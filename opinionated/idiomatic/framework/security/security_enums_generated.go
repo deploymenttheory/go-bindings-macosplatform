@@ -1694,3 +1694,4013 @@ func (e TLSProtocolVersion) String() string {
 		return fmt.Sprintf("TLSProtocolVersion(%d)", int64(e))
 	}
 }
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Type int64
+
+const (
+	TypeExtended Type = 256
+	TypeAccess   Type = 0
+	TypeDefault  Type = 1
+	TypeAfs      Type = 2
+	TypeCoda     Type = 3
+	TypeNtfs     Type = 4
+	TypeNwfs     Type = 5
+)
+
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Type) String() string {
+	switch e {
+	case TypeExtended:
+		return "TypeExtended"
+	case TypeAccess:
+		return "TypeAccess"
+	case TypeDefault:
+		return "TypeDefault"
+	case TypeAfs:
+		return "TypeAfs"
+	case TypeCoda:
+		return "TypeCoda"
+	case TypeNtfs:
+		return "TypeNtfs"
+	case TypeNwfs:
+		return "TypeNwfs"
+	default:
+		return fmt.Sprintf("Type(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type CssmAppledlOpenParametersMask int64
+
+const (
+	KCSSM_APPLEDL_MASK_MODE CssmAppledlOpenParametersMask = 1
+)
+
+// String returns the CssmAppledlOpenParametersMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CssmAppledlOpenParametersMask) String() string {
+	switch e {
+	case KCSSM_APPLEDL_MASK_MODE:
+		return "KCSSM_APPLEDL_MASK_MODE"
+	default:
+		return fmt.Sprintf("CssmAppledlOpenParametersMask(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+type LaunchDataType int64
+
+const (
+	LaunchDataTypeDictionary LaunchDataType = 1
+	LaunchDataTypeArray      LaunchDataType = 2
+	LaunchDataTypeFd         LaunchDataType = 3
+	LaunchDataTypeInteger    LaunchDataType = 4
+	LaunchDataTypeReal       LaunchDataType = 5
+	LaunchDataTypeBool       LaunchDataType = 6
+	LaunchDataTypeString     LaunchDataType = 7
+	LaunchDataTypeOpaque     LaunchDataType = 8
+	LaunchDataTypeErrno      LaunchDataType = 9
+	LaunchDataTypeMachport   LaunchDataType = 10
+)
+
+// String returns the LaunchDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LaunchDataType) String() string {
+	switch e {
+	case LaunchDataTypeDictionary:
+		return "LaunchDataTypeDictionary"
+	case LaunchDataTypeArray:
+		return "LaunchDataTypeArray"
+	case LaunchDataTypeFd:
+		return "LaunchDataTypeFd"
+	case LaunchDataTypeInteger:
+		return "LaunchDataTypeInteger"
+	case LaunchDataTypeReal:
+		return "LaunchDataTypeReal"
+	case LaunchDataTypeBool:
+		return "LaunchDataTypeBool"
+	case LaunchDataTypeString:
+		return "LaunchDataTypeString"
+	case LaunchDataTypeOpaque:
+		return "LaunchDataTypeOpaque"
+	case LaunchDataTypeErrno:
+		return "LaunchDataTypeErrno"
+	case LaunchDataTypeMachport:
+		return "LaunchDataTypeMachport"
+	default:
+		return fmt.Sprintf("LaunchDataType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+// The list of digest algorithms available for code signatures.
+type SecCSDigestAlgorithm int64
+
+const (
+	KSecCodeSignatureNoHash              SecCSDigestAlgorithm = 0
+	KSecCodeSignatureHashSHA1            SecCSDigestAlgorithm = 1
+	KSecCodeSignatureHashSHA256          SecCSDigestAlgorithm = 2
+	KSecCodeSignatureHashSHA256Truncated SecCSDigestAlgorithm = 3
+	KSecCodeSignatureHashSHA384          SecCSDigestAlgorithm = 4
+	KSecCodeSignatureHashSHA512          SecCSDigestAlgorithm = 5
+)
+
+// String returns the SecCSDigestAlgorithm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecCSDigestAlgorithm) String() string {
+	switch e {
+	case KSecCodeSignatureNoHash:
+		return "KSecCodeSignatureNoHash"
+	case KSecCodeSignatureHashSHA1:
+		return "KSecCodeSignatureHashSHA1"
+	case KSecCodeSignatureHashSHA256:
+		return "KSecCodeSignatureHashSHA256"
+	case KSecCodeSignatureHashSHA256Truncated:
+		return "KSecCodeSignatureHashSHA256Truncated"
+	case KSecCodeSignatureHashSHA384:
+		return "KSecCodeSignatureHashSHA384"
+	case KSecCodeSignatureHashSHA512:
+		return "KSecCodeSignatureHashSHA512"
+	default:
+		return fmt.Sprintf("SecCSDigestAlgorithm(%d)", int64(e))
+	}
+}
+
+// Specify option flags that can be embedded in a code signature during signing and that govern the use of the signature.
+// Bitmask — values may be combined with |.
+type SecCodeSignatureFlags int64
+
+const (
+	// May host guest code.
+	KSecCodeSignatureHost SecCodeSignatureFlags = 1
+	// Must be used without a signing identity.
+	KSecCodeSignatureAdhoc SecCodeSignatureFlags = 2
+	// Always set the kSecCodeStatusHard status flag on launch.
+	KSecCodeSignatureForceHard SecCodeSignatureFlags = 256
+	// Always set the termination status flag on launch.
+	KSecCodeSignatureForceKill SecCodeSignatureFlags = 512
+	// Always set the kSecCSConsiderExpiration flag when validating the code.
+	KSecCodeSignatureForceExpiration SecCodeSignatureFlags = 1024
+	// Restrict dyld loading.
+	KSecCodeSignatureRestrict SecCodeSignatureFlags = 2048
+	// Enforce code signing.
+	KSecCodeSignatureEnforcement SecCodeSignatureFlags = 4096
+	// Require library validation.
+	KSecCodeSignatureLibraryValidation SecCodeSignatureFlags = 8192
+	// Apply runtime hardening policies as required by the hardened runtime version.
+	KSecCodeSignatureRuntime      SecCodeSignatureFlags = 65536
+	KSecCodeSignatureLinkerSigned SecCodeSignatureFlags = 131072
+)
+
+// String returns the SecCodeSignatureFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecCodeSignatureFlags) String() string {
+	var parts []string
+	if e&KSecCodeSignatureHost != 0 {
+		parts = append(parts, "KSecCodeSignatureHost")
+	}
+	if e&KSecCodeSignatureAdhoc != 0 {
+		parts = append(parts, "KSecCodeSignatureAdhoc")
+	}
+	if e&KSecCodeSignatureForceHard != 0 {
+		parts = append(parts, "KSecCodeSignatureForceHard")
+	}
+	if e&KSecCodeSignatureForceKill != 0 {
+		parts = append(parts, "KSecCodeSignatureForceKill")
+	}
+	if e&KSecCodeSignatureForceExpiration != 0 {
+		parts = append(parts, "KSecCodeSignatureForceExpiration")
+	}
+	if e&KSecCodeSignatureRestrict != 0 {
+		parts = append(parts, "KSecCodeSignatureRestrict")
+	}
+	if e&KSecCodeSignatureEnforcement != 0 {
+		parts = append(parts, "KSecCodeSignatureEnforcement")
+	}
+	if e&KSecCodeSignatureLibraryValidation != 0 {
+		parts = append(parts, "KSecCodeSignatureLibraryValidation")
+	}
+	if e&KSecCodeSignatureRuntime != 0 {
+		parts = append(parts, "KSecCodeSignatureRuntime")
+	}
+	if e&KSecCodeSignatureLinkerSigned != 0 {
+		parts = append(parts, "KSecCodeSignatureLinkerSigned")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Operational flags attached by code signing services to running code.
+// Bitmask — values may be combined with |.
+type SecCodeStatus int64
+
+const (
+	// The code is dynamically valid.
+	KSecCodeStatusValid SecCodeStatus = 1
+	// The code prefers to be denied access to resources if gaining access would invalidate it.
+	KSecCodeStatusHard SecCodeStatus = 256
+	// The code wants to be terminated if it ever loses its validity.
+	KSecCodeStatusKill SecCodeStatus = 512
+	// The code has been debugged by another process that was allowed to do so.
+	KSecCodeStatusDebugged SecCodeStatus = 268435456
+	// The code ships with the operating system and is signed by Apple.
+	KSecCodeStatusPlatform SecCodeStatus = 67108864
+)
+
+// String returns the SecCodeStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecCodeStatus) String() string {
+	var parts []string
+	if e&KSecCodeStatusValid != 0 {
+		parts = append(parts, "KSecCodeStatusValid")
+	}
+	if e&KSecCodeStatusHard != 0 {
+		parts = append(parts, "KSecCodeStatusHard")
+	}
+	if e&KSecCodeStatusKill != 0 {
+		parts = append(parts, "KSecCodeStatusKill")
+	}
+	if e&KSecCodeStatusDebugged != 0 {
+		parts = append(parts, "KSecCodeStatusDebugged")
+	}
+	if e&KSecCodeStatusPlatform != 0 {
+		parts = append(parts, "KSecCodeStatusPlatform")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Specifies a keychain item’s attributes.
+type SecItemAttr int64
+
+const (
+	// Identifies the creation date attribute.
+	KSecCreationDateItemAttr SecItemAttr = 1667522932
+	// Identifies the modification date attribute.
+	KSecModDateItemAttr SecItemAttr = 1835295092
+	// Identifies the description attribute.
+	KSecDescriptionItemAttr SecItemAttr = 1684370275
+	// Identifies the comment attribute.
+	KSecCommentItemAttr SecItemAttr = 1768123764
+	// Identifies the creator attribute.
+	KSecCreatorItemAttr SecItemAttr = 1668445298
+	// Identifies the type attribute.
+	KSecTypeItemAttr SecItemAttr = 1954115685
+	// Identifies the script code attribute.
+	KSecScriptCodeItemAttr SecItemAttr = 1935897200
+	// Identifies the label attribute.
+	KSecLabelItemAttr SecItemAttr = 1818321516
+	// Identifies the invisible attribute.
+	KSecInvisibleItemAttr SecItemAttr = 1768846953
+	// Identifies the negative attribute.
+	KSecNegativeItemAttr SecItemAttr = 1852139361
+	// Identifies the custom icon attribute.
+	KSecCustomIconItemAttr SecItemAttr = 1668641641
+	// Identifies the account attribute.
+	KSecAccountItemAttr SecItemAttr = 1633903476
+	// Identifies the service attribute.
+	KSecServiceItemAttr SecItemAttr = 1937138533
+	// Identifies the generic attribute.
+	KSecGenericItemAttr SecItemAttr = 1734700641
+	// Identifies the security domain attribute.
+	KSecSecurityDomainItemAttr SecItemAttr = 1935961454
+	// Identifies the server attribute.
+	KSecServerItemAttr SecItemAttr = 1936881266
+	// Identifies the authentication type attribute.
+	KSecAuthenticationTypeItemAttr SecItemAttr = 1635023216
+	// Identifies the port attribute.
+	KSecPortItemAttr SecItemAttr = 1886351988
+	// Identifies the path attribute.
+	KSecPathItemAttr SecItemAttr = 1885434984
+	// Identifies the volume attribute.
+	KSecVolumeItemAttr SecItemAttr = 1986817381
+	// Identifies the address attribute.
+	KSecAddressItemAttr SecItemAttr = 1633969266
+	// Identifies the server signature attribute.
+	KSecSignatureItemAttr SecItemAttr = 1936943463
+	// Identifies the protocol attribute.
+	KSecProtocolItemAttr SecItemAttr = 1886675820
+	// Indicates a CSSM_CERT_TYPE type.
+	KSecCertificateType SecItemAttr = 1668577648
+	// Indicates a CSSM_CERT_ENCODING type.
+	KSecCertificateEncoding SecItemAttr = 1667591779
+	// Indicates a CSSM_CRL_TYPE type.
+	KSecCrlType SecItemAttr = 1668445296
+	// Indicates a CSSM_CRL_ENCODING type.
+	KSecCrlEncoding SecItemAttr = 1668443747
+	// Indicates an alias.
+	KSecAlias SecItemAttr = 1634494835
+)
+
+// String returns the SecItemAttr constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecItemAttr) String() string {
+	switch e {
+	case KSecCreationDateItemAttr:
+		return "KSecCreationDateItemAttr"
+	case KSecModDateItemAttr:
+		return "KSecModDateItemAttr"
+	case KSecDescriptionItemAttr:
+		return "KSecDescriptionItemAttr"
+	case KSecCommentItemAttr:
+		return "KSecCommentItemAttr"
+	case KSecCreatorItemAttr:
+		return "KSecCreatorItemAttr"
+	case KSecTypeItemAttr:
+		return "KSecTypeItemAttr"
+	case KSecScriptCodeItemAttr:
+		return "KSecScriptCodeItemAttr"
+	case KSecLabelItemAttr:
+		return "KSecLabelItemAttr"
+	case KSecInvisibleItemAttr:
+		return "KSecInvisibleItemAttr"
+	case KSecNegativeItemAttr:
+		return "KSecNegativeItemAttr"
+	case KSecCustomIconItemAttr:
+		return "KSecCustomIconItemAttr"
+	case KSecAccountItemAttr:
+		return "KSecAccountItemAttr"
+	case KSecServiceItemAttr:
+		return "KSecServiceItemAttr"
+	case KSecGenericItemAttr:
+		return "KSecGenericItemAttr"
+	case KSecSecurityDomainItemAttr:
+		return "KSecSecurityDomainItemAttr"
+	case KSecServerItemAttr:
+		return "KSecServerItemAttr"
+	case KSecAuthenticationTypeItemAttr:
+		return "KSecAuthenticationTypeItemAttr"
+	case KSecPortItemAttr:
+		return "KSecPortItemAttr"
+	case KSecPathItemAttr:
+		return "KSecPathItemAttr"
+	case KSecVolumeItemAttr:
+		return "KSecVolumeItemAttr"
+	case KSecAddressItemAttr:
+		return "KSecAddressItemAttr"
+	case KSecSignatureItemAttr:
+		return "KSecSignatureItemAttr"
+	case KSecProtocolItemAttr:
+		return "KSecProtocolItemAttr"
+	case KSecCertificateType:
+		return "KSecCertificateType"
+	case KSecCertificateEncoding:
+		return "KSecCertificateEncoding"
+	case KSecCrlType:
+		return "KSecCrlType"
+	case KSecCrlEncoding:
+		return "KSecCrlEncoding"
+	case KSecAlias:
+		return "KSecAlias"
+	default:
+		return fmt.Sprintf("SecItemAttr(%d)", int64(e))
+	}
+}
+
+// The supported sizes for keys of various common types.
+//
+// Deprecated: No longer supported
+type SecKeySizes int64
+
+const (
+	// The default key size for the specified type.
+	KSecDefaultKeySize SecKeySizes = 0
+	// 192-bit DES.
+	KSec3DES192 SecKeySizes = 192
+	// 128-bit AES.
+	KSecAES128 SecKeySizes = 128
+	// 192-bit AES.
+	KSecAES192 SecKeySizes = 192
+	// 256-bit AES.
+	KSecAES256 SecKeySizes = 256
+	// 192-bit ECC Keys for Suite-B from RFC 4492 section 5.1.1.
+	KSecp192r1 SecKeySizes = 192
+	// 256-bit ECC Keys for Suite-B from RFC 4492 section 5.1.1.
+	KSecp256r1 SecKeySizes = 256
+	// 384-bit ECC Keys for Suite-B from RFC 4492 section 5.1.1.
+	KSecp384r1 SecKeySizes = 384
+	// 521-bit ECC Keys for Suite-B from RFC 4492 section 5.1.1.
+	KSecp521r1 SecKeySizes = 521
+	// 1024 bits is the minimum size for an RSA key.
+	KSecRSAMin SecKeySizes = 1024
+	// 4096 bits is the maximum size for an RSA key.
+	KSecRSAMax SecKeySizes = 4096
+)
+
+// String returns the SecKeySizes constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecKeySizes) String() string {
+	switch e {
+	case KSecDefaultKeySize:
+		return "KSecDefaultKeySize"
+	case KSec3DES192:
+		return "KSec3DES192"
+	case KSecAES128:
+		return "KSecAES128"
+	case KSecAES256:
+		return "KSecAES256"
+	case KSecp384r1:
+		return "KSecp384r1"
+	case KSecp521r1:
+		return "KSecp521r1"
+	case KSecRSAMin:
+		return "KSecRSAMin"
+	case KSecRSAMax:
+		return "KSecRSAMax"
+	default:
+		return fmt.Sprintf("SecKeySizes(%d)", int64(e))
+	}
+}
+
+// The flags that indicate key usage in the KeyUsage extension of a certificate.
+// Bitmask — values may be combined with |.
+type SecKeyUsage int64
+
+const (
+	KSecKeyUsageUnspecified SecKeyUsage = 0
+	// The DigitalSignature bit is set in KeyUsage extension.
+	KSecKeyUsageDigitalSignature SecKeyUsage = 1
+	// The NonRepudiation bit is set in KeyUsage extension.
+	KSecKeyUsageNonRepudiation SecKeyUsage = 2
+	// The ContentCommitment bit is set in KeyUsage extension.
+	KSecKeyUsageContentCommitment SecKeyUsage = 2
+	// The KeyEncipherment bit is set in KeyUsage extension.
+	KSecKeyUsageKeyEncipherment SecKeyUsage = 4
+	// The DataEncipherment bit is set in KeyUsage extension.
+	KSecKeyUsageDataEncipherment SecKeyUsage = 8
+	// The KeyAgreement bit is set in KeyUsage extension.
+	KSecKeyUsageKeyAgreement SecKeyUsage = 16
+	// The KeyCertSign bit is set in KeyUsage extension.
+	KSecKeyUsageKeyCertSign SecKeyUsage = 32
+	// The CRLSign bit is set in KeyUsage extension.
+	KSecKeyUsageCRLSign SecKeyUsage = 64
+	// The EncipherOnly bit is set in KeyUsage extension.
+	KSecKeyUsageEncipherOnly SecKeyUsage = 128
+	// The DecipherOnly bit is set in KeyUsage extension.
+	KSecKeyUsageDecipherOnly SecKeyUsage = 256
+	// The KeyUsage extension is marked critical.
+	KSecKeyUsageCritical SecKeyUsage = 2147483648
+	// All flags set.
+	KSecKeyUsageAll SecKeyUsage = 2147483647
+)
+
+// String returns the SecKeyUsage constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecKeyUsage) String() string {
+	var parts []string
+	if e&KSecKeyUsageDigitalSignature != 0 {
+		parts = append(parts, "KSecKeyUsageDigitalSignature")
+	}
+	if e&KSecKeyUsageNonRepudiation != 0 {
+		parts = append(parts, "KSecKeyUsageNonRepudiation")
+	}
+	if e&KSecKeyUsageContentCommitment != 0 {
+		parts = append(parts, "KSecKeyUsageContentCommitment")
+	}
+	if e&KSecKeyUsageKeyEncipherment != 0 {
+		parts = append(parts, "KSecKeyUsageKeyEncipherment")
+	}
+	if e&KSecKeyUsageDataEncipherment != 0 {
+		parts = append(parts, "KSecKeyUsageDataEncipherment")
+	}
+	if e&KSecKeyUsageKeyAgreement != 0 {
+		parts = append(parts, "KSecKeyUsageKeyAgreement")
+	}
+	if e&KSecKeyUsageKeyCertSign != 0 {
+		parts = append(parts, "KSecKeyUsageKeyCertSign")
+	}
+	if e&KSecKeyUsageCRLSign != 0 {
+		parts = append(parts, "KSecKeyUsageCRLSign")
+	}
+	if e&KSecKeyUsageEncipherOnly != 0 {
+		parts = append(parts, "KSecKeyUsageEncipherOnly")
+	}
+	if e&KSecKeyUsageDecipherOnly != 0 {
+		parts = append(parts, "KSecKeyUsageDecipherOnly")
+	}
+	if e&KSecKeyUsageCritical != 0 {
+		parts = append(parts, "KSecKeyUsageCritical")
+	}
+	if e&KSecKeyUsageAll != 0 {
+		parts = append(parts, "KSecKeyUsageAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// The list of keychain events that can trigger a callback.
+type SecKeychainEvent int64
+
+const (
+	// Indicates a keychain was locked.
+	KSecLockEvent SecKeychainEvent = 1
+	// Indicates a keychain was successfully unlocked.
+	KSecUnlockEvent SecKeychainEvent = 2
+	// Indicates an item was added to a keychain.
+	KSecAddEvent SecKeychainEvent = 3
+	// Indicates an item was deleted from a keychain.
+	KSecDeleteEvent SecKeychainEvent = 4
+	// Indicates a keychain item was updated.
+	KSecUpdateEvent SecKeychainEvent = 5
+	// Indicates the keychain password was changed.
+	KSecPasswordChangedEvent SecKeychainEvent = 6
+	// Indicates that a different keychain was specified as the default.
+	KSecDefaultChangedEvent SecKeychainEvent = 9
+	// Indicates a process has accessed a keychain item’s data.
+	//
+	// Deprecated: Read events are no longer posted
+	KSecDataAccessEvent SecKeychainEvent = 10
+	// Indicates the list of keychains has changed.
+	//
+	// Deprecated: Read events are no longer posted
+	KSecKeychainListChangedEvent SecKeychainEvent = 11
+	// Indicates trust settings have changed.
+	//
+	// Deprecated: Read events are no longer posted
+	KSecTrustSettingsChangedEvent SecKeychainEvent = 12
+)
+
+// String returns the SecKeychainEvent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecKeychainEvent) String() string {
+	switch e {
+	case KSecLockEvent:
+		return "KSecLockEvent"
+	case KSecUnlockEvent:
+		return "KSecUnlockEvent"
+	case KSecAddEvent:
+		return "KSecAddEvent"
+	case KSecDeleteEvent:
+		return "KSecDeleteEvent"
+	case KSecUpdateEvent:
+		return "KSecUpdateEvent"
+	case KSecPasswordChangedEvent:
+		return "KSecPasswordChangedEvent"
+	case KSecDefaultChangedEvent:
+		return "KSecDefaultChangedEvent"
+	case KSecDataAccessEvent:
+		return "KSecDataAccessEvent"
+	case KSecKeychainListChangedEvent:
+		return "KSecKeychainListChangedEvent"
+	case KSecTrustSettingsChangedEvent:
+		return "KSecTrustSettingsChangedEvent"
+	default:
+		return fmt.Sprintf("SecKeychainEvent(%d)", int64(e))
+	}
+}
+
+// The types of padding to use when you create or verify a digital signature.
+//
+// Deprecated: Replaced with SecKeyAlgorithm
+// Bitmask — values may be combined with |.
+type SecPadding int64
+
+const (
+	// No padding.
+	KSecPaddingNone SecPadding = 0
+	// PKCS1 padding.
+	KSecPaddingPKCS1  SecPadding = 1
+	KSecPaddingSigRaw SecPadding = 16384
+	// Data to be signed is an MD2 hash.
+	KSecPaddingPKCS1MD2 SecPadding = 32768
+	// Data to be signed is an MD5 hash.
+	KSecPaddingPKCS1MD5 SecPadding = 32769
+	// Data to be signed is a SHA1 hash.
+	KSecPaddingPKCS1SHA1 SecPadding = 32770
+)
+
+// String returns the SecPadding constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecPadding) String() string {
+	var parts []string
+	if e&KSecPaddingPKCS1 != 0 {
+		parts = append(parts, "KSecPaddingPKCS1")
+	}
+	if e&KSecPaddingSigRaw != 0 {
+		parts = append(parts, "KSecPaddingSigRaw")
+	}
+	if e&KSecPaddingPKCS1MD2 != 0 {
+		parts = append(parts, "KSecPaddingPKCS1MD2")
+	}
+	if e&KSecPaddingPKCS1MD5 != 0 {
+		parts = append(parts, "KSecPaddingPKCS1MD5")
+	}
+	if e&KSecPaddingPKCS1SHA1 != 0 {
+		parts = append(parts, "KSecPaddingPKCS1SHA1")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// An enumeration indicating different types of internal requirements for code.
+type SecRequirementType int64
+
+const (
+	// What hosts may run this code.
+	KSecHostRequirementType SecRequirementType = 1
+	// What guests this code may run.
+	KSecGuestRequirementType SecRequirementType = 2
+	// A designated requirement.
+	KSecDesignatedRequirementType SecRequirementType = 3
+	// What libraries this code may link against.
+	KSecLibraryRequirementType SecRequirementType = 4
+	// What plug-ins this code may load.
+	KSecPluginRequirementType SecRequirementType = 5
+	// Invalid type of requirement.
+	KSecInvalidRequirementType SecRequirementType = 6
+	// The number of valid requirement types.
+	KSecRequirementTypeCount SecRequirementType = 6
+)
+
+// String returns the SecRequirementType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecRequirementType) String() string {
+	switch e {
+	case KSecHostRequirementType:
+		return "KSecHostRequirementType"
+	case KSecGuestRequirementType:
+		return "KSecGuestRequirementType"
+	case KSecDesignatedRequirementType:
+		return "KSecDesignatedRequirementType"
+	case KSecLibraryRequirementType:
+		return "KSecLibraryRequirementType"
+	case KSecPluginRequirementType:
+		return "KSecPluginRequirementType"
+	case KSecInvalidRequirementType:
+		return "KSecInvalidRequirementType"
+	default:
+		return fmt.Sprintf("SecRequirementType(%d)", int64(e))
+	}
+}
+
+// Allowed uses for the encryption key in a certificate.
+// Bitmask — values may be combined with |.
+type SecTrustSettingsKeyUsage int64
+
+const (
+	// The key can be used to sign data or verify a signature.
+	KSecTrustSettingsKeyUseSignature SecTrustSettingsKeyUsage = 1
+	// The key can be used to encrypt or decrypt data.
+	KSecTrustSettingsKeyUseEnDecryptData SecTrustSettingsKeyUsage = 2
+	// The key can be used to encrypt or decrypt (wrap or unwrap) a key.
+	KSecTrustSettingsKeyUseEnDecryptKey SecTrustSettingsKeyUsage = 4
+	// The key can be used to sign a certificate or verify a signature.
+	KSecTrustSettingsKeyUseSignCert SecTrustSettingsKeyUsage = 8
+	// The key can be used to sign an OCSP (online certificate status protocol) message or CRL (certificate verification list), or to verify a signature.
+	KSecTrustSettingsKeyUseSignRevocation SecTrustSettingsKeyUsage = 16
+	// The key is a private key that has been shared using a key exchange protocol, such as Diffie-Hellman key exchange.
+	KSecTrustSettingsKeyUseKeyExchange SecTrustSettingsKeyUsage = 32
+	// The key can be used for any purpose.
+	KSecTrustSettingsKeyUseAny SecTrustSettingsKeyUsage = 4294967295
+)
+
+// String returns the SecTrustSettingsKeyUsage constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecTrustSettingsKeyUsage) String() string {
+	var parts []string
+	if e&KSecTrustSettingsKeyUseSignature != 0 {
+		parts = append(parts, "KSecTrustSettingsKeyUseSignature")
+	}
+	if e&KSecTrustSettingsKeyUseEnDecryptData != 0 {
+		parts = append(parts, "KSecTrustSettingsKeyUseEnDecryptData")
+	}
+	if e&KSecTrustSettingsKeyUseEnDecryptKey != 0 {
+		parts = append(parts, "KSecTrustSettingsKeyUseEnDecryptKey")
+	}
+	if e&KSecTrustSettingsKeyUseSignCert != 0 {
+		parts = append(parts, "KSecTrustSettingsKeyUseSignCert")
+	}
+	if e&KSecTrustSettingsKeyUseSignRevocation != 0 {
+		parts = append(parts, "KSecTrustSettingsKeyUseSignRevocation")
+	}
+	if e&KSecTrustSettingsKeyUseKeyExchange != 0 {
+		parts = append(parts, "KSecTrustSettingsKeyUseKeyExchange")
+	}
+	if e&KSecTrustSettingsKeyUseAny != 0 {
+		parts = append(parts, "KSecTrustSettingsKeyUseAny")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Trust settings returned in usage constraints dictionaries.
+type SecTrustSettingsResult int64
+
+const (
+	// Never valid in a trust settings array or in an API call.
+	KSecTrustSettingsResultInvalid SecTrustSettingsResult = 0
+	// This root certificate is explicitly trusted.
+	KSecTrustSettingsResultTrustRoot SecTrustSettingsResult = 1
+	// This non-root certificate is explicitly trusted as if it were a trusted root.
+	KSecTrustSettingsResultTrustAsRoot SecTrustSettingsResult = 2
+	// This certificate is explicitly distrusted.
+	KSecTrustSettingsResultDeny SecTrustSettingsResult = 3
+	// This certificate is neither trusted nor distrusted. This value can be used to specify an “allowed error” without assigning trust to a specific certificate.
+	KSecTrustSettingsResultUnspecified SecTrustSettingsResult = 4
+)
+
+// String returns the SecTrustSettingsResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecTrustSettingsResult) String() string {
+	switch e {
+	case KSecTrustSettingsResultInvalid:
+		return "KSecTrustSettingsResultInvalid"
+	case KSecTrustSettingsResultTrustRoot:
+		return "KSecTrustSettingsResultTrustRoot"
+	case KSecTrustSettingsResultTrustAsRoot:
+		return "KSecTrustSettingsResultTrustAsRoot"
+	case KSecTrustSettingsResultDeny:
+		return "KSecTrustSettingsResultDeny"
+	case KSecTrustSettingsResultUnspecified:
+		return "KSecTrustSettingsResultUnspecified"
+	default:
+		return fmt.Sprintf("SecTrustSettingsResult(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlags int64
+
+const (
+	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
+	XpcListenerCreateFlagsInactive        XpcListenerCreateFlags = 1
+	XpcListenerCreateFlagsForceMach       XpcListenerCreateFlags = 2
+	XpcListenerCreateFlagsForceXpcservice XpcListenerCreateFlags = 4
+)
+
+// String returns the XpcListenerCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcListenerCreateFlags) String() string {
+	var parts []string
+	if e&XpcListenerCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsInactive")
+	}
+	if e&XpcListenerCreateFlagsForceMach != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceMach")
+	}
+	if e&XpcListenerCreateFlagsForceXpcservice != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceXpcservice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlags int64
+
+const (
+	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0
+	XpcSessionCreateFlagsInactive       XpcSessionCreateFlags = 1
+	XpcSessionCreateFlagsMachPrivileged XpcSessionCreateFlags = 2
+)
+
+// String returns the XpcSessionCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcSessionCreateFlags) String() string {
+	var parts []string
+	if e&XpcSessionCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsInactive")
+	}
+	if e&XpcSessionCreateFlagsMachPrivileged != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsMachPrivileged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+const (
+	CSSMERR_AC_DEVICE_FAILED                           = -2147405595
+	CSSMERR_AC_DEVICE_RESET                            = -2147405596
+	CSSMERR_AC_FUNCTION_FAILED                         = -2147405814
+	CSSMERR_AC_FUNCTION_NOT_IMPLEMENTED                = -2147405817
+	CSSMERR_AC_INSUFFICIENT_CLIENT_IDENTIFICATION      = -2147405597
+	CSSMERR_AC_INTERNAL_ERROR                          = -2147405823
+	CSSMERR_AC_INVALID_BASE_ACLS                       = -2147405567
+	CSSMERR_AC_INVALID_CL_HANDLE                       = -2147405742
+	CSSMERR_AC_INVALID_CONTEXT_HANDLE                  = -2147405760
+	CSSMERR_AC_INVALID_DATA                            = -2147405754
+	CSSMERR_AC_INVALID_DB_HANDLE                       = -2147405750
+	CSSMERR_AC_INVALID_DB_LIST                         = -2147405748
+	CSSMERR_AC_INVALID_DB_LIST_POINTER                 = -2147405747
+	CSSMERR_AC_INVALID_DL_HANDLE                       = -2147405743
+	CSSMERR_AC_INVALID_ENCODING                        = -2147405565
+	CSSMERR_AC_INVALID_INPUT_POINTER                   = -2147405819
+	CSSMERR_AC_INVALID_OUTPUT_POINTER                  = -2147405818
+	CSSMERR_AC_INVALID_PASSTHROUGH_ID                  = -2147405738
+	CSSMERR_AC_INVALID_POINTER                         = -2147405820
+	CSSMERR_AC_INVALID_REQUESTOR                       = -2147405563
+	CSSMERR_AC_INVALID_REQUEST_DESCRIPTOR              = -2147405562
+	CSSMERR_AC_INVALID_TP_HANDLE                       = -2147405741
+	CSSMERR_AC_INVALID_TUPLE_CREDENTIALS               = -2147405566
+	CSSMERR_AC_INVALID_VALIDITY_PERIOD                 = -2147405564
+	CSSMERR_AC_IN_DARK_WAKE                            = -2147405594
+	CSSMERR_AC_MDS_ERROR                               = -2147405821
+	CSSMERR_AC_MEMORY_ERROR                            = -2147405822
+	CSSMERR_AC_NO_USER_INTERACTION                     = -2147405600
+	CSSMERR_AC_OS_ACCESS_DENIED                        = -2147405815
+	CSSMERR_AC_SELF_CHECK_FAILED                       = -2147405816
+	CSSMERR_AC_SERVICE_NOT_AVAILABLE                   = -2147405598
+	CSSMERR_AC_USER_CANCELED                           = -2147405599
+	CSSMERR_APPLEDL_DISK_FULL                          = -2147412991
+	CSSMERR_APPLEDL_FILE_TOO_BIG                       = -2147412989
+	CSSMERR_APPLEDL_INCOMPATIBLE_DATABASE_BLOB         = -2147412986
+	CSSMERR_APPLEDL_INCOMPATIBLE_KEY_BLOB              = -2147412985
+	CSSMERR_APPLEDL_INVALID_DATABASE_BLOB              = -2147412988
+	CSSMERR_APPLEDL_INVALID_KEY_BLOB                   = -2147412987
+	CSSMERR_APPLEDL_INVALID_OPEN_PARAMETERS            = -2147412992
+	CSSMERR_APPLEDL_QUOTA_EXCEEDED                     = -2147412990
+	CSSMERR_APPLETP_BAD_CERT_FROM_ISSUER               = -2147408873
+	CSSMERR_APPLETP_CA_PIN_MISMATCH                    = -2147408836
+	CSSMERR_APPLETP_CERT_NOT_FOUND_FROM_ISSUER         = -2147408874
+	CSSMERR_APPLETP_CODE_SIGN_DEVELOPMENT              = -2147408845
+	CSSMERR_APPLETP_CRL_BAD_URI                        = -2147408881
+	CSSMERR_APPLETP_CRL_EXPIRED                        = -2147408885
+	CSSMERR_APPLETP_CRL_INVALID_ANCHOR_CERT            = -2147408877
+	CSSMERR_APPLETP_CRL_NOT_FOUND                      = -2147408883
+	CSSMERR_APPLETP_CRL_NOT_TRUSTED                    = -2147408878
+	CSSMERR_APPLETP_CRL_NOT_VALID_YET                  = -2147408884
+	CSSMERR_APPLETP_CRL_POLICY_FAIL                    = -2147408876
+	CSSMERR_APPLETP_CRL_SERVER_DOWN                    = -2147408882
+	CSSMERR_APPLETP_CS_BAD_CERT_CHAIN_LENGTH           = -2147408849
+	CSSMERR_APPLETP_CS_BAD_PATH_LENGTH                 = -2147408847
+	CSSMERR_APPLETP_CS_NO_BASIC_CONSTRAINTS            = -2147408848
+	CSSMERR_APPLETP_CS_NO_EXTENDED_KEY_USAGE           = -2147408846
+	CSSMERR_APPLETP_EXT_KEYUSAGE_NOT_CRITICAL          = -2147408838
+	CSSMERR_APPLETP_HOSTNAME_MISMATCH                  = -2147408896
+	CSSMERR_APPLETP_IDENTIFIER_MISSING                 = -2147408837
+	CSSMERR_APPLETP_IDP_FAIL                           = -2147408875
+	CSSMERR_APPLETP_INCOMPLETE_REVOCATION_CHECK        = -2147408861
+	CSSMERR_APPLETP_INVALID_AUTHORITY_ID               = -2147408892
+	CSSMERR_APPLETP_INVALID_CA                         = -2147408893
+	CSSMERR_APPLETP_INVALID_EMPTY_SUBJECT              = -2147408841
+	CSSMERR_APPLETP_INVALID_EXTENDED_KEY_USAGE         = -2147408889
+	CSSMERR_APPLETP_INVALID_ID_LINKAGE                 = -2147408888
+	CSSMERR_APPLETP_INVALID_KEY_USAGE                  = -2147408890
+	CSSMERR_APPLETP_INVALID_ROOT                       = -2147408886
+	CSSMERR_APPLETP_INVALID_SUBJECT_ID                 = -2147408891
+	CSSMERR_APPLETP_LEAF_PIN_MISMATCH                  = -2147408835
+	CSSMERR_APPLETP_MISSING_REQUIRED_EXTENSION         = -2147408839
+	CSSMERR_APPLETP_NETWORK_FAILURE                    = -2147408860
+	CSSMERR_APPLETP_NO_BASIC_CONSTRAINTS               = -2147408894
+	CSSMERR_APPLETP_OCSP_BAD_REQUEST                   = -2147408864
+	CSSMERR_APPLETP_OCSP_BAD_RESPONSE                  = -2147408865
+	CSSMERR_APPLETP_OCSP_INVALID_ANCHOR_CERT           = -2147408858
+	CSSMERR_APPLETP_OCSP_NONCE_MISMATCH                = -2147408850
+	CSSMERR_APPLETP_OCSP_NOT_TRUSTED                   = -2147408859
+	CSSMERR_APPLETP_OCSP_NO_SIGNER                     = -2147408856
+	CSSMERR_APPLETP_OCSP_RESP_INTERNAL_ERR             = -2147408854
+	CSSMERR_APPLETP_OCSP_RESP_MALFORMED_REQ            = -2147408855
+	CSSMERR_APPLETP_OCSP_RESP_SIG_REQUIRED             = -2147408852
+	CSSMERR_APPLETP_OCSP_RESP_TRY_LATER                = -2147408853
+	CSSMERR_APPLETP_OCSP_RESP_UNAUTHORIZED             = -2147408851
+	CSSMERR_APPLETP_OCSP_SIG_ERROR                     = -2147408857
+	CSSMERR_APPLETP_OCSP_STATUS_UNRECOGNIZED           = -2147408862
+	CSSMERR_APPLETP_OCSP_UNAVAILABLE                   = -2147408863
+	CSSMERR_APPLETP_PATH_LEN_CONSTRAINT                = -2147408887
+	CSSMERR_APPLETP_RS_BAD_CERT_CHAIN_LENGTH           = -2147408844
+	CSSMERR_APPLETP_RS_BAD_EXTENDED_KEY_USAGE          = -2147408843
+	CSSMERR_APPLETP_SMIME_BAD_EXT_KEY_USE              = -2147408871
+	CSSMERR_APPLETP_SMIME_BAD_KEY_USE                  = -2147408870
+	CSSMERR_APPLETP_SMIME_EMAIL_ADDRS_NOT_FOUND        = -2147408872
+	CSSMERR_APPLETP_SMIME_KEYUSAGE_NOT_CRITICAL        = -2147408869
+	CSSMERR_APPLETP_SMIME_NO_EMAIL_ADDRS               = -2147408868
+	CSSMERR_APPLETP_SMIME_SUBJ_ALT_NAME_NOT_CRIT       = -2147408867
+	CSSMERR_APPLETP_SSL_BAD_EXT_KEY_USE                = -2147408866
+	CSSMERR_APPLETP_TRUST_SETTING_DENY                 = -2147408842
+	CSSMERR_APPLETP_UNKNOWN_CERT_EXTEN                 = -2147408880
+	CSSMERR_APPLETP_UNKNOWN_CRITICAL_EXTEN             = -2147408895
+	CSSMERR_APPLETP_UNKNOWN_CRL_EXTEN                  = -2147408879
+	CSSMERR_APPLETP_UNKNOWN_QUAL_CERT_STATEMENT        = -2147408840
+	CSSMERR_APPLE_DOTMAC_CSR_VERIFY_FAIL               = -2147408785
+	CSSMERR_APPLE_DOTMAC_FAILED_CONSISTENCY_CHECK      = -2147408784
+	CSSMERR_APPLE_DOTMAC_NO_REQ_PENDING                = -2147408786
+	CSSMERR_APPLE_DOTMAC_REQ_IS_PENDING                = -2147408787
+	CSSMERR_APPLE_DOTMAC_REQ_QUEUED                    = -2147408796
+	CSSMERR_APPLE_DOTMAC_REQ_REDIRECT                  = -2147408795
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_ALREADY_EXIST      = -2147408789
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_AUTH               = -2147408792
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_ERR                = -2147408794
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_NOT_AVAIL          = -2147408790
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_PARAM              = -2147408793
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_SERVICE_ERROR      = -2147408788
+	CSSMERR_APPLE_DOTMAC_REQ_SERVER_UNIMPL             = -2147408791
+	CSSMERR_CL_CRL_ALREADY_SIGNED                      = -2147411897
+	CSSMERR_CL_DEVICE_FAILED                           = -2147411739
+	CSSMERR_CL_DEVICE_RESET                            = -2147411740
+	CSSMERR_CL_FUNCTION_FAILED                         = -2147411958
+	CSSMERR_CL_FUNCTION_NOT_IMPLEMENTED                = -2147411961
+	CSSMERR_CL_INSUFFICIENT_CLIENT_IDENTIFICATION      = -2147411741
+	CSSMERR_CL_INTERNAL_ERROR                          = -2147411967
+	CSSMERR_CL_INVALID_BUNDLE_INFO                     = -2147411708
+	CSSMERR_CL_INVALID_BUNDLE_POINTER                  = -2147411711
+	CSSMERR_CL_INVALID_CACHE_HANDLE                    = -2147411710
+	CSSMERR_CL_INVALID_CERTGROUP_POINTER               = -2147411902
+	CSSMERR_CL_INVALID_CERT_POINTER                    = -2147411901
+	CSSMERR_CL_INVALID_CONTEXT_HANDLE                  = -2147411904
+	CSSMERR_CL_INVALID_CRL_INDEX                       = -2147411707
+	CSSMERR_CL_INVALID_CRL_POINTER                     = -2147411900
+	CSSMERR_CL_INVALID_DATA                            = -2147411898
+	CSSMERR_CL_INVALID_FIELD_POINTER                   = -2147411899
+	CSSMERR_CL_INVALID_INPUT_POINTER                   = -2147411963
+	CSSMERR_CL_INVALID_NUMBER_OF_FIELDS                = -2147411896
+	CSSMERR_CL_INVALID_OUTPUT_POINTER                  = -2147411962
+	CSSMERR_CL_INVALID_PASSTHROUGH_ID                  = -2147411882
+	CSSMERR_CL_INVALID_POINTER                         = -2147411964
+	CSSMERR_CL_INVALID_RESULTS_HANDLE                  = -2147411709
+	CSSMERR_CL_INVALID_SCOPE                           = -2147411706
+	CSSMERR_CL_IN_DARK_WAKE                            = -2147411738
+	CSSMERR_CL_MDS_ERROR                               = -2147411965
+	CSSMERR_CL_MEMORY_ERROR                            = -2147411966
+	CSSMERR_CL_NO_FIELD_VALUES                         = -2147411705
+	CSSMERR_CL_NO_USER_INTERACTION                     = -2147411744
+	CSSMERR_CL_OS_ACCESS_DENIED                        = -2147411959
+	CSSMERR_CL_SCOPE_NOT_SUPPORTED                     = -2147411704
+	CSSMERR_CL_SELF_CHECK_FAILED                       = -2147411960
+	CSSMERR_CL_SERVICE_NOT_AVAILABLE                   = -2147411742
+	CSSMERR_CL_UNKNOWN_FORMAT                          = -2147411890
+	CSSMERR_CL_UNKNOWN_TAG                             = -2147411889
+	CSSMERR_CL_USER_CANCELED                           = -2147411743
+	CSSMERR_CL_VERIFICATION_FAILURE                    = -2147411895
+	CSSMERR_CSPDL_APPLE_DL_CONVERSION_ERROR            = -2147415035
+	CSSMERR_CSP_ACL_ADD_FAILED                         = -2147416010
+	CSSMERR_CSP_ACL_BASE_CERTS_NOT_SUPPORTED           = -2147416025
+	CSSMERR_CSP_ACL_CHALLENGE_CALLBACK_FAILED          = -2147416019
+	CSSMERR_CSP_ACL_CHANGE_FAILED                      = -2147416015
+	CSSMERR_CSP_ACL_DELETE_FAILED                      = -2147416012
+	CSSMERR_CSP_ACL_ENTRY_TAG_NOT_FOUND                = -2147416017
+	CSSMERR_CSP_ACL_REPLACE_FAILED                     = -2147416011
+	CSSMERR_CSP_ACL_SUBJECT_TYPE_NOT_SUPPORTED         = -2147416021
+	CSSMERR_CSP_ALGID_MISMATCH                         = -2147415789
+	CSSMERR_CSP_ALREADY_LOGGED_IN                      = -2147415726
+	CSSMERR_CSP_APPLE_ADD_APPLICATION_ACL_SUBJECT      = -2147415040
+	CSSMERR_CSP_APPLE_INVALID_KEY_END_DATE             = -2147415036
+	CSSMERR_CSP_APPLE_INVALID_KEY_START_DATE           = -2147415037
+	CSSMERR_CSP_APPLE_PUBLIC_KEY_INCOMPLETE            = -2147415039
+	CSSMERR_CSP_APPLE_SIGNATURE_MISMATCH               = -2147415038
+	CSSMERR_CSP_APPLE_SSLv2_ROLLBACK                   = -2147415034
+	CSSMERR_CSP_ATTACH_HANDLE_BUSY                     = -2147415802
+	CSSMERR_CSP_BLOCK_SIZE_MISMATCH                    = -2147415731
+	CSSMERR_CSP_CRYPTO_DATA_CALLBACK_FAILED            = -2147415722
+	CSSMERR_CSP_DEVICE_ERROR                           = -2147415804
+	CSSMERR_CSP_DEVICE_FAILED                          = -2147415835
+	CSSMERR_CSP_DEVICE_MEMORY_ERROR                    = -2147415803
+	CSSMERR_CSP_DEVICE_RESET                           = -2147415836
+	CSSMERR_CSP_DEVICE_VERIFY_FAILED                   = -2147415728
+	CSSMERR_CSP_FUNCTION_FAILED                        = -2147416054
+	CSSMERR_CSP_FUNCTION_NOT_IMPLEMENTED               = -2147416057
+	CSSMERR_CSP_INPUT_LENGTH_ERROR                     = -2147415807
+	CSSMERR_CSP_INSUFFICIENT_CLIENT_IDENTIFICATION     = -2147415837
+	CSSMERR_CSP_INTERNAL_ERROR                         = -2147416063
+	CSSMERR_CSP_INVALID_ACCESS_CREDENTIALS             = -2147416027
+	CSSMERR_CSP_INVALID_ACL_BASE_CERTS                 = -2147416026
+	CSSMERR_CSP_INVALID_ACL_CHALLENGE_CALLBACK         = -2147416020
+	CSSMERR_CSP_INVALID_ACL_EDIT_MODE                  = -2147416016
+	CSSMERR_CSP_INVALID_ACL_ENTRY_TAG                  = -2147416018
+	CSSMERR_CSP_INVALID_ACL_SUBJECT_VALUE              = -2147416022
+	CSSMERR_CSP_INVALID_ALGORITHM                      = -2147415759
+	CSSMERR_CSP_INVALID_ATTR_ACCESS_CREDENTIALS        = -2147415678
+	CSSMERR_CSP_INVALID_ATTR_ALG_PARAMS                = -2147415704
+	CSSMERR_CSP_INVALID_ATTR_BASE                      = -2147415686
+	CSSMERR_CSP_INVALID_ATTR_BLOCK_SIZE                = -2147415738
+	CSSMERR_CSP_INVALID_ATTR_DL_DB_HANDLE              = -2147415680
+	CSSMERR_CSP_INVALID_ATTR_EFFECTIVE_BITS            = -2147415696
+	CSSMERR_CSP_INVALID_ATTR_END_DATE                  = -2147415692
+	CSSMERR_CSP_INVALID_ATTR_INIT_VECTOR               = -2147415752
+	CSSMERR_CSP_INVALID_ATTR_ITERATION_COUNT           = -2147415682
+	CSSMERR_CSP_INVALID_ATTR_KEY                       = -2147415754
+	CSSMERR_CSP_INVALID_ATTR_KEY_LENGTH                = -2147415740
+	CSSMERR_CSP_INVALID_ATTR_KEY_TYPE                  = -2147415700
+	CSSMERR_CSP_INVALID_ATTR_LABEL                     = -2147415702
+	CSSMERR_CSP_INVALID_ATTR_MODE                      = -2147415698
+	CSSMERR_CSP_INVALID_ATTR_OUTPUT_SIZE               = -2147415708
+	CSSMERR_CSP_INVALID_ATTR_PADDING                   = -2147415748
+	CSSMERR_CSP_INVALID_ATTR_PASSPHRASE                = -2147415742
+	CSSMERR_CSP_INVALID_ATTR_PRIME                     = -2147415688
+	CSSMERR_CSP_INVALID_ATTR_PRIVATE_KEY_FORMAT        = -2147415674
+	CSSMERR_CSP_INVALID_ATTR_PUBLIC_KEY_FORMAT         = -2147415676
+	CSSMERR_CSP_INVALID_ATTR_RANDOM                    = -2147415746
+	CSSMERR_CSP_INVALID_ATTR_ROUNDS                    = -2147415706
+	CSSMERR_CSP_INVALID_ATTR_SALT                      = -2147415750
+	CSSMERR_CSP_INVALID_ATTR_SEED                      = -2147415744
+	CSSMERR_CSP_INVALID_ATTR_START_DATE                = -2147415694
+	CSSMERR_CSP_INVALID_ATTR_SUBPRIME                  = -2147415684
+	CSSMERR_CSP_INVALID_ATTR_SYMMETRIC_KEY_FORMAT      = -2147415672
+	CSSMERR_CSP_INVALID_ATTR_VERSION                   = -2147415690
+	CSSMERR_CSP_INVALID_ATTR_WRAPPED_KEY_FORMAT        = -2147415670
+	CSSMERR_CSP_INVALID_CONTEXT                        = -2147415760
+	CSSMERR_CSP_INVALID_CONTEXT_HANDLE                 = -2147416000
+	CSSMERR_CSP_INVALID_CRYPTO_DATA                    = -2147415976
+	CSSMERR_CSP_INVALID_DATA                           = -2147415994
+	CSSMERR_CSP_INVALID_DATA_COUNT                     = -2147415768
+	CSSMERR_CSP_INVALID_DIGEST_ALGORITHM               = -2147415723
+	CSSMERR_CSP_INVALID_INPUT_POINTER                  = -2147416059
+	CSSMERR_CSP_INVALID_INPUT_VECTOR                   = -2147415766
+	CSSMERR_CSP_INVALID_KEY                            = -2147415792
+	CSSMERR_CSP_INVALID_KEYATTR_MASK                   = -2147415780
+	CSSMERR_CSP_INVALID_KEYUSAGE_MASK                  = -2147415782
+	CSSMERR_CSP_INVALID_KEY_CLASS                      = -2147415790
+	CSSMERR_CSP_INVALID_KEY_FORMAT                     = -2147415776
+	CSSMERR_CSP_INVALID_KEY_LABEL                      = -2147415778
+	CSSMERR_CSP_INVALID_KEY_POINTER                    = -2147415783
+	CSSMERR_CSP_INVALID_KEY_REFERENCE                  = -2147415791
+	CSSMERR_CSP_INVALID_LOGIN_NAME                     = -2147415727
+	CSSMERR_CSP_INVALID_NEW_ACL_ENTRY                  = -2147416014
+	CSSMERR_CSP_INVALID_NEW_ACL_OWNER                  = -2147416013
+	CSSMERR_CSP_INVALID_OUTPUT_POINTER                 = -2147416058
+	CSSMERR_CSP_INVALID_OUTPUT_VECTOR                  = -2147415765
+	CSSMERR_CSP_INVALID_PASSTHROUGH_ID                 = -2147415978
+	CSSMERR_CSP_INVALID_POINTER                        = -2147416060
+	CSSMERR_CSP_INVALID_SAMPLE_VALUE                   = -2147416024
+	CSSMERR_CSP_INVALID_SIGNATURE                      = -2147415733
+	CSSMERR_CSP_IN_DARK_WAKE                           = -2147415834
+	CSSMERR_CSP_KEY_BLOB_TYPE_INCORRECT                = -2147415787
+	CSSMERR_CSP_KEY_HEADER_INCONSISTENT                = -2147415786
+	CSSMERR_CSP_KEY_LABEL_ALREADY_EXISTS               = -2147415724
+	CSSMERR_CSP_KEY_USAGE_INCORRECT                    = -2147415788
+	CSSMERR_CSP_MDS_ERROR                              = -2147416061
+	CSSMERR_CSP_MEMORY_ERROR                           = -2147416062
+	CSSMERR_CSP_MISSING_ATTR_ACCESS_CREDENTIALS        = -2147415677
+	CSSMERR_CSP_MISSING_ATTR_ALG_PARAMS                = -2147415703
+	CSSMERR_CSP_MISSING_ATTR_BASE                      = -2147415685
+	CSSMERR_CSP_MISSING_ATTR_BLOCK_SIZE                = -2147415737
+	CSSMERR_CSP_MISSING_ATTR_DL_DB_HANDLE              = -2147415679
+	CSSMERR_CSP_MISSING_ATTR_EFFECTIVE_BITS            = -2147415695
+	CSSMERR_CSP_MISSING_ATTR_END_DATE                  = -2147415691
+	CSSMERR_CSP_MISSING_ATTR_INIT_VECTOR               = -2147415751
+	CSSMERR_CSP_MISSING_ATTR_ITERATION_COUNT           = -2147415681
+	CSSMERR_CSP_MISSING_ATTR_KEY                       = -2147415753
+	CSSMERR_CSP_MISSING_ATTR_KEY_LENGTH                = -2147415739
+	CSSMERR_CSP_MISSING_ATTR_KEY_TYPE                  = -2147415699
+	CSSMERR_CSP_MISSING_ATTR_LABEL                     = -2147415701
+	CSSMERR_CSP_MISSING_ATTR_MODE                      = -2147415697
+	CSSMERR_CSP_MISSING_ATTR_OUTPUT_SIZE               = -2147415707
+	CSSMERR_CSP_MISSING_ATTR_PADDING                   = -2147415747
+	CSSMERR_CSP_MISSING_ATTR_PASSPHRASE                = -2147415741
+	CSSMERR_CSP_MISSING_ATTR_PRIME                     = -2147415687
+	CSSMERR_CSP_MISSING_ATTR_PRIVATE_KEY_FORMAT        = -2147415673
+	CSSMERR_CSP_MISSING_ATTR_PUBLIC_KEY_FORMAT         = -2147415675
+	CSSMERR_CSP_MISSING_ATTR_RANDOM                    = -2147415745
+	CSSMERR_CSP_MISSING_ATTR_ROUNDS                    = -2147415705
+	CSSMERR_CSP_MISSING_ATTR_SALT                      = -2147415749
+	CSSMERR_CSP_MISSING_ATTR_SEED                      = -2147415743
+	CSSMERR_CSP_MISSING_ATTR_START_DATE                = -2147415693
+	CSSMERR_CSP_MISSING_ATTR_SUBPRIME                  = -2147415683
+	CSSMERR_CSP_MISSING_ATTR_SYMMETRIC_KEY_FORMAT      = -2147415671
+	CSSMERR_CSP_MISSING_ATTR_VERSION                   = -2147415689
+	CSSMERR_CSP_MISSING_ATTR_WRAPPED_KEY_FORMAT        = -2147415669
+	CSSMERR_CSP_NOT_LOGGED_IN                          = -2147415801
+	CSSMERR_CSP_NO_USER_INTERACTION                    = -2147415840
+	CSSMERR_CSP_OBJECT_ACL_NOT_SUPPORTED               = -2147416029
+	CSSMERR_CSP_OBJECT_ACL_REQUIRED                    = -2147416028
+	CSSMERR_CSP_OBJECT_MANIP_AUTH_DENIED               = -2147416030
+	CSSMERR_CSP_OBJECT_USE_AUTH_DENIED                 = -2147416031
+	CSSMERR_CSP_OPERATION_AUTH_DENIED                  = -2147416032
+	CSSMERR_CSP_OS_ACCESS_DENIED                       = -2147416055
+	CSSMERR_CSP_OUTPUT_LENGTH_ERROR                    = -2147415806
+	CSSMERR_CSP_PRIVATE_KEY_ALREADY_EXISTS             = -2147415725
+	CSSMERR_CSP_PRIVATE_KEY_NOT_FOUND                  = -2147415730
+	CSSMERR_CSP_PRIVILEGE_NOT_GRANTED                  = -2147415989
+	CSSMERR_CSP_PRIVILEGE_NOT_SUPPORTED                = -2147415805
+	CSSMERR_CSP_PUBLIC_KEY_INCONSISTENT                = -2147415729
+	CSSMERR_CSP_QUERY_SIZE_UNKNOWN                     = -2147415732
+	CSSMERR_CSP_SAMPLE_VALUE_NOT_SUPPORTED             = -2147416023
+	CSSMERR_CSP_SELF_CHECK_FAILED                      = -2147416056
+	CSSMERR_CSP_SERVICE_NOT_AVAILABLE                  = -2147415838
+	CSSMERR_CSP_STAGED_OPERATION_IN_PROGRESS           = -2147415736
+	CSSMERR_CSP_STAGED_OPERATION_NOT_STARTED           = -2147415735
+	CSSMERR_CSP_UNSUPPORTED_KEYATTR_MASK               = -2147415779
+	CSSMERR_CSP_UNSUPPORTED_KEYUSAGE_MASK              = -2147415781
+	CSSMERR_CSP_UNSUPPORTED_KEY_FORMAT                 = -2147415785
+	CSSMERR_CSP_UNSUPPORTED_KEY_LABEL                  = -2147415777
+	CSSMERR_CSP_UNSUPPORTED_KEY_SIZE                   = -2147415784
+	CSSMERR_CSP_USER_CANCELED                          = -2147415839
+	CSSMERR_CSP_VECTOR_OF_BUFS_UNSUPPORTED             = -2147415767
+	CSSMERR_CSP_VERIFY_FAILED                          = -2147415734
+	CSSMERR_CSSM_ADDIN_AUTHENTICATE_FAILED             = -2147417828
+	CSSMERR_CSSM_ADDIN_LOAD_FAILED                     = -2147417834
+	CSSMERR_CSSM_ADDIN_UNLOAD_FAILED                   = -2147417832
+	CSSMERR_CSSM_ATTRIBUTE_NOT_IN_CONTEXT              = -2147417822
+	CSSMERR_CSSM_BUFFER_TOO_SMALL                      = -2147417824
+	CSSMERR_CSSM_DEVICE_FAILED                         = -2147417883
+	CSSMERR_CSSM_DEVICE_RESET                          = -2147417884
+	CSSMERR_CSSM_EMM_AUTHENTICATE_FAILED               = -2147417829
+	CSSMERR_CSSM_EMM_LOAD_FAILED                       = -2147417836
+	CSSMERR_CSSM_EMM_UNLOAD_FAILED                     = -2147417835
+	CSSMERR_CSSM_EVENT_NOTIFICATION_CALLBACK_NOT_FOUND = -2147417819
+	CSSMERR_CSSM_FUNCTION_FAILED                       = -2147418102
+	CSSMERR_CSSM_FUNCTION_INTEGRITY_FAIL               = -2147417851
+	CSSMERR_CSSM_FUNCTION_NOT_IMPLEMENTED              = -2147418105
+	CSSMERR_CSSM_INCOMPATIBLE_VERSION                  = -2147418047
+	CSSMERR_CSSM_INSUFFICIENT_CLIENT_IDENTIFICATION    = -2147417885
+	CSSMERR_CSSM_INTERNAL_ERROR                        = -2147418111
+	CSSMERR_CSSM_INVALID_ADDIN_FUNCTION_TABLE          = -2147417830
+	CSSMERR_CSSM_INVALID_ADDIN_HANDLE                  = -2147417855
+	CSSMERR_CSSM_INVALID_ATTRIBUTE                     = -2147417823
+	CSSMERR_CSSM_INVALID_CONTEXT_HANDLE                = -2147418048
+	CSSMERR_CSSM_INVALID_GUID                          = -2147418100
+	CSSMERR_CSSM_INVALID_HANDLE_USAGE                  = -2147417853
+	CSSMERR_CSSM_INVALID_INPUT_POINTER                 = -2147418107
+	CSSMERR_CSSM_INVALID_KEY_HIERARCHY                 = -2147417833
+	CSSMERR_CSSM_INVALID_OUTPUT_POINTER                = -2147418106
+	CSSMERR_CSSM_INVALID_POINTER                       = -2147418108
+	CSSMERR_CSSM_INVALID_PVC                           = -2147417837
+	CSSMERR_CSSM_INVALID_SERVICE_MASK                  = -2147417827
+	CSSMERR_CSSM_INVALID_SUBSERVICEID                  = -2147417825
+	CSSMERR_CSSM_IN_DARK_WAKE                          = -2147417882
+	CSSMERR_CSSM_LIB_REF_NOT_FOUND                     = -2147417831
+	CSSMERR_CSSM_MDS_ERROR                             = -2147418109
+	CSSMERR_CSSM_MEMORY_ERROR                          = -2147418110
+	CSSMERR_CSSM_MODULE_MANAGER_INITIALIZE_FAIL        = -2147417821
+	CSSMERR_CSSM_MODULE_MANAGER_NOT_FOUND              = -2147417820
+	CSSMERR_CSSM_MODULE_MANIFEST_VERIFY_FAILED         = -2147418101
+	CSSMERR_CSSM_MODULE_NOT_LOADED                     = -2147417826
+	CSSMERR_CSSM_NOT_INITIALIZED                       = -2147417854
+	CSSMERR_CSSM_NO_USER_INTERACTION                   = -2147417888
+	CSSMERR_CSSM_OS_ACCESS_DENIED                      = -2147418103
+	CSSMERR_CSSM_PRIVILEGE_NOT_GRANTED                 = -2147418037
+	CSSMERR_CSSM_PVC_ALREADY_CONFIGURED                = -2147417838
+	CSSMERR_CSSM_PVC_REFERENT_NOT_FOUND                = -2147417852
+	CSSMERR_CSSM_SCOPE_NOT_SUPPORTED                   = -2147417839
+	CSSMERR_CSSM_SELF_CHECK_FAILED                     = -2147418104
+	CSSMERR_CSSM_SERVICE_NOT_AVAILABLE                 = -2147417886
+	CSSMERR_CSSM_USER_CANCELED                         = -2147417887
+	CSSMERR_DL_ACL_ADD_FAILED                          = -2147413962
+	CSSMERR_DL_ACL_BASE_CERTS_NOT_SUPPORTED            = -2147413977
+	CSSMERR_DL_ACL_CHALLENGE_CALLBACK_FAILED           = -2147413971
+	CSSMERR_DL_ACL_CHANGE_FAILED                       = -2147413967
+	CSSMERR_DL_ACL_DELETE_FAILED                       = -2147413964
+	CSSMERR_DL_ACL_ENTRY_TAG_NOT_FOUND                 = -2147413969
+	CSSMERR_DL_ACL_REPLACE_FAILED                      = -2147413963
+	CSSMERR_DL_ACL_SUBJECT_TYPE_NOT_SUPPORTED          = -2147413973
+	CSSMERR_DL_DATABASE_CORRUPT                        = -2147413759
+	CSSMERR_DL_DATASTORE_ALREADY_EXISTS                = -2147413736
+	CSSMERR_DL_DATASTORE_DOESNOT_EXIST                 = -2147413737
+	CSSMERR_DL_DATASTORE_IS_OPEN                       = -2147413734
+	CSSMERR_DL_DB_LOCKED                               = -2147413735
+	CSSMERR_DL_DEVICE_FAILED                           = -2147413787
+	CSSMERR_DL_DEVICE_RESET                            = -2147413788
+	CSSMERR_DL_ENDOFDATA                               = -2147413715
+	CSSMERR_DL_FIELD_SPECIFIED_MULTIPLE                = -2147413742
+	CSSMERR_DL_FUNCTION_FAILED                         = -2147414006
+	CSSMERR_DL_FUNCTION_NOT_IMPLEMENTED                = -2147414009
+	CSSMERR_DL_INCOMPATIBLE_FIELD_FORMAT               = -2147413741
+	CSSMERR_DL_INSUFFICIENT_CLIENT_IDENTIFICATION      = -2147413789
+	CSSMERR_DL_INTERNAL_ERROR                          = -2147414015
+	CSSMERR_DL_INVALID_ACCESS_CREDENTIALS              = -2147413979
+	CSSMERR_DL_INVALID_ACCESS_REQUEST                  = -2147413724
+	CSSMERR_DL_INVALID_ACL_BASE_CERTS                  = -2147413978
+	CSSMERR_DL_INVALID_ACL_CHALLENGE_CALLBACK          = -2147413972
+	CSSMERR_DL_INVALID_ACL_EDIT_MODE                   = -2147413968
+	CSSMERR_DL_INVALID_ACL_ENTRY_TAG                   = -2147413970
+	CSSMERR_DL_INVALID_ACL_SUBJECT_VALUE               = -2147413974
+	CSSMERR_DL_INVALID_CL_HANDLE                       = -2147413934
+	CSSMERR_DL_INVALID_CSP_HANDLE                      = -2147413936
+	CSSMERR_DL_INVALID_DB_HANDLE                       = -2147413942
+	CSSMERR_DL_INVALID_DB_LIST_POINTER                 = -2147413939
+	CSSMERR_DL_INVALID_DB_LOCATION                     = -2147413725
+	CSSMERR_DL_INVALID_DB_NAME                         = -2147413738
+	CSSMERR_DL_INVALID_DL_HANDLE                       = -2147413935
+	CSSMERR_DL_INVALID_FIELD_NAME                      = -2147413750
+	CSSMERR_DL_INVALID_INDEX_INFO                      = -2147413723
+	CSSMERR_DL_INVALID_INPUT_POINTER                   = -2147414011
+	CSSMERR_DL_INVALID_MODIFY_MODE                     = -2147413718
+	CSSMERR_DL_INVALID_NETWORK_ADDR                    = -2147413929
+	CSSMERR_DL_INVALID_NEW_ACL_ENTRY                   = -2147413966
+	CSSMERR_DL_INVALID_NEW_ACL_OWNER                   = -2147413965
+	CSSMERR_DL_INVALID_NEW_OWNER                       = -2147413721
+	CSSMERR_DL_INVALID_OPEN_PARAMETERS                 = -2147413717
+	CSSMERR_DL_INVALID_OUTPUT_POINTER                  = -2147414010
+	CSSMERR_DL_INVALID_PARSING_MODULE                  = -2147413740
+	CSSMERR_DL_INVALID_PASSTHROUGH_ID                  = -2147413930
+	CSSMERR_DL_INVALID_POINTER                         = -2147414012
+	CSSMERR_DL_INVALID_QUERY                           = -2147413714
+	CSSMERR_DL_INVALID_RECORDTYPE                      = -2147413751
+	CSSMERR_DL_INVALID_RECORD_INDEX                    = -2147413752
+	CSSMERR_DL_INVALID_RECORD_UID                      = -2147413720
+	CSSMERR_DL_INVALID_RESULTS_HANDLE                  = -2147413726
+	CSSMERR_DL_INVALID_SAMPLE_VALUE                    = -2147413976
+	CSSMERR_DL_INVALID_SELECTION_TAG                   = -2147413722
+	CSSMERR_DL_INVALID_UNIQUE_INDEX_DATA               = -2147413719
+	CSSMERR_DL_INVALID_VALUE                           = -2147413713
+	CSSMERR_DL_IN_DARK_WAKE                            = -2147413786
+	CSSMERR_DL_MDS_ERROR                               = -2147414013
+	CSSMERR_DL_MEMORY_ERROR                            = -2147414014
+	CSSMERR_DL_MISSING_VALUE                           = -2147413732
+	CSSMERR_DL_MULTIPLE_VALUES_UNSUPPORTED             = -2147413712
+	CSSMERR_DL_NO_USER_INTERACTION                     = -2147413792
+	CSSMERR_DL_OBJECT_ACL_NOT_SUPPORTED                = -2147413981
+	CSSMERR_DL_OBJECT_ACL_REQUIRED                     = -2147413980
+	CSSMERR_DL_OBJECT_MANIP_AUTH_DENIED                = -2147413982
+	CSSMERR_DL_OBJECT_USE_AUTH_DENIED                  = -2147413983
+	CSSMERR_DL_OPERATION_AUTH_DENIED                   = -2147413984
+	CSSMERR_DL_OS_ACCESS_DENIED                        = -2147414007
+	CSSMERR_DL_RECORD_MODIFIED                         = -2147413716
+	CSSMERR_DL_RECORD_NOT_FOUND                        = -2147413733
+	CSSMERR_DL_SAMPLE_VALUE_NOT_SUPPORTED              = -2147413975
+	CSSMERR_DL_SELF_CHECK_FAILED                       = -2147414008
+	CSSMERR_DL_SERVICE_NOT_AVAILABLE                   = -2147413790
+	CSSMERR_DL_STALE_UNIQUE_RECORD                     = -2147413711
+	CSSMERR_DL_UNSUPPORTED_FIELD_FORMAT                = -2147413749
+	CSSMERR_DL_UNSUPPORTED_INDEX_INFO                  = -2147413748
+	CSSMERR_DL_UNSUPPORTED_LOCALITY                    = -2147413747
+	CSSMERR_DL_UNSUPPORTED_NUM_ATTRIBUTES              = -2147413746
+	CSSMERR_DL_UNSUPPORTED_NUM_INDEXES                 = -2147413745
+	CSSMERR_DL_UNSUPPORTED_NUM_RECORDTYPES             = -2147413744
+	CSSMERR_DL_UNSUPPORTED_NUM_SELECTION_PREDS         = -2147413729
+	CSSMERR_DL_UNSUPPORTED_OPERATOR                    = -2147413727
+	CSSMERR_DL_UNSUPPORTED_QUERY                       = -2147413731
+	CSSMERR_DL_UNSUPPORTED_QUERY_LIMITS                = -2147413730
+	CSSMERR_DL_UNSUPPORTED_RECORDTYPE                  = -2147413743
+	CSSMERR_DL_USER_CANCELED                           = -2147413791
+	CSSMERR_TP_AUTHENTICATION_FAILED                   = -2147409657
+	CSSMERR_TP_CERTGROUP_INCOMPLETE                    = -2147409656
+	CSSMERR_TP_CERTIFICATE_CANT_OPERATE                = -2147409655
+	CSSMERR_TP_CERT_EXPIRED                            = -2147409654
+	CSSMERR_TP_CERT_NOT_VALID_YET                      = -2147409653
+	CSSMERR_TP_CERT_REVOKED                            = -2147409652
+	CSSMERR_TP_CERT_SUSPENDED                          = -2147409651
+	CSSMERR_TP_CRL_ALREADY_SIGNED                      = -2147409849
+	CSSMERR_TP_DEVICE_FAILED                           = -2147409691
+	CSSMERR_TP_DEVICE_RESET                            = -2147409692
+	CSSMERR_TP_FUNCTION_FAILED                         = -2147409910
+	CSSMERR_TP_FUNCTION_NOT_IMPLEMENTED                = -2147409913
+	CSSMERR_TP_INSUFFICIENT_CLIENT_IDENTIFICATION      = -2147409693
+	CSSMERR_TP_INSUFFICIENT_CREDENTIALS                = -2147409650
+	CSSMERR_TP_INTERNAL_ERROR                          = -2147409919
+	CSSMERR_TP_INVALID_ACTION                          = -2147409649
+	CSSMERR_TP_INVALID_ACTION_DATA                     = -2147409648
+	CSSMERR_TP_INVALID_ANCHOR_CERT                     = -2147409646
+	CSSMERR_TP_INVALID_AUTHORITY                       = -2147409645
+	CSSMERR_TP_INVALID_CALLBACK                        = -2147409625
+	CSSMERR_TP_INVALID_CALLERAUTH_CONTEXT_POINTER      = -2147409663
+	CSSMERR_TP_INVALID_CERTGROUP                       = -2147409660
+	CSSMERR_TP_INVALID_CERTGROUP_POINTER               = -2147409854
+	CSSMERR_TP_INVALID_CERTIFICATE                     = -2147409643
+	CSSMERR_TP_INVALID_CERT_AUTHORITY                  = -2147409642
+	CSSMERR_TP_INVALID_CERT_POINTER                    = -2147409853
+	CSSMERR_TP_INVALID_CL_HANDLE                       = -2147409838
+	CSSMERR_TP_INVALID_CONTEXT_HANDLE                  = -2147409856
+	CSSMERR_TP_INVALID_CRL                             = -2147409638
+	CSSMERR_TP_INVALID_CRLGROUP                        = -2147409659
+	CSSMERR_TP_INVALID_CRLGROUP_POINTER                = -2147409658
+	CSSMERR_TP_INVALID_CRL_AUTHORITY                   = -2147409641
+	CSSMERR_TP_INVALID_CRL_ENCODING                    = -2147409640
+	CSSMERR_TP_INVALID_CRL_POINTER                     = -2147409852
+	CSSMERR_TP_INVALID_CRL_TYPE                        = -2147409639
+	CSSMERR_TP_INVALID_CSP_HANDLE                      = -2147409840
+	CSSMERR_TP_INVALID_DATA                            = -2147409850
+	CSSMERR_TP_INVALID_DB_HANDLE                       = -2147409846
+	CSSMERR_TP_INVALID_DB_LIST                         = -2147409844
+	CSSMERR_TP_INVALID_DB_LIST_POINTER                 = -2147409843
+	CSSMERR_TP_INVALID_DL_HANDLE                       = -2147409839
+	CSSMERR_TP_INVALID_FIELD_POINTER                   = -2147409851
+	CSSMERR_TP_INVALID_FORM_TYPE                       = -2147409637
+	CSSMERR_TP_INVALID_ID                              = -2147409636
+	CSSMERR_TP_INVALID_IDENTIFIER                      = -2147409635
+	CSSMERR_TP_INVALID_IDENTIFIER_POINTER              = -2147409662
+	CSSMERR_TP_INVALID_INDEX                           = -2147409634
+	CSSMERR_TP_INVALID_INPUT_POINTER                   = -2147409915
+	CSSMERR_TP_INVALID_KEYCACHE_HANDLE                 = -2147409661
+	CSSMERR_TP_INVALID_NAME                            = -2147409633
+	CSSMERR_TP_INVALID_NETWORK_ADDR                    = -2147409833
+	CSSMERR_TP_INVALID_NUMBER_OF_FIELDS                = -2147409848
+	CSSMERR_TP_INVALID_OUTPUT_POINTER                  = -2147409914
+	CSSMERR_TP_INVALID_PASSTHROUGH_ID                  = -2147409834
+	CSSMERR_TP_INVALID_POINTER                         = -2147409916
+	CSSMERR_TP_INVALID_POLICY_IDENTIFIERS              = -2147409632
+	CSSMERR_TP_INVALID_REASON                          = -2147409630
+	CSSMERR_TP_INVALID_REQUEST_INPUTS                  = -2147409629
+	CSSMERR_TP_INVALID_RESPONSE_VECTOR                 = -2147409628
+	CSSMERR_TP_INVALID_SIGNATURE                       = -2147409627
+	CSSMERR_TP_INVALID_STOP_ON_POLICY                  = -2147409626
+	CSSMERR_TP_INVALID_TIMESTRING                      = -2147409631
+	CSSMERR_TP_INVALID_TUPLE                           = -2147409624
+	CSSMERR_TP_INVALID_TUPLEGROUP                      = -2147409614
+	CSSMERR_TP_INVALID_TUPLEGROUP_POINTER              = -2147409615
+	CSSMERR_TP_IN_DARK_WAKE                            = -2147409690
+	CSSMERR_TP_MDS_ERROR                               = -2147409917
+	CSSMERR_TP_MEMORY_ERROR                            = -2147409918
+	CSSMERR_TP_NOT_SIGNER                              = -2147409623
+	CSSMERR_TP_NOT_TRUSTED                             = -2147409622
+	CSSMERR_TP_NO_DEFAULT_AUTHORITY                    = -2147409621
+	CSSMERR_TP_NO_USER_INTERACTION                     = -2147409696
+	CSSMERR_TP_OS_ACCESS_DENIED                        = -2147409911
+	CSSMERR_TP_REJECTED_FORM                           = -2147409620
+	CSSMERR_TP_REQUEST_LOST                            = -2147409619
+	CSSMERR_TP_REQUEST_REJECTED                        = -2147409618
+	CSSMERR_TP_SELF_CHECK_FAILED                       = -2147409912
+	CSSMERR_TP_SERVICE_NOT_AVAILABLE                   = -2147409694
+	CSSMERR_TP_UNKNOWN_FORMAT                          = -2147409842
+	CSSMERR_TP_UNKNOWN_TAG                             = -2147409841
+	CSSMERR_TP_UNSUPPORTED_ADDR_TYPE                   = -2147409617
+	CSSMERR_TP_UNSUPPORTED_SERVICE                     = -2147409616
+	CSSMERR_TP_USER_CANCELED                           = -2147409695
+	CSSMERR_TP_VERIFICATION_FAILURE                    = -2147409847
+	CSSMERR_TP_VERIFY_ACTION_FAILED                    = -2147409644
+	CSSM_ACL_AUTHORIZATION_ANY                         = 1
+	CSSM_ACL_AUTHORIZATION_CHANGE_ACL                  = 65536
+	CSSM_ACL_AUTHORIZATION_CHANGE_OWNER                = 65537
+	CSSM_ACL_AUTHORIZATION_DBS_CREATE                  = 22
+	CSSM_ACL_AUTHORIZATION_DBS_DELETE                  = 23
+	CSSM_ACL_AUTHORIZATION_DB_DELETE                   = 17
+	CSSM_ACL_AUTHORIZATION_DB_INSERT                   = 19
+	CSSM_ACL_AUTHORIZATION_DB_MODIFY                   = 20
+	CSSM_ACL_AUTHORIZATION_DB_READ                     = 21
+	CSSM_ACL_AUTHORIZATION_DECRYPT                     = 24
+	CSSM_ACL_AUTHORIZATION_DELETE                      = 25
+	CSSM_ACL_AUTHORIZATION_DERIVE                      = 28
+	CSSM_ACL_AUTHORIZATION_ENCRYPT                     = 35
+	CSSM_ACL_AUTHORIZATION_EXPORT_CLEAR                = 37
+	CSSM_ACL_AUTHORIZATION_EXPORT_WRAPPED              = 38
+	CSSM_ACL_AUTHORIZATION_GENKEY                      = 41
+	CSSM_ACL_AUTHORIZATION_IMPORT_CLEAR                = 47
+	CSSM_ACL_AUTHORIZATION_IMPORT_WRAPPED              = 48
+	CSSM_ACL_AUTHORIZATION_INTEGRITY                   = 65539
+	CSSM_ACL_AUTHORIZATION_LOGIN                       = 57
+	CSSM_ACL_AUTHORIZATION_MAC                         = 59
+	CSSM_ACL_AUTHORIZATION_PARTITION_ID                = 65538
+	CSSM_ACL_AUTHORIZATION_PREAUTH_BASE                = 16842752
+	CSSM_ACL_AUTHORIZATION_PREAUTH_END                 = 16908288
+	CSSM_ACL_AUTHORIZATION_SIGN                        = 115
+	CSSM_ACL_AUTHORIZATION_TAG_VENDOR_DEFINED_START    = 65536
+	CSSM_ACL_CODE_SIGNATURE_INVALID                    = 0
+	CSSM_ACL_CODE_SIGNATURE_OSX                        = 1
+	CSSM_ACL_EDIT_MODE_ADD                             = 1
+	CSSM_ACL_EDIT_MODE_DELETE                          = 2
+	CSSM_ACL_EDIT_MODE_REPLACE                         = 3
+	CSSM_ACL_KEYCHAIN_PROMPT_CURRENT_VERSION           = 257
+	CSSM_ACL_KEYCHAIN_PROMPT_INVALID                   = 64
+	CSSM_ACL_KEYCHAIN_PROMPT_INVALID_ACT               = 128
+	CSSM_ACL_KEYCHAIN_PROMPT_REQUIRE_PASSPHRASE        = 1
+	CSSM_ACL_KEYCHAIN_PROMPT_UNSIGNED                  = 16
+	CSSM_ACL_KEYCHAIN_PROMPT_UNSIGNED_ACT              = 32
+	CSSM_ACL_MATCH_BITS                                = 3
+	CSSM_ACL_MATCH_GID                                 = 2
+	CSSM_ACL_MATCH_HONOR_ROOT                          = 256
+	CSSM_ACL_MATCH_UID                                 = 1
+	CSSM_ACL_PREAUTH_TRACKING_AUTHORIZED               = 2147483648
+	CSSM_ACL_PREAUTH_TRACKING_BLOCKED                  = 0
+	CSSM_ACL_PREAUTH_TRACKING_COUNT_MASK               = 255
+	CSSM_ACL_PREAUTH_TRACKING_UNKNOWN                  = 1073741824
+	CSSM_ACL_PROCESS_SELECTOR_CURRENT_VERSION          = 257
+	CSSM_ACL_SUBJECT_TYPE_ANY                          = 1
+	CSSM_ACL_SUBJECT_TYPE_ASYMMETRIC_KEY               = 65547
+	CSSM_ACL_SUBJECT_TYPE_BIOMETRIC                    = 8
+	CSSM_ACL_SUBJECT_TYPE_CODE_SIGNATURE               = 116
+	CSSM_ACL_SUBJECT_TYPE_COMMENT                      = 12
+	CSSM_ACL_SUBJECT_TYPE_EXT_PAM_NAME                 = 78
+	CSSM_ACL_SUBJECT_TYPE_HASHED_SUBJECT               = 44
+	CSSM_ACL_SUBJECT_TYPE_KEYCHAIN_PROMPT              = 65536
+	CSSM_ACL_SUBJECT_TYPE_LOGIN_NAME                   = 58
+	CSSM_ACL_SUBJECT_TYPE_PARTITION                    = 65548
+	CSSM_ACL_SUBJECT_TYPE_PASSWORD                     = 79
+	CSSM_ACL_SUBJECT_TYPE_PREAUTH                      = 65545
+	CSSM_ACL_SUBJECT_TYPE_PREAUTH_SOURCE               = 65546
+	CSSM_ACL_SUBJECT_TYPE_PROCESS                      = 65539
+	CSSM_ACL_SUBJECT_TYPE_PROMPTED_BIOMETRIC           = 83
+	CSSM_ACL_SUBJECT_TYPE_PROMPTED_PASSWORD            = 84
+	CSSM_ACL_SUBJECT_TYPE_PROTECTED_BIOMETRIC          = 86
+	CSSM_ACL_SUBJECT_TYPE_PROTECTED_PASSWORD           = 87
+	CSSM_ACL_SUBJECT_TYPE_PUBLIC_KEY                   = 89
+	CSSM_ACL_SUBJECT_TYPE_SYMMETRIC_KEY                = 65541
+	CSSM_ACL_SUBJECT_TYPE_THRESHOLD                    = 123
+	CSSM_AC_BASE_AC_ERROR                              = -2147405568
+	CSSM_AC_BASE_ERROR                                 = -2147405824
+	CSSM_AC_PRIVATE_ERROR                              = -2147404800
+	CSSM_ADDR_CUSTOM                                   = 1
+	CSSM_ADDR_NAME                                     = 4
+	CSSM_ADDR_NONE                                     = 0
+	CSSM_ADDR_SOCKADDR                                 = 3
+	CSSM_ADDR_URL                                      = 2
+	CSSM_ALGCLASS_ASYMMETRIC                           = 8
+	CSSM_ALGCLASS_CUSTOM                               = 1
+	CSSM_ALGCLASS_DERIVEKEY                            = 10
+	CSSM_ALGCLASS_DIGEST                               = 4
+	CSSM_ALGCLASS_KEYGEN                               = 9
+	CSSM_ALGCLASS_MAC                                  = 7
+	CSSM_ALGCLASS_NONE                                 = 0
+	CSSM_ALGCLASS_RANDOMGEN                            = 5
+	CSSM_ALGCLASS_SIGNATURE                            = 2
+	CSSM_ALGCLASS_SYMMETRIC                            = 3
+	CSSM_ALGCLASS_UNIQUEGEN                            = 6
+	CSSM_ALGID_3DES                                    = 77
+	CSSM_ALGID_3DES_1KEY                               = 20
+	CSSM_ALGID_3DES_1KEY_EEE                           = 19
+	CSSM_ALGID_3DES_2KEY                               = 18
+	CSSM_ALGID_3DES_2KEY_EDE                           = 18
+	CSSM_ALGID_3DES_2KEY_EEE                           = 21
+	CSSM_ALGID_3DES_3KEY                               = 17
+	CSSM_ALGID_3DES_3KEY_EDE                           = 17
+	CSSM_ALGID_3DES_3KEY_EEE                           = 20
+	CSSM_ALGID_AES                                     = 2147483649
+	CSSM_ALGID_APPLE_YARROW                            = 2147483648
+	CSSM_ALGID_ASC                                     = 2147483655
+	CSSM_ALGID_BATON                                   = 72
+	CSSM_ALGID_BLOWFISH                                = 28
+	CSSM_ALGID_CAST                                    = 27
+	CSSM_ALGID_CAST3                                   = 53
+	CSSM_ALGID_CAST5                                   = 54
+	CSSM_ALGID_CDMF                                    = 52
+	CSSM_ALGID_CRAB                                    = 41
+	CSSM_ALGID_CUSTOM                                  = 1
+	CSSM_ALGID_ConcatBaseAndData                       = 58
+	CSSM_ALGID_ConcatBaseAndKey                        = 56
+	CSSM_ALGID_ConcatDataAndBase                       = 59
+	CSSM_ALGID_ConcatKeyAndBase                        = 57
+	CSSM_ALGID_DES                                     = 14
+	CSSM_ALGID_DESRandom                               = 50
+	CSSM_ALGID_DESX                                    = 15
+	CSSM_ALGID_DH                                      = 2
+	CSSM_ALGID_DSA                                     = 43
+	CSSM_ALGID_DSA_BSAFE                               = 83
+	CSSM_ALGID_ECAES                                   = 90
+	CSSM_ALGID_ECC                                     = 93
+	CSSM_ALGID_ECDH                                    = 84
+	CSSM_ALGID_ECDH_X963_KDF                           = 2147483677
+	CSSM_ALGID_ECDSA                                   = 73
+	CSSM_ALGID_ECDSA_SPECIFIED                         = 2147483676
+	CSSM_ALGID_ECES                                    = 89
+	CSSM_ALGID_ECMQV                                   = 85
+	CSSM_ALGID_ECNRA                                   = 87
+	CSSM_ALGID_ENTROPY_DEFAULT                         = 2147483665
+	CSSM_ALGID_ElGamal                                 = 46
+	CSSM_ALGID_ExtractFromKey                          = 61
+	CSSM_ALGID_FASTHASH                                = 76
+	CSSM_ALGID_FEAL                                    = 32
+	CSSM_ALGID_FEE                                     = 2147483650
+	CSSM_ALGID_FEED                                    = 2147483653
+	CSSM_ALGID_FEEDEXP                                 = 2147483654
+	CSSM_ALGID_FEE_MD5                                 = 2147483651
+	CSSM_ALGID_FEE_SHA1                                = 2147483652
+	CSSM_ALGID_FIPS186Random                           = 92
+	CSSM_ALGID_FortezzaTimestamp                       = 80
+	CSSM_ALGID_GOST                                    = 39
+	CSSM_ALGID_GenericSecret                           = 55
+	CSSM_ALGID_HAVAL                                   = 10
+	CSSM_ALGID_HAVAL3                                  = 98
+	CSSM_ALGID_HAVAL4                                  = 99
+	CSSM_ALGID_HAVAL5                                  = 100
+	CSSM_ALGID_IBCHASH                                 = 12
+	CSSM_ALGID_IDEA                                    = 22
+	CSSM_ALGID_IntelPlatformRandom                     = 96
+	CSSM_ALGID_JUNIPER                                 = 75
+	CSSM_ALGID_KEA                                     = 4
+	CSSM_ALGID_KEYCHAIN_KEY                            = 2147483657
+	CSSM_ALGID_KHAFRE                                  = 37
+	CSSM_ALGID_KHUFU                                   = 36
+	CSSM_ALGID_LAST                                    = 2147483647
+	CSSM_ALGID_LOKI                                    = 35
+	CSSM_ALGID_LUCIFER                                 = 30
+	CSSM_ALGID_MADRYGA                                 = 31
+	CSSM_ALGID_MAYFLY                                  = 74
+	CSSM_ALGID_MD2                                     = 5
+	CSSM_ALGID_MD2Random                               = 47
+	CSSM_ALGID_MD2WithRSA                              = 45
+	CSSM_ALGID_MD4                                     = 6
+	CSSM_ALGID_MD5                                     = 7
+	CSSM_ALGID_MD5HMAC                                 = 102
+	CSSM_ALGID_MD5Random                               = 48
+	CSSM_ALGID_MD5WithRSA                              = 44
+	CSSM_ALGID_MMB                                     = 38
+	CSSM_ALGID_MQV                                     = 94
+	CSSM_ALGID_NHASH                                   = 9
+	CSSM_ALGID_NONE                                    = 0
+	CSSM_ALGID_NRA                                     = 95
+	CSSM_ALGID_OPENSSH1                                = 2147483671
+	CSSM_ALGID_PBE_OPENSSL_MD5                         = 2147483661
+	CSSM_ALGID_PH                                      = 3
+	CSSM_ALGID_PKCS12_PBE_ENCR                         = 2147483658
+	CSSM_ALGID_PKCS12_PBE_MAC                          = 2147483659
+	CSSM_ALGID_PKCS12_SHA1_PBE                         = 86
+	CSSM_ALGID_PKCS5_PBKDF1_MD2                        = 68
+	CSSM_ALGID_PKCS5_PBKDF1_MD5                        = 67
+	CSSM_ALGID_PKCS5_PBKDF1_SHA1                       = 69
+	CSSM_ALGID_PKCS5_PBKDF2                            = 103
+	CSSM_ALGID_RC2                                     = 23
+	CSSM_ALGID_RC4                                     = 25
+	CSSM_ALGID_RC5                                     = 24
+	CSSM_ALGID_RDES                                    = 16
+	CSSM_ALGID_REDOC                                   = 33
+	CSSM_ALGID_REDOC3                                  = 34
+	CSSM_ALGID_RIPEMAC                                 = 13
+	CSSM_ALGID_RIPEMD                                  = 11
+	CSSM_ALGID_RSA                                     = 42
+	CSSM_ALGID_RUNNING_COUNTER                         = 104
+	CSSM_ALGID_SAFER                                   = 40
+	CSSM_ALGID_SEAL                                    = 26
+	CSSM_ALGID_SECURE_PASSPHRASE                       = 2147483660
+	CSSM_ALGID_SHA1                                    = 8
+	CSSM_ALGID_SHA1HMAC                                = 91
+	CSSM_ALGID_SHA1HMAC_LEGACY                         = 2147483656
+	CSSM_ALGID_SHA1WithDSA                             = 81
+	CSSM_ALGID_SHA1WithECDSA                           = 82
+	CSSM_ALGID_SHA1WithECNRA                           = 88
+	CSSM_ALGID_SHA1WithRSA                             = 51
+	CSSM_ALGID_SHA224                                  = 2147483666
+	CSSM_ALGID_SHA224WithECDSA                         = 2147483672
+	CSSM_ALGID_SHA224WithRSA                           = 2147483667
+	CSSM_ALGID_SHA256                                  = 2147483662
+	CSSM_ALGID_SHA256WithECDSA                         = 2147483673
+	CSSM_ALGID_SHA256WithRSA                           = 2147483668
+	CSSM_ALGID_SHA384                                  = 2147483663
+	CSSM_ALGID_SHA384WithECDSA                         = 2147483674
+	CSSM_ALGID_SHA384WithRSA                           = 2147483669
+	CSSM_ALGID_SHA512                                  = 2147483664
+	CSSM_ALGID_SHA512WithECDSA                         = 2147483675
+	CSSM_ALGID_SHA512WithRSA                           = 2147483670
+	CSSM_ALGID_SHARandom                               = 49
+	CSSM_ALGID_SKIPJACK                                = 29
+	CSSM_ALGID_SSL3KeyAndMacDerive                     = 64
+	CSSM_ALGID_SSL3MD5                                 = 78
+	CSSM_ALGID_SSL3MD5_MAC                             = 65
+	// Deprecated: since macOS 12.0.
+	CSSM_ALGID_SSL3MasterDerive = 63
+	// Deprecated: since macOS 12.0.
+	CSSM_ALGID_SSL3PreMasterGen                     = 62
+	CSSM_ALGID_SSL3PrePrimaryGen                    = 62
+	CSSM_ALGID_SSL3PrimaryDerive                    = 63
+	CSSM_ALGID_SSL3SHA1                             = 79
+	CSSM_ALGID_SSL3SHA1_MAC                         = 66
+	CSSM_ALGID_TIGER                                = 101
+	CSSM_ALGID_UTC                                  = 97
+	CSSM_ALGID_VENDOR_DEFINED                       = 2147483648
+	CSSM_ALGID_WrapLynks                            = 70
+	CSSM_ALGID_WrapSET_OAEP                         = 71
+	CSSM_ALGID_XORBaseAndData                       = 60
+	CSSM_ALGID__FIRST_UNUSED                        = 2147483678
+	CSSM_ALGMODE_BC                                 = 14
+	CSSM_ALGMODE_CBC                                = 4
+	CSSM_ALGMODE_CBC128                             = 36
+	CSSM_ALGMODE_CBC64                              = 25
+	CSSM_ALGMODE_CBCC                               = 16
+	CSSM_ALGMODE_CBCPD                              = 20
+	CSSM_ALGMODE_CBCPadIV8                          = 6
+	CSSM_ALGMODE_CBC_IV8                            = 5
+	CSSM_ALGMODE_CFB                                = 7
+	CSSM_ALGMODE_CFB16                              = 29
+	CSSM_ALGMODE_CFB32                              = 28
+	CSSM_ALGMODE_CFB8                               = 30
+	CSSM_ALGMODE_CFBPadIV8                          = 9
+	CSSM_ALGMODE_CFB_IV8                            = 8
+	CSSM_ALGMODE_COUNTER                            = 13
+	CSSM_ALGMODE_CUSTOM                             = 1
+	CSSM_ALGMODE_ECB                                = 2
+	CSSM_ALGMODE_ECB128                             = 34
+	CSSM_ALGMODE_ECB64                              = 24
+	CSSM_ALGMODE_ECB96                              = 35
+	CSSM_ALGMODE_ECBPad                             = 3
+	CSSM_ALGMODE_ISO_9796                           = 41
+	CSSM_ALGMODE_LAST                               = 2147483647
+	CSSM_ALGMODE_NONE                               = 0
+	CSSM_ALGMODE_OAEP_HASH                          = 37
+	CSSM_ALGMODE_OFB                                = 10
+	CSSM_ALGMODE_OFB64                              = 26
+	CSSM_ALGMODE_OFBNLF                             = 17
+	CSSM_ALGMODE_OFBPadIV8                          = 12
+	CSSM_ALGMODE_OFB_IV8                            = 11
+	CSSM_ALGMODE_PBC                                = 18
+	CSSM_ALGMODE_PCBC                               = 15
+	CSSM_ALGMODE_PFB                                = 19
+	CSSM_ALGMODE_PKCS1_EME_OAEP                     = 39
+	CSSM_ALGMODE_PKCS1_EME_V15                      = 38
+	CSSM_ALGMODE_PKCS1_EMSA_V15                     = 40
+	CSSM_ALGMODE_PRIVATE_KEY                        = 22
+	CSSM_ALGMODE_PRIVATE_WRAP                       = 32
+	CSSM_ALGMODE_PUBLIC_KEY                         = 21
+	CSSM_ALGMODE_RELAYX                             = 33
+	CSSM_ALGMODE_SHUFFLE                            = 23
+	CSSM_ALGMODE_VENDOR_DEFINED                     = 2147483648
+	CSSM_ALGMODE_WRAP                               = 31
+	CSSM_ALGMODE_X9_31                              = 42
+	CSSM_APPLECSPDL_DB_CHANGE_PASSWORD              = 5
+	CSSM_APPLECSPDL_DB_GET_HANDLE                   = 6
+	CSSM_APPLECSPDL_DB_GET_SETTINGS                 = 2
+	CSSM_APPLECSPDL_DB_IS_LOCKED                    = 4
+	CSSM_APPLECSPDL_DB_LOCK                         = 0
+	CSSM_APPLECSPDL_DB_SET_SETTINGS                 = 3
+	CSSM_APPLECSPDL_DB_UNLOCK                       = 1
+	CSSM_APPLECSP_KEYDIGEST                         = 256
+	CSSM_APPLECSP_PUBKEY                            = 257
+	CSSM_APPLEDL_OPEN_PARAMETERS_VERSION            = 1
+	CSSM_APPLEFILEDL_COMMIT                         = 1
+	CSSM_APPLEFILEDL_DELETE_FILE                    = 6
+	CSSM_APPLEFILEDL_MAKE_BACKUP                    = 4
+	CSSM_APPLEFILEDL_MAKE_COPY                      = 5
+	CSSM_APPLEFILEDL_ROLLBACK                       = 2
+	CSSM_APPLEFILEDL_TAKE_FILE_LOCK                 = 3
+	CSSM_APPLEFILEDL_TOGGLE_AUTOCOMMIT              = 0
+	CSSM_APPLESCPDL_CSP_GET_KEYHANDLE               = 7
+	CSSM_APPLEX509CL_OBTAIN_CSR                     = 0
+	CSSM_APPLEX509CL_VERIFY_CSR                     = 1
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_10                = 10
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_11                = 11
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_12                = 12
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_13                = 13
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_14                = 14
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_15                = 15
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_16                = 16
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_17                = 17
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_18                = 18
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_19                = 19
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_20                = 20
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_21                = 21
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_22                = 22
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_23                = 23
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_24                = 24
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_25                = 25
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_26                = 26
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_27                = 27
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_28                = 28
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_8                 = 8
+	CSSM_APPLE_PRIVATE_CSPDL_CODE_9                 = 9
+	CSSM_APPLE_UNLOCK_TYPE_KEYBAG                   = 3
+	CSSM_APPLE_UNLOCK_TYPE_KEY_DIRECT               = 1
+	CSSM_APPLE_UNLOCK_TYPE_WRAPPED_PRIVATE          = 2
+	CSSM_ASC_OPTIMIZE_ASCII                         = 5
+	CSSM_ASC_OPTIMIZE_DEFAULT                       = 0
+	CSSM_ASC_OPTIMIZE_SECURITY                      = 2
+	CSSM_ASC_OPTIMIZE_SIZE                          = 1
+	CSSM_ASC_OPTIMIZE_TIME                          = 3
+	CSSM_ASC_OPTIMIZE_TIME_SIZE                     = 4
+	CSSM_ATTACH_READ_ONLY                           = 1
+	CSSM_ATTRIBUTE_ACCESS_CREDENTIALS               = 2147483684
+	CSSM_ATTRIBUTE_ALERT_TITLE                      = 545259527
+	CSSM_ATTRIBUTE_ALG_ID                           = 268435485
+	CSSM_ATTRIBUTE_ALG_PARAMS                       = 536870928
+	CSSM_ATTRIBUTE_ASC_OPTIMIZATION                 = 276824067
+	CSSM_ATTRIBUTE_BASE                             = 536870939
+	CSSM_ATTRIBUTE_BLOCK_SIZE                       = 268435468
+	CSSM_ATTRIBUTE_CSP_HANDLE                       = 268435490
+	CSSM_ATTRIBUTE_CUSTOM                           = 536870913
+	CSSM_ATTRIBUTE_DATA_ACCESS_CREDENTIALS          = 2147483648
+	CSSM_ATTRIBUTE_DATA_CRYPTO_DATA                 = 805306368
+	CSSM_ATTRIBUTE_DATA_CSSM_DATA                   = 536870912
+	CSSM_ATTRIBUTE_DATA_DATE                        = 1610612736
+	CSSM_ATTRIBUTE_DATA_DL_DB_HANDLE                = 33554432
+	CSSM_ATTRIBUTE_DATA_KEY                         = 1073741824
+	CSSM_ATTRIBUTE_DATA_KR_PROFILE                  = 50331648
+	CSSM_ATTRIBUTE_DATA_NONE                        = 0
+	CSSM_ATTRIBUTE_DATA_RANGE                       = 1879048192
+	CSSM_ATTRIBUTE_DATA_STRING                      = 1342177280
+	CSSM_ATTRIBUTE_DATA_UINT32                      = 268435456
+	CSSM_ATTRIBUTE_DATA_VERSION                     = 16777216
+	CSSM_ATTRIBUTE_DESCRIPTION                      = 1342177282
+	CSSM_ATTRIBUTE_DL_DB_HANDLE                     = 33554467
+	CSSM_ATTRIBUTE_EFFECTIVE_BITS                   = 268435476
+	CSSM_ATTRIBUTE_END_DATE                         = 1610612758
+	CSSM_ATTRIBUTE_FEE_CURVE_TYPE                   = 276824066
+	CSSM_ATTRIBUTE_FEE_PRIME_TYPE                   = 276824065
+	CSSM_ATTRIBUTE_INIT_VECTOR                      = 536870916
+	CSSM_ATTRIBUTE_ITERATION_COUNT                  = 268435486
+	CSSM_ATTRIBUTE_IV_SIZE                          = 268435471
+	CSSM_ATTRIBUTE_KEY                              = 1073741827
+	CSSM_ATTRIBUTE_KEYATTR                          = 268435480
+	CSSM_ATTRIBUTE_KEYUSAGE                         = 268435479
+	CSSM_ATTRIBUTE_KEY_LENGTH                       = 268435466
+	CSSM_ATTRIBUTE_KEY_LENGTH_RANGE                 = 1879048203
+	CSSM_ATTRIBUTE_KEY_TYPE                         = 268435474
+	CSSM_ATTRIBUTE_KRPROFILE_LOCAL                  = 50331680
+	CSSM_ATTRIBUTE_KRPROFILE_REMOTE                 = 50331681
+	CSSM_ATTRIBUTE_LABEL                            = 536870929
+	CSSM_ATTRIBUTE_MODE                             = 268435475
+	CSSM_ATTRIBUTE_NONE                             = 0
+	CSSM_ATTRIBUTE_OUTPUT_SIZE                      = 268435469
+	CSSM_ATTRIBUTE_PADDING                          = 268435462
+	CSSM_ATTRIBUTE_PARAM_KEY                        = 1082130437
+	CSSM_ATTRIBUTE_PASSPHRASE                       = 805306377
+	CSSM_ATTRIBUTE_PRIME                            = 536870938
+	CSSM_ATTRIBUTE_PRIVATE_KEY_FORMAT               = 268435494
+	CSSM_ATTRIBUTE_PROMPT                           = 545259526
+	CSSM_ATTRIBUTE_PUBLIC_KEY                       = 1082130432
+	CSSM_ATTRIBUTE_PUBLIC_KEY_FORMAT                = 268435493
+	CSSM_ATTRIBUTE_RANDOM                           = 536870919
+	CSSM_ATTRIBUTE_ROUNDS                           = 268435470
+	CSSM_ATTRIBUTE_ROUNDS_RANGE                     = 1879048223
+	CSSM_ATTRIBUTE_RSA_BLINDING                     = 276824068
+	CSSM_ATTRIBUTE_SALT                             = 536870917
+	CSSM_ATTRIBUTE_SEED                             = 805306376
+	CSSM_ATTRIBUTE_START_DATE                       = 1610612757
+	CSSM_ATTRIBUTE_SUBPRIME                         = 536870940
+	CSSM_ATTRIBUTE_SYMMETRIC_KEY_FORMAT             = 268435495
+	CSSM_ATTRIBUTE_TYPE_MASK                        = 4278190080
+	CSSM_ATTRIBUTE_VENDOR_DEFINED                   = 8388608
+	CSSM_ATTRIBUTE_VERIFY_PASSPHRASE                = 276824072
+	CSSM_ATTRIBUTE_VERSION                          = 16777241
+	CSSM_ATTRIBUTE_WRAPPED_KEY_FORMAT               = 268435496
+	CSSM_BASE_ERROR                                 = -2147418112
+	CSSM_CERTGROUP_CERT_PAIR                        = 3
+	CSSM_CERTGROUP_DATA                             = 0
+	CSSM_CERTGROUP_ENCODED_CERT                     = 1
+	CSSM_CERTGROUP_PARSED_CERT                      = 2
+	CSSM_CERT_ACL_ENTRY                             = 12
+	CSSM_CERT_BUNDLE_CUSTOM                         = 1
+	CSSM_CERT_BUNDLE_ENCODING_BER                   = 2
+	CSSM_CERT_BUNDLE_ENCODING_CUSTOM                = 1
+	CSSM_CERT_BUNDLE_ENCODING_DER                   = 3
+	CSSM_CERT_BUNDLE_ENCODING_PGP                   = 5
+	CSSM_CERT_BUNDLE_ENCODING_SEXPR                 = 4
+	CSSM_CERT_BUNDLE_ENCODING_UNKNOWN               = 0
+	CSSM_CERT_BUNDLE_LAST                           = 32767
+	CSSM_CERT_BUNDLE_PFX                            = 5
+	CSSM_CERT_BUNDLE_PGP_KEYRING                    = 7
+	CSSM_CERT_BUNDLE_PKCS12                         = 4
+	CSSM_CERT_BUNDLE_PKCS7_SIGNED_DATA              = 2
+	CSSM_CERT_BUNDLE_PKCS7_SIGNED_ENVELOPED_DATA    = 3
+	CSSM_CERT_BUNDLE_SPKI_SEQUENCE                  = 6
+	CSSM_CERT_BUNDLE_UNKNOWN                        = 0
+	CSSM_CERT_ENCODING_BER                          = 2
+	CSSM_CERT_ENCODING_CUSTOM                       = 1
+	CSSM_CERT_ENCODING_DER                          = 3
+	CSSM_CERT_ENCODING_LAST                         = 32767
+	CSSM_CERT_ENCODING_MULTIPLE                     = 32766
+	CSSM_CERT_ENCODING_NDR                          = 4
+	CSSM_CERT_ENCODING_PGP                          = 6
+	CSSM_CERT_ENCODING_SEXPR                        = 5
+	CSSM_CERT_ENCODING_UNKNOWN                      = 0
+	CSSM_CERT_Intel                                 = 8
+	CSSM_CERT_LAST                                  = 32767
+	CSSM_CERT_MULTIPLE                              = 32766
+	CSSM_CERT_PARSE_FORMAT_COMPLEX                  = 3
+	CSSM_CERT_PARSE_FORMAT_CUSTOM                   = 1
+	CSSM_CERT_PARSE_FORMAT_LAST                     = 32767
+	CSSM_CERT_PARSE_FORMAT_MULTIPLE                 = 32766
+	CSSM_CERT_PARSE_FORMAT_NONE                     = 0
+	CSSM_CERT_PARSE_FORMAT_OID_NAMED                = 4
+	CSSM_CERT_PARSE_FORMAT_SEXPR                    = 2
+	CSSM_CERT_PARSE_FORMAT_TUPLE                    = 5
+	CSSM_CERT_PGP                                   = 4
+	CSSM_CERT_SDSIv1                                = 6
+	CSSM_CERT_SPKI                                  = 5
+	CSSM_CERT_STATUS_EXPIRED                        = 1
+	CSSM_CERT_STATUS_IS_FROM_NET                    = 32
+	CSSM_CERT_STATUS_IS_IN_ANCHORS                  = 8
+	CSSM_CERT_STATUS_IS_IN_INPUT_CERTS              = 4
+	CSSM_CERT_STATUS_IS_ROOT                        = 16
+	CSSM_CERT_STATUS_NOT_VALID_YET                  = 2
+	CSSM_CERT_STATUS_TRUST_SETTINGS_DENY            = 1024
+	CSSM_CERT_STATUS_TRUST_SETTINGS_FOUND_ADMIN     = 128
+	CSSM_CERT_STATUS_TRUST_SETTINGS_FOUND_SYSTEM    = 256
+	CSSM_CERT_STATUS_TRUST_SETTINGS_FOUND_USER      = 64
+	CSSM_CERT_STATUS_TRUST_SETTINGS_IGNORED_ERROR   = 2048
+	CSSM_CERT_STATUS_TRUST_SETTINGS_TRUST           = 512
+	CSSM_CERT_TUPLE                                 = 11
+	CSSM_CERT_UNKNOWN                               = 0
+	CSSM_CERT_X9_ATTRIBUTE                          = 10
+	CSSM_CERT_X_509_ATTRIBUTE                       = 9
+	CSSM_CERT_X_509v1                               = 1
+	CSSM_CERT_X_509v2                               = 2
+	CSSM_CERT_X_509v3                               = 3
+	CSSM_CL_BASE_CL_ERROR                           = -2147411712
+	CSSM_CL_BASE_ERROR                              = -2147411968
+	CSSM_CL_CUSTOM_CERT_BUNDLE_TYPE                 = 32768
+	CSSM_CL_CUSTOM_CERT_ENCODING                    = 32768
+	CSSM_CL_CUSTOM_CERT_PARSE_FORMAT                = 32768
+	CSSM_CL_CUSTOM_CERT_TYPE                        = 32768
+	CSSM_CL_CUSTOM_CRL_PARSE_FORMAT                 = 32768
+	CSSM_CL_PRIVATE_ERROR                           = -2147410944
+	CSSM_CL_TEMPLATE_INTERMEDIATE_CERT              = 1
+	CSSM_CL_TEMPLATE_PKIX_CERTTEMPLATE              = 2
+	CSSM_CONTEXT_EVENT_CREATE                       = 1
+	CSSM_CONTEXT_EVENT_DELETE                       = 2
+	CSSM_CONTEXT_EVENT_UPDATE                       = 3
+	CSSM_CRLGROUP_CRL_PAIR                          = 3
+	CSSM_CRLGROUP_DATA                              = 0
+	CSSM_CRLGROUP_ENCODED_CRL                       = 1
+	CSSM_CRLGROUP_PARSED_CRL                        = 2
+	CSSM_CRL_ENCODING_BER                           = 2
+	CSSM_CRL_ENCODING_BLOOM                         = 4
+	CSSM_CRL_ENCODING_CUSTOM                        = 1
+	CSSM_CRL_ENCODING_DER                           = 3
+	CSSM_CRL_ENCODING_MULTIPLE                      = 32766
+	CSSM_CRL_ENCODING_SEXPR                         = 5
+	CSSM_CRL_ENCODING_UNKNOWN                       = 0
+	CSSM_CRL_PARSE_FORMAT_COMPLEX                   = 3
+	CSSM_CRL_PARSE_FORMAT_CUSTOM                    = 1
+	CSSM_CRL_PARSE_FORMAT_LAST                      = 32767
+	CSSM_CRL_PARSE_FORMAT_MULTIPLE                  = 32766
+	CSSM_CRL_PARSE_FORMAT_NONE                      = 0
+	CSSM_CRL_PARSE_FORMAT_OID_NAMED                 = 4
+	CSSM_CRL_PARSE_FORMAT_SEXPR                     = 2
+	CSSM_CRL_PARSE_FORMAT_TUPLE                     = 5
+	CSSM_CRL_TYPE_MULTIPLE                          = 32766
+	CSSM_CRL_TYPE_SPKI                              = 3
+	CSSM_CRL_TYPE_UNKNOWN                           = 0
+	CSSM_CRL_TYPE_X_509v1                           = 1
+	CSSM_CRL_TYPE_X_509v2                           = 2
+	CSSM_CSP_BASE_CSP_ERROR                         = -2147415808
+	CSSM_CSP_BASE_ERROR                             = -2147416064
+	CSSM_CSP_HARDWARE                               = 2
+	CSSM_CSP_HYBRID                                 = 3
+	CSSM_CSP_PRIVATE_ERROR                          = -2147415040
+	CSSM_CSP_RDR_EXISTS                             = 2
+	CSSM_CSP_RDR_HW                                 = 4
+	CSSM_CSP_RDR_TOKENPRESENT                       = 1
+	CSSM_CSP_SOFTWARE                               = 1
+	CSSM_CSP_STORES_CERTIFICATES                    = 134217728
+	CSSM_CSP_STORES_GENERIC                         = 268435456
+	CSSM_CSP_STORES_PRIVATE_KEYS                    = 16777216
+	CSSM_CSP_STORES_PUBLIC_KEYS                     = 33554432
+	CSSM_CSP_STORES_SESSION_KEYS                    = 67108864
+	CSSM_CSP_TOK_CLOCK_EXISTS                       = 64
+	CSSM_CSP_TOK_LOGIN_REQUIRED                     = 4
+	CSSM_CSP_TOK_PRIVATE_KEY_PASSWORD               = 4194304
+	CSSM_CSP_TOK_PROT_AUTHENTICATION                = 256
+	CSSM_CSP_TOK_RNG                                = 1
+	CSSM_CSP_TOK_SESSION_KEY_PASSWORD               = 2097152
+	CSSM_CSP_TOK_USER_PIN_EXPIRED                   = 1048576
+	CSSM_CSP_TOK_USER_PIN_INITIALIZED               = 8
+	CSSM_CSP_TOK_WRITE_PROTECTED                    = 2
+	CSSM_CSSM_BASE_CSSM_ERROR                       = -2147417840
+	CSSM_CSSM_BASE_ERROR                            = -2147418112
+	CSSM_CSSM_PRIVATE_ERROR                         = -2147417088
+	CSSM_CUSTOM_COMMON_ERROR_EXTENT                 = 224
+	CSSM_DB_ACCESS_PRIVILEGED                       = 4
+	CSSM_DB_ACCESS_READ                             = 1
+	CSSM_DB_ACCESS_RESET                            = 65536
+	CSSM_DB_ACCESS_WRITE                            = 2
+	CSSM_DB_AND                                     = 1
+	CSSM_DB_ATTRIBUTE_FORMAT_BIG_NUM                = 3
+	CSSM_DB_ATTRIBUTE_FORMAT_BLOB                   = 6
+	CSSM_DB_ATTRIBUTE_FORMAT_COMPLEX                = 8
+	CSSM_DB_ATTRIBUTE_FORMAT_MULTI_UINT32           = 7
+	CSSM_DB_ATTRIBUTE_FORMAT_REAL                   = 4
+	CSSM_DB_ATTRIBUTE_FORMAT_SINT32                 = 1
+	CSSM_DB_ATTRIBUTE_FORMAT_STRING                 = 0
+	CSSM_DB_ATTRIBUTE_FORMAT_TIME_DATE              = 5
+	CSSM_DB_ATTRIBUTE_FORMAT_UINT32                 = 2
+	CSSM_DB_ATTRIBUTE_NAME_AS_INTEGER               = 2
+	CSSM_DB_ATTRIBUTE_NAME_AS_OID                   = 1
+	CSSM_DB_ATTRIBUTE_NAME_AS_STRING                = 0
+	CSSM_DB_CERT_USE_OWNER                          = 4
+	CSSM_DB_CERT_USE_PRIVACY                        = 32
+	CSSM_DB_CERT_USE_REVOKED                        = 8
+	CSSM_DB_CERT_USE_SIGNING                        = 16
+	CSSM_DB_CERT_USE_SYSTEM                         = 2
+	CSSM_DB_CERT_USE_TRUSTED                        = 1
+	CSSM_DB_CONTAINS                                = 4
+	CSSM_DB_CONTAINS_FINAL_SUBSTRING                = 6
+	CSSM_DB_CONTAINS_INITIAL_SUBSTRING              = 5
+	CSSM_DB_DATASTORES_UNKNOWN                      = 4294967295
+	CSSM_DB_EQUAL                                   = 0
+	CSSM_DB_FILESYSTEMSCAN_MODE                     = 1
+	CSSM_DB_GREATER_THAN                            = 3
+	CSSM_DB_INDEX_NONUNIQUE                         = 1
+	CSSM_DB_INDEX_ON_ATTRIBUTE                      = 1
+	CSSM_DB_INDEX_ON_RECORD                         = 2
+	CSSM_DB_INDEX_ON_UNKNOWN                        = 0
+	CSSM_DB_INDEX_UNIQUE                            = 0
+	CSSM_DB_LESS_THAN                               = 2
+	CSSM_DB_MODIFY_ATTRIBUTE_ADD                    = 1
+	CSSM_DB_MODIFY_ATTRIBUTE_DELETE                 = 2
+	CSSM_DB_MODIFY_ATTRIBUTE_NONE                   = 0
+	CSSM_DB_MODIFY_ATTRIBUTE_REPLACE                = 3
+	CSSM_DB_NONE                                    = 0
+	CSSM_DB_NOT_EQUAL                               = 1
+	CSSM_DB_OR                                      = 2
+	CSSM_DB_RECORDTYPE_APP_DEFINED_END              = 4294967295
+	CSSM_DB_RECORDTYPE_APP_DEFINED_START            = 2147483648
+	CSSM_DB_RECORDTYPE_OPEN_GROUP_END               = 18
+	CSSM_DB_RECORDTYPE_OPEN_GROUP_START             = 10
+	CSSM_DB_RECORDTYPE_SCHEMA_END                   = 4
+	CSSM_DB_RECORDTYPE_SCHEMA_START                 = 0
+	CSSM_DB_TRANSACTIONAL_MODE                      = 0
+	CSSM_DL_BASE_DL_ERROR                           = -2147413760
+	CSSM_DL_BASE_ERROR                              = -2147414016
+	CSSM_DL_CUSTOM                                  = 1
+	CSSM_DL_DB_RECORD_ALL_KEYS                      = 18
+	CSSM_DL_DB_RECORD_ANY                           = 10
+	CSSM_DL_DB_RECORD_APPLESHARE_PASSWORD           = 2147483650
+	CSSM_DL_DB_RECORD_CERT                          = 11
+	CSSM_DL_DB_RECORD_CRL                           = 12
+	CSSM_DL_DB_RECORD_EXTENDED_ATTRIBUTE            = 2147487748
+	CSSM_DL_DB_RECORD_GENERIC                       = 14
+	CSSM_DL_DB_RECORD_GENERIC_PASSWORD              = 2147483648
+	CSSM_DL_DB_RECORD_INTERNET_PASSWORD             = 2147483649
+	CSSM_DL_DB_RECORD_METADATA                      = 2147516416
+	CSSM_DL_DB_RECORD_POLICY                        = 13
+	CSSM_DL_DB_RECORD_PRIVATE_KEY                   = 16
+	CSSM_DL_DB_RECORD_PUBLIC_KEY                    = 15
+	CSSM_DL_DB_RECORD_SYMMETRIC_KEY                 = 17
+	CSSM_DL_DB_RECORD_UNLOCK_REFERRAL               = 2147487747
+	CSSM_DL_DB_RECORD_USER_TRUST                    = 2147487745
+	CSSM_DL_DB_RECORD_X509_CERTIFICATE              = 2147487744
+	CSSM_DL_DB_RECORD_X509_CRL                      = 2147487746
+	CSSM_DL_DB_SCHEMA_ATTRIBUTES                    = 2
+	CSSM_DL_DB_SCHEMA_INDEXES                       = 1
+	CSSM_DL_DB_SCHEMA_INFO                          = 0
+	CSSM_DL_DB_SCHEMA_PARSING_MODULE                = 3
+	CSSM_DL_FFS                                     = 5
+	CSSM_DL_LDAP                                    = 2
+	CSSM_DL_MEMORY                                  = 6
+	CSSM_DL_ODBC                                    = 3
+	CSSM_DL_PKCS11                                  = 4
+	CSSM_DL_PRIVATE_ERROR                           = -2147412992
+	CSSM_DL_REMOTEDIR                               = 7
+	CSSM_DL_UNKNOWN                                 = 0
+	CSSM_ELAPSED_TIME_COMPLETE                      = -2
+	CSSM_ELAPSED_TIME_UNKNOWN                       = -1
+	CSSM_ERRCODE_ACL_ADD_FAILED                     = 54
+	CSSM_ERRCODE_ACL_BASE_CERTS_NOT_SUPPORTED       = 39
+	CSSM_ERRCODE_ACL_CHALLENGE_CALLBACK_FAILED      = 45
+	CSSM_ERRCODE_ACL_CHANGE_FAILED                  = 49
+	CSSM_ERRCODE_ACL_DELETE_FAILED                  = 52
+	CSSM_ERRCODE_ACL_ENTRY_TAG_NOT_FOUND            = 47
+	CSSM_ERRCODE_ACL_REPLACE_FAILED                 = 53
+	CSSM_ERRCODE_ACL_SUBJECT_TYPE_NOT_SUPPORTED     = 43
+	CSSM_ERRCODE_CRL_ALREADY_SIGNED                 = 71
+	CSSM_ERRCODE_DEVICE_FAILED                      = 229
+	CSSM_ERRCODE_DEVICE_RESET                       = 228
+	CSSM_ERRCODE_FUNCTION_FAILED                    = 10
+	CSSM_ERRCODE_FUNCTION_NOT_IMPLEMENTED           = 7
+	CSSM_ERRCODE_INCOMPATIBLE_VERSION               = 65
+	CSSM_ERRCODE_INSUFFICIENT_CLIENT_IDENTIFICATION = 227
+	CSSM_ERRCODE_INTERNAL_ERROR                     = 1
+	CSSM_ERRCODE_INVALID_ACCESS_CREDENTIALS         = 37
+	CSSM_ERRCODE_INVALID_ACL_BASE_CERTS             = 38
+	CSSM_ERRCODE_INVALID_ACL_CHALLENGE_CALLBACK     = 44
+	CSSM_ERRCODE_INVALID_ACL_EDIT_MODE              = 48
+	CSSM_ERRCODE_INVALID_ACL_ENTRY_TAG              = 46
+	CSSM_ERRCODE_INVALID_ACL_SUBJECT_VALUE          = 42
+	CSSM_ERRCODE_INVALID_AC_HANDLE                  = 85
+	CSSM_ERRCODE_INVALID_CERTGROUP_POINTER          = 66
+	CSSM_ERRCODE_INVALID_CERT_POINTER               = 67
+	CSSM_ERRCODE_INVALID_CL_HANDLE                  = 82
+	CSSM_ERRCODE_INVALID_CONTEXT_HANDLE             = 64
+	CSSM_ERRCODE_INVALID_CRL_POINTER                = 68
+	CSSM_ERRCODE_INVALID_CRYPTO_DATA                = 88
+	CSSM_ERRCODE_INVALID_CSP_HANDLE                 = 80
+	CSSM_ERRCODE_INVALID_DATA                       = 70
+	CSSM_ERRCODE_INVALID_DB_HANDLE                  = 74
+	CSSM_ERRCODE_INVALID_DB_LIST                    = 76
+	CSSM_ERRCODE_INVALID_DB_LIST_POINTER            = 77
+	CSSM_ERRCODE_INVALID_DL_HANDLE                  = 81
+	CSSM_ERRCODE_INVALID_FIELD_POINTER              = 69
+	CSSM_ERRCODE_INVALID_GUID                       = 12
+	CSSM_ERRCODE_INVALID_INPUT_POINTER              = 5
+	CSSM_ERRCODE_INVALID_KR_HANDLE                  = 84
+	CSSM_ERRCODE_INVALID_NETWORK_ADDR               = 87
+	CSSM_ERRCODE_INVALID_NEW_ACL_ENTRY              = 50
+	CSSM_ERRCODE_INVALID_NEW_ACL_OWNER              = 51
+	CSSM_ERRCODE_INVALID_NUMBER_OF_FIELDS           = 72
+	CSSM_ERRCODE_INVALID_OUTPUT_POINTER             = 6
+	CSSM_ERRCODE_INVALID_PASSTHROUGH_ID             = 86
+	CSSM_ERRCODE_INVALID_POINTER                    = 4
+	CSSM_ERRCODE_INVALID_SAMPLE_VALUE               = 40
+	CSSM_ERRCODE_INVALID_TP_HANDLE                  = 83
+	CSSM_ERRCODE_IN_DARK_WAKE                       = 230
+	CSSM_ERRCODE_MDS_ERROR                          = 3
+	CSSM_ERRCODE_MEMORY_ERROR                       = 2
+	CSSM_ERRCODE_MODULE_MANIFEST_VERIFY_FAILED      = 11
+	CSSM_ERRCODE_NO_USER_INTERACTION                = 224
+	CSSM_ERRCODE_OBJECT_ACL_NOT_SUPPORTED           = 35
+	CSSM_ERRCODE_OBJECT_ACL_REQUIRED                = 36
+	CSSM_ERRCODE_OBJECT_MANIP_AUTH_DENIED           = 34
+	CSSM_ERRCODE_OBJECT_USE_AUTH_DENIED             = 33
+	CSSM_ERRCODE_OPERATION_AUTH_DENIED              = 32
+	CSSM_ERRCODE_OS_ACCESS_DENIED                   = 9
+	CSSM_ERRCODE_PRIVILEGE_NOT_GRANTED              = 75
+	CSSM_ERRCODE_SAMPLE_VALUE_NOT_SUPPORTED         = 41
+	CSSM_ERRCODE_SELF_CHECK_FAILED                  = 8
+	CSSM_ERRCODE_SERVICE_NOT_AVAILABLE              = 226
+	CSSM_ERRCODE_UNKNOWN_FORMAT                     = 78
+	CSSM_ERRCODE_UNKNOWN_TAG                        = 79
+	CSSM_ERRCODE_USER_CANCELED                      = 225
+	CSSM_ERRCODE_VERIFICATION_FAILURE               = 73
+	CSSM_ERRORCODE_COMMON_EXTENT                    = 256
+	CSSM_ERRORCODE_CUSTOM_OFFSET                    = 1024
+	CSSM_ERRORCODE_MODULE_EXTENT                    = 2048
+	CSSM_ESTIMATED_TIME_UNKNOWN                     = -1
+	CSSM_EVIDENCE_FORM_APPLE_CERTGROUP              = 2147483649
+	CSSM_EVIDENCE_FORM_APPLE_CERT_INFO              = 2147483650
+	CSSM_EVIDENCE_FORM_APPLE_HEADER                 = 2147483648
+	CSSM_EVIDENCE_FORM_CERT                         = 1
+	CSSM_EVIDENCE_FORM_CERT_ID                      = 3
+	CSSM_EVIDENCE_FORM_CRL                          = 2
+	CSSM_EVIDENCE_FORM_CRL_ID                       = 4
+	CSSM_EVIDENCE_FORM_CRL_NEXTTIME                 = 7
+	CSSM_EVIDENCE_FORM_CRL_THISTIME                 = 6
+	CSSM_EVIDENCE_FORM_POLICYINFO                   = 8
+	CSSM_EVIDENCE_FORM_TUPLEGROUP                   = 9
+	CSSM_EVIDENCE_FORM_UNSPECIFIC                   = 0
+	CSSM_EVIDENCE_FORM_VERIFIER_TIME                = 5
+	CSSM_FALSE                                      = 0
+	CSSM_FEE_CURVE_TYPE_ANSI_X9_62                  = 3
+	CSSM_FEE_CURVE_TYPE_DEFAULT                     = 0
+	CSSM_FEE_CURVE_TYPE_MONTGOMERY                  = 1
+	CSSM_FEE_CURVE_TYPE_WEIERSTRASS                 = 2
+	CSSM_FEE_PRIME_TYPE_DEFAULT                     = 0
+	CSSM_FEE_PRIME_TYPE_FEE                         = 2
+	CSSM_FEE_PRIME_TYPE_GENERAL                     = 3
+	CSSM_FEE_PRIME_TYPE_MERSENNE                    = 1
+	CSSM_FIELDVALUE_COMPLEX_DATA_TYPE               = 4294967295
+	CSSM_HINT_ADDRESS_APP                           = 1
+	CSSM_HINT_ADDRESS_SP                            = 2
+	CSSM_HINT_NONE                                  = 0
+	CSSM_INVALID_HANDLE                             = 0
+	CSSM_KEYATTR_ALWAYS_SENSITIVE                   = 16
+	CSSM_KEYATTR_EXTRACTABLE                        = 32
+	CSSM_KEYATTR_MODIFIABLE                         = 4
+	CSSM_KEYATTR_NEVER_EXTRACTABLE                  = 64
+	CSSM_KEYATTR_PARTIAL                            = 65536
+	CSSM_KEYATTR_PERMANENT                          = 1
+	CSSM_KEYATTR_PRIVATE                            = 2
+	CSSM_KEYATTR_PUBLIC_KEY_ENCRYPT                 = 131072
+	CSSM_KEYATTR_RETURN_DATA                        = 268435456
+	CSSM_KEYATTR_RETURN_DEFAULT                     = 0
+	CSSM_KEYATTR_RETURN_NONE                        = 1073741824
+	CSSM_KEYATTR_RETURN_REF                         = 536870912
+	CSSM_KEYATTR_SENSITIVE                          = 8
+	CSSM_KEYBLOB_OTHER                              = 4294967295
+	CSSM_KEYBLOB_RAW                                = 0
+	CSSM_KEYBLOB_RAW_FORMAT_BSAFE                   = 6
+	CSSM_KEYBLOB_RAW_FORMAT_CCA                     = 9
+	CSSM_KEYBLOB_RAW_FORMAT_FIPS186                 = 5
+	CSSM_KEYBLOB_RAW_FORMAT_MSCAPI                  = 3
+	CSSM_KEYBLOB_RAW_FORMAT_NONE                    = 0
+	CSSM_KEYBLOB_RAW_FORMAT_OCTET_STRING            = 12
+	CSSM_KEYBLOB_RAW_FORMAT_OPENSSH                 = 2147483649
+	CSSM_KEYBLOB_RAW_FORMAT_OPENSSH2                = 2147483651
+	CSSM_KEYBLOB_RAW_FORMAT_OPENSSL                 = 2147483650
+	CSSM_KEYBLOB_RAW_FORMAT_OTHER                   = 4294967295
+	CSSM_KEYBLOB_RAW_FORMAT_PGP                     = 4
+	CSSM_KEYBLOB_RAW_FORMAT_PKCS1                   = 1
+	CSSM_KEYBLOB_RAW_FORMAT_PKCS3                   = 2
+	CSSM_KEYBLOB_RAW_FORMAT_PKCS8                   = 10
+	CSSM_KEYBLOB_RAW_FORMAT_SPKI                    = 11
+	CSSM_KEYBLOB_RAW_FORMAT_VENDOR_DEFINED          = 2147483648
+	CSSM_KEYBLOB_RAW_FORMAT_X509                    = 2147483648
+	CSSM_KEYBLOB_REFERENCE                          = 2
+	CSSM_KEYBLOB_REF_FORMAT_INTEGER                 = 0
+	CSSM_KEYBLOB_REF_FORMAT_OTHER                   = 4294967295
+	CSSM_KEYBLOB_REF_FORMAT_SPKI                    = 2
+	CSSM_KEYBLOB_REF_FORMAT_STRING                  = 1
+	CSSM_KEYBLOB_WRAPPED                            = 3
+	CSSM_KEYBLOB_WRAPPED_FORMAT_APPLE_CUSTOM        = 100
+	CSSM_KEYBLOB_WRAPPED_FORMAT_MSCAPI              = 3
+	CSSM_KEYBLOB_WRAPPED_FORMAT_NONE                = 0
+	CSSM_KEYBLOB_WRAPPED_FORMAT_OPENSSH1            = 102
+	CSSM_KEYBLOB_WRAPPED_FORMAT_OPENSSL             = 101
+	CSSM_KEYBLOB_WRAPPED_FORMAT_OTHER               = 4294967295
+	CSSM_KEYBLOB_WRAPPED_FORMAT_PKCS7               = 2
+	CSSM_KEYBLOB_WRAPPED_FORMAT_PKCS8               = 1
+	CSSM_KEYCLASS_OTHER                             = 4294967295
+	CSSM_KEYCLASS_PRIVATE_KEY                       = 1
+	CSSM_KEYCLASS_PUBLIC_KEY                        = 0
+	CSSM_KEYCLASS_SECRET_PART                       = 3
+	CSSM_KEYCLASS_SESSION_KEY                       = 2
+	CSSM_KEYHEADER_VERSION                          = 2
+	CSSM_KEYUSE_ANY                                 = 2147483648
+	CSSM_KEYUSE_DECRYPT                             = 2
+	CSSM_KEYUSE_DERIVE                              = 256
+	CSSM_KEYUSE_ENCRYPT                             = 1
+	CSSM_KEYUSE_SIGN                                = 4
+	CSSM_KEYUSE_SIGN_RECOVER                        = 16
+	CSSM_KEYUSE_UNWRAP                              = 128
+	CSSM_KEYUSE_VERIFY                              = 8
+	CSSM_KEYUSE_VERIFY_RECOVER                      = 32
+	CSSM_KEYUSE_WRAP                                = 64
+	CSSM_KEY_HIERARCHY_EXPORT                       = 2
+	CSSM_KEY_HIERARCHY_INTEG                        = 1
+	CSSM_KEY_HIERARCHY_NONE                         = 0
+	CSSM_KR_BASE_ERROR                              = -2147407872
+	CSSM_KR_PRIVATE_ERROR                           = -2147406848
+	CSSM_LIST_ELEMENT_DATUM                         = 0
+	CSSM_LIST_ELEMENT_SUBLIST                       = 1
+	CSSM_LIST_ELEMENT_WORDID                        = 2
+	CSSM_LIST_TYPE_CUSTOM                           = 1
+	CSSM_LIST_TYPE_SEXPR                            = 2
+	CSSM_LIST_TYPE_UNKNOWN                          = 0
+	CSSM_MDS_BASE_ERROR                             = -2147414016
+	CSSM_MDS_PRIVATE_ERROR                          = -2147412992
+	CSSM_MODULE_STRING_SIZE                         = 64
+	CSSM_NET_PROTO_CMP                              = 10
+	CSSM_NET_PROTO_CMPS                             = 11
+	CSSM_NET_PROTO_CUSTOM                           = 1
+	CSSM_NET_PROTO_FTP                              = 7
+	CSSM_NET_PROTO_FTPS                             = 8
+	CSSM_NET_PROTO_LDAP                             = 3
+	CSSM_NET_PROTO_LDAPNS                           = 5
+	CSSM_NET_PROTO_LDAPS                            = 4
+	CSSM_NET_PROTO_NONE                             = 0
+	CSSM_NET_PROTO_OCSP                             = 9
+	CSSM_NET_PROTO_UNSPECIFIED                      = 2
+	CSSM_NET_PROTO_X500DAP                          = 6
+	CSSM_NOTIFY_FAULT                               = 3
+	CSSM_NOTIFY_INSERT                              = 1
+	CSSM_NOTIFY_REMOVE                              = 2
+	CSSM_OK                                         = 0
+	CSSM_PADDING_ALTERNATE                          = 4
+	CSSM_PADDING_APPLE_SSLv2                        = 2147483648
+	CSSM_PADDING_CIPHERSTEALING                     = 8
+	CSSM_PADDING_CUSTOM                             = 1
+	CSSM_PADDING_FF                                 = 5
+	CSSM_PADDING_NONE                               = 0
+	CSSM_PADDING_ONE                                = 3
+	CSSM_PADDING_PKCS1                              = 10
+	CSSM_PADDING_PKCS5                              = 6
+	CSSM_PADDING_PKCS7                              = 7
+	CSSM_PADDING_RANDOM                             = 9
+	CSSM_PADDING_SIGRAW                             = 11
+	CSSM_PADDING_VENDOR_DEFINED                     = 2147483648
+	CSSM_PADDING_ZERO                               = 2
+	CSSM_PKCS5_PBKDF2_PRF_HMAC_SHA1                 = 0
+	CSSM_PKCS_OAEP_MGF1_MD5                         = 2
+	CSSM_PKCS_OAEP_MGF1_SHA1                        = 1
+	CSSM_PKCS_OAEP_MGF_NONE                         = 0
+	CSSM_PKCS_OAEP_PSOURCE_NONE                     = 0
+	CSSM_PKCS_OAEP_PSOURCE_Pspecified               = 1
+	CSSM_PRIVILEGE_SCOPE_NONE                       = 0
+	CSSM_PRIVILEGE_SCOPE_PROCESS                    = 1
+	CSSM_PRIVILEGE_SCOPE_THREAD                     = 2
+	CSSM_PVC_APP                                    = 1
+	CSSM_PVC_NONE                                   = 0
+	CSSM_PVC_SP                                     = 2
+	CSSM_QUERY_RETURN_DATA                          = 1
+	CSSM_QUERY_SIZELIMIT_NONE                       = 0
+	CSSM_QUERY_TIMELIMIT_NONE                       = 0
+	CSSM_SAMPLE_TYPE_ASYMMETRIC_KEY                 = 65547
+	CSSM_SAMPLE_TYPE_BIOMETRIC                      = 8
+	CSSM_SAMPLE_TYPE_COMMENT                        = 12
+	CSSM_SAMPLE_TYPE_HASHED_PASSWORD                = 43
+	CSSM_SAMPLE_TYPE_KEYBAG_KEY                     = 65549
+	CSSM_SAMPLE_TYPE_KEYCHAIN_CHANGE_LOCK           = 65538
+	CSSM_SAMPLE_TYPE_KEYCHAIN_LOCK                  = 65537
+	CSSM_SAMPLE_TYPE_KEYCHAIN_PROMPT                = 65536
+	CSSM_SAMPLE_TYPE_PASSWORD                       = 79
+	CSSM_SAMPLE_TYPE_PREAUTH                        = 65545
+	CSSM_SAMPLE_TYPE_PROCESS                        = 65539
+	CSSM_SAMPLE_TYPE_PROMPTED_BIOMETRIC             = 83
+	CSSM_SAMPLE_TYPE_PROMPTED_PASSWORD              = 84
+	CSSM_SAMPLE_TYPE_PROTECTED_BIOMETRIC            = 86
+	CSSM_SAMPLE_TYPE_PROTECTED_PASSWORD             = 87
+	CSSM_SAMPLE_TYPE_RETRY_ID                       = 85
+	CSSM_SAMPLE_TYPE_SIGNED_NONCE                   = 117
+	CSSM_SAMPLE_TYPE_SIGNED_SECRET                  = 118
+	CSSM_SAMPLE_TYPE_SYMMETRIC_KEY                  = 65541
+	CSSM_SAMPLE_TYPE_THRESHOLD                      = 123
+	CSSM_SERVICE_AC                                 = 32
+	CSSM_SERVICE_CL                                 = 8
+	CSSM_SERVICE_CSP                                = 2
+	CSSM_SERVICE_CSSM                               = 1
+	CSSM_SERVICE_DL                                 = 4
+	CSSM_SERVICE_KR                                 = 64
+	CSSM_SERVICE_TP                                 = 16
+	CSSM_TP_ACTION_ALLOW_EXPIRED                    = 1
+	CSSM_TP_ACTION_ALLOW_EXPIRED_ROOT               = 8
+	CSSM_TP_ACTION_CRL_SUFFICIENT                   = 4
+	CSSM_TP_ACTION_DEFAULT                          = 0
+	CSSM_TP_ACTION_FETCH_CERT_FROM_NET              = 4
+	CSSM_TP_ACTION_FETCH_CRL_FROM_NET               = 2
+	CSSM_TP_ACTION_IMPLICIT_ANCHORS                 = 64
+	CSSM_TP_ACTION_LEAF_IS_CA                       = 2
+	CSSM_TP_ACTION_REQUIRE_CRL_IF_PRESENT           = 8
+	CSSM_TP_ACTION_REQUIRE_CRL_PER_CERT             = 1
+	CSSM_TP_ACTION_REQUIRE_REV_PER_CERT             = 16
+	CSSM_TP_ACTION_TRUST_SETTINGS                   = 32
+	CSSM_TP_AUTHORITY_REQUEST_CERTISSUE             = 1
+	CSSM_TP_AUTHORITY_REQUEST_CERTNOTARIZE          = 6
+	CSSM_TP_AUTHORITY_REQUEST_CERTRESUME            = 4
+	CSSM_TP_AUTHORITY_REQUEST_CERTREVOKE            = 2
+	CSSM_TP_AUTHORITY_REQUEST_CERTSUSPEND           = 3
+	CSSM_TP_AUTHORITY_REQUEST_CERTUSERECOVER        = 7
+	CSSM_TP_AUTHORITY_REQUEST_CERTVERIFY            = 5
+	CSSM_TP_AUTHORITY_REQUEST_CRLISSUE              = 256
+	CSSM_TP_BASE_ERROR                              = -2147409920
+	CSSM_TP_BASE_TP_ERROR                           = -2147409664
+	CSSM_TP_CERTCHANGE_HOLD                         = 2
+	CSSM_TP_CERTCHANGE_NONE                         = 0
+	CSSM_TP_CERTCHANGE_NOT_AUTHORIZED               = 5
+	CSSM_TP_CERTCHANGE_OK                           = 1
+	CSSM_TP_CERTCHANGE_OKWITHNEWTIME                = 2
+	CSSM_TP_CERTCHANGE_REASON_AFFILIATIONCHANGE     = 4
+	CSSM_TP_CERTCHANGE_REASON_CACOMPROMISE          = 2
+	CSSM_TP_CERTCHANGE_REASON_CEASEOPERATION        = 3
+	CSSM_TP_CERTCHANGE_REASON_HOLDRELEASE           = 7
+	CSSM_TP_CERTCHANGE_REASON_KEYCOMPROMISE         = 1
+	CSSM_TP_CERTCHANGE_REASON_SUPERCEDED            = 5
+	CSSM_TP_CERTCHANGE_REASON_SUSPECTEDCOMPROMISE   = 6
+	CSSM_TP_CERTCHANGE_REASON_UNKNOWN               = 0
+	CSSM_TP_CERTCHANGE_REJECTED                     = 4
+	CSSM_TP_CERTCHANGE_RELEASE                      = 3
+	CSSM_TP_CERTCHANGE_REVOKE                       = 1
+	CSSM_TP_CERTCHANGE_STATUS_UNKNOWN               = 0
+	CSSM_TP_CERTCHANGE_WRONGCA                      = 3
+	CSSM_TP_CERTISSUE_NOT_AUTHORIZED                = 5
+	CSSM_TP_CERTISSUE_OK                            = 1
+	CSSM_TP_CERTISSUE_OKWITHCERTMODS                = 2
+	CSSM_TP_CERTISSUE_OKWITHSERVICEMODS             = 3
+	CSSM_TP_CERTISSUE_REJECTED                      = 4
+	CSSM_TP_CERTISSUE_STATUS_UNKNOWN                = 0
+	CSSM_TP_CERTISSUE_WILL_BE_REVOKED               = 6
+	CSSM_TP_CERTNOTARIZE_NOT_AUTHORIZED             = 5
+	CSSM_TP_CERTNOTARIZE_OK                         = 1
+	CSSM_TP_CERTNOTARIZE_OKWITHOUTFIELDS            = 2
+	CSSM_TP_CERTNOTARIZE_OKWITHSERVICEMODS          = 3
+	CSSM_TP_CERTNOTARIZE_REJECTED                   = 4
+	CSSM_TP_CERTNOTARIZE_STATUS_UNKNOWN             = 0
+	CSSM_TP_CERTRECLAIM_NOMATCH                     = 2
+	CSSM_TP_CERTRECLAIM_NOT_AUTHORIZED              = 4
+	CSSM_TP_CERTRECLAIM_OK                          = 1
+	CSSM_TP_CERTRECLAIM_REJECTED                    = 3
+	CSSM_TP_CERTRECLAIM_STATUS_UNKNOWN              = 0
+	CSSM_TP_CERTVERIFY_EXPIRED                      = 5
+	CSSM_TP_CERTVERIFY_INVALID                      = 2
+	CSSM_TP_CERTVERIFY_INVALID_AUTHORITY            = 7
+	CSSM_TP_CERTVERIFY_INVALID_BASIC_CONSTRAINTS    = 13
+	CSSM_TP_CERTVERIFY_INVALID_CERTGROUP            = 10
+	CSSM_TP_CERTVERIFY_INVALID_CERT_VALUE           = 9
+	CSSM_TP_CERTVERIFY_INVALID_CRL_DIST_PT          = 14
+	CSSM_TP_CERTVERIFY_INVALID_NAME_TREE            = 15
+	CSSM_TP_CERTVERIFY_INVALID_POLICY               = 11
+	CSSM_TP_CERTVERIFY_INVALID_POLICY_IDS           = 12
+	CSSM_TP_CERTVERIFY_INVALID_SIGNATURE            = 8
+	CSSM_TP_CERTVERIFY_NOT_VALID_YET                = 6
+	CSSM_TP_CERTVERIFY_REVOKED                      = 3
+	CSSM_TP_CERTVERIFY_SUSPENDED                    = 4
+	CSSM_TP_CERTVERIFY_UNKNOWN                      = 0
+	CSSM_TP_CERTVERIFY_UNKNOWN_CRITICAL_EXT         = 16
+	CSSM_TP_CERTVERIFY_VALID                        = 1
+	CSSM_TP_CERT_DIR_UPDATE                         = 8
+	CSSM_TP_CERT_NOTIFY_RENEW                       = 4
+	CSSM_TP_CERT_PUBLISH                            = 2
+	CSSM_TP_CONFIRM_ACCEPT                          = 1
+	CSSM_TP_CONFIRM_REJECT                          = 2
+	CSSM_TP_CONFIRM_STATUS_UNKNOWN                  = 0
+	CSSM_TP_CRLISSUE_INVALID_DOMAIN                 = 3
+	CSSM_TP_CRLISSUE_NOT_AUTHORIZED                 = 6
+	CSSM_TP_CRLISSUE_NOT_CURRENT                    = 2
+	CSSM_TP_CRLISSUE_OK                             = 1
+	CSSM_TP_CRLISSUE_REJECTED                       = 5
+	CSSM_TP_CRLISSUE_STATUS_UNKNOWN                 = 0
+	CSSM_TP_CRLISSUE_UNKNOWN_IDENTIFIER             = 4
+	CSSM_TP_CRL_DISTRIBUTE                          = 16
+	CSSM_TP_FORM_TYPE_GENERIC                       = 0
+	CSSM_TP_FORM_TYPE_REGISTRATION                  = 1
+	CSSM_TP_KEY_ARCHIVE                             = 1
+	CSSM_TP_PRIVATE_ERROR                           = -2147408896
+	CSSM_TP_STOP_ON_FIRST_FAIL                      = 3
+	CSSM_TP_STOP_ON_FIRST_PASS                      = 2
+	CSSM_TP_STOP_ON_NONE                            = 1
+	CSSM_TP_STOP_ON_POLICY                          = 0
+	CSSM_TRUE                                       = 1
+	CSSM_USEE_AUTHENTICATION                        = 6
+	CSSM_USEE_DOMESTIC                              = 1
+	CSSM_USEE_FINANCIAL                             = 2
+	CSSM_USEE_INSURANCE                             = 9
+	CSSM_USEE_KEYEXCH                               = 7
+	CSSM_USEE_KRENT                                 = 4
+	CSSM_USEE_KRLE                                  = 3
+	CSSM_USEE_LAST                                  = 255
+	CSSM_USEE_MEDICAL                               = 8
+	CSSM_USEE_NONE                                  = 0
+	CSSM_USEE_SSL                                   = 5
+	CSSM_USEE_WEAK                                  = 10
+	CSSM_VALUE_NOT_AVAILABLE                        = -1
+	CSSM_WORDID_A                                   = 2
+	CSSM_WORDID_ACL                                 = 3
+	CSSM_WORDID_ALPHA                               = 4
+	CSSM_WORDID_ASYMMETRIC_KEY                      = 65547
+	CSSM_WORDID_B                                   = 5
+	CSSM_WORDID_BER                                 = 6
+	CSSM_WORDID_BINARY                              = 7
+	CSSM_WORDID_BIOMETRIC                           = 8
+	CSSM_WORDID_C                                   = 9
+	CSSM_WORDID_CANCELED                            = 10
+	CSSM_WORDID_CERT                                = 11
+	CSSM_WORDID_COMMENT                             = 12
+	CSSM_WORDID_CRL                                 = 13
+	CSSM_WORDID_CUSTOM                              = 14
+	CSSM_WORDID_D                                   = 15
+	CSSM_WORDID_DATE                                = 16
+	CSSM_WORDID_DBS_CREATE                          = 22
+	CSSM_WORDID_DBS_DELETE                          = 23
+	CSSM_WORDID_DB_DELETE                           = 17
+	CSSM_WORDID_DB_EXEC_STORED_QUERY                = 18
+	CSSM_WORDID_DB_INSERT                           = 19
+	CSSM_WORDID_DB_MODIFY                           = 20
+	CSSM_WORDID_DB_READ                             = 21
+	CSSM_WORDID_DECRYPT                             = 24
+	CSSM_WORDID_DELETE                              = 25
+	CSSM_WORDID_DELTA_CRL                           = 26
+	CSSM_WORDID_DER                                 = 27
+	CSSM_WORDID_DERIVE                              = 28
+	CSSM_WORDID_DISPLAY                             = 29
+	CSSM_WORDID_DO                                  = 30
+	CSSM_WORDID_DSA                                 = 31
+	CSSM_WORDID_DSA_SHA1                            = 32
+	CSSM_WORDID_E                                   = 33
+	CSSM_WORDID_ELGAMAL                             = 34
+	CSSM_WORDID_ENCRYPT                             = 35
+	CSSM_WORDID_ENTRY                               = 36
+	CSSM_WORDID_EXPORT_CLEAR                        = 37
+	CSSM_WORDID_EXPORT_WRAPPED                      = 38
+	CSSM_WORDID_G                                   = 39
+	CSSM_WORDID_GE                                  = 40
+	CSSM_WORDID_GENKEY                              = 41
+	CSSM_WORDID_HASH                                = 42
+	CSSM_WORDID_HASHED_PASSWORD                     = 43
+	CSSM_WORDID_HASHED_SUBJECT                      = 44
+	CSSM_WORDID_HAVAL                               = 45
+	CSSM_WORDID_IBCHASH                             = 46
+	CSSM_WORDID_IMPORT_CLEAR                        = 47
+	CSSM_WORDID_IMPORT_WRAPPED                      = 48
+	CSSM_WORDID_INTEL                               = 49
+	CSSM_WORDID_ISSUER                              = 50
+	CSSM_WORDID_ISSUER_INFO                         = 51
+	CSSM_WORDID_KEA                                 = 53
+	CSSM_WORDID_KEY                                 = 65543
+	CSSM_WORDID_KEYBAG_KEY                          = 65549
+	CSSM_WORDID_KEYCHAIN_CHANGE_LOCK                = 65538
+	CSSM_WORDID_KEYCHAIN_LOCK                       = 65537
+	CSSM_WORDID_KEYCHAIN_PROMPT                     = 65536
+	CSSM_WORDID_KEYHOLDER                           = 54
+	CSSM_WORDID_K_OF_N                              = 52
+	CSSM_WORDID_L                                   = 55
+	CSSM_WORDID_LE                                  = 56
+	CSSM_WORDID_LOGIN                               = 57
+	CSSM_WORDID_LOGIN_NAME                          = 58
+	CSSM_WORDID_MAC                                 = 59
+	CSSM_WORDID_MD2                                 = 60
+	CSSM_WORDID_MD2WITHRSA                          = 61
+	CSSM_WORDID_MD4                                 = 62
+	CSSM_WORDID_MD5                                 = 63
+	CSSM_WORDID_MD5WITHRSA                          = 64
+	CSSM_WORDID_N                                   = 65
+	CSSM_WORDID_NAME                                = 66
+	CSSM_WORDID_NDR                                 = 67
+	CSSM_WORDID_NHASH                               = 68
+	CSSM_WORDID_NOT_AFTER                           = 69
+	CSSM_WORDID_NOT_BEFORE                          = 70
+	CSSM_WORDID_NULL                                = 71
+	CSSM_WORDID_NUMERIC                             = 72
+	CSSM_WORDID_OBJECT_HASH                         = 73
+	CSSM_WORDID_ONE_TIME                            = 74
+	CSSM_WORDID_ONLINE                              = 75
+	CSSM_WORDID_OWNER                               = 76
+	CSSM_WORDID_P                                   = 77
+	CSSM_WORDID_PAM_NAME                            = 78
+	CSSM_WORDID_PARTITION                           = 65548
+	CSSM_WORDID_PASSWORD                            = 79
+	CSSM_WORDID_PGP                                 = 80
+	CSSM_WORDID_PIN                                 = 65544
+	CSSM_WORDID_PREAUTH                             = 65545
+	CSSM_WORDID_PREAUTH_SOURCE                      = 65546
+	CSSM_WORDID_PREFIX                              = 81
+	CSSM_WORDID_PRIVATE_KEY                         = 82
+	CSSM_WORDID_PROCESS                             = 65539
+	CSSM_WORDID_PROMPTED_BIOMETRIC                  = 83
+	CSSM_WORDID_PROMPTED_PASSWORD                   = 84
+	CSSM_WORDID_PROPAGATE                           = 85
+	CSSM_WORDID_PROTECTED_BIOMETRIC                 = 86
+	CSSM_WORDID_PROTECTED_PASSWORD                  = 87
+	CSSM_WORDID_PROTECTED_PIN                       = 88
+	CSSM_WORDID_PUBLIC_KEY                          = 89
+	CSSM_WORDID_PUBLIC_KEY_FROM_CERT                = 90
+	CSSM_WORDID_Q                                   = 91
+	CSSM_WORDID_RANGE                               = 92
+	CSSM_WORDID_REVAL                               = 93
+	CSSM_WORDID_RIPEMAC                             = 94
+	CSSM_WORDID_RIPEMD                              = 95
+	CSSM_WORDID_RIPEMD160                           = 96
+	CSSM_WORDID_RSA                                 = 97
+	CSSM_WORDID_RSA_ISO9796                         = 98
+	CSSM_WORDID_RSA_PKCS                            = 99
+	CSSM_WORDID_RSA_PKCS1                           = 102
+	CSSM_WORDID_RSA_PKCS1_MD5                       = 103
+	CSSM_WORDID_RSA_PKCS1_SHA1                      = 104
+	CSSM_WORDID_RSA_PKCS1_SIG                       = 105
+	CSSM_WORDID_RSA_PKCS_MD5                        = 100
+	CSSM_WORDID_RSA_PKCS_SHA1                       = 101
+	CSSM_WORDID_RSA_RAW                             = 106
+	CSSM_WORDID_SDSIV1                              = 107
+	CSSM_WORDID_SEQUENCE                            = 108
+	CSSM_WORDID_SET                                 = 109
+	CSSM_WORDID_SEXPR                               = 110
+	CSSM_WORDID_SHA1                                = 111
+	CSSM_WORDID_SHA1WITHDSA                         = 112
+	CSSM_WORDID_SHA1WITHECDSA                       = 113
+	CSSM_WORDID_SHA1WITHRSA                         = 114
+	CSSM_WORDID_SIGN                                = 115
+	CSSM_WORDID_SIGNATURE                           = 116
+	CSSM_WORDID_SIGNED_NONCE                        = 117
+	CSSM_WORDID_SIGNED_SECRET                       = 118
+	CSSM_WORDID_SPKI                                = 119
+	CSSM_WORDID_SUBJECT                             = 120
+	CSSM_WORDID_SUBJECT_INFO                        = 121
+	CSSM_WORDID_SYMMETRIC_KEY                       = 65541
+	CSSM_WORDID_SYSTEM                              = 65542
+	CSSM_WORDID_TAG                                 = 122
+	CSSM_WORDID_THRESHOLD                           = 123
+	CSSM_WORDID_TIME                                = 124
+	CSSM_WORDID_URI                                 = 125
+	CSSM_WORDID_VENDOR_END                          = 2147418112
+	CSSM_WORDID_VENDOR_START                        = 65536
+	CSSM_WORDID_VERSION                             = 126
+	CSSM_WORDID_X509V1                              = 128
+	CSSM_WORDID_X509V2                              = 129
+	CSSM_WORDID_X509V3                              = 130
+	CSSM_WORDID_X509_ATTRIBUTE                      = 127
+	CSSM_WORDID_X9_ATTRIBUTE                        = 131
+	CSSM_WORDID__FIRST_UNUSED                       = 65550
+	CSSM_WORDID__NLU_                               = 0
+	CSSM_WORDID__RESERVED_1                         = 65540
+	CSSM_WORDID__STAR_                              = 1
+	CSSM_WORDID__UNK_                               = -1
+	SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA           = 17
+	SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA               = 19
+	SSL_DHE_DSS_WITH_DES_CBC_SHA                    = 18
+	SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA           = 20
+	SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA               = 22
+	SSL_DHE_RSA_WITH_DES_CBC_SHA                    = 21
+	SSL_DH_DSS_EXPORT_WITH_DES40_CBC_SHA            = 11
+	SSL_DH_DSS_WITH_3DES_EDE_CBC_SHA                = 13
+	SSL_DH_DSS_WITH_DES_CBC_SHA                     = 12
+	SSL_DH_RSA_EXPORT_WITH_DES40_CBC_SHA            = 14
+	SSL_DH_RSA_WITH_3DES_EDE_CBC_SHA                = 16
+	SSL_DH_RSA_WITH_DES_CBC_SHA                     = 15
+	SSL_DH_anon_EXPORT_WITH_DES40_CBC_SHA           = 25
+	SSL_DH_anon_EXPORT_WITH_RC4_40_MD5              = 23
+	SSL_DH_anon_WITH_3DES_EDE_CBC_SHA               = 27
+	SSL_DH_anon_WITH_DES_CBC_SHA                    = 26
+	SSL_DH_anon_WITH_RC4_128_MD5                    = 24
+	SSL_FORTEZZA_DMS_WITH_FORTEZZA_CBC_SHA          = 29
+	SSL_FORTEZZA_DMS_WITH_NULL_SHA                  = 28
+	SSL_NO_SUCH_CIPHERSUITE                         = 65535
+	SSL_NULL_WITH_NULL_NULL                         = 0
+	SSL_RSA_EXPORT_WITH_DES40_CBC_SHA               = 8
+	SSL_RSA_EXPORT_WITH_RC2_CBC_40_MD5              = 6
+	SSL_RSA_EXPORT_WITH_RC4_40_MD5                  = 3
+	SSL_RSA_WITH_3DES_EDE_CBC_MD5                   = 65411
+	SSL_RSA_WITH_3DES_EDE_CBC_SHA                   = 10
+	SSL_RSA_WITH_DES_CBC_MD5                        = 65410
+	SSL_RSA_WITH_DES_CBC_SHA                        = 9
+	SSL_RSA_WITH_IDEA_CBC_MD5                       = 65409
+	SSL_RSA_WITH_IDEA_CBC_SHA                       = 7
+	SSL_RSA_WITH_NULL_MD5                           = 1
+	SSL_RSA_WITH_NULL_SHA                           = 2
+	SSL_RSA_WITH_RC2_CBC_MD5                        = 65408
+	SSL_RSA_WITH_RC4_128_MD5                        = 4
+	SSL_RSA_WITH_RC4_128_SHA                        = 5
+	TLS_AES_128_CCM_8_SHA256                        = 4869
+	TLS_AES_128_CCM_SHA256                          = 4868
+	TLS_AES_128_GCM_SHA256                          = 4865
+	TLS_AES_256_GCM_SHA384                          = 4866
+	TLS_CHACHA20_POLY1305_SHA256                    = 4867
+	TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA               = 19
+	TLS_DHE_DSS_WITH_AES_128_CBC_SHA                = 50
+	TLS_DHE_DSS_WITH_AES_128_CBC_SHA256             = 64
+	TLS_DHE_DSS_WITH_AES_128_GCM_SHA256             = 162
+	TLS_DHE_DSS_WITH_AES_256_CBC_SHA                = 56
+	TLS_DHE_DSS_WITH_AES_256_CBC_SHA256             = 106
+	TLS_DHE_DSS_WITH_AES_256_GCM_SHA384             = 163
+	TLS_DHE_PSK_WITH_3DES_EDE_CBC_SHA               = 143
+	TLS_DHE_PSK_WITH_AES_128_CBC_SHA                = 144
+	TLS_DHE_PSK_WITH_AES_128_CBC_SHA256             = 178
+	TLS_DHE_PSK_WITH_AES_128_GCM_SHA256             = 170
+	TLS_DHE_PSK_WITH_AES_256_CBC_SHA                = 145
+	TLS_DHE_PSK_WITH_AES_256_CBC_SHA384             = 179
+	TLS_DHE_PSK_WITH_AES_256_GCM_SHA384             = 171
+	TLS_DHE_PSK_WITH_NULL_SHA                       = 45
+	TLS_DHE_PSK_WITH_NULL_SHA256                    = 180
+	TLS_DHE_PSK_WITH_NULL_SHA384                    = 181
+	TLS_DHE_PSK_WITH_RC4_128_SHA                    = 142
+	TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA               = 22
+	TLS_DHE_RSA_WITH_AES_128_CBC_SHA                = 51
+	TLS_DHE_RSA_WITH_AES_128_CBC_SHA256             = 103
+	TLS_DHE_RSA_WITH_AES_128_GCM_SHA256             = 158
+	TLS_DHE_RSA_WITH_AES_256_CBC_SHA                = 57
+	TLS_DHE_RSA_WITH_AES_256_CBC_SHA256             = 107
+	TLS_DHE_RSA_WITH_AES_256_GCM_SHA384             = 159
+	TLS_DH_DSS_WITH_3DES_EDE_CBC_SHA                = 13
+	TLS_DH_DSS_WITH_AES_128_CBC_SHA                 = 48
+	TLS_DH_DSS_WITH_AES_128_CBC_SHA256              = 62
+	TLS_DH_DSS_WITH_AES_128_GCM_SHA256              = 164
+	TLS_DH_DSS_WITH_AES_256_CBC_SHA                 = 54
+	TLS_DH_DSS_WITH_AES_256_CBC_SHA256              = 104
+	TLS_DH_DSS_WITH_AES_256_GCM_SHA384              = 165
+	TLS_DH_RSA_WITH_3DES_EDE_CBC_SHA                = 16
+	TLS_DH_RSA_WITH_AES_128_CBC_SHA                 = 49
+	TLS_DH_RSA_WITH_AES_128_CBC_SHA256              = 63
+	TLS_DH_RSA_WITH_AES_128_GCM_SHA256              = 160
+	TLS_DH_RSA_WITH_AES_256_CBC_SHA                 = 55
+	TLS_DH_RSA_WITH_AES_256_CBC_SHA256              = 105
+	TLS_DH_RSA_WITH_AES_256_GCM_SHA384              = 161
+	TLS_DH_anon_WITH_3DES_EDE_CBC_SHA               = 27
+	TLS_DH_anon_WITH_AES_128_CBC_SHA                = 52
+	TLS_DH_anon_WITH_AES_128_CBC_SHA256             = 108
+	TLS_DH_anon_WITH_AES_128_GCM_SHA256             = 166
+	TLS_DH_anon_WITH_AES_256_CBC_SHA                = 58
+	TLS_DH_anon_WITH_AES_256_CBC_SHA256             = 109
+	TLS_DH_anon_WITH_AES_256_GCM_SHA384             = 167
+	TLS_DH_anon_WITH_RC4_128_MD5                    = 24
+	TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA           = 49160
+	TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA            = 49161
+	TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256         = 49187
+	TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256         = 49195
+	TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA            = 49162
+	TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384         = 49188
+	TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384         = 49196
+	TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256   = 52393
+	TLS_ECDHE_ECDSA_WITH_NULL_SHA                   = 49158
+	TLS_ECDHE_ECDSA_WITH_RC4_128_SHA                = 49159
+	TLS_ECDHE_PSK_WITH_AES_128_CBC_SHA              = 49205
+	TLS_ECDHE_PSK_WITH_AES_256_CBC_SHA              = 49206
+	TLS_ECDHE_PSK_WITH_CHACHA20_POLY1305_SHA256     = 52396
+	TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA             = 49170
+	TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA              = 49171
+	TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256           = 49191
+	TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256           = 49199
+	TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA              = 49172
+	TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384           = 49192
+	TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384           = 49200
+	TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256     = 52392
+	TLS_ECDHE_RSA_WITH_NULL_SHA                     = 49168
+	TLS_ECDHE_RSA_WITH_RC4_128_SHA                  = 49169
+	TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA            = 49155
+	TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA             = 49156
+	TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256          = 49189
+	TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256          = 49197
+	TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA             = 49157
+	TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384          = 49190
+	TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384          = 49198
+	TLS_ECDH_ECDSA_WITH_NULL_SHA                    = 49153
+	TLS_ECDH_ECDSA_WITH_RC4_128_SHA                 = 49154
+	TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA              = 49165
+	TLS_ECDH_RSA_WITH_AES_128_CBC_SHA               = 49166
+	TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256            = 49193
+	TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256            = 49201
+	TLS_ECDH_RSA_WITH_AES_256_CBC_SHA               = 49167
+	TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384            = 49194
+	TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384            = 49202
+	TLS_ECDH_RSA_WITH_NULL_SHA                      = 49163
+	TLS_ECDH_RSA_WITH_RC4_128_SHA                   = 49164
+	TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA             = 49175
+	TLS_ECDH_anon_WITH_AES_128_CBC_SHA              = 49176
+	TLS_ECDH_anon_WITH_AES_256_CBC_SHA              = 49177
+	TLS_ECDH_anon_WITH_NULL_SHA                     = 49173
+	TLS_ECDH_anon_WITH_RC4_128_SHA                  = 49174
+	TLS_EMPTY_RENEGOTIATION_INFO_SCSV               = 255
+	TLS_NULL_WITH_NULL_NULL                         = 0
+	TLS_PSK_WITH_3DES_EDE_CBC_SHA                   = 139
+	TLS_PSK_WITH_AES_128_CBC_SHA                    = 140
+	TLS_PSK_WITH_AES_128_CBC_SHA256                 = 174
+	TLS_PSK_WITH_AES_128_GCM_SHA256                 = 168
+	TLS_PSK_WITH_AES_256_CBC_SHA                    = 141
+	TLS_PSK_WITH_AES_256_CBC_SHA384                 = 175
+	TLS_PSK_WITH_AES_256_GCM_SHA384                 = 169
+	TLS_PSK_WITH_CHACHA20_POLY1305_SHA256           = 52395
+	TLS_PSK_WITH_NULL_SHA                           = 44
+	TLS_PSK_WITH_NULL_SHA256                        = 176
+	TLS_PSK_WITH_NULL_SHA384                        = 177
+	TLS_PSK_WITH_RC4_128_SHA                        = 138
+	TLS_RSA_PSK_WITH_3DES_EDE_CBC_SHA               = 147
+	TLS_RSA_PSK_WITH_AES_128_CBC_SHA                = 148
+	TLS_RSA_PSK_WITH_AES_128_CBC_SHA256             = 182
+	TLS_RSA_PSK_WITH_AES_128_GCM_SHA256             = 172
+	TLS_RSA_PSK_WITH_AES_256_CBC_SHA                = 149
+	TLS_RSA_PSK_WITH_AES_256_CBC_SHA384             = 183
+	TLS_RSA_PSK_WITH_AES_256_GCM_SHA384             = 173
+	TLS_RSA_PSK_WITH_NULL_SHA                       = 46
+	TLS_RSA_PSK_WITH_NULL_SHA256                    = 184
+	TLS_RSA_PSK_WITH_NULL_SHA384                    = 185
+	TLS_RSA_PSK_WITH_RC4_128_SHA                    = 146
+	TLS_RSA_WITH_3DES_EDE_CBC_SHA                   = 10
+	TLS_RSA_WITH_AES_128_CBC_SHA                    = 47
+	TLS_RSA_WITH_AES_128_CBC_SHA256                 = 60
+	TLS_RSA_WITH_AES_128_GCM_SHA256                 = 156
+	TLS_RSA_WITH_AES_256_CBC_SHA                    = 53
+	TLS_RSA_WITH_AES_256_CBC_SHA256                 = 61
+	TLS_RSA_WITH_AES_256_GCM_SHA384                 = 157
+	TLS_RSA_WITH_NULL_MD5                           = 1
+	TLS_RSA_WITH_NULL_SHA                           = 2
+	TLS_RSA_WITH_NULL_SHA256                        = 59
+	TLS_RSA_WITH_RC4_128_MD5                        = 4
+	TLS_RSA_WITH_RC4_128_SHA                        = 5
+	CallerSecuritySession                           = 4294967295
+	ErrAuthorizationBadAddress                      = -60033
+	ErrAuthorizationCanceled                        = -60006
+	ErrAuthorizationDenied                          = -60005
+	ErrAuthorizationExternalizeNotAllowed           = -60009
+	ErrAuthorizationInteractionNotAllowed           = -60007
+	ErrAuthorizationInternal                        = -60008
+	ErrAuthorizationInternalizeNotAllowed           = -60010
+	ErrAuthorizationInvalidFlags                    = -60011
+	ErrAuthorizationInvalidPointer                  = -60004
+	ErrAuthorizationInvalidRef                      = -60002
+	ErrAuthorizationInvalidSet                      = -60001
+	ErrAuthorizationInvalidTag                      = -60003
+	ErrAuthorizationSuccess                         = 0
+	ErrAuthorizationToolEnvironmentError            = -60032
+	ErrAuthorizationToolExecuteFailure              = -60031
+	ErrSSLATSCertificateHashAlgorithmViolation      = -9885
+	ErrSSLATSCertificateTrustViolation              = -9886
+	ErrSSLATSCiphersuiteViolation                   = -9882
+	ErrSSLATSLeafCertificateHashAlgorithmViolation  = -9884
+	ErrSSLATSMinimumKeySizeViolation                = -9883
+	ErrSSLATSMinimumVersionViolation                = -9881
+	ErrSSLATSViolation                              = -9880
+	ErrSSLBadCert                                   = -9808
+	ErrSSLBadCertificateStatusResponse              = -9862
+	ErrSSLBadCipherSuite                            = -9818
+	ErrSSLBadConfiguration                          = -9848
+	ErrSSLBadRecordMac                              = -9846
+	ErrSSLBufferOverflow                            = -9817
+	ErrSSLCertExpired                               = -9814
+	ErrSSLCertNotYetValid                           = -9815
+	ErrSSLCertificateRequired                       = -9863
+	ErrSSLClientCertRequested                       = -9842
+	ErrSSLClientHelloReceived                       = -9851
+	ErrSSLClosedAbort                               = -9806
+	ErrSSLClosedGraceful                            = -9805
+	ErrSSLClosedNoNotify                            = -9816
+	ErrSSLConfigurationFailed                       = -9854
+	ErrSSLConnectionRefused                         = -9844
+	ErrSSLCrypto                                    = -9809
+	ErrSSLDecodeError                               = -9859
+	ErrSSLDecompressFail                            = -9857
+	ErrSSLDecryptionFail                            = -9845
+	ErrSSLEarlyDataRejected                         = -9890
+	ErrSSLFatalAlert                                = -9802
+	ErrSSLHandshakeFail                             = -9858
+	ErrSSLHostNameMismatch                          = -9843
+	ErrSSLIllegalParam                              = -9830
+	ErrSSLInappropriateFallback                     = -9860
+	ErrSSLInternal                                  = -9810
+	ErrSSLMissingExtension                          = -9861
+	ErrSSLModuleAttach                              = -9811
+	ErrSSLNegotiation                               = -9801
+	ErrSSLNetworkTimeout                            = -9853
+	ErrSSLNoRootCert                                = -9813
+	ErrSSLPeerAccessDenied                          = -9832
+	ErrSSLPeerAuthCompleted                         = -9841
+	ErrSSLPeerBadCert                               = -9825
+	ErrSSLPeerBadRecordMac                          = -9820
+	ErrSSLPeerCertExpired                           = -9828
+	ErrSSLPeerCertRevoked                           = -9827
+	ErrSSLPeerCertUnknown                           = -9829
+	ErrSSLPeerDecodeError                           = -9833
+	ErrSSLPeerDecompressFail                        = -9823
+	ErrSSLPeerDecryptError                          = -9834
+	ErrSSLPeerDecryptionFail                        = -9821
+	ErrSSLPeerExportRestriction                     = -9835
+	ErrSSLPeerHandshakeFail                         = -9824
+	ErrSSLPeerInsufficientSecurity                  = -9837
+	ErrSSLPeerInternalError                         = -9838
+	ErrSSLPeerNoRenegotiation                       = -9840
+	ErrSSLPeerProtocolVersion                       = -9836
+	ErrSSLPeerRecordOverflow                        = -9822
+	ErrSSLPeerUnexpectedMsg                         = -9819
+	ErrSSLPeerUnknownCA                             = -9831
+	ErrSSLPeerUnsupportedCert                       = -9826
+	ErrSSLPeerUserCancelled                         = -9839
+	ErrSSLProtocol                                  = -9800
+	ErrSSLRecordOverflow                            = -9847
+	ErrSSLSessionNotFound                           = -9804
+	ErrSSLTransportReset                            = -9852
+	ErrSSLUnexpectedMessage                         = -9856
+	ErrSSLUnexpectedRecord                          = -9849
+	ErrSSLUnknownPSKIdentity                        = -9864
+	ErrSSLUnknownRootCert                           = -9812
+	ErrSSLUnrecognizedName                          = -9865
+	ErrSSLUnsupportedExtension                      = -9855
+	ErrSSLWeakPeerEphemeralDHKey                    = -9850
+	ErrSSLWouldBlock                                = -9803
+	ErrSSLXCertChainInvalid                         = -9807
+	ErrSecACLAddFailed                              = -67698
+	ErrSecACLChangeFailed                           = -67699
+	ErrSecACLDeleteFailed                           = -67696
+	ErrSecACLNotSimple                              = -25240
+	ErrSecACLReplaceFailed                          = -67697
+	ErrSecAddinLoadFailed                           = -67711
+	ErrSecAddinUnloadFailed                         = -67714
+	ErrSecAlgorithmMismatch                         = -67730
+	ErrSecAllocate                                  = -108
+	ErrSecAlreadyLoggedIn                           = -67814
+	ErrSecAppleAddAppACLSubject                     = -67589
+	ErrSecAppleInvalidKeyEndDate                    = -67593
+	ErrSecAppleInvalidKeyStartDate                  = -67592
+	ErrSecApplePublicKeyIncomplete                  = -67590
+	ErrSecAppleSSLv2Rollback                        = -67595
+	ErrSecAppleSignatureMismatch                    = -67591
+	ErrSecAttachHandleBusy                          = -67728
+	ErrSecAttributeNotInContext                     = -67720
+	ErrSecAuthFailed                                = -25293
+	ErrSecBadReq                                    = -909
+	ErrSecBlockSizeMismatch                         = -67810
+	ErrSecBufferTooSmall                            = -25301
+	ErrSecCRLAlreadySigned                          = -67684
+	ErrSecCRLBadURI                                 = -67617
+	ErrSecCRLExpired                                = -67613
+	ErrSecCRLNotFound                               = -67615
+	ErrSecCRLNotTrusted                             = -67620
+	ErrSecCRLNotValidYet                            = -67614
+	ErrSecCRLPolicyFailed                           = -67621
+	ErrSecCRLServerDown                             = -67616
+	ErrSecCSAmbiguousBundleFormat                   = -67011
+	ErrSecCSBadBundleFormat                         = -67028
+	ErrSecCSBadCallbackValue                        = -67020
+	ErrSecCSBadDictionaryFormat                     = -67058
+	ErrSecCSBadDiskImageFormat                      = -67001
+	ErrSecCSBadFrameworkVersion                     = -67009
+	ErrSecCSBadLVArch                               = -67017
+	ErrSecCSBadMainExecutable                       = -67010
+	ErrSecCSBadNestedCode                           = -67021
+	ErrSecCSBadObjectFormat                         = -67049
+	ErrSecCSBadResource                             = -67054
+	ErrSecCSBadTeamIdentifier                       = -66997
+	ErrSecCSCMSConstructionFailed                   = -66991
+	ErrSecCSCMSTooLarge                             = -67036
+	ErrSecCSCancelled                               = -67006
+	ErrSecCSDBAccess                                = -67032
+	ErrSecCSDBDenied                                = -67033
+	ErrSecCSDSStoreSymlink                          = -67012
+	ErrSecCSDbCorrupt                               = -67024
+	ErrSecCSFileHardQuarantined                     = -67026
+	ErrSecCSGuestInvalid                            = -67063
+	ErrSecCSHelperFailed                            = -67019
+	ErrSecCSHostProtocolContradiction               = -67043
+	ErrSecCSHostProtocolDedicationError             = -67042
+	ErrSecCSHostProtocolInvalidAttribute            = -67031
+	ErrSecCSHostProtocolInvalidHash                 = -67035
+	ErrSecCSHostProtocolNotProxy                    = -67041
+	ErrSecCSHostProtocolRelativePath                = -67044
+	ErrSecCSHostProtocolStateError                  = -67040
+	ErrSecCSHostProtocolUnrelated                   = -67039
+	ErrSecCSHostReject                              = -67047
+	ErrSecCSInfoPlistFailed                         = -67030
+	ErrSecCSInternalError                           = -67048
+	ErrSecCSInvalidAssociatedFileData               = -66999
+	ErrSecCSInvalidAttributeValues                  = -67066
+	ErrSecCSInvalidEntitlements                     = -66994
+	ErrSecCSInvalidFlags                            = -67070
+	ErrSecCSInvalidObjectRef                        = -67071
+	ErrSecCSInvalidPlatform                         = -67005
+	ErrSecCSInvalidRuntimeVersion                   = -66993
+	ErrSecCSInvalidSymlink                          = -67003
+	ErrSecCSInvalidTeamIdentifier                   = -66998
+	ErrSecCSMultipleGuests                          = -67064
+	ErrSecCSNoMainExecutable                        = -67029
+	ErrSecCSNoMatches                               = -67027
+	ErrSecCSNoSuchCode                              = -67065
+	ErrSecCSNotAHost                                = -67046
+	ErrSecCSNotAppLike                              = -67002
+	ErrSecCSNotSupported                            = -67037
+	ErrSecCSObjectRequired                          = -67069
+	ErrSecCSOutdated                                = -67025
+	ErrSecCSRegularFile                             = -67015
+	ErrSecCSRemoteSignerFailed                      = -66990
+	ErrSecCSReqFailed                               = -67050
+	ErrSecCSReqInvalid                              = -67052
+	ErrSecCSReqUnsupported                          = -67051
+	ErrSecCSResourceDirectoryFailed                 = -67023
+	ErrSecCSResourceNotSupported                    = -67016
+	ErrSecCSResourceRulesInvalid                    = -67053
+	ErrSecCSResourcesInvalid                        = -67055
+	ErrSecCSResourcesNotFound                       = -67056
+	ErrSecCSResourcesNotSealed                      = -67057
+	ErrSecCSRevokedNotarization                     = -66992
+	ErrSecCSSigDBAccess                             = -67032
+	ErrSecCSSigDBDenied                             = -67033
+	ErrSecCSSignatureFailed                         = -67061
+	ErrSecCSSignatureInvalid                        = -67045
+	ErrSecCSSignatureNotVerifiable                  = -67060
+	ErrSecCSSignatureUnsupported                    = -67059
+	ErrSecCSSignatureUntrusted                      = -66996
+	ErrSecCSStaticCodeChanged                       = -67034
+	ErrSecCSStaticCodeNotFound                      = -67068
+	ErrSecCSTooBig                                  = -67004
+	ErrSecCSUnimplemented                           = -67072
+	ErrSecCSUnsealedAppRoot                         = -67014
+	ErrSecCSUnsealedFrameworkRoot                   = -67008
+	ErrSecCSUnsigned                                = -67062
+	ErrSecCSUnsignedNestedCode                      = -67022
+	ErrSecCSUnsupportedDigestAlgorithm              = -67000
+	ErrSecCSUnsupportedGuestAttributes              = -67067
+	ErrSecCSVetoed                                  = -67018
+	ErrSecCSWeakResourceEnvelope                    = -67007
+	ErrSecCSWeakResourceRules                       = -67013
+	ErrSecCallbackFailed                            = -67695
+	ErrSecCertificateCannotOperate                  = -67817
+	ErrSecCertificateDuplicateExtension             = -67903
+	ErrSecCertificateExpired                        = -67818
+	ErrSecCertificateIsCA                           = -67902
+	ErrSecCertificateNameNotAllowed                 = -67900
+	ErrSecCertificateNotValidYet                    = -67819
+	ErrSecCertificatePolicyNotAllowed               = -67899
+	ErrSecCertificateRevoked                        = -67820
+	ErrSecCertificateSuspended                      = -67821
+	ErrSecCertificateValidityPeriodTooLong          = -67901
+	ErrSecCodeSigningBadCertChainLength             = -67647
+	ErrSecCodeSigningBadPathLengthConstraint        = -67649
+	ErrSecCodeSigningDevelopment                    = -67651
+	ErrSecCodeSigningNoBasicConstraints             = -67648
+	ErrSecCodeSigningNoExtendedKeyUsage             = -67650
+	ErrSecConversionError                           = -67594
+	ErrSecCoreFoundationUnknown                     = -4960
+	ErrSecCreateChainFailed                         = -25318
+	ErrSecDataNotAvailable                          = -25316
+	ErrSecDataNotModifiable                         = -25317
+	ErrSecDataTooLarge                              = -25302
+	ErrSecDatabaseLocked                            = -67869
+	ErrSecDatastoreIsOpen                           = -67870
+	ErrSecDecode                                    = -26275
+	ErrSecDeviceError                               = -67727
+	ErrSecDeviceFailed                              = -67588
+	ErrSecDeviceReset                               = -67587
+	ErrSecDeviceVerifyFailed                        = -67812
+	ErrSecDiskFull                                  = -34
+	ErrSecDskFull                                   = -34
+	ErrSecDuplicateCallback                         = -25297
+	ErrSecDuplicateItem                             = -25299
+	ErrSecDuplicateKeychain                         = -25296
+	ErrSecEMMLoadFailed                             = -67709
+	ErrSecEMMUnloadFailed                           = -67710
+	ErrSecEndOfData                                 = -67634
+	ErrSecEventNotificationCallbackNotFound         = -67723
+	ErrSecExtendedKeyUsageNotCritical               = -67881
+	ErrSecFieldSpecifiedMultiple                    = -67866
+	ErrSecFileTooBig                                = -67597
+	ErrSecFunctionFailed                            = -67677
+	ErrSecFunctionIntegrityFail                     = -67670
+	ErrSecHostNameMismatch                          = -67602
+	ErrSecIDPFailure                                = -67622
+	ErrSecIO                                        = -36
+	ErrSecInDarkWake                                = -25320
+	ErrSecIncompatibleDatabaseBlob                  = -67600
+	ErrSecIncompatibleFieldFormat                   = -67867
+	ErrSecIncompatibleKeyBlob                       = -67601
+	ErrSecIncompatibleVersion                       = -67704
+	ErrSecIncompleteCertRevocationCheck             = -67635
+	ErrSecInputLengthError                          = -67724
+	ErrSecInsufficientClientID                      = -67586
+	ErrSecInsufficientCredentials                   = -67822
+	ErrSecInteractionNotAllowed                     = -25308
+	ErrSecInteractionRequired                       = -25315
+	ErrSecInternalComponent                         = -2070
+	ErrSecInternalError                             = -67671
+	// Deprecated: since macOS 12.0.
+	ErrSecInvaldCRLAuthority                 = -67827
+	ErrSecInvalidACL                         = -67702
+	ErrSecInvalidAccessCredentials           = -67700
+	ErrSecInvalidAccessRequest               = -67876
+	ErrSecInvalidAction                      = -67823
+	ErrSecInvalidAddinFunctionTable          = -67716
+	ErrSecInvalidAlgorithm                   = -67747
+	ErrSecInvalidAlgorithmParms              = -67770
+	ErrSecInvalidAttributeAccessCredentials  = -67796
+	ErrSecInvalidAttributeBase               = -67788
+	ErrSecInvalidAttributeBlockSize          = -67764
+	ErrSecInvalidAttributeDLDBHandle         = -67794
+	ErrSecInvalidAttributeEffectiveBits      = -67778
+	ErrSecInvalidAttributeEndDate            = -67782
+	ErrSecInvalidAttributeInitVector         = -67750
+	ErrSecInvalidAttributeIterationCount     = -67792
+	ErrSecInvalidAttributeKey                = -67748
+	ErrSecInvalidAttributeKeyLength          = -67762
+	ErrSecInvalidAttributeKeyType            = -67774
+	ErrSecInvalidAttributeLabel              = -67772
+	ErrSecInvalidAttributeMode               = -67776
+	ErrSecInvalidAttributeOutputSize         = -67766
+	ErrSecInvalidAttributePadding            = -67754
+	ErrSecInvalidAttributePassphrase         = -67760
+	ErrSecInvalidAttributePrime              = -67786
+	ErrSecInvalidAttributePrivateKeyFormat   = -67800
+	ErrSecInvalidAttributePublicKeyFormat    = -67798
+	ErrSecInvalidAttributeRandom             = -67756
+	ErrSecInvalidAttributeRounds             = -67768
+	ErrSecInvalidAttributeSalt               = -67752
+	ErrSecInvalidAttributeSeed               = -67758
+	ErrSecInvalidAttributeStartDate          = -67780
+	ErrSecInvalidAttributeSubprime           = -67790
+	ErrSecInvalidAttributeSymmetricKeyFormat = -67802
+	ErrSecInvalidAttributeVersion            = -67784
+	ErrSecInvalidAttributeWrappedKeyFormat   = -67804
+	ErrSecInvalidAuthority                   = -67824
+	ErrSecInvalidAuthorityKeyID              = -67606
+	ErrSecInvalidBaseACLs                    = -67851
+	ErrSecInvalidBundleInfo                  = -67857
+	ErrSecInvalidCRL                         = -67830
+	ErrSecInvalidCRLAuthority                = -67827
+	ErrSecInvalidCRLEncoding                 = -67828
+	ErrSecInvalidCRLGroup                    = -67816
+	ErrSecInvalidCRLIndex                    = -67858
+	ErrSecInvalidCRLType                     = -67829
+	ErrSecInvalidCallback                    = -25298
+	ErrSecInvalidCertAuthority               = -67826
+	ErrSecInvalidCertificateGroup            = -67691
+	ErrSecInvalidCertificateRef              = -67690
+	ErrSecInvalidContext                     = -67746
+	ErrSecInvalidDBList                      = -67681
+	ErrSecInvalidDBLocation                  = -67875
+	ErrSecInvalidData                        = -67673
+	ErrSecInvalidDatabaseBlob                = -67598
+	ErrSecInvalidDigestAlgorithm             = -67815
+	ErrSecInvalidEncoding                    = -67853
+	ErrSecInvalidExtendedKeyUsage            = -67609
+	ErrSecInvalidFormType                    = -67831
+	ErrSecInvalidGUID                        = -67679
+	ErrSecInvalidHandle                      = -67680
+	ErrSecInvalidHandleUsage                 = -67668
+	ErrSecInvalidID                          = -67832
+	ErrSecInvalidIDLinkage                   = -67610
+	ErrSecInvalidIdentifier                  = -67833
+	ErrSecInvalidIndex                       = -67834
+	ErrSecInvalidIndexInfo                   = -67877
+	ErrSecInvalidInputVector                 = -67744
+	ErrSecInvalidItemRef                     = -25304
+	ErrSecInvalidKeyAttributeMask            = -67738
+	ErrSecInvalidKeyBlob                     = -67599
+	ErrSecInvalidKeyFormat                   = -67742
+	ErrSecInvalidKeyHierarchy                = -67713
+	ErrSecInvalidKeyLabel                    = -67740
+	ErrSecInvalidKeyRef                      = -67712
+	ErrSecInvalidKeyUsageForPolicy           = -67608
+	ErrSecInvalidKeyUsageMask                = -67736
+	ErrSecInvalidKeychain                    = -25295
+	ErrSecInvalidLoginName                   = -67813
+	ErrSecInvalidModifyMode                  = -67879
+	ErrSecInvalidName                        = -67689
+	ErrSecInvalidNetworkAddress              = -67683
+	ErrSecInvalidNewOwner                    = -67878
+	ErrSecInvalidNumberOfFields              = -67685
+	ErrSecInvalidOutputVector                = -67745
+	ErrSecInvalidOwnerEdit                   = -25244
+	ErrSecInvalidPVC                         = -67708
+	ErrSecInvalidParsingModule               = -67868
+	ErrSecInvalidPassthroughID               = -67682
+	ErrSecInvalidPasswordRef                 = -25261
+	ErrSecInvalidPointer                     = -67675
+	ErrSecInvalidPolicyIdentifiers           = -67835
+	ErrSecInvalidPrefsDomain                 = -25319
+	ErrSecInvalidQuery                       = -67693
+	ErrSecInvalidReason                      = -67837
+	ErrSecInvalidRecord                      = -67701
+	ErrSecInvalidRequestInputs               = -67838
+	ErrSecInvalidRequestor                   = -67855
+	ErrSecInvalidResponseVector              = -67839
+	ErrSecInvalidRoot                        = -67612
+	ErrSecInvalidSampleValue                 = -67703
+	ErrSecInvalidScope                       = -67706
+	ErrSecInvalidSearchRef                   = -25305
+	ErrSecInvalidServiceMask                 = -67717
+	ErrSecInvalidSignature                   = -67688
+	ErrSecInvalidStopOnPolicy                = -67840
+	ErrSecInvalidSubServiceID                = -67719
+	ErrSecInvalidSubjectKeyID                = -67607
+	ErrSecInvalidSubjectName                 = -67655
+	ErrSecInvalidTimeString                  = -67836
+	ErrSecInvalidTrustSetting                = -25242
+	ErrSecInvalidTrustSettings               = -25262
+	ErrSecInvalidTuple                       = -67841
+	// Deprecated: since macOS 12.0.
+	ErrSecInvalidTupleCredendtials            = -67852
+	ErrSecInvalidTupleCredentials             = -67852
+	ErrSecInvalidTupleGroup                   = -67850
+	ErrSecInvalidValidityPeriod               = -67854
+	ErrSecInvalidValue                        = -67694
+	ErrSecItemNotFound                        = -25300
+	ErrSecKeyBlobTypeIncorrect                = -67732
+	ErrSecKeyHeaderInconsistent               = -67733
+	ErrSecKeyIsSensitive                      = -25258
+	ErrSecKeySizeNotAllowed                   = -25311
+	ErrSecKeyUsageIncorrect                   = -67731
+	ErrSecLibraryReferenceNotFound            = -67715
+	ErrSecMDSError                            = -67674
+	ErrSecMemoryError                         = -67672
+	ErrSecMissingAlgorithmParms               = -67771
+	ErrSecMissingAttributeAccessCredentials   = -67797
+	ErrSecMissingAttributeBase                = -67789
+	ErrSecMissingAttributeBlockSize           = -67765
+	ErrSecMissingAttributeDLDBHandle          = -67795
+	ErrSecMissingAttributeEffectiveBits       = -67779
+	ErrSecMissingAttributeEndDate             = -67783
+	ErrSecMissingAttributeInitVector          = -67751
+	ErrSecMissingAttributeIterationCount      = -67793
+	ErrSecMissingAttributeKey                 = -67749
+	ErrSecMissingAttributeKeyLength           = -67763
+	ErrSecMissingAttributeKeyType             = -67775
+	ErrSecMissingAttributeLabel               = -67773
+	ErrSecMissingAttributeMode                = -67777
+	ErrSecMissingAttributeOutputSize          = -67767
+	ErrSecMissingAttributePadding             = -67755
+	ErrSecMissingAttributePassphrase          = -67761
+	ErrSecMissingAttributePrime               = -67787
+	ErrSecMissingAttributePrivateKeyFormat    = -67801
+	ErrSecMissingAttributePublicKeyFormat     = -67799
+	ErrSecMissingAttributeRandom              = -67757
+	ErrSecMissingAttributeRounds              = -67769
+	ErrSecMissingAttributeSalt                = -67753
+	ErrSecMissingAttributeSeed                = -67759
+	ErrSecMissingAttributeStartDate           = -67781
+	ErrSecMissingAttributeSubprime            = -67791
+	ErrSecMissingAttributeSymmetricKeyFormat  = -67803
+	ErrSecMissingAttributeVersion             = -67785
+	ErrSecMissingAttributeWrappedKeyFormat    = -67805
+	ErrSecMissingEntitlement                  = -34018
+	ErrSecMissingQualifiedCertStatement       = -67904
+	ErrSecMissingRequiredExtension            = -67880
+	ErrSecMissingValue                        = -67871
+	ErrSecMobileMeCSRVerifyFailure            = -67665
+	ErrSecMobileMeFailedConsistencyCheck      = -67666
+	ErrSecMobileMeNoRequestPending            = -67664
+	ErrSecMobileMeRequestAlreadyPending       = -67663
+	ErrSecMobileMeRequestQueued               = -67657
+	ErrSecMobileMeRequestRedirected           = -67658
+	ErrSecMobileMeServerAlreadyExists         = -67661
+	ErrSecMobileMeServerError                 = -67659
+	ErrSecMobileMeServerNotAvailable          = -67660
+	ErrSecMobileMeServerServiceErr            = -67662
+	ErrSecModuleManagerInitializeFailed       = -67721
+	ErrSecModuleManagerNotFound               = -67722
+	ErrSecModuleManifestVerifyFailed          = -67678
+	ErrSecModuleNotLoaded                     = -67718
+	ErrSecMultipleExecSegments                = -66995
+	ErrSecMultiplePrivKeys                    = -25259
+	ErrSecMultipleValuesUnsupported           = -67842
+	ErrSecNetworkFailure                      = -67636
+	ErrSecNoAccessForItem                     = -25243
+	ErrSecNoBasicConstraints                  = -67604
+	ErrSecNoBasicConstraintsCA                = -67605
+	ErrSecNoCertificateModule                 = -25313
+	ErrSecNoDefaultAuthority                  = -67844
+	ErrSecNoDefaultKeychain                   = -25307
+	ErrSecNoFieldValues                       = -67859
+	ErrSecNoPolicyModule                      = -25314
+	ErrSecNoStorageModule                     = -25312
+	ErrSecNoSuchAttr                          = -25303
+	ErrSecNoSuchClass                         = -25306
+	ErrSecNoSuchKeychain                      = -25294
+	ErrSecNoTrustSettings                     = -25263
+	ErrSecNotAvailable                        = -25291
+	ErrSecNotInitialized                      = -67667
+	ErrSecNotLoggedIn                         = -67729
+	ErrSecNotSigner                           = -26267
+	ErrSecNotTrusted                          = -67843
+	ErrSecOCSPBadRequest                      = -67631
+	ErrSecOCSPBadResponse                     = -67630
+	ErrSecOCSPNoSigner                        = -67640
+	ErrSecOCSPNotTrustedToAnchor              = -67637
+	ErrSecOCSPResponderInternalError          = -67642
+	ErrSecOCSPResponderMalformedReq           = -67641
+	ErrSecOCSPResponderSignatureRequired      = -67644
+	ErrSecOCSPResponderTryLater               = -67643
+	ErrSecOCSPResponderUnauthorized           = -67645
+	ErrSecOCSPResponseNonceMismatch           = -67646
+	ErrSecOCSPSignatureError                  = -67639
+	ErrSecOCSPStatusUnrecognized              = -67633
+	ErrSecOCSPUnavailable                     = -67632
+	ErrSecOpWr                                = -49
+	ErrSecOutputLengthError                   = -67725
+	ErrSecPVCAlreadyConfigured                = -67707
+	ErrSecPVCReferentNotFound                 = -67669
+	ErrSecParam                               = -50
+	ErrSecPassphraseRequired                  = -25260
+	ErrSecPathLengthConstraintExceeded        = -67611
+	ErrSecPkcs12VerifyFailure                 = -25264
+	ErrSecPolicyNotFound                      = -25241
+	ErrSecPrivilegeNotGranted                 = -67705
+	ErrSecPrivilegeNotSupported               = -67726
+	ErrSecPublicKeyInconsistent               = -67811
+	ErrSecQuerySizeUnknown                    = -67809
+	ErrSecQuotaExceeded                       = -67596
+	ErrSecReadOnly                            = -25292
+	ErrSecReadOnlyAttr                        = -25309
+	ErrSecRecordModified                      = -67638
+	ErrSecRejectedForm                        = -67845
+	ErrSecRequestDescriptor                   = -67856
+	ErrSecRequestLost                         = -67846
+	ErrSecRequestRejected                     = -67847
+	ErrSecResourceSignBadCertChainLength      = -67652
+	ErrSecResourceSignBadExtKeyUsage          = -67653
+	ErrSecRestrictedAPI                       = -34020
+	ErrSecSMIMEBadExtendedKeyUsage            = -67624
+	ErrSecSMIMEBadKeyUsage                    = -67625
+	ErrSecSMIMEEmailAddressesNotFound         = -67623
+	ErrSecSMIMEKeyUsageNotCritical            = -67626
+	ErrSecSMIMENoEmailAddress                 = -67627
+	ErrSecSMIMESubjAltNameNotCritical         = -67628
+	ErrSecSSLBadExtendedKeyUsage              = -67629
+	ErrSecSelfCheckFailed                     = -67676
+	ErrSecServiceNotAvailable                 = -67585
+	ErrSecSigningTimeMissing                  = -67894
+	ErrSecStagedOperationInProgress           = -67806
+	ErrSecStagedOperationNotStarted           = -67807
+	ErrSecSuccess                             = 0
+	ErrSecTagNotFound                         = -67692
+	ErrSecTimestampAddInfoNotAvailable        = -67892
+	ErrSecTimestampBadAlg                     = -67886
+	ErrSecTimestampBadDataFormat              = -67888
+	ErrSecTimestampBadRequest                 = -67887
+	ErrSecTimestampInvalid                    = -67883
+	ErrSecTimestampMissing                    = -67882
+	ErrSecTimestampNotTrusted                 = -67884
+	ErrSecTimestampRejection                  = -67895
+	ErrSecTimestampRevocationNotification     = -67898
+	ErrSecTimestampRevocationWarning          = -67897
+	ErrSecTimestampServiceNotAvailable        = -67885
+	ErrSecTimestampSystemFailure              = -67893
+	ErrSecTimestampTimeNotAvailable           = -67889
+	ErrSecTimestampUnacceptedExtension        = -67891
+	ErrSecTimestampUnacceptedPolicy           = -67890
+	ErrSecTimestampWaiting                    = -67896
+	ErrSecTrustNotAvailable                   = -25245
+	ErrSecTrustSettingDeny                    = -67654
+	ErrSecUnimplemented                       = -4
+	ErrSecUnknownCRLExtension                 = -67619
+	ErrSecUnknownCertExtension                = -67618
+	ErrSecUnknownCriticalExtensionFlag        = -67603
+	ErrSecUnknownFormat                       = -25257
+	ErrSecUnknownQualifiedCertStatement       = -67656
+	ErrSecUnknownTag                          = -67687
+	ErrSecUnsupportedAddressType              = -67848
+	ErrSecUnsupportedFieldFormat              = -67860
+	ErrSecUnsupportedFormat                   = -25256
+	ErrSecUnsupportedIndexInfo                = -67861
+	ErrSecUnsupportedKeyAttributeMask         = -67739
+	ErrSecUnsupportedKeyFormat                = -67734
+	ErrSecUnsupportedKeyLabel                 = -67741
+	ErrSecUnsupportedKeySize                  = -67735
+	ErrSecUnsupportedKeyUsageMask             = -67737
+	ErrSecUnsupportedLocality                 = -67862
+	ErrSecUnsupportedNumAttributes            = -67863
+	ErrSecUnsupportedNumIndexes               = -67864
+	ErrSecUnsupportedNumRecordTypes           = -67865
+	ErrSecUnsupportedNumSelectionPreds        = -67873
+	ErrSecUnsupportedOperator                 = -67874
+	ErrSecUnsupportedQueryLimits              = -67872
+	ErrSecUnsupportedService                  = -67849
+	ErrSecUnsupportedVectorOfBuffers          = -67743
+	ErrSecUserCanceled                        = -128
+	ErrSecVerificationFailure                 = -67686
+	ErrSecVerifyActionFailed                  = -67825
+	ErrSecVerifyFailed                        = -67808
+	ErrSecWrPerm                              = -61
+	ErrSecWrongSecVersion                     = -25310
+	ErrSessionAuthorizationDenied             = -60502
+	ErrSessionInternal                        = -60008
+	ErrSessionInvalidAttributes               = -60501
+	ErrSessionInvalidFlags                    = -60011
+	ErrSessionInvalidId                       = -60500
+	ErrSessionSuccess                         = 0
+	ErrSessionValueNotSet                     = -60503
+	KAuthorizationFlagCanNotPreAuthorize      = 1
+	KSecCSAllowNetworkAccess                  = 65536
+	KSecCSBasicValidateOnly                   = 6
+	KSecCSCalculateCMSDigest                  = 64
+	KSecCSCheckAllArchitectures               = 1
+	KSecCSCheckGatekeeperArchitectures        = 65
+	KSecCSCheckNestedCode                     = 8
+	KSecCSContentInformation                  = 16
+	KSecCSDedicatedHost                       = 1
+	KSecCSDoNotValidateExecutable             = 2
+	KSecCSDoNotValidateResources              = 4
+	KSecCSDynamicInformation                  = 8
+	KSecCSFastExecutableValidation            = 131072
+	KSecCSFullReport                          = 32
+	KSecCSGenerateGuestHash                   = 2
+	KSecCSInternalInformation                 = 1
+	KSecCSRequirementInformation              = 4
+	KSecCSRestrictSidebandData                = 512
+	KSecCSRestrictSymlinks                    = 128
+	KSecCSRestrictToAppLike                   = 256
+	KSecCSSigningInformation                  = 2
+	KSecCSSingleThreaded                      = 4096
+	KSecCSSkipResourceDirectory               = 32
+	KSecCSStrictValidate                      = 16
+	KSecCSUseAllArchitectures                 = 1
+	KSecCSUseSoftwareSigningCert              = 1024
+	KSecCSValidatePEH                         = 2048
+	KSecCertEncodingItemAttr                  = 1667591779
+	KSecCertTypeItemAttr                      = 1668577648
+	KSecHonorRoot                             = 256
+	KSecIssuerItemAttr                        = 1769173877
+	KSecKeyAlias                              = 2
+	KSecKeyAlwaysSensitive                    = 15
+	KSecKeyApplicationTag                     = 7
+	KSecKeyDecrypt                            = 19
+	KSecKeyDerive                             = 20
+	KSecKeyEffectiveKeySize                   = 11
+	KSecKeyEncrypt                            = 18
+	KSecKeyEndDate                            = 13
+	KSecKeyExtractable                        = 16
+	KSecKeyKeyClass                           = 0
+	KSecKeyKeyCreator                         = 8
+	KSecKeyKeySizeInBits                      = 10
+	KSecKeyKeyType                            = 9
+	KSecKeyLabel                              = 6
+	KSecKeyModifiable                         = 5
+	KSecKeyNeverExtractable                   = 17
+	KSecKeyPermanent                          = 3
+	KSecKeyPrintName                          = 1
+	KSecKeyPrivate                            = 4
+	KSecKeySensitive                          = 14
+	KSecKeySign                               = 21
+	KSecKeySignRecover                        = 23
+	KSecKeyStartDate                          = 12
+	KSecKeyUnwrap                             = 26
+	KSecKeyVerify                             = 22
+	KSecKeyVerifyRecover                      = 24
+	KSecKeyWrap                               = 25
+	KSecMatchBits                             = 3
+	KSecNoGuest                               = 0
+	KSecPublicKeyHashItemAttr                 = 1752198009
+	KSecReadPermStatus                        = 2
+	KSecRevocationCRLMethod                   = 2
+	KSecRevocationNetworkAccessDisabled       = 16
+	KSecRevocationOCSPMethod                  = 1
+	KSecRevocationPreferCRL                   = 4
+	KSecRevocationRequirePositiveResponse     = 8
+	KSecRevocationUseAnyAvailableMethod       = 3
+	KSecSerialNumberItemAttr                  = 1936614002
+	KSecSubjectItemAttr                       = 1937072746
+	KSecSubjectKeyIdentifierItemAttr          = 1936419172
+	KSecTransformErrorAbortInProgress         = 19
+	KSecTransformErrorAborted                 = 20
+	KSecTransformErrorAttributeNotFound       = 1
+	KSecTransformErrorInvalidAlgorithm        = 6
+	KSecTransformErrorInvalidConnection       = 15
+	KSecTransformErrorInvalidInput            = 10
+	KSecTransformErrorInvalidInputDictionary  = 5
+	KSecTransformErrorInvalidLength           = 7
+	KSecTransformErrorInvalidOperation        = 2
+	KSecTransformErrorInvalidType             = 8
+	KSecTransformErrorMissingParameter        = 14
+	KSecTransformErrorMoreThanOneOutput       = 4
+	KSecTransformErrorNameAlreadyRegistered   = 11
+	KSecTransformErrorNotInitializedCorrectly = 3
+	KSecTransformErrorUnsupportedAttribute    = 12
+	KSecTransformInvalidArgument              = 21
+	KSecTransformInvalidOverride              = 17
+	KSecTransformOperationNotSupportedOnGroup = 13
+	KSecTransformTransformIsExecuting         = 16
+	KSecTransformTransformIsNotRegistered     = 18
+	KSecUnlockStateStatus                     = 1
+	KSecUseOnlyGID                            = 2
+	KSecUseOnlyUID                            = 1
+	KSecWritePermStatus                       = 4
+	NoSecuritySession                         = 0
+)

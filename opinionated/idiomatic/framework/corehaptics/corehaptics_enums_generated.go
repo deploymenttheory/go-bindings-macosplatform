@@ -8,6 +8,63 @@ import (
 	"fmt"
 )
 
+// Possible actions to take after the haptic engine finishes execution.
+type HapticEngineFinishedAction int64
+
+const (
+	HapticEngineFinishedActionStopEngine         HapticEngineFinishedAction = 1
+	HapticEngineFinishedActionLeaveEngineRunning HapticEngineFinishedAction = 2
+)
+
+// String returns the HapticEngineFinishedAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HapticEngineFinishedAction) String() string {
+	switch e {
+	case HapticEngineFinishedActionStopEngine:
+		return "HapticEngineFinishedActionStopEngine"
+	case HapticEngineFinishedActionLeaveEngineRunning:
+		return "HapticEngineFinishedActionLeaveEngineRunning"
+	default:
+		return fmt.Sprintf("HapticEngineFinishedAction(%d)", int64(e))
+	}
+}
+
+// The enumeration of reasons the haptic engine stopped running.
+type HapticEngineStoppedReason int64
+
+const (
+	HapticEngineStoppedReasonAudioSessionInterrupt    HapticEngineStoppedReason = 1
+	HapticEngineStoppedReasonApplicationSuspended     HapticEngineStoppedReason = 2
+	HapticEngineStoppedReasonIdleTimeout              HapticEngineStoppedReason = 3
+	HapticEngineStoppedReasonNotifyWhenFinished       HapticEngineStoppedReason = 4
+	HapticEngineStoppedReasonEngineDestroyed          HapticEngineStoppedReason = 5
+	HapticEngineStoppedReasonGameControllerDisconnect HapticEngineStoppedReason = 6
+	HapticEngineStoppedReasonSystemError              HapticEngineStoppedReason = -1
+)
+
+// String returns the HapticEngineStoppedReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HapticEngineStoppedReason) String() string {
+	switch e {
+	case HapticEngineStoppedReasonAudioSessionInterrupt:
+		return "HapticEngineStoppedReasonAudioSessionInterrupt"
+	case HapticEngineStoppedReasonApplicationSuspended:
+		return "HapticEngineStoppedReasonApplicationSuspended"
+	case HapticEngineStoppedReasonIdleTimeout:
+		return "HapticEngineStoppedReasonIdleTimeout"
+	case HapticEngineStoppedReasonNotifyWhenFinished:
+		return "HapticEngineStoppedReasonNotifyWhenFinished"
+	case HapticEngineStoppedReasonEngineDestroyed:
+		return "HapticEngineStoppedReasonEngineDestroyed"
+	case HapticEngineStoppedReasonGameControllerDisconnect:
+		return "HapticEngineStoppedReasonGameControllerDisconnect"
+	case HapticEngineStoppedReasonSystemError:
+		return "HapticEngineStoppedReasonSystemError"
+	default:
+		return fmt.Sprintf("HapticEngineStoppedReason(%d)", int64(e))
+	}
+}
+
 // Error codes for framework operations.
 type HapticErrorCode int64
 
@@ -92,5 +149,73 @@ func (e HapticErrorCode) String() string {
 		return "HapticErrorCodeMemoryError"
 	default:
 		return fmt.Sprintf("HapticErrorCode(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
 	}
 }

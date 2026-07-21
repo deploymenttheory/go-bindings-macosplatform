@@ -88,72 +88,6 @@ func (e WKCookiePolicy) String() string {
 	}
 }
 
-// Possible error values that WebKit APIs can return.
-type WKErrorCode int64
-
-const (
-	WKErrorUnknown                             WKErrorCode = 1
-	WKErrorWebContentProcessTerminated         WKErrorCode = 2
-	WKErrorWebViewInvalidated                  WKErrorCode = 3
-	WKErrorJavaScriptExceptionOccurred         WKErrorCode = 4
-	WKErrorJavaScriptResultTypeIsUnsupported   WKErrorCode = 5
-	WKErrorContentRuleListStoreCompileFailed   WKErrorCode = 6
-	WKErrorContentRuleListStoreLookUpFailed    WKErrorCode = 7
-	WKErrorContentRuleListStoreRemoveFailed    WKErrorCode = 8
-	WKErrorContentRuleListStoreVersionMismatch WKErrorCode = 9
-	WKErrorAttributedStringContentFailedToLoad WKErrorCode = 10
-	WKErrorAttributedStringContentLoadTimedOut WKErrorCode = 11
-	WKErrorJavaScriptInvalidFrameTarget        WKErrorCode = 12
-	WKErrorNavigationAppBoundDomain            WKErrorCode = 13
-	WKErrorJavaScriptAppBoundDomain            WKErrorCode = 14
-	WKErrorDuplicateCredential                 WKErrorCode = 15
-	WKErrorMalformedCredential                 WKErrorCode = 16
-	WKErrorCredentialNotFound                  WKErrorCode = 17
-)
-
-// String returns the WKErrorCode constant's name, or its numeric form when the
-// value is not a known constant.
-func (e WKErrorCode) String() string {
-	switch e {
-	case WKErrorUnknown:
-		return "WKErrorUnknown"
-	case WKErrorWebContentProcessTerminated:
-		return "WKErrorWebContentProcessTerminated"
-	case WKErrorWebViewInvalidated:
-		return "WKErrorWebViewInvalidated"
-	case WKErrorJavaScriptExceptionOccurred:
-		return "WKErrorJavaScriptExceptionOccurred"
-	case WKErrorJavaScriptResultTypeIsUnsupported:
-		return "WKErrorJavaScriptResultTypeIsUnsupported"
-	case WKErrorContentRuleListStoreCompileFailed:
-		return "WKErrorContentRuleListStoreCompileFailed"
-	case WKErrorContentRuleListStoreLookUpFailed:
-		return "WKErrorContentRuleListStoreLookUpFailed"
-	case WKErrorContentRuleListStoreRemoveFailed:
-		return "WKErrorContentRuleListStoreRemoveFailed"
-	case WKErrorContentRuleListStoreVersionMismatch:
-		return "WKErrorContentRuleListStoreVersionMismatch"
-	case WKErrorAttributedStringContentFailedToLoad:
-		return "WKErrorAttributedStringContentFailedToLoad"
-	case WKErrorAttributedStringContentLoadTimedOut:
-		return "WKErrorAttributedStringContentLoadTimedOut"
-	case WKErrorJavaScriptInvalidFrameTarget:
-		return "WKErrorJavaScriptInvalidFrameTarget"
-	case WKErrorNavigationAppBoundDomain:
-		return "WKErrorNavigationAppBoundDomain"
-	case WKErrorJavaScriptAppBoundDomain:
-		return "WKErrorJavaScriptAppBoundDomain"
-	case WKErrorDuplicateCredential:
-		return "WKErrorDuplicateCredential"
-	case WKErrorMalformedCredential:
-		return "WKErrorMalformedCredential"
-	case WKErrorCredentialNotFound:
-		return "WKErrorCredentialNotFound"
-	default:
-		return fmt.Sprintf("WKErrorCode(%d)", int64(e))
-	}
-}
-
 type WKFullscreenState int64
 
 const (
@@ -605,3 +539,2769 @@ func (e WebCacheModel) String() string {
 		return fmt.Sprintf("WebCacheModel(%d)", int64(e))
 	}
 }
+
+type ACLEntryID int64
+
+const (
+	ACLEntryIDFirstEntry ACLEntryID = 0
+	ACLEntryIDNextEntry  ACLEntryID = -1
+	ACLEntryIDLastEntry  ACLEntryID = -2
+)
+
+// String returns the ACLEntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ACLEntryID) String() string {
+	switch e {
+	case ACLEntryIDFirstEntry:
+		return "ACLEntryIDFirstEntry"
+	case ACLEntryIDNextEntry:
+		return "ACLEntryIDNextEntry"
+	case ACLEntryIDLastEntry:
+		return "ACLEntryIDLastEntry"
+	default:
+		return fmt.Sprintf("ACLEntryID(%d)", int64(e))
+	}
+}
+
+type ACLFlag int64
+
+const (
+	ACLFlagFlagDeferInherit      ACLFlag = 1
+	ACLFlagFlagNoInherit         ACLFlag = 131072
+	ACLFlagEntryInherited        ACLFlag = 16
+	ACLFlagEntryFileInherit      ACLFlag = 32
+	ACLFlagEntryDirectoryInherit ACLFlag = 64
+	ACLFlagEntryLimitInherit     ACLFlag = 128
+	ACLFlagEntryOnlyInherit      ACLFlag = 256
+)
+
+// String returns the ACLFlag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ACLFlag) String() string {
+	switch e {
+	case ACLFlagFlagDeferInherit:
+		return "ACLFlagFlagDeferInherit"
+	case ACLFlagFlagNoInherit:
+		return "ACLFlagFlagNoInherit"
+	case ACLFlagEntryInherited:
+		return "ACLFlagEntryInherited"
+	case ACLFlagEntryFileInherit:
+		return "ACLFlagEntryFileInherit"
+	case ACLFlagEntryDirectoryInherit:
+		return "ACLFlagEntryDirectoryInherit"
+	case ACLFlagEntryLimitInherit:
+		return "ACLFlagEntryLimitInherit"
+	case ACLFlagEntryOnlyInherit:
+		return "ACLFlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("ACLFlag(%d)", int64(e))
+	}
+}
+
+type ACLPerm int64
+
+const (
+	ACLPermReadData           ACLPerm = 2
+	ACLPermListDirectory      ACLPerm = 2
+	ACLPermWriteData          ACLPerm = 4
+	ACLPermAddFile            ACLPerm = 4
+	ACLPermExecute            ACLPerm = 8
+	ACLPermSearch             ACLPerm = 8
+	ACLPermDelete             ACLPerm = 16
+	ACLPermAppendData         ACLPerm = 32
+	ACLPermAddSubdirectory    ACLPerm = 32
+	ACLPermDeleteChild        ACLPerm = 64
+	ACLPermReadAttributes     ACLPerm = 128
+	ACLPermWriteAttributes    ACLPerm = 256
+	ACLPermReadExtattributes  ACLPerm = 512
+	ACLPermWriteExtattributes ACLPerm = 1024
+	ACLPermReadSecurity       ACLPerm = 2048
+	ACLPermWriteSecurity      ACLPerm = 4096
+	ACLPermChangeOwner        ACLPerm = 8192
+	ACLPermSynchronize        ACLPerm = 1048576
+)
+
+// String returns the ACLPerm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ACLPerm) String() string {
+	switch e {
+	case ACLPermReadData:
+		return "ACLPermReadData"
+	case ACLPermWriteData:
+		return "ACLPermWriteData"
+	case ACLPermExecute:
+		return "ACLPermExecute"
+	case ACLPermDelete:
+		return "ACLPermDelete"
+	case ACLPermAppendData:
+		return "ACLPermAppendData"
+	case ACLPermDeleteChild:
+		return "ACLPermDeleteChild"
+	case ACLPermReadAttributes:
+		return "ACLPermReadAttributes"
+	case ACLPermWriteAttributes:
+		return "ACLPermWriteAttributes"
+	case ACLPermReadExtattributes:
+		return "ACLPermReadExtattributes"
+	case ACLPermWriteExtattributes:
+		return "ACLPermWriteExtattributes"
+	case ACLPermReadSecurity:
+		return "ACLPermReadSecurity"
+	case ACLPermWriteSecurity:
+		return "ACLPermWriteSecurity"
+	case ACLPermChangeOwner:
+		return "ACLPermChangeOwner"
+	case ACLPermSynchronize:
+		return "ACLPermSynchronize"
+	default:
+		return fmt.Sprintf("ACLPerm(%d)", int64(e))
+	}
+}
+
+type ACLTag int64
+
+const (
+	ACLTagUndefinedTag  ACLTag = 0
+	ACLTagExtendedAllow ACLTag = 1
+	ACLTagExtendedDeny  ACLTag = 2
+)
+
+// String returns the ACLTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ACLTag) String() string {
+	switch e {
+	case ACLTagUndefinedTag:
+		return "ACLTagUndefinedTag"
+	case ACLTagExtendedAllow:
+		return "ACLTagExtendedAllow"
+	case ACLTagExtendedDeny:
+		return "ACLTagExtendedDeny"
+	default:
+		return fmt.Sprintf("ACLTag(%d)", int64(e))
+	}
+}
+
+type ACLType int64
+
+const (
+	ACLTypeExtended ACLType = 256
+	ACLTypeAccess   ACLType = 0
+	ACLTypeDefault  ACLType = 1
+	ACLTypeAfs      ACLType = 2
+	ACLTypeCoda     ACLType = 3
+	ACLTypeNtfs     ACLType = 4
+	ACLTypeNwfs     ACLType = 5
+)
+
+// String returns the ACLType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ACLType) String() string {
+	switch e {
+	case ACLTypeExtended:
+		return "ACLTypeExtended"
+	case ACLTypeAccess:
+		return "ACLTypeAccess"
+	case ACLTypeDefault:
+		return "ACLTypeDefault"
+	case ACLTypeAfs:
+		return "ACLTypeAfs"
+	case ACLTypeCoda:
+		return "ACLTypeCoda"
+	case ACLTypeNtfs:
+		return "ACLTypeNtfs"
+	case ACLTypeNwfs:
+		return "ACLTypeNwfs"
+	default:
+		return fmt.Sprintf("ACLType(%d)", int64(e))
+	}
+}
+
+type CGLCPContextPriorityRequest int64
+
+const (
+	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
+	KCGLCPContextPriorityRequestNormal CGLCPContextPriorityRequest = 1
+	KCGLCPContextPriorityRequestLow    CGLCPContextPriorityRequest = 2
+)
+
+// String returns the CGLCPContextPriorityRequest constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGLCPContextPriorityRequest) String() string {
+	switch e {
+	case KCGLCPContextPriorityRequestHigh:
+		return "KCGLCPContextPriorityRequestHigh"
+	case KCGLCPContextPriorityRequestNormal:
+		return "KCGLCPContextPriorityRequestNormal"
+	case KCGLCPContextPriorityRequestLow:
+		return "KCGLCPContextPriorityRequestLow"
+	default:
+		return fmt.Sprintf("CGLCPContextPriorityRequest(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DNSServiceAAAAPolicy int64
+
+const (
+	KDNSServiceAAAAPolicyNone     DNSServiceAAAAPolicy = 0
+	KDNSServiceAAAAPolicyFallback DNSServiceAAAAPolicy = 1
+)
+
+// String returns the DNSServiceAAAAPolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DNSServiceAAAAPolicy) String() string {
+	switch e {
+	case KDNSServiceAAAAPolicyNone:
+		return "KDNSServiceAAAAPolicyNone"
+	case KDNSServiceAAAAPolicyFallback:
+		return "KDNSServiceAAAAPolicyFallback"
+	default:
+		return fmt.Sprintf("DNSServiceAAAAPolicy(%d)", int64(e))
+	}
+}
+
+type DOMEventExceptionCode int64
+
+const (
+	DOMEventExceptionCodeErr DOMEventExceptionCode = 0
+)
+
+// String returns the DOMEventExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DOMEventExceptionCode) String() string {
+	switch e {
+	case DOMEventExceptionCodeErr:
+		return "DOMEventExceptionCodeErr"
+	default:
+		return fmt.Sprintf("DOMEventExceptionCode(%d)", int64(e))
+	}
+}
+
+type DOMExceptionCode int64
+
+const (
+	DOMExceptionCodeIndexSizeErr             DOMExceptionCode = 1
+	DOMExceptionCodeDomstringSizeErr         DOMExceptionCode = 2
+	DOMExceptionCodeHierarchyRequestErr      DOMExceptionCode = 3
+	DOMExceptionCodeWrongDocumentErr         DOMExceptionCode = 4
+	DOMExceptionCodeInvalidCharacterErr      DOMExceptionCode = 5
+	DOMExceptionCodeNoDataAllowedErr         DOMExceptionCode = 6
+	DOMExceptionCodeNoModificationAllowedErr DOMExceptionCode = 7
+	DOMExceptionCodeNotFoundErr              DOMExceptionCode = 8
+	DOMExceptionCodeNotSupportedErr          DOMExceptionCode = 9
+	DOMExceptionCodeInuseAttributeErr        DOMExceptionCode = 10
+	DOMExceptionCodeInvalidStateErr          DOMExceptionCode = 11
+	DOMExceptionCodeSyntaxErr                DOMExceptionCode = 12
+	DOMExceptionCodeInvalidModificationErr   DOMExceptionCode = 13
+	DOMExceptionCodeNamespaceErr             DOMExceptionCode = 14
+	DOMExceptionCodeInvalidAccessErr         DOMExceptionCode = 15
+)
+
+// String returns the DOMExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DOMExceptionCode) String() string {
+	switch e {
+	case DOMExceptionCodeIndexSizeErr:
+		return "DOMExceptionCodeIndexSizeErr"
+	case DOMExceptionCodeDomstringSizeErr:
+		return "DOMExceptionCodeDomstringSizeErr"
+	case DOMExceptionCodeHierarchyRequestErr:
+		return "DOMExceptionCodeHierarchyRequestErr"
+	case DOMExceptionCodeWrongDocumentErr:
+		return "DOMExceptionCodeWrongDocumentErr"
+	case DOMExceptionCodeInvalidCharacterErr:
+		return "DOMExceptionCodeInvalidCharacterErr"
+	case DOMExceptionCodeNoDataAllowedErr:
+		return "DOMExceptionCodeNoDataAllowedErr"
+	case DOMExceptionCodeNoModificationAllowedErr:
+		return "DOMExceptionCodeNoModificationAllowedErr"
+	case DOMExceptionCodeNotFoundErr:
+		return "DOMExceptionCodeNotFoundErr"
+	case DOMExceptionCodeNotSupportedErr:
+		return "DOMExceptionCodeNotSupportedErr"
+	case DOMExceptionCodeInuseAttributeErr:
+		return "DOMExceptionCodeInuseAttributeErr"
+	case DOMExceptionCodeInvalidStateErr:
+		return "DOMExceptionCodeInvalidStateErr"
+	case DOMExceptionCodeSyntaxErr:
+		return "DOMExceptionCodeSyntaxErr"
+	case DOMExceptionCodeInvalidModificationErr:
+		return "DOMExceptionCodeInvalidModificationErr"
+	case DOMExceptionCodeNamespaceErr:
+		return "DOMExceptionCodeNamespaceErr"
+	case DOMExceptionCodeInvalidAccessErr:
+		return "DOMExceptionCodeInvalidAccessErr"
+	default:
+		return fmt.Sprintf("DOMExceptionCode(%d)", int64(e))
+	}
+}
+
+type DOMRangeExceptionCode int64
+
+const (
+	DOMRangeExceptionCodeBadBoundarypointsErr DOMRangeExceptionCode = 1
+	DOMRangeExceptionCodeInvalidNodeTypeErr   DOMRangeExceptionCode = 2
+)
+
+// String returns the DOMRangeExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DOMRangeExceptionCode) String() string {
+	switch e {
+	case DOMRangeExceptionCodeBadBoundarypointsErr:
+		return "DOMRangeExceptionCodeBadBoundarypointsErr"
+	case DOMRangeExceptionCodeInvalidNodeTypeErr:
+		return "DOMRangeExceptionCodeInvalidNodeTypeErr"
+	default:
+		return fmt.Sprintf("DOMRangeExceptionCode(%d)", int64(e))
+	}
+}
+
+type DOMXPathExceptionCode int64
+
+const (
+	DOMXPathExceptionCodeInvalidExpressionErr DOMXPathExceptionCode = 51
+	DOMXPathExceptionCodeTypeErr              DOMXPathExceptionCode = 52
+)
+
+// String returns the DOMXPathExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DOMXPathExceptionCode) String() string {
+	switch e {
+	case DOMXPathExceptionCodeInvalidExpressionErr:
+		return "DOMXPathExceptionCodeInvalidExpressionErr"
+	case DOMXPathExceptionCodeTypeErr:
+		return "DOMXPathExceptionCodeTypeErr"
+	default:
+		return fmt.Sprintf("DOMXPathExceptionCode(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type EvCmd int64
+
+const (
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
+	EVLEVEL EvCmd = 4
+)
+
+// String returns the EvCmd constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EvCmd) String() string {
+	switch e {
+	case EVNOP:
+		return "EVNOP"
+	case EVHIDE:
+		return "EVHIDE"
+	case EVSHOW:
+		return "EVSHOW"
+	case EVMOVE:
+		return "EVMOVE"
+	case EVLEVEL:
+		return "EVLEVEL"
+	default:
+		return fmt.Sprintf("EvCmd(%d)", int64(e))
+	}
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+type LaunchDataType int64
+
+const (
+	LaunchDataTypeDictionary LaunchDataType = 1
+	LaunchDataTypeArray      LaunchDataType = 2
+	LaunchDataTypeFd         LaunchDataType = 3
+	LaunchDataTypeInteger    LaunchDataType = 4
+	LaunchDataTypeReal       LaunchDataType = 5
+	LaunchDataTypeBool       LaunchDataType = 6
+	LaunchDataTypeString     LaunchDataType = 7
+	LaunchDataTypeOpaque     LaunchDataType = 8
+	LaunchDataTypeErrno      LaunchDataType = 9
+	LaunchDataTypeMachport   LaunchDataType = 10
+)
+
+// String returns the LaunchDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LaunchDataType) String() string {
+	switch e {
+	case LaunchDataTypeDictionary:
+		return "LaunchDataTypeDictionary"
+	case LaunchDataTypeArray:
+		return "LaunchDataTypeArray"
+	case LaunchDataTypeFd:
+		return "LaunchDataTypeFd"
+	case LaunchDataTypeInteger:
+		return "LaunchDataTypeInteger"
+	case LaunchDataTypeReal:
+		return "LaunchDataTypeReal"
+	case LaunchDataTypeBool:
+		return "LaunchDataTypeBool"
+	case LaunchDataTypeString:
+		return "LaunchDataTypeString"
+	case LaunchDataTypeOpaque:
+		return "LaunchDataTypeOpaque"
+	case LaunchDataTypeErrno:
+		return "LaunchDataTypeErrno"
+	case LaunchDataTypeMachport:
+		return "LaunchDataTypeMachport"
+	default:
+		return fmt.Sprintf("LaunchDataType(%d)", int64(e))
+	}
+}
+
+// These constants are used to specify a domain to MDLabelCreate().
+type MDLabelDomain int64
+
+const (
+	KMDLabelUserDomain  MDLabelDomain = 0
+	KMDLabelLocalDomain MDLabelDomain = 1
+)
+
+// String returns the MDLabelDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDLabelDomain) String() string {
+	switch e {
+	case KMDLabelUserDomain:
+		return "KMDLabelUserDomain"
+	case KMDLabelLocalDomain:
+		return "KMDLabelLocalDomain"
+	default:
+		return fmt.Sprintf("MDLabelDomain(%d)", int64(e))
+	}
+}
+
+type MDQueryOptionFlags int64
+
+const (
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
+	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
+)
+
+// String returns the MDQueryOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQueryOptionFlags) String() string {
+	switch e {
+	case KMDQuerySynchronous:
+		return "KMDQuerySynchronous"
+	case KMDQueryWantsUpdates:
+		return "KMDQueryWantsUpdates"
+	case KMDQueryAllowFSTranslation:
+		return "KMDQueryAllowFSTranslation"
+	default:
+		return fmt.Sprintf("MDQueryOptionFlags(%d)", int64(e))
+	}
+}
+
+type MDQuerySortOptionFlags int64
+
+const (
+	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
+)
+
+// String returns the MDQuerySortOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQuerySortOptionFlags) String() string {
+	switch e {
+	case KMDQueryReverseSortOrderFlag:
+		return "KMDQueryReverseSortOrderFlag"
+	default:
+		return fmt.Sprintf("MDQuerySortOptionFlags(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type NXMouseButton int64
+
+const (
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
+	NX_RightButton NXMouseButton = 2
+)
+
+// String returns the NXMouseButton constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NXMouseButton) String() string {
+	switch e {
+	case NX_OneButton:
+		return "NX_OneButton"
+	case NX_LeftButton:
+		return "NX_LeftButton"
+	case NX_RightButton:
+		return "NX_RightButton"
+	default:
+		return fmt.Sprintf("NXMouseButton(%d)", int64(e))
+	}
+}
+
+// Browser states sent by nw_browser_set_state_changed_handler.
+type BrowserState int64
+
+const (
+	Nw_browser_state_invalid   BrowserState = 0
+	Nw_browser_state_ready     BrowserState = 1
+	Nw_browser_state_failed    BrowserState = 2
+	Nw_browser_state_cancelled BrowserState = 3
+	Nw_browser_state_waiting   BrowserState = 4
+)
+
+// String returns the BrowserState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BrowserState) String() string {
+	switch e {
+	case Nw_browser_state_invalid:
+		return "Nw_browser_state_invalid"
+	case Nw_browser_state_ready:
+		return "Nw_browser_state_ready"
+	case Nw_browser_state_failed:
+		return "Nw_browser_state_failed"
+	case Nw_browser_state_cancelled:
+		return "Nw_browser_state_cancelled"
+	case Nw_browser_state_waiting:
+		return "Nw_browser_state_waiting"
+	default:
+		return fmt.Sprintf("BrowserState(%d)", int64(e))
+	}
+}
+
+// Connection Group states sent by nw_connection_group_set_state_changed_handler. States progress forward and do not move backwards.
+type ConnectionGroupState int64
+
+const (
+	Nw_connection_group_state_invalid   ConnectionGroupState = 0
+	Nw_connection_group_state_waiting   ConnectionGroupState = 1
+	Nw_connection_group_state_ready     ConnectionGroupState = 2
+	Nw_connection_group_state_failed    ConnectionGroupState = 3
+	Nw_connection_group_state_cancelled ConnectionGroupState = 4
+)
+
+// String returns the ConnectionGroupState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ConnectionGroupState) String() string {
+	switch e {
+	case Nw_connection_group_state_invalid:
+		return "Nw_connection_group_state_invalid"
+	case Nw_connection_group_state_waiting:
+		return "Nw_connection_group_state_waiting"
+	case Nw_connection_group_state_ready:
+		return "Nw_connection_group_state_ready"
+	case Nw_connection_group_state_failed:
+		return "Nw_connection_group_state_failed"
+	case Nw_connection_group_state_cancelled:
+		return "Nw_connection_group_state_cancelled"
+	default:
+		return fmt.Sprintf("ConnectionGroupState(%d)", int64(e))
+	}
+}
+
+// Connection states sent by nw_connection_set_state_changed_handler. States generally progress forward and do not move backwards, with the exception of preparing and waiting, which may alternate before the connection becomes ready or failed.
+type ConnectionState int64
+
+const (
+	Nw_connection_state_invalid   ConnectionState = 0
+	Nw_connection_state_waiting   ConnectionState = 1
+	Nw_connection_state_preparing ConnectionState = 2
+	Nw_connection_state_ready     ConnectionState = 3
+	Nw_connection_state_failed    ConnectionState = 4
+	Nw_connection_state_cancelled ConnectionState = 5
+)
+
+// String returns the ConnectionState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ConnectionState) String() string {
+	switch e {
+	case Nw_connection_state_invalid:
+		return "Nw_connection_state_invalid"
+	case Nw_connection_state_waiting:
+		return "Nw_connection_state_waiting"
+	case Nw_connection_state_preparing:
+		return "Nw_connection_state_preparing"
+	case Nw_connection_state_ready:
+		return "Nw_connection_state_ready"
+	case Nw_connection_state_failed:
+		return "Nw_connection_state_failed"
+	case Nw_connection_state_cancelled:
+		return "Nw_connection_state_cancelled"
+	default:
+		return fmt.Sprintf("ConnectionState(%d)", int64(e))
+	}
+}
+
+// The state of a Data Transfer Report indicates whether or not the contents have been collected, and are ready to be accessed.
+type DataTransferReportState int64
+
+const (
+	Nw_data_transfer_report_state_collecting DataTransferReportState = 1
+	Nw_data_transfer_report_state_collected  DataTransferReportState = 2
+)
+
+// String returns the DataTransferReportState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DataTransferReportState) String() string {
+	switch e {
+	case Nw_data_transfer_report_state_collecting:
+		return "Nw_data_transfer_report_state_collecting"
+	case Nw_data_transfer_report_state_collected:
+		return "Nw_data_transfer_report_state_collected"
+	default:
+		return fmt.Sprintf("DataTransferReportState(%d)", int64(e))
+	}
+}
+
+// Endpoint types represent a well-known form of endpoint. Values may be added to this enumeration, and some custom endpoint types may use values not defined in this enumeration.
+type EndpointType int64
+
+const (
+	Nw_endpoint_type_invalid         EndpointType = 0
+	Nw_endpoint_type_address         EndpointType = 1
+	Nw_endpoint_type_host            EndpointType = 2
+	Nw_endpoint_type_bonjour_service EndpointType = 3
+	Nw_endpoint_type_url             EndpointType = 4
+)
+
+// String returns the EndpointType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EndpointType) String() string {
+	switch e {
+	case Nw_endpoint_type_invalid:
+		return "Nw_endpoint_type_invalid"
+	case Nw_endpoint_type_address:
+		return "Nw_endpoint_type_address"
+	case Nw_endpoint_type_host:
+		return "Nw_endpoint_type_host"
+	case Nw_endpoint_type_bonjour_service:
+		return "Nw_endpoint_type_bonjour_service"
+	case Nw_endpoint_type_url:
+		return "Nw_endpoint_type_url"
+	default:
+		return fmt.Sprintf("EndpointType(%d)", int64(e))
+	}
+}
+
+// The enumeration of network error domains.
+type ErrorDomain int64
+
+const (
+	Nw_error_domain_invalid    ErrorDomain = 0
+	Nw_error_domain_posix      ErrorDomain = 1
+	Nw_error_domain_dns        ErrorDomain = 2
+	Nw_error_domain_tls        ErrorDomain = 3
+	Nw_error_domain_wifi_aware ErrorDomain = 4
+)
+
+// String returns the ErrorDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorDomain) String() string {
+	switch e {
+	case Nw_error_domain_invalid:
+		return "Nw_error_domain_invalid"
+	case Nw_error_domain_posix:
+		return "Nw_error_domain_posix"
+	case Nw_error_domain_dns:
+		return "Nw_error_domain_dns"
+	case Nw_error_domain_tls:
+		return "Nw_error_domain_tls"
+	case Nw_error_domain_wifi_aware:
+		return "Nw_error_domain_wifi_aware"
+	default:
+		return fmt.Sprintf("ErrorDomain(%d)", int64(e))
+	}
+}
+
+type EthernetChannelState int64
+
+const (
+	Nw_ethernet_channel_state_invalid   EthernetChannelState = 0
+	Nw_ethernet_channel_state_waiting   EthernetChannelState = 1
+	Nw_ethernet_channel_state_preparing EthernetChannelState = 2
+	Nw_ethernet_channel_state_ready     EthernetChannelState = 3
+	Nw_ethernet_channel_state_failed    EthernetChannelState = 4
+	Nw_ethernet_channel_state_cancelled EthernetChannelState = 5
+)
+
+// String returns the EthernetChannelState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EthernetChannelState) String() string {
+	switch e {
+	case Nw_ethernet_channel_state_invalid:
+		return "Nw_ethernet_channel_state_invalid"
+	case Nw_ethernet_channel_state_waiting:
+		return "Nw_ethernet_channel_state_waiting"
+	case Nw_ethernet_channel_state_preparing:
+		return "Nw_ethernet_channel_state_preparing"
+	case Nw_ethernet_channel_state_ready:
+		return "Nw_ethernet_channel_state_ready"
+	case Nw_ethernet_channel_state_failed:
+		return "Nw_ethernet_channel_state_failed"
+	case Nw_ethernet_channel_state_cancelled:
+		return "Nw_ethernet_channel_state_cancelled"
+	default:
+		return fmt.Sprintf("EthernetChannelState(%d)", int64(e))
+	}
+}
+
+type FramerStartResult int64
+
+const (
+	Nw_framer_start_result_ready           FramerStartResult = 1
+	Nw_framer_start_result_will_mark_ready FramerStartResult = 2
+)
+
+// String returns the FramerStartResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FramerStartResult) String() string {
+	switch e {
+	case Nw_framer_start_result_ready:
+		return "Nw_framer_start_result_ready"
+	case Nw_framer_start_result_will_mark_ready:
+		return "Nw_framer_start_result_will_mark_ready"
+	default:
+		return fmt.Sprintf("FramerStartResult(%d)", int64(e))
+	}
+}
+
+// Interface radio types represent the radio technology for a network link.
+type InterfaceRadioType int64
+
+const (
+	Nw_interface_radio_type_unknown         InterfaceRadioType = 0
+	Nw_interface_radio_type_wifi_b          InterfaceRadioType = 1
+	Nw_interface_radio_type_wifi_a          InterfaceRadioType = 2
+	Nw_interface_radio_type_wifi_g          InterfaceRadioType = 3
+	Nw_interface_radio_type_wifi_n          InterfaceRadioType = 4
+	Nw_interface_radio_type_wifi_ac         InterfaceRadioType = 5
+	Nw_interface_radio_type_wifi_ax         InterfaceRadioType = 6
+	Nw_interface_radio_type_cell_lte        InterfaceRadioType = 128
+	Nw_interface_radio_type_cell_endc_sub6  InterfaceRadioType = 129
+	Nw_interface_radio_type_cell_endc_mmw   InterfaceRadioType = 130
+	Nw_interface_radio_type_cell_nr_sa_sub6 InterfaceRadioType = 131
+	Nw_interface_radio_type_cell_nr_sa_mmw  InterfaceRadioType = 132
+	Nw_interface_radio_type_cell_wcdma      InterfaceRadioType = 133
+	Nw_interface_radio_type_cell_gsm        InterfaceRadioType = 134
+	Nw_interface_radio_type_cell_cdma       InterfaceRadioType = 135
+	Nw_interface_radio_type_cell_evdo       InterfaceRadioType = 136
+)
+
+// String returns the InterfaceRadioType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e InterfaceRadioType) String() string {
+	switch e {
+	case Nw_interface_radio_type_unknown:
+		return "Nw_interface_radio_type_unknown"
+	case Nw_interface_radio_type_wifi_b:
+		return "Nw_interface_radio_type_wifi_b"
+	case Nw_interface_radio_type_wifi_a:
+		return "Nw_interface_radio_type_wifi_a"
+	case Nw_interface_radio_type_wifi_g:
+		return "Nw_interface_radio_type_wifi_g"
+	case Nw_interface_radio_type_wifi_n:
+		return "Nw_interface_radio_type_wifi_n"
+	case Nw_interface_radio_type_wifi_ac:
+		return "Nw_interface_radio_type_wifi_ac"
+	case Nw_interface_radio_type_wifi_ax:
+		return "Nw_interface_radio_type_wifi_ax"
+	case Nw_interface_radio_type_cell_lte:
+		return "Nw_interface_radio_type_cell_lte"
+	case Nw_interface_radio_type_cell_endc_sub6:
+		return "Nw_interface_radio_type_cell_endc_sub6"
+	case Nw_interface_radio_type_cell_endc_mmw:
+		return "Nw_interface_radio_type_cell_endc_mmw"
+	case Nw_interface_radio_type_cell_nr_sa_sub6:
+		return "Nw_interface_radio_type_cell_nr_sa_sub6"
+	case Nw_interface_radio_type_cell_nr_sa_mmw:
+		return "Nw_interface_radio_type_cell_nr_sa_mmw"
+	case Nw_interface_radio_type_cell_wcdma:
+		return "Nw_interface_radio_type_cell_wcdma"
+	case Nw_interface_radio_type_cell_gsm:
+		return "Nw_interface_radio_type_cell_gsm"
+	case Nw_interface_radio_type_cell_cdma:
+		return "Nw_interface_radio_type_cell_cdma"
+	case Nw_interface_radio_type_cell_evdo:
+		return "Nw_interface_radio_type_cell_evdo"
+	default:
+		return fmt.Sprintf("InterfaceRadioType(%d)", int64(e))
+	}
+}
+
+// Interface types represent the underlying media for a network link, such as Wi-Fi or Cellular.
+type InterfaceType int64
+
+const (
+	Nw_interface_type_other    InterfaceType = 0
+	Nw_interface_type_wifi     InterfaceType = 1
+	Nw_interface_type_cellular InterfaceType = 2
+	Nw_interface_type_wired    InterfaceType = 3
+	Nw_interface_type_loopback InterfaceType = 4
+)
+
+// String returns the InterfaceType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e InterfaceType) String() string {
+	switch e {
+	case Nw_interface_type_other:
+		return "Nw_interface_type_other"
+	case Nw_interface_type_wifi:
+		return "Nw_interface_type_wifi"
+	case Nw_interface_type_cellular:
+		return "Nw_interface_type_cellular"
+	case Nw_interface_type_wired:
+		return "Nw_interface_type_wired"
+	case Nw_interface_type_loopback:
+		return "Nw_interface_type_loopback"
+	default:
+		return fmt.Sprintf("InterfaceType(%d)", int64(e))
+	}
+}
+
+// ECN flags marked in IP headers to indicate congestion.
+type IPEcnFlag int64
+
+const (
+	Nw_ip_ecn_flag_non_ect IPEcnFlag = 0
+	Nw_ip_ecn_flag_ect_0   IPEcnFlag = 2
+	Nw_ip_ecn_flag_ect_1   IPEcnFlag = 1
+	Nw_ip_ecn_flag_ce      IPEcnFlag = 3
+)
+
+// String returns the IPEcnFlag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IPEcnFlag) String() string {
+	switch e {
+	case Nw_ip_ecn_flag_non_ect:
+		return "Nw_ip_ecn_flag_non_ect"
+	case Nw_ip_ecn_flag_ect_0:
+		return "Nw_ip_ecn_flag_ect_0"
+	case Nw_ip_ecn_flag_ect_1:
+		return "Nw_ip_ecn_flag_ect_1"
+	case Nw_ip_ecn_flag_ce:
+		return "Nw_ip_ecn_flag_ce"
+	default:
+		return fmt.Sprintf("IPEcnFlag(%d)", int64(e))
+	}
+}
+
+// Preference for local addresses selection.
+type IPLocalAddressPreference int64
+
+const (
+	Nw_ip_local_address_preference_default   IPLocalAddressPreference = 0
+	Nw_ip_local_address_preference_temporary IPLocalAddressPreference = 1
+	Nw_ip_local_address_preference_stable    IPLocalAddressPreference = 2
+)
+
+// String returns the IPLocalAddressPreference constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IPLocalAddressPreference) String() string {
+	switch e {
+	case Nw_ip_local_address_preference_default:
+		return "Nw_ip_local_address_preference_default"
+	case Nw_ip_local_address_preference_temporary:
+		return "Nw_ip_local_address_preference_temporary"
+	case Nw_ip_local_address_preference_stable:
+		return "Nw_ip_local_address_preference_stable"
+	default:
+		return fmt.Sprintf("IPLocalAddressPreference(%d)", int64(e))
+	}
+}
+
+// A specific version of the Internet Protocol.
+type IPVersion int64
+
+const (
+	Nw_ip_version_any IPVersion = 0
+	Nw_ip_version_4   IPVersion = 4
+	Nw_ip_version_6   IPVersion = 6
+)
+
+// String returns the IPVersion constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IPVersion) String() string {
+	switch e {
+	case Nw_ip_version_any:
+		return "Nw_ip_version_any"
+	case Nw_ip_version_4:
+		return "Nw_ip_version_4"
+	case Nw_ip_version_6:
+		return "Nw_ip_version_6"
+	default:
+		return fmt.Sprintf("IPVersion(%d)", int64(e))
+	}
+}
+
+// Link quality measurement is a representation of the expected capabilities of the link layer network attachment. Use this value to tune initial values for algorithms that can scale with the capabilities of the network. Do not use this value to gate connection attempts or to override adjustments that would be made based on actual network performance.
+type LinkQuality int64
+
+const (
+	Nw_link_quality_unknown  LinkQuality = 0
+	Nw_link_quality_minimal  LinkQuality = 10
+	Nw_link_quality_moderate LinkQuality = 20
+	Nw_link_quality_good     LinkQuality = 30
+)
+
+// String returns the LinkQuality constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LinkQuality) String() string {
+	switch e {
+	case Nw_link_quality_unknown:
+		return "Nw_link_quality_unknown"
+	case Nw_link_quality_minimal:
+		return "Nw_link_quality_minimal"
+	case Nw_link_quality_moderate:
+		return "Nw_link_quality_moderate"
+	case Nw_link_quality_good:
+		return "Nw_link_quality_good"
+	default:
+		return fmt.Sprintf("LinkQuality(%d)", int64(e))
+	}
+}
+
+// Listener states sent by nw_listener_set_state_changed_handler. States progress forward and do not move backwards.
+type ListenerState int64
+
+const (
+	Nw_listener_state_invalid   ListenerState = 0
+	Nw_listener_state_waiting   ListenerState = 1
+	Nw_listener_state_ready     ListenerState = 2
+	Nw_listener_state_failed    ListenerState = 3
+	Nw_listener_state_cancelled ListenerState = 4
+)
+
+// String returns the ListenerState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ListenerState) String() string {
+	switch e {
+	case Nw_listener_state_invalid:
+		return "Nw_listener_state_invalid"
+	case Nw_listener_state_waiting:
+		return "Nw_listener_state_waiting"
+	case Nw_listener_state_ready:
+		return "Nw_listener_state_ready"
+	case Nw_listener_state_failed:
+		return "Nw_listener_state_failed"
+	case Nw_listener_state_cancelled:
+		return "Nw_listener_state_cancelled"
+	default:
+		return fmt.Sprintf("ListenerState(%d)", int64(e))
+	}
+}
+
+// Multipath services represent the modes of multipath usage that are allowed for connections.
+type MultipathService int64
+
+const (
+	Nw_multipath_service_disabled    MultipathService = 0
+	Nw_multipath_service_handover    MultipathService = 1
+	Nw_multipath_service_interactive MultipathService = 2
+	Nw_multipath_service_aggregate   MultipathService = 3
+)
+
+// String returns the MultipathService constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MultipathService) String() string {
+	switch e {
+	case Nw_multipath_service_disabled:
+		return "Nw_multipath_service_disabled"
+	case Nw_multipath_service_handover:
+		return "Nw_multipath_service_handover"
+	case Nw_multipath_service_interactive:
+		return "Nw_multipath_service_interactive"
+	case Nw_multipath_service_aggregate:
+		return "Nw_multipath_service_aggregate"
+	default:
+		return fmt.Sprintf("MultipathService(%d)", int64(e))
+	}
+}
+
+// Multipath versions represent the MPTCP standard versions
+type MultipathVersion int64
+
+const (
+	Nw_multipath_version_unspecified MultipathVersion = -1
+	Nw_multipath_version_0           MultipathVersion = 0
+	Nw_multipath_version_1           MultipathVersion = 1
+)
+
+// String returns the MultipathVersion constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MultipathVersion) String() string {
+	switch e {
+	case Nw_multipath_version_unspecified:
+		return "Nw_multipath_version_unspecified"
+	case Nw_multipath_version_0:
+		return "Nw_multipath_version_0"
+	case Nw_multipath_version_1:
+		return "Nw_multipath_version_1"
+	default:
+		return fmt.Sprintf("MultipathVersion(%d)", int64(e))
+	}
+}
+
+// Expired DNS behavior defines whether or not a connection will allow the use of expired DNS answers during connection establishment.
+type ParametersExpiredDNSBehavior int64
+
+const (
+	Nw_parameters_expired_dns_behavior_default    ParametersExpiredDNSBehavior = 0
+	Nw_parameters_expired_dns_behavior_allow      ParametersExpiredDNSBehavior = 1
+	Nw_parameters_expired_dns_behavior_prohibit   ParametersExpiredDNSBehavior = 2
+	Nw_parameters_expired_dns_behavior_persistent ParametersExpiredDNSBehavior = 3
+)
+
+// String returns the ParametersExpiredDNSBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ParametersExpiredDNSBehavior) String() string {
+	switch e {
+	case Nw_parameters_expired_dns_behavior_default:
+		return "Nw_parameters_expired_dns_behavior_default"
+	case Nw_parameters_expired_dns_behavior_allow:
+		return "Nw_parameters_expired_dns_behavior_allow"
+	case Nw_parameters_expired_dns_behavior_prohibit:
+		return "Nw_parameters_expired_dns_behavior_prohibit"
+	case Nw_parameters_expired_dns_behavior_persistent:
+		return "Nw_parameters_expired_dns_behavior_persistent"
+	default:
+		return fmt.Sprintf("ParametersExpiredDNSBehavior(%d)", int64(e))
+	}
+}
+
+// A network path status indicates if there is a usable route available upon which to send and receive data.
+type PathStatus int64
+
+const (
+	Nw_path_status_invalid     PathStatus = 0
+	Nw_path_status_satisfied   PathStatus = 1
+	Nw_path_status_unsatisfied PathStatus = 2
+	Nw_path_status_satisfiable PathStatus = 3
+)
+
+// String returns the PathStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PathStatus) String() string {
+	switch e {
+	case Nw_path_status_invalid:
+		return "Nw_path_status_invalid"
+	case Nw_path_status_satisfied:
+		return "Nw_path_status_satisfied"
+	case Nw_path_status_unsatisfied:
+		return "Nw_path_status_unsatisfied"
+	case Nw_path_status_satisfiable:
+		return "Nw_path_status_satisfiable"
+	default:
+		return fmt.Sprintf("PathStatus(%d)", int64(e))
+	}
+}
+
+// A network path unsatisfied reason may indicate the reason the path is currently unsatisfied for some conditions.
+type PathUnsatisfiedReason int64
+
+const (
+	Nw_path_unsatisfied_reason_not_available        PathUnsatisfiedReason = 0
+	Nw_path_unsatisfied_reason_cellular_denied      PathUnsatisfiedReason = 1
+	Nw_path_unsatisfied_reason_wifi_denied          PathUnsatisfiedReason = 2
+	Nw_path_unsatisfied_reason_local_network_denied PathUnsatisfiedReason = 3
+	Nw_path_unsatisfied_reason_vpn_inactive         PathUnsatisfiedReason = 4
+)
+
+// String returns the PathUnsatisfiedReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PathUnsatisfiedReason) String() string {
+	switch e {
+	case Nw_path_unsatisfied_reason_not_available:
+		return "Nw_path_unsatisfied_reason_not_available"
+	case Nw_path_unsatisfied_reason_cellular_denied:
+		return "Nw_path_unsatisfied_reason_cellular_denied"
+	case Nw_path_unsatisfied_reason_wifi_denied:
+		return "Nw_path_unsatisfied_reason_wifi_denied"
+	case Nw_path_unsatisfied_reason_local_network_denied:
+		return "Nw_path_unsatisfied_reason_local_network_denied"
+	case Nw_path_unsatisfied_reason_vpn_inactive:
+		return "Nw_path_unsatisfied_reason_vpn_inactive"
+	default:
+		return fmt.Sprintf("PathUnsatisfiedReason(%d)", int64(e))
+	}
+}
+
+// Represents the type of a QUIC stream.
+type QuicStreamType int64
+
+const (
+	Nw_quic_stream_type_unknown        QuicStreamType = 0
+	Nw_quic_stream_type_bidirectional  QuicStreamType = 1
+	Nw_quic_stream_type_unidirectional QuicStreamType = 2
+	Nw_quic_stream_type_datagram       QuicStreamType = 3
+)
+
+// String returns the QuicStreamType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QuicStreamType) String() string {
+	switch e {
+	case Nw_quic_stream_type_unknown:
+		return "Nw_quic_stream_type_unknown"
+	case Nw_quic_stream_type_bidirectional:
+		return "Nw_quic_stream_type_bidirectional"
+	case Nw_quic_stream_type_unidirectional:
+		return "Nw_quic_stream_type_unidirectional"
+	case Nw_quic_stream_type_datagram:
+		return "Nw_quic_stream_type_datagram"
+	default:
+		return fmt.Sprintf("QuicStreamType(%d)", int64(e))
+	}
+}
+
+// The protocol used for endpoint resolution.
+type ReportResolutionProtocol int64
+
+const (
+	Nw_report_resolution_protocol_unknown ReportResolutionProtocol = 0
+	Nw_report_resolution_protocol_udp     ReportResolutionProtocol = 1
+	Nw_report_resolution_protocol_tcp     ReportResolutionProtocol = 2
+	Nw_report_resolution_protocol_tls     ReportResolutionProtocol = 3
+	Nw_report_resolution_protocol_https   ReportResolutionProtocol = 4
+)
+
+// String returns the ReportResolutionProtocol constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReportResolutionProtocol) String() string {
+	switch e {
+	case Nw_report_resolution_protocol_unknown:
+		return "Nw_report_resolution_protocol_unknown"
+	case Nw_report_resolution_protocol_udp:
+		return "Nw_report_resolution_protocol_udp"
+	case Nw_report_resolution_protocol_tcp:
+		return "Nw_report_resolution_protocol_tcp"
+	case Nw_report_resolution_protocol_tls:
+		return "Nw_report_resolution_protocol_tls"
+	case Nw_report_resolution_protocol_https:
+		return "Nw_report_resolution_protocol_https"
+	default:
+		return fmt.Sprintf("ReportResolutionProtocol(%d)", int64(e))
+	}
+}
+
+// The source of a resolution indicates if the set of endpoints was resolved locally using a cache, or sent a query over the network.
+type ReportResolutionSource int64
+
+const (
+	Nw_report_resolution_source_query         ReportResolutionSource = 1
+	Nw_report_resolution_source_cache         ReportResolutionSource = 2
+	Nw_report_resolution_source_expired_cache ReportResolutionSource = 3
+)
+
+// String returns the ReportResolutionSource constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReportResolutionSource) String() string {
+	switch e {
+	case Nw_report_resolution_source_query:
+		return "Nw_report_resolution_source_query"
+	case Nw_report_resolution_source_cache:
+		return "Nw_report_resolution_source_cache"
+	case Nw_report_resolution_source_expired_cache:
+		return "Nw_report_resolution_source_expired_cache"
+	default:
+		return fmt.Sprintf("ReportResolutionSource(%d)", int64(e))
+	}
+}
+
+// The network service class represents the network queuing priority to use for traffic generated by a connection.
+type ServiceClass int64
+
+const (
+	Nw_service_class_best_effort       ServiceClass = 0
+	Nw_service_class_background        ServiceClass = 1
+	Nw_service_class_interactive_video ServiceClass = 2
+	Nw_service_class_interactive_voice ServiceClass = 3
+	Nw_service_class_responsive_data   ServiceClass = 4
+	Nw_service_class_signaling         ServiceClass = 5
+)
+
+// String returns the ServiceClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ServiceClass) String() string {
+	switch e {
+	case Nw_service_class_best_effort:
+		return "Nw_service_class_best_effort"
+	case Nw_service_class_background:
+		return "Nw_service_class_background"
+	case Nw_service_class_interactive_video:
+		return "Nw_service_class_interactive_video"
+	case Nw_service_class_interactive_voice:
+		return "Nw_service_class_interactive_voice"
+	case Nw_service_class_responsive_data:
+		return "Nw_service_class_responsive_data"
+	case Nw_service_class_signaling:
+		return "Nw_service_class_signaling"
+	default:
+		return fmt.Sprintf("ServiceClass(%d)", int64(e))
+	}
+}
+
+// An enumeration of possible find results when trying to find a key-value pair in the TXT record object.
+type TxtRecordFindKey int64
+
+const (
+	Nw_txt_record_find_key_invalid         TxtRecordFindKey = 0
+	Nw_txt_record_find_key_not_present     TxtRecordFindKey = 1
+	Nw_txt_record_find_key_no_value        TxtRecordFindKey = 2
+	Nw_txt_record_find_key_empty_value     TxtRecordFindKey = 3
+	Nw_txt_record_find_key_non_empty_value TxtRecordFindKey = 4
+)
+
+// String returns the TxtRecordFindKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TxtRecordFindKey) String() string {
+	switch e {
+	case Nw_txt_record_find_key_invalid:
+		return "Nw_txt_record_find_key_invalid"
+	case Nw_txt_record_find_key_not_present:
+		return "Nw_txt_record_find_key_not_present"
+	case Nw_txt_record_find_key_no_value:
+		return "Nw_txt_record_find_key_no_value"
+	case Nw_txt_record_find_key_empty_value:
+		return "Nw_txt_record_find_key_empty_value"
+	case Nw_txt_record_find_key_non_empty_value:
+		return "Nw_txt_record_find_key_non_empty_value"
+	default:
+		return fmt.Sprintf("TxtRecordFindKey(%d)", int64(e))
+	}
+}
+
+// WebSocket close codes that describe the reason for closing a WebSocket connection. Endpoints MAY use the following pre-defined status codes when sending a Close frame.
+type WsCloseCode int64
+
+const (
+	Nw_ws_close_code_normal_closure             WsCloseCode = 1000
+	Nw_ws_close_code_going_away                 WsCloseCode = 1001
+	Nw_ws_close_code_protocol_error             WsCloseCode = 1002
+	Nw_ws_close_code_unsupported_data           WsCloseCode = 1003
+	Nw_ws_close_code_no_status_received         WsCloseCode = 1005
+	Nw_ws_close_code_abnormal_closure           WsCloseCode = 1006
+	Nw_ws_close_code_invalid_frame_payload_data WsCloseCode = 1007
+	Nw_ws_close_code_policy_violation           WsCloseCode = 1008
+	Nw_ws_close_code_message_too_big            WsCloseCode = 1009
+	Nw_ws_close_code_mandatory_extension        WsCloseCode = 1010
+	Nw_ws_close_code_internal_server_error      WsCloseCode = 1011
+	Nw_ws_close_code_tls_handshake              WsCloseCode = 1015
+)
+
+// String returns the WsCloseCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WsCloseCode) String() string {
+	switch e {
+	case Nw_ws_close_code_normal_closure:
+		return "Nw_ws_close_code_normal_closure"
+	case Nw_ws_close_code_going_away:
+		return "Nw_ws_close_code_going_away"
+	case Nw_ws_close_code_protocol_error:
+		return "Nw_ws_close_code_protocol_error"
+	case Nw_ws_close_code_unsupported_data:
+		return "Nw_ws_close_code_unsupported_data"
+	case Nw_ws_close_code_no_status_received:
+		return "Nw_ws_close_code_no_status_received"
+	case Nw_ws_close_code_abnormal_closure:
+		return "Nw_ws_close_code_abnormal_closure"
+	case Nw_ws_close_code_invalid_frame_payload_data:
+		return "Nw_ws_close_code_invalid_frame_payload_data"
+	case Nw_ws_close_code_policy_violation:
+		return "Nw_ws_close_code_policy_violation"
+	case Nw_ws_close_code_message_too_big:
+		return "Nw_ws_close_code_message_too_big"
+	case Nw_ws_close_code_mandatory_extension:
+		return "Nw_ws_close_code_mandatory_extension"
+	case Nw_ws_close_code_internal_server_error:
+		return "Nw_ws_close_code_internal_server_error"
+	case Nw_ws_close_code_tls_handshake:
+		return "Nw_ws_close_code_tls_handshake"
+	default:
+		return fmt.Sprintf("WsCloseCode(%d)", int64(e))
+	}
+}
+
+// WebSocket opcodes that denote the type of frame sent or received by a WebSocket endpoint. Opcodes define the interpretation of their associated payload data.
+type WsOpcode int64
+
+const (
+	Nw_ws_opcode_invalid WsOpcode = -1
+	Nw_ws_opcode_cont    WsOpcode = 0
+	Nw_ws_opcode_text    WsOpcode = 1
+	Nw_ws_opcode_binary  WsOpcode = 2
+	Nw_ws_opcode_close   WsOpcode = 8
+	Nw_ws_opcode_ping    WsOpcode = 9
+	Nw_ws_opcode_pong    WsOpcode = 10
+)
+
+// String returns the WsOpcode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WsOpcode) String() string {
+	switch e {
+	case Nw_ws_opcode_invalid:
+		return "Nw_ws_opcode_invalid"
+	case Nw_ws_opcode_cont:
+		return "Nw_ws_opcode_cont"
+	case Nw_ws_opcode_text:
+		return "Nw_ws_opcode_text"
+	case Nw_ws_opcode_binary:
+		return "Nw_ws_opcode_binary"
+	case Nw_ws_opcode_close:
+		return "Nw_ws_opcode_close"
+	case Nw_ws_opcode_ping:
+		return "Nw_ws_opcode_ping"
+	case Nw_ws_opcode_pong:
+		return "Nw_ws_opcode_pong"
+	default:
+		return fmt.Sprintf("WsOpcode(%d)", int64(e))
+	}
+}
+
+// The status of a WebSocket server's response to a client's request to connect.
+type WsResponseStatus int64
+
+const (
+	Nw_ws_response_status_invalid WsResponseStatus = 0
+	Nw_ws_response_status_accept  WsResponseStatus = 1
+	Nw_ws_response_status_reject  WsResponseStatus = 2
+)
+
+// String returns the WsResponseStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WsResponseStatus) String() string {
+	switch e {
+	case Nw_ws_response_status_invalid:
+		return "Nw_ws_response_status_invalid"
+	case Nw_ws_response_status_accept:
+		return "Nw_ws_response_status_accept"
+	case Nw_ws_response_status_reject:
+		return "Nw_ws_response_status_reject"
+	default:
+		return fmt.Sprintf("WsResponseStatus(%d)", int64(e))
+	}
+}
+
+// The WebSocket Protocol version.
+type WsVersion int64
+
+const (
+	Nw_ws_version_invalid WsVersion = 0
+	Nw_ws_version_13      WsVersion = 1
+)
+
+// String returns the WsVersion constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WsVersion) String() string {
+	switch e {
+	case Nw_ws_version_invalid:
+		return "Nw_ws_version_invalid"
+	case Nw_ws_version_13:
+		return "Nw_ws_version_13"
+	default:
+		return fmt.Sprintf("WsVersion(%d)", int64(e))
+	}
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type OSUnfairLockFlags int64
+
+const (
+	OSUnfairLockFlagsNone         OSUnfairLockFlags = 0
+	OSUnfairLockFlagsAdaptiveSpin OSUnfairLockFlags = 262144
+)
+
+// String returns the OSUnfairLockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSUnfairLockFlags) String() string {
+	var parts []string
+	if e&OSUnfairLockFlagsAdaptiveSpin != 0 {
+		parts = append(parts, "OSUnfairLockFlagsAdaptiveSpin")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type PMPageToPaperMappingType int64
+
+const (
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
+)
+
+// String returns the PMPageToPaperMappingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PMPageToPaperMappingType) String() string {
+	switch e {
+	case KPMPageToPaperMappingNone:
+		return "KPMPageToPaperMappingNone"
+	case KPMPageToPaperMappingScaleToFit:
+		return "KPMPageToPaperMappingScaleToFit"
+	default:
+		return fmt.Sprintf("PMPageToPaperMappingType(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+// An enumeration that lists the possible ways a delegate handled displaying a custom Lockdown Mode first use dialog.
+type WKDialogResult int64
+
+const (
+	// A result that indicates the delegate didn’t display a message, so the web view should show the default Lockdown Mode message.
+	WKDialogResultShowDefault WKDialogResult = 1
+	// A result that indicates the delegate didn’t display a message, so other web views should check again.
+	WKDialogResultAskAgain WKDialogResult = 2
+	// A result that indicates the delegate displayed the first use message.
+	WKDialogResultHandled WKDialogResult = 3
+)
+
+// String returns the WKDialogResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKDialogResult) String() string {
+	switch e {
+	case WKDialogResultShowDefault:
+		return "WKDialogResultShowDefault"
+	case WKDialogResultAskAgain:
+		return "WKDialogResultAskAgain"
+	case WKDialogResultHandled:
+		return "WKDialogResultHandled"
+	default:
+		return fmt.Sprintf("WKDialogResult(%d)", int64(e))
+	}
+}
+
+type WKDownloadPlaceholderPolicy int64
+
+const (
+	WKDownloadPlaceholderPolicyDisable WKDownloadPlaceholderPolicy = 0
+	WKDownloadPlaceholderPolicyEnable  WKDownloadPlaceholderPolicy = 1
+)
+
+// String returns the WKDownloadPlaceholderPolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKDownloadPlaceholderPolicy) String() string {
+	switch e {
+	case WKDownloadPlaceholderPolicyDisable:
+		return "WKDownloadPlaceholderPolicyDisable"
+	case WKDownloadPlaceholderPolicyEnable:
+		return "WKDownloadPlaceholderPolicyEnable"
+	default:
+		return fmt.Sprintf("WKDownloadPlaceholderPolicy(%d)", int64(e))
+	}
+}
+
+// An enumeration with cases that indicate whether to proceed with a redirect.
+type WKDownloadRedirectPolicy int64
+
+const (
+	WKDownloadRedirectPolicyCancel WKDownloadRedirectPolicy = 0
+	WKDownloadRedirectPolicyAllow  WKDownloadRedirectPolicy = 1
+)
+
+// String returns the WKDownloadRedirectPolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKDownloadRedirectPolicy) String() string {
+	switch e {
+	case WKDownloadRedirectPolicyCancel:
+		return "WKDownloadRedirectPolicyCancel"
+	case WKDownloadRedirectPolicyAllow:
+		return "WKDownloadRedirectPolicyAllow"
+	default:
+		return fmt.Sprintf("WKDownloadRedirectPolicy(%d)", int64(e))
+	}
+}
+
+// Possible error values that WebKit APIs can return.
+type WKErrorCode int64
+
+const (
+	WKErrorUnknown                             WKErrorCode = 1
+	WKErrorWebContentProcessTerminated         WKErrorCode = 2
+	WKErrorWebViewInvalidated                  WKErrorCode = 3
+	WKErrorJavaScriptExceptionOccurred         WKErrorCode = 4
+	WKErrorJavaScriptResultTypeIsUnsupported   WKErrorCode = 5
+	WKErrorContentRuleListStoreCompileFailed   WKErrorCode = 6
+	WKErrorContentRuleListStoreLookUpFailed    WKErrorCode = 7
+	WKErrorContentRuleListStoreRemoveFailed    WKErrorCode = 8
+	WKErrorContentRuleListStoreVersionMismatch WKErrorCode = 9
+	WKErrorAttributedStringContentFailedToLoad WKErrorCode = 10
+	WKErrorAttributedStringContentLoadTimedOut WKErrorCode = 11
+	WKErrorJavaScriptInvalidFrameTarget        WKErrorCode = 12
+	WKErrorNavigationAppBoundDomain            WKErrorCode = 13
+	WKErrorJavaScriptAppBoundDomain            WKErrorCode = 14
+	WKErrorDuplicateCredential                 WKErrorCode = 15
+	WKErrorMalformedCredential                 WKErrorCode = 16
+	WKErrorCredentialNotFound                  WKErrorCode = 17
+)
+
+// String returns the WKErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKErrorCode) String() string {
+	switch e {
+	case WKErrorUnknown:
+		return "WKErrorUnknown"
+	case WKErrorWebContentProcessTerminated:
+		return "WKErrorWebContentProcessTerminated"
+	case WKErrorWebViewInvalidated:
+		return "WKErrorWebViewInvalidated"
+	case WKErrorJavaScriptExceptionOccurred:
+		return "WKErrorJavaScriptExceptionOccurred"
+	case WKErrorJavaScriptResultTypeIsUnsupported:
+		return "WKErrorJavaScriptResultTypeIsUnsupported"
+	case WKErrorContentRuleListStoreCompileFailed:
+		return "WKErrorContentRuleListStoreCompileFailed"
+	case WKErrorContentRuleListStoreLookUpFailed:
+		return "WKErrorContentRuleListStoreLookUpFailed"
+	case WKErrorContentRuleListStoreRemoveFailed:
+		return "WKErrorContentRuleListStoreRemoveFailed"
+	case WKErrorContentRuleListStoreVersionMismatch:
+		return "WKErrorContentRuleListStoreVersionMismatch"
+	case WKErrorAttributedStringContentFailedToLoad:
+		return "WKErrorAttributedStringContentFailedToLoad"
+	case WKErrorAttributedStringContentLoadTimedOut:
+		return "WKErrorAttributedStringContentLoadTimedOut"
+	case WKErrorJavaScriptInvalidFrameTarget:
+		return "WKErrorJavaScriptInvalidFrameTarget"
+	case WKErrorNavigationAppBoundDomain:
+		return "WKErrorNavigationAppBoundDomain"
+	case WKErrorJavaScriptAppBoundDomain:
+		return "WKErrorJavaScriptAppBoundDomain"
+	case WKErrorDuplicateCredential:
+		return "WKErrorDuplicateCredential"
+	case WKErrorMalformedCredential:
+		return "WKErrorMalformedCredential"
+	case WKErrorCredentialNotFound:
+		return "WKErrorCredentialNotFound"
+	default:
+		return fmt.Sprintf("WKErrorCode(%d)", int64(e))
+	}
+}
+
+// An enumeration that describes whether an audio or video presentation is playing, paused, or suspended.
+type WKMediaPlaybackState int64
+
+const (
+	// There is no media to play back.
+	WKMediaPlaybackStateNone WKMediaPlaybackState = 0
+	// The media is playing.
+	WKMediaPlaybackStatePlaying WKMediaPlaybackState = 1
+	// The media playback is paused.
+	WKMediaPlaybackStatePaused WKMediaPlaybackState = 2
+	// The media is not playing, and cannot be resumed until the user revokes the suspension.
+	WKMediaPlaybackStateSuspended WKMediaPlaybackState = 3
+)
+
+// String returns the WKMediaPlaybackState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKMediaPlaybackState) String() string {
+	switch e {
+	case WKMediaPlaybackStateNone:
+		return "WKMediaPlaybackStateNone"
+	case WKMediaPlaybackStatePlaying:
+		return "WKMediaPlaybackStatePlaying"
+	case WKMediaPlaybackStatePaused:
+		return "WKMediaPlaybackStatePaused"
+	case WKMediaPlaybackStateSuspended:
+		return "WKMediaPlaybackStateSuspended"
+	default:
+		return fmt.Sprintf("WKMediaPlaybackState(%d)", int64(e))
+	}
+}
+
+// Constants that indicate whether to allow or cancel navigation to a webpage from an action.
+type WKNavigationActionPolicy int64
+
+const (
+	// Cancel the navigation.
+	WKNavigationActionPolicyCancel WKNavigationActionPolicy = 0
+	// Allow the navigation to continue.
+	WKNavigationActionPolicyAllow WKNavigationActionPolicy = 1
+	// Allow the download to proceed.
+	WKNavigationActionPolicyDownload WKNavigationActionPolicy = 2
+)
+
+// String returns the WKNavigationActionPolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKNavigationActionPolicy) String() string {
+	switch e {
+	case WKNavigationActionPolicyCancel:
+		return "WKNavigationActionPolicyCancel"
+	case WKNavigationActionPolicyAllow:
+		return "WKNavigationActionPolicyAllow"
+	case WKNavigationActionPolicyDownload:
+		return "WKNavigationActionPolicyDownload"
+	default:
+		return fmt.Sprintf("WKNavigationActionPolicy(%d)", int64(e))
+	}
+}
+
+// Constants that indicate whether to allow or cancel navigation to a webpage from a response.
+type WKNavigationResponsePolicy int64
+
+const (
+	// Cancel the navigation.
+	WKNavigationResponsePolicyCancel WKNavigationResponsePolicy = 0
+	// Allow the navigation to continue.
+	WKNavigationResponsePolicyAllow WKNavigationResponsePolicy = 1
+	// Allow the download to proceed.
+	WKNavigationResponsePolicyDownload WKNavigationResponsePolicy = 2
+)
+
+// String returns the WKNavigationResponsePolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKNavigationResponsePolicy) String() string {
+	switch e {
+	case WKNavigationResponsePolicyCancel:
+		return "WKNavigationResponsePolicyCancel"
+	case WKNavigationResponsePolicyAllow:
+		return "WKNavigationResponsePolicyAllow"
+	case WKNavigationResponsePolicyDownload:
+		return "WKNavigationResponsePolicyDownload"
+	default:
+		return fmt.Sprintf("WKNavigationResponsePolicy(%d)", int64(e))
+	}
+}
+
+// An enumeration of possible permission decisions for device resource access.
+type WKPermissionDecision int64
+
+const (
+	// Prompt the user for permission for the requested resource.
+	WKPermissionDecisionPrompt WKPermissionDecision = 0
+	// Grant permission for the requested resource.
+	WKPermissionDecisionGrant WKPermissionDecision = 1
+	// Deny permission for the requested resource.
+	WKPermissionDecisionDeny WKPermissionDecision = 2
+)
+
+// String returns the WKPermissionDecision constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKPermissionDecision) String() string {
+	switch e {
+	case WKPermissionDecisionPrompt:
+		return "WKPermissionDecisionPrompt"
+	case WKPermissionDecisionGrant:
+		return "WKPermissionDecisionGrant"
+	case WKPermissionDecisionDeny:
+		return "WKPermissionDecisionDeny"
+	default:
+		return fmt.Sprintf("WKPermissionDecision(%d)", int64(e))
+	}
+}
+
+type WKWebExtensionContextError int64
+
+const (
+	WKWebExtensionContextErrorUnknown                       WKWebExtensionContextError = 1
+	WKWebExtensionContextErrorAlreadyLoaded                 WKWebExtensionContextError = 2
+	WKWebExtensionContextErrorNotLoaded                     WKWebExtensionContextError = 3
+	WKWebExtensionContextErrorBaseURLAlreadyInUse           WKWebExtensionContextError = 4
+	WKWebExtensionContextErrorNoBackgroundContent           WKWebExtensionContextError = 5
+	WKWebExtensionContextErrorBackgroundContentFailedToLoad WKWebExtensionContextError = 6
+)
+
+// String returns the WKWebExtensionContextError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKWebExtensionContextError) String() string {
+	switch e {
+	case WKWebExtensionContextErrorUnknown:
+		return "WKWebExtensionContextErrorUnknown"
+	case WKWebExtensionContextErrorAlreadyLoaded:
+		return "WKWebExtensionContextErrorAlreadyLoaded"
+	case WKWebExtensionContextErrorNotLoaded:
+		return "WKWebExtensionContextErrorNotLoaded"
+	case WKWebExtensionContextErrorBaseURLAlreadyInUse:
+		return "WKWebExtensionContextErrorBaseURLAlreadyInUse"
+	case WKWebExtensionContextErrorNoBackgroundContent:
+		return "WKWebExtensionContextErrorNoBackgroundContent"
+	case WKWebExtensionContextErrorBackgroundContentFailedToLoad:
+		return "WKWebExtensionContextErrorBackgroundContentFailedToLoad"
+	default:
+		return fmt.Sprintf("WKWebExtensionContextError(%d)", int64(e))
+	}
+}
+
+// Constants that indicate errors in the WKWebExtensionDataRecord domain.
+type WKWebExtensionDataRecordError int64
+
+const (
+	WKWebExtensionDataRecordErrorUnknown                   WKWebExtensionDataRecordError = 1
+	WKWebExtensionDataRecordErrorLocalStorageFailed        WKWebExtensionDataRecordError = 2
+	WKWebExtensionDataRecordErrorSessionStorageFailed      WKWebExtensionDataRecordError = 3
+	WKWebExtensionDataRecordErrorSynchronizedStorageFailed WKWebExtensionDataRecordError = 4
+)
+
+// String returns the WKWebExtensionDataRecordError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKWebExtensionDataRecordError) String() string {
+	switch e {
+	case WKWebExtensionDataRecordErrorUnknown:
+		return "WKWebExtensionDataRecordErrorUnknown"
+	case WKWebExtensionDataRecordErrorLocalStorageFailed:
+		return "WKWebExtensionDataRecordErrorLocalStorageFailed"
+	case WKWebExtensionDataRecordErrorSessionStorageFailed:
+		return "WKWebExtensionDataRecordErrorSessionStorageFailed"
+	case WKWebExtensionDataRecordErrorSynchronizedStorageFailed:
+		return "WKWebExtensionDataRecordErrorSynchronizedStorageFailed"
+	default:
+		return fmt.Sprintf("WKWebExtensionDataRecordError(%d)", int64(e))
+	}
+}
+
+type WKWebExtensionError int64
+
+const (
+	WKWebExtensionErrorUnknown                           WKWebExtensionError = 1
+	WKWebExtensionErrorResourceNotFound                  WKWebExtensionError = 2
+	WKWebExtensionErrorInvalidResourceCodeSignature      WKWebExtensionError = 3
+	WKWebExtensionErrorInvalidManifest                   WKWebExtensionError = 4
+	WKWebExtensionErrorUnsupportedManifestVersion        WKWebExtensionError = 5
+	WKWebExtensionErrorInvalidManifestEntry              WKWebExtensionError = 6
+	WKWebExtensionErrorInvalidDeclarativeNetRequestEntry WKWebExtensionError = 7
+	WKWebExtensionErrorInvalidBackgroundPersistence      WKWebExtensionError = 8
+	WKWebExtensionErrorInvalidArchive                    WKWebExtensionError = 9
+)
+
+// String returns the WKWebExtensionError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKWebExtensionError) String() string {
+	switch e {
+	case WKWebExtensionErrorUnknown:
+		return "WKWebExtensionErrorUnknown"
+	case WKWebExtensionErrorResourceNotFound:
+		return "WKWebExtensionErrorResourceNotFound"
+	case WKWebExtensionErrorInvalidResourceCodeSignature:
+		return "WKWebExtensionErrorInvalidResourceCodeSignature"
+	case WKWebExtensionErrorInvalidManifest:
+		return "WKWebExtensionErrorInvalidManifest"
+	case WKWebExtensionErrorUnsupportedManifestVersion:
+		return "WKWebExtensionErrorUnsupportedManifestVersion"
+	case WKWebExtensionErrorInvalidManifestEntry:
+		return "WKWebExtensionErrorInvalidManifestEntry"
+	case WKWebExtensionErrorInvalidDeclarativeNetRequestEntry:
+		return "WKWebExtensionErrorInvalidDeclarativeNetRequestEntry"
+	case WKWebExtensionErrorInvalidBackgroundPersistence:
+		return "WKWebExtensionErrorInvalidBackgroundPersistence"
+	case WKWebExtensionErrorInvalidArchive:
+		return "WKWebExtensionErrorInvalidArchive"
+	default:
+		return fmt.Sprintf("WKWebExtensionError(%d)", int64(e))
+	}
+}
+
+// Constants that indicate errors in the WKWebExtensionMatchPattern domain.
+type WKWebExtensionMatchPatternError int64
+
+const (
+	WKWebExtensionMatchPatternErrorUnknown       WKWebExtensionMatchPatternError = 1
+	WKWebExtensionMatchPatternErrorInvalidScheme WKWebExtensionMatchPatternError = 2
+	WKWebExtensionMatchPatternErrorInvalidHost   WKWebExtensionMatchPatternError = 3
+	WKWebExtensionMatchPatternErrorInvalidPath   WKWebExtensionMatchPatternError = 4
+)
+
+// String returns the WKWebExtensionMatchPatternError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKWebExtensionMatchPatternError) String() string {
+	switch e {
+	case WKWebExtensionMatchPatternErrorUnknown:
+		return "WKWebExtensionMatchPatternErrorUnknown"
+	case WKWebExtensionMatchPatternErrorInvalidScheme:
+		return "WKWebExtensionMatchPatternErrorInvalidScheme"
+	case WKWebExtensionMatchPatternErrorInvalidHost:
+		return "WKWebExtensionMatchPatternErrorInvalidHost"
+	case WKWebExtensionMatchPatternErrorInvalidPath:
+		return "WKWebExtensionMatchPatternErrorInvalidPath"
+	default:
+		return fmt.Sprintf("WKWebExtensionMatchPatternError(%d)", int64(e))
+	}
+}
+
+// Constants that indicate errors in the WKWebExtensionMessagePort domain.
+type WKWebExtensionMessagePortError int64
+
+const (
+	WKWebExtensionMessagePortErrorUnknown        WKWebExtensionMessagePortError = 1
+	WKWebExtensionMessagePortErrorNotConnected   WKWebExtensionMessagePortError = 2
+	WKWebExtensionMessagePortErrorMessageInvalid WKWebExtensionMessagePortError = 3
+)
+
+// String returns the WKWebExtensionMessagePortError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKWebExtensionMessagePortError) String() string {
+	switch e {
+	case WKWebExtensionMessagePortErrorUnknown:
+		return "WKWebExtensionMessagePortErrorUnknown"
+	case WKWebExtensionMessagePortErrorNotConnected:
+		return "WKWebExtensionMessagePortErrorNotConnected"
+	case WKWebExtensionMessagePortErrorMessageInvalid:
+		return "WKWebExtensionMessagePortErrorMessageInvalid"
+	default:
+		return fmt.Sprintf("WKWebExtensionMessagePortError(%d)", int64(e))
+	}
+}
+
+// Actions that the destination object of a drag operation can perform.
+// Bitmask — values may be combined with |.
+type WebDragDestinationAction uint64
+
+const (
+	// No action.
+	WebDragDestinationActionNone WebDragDestinationAction = 0
+	// Allows DHTML (such as JavaScript) to handle the drag.
+	WebDragDestinationActionDHTML WebDragDestinationAction = 1
+	// Allows editable documents to be changed by the drag operation.
+	WebDragDestinationActionEdit WebDragDestinationAction = 2
+	// Allows the drag operation to change the location.
+	WebDragDestinationActionLoad WebDragDestinationAction = 4
+	// Allows any defined action to occur.
+	WebDragDestinationActionAny WebDragDestinationAction = 4294967295
+)
+
+// String returns the WebDragDestinationAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WebDragDestinationAction) String() string {
+	var parts []string
+	if e&WebDragDestinationActionDHTML != 0 {
+		parts = append(parts, "WebDragDestinationActionDHTML")
+	}
+	if e&WebDragDestinationActionEdit != 0 {
+		parts = append(parts, "WebDragDestinationActionEdit")
+	}
+	if e&WebDragDestinationActionLoad != 0 {
+		parts = append(parts, "WebDragDestinationActionLoad")
+	}
+	if e&WebDragDestinationActionAny != 0 {
+		parts = append(parts, "WebDragDestinationActionAny")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Actions that the source object of a drag operation can perform.
+// Bitmask — values may be combined with |.
+type WebDragSourceAction uint64
+
+const (
+	// No action.
+	WebDragSourceActionNone WebDragSourceAction = 0
+	// Allows DHTML (such as JavaScript) in the source object to initiate a drag operation.
+	WebDragSourceActionDHTML WebDragSourceAction = 1
+	// Allows the user to drag an image in the source object.
+	WebDragSourceActionImage WebDragSourceAction = 2
+	// Allows the user to drag a link in the source object.
+	WebDragSourceActionLink WebDragSourceAction = 4
+	// Allows the user to drag a selection in the source object.
+	WebDragSourceActionSelection WebDragSourceAction = 8
+	// Allows any defined action to occur.
+	WebDragSourceActionAny WebDragSourceAction = 4294967295
+)
+
+// String returns the WebDragSourceAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WebDragSourceAction) String() string {
+	var parts []string
+	if e&WebDragSourceActionDHTML != 0 {
+		parts = append(parts, "WebDragSourceActionDHTML")
+	}
+	if e&WebDragSourceActionImage != 0 {
+		parts = append(parts, "WebDragSourceActionImage")
+	}
+	if e&WebDragSourceActionLink != 0 {
+		parts = append(parts, "WebDragSourceActionLink")
+	}
+	if e&WebDragSourceActionSelection != 0 {
+		parts = append(parts, "WebDragSourceActionSelection")
+	}
+	if e&WebDragSourceActionAny != 0 {
+		parts = append(parts, "WebDragSourceActionAny")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Possible values for the WebActionNavigationTypeKey key that appears in an action dictionary.
+type WebNavigationType int64
+
+const (
+	// A link (an href) was clicked.
+	WebNavigationTypeLinkClicked WebNavigationType = 0
+	// A form was submitted.
+	WebNavigationTypeFormSubmitted WebNavigationType = 1
+	// The user clicked back or forward button.
+	WebNavigationTypeBackForward WebNavigationType = 2
+	// The user hit the reload button.
+	WebNavigationTypeReload WebNavigationType = 3
+	// A form was resubmitted (through a back, forward or reload action).
+	WebNavigationTypeFormResubmitted WebNavigationType = 4
+	// Navigation is taking place for some other reason.
+	WebNavigationTypeOther WebNavigationType = 5
+)
+
+// String returns the WebNavigationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WebNavigationType) String() string {
+	switch e {
+	case WebNavigationTypeLinkClicked:
+		return "WebNavigationTypeLinkClicked"
+	case WebNavigationTypeFormSubmitted:
+		return "WebNavigationTypeFormSubmitted"
+	case WebNavigationTypeBackForward:
+		return "WebNavigationTypeBackForward"
+	case WebNavigationTypeReload:
+		return "WebNavigationTypeReload"
+	case WebNavigationTypeFormResubmitted:
+		return "WebNavigationTypeFormResubmitted"
+	case WebNavigationTypeOther:
+		return "WebNavigationTypeOther"
+	default:
+		return fmt.Sprintf("WebNavigationType(%d)", int64(e))
+	}
+}
+
+// The type of user action that initiated a delegate message.
+type WebViewInsertAction int64
+
+const (
+	// Indicates the user inserted content by typing.
+	WebViewInsertActionTyped WebViewInsertAction = 0
+	// Indicates the user inserted content by pasting.
+	WebViewInsertActionPasted WebViewInsertAction = 1
+	// Indicates the user inserted content by dropping.
+	WebViewInsertActionDropped WebViewInsertAction = 2
+)
+
+// String returns the WebViewInsertAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WebViewInsertAction) String() string {
+	switch e {
+	case WebViewInsertActionTyped:
+		return "WebViewInsertActionTyped"
+	case WebViewInsertActionPasted:
+		return "WebViewInsertActionPasted"
+	case WebViewInsertActionDropped:
+		return "WebViewInsertActionDropped"
+	default:
+		return fmt.Sprintf("WebViewInsertAction(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlags int64
+
+const (
+	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
+	XpcListenerCreateFlagsInactive        XpcListenerCreateFlags = 1
+	XpcListenerCreateFlagsForceMach       XpcListenerCreateFlags = 2
+	XpcListenerCreateFlagsForceXpcservice XpcListenerCreateFlags = 4
+)
+
+// String returns the XpcListenerCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcListenerCreateFlags) String() string {
+	var parts []string
+	if e&XpcListenerCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsInactive")
+	}
+	if e&XpcListenerCreateFlagsForceMach != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceMach")
+	}
+	if e&XpcListenerCreateFlagsForceXpcservice != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceXpcservice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlags int64
+
+const (
+	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0
+	XpcSessionCreateFlagsInactive       XpcSessionCreateFlags = 1
+	XpcSessionCreateFlagsMachPrivileged XpcSessionCreateFlags = 2
+)
+
+// String returns the XpcSessionCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcSessionCreateFlags) String() string {
+	var parts []string
+	if e&XpcSessionCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsInactive")
+	}
+	if e&XpcSessionCreateFlagsMachPrivileged != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsMachPrivileged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+const (
+	DOM_ADDITION                                  = 2
+	DOM_ALLOW_KEYBOARD_INPUT                      = 1
+	DOM_ANY_TYPE                                  = 0
+	DOM_ANY_UNORDERED_NODE_TYPE                   = 8
+	DOM_ATTRIBUTE_NODE                            = 2
+	DOM_AT_TARGET                                 = 2
+	DOM_BOOLEAN_TYPE                              = 3
+	DOM_BOTH                                      = 2
+	DOM_BUBBLING_PHASE                            = 3
+	DOM_CAPTURING_PHASE                           = 1
+	DOM_CDATA_SECTION_NODE                        = 4
+	DOM_CHARSET_RULE                              = 2
+	DOM_COMMENT_NODE                              = 8
+	DOM_CSS_ATTR                                  = 22
+	DOM_CSS_CM                                    = 6
+	DOM_CSS_COUNTER                               = 23
+	DOM_CSS_CUSTOM                                = 3
+	DOM_CSS_DEG                                   = 11
+	DOM_CSS_DIMENSION                             = 18
+	DOM_CSS_EMS                                   = 3
+	DOM_CSS_EXS                                   = 4
+	DOM_CSS_GRAD                                  = 13
+	DOM_CSS_HZ                                    = 16
+	DOM_CSS_IDENT                                 = 21
+	DOM_CSS_IN                                    = 8
+	DOM_CSS_INHERIT                               = 0
+	DOM_CSS_KHZ                                   = 17
+	DOM_CSS_MM                                    = 7
+	DOM_CSS_MS                                    = 14
+	DOM_CSS_NUMBER                                = 1
+	DOM_CSS_PC                                    = 10
+	DOM_CSS_PERCENTAGE                            = 2
+	DOM_CSS_PRIMITIVE_VALUE                       = 1
+	DOM_CSS_PT                                    = 9
+	DOM_CSS_PX                                    = 5
+	DOM_CSS_RAD                                   = 12
+	DOM_CSS_RECT                                  = 24
+	DOM_CSS_RGBCOLOR                              = 25
+	DOM_CSS_S                                     = 15
+	DOM_CSS_STRING                                = 19
+	DOM_CSS_UNKNOWN                               = 0
+	DOM_CSS_URI                                   = 20
+	DOM_CSS_VALUE_LIST                            = 2
+	DOM_CSS_VH                                    = 27
+	DOM_CSS_VMAX                                  = 29
+	DOM_CSS_VMIN                                  = 28
+	DOM_CSS_VW                                    = 26
+	DOM_DOCUMENT_FRAGMENT_NODE                    = 11
+	DOM_DOCUMENT_NODE                             = 9
+	DOM_DOCUMENT_POSITION_CONTAINED_BY            = 16
+	DOM_DOCUMENT_POSITION_CONTAINS                = 8
+	DOM_DOCUMENT_POSITION_DISCONNECTED            = 1
+	DOM_DOCUMENT_POSITION_FOLLOWING               = 4
+	DOM_DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC = 32
+	DOM_DOCUMENT_POSITION_PRECEDING               = 2
+	DOM_DOCUMENT_TYPE_NODE                        = 10
+	DOM_DOM_DELTA_LINE                            = 1
+	DOM_DOM_DELTA_PAGE                            = 2
+	DOM_DOM_DELTA_PIXEL                           = 0
+	DOM_ELEMENT_NODE                              = 1
+	DOM_END_TO_END                                = 2
+	DOM_END_TO_START                              = 3
+	DOM_ENTITY_NODE                               = 6
+	DOM_ENTITY_REFERENCE_NODE                     = 5
+	DOM_FILTER_ACCEPT                             = 1
+	DOM_FILTER_REJECT                             = 2
+	DOM_FILTER_SKIP                               = 3
+	DOM_FIRST_ORDERED_NODE_TYPE                   = 9
+	DOM_FONT_FACE_RULE                            = 5
+	DOM_HORIZONTAL                                = 0
+	DOM_IMPORT_RULE                               = 3
+	DOM_KEYFRAMES_RULE                            = 7
+	DOM_KEYFRAME_RULE                             = 8
+	DOM_KEY_LOCATION_LEFT                         = 1
+	DOM_KEY_LOCATION_NUMPAD                       = 3
+	DOM_KEY_LOCATION_RIGHT                        = 2
+	DOM_KEY_LOCATION_STANDARD                     = 0
+	DOM_MEDIA_RULE                                = 4
+	DOM_MODIFICATION                              = 1
+	DOM_NAMESPACE_RULE                            = 10
+	DOM_NODE_AFTER                                = 1
+	DOM_NODE_BEFORE                               = 0
+	DOM_NODE_BEFORE_AND_AFTER                     = 2
+	DOM_NODE_INSIDE                               = 3
+	DOM_NONE                                      = 0
+	DOM_NOTATION_NODE                             = 12
+	DOM_NUMBER_TYPE                               = 1
+	DOM_ORDERED_NODE_ITERATOR_TYPE                = 5
+	DOM_ORDERED_NODE_SNAPSHOT_TYPE                = 7
+	DOM_PAGE_RULE                                 = 6
+	DOM_PROCESSING_INSTRUCTION_NODE               = 7
+	DOM_REMOVAL                                   = 3
+	DOM_SHOW_ALL                                  = 4294967295
+	DOM_SHOW_ATTRIBUTE                            = 2
+	DOM_SHOW_CDATA_SECTION                        = 8
+	DOM_SHOW_COMMENT                              = 128
+	DOM_SHOW_DOCUMENT                             = 256
+	DOM_SHOW_DOCUMENT_FRAGMENT                    = 1024
+	DOM_SHOW_DOCUMENT_TYPE                        = 512
+	DOM_SHOW_ELEMENT                              = 1
+	DOM_SHOW_ENTITY                               = 32
+	DOM_SHOW_ENTITY_REFERENCE                     = 16
+	DOM_SHOW_NOTATION                             = 2048
+	DOM_SHOW_PROCESSING_INSTRUCTION               = 64
+	DOM_SHOW_TEXT                                 = 4
+	DOM_START_TO_END                              = 1
+	DOM_START_TO_START                            = 0
+	DOM_STRING_TYPE                               = 2
+	DOM_STYLE_RULE                                = 1
+	DOM_SUPPORTS_RULE                             = 12
+	DOM_TEXT_NODE                                 = 3
+	DOM_UNKNOWN_RULE                              = 0
+	DOM_UNORDERED_NODE_ITERATOR_TYPE              = 4
+	DOM_UNORDERED_NODE_SNAPSHOT_TYPE              = 6
+	DOM_VERTICAL                                  = 1
+	DOM_WEBKIT_KEYFRAMES_RULE                     = 7
+	DOM_WEBKIT_KEYFRAME_RULE                      = 8
+	DOM_WEBKIT_REGION_RULE                        = 16
+	WebKitErrorBlockedPlugInVersion               = 203
+	WebKitErrorCannotFindPlugIn                   = 200
+	WebKitErrorCannotLoadPlugIn                   = 201
+	WebKitErrorCannotShowMIMEType                 = 100
+	WebKitErrorCannotShowURL                      = 101
+	WebKitErrorFrameLoadInterruptedByPolicyChange = 102
+	WebKitErrorJavaUnavailable                    = 202
+	WebMenuItemPDFActualSize                      = 24
+	WebMenuItemPDFAutoSize                        = 27
+	WebMenuItemPDFContinuous                      = 30
+	WebMenuItemPDFFacingPages                     = 29
+	WebMenuItemPDFNextPage                        = 31
+	WebMenuItemPDFPreviousPage                    = 32
+	WebMenuItemPDFSinglePage                      = 28
+	WebMenuItemPDFZoomIn                          = 25
+	WebMenuItemPDFZoomOut                         = 26
+	WebMenuItemTagCopy                            = 8
+	WebMenuItemTagCopyImageToClipboard            = 6
+	WebMenuItemTagCopyLinkToClipboard             = 3
+	WebMenuItemTagCut                             = 13
+	WebMenuItemTagDownloadImageToDisk             = 5
+	WebMenuItemTagDownloadLinkToDisk              = 2
+	WebMenuItemTagGoBack                          = 9
+	WebMenuItemTagGoForward                       = 10
+	WebMenuItemTagIgnoreSpelling                  = 17
+	WebMenuItemTagLearnSpelling                   = 18
+	WebMenuItemTagLookUpInDictionary              = 22
+	WebMenuItemTagNoGuessesFound                  = 16
+	WebMenuItemTagOpenFrameInNewWindow            = 7
+	WebMenuItemTagOpenImageInNewWindow            = 4
+	WebMenuItemTagOpenLinkInNewWindow             = 1
+	WebMenuItemTagOpenWithDefaultApplication      = 23
+	WebMenuItemTagOther                           = 19
+	WebMenuItemTagPaste                           = 14
+	WebMenuItemTagReload                          = 12
+	WebMenuItemTagSearchInSpotlight               = 20
+	WebMenuItemTagSearchWeb                       = 21
+	WebMenuItemTagSpellingGuess                   = 15
+	WebMenuItemTagStop                            = 11
+)

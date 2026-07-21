@@ -1,0 +1,13 @@
+{{/*
+    anon_consts.tmpl — untyped const block for anonymous (tag-less) C enums.
+
+    These constants have no enclosing type, so they are emitted as bare untyped
+    package-level constants, exactly as the raw layer does. Names and values are
+    resolved in the gather phase; the template is pure structural shape.
+*/}}
+{{define "anon_consts" -}}
+const (
+{{range .}}{{.CommentBlock}}	{{.ConstName}} = {{.Value}}
+{{end}})
+
+{{end}}

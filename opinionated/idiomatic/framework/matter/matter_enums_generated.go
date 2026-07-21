@@ -4620,87 +4620,6 @@ func (e MTRDiscoveryCapabilities) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRErrorCode int64
-
-const (
-	// MTRErrorCodeGeneralError represents a generic Matter error with no further categorization. The userInfo will have a key named
-	MTRErrorCodeGeneralError         MTRErrorCode = 1
-	MTRErrorCodeInvalidStringLength  MTRErrorCode = 2
-	MTRErrorCodeInvalidIntegerValue  MTRErrorCode = 3
-	MTRErrorCodeInvalidArgument      MTRErrorCode = 4
-	MTRErrorCodeInvalidMessageLength MTRErrorCode = 5
-	MTRErrorCodeInvalidState         MTRErrorCode = 6
-	MTRErrorCodeWrongAddressType     MTRErrorCode = 7
-	MTRErrorCodeIntegrityCheckFailed MTRErrorCode = 8
-	MTRErrorCodeTimeout              MTRErrorCode = 9
-	MTRErrorCodeBufferTooSmall       MTRErrorCode = 10
-	// MTRErrorCodeFabricExists is returned when trying to commission a device into a fabric when it's already part of that fabric.
-	MTRErrorCodeFabricExists MTRErrorCode = 11
-	// MTRErrorCodeUnknownSchema means the schema for the given cluster/attribute, cluster/event, or cluster/command combination is not known.
-	MTRErrorCodeUnknownSchema MTRErrorCode = 12
-	// MTRErrorCodeSchemaMismatch means that provided data did not match the expected schema.
-	MTRErrorCodeSchemaMismatch MTRErrorCode = 13
-	// MTRErrorCodeTLVDecodeFailed means that the TLV being decoded was malformed in some way.  This can include things like lengths running past the end of the buffer, strings that are not actually UTF-8, and various other TLV-level failures.
-	MTRErrorCodeTLVDecodeFailed MTRErrorCode = 14
-	// MTRErrorCodeDNSSDUnauthorized means that the application is not authorized to perform DNS_SD lookups.  This typically means missing entries for "_matter._tcp" (for operational lookup) and "_matterc._udp" (for commissionable lookup) under the NSBonjourServices key in the application's Info.plist.
-	MTRErrorCodeDNSSDUnauthorized MTRErrorCode = 15
-	// The operation was cancelled.
-	MTRErrorCodeCancelled MTRErrorCode = 16
-	// Access to some resource was denied.
-	MTRErrorCodeAccessDenied MTRErrorCode = 17
-	// A request was made to some entity, and that entity cannot handle the request right now, but might be able to at a different point in time.
-	MTRErrorCodeBusy MTRErrorCode = 18
-	// Something was requested that could not be located.
-	MTRErrorCodeNotFound MTRErrorCode = 19
-)
-
-// String returns the MTRErrorCode constant's name, or its numeric form when the
-// value is not a known constant.
-func (e MTRErrorCode) String() string {
-	switch e {
-	case MTRErrorCodeGeneralError:
-		return "MTRErrorCodeGeneralError"
-	case MTRErrorCodeInvalidStringLength:
-		return "MTRErrorCodeInvalidStringLength"
-	case MTRErrorCodeInvalidIntegerValue:
-		return "MTRErrorCodeInvalidIntegerValue"
-	case MTRErrorCodeInvalidArgument:
-		return "MTRErrorCodeInvalidArgument"
-	case MTRErrorCodeInvalidMessageLength:
-		return "MTRErrorCodeInvalidMessageLength"
-	case MTRErrorCodeInvalidState:
-		return "MTRErrorCodeInvalidState"
-	case MTRErrorCodeWrongAddressType:
-		return "MTRErrorCodeWrongAddressType"
-	case MTRErrorCodeIntegrityCheckFailed:
-		return "MTRErrorCodeIntegrityCheckFailed"
-	case MTRErrorCodeTimeout:
-		return "MTRErrorCodeTimeout"
-	case MTRErrorCodeBufferTooSmall:
-		return "MTRErrorCodeBufferTooSmall"
-	case MTRErrorCodeFabricExists:
-		return "MTRErrorCodeFabricExists"
-	case MTRErrorCodeUnknownSchema:
-		return "MTRErrorCodeUnknownSchema"
-	case MTRErrorCodeSchemaMismatch:
-		return "MTRErrorCodeSchemaMismatch"
-	case MTRErrorCodeTLVDecodeFailed:
-		return "MTRErrorCodeTLVDecodeFailed"
-	case MTRErrorCodeDNSSDUnauthorized:
-		return "MTRErrorCodeDNSSDUnauthorized"
-	case MTRErrorCodeCancelled:
-		return "MTRErrorCodeCancelled"
-	case MTRErrorCodeAccessDenied:
-		return "MTRErrorCodeAccessDenied"
-	case MTRErrorCodeBusy:
-		return "MTRErrorCodeBusy"
-	case MTRErrorCodeNotFound:
-		return "MTRErrorCodeNotFound"
-	default:
-		return fmt.Sprintf("MTRErrorCode(%d)", int64(e))
-	}
-}
-
 type MTREventIDType int64
 
 const (
@@ -4941,104 +4860,6 @@ func (e MTREventTimeType) String() string {
 	}
 }
 
-type MTRInteractionErrorCode int64
-
-const (
-	MTRInteractionErrorCodeFailure                MTRInteractionErrorCode = 1
-	MTRInteractionErrorCodeInvalidSubscription    MTRInteractionErrorCode = 125
-	MTRInteractionErrorCodeUnsupportedAccess      MTRInteractionErrorCode = 126
-	MTRInteractionErrorCodeUnsupportedEndpoint    MTRInteractionErrorCode = 127
-	MTRInteractionErrorCodeInvalidAction          MTRInteractionErrorCode = 128
-	MTRInteractionErrorCodeUnsupportedCommand     MTRInteractionErrorCode = 129
-	MTRInteractionErrorCodeInvalidCommand         MTRInteractionErrorCode = 133
-	MTRInteractionErrorCodeUnsupportedAttribute   MTRInteractionErrorCode = 134
-	MTRInteractionErrorCodeConstraintError        MTRInteractionErrorCode = 135
-	MTRInteractionErrorCodeUnsupportedWrite       MTRInteractionErrorCode = 136
-	MTRInteractionErrorCodeResourceExhausted      MTRInteractionErrorCode = 137
-	MTRInteractionErrorCodeNotFound               MTRInteractionErrorCode = 139
-	MTRInteractionErrorCodeUnreportableAttribute  MTRInteractionErrorCode = 140
-	MTRInteractionErrorCodeInvalidDataType        MTRInteractionErrorCode = 141
-	MTRInteractionErrorCodeUnsupportedRead        MTRInteractionErrorCode = 143
-	MTRInteractionErrorCodeDataVersionMismatch    MTRInteractionErrorCode = 146
-	MTRInteractionErrorCodeTimeout                MTRInteractionErrorCode = 148
-	MTRInteractionErrorCodeBusy                   MTRInteractionErrorCode = 156
-	MTRInteractionErrorCodeAccessRestricted       MTRInteractionErrorCode = 157
-	MTRInteractionErrorCodeUnsupportedCluster     MTRInteractionErrorCode = 195
-	MTRInteractionErrorCodeNoUpstreamSubscription MTRInteractionErrorCode = 197
-	MTRInteractionErrorCodeNeedsTimedInteraction  MTRInteractionErrorCode = 198
-	MTRInteractionErrorCodeUnsupportedEvent       MTRInteractionErrorCode = 199
-	MTRInteractionErrorCodePathsExhausted         MTRInteractionErrorCode = 200
-	MTRInteractionErrorCodeTimedRequestMismatch   MTRInteractionErrorCode = 201
-	MTRInteractionErrorCodeFailsafeRequired       MTRInteractionErrorCode = 202
-	MTRInteractionErrorCodeInvalidInState         MTRInteractionErrorCode = 203
-	MTRInteractionErrorCodeNoCommandResponse      MTRInteractionErrorCode = 204
-)
-
-// String returns the MTRInteractionErrorCode constant's name, or its numeric form when the
-// value is not a known constant.
-func (e MTRInteractionErrorCode) String() string {
-	switch e {
-	case MTRInteractionErrorCodeFailure:
-		return "MTRInteractionErrorCodeFailure"
-	case MTRInteractionErrorCodeInvalidSubscription:
-		return "MTRInteractionErrorCodeInvalidSubscription"
-	case MTRInteractionErrorCodeUnsupportedAccess:
-		return "MTRInteractionErrorCodeUnsupportedAccess"
-	case MTRInteractionErrorCodeUnsupportedEndpoint:
-		return "MTRInteractionErrorCodeUnsupportedEndpoint"
-	case MTRInteractionErrorCodeInvalidAction:
-		return "MTRInteractionErrorCodeInvalidAction"
-	case MTRInteractionErrorCodeUnsupportedCommand:
-		return "MTRInteractionErrorCodeUnsupportedCommand"
-	case MTRInteractionErrorCodeInvalidCommand:
-		return "MTRInteractionErrorCodeInvalidCommand"
-	case MTRInteractionErrorCodeUnsupportedAttribute:
-		return "MTRInteractionErrorCodeUnsupportedAttribute"
-	case MTRInteractionErrorCodeConstraintError:
-		return "MTRInteractionErrorCodeConstraintError"
-	case MTRInteractionErrorCodeUnsupportedWrite:
-		return "MTRInteractionErrorCodeUnsupportedWrite"
-	case MTRInteractionErrorCodeResourceExhausted:
-		return "MTRInteractionErrorCodeResourceExhausted"
-	case MTRInteractionErrorCodeNotFound:
-		return "MTRInteractionErrorCodeNotFound"
-	case MTRInteractionErrorCodeUnreportableAttribute:
-		return "MTRInteractionErrorCodeUnreportableAttribute"
-	case MTRInteractionErrorCodeInvalidDataType:
-		return "MTRInteractionErrorCodeInvalidDataType"
-	case MTRInteractionErrorCodeUnsupportedRead:
-		return "MTRInteractionErrorCodeUnsupportedRead"
-	case MTRInteractionErrorCodeDataVersionMismatch:
-		return "MTRInteractionErrorCodeDataVersionMismatch"
-	case MTRInteractionErrorCodeTimeout:
-		return "MTRInteractionErrorCodeTimeout"
-	case MTRInteractionErrorCodeBusy:
-		return "MTRInteractionErrorCodeBusy"
-	case MTRInteractionErrorCodeAccessRestricted:
-		return "MTRInteractionErrorCodeAccessRestricted"
-	case MTRInteractionErrorCodeUnsupportedCluster:
-		return "MTRInteractionErrorCodeUnsupportedCluster"
-	case MTRInteractionErrorCodeNoUpstreamSubscription:
-		return "MTRInteractionErrorCodeNoUpstreamSubscription"
-	case MTRInteractionErrorCodeNeedsTimedInteraction:
-		return "MTRInteractionErrorCodeNeedsTimedInteraction"
-	case MTRInteractionErrorCodeUnsupportedEvent:
-		return "MTRInteractionErrorCodeUnsupportedEvent"
-	case MTRInteractionErrorCodePathsExhausted:
-		return "MTRInteractionErrorCodePathsExhausted"
-	case MTRInteractionErrorCodeTimedRequestMismatch:
-		return "MTRInteractionErrorCodeTimedRequestMismatch"
-	case MTRInteractionErrorCodeFailsafeRequired:
-		return "MTRInteractionErrorCodeFailsafeRequired"
-	case MTRInteractionErrorCodeInvalidInState:
-		return "MTRInteractionErrorCodeInvalidInState"
-	case MTRInteractionErrorCodeNoCommandResponse:
-		return "MTRInteractionErrorCodeNoCommandResponse"
-	default:
-		return fmt.Sprintf("MTRInteractionErrorCode(%d)", int64(e))
-	}
-}
-
 type MTRLogType int64
 
 const (
@@ -5259,4 +5080,15746 @@ func (e MTRTransportType) String() string {
 	default:
 		return fmt.Sprintf("MTRTransportType(%d)", int64(e))
 	}
+}
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Type int64
+
+const (
+	TypeExtended Type = 256
+	TypeAccess   Type = 0
+	TypeDefault  Type = 1
+	TypeAfs      Type = 2
+	TypeCoda     Type = 3
+	TypeNtfs     Type = 4
+	TypeNwfs     Type = 5
+)
+
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Type) String() string {
+	switch e {
+	case TypeExtended:
+		return "TypeExtended"
+	case TypeAccess:
+		return "TypeAccess"
+	case TypeDefault:
+		return "TypeDefault"
+	case TypeAfs:
+		return "TypeAfs"
+	case TypeCoda:
+		return "TypeCoda"
+	case TypeNtfs:
+		return "TypeNtfs"
+	case TypeNwfs:
+		return "TypeNwfs"
+	default:
+		return fmt.Sprintf("Type(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+type LaunchDataType int64
+
+const (
+	LaunchDataTypeDictionary LaunchDataType = 1
+	LaunchDataTypeArray      LaunchDataType = 2
+	LaunchDataTypeFd         LaunchDataType = 3
+	LaunchDataTypeInteger    LaunchDataType = 4
+	LaunchDataTypeReal       LaunchDataType = 5
+	LaunchDataTypeBool       LaunchDataType = 6
+	LaunchDataTypeString     LaunchDataType = 7
+	LaunchDataTypeOpaque     LaunchDataType = 8
+	LaunchDataTypeErrno      LaunchDataType = 9
+	LaunchDataTypeMachport   LaunchDataType = 10
+)
+
+// String returns the LaunchDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LaunchDataType) String() string {
+	switch e {
+	case LaunchDataTypeDictionary:
+		return "LaunchDataTypeDictionary"
+	case LaunchDataTypeArray:
+		return "LaunchDataTypeArray"
+	case LaunchDataTypeFd:
+		return "LaunchDataTypeFd"
+	case LaunchDataTypeInteger:
+		return "LaunchDataTypeInteger"
+	case LaunchDataTypeReal:
+		return "LaunchDataTypeReal"
+	case LaunchDataTypeBool:
+		return "LaunchDataTypeBool"
+	case LaunchDataTypeString:
+		return "LaunchDataTypeString"
+	case LaunchDataTypeOpaque:
+		return "LaunchDataTypeOpaque"
+	case LaunchDataTypeErrno:
+		return "LaunchDataTypeErrno"
+	case LaunchDataTypeMachport:
+		return "LaunchDataTypeMachport"
+	default:
+		return fmt.Sprintf("LaunchDataType(%d)", int64(e))
+	}
+}
+
+// These constants are used to specify a domain to MDLabelCreate().
+type MDLabelDomain int64
+
+const (
+	KMDLabelUserDomain  MDLabelDomain = 0
+	KMDLabelLocalDomain MDLabelDomain = 1
+)
+
+// String returns the MDLabelDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDLabelDomain) String() string {
+	switch e {
+	case KMDLabelUserDomain:
+		return "KMDLabelUserDomain"
+	case KMDLabelLocalDomain:
+		return "KMDLabelLocalDomain"
+	default:
+		return fmt.Sprintf("MDLabelDomain(%d)", int64(e))
+	}
+}
+
+type MDQueryOptionFlags int64
+
+const (
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
+	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
+)
+
+// String returns the MDQueryOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQueryOptionFlags) String() string {
+	switch e {
+	case KMDQuerySynchronous:
+		return "KMDQuerySynchronous"
+	case KMDQueryWantsUpdates:
+		return "KMDQueryWantsUpdates"
+	case KMDQueryAllowFSTranslation:
+		return "KMDQueryAllowFSTranslation"
+	default:
+		return fmt.Sprintf("MDQueryOptionFlags(%d)", int64(e))
+	}
+}
+
+type MDQuerySortOptionFlags int64
+
+const (
+	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
+)
+
+// String returns the MDQuerySortOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQuerySortOptionFlags) String() string {
+	switch e {
+	case KMDQueryReverseSortOrderFlag:
+		return "KMDQueryReverseSortOrderFlag"
+	default:
+		return fmt.Sprintf("MDQuerySortOptionFlags(%d)", int64(e))
+	}
+}
+
+type MTRAccessControlAccessRestrictionType int64
+
+const (
+	MTRAccessControlAccessRestrictionTypeAttributeAccessForbidden MTRAccessControlAccessRestrictionType = 0
+	MTRAccessControlAccessRestrictionTypeAttributeWriteForbidden  MTRAccessControlAccessRestrictionType = 1
+	MTRAccessControlAccessRestrictionTypeCommandForbidden         MTRAccessControlAccessRestrictionType = 2
+	MTRAccessControlAccessRestrictionTypeEventForbidden           MTRAccessControlAccessRestrictionType = 3
+)
+
+// String returns the MTRAccessControlAccessRestrictionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRAccessControlAccessRestrictionType) String() string {
+	switch e {
+	case MTRAccessControlAccessRestrictionTypeAttributeAccessForbidden:
+		return "MTRAccessControlAccessRestrictionTypeAttributeAccessForbidden"
+	case MTRAccessControlAccessRestrictionTypeAttributeWriteForbidden:
+		return "MTRAccessControlAccessRestrictionTypeAttributeWriteForbidden"
+	case MTRAccessControlAccessRestrictionTypeCommandForbidden:
+		return "MTRAccessControlAccessRestrictionTypeCommandForbidden"
+	case MTRAccessControlAccessRestrictionTypeEventForbidden:
+		return "MTRAccessControlAccessRestrictionTypeEventForbidden"
+	default:
+		return fmt.Sprintf("MTRAccessControlAccessRestrictionType(%d)", int64(e))
+	}
+}
+
+type MTRAccessControlAuthMode int64
+
+const (
+	MTRAccessControlAuthModePASE  MTRAccessControlAuthMode = 1
+	MTRAccessControlAuthModeCASE  MTRAccessControlAuthMode = 2
+	MTRAccessControlAuthModeGroup MTRAccessControlAuthMode = 3
+)
+
+// String returns the MTRAccessControlAuthMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRAccessControlAuthMode) String() string {
+	switch e {
+	case MTRAccessControlAuthModePASE:
+		return "MTRAccessControlAuthModePASE"
+	case MTRAccessControlAuthModeCASE:
+		return "MTRAccessControlAuthModeCASE"
+	case MTRAccessControlAuthModeGroup:
+		return "MTRAccessControlAuthModeGroup"
+	default:
+		return fmt.Sprintf("MTRAccessControlAuthMode(%d)", int64(e))
+	}
+}
+
+type MTRAccessControlChangeType int64
+
+const (
+	MTRAccessControlChangeTypeChanged MTRAccessControlChangeType = 0
+	MTRAccessControlChangeTypeAdded   MTRAccessControlChangeType = 1
+	MTRAccessControlChangeTypeRemoved MTRAccessControlChangeType = 2
+)
+
+// String returns the MTRAccessControlChangeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRAccessControlChangeType) String() string {
+	switch e {
+	case MTRAccessControlChangeTypeChanged:
+		return "MTRAccessControlChangeTypeChanged"
+	case MTRAccessControlChangeTypeAdded:
+		return "MTRAccessControlChangeTypeAdded"
+	case MTRAccessControlChangeTypeRemoved:
+		return "MTRAccessControlChangeTypeRemoved"
+	default:
+		return fmt.Sprintf("MTRAccessControlChangeType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRAccessControlFeature int64
+
+const (
+	MTRAccessControlFeatureExtension     MTRAccessControlFeature = 1
+	MTRAccessControlFeatureManagedDevice MTRAccessControlFeature = 2
+)
+
+// String returns the MTRAccessControlFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRAccessControlFeature) String() string {
+	var parts []string
+	if e&MTRAccessControlFeatureExtension != 0 {
+		parts = append(parts, "MTRAccessControlFeatureExtension")
+	}
+	if e&MTRAccessControlFeatureManagedDevice != 0 {
+		parts = append(parts, "MTRAccessControlFeatureManagedDevice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRAccessControlPrivilege int64
+
+const (
+	MTRAccessControlPrivilegeView       MTRAccessControlPrivilege = 1
+	MTRAccessControlPrivilegeProxyView  MTRAccessControlPrivilege = 2
+	MTRAccessControlPrivilegeOperate    MTRAccessControlPrivilege = 3
+	MTRAccessControlPrivilegeManage     MTRAccessControlPrivilege = 4
+	MTRAccessControlPrivilegeAdminister MTRAccessControlPrivilege = 5
+)
+
+// String returns the MTRAccessControlPrivilege constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRAccessControlPrivilege) String() string {
+	switch e {
+	case MTRAccessControlPrivilegeView:
+		return "MTRAccessControlPrivilegeView"
+	case MTRAccessControlPrivilegeProxyView:
+		return "MTRAccessControlPrivilegeProxyView"
+	case MTRAccessControlPrivilegeOperate:
+		return "MTRAccessControlPrivilegeOperate"
+	case MTRAccessControlPrivilegeManage:
+		return "MTRAccessControlPrivilegeManage"
+	case MTRAccessControlPrivilegeAdminister:
+		return "MTRAccessControlPrivilegeAdminister"
+	default:
+		return fmt.Sprintf("MTRAccessControlPrivilege(%d)", int64(e))
+	}
+}
+
+type MTRActionsActionError int64
+
+const (
+	MTRActionsActionErrorUnknown     MTRActionsActionError = 0
+	MTRActionsActionErrorInterrupted MTRActionsActionError = 1
+)
+
+// String returns the MTRActionsActionError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRActionsActionError) String() string {
+	switch e {
+	case MTRActionsActionErrorUnknown:
+		return "MTRActionsActionErrorUnknown"
+	case MTRActionsActionErrorInterrupted:
+		return "MTRActionsActionErrorInterrupted"
+	default:
+		return fmt.Sprintf("MTRActionsActionError(%d)", int64(e))
+	}
+}
+
+type MTRActionsActionState int64
+
+const (
+	MTRActionsActionStateInactive MTRActionsActionState = 0
+	MTRActionsActionStateActive   MTRActionsActionState = 1
+	MTRActionsActionStatePaused   MTRActionsActionState = 2
+	MTRActionsActionStateDisabled MTRActionsActionState = 3
+)
+
+// String returns the MTRActionsActionState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRActionsActionState) String() string {
+	switch e {
+	case MTRActionsActionStateInactive:
+		return "MTRActionsActionStateInactive"
+	case MTRActionsActionStateActive:
+		return "MTRActionsActionStateActive"
+	case MTRActionsActionStatePaused:
+		return "MTRActionsActionStatePaused"
+	case MTRActionsActionStateDisabled:
+		return "MTRActionsActionStateDisabled"
+	default:
+		return fmt.Sprintf("MTRActionsActionState(%d)", int64(e))
+	}
+}
+
+type MTRActionsActionType int64
+
+const (
+	MTRActionsActionTypeOther        MTRActionsActionType = 0
+	MTRActionsActionTypeScene        MTRActionsActionType = 1
+	MTRActionsActionTypeSequence     MTRActionsActionType = 2
+	MTRActionsActionTypeAutomation   MTRActionsActionType = 3
+	MTRActionsActionTypeException    MTRActionsActionType = 4
+	MTRActionsActionTypeNotification MTRActionsActionType = 5
+	MTRActionsActionTypeAlarm        MTRActionsActionType = 6
+)
+
+// String returns the MTRActionsActionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRActionsActionType) String() string {
+	switch e {
+	case MTRActionsActionTypeOther:
+		return "MTRActionsActionTypeOther"
+	case MTRActionsActionTypeScene:
+		return "MTRActionsActionTypeScene"
+	case MTRActionsActionTypeSequence:
+		return "MTRActionsActionTypeSequence"
+	case MTRActionsActionTypeAutomation:
+		return "MTRActionsActionTypeAutomation"
+	case MTRActionsActionTypeException:
+		return "MTRActionsActionTypeException"
+	case MTRActionsActionTypeNotification:
+		return "MTRActionsActionTypeNotification"
+	case MTRActionsActionTypeAlarm:
+		return "MTRActionsActionTypeAlarm"
+	default:
+		return fmt.Sprintf("MTRActionsActionType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRActionsCommandBits int64
+
+const (
+	MTRActionsCommandBitsInstantAction               MTRActionsCommandBits = 1
+	MTRActionsCommandBitsInstantActionWithTransition MTRActionsCommandBits = 2
+	MTRActionsCommandBitsStartAction                 MTRActionsCommandBits = 4
+	MTRActionsCommandBitsStartActionWithDuration     MTRActionsCommandBits = 8
+	MTRActionsCommandBitsStopAction                  MTRActionsCommandBits = 16
+	MTRActionsCommandBitsPauseAction                 MTRActionsCommandBits = 32
+	MTRActionsCommandBitsPauseActionWithDuration     MTRActionsCommandBits = 64
+	MTRActionsCommandBitsResumeAction                MTRActionsCommandBits = 128
+	MTRActionsCommandBitsEnableAction                MTRActionsCommandBits = 256
+	MTRActionsCommandBitsEnableActionWithDuration    MTRActionsCommandBits = 512
+	MTRActionsCommandBitsDisableAction               MTRActionsCommandBits = 1024
+	MTRActionsCommandBitsDisableActionWithDuration   MTRActionsCommandBits = 2048
+)
+
+// String returns the MTRActionsCommandBits constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRActionsCommandBits) String() string {
+	var parts []string
+	if e&MTRActionsCommandBitsInstantAction != 0 {
+		parts = append(parts, "MTRActionsCommandBitsInstantAction")
+	}
+	if e&MTRActionsCommandBitsInstantActionWithTransition != 0 {
+		parts = append(parts, "MTRActionsCommandBitsInstantActionWithTransition")
+	}
+	if e&MTRActionsCommandBitsStartAction != 0 {
+		parts = append(parts, "MTRActionsCommandBitsStartAction")
+	}
+	if e&MTRActionsCommandBitsStartActionWithDuration != 0 {
+		parts = append(parts, "MTRActionsCommandBitsStartActionWithDuration")
+	}
+	if e&MTRActionsCommandBitsStopAction != 0 {
+		parts = append(parts, "MTRActionsCommandBitsStopAction")
+	}
+	if e&MTRActionsCommandBitsPauseAction != 0 {
+		parts = append(parts, "MTRActionsCommandBitsPauseAction")
+	}
+	if e&MTRActionsCommandBitsPauseActionWithDuration != 0 {
+		parts = append(parts, "MTRActionsCommandBitsPauseActionWithDuration")
+	}
+	if e&MTRActionsCommandBitsResumeAction != 0 {
+		parts = append(parts, "MTRActionsCommandBitsResumeAction")
+	}
+	if e&MTRActionsCommandBitsEnableAction != 0 {
+		parts = append(parts, "MTRActionsCommandBitsEnableAction")
+	}
+	if e&MTRActionsCommandBitsEnableActionWithDuration != 0 {
+		parts = append(parts, "MTRActionsCommandBitsEnableActionWithDuration")
+	}
+	if e&MTRActionsCommandBitsDisableAction != 0 {
+		parts = append(parts, "MTRActionsCommandBitsDisableAction")
+	}
+	if e&MTRActionsCommandBitsDisableActionWithDuration != 0 {
+		parts = append(parts, "MTRActionsCommandBitsDisableActionWithDuration")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRActionsEndpointListType int64
+
+const (
+	MTRActionsEndpointListTypeOther MTRActionsEndpointListType = 0
+	MTRActionsEndpointListTypeRoom  MTRActionsEndpointListType = 1
+	MTRActionsEndpointListTypeZone  MTRActionsEndpointListType = 2
+)
+
+// String returns the MTRActionsEndpointListType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRActionsEndpointListType) String() string {
+	switch e {
+	case MTRActionsEndpointListTypeOther:
+		return "MTRActionsEndpointListTypeOther"
+	case MTRActionsEndpointListTypeRoom:
+		return "MTRActionsEndpointListTypeRoom"
+	case MTRActionsEndpointListTypeZone:
+		return "MTRActionsEndpointListTypeZone"
+	default:
+		return fmt.Sprintf("MTRActionsEndpointListType(%d)", int64(e))
+	}
+}
+
+type MTRActivatedCarbonFilterMonitoringChangeIndication int64
+
+const (
+	MTRActivatedCarbonFilterMonitoringChangeIndicationOK       MTRActivatedCarbonFilterMonitoringChangeIndication = 0
+	MTRActivatedCarbonFilterMonitoringChangeIndicationWarning  MTRActivatedCarbonFilterMonitoringChangeIndication = 1
+	MTRActivatedCarbonFilterMonitoringChangeIndicationCritical MTRActivatedCarbonFilterMonitoringChangeIndication = 2
+)
+
+// String returns the MTRActivatedCarbonFilterMonitoringChangeIndication constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRActivatedCarbonFilterMonitoringChangeIndication) String() string {
+	switch e {
+	case MTRActivatedCarbonFilterMonitoringChangeIndicationOK:
+		return "MTRActivatedCarbonFilterMonitoringChangeIndicationOK"
+	case MTRActivatedCarbonFilterMonitoringChangeIndicationWarning:
+		return "MTRActivatedCarbonFilterMonitoringChangeIndicationWarning"
+	case MTRActivatedCarbonFilterMonitoringChangeIndicationCritical:
+		return "MTRActivatedCarbonFilterMonitoringChangeIndicationCritical"
+	default:
+		return fmt.Sprintf("MTRActivatedCarbonFilterMonitoringChangeIndication(%d)", int64(e))
+	}
+}
+
+type MTRActivatedCarbonFilterMonitoringDegradationDirection int64
+
+const (
+	MTRActivatedCarbonFilterMonitoringDegradationDirectionUp   MTRActivatedCarbonFilterMonitoringDegradationDirection = 0
+	MTRActivatedCarbonFilterMonitoringDegradationDirectionDown MTRActivatedCarbonFilterMonitoringDegradationDirection = 1
+)
+
+// String returns the MTRActivatedCarbonFilterMonitoringDegradationDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRActivatedCarbonFilterMonitoringDegradationDirection) String() string {
+	switch e {
+	case MTRActivatedCarbonFilterMonitoringDegradationDirectionUp:
+		return "MTRActivatedCarbonFilterMonitoringDegradationDirectionUp"
+	case MTRActivatedCarbonFilterMonitoringDegradationDirectionDown:
+		return "MTRActivatedCarbonFilterMonitoringDegradationDirectionDown"
+	default:
+		return fmt.Sprintf("MTRActivatedCarbonFilterMonitoringDegradationDirection(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRActivatedCarbonFilterMonitoringFeature int64
+
+const (
+	MTRActivatedCarbonFilterMonitoringFeatureCondition              MTRActivatedCarbonFilterMonitoringFeature = 1
+	MTRActivatedCarbonFilterMonitoringFeatureWarning                MTRActivatedCarbonFilterMonitoringFeature = 2
+	MTRActivatedCarbonFilterMonitoringFeatureReplacementProductList MTRActivatedCarbonFilterMonitoringFeature = 4
+)
+
+// String returns the MTRActivatedCarbonFilterMonitoringFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRActivatedCarbonFilterMonitoringFeature) String() string {
+	var parts []string
+	if e&MTRActivatedCarbonFilterMonitoringFeatureCondition != 0 {
+		parts = append(parts, "MTRActivatedCarbonFilterMonitoringFeatureCondition")
+	}
+	if e&MTRActivatedCarbonFilterMonitoringFeatureWarning != 0 {
+		parts = append(parts, "MTRActivatedCarbonFilterMonitoringFeatureWarning")
+	}
+	if e&MTRActivatedCarbonFilterMonitoringFeatureReplacementProductList != 0 {
+		parts = append(parts, "MTRActivatedCarbonFilterMonitoringFeatureReplacementProductList")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRActivatedCarbonFilterMonitoringProductIdentifierType int64
+
+const (
+	MTRActivatedCarbonFilterMonitoringProductIdentifierTypeUPC    MTRActivatedCarbonFilterMonitoringProductIdentifierType = 0
+	MTRActivatedCarbonFilterMonitoringProductIdentifierTypeGTIN8  MTRActivatedCarbonFilterMonitoringProductIdentifierType = 1
+	MTRActivatedCarbonFilterMonitoringProductIdentifierTypeEAN    MTRActivatedCarbonFilterMonitoringProductIdentifierType = 2
+	MTRActivatedCarbonFilterMonitoringProductIdentifierTypeGTIN14 MTRActivatedCarbonFilterMonitoringProductIdentifierType = 3
+	MTRActivatedCarbonFilterMonitoringProductIdentifierTypeOEM    MTRActivatedCarbonFilterMonitoringProductIdentifierType = 4
+)
+
+// String returns the MTRActivatedCarbonFilterMonitoringProductIdentifierType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRActivatedCarbonFilterMonitoringProductIdentifierType) String() string {
+	switch e {
+	case MTRActivatedCarbonFilterMonitoringProductIdentifierTypeUPC:
+		return "MTRActivatedCarbonFilterMonitoringProductIdentifierTypeUPC"
+	case MTRActivatedCarbonFilterMonitoringProductIdentifierTypeGTIN8:
+		return "MTRActivatedCarbonFilterMonitoringProductIdentifierTypeGTIN8"
+	case MTRActivatedCarbonFilterMonitoringProductIdentifierTypeEAN:
+		return "MTRActivatedCarbonFilterMonitoringProductIdentifierTypeEAN"
+	case MTRActivatedCarbonFilterMonitoringProductIdentifierTypeGTIN14:
+		return "MTRActivatedCarbonFilterMonitoringProductIdentifierTypeGTIN14"
+	case MTRActivatedCarbonFilterMonitoringProductIdentifierTypeOEM:
+		return "MTRActivatedCarbonFilterMonitoringProductIdentifierTypeOEM"
+	default:
+		return fmt.Sprintf("MTRActivatedCarbonFilterMonitoringProductIdentifierType(%d)", int64(e))
+	}
+}
+
+type MTRAdministratorCommissioningCommissioningWindowStatus int64
+
+const (
+	MTRAdministratorCommissioningCommissioningWindowStatusWindowNotOpen      MTRAdministratorCommissioningCommissioningWindowStatus = 0
+	MTRAdministratorCommissioningCommissioningWindowStatusEnhancedWindowOpen MTRAdministratorCommissioningCommissioningWindowStatus = 1
+	MTRAdministratorCommissioningCommissioningWindowStatusBasicWindowOpen    MTRAdministratorCommissioningCommissioningWindowStatus = 2
+)
+
+// String returns the MTRAdministratorCommissioningCommissioningWindowStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRAdministratorCommissioningCommissioningWindowStatus) String() string {
+	switch e {
+	case MTRAdministratorCommissioningCommissioningWindowStatusWindowNotOpen:
+		return "MTRAdministratorCommissioningCommissioningWindowStatusWindowNotOpen"
+	case MTRAdministratorCommissioningCommissioningWindowStatusEnhancedWindowOpen:
+		return "MTRAdministratorCommissioningCommissioningWindowStatusEnhancedWindowOpen"
+	case MTRAdministratorCommissioningCommissioningWindowStatusBasicWindowOpen:
+		return "MTRAdministratorCommissioningCommissioningWindowStatusBasicWindowOpen"
+	default:
+		return fmt.Sprintf("MTRAdministratorCommissioningCommissioningWindowStatus(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRAdministratorCommissioningFeature int64
+
+const (
+	MTRAdministratorCommissioningFeatureBasic MTRAdministratorCommissioningFeature = 1
+)
+
+// String returns the MTRAdministratorCommissioningFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRAdministratorCommissioningFeature) String() string {
+	var parts []string
+	if e&MTRAdministratorCommissioningFeatureBasic != 0 {
+		parts = append(parts, "MTRAdministratorCommissioningFeatureBasic")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRAdministratorCommissioningStatusCode int64
+
+const (
+	MTRAdministratorCommissioningStatusCodeBusy               MTRAdministratorCommissioningStatusCode = 2
+	MTRAdministratorCommissioningStatusCodePAKEParameterError MTRAdministratorCommissioningStatusCode = 3
+	MTRAdministratorCommissioningStatusCodeWindowNotOpen      MTRAdministratorCommissioningStatusCode = 4
+)
+
+// String returns the MTRAdministratorCommissioningStatusCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRAdministratorCommissioningStatusCode) String() string {
+	switch e {
+	case MTRAdministratorCommissioningStatusCodeBusy:
+		return "MTRAdministratorCommissioningStatusCodeBusy"
+	case MTRAdministratorCommissioningStatusCodePAKEParameterError:
+		return "MTRAdministratorCommissioningStatusCodePAKEParameterError"
+	case MTRAdministratorCommissioningStatusCodeWindowNotOpen:
+		return "MTRAdministratorCommissioningStatusCodeWindowNotOpen"
+	default:
+		return fmt.Sprintf("MTRAdministratorCommissioningStatusCode(%d)", int64(e))
+	}
+}
+
+type MTRAirQuality int64
+
+const (
+	MTRAirQualityUnknown       MTRAirQuality = 0
+	MTRAirQualityGood          MTRAirQuality = 1
+	MTRAirQualityFair          MTRAirQuality = 2
+	MTRAirQualityModerate      MTRAirQuality = 3
+	MTRAirQualityPoor          MTRAirQuality = 4
+	MTRAirQualityVeryPoor      MTRAirQuality = 5
+	MTRAirQualityExtremelyPoor MTRAirQuality = 6
+)
+
+// String returns the MTRAirQuality constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRAirQuality) String() string {
+	switch e {
+	case MTRAirQualityUnknown:
+		return "MTRAirQualityUnknown"
+	case MTRAirQualityGood:
+		return "MTRAirQualityGood"
+	case MTRAirQualityFair:
+		return "MTRAirQualityFair"
+	case MTRAirQualityModerate:
+		return "MTRAirQualityModerate"
+	case MTRAirQualityPoor:
+		return "MTRAirQualityPoor"
+	case MTRAirQualityVeryPoor:
+		return "MTRAirQualityVeryPoor"
+	case MTRAirQualityExtremelyPoor:
+		return "MTRAirQualityExtremelyPoor"
+	default:
+		return fmt.Sprintf("MTRAirQuality(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRAirQualityFeature int64
+
+const (
+	MTRAirQualityFeatureFair          MTRAirQualityFeature = 1
+	MTRAirQualityFeatureModerate      MTRAirQualityFeature = 2
+	MTRAirQualityFeatureVeryPoor      MTRAirQualityFeature = 4
+	MTRAirQualityFeatureExtremelyPoor MTRAirQualityFeature = 8
+)
+
+// String returns the MTRAirQualityFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRAirQualityFeature) String() string {
+	var parts []string
+	if e&MTRAirQualityFeatureFair != 0 {
+		parts = append(parts, "MTRAirQualityFeatureFair")
+	}
+	if e&MTRAirQualityFeatureModerate != 0 {
+		parts = append(parts, "MTRAirQualityFeatureModerate")
+	}
+	if e&MTRAirQualityFeatureVeryPoor != 0 {
+		parts = append(parts, "MTRAirQualityFeatureVeryPoor")
+	}
+	if e&MTRAirQualityFeatureExtremelyPoor != 0 {
+		parts = append(parts, "MTRAirQualityFeatureExtremelyPoor")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRApplicationBasicApplicationStatus int64
+
+const (
+	MTRApplicationBasicApplicationStatusStopped               MTRApplicationBasicApplicationStatus = 0
+	MTRApplicationBasicApplicationStatusActiveVisibleFocus    MTRApplicationBasicApplicationStatus = 1
+	MTRApplicationBasicApplicationStatusActiveHidden          MTRApplicationBasicApplicationStatus = 2
+	MTRApplicationBasicApplicationStatusActiveVisibleNotFocus MTRApplicationBasicApplicationStatus = 3
+)
+
+// String returns the MTRApplicationBasicApplicationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRApplicationBasicApplicationStatus) String() string {
+	switch e {
+	case MTRApplicationBasicApplicationStatusStopped:
+		return "MTRApplicationBasicApplicationStatusStopped"
+	case MTRApplicationBasicApplicationStatusActiveVisibleFocus:
+		return "MTRApplicationBasicApplicationStatusActiveVisibleFocus"
+	case MTRApplicationBasicApplicationStatusActiveHidden:
+		return "MTRApplicationBasicApplicationStatusActiveHidden"
+	case MTRApplicationBasicApplicationStatusActiveVisibleNotFocus:
+		return "MTRApplicationBasicApplicationStatusActiveVisibleNotFocus"
+	default:
+		return fmt.Sprintf("MTRApplicationBasicApplicationStatus(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRApplicationLauncherFeature int64
+
+const (
+	MTRApplicationLauncherFeatureApplicationPlatform MTRApplicationLauncherFeature = 1
+)
+
+// String returns the MTRApplicationLauncherFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRApplicationLauncherFeature) String() string {
+	var parts []string
+	if e&MTRApplicationLauncherFeatureApplicationPlatform != 0 {
+		parts = append(parts, "MTRApplicationLauncherFeatureApplicationPlatform")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRApplicationLauncherStatus int64
+
+const (
+	MTRApplicationLauncherStatusSuccess             MTRApplicationLauncherStatus = 0
+	MTRApplicationLauncherStatusAppNotAvailable     MTRApplicationLauncherStatus = 1
+	MTRApplicationLauncherStatusSystemBusy          MTRApplicationLauncherStatus = 2
+	MTRApplicationLauncherStatusPendingUserApproval MTRApplicationLauncherStatus = 3
+	MTRApplicationLauncherStatusDownloading         MTRApplicationLauncherStatus = 4
+	MTRApplicationLauncherStatusInstalling          MTRApplicationLauncherStatus = 5
+)
+
+// String returns the MTRApplicationLauncherStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRApplicationLauncherStatus) String() string {
+	switch e {
+	case MTRApplicationLauncherStatusSuccess:
+		return "MTRApplicationLauncherStatusSuccess"
+	case MTRApplicationLauncherStatusAppNotAvailable:
+		return "MTRApplicationLauncherStatusAppNotAvailable"
+	case MTRApplicationLauncherStatusSystemBusy:
+		return "MTRApplicationLauncherStatusSystemBusy"
+	case MTRApplicationLauncherStatusPendingUserApproval:
+		return "MTRApplicationLauncherStatusPendingUserApproval"
+	case MTRApplicationLauncherStatusDownloading:
+		return "MTRApplicationLauncherStatusDownloading"
+	case MTRApplicationLauncherStatusInstalling:
+		return "MTRApplicationLauncherStatusInstalling"
+	default:
+		return fmt.Sprintf("MTRApplicationLauncherStatus(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRAudioOutputFeature int64
+
+const (
+	MTRAudioOutputFeatureNameUpdates MTRAudioOutputFeature = 1
+)
+
+// String returns the MTRAudioOutputFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRAudioOutputFeature) String() string {
+	var parts []string
+	if e&MTRAudioOutputFeatureNameUpdates != 0 {
+		parts = append(parts, "MTRAudioOutputFeatureNameUpdates")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRAudioOutputOutputType int64
+
+const (
+	MTRAudioOutputOutputTypeHDMI      MTRAudioOutputOutputType = 0
+	MTRAudioOutputOutputTypeHdmi      MTRAudioOutputOutputType = 0
+	MTRAudioOutputOutputTypeBT        MTRAudioOutputOutputType = 1
+	MTRAudioOutputOutputTypeBt        MTRAudioOutputOutputType = 1
+	MTRAudioOutputOutputTypeOptical   MTRAudioOutputOutputType = 2
+	MTRAudioOutputOutputTypeHeadphone MTRAudioOutputOutputType = 3
+	MTRAudioOutputOutputTypeInternal  MTRAudioOutputOutputType = 4
+	MTRAudioOutputOutputTypeOther     MTRAudioOutputOutputType = 5
+)
+
+// String returns the MTRAudioOutputOutputType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRAudioOutputOutputType) String() string {
+	switch e {
+	case MTRAudioOutputOutputTypeHDMI:
+		return "MTRAudioOutputOutputTypeHDMI"
+	case MTRAudioOutputOutputTypeBT:
+		return "MTRAudioOutputOutputTypeBT"
+	case MTRAudioOutputOutputTypeOptical:
+		return "MTRAudioOutputOutputTypeOptical"
+	case MTRAudioOutputOutputTypeHeadphone:
+		return "MTRAudioOutputOutputTypeHeadphone"
+	case MTRAudioOutputOutputTypeInternal:
+		return "MTRAudioOutputOutputTypeInternal"
+	case MTRAudioOutputOutputTypeOther:
+		return "MTRAudioOutputOutputTypeOther"
+	default:
+		return fmt.Sprintf("MTRAudioOutputOutputType(%d)", int64(e))
+	}
+}
+
+type MTRBasicInformationColor int64
+
+const (
+	MTRBasicInformationColorBlack   MTRBasicInformationColor = 0
+	MTRBasicInformationColorNavy    MTRBasicInformationColor = 1
+	MTRBasicInformationColorGreen   MTRBasicInformationColor = 2
+	MTRBasicInformationColorTeal    MTRBasicInformationColor = 3
+	MTRBasicInformationColorMaroon  MTRBasicInformationColor = 4
+	MTRBasicInformationColorPurple  MTRBasicInformationColor = 5
+	MTRBasicInformationColorOlive   MTRBasicInformationColor = 6
+	MTRBasicInformationColorGray    MTRBasicInformationColor = 7
+	MTRBasicInformationColorBlue    MTRBasicInformationColor = 8
+	MTRBasicInformationColorLime    MTRBasicInformationColor = 9
+	MTRBasicInformationColorAqua    MTRBasicInformationColor = 10
+	MTRBasicInformationColorRed     MTRBasicInformationColor = 11
+	MTRBasicInformationColorFuchsia MTRBasicInformationColor = 12
+	MTRBasicInformationColorYellow  MTRBasicInformationColor = 13
+	MTRBasicInformationColorWhite   MTRBasicInformationColor = 14
+	MTRBasicInformationColorNickel  MTRBasicInformationColor = 15
+	MTRBasicInformationColorChrome  MTRBasicInformationColor = 16
+	MTRBasicInformationColorBrass   MTRBasicInformationColor = 17
+	MTRBasicInformationColorCopper  MTRBasicInformationColor = 18
+	MTRBasicInformationColorSilver  MTRBasicInformationColor = 19
+	MTRBasicInformationColorGold    MTRBasicInformationColor = 20
+)
+
+// String returns the MTRBasicInformationColor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRBasicInformationColor) String() string {
+	switch e {
+	case MTRBasicInformationColorBlack:
+		return "MTRBasicInformationColorBlack"
+	case MTRBasicInformationColorNavy:
+		return "MTRBasicInformationColorNavy"
+	case MTRBasicInformationColorGreen:
+		return "MTRBasicInformationColorGreen"
+	case MTRBasicInformationColorTeal:
+		return "MTRBasicInformationColorTeal"
+	case MTRBasicInformationColorMaroon:
+		return "MTRBasicInformationColorMaroon"
+	case MTRBasicInformationColorPurple:
+		return "MTRBasicInformationColorPurple"
+	case MTRBasicInformationColorOlive:
+		return "MTRBasicInformationColorOlive"
+	case MTRBasicInformationColorGray:
+		return "MTRBasicInformationColorGray"
+	case MTRBasicInformationColorBlue:
+		return "MTRBasicInformationColorBlue"
+	case MTRBasicInformationColorLime:
+		return "MTRBasicInformationColorLime"
+	case MTRBasicInformationColorAqua:
+		return "MTRBasicInformationColorAqua"
+	case MTRBasicInformationColorRed:
+		return "MTRBasicInformationColorRed"
+	case MTRBasicInformationColorFuchsia:
+		return "MTRBasicInformationColorFuchsia"
+	case MTRBasicInformationColorYellow:
+		return "MTRBasicInformationColorYellow"
+	case MTRBasicInformationColorWhite:
+		return "MTRBasicInformationColorWhite"
+	case MTRBasicInformationColorNickel:
+		return "MTRBasicInformationColorNickel"
+	case MTRBasicInformationColorChrome:
+		return "MTRBasicInformationColorChrome"
+	case MTRBasicInformationColorBrass:
+		return "MTRBasicInformationColorBrass"
+	case MTRBasicInformationColorCopper:
+		return "MTRBasicInformationColorCopper"
+	case MTRBasicInformationColorSilver:
+		return "MTRBasicInformationColorSilver"
+	case MTRBasicInformationColorGold:
+		return "MTRBasicInformationColorGold"
+	default:
+		return fmt.Sprintf("MTRBasicInformationColor(%d)", int64(e))
+	}
+}
+
+type MTRBasicInformationProductFinish int64
+
+const (
+	MTRBasicInformationProductFinishOther    MTRBasicInformationProductFinish = 0
+	MTRBasicInformationProductFinishMatte    MTRBasicInformationProductFinish = 1
+	MTRBasicInformationProductFinishSatin    MTRBasicInformationProductFinish = 2
+	MTRBasicInformationProductFinishPolished MTRBasicInformationProductFinish = 3
+	MTRBasicInformationProductFinishRugged   MTRBasicInformationProductFinish = 4
+	MTRBasicInformationProductFinishFabric   MTRBasicInformationProductFinish = 5
+)
+
+// String returns the MTRBasicInformationProductFinish constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRBasicInformationProductFinish) String() string {
+	switch e {
+	case MTRBasicInformationProductFinishOther:
+		return "MTRBasicInformationProductFinishOther"
+	case MTRBasicInformationProductFinishMatte:
+		return "MTRBasicInformationProductFinishMatte"
+	case MTRBasicInformationProductFinishSatin:
+		return "MTRBasicInformationProductFinishSatin"
+	case MTRBasicInformationProductFinishPolished:
+		return "MTRBasicInformationProductFinishPolished"
+	case MTRBasicInformationProductFinishRugged:
+		return "MTRBasicInformationProductFinishRugged"
+	case MTRBasicInformationProductFinishFabric:
+		return "MTRBasicInformationProductFinishFabric"
+	default:
+		return fmt.Sprintf("MTRBasicInformationProductFinish(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRBooleanStateConfigurationAlarmModeBitmap int64
+
+const (
+	MTRBooleanStateConfigurationAlarmModeBitmapVisual  MTRBooleanStateConfigurationAlarmModeBitmap = 1
+	MTRBooleanStateConfigurationAlarmModeBitmapAudible MTRBooleanStateConfigurationAlarmModeBitmap = 2
+)
+
+// String returns the MTRBooleanStateConfigurationAlarmModeBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRBooleanStateConfigurationAlarmModeBitmap) String() string {
+	var parts []string
+	if e&MTRBooleanStateConfigurationAlarmModeBitmapVisual != 0 {
+		parts = append(parts, "MTRBooleanStateConfigurationAlarmModeBitmapVisual")
+	}
+	if e&MTRBooleanStateConfigurationAlarmModeBitmapAudible != 0 {
+		parts = append(parts, "MTRBooleanStateConfigurationAlarmModeBitmapAudible")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRBooleanStateConfigurationFeature int64
+
+const (
+	MTRBooleanStateConfigurationFeatureVisual           MTRBooleanStateConfigurationFeature = 1
+	MTRBooleanStateConfigurationFeatureAudible          MTRBooleanStateConfigurationFeature = 2
+	MTRBooleanStateConfigurationFeatureAlarmSuppress    MTRBooleanStateConfigurationFeature = 4
+	MTRBooleanStateConfigurationFeatureSensitivityLevel MTRBooleanStateConfigurationFeature = 8
+)
+
+// String returns the MTRBooleanStateConfigurationFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRBooleanStateConfigurationFeature) String() string {
+	var parts []string
+	if e&MTRBooleanStateConfigurationFeatureVisual != 0 {
+		parts = append(parts, "MTRBooleanStateConfigurationFeatureVisual")
+	}
+	if e&MTRBooleanStateConfigurationFeatureAudible != 0 {
+		parts = append(parts, "MTRBooleanStateConfigurationFeatureAudible")
+	}
+	if e&MTRBooleanStateConfigurationFeatureAlarmSuppress != 0 {
+		parts = append(parts, "MTRBooleanStateConfigurationFeatureAlarmSuppress")
+	}
+	if e&MTRBooleanStateConfigurationFeatureSensitivityLevel != 0 {
+		parts = append(parts, "MTRBooleanStateConfigurationFeatureSensitivityLevel")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRBooleanStateConfigurationSensorFaultBitmap int64
+
+const (
+	MTRBooleanStateConfigurationSensorFaultBitmapGeneralFault MTRBooleanStateConfigurationSensorFaultBitmap = 1
+)
+
+// String returns the MTRBooleanStateConfigurationSensorFaultBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRBooleanStateConfigurationSensorFaultBitmap) String() string {
+	var parts []string
+	if e&MTRBooleanStateConfigurationSensorFaultBitmapGeneralFault != 0 {
+		parts = append(parts, "MTRBooleanStateConfigurationSensorFaultBitmapGeneralFault")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRBridgedDeviceBasicInformationColor int64
+
+const (
+	MTRBridgedDeviceBasicInformationColorBlack   MTRBridgedDeviceBasicInformationColor = 0
+	MTRBridgedDeviceBasicInformationColorNavy    MTRBridgedDeviceBasicInformationColor = 1
+	MTRBridgedDeviceBasicInformationColorGreen   MTRBridgedDeviceBasicInformationColor = 2
+	MTRBridgedDeviceBasicInformationColorTeal    MTRBridgedDeviceBasicInformationColor = 3
+	MTRBridgedDeviceBasicInformationColorMaroon  MTRBridgedDeviceBasicInformationColor = 4
+	MTRBridgedDeviceBasicInformationColorPurple  MTRBridgedDeviceBasicInformationColor = 5
+	MTRBridgedDeviceBasicInformationColorOlive   MTRBridgedDeviceBasicInformationColor = 6
+	MTRBridgedDeviceBasicInformationColorGray    MTRBridgedDeviceBasicInformationColor = 7
+	MTRBridgedDeviceBasicInformationColorBlue    MTRBridgedDeviceBasicInformationColor = 8
+	MTRBridgedDeviceBasicInformationColorLime    MTRBridgedDeviceBasicInformationColor = 9
+	MTRBridgedDeviceBasicInformationColorAqua    MTRBridgedDeviceBasicInformationColor = 10
+	MTRBridgedDeviceBasicInformationColorRed     MTRBridgedDeviceBasicInformationColor = 11
+	MTRBridgedDeviceBasicInformationColorFuchsia MTRBridgedDeviceBasicInformationColor = 12
+	MTRBridgedDeviceBasicInformationColorYellow  MTRBridgedDeviceBasicInformationColor = 13
+	MTRBridgedDeviceBasicInformationColorWhite   MTRBridgedDeviceBasicInformationColor = 14
+	MTRBridgedDeviceBasicInformationColorNickel  MTRBridgedDeviceBasicInformationColor = 15
+	MTRBridgedDeviceBasicInformationColorChrome  MTRBridgedDeviceBasicInformationColor = 16
+	MTRBridgedDeviceBasicInformationColorBrass   MTRBridgedDeviceBasicInformationColor = 17
+	MTRBridgedDeviceBasicInformationColorCopper  MTRBridgedDeviceBasicInformationColor = 18
+	MTRBridgedDeviceBasicInformationColorSilver  MTRBridgedDeviceBasicInformationColor = 19
+	MTRBridgedDeviceBasicInformationColorGold    MTRBridgedDeviceBasicInformationColor = 20
+)
+
+// String returns the MTRBridgedDeviceBasicInformationColor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRBridgedDeviceBasicInformationColor) String() string {
+	switch e {
+	case MTRBridgedDeviceBasicInformationColorBlack:
+		return "MTRBridgedDeviceBasicInformationColorBlack"
+	case MTRBridgedDeviceBasicInformationColorNavy:
+		return "MTRBridgedDeviceBasicInformationColorNavy"
+	case MTRBridgedDeviceBasicInformationColorGreen:
+		return "MTRBridgedDeviceBasicInformationColorGreen"
+	case MTRBridgedDeviceBasicInformationColorTeal:
+		return "MTRBridgedDeviceBasicInformationColorTeal"
+	case MTRBridgedDeviceBasicInformationColorMaroon:
+		return "MTRBridgedDeviceBasicInformationColorMaroon"
+	case MTRBridgedDeviceBasicInformationColorPurple:
+		return "MTRBridgedDeviceBasicInformationColorPurple"
+	case MTRBridgedDeviceBasicInformationColorOlive:
+		return "MTRBridgedDeviceBasicInformationColorOlive"
+	case MTRBridgedDeviceBasicInformationColorGray:
+		return "MTRBridgedDeviceBasicInformationColorGray"
+	case MTRBridgedDeviceBasicInformationColorBlue:
+		return "MTRBridgedDeviceBasicInformationColorBlue"
+	case MTRBridgedDeviceBasicInformationColorLime:
+		return "MTRBridgedDeviceBasicInformationColorLime"
+	case MTRBridgedDeviceBasicInformationColorAqua:
+		return "MTRBridgedDeviceBasicInformationColorAqua"
+	case MTRBridgedDeviceBasicInformationColorRed:
+		return "MTRBridgedDeviceBasicInformationColorRed"
+	case MTRBridgedDeviceBasicInformationColorFuchsia:
+		return "MTRBridgedDeviceBasicInformationColorFuchsia"
+	case MTRBridgedDeviceBasicInformationColorYellow:
+		return "MTRBridgedDeviceBasicInformationColorYellow"
+	case MTRBridgedDeviceBasicInformationColorWhite:
+		return "MTRBridgedDeviceBasicInformationColorWhite"
+	case MTRBridgedDeviceBasicInformationColorNickel:
+		return "MTRBridgedDeviceBasicInformationColorNickel"
+	case MTRBridgedDeviceBasicInformationColorChrome:
+		return "MTRBridgedDeviceBasicInformationColorChrome"
+	case MTRBridgedDeviceBasicInformationColorBrass:
+		return "MTRBridgedDeviceBasicInformationColorBrass"
+	case MTRBridgedDeviceBasicInformationColorCopper:
+		return "MTRBridgedDeviceBasicInformationColorCopper"
+	case MTRBridgedDeviceBasicInformationColorSilver:
+		return "MTRBridgedDeviceBasicInformationColorSilver"
+	case MTRBridgedDeviceBasicInformationColorGold:
+		return "MTRBridgedDeviceBasicInformationColorGold"
+	default:
+		return fmt.Sprintf("MTRBridgedDeviceBasicInformationColor(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRBridgedDeviceBasicInformationFeature int64
+
+const (
+	MTRBridgedDeviceBasicInformationFeatureBridgedICDSupport MTRBridgedDeviceBasicInformationFeature = 1048576
+)
+
+// String returns the MTRBridgedDeviceBasicInformationFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRBridgedDeviceBasicInformationFeature) String() string {
+	var parts []string
+	if e&MTRBridgedDeviceBasicInformationFeatureBridgedICDSupport != 0 {
+		parts = append(parts, "MTRBridgedDeviceBasicInformationFeatureBridgedICDSupport")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRBridgedDeviceBasicInformationProductFinish int64
+
+const (
+	MTRBridgedDeviceBasicInformationProductFinishOther    MTRBridgedDeviceBasicInformationProductFinish = 0
+	MTRBridgedDeviceBasicInformationProductFinishMatte    MTRBridgedDeviceBasicInformationProductFinish = 1
+	MTRBridgedDeviceBasicInformationProductFinishSatin    MTRBridgedDeviceBasicInformationProductFinish = 2
+	MTRBridgedDeviceBasicInformationProductFinishPolished MTRBridgedDeviceBasicInformationProductFinish = 3
+	MTRBridgedDeviceBasicInformationProductFinishRugged   MTRBridgedDeviceBasicInformationProductFinish = 4
+	MTRBridgedDeviceBasicInformationProductFinishFabric   MTRBridgedDeviceBasicInformationProductFinish = 5
+)
+
+// String returns the MTRBridgedDeviceBasicInformationProductFinish constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRBridgedDeviceBasicInformationProductFinish) String() string {
+	switch e {
+	case MTRBridgedDeviceBasicInformationProductFinishOther:
+		return "MTRBridgedDeviceBasicInformationProductFinishOther"
+	case MTRBridgedDeviceBasicInformationProductFinishMatte:
+		return "MTRBridgedDeviceBasicInformationProductFinishMatte"
+	case MTRBridgedDeviceBasicInformationProductFinishSatin:
+		return "MTRBridgedDeviceBasicInformationProductFinishSatin"
+	case MTRBridgedDeviceBasicInformationProductFinishPolished:
+		return "MTRBridgedDeviceBasicInformationProductFinishPolished"
+	case MTRBridgedDeviceBasicInformationProductFinishRugged:
+		return "MTRBridgedDeviceBasicInformationProductFinishRugged"
+	case MTRBridgedDeviceBasicInformationProductFinishFabric:
+		return "MTRBridgedDeviceBasicInformationProductFinishFabric"
+	default:
+		return fmt.Sprintf("MTRBridgedDeviceBasicInformationProductFinish(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRCarbonDioxideConcentrationMeasurementFeature int64
+
+const (
+	MTRCarbonDioxideConcentrationMeasurementFeatureNumericMeasurement MTRCarbonDioxideConcentrationMeasurementFeature = 1
+	MTRCarbonDioxideConcentrationMeasurementFeatureLevelIndication    MTRCarbonDioxideConcentrationMeasurementFeature = 2
+	MTRCarbonDioxideConcentrationMeasurementFeatureMediumLevel        MTRCarbonDioxideConcentrationMeasurementFeature = 4
+	MTRCarbonDioxideConcentrationMeasurementFeatureCriticalLevel      MTRCarbonDioxideConcentrationMeasurementFeature = 8
+	MTRCarbonDioxideConcentrationMeasurementFeaturePeakMeasurement    MTRCarbonDioxideConcentrationMeasurementFeature = 16
+	MTRCarbonDioxideConcentrationMeasurementFeatureAverageMeasurement MTRCarbonDioxideConcentrationMeasurementFeature = 32
+)
+
+// String returns the MTRCarbonDioxideConcentrationMeasurementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRCarbonDioxideConcentrationMeasurementFeature) String() string {
+	var parts []string
+	if e&MTRCarbonDioxideConcentrationMeasurementFeatureNumericMeasurement != 0 {
+		parts = append(parts, "MTRCarbonDioxideConcentrationMeasurementFeatureNumericMeasurement")
+	}
+	if e&MTRCarbonDioxideConcentrationMeasurementFeatureLevelIndication != 0 {
+		parts = append(parts, "MTRCarbonDioxideConcentrationMeasurementFeatureLevelIndication")
+	}
+	if e&MTRCarbonDioxideConcentrationMeasurementFeatureMediumLevel != 0 {
+		parts = append(parts, "MTRCarbonDioxideConcentrationMeasurementFeatureMediumLevel")
+	}
+	if e&MTRCarbonDioxideConcentrationMeasurementFeatureCriticalLevel != 0 {
+		parts = append(parts, "MTRCarbonDioxideConcentrationMeasurementFeatureCriticalLevel")
+	}
+	if e&MTRCarbonDioxideConcentrationMeasurementFeaturePeakMeasurement != 0 {
+		parts = append(parts, "MTRCarbonDioxideConcentrationMeasurementFeaturePeakMeasurement")
+	}
+	if e&MTRCarbonDioxideConcentrationMeasurementFeatureAverageMeasurement != 0 {
+		parts = append(parts, "MTRCarbonDioxideConcentrationMeasurementFeatureAverageMeasurement")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRCarbonDioxideConcentrationMeasurementLevelValue int64
+
+const (
+	MTRCarbonDioxideConcentrationMeasurementLevelValueUnknown  MTRCarbonDioxideConcentrationMeasurementLevelValue = 0
+	MTRCarbonDioxideConcentrationMeasurementLevelValueLow      MTRCarbonDioxideConcentrationMeasurementLevelValue = 1
+	MTRCarbonDioxideConcentrationMeasurementLevelValueMedium   MTRCarbonDioxideConcentrationMeasurementLevelValue = 2
+	MTRCarbonDioxideConcentrationMeasurementLevelValueHigh     MTRCarbonDioxideConcentrationMeasurementLevelValue = 3
+	MTRCarbonDioxideConcentrationMeasurementLevelValueCritical MTRCarbonDioxideConcentrationMeasurementLevelValue = 4
+)
+
+// String returns the MTRCarbonDioxideConcentrationMeasurementLevelValue constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRCarbonDioxideConcentrationMeasurementLevelValue) String() string {
+	switch e {
+	case MTRCarbonDioxideConcentrationMeasurementLevelValueUnknown:
+		return "MTRCarbonDioxideConcentrationMeasurementLevelValueUnknown"
+	case MTRCarbonDioxideConcentrationMeasurementLevelValueLow:
+		return "MTRCarbonDioxideConcentrationMeasurementLevelValueLow"
+	case MTRCarbonDioxideConcentrationMeasurementLevelValueMedium:
+		return "MTRCarbonDioxideConcentrationMeasurementLevelValueMedium"
+	case MTRCarbonDioxideConcentrationMeasurementLevelValueHigh:
+		return "MTRCarbonDioxideConcentrationMeasurementLevelValueHigh"
+	case MTRCarbonDioxideConcentrationMeasurementLevelValueCritical:
+		return "MTRCarbonDioxideConcentrationMeasurementLevelValueCritical"
+	default:
+		return fmt.Sprintf("MTRCarbonDioxideConcentrationMeasurementLevelValue(%d)", int64(e))
+	}
+}
+
+type MTRCarbonDioxideConcentrationMeasurementMeasurementMedium int64
+
+const (
+	MTRCarbonDioxideConcentrationMeasurementMeasurementMediumAir   MTRCarbonDioxideConcentrationMeasurementMeasurementMedium = 0
+	MTRCarbonDioxideConcentrationMeasurementMeasurementMediumWater MTRCarbonDioxideConcentrationMeasurementMeasurementMedium = 1
+	MTRCarbonDioxideConcentrationMeasurementMeasurementMediumSoil  MTRCarbonDioxideConcentrationMeasurementMeasurementMedium = 2
+)
+
+// String returns the MTRCarbonDioxideConcentrationMeasurementMeasurementMedium constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRCarbonDioxideConcentrationMeasurementMeasurementMedium) String() string {
+	switch e {
+	case MTRCarbonDioxideConcentrationMeasurementMeasurementMediumAir:
+		return "MTRCarbonDioxideConcentrationMeasurementMeasurementMediumAir"
+	case MTRCarbonDioxideConcentrationMeasurementMeasurementMediumWater:
+		return "MTRCarbonDioxideConcentrationMeasurementMeasurementMediumWater"
+	case MTRCarbonDioxideConcentrationMeasurementMeasurementMediumSoil:
+		return "MTRCarbonDioxideConcentrationMeasurementMeasurementMediumSoil"
+	default:
+		return fmt.Sprintf("MTRCarbonDioxideConcentrationMeasurementMeasurementMedium(%d)", int64(e))
+	}
+}
+
+type MTRCarbonDioxideConcentrationMeasurementMeasurementUnit int64
+
+const (
+	MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPPM  MTRCarbonDioxideConcentrationMeasurementMeasurementUnit = 0
+	MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPPB  MTRCarbonDioxideConcentrationMeasurementMeasurementUnit = 1
+	MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPPT  MTRCarbonDioxideConcentrationMeasurementMeasurementUnit = 2
+	MTRCarbonDioxideConcentrationMeasurementMeasurementUnitMGM3 MTRCarbonDioxideConcentrationMeasurementMeasurementUnit = 3
+	MTRCarbonDioxideConcentrationMeasurementMeasurementUnitUGM3 MTRCarbonDioxideConcentrationMeasurementMeasurementUnit = 4
+	MTRCarbonDioxideConcentrationMeasurementMeasurementUnitNGM3 MTRCarbonDioxideConcentrationMeasurementMeasurementUnit = 5
+	MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPM3  MTRCarbonDioxideConcentrationMeasurementMeasurementUnit = 6
+	MTRCarbonDioxideConcentrationMeasurementMeasurementUnitBQM3 MTRCarbonDioxideConcentrationMeasurementMeasurementUnit = 7
+)
+
+// String returns the MTRCarbonDioxideConcentrationMeasurementMeasurementUnit constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRCarbonDioxideConcentrationMeasurementMeasurementUnit) String() string {
+	switch e {
+	case MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPPM:
+		return "MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPPM"
+	case MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPPB:
+		return "MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPPB"
+	case MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPPT:
+		return "MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPPT"
+	case MTRCarbonDioxideConcentrationMeasurementMeasurementUnitMGM3:
+		return "MTRCarbonDioxideConcentrationMeasurementMeasurementUnitMGM3"
+	case MTRCarbonDioxideConcentrationMeasurementMeasurementUnitUGM3:
+		return "MTRCarbonDioxideConcentrationMeasurementMeasurementUnitUGM3"
+	case MTRCarbonDioxideConcentrationMeasurementMeasurementUnitNGM3:
+		return "MTRCarbonDioxideConcentrationMeasurementMeasurementUnitNGM3"
+	case MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPM3:
+		return "MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPM3"
+	case MTRCarbonDioxideConcentrationMeasurementMeasurementUnitBQM3:
+		return "MTRCarbonDioxideConcentrationMeasurementMeasurementUnitBQM3"
+	default:
+		return fmt.Sprintf("MTRCarbonDioxideConcentrationMeasurementMeasurementUnit(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRCarbonMonoxideConcentrationMeasurementFeature int64
+
+const (
+	MTRCarbonMonoxideConcentrationMeasurementFeatureNumericMeasurement MTRCarbonMonoxideConcentrationMeasurementFeature = 1
+	MTRCarbonMonoxideConcentrationMeasurementFeatureLevelIndication    MTRCarbonMonoxideConcentrationMeasurementFeature = 2
+	MTRCarbonMonoxideConcentrationMeasurementFeatureMediumLevel        MTRCarbonMonoxideConcentrationMeasurementFeature = 4
+	MTRCarbonMonoxideConcentrationMeasurementFeatureCriticalLevel      MTRCarbonMonoxideConcentrationMeasurementFeature = 8
+	MTRCarbonMonoxideConcentrationMeasurementFeaturePeakMeasurement    MTRCarbonMonoxideConcentrationMeasurementFeature = 16
+	MTRCarbonMonoxideConcentrationMeasurementFeatureAverageMeasurement MTRCarbonMonoxideConcentrationMeasurementFeature = 32
+)
+
+// String returns the MTRCarbonMonoxideConcentrationMeasurementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRCarbonMonoxideConcentrationMeasurementFeature) String() string {
+	var parts []string
+	if e&MTRCarbonMonoxideConcentrationMeasurementFeatureNumericMeasurement != 0 {
+		parts = append(parts, "MTRCarbonMonoxideConcentrationMeasurementFeatureNumericMeasurement")
+	}
+	if e&MTRCarbonMonoxideConcentrationMeasurementFeatureLevelIndication != 0 {
+		parts = append(parts, "MTRCarbonMonoxideConcentrationMeasurementFeatureLevelIndication")
+	}
+	if e&MTRCarbonMonoxideConcentrationMeasurementFeatureMediumLevel != 0 {
+		parts = append(parts, "MTRCarbonMonoxideConcentrationMeasurementFeatureMediumLevel")
+	}
+	if e&MTRCarbonMonoxideConcentrationMeasurementFeatureCriticalLevel != 0 {
+		parts = append(parts, "MTRCarbonMonoxideConcentrationMeasurementFeatureCriticalLevel")
+	}
+	if e&MTRCarbonMonoxideConcentrationMeasurementFeaturePeakMeasurement != 0 {
+		parts = append(parts, "MTRCarbonMonoxideConcentrationMeasurementFeaturePeakMeasurement")
+	}
+	if e&MTRCarbonMonoxideConcentrationMeasurementFeatureAverageMeasurement != 0 {
+		parts = append(parts, "MTRCarbonMonoxideConcentrationMeasurementFeatureAverageMeasurement")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRCarbonMonoxideConcentrationMeasurementLevelValue int64
+
+const (
+	MTRCarbonMonoxideConcentrationMeasurementLevelValueUnknown  MTRCarbonMonoxideConcentrationMeasurementLevelValue = 0
+	MTRCarbonMonoxideConcentrationMeasurementLevelValueLow      MTRCarbonMonoxideConcentrationMeasurementLevelValue = 1
+	MTRCarbonMonoxideConcentrationMeasurementLevelValueMedium   MTRCarbonMonoxideConcentrationMeasurementLevelValue = 2
+	MTRCarbonMonoxideConcentrationMeasurementLevelValueHigh     MTRCarbonMonoxideConcentrationMeasurementLevelValue = 3
+	MTRCarbonMonoxideConcentrationMeasurementLevelValueCritical MTRCarbonMonoxideConcentrationMeasurementLevelValue = 4
+)
+
+// String returns the MTRCarbonMonoxideConcentrationMeasurementLevelValue constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRCarbonMonoxideConcentrationMeasurementLevelValue) String() string {
+	switch e {
+	case MTRCarbonMonoxideConcentrationMeasurementLevelValueUnknown:
+		return "MTRCarbonMonoxideConcentrationMeasurementLevelValueUnknown"
+	case MTRCarbonMonoxideConcentrationMeasurementLevelValueLow:
+		return "MTRCarbonMonoxideConcentrationMeasurementLevelValueLow"
+	case MTRCarbonMonoxideConcentrationMeasurementLevelValueMedium:
+		return "MTRCarbonMonoxideConcentrationMeasurementLevelValueMedium"
+	case MTRCarbonMonoxideConcentrationMeasurementLevelValueHigh:
+		return "MTRCarbonMonoxideConcentrationMeasurementLevelValueHigh"
+	case MTRCarbonMonoxideConcentrationMeasurementLevelValueCritical:
+		return "MTRCarbonMonoxideConcentrationMeasurementLevelValueCritical"
+	default:
+		return fmt.Sprintf("MTRCarbonMonoxideConcentrationMeasurementLevelValue(%d)", int64(e))
+	}
+}
+
+type MTRCarbonMonoxideConcentrationMeasurementMeasurementMedium int64
+
+const (
+	MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumAir   MTRCarbonMonoxideConcentrationMeasurementMeasurementMedium = 0
+	MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumWater MTRCarbonMonoxideConcentrationMeasurementMeasurementMedium = 1
+	MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumSoil  MTRCarbonMonoxideConcentrationMeasurementMeasurementMedium = 2
+)
+
+// String returns the MTRCarbonMonoxideConcentrationMeasurementMeasurementMedium constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRCarbonMonoxideConcentrationMeasurementMeasurementMedium) String() string {
+	switch e {
+	case MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumAir:
+		return "MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumAir"
+	case MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumWater:
+		return "MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumWater"
+	case MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumSoil:
+		return "MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumSoil"
+	default:
+		return fmt.Sprintf("MTRCarbonMonoxideConcentrationMeasurementMeasurementMedium(%d)", int64(e))
+	}
+}
+
+type MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit int64
+
+const (
+	MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPPM  MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit = 0
+	MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPPB  MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit = 1
+	MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPPT  MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit = 2
+	MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitMGM3 MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit = 3
+	MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitUGM3 MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit = 4
+	MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitNGM3 MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit = 5
+	MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPM3  MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit = 6
+	MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitBQM3 MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit = 7
+)
+
+// String returns the MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit) String() string {
+	switch e {
+	case MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPPM:
+		return "MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPPM"
+	case MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPPB:
+		return "MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPPB"
+	case MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPPT:
+		return "MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPPT"
+	case MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitMGM3:
+		return "MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitMGM3"
+	case MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitUGM3:
+		return "MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitUGM3"
+	case MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitNGM3:
+		return "MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitNGM3"
+	case MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPM3:
+		return "MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPM3"
+	case MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitBQM3:
+		return "MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitBQM3"
+	default:
+		return fmt.Sprintf("MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRChannelFeature int64
+
+const (
+	MTRChannelFeatureChannelList     MTRChannelFeature = 1
+	MTRChannelFeatureLineupInfo      MTRChannelFeature = 2
+	MTRChannelFeatureElectronicGuide MTRChannelFeature = 4
+	MTRChannelFeatureRecordProgram   MTRChannelFeature = 8
+)
+
+// String returns the MTRChannelFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRChannelFeature) String() string {
+	var parts []string
+	if e&MTRChannelFeatureChannelList != 0 {
+		parts = append(parts, "MTRChannelFeatureChannelList")
+	}
+	if e&MTRChannelFeatureLineupInfo != 0 {
+		parts = append(parts, "MTRChannelFeatureLineupInfo")
+	}
+	if e&MTRChannelFeatureElectronicGuide != 0 {
+		parts = append(parts, "MTRChannelFeatureElectronicGuide")
+	}
+	if e&MTRChannelFeatureRecordProgram != 0 {
+		parts = append(parts, "MTRChannelFeatureRecordProgram")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRChannelLineupInfoType int64
+
+const (
+	MTRChannelLineupInfoTypeMSO MTRChannelLineupInfoType = 0
+	MTRChannelLineupInfoTypeMso MTRChannelLineupInfoType = 0
+)
+
+// String returns the MTRChannelLineupInfoType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRChannelLineupInfoType) String() string {
+	switch e {
+	case MTRChannelLineupInfoTypeMSO:
+		return "MTRChannelLineupInfoTypeMSO"
+	default:
+		return fmt.Sprintf("MTRChannelLineupInfoType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRChannelRecordingFlagBitmap int64
+
+const (
+	MTRChannelRecordingFlagBitmapScheduled    MTRChannelRecordingFlagBitmap = 1
+	MTRChannelRecordingFlagBitmapRecordSeries MTRChannelRecordingFlagBitmap = 2
+	MTRChannelRecordingFlagBitmapRecorded     MTRChannelRecordingFlagBitmap = 4
+)
+
+// String returns the MTRChannelRecordingFlagBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRChannelRecordingFlagBitmap) String() string {
+	var parts []string
+	if e&MTRChannelRecordingFlagBitmapScheduled != 0 {
+		parts = append(parts, "MTRChannelRecordingFlagBitmapScheduled")
+	}
+	if e&MTRChannelRecordingFlagBitmapRecordSeries != 0 {
+		parts = append(parts, "MTRChannelRecordingFlagBitmapRecordSeries")
+	}
+	if e&MTRChannelRecordingFlagBitmapRecorded != 0 {
+		parts = append(parts, "MTRChannelRecordingFlagBitmapRecorded")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRChannelStatus int64
+
+const (
+	MTRChannelStatusSuccess         MTRChannelStatus = 0
+	MTRChannelStatusMultipleMatches MTRChannelStatus = 1
+	MTRChannelStatusNoMatches       MTRChannelStatus = 2
+)
+
+// String returns the MTRChannelStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRChannelStatus) String() string {
+	switch e {
+	case MTRChannelStatusSuccess:
+		return "MTRChannelStatusSuccess"
+	case MTRChannelStatusMultipleMatches:
+		return "MTRChannelStatusMultipleMatches"
+	case MTRChannelStatusNoMatches:
+		return "MTRChannelStatusNoMatches"
+	default:
+		return fmt.Sprintf("MTRChannelStatus(%d)", int64(e))
+	}
+}
+
+type MTRChannelType int64
+
+const (
+	MTRChannelTypeSatellite   MTRChannelType = 0
+	MTRChannelTypeCable       MTRChannelType = 1
+	MTRChannelTypeTerrestrial MTRChannelType = 2
+	MTRChannelTypeOTT         MTRChannelType = 3
+)
+
+// String returns the MTRChannelType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRChannelType) String() string {
+	switch e {
+	case MTRChannelTypeSatellite:
+		return "MTRChannelTypeSatellite"
+	case MTRChannelTypeCable:
+		return "MTRChannelTypeCable"
+	case MTRChannelTypeTerrestrial:
+		return "MTRChannelTypeTerrestrial"
+	case MTRChannelTypeOTT:
+		return "MTRChannelTypeOTT"
+	default:
+		return fmt.Sprintf("MTRChannelType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRColorControlColorCapabilities int64
+
+const (
+	MTRColorControlColorCapabilitiesHueSaturationSupported    MTRColorControlColorCapabilities = 1
+	MTRColorControlColorCapabilitiesEnhancedHueSupported      MTRColorControlColorCapabilities = 2
+	MTRColorControlColorCapabilitiesColorLoopSupported        MTRColorControlColorCapabilities = 4
+	MTRColorControlColorCapabilitiesXYAttributesSupported     MTRColorControlColorCapabilities = 8
+	MTRColorControlColorCapabilitiesColorTemperatureSupported MTRColorControlColorCapabilities = 16
+)
+
+// String returns the MTRColorControlColorCapabilities constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlColorCapabilities) String() string {
+	var parts []string
+	if e&MTRColorControlColorCapabilitiesHueSaturationSupported != 0 {
+		parts = append(parts, "MTRColorControlColorCapabilitiesHueSaturationSupported")
+	}
+	if e&MTRColorControlColorCapabilitiesEnhancedHueSupported != 0 {
+		parts = append(parts, "MTRColorControlColorCapabilitiesEnhancedHueSupported")
+	}
+	if e&MTRColorControlColorCapabilitiesColorLoopSupported != 0 {
+		parts = append(parts, "MTRColorControlColorCapabilitiesColorLoopSupported")
+	}
+	if e&MTRColorControlColorCapabilitiesXYAttributesSupported != 0 {
+		parts = append(parts, "MTRColorControlColorCapabilitiesXYAttributesSupported")
+	}
+	if e&MTRColorControlColorCapabilitiesColorTemperatureSupported != 0 {
+		parts = append(parts, "MTRColorControlColorCapabilitiesColorTemperatureSupported")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRColorControlColorCapabilitiesBitmap int64
+
+const (
+	MTRColorControlColorCapabilitiesBitmapHueSaturation    MTRColorControlColorCapabilitiesBitmap = 1
+	MTRColorControlColorCapabilitiesBitmapEnhancedHue      MTRColorControlColorCapabilitiesBitmap = 2
+	MTRColorControlColorCapabilitiesBitmapColorLoop        MTRColorControlColorCapabilitiesBitmap = 4
+	MTRColorControlColorCapabilitiesBitmapXY               MTRColorControlColorCapabilitiesBitmap = 8
+	MTRColorControlColorCapabilitiesBitmapColorTemperature MTRColorControlColorCapabilitiesBitmap = 16
+)
+
+// String returns the MTRColorControlColorCapabilitiesBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlColorCapabilitiesBitmap) String() string {
+	var parts []string
+	if e&MTRColorControlColorCapabilitiesBitmapHueSaturation != 0 {
+		parts = append(parts, "MTRColorControlColorCapabilitiesBitmapHueSaturation")
+	}
+	if e&MTRColorControlColorCapabilitiesBitmapEnhancedHue != 0 {
+		parts = append(parts, "MTRColorControlColorCapabilitiesBitmapEnhancedHue")
+	}
+	if e&MTRColorControlColorCapabilitiesBitmapColorLoop != 0 {
+		parts = append(parts, "MTRColorControlColorCapabilitiesBitmapColorLoop")
+	}
+	if e&MTRColorControlColorCapabilitiesBitmapXY != 0 {
+		parts = append(parts, "MTRColorControlColorCapabilitiesBitmapXY")
+	}
+	if e&MTRColorControlColorCapabilitiesBitmapColorTemperature != 0 {
+		parts = append(parts, "MTRColorControlColorCapabilitiesBitmapColorTemperature")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRColorControlColorLoopAction int64
+
+const (
+	MTRColorControlColorLoopActionDeactivate                            MTRColorControlColorLoopAction = 0
+	MTRColorControlColorLoopActionActivateFromColorLoopStartEnhancedHue MTRColorControlColorLoopAction = 1
+	MTRColorControlColorLoopActionActivateFromEnhancedCurrentHue        MTRColorControlColorLoopAction = 2
+)
+
+// String returns the MTRColorControlColorLoopAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlColorLoopAction) String() string {
+	switch e {
+	case MTRColorControlColorLoopActionDeactivate:
+		return "MTRColorControlColorLoopActionDeactivate"
+	case MTRColorControlColorLoopActionActivateFromColorLoopStartEnhancedHue:
+		return "MTRColorControlColorLoopActionActivateFromColorLoopStartEnhancedHue"
+	case MTRColorControlColorLoopActionActivateFromEnhancedCurrentHue:
+		return "MTRColorControlColorLoopActionActivateFromEnhancedCurrentHue"
+	default:
+		return fmt.Sprintf("MTRColorControlColorLoopAction(%d)", int64(e))
+	}
+}
+
+type MTRColorControlColorLoopDirection int64
+
+const (
+	MTRColorControlColorLoopDirectionDecrement    MTRColorControlColorLoopDirection = 0
+	MTRColorControlColorLoopDirectionDecrementHue MTRColorControlColorLoopDirection = 0
+	MTRColorControlColorLoopDirectionIncrement    MTRColorControlColorLoopDirection = 1
+	MTRColorControlColorLoopDirectionIncrementHue MTRColorControlColorLoopDirection = 1
+)
+
+// String returns the MTRColorControlColorLoopDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlColorLoopDirection) String() string {
+	switch e {
+	case MTRColorControlColorLoopDirectionDecrement:
+		return "MTRColorControlColorLoopDirectionDecrement"
+	case MTRColorControlColorLoopDirectionIncrement:
+		return "MTRColorControlColorLoopDirectionIncrement"
+	default:
+		return fmt.Sprintf("MTRColorControlColorLoopDirection(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRColorControlColorLoopUpdateFlags int64
+
+const (
+	MTRColorControlColorLoopUpdateFlagsUpdateAction    MTRColorControlColorLoopUpdateFlags = 1
+	MTRColorControlColorLoopUpdateFlagsUpdateDirection MTRColorControlColorLoopUpdateFlags = 2
+	MTRColorControlColorLoopUpdateFlagsUpdateTime      MTRColorControlColorLoopUpdateFlags = 4
+	MTRColorControlColorLoopUpdateFlagsUpdateStartHue  MTRColorControlColorLoopUpdateFlags = 8
+)
+
+// String returns the MTRColorControlColorLoopUpdateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlColorLoopUpdateFlags) String() string {
+	var parts []string
+	if e&MTRColorControlColorLoopUpdateFlagsUpdateAction != 0 {
+		parts = append(parts, "MTRColorControlColorLoopUpdateFlagsUpdateAction")
+	}
+	if e&MTRColorControlColorLoopUpdateFlagsUpdateDirection != 0 {
+		parts = append(parts, "MTRColorControlColorLoopUpdateFlagsUpdateDirection")
+	}
+	if e&MTRColorControlColorLoopUpdateFlagsUpdateTime != 0 {
+		parts = append(parts, "MTRColorControlColorLoopUpdateFlagsUpdateTime")
+	}
+	if e&MTRColorControlColorLoopUpdateFlagsUpdateStartHue != 0 {
+		parts = append(parts, "MTRColorControlColorLoopUpdateFlagsUpdateStartHue")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRColorControlColorMode int64
+
+const (
+	MTRColorControlColorModeCurrentHueAndCurrentSaturation MTRColorControlColorMode = 0
+	MTRColorControlColorModeCurrentXAndCurrentY            MTRColorControlColorMode = 1
+	MTRColorControlColorModeColorTemperatureMireds         MTRColorControlColorMode = 2
+	MTRColorControlColorModeColorTemperature               MTRColorControlColorMode = 2
+)
+
+// String returns the MTRColorControlColorMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlColorMode) String() string {
+	switch e {
+	case MTRColorControlColorModeCurrentHueAndCurrentSaturation:
+		return "MTRColorControlColorModeCurrentHueAndCurrentSaturation"
+	case MTRColorControlColorModeCurrentXAndCurrentY:
+		return "MTRColorControlColorModeCurrentXAndCurrentY"
+	case MTRColorControlColorModeColorTemperatureMireds:
+		return "MTRColorControlColorModeColorTemperatureMireds"
+	default:
+		return fmt.Sprintf("MTRColorControlColorMode(%d)", int64(e))
+	}
+}
+
+type MTRColorControlDirection int64
+
+const (
+	MTRColorControlDirectionShortest MTRColorControlDirection = 0
+	MTRColorControlDirectionLongest  MTRColorControlDirection = 1
+	MTRColorControlDirectionUp       MTRColorControlDirection = 2
+	MTRColorControlDirectionDown     MTRColorControlDirection = 3
+)
+
+// String returns the MTRColorControlDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlDirection) String() string {
+	switch e {
+	case MTRColorControlDirectionShortest:
+		return "MTRColorControlDirectionShortest"
+	case MTRColorControlDirectionLongest:
+		return "MTRColorControlDirectionLongest"
+	case MTRColorControlDirectionUp:
+		return "MTRColorControlDirectionUp"
+	case MTRColorControlDirectionDown:
+		return "MTRColorControlDirectionDown"
+	default:
+		return fmt.Sprintf("MTRColorControlDirection(%d)", int64(e))
+	}
+}
+
+type MTRColorControlDriftCompensation int64
+
+const (
+	MTRColorControlDriftCompensationNone                                  MTRColorControlDriftCompensation = 0
+	MTRColorControlDriftCompensationOtherOrUnknown                        MTRColorControlDriftCompensation = 1
+	MTRColorControlDriftCompensationTemperatureMonitoring                 MTRColorControlDriftCompensation = 2
+	MTRColorControlDriftCompensationOpticalLuminanceMonitoringAndFeedback MTRColorControlDriftCompensation = 3
+	MTRColorControlDriftCompensationOpticalColorMonitoringAndFeedback     MTRColorControlDriftCompensation = 4
+)
+
+// String returns the MTRColorControlDriftCompensation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlDriftCompensation) String() string {
+	switch e {
+	case MTRColorControlDriftCompensationNone:
+		return "MTRColorControlDriftCompensationNone"
+	case MTRColorControlDriftCompensationOtherOrUnknown:
+		return "MTRColorControlDriftCompensationOtherOrUnknown"
+	case MTRColorControlDriftCompensationTemperatureMonitoring:
+		return "MTRColorControlDriftCompensationTemperatureMonitoring"
+	case MTRColorControlDriftCompensationOpticalLuminanceMonitoringAndFeedback:
+		return "MTRColorControlDriftCompensationOpticalLuminanceMonitoringAndFeedback"
+	case MTRColorControlDriftCompensationOpticalColorMonitoringAndFeedback:
+		return "MTRColorControlDriftCompensationOpticalColorMonitoringAndFeedback"
+	default:
+		return fmt.Sprintf("MTRColorControlDriftCompensation(%d)", int64(e))
+	}
+}
+
+type MTRColorControlEnhancedColorMode int64
+
+const (
+	MTRColorControlEnhancedColorModeCurrentHueAndCurrentSaturation         MTRColorControlEnhancedColorMode = 0
+	MTRColorControlEnhancedColorModeCurrentXAndCurrentY                    MTRColorControlEnhancedColorMode = 1
+	MTRColorControlEnhancedColorModeColorTemperatureMireds                 MTRColorControlEnhancedColorMode = 2
+	MTRColorControlEnhancedColorModeEnhancedCurrentHueAndCurrentSaturation MTRColorControlEnhancedColorMode = 3
+)
+
+// String returns the MTRColorControlEnhancedColorMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlEnhancedColorMode) String() string {
+	switch e {
+	case MTRColorControlEnhancedColorModeCurrentHueAndCurrentSaturation:
+		return "MTRColorControlEnhancedColorModeCurrentHueAndCurrentSaturation"
+	case MTRColorControlEnhancedColorModeCurrentXAndCurrentY:
+		return "MTRColorControlEnhancedColorModeCurrentXAndCurrentY"
+	case MTRColorControlEnhancedColorModeColorTemperatureMireds:
+		return "MTRColorControlEnhancedColorModeColorTemperatureMireds"
+	case MTRColorControlEnhancedColorModeEnhancedCurrentHueAndCurrentSaturation:
+		return "MTRColorControlEnhancedColorModeEnhancedCurrentHueAndCurrentSaturation"
+	default:
+		return fmt.Sprintf("MTRColorControlEnhancedColorMode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRColorControlFeature int64
+
+const (
+	MTRColorControlFeatureHueAndSaturation MTRColorControlFeature = 1
+	MTRColorControlFeatureEnhancedHue      MTRColorControlFeature = 2
+	MTRColorControlFeatureColorLoop        MTRColorControlFeature = 4
+	MTRColorControlFeatureXY               MTRColorControlFeature = 8
+	MTRColorControlFeatureColorTemperature MTRColorControlFeature = 16
+)
+
+// String returns the MTRColorControlFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlFeature) String() string {
+	var parts []string
+	if e&MTRColorControlFeatureHueAndSaturation != 0 {
+		parts = append(parts, "MTRColorControlFeatureHueAndSaturation")
+	}
+	if e&MTRColorControlFeatureEnhancedHue != 0 {
+		parts = append(parts, "MTRColorControlFeatureEnhancedHue")
+	}
+	if e&MTRColorControlFeatureColorLoop != 0 {
+		parts = append(parts, "MTRColorControlFeatureColorLoop")
+	}
+	if e&MTRColorControlFeatureXY != 0 {
+		parts = append(parts, "MTRColorControlFeatureXY")
+	}
+	if e&MTRColorControlFeatureColorTemperature != 0 {
+		parts = append(parts, "MTRColorControlFeatureColorTemperature")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRColorControlHueDirection int64
+
+const (
+	MTRColorControlHueDirectionShortestDistance MTRColorControlHueDirection = 0
+	MTRColorControlHueDirectionLongestDistance  MTRColorControlHueDirection = 1
+	MTRColorControlHueDirectionUp               MTRColorControlHueDirection = 2
+	MTRColorControlHueDirectionDown             MTRColorControlHueDirection = 3
+)
+
+// String returns the MTRColorControlHueDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlHueDirection) String() string {
+	switch e {
+	case MTRColorControlHueDirectionShortestDistance:
+		return "MTRColorControlHueDirectionShortestDistance"
+	case MTRColorControlHueDirectionLongestDistance:
+		return "MTRColorControlHueDirectionLongestDistance"
+	case MTRColorControlHueDirectionUp:
+		return "MTRColorControlHueDirectionUp"
+	case MTRColorControlHueDirectionDown:
+		return "MTRColorControlHueDirectionDown"
+	default:
+		return fmt.Sprintf("MTRColorControlHueDirection(%d)", int64(e))
+	}
+}
+
+type MTRColorControlHueMoveMode int64
+
+const (
+	MTRColorControlHueMoveModeStop MTRColorControlHueMoveMode = 0
+	MTRColorControlHueMoveModeUp   MTRColorControlHueMoveMode = 1
+	MTRColorControlHueMoveModeDown MTRColorControlHueMoveMode = 3
+)
+
+// String returns the MTRColorControlHueMoveMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlHueMoveMode) String() string {
+	switch e {
+	case MTRColorControlHueMoveModeStop:
+		return "MTRColorControlHueMoveModeStop"
+	case MTRColorControlHueMoveModeUp:
+		return "MTRColorControlHueMoveModeUp"
+	case MTRColorControlHueMoveModeDown:
+		return "MTRColorControlHueMoveModeDown"
+	default:
+		return fmt.Sprintf("MTRColorControlHueMoveMode(%d)", int64(e))
+	}
+}
+
+type MTRColorControlHueStepMode int64
+
+const (
+	MTRColorControlHueStepModeUp   MTRColorControlHueStepMode = 1
+	MTRColorControlHueStepModeDown MTRColorControlHueStepMode = 3
+)
+
+// String returns the MTRColorControlHueStepMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlHueStepMode) String() string {
+	switch e {
+	case MTRColorControlHueStepModeUp:
+		return "MTRColorControlHueStepModeUp"
+	case MTRColorControlHueStepModeDown:
+		return "MTRColorControlHueStepModeDown"
+	default:
+		return fmt.Sprintf("MTRColorControlHueStepMode(%d)", int64(e))
+	}
+}
+
+type MTRColorControlMoveMode int64
+
+const (
+	MTRColorControlMoveModeStop MTRColorControlMoveMode = 0
+	MTRColorControlMoveModeUp   MTRColorControlMoveMode = 1
+	MTRColorControlMoveModeDown MTRColorControlMoveMode = 3
+)
+
+// String returns the MTRColorControlMoveMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlMoveMode) String() string {
+	switch e {
+	case MTRColorControlMoveModeStop:
+		return "MTRColorControlMoveModeStop"
+	case MTRColorControlMoveModeUp:
+		return "MTRColorControlMoveModeUp"
+	case MTRColorControlMoveModeDown:
+		return "MTRColorControlMoveModeDown"
+	default:
+		return fmt.Sprintf("MTRColorControlMoveMode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRColorControlOptionsBitmap int64
+
+const (
+	MTRColorControlOptionsBitmapExecuteIfOff MTRColorControlOptionsBitmap = 1
+)
+
+// String returns the MTRColorControlOptionsBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlOptionsBitmap) String() string {
+	var parts []string
+	if e&MTRColorControlOptionsBitmapExecuteIfOff != 0 {
+		parts = append(parts, "MTRColorControlOptionsBitmapExecuteIfOff")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRColorControlSaturationMoveMode int64
+
+const (
+	MTRColorControlSaturationMoveModeStop MTRColorControlSaturationMoveMode = 0
+	MTRColorControlSaturationMoveModeUp   MTRColorControlSaturationMoveMode = 1
+	MTRColorControlSaturationMoveModeDown MTRColorControlSaturationMoveMode = 3
+)
+
+// String returns the MTRColorControlSaturationMoveMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlSaturationMoveMode) String() string {
+	switch e {
+	case MTRColorControlSaturationMoveModeStop:
+		return "MTRColorControlSaturationMoveModeStop"
+	case MTRColorControlSaturationMoveModeUp:
+		return "MTRColorControlSaturationMoveModeUp"
+	case MTRColorControlSaturationMoveModeDown:
+		return "MTRColorControlSaturationMoveModeDown"
+	default:
+		return fmt.Sprintf("MTRColorControlSaturationMoveMode(%d)", int64(e))
+	}
+}
+
+type MTRColorControlSaturationStepMode int64
+
+const (
+	MTRColorControlSaturationStepModeUp   MTRColorControlSaturationStepMode = 1
+	MTRColorControlSaturationStepModeDown MTRColorControlSaturationStepMode = 3
+)
+
+// String returns the MTRColorControlSaturationStepMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlSaturationStepMode) String() string {
+	switch e {
+	case MTRColorControlSaturationStepModeUp:
+		return "MTRColorControlSaturationStepModeUp"
+	case MTRColorControlSaturationStepModeDown:
+		return "MTRColorControlSaturationStepModeDown"
+	default:
+		return fmt.Sprintf("MTRColorControlSaturationStepMode(%d)", int64(e))
+	}
+}
+
+type MTRColorControlStepMode int64
+
+const (
+	MTRColorControlStepModeUp   MTRColorControlStepMode = 1
+	MTRColorControlStepModeDown MTRColorControlStepMode = 3
+)
+
+// String returns the MTRColorControlStepMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlStepMode) String() string {
+	switch e {
+	case MTRColorControlStepModeUp:
+		return "MTRColorControlStepModeUp"
+	case MTRColorControlStepModeDown:
+		return "MTRColorControlStepModeDown"
+	default:
+		return fmt.Sprintf("MTRColorControlStepMode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRColorControlUpdateFlagsBitmap int64
+
+const (
+	MTRColorControlUpdateFlagsBitmapUpdateAction    MTRColorControlUpdateFlagsBitmap = 1
+	MTRColorControlUpdateFlagsBitmapUpdateDirection MTRColorControlUpdateFlagsBitmap = 2
+	MTRColorControlUpdateFlagsBitmapUpdateTime      MTRColorControlUpdateFlagsBitmap = 4
+	MTRColorControlUpdateFlagsBitmapUpdateStartHue  MTRColorControlUpdateFlagsBitmap = 8
+)
+
+// String returns the MTRColorControlUpdateFlagsBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRColorControlUpdateFlagsBitmap) String() string {
+	var parts []string
+	if e&MTRColorControlUpdateFlagsBitmapUpdateAction != 0 {
+		parts = append(parts, "MTRColorControlUpdateFlagsBitmapUpdateAction")
+	}
+	if e&MTRColorControlUpdateFlagsBitmapUpdateDirection != 0 {
+		parts = append(parts, "MTRColorControlUpdateFlagsBitmapUpdateDirection")
+	}
+	if e&MTRColorControlUpdateFlagsBitmapUpdateTime != 0 {
+		parts = append(parts, "MTRColorControlUpdateFlagsBitmapUpdateTime")
+	}
+	if e&MTRColorControlUpdateFlagsBitmapUpdateStartHue != 0 {
+		parts = append(parts, "MTRColorControlUpdateFlagsBitmapUpdateStartHue")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRCommissionerControlSupportedDeviceCategoryBitmap int64
+
+const (
+	MTRCommissionerControlSupportedDeviceCategoryBitmapFabricSynchronization MTRCommissionerControlSupportedDeviceCategoryBitmap = 1
+)
+
+// String returns the MTRCommissionerControlSupportedDeviceCategoryBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRCommissionerControlSupportedDeviceCategoryBitmap) String() string {
+	var parts []string
+	if e&MTRCommissionerControlSupportedDeviceCategoryBitmapFabricSynchronization != 0 {
+		parts = append(parts, "MTRCommissionerControlSupportedDeviceCategoryBitmapFabricSynchronization")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRContentAppObserverStatus int64
+
+const (
+	MTRContentAppObserverStatusSuccess        MTRContentAppObserverStatus = 0
+	MTRContentAppObserverStatusUnexpectedData MTRContentAppObserverStatus = 1
+)
+
+// String returns the MTRContentAppObserverStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRContentAppObserverStatus) String() string {
+	switch e {
+	case MTRContentAppObserverStatusSuccess:
+		return "MTRContentAppObserverStatusSuccess"
+	case MTRContentAppObserverStatusUnexpectedData:
+		return "MTRContentAppObserverStatusUnexpectedData"
+	default:
+		return fmt.Sprintf("MTRContentAppObserverStatus(%d)", int64(e))
+	}
+}
+
+type MTRContentLauncherContentLaunchStatus int64
+
+const (
+	MTRContentLauncherContentLaunchStatusSuccess         MTRContentLauncherContentLaunchStatus = 0
+	MTRContentLauncherContentLaunchStatusUrlNotAvailable MTRContentLauncherContentLaunchStatus = 1
+	MTRContentLauncherContentLaunchStatusAuthFailed      MTRContentLauncherContentLaunchStatus = 2
+)
+
+// String returns the MTRContentLauncherContentLaunchStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRContentLauncherContentLaunchStatus) String() string {
+	switch e {
+	case MTRContentLauncherContentLaunchStatusSuccess:
+		return "MTRContentLauncherContentLaunchStatusSuccess"
+	case MTRContentLauncherContentLaunchStatusUrlNotAvailable:
+		return "MTRContentLauncherContentLaunchStatusUrlNotAvailable"
+	case MTRContentLauncherContentLaunchStatusAuthFailed:
+		return "MTRContentLauncherContentLaunchStatusAuthFailed"
+	default:
+		return fmt.Sprintf("MTRContentLauncherContentLaunchStatus(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRContentLauncherFeature int64
+
+const (
+	MTRContentLauncherFeatureContentSearch MTRContentLauncherFeature = 1
+	MTRContentLauncherFeatureURLPlayback   MTRContentLauncherFeature = 2
+	MTRContentLauncherFeatureAdvancedSeek  MTRContentLauncherFeature = 4
+	MTRContentLauncherFeatureTextTracks    MTRContentLauncherFeature = 8
+	MTRContentLauncherFeatureAudioTracks   MTRContentLauncherFeature = 16
+)
+
+// String returns the MTRContentLauncherFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRContentLauncherFeature) String() string {
+	var parts []string
+	if e&MTRContentLauncherFeatureContentSearch != 0 {
+		parts = append(parts, "MTRContentLauncherFeatureContentSearch")
+	}
+	if e&MTRContentLauncherFeatureURLPlayback != 0 {
+		parts = append(parts, "MTRContentLauncherFeatureURLPlayback")
+	}
+	if e&MTRContentLauncherFeatureAdvancedSeek != 0 {
+		parts = append(parts, "MTRContentLauncherFeatureAdvancedSeek")
+	}
+	if e&MTRContentLauncherFeatureTextTracks != 0 {
+		parts = append(parts, "MTRContentLauncherFeatureTextTracks")
+	}
+	if e&MTRContentLauncherFeatureAudioTracks != 0 {
+		parts = append(parts, "MTRContentLauncherFeatureAudioTracks")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRContentLauncherMetricType int64
+
+const (
+	MTRContentLauncherMetricTypePixels     MTRContentLauncherMetricType = 0
+	MTRContentLauncherMetricTypePIXELS     MTRContentLauncherMetricType = 0
+	MTRContentLauncherMetricTypePercentage MTRContentLauncherMetricType = 1
+	MTRContentLauncherMetricTypePERCENTAGE MTRContentLauncherMetricType = 1
+)
+
+// String returns the MTRContentLauncherMetricType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRContentLauncherMetricType) String() string {
+	switch e {
+	case MTRContentLauncherMetricTypePixels:
+		return "MTRContentLauncherMetricTypePixels"
+	case MTRContentLauncherMetricTypePercentage:
+		return "MTRContentLauncherMetricTypePercentage"
+	default:
+		return fmt.Sprintf("MTRContentLauncherMetricType(%d)", int64(e))
+	}
+}
+
+type MTRContentLauncherParameter int64
+
+const (
+	MTRContentLauncherParameterActor      MTRContentLauncherParameter = 0
+	MTRContentLauncherParameterChannel    MTRContentLauncherParameter = 1
+	MTRContentLauncherParameterCharacter  MTRContentLauncherParameter = 2
+	MTRContentLauncherParameterDirector   MTRContentLauncherParameter = 3
+	MTRContentLauncherParameterEvent      MTRContentLauncherParameter = 4
+	MTRContentLauncherParameterFranchise  MTRContentLauncherParameter = 5
+	MTRContentLauncherParameterGenre      MTRContentLauncherParameter = 6
+	MTRContentLauncherParameterLeague     MTRContentLauncherParameter = 7
+	MTRContentLauncherParameterPopularity MTRContentLauncherParameter = 8
+	MTRContentLauncherParameterProvider   MTRContentLauncherParameter = 9
+	MTRContentLauncherParameterSport      MTRContentLauncherParameter = 10
+	MTRContentLauncherParameterSportsTeam MTRContentLauncherParameter = 11
+	MTRContentLauncherParameterType       MTRContentLauncherParameter = 12
+	MTRContentLauncherParameterVideo      MTRContentLauncherParameter = 13
+	MTRContentLauncherParameterSeason     MTRContentLauncherParameter = 14
+	MTRContentLauncherParameterEpisode    MTRContentLauncherParameter = 15
+	MTRContentLauncherParameterAny        MTRContentLauncherParameter = 16
+)
+
+// String returns the MTRContentLauncherParameter constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRContentLauncherParameter) String() string {
+	switch e {
+	case MTRContentLauncherParameterActor:
+		return "MTRContentLauncherParameterActor"
+	case MTRContentLauncherParameterChannel:
+		return "MTRContentLauncherParameterChannel"
+	case MTRContentLauncherParameterCharacter:
+		return "MTRContentLauncherParameterCharacter"
+	case MTRContentLauncherParameterDirector:
+		return "MTRContentLauncherParameterDirector"
+	case MTRContentLauncherParameterEvent:
+		return "MTRContentLauncherParameterEvent"
+	case MTRContentLauncherParameterFranchise:
+		return "MTRContentLauncherParameterFranchise"
+	case MTRContentLauncherParameterGenre:
+		return "MTRContentLauncherParameterGenre"
+	case MTRContentLauncherParameterLeague:
+		return "MTRContentLauncherParameterLeague"
+	case MTRContentLauncherParameterPopularity:
+		return "MTRContentLauncherParameterPopularity"
+	case MTRContentLauncherParameterProvider:
+		return "MTRContentLauncherParameterProvider"
+	case MTRContentLauncherParameterSport:
+		return "MTRContentLauncherParameterSport"
+	case MTRContentLauncherParameterSportsTeam:
+		return "MTRContentLauncherParameterSportsTeam"
+	case MTRContentLauncherParameterType:
+		return "MTRContentLauncherParameterType"
+	case MTRContentLauncherParameterVideo:
+		return "MTRContentLauncherParameterVideo"
+	case MTRContentLauncherParameterSeason:
+		return "MTRContentLauncherParameterSeason"
+	case MTRContentLauncherParameterEpisode:
+		return "MTRContentLauncherParameterEpisode"
+	case MTRContentLauncherParameterAny:
+		return "MTRContentLauncherParameterAny"
+	default:
+		return fmt.Sprintf("MTRContentLauncherParameter(%d)", int64(e))
+	}
+}
+
+type MTRContentLauncherStatus int64
+
+const (
+	MTRContentLauncherStatusSuccess                MTRContentLauncherStatus = 0
+	MTRContentLauncherStatusURLNotAvailable        MTRContentLauncherStatus = 1
+	MTRContentLauncherStatusAuthFailed             MTRContentLauncherStatus = 2
+	MTRContentLauncherStatusTextTrackNotAvailable  MTRContentLauncherStatus = 3
+	MTRContentLauncherStatusAudioTrackNotAvailable MTRContentLauncherStatus = 4
+)
+
+// String returns the MTRContentLauncherStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRContentLauncherStatus) String() string {
+	switch e {
+	case MTRContentLauncherStatusSuccess:
+		return "MTRContentLauncherStatusSuccess"
+	case MTRContentLauncherStatusURLNotAvailable:
+		return "MTRContentLauncherStatusURLNotAvailable"
+	case MTRContentLauncherStatusAuthFailed:
+		return "MTRContentLauncherStatusAuthFailed"
+	case MTRContentLauncherStatusTextTrackNotAvailable:
+		return "MTRContentLauncherStatusTextTrackNotAvailable"
+	case MTRContentLauncherStatusAudioTrackNotAvailable:
+		return "MTRContentLauncherStatusAudioTrackNotAvailable"
+	default:
+		return fmt.Sprintf("MTRContentLauncherStatus(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRContentLauncherSupportedProtocolsBitmap int64
+
+const (
+	MTRContentLauncherSupportedProtocolsBitmapDASH MTRContentLauncherSupportedProtocolsBitmap = 1
+	MTRContentLauncherSupportedProtocolsBitmapHLS  MTRContentLauncherSupportedProtocolsBitmap = 2
+)
+
+// String returns the MTRContentLauncherSupportedProtocolsBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRContentLauncherSupportedProtocolsBitmap) String() string {
+	var parts []string
+	if e&MTRContentLauncherSupportedProtocolsBitmapDASH != 0 {
+		parts = append(parts, "MTRContentLauncherSupportedProtocolsBitmapDASH")
+	}
+	if e&MTRContentLauncherSupportedProtocolsBitmapHLS != 0 {
+		parts = append(parts, "MTRContentLauncherSupportedProtocolsBitmapHLS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRContentLauncherSupportedStreamingProtocol int64
+
+const (
+	MTRContentLauncherSupportedStreamingProtocolDASH MTRContentLauncherSupportedStreamingProtocol = 1
+	MTRContentLauncherSupportedStreamingProtocolHLS  MTRContentLauncherSupportedStreamingProtocol = 2
+)
+
+// String returns the MTRContentLauncherSupportedStreamingProtocol constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRContentLauncherSupportedStreamingProtocol) String() string {
+	var parts []string
+	if e&MTRContentLauncherSupportedStreamingProtocolDASH != 0 {
+		parts = append(parts, "MTRContentLauncherSupportedStreamingProtocolDASH")
+	}
+	if e&MTRContentLauncherSupportedStreamingProtocolHLS != 0 {
+		parts = append(parts, "MTRContentLauncherSupportedStreamingProtocolHLS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRDataTypeAtomicRequestTypeEnum int64
+
+const (
+	MTRDataTypeAtomicRequestTypeEnumBeginWrite    MTRDataTypeAtomicRequestTypeEnum = 0
+	MTRDataTypeAtomicRequestTypeEnumCommitWrite   MTRDataTypeAtomicRequestTypeEnum = 1
+	MTRDataTypeAtomicRequestTypeEnumRollbackWrite MTRDataTypeAtomicRequestTypeEnum = 2
+)
+
+// String returns the MTRDataTypeAtomicRequestTypeEnum constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDataTypeAtomicRequestTypeEnum) String() string {
+	switch e {
+	case MTRDataTypeAtomicRequestTypeEnumBeginWrite:
+		return "MTRDataTypeAtomicRequestTypeEnumBeginWrite"
+	case MTRDataTypeAtomicRequestTypeEnumCommitWrite:
+		return "MTRDataTypeAtomicRequestTypeEnumCommitWrite"
+	case MTRDataTypeAtomicRequestTypeEnumRollbackWrite:
+		return "MTRDataTypeAtomicRequestTypeEnumRollbackWrite"
+	default:
+		return fmt.Sprintf("MTRDataTypeAtomicRequestTypeEnum(%d)", int64(e))
+	}
+}
+
+type MTRDataTypeLandmarkTag int64
+
+const (
+	MTRDataTypeLandmarkTagAirConditioner MTRDataTypeLandmarkTag = 0
+	MTRDataTypeLandmarkTagAirPurifier    MTRDataTypeLandmarkTag = 1
+	MTRDataTypeLandmarkTagBackDoor       MTRDataTypeLandmarkTag = 2
+	MTRDataTypeLandmarkTagBarStool       MTRDataTypeLandmarkTag = 3
+	MTRDataTypeLandmarkTagBathMat        MTRDataTypeLandmarkTag = 4
+	MTRDataTypeLandmarkTagBathtub        MTRDataTypeLandmarkTag = 5
+	MTRDataTypeLandmarkTagBed            MTRDataTypeLandmarkTag = 6
+	MTRDataTypeLandmarkTagBookshelf      MTRDataTypeLandmarkTag = 7
+	MTRDataTypeLandmarkTagChair          MTRDataTypeLandmarkTag = 8
+	MTRDataTypeLandmarkTagChristmasTree  MTRDataTypeLandmarkTag = 9
+	MTRDataTypeLandmarkTagCoatRack       MTRDataTypeLandmarkTag = 10
+	MTRDataTypeLandmarkTagCoffeeTable    MTRDataTypeLandmarkTag = 11
+	MTRDataTypeLandmarkTagCookingRange   MTRDataTypeLandmarkTag = 12
+	MTRDataTypeLandmarkTagCouch          MTRDataTypeLandmarkTag = 13
+	MTRDataTypeLandmarkTagCountertop     MTRDataTypeLandmarkTag = 14
+	MTRDataTypeLandmarkTagCradle         MTRDataTypeLandmarkTag = 15
+	MTRDataTypeLandmarkTagCrib           MTRDataTypeLandmarkTag = 16
+	MTRDataTypeLandmarkTagDesk           MTRDataTypeLandmarkTag = 17
+	MTRDataTypeLandmarkTagDiningTable    MTRDataTypeLandmarkTag = 18
+	MTRDataTypeLandmarkTagDishwasher     MTRDataTypeLandmarkTag = 19
+	MTRDataTypeLandmarkTagDoor           MTRDataTypeLandmarkTag = 20
+	MTRDataTypeLandmarkTagDresser        MTRDataTypeLandmarkTag = 21
+	MTRDataTypeLandmarkTagLaundryDryer   MTRDataTypeLandmarkTag = 22
+	MTRDataTypeLandmarkTagFan            MTRDataTypeLandmarkTag = 23
+	MTRDataTypeLandmarkTagFireplace      MTRDataTypeLandmarkTag = 24
+	MTRDataTypeLandmarkTagFreezer        MTRDataTypeLandmarkTag = 25
+	MTRDataTypeLandmarkTagFrontDoor      MTRDataTypeLandmarkTag = 26
+	MTRDataTypeLandmarkTagHighChair      MTRDataTypeLandmarkTag = 27
+	MTRDataTypeLandmarkTagKitchenIsland  MTRDataTypeLandmarkTag = 28
+	MTRDataTypeLandmarkTagLamp           MTRDataTypeLandmarkTag = 29
+	MTRDataTypeLandmarkTagLitterBox      MTRDataTypeLandmarkTag = 30
+	MTRDataTypeLandmarkTagMirror         MTRDataTypeLandmarkTag = 31
+	MTRDataTypeLandmarkTagNightstand     MTRDataTypeLandmarkTag = 32
+	MTRDataTypeLandmarkTagOven           MTRDataTypeLandmarkTag = 33
+	MTRDataTypeLandmarkTagPetBed         MTRDataTypeLandmarkTag = 34
+	MTRDataTypeLandmarkTagPetBowl        MTRDataTypeLandmarkTag = 35
+	MTRDataTypeLandmarkTagPetCrate       MTRDataTypeLandmarkTag = 36
+	MTRDataTypeLandmarkTagRefrigerator   MTRDataTypeLandmarkTag = 37
+	MTRDataTypeLandmarkTagScratchingPost MTRDataTypeLandmarkTag = 38
+	MTRDataTypeLandmarkTagShoeRack       MTRDataTypeLandmarkTag = 39
+	MTRDataTypeLandmarkTagShower         MTRDataTypeLandmarkTag = 40
+	MTRDataTypeLandmarkTagSideDoor       MTRDataTypeLandmarkTag = 41
+	MTRDataTypeLandmarkTagSink           MTRDataTypeLandmarkTag = 42
+	MTRDataTypeLandmarkTagSofa           MTRDataTypeLandmarkTag = 43
+	MTRDataTypeLandmarkTagStove          MTRDataTypeLandmarkTag = 44
+	MTRDataTypeLandmarkTagTable          MTRDataTypeLandmarkTag = 45
+	MTRDataTypeLandmarkTagToilet         MTRDataTypeLandmarkTag = 46
+	MTRDataTypeLandmarkTagTrashCan       MTRDataTypeLandmarkTag = 47
+	MTRDataTypeLandmarkTagLaundryWasher  MTRDataTypeLandmarkTag = 48
+	MTRDataTypeLandmarkTagWindow         MTRDataTypeLandmarkTag = 49
+	MTRDataTypeLandmarkTagWineCooler     MTRDataTypeLandmarkTag = 50
+)
+
+// String returns the MTRDataTypeLandmarkTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDataTypeLandmarkTag) String() string {
+	switch e {
+	case MTRDataTypeLandmarkTagAirConditioner:
+		return "MTRDataTypeLandmarkTagAirConditioner"
+	case MTRDataTypeLandmarkTagAirPurifier:
+		return "MTRDataTypeLandmarkTagAirPurifier"
+	case MTRDataTypeLandmarkTagBackDoor:
+		return "MTRDataTypeLandmarkTagBackDoor"
+	case MTRDataTypeLandmarkTagBarStool:
+		return "MTRDataTypeLandmarkTagBarStool"
+	case MTRDataTypeLandmarkTagBathMat:
+		return "MTRDataTypeLandmarkTagBathMat"
+	case MTRDataTypeLandmarkTagBathtub:
+		return "MTRDataTypeLandmarkTagBathtub"
+	case MTRDataTypeLandmarkTagBed:
+		return "MTRDataTypeLandmarkTagBed"
+	case MTRDataTypeLandmarkTagBookshelf:
+		return "MTRDataTypeLandmarkTagBookshelf"
+	case MTRDataTypeLandmarkTagChair:
+		return "MTRDataTypeLandmarkTagChair"
+	case MTRDataTypeLandmarkTagChristmasTree:
+		return "MTRDataTypeLandmarkTagChristmasTree"
+	case MTRDataTypeLandmarkTagCoatRack:
+		return "MTRDataTypeLandmarkTagCoatRack"
+	case MTRDataTypeLandmarkTagCoffeeTable:
+		return "MTRDataTypeLandmarkTagCoffeeTable"
+	case MTRDataTypeLandmarkTagCookingRange:
+		return "MTRDataTypeLandmarkTagCookingRange"
+	case MTRDataTypeLandmarkTagCouch:
+		return "MTRDataTypeLandmarkTagCouch"
+	case MTRDataTypeLandmarkTagCountertop:
+		return "MTRDataTypeLandmarkTagCountertop"
+	case MTRDataTypeLandmarkTagCradle:
+		return "MTRDataTypeLandmarkTagCradle"
+	case MTRDataTypeLandmarkTagCrib:
+		return "MTRDataTypeLandmarkTagCrib"
+	case MTRDataTypeLandmarkTagDesk:
+		return "MTRDataTypeLandmarkTagDesk"
+	case MTRDataTypeLandmarkTagDiningTable:
+		return "MTRDataTypeLandmarkTagDiningTable"
+	case MTRDataTypeLandmarkTagDishwasher:
+		return "MTRDataTypeLandmarkTagDishwasher"
+	case MTRDataTypeLandmarkTagDoor:
+		return "MTRDataTypeLandmarkTagDoor"
+	case MTRDataTypeLandmarkTagDresser:
+		return "MTRDataTypeLandmarkTagDresser"
+	case MTRDataTypeLandmarkTagLaundryDryer:
+		return "MTRDataTypeLandmarkTagLaundryDryer"
+	case MTRDataTypeLandmarkTagFan:
+		return "MTRDataTypeLandmarkTagFan"
+	case MTRDataTypeLandmarkTagFireplace:
+		return "MTRDataTypeLandmarkTagFireplace"
+	case MTRDataTypeLandmarkTagFreezer:
+		return "MTRDataTypeLandmarkTagFreezer"
+	case MTRDataTypeLandmarkTagFrontDoor:
+		return "MTRDataTypeLandmarkTagFrontDoor"
+	case MTRDataTypeLandmarkTagHighChair:
+		return "MTRDataTypeLandmarkTagHighChair"
+	case MTRDataTypeLandmarkTagKitchenIsland:
+		return "MTRDataTypeLandmarkTagKitchenIsland"
+	case MTRDataTypeLandmarkTagLamp:
+		return "MTRDataTypeLandmarkTagLamp"
+	case MTRDataTypeLandmarkTagLitterBox:
+		return "MTRDataTypeLandmarkTagLitterBox"
+	case MTRDataTypeLandmarkTagMirror:
+		return "MTRDataTypeLandmarkTagMirror"
+	case MTRDataTypeLandmarkTagNightstand:
+		return "MTRDataTypeLandmarkTagNightstand"
+	case MTRDataTypeLandmarkTagOven:
+		return "MTRDataTypeLandmarkTagOven"
+	case MTRDataTypeLandmarkTagPetBed:
+		return "MTRDataTypeLandmarkTagPetBed"
+	case MTRDataTypeLandmarkTagPetBowl:
+		return "MTRDataTypeLandmarkTagPetBowl"
+	case MTRDataTypeLandmarkTagPetCrate:
+		return "MTRDataTypeLandmarkTagPetCrate"
+	case MTRDataTypeLandmarkTagRefrigerator:
+		return "MTRDataTypeLandmarkTagRefrigerator"
+	case MTRDataTypeLandmarkTagScratchingPost:
+		return "MTRDataTypeLandmarkTagScratchingPost"
+	case MTRDataTypeLandmarkTagShoeRack:
+		return "MTRDataTypeLandmarkTagShoeRack"
+	case MTRDataTypeLandmarkTagShower:
+		return "MTRDataTypeLandmarkTagShower"
+	case MTRDataTypeLandmarkTagSideDoor:
+		return "MTRDataTypeLandmarkTagSideDoor"
+	case MTRDataTypeLandmarkTagSink:
+		return "MTRDataTypeLandmarkTagSink"
+	case MTRDataTypeLandmarkTagSofa:
+		return "MTRDataTypeLandmarkTagSofa"
+	case MTRDataTypeLandmarkTagStove:
+		return "MTRDataTypeLandmarkTagStove"
+	case MTRDataTypeLandmarkTagTable:
+		return "MTRDataTypeLandmarkTagTable"
+	case MTRDataTypeLandmarkTagToilet:
+		return "MTRDataTypeLandmarkTagToilet"
+	case MTRDataTypeLandmarkTagTrashCan:
+		return "MTRDataTypeLandmarkTagTrashCan"
+	case MTRDataTypeLandmarkTagLaundryWasher:
+		return "MTRDataTypeLandmarkTagLaundryWasher"
+	case MTRDataTypeLandmarkTagWindow:
+		return "MTRDataTypeLandmarkTagWindow"
+	case MTRDataTypeLandmarkTagWineCooler:
+		return "MTRDataTypeLandmarkTagWineCooler"
+	default:
+		return fmt.Sprintf("MTRDataTypeLandmarkTag(%d)", int64(e))
+	}
+}
+
+type MTRDataTypePositionTag int64
+
+const (
+	MTRDataTypePositionTagLeft   MTRDataTypePositionTag = 0
+	MTRDataTypePositionTagRight  MTRDataTypePositionTag = 1
+	MTRDataTypePositionTagTop    MTRDataTypePositionTag = 2
+	MTRDataTypePositionTagBottom MTRDataTypePositionTag = 3
+	MTRDataTypePositionTagMiddle MTRDataTypePositionTag = 4
+	MTRDataTypePositionTagRow    MTRDataTypePositionTag = 5
+	MTRDataTypePositionTagColumn MTRDataTypePositionTag = 6
+)
+
+// String returns the MTRDataTypePositionTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDataTypePositionTag) String() string {
+	switch e {
+	case MTRDataTypePositionTagLeft:
+		return "MTRDataTypePositionTagLeft"
+	case MTRDataTypePositionTagRight:
+		return "MTRDataTypePositionTagRight"
+	case MTRDataTypePositionTagTop:
+		return "MTRDataTypePositionTagTop"
+	case MTRDataTypePositionTagBottom:
+		return "MTRDataTypePositionTagBottom"
+	case MTRDataTypePositionTagMiddle:
+		return "MTRDataTypePositionTagMiddle"
+	case MTRDataTypePositionTagRow:
+		return "MTRDataTypePositionTagRow"
+	case MTRDataTypePositionTagColumn:
+		return "MTRDataTypePositionTagColumn"
+	default:
+		return fmt.Sprintf("MTRDataTypePositionTag(%d)", int64(e))
+	}
+}
+
+type MTRDataTypeRelativePositionTag int64
+
+const (
+	MTRDataTypeRelativePositionTagUnder   MTRDataTypeRelativePositionTag = 0
+	MTRDataTypeRelativePositionTagNextTo  MTRDataTypeRelativePositionTag = 1
+	MTRDataTypeRelativePositionTagAround  MTRDataTypeRelativePositionTag = 2
+	MTRDataTypeRelativePositionTagOn      MTRDataTypeRelativePositionTag = 3
+	MTRDataTypeRelativePositionTagAbove   MTRDataTypeRelativePositionTag = 4
+	MTRDataTypeRelativePositionTagFrontOf MTRDataTypeRelativePositionTag = 5
+	MTRDataTypeRelativePositionTagBehind  MTRDataTypeRelativePositionTag = 6
+)
+
+// String returns the MTRDataTypeRelativePositionTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDataTypeRelativePositionTag) String() string {
+	switch e {
+	case MTRDataTypeRelativePositionTagUnder:
+		return "MTRDataTypeRelativePositionTagUnder"
+	case MTRDataTypeRelativePositionTagNextTo:
+		return "MTRDataTypeRelativePositionTagNextTo"
+	case MTRDataTypeRelativePositionTagAround:
+		return "MTRDataTypeRelativePositionTagAround"
+	case MTRDataTypeRelativePositionTagOn:
+		return "MTRDataTypeRelativePositionTagOn"
+	case MTRDataTypeRelativePositionTagAbove:
+		return "MTRDataTypeRelativePositionTagAbove"
+	case MTRDataTypeRelativePositionTagFrontOf:
+		return "MTRDataTypeRelativePositionTagFrontOf"
+	case MTRDataTypeRelativePositionTagBehind:
+		return "MTRDataTypeRelativePositionTagBehind"
+	default:
+		return fmt.Sprintf("MTRDataTypeRelativePositionTag(%d)", int64(e))
+	}
+}
+
+type MTRDeviceEnergyManagementAdjustmentCause int64
+
+const (
+	MTRDeviceEnergyManagementAdjustmentCauseLocalOptimization MTRDeviceEnergyManagementAdjustmentCause = 0
+	MTRDeviceEnergyManagementAdjustmentCauseGridOptimization  MTRDeviceEnergyManagementAdjustmentCause = 1
+)
+
+// String returns the MTRDeviceEnergyManagementAdjustmentCause constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDeviceEnergyManagementAdjustmentCause) String() string {
+	switch e {
+	case MTRDeviceEnergyManagementAdjustmentCauseLocalOptimization:
+		return "MTRDeviceEnergyManagementAdjustmentCauseLocalOptimization"
+	case MTRDeviceEnergyManagementAdjustmentCauseGridOptimization:
+		return "MTRDeviceEnergyManagementAdjustmentCauseGridOptimization"
+	default:
+		return fmt.Sprintf("MTRDeviceEnergyManagementAdjustmentCause(%d)", int64(e))
+	}
+}
+
+type MTRDeviceEnergyManagementCause int64
+
+const (
+	MTRDeviceEnergyManagementCauseNormalCompletion MTRDeviceEnergyManagementCause = 0
+	MTRDeviceEnergyManagementCauseOffline          MTRDeviceEnergyManagementCause = 1
+	MTRDeviceEnergyManagementCauseFault            MTRDeviceEnergyManagementCause = 2
+	MTRDeviceEnergyManagementCauseUserOptOut       MTRDeviceEnergyManagementCause = 3
+	MTRDeviceEnergyManagementCauseCancelled        MTRDeviceEnergyManagementCause = 4
+)
+
+// String returns the MTRDeviceEnergyManagementCause constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDeviceEnergyManagementCause) String() string {
+	switch e {
+	case MTRDeviceEnergyManagementCauseNormalCompletion:
+		return "MTRDeviceEnergyManagementCauseNormalCompletion"
+	case MTRDeviceEnergyManagementCauseOffline:
+		return "MTRDeviceEnergyManagementCauseOffline"
+	case MTRDeviceEnergyManagementCauseFault:
+		return "MTRDeviceEnergyManagementCauseFault"
+	case MTRDeviceEnergyManagementCauseUserOptOut:
+		return "MTRDeviceEnergyManagementCauseUserOptOut"
+	case MTRDeviceEnergyManagementCauseCancelled:
+		return "MTRDeviceEnergyManagementCauseCancelled"
+	default:
+		return fmt.Sprintf("MTRDeviceEnergyManagementCause(%d)", int64(e))
+	}
+}
+
+type MTRDeviceEnergyManagementCostType int64
+
+const (
+	MTRDeviceEnergyManagementCostTypeFinancial    MTRDeviceEnergyManagementCostType = 0
+	MTRDeviceEnergyManagementCostTypeGHGEmissions MTRDeviceEnergyManagementCostType = 1
+	MTRDeviceEnergyManagementCostTypeComfort      MTRDeviceEnergyManagementCostType = 2
+	MTRDeviceEnergyManagementCostTypeTemperature  MTRDeviceEnergyManagementCostType = 3
+)
+
+// String returns the MTRDeviceEnergyManagementCostType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDeviceEnergyManagementCostType) String() string {
+	switch e {
+	case MTRDeviceEnergyManagementCostTypeFinancial:
+		return "MTRDeviceEnergyManagementCostTypeFinancial"
+	case MTRDeviceEnergyManagementCostTypeGHGEmissions:
+		return "MTRDeviceEnergyManagementCostTypeGHGEmissions"
+	case MTRDeviceEnergyManagementCostTypeComfort:
+		return "MTRDeviceEnergyManagementCostTypeComfort"
+	case MTRDeviceEnergyManagementCostTypeTemperature:
+		return "MTRDeviceEnergyManagementCostTypeTemperature"
+	default:
+		return fmt.Sprintf("MTRDeviceEnergyManagementCostType(%d)", int64(e))
+	}
+}
+
+type MTRDeviceEnergyManagementESAState int64
+
+const (
+	MTRDeviceEnergyManagementESAStateOffline           MTRDeviceEnergyManagementESAState = 0
+	MTRDeviceEnergyManagementESAStateOnline            MTRDeviceEnergyManagementESAState = 1
+	MTRDeviceEnergyManagementESAStateFault             MTRDeviceEnergyManagementESAState = 2
+	MTRDeviceEnergyManagementESAStatePowerAdjustActive MTRDeviceEnergyManagementESAState = 3
+	MTRDeviceEnergyManagementESAStatePaused            MTRDeviceEnergyManagementESAState = 4
+)
+
+// String returns the MTRDeviceEnergyManagementESAState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDeviceEnergyManagementESAState) String() string {
+	switch e {
+	case MTRDeviceEnergyManagementESAStateOffline:
+		return "MTRDeviceEnergyManagementESAStateOffline"
+	case MTRDeviceEnergyManagementESAStateOnline:
+		return "MTRDeviceEnergyManagementESAStateOnline"
+	case MTRDeviceEnergyManagementESAStateFault:
+		return "MTRDeviceEnergyManagementESAStateFault"
+	case MTRDeviceEnergyManagementESAStatePowerAdjustActive:
+		return "MTRDeviceEnergyManagementESAStatePowerAdjustActive"
+	case MTRDeviceEnergyManagementESAStatePaused:
+		return "MTRDeviceEnergyManagementESAStatePaused"
+	default:
+		return fmt.Sprintf("MTRDeviceEnergyManagementESAState(%d)", int64(e))
+	}
+}
+
+type MTRDeviceEnergyManagementESAType int64
+
+const (
+	MTRDeviceEnergyManagementESATypeEVSE                MTRDeviceEnergyManagementESAType = 0
+	MTRDeviceEnergyManagementESATypeSpaceHeating        MTRDeviceEnergyManagementESAType = 1
+	MTRDeviceEnergyManagementESATypeWaterHeating        MTRDeviceEnergyManagementESAType = 2
+	MTRDeviceEnergyManagementESATypeSpaceCooling        MTRDeviceEnergyManagementESAType = 3
+	MTRDeviceEnergyManagementESATypeSpaceHeatingCooling MTRDeviceEnergyManagementESAType = 4
+	MTRDeviceEnergyManagementESATypeBatteryStorage      MTRDeviceEnergyManagementESAType = 5
+	MTRDeviceEnergyManagementESATypeSolarPV             MTRDeviceEnergyManagementESAType = 6
+	MTRDeviceEnergyManagementESATypeFridgeFreezer       MTRDeviceEnergyManagementESAType = 7
+	MTRDeviceEnergyManagementESATypeWashingMachine      MTRDeviceEnergyManagementESAType = 8
+	MTRDeviceEnergyManagementESATypeDishwasher          MTRDeviceEnergyManagementESAType = 9
+	MTRDeviceEnergyManagementESATypeCooking             MTRDeviceEnergyManagementESAType = 10
+	MTRDeviceEnergyManagementESATypeHomeWaterPump       MTRDeviceEnergyManagementESAType = 11
+	MTRDeviceEnergyManagementESATypeIrrigationWaterPump MTRDeviceEnergyManagementESAType = 12
+	MTRDeviceEnergyManagementESATypePoolPump            MTRDeviceEnergyManagementESAType = 13
+	MTRDeviceEnergyManagementESATypeOther               MTRDeviceEnergyManagementESAType = 255
+)
+
+// String returns the MTRDeviceEnergyManagementESAType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDeviceEnergyManagementESAType) String() string {
+	switch e {
+	case MTRDeviceEnergyManagementESATypeEVSE:
+		return "MTRDeviceEnergyManagementESATypeEVSE"
+	case MTRDeviceEnergyManagementESATypeSpaceHeating:
+		return "MTRDeviceEnergyManagementESATypeSpaceHeating"
+	case MTRDeviceEnergyManagementESATypeWaterHeating:
+		return "MTRDeviceEnergyManagementESATypeWaterHeating"
+	case MTRDeviceEnergyManagementESATypeSpaceCooling:
+		return "MTRDeviceEnergyManagementESATypeSpaceCooling"
+	case MTRDeviceEnergyManagementESATypeSpaceHeatingCooling:
+		return "MTRDeviceEnergyManagementESATypeSpaceHeatingCooling"
+	case MTRDeviceEnergyManagementESATypeBatteryStorage:
+		return "MTRDeviceEnergyManagementESATypeBatteryStorage"
+	case MTRDeviceEnergyManagementESATypeSolarPV:
+		return "MTRDeviceEnergyManagementESATypeSolarPV"
+	case MTRDeviceEnergyManagementESATypeFridgeFreezer:
+		return "MTRDeviceEnergyManagementESATypeFridgeFreezer"
+	case MTRDeviceEnergyManagementESATypeWashingMachine:
+		return "MTRDeviceEnergyManagementESATypeWashingMachine"
+	case MTRDeviceEnergyManagementESATypeDishwasher:
+		return "MTRDeviceEnergyManagementESATypeDishwasher"
+	case MTRDeviceEnergyManagementESATypeCooking:
+		return "MTRDeviceEnergyManagementESATypeCooking"
+	case MTRDeviceEnergyManagementESATypeHomeWaterPump:
+		return "MTRDeviceEnergyManagementESATypeHomeWaterPump"
+	case MTRDeviceEnergyManagementESATypeIrrigationWaterPump:
+		return "MTRDeviceEnergyManagementESATypeIrrigationWaterPump"
+	case MTRDeviceEnergyManagementESATypePoolPump:
+		return "MTRDeviceEnergyManagementESATypePoolPump"
+	case MTRDeviceEnergyManagementESATypeOther:
+		return "MTRDeviceEnergyManagementESATypeOther"
+	default:
+		return fmt.Sprintf("MTRDeviceEnergyManagementESAType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRDeviceEnergyManagementFeature int64
+
+const (
+	MTRDeviceEnergyManagementFeaturePowerAdjustment           MTRDeviceEnergyManagementFeature = 1
+	MTRDeviceEnergyManagementFeaturePowerForecastReporting    MTRDeviceEnergyManagementFeature = 2
+	MTRDeviceEnergyManagementFeatureStateForecastReporting    MTRDeviceEnergyManagementFeature = 4
+	MTRDeviceEnergyManagementFeatureStartTimeAdjustment       MTRDeviceEnergyManagementFeature = 8
+	MTRDeviceEnergyManagementFeaturePausable                  MTRDeviceEnergyManagementFeature = 16
+	MTRDeviceEnergyManagementFeatureForecastAdjustment        MTRDeviceEnergyManagementFeature = 32
+	MTRDeviceEnergyManagementFeatureConstraintBasedAdjustment MTRDeviceEnergyManagementFeature = 64
+)
+
+// String returns the MTRDeviceEnergyManagementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDeviceEnergyManagementFeature) String() string {
+	var parts []string
+	if e&MTRDeviceEnergyManagementFeaturePowerAdjustment != 0 {
+		parts = append(parts, "MTRDeviceEnergyManagementFeaturePowerAdjustment")
+	}
+	if e&MTRDeviceEnergyManagementFeaturePowerForecastReporting != 0 {
+		parts = append(parts, "MTRDeviceEnergyManagementFeaturePowerForecastReporting")
+	}
+	if e&MTRDeviceEnergyManagementFeatureStateForecastReporting != 0 {
+		parts = append(parts, "MTRDeviceEnergyManagementFeatureStateForecastReporting")
+	}
+	if e&MTRDeviceEnergyManagementFeatureStartTimeAdjustment != 0 {
+		parts = append(parts, "MTRDeviceEnergyManagementFeatureStartTimeAdjustment")
+	}
+	if e&MTRDeviceEnergyManagementFeaturePausable != 0 {
+		parts = append(parts, "MTRDeviceEnergyManagementFeaturePausable")
+	}
+	if e&MTRDeviceEnergyManagementFeatureForecastAdjustment != 0 {
+		parts = append(parts, "MTRDeviceEnergyManagementFeatureForecastAdjustment")
+	}
+	if e&MTRDeviceEnergyManagementFeatureConstraintBasedAdjustment != 0 {
+		parts = append(parts, "MTRDeviceEnergyManagementFeatureConstraintBasedAdjustment")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRDeviceEnergyManagementForecastUpdateReason int64
+
+const (
+	MTRDeviceEnergyManagementForecastUpdateReasonInternalOptimization MTRDeviceEnergyManagementForecastUpdateReason = 0
+	MTRDeviceEnergyManagementForecastUpdateReasonLocalOptimization    MTRDeviceEnergyManagementForecastUpdateReason = 1
+	MTRDeviceEnergyManagementForecastUpdateReasonGridOptimization     MTRDeviceEnergyManagementForecastUpdateReason = 2
+)
+
+// String returns the MTRDeviceEnergyManagementForecastUpdateReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDeviceEnergyManagementForecastUpdateReason) String() string {
+	switch e {
+	case MTRDeviceEnergyManagementForecastUpdateReasonInternalOptimization:
+		return "MTRDeviceEnergyManagementForecastUpdateReasonInternalOptimization"
+	case MTRDeviceEnergyManagementForecastUpdateReasonLocalOptimization:
+		return "MTRDeviceEnergyManagementForecastUpdateReasonLocalOptimization"
+	case MTRDeviceEnergyManagementForecastUpdateReasonGridOptimization:
+		return "MTRDeviceEnergyManagementForecastUpdateReasonGridOptimization"
+	default:
+		return fmt.Sprintf("MTRDeviceEnergyManagementForecastUpdateReason(%d)", int64(e))
+	}
+}
+
+type MTRDeviceEnergyManagementModeModeTag int64
+
+const (
+	MTRDeviceEnergyManagementModeModeTagAuto               MTRDeviceEnergyManagementModeModeTag = 0
+	MTRDeviceEnergyManagementModeModeTagQuick              MTRDeviceEnergyManagementModeModeTag = 1
+	MTRDeviceEnergyManagementModeModeTagQuiet              MTRDeviceEnergyManagementModeModeTag = 2
+	MTRDeviceEnergyManagementModeModeTagLowNoise           MTRDeviceEnergyManagementModeModeTag = 3
+	MTRDeviceEnergyManagementModeModeTagLowEnergy          MTRDeviceEnergyManagementModeModeTag = 4
+	MTRDeviceEnergyManagementModeModeTagVacation           MTRDeviceEnergyManagementModeModeTag = 5
+	MTRDeviceEnergyManagementModeModeTagMin                MTRDeviceEnergyManagementModeModeTag = 6
+	MTRDeviceEnergyManagementModeModeTagMax                MTRDeviceEnergyManagementModeModeTag = 7
+	MTRDeviceEnergyManagementModeModeTagNight              MTRDeviceEnergyManagementModeModeTag = 8
+	MTRDeviceEnergyManagementModeModeTagDay                MTRDeviceEnergyManagementModeModeTag = 9
+	MTRDeviceEnergyManagementModeModeTagNoOptimization     MTRDeviceEnergyManagementModeModeTag = 16384
+	MTRDeviceEnergyManagementModeModeTagDeviceOptimization MTRDeviceEnergyManagementModeModeTag = 16385
+	MTRDeviceEnergyManagementModeModeTagLocalOptimization  MTRDeviceEnergyManagementModeModeTag = 16386
+	MTRDeviceEnergyManagementModeModeTagGridOptimization   MTRDeviceEnergyManagementModeModeTag = 16387
+)
+
+// String returns the MTRDeviceEnergyManagementModeModeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDeviceEnergyManagementModeModeTag) String() string {
+	switch e {
+	case MTRDeviceEnergyManagementModeModeTagAuto:
+		return "MTRDeviceEnergyManagementModeModeTagAuto"
+	case MTRDeviceEnergyManagementModeModeTagQuick:
+		return "MTRDeviceEnergyManagementModeModeTagQuick"
+	case MTRDeviceEnergyManagementModeModeTagQuiet:
+		return "MTRDeviceEnergyManagementModeModeTagQuiet"
+	case MTRDeviceEnergyManagementModeModeTagLowNoise:
+		return "MTRDeviceEnergyManagementModeModeTagLowNoise"
+	case MTRDeviceEnergyManagementModeModeTagLowEnergy:
+		return "MTRDeviceEnergyManagementModeModeTagLowEnergy"
+	case MTRDeviceEnergyManagementModeModeTagVacation:
+		return "MTRDeviceEnergyManagementModeModeTagVacation"
+	case MTRDeviceEnergyManagementModeModeTagMin:
+		return "MTRDeviceEnergyManagementModeModeTagMin"
+	case MTRDeviceEnergyManagementModeModeTagMax:
+		return "MTRDeviceEnergyManagementModeModeTagMax"
+	case MTRDeviceEnergyManagementModeModeTagNight:
+		return "MTRDeviceEnergyManagementModeModeTagNight"
+	case MTRDeviceEnergyManagementModeModeTagDay:
+		return "MTRDeviceEnergyManagementModeModeTagDay"
+	case MTRDeviceEnergyManagementModeModeTagNoOptimization:
+		return "MTRDeviceEnergyManagementModeModeTagNoOptimization"
+	case MTRDeviceEnergyManagementModeModeTagDeviceOptimization:
+		return "MTRDeviceEnergyManagementModeModeTagDeviceOptimization"
+	case MTRDeviceEnergyManagementModeModeTagLocalOptimization:
+		return "MTRDeviceEnergyManagementModeModeTagLocalOptimization"
+	case MTRDeviceEnergyManagementModeModeTagGridOptimization:
+		return "MTRDeviceEnergyManagementModeModeTagGridOptimization"
+	default:
+		return fmt.Sprintf("MTRDeviceEnergyManagementModeModeTag(%d)", int64(e))
+	}
+}
+
+type MTRDeviceEnergyManagementOptOutState int64
+
+const (
+	MTRDeviceEnergyManagementOptOutStateNoOptOut    MTRDeviceEnergyManagementOptOutState = 0
+	MTRDeviceEnergyManagementOptOutStateLocalOptOut MTRDeviceEnergyManagementOptOutState = 1
+	MTRDeviceEnergyManagementOptOutStateGridOptOut  MTRDeviceEnergyManagementOptOutState = 2
+	MTRDeviceEnergyManagementOptOutStateOptOut      MTRDeviceEnergyManagementOptOutState = 3
+)
+
+// String returns the MTRDeviceEnergyManagementOptOutState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDeviceEnergyManagementOptOutState) String() string {
+	switch e {
+	case MTRDeviceEnergyManagementOptOutStateNoOptOut:
+		return "MTRDeviceEnergyManagementOptOutStateNoOptOut"
+	case MTRDeviceEnergyManagementOptOutStateLocalOptOut:
+		return "MTRDeviceEnergyManagementOptOutStateLocalOptOut"
+	case MTRDeviceEnergyManagementOptOutStateGridOptOut:
+		return "MTRDeviceEnergyManagementOptOutStateGridOptOut"
+	case MTRDeviceEnergyManagementOptOutStateOptOut:
+		return "MTRDeviceEnergyManagementOptOutStateOptOut"
+	default:
+		return fmt.Sprintf("MTRDeviceEnergyManagementOptOutState(%d)", int64(e))
+	}
+}
+
+type MTRDeviceEnergyManagementPowerAdjustReason int64
+
+const (
+	MTRDeviceEnergyManagementPowerAdjustReasonNoAdjustment                MTRDeviceEnergyManagementPowerAdjustReason = 0
+	MTRDeviceEnergyManagementPowerAdjustReasonLocalOptimizationAdjustment MTRDeviceEnergyManagementPowerAdjustReason = 1
+	MTRDeviceEnergyManagementPowerAdjustReasonGridOptimizationAdjustment  MTRDeviceEnergyManagementPowerAdjustReason = 2
+)
+
+// String returns the MTRDeviceEnergyManagementPowerAdjustReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDeviceEnergyManagementPowerAdjustReason) String() string {
+	switch e {
+	case MTRDeviceEnergyManagementPowerAdjustReasonNoAdjustment:
+		return "MTRDeviceEnergyManagementPowerAdjustReasonNoAdjustment"
+	case MTRDeviceEnergyManagementPowerAdjustReasonLocalOptimizationAdjustment:
+		return "MTRDeviceEnergyManagementPowerAdjustReasonLocalOptimizationAdjustment"
+	case MTRDeviceEnergyManagementPowerAdjustReasonGridOptimizationAdjustment:
+		return "MTRDeviceEnergyManagementPowerAdjustReasonGridOptimizationAdjustment"
+	default:
+		return fmt.Sprintf("MTRDeviceEnergyManagementPowerAdjustReason(%d)", int64(e))
+	}
+}
+
+type MTRDeviceTypeIDType int64
+
+const (
+	MTRDeviceTypeIDTypeDoorLockID                     MTRDeviceTypeIDType = 10
+	MTRDeviceTypeIDTypeDoorLockControllerID           MTRDeviceTypeIDType = 11
+	MTRDeviceTypeIDTypeAggregatorID                   MTRDeviceTypeIDType = 14
+	MTRDeviceTypeIDTypeGenericSwitchID                MTRDeviceTypeIDType = 15
+	MTRDeviceTypeIDTypePowerSourceID                  MTRDeviceTypeIDType = 17
+	MTRDeviceTypeIDTypeOTARequestorID                 MTRDeviceTypeIDType = 18
+	MTRDeviceTypeIDTypeBridgedNodeID                  MTRDeviceTypeIDType = 19
+	MTRDeviceTypeIDTypeOTAProviderID                  MTRDeviceTypeIDType = 20
+	MTRDeviceTypeIDTypeContactSensorID                MTRDeviceTypeIDType = 21
+	MTRDeviceTypeIDTypeRootNodeID                     MTRDeviceTypeIDType = 22
+	MTRDeviceTypeIDTypeSolarPowerID                   MTRDeviceTypeIDType = 23
+	MTRDeviceTypeIDTypeBatteryStorageID               MTRDeviceTypeIDType = 24
+	MTRDeviceTypeIDTypeSecondaryNetworkInterfaceID    MTRDeviceTypeIDType = 25
+	MTRDeviceTypeIDTypeSpeakerID                      MTRDeviceTypeIDType = 34
+	MTRDeviceTypeIDTypeCastingVideoPlayerID           MTRDeviceTypeIDType = 35
+	MTRDeviceTypeIDTypeContentAppID                   MTRDeviceTypeIDType = 36
+	MTRDeviceTypeIDTypeModeSelectID                   MTRDeviceTypeIDType = 39
+	MTRDeviceTypeIDTypeBasicVideoPlayerID             MTRDeviceTypeIDType = 40
+	MTRDeviceTypeIDTypeCastingVideoClientID           MTRDeviceTypeIDType = 41
+	MTRDeviceTypeIDTypeVideoRemoteControlID           MTRDeviceTypeIDType = 42
+	MTRDeviceTypeIDTypeFanID                          MTRDeviceTypeIDType = 43
+	MTRDeviceTypeIDTypeAirQualitySensorID             MTRDeviceTypeIDType = 44
+	MTRDeviceTypeIDTypeAirPurifierID                  MTRDeviceTypeIDType = 45
+	MTRDeviceTypeIDTypeWaterFreezeDetectorID          MTRDeviceTypeIDType = 65
+	MTRDeviceTypeIDTypeWaterValveID                   MTRDeviceTypeIDType = 66
+	MTRDeviceTypeIDTypeWaterLeakDetectorID            MTRDeviceTypeIDType = 67
+	MTRDeviceTypeIDTypeRainSensorID                   MTRDeviceTypeIDType = 68
+	MTRDeviceTypeIDTypeRefrigeratorID                 MTRDeviceTypeIDType = 112
+	MTRDeviceTypeIDTypeTemperatureControlledCabinetID MTRDeviceTypeIDType = 113
+	MTRDeviceTypeIDTypeRoomAirConditionerID           MTRDeviceTypeIDType = 114
+	MTRDeviceTypeIDTypeLaundryWasherID                MTRDeviceTypeIDType = 115
+	MTRDeviceTypeIDTypeRoboticVacuumCleanerID         MTRDeviceTypeIDType = 116
+	MTRDeviceTypeIDTypeDishwasherID                   MTRDeviceTypeIDType = 117
+	MTRDeviceTypeIDTypeSmokeCOAlarmID                 MTRDeviceTypeIDType = 118
+	MTRDeviceTypeIDTypeCookSurfaceID                  MTRDeviceTypeIDType = 119
+	MTRDeviceTypeIDTypeCooktopID                      MTRDeviceTypeIDType = 120
+	MTRDeviceTypeIDTypeMicrowaveOvenID                MTRDeviceTypeIDType = 121
+	MTRDeviceTypeIDTypeExtractorHoodID                MTRDeviceTypeIDType = 122
+	MTRDeviceTypeIDTypeOvenID                         MTRDeviceTypeIDType = 123
+	MTRDeviceTypeIDTypeLaundryDryerID                 MTRDeviceTypeIDType = 124
+	MTRDeviceTypeIDTypeNetworkInfrastructureManagerID MTRDeviceTypeIDType = 144
+	MTRDeviceTypeIDTypeThreadBorderRouterID           MTRDeviceTypeIDType = 145
+	MTRDeviceTypeIDTypeOnOffLightID                   MTRDeviceTypeIDType = 256
+	MTRDeviceTypeIDTypeDimmableLightID                MTRDeviceTypeIDType = 257
+	MTRDeviceTypeIDTypeOnOffLightSwitchID             MTRDeviceTypeIDType = 259
+	MTRDeviceTypeIDTypeDimmerSwitchID                 MTRDeviceTypeIDType = 260
+	MTRDeviceTypeIDTypeColorDimmerSwitchID            MTRDeviceTypeIDType = 261
+	MTRDeviceTypeIDTypeLightSensorID                  MTRDeviceTypeIDType = 262
+	MTRDeviceTypeIDTypeOccupancySensorID              MTRDeviceTypeIDType = 263
+	MTRDeviceTypeIDTypeOnOffPlugInUnitID              MTRDeviceTypeIDType = 266
+	MTRDeviceTypeIDTypeDimmablePlugInUnitID           MTRDeviceTypeIDType = 267
+	MTRDeviceTypeIDTypeColorTemperatureLightID        MTRDeviceTypeIDType = 268
+	MTRDeviceTypeIDTypeExtendedColorLightID           MTRDeviceTypeIDType = 269
+	MTRDeviceTypeIDTypeWindowCoveringID               MTRDeviceTypeIDType = 514
+	MTRDeviceTypeIDTypeWindowCoveringControllerID     MTRDeviceTypeIDType = 515
+	MTRDeviceTypeIDTypeThermostatID                   MTRDeviceTypeIDType = 769
+	MTRDeviceTypeIDTypeTemperatureSensorID            MTRDeviceTypeIDType = 770
+	MTRDeviceTypeIDTypePumpID                         MTRDeviceTypeIDType = 771
+	MTRDeviceTypeIDTypePumpControllerID               MTRDeviceTypeIDType = 772
+	MTRDeviceTypeIDTypePressureSensorID               MTRDeviceTypeIDType = 773
+	MTRDeviceTypeIDTypeFlowSensorID                   MTRDeviceTypeIDType = 774
+	MTRDeviceTypeIDTypeHumiditySensorID               MTRDeviceTypeIDType = 775
+	MTRDeviceTypeIDTypeHeatPumpID                     MTRDeviceTypeIDType = 777
+	MTRDeviceTypeIDTypeEVSEID                         MTRDeviceTypeIDType = 1292
+	MTRDeviceTypeIDTypeDeviceEnergyManagementID       MTRDeviceTypeIDType = 1293
+	MTRDeviceTypeIDTypeWaterHeaterID                  MTRDeviceTypeIDType = 1295
+	MTRDeviceTypeIDTypeElectricalSensorID             MTRDeviceTypeIDType = 1296
+	MTRDeviceTypeIDTypeControlBridgeID                MTRDeviceTypeIDType = 2112
+	MTRDeviceTypeIDTypeOnOffSensorID                  MTRDeviceTypeIDType = 2128
+)
+
+// String returns the MTRDeviceTypeIDType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDeviceTypeIDType) String() string {
+	switch e {
+	case MTRDeviceTypeIDTypeDoorLockID:
+		return "MTRDeviceTypeIDTypeDoorLockID"
+	case MTRDeviceTypeIDTypeDoorLockControllerID:
+		return "MTRDeviceTypeIDTypeDoorLockControllerID"
+	case MTRDeviceTypeIDTypeAggregatorID:
+		return "MTRDeviceTypeIDTypeAggregatorID"
+	case MTRDeviceTypeIDTypeGenericSwitchID:
+		return "MTRDeviceTypeIDTypeGenericSwitchID"
+	case MTRDeviceTypeIDTypePowerSourceID:
+		return "MTRDeviceTypeIDTypePowerSourceID"
+	case MTRDeviceTypeIDTypeOTARequestorID:
+		return "MTRDeviceTypeIDTypeOTARequestorID"
+	case MTRDeviceTypeIDTypeBridgedNodeID:
+		return "MTRDeviceTypeIDTypeBridgedNodeID"
+	case MTRDeviceTypeIDTypeOTAProviderID:
+		return "MTRDeviceTypeIDTypeOTAProviderID"
+	case MTRDeviceTypeIDTypeContactSensorID:
+		return "MTRDeviceTypeIDTypeContactSensorID"
+	case MTRDeviceTypeIDTypeRootNodeID:
+		return "MTRDeviceTypeIDTypeRootNodeID"
+	case MTRDeviceTypeIDTypeSolarPowerID:
+		return "MTRDeviceTypeIDTypeSolarPowerID"
+	case MTRDeviceTypeIDTypeBatteryStorageID:
+		return "MTRDeviceTypeIDTypeBatteryStorageID"
+	case MTRDeviceTypeIDTypeSecondaryNetworkInterfaceID:
+		return "MTRDeviceTypeIDTypeSecondaryNetworkInterfaceID"
+	case MTRDeviceTypeIDTypeSpeakerID:
+		return "MTRDeviceTypeIDTypeSpeakerID"
+	case MTRDeviceTypeIDTypeCastingVideoPlayerID:
+		return "MTRDeviceTypeIDTypeCastingVideoPlayerID"
+	case MTRDeviceTypeIDTypeContentAppID:
+		return "MTRDeviceTypeIDTypeContentAppID"
+	case MTRDeviceTypeIDTypeModeSelectID:
+		return "MTRDeviceTypeIDTypeModeSelectID"
+	case MTRDeviceTypeIDTypeBasicVideoPlayerID:
+		return "MTRDeviceTypeIDTypeBasicVideoPlayerID"
+	case MTRDeviceTypeIDTypeCastingVideoClientID:
+		return "MTRDeviceTypeIDTypeCastingVideoClientID"
+	case MTRDeviceTypeIDTypeVideoRemoteControlID:
+		return "MTRDeviceTypeIDTypeVideoRemoteControlID"
+	case MTRDeviceTypeIDTypeFanID:
+		return "MTRDeviceTypeIDTypeFanID"
+	case MTRDeviceTypeIDTypeAirQualitySensorID:
+		return "MTRDeviceTypeIDTypeAirQualitySensorID"
+	case MTRDeviceTypeIDTypeAirPurifierID:
+		return "MTRDeviceTypeIDTypeAirPurifierID"
+	case MTRDeviceTypeIDTypeWaterFreezeDetectorID:
+		return "MTRDeviceTypeIDTypeWaterFreezeDetectorID"
+	case MTRDeviceTypeIDTypeWaterValveID:
+		return "MTRDeviceTypeIDTypeWaterValveID"
+	case MTRDeviceTypeIDTypeWaterLeakDetectorID:
+		return "MTRDeviceTypeIDTypeWaterLeakDetectorID"
+	case MTRDeviceTypeIDTypeRainSensorID:
+		return "MTRDeviceTypeIDTypeRainSensorID"
+	case MTRDeviceTypeIDTypeRefrigeratorID:
+		return "MTRDeviceTypeIDTypeRefrigeratorID"
+	case MTRDeviceTypeIDTypeTemperatureControlledCabinetID:
+		return "MTRDeviceTypeIDTypeTemperatureControlledCabinetID"
+	case MTRDeviceTypeIDTypeRoomAirConditionerID:
+		return "MTRDeviceTypeIDTypeRoomAirConditionerID"
+	case MTRDeviceTypeIDTypeLaundryWasherID:
+		return "MTRDeviceTypeIDTypeLaundryWasherID"
+	case MTRDeviceTypeIDTypeRoboticVacuumCleanerID:
+		return "MTRDeviceTypeIDTypeRoboticVacuumCleanerID"
+	case MTRDeviceTypeIDTypeDishwasherID:
+		return "MTRDeviceTypeIDTypeDishwasherID"
+	case MTRDeviceTypeIDTypeSmokeCOAlarmID:
+		return "MTRDeviceTypeIDTypeSmokeCOAlarmID"
+	case MTRDeviceTypeIDTypeCookSurfaceID:
+		return "MTRDeviceTypeIDTypeCookSurfaceID"
+	case MTRDeviceTypeIDTypeCooktopID:
+		return "MTRDeviceTypeIDTypeCooktopID"
+	case MTRDeviceTypeIDTypeMicrowaveOvenID:
+		return "MTRDeviceTypeIDTypeMicrowaveOvenID"
+	case MTRDeviceTypeIDTypeExtractorHoodID:
+		return "MTRDeviceTypeIDTypeExtractorHoodID"
+	case MTRDeviceTypeIDTypeOvenID:
+		return "MTRDeviceTypeIDTypeOvenID"
+	case MTRDeviceTypeIDTypeLaundryDryerID:
+		return "MTRDeviceTypeIDTypeLaundryDryerID"
+	case MTRDeviceTypeIDTypeNetworkInfrastructureManagerID:
+		return "MTRDeviceTypeIDTypeNetworkInfrastructureManagerID"
+	case MTRDeviceTypeIDTypeThreadBorderRouterID:
+		return "MTRDeviceTypeIDTypeThreadBorderRouterID"
+	case MTRDeviceTypeIDTypeOnOffLightID:
+		return "MTRDeviceTypeIDTypeOnOffLightID"
+	case MTRDeviceTypeIDTypeDimmableLightID:
+		return "MTRDeviceTypeIDTypeDimmableLightID"
+	case MTRDeviceTypeIDTypeOnOffLightSwitchID:
+		return "MTRDeviceTypeIDTypeOnOffLightSwitchID"
+	case MTRDeviceTypeIDTypeDimmerSwitchID:
+		return "MTRDeviceTypeIDTypeDimmerSwitchID"
+	case MTRDeviceTypeIDTypeColorDimmerSwitchID:
+		return "MTRDeviceTypeIDTypeColorDimmerSwitchID"
+	case MTRDeviceTypeIDTypeLightSensorID:
+		return "MTRDeviceTypeIDTypeLightSensorID"
+	case MTRDeviceTypeIDTypeOccupancySensorID:
+		return "MTRDeviceTypeIDTypeOccupancySensorID"
+	case MTRDeviceTypeIDTypeOnOffPlugInUnitID:
+		return "MTRDeviceTypeIDTypeOnOffPlugInUnitID"
+	case MTRDeviceTypeIDTypeDimmablePlugInUnitID:
+		return "MTRDeviceTypeIDTypeDimmablePlugInUnitID"
+	case MTRDeviceTypeIDTypeColorTemperatureLightID:
+		return "MTRDeviceTypeIDTypeColorTemperatureLightID"
+	case MTRDeviceTypeIDTypeExtendedColorLightID:
+		return "MTRDeviceTypeIDTypeExtendedColorLightID"
+	case MTRDeviceTypeIDTypeWindowCoveringID:
+		return "MTRDeviceTypeIDTypeWindowCoveringID"
+	case MTRDeviceTypeIDTypeWindowCoveringControllerID:
+		return "MTRDeviceTypeIDTypeWindowCoveringControllerID"
+	case MTRDeviceTypeIDTypeThermostatID:
+		return "MTRDeviceTypeIDTypeThermostatID"
+	case MTRDeviceTypeIDTypeTemperatureSensorID:
+		return "MTRDeviceTypeIDTypeTemperatureSensorID"
+	case MTRDeviceTypeIDTypePumpID:
+		return "MTRDeviceTypeIDTypePumpID"
+	case MTRDeviceTypeIDTypePumpControllerID:
+		return "MTRDeviceTypeIDTypePumpControllerID"
+	case MTRDeviceTypeIDTypePressureSensorID:
+		return "MTRDeviceTypeIDTypePressureSensorID"
+	case MTRDeviceTypeIDTypeFlowSensorID:
+		return "MTRDeviceTypeIDTypeFlowSensorID"
+	case MTRDeviceTypeIDTypeHumiditySensorID:
+		return "MTRDeviceTypeIDTypeHumiditySensorID"
+	case MTRDeviceTypeIDTypeHeatPumpID:
+		return "MTRDeviceTypeIDTypeHeatPumpID"
+	case MTRDeviceTypeIDTypeEVSEID:
+		return "MTRDeviceTypeIDTypeEVSEID"
+	case MTRDeviceTypeIDTypeDeviceEnergyManagementID:
+		return "MTRDeviceTypeIDTypeDeviceEnergyManagementID"
+	case MTRDeviceTypeIDTypeWaterHeaterID:
+		return "MTRDeviceTypeIDTypeWaterHeaterID"
+	case MTRDeviceTypeIDTypeElectricalSensorID:
+		return "MTRDeviceTypeIDTypeElectricalSensorID"
+	case MTRDeviceTypeIDTypeControlBridgeID:
+		return "MTRDeviceTypeIDTypeControlBridgeID"
+	case MTRDeviceTypeIDTypeOnOffSensorID:
+		return "MTRDeviceTypeIDTypeOnOffSensorID"
+	default:
+		return fmt.Sprintf("MTRDeviceTypeIDType(%d)", int64(e))
+	}
+}
+
+type MTRDiagnosticLogsIntent int64
+
+const (
+	MTRDiagnosticLogsIntentEndUserSupport MTRDiagnosticLogsIntent = 0
+	MTRDiagnosticLogsIntentNetworkDiag    MTRDiagnosticLogsIntent = 1
+	MTRDiagnosticLogsIntentCrashLogs      MTRDiagnosticLogsIntent = 2
+)
+
+// String returns the MTRDiagnosticLogsIntent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDiagnosticLogsIntent) String() string {
+	switch e {
+	case MTRDiagnosticLogsIntentEndUserSupport:
+		return "MTRDiagnosticLogsIntentEndUserSupport"
+	case MTRDiagnosticLogsIntentNetworkDiag:
+		return "MTRDiagnosticLogsIntentNetworkDiag"
+	case MTRDiagnosticLogsIntentCrashLogs:
+		return "MTRDiagnosticLogsIntentCrashLogs"
+	default:
+		return fmt.Sprintf("MTRDiagnosticLogsIntent(%d)", int64(e))
+	}
+}
+
+type MTRDiagnosticLogsLogsIntent int64
+
+const (
+	MTRDiagnosticLogsLogsIntentEndUserSupport MTRDiagnosticLogsLogsIntent = 0
+	MTRDiagnosticLogsLogsIntentNetworkDiag    MTRDiagnosticLogsLogsIntent = 1
+	MTRDiagnosticLogsLogsIntentCrashLogs      MTRDiagnosticLogsLogsIntent = 2
+)
+
+// String returns the MTRDiagnosticLogsLogsIntent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDiagnosticLogsLogsIntent) String() string {
+	switch e {
+	case MTRDiagnosticLogsLogsIntentEndUserSupport:
+		return "MTRDiagnosticLogsLogsIntentEndUserSupport"
+	case MTRDiagnosticLogsLogsIntentNetworkDiag:
+		return "MTRDiagnosticLogsLogsIntentNetworkDiag"
+	case MTRDiagnosticLogsLogsIntentCrashLogs:
+		return "MTRDiagnosticLogsLogsIntentCrashLogs"
+	default:
+		return fmt.Sprintf("MTRDiagnosticLogsLogsIntent(%d)", int64(e))
+	}
+}
+
+type MTRDiagnosticLogsLogsStatus int64
+
+const (
+	MTRDiagnosticLogsLogsStatusSuccess   MTRDiagnosticLogsLogsStatus = 0
+	MTRDiagnosticLogsLogsStatusExhausted MTRDiagnosticLogsLogsStatus = 1
+	MTRDiagnosticLogsLogsStatusNoLogs    MTRDiagnosticLogsLogsStatus = 2
+	MTRDiagnosticLogsLogsStatusBusy      MTRDiagnosticLogsLogsStatus = 3
+	MTRDiagnosticLogsLogsStatusDenied    MTRDiagnosticLogsLogsStatus = 4
+)
+
+// String returns the MTRDiagnosticLogsLogsStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDiagnosticLogsLogsStatus) String() string {
+	switch e {
+	case MTRDiagnosticLogsLogsStatusSuccess:
+		return "MTRDiagnosticLogsLogsStatusSuccess"
+	case MTRDiagnosticLogsLogsStatusExhausted:
+		return "MTRDiagnosticLogsLogsStatusExhausted"
+	case MTRDiagnosticLogsLogsStatusNoLogs:
+		return "MTRDiagnosticLogsLogsStatusNoLogs"
+	case MTRDiagnosticLogsLogsStatusBusy:
+		return "MTRDiagnosticLogsLogsStatusBusy"
+	case MTRDiagnosticLogsLogsStatusDenied:
+		return "MTRDiagnosticLogsLogsStatusDenied"
+	default:
+		return fmt.Sprintf("MTRDiagnosticLogsLogsStatus(%d)", int64(e))
+	}
+}
+
+type MTRDiagnosticLogsLogsTransferProtocol int64
+
+const (
+	MTRDiagnosticLogsLogsTransferProtocolResponsePayload MTRDiagnosticLogsLogsTransferProtocol = 0
+	MTRDiagnosticLogsLogsTransferProtocolBDX             MTRDiagnosticLogsLogsTransferProtocol = 1
+)
+
+// String returns the MTRDiagnosticLogsLogsTransferProtocol constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDiagnosticLogsLogsTransferProtocol) String() string {
+	switch e {
+	case MTRDiagnosticLogsLogsTransferProtocolResponsePayload:
+		return "MTRDiagnosticLogsLogsTransferProtocolResponsePayload"
+	case MTRDiagnosticLogsLogsTransferProtocolBDX:
+		return "MTRDiagnosticLogsLogsTransferProtocolBDX"
+	default:
+		return fmt.Sprintf("MTRDiagnosticLogsLogsTransferProtocol(%d)", int64(e))
+	}
+}
+
+type MTRDiagnosticLogsStatus int64
+
+const (
+	MTRDiagnosticLogsStatusSuccess   MTRDiagnosticLogsStatus = 0
+	MTRDiagnosticLogsStatusExhausted MTRDiagnosticLogsStatus = 1
+	MTRDiagnosticLogsStatusNoLogs    MTRDiagnosticLogsStatus = 2
+	MTRDiagnosticLogsStatusBusy      MTRDiagnosticLogsStatus = 3
+	MTRDiagnosticLogsStatusDenied    MTRDiagnosticLogsStatus = 4
+)
+
+// String returns the MTRDiagnosticLogsStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDiagnosticLogsStatus) String() string {
+	switch e {
+	case MTRDiagnosticLogsStatusSuccess:
+		return "MTRDiagnosticLogsStatusSuccess"
+	case MTRDiagnosticLogsStatusExhausted:
+		return "MTRDiagnosticLogsStatusExhausted"
+	case MTRDiagnosticLogsStatusNoLogs:
+		return "MTRDiagnosticLogsStatusNoLogs"
+	case MTRDiagnosticLogsStatusBusy:
+		return "MTRDiagnosticLogsStatusBusy"
+	case MTRDiagnosticLogsStatusDenied:
+		return "MTRDiagnosticLogsStatusDenied"
+	default:
+		return fmt.Sprintf("MTRDiagnosticLogsStatus(%d)", int64(e))
+	}
+}
+
+type MTRDiagnosticLogsTransferProtocol int64
+
+const (
+	MTRDiagnosticLogsTransferProtocolResponsePayload MTRDiagnosticLogsTransferProtocol = 0
+	MTRDiagnosticLogsTransferProtocolBDX             MTRDiagnosticLogsTransferProtocol = 1
+)
+
+// String returns the MTRDiagnosticLogsTransferProtocol constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDiagnosticLogsTransferProtocol) String() string {
+	switch e {
+	case MTRDiagnosticLogsTransferProtocolResponsePayload:
+		return "MTRDiagnosticLogsTransferProtocolResponsePayload"
+	case MTRDiagnosticLogsTransferProtocolBDX:
+		return "MTRDiagnosticLogsTransferProtocolBDX"
+	default:
+		return fmt.Sprintf("MTRDiagnosticLogsTransferProtocol(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRDishwasherAlarmAlarmBitmap int64
+
+const (
+	MTRDishwasherAlarmAlarmBitmapDoorError MTRDishwasherAlarmAlarmBitmap = 4
+)
+
+// String returns the MTRDishwasherAlarmAlarmBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDishwasherAlarmAlarmBitmap) String() string {
+	var parts []string
+	if e&MTRDishwasherAlarmAlarmBitmapDoorError != 0 {
+		parts = append(parts, "MTRDishwasherAlarmAlarmBitmapDoorError")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRDishwasherAlarmFeature int64
+
+const (
+	MTRDishwasherAlarmFeatureReset MTRDishwasherAlarmFeature = 1
+)
+
+// String returns the MTRDishwasherAlarmFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDishwasherAlarmFeature) String() string {
+	var parts []string
+	if e&MTRDishwasherAlarmFeatureReset != 0 {
+		parts = append(parts, "MTRDishwasherAlarmFeatureReset")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRDishwasherModeModeTag int64
+
+const (
+	MTRDishwasherModeModeTagAuto      MTRDishwasherModeModeTag = 0
+	MTRDishwasherModeModeTagQuick     MTRDishwasherModeModeTag = 1
+	MTRDishwasherModeModeTagQuiet     MTRDishwasherModeModeTag = 2
+	MTRDishwasherModeModeTagLowNoise  MTRDishwasherModeModeTag = 3
+	MTRDishwasherModeModeTagLowEnergy MTRDishwasherModeModeTag = 4
+	MTRDishwasherModeModeTagVacation  MTRDishwasherModeModeTag = 5
+	MTRDishwasherModeModeTagMin       MTRDishwasherModeModeTag = 6
+	MTRDishwasherModeModeTagMax       MTRDishwasherModeModeTag = 7
+	MTRDishwasherModeModeTagNight     MTRDishwasherModeModeTag = 8
+	MTRDishwasherModeModeTagDay       MTRDishwasherModeModeTag = 9
+	MTRDishwasherModeModeTagNormal    MTRDishwasherModeModeTag = 16384
+	MTRDishwasherModeModeTagHeavy     MTRDishwasherModeModeTag = 16385
+	MTRDishwasherModeModeTagLight     MTRDishwasherModeModeTag = 16386
+)
+
+// String returns the MTRDishwasherModeModeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDishwasherModeModeTag) String() string {
+	switch e {
+	case MTRDishwasherModeModeTagAuto:
+		return "MTRDishwasherModeModeTagAuto"
+	case MTRDishwasherModeModeTagQuick:
+		return "MTRDishwasherModeModeTagQuick"
+	case MTRDishwasherModeModeTagQuiet:
+		return "MTRDishwasherModeModeTagQuiet"
+	case MTRDishwasherModeModeTagLowNoise:
+		return "MTRDishwasherModeModeTagLowNoise"
+	case MTRDishwasherModeModeTagLowEnergy:
+		return "MTRDishwasherModeModeTagLowEnergy"
+	case MTRDishwasherModeModeTagVacation:
+		return "MTRDishwasherModeModeTagVacation"
+	case MTRDishwasherModeModeTagMin:
+		return "MTRDishwasherModeModeTagMin"
+	case MTRDishwasherModeModeTagMax:
+		return "MTRDishwasherModeModeTagMax"
+	case MTRDishwasherModeModeTagNight:
+		return "MTRDishwasherModeModeTagNight"
+	case MTRDishwasherModeModeTagDay:
+		return "MTRDishwasherModeModeTagDay"
+	case MTRDishwasherModeModeTagNormal:
+		return "MTRDishwasherModeModeTagNormal"
+	case MTRDishwasherModeModeTagHeavy:
+		return "MTRDishwasherModeModeTagHeavy"
+	case MTRDishwasherModeModeTagLight:
+		return "MTRDishwasherModeModeTagLight"
+	default:
+		return fmt.Sprintf("MTRDishwasherModeModeTag(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockAlarmCode int64
+
+const (
+	MTRDoorLockAlarmCodeLockJammed              MTRDoorLockAlarmCode = 0
+	MTRDoorLockAlarmCodeLockFactoryReset        MTRDoorLockAlarmCode = 1
+	MTRDoorLockAlarmCodeLockRadioPowerCycled    MTRDoorLockAlarmCode = 3
+	MTRDoorLockAlarmCodeWrongCodeEntryLimit     MTRDoorLockAlarmCode = 4
+	MTRDoorLockAlarmCodeFrontEsceutcheonRemoved MTRDoorLockAlarmCode = 5
+	MTRDoorLockAlarmCodeDoorForcedOpen          MTRDoorLockAlarmCode = 6
+	MTRDoorLockAlarmCodeDoorAjar                MTRDoorLockAlarmCode = 7
+	MTRDoorLockAlarmCodeForcedUser              MTRDoorLockAlarmCode = 8
+)
+
+// String returns the MTRDoorLockAlarmCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockAlarmCode) String() string {
+	switch e {
+	case MTRDoorLockAlarmCodeLockJammed:
+		return "MTRDoorLockAlarmCodeLockJammed"
+	case MTRDoorLockAlarmCodeLockFactoryReset:
+		return "MTRDoorLockAlarmCodeLockFactoryReset"
+	case MTRDoorLockAlarmCodeLockRadioPowerCycled:
+		return "MTRDoorLockAlarmCodeLockRadioPowerCycled"
+	case MTRDoorLockAlarmCodeWrongCodeEntryLimit:
+		return "MTRDoorLockAlarmCodeWrongCodeEntryLimit"
+	case MTRDoorLockAlarmCodeFrontEsceutcheonRemoved:
+		return "MTRDoorLockAlarmCodeFrontEsceutcheonRemoved"
+	case MTRDoorLockAlarmCodeDoorForcedOpen:
+		return "MTRDoorLockAlarmCodeDoorForcedOpen"
+	case MTRDoorLockAlarmCodeDoorAjar:
+		return "MTRDoorLockAlarmCodeDoorAjar"
+	case MTRDoorLockAlarmCodeForcedUser:
+		return "MTRDoorLockAlarmCodeForcedUser"
+	default:
+		return fmt.Sprintf("MTRDoorLockAlarmCode(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockCredentialRule int64
+
+const (
+	MTRDoorLockCredentialRuleSingle MTRDoorLockCredentialRule = 0
+	MTRDoorLockCredentialRuleDual   MTRDoorLockCredentialRule = 1
+	MTRDoorLockCredentialRuleTri    MTRDoorLockCredentialRule = 2
+)
+
+// String returns the MTRDoorLockCredentialRule constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockCredentialRule) String() string {
+	switch e {
+	case MTRDoorLockCredentialRuleSingle:
+		return "MTRDoorLockCredentialRuleSingle"
+	case MTRDoorLockCredentialRuleDual:
+		return "MTRDoorLockCredentialRuleDual"
+	case MTRDoorLockCredentialRuleTri:
+		return "MTRDoorLockCredentialRuleTri"
+	default:
+		return fmt.Sprintf("MTRDoorLockCredentialRule(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockCredentialType int64
+
+const (
+	MTRDoorLockCredentialTypeProgrammingPIN               MTRDoorLockCredentialType = 0
+	MTRDoorLockCredentialTypePIN                          MTRDoorLockCredentialType = 1
+	MTRDoorLockCredentialTypeRFID                         MTRDoorLockCredentialType = 2
+	MTRDoorLockCredentialTypeFingerprint                  MTRDoorLockCredentialType = 3
+	MTRDoorLockCredentialTypeFingerVein                   MTRDoorLockCredentialType = 4
+	MTRDoorLockCredentialTypeFace                         MTRDoorLockCredentialType = 5
+	MTRDoorLockCredentialTypeAliroCredentialIssuerKey     MTRDoorLockCredentialType = 6
+	MTRDoorLockCredentialTypeAliroEvictableEndpointKey    MTRDoorLockCredentialType = 7
+	MTRDoorLockCredentialTypeAliroNonEvictableEndpointKey MTRDoorLockCredentialType = 8
+)
+
+// String returns the MTRDoorLockCredentialType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockCredentialType) String() string {
+	switch e {
+	case MTRDoorLockCredentialTypeProgrammingPIN:
+		return "MTRDoorLockCredentialTypeProgrammingPIN"
+	case MTRDoorLockCredentialTypePIN:
+		return "MTRDoorLockCredentialTypePIN"
+	case MTRDoorLockCredentialTypeRFID:
+		return "MTRDoorLockCredentialTypeRFID"
+	case MTRDoorLockCredentialTypeFingerprint:
+		return "MTRDoorLockCredentialTypeFingerprint"
+	case MTRDoorLockCredentialTypeFingerVein:
+		return "MTRDoorLockCredentialTypeFingerVein"
+	case MTRDoorLockCredentialTypeFace:
+		return "MTRDoorLockCredentialTypeFace"
+	case MTRDoorLockCredentialTypeAliroCredentialIssuerKey:
+		return "MTRDoorLockCredentialTypeAliroCredentialIssuerKey"
+	case MTRDoorLockCredentialTypeAliroEvictableEndpointKey:
+		return "MTRDoorLockCredentialTypeAliroEvictableEndpointKey"
+	case MTRDoorLockCredentialTypeAliroNonEvictableEndpointKey:
+		return "MTRDoorLockCredentialTypeAliroNonEvictableEndpointKey"
+	default:
+		return fmt.Sprintf("MTRDoorLockCredentialType(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockDataOperationType int64
+
+const (
+	MTRDoorLockDataOperationTypeAdd    MTRDoorLockDataOperationType = 0
+	MTRDoorLockDataOperationTypeClear  MTRDoorLockDataOperationType = 1
+	MTRDoorLockDataOperationTypeModify MTRDoorLockDataOperationType = 2
+)
+
+// String returns the MTRDoorLockDataOperationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDataOperationType) String() string {
+	switch e {
+	case MTRDoorLockDataOperationTypeAdd:
+		return "MTRDoorLockDataOperationTypeAdd"
+	case MTRDoorLockDataOperationTypeClear:
+		return "MTRDoorLockDataOperationTypeClear"
+	case MTRDoorLockDataOperationTypeModify:
+		return "MTRDoorLockDataOperationTypeModify"
+	default:
+		return fmt.Sprintf("MTRDoorLockDataOperationType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDayOfWeek int64
+
+const (
+	MTRDoorLockDayOfWeekSunday    MTRDoorLockDayOfWeek = 1
+	MTRDoorLockDayOfWeekMonday    MTRDoorLockDayOfWeek = 2
+	MTRDoorLockDayOfWeekTuesday   MTRDoorLockDayOfWeek = 4
+	MTRDoorLockDayOfWeekWednesday MTRDoorLockDayOfWeek = 8
+	MTRDoorLockDayOfWeekThursday  MTRDoorLockDayOfWeek = 16
+	MTRDoorLockDayOfWeekFriday    MTRDoorLockDayOfWeek = 32
+	MTRDoorLockDayOfWeekSaturday  MTRDoorLockDayOfWeek = 64
+)
+
+// String returns the MTRDoorLockDayOfWeek constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDayOfWeek) String() string {
+	var parts []string
+	if e&MTRDoorLockDayOfWeekSunday != 0 {
+		parts = append(parts, "MTRDoorLockDayOfWeekSunday")
+	}
+	if e&MTRDoorLockDayOfWeekMonday != 0 {
+		parts = append(parts, "MTRDoorLockDayOfWeekMonday")
+	}
+	if e&MTRDoorLockDayOfWeekTuesday != 0 {
+		parts = append(parts, "MTRDoorLockDayOfWeekTuesday")
+	}
+	if e&MTRDoorLockDayOfWeekWednesday != 0 {
+		parts = append(parts, "MTRDoorLockDayOfWeekWednesday")
+	}
+	if e&MTRDoorLockDayOfWeekThursday != 0 {
+		parts = append(parts, "MTRDoorLockDayOfWeekThursday")
+	}
+	if e&MTRDoorLockDayOfWeekFriday != 0 {
+		parts = append(parts, "MTRDoorLockDayOfWeekFriday")
+	}
+	if e&MTRDoorLockDayOfWeekSaturday != 0 {
+		parts = append(parts, "MTRDoorLockDayOfWeekSaturday")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDaysMaskMap int64
+
+const (
+	MTRDoorLockDaysMaskMapSunday    MTRDoorLockDaysMaskMap = 1
+	MTRDoorLockDaysMaskMapMonday    MTRDoorLockDaysMaskMap = 2
+	MTRDoorLockDaysMaskMapTuesday   MTRDoorLockDaysMaskMap = 4
+	MTRDoorLockDaysMaskMapWednesday MTRDoorLockDaysMaskMap = 8
+	MTRDoorLockDaysMaskMapThursday  MTRDoorLockDaysMaskMap = 16
+	MTRDoorLockDaysMaskMapFriday    MTRDoorLockDaysMaskMap = 32
+	MTRDoorLockDaysMaskMapSaturday  MTRDoorLockDaysMaskMap = 64
+)
+
+// String returns the MTRDoorLockDaysMaskMap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDaysMaskMap) String() string {
+	var parts []string
+	if e&MTRDoorLockDaysMaskMapSunday != 0 {
+		parts = append(parts, "MTRDoorLockDaysMaskMapSunday")
+	}
+	if e&MTRDoorLockDaysMaskMapMonday != 0 {
+		parts = append(parts, "MTRDoorLockDaysMaskMapMonday")
+	}
+	if e&MTRDoorLockDaysMaskMapTuesday != 0 {
+		parts = append(parts, "MTRDoorLockDaysMaskMapTuesday")
+	}
+	if e&MTRDoorLockDaysMaskMapWednesday != 0 {
+		parts = append(parts, "MTRDoorLockDaysMaskMapWednesday")
+	}
+	if e&MTRDoorLockDaysMaskMapThursday != 0 {
+		parts = append(parts, "MTRDoorLockDaysMaskMapThursday")
+	}
+	if e&MTRDoorLockDaysMaskMapFriday != 0 {
+		parts = append(parts, "MTRDoorLockDaysMaskMapFriday")
+	}
+	if e&MTRDoorLockDaysMaskMapSaturday != 0 {
+		parts = append(parts, "MTRDoorLockDaysMaskMapSaturday")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRDoorLockDlAlarmCode int64
+
+const (
+	MTRDoorLockDlAlarmCodeLockJammed              MTRDoorLockDlAlarmCode = 0
+	MTRDoorLockDlAlarmCodeLockFactoryReset        MTRDoorLockDlAlarmCode = 1
+	MTRDoorLockDlAlarmCodeLockRadioPowerCycled    MTRDoorLockDlAlarmCode = 3
+	MTRDoorLockDlAlarmCodeWrongCodeEntryLimit     MTRDoorLockDlAlarmCode = 4
+	MTRDoorLockDlAlarmCodeFrontEsceutcheonRemoved MTRDoorLockDlAlarmCode = 5
+	MTRDoorLockDlAlarmCodeDoorForcedOpen          MTRDoorLockDlAlarmCode = 6
+	MTRDoorLockDlAlarmCodeDoorAjar                MTRDoorLockDlAlarmCode = 7
+	MTRDoorLockDlAlarmCodeForcedUser              MTRDoorLockDlAlarmCode = 8
+)
+
+// String returns the MTRDoorLockDlAlarmCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlAlarmCode) String() string {
+	switch e {
+	case MTRDoorLockDlAlarmCodeLockJammed:
+		return "MTRDoorLockDlAlarmCodeLockJammed"
+	case MTRDoorLockDlAlarmCodeLockFactoryReset:
+		return "MTRDoorLockDlAlarmCodeLockFactoryReset"
+	case MTRDoorLockDlAlarmCodeLockRadioPowerCycled:
+		return "MTRDoorLockDlAlarmCodeLockRadioPowerCycled"
+	case MTRDoorLockDlAlarmCodeWrongCodeEntryLimit:
+		return "MTRDoorLockDlAlarmCodeWrongCodeEntryLimit"
+	case MTRDoorLockDlAlarmCodeFrontEsceutcheonRemoved:
+		return "MTRDoorLockDlAlarmCodeFrontEsceutcheonRemoved"
+	case MTRDoorLockDlAlarmCodeDoorForcedOpen:
+		return "MTRDoorLockDlAlarmCodeDoorForcedOpen"
+	case MTRDoorLockDlAlarmCodeDoorAjar:
+		return "MTRDoorLockDlAlarmCodeDoorAjar"
+	case MTRDoorLockDlAlarmCodeForcedUser:
+		return "MTRDoorLockDlAlarmCodeForcedUser"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlAlarmCode(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockDlCredentialRule int64
+
+const (
+	MTRDoorLockDlCredentialRuleSingle MTRDoorLockDlCredentialRule = 0
+	MTRDoorLockDlCredentialRuleTri    MTRDoorLockDlCredentialRule = 2
+)
+
+// String returns the MTRDoorLockDlCredentialRule constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlCredentialRule) String() string {
+	switch e {
+	case MTRDoorLockDlCredentialRuleSingle:
+		return "MTRDoorLockDlCredentialRuleSingle"
+	case MTRDoorLockDlCredentialRuleTri:
+		return "MTRDoorLockDlCredentialRuleTri"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlCredentialRule(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDlCredentialRuleMask int64
+
+const (
+	MTRDoorLockDlCredentialRuleMaskSingle MTRDoorLockDlCredentialRuleMask = 1
+	MTRDoorLockDlCredentialRuleMaskDual   MTRDoorLockDlCredentialRuleMask = 2
+	MTRDoorLockDlCredentialRuleMaskTri    MTRDoorLockDlCredentialRuleMask = 4
+)
+
+// String returns the MTRDoorLockDlCredentialRuleMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlCredentialRuleMask) String() string {
+	var parts []string
+	if e&MTRDoorLockDlCredentialRuleMaskSingle != 0 {
+		parts = append(parts, "MTRDoorLockDlCredentialRuleMaskSingle")
+	}
+	if e&MTRDoorLockDlCredentialRuleMaskDual != 0 {
+		parts = append(parts, "MTRDoorLockDlCredentialRuleMaskDual")
+	}
+	if e&MTRDoorLockDlCredentialRuleMaskTri != 0 {
+		parts = append(parts, "MTRDoorLockDlCredentialRuleMaskTri")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDlCredentialRulesSupport int64
+
+const (
+	MTRDoorLockDlCredentialRulesSupportSingle MTRDoorLockDlCredentialRulesSupport = 1
+	MTRDoorLockDlCredentialRulesSupportDual   MTRDoorLockDlCredentialRulesSupport = 2
+	MTRDoorLockDlCredentialRulesSupportTri    MTRDoorLockDlCredentialRulesSupport = 4
+)
+
+// String returns the MTRDoorLockDlCredentialRulesSupport constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlCredentialRulesSupport) String() string {
+	var parts []string
+	if e&MTRDoorLockDlCredentialRulesSupportSingle != 0 {
+		parts = append(parts, "MTRDoorLockDlCredentialRulesSupportSingle")
+	}
+	if e&MTRDoorLockDlCredentialRulesSupportDual != 0 {
+		parts = append(parts, "MTRDoorLockDlCredentialRulesSupportDual")
+	}
+	if e&MTRDoorLockDlCredentialRulesSupportTri != 0 {
+		parts = append(parts, "MTRDoorLockDlCredentialRulesSupportTri")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRDoorLockDlCredentialType int64
+
+const (
+	MTRDoorLockDlCredentialTypeProgrammingPIN MTRDoorLockDlCredentialType = 0
+	MTRDoorLockDlCredentialTypePIN            MTRDoorLockDlCredentialType = 1
+	MTRDoorLockDlCredentialTypeRFID           MTRDoorLockDlCredentialType = 2
+	MTRDoorLockDlCredentialTypeFingerprint    MTRDoorLockDlCredentialType = 3
+	MTRDoorLockDlCredentialTypeFingerVein     MTRDoorLockDlCredentialType = 4
+	MTRDoorLockDlCredentialTypeFace           MTRDoorLockDlCredentialType = 5
+)
+
+// String returns the MTRDoorLockDlCredentialType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlCredentialType) String() string {
+	switch e {
+	case MTRDoorLockDlCredentialTypeProgrammingPIN:
+		return "MTRDoorLockDlCredentialTypeProgrammingPIN"
+	case MTRDoorLockDlCredentialTypePIN:
+		return "MTRDoorLockDlCredentialTypePIN"
+	case MTRDoorLockDlCredentialTypeRFID:
+		return "MTRDoorLockDlCredentialTypeRFID"
+	case MTRDoorLockDlCredentialTypeFingerprint:
+		return "MTRDoorLockDlCredentialTypeFingerprint"
+	case MTRDoorLockDlCredentialTypeFingerVein:
+		return "MTRDoorLockDlCredentialTypeFingerVein"
+	case MTRDoorLockDlCredentialTypeFace:
+		return "MTRDoorLockDlCredentialTypeFace"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlCredentialType(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockDlDataOperationType int64
+
+const (
+	MTRDoorLockDlDataOperationTypeAdd    MTRDoorLockDlDataOperationType = 0
+	MTRDoorLockDlDataOperationTypeClear  MTRDoorLockDlDataOperationType = 1
+	MTRDoorLockDlDataOperationTypeModify MTRDoorLockDlDataOperationType = 2
+)
+
+// String returns the MTRDoorLockDlDataOperationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlDataOperationType) String() string {
+	switch e {
+	case MTRDoorLockDlDataOperationTypeAdd:
+		return "MTRDoorLockDlDataOperationTypeAdd"
+	case MTRDoorLockDlDataOperationTypeClear:
+		return "MTRDoorLockDlDataOperationTypeClear"
+	case MTRDoorLockDlDataOperationTypeModify:
+		return "MTRDoorLockDlDataOperationTypeModify"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlDataOperationType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDlDaysMaskMap int64
+
+const (
+	MTRDoorLockDlDaysMaskMapSunday    MTRDoorLockDlDaysMaskMap = 1
+	MTRDoorLockDlDaysMaskMapMonday    MTRDoorLockDlDaysMaskMap = 2
+	MTRDoorLockDlDaysMaskMapTuesday   MTRDoorLockDlDaysMaskMap = 4
+	MTRDoorLockDlDaysMaskMapWednesday MTRDoorLockDlDaysMaskMap = 8
+	MTRDoorLockDlDaysMaskMapThursday  MTRDoorLockDlDaysMaskMap = 16
+	MTRDoorLockDlDaysMaskMapFriday    MTRDoorLockDlDaysMaskMap = 32
+	MTRDoorLockDlDaysMaskMapSaturday  MTRDoorLockDlDaysMaskMap = 64
+)
+
+// String returns the MTRDoorLockDlDaysMaskMap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlDaysMaskMap) String() string {
+	var parts []string
+	if e&MTRDoorLockDlDaysMaskMapSunday != 0 {
+		parts = append(parts, "MTRDoorLockDlDaysMaskMapSunday")
+	}
+	if e&MTRDoorLockDlDaysMaskMapMonday != 0 {
+		parts = append(parts, "MTRDoorLockDlDaysMaskMapMonday")
+	}
+	if e&MTRDoorLockDlDaysMaskMapTuesday != 0 {
+		parts = append(parts, "MTRDoorLockDlDaysMaskMapTuesday")
+	}
+	if e&MTRDoorLockDlDaysMaskMapWednesday != 0 {
+		parts = append(parts, "MTRDoorLockDlDaysMaskMapWednesday")
+	}
+	if e&MTRDoorLockDlDaysMaskMapThursday != 0 {
+		parts = append(parts, "MTRDoorLockDlDaysMaskMapThursday")
+	}
+	if e&MTRDoorLockDlDaysMaskMapFriday != 0 {
+		parts = append(parts, "MTRDoorLockDlDaysMaskMapFriday")
+	}
+	if e&MTRDoorLockDlDaysMaskMapSaturday != 0 {
+		parts = append(parts, "MTRDoorLockDlDaysMaskMapSaturday")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDlDefaultConfigurationRegister int64
+
+const (
+	MTRDoorLockDlDefaultConfigurationRegisterEnableLocalProgrammingEnabled         MTRDoorLockDlDefaultConfigurationRegister = 1
+	MTRDoorLockDlDefaultConfigurationRegisterKeypadInterfaceDefaultAccessEnabled   MTRDoorLockDlDefaultConfigurationRegister = 2
+	MTRDoorLockDlDefaultConfigurationRegisterRemoteInterfaceDefaultAccessIsEnabled MTRDoorLockDlDefaultConfigurationRegister = 4
+	MTRDoorLockDlDefaultConfigurationRegisterSoundEnabled                          MTRDoorLockDlDefaultConfigurationRegister = 32
+	MTRDoorLockDlDefaultConfigurationRegisterAutoRelockTimeSet                     MTRDoorLockDlDefaultConfigurationRegister = 64
+	MTRDoorLockDlDefaultConfigurationRegisterLEDSettingsSet                        MTRDoorLockDlDefaultConfigurationRegister = 128
+)
+
+// String returns the MTRDoorLockDlDefaultConfigurationRegister constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlDefaultConfigurationRegister) String() string {
+	var parts []string
+	if e&MTRDoorLockDlDefaultConfigurationRegisterEnableLocalProgrammingEnabled != 0 {
+		parts = append(parts, "MTRDoorLockDlDefaultConfigurationRegisterEnableLocalProgrammingEnabled")
+	}
+	if e&MTRDoorLockDlDefaultConfigurationRegisterKeypadInterfaceDefaultAccessEnabled != 0 {
+		parts = append(parts, "MTRDoorLockDlDefaultConfigurationRegisterKeypadInterfaceDefaultAccessEnabled")
+	}
+	if e&MTRDoorLockDlDefaultConfigurationRegisterRemoteInterfaceDefaultAccessIsEnabled != 0 {
+		parts = append(parts, "MTRDoorLockDlDefaultConfigurationRegisterRemoteInterfaceDefaultAccessIsEnabled")
+	}
+	if e&MTRDoorLockDlDefaultConfigurationRegisterSoundEnabled != 0 {
+		parts = append(parts, "MTRDoorLockDlDefaultConfigurationRegisterSoundEnabled")
+	}
+	if e&MTRDoorLockDlDefaultConfigurationRegisterAutoRelockTimeSet != 0 {
+		parts = append(parts, "MTRDoorLockDlDefaultConfigurationRegisterAutoRelockTimeSet")
+	}
+	if e&MTRDoorLockDlDefaultConfigurationRegisterLEDSettingsSet != 0 {
+		parts = append(parts, "MTRDoorLockDlDefaultConfigurationRegisterLEDSettingsSet")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRDoorLockDlDoorState int64
+
+const (
+	MTRDoorLockDlDoorStateDoorOpen             MTRDoorLockDlDoorState = 0
+	MTRDoorLockDlDoorStateDoorClosed           MTRDoorLockDlDoorState = 1
+	MTRDoorLockDlDoorStateDoorJammed           MTRDoorLockDlDoorState = 2
+	MTRDoorLockDlDoorStateDoorForcedOpen       MTRDoorLockDlDoorState = 3
+	MTRDoorLockDlDoorStateDoorUnspecifiedError MTRDoorLockDlDoorState = 4
+	MTRDoorLockDlDoorStateDoorAjar             MTRDoorLockDlDoorState = 5
+)
+
+// String returns the MTRDoorLockDlDoorState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlDoorState) String() string {
+	switch e {
+	case MTRDoorLockDlDoorStateDoorOpen:
+		return "MTRDoorLockDlDoorStateDoorOpen"
+	case MTRDoorLockDlDoorStateDoorClosed:
+		return "MTRDoorLockDlDoorStateDoorClosed"
+	case MTRDoorLockDlDoorStateDoorJammed:
+		return "MTRDoorLockDlDoorStateDoorJammed"
+	case MTRDoorLockDlDoorStateDoorForcedOpen:
+		return "MTRDoorLockDlDoorStateDoorForcedOpen"
+	case MTRDoorLockDlDoorStateDoorUnspecifiedError:
+		return "MTRDoorLockDlDoorStateDoorUnspecifiedError"
+	case MTRDoorLockDlDoorStateDoorAjar:
+		return "MTRDoorLockDlDoorStateDoorAjar"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlDoorState(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDlKeypadOperationEventMask int64
+
+const (
+	MTRDoorLockDlKeypadOperationEventMaskUnknown               MTRDoorLockDlKeypadOperationEventMask = 1
+	MTRDoorLockDlKeypadOperationEventMaskLock                  MTRDoorLockDlKeypadOperationEventMask = 2
+	MTRDoorLockDlKeypadOperationEventMaskUnlock                MTRDoorLockDlKeypadOperationEventMask = 4
+	MTRDoorLockDlKeypadOperationEventMaskLockInvalidPIN        MTRDoorLockDlKeypadOperationEventMask = 8
+	MTRDoorLockDlKeypadOperationEventMaskLockInvalidSchedule   MTRDoorLockDlKeypadOperationEventMask = 16
+	MTRDoorLockDlKeypadOperationEventMaskUnlockInvalidCode     MTRDoorLockDlKeypadOperationEventMask = 32
+	MTRDoorLockDlKeypadOperationEventMaskUnlockInvalidSchedule MTRDoorLockDlKeypadOperationEventMask = 64
+	MTRDoorLockDlKeypadOperationEventMaskNonAccessUserOpEvent  MTRDoorLockDlKeypadOperationEventMask = 128
+)
+
+// String returns the MTRDoorLockDlKeypadOperationEventMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlKeypadOperationEventMask) String() string {
+	var parts []string
+	if e&MTRDoorLockDlKeypadOperationEventMaskUnknown != 0 {
+		parts = append(parts, "MTRDoorLockDlKeypadOperationEventMaskUnknown")
+	}
+	if e&MTRDoorLockDlKeypadOperationEventMaskLock != 0 {
+		parts = append(parts, "MTRDoorLockDlKeypadOperationEventMaskLock")
+	}
+	if e&MTRDoorLockDlKeypadOperationEventMaskUnlock != 0 {
+		parts = append(parts, "MTRDoorLockDlKeypadOperationEventMaskUnlock")
+	}
+	if e&MTRDoorLockDlKeypadOperationEventMaskLockInvalidPIN != 0 {
+		parts = append(parts, "MTRDoorLockDlKeypadOperationEventMaskLockInvalidPIN")
+	}
+	if e&MTRDoorLockDlKeypadOperationEventMaskLockInvalidSchedule != 0 {
+		parts = append(parts, "MTRDoorLockDlKeypadOperationEventMaskLockInvalidSchedule")
+	}
+	if e&MTRDoorLockDlKeypadOperationEventMaskUnlockInvalidCode != 0 {
+		parts = append(parts, "MTRDoorLockDlKeypadOperationEventMaskUnlockInvalidCode")
+	}
+	if e&MTRDoorLockDlKeypadOperationEventMaskUnlockInvalidSchedule != 0 {
+		parts = append(parts, "MTRDoorLockDlKeypadOperationEventMaskUnlockInvalidSchedule")
+	}
+	if e&MTRDoorLockDlKeypadOperationEventMaskNonAccessUserOpEvent != 0 {
+		parts = append(parts, "MTRDoorLockDlKeypadOperationEventMaskNonAccessUserOpEvent")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDlKeypadProgrammingEventMask int64
+
+const (
+	MTRDoorLockDlKeypadProgrammingEventMaskUnknown               MTRDoorLockDlKeypadProgrammingEventMask = 1
+	MTRDoorLockDlKeypadProgrammingEventMaskProgrammingPINChanged MTRDoorLockDlKeypadProgrammingEventMask = 2
+	MTRDoorLockDlKeypadProgrammingEventMaskPINAdded              MTRDoorLockDlKeypadProgrammingEventMask = 4
+	MTRDoorLockDlKeypadProgrammingEventMaskPINCleared            MTRDoorLockDlKeypadProgrammingEventMask = 8
+	MTRDoorLockDlKeypadProgrammingEventMaskPINChanged            MTRDoorLockDlKeypadProgrammingEventMask = 16
+)
+
+// String returns the MTRDoorLockDlKeypadProgrammingEventMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlKeypadProgrammingEventMask) String() string {
+	var parts []string
+	if e&MTRDoorLockDlKeypadProgrammingEventMaskUnknown != 0 {
+		parts = append(parts, "MTRDoorLockDlKeypadProgrammingEventMaskUnknown")
+	}
+	if e&MTRDoorLockDlKeypadProgrammingEventMaskProgrammingPINChanged != 0 {
+		parts = append(parts, "MTRDoorLockDlKeypadProgrammingEventMaskProgrammingPINChanged")
+	}
+	if e&MTRDoorLockDlKeypadProgrammingEventMaskPINAdded != 0 {
+		parts = append(parts, "MTRDoorLockDlKeypadProgrammingEventMaskPINAdded")
+	}
+	if e&MTRDoorLockDlKeypadProgrammingEventMaskPINCleared != 0 {
+		parts = append(parts, "MTRDoorLockDlKeypadProgrammingEventMaskPINCleared")
+	}
+	if e&MTRDoorLockDlKeypadProgrammingEventMaskPINChanged != 0 {
+		parts = append(parts, "MTRDoorLockDlKeypadProgrammingEventMaskPINChanged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDlLocalProgrammingFeatures int64
+
+const (
+	MTRDoorLockDlLocalProgrammingFeaturesAddUsersCredentialsSchedulesLocally    MTRDoorLockDlLocalProgrammingFeatures = 1
+	MTRDoorLockDlLocalProgrammingFeaturesModifyUsersCredentialsSchedulesLocally MTRDoorLockDlLocalProgrammingFeatures = 2
+	MTRDoorLockDlLocalProgrammingFeaturesClearUsersCredentialsSchedulesLocally  MTRDoorLockDlLocalProgrammingFeatures = 4
+	MTRDoorLockDlLocalProgrammingFeaturesAdjustLockSettingsLocally              MTRDoorLockDlLocalProgrammingFeatures = 8
+)
+
+// String returns the MTRDoorLockDlLocalProgrammingFeatures constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlLocalProgrammingFeatures) String() string {
+	var parts []string
+	if e&MTRDoorLockDlLocalProgrammingFeaturesAddUsersCredentialsSchedulesLocally != 0 {
+		parts = append(parts, "MTRDoorLockDlLocalProgrammingFeaturesAddUsersCredentialsSchedulesLocally")
+	}
+	if e&MTRDoorLockDlLocalProgrammingFeaturesModifyUsersCredentialsSchedulesLocally != 0 {
+		parts = append(parts, "MTRDoorLockDlLocalProgrammingFeaturesModifyUsersCredentialsSchedulesLocally")
+	}
+	if e&MTRDoorLockDlLocalProgrammingFeaturesClearUsersCredentialsSchedulesLocally != 0 {
+		parts = append(parts, "MTRDoorLockDlLocalProgrammingFeaturesClearUsersCredentialsSchedulesLocally")
+	}
+	if e&MTRDoorLockDlLocalProgrammingFeaturesAdjustLockSettingsLocally != 0 {
+		parts = append(parts, "MTRDoorLockDlLocalProgrammingFeaturesAdjustLockSettingsLocally")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRDoorLockDlLockDataType int64
+
+const (
+	MTRDoorLockDlLockDataTypeUnspecified     MTRDoorLockDlLockDataType = 0
+	MTRDoorLockDlLockDataTypeProgrammingCode MTRDoorLockDlLockDataType = 1
+	MTRDoorLockDlLockDataTypeUserIndex       MTRDoorLockDlLockDataType = 2
+	MTRDoorLockDlLockDataTypeWeekDaySchedule MTRDoorLockDlLockDataType = 3
+	MTRDoorLockDlLockDataTypeYearDaySchedule MTRDoorLockDlLockDataType = 4
+	MTRDoorLockDlLockDataTypeHolidaySchedule MTRDoorLockDlLockDataType = 5
+	MTRDoorLockDlLockDataTypePIN             MTRDoorLockDlLockDataType = 6
+	MTRDoorLockDlLockDataTypeRFID            MTRDoorLockDlLockDataType = 7
+	MTRDoorLockDlLockDataTypeFingerprint     MTRDoorLockDlLockDataType = 8
+)
+
+// String returns the MTRDoorLockDlLockDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlLockDataType) String() string {
+	switch e {
+	case MTRDoorLockDlLockDataTypeUnspecified:
+		return "MTRDoorLockDlLockDataTypeUnspecified"
+	case MTRDoorLockDlLockDataTypeProgrammingCode:
+		return "MTRDoorLockDlLockDataTypeProgrammingCode"
+	case MTRDoorLockDlLockDataTypeUserIndex:
+		return "MTRDoorLockDlLockDataTypeUserIndex"
+	case MTRDoorLockDlLockDataTypeWeekDaySchedule:
+		return "MTRDoorLockDlLockDataTypeWeekDaySchedule"
+	case MTRDoorLockDlLockDataTypeYearDaySchedule:
+		return "MTRDoorLockDlLockDataTypeYearDaySchedule"
+	case MTRDoorLockDlLockDataTypeHolidaySchedule:
+		return "MTRDoorLockDlLockDataTypeHolidaySchedule"
+	case MTRDoorLockDlLockDataTypePIN:
+		return "MTRDoorLockDlLockDataTypePIN"
+	case MTRDoorLockDlLockDataTypeRFID:
+		return "MTRDoorLockDlLockDataTypeRFID"
+	case MTRDoorLockDlLockDataTypeFingerprint:
+		return "MTRDoorLockDlLockDataTypeFingerprint"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlLockDataType(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockDlLockOperationType int64
+
+const (
+	MTRDoorLockDlLockOperationTypeLock               MTRDoorLockDlLockOperationType = 0
+	MTRDoorLockDlLockOperationTypeUnlock             MTRDoorLockDlLockOperationType = 1
+	MTRDoorLockDlLockOperationTypeNonAccessUserEvent MTRDoorLockDlLockOperationType = 2
+	MTRDoorLockDlLockOperationTypeForcedUserEvent    MTRDoorLockDlLockOperationType = 3
+)
+
+// String returns the MTRDoorLockDlLockOperationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlLockOperationType) String() string {
+	switch e {
+	case MTRDoorLockDlLockOperationTypeLock:
+		return "MTRDoorLockDlLockOperationTypeLock"
+	case MTRDoorLockDlLockOperationTypeUnlock:
+		return "MTRDoorLockDlLockOperationTypeUnlock"
+	case MTRDoorLockDlLockOperationTypeNonAccessUserEvent:
+		return "MTRDoorLockDlLockOperationTypeNonAccessUserEvent"
+	case MTRDoorLockDlLockOperationTypeForcedUserEvent:
+		return "MTRDoorLockDlLockOperationTypeForcedUserEvent"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlLockOperationType(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockDlLockState int64
+
+const (
+	MTRDoorLockDlLockStateNotFullyLocked MTRDoorLockDlLockState = 0
+	MTRDoorLockDlLockStateLocked         MTRDoorLockDlLockState = 1
+	MTRDoorLockDlLockStateUnlocked       MTRDoorLockDlLockState = 2
+	MTRDoorLockDlLockStateUnlatched      MTRDoorLockDlLockState = 3
+)
+
+// String returns the MTRDoorLockDlLockState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlLockState) String() string {
+	switch e {
+	case MTRDoorLockDlLockStateNotFullyLocked:
+		return "MTRDoorLockDlLockStateNotFullyLocked"
+	case MTRDoorLockDlLockStateLocked:
+		return "MTRDoorLockDlLockStateLocked"
+	case MTRDoorLockDlLockStateUnlocked:
+		return "MTRDoorLockDlLockStateUnlocked"
+	case MTRDoorLockDlLockStateUnlatched:
+		return "MTRDoorLockDlLockStateUnlatched"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlLockState(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockDlLockType int64
+
+const (
+	MTRDoorLockDlLockTypeDeadBolt           MTRDoorLockDlLockType = 0
+	MTRDoorLockDlLockTypeMagnetic           MTRDoorLockDlLockType = 1
+	MTRDoorLockDlLockTypeOther              MTRDoorLockDlLockType = 2
+	MTRDoorLockDlLockTypeMortise            MTRDoorLockDlLockType = 3
+	MTRDoorLockDlLockTypeRim                MTRDoorLockDlLockType = 4
+	MTRDoorLockDlLockTypeLatchBolt          MTRDoorLockDlLockType = 5
+	MTRDoorLockDlLockTypeCylindricalLock    MTRDoorLockDlLockType = 6
+	MTRDoorLockDlLockTypeTubularLock        MTRDoorLockDlLockType = 7
+	MTRDoorLockDlLockTypeInterconnectedLock MTRDoorLockDlLockType = 8
+	MTRDoorLockDlLockTypeDeadLatch          MTRDoorLockDlLockType = 9
+	MTRDoorLockDlLockTypeDoorFurniture      MTRDoorLockDlLockType = 10
+	MTRDoorLockDlLockTypeEurocylinder       MTRDoorLockDlLockType = 11
+)
+
+// String returns the MTRDoorLockDlLockType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlLockType) String() string {
+	switch e {
+	case MTRDoorLockDlLockTypeDeadBolt:
+		return "MTRDoorLockDlLockTypeDeadBolt"
+	case MTRDoorLockDlLockTypeMagnetic:
+		return "MTRDoorLockDlLockTypeMagnetic"
+	case MTRDoorLockDlLockTypeOther:
+		return "MTRDoorLockDlLockTypeOther"
+	case MTRDoorLockDlLockTypeMortise:
+		return "MTRDoorLockDlLockTypeMortise"
+	case MTRDoorLockDlLockTypeRim:
+		return "MTRDoorLockDlLockTypeRim"
+	case MTRDoorLockDlLockTypeLatchBolt:
+		return "MTRDoorLockDlLockTypeLatchBolt"
+	case MTRDoorLockDlLockTypeCylindricalLock:
+		return "MTRDoorLockDlLockTypeCylindricalLock"
+	case MTRDoorLockDlLockTypeTubularLock:
+		return "MTRDoorLockDlLockTypeTubularLock"
+	case MTRDoorLockDlLockTypeInterconnectedLock:
+		return "MTRDoorLockDlLockTypeInterconnectedLock"
+	case MTRDoorLockDlLockTypeDeadLatch:
+		return "MTRDoorLockDlLockTypeDeadLatch"
+	case MTRDoorLockDlLockTypeDoorFurniture:
+		return "MTRDoorLockDlLockTypeDoorFurniture"
+	case MTRDoorLockDlLockTypeEurocylinder:
+		return "MTRDoorLockDlLockTypeEurocylinder"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlLockType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDlManualOperationEventMask int64
+
+const (
+	MTRDoorLockDlManualOperationEventMaskUnknown         MTRDoorLockDlManualOperationEventMask = 1
+	MTRDoorLockDlManualOperationEventMaskThumbturnLock   MTRDoorLockDlManualOperationEventMask = 2
+	MTRDoorLockDlManualOperationEventMaskThumbturnUnlock MTRDoorLockDlManualOperationEventMask = 4
+	MTRDoorLockDlManualOperationEventMaskOneTouchLock    MTRDoorLockDlManualOperationEventMask = 8
+	MTRDoorLockDlManualOperationEventMaskKeyLock         MTRDoorLockDlManualOperationEventMask = 16
+	MTRDoorLockDlManualOperationEventMaskKeyUnlock       MTRDoorLockDlManualOperationEventMask = 32
+	MTRDoorLockDlManualOperationEventMaskAutoLock        MTRDoorLockDlManualOperationEventMask = 64
+	MTRDoorLockDlManualOperationEventMaskScheduleLock    MTRDoorLockDlManualOperationEventMask = 128
+	MTRDoorLockDlManualOperationEventMaskScheduleUnlock  MTRDoorLockDlManualOperationEventMask = 256
+	MTRDoorLockDlManualOperationEventMaskManualLock      MTRDoorLockDlManualOperationEventMask = 512
+	MTRDoorLockDlManualOperationEventMaskManualUnlock    MTRDoorLockDlManualOperationEventMask = 1024
+)
+
+// String returns the MTRDoorLockDlManualOperationEventMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlManualOperationEventMask) String() string {
+	var parts []string
+	if e&MTRDoorLockDlManualOperationEventMaskUnknown != 0 {
+		parts = append(parts, "MTRDoorLockDlManualOperationEventMaskUnknown")
+	}
+	if e&MTRDoorLockDlManualOperationEventMaskThumbturnLock != 0 {
+		parts = append(parts, "MTRDoorLockDlManualOperationEventMaskThumbturnLock")
+	}
+	if e&MTRDoorLockDlManualOperationEventMaskThumbturnUnlock != 0 {
+		parts = append(parts, "MTRDoorLockDlManualOperationEventMaskThumbturnUnlock")
+	}
+	if e&MTRDoorLockDlManualOperationEventMaskOneTouchLock != 0 {
+		parts = append(parts, "MTRDoorLockDlManualOperationEventMaskOneTouchLock")
+	}
+	if e&MTRDoorLockDlManualOperationEventMaskKeyLock != 0 {
+		parts = append(parts, "MTRDoorLockDlManualOperationEventMaskKeyLock")
+	}
+	if e&MTRDoorLockDlManualOperationEventMaskKeyUnlock != 0 {
+		parts = append(parts, "MTRDoorLockDlManualOperationEventMaskKeyUnlock")
+	}
+	if e&MTRDoorLockDlManualOperationEventMaskAutoLock != 0 {
+		parts = append(parts, "MTRDoorLockDlManualOperationEventMaskAutoLock")
+	}
+	if e&MTRDoorLockDlManualOperationEventMaskScheduleLock != 0 {
+		parts = append(parts, "MTRDoorLockDlManualOperationEventMaskScheduleLock")
+	}
+	if e&MTRDoorLockDlManualOperationEventMaskScheduleUnlock != 0 {
+		parts = append(parts, "MTRDoorLockDlManualOperationEventMaskScheduleUnlock")
+	}
+	if e&MTRDoorLockDlManualOperationEventMaskManualLock != 0 {
+		parts = append(parts, "MTRDoorLockDlManualOperationEventMaskManualLock")
+	}
+	if e&MTRDoorLockDlManualOperationEventMaskManualUnlock != 0 {
+		parts = append(parts, "MTRDoorLockDlManualOperationEventMaskManualUnlock")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRDoorLockDlOperatingMode int64
+
+const (
+	MTRDoorLockDlOperatingModeNormal             MTRDoorLockDlOperatingMode = 0
+	MTRDoorLockDlOperatingModeVacation           MTRDoorLockDlOperatingMode = 1
+	MTRDoorLockDlOperatingModePrivacy            MTRDoorLockDlOperatingMode = 2
+	MTRDoorLockDlOperatingModeNoRemoteLockUnlock MTRDoorLockDlOperatingMode = 3
+	MTRDoorLockDlOperatingModePassage            MTRDoorLockDlOperatingMode = 4
+)
+
+// String returns the MTRDoorLockDlOperatingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlOperatingMode) String() string {
+	switch e {
+	case MTRDoorLockDlOperatingModeNormal:
+		return "MTRDoorLockDlOperatingModeNormal"
+	case MTRDoorLockDlOperatingModeVacation:
+		return "MTRDoorLockDlOperatingModeVacation"
+	case MTRDoorLockDlOperatingModePrivacy:
+		return "MTRDoorLockDlOperatingModePrivacy"
+	case MTRDoorLockDlOperatingModeNoRemoteLockUnlock:
+		return "MTRDoorLockDlOperatingModeNoRemoteLockUnlock"
+	case MTRDoorLockDlOperatingModePassage:
+		return "MTRDoorLockDlOperatingModePassage"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlOperatingMode(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockDlOperationError int64
+
+const (
+	MTRDoorLockDlOperationErrorUnspecified         MTRDoorLockDlOperationError = 0
+	MTRDoorLockDlOperationErrorInvalidCredential   MTRDoorLockDlOperationError = 1
+	MTRDoorLockDlOperationErrorDisabledUserDenied  MTRDoorLockDlOperationError = 2
+	MTRDoorLockDlOperationErrorRestricted          MTRDoorLockDlOperationError = 3
+	MTRDoorLockDlOperationErrorInsufficientBattery MTRDoorLockDlOperationError = 4
+)
+
+// String returns the MTRDoorLockDlOperationError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlOperationError) String() string {
+	switch e {
+	case MTRDoorLockDlOperationErrorUnspecified:
+		return "MTRDoorLockDlOperationErrorUnspecified"
+	case MTRDoorLockDlOperationErrorInvalidCredential:
+		return "MTRDoorLockDlOperationErrorInvalidCredential"
+	case MTRDoorLockDlOperationErrorDisabledUserDenied:
+		return "MTRDoorLockDlOperationErrorDisabledUserDenied"
+	case MTRDoorLockDlOperationErrorRestricted:
+		return "MTRDoorLockDlOperationErrorRestricted"
+	case MTRDoorLockDlOperationErrorInsufficientBattery:
+		return "MTRDoorLockDlOperationErrorInsufficientBattery"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlOperationError(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockDlOperationSource int64
+
+const (
+	MTRDoorLockDlOperationSourceUnspecified       MTRDoorLockDlOperationSource = 0
+	MTRDoorLockDlOperationSourceManual            MTRDoorLockDlOperationSource = 1
+	MTRDoorLockDlOperationSourceProprietaryRemote MTRDoorLockDlOperationSource = 2
+	MTRDoorLockDlOperationSourceKeypad            MTRDoorLockDlOperationSource = 3
+	MTRDoorLockDlOperationSourceAuto              MTRDoorLockDlOperationSource = 4
+	MTRDoorLockDlOperationSourceButton            MTRDoorLockDlOperationSource = 5
+	MTRDoorLockDlOperationSourceSchedule          MTRDoorLockDlOperationSource = 6
+	MTRDoorLockDlOperationSourceRemote            MTRDoorLockDlOperationSource = 7
+	MTRDoorLockDlOperationSourceRFID              MTRDoorLockDlOperationSource = 8
+	MTRDoorLockDlOperationSourceBiometric         MTRDoorLockDlOperationSource = 9
+)
+
+// String returns the MTRDoorLockDlOperationSource constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlOperationSource) String() string {
+	switch e {
+	case MTRDoorLockDlOperationSourceUnspecified:
+		return "MTRDoorLockDlOperationSourceUnspecified"
+	case MTRDoorLockDlOperationSourceManual:
+		return "MTRDoorLockDlOperationSourceManual"
+	case MTRDoorLockDlOperationSourceProprietaryRemote:
+		return "MTRDoorLockDlOperationSourceProprietaryRemote"
+	case MTRDoorLockDlOperationSourceKeypad:
+		return "MTRDoorLockDlOperationSourceKeypad"
+	case MTRDoorLockDlOperationSourceAuto:
+		return "MTRDoorLockDlOperationSourceAuto"
+	case MTRDoorLockDlOperationSourceButton:
+		return "MTRDoorLockDlOperationSourceButton"
+	case MTRDoorLockDlOperationSourceSchedule:
+		return "MTRDoorLockDlOperationSourceSchedule"
+	case MTRDoorLockDlOperationSourceRemote:
+		return "MTRDoorLockDlOperationSourceRemote"
+	case MTRDoorLockDlOperationSourceRFID:
+		return "MTRDoorLockDlOperationSourceRFID"
+	case MTRDoorLockDlOperationSourceBiometric:
+		return "MTRDoorLockDlOperationSourceBiometric"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlOperationSource(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDlRFIDOperationEventMask int64
+
+const (
+	MTRDoorLockDlRFIDOperationEventMaskUnknown               MTRDoorLockDlRFIDOperationEventMask = 1
+	MTRDoorLockDlRFIDOperationEventMaskLock                  MTRDoorLockDlRFIDOperationEventMask = 2
+	MTRDoorLockDlRFIDOperationEventMaskUnlock                MTRDoorLockDlRFIDOperationEventMask = 4
+	MTRDoorLockDlRFIDOperationEventMaskLockInvalidRFID       MTRDoorLockDlRFIDOperationEventMask = 8
+	MTRDoorLockDlRFIDOperationEventMaskLockInvalidSchedule   MTRDoorLockDlRFIDOperationEventMask = 16
+	MTRDoorLockDlRFIDOperationEventMaskUnlockInvalidRFID     MTRDoorLockDlRFIDOperationEventMask = 32
+	MTRDoorLockDlRFIDOperationEventMaskUnlockInvalidSchedule MTRDoorLockDlRFIDOperationEventMask = 64
+)
+
+// String returns the MTRDoorLockDlRFIDOperationEventMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlRFIDOperationEventMask) String() string {
+	var parts []string
+	if e&MTRDoorLockDlRFIDOperationEventMaskUnknown != 0 {
+		parts = append(parts, "MTRDoorLockDlRFIDOperationEventMaskUnknown")
+	}
+	if e&MTRDoorLockDlRFIDOperationEventMaskLock != 0 {
+		parts = append(parts, "MTRDoorLockDlRFIDOperationEventMaskLock")
+	}
+	if e&MTRDoorLockDlRFIDOperationEventMaskUnlock != 0 {
+		parts = append(parts, "MTRDoorLockDlRFIDOperationEventMaskUnlock")
+	}
+	if e&MTRDoorLockDlRFIDOperationEventMaskLockInvalidRFID != 0 {
+		parts = append(parts, "MTRDoorLockDlRFIDOperationEventMaskLockInvalidRFID")
+	}
+	if e&MTRDoorLockDlRFIDOperationEventMaskLockInvalidSchedule != 0 {
+		parts = append(parts, "MTRDoorLockDlRFIDOperationEventMaskLockInvalidSchedule")
+	}
+	if e&MTRDoorLockDlRFIDOperationEventMaskUnlockInvalidRFID != 0 {
+		parts = append(parts, "MTRDoorLockDlRFIDOperationEventMaskUnlockInvalidRFID")
+	}
+	if e&MTRDoorLockDlRFIDOperationEventMaskUnlockInvalidSchedule != 0 {
+		parts = append(parts, "MTRDoorLockDlRFIDOperationEventMaskUnlockInvalidSchedule")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDlRFIDProgrammingEventMask int64
+
+const (
+	MTRDoorLockDlRFIDProgrammingEventMaskUnknown         MTRDoorLockDlRFIDProgrammingEventMask = 1
+	MTRDoorLockDlRFIDProgrammingEventMaskRFIDCodeAdded   MTRDoorLockDlRFIDProgrammingEventMask = 32
+	MTRDoorLockDlRFIDProgrammingEventMaskRFIDCodeCleared MTRDoorLockDlRFIDProgrammingEventMask = 64
+)
+
+// String returns the MTRDoorLockDlRFIDProgrammingEventMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlRFIDProgrammingEventMask) String() string {
+	var parts []string
+	if e&MTRDoorLockDlRFIDProgrammingEventMaskUnknown != 0 {
+		parts = append(parts, "MTRDoorLockDlRFIDProgrammingEventMaskUnknown")
+	}
+	if e&MTRDoorLockDlRFIDProgrammingEventMaskRFIDCodeAdded != 0 {
+		parts = append(parts, "MTRDoorLockDlRFIDProgrammingEventMaskRFIDCodeAdded")
+	}
+	if e&MTRDoorLockDlRFIDProgrammingEventMaskRFIDCodeCleared != 0 {
+		parts = append(parts, "MTRDoorLockDlRFIDProgrammingEventMaskRFIDCodeCleared")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDlRemoteOperationEventMask int64
+
+const (
+	MTRDoorLockDlRemoteOperationEventMaskUnknown               MTRDoorLockDlRemoteOperationEventMask = 1
+	MTRDoorLockDlRemoteOperationEventMaskLock                  MTRDoorLockDlRemoteOperationEventMask = 2
+	MTRDoorLockDlRemoteOperationEventMaskUnlock                MTRDoorLockDlRemoteOperationEventMask = 4
+	MTRDoorLockDlRemoteOperationEventMaskLockInvalidCode       MTRDoorLockDlRemoteOperationEventMask = 8
+	MTRDoorLockDlRemoteOperationEventMaskLockInvalidSchedule   MTRDoorLockDlRemoteOperationEventMask = 16
+	MTRDoorLockDlRemoteOperationEventMaskUnlockInvalidCode     MTRDoorLockDlRemoteOperationEventMask = 32
+	MTRDoorLockDlRemoteOperationEventMaskUnlockInvalidSchedule MTRDoorLockDlRemoteOperationEventMask = 64
+)
+
+// String returns the MTRDoorLockDlRemoteOperationEventMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlRemoteOperationEventMask) String() string {
+	var parts []string
+	if e&MTRDoorLockDlRemoteOperationEventMaskUnknown != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteOperationEventMaskUnknown")
+	}
+	if e&MTRDoorLockDlRemoteOperationEventMaskLock != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteOperationEventMaskLock")
+	}
+	if e&MTRDoorLockDlRemoteOperationEventMaskUnlock != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteOperationEventMaskUnlock")
+	}
+	if e&MTRDoorLockDlRemoteOperationEventMaskLockInvalidCode != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteOperationEventMaskLockInvalidCode")
+	}
+	if e&MTRDoorLockDlRemoteOperationEventMaskLockInvalidSchedule != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteOperationEventMaskLockInvalidSchedule")
+	}
+	if e&MTRDoorLockDlRemoteOperationEventMaskUnlockInvalidCode != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteOperationEventMaskUnlockInvalidCode")
+	}
+	if e&MTRDoorLockDlRemoteOperationEventMaskUnlockInvalidSchedule != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteOperationEventMaskUnlockInvalidSchedule")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDlRemoteProgrammingEventMask int64
+
+const (
+	MTRDoorLockDlRemoteProgrammingEventMaskUnknown               MTRDoorLockDlRemoteProgrammingEventMask = 1
+	MTRDoorLockDlRemoteProgrammingEventMaskProgrammingPINChanged MTRDoorLockDlRemoteProgrammingEventMask = 2
+	MTRDoorLockDlRemoteProgrammingEventMaskPINAdded              MTRDoorLockDlRemoteProgrammingEventMask = 4
+	MTRDoorLockDlRemoteProgrammingEventMaskPINCleared            MTRDoorLockDlRemoteProgrammingEventMask = 8
+	MTRDoorLockDlRemoteProgrammingEventMaskPINChanged            MTRDoorLockDlRemoteProgrammingEventMask = 16
+	MTRDoorLockDlRemoteProgrammingEventMaskRFIDCodeAdded         MTRDoorLockDlRemoteProgrammingEventMask = 32
+	MTRDoorLockDlRemoteProgrammingEventMaskRFIDCodeCleared       MTRDoorLockDlRemoteProgrammingEventMask = 64
+)
+
+// String returns the MTRDoorLockDlRemoteProgrammingEventMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlRemoteProgrammingEventMask) String() string {
+	var parts []string
+	if e&MTRDoorLockDlRemoteProgrammingEventMaskUnknown != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteProgrammingEventMaskUnknown")
+	}
+	if e&MTRDoorLockDlRemoteProgrammingEventMaskProgrammingPINChanged != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteProgrammingEventMaskProgrammingPINChanged")
+	}
+	if e&MTRDoorLockDlRemoteProgrammingEventMaskPINAdded != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteProgrammingEventMaskPINAdded")
+	}
+	if e&MTRDoorLockDlRemoteProgrammingEventMaskPINCleared != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteProgrammingEventMaskPINCleared")
+	}
+	if e&MTRDoorLockDlRemoteProgrammingEventMaskPINChanged != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteProgrammingEventMaskPINChanged")
+	}
+	if e&MTRDoorLockDlRemoteProgrammingEventMaskRFIDCodeAdded != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteProgrammingEventMaskRFIDCodeAdded")
+	}
+	if e&MTRDoorLockDlRemoteProgrammingEventMaskRFIDCodeCleared != 0 {
+		parts = append(parts, "MTRDoorLockDlRemoteProgrammingEventMaskRFIDCodeCleared")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRDoorLockDlStatus int64
+
+const (
+	MTRDoorLockDlStatusSuccess           MTRDoorLockDlStatus = 0
+	MTRDoorLockDlStatusFailure           MTRDoorLockDlStatus = 1
+	MTRDoorLockDlStatusDuplicate         MTRDoorLockDlStatus = 2
+	MTRDoorLockDlStatusOccupied          MTRDoorLockDlStatus = 3
+	MTRDoorLockDlStatusInvalidField      MTRDoorLockDlStatus = 133
+	MTRDoorLockDlStatusResourceExhausted MTRDoorLockDlStatus = 137
+	MTRDoorLockDlStatusNotFound          MTRDoorLockDlStatus = 139
+)
+
+// String returns the MTRDoorLockDlStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlStatus) String() string {
+	switch e {
+	case MTRDoorLockDlStatusSuccess:
+		return "MTRDoorLockDlStatusSuccess"
+	case MTRDoorLockDlStatusFailure:
+		return "MTRDoorLockDlStatusFailure"
+	case MTRDoorLockDlStatusDuplicate:
+		return "MTRDoorLockDlStatusDuplicate"
+	case MTRDoorLockDlStatusOccupied:
+		return "MTRDoorLockDlStatusOccupied"
+	case MTRDoorLockDlStatusInvalidField:
+		return "MTRDoorLockDlStatusInvalidField"
+	case MTRDoorLockDlStatusResourceExhausted:
+		return "MTRDoorLockDlStatusResourceExhausted"
+	case MTRDoorLockDlStatusNotFound:
+		return "MTRDoorLockDlStatusNotFound"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlStatus(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockDlSupportedOperatingModes int64
+
+const (
+	MTRDoorLockDlSupportedOperatingModesNormal             MTRDoorLockDlSupportedOperatingModes = 1
+	MTRDoorLockDlSupportedOperatingModesVacation           MTRDoorLockDlSupportedOperatingModes = 2
+	MTRDoorLockDlSupportedOperatingModesPrivacy            MTRDoorLockDlSupportedOperatingModes = 4
+	MTRDoorLockDlSupportedOperatingModesNoRemoteLockUnlock MTRDoorLockDlSupportedOperatingModes = 8
+	MTRDoorLockDlSupportedOperatingModesPassage            MTRDoorLockDlSupportedOperatingModes = 16
+)
+
+// String returns the MTRDoorLockDlSupportedOperatingModes constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlSupportedOperatingModes) String() string {
+	var parts []string
+	if e&MTRDoorLockDlSupportedOperatingModesNormal != 0 {
+		parts = append(parts, "MTRDoorLockDlSupportedOperatingModesNormal")
+	}
+	if e&MTRDoorLockDlSupportedOperatingModesVacation != 0 {
+		parts = append(parts, "MTRDoorLockDlSupportedOperatingModesVacation")
+	}
+	if e&MTRDoorLockDlSupportedOperatingModesPrivacy != 0 {
+		parts = append(parts, "MTRDoorLockDlSupportedOperatingModesPrivacy")
+	}
+	if e&MTRDoorLockDlSupportedOperatingModesNoRemoteLockUnlock != 0 {
+		parts = append(parts, "MTRDoorLockDlSupportedOperatingModesNoRemoteLockUnlock")
+	}
+	if e&MTRDoorLockDlSupportedOperatingModesPassage != 0 {
+		parts = append(parts, "MTRDoorLockDlSupportedOperatingModesPassage")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRDoorLockDlUserStatus int64
+
+const (
+	MTRDoorLockDlUserStatusAvailable        MTRDoorLockDlUserStatus = 0
+	MTRDoorLockDlUserStatusOccupiedEnabled  MTRDoorLockDlUserStatus = 1
+	MTRDoorLockDlUserStatusOccupiedDisabled MTRDoorLockDlUserStatus = 3
+)
+
+// String returns the MTRDoorLockDlUserStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlUserStatus) String() string {
+	switch e {
+	case MTRDoorLockDlUserStatusAvailable:
+		return "MTRDoorLockDlUserStatusAvailable"
+	case MTRDoorLockDlUserStatusOccupiedEnabled:
+		return "MTRDoorLockDlUserStatusOccupiedEnabled"
+	case MTRDoorLockDlUserStatusOccupiedDisabled:
+		return "MTRDoorLockDlUserStatusOccupiedDisabled"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlUserStatus(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockDlUserType int64
+
+const (
+	MTRDoorLockDlUserTypeUnrestrictedUser       MTRDoorLockDlUserType = 0
+	MTRDoorLockDlUserTypeYearDayScheduleUser    MTRDoorLockDlUserType = 1
+	MTRDoorLockDlUserTypeWeekDayScheduleUser    MTRDoorLockDlUserType = 2
+	MTRDoorLockDlUserTypeProgrammingUser        MTRDoorLockDlUserType = 3
+	MTRDoorLockDlUserTypeNonAccessUser          MTRDoorLockDlUserType = 4
+	MTRDoorLockDlUserTypeForcedUser             MTRDoorLockDlUserType = 5
+	MTRDoorLockDlUserTypeDisposableUser         MTRDoorLockDlUserType = 6
+	MTRDoorLockDlUserTypeExpiringUser           MTRDoorLockDlUserType = 7
+	MTRDoorLockDlUserTypeScheduleRestrictedUser MTRDoorLockDlUserType = 8
+	MTRDoorLockDlUserTypeRemoteOnlyUser         MTRDoorLockDlUserType = 9
+)
+
+// String returns the MTRDoorLockDlUserType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDlUserType) String() string {
+	switch e {
+	case MTRDoorLockDlUserTypeUnrestrictedUser:
+		return "MTRDoorLockDlUserTypeUnrestrictedUser"
+	case MTRDoorLockDlUserTypeYearDayScheduleUser:
+		return "MTRDoorLockDlUserTypeYearDayScheduleUser"
+	case MTRDoorLockDlUserTypeWeekDayScheduleUser:
+		return "MTRDoorLockDlUserTypeWeekDayScheduleUser"
+	case MTRDoorLockDlUserTypeProgrammingUser:
+		return "MTRDoorLockDlUserTypeProgrammingUser"
+	case MTRDoorLockDlUserTypeNonAccessUser:
+		return "MTRDoorLockDlUserTypeNonAccessUser"
+	case MTRDoorLockDlUserTypeForcedUser:
+		return "MTRDoorLockDlUserTypeForcedUser"
+	case MTRDoorLockDlUserTypeDisposableUser:
+		return "MTRDoorLockDlUserTypeDisposableUser"
+	case MTRDoorLockDlUserTypeExpiringUser:
+		return "MTRDoorLockDlUserTypeExpiringUser"
+	case MTRDoorLockDlUserTypeScheduleRestrictedUser:
+		return "MTRDoorLockDlUserTypeScheduleRestrictedUser"
+	case MTRDoorLockDlUserTypeRemoteOnlyUser:
+		return "MTRDoorLockDlUserTypeRemoteOnlyUser"
+	default:
+		return fmt.Sprintf("MTRDoorLockDlUserType(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockDoorState int64
+
+const (
+	MTRDoorLockDoorStateDoorOpen             MTRDoorLockDoorState = 0
+	MTRDoorLockDoorStateDoorClosed           MTRDoorLockDoorState = 1
+	MTRDoorLockDoorStateDoorJammed           MTRDoorLockDoorState = 2
+	MTRDoorLockDoorStateDoorForcedOpen       MTRDoorLockDoorState = 3
+	MTRDoorLockDoorStateDoorUnspecifiedError MTRDoorLockDoorState = 4
+	MTRDoorLockDoorStateDoorAjar             MTRDoorLockDoorState = 5
+)
+
+// String returns the MTRDoorLockDoorState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockDoorState) String() string {
+	switch e {
+	case MTRDoorLockDoorStateDoorOpen:
+		return "MTRDoorLockDoorStateDoorOpen"
+	case MTRDoorLockDoorStateDoorClosed:
+		return "MTRDoorLockDoorStateDoorClosed"
+	case MTRDoorLockDoorStateDoorJammed:
+		return "MTRDoorLockDoorStateDoorJammed"
+	case MTRDoorLockDoorStateDoorForcedOpen:
+		return "MTRDoorLockDoorStateDoorForcedOpen"
+	case MTRDoorLockDoorStateDoorUnspecifiedError:
+		return "MTRDoorLockDoorStateDoorUnspecifiedError"
+	case MTRDoorLockDoorStateDoorAjar:
+		return "MTRDoorLockDoorStateDoorAjar"
+	default:
+		return fmt.Sprintf("MTRDoorLockDoorState(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRDoorLockFeature int64
+
+const (
+	MTRDoorLockFeaturePINCredential               MTRDoorLockFeature = 1
+	MTRDoorLockFeaturePINCredentials              MTRDoorLockFeature = 1
+	MTRDoorLockFeatureRFIDCredential              MTRDoorLockFeature = 2
+	MTRDoorLockFeatureRFIDCredentials             MTRDoorLockFeature = 2
+	MTRDoorLockFeatureFingerCredentials           MTRDoorLockFeature = 4
+	MTRDoorLockFeatureLogging                     MTRDoorLockFeature = 8
+	MTRDoorLockFeatureWeekDayAccessSchedules      MTRDoorLockFeature = 16
+	MTRDoorLockFeatureWeekDaySchedules            MTRDoorLockFeature = 16
+	MTRDoorLockFeatureDoorPositionSensor          MTRDoorLockFeature = 32
+	MTRDoorLockFeatureFaceCredentials             MTRDoorLockFeature = 64
+	MTRDoorLockFeatureCredentialsOverTheAirAccess MTRDoorLockFeature = 128
+	MTRDoorLockFeatureCredentialsOTA              MTRDoorLockFeature = 128
+	MTRDoorLockFeatureUser                        MTRDoorLockFeature = 256
+	MTRDoorLockFeatureUsersManagement             MTRDoorLockFeature = 256
+	MTRDoorLockFeatureNotification                MTRDoorLockFeature = 512
+	MTRDoorLockFeatureNotifications               MTRDoorLockFeature = 512
+	MTRDoorLockFeatureYearDayAccessSchedules      MTRDoorLockFeature = 1024
+	MTRDoorLockFeatureYearDaySchedules            MTRDoorLockFeature = 1024
+	MTRDoorLockFeatureHolidaySchedules            MTRDoorLockFeature = 2048
+	MTRDoorLockFeatureUnbolt                      MTRDoorLockFeature = 4096
+	MTRDoorLockFeatureAliroProvisioning           MTRDoorLockFeature = 8192
+	MTRDoorLockFeatureAliroBLEUWB                 MTRDoorLockFeature = 16384
+)
+
+// String returns the MTRDoorLockFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockFeature) String() string {
+	var parts []string
+	if e&MTRDoorLockFeaturePINCredential != 0 {
+		parts = append(parts, "MTRDoorLockFeaturePINCredential")
+	}
+	if e&MTRDoorLockFeaturePINCredentials != 0 {
+		parts = append(parts, "MTRDoorLockFeaturePINCredentials")
+	}
+	if e&MTRDoorLockFeatureRFIDCredential != 0 {
+		parts = append(parts, "MTRDoorLockFeatureRFIDCredential")
+	}
+	if e&MTRDoorLockFeatureRFIDCredentials != 0 {
+		parts = append(parts, "MTRDoorLockFeatureRFIDCredentials")
+	}
+	if e&MTRDoorLockFeatureFingerCredentials != 0 {
+		parts = append(parts, "MTRDoorLockFeatureFingerCredentials")
+	}
+	if e&MTRDoorLockFeatureLogging != 0 {
+		parts = append(parts, "MTRDoorLockFeatureLogging")
+	}
+	if e&MTRDoorLockFeatureWeekDayAccessSchedules != 0 {
+		parts = append(parts, "MTRDoorLockFeatureWeekDayAccessSchedules")
+	}
+	if e&MTRDoorLockFeatureWeekDaySchedules != 0 {
+		parts = append(parts, "MTRDoorLockFeatureWeekDaySchedules")
+	}
+	if e&MTRDoorLockFeatureDoorPositionSensor != 0 {
+		parts = append(parts, "MTRDoorLockFeatureDoorPositionSensor")
+	}
+	if e&MTRDoorLockFeatureFaceCredentials != 0 {
+		parts = append(parts, "MTRDoorLockFeatureFaceCredentials")
+	}
+	if e&MTRDoorLockFeatureCredentialsOverTheAirAccess != 0 {
+		parts = append(parts, "MTRDoorLockFeatureCredentialsOverTheAirAccess")
+	}
+	if e&MTRDoorLockFeatureCredentialsOTA != 0 {
+		parts = append(parts, "MTRDoorLockFeatureCredentialsOTA")
+	}
+	if e&MTRDoorLockFeatureUser != 0 {
+		parts = append(parts, "MTRDoorLockFeatureUser")
+	}
+	if e&MTRDoorLockFeatureUsersManagement != 0 {
+		parts = append(parts, "MTRDoorLockFeatureUsersManagement")
+	}
+	if e&MTRDoorLockFeatureNotification != 0 {
+		parts = append(parts, "MTRDoorLockFeatureNotification")
+	}
+	if e&MTRDoorLockFeatureNotifications != 0 {
+		parts = append(parts, "MTRDoorLockFeatureNotifications")
+	}
+	if e&MTRDoorLockFeatureYearDayAccessSchedules != 0 {
+		parts = append(parts, "MTRDoorLockFeatureYearDayAccessSchedules")
+	}
+	if e&MTRDoorLockFeatureYearDaySchedules != 0 {
+		parts = append(parts, "MTRDoorLockFeatureYearDaySchedules")
+	}
+	if e&MTRDoorLockFeatureHolidaySchedules != 0 {
+		parts = append(parts, "MTRDoorLockFeatureHolidaySchedules")
+	}
+	if e&MTRDoorLockFeatureUnbolt != 0 {
+		parts = append(parts, "MTRDoorLockFeatureUnbolt")
+	}
+	if e&MTRDoorLockFeatureAliroProvisioning != 0 {
+		parts = append(parts, "MTRDoorLockFeatureAliroProvisioning")
+	}
+	if e&MTRDoorLockFeatureAliroBLEUWB != 0 {
+		parts = append(parts, "MTRDoorLockFeatureAliroBLEUWB")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRDoorLockLockDataType int64
+
+const (
+	MTRDoorLockLockDataTypeUnspecified                  MTRDoorLockLockDataType = 0
+	MTRDoorLockLockDataTypeProgrammingCode              MTRDoorLockLockDataType = 1
+	MTRDoorLockLockDataTypeUserIndex                    MTRDoorLockLockDataType = 2
+	MTRDoorLockLockDataTypeWeekDaySchedule              MTRDoorLockLockDataType = 3
+	MTRDoorLockLockDataTypeYearDaySchedule              MTRDoorLockLockDataType = 4
+	MTRDoorLockLockDataTypeHolidaySchedule              MTRDoorLockLockDataType = 5
+	MTRDoorLockLockDataTypePIN                          MTRDoorLockLockDataType = 6
+	MTRDoorLockLockDataTypeRFID                         MTRDoorLockLockDataType = 7
+	MTRDoorLockLockDataTypeFingerprint                  MTRDoorLockLockDataType = 8
+	MTRDoorLockLockDataTypeFingerVein                   MTRDoorLockLockDataType = 9
+	MTRDoorLockLockDataTypeFace                         MTRDoorLockLockDataType = 10
+	MTRDoorLockLockDataTypeAliroCredentialIssuerKey     MTRDoorLockLockDataType = 11
+	MTRDoorLockLockDataTypeAliroEvictableEndpointKey    MTRDoorLockLockDataType = 12
+	MTRDoorLockLockDataTypeAliroNonEvictableEndpointKey MTRDoorLockLockDataType = 13
+)
+
+// String returns the MTRDoorLockLockDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockLockDataType) String() string {
+	switch e {
+	case MTRDoorLockLockDataTypeUnspecified:
+		return "MTRDoorLockLockDataTypeUnspecified"
+	case MTRDoorLockLockDataTypeProgrammingCode:
+		return "MTRDoorLockLockDataTypeProgrammingCode"
+	case MTRDoorLockLockDataTypeUserIndex:
+		return "MTRDoorLockLockDataTypeUserIndex"
+	case MTRDoorLockLockDataTypeWeekDaySchedule:
+		return "MTRDoorLockLockDataTypeWeekDaySchedule"
+	case MTRDoorLockLockDataTypeYearDaySchedule:
+		return "MTRDoorLockLockDataTypeYearDaySchedule"
+	case MTRDoorLockLockDataTypeHolidaySchedule:
+		return "MTRDoorLockLockDataTypeHolidaySchedule"
+	case MTRDoorLockLockDataTypePIN:
+		return "MTRDoorLockLockDataTypePIN"
+	case MTRDoorLockLockDataTypeRFID:
+		return "MTRDoorLockLockDataTypeRFID"
+	case MTRDoorLockLockDataTypeFingerprint:
+		return "MTRDoorLockLockDataTypeFingerprint"
+	case MTRDoorLockLockDataTypeFingerVein:
+		return "MTRDoorLockLockDataTypeFingerVein"
+	case MTRDoorLockLockDataTypeFace:
+		return "MTRDoorLockLockDataTypeFace"
+	case MTRDoorLockLockDataTypeAliroCredentialIssuerKey:
+		return "MTRDoorLockLockDataTypeAliroCredentialIssuerKey"
+	case MTRDoorLockLockDataTypeAliroEvictableEndpointKey:
+		return "MTRDoorLockLockDataTypeAliroEvictableEndpointKey"
+	case MTRDoorLockLockDataTypeAliroNonEvictableEndpointKey:
+		return "MTRDoorLockLockDataTypeAliroNonEvictableEndpointKey"
+	default:
+		return fmt.Sprintf("MTRDoorLockLockDataType(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockLockOperationType int64
+
+const (
+	MTRDoorLockLockOperationTypeLock               MTRDoorLockLockOperationType = 0
+	MTRDoorLockLockOperationTypeUnlock             MTRDoorLockLockOperationType = 1
+	MTRDoorLockLockOperationTypeNonAccessUserEvent MTRDoorLockLockOperationType = 2
+	MTRDoorLockLockOperationTypeForcedUserEvent    MTRDoorLockLockOperationType = 3
+	MTRDoorLockLockOperationTypeUnlatch            MTRDoorLockLockOperationType = 4
+)
+
+// String returns the MTRDoorLockLockOperationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockLockOperationType) String() string {
+	switch e {
+	case MTRDoorLockLockOperationTypeLock:
+		return "MTRDoorLockLockOperationTypeLock"
+	case MTRDoorLockLockOperationTypeUnlock:
+		return "MTRDoorLockLockOperationTypeUnlock"
+	case MTRDoorLockLockOperationTypeNonAccessUserEvent:
+		return "MTRDoorLockLockOperationTypeNonAccessUserEvent"
+	case MTRDoorLockLockOperationTypeForcedUserEvent:
+		return "MTRDoorLockLockOperationTypeForcedUserEvent"
+	case MTRDoorLockLockOperationTypeUnlatch:
+		return "MTRDoorLockLockOperationTypeUnlatch"
+	default:
+		return fmt.Sprintf("MTRDoorLockLockOperationType(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockOperatingMode int64
+
+const (
+	MTRDoorLockOperatingModeNormal             MTRDoorLockOperatingMode = 0
+	MTRDoorLockOperatingModeVacation           MTRDoorLockOperatingMode = 1
+	MTRDoorLockOperatingModePrivacy            MTRDoorLockOperatingMode = 2
+	MTRDoorLockOperatingModeNoRemoteLockUnlock MTRDoorLockOperatingMode = 3
+	MTRDoorLockOperatingModePassage            MTRDoorLockOperatingMode = 4
+)
+
+// String returns the MTRDoorLockOperatingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockOperatingMode) String() string {
+	switch e {
+	case MTRDoorLockOperatingModeNormal:
+		return "MTRDoorLockOperatingModeNormal"
+	case MTRDoorLockOperatingModeVacation:
+		return "MTRDoorLockOperatingModeVacation"
+	case MTRDoorLockOperatingModePrivacy:
+		return "MTRDoorLockOperatingModePrivacy"
+	case MTRDoorLockOperatingModeNoRemoteLockUnlock:
+		return "MTRDoorLockOperatingModeNoRemoteLockUnlock"
+	case MTRDoorLockOperatingModePassage:
+		return "MTRDoorLockOperatingModePassage"
+	default:
+		return fmt.Sprintf("MTRDoorLockOperatingMode(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockOperationError int64
+
+const (
+	MTRDoorLockOperationErrorUnspecified         MTRDoorLockOperationError = 0
+	MTRDoorLockOperationErrorInvalidCredential   MTRDoorLockOperationError = 1
+	MTRDoorLockOperationErrorDisabledUserDenied  MTRDoorLockOperationError = 2
+	MTRDoorLockOperationErrorRestricted          MTRDoorLockOperationError = 3
+	MTRDoorLockOperationErrorInsufficientBattery MTRDoorLockOperationError = 4
+)
+
+// String returns the MTRDoorLockOperationError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockOperationError) String() string {
+	switch e {
+	case MTRDoorLockOperationErrorUnspecified:
+		return "MTRDoorLockOperationErrorUnspecified"
+	case MTRDoorLockOperationErrorInvalidCredential:
+		return "MTRDoorLockOperationErrorInvalidCredential"
+	case MTRDoorLockOperationErrorDisabledUserDenied:
+		return "MTRDoorLockOperationErrorDisabledUserDenied"
+	case MTRDoorLockOperationErrorRestricted:
+		return "MTRDoorLockOperationErrorRestricted"
+	case MTRDoorLockOperationErrorInsufficientBattery:
+		return "MTRDoorLockOperationErrorInsufficientBattery"
+	default:
+		return fmt.Sprintf("MTRDoorLockOperationError(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockOperationEventCode int64
+
+const (
+	MTRDoorLockOperationEventCodeUnknownOrMfgSpecific  MTRDoorLockOperationEventCode = 0
+	MTRDoorLockOperationEventCodeLock                  MTRDoorLockOperationEventCode = 1
+	MTRDoorLockOperationEventCodeUnlock                MTRDoorLockOperationEventCode = 2
+	MTRDoorLockOperationEventCodeLockInvalidPinOrId    MTRDoorLockOperationEventCode = 3
+	MTRDoorLockOperationEventCodeLockInvalidSchedule   MTRDoorLockOperationEventCode = 4
+	MTRDoorLockOperationEventCodeUnlockInvalidPinOrId  MTRDoorLockOperationEventCode = 5
+	MTRDoorLockOperationEventCodeUnlockInvalidSchedule MTRDoorLockOperationEventCode = 6
+	MTRDoorLockOperationEventCodeOneTouchLock          MTRDoorLockOperationEventCode = 7
+	MTRDoorLockOperationEventCodeKeyLock               MTRDoorLockOperationEventCode = 8
+	MTRDoorLockOperationEventCodeKeyUnlock             MTRDoorLockOperationEventCode = 9
+	MTRDoorLockOperationEventCodeAutoLock              MTRDoorLockOperationEventCode = 10
+	MTRDoorLockOperationEventCodeScheduleLock          MTRDoorLockOperationEventCode = 11
+	MTRDoorLockOperationEventCodeScheduleUnlock        MTRDoorLockOperationEventCode = 12
+	MTRDoorLockOperationEventCodeManualLock            MTRDoorLockOperationEventCode = 13
+	MTRDoorLockOperationEventCodeManualUnlock          MTRDoorLockOperationEventCode = 14
+)
+
+// String returns the MTRDoorLockOperationEventCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockOperationEventCode) String() string {
+	switch e {
+	case MTRDoorLockOperationEventCodeUnknownOrMfgSpecific:
+		return "MTRDoorLockOperationEventCodeUnknownOrMfgSpecific"
+	case MTRDoorLockOperationEventCodeLock:
+		return "MTRDoorLockOperationEventCodeLock"
+	case MTRDoorLockOperationEventCodeUnlock:
+		return "MTRDoorLockOperationEventCodeUnlock"
+	case MTRDoorLockOperationEventCodeLockInvalidPinOrId:
+		return "MTRDoorLockOperationEventCodeLockInvalidPinOrId"
+	case MTRDoorLockOperationEventCodeLockInvalidSchedule:
+		return "MTRDoorLockOperationEventCodeLockInvalidSchedule"
+	case MTRDoorLockOperationEventCodeUnlockInvalidPinOrId:
+		return "MTRDoorLockOperationEventCodeUnlockInvalidPinOrId"
+	case MTRDoorLockOperationEventCodeUnlockInvalidSchedule:
+		return "MTRDoorLockOperationEventCodeUnlockInvalidSchedule"
+	case MTRDoorLockOperationEventCodeOneTouchLock:
+		return "MTRDoorLockOperationEventCodeOneTouchLock"
+	case MTRDoorLockOperationEventCodeKeyLock:
+		return "MTRDoorLockOperationEventCodeKeyLock"
+	case MTRDoorLockOperationEventCodeKeyUnlock:
+		return "MTRDoorLockOperationEventCodeKeyUnlock"
+	case MTRDoorLockOperationEventCodeAutoLock:
+		return "MTRDoorLockOperationEventCodeAutoLock"
+	case MTRDoorLockOperationEventCodeScheduleLock:
+		return "MTRDoorLockOperationEventCodeScheduleLock"
+	case MTRDoorLockOperationEventCodeScheduleUnlock:
+		return "MTRDoorLockOperationEventCodeScheduleUnlock"
+	case MTRDoorLockOperationEventCodeManualLock:
+		return "MTRDoorLockOperationEventCodeManualLock"
+	case MTRDoorLockOperationEventCodeManualUnlock:
+		return "MTRDoorLockOperationEventCodeManualUnlock"
+	default:
+		return fmt.Sprintf("MTRDoorLockOperationEventCode(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockOperationSource int64
+
+const (
+	MTRDoorLockOperationSourceUnspecified       MTRDoorLockOperationSource = 0
+	MTRDoorLockOperationSourceManual            MTRDoorLockOperationSource = 1
+	MTRDoorLockOperationSourceProprietaryRemote MTRDoorLockOperationSource = 2
+	MTRDoorLockOperationSourceKeypad            MTRDoorLockOperationSource = 3
+	MTRDoorLockOperationSourceAuto              MTRDoorLockOperationSource = 4
+	MTRDoorLockOperationSourceButton            MTRDoorLockOperationSource = 5
+	MTRDoorLockOperationSourceSchedule          MTRDoorLockOperationSource = 6
+	MTRDoorLockOperationSourceRemote            MTRDoorLockOperationSource = 7
+	MTRDoorLockOperationSourceRFID              MTRDoorLockOperationSource = 8
+	MTRDoorLockOperationSourceBiometric         MTRDoorLockOperationSource = 9
+	MTRDoorLockOperationSourceAliro             MTRDoorLockOperationSource = 10
+)
+
+// String returns the MTRDoorLockOperationSource constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockOperationSource) String() string {
+	switch e {
+	case MTRDoorLockOperationSourceUnspecified:
+		return "MTRDoorLockOperationSourceUnspecified"
+	case MTRDoorLockOperationSourceManual:
+		return "MTRDoorLockOperationSourceManual"
+	case MTRDoorLockOperationSourceProprietaryRemote:
+		return "MTRDoorLockOperationSourceProprietaryRemote"
+	case MTRDoorLockOperationSourceKeypad:
+		return "MTRDoorLockOperationSourceKeypad"
+	case MTRDoorLockOperationSourceAuto:
+		return "MTRDoorLockOperationSourceAuto"
+	case MTRDoorLockOperationSourceButton:
+		return "MTRDoorLockOperationSourceButton"
+	case MTRDoorLockOperationSourceSchedule:
+		return "MTRDoorLockOperationSourceSchedule"
+	case MTRDoorLockOperationSourceRemote:
+		return "MTRDoorLockOperationSourceRemote"
+	case MTRDoorLockOperationSourceRFID:
+		return "MTRDoorLockOperationSourceRFID"
+	case MTRDoorLockOperationSourceBiometric:
+		return "MTRDoorLockOperationSourceBiometric"
+	case MTRDoorLockOperationSourceAliro:
+		return "MTRDoorLockOperationSourceAliro"
+	default:
+		return fmt.Sprintf("MTRDoorLockOperationSource(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockProgrammingEventCode int64
+
+const (
+	MTRDoorLockProgrammingEventCodeUnknownOrMfgSpecific MTRDoorLockProgrammingEventCode = 0
+	MTRDoorLockProgrammingEventCodeMasterCodeChanged    MTRDoorLockProgrammingEventCode = 1
+	MTRDoorLockProgrammingEventCodePinAdded             MTRDoorLockProgrammingEventCode = 2
+	MTRDoorLockProgrammingEventCodePinDeleted           MTRDoorLockProgrammingEventCode = 3
+	MTRDoorLockProgrammingEventCodePinChanged           MTRDoorLockProgrammingEventCode = 4
+	MTRDoorLockProgrammingEventCodeIdAdded              MTRDoorLockProgrammingEventCode = 5
+	MTRDoorLockProgrammingEventCodeIdDeleted            MTRDoorLockProgrammingEventCode = 6
+)
+
+// String returns the MTRDoorLockProgrammingEventCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockProgrammingEventCode) String() string {
+	switch e {
+	case MTRDoorLockProgrammingEventCodeUnknownOrMfgSpecific:
+		return "MTRDoorLockProgrammingEventCodeUnknownOrMfgSpecific"
+	case MTRDoorLockProgrammingEventCodeMasterCodeChanged:
+		return "MTRDoorLockProgrammingEventCodeMasterCodeChanged"
+	case MTRDoorLockProgrammingEventCodePinAdded:
+		return "MTRDoorLockProgrammingEventCodePinAdded"
+	case MTRDoorLockProgrammingEventCodePinDeleted:
+		return "MTRDoorLockProgrammingEventCodePinDeleted"
+	case MTRDoorLockProgrammingEventCodePinChanged:
+		return "MTRDoorLockProgrammingEventCodePinChanged"
+	case MTRDoorLockProgrammingEventCodeIdAdded:
+		return "MTRDoorLockProgrammingEventCodeIdAdded"
+	case MTRDoorLockProgrammingEventCodeIdDeleted:
+		return "MTRDoorLockProgrammingEventCodeIdDeleted"
+	default:
+		return fmt.Sprintf("MTRDoorLockProgrammingEventCode(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockSetPinOrIdStatus int64
+
+const (
+	MTRDoorLockSetPinOrIdStatusSuccess            MTRDoorLockSetPinOrIdStatus = 0
+	MTRDoorLockSetPinOrIdStatusGeneralFailure     MTRDoorLockSetPinOrIdStatus = 1
+	MTRDoorLockSetPinOrIdStatusMemoryFull         MTRDoorLockSetPinOrIdStatus = 2
+	MTRDoorLockSetPinOrIdStatusDuplicateCodeError MTRDoorLockSetPinOrIdStatus = 3
+)
+
+// String returns the MTRDoorLockSetPinOrIdStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockSetPinOrIdStatus) String() string {
+	switch e {
+	case MTRDoorLockSetPinOrIdStatusSuccess:
+		return "MTRDoorLockSetPinOrIdStatusSuccess"
+	case MTRDoorLockSetPinOrIdStatusGeneralFailure:
+		return "MTRDoorLockSetPinOrIdStatusGeneralFailure"
+	case MTRDoorLockSetPinOrIdStatusMemoryFull:
+		return "MTRDoorLockSetPinOrIdStatusMemoryFull"
+	case MTRDoorLockSetPinOrIdStatusDuplicateCodeError:
+		return "MTRDoorLockSetPinOrIdStatusDuplicateCodeError"
+	default:
+		return fmt.Sprintf("MTRDoorLockSetPinOrIdStatus(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockUserStatus int64
+
+const (
+	MTRDoorLockUserStatusAvailable        MTRDoorLockUserStatus = 0
+	MTRDoorLockUserStatusOccupiedEnabled  MTRDoorLockUserStatus = 1
+	MTRDoorLockUserStatusOccupiedDisabled MTRDoorLockUserStatus = 3
+	MTRDoorLockUserStatusNotSupported     MTRDoorLockUserStatus = 255
+)
+
+// String returns the MTRDoorLockUserStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockUserStatus) String() string {
+	switch e {
+	case MTRDoorLockUserStatusAvailable:
+		return "MTRDoorLockUserStatusAvailable"
+	case MTRDoorLockUserStatusOccupiedEnabled:
+		return "MTRDoorLockUserStatusOccupiedEnabled"
+	case MTRDoorLockUserStatusOccupiedDisabled:
+		return "MTRDoorLockUserStatusOccupiedDisabled"
+	case MTRDoorLockUserStatusNotSupported:
+		return "MTRDoorLockUserStatusNotSupported"
+	default:
+		return fmt.Sprintf("MTRDoorLockUserStatus(%d)", int64(e))
+	}
+}
+
+type MTRDoorLockUserType int64
+
+const (
+	MTRDoorLockUserTypeUnrestrictedUser       MTRDoorLockUserType = 0
+	MTRDoorLockUserTypeUnrestricted           MTRDoorLockUserType = 0
+	MTRDoorLockUserTypeYearDayScheduleUser    MTRDoorLockUserType = 1
+	MTRDoorLockUserTypeWeekDayScheduleUser    MTRDoorLockUserType = 2
+	MTRDoorLockUserTypeProgrammingUser        MTRDoorLockUserType = 3
+	MTRDoorLockUserTypeMasterUser             MTRDoorLockUserType = 3
+	MTRDoorLockUserTypeNonAccessUser          MTRDoorLockUserType = 4
+	MTRDoorLockUserTypeForcedUser             MTRDoorLockUserType = 5
+	MTRDoorLockUserTypeDisposableUser         MTRDoorLockUserType = 6
+	MTRDoorLockUserTypeExpiringUser           MTRDoorLockUserType = 7
+	MTRDoorLockUserTypeScheduleRestrictedUser MTRDoorLockUserType = 8
+	MTRDoorLockUserTypeRemoteOnlyUser         MTRDoorLockUserType = 9
+	MTRDoorLockUserTypeNotSupported           MTRDoorLockUserType = 255
+)
+
+// String returns the MTRDoorLockUserType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRDoorLockUserType) String() string {
+	switch e {
+	case MTRDoorLockUserTypeUnrestrictedUser:
+		return "MTRDoorLockUserTypeUnrestrictedUser"
+	case MTRDoorLockUserTypeYearDayScheduleUser:
+		return "MTRDoorLockUserTypeYearDayScheduleUser"
+	case MTRDoorLockUserTypeWeekDayScheduleUser:
+		return "MTRDoorLockUserTypeWeekDayScheduleUser"
+	case MTRDoorLockUserTypeProgrammingUser:
+		return "MTRDoorLockUserTypeProgrammingUser"
+	case MTRDoorLockUserTypeNonAccessUser:
+		return "MTRDoorLockUserTypeNonAccessUser"
+	case MTRDoorLockUserTypeForcedUser:
+		return "MTRDoorLockUserTypeForcedUser"
+	case MTRDoorLockUserTypeDisposableUser:
+		return "MTRDoorLockUserTypeDisposableUser"
+	case MTRDoorLockUserTypeExpiringUser:
+		return "MTRDoorLockUserTypeExpiringUser"
+	case MTRDoorLockUserTypeScheduleRestrictedUser:
+		return "MTRDoorLockUserTypeScheduleRestrictedUser"
+	case MTRDoorLockUserTypeRemoteOnlyUser:
+		return "MTRDoorLockUserTypeRemoteOnlyUser"
+	case MTRDoorLockUserTypeNotSupported:
+		return "MTRDoorLockUserTypeNotSupported"
+	default:
+		return fmt.Sprintf("MTRDoorLockUserType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRElectricalEnergyMeasurementFeature int64
+
+const (
+	MTRElectricalEnergyMeasurementFeatureImportedEnergy   MTRElectricalEnergyMeasurementFeature = 1
+	MTRElectricalEnergyMeasurementFeatureExportedEnergy   MTRElectricalEnergyMeasurementFeature = 2
+	MTRElectricalEnergyMeasurementFeatureCumulativeEnergy MTRElectricalEnergyMeasurementFeature = 4
+	MTRElectricalEnergyMeasurementFeaturePeriodicEnergy   MTRElectricalEnergyMeasurementFeature = 8
+)
+
+// String returns the MTRElectricalEnergyMeasurementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRElectricalEnergyMeasurementFeature) String() string {
+	var parts []string
+	if e&MTRElectricalEnergyMeasurementFeatureImportedEnergy != 0 {
+		parts = append(parts, "MTRElectricalEnergyMeasurementFeatureImportedEnergy")
+	}
+	if e&MTRElectricalEnergyMeasurementFeatureExportedEnergy != 0 {
+		parts = append(parts, "MTRElectricalEnergyMeasurementFeatureExportedEnergy")
+	}
+	if e&MTRElectricalEnergyMeasurementFeatureCumulativeEnergy != 0 {
+		parts = append(parts, "MTRElectricalEnergyMeasurementFeatureCumulativeEnergy")
+	}
+	if e&MTRElectricalEnergyMeasurementFeaturePeriodicEnergy != 0 {
+		parts = append(parts, "MTRElectricalEnergyMeasurementFeaturePeriodicEnergy")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRElectricalEnergyMeasurementMeasurementType int64
+
+const (
+	MTRElectricalEnergyMeasurementMeasurementTypeUnspecified      MTRElectricalEnergyMeasurementMeasurementType = 0
+	MTRElectricalEnergyMeasurementMeasurementTypeVoltage          MTRElectricalEnergyMeasurementMeasurementType = 1
+	MTRElectricalEnergyMeasurementMeasurementTypeActiveCurrent    MTRElectricalEnergyMeasurementMeasurementType = 2
+	MTRElectricalEnergyMeasurementMeasurementTypeReactiveCurrent  MTRElectricalEnergyMeasurementMeasurementType = 3
+	MTRElectricalEnergyMeasurementMeasurementTypeApparentCurrent  MTRElectricalEnergyMeasurementMeasurementType = 4
+	MTRElectricalEnergyMeasurementMeasurementTypeActivePower      MTRElectricalEnergyMeasurementMeasurementType = 5
+	MTRElectricalEnergyMeasurementMeasurementTypeReactivePower    MTRElectricalEnergyMeasurementMeasurementType = 6
+	MTRElectricalEnergyMeasurementMeasurementTypeApparentPower    MTRElectricalEnergyMeasurementMeasurementType = 7
+	MTRElectricalEnergyMeasurementMeasurementTypeRMSVoltage       MTRElectricalEnergyMeasurementMeasurementType = 8
+	MTRElectricalEnergyMeasurementMeasurementTypeRMSCurrent       MTRElectricalEnergyMeasurementMeasurementType = 9
+	MTRElectricalEnergyMeasurementMeasurementTypeRMSPower         MTRElectricalEnergyMeasurementMeasurementType = 10
+	MTRElectricalEnergyMeasurementMeasurementTypeFrequency        MTRElectricalEnergyMeasurementMeasurementType = 11
+	MTRElectricalEnergyMeasurementMeasurementTypePowerFactor      MTRElectricalEnergyMeasurementMeasurementType = 12
+	MTRElectricalEnergyMeasurementMeasurementTypeNeutralCurrent   MTRElectricalEnergyMeasurementMeasurementType = 13
+	MTRElectricalEnergyMeasurementMeasurementTypeElectricalEnergy MTRElectricalEnergyMeasurementMeasurementType = 14
+)
+
+// String returns the MTRElectricalEnergyMeasurementMeasurementType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRElectricalEnergyMeasurementMeasurementType) String() string {
+	switch e {
+	case MTRElectricalEnergyMeasurementMeasurementTypeUnspecified:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeUnspecified"
+	case MTRElectricalEnergyMeasurementMeasurementTypeVoltage:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeVoltage"
+	case MTRElectricalEnergyMeasurementMeasurementTypeActiveCurrent:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeActiveCurrent"
+	case MTRElectricalEnergyMeasurementMeasurementTypeReactiveCurrent:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeReactiveCurrent"
+	case MTRElectricalEnergyMeasurementMeasurementTypeApparentCurrent:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeApparentCurrent"
+	case MTRElectricalEnergyMeasurementMeasurementTypeActivePower:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeActivePower"
+	case MTRElectricalEnergyMeasurementMeasurementTypeReactivePower:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeReactivePower"
+	case MTRElectricalEnergyMeasurementMeasurementTypeApparentPower:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeApparentPower"
+	case MTRElectricalEnergyMeasurementMeasurementTypeRMSVoltage:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeRMSVoltage"
+	case MTRElectricalEnergyMeasurementMeasurementTypeRMSCurrent:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeRMSCurrent"
+	case MTRElectricalEnergyMeasurementMeasurementTypeRMSPower:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeRMSPower"
+	case MTRElectricalEnergyMeasurementMeasurementTypeFrequency:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeFrequency"
+	case MTRElectricalEnergyMeasurementMeasurementTypePowerFactor:
+		return "MTRElectricalEnergyMeasurementMeasurementTypePowerFactor"
+	case MTRElectricalEnergyMeasurementMeasurementTypeNeutralCurrent:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeNeutralCurrent"
+	case MTRElectricalEnergyMeasurementMeasurementTypeElectricalEnergy:
+		return "MTRElectricalEnergyMeasurementMeasurementTypeElectricalEnergy"
+	default:
+		return fmt.Sprintf("MTRElectricalEnergyMeasurementMeasurementType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRElectricalPowerMeasurementFeature int64
+
+const (
+	MTRElectricalPowerMeasurementFeatureDirectCurrent      MTRElectricalPowerMeasurementFeature = 1
+	MTRElectricalPowerMeasurementFeatureAlternatingCurrent MTRElectricalPowerMeasurementFeature = 2
+	MTRElectricalPowerMeasurementFeaturePolyphasePower     MTRElectricalPowerMeasurementFeature = 4
+	MTRElectricalPowerMeasurementFeatureHarmonics          MTRElectricalPowerMeasurementFeature = 8
+	MTRElectricalPowerMeasurementFeaturePowerQuality       MTRElectricalPowerMeasurementFeature = 16
+)
+
+// String returns the MTRElectricalPowerMeasurementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRElectricalPowerMeasurementFeature) String() string {
+	var parts []string
+	if e&MTRElectricalPowerMeasurementFeatureDirectCurrent != 0 {
+		parts = append(parts, "MTRElectricalPowerMeasurementFeatureDirectCurrent")
+	}
+	if e&MTRElectricalPowerMeasurementFeatureAlternatingCurrent != 0 {
+		parts = append(parts, "MTRElectricalPowerMeasurementFeatureAlternatingCurrent")
+	}
+	if e&MTRElectricalPowerMeasurementFeaturePolyphasePower != 0 {
+		parts = append(parts, "MTRElectricalPowerMeasurementFeaturePolyphasePower")
+	}
+	if e&MTRElectricalPowerMeasurementFeatureHarmonics != 0 {
+		parts = append(parts, "MTRElectricalPowerMeasurementFeatureHarmonics")
+	}
+	if e&MTRElectricalPowerMeasurementFeaturePowerQuality != 0 {
+		parts = append(parts, "MTRElectricalPowerMeasurementFeaturePowerQuality")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRElectricalPowerMeasurementMeasurementType int64
+
+const (
+	MTRElectricalPowerMeasurementMeasurementTypeUnspecified      MTRElectricalPowerMeasurementMeasurementType = 0
+	MTRElectricalPowerMeasurementMeasurementTypeVoltage          MTRElectricalPowerMeasurementMeasurementType = 1
+	MTRElectricalPowerMeasurementMeasurementTypeActiveCurrent    MTRElectricalPowerMeasurementMeasurementType = 2
+	MTRElectricalPowerMeasurementMeasurementTypeReactiveCurrent  MTRElectricalPowerMeasurementMeasurementType = 3
+	MTRElectricalPowerMeasurementMeasurementTypeApparentCurrent  MTRElectricalPowerMeasurementMeasurementType = 4
+	MTRElectricalPowerMeasurementMeasurementTypeActivePower      MTRElectricalPowerMeasurementMeasurementType = 5
+	MTRElectricalPowerMeasurementMeasurementTypeReactivePower    MTRElectricalPowerMeasurementMeasurementType = 6
+	MTRElectricalPowerMeasurementMeasurementTypeApparentPower    MTRElectricalPowerMeasurementMeasurementType = 7
+	MTRElectricalPowerMeasurementMeasurementTypeRMSVoltage       MTRElectricalPowerMeasurementMeasurementType = 8
+	MTRElectricalPowerMeasurementMeasurementTypeRMSCurrent       MTRElectricalPowerMeasurementMeasurementType = 9
+	MTRElectricalPowerMeasurementMeasurementTypeRMSPower         MTRElectricalPowerMeasurementMeasurementType = 10
+	MTRElectricalPowerMeasurementMeasurementTypeFrequency        MTRElectricalPowerMeasurementMeasurementType = 11
+	MTRElectricalPowerMeasurementMeasurementTypePowerFactor      MTRElectricalPowerMeasurementMeasurementType = 12
+	MTRElectricalPowerMeasurementMeasurementTypeNeutralCurrent   MTRElectricalPowerMeasurementMeasurementType = 13
+	MTRElectricalPowerMeasurementMeasurementTypeElectricalEnergy MTRElectricalPowerMeasurementMeasurementType = 14
+)
+
+// String returns the MTRElectricalPowerMeasurementMeasurementType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRElectricalPowerMeasurementMeasurementType) String() string {
+	switch e {
+	case MTRElectricalPowerMeasurementMeasurementTypeUnspecified:
+		return "MTRElectricalPowerMeasurementMeasurementTypeUnspecified"
+	case MTRElectricalPowerMeasurementMeasurementTypeVoltage:
+		return "MTRElectricalPowerMeasurementMeasurementTypeVoltage"
+	case MTRElectricalPowerMeasurementMeasurementTypeActiveCurrent:
+		return "MTRElectricalPowerMeasurementMeasurementTypeActiveCurrent"
+	case MTRElectricalPowerMeasurementMeasurementTypeReactiveCurrent:
+		return "MTRElectricalPowerMeasurementMeasurementTypeReactiveCurrent"
+	case MTRElectricalPowerMeasurementMeasurementTypeApparentCurrent:
+		return "MTRElectricalPowerMeasurementMeasurementTypeApparentCurrent"
+	case MTRElectricalPowerMeasurementMeasurementTypeActivePower:
+		return "MTRElectricalPowerMeasurementMeasurementTypeActivePower"
+	case MTRElectricalPowerMeasurementMeasurementTypeReactivePower:
+		return "MTRElectricalPowerMeasurementMeasurementTypeReactivePower"
+	case MTRElectricalPowerMeasurementMeasurementTypeApparentPower:
+		return "MTRElectricalPowerMeasurementMeasurementTypeApparentPower"
+	case MTRElectricalPowerMeasurementMeasurementTypeRMSVoltage:
+		return "MTRElectricalPowerMeasurementMeasurementTypeRMSVoltage"
+	case MTRElectricalPowerMeasurementMeasurementTypeRMSCurrent:
+		return "MTRElectricalPowerMeasurementMeasurementTypeRMSCurrent"
+	case MTRElectricalPowerMeasurementMeasurementTypeRMSPower:
+		return "MTRElectricalPowerMeasurementMeasurementTypeRMSPower"
+	case MTRElectricalPowerMeasurementMeasurementTypeFrequency:
+		return "MTRElectricalPowerMeasurementMeasurementTypeFrequency"
+	case MTRElectricalPowerMeasurementMeasurementTypePowerFactor:
+		return "MTRElectricalPowerMeasurementMeasurementTypePowerFactor"
+	case MTRElectricalPowerMeasurementMeasurementTypeNeutralCurrent:
+		return "MTRElectricalPowerMeasurementMeasurementTypeNeutralCurrent"
+	case MTRElectricalPowerMeasurementMeasurementTypeElectricalEnergy:
+		return "MTRElectricalPowerMeasurementMeasurementTypeElectricalEnergy"
+	default:
+		return fmt.Sprintf("MTRElectricalPowerMeasurementMeasurementType(%d)", int64(e))
+	}
+}
+
+type MTRElectricalPowerMeasurementPowerMode int64
+
+const (
+	MTRElectricalPowerMeasurementPowerModeUnknown MTRElectricalPowerMeasurementPowerMode = 0
+	MTRElectricalPowerMeasurementPowerModeDC      MTRElectricalPowerMeasurementPowerMode = 1
+	MTRElectricalPowerMeasurementPowerModeAC      MTRElectricalPowerMeasurementPowerMode = 2
+)
+
+// String returns the MTRElectricalPowerMeasurementPowerMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRElectricalPowerMeasurementPowerMode) String() string {
+	switch e {
+	case MTRElectricalPowerMeasurementPowerModeUnknown:
+		return "MTRElectricalPowerMeasurementPowerModeUnknown"
+	case MTRElectricalPowerMeasurementPowerModeDC:
+		return "MTRElectricalPowerMeasurementPowerModeDC"
+	case MTRElectricalPowerMeasurementPowerModeAC:
+		return "MTRElectricalPowerMeasurementPowerModeAC"
+	default:
+		return fmt.Sprintf("MTRElectricalPowerMeasurementPowerMode(%d)", int64(e))
+	}
+}
+
+type MTREnergyEVSEEnergyTransferStoppedReason int64
+
+const (
+	MTREnergyEVSEEnergyTransferStoppedReasonEVStopped   MTREnergyEVSEEnergyTransferStoppedReason = 0
+	MTREnergyEVSEEnergyTransferStoppedReasonEVSEStopped MTREnergyEVSEEnergyTransferStoppedReason = 1
+	MTREnergyEVSEEnergyTransferStoppedReasonOther       MTREnergyEVSEEnergyTransferStoppedReason = 2
+)
+
+// String returns the MTREnergyEVSEEnergyTransferStoppedReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTREnergyEVSEEnergyTransferStoppedReason) String() string {
+	switch e {
+	case MTREnergyEVSEEnergyTransferStoppedReasonEVStopped:
+		return "MTREnergyEVSEEnergyTransferStoppedReasonEVStopped"
+	case MTREnergyEVSEEnergyTransferStoppedReasonEVSEStopped:
+		return "MTREnergyEVSEEnergyTransferStoppedReasonEVSEStopped"
+	case MTREnergyEVSEEnergyTransferStoppedReasonOther:
+		return "MTREnergyEVSEEnergyTransferStoppedReasonOther"
+	default:
+		return fmt.Sprintf("MTREnergyEVSEEnergyTransferStoppedReason(%d)", int64(e))
+	}
+}
+
+type MTREnergyEVSEFaultState int64
+
+const (
+	MTREnergyEVSEFaultStateNoError           MTREnergyEVSEFaultState = 0
+	MTREnergyEVSEFaultStateMeterFailure      MTREnergyEVSEFaultState = 1
+	MTREnergyEVSEFaultStateOverVoltage       MTREnergyEVSEFaultState = 2
+	MTREnergyEVSEFaultStateUnderVoltage      MTREnergyEVSEFaultState = 3
+	MTREnergyEVSEFaultStateOverCurrent       MTREnergyEVSEFaultState = 4
+	MTREnergyEVSEFaultStateContactWetFailure MTREnergyEVSEFaultState = 5
+	MTREnergyEVSEFaultStateContactDryFailure MTREnergyEVSEFaultState = 6
+	MTREnergyEVSEFaultStateGroundFault       MTREnergyEVSEFaultState = 7
+	MTREnergyEVSEFaultStatePowerLoss         MTREnergyEVSEFaultState = 8
+	MTREnergyEVSEFaultStatePowerQuality      MTREnergyEVSEFaultState = 9
+	MTREnergyEVSEFaultStatePilotShortCircuit MTREnergyEVSEFaultState = 10
+	MTREnergyEVSEFaultStateEmergencyStop     MTREnergyEVSEFaultState = 11
+	MTREnergyEVSEFaultStateEVDisconnected    MTREnergyEVSEFaultState = 12
+	MTREnergyEVSEFaultStateWrongPowerSupply  MTREnergyEVSEFaultState = 13
+	MTREnergyEVSEFaultStateLiveNeutralSwap   MTREnergyEVSEFaultState = 14
+	MTREnergyEVSEFaultStateOverTemperature   MTREnergyEVSEFaultState = 15
+	MTREnergyEVSEFaultStateOther             MTREnergyEVSEFaultState = 255
+)
+
+// String returns the MTREnergyEVSEFaultState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTREnergyEVSEFaultState) String() string {
+	switch e {
+	case MTREnergyEVSEFaultStateNoError:
+		return "MTREnergyEVSEFaultStateNoError"
+	case MTREnergyEVSEFaultStateMeterFailure:
+		return "MTREnergyEVSEFaultStateMeterFailure"
+	case MTREnergyEVSEFaultStateOverVoltage:
+		return "MTREnergyEVSEFaultStateOverVoltage"
+	case MTREnergyEVSEFaultStateUnderVoltage:
+		return "MTREnergyEVSEFaultStateUnderVoltage"
+	case MTREnergyEVSEFaultStateOverCurrent:
+		return "MTREnergyEVSEFaultStateOverCurrent"
+	case MTREnergyEVSEFaultStateContactWetFailure:
+		return "MTREnergyEVSEFaultStateContactWetFailure"
+	case MTREnergyEVSEFaultStateContactDryFailure:
+		return "MTREnergyEVSEFaultStateContactDryFailure"
+	case MTREnergyEVSEFaultStateGroundFault:
+		return "MTREnergyEVSEFaultStateGroundFault"
+	case MTREnergyEVSEFaultStatePowerLoss:
+		return "MTREnergyEVSEFaultStatePowerLoss"
+	case MTREnergyEVSEFaultStatePowerQuality:
+		return "MTREnergyEVSEFaultStatePowerQuality"
+	case MTREnergyEVSEFaultStatePilotShortCircuit:
+		return "MTREnergyEVSEFaultStatePilotShortCircuit"
+	case MTREnergyEVSEFaultStateEmergencyStop:
+		return "MTREnergyEVSEFaultStateEmergencyStop"
+	case MTREnergyEVSEFaultStateEVDisconnected:
+		return "MTREnergyEVSEFaultStateEVDisconnected"
+	case MTREnergyEVSEFaultStateWrongPowerSupply:
+		return "MTREnergyEVSEFaultStateWrongPowerSupply"
+	case MTREnergyEVSEFaultStateLiveNeutralSwap:
+		return "MTREnergyEVSEFaultStateLiveNeutralSwap"
+	case MTREnergyEVSEFaultStateOverTemperature:
+		return "MTREnergyEVSEFaultStateOverTemperature"
+	case MTREnergyEVSEFaultStateOther:
+		return "MTREnergyEVSEFaultStateOther"
+	default:
+		return fmt.Sprintf("MTREnergyEVSEFaultState(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTREnergyEVSEFeature int64
+
+const (
+	MTREnergyEVSEFeatureChargingPreferences MTREnergyEVSEFeature = 1
+	MTREnergyEVSEFeatureRFID                MTREnergyEVSEFeature = 8
+)
+
+// String returns the MTREnergyEVSEFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTREnergyEVSEFeature) String() string {
+	var parts []string
+	if e&MTREnergyEVSEFeatureChargingPreferences != 0 {
+		parts = append(parts, "MTREnergyEVSEFeatureChargingPreferences")
+	}
+	if e&MTREnergyEVSEFeatureRFID != 0 {
+		parts = append(parts, "MTREnergyEVSEFeatureRFID")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTREnergyEVSEModeModeTag int64
+
+const (
+	MTREnergyEVSEModeModeTagAuto          MTREnergyEVSEModeModeTag = 0
+	MTREnergyEVSEModeModeTagQuick         MTREnergyEVSEModeModeTag = 1
+	MTREnergyEVSEModeModeTagQuiet         MTREnergyEVSEModeModeTag = 2
+	MTREnergyEVSEModeModeTagLowNoise      MTREnergyEVSEModeModeTag = 3
+	MTREnergyEVSEModeModeTagLowEnergy     MTREnergyEVSEModeModeTag = 4
+	MTREnergyEVSEModeModeTagVacation      MTREnergyEVSEModeModeTag = 5
+	MTREnergyEVSEModeModeTagMin           MTREnergyEVSEModeModeTag = 6
+	MTREnergyEVSEModeModeTagMax           MTREnergyEVSEModeModeTag = 7
+	MTREnergyEVSEModeModeTagNight         MTREnergyEVSEModeModeTag = 8
+	MTREnergyEVSEModeModeTagDay           MTREnergyEVSEModeModeTag = 9
+	MTREnergyEVSEModeModeTagManual        MTREnergyEVSEModeModeTag = 16384
+	MTREnergyEVSEModeModeTagTimeOfUse     MTREnergyEVSEModeModeTag = 16385
+	MTREnergyEVSEModeModeTagSolarCharging MTREnergyEVSEModeModeTag = 16386
+	MTREnergyEVSEModeModeTagV2X           MTREnergyEVSEModeModeTag = 16387
+)
+
+// String returns the MTREnergyEVSEModeModeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTREnergyEVSEModeModeTag) String() string {
+	switch e {
+	case MTREnergyEVSEModeModeTagAuto:
+		return "MTREnergyEVSEModeModeTagAuto"
+	case MTREnergyEVSEModeModeTagQuick:
+		return "MTREnergyEVSEModeModeTagQuick"
+	case MTREnergyEVSEModeModeTagQuiet:
+		return "MTREnergyEVSEModeModeTagQuiet"
+	case MTREnergyEVSEModeModeTagLowNoise:
+		return "MTREnergyEVSEModeModeTagLowNoise"
+	case MTREnergyEVSEModeModeTagLowEnergy:
+		return "MTREnergyEVSEModeModeTagLowEnergy"
+	case MTREnergyEVSEModeModeTagVacation:
+		return "MTREnergyEVSEModeModeTagVacation"
+	case MTREnergyEVSEModeModeTagMin:
+		return "MTREnergyEVSEModeModeTagMin"
+	case MTREnergyEVSEModeModeTagMax:
+		return "MTREnergyEVSEModeModeTagMax"
+	case MTREnergyEVSEModeModeTagNight:
+		return "MTREnergyEVSEModeModeTagNight"
+	case MTREnergyEVSEModeModeTagDay:
+		return "MTREnergyEVSEModeModeTagDay"
+	case MTREnergyEVSEModeModeTagManual:
+		return "MTREnergyEVSEModeModeTagManual"
+	case MTREnergyEVSEModeModeTagTimeOfUse:
+		return "MTREnergyEVSEModeModeTagTimeOfUse"
+	case MTREnergyEVSEModeModeTagSolarCharging:
+		return "MTREnergyEVSEModeModeTagSolarCharging"
+	case MTREnergyEVSEModeModeTagV2X:
+		return "MTREnergyEVSEModeModeTagV2X"
+	default:
+		return fmt.Sprintf("MTREnergyEVSEModeModeTag(%d)", int64(e))
+	}
+}
+
+type MTREnergyEVSEState int64
+
+const (
+	MTREnergyEVSEStateNotPluggedIn      MTREnergyEVSEState = 0
+	MTREnergyEVSEStatePluggedInNoDemand MTREnergyEVSEState = 1
+	MTREnergyEVSEStatePluggedInDemand   MTREnergyEVSEState = 2
+	MTREnergyEVSEStatePluggedInCharging MTREnergyEVSEState = 3
+	MTREnergyEVSEStateSessionEnding     MTREnergyEVSEState = 5
+	MTREnergyEVSEStateFault             MTREnergyEVSEState = 6
+)
+
+// String returns the MTREnergyEVSEState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTREnergyEVSEState) String() string {
+	switch e {
+	case MTREnergyEVSEStateNotPluggedIn:
+		return "MTREnergyEVSEStateNotPluggedIn"
+	case MTREnergyEVSEStatePluggedInNoDemand:
+		return "MTREnergyEVSEStatePluggedInNoDemand"
+	case MTREnergyEVSEStatePluggedInDemand:
+		return "MTREnergyEVSEStatePluggedInDemand"
+	case MTREnergyEVSEStatePluggedInCharging:
+		return "MTREnergyEVSEStatePluggedInCharging"
+	case MTREnergyEVSEStateSessionEnding:
+		return "MTREnergyEVSEStateSessionEnding"
+	case MTREnergyEVSEStateFault:
+		return "MTREnergyEVSEStateFault"
+	default:
+		return fmt.Sprintf("MTREnergyEVSEState(%d)", int64(e))
+	}
+}
+
+type MTREnergyEVSESupplyState int64
+
+const (
+	MTREnergyEVSESupplyStateDisabled            MTREnergyEVSESupplyState = 0
+	MTREnergyEVSESupplyStateChargingEnabled     MTREnergyEVSESupplyState = 1
+	MTREnergyEVSESupplyStateDisabledError       MTREnergyEVSESupplyState = 3
+	MTREnergyEVSESupplyStateDisabledDiagnostics MTREnergyEVSESupplyState = 4
+)
+
+// String returns the MTREnergyEVSESupplyState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTREnergyEVSESupplyState) String() string {
+	switch e {
+	case MTREnergyEVSESupplyStateDisabled:
+		return "MTREnergyEVSESupplyStateDisabled"
+	case MTREnergyEVSESupplyStateChargingEnabled:
+		return "MTREnergyEVSESupplyStateChargingEnabled"
+	case MTREnergyEVSESupplyStateDisabledError:
+		return "MTREnergyEVSESupplyStateDisabledError"
+	case MTREnergyEVSESupplyStateDisabledDiagnostics:
+		return "MTREnergyEVSESupplyStateDisabledDiagnostics"
+	default:
+		return fmt.Sprintf("MTREnergyEVSESupplyState(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTREnergyEVSETargetDayOfWeekBitmap int64
+
+const (
+	MTREnergyEVSETargetDayOfWeekBitmapSunday    MTREnergyEVSETargetDayOfWeekBitmap = 1
+	MTREnergyEVSETargetDayOfWeekBitmapMonday    MTREnergyEVSETargetDayOfWeekBitmap = 2
+	MTREnergyEVSETargetDayOfWeekBitmapTuesday   MTREnergyEVSETargetDayOfWeekBitmap = 4
+	MTREnergyEVSETargetDayOfWeekBitmapWednesday MTREnergyEVSETargetDayOfWeekBitmap = 8
+	MTREnergyEVSETargetDayOfWeekBitmapThursday  MTREnergyEVSETargetDayOfWeekBitmap = 16
+	MTREnergyEVSETargetDayOfWeekBitmapFriday    MTREnergyEVSETargetDayOfWeekBitmap = 32
+	MTREnergyEVSETargetDayOfWeekBitmapSaturday  MTREnergyEVSETargetDayOfWeekBitmap = 64
+)
+
+// String returns the MTREnergyEVSETargetDayOfWeekBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTREnergyEVSETargetDayOfWeekBitmap) String() string {
+	var parts []string
+	if e&MTREnergyEVSETargetDayOfWeekBitmapSunday != 0 {
+		parts = append(parts, "MTREnergyEVSETargetDayOfWeekBitmapSunday")
+	}
+	if e&MTREnergyEVSETargetDayOfWeekBitmapMonday != 0 {
+		parts = append(parts, "MTREnergyEVSETargetDayOfWeekBitmapMonday")
+	}
+	if e&MTREnergyEVSETargetDayOfWeekBitmapTuesday != 0 {
+		parts = append(parts, "MTREnergyEVSETargetDayOfWeekBitmapTuesday")
+	}
+	if e&MTREnergyEVSETargetDayOfWeekBitmapWednesday != 0 {
+		parts = append(parts, "MTREnergyEVSETargetDayOfWeekBitmapWednesday")
+	}
+	if e&MTREnergyEVSETargetDayOfWeekBitmapThursday != 0 {
+		parts = append(parts, "MTREnergyEVSETargetDayOfWeekBitmapThursday")
+	}
+	if e&MTREnergyEVSETargetDayOfWeekBitmapFriday != 0 {
+		parts = append(parts, "MTREnergyEVSETargetDayOfWeekBitmapFriday")
+	}
+	if e&MTREnergyEVSETargetDayOfWeekBitmapSaturday != 0 {
+		parts = append(parts, "MTREnergyEVSETargetDayOfWeekBitmapSaturday")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRErrorCode int64
+
+const (
+	// MTRErrorCodeGeneralError represents a generic Matter error with no further categorization. The userInfo will have a key named
+	MTRErrorCodeGeneralError         MTRErrorCode = 1
+	MTRErrorCodeInvalidStringLength  MTRErrorCode = 2
+	MTRErrorCodeInvalidIntegerValue  MTRErrorCode = 3
+	MTRErrorCodeInvalidArgument      MTRErrorCode = 4
+	MTRErrorCodeInvalidMessageLength MTRErrorCode = 5
+	MTRErrorCodeInvalidState         MTRErrorCode = 6
+	MTRErrorCodeWrongAddressType     MTRErrorCode = 7
+	MTRErrorCodeIntegrityCheckFailed MTRErrorCode = 8
+	MTRErrorCodeTimeout              MTRErrorCode = 9
+	MTRErrorCodeBufferTooSmall       MTRErrorCode = 10
+	// MTRErrorCodeFabricExists is returned when trying to commission a device into a fabric when it's already part of that fabric.
+	MTRErrorCodeFabricExists MTRErrorCode = 11
+	// MTRErrorCodeUnknownSchema means the schema for the given cluster/attribute, cluster/event, or cluster/command combination is not known.
+	MTRErrorCodeUnknownSchema MTRErrorCode = 12
+	// MTRErrorCodeSchemaMismatch means that provided data did not match the expected schema.
+	MTRErrorCodeSchemaMismatch MTRErrorCode = 13
+	// MTRErrorCodeTLVDecodeFailed means that the TLV being decoded was malformed in some way.  This can include things like lengths running past the end of the buffer, strings that are not actually UTF-8, and various other TLV-level failures.
+	MTRErrorCodeTLVDecodeFailed MTRErrorCode = 14
+	// MTRErrorCodeDNSSDUnauthorized means that the application is not authorized to perform DNS_SD lookups.  This typically means missing entries for "_matter._tcp" (for operational lookup) and "_matterc._udp" (for commissionable lookup) under the NSBonjourServices key in the application's Info.plist.
+	MTRErrorCodeDNSSDUnauthorized MTRErrorCode = 15
+	// The operation was cancelled.
+	MTRErrorCodeCancelled MTRErrorCode = 16
+	// Access to some resource was denied.
+	MTRErrorCodeAccessDenied MTRErrorCode = 17
+	// A request was made to some entity, and that entity cannot handle the request right now, but might be able to at a different point in time.
+	MTRErrorCodeBusy MTRErrorCode = 18
+	// Something was requested that could not be located.
+	MTRErrorCodeNotFound MTRErrorCode = 19
+)
+
+// String returns the MTRErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRErrorCode) String() string {
+	switch e {
+	case MTRErrorCodeGeneralError:
+		return "MTRErrorCodeGeneralError"
+	case MTRErrorCodeInvalidStringLength:
+		return "MTRErrorCodeInvalidStringLength"
+	case MTRErrorCodeInvalidIntegerValue:
+		return "MTRErrorCodeInvalidIntegerValue"
+	case MTRErrorCodeInvalidArgument:
+		return "MTRErrorCodeInvalidArgument"
+	case MTRErrorCodeInvalidMessageLength:
+		return "MTRErrorCodeInvalidMessageLength"
+	case MTRErrorCodeInvalidState:
+		return "MTRErrorCodeInvalidState"
+	case MTRErrorCodeWrongAddressType:
+		return "MTRErrorCodeWrongAddressType"
+	case MTRErrorCodeIntegrityCheckFailed:
+		return "MTRErrorCodeIntegrityCheckFailed"
+	case MTRErrorCodeTimeout:
+		return "MTRErrorCodeTimeout"
+	case MTRErrorCodeBufferTooSmall:
+		return "MTRErrorCodeBufferTooSmall"
+	case MTRErrorCodeFabricExists:
+		return "MTRErrorCodeFabricExists"
+	case MTRErrorCodeUnknownSchema:
+		return "MTRErrorCodeUnknownSchema"
+	case MTRErrorCodeSchemaMismatch:
+		return "MTRErrorCodeSchemaMismatch"
+	case MTRErrorCodeTLVDecodeFailed:
+		return "MTRErrorCodeTLVDecodeFailed"
+	case MTRErrorCodeDNSSDUnauthorized:
+		return "MTRErrorCodeDNSSDUnauthorized"
+	case MTRErrorCodeCancelled:
+		return "MTRErrorCodeCancelled"
+	case MTRErrorCodeAccessDenied:
+		return "MTRErrorCodeAccessDenied"
+	case MTRErrorCodeBusy:
+		return "MTRErrorCodeBusy"
+	case MTRErrorCodeNotFound:
+		return "MTRErrorCodeNotFound"
+	default:
+		return fmt.Sprintf("MTRErrorCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTREthernetNetworkDiagnosticsFeature int64
+
+const (
+	MTREthernetNetworkDiagnosticsFeaturePacketCounts MTREthernetNetworkDiagnosticsFeature = 1
+	MTREthernetNetworkDiagnosticsFeatureErrorCounts  MTREthernetNetworkDiagnosticsFeature = 2
+)
+
+// String returns the MTREthernetNetworkDiagnosticsFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTREthernetNetworkDiagnosticsFeature) String() string {
+	var parts []string
+	if e&MTREthernetNetworkDiagnosticsFeaturePacketCounts != 0 {
+		parts = append(parts, "MTREthernetNetworkDiagnosticsFeaturePacketCounts")
+	}
+	if e&MTREthernetNetworkDiagnosticsFeatureErrorCounts != 0 {
+		parts = append(parts, "MTREthernetNetworkDiagnosticsFeatureErrorCounts")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTREthernetNetworkDiagnosticsPHYRate int64
+
+const (
+	MTREthernetNetworkDiagnosticsPHYRateRate10M  MTREthernetNetworkDiagnosticsPHYRate = 0
+	MTREthernetNetworkDiagnosticsPHYRateRate100M MTREthernetNetworkDiagnosticsPHYRate = 1
+	MTREthernetNetworkDiagnosticsPHYRateRate1G   MTREthernetNetworkDiagnosticsPHYRate = 2
+	MTREthernetNetworkDiagnosticsPHYRateRate25G  MTREthernetNetworkDiagnosticsPHYRate = 3
+	MTREthernetNetworkDiagnosticsPHYRateRate5G   MTREthernetNetworkDiagnosticsPHYRate = 4
+	MTREthernetNetworkDiagnosticsPHYRateRate10G  MTREthernetNetworkDiagnosticsPHYRate = 5
+	MTREthernetNetworkDiagnosticsPHYRateRate40G  MTREthernetNetworkDiagnosticsPHYRate = 6
+	MTREthernetNetworkDiagnosticsPHYRateRate100G MTREthernetNetworkDiagnosticsPHYRate = 7
+	MTREthernetNetworkDiagnosticsPHYRateRate200G MTREthernetNetworkDiagnosticsPHYRate = 8
+	MTREthernetNetworkDiagnosticsPHYRateRate400G MTREthernetNetworkDiagnosticsPHYRate = 9
+)
+
+// String returns the MTREthernetNetworkDiagnosticsPHYRate constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTREthernetNetworkDiagnosticsPHYRate) String() string {
+	switch e {
+	case MTREthernetNetworkDiagnosticsPHYRateRate10M:
+		return "MTREthernetNetworkDiagnosticsPHYRateRate10M"
+	case MTREthernetNetworkDiagnosticsPHYRateRate100M:
+		return "MTREthernetNetworkDiagnosticsPHYRateRate100M"
+	case MTREthernetNetworkDiagnosticsPHYRateRate1G:
+		return "MTREthernetNetworkDiagnosticsPHYRateRate1G"
+	case MTREthernetNetworkDiagnosticsPHYRateRate25G:
+		return "MTREthernetNetworkDiagnosticsPHYRateRate25G"
+	case MTREthernetNetworkDiagnosticsPHYRateRate5G:
+		return "MTREthernetNetworkDiagnosticsPHYRateRate5G"
+	case MTREthernetNetworkDiagnosticsPHYRateRate10G:
+		return "MTREthernetNetworkDiagnosticsPHYRateRate10G"
+	case MTREthernetNetworkDiagnosticsPHYRateRate40G:
+		return "MTREthernetNetworkDiagnosticsPHYRateRate40G"
+	case MTREthernetNetworkDiagnosticsPHYRateRate100G:
+		return "MTREthernetNetworkDiagnosticsPHYRateRate100G"
+	case MTREthernetNetworkDiagnosticsPHYRateRate200G:
+		return "MTREthernetNetworkDiagnosticsPHYRateRate200G"
+	case MTREthernetNetworkDiagnosticsPHYRateRate400G:
+		return "MTREthernetNetworkDiagnosticsPHYRateRate400G"
+	default:
+		return fmt.Sprintf("MTREthernetNetworkDiagnosticsPHYRate(%d)", int64(e))
+	}
+}
+
+type MTREthernetNetworkDiagnosticsPHYRateType int64
+
+const (
+	MTREthernetNetworkDiagnosticsPHYRateType10M   MTREthernetNetworkDiagnosticsPHYRateType = 0
+	MTREthernetNetworkDiagnosticsPHYRateType100M  MTREthernetNetworkDiagnosticsPHYRateType = 1
+	MTREthernetNetworkDiagnosticsPHYRateType1000M MTREthernetNetworkDiagnosticsPHYRateType = 2
+	MTREthernetNetworkDiagnosticsPHYRateType25G   MTREthernetNetworkDiagnosticsPHYRateType = 3
+	MTREthernetNetworkDiagnosticsPHYRateType5G    MTREthernetNetworkDiagnosticsPHYRateType = 4
+	MTREthernetNetworkDiagnosticsPHYRateType10G   MTREthernetNetworkDiagnosticsPHYRateType = 5
+	MTREthernetNetworkDiagnosticsPHYRateType40G   MTREthernetNetworkDiagnosticsPHYRateType = 6
+	MTREthernetNetworkDiagnosticsPHYRateType100G  MTREthernetNetworkDiagnosticsPHYRateType = 7
+	MTREthernetNetworkDiagnosticsPHYRateType200G  MTREthernetNetworkDiagnosticsPHYRateType = 8
+	MTREthernetNetworkDiagnosticsPHYRateType400G  MTREthernetNetworkDiagnosticsPHYRateType = 9
+)
+
+// String returns the MTREthernetNetworkDiagnosticsPHYRateType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTREthernetNetworkDiagnosticsPHYRateType) String() string {
+	switch e {
+	case MTREthernetNetworkDiagnosticsPHYRateType10M:
+		return "MTREthernetNetworkDiagnosticsPHYRateType10M"
+	case MTREthernetNetworkDiagnosticsPHYRateType100M:
+		return "MTREthernetNetworkDiagnosticsPHYRateType100M"
+	case MTREthernetNetworkDiagnosticsPHYRateType1000M:
+		return "MTREthernetNetworkDiagnosticsPHYRateType1000M"
+	case MTREthernetNetworkDiagnosticsPHYRateType25G:
+		return "MTREthernetNetworkDiagnosticsPHYRateType25G"
+	case MTREthernetNetworkDiagnosticsPHYRateType5G:
+		return "MTREthernetNetworkDiagnosticsPHYRateType5G"
+	case MTREthernetNetworkDiagnosticsPHYRateType10G:
+		return "MTREthernetNetworkDiagnosticsPHYRateType10G"
+	case MTREthernetNetworkDiagnosticsPHYRateType40G:
+		return "MTREthernetNetworkDiagnosticsPHYRateType40G"
+	case MTREthernetNetworkDiagnosticsPHYRateType100G:
+		return "MTREthernetNetworkDiagnosticsPHYRateType100G"
+	case MTREthernetNetworkDiagnosticsPHYRateType200G:
+		return "MTREthernetNetworkDiagnosticsPHYRateType200G"
+	case MTREthernetNetworkDiagnosticsPHYRateType400G:
+		return "MTREthernetNetworkDiagnosticsPHYRateType400G"
+	default:
+		return fmt.Sprintf("MTREthernetNetworkDiagnosticsPHYRateType(%d)", int64(e))
+	}
+}
+
+type MTREventPriority uint64
+
+const (
+	MTREventPriorityDebug    MTREventPriority = 0
+	MTREventPriorityInfo     MTREventPriority = 1
+	MTREventPriorityCritical MTREventPriority = 2
+)
+
+// String returns the MTREventPriority constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTREventPriority) String() string {
+	switch e {
+	case MTREventPriorityDebug:
+		return "MTREventPriorityDebug"
+	case MTREventPriorityInfo:
+		return "MTREventPriorityInfo"
+	case MTREventPriorityCritical:
+		return "MTREventPriorityCritical"
+	default:
+		return fmt.Sprintf("MTREventPriority(%d)", int64(e))
+	}
+}
+
+type MTRFanControlAirflowDirection int64
+
+const (
+	MTRFanControlAirflowDirectionForward MTRFanControlAirflowDirection = 0
+	MTRFanControlAirflowDirectionReverse MTRFanControlAirflowDirection = 1
+)
+
+// String returns the MTRFanControlAirflowDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFanControlAirflowDirection) String() string {
+	switch e {
+	case MTRFanControlAirflowDirectionForward:
+		return "MTRFanControlAirflowDirectionForward"
+	case MTRFanControlAirflowDirectionReverse:
+		return "MTRFanControlAirflowDirectionReverse"
+	default:
+		return fmt.Sprintf("MTRFanControlAirflowDirection(%d)", int64(e))
+	}
+}
+
+type MTRFanControlFanMode int64
+
+const (
+	MTRFanControlFanModeOff    MTRFanControlFanMode = 0
+	MTRFanControlFanModeLow    MTRFanControlFanMode = 1
+	MTRFanControlFanModeMedium MTRFanControlFanMode = 2
+	MTRFanControlFanModeHigh   MTRFanControlFanMode = 3
+	MTRFanControlFanModeOn     MTRFanControlFanMode = 4
+	MTRFanControlFanModeAuto   MTRFanControlFanMode = 5
+	MTRFanControlFanModeSmart  MTRFanControlFanMode = 6
+)
+
+// String returns the MTRFanControlFanMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFanControlFanMode) String() string {
+	switch e {
+	case MTRFanControlFanModeOff:
+		return "MTRFanControlFanModeOff"
+	case MTRFanControlFanModeLow:
+		return "MTRFanControlFanModeLow"
+	case MTRFanControlFanModeMedium:
+		return "MTRFanControlFanModeMedium"
+	case MTRFanControlFanModeHigh:
+		return "MTRFanControlFanModeHigh"
+	case MTRFanControlFanModeOn:
+		return "MTRFanControlFanModeOn"
+	case MTRFanControlFanModeAuto:
+		return "MTRFanControlFanModeAuto"
+	case MTRFanControlFanModeSmart:
+		return "MTRFanControlFanModeSmart"
+	default:
+		return fmt.Sprintf("MTRFanControlFanMode(%d)", int64(e))
+	}
+}
+
+type MTRFanControlFanModeSequence int64
+
+const (
+	MTRFanControlFanModeSequenceOffLowMedHigh     MTRFanControlFanModeSequence = 0
+	MTRFanControlFanModeSequenceOffLowHigh        MTRFanControlFanModeSequence = 1
+	MTRFanControlFanModeSequenceOffLowMedHighAuto MTRFanControlFanModeSequence = 2
+	MTRFanControlFanModeSequenceOffLowHighAuto    MTRFanControlFanModeSequence = 3
+	MTRFanControlFanModeSequenceOffHighAuto       MTRFanControlFanModeSequence = 4
+	MTRFanControlFanModeSequenceOffOnAuto         MTRFanControlFanModeSequence = 4
+	MTRFanControlFanModeSequenceOffHigh           MTRFanControlFanModeSequence = 5
+	MTRFanControlFanModeSequenceOffOn             MTRFanControlFanModeSequence = 5
+)
+
+// String returns the MTRFanControlFanModeSequence constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFanControlFanModeSequence) String() string {
+	switch e {
+	case MTRFanControlFanModeSequenceOffLowMedHigh:
+		return "MTRFanControlFanModeSequenceOffLowMedHigh"
+	case MTRFanControlFanModeSequenceOffLowHigh:
+		return "MTRFanControlFanModeSequenceOffLowHigh"
+	case MTRFanControlFanModeSequenceOffLowMedHighAuto:
+		return "MTRFanControlFanModeSequenceOffLowMedHighAuto"
+	case MTRFanControlFanModeSequenceOffLowHighAuto:
+		return "MTRFanControlFanModeSequenceOffLowHighAuto"
+	case MTRFanControlFanModeSequenceOffHighAuto:
+		return "MTRFanControlFanModeSequenceOffHighAuto"
+	case MTRFanControlFanModeSequenceOffHigh:
+		return "MTRFanControlFanModeSequenceOffHigh"
+	default:
+		return fmt.Sprintf("MTRFanControlFanModeSequence(%d)", int64(e))
+	}
+}
+
+type MTRFanControlFanModeSequenceType int64
+
+const (
+	MTRFanControlFanModeSequenceTypeOffLowMedHigh     MTRFanControlFanModeSequenceType = 0
+	MTRFanControlFanModeSequenceTypeOffLowHigh        MTRFanControlFanModeSequenceType = 1
+	MTRFanControlFanModeSequenceTypeOffLowMedHighAuto MTRFanControlFanModeSequenceType = 2
+	MTRFanControlFanModeSequenceTypeOffLowHighAuto    MTRFanControlFanModeSequenceType = 3
+	MTRFanControlFanModeSequenceTypeOffOnAuto         MTRFanControlFanModeSequenceType = 4
+	MTRFanControlFanModeSequenceTypeOffOn             MTRFanControlFanModeSequenceType = 5
+)
+
+// String returns the MTRFanControlFanModeSequenceType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFanControlFanModeSequenceType) String() string {
+	switch e {
+	case MTRFanControlFanModeSequenceTypeOffLowMedHigh:
+		return "MTRFanControlFanModeSequenceTypeOffLowMedHigh"
+	case MTRFanControlFanModeSequenceTypeOffLowHigh:
+		return "MTRFanControlFanModeSequenceTypeOffLowHigh"
+	case MTRFanControlFanModeSequenceTypeOffLowMedHighAuto:
+		return "MTRFanControlFanModeSequenceTypeOffLowMedHighAuto"
+	case MTRFanControlFanModeSequenceTypeOffLowHighAuto:
+		return "MTRFanControlFanModeSequenceTypeOffLowHighAuto"
+	case MTRFanControlFanModeSequenceTypeOffOnAuto:
+		return "MTRFanControlFanModeSequenceTypeOffOnAuto"
+	case MTRFanControlFanModeSequenceTypeOffOn:
+		return "MTRFanControlFanModeSequenceTypeOffOn"
+	default:
+		return fmt.Sprintf("MTRFanControlFanModeSequenceType(%d)", int64(e))
+	}
+}
+
+type MTRFanControlFanModeType int64
+
+const (
+	MTRFanControlFanModeTypeOff    MTRFanControlFanModeType = 0
+	MTRFanControlFanModeTypeLow    MTRFanControlFanModeType = 1
+	MTRFanControlFanModeTypeMedium MTRFanControlFanModeType = 2
+	MTRFanControlFanModeTypeHigh   MTRFanControlFanModeType = 3
+	MTRFanControlFanModeTypeOn     MTRFanControlFanModeType = 4
+	MTRFanControlFanModeTypeAuto   MTRFanControlFanModeType = 5
+	MTRFanControlFanModeTypeSmart  MTRFanControlFanModeType = 6
+)
+
+// String returns the MTRFanControlFanModeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFanControlFanModeType) String() string {
+	switch e {
+	case MTRFanControlFanModeTypeOff:
+		return "MTRFanControlFanModeTypeOff"
+	case MTRFanControlFanModeTypeLow:
+		return "MTRFanControlFanModeTypeLow"
+	case MTRFanControlFanModeTypeMedium:
+		return "MTRFanControlFanModeTypeMedium"
+	case MTRFanControlFanModeTypeHigh:
+		return "MTRFanControlFanModeTypeHigh"
+	case MTRFanControlFanModeTypeOn:
+		return "MTRFanControlFanModeTypeOn"
+	case MTRFanControlFanModeTypeAuto:
+		return "MTRFanControlFanModeTypeAuto"
+	case MTRFanControlFanModeTypeSmart:
+		return "MTRFanControlFanModeTypeSmart"
+	default:
+		return fmt.Sprintf("MTRFanControlFanModeType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRFanControlFeature int64
+
+const (
+	MTRFanControlFeatureMultiSpeed       MTRFanControlFeature = 1
+	MTRFanControlFeatureAuto             MTRFanControlFeature = 2
+	MTRFanControlFeatureRocking          MTRFanControlFeature = 4
+	MTRFanControlFeatureWind             MTRFanControlFeature = 8
+	MTRFanControlFeatureStep             MTRFanControlFeature = 16
+	MTRFanControlFeatureAirflowDirection MTRFanControlFeature = 32
+)
+
+// String returns the MTRFanControlFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFanControlFeature) String() string {
+	var parts []string
+	if e&MTRFanControlFeatureMultiSpeed != 0 {
+		parts = append(parts, "MTRFanControlFeatureMultiSpeed")
+	}
+	if e&MTRFanControlFeatureAuto != 0 {
+		parts = append(parts, "MTRFanControlFeatureAuto")
+	}
+	if e&MTRFanControlFeatureRocking != 0 {
+		parts = append(parts, "MTRFanControlFeatureRocking")
+	}
+	if e&MTRFanControlFeatureWind != 0 {
+		parts = append(parts, "MTRFanControlFeatureWind")
+	}
+	if e&MTRFanControlFeatureStep != 0 {
+		parts = append(parts, "MTRFanControlFeatureStep")
+	}
+	if e&MTRFanControlFeatureAirflowDirection != 0 {
+		parts = append(parts, "MTRFanControlFeatureAirflowDirection")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRFanControlRockBitmap int64
+
+const (
+	MTRFanControlRockBitmapRockLeftRight MTRFanControlRockBitmap = 1
+	MTRFanControlRockBitmapRockUpDown    MTRFanControlRockBitmap = 2
+	MTRFanControlRockBitmapRockRound     MTRFanControlRockBitmap = 4
+)
+
+// String returns the MTRFanControlRockBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFanControlRockBitmap) String() string {
+	var parts []string
+	if e&MTRFanControlRockBitmapRockLeftRight != 0 {
+		parts = append(parts, "MTRFanControlRockBitmapRockLeftRight")
+	}
+	if e&MTRFanControlRockBitmapRockUpDown != 0 {
+		parts = append(parts, "MTRFanControlRockBitmapRockUpDown")
+	}
+	if e&MTRFanControlRockBitmapRockRound != 0 {
+		parts = append(parts, "MTRFanControlRockBitmapRockRound")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRFanControlRockSupportMask int64
+
+const (
+	MTRFanControlRockSupportMaskRockLeftRight MTRFanControlRockSupportMask = 1
+	MTRFanControlRockSupportMaskRockUpDown    MTRFanControlRockSupportMask = 2
+	MTRFanControlRockSupportMaskRockRound     MTRFanControlRockSupportMask = 4
+)
+
+// String returns the MTRFanControlRockSupportMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFanControlRockSupportMask) String() string {
+	var parts []string
+	if e&MTRFanControlRockSupportMaskRockLeftRight != 0 {
+		parts = append(parts, "MTRFanControlRockSupportMaskRockLeftRight")
+	}
+	if e&MTRFanControlRockSupportMaskRockUpDown != 0 {
+		parts = append(parts, "MTRFanControlRockSupportMaskRockUpDown")
+	}
+	if e&MTRFanControlRockSupportMaskRockRound != 0 {
+		parts = append(parts, "MTRFanControlRockSupportMaskRockRound")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRFanControlStepDirection int64
+
+const (
+	MTRFanControlStepDirectionIncrease MTRFanControlStepDirection = 0
+	MTRFanControlStepDirectionDecrease MTRFanControlStepDirection = 1
+)
+
+// String returns the MTRFanControlStepDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFanControlStepDirection) String() string {
+	switch e {
+	case MTRFanControlStepDirectionIncrease:
+		return "MTRFanControlStepDirectionIncrease"
+	case MTRFanControlStepDirectionDecrease:
+		return "MTRFanControlStepDirectionDecrease"
+	default:
+		return fmt.Sprintf("MTRFanControlStepDirection(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRFanControlWindBitmap int64
+
+const (
+	MTRFanControlWindBitmapSleepWind   MTRFanControlWindBitmap = 1
+	MTRFanControlWindBitmapNaturalWind MTRFanControlWindBitmap = 2
+)
+
+// String returns the MTRFanControlWindBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFanControlWindBitmap) String() string {
+	var parts []string
+	if e&MTRFanControlWindBitmapSleepWind != 0 {
+		parts = append(parts, "MTRFanControlWindBitmapSleepWind")
+	}
+	if e&MTRFanControlWindBitmapNaturalWind != 0 {
+		parts = append(parts, "MTRFanControlWindBitmapNaturalWind")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRFanControlWindSettingMask int64
+
+const (
+	MTRFanControlWindSettingMaskSleepWind   MTRFanControlWindSettingMask = 1
+	MTRFanControlWindSettingMaskNaturalWind MTRFanControlWindSettingMask = 2
+)
+
+// String returns the MTRFanControlWindSettingMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFanControlWindSettingMask) String() string {
+	var parts []string
+	if e&MTRFanControlWindSettingMaskSleepWind != 0 {
+		parts = append(parts, "MTRFanControlWindSettingMaskSleepWind")
+	}
+	if e&MTRFanControlWindSettingMaskNaturalWind != 0 {
+		parts = append(parts, "MTRFanControlWindSettingMaskNaturalWind")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRFanControlWindSupportMask int64
+
+const (
+	MTRFanControlWindSupportMaskSleepWind   MTRFanControlWindSupportMask = 1
+	MTRFanControlWindSupportMaskNaturalWind MTRFanControlWindSupportMask = 2
+)
+
+// String returns the MTRFanControlWindSupportMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFanControlWindSupportMask) String() string {
+	var parts []string
+	if e&MTRFanControlWindSupportMaskSleepWind != 0 {
+		parts = append(parts, "MTRFanControlWindSupportMaskSleepWind")
+	}
+	if e&MTRFanControlWindSupportMaskNaturalWind != 0 {
+		parts = append(parts, "MTRFanControlWindSupportMaskNaturalWind")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRFormaldehydeConcentrationMeasurementFeature int64
+
+const (
+	MTRFormaldehydeConcentrationMeasurementFeatureNumericMeasurement MTRFormaldehydeConcentrationMeasurementFeature = 1
+	MTRFormaldehydeConcentrationMeasurementFeatureLevelIndication    MTRFormaldehydeConcentrationMeasurementFeature = 2
+	MTRFormaldehydeConcentrationMeasurementFeatureMediumLevel        MTRFormaldehydeConcentrationMeasurementFeature = 4
+	MTRFormaldehydeConcentrationMeasurementFeatureCriticalLevel      MTRFormaldehydeConcentrationMeasurementFeature = 8
+	MTRFormaldehydeConcentrationMeasurementFeaturePeakMeasurement    MTRFormaldehydeConcentrationMeasurementFeature = 16
+	MTRFormaldehydeConcentrationMeasurementFeatureAverageMeasurement MTRFormaldehydeConcentrationMeasurementFeature = 32
+)
+
+// String returns the MTRFormaldehydeConcentrationMeasurementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFormaldehydeConcentrationMeasurementFeature) String() string {
+	var parts []string
+	if e&MTRFormaldehydeConcentrationMeasurementFeatureNumericMeasurement != 0 {
+		parts = append(parts, "MTRFormaldehydeConcentrationMeasurementFeatureNumericMeasurement")
+	}
+	if e&MTRFormaldehydeConcentrationMeasurementFeatureLevelIndication != 0 {
+		parts = append(parts, "MTRFormaldehydeConcentrationMeasurementFeatureLevelIndication")
+	}
+	if e&MTRFormaldehydeConcentrationMeasurementFeatureMediumLevel != 0 {
+		parts = append(parts, "MTRFormaldehydeConcentrationMeasurementFeatureMediumLevel")
+	}
+	if e&MTRFormaldehydeConcentrationMeasurementFeatureCriticalLevel != 0 {
+		parts = append(parts, "MTRFormaldehydeConcentrationMeasurementFeatureCriticalLevel")
+	}
+	if e&MTRFormaldehydeConcentrationMeasurementFeaturePeakMeasurement != 0 {
+		parts = append(parts, "MTRFormaldehydeConcentrationMeasurementFeaturePeakMeasurement")
+	}
+	if e&MTRFormaldehydeConcentrationMeasurementFeatureAverageMeasurement != 0 {
+		parts = append(parts, "MTRFormaldehydeConcentrationMeasurementFeatureAverageMeasurement")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRFormaldehydeConcentrationMeasurementLevelValue int64
+
+const (
+	MTRFormaldehydeConcentrationMeasurementLevelValueUnknown  MTRFormaldehydeConcentrationMeasurementLevelValue = 0
+	MTRFormaldehydeConcentrationMeasurementLevelValueLow      MTRFormaldehydeConcentrationMeasurementLevelValue = 1
+	MTRFormaldehydeConcentrationMeasurementLevelValueMedium   MTRFormaldehydeConcentrationMeasurementLevelValue = 2
+	MTRFormaldehydeConcentrationMeasurementLevelValueHigh     MTRFormaldehydeConcentrationMeasurementLevelValue = 3
+	MTRFormaldehydeConcentrationMeasurementLevelValueCritical MTRFormaldehydeConcentrationMeasurementLevelValue = 4
+)
+
+// String returns the MTRFormaldehydeConcentrationMeasurementLevelValue constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFormaldehydeConcentrationMeasurementLevelValue) String() string {
+	switch e {
+	case MTRFormaldehydeConcentrationMeasurementLevelValueUnknown:
+		return "MTRFormaldehydeConcentrationMeasurementLevelValueUnknown"
+	case MTRFormaldehydeConcentrationMeasurementLevelValueLow:
+		return "MTRFormaldehydeConcentrationMeasurementLevelValueLow"
+	case MTRFormaldehydeConcentrationMeasurementLevelValueMedium:
+		return "MTRFormaldehydeConcentrationMeasurementLevelValueMedium"
+	case MTRFormaldehydeConcentrationMeasurementLevelValueHigh:
+		return "MTRFormaldehydeConcentrationMeasurementLevelValueHigh"
+	case MTRFormaldehydeConcentrationMeasurementLevelValueCritical:
+		return "MTRFormaldehydeConcentrationMeasurementLevelValueCritical"
+	default:
+		return fmt.Sprintf("MTRFormaldehydeConcentrationMeasurementLevelValue(%d)", int64(e))
+	}
+}
+
+type MTRFormaldehydeConcentrationMeasurementMeasurementMedium int64
+
+const (
+	MTRFormaldehydeConcentrationMeasurementMeasurementMediumAir   MTRFormaldehydeConcentrationMeasurementMeasurementMedium = 0
+	MTRFormaldehydeConcentrationMeasurementMeasurementMediumWater MTRFormaldehydeConcentrationMeasurementMeasurementMedium = 1
+	MTRFormaldehydeConcentrationMeasurementMeasurementMediumSoil  MTRFormaldehydeConcentrationMeasurementMeasurementMedium = 2
+)
+
+// String returns the MTRFormaldehydeConcentrationMeasurementMeasurementMedium constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFormaldehydeConcentrationMeasurementMeasurementMedium) String() string {
+	switch e {
+	case MTRFormaldehydeConcentrationMeasurementMeasurementMediumAir:
+		return "MTRFormaldehydeConcentrationMeasurementMeasurementMediumAir"
+	case MTRFormaldehydeConcentrationMeasurementMeasurementMediumWater:
+		return "MTRFormaldehydeConcentrationMeasurementMeasurementMediumWater"
+	case MTRFormaldehydeConcentrationMeasurementMeasurementMediumSoil:
+		return "MTRFormaldehydeConcentrationMeasurementMeasurementMediumSoil"
+	default:
+		return fmt.Sprintf("MTRFormaldehydeConcentrationMeasurementMeasurementMedium(%d)", int64(e))
+	}
+}
+
+type MTRFormaldehydeConcentrationMeasurementMeasurementUnit int64
+
+const (
+	MTRFormaldehydeConcentrationMeasurementMeasurementUnitPPM  MTRFormaldehydeConcentrationMeasurementMeasurementUnit = 0
+	MTRFormaldehydeConcentrationMeasurementMeasurementUnitPPB  MTRFormaldehydeConcentrationMeasurementMeasurementUnit = 1
+	MTRFormaldehydeConcentrationMeasurementMeasurementUnitPPT  MTRFormaldehydeConcentrationMeasurementMeasurementUnit = 2
+	MTRFormaldehydeConcentrationMeasurementMeasurementUnitMGM3 MTRFormaldehydeConcentrationMeasurementMeasurementUnit = 3
+	MTRFormaldehydeConcentrationMeasurementMeasurementUnitUGM3 MTRFormaldehydeConcentrationMeasurementMeasurementUnit = 4
+	MTRFormaldehydeConcentrationMeasurementMeasurementUnitNGM3 MTRFormaldehydeConcentrationMeasurementMeasurementUnit = 5
+	MTRFormaldehydeConcentrationMeasurementMeasurementUnitPM3  MTRFormaldehydeConcentrationMeasurementMeasurementUnit = 6
+	MTRFormaldehydeConcentrationMeasurementMeasurementUnitBQM3 MTRFormaldehydeConcentrationMeasurementMeasurementUnit = 7
+)
+
+// String returns the MTRFormaldehydeConcentrationMeasurementMeasurementUnit constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRFormaldehydeConcentrationMeasurementMeasurementUnit) String() string {
+	switch e {
+	case MTRFormaldehydeConcentrationMeasurementMeasurementUnitPPM:
+		return "MTRFormaldehydeConcentrationMeasurementMeasurementUnitPPM"
+	case MTRFormaldehydeConcentrationMeasurementMeasurementUnitPPB:
+		return "MTRFormaldehydeConcentrationMeasurementMeasurementUnitPPB"
+	case MTRFormaldehydeConcentrationMeasurementMeasurementUnitPPT:
+		return "MTRFormaldehydeConcentrationMeasurementMeasurementUnitPPT"
+	case MTRFormaldehydeConcentrationMeasurementMeasurementUnitMGM3:
+		return "MTRFormaldehydeConcentrationMeasurementMeasurementUnitMGM3"
+	case MTRFormaldehydeConcentrationMeasurementMeasurementUnitUGM3:
+		return "MTRFormaldehydeConcentrationMeasurementMeasurementUnitUGM3"
+	case MTRFormaldehydeConcentrationMeasurementMeasurementUnitNGM3:
+		return "MTRFormaldehydeConcentrationMeasurementMeasurementUnitNGM3"
+	case MTRFormaldehydeConcentrationMeasurementMeasurementUnitPM3:
+		return "MTRFormaldehydeConcentrationMeasurementMeasurementUnitPM3"
+	case MTRFormaldehydeConcentrationMeasurementMeasurementUnitBQM3:
+		return "MTRFormaldehydeConcentrationMeasurementMeasurementUnitBQM3"
+	default:
+		return fmt.Sprintf("MTRFormaldehydeConcentrationMeasurementMeasurementUnit(%d)", int64(e))
+	}
+}
+
+type MTRGeneralCommissioningCommissioningError int64
+
+const (
+	MTRGeneralCommissioningCommissioningErrorOK                    MTRGeneralCommissioningCommissioningError = 0
+	MTRGeneralCommissioningCommissioningErrorOk                    MTRGeneralCommissioningCommissioningError = 0
+	MTRGeneralCommissioningCommissioningErrorValueOutsideRange     MTRGeneralCommissioningCommissioningError = 1
+	MTRGeneralCommissioningCommissioningErrorInvalidAuthentication MTRGeneralCommissioningCommissioningError = 2
+	MTRGeneralCommissioningCommissioningErrorNoFailSafe            MTRGeneralCommissioningCommissioningError = 3
+	MTRGeneralCommissioningCommissioningErrorBusyWithOtherAdmin    MTRGeneralCommissioningCommissioningError = 4
+)
+
+// String returns the MTRGeneralCommissioningCommissioningError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGeneralCommissioningCommissioningError) String() string {
+	switch e {
+	case MTRGeneralCommissioningCommissioningErrorOK:
+		return "MTRGeneralCommissioningCommissioningErrorOK"
+	case MTRGeneralCommissioningCommissioningErrorValueOutsideRange:
+		return "MTRGeneralCommissioningCommissioningErrorValueOutsideRange"
+	case MTRGeneralCommissioningCommissioningErrorInvalidAuthentication:
+		return "MTRGeneralCommissioningCommissioningErrorInvalidAuthentication"
+	case MTRGeneralCommissioningCommissioningErrorNoFailSafe:
+		return "MTRGeneralCommissioningCommissioningErrorNoFailSafe"
+	case MTRGeneralCommissioningCommissioningErrorBusyWithOtherAdmin:
+		return "MTRGeneralCommissioningCommissioningErrorBusyWithOtherAdmin"
+	default:
+		return fmt.Sprintf("MTRGeneralCommissioningCommissioningError(%d)", int64(e))
+	}
+}
+
+type MTRGeneralCommissioningRegulatoryLocationType int64
+
+const (
+	MTRGeneralCommissioningRegulatoryLocationTypeIndoor        MTRGeneralCommissioningRegulatoryLocationType = 0
+	MTRGeneralCommissioningRegulatoryLocationTypeOutdoor       MTRGeneralCommissioningRegulatoryLocationType = 1
+	MTRGeneralCommissioningRegulatoryLocationTypeIndoorOutdoor MTRGeneralCommissioningRegulatoryLocationType = 2
+)
+
+// String returns the MTRGeneralCommissioningRegulatoryLocationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGeneralCommissioningRegulatoryLocationType) String() string {
+	switch e {
+	case MTRGeneralCommissioningRegulatoryLocationTypeIndoor:
+		return "MTRGeneralCommissioningRegulatoryLocationTypeIndoor"
+	case MTRGeneralCommissioningRegulatoryLocationTypeOutdoor:
+		return "MTRGeneralCommissioningRegulatoryLocationTypeOutdoor"
+	case MTRGeneralCommissioningRegulatoryLocationTypeIndoorOutdoor:
+		return "MTRGeneralCommissioningRegulatoryLocationTypeIndoorOutdoor"
+	default:
+		return fmt.Sprintf("MTRGeneralCommissioningRegulatoryLocationType(%d)", int64(e))
+	}
+}
+
+type MTRGeneralDiagnosticsBootReason int64
+
+const (
+	MTRGeneralDiagnosticsBootReasonUnspecified             MTRGeneralDiagnosticsBootReason = 0
+	MTRGeneralDiagnosticsBootReasonPowerOnReboot           MTRGeneralDiagnosticsBootReason = 1
+	MTRGeneralDiagnosticsBootReasonBrownOutReset           MTRGeneralDiagnosticsBootReason = 2
+	MTRGeneralDiagnosticsBootReasonSoftwareWatchdogReset   MTRGeneralDiagnosticsBootReason = 3
+	MTRGeneralDiagnosticsBootReasonHardwareWatchdogReset   MTRGeneralDiagnosticsBootReason = 4
+	MTRGeneralDiagnosticsBootReasonSoftwareUpdateCompleted MTRGeneralDiagnosticsBootReason = 5
+	MTRGeneralDiagnosticsBootReasonSoftwareReset           MTRGeneralDiagnosticsBootReason = 6
+)
+
+// String returns the MTRGeneralDiagnosticsBootReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGeneralDiagnosticsBootReason) String() string {
+	switch e {
+	case MTRGeneralDiagnosticsBootReasonUnspecified:
+		return "MTRGeneralDiagnosticsBootReasonUnspecified"
+	case MTRGeneralDiagnosticsBootReasonPowerOnReboot:
+		return "MTRGeneralDiagnosticsBootReasonPowerOnReboot"
+	case MTRGeneralDiagnosticsBootReasonBrownOutReset:
+		return "MTRGeneralDiagnosticsBootReasonBrownOutReset"
+	case MTRGeneralDiagnosticsBootReasonSoftwareWatchdogReset:
+		return "MTRGeneralDiagnosticsBootReasonSoftwareWatchdogReset"
+	case MTRGeneralDiagnosticsBootReasonHardwareWatchdogReset:
+		return "MTRGeneralDiagnosticsBootReasonHardwareWatchdogReset"
+	case MTRGeneralDiagnosticsBootReasonSoftwareUpdateCompleted:
+		return "MTRGeneralDiagnosticsBootReasonSoftwareUpdateCompleted"
+	case MTRGeneralDiagnosticsBootReasonSoftwareReset:
+		return "MTRGeneralDiagnosticsBootReasonSoftwareReset"
+	default:
+		return fmt.Sprintf("MTRGeneralDiagnosticsBootReason(%d)", int64(e))
+	}
+}
+
+type MTRGeneralDiagnosticsBootReasonType int64
+
+const (
+	MTRGeneralDiagnosticsBootReasonTypeUnspecified             MTRGeneralDiagnosticsBootReasonType = 0
+	MTRGeneralDiagnosticsBootReasonTypePowerOnReboot           MTRGeneralDiagnosticsBootReasonType = 1
+	MTRGeneralDiagnosticsBootReasonTypeBrownOutReset           MTRGeneralDiagnosticsBootReasonType = 2
+	MTRGeneralDiagnosticsBootReasonTypeSoftwareWatchdogReset   MTRGeneralDiagnosticsBootReasonType = 3
+	MTRGeneralDiagnosticsBootReasonTypeHardwareWatchdogReset   MTRGeneralDiagnosticsBootReasonType = 4
+	MTRGeneralDiagnosticsBootReasonTypeSoftwareUpdateCompleted MTRGeneralDiagnosticsBootReasonType = 5
+	MTRGeneralDiagnosticsBootReasonTypeSoftwareReset           MTRGeneralDiagnosticsBootReasonType = 6
+)
+
+// String returns the MTRGeneralDiagnosticsBootReasonType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGeneralDiagnosticsBootReasonType) String() string {
+	switch e {
+	case MTRGeneralDiagnosticsBootReasonTypeUnspecified:
+		return "MTRGeneralDiagnosticsBootReasonTypeUnspecified"
+	case MTRGeneralDiagnosticsBootReasonTypePowerOnReboot:
+		return "MTRGeneralDiagnosticsBootReasonTypePowerOnReboot"
+	case MTRGeneralDiagnosticsBootReasonTypeBrownOutReset:
+		return "MTRGeneralDiagnosticsBootReasonTypeBrownOutReset"
+	case MTRGeneralDiagnosticsBootReasonTypeSoftwareWatchdogReset:
+		return "MTRGeneralDiagnosticsBootReasonTypeSoftwareWatchdogReset"
+	case MTRGeneralDiagnosticsBootReasonTypeHardwareWatchdogReset:
+		return "MTRGeneralDiagnosticsBootReasonTypeHardwareWatchdogReset"
+	case MTRGeneralDiagnosticsBootReasonTypeSoftwareUpdateCompleted:
+		return "MTRGeneralDiagnosticsBootReasonTypeSoftwareUpdateCompleted"
+	case MTRGeneralDiagnosticsBootReasonTypeSoftwareReset:
+		return "MTRGeneralDiagnosticsBootReasonTypeSoftwareReset"
+	default:
+		return fmt.Sprintf("MTRGeneralDiagnosticsBootReasonType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRGeneralDiagnosticsFeature int64
+
+const (
+	MTRGeneralDiagnosticsFeatureDataModelTest MTRGeneralDiagnosticsFeature = 1
+)
+
+// String returns the MTRGeneralDiagnosticsFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGeneralDiagnosticsFeature) String() string {
+	var parts []string
+	if e&MTRGeneralDiagnosticsFeatureDataModelTest != 0 {
+		parts = append(parts, "MTRGeneralDiagnosticsFeatureDataModelTest")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRGeneralDiagnosticsHardwareFault int64
+
+const (
+	MTRGeneralDiagnosticsHardwareFaultUnspecified            MTRGeneralDiagnosticsHardwareFault = 0
+	MTRGeneralDiagnosticsHardwareFaultRadio                  MTRGeneralDiagnosticsHardwareFault = 1
+	MTRGeneralDiagnosticsHardwareFaultSensor                 MTRGeneralDiagnosticsHardwareFault = 2
+	MTRGeneralDiagnosticsHardwareFaultResettableOverTemp     MTRGeneralDiagnosticsHardwareFault = 3
+	MTRGeneralDiagnosticsHardwareFaultNonResettableOverTemp  MTRGeneralDiagnosticsHardwareFault = 4
+	MTRGeneralDiagnosticsHardwareFaultPowerSource            MTRGeneralDiagnosticsHardwareFault = 5
+	MTRGeneralDiagnosticsHardwareFaultVisualDisplayFault     MTRGeneralDiagnosticsHardwareFault = 6
+	MTRGeneralDiagnosticsHardwareFaultAudioOutputFault       MTRGeneralDiagnosticsHardwareFault = 7
+	MTRGeneralDiagnosticsHardwareFaultUserInterfaceFault     MTRGeneralDiagnosticsHardwareFault = 8
+	MTRGeneralDiagnosticsHardwareFaultNonVolatileMemoryError MTRGeneralDiagnosticsHardwareFault = 9
+	MTRGeneralDiagnosticsHardwareFaultTamperDetected         MTRGeneralDiagnosticsHardwareFault = 10
+)
+
+// String returns the MTRGeneralDiagnosticsHardwareFault constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGeneralDiagnosticsHardwareFault) String() string {
+	switch e {
+	case MTRGeneralDiagnosticsHardwareFaultUnspecified:
+		return "MTRGeneralDiagnosticsHardwareFaultUnspecified"
+	case MTRGeneralDiagnosticsHardwareFaultRadio:
+		return "MTRGeneralDiagnosticsHardwareFaultRadio"
+	case MTRGeneralDiagnosticsHardwareFaultSensor:
+		return "MTRGeneralDiagnosticsHardwareFaultSensor"
+	case MTRGeneralDiagnosticsHardwareFaultResettableOverTemp:
+		return "MTRGeneralDiagnosticsHardwareFaultResettableOverTemp"
+	case MTRGeneralDiagnosticsHardwareFaultNonResettableOverTemp:
+		return "MTRGeneralDiagnosticsHardwareFaultNonResettableOverTemp"
+	case MTRGeneralDiagnosticsHardwareFaultPowerSource:
+		return "MTRGeneralDiagnosticsHardwareFaultPowerSource"
+	case MTRGeneralDiagnosticsHardwareFaultVisualDisplayFault:
+		return "MTRGeneralDiagnosticsHardwareFaultVisualDisplayFault"
+	case MTRGeneralDiagnosticsHardwareFaultAudioOutputFault:
+		return "MTRGeneralDiagnosticsHardwareFaultAudioOutputFault"
+	case MTRGeneralDiagnosticsHardwareFaultUserInterfaceFault:
+		return "MTRGeneralDiagnosticsHardwareFaultUserInterfaceFault"
+	case MTRGeneralDiagnosticsHardwareFaultNonVolatileMemoryError:
+		return "MTRGeneralDiagnosticsHardwareFaultNonVolatileMemoryError"
+	case MTRGeneralDiagnosticsHardwareFaultTamperDetected:
+		return "MTRGeneralDiagnosticsHardwareFaultTamperDetected"
+	default:
+		return fmt.Sprintf("MTRGeneralDiagnosticsHardwareFault(%d)", int64(e))
+	}
+}
+
+type MTRGeneralDiagnosticsHardwareFaultType int64
+
+const (
+	MTRGeneralDiagnosticsHardwareFaultTypeUnspecified            MTRGeneralDiagnosticsHardwareFaultType = 0
+	MTRGeneralDiagnosticsHardwareFaultTypeRadio                  MTRGeneralDiagnosticsHardwareFaultType = 1
+	MTRGeneralDiagnosticsHardwareFaultTypeSensor                 MTRGeneralDiagnosticsHardwareFaultType = 2
+	MTRGeneralDiagnosticsHardwareFaultTypeResettableOverTemp     MTRGeneralDiagnosticsHardwareFaultType = 3
+	MTRGeneralDiagnosticsHardwareFaultTypeNonResettableOverTemp  MTRGeneralDiagnosticsHardwareFaultType = 4
+	MTRGeneralDiagnosticsHardwareFaultTypePowerSource            MTRGeneralDiagnosticsHardwareFaultType = 5
+	MTRGeneralDiagnosticsHardwareFaultTypeVisualDisplayFault     MTRGeneralDiagnosticsHardwareFaultType = 6
+	MTRGeneralDiagnosticsHardwareFaultTypeAudioOutputFault       MTRGeneralDiagnosticsHardwareFaultType = 7
+	MTRGeneralDiagnosticsHardwareFaultTypeUserInterfaceFault     MTRGeneralDiagnosticsHardwareFaultType = 8
+	MTRGeneralDiagnosticsHardwareFaultTypeNonVolatileMemoryError MTRGeneralDiagnosticsHardwareFaultType = 9
+	MTRGeneralDiagnosticsHardwareFaultTypeTamperDetected         MTRGeneralDiagnosticsHardwareFaultType = 10
+)
+
+// String returns the MTRGeneralDiagnosticsHardwareFaultType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGeneralDiagnosticsHardwareFaultType) String() string {
+	switch e {
+	case MTRGeneralDiagnosticsHardwareFaultTypeUnspecified:
+		return "MTRGeneralDiagnosticsHardwareFaultTypeUnspecified"
+	case MTRGeneralDiagnosticsHardwareFaultTypeRadio:
+		return "MTRGeneralDiagnosticsHardwareFaultTypeRadio"
+	case MTRGeneralDiagnosticsHardwareFaultTypeSensor:
+		return "MTRGeneralDiagnosticsHardwareFaultTypeSensor"
+	case MTRGeneralDiagnosticsHardwareFaultTypeResettableOverTemp:
+		return "MTRGeneralDiagnosticsHardwareFaultTypeResettableOverTemp"
+	case MTRGeneralDiagnosticsHardwareFaultTypeNonResettableOverTemp:
+		return "MTRGeneralDiagnosticsHardwareFaultTypeNonResettableOverTemp"
+	case MTRGeneralDiagnosticsHardwareFaultTypePowerSource:
+		return "MTRGeneralDiagnosticsHardwareFaultTypePowerSource"
+	case MTRGeneralDiagnosticsHardwareFaultTypeVisualDisplayFault:
+		return "MTRGeneralDiagnosticsHardwareFaultTypeVisualDisplayFault"
+	case MTRGeneralDiagnosticsHardwareFaultTypeAudioOutputFault:
+		return "MTRGeneralDiagnosticsHardwareFaultTypeAudioOutputFault"
+	case MTRGeneralDiagnosticsHardwareFaultTypeUserInterfaceFault:
+		return "MTRGeneralDiagnosticsHardwareFaultTypeUserInterfaceFault"
+	case MTRGeneralDiagnosticsHardwareFaultTypeNonVolatileMemoryError:
+		return "MTRGeneralDiagnosticsHardwareFaultTypeNonVolatileMemoryError"
+	case MTRGeneralDiagnosticsHardwareFaultTypeTamperDetected:
+		return "MTRGeneralDiagnosticsHardwareFaultTypeTamperDetected"
+	default:
+		return fmt.Sprintf("MTRGeneralDiagnosticsHardwareFaultType(%d)", int64(e))
+	}
+}
+
+type MTRGeneralDiagnosticsInterfaceType int64
+
+const (
+	MTRGeneralDiagnosticsInterfaceTypeUnspecified MTRGeneralDiagnosticsInterfaceType = 0
+	MTRGeneralDiagnosticsInterfaceTypeWiFi        MTRGeneralDiagnosticsInterfaceType = 1
+	MTRGeneralDiagnosticsInterfaceTypeEthernet    MTRGeneralDiagnosticsInterfaceType = 2
+	MTRGeneralDiagnosticsInterfaceTypeCellular    MTRGeneralDiagnosticsInterfaceType = 3
+	MTRGeneralDiagnosticsInterfaceTypeThread      MTRGeneralDiagnosticsInterfaceType = 4
+)
+
+// String returns the MTRGeneralDiagnosticsInterfaceType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGeneralDiagnosticsInterfaceType) String() string {
+	switch e {
+	case MTRGeneralDiagnosticsInterfaceTypeUnspecified:
+		return "MTRGeneralDiagnosticsInterfaceTypeUnspecified"
+	case MTRGeneralDiagnosticsInterfaceTypeWiFi:
+		return "MTRGeneralDiagnosticsInterfaceTypeWiFi"
+	case MTRGeneralDiagnosticsInterfaceTypeEthernet:
+		return "MTRGeneralDiagnosticsInterfaceTypeEthernet"
+	case MTRGeneralDiagnosticsInterfaceTypeCellular:
+		return "MTRGeneralDiagnosticsInterfaceTypeCellular"
+	case MTRGeneralDiagnosticsInterfaceTypeThread:
+		return "MTRGeneralDiagnosticsInterfaceTypeThread"
+	default:
+		return fmt.Sprintf("MTRGeneralDiagnosticsInterfaceType(%d)", int64(e))
+	}
+}
+
+type MTRGeneralDiagnosticsNetworkFault int64
+
+const (
+	MTRGeneralDiagnosticsNetworkFaultUnspecified      MTRGeneralDiagnosticsNetworkFault = 0
+	MTRGeneralDiagnosticsNetworkFaultHardwareFailure  MTRGeneralDiagnosticsNetworkFault = 1
+	MTRGeneralDiagnosticsNetworkFaultNetworkJammed    MTRGeneralDiagnosticsNetworkFault = 2
+	MTRGeneralDiagnosticsNetworkFaultConnectionFailed MTRGeneralDiagnosticsNetworkFault = 3
+)
+
+// String returns the MTRGeneralDiagnosticsNetworkFault constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGeneralDiagnosticsNetworkFault) String() string {
+	switch e {
+	case MTRGeneralDiagnosticsNetworkFaultUnspecified:
+		return "MTRGeneralDiagnosticsNetworkFaultUnspecified"
+	case MTRGeneralDiagnosticsNetworkFaultHardwareFailure:
+		return "MTRGeneralDiagnosticsNetworkFaultHardwareFailure"
+	case MTRGeneralDiagnosticsNetworkFaultNetworkJammed:
+		return "MTRGeneralDiagnosticsNetworkFaultNetworkJammed"
+	case MTRGeneralDiagnosticsNetworkFaultConnectionFailed:
+		return "MTRGeneralDiagnosticsNetworkFaultConnectionFailed"
+	default:
+		return fmt.Sprintf("MTRGeneralDiagnosticsNetworkFault(%d)", int64(e))
+	}
+}
+
+type MTRGeneralDiagnosticsNetworkFaultType int64
+
+const (
+	MTRGeneralDiagnosticsNetworkFaultTypeUnspecified      MTRGeneralDiagnosticsNetworkFaultType = 0
+	MTRGeneralDiagnosticsNetworkFaultTypeHardwareFailure  MTRGeneralDiagnosticsNetworkFaultType = 1
+	MTRGeneralDiagnosticsNetworkFaultTypeNetworkJammed    MTRGeneralDiagnosticsNetworkFaultType = 2
+	MTRGeneralDiagnosticsNetworkFaultTypeConnectionFailed MTRGeneralDiagnosticsNetworkFaultType = 3
+)
+
+// String returns the MTRGeneralDiagnosticsNetworkFaultType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGeneralDiagnosticsNetworkFaultType) String() string {
+	switch e {
+	case MTRGeneralDiagnosticsNetworkFaultTypeUnspecified:
+		return "MTRGeneralDiagnosticsNetworkFaultTypeUnspecified"
+	case MTRGeneralDiagnosticsNetworkFaultTypeHardwareFailure:
+		return "MTRGeneralDiagnosticsNetworkFaultTypeHardwareFailure"
+	case MTRGeneralDiagnosticsNetworkFaultTypeNetworkJammed:
+		return "MTRGeneralDiagnosticsNetworkFaultTypeNetworkJammed"
+	case MTRGeneralDiagnosticsNetworkFaultTypeConnectionFailed:
+		return "MTRGeneralDiagnosticsNetworkFaultTypeConnectionFailed"
+	default:
+		return fmt.Sprintf("MTRGeneralDiagnosticsNetworkFaultType(%d)", int64(e))
+	}
+}
+
+type MTRGeneralDiagnosticsRadioFault int64
+
+const (
+	MTRGeneralDiagnosticsRadioFaultUnspecified   MTRGeneralDiagnosticsRadioFault = 0
+	MTRGeneralDiagnosticsRadioFaultWiFiFault     MTRGeneralDiagnosticsRadioFault = 1
+	MTRGeneralDiagnosticsRadioFaultCellularFault MTRGeneralDiagnosticsRadioFault = 2
+	MTRGeneralDiagnosticsRadioFaultThreadFault   MTRGeneralDiagnosticsRadioFault = 3
+	MTRGeneralDiagnosticsRadioFaultNFCFault      MTRGeneralDiagnosticsRadioFault = 4
+	MTRGeneralDiagnosticsRadioFaultBLEFault      MTRGeneralDiagnosticsRadioFault = 5
+	MTRGeneralDiagnosticsRadioFaultEthernetFault MTRGeneralDiagnosticsRadioFault = 6
+)
+
+// String returns the MTRGeneralDiagnosticsRadioFault constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGeneralDiagnosticsRadioFault) String() string {
+	switch e {
+	case MTRGeneralDiagnosticsRadioFaultUnspecified:
+		return "MTRGeneralDiagnosticsRadioFaultUnspecified"
+	case MTRGeneralDiagnosticsRadioFaultWiFiFault:
+		return "MTRGeneralDiagnosticsRadioFaultWiFiFault"
+	case MTRGeneralDiagnosticsRadioFaultCellularFault:
+		return "MTRGeneralDiagnosticsRadioFaultCellularFault"
+	case MTRGeneralDiagnosticsRadioFaultThreadFault:
+		return "MTRGeneralDiagnosticsRadioFaultThreadFault"
+	case MTRGeneralDiagnosticsRadioFaultNFCFault:
+		return "MTRGeneralDiagnosticsRadioFaultNFCFault"
+	case MTRGeneralDiagnosticsRadioFaultBLEFault:
+		return "MTRGeneralDiagnosticsRadioFaultBLEFault"
+	case MTRGeneralDiagnosticsRadioFaultEthernetFault:
+		return "MTRGeneralDiagnosticsRadioFaultEthernetFault"
+	default:
+		return fmt.Sprintf("MTRGeneralDiagnosticsRadioFault(%d)", int64(e))
+	}
+}
+
+type MTRGeneralDiagnosticsRadioFaultType int64
+
+const (
+	MTRGeneralDiagnosticsRadioFaultTypeUnspecified   MTRGeneralDiagnosticsRadioFaultType = 0
+	MTRGeneralDiagnosticsRadioFaultTypeWiFiFault     MTRGeneralDiagnosticsRadioFaultType = 1
+	MTRGeneralDiagnosticsRadioFaultTypeCellularFault MTRGeneralDiagnosticsRadioFaultType = 2
+	MTRGeneralDiagnosticsRadioFaultTypeThreadFault   MTRGeneralDiagnosticsRadioFaultType = 3
+	MTRGeneralDiagnosticsRadioFaultTypeNFCFault      MTRGeneralDiagnosticsRadioFaultType = 4
+	MTRGeneralDiagnosticsRadioFaultTypeBLEFault      MTRGeneralDiagnosticsRadioFaultType = 5
+	MTRGeneralDiagnosticsRadioFaultTypeEthernetFault MTRGeneralDiagnosticsRadioFaultType = 6
+)
+
+// String returns the MTRGeneralDiagnosticsRadioFaultType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGeneralDiagnosticsRadioFaultType) String() string {
+	switch e {
+	case MTRGeneralDiagnosticsRadioFaultTypeUnspecified:
+		return "MTRGeneralDiagnosticsRadioFaultTypeUnspecified"
+	case MTRGeneralDiagnosticsRadioFaultTypeWiFiFault:
+		return "MTRGeneralDiagnosticsRadioFaultTypeWiFiFault"
+	case MTRGeneralDiagnosticsRadioFaultTypeCellularFault:
+		return "MTRGeneralDiagnosticsRadioFaultTypeCellularFault"
+	case MTRGeneralDiagnosticsRadioFaultTypeThreadFault:
+		return "MTRGeneralDiagnosticsRadioFaultTypeThreadFault"
+	case MTRGeneralDiagnosticsRadioFaultTypeNFCFault:
+		return "MTRGeneralDiagnosticsRadioFaultTypeNFCFault"
+	case MTRGeneralDiagnosticsRadioFaultTypeBLEFault:
+		return "MTRGeneralDiagnosticsRadioFaultTypeBLEFault"
+	case MTRGeneralDiagnosticsRadioFaultTypeEthernetFault:
+		return "MTRGeneralDiagnosticsRadioFaultTypeEthernetFault"
+	default:
+		return fmt.Sprintf("MTRGeneralDiagnosticsRadioFaultType(%d)", int64(e))
+	}
+}
+
+type MTRGroupKeyManagementGroupKeySecurityPolicy int64
+
+const (
+	MTRGroupKeyManagementGroupKeySecurityPolicyTrustFirst   MTRGroupKeyManagementGroupKeySecurityPolicy = 0
+	MTRGroupKeyManagementGroupKeySecurityPolicyCacheAndSync MTRGroupKeyManagementGroupKeySecurityPolicy = 1
+)
+
+// String returns the MTRGroupKeyManagementGroupKeySecurityPolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGroupKeyManagementGroupKeySecurityPolicy) String() string {
+	switch e {
+	case MTRGroupKeyManagementGroupKeySecurityPolicyTrustFirst:
+		return "MTRGroupKeyManagementGroupKeySecurityPolicyTrustFirst"
+	case MTRGroupKeyManagementGroupKeySecurityPolicyCacheAndSync:
+		return "MTRGroupKeyManagementGroupKeySecurityPolicyCacheAndSync"
+	default:
+		return fmt.Sprintf("MTRGroupKeyManagementGroupKeySecurityPolicy(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRGroupsFeature int64
+
+const (
+	MTRGroupsFeatureGroupNames MTRGroupsFeature = 1
+)
+
+// String returns the MTRGroupsFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGroupsFeature) String() string {
+	var parts []string
+	if e&MTRGroupsFeatureGroupNames != 0 {
+		parts = append(parts, "MTRGroupsFeatureGroupNames")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRGroupsGroupClusterFeature int64
+
+const (
+	MTRGroupsGroupClusterFeatureGroupNames MTRGroupsGroupClusterFeature = 1
+)
+
+// String returns the MTRGroupsGroupClusterFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGroupsGroupClusterFeature) String() string {
+	var parts []string
+	if e&MTRGroupsGroupClusterFeatureGroupNames != 0 {
+		parts = append(parts, "MTRGroupsGroupClusterFeatureGroupNames")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRGroupsNameSupportBitmap int64
+
+const (
+	MTRGroupsNameSupportBitmapGroupNames MTRGroupsNameSupportBitmap = 128
+)
+
+// String returns the MTRGroupsNameSupportBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRGroupsNameSupportBitmap) String() string {
+	var parts []string
+	if e&MTRGroupsNameSupportBitmapGroupNames != 0 {
+		parts = append(parts, "MTRGroupsNameSupportBitmapGroupNames")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRHEPAFilterMonitoringChangeIndication int64
+
+const (
+	MTRHEPAFilterMonitoringChangeIndicationOK       MTRHEPAFilterMonitoringChangeIndication = 0
+	MTRHEPAFilterMonitoringChangeIndicationWarning  MTRHEPAFilterMonitoringChangeIndication = 1
+	MTRHEPAFilterMonitoringChangeIndicationCritical MTRHEPAFilterMonitoringChangeIndication = 2
+)
+
+// String returns the MTRHEPAFilterMonitoringChangeIndication constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRHEPAFilterMonitoringChangeIndication) String() string {
+	switch e {
+	case MTRHEPAFilterMonitoringChangeIndicationOK:
+		return "MTRHEPAFilterMonitoringChangeIndicationOK"
+	case MTRHEPAFilterMonitoringChangeIndicationWarning:
+		return "MTRHEPAFilterMonitoringChangeIndicationWarning"
+	case MTRHEPAFilterMonitoringChangeIndicationCritical:
+		return "MTRHEPAFilterMonitoringChangeIndicationCritical"
+	default:
+		return fmt.Sprintf("MTRHEPAFilterMonitoringChangeIndication(%d)", int64(e))
+	}
+}
+
+type MTRHEPAFilterMonitoringDegradationDirection int64
+
+const (
+	MTRHEPAFilterMonitoringDegradationDirectionUp   MTRHEPAFilterMonitoringDegradationDirection = 0
+	MTRHEPAFilterMonitoringDegradationDirectionDown MTRHEPAFilterMonitoringDegradationDirection = 1
+)
+
+// String returns the MTRHEPAFilterMonitoringDegradationDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRHEPAFilterMonitoringDegradationDirection) String() string {
+	switch e {
+	case MTRHEPAFilterMonitoringDegradationDirectionUp:
+		return "MTRHEPAFilterMonitoringDegradationDirectionUp"
+	case MTRHEPAFilterMonitoringDegradationDirectionDown:
+		return "MTRHEPAFilterMonitoringDegradationDirectionDown"
+	default:
+		return fmt.Sprintf("MTRHEPAFilterMonitoringDegradationDirection(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRHEPAFilterMonitoringFeature int64
+
+const (
+	MTRHEPAFilterMonitoringFeatureCondition              MTRHEPAFilterMonitoringFeature = 1
+	MTRHEPAFilterMonitoringFeatureWarning                MTRHEPAFilterMonitoringFeature = 2
+	MTRHEPAFilterMonitoringFeatureReplacementProductList MTRHEPAFilterMonitoringFeature = 4
+)
+
+// String returns the MTRHEPAFilterMonitoringFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRHEPAFilterMonitoringFeature) String() string {
+	var parts []string
+	if e&MTRHEPAFilterMonitoringFeatureCondition != 0 {
+		parts = append(parts, "MTRHEPAFilterMonitoringFeatureCondition")
+	}
+	if e&MTRHEPAFilterMonitoringFeatureWarning != 0 {
+		parts = append(parts, "MTRHEPAFilterMonitoringFeatureWarning")
+	}
+	if e&MTRHEPAFilterMonitoringFeatureReplacementProductList != 0 {
+		parts = append(parts, "MTRHEPAFilterMonitoringFeatureReplacementProductList")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRHEPAFilterMonitoringProductIdentifierType int64
+
+const (
+	MTRHEPAFilterMonitoringProductIdentifierTypeUPC    MTRHEPAFilterMonitoringProductIdentifierType = 0
+	MTRHEPAFilterMonitoringProductIdentifierTypeGTIN8  MTRHEPAFilterMonitoringProductIdentifierType = 1
+	MTRHEPAFilterMonitoringProductIdentifierTypeEAN    MTRHEPAFilterMonitoringProductIdentifierType = 2
+	MTRHEPAFilterMonitoringProductIdentifierTypeGTIN14 MTRHEPAFilterMonitoringProductIdentifierType = 3
+	MTRHEPAFilterMonitoringProductIdentifierTypeOEM    MTRHEPAFilterMonitoringProductIdentifierType = 4
+)
+
+// String returns the MTRHEPAFilterMonitoringProductIdentifierType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRHEPAFilterMonitoringProductIdentifierType) String() string {
+	switch e {
+	case MTRHEPAFilterMonitoringProductIdentifierTypeUPC:
+		return "MTRHEPAFilterMonitoringProductIdentifierTypeUPC"
+	case MTRHEPAFilterMonitoringProductIdentifierTypeGTIN8:
+		return "MTRHEPAFilterMonitoringProductIdentifierTypeGTIN8"
+	case MTRHEPAFilterMonitoringProductIdentifierTypeEAN:
+		return "MTRHEPAFilterMonitoringProductIdentifierTypeEAN"
+	case MTRHEPAFilterMonitoringProductIdentifierTypeGTIN14:
+		return "MTRHEPAFilterMonitoringProductIdentifierTypeGTIN14"
+	case MTRHEPAFilterMonitoringProductIdentifierTypeOEM:
+		return "MTRHEPAFilterMonitoringProductIdentifierTypeOEM"
+	default:
+		return fmt.Sprintf("MTRHEPAFilterMonitoringProductIdentifierType(%d)", int64(e))
+	}
+}
+
+type MTRICDManagementClientType int64
+
+const (
+	MTRICDManagementClientTypePermanent MTRICDManagementClientType = 0
+	MTRICDManagementClientTypeEphemeral MTRICDManagementClientType = 1
+)
+
+// String returns the MTRICDManagementClientType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRICDManagementClientType) String() string {
+	switch e {
+	case MTRICDManagementClientTypePermanent:
+		return "MTRICDManagementClientTypePermanent"
+	case MTRICDManagementClientTypeEphemeral:
+		return "MTRICDManagementClientTypeEphemeral"
+	default:
+		return fmt.Sprintf("MTRICDManagementClientType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRICDManagementFeature int64
+
+const (
+	MTRICDManagementFeatureCheckInProtocolSupport MTRICDManagementFeature = 1
+	MTRICDManagementFeatureUserActiveModeTrigger  MTRICDManagementFeature = 2
+	MTRICDManagementFeatureLongIdleTimeSupport    MTRICDManagementFeature = 4
+	MTRICDManagementFeatureDynamicSitLitSupport   MTRICDManagementFeature = 8
+)
+
+// String returns the MTRICDManagementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRICDManagementFeature) String() string {
+	var parts []string
+	if e&MTRICDManagementFeatureCheckInProtocolSupport != 0 {
+		parts = append(parts, "MTRICDManagementFeatureCheckInProtocolSupport")
+	}
+	if e&MTRICDManagementFeatureUserActiveModeTrigger != 0 {
+		parts = append(parts, "MTRICDManagementFeatureUserActiveModeTrigger")
+	}
+	if e&MTRICDManagementFeatureLongIdleTimeSupport != 0 {
+		parts = append(parts, "MTRICDManagementFeatureLongIdleTimeSupport")
+	}
+	if e&MTRICDManagementFeatureDynamicSitLitSupport != 0 {
+		parts = append(parts, "MTRICDManagementFeatureDynamicSitLitSupport")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRICDManagementOperatingMode int64
+
+const (
+	MTRICDManagementOperatingModeSIT MTRICDManagementOperatingMode = 0
+	MTRICDManagementOperatingModeLIT MTRICDManagementOperatingMode = 1
+)
+
+// String returns the MTRICDManagementOperatingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRICDManagementOperatingMode) String() string {
+	switch e {
+	case MTRICDManagementOperatingModeSIT:
+		return "MTRICDManagementOperatingModeSIT"
+	case MTRICDManagementOperatingModeLIT:
+		return "MTRICDManagementOperatingModeLIT"
+	default:
+		return fmt.Sprintf("MTRICDManagementOperatingMode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRICDManagementUserActiveModeTriggerBitmap int64
+
+const (
+	MTRICDManagementUserActiveModeTriggerBitmapPowerCycle               MTRICDManagementUserActiveModeTriggerBitmap = 1
+	MTRICDManagementUserActiveModeTriggerBitmapSettingsMenu             MTRICDManagementUserActiveModeTriggerBitmap = 2
+	MTRICDManagementUserActiveModeTriggerBitmapCustomInstruction        MTRICDManagementUserActiveModeTriggerBitmap = 4
+	MTRICDManagementUserActiveModeTriggerBitmapDeviceManual             MTRICDManagementUserActiveModeTriggerBitmap = 8
+	MTRICDManagementUserActiveModeTriggerBitmapActuateSensor            MTRICDManagementUserActiveModeTriggerBitmap = 16
+	MTRICDManagementUserActiveModeTriggerBitmapActuateSensorSeconds     MTRICDManagementUserActiveModeTriggerBitmap = 32
+	MTRICDManagementUserActiveModeTriggerBitmapActuateSensorTimes       MTRICDManagementUserActiveModeTriggerBitmap = 64
+	MTRICDManagementUserActiveModeTriggerBitmapActuateSensorLightsBlink MTRICDManagementUserActiveModeTriggerBitmap = 128
+	MTRICDManagementUserActiveModeTriggerBitmapResetButton              MTRICDManagementUserActiveModeTriggerBitmap = 256
+	MTRICDManagementUserActiveModeTriggerBitmapResetButtonLightsBlink   MTRICDManagementUserActiveModeTriggerBitmap = 512
+	MTRICDManagementUserActiveModeTriggerBitmapResetButtonSeconds       MTRICDManagementUserActiveModeTriggerBitmap = 1024
+	MTRICDManagementUserActiveModeTriggerBitmapResetButtonTimes         MTRICDManagementUserActiveModeTriggerBitmap = 2048
+	MTRICDManagementUserActiveModeTriggerBitmapSetupButton              MTRICDManagementUserActiveModeTriggerBitmap = 4096
+	MTRICDManagementUserActiveModeTriggerBitmapSetupButtonSeconds       MTRICDManagementUserActiveModeTriggerBitmap = 8192
+	MTRICDManagementUserActiveModeTriggerBitmapSetupButtonLightsBlink   MTRICDManagementUserActiveModeTriggerBitmap = 16384
+	MTRICDManagementUserActiveModeTriggerBitmapSetupButtonTimes         MTRICDManagementUserActiveModeTriggerBitmap = 32768
+	MTRICDManagementUserActiveModeTriggerBitmapAppDefinedButton         MTRICDManagementUserActiveModeTriggerBitmap = 65536
+)
+
+// String returns the MTRICDManagementUserActiveModeTriggerBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRICDManagementUserActiveModeTriggerBitmap) String() string {
+	var parts []string
+	if e&MTRICDManagementUserActiveModeTriggerBitmapPowerCycle != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapPowerCycle")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapSettingsMenu != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapSettingsMenu")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapCustomInstruction != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapCustomInstruction")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapDeviceManual != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapDeviceManual")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapActuateSensor != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapActuateSensor")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapActuateSensorSeconds != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapActuateSensorSeconds")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapActuateSensorTimes != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapActuateSensorTimes")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapActuateSensorLightsBlink != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapActuateSensorLightsBlink")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapResetButton != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapResetButton")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapResetButtonLightsBlink != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapResetButtonLightsBlink")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapResetButtonSeconds != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapResetButtonSeconds")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapResetButtonTimes != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapResetButtonTimes")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapSetupButton != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapSetupButton")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapSetupButtonSeconds != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapSetupButtonSeconds")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapSetupButtonLightsBlink != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapSetupButtonLightsBlink")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapSetupButtonTimes != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapSetupButtonTimes")
+	}
+	if e&MTRICDManagementUserActiveModeTriggerBitmapAppDefinedButton != 0 {
+		parts = append(parts, "MTRICDManagementUserActiveModeTriggerBitmapAppDefinedButton")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRIdentifyEffectIdentifier int64
+
+const (
+	MTRIdentifyEffectIdentifierBlink         MTRIdentifyEffectIdentifier = 0
+	MTRIdentifyEffectIdentifierBreathe       MTRIdentifyEffectIdentifier = 1
+	MTRIdentifyEffectIdentifierOkay          MTRIdentifyEffectIdentifier = 2
+	MTRIdentifyEffectIdentifierChannelChange MTRIdentifyEffectIdentifier = 11
+	MTRIdentifyEffectIdentifierFinishEffect  MTRIdentifyEffectIdentifier = 254
+	MTRIdentifyEffectIdentifierStopEffect    MTRIdentifyEffectIdentifier = 255
+)
+
+// String returns the MTRIdentifyEffectIdentifier constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRIdentifyEffectIdentifier) String() string {
+	switch e {
+	case MTRIdentifyEffectIdentifierBlink:
+		return "MTRIdentifyEffectIdentifierBlink"
+	case MTRIdentifyEffectIdentifierBreathe:
+		return "MTRIdentifyEffectIdentifierBreathe"
+	case MTRIdentifyEffectIdentifierOkay:
+		return "MTRIdentifyEffectIdentifierOkay"
+	case MTRIdentifyEffectIdentifierChannelChange:
+		return "MTRIdentifyEffectIdentifierChannelChange"
+	case MTRIdentifyEffectIdentifierFinishEffect:
+		return "MTRIdentifyEffectIdentifierFinishEffect"
+	case MTRIdentifyEffectIdentifierStopEffect:
+		return "MTRIdentifyEffectIdentifierStopEffect"
+	default:
+		return fmt.Sprintf("MTRIdentifyEffectIdentifier(%d)", int64(e))
+	}
+}
+
+type MTRIdentifyEffectVariant int64
+
+const (
+	MTRIdentifyEffectVariantDefault MTRIdentifyEffectVariant = 0
+)
+
+// String returns the MTRIdentifyEffectVariant constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRIdentifyEffectVariant) String() string {
+	switch e {
+	case MTRIdentifyEffectVariantDefault:
+		return "MTRIdentifyEffectVariantDefault"
+	default:
+		return fmt.Sprintf("MTRIdentifyEffectVariant(%d)", int64(e))
+	}
+}
+
+type MTRIdentifyType int64
+
+const (
+	MTRIdentifyTypeNone             MTRIdentifyType = 0
+	MTRIdentifyTypeLightOutput      MTRIdentifyType = 1
+	MTRIdentifyTypeVisibleLight     MTRIdentifyType = 1
+	MTRIdentifyTypeVisibleIndicator MTRIdentifyType = 2
+	MTRIdentifyTypeVisibleLED       MTRIdentifyType = 2
+	MTRIdentifyTypeAudibleBeep      MTRIdentifyType = 3
+	MTRIdentifyTypeDisplay          MTRIdentifyType = 4
+	MTRIdentifyTypeActuator         MTRIdentifyType = 5
+)
+
+// String returns the MTRIdentifyType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRIdentifyType) String() string {
+	switch e {
+	case MTRIdentifyTypeNone:
+		return "MTRIdentifyTypeNone"
+	case MTRIdentifyTypeLightOutput:
+		return "MTRIdentifyTypeLightOutput"
+	case MTRIdentifyTypeVisibleIndicator:
+		return "MTRIdentifyTypeVisibleIndicator"
+	case MTRIdentifyTypeAudibleBeep:
+		return "MTRIdentifyTypeAudibleBeep"
+	case MTRIdentifyTypeDisplay:
+		return "MTRIdentifyTypeDisplay"
+	case MTRIdentifyTypeActuator:
+		return "MTRIdentifyTypeActuator"
+	default:
+		return fmt.Sprintf("MTRIdentifyType(%d)", int64(e))
+	}
+}
+
+type MTRIlluminanceMeasurementLightSensorType int64
+
+const (
+	MTRIlluminanceMeasurementLightSensorTypePhotodiode MTRIlluminanceMeasurementLightSensorType = 0
+	MTRIlluminanceMeasurementLightSensorTypeCMOS       MTRIlluminanceMeasurementLightSensorType = 1
+)
+
+// String returns the MTRIlluminanceMeasurementLightSensorType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRIlluminanceMeasurementLightSensorType) String() string {
+	switch e {
+	case MTRIlluminanceMeasurementLightSensorTypePhotodiode:
+		return "MTRIlluminanceMeasurementLightSensorTypePhotodiode"
+	case MTRIlluminanceMeasurementLightSensorTypeCMOS:
+		return "MTRIlluminanceMeasurementLightSensorTypeCMOS"
+	default:
+		return fmt.Sprintf("MTRIlluminanceMeasurementLightSensorType(%d)", int64(e))
+	}
+}
+
+type MTRInteractionErrorCode int64
+
+const (
+	MTRInteractionErrorCodeFailure                MTRInteractionErrorCode = 1
+	MTRInteractionErrorCodeInvalidSubscription    MTRInteractionErrorCode = 125
+	MTRInteractionErrorCodeUnsupportedAccess      MTRInteractionErrorCode = 126
+	MTRInteractionErrorCodeUnsupportedEndpoint    MTRInteractionErrorCode = 127
+	MTRInteractionErrorCodeInvalidAction          MTRInteractionErrorCode = 128
+	MTRInteractionErrorCodeUnsupportedCommand     MTRInteractionErrorCode = 129
+	MTRInteractionErrorCodeInvalidCommand         MTRInteractionErrorCode = 133
+	MTRInteractionErrorCodeUnsupportedAttribute   MTRInteractionErrorCode = 134
+	MTRInteractionErrorCodeConstraintError        MTRInteractionErrorCode = 135
+	MTRInteractionErrorCodeUnsupportedWrite       MTRInteractionErrorCode = 136
+	MTRInteractionErrorCodeResourceExhausted      MTRInteractionErrorCode = 137
+	MTRInteractionErrorCodeNotFound               MTRInteractionErrorCode = 139
+	MTRInteractionErrorCodeUnreportableAttribute  MTRInteractionErrorCode = 140
+	MTRInteractionErrorCodeInvalidDataType        MTRInteractionErrorCode = 141
+	MTRInteractionErrorCodeUnsupportedRead        MTRInteractionErrorCode = 143
+	MTRInteractionErrorCodeDataVersionMismatch    MTRInteractionErrorCode = 146
+	MTRInteractionErrorCodeTimeout                MTRInteractionErrorCode = 148
+	MTRInteractionErrorCodeBusy                   MTRInteractionErrorCode = 156
+	MTRInteractionErrorCodeAccessRestricted       MTRInteractionErrorCode = 157
+	MTRInteractionErrorCodeUnsupportedCluster     MTRInteractionErrorCode = 195
+	MTRInteractionErrorCodeNoUpstreamSubscription MTRInteractionErrorCode = 197
+	MTRInteractionErrorCodeNeedsTimedInteraction  MTRInteractionErrorCode = 198
+	MTRInteractionErrorCodeUnsupportedEvent       MTRInteractionErrorCode = 199
+	MTRInteractionErrorCodePathsExhausted         MTRInteractionErrorCode = 200
+	MTRInteractionErrorCodeTimedRequestMismatch   MTRInteractionErrorCode = 201
+	MTRInteractionErrorCodeFailsafeRequired       MTRInteractionErrorCode = 202
+	MTRInteractionErrorCodeInvalidInState         MTRInteractionErrorCode = 203
+	MTRInteractionErrorCodeNoCommandResponse      MTRInteractionErrorCode = 204
+)
+
+// String returns the MTRInteractionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRInteractionErrorCode) String() string {
+	switch e {
+	case MTRInteractionErrorCodeFailure:
+		return "MTRInteractionErrorCodeFailure"
+	case MTRInteractionErrorCodeInvalidSubscription:
+		return "MTRInteractionErrorCodeInvalidSubscription"
+	case MTRInteractionErrorCodeUnsupportedAccess:
+		return "MTRInteractionErrorCodeUnsupportedAccess"
+	case MTRInteractionErrorCodeUnsupportedEndpoint:
+		return "MTRInteractionErrorCodeUnsupportedEndpoint"
+	case MTRInteractionErrorCodeInvalidAction:
+		return "MTRInteractionErrorCodeInvalidAction"
+	case MTRInteractionErrorCodeUnsupportedCommand:
+		return "MTRInteractionErrorCodeUnsupportedCommand"
+	case MTRInteractionErrorCodeInvalidCommand:
+		return "MTRInteractionErrorCodeInvalidCommand"
+	case MTRInteractionErrorCodeUnsupportedAttribute:
+		return "MTRInteractionErrorCodeUnsupportedAttribute"
+	case MTRInteractionErrorCodeConstraintError:
+		return "MTRInteractionErrorCodeConstraintError"
+	case MTRInteractionErrorCodeUnsupportedWrite:
+		return "MTRInteractionErrorCodeUnsupportedWrite"
+	case MTRInteractionErrorCodeResourceExhausted:
+		return "MTRInteractionErrorCodeResourceExhausted"
+	case MTRInteractionErrorCodeNotFound:
+		return "MTRInteractionErrorCodeNotFound"
+	case MTRInteractionErrorCodeUnreportableAttribute:
+		return "MTRInteractionErrorCodeUnreportableAttribute"
+	case MTRInteractionErrorCodeInvalidDataType:
+		return "MTRInteractionErrorCodeInvalidDataType"
+	case MTRInteractionErrorCodeUnsupportedRead:
+		return "MTRInteractionErrorCodeUnsupportedRead"
+	case MTRInteractionErrorCodeDataVersionMismatch:
+		return "MTRInteractionErrorCodeDataVersionMismatch"
+	case MTRInteractionErrorCodeTimeout:
+		return "MTRInteractionErrorCodeTimeout"
+	case MTRInteractionErrorCodeBusy:
+		return "MTRInteractionErrorCodeBusy"
+	case MTRInteractionErrorCodeAccessRestricted:
+		return "MTRInteractionErrorCodeAccessRestricted"
+	case MTRInteractionErrorCodeUnsupportedCluster:
+		return "MTRInteractionErrorCodeUnsupportedCluster"
+	case MTRInteractionErrorCodeNoUpstreamSubscription:
+		return "MTRInteractionErrorCodeNoUpstreamSubscription"
+	case MTRInteractionErrorCodeNeedsTimedInteraction:
+		return "MTRInteractionErrorCodeNeedsTimedInteraction"
+	case MTRInteractionErrorCodeUnsupportedEvent:
+		return "MTRInteractionErrorCodeUnsupportedEvent"
+	case MTRInteractionErrorCodePathsExhausted:
+		return "MTRInteractionErrorCodePathsExhausted"
+	case MTRInteractionErrorCodeTimedRequestMismatch:
+		return "MTRInteractionErrorCodeTimedRequestMismatch"
+	case MTRInteractionErrorCodeFailsafeRequired:
+		return "MTRInteractionErrorCodeFailsafeRequired"
+	case MTRInteractionErrorCodeInvalidInState:
+		return "MTRInteractionErrorCodeInvalidInState"
+	case MTRInteractionErrorCodeNoCommandResponse:
+		return "MTRInteractionErrorCodeNoCommandResponse"
+	default:
+		return fmt.Sprintf("MTRInteractionErrorCode(%d)", int64(e))
+	}
+}
+
+type MTRKeypadInputCECKeyCode int64
+
+const (
+	MTRKeypadInputCECKeyCodeSelect                    MTRKeypadInputCECKeyCode = 0
+	MTRKeypadInputCECKeyCodeUp                        MTRKeypadInputCECKeyCode = 1
+	MTRKeypadInputCECKeyCodeDown                      MTRKeypadInputCECKeyCode = 2
+	MTRKeypadInputCECKeyCodeLeft                      MTRKeypadInputCECKeyCode = 3
+	MTRKeypadInputCECKeyCodeRight                     MTRKeypadInputCECKeyCode = 4
+	MTRKeypadInputCECKeyCodeRightUp                   MTRKeypadInputCECKeyCode = 5
+	MTRKeypadInputCECKeyCodeRightDown                 MTRKeypadInputCECKeyCode = 6
+	MTRKeypadInputCECKeyCodeLeftUp                    MTRKeypadInputCECKeyCode = 7
+	MTRKeypadInputCECKeyCodeLeftDown                  MTRKeypadInputCECKeyCode = 8
+	MTRKeypadInputCECKeyCodeRootMenu                  MTRKeypadInputCECKeyCode = 9
+	MTRKeypadInputCECKeyCodeSetupMenu                 MTRKeypadInputCECKeyCode = 10
+	MTRKeypadInputCECKeyCodeContentsMenu              MTRKeypadInputCECKeyCode = 11
+	MTRKeypadInputCECKeyCodeFavoriteMenu              MTRKeypadInputCECKeyCode = 12
+	MTRKeypadInputCECKeyCodeExit                      MTRKeypadInputCECKeyCode = 13
+	MTRKeypadInputCECKeyCodeMediaTopMenu              MTRKeypadInputCECKeyCode = 16
+	MTRKeypadInputCECKeyCodeMediaContextSensitiveMenu MTRKeypadInputCECKeyCode = 17
+	MTRKeypadInputCECKeyCodeNumberEntryMode           MTRKeypadInputCECKeyCode = 29
+	MTRKeypadInputCECKeyCodeNumber11                  MTRKeypadInputCECKeyCode = 30
+	MTRKeypadInputCECKeyCodeNumber12                  MTRKeypadInputCECKeyCode = 31
+	MTRKeypadInputCECKeyCodeNumber0OrNumber10         MTRKeypadInputCECKeyCode = 32
+	MTRKeypadInputCECKeyCodeNumbers1                  MTRKeypadInputCECKeyCode = 33
+	MTRKeypadInputCECKeyCodeNumbers2                  MTRKeypadInputCECKeyCode = 34
+	MTRKeypadInputCECKeyCodeNumbers3                  MTRKeypadInputCECKeyCode = 35
+	MTRKeypadInputCECKeyCodeNumbers4                  MTRKeypadInputCECKeyCode = 36
+	MTRKeypadInputCECKeyCodeNumbers5                  MTRKeypadInputCECKeyCode = 37
+	MTRKeypadInputCECKeyCodeNumbers6                  MTRKeypadInputCECKeyCode = 38
+	MTRKeypadInputCECKeyCodeNumbers7                  MTRKeypadInputCECKeyCode = 39
+	MTRKeypadInputCECKeyCodeNumbers8                  MTRKeypadInputCECKeyCode = 40
+	MTRKeypadInputCECKeyCodeNumbers9                  MTRKeypadInputCECKeyCode = 41
+	MTRKeypadInputCECKeyCodeDot                       MTRKeypadInputCECKeyCode = 42
+	MTRKeypadInputCECKeyCodeEnter                     MTRKeypadInputCECKeyCode = 43
+	MTRKeypadInputCECKeyCodeClear                     MTRKeypadInputCECKeyCode = 44
+	MTRKeypadInputCECKeyCodeNextFavorite              MTRKeypadInputCECKeyCode = 47
+	MTRKeypadInputCECKeyCodeChannelUp                 MTRKeypadInputCECKeyCode = 48
+	MTRKeypadInputCECKeyCodeChannelDown               MTRKeypadInputCECKeyCode = 49
+	MTRKeypadInputCECKeyCodePreviousChannel           MTRKeypadInputCECKeyCode = 50
+	MTRKeypadInputCECKeyCodeSoundSelect               MTRKeypadInputCECKeyCode = 51
+	MTRKeypadInputCECKeyCodeInputSelect               MTRKeypadInputCECKeyCode = 52
+	MTRKeypadInputCECKeyCodeDisplayInformation        MTRKeypadInputCECKeyCode = 53
+	MTRKeypadInputCECKeyCodeHelp                      MTRKeypadInputCECKeyCode = 54
+	MTRKeypadInputCECKeyCodePageUp                    MTRKeypadInputCECKeyCode = 55
+	MTRKeypadInputCECKeyCodePageDown                  MTRKeypadInputCECKeyCode = 56
+	MTRKeypadInputCECKeyCodePower                     MTRKeypadInputCECKeyCode = 64
+	MTRKeypadInputCECKeyCodeVolumeUp                  MTRKeypadInputCECKeyCode = 65
+	MTRKeypadInputCECKeyCodeVolumeDown                MTRKeypadInputCECKeyCode = 66
+	MTRKeypadInputCECKeyCodeMute                      MTRKeypadInputCECKeyCode = 67
+	MTRKeypadInputCECKeyCodePlay                      MTRKeypadInputCECKeyCode = 68
+	MTRKeypadInputCECKeyCodeStop                      MTRKeypadInputCECKeyCode = 69
+	MTRKeypadInputCECKeyCodePause                     MTRKeypadInputCECKeyCode = 70
+	MTRKeypadInputCECKeyCodeRecord                    MTRKeypadInputCECKeyCode = 71
+	MTRKeypadInputCECKeyCodeRewind                    MTRKeypadInputCECKeyCode = 72
+	MTRKeypadInputCECKeyCodeFastForward               MTRKeypadInputCECKeyCode = 73
+	MTRKeypadInputCECKeyCodeEject                     MTRKeypadInputCECKeyCode = 74
+	MTRKeypadInputCECKeyCodeForward                   MTRKeypadInputCECKeyCode = 75
+	MTRKeypadInputCECKeyCodeBackward                  MTRKeypadInputCECKeyCode = 76
+	MTRKeypadInputCECKeyCodeStopRecord                MTRKeypadInputCECKeyCode = 77
+	MTRKeypadInputCECKeyCodePauseRecord               MTRKeypadInputCECKeyCode = 78
+	MTRKeypadInputCECKeyCodeReserved                  MTRKeypadInputCECKeyCode = 79
+	MTRKeypadInputCECKeyCodeAngle                     MTRKeypadInputCECKeyCode = 80
+	MTRKeypadInputCECKeyCodeSubPicture                MTRKeypadInputCECKeyCode = 81
+	MTRKeypadInputCECKeyCodeVideoOnDemand             MTRKeypadInputCECKeyCode = 82
+	MTRKeypadInputCECKeyCodeElectronicProgramGuide    MTRKeypadInputCECKeyCode = 83
+	MTRKeypadInputCECKeyCodeTimerProgramming          MTRKeypadInputCECKeyCode = 84
+	MTRKeypadInputCECKeyCodeInitialConfiguration      MTRKeypadInputCECKeyCode = 85
+	MTRKeypadInputCECKeyCodeSelectBroadcastType       MTRKeypadInputCECKeyCode = 86
+	MTRKeypadInputCECKeyCodeSelectSoundPresentation   MTRKeypadInputCECKeyCode = 87
+	MTRKeypadInputCECKeyCodePlayFunction              MTRKeypadInputCECKeyCode = 96
+	MTRKeypadInputCECKeyCodePausePlayFunction         MTRKeypadInputCECKeyCode = 97
+	MTRKeypadInputCECKeyCodeRecordFunction            MTRKeypadInputCECKeyCode = 98
+	MTRKeypadInputCECKeyCodePauseRecordFunction       MTRKeypadInputCECKeyCode = 99
+	MTRKeypadInputCECKeyCodeStopFunction              MTRKeypadInputCECKeyCode = 100
+	MTRKeypadInputCECKeyCodeMuteFunction              MTRKeypadInputCECKeyCode = 101
+	MTRKeypadInputCECKeyCodeRestoreVolumeFunction     MTRKeypadInputCECKeyCode = 102
+	MTRKeypadInputCECKeyCodeTuneFunction              MTRKeypadInputCECKeyCode = 103
+	MTRKeypadInputCECKeyCodeSelectMediaFunction       MTRKeypadInputCECKeyCode = 104
+	MTRKeypadInputCECKeyCodeSelectAvInputFunction     MTRKeypadInputCECKeyCode = 105
+	MTRKeypadInputCECKeyCodeSelectAudioInputFunction  MTRKeypadInputCECKeyCode = 106
+	MTRKeypadInputCECKeyCodePowerToggleFunction       MTRKeypadInputCECKeyCode = 107
+	MTRKeypadInputCECKeyCodePowerOffFunction          MTRKeypadInputCECKeyCode = 108
+	MTRKeypadInputCECKeyCodePowerOnFunction           MTRKeypadInputCECKeyCode = 109
+	MTRKeypadInputCECKeyCodeF1Blue                    MTRKeypadInputCECKeyCode = 113
+	MTRKeypadInputCECKeyCodeF2Red                     MTRKeypadInputCECKeyCode = 114
+	MTRKeypadInputCECKeyCodeF3Green                   MTRKeypadInputCECKeyCode = 115
+	MTRKeypadInputCECKeyCodeF4Yellow                  MTRKeypadInputCECKeyCode = 116
+	MTRKeypadInputCECKeyCodeF5                        MTRKeypadInputCECKeyCode = 117
+	MTRKeypadInputCECKeyCodeData                      MTRKeypadInputCECKeyCode = 118
+)
+
+// String returns the MTRKeypadInputCECKeyCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRKeypadInputCECKeyCode) String() string {
+	switch e {
+	case MTRKeypadInputCECKeyCodeSelect:
+		return "MTRKeypadInputCECKeyCodeSelect"
+	case MTRKeypadInputCECKeyCodeUp:
+		return "MTRKeypadInputCECKeyCodeUp"
+	case MTRKeypadInputCECKeyCodeDown:
+		return "MTRKeypadInputCECKeyCodeDown"
+	case MTRKeypadInputCECKeyCodeLeft:
+		return "MTRKeypadInputCECKeyCodeLeft"
+	case MTRKeypadInputCECKeyCodeRight:
+		return "MTRKeypadInputCECKeyCodeRight"
+	case MTRKeypadInputCECKeyCodeRightUp:
+		return "MTRKeypadInputCECKeyCodeRightUp"
+	case MTRKeypadInputCECKeyCodeRightDown:
+		return "MTRKeypadInputCECKeyCodeRightDown"
+	case MTRKeypadInputCECKeyCodeLeftUp:
+		return "MTRKeypadInputCECKeyCodeLeftUp"
+	case MTRKeypadInputCECKeyCodeLeftDown:
+		return "MTRKeypadInputCECKeyCodeLeftDown"
+	case MTRKeypadInputCECKeyCodeRootMenu:
+		return "MTRKeypadInputCECKeyCodeRootMenu"
+	case MTRKeypadInputCECKeyCodeSetupMenu:
+		return "MTRKeypadInputCECKeyCodeSetupMenu"
+	case MTRKeypadInputCECKeyCodeContentsMenu:
+		return "MTRKeypadInputCECKeyCodeContentsMenu"
+	case MTRKeypadInputCECKeyCodeFavoriteMenu:
+		return "MTRKeypadInputCECKeyCodeFavoriteMenu"
+	case MTRKeypadInputCECKeyCodeExit:
+		return "MTRKeypadInputCECKeyCodeExit"
+	case MTRKeypadInputCECKeyCodeMediaTopMenu:
+		return "MTRKeypadInputCECKeyCodeMediaTopMenu"
+	case MTRKeypadInputCECKeyCodeMediaContextSensitiveMenu:
+		return "MTRKeypadInputCECKeyCodeMediaContextSensitiveMenu"
+	case MTRKeypadInputCECKeyCodeNumberEntryMode:
+		return "MTRKeypadInputCECKeyCodeNumberEntryMode"
+	case MTRKeypadInputCECKeyCodeNumber11:
+		return "MTRKeypadInputCECKeyCodeNumber11"
+	case MTRKeypadInputCECKeyCodeNumber12:
+		return "MTRKeypadInputCECKeyCodeNumber12"
+	case MTRKeypadInputCECKeyCodeNumber0OrNumber10:
+		return "MTRKeypadInputCECKeyCodeNumber0OrNumber10"
+	case MTRKeypadInputCECKeyCodeNumbers1:
+		return "MTRKeypadInputCECKeyCodeNumbers1"
+	case MTRKeypadInputCECKeyCodeNumbers2:
+		return "MTRKeypadInputCECKeyCodeNumbers2"
+	case MTRKeypadInputCECKeyCodeNumbers3:
+		return "MTRKeypadInputCECKeyCodeNumbers3"
+	case MTRKeypadInputCECKeyCodeNumbers4:
+		return "MTRKeypadInputCECKeyCodeNumbers4"
+	case MTRKeypadInputCECKeyCodeNumbers5:
+		return "MTRKeypadInputCECKeyCodeNumbers5"
+	case MTRKeypadInputCECKeyCodeNumbers6:
+		return "MTRKeypadInputCECKeyCodeNumbers6"
+	case MTRKeypadInputCECKeyCodeNumbers7:
+		return "MTRKeypadInputCECKeyCodeNumbers7"
+	case MTRKeypadInputCECKeyCodeNumbers8:
+		return "MTRKeypadInputCECKeyCodeNumbers8"
+	case MTRKeypadInputCECKeyCodeNumbers9:
+		return "MTRKeypadInputCECKeyCodeNumbers9"
+	case MTRKeypadInputCECKeyCodeDot:
+		return "MTRKeypadInputCECKeyCodeDot"
+	case MTRKeypadInputCECKeyCodeEnter:
+		return "MTRKeypadInputCECKeyCodeEnter"
+	case MTRKeypadInputCECKeyCodeClear:
+		return "MTRKeypadInputCECKeyCodeClear"
+	case MTRKeypadInputCECKeyCodeNextFavorite:
+		return "MTRKeypadInputCECKeyCodeNextFavorite"
+	case MTRKeypadInputCECKeyCodeChannelUp:
+		return "MTRKeypadInputCECKeyCodeChannelUp"
+	case MTRKeypadInputCECKeyCodeChannelDown:
+		return "MTRKeypadInputCECKeyCodeChannelDown"
+	case MTRKeypadInputCECKeyCodePreviousChannel:
+		return "MTRKeypadInputCECKeyCodePreviousChannel"
+	case MTRKeypadInputCECKeyCodeSoundSelect:
+		return "MTRKeypadInputCECKeyCodeSoundSelect"
+	case MTRKeypadInputCECKeyCodeInputSelect:
+		return "MTRKeypadInputCECKeyCodeInputSelect"
+	case MTRKeypadInputCECKeyCodeDisplayInformation:
+		return "MTRKeypadInputCECKeyCodeDisplayInformation"
+	case MTRKeypadInputCECKeyCodeHelp:
+		return "MTRKeypadInputCECKeyCodeHelp"
+	case MTRKeypadInputCECKeyCodePageUp:
+		return "MTRKeypadInputCECKeyCodePageUp"
+	case MTRKeypadInputCECKeyCodePageDown:
+		return "MTRKeypadInputCECKeyCodePageDown"
+	case MTRKeypadInputCECKeyCodePower:
+		return "MTRKeypadInputCECKeyCodePower"
+	case MTRKeypadInputCECKeyCodeVolumeUp:
+		return "MTRKeypadInputCECKeyCodeVolumeUp"
+	case MTRKeypadInputCECKeyCodeVolumeDown:
+		return "MTRKeypadInputCECKeyCodeVolumeDown"
+	case MTRKeypadInputCECKeyCodeMute:
+		return "MTRKeypadInputCECKeyCodeMute"
+	case MTRKeypadInputCECKeyCodePlay:
+		return "MTRKeypadInputCECKeyCodePlay"
+	case MTRKeypadInputCECKeyCodeStop:
+		return "MTRKeypadInputCECKeyCodeStop"
+	case MTRKeypadInputCECKeyCodePause:
+		return "MTRKeypadInputCECKeyCodePause"
+	case MTRKeypadInputCECKeyCodeRecord:
+		return "MTRKeypadInputCECKeyCodeRecord"
+	case MTRKeypadInputCECKeyCodeRewind:
+		return "MTRKeypadInputCECKeyCodeRewind"
+	case MTRKeypadInputCECKeyCodeFastForward:
+		return "MTRKeypadInputCECKeyCodeFastForward"
+	case MTRKeypadInputCECKeyCodeEject:
+		return "MTRKeypadInputCECKeyCodeEject"
+	case MTRKeypadInputCECKeyCodeForward:
+		return "MTRKeypadInputCECKeyCodeForward"
+	case MTRKeypadInputCECKeyCodeBackward:
+		return "MTRKeypadInputCECKeyCodeBackward"
+	case MTRKeypadInputCECKeyCodeStopRecord:
+		return "MTRKeypadInputCECKeyCodeStopRecord"
+	case MTRKeypadInputCECKeyCodePauseRecord:
+		return "MTRKeypadInputCECKeyCodePauseRecord"
+	case MTRKeypadInputCECKeyCodeReserved:
+		return "MTRKeypadInputCECKeyCodeReserved"
+	case MTRKeypadInputCECKeyCodeAngle:
+		return "MTRKeypadInputCECKeyCodeAngle"
+	case MTRKeypadInputCECKeyCodeSubPicture:
+		return "MTRKeypadInputCECKeyCodeSubPicture"
+	case MTRKeypadInputCECKeyCodeVideoOnDemand:
+		return "MTRKeypadInputCECKeyCodeVideoOnDemand"
+	case MTRKeypadInputCECKeyCodeElectronicProgramGuide:
+		return "MTRKeypadInputCECKeyCodeElectronicProgramGuide"
+	case MTRKeypadInputCECKeyCodeTimerProgramming:
+		return "MTRKeypadInputCECKeyCodeTimerProgramming"
+	case MTRKeypadInputCECKeyCodeInitialConfiguration:
+		return "MTRKeypadInputCECKeyCodeInitialConfiguration"
+	case MTRKeypadInputCECKeyCodeSelectBroadcastType:
+		return "MTRKeypadInputCECKeyCodeSelectBroadcastType"
+	case MTRKeypadInputCECKeyCodeSelectSoundPresentation:
+		return "MTRKeypadInputCECKeyCodeSelectSoundPresentation"
+	case MTRKeypadInputCECKeyCodePlayFunction:
+		return "MTRKeypadInputCECKeyCodePlayFunction"
+	case MTRKeypadInputCECKeyCodePausePlayFunction:
+		return "MTRKeypadInputCECKeyCodePausePlayFunction"
+	case MTRKeypadInputCECKeyCodeRecordFunction:
+		return "MTRKeypadInputCECKeyCodeRecordFunction"
+	case MTRKeypadInputCECKeyCodePauseRecordFunction:
+		return "MTRKeypadInputCECKeyCodePauseRecordFunction"
+	case MTRKeypadInputCECKeyCodeStopFunction:
+		return "MTRKeypadInputCECKeyCodeStopFunction"
+	case MTRKeypadInputCECKeyCodeMuteFunction:
+		return "MTRKeypadInputCECKeyCodeMuteFunction"
+	case MTRKeypadInputCECKeyCodeRestoreVolumeFunction:
+		return "MTRKeypadInputCECKeyCodeRestoreVolumeFunction"
+	case MTRKeypadInputCECKeyCodeTuneFunction:
+		return "MTRKeypadInputCECKeyCodeTuneFunction"
+	case MTRKeypadInputCECKeyCodeSelectMediaFunction:
+		return "MTRKeypadInputCECKeyCodeSelectMediaFunction"
+	case MTRKeypadInputCECKeyCodeSelectAvInputFunction:
+		return "MTRKeypadInputCECKeyCodeSelectAvInputFunction"
+	case MTRKeypadInputCECKeyCodeSelectAudioInputFunction:
+		return "MTRKeypadInputCECKeyCodeSelectAudioInputFunction"
+	case MTRKeypadInputCECKeyCodePowerToggleFunction:
+		return "MTRKeypadInputCECKeyCodePowerToggleFunction"
+	case MTRKeypadInputCECKeyCodePowerOffFunction:
+		return "MTRKeypadInputCECKeyCodePowerOffFunction"
+	case MTRKeypadInputCECKeyCodePowerOnFunction:
+		return "MTRKeypadInputCECKeyCodePowerOnFunction"
+	case MTRKeypadInputCECKeyCodeF1Blue:
+		return "MTRKeypadInputCECKeyCodeF1Blue"
+	case MTRKeypadInputCECKeyCodeF2Red:
+		return "MTRKeypadInputCECKeyCodeF2Red"
+	case MTRKeypadInputCECKeyCodeF3Green:
+		return "MTRKeypadInputCECKeyCodeF3Green"
+	case MTRKeypadInputCECKeyCodeF4Yellow:
+		return "MTRKeypadInputCECKeyCodeF4Yellow"
+	case MTRKeypadInputCECKeyCodeF5:
+		return "MTRKeypadInputCECKeyCodeF5"
+	case MTRKeypadInputCECKeyCodeData:
+		return "MTRKeypadInputCECKeyCodeData"
+	default:
+		return fmt.Sprintf("MTRKeypadInputCECKeyCode(%d)", int64(e))
+	}
+}
+
+type MTRKeypadInputCecKeyCode int64
+
+const (
+	MTRKeypadInputCecKeyCodeSelect                    MTRKeypadInputCecKeyCode = 0
+	MTRKeypadInputCecKeyCodeUp                        MTRKeypadInputCecKeyCode = 1
+	MTRKeypadInputCecKeyCodeDown                      MTRKeypadInputCecKeyCode = 2
+	MTRKeypadInputCecKeyCodeLeft                      MTRKeypadInputCecKeyCode = 3
+	MTRKeypadInputCecKeyCodeRight                     MTRKeypadInputCecKeyCode = 4
+	MTRKeypadInputCecKeyCodeRightUp                   MTRKeypadInputCecKeyCode = 5
+	MTRKeypadInputCecKeyCodeRightDown                 MTRKeypadInputCecKeyCode = 6
+	MTRKeypadInputCecKeyCodeLeftUp                    MTRKeypadInputCecKeyCode = 7
+	MTRKeypadInputCecKeyCodeLeftDown                  MTRKeypadInputCecKeyCode = 8
+	MTRKeypadInputCecKeyCodeRootMenu                  MTRKeypadInputCecKeyCode = 9
+	MTRKeypadInputCecKeyCodeSetupMenu                 MTRKeypadInputCecKeyCode = 10
+	MTRKeypadInputCecKeyCodeContentsMenu              MTRKeypadInputCecKeyCode = 11
+	MTRKeypadInputCecKeyCodeFavoriteMenu              MTRKeypadInputCecKeyCode = 12
+	MTRKeypadInputCecKeyCodeExit                      MTRKeypadInputCecKeyCode = 13
+	MTRKeypadInputCecKeyCodeMediaTopMenu              MTRKeypadInputCecKeyCode = 16
+	MTRKeypadInputCecKeyCodeMediaContextSensitiveMenu MTRKeypadInputCecKeyCode = 17
+	MTRKeypadInputCecKeyCodeNumberEntryMode           MTRKeypadInputCecKeyCode = 29
+	MTRKeypadInputCecKeyCodeNumber11                  MTRKeypadInputCecKeyCode = 30
+	MTRKeypadInputCecKeyCodeNumber12                  MTRKeypadInputCecKeyCode = 31
+	MTRKeypadInputCecKeyCodeNumber0OrNumber10         MTRKeypadInputCecKeyCode = 32
+	MTRKeypadInputCecKeyCodeNumbers1                  MTRKeypadInputCecKeyCode = 33
+	MTRKeypadInputCecKeyCodeNumbers2                  MTRKeypadInputCecKeyCode = 34
+	MTRKeypadInputCecKeyCodeNumbers3                  MTRKeypadInputCecKeyCode = 35
+	MTRKeypadInputCecKeyCodeNumbers4                  MTRKeypadInputCecKeyCode = 36
+	MTRKeypadInputCecKeyCodeNumbers5                  MTRKeypadInputCecKeyCode = 37
+	MTRKeypadInputCecKeyCodeNumbers6                  MTRKeypadInputCecKeyCode = 38
+	MTRKeypadInputCecKeyCodeNumbers7                  MTRKeypadInputCecKeyCode = 39
+	MTRKeypadInputCecKeyCodeNumbers8                  MTRKeypadInputCecKeyCode = 40
+	MTRKeypadInputCecKeyCodeNumbers9                  MTRKeypadInputCecKeyCode = 41
+	MTRKeypadInputCecKeyCodeDot                       MTRKeypadInputCecKeyCode = 42
+	MTRKeypadInputCecKeyCodeEnter                     MTRKeypadInputCecKeyCode = 43
+	MTRKeypadInputCecKeyCodeClear                     MTRKeypadInputCecKeyCode = 44
+	MTRKeypadInputCecKeyCodeNextFavorite              MTRKeypadInputCecKeyCode = 47
+	MTRKeypadInputCecKeyCodeChannelUp                 MTRKeypadInputCecKeyCode = 48
+	MTRKeypadInputCecKeyCodeChannelDown               MTRKeypadInputCecKeyCode = 49
+	MTRKeypadInputCecKeyCodePreviousChannel           MTRKeypadInputCecKeyCode = 50
+	MTRKeypadInputCecKeyCodeSoundSelect               MTRKeypadInputCecKeyCode = 51
+	MTRKeypadInputCecKeyCodeInputSelect               MTRKeypadInputCecKeyCode = 52
+	MTRKeypadInputCecKeyCodeDisplayInformation        MTRKeypadInputCecKeyCode = 53
+	MTRKeypadInputCecKeyCodeHelp                      MTRKeypadInputCecKeyCode = 54
+	MTRKeypadInputCecKeyCodePageUp                    MTRKeypadInputCecKeyCode = 55
+	MTRKeypadInputCecKeyCodePageDown                  MTRKeypadInputCecKeyCode = 56
+	MTRKeypadInputCecKeyCodePower                     MTRKeypadInputCecKeyCode = 64
+	MTRKeypadInputCecKeyCodeVolumeUp                  MTRKeypadInputCecKeyCode = 65
+	MTRKeypadInputCecKeyCodeVolumeDown                MTRKeypadInputCecKeyCode = 66
+	MTRKeypadInputCecKeyCodeMute                      MTRKeypadInputCecKeyCode = 67
+	MTRKeypadInputCecKeyCodePlay                      MTRKeypadInputCecKeyCode = 68
+	MTRKeypadInputCecKeyCodeStop                      MTRKeypadInputCecKeyCode = 69
+	MTRKeypadInputCecKeyCodePause                     MTRKeypadInputCecKeyCode = 70
+	MTRKeypadInputCecKeyCodeRecord                    MTRKeypadInputCecKeyCode = 71
+	MTRKeypadInputCecKeyCodeRewind                    MTRKeypadInputCecKeyCode = 72
+	MTRKeypadInputCecKeyCodeFastForward               MTRKeypadInputCecKeyCode = 73
+	MTRKeypadInputCecKeyCodeEject                     MTRKeypadInputCecKeyCode = 74
+	MTRKeypadInputCecKeyCodeForward                   MTRKeypadInputCecKeyCode = 75
+	MTRKeypadInputCecKeyCodeBackward                  MTRKeypadInputCecKeyCode = 76
+	MTRKeypadInputCecKeyCodeStopRecord                MTRKeypadInputCecKeyCode = 77
+	MTRKeypadInputCecKeyCodePauseRecord               MTRKeypadInputCecKeyCode = 78
+	MTRKeypadInputCecKeyCodeReserved                  MTRKeypadInputCecKeyCode = 79
+	MTRKeypadInputCecKeyCodeAngle                     MTRKeypadInputCecKeyCode = 80
+	MTRKeypadInputCecKeyCodeSubPicture                MTRKeypadInputCecKeyCode = 81
+	MTRKeypadInputCecKeyCodeVideoOnDemand             MTRKeypadInputCecKeyCode = 82
+	MTRKeypadInputCecKeyCodeElectronicProgramGuide    MTRKeypadInputCecKeyCode = 83
+	MTRKeypadInputCecKeyCodeTimerProgramming          MTRKeypadInputCecKeyCode = 84
+	MTRKeypadInputCecKeyCodeInitialConfiguration      MTRKeypadInputCecKeyCode = 85
+	MTRKeypadInputCecKeyCodeSelectBroadcastType       MTRKeypadInputCecKeyCode = 86
+	MTRKeypadInputCecKeyCodeSelectSoundPresentation   MTRKeypadInputCecKeyCode = 87
+	MTRKeypadInputCecKeyCodePlayFunction              MTRKeypadInputCecKeyCode = 96
+	MTRKeypadInputCecKeyCodePausePlayFunction         MTRKeypadInputCecKeyCode = 97
+	MTRKeypadInputCecKeyCodeRecordFunction            MTRKeypadInputCecKeyCode = 98
+	MTRKeypadInputCecKeyCodePauseRecordFunction       MTRKeypadInputCecKeyCode = 99
+	MTRKeypadInputCecKeyCodeStopFunction              MTRKeypadInputCecKeyCode = 100
+	MTRKeypadInputCecKeyCodeMuteFunction              MTRKeypadInputCecKeyCode = 101
+	MTRKeypadInputCecKeyCodeRestoreVolumeFunction     MTRKeypadInputCecKeyCode = 102
+	MTRKeypadInputCecKeyCodeTuneFunction              MTRKeypadInputCecKeyCode = 103
+	MTRKeypadInputCecKeyCodeSelectMediaFunction       MTRKeypadInputCecKeyCode = 104
+	MTRKeypadInputCecKeyCodeSelectAvInputFunction     MTRKeypadInputCecKeyCode = 105
+	MTRKeypadInputCecKeyCodeSelectAudioInputFunction  MTRKeypadInputCecKeyCode = 106
+	MTRKeypadInputCecKeyCodePowerToggleFunction       MTRKeypadInputCecKeyCode = 107
+	MTRKeypadInputCecKeyCodePowerOffFunction          MTRKeypadInputCecKeyCode = 108
+	MTRKeypadInputCecKeyCodePowerOnFunction           MTRKeypadInputCecKeyCode = 109
+	MTRKeypadInputCecKeyCodeF1Blue                    MTRKeypadInputCecKeyCode = 113
+	MTRKeypadInputCecKeyCodeF2Red                     MTRKeypadInputCecKeyCode = 114
+	MTRKeypadInputCecKeyCodeF3Green                   MTRKeypadInputCecKeyCode = 115
+	MTRKeypadInputCecKeyCodeF4Yellow                  MTRKeypadInputCecKeyCode = 116
+	MTRKeypadInputCecKeyCodeF5                        MTRKeypadInputCecKeyCode = 117
+	MTRKeypadInputCecKeyCodeData                      MTRKeypadInputCecKeyCode = 118
+)
+
+// String returns the MTRKeypadInputCecKeyCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRKeypadInputCecKeyCode) String() string {
+	switch e {
+	case MTRKeypadInputCecKeyCodeSelect:
+		return "MTRKeypadInputCecKeyCodeSelect"
+	case MTRKeypadInputCecKeyCodeUp:
+		return "MTRKeypadInputCecKeyCodeUp"
+	case MTRKeypadInputCecKeyCodeDown:
+		return "MTRKeypadInputCecKeyCodeDown"
+	case MTRKeypadInputCecKeyCodeLeft:
+		return "MTRKeypadInputCecKeyCodeLeft"
+	case MTRKeypadInputCecKeyCodeRight:
+		return "MTRKeypadInputCecKeyCodeRight"
+	case MTRKeypadInputCecKeyCodeRightUp:
+		return "MTRKeypadInputCecKeyCodeRightUp"
+	case MTRKeypadInputCecKeyCodeRightDown:
+		return "MTRKeypadInputCecKeyCodeRightDown"
+	case MTRKeypadInputCecKeyCodeLeftUp:
+		return "MTRKeypadInputCecKeyCodeLeftUp"
+	case MTRKeypadInputCecKeyCodeLeftDown:
+		return "MTRKeypadInputCecKeyCodeLeftDown"
+	case MTRKeypadInputCecKeyCodeRootMenu:
+		return "MTRKeypadInputCecKeyCodeRootMenu"
+	case MTRKeypadInputCecKeyCodeSetupMenu:
+		return "MTRKeypadInputCecKeyCodeSetupMenu"
+	case MTRKeypadInputCecKeyCodeContentsMenu:
+		return "MTRKeypadInputCecKeyCodeContentsMenu"
+	case MTRKeypadInputCecKeyCodeFavoriteMenu:
+		return "MTRKeypadInputCecKeyCodeFavoriteMenu"
+	case MTRKeypadInputCecKeyCodeExit:
+		return "MTRKeypadInputCecKeyCodeExit"
+	case MTRKeypadInputCecKeyCodeMediaTopMenu:
+		return "MTRKeypadInputCecKeyCodeMediaTopMenu"
+	case MTRKeypadInputCecKeyCodeMediaContextSensitiveMenu:
+		return "MTRKeypadInputCecKeyCodeMediaContextSensitiveMenu"
+	case MTRKeypadInputCecKeyCodeNumberEntryMode:
+		return "MTRKeypadInputCecKeyCodeNumberEntryMode"
+	case MTRKeypadInputCecKeyCodeNumber11:
+		return "MTRKeypadInputCecKeyCodeNumber11"
+	case MTRKeypadInputCecKeyCodeNumber12:
+		return "MTRKeypadInputCecKeyCodeNumber12"
+	case MTRKeypadInputCecKeyCodeNumber0OrNumber10:
+		return "MTRKeypadInputCecKeyCodeNumber0OrNumber10"
+	case MTRKeypadInputCecKeyCodeNumbers1:
+		return "MTRKeypadInputCecKeyCodeNumbers1"
+	case MTRKeypadInputCecKeyCodeNumbers2:
+		return "MTRKeypadInputCecKeyCodeNumbers2"
+	case MTRKeypadInputCecKeyCodeNumbers3:
+		return "MTRKeypadInputCecKeyCodeNumbers3"
+	case MTRKeypadInputCecKeyCodeNumbers4:
+		return "MTRKeypadInputCecKeyCodeNumbers4"
+	case MTRKeypadInputCecKeyCodeNumbers5:
+		return "MTRKeypadInputCecKeyCodeNumbers5"
+	case MTRKeypadInputCecKeyCodeNumbers6:
+		return "MTRKeypadInputCecKeyCodeNumbers6"
+	case MTRKeypadInputCecKeyCodeNumbers7:
+		return "MTRKeypadInputCecKeyCodeNumbers7"
+	case MTRKeypadInputCecKeyCodeNumbers8:
+		return "MTRKeypadInputCecKeyCodeNumbers8"
+	case MTRKeypadInputCecKeyCodeNumbers9:
+		return "MTRKeypadInputCecKeyCodeNumbers9"
+	case MTRKeypadInputCecKeyCodeDot:
+		return "MTRKeypadInputCecKeyCodeDot"
+	case MTRKeypadInputCecKeyCodeEnter:
+		return "MTRKeypadInputCecKeyCodeEnter"
+	case MTRKeypadInputCecKeyCodeClear:
+		return "MTRKeypadInputCecKeyCodeClear"
+	case MTRKeypadInputCecKeyCodeNextFavorite:
+		return "MTRKeypadInputCecKeyCodeNextFavorite"
+	case MTRKeypadInputCecKeyCodeChannelUp:
+		return "MTRKeypadInputCecKeyCodeChannelUp"
+	case MTRKeypadInputCecKeyCodeChannelDown:
+		return "MTRKeypadInputCecKeyCodeChannelDown"
+	case MTRKeypadInputCecKeyCodePreviousChannel:
+		return "MTRKeypadInputCecKeyCodePreviousChannel"
+	case MTRKeypadInputCecKeyCodeSoundSelect:
+		return "MTRKeypadInputCecKeyCodeSoundSelect"
+	case MTRKeypadInputCecKeyCodeInputSelect:
+		return "MTRKeypadInputCecKeyCodeInputSelect"
+	case MTRKeypadInputCecKeyCodeDisplayInformation:
+		return "MTRKeypadInputCecKeyCodeDisplayInformation"
+	case MTRKeypadInputCecKeyCodeHelp:
+		return "MTRKeypadInputCecKeyCodeHelp"
+	case MTRKeypadInputCecKeyCodePageUp:
+		return "MTRKeypadInputCecKeyCodePageUp"
+	case MTRKeypadInputCecKeyCodePageDown:
+		return "MTRKeypadInputCecKeyCodePageDown"
+	case MTRKeypadInputCecKeyCodePower:
+		return "MTRKeypadInputCecKeyCodePower"
+	case MTRKeypadInputCecKeyCodeVolumeUp:
+		return "MTRKeypadInputCecKeyCodeVolumeUp"
+	case MTRKeypadInputCecKeyCodeVolumeDown:
+		return "MTRKeypadInputCecKeyCodeVolumeDown"
+	case MTRKeypadInputCecKeyCodeMute:
+		return "MTRKeypadInputCecKeyCodeMute"
+	case MTRKeypadInputCecKeyCodePlay:
+		return "MTRKeypadInputCecKeyCodePlay"
+	case MTRKeypadInputCecKeyCodeStop:
+		return "MTRKeypadInputCecKeyCodeStop"
+	case MTRKeypadInputCecKeyCodePause:
+		return "MTRKeypadInputCecKeyCodePause"
+	case MTRKeypadInputCecKeyCodeRecord:
+		return "MTRKeypadInputCecKeyCodeRecord"
+	case MTRKeypadInputCecKeyCodeRewind:
+		return "MTRKeypadInputCecKeyCodeRewind"
+	case MTRKeypadInputCecKeyCodeFastForward:
+		return "MTRKeypadInputCecKeyCodeFastForward"
+	case MTRKeypadInputCecKeyCodeEject:
+		return "MTRKeypadInputCecKeyCodeEject"
+	case MTRKeypadInputCecKeyCodeForward:
+		return "MTRKeypadInputCecKeyCodeForward"
+	case MTRKeypadInputCecKeyCodeBackward:
+		return "MTRKeypadInputCecKeyCodeBackward"
+	case MTRKeypadInputCecKeyCodeStopRecord:
+		return "MTRKeypadInputCecKeyCodeStopRecord"
+	case MTRKeypadInputCecKeyCodePauseRecord:
+		return "MTRKeypadInputCecKeyCodePauseRecord"
+	case MTRKeypadInputCecKeyCodeReserved:
+		return "MTRKeypadInputCecKeyCodeReserved"
+	case MTRKeypadInputCecKeyCodeAngle:
+		return "MTRKeypadInputCecKeyCodeAngle"
+	case MTRKeypadInputCecKeyCodeSubPicture:
+		return "MTRKeypadInputCecKeyCodeSubPicture"
+	case MTRKeypadInputCecKeyCodeVideoOnDemand:
+		return "MTRKeypadInputCecKeyCodeVideoOnDemand"
+	case MTRKeypadInputCecKeyCodeElectronicProgramGuide:
+		return "MTRKeypadInputCecKeyCodeElectronicProgramGuide"
+	case MTRKeypadInputCecKeyCodeTimerProgramming:
+		return "MTRKeypadInputCecKeyCodeTimerProgramming"
+	case MTRKeypadInputCecKeyCodeInitialConfiguration:
+		return "MTRKeypadInputCecKeyCodeInitialConfiguration"
+	case MTRKeypadInputCecKeyCodeSelectBroadcastType:
+		return "MTRKeypadInputCecKeyCodeSelectBroadcastType"
+	case MTRKeypadInputCecKeyCodeSelectSoundPresentation:
+		return "MTRKeypadInputCecKeyCodeSelectSoundPresentation"
+	case MTRKeypadInputCecKeyCodePlayFunction:
+		return "MTRKeypadInputCecKeyCodePlayFunction"
+	case MTRKeypadInputCecKeyCodePausePlayFunction:
+		return "MTRKeypadInputCecKeyCodePausePlayFunction"
+	case MTRKeypadInputCecKeyCodeRecordFunction:
+		return "MTRKeypadInputCecKeyCodeRecordFunction"
+	case MTRKeypadInputCecKeyCodePauseRecordFunction:
+		return "MTRKeypadInputCecKeyCodePauseRecordFunction"
+	case MTRKeypadInputCecKeyCodeStopFunction:
+		return "MTRKeypadInputCecKeyCodeStopFunction"
+	case MTRKeypadInputCecKeyCodeMuteFunction:
+		return "MTRKeypadInputCecKeyCodeMuteFunction"
+	case MTRKeypadInputCecKeyCodeRestoreVolumeFunction:
+		return "MTRKeypadInputCecKeyCodeRestoreVolumeFunction"
+	case MTRKeypadInputCecKeyCodeTuneFunction:
+		return "MTRKeypadInputCecKeyCodeTuneFunction"
+	case MTRKeypadInputCecKeyCodeSelectMediaFunction:
+		return "MTRKeypadInputCecKeyCodeSelectMediaFunction"
+	case MTRKeypadInputCecKeyCodeSelectAvInputFunction:
+		return "MTRKeypadInputCecKeyCodeSelectAvInputFunction"
+	case MTRKeypadInputCecKeyCodeSelectAudioInputFunction:
+		return "MTRKeypadInputCecKeyCodeSelectAudioInputFunction"
+	case MTRKeypadInputCecKeyCodePowerToggleFunction:
+		return "MTRKeypadInputCecKeyCodePowerToggleFunction"
+	case MTRKeypadInputCecKeyCodePowerOffFunction:
+		return "MTRKeypadInputCecKeyCodePowerOffFunction"
+	case MTRKeypadInputCecKeyCodePowerOnFunction:
+		return "MTRKeypadInputCecKeyCodePowerOnFunction"
+	case MTRKeypadInputCecKeyCodeF1Blue:
+		return "MTRKeypadInputCecKeyCodeF1Blue"
+	case MTRKeypadInputCecKeyCodeF2Red:
+		return "MTRKeypadInputCecKeyCodeF2Red"
+	case MTRKeypadInputCecKeyCodeF3Green:
+		return "MTRKeypadInputCecKeyCodeF3Green"
+	case MTRKeypadInputCecKeyCodeF4Yellow:
+		return "MTRKeypadInputCecKeyCodeF4Yellow"
+	case MTRKeypadInputCecKeyCodeF5:
+		return "MTRKeypadInputCecKeyCodeF5"
+	case MTRKeypadInputCecKeyCodeData:
+		return "MTRKeypadInputCecKeyCodeData"
+	default:
+		return fmt.Sprintf("MTRKeypadInputCecKeyCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRKeypadInputFeature int64
+
+const (
+	MTRKeypadInputFeatureNavigationKeyCodes MTRKeypadInputFeature = 1
+	MTRKeypadInputFeatureLocationKeys       MTRKeypadInputFeature = 2
+	MTRKeypadInputFeatureNumberKeys         MTRKeypadInputFeature = 4
+)
+
+// String returns the MTRKeypadInputFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRKeypadInputFeature) String() string {
+	var parts []string
+	if e&MTRKeypadInputFeatureNavigationKeyCodes != 0 {
+		parts = append(parts, "MTRKeypadInputFeatureNavigationKeyCodes")
+	}
+	if e&MTRKeypadInputFeatureLocationKeys != 0 {
+		parts = append(parts, "MTRKeypadInputFeatureLocationKeys")
+	}
+	if e&MTRKeypadInputFeatureNumberKeys != 0 {
+		parts = append(parts, "MTRKeypadInputFeatureNumberKeys")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRKeypadInputStatus int64
+
+const (
+	MTRKeypadInputStatusSuccess                  MTRKeypadInputStatus = 0
+	MTRKeypadInputStatusUnsupportedKey           MTRKeypadInputStatus = 1
+	MTRKeypadInputStatusInvalidKeyInCurrentState MTRKeypadInputStatus = 2
+)
+
+// String returns the MTRKeypadInputStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRKeypadInputStatus) String() string {
+	switch e {
+	case MTRKeypadInputStatusSuccess:
+		return "MTRKeypadInputStatusSuccess"
+	case MTRKeypadInputStatusUnsupportedKey:
+		return "MTRKeypadInputStatusUnsupportedKey"
+	case MTRKeypadInputStatusInvalidKeyInCurrentState:
+		return "MTRKeypadInputStatusInvalidKeyInCurrentState"
+	default:
+		return fmt.Sprintf("MTRKeypadInputStatus(%d)", int64(e))
+	}
+}
+
+type MTRLaundryDryerControlsDrynessLevel int64
+
+const (
+	MTRLaundryDryerControlsDrynessLevelLow    MTRLaundryDryerControlsDrynessLevel = 0
+	MTRLaundryDryerControlsDrynessLevelNormal MTRLaundryDryerControlsDrynessLevel = 1
+	MTRLaundryDryerControlsDrynessLevelExtra  MTRLaundryDryerControlsDrynessLevel = 2
+	MTRLaundryDryerControlsDrynessLevelMax    MTRLaundryDryerControlsDrynessLevel = 3
+)
+
+// String returns the MTRLaundryDryerControlsDrynessLevel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRLaundryDryerControlsDrynessLevel) String() string {
+	switch e {
+	case MTRLaundryDryerControlsDrynessLevelLow:
+		return "MTRLaundryDryerControlsDrynessLevelLow"
+	case MTRLaundryDryerControlsDrynessLevelNormal:
+		return "MTRLaundryDryerControlsDrynessLevelNormal"
+	case MTRLaundryDryerControlsDrynessLevelExtra:
+		return "MTRLaundryDryerControlsDrynessLevelExtra"
+	case MTRLaundryDryerControlsDrynessLevelMax:
+		return "MTRLaundryDryerControlsDrynessLevelMax"
+	default:
+		return fmt.Sprintf("MTRLaundryDryerControlsDrynessLevel(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRLaundryWasherControlsFeature int64
+
+const (
+	MTRLaundryWasherControlsFeatureSpin  MTRLaundryWasherControlsFeature = 1
+	MTRLaundryWasherControlsFeatureRinse MTRLaundryWasherControlsFeature = 2
+)
+
+// String returns the MTRLaundryWasherControlsFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRLaundryWasherControlsFeature) String() string {
+	var parts []string
+	if e&MTRLaundryWasherControlsFeatureSpin != 0 {
+		parts = append(parts, "MTRLaundryWasherControlsFeatureSpin")
+	}
+	if e&MTRLaundryWasherControlsFeatureRinse != 0 {
+		parts = append(parts, "MTRLaundryWasherControlsFeatureRinse")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRLaundryWasherControlsNumberOfRinses int64
+
+const (
+	MTRLaundryWasherControlsNumberOfRinsesNone   MTRLaundryWasherControlsNumberOfRinses = 0
+	MTRLaundryWasherControlsNumberOfRinsesNormal MTRLaundryWasherControlsNumberOfRinses = 1
+	MTRLaundryWasherControlsNumberOfRinsesExtra  MTRLaundryWasherControlsNumberOfRinses = 2
+	MTRLaundryWasherControlsNumberOfRinsesMax    MTRLaundryWasherControlsNumberOfRinses = 3
+)
+
+// String returns the MTRLaundryWasherControlsNumberOfRinses constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRLaundryWasherControlsNumberOfRinses) String() string {
+	switch e {
+	case MTRLaundryWasherControlsNumberOfRinsesNone:
+		return "MTRLaundryWasherControlsNumberOfRinsesNone"
+	case MTRLaundryWasherControlsNumberOfRinsesNormal:
+		return "MTRLaundryWasherControlsNumberOfRinsesNormal"
+	case MTRLaundryWasherControlsNumberOfRinsesExtra:
+		return "MTRLaundryWasherControlsNumberOfRinsesExtra"
+	case MTRLaundryWasherControlsNumberOfRinsesMax:
+		return "MTRLaundryWasherControlsNumberOfRinsesMax"
+	default:
+		return fmt.Sprintf("MTRLaundryWasherControlsNumberOfRinses(%d)", int64(e))
+	}
+}
+
+type MTRLaundryWasherModeModeTag int64
+
+const (
+	MTRLaundryWasherModeModeTagAuto      MTRLaundryWasherModeModeTag = 0
+	MTRLaundryWasherModeModeTagQuick     MTRLaundryWasherModeModeTag = 1
+	MTRLaundryWasherModeModeTagQuiet     MTRLaundryWasherModeModeTag = 2
+	MTRLaundryWasherModeModeTagLowNoise  MTRLaundryWasherModeModeTag = 3
+	MTRLaundryWasherModeModeTagLowEnergy MTRLaundryWasherModeModeTag = 4
+	MTRLaundryWasherModeModeTagVacation  MTRLaundryWasherModeModeTag = 5
+	MTRLaundryWasherModeModeTagMin       MTRLaundryWasherModeModeTag = 6
+	MTRLaundryWasherModeModeTagMax       MTRLaundryWasherModeModeTag = 7
+	MTRLaundryWasherModeModeTagNight     MTRLaundryWasherModeModeTag = 8
+	MTRLaundryWasherModeModeTagDay       MTRLaundryWasherModeModeTag = 9
+	MTRLaundryWasherModeModeTagNormal    MTRLaundryWasherModeModeTag = 16384
+	MTRLaundryWasherModeModeTagDelicate  MTRLaundryWasherModeModeTag = 16385
+	MTRLaundryWasherModeModeTagHeavy     MTRLaundryWasherModeModeTag = 16386
+	MTRLaundryWasherModeModeTagWhites    MTRLaundryWasherModeModeTag = 16387
+)
+
+// String returns the MTRLaundryWasherModeModeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRLaundryWasherModeModeTag) String() string {
+	switch e {
+	case MTRLaundryWasherModeModeTagAuto:
+		return "MTRLaundryWasherModeModeTagAuto"
+	case MTRLaundryWasherModeModeTagQuick:
+		return "MTRLaundryWasherModeModeTagQuick"
+	case MTRLaundryWasherModeModeTagQuiet:
+		return "MTRLaundryWasherModeModeTagQuiet"
+	case MTRLaundryWasherModeModeTagLowNoise:
+		return "MTRLaundryWasherModeModeTagLowNoise"
+	case MTRLaundryWasherModeModeTagLowEnergy:
+		return "MTRLaundryWasherModeModeTagLowEnergy"
+	case MTRLaundryWasherModeModeTagVacation:
+		return "MTRLaundryWasherModeModeTagVacation"
+	case MTRLaundryWasherModeModeTagMin:
+		return "MTRLaundryWasherModeModeTagMin"
+	case MTRLaundryWasherModeModeTagMax:
+		return "MTRLaundryWasherModeModeTagMax"
+	case MTRLaundryWasherModeModeTagNight:
+		return "MTRLaundryWasherModeModeTagNight"
+	case MTRLaundryWasherModeModeTagDay:
+		return "MTRLaundryWasherModeModeTagDay"
+	case MTRLaundryWasherModeModeTagNormal:
+		return "MTRLaundryWasherModeModeTagNormal"
+	case MTRLaundryWasherModeModeTagDelicate:
+		return "MTRLaundryWasherModeModeTagDelicate"
+	case MTRLaundryWasherModeModeTagHeavy:
+		return "MTRLaundryWasherModeModeTagHeavy"
+	case MTRLaundryWasherModeModeTagWhites:
+		return "MTRLaundryWasherModeModeTagWhites"
+	default:
+		return fmt.Sprintf("MTRLaundryWasherModeModeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRLevelControlFeature int64
+
+const (
+	MTRLevelControlFeatureOnOff     MTRLevelControlFeature = 1
+	MTRLevelControlFeatureLighting  MTRLevelControlFeature = 2
+	MTRLevelControlFeatureFrequency MTRLevelControlFeature = 4
+)
+
+// String returns the MTRLevelControlFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRLevelControlFeature) String() string {
+	var parts []string
+	if e&MTRLevelControlFeatureOnOff != 0 {
+		parts = append(parts, "MTRLevelControlFeatureOnOff")
+	}
+	if e&MTRLevelControlFeatureLighting != 0 {
+		parts = append(parts, "MTRLevelControlFeatureLighting")
+	}
+	if e&MTRLevelControlFeatureFrequency != 0 {
+		parts = append(parts, "MTRLevelControlFeatureFrequency")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRLevelControlMoveMode int64
+
+const (
+	MTRLevelControlMoveModeUp   MTRLevelControlMoveMode = 0
+	MTRLevelControlMoveModeDown MTRLevelControlMoveMode = 1
+)
+
+// String returns the MTRLevelControlMoveMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRLevelControlMoveMode) String() string {
+	switch e {
+	case MTRLevelControlMoveModeUp:
+		return "MTRLevelControlMoveModeUp"
+	case MTRLevelControlMoveModeDown:
+		return "MTRLevelControlMoveModeDown"
+	default:
+		return fmt.Sprintf("MTRLevelControlMoveMode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRLevelControlOptions int64
+
+const (
+	MTRLevelControlOptionsExecuteIfOff           MTRLevelControlOptions = 1
+	MTRLevelControlOptionsCoupleColorTempToLevel MTRLevelControlOptions = 2
+)
+
+// String returns the MTRLevelControlOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRLevelControlOptions) String() string {
+	var parts []string
+	if e&MTRLevelControlOptionsExecuteIfOff != 0 {
+		parts = append(parts, "MTRLevelControlOptionsExecuteIfOff")
+	}
+	if e&MTRLevelControlOptionsCoupleColorTempToLevel != 0 {
+		parts = append(parts, "MTRLevelControlOptionsCoupleColorTempToLevel")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRLevelControlOptionsBitmap int64
+
+const (
+	MTRLevelControlOptionsBitmapExecuteIfOff           MTRLevelControlOptionsBitmap = 1
+	MTRLevelControlOptionsBitmapCoupleColorTempToLevel MTRLevelControlOptionsBitmap = 2
+)
+
+// String returns the MTRLevelControlOptionsBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRLevelControlOptionsBitmap) String() string {
+	var parts []string
+	if e&MTRLevelControlOptionsBitmapExecuteIfOff != 0 {
+		parts = append(parts, "MTRLevelControlOptionsBitmapExecuteIfOff")
+	}
+	if e&MTRLevelControlOptionsBitmapCoupleColorTempToLevel != 0 {
+		parts = append(parts, "MTRLevelControlOptionsBitmapCoupleColorTempToLevel")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRLevelControlStepMode int64
+
+const (
+	MTRLevelControlStepModeUp   MTRLevelControlStepMode = 0
+	MTRLevelControlStepModeDown MTRLevelControlStepMode = 1
+)
+
+// String returns the MTRLevelControlStepMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRLevelControlStepMode) String() string {
+	switch e {
+	case MTRLevelControlStepModeUp:
+		return "MTRLevelControlStepModeUp"
+	case MTRLevelControlStepModeDown:
+		return "MTRLevelControlStepModeDown"
+	default:
+		return fmt.Sprintf("MTRLevelControlStepMode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRMediaInputFeature int64
+
+const (
+	MTRMediaInputFeatureNameUpdates MTRMediaInputFeature = 1
+)
+
+// String returns the MTRMediaInputFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRMediaInputFeature) String() string {
+	var parts []string
+	if e&MTRMediaInputFeatureNameUpdates != 0 {
+		parts = append(parts, "MTRMediaInputFeatureNameUpdates")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRMediaInputInputType int64
+
+const (
+	MTRMediaInputInputTypeInternal  MTRMediaInputInputType = 0
+	MTRMediaInputInputTypeAux       MTRMediaInputInputType = 1
+	MTRMediaInputInputTypeCoax      MTRMediaInputInputType = 2
+	MTRMediaInputInputTypeComposite MTRMediaInputInputType = 3
+	MTRMediaInputInputTypeHDMI      MTRMediaInputInputType = 4
+	MTRMediaInputInputTypeHdmi      MTRMediaInputInputType = 4
+	MTRMediaInputInputTypeInput     MTRMediaInputInputType = 5
+	MTRMediaInputInputTypeLine      MTRMediaInputInputType = 6
+	MTRMediaInputInputTypeOptical   MTRMediaInputInputType = 7
+	MTRMediaInputInputTypeVideo     MTRMediaInputInputType = 8
+	MTRMediaInputInputTypeSCART     MTRMediaInputInputType = 9
+	MTRMediaInputInputTypeScart     MTRMediaInputInputType = 9
+	MTRMediaInputInputTypeUSB       MTRMediaInputInputType = 10
+	MTRMediaInputInputTypeUsb       MTRMediaInputInputType = 10
+	MTRMediaInputInputTypeOther     MTRMediaInputInputType = 11
+)
+
+// String returns the MTRMediaInputInputType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRMediaInputInputType) String() string {
+	switch e {
+	case MTRMediaInputInputTypeInternal:
+		return "MTRMediaInputInputTypeInternal"
+	case MTRMediaInputInputTypeAux:
+		return "MTRMediaInputInputTypeAux"
+	case MTRMediaInputInputTypeCoax:
+		return "MTRMediaInputInputTypeCoax"
+	case MTRMediaInputInputTypeComposite:
+		return "MTRMediaInputInputTypeComposite"
+	case MTRMediaInputInputTypeHDMI:
+		return "MTRMediaInputInputTypeHDMI"
+	case MTRMediaInputInputTypeInput:
+		return "MTRMediaInputInputTypeInput"
+	case MTRMediaInputInputTypeLine:
+		return "MTRMediaInputInputTypeLine"
+	case MTRMediaInputInputTypeOptical:
+		return "MTRMediaInputInputTypeOptical"
+	case MTRMediaInputInputTypeVideo:
+		return "MTRMediaInputInputTypeVideo"
+	case MTRMediaInputInputTypeSCART:
+		return "MTRMediaInputInputTypeSCART"
+	case MTRMediaInputInputTypeUSB:
+		return "MTRMediaInputInputTypeUSB"
+	case MTRMediaInputInputTypeOther:
+		return "MTRMediaInputInputTypeOther"
+	default:
+		return fmt.Sprintf("MTRMediaInputInputType(%d)", int64(e))
+	}
+}
+
+type MTRMediaPlaybackCharacteristic int64
+
+const (
+	MTRMediaPlaybackCharacteristicForcedSubtitles              MTRMediaPlaybackCharacteristic = 0
+	MTRMediaPlaybackCharacteristicDescribesVideo               MTRMediaPlaybackCharacteristic = 1
+	MTRMediaPlaybackCharacteristicEasyToRead                   MTRMediaPlaybackCharacteristic = 2
+	MTRMediaPlaybackCharacteristicFrameBased                   MTRMediaPlaybackCharacteristic = 3
+	MTRMediaPlaybackCharacteristicMainProgram                  MTRMediaPlaybackCharacteristic = 4
+	MTRMediaPlaybackCharacteristicOriginalContent              MTRMediaPlaybackCharacteristic = 5
+	MTRMediaPlaybackCharacteristicVoiceOverTranslation         MTRMediaPlaybackCharacteristic = 6
+	MTRMediaPlaybackCharacteristicCaption                      MTRMediaPlaybackCharacteristic = 7
+	MTRMediaPlaybackCharacteristicSubtitle                     MTRMediaPlaybackCharacteristic = 8
+	MTRMediaPlaybackCharacteristicAlternate                    MTRMediaPlaybackCharacteristic = 9
+	MTRMediaPlaybackCharacteristicSupplementary                MTRMediaPlaybackCharacteristic = 10
+	MTRMediaPlaybackCharacteristicCommentary                   MTRMediaPlaybackCharacteristic = 11
+	MTRMediaPlaybackCharacteristicDubbedTranslation            MTRMediaPlaybackCharacteristic = 12
+	MTRMediaPlaybackCharacteristicDescription                  MTRMediaPlaybackCharacteristic = 13
+	MTRMediaPlaybackCharacteristicMetadata                     MTRMediaPlaybackCharacteristic = 14
+	MTRMediaPlaybackCharacteristicEnhancedAudioIntelligibility MTRMediaPlaybackCharacteristic = 15
+	MTRMediaPlaybackCharacteristicEmergency                    MTRMediaPlaybackCharacteristic = 16
+	MTRMediaPlaybackCharacteristicKaraoke                      MTRMediaPlaybackCharacteristic = 17
+)
+
+// String returns the MTRMediaPlaybackCharacteristic constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRMediaPlaybackCharacteristic) String() string {
+	switch e {
+	case MTRMediaPlaybackCharacteristicForcedSubtitles:
+		return "MTRMediaPlaybackCharacteristicForcedSubtitles"
+	case MTRMediaPlaybackCharacteristicDescribesVideo:
+		return "MTRMediaPlaybackCharacteristicDescribesVideo"
+	case MTRMediaPlaybackCharacteristicEasyToRead:
+		return "MTRMediaPlaybackCharacteristicEasyToRead"
+	case MTRMediaPlaybackCharacteristicFrameBased:
+		return "MTRMediaPlaybackCharacteristicFrameBased"
+	case MTRMediaPlaybackCharacteristicMainProgram:
+		return "MTRMediaPlaybackCharacteristicMainProgram"
+	case MTRMediaPlaybackCharacteristicOriginalContent:
+		return "MTRMediaPlaybackCharacteristicOriginalContent"
+	case MTRMediaPlaybackCharacteristicVoiceOverTranslation:
+		return "MTRMediaPlaybackCharacteristicVoiceOverTranslation"
+	case MTRMediaPlaybackCharacteristicCaption:
+		return "MTRMediaPlaybackCharacteristicCaption"
+	case MTRMediaPlaybackCharacteristicSubtitle:
+		return "MTRMediaPlaybackCharacteristicSubtitle"
+	case MTRMediaPlaybackCharacteristicAlternate:
+		return "MTRMediaPlaybackCharacteristicAlternate"
+	case MTRMediaPlaybackCharacteristicSupplementary:
+		return "MTRMediaPlaybackCharacteristicSupplementary"
+	case MTRMediaPlaybackCharacteristicCommentary:
+		return "MTRMediaPlaybackCharacteristicCommentary"
+	case MTRMediaPlaybackCharacteristicDubbedTranslation:
+		return "MTRMediaPlaybackCharacteristicDubbedTranslation"
+	case MTRMediaPlaybackCharacteristicDescription:
+		return "MTRMediaPlaybackCharacteristicDescription"
+	case MTRMediaPlaybackCharacteristicMetadata:
+		return "MTRMediaPlaybackCharacteristicMetadata"
+	case MTRMediaPlaybackCharacteristicEnhancedAudioIntelligibility:
+		return "MTRMediaPlaybackCharacteristicEnhancedAudioIntelligibility"
+	case MTRMediaPlaybackCharacteristicEmergency:
+		return "MTRMediaPlaybackCharacteristicEmergency"
+	case MTRMediaPlaybackCharacteristicKaraoke:
+		return "MTRMediaPlaybackCharacteristicKaraoke"
+	default:
+		return fmt.Sprintf("MTRMediaPlaybackCharacteristic(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRMediaPlaybackFeature int64
+
+const (
+	MTRMediaPlaybackFeatureAdvancedSeek  MTRMediaPlaybackFeature = 1
+	MTRMediaPlaybackFeatureVariableSpeed MTRMediaPlaybackFeature = 2
+	MTRMediaPlaybackFeatureTextTracks    MTRMediaPlaybackFeature = 4
+	MTRMediaPlaybackFeatureAudioTracks   MTRMediaPlaybackFeature = 8
+	MTRMediaPlaybackFeatureAudioAdvance  MTRMediaPlaybackFeature = 16
+)
+
+// String returns the MTRMediaPlaybackFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRMediaPlaybackFeature) String() string {
+	var parts []string
+	if e&MTRMediaPlaybackFeatureAdvancedSeek != 0 {
+		parts = append(parts, "MTRMediaPlaybackFeatureAdvancedSeek")
+	}
+	if e&MTRMediaPlaybackFeatureVariableSpeed != 0 {
+		parts = append(parts, "MTRMediaPlaybackFeatureVariableSpeed")
+	}
+	if e&MTRMediaPlaybackFeatureTextTracks != 0 {
+		parts = append(parts, "MTRMediaPlaybackFeatureTextTracks")
+	}
+	if e&MTRMediaPlaybackFeatureAudioTracks != 0 {
+		parts = append(parts, "MTRMediaPlaybackFeatureAudioTracks")
+	}
+	if e&MTRMediaPlaybackFeatureAudioAdvance != 0 {
+		parts = append(parts, "MTRMediaPlaybackFeatureAudioAdvance")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRMediaPlaybackPlaybackState int64
+
+const (
+	MTRMediaPlaybackPlaybackStatePlaying    MTRMediaPlaybackPlaybackState = 0
+	MTRMediaPlaybackPlaybackStatePaused     MTRMediaPlaybackPlaybackState = 1
+	MTRMediaPlaybackPlaybackStateNotPlaying MTRMediaPlaybackPlaybackState = 2
+	MTRMediaPlaybackPlaybackStateBuffering  MTRMediaPlaybackPlaybackState = 3
+)
+
+// String returns the MTRMediaPlaybackPlaybackState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRMediaPlaybackPlaybackState) String() string {
+	switch e {
+	case MTRMediaPlaybackPlaybackStatePlaying:
+		return "MTRMediaPlaybackPlaybackStatePlaying"
+	case MTRMediaPlaybackPlaybackStatePaused:
+		return "MTRMediaPlaybackPlaybackStatePaused"
+	case MTRMediaPlaybackPlaybackStateNotPlaying:
+		return "MTRMediaPlaybackPlaybackStateNotPlaying"
+	case MTRMediaPlaybackPlaybackStateBuffering:
+		return "MTRMediaPlaybackPlaybackStateBuffering"
+	default:
+		return fmt.Sprintf("MTRMediaPlaybackPlaybackState(%d)", int64(e))
+	}
+}
+
+type MTRMediaPlaybackStatus int64
+
+const (
+	MTRMediaPlaybackStatusSuccess                MTRMediaPlaybackStatus = 0
+	MTRMediaPlaybackStatusInvalidStateForCommand MTRMediaPlaybackStatus = 1
+	MTRMediaPlaybackStatusNotAllowed             MTRMediaPlaybackStatus = 2
+	MTRMediaPlaybackStatusNotActive              MTRMediaPlaybackStatus = 3
+	MTRMediaPlaybackStatusSpeedOutOfRange        MTRMediaPlaybackStatus = 4
+	MTRMediaPlaybackStatusSeekOutOfRange         MTRMediaPlaybackStatus = 5
+)
+
+// String returns the MTRMediaPlaybackStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRMediaPlaybackStatus) String() string {
+	switch e {
+	case MTRMediaPlaybackStatusSuccess:
+		return "MTRMediaPlaybackStatusSuccess"
+	case MTRMediaPlaybackStatusInvalidStateForCommand:
+		return "MTRMediaPlaybackStatusInvalidStateForCommand"
+	case MTRMediaPlaybackStatusNotAllowed:
+		return "MTRMediaPlaybackStatusNotAllowed"
+	case MTRMediaPlaybackStatusNotActive:
+		return "MTRMediaPlaybackStatusNotActive"
+	case MTRMediaPlaybackStatusSpeedOutOfRange:
+		return "MTRMediaPlaybackStatusSpeedOutOfRange"
+	case MTRMediaPlaybackStatusSeekOutOfRange:
+		return "MTRMediaPlaybackStatusSeekOutOfRange"
+	default:
+		return fmt.Sprintf("MTRMediaPlaybackStatus(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRMessagesFeature int64
+
+const (
+	MTRMessagesFeatureReceivedConfirmation MTRMessagesFeature = 1
+	MTRMessagesFeatureConfirmationResponse MTRMessagesFeature = 2
+	MTRMessagesFeatureConfirmationReply    MTRMessagesFeature = 4
+	MTRMessagesFeatureProtectedMessages    MTRMessagesFeature = 8
+)
+
+// String returns the MTRMessagesFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRMessagesFeature) String() string {
+	var parts []string
+	if e&MTRMessagesFeatureReceivedConfirmation != 0 {
+		parts = append(parts, "MTRMessagesFeatureReceivedConfirmation")
+	}
+	if e&MTRMessagesFeatureConfirmationResponse != 0 {
+		parts = append(parts, "MTRMessagesFeatureConfirmationResponse")
+	}
+	if e&MTRMessagesFeatureConfirmationReply != 0 {
+		parts = append(parts, "MTRMessagesFeatureConfirmationReply")
+	}
+	if e&MTRMessagesFeatureProtectedMessages != 0 {
+		parts = append(parts, "MTRMessagesFeatureProtectedMessages")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRMessagesFutureMessagePreference int64
+
+const (
+	MTRMessagesFutureMessagePreferenceAllowed    MTRMessagesFutureMessagePreference = 0
+	MTRMessagesFutureMessagePreferenceIncreased  MTRMessagesFutureMessagePreference = 1
+	MTRMessagesFutureMessagePreferenceReduced    MTRMessagesFutureMessagePreference = 2
+	MTRMessagesFutureMessagePreferenceDisallowed MTRMessagesFutureMessagePreference = 3
+	MTRMessagesFutureMessagePreferenceBanned     MTRMessagesFutureMessagePreference = 4
+)
+
+// String returns the MTRMessagesFutureMessagePreference constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRMessagesFutureMessagePreference) String() string {
+	switch e {
+	case MTRMessagesFutureMessagePreferenceAllowed:
+		return "MTRMessagesFutureMessagePreferenceAllowed"
+	case MTRMessagesFutureMessagePreferenceIncreased:
+		return "MTRMessagesFutureMessagePreferenceIncreased"
+	case MTRMessagesFutureMessagePreferenceReduced:
+		return "MTRMessagesFutureMessagePreferenceReduced"
+	case MTRMessagesFutureMessagePreferenceDisallowed:
+		return "MTRMessagesFutureMessagePreferenceDisallowed"
+	case MTRMessagesFutureMessagePreferenceBanned:
+		return "MTRMessagesFutureMessagePreferenceBanned"
+	default:
+		return fmt.Sprintf("MTRMessagesFutureMessagePreference(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRMessagesMessageControlBitmap int64
+
+const (
+	MTRMessagesMessageControlBitmapConfirmationRequired MTRMessagesMessageControlBitmap = 1
+	MTRMessagesMessageControlBitmapResponseRequired     MTRMessagesMessageControlBitmap = 2
+	MTRMessagesMessageControlBitmapReplyMessage         MTRMessagesMessageControlBitmap = 4
+	MTRMessagesMessageControlBitmapMessageConfirmed     MTRMessagesMessageControlBitmap = 8
+	MTRMessagesMessageControlBitmapMessageProtected     MTRMessagesMessageControlBitmap = 16
+)
+
+// String returns the MTRMessagesMessageControlBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRMessagesMessageControlBitmap) String() string {
+	var parts []string
+	if e&MTRMessagesMessageControlBitmapConfirmationRequired != 0 {
+		parts = append(parts, "MTRMessagesMessageControlBitmapConfirmationRequired")
+	}
+	if e&MTRMessagesMessageControlBitmapResponseRequired != 0 {
+		parts = append(parts, "MTRMessagesMessageControlBitmapResponseRequired")
+	}
+	if e&MTRMessagesMessageControlBitmapReplyMessage != 0 {
+		parts = append(parts, "MTRMessagesMessageControlBitmapReplyMessage")
+	}
+	if e&MTRMessagesMessageControlBitmapMessageConfirmed != 0 {
+		parts = append(parts, "MTRMessagesMessageControlBitmapMessageConfirmed")
+	}
+	if e&MTRMessagesMessageControlBitmapMessageProtected != 0 {
+		parts = append(parts, "MTRMessagesMessageControlBitmapMessageProtected")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRMessagesMessagePriority int64
+
+const (
+	MTRMessagesMessagePriorityLow      MTRMessagesMessagePriority = 0
+	MTRMessagesMessagePriorityMedium   MTRMessagesMessagePriority = 1
+	MTRMessagesMessagePriorityHigh     MTRMessagesMessagePriority = 2
+	MTRMessagesMessagePriorityCritical MTRMessagesMessagePriority = 3
+)
+
+// String returns the MTRMessagesMessagePriority constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRMessagesMessagePriority) String() string {
+	switch e {
+	case MTRMessagesMessagePriorityLow:
+		return "MTRMessagesMessagePriorityLow"
+	case MTRMessagesMessagePriorityMedium:
+		return "MTRMessagesMessagePriorityMedium"
+	case MTRMessagesMessagePriorityHigh:
+		return "MTRMessagesMessagePriorityHigh"
+	case MTRMessagesMessagePriorityCritical:
+		return "MTRMessagesMessagePriorityCritical"
+	default:
+		return fmt.Sprintf("MTRMessagesMessagePriority(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRMicrowaveOvenControlFeature int64
+
+const (
+	MTRMicrowaveOvenControlFeaturePowerAsNumber     MTRMicrowaveOvenControlFeature = 1
+	MTRMicrowaveOvenControlFeaturePowerNumberLimits MTRMicrowaveOvenControlFeature = 4
+)
+
+// String returns the MTRMicrowaveOvenControlFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRMicrowaveOvenControlFeature) String() string {
+	var parts []string
+	if e&MTRMicrowaveOvenControlFeaturePowerAsNumber != 0 {
+		parts = append(parts, "MTRMicrowaveOvenControlFeaturePowerAsNumber")
+	}
+	if e&MTRMicrowaveOvenControlFeaturePowerNumberLimits != 0 {
+		parts = append(parts, "MTRMicrowaveOvenControlFeaturePowerNumberLimits")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRMicrowaveOvenModeModeTag int64
+
+const (
+	MTRMicrowaveOvenModeModeTagAuto      MTRMicrowaveOvenModeModeTag = 0
+	MTRMicrowaveOvenModeModeTagQuick     MTRMicrowaveOvenModeModeTag = 1
+	MTRMicrowaveOvenModeModeTagQuiet     MTRMicrowaveOvenModeModeTag = 2
+	MTRMicrowaveOvenModeModeTagLowNoise  MTRMicrowaveOvenModeModeTag = 3
+	MTRMicrowaveOvenModeModeTagLowEnergy MTRMicrowaveOvenModeModeTag = 4
+	MTRMicrowaveOvenModeModeTagVacation  MTRMicrowaveOvenModeModeTag = 5
+	MTRMicrowaveOvenModeModeTagMin       MTRMicrowaveOvenModeModeTag = 6
+	MTRMicrowaveOvenModeModeTagMax       MTRMicrowaveOvenModeModeTag = 7
+	MTRMicrowaveOvenModeModeTagNight     MTRMicrowaveOvenModeModeTag = 8
+	MTRMicrowaveOvenModeModeTagDay       MTRMicrowaveOvenModeModeTag = 9
+	MTRMicrowaveOvenModeModeTagNormal    MTRMicrowaveOvenModeModeTag = 16384
+	MTRMicrowaveOvenModeModeTagDefrost   MTRMicrowaveOvenModeModeTag = 16385
+)
+
+// String returns the MTRMicrowaveOvenModeModeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRMicrowaveOvenModeModeTag) String() string {
+	switch e {
+	case MTRMicrowaveOvenModeModeTagAuto:
+		return "MTRMicrowaveOvenModeModeTagAuto"
+	case MTRMicrowaveOvenModeModeTagQuick:
+		return "MTRMicrowaveOvenModeModeTagQuick"
+	case MTRMicrowaveOvenModeModeTagQuiet:
+		return "MTRMicrowaveOvenModeModeTagQuiet"
+	case MTRMicrowaveOvenModeModeTagLowNoise:
+		return "MTRMicrowaveOvenModeModeTagLowNoise"
+	case MTRMicrowaveOvenModeModeTagLowEnergy:
+		return "MTRMicrowaveOvenModeModeTagLowEnergy"
+	case MTRMicrowaveOvenModeModeTagVacation:
+		return "MTRMicrowaveOvenModeModeTagVacation"
+	case MTRMicrowaveOvenModeModeTagMin:
+		return "MTRMicrowaveOvenModeModeTagMin"
+	case MTRMicrowaveOvenModeModeTagMax:
+		return "MTRMicrowaveOvenModeModeTagMax"
+	case MTRMicrowaveOvenModeModeTagNight:
+		return "MTRMicrowaveOvenModeModeTagNight"
+	case MTRMicrowaveOvenModeModeTagDay:
+		return "MTRMicrowaveOvenModeModeTagDay"
+	case MTRMicrowaveOvenModeModeTagNormal:
+		return "MTRMicrowaveOvenModeModeTagNormal"
+	case MTRMicrowaveOvenModeModeTagDefrost:
+		return "MTRMicrowaveOvenModeModeTagDefrost"
+	default:
+		return fmt.Sprintf("MTRMicrowaveOvenModeModeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRModeSelectFeature int64
+
+const (
+	MTRModeSelectFeatureOnOff    MTRModeSelectFeature = 1
+	MTRModeSelectFeatureDEPONOFF MTRModeSelectFeature = 1
+)
+
+// String returns the MTRModeSelectFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRModeSelectFeature) String() string {
+	var parts []string
+	if e&MTRModeSelectFeatureOnOff != 0 {
+		parts = append(parts, "MTRModeSelectFeatureOnOff")
+	}
+	if e&MTRModeSelectFeatureDEPONOFF != 0 {
+		parts = append(parts, "MTRModeSelectFeatureDEPONOFF")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRNetworkCommissioningStatus int64
+
+const (
+	MTRNetworkCommissioningStatusSuccess                MTRNetworkCommissioningStatus = 0
+	MTRNetworkCommissioningStatusOutOfRange             MTRNetworkCommissioningStatus = 1
+	MTRNetworkCommissioningStatusBoundsExceeded         MTRNetworkCommissioningStatus = 2
+	MTRNetworkCommissioningStatusNetworkIDNotFound      MTRNetworkCommissioningStatus = 3
+	MTRNetworkCommissioningStatusDuplicateNetworkID     MTRNetworkCommissioningStatus = 4
+	MTRNetworkCommissioningStatusNetworkNotFound        MTRNetworkCommissioningStatus = 5
+	MTRNetworkCommissioningStatusRegulatoryError        MTRNetworkCommissioningStatus = 6
+	MTRNetworkCommissioningStatusAuthFailure            MTRNetworkCommissioningStatus = 7
+	MTRNetworkCommissioningStatusUnsupportedSecurity    MTRNetworkCommissioningStatus = 8
+	MTRNetworkCommissioningStatusOtherConnectionFailure MTRNetworkCommissioningStatus = 9
+	MTRNetworkCommissioningStatusIPV6Failed             MTRNetworkCommissioningStatus = 10
+	MTRNetworkCommissioningStatusIPBindFailed           MTRNetworkCommissioningStatus = 11
+	MTRNetworkCommissioningStatusUnknownError           MTRNetworkCommissioningStatus = 12
+)
+
+// String returns the MTRNetworkCommissioningStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRNetworkCommissioningStatus) String() string {
+	switch e {
+	case MTRNetworkCommissioningStatusSuccess:
+		return "MTRNetworkCommissioningStatusSuccess"
+	case MTRNetworkCommissioningStatusOutOfRange:
+		return "MTRNetworkCommissioningStatusOutOfRange"
+	case MTRNetworkCommissioningStatusBoundsExceeded:
+		return "MTRNetworkCommissioningStatusBoundsExceeded"
+	case MTRNetworkCommissioningStatusNetworkIDNotFound:
+		return "MTRNetworkCommissioningStatusNetworkIDNotFound"
+	case MTRNetworkCommissioningStatusDuplicateNetworkID:
+		return "MTRNetworkCommissioningStatusDuplicateNetworkID"
+	case MTRNetworkCommissioningStatusNetworkNotFound:
+		return "MTRNetworkCommissioningStatusNetworkNotFound"
+	case MTRNetworkCommissioningStatusRegulatoryError:
+		return "MTRNetworkCommissioningStatusRegulatoryError"
+	case MTRNetworkCommissioningStatusAuthFailure:
+		return "MTRNetworkCommissioningStatusAuthFailure"
+	case MTRNetworkCommissioningStatusUnsupportedSecurity:
+		return "MTRNetworkCommissioningStatusUnsupportedSecurity"
+	case MTRNetworkCommissioningStatusOtherConnectionFailure:
+		return "MTRNetworkCommissioningStatusOtherConnectionFailure"
+	case MTRNetworkCommissioningStatusIPV6Failed:
+		return "MTRNetworkCommissioningStatusIPV6Failed"
+	case MTRNetworkCommissioningStatusIPBindFailed:
+		return "MTRNetworkCommissioningStatusIPBindFailed"
+	case MTRNetworkCommissioningStatusUnknownError:
+		return "MTRNetworkCommissioningStatusUnknownError"
+	default:
+		return fmt.Sprintf("MTRNetworkCommissioningStatus(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRNetworkCommissioningThreadCapabilitiesBitmap int64
+
+const (
+	MTRNetworkCommissioningThreadCapabilitiesBitmapIsBorderRouterCapable                MTRNetworkCommissioningThreadCapabilitiesBitmap = 1
+	MTRNetworkCommissioningThreadCapabilitiesBitmapIsRouterCapable                      MTRNetworkCommissioningThreadCapabilitiesBitmap = 2
+	MTRNetworkCommissioningThreadCapabilitiesBitmapIsSleepyEndDeviceCapable             MTRNetworkCommissioningThreadCapabilitiesBitmap = 4
+	MTRNetworkCommissioningThreadCapabilitiesBitmapIsFullThreadDevice                   MTRNetworkCommissioningThreadCapabilitiesBitmap = 8
+	MTRNetworkCommissioningThreadCapabilitiesBitmapIsSynchronizedSleepyEndDeviceCapable MTRNetworkCommissioningThreadCapabilitiesBitmap = 16
+)
+
+// String returns the MTRNetworkCommissioningThreadCapabilitiesBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRNetworkCommissioningThreadCapabilitiesBitmap) String() string {
+	var parts []string
+	if e&MTRNetworkCommissioningThreadCapabilitiesBitmapIsBorderRouterCapable != 0 {
+		parts = append(parts, "MTRNetworkCommissioningThreadCapabilitiesBitmapIsBorderRouterCapable")
+	}
+	if e&MTRNetworkCommissioningThreadCapabilitiesBitmapIsRouterCapable != 0 {
+		parts = append(parts, "MTRNetworkCommissioningThreadCapabilitiesBitmapIsRouterCapable")
+	}
+	if e&MTRNetworkCommissioningThreadCapabilitiesBitmapIsSleepyEndDeviceCapable != 0 {
+		parts = append(parts, "MTRNetworkCommissioningThreadCapabilitiesBitmapIsSleepyEndDeviceCapable")
+	}
+	if e&MTRNetworkCommissioningThreadCapabilitiesBitmapIsFullThreadDevice != 0 {
+		parts = append(parts, "MTRNetworkCommissioningThreadCapabilitiesBitmapIsFullThreadDevice")
+	}
+	if e&MTRNetworkCommissioningThreadCapabilitiesBitmapIsSynchronizedSleepyEndDeviceCapable != 0 {
+		parts = append(parts, "MTRNetworkCommissioningThreadCapabilitiesBitmapIsSynchronizedSleepyEndDeviceCapable")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRNetworkCommissioningWiFiBand int64
+
+const (
+	MTRNetworkCommissioningWiFiBand2G4  MTRNetworkCommissioningWiFiBand = 0
+	MTRNetworkCommissioningWiFiBand3G65 MTRNetworkCommissioningWiFiBand = 1
+	MTRNetworkCommissioningWiFiBand5G   MTRNetworkCommissioningWiFiBand = 2
+	MTRNetworkCommissioningWiFiBand6G   MTRNetworkCommissioningWiFiBand = 3
+	MTRNetworkCommissioningWiFiBand60G  MTRNetworkCommissioningWiFiBand = 4
+	MTRNetworkCommissioningWiFiBand1G   MTRNetworkCommissioningWiFiBand = 5
+)
+
+// String returns the MTRNetworkCommissioningWiFiBand constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRNetworkCommissioningWiFiBand) String() string {
+	switch e {
+	case MTRNetworkCommissioningWiFiBand2G4:
+		return "MTRNetworkCommissioningWiFiBand2G4"
+	case MTRNetworkCommissioningWiFiBand3G65:
+		return "MTRNetworkCommissioningWiFiBand3G65"
+	case MTRNetworkCommissioningWiFiBand5G:
+		return "MTRNetworkCommissioningWiFiBand5G"
+	case MTRNetworkCommissioningWiFiBand6G:
+		return "MTRNetworkCommissioningWiFiBand6G"
+	case MTRNetworkCommissioningWiFiBand60G:
+		return "MTRNetworkCommissioningWiFiBand60G"
+	case MTRNetworkCommissioningWiFiBand1G:
+		return "MTRNetworkCommissioningWiFiBand1G"
+	default:
+		return fmt.Sprintf("MTRNetworkCommissioningWiFiBand(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRNetworkCommissioningWiFiSecurity int64
+
+const (
+	MTRNetworkCommissioningWiFiSecurityUnencrypted  MTRNetworkCommissioningWiFiSecurity = 1
+	MTRNetworkCommissioningWiFiSecurityWEP          MTRNetworkCommissioningWiFiSecurity = 2
+	MTRNetworkCommissioningWiFiSecurityWepPersonal  MTRNetworkCommissioningWiFiSecurity = 2
+	MTRNetworkCommissioningWiFiSecurityWPAPersonal  MTRNetworkCommissioningWiFiSecurity = 4
+	MTRNetworkCommissioningWiFiSecurityWpaPersonal  MTRNetworkCommissioningWiFiSecurity = 4
+	MTRNetworkCommissioningWiFiSecurityWPA2Personal MTRNetworkCommissioningWiFiSecurity = 8
+	MTRNetworkCommissioningWiFiSecurityWpa2Personal MTRNetworkCommissioningWiFiSecurity = 8
+	MTRNetworkCommissioningWiFiSecurityWPA3Personal MTRNetworkCommissioningWiFiSecurity = 16
+	MTRNetworkCommissioningWiFiSecurityWpa3Personal MTRNetworkCommissioningWiFiSecurity = 16
+)
+
+// String returns the MTRNetworkCommissioningWiFiSecurity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRNetworkCommissioningWiFiSecurity) String() string {
+	var parts []string
+	if e&MTRNetworkCommissioningWiFiSecurityUnencrypted != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityUnencrypted")
+	}
+	if e&MTRNetworkCommissioningWiFiSecurityWEP != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityWEP")
+	}
+	if e&MTRNetworkCommissioningWiFiSecurityWepPersonal != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityWepPersonal")
+	}
+	if e&MTRNetworkCommissioningWiFiSecurityWPAPersonal != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityWPAPersonal")
+	}
+	if e&MTRNetworkCommissioningWiFiSecurityWpaPersonal != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityWpaPersonal")
+	}
+	if e&MTRNetworkCommissioningWiFiSecurityWPA2Personal != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityWPA2Personal")
+	}
+	if e&MTRNetworkCommissioningWiFiSecurityWpa2Personal != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityWpa2Personal")
+	}
+	if e&MTRNetworkCommissioningWiFiSecurityWPA3Personal != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityWPA3Personal")
+	}
+	if e&MTRNetworkCommissioningWiFiSecurityWpa3Personal != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityWpa3Personal")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRNetworkCommissioningWiFiSecurityBitmap int64
+
+const (
+	MTRNetworkCommissioningWiFiSecurityBitmapUnencrypted  MTRNetworkCommissioningWiFiSecurityBitmap = 1
+	MTRNetworkCommissioningWiFiSecurityBitmapWEP          MTRNetworkCommissioningWiFiSecurityBitmap = 2
+	MTRNetworkCommissioningWiFiSecurityBitmapWPAPersonal  MTRNetworkCommissioningWiFiSecurityBitmap = 4
+	MTRNetworkCommissioningWiFiSecurityBitmapWPA2Personal MTRNetworkCommissioningWiFiSecurityBitmap = 8
+	MTRNetworkCommissioningWiFiSecurityBitmapWPA3Personal MTRNetworkCommissioningWiFiSecurityBitmap = 16
+)
+
+// String returns the MTRNetworkCommissioningWiFiSecurityBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRNetworkCommissioningWiFiSecurityBitmap) String() string {
+	var parts []string
+	if e&MTRNetworkCommissioningWiFiSecurityBitmapUnencrypted != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityBitmapUnencrypted")
+	}
+	if e&MTRNetworkCommissioningWiFiSecurityBitmapWEP != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityBitmapWEP")
+	}
+	if e&MTRNetworkCommissioningWiFiSecurityBitmapWPAPersonal != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityBitmapWPAPersonal")
+	}
+	if e&MTRNetworkCommissioningWiFiSecurityBitmapWPA2Personal != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityBitmapWPA2Personal")
+	}
+	if e&MTRNetworkCommissioningWiFiSecurityBitmapWPA3Personal != 0 {
+		parts = append(parts, "MTRNetworkCommissioningWiFiSecurityBitmapWPA3Personal")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRNitrogenDioxideConcentrationMeasurementFeature int64
+
+const (
+	MTRNitrogenDioxideConcentrationMeasurementFeatureNumericMeasurement MTRNitrogenDioxideConcentrationMeasurementFeature = 1
+	MTRNitrogenDioxideConcentrationMeasurementFeatureLevelIndication    MTRNitrogenDioxideConcentrationMeasurementFeature = 2
+	MTRNitrogenDioxideConcentrationMeasurementFeatureMediumLevel        MTRNitrogenDioxideConcentrationMeasurementFeature = 4
+	MTRNitrogenDioxideConcentrationMeasurementFeatureCriticalLevel      MTRNitrogenDioxideConcentrationMeasurementFeature = 8
+	MTRNitrogenDioxideConcentrationMeasurementFeaturePeakMeasurement    MTRNitrogenDioxideConcentrationMeasurementFeature = 16
+	MTRNitrogenDioxideConcentrationMeasurementFeatureAverageMeasurement MTRNitrogenDioxideConcentrationMeasurementFeature = 32
+)
+
+// String returns the MTRNitrogenDioxideConcentrationMeasurementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRNitrogenDioxideConcentrationMeasurementFeature) String() string {
+	var parts []string
+	if e&MTRNitrogenDioxideConcentrationMeasurementFeatureNumericMeasurement != 0 {
+		parts = append(parts, "MTRNitrogenDioxideConcentrationMeasurementFeatureNumericMeasurement")
+	}
+	if e&MTRNitrogenDioxideConcentrationMeasurementFeatureLevelIndication != 0 {
+		parts = append(parts, "MTRNitrogenDioxideConcentrationMeasurementFeatureLevelIndication")
+	}
+	if e&MTRNitrogenDioxideConcentrationMeasurementFeatureMediumLevel != 0 {
+		parts = append(parts, "MTRNitrogenDioxideConcentrationMeasurementFeatureMediumLevel")
+	}
+	if e&MTRNitrogenDioxideConcentrationMeasurementFeatureCriticalLevel != 0 {
+		parts = append(parts, "MTRNitrogenDioxideConcentrationMeasurementFeatureCriticalLevel")
+	}
+	if e&MTRNitrogenDioxideConcentrationMeasurementFeaturePeakMeasurement != 0 {
+		parts = append(parts, "MTRNitrogenDioxideConcentrationMeasurementFeaturePeakMeasurement")
+	}
+	if e&MTRNitrogenDioxideConcentrationMeasurementFeatureAverageMeasurement != 0 {
+		parts = append(parts, "MTRNitrogenDioxideConcentrationMeasurementFeatureAverageMeasurement")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRNitrogenDioxideConcentrationMeasurementLevelValue int64
+
+const (
+	MTRNitrogenDioxideConcentrationMeasurementLevelValueUnknown  MTRNitrogenDioxideConcentrationMeasurementLevelValue = 0
+	MTRNitrogenDioxideConcentrationMeasurementLevelValueLow      MTRNitrogenDioxideConcentrationMeasurementLevelValue = 1
+	MTRNitrogenDioxideConcentrationMeasurementLevelValueMedium   MTRNitrogenDioxideConcentrationMeasurementLevelValue = 2
+	MTRNitrogenDioxideConcentrationMeasurementLevelValueHigh     MTRNitrogenDioxideConcentrationMeasurementLevelValue = 3
+	MTRNitrogenDioxideConcentrationMeasurementLevelValueCritical MTRNitrogenDioxideConcentrationMeasurementLevelValue = 4
+)
+
+// String returns the MTRNitrogenDioxideConcentrationMeasurementLevelValue constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRNitrogenDioxideConcentrationMeasurementLevelValue) String() string {
+	switch e {
+	case MTRNitrogenDioxideConcentrationMeasurementLevelValueUnknown:
+		return "MTRNitrogenDioxideConcentrationMeasurementLevelValueUnknown"
+	case MTRNitrogenDioxideConcentrationMeasurementLevelValueLow:
+		return "MTRNitrogenDioxideConcentrationMeasurementLevelValueLow"
+	case MTRNitrogenDioxideConcentrationMeasurementLevelValueMedium:
+		return "MTRNitrogenDioxideConcentrationMeasurementLevelValueMedium"
+	case MTRNitrogenDioxideConcentrationMeasurementLevelValueHigh:
+		return "MTRNitrogenDioxideConcentrationMeasurementLevelValueHigh"
+	case MTRNitrogenDioxideConcentrationMeasurementLevelValueCritical:
+		return "MTRNitrogenDioxideConcentrationMeasurementLevelValueCritical"
+	default:
+		return fmt.Sprintf("MTRNitrogenDioxideConcentrationMeasurementLevelValue(%d)", int64(e))
+	}
+}
+
+type MTRNitrogenDioxideConcentrationMeasurementMeasurementMedium int64
+
+const (
+	MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumAir   MTRNitrogenDioxideConcentrationMeasurementMeasurementMedium = 0
+	MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumWater MTRNitrogenDioxideConcentrationMeasurementMeasurementMedium = 1
+	MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumSoil  MTRNitrogenDioxideConcentrationMeasurementMeasurementMedium = 2
+)
+
+// String returns the MTRNitrogenDioxideConcentrationMeasurementMeasurementMedium constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRNitrogenDioxideConcentrationMeasurementMeasurementMedium) String() string {
+	switch e {
+	case MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumAir:
+		return "MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumAir"
+	case MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumWater:
+		return "MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumWater"
+	case MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumSoil:
+		return "MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumSoil"
+	default:
+		return fmt.Sprintf("MTRNitrogenDioxideConcentrationMeasurementMeasurementMedium(%d)", int64(e))
+	}
+}
+
+type MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit int64
+
+const (
+	MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPPM  MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit = 0
+	MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPPB  MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit = 1
+	MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPPT  MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit = 2
+	MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitMGM3 MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit = 3
+	MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitUGM3 MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit = 4
+	MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitNGM3 MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit = 5
+	MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPM3  MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit = 6
+	MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitBQM3 MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit = 7
+)
+
+// String returns the MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit) String() string {
+	switch e {
+	case MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPPM:
+		return "MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPPM"
+	case MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPPB:
+		return "MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPPB"
+	case MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPPT:
+		return "MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPPT"
+	case MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitMGM3:
+		return "MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitMGM3"
+	case MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitUGM3:
+		return "MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitUGM3"
+	case MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitNGM3:
+		return "MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitNGM3"
+	case MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPM3:
+		return "MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPM3"
+	case MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitBQM3:
+		return "MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitBQM3"
+	default:
+		return fmt.Sprintf("MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit(%d)", int64(e))
+	}
+}
+
+type MTROTASoftwareUpdateProviderApplyUpdateAction int64
+
+const (
+	MTROTASoftwareUpdateProviderApplyUpdateActionProceed         MTROTASoftwareUpdateProviderApplyUpdateAction = 0
+	MTROTASoftwareUpdateProviderApplyUpdateActionAwaitNextAction MTROTASoftwareUpdateProviderApplyUpdateAction = 1
+	MTROTASoftwareUpdateProviderApplyUpdateActionDiscontinue     MTROTASoftwareUpdateProviderApplyUpdateAction = 2
+)
+
+// String returns the MTROTASoftwareUpdateProviderApplyUpdateAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROTASoftwareUpdateProviderApplyUpdateAction) String() string {
+	switch e {
+	case MTROTASoftwareUpdateProviderApplyUpdateActionProceed:
+		return "MTROTASoftwareUpdateProviderApplyUpdateActionProceed"
+	case MTROTASoftwareUpdateProviderApplyUpdateActionAwaitNextAction:
+		return "MTROTASoftwareUpdateProviderApplyUpdateActionAwaitNextAction"
+	case MTROTASoftwareUpdateProviderApplyUpdateActionDiscontinue:
+		return "MTROTASoftwareUpdateProviderApplyUpdateActionDiscontinue"
+	default:
+		return fmt.Sprintf("MTROTASoftwareUpdateProviderApplyUpdateAction(%d)", int64(e))
+	}
+}
+
+type MTROTASoftwareUpdateProviderDownloadProtocol int64
+
+const (
+	MTROTASoftwareUpdateProviderDownloadProtocolBDXSynchronous  MTROTASoftwareUpdateProviderDownloadProtocol = 0
+	MTROTASoftwareUpdateProviderDownloadProtocolBDXAsynchronous MTROTASoftwareUpdateProviderDownloadProtocol = 1
+	MTROTASoftwareUpdateProviderDownloadProtocolHTTPS           MTROTASoftwareUpdateProviderDownloadProtocol = 2
+	MTROTASoftwareUpdateProviderDownloadProtocolVendorSpecific  MTROTASoftwareUpdateProviderDownloadProtocol = 3
+)
+
+// String returns the MTROTASoftwareUpdateProviderDownloadProtocol constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROTASoftwareUpdateProviderDownloadProtocol) String() string {
+	switch e {
+	case MTROTASoftwareUpdateProviderDownloadProtocolBDXSynchronous:
+		return "MTROTASoftwareUpdateProviderDownloadProtocolBDXSynchronous"
+	case MTROTASoftwareUpdateProviderDownloadProtocolBDXAsynchronous:
+		return "MTROTASoftwareUpdateProviderDownloadProtocolBDXAsynchronous"
+	case MTROTASoftwareUpdateProviderDownloadProtocolHTTPS:
+		return "MTROTASoftwareUpdateProviderDownloadProtocolHTTPS"
+	case MTROTASoftwareUpdateProviderDownloadProtocolVendorSpecific:
+		return "MTROTASoftwareUpdateProviderDownloadProtocolVendorSpecific"
+	default:
+		return fmt.Sprintf("MTROTASoftwareUpdateProviderDownloadProtocol(%d)", int64(e))
+	}
+}
+
+type MTROTASoftwareUpdateProviderOTAApplyUpdateAction int64
+
+const (
+	MTROTASoftwareUpdateProviderOTAApplyUpdateActionProceed         MTROTASoftwareUpdateProviderOTAApplyUpdateAction = 0
+	MTROTASoftwareUpdateProviderOTAApplyUpdateActionAwaitNextAction MTROTASoftwareUpdateProviderOTAApplyUpdateAction = 1
+	MTROTASoftwareUpdateProviderOTAApplyUpdateActionDiscontinue     MTROTASoftwareUpdateProviderOTAApplyUpdateAction = 2
+)
+
+// String returns the MTROTASoftwareUpdateProviderOTAApplyUpdateAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROTASoftwareUpdateProviderOTAApplyUpdateAction) String() string {
+	switch e {
+	case MTROTASoftwareUpdateProviderOTAApplyUpdateActionProceed:
+		return "MTROTASoftwareUpdateProviderOTAApplyUpdateActionProceed"
+	case MTROTASoftwareUpdateProviderOTAApplyUpdateActionAwaitNextAction:
+		return "MTROTASoftwareUpdateProviderOTAApplyUpdateActionAwaitNextAction"
+	case MTROTASoftwareUpdateProviderOTAApplyUpdateActionDiscontinue:
+		return "MTROTASoftwareUpdateProviderOTAApplyUpdateActionDiscontinue"
+	default:
+		return fmt.Sprintf("MTROTASoftwareUpdateProviderOTAApplyUpdateAction(%d)", int64(e))
+	}
+}
+
+type MTROTASoftwareUpdateProviderOTADownloadProtocol int64
+
+const (
+	MTROTASoftwareUpdateProviderOTADownloadProtocolBDXSynchronous  MTROTASoftwareUpdateProviderOTADownloadProtocol = 0
+	MTROTASoftwareUpdateProviderOTADownloadProtocolBDXAsynchronous MTROTASoftwareUpdateProviderOTADownloadProtocol = 1
+	MTROTASoftwareUpdateProviderOTADownloadProtocolHTTPS           MTROTASoftwareUpdateProviderOTADownloadProtocol = 2
+	MTROTASoftwareUpdateProviderOTADownloadProtocolVendorSpecific  MTROTASoftwareUpdateProviderOTADownloadProtocol = 3
+)
+
+// String returns the MTROTASoftwareUpdateProviderOTADownloadProtocol constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROTASoftwareUpdateProviderOTADownloadProtocol) String() string {
+	switch e {
+	case MTROTASoftwareUpdateProviderOTADownloadProtocolBDXSynchronous:
+		return "MTROTASoftwareUpdateProviderOTADownloadProtocolBDXSynchronous"
+	case MTROTASoftwareUpdateProviderOTADownloadProtocolBDXAsynchronous:
+		return "MTROTASoftwareUpdateProviderOTADownloadProtocolBDXAsynchronous"
+	case MTROTASoftwareUpdateProviderOTADownloadProtocolHTTPS:
+		return "MTROTASoftwareUpdateProviderOTADownloadProtocolHTTPS"
+	case MTROTASoftwareUpdateProviderOTADownloadProtocolVendorSpecific:
+		return "MTROTASoftwareUpdateProviderOTADownloadProtocolVendorSpecific"
+	default:
+		return fmt.Sprintf("MTROTASoftwareUpdateProviderOTADownloadProtocol(%d)", int64(e))
+	}
+}
+
+type MTROTASoftwareUpdateProviderOTAQueryStatus int64
+
+const (
+	MTROTASoftwareUpdateProviderOTAQueryStatusUpdateAvailable              MTROTASoftwareUpdateProviderOTAQueryStatus = 0
+	MTROTASoftwareUpdateProviderOTAQueryStatusBusy                         MTROTASoftwareUpdateProviderOTAQueryStatus = 1
+	MTROTASoftwareUpdateProviderOTAQueryStatusNotAvailable                 MTROTASoftwareUpdateProviderOTAQueryStatus = 2
+	MTROTASoftwareUpdateProviderOTAQueryStatusDownloadProtocolNotSupported MTROTASoftwareUpdateProviderOTAQueryStatus = 3
+)
+
+// String returns the MTROTASoftwareUpdateProviderOTAQueryStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROTASoftwareUpdateProviderOTAQueryStatus) String() string {
+	switch e {
+	case MTROTASoftwareUpdateProviderOTAQueryStatusUpdateAvailable:
+		return "MTROTASoftwareUpdateProviderOTAQueryStatusUpdateAvailable"
+	case MTROTASoftwareUpdateProviderOTAQueryStatusBusy:
+		return "MTROTASoftwareUpdateProviderOTAQueryStatusBusy"
+	case MTROTASoftwareUpdateProviderOTAQueryStatusNotAvailable:
+		return "MTROTASoftwareUpdateProviderOTAQueryStatusNotAvailable"
+	case MTROTASoftwareUpdateProviderOTAQueryStatusDownloadProtocolNotSupported:
+		return "MTROTASoftwareUpdateProviderOTAQueryStatusDownloadProtocolNotSupported"
+	default:
+		return fmt.Sprintf("MTROTASoftwareUpdateProviderOTAQueryStatus(%d)", int64(e))
+	}
+}
+
+type MTROTASoftwareUpdateProviderStatus int64
+
+const (
+	MTROTASoftwareUpdateProviderStatusUpdateAvailable              MTROTASoftwareUpdateProviderStatus = 0
+	MTROTASoftwareUpdateProviderStatusBusy                         MTROTASoftwareUpdateProviderStatus = 1
+	MTROTASoftwareUpdateProviderStatusNotAvailable                 MTROTASoftwareUpdateProviderStatus = 2
+	MTROTASoftwareUpdateProviderStatusDownloadProtocolNotSupported MTROTASoftwareUpdateProviderStatus = 3
+)
+
+// String returns the MTROTASoftwareUpdateProviderStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROTASoftwareUpdateProviderStatus) String() string {
+	switch e {
+	case MTROTASoftwareUpdateProviderStatusUpdateAvailable:
+		return "MTROTASoftwareUpdateProviderStatusUpdateAvailable"
+	case MTROTASoftwareUpdateProviderStatusBusy:
+		return "MTROTASoftwareUpdateProviderStatusBusy"
+	case MTROTASoftwareUpdateProviderStatusNotAvailable:
+		return "MTROTASoftwareUpdateProviderStatusNotAvailable"
+	case MTROTASoftwareUpdateProviderStatusDownloadProtocolNotSupported:
+		return "MTROTASoftwareUpdateProviderStatusDownloadProtocolNotSupported"
+	default:
+		return fmt.Sprintf("MTROTASoftwareUpdateProviderStatus(%d)", int64(e))
+	}
+}
+
+type MTROTASoftwareUpdateRequestorAnnouncementReason int64
+
+const (
+	MTROTASoftwareUpdateRequestorAnnouncementReasonSimpleAnnouncement    MTROTASoftwareUpdateRequestorAnnouncementReason = 0
+	MTROTASoftwareUpdateRequestorAnnouncementReasonUpdateAvailable       MTROTASoftwareUpdateRequestorAnnouncementReason = 1
+	MTROTASoftwareUpdateRequestorAnnouncementReasonUrgentUpdateAvailable MTROTASoftwareUpdateRequestorAnnouncementReason = 2
+)
+
+// String returns the MTROTASoftwareUpdateRequestorAnnouncementReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROTASoftwareUpdateRequestorAnnouncementReason) String() string {
+	switch e {
+	case MTROTASoftwareUpdateRequestorAnnouncementReasonSimpleAnnouncement:
+		return "MTROTASoftwareUpdateRequestorAnnouncementReasonSimpleAnnouncement"
+	case MTROTASoftwareUpdateRequestorAnnouncementReasonUpdateAvailable:
+		return "MTROTASoftwareUpdateRequestorAnnouncementReasonUpdateAvailable"
+	case MTROTASoftwareUpdateRequestorAnnouncementReasonUrgentUpdateAvailable:
+		return "MTROTASoftwareUpdateRequestorAnnouncementReasonUrgentUpdateAvailable"
+	default:
+		return fmt.Sprintf("MTROTASoftwareUpdateRequestorAnnouncementReason(%d)", int64(e))
+	}
+}
+
+type MTROTASoftwareUpdateRequestorChangeReason int64
+
+const (
+	MTROTASoftwareUpdateRequestorChangeReasonUnknown         MTROTASoftwareUpdateRequestorChangeReason = 0
+	MTROTASoftwareUpdateRequestorChangeReasonSuccess         MTROTASoftwareUpdateRequestorChangeReason = 1
+	MTROTASoftwareUpdateRequestorChangeReasonFailure         MTROTASoftwareUpdateRequestorChangeReason = 2
+	MTROTASoftwareUpdateRequestorChangeReasonTimeOut         MTROTASoftwareUpdateRequestorChangeReason = 3
+	MTROTASoftwareUpdateRequestorChangeReasonDelayByProvider MTROTASoftwareUpdateRequestorChangeReason = 4
+)
+
+// String returns the MTROTASoftwareUpdateRequestorChangeReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROTASoftwareUpdateRequestorChangeReason) String() string {
+	switch e {
+	case MTROTASoftwareUpdateRequestorChangeReasonUnknown:
+		return "MTROTASoftwareUpdateRequestorChangeReasonUnknown"
+	case MTROTASoftwareUpdateRequestorChangeReasonSuccess:
+		return "MTROTASoftwareUpdateRequestorChangeReasonSuccess"
+	case MTROTASoftwareUpdateRequestorChangeReasonFailure:
+		return "MTROTASoftwareUpdateRequestorChangeReasonFailure"
+	case MTROTASoftwareUpdateRequestorChangeReasonTimeOut:
+		return "MTROTASoftwareUpdateRequestorChangeReasonTimeOut"
+	case MTROTASoftwareUpdateRequestorChangeReasonDelayByProvider:
+		return "MTROTASoftwareUpdateRequestorChangeReasonDelayByProvider"
+	default:
+		return fmt.Sprintf("MTROTASoftwareUpdateRequestorChangeReason(%d)", int64(e))
+	}
+}
+
+type MTROTASoftwareUpdateRequestorOTAAnnouncementReason int64
+
+const (
+	MTROTASoftwareUpdateRequestorOTAAnnouncementReasonSimpleAnnouncement    MTROTASoftwareUpdateRequestorOTAAnnouncementReason = 0
+	MTROTASoftwareUpdateRequestorOTAAnnouncementReasonUpdateAvailable       MTROTASoftwareUpdateRequestorOTAAnnouncementReason = 1
+	MTROTASoftwareUpdateRequestorOTAAnnouncementReasonUrgentUpdateAvailable MTROTASoftwareUpdateRequestorOTAAnnouncementReason = 2
+)
+
+// String returns the MTROTASoftwareUpdateRequestorOTAAnnouncementReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROTASoftwareUpdateRequestorOTAAnnouncementReason) String() string {
+	switch e {
+	case MTROTASoftwareUpdateRequestorOTAAnnouncementReasonSimpleAnnouncement:
+		return "MTROTASoftwareUpdateRequestorOTAAnnouncementReasonSimpleAnnouncement"
+	case MTROTASoftwareUpdateRequestorOTAAnnouncementReasonUpdateAvailable:
+		return "MTROTASoftwareUpdateRequestorOTAAnnouncementReasonUpdateAvailable"
+	case MTROTASoftwareUpdateRequestorOTAAnnouncementReasonUrgentUpdateAvailable:
+		return "MTROTASoftwareUpdateRequestorOTAAnnouncementReasonUrgentUpdateAvailable"
+	default:
+		return fmt.Sprintf("MTROTASoftwareUpdateRequestorOTAAnnouncementReason(%d)", int64(e))
+	}
+}
+
+type MTROTASoftwareUpdateRequestorOTAChangeReason int64
+
+const (
+	MTROTASoftwareUpdateRequestorOTAChangeReasonUnknown         MTROTASoftwareUpdateRequestorOTAChangeReason = 0
+	MTROTASoftwareUpdateRequestorOTAChangeReasonSuccess         MTROTASoftwareUpdateRequestorOTAChangeReason = 1
+	MTROTASoftwareUpdateRequestorOTAChangeReasonFailure         MTROTASoftwareUpdateRequestorOTAChangeReason = 2
+	MTROTASoftwareUpdateRequestorOTAChangeReasonTimeOut         MTROTASoftwareUpdateRequestorOTAChangeReason = 3
+	MTROTASoftwareUpdateRequestorOTAChangeReasonDelayByProvider MTROTASoftwareUpdateRequestorOTAChangeReason = 4
+)
+
+// String returns the MTROTASoftwareUpdateRequestorOTAChangeReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROTASoftwareUpdateRequestorOTAChangeReason) String() string {
+	switch e {
+	case MTROTASoftwareUpdateRequestorOTAChangeReasonUnknown:
+		return "MTROTASoftwareUpdateRequestorOTAChangeReasonUnknown"
+	case MTROTASoftwareUpdateRequestorOTAChangeReasonSuccess:
+		return "MTROTASoftwareUpdateRequestorOTAChangeReasonSuccess"
+	case MTROTASoftwareUpdateRequestorOTAChangeReasonFailure:
+		return "MTROTASoftwareUpdateRequestorOTAChangeReasonFailure"
+	case MTROTASoftwareUpdateRequestorOTAChangeReasonTimeOut:
+		return "MTROTASoftwareUpdateRequestorOTAChangeReasonTimeOut"
+	case MTROTASoftwareUpdateRequestorOTAChangeReasonDelayByProvider:
+		return "MTROTASoftwareUpdateRequestorOTAChangeReasonDelayByProvider"
+	default:
+		return fmt.Sprintf("MTROTASoftwareUpdateRequestorOTAChangeReason(%d)", int64(e))
+	}
+}
+
+type MTROTASoftwareUpdateRequestorOTAUpdateState int64
+
+const (
+	MTROTASoftwareUpdateRequestorOTAUpdateStateUnknown              MTROTASoftwareUpdateRequestorOTAUpdateState = 0
+	MTROTASoftwareUpdateRequestorOTAUpdateStateIdle                 MTROTASoftwareUpdateRequestorOTAUpdateState = 1
+	MTROTASoftwareUpdateRequestorOTAUpdateStateQuerying             MTROTASoftwareUpdateRequestorOTAUpdateState = 2
+	MTROTASoftwareUpdateRequestorOTAUpdateStateDelayedOnQuery       MTROTASoftwareUpdateRequestorOTAUpdateState = 3
+	MTROTASoftwareUpdateRequestorOTAUpdateStateDownloading          MTROTASoftwareUpdateRequestorOTAUpdateState = 4
+	MTROTASoftwareUpdateRequestorOTAUpdateStateApplying             MTROTASoftwareUpdateRequestorOTAUpdateState = 5
+	MTROTASoftwareUpdateRequestorOTAUpdateStateDelayedOnApply       MTROTASoftwareUpdateRequestorOTAUpdateState = 6
+	MTROTASoftwareUpdateRequestorOTAUpdateStateRollingBack          MTROTASoftwareUpdateRequestorOTAUpdateState = 7
+	MTROTASoftwareUpdateRequestorOTAUpdateStateDelayedOnUserConsent MTROTASoftwareUpdateRequestorOTAUpdateState = 8
+)
+
+// String returns the MTROTASoftwareUpdateRequestorOTAUpdateState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROTASoftwareUpdateRequestorOTAUpdateState) String() string {
+	switch e {
+	case MTROTASoftwareUpdateRequestorOTAUpdateStateUnknown:
+		return "MTROTASoftwareUpdateRequestorOTAUpdateStateUnknown"
+	case MTROTASoftwareUpdateRequestorOTAUpdateStateIdle:
+		return "MTROTASoftwareUpdateRequestorOTAUpdateStateIdle"
+	case MTROTASoftwareUpdateRequestorOTAUpdateStateQuerying:
+		return "MTROTASoftwareUpdateRequestorOTAUpdateStateQuerying"
+	case MTROTASoftwareUpdateRequestorOTAUpdateStateDelayedOnQuery:
+		return "MTROTASoftwareUpdateRequestorOTAUpdateStateDelayedOnQuery"
+	case MTROTASoftwareUpdateRequestorOTAUpdateStateDownloading:
+		return "MTROTASoftwareUpdateRequestorOTAUpdateStateDownloading"
+	case MTROTASoftwareUpdateRequestorOTAUpdateStateApplying:
+		return "MTROTASoftwareUpdateRequestorOTAUpdateStateApplying"
+	case MTROTASoftwareUpdateRequestorOTAUpdateStateDelayedOnApply:
+		return "MTROTASoftwareUpdateRequestorOTAUpdateStateDelayedOnApply"
+	case MTROTASoftwareUpdateRequestorOTAUpdateStateRollingBack:
+		return "MTROTASoftwareUpdateRequestorOTAUpdateStateRollingBack"
+	case MTROTASoftwareUpdateRequestorOTAUpdateStateDelayedOnUserConsent:
+		return "MTROTASoftwareUpdateRequestorOTAUpdateStateDelayedOnUserConsent"
+	default:
+		return fmt.Sprintf("MTROTASoftwareUpdateRequestorOTAUpdateState(%d)", int64(e))
+	}
+}
+
+type MTROTASoftwareUpdateRequestorUpdateState int64
+
+const (
+	MTROTASoftwareUpdateRequestorUpdateStateUnknown              MTROTASoftwareUpdateRequestorUpdateState = 0
+	MTROTASoftwareUpdateRequestorUpdateStateIdle                 MTROTASoftwareUpdateRequestorUpdateState = 1
+	MTROTASoftwareUpdateRequestorUpdateStateQuerying             MTROTASoftwareUpdateRequestorUpdateState = 2
+	MTROTASoftwareUpdateRequestorUpdateStateDelayedOnQuery       MTROTASoftwareUpdateRequestorUpdateState = 3
+	MTROTASoftwareUpdateRequestorUpdateStateDownloading          MTROTASoftwareUpdateRequestorUpdateState = 4
+	MTROTASoftwareUpdateRequestorUpdateStateApplying             MTROTASoftwareUpdateRequestorUpdateState = 5
+	MTROTASoftwareUpdateRequestorUpdateStateDelayedOnApply       MTROTASoftwareUpdateRequestorUpdateState = 6
+	MTROTASoftwareUpdateRequestorUpdateStateRollingBack          MTROTASoftwareUpdateRequestorUpdateState = 7
+	MTROTASoftwareUpdateRequestorUpdateStateDelayedOnUserConsent MTROTASoftwareUpdateRequestorUpdateState = 8
+)
+
+// String returns the MTROTASoftwareUpdateRequestorUpdateState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROTASoftwareUpdateRequestorUpdateState) String() string {
+	switch e {
+	case MTROTASoftwareUpdateRequestorUpdateStateUnknown:
+		return "MTROTASoftwareUpdateRequestorUpdateStateUnknown"
+	case MTROTASoftwareUpdateRequestorUpdateStateIdle:
+		return "MTROTASoftwareUpdateRequestorUpdateStateIdle"
+	case MTROTASoftwareUpdateRequestorUpdateStateQuerying:
+		return "MTROTASoftwareUpdateRequestorUpdateStateQuerying"
+	case MTROTASoftwareUpdateRequestorUpdateStateDelayedOnQuery:
+		return "MTROTASoftwareUpdateRequestorUpdateStateDelayedOnQuery"
+	case MTROTASoftwareUpdateRequestorUpdateStateDownloading:
+		return "MTROTASoftwareUpdateRequestorUpdateStateDownloading"
+	case MTROTASoftwareUpdateRequestorUpdateStateApplying:
+		return "MTROTASoftwareUpdateRequestorUpdateStateApplying"
+	case MTROTASoftwareUpdateRequestorUpdateStateDelayedOnApply:
+		return "MTROTASoftwareUpdateRequestorUpdateStateDelayedOnApply"
+	case MTROTASoftwareUpdateRequestorUpdateStateRollingBack:
+		return "MTROTASoftwareUpdateRequestorUpdateStateRollingBack"
+	case MTROTASoftwareUpdateRequestorUpdateStateDelayedOnUserConsent:
+		return "MTROTASoftwareUpdateRequestorUpdateStateDelayedOnUserConsent"
+	default:
+		return fmt.Sprintf("MTROTASoftwareUpdateRequestorUpdateState(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTROccupancySensingFeature int64
+
+const (
+	MTROccupancySensingFeatureOther           MTROccupancySensingFeature = 1
+	MTROccupancySensingFeaturePassiveInfrared MTROccupancySensingFeature = 2
+	MTROccupancySensingFeatureUltrasonic      MTROccupancySensingFeature = 4
+	MTROccupancySensingFeaturePhysicalContact MTROccupancySensingFeature = 8
+	MTROccupancySensingFeatureActiveInfrared  MTROccupancySensingFeature = 16
+	MTROccupancySensingFeatureRadar           MTROccupancySensingFeature = 32
+	MTROccupancySensingFeatureRFSensing       MTROccupancySensingFeature = 64
+	MTROccupancySensingFeatureVision          MTROccupancySensingFeature = 128
+)
+
+// String returns the MTROccupancySensingFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROccupancySensingFeature) String() string {
+	var parts []string
+	if e&MTROccupancySensingFeatureOther != 0 {
+		parts = append(parts, "MTROccupancySensingFeatureOther")
+	}
+	if e&MTROccupancySensingFeaturePassiveInfrared != 0 {
+		parts = append(parts, "MTROccupancySensingFeaturePassiveInfrared")
+	}
+	if e&MTROccupancySensingFeatureUltrasonic != 0 {
+		parts = append(parts, "MTROccupancySensingFeatureUltrasonic")
+	}
+	if e&MTROccupancySensingFeaturePhysicalContact != 0 {
+		parts = append(parts, "MTROccupancySensingFeaturePhysicalContact")
+	}
+	if e&MTROccupancySensingFeatureActiveInfrared != 0 {
+		parts = append(parts, "MTROccupancySensingFeatureActiveInfrared")
+	}
+	if e&MTROccupancySensingFeatureRadar != 0 {
+		parts = append(parts, "MTROccupancySensingFeatureRadar")
+	}
+	if e&MTROccupancySensingFeatureRFSensing != 0 {
+		parts = append(parts, "MTROccupancySensingFeatureRFSensing")
+	}
+	if e&MTROccupancySensingFeatureVision != 0 {
+		parts = append(parts, "MTROccupancySensingFeatureVision")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTROccupancySensingOccupancyBitmap int64
+
+const (
+	MTROccupancySensingOccupancyBitmapOccupied MTROccupancySensingOccupancyBitmap = 1
+)
+
+// String returns the MTROccupancySensingOccupancyBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROccupancySensingOccupancyBitmap) String() string {
+	var parts []string
+	if e&MTROccupancySensingOccupancyBitmapOccupied != 0 {
+		parts = append(parts, "MTROccupancySensingOccupancyBitmapOccupied")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTROccupancySensingOccupancySensorType int64
+
+const (
+	MTROccupancySensingOccupancySensorTypePIR              MTROccupancySensingOccupancySensorType = 0
+	MTROccupancySensingOccupancySensorTypeUltrasonic       MTROccupancySensingOccupancySensorType = 1
+	MTROccupancySensingOccupancySensorTypePIRAndUltrasonic MTROccupancySensingOccupancySensorType = 2
+	MTROccupancySensingOccupancySensorTypePhysicalContact  MTROccupancySensingOccupancySensorType = 3
+)
+
+// String returns the MTROccupancySensingOccupancySensorType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROccupancySensingOccupancySensorType) String() string {
+	switch e {
+	case MTROccupancySensingOccupancySensorTypePIR:
+		return "MTROccupancySensingOccupancySensorTypePIR"
+	case MTROccupancySensingOccupancySensorTypeUltrasonic:
+		return "MTROccupancySensingOccupancySensorTypeUltrasonic"
+	case MTROccupancySensingOccupancySensorTypePIRAndUltrasonic:
+		return "MTROccupancySensingOccupancySensorTypePIRAndUltrasonic"
+	case MTROccupancySensingOccupancySensorTypePhysicalContact:
+		return "MTROccupancySensingOccupancySensorTypePhysicalContact"
+	default:
+		return fmt.Sprintf("MTROccupancySensingOccupancySensorType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTROccupancySensingOccupancySensorTypeBitmap int64
+
+const (
+	MTROccupancySensingOccupancySensorTypeBitmapPIR             MTROccupancySensingOccupancySensorTypeBitmap = 1
+	MTROccupancySensingOccupancySensorTypeBitmapUltrasonic      MTROccupancySensingOccupancySensorTypeBitmap = 2
+	MTROccupancySensingOccupancySensorTypeBitmapPhysicalContact MTROccupancySensingOccupancySensorTypeBitmap = 4
+)
+
+// String returns the MTROccupancySensingOccupancySensorTypeBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROccupancySensingOccupancySensorTypeBitmap) String() string {
+	var parts []string
+	if e&MTROccupancySensingOccupancySensorTypeBitmapPIR != 0 {
+		parts = append(parts, "MTROccupancySensingOccupancySensorTypeBitmapPIR")
+	}
+	if e&MTROccupancySensingOccupancySensorTypeBitmapUltrasonic != 0 {
+		parts = append(parts, "MTROccupancySensingOccupancySensorTypeBitmapUltrasonic")
+	}
+	if e&MTROccupancySensingOccupancySensorTypeBitmapPhysicalContact != 0 {
+		parts = append(parts, "MTROccupancySensingOccupancySensorTypeBitmapPhysicalContact")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTROnOffControl int64
+
+const (
+	MTROnOffControlAcceptOnlyWhenOn MTROnOffControl = 1
+)
+
+// String returns the MTROnOffControl constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROnOffControl) String() string {
+	var parts []string
+	if e&MTROnOffControlAcceptOnlyWhenOn != 0 {
+		parts = append(parts, "MTROnOffControlAcceptOnlyWhenOn")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTROnOffControlBitmap int64
+
+const (
+	MTROnOffControlBitmapAcceptOnlyWhenOn MTROnOffControlBitmap = 1
+)
+
+// String returns the MTROnOffControlBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROnOffControlBitmap) String() string {
+	var parts []string
+	if e&MTROnOffControlBitmapAcceptOnlyWhenOn != 0 {
+		parts = append(parts, "MTROnOffControlBitmapAcceptOnlyWhenOn")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTROnOffDelayedAllOffEffectVariant int64
+
+const (
+	MTROnOffDelayedAllOffEffectVariantDelayedOffFastFade                                   MTROnOffDelayedAllOffEffectVariant = 0
+	MTROnOffDelayedAllOffEffectVariantFadeToOffIn0p8Seconds                                MTROnOffDelayedAllOffEffectVariant = 0
+	MTROnOffDelayedAllOffEffectVariantNoFade                                               MTROnOffDelayedAllOffEffectVariant = 1
+	MTROnOffDelayedAllOffEffectVariantDelayedOffSlowFade                                   MTROnOffDelayedAllOffEffectVariant = 2
+	MTROnOffDelayedAllOffEffectVariant50PercentDimDownIn0p8SecondsThenFadeToOffIn12Seconds MTROnOffDelayedAllOffEffectVariant = 2
+)
+
+// String returns the MTROnOffDelayedAllOffEffectVariant constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROnOffDelayedAllOffEffectVariant) String() string {
+	switch e {
+	case MTROnOffDelayedAllOffEffectVariantDelayedOffFastFade:
+		return "MTROnOffDelayedAllOffEffectVariantDelayedOffFastFade"
+	case MTROnOffDelayedAllOffEffectVariantNoFade:
+		return "MTROnOffDelayedAllOffEffectVariantNoFade"
+	case MTROnOffDelayedAllOffEffectVariantDelayedOffSlowFade:
+		return "MTROnOffDelayedAllOffEffectVariantDelayedOffSlowFade"
+	default:
+		return fmt.Sprintf("MTROnOffDelayedAllOffEffectVariant(%d)", int64(e))
+	}
+}
+
+type MTROnOffDyingLightEffectVariant int64
+
+const (
+	MTROnOffDyingLightEffectVariantDyingLightFadeOff                                  MTROnOffDyingLightEffectVariant = 0
+	MTROnOffDyingLightEffectVariant20PercenterDimUpIn0p5SecondsThenFadeToOffIn1Second MTROnOffDyingLightEffectVariant = 0
+)
+
+// String returns the MTROnOffDyingLightEffectVariant constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROnOffDyingLightEffectVariant) String() string {
+	switch e {
+	case MTROnOffDyingLightEffectVariantDyingLightFadeOff:
+		return "MTROnOffDyingLightEffectVariantDyingLightFadeOff"
+	default:
+		return fmt.Sprintf("MTROnOffDyingLightEffectVariant(%d)", int64(e))
+	}
+}
+
+type MTROnOffEffectIdentifier int64
+
+const (
+	MTROnOffEffectIdentifierDelayedAllOff MTROnOffEffectIdentifier = 0
+	MTROnOffEffectIdentifierDyingLight    MTROnOffEffectIdentifier = 1
+)
+
+// String returns the MTROnOffEffectIdentifier constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROnOffEffectIdentifier) String() string {
+	switch e {
+	case MTROnOffEffectIdentifierDelayedAllOff:
+		return "MTROnOffEffectIdentifierDelayedAllOff"
+	case MTROnOffEffectIdentifierDyingLight:
+		return "MTROnOffEffectIdentifierDyingLight"
+	default:
+		return fmt.Sprintf("MTROnOffEffectIdentifier(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTROnOffFeature int64
+
+const (
+	MTROnOffFeatureLighting          MTROnOffFeature = 1
+	MTROnOffFeatureDeadFrontBehavior MTROnOffFeature = 2
+	MTROnOffFeatureDeadFront         MTROnOffFeature = 2
+	MTROnOffFeatureOffOnly           MTROnOffFeature = 4
+)
+
+// String returns the MTROnOffFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROnOffFeature) String() string {
+	var parts []string
+	if e&MTROnOffFeatureLighting != 0 {
+		parts = append(parts, "MTROnOffFeatureLighting")
+	}
+	if e&MTROnOffFeatureDeadFrontBehavior != 0 {
+		parts = append(parts, "MTROnOffFeatureDeadFrontBehavior")
+	}
+	if e&MTROnOffFeatureDeadFront != 0 {
+		parts = append(parts, "MTROnOffFeatureDeadFront")
+	}
+	if e&MTROnOffFeatureOffOnly != 0 {
+		parts = append(parts, "MTROnOffFeatureOffOnly")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTROnOffStartUpOnOff int64
+
+const (
+	MTROnOffStartUpOnOffOff                 MTROnOffStartUpOnOff = 0
+	MTROnOffStartUpOnOffOn                  MTROnOffStartUpOnOff = 1
+	MTROnOffStartUpOnOffToggle              MTROnOffStartUpOnOff = 2
+	MTROnOffStartUpOnOffTogglePreviousOnOff MTROnOffStartUpOnOff = 2
+)
+
+// String returns the MTROnOffStartUpOnOff constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROnOffStartUpOnOff) String() string {
+	switch e {
+	case MTROnOffStartUpOnOffOff:
+		return "MTROnOffStartUpOnOffOff"
+	case MTROnOffStartUpOnOffOn:
+		return "MTROnOffStartUpOnOffOn"
+	case MTROnOffStartUpOnOffToggle:
+		return "MTROnOffStartUpOnOffToggle"
+	default:
+		return fmt.Sprintf("MTROnOffStartUpOnOff(%d)", int64(e))
+	}
+}
+
+type MTROnboardingPayloadType uint64
+
+const (
+	MTROnboardingPayloadTypeQRCode     MTROnboardingPayloadType = 0
+	MTROnboardingPayloadTypeManualCode MTROnboardingPayloadType = 1
+	MTROnboardingPayloadTypeNFC        MTROnboardingPayloadType = 2
+)
+
+// String returns the MTROnboardingPayloadType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROnboardingPayloadType) String() string {
+	switch e {
+	case MTROnboardingPayloadTypeQRCode:
+		return "MTROnboardingPayloadTypeQRCode"
+	case MTROnboardingPayloadTypeManualCode:
+		return "MTROnboardingPayloadTypeManualCode"
+	case MTROnboardingPayloadTypeNFC:
+		return "MTROnboardingPayloadTypeNFC"
+	default:
+		return fmt.Sprintf("MTROnboardingPayloadType(%d)", int64(e))
+	}
+}
+
+type MTROperationalCredentialsCertificateChainType int64
+
+const (
+	MTROperationalCredentialsCertificateChainTypeDACCertificate MTROperationalCredentialsCertificateChainType = 1
+	MTROperationalCredentialsCertificateChainTypePAICertificate MTROperationalCredentialsCertificateChainType = 2
+)
+
+// String returns the MTROperationalCredentialsCertificateChainType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROperationalCredentialsCertificateChainType) String() string {
+	switch e {
+	case MTROperationalCredentialsCertificateChainTypeDACCertificate:
+		return "MTROperationalCredentialsCertificateChainTypeDACCertificate"
+	case MTROperationalCredentialsCertificateChainTypePAICertificate:
+		return "MTROperationalCredentialsCertificateChainTypePAICertificate"
+	default:
+		return fmt.Sprintf("MTROperationalCredentialsCertificateChainType(%d)", int64(e))
+	}
+}
+
+type MTROperationalCredentialsNodeOperationalCertStatus int64
+
+const (
+	MTROperationalCredentialsNodeOperationalCertStatusOK                  MTROperationalCredentialsNodeOperationalCertStatus = 0
+	MTROperationalCredentialsNodeOperationalCertStatusInvalidPublicKey    MTROperationalCredentialsNodeOperationalCertStatus = 1
+	MTROperationalCredentialsNodeOperationalCertStatusInvalidNodeOpId     MTROperationalCredentialsNodeOperationalCertStatus = 2
+	MTROperationalCredentialsNodeOperationalCertStatusInvalidNOC          MTROperationalCredentialsNodeOperationalCertStatus = 3
+	MTROperationalCredentialsNodeOperationalCertStatusMissingCsr          MTROperationalCredentialsNodeOperationalCertStatus = 4
+	MTROperationalCredentialsNodeOperationalCertStatusTableFull           MTROperationalCredentialsNodeOperationalCertStatus = 5
+	MTROperationalCredentialsNodeOperationalCertStatusInvalidAdminSubject MTROperationalCredentialsNodeOperationalCertStatus = 6
+	MTROperationalCredentialsNodeOperationalCertStatusFabricConflict      MTROperationalCredentialsNodeOperationalCertStatus = 9
+	MTROperationalCredentialsNodeOperationalCertStatusLabelConflict       MTROperationalCredentialsNodeOperationalCertStatus = 10
+	MTROperationalCredentialsNodeOperationalCertStatusInvalidFabricIndex  MTROperationalCredentialsNodeOperationalCertStatus = 11
+)
+
+// String returns the MTROperationalCredentialsNodeOperationalCertStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROperationalCredentialsNodeOperationalCertStatus) String() string {
+	switch e {
+	case MTROperationalCredentialsNodeOperationalCertStatusOK:
+		return "MTROperationalCredentialsNodeOperationalCertStatusOK"
+	case MTROperationalCredentialsNodeOperationalCertStatusInvalidPublicKey:
+		return "MTROperationalCredentialsNodeOperationalCertStatusInvalidPublicKey"
+	case MTROperationalCredentialsNodeOperationalCertStatusInvalidNodeOpId:
+		return "MTROperationalCredentialsNodeOperationalCertStatusInvalidNodeOpId"
+	case MTROperationalCredentialsNodeOperationalCertStatusInvalidNOC:
+		return "MTROperationalCredentialsNodeOperationalCertStatusInvalidNOC"
+	case MTROperationalCredentialsNodeOperationalCertStatusMissingCsr:
+		return "MTROperationalCredentialsNodeOperationalCertStatusMissingCsr"
+	case MTROperationalCredentialsNodeOperationalCertStatusTableFull:
+		return "MTROperationalCredentialsNodeOperationalCertStatusTableFull"
+	case MTROperationalCredentialsNodeOperationalCertStatusInvalidAdminSubject:
+		return "MTROperationalCredentialsNodeOperationalCertStatusInvalidAdminSubject"
+	case MTROperationalCredentialsNodeOperationalCertStatusFabricConflict:
+		return "MTROperationalCredentialsNodeOperationalCertStatusFabricConflict"
+	case MTROperationalCredentialsNodeOperationalCertStatusLabelConflict:
+		return "MTROperationalCredentialsNodeOperationalCertStatusLabelConflict"
+	case MTROperationalCredentialsNodeOperationalCertStatusInvalidFabricIndex:
+		return "MTROperationalCredentialsNodeOperationalCertStatusInvalidFabricIndex"
+	default:
+		return fmt.Sprintf("MTROperationalCredentialsNodeOperationalCertStatus(%d)", int64(e))
+	}
+}
+
+type MTROperationalCredentialsOperationalCertStatus int64
+
+const (
+	MTROperationalCredentialsOperationalCertStatusSUCCESS             MTROperationalCredentialsOperationalCertStatus = 0
+	MTROperationalCredentialsOperationalCertStatusInvalidPublicKey    MTROperationalCredentialsOperationalCertStatus = 1
+	MTROperationalCredentialsOperationalCertStatusInvalidNodeOpId     MTROperationalCredentialsOperationalCertStatus = 2
+	MTROperationalCredentialsOperationalCertStatusInvalidNOC          MTROperationalCredentialsOperationalCertStatus = 3
+	MTROperationalCredentialsOperationalCertStatusMissingCsr          MTROperationalCredentialsOperationalCertStatus = 4
+	MTROperationalCredentialsOperationalCertStatusTableFull           MTROperationalCredentialsOperationalCertStatus = 5
+	MTROperationalCredentialsOperationalCertStatusInvalidAdminSubject MTROperationalCredentialsOperationalCertStatus = 6
+	MTROperationalCredentialsOperationalCertStatusFabricConflict      MTROperationalCredentialsOperationalCertStatus = 9
+	MTROperationalCredentialsOperationalCertStatusLabelConflict       MTROperationalCredentialsOperationalCertStatus = 10
+	MTROperationalCredentialsOperationalCertStatusInvalidFabricIndex  MTROperationalCredentialsOperationalCertStatus = 11
+)
+
+// String returns the MTROperationalCredentialsOperationalCertStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROperationalCredentialsOperationalCertStatus) String() string {
+	switch e {
+	case MTROperationalCredentialsOperationalCertStatusSUCCESS:
+		return "MTROperationalCredentialsOperationalCertStatusSUCCESS"
+	case MTROperationalCredentialsOperationalCertStatusInvalidPublicKey:
+		return "MTROperationalCredentialsOperationalCertStatusInvalidPublicKey"
+	case MTROperationalCredentialsOperationalCertStatusInvalidNodeOpId:
+		return "MTROperationalCredentialsOperationalCertStatusInvalidNodeOpId"
+	case MTROperationalCredentialsOperationalCertStatusInvalidNOC:
+		return "MTROperationalCredentialsOperationalCertStatusInvalidNOC"
+	case MTROperationalCredentialsOperationalCertStatusMissingCsr:
+		return "MTROperationalCredentialsOperationalCertStatusMissingCsr"
+	case MTROperationalCredentialsOperationalCertStatusTableFull:
+		return "MTROperationalCredentialsOperationalCertStatusTableFull"
+	case MTROperationalCredentialsOperationalCertStatusInvalidAdminSubject:
+		return "MTROperationalCredentialsOperationalCertStatusInvalidAdminSubject"
+	case MTROperationalCredentialsOperationalCertStatusFabricConflict:
+		return "MTROperationalCredentialsOperationalCertStatusFabricConflict"
+	case MTROperationalCredentialsOperationalCertStatusLabelConflict:
+		return "MTROperationalCredentialsOperationalCertStatusLabelConflict"
+	case MTROperationalCredentialsOperationalCertStatusInvalidFabricIndex:
+		return "MTROperationalCredentialsOperationalCertStatusInvalidFabricIndex"
+	default:
+		return fmt.Sprintf("MTROperationalCredentialsOperationalCertStatus(%d)", int64(e))
+	}
+}
+
+type MTROperationalState int64
+
+const (
+	MTROperationalStateStopped MTROperationalState = 0
+	MTROperationalStateRunning MTROperationalState = 1
+	MTROperationalStatePaused  MTROperationalState = 2
+	MTROperationalStateError   MTROperationalState = 3
+)
+
+// String returns the MTROperationalState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROperationalState) String() string {
+	switch e {
+	case MTROperationalStateStopped:
+		return "MTROperationalStateStopped"
+	case MTROperationalStateRunning:
+		return "MTROperationalStateRunning"
+	case MTROperationalStatePaused:
+		return "MTROperationalStatePaused"
+	case MTROperationalStateError:
+		return "MTROperationalStateError"
+	default:
+		return fmt.Sprintf("MTROperationalState(%d)", int64(e))
+	}
+}
+
+type MTROperationalStateErrorState int64
+
+const (
+	MTROperationalStateErrorStateNoError                   MTROperationalStateErrorState = 0
+	MTROperationalStateErrorStateUnableToStartOrResume     MTROperationalStateErrorState = 1
+	MTROperationalStateErrorStateUnableToCompleteOperation MTROperationalStateErrorState = 2
+	MTROperationalStateErrorStateCommandInvalidInState     MTROperationalStateErrorState = 3
+)
+
+// String returns the MTROperationalStateErrorState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROperationalStateErrorState) String() string {
+	switch e {
+	case MTROperationalStateErrorStateNoError:
+		return "MTROperationalStateErrorStateNoError"
+	case MTROperationalStateErrorStateUnableToStartOrResume:
+		return "MTROperationalStateErrorStateUnableToStartOrResume"
+	case MTROperationalStateErrorStateUnableToCompleteOperation:
+		return "MTROperationalStateErrorStateUnableToCompleteOperation"
+	case MTROperationalStateErrorStateCommandInvalidInState:
+		return "MTROperationalStateErrorStateCommandInvalidInState"
+	default:
+		return fmt.Sprintf("MTROperationalStateErrorState(%d)", int64(e))
+	}
+}
+
+type MTROtaSoftwareUpdateProviderOTAApplyUpdateAction int64
+
+const (
+	MTROtaSoftwareUpdateProviderOTAApplyUpdateActionProceed         MTROtaSoftwareUpdateProviderOTAApplyUpdateAction = 0
+	MTROtaSoftwareUpdateProviderOTAApplyUpdateActionAwaitNextAction MTROtaSoftwareUpdateProviderOTAApplyUpdateAction = 1
+	MTROtaSoftwareUpdateProviderOTAApplyUpdateActionDiscontinue     MTROtaSoftwareUpdateProviderOTAApplyUpdateAction = 2
+)
+
+// String returns the MTROtaSoftwareUpdateProviderOTAApplyUpdateAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROtaSoftwareUpdateProviderOTAApplyUpdateAction) String() string {
+	switch e {
+	case MTROtaSoftwareUpdateProviderOTAApplyUpdateActionProceed:
+		return "MTROtaSoftwareUpdateProviderOTAApplyUpdateActionProceed"
+	case MTROtaSoftwareUpdateProviderOTAApplyUpdateActionAwaitNextAction:
+		return "MTROtaSoftwareUpdateProviderOTAApplyUpdateActionAwaitNextAction"
+	case MTROtaSoftwareUpdateProviderOTAApplyUpdateActionDiscontinue:
+		return "MTROtaSoftwareUpdateProviderOTAApplyUpdateActionDiscontinue"
+	default:
+		return fmt.Sprintf("MTROtaSoftwareUpdateProviderOTAApplyUpdateAction(%d)", int64(e))
+	}
+}
+
+type MTROtaSoftwareUpdateProviderOTADownloadProtocol int64
+
+const (
+	MTROtaSoftwareUpdateProviderOTADownloadProtocolBDXSynchronous  MTROtaSoftwareUpdateProviderOTADownloadProtocol = 0
+	MTROtaSoftwareUpdateProviderOTADownloadProtocolBDXAsynchronous MTROtaSoftwareUpdateProviderOTADownloadProtocol = 1
+	MTROtaSoftwareUpdateProviderOTADownloadProtocolHTTPS           MTROtaSoftwareUpdateProviderOTADownloadProtocol = 2
+	MTROtaSoftwareUpdateProviderOTADownloadProtocolVendorSpecific  MTROtaSoftwareUpdateProviderOTADownloadProtocol = 3
+)
+
+// String returns the MTROtaSoftwareUpdateProviderOTADownloadProtocol constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROtaSoftwareUpdateProviderOTADownloadProtocol) String() string {
+	switch e {
+	case MTROtaSoftwareUpdateProviderOTADownloadProtocolBDXSynchronous:
+		return "MTROtaSoftwareUpdateProviderOTADownloadProtocolBDXSynchronous"
+	case MTROtaSoftwareUpdateProviderOTADownloadProtocolBDXAsynchronous:
+		return "MTROtaSoftwareUpdateProviderOTADownloadProtocolBDXAsynchronous"
+	case MTROtaSoftwareUpdateProviderOTADownloadProtocolHTTPS:
+		return "MTROtaSoftwareUpdateProviderOTADownloadProtocolHTTPS"
+	case MTROtaSoftwareUpdateProviderOTADownloadProtocolVendorSpecific:
+		return "MTROtaSoftwareUpdateProviderOTADownloadProtocolVendorSpecific"
+	default:
+		return fmt.Sprintf("MTROtaSoftwareUpdateProviderOTADownloadProtocol(%d)", int64(e))
+	}
+}
+
+type MTROtaSoftwareUpdateProviderOTAQueryStatus int64
+
+const (
+	MTROtaSoftwareUpdateProviderOTAQueryStatusUpdateAvailable              MTROtaSoftwareUpdateProviderOTAQueryStatus = 0
+	MTROtaSoftwareUpdateProviderOTAQueryStatusBusy                         MTROtaSoftwareUpdateProviderOTAQueryStatus = 1
+	MTROtaSoftwareUpdateProviderOTAQueryStatusNotAvailable                 MTROtaSoftwareUpdateProviderOTAQueryStatus = 2
+	MTROtaSoftwareUpdateProviderOTAQueryStatusDownloadProtocolNotSupported MTROtaSoftwareUpdateProviderOTAQueryStatus = 3
+)
+
+// String returns the MTROtaSoftwareUpdateProviderOTAQueryStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROtaSoftwareUpdateProviderOTAQueryStatus) String() string {
+	switch e {
+	case MTROtaSoftwareUpdateProviderOTAQueryStatusUpdateAvailable:
+		return "MTROtaSoftwareUpdateProviderOTAQueryStatusUpdateAvailable"
+	case MTROtaSoftwareUpdateProviderOTAQueryStatusBusy:
+		return "MTROtaSoftwareUpdateProviderOTAQueryStatusBusy"
+	case MTROtaSoftwareUpdateProviderOTAQueryStatusNotAvailable:
+		return "MTROtaSoftwareUpdateProviderOTAQueryStatusNotAvailable"
+	case MTROtaSoftwareUpdateProviderOTAQueryStatusDownloadProtocolNotSupported:
+		return "MTROtaSoftwareUpdateProviderOTAQueryStatusDownloadProtocolNotSupported"
+	default:
+		return fmt.Sprintf("MTROtaSoftwareUpdateProviderOTAQueryStatus(%d)", int64(e))
+	}
+}
+
+type MTROtaSoftwareUpdateRequestorOTAAnnouncementReason int64
+
+const (
+	MTROtaSoftwareUpdateRequestorOTAAnnouncementReasonSimpleAnnouncement    MTROtaSoftwareUpdateRequestorOTAAnnouncementReason = 0
+	MTROtaSoftwareUpdateRequestorOTAAnnouncementReasonUpdateAvailable       MTROtaSoftwareUpdateRequestorOTAAnnouncementReason = 1
+	MTROtaSoftwareUpdateRequestorOTAAnnouncementReasonUrgentUpdateAvailable MTROtaSoftwareUpdateRequestorOTAAnnouncementReason = 2
+)
+
+// String returns the MTROtaSoftwareUpdateRequestorOTAAnnouncementReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROtaSoftwareUpdateRequestorOTAAnnouncementReason) String() string {
+	switch e {
+	case MTROtaSoftwareUpdateRequestorOTAAnnouncementReasonSimpleAnnouncement:
+		return "MTROtaSoftwareUpdateRequestorOTAAnnouncementReasonSimpleAnnouncement"
+	case MTROtaSoftwareUpdateRequestorOTAAnnouncementReasonUpdateAvailable:
+		return "MTROtaSoftwareUpdateRequestorOTAAnnouncementReasonUpdateAvailable"
+	case MTROtaSoftwareUpdateRequestorOTAAnnouncementReasonUrgentUpdateAvailable:
+		return "MTROtaSoftwareUpdateRequestorOTAAnnouncementReasonUrgentUpdateAvailable"
+	default:
+		return fmt.Sprintf("MTROtaSoftwareUpdateRequestorOTAAnnouncementReason(%d)", int64(e))
+	}
+}
+
+type MTROtaSoftwareUpdateRequestorOTAChangeReason int64
+
+const (
+	MTROtaSoftwareUpdateRequestorOTAChangeReasonUnknown         MTROtaSoftwareUpdateRequestorOTAChangeReason = 0
+	MTROtaSoftwareUpdateRequestorOTAChangeReasonSuccess         MTROtaSoftwareUpdateRequestorOTAChangeReason = 1
+	MTROtaSoftwareUpdateRequestorOTAChangeReasonFailure         MTROtaSoftwareUpdateRequestorOTAChangeReason = 2
+	MTROtaSoftwareUpdateRequestorOTAChangeReasonTimeOut         MTROtaSoftwareUpdateRequestorOTAChangeReason = 3
+	MTROtaSoftwareUpdateRequestorOTAChangeReasonDelayByProvider MTROtaSoftwareUpdateRequestorOTAChangeReason = 4
+)
+
+// String returns the MTROtaSoftwareUpdateRequestorOTAChangeReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROtaSoftwareUpdateRequestorOTAChangeReason) String() string {
+	switch e {
+	case MTROtaSoftwareUpdateRequestorOTAChangeReasonUnknown:
+		return "MTROtaSoftwareUpdateRequestorOTAChangeReasonUnknown"
+	case MTROtaSoftwareUpdateRequestorOTAChangeReasonSuccess:
+		return "MTROtaSoftwareUpdateRequestorOTAChangeReasonSuccess"
+	case MTROtaSoftwareUpdateRequestorOTAChangeReasonFailure:
+		return "MTROtaSoftwareUpdateRequestorOTAChangeReasonFailure"
+	case MTROtaSoftwareUpdateRequestorOTAChangeReasonTimeOut:
+		return "MTROtaSoftwareUpdateRequestorOTAChangeReasonTimeOut"
+	case MTROtaSoftwareUpdateRequestorOTAChangeReasonDelayByProvider:
+		return "MTROtaSoftwareUpdateRequestorOTAChangeReasonDelayByProvider"
+	default:
+		return fmt.Sprintf("MTROtaSoftwareUpdateRequestorOTAChangeReason(%d)", int64(e))
+	}
+}
+
+type MTROtaSoftwareUpdateRequestorOTAUpdateState int64
+
+const (
+	MTROtaSoftwareUpdateRequestorOTAUpdateStateUnknown              MTROtaSoftwareUpdateRequestorOTAUpdateState = 0
+	MTROtaSoftwareUpdateRequestorOTAUpdateStateIdle                 MTROtaSoftwareUpdateRequestorOTAUpdateState = 1
+	MTROtaSoftwareUpdateRequestorOTAUpdateStateQuerying             MTROtaSoftwareUpdateRequestorOTAUpdateState = 2
+	MTROtaSoftwareUpdateRequestorOTAUpdateStateDelayedOnQuery       MTROtaSoftwareUpdateRequestorOTAUpdateState = 3
+	MTROtaSoftwareUpdateRequestorOTAUpdateStateDownloading          MTROtaSoftwareUpdateRequestorOTAUpdateState = 4
+	MTROtaSoftwareUpdateRequestorOTAUpdateStateApplying             MTROtaSoftwareUpdateRequestorOTAUpdateState = 5
+	MTROtaSoftwareUpdateRequestorOTAUpdateStateDelayedOnApply       MTROtaSoftwareUpdateRequestorOTAUpdateState = 6
+	MTROtaSoftwareUpdateRequestorOTAUpdateStateRollingBack          MTROtaSoftwareUpdateRequestorOTAUpdateState = 7
+	MTROtaSoftwareUpdateRequestorOTAUpdateStateDelayedOnUserConsent MTROtaSoftwareUpdateRequestorOTAUpdateState = 8
+)
+
+// String returns the MTROtaSoftwareUpdateRequestorOTAUpdateState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROtaSoftwareUpdateRequestorOTAUpdateState) String() string {
+	switch e {
+	case MTROtaSoftwareUpdateRequestorOTAUpdateStateUnknown:
+		return "MTROtaSoftwareUpdateRequestorOTAUpdateStateUnknown"
+	case MTROtaSoftwareUpdateRequestorOTAUpdateStateIdle:
+		return "MTROtaSoftwareUpdateRequestorOTAUpdateStateIdle"
+	case MTROtaSoftwareUpdateRequestorOTAUpdateStateQuerying:
+		return "MTROtaSoftwareUpdateRequestorOTAUpdateStateQuerying"
+	case MTROtaSoftwareUpdateRequestorOTAUpdateStateDelayedOnQuery:
+		return "MTROtaSoftwareUpdateRequestorOTAUpdateStateDelayedOnQuery"
+	case MTROtaSoftwareUpdateRequestorOTAUpdateStateDownloading:
+		return "MTROtaSoftwareUpdateRequestorOTAUpdateStateDownloading"
+	case MTROtaSoftwareUpdateRequestorOTAUpdateStateApplying:
+		return "MTROtaSoftwareUpdateRequestorOTAUpdateStateApplying"
+	case MTROtaSoftwareUpdateRequestorOTAUpdateStateDelayedOnApply:
+		return "MTROtaSoftwareUpdateRequestorOTAUpdateStateDelayedOnApply"
+	case MTROtaSoftwareUpdateRequestorOTAUpdateStateRollingBack:
+		return "MTROtaSoftwareUpdateRequestorOTAUpdateStateRollingBack"
+	case MTROtaSoftwareUpdateRequestorOTAUpdateStateDelayedOnUserConsent:
+		return "MTROtaSoftwareUpdateRequestorOTAUpdateStateDelayedOnUserConsent"
+	default:
+		return fmt.Sprintf("MTROtaSoftwareUpdateRequestorOTAUpdateState(%d)", int64(e))
+	}
+}
+
+type MTROvenCavityOperationalStateErrorState int64
+
+const (
+	MTROvenCavityOperationalStateErrorStateNoError                   MTROvenCavityOperationalStateErrorState = 0
+	MTROvenCavityOperationalStateErrorStateUnableToStartOrResume     MTROvenCavityOperationalStateErrorState = 1
+	MTROvenCavityOperationalStateErrorStateUnableToCompleteOperation MTROvenCavityOperationalStateErrorState = 2
+	MTROvenCavityOperationalStateErrorStateCommandInvalidInState     MTROvenCavityOperationalStateErrorState = 3
+)
+
+// String returns the MTROvenCavityOperationalStateErrorState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROvenCavityOperationalStateErrorState) String() string {
+	switch e {
+	case MTROvenCavityOperationalStateErrorStateNoError:
+		return "MTROvenCavityOperationalStateErrorStateNoError"
+	case MTROvenCavityOperationalStateErrorStateUnableToStartOrResume:
+		return "MTROvenCavityOperationalStateErrorStateUnableToStartOrResume"
+	case MTROvenCavityOperationalStateErrorStateUnableToCompleteOperation:
+		return "MTROvenCavityOperationalStateErrorStateUnableToCompleteOperation"
+	case MTROvenCavityOperationalStateErrorStateCommandInvalidInState:
+		return "MTROvenCavityOperationalStateErrorStateCommandInvalidInState"
+	default:
+		return fmt.Sprintf("MTROvenCavityOperationalStateErrorState(%d)", int64(e))
+	}
+}
+
+type MTROvenCavityOperationalStateOperationalState int64
+
+const (
+	MTROvenCavityOperationalStateOperationalStateStopped MTROvenCavityOperationalStateOperationalState = 0
+	MTROvenCavityOperationalStateOperationalStateRunning MTROvenCavityOperationalStateOperationalState = 1
+	MTROvenCavityOperationalStateOperationalStatePaused  MTROvenCavityOperationalStateOperationalState = 2
+	MTROvenCavityOperationalStateOperationalStateError   MTROvenCavityOperationalStateOperationalState = 3
+)
+
+// String returns the MTROvenCavityOperationalStateOperationalState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROvenCavityOperationalStateOperationalState) String() string {
+	switch e {
+	case MTROvenCavityOperationalStateOperationalStateStopped:
+		return "MTROvenCavityOperationalStateOperationalStateStopped"
+	case MTROvenCavityOperationalStateOperationalStateRunning:
+		return "MTROvenCavityOperationalStateOperationalStateRunning"
+	case MTROvenCavityOperationalStateOperationalStatePaused:
+		return "MTROvenCavityOperationalStateOperationalStatePaused"
+	case MTROvenCavityOperationalStateOperationalStateError:
+		return "MTROvenCavityOperationalStateOperationalStateError"
+	default:
+		return fmt.Sprintf("MTROvenCavityOperationalStateOperationalState(%d)", int64(e))
+	}
+}
+
+type MTROvenModeModeTag int64
+
+const (
+	MTROvenModeModeTagAuto            MTROvenModeModeTag = 0
+	MTROvenModeModeTagQuick           MTROvenModeModeTag = 1
+	MTROvenModeModeTagQuiet           MTROvenModeModeTag = 2
+	MTROvenModeModeTagLowNoise        MTROvenModeModeTag = 3
+	MTROvenModeModeTagLowEnergy       MTROvenModeModeTag = 4
+	MTROvenModeModeTagVacation        MTROvenModeModeTag = 5
+	MTROvenModeModeTagMin             MTROvenModeModeTag = 6
+	MTROvenModeModeTagMax             MTROvenModeModeTag = 7
+	MTROvenModeModeTagNight           MTROvenModeModeTag = 8
+	MTROvenModeModeTagDay             MTROvenModeModeTag = 9
+	MTROvenModeModeTagBake            MTROvenModeModeTag = 16384
+	MTROvenModeModeTagConvection      MTROvenModeModeTag = 16385
+	MTROvenModeModeTagGrill           MTROvenModeModeTag = 16386
+	MTROvenModeModeTagRoast           MTROvenModeModeTag = 16387
+	MTROvenModeModeTagClean           MTROvenModeModeTag = 16388
+	MTROvenModeModeTagConvectionBake  MTROvenModeModeTag = 16389
+	MTROvenModeModeTagConvectionRoast MTROvenModeModeTag = 16390
+	MTROvenModeModeTagWarming         MTROvenModeModeTag = 16391
+	MTROvenModeModeTagProofing        MTROvenModeModeTag = 16392
+)
+
+// String returns the MTROvenModeModeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROvenModeModeTag) String() string {
+	switch e {
+	case MTROvenModeModeTagAuto:
+		return "MTROvenModeModeTagAuto"
+	case MTROvenModeModeTagQuick:
+		return "MTROvenModeModeTagQuick"
+	case MTROvenModeModeTagQuiet:
+		return "MTROvenModeModeTagQuiet"
+	case MTROvenModeModeTagLowNoise:
+		return "MTROvenModeModeTagLowNoise"
+	case MTROvenModeModeTagLowEnergy:
+		return "MTROvenModeModeTagLowEnergy"
+	case MTROvenModeModeTagVacation:
+		return "MTROvenModeModeTagVacation"
+	case MTROvenModeModeTagMin:
+		return "MTROvenModeModeTagMin"
+	case MTROvenModeModeTagMax:
+		return "MTROvenModeModeTagMax"
+	case MTROvenModeModeTagNight:
+		return "MTROvenModeModeTagNight"
+	case MTROvenModeModeTagDay:
+		return "MTROvenModeModeTagDay"
+	case MTROvenModeModeTagBake:
+		return "MTROvenModeModeTagBake"
+	case MTROvenModeModeTagConvection:
+		return "MTROvenModeModeTagConvection"
+	case MTROvenModeModeTagGrill:
+		return "MTROvenModeModeTagGrill"
+	case MTROvenModeModeTagRoast:
+		return "MTROvenModeModeTagRoast"
+	case MTROvenModeModeTagClean:
+		return "MTROvenModeModeTagClean"
+	case MTROvenModeModeTagConvectionBake:
+		return "MTROvenModeModeTagConvectionBake"
+	case MTROvenModeModeTagConvectionRoast:
+		return "MTROvenModeModeTagConvectionRoast"
+	case MTROvenModeModeTagWarming:
+		return "MTROvenModeModeTagWarming"
+	case MTROvenModeModeTagProofing:
+		return "MTROvenModeModeTagProofing"
+	default:
+		return fmt.Sprintf("MTROvenModeModeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTROzoneConcentrationMeasurementFeature int64
+
+const (
+	MTROzoneConcentrationMeasurementFeatureNumericMeasurement MTROzoneConcentrationMeasurementFeature = 1
+	MTROzoneConcentrationMeasurementFeatureLevelIndication    MTROzoneConcentrationMeasurementFeature = 2
+	MTROzoneConcentrationMeasurementFeatureMediumLevel        MTROzoneConcentrationMeasurementFeature = 4
+	MTROzoneConcentrationMeasurementFeatureCriticalLevel      MTROzoneConcentrationMeasurementFeature = 8
+	MTROzoneConcentrationMeasurementFeaturePeakMeasurement    MTROzoneConcentrationMeasurementFeature = 16
+	MTROzoneConcentrationMeasurementFeatureAverageMeasurement MTROzoneConcentrationMeasurementFeature = 32
+)
+
+// String returns the MTROzoneConcentrationMeasurementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROzoneConcentrationMeasurementFeature) String() string {
+	var parts []string
+	if e&MTROzoneConcentrationMeasurementFeatureNumericMeasurement != 0 {
+		parts = append(parts, "MTROzoneConcentrationMeasurementFeatureNumericMeasurement")
+	}
+	if e&MTROzoneConcentrationMeasurementFeatureLevelIndication != 0 {
+		parts = append(parts, "MTROzoneConcentrationMeasurementFeatureLevelIndication")
+	}
+	if e&MTROzoneConcentrationMeasurementFeatureMediumLevel != 0 {
+		parts = append(parts, "MTROzoneConcentrationMeasurementFeatureMediumLevel")
+	}
+	if e&MTROzoneConcentrationMeasurementFeatureCriticalLevel != 0 {
+		parts = append(parts, "MTROzoneConcentrationMeasurementFeatureCriticalLevel")
+	}
+	if e&MTROzoneConcentrationMeasurementFeaturePeakMeasurement != 0 {
+		parts = append(parts, "MTROzoneConcentrationMeasurementFeaturePeakMeasurement")
+	}
+	if e&MTROzoneConcentrationMeasurementFeatureAverageMeasurement != 0 {
+		parts = append(parts, "MTROzoneConcentrationMeasurementFeatureAverageMeasurement")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTROzoneConcentrationMeasurementLevelValue int64
+
+const (
+	MTROzoneConcentrationMeasurementLevelValueUnknown  MTROzoneConcentrationMeasurementLevelValue = 0
+	MTROzoneConcentrationMeasurementLevelValueLow      MTROzoneConcentrationMeasurementLevelValue = 1
+	MTROzoneConcentrationMeasurementLevelValueMedium   MTROzoneConcentrationMeasurementLevelValue = 2
+	MTROzoneConcentrationMeasurementLevelValueHigh     MTROzoneConcentrationMeasurementLevelValue = 3
+	MTROzoneConcentrationMeasurementLevelValueCritical MTROzoneConcentrationMeasurementLevelValue = 4
+)
+
+// String returns the MTROzoneConcentrationMeasurementLevelValue constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROzoneConcentrationMeasurementLevelValue) String() string {
+	switch e {
+	case MTROzoneConcentrationMeasurementLevelValueUnknown:
+		return "MTROzoneConcentrationMeasurementLevelValueUnknown"
+	case MTROzoneConcentrationMeasurementLevelValueLow:
+		return "MTROzoneConcentrationMeasurementLevelValueLow"
+	case MTROzoneConcentrationMeasurementLevelValueMedium:
+		return "MTROzoneConcentrationMeasurementLevelValueMedium"
+	case MTROzoneConcentrationMeasurementLevelValueHigh:
+		return "MTROzoneConcentrationMeasurementLevelValueHigh"
+	case MTROzoneConcentrationMeasurementLevelValueCritical:
+		return "MTROzoneConcentrationMeasurementLevelValueCritical"
+	default:
+		return fmt.Sprintf("MTROzoneConcentrationMeasurementLevelValue(%d)", int64(e))
+	}
+}
+
+type MTROzoneConcentrationMeasurementMeasurementMedium int64
+
+const (
+	MTROzoneConcentrationMeasurementMeasurementMediumAir   MTROzoneConcentrationMeasurementMeasurementMedium = 0
+	MTROzoneConcentrationMeasurementMeasurementMediumWater MTROzoneConcentrationMeasurementMeasurementMedium = 1
+	MTROzoneConcentrationMeasurementMeasurementMediumSoil  MTROzoneConcentrationMeasurementMeasurementMedium = 2
+)
+
+// String returns the MTROzoneConcentrationMeasurementMeasurementMedium constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROzoneConcentrationMeasurementMeasurementMedium) String() string {
+	switch e {
+	case MTROzoneConcentrationMeasurementMeasurementMediumAir:
+		return "MTROzoneConcentrationMeasurementMeasurementMediumAir"
+	case MTROzoneConcentrationMeasurementMeasurementMediumWater:
+		return "MTROzoneConcentrationMeasurementMeasurementMediumWater"
+	case MTROzoneConcentrationMeasurementMeasurementMediumSoil:
+		return "MTROzoneConcentrationMeasurementMeasurementMediumSoil"
+	default:
+		return fmt.Sprintf("MTROzoneConcentrationMeasurementMeasurementMedium(%d)", int64(e))
+	}
+}
+
+type MTROzoneConcentrationMeasurementMeasurementUnit int64
+
+const (
+	MTROzoneConcentrationMeasurementMeasurementUnitPPM  MTROzoneConcentrationMeasurementMeasurementUnit = 0
+	MTROzoneConcentrationMeasurementMeasurementUnitPPB  MTROzoneConcentrationMeasurementMeasurementUnit = 1
+	MTROzoneConcentrationMeasurementMeasurementUnitPPT  MTROzoneConcentrationMeasurementMeasurementUnit = 2
+	MTROzoneConcentrationMeasurementMeasurementUnitMGM3 MTROzoneConcentrationMeasurementMeasurementUnit = 3
+	MTROzoneConcentrationMeasurementMeasurementUnitUGM3 MTROzoneConcentrationMeasurementMeasurementUnit = 4
+	MTROzoneConcentrationMeasurementMeasurementUnitNGM3 MTROzoneConcentrationMeasurementMeasurementUnit = 5
+	MTROzoneConcentrationMeasurementMeasurementUnitPM3  MTROzoneConcentrationMeasurementMeasurementUnit = 6
+	MTROzoneConcentrationMeasurementMeasurementUnitBQM3 MTROzoneConcentrationMeasurementMeasurementUnit = 7
+)
+
+// String returns the MTROzoneConcentrationMeasurementMeasurementUnit constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTROzoneConcentrationMeasurementMeasurementUnit) String() string {
+	switch e {
+	case MTROzoneConcentrationMeasurementMeasurementUnitPPM:
+		return "MTROzoneConcentrationMeasurementMeasurementUnitPPM"
+	case MTROzoneConcentrationMeasurementMeasurementUnitPPB:
+		return "MTROzoneConcentrationMeasurementMeasurementUnitPPB"
+	case MTROzoneConcentrationMeasurementMeasurementUnitPPT:
+		return "MTROzoneConcentrationMeasurementMeasurementUnitPPT"
+	case MTROzoneConcentrationMeasurementMeasurementUnitMGM3:
+		return "MTROzoneConcentrationMeasurementMeasurementUnitMGM3"
+	case MTROzoneConcentrationMeasurementMeasurementUnitUGM3:
+		return "MTROzoneConcentrationMeasurementMeasurementUnitUGM3"
+	case MTROzoneConcentrationMeasurementMeasurementUnitNGM3:
+		return "MTROzoneConcentrationMeasurementMeasurementUnitNGM3"
+	case MTROzoneConcentrationMeasurementMeasurementUnitPM3:
+		return "MTROzoneConcentrationMeasurementMeasurementUnitPM3"
+	case MTROzoneConcentrationMeasurementMeasurementUnitBQM3:
+		return "MTROzoneConcentrationMeasurementMeasurementUnitBQM3"
+	default:
+		return fmt.Sprintf("MTROzoneConcentrationMeasurementMeasurementUnit(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRPM10ConcentrationMeasurementFeature int64
+
+const (
+	MTRPM10ConcentrationMeasurementFeatureNumericMeasurement MTRPM10ConcentrationMeasurementFeature = 1
+	MTRPM10ConcentrationMeasurementFeatureLevelIndication    MTRPM10ConcentrationMeasurementFeature = 2
+	MTRPM10ConcentrationMeasurementFeatureMediumLevel        MTRPM10ConcentrationMeasurementFeature = 4
+	MTRPM10ConcentrationMeasurementFeatureCriticalLevel      MTRPM10ConcentrationMeasurementFeature = 8
+	MTRPM10ConcentrationMeasurementFeaturePeakMeasurement    MTRPM10ConcentrationMeasurementFeature = 16
+	MTRPM10ConcentrationMeasurementFeatureAverageMeasurement MTRPM10ConcentrationMeasurementFeature = 32
+)
+
+// String returns the MTRPM10ConcentrationMeasurementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPM10ConcentrationMeasurementFeature) String() string {
+	var parts []string
+	if e&MTRPM10ConcentrationMeasurementFeatureNumericMeasurement != 0 {
+		parts = append(parts, "MTRPM10ConcentrationMeasurementFeatureNumericMeasurement")
+	}
+	if e&MTRPM10ConcentrationMeasurementFeatureLevelIndication != 0 {
+		parts = append(parts, "MTRPM10ConcentrationMeasurementFeatureLevelIndication")
+	}
+	if e&MTRPM10ConcentrationMeasurementFeatureMediumLevel != 0 {
+		parts = append(parts, "MTRPM10ConcentrationMeasurementFeatureMediumLevel")
+	}
+	if e&MTRPM10ConcentrationMeasurementFeatureCriticalLevel != 0 {
+		parts = append(parts, "MTRPM10ConcentrationMeasurementFeatureCriticalLevel")
+	}
+	if e&MTRPM10ConcentrationMeasurementFeaturePeakMeasurement != 0 {
+		parts = append(parts, "MTRPM10ConcentrationMeasurementFeaturePeakMeasurement")
+	}
+	if e&MTRPM10ConcentrationMeasurementFeatureAverageMeasurement != 0 {
+		parts = append(parts, "MTRPM10ConcentrationMeasurementFeatureAverageMeasurement")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRPM10ConcentrationMeasurementLevelValue int64
+
+const (
+	MTRPM10ConcentrationMeasurementLevelValueUnknown  MTRPM10ConcentrationMeasurementLevelValue = 0
+	MTRPM10ConcentrationMeasurementLevelValueLow      MTRPM10ConcentrationMeasurementLevelValue = 1
+	MTRPM10ConcentrationMeasurementLevelValueMedium   MTRPM10ConcentrationMeasurementLevelValue = 2
+	MTRPM10ConcentrationMeasurementLevelValueHigh     MTRPM10ConcentrationMeasurementLevelValue = 3
+	MTRPM10ConcentrationMeasurementLevelValueCritical MTRPM10ConcentrationMeasurementLevelValue = 4
+)
+
+// String returns the MTRPM10ConcentrationMeasurementLevelValue constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPM10ConcentrationMeasurementLevelValue) String() string {
+	switch e {
+	case MTRPM10ConcentrationMeasurementLevelValueUnknown:
+		return "MTRPM10ConcentrationMeasurementLevelValueUnknown"
+	case MTRPM10ConcentrationMeasurementLevelValueLow:
+		return "MTRPM10ConcentrationMeasurementLevelValueLow"
+	case MTRPM10ConcentrationMeasurementLevelValueMedium:
+		return "MTRPM10ConcentrationMeasurementLevelValueMedium"
+	case MTRPM10ConcentrationMeasurementLevelValueHigh:
+		return "MTRPM10ConcentrationMeasurementLevelValueHigh"
+	case MTRPM10ConcentrationMeasurementLevelValueCritical:
+		return "MTRPM10ConcentrationMeasurementLevelValueCritical"
+	default:
+		return fmt.Sprintf("MTRPM10ConcentrationMeasurementLevelValue(%d)", int64(e))
+	}
+}
+
+type MTRPM10ConcentrationMeasurementMeasurementMedium int64
+
+const (
+	MTRPM10ConcentrationMeasurementMeasurementMediumAir   MTRPM10ConcentrationMeasurementMeasurementMedium = 0
+	MTRPM10ConcentrationMeasurementMeasurementMediumWater MTRPM10ConcentrationMeasurementMeasurementMedium = 1
+	MTRPM10ConcentrationMeasurementMeasurementMediumSoil  MTRPM10ConcentrationMeasurementMeasurementMedium = 2
+)
+
+// String returns the MTRPM10ConcentrationMeasurementMeasurementMedium constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPM10ConcentrationMeasurementMeasurementMedium) String() string {
+	switch e {
+	case MTRPM10ConcentrationMeasurementMeasurementMediumAir:
+		return "MTRPM10ConcentrationMeasurementMeasurementMediumAir"
+	case MTRPM10ConcentrationMeasurementMeasurementMediumWater:
+		return "MTRPM10ConcentrationMeasurementMeasurementMediumWater"
+	case MTRPM10ConcentrationMeasurementMeasurementMediumSoil:
+		return "MTRPM10ConcentrationMeasurementMeasurementMediumSoil"
+	default:
+		return fmt.Sprintf("MTRPM10ConcentrationMeasurementMeasurementMedium(%d)", int64(e))
+	}
+}
+
+type MTRPM10ConcentrationMeasurementMeasurementUnit int64
+
+const (
+	MTRPM10ConcentrationMeasurementMeasurementUnitPPM  MTRPM10ConcentrationMeasurementMeasurementUnit = 0
+	MTRPM10ConcentrationMeasurementMeasurementUnitPPB  MTRPM10ConcentrationMeasurementMeasurementUnit = 1
+	MTRPM10ConcentrationMeasurementMeasurementUnitPPT  MTRPM10ConcentrationMeasurementMeasurementUnit = 2
+	MTRPM10ConcentrationMeasurementMeasurementUnitMGM3 MTRPM10ConcentrationMeasurementMeasurementUnit = 3
+	MTRPM10ConcentrationMeasurementMeasurementUnitUGM3 MTRPM10ConcentrationMeasurementMeasurementUnit = 4
+	MTRPM10ConcentrationMeasurementMeasurementUnitNGM3 MTRPM10ConcentrationMeasurementMeasurementUnit = 5
+	MTRPM10ConcentrationMeasurementMeasurementUnitPM3  MTRPM10ConcentrationMeasurementMeasurementUnit = 6
+	MTRPM10ConcentrationMeasurementMeasurementUnitBQM3 MTRPM10ConcentrationMeasurementMeasurementUnit = 7
+)
+
+// String returns the MTRPM10ConcentrationMeasurementMeasurementUnit constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPM10ConcentrationMeasurementMeasurementUnit) String() string {
+	switch e {
+	case MTRPM10ConcentrationMeasurementMeasurementUnitPPM:
+		return "MTRPM10ConcentrationMeasurementMeasurementUnitPPM"
+	case MTRPM10ConcentrationMeasurementMeasurementUnitPPB:
+		return "MTRPM10ConcentrationMeasurementMeasurementUnitPPB"
+	case MTRPM10ConcentrationMeasurementMeasurementUnitPPT:
+		return "MTRPM10ConcentrationMeasurementMeasurementUnitPPT"
+	case MTRPM10ConcentrationMeasurementMeasurementUnitMGM3:
+		return "MTRPM10ConcentrationMeasurementMeasurementUnitMGM3"
+	case MTRPM10ConcentrationMeasurementMeasurementUnitUGM3:
+		return "MTRPM10ConcentrationMeasurementMeasurementUnitUGM3"
+	case MTRPM10ConcentrationMeasurementMeasurementUnitNGM3:
+		return "MTRPM10ConcentrationMeasurementMeasurementUnitNGM3"
+	case MTRPM10ConcentrationMeasurementMeasurementUnitPM3:
+		return "MTRPM10ConcentrationMeasurementMeasurementUnitPM3"
+	case MTRPM10ConcentrationMeasurementMeasurementUnitBQM3:
+		return "MTRPM10ConcentrationMeasurementMeasurementUnitBQM3"
+	default:
+		return fmt.Sprintf("MTRPM10ConcentrationMeasurementMeasurementUnit(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRPM1ConcentrationMeasurementFeature int64
+
+const (
+	MTRPM1ConcentrationMeasurementFeatureNumericMeasurement MTRPM1ConcentrationMeasurementFeature = 1
+	MTRPM1ConcentrationMeasurementFeatureLevelIndication    MTRPM1ConcentrationMeasurementFeature = 2
+	MTRPM1ConcentrationMeasurementFeatureMediumLevel        MTRPM1ConcentrationMeasurementFeature = 4
+	MTRPM1ConcentrationMeasurementFeatureCriticalLevel      MTRPM1ConcentrationMeasurementFeature = 8
+	MTRPM1ConcentrationMeasurementFeaturePeakMeasurement    MTRPM1ConcentrationMeasurementFeature = 16
+	MTRPM1ConcentrationMeasurementFeatureAverageMeasurement MTRPM1ConcentrationMeasurementFeature = 32
+)
+
+// String returns the MTRPM1ConcentrationMeasurementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPM1ConcentrationMeasurementFeature) String() string {
+	var parts []string
+	if e&MTRPM1ConcentrationMeasurementFeatureNumericMeasurement != 0 {
+		parts = append(parts, "MTRPM1ConcentrationMeasurementFeatureNumericMeasurement")
+	}
+	if e&MTRPM1ConcentrationMeasurementFeatureLevelIndication != 0 {
+		parts = append(parts, "MTRPM1ConcentrationMeasurementFeatureLevelIndication")
+	}
+	if e&MTRPM1ConcentrationMeasurementFeatureMediumLevel != 0 {
+		parts = append(parts, "MTRPM1ConcentrationMeasurementFeatureMediumLevel")
+	}
+	if e&MTRPM1ConcentrationMeasurementFeatureCriticalLevel != 0 {
+		parts = append(parts, "MTRPM1ConcentrationMeasurementFeatureCriticalLevel")
+	}
+	if e&MTRPM1ConcentrationMeasurementFeaturePeakMeasurement != 0 {
+		parts = append(parts, "MTRPM1ConcentrationMeasurementFeaturePeakMeasurement")
+	}
+	if e&MTRPM1ConcentrationMeasurementFeatureAverageMeasurement != 0 {
+		parts = append(parts, "MTRPM1ConcentrationMeasurementFeatureAverageMeasurement")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRPM1ConcentrationMeasurementLevelValue int64
+
+const (
+	MTRPM1ConcentrationMeasurementLevelValueUnknown  MTRPM1ConcentrationMeasurementLevelValue = 0
+	MTRPM1ConcentrationMeasurementLevelValueLow      MTRPM1ConcentrationMeasurementLevelValue = 1
+	MTRPM1ConcentrationMeasurementLevelValueMedium   MTRPM1ConcentrationMeasurementLevelValue = 2
+	MTRPM1ConcentrationMeasurementLevelValueHigh     MTRPM1ConcentrationMeasurementLevelValue = 3
+	MTRPM1ConcentrationMeasurementLevelValueCritical MTRPM1ConcentrationMeasurementLevelValue = 4
+)
+
+// String returns the MTRPM1ConcentrationMeasurementLevelValue constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPM1ConcentrationMeasurementLevelValue) String() string {
+	switch e {
+	case MTRPM1ConcentrationMeasurementLevelValueUnknown:
+		return "MTRPM1ConcentrationMeasurementLevelValueUnknown"
+	case MTRPM1ConcentrationMeasurementLevelValueLow:
+		return "MTRPM1ConcentrationMeasurementLevelValueLow"
+	case MTRPM1ConcentrationMeasurementLevelValueMedium:
+		return "MTRPM1ConcentrationMeasurementLevelValueMedium"
+	case MTRPM1ConcentrationMeasurementLevelValueHigh:
+		return "MTRPM1ConcentrationMeasurementLevelValueHigh"
+	case MTRPM1ConcentrationMeasurementLevelValueCritical:
+		return "MTRPM1ConcentrationMeasurementLevelValueCritical"
+	default:
+		return fmt.Sprintf("MTRPM1ConcentrationMeasurementLevelValue(%d)", int64(e))
+	}
+}
+
+type MTRPM1ConcentrationMeasurementMeasurementMedium int64
+
+const (
+	MTRPM1ConcentrationMeasurementMeasurementMediumAir   MTRPM1ConcentrationMeasurementMeasurementMedium = 0
+	MTRPM1ConcentrationMeasurementMeasurementMediumWater MTRPM1ConcentrationMeasurementMeasurementMedium = 1
+	MTRPM1ConcentrationMeasurementMeasurementMediumSoil  MTRPM1ConcentrationMeasurementMeasurementMedium = 2
+)
+
+// String returns the MTRPM1ConcentrationMeasurementMeasurementMedium constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPM1ConcentrationMeasurementMeasurementMedium) String() string {
+	switch e {
+	case MTRPM1ConcentrationMeasurementMeasurementMediumAir:
+		return "MTRPM1ConcentrationMeasurementMeasurementMediumAir"
+	case MTRPM1ConcentrationMeasurementMeasurementMediumWater:
+		return "MTRPM1ConcentrationMeasurementMeasurementMediumWater"
+	case MTRPM1ConcentrationMeasurementMeasurementMediumSoil:
+		return "MTRPM1ConcentrationMeasurementMeasurementMediumSoil"
+	default:
+		return fmt.Sprintf("MTRPM1ConcentrationMeasurementMeasurementMedium(%d)", int64(e))
+	}
+}
+
+type MTRPM1ConcentrationMeasurementMeasurementUnit int64
+
+const (
+	MTRPM1ConcentrationMeasurementMeasurementUnitPPM  MTRPM1ConcentrationMeasurementMeasurementUnit = 0
+	MTRPM1ConcentrationMeasurementMeasurementUnitPPB  MTRPM1ConcentrationMeasurementMeasurementUnit = 1
+	MTRPM1ConcentrationMeasurementMeasurementUnitPPT  MTRPM1ConcentrationMeasurementMeasurementUnit = 2
+	MTRPM1ConcentrationMeasurementMeasurementUnitMGM3 MTRPM1ConcentrationMeasurementMeasurementUnit = 3
+	MTRPM1ConcentrationMeasurementMeasurementUnitUGM3 MTRPM1ConcentrationMeasurementMeasurementUnit = 4
+	MTRPM1ConcentrationMeasurementMeasurementUnitNGM3 MTRPM1ConcentrationMeasurementMeasurementUnit = 5
+	MTRPM1ConcentrationMeasurementMeasurementUnitPM3  MTRPM1ConcentrationMeasurementMeasurementUnit = 6
+	MTRPM1ConcentrationMeasurementMeasurementUnitBQM3 MTRPM1ConcentrationMeasurementMeasurementUnit = 7
+)
+
+// String returns the MTRPM1ConcentrationMeasurementMeasurementUnit constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPM1ConcentrationMeasurementMeasurementUnit) String() string {
+	switch e {
+	case MTRPM1ConcentrationMeasurementMeasurementUnitPPM:
+		return "MTRPM1ConcentrationMeasurementMeasurementUnitPPM"
+	case MTRPM1ConcentrationMeasurementMeasurementUnitPPB:
+		return "MTRPM1ConcentrationMeasurementMeasurementUnitPPB"
+	case MTRPM1ConcentrationMeasurementMeasurementUnitPPT:
+		return "MTRPM1ConcentrationMeasurementMeasurementUnitPPT"
+	case MTRPM1ConcentrationMeasurementMeasurementUnitMGM3:
+		return "MTRPM1ConcentrationMeasurementMeasurementUnitMGM3"
+	case MTRPM1ConcentrationMeasurementMeasurementUnitUGM3:
+		return "MTRPM1ConcentrationMeasurementMeasurementUnitUGM3"
+	case MTRPM1ConcentrationMeasurementMeasurementUnitNGM3:
+		return "MTRPM1ConcentrationMeasurementMeasurementUnitNGM3"
+	case MTRPM1ConcentrationMeasurementMeasurementUnitPM3:
+		return "MTRPM1ConcentrationMeasurementMeasurementUnitPM3"
+	case MTRPM1ConcentrationMeasurementMeasurementUnitBQM3:
+		return "MTRPM1ConcentrationMeasurementMeasurementUnitBQM3"
+	default:
+		return fmt.Sprintf("MTRPM1ConcentrationMeasurementMeasurementUnit(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRPM25ConcentrationMeasurementFeature int64
+
+const (
+	MTRPM25ConcentrationMeasurementFeatureNumericMeasurement MTRPM25ConcentrationMeasurementFeature = 1
+	MTRPM25ConcentrationMeasurementFeatureLevelIndication    MTRPM25ConcentrationMeasurementFeature = 2
+	MTRPM25ConcentrationMeasurementFeatureMediumLevel        MTRPM25ConcentrationMeasurementFeature = 4
+	MTRPM25ConcentrationMeasurementFeatureCriticalLevel      MTRPM25ConcentrationMeasurementFeature = 8
+	MTRPM25ConcentrationMeasurementFeaturePeakMeasurement    MTRPM25ConcentrationMeasurementFeature = 16
+	MTRPM25ConcentrationMeasurementFeatureAverageMeasurement MTRPM25ConcentrationMeasurementFeature = 32
+)
+
+// String returns the MTRPM25ConcentrationMeasurementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPM25ConcentrationMeasurementFeature) String() string {
+	var parts []string
+	if e&MTRPM25ConcentrationMeasurementFeatureNumericMeasurement != 0 {
+		parts = append(parts, "MTRPM25ConcentrationMeasurementFeatureNumericMeasurement")
+	}
+	if e&MTRPM25ConcentrationMeasurementFeatureLevelIndication != 0 {
+		parts = append(parts, "MTRPM25ConcentrationMeasurementFeatureLevelIndication")
+	}
+	if e&MTRPM25ConcentrationMeasurementFeatureMediumLevel != 0 {
+		parts = append(parts, "MTRPM25ConcentrationMeasurementFeatureMediumLevel")
+	}
+	if e&MTRPM25ConcentrationMeasurementFeatureCriticalLevel != 0 {
+		parts = append(parts, "MTRPM25ConcentrationMeasurementFeatureCriticalLevel")
+	}
+	if e&MTRPM25ConcentrationMeasurementFeaturePeakMeasurement != 0 {
+		parts = append(parts, "MTRPM25ConcentrationMeasurementFeaturePeakMeasurement")
+	}
+	if e&MTRPM25ConcentrationMeasurementFeatureAverageMeasurement != 0 {
+		parts = append(parts, "MTRPM25ConcentrationMeasurementFeatureAverageMeasurement")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRPM25ConcentrationMeasurementLevelValue int64
+
+const (
+	MTRPM25ConcentrationMeasurementLevelValueUnknown  MTRPM25ConcentrationMeasurementLevelValue = 0
+	MTRPM25ConcentrationMeasurementLevelValueLow      MTRPM25ConcentrationMeasurementLevelValue = 1
+	MTRPM25ConcentrationMeasurementLevelValueMedium   MTRPM25ConcentrationMeasurementLevelValue = 2
+	MTRPM25ConcentrationMeasurementLevelValueHigh     MTRPM25ConcentrationMeasurementLevelValue = 3
+	MTRPM25ConcentrationMeasurementLevelValueCritical MTRPM25ConcentrationMeasurementLevelValue = 4
+)
+
+// String returns the MTRPM25ConcentrationMeasurementLevelValue constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPM25ConcentrationMeasurementLevelValue) String() string {
+	switch e {
+	case MTRPM25ConcentrationMeasurementLevelValueUnknown:
+		return "MTRPM25ConcentrationMeasurementLevelValueUnknown"
+	case MTRPM25ConcentrationMeasurementLevelValueLow:
+		return "MTRPM25ConcentrationMeasurementLevelValueLow"
+	case MTRPM25ConcentrationMeasurementLevelValueMedium:
+		return "MTRPM25ConcentrationMeasurementLevelValueMedium"
+	case MTRPM25ConcentrationMeasurementLevelValueHigh:
+		return "MTRPM25ConcentrationMeasurementLevelValueHigh"
+	case MTRPM25ConcentrationMeasurementLevelValueCritical:
+		return "MTRPM25ConcentrationMeasurementLevelValueCritical"
+	default:
+		return fmt.Sprintf("MTRPM25ConcentrationMeasurementLevelValue(%d)", int64(e))
+	}
+}
+
+type MTRPM25ConcentrationMeasurementMeasurementMedium int64
+
+const (
+	MTRPM25ConcentrationMeasurementMeasurementMediumAir   MTRPM25ConcentrationMeasurementMeasurementMedium = 0
+	MTRPM25ConcentrationMeasurementMeasurementMediumWater MTRPM25ConcentrationMeasurementMeasurementMedium = 1
+	MTRPM25ConcentrationMeasurementMeasurementMediumSoil  MTRPM25ConcentrationMeasurementMeasurementMedium = 2
+)
+
+// String returns the MTRPM25ConcentrationMeasurementMeasurementMedium constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPM25ConcentrationMeasurementMeasurementMedium) String() string {
+	switch e {
+	case MTRPM25ConcentrationMeasurementMeasurementMediumAir:
+		return "MTRPM25ConcentrationMeasurementMeasurementMediumAir"
+	case MTRPM25ConcentrationMeasurementMeasurementMediumWater:
+		return "MTRPM25ConcentrationMeasurementMeasurementMediumWater"
+	case MTRPM25ConcentrationMeasurementMeasurementMediumSoil:
+		return "MTRPM25ConcentrationMeasurementMeasurementMediumSoil"
+	default:
+		return fmt.Sprintf("MTRPM25ConcentrationMeasurementMeasurementMedium(%d)", int64(e))
+	}
+}
+
+type MTRPM25ConcentrationMeasurementMeasurementUnit int64
+
+const (
+	MTRPM25ConcentrationMeasurementMeasurementUnitPPM  MTRPM25ConcentrationMeasurementMeasurementUnit = 0
+	MTRPM25ConcentrationMeasurementMeasurementUnitPPB  MTRPM25ConcentrationMeasurementMeasurementUnit = 1
+	MTRPM25ConcentrationMeasurementMeasurementUnitPPT  MTRPM25ConcentrationMeasurementMeasurementUnit = 2
+	MTRPM25ConcentrationMeasurementMeasurementUnitMGM3 MTRPM25ConcentrationMeasurementMeasurementUnit = 3
+	MTRPM25ConcentrationMeasurementMeasurementUnitUGM3 MTRPM25ConcentrationMeasurementMeasurementUnit = 4
+	MTRPM25ConcentrationMeasurementMeasurementUnitNGM3 MTRPM25ConcentrationMeasurementMeasurementUnit = 5
+	MTRPM25ConcentrationMeasurementMeasurementUnitPM3  MTRPM25ConcentrationMeasurementMeasurementUnit = 6
+	MTRPM25ConcentrationMeasurementMeasurementUnitBQM3 MTRPM25ConcentrationMeasurementMeasurementUnit = 7
+)
+
+// String returns the MTRPM25ConcentrationMeasurementMeasurementUnit constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPM25ConcentrationMeasurementMeasurementUnit) String() string {
+	switch e {
+	case MTRPM25ConcentrationMeasurementMeasurementUnitPPM:
+		return "MTRPM25ConcentrationMeasurementMeasurementUnitPPM"
+	case MTRPM25ConcentrationMeasurementMeasurementUnitPPB:
+		return "MTRPM25ConcentrationMeasurementMeasurementUnitPPB"
+	case MTRPM25ConcentrationMeasurementMeasurementUnitPPT:
+		return "MTRPM25ConcentrationMeasurementMeasurementUnitPPT"
+	case MTRPM25ConcentrationMeasurementMeasurementUnitMGM3:
+		return "MTRPM25ConcentrationMeasurementMeasurementUnitMGM3"
+	case MTRPM25ConcentrationMeasurementMeasurementUnitUGM3:
+		return "MTRPM25ConcentrationMeasurementMeasurementUnitUGM3"
+	case MTRPM25ConcentrationMeasurementMeasurementUnitNGM3:
+		return "MTRPM25ConcentrationMeasurementMeasurementUnitNGM3"
+	case MTRPM25ConcentrationMeasurementMeasurementUnitPM3:
+		return "MTRPM25ConcentrationMeasurementMeasurementUnitPM3"
+	case MTRPM25ConcentrationMeasurementMeasurementUnitBQM3:
+		return "MTRPM25ConcentrationMeasurementMeasurementUnitBQM3"
+	default:
+		return fmt.Sprintf("MTRPM25ConcentrationMeasurementMeasurementUnit(%d)", int64(e))
+	}
+}
+
+type MTRPowerSourceBatApprovedChemistry int64
+
+const (
+	MTRPowerSourceBatApprovedChemistryUnspecified             MTRPowerSourceBatApprovedChemistry = 0
+	MTRPowerSourceBatApprovedChemistryAlkaline                MTRPowerSourceBatApprovedChemistry = 1
+	MTRPowerSourceBatApprovedChemistryLithiumCarbonFluoride   MTRPowerSourceBatApprovedChemistry = 2
+	MTRPowerSourceBatApprovedChemistryLithiumChromiumOxide    MTRPowerSourceBatApprovedChemistry = 3
+	MTRPowerSourceBatApprovedChemistryLithiumCopperOxide      MTRPowerSourceBatApprovedChemistry = 4
+	MTRPowerSourceBatApprovedChemistryLithiumIronDisulfide    MTRPowerSourceBatApprovedChemistry = 5
+	MTRPowerSourceBatApprovedChemistryLithiumManganeseDioxide MTRPowerSourceBatApprovedChemistry = 6
+	MTRPowerSourceBatApprovedChemistryLithiumThionylChloride  MTRPowerSourceBatApprovedChemistry = 7
+	MTRPowerSourceBatApprovedChemistryMagnesium               MTRPowerSourceBatApprovedChemistry = 8
+	MTRPowerSourceBatApprovedChemistryMercuryOxide            MTRPowerSourceBatApprovedChemistry = 9
+	MTRPowerSourceBatApprovedChemistryNickelOxyhydride        MTRPowerSourceBatApprovedChemistry = 10
+	MTRPowerSourceBatApprovedChemistrySilverOxide             MTRPowerSourceBatApprovedChemistry = 11
+	MTRPowerSourceBatApprovedChemistryZincAir                 MTRPowerSourceBatApprovedChemistry = 12
+	MTRPowerSourceBatApprovedChemistryZincCarbon              MTRPowerSourceBatApprovedChemistry = 13
+	MTRPowerSourceBatApprovedChemistryZincChloride            MTRPowerSourceBatApprovedChemistry = 14
+	MTRPowerSourceBatApprovedChemistryZincManganeseDioxide    MTRPowerSourceBatApprovedChemistry = 15
+	MTRPowerSourceBatApprovedChemistryLeadAcid                MTRPowerSourceBatApprovedChemistry = 16
+	MTRPowerSourceBatApprovedChemistryLithiumCobaltOxide      MTRPowerSourceBatApprovedChemistry = 17
+	MTRPowerSourceBatApprovedChemistryLithiumIon              MTRPowerSourceBatApprovedChemistry = 18
+	MTRPowerSourceBatApprovedChemistryLithiumIonPolymer       MTRPowerSourceBatApprovedChemistry = 19
+	MTRPowerSourceBatApprovedChemistryLithiumIronPhosphate    MTRPowerSourceBatApprovedChemistry = 20
+	MTRPowerSourceBatApprovedChemistryLithiumSulfur           MTRPowerSourceBatApprovedChemistry = 21
+	MTRPowerSourceBatApprovedChemistryLithiumTitanate         MTRPowerSourceBatApprovedChemistry = 22
+	MTRPowerSourceBatApprovedChemistryNickelCadmium           MTRPowerSourceBatApprovedChemistry = 23
+	MTRPowerSourceBatApprovedChemistryNickelHydrogen          MTRPowerSourceBatApprovedChemistry = 24
+	MTRPowerSourceBatApprovedChemistryNickelIron              MTRPowerSourceBatApprovedChemistry = 25
+	MTRPowerSourceBatApprovedChemistryNickelMetalHydride      MTRPowerSourceBatApprovedChemistry = 26
+	MTRPowerSourceBatApprovedChemistryNickelZinc              MTRPowerSourceBatApprovedChemistry = 27
+	MTRPowerSourceBatApprovedChemistrySilverZinc              MTRPowerSourceBatApprovedChemistry = 28
+	MTRPowerSourceBatApprovedChemistrySodiumIon               MTRPowerSourceBatApprovedChemistry = 29
+	MTRPowerSourceBatApprovedChemistrySodiumSulfur            MTRPowerSourceBatApprovedChemistry = 30
+	MTRPowerSourceBatApprovedChemistryZincBromide             MTRPowerSourceBatApprovedChemistry = 31
+	MTRPowerSourceBatApprovedChemistryZincCerium              MTRPowerSourceBatApprovedChemistry = 32
+)
+
+// String returns the MTRPowerSourceBatApprovedChemistry constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPowerSourceBatApprovedChemistry) String() string {
+	switch e {
+	case MTRPowerSourceBatApprovedChemistryUnspecified:
+		return "MTRPowerSourceBatApprovedChemistryUnspecified"
+	case MTRPowerSourceBatApprovedChemistryAlkaline:
+		return "MTRPowerSourceBatApprovedChemistryAlkaline"
+	case MTRPowerSourceBatApprovedChemistryLithiumCarbonFluoride:
+		return "MTRPowerSourceBatApprovedChemistryLithiumCarbonFluoride"
+	case MTRPowerSourceBatApprovedChemistryLithiumChromiumOxide:
+		return "MTRPowerSourceBatApprovedChemistryLithiumChromiumOxide"
+	case MTRPowerSourceBatApprovedChemistryLithiumCopperOxide:
+		return "MTRPowerSourceBatApprovedChemistryLithiumCopperOxide"
+	case MTRPowerSourceBatApprovedChemistryLithiumIronDisulfide:
+		return "MTRPowerSourceBatApprovedChemistryLithiumIronDisulfide"
+	case MTRPowerSourceBatApprovedChemistryLithiumManganeseDioxide:
+		return "MTRPowerSourceBatApprovedChemistryLithiumManganeseDioxide"
+	case MTRPowerSourceBatApprovedChemistryLithiumThionylChloride:
+		return "MTRPowerSourceBatApprovedChemistryLithiumThionylChloride"
+	case MTRPowerSourceBatApprovedChemistryMagnesium:
+		return "MTRPowerSourceBatApprovedChemistryMagnesium"
+	case MTRPowerSourceBatApprovedChemistryMercuryOxide:
+		return "MTRPowerSourceBatApprovedChemistryMercuryOxide"
+	case MTRPowerSourceBatApprovedChemistryNickelOxyhydride:
+		return "MTRPowerSourceBatApprovedChemistryNickelOxyhydride"
+	case MTRPowerSourceBatApprovedChemistrySilverOxide:
+		return "MTRPowerSourceBatApprovedChemistrySilverOxide"
+	case MTRPowerSourceBatApprovedChemistryZincAir:
+		return "MTRPowerSourceBatApprovedChemistryZincAir"
+	case MTRPowerSourceBatApprovedChemistryZincCarbon:
+		return "MTRPowerSourceBatApprovedChemistryZincCarbon"
+	case MTRPowerSourceBatApprovedChemistryZincChloride:
+		return "MTRPowerSourceBatApprovedChemistryZincChloride"
+	case MTRPowerSourceBatApprovedChemistryZincManganeseDioxide:
+		return "MTRPowerSourceBatApprovedChemistryZincManganeseDioxide"
+	case MTRPowerSourceBatApprovedChemistryLeadAcid:
+		return "MTRPowerSourceBatApprovedChemistryLeadAcid"
+	case MTRPowerSourceBatApprovedChemistryLithiumCobaltOxide:
+		return "MTRPowerSourceBatApprovedChemistryLithiumCobaltOxide"
+	case MTRPowerSourceBatApprovedChemistryLithiumIon:
+		return "MTRPowerSourceBatApprovedChemistryLithiumIon"
+	case MTRPowerSourceBatApprovedChemistryLithiumIonPolymer:
+		return "MTRPowerSourceBatApprovedChemistryLithiumIonPolymer"
+	case MTRPowerSourceBatApprovedChemistryLithiumIronPhosphate:
+		return "MTRPowerSourceBatApprovedChemistryLithiumIronPhosphate"
+	case MTRPowerSourceBatApprovedChemistryLithiumSulfur:
+		return "MTRPowerSourceBatApprovedChemistryLithiumSulfur"
+	case MTRPowerSourceBatApprovedChemistryLithiumTitanate:
+		return "MTRPowerSourceBatApprovedChemistryLithiumTitanate"
+	case MTRPowerSourceBatApprovedChemistryNickelCadmium:
+		return "MTRPowerSourceBatApprovedChemistryNickelCadmium"
+	case MTRPowerSourceBatApprovedChemistryNickelHydrogen:
+		return "MTRPowerSourceBatApprovedChemistryNickelHydrogen"
+	case MTRPowerSourceBatApprovedChemistryNickelIron:
+		return "MTRPowerSourceBatApprovedChemistryNickelIron"
+	case MTRPowerSourceBatApprovedChemistryNickelMetalHydride:
+		return "MTRPowerSourceBatApprovedChemistryNickelMetalHydride"
+	case MTRPowerSourceBatApprovedChemistryNickelZinc:
+		return "MTRPowerSourceBatApprovedChemistryNickelZinc"
+	case MTRPowerSourceBatApprovedChemistrySilverZinc:
+		return "MTRPowerSourceBatApprovedChemistrySilverZinc"
+	case MTRPowerSourceBatApprovedChemistrySodiumIon:
+		return "MTRPowerSourceBatApprovedChemistrySodiumIon"
+	case MTRPowerSourceBatApprovedChemistrySodiumSulfur:
+		return "MTRPowerSourceBatApprovedChemistrySodiumSulfur"
+	case MTRPowerSourceBatApprovedChemistryZincBromide:
+		return "MTRPowerSourceBatApprovedChemistryZincBromide"
+	case MTRPowerSourceBatApprovedChemistryZincCerium:
+		return "MTRPowerSourceBatApprovedChemistryZincCerium"
+	default:
+		return fmt.Sprintf("MTRPowerSourceBatApprovedChemistry(%d)", int64(e))
+	}
+}
+
+type MTRPowerSourceBatChargeFault int64
+
+const (
+	MTRPowerSourceBatChargeFaultUnspecified         MTRPowerSourceBatChargeFault = 0
+	MTRPowerSourceBatChargeFaultUnspecfied          MTRPowerSourceBatChargeFault = 0
+	MTRPowerSourceBatChargeFaultAmbientTooHot       MTRPowerSourceBatChargeFault = 1
+	MTRPowerSourceBatChargeFaultAmbientTooCold      MTRPowerSourceBatChargeFault = 2
+	MTRPowerSourceBatChargeFaultBatteryTooHot       MTRPowerSourceBatChargeFault = 3
+	MTRPowerSourceBatChargeFaultBatteryTooCold      MTRPowerSourceBatChargeFault = 4
+	MTRPowerSourceBatChargeFaultBatteryAbsent       MTRPowerSourceBatChargeFault = 5
+	MTRPowerSourceBatChargeFaultBatteryOverVoltage  MTRPowerSourceBatChargeFault = 6
+	MTRPowerSourceBatChargeFaultBatteryUnderVoltage MTRPowerSourceBatChargeFault = 7
+	MTRPowerSourceBatChargeFaultChargerOverVoltage  MTRPowerSourceBatChargeFault = 8
+	MTRPowerSourceBatChargeFaultChargerUnderVoltage MTRPowerSourceBatChargeFault = 9
+	MTRPowerSourceBatChargeFaultSafetyTimeout       MTRPowerSourceBatChargeFault = 10
+)
+
+// String returns the MTRPowerSourceBatChargeFault constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPowerSourceBatChargeFault) String() string {
+	switch e {
+	case MTRPowerSourceBatChargeFaultUnspecified:
+		return "MTRPowerSourceBatChargeFaultUnspecified"
+	case MTRPowerSourceBatChargeFaultAmbientTooHot:
+		return "MTRPowerSourceBatChargeFaultAmbientTooHot"
+	case MTRPowerSourceBatChargeFaultAmbientTooCold:
+		return "MTRPowerSourceBatChargeFaultAmbientTooCold"
+	case MTRPowerSourceBatChargeFaultBatteryTooHot:
+		return "MTRPowerSourceBatChargeFaultBatteryTooHot"
+	case MTRPowerSourceBatChargeFaultBatteryTooCold:
+		return "MTRPowerSourceBatChargeFaultBatteryTooCold"
+	case MTRPowerSourceBatChargeFaultBatteryAbsent:
+		return "MTRPowerSourceBatChargeFaultBatteryAbsent"
+	case MTRPowerSourceBatChargeFaultBatteryOverVoltage:
+		return "MTRPowerSourceBatChargeFaultBatteryOverVoltage"
+	case MTRPowerSourceBatChargeFaultBatteryUnderVoltage:
+		return "MTRPowerSourceBatChargeFaultBatteryUnderVoltage"
+	case MTRPowerSourceBatChargeFaultChargerOverVoltage:
+		return "MTRPowerSourceBatChargeFaultChargerOverVoltage"
+	case MTRPowerSourceBatChargeFaultChargerUnderVoltage:
+		return "MTRPowerSourceBatChargeFaultChargerUnderVoltage"
+	case MTRPowerSourceBatChargeFaultSafetyTimeout:
+		return "MTRPowerSourceBatChargeFaultSafetyTimeout"
+	default:
+		return fmt.Sprintf("MTRPowerSourceBatChargeFault(%d)", int64(e))
+	}
+}
+
+type MTRPowerSourceBatChargeLevel int64
+
+const (
+	MTRPowerSourceBatChargeLevelOK       MTRPowerSourceBatChargeLevel = 0
+	MTRPowerSourceBatChargeLevelOk       MTRPowerSourceBatChargeLevel = 0
+	MTRPowerSourceBatChargeLevelWarning  MTRPowerSourceBatChargeLevel = 1
+	MTRPowerSourceBatChargeLevelCritical MTRPowerSourceBatChargeLevel = 2
+)
+
+// String returns the MTRPowerSourceBatChargeLevel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPowerSourceBatChargeLevel) String() string {
+	switch e {
+	case MTRPowerSourceBatChargeLevelOK:
+		return "MTRPowerSourceBatChargeLevelOK"
+	case MTRPowerSourceBatChargeLevelWarning:
+		return "MTRPowerSourceBatChargeLevelWarning"
+	case MTRPowerSourceBatChargeLevelCritical:
+		return "MTRPowerSourceBatChargeLevelCritical"
+	default:
+		return fmt.Sprintf("MTRPowerSourceBatChargeLevel(%d)", int64(e))
+	}
+}
+
+type MTRPowerSourceBatChargeState int64
+
+const (
+	MTRPowerSourceBatChargeStateUnknown        MTRPowerSourceBatChargeState = 0
+	MTRPowerSourceBatChargeStateIsCharging     MTRPowerSourceBatChargeState = 1
+	MTRPowerSourceBatChargeStateIsAtFullCharge MTRPowerSourceBatChargeState = 2
+	MTRPowerSourceBatChargeStateIsNotCharging  MTRPowerSourceBatChargeState = 3
+)
+
+// String returns the MTRPowerSourceBatChargeState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPowerSourceBatChargeState) String() string {
+	switch e {
+	case MTRPowerSourceBatChargeStateUnknown:
+		return "MTRPowerSourceBatChargeStateUnknown"
+	case MTRPowerSourceBatChargeStateIsCharging:
+		return "MTRPowerSourceBatChargeStateIsCharging"
+	case MTRPowerSourceBatChargeStateIsAtFullCharge:
+		return "MTRPowerSourceBatChargeStateIsAtFullCharge"
+	case MTRPowerSourceBatChargeStateIsNotCharging:
+		return "MTRPowerSourceBatChargeStateIsNotCharging"
+	default:
+		return fmt.Sprintf("MTRPowerSourceBatChargeState(%d)", int64(e))
+	}
+}
+
+type MTRPowerSourceBatCommonDesignation int64
+
+const (
+	MTRPowerSourceBatCommonDesignationUnspecified MTRPowerSourceBatCommonDesignation = 0
+	MTRPowerSourceBatCommonDesignationAAA         MTRPowerSourceBatCommonDesignation = 1
+	MTRPowerSourceBatCommonDesignationAA          MTRPowerSourceBatCommonDesignation = 2
+	MTRPowerSourceBatCommonDesignationC           MTRPowerSourceBatCommonDesignation = 3
+	MTRPowerSourceBatCommonDesignationD           MTRPowerSourceBatCommonDesignation = 4
+	MTRPowerSourceBatCommonDesignation4v5         MTRPowerSourceBatCommonDesignation = 5
+	MTRPowerSourceBatCommonDesignation6v0         MTRPowerSourceBatCommonDesignation = 6
+	MTRPowerSourceBatCommonDesignation9v0         MTRPowerSourceBatCommonDesignation = 7
+	MTRPowerSourceBatCommonDesignation12AA        MTRPowerSourceBatCommonDesignation = 8
+	MTRPowerSourceBatCommonDesignationAAAA        MTRPowerSourceBatCommonDesignation = 9
+	MTRPowerSourceBatCommonDesignationA           MTRPowerSourceBatCommonDesignation = 10
+	MTRPowerSourceBatCommonDesignationB           MTRPowerSourceBatCommonDesignation = 11
+	MTRPowerSourceBatCommonDesignationF           MTRPowerSourceBatCommonDesignation = 12
+	MTRPowerSourceBatCommonDesignationN           MTRPowerSourceBatCommonDesignation = 13
+	MTRPowerSourceBatCommonDesignationNo6         MTRPowerSourceBatCommonDesignation = 14
+	MTRPowerSourceBatCommonDesignationSubC        MTRPowerSourceBatCommonDesignation = 15
+	MTRPowerSourceBatCommonDesignationA23         MTRPowerSourceBatCommonDesignation = 16
+	MTRPowerSourceBatCommonDesignationA27         MTRPowerSourceBatCommonDesignation = 17
+	MTRPowerSourceBatCommonDesignationBA5800      MTRPowerSourceBatCommonDesignation = 18
+	MTRPowerSourceBatCommonDesignationDuplex      MTRPowerSourceBatCommonDesignation = 19
+	MTRPowerSourceBatCommonDesignation4SR44       MTRPowerSourceBatCommonDesignation = 20
+	MTRPowerSourceBatCommonDesignation523         MTRPowerSourceBatCommonDesignation = 21
+	MTRPowerSourceBatCommonDesignation531         MTRPowerSourceBatCommonDesignation = 22
+	MTRPowerSourceBatCommonDesignation15v0        MTRPowerSourceBatCommonDesignation = 23
+	MTRPowerSourceBatCommonDesignation22v5        MTRPowerSourceBatCommonDesignation = 24
+	MTRPowerSourceBatCommonDesignation30v0        MTRPowerSourceBatCommonDesignation = 25
+	MTRPowerSourceBatCommonDesignation45v0        MTRPowerSourceBatCommonDesignation = 26
+	MTRPowerSourceBatCommonDesignation67v5        MTRPowerSourceBatCommonDesignation = 27
+	MTRPowerSourceBatCommonDesignationJ           MTRPowerSourceBatCommonDesignation = 28
+	MTRPowerSourceBatCommonDesignationCR123A      MTRPowerSourceBatCommonDesignation = 29
+	MTRPowerSourceBatCommonDesignationCR2         MTRPowerSourceBatCommonDesignation = 30
+	MTRPowerSourceBatCommonDesignation2CR5        MTRPowerSourceBatCommonDesignation = 31
+	MTRPowerSourceBatCommonDesignationCRP2        MTRPowerSourceBatCommonDesignation = 32
+	MTRPowerSourceBatCommonDesignationCRV3        MTRPowerSourceBatCommonDesignation = 33
+	MTRPowerSourceBatCommonDesignationSR41        MTRPowerSourceBatCommonDesignation = 34
+	MTRPowerSourceBatCommonDesignationSR43        MTRPowerSourceBatCommonDesignation = 35
+	MTRPowerSourceBatCommonDesignationSR44        MTRPowerSourceBatCommonDesignation = 36
+	MTRPowerSourceBatCommonDesignationSR45        MTRPowerSourceBatCommonDesignation = 37
+	MTRPowerSourceBatCommonDesignationSR48        MTRPowerSourceBatCommonDesignation = 38
+	MTRPowerSourceBatCommonDesignationSR54        MTRPowerSourceBatCommonDesignation = 39
+	MTRPowerSourceBatCommonDesignationSR55        MTRPowerSourceBatCommonDesignation = 40
+	MTRPowerSourceBatCommonDesignationSR57        MTRPowerSourceBatCommonDesignation = 41
+	MTRPowerSourceBatCommonDesignationSR58        MTRPowerSourceBatCommonDesignation = 42
+	MTRPowerSourceBatCommonDesignationSR59        MTRPowerSourceBatCommonDesignation = 43
+	MTRPowerSourceBatCommonDesignationSR60        MTRPowerSourceBatCommonDesignation = 44
+	MTRPowerSourceBatCommonDesignationSR63        MTRPowerSourceBatCommonDesignation = 45
+	MTRPowerSourceBatCommonDesignationSR64        MTRPowerSourceBatCommonDesignation = 46
+	MTRPowerSourceBatCommonDesignationSR65        MTRPowerSourceBatCommonDesignation = 47
+	MTRPowerSourceBatCommonDesignationSR66        MTRPowerSourceBatCommonDesignation = 48
+	MTRPowerSourceBatCommonDesignationSR67        MTRPowerSourceBatCommonDesignation = 49
+	MTRPowerSourceBatCommonDesignationSR68        MTRPowerSourceBatCommonDesignation = 50
+	MTRPowerSourceBatCommonDesignationSR69        MTRPowerSourceBatCommonDesignation = 51
+	MTRPowerSourceBatCommonDesignationSR516       MTRPowerSourceBatCommonDesignation = 52
+	MTRPowerSourceBatCommonDesignationSR731       MTRPowerSourceBatCommonDesignation = 53
+	MTRPowerSourceBatCommonDesignationSR712       MTRPowerSourceBatCommonDesignation = 54
+	MTRPowerSourceBatCommonDesignationLR932       MTRPowerSourceBatCommonDesignation = 55
+	MTRPowerSourceBatCommonDesignationA5          MTRPowerSourceBatCommonDesignation = 56
+	MTRPowerSourceBatCommonDesignationA10         MTRPowerSourceBatCommonDesignation = 57
+	MTRPowerSourceBatCommonDesignationA13         MTRPowerSourceBatCommonDesignation = 58
+	MTRPowerSourceBatCommonDesignationA312        MTRPowerSourceBatCommonDesignation = 59
+	MTRPowerSourceBatCommonDesignationA675        MTRPowerSourceBatCommonDesignation = 60
+	MTRPowerSourceBatCommonDesignationAC41E       MTRPowerSourceBatCommonDesignation = 61
+	MTRPowerSourceBatCommonDesignation10180       MTRPowerSourceBatCommonDesignation = 62
+	MTRPowerSourceBatCommonDesignation10280       MTRPowerSourceBatCommonDesignation = 63
+	MTRPowerSourceBatCommonDesignation10440       MTRPowerSourceBatCommonDesignation = 64
+	MTRPowerSourceBatCommonDesignation14250       MTRPowerSourceBatCommonDesignation = 65
+	MTRPowerSourceBatCommonDesignation14430       MTRPowerSourceBatCommonDesignation = 66
+	MTRPowerSourceBatCommonDesignation14500       MTRPowerSourceBatCommonDesignation = 67
+	MTRPowerSourceBatCommonDesignation14650       MTRPowerSourceBatCommonDesignation = 68
+	MTRPowerSourceBatCommonDesignation15270       MTRPowerSourceBatCommonDesignation = 69
+	MTRPowerSourceBatCommonDesignation16340       MTRPowerSourceBatCommonDesignation = 70
+	MTRPowerSourceBatCommonDesignationRCR123A     MTRPowerSourceBatCommonDesignation = 71
+	MTRPowerSourceBatCommonDesignation17500       MTRPowerSourceBatCommonDesignation = 72
+	MTRPowerSourceBatCommonDesignation17670       MTRPowerSourceBatCommonDesignation = 73
+	MTRPowerSourceBatCommonDesignation18350       MTRPowerSourceBatCommonDesignation = 74
+	MTRPowerSourceBatCommonDesignation18500       MTRPowerSourceBatCommonDesignation = 75
+	MTRPowerSourceBatCommonDesignation18650       MTRPowerSourceBatCommonDesignation = 76
+	MTRPowerSourceBatCommonDesignation19670       MTRPowerSourceBatCommonDesignation = 77
+	MTRPowerSourceBatCommonDesignation25500       MTRPowerSourceBatCommonDesignation = 78
+	MTRPowerSourceBatCommonDesignation26650       MTRPowerSourceBatCommonDesignation = 79
+	MTRPowerSourceBatCommonDesignation32600       MTRPowerSourceBatCommonDesignation = 80
+)
+
+// String returns the MTRPowerSourceBatCommonDesignation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPowerSourceBatCommonDesignation) String() string {
+	switch e {
+	case MTRPowerSourceBatCommonDesignationUnspecified:
+		return "MTRPowerSourceBatCommonDesignationUnspecified"
+	case MTRPowerSourceBatCommonDesignationAAA:
+		return "MTRPowerSourceBatCommonDesignationAAA"
+	case MTRPowerSourceBatCommonDesignationAA:
+		return "MTRPowerSourceBatCommonDesignationAA"
+	case MTRPowerSourceBatCommonDesignationC:
+		return "MTRPowerSourceBatCommonDesignationC"
+	case MTRPowerSourceBatCommonDesignationD:
+		return "MTRPowerSourceBatCommonDesignationD"
+	case MTRPowerSourceBatCommonDesignation4v5:
+		return "MTRPowerSourceBatCommonDesignation4v5"
+	case MTRPowerSourceBatCommonDesignation6v0:
+		return "MTRPowerSourceBatCommonDesignation6v0"
+	case MTRPowerSourceBatCommonDesignation9v0:
+		return "MTRPowerSourceBatCommonDesignation9v0"
+	case MTRPowerSourceBatCommonDesignation12AA:
+		return "MTRPowerSourceBatCommonDesignation12AA"
+	case MTRPowerSourceBatCommonDesignationAAAA:
+		return "MTRPowerSourceBatCommonDesignationAAAA"
+	case MTRPowerSourceBatCommonDesignationA:
+		return "MTRPowerSourceBatCommonDesignationA"
+	case MTRPowerSourceBatCommonDesignationB:
+		return "MTRPowerSourceBatCommonDesignationB"
+	case MTRPowerSourceBatCommonDesignationF:
+		return "MTRPowerSourceBatCommonDesignationF"
+	case MTRPowerSourceBatCommonDesignationN:
+		return "MTRPowerSourceBatCommonDesignationN"
+	case MTRPowerSourceBatCommonDesignationNo6:
+		return "MTRPowerSourceBatCommonDesignationNo6"
+	case MTRPowerSourceBatCommonDesignationSubC:
+		return "MTRPowerSourceBatCommonDesignationSubC"
+	case MTRPowerSourceBatCommonDesignationA23:
+		return "MTRPowerSourceBatCommonDesignationA23"
+	case MTRPowerSourceBatCommonDesignationA27:
+		return "MTRPowerSourceBatCommonDesignationA27"
+	case MTRPowerSourceBatCommonDesignationBA5800:
+		return "MTRPowerSourceBatCommonDesignationBA5800"
+	case MTRPowerSourceBatCommonDesignationDuplex:
+		return "MTRPowerSourceBatCommonDesignationDuplex"
+	case MTRPowerSourceBatCommonDesignation4SR44:
+		return "MTRPowerSourceBatCommonDesignation4SR44"
+	case MTRPowerSourceBatCommonDesignation523:
+		return "MTRPowerSourceBatCommonDesignation523"
+	case MTRPowerSourceBatCommonDesignation531:
+		return "MTRPowerSourceBatCommonDesignation531"
+	case MTRPowerSourceBatCommonDesignation15v0:
+		return "MTRPowerSourceBatCommonDesignation15v0"
+	case MTRPowerSourceBatCommonDesignation22v5:
+		return "MTRPowerSourceBatCommonDesignation22v5"
+	case MTRPowerSourceBatCommonDesignation30v0:
+		return "MTRPowerSourceBatCommonDesignation30v0"
+	case MTRPowerSourceBatCommonDesignation45v0:
+		return "MTRPowerSourceBatCommonDesignation45v0"
+	case MTRPowerSourceBatCommonDesignation67v5:
+		return "MTRPowerSourceBatCommonDesignation67v5"
+	case MTRPowerSourceBatCommonDesignationJ:
+		return "MTRPowerSourceBatCommonDesignationJ"
+	case MTRPowerSourceBatCommonDesignationCR123A:
+		return "MTRPowerSourceBatCommonDesignationCR123A"
+	case MTRPowerSourceBatCommonDesignationCR2:
+		return "MTRPowerSourceBatCommonDesignationCR2"
+	case MTRPowerSourceBatCommonDesignation2CR5:
+		return "MTRPowerSourceBatCommonDesignation2CR5"
+	case MTRPowerSourceBatCommonDesignationCRP2:
+		return "MTRPowerSourceBatCommonDesignationCRP2"
+	case MTRPowerSourceBatCommonDesignationCRV3:
+		return "MTRPowerSourceBatCommonDesignationCRV3"
+	case MTRPowerSourceBatCommonDesignationSR41:
+		return "MTRPowerSourceBatCommonDesignationSR41"
+	case MTRPowerSourceBatCommonDesignationSR43:
+		return "MTRPowerSourceBatCommonDesignationSR43"
+	case MTRPowerSourceBatCommonDesignationSR44:
+		return "MTRPowerSourceBatCommonDesignationSR44"
+	case MTRPowerSourceBatCommonDesignationSR45:
+		return "MTRPowerSourceBatCommonDesignationSR45"
+	case MTRPowerSourceBatCommonDesignationSR48:
+		return "MTRPowerSourceBatCommonDesignationSR48"
+	case MTRPowerSourceBatCommonDesignationSR54:
+		return "MTRPowerSourceBatCommonDesignationSR54"
+	case MTRPowerSourceBatCommonDesignationSR55:
+		return "MTRPowerSourceBatCommonDesignationSR55"
+	case MTRPowerSourceBatCommonDesignationSR57:
+		return "MTRPowerSourceBatCommonDesignationSR57"
+	case MTRPowerSourceBatCommonDesignationSR58:
+		return "MTRPowerSourceBatCommonDesignationSR58"
+	case MTRPowerSourceBatCommonDesignationSR59:
+		return "MTRPowerSourceBatCommonDesignationSR59"
+	case MTRPowerSourceBatCommonDesignationSR60:
+		return "MTRPowerSourceBatCommonDesignationSR60"
+	case MTRPowerSourceBatCommonDesignationSR63:
+		return "MTRPowerSourceBatCommonDesignationSR63"
+	case MTRPowerSourceBatCommonDesignationSR64:
+		return "MTRPowerSourceBatCommonDesignationSR64"
+	case MTRPowerSourceBatCommonDesignationSR65:
+		return "MTRPowerSourceBatCommonDesignationSR65"
+	case MTRPowerSourceBatCommonDesignationSR66:
+		return "MTRPowerSourceBatCommonDesignationSR66"
+	case MTRPowerSourceBatCommonDesignationSR67:
+		return "MTRPowerSourceBatCommonDesignationSR67"
+	case MTRPowerSourceBatCommonDesignationSR68:
+		return "MTRPowerSourceBatCommonDesignationSR68"
+	case MTRPowerSourceBatCommonDesignationSR69:
+		return "MTRPowerSourceBatCommonDesignationSR69"
+	case MTRPowerSourceBatCommonDesignationSR516:
+		return "MTRPowerSourceBatCommonDesignationSR516"
+	case MTRPowerSourceBatCommonDesignationSR731:
+		return "MTRPowerSourceBatCommonDesignationSR731"
+	case MTRPowerSourceBatCommonDesignationSR712:
+		return "MTRPowerSourceBatCommonDesignationSR712"
+	case MTRPowerSourceBatCommonDesignationLR932:
+		return "MTRPowerSourceBatCommonDesignationLR932"
+	case MTRPowerSourceBatCommonDesignationA5:
+		return "MTRPowerSourceBatCommonDesignationA5"
+	case MTRPowerSourceBatCommonDesignationA10:
+		return "MTRPowerSourceBatCommonDesignationA10"
+	case MTRPowerSourceBatCommonDesignationA13:
+		return "MTRPowerSourceBatCommonDesignationA13"
+	case MTRPowerSourceBatCommonDesignationA312:
+		return "MTRPowerSourceBatCommonDesignationA312"
+	case MTRPowerSourceBatCommonDesignationA675:
+		return "MTRPowerSourceBatCommonDesignationA675"
+	case MTRPowerSourceBatCommonDesignationAC41E:
+		return "MTRPowerSourceBatCommonDesignationAC41E"
+	case MTRPowerSourceBatCommonDesignation10180:
+		return "MTRPowerSourceBatCommonDesignation10180"
+	case MTRPowerSourceBatCommonDesignation10280:
+		return "MTRPowerSourceBatCommonDesignation10280"
+	case MTRPowerSourceBatCommonDesignation10440:
+		return "MTRPowerSourceBatCommonDesignation10440"
+	case MTRPowerSourceBatCommonDesignation14250:
+		return "MTRPowerSourceBatCommonDesignation14250"
+	case MTRPowerSourceBatCommonDesignation14430:
+		return "MTRPowerSourceBatCommonDesignation14430"
+	case MTRPowerSourceBatCommonDesignation14500:
+		return "MTRPowerSourceBatCommonDesignation14500"
+	case MTRPowerSourceBatCommonDesignation14650:
+		return "MTRPowerSourceBatCommonDesignation14650"
+	case MTRPowerSourceBatCommonDesignation15270:
+		return "MTRPowerSourceBatCommonDesignation15270"
+	case MTRPowerSourceBatCommonDesignation16340:
+		return "MTRPowerSourceBatCommonDesignation16340"
+	case MTRPowerSourceBatCommonDesignationRCR123A:
+		return "MTRPowerSourceBatCommonDesignationRCR123A"
+	case MTRPowerSourceBatCommonDesignation17500:
+		return "MTRPowerSourceBatCommonDesignation17500"
+	case MTRPowerSourceBatCommonDesignation17670:
+		return "MTRPowerSourceBatCommonDesignation17670"
+	case MTRPowerSourceBatCommonDesignation18350:
+		return "MTRPowerSourceBatCommonDesignation18350"
+	case MTRPowerSourceBatCommonDesignation18500:
+		return "MTRPowerSourceBatCommonDesignation18500"
+	case MTRPowerSourceBatCommonDesignation18650:
+		return "MTRPowerSourceBatCommonDesignation18650"
+	case MTRPowerSourceBatCommonDesignation19670:
+		return "MTRPowerSourceBatCommonDesignation19670"
+	case MTRPowerSourceBatCommonDesignation25500:
+		return "MTRPowerSourceBatCommonDesignation25500"
+	case MTRPowerSourceBatCommonDesignation26650:
+		return "MTRPowerSourceBatCommonDesignation26650"
+	case MTRPowerSourceBatCommonDesignation32600:
+		return "MTRPowerSourceBatCommonDesignation32600"
+	default:
+		return fmt.Sprintf("MTRPowerSourceBatCommonDesignation(%d)", int64(e))
+	}
+}
+
+type MTRPowerSourceBatFault int64
+
+const (
+	MTRPowerSourceBatFaultUnspecified MTRPowerSourceBatFault = 0
+	MTRPowerSourceBatFaultUnspecfied  MTRPowerSourceBatFault = 0
+	MTRPowerSourceBatFaultOverTemp    MTRPowerSourceBatFault = 1
+	MTRPowerSourceBatFaultUnderTemp   MTRPowerSourceBatFault = 2
+)
+
+// String returns the MTRPowerSourceBatFault constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPowerSourceBatFault) String() string {
+	switch e {
+	case MTRPowerSourceBatFaultUnspecified:
+		return "MTRPowerSourceBatFaultUnspecified"
+	case MTRPowerSourceBatFaultOverTemp:
+		return "MTRPowerSourceBatFaultOverTemp"
+	case MTRPowerSourceBatFaultUnderTemp:
+		return "MTRPowerSourceBatFaultUnderTemp"
+	default:
+		return fmt.Sprintf("MTRPowerSourceBatFault(%d)", int64(e))
+	}
+}
+
+type MTRPowerSourceBatReplaceability int64
+
+const (
+	MTRPowerSourceBatReplaceabilityUnspecified        MTRPowerSourceBatReplaceability = 0
+	MTRPowerSourceBatReplaceabilityNotReplaceable     MTRPowerSourceBatReplaceability = 1
+	MTRPowerSourceBatReplaceabilityUserReplaceable    MTRPowerSourceBatReplaceability = 2
+	MTRPowerSourceBatReplaceabilityFactoryReplaceable MTRPowerSourceBatReplaceability = 3
+)
+
+// String returns the MTRPowerSourceBatReplaceability constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPowerSourceBatReplaceability) String() string {
+	switch e {
+	case MTRPowerSourceBatReplaceabilityUnspecified:
+		return "MTRPowerSourceBatReplaceabilityUnspecified"
+	case MTRPowerSourceBatReplaceabilityNotReplaceable:
+		return "MTRPowerSourceBatReplaceabilityNotReplaceable"
+	case MTRPowerSourceBatReplaceabilityUserReplaceable:
+		return "MTRPowerSourceBatReplaceabilityUserReplaceable"
+	case MTRPowerSourceBatReplaceabilityFactoryReplaceable:
+		return "MTRPowerSourceBatReplaceabilityFactoryReplaceable"
+	default:
+		return fmt.Sprintf("MTRPowerSourceBatReplaceability(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRPowerSourceFeature int64
+
+const (
+	MTRPowerSourceFeatureWired        MTRPowerSourceFeature = 1
+	MTRPowerSourceFeatureBattery      MTRPowerSourceFeature = 2
+	MTRPowerSourceFeatureRechargeable MTRPowerSourceFeature = 4
+	MTRPowerSourceFeatureReplaceable  MTRPowerSourceFeature = 8
+)
+
+// String returns the MTRPowerSourceFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPowerSourceFeature) String() string {
+	var parts []string
+	if e&MTRPowerSourceFeatureWired != 0 {
+		parts = append(parts, "MTRPowerSourceFeatureWired")
+	}
+	if e&MTRPowerSourceFeatureBattery != 0 {
+		parts = append(parts, "MTRPowerSourceFeatureBattery")
+	}
+	if e&MTRPowerSourceFeatureRechargeable != 0 {
+		parts = append(parts, "MTRPowerSourceFeatureRechargeable")
+	}
+	if e&MTRPowerSourceFeatureReplaceable != 0 {
+		parts = append(parts, "MTRPowerSourceFeatureReplaceable")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRPowerSourceStatus int64
+
+const (
+	MTRPowerSourceStatusUnspecified MTRPowerSourceStatus = 0
+	MTRPowerSourceStatusUnspecfied  MTRPowerSourceStatus = 0
+	MTRPowerSourceStatusActive      MTRPowerSourceStatus = 1
+	MTRPowerSourceStatusStandby     MTRPowerSourceStatus = 2
+	MTRPowerSourceStatusUnavailable MTRPowerSourceStatus = 3
+)
+
+// String returns the MTRPowerSourceStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPowerSourceStatus) String() string {
+	switch e {
+	case MTRPowerSourceStatusUnspecified:
+		return "MTRPowerSourceStatusUnspecified"
+	case MTRPowerSourceStatusActive:
+		return "MTRPowerSourceStatusActive"
+	case MTRPowerSourceStatusStandby:
+		return "MTRPowerSourceStatusStandby"
+	case MTRPowerSourceStatusUnavailable:
+		return "MTRPowerSourceStatusUnavailable"
+	default:
+		return fmt.Sprintf("MTRPowerSourceStatus(%d)", int64(e))
+	}
+}
+
+type MTRPowerSourceWiredCurrentType int64
+
+const (
+	MTRPowerSourceWiredCurrentTypeAC MTRPowerSourceWiredCurrentType = 0
+	MTRPowerSourceWiredCurrentTypeDC MTRPowerSourceWiredCurrentType = 1
+)
+
+// String returns the MTRPowerSourceWiredCurrentType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPowerSourceWiredCurrentType) String() string {
+	switch e {
+	case MTRPowerSourceWiredCurrentTypeAC:
+		return "MTRPowerSourceWiredCurrentTypeAC"
+	case MTRPowerSourceWiredCurrentTypeDC:
+		return "MTRPowerSourceWiredCurrentTypeDC"
+	default:
+		return fmt.Sprintf("MTRPowerSourceWiredCurrentType(%d)", int64(e))
+	}
+}
+
+type MTRPowerSourceWiredFault int64
+
+const (
+	MTRPowerSourceWiredFaultUnspecified  MTRPowerSourceWiredFault = 0
+	MTRPowerSourceWiredFaultUnspecfied   MTRPowerSourceWiredFault = 0
+	MTRPowerSourceWiredFaultOverVoltage  MTRPowerSourceWiredFault = 1
+	MTRPowerSourceWiredFaultUnderVoltage MTRPowerSourceWiredFault = 2
+)
+
+// String returns the MTRPowerSourceWiredFault constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPowerSourceWiredFault) String() string {
+	switch e {
+	case MTRPowerSourceWiredFaultUnspecified:
+		return "MTRPowerSourceWiredFaultUnspecified"
+	case MTRPowerSourceWiredFaultOverVoltage:
+		return "MTRPowerSourceWiredFaultOverVoltage"
+	case MTRPowerSourceWiredFaultUnderVoltage:
+		return "MTRPowerSourceWiredFaultUnderVoltage"
+	default:
+		return fmt.Sprintf("MTRPowerSourceWiredFault(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRPowerTopologyFeature int64
+
+const (
+	MTRPowerTopologyFeatureNodeTopology     MTRPowerTopologyFeature = 1
+	MTRPowerTopologyFeatureTreeTopology     MTRPowerTopologyFeature = 2
+	MTRPowerTopologyFeatureSetTopology      MTRPowerTopologyFeature = 4
+	MTRPowerTopologyFeatureDynamicPowerFlow MTRPowerTopologyFeature = 8
+)
+
+// String returns the MTRPowerTopologyFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPowerTopologyFeature) String() string {
+	var parts []string
+	if e&MTRPowerTopologyFeatureNodeTopology != 0 {
+		parts = append(parts, "MTRPowerTopologyFeatureNodeTopology")
+	}
+	if e&MTRPowerTopologyFeatureTreeTopology != 0 {
+		parts = append(parts, "MTRPowerTopologyFeatureTreeTopology")
+	}
+	if e&MTRPowerTopologyFeatureSetTopology != 0 {
+		parts = append(parts, "MTRPowerTopologyFeatureSetTopology")
+	}
+	if e&MTRPowerTopologyFeatureDynamicPowerFlow != 0 {
+		parts = append(parts, "MTRPowerTopologyFeatureDynamicPowerFlow")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRPressureMeasurementFeature int64
+
+const (
+	MTRPressureMeasurementFeatureExtended MTRPressureMeasurementFeature = 1
+)
+
+// String returns the MTRPressureMeasurementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPressureMeasurementFeature) String() string {
+	var parts []string
+	if e&MTRPressureMeasurementFeatureExtended != 0 {
+		parts = append(parts, "MTRPressureMeasurementFeatureExtended")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRPressureMeasurementPressureFeature int64
+
+const (
+	MTRPressureMeasurementPressureFeatureExtended MTRPressureMeasurementPressureFeature = 1
+	MTRPressureMeasurementPressureFeatureEXT      MTRPressureMeasurementPressureFeature = 1
+)
+
+// String returns the MTRPressureMeasurementPressureFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPressureMeasurementPressureFeature) String() string {
+	var parts []string
+	if e&MTRPressureMeasurementPressureFeatureExtended != 0 {
+		parts = append(parts, "MTRPressureMeasurementPressureFeatureExtended")
+	}
+	if e&MTRPressureMeasurementPressureFeatureEXT != 0 {
+		parts = append(parts, "MTRPressureMeasurementPressureFeatureEXT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRPumpConfigurationAndControlControlMode int64
+
+const (
+	MTRPumpConfigurationAndControlControlModeConstantSpeed        MTRPumpConfigurationAndControlControlMode = 0
+	MTRPumpConfigurationAndControlControlModeConstantPressure     MTRPumpConfigurationAndControlControlMode = 1
+	MTRPumpConfigurationAndControlControlModeProportionalPressure MTRPumpConfigurationAndControlControlMode = 2
+	MTRPumpConfigurationAndControlControlModeConstantFlow         MTRPumpConfigurationAndControlControlMode = 3
+	MTRPumpConfigurationAndControlControlModeConstantTemperature  MTRPumpConfigurationAndControlControlMode = 5
+	MTRPumpConfigurationAndControlControlModeAutomatic            MTRPumpConfigurationAndControlControlMode = 7
+)
+
+// String returns the MTRPumpConfigurationAndControlControlMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPumpConfigurationAndControlControlMode) String() string {
+	switch e {
+	case MTRPumpConfigurationAndControlControlModeConstantSpeed:
+		return "MTRPumpConfigurationAndControlControlModeConstantSpeed"
+	case MTRPumpConfigurationAndControlControlModeConstantPressure:
+		return "MTRPumpConfigurationAndControlControlModeConstantPressure"
+	case MTRPumpConfigurationAndControlControlModeProportionalPressure:
+		return "MTRPumpConfigurationAndControlControlModeProportionalPressure"
+	case MTRPumpConfigurationAndControlControlModeConstantFlow:
+		return "MTRPumpConfigurationAndControlControlModeConstantFlow"
+	case MTRPumpConfigurationAndControlControlModeConstantTemperature:
+		return "MTRPumpConfigurationAndControlControlModeConstantTemperature"
+	case MTRPumpConfigurationAndControlControlModeAutomatic:
+		return "MTRPumpConfigurationAndControlControlModeAutomatic"
+	default:
+		return fmt.Sprintf("MTRPumpConfigurationAndControlControlMode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRPumpConfigurationAndControlFeature int64
+
+const (
+	MTRPumpConfigurationAndControlFeatureConstantPressure    MTRPumpConfigurationAndControlFeature = 1
+	MTRPumpConfigurationAndControlFeatureCompensatedPressure MTRPumpConfigurationAndControlFeature = 2
+	MTRPumpConfigurationAndControlFeatureConstantFlow        MTRPumpConfigurationAndControlFeature = 4
+	MTRPumpConfigurationAndControlFeatureConstantSpeed       MTRPumpConfigurationAndControlFeature = 8
+	MTRPumpConfigurationAndControlFeatureConstantTemperature MTRPumpConfigurationAndControlFeature = 16
+	MTRPumpConfigurationAndControlFeatureAutomatic           MTRPumpConfigurationAndControlFeature = 32
+	MTRPumpConfigurationAndControlFeatureLocalOperation      MTRPumpConfigurationAndControlFeature = 64
+)
+
+// String returns the MTRPumpConfigurationAndControlFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPumpConfigurationAndControlFeature) String() string {
+	var parts []string
+	if e&MTRPumpConfigurationAndControlFeatureConstantPressure != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlFeatureConstantPressure")
+	}
+	if e&MTRPumpConfigurationAndControlFeatureCompensatedPressure != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlFeatureCompensatedPressure")
+	}
+	if e&MTRPumpConfigurationAndControlFeatureConstantFlow != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlFeatureConstantFlow")
+	}
+	if e&MTRPumpConfigurationAndControlFeatureConstantSpeed != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlFeatureConstantSpeed")
+	}
+	if e&MTRPumpConfigurationAndControlFeatureConstantTemperature != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlFeatureConstantTemperature")
+	}
+	if e&MTRPumpConfigurationAndControlFeatureAutomatic != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlFeatureAutomatic")
+	}
+	if e&MTRPumpConfigurationAndControlFeatureLocalOperation != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlFeatureLocalOperation")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRPumpConfigurationAndControlOperationMode int64
+
+const (
+	MTRPumpConfigurationAndControlOperationModeNormal  MTRPumpConfigurationAndControlOperationMode = 0
+	MTRPumpConfigurationAndControlOperationModeMinimum MTRPumpConfigurationAndControlOperationMode = 1
+	MTRPumpConfigurationAndControlOperationModeMaximum MTRPumpConfigurationAndControlOperationMode = 2
+	MTRPumpConfigurationAndControlOperationModeLocal   MTRPumpConfigurationAndControlOperationMode = 3
+)
+
+// String returns the MTRPumpConfigurationAndControlOperationMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPumpConfigurationAndControlOperationMode) String() string {
+	switch e {
+	case MTRPumpConfigurationAndControlOperationModeNormal:
+		return "MTRPumpConfigurationAndControlOperationModeNormal"
+	case MTRPumpConfigurationAndControlOperationModeMinimum:
+		return "MTRPumpConfigurationAndControlOperationModeMinimum"
+	case MTRPumpConfigurationAndControlOperationModeMaximum:
+		return "MTRPumpConfigurationAndControlOperationModeMaximum"
+	case MTRPumpConfigurationAndControlOperationModeLocal:
+		return "MTRPumpConfigurationAndControlOperationModeLocal"
+	default:
+		return fmt.Sprintf("MTRPumpConfigurationAndControlOperationMode(%d)", int64(e))
+	}
+}
+
+type MTRPumpConfigurationAndControlPumpControlMode int64
+
+const (
+	MTRPumpConfigurationAndControlPumpControlModeConstantSpeed        MTRPumpConfigurationAndControlPumpControlMode = 0
+	MTRPumpConfigurationAndControlPumpControlModeConstantPressure     MTRPumpConfigurationAndControlPumpControlMode = 1
+	MTRPumpConfigurationAndControlPumpControlModeProportionalPressure MTRPumpConfigurationAndControlPumpControlMode = 2
+	MTRPumpConfigurationAndControlPumpControlModeConstantFlow         MTRPumpConfigurationAndControlPumpControlMode = 3
+	MTRPumpConfigurationAndControlPumpControlModeConstantTemperature  MTRPumpConfigurationAndControlPumpControlMode = 5
+	MTRPumpConfigurationAndControlPumpControlModeAutomatic            MTRPumpConfigurationAndControlPumpControlMode = 7
+)
+
+// String returns the MTRPumpConfigurationAndControlPumpControlMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPumpConfigurationAndControlPumpControlMode) String() string {
+	switch e {
+	case MTRPumpConfigurationAndControlPumpControlModeConstantSpeed:
+		return "MTRPumpConfigurationAndControlPumpControlModeConstantSpeed"
+	case MTRPumpConfigurationAndControlPumpControlModeConstantPressure:
+		return "MTRPumpConfigurationAndControlPumpControlModeConstantPressure"
+	case MTRPumpConfigurationAndControlPumpControlModeProportionalPressure:
+		return "MTRPumpConfigurationAndControlPumpControlModeProportionalPressure"
+	case MTRPumpConfigurationAndControlPumpControlModeConstantFlow:
+		return "MTRPumpConfigurationAndControlPumpControlModeConstantFlow"
+	case MTRPumpConfigurationAndControlPumpControlModeConstantTemperature:
+		return "MTRPumpConfigurationAndControlPumpControlModeConstantTemperature"
+	case MTRPumpConfigurationAndControlPumpControlModeAutomatic:
+		return "MTRPumpConfigurationAndControlPumpControlModeAutomatic"
+	default:
+		return fmt.Sprintf("MTRPumpConfigurationAndControlPumpControlMode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRPumpConfigurationAndControlPumpFeature int64
+
+const (
+	MTRPumpConfigurationAndControlPumpFeatureConstantPressure    MTRPumpConfigurationAndControlPumpFeature = 1
+	MTRPumpConfigurationAndControlPumpFeatureCompensatedPressure MTRPumpConfigurationAndControlPumpFeature = 2
+	MTRPumpConfigurationAndControlPumpFeatureConstantFlow        MTRPumpConfigurationAndControlPumpFeature = 4
+	MTRPumpConfigurationAndControlPumpFeatureConstantSpeed       MTRPumpConfigurationAndControlPumpFeature = 8
+	MTRPumpConfigurationAndControlPumpFeatureConstantTemperature MTRPumpConfigurationAndControlPumpFeature = 16
+	MTRPumpConfigurationAndControlPumpFeatureAutomatic           MTRPumpConfigurationAndControlPumpFeature = 32
+	MTRPumpConfigurationAndControlPumpFeatureLocalOperation      MTRPumpConfigurationAndControlPumpFeature = 64
+	MTRPumpConfigurationAndControlPumpFeatureLocal               MTRPumpConfigurationAndControlPumpFeature = 64
+)
+
+// String returns the MTRPumpConfigurationAndControlPumpFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPumpConfigurationAndControlPumpFeature) String() string {
+	var parts []string
+	if e&MTRPumpConfigurationAndControlPumpFeatureConstantPressure != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpFeatureConstantPressure")
+	}
+	if e&MTRPumpConfigurationAndControlPumpFeatureCompensatedPressure != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpFeatureCompensatedPressure")
+	}
+	if e&MTRPumpConfigurationAndControlPumpFeatureConstantFlow != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpFeatureConstantFlow")
+	}
+	if e&MTRPumpConfigurationAndControlPumpFeatureConstantSpeed != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpFeatureConstantSpeed")
+	}
+	if e&MTRPumpConfigurationAndControlPumpFeatureConstantTemperature != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpFeatureConstantTemperature")
+	}
+	if e&MTRPumpConfigurationAndControlPumpFeatureAutomatic != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpFeatureAutomatic")
+	}
+	if e&MTRPumpConfigurationAndControlPumpFeatureLocalOperation != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpFeatureLocalOperation")
+	}
+	if e&MTRPumpConfigurationAndControlPumpFeatureLocal != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpFeatureLocal")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRPumpConfigurationAndControlPumpOperationMode int64
+
+const (
+	MTRPumpConfigurationAndControlPumpOperationModeNormal  MTRPumpConfigurationAndControlPumpOperationMode = 0
+	MTRPumpConfigurationAndControlPumpOperationModeMinimum MTRPumpConfigurationAndControlPumpOperationMode = 1
+	MTRPumpConfigurationAndControlPumpOperationModeMaximum MTRPumpConfigurationAndControlPumpOperationMode = 2
+	MTRPumpConfigurationAndControlPumpOperationModeLocal   MTRPumpConfigurationAndControlPumpOperationMode = 3
+)
+
+// String returns the MTRPumpConfigurationAndControlPumpOperationMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPumpConfigurationAndControlPumpOperationMode) String() string {
+	switch e {
+	case MTRPumpConfigurationAndControlPumpOperationModeNormal:
+		return "MTRPumpConfigurationAndControlPumpOperationModeNormal"
+	case MTRPumpConfigurationAndControlPumpOperationModeMinimum:
+		return "MTRPumpConfigurationAndControlPumpOperationModeMinimum"
+	case MTRPumpConfigurationAndControlPumpOperationModeMaximum:
+		return "MTRPumpConfigurationAndControlPumpOperationModeMaximum"
+	case MTRPumpConfigurationAndControlPumpOperationModeLocal:
+		return "MTRPumpConfigurationAndControlPumpOperationModeLocal"
+	default:
+		return fmt.Sprintf("MTRPumpConfigurationAndControlPumpOperationMode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRPumpConfigurationAndControlPumpStatus int64
+
+const (
+	MTRPumpConfigurationAndControlPumpStatusDeviceFault       MTRPumpConfigurationAndControlPumpStatus = 1
+	MTRPumpConfigurationAndControlPumpStatusSupplyfault       MTRPumpConfigurationAndControlPumpStatus = 2
+	MTRPumpConfigurationAndControlPumpStatusSpeedLow          MTRPumpConfigurationAndControlPumpStatus = 4
+	MTRPumpConfigurationAndControlPumpStatusSpeedHigh         MTRPumpConfigurationAndControlPumpStatus = 8
+	MTRPumpConfigurationAndControlPumpStatusLocalOverride     MTRPumpConfigurationAndControlPumpStatus = 16
+	MTRPumpConfigurationAndControlPumpStatusRunning           MTRPumpConfigurationAndControlPumpStatus = 32
+	MTRPumpConfigurationAndControlPumpStatusRemotePressure    MTRPumpConfigurationAndControlPumpStatus = 64
+	MTRPumpConfigurationAndControlPumpStatusRemoteFlow        MTRPumpConfigurationAndControlPumpStatus = 128
+	MTRPumpConfigurationAndControlPumpStatusRemoteTemperature MTRPumpConfigurationAndControlPumpStatus = 256
+)
+
+// String returns the MTRPumpConfigurationAndControlPumpStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPumpConfigurationAndControlPumpStatus) String() string {
+	var parts []string
+	if e&MTRPumpConfigurationAndControlPumpStatusDeviceFault != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusDeviceFault")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusSupplyfault != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusSupplyfault")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusSpeedLow != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusSpeedLow")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusSpeedHigh != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusSpeedHigh")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusLocalOverride != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusLocalOverride")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusRunning != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusRunning")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusRemotePressure != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusRemotePressure")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusRemoteFlow != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusRemoteFlow")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusRemoteTemperature != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusRemoteTemperature")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRPumpConfigurationAndControlPumpStatusBitmap int64
+
+const (
+	MTRPumpConfigurationAndControlPumpStatusBitmapDeviceFault       MTRPumpConfigurationAndControlPumpStatusBitmap = 1
+	MTRPumpConfigurationAndControlPumpStatusBitmapSupplyFault       MTRPumpConfigurationAndControlPumpStatusBitmap = 2
+	MTRPumpConfigurationAndControlPumpStatusBitmapSupplyfault       MTRPumpConfigurationAndControlPumpStatusBitmap = 2
+	MTRPumpConfigurationAndControlPumpStatusBitmapSpeedLow          MTRPumpConfigurationAndControlPumpStatusBitmap = 4
+	MTRPumpConfigurationAndControlPumpStatusBitmapSpeedHigh         MTRPumpConfigurationAndControlPumpStatusBitmap = 8
+	MTRPumpConfigurationAndControlPumpStatusBitmapLocalOverride     MTRPumpConfigurationAndControlPumpStatusBitmap = 16
+	MTRPumpConfigurationAndControlPumpStatusBitmapRunning           MTRPumpConfigurationAndControlPumpStatusBitmap = 32
+	MTRPumpConfigurationAndControlPumpStatusBitmapRemotePressure    MTRPumpConfigurationAndControlPumpStatusBitmap = 64
+	MTRPumpConfigurationAndControlPumpStatusBitmapRemoteFlow        MTRPumpConfigurationAndControlPumpStatusBitmap = 128
+	MTRPumpConfigurationAndControlPumpStatusBitmapRemoteTemperature MTRPumpConfigurationAndControlPumpStatusBitmap = 256
+)
+
+// String returns the MTRPumpConfigurationAndControlPumpStatusBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRPumpConfigurationAndControlPumpStatusBitmap) String() string {
+	var parts []string
+	if e&MTRPumpConfigurationAndControlPumpStatusBitmapDeviceFault != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusBitmapDeviceFault")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusBitmapSupplyFault != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusBitmapSupplyFault")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusBitmapSupplyfault != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusBitmapSupplyfault")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusBitmapSpeedLow != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusBitmapSpeedLow")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusBitmapSpeedHigh != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusBitmapSpeedHigh")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusBitmapLocalOverride != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusBitmapLocalOverride")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusBitmapRunning != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusBitmapRunning")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusBitmapRemotePressure != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusBitmapRemotePressure")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusBitmapRemoteFlow != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusBitmapRemoteFlow")
+	}
+	if e&MTRPumpConfigurationAndControlPumpStatusBitmapRemoteTemperature != 0 {
+		parts = append(parts, "MTRPumpConfigurationAndControlPumpStatusBitmapRemoteTemperature")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRRVCCleanModeModeTag int64
+
+const (
+	MTRRVCCleanModeModeTagAuto      MTRRVCCleanModeModeTag = 0
+	MTRRVCCleanModeModeTagQuick     MTRRVCCleanModeModeTag = 1
+	MTRRVCCleanModeModeTagQuiet     MTRRVCCleanModeModeTag = 2
+	MTRRVCCleanModeModeTagLowNoise  MTRRVCCleanModeModeTag = 3
+	MTRRVCCleanModeModeTagLowEnergy MTRRVCCleanModeModeTag = 4
+	MTRRVCCleanModeModeTagVacation  MTRRVCCleanModeModeTag = 5
+	MTRRVCCleanModeModeTagMin       MTRRVCCleanModeModeTag = 6
+	MTRRVCCleanModeModeTagMax       MTRRVCCleanModeModeTag = 7
+	MTRRVCCleanModeModeTagNight     MTRRVCCleanModeModeTag = 8
+	MTRRVCCleanModeModeTagDay       MTRRVCCleanModeModeTag = 9
+	MTRRVCCleanModeModeTagDeepClean MTRRVCCleanModeModeTag = 16384
+	MTRRVCCleanModeModeTagVacuum    MTRRVCCleanModeModeTag = 16385
+	MTRRVCCleanModeModeTagMop       MTRRVCCleanModeModeTag = 16386
+)
+
+// String returns the MTRRVCCleanModeModeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRVCCleanModeModeTag) String() string {
+	switch e {
+	case MTRRVCCleanModeModeTagAuto:
+		return "MTRRVCCleanModeModeTagAuto"
+	case MTRRVCCleanModeModeTagQuick:
+		return "MTRRVCCleanModeModeTagQuick"
+	case MTRRVCCleanModeModeTagQuiet:
+		return "MTRRVCCleanModeModeTagQuiet"
+	case MTRRVCCleanModeModeTagLowNoise:
+		return "MTRRVCCleanModeModeTagLowNoise"
+	case MTRRVCCleanModeModeTagLowEnergy:
+		return "MTRRVCCleanModeModeTagLowEnergy"
+	case MTRRVCCleanModeModeTagVacation:
+		return "MTRRVCCleanModeModeTagVacation"
+	case MTRRVCCleanModeModeTagMin:
+		return "MTRRVCCleanModeModeTagMin"
+	case MTRRVCCleanModeModeTagMax:
+		return "MTRRVCCleanModeModeTagMax"
+	case MTRRVCCleanModeModeTagNight:
+		return "MTRRVCCleanModeModeTagNight"
+	case MTRRVCCleanModeModeTagDay:
+		return "MTRRVCCleanModeModeTagDay"
+	case MTRRVCCleanModeModeTagDeepClean:
+		return "MTRRVCCleanModeModeTagDeepClean"
+	case MTRRVCCleanModeModeTagVacuum:
+		return "MTRRVCCleanModeModeTagVacuum"
+	case MTRRVCCleanModeModeTagMop:
+		return "MTRRVCCleanModeModeTagMop"
+	default:
+		return fmt.Sprintf("MTRRVCCleanModeModeTag(%d)", int64(e))
+	}
+}
+
+type MTRRVCCleanModeStatusCode int64
+
+const (
+	MTRRVCCleanModeStatusCodeCleaningInProgress MTRRVCCleanModeStatusCode = 64
+)
+
+// String returns the MTRRVCCleanModeStatusCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRVCCleanModeStatusCode) String() string {
+	switch e {
+	case MTRRVCCleanModeStatusCodeCleaningInProgress:
+		return "MTRRVCCleanModeStatusCodeCleaningInProgress"
+	default:
+		return fmt.Sprintf("MTRRVCCleanModeStatusCode(%d)", int64(e))
+	}
+}
+
+type MTRRVCOperationalStateErrorState int64
+
+const (
+	MTRRVCOperationalStateErrorStateNoError                   MTRRVCOperationalStateErrorState = 0
+	MTRRVCOperationalStateErrorStateUnableToStartOrResume     MTRRVCOperationalStateErrorState = 1
+	MTRRVCOperationalStateErrorStateUnableToCompleteOperation MTRRVCOperationalStateErrorState = 2
+	MTRRVCOperationalStateErrorStateCommandInvalidInState     MTRRVCOperationalStateErrorState = 3
+	MTRRVCOperationalStateErrorStateFailedToFindChargingDock  MTRRVCOperationalStateErrorState = 64
+	MTRRVCOperationalStateErrorStateStuck                     MTRRVCOperationalStateErrorState = 65
+	MTRRVCOperationalStateErrorStateDustBinMissing            MTRRVCOperationalStateErrorState = 66
+	MTRRVCOperationalStateErrorStateDustBinFull               MTRRVCOperationalStateErrorState = 67
+	MTRRVCOperationalStateErrorStateWaterTankEmpty            MTRRVCOperationalStateErrorState = 68
+	MTRRVCOperationalStateErrorStateWaterTankMissing          MTRRVCOperationalStateErrorState = 69
+	MTRRVCOperationalStateErrorStateWaterTankLidOpen          MTRRVCOperationalStateErrorState = 70
+	MTRRVCOperationalStateErrorStateMopCleaningPadMissing     MTRRVCOperationalStateErrorState = 71
+)
+
+// String returns the MTRRVCOperationalStateErrorState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRVCOperationalStateErrorState) String() string {
+	switch e {
+	case MTRRVCOperationalStateErrorStateNoError:
+		return "MTRRVCOperationalStateErrorStateNoError"
+	case MTRRVCOperationalStateErrorStateUnableToStartOrResume:
+		return "MTRRVCOperationalStateErrorStateUnableToStartOrResume"
+	case MTRRVCOperationalStateErrorStateUnableToCompleteOperation:
+		return "MTRRVCOperationalStateErrorStateUnableToCompleteOperation"
+	case MTRRVCOperationalStateErrorStateCommandInvalidInState:
+		return "MTRRVCOperationalStateErrorStateCommandInvalidInState"
+	case MTRRVCOperationalStateErrorStateFailedToFindChargingDock:
+		return "MTRRVCOperationalStateErrorStateFailedToFindChargingDock"
+	case MTRRVCOperationalStateErrorStateStuck:
+		return "MTRRVCOperationalStateErrorStateStuck"
+	case MTRRVCOperationalStateErrorStateDustBinMissing:
+		return "MTRRVCOperationalStateErrorStateDustBinMissing"
+	case MTRRVCOperationalStateErrorStateDustBinFull:
+		return "MTRRVCOperationalStateErrorStateDustBinFull"
+	case MTRRVCOperationalStateErrorStateWaterTankEmpty:
+		return "MTRRVCOperationalStateErrorStateWaterTankEmpty"
+	case MTRRVCOperationalStateErrorStateWaterTankMissing:
+		return "MTRRVCOperationalStateErrorStateWaterTankMissing"
+	case MTRRVCOperationalStateErrorStateWaterTankLidOpen:
+		return "MTRRVCOperationalStateErrorStateWaterTankLidOpen"
+	case MTRRVCOperationalStateErrorStateMopCleaningPadMissing:
+		return "MTRRVCOperationalStateErrorStateMopCleaningPadMissing"
+	default:
+		return fmt.Sprintf("MTRRVCOperationalStateErrorState(%d)", int64(e))
+	}
+}
+
+type MTRRVCOperationalStateOperationalState int64
+
+const (
+	MTRRVCOperationalStateOperationalStateStopped        MTRRVCOperationalStateOperationalState = 0
+	MTRRVCOperationalStateOperationalStateRunning        MTRRVCOperationalStateOperationalState = 1
+	MTRRVCOperationalStateOperationalStatePaused         MTRRVCOperationalStateOperationalState = 2
+	MTRRVCOperationalStateOperationalStateError          MTRRVCOperationalStateOperationalState = 3
+	MTRRVCOperationalStateOperationalStateSeekingCharger MTRRVCOperationalStateOperationalState = 64
+	MTRRVCOperationalStateOperationalStateCharging       MTRRVCOperationalStateOperationalState = 65
+	MTRRVCOperationalStateOperationalStateDocked         MTRRVCOperationalStateOperationalState = 66
+)
+
+// String returns the MTRRVCOperationalStateOperationalState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRVCOperationalStateOperationalState) String() string {
+	switch e {
+	case MTRRVCOperationalStateOperationalStateStopped:
+		return "MTRRVCOperationalStateOperationalStateStopped"
+	case MTRRVCOperationalStateOperationalStateRunning:
+		return "MTRRVCOperationalStateOperationalStateRunning"
+	case MTRRVCOperationalStateOperationalStatePaused:
+		return "MTRRVCOperationalStateOperationalStatePaused"
+	case MTRRVCOperationalStateOperationalStateError:
+		return "MTRRVCOperationalStateOperationalStateError"
+	case MTRRVCOperationalStateOperationalStateSeekingCharger:
+		return "MTRRVCOperationalStateOperationalStateSeekingCharger"
+	case MTRRVCOperationalStateOperationalStateCharging:
+		return "MTRRVCOperationalStateOperationalStateCharging"
+	case MTRRVCOperationalStateOperationalStateDocked:
+		return "MTRRVCOperationalStateOperationalStateDocked"
+	default:
+		return fmt.Sprintf("MTRRVCOperationalStateOperationalState(%d)", int64(e))
+	}
+}
+
+type MTRRVCRunModeModeTag int64
+
+const (
+	MTRRVCRunModeModeTagAuto      MTRRVCRunModeModeTag = 0
+	MTRRVCRunModeModeTagQuick     MTRRVCRunModeModeTag = 1
+	MTRRVCRunModeModeTagQuiet     MTRRVCRunModeModeTag = 2
+	MTRRVCRunModeModeTagLowNoise  MTRRVCRunModeModeTag = 3
+	MTRRVCRunModeModeTagLowEnergy MTRRVCRunModeModeTag = 4
+	MTRRVCRunModeModeTagVacation  MTRRVCRunModeModeTag = 5
+	MTRRVCRunModeModeTagMin       MTRRVCRunModeModeTag = 6
+	MTRRVCRunModeModeTagMax       MTRRVCRunModeModeTag = 7
+	MTRRVCRunModeModeTagNight     MTRRVCRunModeModeTag = 8
+	MTRRVCRunModeModeTagDay       MTRRVCRunModeModeTag = 9
+	MTRRVCRunModeModeTagIdle      MTRRVCRunModeModeTag = 16384
+	MTRRVCRunModeModeTagCleaning  MTRRVCRunModeModeTag = 16385
+	MTRRVCRunModeModeTagMapping   MTRRVCRunModeModeTag = 16386
+)
+
+// String returns the MTRRVCRunModeModeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRVCRunModeModeTag) String() string {
+	switch e {
+	case MTRRVCRunModeModeTagAuto:
+		return "MTRRVCRunModeModeTagAuto"
+	case MTRRVCRunModeModeTagQuick:
+		return "MTRRVCRunModeModeTagQuick"
+	case MTRRVCRunModeModeTagQuiet:
+		return "MTRRVCRunModeModeTagQuiet"
+	case MTRRVCRunModeModeTagLowNoise:
+		return "MTRRVCRunModeModeTagLowNoise"
+	case MTRRVCRunModeModeTagLowEnergy:
+		return "MTRRVCRunModeModeTagLowEnergy"
+	case MTRRVCRunModeModeTagVacation:
+		return "MTRRVCRunModeModeTagVacation"
+	case MTRRVCRunModeModeTagMin:
+		return "MTRRVCRunModeModeTagMin"
+	case MTRRVCRunModeModeTagMax:
+		return "MTRRVCRunModeModeTagMax"
+	case MTRRVCRunModeModeTagNight:
+		return "MTRRVCRunModeModeTagNight"
+	case MTRRVCRunModeModeTagDay:
+		return "MTRRVCRunModeModeTagDay"
+	case MTRRVCRunModeModeTagIdle:
+		return "MTRRVCRunModeModeTagIdle"
+	case MTRRVCRunModeModeTagCleaning:
+		return "MTRRVCRunModeModeTagCleaning"
+	case MTRRVCRunModeModeTagMapping:
+		return "MTRRVCRunModeModeTagMapping"
+	default:
+		return fmt.Sprintf("MTRRVCRunModeModeTag(%d)", int64(e))
+	}
+}
+
+type MTRRVCRunModeStatusCode int64
+
+const (
+	MTRRVCRunModeStatusCodeStuck                 MTRRVCRunModeStatusCode = 65
+	MTRRVCRunModeStatusCodeDustBinMissing        MTRRVCRunModeStatusCode = 66
+	MTRRVCRunModeStatusCodeDustBinFull           MTRRVCRunModeStatusCode = 67
+	MTRRVCRunModeStatusCodeWaterTankEmpty        MTRRVCRunModeStatusCode = 68
+	MTRRVCRunModeStatusCodeWaterTankMissing      MTRRVCRunModeStatusCode = 69
+	MTRRVCRunModeStatusCodeWaterTankLidOpen      MTRRVCRunModeStatusCode = 70
+	MTRRVCRunModeStatusCodeMopCleaningPadMissing MTRRVCRunModeStatusCode = 71
+	MTRRVCRunModeStatusCodeBatteryLow            MTRRVCRunModeStatusCode = 72
+)
+
+// String returns the MTRRVCRunModeStatusCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRVCRunModeStatusCode) String() string {
+	switch e {
+	case MTRRVCRunModeStatusCodeStuck:
+		return "MTRRVCRunModeStatusCodeStuck"
+	case MTRRVCRunModeStatusCodeDustBinMissing:
+		return "MTRRVCRunModeStatusCodeDustBinMissing"
+	case MTRRVCRunModeStatusCodeDustBinFull:
+		return "MTRRVCRunModeStatusCodeDustBinFull"
+	case MTRRVCRunModeStatusCodeWaterTankEmpty:
+		return "MTRRVCRunModeStatusCodeWaterTankEmpty"
+	case MTRRVCRunModeStatusCodeWaterTankMissing:
+		return "MTRRVCRunModeStatusCodeWaterTankMissing"
+	case MTRRVCRunModeStatusCodeWaterTankLidOpen:
+		return "MTRRVCRunModeStatusCodeWaterTankLidOpen"
+	case MTRRVCRunModeStatusCodeMopCleaningPadMissing:
+		return "MTRRVCRunModeStatusCodeMopCleaningPadMissing"
+	case MTRRVCRunModeStatusCodeBatteryLow:
+		return "MTRRVCRunModeStatusCodeBatteryLow"
+	default:
+		return fmt.Sprintf("MTRRVCRunModeStatusCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRRadonConcentrationMeasurementFeature int64
+
+const (
+	MTRRadonConcentrationMeasurementFeatureNumericMeasurement MTRRadonConcentrationMeasurementFeature = 1
+	MTRRadonConcentrationMeasurementFeatureLevelIndication    MTRRadonConcentrationMeasurementFeature = 2
+	MTRRadonConcentrationMeasurementFeatureMediumLevel        MTRRadonConcentrationMeasurementFeature = 4
+	MTRRadonConcentrationMeasurementFeatureCriticalLevel      MTRRadonConcentrationMeasurementFeature = 8
+	MTRRadonConcentrationMeasurementFeaturePeakMeasurement    MTRRadonConcentrationMeasurementFeature = 16
+	MTRRadonConcentrationMeasurementFeatureAverageMeasurement MTRRadonConcentrationMeasurementFeature = 32
+)
+
+// String returns the MTRRadonConcentrationMeasurementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRadonConcentrationMeasurementFeature) String() string {
+	var parts []string
+	if e&MTRRadonConcentrationMeasurementFeatureNumericMeasurement != 0 {
+		parts = append(parts, "MTRRadonConcentrationMeasurementFeatureNumericMeasurement")
+	}
+	if e&MTRRadonConcentrationMeasurementFeatureLevelIndication != 0 {
+		parts = append(parts, "MTRRadonConcentrationMeasurementFeatureLevelIndication")
+	}
+	if e&MTRRadonConcentrationMeasurementFeatureMediumLevel != 0 {
+		parts = append(parts, "MTRRadonConcentrationMeasurementFeatureMediumLevel")
+	}
+	if e&MTRRadonConcentrationMeasurementFeatureCriticalLevel != 0 {
+		parts = append(parts, "MTRRadonConcentrationMeasurementFeatureCriticalLevel")
+	}
+	if e&MTRRadonConcentrationMeasurementFeaturePeakMeasurement != 0 {
+		parts = append(parts, "MTRRadonConcentrationMeasurementFeaturePeakMeasurement")
+	}
+	if e&MTRRadonConcentrationMeasurementFeatureAverageMeasurement != 0 {
+		parts = append(parts, "MTRRadonConcentrationMeasurementFeatureAverageMeasurement")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRRadonConcentrationMeasurementLevelValue int64
+
+const (
+	MTRRadonConcentrationMeasurementLevelValueUnknown  MTRRadonConcentrationMeasurementLevelValue = 0
+	MTRRadonConcentrationMeasurementLevelValueLow      MTRRadonConcentrationMeasurementLevelValue = 1
+	MTRRadonConcentrationMeasurementLevelValueMedium   MTRRadonConcentrationMeasurementLevelValue = 2
+	MTRRadonConcentrationMeasurementLevelValueHigh     MTRRadonConcentrationMeasurementLevelValue = 3
+	MTRRadonConcentrationMeasurementLevelValueCritical MTRRadonConcentrationMeasurementLevelValue = 4
+)
+
+// String returns the MTRRadonConcentrationMeasurementLevelValue constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRadonConcentrationMeasurementLevelValue) String() string {
+	switch e {
+	case MTRRadonConcentrationMeasurementLevelValueUnknown:
+		return "MTRRadonConcentrationMeasurementLevelValueUnknown"
+	case MTRRadonConcentrationMeasurementLevelValueLow:
+		return "MTRRadonConcentrationMeasurementLevelValueLow"
+	case MTRRadonConcentrationMeasurementLevelValueMedium:
+		return "MTRRadonConcentrationMeasurementLevelValueMedium"
+	case MTRRadonConcentrationMeasurementLevelValueHigh:
+		return "MTRRadonConcentrationMeasurementLevelValueHigh"
+	case MTRRadonConcentrationMeasurementLevelValueCritical:
+		return "MTRRadonConcentrationMeasurementLevelValueCritical"
+	default:
+		return fmt.Sprintf("MTRRadonConcentrationMeasurementLevelValue(%d)", int64(e))
+	}
+}
+
+type MTRRadonConcentrationMeasurementMeasurementMedium int64
+
+const (
+	MTRRadonConcentrationMeasurementMeasurementMediumAir   MTRRadonConcentrationMeasurementMeasurementMedium = 0
+	MTRRadonConcentrationMeasurementMeasurementMediumWater MTRRadonConcentrationMeasurementMeasurementMedium = 1
+	MTRRadonConcentrationMeasurementMeasurementMediumSoil  MTRRadonConcentrationMeasurementMeasurementMedium = 2
+)
+
+// String returns the MTRRadonConcentrationMeasurementMeasurementMedium constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRadonConcentrationMeasurementMeasurementMedium) String() string {
+	switch e {
+	case MTRRadonConcentrationMeasurementMeasurementMediumAir:
+		return "MTRRadonConcentrationMeasurementMeasurementMediumAir"
+	case MTRRadonConcentrationMeasurementMeasurementMediumWater:
+		return "MTRRadonConcentrationMeasurementMeasurementMediumWater"
+	case MTRRadonConcentrationMeasurementMeasurementMediumSoil:
+		return "MTRRadonConcentrationMeasurementMeasurementMediumSoil"
+	default:
+		return fmt.Sprintf("MTRRadonConcentrationMeasurementMeasurementMedium(%d)", int64(e))
+	}
+}
+
+type MTRRadonConcentrationMeasurementMeasurementUnit int64
+
+const (
+	MTRRadonConcentrationMeasurementMeasurementUnitPPM  MTRRadonConcentrationMeasurementMeasurementUnit = 0
+	MTRRadonConcentrationMeasurementMeasurementUnitPPB  MTRRadonConcentrationMeasurementMeasurementUnit = 1
+	MTRRadonConcentrationMeasurementMeasurementUnitPPT  MTRRadonConcentrationMeasurementMeasurementUnit = 2
+	MTRRadonConcentrationMeasurementMeasurementUnitMGM3 MTRRadonConcentrationMeasurementMeasurementUnit = 3
+	MTRRadonConcentrationMeasurementMeasurementUnitUGM3 MTRRadonConcentrationMeasurementMeasurementUnit = 4
+	MTRRadonConcentrationMeasurementMeasurementUnitNGM3 MTRRadonConcentrationMeasurementMeasurementUnit = 5
+	MTRRadonConcentrationMeasurementMeasurementUnitPM3  MTRRadonConcentrationMeasurementMeasurementUnit = 6
+	MTRRadonConcentrationMeasurementMeasurementUnitBQM3 MTRRadonConcentrationMeasurementMeasurementUnit = 7
+)
+
+// String returns the MTRRadonConcentrationMeasurementMeasurementUnit constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRadonConcentrationMeasurementMeasurementUnit) String() string {
+	switch e {
+	case MTRRadonConcentrationMeasurementMeasurementUnitPPM:
+		return "MTRRadonConcentrationMeasurementMeasurementUnitPPM"
+	case MTRRadonConcentrationMeasurementMeasurementUnitPPB:
+		return "MTRRadonConcentrationMeasurementMeasurementUnitPPB"
+	case MTRRadonConcentrationMeasurementMeasurementUnitPPT:
+		return "MTRRadonConcentrationMeasurementMeasurementUnitPPT"
+	case MTRRadonConcentrationMeasurementMeasurementUnitMGM3:
+		return "MTRRadonConcentrationMeasurementMeasurementUnitMGM3"
+	case MTRRadonConcentrationMeasurementMeasurementUnitUGM3:
+		return "MTRRadonConcentrationMeasurementMeasurementUnitUGM3"
+	case MTRRadonConcentrationMeasurementMeasurementUnitNGM3:
+		return "MTRRadonConcentrationMeasurementMeasurementUnitNGM3"
+	case MTRRadonConcentrationMeasurementMeasurementUnitPM3:
+		return "MTRRadonConcentrationMeasurementMeasurementUnitPM3"
+	case MTRRadonConcentrationMeasurementMeasurementUnitBQM3:
+		return "MTRRadonConcentrationMeasurementMeasurementUnitBQM3"
+	default:
+		return fmt.Sprintf("MTRRadonConcentrationMeasurementMeasurementUnit(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRRefrigeratorAlarmAlarmBitmap int64
+
+const (
+	MTRRefrigeratorAlarmAlarmBitmapDoorOpen MTRRefrigeratorAlarmAlarmBitmap = 1
+)
+
+// String returns the MTRRefrigeratorAlarmAlarmBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRefrigeratorAlarmAlarmBitmap) String() string {
+	var parts []string
+	if e&MTRRefrigeratorAlarmAlarmBitmapDoorOpen != 0 {
+		parts = append(parts, "MTRRefrigeratorAlarmAlarmBitmapDoorOpen")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag int64
+
+const (
+	MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagAuto        MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag = 0
+	MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagQuick       MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag = 1
+	MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagQuiet       MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag = 2
+	MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagLowNoise    MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag = 3
+	MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagLowEnergy   MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag = 4
+	MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagVacation    MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag = 5
+	MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagMin         MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag = 6
+	MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagMax         MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag = 7
+	MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagNight       MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag = 8
+	MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagDay         MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag = 9
+	MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagRapidCool   MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag = 16384
+	MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagRapidFreeze MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag = 16385
+)
+
+// String returns the MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag) String() string {
+	switch e {
+	case MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagAuto:
+		return "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagAuto"
+	case MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagQuick:
+		return "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagQuick"
+	case MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagQuiet:
+		return "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagQuiet"
+	case MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagLowNoise:
+		return "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagLowNoise"
+	case MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagLowEnergy:
+		return "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagLowEnergy"
+	case MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagVacation:
+		return "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagVacation"
+	case MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagMin:
+		return "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagMin"
+	case MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagMax:
+		return "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagMax"
+	case MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagNight:
+		return "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagNight"
+	case MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagDay:
+		return "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagDay"
+	case MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagRapidCool:
+		return "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagRapidCool"
+	case MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagRapidFreeze:
+		return "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagRapidFreeze"
+	default:
+		return fmt.Sprintf("MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRServiceAreaFeature int64
+
+const (
+	MTRServiceAreaFeatureSelectWhileRunning MTRServiceAreaFeature = 1
+	MTRServiceAreaFeatureProgressReporting  MTRServiceAreaFeature = 2
+	MTRServiceAreaFeatureMaps               MTRServiceAreaFeature = 4
+)
+
+// String returns the MTRServiceAreaFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRServiceAreaFeature) String() string {
+	var parts []string
+	if e&MTRServiceAreaFeatureSelectWhileRunning != 0 {
+		parts = append(parts, "MTRServiceAreaFeatureSelectWhileRunning")
+	}
+	if e&MTRServiceAreaFeatureProgressReporting != 0 {
+		parts = append(parts, "MTRServiceAreaFeatureProgressReporting")
+	}
+	if e&MTRServiceAreaFeatureMaps != 0 {
+		parts = append(parts, "MTRServiceAreaFeatureMaps")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRServiceAreaOperationalStatus int64
+
+const (
+	MTRServiceAreaOperationalStatusPending   MTRServiceAreaOperationalStatus = 0
+	MTRServiceAreaOperationalStatusOperating MTRServiceAreaOperationalStatus = 1
+	MTRServiceAreaOperationalStatusSkipped   MTRServiceAreaOperationalStatus = 2
+	MTRServiceAreaOperationalStatusCompleted MTRServiceAreaOperationalStatus = 3
+)
+
+// String returns the MTRServiceAreaOperationalStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRServiceAreaOperationalStatus) String() string {
+	switch e {
+	case MTRServiceAreaOperationalStatusPending:
+		return "MTRServiceAreaOperationalStatusPending"
+	case MTRServiceAreaOperationalStatusOperating:
+		return "MTRServiceAreaOperationalStatusOperating"
+	case MTRServiceAreaOperationalStatusSkipped:
+		return "MTRServiceAreaOperationalStatusSkipped"
+	case MTRServiceAreaOperationalStatusCompleted:
+		return "MTRServiceAreaOperationalStatusCompleted"
+	default:
+		return fmt.Sprintf("MTRServiceAreaOperationalStatus(%d)", int64(e))
+	}
+}
+
+type MTRServiceAreaSelectAreasStatus int64
+
+const (
+	MTRServiceAreaSelectAreasStatusSuccess         MTRServiceAreaSelectAreasStatus = 0
+	MTRServiceAreaSelectAreasStatusUnsupportedArea MTRServiceAreaSelectAreasStatus = 1
+	MTRServiceAreaSelectAreasStatusInvalidInMode   MTRServiceAreaSelectAreasStatus = 2
+	MTRServiceAreaSelectAreasStatusInvalidSet      MTRServiceAreaSelectAreasStatus = 3
+)
+
+// String returns the MTRServiceAreaSelectAreasStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRServiceAreaSelectAreasStatus) String() string {
+	switch e {
+	case MTRServiceAreaSelectAreasStatusSuccess:
+		return "MTRServiceAreaSelectAreasStatusSuccess"
+	case MTRServiceAreaSelectAreasStatusUnsupportedArea:
+		return "MTRServiceAreaSelectAreasStatusUnsupportedArea"
+	case MTRServiceAreaSelectAreasStatusInvalidInMode:
+		return "MTRServiceAreaSelectAreasStatusInvalidInMode"
+	case MTRServiceAreaSelectAreasStatusInvalidSet:
+		return "MTRServiceAreaSelectAreasStatusInvalidSet"
+	default:
+		return fmt.Sprintf("MTRServiceAreaSelectAreasStatus(%d)", int64(e))
+	}
+}
+
+type MTRServiceAreaSkipAreaStatus int64
+
+const (
+	MTRServiceAreaSkipAreaStatusSuccess            MTRServiceAreaSkipAreaStatus = 0
+	MTRServiceAreaSkipAreaStatusInvalidAreaList    MTRServiceAreaSkipAreaStatus = 1
+	MTRServiceAreaSkipAreaStatusInvalidInMode      MTRServiceAreaSkipAreaStatus = 2
+	MTRServiceAreaSkipAreaStatusInvalidSkippedArea MTRServiceAreaSkipAreaStatus = 3
+)
+
+// String returns the MTRServiceAreaSkipAreaStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRServiceAreaSkipAreaStatus) String() string {
+	switch e {
+	case MTRServiceAreaSkipAreaStatusSuccess:
+		return "MTRServiceAreaSkipAreaStatusSuccess"
+	case MTRServiceAreaSkipAreaStatusInvalidAreaList:
+		return "MTRServiceAreaSkipAreaStatusInvalidAreaList"
+	case MTRServiceAreaSkipAreaStatusInvalidInMode:
+		return "MTRServiceAreaSkipAreaStatusInvalidInMode"
+	case MTRServiceAreaSkipAreaStatusInvalidSkippedArea:
+		return "MTRServiceAreaSkipAreaStatusInvalidSkippedArea"
+	default:
+		return fmt.Sprintf("MTRServiceAreaSkipAreaStatus(%d)", int64(e))
+	}
+}
+
+type MTRSmokeCOAlarmAlarmState int64
+
+const (
+	MTRSmokeCOAlarmAlarmStateNormal   MTRSmokeCOAlarmAlarmState = 0
+	MTRSmokeCOAlarmAlarmStateWarning  MTRSmokeCOAlarmAlarmState = 1
+	MTRSmokeCOAlarmAlarmStateCritical MTRSmokeCOAlarmAlarmState = 2
+)
+
+// String returns the MTRSmokeCOAlarmAlarmState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRSmokeCOAlarmAlarmState) String() string {
+	switch e {
+	case MTRSmokeCOAlarmAlarmStateNormal:
+		return "MTRSmokeCOAlarmAlarmStateNormal"
+	case MTRSmokeCOAlarmAlarmStateWarning:
+		return "MTRSmokeCOAlarmAlarmStateWarning"
+	case MTRSmokeCOAlarmAlarmStateCritical:
+		return "MTRSmokeCOAlarmAlarmStateCritical"
+	default:
+		return fmt.Sprintf("MTRSmokeCOAlarmAlarmState(%d)", int64(e))
+	}
+}
+
+type MTRSmokeCOAlarmContaminationState int64
+
+const (
+	MTRSmokeCOAlarmContaminationStateNormal   MTRSmokeCOAlarmContaminationState = 0
+	MTRSmokeCOAlarmContaminationStateLow      MTRSmokeCOAlarmContaminationState = 1
+	MTRSmokeCOAlarmContaminationStateWarning  MTRSmokeCOAlarmContaminationState = 2
+	MTRSmokeCOAlarmContaminationStateCritical MTRSmokeCOAlarmContaminationState = 3
+)
+
+// String returns the MTRSmokeCOAlarmContaminationState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRSmokeCOAlarmContaminationState) String() string {
+	switch e {
+	case MTRSmokeCOAlarmContaminationStateNormal:
+		return "MTRSmokeCOAlarmContaminationStateNormal"
+	case MTRSmokeCOAlarmContaminationStateLow:
+		return "MTRSmokeCOAlarmContaminationStateLow"
+	case MTRSmokeCOAlarmContaminationStateWarning:
+		return "MTRSmokeCOAlarmContaminationStateWarning"
+	case MTRSmokeCOAlarmContaminationStateCritical:
+		return "MTRSmokeCOAlarmContaminationStateCritical"
+	default:
+		return fmt.Sprintf("MTRSmokeCOAlarmContaminationState(%d)", int64(e))
+	}
+}
+
+type MTRSmokeCOAlarmEndOfService int64
+
+const (
+	MTRSmokeCOAlarmEndOfServiceNormal  MTRSmokeCOAlarmEndOfService = 0
+	MTRSmokeCOAlarmEndOfServiceExpired MTRSmokeCOAlarmEndOfService = 1
+)
+
+// String returns the MTRSmokeCOAlarmEndOfService constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRSmokeCOAlarmEndOfService) String() string {
+	switch e {
+	case MTRSmokeCOAlarmEndOfServiceNormal:
+		return "MTRSmokeCOAlarmEndOfServiceNormal"
+	case MTRSmokeCOAlarmEndOfServiceExpired:
+		return "MTRSmokeCOAlarmEndOfServiceExpired"
+	default:
+		return fmt.Sprintf("MTRSmokeCOAlarmEndOfService(%d)", int64(e))
+	}
+}
+
+type MTRSmokeCOAlarmExpressedState int64
+
+const (
+	MTRSmokeCOAlarmExpressedStateNormal            MTRSmokeCOAlarmExpressedState = 0
+	MTRSmokeCOAlarmExpressedStateSmokeAlarm        MTRSmokeCOAlarmExpressedState = 1
+	MTRSmokeCOAlarmExpressedStateCOAlarm           MTRSmokeCOAlarmExpressedState = 2
+	MTRSmokeCOAlarmExpressedStateBatteryAlert      MTRSmokeCOAlarmExpressedState = 3
+	MTRSmokeCOAlarmExpressedStateTesting           MTRSmokeCOAlarmExpressedState = 4
+	MTRSmokeCOAlarmExpressedStateHardwareFault     MTRSmokeCOAlarmExpressedState = 5
+	MTRSmokeCOAlarmExpressedStateEndOfService      MTRSmokeCOAlarmExpressedState = 6
+	MTRSmokeCOAlarmExpressedStateInterconnectSmoke MTRSmokeCOAlarmExpressedState = 7
+	MTRSmokeCOAlarmExpressedStateInterconnectCO    MTRSmokeCOAlarmExpressedState = 8
+)
+
+// String returns the MTRSmokeCOAlarmExpressedState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRSmokeCOAlarmExpressedState) String() string {
+	switch e {
+	case MTRSmokeCOAlarmExpressedStateNormal:
+		return "MTRSmokeCOAlarmExpressedStateNormal"
+	case MTRSmokeCOAlarmExpressedStateSmokeAlarm:
+		return "MTRSmokeCOAlarmExpressedStateSmokeAlarm"
+	case MTRSmokeCOAlarmExpressedStateCOAlarm:
+		return "MTRSmokeCOAlarmExpressedStateCOAlarm"
+	case MTRSmokeCOAlarmExpressedStateBatteryAlert:
+		return "MTRSmokeCOAlarmExpressedStateBatteryAlert"
+	case MTRSmokeCOAlarmExpressedStateTesting:
+		return "MTRSmokeCOAlarmExpressedStateTesting"
+	case MTRSmokeCOAlarmExpressedStateHardwareFault:
+		return "MTRSmokeCOAlarmExpressedStateHardwareFault"
+	case MTRSmokeCOAlarmExpressedStateEndOfService:
+		return "MTRSmokeCOAlarmExpressedStateEndOfService"
+	case MTRSmokeCOAlarmExpressedStateInterconnectSmoke:
+		return "MTRSmokeCOAlarmExpressedStateInterconnectSmoke"
+	case MTRSmokeCOAlarmExpressedStateInterconnectCO:
+		return "MTRSmokeCOAlarmExpressedStateInterconnectCO"
+	default:
+		return fmt.Sprintf("MTRSmokeCOAlarmExpressedState(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRSmokeCOAlarmFeature int64
+
+const (
+	MTRSmokeCOAlarmFeatureSmokeAlarm MTRSmokeCOAlarmFeature = 1
+	MTRSmokeCOAlarmFeatureCOAlarm    MTRSmokeCOAlarmFeature = 2
+)
+
+// String returns the MTRSmokeCOAlarmFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRSmokeCOAlarmFeature) String() string {
+	var parts []string
+	if e&MTRSmokeCOAlarmFeatureSmokeAlarm != 0 {
+		parts = append(parts, "MTRSmokeCOAlarmFeatureSmokeAlarm")
+	}
+	if e&MTRSmokeCOAlarmFeatureCOAlarm != 0 {
+		parts = append(parts, "MTRSmokeCOAlarmFeatureCOAlarm")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRSmokeCOAlarmMuteState int64
+
+const (
+	MTRSmokeCOAlarmMuteStateNotMuted MTRSmokeCOAlarmMuteState = 0
+	MTRSmokeCOAlarmMuteStateMuted    MTRSmokeCOAlarmMuteState = 1
+)
+
+// String returns the MTRSmokeCOAlarmMuteState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRSmokeCOAlarmMuteState) String() string {
+	switch e {
+	case MTRSmokeCOAlarmMuteStateNotMuted:
+		return "MTRSmokeCOAlarmMuteStateNotMuted"
+	case MTRSmokeCOAlarmMuteStateMuted:
+		return "MTRSmokeCOAlarmMuteStateMuted"
+	default:
+		return fmt.Sprintf("MTRSmokeCOAlarmMuteState(%d)", int64(e))
+	}
+}
+
+type MTRSmokeCOAlarmSensitivity int64
+
+const (
+	MTRSmokeCOAlarmSensitivityHigh     MTRSmokeCOAlarmSensitivity = 0
+	MTRSmokeCOAlarmSensitivityStandard MTRSmokeCOAlarmSensitivity = 1
+	MTRSmokeCOAlarmSensitivityLow      MTRSmokeCOAlarmSensitivity = 2
+)
+
+// String returns the MTRSmokeCOAlarmSensitivity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRSmokeCOAlarmSensitivity) String() string {
+	switch e {
+	case MTRSmokeCOAlarmSensitivityHigh:
+		return "MTRSmokeCOAlarmSensitivityHigh"
+	case MTRSmokeCOAlarmSensitivityStandard:
+		return "MTRSmokeCOAlarmSensitivityStandard"
+	case MTRSmokeCOAlarmSensitivityLow:
+		return "MTRSmokeCOAlarmSensitivityLow"
+	default:
+		return fmt.Sprintf("MTRSmokeCOAlarmSensitivity(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRSoftwareDiagnosticsFeature int64
+
+const (
+	MTRSoftwareDiagnosticsFeatureWatermarks MTRSoftwareDiagnosticsFeature = 1
+	MTRSoftwareDiagnosticsFeatureWaterMarks MTRSoftwareDiagnosticsFeature = 1
+)
+
+// String returns the MTRSoftwareDiagnosticsFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRSoftwareDiagnosticsFeature) String() string {
+	var parts []string
+	if e&MTRSoftwareDiagnosticsFeatureWatermarks != 0 {
+		parts = append(parts, "MTRSoftwareDiagnosticsFeatureWatermarks")
+	}
+	if e&MTRSoftwareDiagnosticsFeatureWaterMarks != 0 {
+		parts = append(parts, "MTRSoftwareDiagnosticsFeatureWaterMarks")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRSwitchFeature int64
+
+const (
+	MTRSwitchFeatureLatchingSwitch            MTRSwitchFeature = 1
+	MTRSwitchFeatureMomentarySwitch           MTRSwitchFeature = 2
+	MTRSwitchFeatureMomentarySwitchRelease    MTRSwitchFeature = 4
+	MTRSwitchFeatureMomentarySwitchLongPress  MTRSwitchFeature = 8
+	MTRSwitchFeatureMomentarySwitchMultiPress MTRSwitchFeature = 16
+	MTRSwitchFeatureActionSwitch              MTRSwitchFeature = 32
+)
+
+// String returns the MTRSwitchFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRSwitchFeature) String() string {
+	var parts []string
+	if e&MTRSwitchFeatureLatchingSwitch != 0 {
+		parts = append(parts, "MTRSwitchFeatureLatchingSwitch")
+	}
+	if e&MTRSwitchFeatureMomentarySwitch != 0 {
+		parts = append(parts, "MTRSwitchFeatureMomentarySwitch")
+	}
+	if e&MTRSwitchFeatureMomentarySwitchRelease != 0 {
+		parts = append(parts, "MTRSwitchFeatureMomentarySwitchRelease")
+	}
+	if e&MTRSwitchFeatureMomentarySwitchLongPress != 0 {
+		parts = append(parts, "MTRSwitchFeatureMomentarySwitchLongPress")
+	}
+	if e&MTRSwitchFeatureMomentarySwitchMultiPress != 0 {
+		parts = append(parts, "MTRSwitchFeatureMomentarySwitchMultiPress")
+	}
+	if e&MTRSwitchFeatureActionSwitch != 0 {
+		parts = append(parts, "MTRSwitchFeatureActionSwitch")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRTargetNavigatorStatus int64
+
+const (
+	MTRTargetNavigatorStatusSuccess        MTRTargetNavigatorStatus = 0
+	MTRTargetNavigatorStatusTargetNotFound MTRTargetNavigatorStatus = 1
+	MTRTargetNavigatorStatusNotAllowed     MTRTargetNavigatorStatus = 2
+)
+
+// String returns the MTRTargetNavigatorStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTargetNavigatorStatus) String() string {
+	switch e {
+	case MTRTargetNavigatorStatusSuccess:
+		return "MTRTargetNavigatorStatusSuccess"
+	case MTRTargetNavigatorStatusTargetNotFound:
+		return "MTRTargetNavigatorStatusTargetNotFound"
+	case MTRTargetNavigatorStatusNotAllowed:
+		return "MTRTargetNavigatorStatusNotAllowed"
+	default:
+		return fmt.Sprintf("MTRTargetNavigatorStatus(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRTemperatureControlFeature int64
+
+const (
+	MTRTemperatureControlFeatureTemperatureNumber MTRTemperatureControlFeature = 1
+	MTRTemperatureControlFeatureTemperatureLevel  MTRTemperatureControlFeature = 2
+	MTRTemperatureControlFeatureTemperatureStep   MTRTemperatureControlFeature = 4
+)
+
+// String returns the MTRTemperatureControlFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTemperatureControlFeature) String() string {
+	var parts []string
+	if e&MTRTemperatureControlFeatureTemperatureNumber != 0 {
+		parts = append(parts, "MTRTemperatureControlFeatureTemperatureNumber")
+	}
+	if e&MTRTemperatureControlFeatureTemperatureLevel != 0 {
+		parts = append(parts, "MTRTemperatureControlFeatureTemperatureLevel")
+	}
+	if e&MTRTemperatureControlFeatureTemperatureStep != 0 {
+		parts = append(parts, "MTRTemperatureControlFeatureTemperatureStep")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRTestClusterBitmap16MaskMap int64
+
+const (
+	MTRTestClusterBitmap16MaskMapMaskVal1 MTRTestClusterBitmap16MaskMap = 1
+	MTRTestClusterBitmap16MaskMapMaskVal2 MTRTestClusterBitmap16MaskMap = 2
+	MTRTestClusterBitmap16MaskMapMaskVal3 MTRTestClusterBitmap16MaskMap = 4
+	MTRTestClusterBitmap16MaskMapMaskVal4 MTRTestClusterBitmap16MaskMap = 16384
+)
+
+// String returns the MTRTestClusterBitmap16MaskMap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTestClusterBitmap16MaskMap) String() string {
+	var parts []string
+	if e&MTRTestClusterBitmap16MaskMapMaskVal1 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap16MaskMapMaskVal1")
+	}
+	if e&MTRTestClusterBitmap16MaskMapMaskVal2 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap16MaskMapMaskVal2")
+	}
+	if e&MTRTestClusterBitmap16MaskMapMaskVal3 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap16MaskMapMaskVal3")
+	}
+	if e&MTRTestClusterBitmap16MaskMapMaskVal4 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap16MaskMapMaskVal4")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRTestClusterBitmap32MaskMap int64
+
+const (
+	MTRTestClusterBitmap32MaskMapMaskVal1 MTRTestClusterBitmap32MaskMap = 1
+	MTRTestClusterBitmap32MaskMapMaskVal2 MTRTestClusterBitmap32MaskMap = 2
+	MTRTestClusterBitmap32MaskMapMaskVal3 MTRTestClusterBitmap32MaskMap = 4
+	MTRTestClusterBitmap32MaskMapMaskVal4 MTRTestClusterBitmap32MaskMap = 1073741824
+)
+
+// String returns the MTRTestClusterBitmap32MaskMap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTestClusterBitmap32MaskMap) String() string {
+	var parts []string
+	if e&MTRTestClusterBitmap32MaskMapMaskVal1 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap32MaskMapMaskVal1")
+	}
+	if e&MTRTestClusterBitmap32MaskMapMaskVal2 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap32MaskMapMaskVal2")
+	}
+	if e&MTRTestClusterBitmap32MaskMapMaskVal3 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap32MaskMapMaskVal3")
+	}
+	if e&MTRTestClusterBitmap32MaskMapMaskVal4 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap32MaskMapMaskVal4")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRTestClusterBitmap64MaskMap uint64
+
+const (
+	MTRTestClusterBitmap64MaskMapMaskVal1 MTRTestClusterBitmap64MaskMap = 1
+	MTRTestClusterBitmap64MaskMapMaskVal2 MTRTestClusterBitmap64MaskMap = 2
+	MTRTestClusterBitmap64MaskMapMaskVal3 MTRTestClusterBitmap64MaskMap = 4
+	MTRTestClusterBitmap64MaskMapMaskVal4 MTRTestClusterBitmap64MaskMap = 4611686018427387904
+)
+
+// String returns the MTRTestClusterBitmap64MaskMap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTestClusterBitmap64MaskMap) String() string {
+	var parts []string
+	if e&MTRTestClusterBitmap64MaskMapMaskVal1 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap64MaskMapMaskVal1")
+	}
+	if e&MTRTestClusterBitmap64MaskMapMaskVal2 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap64MaskMapMaskVal2")
+	}
+	if e&MTRTestClusterBitmap64MaskMapMaskVal3 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap64MaskMapMaskVal3")
+	}
+	if e&MTRTestClusterBitmap64MaskMapMaskVal4 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap64MaskMapMaskVal4")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRTestClusterBitmap8MaskMap int64
+
+const (
+	MTRTestClusterBitmap8MaskMapMaskVal1 MTRTestClusterBitmap8MaskMap = 1
+	MTRTestClusterBitmap8MaskMapMaskVal2 MTRTestClusterBitmap8MaskMap = 2
+	MTRTestClusterBitmap8MaskMapMaskVal3 MTRTestClusterBitmap8MaskMap = 4
+	MTRTestClusterBitmap8MaskMapMaskVal4 MTRTestClusterBitmap8MaskMap = 64
+)
+
+// String returns the MTRTestClusterBitmap8MaskMap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTestClusterBitmap8MaskMap) String() string {
+	var parts []string
+	if e&MTRTestClusterBitmap8MaskMapMaskVal1 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap8MaskMapMaskVal1")
+	}
+	if e&MTRTestClusterBitmap8MaskMapMaskVal2 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap8MaskMapMaskVal2")
+	}
+	if e&MTRTestClusterBitmap8MaskMapMaskVal3 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap8MaskMapMaskVal3")
+	}
+	if e&MTRTestClusterBitmap8MaskMapMaskVal4 != 0 {
+		parts = append(parts, "MTRTestClusterBitmap8MaskMapMaskVal4")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRTestClusterSimple int64
+
+const (
+	MTRTestClusterSimpleUnspecified MTRTestClusterSimple = 0
+	MTRTestClusterSimpleValueA      MTRTestClusterSimple = 1
+	MTRTestClusterSimpleValueB      MTRTestClusterSimple = 2
+	MTRTestClusterSimpleValueC      MTRTestClusterSimple = 3
+)
+
+// String returns the MTRTestClusterSimple constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTestClusterSimple) String() string {
+	switch e {
+	case MTRTestClusterSimpleUnspecified:
+		return "MTRTestClusterSimpleUnspecified"
+	case MTRTestClusterSimpleValueA:
+		return "MTRTestClusterSimpleValueA"
+	case MTRTestClusterSimpleValueB:
+		return "MTRTestClusterSimpleValueB"
+	case MTRTestClusterSimpleValueC:
+		return "MTRTestClusterSimpleValueC"
+	default:
+		return fmt.Sprintf("MTRTestClusterSimple(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRTestClusterSimpleBitmap int64
+
+const (
+	MTRTestClusterSimpleBitmapValueA MTRTestClusterSimpleBitmap = 1
+	MTRTestClusterSimpleBitmapValueB MTRTestClusterSimpleBitmap = 2
+	MTRTestClusterSimpleBitmapValueC MTRTestClusterSimpleBitmap = 4
+)
+
+// String returns the MTRTestClusterSimpleBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTestClusterSimpleBitmap) String() string {
+	var parts []string
+	if e&MTRTestClusterSimpleBitmapValueA != 0 {
+		parts = append(parts, "MTRTestClusterSimpleBitmapValueA")
+	}
+	if e&MTRTestClusterSimpleBitmapValueB != 0 {
+		parts = append(parts, "MTRTestClusterSimpleBitmapValueB")
+	}
+	if e&MTRTestClusterSimpleBitmapValueC != 0 {
+		parts = append(parts, "MTRTestClusterSimpleBitmapValueC")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRThermostatACCapacityFormat int64
+
+const (
+	MTRThermostatACCapacityFormatBTUh MTRThermostatACCapacityFormat = 0
+)
+
+// String returns the MTRThermostatACCapacityFormat constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatACCapacityFormat) String() string {
+	switch e {
+	case MTRThermostatACCapacityFormatBTUh:
+		return "MTRThermostatACCapacityFormatBTUh"
+	default:
+		return fmt.Sprintf("MTRThermostatACCapacityFormat(%d)", int64(e))
+	}
+}
+
+type MTRThermostatACCompressorType int64
+
+const (
+	MTRThermostatACCompressorTypeUnknown MTRThermostatACCompressorType = 0
+	MTRThermostatACCompressorTypeT1      MTRThermostatACCompressorType = 1
+	MTRThermostatACCompressorTypeT2      MTRThermostatACCompressorType = 2
+	MTRThermostatACCompressorTypeT3      MTRThermostatACCompressorType = 3
+)
+
+// String returns the MTRThermostatACCompressorType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatACCompressorType) String() string {
+	switch e {
+	case MTRThermostatACCompressorTypeUnknown:
+		return "MTRThermostatACCompressorTypeUnknown"
+	case MTRThermostatACCompressorTypeT1:
+		return "MTRThermostatACCompressorTypeT1"
+	case MTRThermostatACCompressorTypeT2:
+		return "MTRThermostatACCompressorTypeT2"
+	case MTRThermostatACCompressorTypeT3:
+		return "MTRThermostatACCompressorTypeT3"
+	default:
+		return fmt.Sprintf("MTRThermostatACCompressorType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRThermostatACErrorCodeBitmap int64
+
+const (
+	MTRThermostatACErrorCodeBitmapCompressorFail    MTRThermostatACErrorCodeBitmap = 1
+	MTRThermostatACErrorCodeBitmapRoomSensorFail    MTRThermostatACErrorCodeBitmap = 2
+	MTRThermostatACErrorCodeBitmapOutdoorSensorFail MTRThermostatACErrorCodeBitmap = 4
+	MTRThermostatACErrorCodeBitmapCoilSensorFail    MTRThermostatACErrorCodeBitmap = 8
+	MTRThermostatACErrorCodeBitmapFanFail           MTRThermostatACErrorCodeBitmap = 16
+)
+
+// String returns the MTRThermostatACErrorCodeBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatACErrorCodeBitmap) String() string {
+	var parts []string
+	if e&MTRThermostatACErrorCodeBitmapCompressorFail != 0 {
+		parts = append(parts, "MTRThermostatACErrorCodeBitmapCompressorFail")
+	}
+	if e&MTRThermostatACErrorCodeBitmapRoomSensorFail != 0 {
+		parts = append(parts, "MTRThermostatACErrorCodeBitmapRoomSensorFail")
+	}
+	if e&MTRThermostatACErrorCodeBitmapOutdoorSensorFail != 0 {
+		parts = append(parts, "MTRThermostatACErrorCodeBitmapOutdoorSensorFail")
+	}
+	if e&MTRThermostatACErrorCodeBitmapCoilSensorFail != 0 {
+		parts = append(parts, "MTRThermostatACErrorCodeBitmapCoilSensorFail")
+	}
+	if e&MTRThermostatACErrorCodeBitmapFanFail != 0 {
+		parts = append(parts, "MTRThermostatACErrorCodeBitmapFanFail")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRThermostatACLouverPosition int64
+
+const (
+	MTRThermostatACLouverPositionClosed        MTRThermostatACLouverPosition = 1
+	MTRThermostatACLouverPositionOpen          MTRThermostatACLouverPosition = 2
+	MTRThermostatACLouverPositionQuarter       MTRThermostatACLouverPosition = 3
+	MTRThermostatACLouverPositionHalf          MTRThermostatACLouverPosition = 4
+	MTRThermostatACLouverPositionThreeQuarters MTRThermostatACLouverPosition = 5
+)
+
+// String returns the MTRThermostatACLouverPosition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatACLouverPosition) String() string {
+	switch e {
+	case MTRThermostatACLouverPositionClosed:
+		return "MTRThermostatACLouverPositionClosed"
+	case MTRThermostatACLouverPositionOpen:
+		return "MTRThermostatACLouverPositionOpen"
+	case MTRThermostatACLouverPositionQuarter:
+		return "MTRThermostatACLouverPositionQuarter"
+	case MTRThermostatACLouverPositionHalf:
+		return "MTRThermostatACLouverPositionHalf"
+	case MTRThermostatACLouverPositionThreeQuarters:
+		return "MTRThermostatACLouverPositionThreeQuarters"
+	default:
+		return fmt.Sprintf("MTRThermostatACLouverPosition(%d)", int64(e))
+	}
+}
+
+type MTRThermostatACRefrigerantType int64
+
+const (
+	MTRThermostatACRefrigerantTypeUnknown MTRThermostatACRefrigerantType = 0
+	MTRThermostatACRefrigerantTypeR22     MTRThermostatACRefrigerantType = 1
+	MTRThermostatACRefrigerantTypeR410a   MTRThermostatACRefrigerantType = 2
+	MTRThermostatACRefrigerantTypeR407c   MTRThermostatACRefrigerantType = 3
+)
+
+// String returns the MTRThermostatACRefrigerantType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatACRefrigerantType) String() string {
+	switch e {
+	case MTRThermostatACRefrigerantTypeUnknown:
+		return "MTRThermostatACRefrigerantTypeUnknown"
+	case MTRThermostatACRefrigerantTypeR22:
+		return "MTRThermostatACRefrigerantTypeR22"
+	case MTRThermostatACRefrigerantTypeR410a:
+		return "MTRThermostatACRefrigerantTypeR410a"
+	case MTRThermostatACRefrigerantTypeR407c:
+		return "MTRThermostatACRefrigerantTypeR407c"
+	default:
+		return fmt.Sprintf("MTRThermostatACRefrigerantType(%d)", int64(e))
+	}
+}
+
+type MTRThermostatACType int64
+
+const (
+	MTRThermostatACTypeUnknown          MTRThermostatACType = 0
+	MTRThermostatACTypeCoolingFixed     MTRThermostatACType = 1
+	MTRThermostatACTypeHeatPumpFixed    MTRThermostatACType = 2
+	MTRThermostatACTypeCoolingInverter  MTRThermostatACType = 3
+	MTRThermostatACTypeHeatPumpInverter MTRThermostatACType = 4
+)
+
+// String returns the MTRThermostatACType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatACType) String() string {
+	switch e {
+	case MTRThermostatACTypeUnknown:
+		return "MTRThermostatACTypeUnknown"
+	case MTRThermostatACTypeCoolingFixed:
+		return "MTRThermostatACTypeCoolingFixed"
+	case MTRThermostatACTypeHeatPumpFixed:
+		return "MTRThermostatACTypeHeatPumpFixed"
+	case MTRThermostatACTypeCoolingInverter:
+		return "MTRThermostatACTypeCoolingInverter"
+	case MTRThermostatACTypeHeatPumpInverter:
+		return "MTRThermostatACTypeHeatPumpInverter"
+	default:
+		return fmt.Sprintf("MTRThermostatACType(%d)", int64(e))
+	}
+}
+
+type MTRThermostatControlSequence int64
+
+const (
+	MTRThermostatControlSequenceCoolingOnly                 MTRThermostatControlSequence = 0
+	MTRThermostatControlSequenceCoolingWithReheat           MTRThermostatControlSequence = 1
+	MTRThermostatControlSequenceHeatingOnly                 MTRThermostatControlSequence = 2
+	MTRThermostatControlSequenceHeatingWithReheat           MTRThermostatControlSequence = 3
+	MTRThermostatControlSequenceCoolingAndHeating           MTRThermostatControlSequence = 4
+	MTRThermostatControlSequenceCoolingAndHeatingWithReheat MTRThermostatControlSequence = 5
+)
+
+// String returns the MTRThermostatControlSequence constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatControlSequence) String() string {
+	switch e {
+	case MTRThermostatControlSequenceCoolingOnly:
+		return "MTRThermostatControlSequenceCoolingOnly"
+	case MTRThermostatControlSequenceCoolingWithReheat:
+		return "MTRThermostatControlSequenceCoolingWithReheat"
+	case MTRThermostatControlSequenceHeatingOnly:
+		return "MTRThermostatControlSequenceHeatingOnly"
+	case MTRThermostatControlSequenceHeatingWithReheat:
+		return "MTRThermostatControlSequenceHeatingWithReheat"
+	case MTRThermostatControlSequenceCoolingAndHeating:
+		return "MTRThermostatControlSequenceCoolingAndHeating"
+	case MTRThermostatControlSequenceCoolingAndHeatingWithReheat:
+		return "MTRThermostatControlSequenceCoolingAndHeatingWithReheat"
+	default:
+		return fmt.Sprintf("MTRThermostatControlSequence(%d)", int64(e))
+	}
+}
+
+type MTRThermostatControlSequenceOfOperation int64
+
+const (
+	MTRThermostatControlSequenceOfOperationCoolingOnly                 MTRThermostatControlSequenceOfOperation = 0
+	MTRThermostatControlSequenceOfOperationCoolingWithReheat           MTRThermostatControlSequenceOfOperation = 1
+	MTRThermostatControlSequenceOfOperationHeatingOnly                 MTRThermostatControlSequenceOfOperation = 2
+	MTRThermostatControlSequenceOfOperationHeatingWithReheat           MTRThermostatControlSequenceOfOperation = 3
+	MTRThermostatControlSequenceOfOperationCoolingAndHeating           MTRThermostatControlSequenceOfOperation = 4
+	MTRThermostatControlSequenceOfOperationCoolingAndHeatingWithReheat MTRThermostatControlSequenceOfOperation = 5
+)
+
+// String returns the MTRThermostatControlSequenceOfOperation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatControlSequenceOfOperation) String() string {
+	switch e {
+	case MTRThermostatControlSequenceOfOperationCoolingOnly:
+		return "MTRThermostatControlSequenceOfOperationCoolingOnly"
+	case MTRThermostatControlSequenceOfOperationCoolingWithReheat:
+		return "MTRThermostatControlSequenceOfOperationCoolingWithReheat"
+	case MTRThermostatControlSequenceOfOperationHeatingOnly:
+		return "MTRThermostatControlSequenceOfOperationHeatingOnly"
+	case MTRThermostatControlSequenceOfOperationHeatingWithReheat:
+		return "MTRThermostatControlSequenceOfOperationHeatingWithReheat"
+	case MTRThermostatControlSequenceOfOperationCoolingAndHeating:
+		return "MTRThermostatControlSequenceOfOperationCoolingAndHeating"
+	case MTRThermostatControlSequenceOfOperationCoolingAndHeatingWithReheat:
+		return "MTRThermostatControlSequenceOfOperationCoolingAndHeatingWithReheat"
+	default:
+		return fmt.Sprintf("MTRThermostatControlSequenceOfOperation(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRThermostatDayOfWeek int64
+
+const (
+	MTRThermostatDayOfWeekSunday         MTRThermostatDayOfWeek = 1
+	MTRThermostatDayOfWeekMonday         MTRThermostatDayOfWeek = 2
+	MTRThermostatDayOfWeekTuesday        MTRThermostatDayOfWeek = 4
+	MTRThermostatDayOfWeekWednesday      MTRThermostatDayOfWeek = 8
+	MTRThermostatDayOfWeekThursday       MTRThermostatDayOfWeek = 16
+	MTRThermostatDayOfWeekFriday         MTRThermostatDayOfWeek = 32
+	MTRThermostatDayOfWeekSaturday       MTRThermostatDayOfWeek = 64
+	MTRThermostatDayOfWeekAway           MTRThermostatDayOfWeek = 128
+	MTRThermostatDayOfWeekAwayOrVacation MTRThermostatDayOfWeek = 128
+)
+
+// String returns the MTRThermostatDayOfWeek constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatDayOfWeek) String() string {
+	var parts []string
+	if e&MTRThermostatDayOfWeekSunday != 0 {
+		parts = append(parts, "MTRThermostatDayOfWeekSunday")
+	}
+	if e&MTRThermostatDayOfWeekMonday != 0 {
+		parts = append(parts, "MTRThermostatDayOfWeekMonday")
+	}
+	if e&MTRThermostatDayOfWeekTuesday != 0 {
+		parts = append(parts, "MTRThermostatDayOfWeekTuesday")
+	}
+	if e&MTRThermostatDayOfWeekWednesday != 0 {
+		parts = append(parts, "MTRThermostatDayOfWeekWednesday")
+	}
+	if e&MTRThermostatDayOfWeekThursday != 0 {
+		parts = append(parts, "MTRThermostatDayOfWeekThursday")
+	}
+	if e&MTRThermostatDayOfWeekFriday != 0 {
+		parts = append(parts, "MTRThermostatDayOfWeekFriday")
+	}
+	if e&MTRThermostatDayOfWeekSaturday != 0 {
+		parts = append(parts, "MTRThermostatDayOfWeekSaturday")
+	}
+	if e&MTRThermostatDayOfWeekAway != 0 {
+		parts = append(parts, "MTRThermostatDayOfWeekAway")
+	}
+	if e&MTRThermostatDayOfWeekAwayOrVacation != 0 {
+		parts = append(parts, "MTRThermostatDayOfWeekAwayOrVacation")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRThermostatFeature int64
+
+const (
+	MTRThermostatFeatureHeating                     MTRThermostatFeature = 1
+	MTRThermostatFeatureCooling                     MTRThermostatFeature = 2
+	MTRThermostatFeatureOccupancy                   MTRThermostatFeature = 4
+	MTRThermostatFeatureScheduleConfiguration       MTRThermostatFeature = 8
+	MTRThermostatFeatureSchedule                    MTRThermostatFeature = 8
+	MTRThermostatFeatureSetback                     MTRThermostatFeature = 16
+	MTRThermostatFeatureAutoMode                    MTRThermostatFeature = 32
+	MTRThermostatFeatureAutomode                    MTRThermostatFeature = 32
+	MTRThermostatFeatureLocalTemperatureNotExposed  MTRThermostatFeature = 64
+	MTRThermostatFeatureMatterScheduleConfiguration MTRThermostatFeature = 128
+	MTRThermostatFeaturePresets                     MTRThermostatFeature = 256
+)
+
+// String returns the MTRThermostatFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatFeature) String() string {
+	var parts []string
+	if e&MTRThermostatFeatureHeating != 0 {
+		parts = append(parts, "MTRThermostatFeatureHeating")
+	}
+	if e&MTRThermostatFeatureCooling != 0 {
+		parts = append(parts, "MTRThermostatFeatureCooling")
+	}
+	if e&MTRThermostatFeatureOccupancy != 0 {
+		parts = append(parts, "MTRThermostatFeatureOccupancy")
+	}
+	if e&MTRThermostatFeatureScheduleConfiguration != 0 {
+		parts = append(parts, "MTRThermostatFeatureScheduleConfiguration")
+	}
+	if e&MTRThermostatFeatureSchedule != 0 {
+		parts = append(parts, "MTRThermostatFeatureSchedule")
+	}
+	if e&MTRThermostatFeatureSetback != 0 {
+		parts = append(parts, "MTRThermostatFeatureSetback")
+	}
+	if e&MTRThermostatFeatureAutoMode != 0 {
+		parts = append(parts, "MTRThermostatFeatureAutoMode")
+	}
+	if e&MTRThermostatFeatureAutomode != 0 {
+		parts = append(parts, "MTRThermostatFeatureAutomode")
+	}
+	if e&MTRThermostatFeatureLocalTemperatureNotExposed != 0 {
+		parts = append(parts, "MTRThermostatFeatureLocalTemperatureNotExposed")
+	}
+	if e&MTRThermostatFeatureMatterScheduleConfiguration != 0 {
+		parts = append(parts, "MTRThermostatFeatureMatterScheduleConfiguration")
+	}
+	if e&MTRThermostatFeaturePresets != 0 {
+		parts = append(parts, "MTRThermostatFeaturePresets")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRThermostatHVACSystemTypeBitmap int64
+
+const (
+	MTRThermostatHVACSystemTypeBitmapCoolingStage      MTRThermostatHVACSystemTypeBitmap = 3
+	MTRThermostatHVACSystemTypeBitmapHeatingStage      MTRThermostatHVACSystemTypeBitmap = 12
+	MTRThermostatHVACSystemTypeBitmapHeatingIsHeatPump MTRThermostatHVACSystemTypeBitmap = 16
+	MTRThermostatHVACSystemTypeBitmapHeatingUsesFuel   MTRThermostatHVACSystemTypeBitmap = 32
+)
+
+// String returns the MTRThermostatHVACSystemTypeBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatHVACSystemTypeBitmap) String() string {
+	var parts []string
+	if e&MTRThermostatHVACSystemTypeBitmapCoolingStage != 0 {
+		parts = append(parts, "MTRThermostatHVACSystemTypeBitmapCoolingStage")
+	}
+	if e&MTRThermostatHVACSystemTypeBitmapHeatingStage != 0 {
+		parts = append(parts, "MTRThermostatHVACSystemTypeBitmapHeatingStage")
+	}
+	if e&MTRThermostatHVACSystemTypeBitmapHeatingIsHeatPump != 0 {
+		parts = append(parts, "MTRThermostatHVACSystemTypeBitmapHeatingIsHeatPump")
+	}
+	if e&MTRThermostatHVACSystemTypeBitmapHeatingUsesFuel != 0 {
+		parts = append(parts, "MTRThermostatHVACSystemTypeBitmapHeatingUsesFuel")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRThermostatModeForSequence int64
+
+const (
+	MTRThermostatModeForSequenceHeatSetpointPresent      MTRThermostatModeForSequence = 1
+	MTRThermostatModeForSequenceHeatSetpointFieldPresent MTRThermostatModeForSequence = 1
+	MTRThermostatModeForSequenceCoolSetpointPresent      MTRThermostatModeForSequence = 2
+	MTRThermostatModeForSequenceCoolSetpointFieldPresent MTRThermostatModeForSequence = 2
+)
+
+// String returns the MTRThermostatModeForSequence constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatModeForSequence) String() string {
+	var parts []string
+	if e&MTRThermostatModeForSequenceHeatSetpointPresent != 0 {
+		parts = append(parts, "MTRThermostatModeForSequenceHeatSetpointPresent")
+	}
+	if e&MTRThermostatModeForSequenceHeatSetpointFieldPresent != 0 {
+		parts = append(parts, "MTRThermostatModeForSequenceHeatSetpointFieldPresent")
+	}
+	if e&MTRThermostatModeForSequenceCoolSetpointPresent != 0 {
+		parts = append(parts, "MTRThermostatModeForSequenceCoolSetpointPresent")
+	}
+	if e&MTRThermostatModeForSequenceCoolSetpointFieldPresent != 0 {
+		parts = append(parts, "MTRThermostatModeForSequenceCoolSetpointFieldPresent")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRThermostatOccupancyBitmap int64
+
+const (
+	MTRThermostatOccupancyBitmapOccupied MTRThermostatOccupancyBitmap = 1
+)
+
+// String returns the MTRThermostatOccupancyBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatOccupancyBitmap) String() string {
+	var parts []string
+	if e&MTRThermostatOccupancyBitmapOccupied != 0 {
+		parts = append(parts, "MTRThermostatOccupancyBitmapOccupied")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRThermostatPresetScenario int64
+
+const (
+	MTRThermostatPresetScenarioOccupied     MTRThermostatPresetScenario = 1
+	MTRThermostatPresetScenarioUnoccupied   MTRThermostatPresetScenario = 2
+	MTRThermostatPresetScenarioSleep        MTRThermostatPresetScenario = 3
+	MTRThermostatPresetScenarioWake         MTRThermostatPresetScenario = 4
+	MTRThermostatPresetScenarioVacation     MTRThermostatPresetScenario = 5
+	MTRThermostatPresetScenarioGoingToSleep MTRThermostatPresetScenario = 6
+	MTRThermostatPresetScenarioUserDefined  MTRThermostatPresetScenario = 254
+)
+
+// String returns the MTRThermostatPresetScenario constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatPresetScenario) String() string {
+	switch e {
+	case MTRThermostatPresetScenarioOccupied:
+		return "MTRThermostatPresetScenarioOccupied"
+	case MTRThermostatPresetScenarioUnoccupied:
+		return "MTRThermostatPresetScenarioUnoccupied"
+	case MTRThermostatPresetScenarioSleep:
+		return "MTRThermostatPresetScenarioSleep"
+	case MTRThermostatPresetScenarioWake:
+		return "MTRThermostatPresetScenarioWake"
+	case MTRThermostatPresetScenarioVacation:
+		return "MTRThermostatPresetScenarioVacation"
+	case MTRThermostatPresetScenarioGoingToSleep:
+		return "MTRThermostatPresetScenarioGoingToSleep"
+	case MTRThermostatPresetScenarioUserDefined:
+		return "MTRThermostatPresetScenarioUserDefined"
+	default:
+		return fmt.Sprintf("MTRThermostatPresetScenario(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRThermostatPresetTypeFeaturesBitmap int64
+
+const (
+	MTRThermostatPresetTypeFeaturesBitmapAutomatic     MTRThermostatPresetTypeFeaturesBitmap = 1
+	MTRThermostatPresetTypeFeaturesBitmapSupportsNames MTRThermostatPresetTypeFeaturesBitmap = 2
+)
+
+// String returns the MTRThermostatPresetTypeFeaturesBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatPresetTypeFeaturesBitmap) String() string {
+	var parts []string
+	if e&MTRThermostatPresetTypeFeaturesBitmapAutomatic != 0 {
+		parts = append(parts, "MTRThermostatPresetTypeFeaturesBitmapAutomatic")
+	}
+	if e&MTRThermostatPresetTypeFeaturesBitmapSupportsNames != 0 {
+		parts = append(parts, "MTRThermostatPresetTypeFeaturesBitmapSupportsNames")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRThermostatProgrammingOperationModeBitmap int64
+
+const (
+	MTRThermostatProgrammingOperationModeBitmapScheduleActive MTRThermostatProgrammingOperationModeBitmap = 1
+	MTRThermostatProgrammingOperationModeBitmapAutoRecovery   MTRThermostatProgrammingOperationModeBitmap = 2
+	MTRThermostatProgrammingOperationModeBitmapEconomy        MTRThermostatProgrammingOperationModeBitmap = 4
+)
+
+// String returns the MTRThermostatProgrammingOperationModeBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatProgrammingOperationModeBitmap) String() string {
+	var parts []string
+	if e&MTRThermostatProgrammingOperationModeBitmapScheduleActive != 0 {
+		parts = append(parts, "MTRThermostatProgrammingOperationModeBitmapScheduleActive")
+	}
+	if e&MTRThermostatProgrammingOperationModeBitmapAutoRecovery != 0 {
+		parts = append(parts, "MTRThermostatProgrammingOperationModeBitmapAutoRecovery")
+	}
+	if e&MTRThermostatProgrammingOperationModeBitmapEconomy != 0 {
+		parts = append(parts, "MTRThermostatProgrammingOperationModeBitmapEconomy")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRThermostatRelayStateBitmap int64
+
+const (
+	MTRThermostatRelayStateBitmapHeat       MTRThermostatRelayStateBitmap = 1
+	MTRThermostatRelayStateBitmapCool       MTRThermostatRelayStateBitmap = 2
+	MTRThermostatRelayStateBitmapFan        MTRThermostatRelayStateBitmap = 4
+	MTRThermostatRelayStateBitmapHeatStage2 MTRThermostatRelayStateBitmap = 8
+	MTRThermostatRelayStateBitmapCoolStage2 MTRThermostatRelayStateBitmap = 16
+	MTRThermostatRelayStateBitmapFanStage2  MTRThermostatRelayStateBitmap = 32
+	MTRThermostatRelayStateBitmapFanStage3  MTRThermostatRelayStateBitmap = 64
+)
+
+// String returns the MTRThermostatRelayStateBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatRelayStateBitmap) String() string {
+	var parts []string
+	if e&MTRThermostatRelayStateBitmapHeat != 0 {
+		parts = append(parts, "MTRThermostatRelayStateBitmapHeat")
+	}
+	if e&MTRThermostatRelayStateBitmapCool != 0 {
+		parts = append(parts, "MTRThermostatRelayStateBitmapCool")
+	}
+	if e&MTRThermostatRelayStateBitmapFan != 0 {
+		parts = append(parts, "MTRThermostatRelayStateBitmapFan")
+	}
+	if e&MTRThermostatRelayStateBitmapHeatStage2 != 0 {
+		parts = append(parts, "MTRThermostatRelayStateBitmapHeatStage2")
+	}
+	if e&MTRThermostatRelayStateBitmapCoolStage2 != 0 {
+		parts = append(parts, "MTRThermostatRelayStateBitmapCoolStage2")
+	}
+	if e&MTRThermostatRelayStateBitmapFanStage2 != 0 {
+		parts = append(parts, "MTRThermostatRelayStateBitmapFanStage2")
+	}
+	if e&MTRThermostatRelayStateBitmapFanStage3 != 0 {
+		parts = append(parts, "MTRThermostatRelayStateBitmapFanStage3")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRThermostatRemoteSensingBitmap int64
+
+const (
+	MTRThermostatRemoteSensingBitmapLocalTemperature   MTRThermostatRemoteSensingBitmap = 1
+	MTRThermostatRemoteSensingBitmapOutdoorTemperature MTRThermostatRemoteSensingBitmap = 2
+	MTRThermostatRemoteSensingBitmapOccupancy          MTRThermostatRemoteSensingBitmap = 4
+)
+
+// String returns the MTRThermostatRemoteSensingBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatRemoteSensingBitmap) String() string {
+	var parts []string
+	if e&MTRThermostatRemoteSensingBitmapLocalTemperature != 0 {
+		parts = append(parts, "MTRThermostatRemoteSensingBitmapLocalTemperature")
+	}
+	if e&MTRThermostatRemoteSensingBitmapOutdoorTemperature != 0 {
+		parts = append(parts, "MTRThermostatRemoteSensingBitmapOutdoorTemperature")
+	}
+	if e&MTRThermostatRemoteSensingBitmapOccupancy != 0 {
+		parts = append(parts, "MTRThermostatRemoteSensingBitmapOccupancy")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRThermostatRunningMode int64
+
+const (
+	MTRThermostatRunningModeOff  MTRThermostatRunningMode = 0
+	MTRThermostatRunningModeCool MTRThermostatRunningMode = 3
+	MTRThermostatRunningModeHeat MTRThermostatRunningMode = 4
+)
+
+// String returns the MTRThermostatRunningMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatRunningMode) String() string {
+	switch e {
+	case MTRThermostatRunningModeOff:
+		return "MTRThermostatRunningModeOff"
+	case MTRThermostatRunningModeCool:
+		return "MTRThermostatRunningModeCool"
+	case MTRThermostatRunningModeHeat:
+		return "MTRThermostatRunningModeHeat"
+	default:
+		return fmt.Sprintf("MTRThermostatRunningMode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRThermostatScheduleDayOfWeekBitmap int64
+
+const (
+	MTRThermostatScheduleDayOfWeekBitmapSunday    MTRThermostatScheduleDayOfWeekBitmap = 1
+	MTRThermostatScheduleDayOfWeekBitmapMonday    MTRThermostatScheduleDayOfWeekBitmap = 2
+	MTRThermostatScheduleDayOfWeekBitmapTuesday   MTRThermostatScheduleDayOfWeekBitmap = 4
+	MTRThermostatScheduleDayOfWeekBitmapWednesday MTRThermostatScheduleDayOfWeekBitmap = 8
+	MTRThermostatScheduleDayOfWeekBitmapThursday  MTRThermostatScheduleDayOfWeekBitmap = 16
+	MTRThermostatScheduleDayOfWeekBitmapFriday    MTRThermostatScheduleDayOfWeekBitmap = 32
+	MTRThermostatScheduleDayOfWeekBitmapSaturday  MTRThermostatScheduleDayOfWeekBitmap = 64
+	MTRThermostatScheduleDayOfWeekBitmapAway      MTRThermostatScheduleDayOfWeekBitmap = 128
+)
+
+// String returns the MTRThermostatScheduleDayOfWeekBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatScheduleDayOfWeekBitmap) String() string {
+	var parts []string
+	if e&MTRThermostatScheduleDayOfWeekBitmapSunday != 0 {
+		parts = append(parts, "MTRThermostatScheduleDayOfWeekBitmapSunday")
+	}
+	if e&MTRThermostatScheduleDayOfWeekBitmapMonday != 0 {
+		parts = append(parts, "MTRThermostatScheduleDayOfWeekBitmapMonday")
+	}
+	if e&MTRThermostatScheduleDayOfWeekBitmapTuesday != 0 {
+		parts = append(parts, "MTRThermostatScheduleDayOfWeekBitmapTuesday")
+	}
+	if e&MTRThermostatScheduleDayOfWeekBitmapWednesday != 0 {
+		parts = append(parts, "MTRThermostatScheduleDayOfWeekBitmapWednesday")
+	}
+	if e&MTRThermostatScheduleDayOfWeekBitmapThursday != 0 {
+		parts = append(parts, "MTRThermostatScheduleDayOfWeekBitmapThursday")
+	}
+	if e&MTRThermostatScheduleDayOfWeekBitmapFriday != 0 {
+		parts = append(parts, "MTRThermostatScheduleDayOfWeekBitmapFriday")
+	}
+	if e&MTRThermostatScheduleDayOfWeekBitmapSaturday != 0 {
+		parts = append(parts, "MTRThermostatScheduleDayOfWeekBitmapSaturday")
+	}
+	if e&MTRThermostatScheduleDayOfWeekBitmapAway != 0 {
+		parts = append(parts, "MTRThermostatScheduleDayOfWeekBitmapAway")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRThermostatScheduleModeBitmap int64
+
+const (
+	MTRThermostatScheduleModeBitmapHeatSetpointPresent MTRThermostatScheduleModeBitmap = 1
+	MTRThermostatScheduleModeBitmapCoolSetpointPresent MTRThermostatScheduleModeBitmap = 2
+)
+
+// String returns the MTRThermostatScheduleModeBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatScheduleModeBitmap) String() string {
+	var parts []string
+	if e&MTRThermostatScheduleModeBitmapHeatSetpointPresent != 0 {
+		parts = append(parts, "MTRThermostatScheduleModeBitmapHeatSetpointPresent")
+	}
+	if e&MTRThermostatScheduleModeBitmapCoolSetpointPresent != 0 {
+		parts = append(parts, "MTRThermostatScheduleModeBitmapCoolSetpointPresent")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRThermostatScheduleTypeFeaturesBitmap int64
+
+const (
+	MTRThermostatScheduleTypeFeaturesBitmapSupportsPresets   MTRThermostatScheduleTypeFeaturesBitmap = 1
+	MTRThermostatScheduleTypeFeaturesBitmapSupportsSetpoints MTRThermostatScheduleTypeFeaturesBitmap = 2
+	MTRThermostatScheduleTypeFeaturesBitmapSupportsNames     MTRThermostatScheduleTypeFeaturesBitmap = 4
+	MTRThermostatScheduleTypeFeaturesBitmapSupportsOff       MTRThermostatScheduleTypeFeaturesBitmap = 8
+)
+
+// String returns the MTRThermostatScheduleTypeFeaturesBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatScheduleTypeFeaturesBitmap) String() string {
+	var parts []string
+	if e&MTRThermostatScheduleTypeFeaturesBitmapSupportsPresets != 0 {
+		parts = append(parts, "MTRThermostatScheduleTypeFeaturesBitmapSupportsPresets")
+	}
+	if e&MTRThermostatScheduleTypeFeaturesBitmapSupportsSetpoints != 0 {
+		parts = append(parts, "MTRThermostatScheduleTypeFeaturesBitmapSupportsSetpoints")
+	}
+	if e&MTRThermostatScheduleTypeFeaturesBitmapSupportsNames != 0 {
+		parts = append(parts, "MTRThermostatScheduleTypeFeaturesBitmapSupportsNames")
+	}
+	if e&MTRThermostatScheduleTypeFeaturesBitmapSupportsOff != 0 {
+		parts = append(parts, "MTRThermostatScheduleTypeFeaturesBitmapSupportsOff")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRThermostatSetpointAdjustMode int64
+
+const (
+	MTRThermostatSetpointAdjustModeHeat                 MTRThermostatSetpointAdjustMode = 0
+	MTRThermostatSetpointAdjustModeHeatSetpoint         MTRThermostatSetpointAdjustMode = 0
+	MTRThermostatSetpointAdjustModeCool                 MTRThermostatSetpointAdjustMode = 1
+	MTRThermostatSetpointAdjustModeCoolSetpoint         MTRThermostatSetpointAdjustMode = 1
+	MTRThermostatSetpointAdjustModeBoth                 MTRThermostatSetpointAdjustMode = 2
+	MTRThermostatSetpointAdjustModeHeatAndCoolSetpoints MTRThermostatSetpointAdjustMode = 2
+)
+
+// String returns the MTRThermostatSetpointAdjustMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatSetpointAdjustMode) String() string {
+	switch e {
+	case MTRThermostatSetpointAdjustModeHeat:
+		return "MTRThermostatSetpointAdjustModeHeat"
+	case MTRThermostatSetpointAdjustModeCool:
+		return "MTRThermostatSetpointAdjustModeCool"
+	case MTRThermostatSetpointAdjustModeBoth:
+		return "MTRThermostatSetpointAdjustModeBoth"
+	default:
+		return fmt.Sprintf("MTRThermostatSetpointAdjustMode(%d)", int64(e))
+	}
+}
+
+type MTRThermostatSetpointChangeSource int64
+
+const (
+	MTRThermostatSetpointChangeSourceManual   MTRThermostatSetpointChangeSource = 0
+	MTRThermostatSetpointChangeSourceSchedule MTRThermostatSetpointChangeSource = 1
+	MTRThermostatSetpointChangeSourceExternal MTRThermostatSetpointChangeSource = 2
+)
+
+// String returns the MTRThermostatSetpointChangeSource constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatSetpointChangeSource) String() string {
+	switch e {
+	case MTRThermostatSetpointChangeSourceManual:
+		return "MTRThermostatSetpointChangeSourceManual"
+	case MTRThermostatSetpointChangeSourceSchedule:
+		return "MTRThermostatSetpointChangeSourceSchedule"
+	case MTRThermostatSetpointChangeSourceExternal:
+		return "MTRThermostatSetpointChangeSourceExternal"
+	default:
+		return fmt.Sprintf("MTRThermostatSetpointChangeSource(%d)", int64(e))
+	}
+}
+
+type MTRThermostatSetpointRaiseLowerMode int64
+
+const (
+	MTRThermostatSetpointRaiseLowerModeHeat MTRThermostatSetpointRaiseLowerMode = 0
+	MTRThermostatSetpointRaiseLowerModeCool MTRThermostatSetpointRaiseLowerMode = 1
+	MTRThermostatSetpointRaiseLowerModeBoth MTRThermostatSetpointRaiseLowerMode = 2
+)
+
+// String returns the MTRThermostatSetpointRaiseLowerMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatSetpointRaiseLowerMode) String() string {
+	switch e {
+	case MTRThermostatSetpointRaiseLowerModeHeat:
+		return "MTRThermostatSetpointRaiseLowerModeHeat"
+	case MTRThermostatSetpointRaiseLowerModeCool:
+		return "MTRThermostatSetpointRaiseLowerModeCool"
+	case MTRThermostatSetpointRaiseLowerModeBoth:
+		return "MTRThermostatSetpointRaiseLowerModeBoth"
+	default:
+		return fmt.Sprintf("MTRThermostatSetpointRaiseLowerMode(%d)", int64(e))
+	}
+}
+
+type MTRThermostatStartOfWeek int64
+
+const (
+	MTRThermostatStartOfWeekSunday    MTRThermostatStartOfWeek = 0
+	MTRThermostatStartOfWeekMonday    MTRThermostatStartOfWeek = 1
+	MTRThermostatStartOfWeekTuesday   MTRThermostatStartOfWeek = 2
+	MTRThermostatStartOfWeekWednesday MTRThermostatStartOfWeek = 3
+	MTRThermostatStartOfWeekThursday  MTRThermostatStartOfWeek = 4
+	MTRThermostatStartOfWeekFriday    MTRThermostatStartOfWeek = 5
+	MTRThermostatStartOfWeekSaturday  MTRThermostatStartOfWeek = 6
+)
+
+// String returns the MTRThermostatStartOfWeek constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatStartOfWeek) String() string {
+	switch e {
+	case MTRThermostatStartOfWeekSunday:
+		return "MTRThermostatStartOfWeekSunday"
+	case MTRThermostatStartOfWeekMonday:
+		return "MTRThermostatStartOfWeekMonday"
+	case MTRThermostatStartOfWeekTuesday:
+		return "MTRThermostatStartOfWeekTuesday"
+	case MTRThermostatStartOfWeekWednesday:
+		return "MTRThermostatStartOfWeekWednesday"
+	case MTRThermostatStartOfWeekThursday:
+		return "MTRThermostatStartOfWeekThursday"
+	case MTRThermostatStartOfWeekFriday:
+		return "MTRThermostatStartOfWeekFriday"
+	case MTRThermostatStartOfWeekSaturday:
+		return "MTRThermostatStartOfWeekSaturday"
+	default:
+		return fmt.Sprintf("MTRThermostatStartOfWeek(%d)", int64(e))
+	}
+}
+
+type MTRThermostatSystemMode int64
+
+const (
+	MTRThermostatSystemModeOff              MTRThermostatSystemMode = 0
+	MTRThermostatSystemModeAuto             MTRThermostatSystemMode = 1
+	MTRThermostatSystemModeCool             MTRThermostatSystemMode = 3
+	MTRThermostatSystemModeHeat             MTRThermostatSystemMode = 4
+	MTRThermostatSystemModeEmergencyHeat    MTRThermostatSystemMode = 5
+	MTRThermostatSystemModeEmergencyHeating MTRThermostatSystemMode = 5
+	MTRThermostatSystemModePrecooling       MTRThermostatSystemMode = 6
+	MTRThermostatSystemModeFanOnly          MTRThermostatSystemMode = 7
+	MTRThermostatSystemModeDry              MTRThermostatSystemMode = 8
+	MTRThermostatSystemModeSleep            MTRThermostatSystemMode = 9
+)
+
+// String returns the MTRThermostatSystemMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatSystemMode) String() string {
+	switch e {
+	case MTRThermostatSystemModeOff:
+		return "MTRThermostatSystemModeOff"
+	case MTRThermostatSystemModeAuto:
+		return "MTRThermostatSystemModeAuto"
+	case MTRThermostatSystemModeCool:
+		return "MTRThermostatSystemModeCool"
+	case MTRThermostatSystemModeHeat:
+		return "MTRThermostatSystemModeHeat"
+	case MTRThermostatSystemModeEmergencyHeat:
+		return "MTRThermostatSystemModeEmergencyHeat"
+	case MTRThermostatSystemModePrecooling:
+		return "MTRThermostatSystemModePrecooling"
+	case MTRThermostatSystemModeFanOnly:
+		return "MTRThermostatSystemModeFanOnly"
+	case MTRThermostatSystemModeDry:
+		return "MTRThermostatSystemModeDry"
+	case MTRThermostatSystemModeSleep:
+		return "MTRThermostatSystemModeSleep"
+	default:
+		return fmt.Sprintf("MTRThermostatSystemMode(%d)", int64(e))
+	}
+}
+
+type MTRThermostatTemperatureSetpointHold int64
+
+const (
+	MTRThermostatTemperatureSetpointHoldSetpointHoldOff MTRThermostatTemperatureSetpointHold = 0
+	MTRThermostatTemperatureSetpointHoldSetpointHoldOn  MTRThermostatTemperatureSetpointHold = 1
+)
+
+// String returns the MTRThermostatTemperatureSetpointHold constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatTemperatureSetpointHold) String() string {
+	switch e {
+	case MTRThermostatTemperatureSetpointHoldSetpointHoldOff:
+		return "MTRThermostatTemperatureSetpointHoldSetpointHoldOff"
+	case MTRThermostatTemperatureSetpointHoldSetpointHoldOn:
+		return "MTRThermostatTemperatureSetpointHoldSetpointHoldOn"
+	default:
+		return fmt.Sprintf("MTRThermostatTemperatureSetpointHold(%d)", int64(e))
+	}
+}
+
+type MTRThermostatUserInterfaceConfigurationKeypadLockout int64
+
+const (
+	MTRThermostatUserInterfaceConfigurationKeypadLockoutNoLockout MTRThermostatUserInterfaceConfigurationKeypadLockout = 0
+	MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout1  MTRThermostatUserInterfaceConfigurationKeypadLockout = 1
+	MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout2  MTRThermostatUserInterfaceConfigurationKeypadLockout = 2
+	MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout3  MTRThermostatUserInterfaceConfigurationKeypadLockout = 3
+	MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout4  MTRThermostatUserInterfaceConfigurationKeypadLockout = 4
+	MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout5  MTRThermostatUserInterfaceConfigurationKeypadLockout = 5
+)
+
+// String returns the MTRThermostatUserInterfaceConfigurationKeypadLockout constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatUserInterfaceConfigurationKeypadLockout) String() string {
+	switch e {
+	case MTRThermostatUserInterfaceConfigurationKeypadLockoutNoLockout:
+		return "MTRThermostatUserInterfaceConfigurationKeypadLockoutNoLockout"
+	case MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout1:
+		return "MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout1"
+	case MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout2:
+		return "MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout2"
+	case MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout3:
+		return "MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout3"
+	case MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout4:
+		return "MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout4"
+	case MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout5:
+		return "MTRThermostatUserInterfaceConfigurationKeypadLockoutLockout5"
+	default:
+		return fmt.Sprintf("MTRThermostatUserInterfaceConfigurationKeypadLockout(%d)", int64(e))
+	}
+}
+
+type MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibility int64
+
+const (
+	MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibilityScheduleProgrammingPermitted MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibility = 0
+	MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibilityScheduleProgrammingDenied    MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibility = 1
+)
+
+// String returns the MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibility constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibility) String() string {
+	switch e {
+	case MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibilityScheduleProgrammingPermitted:
+		return "MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibilityScheduleProgrammingPermitted"
+	case MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibilityScheduleProgrammingDenied:
+		return "MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibilityScheduleProgrammingDenied"
+	default:
+		return fmt.Sprintf("MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibility(%d)", int64(e))
+	}
+}
+
+type MTRThermostatUserInterfaceConfigurationTemperatureDisplayMode int64
+
+const (
+	MTRThermostatUserInterfaceConfigurationTemperatureDisplayModeCelsius    MTRThermostatUserInterfaceConfigurationTemperatureDisplayMode = 0
+	MTRThermostatUserInterfaceConfigurationTemperatureDisplayModeFahrenheit MTRThermostatUserInterfaceConfigurationTemperatureDisplayMode = 1
+)
+
+// String returns the MTRThermostatUserInterfaceConfigurationTemperatureDisplayMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThermostatUserInterfaceConfigurationTemperatureDisplayMode) String() string {
+	switch e {
+	case MTRThermostatUserInterfaceConfigurationTemperatureDisplayModeCelsius:
+		return "MTRThermostatUserInterfaceConfigurationTemperatureDisplayModeCelsius"
+	case MTRThermostatUserInterfaceConfigurationTemperatureDisplayModeFahrenheit:
+		return "MTRThermostatUserInterfaceConfigurationTemperatureDisplayModeFahrenheit"
+	default:
+		return fmt.Sprintf("MTRThermostatUserInterfaceConfigurationTemperatureDisplayMode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRThreadBorderRouterManagementFeature int64
+
+const (
+	MTRThreadBorderRouterManagementFeaturePANChange MTRThreadBorderRouterManagementFeature = 1
+)
+
+// String returns the MTRThreadBorderRouterManagementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThreadBorderRouterManagementFeature) String() string {
+	var parts []string
+	if e&MTRThreadBorderRouterManagementFeaturePANChange != 0 {
+		parts = append(parts, "MTRThreadBorderRouterManagementFeaturePANChange")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRThreadNetworkDiagnosticsConnectionStatus int64
+
+const (
+	MTRThreadNetworkDiagnosticsConnectionStatusConnected    MTRThreadNetworkDiagnosticsConnectionStatus = 0
+	MTRThreadNetworkDiagnosticsConnectionStatusNotConnected MTRThreadNetworkDiagnosticsConnectionStatus = 1
+)
+
+// String returns the MTRThreadNetworkDiagnosticsConnectionStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThreadNetworkDiagnosticsConnectionStatus) String() string {
+	switch e {
+	case MTRThreadNetworkDiagnosticsConnectionStatusConnected:
+		return "MTRThreadNetworkDiagnosticsConnectionStatusConnected"
+	case MTRThreadNetworkDiagnosticsConnectionStatusNotConnected:
+		return "MTRThreadNetworkDiagnosticsConnectionStatusNotConnected"
+	default:
+		return fmt.Sprintf("MTRThreadNetworkDiagnosticsConnectionStatus(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRThreadNetworkDiagnosticsFeature int64
+
+const (
+	MTRThreadNetworkDiagnosticsFeaturePacketCounts MTRThreadNetworkDiagnosticsFeature = 1
+	MTRThreadNetworkDiagnosticsFeatureErrorCounts  MTRThreadNetworkDiagnosticsFeature = 2
+	MTRThreadNetworkDiagnosticsFeatureMLECounts    MTRThreadNetworkDiagnosticsFeature = 4
+	MTRThreadNetworkDiagnosticsFeatureMACCounts    MTRThreadNetworkDiagnosticsFeature = 8
+)
+
+// String returns the MTRThreadNetworkDiagnosticsFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThreadNetworkDiagnosticsFeature) String() string {
+	var parts []string
+	if e&MTRThreadNetworkDiagnosticsFeaturePacketCounts != 0 {
+		parts = append(parts, "MTRThreadNetworkDiagnosticsFeaturePacketCounts")
+	}
+	if e&MTRThreadNetworkDiagnosticsFeatureErrorCounts != 0 {
+		parts = append(parts, "MTRThreadNetworkDiagnosticsFeatureErrorCounts")
+	}
+	if e&MTRThreadNetworkDiagnosticsFeatureMLECounts != 0 {
+		parts = append(parts, "MTRThreadNetworkDiagnosticsFeatureMLECounts")
+	}
+	if e&MTRThreadNetworkDiagnosticsFeatureMACCounts != 0 {
+		parts = append(parts, "MTRThreadNetworkDiagnosticsFeatureMACCounts")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRThreadNetworkDiagnosticsNetworkFault int64
+
+const (
+	MTRThreadNetworkDiagnosticsNetworkFaultUnspecified     MTRThreadNetworkDiagnosticsNetworkFault = 0
+	MTRThreadNetworkDiagnosticsNetworkFaultLinkDown        MTRThreadNetworkDiagnosticsNetworkFault = 1
+	MTRThreadNetworkDiagnosticsNetworkFaultHardwareFailure MTRThreadNetworkDiagnosticsNetworkFault = 2
+	MTRThreadNetworkDiagnosticsNetworkFaultNetworkJammed   MTRThreadNetworkDiagnosticsNetworkFault = 3
+)
+
+// String returns the MTRThreadNetworkDiagnosticsNetworkFault constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThreadNetworkDiagnosticsNetworkFault) String() string {
+	switch e {
+	case MTRThreadNetworkDiagnosticsNetworkFaultUnspecified:
+		return "MTRThreadNetworkDiagnosticsNetworkFaultUnspecified"
+	case MTRThreadNetworkDiagnosticsNetworkFaultLinkDown:
+		return "MTRThreadNetworkDiagnosticsNetworkFaultLinkDown"
+	case MTRThreadNetworkDiagnosticsNetworkFaultHardwareFailure:
+		return "MTRThreadNetworkDiagnosticsNetworkFaultHardwareFailure"
+	case MTRThreadNetworkDiagnosticsNetworkFaultNetworkJammed:
+		return "MTRThreadNetworkDiagnosticsNetworkFaultNetworkJammed"
+	default:
+		return fmt.Sprintf("MTRThreadNetworkDiagnosticsNetworkFault(%d)", int64(e))
+	}
+}
+
+type MTRThreadNetworkDiagnosticsRoutingRole int64
+
+const (
+	MTRThreadNetworkDiagnosticsRoutingRoleUnspecified     MTRThreadNetworkDiagnosticsRoutingRole = 0
+	MTRThreadNetworkDiagnosticsRoutingRoleUnassigned      MTRThreadNetworkDiagnosticsRoutingRole = 1
+	MTRThreadNetworkDiagnosticsRoutingRoleSleepyEndDevice MTRThreadNetworkDiagnosticsRoutingRole = 2
+	MTRThreadNetworkDiagnosticsRoutingRoleEndDevice       MTRThreadNetworkDiagnosticsRoutingRole = 3
+	MTRThreadNetworkDiagnosticsRoutingRoleREED            MTRThreadNetworkDiagnosticsRoutingRole = 4
+	MTRThreadNetworkDiagnosticsRoutingRoleRouter          MTRThreadNetworkDiagnosticsRoutingRole = 5
+	MTRThreadNetworkDiagnosticsRoutingRoleLeader          MTRThreadNetworkDiagnosticsRoutingRole = 6
+)
+
+// String returns the MTRThreadNetworkDiagnosticsRoutingRole constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThreadNetworkDiagnosticsRoutingRole) String() string {
+	switch e {
+	case MTRThreadNetworkDiagnosticsRoutingRoleUnspecified:
+		return "MTRThreadNetworkDiagnosticsRoutingRoleUnspecified"
+	case MTRThreadNetworkDiagnosticsRoutingRoleUnassigned:
+		return "MTRThreadNetworkDiagnosticsRoutingRoleUnassigned"
+	case MTRThreadNetworkDiagnosticsRoutingRoleSleepyEndDevice:
+		return "MTRThreadNetworkDiagnosticsRoutingRoleSleepyEndDevice"
+	case MTRThreadNetworkDiagnosticsRoutingRoleEndDevice:
+		return "MTRThreadNetworkDiagnosticsRoutingRoleEndDevice"
+	case MTRThreadNetworkDiagnosticsRoutingRoleREED:
+		return "MTRThreadNetworkDiagnosticsRoutingRoleREED"
+	case MTRThreadNetworkDiagnosticsRoutingRoleRouter:
+		return "MTRThreadNetworkDiagnosticsRoutingRoleRouter"
+	case MTRThreadNetworkDiagnosticsRoutingRoleLeader:
+		return "MTRThreadNetworkDiagnosticsRoutingRoleLeader"
+	default:
+		return fmt.Sprintf("MTRThreadNetworkDiagnosticsRoutingRole(%d)", int64(e))
+	}
+}
+
+type MTRThreadNetworkDiagnosticsThreadConnectionStatus int64
+
+const (
+	MTRThreadNetworkDiagnosticsThreadConnectionStatusConnected    MTRThreadNetworkDiagnosticsThreadConnectionStatus = 0
+	MTRThreadNetworkDiagnosticsThreadConnectionStatusNotConnected MTRThreadNetworkDiagnosticsThreadConnectionStatus = 1
+)
+
+// String returns the MTRThreadNetworkDiagnosticsThreadConnectionStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRThreadNetworkDiagnosticsThreadConnectionStatus) String() string {
+	switch e {
+	case MTRThreadNetworkDiagnosticsThreadConnectionStatusConnected:
+		return "MTRThreadNetworkDiagnosticsThreadConnectionStatusConnected"
+	case MTRThreadNetworkDiagnosticsThreadConnectionStatusNotConnected:
+		return "MTRThreadNetworkDiagnosticsThreadConnectionStatusNotConnected"
+	default:
+		return fmt.Sprintf("MTRThreadNetworkDiagnosticsThreadConnectionStatus(%d)", int64(e))
+	}
+}
+
+type MTRTimeFormatLocalizationCalendarType int64
+
+const (
+	MTRTimeFormatLocalizationCalendarTypeBuddhist        MTRTimeFormatLocalizationCalendarType = 0
+	MTRTimeFormatLocalizationCalendarTypeChinese         MTRTimeFormatLocalizationCalendarType = 1
+	MTRTimeFormatLocalizationCalendarTypeCoptic          MTRTimeFormatLocalizationCalendarType = 2
+	MTRTimeFormatLocalizationCalendarTypeEthiopian       MTRTimeFormatLocalizationCalendarType = 3
+	MTRTimeFormatLocalizationCalendarTypeGregorian       MTRTimeFormatLocalizationCalendarType = 4
+	MTRTimeFormatLocalizationCalendarTypeHebrew          MTRTimeFormatLocalizationCalendarType = 5
+	MTRTimeFormatLocalizationCalendarTypeIndian          MTRTimeFormatLocalizationCalendarType = 6
+	MTRTimeFormatLocalizationCalendarTypeIslamic         MTRTimeFormatLocalizationCalendarType = 7
+	MTRTimeFormatLocalizationCalendarTypeJapanese        MTRTimeFormatLocalizationCalendarType = 8
+	MTRTimeFormatLocalizationCalendarTypeKorean          MTRTimeFormatLocalizationCalendarType = 9
+	MTRTimeFormatLocalizationCalendarTypePersian         MTRTimeFormatLocalizationCalendarType = 10
+	MTRTimeFormatLocalizationCalendarTypeTaiwanese       MTRTimeFormatLocalizationCalendarType = 11
+	MTRTimeFormatLocalizationCalendarTypeUseActiveLocale MTRTimeFormatLocalizationCalendarType = 255
+)
+
+// String returns the MTRTimeFormatLocalizationCalendarType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTimeFormatLocalizationCalendarType) String() string {
+	switch e {
+	case MTRTimeFormatLocalizationCalendarTypeBuddhist:
+		return "MTRTimeFormatLocalizationCalendarTypeBuddhist"
+	case MTRTimeFormatLocalizationCalendarTypeChinese:
+		return "MTRTimeFormatLocalizationCalendarTypeChinese"
+	case MTRTimeFormatLocalizationCalendarTypeCoptic:
+		return "MTRTimeFormatLocalizationCalendarTypeCoptic"
+	case MTRTimeFormatLocalizationCalendarTypeEthiopian:
+		return "MTRTimeFormatLocalizationCalendarTypeEthiopian"
+	case MTRTimeFormatLocalizationCalendarTypeGregorian:
+		return "MTRTimeFormatLocalizationCalendarTypeGregorian"
+	case MTRTimeFormatLocalizationCalendarTypeHebrew:
+		return "MTRTimeFormatLocalizationCalendarTypeHebrew"
+	case MTRTimeFormatLocalizationCalendarTypeIndian:
+		return "MTRTimeFormatLocalizationCalendarTypeIndian"
+	case MTRTimeFormatLocalizationCalendarTypeIslamic:
+		return "MTRTimeFormatLocalizationCalendarTypeIslamic"
+	case MTRTimeFormatLocalizationCalendarTypeJapanese:
+		return "MTRTimeFormatLocalizationCalendarTypeJapanese"
+	case MTRTimeFormatLocalizationCalendarTypeKorean:
+		return "MTRTimeFormatLocalizationCalendarTypeKorean"
+	case MTRTimeFormatLocalizationCalendarTypePersian:
+		return "MTRTimeFormatLocalizationCalendarTypePersian"
+	case MTRTimeFormatLocalizationCalendarTypeTaiwanese:
+		return "MTRTimeFormatLocalizationCalendarTypeTaiwanese"
+	case MTRTimeFormatLocalizationCalendarTypeUseActiveLocale:
+		return "MTRTimeFormatLocalizationCalendarTypeUseActiveLocale"
+	default:
+		return fmt.Sprintf("MTRTimeFormatLocalizationCalendarType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRTimeFormatLocalizationFeature int64
+
+const (
+	MTRTimeFormatLocalizationFeatureCalendarFormat MTRTimeFormatLocalizationFeature = 1
+)
+
+// String returns the MTRTimeFormatLocalizationFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTimeFormatLocalizationFeature) String() string {
+	var parts []string
+	if e&MTRTimeFormatLocalizationFeatureCalendarFormat != 0 {
+		parts = append(parts, "MTRTimeFormatLocalizationFeatureCalendarFormat")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRTimeFormatLocalizationHourFormat int64
+
+const (
+	MTRTimeFormatLocalizationHourFormat12hr            MTRTimeFormatLocalizationHourFormat = 0
+	MTRTimeFormatLocalizationHourFormat24hr            MTRTimeFormatLocalizationHourFormat = 1
+	MTRTimeFormatLocalizationHourFormatUseActiveLocale MTRTimeFormatLocalizationHourFormat = 255
+)
+
+// String returns the MTRTimeFormatLocalizationHourFormat constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTimeFormatLocalizationHourFormat) String() string {
+	switch e {
+	case MTRTimeFormatLocalizationHourFormat12hr:
+		return "MTRTimeFormatLocalizationHourFormat12hr"
+	case MTRTimeFormatLocalizationHourFormat24hr:
+		return "MTRTimeFormatLocalizationHourFormat24hr"
+	case MTRTimeFormatLocalizationHourFormatUseActiveLocale:
+		return "MTRTimeFormatLocalizationHourFormatUseActiveLocale"
+	default:
+		return fmt.Sprintf("MTRTimeFormatLocalizationHourFormat(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRTimeSynchronizationFeature int64
+
+const (
+	MTRTimeSynchronizationFeatureTimeZone       MTRTimeSynchronizationFeature = 1
+	MTRTimeSynchronizationFeatureNTPClient      MTRTimeSynchronizationFeature = 2
+	MTRTimeSynchronizationFeatureNTPServer      MTRTimeSynchronizationFeature = 4
+	MTRTimeSynchronizationFeatureTimeSyncClient MTRTimeSynchronizationFeature = 8
+)
+
+// String returns the MTRTimeSynchronizationFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTimeSynchronizationFeature) String() string {
+	var parts []string
+	if e&MTRTimeSynchronizationFeatureTimeZone != 0 {
+		parts = append(parts, "MTRTimeSynchronizationFeatureTimeZone")
+	}
+	if e&MTRTimeSynchronizationFeatureNTPClient != 0 {
+		parts = append(parts, "MTRTimeSynchronizationFeatureNTPClient")
+	}
+	if e&MTRTimeSynchronizationFeatureNTPServer != 0 {
+		parts = append(parts, "MTRTimeSynchronizationFeatureNTPServer")
+	}
+	if e&MTRTimeSynchronizationFeatureTimeSyncClient != 0 {
+		parts = append(parts, "MTRTimeSynchronizationFeatureTimeSyncClient")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRTimeSynchronizationGranularity int64
+
+const (
+	MTRTimeSynchronizationGranularityNoTimeGranularity       MTRTimeSynchronizationGranularity = 0
+	MTRTimeSynchronizationGranularityMinutesGranularity      MTRTimeSynchronizationGranularity = 1
+	MTRTimeSynchronizationGranularitySecondsGranularity      MTRTimeSynchronizationGranularity = 2
+	MTRTimeSynchronizationGranularityMillisecondsGranularity MTRTimeSynchronizationGranularity = 3
+	MTRTimeSynchronizationGranularityMicrosecondsGranularity MTRTimeSynchronizationGranularity = 4
+)
+
+// String returns the MTRTimeSynchronizationGranularity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTimeSynchronizationGranularity) String() string {
+	switch e {
+	case MTRTimeSynchronizationGranularityNoTimeGranularity:
+		return "MTRTimeSynchronizationGranularityNoTimeGranularity"
+	case MTRTimeSynchronizationGranularityMinutesGranularity:
+		return "MTRTimeSynchronizationGranularityMinutesGranularity"
+	case MTRTimeSynchronizationGranularitySecondsGranularity:
+		return "MTRTimeSynchronizationGranularitySecondsGranularity"
+	case MTRTimeSynchronizationGranularityMillisecondsGranularity:
+		return "MTRTimeSynchronizationGranularityMillisecondsGranularity"
+	case MTRTimeSynchronizationGranularityMicrosecondsGranularity:
+		return "MTRTimeSynchronizationGranularityMicrosecondsGranularity"
+	default:
+		return fmt.Sprintf("MTRTimeSynchronizationGranularity(%d)", int64(e))
+	}
+}
+
+type MTRTimeSynchronizationStatusCode int64
+
+const (
+	MTRTimeSynchronizationStatusCodeTimeNotAccepted MTRTimeSynchronizationStatusCode = 2
+)
+
+// String returns the MTRTimeSynchronizationStatusCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTimeSynchronizationStatusCode) String() string {
+	switch e {
+	case MTRTimeSynchronizationStatusCodeTimeNotAccepted:
+		return "MTRTimeSynchronizationStatusCodeTimeNotAccepted"
+	default:
+		return fmt.Sprintf("MTRTimeSynchronizationStatusCode(%d)", int64(e))
+	}
+}
+
+type MTRTimeSynchronizationTimeSource int64
+
+const (
+	MTRTimeSynchronizationTimeSourceNone             MTRTimeSynchronizationTimeSource = 0
+	MTRTimeSynchronizationTimeSourceUnknown          MTRTimeSynchronizationTimeSource = 1
+	MTRTimeSynchronizationTimeSourceAdmin            MTRTimeSynchronizationTimeSource = 2
+	MTRTimeSynchronizationTimeSourceNodeTimeCluster  MTRTimeSynchronizationTimeSource = 3
+	MTRTimeSynchronizationTimeSourceNonMatterSNTP    MTRTimeSynchronizationTimeSource = 4
+	MTRTimeSynchronizationTimeSourceNonFabricSntp    MTRTimeSynchronizationTimeSource = 4
+	MTRTimeSynchronizationTimeSourceNonMatterNTP     MTRTimeSynchronizationTimeSource = 5
+	MTRTimeSynchronizationTimeSourceNonFabricNtp     MTRTimeSynchronizationTimeSource = 5
+	MTRTimeSynchronizationTimeSourceMatterSNTP       MTRTimeSynchronizationTimeSource = 6
+	MTRTimeSynchronizationTimeSourceFabricSntp       MTRTimeSynchronizationTimeSource = 6
+	MTRTimeSynchronizationTimeSourceMatterNTP        MTRTimeSynchronizationTimeSource = 7
+	MTRTimeSynchronizationTimeSourceFabricNtp        MTRTimeSynchronizationTimeSource = 7
+	MTRTimeSynchronizationTimeSourceMixedNTP         MTRTimeSynchronizationTimeSource = 8
+	MTRTimeSynchronizationTimeSourceMixedNtp         MTRTimeSynchronizationTimeSource = 8
+	MTRTimeSynchronizationTimeSourceNonMatterSNTPNTS MTRTimeSynchronizationTimeSource = 9
+	MTRTimeSynchronizationTimeSourceNonFabricSntpNts MTRTimeSynchronizationTimeSource = 9
+	MTRTimeSynchronizationTimeSourceNonMatterNTPNTS  MTRTimeSynchronizationTimeSource = 10
+	MTRTimeSynchronizationTimeSourceNonFabricNtpNts  MTRTimeSynchronizationTimeSource = 10
+	MTRTimeSynchronizationTimeSourceMatterSNTPNTS    MTRTimeSynchronizationTimeSource = 11
+	MTRTimeSynchronizationTimeSourceFabricSntpNts    MTRTimeSynchronizationTimeSource = 11
+	MTRTimeSynchronizationTimeSourceMatterNTPNTS     MTRTimeSynchronizationTimeSource = 12
+	MTRTimeSynchronizationTimeSourceFabricNtpNts     MTRTimeSynchronizationTimeSource = 12
+	MTRTimeSynchronizationTimeSourceMixedNTPNTS      MTRTimeSynchronizationTimeSource = 13
+	MTRTimeSynchronizationTimeSourceMixedNtpNts      MTRTimeSynchronizationTimeSource = 13
+	MTRTimeSynchronizationTimeSourceCloudSource      MTRTimeSynchronizationTimeSource = 14
+	MTRTimeSynchronizationTimeSourcePTP              MTRTimeSynchronizationTimeSource = 15
+	MTRTimeSynchronizationTimeSourcePtp              MTRTimeSynchronizationTimeSource = 15
+	MTRTimeSynchronizationTimeSourceGNSS             MTRTimeSynchronizationTimeSource = 16
+	MTRTimeSynchronizationTimeSourceGnss             MTRTimeSynchronizationTimeSource = 16
+)
+
+// String returns the MTRTimeSynchronizationTimeSource constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTimeSynchronizationTimeSource) String() string {
+	switch e {
+	case MTRTimeSynchronizationTimeSourceNone:
+		return "MTRTimeSynchronizationTimeSourceNone"
+	case MTRTimeSynchronizationTimeSourceUnknown:
+		return "MTRTimeSynchronizationTimeSourceUnknown"
+	case MTRTimeSynchronizationTimeSourceAdmin:
+		return "MTRTimeSynchronizationTimeSourceAdmin"
+	case MTRTimeSynchronizationTimeSourceNodeTimeCluster:
+		return "MTRTimeSynchronizationTimeSourceNodeTimeCluster"
+	case MTRTimeSynchronizationTimeSourceNonMatterSNTP:
+		return "MTRTimeSynchronizationTimeSourceNonMatterSNTP"
+	case MTRTimeSynchronizationTimeSourceNonMatterNTP:
+		return "MTRTimeSynchronizationTimeSourceNonMatterNTP"
+	case MTRTimeSynchronizationTimeSourceMatterSNTP:
+		return "MTRTimeSynchronizationTimeSourceMatterSNTP"
+	case MTRTimeSynchronizationTimeSourceMatterNTP:
+		return "MTRTimeSynchronizationTimeSourceMatterNTP"
+	case MTRTimeSynchronizationTimeSourceMixedNTP:
+		return "MTRTimeSynchronizationTimeSourceMixedNTP"
+	case MTRTimeSynchronizationTimeSourceNonMatterSNTPNTS:
+		return "MTRTimeSynchronizationTimeSourceNonMatterSNTPNTS"
+	case MTRTimeSynchronizationTimeSourceNonMatterNTPNTS:
+		return "MTRTimeSynchronizationTimeSourceNonMatterNTPNTS"
+	case MTRTimeSynchronizationTimeSourceMatterSNTPNTS:
+		return "MTRTimeSynchronizationTimeSourceMatterSNTPNTS"
+	case MTRTimeSynchronizationTimeSourceMatterNTPNTS:
+		return "MTRTimeSynchronizationTimeSourceMatterNTPNTS"
+	case MTRTimeSynchronizationTimeSourceMixedNTPNTS:
+		return "MTRTimeSynchronizationTimeSourceMixedNTPNTS"
+	case MTRTimeSynchronizationTimeSourceCloudSource:
+		return "MTRTimeSynchronizationTimeSourceCloudSource"
+	case MTRTimeSynchronizationTimeSourcePTP:
+		return "MTRTimeSynchronizationTimeSourcePTP"
+	case MTRTimeSynchronizationTimeSourceGNSS:
+		return "MTRTimeSynchronizationTimeSourceGNSS"
+	default:
+		return fmt.Sprintf("MTRTimeSynchronizationTimeSource(%d)", int64(e))
+	}
+}
+
+type MTRTimeSynchronizationTimeZoneDatabase int64
+
+const (
+	MTRTimeSynchronizationTimeZoneDatabaseFull    MTRTimeSynchronizationTimeZoneDatabase = 0
+	MTRTimeSynchronizationTimeZoneDatabasePartial MTRTimeSynchronizationTimeZoneDatabase = 1
+	MTRTimeSynchronizationTimeZoneDatabaseNone    MTRTimeSynchronizationTimeZoneDatabase = 2
+)
+
+// String returns the MTRTimeSynchronizationTimeZoneDatabase constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTimeSynchronizationTimeZoneDatabase) String() string {
+	switch e {
+	case MTRTimeSynchronizationTimeZoneDatabaseFull:
+		return "MTRTimeSynchronizationTimeZoneDatabaseFull"
+	case MTRTimeSynchronizationTimeZoneDatabasePartial:
+		return "MTRTimeSynchronizationTimeZoneDatabasePartial"
+	case MTRTimeSynchronizationTimeZoneDatabaseNone:
+		return "MTRTimeSynchronizationTimeZoneDatabaseNone"
+	default:
+		return fmt.Sprintf("MTRTimeSynchronizationTimeZoneDatabase(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature int64
+
+const (
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureNumericMeasurement MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature = 1
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureLevelIndication    MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature = 2
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureMediumLevel        MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature = 4
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureCriticalLevel      MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature = 8
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeaturePeakMeasurement    MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature = 16
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureAverageMeasurement MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature = 32
+)
+
+// String returns the MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature) String() string {
+	var parts []string
+	if e&MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureNumericMeasurement != 0 {
+		parts = append(parts, "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureNumericMeasurement")
+	}
+	if e&MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureLevelIndication != 0 {
+		parts = append(parts, "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureLevelIndication")
+	}
+	if e&MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureMediumLevel != 0 {
+		parts = append(parts, "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureMediumLevel")
+	}
+	if e&MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureCriticalLevel != 0 {
+		parts = append(parts, "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureCriticalLevel")
+	}
+	if e&MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeaturePeakMeasurement != 0 {
+		parts = append(parts, "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeaturePeakMeasurement")
+	}
+	if e&MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureAverageMeasurement != 0 {
+		parts = append(parts, "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureAverageMeasurement")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue int64
+
+const (
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueUnknown  MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue = 0
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueLow      MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue = 1
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueMedium   MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue = 2
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueHigh     MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue = 3
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueCritical MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue = 4
+)
+
+// String returns the MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue) String() string {
+	switch e {
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueUnknown:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueUnknown"
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueLow:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueLow"
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueMedium:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueMedium"
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueHigh:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueHigh"
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueCritical:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueCritical"
+	default:
+		return fmt.Sprintf("MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue(%d)", int64(e))
+	}
+}
+
+type MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMedium int64
+
+const (
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumAir   MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMedium = 0
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumWater MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMedium = 1
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumSoil  MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMedium = 2
+)
+
+// String returns the MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMedium constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMedium) String() string {
+	switch e {
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumAir:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumAir"
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumWater:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumWater"
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumSoil:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumSoil"
+	default:
+		return fmt.Sprintf("MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMedium(%d)", int64(e))
+	}
+}
+
+type MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit int64
+
+const (
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPPM  MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit = 0
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPPB  MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit = 1
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPPT  MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit = 2
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitMGM3 MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit = 3
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitUGM3 MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit = 4
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitNGM3 MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit = 5
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPM3  MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit = 6
+	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitBQM3 MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit = 7
+)
+
+// String returns the MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit) String() string {
+	switch e {
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPPM:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPPM"
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPPB:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPPB"
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPPT:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPPT"
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitMGM3:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitMGM3"
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitUGM3:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitUGM3"
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitNGM3:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitNGM3"
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPM3:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPM3"
+	case MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitBQM3:
+		return "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitBQM3"
+	default:
+		return fmt.Sprintf("MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRUnitLocalizationFeature int64
+
+const (
+	MTRUnitLocalizationFeatureTemperatureUnit MTRUnitLocalizationFeature = 1
+)
+
+// String returns the MTRUnitLocalizationFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRUnitLocalizationFeature) String() string {
+	var parts []string
+	if e&MTRUnitLocalizationFeatureTemperatureUnit != 0 {
+		parts = append(parts, "MTRUnitLocalizationFeatureTemperatureUnit")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRUnitLocalizationTempUnit int64
+
+const (
+	MTRUnitLocalizationTempUnitFahrenheit MTRUnitLocalizationTempUnit = 0
+	MTRUnitLocalizationTempUnitCelsius    MTRUnitLocalizationTempUnit = 1
+	MTRUnitLocalizationTempUnitKelvin     MTRUnitLocalizationTempUnit = 2
+)
+
+// String returns the MTRUnitLocalizationTempUnit constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRUnitLocalizationTempUnit) String() string {
+	switch e {
+	case MTRUnitLocalizationTempUnitFahrenheit:
+		return "MTRUnitLocalizationTempUnitFahrenheit"
+	case MTRUnitLocalizationTempUnitCelsius:
+		return "MTRUnitLocalizationTempUnitCelsius"
+	case MTRUnitLocalizationTempUnitKelvin:
+		return "MTRUnitLocalizationTempUnitKelvin"
+	default:
+		return fmt.Sprintf("MTRUnitLocalizationTempUnit(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRUnitTestingBitmap16MaskMap int64
+
+const (
+	MTRUnitTestingBitmap16MaskMapMaskVal1 MTRUnitTestingBitmap16MaskMap = 1
+	MTRUnitTestingBitmap16MaskMapMaskVal2 MTRUnitTestingBitmap16MaskMap = 2
+	MTRUnitTestingBitmap16MaskMapMaskVal3 MTRUnitTestingBitmap16MaskMap = 4
+	MTRUnitTestingBitmap16MaskMapMaskVal4 MTRUnitTestingBitmap16MaskMap = 16384
+)
+
+// String returns the MTRUnitTestingBitmap16MaskMap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRUnitTestingBitmap16MaskMap) String() string {
+	var parts []string
+	if e&MTRUnitTestingBitmap16MaskMapMaskVal1 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap16MaskMapMaskVal1")
+	}
+	if e&MTRUnitTestingBitmap16MaskMapMaskVal2 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap16MaskMapMaskVal2")
+	}
+	if e&MTRUnitTestingBitmap16MaskMapMaskVal3 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap16MaskMapMaskVal3")
+	}
+	if e&MTRUnitTestingBitmap16MaskMapMaskVal4 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap16MaskMapMaskVal4")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRUnitTestingBitmap32MaskMap int64
+
+const (
+	MTRUnitTestingBitmap32MaskMapMaskVal1 MTRUnitTestingBitmap32MaskMap = 1
+	MTRUnitTestingBitmap32MaskMapMaskVal2 MTRUnitTestingBitmap32MaskMap = 2
+	MTRUnitTestingBitmap32MaskMapMaskVal3 MTRUnitTestingBitmap32MaskMap = 4
+	MTRUnitTestingBitmap32MaskMapMaskVal4 MTRUnitTestingBitmap32MaskMap = 1073741824
+)
+
+// String returns the MTRUnitTestingBitmap32MaskMap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRUnitTestingBitmap32MaskMap) String() string {
+	var parts []string
+	if e&MTRUnitTestingBitmap32MaskMapMaskVal1 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap32MaskMapMaskVal1")
+	}
+	if e&MTRUnitTestingBitmap32MaskMapMaskVal2 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap32MaskMapMaskVal2")
+	}
+	if e&MTRUnitTestingBitmap32MaskMapMaskVal3 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap32MaskMapMaskVal3")
+	}
+	if e&MTRUnitTestingBitmap32MaskMapMaskVal4 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap32MaskMapMaskVal4")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRUnitTestingBitmap64MaskMap uint64
+
+const (
+	MTRUnitTestingBitmap64MaskMapMaskVal1 MTRUnitTestingBitmap64MaskMap = 1
+	MTRUnitTestingBitmap64MaskMapMaskVal2 MTRUnitTestingBitmap64MaskMap = 2
+	MTRUnitTestingBitmap64MaskMapMaskVal3 MTRUnitTestingBitmap64MaskMap = 4
+	MTRUnitTestingBitmap64MaskMapMaskVal4 MTRUnitTestingBitmap64MaskMap = 4611686018427387904
+)
+
+// String returns the MTRUnitTestingBitmap64MaskMap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRUnitTestingBitmap64MaskMap) String() string {
+	var parts []string
+	if e&MTRUnitTestingBitmap64MaskMapMaskVal1 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap64MaskMapMaskVal1")
+	}
+	if e&MTRUnitTestingBitmap64MaskMapMaskVal2 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap64MaskMapMaskVal2")
+	}
+	if e&MTRUnitTestingBitmap64MaskMapMaskVal3 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap64MaskMapMaskVal3")
+	}
+	if e&MTRUnitTestingBitmap64MaskMapMaskVal4 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap64MaskMapMaskVal4")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRUnitTestingBitmap8MaskMap int64
+
+const (
+	MTRUnitTestingBitmap8MaskMapMaskVal1 MTRUnitTestingBitmap8MaskMap = 1
+	MTRUnitTestingBitmap8MaskMapMaskVal2 MTRUnitTestingBitmap8MaskMap = 2
+	MTRUnitTestingBitmap8MaskMapMaskVal3 MTRUnitTestingBitmap8MaskMap = 4
+	MTRUnitTestingBitmap8MaskMapMaskVal4 MTRUnitTestingBitmap8MaskMap = 64
+)
+
+// String returns the MTRUnitTestingBitmap8MaskMap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRUnitTestingBitmap8MaskMap) String() string {
+	var parts []string
+	if e&MTRUnitTestingBitmap8MaskMapMaskVal1 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap8MaskMapMaskVal1")
+	}
+	if e&MTRUnitTestingBitmap8MaskMapMaskVal2 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap8MaskMapMaskVal2")
+	}
+	if e&MTRUnitTestingBitmap8MaskMapMaskVal3 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap8MaskMapMaskVal3")
+	}
+	if e&MTRUnitTestingBitmap8MaskMapMaskVal4 != 0 {
+		parts = append(parts, "MTRUnitTestingBitmap8MaskMapMaskVal4")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRUnitTestingSimple int64
+
+const (
+	MTRUnitTestingSimpleUnspecified MTRUnitTestingSimple = 0
+	MTRUnitTestingSimpleValueA      MTRUnitTestingSimple = 1
+	MTRUnitTestingSimpleValueB      MTRUnitTestingSimple = 2
+	MTRUnitTestingSimpleValueC      MTRUnitTestingSimple = 3
+)
+
+// String returns the MTRUnitTestingSimple constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRUnitTestingSimple) String() string {
+	switch e {
+	case MTRUnitTestingSimpleUnspecified:
+		return "MTRUnitTestingSimpleUnspecified"
+	case MTRUnitTestingSimpleValueA:
+		return "MTRUnitTestingSimpleValueA"
+	case MTRUnitTestingSimpleValueB:
+		return "MTRUnitTestingSimpleValueB"
+	case MTRUnitTestingSimpleValueC:
+		return "MTRUnitTestingSimpleValueC"
+	default:
+		return fmt.Sprintf("MTRUnitTestingSimple(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRUnitTestingSimpleBitmap int64
+
+const (
+	MTRUnitTestingSimpleBitmapValueA MTRUnitTestingSimpleBitmap = 1
+	MTRUnitTestingSimpleBitmapValueB MTRUnitTestingSimpleBitmap = 2
+	MTRUnitTestingSimpleBitmapValueC MTRUnitTestingSimpleBitmap = 4
+)
+
+// String returns the MTRUnitTestingSimpleBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRUnitTestingSimpleBitmap) String() string {
+	var parts []string
+	if e&MTRUnitTestingSimpleBitmapValueA != 0 {
+		parts = append(parts, "MTRUnitTestingSimpleBitmapValueA")
+	}
+	if e&MTRUnitTestingSimpleBitmapValueB != 0 {
+		parts = append(parts, "MTRUnitTestingSimpleBitmapValueB")
+	}
+	if e&MTRUnitTestingSimpleBitmapValueC != 0 {
+		parts = append(parts, "MTRUnitTestingSimpleBitmapValueC")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRValveConfigurationAndControlFeature int64
+
+const (
+	MTRValveConfigurationAndControlFeatureTimeSync MTRValveConfigurationAndControlFeature = 1
+	MTRValveConfigurationAndControlFeatureLevel    MTRValveConfigurationAndControlFeature = 2
+)
+
+// String returns the MTRValveConfigurationAndControlFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRValveConfigurationAndControlFeature) String() string {
+	var parts []string
+	if e&MTRValveConfigurationAndControlFeatureTimeSync != 0 {
+		parts = append(parts, "MTRValveConfigurationAndControlFeatureTimeSync")
+	}
+	if e&MTRValveConfigurationAndControlFeatureLevel != 0 {
+		parts = append(parts, "MTRValveConfigurationAndControlFeatureLevel")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRValveConfigurationAndControlStatusCode int64
+
+const (
+	MTRValveConfigurationAndControlStatusCodeFailureDueToFault MTRValveConfigurationAndControlStatusCode = 2
+)
+
+// String returns the MTRValveConfigurationAndControlStatusCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRValveConfigurationAndControlStatusCode) String() string {
+	switch e {
+	case MTRValveConfigurationAndControlStatusCodeFailureDueToFault:
+		return "MTRValveConfigurationAndControlStatusCodeFailureDueToFault"
+	default:
+		return fmt.Sprintf("MTRValveConfigurationAndControlStatusCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRValveConfigurationAndControlValveFaultBitmap int64
+
+const (
+	MTRValveConfigurationAndControlValveFaultBitmapGeneralFault    MTRValveConfigurationAndControlValveFaultBitmap = 1
+	MTRValveConfigurationAndControlValveFaultBitmapBlocked         MTRValveConfigurationAndControlValveFaultBitmap = 2
+	MTRValveConfigurationAndControlValveFaultBitmapLeaking         MTRValveConfigurationAndControlValveFaultBitmap = 4
+	MTRValveConfigurationAndControlValveFaultBitmapNotConnected    MTRValveConfigurationAndControlValveFaultBitmap = 8
+	MTRValveConfigurationAndControlValveFaultBitmapShortCircuit    MTRValveConfigurationAndControlValveFaultBitmap = 16
+	MTRValveConfigurationAndControlValveFaultBitmapCurrentExceeded MTRValveConfigurationAndControlValveFaultBitmap = 32
+)
+
+// String returns the MTRValveConfigurationAndControlValveFaultBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRValveConfigurationAndControlValveFaultBitmap) String() string {
+	var parts []string
+	if e&MTRValveConfigurationAndControlValveFaultBitmapGeneralFault != 0 {
+		parts = append(parts, "MTRValveConfigurationAndControlValveFaultBitmapGeneralFault")
+	}
+	if e&MTRValveConfigurationAndControlValveFaultBitmapBlocked != 0 {
+		parts = append(parts, "MTRValveConfigurationAndControlValveFaultBitmapBlocked")
+	}
+	if e&MTRValveConfigurationAndControlValveFaultBitmapLeaking != 0 {
+		parts = append(parts, "MTRValveConfigurationAndControlValveFaultBitmapLeaking")
+	}
+	if e&MTRValveConfigurationAndControlValveFaultBitmapNotConnected != 0 {
+		parts = append(parts, "MTRValveConfigurationAndControlValveFaultBitmapNotConnected")
+	}
+	if e&MTRValveConfigurationAndControlValveFaultBitmapShortCircuit != 0 {
+		parts = append(parts, "MTRValveConfigurationAndControlValveFaultBitmapShortCircuit")
+	}
+	if e&MTRValveConfigurationAndControlValveFaultBitmapCurrentExceeded != 0 {
+		parts = append(parts, "MTRValveConfigurationAndControlValveFaultBitmapCurrentExceeded")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRValveConfigurationAndControlValveState int64
+
+const (
+	MTRValveConfigurationAndControlValveStateClosed        MTRValveConfigurationAndControlValveState = 0
+	MTRValveConfigurationAndControlValveStateOpen          MTRValveConfigurationAndControlValveState = 1
+	MTRValveConfigurationAndControlValveStateTransitioning MTRValveConfigurationAndControlValveState = 2
+)
+
+// String returns the MTRValveConfigurationAndControlValveState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRValveConfigurationAndControlValveState) String() string {
+	switch e {
+	case MTRValveConfigurationAndControlValveStateClosed:
+		return "MTRValveConfigurationAndControlValveStateClosed"
+	case MTRValveConfigurationAndControlValveStateOpen:
+		return "MTRValveConfigurationAndControlValveStateOpen"
+	case MTRValveConfigurationAndControlValveStateTransitioning:
+		return "MTRValveConfigurationAndControlValveStateTransitioning"
+	default:
+		return fmt.Sprintf("MTRValveConfigurationAndControlValveState(%d)", int64(e))
+	}
+}
+
+type MTRWaterHeaterManagementBoostState int64
+
+const (
+	MTRWaterHeaterManagementBoostStateInactive MTRWaterHeaterManagementBoostState = 0
+	MTRWaterHeaterManagementBoostStateActive   MTRWaterHeaterManagementBoostState = 1
+)
+
+// String returns the MTRWaterHeaterManagementBoostState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWaterHeaterManagementBoostState) String() string {
+	switch e {
+	case MTRWaterHeaterManagementBoostStateInactive:
+		return "MTRWaterHeaterManagementBoostStateInactive"
+	case MTRWaterHeaterManagementBoostStateActive:
+		return "MTRWaterHeaterManagementBoostStateActive"
+	default:
+		return fmt.Sprintf("MTRWaterHeaterManagementBoostState(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRWaterHeaterManagementFeature int64
+
+const (
+	MTRWaterHeaterManagementFeatureEnergyManagement MTRWaterHeaterManagementFeature = 1
+	MTRWaterHeaterManagementFeatureTankPercent      MTRWaterHeaterManagementFeature = 2
+)
+
+// String returns the MTRWaterHeaterManagementFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWaterHeaterManagementFeature) String() string {
+	var parts []string
+	if e&MTRWaterHeaterManagementFeatureEnergyManagement != 0 {
+		parts = append(parts, "MTRWaterHeaterManagementFeatureEnergyManagement")
+	}
+	if e&MTRWaterHeaterManagementFeatureTankPercent != 0 {
+		parts = append(parts, "MTRWaterHeaterManagementFeatureTankPercent")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRWaterHeaterManagementWaterHeaterHeatSourceBitmap int64
+
+const (
+	MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapImmersionElement1 MTRWaterHeaterManagementWaterHeaterHeatSourceBitmap = 1
+	MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapImmersionElement2 MTRWaterHeaterManagementWaterHeaterHeatSourceBitmap = 2
+	MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapHeatPump          MTRWaterHeaterManagementWaterHeaterHeatSourceBitmap = 4
+	MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapBoiler            MTRWaterHeaterManagementWaterHeaterHeatSourceBitmap = 8
+	MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapOther             MTRWaterHeaterManagementWaterHeaterHeatSourceBitmap = 16
+)
+
+// String returns the MTRWaterHeaterManagementWaterHeaterHeatSourceBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWaterHeaterManagementWaterHeaterHeatSourceBitmap) String() string {
+	var parts []string
+	if e&MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapImmersionElement1 != 0 {
+		parts = append(parts, "MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapImmersionElement1")
+	}
+	if e&MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapImmersionElement2 != 0 {
+		parts = append(parts, "MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapImmersionElement2")
+	}
+	if e&MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapHeatPump != 0 {
+		parts = append(parts, "MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapHeatPump")
+	}
+	if e&MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapBoiler != 0 {
+		parts = append(parts, "MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapBoiler")
+	}
+	if e&MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapOther != 0 {
+		parts = append(parts, "MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapOther")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRWaterHeaterModeModeTag int64
+
+const (
+	MTRWaterHeaterModeModeTagAuto      MTRWaterHeaterModeModeTag = 0
+	MTRWaterHeaterModeModeTagQuick     MTRWaterHeaterModeModeTag = 1
+	MTRWaterHeaterModeModeTagQuiet     MTRWaterHeaterModeModeTag = 2
+	MTRWaterHeaterModeModeTagLowNoise  MTRWaterHeaterModeModeTag = 3
+	MTRWaterHeaterModeModeTagLowEnergy MTRWaterHeaterModeModeTag = 4
+	MTRWaterHeaterModeModeTagVacation  MTRWaterHeaterModeModeTag = 5
+	MTRWaterHeaterModeModeTagMin       MTRWaterHeaterModeModeTag = 6
+	MTRWaterHeaterModeModeTagMax       MTRWaterHeaterModeModeTag = 7
+	MTRWaterHeaterModeModeTagNight     MTRWaterHeaterModeModeTag = 8
+	MTRWaterHeaterModeModeTagDay       MTRWaterHeaterModeModeTag = 9
+	MTRWaterHeaterModeModeTagOff       MTRWaterHeaterModeModeTag = 16384
+	MTRWaterHeaterModeModeTagManual    MTRWaterHeaterModeModeTag = 16385
+	MTRWaterHeaterModeModeTagTimed     MTRWaterHeaterModeModeTag = 16386
+)
+
+// String returns the MTRWaterHeaterModeModeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWaterHeaterModeModeTag) String() string {
+	switch e {
+	case MTRWaterHeaterModeModeTagAuto:
+		return "MTRWaterHeaterModeModeTagAuto"
+	case MTRWaterHeaterModeModeTagQuick:
+		return "MTRWaterHeaterModeModeTagQuick"
+	case MTRWaterHeaterModeModeTagQuiet:
+		return "MTRWaterHeaterModeModeTagQuiet"
+	case MTRWaterHeaterModeModeTagLowNoise:
+		return "MTRWaterHeaterModeModeTagLowNoise"
+	case MTRWaterHeaterModeModeTagLowEnergy:
+		return "MTRWaterHeaterModeModeTagLowEnergy"
+	case MTRWaterHeaterModeModeTagVacation:
+		return "MTRWaterHeaterModeModeTagVacation"
+	case MTRWaterHeaterModeModeTagMin:
+		return "MTRWaterHeaterModeModeTagMin"
+	case MTRWaterHeaterModeModeTagMax:
+		return "MTRWaterHeaterModeModeTagMax"
+	case MTRWaterHeaterModeModeTagNight:
+		return "MTRWaterHeaterModeModeTagNight"
+	case MTRWaterHeaterModeModeTagDay:
+		return "MTRWaterHeaterModeModeTagDay"
+	case MTRWaterHeaterModeModeTagOff:
+		return "MTRWaterHeaterModeModeTagOff"
+	case MTRWaterHeaterModeModeTagManual:
+		return "MTRWaterHeaterModeModeTagManual"
+	case MTRWaterHeaterModeModeTagTimed:
+		return "MTRWaterHeaterModeModeTagTimed"
+	default:
+		return fmt.Sprintf("MTRWaterHeaterModeModeTag(%d)", int64(e))
+	}
+}
+
+type MTRWiFiNetworkDiagnosticsAssociationFailureCause int64
+
+const (
+	MTRWiFiNetworkDiagnosticsAssociationFailureCauseUnknown              MTRWiFiNetworkDiagnosticsAssociationFailureCause = 0
+	MTRWiFiNetworkDiagnosticsAssociationFailureCauseAssociationFailed    MTRWiFiNetworkDiagnosticsAssociationFailureCause = 1
+	MTRWiFiNetworkDiagnosticsAssociationFailureCauseAuthenticationFailed MTRWiFiNetworkDiagnosticsAssociationFailureCause = 2
+	MTRWiFiNetworkDiagnosticsAssociationFailureCauseSsidNotFound         MTRWiFiNetworkDiagnosticsAssociationFailureCause = 3
+)
+
+// String returns the MTRWiFiNetworkDiagnosticsAssociationFailureCause constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWiFiNetworkDiagnosticsAssociationFailureCause) String() string {
+	switch e {
+	case MTRWiFiNetworkDiagnosticsAssociationFailureCauseUnknown:
+		return "MTRWiFiNetworkDiagnosticsAssociationFailureCauseUnknown"
+	case MTRWiFiNetworkDiagnosticsAssociationFailureCauseAssociationFailed:
+		return "MTRWiFiNetworkDiagnosticsAssociationFailureCauseAssociationFailed"
+	case MTRWiFiNetworkDiagnosticsAssociationFailureCauseAuthenticationFailed:
+		return "MTRWiFiNetworkDiagnosticsAssociationFailureCauseAuthenticationFailed"
+	case MTRWiFiNetworkDiagnosticsAssociationFailureCauseSsidNotFound:
+		return "MTRWiFiNetworkDiagnosticsAssociationFailureCauseSsidNotFound"
+	default:
+		return fmt.Sprintf("MTRWiFiNetworkDiagnosticsAssociationFailureCause(%d)", int64(e))
+	}
+}
+
+type MTRWiFiNetworkDiagnosticsConnectionStatus int64
+
+const (
+	MTRWiFiNetworkDiagnosticsConnectionStatusConnected    MTRWiFiNetworkDiagnosticsConnectionStatus = 0
+	MTRWiFiNetworkDiagnosticsConnectionStatusNotConnected MTRWiFiNetworkDiagnosticsConnectionStatus = 1
+)
+
+// String returns the MTRWiFiNetworkDiagnosticsConnectionStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWiFiNetworkDiagnosticsConnectionStatus) String() string {
+	switch e {
+	case MTRWiFiNetworkDiagnosticsConnectionStatusConnected:
+		return "MTRWiFiNetworkDiagnosticsConnectionStatusConnected"
+	case MTRWiFiNetworkDiagnosticsConnectionStatusNotConnected:
+		return "MTRWiFiNetworkDiagnosticsConnectionStatusNotConnected"
+	default:
+		return fmt.Sprintf("MTRWiFiNetworkDiagnosticsConnectionStatus(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRWiFiNetworkDiagnosticsFeature int64
+
+const (
+	MTRWiFiNetworkDiagnosticsFeaturePacketCounts MTRWiFiNetworkDiagnosticsFeature = 1
+	MTRWiFiNetworkDiagnosticsFeatureErrorCounts  MTRWiFiNetworkDiagnosticsFeature = 2
+)
+
+// String returns the MTRWiFiNetworkDiagnosticsFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWiFiNetworkDiagnosticsFeature) String() string {
+	var parts []string
+	if e&MTRWiFiNetworkDiagnosticsFeaturePacketCounts != 0 {
+		parts = append(parts, "MTRWiFiNetworkDiagnosticsFeaturePacketCounts")
+	}
+	if e&MTRWiFiNetworkDiagnosticsFeatureErrorCounts != 0 {
+		parts = append(parts, "MTRWiFiNetworkDiagnosticsFeatureErrorCounts")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRWiFiNetworkDiagnosticsSecurityType int64
+
+const (
+	MTRWiFiNetworkDiagnosticsSecurityTypeUnspecified MTRWiFiNetworkDiagnosticsSecurityType = 0
+	MTRWiFiNetworkDiagnosticsSecurityTypeNone        MTRWiFiNetworkDiagnosticsSecurityType = 1
+	MTRWiFiNetworkDiagnosticsSecurityTypeWEP         MTRWiFiNetworkDiagnosticsSecurityType = 2
+	MTRWiFiNetworkDiagnosticsSecurityTypeWPA         MTRWiFiNetworkDiagnosticsSecurityType = 3
+	MTRWiFiNetworkDiagnosticsSecurityTypeWPA2        MTRWiFiNetworkDiagnosticsSecurityType = 4
+	MTRWiFiNetworkDiagnosticsSecurityTypeWPA3        MTRWiFiNetworkDiagnosticsSecurityType = 5
+)
+
+// String returns the MTRWiFiNetworkDiagnosticsSecurityType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWiFiNetworkDiagnosticsSecurityType) String() string {
+	switch e {
+	case MTRWiFiNetworkDiagnosticsSecurityTypeUnspecified:
+		return "MTRWiFiNetworkDiagnosticsSecurityTypeUnspecified"
+	case MTRWiFiNetworkDiagnosticsSecurityTypeNone:
+		return "MTRWiFiNetworkDiagnosticsSecurityTypeNone"
+	case MTRWiFiNetworkDiagnosticsSecurityTypeWEP:
+		return "MTRWiFiNetworkDiagnosticsSecurityTypeWEP"
+	case MTRWiFiNetworkDiagnosticsSecurityTypeWPA:
+		return "MTRWiFiNetworkDiagnosticsSecurityTypeWPA"
+	case MTRWiFiNetworkDiagnosticsSecurityTypeWPA2:
+		return "MTRWiFiNetworkDiagnosticsSecurityTypeWPA2"
+	case MTRWiFiNetworkDiagnosticsSecurityTypeWPA3:
+		return "MTRWiFiNetworkDiagnosticsSecurityTypeWPA3"
+	default:
+		return fmt.Sprintf("MTRWiFiNetworkDiagnosticsSecurityType(%d)", int64(e))
+	}
+}
+
+type MTRWiFiNetworkDiagnosticsWiFiConnectionStatus int64
+
+const (
+	MTRWiFiNetworkDiagnosticsWiFiConnectionStatusConnected    MTRWiFiNetworkDiagnosticsWiFiConnectionStatus = 0
+	MTRWiFiNetworkDiagnosticsWiFiConnectionStatusNotConnected MTRWiFiNetworkDiagnosticsWiFiConnectionStatus = 1
+)
+
+// String returns the MTRWiFiNetworkDiagnosticsWiFiConnectionStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWiFiNetworkDiagnosticsWiFiConnectionStatus) String() string {
+	switch e {
+	case MTRWiFiNetworkDiagnosticsWiFiConnectionStatusConnected:
+		return "MTRWiFiNetworkDiagnosticsWiFiConnectionStatusConnected"
+	case MTRWiFiNetworkDiagnosticsWiFiConnectionStatusNotConnected:
+		return "MTRWiFiNetworkDiagnosticsWiFiConnectionStatusNotConnected"
+	default:
+		return fmt.Sprintf("MTRWiFiNetworkDiagnosticsWiFiConnectionStatus(%d)", int64(e))
+	}
+}
+
+type MTRWiFiNetworkDiagnosticsWiFiVersion int64
+
+const (
+	MTRWiFiNetworkDiagnosticsWiFiVersionA  MTRWiFiNetworkDiagnosticsWiFiVersion = 0
+	MTRWiFiNetworkDiagnosticsWiFiVersionB  MTRWiFiNetworkDiagnosticsWiFiVersion = 1
+	MTRWiFiNetworkDiagnosticsWiFiVersionG  MTRWiFiNetworkDiagnosticsWiFiVersion = 2
+	MTRWiFiNetworkDiagnosticsWiFiVersionN  MTRWiFiNetworkDiagnosticsWiFiVersion = 3
+	MTRWiFiNetworkDiagnosticsWiFiVersionAc MTRWiFiNetworkDiagnosticsWiFiVersion = 4
+	MTRWiFiNetworkDiagnosticsWiFiVersionAx MTRWiFiNetworkDiagnosticsWiFiVersion = 5
+	MTRWiFiNetworkDiagnosticsWiFiVersionAh MTRWiFiNetworkDiagnosticsWiFiVersion = 6
+)
+
+// String returns the MTRWiFiNetworkDiagnosticsWiFiVersion constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWiFiNetworkDiagnosticsWiFiVersion) String() string {
+	switch e {
+	case MTRWiFiNetworkDiagnosticsWiFiVersionA:
+		return "MTRWiFiNetworkDiagnosticsWiFiVersionA"
+	case MTRWiFiNetworkDiagnosticsWiFiVersionB:
+		return "MTRWiFiNetworkDiagnosticsWiFiVersionB"
+	case MTRWiFiNetworkDiagnosticsWiFiVersionG:
+		return "MTRWiFiNetworkDiagnosticsWiFiVersionG"
+	case MTRWiFiNetworkDiagnosticsWiFiVersionN:
+		return "MTRWiFiNetworkDiagnosticsWiFiVersionN"
+	case MTRWiFiNetworkDiagnosticsWiFiVersionAc:
+		return "MTRWiFiNetworkDiagnosticsWiFiVersionAc"
+	case MTRWiFiNetworkDiagnosticsWiFiVersionAx:
+		return "MTRWiFiNetworkDiagnosticsWiFiVersionAx"
+	case MTRWiFiNetworkDiagnosticsWiFiVersionAh:
+		return "MTRWiFiNetworkDiagnosticsWiFiVersionAh"
+	default:
+		return fmt.Sprintf("MTRWiFiNetworkDiagnosticsWiFiVersion(%d)", int64(e))
+	}
+}
+
+type MTRWiFiNetworkDiagnosticsWiFiVersionType int64
+
+const (
+	MTRWiFiNetworkDiagnosticsWiFiVersionTypeA       MTRWiFiNetworkDiagnosticsWiFiVersionType = 0
+	MTRWiFiNetworkDiagnosticsWiFiVersionType80211a  MTRWiFiNetworkDiagnosticsWiFiVersionType = 0
+	MTRWiFiNetworkDiagnosticsWiFiVersionTypeB       MTRWiFiNetworkDiagnosticsWiFiVersionType = 1
+	MTRWiFiNetworkDiagnosticsWiFiVersionType80211b  MTRWiFiNetworkDiagnosticsWiFiVersionType = 1
+	MTRWiFiNetworkDiagnosticsWiFiVersionTypeG       MTRWiFiNetworkDiagnosticsWiFiVersionType = 2
+	MTRWiFiNetworkDiagnosticsWiFiVersionType80211g  MTRWiFiNetworkDiagnosticsWiFiVersionType = 2
+	MTRWiFiNetworkDiagnosticsWiFiVersionTypeN       MTRWiFiNetworkDiagnosticsWiFiVersionType = 3
+	MTRWiFiNetworkDiagnosticsWiFiVersionType80211n  MTRWiFiNetworkDiagnosticsWiFiVersionType = 3
+	MTRWiFiNetworkDiagnosticsWiFiVersionTypeAc      MTRWiFiNetworkDiagnosticsWiFiVersionType = 4
+	MTRWiFiNetworkDiagnosticsWiFiVersionType80211ac MTRWiFiNetworkDiagnosticsWiFiVersionType = 4
+	MTRWiFiNetworkDiagnosticsWiFiVersionTypeAx      MTRWiFiNetworkDiagnosticsWiFiVersionType = 5
+	MTRWiFiNetworkDiagnosticsWiFiVersionType80211ax MTRWiFiNetworkDiagnosticsWiFiVersionType = 5
+)
+
+// String returns the MTRWiFiNetworkDiagnosticsWiFiVersionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWiFiNetworkDiagnosticsWiFiVersionType) String() string {
+	switch e {
+	case MTRWiFiNetworkDiagnosticsWiFiVersionTypeA:
+		return "MTRWiFiNetworkDiagnosticsWiFiVersionTypeA"
+	case MTRWiFiNetworkDiagnosticsWiFiVersionTypeB:
+		return "MTRWiFiNetworkDiagnosticsWiFiVersionTypeB"
+	case MTRWiFiNetworkDiagnosticsWiFiVersionTypeG:
+		return "MTRWiFiNetworkDiagnosticsWiFiVersionTypeG"
+	case MTRWiFiNetworkDiagnosticsWiFiVersionTypeN:
+		return "MTRWiFiNetworkDiagnosticsWiFiVersionTypeN"
+	case MTRWiFiNetworkDiagnosticsWiFiVersionTypeAc:
+		return "MTRWiFiNetworkDiagnosticsWiFiVersionTypeAc"
+	case MTRWiFiNetworkDiagnosticsWiFiVersionTypeAx:
+		return "MTRWiFiNetworkDiagnosticsWiFiVersionTypeAx"
+	default:
+		return fmt.Sprintf("MTRWiFiNetworkDiagnosticsWiFiVersionType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRWindowCoveringConfigStatus int64
+
+const (
+	MTRWindowCoveringConfigStatusOperational           MTRWindowCoveringConfigStatus = 1
+	MTRWindowCoveringConfigStatusOnlineReserved        MTRWindowCoveringConfigStatus = 2
+	MTRWindowCoveringConfigStatusLiftMovementReversed  MTRWindowCoveringConfigStatus = 4
+	MTRWindowCoveringConfigStatusLiftPositionAware     MTRWindowCoveringConfigStatus = 8
+	MTRWindowCoveringConfigStatusTiltPositionAware     MTRWindowCoveringConfigStatus = 16
+	MTRWindowCoveringConfigStatusLiftEncoderControlled MTRWindowCoveringConfigStatus = 32
+	MTRWindowCoveringConfigStatusTiltEncoderControlled MTRWindowCoveringConfigStatus = 64
+)
+
+// String returns the MTRWindowCoveringConfigStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWindowCoveringConfigStatus) String() string {
+	var parts []string
+	if e&MTRWindowCoveringConfigStatusOperational != 0 {
+		parts = append(parts, "MTRWindowCoveringConfigStatusOperational")
+	}
+	if e&MTRWindowCoveringConfigStatusOnlineReserved != 0 {
+		parts = append(parts, "MTRWindowCoveringConfigStatusOnlineReserved")
+	}
+	if e&MTRWindowCoveringConfigStatusLiftMovementReversed != 0 {
+		parts = append(parts, "MTRWindowCoveringConfigStatusLiftMovementReversed")
+	}
+	if e&MTRWindowCoveringConfigStatusLiftPositionAware != 0 {
+		parts = append(parts, "MTRWindowCoveringConfigStatusLiftPositionAware")
+	}
+	if e&MTRWindowCoveringConfigStatusTiltPositionAware != 0 {
+		parts = append(parts, "MTRWindowCoveringConfigStatusTiltPositionAware")
+	}
+	if e&MTRWindowCoveringConfigStatusLiftEncoderControlled != 0 {
+		parts = append(parts, "MTRWindowCoveringConfigStatusLiftEncoderControlled")
+	}
+	if e&MTRWindowCoveringConfigStatusTiltEncoderControlled != 0 {
+		parts = append(parts, "MTRWindowCoveringConfigStatusTiltEncoderControlled")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRWindowCoveringEndProductType int64
+
+const (
+	MTRWindowCoveringEndProductTypeRollerShade               MTRWindowCoveringEndProductType = 0
+	MTRWindowCoveringEndProductTypeRomanShade                MTRWindowCoveringEndProductType = 1
+	MTRWindowCoveringEndProductTypeBalloonShade              MTRWindowCoveringEndProductType = 2
+	MTRWindowCoveringEndProductTypeWovenWood                 MTRWindowCoveringEndProductType = 3
+	MTRWindowCoveringEndProductTypePleatedShade              MTRWindowCoveringEndProductType = 4
+	MTRWindowCoveringEndProductTypeCellularShade             MTRWindowCoveringEndProductType = 5
+	MTRWindowCoveringEndProductTypeLayeredShade              MTRWindowCoveringEndProductType = 6
+	MTRWindowCoveringEndProductTypeLayeredShade2D            MTRWindowCoveringEndProductType = 7
+	MTRWindowCoveringEndProductTypeSheerShade                MTRWindowCoveringEndProductType = 8
+	MTRWindowCoveringEndProductTypeTiltOnlyInteriorBlind     MTRWindowCoveringEndProductType = 9
+	MTRWindowCoveringEndProductTypeInteriorBlind             MTRWindowCoveringEndProductType = 10
+	MTRWindowCoveringEndProductTypeVerticalBlindStripCurtain MTRWindowCoveringEndProductType = 11
+	MTRWindowCoveringEndProductTypeInteriorVenetianBlind     MTRWindowCoveringEndProductType = 12
+	MTRWindowCoveringEndProductTypeExteriorVenetianBlind     MTRWindowCoveringEndProductType = 13
+	MTRWindowCoveringEndProductTypeLateralLeftCurtain        MTRWindowCoveringEndProductType = 14
+	MTRWindowCoveringEndProductTypeLateralRightCurtain       MTRWindowCoveringEndProductType = 15
+	MTRWindowCoveringEndProductTypeCentralCurtain            MTRWindowCoveringEndProductType = 16
+	MTRWindowCoveringEndProductTypeRollerShutter             MTRWindowCoveringEndProductType = 17
+	MTRWindowCoveringEndProductTypeExteriorVerticalScreen    MTRWindowCoveringEndProductType = 18
+	MTRWindowCoveringEndProductTypeAwningTerracePatio        MTRWindowCoveringEndProductType = 19
+	MTRWindowCoveringEndProductTypeAwningVerticalScreen      MTRWindowCoveringEndProductType = 20
+	MTRWindowCoveringEndProductTypeTiltOnlyPergola           MTRWindowCoveringEndProductType = 21
+	MTRWindowCoveringEndProductTypeSwingingShutter           MTRWindowCoveringEndProductType = 22
+	MTRWindowCoveringEndProductTypeSlidingShutter            MTRWindowCoveringEndProductType = 23
+	MTRWindowCoveringEndProductTypeUnknown                   MTRWindowCoveringEndProductType = 255
+)
+
+// String returns the MTRWindowCoveringEndProductType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWindowCoveringEndProductType) String() string {
+	switch e {
+	case MTRWindowCoveringEndProductTypeRollerShade:
+		return "MTRWindowCoveringEndProductTypeRollerShade"
+	case MTRWindowCoveringEndProductTypeRomanShade:
+		return "MTRWindowCoveringEndProductTypeRomanShade"
+	case MTRWindowCoveringEndProductTypeBalloonShade:
+		return "MTRWindowCoveringEndProductTypeBalloonShade"
+	case MTRWindowCoveringEndProductTypeWovenWood:
+		return "MTRWindowCoveringEndProductTypeWovenWood"
+	case MTRWindowCoveringEndProductTypePleatedShade:
+		return "MTRWindowCoveringEndProductTypePleatedShade"
+	case MTRWindowCoveringEndProductTypeCellularShade:
+		return "MTRWindowCoveringEndProductTypeCellularShade"
+	case MTRWindowCoveringEndProductTypeLayeredShade:
+		return "MTRWindowCoveringEndProductTypeLayeredShade"
+	case MTRWindowCoveringEndProductTypeLayeredShade2D:
+		return "MTRWindowCoveringEndProductTypeLayeredShade2D"
+	case MTRWindowCoveringEndProductTypeSheerShade:
+		return "MTRWindowCoveringEndProductTypeSheerShade"
+	case MTRWindowCoveringEndProductTypeTiltOnlyInteriorBlind:
+		return "MTRWindowCoveringEndProductTypeTiltOnlyInteriorBlind"
+	case MTRWindowCoveringEndProductTypeInteriorBlind:
+		return "MTRWindowCoveringEndProductTypeInteriorBlind"
+	case MTRWindowCoveringEndProductTypeVerticalBlindStripCurtain:
+		return "MTRWindowCoveringEndProductTypeVerticalBlindStripCurtain"
+	case MTRWindowCoveringEndProductTypeInteriorVenetianBlind:
+		return "MTRWindowCoveringEndProductTypeInteriorVenetianBlind"
+	case MTRWindowCoveringEndProductTypeExteriorVenetianBlind:
+		return "MTRWindowCoveringEndProductTypeExteriorVenetianBlind"
+	case MTRWindowCoveringEndProductTypeLateralLeftCurtain:
+		return "MTRWindowCoveringEndProductTypeLateralLeftCurtain"
+	case MTRWindowCoveringEndProductTypeLateralRightCurtain:
+		return "MTRWindowCoveringEndProductTypeLateralRightCurtain"
+	case MTRWindowCoveringEndProductTypeCentralCurtain:
+		return "MTRWindowCoveringEndProductTypeCentralCurtain"
+	case MTRWindowCoveringEndProductTypeRollerShutter:
+		return "MTRWindowCoveringEndProductTypeRollerShutter"
+	case MTRWindowCoveringEndProductTypeExteriorVerticalScreen:
+		return "MTRWindowCoveringEndProductTypeExteriorVerticalScreen"
+	case MTRWindowCoveringEndProductTypeAwningTerracePatio:
+		return "MTRWindowCoveringEndProductTypeAwningTerracePatio"
+	case MTRWindowCoveringEndProductTypeAwningVerticalScreen:
+		return "MTRWindowCoveringEndProductTypeAwningVerticalScreen"
+	case MTRWindowCoveringEndProductTypeTiltOnlyPergola:
+		return "MTRWindowCoveringEndProductTypeTiltOnlyPergola"
+	case MTRWindowCoveringEndProductTypeSwingingShutter:
+		return "MTRWindowCoveringEndProductTypeSwingingShutter"
+	case MTRWindowCoveringEndProductTypeSlidingShutter:
+		return "MTRWindowCoveringEndProductTypeSlidingShutter"
+	case MTRWindowCoveringEndProductTypeUnknown:
+		return "MTRWindowCoveringEndProductTypeUnknown"
+	default:
+		return fmt.Sprintf("MTRWindowCoveringEndProductType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRWindowCoveringFeature int64
+
+const (
+	MTRWindowCoveringFeatureLift              MTRWindowCoveringFeature = 1
+	MTRWindowCoveringFeatureTilt              MTRWindowCoveringFeature = 2
+	MTRWindowCoveringFeaturePositionAwareLift MTRWindowCoveringFeature = 4
+	MTRWindowCoveringFeatureAbsolutePosition  MTRWindowCoveringFeature = 8
+	MTRWindowCoveringFeaturePositionAwareTilt MTRWindowCoveringFeature = 16
+)
+
+// String returns the MTRWindowCoveringFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWindowCoveringFeature) String() string {
+	var parts []string
+	if e&MTRWindowCoveringFeatureLift != 0 {
+		parts = append(parts, "MTRWindowCoveringFeatureLift")
+	}
+	if e&MTRWindowCoveringFeatureTilt != 0 {
+		parts = append(parts, "MTRWindowCoveringFeatureTilt")
+	}
+	if e&MTRWindowCoveringFeaturePositionAwareLift != 0 {
+		parts = append(parts, "MTRWindowCoveringFeaturePositionAwareLift")
+	}
+	if e&MTRWindowCoveringFeatureAbsolutePosition != 0 {
+		parts = append(parts, "MTRWindowCoveringFeatureAbsolutePosition")
+	}
+	if e&MTRWindowCoveringFeaturePositionAwareTilt != 0 {
+		parts = append(parts, "MTRWindowCoveringFeaturePositionAwareTilt")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRWindowCoveringMode int64
+
+const (
+	MTRWindowCoveringModeMotorDirectionReversed MTRWindowCoveringMode = 1
+	MTRWindowCoveringModeCalibrationMode        MTRWindowCoveringMode = 2
+	MTRWindowCoveringModeMaintenanceMode        MTRWindowCoveringMode = 4
+	MTRWindowCoveringModeLedFeedback            MTRWindowCoveringMode = 8
+)
+
+// String returns the MTRWindowCoveringMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWindowCoveringMode) String() string {
+	var parts []string
+	if e&MTRWindowCoveringModeMotorDirectionReversed != 0 {
+		parts = append(parts, "MTRWindowCoveringModeMotorDirectionReversed")
+	}
+	if e&MTRWindowCoveringModeCalibrationMode != 0 {
+		parts = append(parts, "MTRWindowCoveringModeCalibrationMode")
+	}
+	if e&MTRWindowCoveringModeMaintenanceMode != 0 {
+		parts = append(parts, "MTRWindowCoveringModeMaintenanceMode")
+	}
+	if e&MTRWindowCoveringModeLedFeedback != 0 {
+		parts = append(parts, "MTRWindowCoveringModeLedFeedback")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRWindowCoveringOperationalStatus int64
+
+const (
+	MTRWindowCoveringOperationalStatusGlobal MTRWindowCoveringOperationalStatus = 3
+	MTRWindowCoveringOperationalStatusLift   MTRWindowCoveringOperationalStatus = 12
+	MTRWindowCoveringOperationalStatusTilt   MTRWindowCoveringOperationalStatus = 48
+)
+
+// String returns the MTRWindowCoveringOperationalStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWindowCoveringOperationalStatus) String() string {
+	var parts []string
+	if e&MTRWindowCoveringOperationalStatusGlobal != 0 {
+		parts = append(parts, "MTRWindowCoveringOperationalStatusGlobal")
+	}
+	if e&MTRWindowCoveringOperationalStatusLift != 0 {
+		parts = append(parts, "MTRWindowCoveringOperationalStatusLift")
+	}
+	if e&MTRWindowCoveringOperationalStatusTilt != 0 {
+		parts = append(parts, "MTRWindowCoveringOperationalStatusTilt")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MTRWindowCoveringSafetyStatus int64
+
+const (
+	MTRWindowCoveringSafetyStatusRemoteLockout       MTRWindowCoveringSafetyStatus = 1
+	MTRWindowCoveringSafetyStatusTamperDetection     MTRWindowCoveringSafetyStatus = 2
+	MTRWindowCoveringSafetyStatusFailedCommunication MTRWindowCoveringSafetyStatus = 4
+	MTRWindowCoveringSafetyStatusPositionFailure     MTRWindowCoveringSafetyStatus = 8
+	MTRWindowCoveringSafetyStatusThermalProtection   MTRWindowCoveringSafetyStatus = 16
+	MTRWindowCoveringSafetyStatusObstacleDetected    MTRWindowCoveringSafetyStatus = 32
+	MTRWindowCoveringSafetyStatusPower               MTRWindowCoveringSafetyStatus = 64
+	MTRWindowCoveringSafetyStatusStopInput           MTRWindowCoveringSafetyStatus = 128
+	MTRWindowCoveringSafetyStatusMotorJammed         MTRWindowCoveringSafetyStatus = 256
+	MTRWindowCoveringSafetyStatusHardwareFailure     MTRWindowCoveringSafetyStatus = 512
+	MTRWindowCoveringSafetyStatusManualOperation     MTRWindowCoveringSafetyStatus = 1024
+	MTRWindowCoveringSafetyStatusProtection          MTRWindowCoveringSafetyStatus = 2048
+)
+
+// String returns the MTRWindowCoveringSafetyStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWindowCoveringSafetyStatus) String() string {
+	var parts []string
+	if e&MTRWindowCoveringSafetyStatusRemoteLockout != 0 {
+		parts = append(parts, "MTRWindowCoveringSafetyStatusRemoteLockout")
+	}
+	if e&MTRWindowCoveringSafetyStatusTamperDetection != 0 {
+		parts = append(parts, "MTRWindowCoveringSafetyStatusTamperDetection")
+	}
+	if e&MTRWindowCoveringSafetyStatusFailedCommunication != 0 {
+		parts = append(parts, "MTRWindowCoveringSafetyStatusFailedCommunication")
+	}
+	if e&MTRWindowCoveringSafetyStatusPositionFailure != 0 {
+		parts = append(parts, "MTRWindowCoveringSafetyStatusPositionFailure")
+	}
+	if e&MTRWindowCoveringSafetyStatusThermalProtection != 0 {
+		parts = append(parts, "MTRWindowCoveringSafetyStatusThermalProtection")
+	}
+	if e&MTRWindowCoveringSafetyStatusObstacleDetected != 0 {
+		parts = append(parts, "MTRWindowCoveringSafetyStatusObstacleDetected")
+	}
+	if e&MTRWindowCoveringSafetyStatusPower != 0 {
+		parts = append(parts, "MTRWindowCoveringSafetyStatusPower")
+	}
+	if e&MTRWindowCoveringSafetyStatusStopInput != 0 {
+		parts = append(parts, "MTRWindowCoveringSafetyStatusStopInput")
+	}
+	if e&MTRWindowCoveringSafetyStatusMotorJammed != 0 {
+		parts = append(parts, "MTRWindowCoveringSafetyStatusMotorJammed")
+	}
+	if e&MTRWindowCoveringSafetyStatusHardwareFailure != 0 {
+		parts = append(parts, "MTRWindowCoveringSafetyStatusHardwareFailure")
+	}
+	if e&MTRWindowCoveringSafetyStatusManualOperation != 0 {
+		parts = append(parts, "MTRWindowCoveringSafetyStatusManualOperation")
+	}
+	if e&MTRWindowCoveringSafetyStatusProtection != 0 {
+		parts = append(parts, "MTRWindowCoveringSafetyStatusProtection")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MTRWindowCoveringType int64
+
+const (
+	MTRWindowCoveringTypeRollerShade               MTRWindowCoveringType = 0
+	MTRWindowCoveringTypeRollerShade2Motor         MTRWindowCoveringType = 1
+	MTRWindowCoveringTypeRollerShadeExterior       MTRWindowCoveringType = 2
+	MTRWindowCoveringTypeRollerShadeExterior2Motor MTRWindowCoveringType = 3
+	MTRWindowCoveringTypeDrapery                   MTRWindowCoveringType = 4
+	MTRWindowCoveringTypeAwning                    MTRWindowCoveringType = 5
+	MTRWindowCoveringTypeShutter                   MTRWindowCoveringType = 6
+	MTRWindowCoveringTypeTiltBlindTiltOnly         MTRWindowCoveringType = 7
+	MTRWindowCoveringTypeTiltBlindLiftAndTilt      MTRWindowCoveringType = 8
+	MTRWindowCoveringTypeProjectorScreen           MTRWindowCoveringType = 9
+	MTRWindowCoveringTypeUnknown                   MTRWindowCoveringType = 255
+)
+
+// String returns the MTRWindowCoveringType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRWindowCoveringType) String() string {
+	switch e {
+	case MTRWindowCoveringTypeRollerShade:
+		return "MTRWindowCoveringTypeRollerShade"
+	case MTRWindowCoveringTypeRollerShade2Motor:
+		return "MTRWindowCoveringTypeRollerShade2Motor"
+	case MTRWindowCoveringTypeRollerShadeExterior:
+		return "MTRWindowCoveringTypeRollerShadeExterior"
+	case MTRWindowCoveringTypeRollerShadeExterior2Motor:
+		return "MTRWindowCoveringTypeRollerShadeExterior2Motor"
+	case MTRWindowCoveringTypeDrapery:
+		return "MTRWindowCoveringTypeDrapery"
+	case MTRWindowCoveringTypeAwning:
+		return "MTRWindowCoveringTypeAwning"
+	case MTRWindowCoveringTypeShutter:
+		return "MTRWindowCoveringTypeShutter"
+	case MTRWindowCoveringTypeTiltBlindTiltOnly:
+		return "MTRWindowCoveringTypeTiltBlindTiltOnly"
+	case MTRWindowCoveringTypeTiltBlindLiftAndTilt:
+		return "MTRWindowCoveringTypeTiltBlindLiftAndTilt"
+	case MTRWindowCoveringTypeProjectorScreen:
+		return "MTRWindowCoveringTypeProjectorScreen"
+	case MTRWindowCoveringTypeUnknown:
+		return "MTRWindowCoveringTypeUnknown"
+	default:
+		return fmt.Sprintf("MTRWindowCoveringType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlags int64
+
+const (
+	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
+	XpcListenerCreateFlagsInactive        XpcListenerCreateFlags = 1
+	XpcListenerCreateFlagsForceMach       XpcListenerCreateFlags = 2
+	XpcListenerCreateFlagsForceXpcservice XpcListenerCreateFlags = 4
+)
+
+// String returns the XpcListenerCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcListenerCreateFlags) String() string {
+	var parts []string
+	if e&XpcListenerCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsInactive")
+	}
+	if e&XpcListenerCreateFlagsForceMach != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceMach")
+	}
+	if e&XpcListenerCreateFlagsForceXpcservice != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceXpcservice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlags int64
+
+const (
+	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0
+	XpcSessionCreateFlagsInactive       XpcSessionCreateFlags = 1
+	XpcSessionCreateFlagsMachPrivileged XpcSessionCreateFlags = 2
+)
+
+// String returns the XpcSessionCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcSessionCreateFlags) String() string {
+	var parts []string
+	if e&XpcSessionCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsInactive")
+	}
+	if e&XpcSessionCreateFlagsMachPrivileged != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsMachPrivileged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }

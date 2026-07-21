@@ -1349,3 +1349,1586 @@ func (e CFXMLParserStatusCode) String() string {
 	}
 	return strings.Join(parts, "|")
 }
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Type int64
+
+const (
+	TypeExtended Type = 256
+	TypeAccess   Type = 0
+	TypeDefault  Type = 1
+	TypeAfs      Type = 2
+	TypeCoda     Type = 3
+	TypeNtfs     Type = 4
+	TypeNwfs     Type = 5
+)
+
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Type) String() string {
+	switch e {
+	case TypeExtended:
+		return "TypeExtended"
+	case TypeAccess:
+		return "TypeAccess"
+	case TypeDefault:
+		return "TypeDefault"
+	case TypeAfs:
+		return "TypeAfs"
+	case TypeCoda:
+		return "TypeCoda"
+	case TypeNtfs:
+		return "TypeNtfs"
+	case TypeNwfs:
+		return "TypeNwfs"
+	default:
+		return fmt.Sprintf("Type(%d)", int64(e))
+	}
+}
+
+// A CFOptionFlags type for specifying options for searching.
+// Bitmask — values may be combined with |.
+type CFDataSearchFlags int64
+
+const (
+	KCFDataSearchBackwards CFDataSearchFlags = 1
+	KCFDataSearchAnchored  CFDataSearchFlags = 2
+)
+
+// String returns the CFDataSearchFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFDataSearchFlags) String() string {
+	var parts []string
+	if e&KCFDataSearchBackwards != 0 {
+		parts = append(parts, "KCFDataSearchBackwards")
+	}
+	if e&KCFDataSearchAnchored != 0 {
+		parts = append(parts, "KCFDataSearchAnchored")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// These option flags are used as a mask to indicate a specific set of fields in the CFGregorianDate or CFGregorianUnits structures.
+// Bitmask — values may be combined with |.
+type CFGregorianUnitFlags int64
+
+const (
+	// Specifies the year field.
+	//
+	// Deprecated: Use CFCalendar or NSCalendar API instead
+	KCFGregorianUnitsYears CFGregorianUnitFlags = 1
+	// Specifies the month field.
+	//
+	// Deprecated: Use CFCalendar or NSCalendar API instead
+	KCFGregorianUnitsMonths CFGregorianUnitFlags = 2
+	// Specifies the day field.
+	//
+	// Deprecated: Use CFCalendar or NSCalendar API instead
+	KCFGregorianUnitsDays CFGregorianUnitFlags = 4
+	// Specifies the hours field.
+	//
+	// Deprecated: Use CFCalendar or NSCalendar API instead
+	KCFGregorianUnitsHours CFGregorianUnitFlags = 8
+	// Specifies the minutes field.
+	//
+	// Deprecated: Use CFCalendar or NSCalendar API instead
+	KCFGregorianUnitsMinutes CFGregorianUnitFlags = 16
+	// Specifies the seconds field.
+	//
+	// Deprecated: Use CFCalendar or NSCalendar API instead
+	KCFGregorianUnitsSeconds CFGregorianUnitFlags = 32
+	// Specifies all fields.
+	//
+	// Deprecated: Use CFCalendar or NSCalendar API instead
+	KCFGregorianAllUnits CFGregorianUnitFlags = 16777215
+)
+
+// String returns the CFGregorianUnitFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFGregorianUnitFlags) String() string {
+	var parts []string
+	if e&KCFGregorianUnitsYears != 0 {
+		parts = append(parts, "KCFGregorianUnitsYears")
+	}
+	if e&KCFGregorianUnitsMonths != 0 {
+		parts = append(parts, "KCFGregorianUnitsMonths")
+	}
+	if e&KCFGregorianUnitsDays != 0 {
+		parts = append(parts, "KCFGregorianUnitsDays")
+	}
+	if e&KCFGregorianUnitsHours != 0 {
+		parts = append(parts, "KCFGregorianUnitsHours")
+	}
+	if e&KCFGregorianUnitsMinutes != 0 {
+		parts = append(parts, "KCFGregorianUnitsMinutes")
+	}
+	if e&KCFGregorianUnitsSeconds != 0 {
+		parts = append(parts, "KCFGregorianUnitsSeconds")
+	}
+	if e&KCFGregorianAllUnits != 0 {
+		parts = append(parts, "KCFGregorianAllUnits")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Type for constants specifying how numbers should be parsed.
+// Bitmask — values may be combined with |.
+type CFNumberFormatterOptionFlags int64
+
+const (
+	// Specifies that only integers should be parsed.
+	KCFNumberFormatterParseIntegersOnly CFNumberFormatterOptionFlags = 1
+)
+
+// String returns the CFNumberFormatterOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFNumberFormatterOptionFlags) String() string {
+	var parts []string
+	if e&KCFNumberFormatterParseIntegersOnly != 0 {
+		parts = append(parts, "KCFNumberFormatterParseIntegersOnly")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Type for constants specifying how numbers should be padded.
+type CFNumberFormatterPadPosition int64
+
+const (
+	// Specifies the number of padding characters before the prefix.
+	KCFNumberFormatterPadBeforePrefix CFNumberFormatterPadPosition = 0
+	// Specifies the number of padding characters after the prefix.
+	KCFNumberFormatterPadAfterPrefix CFNumberFormatterPadPosition = 1
+	// Specifies the number of padding characters before the suffix.
+	KCFNumberFormatterPadBeforeSuffix CFNumberFormatterPadPosition = 2
+	// Specifies the number of padding characters after the suffix.
+	KCFNumberFormatterPadAfterSuffix CFNumberFormatterPadPosition = 3
+)
+
+// String returns the CFNumberFormatterPadPosition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFNumberFormatterPadPosition) String() string {
+	switch e {
+	case KCFNumberFormatterPadBeforePrefix:
+		return "KCFNumberFormatterPadBeforePrefix"
+	case KCFNumberFormatterPadAfterPrefix:
+		return "KCFNumberFormatterPadAfterPrefix"
+	case KCFNumberFormatterPadBeforeSuffix:
+		return "KCFNumberFormatterPadBeforeSuffix"
+	case KCFNumberFormatterPadAfterSuffix:
+		return "KCFNumberFormatterPadAfterSuffix"
+	default:
+		return fmt.Sprintf("CFNumberFormatterPadPosition(%d)", int64(e))
+	}
+}
+
+// These constants are used to specify how numbers should be rounded.
+type CFNumberFormatterRoundingMode int64
+
+const (
+	// Round towards positive infinity.
+	KCFNumberFormatterRoundCeiling CFNumberFormatterRoundingMode = 0
+	// Round towards negative infinity.
+	KCFNumberFormatterRoundFloor CFNumberFormatterRoundingMode = 1
+	// Round towards zero.
+	KCFNumberFormatterRoundDown CFNumberFormatterRoundingMode = 2
+	// Round away from zero.
+	KCFNumberFormatterRoundUp CFNumberFormatterRoundingMode = 3
+	// Round towards the nearest integer, or towards an even number if equidistant.
+	KCFNumberFormatterRoundHalfEven CFNumberFormatterRoundingMode = 4
+	// Round towards the nearest integer, or towards zero if equidistant.
+	KCFNumberFormatterRoundHalfDown CFNumberFormatterRoundingMode = 5
+	// Round towards the nearest integer, or away from zero if equidistant.
+	KCFNumberFormatterRoundHalfUp CFNumberFormatterRoundingMode = 6
+)
+
+// String returns the CFNumberFormatterRoundingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFNumberFormatterRoundingMode) String() string {
+	switch e {
+	case KCFNumberFormatterRoundCeiling:
+		return "KCFNumberFormatterRoundCeiling"
+	case KCFNumberFormatterRoundFloor:
+		return "KCFNumberFormatterRoundFloor"
+	case KCFNumberFormatterRoundDown:
+		return "KCFNumberFormatterRoundDown"
+	case KCFNumberFormatterRoundUp:
+		return "KCFNumberFormatterRoundUp"
+	case KCFNumberFormatterRoundHalfEven:
+		return "KCFNumberFormatterRoundHalfEven"
+	case KCFNumberFormatterRoundHalfDown:
+		return "KCFNumberFormatterRoundHalfDown"
+	case KCFNumberFormatterRoundHalfUp:
+		return "KCFNumberFormatterRoundHalfUp"
+	default:
+		return fmt.Sprintf("CFNumberFormatterRoundingMode(%d)", int64(e))
+	}
+}
+
+// Type for flags that determine the degree of mutability of newly created property lists.
+// Bitmask — values may be combined with |.
+type CFPropertyListMutabilityOptions int64
+
+const (
+	// Specifies that the property list should be immutable.
+	KCFPropertyListImmutable CFPropertyListMutabilityOptions = 0
+	// Specifies that the property list should have mutable containers but immutable leaves.
+	KCFPropertyListMutableContainers CFPropertyListMutabilityOptions = 1
+	// Specifies that the property list should have mutable containers and mutable leaves.
+	KCFPropertyListMutableContainersAndLeaves CFPropertyListMutabilityOptions = 2
+)
+
+// String returns the CFPropertyListMutabilityOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFPropertyListMutabilityOptions) String() string {
+	var parts []string
+	if e&KCFPropertyListMutableContainers != 0 {
+		parts = append(parts, "KCFPropertyListMutableContainers")
+	}
+	if e&KCFPropertyListMutableContainersAndLeaves != 0 {
+		parts = append(parts, "KCFPropertyListMutableContainersAndLeaves")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Run loop activity stages in which run loop observers can be scheduled.
+// Bitmask — values may be combined with |.
+type CFRunLoopActivity int64
+
+const (
+	// The entrance of the run loop, before entering the event processing loop. This activity occurs once for each call to CFRunLoopRun and CFRunLoopRunInMode.
+	KCFRunLoopEntry CFRunLoopActivity = 1
+	// Inside the event processing loop before any timers are processed.
+	KCFRunLoopBeforeTimers CFRunLoopActivity = 2
+	// Inside the event processing loop before any sources are processed.
+	KCFRunLoopBeforeSources CFRunLoopActivity = 4
+	KCFRunLoopBeforeWaiting CFRunLoopActivity = 32
+	// Inside the event processing loop after the run loop wakes up, but before processing the event that woke it up. This activity occurs only if the run loop did in fact go to sleep during the current loop.
+	KCFRunLoopAfterWaiting CFRunLoopActivity = 64
+	// The exit of the run loop, after exiting the event processing loop. This activity occurs once for each call to CFRunLoopRun and CFRunLoopRunInMode.
+	KCFRunLoopExit CFRunLoopActivity = 128
+	// A combination of all the preceding stages.
+	KCFRunLoopAllActivities CFRunLoopActivity = 268435455
+)
+
+// String returns the CFRunLoopActivity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFRunLoopActivity) String() string {
+	var parts []string
+	if e&KCFRunLoopEntry != 0 {
+		parts = append(parts, "KCFRunLoopEntry")
+	}
+	if e&KCFRunLoopBeforeTimers != 0 {
+		parts = append(parts, "KCFRunLoopBeforeTimers")
+	}
+	if e&KCFRunLoopBeforeSources != 0 {
+		parts = append(parts, "KCFRunLoopBeforeSources")
+	}
+	if e&KCFRunLoopBeforeWaiting != 0 {
+		parts = append(parts, "KCFRunLoopBeforeWaiting")
+	}
+	if e&KCFRunLoopAfterWaiting != 0 {
+		parts = append(parts, "KCFRunLoopAfterWaiting")
+	}
+	if e&KCFRunLoopExit != 0 {
+		parts = append(parts, "KCFRunLoopExit")
+	}
+	if e&KCFRunLoopAllActivities != 0 {
+		parts = append(parts, "KCFRunLoopAllActivities")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Types of socket activity that can cause the callback function of a CFSocket object to be called.
+// Bitmask — values may be combined with |.
+type CFSocketCallBackType int64
+
+const (
+	// No callback should be made for any activity.
+	KCFSocketNoCallBack CFSocketCallBackType = 0
+	// The callback is called when data is available to be read or a new connection is waiting to be accepted. The data is not automatically read; the callback must read the data itself.
+	KCFSocketReadCallBack CFSocketCallBackType = 1
+	// New connections will be automatically accepted and the callback is called with the data argument being a pointer to a CFSocketNativeHandle of the child socket. This callback is usable only with listening sockets.
+	KCFSocketAcceptCallBack CFSocketCallBackType = 2
+	// Incoming data will be read in chunks in the background and the callback is called with the data argument being a CFData object containing the read data.
+	KCFSocketDataCallBack    CFSocketCallBackType = 3
+	KCFSocketConnectCallBack CFSocketCallBackType = 4
+	// The callback is called when the socket is writable. This callback type may be useful when large amounts of data are being sent rapidly over the socket and you want a notification when there is space in the kernel buffers for more data.
+	KCFSocketWriteCallBack CFSocketCallBackType = 8
+)
+
+// String returns the CFSocketCallBackType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFSocketCallBackType) String() string {
+	var parts []string
+	if e&KCFSocketReadCallBack != 0 {
+		parts = append(parts, "KCFSocketReadCallBack")
+	}
+	if e&KCFSocketAcceptCallBack != 0 {
+		parts = append(parts, "KCFSocketAcceptCallBack")
+	}
+	if e&KCFSocketDataCallBack != 0 {
+		parts = append(parts, "KCFSocketDataCallBack")
+	}
+	if e&KCFSocketConnectCallBack != 0 {
+		parts = append(parts, "KCFSocketConnectCallBack")
+	}
+	if e&KCFSocketWriteCallBack != 0 {
+		parts = append(parts, "KCFSocketWriteCallBack")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Defines constants for values returned in the domain field of the CFStreamError structure.
+type CFStreamErrorDomain int64
+
+const (
+	// The error code is a custom error code.
+	KCFStreamErrorDomainCustom CFStreamErrorDomain = -1
+	// The error code is an error code defined in errno.h.
+	KCFStreamErrorDomainPOSIX CFStreamErrorDomain = 1
+	// The error is an OSStatus value defined in MacErrors.h.
+	KCFStreamErrorDomainMacOSStatus CFStreamErrorDomain = 2
+)
+
+// String returns the CFStreamErrorDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFStreamErrorDomain) String() string {
+	switch e {
+	case KCFStreamErrorDomainCustom:
+		return "KCFStreamErrorDomainCustom"
+	case KCFStreamErrorDomainPOSIX:
+		return "KCFStreamErrorDomainPOSIX"
+	case KCFStreamErrorDomainMacOSStatus:
+		return "KCFStreamErrorDomainMacOSStatus"
+	default:
+		return fmt.Sprintf("CFStreamErrorDomain(%d)", int64(e))
+	}
+}
+
+// Defines constants for stream-related events.
+// Bitmask — values may be combined with |.
+type CFStreamEventType int64
+
+const (
+	// No event has occurred.
+	KCFStreamEventNone CFStreamEventType = 0
+	// The open has completed successfully.
+	KCFStreamEventOpenCompleted CFStreamEventType = 1
+	// The stream has bytes to be read.
+	KCFStreamEventHasBytesAvailable CFStreamEventType = 2
+	// The stream can accept bytes for writing.
+	KCFStreamEventCanAcceptBytes CFStreamEventType = 4
+	// An error has occurred on the stream.
+	KCFStreamEventErrorOccurred CFStreamEventType = 8
+	// The end of the stream has been reached.
+	KCFStreamEventEndEncountered CFStreamEventType = 16
+)
+
+// String returns the CFStreamEventType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFStreamEventType) String() string {
+	var parts []string
+	if e&KCFStreamEventOpenCompleted != 0 {
+		parts = append(parts, "KCFStreamEventOpenCompleted")
+	}
+	if e&KCFStreamEventHasBytesAvailable != 0 {
+		parts = append(parts, "KCFStreamEventHasBytesAvailable")
+	}
+	if e&KCFStreamEventCanAcceptBytes != 0 {
+		parts = append(parts, "KCFStreamEventCanAcceptBytes")
+	}
+	if e&KCFStreamEventErrorOccurred != 0 {
+		parts = append(parts, "KCFStreamEventErrorOccurred")
+	}
+	if e&KCFStreamEventEndEncountered != 0 {
+		parts = append(parts, "KCFStreamEventEndEncountered")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Encodings that are built-in on all platforms on which macOS runs.
+type CFStringBuiltInEncodings int64
+
+const (
+	// An encoding constant that identifies the Mac Roman encoding.
+	KCFStringEncodingMacRoman CFStringBuiltInEncodings = 0
+	// An encoding constant that identifies the Windows Latin 1 encoding (ANSI codepage 1252).
+	KCFStringEncodingWindowsLatin1 CFStringBuiltInEncodings = 1280
+	// An encoding constant that identifies the ISO Latin 1 encoding (ISO 8859-1)
+	KCFStringEncodingISOLatin1 CFStringBuiltInEncodings = 513
+	// An encoding constant that identifies the NextStep/OpenStep encoding.
+	KCFStringEncodingNextStepLatin CFStringBuiltInEncodings = 2817
+	// An encoding constant that identifies the ASCII encoding (decimal values 0 through 127).
+	KCFStringEncodingASCII CFStringBuiltInEncodings = 1536
+	// An encoding constant that identifies the Unicode encoding.
+	KCFStringEncodingUnicode CFStringBuiltInEncodings = 256
+	// An encoding constant that identifies the UTF 8 encoding.
+	KCFStringEncodingUTF8 CFStringBuiltInEncodings = 134217984
+	// An encoding constant that identifies non-lossy ASCII encoding.
+	KCFStringEncodingNonLossyASCII CFStringBuiltInEncodings = 3071
+	// An encoding constant that identifies kTextEncodingUnicodeDefault + kUnicodeUTF16Format encoding (alias of kCFStringEncodingUnicode).
+	KCFStringEncodingUTF16 CFStringBuiltInEncodings = 256
+	// An encoding constant that identifies kTextEncodingUnicodeDefault + kUnicodeUTF16BEFormat encoding. This constant specifies big-endian byte order.
+	KCFStringEncodingUTF16BE CFStringBuiltInEncodings = 268435712
+	// An encoding constant that identifies kTextEncodingUnicodeDefault + kUnicodeUTF16LEFormat encoding. This constant specifies little-endian byte order.
+	KCFStringEncodingUTF16LE CFStringBuiltInEncodings = 335544576
+	// An encoding constant that identifies kTextEncodingUnicodeDefault + kUnicodeUTF32Format encoding.
+	KCFStringEncodingUTF32 CFStringBuiltInEncodings = 201326848
+	// An encoding constant that identifies kTextEncodingUnicodeDefault + kUnicodeUTF32BEFormat encoding. This constant specifies big-endian byte order.
+	KCFStringEncodingUTF32BE CFStringBuiltInEncodings = 402653440
+	// An encoding constant that identifies kTextEncodingUnicodeDefault + kUnicodeUTF32LEFormat encoding. This constant specifies little-endian byte order.
+	KCFStringEncodingUTF32LE CFStringBuiltInEncodings = 469762304
+)
+
+// String returns the CFStringBuiltInEncodings constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFStringBuiltInEncodings) String() string {
+	switch e {
+	case KCFStringEncodingMacRoman:
+		return "KCFStringEncodingMacRoman"
+	case KCFStringEncodingWindowsLatin1:
+		return "KCFStringEncodingWindowsLatin1"
+	case KCFStringEncodingISOLatin1:
+		return "KCFStringEncodingISOLatin1"
+	case KCFStringEncodingNextStepLatin:
+		return "KCFStringEncodingNextStepLatin"
+	case KCFStringEncodingASCII:
+		return "KCFStringEncodingASCII"
+	case KCFStringEncodingUnicode:
+		return "KCFStringEncodingUnicode"
+	case KCFStringEncodingUTF8:
+		return "KCFStringEncodingUTF8"
+	case KCFStringEncodingNonLossyASCII:
+		return "KCFStringEncodingNonLossyASCII"
+	case KCFStringEncodingUTF16BE:
+		return "KCFStringEncodingUTF16BE"
+	case KCFStringEncodingUTF16LE:
+		return "KCFStringEncodingUTF16LE"
+	case KCFStringEncodingUTF32:
+		return "KCFStringEncodingUTF32"
+	case KCFStringEncodingUTF32BE:
+		return "KCFStringEncodingUTF32BE"
+	case KCFStringEncodingUTF32LE:
+		return "KCFStringEncodingUTF32LE"
+	default:
+		return fmt.Sprintf("CFStringBuiltInEncodings(%d)", int64(e))
+	}
+}
+
+// Index type for constants used to specify external string encodings.
+type CFStringEncodings int64
+
+const (
+	KCFStringEncodingMacJapanese        CFStringEncodings = 1
+	KCFStringEncodingMacChineseTrad     CFStringEncodings = 2
+	KCFStringEncodingMacKorean          CFStringEncodings = 3
+	KCFStringEncodingMacArabic          CFStringEncodings = 4
+	KCFStringEncodingMacHebrew          CFStringEncodings = 5
+	KCFStringEncodingMacGreek           CFStringEncodings = 6
+	KCFStringEncodingMacCyrillic        CFStringEncodings = 7
+	KCFStringEncodingMacDevanagari      CFStringEncodings = 9
+	KCFStringEncodingMacGurmukhi        CFStringEncodings = 10
+	KCFStringEncodingMacGujarati        CFStringEncodings = 11
+	KCFStringEncodingMacOriya           CFStringEncodings = 12
+	KCFStringEncodingMacBengali         CFStringEncodings = 13
+	KCFStringEncodingMacTamil           CFStringEncodings = 14
+	KCFStringEncodingMacTelugu          CFStringEncodings = 15
+	KCFStringEncodingMacKannada         CFStringEncodings = 16
+	KCFStringEncodingMacMalayalam       CFStringEncodings = 17
+	KCFStringEncodingMacSinhalese       CFStringEncodings = 18
+	KCFStringEncodingMacBurmese         CFStringEncodings = 19
+	KCFStringEncodingMacKhmer           CFStringEncodings = 20
+	KCFStringEncodingMacThai            CFStringEncodings = 21
+	KCFStringEncodingMacLaotian         CFStringEncodings = 22
+	KCFStringEncodingMacGeorgian        CFStringEncodings = 23
+	KCFStringEncodingMacArmenian        CFStringEncodings = 24
+	KCFStringEncodingMacChineseSimp     CFStringEncodings = 25
+	KCFStringEncodingMacTibetan         CFStringEncodings = 26
+	KCFStringEncodingMacMongolian       CFStringEncodings = 27
+	KCFStringEncodingMacEthiopic        CFStringEncodings = 28
+	KCFStringEncodingMacCentralEurRoman CFStringEncodings = 29
+	KCFStringEncodingMacVietnamese      CFStringEncodings = 30
+	KCFStringEncodingMacExtArabic       CFStringEncodings = 31
+	KCFStringEncodingMacSymbol          CFStringEncodings = 33
+	KCFStringEncodingMacDingbats        CFStringEncodings = 34
+	KCFStringEncodingMacTurkish         CFStringEncodings = 35
+	KCFStringEncodingMacCroatian        CFStringEncodings = 36
+	KCFStringEncodingMacIcelandic       CFStringEncodings = 37
+	KCFStringEncodingMacRomanian        CFStringEncodings = 38
+	KCFStringEncodingMacCeltic          CFStringEncodings = 39
+	KCFStringEncodingMacGaelic          CFStringEncodings = 40
+	// Like MacArabic but uses Farsi digits.
+	KCFStringEncodingMacFarsi     CFStringEncodings = 140
+	KCFStringEncodingMacUkrainian CFStringEncodings = 152
+	KCFStringEncodingMacInuit     CFStringEncodings = 236
+	// VT100102 font from Comm Toolbox: Latin-1 repertoire + box drawing etc.
+	KCFStringEncodingMacVT100 CFStringEncodings = 252
+	// Meta-value, should never appear in a table.
+	KCFStringEncodingMacHFS CFStringEncodings = 255
+	// ISO 8859-2.
+	KCFStringEncodingISOLatin2 CFStringEncodings = 514
+	// ISO 8859-3.
+	KCFStringEncodingISOLatin3 CFStringEncodings = 515
+	// ISO 8859-4.
+	KCFStringEncodingISOLatin4 CFStringEncodings = 516
+	// ISO 8859-5.
+	KCFStringEncodingISOLatinCyrillic CFStringEncodings = 517
+	// ISO 8859-6, =ASMO 708, =DOS CP 708.
+	KCFStringEncodingISOLatinArabic CFStringEncodings = 518
+	// ISO 8859-7.
+	KCFStringEncodingISOLatinGreek CFStringEncodings = 519
+	// ISO 8859-8.
+	KCFStringEncodingISOLatinHebrew CFStringEncodings = 520
+	// ISO 8859-9.
+	KCFStringEncodingISOLatin5 CFStringEncodings = 521
+	// ISO 8859-10.
+	KCFStringEncodingISOLatin6 CFStringEncodings = 522
+	// ISO 8859-11.
+	KCFStringEncodingISOLatinThai CFStringEncodings = 523
+	// ISO 8859-13.
+	KCFStringEncodingISOLatin7 CFStringEncodings = 525
+	// ISO 8859-14.
+	KCFStringEncodingISOLatin8 CFStringEncodings = 526
+	// ISO 8859-15.
+	KCFStringEncodingISOLatin9 CFStringEncodings = 527
+	// ISO 8859-16.
+	KCFStringEncodingISOLatin10 CFStringEncodings = 528
+	// Code page 437.
+	KCFStringEncodingDOSLatinUS CFStringEncodings = 1024
+	// Code page 737 (formerly code page 437G).
+	KCFStringEncodingDOSGreek CFStringEncodings = 1029
+	// Code page 775.
+	KCFStringEncodingDOSBalticRim CFStringEncodings = 1030
+	// Code page 850, “Multilingual”.
+	KCFStringEncodingDOSLatin1 CFStringEncodings = 1040
+	// Code page 851.
+	KCFStringEncodingDOSGreek1 CFStringEncodings = 1041
+	// Code page 852, Slavic.
+	KCFStringEncodingDOSLatin2 CFStringEncodings = 1042
+	// Code page 855, IBM Cyrillic.
+	KCFStringEncodingDOSCyrillic CFStringEncodings = 1043
+	// Code page 857, IBM Turkish.
+	KCFStringEncodingDOSTurkish CFStringEncodings = 1044
+	// Code page 860.
+	KCFStringEncodingDOSPortuguese CFStringEncodings = 1045
+	// Code page 861.
+	KCFStringEncodingDOSIcelandic CFStringEncodings = 1046
+	// Code page 862.
+	KCFStringEncodingDOSHebrew CFStringEncodings = 1047
+	// Code page 863.
+	KCFStringEncodingDOSCanadianFrench CFStringEncodings = 1048
+	// Code page 864.
+	KCFStringEncodingDOSArabic CFStringEncodings = 1049
+	// Code page 865.
+	KCFStringEncodingDOSNordic CFStringEncodings = 1050
+	// Code page 866.
+	KCFStringEncodingDOSRussian CFStringEncodings = 1051
+	// Code page 869, IBM Modern Greek.
+	KCFStringEncodingDOSGreek2 CFStringEncodings = 1052
+	// Code page 874, also for Windows.
+	KCFStringEncodingDOSThai CFStringEncodings = 1053
+	// Code page 932, also for Windows.
+	KCFStringEncodingDOSJapanese CFStringEncodings = 1056
+	// Code page 936, also for Windows.
+	KCFStringEncodingDOSChineseSimplif CFStringEncodings = 1057
+	// Code page 949, also for Windows; Unified Hangul Code.
+	KCFStringEncodingDOSKorean CFStringEncodings = 1058
+	// Code page 950, also for Windows.
+	KCFStringEncodingDOSChineseTrad CFStringEncodings = 1059
+	// Code page 1250, Central Europe.
+	KCFStringEncodingWindowsLatin2 CFStringEncodings = 1281
+	// Code page 1251, Slavic Cyrillic.
+	KCFStringEncodingWindowsCyrillic CFStringEncodings = 1282
+	// Code page 1253.
+	KCFStringEncodingWindowsGreek CFStringEncodings = 1283
+	// Code page 1254, Turkish.
+	KCFStringEncodingWindowsLatin5 CFStringEncodings = 1284
+	// Code page 1255.
+	KCFStringEncodingWindowsHebrew CFStringEncodings = 1285
+	// Code page 1256.
+	KCFStringEncodingWindowsArabic CFStringEncodings = 1286
+	// Code page 1257.
+	KCFStringEncodingWindowsBalticRim CFStringEncodings = 1287
+	// Code page 1258.
+	KCFStringEncodingWindowsVietnamese CFStringEncodings = 1288
+	// Code page 1361, for Windows NT.
+	KCFStringEncodingWindowsKoreanJohab CFStringEncodings = 1296
+	// ANSEL (ANSI Z39.47).
+	KCFStringEncodingANSEL        CFStringEncodings = 1537
+	KCFStringEncodingJIS_X0201_76 CFStringEncodings = 1568
+	KCFStringEncodingJIS_X0208_83 CFStringEncodings = 1569
+	KCFStringEncodingJIS_X0208_90 CFStringEncodings = 1570
+	KCFStringEncodingJIS_X0212_90 CFStringEncodings = 1571
+	KCFStringEncodingJIS_C6226_78 CFStringEncodings = 1572
+	// Shift-JIS format encoding of JIS X0213 planes 1 and 2.
+	KCFStringEncodingShiftJIS_X0213 CFStringEncodings = 1576
+	// JIS X0213 in plane-row-column notation.
+	KCFStringEncodingShiftJIS_X0213_MenKuTen CFStringEncodings = 1577
+	KCFStringEncodingGB_2312_80              CFStringEncodings = 1584
+	// Annex to GB 13000-93; for Windows 95.
+	KCFStringEncodingGBK_95        CFStringEncodings = 1585
+	KCFStringEncodingGB_18030_2000 CFStringEncodings = 1586
+	// Same as KSC 5601-92 without Johab annex.
+	KCFStringEncodingKSC_5601_87 CFStringEncodings = 1600
+	// KSC 5601-92 Johab annex.
+	KCFStringEncodingKSC_5601_92_Johab CFStringEncodings = 1601
+	// CNS 11643-1992 plane 1.
+	KCFStringEncodingCNS_11643_92_P1 CFStringEncodings = 1617
+	// CNS 11643-1992 plane 2.
+	KCFStringEncodingCNS_11643_92_P2 CFStringEncodings = 1618
+	// CNS 11643-1992 plane 3 (was plane 14 in 1986 version).
+	KCFStringEncodingCNS_11643_92_P3 CFStringEncodings = 1619
+	KCFStringEncodingISO_2022_JP     CFStringEncodings = 2080
+	KCFStringEncodingISO_2022_JP_2   CFStringEncodings = 2081
+	// RFC 2237.
+	KCFStringEncodingISO_2022_JP_1 CFStringEncodings = 2082
+	// JIS X0213.
+	KCFStringEncodingISO_2022_JP_3   CFStringEncodings = 2083
+	KCFStringEncodingISO_2022_CN     CFStringEncodings = 2096
+	KCFStringEncodingISO_2022_CN_EXT CFStringEncodings = 2097
+	KCFStringEncodingISO_2022_KR     CFStringEncodings = 2112
+	// ISO 646, 1-byte katakana, JIS 208, JIS 212.
+	KCFStringEncodingEUC_JP CFStringEncodings = 2336
+	// ISO 646, GB 2312-80.
+	KCFStringEncodingEUC_CN CFStringEncodings = 2352
+	// ISO 646, CNS 11643-1992 Planes 1-16.
+	KCFStringEncodingEUC_TW CFStringEncodings = 2353
+	// ISO 646, KS C 5601-1987.
+	KCFStringEncodingEUC_KR CFStringEncodings = 2368
+	// Plain Shift-JIS.
+	KCFStringEncodingShiftJIS CFStringEncodings = 2561
+	// Russian internet standard.
+	KCFStringEncodingKOI8_R CFStringEncodings = 2562
+	// Big-5 (has variants)
+	KCFStringEncodingBig5 CFStringEncodings = 2563
+	// Mac OS Roman permuted to align with ISO Latin-1.
+	KCFStringEncodingMacRomanLatin1 CFStringEncodings = 2564
+	// HZ (RFC 1842, for Chinese mail & news).
+	KCFStringEncodingHZ_GB_2312 CFStringEncodings = 2565
+	// Big-5 with Hong Kong special char set supplement.
+	KCFStringEncodingBig5_HKSCS_1999 CFStringEncodings = 2566
+	// RFC 1456, Vietnamese.
+	KCFStringEncodingVISCII CFStringEncodings = 2567
+	// RFC 2319, Ukrainian.
+	KCFStringEncodingKOI8_U CFStringEncodings = 2568
+	// Taiwan Big-5E standard.
+	KCFStringEncodingBig5_E CFStringEncodings = 2569
+	// NextStep Japanese encoding.
+	KCFStringEncodingNextStepJapanese CFStringEncodings = 2818
+	// basic EBCDIC-US
+	KCFStringEncodingEBCDIC_US CFStringEncodings = 3073
+	// code page 037, extended EBCDIC (Latin-1 set) for US, Canada.
+	KCFStringEncodingEBCDIC_CP037 CFStringEncodings = 3074
+	// kTextEncodingUnicodeDefault + kUnicodeUTF7Format RFC2152.
+	KCFStringEncodingUTF7 CFStringEncodings = 67109120
+	// UTF-7 (IMAP folder variant) RFC3501.
+	KCFStringEncodingUTF7_IMAP CFStringEncodings = 2576
+	// Shift-JIS format encoding of JIS X0213 planes 1 and 2.
+	KCFStringEncodingShiftJIS_X0213_00 CFStringEncodings = 1576
+)
+
+// String returns the CFStringEncodings constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFStringEncodings) String() string {
+	switch e {
+	case KCFStringEncodingMacJapanese:
+		return "KCFStringEncodingMacJapanese"
+	case KCFStringEncodingMacChineseTrad:
+		return "KCFStringEncodingMacChineseTrad"
+	case KCFStringEncodingMacKorean:
+		return "KCFStringEncodingMacKorean"
+	case KCFStringEncodingMacArabic:
+		return "KCFStringEncodingMacArabic"
+	case KCFStringEncodingMacHebrew:
+		return "KCFStringEncodingMacHebrew"
+	case KCFStringEncodingMacGreek:
+		return "KCFStringEncodingMacGreek"
+	case KCFStringEncodingMacCyrillic:
+		return "KCFStringEncodingMacCyrillic"
+	case KCFStringEncodingMacDevanagari:
+		return "KCFStringEncodingMacDevanagari"
+	case KCFStringEncodingMacGurmukhi:
+		return "KCFStringEncodingMacGurmukhi"
+	case KCFStringEncodingMacGujarati:
+		return "KCFStringEncodingMacGujarati"
+	case KCFStringEncodingMacOriya:
+		return "KCFStringEncodingMacOriya"
+	case KCFStringEncodingMacBengali:
+		return "KCFStringEncodingMacBengali"
+	case KCFStringEncodingMacTamil:
+		return "KCFStringEncodingMacTamil"
+	case KCFStringEncodingMacTelugu:
+		return "KCFStringEncodingMacTelugu"
+	case KCFStringEncodingMacKannada:
+		return "KCFStringEncodingMacKannada"
+	case KCFStringEncodingMacMalayalam:
+		return "KCFStringEncodingMacMalayalam"
+	case KCFStringEncodingMacSinhalese:
+		return "KCFStringEncodingMacSinhalese"
+	case KCFStringEncodingMacBurmese:
+		return "KCFStringEncodingMacBurmese"
+	case KCFStringEncodingMacKhmer:
+		return "KCFStringEncodingMacKhmer"
+	case KCFStringEncodingMacThai:
+		return "KCFStringEncodingMacThai"
+	case KCFStringEncodingMacLaotian:
+		return "KCFStringEncodingMacLaotian"
+	case KCFStringEncodingMacGeorgian:
+		return "KCFStringEncodingMacGeorgian"
+	case KCFStringEncodingMacArmenian:
+		return "KCFStringEncodingMacArmenian"
+	case KCFStringEncodingMacChineseSimp:
+		return "KCFStringEncodingMacChineseSimp"
+	case KCFStringEncodingMacTibetan:
+		return "KCFStringEncodingMacTibetan"
+	case KCFStringEncodingMacMongolian:
+		return "KCFStringEncodingMacMongolian"
+	case KCFStringEncodingMacEthiopic:
+		return "KCFStringEncodingMacEthiopic"
+	case KCFStringEncodingMacCentralEurRoman:
+		return "KCFStringEncodingMacCentralEurRoman"
+	case KCFStringEncodingMacVietnamese:
+		return "KCFStringEncodingMacVietnamese"
+	case KCFStringEncodingMacExtArabic:
+		return "KCFStringEncodingMacExtArabic"
+	case KCFStringEncodingMacSymbol:
+		return "KCFStringEncodingMacSymbol"
+	case KCFStringEncodingMacDingbats:
+		return "KCFStringEncodingMacDingbats"
+	case KCFStringEncodingMacTurkish:
+		return "KCFStringEncodingMacTurkish"
+	case KCFStringEncodingMacCroatian:
+		return "KCFStringEncodingMacCroatian"
+	case KCFStringEncodingMacIcelandic:
+		return "KCFStringEncodingMacIcelandic"
+	case KCFStringEncodingMacRomanian:
+		return "KCFStringEncodingMacRomanian"
+	case KCFStringEncodingMacCeltic:
+		return "KCFStringEncodingMacCeltic"
+	case KCFStringEncodingMacGaelic:
+		return "KCFStringEncodingMacGaelic"
+	case KCFStringEncodingMacFarsi:
+		return "KCFStringEncodingMacFarsi"
+	case KCFStringEncodingMacUkrainian:
+		return "KCFStringEncodingMacUkrainian"
+	case KCFStringEncodingMacInuit:
+		return "KCFStringEncodingMacInuit"
+	case KCFStringEncodingMacVT100:
+		return "KCFStringEncodingMacVT100"
+	case KCFStringEncodingMacHFS:
+		return "KCFStringEncodingMacHFS"
+	case KCFStringEncodingISOLatin2:
+		return "KCFStringEncodingISOLatin2"
+	case KCFStringEncodingISOLatin3:
+		return "KCFStringEncodingISOLatin3"
+	case KCFStringEncodingISOLatin4:
+		return "KCFStringEncodingISOLatin4"
+	case KCFStringEncodingISOLatinCyrillic:
+		return "KCFStringEncodingISOLatinCyrillic"
+	case KCFStringEncodingISOLatinArabic:
+		return "KCFStringEncodingISOLatinArabic"
+	case KCFStringEncodingISOLatinGreek:
+		return "KCFStringEncodingISOLatinGreek"
+	case KCFStringEncodingISOLatinHebrew:
+		return "KCFStringEncodingISOLatinHebrew"
+	case KCFStringEncodingISOLatin5:
+		return "KCFStringEncodingISOLatin5"
+	case KCFStringEncodingISOLatin6:
+		return "KCFStringEncodingISOLatin6"
+	case KCFStringEncodingISOLatinThai:
+		return "KCFStringEncodingISOLatinThai"
+	case KCFStringEncodingISOLatin7:
+		return "KCFStringEncodingISOLatin7"
+	case KCFStringEncodingISOLatin8:
+		return "KCFStringEncodingISOLatin8"
+	case KCFStringEncodingISOLatin9:
+		return "KCFStringEncodingISOLatin9"
+	case KCFStringEncodingISOLatin10:
+		return "KCFStringEncodingISOLatin10"
+	case KCFStringEncodingDOSLatinUS:
+		return "KCFStringEncodingDOSLatinUS"
+	case KCFStringEncodingDOSGreek:
+		return "KCFStringEncodingDOSGreek"
+	case KCFStringEncodingDOSBalticRim:
+		return "KCFStringEncodingDOSBalticRim"
+	case KCFStringEncodingDOSLatin1:
+		return "KCFStringEncodingDOSLatin1"
+	case KCFStringEncodingDOSGreek1:
+		return "KCFStringEncodingDOSGreek1"
+	case KCFStringEncodingDOSLatin2:
+		return "KCFStringEncodingDOSLatin2"
+	case KCFStringEncodingDOSCyrillic:
+		return "KCFStringEncodingDOSCyrillic"
+	case KCFStringEncodingDOSTurkish:
+		return "KCFStringEncodingDOSTurkish"
+	case KCFStringEncodingDOSPortuguese:
+		return "KCFStringEncodingDOSPortuguese"
+	case KCFStringEncodingDOSIcelandic:
+		return "KCFStringEncodingDOSIcelandic"
+	case KCFStringEncodingDOSHebrew:
+		return "KCFStringEncodingDOSHebrew"
+	case KCFStringEncodingDOSCanadianFrench:
+		return "KCFStringEncodingDOSCanadianFrench"
+	case KCFStringEncodingDOSArabic:
+		return "KCFStringEncodingDOSArabic"
+	case KCFStringEncodingDOSNordic:
+		return "KCFStringEncodingDOSNordic"
+	case KCFStringEncodingDOSRussian:
+		return "KCFStringEncodingDOSRussian"
+	case KCFStringEncodingDOSGreek2:
+		return "KCFStringEncodingDOSGreek2"
+	case KCFStringEncodingDOSThai:
+		return "KCFStringEncodingDOSThai"
+	case KCFStringEncodingDOSJapanese:
+		return "KCFStringEncodingDOSJapanese"
+	case KCFStringEncodingDOSChineseSimplif:
+		return "KCFStringEncodingDOSChineseSimplif"
+	case KCFStringEncodingDOSKorean:
+		return "KCFStringEncodingDOSKorean"
+	case KCFStringEncodingDOSChineseTrad:
+		return "KCFStringEncodingDOSChineseTrad"
+	case KCFStringEncodingWindowsLatin2:
+		return "KCFStringEncodingWindowsLatin2"
+	case KCFStringEncodingWindowsCyrillic:
+		return "KCFStringEncodingWindowsCyrillic"
+	case KCFStringEncodingWindowsGreek:
+		return "KCFStringEncodingWindowsGreek"
+	case KCFStringEncodingWindowsLatin5:
+		return "KCFStringEncodingWindowsLatin5"
+	case KCFStringEncodingWindowsHebrew:
+		return "KCFStringEncodingWindowsHebrew"
+	case KCFStringEncodingWindowsArabic:
+		return "KCFStringEncodingWindowsArabic"
+	case KCFStringEncodingWindowsBalticRim:
+		return "KCFStringEncodingWindowsBalticRim"
+	case KCFStringEncodingWindowsVietnamese:
+		return "KCFStringEncodingWindowsVietnamese"
+	case KCFStringEncodingWindowsKoreanJohab:
+		return "KCFStringEncodingWindowsKoreanJohab"
+	case KCFStringEncodingANSEL:
+		return "KCFStringEncodingANSEL"
+	case KCFStringEncodingJIS_X0201_76:
+		return "KCFStringEncodingJIS_X0201_76"
+	case KCFStringEncodingJIS_X0208_83:
+		return "KCFStringEncodingJIS_X0208_83"
+	case KCFStringEncodingJIS_X0208_90:
+		return "KCFStringEncodingJIS_X0208_90"
+	case KCFStringEncodingJIS_X0212_90:
+		return "KCFStringEncodingJIS_X0212_90"
+	case KCFStringEncodingJIS_C6226_78:
+		return "KCFStringEncodingJIS_C6226_78"
+	case KCFStringEncodingShiftJIS_X0213:
+		return "KCFStringEncodingShiftJIS_X0213"
+	case KCFStringEncodingShiftJIS_X0213_MenKuTen:
+		return "KCFStringEncodingShiftJIS_X0213_MenKuTen"
+	case KCFStringEncodingGB_2312_80:
+		return "KCFStringEncodingGB_2312_80"
+	case KCFStringEncodingGBK_95:
+		return "KCFStringEncodingGBK_95"
+	case KCFStringEncodingGB_18030_2000:
+		return "KCFStringEncodingGB_18030_2000"
+	case KCFStringEncodingKSC_5601_87:
+		return "KCFStringEncodingKSC_5601_87"
+	case KCFStringEncodingKSC_5601_92_Johab:
+		return "KCFStringEncodingKSC_5601_92_Johab"
+	case KCFStringEncodingCNS_11643_92_P1:
+		return "KCFStringEncodingCNS_11643_92_P1"
+	case KCFStringEncodingCNS_11643_92_P2:
+		return "KCFStringEncodingCNS_11643_92_P2"
+	case KCFStringEncodingCNS_11643_92_P3:
+		return "KCFStringEncodingCNS_11643_92_P3"
+	case KCFStringEncodingISO_2022_JP:
+		return "KCFStringEncodingISO_2022_JP"
+	case KCFStringEncodingISO_2022_JP_2:
+		return "KCFStringEncodingISO_2022_JP_2"
+	case KCFStringEncodingISO_2022_JP_1:
+		return "KCFStringEncodingISO_2022_JP_1"
+	case KCFStringEncodingISO_2022_JP_3:
+		return "KCFStringEncodingISO_2022_JP_3"
+	case KCFStringEncodingISO_2022_CN:
+		return "KCFStringEncodingISO_2022_CN"
+	case KCFStringEncodingISO_2022_CN_EXT:
+		return "KCFStringEncodingISO_2022_CN_EXT"
+	case KCFStringEncodingISO_2022_KR:
+		return "KCFStringEncodingISO_2022_KR"
+	case KCFStringEncodingEUC_JP:
+		return "KCFStringEncodingEUC_JP"
+	case KCFStringEncodingEUC_CN:
+		return "KCFStringEncodingEUC_CN"
+	case KCFStringEncodingEUC_TW:
+		return "KCFStringEncodingEUC_TW"
+	case KCFStringEncodingEUC_KR:
+		return "KCFStringEncodingEUC_KR"
+	case KCFStringEncodingShiftJIS:
+		return "KCFStringEncodingShiftJIS"
+	case KCFStringEncodingKOI8_R:
+		return "KCFStringEncodingKOI8_R"
+	case KCFStringEncodingBig5:
+		return "KCFStringEncodingBig5"
+	case KCFStringEncodingMacRomanLatin1:
+		return "KCFStringEncodingMacRomanLatin1"
+	case KCFStringEncodingHZ_GB_2312:
+		return "KCFStringEncodingHZ_GB_2312"
+	case KCFStringEncodingBig5_HKSCS_1999:
+		return "KCFStringEncodingBig5_HKSCS_1999"
+	case KCFStringEncodingVISCII:
+		return "KCFStringEncodingVISCII"
+	case KCFStringEncodingKOI8_U:
+		return "KCFStringEncodingKOI8_U"
+	case KCFStringEncodingBig5_E:
+		return "KCFStringEncodingBig5_E"
+	case KCFStringEncodingNextStepJapanese:
+		return "KCFStringEncodingNextStepJapanese"
+	case KCFStringEncodingEBCDIC_US:
+		return "KCFStringEncodingEBCDIC_US"
+	case KCFStringEncodingEBCDIC_CP037:
+		return "KCFStringEncodingEBCDIC_CP037"
+	case KCFStringEncodingUTF7:
+		return "KCFStringEncodingUTF7"
+	case KCFStringEncodingUTF7_IMAP:
+		return "KCFStringEncodingUTF7_IMAP"
+	default:
+		return fmt.Sprintf("CFStringEncodings(%d)", int64(e))
+	}
+}
+
+// CFURL error codes.
+//
+// Deprecated: Use CFError codes instead
+type CFURLError int64
+
+const (
+	// Indicates an unknown error.
+	KCFURLUnknownError CFURLError = -10
+	// Indicates that the scheme is not recognized.
+	KCFURLUnknownSchemeError CFURLError = -11
+	// Indicates a resource was not found.
+	KCFURLResourceNotFoundError CFURLError = -12
+	// Indicates an error in accessing a resource.
+	KCFURLResourceAccessViolationError CFURLError = -13
+	// Indicates a remote host is unavailable.
+	KCFURLRemoteHostUnavailableError CFURLError = -14
+	// Indicates one or more arguments are improper.
+	KCFURLImproperArgumentsError CFURLError = -15
+	// Indicates a property key is unknown.
+	KCFURLUnknownPropertyKeyError CFURLError = -16
+	// Indicates a property key was unavailable.
+	KCFURLPropertyKeyUnavailableError CFURLError = -17
+	// Indicates a timeout.
+	KCFURLTimeoutError CFURLError = -18
+)
+
+// String returns the CFURLError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFURLError) String() string {
+	switch e {
+	case KCFURLUnknownError:
+		return "KCFURLUnknownError"
+	case KCFURLUnknownSchemeError:
+		return "KCFURLUnknownSchemeError"
+	case KCFURLResourceNotFoundError:
+		return "KCFURLResourceNotFoundError"
+	case KCFURLResourceAccessViolationError:
+		return "KCFURLResourceAccessViolationError"
+	case KCFURLRemoteHostUnavailableError:
+		return "KCFURLRemoteHostUnavailableError"
+	case KCFURLImproperArgumentsError:
+		return "KCFURLImproperArgumentsError"
+	case KCFURLUnknownPropertyKeyError:
+		return "KCFURLUnknownPropertyKeyError"
+	case KCFURLPropertyKeyUnavailableError:
+		return "KCFURLPropertyKeyUnavailableError"
+	case KCFURLTimeoutError:
+		return "KCFURLTimeoutError"
+	default:
+		return fmt.Sprintf("CFURLError(%d)", int64(e))
+	}
+}
+
+// Options you can use to control the parser’s treatment of an XML document.
+// Bitmask — values may be combined with |.
+type CFXMLParserOptions int64
+
+const (
+	// Validates the document against its grammar from the DTD, reporting any errors. Currently not supported.
+	KCFXMLParserValidateDocument CFXMLParserOptions = 1
+	// Silently skip over metadata constructs (the DTD and comments).
+	KCFXMLParserSkipMetaData CFXMLParserOptions = 2
+	// Replaces declared entities like &lt;. Note that other than the 5 predefined entities (lt, gt, quot, amp, apos), these must be defined in the DTD. Currently not supported.
+	KCFXMLParserReplacePhysicalEntities CFXMLParserOptions = 4
+	KCFXMLParserSkipWhitespace          CFXMLParserOptions = 8
+	// Resolves all external entities.
+	KCFXMLParserResolveExternalEntities CFXMLParserOptions = 16
+	// Where the DTD specifies implied attribute-value pairs for a particular element, add those pairs to any occurrences of the element in the element tree. Currently not supported.
+	KCFXMLParserAddImpliedAttributes CFXMLParserOptions = 32
+	// Makes the parser do the most work, returning only the pure elementtree.
+	KCFXMLParserAllOptions CFXMLParserOptions = 16777215
+	// Leaves the XML as “intact” as possible (reports all structures; performs no replacements).
+	KCFXMLParserNoOptions CFXMLParserOptions = 0
+)
+
+// String returns the CFXMLParserOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFXMLParserOptions) String() string {
+	var parts []string
+	if e&KCFXMLParserValidateDocument != 0 {
+		parts = append(parts, "KCFXMLParserValidateDocument")
+	}
+	if e&KCFXMLParserSkipMetaData != 0 {
+		parts = append(parts, "KCFXMLParserSkipMetaData")
+	}
+	if e&KCFXMLParserReplacePhysicalEntities != 0 {
+		parts = append(parts, "KCFXMLParserReplacePhysicalEntities")
+	}
+	if e&KCFXMLParserSkipWhitespace != 0 {
+		parts = append(parts, "KCFXMLParserSkipWhitespace")
+	}
+	if e&KCFXMLParserResolveExternalEntities != 0 {
+		parts = append(parts, "KCFXMLParserResolveExternalEntities")
+	}
+	if e&KCFXMLParserAddImpliedAttributes != 0 {
+		parts = append(parts, "KCFXMLParserAddImpliedAttributes")
+	}
+	if e&KCFXMLParserAllOptions != 0 {
+		parts = append(parts, "KCFXMLParserAllOptions")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type CGRectEdge int64
+
+const (
+	CGRectMinXEdge CGRectEdge = 0
+	CGRectMinYEdge CGRectEdge = 1
+	CGRectMaxXEdge CGRectEdge = 2
+	CGRectMaxYEdge CGRectEdge = 3
+)
+
+// String returns the CGRectEdge constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGRectEdge) String() string {
+	switch e {
+	case CGRectMinXEdge:
+		return "CGRectMinXEdge"
+	case CGRectMinYEdge:
+		return "CGRectMinYEdge"
+	case CGRectMaxXEdge:
+		return "CGRectMaxXEdge"
+	case CGRectMaxYEdge:
+		return "CGRectMaxYEdge"
+	default:
+		return fmt.Sprintf("CGRectEdge(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+const (
+	KCFBundleExecutableArchitectureARM64          = 16777228
+	KCFBundleExecutableArchitectureI386           = 7
+	KCFBundleExecutableArchitecturePPC            = 18
+	KCFBundleExecutableArchitecturePPC64          = 16777234
+	KCFBundleExecutableArchitectureX86_64         = 16777223
+	KCFCalendarComponentsWrap                     = 1
+	KCFFileDescriptorReadCallBack                 = 1
+	KCFFileDescriptorWriteCallBack                = 2
+	KCFMessagePortBecameInvalidError              = -5
+	KCFMessagePortIsInvalid                       = -3
+	KCFMessagePortReceiveTimeout                  = -2
+	KCFMessagePortSendTimeout                     = -1
+	KCFMessagePortSuccess                         = 0
+	KCFMessagePortTransportError                  = -4
+	KCFNotificationDeliverImmediately             = 1
+	KCFNotificationPostToAllSessions              = 2
+	KCFPropertyListReadCorruptError               = 3840
+	KCFPropertyListReadStreamError                = 3842
+	KCFPropertyListReadUnknownVersionError        = 3841
+	KCFPropertyListWriteStreamError               = 3851
+	KCFSocketAutomaticallyReenableAcceptCallBack  = 2
+	KCFSocketAutomaticallyReenableDataCallBack    = 3
+	KCFSocketAutomaticallyReenableReadCallBack    = 1
+	KCFSocketAutomaticallyReenableWriteCallBack   = 8
+	KCFSocketCloseOnInvalidate                    = 128
+	KCFSocketLeaveErrors                          = 64
+	KCFStringTokenizerAttributeLanguage           = 131072
+	KCFStringTokenizerAttributeLatinTranscription = 65536
+	KCFStringTokenizerUnitLineBreak               = 3
+	KCFStringTokenizerUnitParagraph               = 2
+	KCFStringTokenizerUnitSentence                = 1
+	KCFStringTokenizerUnitWord                    = 0
+	KCFStringTokenizerUnitWordBoundary            = 4
+	KCFUserNotificationAlternateResponse          = 1
+	KCFUserNotificationCancelResponse             = 3
+	KCFUserNotificationCautionAlertLevel          = 2
+	KCFUserNotificationDefaultResponse            = 0
+	KCFUserNotificationNoDefaultButtonFlag        = 32
+	KCFUserNotificationNoteAlertLevel             = 1
+	KCFUserNotificationOtherResponse              = 2
+	KCFUserNotificationPlainAlertLevel            = 3
+	KCFUserNotificationStopAlertLevel             = 0
+	KCFUserNotificationUseRadioButtonsFlag        = 64
+	KCFXMLNodeCurrentVersion                      = 1
+)

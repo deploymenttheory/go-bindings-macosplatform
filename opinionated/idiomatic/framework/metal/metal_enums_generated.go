@@ -3943,3 +3943,2492 @@ func (e Winding) String() string {
 		return fmt.Sprintf("Winding(%d)", int64(e))
 	}
 }
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Acl_type_t int64
+
+const (
+	Acl_type_tExtended Acl_type_t = 256
+	Acl_type_tAccess   Acl_type_t = 0
+	Acl_type_tDefault  Acl_type_t = 1
+	Acl_type_tAfs      Acl_type_t = 2
+	Acl_type_tCoda     Acl_type_t = 3
+	Acl_type_tNtfs     Acl_type_t = 4
+	Acl_type_tNwfs     Acl_type_t = 5
+)
+
+// String returns the Acl_type_t constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Acl_type_t) String() string {
+	switch e {
+	case Acl_type_tExtended:
+		return "Acl_type_tExtended"
+	case Acl_type_tAccess:
+		return "Acl_type_tAccess"
+	case Acl_type_tDefault:
+		return "Acl_type_tDefault"
+	case Acl_type_tAfs:
+		return "Acl_type_tAfs"
+	case Acl_type_tCoda:
+		return "Acl_type_tCoda"
+	case Acl_type_tNtfs:
+		return "Acl_type_tNtfs"
+	case Acl_type_tNwfs:
+		return "Acl_type_tNwfs"
+	default:
+		return fmt.Sprintf("Acl_type_t(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+type LaunchDataType int64
+
+const (
+	LaunchDataTypeDictionary LaunchDataType = 1
+	LaunchDataTypeArray      LaunchDataType = 2
+	LaunchDataTypeFd         LaunchDataType = 3
+	LaunchDataTypeInteger    LaunchDataType = 4
+	LaunchDataTypeReal       LaunchDataType = 5
+	LaunchDataTypeBool       LaunchDataType = 6
+	LaunchDataTypeString     LaunchDataType = 7
+	LaunchDataTypeOpaque     LaunchDataType = 8
+	LaunchDataTypeErrno      LaunchDataType = 9
+	LaunchDataTypeMachport   LaunchDataType = 10
+)
+
+// String returns the LaunchDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LaunchDataType) String() string {
+	switch e {
+	case LaunchDataTypeDictionary:
+		return "LaunchDataTypeDictionary"
+	case LaunchDataTypeArray:
+		return "LaunchDataTypeArray"
+	case LaunchDataTypeFd:
+		return "LaunchDataTypeFd"
+	case LaunchDataTypeInteger:
+		return "LaunchDataTypeInteger"
+	case LaunchDataTypeReal:
+		return "LaunchDataTypeReal"
+	case LaunchDataTypeBool:
+		return "LaunchDataTypeBool"
+	case LaunchDataTypeString:
+		return "LaunchDataTypeString"
+	case LaunchDataTypeOpaque:
+		return "LaunchDataTypeOpaque"
+	case LaunchDataTypeErrno:
+		return "LaunchDataTypeErrno"
+	case LaunchDataTypeMachport:
+		return "LaunchDataTypeMachport"
+	default:
+		return fmt.Sprintf("LaunchDataType(%d)", int64(e))
+	}
+}
+
+// These constants are used to specify a domain to MDLabelCreate().
+type MDLabelDomain int64
+
+const (
+	KMDLabelUserDomain  MDLabelDomain = 0
+	KMDLabelLocalDomain MDLabelDomain = 1
+)
+
+// String returns the MDLabelDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDLabelDomain) String() string {
+	switch e {
+	case KMDLabelUserDomain:
+		return "KMDLabelUserDomain"
+	case KMDLabelLocalDomain:
+		return "KMDLabelLocalDomain"
+	default:
+		return fmt.Sprintf("MDLabelDomain(%d)", int64(e))
+	}
+}
+
+type MDQueryOptionFlags int64
+
+const (
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
+	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
+)
+
+// String returns the MDQueryOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQueryOptionFlags) String() string {
+	switch e {
+	case KMDQuerySynchronous:
+		return "KMDQuerySynchronous"
+	case KMDQueryWantsUpdates:
+		return "KMDQueryWantsUpdates"
+	case KMDQueryAllowFSTranslation:
+		return "KMDQueryAllowFSTranslation"
+	default:
+		return fmt.Sprintf("MDQueryOptionFlags(%d)", int64(e))
+	}
+}
+
+type MDQuerySortOptionFlags int64
+
+const (
+	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
+)
+
+// String returns the MDQuerySortOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQuerySortOptionFlags) String() string {
+	switch e {
+	case KMDQueryReverseSortOrderFlag:
+		return "KMDQueryReverseSortOrderFlag"
+	default:
+		return fmt.Sprintf("MDQuerySortOptionFlags(%d)", int64(e))
+	}
+}
+
+type MTL4CommandQueueError int64
+
+const (
+	// Indicates the absence of any problems.
+	MTL4CommandQueueErrorNone MTL4CommandQueueError = 0
+	// Indicates the workload takes longer to execute than the system allows.
+	MTL4CommandQueueErrorTimeout MTL4CommandQueueError = 1
+	// Indicates a process doesn’t have access to a GPU device.
+	MTL4CommandQueueErrorNotPermitted MTL4CommandQueueError = 2
+	// Indicates the GPU doesn’t have sufficient memory to execute a command buffer.
+	MTL4CommandQueueErrorOutOfMemory MTL4CommandQueueError = 3
+	// Indicates the physical removal of the GPU before the command buffer completed.
+	MTL4CommandQueueErrorDeviceRemoved MTL4CommandQueueError = 4
+	// Indicates that the system revokes GPU access because it’s responsible for too many timeouts or hangs.
+	MTL4CommandQueueErrorAccessRevoked MTL4CommandQueueError = 5
+	// Indicates an internal problem in the Metal framework.
+	MTL4CommandQueueErrorInternal MTL4CommandQueueError = 6
+)
+
+// String returns the MTL4CommandQueueError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTL4CommandQueueError) String() string {
+	switch e {
+	case MTL4CommandQueueErrorNone:
+		return "MTL4CommandQueueErrorNone"
+	case MTL4CommandQueueErrorTimeout:
+		return "MTL4CommandQueueErrorTimeout"
+	case MTL4CommandQueueErrorNotPermitted:
+		return "MTL4CommandQueueErrorNotPermitted"
+	case MTL4CommandQueueErrorOutOfMemory:
+		return "MTL4CommandQueueErrorOutOfMemory"
+	case MTL4CommandQueueErrorDeviceRemoved:
+		return "MTL4CommandQueueErrorDeviceRemoved"
+	case MTL4CommandQueueErrorAccessRevoked:
+		return "MTL4CommandQueueErrorAccessRevoked"
+	case MTL4CommandQueueErrorInternal:
+		return "MTL4CommandQueueErrorInternal"
+	default:
+		return fmt.Sprintf("MTL4CommandQueueError(%d)", int64(e))
+	}
+}
+
+// Represents the status of a compiler task.
+type MTL4CompilerTaskStatus int64
+
+const (
+	// No status.
+	MTL4CompilerTaskStatusNone MTL4CompilerTaskStatus = 0
+	// The compiler task is currently scheduled.
+	MTL4CompilerTaskStatusScheduled MTL4CompilerTaskStatus = 1
+	// The compiler task is currently compiling.
+	MTL4CompilerTaskStatusCompiling MTL4CompilerTaskStatus = 2
+	// The compiler task is finished.
+	MTL4CompilerTaskStatusFinished MTL4CompilerTaskStatus = 3
+)
+
+// String returns the MTL4CompilerTaskStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTL4CompilerTaskStatus) String() string {
+	switch e {
+	case MTL4CompilerTaskStatusNone:
+		return "MTL4CompilerTaskStatusNone"
+	case MTL4CompilerTaskStatusScheduled:
+		return "MTL4CompilerTaskStatusScheduled"
+	case MTL4CompilerTaskStatusCompiling:
+		return "MTL4CompilerTaskStatusCompiling"
+	case MTL4CompilerTaskStatusFinished:
+		return "MTL4CompilerTaskStatusFinished"
+	default:
+		return fmt.Sprintf("MTL4CompilerTaskStatus(%d)", int64(e))
+	}
+}
+
+// Custom render pass options you specify at encoder creation time.
+// Bitmask — values may be combined with |.
+type MTL4RenderEncoderOptions uint64
+
+const (
+	// Declares that this render pass doesn’t suspend nor resume.
+	MTL4RenderEncoderOptionNone MTL4RenderEncoderOptions = 0
+	// Configures the render pass as suspending.
+	MTL4RenderEncoderOptionSuspending MTL4RenderEncoderOptions = 1
+	// Configures the render pass to as resuming.
+	MTL4RenderEncoderOptionResuming MTL4RenderEncoderOptions = 2
+)
+
+// String returns the MTL4RenderEncoderOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTL4RenderEncoderOptions) String() string {
+	var parts []string
+	if e&MTL4RenderEncoderOptionSuspending != 0 {
+		parts = append(parts, "MTL4RenderEncoderOptionSuspending")
+	}
+	if e&MTL4RenderEncoderOptionResuming != 0 {
+		parts = append(parts, "MTL4RenderEncoderOptionResuming")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Provides a hint to the system about the desired accuracy when writing GPU counter timestamps.
+type MTL4TimestampGranularity int64
+
+const (
+	// A minimally-invasive timestamp which may be less precise.
+	MTL4TimestampGranularityRelaxed MTL4TimestampGranularity = 0
+	// A timestamp as precise as possible.
+	MTL4TimestampGranularityPrecise MTL4TimestampGranularity = 1
+)
+
+// String returns the MTL4TimestampGranularity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTL4TimestampGranularity) String() string {
+	switch e {
+	case MTL4TimestampGranularityRelaxed:
+		return "MTL4TimestampGranularityRelaxed"
+	case MTL4TimestampGranularityPrecise:
+		return "MTL4TimestampGranularityPrecise"
+	default:
+		return fmt.Sprintf("MTL4TimestampGranularity(%d)", int64(e))
+	}
+}
+
+// Memory consistency options for synchronization commands.
+// Bitmask — values may be combined with |.
+type MTL4VisibilityOptions uint64
+
+const (
+	// Don’t flush caches. When you use this option on a barrier, it turns it into an execution barrier.
+	MTL4VisibilityOptionNone MTL4VisibilityOptions = 0
+	// Flushes caches to the GPU (device) memory coherence point.
+	MTL4VisibilityOptionDevice MTL4VisibilityOptions = 1
+	// Flushes caches to ensure that aliased virtual addresses are memory consistent.
+	MTL4VisibilityOptionResourceAlias MTL4VisibilityOptions = 2
+)
+
+// String returns the MTL4VisibilityOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTL4VisibilityOptions) String() string {
+	var parts []string
+	if e&MTL4VisibilityOptionDevice != 0 {
+		parts = append(parts, "MTL4VisibilityOptionDevice")
+	}
+	if e&MTL4VisibilityOptionResourceAlias != 0 {
+		parts = append(parts, "MTL4VisibilityOptionResourceAlias")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type AccelerationStructureRefitOptions uint64
+
+const (
+	// Refitting shall result in updated vertex data from the provided geometry descriptor. If not set, vertex buffers shall be ignored on the geometry descriptor and vertex data previously encoded shall be copied.
+	AccelerationStructureRefitOptionVertexData AccelerationStructureRefitOptions = 1
+	// Refitting shall result in updated per primitive data from the provided geometry descriptor. If not set, per primitive data buffers shall be ignored on the geometry descriptor and per primitive data previously encoded shall be copied.
+	AccelerationStructureRefitOptionPerPrimitiveData AccelerationStructureRefitOptions = 2
+)
+
+// String returns the AccelerationStructureRefitOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AccelerationStructureRefitOptions) String() string {
+	var parts []string
+	if e&AccelerationStructureRefitOptionVertexData != 0 {
+		parts = append(parts, "AccelerationStructureRefitOptionVertexData")
+	}
+	if e&AccelerationStructureRefitOptionPerPrimitiveData != 0 {
+		parts = append(parts, "AccelerationStructureRefitOptionPerPrimitiveData")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// The values that determine the limits and capabilities of argument buffers.
+type ArgumentBuffersTier uint64
+
+const (
+	// Support for tier 1 argument buffers.
+	ArgumentBuffersTier1 ArgumentBuffersTier = 0
+	// Support for tier 2 argument buffers.
+	ArgumentBuffersTier2 ArgumentBuffersTier = 1
+)
+
+// String returns the ArgumentBuffersTier constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ArgumentBuffersTier) String() string {
+	switch e {
+	case ArgumentBuffersTier1:
+		return "ArgumentBuffersTier1"
+	case ArgumentBuffersTier2:
+		return "ArgumentBuffersTier2"
+	default:
+		return fmt.Sprintf("ArgumentBuffersTier(%d)", int64(e))
+	}
+}
+
+// Describes the types of resources that a barrier operates on.
+// Bitmask — values may be combined with |.
+type BarrierScope uint64
+
+const (
+	// The barrier affects any buffer objects.
+	BarrierScopeBuffers BarrierScope = 1
+	// The barrier affects textures.
+	BarrierScopeTextures BarrierScope = 2
+	// The barrier affects any render targets.
+	BarrierScopeRenderTargets BarrierScope = 4
+)
+
+// String returns the BarrierScope constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BarrierScope) String() string {
+	var parts []string
+	if e&BarrierScopeBuffers != 0 {
+		parts = append(parts, "BarrierScopeBuffers")
+	}
+	if e&BarrierScopeTextures != 0 {
+		parts = append(parts, "BarrierScopeTextures")
+	}
+	if e&BarrierScopeRenderTargets != 0 {
+		parts = append(parts, "BarrierScopeRenderTargets")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// An error that occurred when creating a binary shader archive.
+type BinaryArchiveError uint64
+
+const (
+	BinaryArchiveErrorNone               BinaryArchiveError = 0
+	BinaryArchiveErrorInvalidFile        BinaryArchiveError = 1
+	BinaryArchiveErrorUnexpectedElement  BinaryArchiveError = 2
+	BinaryArchiveErrorCompilationFailure BinaryArchiveError = 3
+	BinaryArchiveErrorInternalError      BinaryArchiveError = 4
+)
+
+// String returns the BinaryArchiveError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BinaryArchiveError) String() string {
+	switch e {
+	case BinaryArchiveErrorNone:
+		return "BinaryArchiveErrorNone"
+	case BinaryArchiveErrorInvalidFile:
+		return "BinaryArchiveErrorInvalidFile"
+	case BinaryArchiveErrorUnexpectedElement:
+		return "BinaryArchiveErrorUnexpectedElement"
+	case BinaryArchiveErrorCompilationFailure:
+		return "BinaryArchiveErrorCompilationFailure"
+	case BinaryArchiveErrorInternalError:
+		return "BinaryArchiveErrorInternalError"
+	default:
+		return fmt.Sprintf("BinaryArchiveError(%d)", int64(e))
+	}
+}
+
+type BindingType int64
+
+const (
+	BindingTypeBuffer                         BindingType = 0
+	BindingTypeThreadgroupMemory              BindingType = 1
+	BindingTypeTexture                        BindingType = 2
+	BindingTypeSampler                        BindingType = 3
+	BindingTypeImageblockData                 BindingType = 16
+	BindingTypeImageblock                     BindingType = 17
+	BindingTypeVisibleFunctionTable           BindingType = 24
+	BindingTypePrimitiveAccelerationStructure BindingType = 25
+	BindingTypeInstanceAccelerationStructure  BindingType = 26
+	BindingTypeIntersectionFunctionTable      BindingType = 27
+	BindingTypeObjectPayload                  BindingType = 34
+	BindingTypeTensor                         BindingType = 37
+)
+
+// String returns the BindingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BindingType) String() string {
+	switch e {
+	case BindingTypeBuffer:
+		return "BindingTypeBuffer"
+	case BindingTypeThreadgroupMemory:
+		return "BindingTypeThreadgroupMemory"
+	case BindingTypeTexture:
+		return "BindingTypeTexture"
+	case BindingTypeSampler:
+		return "BindingTypeSampler"
+	case BindingTypeImageblockData:
+		return "BindingTypeImageblockData"
+	case BindingTypeImageblock:
+		return "BindingTypeImageblock"
+	case BindingTypeVisibleFunctionTable:
+		return "BindingTypeVisibleFunctionTable"
+	case BindingTypePrimitiveAccelerationStructure:
+		return "BindingTypePrimitiveAccelerationStructure"
+	case BindingTypeInstanceAccelerationStructure:
+		return "BindingTypeInstanceAccelerationStructure"
+	case BindingTypeIntersectionFunctionTable:
+		return "BindingTypeIntersectionFunctionTable"
+	case BindingTypeObjectPayload:
+		return "BindingTypeObjectPayload"
+	case BindingTypeTensor:
+		return "BindingTypeTensor"
+	default:
+		return fmt.Sprintf("BindingType(%d)", int64(e))
+	}
+}
+
+// The options that enable behavior for some blit operations.
+// Bitmask — values may be combined with |.
+type BlitOption uint64
+
+const (
+	// A blit option that clears other blit options, which removes any optional behavior for a blit operation.
+	BlitOptionNone BlitOption = 0
+	// A blit option that copies the depth portion of a combined depth and stencil texture to or from a buffer.
+	BlitOptionDepthFromDepthStencil BlitOption = 1
+	// A blit option that copies the stencil portion of a combined depth and stencil texture to or from a buffer.
+	BlitOptionStencilFromDepthStencil BlitOption = 2
+	// A blit option that copies PVRTC data between a texture and a buffer.
+	BlitOptionRowLinearPVRTC BlitOption = 4
+)
+
+// String returns the BlitOption constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BlitOption) String() string {
+	var parts []string
+	if e&BlitOptionDepthFromDepthStencil != 0 {
+		parts = append(parts, "BlitOptionDepthFromDepthStencil")
+	}
+	if e&BlitOptionStencilFromDepthStencil != 0 {
+		parts = append(parts, "BlitOptionStencilFromDepthStencil")
+	}
+	if e&BlitOptionRowLinearPVRTC != 0 {
+		parts = append(parts, "BlitOptionRowLinearPVRTC")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Enumerates the different support levels for sparse buffers.
+type BufferSparseTier int64
+
+const (
+	// Indicates that the buffer is not sparse.
+	BufferSparseTierNone BufferSparseTier = 0
+	// Indicates support for sparse buffers tier 1.
+	BufferSparseTier1 BufferSparseTier = 1
+)
+
+// String returns the BufferSparseTier constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BufferSparseTier) String() string {
+	switch e {
+	case BufferSparseTierNone:
+		return "BufferSparseTierNone"
+	case BufferSparseTier1:
+		return "BufferSparseTier1"
+	default:
+		return fmt.Sprintf("BufferSparseTier(%d)", int64(e))
+	}
+}
+
+// Errors returned by capture sessions.
+type CaptureError int64
+
+const (
+	// A capture error that indicates the capture options you’re requesting aren’t available.
+	CaptureErrorNotSupported CaptureError = 1
+	// A capture error that indicates the session is already in progress.
+	CaptureErrorAlreadyCapturing CaptureError = 2
+	// A capture error that indicates your descriptor has invalid properties.
+	CaptureErrorInvalidDescriptor CaptureError = 3
+)
+
+// String returns the CaptureError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CaptureError) String() string {
+	switch e {
+	case CaptureErrorNotSupported:
+		return "CaptureErrorNotSupported"
+	case CaptureErrorAlreadyCapturing:
+		return "CaptureErrorAlreadyCapturing"
+	case CaptureErrorInvalidDescriptor:
+		return "CaptureErrorInvalidDescriptor"
+	default:
+		return fmt.Sprintf("CaptureError(%d)", int64(e))
+	}
+}
+
+// The command buffer error codes that indicate why the GPU doesn’t finish executing a command buffer.
+type CommandBufferError uint64
+
+const (
+	CommandBufferErrorNone      CommandBufferError = 0
+	CommandBufferErrorInternal  CommandBufferError = 1
+	CommandBufferErrorTimeout   CommandBufferError = 2
+	CommandBufferErrorPageFault CommandBufferError = 3
+	// Deprecated: since macOS 13.0.
+	CommandBufferErrorBlacklisted CommandBufferError = 4
+	// Deprecated: since macOS 13.0.
+	CommandBufferErrorAccessRevoked CommandBufferError = 4
+	// Deprecated: since macOS 13.0.
+	CommandBufferErrorNotPermitted CommandBufferError = 7
+	// Deprecated: since macOS 13.0.
+	CommandBufferErrorOutOfMemory CommandBufferError = 8
+	// Deprecated: since macOS 13.0.
+	CommandBufferErrorInvalidResource CommandBufferError = 9
+	CommandBufferErrorMemoryless      CommandBufferError = 10
+	CommandBufferErrorDeviceRemoved   CommandBufferError = 11
+	CommandBufferErrorStackOverflow   CommandBufferError = 12
+)
+
+// String returns the CommandBufferError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CommandBufferError) String() string {
+	switch e {
+	case CommandBufferErrorNone:
+		return "CommandBufferErrorNone"
+	case CommandBufferErrorInternal:
+		return "CommandBufferErrorInternal"
+	case CommandBufferErrorTimeout:
+		return "CommandBufferErrorTimeout"
+	case CommandBufferErrorPageFault:
+		return "CommandBufferErrorPageFault"
+	case CommandBufferErrorBlacklisted:
+		return "CommandBufferErrorBlacklisted"
+	case CommandBufferErrorNotPermitted:
+		return "CommandBufferErrorNotPermitted"
+	case CommandBufferErrorOutOfMemory:
+		return "CommandBufferErrorOutOfMemory"
+	case CommandBufferErrorInvalidResource:
+		return "CommandBufferErrorInvalidResource"
+	case CommandBufferErrorMemoryless:
+		return "CommandBufferErrorMemoryless"
+	case CommandBufferErrorDeviceRemoved:
+		return "CommandBufferErrorDeviceRemoved"
+	case CommandBufferErrorStackOverflow:
+		return "CommandBufferErrorStackOverflow"
+	default:
+		return fmt.Sprintf("CommandBufferError(%d)", int64(e))
+	}
+}
+
+// The discrete states for a command buffer that represent its life cycle stages.
+type CommandBufferStatus uint64
+
+const (
+	// A command buffer’s initial state, which indicates its command queue isn’t reserving a place for it.
+	CommandBufferStatusNotEnqueued CommandBufferStatus = 0
+	// A command buffer’s second state, which indicates its command queue is reserving a place for it.
+	CommandBufferStatusEnqueued CommandBufferStatus = 1
+	// A command buffer’s third state, which indicates the command queue is preparing to schedule the command buffer by resolving its dependencies.
+	CommandBufferStatusCommitted CommandBufferStatus = 2
+	// A command buffer’s fourth state, which indicates the command buffer has its resources ready and is waiting for the GPU to run its commands.
+	CommandBufferStatusScheduled CommandBufferStatus = 3
+	// A command buffer’s successful, final state, which indicates the GPU finished running the command buffer’s commands without any problems.
+	CommandBufferStatusCompleted CommandBufferStatus = 4
+	// A command buffer’s unsuccessful, final state, which indicates the GPU stopped running the buffer’s commands because of a runtime issue.
+	CommandBufferStatusError CommandBufferStatus = 5
+)
+
+// String returns the CommandBufferStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CommandBufferStatus) String() string {
+	switch e {
+	case CommandBufferStatusNotEnqueued:
+		return "CommandBufferStatusNotEnqueued"
+	case CommandBufferStatusEnqueued:
+		return "CommandBufferStatusEnqueued"
+	case CommandBufferStatusCommitted:
+		return "CommandBufferStatusCommitted"
+	case CommandBufferStatusScheduled:
+		return "CommandBufferStatusScheduled"
+	case CommandBufferStatusCompleted:
+		return "CommandBufferStatusCompleted"
+	case CommandBufferStatusError:
+		return "CommandBufferStatusError"
+	default:
+		return fmt.Sprintf("CommandBufferStatus(%d)", int64(e))
+	}
+}
+
+// Possible error conditions for the command encoder’s commands.
+type CommandEncoderErrorState int64
+
+const (
+	// An error state that indicates the command buffer doesn’t know the state of its commands on the GPU.
+	CommandEncoderErrorStateUnknown CommandEncoderErrorState = 0
+	// A state that indicates the GPU successfully executed the commands without any errors.
+	CommandEncoderErrorStateCompleted CommandEncoderErrorState = 1
+	// An error state that indicates the GPU failed to fully execute the commands because of an error.
+	CommandEncoderErrorStateAffected CommandEncoderErrorState = 2
+	// An error state that indicates the GPU didn’t execute the commands.
+	CommandEncoderErrorStatePending CommandEncoderErrorState = 3
+	// An error state that indicates the commands in the command buffer are the cause of an error.
+	CommandEncoderErrorStateFaulted CommandEncoderErrorState = 4
+)
+
+// String returns the CommandEncoderErrorState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CommandEncoderErrorState) String() string {
+	switch e {
+	case CommandEncoderErrorStateUnknown:
+		return "CommandEncoderErrorStateUnknown"
+	case CommandEncoderErrorStateCompleted:
+		return "CommandEncoderErrorStateCompleted"
+	case CommandEncoderErrorStateAffected:
+		return "CommandEncoderErrorStateAffected"
+	case CommandEncoderErrorStatePending:
+		return "CommandEncoderErrorStatePending"
+	case CommandEncoderErrorStateFaulted:
+		return "CommandEncoderErrorStateFaulted"
+	default:
+		return fmt.Sprintf("CommandEncoderErrorState(%d)", int64(e))
+	}
+}
+
+// The error codes that indicate why a GPU driver can’t create a counter sample buffer.
+type CounterSampleBufferError int64
+
+const (
+	CounterSampleBufferErrorOutOfMemory CounterSampleBufferError = 0
+	CounterSampleBufferErrorInvalid     CounterSampleBufferError = 1
+	CounterSampleBufferErrorInternal    CounterSampleBufferError = 2
+)
+
+// String returns the CounterSampleBufferError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CounterSampleBufferError) String() string {
+	switch e {
+	case CounterSampleBufferErrorOutOfMemory:
+		return "CounterSampleBufferErrorOutOfMemory"
+	case CounterSampleBufferErrorInvalid:
+		return "CounterSampleBufferErrorInvalid"
+	case CounterSampleBufferErrorInternal:
+		return "CounterSampleBufferErrorInternal"
+	default:
+		return fmt.Sprintf("CounterSampleBufferError(%d)", int64(e))
+	}
+}
+
+// Options for different times when you can sample GPU counters.
+type CounterSamplingPoint uint64
+
+const (
+	// Counter sampling is allowed at the start and end of a render pass’s vertex and fragment stages, and at the start and end of compute and blit passes.
+	CounterSamplingPointAtStageBoundary CounterSamplingPoint = 0
+	// Counter sampling is allowed between draw commands in a render pass.
+	CounterSamplingPointAtDrawBoundary CounterSamplingPoint = 1
+	// Counter sampling is allowed between kernel dispatches in a compute pass.
+	CounterSamplingPointAtDispatchBoundary CounterSamplingPoint = 2
+	// Counter sampling is allowed between tile dispatches in a render pass.
+	CounterSamplingPointAtTileDispatchBoundary CounterSamplingPoint = 3
+	// Counter sampling is allowed between blit commands in a blit pass.
+	CounterSamplingPointAtBlitBoundary CounterSamplingPoint = 4
+)
+
+// String returns the CounterSamplingPoint constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CounterSamplingPoint) String() string {
+	switch e {
+	case CounterSamplingPointAtStageBoundary:
+		return "CounterSamplingPointAtStageBoundary"
+	case CounterSamplingPointAtDrawBoundary:
+		return "CounterSamplingPointAtDrawBoundary"
+	case CounterSamplingPointAtDispatchBoundary:
+		return "CounterSamplingPointAtDispatchBoundary"
+	case CounterSamplingPointAtTileDispatchBoundary:
+		return "CounterSamplingPointAtTileDispatchBoundary"
+	case CounterSamplingPointAtBlitBoundary:
+		return "CounterSamplingPointAtBlitBoundary"
+	default:
+		return fmt.Sprintf("CounterSamplingPoint(%d)", int64(e))
+	}
+}
+
+// The mode that determines whether to perform culling and which type of primitive to cull.
+type CullMode uint64
+
+const (
+	// Does not cull any primitives.
+	CullModeNone CullMode = 0
+	// Culls front-facing primitives.
+	CullModeFront CullMode = 1
+	// Culls back-facing primitives.
+	CullModeBack CullMode = 2
+)
+
+// String returns the CullMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CullMode) String() string {
+	switch e {
+	case CullModeNone:
+		return "CullModeNone"
+	case CullModeFront:
+		return "CullModeFront"
+	case CullModeBack:
+		return "CullModeBack"
+	default:
+		return fmt.Sprintf("CullMode(%d)", int64(e))
+	}
+}
+
+// The mode that determines how to deal with fragments outside of the near or far planes.
+type DepthClipMode uint64
+
+const (
+	// Clip fragments outside the near or far planes.
+	DepthClipModeClip DepthClipMode = 0
+	// Clamp fragments outside the near or far planes.
+	DepthClipModeClamp DepthClipMode = 1
+)
+
+// String returns the DepthClipMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DepthClipMode) String() string {
+	switch e {
+	case DepthClipModeClip:
+		return "DepthClipModeClip"
+	case DepthClipModeClamp:
+		return "DepthClipModeClamp"
+	default:
+		return fmt.Sprintf("DepthClipMode(%d)", int64(e))
+	}
+}
+
+type DeviceError int64
+
+const (
+	// Indicates the absence of any problems.
+	DeviceErrorNone DeviceError = 0
+	// Indicates the requested feature is not supported by the current device.
+	DeviceErrorNotSupported DeviceError = 1
+)
+
+// String returns the DeviceError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DeviceError) String() string {
+	switch e {
+	case DeviceErrorNone:
+		return "DeviceErrorNone"
+	case DeviceErrorNotSupported:
+		return "DeviceErrorNotSupported"
+	default:
+		return fmt.Sprintf("DeviceError(%d)", int64(e))
+	}
+}
+
+// Indicates the location of the GPU relative to the system it’s connect to.
+type DeviceLocation uint64
+
+const (
+	// A location that indicates the GPU is permanently connected to the system internally.
+	DeviceLocationBuiltIn DeviceLocation = 0
+	// A GPU location that indicates a person connected the GPU to a system’s internal slot.
+	DeviceLocationSlot DeviceLocation = 1
+	// A GPU location that indicates a person connected the GPU to the system with an external interface, such as Thunderbolt.
+	DeviceLocationExternal DeviceLocation = 2
+	// A value that indicates the system can’t determine how the GPU connects to it.
+	DeviceLocationUnspecified DeviceLocation = 18446744073709551615
+)
+
+// String returns the DeviceLocation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DeviceLocation) String() string {
+	switch e {
+	case DeviceLocationBuiltIn:
+		return "DeviceLocationBuiltIn"
+	case DeviceLocationSlot:
+		return "DeviceLocationSlot"
+	case DeviceLocationExternal:
+		return "DeviceLocationExternal"
+	case DeviceLocationUnspecified:
+		return "DeviceLocationUnspecified"
+	default:
+		return fmt.Sprintf("DeviceLocation(%d)", int64(e))
+	}
+}
+
+// Errors when compiling dynamic libraries.
+type DynamicLibraryError uint64
+
+const (
+	DynamicLibraryErrorNone                  DynamicLibraryError = 0
+	DynamicLibraryErrorInvalidFile           DynamicLibraryError = 1
+	DynamicLibraryErrorCompilationFailure    DynamicLibraryError = 2
+	DynamicLibraryErrorUnresolvedInstallName DynamicLibraryError = 3
+	DynamicLibraryErrorDependencyLoadFailure DynamicLibraryError = 4
+	DynamicLibraryErrorUnsupported           DynamicLibraryError = 5
+)
+
+// String returns the DynamicLibraryError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DynamicLibraryError) String() string {
+	switch e {
+	case DynamicLibraryErrorNone:
+		return "DynamicLibraryErrorNone"
+	case DynamicLibraryErrorInvalidFile:
+		return "DynamicLibraryErrorInvalidFile"
+	case DynamicLibraryErrorCompilationFailure:
+		return "DynamicLibraryErrorCompilationFailure"
+	case DynamicLibraryErrorUnresolvedInstallName:
+		return "DynamicLibraryErrorUnresolvedInstallName"
+	case DynamicLibraryErrorDependencyLoadFailure:
+		return "DynamicLibraryErrorDependencyLoadFailure"
+	case DynamicLibraryErrorUnsupported:
+		return "DynamicLibraryErrorUnsupported"
+	default:
+		return fmt.Sprintf("DynamicLibraryError(%d)", int64(e))
+	}
+}
+
+// The device feature sets that define specific platform, hardware, and software configurations.
+//
+// Deprecated: Use MTLGPUFamily instead
+type FeatureSet uint64
+
+const (
+	// The GPU family 1, version 1 feature set for macOS.
+	FeatureSet_macOS_GPUFamily1_v1 FeatureSet = 10000
+	FeatureSet_OSX_GPUFamily1_v1   FeatureSet = 10000
+	// The GPU family 1, version 2 feature set for macOS.
+	FeatureSet_macOS_GPUFamily1_v2 FeatureSet = 10001
+	FeatureSet_OSX_GPUFamily1_v2   FeatureSet = 10001
+	// The read-write texture, tier 2 feature set for macOS.
+	FeatureSet_macOS_ReadWriteTextureTier2 FeatureSet = 10002
+	FeatureSet_OSX_ReadWriteTextureTier2   FeatureSet = 10002
+	// The GPU family 1, version 3 feature set for macOS.
+	FeatureSet_macOS_GPUFamily1_v3 FeatureSet = 10003
+	// The GPU family 1, version 4 feature set for macOS.
+	FeatureSet_macOS_GPUFamily1_v4 FeatureSet = 10004
+	// The GPU family 2, version 1 feature set for macOS.
+	FeatureSet_macOS_GPUFamily2_v1 FeatureSet = 10005
+)
+
+// String returns the FeatureSet constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FeatureSet) String() string {
+	switch e {
+	case FeatureSet_macOS_GPUFamily1_v1:
+		return "FeatureSet_macOS_GPUFamily1_v1"
+	case FeatureSet_macOS_GPUFamily1_v2:
+		return "FeatureSet_macOS_GPUFamily1_v2"
+	case FeatureSet_macOS_ReadWriteTextureTier2:
+		return "FeatureSet_macOS_ReadWriteTextureTier2"
+	case FeatureSet_macOS_GPUFamily1_v3:
+		return "FeatureSet_macOS_GPUFamily1_v3"
+	case FeatureSet_macOS_GPUFamily1_v4:
+		return "FeatureSet_macOS_GPUFamily1_v4"
+	case FeatureSet_macOS_GPUFamily2_v1:
+		return "FeatureSet_macOS_GPUFamily2_v1"
+	default:
+		return fmt.Sprintf("FeatureSet(%d)", int64(e))
+	}
+}
+
+// Options for different kinds of function logs.
+type FunctionLogType uint64
+
+const (
+	// A message related to usage validation.
+	FunctionLogTypeValidation FunctionLogType = 0
+)
+
+// String returns the FunctionLogType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FunctionLogType) String() string {
+	switch e {
+	case FunctionLogTypeValidation:
+		return "FunctionLogTypeValidation"
+	default:
+		return fmt.Sprintf("FunctionLogType(%d)", int64(e))
+	}
+}
+
+// The type of a top-level Metal Shading Language (MSL) function.
+type FunctionType uint64
+
+const (
+	// A vertex function you can use in a render pipeline state object.
+	FunctionTypeVertex FunctionType = 1
+	// A fragment function you can use in a render pipeline state object.
+	FunctionTypeFragment FunctionType = 2
+	// A kernel you can use in a compute pipeline state object.
+	FunctionTypeKernel FunctionType = 3
+	// A function you can use in a visible function table.
+	FunctionTypeVisible FunctionType = 5
+	// A function you can use in an intersection function table.
+	FunctionTypeIntersection FunctionType = 6
+	FunctionTypeMesh         FunctionType = 7
+	FunctionTypeObject       FunctionType = 8
+)
+
+// String returns the FunctionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FunctionType) String() string {
+	switch e {
+	case FunctionTypeVertex:
+		return "FunctionTypeVertex"
+	case FunctionTypeFragment:
+		return "FunctionTypeFragment"
+	case FunctionTypeKernel:
+		return "FunctionTypeKernel"
+	case FunctionTypeVisible:
+		return "FunctionTypeVisible"
+	case FunctionTypeIntersection:
+		return "FunctionTypeIntersection"
+	case FunctionTypeMesh:
+		return "FunctionTypeMesh"
+	case FunctionTypeObject:
+		return "FunctionTypeObject"
+	default:
+		return fmt.Sprintf("FunctionType(%d)", int64(e))
+	}
+}
+
+// Represents the functionality for families of GPUs.
+type GPUFamily int64
+
+const (
+	// Represents the Apple family 1 GPU features that correspond to the Apple A7 GPUs.
+	//
+	// Deprecated: Use MTLGPUFamily instead
+	GPUFamilyApple1 GPUFamily = 1001
+	// Represents the Apple family 2 GPU features that correspond to the Apple A8 GPUs.
+	GPUFamilyApple2 GPUFamily = 1002
+	// Represents the Apple family 3 GPU features that correspond to the Apple A9 and A10 GPUs.
+	GPUFamilyApple3 GPUFamily = 1003
+	// Represents the Apple family 4 GPU features that correspond to the Apple A11 GPUs.
+	GPUFamilyApple4 GPUFamily = 1004
+	// Represents the Apple family 5 GPU features that correspond to the Apple A12 GPUs.
+	GPUFamilyApple5 GPUFamily = 1005
+	// Represents the Apple family 6 GPU features that correspond to the Apple A13 GPUs.
+	GPUFamilyApple6 GPUFamily = 1006
+	// Represents the Apple family 7 GPU features that correspond to the Apple A14 and M1 GPUs.
+	GPUFamilyApple7 GPUFamily = 1007
+	// Represents the Apple family 8 GPU features that correspond to the Apple A15, A16, and M2 GPUs.
+	GPUFamilyApple8 GPUFamily = 1008
+	// Represents the Apple family 9 GPU features that correspond to the Apple A17, M3, and M4 GPUs.
+	GPUFamilyApple9  GPUFamily = 1009
+	GPUFamilyApple10 GPUFamily = 1010
+	// Represents the Mac family 1 GPU features.
+	//
+	// Deprecated: since macOS 13.0.
+	GPUFamilyMac1 GPUFamily = 2001
+	// Represents the Mac family 2 GPU features.
+	//
+	// Deprecated: since macOS 13.0.
+	GPUFamilyMac2 GPUFamily = 2002
+	// Represents the Common family 1 GPU features.
+	//
+	// Deprecated: since macOS 13.0.
+	GPUFamilyCommon1 GPUFamily = 3001
+	// Represents the Common family 2 GPU features.
+	//
+	// Deprecated: since macOS 13.0.
+	GPUFamilyCommon2 GPUFamily = 3002
+	// Represents the Common family 3 GPU features.
+	GPUFamilyCommon3 GPUFamily = 3003
+	// Represents a family 1 Mac GPU when running an app you built with Mac Catalyst.
+	//
+	// Deprecated: since macOS 13.0.
+	GPUFamilyMacCatalyst1 GPUFamily = 4001
+	// Represents a family 2 Mac GPU when running an app you built with Mac Catalyst.
+	//
+	// Deprecated: since macOS 13.0.
+	GPUFamilyMacCatalyst2 GPUFamily = 4002
+	// Represents the Metal 3 features.
+	GPUFamilyMetal3 GPUFamily = 5001
+	GPUFamilyMetal4 GPUFamily = 5002
+)
+
+// String returns the GPUFamily constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GPUFamily) String() string {
+	switch e {
+	case GPUFamilyApple1:
+		return "GPUFamilyApple1"
+	case GPUFamilyApple2:
+		return "GPUFamilyApple2"
+	case GPUFamilyApple3:
+		return "GPUFamilyApple3"
+	case GPUFamilyApple4:
+		return "GPUFamilyApple4"
+	case GPUFamilyApple5:
+		return "GPUFamilyApple5"
+	case GPUFamilyApple6:
+		return "GPUFamilyApple6"
+	case GPUFamilyApple7:
+		return "GPUFamilyApple7"
+	case GPUFamilyApple8:
+		return "GPUFamilyApple8"
+	case GPUFamilyApple9:
+		return "GPUFamilyApple9"
+	case GPUFamilyApple10:
+		return "GPUFamilyApple10"
+	case GPUFamilyMac1:
+		return "GPUFamilyMac1"
+	case GPUFamilyMac2:
+		return "GPUFamilyMac2"
+	case GPUFamilyCommon1:
+		return "GPUFamilyCommon1"
+	case GPUFamilyCommon2:
+		return "GPUFamilyCommon2"
+	case GPUFamilyCommon3:
+		return "GPUFamilyCommon3"
+	case GPUFamilyMacCatalyst1:
+		return "GPUFamilyMacCatalyst1"
+	case GPUFamilyMacCatalyst2:
+		return "GPUFamilyMacCatalyst2"
+	case GPUFamilyMetal3:
+		return "GPUFamilyMetal3"
+	case GPUFamilyMetal4:
+		return "GPUFamilyMetal4"
+	default:
+		return fmt.Sprintf("GPUFamily(%d)", int64(e))
+	}
+}
+
+// The categories of errors for creating an input/output file handle.
+type IOError int64
+
+const (
+	IOErrorURLInvalid IOError = 1
+	IOErrorInternal   IOError = 2
+)
+
+// String returns the IOError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IOError) String() string {
+	switch e {
+	case IOErrorURLInvalid:
+		return "IOErrorURLInvalid"
+	case IOErrorInternal:
+		return "IOErrorInternal"
+	default:
+		return fmt.Sprintf("IOError(%d)", int64(e))
+	}
+}
+
+// Represents the state of an input/output command buffer.
+type IOStatus int64
+
+const (
+	// Indicates the GPU hasn’t finished executing the input/output command buffer.
+	IOStatusPending IOStatus = 0
+	// Indicates the GPU has successfully abandoned the input/output command buffer.
+	IOStatusCancelled IOStatus = 1
+	// Indicates the GPU experienced a problem with the input/output command buffer.
+	IOStatusError IOStatus = 2
+	// Indicates the GPU has successfully finished executing the input/output command buffer.
+	IOStatusComplete IOStatus = 3
+)
+
+// String returns the IOStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IOStatus) String() string {
+	switch e {
+	case IOStatusPending:
+		return "IOStatusPending"
+	case IOStatusCancelled:
+		return "IOStatusCancelled"
+	case IOStatusError:
+		return "IOStatusError"
+	case IOStatusComplete:
+		return "IOStatusComplete"
+	default:
+		return fmt.Sprintf("IOStatus(%d)", int64(e))
+	}
+}
+
+// Constants for specifying different types of custom intersection functions.
+// Bitmask — values may be combined with |.
+type IntersectionFunctionSignature uint64
+
+const (
+	// A constant indicating that the function uses the default signature.
+	IntersectionFunctionSignatureNone IntersectionFunctionSignature = 0
+	// A flag indicating that function signature uses instancing.
+	IntersectionFunctionSignatureInstancing IntersectionFunctionSignature = 1
+	// A flag indicating that function signature uses triangle data.
+	IntersectionFunctionSignatureTriangleData IntersectionFunctionSignature = 2
+	// A flag indicating that function signature uses world space data.
+	IntersectionFunctionSignatureWorldSpaceData IntersectionFunctionSignature = 4
+	// The intersection functions may be called from intersectors using the instance_motion intersection tag as described in the Metal Shading Language Guide.
+	IntersectionFunctionSignatureInstanceMotion IntersectionFunctionSignature = 8
+	// The intersection functions can query time, motion_start_time, motion_end_time and key_frame_count as described in the Metal Shading Language Guide.
+	IntersectionFunctionSignaturePrimitiveMotion IntersectionFunctionSignature = 16
+	// The intersection functions may be called from intersectors using the extended_limits intersection tag as described in the Metal Shading Language Guide.
+	IntersectionFunctionSignatureExtendedLimits IntersectionFunctionSignature = 32
+	// The intersection functions may be called from intersectors using the max_levels intersection tag as described in the Metal Shading Language Guide.
+	IntersectionFunctionSignatureMaxLevels IntersectionFunctionSignature = 64
+	// The curve intersection functions can read the built-in curve_parameter as described in the Metal Shading Language Guide.
+	IntersectionFunctionSignatureCurveData IntersectionFunctionSignature = 128
+	// The intersection function will be used with intersection function buffers
+	IntersectionFunctionSignatureIntersectionFunctionBuffer IntersectionFunctionSignature = 256
+	// The intersection function uses the intersection function buffer user_data pointer
+	IntersectionFunctionSignatureUserData IntersectionFunctionSignature = 512
+)
+
+// String returns the IntersectionFunctionSignature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IntersectionFunctionSignature) String() string {
+	var parts []string
+	if e&IntersectionFunctionSignatureInstancing != 0 {
+		parts = append(parts, "IntersectionFunctionSignatureInstancing")
+	}
+	if e&IntersectionFunctionSignatureTriangleData != 0 {
+		parts = append(parts, "IntersectionFunctionSignatureTriangleData")
+	}
+	if e&IntersectionFunctionSignatureWorldSpaceData != 0 {
+		parts = append(parts, "IntersectionFunctionSignatureWorldSpaceData")
+	}
+	if e&IntersectionFunctionSignatureInstanceMotion != 0 {
+		parts = append(parts, "IntersectionFunctionSignatureInstanceMotion")
+	}
+	if e&IntersectionFunctionSignaturePrimitiveMotion != 0 {
+		parts = append(parts, "IntersectionFunctionSignaturePrimitiveMotion")
+	}
+	if e&IntersectionFunctionSignatureExtendedLimits != 0 {
+		parts = append(parts, "IntersectionFunctionSignatureExtendedLimits")
+	}
+	if e&IntersectionFunctionSignatureMaxLevels != 0 {
+		parts = append(parts, "IntersectionFunctionSignatureMaxLevels")
+	}
+	if e&IntersectionFunctionSignatureCurveData != 0 {
+		parts = append(parts, "IntersectionFunctionSignatureCurveData")
+	}
+	if e&IntersectionFunctionSignatureIntersectionFunctionBuffer != 0 {
+		parts = append(parts, "IntersectionFunctionSignatureIntersectionFunctionBuffer")
+	}
+	if e&IntersectionFunctionSignatureUserData != 0 {
+		parts = append(parts, "IntersectionFunctionSignatureUserData")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Metal errors related to libraries.
+type LibraryError uint64
+
+const (
+	LibraryErrorUnsupported      LibraryError = 1
+	LibraryErrorInternal         LibraryError = 2
+	LibraryErrorCompileFailure   LibraryError = 3
+	LibraryErrorCompileWarning   LibraryError = 4
+	LibraryErrorFunctionNotFound LibraryError = 5
+	LibraryErrorFileNotFound     LibraryError = 6
+)
+
+// String returns the LibraryError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LibraryError) String() string {
+	switch e {
+	case LibraryErrorUnsupported:
+		return "LibraryErrorUnsupported"
+	case LibraryErrorInternal:
+		return "LibraryErrorInternal"
+	case LibraryErrorCompileFailure:
+		return "LibraryErrorCompileFailure"
+	case LibraryErrorCompileWarning:
+		return "LibraryErrorCompileWarning"
+	case LibraryErrorFunctionNotFound:
+		return "LibraryErrorFunctionNotFound"
+	case LibraryErrorFileNotFound:
+		return "LibraryErrorFileNotFound"
+	default:
+		return fmt.Sprintf("LibraryError(%d)", int64(e))
+	}
+}
+
+type LogStateError uint64
+
+const (
+	LogStateErrorInvalidSize LogStateError = 1
+	LogStateErrorInvalid     LogStateError = 2
+)
+
+// String returns the LogStateError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LogStateError) String() string {
+	switch e {
+	case LogStateErrorInvalidSize:
+		return "LogStateErrorInvalidSize"
+	case LogStateErrorInvalid:
+		return "LogStateErrorInvalid"
+	default:
+		return fmt.Sprintf("LogStateError(%d)", int64(e))
+	}
+}
+
+// Types of tessellation patches that can be inputs of a post-tessellation vertex function.
+type PatchType uint64
+
+const (
+	// An option that indicates that this isn’t a post-tessellation vertex function.
+	//
+	// Deprecated: Use MTLBinding and cast to specific Binding (MTLTextureBinding, MTLBufferBinding, .etc) instead
+	PatchTypeNone PatchType = 0
+	// A triangle patch.
+	//
+	// Deprecated: Use MTLBinding and cast to specific Binding (MTLTextureBinding, MTLBufferBinding, .etc) instead
+	PatchTypeTriangle PatchType = 1
+	// A quad patch.
+	PatchTypeQuad PatchType = 2
+)
+
+// String returns the PatchType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PatchType) String() string {
+	switch e {
+	case PatchTypeNone:
+		return "PatchTypeNone"
+	case PatchTypeTriangle:
+		return "PatchTypeTriangle"
+	case PatchTypeQuad:
+		return "PatchTypeQuad"
+	default:
+		return fmt.Sprintf("PatchType(%d)", int64(e))
+	}
+}
+
+// Options that determine how Metal prepares the pipeline.
+// Bitmask — values may be combined with |.
+type PipelineOption uint64
+
+const (
+	// Don’t provide any reflection information.
+	PipelineOptionNone PipelineOption = 0
+	// An option instance that provides argument information for textures and threadgroup memory.
+	//
+	// Deprecated: since macOS 13.0.
+	PipelineOptionArgumentInfo PipelineOption = 1
+	// An option that provides binding information for pipeline state resources.
+	//
+	// Deprecated: since macOS 13.0.
+	PipelineOptionBindingInfo PipelineOption = 1
+	// An option instance that provides detailed buffer type information for buffer arguments.
+	//
+	// Deprecated: since macOS 13.0.
+	PipelineOptionBufferTypeInfo PipelineOption = 2
+	// An option that instructs the compiler to return an error when a GPU function isn’t in a binary archive.
+	PipelineOptionFailOnBinaryArchiveMiss PipelineOption = 4
+)
+
+// String returns the PipelineOption constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PipelineOption) String() string {
+	var parts []string
+	if e&PipelineOptionArgumentInfo != 0 {
+		parts = append(parts, "PipelineOptionArgumentInfo")
+	}
+	if e&PipelineOptionBindingInfo != 0 {
+		parts = append(parts, "PipelineOptionBindingInfo")
+	}
+	if e&PipelineOptionBufferTypeInfo != 0 {
+		parts = append(parts, "PipelineOptionBufferTypeInfo")
+	}
+	if e&PipelineOptionFailOnBinaryArchiveMiss != 0 {
+		parts = append(parts, "PipelineOptionFailOnBinaryArchiveMiss")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// The geometric primitive type for drawing commands.
+type PrimitiveType uint64
+
+const (
+	// Rasterize a point at each vertex. The vertex shader needs to provide [[point_size]], or the point size is undefined.
+	PrimitiveTypePoint PrimitiveType = 0
+	// Rasterize a line between each separate pair of vertices, resulting in a series of unconnected lines. If there are an odd number of vertices, the last vertex is ignored.
+	PrimitiveTypeLine PrimitiveType = 1
+	// Rasterize a line between each pair of adjacent vertices, resulting in a series of connected lines (also called a polyline).
+	PrimitiveTypeLineStrip PrimitiveType = 2
+	// For every separate set of three vertices, rasterize a triangle. If the number of vertices is not a multiple of three, either one or two vertices is ignored.
+	PrimitiveTypeTriangle PrimitiveType = 3
+	// For every three adjacent vertices, rasterize a triangle.
+	PrimitiveTypeTriangleStrip PrimitiveType = 4
+)
+
+// String returns the PrimitiveType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PrimitiveType) String() string {
+	switch e {
+	case PrimitiveTypePoint:
+		return "PrimitiveTypePoint"
+	case PrimitiveTypeLine:
+		return "PrimitiveTypeLine"
+	case PrimitiveTypeLineStrip:
+		return "PrimitiveTypeLineStrip"
+	case PrimitiveTypeTriangle:
+		return "PrimitiveTypeTriangle"
+	case PrimitiveTypeTriangleStrip:
+		return "PrimitiveTypeTriangleStrip"
+	default:
+		return fmt.Sprintf("PrimitiveType(%d)", int64(e))
+	}
+}
+
+// The purgeable state of the resource.
+type PurgeableState uint64
+
+const (
+	// The current state is queried but doesn’t change.
+	PurgeableStateKeepCurrent PurgeableState = 1
+	// The contents of the resource aren’t allowed to be discarded.
+	PurgeableStateNonVolatile PurgeableState = 2
+	// The system is allowed to discard the resource to free up memory.
+	PurgeableStateVolatile PurgeableState = 3
+	// A state that indicates to the system that it needs to consider the contents of a resource as invalid, typically because you’re discarding it.
+	PurgeableStateEmpty PurgeableState = 4
+)
+
+// String returns the PurgeableState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PurgeableState) String() string {
+	switch e {
+	case PurgeableStateKeepCurrent:
+		return "PurgeableStateKeepCurrent"
+	case PurgeableStateNonVolatile:
+		return "PurgeableStateNonVolatile"
+	case PurgeableStateVolatile:
+		return "PurgeableStateVolatile"
+	case PurgeableStateEmpty:
+		return "PurgeableStateEmpty"
+	default:
+		return fmt.Sprintf("PurgeableState(%d)", int64(e))
+	}
+}
+
+// The support level for read-write texture formats.
+type ReadWriteTextureTier uint64
+
+const (
+	// Indicates the system doesn’t support read-write textures.
+	ReadWriteTextureTierNone ReadWriteTextureTier = 0
+	// Indicates the system supports tier 1 read-write textures.
+	ReadWriteTextureTier1 ReadWriteTextureTier = 1
+	// Indicates the system supports tier 2 read-write textures.
+	ReadWriteTextureTier2 ReadWriteTextureTier = 2
+)
+
+// String returns the ReadWriteTextureTier constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReadWriteTextureTier) String() string {
+	switch e {
+	case ReadWriteTextureTierNone:
+		return "ReadWriteTextureTierNone"
+	case ReadWriteTextureTier1:
+		return "ReadWriteTextureTier1"
+	case ReadWriteTextureTier2:
+		return "ReadWriteTextureTier2"
+	default:
+		return fmt.Sprintf("ReadWriteTextureTier(%d)", int64(e))
+	}
+}
+
+// The stages in a render pass that triggers a synchronization command.
+// Bitmask — values may be combined with |.
+type RenderStages uint64
+
+const (
+	// The vertex rendering stage.
+	RenderStageVertex RenderStages = 1
+	// The fragment rendering stage.
+	RenderStageFragment RenderStages = 2
+	// The tile rendering stage.
+	RenderStageTile RenderStages = 4
+	// The object rendering stage.
+	RenderStageObject RenderStages = 8
+	// The mesh rendering stage.
+	RenderStageMesh RenderStages = 16
+)
+
+// String returns the RenderStages constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RenderStages) String() string {
+	var parts []string
+	if e&RenderStageVertex != 0 {
+		parts = append(parts, "RenderStageVertex")
+	}
+	if e&RenderStageFragment != 0 {
+		parts = append(parts, "RenderStageFragment")
+	}
+	if e&RenderStageTile != 0 {
+		parts = append(parts, "RenderStageTile")
+	}
+	if e&RenderStageObject != 0 {
+		parts = append(parts, "RenderStageObject")
+	}
+	if e&RenderStageMesh != 0 {
+		parts = append(parts, "RenderStageMesh")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Options that describe how a graphics or compute function uses an argument buffer’s resource.
+// Bitmask — values may be combined with |.
+type ResourceUsage uint64
+
+const (
+	// An option that enables reading from the resource.
+	ResourceUsageRead ResourceUsage = 1
+	// An option that enables writing to the resource.
+	ResourceUsageWrite ResourceUsage = 2
+	// An option that enables sampling from the resource.
+	//
+	// Deprecated: since macOS 13.0.
+	ResourceUsageSample ResourceUsage = 4
+)
+
+// String returns the ResourceUsage constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ResourceUsage) String() string {
+	var parts []string
+	if e&ResourceUsageRead != 0 {
+		parts = append(parts, "ResourceUsageRead")
+	}
+	if e&ResourceUsageWrite != 0 {
+		parts = append(parts, "ResourceUsageWrite")
+	}
+	if e&ResourceUsageSample != 0 {
+		parts = append(parts, "ResourceUsageSample")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Options used when converting between a pixel-based region within a texture to a tile-based region.
+type SparseTextureRegionAlignmentMode uint64
+
+const (
+	// The tile region includes any partially covered tiles.
+	SparseTextureRegionAlignmentModeOutward SparseTextureRegionAlignmentMode = 0
+	// The tile region ignores partially covered tiles.
+	SparseTextureRegionAlignmentModeInward SparseTextureRegionAlignmentMode = 1
+)
+
+// String returns the SparseTextureRegionAlignmentMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SparseTextureRegionAlignmentMode) String() string {
+	switch e {
+	case SparseTextureRegionAlignmentModeOutward:
+		return "SparseTextureRegionAlignmentModeOutward"
+	case SparseTextureRegionAlignmentModeInward:
+		return "SparseTextureRegionAlignmentModeInward"
+	default:
+		return fmt.Sprintf("SparseTextureRegionAlignmentMode(%d)", int64(e))
+	}
+}
+
+// The segments of command execution within the Metal pass types.
+// Bitmask — values may be combined with |.
+type Stages uint64
+
+const (
+	// Represents all vertex shader stage work in a render pass.
+	StageVertex Stages = 1
+	// Represents all fragment shader stage work in a render pass.
+	StageFragment Stages = 2
+	// Represents all tile shading stage work in a render pass.
+	StageTile Stages = 4
+	// Represents all object shader stage work in a render pass.
+	StageObject Stages = 8
+	// Represents all mesh shader stage work work in a render pass.
+	StageMesh Stages = 16
+	// Represents all sparse and placement sparse resource mapping updates.
+	StageResourceState Stages = 67108864
+	// Represents all compute dispatches in a compute pass.
+	StageDispatch Stages = 134217728
+	// Represents all blit operations in a pass.
+	StageBlit Stages = 268435456
+	// Represents all acceleration structure operations.
+	StageAccelerationStructure Stages = 536870912
+	// Represents all machine learning network dispatch operations.
+	StageMachineLearning Stages = 1073741824
+	// Convenience mask representing all stages of GPU work.
+	StageAll Stages = 9223372036854775807
+)
+
+// String returns the Stages constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Stages) String() string {
+	var parts []string
+	if e&StageVertex != 0 {
+		parts = append(parts, "StageVertex")
+	}
+	if e&StageFragment != 0 {
+		parts = append(parts, "StageFragment")
+	}
+	if e&StageTile != 0 {
+		parts = append(parts, "StageTile")
+	}
+	if e&StageObject != 0 {
+		parts = append(parts, "StageObject")
+	}
+	if e&StageMesh != 0 {
+		parts = append(parts, "StageMesh")
+	}
+	if e&StageResourceState != 0 {
+		parts = append(parts, "StageResourceState")
+	}
+	if e&StageDispatch != 0 {
+		parts = append(parts, "StageDispatch")
+	}
+	if e&StageBlit != 0 {
+		parts = append(parts, "StageBlit")
+	}
+	if e&StageAccelerationStructure != 0 {
+		parts = append(parts, "StageAccelerationStructure")
+	}
+	if e&StageMachineLearning != 0 {
+		parts = append(parts, "StageMachineLearning")
+	}
+	if e&StageAll != 0 {
+		parts = append(parts, "StageAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type TensorError int64
+
+const (
+	TensorErrorNone              TensorError = 0
+	TensorErrorInternalError     TensorError = 1
+	TensorErrorInvalidDescriptor TensorError = 2
+)
+
+// String returns the TensorError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TensorError) String() string {
+	switch e {
+	case TensorErrorNone:
+		return "TensorErrorNone"
+	case TensorErrorInternalError:
+		return "TensorErrorInternalError"
+	case TensorErrorInvalidDescriptor:
+		return "TensorErrorInvalidDescriptor"
+	default:
+		return fmt.Sprintf("TensorError(%d)", int64(e))
+	}
+}
+
+// Enumerates the different support levels for sparse textures.
+type TextureSparseTier int64
+
+const (
+	// Indicates that the texture is not sparse.
+	TextureSparseTierNone TextureSparseTier = 0
+	// Indicates support for sparse textures tier 1.
+	TextureSparseTier1 TextureSparseTier = 1
+	// Indicates support for sparse textures tier 2.
+	TextureSparseTier2 TextureSparseTier = 2
+)
+
+// String returns the TextureSparseTier constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextureSparseTier) String() string {
+	switch e {
+	case TextureSparseTierNone:
+		return "TextureSparseTierNone"
+	case TextureSparseTier1:
+		return "TextureSparseTier1"
+	case TextureSparseTier2:
+		return "TextureSparseTier2"
+	default:
+		return fmt.Sprintf("TextureSparseTier(%d)", int64(e))
+	}
+}
+
+// Specifies how to rasterize triangle and triangle strip primitives.
+type TriangleFillMode uint64
+
+const (
+	// Rasterize triangle and triangle strip primitives as filled triangles.
+	TriangleFillModeFill TriangleFillMode = 0
+	// Rasterize triangle and triangle strip primitives as lines.
+	TriangleFillModeLines TriangleFillMode = 1
+)
+
+// String returns the TriangleFillMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TriangleFillMode) String() string {
+	switch e {
+	case TriangleFillModeFill:
+		return "TriangleFillModeFill"
+	case TriangleFillModeLines:
+		return "TriangleFillModeLines"
+	default:
+		return fmt.Sprintf("TriangleFillMode(%d)", int64(e))
+	}
+}
+
+// The mode that determines what, if anything, the GPU writes to the results buffer, after the GPU executes the render pass.
+type VisibilityResultMode uint64
+
+const (
+	// The result doesn’t contain any data because visibility testing was disabled.
+	VisibilityResultModeDisabled VisibilityResultMode = 0
+	// The result records whether any samples passed depth and stencil tests.
+	VisibilityResultModeBoolean VisibilityResultMode = 1
+	// The result records how many samples passed depth and stencil tests.
+	VisibilityResultModeCounting VisibilityResultMode = 2
+)
+
+// String returns the VisibilityResultMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VisibilityResultMode) String() string {
+	switch e {
+	case VisibilityResultModeDisabled:
+		return "VisibilityResultModeDisabled"
+	case VisibilityResultModeBoolean:
+		return "VisibilityResultModeBoolean"
+	case VisibilityResultModeCounting:
+		return "VisibilityResultModeCounting"
+	default:
+		return fmt.Sprintf("VisibilityResultMode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlags int64
+
+const (
+	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
+	XpcListenerCreateFlagsInactive        XpcListenerCreateFlags = 1
+	XpcListenerCreateFlagsForceMach       XpcListenerCreateFlags = 2
+	XpcListenerCreateFlagsForceXpcservice XpcListenerCreateFlags = 4
+)
+
+// String returns the XpcListenerCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcListenerCreateFlags) String() string {
+	var parts []string
+	if e&XpcListenerCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsInactive")
+	}
+	if e&XpcListenerCreateFlagsForceMach != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceMach")
+	}
+	if e&XpcListenerCreateFlagsForceXpcservice != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceXpcservice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlags int64
+
+const (
+	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0
+	XpcSessionCreateFlagsInactive       XpcSessionCreateFlags = 1
+	XpcSessionCreateFlagsMachPrivileged XpcSessionCreateFlags = 2
+)
+
+// String returns the XpcSessionCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcSessionCreateFlags) String() string {
+	var parts []string
+	if e&XpcSessionCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsInactive")
+	}
+	if e&XpcSessionCreateFlagsMachPrivileged != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsMachPrivileged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

@@ -306,71 +306,6 @@ func (e ElectrocardiogramSymptomsStatus) String() string {
 	}
 }
 
-// Error codes returned by HealthKit.
-type ErrorCode int64
-
-const (
-	UnknownError ErrorCode = 0
-	// No error occurred.
-	NoError                                 ErrorCode = 0
-	ErrorHealthDataUnavailable              ErrorCode = 1
-	ErrorHealthDataRestricted               ErrorCode = 2
-	ErrorInvalidArgument                    ErrorCode = 3
-	ErrorAuthorizationDenied                ErrorCode = 4
-	ErrorAuthorizationNotDetermined         ErrorCode = 5
-	ErrorDatabaseInaccessible               ErrorCode = 6
-	ErrorUserCanceled                       ErrorCode = 7
-	ErrorAnotherWorkoutSessionStarted       ErrorCode = 8
-	ErrorUserExitedWorkoutSession           ErrorCode = 9
-	ErrorRequiredAuthorizationDenied        ErrorCode = 10
-	ErrorNoData                             ErrorCode = 11
-	ErrorWorkoutActivityNotAllowed          ErrorCode = 12
-	ErrorDataSizeExceeded                   ErrorCode = 13
-	ErrorBackgroundWorkoutSessionNotAllowed ErrorCode = 14
-	ErrorNotPermissibleForGuestUserMode     ErrorCode = 15
-)
-
-// String returns the ErrorCode constant's name, or its numeric form when the
-// value is not a known constant.
-func (e ErrorCode) String() string {
-	switch e {
-	case UnknownError:
-		return "UnknownError"
-	case ErrorHealthDataUnavailable:
-		return "ErrorHealthDataUnavailable"
-	case ErrorHealthDataRestricted:
-		return "ErrorHealthDataRestricted"
-	case ErrorInvalidArgument:
-		return "ErrorInvalidArgument"
-	case ErrorAuthorizationDenied:
-		return "ErrorAuthorizationDenied"
-	case ErrorAuthorizationNotDetermined:
-		return "ErrorAuthorizationNotDetermined"
-	case ErrorDatabaseInaccessible:
-		return "ErrorDatabaseInaccessible"
-	case ErrorUserCanceled:
-		return "ErrorUserCanceled"
-	case ErrorAnotherWorkoutSessionStarted:
-		return "ErrorAnotherWorkoutSessionStarted"
-	case ErrorUserExitedWorkoutSession:
-		return "ErrorUserExitedWorkoutSession"
-	case ErrorRequiredAuthorizationDenied:
-		return "ErrorRequiredAuthorizationDenied"
-	case ErrorNoData:
-		return "ErrorNoData"
-	case ErrorWorkoutActivityNotAllowed:
-		return "ErrorWorkoutActivityNotAllowed"
-	case ErrorDataSizeExceeded:
-		return "ErrorDataSizeExceeded"
-	case ErrorBackgroundWorkoutSessionNotAllowed:
-		return "ErrorBackgroundWorkoutSessionNotAllowed"
-	case ErrorNotPermissibleForGuestUserMode:
-		return "ErrorNotPermissibleForGuestUserMode"
-	default:
-		return fmt.Sprintf("ErrorCode(%d)", int64(e))
-	}
-}
-
 // Categories representing the user’s skin type based on the Fitzpatrick scale.
 type FitzpatrickSkinType int64
 
@@ -1643,4 +1578,2170 @@ func (e WorkoutSwimmingLocationType) String() string {
 	default:
 		return fmt.Sprintf("WorkoutSwimmingLocationType(%d)", int64(e))
 	}
+}
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Type int64
+
+const (
+	TypeExtended Type = 256
+	TypeAccess   Type = 0
+	TypeDefault  Type = 1
+	TypeAfs      Type = 2
+	TypeCoda     Type = 3
+	TypeNtfs     Type = 4
+	TypeNwfs     Type = 5
+)
+
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Type) String() string {
+	switch e {
+	case TypeExtended:
+		return "TypeExtended"
+	case TypeAccess:
+		return "TypeAccess"
+	case TypeDefault:
+		return "TypeDefault"
+	case TypeAfs:
+		return "TypeAfs"
+	case TypeCoda:
+		return "TypeCoda"
+	case TypeNtfs:
+		return "TypeNtfs"
+	case TypeNwfs:
+		return "TypeNwfs"
+	default:
+		return fmt.Sprintf("Type(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+// Version numbers for the algorithm Apple Watch uses to generate an ECG reading.
+type AppleECGAlgorithmVersion int64
+
+const (
+	// The version 1 algorithm.
+	AppleECGAlgorithmVersion1 AppleECGAlgorithmVersion = 1
+	// The version 2 algorithm.
+	AppleECGAlgorithmVersion2 AppleECGAlgorithmVersion = 2
+)
+
+// String returns the AppleECGAlgorithmVersion constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AppleECGAlgorithmVersion) String() string {
+	switch e {
+	case AppleECGAlgorithmVersion1:
+		return "AppleECGAlgorithmVersion1"
+	case AppleECGAlgorithmVersion2:
+		return "AppleECGAlgorithmVersion2"
+	default:
+		return fmt.Sprintf("AppleECGAlgorithmVersion(%d)", int64(e))
+	}
+}
+
+// Values that indicate whether your app needs to request authorization from the user.
+type AuthorizationRequestStatus int64
+
+const (
+	// The authorization request status could not be determined because an error occurred.
+	AuthorizationRequestStatusUnknown AuthorizationRequestStatus = 0
+	// The application has not yet requested authorization for all the specified data types.
+	AuthorizationRequestStatusShouldRequest AuthorizationRequestStatus = 1
+	// The application has already requested authorization for all the specified data types.
+	AuthorizationRequestStatusUnnecessary AuthorizationRequestStatus = 2
+)
+
+// String returns the AuthorizationRequestStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationRequestStatus) String() string {
+	switch e {
+	case AuthorizationRequestStatusUnknown:
+		return "AuthorizationRequestStatusUnknown"
+	case AuthorizationRequestStatusShouldRequest:
+		return "AuthorizationRequestStatusShouldRequest"
+	case AuthorizationRequestStatusUnnecessary:
+		return "AuthorizationRequestStatusUnnecessary"
+	default:
+		return fmt.Sprintf("AuthorizationRequestStatus(%d)", int64(e))
+	}
+}
+
+// Constants indicating the timing of a blood glucose sample relative to a meal.
+type BloodGlucoseMealTime int64
+
+const (
+	// A blood glucose sample taken just before eating a meal.
+	BloodGlucoseMealTimePreprandial BloodGlucoseMealTime = 1
+	// A blood glucose sample taken just after eating a meal.
+	BloodGlucoseMealTimePostprandial BloodGlucoseMealTime = 2
+)
+
+// String returns the BloodGlucoseMealTime constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BloodGlucoseMealTime) String() string {
+	switch e {
+	case BloodGlucoseMealTimePreprandial:
+		return "BloodGlucoseMealTimePreprandial"
+	case BloodGlucoseMealTimePostprandial:
+		return "BloodGlucoseMealTimePostprandial"
+	default:
+		return fmt.Sprintf("BloodGlucoseMealTime(%d)", int64(e))
+	}
+}
+
+// Constants that indicate where on the body a temperature reading was taken.
+type BodyTemperatureSensorLocation int64
+
+const (
+	// The temperature was taken at a location that is not otherwise in this list.
+	BodyTemperatureSensorLocationOther BodyTemperatureSensorLocation = 0
+	// The temperature was taken in the armpit.
+	BodyTemperatureSensorLocationArmpit BodyTemperatureSensorLocation = 1
+	// The temperature was taken on the body.
+	BodyTemperatureSensorLocationBody BodyTemperatureSensorLocation = 2
+	// The temperature was taken in the ear.
+	BodyTemperatureSensorLocationEar BodyTemperatureSensorLocation = 3
+	// The temperature was taken at the finger.
+	BodyTemperatureSensorLocationFinger BodyTemperatureSensorLocation = 4
+	// The temperature was taken inside the gastrointestinal tract.
+	BodyTemperatureSensorLocationGastroIntestinal BodyTemperatureSensorLocation = 5
+	// The temperature was taken in the mouth.
+	BodyTemperatureSensorLocationMouth BodyTemperatureSensorLocation = 6
+	// The temperature was taken in the rectum.
+	BodyTemperatureSensorLocationRectum BodyTemperatureSensorLocation = 7
+	// The temperature was taken at the toe.
+	BodyTemperatureSensorLocationToe BodyTemperatureSensorLocation = 8
+	// The temperature was taken on the eardrum.
+	BodyTemperatureSensorLocationEarDrum BodyTemperatureSensorLocation = 9
+	// The temperature was taken at the temporal artery.
+	BodyTemperatureSensorLocationTemporalArtery BodyTemperatureSensorLocation = 10
+	// The temperature was taken on the forehead.
+	BodyTemperatureSensorLocationForehead BodyTemperatureSensorLocation = 11
+)
+
+// String returns the BodyTemperatureSensorLocation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BodyTemperatureSensorLocation) String() string {
+	switch e {
+	case BodyTemperatureSensorLocationOther:
+		return "BodyTemperatureSensorLocationOther"
+	case BodyTemperatureSensorLocationArmpit:
+		return "BodyTemperatureSensorLocationArmpit"
+	case BodyTemperatureSensorLocationBody:
+		return "BodyTemperatureSensorLocationBody"
+	case BodyTemperatureSensorLocationEar:
+		return "BodyTemperatureSensorLocationEar"
+	case BodyTemperatureSensorLocationFinger:
+		return "BodyTemperatureSensorLocationFinger"
+	case BodyTemperatureSensorLocationGastroIntestinal:
+		return "BodyTemperatureSensorLocationGastroIntestinal"
+	case BodyTemperatureSensorLocationMouth:
+		return "BodyTemperatureSensorLocationMouth"
+	case BodyTemperatureSensorLocationRectum:
+		return "BodyTemperatureSensorLocationRectum"
+	case BodyTemperatureSensorLocationToe:
+		return "BodyTemperatureSensorLocationToe"
+	case BodyTemperatureSensorLocationEarDrum:
+		return "BodyTemperatureSensorLocationEarDrum"
+	case BodyTemperatureSensorLocationTemporalArtery:
+		return "BodyTemperatureSensorLocationTemporalArtery"
+	case BodyTemperatureSensorLocationForehead:
+		return "BodyTemperatureSensorLocationForehead"
+	default:
+		return fmt.Sprintf("BodyTemperatureSensorLocation(%d)", int64(e))
+	}
+}
+
+// Categories that are undefined.
+type CategoryValue int64
+
+const (
+	// A category value for types that don’t have a defined value.
+	CategoryValueNotApplicable CategoryValue = 0
+)
+
+// String returns the CategoryValue constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValue) String() string {
+	switch e {
+	case CategoryValueNotApplicable:
+		return "CategoryValueNotApplicable"
+	default:
+		return fmt.Sprintf("CategoryValue(%d)", int64(e))
+	}
+}
+
+// Categories that represent change in appetite.
+type CategoryValueAppetiteChanges int64
+
+const (
+	// An unspecified change in appetite.
+	CategoryValueAppetiteChangesUnspecified CategoryValueAppetiteChanges = 0
+	// No change in the user’s appetite.
+	CategoryValueAppetiteChangesNoChange CategoryValueAppetiteChanges = 1
+	// The user’s appetite decreased.
+	CategoryValueAppetiteChangesDecreased CategoryValueAppetiteChanges = 2
+	// The user’s appetite increased.
+	CategoryValueAppetiteChangesIncreased CategoryValueAppetiteChanges = 3
+)
+
+// String returns the CategoryValueAppetiteChanges constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueAppetiteChanges) String() string {
+	switch e {
+	case CategoryValueAppetiteChangesUnspecified:
+		return "CategoryValueAppetiteChangesUnspecified"
+	case CategoryValueAppetiteChangesNoChange:
+		return "CategoryValueAppetiteChangesNoChange"
+	case CategoryValueAppetiteChangesDecreased:
+		return "CategoryValueAppetiteChangesDecreased"
+	case CategoryValueAppetiteChangesIncreased:
+		return "CategoryValueAppetiteChangesIncreased"
+	default:
+		return fmt.Sprintf("CategoryValueAppetiteChanges(%d)", int64(e))
+	}
+}
+
+// Categories that the system used to indicate whether the user stood during the sample’s duration.
+type CategoryValueAppleStandHour int64
+
+const (
+	// The user stood up and moved for at least one continuous minute during the sample.
+	CategoryValueAppleStandHourStood CategoryValueAppleStandHour = 0
+	// The user didn’t stand up and move for at least one continuous minute during the sample.
+	CategoryValueAppleStandHourIdle CategoryValueAppleStandHour = 1
+)
+
+// String returns the CategoryValueAppleStandHour constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueAppleStandHour) String() string {
+	switch e {
+	case CategoryValueAppleStandHourStood:
+		return "CategoryValueAppleStandHourStood"
+	case CategoryValueAppleStandHourIdle:
+		return "CategoryValueAppleStandHourIdle"
+	default:
+		return fmt.Sprintf("CategoryValueAppleStandHour(%d)", int64(e))
+	}
+}
+
+// The value of an event triggered by a reduced score for the steadiness of the user’s gait.
+type CategoryValueAppleWalkingSteadinessEvent int64
+
+const (
+	// The user received a below-normal steadiness score for their gait while walking.
+	CategoryValueAppleWalkingSteadinessEventInitialLow CategoryValueAppleWalkingSteadinessEvent = 1
+	// The user received a steadiness score for their gait while walking that was considerably below normal.
+	CategoryValueAppleWalkingSteadinessEventInitialVeryLow CategoryValueAppleWalkingSteadinessEvent = 2
+	// The user’s below-normal score persists over a significant period of time.
+	CategoryValueAppleWalkingSteadinessEventRepeatLow CategoryValueAppleWalkingSteadinessEvent = 3
+	// The user’s considerably below-normal score persists over a significant period of time.
+	CategoryValueAppleWalkingSteadinessEventRepeatVeryLow CategoryValueAppleWalkingSteadinessEvent = 4
+)
+
+// String returns the CategoryValueAppleWalkingSteadinessEvent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueAppleWalkingSteadinessEvent) String() string {
+	switch e {
+	case CategoryValueAppleWalkingSteadinessEventInitialLow:
+		return "CategoryValueAppleWalkingSteadinessEventInitialLow"
+	case CategoryValueAppleWalkingSteadinessEventInitialVeryLow:
+		return "CategoryValueAppleWalkingSteadinessEventInitialVeryLow"
+	case CategoryValueAppleWalkingSteadinessEventRepeatLow:
+		return "CategoryValueAppleWalkingSteadinessEventRepeatLow"
+	case CategoryValueAppleWalkingSteadinessEventRepeatVeryLow:
+		return "CategoryValueAppleWalkingSteadinessEventRepeatVeryLow"
+	default:
+		return fmt.Sprintf("CategoryValueAppleWalkingSteadinessEvent(%d)", int64(e))
+	}
+}
+
+// Categories that indicate audio exposure events.
+type CategoryValueAudioExposureEvent int64
+
+const (
+	// Exposure to a loud environment.
+	CategoryValueAudioExposureEventLoudEnvironment CategoryValueAudioExposureEvent = 1
+)
+
+// String returns the CategoryValueAudioExposureEvent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueAudioExposureEvent) String() string {
+	switch e {
+	case CategoryValueAudioExposureEventLoudEnvironment:
+		return "CategoryValueAudioExposureEventLoudEnvironment"
+	default:
+		return fmt.Sprintf("CategoryValueAudioExposureEvent(%d)", int64(e))
+	}
+}
+
+// Categories that represent the user’s cervical mucus quality.
+type CategoryValueCervicalMucusQuality int64
+
+const (
+	// Little or no mucus.
+	CategoryValueCervicalMucusQualityDry CategoryValueCervicalMucusQuality = 1
+	// Sticky mucus.
+	CategoryValueCervicalMucusQualitySticky CategoryValueCervicalMucusQuality = 2
+	// Creamy mucus.
+	CategoryValueCervicalMucusQualityCreamy CategoryValueCervicalMucusQuality = 3
+	// Watery mucus.
+	CategoryValueCervicalMucusQualityWatery CategoryValueCervicalMucusQuality = 4
+	// Mucus the color and consistency of egg whites.
+	CategoryValueCervicalMucusQualityEggWhite CategoryValueCervicalMucusQuality = 5
+)
+
+// String returns the CategoryValueCervicalMucusQuality constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueCervicalMucusQuality) String() string {
+	switch e {
+	case CategoryValueCervicalMucusQualityDry:
+		return "CategoryValueCervicalMucusQualityDry"
+	case CategoryValueCervicalMucusQualitySticky:
+		return "CategoryValueCervicalMucusQualitySticky"
+	case CategoryValueCervicalMucusQualityCreamy:
+		return "CategoryValueCervicalMucusQualityCreamy"
+	case CategoryValueCervicalMucusQualityWatery:
+		return "CategoryValueCervicalMucusQualityWatery"
+	case CategoryValueCervicalMucusQualityEggWhite:
+		return "CategoryValueCervicalMucusQualityEggWhite"
+	default:
+		return fmt.Sprintf("CategoryValueCervicalMucusQuality(%d)", int64(e))
+	}
+}
+
+// The type of contraceptive.
+type CategoryValueContraceptive int64
+
+const (
+	// An unspecified type of contraceptive.
+	CategoryValueContraceptiveUnspecified CategoryValueContraceptive = 1
+	// A contraceptive implant.
+	CategoryValueContraceptiveImplant CategoryValueContraceptive = 2
+	// An injectable contraceptive.
+	CategoryValueContraceptiveInjection CategoryValueContraceptive = 3
+	// An intrauterine device (IUD).
+	CategoryValueContraceptiveIntrauterineDevice CategoryValueContraceptive = 4
+	// A contraceptive intravaginal ring.
+	CategoryValueContraceptiveIntravaginalRing CategoryValueContraceptive = 5
+	// An oral contraceptive.
+	CategoryValueContraceptiveOral CategoryValueContraceptive = 6
+	// A contraceptive patch.
+	CategoryValueContraceptivePatch CategoryValueContraceptive = 7
+)
+
+// String returns the CategoryValueContraceptive constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueContraceptive) String() string {
+	switch e {
+	case CategoryValueContraceptiveUnspecified:
+		return "CategoryValueContraceptiveUnspecified"
+	case CategoryValueContraceptiveImplant:
+		return "CategoryValueContraceptiveImplant"
+	case CategoryValueContraceptiveInjection:
+		return "CategoryValueContraceptiveInjection"
+	case CategoryValueContraceptiveIntrauterineDevice:
+		return "CategoryValueContraceptiveIntrauterineDevice"
+	case CategoryValueContraceptiveIntravaginalRing:
+		return "CategoryValueContraceptiveIntravaginalRing"
+	case CategoryValueContraceptiveOral:
+		return "CategoryValueContraceptiveOral"
+	case CategoryValueContraceptivePatch:
+		return "CategoryValueContraceptivePatch"
+	default:
+		return fmt.Sprintf("CategoryValueContraceptive(%d)", int64(e))
+	}
+}
+
+// Exposure events for environmental audio.
+type CategoryValueEnvironmentalAudioExposureEvent int64
+
+const (
+	// A brief exposure to a loud environment.
+	CategoryValueEnvironmentalAudioExposureEventMomentaryLimit CategoryValueEnvironmentalAudioExposureEvent = 1
+)
+
+// String returns the CategoryValueEnvironmentalAudioExposureEvent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueEnvironmentalAudioExposureEvent) String() string {
+	switch e {
+	case CategoryValueEnvironmentalAudioExposureEventMomentaryLimit:
+		return "CategoryValueEnvironmentalAudioExposureEventMomentaryLimit"
+	default:
+		return fmt.Sprintf("CategoryValueEnvironmentalAudioExposureEvent(%d)", int64(e))
+	}
+}
+
+// Exposure events for headphone audio.
+type CategoryValueHeadphoneAudioExposureEvent int64
+
+const (
+	// Exposure to significant audio levels from headphones over a seven-day period.
+	CategoryValueHeadphoneAudioExposureEventSevenDayLimit CategoryValueHeadphoneAudioExposureEvent = 1
+)
+
+// String returns the CategoryValueHeadphoneAudioExposureEvent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueHeadphoneAudioExposureEvent) String() string {
+	switch e {
+	case CategoryValueHeadphoneAudioExposureEventSevenDayLimit:
+		return "CategoryValueHeadphoneAudioExposureEventSevenDayLimit"
+	default:
+		return fmt.Sprintf("CategoryValueHeadphoneAudioExposureEvent(%d)", int64(e))
+	}
+}
+
+// A value that indicates a low-level cardio fitness event.
+type CategoryValueLowCardioFitnessEvent int64
+
+const (
+	// An event that indicates a low level of cardio fitness, based on the VO2 max readings from the user’s Apple Watch.
+	CategoryValueLowCardioFitnessEventLowFitness CategoryValueLowCardioFitnessEvent = 1
+)
+
+// String returns the CategoryValueLowCardioFitnessEvent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueLowCardioFitnessEvent) String() string {
+	switch e {
+	case CategoryValueLowCardioFitnessEventLowFitness:
+		return "CategoryValueLowCardioFitnessEventLowFitness"
+	default:
+		return fmt.Sprintf("CategoryValueLowCardioFitnessEvent(%d)", int64(e))
+	}
+}
+
+// Categories that indicate the amount of menstrual flow for a given sample.
+//
+// Deprecated: since macOS 15.0.
+type CategoryValueMenstrualFlow int64
+
+const (
+	// An unspecified amount of menstrual flow.
+	CategoryValueMenstrualFlowUnspecified CategoryValueMenstrualFlow = 1
+	// Light menstrual flow.
+	CategoryValueMenstrualFlowLight CategoryValueMenstrualFlow = 2
+	// Medium menstrual flow.
+	CategoryValueMenstrualFlowMedium CategoryValueMenstrualFlow = 3
+	// Heavy menstrual flow.
+	CategoryValueMenstrualFlowHeavy CategoryValueMenstrualFlow = 4
+	// No menstrual flow.
+	//
+	// Deprecated: since macOS 15.0.
+	CategoryValueMenstrualFlowNone CategoryValueMenstrualFlow = 5
+)
+
+// String returns the CategoryValueMenstrualFlow constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueMenstrualFlow) String() string {
+	switch e {
+	case CategoryValueMenstrualFlowUnspecified:
+		return "CategoryValueMenstrualFlowUnspecified"
+	case CategoryValueMenstrualFlowLight:
+		return "CategoryValueMenstrualFlowLight"
+	case CategoryValueMenstrualFlowMedium:
+		return "CategoryValueMenstrualFlowMedium"
+	case CategoryValueMenstrualFlowHeavy:
+		return "CategoryValueMenstrualFlowHeavy"
+	case CategoryValueMenstrualFlowNone:
+		return "CategoryValueMenstrualFlowNone"
+	default:
+		return fmt.Sprintf("CategoryValueMenstrualFlow(%d)", int64(e))
+	}
+}
+
+// Categories that represent the result of an ovulation home test.
+type CategoryValueOvulationTestResult int64
+
+const (
+	// The ovulation test is negative.
+	CategoryValueOvulationTestResultNegative CategoryValueOvulationTestResult = 1
+	// The ovulation test detected a surge in the luteinizing hormone. This value often refers to a Positive or Peak result.
+	CategoryValueOvulationTestResultLuteinizingHormoneSurge CategoryValueOvulationTestResult = 2
+	// The ovulation test is positive.
+	CategoryValueOvulationTestResultPositive CategoryValueOvulationTestResult = 2
+	// The ovulation test is inconclusive.
+	CategoryValueOvulationTestResultIndeterminate CategoryValueOvulationTestResult = 3
+	// The ovulation test detected a surge in estrogen. This value often refers to a High result.
+	CategoryValueOvulationTestResultEstrogenSurge CategoryValueOvulationTestResult = 4
+)
+
+// String returns the CategoryValueOvulationTestResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueOvulationTestResult) String() string {
+	switch e {
+	case CategoryValueOvulationTestResultNegative:
+		return "CategoryValueOvulationTestResultNegative"
+	case CategoryValueOvulationTestResultLuteinizingHormoneSurge:
+		return "CategoryValueOvulationTestResultLuteinizingHormoneSurge"
+	case CategoryValueOvulationTestResultIndeterminate:
+		return "CategoryValueOvulationTestResultIndeterminate"
+	case CategoryValueOvulationTestResultEstrogenSurge:
+		return "CategoryValueOvulationTestResultEstrogenSurge"
+	default:
+		return fmt.Sprintf("CategoryValueOvulationTestResult(%d)", int64(e))
+	}
+}
+
+// Category values that indicate the results of a home pregnancy test.
+type CategoryValuePregnancyTestResult int64
+
+const (
+	// The test returned a negative result.
+	CategoryValuePregnancyTestResultNegative CategoryValuePregnancyTestResult = 1
+	// The test returned a positive result.
+	CategoryValuePregnancyTestResultPositive CategoryValuePregnancyTestResult = 2
+	// The test was inconclusive.
+	CategoryValuePregnancyTestResultIndeterminate CategoryValuePregnancyTestResult = 3
+)
+
+// String returns the CategoryValuePregnancyTestResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValuePregnancyTestResult) String() string {
+	switch e {
+	case CategoryValuePregnancyTestResultNegative:
+		return "CategoryValuePregnancyTestResultNegative"
+	case CategoryValuePregnancyTestResultPositive:
+		return "CategoryValuePregnancyTestResultPositive"
+	case CategoryValuePregnancyTestResultIndeterminate:
+		return "CategoryValuePregnancyTestResultIndeterminate"
+	default:
+		return fmt.Sprintf("CategoryValuePregnancyTestResult(%d)", int64(e))
+	}
+}
+
+// Categories that indicate whether a symptom is present.
+type CategoryValuePresence int64
+
+const (
+	// The symptom is present.
+	CategoryValuePresencePresent CategoryValuePresence = 0
+	// The symptom isn’t present.
+	CategoryValuePresenceNotPresent CategoryValuePresence = 1
+)
+
+// String returns the CategoryValuePresence constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValuePresence) String() string {
+	switch e {
+	case CategoryValuePresencePresent:
+		return "CategoryValuePresencePresent"
+	case CategoryValuePresenceNotPresent:
+		return "CategoryValuePresenceNotPresent"
+	default:
+		return fmt.Sprintf("CategoryValuePresence(%d)", int64(e))
+	}
+}
+
+// A category value that indicates the result from a home progesterone test.
+type CategoryValueProgesteroneTestResult int64
+
+const (
+	// The test returned a negative result.
+	CategoryValueProgesteroneTestResultNegative CategoryValueProgesteroneTestResult = 1
+	// The test returned a positive result.
+	CategoryValueProgesteroneTestResultPositive CategoryValueProgesteroneTestResult = 2
+	// The test was inconclusive.
+	CategoryValueProgesteroneTestResultIndeterminate CategoryValueProgesteroneTestResult = 3
+)
+
+// String returns the CategoryValueProgesteroneTestResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueProgesteroneTestResult) String() string {
+	switch e {
+	case CategoryValueProgesteroneTestResultNegative:
+		return "CategoryValueProgesteroneTestResultNegative"
+	case CategoryValueProgesteroneTestResultPositive:
+		return "CategoryValueProgesteroneTestResultPositive"
+	case CategoryValueProgesteroneTestResultIndeterminate:
+		return "CategoryValueProgesteroneTestResultIndeterminate"
+	default:
+		return fmt.Sprintf("CategoryValueProgesteroneTestResult(%d)", int64(e))
+	}
+}
+
+// Categories that represent the severity of a symptom.
+type CategoryValueSeverity int64
+
+const (
+	// The symptom’s severity is not specified.
+	CategoryValueSeverityUnspecified CategoryValueSeverity = 0
+	// The symptom is not present.
+	CategoryValueSeverityNotPresent CategoryValueSeverity = 1
+	// The symptom is mild.
+	CategoryValueSeverityMild CategoryValueSeverity = 2
+	// The symptom is moderate.
+	CategoryValueSeverityModerate CategoryValueSeverity = 3
+	// The symptom is severe.
+	CategoryValueSeveritySevere CategoryValueSeverity = 4
+)
+
+// String returns the CategoryValueSeverity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueSeverity) String() string {
+	switch e {
+	case CategoryValueSeverityUnspecified:
+		return "CategoryValueSeverityUnspecified"
+	case CategoryValueSeverityNotPresent:
+		return "CategoryValueSeverityNotPresent"
+	case CategoryValueSeverityMild:
+		return "CategoryValueSeverityMild"
+	case CategoryValueSeverityModerate:
+		return "CategoryValueSeverityModerate"
+	case CategoryValueSeveritySevere:
+		return "CategoryValueSeveritySevere"
+	default:
+		return fmt.Sprintf("CategoryValueSeverity(%d)", int64(e))
+	}
+}
+
+// Categories that represent the result of a sleep analysis.
+type CategoryValueSleepAnalysis int64
+
+const (
+	// The user is in bed.
+	CategoryValueSleepAnalysisInBed CategoryValueSleepAnalysis = 0
+	// The user is asleep, but the specific stage isn’t known.
+	CategoryValueSleepAnalysisAsleepUnspecified CategoryValueSleepAnalysis = 1
+	// The user is sleeping.
+	//
+	// Deprecated: since macOS 13.0.
+	CategoryValueSleepAnalysisAsleep CategoryValueSleepAnalysis = 1
+	// The user is awake.
+	CategoryValueSleepAnalysisAwake CategoryValueSleepAnalysis = 2
+	// The user is in light or intermediate sleep.
+	CategoryValueSleepAnalysisAsleepCore CategoryValueSleepAnalysis = 3
+	// The user is in deep sleep.
+	CategoryValueSleepAnalysisAsleepDeep CategoryValueSleepAnalysis = 4
+	// The user is in REM sleep.
+	CategoryValueSleepAnalysisAsleepREM CategoryValueSleepAnalysis = 5
+)
+
+// String returns the CategoryValueSleepAnalysis constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueSleepAnalysis) String() string {
+	switch e {
+	case CategoryValueSleepAnalysisInBed:
+		return "CategoryValueSleepAnalysisInBed"
+	case CategoryValueSleepAnalysisAsleepUnspecified:
+		return "CategoryValueSleepAnalysisAsleepUnspecified"
+	case CategoryValueSleepAnalysisAwake:
+		return "CategoryValueSleepAnalysisAwake"
+	case CategoryValueSleepAnalysisAsleepCore:
+		return "CategoryValueSleepAnalysisAsleepCore"
+	case CategoryValueSleepAnalysisAsleepDeep:
+		return "CategoryValueSleepAnalysisAsleepDeep"
+	case CategoryValueSleepAnalysisAsleepREM:
+		return "CategoryValueSleepAnalysisAsleepREM"
+	default:
+		return fmt.Sprintf("CategoryValueSleepAnalysis(%d)", int64(e))
+	}
+}
+
+// A value that indicates the intensity of vaginal bleeding.
+type CategoryValueVaginalBleeding int64
+
+const (
+	// A value that indicates an unspecified amount of vaginal bleeding.
+	CategoryValueVaginalBleedingUnspecified CategoryValueVaginalBleeding = 1
+	// A value that indicates light vaginal bleeding.
+	CategoryValueVaginalBleedingLight CategoryValueVaginalBleeding = 2
+	// A value that indicates a medium amount of vaginal bleeding.
+	CategoryValueVaginalBleedingMedium CategoryValueVaginalBleeding = 3
+	// A value that indicates a heavy amount of vaginal bleeding.
+	CategoryValueVaginalBleedingHeavy CategoryValueVaginalBleeding = 4
+	// A value that indicates no vaginal bleeding.
+	CategoryValueVaginalBleedingNone CategoryValueVaginalBleeding = 5
+)
+
+// String returns the CategoryValueVaginalBleeding constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CategoryValueVaginalBleeding) String() string {
+	switch e {
+	case CategoryValueVaginalBleedingUnspecified:
+		return "CategoryValueVaginalBleedingUnspecified"
+	case CategoryValueVaginalBleedingLight:
+		return "CategoryValueVaginalBleedingLight"
+	case CategoryValueVaginalBleedingMedium:
+		return "CategoryValueVaginalBleedingMedium"
+	case CategoryValueVaginalBleedingHeavy:
+		return "CategoryValueVaginalBleedingHeavy"
+	case CategoryValueVaginalBleedingNone:
+		return "CategoryValueVaginalBleedingNone"
+	default:
+		return fmt.Sprintf("CategoryValueVaginalBleeding(%d)", int64(e))
+	}
+}
+
+type CyclingFunctionalThresholdPowerTestType int64
+
+const (
+	CyclingFunctionalThresholdPowerTestTypeMaxExercise60Minute CyclingFunctionalThresholdPowerTestType = 1
+	CyclingFunctionalThresholdPowerTestTypeMaxExercise20Minute CyclingFunctionalThresholdPowerTestType = 2
+	CyclingFunctionalThresholdPowerTestTypeRampTest            CyclingFunctionalThresholdPowerTestType = 3
+	CyclingFunctionalThresholdPowerTestTypePredictionExercise  CyclingFunctionalThresholdPowerTestType = 4
+)
+
+// String returns the CyclingFunctionalThresholdPowerTestType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CyclingFunctionalThresholdPowerTestType) String() string {
+	switch e {
+	case CyclingFunctionalThresholdPowerTestTypeMaxExercise60Minute:
+		return "CyclingFunctionalThresholdPowerTestTypeMaxExercise60Minute"
+	case CyclingFunctionalThresholdPowerTestTypeMaxExercise20Minute:
+		return "CyclingFunctionalThresholdPowerTestTypeMaxExercise20Minute"
+	case CyclingFunctionalThresholdPowerTestTypeRampTest:
+		return "CyclingFunctionalThresholdPowerTestTypeRampTest"
+	case CyclingFunctionalThresholdPowerTestTypePredictionExercise:
+		return "CyclingFunctionalThresholdPowerTestTypePredictionExercise"
+	default:
+		return fmt.Sprintf("CyclingFunctionalThresholdPowerTestType(%d)", int64(e))
+	}
+}
+
+// Values that indicate the placement of the device that measured a sample.
+type DevicePlacementSide int64
+
+const (
+	// The system couldn’t determine the device’s placement.
+	DevicePlacementSideUnknown DevicePlacementSide = 0
+	// A device predominately located on the left side.
+	DevicePlacementSideLeft DevicePlacementSide = 1
+	// A device predominately located on the right side.
+	DevicePlacementSideRight DevicePlacementSide = 2
+	// A device predominately located near the center of the body.
+	DevicePlacementSideCentral DevicePlacementSide = 3
+)
+
+// String returns the DevicePlacementSide constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DevicePlacementSide) String() string {
+	switch e {
+	case DevicePlacementSideUnknown:
+		return "DevicePlacementSideUnknown"
+	case DevicePlacementSideLeft:
+		return "DevicePlacementSideLeft"
+	case DevicePlacementSideRight:
+		return "DevicePlacementSideRight"
+	case DevicePlacementSideCentral:
+		return "DevicePlacementSideCentral"
+	default:
+		return fmt.Sprintf("DevicePlacementSide(%d)", int64(e))
+	}
+}
+
+// Error codes returned by HealthKit.
+type ErrorCode int64
+
+const (
+	UnknownError ErrorCode = 0
+	// No error occurred.
+	NoError                                 ErrorCode = 0
+	ErrorHealthDataUnavailable              ErrorCode = 1
+	ErrorHealthDataRestricted               ErrorCode = 2
+	ErrorInvalidArgument                    ErrorCode = 3
+	ErrorAuthorizationDenied                ErrorCode = 4
+	ErrorAuthorizationNotDetermined         ErrorCode = 5
+	ErrorDatabaseInaccessible               ErrorCode = 6
+	ErrorUserCanceled                       ErrorCode = 7
+	ErrorAnotherWorkoutSessionStarted       ErrorCode = 8
+	ErrorUserExitedWorkoutSession           ErrorCode = 9
+	ErrorRequiredAuthorizationDenied        ErrorCode = 10
+	ErrorNoData                             ErrorCode = 11
+	ErrorWorkoutActivityNotAllowed          ErrorCode = 12
+	ErrorDataSizeExceeded                   ErrorCode = 13
+	ErrorBackgroundWorkoutSessionNotAllowed ErrorCode = 14
+	ErrorNotPermissibleForGuestUserMode     ErrorCode = 15
+)
+
+// String returns the ErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ErrorCode) String() string {
+	switch e {
+	case UnknownError:
+		return "UnknownError"
+	case ErrorHealthDataUnavailable:
+		return "ErrorHealthDataUnavailable"
+	case ErrorHealthDataRestricted:
+		return "ErrorHealthDataRestricted"
+	case ErrorInvalidArgument:
+		return "ErrorInvalidArgument"
+	case ErrorAuthorizationDenied:
+		return "ErrorAuthorizationDenied"
+	case ErrorAuthorizationNotDetermined:
+		return "ErrorAuthorizationNotDetermined"
+	case ErrorDatabaseInaccessible:
+		return "ErrorDatabaseInaccessible"
+	case ErrorUserCanceled:
+		return "ErrorUserCanceled"
+	case ErrorAnotherWorkoutSessionStarted:
+		return "ErrorAnotherWorkoutSessionStarted"
+	case ErrorUserExitedWorkoutSession:
+		return "ErrorUserExitedWorkoutSession"
+	case ErrorRequiredAuthorizationDenied:
+		return "ErrorRequiredAuthorizationDenied"
+	case ErrorNoData:
+		return "ErrorNoData"
+	case ErrorWorkoutActivityNotAllowed:
+		return "ErrorWorkoutActivityNotAllowed"
+	case ErrorDataSizeExceeded:
+		return "ErrorDataSizeExceeded"
+	case ErrorBackgroundWorkoutSessionNotAllowed:
+		return "ErrorBackgroundWorkoutSessionNotAllowed"
+	case ErrorNotPermissibleForGuestUserMode:
+		return "ErrorNotPermissibleForGuestUserMode"
+	default:
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
+	}
+}
+
+type GAD7AssessmentAnswer int64
+
+const (
+	GAD7AssessmentAnswerNotAtAll            GAD7AssessmentAnswer = 0
+	GAD7AssessmentAnswerSeveralDays         GAD7AssessmentAnswer = 1
+	GAD7AssessmentAnswerMoreThanHalfTheDays GAD7AssessmentAnswer = 2
+	GAD7AssessmentAnswerNearlyEveryDay      GAD7AssessmentAnswer = 3
+)
+
+// String returns the GAD7AssessmentAnswer constant's name, or its numeric form when the
+// value is not a known constant.
+func (e GAD7AssessmentAnswer) String() string {
+	switch e {
+	case GAD7AssessmentAnswerNotAtAll:
+		return "GAD7AssessmentAnswerNotAtAll"
+	case GAD7AssessmentAnswerSeveralDays:
+		return "GAD7AssessmentAnswerSeveralDays"
+	case GAD7AssessmentAnswerMoreThanHalfTheDays:
+		return "GAD7AssessmentAnswerMoreThanHalfTheDays"
+	case GAD7AssessmentAnswerNearlyEveryDay:
+		return "GAD7AssessmentAnswerNearlyEveryDay"
+	default:
+		return fmt.Sprintf("GAD7AssessmentAnswer(%d)", int64(e))
+	}
+}
+
+// Values that indicate the user’s level of activity when the heart rate sample was measured.
+type HeartRateMotionContext int64
+
+const (
+	// A value indicating that the user’s activity level could not be determined.
+	HeartRateMotionContextNotSet HeartRateMotionContext = 0
+	// A value indicating that the user has been still for at least 5 minutes prior to the heart rate sample.
+	HeartRateMotionContextSedentary HeartRateMotionContext = 1
+	// A value indicating that the user was in motion during the heart rate sample.
+	HeartRateMotionContextActive HeartRateMotionContext = 2
+)
+
+// String returns the HeartRateMotionContext constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HeartRateMotionContext) String() string {
+	switch e {
+	case HeartRateMotionContextNotSet:
+		return "HeartRateMotionContextNotSet"
+	case HeartRateMotionContextSedentary:
+		return "HeartRateMotionContextSedentary"
+	case HeartRateMotionContextActive:
+		return "HeartRateMotionContextActive"
+	default:
+		return fmt.Sprintf("HeartRateMotionContext(%d)", int64(e))
+	}
+}
+
+// The test that measured a person’s heart-rate recovery.
+type HeartRateRecoveryTestType int64
+
+const (
+	// Measures a person’s actual heart-rate recovery.
+	HeartRateRecoveryTestTypeMaxExercise HeartRateRecoveryTestType = 1
+	// A test that estimates a person’s heart-rate recovery using lower-intensity exercise.
+	HeartRateRecoveryTestTypePredictionSubMaxExercise HeartRateRecoveryTestType = 2
+	// A test that estimates a person’s heart-rate recovery without using exercise.
+	HeartRateRecoveryTestTypePredictionNonExercise HeartRateRecoveryTestType = 3
+)
+
+// String returns the HeartRateRecoveryTestType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HeartRateRecoveryTestType) String() string {
+	switch e {
+	case HeartRateRecoveryTestTypeMaxExercise:
+		return "HeartRateRecoveryTestTypeMaxExercise"
+	case HeartRateRecoveryTestTypePredictionSubMaxExercise:
+		return "HeartRateRecoveryTestTypePredictionSubMaxExercise"
+	case HeartRateRecoveryTestTypePredictionNonExercise:
+		return "HeartRateRecoveryTestTypePredictionNonExercise"
+	default:
+		return fmt.Sprintf("HeartRateRecoveryTestType(%d)", int64(e))
+	}
+}
+
+// Constants that indicate where on the body the heart rate sensor is located.
+type HeartRateSensorLocation int64
+
+const (
+	// The heart rate sensor’s location is not otherwise on this list.
+	HeartRateSensorLocationOther HeartRateSensorLocation = 0
+	// The heart rate sensor is located on the user’s chest.
+	HeartRateSensorLocationChest HeartRateSensorLocation = 1
+	// The heart rate sensor is located on the user’s wrist.
+	HeartRateSensorLocationWrist HeartRateSensorLocation = 2
+	// The heart rate sensor is located on the user’s finger.
+	HeartRateSensorLocationFinger HeartRateSensorLocation = 3
+	// The heart rate sensor is located on the user’s hand.
+	HeartRateSensorLocationHand HeartRateSensorLocation = 4
+	// The heart rate sensor is located on the user’s earlobe.
+	HeartRateSensorLocationEarLobe HeartRateSensorLocation = 5
+	// The heart rate sensor is located on the user’s foot.
+	HeartRateSensorLocationFoot HeartRateSensorLocation = 6
+)
+
+// String returns the HeartRateSensorLocation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HeartRateSensorLocation) String() string {
+	switch e {
+	case HeartRateSensorLocationOther:
+		return "HeartRateSensorLocationOther"
+	case HeartRateSensorLocationChest:
+		return "HeartRateSensorLocationChest"
+	case HeartRateSensorLocationWrist:
+		return "HeartRateSensorLocationWrist"
+	case HeartRateSensorLocationFinger:
+		return "HeartRateSensorLocationFinger"
+	case HeartRateSensorLocationHand:
+		return "HeartRateSensorLocationHand"
+	case HeartRateSensorLocationEarLobe:
+		return "HeartRateSensorLocationEarLobe"
+	case HeartRateSensorLocationFoot:
+		return "HeartRateSensorLocationFoot"
+	default:
+		return fmt.Sprintf("HeartRateSensorLocation(%d)", int64(e))
+	}
+}
+
+// Possible reasons for administering insulin.
+type InsulinDeliveryReason int64
+
+const (
+	// Insulin administered to meet the user’s basic metabolic needs.
+	InsulinDeliveryReasonBasal InsulinDeliveryReason = 1
+	// Insulin administered to meet the user’s episodic requirements.
+	InsulinDeliveryReasonBolus InsulinDeliveryReason = 2
+)
+
+// String returns the InsulinDeliveryReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e InsulinDeliveryReason) String() string {
+	switch e {
+	case InsulinDeliveryReasonBasal:
+		return "InsulinDeliveryReasonBasal"
+	case InsulinDeliveryReasonBolus:
+		return "InsulinDeliveryReasonBolus"
+	default:
+		return fmt.Sprintf("InsulinDeliveryReason(%d)", int64(e))
+	}
+}
+
+type PHQ9AssessmentAnswer int64
+
+const (
+	PHQ9AssessmentAnswerNotAtAll            PHQ9AssessmentAnswer = 0
+	PHQ9AssessmentAnswerSeveralDays         PHQ9AssessmentAnswer = 1
+	PHQ9AssessmentAnswerMoreThanHalfTheDays PHQ9AssessmentAnswer = 2
+	PHQ9AssessmentAnswerNearlyEveryDay      PHQ9AssessmentAnswer = 3
+	PHQ9AssessmentAnswerPreferNotToAnswer   PHQ9AssessmentAnswer = 4
+)
+
+// String returns the PHQ9AssessmentAnswer constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PHQ9AssessmentAnswer) String() string {
+	switch e {
+	case PHQ9AssessmentAnswerNotAtAll:
+		return "PHQ9AssessmentAnswerNotAtAll"
+	case PHQ9AssessmentAnswerSeveralDays:
+		return "PHQ9AssessmentAnswerSeveralDays"
+	case PHQ9AssessmentAnswerMoreThanHalfTheDays:
+		return "PHQ9AssessmentAnswerMoreThanHalfTheDays"
+	case PHQ9AssessmentAnswerNearlyEveryDay:
+		return "PHQ9AssessmentAnswerNearlyEveryDay"
+	case PHQ9AssessmentAnswerPreferNotToAnswer:
+		return "PHQ9AssessmentAnswerPreferNotToAnswer"
+	default:
+		return fmt.Sprintf("PHQ9AssessmentAnswer(%d)", int64(e))
+	}
+}
+
+type PhysicalEffortEstimationType int64
+
+const (
+	PhysicalEffortEstimationTypeActivityLookup PhysicalEffortEstimationType = 1
+	PhysicalEffortEstimationTypeDeviceSensed   PhysicalEffortEstimationType = 2
+)
+
+// String returns the PhysicalEffortEstimationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PhysicalEffortEstimationType) String() string {
+	switch e {
+	case PhysicalEffortEstimationTypeActivityLookup:
+		return "PhysicalEffortEstimationTypeActivityLookup"
+	case PhysicalEffortEstimationTypeDeviceSensed:
+		return "PhysicalEffortEstimationTypeDeviceSensed"
+	default:
+		return fmt.Sprintf("PhysicalEffortEstimationType(%d)", int64(e))
+	}
+}
+
+// The style of stroke while swimming.
+type SwimmingStrokeStyle int64
+
+const (
+	// The user’s stroke could not be determined.
+	SwimmingStrokeStyleUnknown SwimmingStrokeStyle = 0
+	// The user swam a mixture of strokes.
+	SwimmingStrokeStyleMixed SwimmingStrokeStyle = 1
+	// The user swam the freestyle stroke.
+	SwimmingStrokeStyleFreestyle SwimmingStrokeStyle = 2
+	// The user swam the backstroke.
+	SwimmingStrokeStyleBackstroke SwimmingStrokeStyle = 3
+	// The user swam the breaststroke.
+	SwimmingStrokeStyleBreaststroke SwimmingStrokeStyle = 4
+	// The user swam the butterfly stroke.
+	SwimmingStrokeStyleButterfly SwimmingStrokeStyle = 5
+	// The user swam using a kickboard.
+	SwimmingStrokeStyleKickboard SwimmingStrokeStyle = 6
+)
+
+// String returns the SwimmingStrokeStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SwimmingStrokeStyle) String() string {
+	switch e {
+	case SwimmingStrokeStyleUnknown:
+		return "SwimmingStrokeStyleUnknown"
+	case SwimmingStrokeStyleMixed:
+		return "SwimmingStrokeStyleMixed"
+	case SwimmingStrokeStyleFreestyle:
+		return "SwimmingStrokeStyleFreestyle"
+	case SwimmingStrokeStyleBackstroke:
+		return "SwimmingStrokeStyleBackstroke"
+	case SwimmingStrokeStyleBreaststroke:
+		return "SwimmingStrokeStyleBreaststroke"
+	case SwimmingStrokeStyleButterfly:
+		return "SwimmingStrokeStyleButterfly"
+	case SwimmingStrokeStyleKickboard:
+		return "SwimmingStrokeStyleKickboard"
+	default:
+		return fmt.Sprintf("SwimmingStrokeStyle(%d)", int64(e))
+	}
+}
+
+// The type of motion performed during the sample.
+type UserMotionContext int64
+
+const (
+	// The person’s motion was not specified.
+	UserMotionContextNotSet UserMotionContext = 0
+	// The person was stationary during the sample.
+	UserMotionContextStationary UserMotionContext = 1
+	// The person was active during the sample.
+	UserMotionContextActive UserMotionContext = 2
+)
+
+// String returns the UserMotionContext constant's name, or its numeric form when the
+// value is not a known constant.
+func (e UserMotionContext) String() string {
+	switch e {
+	case UserMotionContextNotSet:
+		return "UserMotionContextNotSet"
+	case UserMotionContextStationary:
+		return "UserMotionContextStationary"
+	case UserMotionContextActive:
+		return "UserMotionContextActive"
+	default:
+		return fmt.Sprintf("UserMotionContext(%d)", int64(e))
+	}
+}
+
+// Methods for calculating the user’s VO2 max rate.
+type VO2MaxTestType int64
+
+const (
+	// A test that measures VO2 max rate by monitoring exercise to the user’s physical limit.
+	VO2MaxTestTypeMaxExercise VO2MaxTestType = 1
+	// A calculation that estimates VO2 max rate based on low-intensity exercise.
+	VO2MaxTestTypePredictionSubMaxExercise VO2MaxTestType = 2
+	// A calculation that estimates VO2 max rate without any exercise.
+	VO2MaxTestTypePredictionNonExercise VO2MaxTestType = 3
+	VO2MaxTestTypePredictionStepTest    VO2MaxTestType = 4
+)
+
+// String returns the VO2MaxTestType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VO2MaxTestType) String() string {
+	switch e {
+	case VO2MaxTestTypeMaxExercise:
+		return "VO2MaxTestTypeMaxExercise"
+	case VO2MaxTestTypePredictionSubMaxExercise:
+		return "VO2MaxTestTypePredictionSubMaxExercise"
+	case VO2MaxTestTypePredictionNonExercise:
+		return "VO2MaxTestTypePredictionNonExercise"
+	case VO2MaxTestTypePredictionStepTest:
+		return "VO2MaxTestTypePredictionStepTest"
+	default:
+		return fmt.Sprintf("VO2MaxTestType(%d)", int64(e))
+	}
+}
+
+type WaterSalinity int64
+
+const (
+	WaterSalinityFreshWater WaterSalinity = 1
+	WaterSalinitySaltWater  WaterSalinity = 2
+)
+
+// String returns the WaterSalinity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WaterSalinity) String() string {
+	switch e {
+	case WaterSalinityFreshWater:
+		return "WaterSalinityFreshWater"
+	case WaterSalinitySaltWater:
+		return "WaterSalinitySaltWater"
+	default:
+		return fmt.Sprintf("WaterSalinity(%d)", int64(e))
+	}
+}
+
+// Constants that indicate a type of weather.
+type WeatherCondition int64
+
+const (
+	// The weather condition is unknown or irrelevant.
+	WeatherConditionNone WeatherCondition = 0
+	// The weather condition is clear.
+	WeatherConditionClear WeatherCondition = 1
+	// The weather condition is fair.
+	WeatherConditionFair WeatherCondition = 2
+	// The weather condition is partly cloudy.
+	WeatherConditionPartlyCloudy WeatherCondition = 3
+	// The weather condition is mostly cloudy.
+	WeatherConditionMostlyCloudy WeatherCondition = 4
+	// The weather condition is cloudy.
+	WeatherConditionCloudy WeatherCondition = 5
+	// The weather condition is foggy.
+	WeatherConditionFoggy WeatherCondition = 6
+	// The weather condition is hazy.
+	WeatherConditionHaze WeatherCondition = 7
+	// The weather condition is windy.
+	WeatherConditionWindy WeatherCondition = 8
+	// The weather condition is blustery.
+	WeatherConditionBlustery WeatherCondition = 9
+	// The weather condition is smoky.
+	WeatherConditionSmoky WeatherCondition = 10
+	// The weather condition is dust.
+	WeatherConditionDust WeatherCondition = 11
+	// The weather condition is snow.
+	WeatherConditionSnow WeatherCondition = 12
+	// The weather condition is hail.
+	WeatherConditionHail WeatherCondition = 13
+	// The weather condition is sleet.
+	WeatherConditionSleet WeatherCondition = 14
+	// The weather condition is freezing drizzle.
+	WeatherConditionFreezingDrizzle WeatherCondition = 15
+	// The weather condition is freezing rain.
+	WeatherConditionFreezingRain WeatherCondition = 16
+	// The weather condition is mixed rain and hail.
+	WeatherConditionMixedRainAndHail WeatherCondition = 17
+	// The weather condition is mixed rain and snow.
+	WeatherConditionMixedRainAndSnow WeatherCondition = 18
+	// The weather condition is mixed rain and sleet.
+	WeatherConditionMixedRainAndSleet WeatherCondition = 19
+	// The weather condition is mixed snow and sleet.
+	WeatherConditionMixedSnowAndSleet WeatherCondition = 20
+	// The weather condition is drizzle.
+	WeatherConditionDrizzle WeatherCondition = 21
+	// The weather condition is scattered showers.
+	WeatherConditionScatteredShowers WeatherCondition = 22
+	// The weather condition is showers.
+	WeatherConditionShowers WeatherCondition = 23
+	// The weather condition is thunderstorms.
+	WeatherConditionThunderstorms WeatherCondition = 24
+	// The weather condition is tropical storm.
+	WeatherConditionTropicalStorm WeatherCondition = 25
+	// The weather condition is hurricane.
+	WeatherConditionHurricane WeatherCondition = 26
+	// The weather condition is tornado.
+	WeatherConditionTornado WeatherCondition = 27
+)
+
+// String returns the WeatherCondition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WeatherCondition) String() string {
+	switch e {
+	case WeatherConditionNone:
+		return "WeatherConditionNone"
+	case WeatherConditionClear:
+		return "WeatherConditionClear"
+	case WeatherConditionFair:
+		return "WeatherConditionFair"
+	case WeatherConditionPartlyCloudy:
+		return "WeatherConditionPartlyCloudy"
+	case WeatherConditionMostlyCloudy:
+		return "WeatherConditionMostlyCloudy"
+	case WeatherConditionCloudy:
+		return "WeatherConditionCloudy"
+	case WeatherConditionFoggy:
+		return "WeatherConditionFoggy"
+	case WeatherConditionHaze:
+		return "WeatherConditionHaze"
+	case WeatherConditionWindy:
+		return "WeatherConditionWindy"
+	case WeatherConditionBlustery:
+		return "WeatherConditionBlustery"
+	case WeatherConditionSmoky:
+		return "WeatherConditionSmoky"
+	case WeatherConditionDust:
+		return "WeatherConditionDust"
+	case WeatherConditionSnow:
+		return "WeatherConditionSnow"
+	case WeatherConditionHail:
+		return "WeatherConditionHail"
+	case WeatherConditionSleet:
+		return "WeatherConditionSleet"
+	case WeatherConditionFreezingDrizzle:
+		return "WeatherConditionFreezingDrizzle"
+	case WeatherConditionFreezingRain:
+		return "WeatherConditionFreezingRain"
+	case WeatherConditionMixedRainAndHail:
+		return "WeatherConditionMixedRainAndHail"
+	case WeatherConditionMixedRainAndSnow:
+		return "WeatherConditionMixedRainAndSnow"
+	case WeatherConditionMixedRainAndSleet:
+		return "WeatherConditionMixedRainAndSleet"
+	case WeatherConditionMixedSnowAndSleet:
+		return "WeatherConditionMixedSnowAndSleet"
+	case WeatherConditionDrizzle:
+		return "WeatherConditionDrizzle"
+	case WeatherConditionScatteredShowers:
+		return "WeatherConditionScatteredShowers"
+	case WeatherConditionShowers:
+		return "WeatherConditionShowers"
+	case WeatherConditionThunderstorms:
+		return "WeatherConditionThunderstorms"
+	case WeatherConditionTropicalStorm:
+		return "WeatherConditionTropicalStorm"
+	case WeatherConditionHurricane:
+		return "WeatherConditionHurricane"
+	case WeatherConditionTornado:
+		return "WeatherConditionTornado"
+	default:
+		return fmt.Sprintf("WeatherCondition(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+type LaunchDataType int64
+
+const (
+	LaunchDataTypeDictionary LaunchDataType = 1
+	LaunchDataTypeArray      LaunchDataType = 2
+	LaunchDataTypeFd         LaunchDataType = 3
+	LaunchDataTypeInteger    LaunchDataType = 4
+	LaunchDataTypeReal       LaunchDataType = 5
+	LaunchDataTypeBool       LaunchDataType = 6
+	LaunchDataTypeString     LaunchDataType = 7
+	LaunchDataTypeOpaque     LaunchDataType = 8
+	LaunchDataTypeErrno      LaunchDataType = 9
+	LaunchDataTypeMachport   LaunchDataType = 10
+)
+
+// String returns the LaunchDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LaunchDataType) String() string {
+	switch e {
+	case LaunchDataTypeDictionary:
+		return "LaunchDataTypeDictionary"
+	case LaunchDataTypeArray:
+		return "LaunchDataTypeArray"
+	case LaunchDataTypeFd:
+		return "LaunchDataTypeFd"
+	case LaunchDataTypeInteger:
+		return "LaunchDataTypeInteger"
+	case LaunchDataTypeReal:
+		return "LaunchDataTypeReal"
+	case LaunchDataTypeBool:
+		return "LaunchDataTypeBool"
+	case LaunchDataTypeString:
+		return "LaunchDataTypeString"
+	case LaunchDataTypeOpaque:
+		return "LaunchDataTypeOpaque"
+	case LaunchDataTypeErrno:
+		return "LaunchDataTypeErrno"
+	case LaunchDataTypeMachport:
+		return "LaunchDataTypeMachport"
+	default:
+		return fmt.Sprintf("LaunchDataType(%d)", int64(e))
+	}
+}
+
+// These constants are used to specify a domain to MDLabelCreate().
+type MDLabelDomain int64
+
+const (
+	KMDLabelUserDomain  MDLabelDomain = 0
+	KMDLabelLocalDomain MDLabelDomain = 1
+)
+
+// String returns the MDLabelDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDLabelDomain) String() string {
+	switch e {
+	case KMDLabelUserDomain:
+		return "KMDLabelUserDomain"
+	case KMDLabelLocalDomain:
+		return "KMDLabelLocalDomain"
+	default:
+		return fmt.Sprintf("MDLabelDomain(%d)", int64(e))
+	}
+}
+
+type MDQueryOptionFlags int64
+
+const (
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
+	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
+)
+
+// String returns the MDQueryOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQueryOptionFlags) String() string {
+	switch e {
+	case KMDQuerySynchronous:
+		return "KMDQuerySynchronous"
+	case KMDQueryWantsUpdates:
+		return "KMDQueryWantsUpdates"
+	case KMDQueryAllowFSTranslation:
+		return "KMDQueryAllowFSTranslation"
+	default:
+		return fmt.Sprintf("MDQueryOptionFlags(%d)", int64(e))
+	}
+}
+
+type MDQuerySortOptionFlags int64
+
+const (
+	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
+)
+
+// String returns the MDQuerySortOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQuerySortOptionFlags) String() string {
+	switch e {
+	case KMDQueryReverseSortOrderFlag:
+		return "KMDQueryReverseSortOrderFlag"
+	default:
+		return fmt.Sprintf("MDQuerySortOptionFlags(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlags int64
+
+const (
+	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
+	XpcListenerCreateFlagsInactive        XpcListenerCreateFlags = 1
+	XpcListenerCreateFlagsForceMach       XpcListenerCreateFlags = 2
+	XpcListenerCreateFlagsForceXpcservice XpcListenerCreateFlags = 4
+)
+
+// String returns the XpcListenerCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcListenerCreateFlags) String() string {
+	var parts []string
+	if e&XpcListenerCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsInactive")
+	}
+	if e&XpcListenerCreateFlagsForceMach != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceMach")
+	}
+	if e&XpcListenerCreateFlagsForceXpcservice != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceXpcservice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlags int64
+
+const (
+	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0
+	XpcSessionCreateFlagsInactive       XpcSessionCreateFlags = 1
+	XpcSessionCreateFlagsMachPrivileged XpcSessionCreateFlags = 2
+)
+
+// String returns the XpcSessionCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcSessionCreateFlags) String() string {
+	var parts []string
+	if e&XpcSessionCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsInactive")
+	}
+	if e&XpcSessionCreateFlagsMachPrivileged != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsMachPrivileged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }

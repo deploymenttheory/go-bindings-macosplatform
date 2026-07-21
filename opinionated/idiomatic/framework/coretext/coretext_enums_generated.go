@@ -863,3 +863,2137 @@ func (e CTTextAlignment) String() string {
 		return fmt.Sprintf("CTTextAlignment(%d)", int64(e))
 	}
 }
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Type int64
+
+const (
+	TypeExtended Type = 256
+	TypeAccess   Type = 0
+	TypeDefault  Type = 1
+	TypeAfs      Type = 2
+	TypeCoda     Type = 3
+	TypeNtfs     Type = 4
+	TypeNwfs     Type = 5
+)
+
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Type) String() string {
+	switch e {
+	case TypeExtended:
+		return "TypeExtended"
+	case TypeAccess:
+		return "TypeAccess"
+	case TypeDefault:
+		return "TypeDefault"
+	case TypeAfs:
+		return "TypeAfs"
+	case TypeCoda:
+		return "TypeCoda"
+	case TypeNtfs:
+		return "TypeNtfs"
+	case TypeNwfs:
+		return "TypeNwfs"
+	default:
+		return fmt.Sprintf("Type(%d)", int64(e))
+	}
+}
+
+// Constants that track the progress of font descriptor matching.
+type CTFontDescriptorMatchingState int64
+
+const (
+	// A state that indicates matching is about to begin.
+	KCTFontDescriptorMatchingDidBegin CTFontDescriptorMatchingState = 0
+	// A state that indicates matching is done.
+	KCTFontDescriptorMatchingDidFinish CTFontDescriptorMatchingState = 1
+	// A state that indicates communication with the server is about to begin.
+	KCTFontDescriptorMatchingWillBeginQuerying CTFontDescriptorMatchingState = 2
+	// A state that indicates that matching is stalled, such as while waiting for a server response.
+	KCTFontDescriptorMatchingStalled CTFontDescriptorMatchingState = 3
+	// A state that indicates downloading is about to begin.
+	KCTFontDescriptorMatchingWillBeginDownloading CTFontDescriptorMatchingState = 4
+	// A state that indicates downloading is in progress.
+	KCTFontDescriptorMatchingDownloading CTFontDescriptorMatchingState = 5
+	// A state that indicates downloading is done.
+	KCTFontDescriptorMatchingDidFinishDownloading CTFontDescriptorMatchingState = 6
+	// A state that indicates the font descriptor match is successful.
+	KCTFontDescriptorMatchingDidMatch CTFontDescriptorMatchingState = 7
+	// A state that indicates an error.
+	KCTFontDescriptorMatchingDidFailWithError CTFontDescriptorMatchingState = 8
+)
+
+// String returns the CTFontDescriptorMatchingState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CTFontDescriptorMatchingState) String() string {
+	switch e {
+	case KCTFontDescriptorMatchingDidBegin:
+		return "KCTFontDescriptorMatchingDidBegin"
+	case KCTFontDescriptorMatchingDidFinish:
+		return "KCTFontDescriptorMatchingDidFinish"
+	case KCTFontDescriptorMatchingWillBeginQuerying:
+		return "KCTFontDescriptorMatchingWillBeginQuerying"
+	case KCTFontDescriptorMatchingStalled:
+		return "KCTFontDescriptorMatchingStalled"
+	case KCTFontDescriptorMatchingWillBeginDownloading:
+		return "KCTFontDescriptorMatchingWillBeginDownloading"
+	case KCTFontDescriptorMatchingDownloading:
+		return "KCTFontDescriptorMatchingDownloading"
+	case KCTFontDescriptorMatchingDidFinishDownloading:
+		return "KCTFontDescriptorMatchingDidFinishDownloading"
+	case KCTFontDescriptorMatchingDidMatch:
+		return "KCTFontDescriptorMatchingDidMatch"
+	case KCTFontDescriptorMatchingDidFailWithError:
+		return "KCTFontDescriptorMatchingDidFailWithError"
+	default:
+		return fmt.Sprintf("CTFontDescriptorMatchingState(%d)", int64(e))
+	}
+}
+
+// The recognized format of the font.
+type CTFontFormat int64
+
+const (
+	// The font is not a recognized format.
+	KCTFontFormatUnrecognized CTFontFormat = 0
+	// The font is an OpenType format containing PostScript data.
+	KCTFontFormatOpenTypePostScript CTFontFormat = 1
+	// The font is an OpenType format containing TrueType data.
+	KCTFontFormatOpenTypeTrueType CTFontFormat = 2
+	// The font is a recognized TrueType format.
+	KCTFontFormatTrueType CTFontFormat = 3
+	// The font is a recognized PostScript format.
+	KCTFontFormatPostScript CTFontFormat = 4
+	// The font is a bitmap-only format.
+	KCTFontFormatBitmap CTFontFormat = 5
+)
+
+// String returns the CTFontFormat constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CTFontFormat) String() string {
+	switch e {
+	case KCTFontFormatUnrecognized:
+		return "KCTFontFormatUnrecognized"
+	case KCTFontFormatOpenTypePostScript:
+		return "KCTFontFormatOpenTypePostScript"
+	case KCTFontFormatOpenTypeTrueType:
+		return "KCTFontFormatOpenTypeTrueType"
+	case KCTFontFormatTrueType:
+		return "KCTFontFormatTrueType"
+	case KCTFontFormatPostScript:
+		return "KCTFontFormatPostScript"
+	case KCTFontFormatBitmap:
+		return "KCTFontFormatBitmap"
+	default:
+		return fmt.Sprintf("CTFontFormat(%d)", int64(e))
+	}
+}
+
+// Errors that prevent unregistration of fonts for a specified font file URL.
+type CTFontManagerError int64
+
+const (
+	// An error that indicates the file doesn’t exist at the specified URL.
+	KCTFontManagerErrorFileNotFound CTFontManagerError = 101
+	// An error that indicates insufficient permissions to access the file.
+	KCTFontManagerErrorInsufficientPermissions CTFontManagerError = 102
+	// An error that indicates the file’s format is unrecognized or unsupported.
+	KCTFontManagerErrorUnrecognizedFormat CTFontManagerError = 103
+	// An error that indicates the file contains invalid font data that could cause system problems.
+	KCTFontManagerErrorInvalidFontData CTFontManagerError = 104
+	// An error that indicates the file is already registered in the specified scope.
+	KCTFontManagerErrorAlreadyRegistered CTFontManagerError = 105
+	// An error that indicates an operation failure due to a system limitation.
+	KCTFontManagerErrorExceededResourceLimit CTFontManagerError = 106
+	// An error that indicates the asset isn’t found.
+	KCTFontManagerErrorAssetNotFound CTFontManagerError = 107
+	// An error that indicates the file isn’t registered in the specified scope.
+	KCTFontManagerErrorNotRegistered CTFontManagerError = 201
+	// An error that indicates the font file is actively in use and can’t be unregistered.
+	KCTFontManagerErrorInUse CTFontManagerError = 202
+	// An error that indicates the file is required by the system and can’t be unregistered.
+	KCTFontManagerErrorSystemRequired CTFontManagerError = 203
+	// An error that indicates the file can’t be processed due to an unexpected FontProvider error.
+	KCTFontManagerErrorRegistrationFailed CTFontManagerError = 301
+	// An error that indicates the file can’t be processed because the provider doesn’t have a necessary entitlement.
+	KCTFontManagerErrorMissingEntitlement CTFontManagerError = 302
+	// An error that indicates the font descriptor doesn’t have the necessary information to specify a font file.
+	KCTFontManagerErrorInsufficientInfo CTFontManagerError = 303
+	// An error that indicates the user cancelled the operation.
+	KCTFontManagerErrorCancelledByUser CTFontManagerError = 304
+	// An error that indicates the file can’t register because of a duplicate font name.
+	KCTFontManagerErrorDuplicatedName CTFontManagerError = 305
+	// An error that indicates the file isn’t in an allowed location, which must be either in the app’s bundle or an on-demand resource.
+	KCTFontManagerErrorInvalidFilePath CTFontManagerError = 306
+	// An error that indicates the specified scope isn’t supported.
+	KCTFontManagerErrorUnsupportedScope CTFontManagerError = 307
+)
+
+// String returns the CTFontManagerError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CTFontManagerError) String() string {
+	switch e {
+	case KCTFontManagerErrorFileNotFound:
+		return "KCTFontManagerErrorFileNotFound"
+	case KCTFontManagerErrorInsufficientPermissions:
+		return "KCTFontManagerErrorInsufficientPermissions"
+	case KCTFontManagerErrorUnrecognizedFormat:
+		return "KCTFontManagerErrorUnrecognizedFormat"
+	case KCTFontManagerErrorInvalidFontData:
+		return "KCTFontManagerErrorInvalidFontData"
+	case KCTFontManagerErrorAlreadyRegistered:
+		return "KCTFontManagerErrorAlreadyRegistered"
+	case KCTFontManagerErrorExceededResourceLimit:
+		return "KCTFontManagerErrorExceededResourceLimit"
+	case KCTFontManagerErrorAssetNotFound:
+		return "KCTFontManagerErrorAssetNotFound"
+	case KCTFontManagerErrorNotRegistered:
+		return "KCTFontManagerErrorNotRegistered"
+	case KCTFontManagerErrorInUse:
+		return "KCTFontManagerErrorInUse"
+	case KCTFontManagerErrorSystemRequired:
+		return "KCTFontManagerErrorSystemRequired"
+	case KCTFontManagerErrorRegistrationFailed:
+		return "KCTFontManagerErrorRegistrationFailed"
+	case KCTFontManagerErrorMissingEntitlement:
+		return "KCTFontManagerErrorMissingEntitlement"
+	case KCTFontManagerErrorInsufficientInfo:
+		return "KCTFontManagerErrorInsufficientInfo"
+	case KCTFontManagerErrorCancelledByUser:
+		return "KCTFontManagerErrorCancelledByUser"
+	case KCTFontManagerErrorDuplicatedName:
+		return "KCTFontManagerErrorDuplicatedName"
+	case KCTFontManagerErrorInvalidFilePath:
+		return "KCTFontManagerErrorInvalidFilePath"
+	case KCTFontManagerErrorUnsupportedScope:
+		return "KCTFontManagerErrorUnsupportedScope"
+	default:
+		return fmt.Sprintf("CTFontManagerError(%d)", int64(e))
+	}
+}
+
+// Options for font creation and descriptor matching.
+// Bitmask — values may be combined with |.
+type CTFontOptions int64
+
+const (
+	// Default options are used.
+	KCTFontOptionsDefault CTFontOptions = 0
+	// Prevents automatic font activation.
+	KCTFontOptionsPreventAutoActivation CTFontOptions = 1
+	KCTFontOptionsPreventAutoDownload   CTFontOptions = 2
+	// Font matching prefers to match Apple system fonts.
+	KCTFontOptionsPreferSystemFont CTFontOptions = 4
+)
+
+// String returns the CTFontOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CTFontOptions) String() string {
+	var parts []string
+	if e&KCTFontOptionsPreventAutoActivation != 0 {
+		parts = append(parts, "KCTFontOptionsPreventAutoActivation")
+	}
+	if e&KCTFontOptionsPreventAutoDownload != 0 {
+		parts = append(parts, "KCTFontOptionsPreventAutoDownload")
+	}
+	if e&KCTFontOptionsPreferSystemFont != 0 {
+		parts = append(parts, "KCTFontOptionsPreferSystemFont")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// The stylistic class values of the font.
+// Bitmask — values may be combined with |.
+type CTFontStylisticClass int64
+
+const (
+	// The font has no design classification.
+	KCTFontClassUnknown CTFontStylisticClass = 0
+	// A font style based on the Latin printing style of the 15th to 17th century.
+	KCTFontClassOldStyleSerifs CTFontStylisticClass = 268435456
+	// A font style based on the Latin printing style of the 18th to 19th century.
+	KCTFontClassTransitionalSerifs CTFontStylisticClass = 536870912
+	// A font style based on the Latin printing style of the 20th century.
+	KCTFontClassModernSerifs CTFontStylisticClass = 805306368
+	// A font style variation of the Oldstyle Serifs and the Transitional Serifs.
+	KCTFontClassClarendonSerifs CTFontStylisticClass = 1073741824
+	// A font style characterized by serifs with a square transition between the strokes and the serifs (no brackets).
+	KCTFontClassSlabSerifs CTFontStylisticClass = 1342177280
+	// A font style that includes serifs but expresses a design freedom that doesn’t generally fit within the other serif design classifications.
+	KCTFontClassFreeformSerifs CTFontStylisticClass = 1879048192
+	// A font style that includes most basic letter forms (excluding Scripts and Ornamentals) that do not have serifs on the strokes.
+	KCTFontClassSansSerif CTFontStylisticClass = 2147483648
+	// A font style that includes highly decorated or stylized character shapes such as those typically used in headlines.
+	KCTFontClassOrnamentals CTFontStylisticClass = 2415919104
+	// A font style among those typefaces designed to simulate handwriting.
+	KCTFontClassScripts CTFontStylisticClass = 2684354560
+	// A generally design-independent font style.
+	KCTFontClassSymbolic CTFontStylisticClass = 3221225472
+	// The font has no design classification.
+	KCTFontUnknownClass CTFontStylisticClass = 0
+	// The font’s style is based on the Latin printing style of the 15th to 17th century.
+	KCTFontOldStyleSerifsClass CTFontStylisticClass = 268435456
+	// The font’s style is based on the Latin printing style of the 18th to 19th century.
+	KCTFontTransitionalSerifsClass CTFontStylisticClass = 536870912
+	// The font’s style is based on the Latin printing style of the 20th century.
+	KCTFontModernSerifsClass CTFontStylisticClass = 805306368
+	// The font’s style is a variation of the Oldstyle Serifs and the Transitional Serifs.
+	KCTFontClarendonSerifsClass CTFontStylisticClass = 1073741824
+	// The font’s style is characterized by serifs with a square transition between the strokes and the serifs (no brackets).
+	KCTFontSlabSerifsClass CTFontStylisticClass = 1342177280
+	// The font’s style includes serifs but expresses a design freedom that doesn’t generally fit within the other serif design classifications.
+	KCTFontFreeformSerifsClass CTFontStylisticClass = 1879048192
+	// The font’s style includes most basic letter forms (excluding Scripts and Ornamentals) that do not have serifs on the strokes.
+	KCTFontSansSerifClass CTFontStylisticClass = 2147483648
+	// The font’s style includes highly decorated or stylized character shapes such as those typically used in headlines.
+	KCTFontOrnamentalsClass CTFontStylisticClass = 2415919104
+	// The font’s style is among those typefaces designed to simulate handwriting.
+	KCTFontScriptsClass CTFontStylisticClass = 2684354560
+	// The font’s style is generally design independent.
+	KCTFontSymbolicClass CTFontStylisticClass = 3221225472
+)
+
+// String returns the CTFontStylisticClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CTFontStylisticClass) String() string {
+	var parts []string
+	if e&KCTFontClassOldStyleSerifs != 0 {
+		parts = append(parts, "KCTFontClassOldStyleSerifs")
+	}
+	if e&KCTFontClassTransitionalSerifs != 0 {
+		parts = append(parts, "KCTFontClassTransitionalSerifs")
+	}
+	if e&KCTFontClassModernSerifs != 0 {
+		parts = append(parts, "KCTFontClassModernSerifs")
+	}
+	if e&KCTFontClassClarendonSerifs != 0 {
+		parts = append(parts, "KCTFontClassClarendonSerifs")
+	}
+	if e&KCTFontClassSlabSerifs != 0 {
+		parts = append(parts, "KCTFontClassSlabSerifs")
+	}
+	if e&KCTFontClassFreeformSerifs != 0 {
+		parts = append(parts, "KCTFontClassFreeformSerifs")
+	}
+	if e&KCTFontClassSansSerif != 0 {
+		parts = append(parts, "KCTFontClassSansSerif")
+	}
+	if e&KCTFontClassOrnamentals != 0 {
+		parts = append(parts, "KCTFontClassOrnamentals")
+	}
+	if e&KCTFontClassScripts != 0 {
+		parts = append(parts, "KCTFontClassScripts")
+	}
+	if e&KCTFontClassSymbolic != 0 {
+		parts = append(parts, "KCTFontClassSymbolic")
+	}
+	if e&KCTFontOldStyleSerifsClass != 0 {
+		parts = append(parts, "KCTFontOldStyleSerifsClass")
+	}
+	if e&KCTFontTransitionalSerifsClass != 0 {
+		parts = append(parts, "KCTFontTransitionalSerifsClass")
+	}
+	if e&KCTFontModernSerifsClass != 0 {
+		parts = append(parts, "KCTFontModernSerifsClass")
+	}
+	if e&KCTFontClarendonSerifsClass != 0 {
+		parts = append(parts, "KCTFontClarendonSerifsClass")
+	}
+	if e&KCTFontSlabSerifsClass != 0 {
+		parts = append(parts, "KCTFontSlabSerifsClass")
+	}
+	if e&KCTFontFreeformSerifsClass != 0 {
+		parts = append(parts, "KCTFontFreeformSerifsClass")
+	}
+	if e&KCTFontSansSerifClass != 0 {
+		parts = append(parts, "KCTFontSansSerifClass")
+	}
+	if e&KCTFontOrnamentalsClass != 0 {
+		parts = append(parts, "KCTFontOrnamentalsClass")
+	}
+	if e&KCTFontScriptsClass != 0 {
+		parts = append(parts, "KCTFontScriptsClass")
+	}
+	if e&KCTFontSymbolicClass != 0 {
+		parts = append(parts, "KCTFontSymbolicClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// These constants specify the fill rule used by a frame
+type CTFramePathFillRule int64
+
+const (
+	// Paints the area using the even-odd fill rule.
+	KCTFramePathFillEvenOdd CTFramePathFillRule = 0
+	// Paints the area using the nonzero winding number rule.
+	KCTFramePathFillWindingNumber CTFramePathFillRule = 1
+)
+
+// String returns the CTFramePathFillRule constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CTFramePathFillRule) String() string {
+	switch e {
+	case KCTFramePathFillEvenOdd:
+		return "KCTFramePathFillEvenOdd"
+	case KCTFramePathFillWindingNumber:
+		return "KCTFramePathFillWindingNumber"
+	default:
+		return fmt.Sprintf("CTFramePathFillRule(%d)", int64(e))
+	}
+}
+
+// Constants that specify frame progression types.
+type CTFrameProgression int64
+
+const (
+	// Lines stack top to bottom for horizontal text.
+	KCTFrameProgressionTopToBottom CTFrameProgression = 0
+	// Lines stack right to left for vertical text.
+	KCTFrameProgressionRightToLeft CTFrameProgression = 1
+	// Lines stack left to right for vertical text.
+	KCTFrameProgressionLeftToRight CTFrameProgression = 2
+)
+
+// String returns the CTFrameProgression constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CTFrameProgression) String() string {
+	switch e {
+	case KCTFrameProgressionTopToBottom:
+		return "KCTFrameProgressionTopToBottom"
+	case KCTFrameProgressionRightToLeft:
+		return "KCTFrameProgressionRightToLeft"
+	case KCTFrameProgressionLeftToRight:
+		return "KCTFrameProgressionLeftToRight"
+	default:
+		return fmt.Sprintf("CTFrameProgression(%d)", int64(e))
+	}
+}
+
+// These constants specify what happens when a line is too long for its frame.
+type CTLineBreakMode int64
+
+const (
+	KCTLineBreakByWordWrapping     CTLineBreakMode = 0
+	KCTLineBreakByCharWrapping     CTLineBreakMode = 1
+	KCTLineBreakByClipping         CTLineBreakMode = 2
+	KCTLineBreakByTruncatingHead   CTLineBreakMode = 3
+	KCTLineBreakByTruncatingTail   CTLineBreakMode = 4
+	KCTLineBreakByTruncatingMiddle CTLineBreakMode = 5
+)
+
+// String returns the CTLineBreakMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CTLineBreakMode) String() string {
+	switch e {
+	case KCTLineBreakByWordWrapping:
+		return "KCTLineBreakByWordWrapping"
+	case KCTLineBreakByCharWrapping:
+		return "KCTLineBreakByCharWrapping"
+	case KCTLineBreakByClipping:
+		return "KCTLineBreakByClipping"
+	case KCTLineBreakByTruncatingHead:
+		return "KCTLineBreakByTruncatingHead"
+	case KCTLineBreakByTruncatingTail:
+		return "KCTLineBreakByTruncatingTail"
+	case KCTLineBreakByTruncatingMiddle:
+		return "KCTLineBreakByTruncatingMiddle"
+	default:
+		return fmt.Sprintf("CTLineBreakMode(%d)", int64(e))
+	}
+}
+
+// Underline style specifiers.
+// Bitmask — values may be combined with |.
+type CTUnderlineStyle int64
+
+const (
+	// A specifier that indicates not to draw an underline.
+	KCTUnderlineStyleNone CTUnderlineStyle = 0
+	// A specifier that indicates to draw an underline consisting of a single line.
+	KCTUnderlineStyleSingle CTUnderlineStyle = 1
+	// A specifier that indicates to draw an underline consisting of a thick line.
+	KCTUnderlineStyleThick CTUnderlineStyle = 2
+	// A specifier that indicates to draw an underline consisting of a double line.
+	KCTUnderlineStyleDouble CTUnderlineStyle = 9
+)
+
+// String returns the CTUnderlineStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CTUnderlineStyle) String() string {
+	var parts []string
+	if e&KCTUnderlineStyleSingle != 0 {
+		parts = append(parts, "KCTUnderlineStyleSingle")
+	}
+	if e&KCTUnderlineStyleThick != 0 {
+		parts = append(parts, "KCTUnderlineStyleThick")
+	}
+	if e&KCTUnderlineStyleDouble != 0 {
+		parts = append(parts, "KCTUnderlineStyleDouble")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Underline style modifiers.
+// Bitmask — values may be combined with |.
+type CTUnderlineStyleModifiers int64
+
+const (
+	// A modifier that indicates to draw a solid underline.
+	KCTUnderlinePatternSolid CTUnderlineStyleModifiers = 0
+	// A modifier that indicates to draw an underline using a pattern of dots.
+	KCTUnderlinePatternDot CTUnderlineStyleModifiers = 256
+	// A modifier that indicates to draw an underline using a pattern of dashes.
+	KCTUnderlinePatternDash CTUnderlineStyleModifiers = 512
+	// A modifier that indicates to draw an underline using a pattern of alternating dashes and dots.
+	KCTUnderlinePatternDashDot CTUnderlineStyleModifiers = 768
+	// A modifier that indicates to draw an underline using a pattern of a dash followed by two dots.
+	KCTUnderlinePatternDashDotDot CTUnderlineStyleModifiers = 1024
+)
+
+// String returns the CTUnderlineStyleModifiers constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CTUnderlineStyleModifiers) String() string {
+	var parts []string
+	if e&KCTUnderlinePatternDot != 0 {
+		parts = append(parts, "KCTUnderlinePatternDot")
+	}
+	if e&KCTUnderlinePatternDash != 0 {
+		parts = append(parts, "KCTUnderlinePatternDash")
+	}
+	if e&KCTUnderlinePatternDashDot != 0 {
+		parts = append(parts, "KCTUnderlinePatternDashDot")
+	}
+	if e&KCTUnderlinePatternDashDotDot != 0 {
+		parts = append(parts, "KCTUnderlinePatternDashDotDot")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// These constants specify the writing direction.
+type CTWritingDirection int64
+
+const (
+	KCTWritingDirectionNatural     CTWritingDirection = -1
+	KCTWritingDirectionLeftToRight CTWritingDirection = 0
+	KCTWritingDirectionRightToLeft CTWritingDirection = 1
+)
+
+// String returns the CTWritingDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CTWritingDirection) String() string {
+	switch e {
+	case KCTWritingDirectionNatural:
+		return "KCTWritingDirectionNatural"
+	case KCTWritingDirectionLeftToRight:
+		return "KCTWritingDirectionLeftToRight"
+	case KCTWritingDirectionRightToLeft:
+		return "KCTWritingDirectionRightToLeft"
+	default:
+		return fmt.Sprintf("CTWritingDirection(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type EvCmd int64
+
+const (
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
+	EVLEVEL EvCmd = 4
+)
+
+// String returns the EvCmd constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EvCmd) String() string {
+	switch e {
+	case EVNOP:
+		return "EVNOP"
+	case EVHIDE:
+		return "EVHIDE"
+	case EVSHOW:
+		return "EVSHOW"
+	case EVMOVE:
+		return "EVMOVE"
+	case EVLEVEL:
+		return "EVLEVEL"
+	default:
+		return fmt.Sprintf("EvCmd(%d)", int64(e))
+	}
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type NXMouseButton int64
+
+const (
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
+	NX_RightButton NXMouseButton = 2
+)
+
+// String returns the NXMouseButton constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NXMouseButton) String() string {
+	switch e {
+	case NX_OneButton:
+		return "NX_OneButton"
+	case NX_LeftButton:
+		return "NX_LeftButton"
+	case NX_RightButton:
+		return "NX_RightButton"
+	default:
+		return fmt.Sprintf("NXMouseButton(%d)", int64(e))
+	}
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+const (
+	CmapFontTableTag                           = 1668112752
+	DescriptorFontTableTag                     = 1717859171
+	FeatureFontTableTag                        = 1717920116
+	KANKRCurrentVersion                        = 0
+	KAbbrevSquaredLigaturesOffSelector         = 15
+	KAbbrevSquaredLigaturesOnSelector          = 14
+	KAllCapsSelector                           = 1
+	KAllLowerCaseSelector                      = 2
+	KAllTypeFeaturesOffSelector                = 1
+	KAllTypeFeaturesOnSelector                 = 0
+	KAllTypographicFeaturesType                = 0
+	KAltHalfWidthTextSelector                  = 6
+	KAltProportionalTextSelector               = 5
+	KAlternateHorizKanaOffSelector             = 1
+	KAlternateHorizKanaOnSelector              = 0
+	KAlternateKanaType                         = 34
+	KAlternateVertKanaOffSelector              = 3
+	KAlternateVertKanaOnSelector               = 2
+	KAnnotationType                            = 24
+	KAsteriskToMultiplyOffSelector             = 3
+	KAsteriskToMultiplyOnSelector              = 2
+	KBSLNControlPointFormatNoMap               = 2
+	KBSLNControlPointFormatWithMap             = 3
+	KBSLNCurrentVersion                        = 65536
+	KBSLNDistanceFormatNoMap                   = 0
+	KBSLNDistanceFormatWithMap                 = 1
+	KBSLNHangingBaseline                       = 3
+	KBSLNIdeographicCenterBaseline             = 1
+	KBSLNIdeographicHighBaseline               = 5
+	KBSLNIdeographicLowBaseline                = 2
+	KBSLNLastBaseline                          = 31
+	KBSLNMathBaseline                          = 4
+	KBSLNNoBaseline                            = 255
+	KBSLNNoBaselineOverride                    = 255
+	KBSLNNumBaselineClasses                    = 32
+	KBSLNRomanBaseline                         = 0
+	KBSLNTag                                   = 1651731566
+	KBoxAnnotationSelector                     = 1
+	KCJKItalicRomanOffSelector                 = 3
+	KCJKItalicRomanOnSelector                  = 2
+	KCJKItalicRomanSelector                    = 1
+	KCJKRomanSpacingType                       = 103
+	KCJKSymbolAltFiveSelector                  = 5
+	KCJKSymbolAltFourSelector                  = 4
+	KCJKSymbolAltOneSelector                   = 1
+	KCJKSymbolAltThreeSelector                 = 3
+	KCJKSymbolAltTwoSelector                   = 2
+	KCJKSymbolAlternativesType                 = 29
+	KCJKVerticalRomanCenteredSelector          = 0
+	KCJKVerticalRomanHBaselineSelector         = 1
+	KCJKVerticalRomanPlacementType             = 31
+	KCTFontClassMaskShift                      = 28
+	KCTFontPriorityComputer                    = 30000
+	KCTFontPriorityDynamic                     = 50000
+	KCTFontPriorityNetwork                     = 20000
+	KCTFontPriorityProcess                     = 60000
+	KCTFontPrioritySystem                      = 10000
+	KCTFontPriorityUser                        = 40000
+	KCTFontTableAcnt                           = 1633906292
+	KCTFontTableAnkr                           = 1634626418
+	KCTFontTableAvar                           = 1635148146
+	KCTFontTableBASE                           = 1111577413
+	KCTFontTableBdat                           = 1650745716
+	KCTFontTableBhed                           = 1651008868
+	KCTFontTableBloc                           = 1651273571
+	KCTFontTableBsln                           = 1651731566
+	KCTFontTableCBDT                           = 1128416340
+	KCTFontTableCBLC                           = 1128418371
+	KCTFontTableCFF                            = 1128678944
+	KCTFontTableCFF2                           = 1128678962
+	KCTFontTableCOLR                           = 1129270354
+	KCTFontTableCPAL                           = 1129333068
+	KCTFontTableCidg                           = 1667851367
+	KCTFontTableCmap                           = 1668112752
+	KCTFontTableCvar                           = 1668702578
+	KCTFontTableCvt                            = 1668707360
+	KCTFontTableDSIG                           = 1146308935
+	KCTFontTableEBDT                           = 1161970772
+	KCTFontTableEBLC                           = 1161972803
+	KCTFontTableEBSC                           = 1161974595
+	KCTFontTableFdsc                           = 1717859171
+	KCTFontTableFeat                           = 1717920116
+	KCTFontTableFmtx                           = 1718449272
+	KCTFontTableFond                           = 1718578788
+	KCTFontTableFpgm                           = 1718642541
+	KCTFontTableFvar                           = 1719034226
+	KCTFontTableGDEF                           = 1195656518
+	KCTFontTableGPOS                           = 1196445523
+	KCTFontTableGSUB                           = 1196643650
+	KCTFontTableGasp                           = 1734439792
+	KCTFontTableGlyf                           = 1735162214
+	KCTFontTableGvar                           = 1735811442
+	KCTFontTableHVAR                           = 1213612370
+	KCTFontTableHdmx                           = 1751412088
+	KCTFontTableHead                           = 1751474532
+	KCTFontTableHhea                           = 1751672161
+	KCTFontTableHmtx                           = 1752003704
+	KCTFontTableHsty                           = 1752396921
+	KCTFontTableJSTF                           = 1246975046
+	KCTFontTableJust                           = 1786082164
+	KCTFontTableKern                           = 1801810542
+	KCTFontTableKerx                           = 1801810552
+	KCTFontTableLTSH                           = 1280594760
+	KCTFontTableLcar                           = 1818452338
+	KCTFontTableLoca                           = 1819239265
+	KCTFontTableLtag                           = 1819566439
+	KCTFontTableMATH                           = 1296127048
+	KCTFontTableMERG                           = 1296388679
+	KCTFontTableMVAR                           = 1297498450
+	KCTFontTableMaxp                           = 1835104368
+	KCTFontTableMeta                           = 1835365473
+	KCTFontTableMort                           = 1836020340
+	KCTFontTableMorx                           = 1836020344
+	KCTFontTableName                           = 1851878757
+	KCTFontTableOS2                            = 1330851634
+	KCTFontTableOpbd                           = 1869636196
+	KCTFontTablePCLT                           = 1346587732
+	KCTFontTablePost                           = 1886352244
+	KCTFontTablePrep                           = 1886545264
+	KCTFontTableProp                           = 1886547824
+	KCTFontTableSTAT                           = 1398030676
+	KCTFontTableSVG                            = 1398163232
+	KCTFontTableSbit                           = 1935829364
+	KCTFontTableSbix                           = 1935829368
+	KCTFontTableTrak                           = 1953653099
+	KCTFontTableVDMX                           = 1447316824
+	KCTFontTableVORG                           = 1448038983
+	KCTFontTableVVAR                           = 1448493394
+	KCTFontTableVhea                           = 1986553185
+	KCTFontTableVmtx                           = 1986884728
+	KCTFontTableXref                           = 2020762982
+	KCTFontTableZapf                           = 1516335206
+	KCTRunDelegateCurrentVersion               = 1
+	KCTRunDelegateVersion1                     = 1
+	KCTWritingDirectionEmbedding               = 0
+	KCTWritingDirectionOverride                = 2
+	KCanonicalCompositionOffSelector           = 1
+	KCanonicalCompositionOnSelector            = 0
+	KCaseSensitiveLayoutOffSelector            = 1
+	KCaseSensitiveLayoutOnSelector             = 0
+	KCaseSensitiveLayoutType                   = 33
+	KCaseSensitiveSpacingOffSelector           = 3
+	KCaseSensitiveSpacingOnSelector            = 2
+	KCharacterAlternativesType                 = 17
+	KCharacterShapeType                        = 20
+	KCircleAnnotationSelector                  = 3
+	KCommonLigaturesOffSelector                = 3
+	KCommonLigaturesOnSelector                 = 2
+	KCompatibilityCompositionOffSelector       = 3
+	KCompatibilityCompositionOnSelector        = 2
+	KContextualAlternatesOffSelector           = 1
+	KContextualAlternatesOnSelector            = 0
+	KContextualAlternatesType                  = 36
+	KContextualLigaturesOffSelector            = 19
+	KContextualLigaturesOnSelector             = 18
+	KContextualSwashAlternatesOffSelector      = 5
+	KContextualSwashAlternatesOnSelector       = 4
+	KCursiveConnectionType                     = 2
+	KCursiveSelector                           = 2
+	KDecomposeDiacriticsSelector               = 2
+	KDecorativeBordersSelector                 = 4
+	KDefaultCJKRomanSelector                   = 2
+	KDefaultLowerCaseSelector                  = 0
+	KDefaultUpperCaseSelector                  = 0
+	KDesignComplexityType                      = 18
+	KDesignLevel1Selector                      = 0
+	KDesignLevel2Selector                      = 1
+	KDesignLevel3Selector                      = 2
+	KDesignLevel4Selector                      = 3
+	KDesignLevel5Selector                      = 4
+	KDiacriticsType                            = 9
+	KDiagonalFractionsSelector                 = 2
+	KDiamondAnnotationSelector                 = 8
+	KDingbatsSelector                          = 1
+	KDiphthongLigaturesOffSelector             = 11
+	KDiphthongLigaturesOnSelector              = 10
+	KDisplayTextSelector                       = 1
+	KEngravedTextSelector                      = 2
+	KExpertCharactersSelector                  = 10
+	KExponentsOffSelector                      = 9
+	KExponentsOnSelector                       = 8
+	KFleuronsSelector                          = 3
+	KFontAlbanianLanguage                      = 36
+	KFontAmharicLanguage                       = 85
+	KFontAmharicScript                         = 28
+	KFontArabicLanguage                        = 12
+	KFontArabicScript                          = 4
+	KFontArmenianLanguage                      = 51
+	KFontArmenianScript                        = 24
+	KFontAssameseLanguage                      = 68
+	KFontAymaraLanguage                        = 134
+	KFontAzerbaijanArLanguage                  = 50
+	KFontAzerbaijaniLanguage                   = 49
+	KFontBasqueLanguage                        = 129
+	KFontBengaliLanguage                       = 67
+	KFontBengaliScript                         = 13
+	KFontBulgarianLanguage                     = 44
+	KFontBurmeseLanguage                       = 77
+	KFontBurmeseScript                         = 19
+	KFontByelorussianLanguage                  = 46
+	KFontCatalanLanguage                       = 130
+	KFontChewaLanguage                         = 92
+	KFontChineseScript                         = 2
+	KFontCopyrightName                         = 0
+	KFontCroatianLanguage                      = 18
+	KFontCustom16BitScript                     = 2
+	KFontCustom816BitScript                    = 1
+	KFontCustom8BitScript                      = 0
+	KFontCustomPlatform                        = 4
+	KFontCyrillicScript                        = 7
+	KFontCzechLanguage                         = 38
+	KFontDanishLanguage                        = 7
+	KFontDescriptionName                       = 10
+	KFontDesignerName                          = 9
+	KFontDesignerURLName                       = 12
+	KFontDevanagariScript                      = 9
+	KFontDutchLanguage                         = 4
+	KFontDzongkhaLanguage                      = 137
+	KFontEastEuropeanRomanScript               = 29
+	KFontEnglishLanguage                       = 0
+	KFontEsperantoLanguage                     = 94
+	KFontEstonianLanguage                      = 27
+	KFontEthiopicScript                        = 28
+	KFontExtendedArabicScript                  = 31
+	KFontFaeroeseLanguage                      = 30
+	KFontFamilyName                            = 1
+	KFontFarsiLanguage                         = 31
+	KFontFinnishLanguage                       = 13
+	KFontFlemishLanguage                       = 34
+	KFontFrenchLanguage                        = 1
+	KFontFullName                              = 4
+	KFontGallaLanguage                         = 87
+	KFontGeezScript                            = 28
+	KFontGeorgianLanguage                      = 52
+	KFontGeorgianScript                        = 23
+	KFontGermanLanguage                        = 2
+	KFontGreekLanguage                         = 14
+	KFontGreekScript                           = 6
+	KFontGuaraniLanguage                       = 133
+	KFontGujaratiLanguage                      = 69
+	KFontGujaratiScript                        = 11
+	KFontGurmukhiScript                        = 10
+	KFontHebrewLanguage                        = 10
+	KFontHebrewScript                          = 5
+	KFontHindiLanguage                         = 21
+	KFontHungarianLanguage                     = 26
+	KFontISO10646_1993Semantics                = 2
+	KFontIcelandicLanguage                     = 15
+	KFontIndonesianLanguage                    = 81
+	KFontIrishLanguage                         = 35
+	KFontItalianLanguage                       = 3
+	KFontJapaneseLanguage                      = 11
+	KFontJapaneseScript                        = 1
+	KFontJavaneseRomLanguage                   = 138
+	KFontKannadaLanguage                       = 73
+	KFontKannadaScript                         = 16
+	KFontKashmiriLanguage                      = 61
+	KFontKazakhLanguage                        = 48
+	KFontKhmerLanguage                         = 78
+	KFontKhmerScript                           = 20
+	KFontKirghizLanguage                       = 54
+	KFontKoreanLanguage                        = 23
+	KFontKoreanScript                          = 3
+	KFontKurdishLanguage                       = 60
+	KFontLaoLanguage                           = 79
+	KFontLaotianScript                         = 22
+	KFontLappishLanguage                       = 29
+	KFontLastReservedName                      = 255
+	KFontLatinLanguage                         = 131
+	KFontLatvianLanguage                       = 28
+	KFontLettishLanguage                       = 28
+	KFontLicenseDescriptionName                = 13
+	KFontLicenseInfoURLName                    = 14
+	KFontLithuanianLanguage                    = 24
+	KFontMacCompatibleFullName                 = 18
+	KFontMacedonianLanguage                    = 43
+	KFontMacintoshPlatform                     = 1
+	KFontMalagasyLanguage                      = 93
+	KFontMalayArabicLanguage                   = 84
+	KFontMalayRomanLanguage                    = 83
+	KFontMalayalamLanguage                     = 72
+	KFontMalayalamScript                       = 17
+	KFontMalteseLanguage                       = 16
+	KFontManufacturerName                      = 8
+	KFontMarathiLanguage                       = 66
+	KFontMicrosoftPlatform                     = 3
+	KFontMicrosoftStandardScript               = 1
+	KFontMicrosoftSymbolScript                 = 0
+	KFontMicrosoftUCS4Script                   = 10
+	KFontMoldavianLanguage                     = 53
+	KFontMongolianCyrLanguage                  = 58
+	KFontMongolianLanguage                     = 57
+	KFontMongolianScript                       = 27
+	KFontNepaliLanguage                        = 64
+	KFontNoLanguageCode                        = 4294967295
+	KFontNoNameCode                            = 4294967295
+	KFontNoPlatformCode                        = 4294967295
+	KFontNoScriptCode                          = 4294967295
+	KFontNorwegianLanguage                     = 9
+	KFontOriyaLanguage                         = 71
+	KFontOriyaScript                           = 12
+	KFontOromoLanguage                         = 87
+	KFontPashtoLanguage                        = 59
+	KFontPersianLanguage                       = 31
+	KFontPolishLanguage                        = 25
+	KFontPortugueseLanguage                    = 8
+	KFontPostScriptCIDName                     = 20
+	KFontPostscriptName                        = 6
+	KFontPreferredFamilyName                   = 16
+	KFontPreferredSubfamilyName                = 17
+	KFontPunjabiLanguage                       = 70
+	KFontQuechuaLanguage                       = 132
+	KFontRSymbolScript                         = 8
+	KFontReservedPlatform                      = 2
+	KFontRomanScript                           = 0
+	KFontRomanianLanguage                      = 37
+	KFontRuandaLanguage                        = 90
+	KFontRundiLanguage                         = 91
+	KFontRussian                               = 7
+	KFontRussianLanguage                       = 32
+	KFontSaamiskLanguage                       = 29
+	KFontSampleTextName                        = 19
+	KFontSanskritLanguage                      = 65
+	KFontSerbianLanguage                       = 42
+	KFontSimpChineseLanguage                   = 33
+	KFontSimpleChineseScript                   = 25
+	KFontSindhiLanguage                        = 62
+	KFontSindhiScript                          = 31
+	KFontSinhaleseLanguage                     = 76
+	KFontSinhaleseScript                       = 18
+	KFontSlavicScript                          = 29
+	KFontSlovakLanguage                        = 39
+	KFontSlovenianLanguage                     = 40
+	KFontSomaliLanguage                        = 88
+	KFontSpanishLanguage                       = 6
+	KFontStyleName                             = 2
+	KFontSundaneseRomLanguage                  = 139
+	KFontSwahiliLanguage                       = 89
+	KFontSwedishLanguage                       = 5
+	KFontTagalogLanguage                       = 82
+	KFontTajikiLanguage                        = 55
+	KFontTamilLanguage                         = 74
+	KFontTamilScript                           = 14
+	KFontTatarLanguage                         = 135
+	KFontTeluguLanguage                        = 75
+	KFontTeluguScript                          = 15
+	KFontThaiLanguage                          = 22
+	KFontThaiScript                            = 21
+	KFontTibetanLanguage                       = 63
+	KFontTibetanScript                         = 26
+	KFontTigrinyaLanguage                      = 86
+	KFontTradChineseLanguage                   = 19
+	KFontTrademarkName                         = 7
+	KFontTraditionalChineseScript              = 2
+	KFontTurkishLanguage                       = 17
+	KFontTurkmenLanguage                       = 56
+	KFontUighurLanguage                        = 136
+	KFontUkrainianLanguage                     = 45
+	KFontUnicodeDefaultSemantics               = 0
+	KFontUnicodePlatform                       = 0
+	KFontUnicodeV1_1Semantics                  = 1
+	KFontUnicodeV2_0BMPOnlySemantics           = 3
+	KFontUnicodeV2_0FullCoverageSemantics      = 4
+	KFontUnicodeV4_0VariationSequenceSemantics = 5
+	KFontUnicode_FullRepertoire                = 6
+	KFontUninterpretedScript                   = 32
+	KFontUniqueName                            = 3
+	KFontUrduLanguage                          = 20
+	KFontUzbekLanguage                         = 47
+	KFontVendorURLName                         = 11
+	KFontVersionName                           = 5
+	KFontVietnameseLanguage                    = 80
+	KFontVietnameseScript                      = 30
+	KFontWelshLanguage                         = 128
+	KFontYiddishLanguage                       = 41
+	KFormInterrobangOffSelector                = 7
+	KFormInterrobangOnSelector                 = 6
+	KFractionsType                             = 11
+	KFullWidthCJKRomanSelector                 = 3
+	KFullWidthIdeographsSelector               = 0
+	KFullWidthKanaSelector                     = 0
+	KHalfWidthCJKRomanSelector                 = 0
+	KHalfWidthIdeographsSelector               = 2
+	KHalfWidthTextSelector                     = 2
+	KHanjaToHangulAltOneSelector               = 7
+	KHanjaToHangulAltThreeSelector             = 9
+	KHanjaToHangulAltTwoSelector               = 8
+	KHanjaToHangulSelector                     = 1
+	KHideDiacriticsSelector                    = 1
+	KHiraganaToKatakanaSelector                = 2
+	KHistoricalLigaturesOffSelector            = 21
+	KHistoricalLigaturesOnSelector             = 20
+	KHojoCharactersSelector                    = 12
+	KHyphenToEnDashOffSelector                 = 3
+	KHyphenToEnDashOnSelector                  = 2
+	KHyphenToMinusOffSelector                  = 1
+	KHyphenToMinusOnSelector                   = 0
+	KHyphensToEmDashOffSelector                = 1
+	KHyphensToEmDashOnSelector                 = 0
+	KIdeographicAltFiveSelector                = 5
+	KIdeographicAltFourSelector                = 4
+	KIdeographicAltOneSelector                 = 1
+	KIdeographicAltThreeSelector               = 3
+	KIdeographicAltTwoSelector                 = 2
+	KIdeographicAlternativesType               = 30
+	KIdeographicSpacingType                    = 26
+	KIlluminatedCapsSelector                   = 3
+	KInequalityLigaturesOffSelector            = 7
+	KInequalityLigaturesOnSelector             = 6
+	KInferiorsSelector                         = 2
+	KInitialCapsAndSmallCapsSelector           = 5
+	KInitialCapsSelector                       = 4
+	KInternationalSymbolsSelector              = 5
+	KInvertedBoxAnnotationSelector             = 9
+	KInvertedCircleAnnotationSelector          = 4
+	KInvertedRoundedBoxAnnotationSelector      = 10
+	KItalicCJKRomanType                        = 32
+	KJIS1978CharactersSelector                 = 2
+	KJIS1983CharactersSelector                 = 3
+	KJIS1990CharactersSelector                 = 4
+	KJIS2004CharactersSelector                 = 11
+	KJUSTCurrentVersion                        = 65536
+	KJUSTKashidaPriority                       = 0
+	KJUSTLetterPriority                        = 2
+	KJUSTNullPriority                          = 3
+	KJUSTOverrideLimits                        = 16384
+	KJUSTOverridePriority                      = 32768
+	KJUSTOverrideUnlimited                     = 8192
+	KJUSTPriorityCount                         = 4
+	KJUSTPriorityMask                          = 3
+	KJUSTSpacePriority                         = 1
+	KJUSTStandardFormat                        = 0
+	KJUSTTag                                   = 1786082164
+	KJUSTUnlimited                             = 4096
+	KJUSTnoGlyphcode                           = 65535
+	KJUSTpcConditionalAddAction                = 2
+	KJUSTpcDecompositionAction                 = 0
+	KJUSTpcDuctilityAction                     = 4
+	KJUSTpcGlyphRepeatAddAction                = 5
+	KJUSTpcGlyphStretchAction                  = 3
+	KJUSTpcUnconditionalAddAction              = 1
+	KKERNCrossStream                           = 16384
+	KKERNCrossStreamResetNote                  = 2
+	KKERNCurrentVersion                        = 65536
+	KKERNFormatMask                            = 255
+	KKERNIndexArray                            = 3
+	KKERNLineEndKerning                        = 2
+	KKERNLineStart                             = 1
+	KKERNNoCrossKerning                        = 4
+	KKERNNoStakeNote                           = 1
+	KKERNNotApplied                            = 1
+	KKERNNotesRequested                        = 8
+	KKERNOrderedList                           = 0
+	KKERNResetCrossStream                      = 32768
+	KKERNSimpleArray                           = 2
+	KKERNStateTable                            = 1
+	KKERNTag                                   = 1801810542
+	KKERNUnusedBits                            = 7936
+	KKERNVariation                             = 8192
+	KKERNVertical                              = 32768
+	KKERXActionOffsetMask                      = 16777215
+	KKERXActionTypeAnchorPoints                = 1073741824
+	KKERXActionTypeControlPoints               = 0
+	KKERXActionTypeCoordinates                 = 2147483648
+	KKERXActionTypeMask                        = 3221225472
+	KKERXControlPoint                          = 4
+	KKERXCrossStream                           = 1073741824
+	KKERXCrossStreamResetNote                  = 2
+	KKERXCurrentVersion                        = 131072
+	KKERXDescending                            = 268435456
+	KKERXFormatMask                            = 255
+	KKERXIndexArray                            = 6
+	KKERXLineEndKerning                        = 2
+	KKERXLineStart                             = 1
+	KKERXNoCrossKerning                        = 4
+	KKERXNoStakeNote                           = 1
+	KKERXNotApplied                            = 1
+	KKERXNotesRequested                        = 8
+	KKERXOrderedList                           = 0
+	KKERXResetCrossStream                      = 32768
+	KKERXSimpleArray                           = 2
+	KKERXStateTable                            = 1
+	KKERXTag                                   = 1801810552
+	KKERXUnusedBits                            = 268435200
+	KKERXUnusedFlags                           = 1056964608
+	KKERXValuesAreLong                         = 1
+	KKERXVariation                             = 536870912
+	KKERXVertical                              = -2147483648
+	KKanaSpacingType                           = 25
+	KKanaToRomanizationSelector                = 4
+	KKatakanaToHiraganaSelector                = 3
+	KLCARCtlPointFormat                        = 1
+	KLCARCurrentVersion                        = 65536
+	KLCARLinearFormat                          = 0
+	KLCARTag                                   = 1818452338
+	KLTAGCurrentVersion                        = 1
+	KLanguageTagType                           = 39
+	KLastFeatureType                           = -1
+	KLetterCaseType                            = 3
+	KLigaturesType                             = 1
+	KLineFinalSwashesOffSelector               = 7
+	KLineFinalSwashesOnSelector                = 6
+	KLineInitialSwashesOffSelector             = 5
+	KLineInitialSwashesOnSelector              = 4
+	KLinguisticRearrangementOffSelector        = 1
+	KLinguisticRearrangementOnSelector         = 0
+	KLinguisticRearrangementType               = 5
+	KLogosOffSelector                          = 7
+	KLogosOnSelector                           = 6
+	KLowerCaseNumbersSelector                  = 0
+	KLowerCasePetiteCapsSelector               = 2
+	KLowerCaseSmallCapsSelector                = 1
+	KLowerCaseType                             = 37
+	KMORTContextualType                        = 1
+	KMORTCoverDescending                       = 16384
+	KMORTCoverIgnoreVertical                   = 8192
+	KMORTCoverTypeMask                         = 15
+	KMORTCoverVertical                         = 32768
+	KMORTCurrInsertBefore                      = 2048
+	KMORTCurrInsertCountMask                   = 992
+	KMORTCurrInsertCountShift                  = 5
+	KMORTCurrInsertKashidaLike                 = 8192
+	KMORTCurrJustTableCountMask                = 127
+	KMORTCurrJustTableCountShift               = 0
+	KMORTCurrentVersion                        = 65536
+	KMORTDoInsertionsBefore                    = 128
+	KMORTInsertionType                         = 5
+	KMORTInsertionsCountMask                   = 63
+	KMORTIsSplitVowelPiece                     = 64
+	KMORTLigFormOffsetMask                     = 1073741823
+	KMORTLigFormOffsetShift                    = 2
+	KMORTLigLastAction                         = -2147483648
+	KMORTLigStoreLigature                      = 1073741824
+	KMORTLigatureType                          = 2
+	KMORTMarkInsertBefore                      = 1024
+	KMORTMarkInsertCountMask                   = 31
+	KMORTMarkInsertCountShift                  = 0
+	KMORTMarkInsertKashidaLike                 = 4096
+	KMORTMarkJustTableCountMask                = 16256
+	KMORTMarkJustTableCountShift               = 7
+	KMORTRearrangementType                     = 0
+	KMORTSwashType                             = 4
+	KMORTTag                                   = 1836020340
+	KMORTraCDx                                 = 6
+	KMORTraCDxA                                = 8
+	KMORTraCDxAB                               = 12
+	KMORTraCDxBA                               = 13
+	KMORTraDCx                                 = 7
+	KMORTraDCxA                                = 9
+	KMORTraDCxAB                               = 14
+	KMORTraDCxBA                               = 15
+	KMORTraDx                                  = 2
+	KMORTraDxA                                 = 3
+	KMORTraDxAB                                = 10
+	KMORTraDxBA                                = 11
+	KMORTraNoAction                            = 0
+	KMORTraxA                                  = 1
+	KMORTraxAB                                 = 4
+	KMORTraxBA                                 = 5
+	KMORXCoverDescending                       = 1073741824
+	KMORXCoverIgnoreVertical                   = 536870912
+	KMORXCoverLogicalOrder                     = 268435456
+	KMORXCoverTypeMask                         = 255
+	KMORXCoverVertical                         = -2147483648
+	KMORXCurrentVersion                        = 131072
+	KMORXTag                                   = 1836020344
+	KMathSymbolsSelector                       = 6
+	KMathematicalExtrasType                    = 15
+	KMathematicalGreekOffSelector              = 11
+	KMathematicalGreekOnSelector               = 10
+	KMonospacedNumbersSelector                 = 0
+	KMonospacedTextSelector                    = 1
+	KNLCCharactersSelector                     = 13
+	KNoAlternatesSelector                      = 0
+	KNoAnnotationSelector                      = 0
+	KNoCJKItalicRomanSelector                  = 0
+	KNoCJKSymbolAlternativesSelector           = 0
+	KNoFractionsSelector                       = 0
+	KNoIdeographicAlternativesSelector         = 0
+	KNoOrnamentsSelector                       = 0
+	KNoRubyKanaSelector                        = 0
+	KNoStyleOptionsSelector                    = 0
+	KNoStylisticAlternatesSelector             = 0
+	KNoTransliterationSelector                 = 0
+	KNonFinalSwashesOffSelector                = 9
+	KNonFinalSwashesOnSelector                 = 8
+	KNormalPositionSelector                    = 0
+	KNumberCaseType                            = 21
+	KNumberSpacingType                         = 6
+	KOPBDControlPointFormat                    = 1
+	KOPBDCurrentVersion                        = 65536
+	KOPBDDistanceFormat                        = 0
+	KOPBDTag                                   = 1869636196
+	KOrdinalsSelector                          = 3
+	KOrnamentSetsType                          = 16
+	KOverlappingCharactersType                 = 13
+	KPROPALDirectionClass                      = 2
+	KPROPANDirectionClass                      = 6
+	KPROPBNDirectionClass                      = 19
+	KPROPCSDirectionClass                      = 7
+	KPROPCanHangLTMask                         = 16384
+	KPROPCanHangRBMask                         = 8192
+	KPROPCurrentVersion                        = 196608
+	KPROPDirectionMask                         = 31
+	KPROPENDirectionClass                      = 3
+	KPROPESDirectionClass                      = 4
+	KPROPETDirectionClass                      = 5
+	KPROPIsFloaterMask                         = 32768
+	KPROPLDirectionClass                       = 0
+	KPROPLREDirectionClass                     = 13
+	KPROPLRODirectionClass                     = 14
+	KPROPNSMDirectionClass                     = 18
+	KPROPNumDirectionClasses                   = 20
+	KPROPONDirectionClass                      = 11
+	KPROPPDFDirectionClass                     = 17
+	KPROPPSDirectionClass                      = 8
+	KPROPPairOffsetMask                        = 3840
+	KPROPPairOffsetShift                       = 8
+	KPROPPairOffsetSign                        = 7
+	KPROPRDirectionClass                       = 1
+	KPROPRLEDirectionClass                     = 15
+	KPROPRLODirectionClass                     = 16
+	KPROPRightConnectMask                      = 128
+	KPROPSDirectionClass                       = 9
+	KPROPSENDirectionClass                     = 12
+	KPROPTag                                   = 1886547824
+	KPROPUseRLPairMask                         = 4096
+	KPROPWSDirectionClass                      = 10
+	KPROPZeroReserved                          = 96
+	KParenthesisAnnotationSelector             = 5
+	KPartiallyConnectedSelector                = 1
+	KPeriodAnnotationSelector                  = 6
+	KPeriodsToEllipsisOffSelector              = 11
+	KPeriodsToEllipsisOnSelector               = 10
+	KPiCharactersSelector                      = 2
+	KPreventOverlapOffSelector                 = 1
+	KPreventOverlapOnSelector                  = 0
+	KProportionalCJKRomanSelector              = 1
+	KProportionalIdeographsSelector            = 1
+	KProportionalKanaSelector                  = 1
+	KProportionalNumbersSelector               = 1
+	KProportionalTextSelector                  = 0
+	KQuarterWidthNumbersSelector               = 3
+	KQuarterWidthTextSelector                  = 4
+	KRareLigaturesOffSelector                  = 5
+	KRareLigaturesOnSelector                   = 4
+	KRebusPicturesOffSelector                  = 9
+	KRebusPicturesOnSelector                   = 8
+	KRequiredLigaturesOffSelector              = 1
+	KRequiredLigaturesOnSelector               = 0
+	KRomanNumeralAnnotationSelector            = 7
+	KRomanizationToHiraganaSelector            = 5
+	KRomanizationToKatakanaSelector            = 6
+	KRoundedBoxAnnotationSelector              = 2
+	KRubyKanaOffSelector                       = 3
+	KRubyKanaOnSelector                        = 2
+	KRubyKanaSelector                          = 1
+	KRubyKanaType                              = 28
+	KSFNTLookupSegmentArray                    = 4
+	KSFNTLookupSegmentSingle                   = 2
+	KSFNTLookupSimpleArray                     = 0
+	KSFNTLookupSingleTable                     = 6
+	KSFNTLookupTrimmedArray                    = 8
+	KSFNTLookupVector                          = 10
+	KSTClassDeletedGlyph                       = 2
+	KSTClassEndOfLine                          = 3
+	KSTClassEndOfText                          = 0
+	KSTClassOutOfBounds                        = 1
+	KSTKCrossStreamReset                       = 8192
+	KSTLigActionMask                           = 16383
+	KSTMarkEnd                                 = 8192
+	KSTNoAdvance                               = 16384
+	KSTRearrVerbMask                           = 15
+	KSTSetMark                                 = 32768
+	KSTXHasLigAction                           = 8192
+	KScientificInferiorsSelector               = 4
+	KShowDiacriticsSelector                    = 0
+	KSimplifiedCharactersSelector              = 1
+	KSlashToDivideOffSelector                  = 5
+	KSlashToDivideOnSelector                   = 4
+	KSlashedZeroOffSelector                    = 5
+	KSlashedZeroOnSelector                     = 4
+	KSmallCapsSelector                         = 3
+	KSmartQuotesOffSelector                    = 9
+	KSmartQuotesOnSelector                     = 8
+	KSmartSwashType                            = 8
+	KSquaredLigaturesOffSelector               = 13
+	KSquaredLigaturesOnSelector                = 12
+	KStyleOptionsType                          = 19
+	KStylisticAltEightOffSelector              = 17
+	KStylisticAltEightOnSelector               = 16
+	KStylisticAltEighteenOffSelector           = 37
+	KStylisticAltEighteenOnSelector            = 36
+	KStylisticAltElevenOffSelector             = 23
+	KStylisticAltElevenOnSelector              = 22
+	KStylisticAltFifteenOffSelector            = 31
+	KStylisticAltFifteenOnSelector             = 30
+	KStylisticAltFiveOffSelector               = 11
+	KStylisticAltFiveOnSelector                = 10
+	KStylisticAltFourOffSelector               = 9
+	KStylisticAltFourOnSelector                = 8
+	KStylisticAltFourteenOffSelector           = 29
+	KStylisticAltFourteenOnSelector            = 28
+	KStylisticAltNineOffSelector               = 19
+	KStylisticAltNineOnSelector                = 18
+	KStylisticAltNineteenOffSelector           = 39
+	KStylisticAltNineteenOnSelector            = 38
+	KStylisticAltOneOffSelector                = 3
+	KStylisticAltOneOnSelector                 = 2
+	KStylisticAltSevenOffSelector              = 15
+	KStylisticAltSevenOnSelector               = 14
+	KStylisticAltSeventeenOffSelector          = 35
+	KStylisticAltSeventeenOnSelector           = 34
+	KStylisticAltSixOffSelector                = 13
+	KStylisticAltSixOnSelector                 = 12
+	KStylisticAltSixteenOffSelector            = 33
+	KStylisticAltSixteenOnSelector             = 32
+	KStylisticAltTenOffSelector                = 21
+	KStylisticAltTenOnSelector                 = 20
+	KStylisticAltThirteenOffSelector           = 27
+	KStylisticAltThirteenOnSelector            = 26
+	KStylisticAltThreeOffSelector              = 7
+	KStylisticAltThreeOnSelector               = 6
+	KStylisticAltTwelveOffSelector             = 25
+	KStylisticAltTwelveOnSelector              = 24
+	KStylisticAltTwentyOffSelector             = 41
+	KStylisticAltTwentyOnSelector              = 40
+	KStylisticAltTwoOffSelector                = 5
+	KStylisticAltTwoOnSelector                 = 4
+	KStylisticAlternativesType                 = 35
+	KSubstituteVerticalFormsOffSelector        = 1
+	KSubstituteVerticalFormsOnSelector         = 0
+	KSuperiorsSelector                         = 1
+	KSwashAlternatesOffSelector                = 3
+	KSwashAlternatesOnSelector                 = 2
+	KSymbolLigaturesOffSelector                = 17
+	KSymbolLigaturesOnSelector                 = 16
+	KTRAKCurrentVersion                        = 65536
+	KTRAKTag                                   = 1953653099
+	KTRAKUniformFormat                         = 0
+	KTallCapsSelector                          = 5
+	KTextSpacingType                           = 22
+	KThirdWidthNumbersSelector                 = 2
+	KThirdWidthTextSelector                    = 3
+	KTitlingCapsSelector                       = 4
+	KTraditionalAltFiveSelector                = 9
+	KTraditionalAltFourSelector                = 8
+	KTraditionalAltOneSelector                 = 5
+	KTraditionalAltThreeSelector               = 7
+	KTraditionalAltTwoSelector                 = 6
+	KTraditionalCharactersSelector             = 0
+	KTraditionalNamesCharactersSelector        = 14
+	KTranscodingCompositionOffSelector         = 5
+	KTranscodingCompositionOnSelector          = 4
+	KTransliterationType                       = 23
+	KTypographicExtrasType                     = 14
+	KUnconnectedSelector                       = 0
+	KUnicodeDecompositionType                  = 27
+	KUpperAndLowerCaseSelector                 = 0
+	KUpperCaseNumbersSelector                  = 1
+	KUpperCasePetiteCapsSelector               = 2
+	KUpperCaseSmallCapsSelector                = 1
+	KUpperCaseType                             = 38
+	KVerticalFractionsSelector                 = 1
+	KVerticalPositionType                      = 10
+	KVerticalSubstitutionType                  = 4
+	KWordFinalSwashesOffSelector               = 3
+	KWordFinalSwashesOnSelector                = 2
+	KWordInitialSwashesOffSelector             = 1
+	KWordInitialSwashesOnSelector              = 0
+	NameFontTableTag                           = 1851878757
+	NonGlyphID                                 = 65535
+	Os2FontTableTag                            = 1330851634
+	Sizeof_sfntCMapEncoding                    = 8
+	Sizeof_sfntCMapExtendedSubHeader           = 12
+	Sizeof_sfntCMapHeader                      = 4
+	Sizeof_sfntCMapSubHeader                   = 6
+	Sizeof_sfntDescriptorHeader                = 8
+	Sizeof_sfntDirectory                       = 12
+	Sizeof_sfntInstance                        = 4
+	Sizeof_sfntNameHeader                      = 6
+	Sizeof_sfntNameRecord                      = 12
+	Sizeof_sfntVariationAxis                   = 20
+	Sizeof_sfntVariationHeader                 = 16
+	VariationFontTableTag                      = 1719034226
+)

@@ -6,6 +6,7 @@ package imagecapturecore
 
 import (
 	"fmt"
+	"strings"
 )
 
 // The type of image capture device.
@@ -118,165 +119,6 @@ func (e MediaPresentation) String() string {
 		return "MediaPresentationOriginalAssets"
 	default:
 		return fmt.Sprintf("MediaPresentation(%d)", int64(e))
-	}
-}
-
-type ReturnConnectionErrorCode int64
-
-const (
-	ReturnConnectionDriverExited              ReturnConnectionErrorCode = -21350
-	ReturnConnectionClosedSessionSuddenly     ReturnConnectionErrorCode = -21349
-	ReturnConnectionEjectedSuddenly           ReturnConnectionErrorCode = -21348
-	ReturnConnectionSessionAlreadyOpen        ReturnConnectionErrorCode = -21347
-	ReturnConnectionEjectFailed               ReturnConnectionErrorCode = -21346
-	ReturnConnectionFailedToOpen              ReturnConnectionErrorCode = -21345
-	ReturnConnectionFailedToOpenDevice        ReturnConnectionErrorCode = -21344
-	ReturnConnectionNotAuthorizedToOpenDevice ReturnConnectionErrorCode = -21343
-)
-
-// String returns the ReturnConnectionErrorCode constant's name, or its numeric form when the
-// value is not a known constant.
-func (e ReturnConnectionErrorCode) String() string {
-	switch e {
-	case ReturnConnectionDriverExited:
-		return "ReturnConnectionDriverExited"
-	case ReturnConnectionClosedSessionSuddenly:
-		return "ReturnConnectionClosedSessionSuddenly"
-	case ReturnConnectionEjectedSuddenly:
-		return "ReturnConnectionEjectedSuddenly"
-	case ReturnConnectionSessionAlreadyOpen:
-		return "ReturnConnectionSessionAlreadyOpen"
-	case ReturnConnectionEjectFailed:
-		return "ReturnConnectionEjectFailed"
-	case ReturnConnectionFailedToOpen:
-		return "ReturnConnectionFailedToOpen"
-	case ReturnConnectionFailedToOpenDevice:
-		return "ReturnConnectionFailedToOpenDevice"
-	case ReturnConnectionNotAuthorizedToOpenDevice:
-		return "ReturnConnectionNotAuthorizedToOpenDevice"
-	default:
-		return fmt.Sprintf("ReturnConnectionErrorCode(%d)", int64(e))
-	}
-}
-
-type ReturnDownloadErrorCode int64
-
-const (
-	ReturnDownloadPathInvalid  ReturnDownloadErrorCode = -21100
-	ReturnDownloadFileWritable ReturnDownloadErrorCode = -21099
-)
-
-// String returns the ReturnDownloadErrorCode constant's name, or its numeric form when the
-// value is not a known constant.
-func (e ReturnDownloadErrorCode) String() string {
-	switch e {
-	case ReturnDownloadPathInvalid:
-		return "ReturnDownloadPathInvalid"
-	case ReturnDownloadFileWritable:
-		return "ReturnDownloadFileWritable"
-	default:
-		return fmt.Sprintf("ReturnDownloadErrorCode(%d)", int64(e))
-	}
-}
-
-type ReturnMetadataErrorCode int64
-
-const (
-	ReturnMetadataNotAvailable    ReturnMetadataErrorCode = -20150
-	ReturnMetadataAlreadyFetching ReturnMetadataErrorCode = -20149
-	ReturnMetadataCanceled        ReturnMetadataErrorCode = -20148
-	ReturnMetadataInvalid         ReturnMetadataErrorCode = -20147
-)
-
-// String returns the ReturnMetadataErrorCode constant's name, or its numeric form when the
-// value is not a known constant.
-func (e ReturnMetadataErrorCode) String() string {
-	switch e {
-	case ReturnMetadataNotAvailable:
-		return "ReturnMetadataNotAvailable"
-	case ReturnMetadataAlreadyFetching:
-		return "ReturnMetadataAlreadyFetching"
-	case ReturnMetadataCanceled:
-		return "ReturnMetadataCanceled"
-	case ReturnMetadataInvalid:
-		return "ReturnMetadataInvalid"
-	default:
-		return fmt.Sprintf("ReturnMetadataErrorCode(%d)", int64(e))
-	}
-}
-
-type ReturnObjectErrorCode int64
-
-const (
-	ReturnCodeObjectDoesNotExist        ReturnObjectErrorCode = -21450
-	ReturnCodeObjectDataOffsetInvalid   ReturnObjectErrorCode = -21449
-	ReturnCodeObjectCouldNotBeRead      ReturnObjectErrorCode = -21448
-	ReturnCodeObjectDataEmpty           ReturnObjectErrorCode = -21447
-	ReturnCodeObjectDataRequestTooLarge ReturnObjectErrorCode = -21446
-)
-
-// String returns the ReturnObjectErrorCode constant's name, or its numeric form when the
-// value is not a known constant.
-func (e ReturnObjectErrorCode) String() string {
-	switch e {
-	case ReturnCodeObjectDoesNotExist:
-		return "ReturnCodeObjectDoesNotExist"
-	case ReturnCodeObjectDataOffsetInvalid:
-		return "ReturnCodeObjectDataOffsetInvalid"
-	case ReturnCodeObjectCouldNotBeRead:
-		return "ReturnCodeObjectCouldNotBeRead"
-	case ReturnCodeObjectDataEmpty:
-		return "ReturnCodeObjectDataEmpty"
-	case ReturnCodeObjectDataRequestTooLarge:
-		return "ReturnCodeObjectDataRequestTooLarge"
-	default:
-		return fmt.Sprintf("ReturnObjectErrorCode(%d)", int64(e))
-	}
-}
-
-type ReturnPTPDeviceErrorCode int64
-
-const (
-	ReturnPTPFailedToSendCommand        ReturnPTPDeviceErrorCode = -21250
-	ReturnPTPNotAuthorizedToSendCommand ReturnPTPDeviceErrorCode = -21249
-)
-
-// String returns the ReturnPTPDeviceErrorCode constant's name, or its numeric form when the
-// value is not a known constant.
-func (e ReturnPTPDeviceErrorCode) String() string {
-	switch e {
-	case ReturnPTPFailedToSendCommand:
-		return "ReturnPTPFailedToSendCommand"
-	case ReturnPTPNotAuthorizedToSendCommand:
-		return "ReturnPTPNotAuthorizedToSendCommand"
-	default:
-		return fmt.Sprintf("ReturnPTPDeviceErrorCode(%d)", int64(e))
-	}
-}
-
-type ReturnThumbnailErrorCode int64
-
-const (
-	ReturnThumbnailNotAvailable    ReturnThumbnailErrorCode = -21000
-	ReturnThumbnailAlreadyFetching ReturnThumbnailErrorCode = -20999
-	ReturnThumbnailCanceled        ReturnThumbnailErrorCode = -20098
-	ReturnThumbnailInvalid         ReturnThumbnailErrorCode = -20097
-)
-
-// String returns the ReturnThumbnailErrorCode constant's name, or its numeric form when the
-// value is not a known constant.
-func (e ReturnThumbnailErrorCode) String() string {
-	switch e {
-	case ReturnThumbnailNotAvailable:
-		return "ReturnThumbnailNotAvailable"
-	case ReturnThumbnailAlreadyFetching:
-		return "ReturnThumbnailAlreadyFetching"
-	case ReturnThumbnailCanceled:
-		return "ReturnThumbnailCanceled"
-	case ReturnThumbnailInvalid:
-		return "ReturnThumbnailInvalid"
-	default:
-		return fmt.Sprintf("ReturnThumbnailErrorCode(%d)", int64(e))
 	}
 }
 
@@ -720,4 +562,1570 @@ func (e ScannerTransferMode) String() string {
 	default:
 		return fmt.Sprintf("ScannerTransferMode(%d)", int64(e))
 	}
+}
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Type int64
+
+const (
+	TypeExtended Type = 256
+	TypeAccess   Type = 0
+	TypeDefault  Type = 1
+	TypeAfs      Type = 2
+	TypeCoda     Type = 3
+	TypeNtfs     Type = 4
+	TypeNwfs     Type = 5
+)
+
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Type) String() string {
+	switch e {
+	case TypeExtended:
+		return "TypeExtended"
+	case TypeAccess:
+		return "TypeAccess"
+	case TypeDefault:
+		return "TypeDefault"
+	case TypeAfs:
+		return "TypeAfs"
+	case TypeCoda:
+		return "TypeCoda"
+	case TypeNtfs:
+		return "TypeNtfs"
+	case TypeNwfs:
+		return "TypeNwfs"
+	default:
+		return fmt.Sprintf("Type(%d)", int64(e))
+	}
+}
+
+type CGLCPContextPriorityRequest int64
+
+const (
+	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
+	KCGLCPContextPriorityRequestNormal CGLCPContextPriorityRequest = 1
+	KCGLCPContextPriorityRequestLow    CGLCPContextPriorityRequest = 2
+)
+
+// String returns the CGLCPContextPriorityRequest constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGLCPContextPriorityRequest) String() string {
+	switch e {
+	case KCGLCPContextPriorityRequestHigh:
+		return "KCGLCPContextPriorityRequestHigh"
+	case KCGLCPContextPriorityRequestNormal:
+		return "KCGLCPContextPriorityRequestNormal"
+	case KCGLCPContextPriorityRequestLow:
+		return "KCGLCPContextPriorityRequestLow"
+	default:
+		return fmt.Sprintf("CGLCPContextPriorityRequest(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type EvCmd int64
+
+const (
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
+	EVLEVEL EvCmd = 4
+)
+
+// String returns the EvCmd constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EvCmd) String() string {
+	switch e {
+	case EVNOP:
+		return "EVNOP"
+	case EVHIDE:
+		return "EVHIDE"
+	case EVSHOW:
+		return "EVSHOW"
+	case EVMOVE:
+		return "EVMOVE"
+	case EVLEVEL:
+		return "EVLEVEL"
+	default:
+		return fmt.Sprintf("EvCmd(%d)", int64(e))
+	}
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+// The location of the image capture device.
+type DeviceLocationType uint64
+
+const (
+	// A device that’s directly attached to the Mac through its USB or FireWire port.
+	DeviceLocationTypeLocal DeviceLocationType = 256
+	// A device that’s shared by other Mac hosts.
+	DeviceLocationTypeShared DeviceLocationType = 512
+	// A supported Bonjour services device.
+	DeviceLocationTypeBonjour DeviceLocationType = 1024
+	// A paired Bluetooth device.
+	DeviceLocationTypeBluetooth DeviceLocationType = 2048
+)
+
+// String returns the DeviceLocationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DeviceLocationType) String() string {
+	switch e {
+	case DeviceLocationTypeLocal:
+		return "DeviceLocationTypeLocal"
+	case DeviceLocationTypeShared:
+		return "DeviceLocationTypeShared"
+	case DeviceLocationTypeBonjour:
+		return "DeviceLocationTypeBonjour"
+	case DeviceLocationTypeBluetooth:
+		return "DeviceLocationTypeBluetooth"
+	default:
+		return fmt.Sprintf("DeviceLocationType(%d)", int64(e))
+	}
+}
+
+// Masks for detecting different device locations.
+type DeviceLocationTypeMask uint64
+
+const (
+	// A mask for detecting a local device, such as USB or FireWire.
+	DeviceLocationTypeMaskLocal DeviceLocationTypeMask = 256
+	// A mask for detecting a device shared by another Mac host.
+	DeviceLocationTypeMaskShared DeviceLocationTypeMask = 512
+	// A mask for detecting a network device that publishes a Bonjour service.
+	DeviceLocationTypeMaskBonjour DeviceLocationTypeMask = 1024
+	// A mask for detecting a paired Bluetooth device.
+	DeviceLocationTypeMaskBluetooth DeviceLocationTypeMask = 2048
+	// A mask for detecting a remote device, such as a shared, Bonjour, or Bluetooth device.
+	DeviceLocationTypeMaskRemote DeviceLocationTypeMask = 65024
+)
+
+// String returns the DeviceLocationTypeMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DeviceLocationTypeMask) String() string {
+	switch e {
+	case DeviceLocationTypeMaskLocal:
+		return "DeviceLocationTypeMaskLocal"
+	case DeviceLocationTypeMaskShared:
+		return "DeviceLocationTypeMaskShared"
+	case DeviceLocationTypeMaskBonjour:
+		return "DeviceLocationTypeMaskBonjour"
+	case DeviceLocationTypeMaskBluetooth:
+		return "DeviceLocationTypeMaskBluetooth"
+	case DeviceLocationTypeMaskRemote:
+		return "DeviceLocationTypeMaskRemote"
+	default:
+		return fmt.Sprintf("DeviceLocationTypeMask(%d)", int64(e))
+	}
+}
+
+type LegacyReturnCode int64
+
+const (
+	LegacyReturnCodeCommunicationErr               LegacyReturnCode = -9900
+	LegacyReturnCodeDeviceNotFoundErr              LegacyReturnCode = -9901
+	LegacyReturnCodeDeviceNotOpenErr               LegacyReturnCode = -9902
+	LegacyReturnCodeFileCorruptedErr               LegacyReturnCode = -9903
+	LegacyReturnCodeIOPendingErr                   LegacyReturnCode = -9904
+	LegacyReturnCodeInvalidObjectErr               LegacyReturnCode = -9905
+	LegacyReturnCodeInvalidPropertyErr             LegacyReturnCode = -9906
+	LegacyReturnCodeIndexOutOfRangeErr             LegacyReturnCode = -9907
+	LegacyReturnCodePropertyTypeNotFoundErr        LegacyReturnCode = -9908
+	LegacyReturnCodeCannotYieldDevice              LegacyReturnCode = -9909
+	LegacyReturnCodeDataTypeNotFoundErr            LegacyReturnCode = -9910
+	LegacyReturnCodeDeviceMemoryAllocationErr      LegacyReturnCode = -9911
+	LegacyReturnCodeDeviceInternalErr              LegacyReturnCode = -9912
+	LegacyReturnCodeDeviceInvalidParamErr          LegacyReturnCode = -9913
+	LegacyReturnCodeDeviceAlreadyOpenErr           LegacyReturnCode = -9914
+	LegacyReturnCodeDeviceLocationIDNotFoundErr    LegacyReturnCode = -9915
+	LegacyReturnCodeDeviceGUIDNotFoundErr          LegacyReturnCode = -9916
+	LegacyReturnCodeDeviceIOServicePathNotFoundErr LegacyReturnCode = -9917
+	LegacyReturnCodeDeviceUnsupportedErr           LegacyReturnCode = -9918
+	LegacyReturnCodeFrameworkInternalErr           LegacyReturnCode = -9919
+	LegacyReturnCodeExtensionInternalErr           LegacyReturnCode = -9920
+	LegacyReturnCodeInvalidSessionErr              LegacyReturnCode = -9921
+)
+
+// String returns the LegacyReturnCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LegacyReturnCode) String() string {
+	switch e {
+	case LegacyReturnCodeCommunicationErr:
+		return "LegacyReturnCodeCommunicationErr"
+	case LegacyReturnCodeDeviceNotFoundErr:
+		return "LegacyReturnCodeDeviceNotFoundErr"
+	case LegacyReturnCodeDeviceNotOpenErr:
+		return "LegacyReturnCodeDeviceNotOpenErr"
+	case LegacyReturnCodeFileCorruptedErr:
+		return "LegacyReturnCodeFileCorruptedErr"
+	case LegacyReturnCodeIOPendingErr:
+		return "LegacyReturnCodeIOPendingErr"
+	case LegacyReturnCodeInvalidObjectErr:
+		return "LegacyReturnCodeInvalidObjectErr"
+	case LegacyReturnCodeInvalidPropertyErr:
+		return "LegacyReturnCodeInvalidPropertyErr"
+	case LegacyReturnCodeIndexOutOfRangeErr:
+		return "LegacyReturnCodeIndexOutOfRangeErr"
+	case LegacyReturnCodePropertyTypeNotFoundErr:
+		return "LegacyReturnCodePropertyTypeNotFoundErr"
+	case LegacyReturnCodeCannotYieldDevice:
+		return "LegacyReturnCodeCannotYieldDevice"
+	case LegacyReturnCodeDataTypeNotFoundErr:
+		return "LegacyReturnCodeDataTypeNotFoundErr"
+	case LegacyReturnCodeDeviceMemoryAllocationErr:
+		return "LegacyReturnCodeDeviceMemoryAllocationErr"
+	case LegacyReturnCodeDeviceInternalErr:
+		return "LegacyReturnCodeDeviceInternalErr"
+	case LegacyReturnCodeDeviceInvalidParamErr:
+		return "LegacyReturnCodeDeviceInvalidParamErr"
+	case LegacyReturnCodeDeviceAlreadyOpenErr:
+		return "LegacyReturnCodeDeviceAlreadyOpenErr"
+	case LegacyReturnCodeDeviceLocationIDNotFoundErr:
+		return "LegacyReturnCodeDeviceLocationIDNotFoundErr"
+	case LegacyReturnCodeDeviceGUIDNotFoundErr:
+		return "LegacyReturnCodeDeviceGUIDNotFoundErr"
+	case LegacyReturnCodeDeviceIOServicePathNotFoundErr:
+		return "LegacyReturnCodeDeviceIOServicePathNotFoundErr"
+	case LegacyReturnCodeDeviceUnsupportedErr:
+		return "LegacyReturnCodeDeviceUnsupportedErr"
+	case LegacyReturnCodeFrameworkInternalErr:
+		return "LegacyReturnCodeFrameworkInternalErr"
+	case LegacyReturnCodeExtensionInternalErr:
+		return "LegacyReturnCodeExtensionInternalErr"
+	case LegacyReturnCodeInvalidSessionErr:
+		return "LegacyReturnCodeInvalidSessionErr"
+	default:
+		return fmt.Sprintf("LegacyReturnCode(%d)", int64(e))
+	}
+}
+
+type ReturnCode int64
+
+const (
+	ReturnSuccess                              ReturnCode = 0
+	ReturnInvalidParam                         ReturnCode = -9922
+	ReturnCommunicationTimedOut                ReturnCode = -9923
+	ReturnScanOperationCanceled                ReturnCode = -9924
+	ReturnScannerInUseByLocalUser              ReturnCode = -9925
+	ReturnScannerInUseByRemoteUser             ReturnCode = -9926
+	ReturnDeviceFailedToOpenSession            ReturnCode = -9927
+	ReturnDeviceFailedToCloseSession           ReturnCode = -9928
+	ReturnScannerFailedToSelectFunctionalUnit  ReturnCode = -9929
+	ReturnScannerFailedToCompleteOverviewScan  ReturnCode = -9930
+	ReturnScannerFailedToCompleteScan          ReturnCode = -9931
+	ReturnReceivedUnsolicitedScannerStatusInfo ReturnCode = -9932
+	ReturnReceivedUnsolicitedScannerErrorInfo  ReturnCode = -9933
+	ReturnDownloadFailed                       ReturnCode = -9934
+	ReturnUploadFailed                         ReturnCode = -9935
+	ReturnFailedToCompletePassThroughCommand   ReturnCode = -9936
+	ReturnDownloadCanceled                     ReturnCode = -9937
+	ReturnFailedToEnabeTethering               ReturnCode = -9938
+	ReturnFailedToDisabeTethering              ReturnCode = -9939
+	ReturnFailedToCompleteSendMessageRequest   ReturnCode = -9940
+	ReturnDeleteFilesFailed                    ReturnCode = -9941
+	ReturnDeleteFilesCanceled                  ReturnCode = -9942
+	ReturnDeviceIsPasscodeLocked               ReturnCode = -9943
+	ReturnDeviceFailedToTakePicture            ReturnCode = -9944
+	ReturnDeviceSoftwareNotInstalled           ReturnCode = -9945
+	ReturnDeviceSoftwareIsBeingInstalled       ReturnCode = -9946
+	ReturnDeviceSoftwareInstallationCompleted  ReturnCode = -9947
+	ReturnDeviceSoftwareInstallationCanceled   ReturnCode = -9948
+	ReturnDeviceSoftwareInstallationFailed     ReturnCode = -9949
+	ReturnDeviceSoftwareNotAvailable           ReturnCode = -9950
+	ReturnDeviceCouldNotPair                   ReturnCode = -9951
+	ReturnDeviceCouldNotUnpair                 ReturnCode = -9952
+	ReturnDeviceNeedsCredentials               ReturnCode = -9953
+	ReturnDeviceIsBusyEnumerating              ReturnCode = -9954
+	ReturnDeviceCommandGeneralFailure          ReturnCode = -9955
+	ReturnDeviceFailedToCompleteTransfer       ReturnCode = -9956
+	ReturnDeviceFailedToSendData               ReturnCode = -9957
+	ReturnSessionNotOpened                     ReturnCode = -9958
+	ReturnExFATVolumeInvalid                   ReturnCode = 21200
+	ReturnMultiErrorDictionary                 ReturnCode = -30000
+)
+
+// String returns the ReturnCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReturnCode) String() string {
+	switch e {
+	case ReturnSuccess:
+		return "ReturnSuccess"
+	case ReturnInvalidParam:
+		return "ReturnInvalidParam"
+	case ReturnCommunicationTimedOut:
+		return "ReturnCommunicationTimedOut"
+	case ReturnScanOperationCanceled:
+		return "ReturnScanOperationCanceled"
+	case ReturnScannerInUseByLocalUser:
+		return "ReturnScannerInUseByLocalUser"
+	case ReturnScannerInUseByRemoteUser:
+		return "ReturnScannerInUseByRemoteUser"
+	case ReturnDeviceFailedToOpenSession:
+		return "ReturnDeviceFailedToOpenSession"
+	case ReturnDeviceFailedToCloseSession:
+		return "ReturnDeviceFailedToCloseSession"
+	case ReturnScannerFailedToSelectFunctionalUnit:
+		return "ReturnScannerFailedToSelectFunctionalUnit"
+	case ReturnScannerFailedToCompleteOverviewScan:
+		return "ReturnScannerFailedToCompleteOverviewScan"
+	case ReturnScannerFailedToCompleteScan:
+		return "ReturnScannerFailedToCompleteScan"
+	case ReturnReceivedUnsolicitedScannerStatusInfo:
+		return "ReturnReceivedUnsolicitedScannerStatusInfo"
+	case ReturnReceivedUnsolicitedScannerErrorInfo:
+		return "ReturnReceivedUnsolicitedScannerErrorInfo"
+	case ReturnDownloadFailed:
+		return "ReturnDownloadFailed"
+	case ReturnUploadFailed:
+		return "ReturnUploadFailed"
+	case ReturnFailedToCompletePassThroughCommand:
+		return "ReturnFailedToCompletePassThroughCommand"
+	case ReturnDownloadCanceled:
+		return "ReturnDownloadCanceled"
+	case ReturnFailedToEnabeTethering:
+		return "ReturnFailedToEnabeTethering"
+	case ReturnFailedToDisabeTethering:
+		return "ReturnFailedToDisabeTethering"
+	case ReturnFailedToCompleteSendMessageRequest:
+		return "ReturnFailedToCompleteSendMessageRequest"
+	case ReturnDeleteFilesFailed:
+		return "ReturnDeleteFilesFailed"
+	case ReturnDeleteFilesCanceled:
+		return "ReturnDeleteFilesCanceled"
+	case ReturnDeviceIsPasscodeLocked:
+		return "ReturnDeviceIsPasscodeLocked"
+	case ReturnDeviceFailedToTakePicture:
+		return "ReturnDeviceFailedToTakePicture"
+	case ReturnDeviceSoftwareNotInstalled:
+		return "ReturnDeviceSoftwareNotInstalled"
+	case ReturnDeviceSoftwareIsBeingInstalled:
+		return "ReturnDeviceSoftwareIsBeingInstalled"
+	case ReturnDeviceSoftwareInstallationCompleted:
+		return "ReturnDeviceSoftwareInstallationCompleted"
+	case ReturnDeviceSoftwareInstallationCanceled:
+		return "ReturnDeviceSoftwareInstallationCanceled"
+	case ReturnDeviceSoftwareInstallationFailed:
+		return "ReturnDeviceSoftwareInstallationFailed"
+	case ReturnDeviceSoftwareNotAvailable:
+		return "ReturnDeviceSoftwareNotAvailable"
+	case ReturnDeviceCouldNotPair:
+		return "ReturnDeviceCouldNotPair"
+	case ReturnDeviceCouldNotUnpair:
+		return "ReturnDeviceCouldNotUnpair"
+	case ReturnDeviceNeedsCredentials:
+		return "ReturnDeviceNeedsCredentials"
+	case ReturnDeviceIsBusyEnumerating:
+		return "ReturnDeviceIsBusyEnumerating"
+	case ReturnDeviceCommandGeneralFailure:
+		return "ReturnDeviceCommandGeneralFailure"
+	case ReturnDeviceFailedToCompleteTransfer:
+		return "ReturnDeviceFailedToCompleteTransfer"
+	case ReturnDeviceFailedToSendData:
+		return "ReturnDeviceFailedToSendData"
+	case ReturnSessionNotOpened:
+		return "ReturnSessionNotOpened"
+	case ReturnExFATVolumeInvalid:
+		return "ReturnExFATVolumeInvalid"
+	case ReturnMultiErrorDictionary:
+		return "ReturnMultiErrorDictionary"
+	default:
+		return fmt.Sprintf("ReturnCode(%d)", int64(e))
+	}
+}
+
+type ReturnCodeOffset int64
+
+const (
+	ReturnCodeThumbnailOffset  ReturnCodeOffset = -21000
+	ReturnCodeMetadataOffset   ReturnCodeOffset = -21050
+	ReturnCodeDownloadOffset   ReturnCodeOffset = -21100
+	ReturnCodeDeleteOffset     ReturnCodeOffset = -21150
+	ReturnCodeExFATOffset      ReturnCodeOffset = -21200
+	ReturnCodePTPOffset        ReturnCodeOffset = -21250
+	ReturnCodeSystemOffset     ReturnCodeOffset = -21300
+	ReturnCodeDeviceOffset     ReturnCodeOffset = -21350
+	ReturnCodeDeviceConnection ReturnCodeOffset = -21400
+	ReturnCodeObjectOffset     ReturnCodeOffset = -21450
+)
+
+// String returns the ReturnCodeOffset constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReturnCodeOffset) String() string {
+	switch e {
+	case ReturnCodeThumbnailOffset:
+		return "ReturnCodeThumbnailOffset"
+	case ReturnCodeMetadataOffset:
+		return "ReturnCodeMetadataOffset"
+	case ReturnCodeDownloadOffset:
+		return "ReturnCodeDownloadOffset"
+	case ReturnCodeDeleteOffset:
+		return "ReturnCodeDeleteOffset"
+	case ReturnCodeExFATOffset:
+		return "ReturnCodeExFATOffset"
+	case ReturnCodePTPOffset:
+		return "ReturnCodePTPOffset"
+	case ReturnCodeSystemOffset:
+		return "ReturnCodeSystemOffset"
+	case ReturnCodeDeviceOffset:
+		return "ReturnCodeDeviceOffset"
+	case ReturnCodeDeviceConnection:
+		return "ReturnCodeDeviceConnection"
+	case ReturnCodeObjectOffset:
+		return "ReturnCodeObjectOffset"
+	default:
+		return fmt.Sprintf("ReturnCodeOffset(%d)", int64(e))
+	}
+}
+
+type ReturnConnectionErrorCode int64
+
+const (
+	ReturnConnectionDriverExited              ReturnConnectionErrorCode = -21350
+	ReturnConnectionClosedSessionSuddenly     ReturnConnectionErrorCode = -21349
+	ReturnConnectionEjectedSuddenly           ReturnConnectionErrorCode = -21348
+	ReturnConnectionSessionAlreadyOpen        ReturnConnectionErrorCode = -21347
+	ReturnConnectionEjectFailed               ReturnConnectionErrorCode = -21346
+	ReturnConnectionFailedToOpen              ReturnConnectionErrorCode = -21345
+	ReturnConnectionFailedToOpenDevice        ReturnConnectionErrorCode = -21344
+	ReturnConnectionNotAuthorizedToOpenDevice ReturnConnectionErrorCode = -21343
+)
+
+// String returns the ReturnConnectionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReturnConnectionErrorCode) String() string {
+	switch e {
+	case ReturnConnectionDriverExited:
+		return "ReturnConnectionDriverExited"
+	case ReturnConnectionClosedSessionSuddenly:
+		return "ReturnConnectionClosedSessionSuddenly"
+	case ReturnConnectionEjectedSuddenly:
+		return "ReturnConnectionEjectedSuddenly"
+	case ReturnConnectionSessionAlreadyOpen:
+		return "ReturnConnectionSessionAlreadyOpen"
+	case ReturnConnectionEjectFailed:
+		return "ReturnConnectionEjectFailed"
+	case ReturnConnectionFailedToOpen:
+		return "ReturnConnectionFailedToOpen"
+	case ReturnConnectionFailedToOpenDevice:
+		return "ReturnConnectionFailedToOpenDevice"
+	case ReturnConnectionNotAuthorizedToOpenDevice:
+		return "ReturnConnectionNotAuthorizedToOpenDevice"
+	default:
+		return fmt.Sprintf("ReturnConnectionErrorCode(%d)", int64(e))
+	}
+}
+
+type ReturnDownloadErrorCode int64
+
+const (
+	ReturnDownloadPathInvalid  ReturnDownloadErrorCode = -21100
+	ReturnDownloadFileWritable ReturnDownloadErrorCode = -21099
+)
+
+// String returns the ReturnDownloadErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReturnDownloadErrorCode) String() string {
+	switch e {
+	case ReturnDownloadPathInvalid:
+		return "ReturnDownloadPathInvalid"
+	case ReturnDownloadFileWritable:
+		return "ReturnDownloadFileWritable"
+	default:
+		return fmt.Sprintf("ReturnDownloadErrorCode(%d)", int64(e))
+	}
+}
+
+type ReturnMetadataErrorCode int64
+
+const (
+	ReturnMetadataNotAvailable    ReturnMetadataErrorCode = -20150
+	ReturnMetadataAlreadyFetching ReturnMetadataErrorCode = -20149
+	ReturnMetadataCanceled        ReturnMetadataErrorCode = -20148
+	ReturnMetadataInvalid         ReturnMetadataErrorCode = -20147
+)
+
+// String returns the ReturnMetadataErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReturnMetadataErrorCode) String() string {
+	switch e {
+	case ReturnMetadataNotAvailable:
+		return "ReturnMetadataNotAvailable"
+	case ReturnMetadataAlreadyFetching:
+		return "ReturnMetadataAlreadyFetching"
+	case ReturnMetadataCanceled:
+		return "ReturnMetadataCanceled"
+	case ReturnMetadataInvalid:
+		return "ReturnMetadataInvalid"
+	default:
+		return fmt.Sprintf("ReturnMetadataErrorCode(%d)", int64(e))
+	}
+}
+
+type ReturnObjectErrorCode int64
+
+const (
+	ReturnCodeObjectDoesNotExist        ReturnObjectErrorCode = -21450
+	ReturnCodeObjectDataOffsetInvalid   ReturnObjectErrorCode = -21449
+	ReturnCodeObjectCouldNotBeRead      ReturnObjectErrorCode = -21448
+	ReturnCodeObjectDataEmpty           ReturnObjectErrorCode = -21447
+	ReturnCodeObjectDataRequestTooLarge ReturnObjectErrorCode = -21446
+)
+
+// String returns the ReturnObjectErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReturnObjectErrorCode) String() string {
+	switch e {
+	case ReturnCodeObjectDoesNotExist:
+		return "ReturnCodeObjectDoesNotExist"
+	case ReturnCodeObjectDataOffsetInvalid:
+		return "ReturnCodeObjectDataOffsetInvalid"
+	case ReturnCodeObjectCouldNotBeRead:
+		return "ReturnCodeObjectCouldNotBeRead"
+	case ReturnCodeObjectDataEmpty:
+		return "ReturnCodeObjectDataEmpty"
+	case ReturnCodeObjectDataRequestTooLarge:
+		return "ReturnCodeObjectDataRequestTooLarge"
+	default:
+		return fmt.Sprintf("ReturnObjectErrorCode(%d)", int64(e))
+	}
+}
+
+type ReturnPTPDeviceErrorCode int64
+
+const (
+	ReturnPTPFailedToSendCommand        ReturnPTPDeviceErrorCode = -21250
+	ReturnPTPNotAuthorizedToSendCommand ReturnPTPDeviceErrorCode = -21249
+)
+
+// String returns the ReturnPTPDeviceErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReturnPTPDeviceErrorCode) String() string {
+	switch e {
+	case ReturnPTPFailedToSendCommand:
+		return "ReturnPTPFailedToSendCommand"
+	case ReturnPTPNotAuthorizedToSendCommand:
+		return "ReturnPTPNotAuthorizedToSendCommand"
+	default:
+		return fmt.Sprintf("ReturnPTPDeviceErrorCode(%d)", int64(e))
+	}
+}
+
+type ReturnThumbnailErrorCode int64
+
+const (
+	ReturnThumbnailNotAvailable    ReturnThumbnailErrorCode = -21000
+	ReturnThumbnailAlreadyFetching ReturnThumbnailErrorCode = -20999
+	ReturnThumbnailCanceled        ReturnThumbnailErrorCode = -20098
+	ReturnThumbnailInvalid         ReturnThumbnailErrorCode = -20097
+)
+
+// String returns the ReturnThumbnailErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ReturnThumbnailErrorCode) String() string {
+	switch e {
+	case ReturnThumbnailNotAvailable:
+		return "ReturnThumbnailNotAvailable"
+	case ReturnThumbnailAlreadyFetching:
+		return "ReturnThumbnailAlreadyFetching"
+	case ReturnThumbnailCanceled:
+		return "ReturnThumbnailCanceled"
+	case ReturnThumbnailInvalid:
+		return "ReturnThumbnailInvalid"
+	default:
+		return fmt.Sprintf("ReturnThumbnailErrorCode(%d)", int64(e))
+	}
+}
+
+// The color data formats relevant to multichannel data.
+type ScannerColorDataFormatType uint64
+
+const (
+	ScannerColorDataFormatTypeChunky ScannerColorDataFormatType = 0
+	ScannerColorDataFormatTypePlanar ScannerColorDataFormatType = 1
+)
+
+// String returns the ScannerColorDataFormatType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScannerColorDataFormatType) String() string {
+	switch e {
+	case ScannerColorDataFormatTypeChunky:
+		return "ScannerColorDataFormatTypeChunky"
+	case ScannerColorDataFormatTypePlanar:
+		return "ScannerColorDataFormatTypePlanar"
+	default:
+		return fmt.Sprintf("ScannerColorDataFormatType(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+type LaunchDataType int64
+
+const (
+	LaunchDataTypeDictionary LaunchDataType = 1
+	LaunchDataTypeArray      LaunchDataType = 2
+	LaunchDataTypeFd         LaunchDataType = 3
+	LaunchDataTypeInteger    LaunchDataType = 4
+	LaunchDataTypeReal       LaunchDataType = 5
+	LaunchDataTypeBool       LaunchDataType = 6
+	LaunchDataTypeString     LaunchDataType = 7
+	LaunchDataTypeOpaque     LaunchDataType = 8
+	LaunchDataTypeErrno      LaunchDataType = 9
+	LaunchDataTypeMachport   LaunchDataType = 10
+)
+
+// String returns the LaunchDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LaunchDataType) String() string {
+	switch e {
+	case LaunchDataTypeDictionary:
+		return "LaunchDataTypeDictionary"
+	case LaunchDataTypeArray:
+		return "LaunchDataTypeArray"
+	case LaunchDataTypeFd:
+		return "LaunchDataTypeFd"
+	case LaunchDataTypeInteger:
+		return "LaunchDataTypeInteger"
+	case LaunchDataTypeReal:
+		return "LaunchDataTypeReal"
+	case LaunchDataTypeBool:
+		return "LaunchDataTypeBool"
+	case LaunchDataTypeString:
+		return "LaunchDataTypeString"
+	case LaunchDataTypeOpaque:
+		return "LaunchDataTypeOpaque"
+	case LaunchDataTypeErrno:
+		return "LaunchDataTypeErrno"
+	case LaunchDataTypeMachport:
+		return "LaunchDataTypeMachport"
+	default:
+		return fmt.Sprintf("LaunchDataType(%d)", int64(e))
+	}
+}
+
+// These constants are used to specify a domain to MDLabelCreate().
+type MDLabelDomain int64
+
+const (
+	KMDLabelUserDomain  MDLabelDomain = 0
+	KMDLabelLocalDomain MDLabelDomain = 1
+)
+
+// String returns the MDLabelDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDLabelDomain) String() string {
+	switch e {
+	case KMDLabelUserDomain:
+		return "KMDLabelUserDomain"
+	case KMDLabelLocalDomain:
+		return "KMDLabelLocalDomain"
+	default:
+		return fmt.Sprintf("MDLabelDomain(%d)", int64(e))
+	}
+}
+
+type MDQueryOptionFlags int64
+
+const (
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
+	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
+)
+
+// String returns the MDQueryOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQueryOptionFlags) String() string {
+	switch e {
+	case KMDQuerySynchronous:
+		return "KMDQuerySynchronous"
+	case KMDQueryWantsUpdates:
+		return "KMDQueryWantsUpdates"
+	case KMDQueryAllowFSTranslation:
+		return "KMDQueryAllowFSTranslation"
+	default:
+		return fmt.Sprintf("MDQueryOptionFlags(%d)", int64(e))
+	}
+}
+
+type MDQuerySortOptionFlags int64
+
+const (
+	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
+)
+
+// String returns the MDQuerySortOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQuerySortOptionFlags) String() string {
+	switch e {
+	case KMDQueryReverseSortOrderFlag:
+		return "KMDQueryReverseSortOrderFlag"
+	default:
+		return fmt.Sprintf("MDQuerySortOptionFlags(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type NXMouseButton int64
+
+const (
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
+	NX_RightButton NXMouseButton = 2
+)
+
+// String returns the NXMouseButton constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NXMouseButton) String() string {
+	switch e {
+	case NX_OneButton:
+		return "NX_OneButton"
+	case NX_LeftButton:
+		return "NX_LeftButton"
+	case NX_RightButton:
+		return "NX_RightButton"
+	default:
+		return fmt.Sprintf("NXMouseButton(%d)", int64(e))
+	}
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type OSUnfairLockFlags int64
+
+const (
+	OSUnfairLockFlagsNone         OSUnfairLockFlags = 0
+	OSUnfairLockFlagsAdaptiveSpin OSUnfairLockFlags = 262144
+)
+
+// String returns the OSUnfairLockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSUnfairLockFlags) String() string {
+	var parts []string
+	if e&OSUnfairLockFlagsAdaptiveSpin != 0 {
+		parts = append(parts, "OSUnfairLockFlagsAdaptiveSpin")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type PMPageToPaperMappingType int64
+
+const (
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
+)
+
+// String returns the PMPageToPaperMappingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PMPageToPaperMappingType) String() string {
+	switch e {
+	case KPMPageToPaperMappingNone:
+		return "KPMPageToPaperMappingNone"
+	case KPMPageToPaperMappingScaleToFit:
+		return "KPMPageToPaperMappingScaleToFit"
+	default:
+		return fmt.Sprintf("PMPageToPaperMappingType(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlags int64
+
+const (
+	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
+	XpcListenerCreateFlagsInactive        XpcListenerCreateFlags = 1
+	XpcListenerCreateFlagsForceMach       XpcListenerCreateFlags = 2
+	XpcListenerCreateFlagsForceXpcservice XpcListenerCreateFlags = 4
+)
+
+// String returns the XpcListenerCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcListenerCreateFlags) String() string {
+	var parts []string
+	if e&XpcListenerCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsInactive")
+	}
+	if e&XpcListenerCreateFlagsForceMach != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceMach")
+	}
+	if e&XpcListenerCreateFlagsForceXpcservice != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceXpcservice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlags int64
+
+const (
+	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0
+	XpcSessionCreateFlagsInactive       XpcSessionCreateFlags = 1
+	XpcSessionCreateFlagsMachPrivileged XpcSessionCreateFlags = 2
+)
+
+// String returns the XpcSessionCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcSessionCreateFlags) String() string {
+	var parts []string
+	if e&XpcSessionCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsInactive")
+	}
+	if e&XpcSessionCreateFlagsMachPrivileged != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsMachPrivileged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }

@@ -190,3 +190,1523 @@ func (e CMTimeRoundingMethod) String() string {
 		return fmt.Sprintf("CMTimeRoundingMethod(%d)", int64(e))
 	}
 }
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Type int64
+
+const (
+	TypeExtended Type = 256
+	TypeAccess   Type = 0
+	TypeDefault  Type = 1
+	TypeAfs      Type = 2
+	TypeCoda     Type = 3
+	TypeNtfs     Type = 4
+	TypeNwfs     Type = 5
+)
+
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Type) String() string {
+	switch e {
+	case TypeExtended:
+		return "TypeExtended"
+	case TypeAccess:
+		return "TypeAccess"
+	case TypeDefault:
+		return "TypeDefault"
+	case TypeAfs:
+		return "TypeAfs"
+	case TypeCoda:
+		return "TypeCoda"
+	case TypeNtfs:
+		return "TypeNtfs"
+	case TypeNwfs:
+		return "TypeNwfs"
+	default:
+		return fmt.Sprintf("Type(%d)", int64(e))
+	}
+}
+
+type CGLCPContextPriorityRequest int64
+
+const (
+	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
+	KCGLCPContextPriorityRequestNormal CGLCPContextPriorityRequest = 1
+	KCGLCPContextPriorityRequestLow    CGLCPContextPriorityRequest = 2
+)
+
+// String returns the CGLCPContextPriorityRequest constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGLCPContextPriorityRequest) String() string {
+	switch e {
+	case KCGLCPContextPriorityRequestHigh:
+		return "KCGLCPContextPriorityRequestHigh"
+	case KCGLCPContextPriorityRequestNormal:
+		return "KCGLCPContextPriorityRequestNormal"
+	case KCGLCPContextPriorityRequestLow:
+		return "KCGLCPContextPriorityRequestLow"
+	default:
+		return fmt.Sprintf("CGLCPContextPriorityRequest(%d)", int64(e))
+	}
+}
+
+// The type of packing within each video frame, if any.
+type CMPackingType int64
+
+const (
+	// Each frame contains only a single image, and isn’t frame-packed.
+	KCMPackingType_None CMPackingType = 1852796517
+	// The video contains packed frames that have a left eye image on the left and right eye image on the right.
+	KCMPackingType_SideBySide CMPackingType = 1936286821
+	// The video contains packed frames that have a left eye image on the top and right eye image on the bottom.
+	KCMPackingType_OverUnder CMPackingType = 1870030194
+)
+
+// String returns the CMPackingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CMPackingType) String() string {
+	switch e {
+	case KCMPackingType_None:
+		return "KCMPackingType_None"
+	case KCMPackingType_SideBySide:
+		return "KCMPackingType_SideBySide"
+	case KCMPackingType_OverUnder:
+		return "KCMPackingType_OverUnder"
+	default:
+		return fmt.Sprintf("CMPackingType(%d)", int64(e))
+	}
+}
+
+// Constants describing the projection surface information in a 3D video buffer or channel.
+type CMProjectionType int64
+
+const (
+	// Video content displays on a flat, rectangular 2D surface.
+	KCMProjectionType_Rectangular CMProjectionType = 1919247220
+	// Video content displays as a 360 degree equirectangular projection.
+	KCMProjectionType_Equirectangular CMProjectionType = 1701934441
+	// Video content displays as a 180 degree equirectangular projection.
+	KCMProjectionType_HalfEquirectangular CMProjectionType = 1751478645
+	// Video content displays as a fisheye projection.
+	KCMProjectionType_Fisheye             CMProjectionType = 1718186856
+	KCMProjectionType_ParametricImmersive CMProjectionType = 1886546285
+)
+
+// String returns the CMProjectionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CMProjectionType) String() string {
+	switch e {
+	case KCMProjectionType_Rectangular:
+		return "KCMProjectionType_Rectangular"
+	case KCMProjectionType_Equirectangular:
+		return "KCMProjectionType_Equirectangular"
+	case KCMProjectionType_HalfEquirectangular:
+		return "KCMProjectionType_HalfEquirectangular"
+	case KCMProjectionType_Fisheye:
+		return "KCMProjectionType_Fisheye"
+	case KCMProjectionType_ParametricImmersive:
+		return "KCMProjectionType_ParametricImmersive"
+	default:
+		return fmt.Sprintf("CMProjectionType(%d)", int64(e))
+	}
+}
+
+// Constants describing the stereo views contained within a buffer or channel.
+// Bitmask — values may be combined with |.
+type CMStereoViewComponents int64
+
+const (
+	// A constant for video metadata to have no available stereo frames.
+	KCMStereoView_None CMStereoViewComponents = 0
+	// The stereo video track includes a left eye layer.
+	KCMStereoView_LeftEye CMStereoViewComponents = 1
+	// The stereo video track includes a right eye layer.
+	KCMStereoView_RightEye CMStereoViewComponents = 2
+)
+
+// String returns the CMStereoViewComponents constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CMStereoViewComponents) String() string {
+	var parts []string
+	if e&KCMStereoView_LeftEye != 0 {
+		parts = append(parts, "KCMStereoView_LeftEye")
+	}
+	if e&KCMStereoView_RightEye != 0 {
+		parts = append(parts, "KCMStereoView_RightEye")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Create a set of stereo view interpretation options from a constant.
+// Bitmask — values may be combined with |.
+type CMStereoViewInterpretationOptions int64
+
+const (
+	// The default options for stereo video views.
+	KCMStereoViewInterpretation_Default CMStereoViewInterpretationOptions = 0
+	// Changes the default ordering of eye data, switching it from left-to-right to right-to-left.
+	KCMStereoViewInterpretation_StereoOrderReversed CMStereoViewInterpretationOptions = 1
+	// A flag indicating that the video content contains additional views beyond the left or right eye.
+	KCMStereoViewInterpretation_AdditionalViews CMStereoViewInterpretationOptions = 2
+)
+
+// String returns the CMStereoViewInterpretationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CMStereoViewInterpretationOptions) String() string {
+	var parts []string
+	if e&KCMStereoViewInterpretation_StereoOrderReversed != 0 {
+		parts = append(parts, "KCMStereoViewInterpretation_StereoOrderReversed")
+	}
+	if e&KCMStereoViewInterpretation_AdditionalViews != 0 {
+		parts = append(parts, "KCMStereoViewInterpretation_AdditionalViews")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Error codes returned by Core Media when working with tag collections.
+type CMTagCollectionError int64
+
+const (
+	// Indicates a parameter to a function was of the wrong type or didn’t meet a necessary condition.
+	KCMTagCollectionError_ParamErr CMTagCollectionError = -15740
+	// Indicates an internal allocation failed.
+	KCMTagCollectionError_AllocationFailed CMTagCollectionError = -15741
+	// Indicates an error occurred inside of the Core Media framework.
+	KCMTagCollectionError_InternalError CMTagCollectionError = -15742
+	// Indicates that the collection contains an invalid tag.
+	KCMTagCollectionError_InvalidTag CMTagCollectionError = -15743
+	// Indicates that a Core Foundation dictionary instance failed to initialize a new tag collection.
+	KCMTagCollectionError_InvalidTagCollectionDictionary CMTagCollectionError = -15744
+	// Indicates that a Core Foundation data instance failed to initialize a new tag collection.
+	KCMTagCollectionError_InvalidTagCollectionData CMTagCollectionError = -15745
+	// Indicates that there was no match in a collection for a tag.
+	KCMTagCollectionError_TagNotFound CMTagCollectionError = -15746
+	// Indicates that a Core Foundation data instance failed to initialize a new tag collection due to a versioning problem.
+	KCMTagCollectionError_InvalidTagCollectionDataVersion CMTagCollectionError = -15747
+	// Indicates that a buffer was smaller than the number of requested tags.
+	KCMTagCollectionError_ExhaustedBufferSize CMTagCollectionError = -15748
+	// Indicates a function lacks a necessary backing implementation in Core Media.
+	KCMTagCollectionError_NotYetImplemented CMTagCollectionError = -15749
+)
+
+// String returns the CMTagCollectionError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CMTagCollectionError) String() string {
+	switch e {
+	case KCMTagCollectionError_ParamErr:
+		return "KCMTagCollectionError_ParamErr"
+	case KCMTagCollectionError_AllocationFailed:
+		return "KCMTagCollectionError_AllocationFailed"
+	case KCMTagCollectionError_InternalError:
+		return "KCMTagCollectionError_InternalError"
+	case KCMTagCollectionError_InvalidTag:
+		return "KCMTagCollectionError_InvalidTag"
+	case KCMTagCollectionError_InvalidTagCollectionDictionary:
+		return "KCMTagCollectionError_InvalidTagCollectionDictionary"
+	case KCMTagCollectionError_InvalidTagCollectionData:
+		return "KCMTagCollectionError_InvalidTagCollectionData"
+	case KCMTagCollectionError_TagNotFound:
+		return "KCMTagCollectionError_TagNotFound"
+	case KCMTagCollectionError_InvalidTagCollectionDataVersion:
+		return "KCMTagCollectionError_InvalidTagCollectionDataVersion"
+	case KCMTagCollectionError_ExhaustedBufferSize:
+		return "KCMTagCollectionError_ExhaustedBufferSize"
+	case KCMTagCollectionError_NotYetImplemented:
+		return "KCMTagCollectionError_NotYetImplemented"
+	default:
+		return fmt.Sprintf("CMTagCollectionError(%d)", int64(e))
+	}
+}
+
+// Core media tagging errors reported by the framework.
+type CMTagError int64
+
+const (
+	// An error where input or output parameters didn’t match the requirements of Core Media.
+	KCMTagError_ParamErr CMTagError = -15730
+	// An error where the system can’t allocate enough memory for the tag.
+	KCMTagError_AllocationFailed CMTagError = -15731
+)
+
+// String returns the CMTagError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CMTagError) String() string {
+	switch e {
+	case KCMTagError_ParamErr:
+		return "KCMTagError_ParamErr"
+	case KCMTagError_AllocationFailed:
+		return "KCMTagError_AllocationFailed"
+	default:
+		return fmt.Sprintf("CMTagError(%d)", int64(e))
+	}
+}
+
+// Error codes returned by Core Media when working with tagged buffer groups.
+type CMTaggedBufferGroupError int64
+
+const (
+	// Indicates a parameter to a function was of the wrong type or didn’t meet a necessary condition.
+	KCMTaggedBufferGroupError_ParamErr CMTaggedBufferGroupError = -15780
+	// Indicates an internal allocation failed.
+	KCMTaggedBufferGroupError_AllocationFailed CMTaggedBufferGroupError = -15781
+	// Indicates an error occurred inside of the Core Media framework.
+	KCMTaggedBufferGroupError_InternalError CMTaggedBufferGroupError = -15782
+)
+
+// String returns the CMTaggedBufferGroupError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CMTaggedBufferGroupError) String() string {
+	switch e {
+	case KCMTaggedBufferGroupError_ParamErr:
+		return "KCMTaggedBufferGroupError_ParamErr"
+	case KCMTaggedBufferGroupError_AllocationFailed:
+		return "KCMTaggedBufferGroupError_AllocationFailed"
+	case KCMTaggedBufferGroupError_InternalError:
+		return "KCMTaggedBufferGroupError_InternalError"
+	default:
+		return fmt.Sprintf("CMTaggedBufferGroupError(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type EvCmd int64
+
+const (
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
+	EVLEVEL EvCmd = 4
+)
+
+// String returns the EvCmd constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EvCmd) String() string {
+	switch e {
+	case EVNOP:
+		return "EVNOP"
+	case EVHIDE:
+		return "EVHIDE"
+	case EVSHOW:
+		return "EVSHOW"
+	case EVMOVE:
+		return "EVMOVE"
+	case EVLEVEL:
+		return "EVLEVEL"
+	default:
+		return fmt.Sprintf("EvCmd(%d)", int64(e))
+	}
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+type LaunchDataType int64
+
+const (
+	LaunchDataTypeDictionary LaunchDataType = 1
+	LaunchDataTypeArray      LaunchDataType = 2
+	LaunchDataTypeFd         LaunchDataType = 3
+	LaunchDataTypeInteger    LaunchDataType = 4
+	LaunchDataTypeReal       LaunchDataType = 5
+	LaunchDataTypeBool       LaunchDataType = 6
+	LaunchDataTypeString     LaunchDataType = 7
+	LaunchDataTypeOpaque     LaunchDataType = 8
+	LaunchDataTypeErrno      LaunchDataType = 9
+	LaunchDataTypeMachport   LaunchDataType = 10
+)
+
+// String returns the LaunchDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LaunchDataType) String() string {
+	switch e {
+	case LaunchDataTypeDictionary:
+		return "LaunchDataTypeDictionary"
+	case LaunchDataTypeArray:
+		return "LaunchDataTypeArray"
+	case LaunchDataTypeFd:
+		return "LaunchDataTypeFd"
+	case LaunchDataTypeInteger:
+		return "LaunchDataTypeInteger"
+	case LaunchDataTypeReal:
+		return "LaunchDataTypeReal"
+	case LaunchDataTypeBool:
+		return "LaunchDataTypeBool"
+	case LaunchDataTypeString:
+		return "LaunchDataTypeString"
+	case LaunchDataTypeOpaque:
+		return "LaunchDataTypeOpaque"
+	case LaunchDataTypeErrno:
+		return "LaunchDataTypeErrno"
+	case LaunchDataTypeMachport:
+		return "LaunchDataTypeMachport"
+	default:
+		return fmt.Sprintf("LaunchDataType(%d)", int64(e))
+	}
+}
+
+// These constants are used to specify a domain to MDLabelCreate().
+type MDLabelDomain int64
+
+const (
+	KMDLabelUserDomain  MDLabelDomain = 0
+	KMDLabelLocalDomain MDLabelDomain = 1
+)
+
+// String returns the MDLabelDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDLabelDomain) String() string {
+	switch e {
+	case KMDLabelUserDomain:
+		return "KMDLabelUserDomain"
+	case KMDLabelLocalDomain:
+		return "KMDLabelLocalDomain"
+	default:
+		return fmt.Sprintf("MDLabelDomain(%d)", int64(e))
+	}
+}
+
+type MDQueryOptionFlags int64
+
+const (
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
+	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
+)
+
+// String returns the MDQueryOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQueryOptionFlags) String() string {
+	switch e {
+	case KMDQuerySynchronous:
+		return "KMDQuerySynchronous"
+	case KMDQueryWantsUpdates:
+		return "KMDQueryWantsUpdates"
+	case KMDQueryAllowFSTranslation:
+		return "KMDQueryAllowFSTranslation"
+	default:
+		return fmt.Sprintf("MDQueryOptionFlags(%d)", int64(e))
+	}
+}
+
+type MDQuerySortOptionFlags int64
+
+const (
+	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
+)
+
+// String returns the MDQuerySortOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQuerySortOptionFlags) String() string {
+	switch e {
+	case KMDQueryReverseSortOrderFlag:
+		return "KMDQueryReverseSortOrderFlag"
+	default:
+		return fmt.Sprintf("MDQuerySortOptionFlags(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type NXMouseButton int64
+
+const (
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
+	NX_RightButton NXMouseButton = 2
+)
+
+// String returns the NXMouseButton constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NXMouseButton) String() string {
+	switch e {
+	case NX_OneButton:
+		return "NX_OneButton"
+	case NX_LeftButton:
+		return "NX_LeftButton"
+	case NX_RightButton:
+		return "NX_RightButton"
+	default:
+		return fmt.Sprintf("NXMouseButton(%d)", int64(e))
+	}
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+type PMPageToPaperMappingType int64
+
+const (
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
+)
+
+// String returns the PMPageToPaperMappingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PMPageToPaperMappingType) String() string {
+	switch e {
+	case KPMPageToPaperMappingNone:
+		return "KPMPageToPaperMappingNone"
+	case KPMPageToPaperMappingScaleToFit:
+		return "KPMPageToPaperMappingScaleToFit"
+	default:
+		return fmt.Sprintf("PMPageToPaperMappingType(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlags int64
+
+const (
+	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
+	XpcListenerCreateFlagsInactive        XpcListenerCreateFlags = 1
+	XpcListenerCreateFlagsForceMach       XpcListenerCreateFlags = 2
+	XpcListenerCreateFlagsForceXpcservice XpcListenerCreateFlags = 4
+)
+
+// String returns the XpcListenerCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcListenerCreateFlags) String() string {
+	var parts []string
+	if e&XpcListenerCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsInactive")
+	}
+	if e&XpcListenerCreateFlagsForceMach != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceMach")
+	}
+	if e&XpcListenerCreateFlagsForceXpcservice != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceXpcservice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlags int64
+
+const (
+	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0
+	XpcSessionCreateFlagsInactive       XpcSessionCreateFlags = 1
+	XpcSessionCreateFlagsMachPrivileged XpcSessionCreateFlags = 2
+)
+
+// String returns the XpcSessionCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcSessionCreateFlags) String() string {
+	var parts []string
+	if e&XpcSessionCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsInactive")
+	}
+	if e&XpcSessionCreateFlagsMachPrivileged != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsMachPrivileged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+const (
+	KCMAttachmentMode_ShouldNotPropagate                                                          = 0
+	KCMAttachmentMode_ShouldPropagate                                                             = 1
+	KCMAudioCodecType_AAC_AudibleProtected                                                        = 1633771875
+	KCMAudioCodecType_AAC_LCProtected                                                             = 1885430115
+	KCMAudioFormatDescriptionMask_All                                                             = 15
+	KCMAudioFormatDescriptionMask_ChannelLayout                                                   = 4
+	KCMAudioFormatDescriptionMask_Extensions                                                      = 8
+	KCMAudioFormatDescriptionMask_MagicCookie                                                     = 2
+	KCMAudioFormatDescriptionMask_StreamBasicDescription                                          = 1
+	KCMBlockBufferAlwaysCopyDataFlag                                                              = 2
+	KCMBlockBufferAssureMemoryNowFlag                                                             = 1
+	KCMBlockBufferBadCustomBlockSourceErr                                                         = -12702
+	KCMBlockBufferBadLengthParameterErr                                                           = -12704
+	KCMBlockBufferBadOffsetParameterErr                                                           = -12703
+	KCMBlockBufferBadPointerParameterErr                                                          = -12705
+	KCMBlockBufferBlockAllocationFailedErr                                                        = -12701
+	KCMBlockBufferCustomBlockSourceVersion                                                        = 0
+	KCMBlockBufferDontOptimizeDepthFlag                                                           = 4
+	KCMBlockBufferEmptyBBufErr                                                                    = -12706
+	KCMBlockBufferInsufficientSpaceErr                                                            = -12708
+	KCMBlockBufferNoErr                                                                           = 0
+	KCMBlockBufferPermitEmptyReferenceFlag                                                        = 8
+	KCMBlockBufferStructureAllocationFailedErr                                                    = -12700
+	KCMBlockBufferUnallocatedBlockErr                                                             = -12707
+	KCMBufferQueueError_AllocationFailed                                                          = -12760
+	KCMBufferQueueError_BadTriggerDuration                                                        = -12765
+	KCMBufferQueueError_CannotModifyQueueFromTriggerCallback                                      = -12766
+	KCMBufferQueueError_EnqueueAfterEndOfData                                                     = -12763
+	KCMBufferQueueError_InvalidBuffer                                                             = -12769
+	KCMBufferQueueError_InvalidCMBufferCallbacksStruct                                            = -12762
+	KCMBufferQueueError_InvalidTriggerCondition                                                   = -12767
+	KCMBufferQueueError_InvalidTriggerToken                                                       = -12768
+	KCMBufferQueueError_QueueIsFull                                                               = -12764
+	KCMBufferQueueError_RequiredParameterMissing                                                  = -12761
+	KCMBufferQueueTrigger_WhenBufferCountBecomesGreaterThan                                       = 11
+	KCMBufferQueueTrigger_WhenBufferCountBecomesLessThan                                          = 10
+	KCMBufferQueueTrigger_WhenDataBecomesReady                                                    = 7
+	KCMBufferQueueTrigger_WhenDurationBecomesGreaterThan                                          = 3
+	KCMBufferQueueTrigger_WhenDurationBecomesGreaterThanOrEqualTo                                 = 4
+	KCMBufferQueueTrigger_WhenDurationBecomesGreaterThanOrEqualToAndBufferCountBecomesGreaterThan = 12
+	KCMBufferQueueTrigger_WhenDurationBecomesLessThan                                             = 1
+	KCMBufferQueueTrigger_WhenDurationBecomesLessThanOrEqualTo                                    = 2
+	KCMBufferQueueTrigger_WhenEndOfDataReached                                                    = 8
+	KCMBufferQueueTrigger_WhenMaxPresentationTimeStampChanges                                     = 6
+	KCMBufferQueueTrigger_WhenMinPresentationTimeStampChanges                                     = 5
+	KCMBufferQueueTrigger_WhenReset                                                               = 9
+	KCMClockError_AllocationFailed                                                                = -12747
+	KCMClockError_InvalidParameter                                                                = -12746
+	KCMClockError_MissingRequiredParameter                                                        = -12745
+	KCMClockError_UnsupportedOperation                                                            = -12756
+	KCMClosedCaptionFormatType_ATSC                                                               = 1635017571
+	KCMClosedCaptionFormatType_CEA608                                                             = 1664495672
+	KCMClosedCaptionFormatType_CEA708                                                             = 1664561208
+	KCMFormatDescriptionBridgeError_AllocationFailed                                              = -12713
+	KCMFormatDescriptionBridgeError_IncompatibleFormatDescription                                 = -12716
+	KCMFormatDescriptionBridgeError_InvalidFormatDescription                                      = -12715
+	KCMFormatDescriptionBridgeError_InvalidParameter                                              = -12712
+	KCMFormatDescriptionBridgeError_InvalidSerializedSampleDescription                            = -12714
+	KCMFormatDescriptionBridgeError_InvalidSlice                                                  = -12719
+	KCMFormatDescriptionBridgeError_UnsupportedSampleDescriptionFlavor                            = -12717
+	KCMFormatDescriptionError_AllocationFailed                                                    = -12711
+	KCMFormatDescriptionError_InvalidParameter                                                    = -12710
+	KCMFormatDescriptionError_ValueNotAvailable                                                   = -12718
+	KCMMPEG2VideoProfile_HDV_1080i50                                                              = 1751414323
+	KCMMPEG2VideoProfile_HDV_1080i60                                                              = 1751414322
+	KCMMPEG2VideoProfile_HDV_1080p24                                                              = 1751414326
+	KCMMPEG2VideoProfile_HDV_1080p25                                                              = 1751414327
+	KCMMPEG2VideoProfile_HDV_1080p30                                                              = 1751414328
+	KCMMPEG2VideoProfile_HDV_720p24                                                               = 1751414324
+	KCMMPEG2VideoProfile_HDV_720p25                                                               = 1751414325
+	KCMMPEG2VideoProfile_HDV_720p30                                                               = 1751414321
+	KCMMPEG2VideoProfile_HDV_720p50                                                               = 1751414369
+	KCMMPEG2VideoProfile_HDV_720p60                                                               = 1751414329
+	KCMMPEG2VideoProfile_XDCAM_EX_1080i50_VBR35                                                   = 2019849827
+	KCMMPEG2VideoProfile_XDCAM_EX_1080i60_VBR35                                                   = 2019849826
+	KCMMPEG2VideoProfile_XDCAM_EX_1080p24_VBR35                                                   = 2019849828
+	KCMMPEG2VideoProfile_XDCAM_EX_1080p25_VBR35                                                   = 2019849829
+	KCMMPEG2VideoProfile_XDCAM_EX_1080p30_VBR35                                                   = 2019849830
+	KCMMPEG2VideoProfile_XDCAM_EX_720p24_VBR35                                                    = 2019849780
+	KCMMPEG2VideoProfile_XDCAM_EX_720p25_VBR35                                                    = 2019849781
+	KCMMPEG2VideoProfile_XDCAM_EX_720p30_VBR35                                                    = 2019849777
+	KCMMPEG2VideoProfile_XDCAM_EX_720p50_VBR35                                                    = 2019849825
+	KCMMPEG2VideoProfile_XDCAM_EX_720p60_VBR35                                                    = 2019849785
+	KCMMPEG2VideoProfile_XDCAM_HD422_1080i50_CBR50                                                = 2019833187
+	KCMMPEG2VideoProfile_XDCAM_HD422_1080i60_CBR50                                                = 2019833186
+	KCMMPEG2VideoProfile_XDCAM_HD422_1080p24_CBR50                                                = 2019833188
+	KCMMPEG2VideoProfile_XDCAM_HD422_1080p25_CBR50                                                = 2019833189
+	KCMMPEG2VideoProfile_XDCAM_HD422_1080p30_CBR50                                                = 2019833190
+	KCMMPEG2VideoProfile_XDCAM_HD422_540p                                                         = 2019846194
+	KCMMPEG2VideoProfile_XDCAM_HD422_720p24_CBR50                                                 = 2019833140
+	KCMMPEG2VideoProfile_XDCAM_HD422_720p25_CBR50                                                 = 2019833141
+	KCMMPEG2VideoProfile_XDCAM_HD422_720p30_CBR50                                                 = 2019833137
+	KCMMPEG2VideoProfile_XDCAM_HD422_720p50_CBR50                                                 = 2019833185
+	KCMMPEG2VideoProfile_XDCAM_HD422_720p60_CBR50                                                 = 2019833145
+	KCMMPEG2VideoProfile_XDCAM_HD_1080i50_VBR35                                                   = 2019849779
+	KCMMPEG2VideoProfile_XDCAM_HD_1080i60_VBR35                                                   = 2019849778
+	KCMMPEG2VideoProfile_XDCAM_HD_1080p24_VBR35                                                   = 2019849782
+	KCMMPEG2VideoProfile_XDCAM_HD_1080p25_VBR35                                                   = 2019849783
+	KCMMPEG2VideoProfile_XDCAM_HD_1080p30_VBR35                                                   = 2019849784
+	KCMMPEG2VideoProfile_XDCAM_HD_540p                                                            = 2019846244
+	KCMMPEG2VideoProfile_XF                                                                       = 2019981873
+	KCMMediaType_Audio                                                                            = 1936684398
+	KCMMediaType_AuxiliaryPicture                                                                 = 1635088502
+	KCMMediaType_ClosedCaption                                                                    = 1668047728
+	KCMMediaType_Metadata                                                                         = 1835365473
+	KCMMediaType_Muxed                                                                            = 1836415096
+	KCMMediaType_Subtitle                                                                         = 1935832172
+	KCMMediaType_TaggedBufferGroup                                                                = 1952606066
+	KCMMediaType_Text                                                                             = 1952807028
+	KCMMediaType_TimeCode                                                                         = 1953325924
+	KCMMediaType_Video                                                                            = 1986618469
+	KCMMemoryPoolError_AllocationFailed                                                           = -15490
+	KCMMemoryPoolError_InvalidParameter                                                           = -15491
+	KCMMetadataDataTypeRegistryError_AllocationFailed                                             = -16310
+	KCMMetadataDataTypeRegistryError_BadDataTypeIdentifier                                        = -16312
+	KCMMetadataDataTypeRegistryError_DataTypeAlreadyRegistered                                    = -16313
+	KCMMetadataDataTypeRegistryError_MultipleConformingBaseTypes                                  = -16315
+	KCMMetadataDataTypeRegistryError_RequiredParameterMissing                                     = -16311
+	KCMMetadataDataTypeRegistryError_RequiresConformingBaseType                                   = -16314
+	KCMMetadataFormatType_Boxed                                                                   = 1835360888
+	KCMMetadataFormatType_EMSG                                                                    = 1701671783
+	KCMMetadataFormatType_ICY                                                                     = 1768126752
+	KCMMetadataFormatType_ID3                                                                     = 1768174368
+	KCMMetadataIdentifierError_AllocationFailed                                                   = -16300
+	KCMMetadataIdentifierError_BadIdentifier                                                      = -16307
+	KCMMetadataIdentifierError_BadKey                                                             = -16302
+	KCMMetadataIdentifierError_BadKeyLength                                                       = -16303
+	KCMMetadataIdentifierError_BadKeySpace                                                        = -16306
+	KCMMetadataIdentifierError_BadKeyType                                                         = -16304
+	KCMMetadataIdentifierError_BadNumberKey                                                       = -16305
+	KCMMetadataIdentifierError_NoKeyValueAvailable                                                = -16308
+	KCMMetadataIdentifierError_RequiredParameterMissing                                           = -16301
+	KCMMuxedStreamType_DV                                                                         = 1685463072
+	KCMMuxedStreamType_EmbeddedDeviceScreenRecording                                              = 1769173536
+	KCMMuxedStreamType_MPEG1System                                                                = 1836069235
+	KCMMuxedStreamType_MPEG2Program                                                               = 1836069488
+	KCMMuxedStreamType_MPEG2Transport                                                             = 1836069492
+	KCMPersistentTrackID_Invalid                                                                  = 0
+	KCMPixelFormat_16BE555                                                                        = 16
+	KCMPixelFormat_16BE565                                                                        = 1110783541
+	KCMPixelFormat_16LE555                                                                        = 1278555445
+	KCMPixelFormat_16LE5551                                                                       = 892679473
+	KCMPixelFormat_16LE565                                                                        = 1278555701
+	KCMPixelFormat_24RGB                                                                          = 24
+	KCMPixelFormat_32ARGB                                                                         = 32
+	KCMPixelFormat_32BGRA                                                                         = 1111970369
+	KCMPixelFormat_422YpCbCr10                                                                    = 1983000880
+	KCMPixelFormat_422YpCbCr16                                                                    = 1983000886
+	KCMPixelFormat_422YpCbCr8                                                                     = 846624121
+	KCMPixelFormat_422YpCbCr8_yuvs                                                                = 2037741171
+	KCMPixelFormat_4444YpCbCrA8                                                                   = 1983131704
+	KCMPixelFormat_444YpCbCr10                                                                    = 1983131952
+	KCMPixelFormat_444YpCbCr8                                                                     = 1983066168
+	KCMPixelFormat_8IndexedGray_WhiteIsZero                                                       = 40
+	KCMSampleBufferError_AllocationFailed                                                         = -12730
+	KCMSampleBufferError_AlreadyHasDataBuffer                                                     = -12732
+	KCMSampleBufferError_ArrayTooSmall                                                            = -12737
+	KCMSampleBufferError_BufferHasNoSampleSizes                                                   = -12735
+	KCMSampleBufferError_BufferHasNoSampleTimingInfo                                              = -12736
+	KCMSampleBufferError_BufferNotReady                                                           = -12733
+	KCMSampleBufferError_CannotSubdivide                                                          = -12739
+	KCMSampleBufferError_DataCanceled                                                             = -16751
+	KCMSampleBufferError_DataFailed                                                               = -16750
+	KCMSampleBufferError_InvalidEntryCount                                                        = -12738
+	KCMSampleBufferError_InvalidMediaFormat                                                       = -12743
+	KCMSampleBufferError_InvalidMediaTypeForOperation                                             = -12741
+	KCMSampleBufferError_InvalidSampleData                                                        = -12742
+	KCMSampleBufferError_Invalidated                                                              = -12744
+	KCMSampleBufferError_RequiredParameterMissing                                                 = -12731
+	KCMSampleBufferError_SampleIndexOutOfRange                                                    = -12734
+	KCMSampleBufferError_SampleTimingInfoInvalid                                                  = -12740
+	KCMSampleBufferFlag_AudioBufferList_Assure16ByteAlignment                                     = 1
+	KCMSimpleQueueError_AllocationFailed                                                          = -12770
+	KCMSimpleQueueError_ParameterOutOfRange                                                       = -12772
+	KCMSimpleQueueError_QueueIsFull                                                               = -12773
+	KCMSimpleQueueError_RequiredParameterMissing                                                  = -12771
+	KCMSubtitleFormatType_3GText                                                                  = 1954034535
+	KCMSubtitleFormatType_WebVTT                                                                  = 2004251764
+	KCMSyncError_AllocationFailed                                                                 = -12754
+	KCMSyncError_InvalidParameter                                                                 = -12753
+	KCMSyncError_MissingRequiredParameter                                                         = -12752
+	KCMSyncError_RateMustBeNonZero                                                                = -12755
+	KCMTaggedBufferGroupFormatType_TaggedBufferGroup                                              = 1952606066
+	KCMTextDisplayFlag_allSubtitlesForced                                                         = 2147483648
+	KCMTextDisplayFlag_continuousKaraoke                                                          = 2048
+	KCMTextDisplayFlag_fillTextRegion                                                             = 262144
+	KCMTextDisplayFlag_forcedSubtitlesPresent                                                     = 1073741824
+	KCMTextDisplayFlag_obeySubtitleFormatting                                                     = 536870912
+	KCMTextDisplayFlag_scrollDirectionMask                                                        = 384
+	KCMTextDisplayFlag_scrollDirection_bottomToTop                                                = 0
+	KCMTextDisplayFlag_scrollDirection_leftToRight                                                = 384
+	KCMTextDisplayFlag_scrollDirection_rightToLeft                                                = 128
+	KCMTextDisplayFlag_scrollDirection_topToBottom                                                = 256
+	KCMTextDisplayFlag_scrollIn                                                                   = 32
+	KCMTextDisplayFlag_scrollOut                                                                  = 64
+	KCMTextDisplayFlag_writeTextVertically                                                        = 131072
+	KCMTextFormatType_3GText                                                                      = 1954034535
+	KCMTextFormatType_QTText                                                                      = 1952807028
+	KCMTextJustification_bottom_right                                                             = -1
+	KCMTextJustification_centered                                                                 = 1
+	KCMTextJustification_left_top                                                                 = 0
+	KCMTimeCodeFlag_24HourMax                                                                     = 2
+	KCMTimeCodeFlag_DropFrame                                                                     = 1
+	KCMTimeCodeFlag_NegTimesOK                                                                    = 4
+	KCMTimeCodeFormatType_Counter32                                                               = 1668166450
+	KCMTimeCodeFormatType_Counter64                                                               = 1668167220
+	KCMTimeCodeFormatType_TimeCode32                                                              = 1953325924
+	KCMTimeCodeFormatType_TimeCode64                                                              = 1952658996
+	KCMTimebaseError_AllocationFailed                                                             = -12750
+	KCMTimebaseError_InvalidParameter                                                             = -12749
+	KCMTimebaseError_MissingRequiredParameter                                                     = -12748
+	KCMTimebaseError_ReadOnly                                                                     = -12757
+	KCMTimebaseError_TimerIntervalTooShort                                                        = -12751
+	KCMVideoCodecType_422YpCbCr8                                                                  = 846624121
+	KCMVideoCodecType_AV1                                                                         = 1635135537
+	KCMVideoCodecType_Animation                                                                   = 1919706400
+	KCMVideoCodecType_AppleProRes422                                                              = 1634755438
+	KCMVideoCodecType_AppleProRes422HQ                                                            = 1634755432
+	KCMVideoCodecType_AppleProRes422LT                                                            = 1634755443
+	KCMVideoCodecType_AppleProRes422Proxy                                                         = 1634755439
+	KCMVideoCodecType_AppleProRes4444                                                             = 1634743400
+	KCMVideoCodecType_AppleProRes4444XQ                                                           = 1634743416
+	KCMVideoCodecType_AppleProResRAW                                                              = 1634759278
+	KCMVideoCodecType_AppleProResRAWHQ                                                            = 1634759272
+	KCMVideoCodecType_Cinepak                                                                     = 1668704612
+	KCMVideoCodecType_DVCNTSC                                                                     = 1685480224
+	KCMVideoCodecType_DVCPAL                                                                      = 1685480304
+	KCMVideoCodecType_DVCPROHD1080i50                                                             = 1685481525
+	KCMVideoCodecType_DVCPROHD1080i60                                                             = 1685481526
+	KCMVideoCodecType_DVCPROHD1080p25                                                             = 1685481522
+	KCMVideoCodecType_DVCPROHD1080p30                                                             = 1685481523
+	KCMVideoCodecType_DVCPROHD720p50                                                              = 1685481585
+	KCMVideoCodecType_DVCPROHD720p60                                                              = 1685481584
+	KCMVideoCodecType_DVCPro50NTSC                                                                = 1685468526
+	KCMVideoCodecType_DVCPro50PAL                                                                 = 1685468528
+	KCMVideoCodecType_DVCProPAL                                                                   = 1685483632
+	KCMVideoCodecType_DepthHEVC                                                                   = 1684369512
+	KCMVideoCodecType_DisparityHEVC                                                               = 1684632424
+	KCMVideoCodecType_DolbyVisionHEVC                                                             = 1685481521
+	KCMVideoCodecType_H263                                                                        = 1748121139
+	KCMVideoCodecType_H264                                                                        = 1635148593
+	KCMVideoCodecType_HEVC                                                                        = 1752589105
+	KCMVideoCodecType_HEVCWithAlpha                                                               = 1836415073
+	KCMVideoCodecType_JPEG                                                                        = 1785750887
+	KCMVideoCodecType_JPEG_OpenDML                                                                = 1684890161
+	KCMVideoCodecType_JPEG_XL                                                                     = 1786276963
+	KCMVideoCodecType_MPEG1Video                                                                  = 1836069238
+	KCMVideoCodecType_MPEG2Video                                                                  = 1836069494
+	KCMVideoCodecType_MPEG4Video                                                                  = 1836070006
+	KCMVideoCodecType_SorensonVideo                                                               = 1398165809
+	KCMVideoCodecType_SorensonVideo3                                                              = 1398165811
+	KCMVideoCodecType_VP9                                                                         = 1987063865
+)

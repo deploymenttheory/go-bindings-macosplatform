@@ -8788,3 +8788,2480 @@ func (e WritingToolsResultOptions) String() string {
 	}
 	return strings.Join(parts, "|")
 }
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Type int64
+
+const (
+	TypeExtended Type = 256
+	TypeAccess   Type = 0
+	TypeDefault  Type = 1
+	TypeAfs      Type = 2
+	TypeCoda     Type = 3
+	TypeNtfs     Type = 4
+	TypeNwfs     Type = 5
+)
+
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Type) String() string {
+	switch e {
+	case TypeExtended:
+		return "TypeExtended"
+	case TypeAccess:
+		return "TypeAccess"
+	case TypeDefault:
+		return "TypeDefault"
+	case TypeAfs:
+		return "TypeAfs"
+	case TypeCoda:
+		return "TypeCoda"
+	case TypeNtfs:
+		return "TypeNtfs"
+	case TypeNwfs:
+		return "TypeNwfs"
+	default:
+		return fmt.Sprintf("Type(%d)", int64(e))
+	}
+}
+
+type CGLCPContextPriorityRequest int64
+
+const (
+	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
+	KCGLCPContextPriorityRequestNormal CGLCPContextPriorityRequest = 1
+	KCGLCPContextPriorityRequestLow    CGLCPContextPriorityRequest = 2
+)
+
+// String returns the CGLCPContextPriorityRequest constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGLCPContextPriorityRequest) String() string {
+	switch e {
+	case KCGLCPContextPriorityRequestHigh:
+		return "KCGLCPContextPriorityRequestHigh"
+	case KCGLCPContextPriorityRequestNormal:
+		return "KCGLCPContextPriorityRequestNormal"
+	case KCGLCPContextPriorityRequestLow:
+		return "KCGLCPContextPriorityRequestLow"
+	default:
+		return fmt.Sprintf("CGLCPContextPriorityRequest(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type EvCmd int64
+
+const (
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
+	EVLEVEL EvCmd = 4
+)
+
+// String returns the EvCmd constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EvCmd) String() string {
+	switch e {
+	case EVNOP:
+		return "EVNOP"
+	case EVHIDE:
+		return "EVHIDE"
+	case EVSHOW:
+		return "EVSHOW"
+	case EVMOVE:
+		return "EVMOVE"
+	case EVLEVEL:
+		return "EVLEVEL"
+	default:
+		return fmt.Sprintf("EvCmd(%d)", int64(e))
+	}
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+type LaunchDataType int64
+
+const (
+	LaunchDataTypeDictionary LaunchDataType = 1
+	LaunchDataTypeArray      LaunchDataType = 2
+	LaunchDataTypeFd         LaunchDataType = 3
+	LaunchDataTypeInteger    LaunchDataType = 4
+	LaunchDataTypeReal       LaunchDataType = 5
+	LaunchDataTypeBool       LaunchDataType = 6
+	LaunchDataTypeString     LaunchDataType = 7
+	LaunchDataTypeOpaque     LaunchDataType = 8
+	LaunchDataTypeErrno      LaunchDataType = 9
+	LaunchDataTypeMachport   LaunchDataType = 10
+)
+
+// String returns the LaunchDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LaunchDataType) String() string {
+	switch e {
+	case LaunchDataTypeDictionary:
+		return "LaunchDataTypeDictionary"
+	case LaunchDataTypeArray:
+		return "LaunchDataTypeArray"
+	case LaunchDataTypeFd:
+		return "LaunchDataTypeFd"
+	case LaunchDataTypeInteger:
+		return "LaunchDataTypeInteger"
+	case LaunchDataTypeReal:
+		return "LaunchDataTypeReal"
+	case LaunchDataTypeBool:
+		return "LaunchDataTypeBool"
+	case LaunchDataTypeString:
+		return "LaunchDataTypeString"
+	case LaunchDataTypeOpaque:
+		return "LaunchDataTypeOpaque"
+	case LaunchDataTypeErrno:
+		return "LaunchDataTypeErrno"
+	case LaunchDataTypeMachport:
+		return "LaunchDataTypeMachport"
+	default:
+		return fmt.Sprintf("LaunchDataType(%d)", int64(e))
+	}
+}
+
+// These constants are used to specify a domain to MDLabelCreate().
+type MDLabelDomain int64
+
+const (
+	KMDLabelUserDomain  MDLabelDomain = 0
+	KMDLabelLocalDomain MDLabelDomain = 1
+)
+
+// String returns the MDLabelDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDLabelDomain) String() string {
+	switch e {
+	case KMDLabelUserDomain:
+		return "KMDLabelUserDomain"
+	case KMDLabelLocalDomain:
+		return "KMDLabelLocalDomain"
+	default:
+		return fmt.Sprintf("MDLabelDomain(%d)", int64(e))
+	}
+}
+
+type MDQueryOptionFlags int64
+
+const (
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
+	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
+)
+
+// String returns the MDQueryOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQueryOptionFlags) String() string {
+	switch e {
+	case KMDQuerySynchronous:
+		return "KMDQuerySynchronous"
+	case KMDQueryWantsUpdates:
+		return "KMDQueryWantsUpdates"
+	case KMDQueryAllowFSTranslation:
+		return "KMDQueryAllowFSTranslation"
+	default:
+		return fmt.Sprintf("MDQueryOptionFlags(%d)", int64(e))
+	}
+}
+
+type MDQuerySortOptionFlags int64
+
+const (
+	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
+)
+
+// String returns the MDQuerySortOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQuerySortOptionFlags) String() string {
+	switch e {
+	case KMDQueryReverseSortOrderFlag:
+		return "KMDQueryReverseSortOrderFlag"
+	default:
+		return fmt.Sprintf("MDQuerySortOptionFlags(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Constants that specify the position where the annotation applies.
+type AccessibilityAnnotationPosition int64
+
+const (
+	AccessibilityAnnotationPositionFullRange AccessibilityAnnotationPosition = 0
+	AccessibilityAnnotationPositionStart     AccessibilityAnnotationPosition = 1
+	AccessibilityAnnotationPositionEnd       AccessibilityAnnotationPosition = 2
+)
+
+// String returns the AccessibilityAnnotationPosition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AccessibilityAnnotationPosition) String() string {
+	switch e {
+	case AccessibilityAnnotationPositionFullRange:
+		return "AccessibilityAnnotationPositionFullRange"
+	case AccessibilityAnnotationPositionStart:
+		return "AccessibilityAnnotationPositionStart"
+	case AccessibilityAnnotationPositionEnd:
+		return "AccessibilityAnnotationPositionEnd"
+	default:
+		return fmt.Sprintf("AccessibilityAnnotationPosition(%d)", int64(e))
+	}
+}
+
+// Values that indicate the orientation of accessibility elements, such as scroll bars and split views.
+type AccessibilityOrientation int64
+
+const (
+	// The element has unknown orientation.
+	AccessibilityOrientationUnknown AccessibilityOrientation = 0
+	// The element is oriented vertically.
+	AccessibilityOrientationVertical AccessibilityOrientation = 1
+	// The element is oriented horizontally.
+	AccessibilityOrientationHorizontal AccessibilityOrientation = 2
+)
+
+// String returns the AccessibilityOrientation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AccessibilityOrientation) String() string {
+	switch e {
+	case AccessibilityOrientationUnknown:
+		return "AccessibilityOrientationUnknown"
+	case AccessibilityOrientationVertical:
+		return "AccessibilityOrientationVertical"
+	case AccessibilityOrientationHorizontal:
+		return "AccessibilityOrientationHorizontal"
+	default:
+		return fmt.Sprintf("AccessibilityOrientation(%d)", int64(e))
+	}
+}
+
+// A data type for notification priority levels.
+type AccessibilityPriorityLevel int64
+
+const (
+	// The notification is a low priority.
+	AccessibilityPriorityLow AccessibilityPriorityLevel = 10
+	// The notification is a medium priority.
+	AccessibilityPriorityMedium AccessibilityPriorityLevel = 50
+	// The notification is a high priority.
+	AccessibilityPriorityHigh AccessibilityPriorityLevel = 90
+)
+
+// String returns the AccessibilityPriorityLevel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AccessibilityPriorityLevel) String() string {
+	switch e {
+	case AccessibilityPriorityLow:
+		return "AccessibilityPriorityLow"
+	case AccessibilityPriorityMedium:
+		return "AccessibilityPriorityMedium"
+	case AccessibilityPriorityHigh:
+		return "AccessibilityPriorityHigh"
+	default:
+		return fmt.Sprintf("AccessibilityPriorityLevel(%d)", int64(e))
+	}
+}
+
+// Values that indicate the marker type of an accessibility element.
+type AccessibilityRulerMarkerType int64
+
+const (
+	// Unknown marker type.
+	AccessibilityRulerMarkerTypeUnknown AccessibilityRulerMarkerType = 0
+	// Left tab stop.
+	AccessibilityRulerMarkerTypeTabStopLeft AccessibilityRulerMarkerType = 1
+	// Right tab stop.
+	AccessibilityRulerMarkerTypeTabStopRight AccessibilityRulerMarkerType = 2
+	// Center tab stop.
+	AccessibilityRulerMarkerTypeTabStopCenter AccessibilityRulerMarkerType = 3
+	// Decimal tab stop.
+	AccessibilityRulerMarkerTypeTabStopDecimal AccessibilityRulerMarkerType = 4
+	// Head indent marker.
+	AccessibilityRulerMarkerTypeIndentHead AccessibilityRulerMarkerType = 5
+	// Tail indent marker.
+	AccessibilityRulerMarkerTypeIndentTail AccessibilityRulerMarkerType = 6
+	// First line indent marker.
+	AccessibilityRulerMarkerTypeIndentFirstLine AccessibilityRulerMarkerType = 7
+)
+
+// String returns the AccessibilityRulerMarkerType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AccessibilityRulerMarkerType) String() string {
+	switch e {
+	case AccessibilityRulerMarkerTypeUnknown:
+		return "AccessibilityRulerMarkerTypeUnknown"
+	case AccessibilityRulerMarkerTypeTabStopLeft:
+		return "AccessibilityRulerMarkerTypeTabStopLeft"
+	case AccessibilityRulerMarkerTypeTabStopRight:
+		return "AccessibilityRulerMarkerTypeTabStopRight"
+	case AccessibilityRulerMarkerTypeTabStopCenter:
+		return "AccessibilityRulerMarkerTypeTabStopCenter"
+	case AccessibilityRulerMarkerTypeTabStopDecimal:
+		return "AccessibilityRulerMarkerTypeTabStopDecimal"
+	case AccessibilityRulerMarkerTypeIndentHead:
+		return "AccessibilityRulerMarkerTypeIndentHead"
+	case AccessibilityRulerMarkerTypeIndentTail:
+		return "AccessibilityRulerMarkerTypeIndentTail"
+	case AccessibilityRulerMarkerTypeIndentFirstLine:
+		return "AccessibilityRulerMarkerTypeIndentFirstLine"
+	default:
+		return fmt.Sprintf("AccessibilityRulerMarkerType(%d)", int64(e))
+	}
+}
+
+// Values that indicate the sort direction of a column.
+type AccessibilitySortDirection int64
+
+const (
+	// The sort direction is unknown.
+	AccessibilitySortDirectionUnknown AccessibilitySortDirection = 0
+	// The column is sorted in ascending values.
+	AccessibilitySortDirectionAscending AccessibilitySortDirection = 1
+	// The column is sorted in descending values.
+	AccessibilitySortDirectionDescending AccessibilitySortDirection = 2
+)
+
+// String returns the AccessibilitySortDirection constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AccessibilitySortDirection) String() string {
+	switch e {
+	case AccessibilitySortDirectionUnknown:
+		return "AccessibilitySortDirectionUnknown"
+	case AccessibilitySortDirectionAscending:
+		return "AccessibilitySortDirectionAscending"
+	case AccessibilitySortDirectionDescending:
+		return "AccessibilitySortDirectionDescending"
+	default:
+		return fmt.Sprintf("AccessibilitySortDirection(%d)", int64(e))
+	}
+}
+
+// Values that indicate the unit values of a ruler or layout area.
+type AccessibilityUnits int64
+
+const (
+	// The units are unknown.
+	AccessibilityUnitsUnknown AccessibilityUnits = 0
+	// The units are inches.
+	AccessibilityUnitsInches AccessibilityUnits = 1
+	// The units are centimeters.
+	AccessibilityUnitsCentimeters AccessibilityUnits = 2
+	// The units are points.
+	AccessibilityUnitsPoints AccessibilityUnits = 3
+	// The units are picas.
+	AccessibilityUnitsPicas AccessibilityUnits = 4
+)
+
+// String returns the AccessibilityUnits constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AccessibilityUnits) String() string {
+	switch e {
+	case AccessibilityUnitsUnknown:
+		return "AccessibilityUnitsUnknown"
+	case AccessibilityUnitsInches:
+		return "AccessibilityUnitsInches"
+	case AccessibilityUnitsCentimeters:
+		return "AccessibilityUnitsCentimeters"
+	case AccessibilityUnitsPoints:
+		return "AccessibilityUnitsPoints"
+	case AccessibilityUnitsPicas:
+		return "AccessibilityUnitsPicas"
+	default:
+		return fmt.Sprintf("AccessibilityUnits(%d)", int64(e))
+	}
+}
+
+type BrowserDropOperation uint64
+
+const (
+	BrowserDropOn    BrowserDropOperation = 0
+	BrowserDropAbove BrowserDropOperation = 1
+)
+
+// String returns the BrowserDropOperation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BrowserDropOperation) String() string {
+	switch e {
+	case BrowserDropOn:
+		return "BrowserDropOn"
+	case BrowserDropAbove:
+		return "BrowserDropAbove"
+	default:
+		return fmt.Sprintf("BrowserDropOperation(%d)", int64(e))
+	}
+}
+
+type CollectionViewDropOperation int64
+
+const (
+	CollectionViewDropOn     CollectionViewDropOperation = 0
+	CollectionViewDropBefore CollectionViewDropOperation = 1
+)
+
+// String returns the CollectionViewDropOperation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CollectionViewDropOperation) String() string {
+	switch e {
+	case CollectionViewDropOn:
+		return "CollectionViewDropOn"
+	case CollectionViewDropBefore:
+		return "CollectionViewDropBefore"
+	default:
+		return fmt.Sprintf("CollectionViewDropOperation(%d)", int64(e))
+	}
+}
+
+// Constants that specify whether a drag terminates within or outside the application.
+type DraggingContext int64
+
+const (
+	// A constant that indicates dragging terminates outside the application.
+	DraggingContextOutsideApplication DraggingContext = 0
+	// A constant that indicates dragging terminates within the application.
+	DraggingContextWithinApplication DraggingContext = 1
+)
+
+// String returns the DraggingContext constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DraggingContext) String() string {
+	switch e {
+	case DraggingContextOutsideApplication:
+		return "DraggingContextOutsideApplication"
+	case DraggingContextWithinApplication:
+		return "DraggingContextWithinApplication"
+	default:
+		return fmt.Sprintf("DraggingContext(%d)", int64(e))
+	}
+}
+
+// These constants specify the possible states of a drawer.
+type DrawerState uint64
+
+const (
+	// Deprecated: Drawers are deprecated; consider using NSSplitViewController
+	DrawerClosedState DrawerState = 0
+	// Deprecated: Drawers are deprecated; consider using NSSplitViewController
+	DrawerOpeningState DrawerState = 1
+	// Deprecated: Drawers are deprecated; consider using NSSplitViewController
+	DrawerOpenState DrawerState = 2
+	// Deprecated: Drawers are deprecated; consider using NSSplitViewController
+	DrawerClosingState DrawerState = 3
+)
+
+// String returns the DrawerState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DrawerState) String() string {
+	switch e {
+	case DrawerClosedState:
+		return "DrawerClosedState"
+	case DrawerOpeningState:
+		return "DrawerOpeningState"
+	case DrawerOpenState:
+		return "DrawerOpenState"
+	case DrawerClosingState:
+		return "DrawerClosingState"
+	default:
+		return fmt.Sprintf("DrawerState(%d)", int64(e))
+	}
+}
+
+// These constants define the tags for performFindPanelAction:.
+type FindPanelAction uint64
+
+const (
+	// Displays the find panel.
+	FindPanelActionShowFindPanel FindPanelAction = 1
+	// Finds the next instance of the queried text.
+	FindPanelActionNext FindPanelAction = 2
+	// Finds the previous instance of the queried text.
+	FindPanelActionPrevious FindPanelAction = 3
+	// Replaces all query instances within the text view.
+	FindPanelActionReplaceAll FindPanelAction = 4
+	// Replaces a single query instance within the text view.
+	FindPanelActionReplace FindPanelAction = 5
+	// Replaces a single query instance and finds the next.
+	FindPanelActionReplaceAndFind FindPanelAction = 6
+	// Sets the query string to the current selection.
+	FindPanelActionSetFindString FindPanelAction = 7
+	// Replaces all query instances within the selection.
+	FindPanelActionReplaceAllInSelection FindPanelAction = 8
+	// Selects all query instances in the text view.
+	FindPanelActionSelectAll FindPanelAction = 9
+	// Selects all query instances within the selection.
+	FindPanelActionSelectAllInSelection FindPanelAction = 10
+)
+
+// String returns the FindPanelAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FindPanelAction) String() string {
+	switch e {
+	case FindPanelActionShowFindPanel:
+		return "FindPanelActionShowFindPanel"
+	case FindPanelActionNext:
+		return "FindPanelActionNext"
+	case FindPanelActionPrevious:
+		return "FindPanelActionPrevious"
+	case FindPanelActionReplaceAll:
+		return "FindPanelActionReplaceAll"
+	case FindPanelActionReplace:
+		return "FindPanelActionReplace"
+	case FindPanelActionReplaceAndFind:
+		return "FindPanelActionReplaceAndFind"
+	case FindPanelActionSetFindString:
+		return "FindPanelActionSetFindString"
+	case FindPanelActionReplaceAllInSelection:
+		return "FindPanelActionReplaceAllInSelection"
+	case FindPanelActionSelectAll:
+		return "FindPanelActionSelectAll"
+	case FindPanelActionSelectAllInSelection:
+		return "FindPanelActionSelectAllInSelection"
+	default:
+		return fmt.Sprintf("FindPanelAction(%d)", int64(e))
+	}
+}
+
+// The type of substring matching used by the Find panel.
+type FindPanelSubstringMatchType uint64
+
+const (
+	FindPanelSubstringMatchTypeContains   FindPanelSubstringMatchType = 0
+	FindPanelSubstringMatchTypeStartsWith FindPanelSubstringMatchType = 1
+	FindPanelSubstringMatchTypeFullWord   FindPanelSubstringMatchType = 2
+	FindPanelSubstringMatchTypeEndsWith   FindPanelSubstringMatchType = 3
+)
+
+// String returns the FindPanelSubstringMatchType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FindPanelSubstringMatchType) String() string {
+	switch e {
+	case FindPanelSubstringMatchTypeContains:
+		return "FindPanelSubstringMatchTypeContains"
+	case FindPanelSubstringMatchTypeStartsWith:
+		return "FindPanelSubstringMatchTypeStartsWith"
+	case FindPanelSubstringMatchTypeFullWord:
+		return "FindPanelSubstringMatchTypeFullWord"
+	case FindPanelSubstringMatchTypeEndsWith:
+		return "FindPanelSubstringMatchTypeEndsWith"
+	default:
+		return fmt.Sprintf("FindPanelSubstringMatchType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type FontPanelModeMask uint64
+
+const (
+	FontPanelModeMaskFace                FontPanelModeMask = 1
+	FontPanelModeMaskSize                FontPanelModeMask = 2
+	FontPanelModeMaskCollection          FontPanelModeMask = 4
+	FontPanelModeMaskUnderlineEffect     FontPanelModeMask = 256
+	FontPanelModeMaskStrikethroughEffect FontPanelModeMask = 512
+	FontPanelModeMaskTextColorEffect     FontPanelModeMask = 1024
+	FontPanelModeMaskDocumentColorEffect FontPanelModeMask = 2048
+	FontPanelModeMaskShadowEffect        FontPanelModeMask = 4096
+	FontPanelModeMaskAllEffects          FontPanelModeMask = 1048320
+	FontPanelModesMaskStandardModes      FontPanelModeMask = 65535
+	FontPanelModesMaskAllModes           FontPanelModeMask = 4294967295
+)
+
+// String returns the FontPanelModeMask constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FontPanelModeMask) String() string {
+	var parts []string
+	if e&FontPanelModeMaskFace != 0 {
+		parts = append(parts, "FontPanelModeMaskFace")
+	}
+	if e&FontPanelModeMaskSize != 0 {
+		parts = append(parts, "FontPanelModeMaskSize")
+	}
+	if e&FontPanelModeMaskCollection != 0 {
+		parts = append(parts, "FontPanelModeMaskCollection")
+	}
+	if e&FontPanelModeMaskUnderlineEffect != 0 {
+		parts = append(parts, "FontPanelModeMaskUnderlineEffect")
+	}
+	if e&FontPanelModeMaskStrikethroughEffect != 0 {
+		parts = append(parts, "FontPanelModeMaskStrikethroughEffect")
+	}
+	if e&FontPanelModeMaskTextColorEffect != 0 {
+		parts = append(parts, "FontPanelModeMaskTextColorEffect")
+	}
+	if e&FontPanelModeMaskDocumentColorEffect != 0 {
+		parts = append(parts, "FontPanelModeMaskDocumentColorEffect")
+	}
+	if e&FontPanelModeMaskShadowEffect != 0 {
+		parts = append(parts, "FontPanelModeMaskShadowEffect")
+	}
+	if e&FontPanelModeMaskAllEffects != 0 {
+		parts = append(parts, "FontPanelModeMaskAllEffects")
+	}
+	if e&FontPanelModesMaskStandardModes != 0 {
+		parts = append(parts, "FontPanelModesMaskStandardModes")
+	}
+	if e&FontPanelModesMaskAllModes != 0 {
+		parts = append(parts, "FontPanelModesMaskAllModes")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// A pattern of haptic feedback to be provided to the user.
+type HapticFeedbackPattern int64
+
+const (
+	HapticFeedbackPatternGeneric     HapticFeedbackPattern = 0
+	HapticFeedbackPatternAlignment   HapticFeedbackPattern = 1
+	HapticFeedbackPatternLevelChange HapticFeedbackPattern = 2
+)
+
+// String returns the HapticFeedbackPattern constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HapticFeedbackPattern) String() string {
+	switch e {
+	case HapticFeedbackPatternGeneric:
+		return "HapticFeedbackPatternGeneric"
+	case HapticFeedbackPatternAlignment:
+		return "HapticFeedbackPatternAlignment"
+	case HapticFeedbackPatternLevelChange:
+		return "HapticFeedbackPatternLevelChange"
+	default:
+		return fmt.Sprintf("HapticFeedbackPattern(%d)", int64(e))
+	}
+}
+
+// Constants that identify the loading status of the image.
+type ImageRepLoadStatus int64
+
+const (
+	ImageRepLoadStatusUnknownType     ImageRepLoadStatus = -1
+	ImageRepLoadStatusReadingHeader   ImageRepLoadStatus = -2
+	ImageRepLoadStatusWillNeedAllData ImageRepLoadStatus = -3
+	ImageRepLoadStatusInvalidData     ImageRepLoadStatus = -4
+	ImageRepLoadStatusUnexpectedEOF   ImageRepLoadStatus = -5
+	ImageRepLoadStatusCompleted       ImageRepLoadStatus = -6
+)
+
+// String returns the ImageRepLoadStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageRepLoadStatus) String() string {
+	switch e {
+	case ImageRepLoadStatusUnknownType:
+		return "ImageRepLoadStatusUnknownType"
+	case ImageRepLoadStatusReadingHeader:
+		return "ImageRepLoadStatusReadingHeader"
+	case ImageRepLoadStatusWillNeedAllData:
+		return "ImageRepLoadStatusWillNeedAllData"
+	case ImageRepLoadStatusInvalidData:
+		return "ImageRepLoadStatusInvalidData"
+	case ImageRepLoadStatusUnexpectedEOF:
+		return "ImageRepLoadStatusUnexpectedEOF"
+	case ImageRepLoadStatusCompleted:
+		return "ImageRepLoadStatusCompleted"
+	default:
+		return fmt.Sprintf("ImageRepLoadStatus(%d)", int64(e))
+	}
+}
+
+type PageLayoutResult int64
+
+const (
+	PageLayoutResultCancelled PageLayoutResult = 0
+	PageLayoutResultChanged   PageLayoutResult = 1
+)
+
+// String returns the PageLayoutResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PageLayoutResult) String() string {
+	switch e {
+	case PageLayoutResultCancelled:
+		return "PageLayoutResultCancelled"
+	case PageLayoutResultChanged:
+		return "PageLayoutResultChanged"
+	default:
+		return fmt.Sprintf("PageLayoutResult(%d)", int64(e))
+	}
+}
+
+// Options that specify how to interpret data on the pasteboard when initializing pasteboard data.
+// Bitmask — values may be combined with |.
+type PasteboardReadingOptions uint64
+
+const (
+	PasteboardReadingAsData         PasteboardReadingOptions = 0
+	PasteboardReadingAsString       PasteboardReadingOptions = 1
+	PasteboardReadingAsPropertyList PasteboardReadingOptions = 2
+	PasteboardReadingAsKeyedArchive PasteboardReadingOptions = 4
+)
+
+// String returns the PasteboardReadingOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PasteboardReadingOptions) String() string {
+	var parts []string
+	if e&PasteboardReadingAsString != 0 {
+		parts = append(parts, "PasteboardReadingAsString")
+	}
+	if e&PasteboardReadingAsPropertyList != 0 {
+		parts = append(parts, "PasteboardReadingAsPropertyList")
+	}
+	if e&PasteboardReadingAsKeyedArchive != 0 {
+		parts = append(parts, "PasteboardReadingAsKeyedArchive")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Type to specify options for writing to a pasteboard.
+// Bitmask — values may be combined with |.
+type PasteboardWritingOptions uint64
+
+const (
+	PasteboardWritingPromised PasteboardWritingOptions = 512
+)
+
+// String returns the PasteboardWritingOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PasteboardWritingOptions) String() string {
+	var parts []string
+	if e&PasteboardWritingPromised != 0 {
+		parts = append(parts, "PasteboardWritingPromised")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// The set of predefined appearances for a popover.
+//
+// Deprecated: since macOS 10.10.
+type PopoverAppearance int64
+
+const (
+	// The popover will use the default, light content appearance.
+	//
+	// Deprecated: since macOS 10.10.
+	PopoverAppearanceMinimal PopoverAppearance = 0
+	// The popover will draw with a HUD appearance.
+	//
+	// Deprecated: since macOS 10.10.
+	PopoverAppearanceHUD PopoverAppearance = 1
+)
+
+// String returns the PopoverAppearance constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PopoverAppearance) String() string {
+	switch e {
+	case PopoverAppearanceMinimal:
+		return "PopoverAppearanceMinimal"
+	case PopoverAppearanceHUD:
+		return "PopoverAppearanceHUD"
+	default:
+		return fmt.Sprintf("PopoverAppearance(%d)", int64(e))
+	}
+}
+
+type PrintPanelResult int64
+
+const (
+	PrintPanelResultCancelled PrintPanelResult = 0
+	PrintPanelResultPrinted   PrintPanelResult = 1
+)
+
+// String returns the PrintPanelResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PrintPanelResult) String() string {
+	switch e {
+	case PrintPanelResultCancelled:
+		return "PrintPanelResultCancelled"
+	case PrintPanelResultPrinted:
+		return "PrintPanelResultPrinted"
+	default:
+		return fmt.Sprintf("PrintPanelResult(%d)", int64(e))
+	}
+}
+
+// Constants that specify page orientations.
+//
+// Deprecated: since macOS 10.14.
+type PrintingOrientation uint64
+
+const (
+	// Deprecated: since macOS 10.14.
+	PortraitOrientation PrintingOrientation = 0
+	// Deprecated: since macOS 10.14.
+	LandscapeOrientation PrintingOrientation = 1
+)
+
+// String returns the PrintingOrientation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PrintingOrientation) String() string {
+	switch e {
+	case PortraitOrientation:
+		return "PortraitOrientation"
+	case LandscapeOrientation:
+		return "LandscapeOrientation"
+	default:
+		return fmt.Sprintf("PrintingOrientation(%d)", int64(e))
+	}
+}
+
+// Specify the height of a progress indicator.
+//
+// Deprecated: These constants do not accurately represent the geometry of NSProgressIndicator.  Use `controlSize` and `sizeToFit` instead.
+type ProgressIndicatorThickness uint64
+
+const (
+	// Deprecated: These constants do not accurately represent the geometry of NSProgressIndicator.  Use `controlSize` and `sizeToFit` instead.
+	ProgressIndicatorPreferredThickness ProgressIndicatorThickness = 14
+	// Deprecated: These constants do not accurately represent the geometry of NSProgressIndicator.  Use `controlSize` and `sizeToFit` instead.
+	ProgressIndicatorPreferredSmallThickness ProgressIndicatorThickness = 10
+	// Deprecated: These constants do not accurately represent the geometry of NSProgressIndicator.  Use `controlSize` and `sizeToFit` instead.
+	ProgressIndicatorPreferredLargeThickness ProgressIndicatorThickness = 18
+	// Deprecated: These constants do not accurately represent the geometry of NSProgressIndicator.  Use `controlSize` and `sizeToFit` instead.
+	ProgressIndicatorPreferredAquaThickness ProgressIndicatorThickness = 12
+)
+
+// String returns the ProgressIndicatorThickness constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ProgressIndicatorThickness) String() string {
+	switch e {
+	case ProgressIndicatorPreferredThickness:
+		return "ProgressIndicatorPreferredThickness"
+	case ProgressIndicatorPreferredSmallThickness:
+		return "ProgressIndicatorPreferredSmallThickness"
+	case ProgressIndicatorPreferredLargeThickness:
+		return "ProgressIndicatorPreferredLargeThickness"
+	case ProgressIndicatorPreferredAquaThickness:
+		return "ProgressIndicatorPreferredAquaThickness"
+	default:
+		return fmt.Sprintf("ProgressIndicatorThickness(%d)", int64(e))
+	}
+}
+
+// The sharing scope constants specify the nature of the things you are sharing.
+type SharingContentScope int64
+
+const (
+	// NSSharingContentScopeItem: use when sharing a clearly identified item, e.g. a file represented by its icon.
+	SharingContentScopeItem SharingContentScope = 0
+	// NSSharingContentScopePartial: use when sharing a portion of a more global content, e.g. part of a webpage
+	SharingContentScopePartial SharingContentScope = 1
+	// NSSharingContentScopeFull: use when sharing the whole content of the current document, e.g. the url of the webpage
+	SharingContentScopeFull SharingContentScope = 2
+)
+
+// String returns the SharingContentScope constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SharingContentScope) String() string {
+	switch e {
+	case SharingContentScopeItem:
+		return "SharingContentScopeItem"
+	case SharingContentScopePartial:
+		return "SharingContentScopePartial"
+	case SharingContentScopeFull:
+		return "SharingContentScopeFull"
+	default:
+		return fmt.Sprintf("SharingContentScope(%d)", int64(e))
+	}
+}
+
+// Constants for the spelling state attribute key.
+type SpellingState int64
+
+const (
+	// Flag for spelling issues.
+	SpellingStateSpellingFlag SpellingState = 1
+	// Flag for grammar issues.
+	SpellingStateGrammarFlag SpellingState = 2
+)
+
+// String returns the SpellingState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpellingState) String() string {
+	switch e {
+	case SpellingStateSpellingFlag:
+		return "SpellingStateSpellingFlag"
+	case SpellingStateGrammarFlag:
+		return "SpellingStateGrammarFlag"
+	default:
+		return fmt.Sprintf("SpellingState(%d)", int64(e))
+	}
+}
+
+// A group of constants that indicate a highlighting style for your app’s user interface to display during a spring-loading operation.
+type SpringLoadingHighlight int64
+
+const (
+	// A constant that indicates no highlighting.
+	SpringLoadingHighlightNone SpringLoadingHighlight = 0
+	// A constant that indicates standard highlighting to show the destination supports spring-loading.
+	SpringLoadingHighlightStandard SpringLoadingHighlight = 1
+	// A constant that indicates emphasized highlighting to show active spring-loading on the destination.
+	SpringLoadingHighlightEmphasized SpringLoadingHighlight = 2
+)
+
+// String returns the SpringLoadingHighlight constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpringLoadingHighlight) String() string {
+	switch e {
+	case SpringLoadingHighlightNone:
+		return "SpringLoadingHighlightNone"
+	case SpringLoadingHighlightStandard:
+		return "SpringLoadingHighlightStandard"
+	case SpringLoadingHighlightEmphasized:
+		return "SpringLoadingHighlightEmphasized"
+	default:
+		return fmt.Sprintf("SpringLoadingHighlight(%d)", int64(e))
+	}
+}
+
+// These constants denote the type of spring-loading behavior configured for the destination object.
+// Bitmask — values may be combined with |.
+type SpringLoadingOptions uint64
+
+const (
+	// Spring-loading on the destination object is disabled. No spring-loading operations can occur.
+	SpringLoadingDisabled SpringLoadingOptions = 0
+	// Spring-loading on the destination object is enabled. The user can drag an object over a destination object and hover or force click to initiate spring-loading and activate the destination object. When initiated by a force click, spring-loading is invoked once the force click is released.
+	SpringLoadingEnabled SpringLoadingOptions = 1
+	// Spring-loading on the destination object is enabled. The user can drag an object over a destination object and hover or force click to initiate spring-loading and activate the destination object. When initiated by a force click, spring-loading is invoked once the force click begins and deactivated when the force click is released. When initiated by hovering, spring-loading is invoked at the hover timeout and deactivated when the drag exits the destination object. Use this constant sparingly.
+	SpringLoadingContinuousActivation SpringLoadingOptions = 2
+	// Spring-loading on the destination object is enabled, but cannot be invoked by hovering. The user can drag an object over a destination object and force click to initiate spring-loading and activate the destination object. This option may be useful in situations where a long hover, such as dragging across a large destination object, initiates undesired spring-loading. Use this constant sparingly.
+	SpringLoadingNoHover SpringLoadingOptions = 8
+)
+
+// String returns the SpringLoadingOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SpringLoadingOptions) String() string {
+	var parts []string
+	if e&SpringLoadingEnabled != 0 {
+		parts = append(parts, "SpringLoadingEnabled")
+	}
+	if e&SpringLoadingContinuousActivation != 0 {
+		parts = append(parts, "SpringLoadingContinuousActivation")
+	}
+	if e&SpringLoadingNoHover != 0 {
+		parts = append(parts, "SpringLoadingNoHover")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Constants that specify the rendering options for drawing a string.
+// Bitmask — values may be combined with |.
+type StringDrawingOptions int64
+
+const (
+	// Uses the line fragment origin instead of the baseline origin.
+	StringDrawingUsesLineFragmentOrigin StringDrawingOptions = 1
+	// Uses the font leading for calculating line heights.
+	StringDrawingUsesFontLeading StringDrawingOptions = 2
+	// Uses image glyph bounds instead of typographic bounds.
+	StringDrawingUsesDeviceMetrics StringDrawingOptions = 8
+	// Truncates and adds the ellipsis character to the last visible line if the text doesn’t fit into the specified bounds.
+	StringDrawingTruncatesLastVisibleLine StringDrawingOptions = 32
+	// Specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
+	StringDrawingOptionsResolvesNaturalAlignmentWithBaseWritingDirection StringDrawingOptions = 512
+	// An option that disables screen font substitution.
+	//
+	// Deprecated: since macOS 10.11.
+	StringDrawingDisableScreenFontSubstitution StringDrawingOptions = 4
+	// Suppresses caching layout information.
+	//
+	// Deprecated: since macOS 10.11.
+	StringDrawingOneShot StringDrawingOptions = 16
+)
+
+// String returns the StringDrawingOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e StringDrawingOptions) String() string {
+	var parts []string
+	if e&StringDrawingUsesLineFragmentOrigin != 0 {
+		parts = append(parts, "StringDrawingUsesLineFragmentOrigin")
+	}
+	if e&StringDrawingUsesFontLeading != 0 {
+		parts = append(parts, "StringDrawingUsesFontLeading")
+	}
+	if e&StringDrawingUsesDeviceMetrics != 0 {
+		parts = append(parts, "StringDrawingUsesDeviceMetrics")
+	}
+	if e&StringDrawingTruncatesLastVisibleLine != 0 {
+		parts = append(parts, "StringDrawingTruncatesLastVisibleLine")
+	}
+	if e&StringDrawingOptionsResolvesNaturalAlignmentWithBaseWritingDirection != 0 {
+		parts = append(parts, "StringDrawingOptionsResolvesNaturalAlignmentWithBaseWritingDirection")
+	}
+	if e&StringDrawingDisableScreenFontSubstitution != 0 {
+		parts = append(parts, "StringDrawingDisableScreenFontSubstitution")
+	}
+	if e&StringDrawingOneShot != 0 {
+		parts = append(parts, "StringDrawingOneShot")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type TextCursorAccessoryPlacement int64
+
+const (
+	TextCursorAccessoryPlacementUnspecified     TextCursorAccessoryPlacement = 0
+	TextCursorAccessoryPlacementBackward        TextCursorAccessoryPlacement = 1
+	TextCursorAccessoryPlacementForward         TextCursorAccessoryPlacement = 2
+	TextCursorAccessoryPlacementInvisible       TextCursorAccessoryPlacement = 3
+	TextCursorAccessoryPlacementCenter          TextCursorAccessoryPlacement = 4
+	TextCursorAccessoryPlacementOffscreenLeft   TextCursorAccessoryPlacement = 5
+	TextCursorAccessoryPlacementOffscreenTop    TextCursorAccessoryPlacement = 6
+	TextCursorAccessoryPlacementOffscreenRight  TextCursorAccessoryPlacement = 7
+	TextCursorAccessoryPlacementOffscreenBottom TextCursorAccessoryPlacement = 8
+)
+
+// String returns the TextCursorAccessoryPlacement constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextCursorAccessoryPlacement) String() string {
+	switch e {
+	case TextCursorAccessoryPlacementUnspecified:
+		return "TextCursorAccessoryPlacementUnspecified"
+	case TextCursorAccessoryPlacementBackward:
+		return "TextCursorAccessoryPlacementBackward"
+	case TextCursorAccessoryPlacementForward:
+		return "TextCursorAccessoryPlacementForward"
+	case TextCursorAccessoryPlacementInvisible:
+		return "TextCursorAccessoryPlacementInvisible"
+	case TextCursorAccessoryPlacementCenter:
+		return "TextCursorAccessoryPlacementCenter"
+	case TextCursorAccessoryPlacementOffscreenLeft:
+		return "TextCursorAccessoryPlacementOffscreenLeft"
+	case TextCursorAccessoryPlacementOffscreenTop:
+		return "TextCursorAccessoryPlacementOffscreenTop"
+	case TextCursorAccessoryPlacementOffscreenRight:
+		return "TextCursorAccessoryPlacementOffscreenRight"
+	case TextCursorAccessoryPlacementOffscreenBottom:
+		return "TextCursorAccessoryPlacementOffscreenBottom"
+	default:
+		return fmt.Sprintf("TextCursorAccessoryPlacement(%d)", int64(e))
+	}
+}
+
+// The following constants indicate the type of search anchor an action should perform.
+type TextFinderMatchingType int64
+
+const (
+	TextFinderMatchingTypeContains   TextFinderMatchingType = 0
+	TextFinderMatchingTypeStartsWith TextFinderMatchingType = 1
+	TextFinderMatchingTypeFullWord   TextFinderMatchingType = 2
+	TextFinderMatchingTypeEndsWith   TextFinderMatchingType = 3
+)
+
+// String returns the TextFinderMatchingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextFinderMatchingType) String() string {
+	switch e {
+	case TextFinderMatchingTypeContains:
+		return "TextFinderMatchingTypeContains"
+	case TextFinderMatchingTypeStartsWith:
+		return "TextFinderMatchingTypeStartsWith"
+	case TextFinderMatchingTypeFullWord:
+		return "TextFinderMatchingTypeFullWord"
+	case TextFinderMatchingTypeEndsWith:
+		return "TextFinderMatchingTypeEndsWith"
+	default:
+		return fmt.Sprintf("TextFinderMatchingType(%d)", int64(e))
+	}
+}
+
+// Values that describe options for enumerating text layout fragments.
+// Bitmask — values may be combined with |.
+type TextLayoutFragmentEnumerationOptions uint64
+
+const (
+	// The value that represents no selected enumeration options.
+	TextLayoutFragmentEnumerationOptionsNone                     TextLayoutFragmentEnumerationOptions = 0
+	TextLayoutFragmentEnumerationOptionsReverse                  TextLayoutFragmentEnumerationOptions = 1
+	TextLayoutFragmentEnumerationOptionsEstimatesSize            TextLayoutFragmentEnumerationOptions = 2
+	TextLayoutFragmentEnumerationOptionsEnsuresLayout            TextLayoutFragmentEnumerationOptions = 4
+	TextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment TextLayoutFragmentEnumerationOptions = 8
+)
+
+// String returns the TextLayoutFragmentEnumerationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextLayoutFragmentEnumerationOptions) String() string {
+	var parts []string
+	if e&TextLayoutFragmentEnumerationOptionsReverse != 0 {
+		parts = append(parts, "TextLayoutFragmentEnumerationOptionsReverse")
+	}
+	if e&TextLayoutFragmentEnumerationOptionsEstimatesSize != 0 {
+		parts = append(parts, "TextLayoutFragmentEnumerationOptionsEstimatesSize")
+	}
+	if e&TextLayoutFragmentEnumerationOptionsEnsuresLayout != 0 {
+		parts = append(parts, "TextLayoutFragmentEnumerationOptionsEnsuresLayout")
+	}
+	if e&TextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment != 0 {
+		parts = append(parts, "TextLayoutFragmentEnumerationOptionsEnsuresExtraLineFragment")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type TextMovement int64
+
+const (
+	TextMovementReturn  TextMovement = 16
+	TextMovementTab     TextMovement = 17
+	TextMovementBacktab TextMovement = 18
+	TextMovementLeft    TextMovement = 19
+	TextMovementRight   TextMovement = 20
+	TextMovementUp      TextMovement = 21
+	TextMovementDown    TextMovement = 22
+	TextMovementCancel  TextMovement = 23
+	TextMovementOther   TextMovement = 0
+)
+
+// String returns the TextMovement constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextMovement) String() string {
+	switch e {
+	case TextMovementReturn:
+		return "TextMovementReturn"
+	case TextMovementTab:
+		return "TextMovementTab"
+	case TextMovementBacktab:
+		return "TextMovementBacktab"
+	case TextMovementLeft:
+		return "TextMovementLeft"
+	case TextMovementRight:
+		return "TextMovementRight"
+	case TextMovementUp:
+		return "TextMovementUp"
+	case TextMovementDown:
+		return "TextMovementDown"
+	case TextMovementCancel:
+		return "TextMovementCancel"
+	case TextMovementOther:
+		return "TextMovementOther"
+	default:
+		return fmt.Sprintf("TextMovement(%d)", int64(e))
+	}
+}
+
+// Constants that specify the text scaling.
+type TextScalingType int64
+
+const (
+	// Font sizes throughout the document appear visually similar to how they would render in macOS and non-Apple platforms.
+	TextScalingStandard TextScalingType = 0
+	// Font sizes throughout the document appear visually similar to how they would render in iOS.
+	TextScalingiOS TextScalingType = 1
+)
+
+// String returns the TextScalingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextScalingType) String() string {
+	switch e {
+	case TextScalingStandard:
+		return "TextScalingStandard"
+	case TextScalingiOS:
+		return "TextScalingiOS"
+	default:
+		return fmt.Sprintf("TextScalingType(%d)", int64(e))
+	}
+}
+
+// Values that describe the possible layout orientations.
+type TextSelectionNavigationLayoutOrientation int64
+
+const (
+	TextSelectionNavigationLayoutOrientationHorizontal TextSelectionNavigationLayoutOrientation = 0
+	TextSelectionNavigationLayoutOrientationVertical   TextSelectionNavigationLayoutOrientation = 1
+)
+
+// String returns the TextSelectionNavigationLayoutOrientation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextSelectionNavigationLayoutOrientation) String() string {
+	switch e {
+	case TextSelectionNavigationLayoutOrientationHorizontal:
+		return "TextSelectionNavigationLayoutOrientationHorizontal"
+	case TextSelectionNavigationLayoutOrientationVertical:
+		return "TextSelectionNavigationLayoutOrientationVertical"
+	default:
+		return fmt.Sprintf("TextSelectionNavigationLayoutOrientation(%d)", int64(e))
+	}
+}
+
+// Values that describe how the framework handles different kinds of selection modifiers.
+// Bitmask — values may be combined with |.
+type TextSelectionNavigationModifier uint64
+
+const (
+	TextSelectionNavigationModifierExtend   TextSelectionNavigationModifier = 1
+	TextSelectionNavigationModifierVisual   TextSelectionNavigationModifier = 2
+	TextSelectionNavigationModifierMultiple TextSelectionNavigationModifier = 4
+)
+
+// String returns the TextSelectionNavigationModifier constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextSelectionNavigationModifier) String() string {
+	var parts []string
+	if e&TextSelectionNavigationModifierExtend != 0 {
+		parts = append(parts, "TextSelectionNavigationModifierExtend")
+	}
+	if e&TextSelectionNavigationModifierVisual != 0 {
+		parts = append(parts, "TextSelectionNavigationModifierVisual")
+	}
+	if e&TextSelectionNavigationModifierMultiple != 0 {
+		parts = append(parts, "TextSelectionNavigationModifierMultiple")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Constants for the writing direction attribute key.
+type WritingDirectionFormatType int64
+
+const (
+	// Text is embedded in text with another writing direction. For example, an English quotation in the middle of an Arabic sentence could be marked as being embedded left-to-right text.
+	WritingDirectionEmbedding WritingDirectionFormatType = 0
+	// Enables character types with inherent directionality to be overridden when required for special cases, such as for part numbers made of mixed English, digits, and Hebrew letters to be written from right to left.
+	WritingDirectionOverride WritingDirectionFormatType = 2
+)
+
+// String returns the WritingDirectionFormatType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WritingDirectionFormatType) String() string {
+	switch e {
+	case WritingDirectionEmbedding:
+		return "WritingDirectionEmbedding"
+	case WritingDirectionOverride:
+		return "WritingDirectionOverride"
+	default:
+		return fmt.Sprintf("WritingDirectionFormatType(%d)", int64(e))
+	}
+}
+
+// Use the `NSWritingToolsCoordinator.TextAnimation` constants to determine the type of animation that is occurring. During an interactive change to your view, Writing Tools creates animations to provide feedback about what’s happening. During the setup for each animation, Writing Tools reports the type of animation to the coordinator’s delegate, so that you can perform additional actions related to that animation. For example, during an insertion animation, you might animate changes to other views in your interface.
+type WritingToolsCoordinatorTextAnimation int64
+
+const (
+	// The animation that Writing Tools performs when waiting to receive results from the large language model. This type of animation applies a visual effect to the text that Writing Tools is evaluating. When preparing for this animation, hide the text that Writing Tools is about to evaluate. In the same space where that text appears, Writing Tools displays a preview image that you provide and animates changes to that image.
+	WritingToolsCoordinatorTextAnimationAnticipate WritingToolsCoordinatorTextAnimation = 0
+	// The animation that Writing Tools performs when removing text from your view. This type of animation shows the removal of text from your view. When preparing for this animation, hide the text in the provided range if you haven’t already. If you support animating the reflow of your view’s text, you can also prepare any other animations you need. Writing Tools uses a preview object you provide to animate the removal of the text.
+	WritingToolsCoordinatorTextAnimationRemove WritingToolsCoordinatorTextAnimation = 1
+	// The animation that Writing Tools performs when inserting text into your view. This type of animation shows the insertion of text to your view. When preparing for this animation, hide the text in the provided range if you haven’t already. If you support animating the reflow of your view’s text, you can also prepare any other animations you need. Writing Tools uses a preview object you provide to animate the insertion of the text.
+	WritingToolsCoordinatorTextAnimationInsert WritingToolsCoordinatorTextAnimation = 2
+	// The animation effect that Writing Tools performs when the view is waiting for results, but the system isn’t actively evaluating the text. When Writing Tools isn’t actively evaluating your text, it creates this animation. When preparing for this animation, display the text in the specified range with a foreground color of 50% grey.
+	WritingToolsCoordinatorTextAnimationAnticipateInactive WritingToolsCoordinatorTextAnimation = 8
+	// The animation effect that Writing Tools performs on text situated after the insertion point. When Writing Tools inserts text at a given location, it creates an animation to make room for the new text. When preparing for this animation, hide the text between the insertion point and the end of your text storage. When finishing the animation, show the text again.
+	WritingToolsCoordinatorTextAnimationTranslate WritingToolsCoordinatorTextAnimation = 9
+)
+
+// String returns the WritingToolsCoordinatorTextAnimation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WritingToolsCoordinatorTextAnimation) String() string {
+	switch e {
+	case WritingToolsCoordinatorTextAnimationAnticipate:
+		return "WritingToolsCoordinatorTextAnimationAnticipate"
+	case WritingToolsCoordinatorTextAnimationRemove:
+		return "WritingToolsCoordinatorTextAnimationRemove"
+	case WritingToolsCoordinatorTextAnimationInsert:
+		return "WritingToolsCoordinatorTextAnimationInsert"
+	case WritingToolsCoordinatorTextAnimationAnticipateInactive:
+		return "WritingToolsCoordinatorTextAnimationAnticipateInactive"
+	case WritingToolsCoordinatorTextAnimationTranslate:
+		return "WritingToolsCoordinatorTextAnimationTranslate"
+	default:
+		return fmt.Sprintf("WritingToolsCoordinatorTextAnimation(%d)", int64(e))
+	}
+}
+
+// Options that indicate whether Writing Tools is animating changes to your view’s text. During an operation, Writing Tools delivers replacement text to the delegate of the active “NSWritingToolsCoordinator“ object. Depending on the configured experience for your view, it delivers these changes as either interactive or noninteractive replacements. For interactive replacements, Writing Tools animates the change automatically and provides you with the information you need to perform any related animations.
+type WritingToolsCoordinatorTextReplacementReason int64
+
+const (
+	// An option to animate the replacement of text in your view. When Writing Tools requests an interactive change in your delegate’s ``NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:replace:in:proposedText:reason:animationParameters:completion:)`` method, it passes a valid set of animation parameters to that method. Update your view’s text storage and use the provided ``NSWritingToolsCoordinator/AnimationParameters`` type to create any view-specific animations you need to support the animated replacement of the text.
+	WritingToolsCoordinatorTextReplacementReasonInteractive WritingToolsCoordinatorTextReplacementReason = 0
+	// An option to replace the text in your view without animating the change. When Writing Tools requests a noninteractive change in your delegate’s ``NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:replace:in:proposedText:reason:animationParameters:completion:)`` method, update your view’s text storage without animating the change.
+	WritingToolsCoordinatorTextReplacementReasonNoninteractive WritingToolsCoordinatorTextReplacementReason = 1
+)
+
+// String returns the WritingToolsCoordinatorTextReplacementReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WritingToolsCoordinatorTextReplacementReason) String() string {
+	switch e {
+	case WritingToolsCoordinatorTextReplacementReasonInteractive:
+		return "WritingToolsCoordinatorTextReplacementReasonInteractive"
+	case WritingToolsCoordinatorTextReplacementReasonNoninteractive:
+		return "WritingToolsCoordinatorTextReplacementReasonNoninteractive"
+	default:
+		return fmt.Sprintf("WritingToolsCoordinatorTextReplacementReason(%d)", int64(e))
+	}
+}
+
+type NXMouseButton int64
+
+const (
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
+	NX_RightButton NXMouseButton = 2
+)
+
+// String returns the NXMouseButton constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NXMouseButton) String() string {
+	switch e {
+	case NX_OneButton:
+		return "NX_OneButton"
+	case NX_LeftButton:
+		return "NX_LeftButton"
+	case NX_RightButton:
+		return "NX_RightButton"
+	default:
+		return fmt.Sprintf("NXMouseButton(%d)", int64(e))
+	}
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type OSUnfairLockFlags int64
+
+const (
+	OSUnfairLockFlagsNone         OSUnfairLockFlags = 0
+	OSUnfairLockFlagsAdaptiveSpin OSUnfairLockFlags = 262144
+)
+
+// String returns the OSUnfairLockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSUnfairLockFlags) String() string {
+	var parts []string
+	if e&OSUnfairLockFlagsAdaptiveSpin != 0 {
+		parts = append(parts, "OSUnfairLockFlagsAdaptiveSpin")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type PMPageToPaperMappingType int64
+
+const (
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
+)
+
+// String returns the PMPageToPaperMappingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PMPageToPaperMappingType) String() string {
+	switch e {
+	case KPMPageToPaperMappingNone:
+		return "KPMPageToPaperMappingNone"
+	case KPMPageToPaperMappingScaleToFit:
+		return "KPMPageToPaperMappingScaleToFit"
+	default:
+		return fmt.Sprintf("PMPageToPaperMappingType(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlags int64
+
+const (
+	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
+	XpcListenerCreateFlagsInactive        XpcListenerCreateFlags = 1
+	XpcListenerCreateFlagsForceMach       XpcListenerCreateFlags = 2
+	XpcListenerCreateFlagsForceXpcservice XpcListenerCreateFlags = 4
+)
+
+// String returns the XpcListenerCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcListenerCreateFlags) String() string {
+	var parts []string
+	if e&XpcListenerCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsInactive")
+	}
+	if e&XpcListenerCreateFlagsForceMach != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceMach")
+	}
+	if e&XpcListenerCreateFlagsForceXpcservice != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceXpcservice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlags int64
+
+const (
+	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0
+	XpcSessionCreateFlagsInactive       XpcSessionCreateFlags = 1
+	XpcSessionCreateFlagsMachPrivileged XpcSessionCreateFlags = 2
+)
+
+// String returns the XpcSessionCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcSessionCreateFlags) String() string {
+	var parts []string
+	if e&XpcSessionCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsInactive")
+	}
+	if e&XpcSessionCreateFlagsMachPrivileged != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsMachPrivileged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+const (
+	AccessibilityHourMinuteDateTimeComponentsFlag       = 12
+	AccessibilityHourMinuteSecondDateTimeComponentsFlag = 14
+	AccessibilityYearMonthDateTimeComponentsFlag        = 192
+	AccessibilityYearMonthDayDateTimeComponentsFlag     = 224
+	// Deprecated: Use NSAlertFirstButtonReturn and other NSModalResponses with an NSAlert presentation instead
+	AlertAlternateReturn = 0
+	// Deprecated: Use NSAlertFirstButtonReturn with an NSAlert presentation instead
+	AlertDefaultReturn = 1
+	// Deprecated: Use NSAlertFirstButtonReturn and other NSModalResponses with an NSAlert presentation instead
+	AlertErrorReturn = -2
+	// Deprecated: Use NSAlertFirstButtonReturn and other NSModalResponses with an NSAlert presentation instead
+	AlertOtherReturn = -1
+	// Deprecated: Use formatters instead
+	AnyType             = 0
+	AttachmentCharacter = 65532
+	BackTabCharacter    = 25
+	BackspaceCharacter  = 8
+	BacktabTextMovement = 18
+	BeginFunctionKey    = 63274
+	BreakFunctionKey    = 63282
+	// Deprecated: since macOS 10.10.
+	CancelButton                 = 0
+	CancelTextMovement           = 23
+	CarriageReturnCharacter      = 13
+	ClearDisplayFunctionKey      = 63290
+	ClearLineFunctionKey         = 63289
+	ControlGlyph                 = 16777215
+	DeleteCharFunctionKey        = 63294
+	DeleteCharacter              = 127
+	DeleteFunctionKey            = 63272
+	DeleteLineFunctionKey        = 63292
+	DisplayWindowRunLoopOrdering = 600000
+	// Deprecated: Use formatters instead
+	DoubleType           = 6
+	DownArrowFunctionKey = 63233
+	DownTextMovement     = 22
+	EndFunctionKey       = 63275
+	EnterCharacter       = 3
+	ExecuteFunctionKey   = 63298
+	F10FunctionKey       = 63245
+	F11FunctionKey       = 63246
+	F12FunctionKey       = 63247
+	F13FunctionKey       = 63248
+	F14FunctionKey       = 63249
+	F15FunctionKey       = 63250
+	F16FunctionKey       = 63251
+	F17FunctionKey       = 63252
+	F18FunctionKey       = 63253
+	F19FunctionKey       = 63254
+	F1FunctionKey        = 63236
+	F20FunctionKey       = 63255
+	F21FunctionKey       = 63256
+	F22FunctionKey       = 63257
+	F23FunctionKey       = 63258
+	F24FunctionKey       = 63259
+	F25FunctionKey       = 63260
+	F26FunctionKey       = 63261
+	F27FunctionKey       = 63262
+	F28FunctionKey       = 63263
+	F29FunctionKey       = 63264
+	F2FunctionKey        = 63237
+	F30FunctionKey       = 63265
+	F31FunctionKey       = 63266
+	F32FunctionKey       = 63267
+	F33FunctionKey       = 63268
+	F34FunctionKey       = 63269
+	F35FunctionKey       = 63270
+	F3FunctionKey        = 63238
+	F4FunctionKey        = 63239
+	F5FunctionKey        = 63240
+	F6FunctionKey        = 63241
+	F7FunctionKey        = 63242
+	F8FunctionKey        = 63243
+	F9FunctionKey        = 63244
+	FPCurrentField       = 134
+	FPPreviewButton      = 131
+	FPPreviewField       = 128
+	FPRevertButton       = 130
+	FPSetButton          = 132
+	FPSizeField          = 129
+	FPSizeTitle          = 133
+	// Deprecated: since macOS 10.13.
+	FileHandlingPanelCancelButton = 0
+	// Deprecated: since macOS 10.13.
+	FileHandlingPanelOKButton = 1
+	FindFunctionKey           = 63301
+	// Deprecated: Use formatters instead
+	FloatType                            = 3
+	FontAssetDownloadError               = 66304
+	FontBoldTrait                        = 2
+	FontClarendonSerifsClass             = 1073741824
+	FontCondensedTrait                   = 64
+	FontErrorMaximum                     = 66335
+	FontErrorMinimum                     = 66304
+	FontExpandedTrait                    = 32
+	FontFamilyClassMask                  = 4026531840
+	FontFreeformSerifsClass              = 1879048192
+	FontItalicTrait                      = 1
+	FontModernSerifsClass                = 805306368
+	FontMonoSpaceTrait                   = 1024
+	FontOldStyleSerifsClass              = 268435456
+	FontOrnamentalsClass                 = -1879048192
+	FontPanelAllEffectsModeMask          = 1048320
+	FontPanelAllModesMask                = 4294967295
+	FontPanelCollectionModeMask          = 4
+	FontPanelDocumentColorEffectModeMask = 2048
+	FontPanelFaceModeMask                = 1
+	FontPanelShadowEffectModeMask        = 4096
+	FontPanelSizeModeMask                = 2
+	FontPanelStandardModesMask           = 65535
+	FontPanelStrikethroughEffectModeMask = 512
+	FontPanelTextColorEffectModeMask     = 1024
+	FontPanelUnderlineEffectModeMask     = 256
+	FontSansSerifClass                   = -2147483648
+	FontScriptsClass                     = -1610612736
+	FontSlabSerifsClass                  = 1342177280
+	FontSymbolicClass                    = -1073741824
+	FontTransitionalSerifsClass          = 536870912
+	FontUIOptimizedTrait                 = 4096
+	FontUnknownClass                     = 0
+	FontVerticalTrait                    = 2048
+	FormFeedCharacter                    = 12
+	// Deprecated: since macOS 10.11.
+	GlyphAttributeBidiLevel = 2
+	// Deprecated: since macOS 10.11.
+	GlyphAttributeElastic = 1
+	// Deprecated: since macOS 10.11.
+	GlyphAttributeInscribe = 5
+	// Deprecated: since macOS 10.11.
+	GlyphAttributeSoft    = 0
+	HelpFunctionKey       = 63302
+	HomeFunctionKey       = 63273
+	IllegalTextMovement   = 0
+	ImageRepMatchesDevice = 0
+	InsertCharFunctionKey = 63293
+	InsertFunctionKey     = 63271
+	InsertLineFunctionKey = 63291
+	// Deprecated: Use formatters instead
+	IntType                = 1
+	LeftArrowFunctionKey   = 63234
+	LeftTextMovement       = 19
+	LineSeparatorCharacter = 8232
+	// Deprecated: since macOS 10.8.
+	MacintoshInterfaceStyle = 3
+	MenuFunctionKey         = 63285
+	ModeSwitchFunctionKey   = 63303
+	NewlineCharacter        = 10
+	NextFunctionKey         = 63296
+	// Deprecated: since macOS 10.8.
+	NextStepInterfaceStyle = 1
+	// Deprecated: since macOS 10.8.
+	NoInterfaceStyle = 0
+	// Deprecated: Use NSUnderlineStyleNone instead
+	NoUnderlineStyle = 0
+	NullGlyph        = 0
+	// Deprecated: since macOS 10.10.
+	OKButton                       = 1
+	OpenGLPFAAccelerated           = 73
+	OpenGLPFAAcceleratedCompute    = 97
+	OpenGLPFAAccumSize             = 14
+	OpenGLPFAAllRenderers          = 1
+	OpenGLPFAAllowOfflineRenderers = 96
+	OpenGLPFAAlphaSize             = 11
+	OpenGLPFAAuxBuffers            = 7
+	OpenGLPFAAuxDepthStencil       = 57
+	OpenGLPFABackingStore          = 76
+	OpenGLPFAClosestPolicy         = 74
+	OpenGLPFAColorFloat            = 58
+	OpenGLPFAColorSize             = 8
+	// Deprecated: since macOS 10.9.
+	OpenGLPFACompliant    = 83
+	OpenGLPFADepthSize    = 12
+	OpenGLPFADoubleBuffer = 5
+	// Deprecated: since macOS 10.6.
+	OpenGLPFAFullScreen = 54
+	// Deprecated: since macOS 10.5.
+	OpenGLPFAMPSafe        = 78
+	OpenGLPFAMaximumPolicy = 52
+	OpenGLPFAMinimumPolicy = 51
+	// Deprecated: since macOS 10.5.
+	OpenGLPFAMultiScreen = 81
+	OpenGLPFAMultisample = 59
+	OpenGLPFANoRecovery  = 72
+	// Deprecated: since macOS 10.7.
+	OpenGLPFAOffScreen     = 53
+	OpenGLPFAOpenGLProfile = 99
+	// Deprecated: since macOS 10.7.
+	OpenGLPFAPixelBuffer = 90
+	// Deprecated: since macOS 10.7.
+	OpenGLPFARemotePixelBuffer = 91
+	OpenGLPFARendererID        = 70
+	// Deprecated: since macOS 10.5.
+	OpenGLPFARobust        = 75
+	OpenGLPFASampleAlpha   = 61
+	OpenGLPFASampleBuffers = 55
+	OpenGLPFASamples       = 56
+	OpenGLPFAScreenMask    = 84
+	// Deprecated: since macOS 10.9.
+	OpenGLPFASingleRenderer = 71
+	OpenGLPFAStencilSize    = 13
+	// Deprecated: since macOS 10.12.
+	OpenGLPFAStereo             = 6
+	OpenGLPFASupersample        = 60
+	OpenGLPFATripleBuffer       = 3
+	OpenGLPFAVirtualScreenCount = 128
+	// Deprecated: since macOS 10.9.
+	OpenGLPFAWindow                     = 80
+	OpenGLProfileVersion3_2Core         = 12800
+	OpenGLProfileVersion4_1Core         = 16640
+	OpenGLProfileVersionLegacy          = 4096
+	OtherTextMovement                   = 0
+	OutlineViewDropOnItemIndex          = -1
+	PageDownFunctionKey                 = 63277
+	PageUpFunctionKey                   = 63276
+	ParagraphSeparatorCharacter         = 8233
+	PasteboardCommunicationError        = 67585
+	PasteboardContentsNotAvailableError = 67587
+	PasteboardErrorMaximum              = 67839
+	PasteboardErrorMinimum              = 67584
+	PasteboardInvalidArgumentError      = 67586
+	PasteboardMiscellaneousError        = 67584
+	PauseFunctionKey                    = 63280
+	// Deprecated: Use formatters instead
+	PositiveDoubleType = 7
+	// Deprecated: Use formatters instead
+	PositiveFloatType = 4
+	// Deprecated: Use formatters instead
+	PositiveIntType                 = 2
+	PrevFunctionKey                 = 63295
+	PrintFunctionKey                = 63288
+	PrintScreenFunctionKey          = 63278
+	RedoFunctionKey                 = 63300
+	ResetCursorRectsRunLoopOrdering = 700000
+	ResetFunctionKey                = 63283
+	ReturnTextMovement              = 16
+	RightArrowFunctionKey           = 63235
+	RightTextMovement               = 20
+	// Deprecated: Use NSModalResponseAbort instead
+	RunAbortedResponse = -1001
+	// Deprecated: Use NSModalResponseContinue instead
+	RunContinuesResponse = -1002
+	// Deprecated: Use NSModalResponseStop instead
+	RunStoppedResponse                     = -1000
+	ScrollLockFunctionKey                  = 63279
+	SelectFunctionKey                      = 63297
+	ServiceApplicationLaunchFailedError    = 66561
+	ServiceApplicationNotFoundError        = 66560
+	ServiceErrorMaximum                    = 66817
+	ServiceErrorMinimum                    = 66560
+	ServiceInvalidPasteboardDataError      = 66563
+	ServiceMalformedServiceDictionaryError = 66564
+	ServiceMiscellaneousError              = 66800
+	ServiceRequestTimedOutError            = 66562
+	SharingServiceErrorMaximum             = 67327
+	SharingServiceErrorMinimum             = 67072
+	SharingServiceNotConfiguredError       = 67072
+	ShowControlGlyphs                      = 1
+	ShowInvisibleGlyphs                    = 2
+	// Deprecated: Use NSUnderlineStyleSingle instead
+	SingleUnderlineStyle                   = 1
+	StopFunctionKey                        = 63284
+	SysReqFunctionKey                      = 63281
+	SystemFunctionKey                      = 63287
+	TabCharacter                           = 9
+	TabTextMovement                        = 17
+	TextReadInapplicableDocumentTypeError  = 65806
+	TextReadWriteErrorMaximum              = 66303
+	TextReadWriteErrorMinimum              = 65792
+	TextWriteInapplicableDocumentTypeError = 66062
+	// Deprecated: Use NSWritingDirectionEmbedding instead
+	TextWritingDirectionEmbedding = 0
+	// Deprecated: Use NSWritingDirectionOverride instead
+	TextWritingDirectionOverride          = 2
+	UndoFunctionKey                       = 63299
+	UpArrowFunctionKey                    = 63232
+	UpTextMovement                        = 21
+	UpdateWindowsRunLoopOrdering          = 500000
+	UserFunctionKey                       = 63286
+	WantsBidiLevels                       = 4
+	WindowSharingErrorMaximum             = 67466
+	WindowSharingErrorMinimum             = 67456
+	WindowSharingRequestAlreadyRequested  = 67456
+	WindowSharingRequestNoEligibleSession = 67457
+	WindowSharingRequestUnspecifiedError  = 67458
+	// Deprecated: since macOS 10.8.
+	Windows95InterfaceStyle            = 2
+	WorkspaceAuthorizationInvalidError = 67328
+	WorkspaceErrorMaximum              = 67455
+	WorkspaceErrorMinimum              = 67328
+)

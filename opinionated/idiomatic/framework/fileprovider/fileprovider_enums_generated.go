@@ -63,6 +63,932 @@ func (e FileProviderDomainTestingModes) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that identify known folders.
+// Bitmask — values may be combined with |.
+type FileProviderKnownFolders uint64
+
+const (
+	FileProviderDesktop   FileProviderKnownFolders = 1
+	FileProviderDocuments FileProviderKnownFolders = 2
+)
+
+// String returns the FileProviderKnownFolders constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderKnownFolders) String() string {
+	var parts []string
+	if e&FileProviderDesktop != 0 {
+		parts = append(parts, "FileProviderDesktop")
+	}
+	if e&FileProviderDocuments != 0 {
+		parts = append(parts, "FileProviderDocuments")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Options for disconnecting a domain from the extension.
+// Bitmask — values may be combined with |.
+type FileProviderManagerDisconnectionOptions uint64
+
+const (
+	FileProviderManagerDisconnectionOptionsTemporary FileProviderManagerDisconnectionOptions = 1
+)
+
+// String returns the FileProviderManagerDisconnectionOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderManagerDisconnectionOptions) String() string {
+	var parts []string
+	if e&FileProviderManagerDisconnectionOptionsTemporary != 0 {
+		parts = append(parts, "FileProviderManagerDisconnectionOptionsTemporary")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Constants that describe why an external volume might not be eligible for storing a domain.
+// Bitmask — values may be combined with |.
+type FileProviderVolumeUnsupportedReason uint64
+
+const (
+	FileProviderVolumeUnsupportedReasonNone         FileProviderVolumeUnsupportedReason = 0
+	FileProviderVolumeUnsupportedReasonUnknown      FileProviderVolumeUnsupportedReason = 1
+	FileProviderVolumeUnsupportedReasonNonAPFS      FileProviderVolumeUnsupportedReason = 2
+	FileProviderVolumeUnsupportedReasonNonEncrypted FileProviderVolumeUnsupportedReason = 4
+	FileProviderVolumeUnsupportedReasonReadOnly     FileProviderVolumeUnsupportedReason = 8
+	FileProviderVolumeUnsupportedReasonNetwork      FileProviderVolumeUnsupportedReason = 16
+	FileProviderVolumeUnsupportedReasonQuarantined  FileProviderVolumeUnsupportedReason = 32
+)
+
+// String returns the FileProviderVolumeUnsupportedReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderVolumeUnsupportedReason) String() string {
+	var parts []string
+	if e&FileProviderVolumeUnsupportedReasonUnknown != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonUnknown")
+	}
+	if e&FileProviderVolumeUnsupportedReasonNonAPFS != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonNonAPFS")
+	}
+	if e&FileProviderVolumeUnsupportedReasonNonEncrypted != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonNonEncrypted")
+	}
+	if e&FileProviderVolumeUnsupportedReasonReadOnly != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonReadOnly")
+	}
+	if e&FileProviderVolumeUnsupportedReasonNetwork != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonNetwork")
+	}
+	if e&FileProviderVolumeUnsupportedReasonQuarantined != 0 {
+		parts = append(parts, "FileProviderVolumeUnsupportedReasonQuarantined")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Type int64
+
+const (
+	TypeExtended Type = 256
+	TypeAccess   Type = 0
+	TypeDefault  Type = 1
+	TypeAfs      Type = 2
+	TypeCoda     Type = 3
+	TypeNtfs     Type = 4
+	TypeNwfs     Type = 5
+)
+
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Type) String() string {
+	switch e {
+	case TypeExtended:
+		return "TypeExtended"
+	case TypeAccess:
+		return "TypeAccess"
+	case TypeDefault:
+		return "TypeDefault"
+	case TypeAfs:
+		return "TypeAfs"
+	case TypeCoda:
+		return "TypeCoda"
+	case TypeNtfs:
+		return "TypeNtfs"
+	case TypeNwfs:
+		return "TypeNwfs"
+	default:
+		return fmt.Sprintf("Type(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type EvCmd int64
+
+const (
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
+	EVLEVEL EvCmd = 4
+)
+
+// String returns the EvCmd constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EvCmd) String() string {
+	switch e {
+	case EVNOP:
+		return "EVNOP"
+	case EVHIDE:
+		return "EVHIDE"
+	case EVSHOW:
+		return "EVSHOW"
+	case EVMOVE:
+		return "EVMOVE"
+	case EVLEVEL:
+		return "EVLEVEL"
+	default:
+		return fmt.Sprintf("EvCmd(%d)", int64(e))
+	}
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+type LaunchDataType int64
+
+const (
+	LaunchDataTypeDictionary LaunchDataType = 1
+	LaunchDataTypeArray      LaunchDataType = 2
+	LaunchDataTypeFd         LaunchDataType = 3
+	LaunchDataTypeInteger    LaunchDataType = 4
+	LaunchDataTypeReal       LaunchDataType = 5
+	LaunchDataTypeBool       LaunchDataType = 6
+	LaunchDataTypeString     LaunchDataType = 7
+	LaunchDataTypeOpaque     LaunchDataType = 8
+	LaunchDataTypeErrno      LaunchDataType = 9
+	LaunchDataTypeMachport   LaunchDataType = 10
+)
+
+// String returns the LaunchDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LaunchDataType) String() string {
+	switch e {
+	case LaunchDataTypeDictionary:
+		return "LaunchDataTypeDictionary"
+	case LaunchDataTypeArray:
+		return "LaunchDataTypeArray"
+	case LaunchDataTypeFd:
+		return "LaunchDataTypeFd"
+	case LaunchDataTypeInteger:
+		return "LaunchDataTypeInteger"
+	case LaunchDataTypeReal:
+		return "LaunchDataTypeReal"
+	case LaunchDataTypeBool:
+		return "LaunchDataTypeBool"
+	case LaunchDataTypeString:
+		return "LaunchDataTypeString"
+	case LaunchDataTypeOpaque:
+		return "LaunchDataTypeOpaque"
+	case LaunchDataTypeErrno:
+		return "LaunchDataTypeErrno"
+	case LaunchDataTypeMachport:
+		return "LaunchDataTypeMachport"
+	default:
+		return fmt.Sprintf("LaunchDataType(%d)", int64(e))
+	}
+}
+
+// These constants are used to specify a domain to MDLabelCreate().
+type MDLabelDomain int64
+
+const (
+	KMDLabelUserDomain  MDLabelDomain = 0
+	KMDLabelLocalDomain MDLabelDomain = 1
+)
+
+// String returns the MDLabelDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDLabelDomain) String() string {
+	switch e {
+	case KMDLabelUserDomain:
+		return "KMDLabelUserDomain"
+	case KMDLabelLocalDomain:
+		return "KMDLabelLocalDomain"
+	default:
+		return fmt.Sprintf("MDLabelDomain(%d)", int64(e))
+	}
+}
+
+type MDQueryOptionFlags int64
+
+const (
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
+	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
+)
+
+// String returns the MDQueryOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQueryOptionFlags) String() string {
+	switch e {
+	case KMDQuerySynchronous:
+		return "KMDQuerySynchronous"
+	case KMDQueryWantsUpdates:
+		return "KMDQueryWantsUpdates"
+	case KMDQueryAllowFSTranslation:
+		return "KMDQueryAllowFSTranslation"
+	default:
+		return fmt.Sprintf("MDQueryOptionFlags(%d)", int64(e))
+	}
+}
+
+type MDQuerySortOptionFlags int64
+
+const (
+	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
+)
+
+// String returns the MDQuerySortOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQuerySortOptionFlags) String() string {
+	switch e {
+	case KMDQueryReverseSortOrderFlag:
+		return "KMDQueryReverseSortOrderFlag"
+	default:
+		return fmt.Sprintf("MDQuerySortOptionFlags(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type FileProviderContentPolicy int64
+
+const (
+	// Inherit the content policy of the parent folder. This is the default policy on every item other than the root.
+	FileProviderContentPolicyInherited FileProviderContentPolicy = 0
+	// Download this item lazily (i.e when it is read) if it is dataless. Download remote content updates eagerly if this file is not dataless. Allow eviction on low disk pressure and other triggers. This is the default policy on the root on macOS.
+	FileProviderContentPolicyDownloadLazily FileProviderContentPolicy = 1
+	// Download this item lazily (i.e when it is read.) Evict the file upon remote content update. Also allow eviction on low disk pressure and other triggers. This is the default policy on the root on iOS.
+	FileProviderContentPolicyDownloadLazilyAndEvictOnRemoteUpdate FileProviderContentPolicy = 2
+	// Download this item eagerly (i.e before it is read.) Keep downloading remote updates eagerly. Prevent eviction on low disk pressure and other triggers. When an item with the inherited policy is moved into a folder with this policy, the system will automatically schedule a download.
+	FileProviderContentPolicyDownloadEagerlyAndKeepDownloaded FileProviderContentPolicy = 3
+)
+
+// String returns the FileProviderContentPolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderContentPolicy) String() string {
+	switch e {
+	case FileProviderContentPolicyInherited:
+		return "FileProviderContentPolicyInherited"
+	case FileProviderContentPolicyDownloadLazily:
+		return "FileProviderContentPolicyDownloadLazily"
+	case FileProviderContentPolicyDownloadLazilyAndEvictOnRemoteUpdate:
+		return "FileProviderContentPolicyDownloadLazilyAndEvictOnRemoteUpdate"
+	case FileProviderContentPolicyDownloadEagerlyAndKeepDownloaded:
+		return "FileProviderContentPolicyDownloadEagerlyAndKeepDownloaded"
+	default:
+		return fmt.Sprintf("FileProviderContentPolicy(%d)", int64(e))
+	}
+}
+
+// Options for creating items.
+// Bitmask — values may be combined with |.
+type FileProviderCreateItemOptions uint64
+
+const (
+	// An option indicating that the item may already exist in your remote storage.
+	FileProviderCreateItemMayAlreadyExist FileProviderCreateItemOptions = 1
+	// A value indicating a conflict for a deleted item.
+	FileProviderCreateItemDeletionConflicted FileProviderCreateItemOptions = 2
+)
+
+// String returns the FileProviderCreateItemOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderCreateItemOptions) String() string {
+	var parts []string
+	if e&FileProviderCreateItemMayAlreadyExist != 0 {
+		parts = append(parts, "FileProviderCreateItemMayAlreadyExist")
+	}
+	if e&FileProviderCreateItemDeletionConflicted != 0 {
+		parts = append(parts, "FileProviderCreateItemDeletionConflicted")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Options for deleting items.
+// Bitmask — values may be combined with |.
+type FileProviderDeleteItemOptions uint64
+
+const (
+	// A value indicating that the delete operation removes the item and all of its children.
+	FileProviderDeleteItemRecursive FileProviderDeleteItemOptions = 1
+)
+
+// String returns the FileProviderDeleteItemOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderDeleteItemOptions) String() string {
+	var parts []string
+	if e&FileProviderDeleteItemRecursive != 0 {
+		parts = append(parts, "FileProviderDeleteItemRecursive")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // The error codes for the File Provider extension.
 type FileProviderErrorCode int64
 
@@ -163,24 +1089,21 @@ func (e FileProviderErrorCode) String() string {
 	}
 }
 
-// Constants that identify known folders.
+// Options for fetching a range of data from a file.
 // Bitmask — values may be combined with |.
-type FileProviderKnownFolders uint64
+type FileProviderFetchContentsOptions uint64
 
 const (
-	FileProviderDesktop   FileProviderKnownFolders = 1
-	FileProviderDocuments FileProviderKnownFolders = 2
+	// An option that indicates the system requires an exact match of the requested item’s version.
+	FileProviderFetchContentsOptionsStrictVersioning FileProviderFetchContentsOptions = 1
 )
 
-// String returns the FileProviderKnownFolders constant's name, or its numeric form when the
+// String returns the FileProviderFetchContentsOptions constant's name, or its numeric form when the
 // value is not a known constant.
-func (e FileProviderKnownFolders) String() string {
+func (e FileProviderFetchContentsOptions) String() string {
 	var parts []string
-	if e&FileProviderDesktop != 0 {
-		parts = append(parts, "FileProviderDesktop")
-	}
-	if e&FileProviderDocuments != 0 {
-		parts = append(parts, "FileProviderDocuments")
+	if e&FileProviderFetchContentsOptionsStrictVersioning != 0 {
+		parts = append(parts, "FileProviderFetchContentsOptionsStrictVersioning")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -188,20 +1111,41 @@ func (e FileProviderKnownFolders) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Options for disconnecting a domain from the extension.
+// Flags that define an item’s on-disk properties and its appearance in the user interface.
 // Bitmask — values may be combined with |.
-type FileProviderManagerDisconnectionOptions uint64
+type FileProviderFileSystemFlags uint64
 
 const (
-	FileProviderManagerDisconnectionOptionsTemporary FileProviderManagerDisconnectionOptions = 1
+	// The user can execute the item.
+	FileProviderFileSystemUserExecutable FileProviderFileSystemFlags = 1
+	// The user can read the item.
+	FileProviderFileSystemUserReadable FileProviderFileSystemFlags = 2
+	// The user can modify the item.
+	FileProviderFileSystemUserWritable FileProviderFileSystemFlags = 4
+	// By default, the system hides the item when the user views the file system.
+	FileProviderFileSystemHidden FileProviderFileSystemFlags = 8
+	// By default, the system hides the item’s extension when showing its filename.
+	FileProviderFileSystemPathExtensionHidden FileProviderFileSystemFlags = 16
 )
 
-// String returns the FileProviderManagerDisconnectionOptions constant's name, or its numeric form when the
+// String returns the FileProviderFileSystemFlags constant's name, or its numeric form when the
 // value is not a known constant.
-func (e FileProviderManagerDisconnectionOptions) String() string {
+func (e FileProviderFileSystemFlags) String() string {
 	var parts []string
-	if e&FileProviderManagerDisconnectionOptionsTemporary != 0 {
-		parts = append(parts, "FileProviderManagerDisconnectionOptionsTemporary")
+	if e&FileProviderFileSystemUserExecutable != 0 {
+		parts = append(parts, "FileProviderFileSystemUserExecutable")
+	}
+	if e&FileProviderFileSystemUserReadable != 0 {
+		parts = append(parts, "FileProviderFileSystemUserReadable")
+	}
+	if e&FileProviderFileSystemUserWritable != 0 {
+		parts = append(parts, "FileProviderFileSystemUserWritable")
+	}
+	if e&FileProviderFileSystemHidden != 0 {
+		parts = append(parts, "FileProviderFileSystemHidden")
+	}
+	if e&FileProviderFileSystemPathExtensionHidden != 0 {
+		parts = append(parts, "FileProviderFileSystemPathExtensionHidden")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -209,41 +1153,510 @@ func (e FileProviderManagerDisconnectionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// Constants that describe why an external volume might not be eligible for storing a domain.
+// An item’s capabilities, which define the actions that the user can perform in the document browser.
 // Bitmask — values may be combined with |.
-type FileProviderVolumeUnsupportedReason uint64
+type FileProviderItemCapabilities uint64
 
 const (
-	FileProviderVolumeUnsupportedReasonNone         FileProviderVolumeUnsupportedReason = 0
-	FileProviderVolumeUnsupportedReasonUnknown      FileProviderVolumeUnsupportedReason = 1
-	FileProviderVolumeUnsupportedReasonNonAPFS      FileProviderVolumeUnsupportedReason = 2
-	FileProviderVolumeUnsupportedReasonNonEncrypted FileProviderVolumeUnsupportedReason = 4
-	FileProviderVolumeUnsupportedReasonReadOnly     FileProviderVolumeUnsupportedReason = 8
-	FileProviderVolumeUnsupportedReasonNetwork      FileProviderVolumeUnsupportedReason = 16
-	FileProviderVolumeUnsupportedReasonQuarantined  FileProviderVolumeUnsupportedReason = 32
+	// A value indicating that the value can be read from.
+	FileProviderItemCapabilitiesAllowsReading FileProviderItemCapabilities = 1
+	// A value indicating that the item can be written to.
+	FileProviderItemCapabilitiesAllowsWriting FileProviderItemCapabilities = 2
+	// A value indicating that the item can be moved.
+	FileProviderItemCapabilitiesAllowsReparenting FileProviderItemCapabilities = 4
+	// A value indicating that the item can be renamed.
+	FileProviderItemCapabilitiesAllowsRenaming FileProviderItemCapabilities = 8
+	// A value indicating that the item can be moved to the trash.
+	FileProviderItemCapabilitiesAllowsTrashing FileProviderItemCapabilities = 16
+	// A value indicating that the item can be deleted.
+	FileProviderItemCapabilitiesAllowsDeleting FileProviderItemCapabilities = 32
+	// A value indicating that the system can delete the local copy of the item.
+	//
+	// Deprecated: use NSFileProviderContentPolicy instead
+	FileProviderItemCapabilitiesAllowsEvicting FileProviderItemCapabilities = 64
+	// A value indicating that the user can exclude the item from sync operations.
+	FileProviderItemCapabilitiesAllowsExcludingFromSync FileProviderItemCapabilities = 128
+	// A value indicating that the user can add subitems.
+	FileProviderItemCapabilitiesAllowsAddingSubItems FileProviderItemCapabilities = 2
+	// A value indicating that the item’s contents can be enumerated.
+	FileProviderItemCapabilitiesAllowsContentEnumerating FileProviderItemCapabilities = 1
+	// A convenience value for enabling all capabilities.
+	//
+	// Deprecated: This capability is no longer supported, and does not contain all capabilities. Please migrate to directly specifying each of the individual capabilities that should be allowed for the item.
+	FileProviderItemCapabilitiesAllowsAll FileProviderItemCapabilities = 63
 )
 
-// String returns the FileProviderVolumeUnsupportedReason constant's name, or its numeric form when the
+// String returns the FileProviderItemCapabilities constant's name, or its numeric form when the
 // value is not a known constant.
-func (e FileProviderVolumeUnsupportedReason) String() string {
+func (e FileProviderItemCapabilities) String() string {
 	var parts []string
-	if e&FileProviderVolumeUnsupportedReasonUnknown != 0 {
-		parts = append(parts, "FileProviderVolumeUnsupportedReasonUnknown")
+	if e&FileProviderItemCapabilitiesAllowsReading != 0 {
+		parts = append(parts, "FileProviderItemCapabilitiesAllowsReading")
 	}
-	if e&FileProviderVolumeUnsupportedReasonNonAPFS != 0 {
-		parts = append(parts, "FileProviderVolumeUnsupportedReasonNonAPFS")
+	if e&FileProviderItemCapabilitiesAllowsWriting != 0 {
+		parts = append(parts, "FileProviderItemCapabilitiesAllowsWriting")
 	}
-	if e&FileProviderVolumeUnsupportedReasonNonEncrypted != 0 {
-		parts = append(parts, "FileProviderVolumeUnsupportedReasonNonEncrypted")
+	if e&FileProviderItemCapabilitiesAllowsReparenting != 0 {
+		parts = append(parts, "FileProviderItemCapabilitiesAllowsReparenting")
 	}
-	if e&FileProviderVolumeUnsupportedReasonReadOnly != 0 {
-		parts = append(parts, "FileProviderVolumeUnsupportedReasonReadOnly")
+	if e&FileProviderItemCapabilitiesAllowsRenaming != 0 {
+		parts = append(parts, "FileProviderItemCapabilitiesAllowsRenaming")
 	}
-	if e&FileProviderVolumeUnsupportedReasonNetwork != 0 {
-		parts = append(parts, "FileProviderVolumeUnsupportedReasonNetwork")
+	if e&FileProviderItemCapabilitiesAllowsTrashing != 0 {
+		parts = append(parts, "FileProviderItemCapabilitiesAllowsTrashing")
 	}
-	if e&FileProviderVolumeUnsupportedReasonQuarantined != 0 {
-		parts = append(parts, "FileProviderVolumeUnsupportedReasonQuarantined")
+	if e&FileProviderItemCapabilitiesAllowsDeleting != 0 {
+		parts = append(parts, "FileProviderItemCapabilitiesAllowsDeleting")
+	}
+	if e&FileProviderItemCapabilitiesAllowsEvicting != 0 {
+		parts = append(parts, "FileProviderItemCapabilitiesAllowsEvicting")
+	}
+	if e&FileProviderItemCapabilitiesAllowsExcludingFromSync != 0 {
+		parts = append(parts, "FileProviderItemCapabilitiesAllowsExcludingFromSync")
+	}
+	if e&FileProviderItemCapabilitiesAllowsAddingSubItems != 0 {
+		parts = append(parts, "FileProviderItemCapabilitiesAllowsAddingSubItems")
+	}
+	if e&FileProviderItemCapabilitiesAllowsContentEnumerating != 0 {
+		parts = append(parts, "FileProviderItemCapabilitiesAllowsContentEnumerating")
+	}
+	if e&FileProviderItemCapabilitiesAllowsAll != 0 {
+		parts = append(parts, "FileProviderItemCapabilitiesAllowsAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Fields that specify which of the item’s properties have changed.
+// Bitmask — values may be combined with |.
+type FileProviderItemFields uint64
+
+const (
+	// The item’s content.
+	FileProviderItemContents FileProviderItemFields = 1
+	// The item’s filename.
+	FileProviderItemFilename FileProviderItemFields = 2
+	// The identity of the directory that contains the item.
+	FileProviderItemParentItemIdentifier FileProviderItemFields = 4
+	// The date the item was last used.
+	FileProviderItemLastUsedDate FileProviderItemFields = 8
+	// The tags for the item.
+	FileProviderItemTagData FileProviderItemFields = 16
+	// The item’s favorite rank.
+	FileProviderItemFavoriteRank FileProviderItemFields = 32
+	// The item’s creation date.
+	FileProviderItemCreationDate FileProviderItemFields = 64
+	// The item’s modification date.
+	FileProviderItemContentModificationDate FileProviderItemFields = 128
+	// The flags describing the item’s on-disk representation.
+	FileProviderItemFileSystemFlags FileProviderItemFields = 256
+	// The item’s extended attributes.
+	FileProviderItemExtendedAttributes FileProviderItemFields = 512
+	// The file type and creator codes for the item.
+	FileProviderItemTypeAndCreator FileProviderItemFields = 1024
+)
+
+// String returns the FileProviderItemFields constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderItemFields) String() string {
+	var parts []string
+	if e&FileProviderItemContents != 0 {
+		parts = append(parts, "FileProviderItemContents")
+	}
+	if e&FileProviderItemFilename != 0 {
+		parts = append(parts, "FileProviderItemFilename")
+	}
+	if e&FileProviderItemParentItemIdentifier != 0 {
+		parts = append(parts, "FileProviderItemParentItemIdentifier")
+	}
+	if e&FileProviderItemLastUsedDate != 0 {
+		parts = append(parts, "FileProviderItemLastUsedDate")
+	}
+	if e&FileProviderItemTagData != 0 {
+		parts = append(parts, "FileProviderItemTagData")
+	}
+	if e&FileProviderItemFavoriteRank != 0 {
+		parts = append(parts, "FileProviderItemFavoriteRank")
+	}
+	if e&FileProviderItemCreationDate != 0 {
+		parts = append(parts, "FileProviderItemCreationDate")
+	}
+	if e&FileProviderItemContentModificationDate != 0 {
+		parts = append(parts, "FileProviderItemContentModificationDate")
+	}
+	if e&FileProviderItemFileSystemFlags != 0 {
+		parts = append(parts, "FileProviderItemFileSystemFlags")
+	}
+	if e&FileProviderItemExtendedAttributes != 0 {
+		parts = append(parts, "FileProviderItemExtendedAttributes")
+	}
+	if e&FileProviderItemTypeAndCreator != 0 {
+		parts = append(parts, "FileProviderItemTypeAndCreator")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Flags that provides additional information about the provided content.
+// Bitmask — values may be combined with |.
+type FileProviderMaterializationFlags uint64
+
+const (
+	// A flag indicating that the system should consider the file fully materialized, even if it’s a sparse file.
+	FileProviderMaterializationFlagsKnownSparseRanges FileProviderMaterializationFlags = 1
+)
+
+// String returns the FileProviderMaterializationFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderMaterializationFlags) String() string {
+	var parts []string
+	if e&FileProviderMaterializationFlagsKnownSparseRanges != 0 {
+		parts = append(parts, "FileProviderMaterializationFlagsKnownSparseRanges")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Options for modifying items.
+// Bitmask — values may be combined with |.
+type FileProviderModifyItemOptions uint64
+
+const (
+	// An option that indicates the changes may already exist in your remote storage.
+	FileProviderModifyItemMayAlreadyExist FileProviderModifyItemOptions = 1
+	// An option to fail an upload in the event of a version conflict.
+	FileProviderModifyItemFailOnConflict FileProviderModifyItemOptions = 2
+	// An option to require the upload to complete before calling the completion handler.
+	FileProviderModifyItemIsImmediateUploadRequestByPresentingApplication FileProviderModifyItemOptions = 4
+)
+
+// String returns the FileProviderModifyItemOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderModifyItemOptions) String() string {
+	var parts []string
+	if e&FileProviderModifyItemMayAlreadyExist != 0 {
+		parts = append(parts, "FileProviderModifyItemMayAlreadyExist")
+	}
+	if e&FileProviderModifyItemFailOnConflict != 0 {
+		parts = append(parts, "FileProviderModifyItemFailOnConflict")
+	}
+	if e&FileProviderModifyItemIsImmediateUploadRequestByPresentingApplication != 0 {
+		parts = append(parts, "FileProviderModifyItemIsImmediateUploadRequestByPresentingApplication")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// The location where the operation takes place.
+type FileProviderTestingOperationSide uint64
+
+const (
+	// The File Provider extension’s local storage.
+	FileProviderTestingOperationSideDisk FileProviderTestingOperationSide = 0
+	// The File Provider extension’s remote storage.
+	FileProviderTestingOperationSideFileProvider FileProviderTestingOperationSide = 1
+)
+
+// String returns the FileProviderTestingOperationSide constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderTestingOperationSide) String() string {
+	switch e {
+	case FileProviderTestingOperationSideDisk:
+		return "FileProviderTestingOperationSideDisk"
+	case FileProviderTestingOperationSideFileProvider:
+		return "FileProviderTestingOperationSideFileProvider"
+	default:
+		return fmt.Sprintf("FileProviderTestingOperationSide(%d)", int64(e))
+	}
+}
+
+// The action that an operation performs.
+type FileProviderTestingOperationType int64
+
+const (
+	// Alerts the system to changes to either the local or remote storage.
+	FileProviderTestingOperationTypeIngestion FileProviderTestingOperationType = 0
+	// Looks up an item.
+	FileProviderTestingOperationTypeLookup FileProviderTestingOperationType = 1
+	// Propagates the creation of a source item to the target location.
+	FileProviderTestingOperationTypeCreation FileProviderTestingOperationType = 2
+	// Propagates a change from the source item to the target location.
+	FileProviderTestingOperationTypeModification FileProviderTestingOperationType = 3
+	// Propagates the deletion of the source item from the target location.
+	FileProviderTestingOperationTypeDeletion FileProviderTestingOperationType = 4
+	// Fetches an item’s content.
+	FileProviderTestingOperationTypeContentFetch FileProviderTestingOperationType = 5
+	// Lists an item’s content.
+	FileProviderTestingOperationTypeChildrenEnumeration FileProviderTestingOperationType = 6
+	// Resolves a collision by renaming the new item.
+	FileProviderTestingOperationTypeCollisionResolution FileProviderTestingOperationType = 7
+)
+
+// String returns the FileProviderTestingOperationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileProviderTestingOperationType) String() string {
+	switch e {
+	case FileProviderTestingOperationTypeIngestion:
+		return "FileProviderTestingOperationTypeIngestion"
+	case FileProviderTestingOperationTypeLookup:
+		return "FileProviderTestingOperationTypeLookup"
+	case FileProviderTestingOperationTypeCreation:
+		return "FileProviderTestingOperationTypeCreation"
+	case FileProviderTestingOperationTypeModification:
+		return "FileProviderTestingOperationTypeModification"
+	case FileProviderTestingOperationTypeDeletion:
+		return "FileProviderTestingOperationTypeDeletion"
+	case FileProviderTestingOperationTypeContentFetch:
+		return "FileProviderTestingOperationTypeContentFetch"
+	case FileProviderTestingOperationTypeChildrenEnumeration:
+		return "FileProviderTestingOperationTypeChildrenEnumeration"
+	case FileProviderTestingOperationTypeCollisionResolution:
+		return "FileProviderTestingOperationTypeCollisionResolution"
+	default:
+		return fmt.Sprintf("FileProviderTestingOperationType(%d)", int64(e))
+	}
+}
+
+type NXMouseButton int64
+
+const (
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
+	NX_RightButton NXMouseButton = 2
+)
+
+// String returns the NXMouseButton constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NXMouseButton) String() string {
+	switch e {
+	case NX_OneButton:
+		return "NX_OneButton"
+	case NX_LeftButton:
+		return "NX_LeftButton"
+	case NX_RightButton:
+		return "NX_RightButton"
+	default:
+		return fmt.Sprintf("NXMouseButton(%d)", int64(e))
+	}
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlags int64
+
+const (
+	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
+	XpcListenerCreateFlagsInactive        XpcListenerCreateFlags = 1
+	XpcListenerCreateFlagsForceMach       XpcListenerCreateFlags = 2
+	XpcListenerCreateFlagsForceXpcservice XpcListenerCreateFlags = 4
+)
+
+// String returns the XpcListenerCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcListenerCreateFlags) String() string {
+	var parts []string
+	if e&XpcListenerCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsInactive")
+	}
+	if e&XpcListenerCreateFlagsForceMach != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceMach")
+	}
+	if e&XpcListenerCreateFlagsForceXpcservice != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceXpcservice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlags int64
+
+const (
+	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0
+	XpcSessionCreateFlagsInactive       XpcSessionCreateFlags = 1
+	XpcSessionCreateFlagsMachPrivileged XpcSessionCreateFlags = 2
+)
+
+// String returns the XpcSessionCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcSessionCreateFlags) String() string {
+	var parts []string
+	if e&XpcSessionCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsInactive")
+	}
+	if e&XpcSessionCreateFlagsMachPrivileged != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsMachPrivileged")
 	}
 	if len(parts) == 0 {
 		return "0"

@@ -186,3 +186,1268 @@ func (e SupportedLayoutsOptions) String() string {
 	}
 	return strings.Join(parts, "|")
 }
+
+type ACLEntryID int64
+
+const (
+	ACLEntryIDFirstEntry ACLEntryID = 0
+	ACLEntryIDNextEntry  ACLEntryID = -1
+	ACLEntryIDLastEntry  ACLEntryID = -2
+)
+
+// String returns the ACLEntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ACLEntryID) String() string {
+	switch e {
+	case ACLEntryIDFirstEntry:
+		return "ACLEntryIDFirstEntry"
+	case ACLEntryIDNextEntry:
+		return "ACLEntryIDNextEntry"
+	case ACLEntryIDLastEntry:
+		return "ACLEntryIDLastEntry"
+	default:
+		return fmt.Sprintf("ACLEntryID(%d)", int64(e))
+	}
+}
+
+type ACLFlag int64
+
+const (
+	ACLFlagFlagDeferInherit      ACLFlag = 1
+	ACLFlagFlagNoInherit         ACLFlag = 131072
+	ACLFlagEntryInherited        ACLFlag = 16
+	ACLFlagEntryFileInherit      ACLFlag = 32
+	ACLFlagEntryDirectoryInherit ACLFlag = 64
+	ACLFlagEntryLimitInherit     ACLFlag = 128
+	ACLFlagEntryOnlyInherit      ACLFlag = 256
+)
+
+// String returns the ACLFlag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ACLFlag) String() string {
+	switch e {
+	case ACLFlagFlagDeferInherit:
+		return "ACLFlagFlagDeferInherit"
+	case ACLFlagFlagNoInherit:
+		return "ACLFlagFlagNoInherit"
+	case ACLFlagEntryInherited:
+		return "ACLFlagEntryInherited"
+	case ACLFlagEntryFileInherit:
+		return "ACLFlagEntryFileInherit"
+	case ACLFlagEntryDirectoryInherit:
+		return "ACLFlagEntryDirectoryInherit"
+	case ACLFlagEntryLimitInherit:
+		return "ACLFlagEntryLimitInherit"
+	case ACLFlagEntryOnlyInherit:
+		return "ACLFlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("ACLFlag(%d)", int64(e))
+	}
+}
+
+type ACLPerm int64
+
+const (
+	ACLPermReadData           ACLPerm = 2
+	ACLPermListDirectory      ACLPerm = 2
+	ACLPermWriteData          ACLPerm = 4
+	ACLPermAddFile            ACLPerm = 4
+	ACLPermExecute            ACLPerm = 8
+	ACLPermSearch             ACLPerm = 8
+	ACLPermDelete             ACLPerm = 16
+	ACLPermAppendData         ACLPerm = 32
+	ACLPermAddSubdirectory    ACLPerm = 32
+	ACLPermDeleteChild        ACLPerm = 64
+	ACLPermReadAttributes     ACLPerm = 128
+	ACLPermWriteAttributes    ACLPerm = 256
+	ACLPermReadExtattributes  ACLPerm = 512
+	ACLPermWriteExtattributes ACLPerm = 1024
+	ACLPermReadSecurity       ACLPerm = 2048
+	ACLPermWriteSecurity      ACLPerm = 4096
+	ACLPermChangeOwner        ACLPerm = 8192
+	ACLPermSynchronize        ACLPerm = 1048576
+)
+
+// String returns the ACLPerm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ACLPerm) String() string {
+	switch e {
+	case ACLPermReadData:
+		return "ACLPermReadData"
+	case ACLPermWriteData:
+		return "ACLPermWriteData"
+	case ACLPermExecute:
+		return "ACLPermExecute"
+	case ACLPermDelete:
+		return "ACLPermDelete"
+	case ACLPermAppendData:
+		return "ACLPermAppendData"
+	case ACLPermDeleteChild:
+		return "ACLPermDeleteChild"
+	case ACLPermReadAttributes:
+		return "ACLPermReadAttributes"
+	case ACLPermWriteAttributes:
+		return "ACLPermWriteAttributes"
+	case ACLPermReadExtattributes:
+		return "ACLPermReadExtattributes"
+	case ACLPermWriteExtattributes:
+		return "ACLPermWriteExtattributes"
+	case ACLPermReadSecurity:
+		return "ACLPermReadSecurity"
+	case ACLPermWriteSecurity:
+		return "ACLPermWriteSecurity"
+	case ACLPermChangeOwner:
+		return "ACLPermChangeOwner"
+	case ACLPermSynchronize:
+		return "ACLPermSynchronize"
+	default:
+		return fmt.Sprintf("ACLPerm(%d)", int64(e))
+	}
+}
+
+type ACLTag int64
+
+const (
+	ACLTagUndefinedTag  ACLTag = 0
+	ACLTagExtendedAllow ACLTag = 1
+	ACLTagExtendedDeny  ACLTag = 2
+)
+
+// String returns the ACLTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ACLTag) String() string {
+	switch e {
+	case ACLTagUndefinedTag:
+		return "ACLTagUndefinedTag"
+	case ACLTagExtendedAllow:
+		return "ACLTagExtendedAllow"
+	case ACLTagExtendedDeny:
+		return "ACLTagExtendedDeny"
+	default:
+		return fmt.Sprintf("ACLTag(%d)", int64(e))
+	}
+}
+
+type ACLType int64
+
+const (
+	ACLTypeExtended ACLType = 256
+	ACLTypeAccess   ACLType = 0
+	ACLTypeDefault  ACLType = 1
+	ACLTypeAfs      ACLType = 2
+	ACLTypeCoda     ACLType = 3
+	ACLTypeNtfs     ACLType = 4
+	ACLTypeNwfs     ACLType = 5
+)
+
+// String returns the ACLType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ACLType) String() string {
+	switch e {
+	case ACLTypeExtended:
+		return "ACLTypeExtended"
+	case ACLTypeAccess:
+		return "ACLTypeAccess"
+	case ACLTypeDefault:
+		return "ACLTypeDefault"
+	case ACLTypeAfs:
+		return "ACLTypeAfs"
+	case ACLTypeCoda:
+		return "ACLTypeCoda"
+	case ACLTypeNtfs:
+		return "ACLTypeNtfs"
+	case ACLTypeNwfs:
+		return "ACLTypeNwfs"
+	default:
+		return fmt.Sprintf("ACLType(%d)", int64(e))
+	}
+}
+
+type ArAuthorizationStatus int64
+
+const (
+	Ar_authorization_status_not_determined ArAuthorizationStatus = 0
+	Ar_authorization_status_allowed        ArAuthorizationStatus = 1
+	Ar_authorization_status_denied         ArAuthorizationStatus = 2
+)
+
+// String returns the ArAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ArAuthorizationStatus) String() string {
+	switch e {
+	case Ar_authorization_status_not_determined:
+		return "Ar_authorization_status_not_determined"
+	case Ar_authorization_status_allowed:
+		return "Ar_authorization_status_allowed"
+	case Ar_authorization_status_denied:
+		return "Ar_authorization_status_denied"
+	default:
+		return fmt.Sprintf("ArAuthorizationStatus(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type ArAuthorizationType int64
+
+const (
+	Ar_authorization_type_none ArAuthorizationType = 0
+	// Authorization type used when requesting hand tracking.
+	Ar_authorization_type_hand_tracking ArAuthorizationType = 1
+	// Authorization type used when requesting: - Image tracking
+	Ar_authorization_type_world_sensing ArAuthorizationType = 2
+	// Authorization type used when requesting: - Camera access
+	Ar_authorization_type_camera_access ArAuthorizationType = 8
+)
+
+// String returns the ArAuthorizationType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ArAuthorizationType) String() string {
+	var parts []string
+	if e&Ar_authorization_type_hand_tracking != 0 {
+		parts = append(parts, "Ar_authorization_type_hand_tracking")
+	}
+	if e&Ar_authorization_type_world_sensing != 0 {
+		parts = append(parts, "Ar_authorization_type_world_sensing")
+	}
+	if e&Ar_authorization_type_camera_access != 0 {
+		parts = append(parts, "Ar_authorization_type_camera_access")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type ArDataProviderState int64
+
+const (
+	Ar_data_provider_state_initialized ArDataProviderState = 0
+	Ar_data_provider_state_running     ArDataProviderState = 1
+	Ar_data_provider_state_paused      ArDataProviderState = 2
+	Ar_data_provider_state_stopped     ArDataProviderState = 3
+)
+
+// String returns the ArDataProviderState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ArDataProviderState) String() string {
+	switch e {
+	case Ar_data_provider_state_initialized:
+		return "Ar_data_provider_state_initialized"
+	case Ar_data_provider_state_running:
+		return "Ar_data_provider_state_running"
+	case Ar_data_provider_state_paused:
+		return "Ar_data_provider_state_paused"
+	case Ar_data_provider_state_stopped:
+		return "Ar_data_provider_state_stopped"
+	default:
+		return fmt.Sprintf("ArDataProviderState(%d)", int64(e))
+	}
+}
+
+type ArDeviceAnchorQueryStatus int64
+
+const (
+	Ar_device_anchor_query_status_success ArDeviceAnchorQueryStatus = 0
+	Ar_device_anchor_query_status_failure ArDeviceAnchorQueryStatus = 1
+)
+
+// String returns the ArDeviceAnchorQueryStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ArDeviceAnchorQueryStatus) String() string {
+	switch e {
+	case Ar_device_anchor_query_status_success:
+		return "Ar_device_anchor_query_status_success"
+	case Ar_device_anchor_query_status_failure:
+		return "Ar_device_anchor_query_status_failure"
+	default:
+		return fmt.Sprintf("ArDeviceAnchorQueryStatus(%d)", int64(e))
+	}
+}
+
+type ArDeviceAnchorTrackingState int64
+
+const (
+	Ar_device_anchor_tracking_state_untracked           ArDeviceAnchorTrackingState = 0
+	Ar_device_anchor_tracking_state_orientation_tracked ArDeviceAnchorTrackingState = 1
+	Ar_device_anchor_tracking_state_tracked             ArDeviceAnchorTrackingState = 2
+)
+
+// String returns the ArDeviceAnchorTrackingState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ArDeviceAnchorTrackingState) String() string {
+	switch e {
+	case Ar_device_anchor_tracking_state_untracked:
+		return "Ar_device_anchor_tracking_state_untracked"
+	case Ar_device_anchor_tracking_state_orientation_tracked:
+		return "Ar_device_anchor_tracking_state_orientation_tracked"
+	case Ar_device_anchor_tracking_state_tracked:
+		return "Ar_device_anchor_tracking_state_tracked"
+	default:
+		return fmt.Sprintf("ArDeviceAnchorTrackingState(%d)", int64(e))
+	}
+}
+
+type ArSessionErrorCode int64
+
+const (
+	// Error code indicating that a data provider requires an authorization that has not been granted by the user.
+	Ar_session_error_code_data_provider_not_authorized ArSessionErrorCode = 100
+	// Error code indicating a data provider has failed to run.
+	Ar_session_error_code_data_provider_failed_to_run ArSessionErrorCode = 101
+)
+
+// String returns the ArSessionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ArSessionErrorCode) String() string {
+	switch e {
+	case Ar_session_error_code_data_provider_not_authorized:
+		return "Ar_session_error_code_data_provider_not_authorized"
+	case Ar_session_error_code_data_provider_failed_to_run:
+		return "Ar_session_error_code_data_provider_failed_to_run"
+	default:
+		return fmt.Sprintf("ArSessionErrorCode(%d)", int64(e))
+	}
+}
+
+type ArWorldTrackingErrorCode int64
+
+const (
+	// Error code indicating that the maximum amount of world anchors have been added.
+	Ar_world_tracking_error_code_anchor_max_limit_reached ArWorldTrackingErrorCode = 201
+	// Error code indicating that a world anchor failed to be removed.
+	Ar_world_tracking_error_code_remove_anchor_failed ArWorldTrackingErrorCode = 202
+)
+
+// String returns the ArWorldTrackingErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ArWorldTrackingErrorCode) String() string {
+	switch e {
+	case Ar_world_tracking_error_code_anchor_max_limit_reached:
+		return "Ar_world_tracking_error_code_anchor_max_limit_reached"
+	case Ar_world_tracking_error_code_remove_anchor_failed:
+		return "Ar_world_tracking_error_code_remove_anchor_failed"
+	default:
+		return fmt.Sprintf("ArWorldTrackingErrorCode(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+// Errors that can occur during layer configuration.
+type LayerRendererConfigurationErrorCode int64
+
+const (
+	// An error that indicates the system didn’t find a default layer configuration.
+	Cp_layer_renderer_configuration_error_code_missing_configuration LayerRendererConfigurationErrorCode = -20
+	// An error that indicates the system doesn’t support the specified color format choice.
+	Cp_layer_renderer_configuration_error_code_unsupported_color_format LayerRendererConfigurationErrorCode = -4
+	// An error that indicates the system doesn’t support the specified color usage option.
+	Cp_layer_renderer_configuration_error_code_unsupported_color_usage LayerRendererConfigurationErrorCode = -5
+	// An error that indicates the system doesn’t support the specified depth format choice.
+	Cp_layer_renderer_configuration_error_code_unsupported_depth_format LayerRendererConfigurationErrorCode = -7
+	// An error that indicates the system doesn’t support the specified depth usage choice.
+	Cp_layer_renderer_configuration_error_code_unsupported_depth_usage LayerRendererConfigurationErrorCode = -8
+	// An error that indicates foveation is enabled but not supported.
+	Cp_layer_renderer_configuration_error_code_variable_rasterization_rate_is_not_supported LayerRendererConfigurationErrorCode = -16
+	// An error that occurs when you try to enable temporal anti-aliasing but the current configuration parameters don’t support it.
+	Cp_layer_renderer_configuration_error_code_temporal_anti_aliasing_not_supported LayerRendererConfigurationErrorCode = -17
+	// An error that indicates not enough frames are available for rendering.
+	Cp_layer_renderer_configuration_error_code_not_enough_frames_requested LayerRendererConfigurationErrorCode = -10
+	// An error that indicates your app requested too many frames for rendering.
+	Cp_layer_renderer_configuration_error_code_too_many_frames_requested LayerRendererConfigurationErrorCode = -11
+	// An error that indicates the depth range values aren’t in reverse-z order.
+	Cp_layer_renderer_configuration_error_code_unsupported_forward_depth_range LayerRendererConfigurationErrorCode = -101
+	// An error that indicates the configuration’s current layout value is invalid.
+	Cp_layer_renderer_configuration_error_code_layout_not_supported LayerRendererConfigurationErrorCode = -6
+	// An error that indicates the near plane of the client is closer than the minimum supported distance.
+	Cp_layer_renderer_configuration_error_code_unsupported_near_plane_distance LayerRendererConfigurationErrorCode = -104
+	// An error that indicates the layer doesn’t support the current pixel format for tracking areas textures.
+	Cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_format LayerRendererConfigurationErrorCode = -21
+	// An error that indicates the layer doesn’t support the current texture usage for tracking areas textures.
+	Cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_usage LayerRendererConfigurationErrorCode = -22
+	// An error that indicates the layer doesn’t support the current pixel format for stencil texture.
+	Cp_layer_renderer_configuration_error_code_unsupported_drawable_render_context_stencil_format LayerRendererConfigurationErrorCode = -23
+	// An error that indicates the configuration’s render quality is unsupported. This could be because foveation is disabled or the quality is outside of the valid range of [0, 1], the error userInfo will contain additional information.
+	Cp_layer_renderer_configuration_error_code_unsupported_render_quality LayerRendererConfigurationErrorCode = -18
+)
+
+// String returns the LayerRendererConfigurationErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LayerRendererConfigurationErrorCode) String() string {
+	switch e {
+	case Cp_layer_renderer_configuration_error_code_missing_configuration:
+		return "Cp_layer_renderer_configuration_error_code_missing_configuration"
+	case Cp_layer_renderer_configuration_error_code_unsupported_color_format:
+		return "Cp_layer_renderer_configuration_error_code_unsupported_color_format"
+	case Cp_layer_renderer_configuration_error_code_unsupported_color_usage:
+		return "Cp_layer_renderer_configuration_error_code_unsupported_color_usage"
+	case Cp_layer_renderer_configuration_error_code_unsupported_depth_format:
+		return "Cp_layer_renderer_configuration_error_code_unsupported_depth_format"
+	case Cp_layer_renderer_configuration_error_code_unsupported_depth_usage:
+		return "Cp_layer_renderer_configuration_error_code_unsupported_depth_usage"
+	case Cp_layer_renderer_configuration_error_code_variable_rasterization_rate_is_not_supported:
+		return "Cp_layer_renderer_configuration_error_code_variable_rasterization_rate_is_not_supported"
+	case Cp_layer_renderer_configuration_error_code_temporal_anti_aliasing_not_supported:
+		return "Cp_layer_renderer_configuration_error_code_temporal_anti_aliasing_not_supported"
+	case Cp_layer_renderer_configuration_error_code_not_enough_frames_requested:
+		return "Cp_layer_renderer_configuration_error_code_not_enough_frames_requested"
+	case Cp_layer_renderer_configuration_error_code_too_many_frames_requested:
+		return "Cp_layer_renderer_configuration_error_code_too_many_frames_requested"
+	case Cp_layer_renderer_configuration_error_code_unsupported_forward_depth_range:
+		return "Cp_layer_renderer_configuration_error_code_unsupported_forward_depth_range"
+	case Cp_layer_renderer_configuration_error_code_layout_not_supported:
+		return "Cp_layer_renderer_configuration_error_code_layout_not_supported"
+	case Cp_layer_renderer_configuration_error_code_unsupported_near_plane_distance:
+		return "Cp_layer_renderer_configuration_error_code_unsupported_near_plane_distance"
+	case Cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_format:
+		return "Cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_format"
+	case Cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_usage:
+		return "Cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_usage"
+	case Cp_layer_renderer_configuration_error_code_unsupported_drawable_render_context_stencil_format:
+		return "Cp_layer_renderer_configuration_error_code_unsupported_drawable_render_context_stencil_format"
+	case Cp_layer_renderer_configuration_error_code_unsupported_render_quality:
+		return "Cp_layer_renderer_configuration_error_code_unsupported_render_quality"
+	default:
+		return fmt.Sprintf("LayerRendererConfigurationErrorCode(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type EvCmd int64
+
+const (
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
+	EVLEVEL EvCmd = 4
+)
+
+// String returns the EvCmd constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EvCmd) String() string {
+	switch e {
+	case EVNOP:
+		return "EVNOP"
+	case EVHIDE:
+		return "EVHIDE"
+	case EVSHOW:
+		return "EVSHOW"
+	case EVMOVE:
+		return "EVMOVE"
+	case EVLEVEL:
+		return "EVLEVEL"
+	default:
+		return fmt.Sprintf("EvCmd(%d)", int64(e))
+	}
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+type LaunchDataType int64
+
+const (
+	LaunchDataTypeDictionary LaunchDataType = 1
+	LaunchDataTypeArray      LaunchDataType = 2
+	LaunchDataTypeFd         LaunchDataType = 3
+	LaunchDataTypeInteger    LaunchDataType = 4
+	LaunchDataTypeReal       LaunchDataType = 5
+	LaunchDataTypeBool       LaunchDataType = 6
+	LaunchDataTypeString     LaunchDataType = 7
+	LaunchDataTypeOpaque     LaunchDataType = 8
+	LaunchDataTypeErrno      LaunchDataType = 9
+	LaunchDataTypeMachport   LaunchDataType = 10
+)
+
+// String returns the LaunchDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LaunchDataType) String() string {
+	switch e {
+	case LaunchDataTypeDictionary:
+		return "LaunchDataTypeDictionary"
+	case LaunchDataTypeArray:
+		return "LaunchDataTypeArray"
+	case LaunchDataTypeFd:
+		return "LaunchDataTypeFd"
+	case LaunchDataTypeInteger:
+		return "LaunchDataTypeInteger"
+	case LaunchDataTypeReal:
+		return "LaunchDataTypeReal"
+	case LaunchDataTypeBool:
+		return "LaunchDataTypeBool"
+	case LaunchDataTypeString:
+		return "LaunchDataTypeString"
+	case LaunchDataTypeOpaque:
+		return "LaunchDataTypeOpaque"
+	case LaunchDataTypeErrno:
+		return "LaunchDataTypeErrno"
+	case LaunchDataTypeMachport:
+		return "LaunchDataTypeMachport"
+	default:
+		return fmt.Sprintf("LaunchDataType(%d)", int64(e))
+	}
+}
+
+// These constants are used to specify a domain to MDLabelCreate().
+type MDLabelDomain int64
+
+const (
+	KMDLabelUserDomain  MDLabelDomain = 0
+	KMDLabelLocalDomain MDLabelDomain = 1
+)
+
+// String returns the MDLabelDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDLabelDomain) String() string {
+	switch e {
+	case KMDLabelUserDomain:
+		return "KMDLabelUserDomain"
+	case KMDLabelLocalDomain:
+		return "KMDLabelLocalDomain"
+	default:
+		return fmt.Sprintf("MDLabelDomain(%d)", int64(e))
+	}
+}
+
+type MDQueryOptionFlags int64
+
+const (
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
+	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
+)
+
+// String returns the MDQueryOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQueryOptionFlags) String() string {
+	switch e {
+	case KMDQuerySynchronous:
+		return "KMDQuerySynchronous"
+	case KMDQueryWantsUpdates:
+		return "KMDQueryWantsUpdates"
+	case KMDQueryAllowFSTranslation:
+		return "KMDQueryAllowFSTranslation"
+	default:
+		return fmt.Sprintf("MDQueryOptionFlags(%d)", int64(e))
+	}
+}
+
+type MDQuerySortOptionFlags int64
+
+const (
+	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
+)
+
+// String returns the MDQuerySortOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQuerySortOptionFlags) String() string {
+	switch e {
+	case KMDQueryReverseSortOrderFlag:
+		return "KMDQueryReverseSortOrderFlag"
+	default:
+		return fmt.Sprintf("MDQuerySortOptionFlags(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type NXMouseButton int64
+
+const (
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
+	NX_RightButton NXMouseButton = 2
+)
+
+// String returns the NXMouseButton constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NXMouseButton) String() string {
+	switch e {
+	case NX_OneButton:
+		return "NX_OneButton"
+	case NX_LeftButton:
+		return "NX_LeftButton"
+	case NX_RightButton:
+		return "NX_RightButton"
+	default:
+		return fmt.Sprintf("NXMouseButton(%d)", int64(e))
+	}
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+type PMPageToPaperMappingType int64
+
+const (
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
+)
+
+// String returns the PMPageToPaperMappingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PMPageToPaperMappingType) String() string {
+	switch e {
+	case KPMPageToPaperMappingNone:
+		return "KPMPageToPaperMappingNone"
+	case KPMPageToPaperMappingScaleToFit:
+		return "KPMPageToPaperMappingScaleToFit"
+	default:
+		return fmt.Sprintf("PMPageToPaperMappingType(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlags int64
+
+const (
+	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
+	XpcListenerCreateFlagsInactive        XpcListenerCreateFlags = 1
+	XpcListenerCreateFlagsForceMach       XpcListenerCreateFlags = 2
+	XpcListenerCreateFlagsForceXpcservice XpcListenerCreateFlags = 4
+)
+
+// String returns the XpcListenerCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcListenerCreateFlags) String() string {
+	var parts []string
+	if e&XpcListenerCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsInactive")
+	}
+	if e&XpcListenerCreateFlagsForceMach != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceMach")
+	}
+	if e&XpcListenerCreateFlagsForceXpcservice != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceXpcservice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlags int64
+
+const (
+	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0
+	XpcSessionCreateFlagsInactive       XpcSessionCreateFlags = 1
+	XpcSessionCreateFlagsMachPrivileged XpcSessionCreateFlags = 2
+)
+
+// String returns the XpcSessionCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcSessionCreateFlags) String() string {
+	var parts []string
+	if e&XpcSessionCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsInactive")
+	}
+	if e&XpcSessionCreateFlagsMachPrivileged != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsMachPrivileged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

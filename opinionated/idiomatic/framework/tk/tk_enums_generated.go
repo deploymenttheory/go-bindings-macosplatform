@@ -164,3 +164,255 @@ func (e XIMStatusDataType) String() string {
 		return fmt.Sprintf("XIMStatusDataType(%d)", int64(e))
 	}
 }
+
+type TclQueueposition int64
+
+const (
+	TclQueuepositionTail TclQueueposition = 0
+	TclQueuepositionHead TclQueueposition = 1
+	TclQueuepositionMark TclQueueposition = 2
+)
+
+// String returns the TclQueueposition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TclQueueposition) String() string {
+	switch e {
+	case TclQueuepositionTail:
+		return "TclQueuepositionTail"
+	case TclQueuepositionHead:
+		return "TclQueuepositionHead"
+	case TclQueuepositionMark:
+		return "TclQueuepositionMark"
+	default:
+		return fmt.Sprintf("TclQueueposition(%d)", int64(e))
+	}
+}
+
+type TclValuetype int64
+
+const (
+	TclValuetypeInt     TclValuetype = 0
+	TclValuetypeDouble  TclValuetype = 1
+	TclValuetypeEither  TclValuetype = 2
+	TclValuetypeWideInt TclValuetype = 3
+)
+
+// String returns the TclValuetype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TclValuetype) String() string {
+	switch e {
+	case TclValuetypeInt:
+		return "TclValuetypeInt"
+	case TclValuetypeDouble:
+		return "TclValuetypeDouble"
+	case TclValuetypeEither:
+		return "TclValuetypeEither"
+	case TclValuetypeWideInt:
+		return "TclValuetypeWideInt"
+	default:
+		return fmt.Sprintf("TclValuetype(%d)", int64(e))
+	}
+}
+
+type Configtypes int64
+
+const (
+	ConfigtypesBoolean      Configtypes = 0
+	ConfigtypesInt          Configtypes = 1
+	ConfigtypesDouble       Configtypes = 2
+	ConfigtypesString       Configtypes = 3
+	ConfigtypesUID          Configtypes = 4
+	ConfigtypesColor        Configtypes = 5
+	ConfigtypesFont         Configtypes = 6
+	ConfigtypesBitmap       Configtypes = 7
+	ConfigtypesBorder       Configtypes = 8
+	ConfigtypesRelief       Configtypes = 9
+	ConfigtypesCursor       Configtypes = 10
+	ConfigtypesActiveCursor Configtypes = 11
+	ConfigtypesJustify      Configtypes = 12
+	ConfigtypesAnchor       Configtypes = 13
+	ConfigtypesSynonym      Configtypes = 14
+	ConfigtypesCapStyle     Configtypes = 15
+	ConfigtypesJoinStyle    Configtypes = 16
+	ConfigtypesPixels       Configtypes = 17
+	ConfigtypesMm           Configtypes = 18
+	ConfigtypesWindow       Configtypes = 19
+	ConfigtypesCustom       Configtypes = 20
+	ConfigtypesEnd          Configtypes = 21
+)
+
+// String returns the Configtypes constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Configtypes) String() string {
+	switch e {
+	case ConfigtypesBoolean:
+		return "ConfigtypesBoolean"
+	case ConfigtypesInt:
+		return "ConfigtypesInt"
+	case ConfigtypesDouble:
+		return "ConfigtypesDouble"
+	case ConfigtypesString:
+		return "ConfigtypesString"
+	case ConfigtypesUID:
+		return "ConfigtypesUID"
+	case ConfigtypesColor:
+		return "ConfigtypesColor"
+	case ConfigtypesFont:
+		return "ConfigtypesFont"
+	case ConfigtypesBitmap:
+		return "ConfigtypesBitmap"
+	case ConfigtypesBorder:
+		return "ConfigtypesBorder"
+	case ConfigtypesRelief:
+		return "ConfigtypesRelief"
+	case ConfigtypesCursor:
+		return "ConfigtypesCursor"
+	case ConfigtypesActiveCursor:
+		return "ConfigtypesActiveCursor"
+	case ConfigtypesJustify:
+		return "ConfigtypesJustify"
+	case ConfigtypesAnchor:
+		return "ConfigtypesAnchor"
+	case ConfigtypesSynonym:
+		return "ConfigtypesSynonym"
+	case ConfigtypesCapStyle:
+		return "ConfigtypesCapStyle"
+	case ConfigtypesJoinStyle:
+		return "ConfigtypesJoinStyle"
+	case ConfigtypesPixels:
+		return "ConfigtypesPixels"
+	case ConfigtypesMm:
+		return "ConfigtypesMm"
+	case ConfigtypesWindow:
+		return "ConfigtypesWindow"
+	case ConfigtypesCustom:
+		return "ConfigtypesCustom"
+	case ConfigtypesEnd:
+		return "ConfigtypesEnd"
+	default:
+		return fmt.Sprintf("Configtypes(%d)", int64(e))
+	}
+}
+
+type Optiontype int64
+
+const (
+	OptiontypeBoolean     Optiontype = 0
+	OptiontypeInt         Optiontype = 1
+	OptiontypeDouble      Optiontype = 2
+	OptiontypeString      Optiontype = 3
+	OptiontypeStringTable Optiontype = 4
+	OptiontypeColor       Optiontype = 5
+	OptiontypeFont        Optiontype = 6
+	OptiontypeBitmap      Optiontype = 7
+	OptiontypeBorder      Optiontype = 8
+	OptiontypeRelief      Optiontype = 9
+	OptiontypeCursor      Optiontype = 10
+	OptiontypeJustify     Optiontype = 11
+	OptiontypeAnchor      Optiontype = 12
+	OptiontypeSynonym     Optiontype = 13
+	OptiontypePixels      Optiontype = 14
+	OptiontypeWindow      Optiontype = 15
+	OptiontypeEnd         Optiontype = 16
+	OptiontypeCustom      Optiontype = 17
+	OptiontypeStyle       Optiontype = 18
+)
+
+// String returns the Optiontype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Optiontype) String() string {
+	switch e {
+	case OptiontypeBoolean:
+		return "OptiontypeBoolean"
+	case OptiontypeInt:
+		return "OptiontypeInt"
+	case OptiontypeDouble:
+		return "OptiontypeDouble"
+	case OptiontypeString:
+		return "OptiontypeString"
+	case OptiontypeStringTable:
+		return "OptiontypeStringTable"
+	case OptiontypeColor:
+		return "OptiontypeColor"
+	case OptiontypeFont:
+		return "OptiontypeFont"
+	case OptiontypeBitmap:
+		return "OptiontypeBitmap"
+	case OptiontypeBorder:
+		return "OptiontypeBorder"
+	case OptiontypeRelief:
+		return "OptiontypeRelief"
+	case OptiontypeCursor:
+		return "OptiontypeCursor"
+	case OptiontypeJustify:
+		return "OptiontypeJustify"
+	case OptiontypeAnchor:
+		return "OptiontypeAnchor"
+	case OptiontypeSynonym:
+		return "OptiontypeSynonym"
+	case OptiontypePixels:
+		return "OptiontypePixels"
+	case OptiontypeWindow:
+		return "OptiontypeWindow"
+	case OptiontypeEnd:
+		return "OptiontypeEnd"
+	case OptiontypeCustom:
+		return "OptiontypeCustom"
+	case OptiontypeStyle:
+		return "OptiontypeStyle"
+	default:
+		return fmt.Sprintf("Optiontype(%d)", int64(e))
+	}
+}
+
+type Restrictaction int64
+
+const (
+	RestrictactionDeferEvent   Restrictaction = 0
+	RestrictactionProcessEvent Restrictaction = 1
+	RestrictactionDiscardEvent Restrictaction = 2
+)
+
+// String returns the Restrictaction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Restrictaction) String() string {
+	switch e {
+	case RestrictactionDeferEvent:
+		return "RestrictactionDeferEvent"
+	case RestrictactionProcessEvent:
+		return "RestrictactionProcessEvent"
+	case RestrictactionDiscardEvent:
+		return "RestrictactionDiscardEvent"
+	default:
+		return fmt.Sprintf("Restrictaction(%d)", int64(e))
+	}
+}
+
+type State int64
+
+const (
+	StateNull     State = -1
+	StateActive   State = 0
+	StateDisabled State = 1
+	StateNormal   State = 2
+	StateHidden   State = 3
+)
+
+// String returns the State constant's name, or its numeric form when the
+// value is not a known constant.
+func (e State) String() string {
+	switch e {
+	case StateNull:
+		return "StateNull"
+	case StateActive:
+		return "StateActive"
+	case StateDisabled:
+		return "StateDisabled"
+	case StateNormal:
+		return "StateNormal"
+	case StateHidden:
+		return "StateHidden"
+	default:
+		return fmt.Sprintf("State(%d)", int64(e))
+	}
+}

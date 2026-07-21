@@ -1028,3 +1028,1712 @@ func (e SpeechSynthesisVoiceTraits) String() string {
 	}
 	return strings.Join(parts, "|")
 }
+
+// The in-head modes for a point source.
+type Audio3DMixingPointSourceInHeadMode int64
+
+const (
+	// The point source remains a single mono source inside the head of the listener regardless of the channels it consists of.
+	Audio3DMixingPointSourceInHeadModeMono Audio3DMixingPointSourceInHeadMode = 0
+	// The point source distributes into each output channel inside the head of the listener.
+	Audio3DMixingPointSourceInHeadModeBypass Audio3DMixingPointSourceInHeadMode = 1
+)
+
+// String returns the Audio3DMixingPointSourceInHeadMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Audio3DMixingPointSourceInHeadMode) String() string {
+	switch e {
+	case Audio3DMixingPointSourceInHeadModeMono:
+		return "Audio3DMixingPointSourceInHeadModeMono"
+	case Audio3DMixingPointSourceInHeadModeBypass:
+		return "Audio3DMixingPointSourceInHeadModeBypass"
+	default:
+		return fmt.Sprintf("Audio3DMixingPointSourceInHeadMode(%d)", int64(e))
+	}
+}
+
+// The types of rendering algorithms available per input bus of the environment node.
+type Audio3DMixingRenderingAlgorithm int64
+
+const (
+	// An algorithm that pans the data of the mixer bus into a stereo field.
+	Audio3DMixingRenderingAlgorithmEqualPowerPanning Audio3DMixingRenderingAlgorithm = 0
+	// An algorithm that emulates 3D space in headphones by simulating interaural time delays and other spatial cues.
+	Audio3DMixingRenderingAlgorithmSphericalHead Audio3DMixingRenderingAlgorithm = 1
+	// A high-quality algorithm that uses filtering to emulate 3D space in headphones.
+	Audio3DMixingRenderingAlgorithmHRTF Audio3DMixingRenderingAlgorithm = 2
+	// An algorithm that renders to multichannel hardware.
+	Audio3DMixingRenderingAlgorithmSoundField Audio3DMixingRenderingAlgorithm = 3
+	// An algorithm to use when the source data doesn’t need localization.
+	Audio3DMixingRenderingAlgorithmStereoPassThrough Audio3DMixingRenderingAlgorithm = 5
+	// A higher-quality head-related transfer function rendering algorithm.
+	Audio3DMixingRenderingAlgorithmHRTFHQ Audio3DMixingRenderingAlgorithm = 6
+	// Automatically selects the highest-quality rendering algorithm available for the current playback hardware.
+	Audio3DMixingRenderingAlgorithmAuto Audio3DMixingRenderingAlgorithm = 7
+)
+
+// String returns the Audio3DMixingRenderingAlgorithm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Audio3DMixingRenderingAlgorithm) String() string {
+	switch e {
+	case Audio3DMixingRenderingAlgorithmEqualPowerPanning:
+		return "Audio3DMixingRenderingAlgorithmEqualPowerPanning"
+	case Audio3DMixingRenderingAlgorithmSphericalHead:
+		return "Audio3DMixingRenderingAlgorithmSphericalHead"
+	case Audio3DMixingRenderingAlgorithmHRTF:
+		return "Audio3DMixingRenderingAlgorithmHRTF"
+	case Audio3DMixingRenderingAlgorithmSoundField:
+		return "Audio3DMixingRenderingAlgorithmSoundField"
+	case Audio3DMixingRenderingAlgorithmStereoPassThrough:
+		return "Audio3DMixingRenderingAlgorithmStereoPassThrough"
+	case Audio3DMixingRenderingAlgorithmHRTFHQ:
+		return "Audio3DMixingRenderingAlgorithmHRTFHQ"
+	case Audio3DMixingRenderingAlgorithmAuto:
+		return "Audio3DMixingRenderingAlgorithmAuto"
+	default:
+		return fmt.Sprintf("Audio3DMixingRenderingAlgorithm(%d)", int64(e))
+	}
+}
+
+// The source modes for the input bus of the audio environment node.
+type Audio3DMixingSourceMode int64
+
+const (
+	// A mono input bus that renders as a point source at the location of the source node.
+	Audio3DMixingSourceModeSpatializeIfMono Audio3DMixingSourceMode = 0
+	// A mode that does no spatial rendering.
+	Audio3DMixingSourceModeBypass Audio3DMixingSourceMode = 1
+	// All channels of the bus render as a single source at the location of the source node.
+	Audio3DMixingSourceModePointSource Audio3DMixingSourceMode = 2
+	// The input channels spread around the listener as far-field sources that anchor to global space.
+	Audio3DMixingSourceModeAmbienceBed Audio3DMixingSourceMode = 3
+)
+
+// String returns the Audio3DMixingSourceMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Audio3DMixingSourceMode) String() string {
+	switch e {
+	case Audio3DMixingSourceModeSpatializeIfMono:
+		return "Audio3DMixingSourceModeSpatializeIfMono"
+	case Audio3DMixingSourceModeBypass:
+		return "Audio3DMixingSourceModeBypass"
+	case Audio3DMixingSourceModePointSource:
+		return "Audio3DMixingSourceModePointSource"
+	case Audio3DMixingSourceModeAmbienceBed:
+		return "Audio3DMixingSourceModeAmbienceBed"
+	default:
+		return fmt.Sprintf("Audio3DMixingSourceMode(%d)", int64(e))
+	}
+}
+
+// Constants that indicate an app’s permission to add audio to calls.
+type AudioApplicationMicrophoneInjectionPermission int64
+
+const (
+	AudioApplicationMicrophoneInjectionPermissionServiceDisabled AudioApplicationMicrophoneInjectionPermission = 1936876659
+	AudioApplicationMicrophoneInjectionPermissionUndetermined    AudioApplicationMicrophoneInjectionPermission = 1970168948
+	AudioApplicationMicrophoneInjectionPermissionDenied          AudioApplicationMicrophoneInjectionPermission = 1684369017
+	AudioApplicationMicrophoneInjectionPermissionGranted         AudioApplicationMicrophoneInjectionPermission = 1735552628
+)
+
+// String returns the AudioApplicationMicrophoneInjectionPermission constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioApplicationMicrophoneInjectionPermission) String() string {
+	switch e {
+	case AudioApplicationMicrophoneInjectionPermissionServiceDisabled:
+		return "AudioApplicationMicrophoneInjectionPermissionServiceDisabled"
+	case AudioApplicationMicrophoneInjectionPermissionUndetermined:
+		return "AudioApplicationMicrophoneInjectionPermissionUndetermined"
+	case AudioApplicationMicrophoneInjectionPermissionDenied:
+		return "AudioApplicationMicrophoneInjectionPermissionDenied"
+	case AudioApplicationMicrophoneInjectionPermissionGranted:
+		return "AudioApplicationMicrophoneInjectionPermissionGranted"
+	default:
+		return fmt.Sprintf("AudioApplicationMicrophoneInjectionPermission(%d)", int64(e))
+	}
+}
+
+// An option that indicates the status of an audio converter input block.
+type AudioConverterInputStatus int64
+
+const (
+	// A status that indicates the normal case where you supply data to the converter.
+	AudioConverterInputStatus_HaveData AudioConverterInputStatus = 0
+	// A status that indicates you’re out of data.
+	AudioConverterInputStatus_NoDataNow AudioConverterInputStatus = 1
+	// A status that indicates you’re at the end of an audio stream.
+	AudioConverterInputStatus_EndOfStream AudioConverterInputStatus = 2
+)
+
+// String returns the AudioConverterInputStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioConverterInputStatus) String() string {
+	switch e {
+	case AudioConverterInputStatus_HaveData:
+		return "AudioConverterInputStatus_HaveData"
+	case AudioConverterInputStatus_NoDataNow:
+		return "AudioConverterInputStatus_NoDataNow"
+	case AudioConverterInputStatus_EndOfStream:
+		return "AudioConverterInputStatus_EndOfStream"
+	default:
+		return fmt.Sprintf("AudioConverterInputStatus(%d)", int64(e))
+	}
+}
+
+// An option that indicates the return status of an audio converter method.
+type AudioConverterOutputStatus int64
+
+const (
+	// A status that indicates that the method returns all of the requested data.
+	AudioConverterOutputStatus_HaveData AudioConverterOutputStatus = 0
+	// A status that indicates the method doesn’t have enough input available to satisfy the request.
+	AudioConverterOutputStatus_InputRanDry AudioConverterOutputStatus = 1
+	// A status that indicates the method reaches the end of the stream, and doesn’t return any data.
+	AudioConverterOutputStatus_EndOfStream AudioConverterOutputStatus = 2
+	// A status that indicates the method encounters an error.
+	AudioConverterOutputStatus_Error AudioConverterOutputStatus = 3
+)
+
+// String returns the AudioConverterOutputStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioConverterOutputStatus) String() string {
+	switch e {
+	case AudioConverterOutputStatus_HaveData:
+		return "AudioConverterOutputStatus_HaveData"
+	case AudioConverterOutputStatus_InputRanDry:
+		return "AudioConverterOutputStatus_InputRanDry"
+	case AudioConverterOutputStatus_EndOfStream:
+		return "AudioConverterOutputStatus_EndOfStream"
+	case AudioConverterOutputStatus_Error:
+		return "AudioConverterOutputStatus_Error"
+	default:
+		return fmt.Sprintf("AudioConverterOutputStatus(%d)", int64(e))
+	}
+}
+
+// Constants that describe error codes that the framework returns from manual rendering mode methods.
+type AudioEngineManualRenderingError int64
+
+const (
+	// An operation the system can’t perform because the engine isn’t in manual rendering mode or the right variant of it.
+	AudioEngineManualRenderingErrorInvalidMode AudioEngineManualRenderingError = -80800
+	// An operation that the system can’t perform because the engine is still running.
+	AudioEngineManualRenderingErrorInitialized AudioEngineManualRenderingError = -80801
+	// An operation the system can’t perform because the engine isn’t running.
+	AudioEngineManualRenderingErrorNotRunning AudioEngineManualRenderingError = -80802
+)
+
+// String returns the AudioEngineManualRenderingError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioEngineManualRenderingError) String() string {
+	switch e {
+	case AudioEngineManualRenderingErrorInvalidMode:
+		return "AudioEngineManualRenderingErrorInvalidMode"
+	case AudioEngineManualRenderingErrorInitialized:
+		return "AudioEngineManualRenderingErrorInitialized"
+	case AudioEngineManualRenderingErrorNotRunning:
+		return "AudioEngineManualRenderingErrorNotRunning"
+	default:
+		return fmt.Sprintf("AudioEngineManualRenderingError(%d)", int64(e))
+	}
+}
+
+// The values that specify the sample rate audio quality for encoding and conversion.
+type AudioQuality int64
+
+const (
+	// A value that represents a minimum audio quality for encoding and conversion.
+	AudioQualityMin AudioQuality = 0
+	// A value that represents a low audio quality for encoding and conversion.
+	AudioQualityLow AudioQuality = 32
+	// A value that represents a medium audio quality for encoding and conversion.
+	AudioQualityMedium AudioQuality = 64
+	// A value that represents a high audio quality for encoding and conversion.
+	AudioQualityHigh AudioQuality = 96
+	// A value that represents a maximum audio quality for encoding and conversion.
+	AudioQualityMax AudioQuality = 127
+)
+
+// String returns the AudioQuality constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioQuality) String() string {
+	switch e {
+	case AudioQualityMin:
+		return "AudioQualityMin"
+	case AudioQualityLow:
+		return "AudioQualityLow"
+	case AudioQualityMedium:
+		return "AudioQualityMedium"
+	case AudioQualityHigh:
+		return "AudioQualityHigh"
+	case AudioQualityMax:
+		return "AudioQualityMax"
+	default:
+		return fmt.Sprintf("AudioQuality(%d)", int64(e))
+	}
+}
+
+// Constants that describe the options to pass when activating the audio session.
+// Bitmask — values may be combined with |.
+type AudioSessionActivationOptions uint64
+
+const (
+	// A value that indicates the system should activate the audio session with no options.
+	AudioSessionActivationOptionNone AudioSessionActivationOptions = 0
+)
+
+// String returns the AudioSessionActivationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionActivationOptions) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Constants that specify optional audio behaviors.
+// Bitmask — values may be combined with |.
+type AudioSessionCategoryOptions uint64
+
+const (
+	// Controls whether other active audio apps will be interrupted or mixed with when your app's audio session goes active. Details depend on the category. - ``AVAudioSessionCategoryPlayAndRecord`` or ``AVAudioSessionCategoryMultiRoute`` with ``AVAudioSessionModeDefault``: MixWithOthers defaults to false, but can be set to true, allowing other applications to play in the background while your app has both audio input and output enabled. - ``AVAudioSessionCategoryPlayback``: MixWithOthers defaults to false, but can be set to true, allowing other applications to play in the background. Your app will still be able to play regardless of the setting of the ringer switch. - Other categories: MixWithOthers defaults to false and cannot be changed. MixWithOthers is only valid with ``AVAudioSessionCategoryPlayAndRecord``, ``AVAudioSessionCategoryPlayback``, and ``AVAudioSessionCategoryMultiRoute`` with ``AVAudioSessionModeDefault``.
+	AudioSessionCategoryOptionMixWithOthers AudioSessionCategoryOptions = 1
+	// Controls whether or not other active audio apps will be ducked when when your app's audio session goes active. An example of this is a workout app, which provides periodic updates to the user. It reduces the volume of any music currently being played while it provides its status. Defaults to off. Note that the other audio will be ducked for as long as the current session is active. You will need to deactivate your audio session when you want to restore full volume playback (un-duck) other sessions. Setting this option will also make your session mixable with others (``AVAudioSessionCategoryOptionMixWithOthers`` will be set). DuckOthers is only valid with ``AVAudioSessionCategoryAmbient``, ``AVAudioSessionCategoryPlayAndRecord``, ``AVAudioSessionCategoryPlayback``, and ``AVAudioSessionCategoryMultiRoute`` with ``AVAudioSessionModeDefault``.
+	AudioSessionCategoryOptionDuckOthers AudioSessionCategoryOptions = 2
+)
+
+// String returns the AudioSessionCategoryOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionCategoryOptions) String() string {
+	var parts []string
+	if e&AudioSessionCategoryOptionMixWithOthers != 0 {
+		parts = append(parts, "AudioSessionCategoryOptionMixWithOthers")
+	}
+	if e&AudioSessionCategoryOptionDuckOthers != 0 {
+		parts = append(parts, "AudioSessionCategoryOptionDuckOthers")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Constant values used to specify the audio session’s aggregated I/O behavior.
+type AudioSessionIOType uint64
+
+const (
+	AudioSessionIOTypeNotSpecified AudioSessionIOType = 0
+	AudioSessionIOTypeAggregated   AudioSessionIOType = 1
+)
+
+// String returns the AudioSessionIOType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionIOType) String() string {
+	switch e {
+	case AudioSessionIOTypeNotSpecified:
+		return "AudioSessionIOTypeNotSpecified"
+	case AudioSessionIOTypeAggregated:
+		return "AudioSessionIOTypeAggregated"
+	default:
+		return fmt.Sprintf("AudioSessionIOType(%d)", int64(e))
+	}
+}
+
+// Constants that indicate the state of an audio session after an interruption.
+// Bitmask — values may be combined with |.
+type AudioSessionInterruptionOptions uint64
+
+const (
+	// Indicates that you should resume playback now that the interruption has ended.
+	AudioSessionInterruptionOptionShouldResume AudioSessionInterruptionOptions = 1
+)
+
+// String returns the AudioSessionInterruptionOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionInterruptionOptions) String() string {
+	var parts []string
+	if e&AudioSessionInterruptionOptionShouldResume != 0 {
+		parts = append(parts, "AudioSessionInterruptionOptionShouldResume")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Constants that define the reasons for an audio session interruption.
+type AudioSessionInterruptionReason uint64
+
+const (
+	AudioSessionInterruptionReasonDefault         AudioSessionInterruptionReason = 0
+	AudioSessionInterruptionReasonAppWasSuspended AudioSessionInterruptionReason = 1
+	AudioSessionInterruptionReasonBuiltInMicMuted AudioSessionInterruptionReason = 2
+)
+
+// String returns the AudioSessionInterruptionReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionInterruptionReason) String() string {
+	switch e {
+	case AudioSessionInterruptionReasonDefault:
+		return "AudioSessionInterruptionReasonDefault"
+	case AudioSessionInterruptionReasonAppWasSuspended:
+		return "AudioSessionInterruptionReasonAppWasSuspended"
+	case AudioSessionInterruptionReasonBuiltInMicMuted:
+		return "AudioSessionInterruptionReasonBuiltInMicMuted"
+	default:
+		return fmt.Sprintf("AudioSessionInterruptionReason(%d)", int64(e))
+	}
+}
+
+// Constants that describe the type of an audio interruption.
+type AudioSessionInterruptionType uint64
+
+const (
+	AudioSessionInterruptionTypeBegan AudioSessionInterruptionType = 1
+	AudioSessionInterruptionTypeEnded AudioSessionInterruptionType = 0
+)
+
+// String returns the AudioSessionInterruptionType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionInterruptionType) String() string {
+	switch e {
+	case AudioSessionInterruptionTypeBegan:
+		return "AudioSessionInterruptionTypeBegan"
+	case AudioSessionInterruptionTypeEnded:
+		return "AudioSessionInterruptionTypeEnded"
+	default:
+		return fmt.Sprintf("AudioSessionInterruptionType(%d)", int64(e))
+	}
+}
+
+// The modes of injecting audio into another app’s input stream.
+type AudioSessionMicrophoneInjectionMode int64
+
+const (
+	// Default state, microphone injection is not preferred
+	AudioSessionMicrophoneInjectionModeNone AudioSessionMicrophoneInjectionMode = 0
+	// Inject Spoken Audio, like synthesized speech, with microphone audio
+	AudioSessionMicrophoneInjectionModeSpokenAudio AudioSessionMicrophoneInjectionMode = 1
+)
+
+// String returns the AudioSessionMicrophoneInjectionMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionMicrophoneInjectionMode) String() string {
+	switch e {
+	case AudioSessionMicrophoneInjectionModeNone:
+		return "AudioSessionMicrophoneInjectionModeNone"
+	case AudioSessionMicrophoneInjectionModeSpokenAudio:
+		return "AudioSessionMicrophoneInjectionModeSpokenAudio"
+	default:
+		return fmt.Sprintf("AudioSessionMicrophoneInjectionMode(%d)", int64(e))
+	}
+}
+
+// Constants for use with the overrideOutputAudioPort(_:) method.
+type AudioSessionPortOverride uint64
+
+const (
+	// No override.  Return audio routing to the default state for the current audio category.
+	AudioSessionPortOverrideNone AudioSessionPortOverride = 0
+)
+
+// String returns the AudioSessionPortOverride constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionPortOverride) String() string {
+	switch e {
+	case AudioSessionPortOverrideNone:
+		return "AudioSessionPortOverrideNone"
+	default:
+		return fmt.Sprintf("AudioSessionPortOverride(%d)", int64(e))
+	}
+}
+
+// Constants that indicate the prompt style to use.
+type AudioSessionPromptStyle uint64
+
+const (
+	AudioSessionPromptStyleNone   AudioSessionPromptStyle = 1852796517
+	AudioSessionPromptStyleShort  AudioSessionPromptStyle = 1936224884
+	AudioSessionPromptStyleNormal AudioSessionPromptStyle = 1852992876
+)
+
+// String returns the AudioSessionPromptStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionPromptStyle) String() string {
+	switch e {
+	case AudioSessionPromptStyleNone:
+		return "AudioSessionPromptStyleNone"
+	case AudioSessionPromptStyleShort:
+		return "AudioSessionPromptStyleShort"
+	case AudioSessionPromptStyleNormal:
+		return "AudioSessionPromptStyleNormal"
+	default:
+		return fmt.Sprintf("AudioSessionPromptStyle(%d)", int64(e))
+	}
+}
+
+// Audio session rendering mode identifiers.
+type AudioSessionRenderingMode int64
+
+const (
+	// Default Mode when no asset is loaded or playing
+	AudioSessionRenderingModeNotApplicable AudioSessionRenderingMode = 0
+	// Default mode for non multi-channel cases
+	AudioSessionRenderingModeMonoStereo AudioSessionRenderingMode = 1
+	// Default mode for multi-channel cases that do not fall into the modes below
+	AudioSessionRenderingModeSurround AudioSessionRenderingMode = 2
+	// Fallback mode if provided content is Dolby variant but hardware capabilities don't support it
+	AudioSessionRenderingModeSpatialAudio AudioSessionRenderingMode = 3
+	// Dolby Audio mode
+	AudioSessionRenderingModeDolbyAudio AudioSessionRenderingMode = 4
+	// Dolby Atmos mode
+	AudioSessionRenderingModeDolbyAtmos AudioSessionRenderingMode = 5
+)
+
+// String returns the AudioSessionRenderingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionRenderingMode) String() string {
+	switch e {
+	case AudioSessionRenderingModeNotApplicable:
+		return "AudioSessionRenderingModeNotApplicable"
+	case AudioSessionRenderingModeMonoStereo:
+		return "AudioSessionRenderingModeMonoStereo"
+	case AudioSessionRenderingModeSurround:
+		return "AudioSessionRenderingModeSurround"
+	case AudioSessionRenderingModeSpatialAudio:
+		return "AudioSessionRenderingModeSpatialAudio"
+	case AudioSessionRenderingModeDolbyAudio:
+		return "AudioSessionRenderingModeDolbyAudio"
+	case AudioSessionRenderingModeDolbyAtmos:
+		return "AudioSessionRenderingModeDolbyAtmos"
+	default:
+		return fmt.Sprintf("AudioSessionRenderingMode(%d)", int64(e))
+	}
+}
+
+// Constants that indicate the reason for an audio route change.
+type AudioSessionRouteChangeReason uint64
+
+const (
+	// The reason is unknown.
+	AudioSessionRouteChangeReasonUnknown AudioSessionRouteChangeReason = 0
+	// A new device became available (e.g. headphones have been plugged in).
+	AudioSessionRouteChangeReasonNewDeviceAvailable AudioSessionRouteChangeReason = 1
+	// The old device became unavailable (e.g. headphones have been unplugged).
+	AudioSessionRouteChangeReasonOldDeviceUnavailable AudioSessionRouteChangeReason = 2
+	// The audio category has changed (e.g. AVAudioSessionCategoryPlayback has been changed to AVAudioSessionCategoryPlayAndRecord).
+	AudioSessionRouteChangeReasonCategoryChange AudioSessionRouteChangeReason = 3
+	// The route has been overridden (e.g. category is AVAudioSessionCategoryPlayAndRecord and the output has been changed from the receiver, which is the default, to the speaker).
+	AudioSessionRouteChangeReasonOverride AudioSessionRouteChangeReason = 4
+	// The device woke from sleep.
+	AudioSessionRouteChangeReasonWakeFromSleep AudioSessionRouteChangeReason = 6
+	// Returned when there is no route for the current category (for instance, the category is AVAudioSessionCategoryRecord but no input device is available).
+	AudioSessionRouteChangeReasonNoSuitableRouteForCategory AudioSessionRouteChangeReason = 7
+	// Indicates that the set of input and/our output ports has not changed, but some aspect of their configuration has changed.  For example, a port's selected data source has changed. (Introduced in iOS 7.0, watchOS 2.0, tvOS 9.0).
+	AudioSessionRouteChangeReasonRouteConfigurationChange AudioSessionRouteChangeReason = 8
+)
+
+// String returns the AudioSessionRouteChangeReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionRouteChangeReason) String() string {
+	switch e {
+	case AudioSessionRouteChangeReasonUnknown:
+		return "AudioSessionRouteChangeReasonUnknown"
+	case AudioSessionRouteChangeReasonNewDeviceAvailable:
+		return "AudioSessionRouteChangeReasonNewDeviceAvailable"
+	case AudioSessionRouteChangeReasonOldDeviceUnavailable:
+		return "AudioSessionRouteChangeReasonOldDeviceUnavailable"
+	case AudioSessionRouteChangeReasonCategoryChange:
+		return "AudioSessionRouteChangeReasonCategoryChange"
+	case AudioSessionRouteChangeReasonOverride:
+		return "AudioSessionRouteChangeReasonOverride"
+	case AudioSessionRouteChangeReasonWakeFromSleep:
+		return "AudioSessionRouteChangeReasonWakeFromSleep"
+	case AudioSessionRouteChangeReasonNoSuitableRouteForCategory:
+		return "AudioSessionRouteChangeReasonNoSuitableRouteForCategory"
+	case AudioSessionRouteChangeReasonRouteConfigurationChange:
+		return "AudioSessionRouteChangeReasonRouteConfigurationChange"
+	default:
+		return fmt.Sprintf("AudioSessionRouteChangeReason(%d)", int64(e))
+	}
+}
+
+// Cases that indicate the possible route-sharing policies for an audio session.
+type AudioSessionRouteSharingPolicy uint64
+
+const (
+	AudioSessionRouteSharingPolicyDefault       AudioSessionRouteSharingPolicy = 0
+	AudioSessionRouteSharingPolicyLongFormAudio AudioSessionRouteSharingPolicy = 1
+)
+
+// String returns the AudioSessionRouteSharingPolicy constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionRouteSharingPolicy) String() string {
+	switch e {
+	case AudioSessionRouteSharingPolicyDefault:
+		return "AudioSessionRouteSharingPolicyDefault"
+	case AudioSessionRouteSharingPolicyLongFormAudio:
+		return "AudioSessionRouteSharingPolicyLongFormAudio"
+	default:
+		return fmt.Sprintf("AudioSessionRouteSharingPolicy(%d)", int64(e))
+	}
+}
+
+// Options that provide additional information about your app’s audio intentions upon session deactivation.
+// Bitmask — values may be combined with |.
+type AudioSessionSetActiveOptions uint64
+
+const (
+	// Notify an interrupted app that the interruption has ended and it may resume playback. Only valid on session deactivation.
+	AudioSessionSetActiveOptionNotifyOthersOnDeactivation AudioSessionSetActiveOptions = 1
+)
+
+// String returns the AudioSessionSetActiveOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionSetActiveOptions) String() string {
+	var parts []string
+	if e&AudioSessionSetActiveOptionNotifyOthersOnDeactivation != 0 {
+		parts = append(parts, "AudioSessionSetActiveOptionNotifyOthersOnDeactivation")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Constants that indicate whether optional secondary audio muting should begin or end.
+type AudioSessionSilenceSecondaryAudioHintType uint64
+
+const (
+	// Another application's primary audio has started.
+	AudioSessionSilenceSecondaryAudioHintTypeBegin AudioSessionSilenceSecondaryAudioHintType = 1
+	// Another application's primary audio has stopped.
+	AudioSessionSilenceSecondaryAudioHintTypeEnd AudioSessionSilenceSecondaryAudioHintType = 0
+)
+
+// String returns the AudioSessionSilenceSecondaryAudioHintType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionSilenceSecondaryAudioHintType) String() string {
+	switch e {
+	case AudioSessionSilenceSecondaryAudioHintTypeBegin:
+		return "AudioSessionSilenceSecondaryAudioHintTypeBegin"
+	case AudioSessionSilenceSecondaryAudioHintTypeEnd:
+		return "AudioSessionSilenceSecondaryAudioHintTypeEnd"
+	default:
+		return fmt.Sprintf("AudioSessionSilenceSecondaryAudioHintType(%d)", int64(e))
+	}
+}
+
+// Constants that define the supported stereo orientations.
+type AudioStereoOrientation int64
+
+const (
+	AudioStereoOrientationNone               AudioStereoOrientation = 0
+	AudioStereoOrientationPortrait           AudioStereoOrientation = 1
+	AudioStereoOrientationPortraitUpsideDown AudioStereoOrientation = 2
+	AudioStereoOrientationLandscapeRight     AudioStereoOrientation = 3
+	AudioStereoOrientationLandscapeLeft      AudioStereoOrientation = 4
+)
+
+// String returns the AudioStereoOrientation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioStereoOrientation) String() string {
+	switch e {
+	case AudioStereoOrientationNone:
+		return "AudioStereoOrientationNone"
+	case AudioStereoOrientationPortrait:
+		return "AudioStereoOrientationPortrait"
+	case AudioStereoOrientationPortraitUpsideDown:
+		return "AudioStereoOrientationPortraitUpsideDown"
+	case AudioStereoOrientationLandscapeRight:
+		return "AudioStereoOrientationLandscapeRight"
+	case AudioStereoOrientationLandscapeLeft:
+		return "AudioStereoOrientationLandscapeLeft"
+	default:
+		return fmt.Sprintf("AudioStereoOrientation(%d)", int64(e))
+	}
+}
+
+// Types of speech activity events.
+type AudioVoiceProcessingSpeechActivityEvent int64
+
+const (
+	// Indicates the start of speech activity.
+	AudioVoiceProcessingSpeechActivityStarted AudioVoiceProcessingSpeechActivityEvent = 0
+	// Indicates the end of speech activity.
+	AudioVoiceProcessingSpeechActivityEnded AudioVoiceProcessingSpeechActivityEvent = 1
+)
+
+// String returns the AudioVoiceProcessingSpeechActivityEvent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioVoiceProcessingSpeechActivityEvent) String() string {
+	switch e {
+	case AudioVoiceProcessingSpeechActivityStarted:
+		return "AudioVoiceProcessingSpeechActivityStarted"
+	case AudioVoiceProcessingSpeechActivityEnded:
+		return "AudioVoiceProcessingSpeechActivityEnded"
+	default:
+		return fmt.Sprintf("AudioVoiceProcessingSpeechActivityEvent(%d)", int64(e))
+	}
+}
+
+// Options that define the number of times a track loops.
+type MusicTrackLoopCount int64
+
+const (
+	// A track that loops forever.
+	MusicTrackLoopCountForever MusicTrackLoopCount = -1
+)
+
+// String returns the MusicTrackLoopCount constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MusicTrackLoopCount) String() string {
+	switch e {
+	case MusicTrackLoopCountForever:
+		return "MusicTrackLoopCountForever"
+	default:
+		return fmt.Sprintf("MusicTrackLoopCount(%d)", int64(e))
+	}
+}
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Type int64
+
+const (
+	TypeExtended Type = 256
+	TypeAccess   Type = 0
+	TypeDefault  Type = 1
+	TypeAfs      Type = 2
+	TypeCoda     Type = 3
+	TypeNtfs     Type = 4
+	TypeNwfs     Type = 5
+)
+
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Type) String() string {
+	switch e {
+	case TypeExtended:
+		return "TypeExtended"
+	case TypeAccess:
+		return "TypeAccess"
+	case TypeDefault:
+		return "TypeDefault"
+	case TypeAfs:
+		return "TypeAfs"
+	case TypeCoda:
+		return "TypeCoda"
+	case TypeNtfs:
+		return "TypeNtfs"
+	case TypeNwfs:
+		return "TypeNwfs"
+	default:
+		return fmt.Sprintf("Type(%d)", int64(e))
+	}
+}
+
+type CGLCPContextPriorityRequest int64
+
+const (
+	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
+	KCGLCPContextPriorityRequestNormal CGLCPContextPriorityRequest = 1
+	KCGLCPContextPriorityRequestLow    CGLCPContextPriorityRequest = 2
+)
+
+// String returns the CGLCPContextPriorityRequest constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGLCPContextPriorityRequest) String() string {
+	switch e {
+	case KCGLCPContextPriorityRequestHigh:
+		return "KCGLCPContextPriorityRequestHigh"
+	case KCGLCPContextPriorityRequestNormal:
+		return "KCGLCPContextPriorityRequestNormal"
+	case KCGLCPContextPriorityRequestLow:
+		return "KCGLCPContextPriorityRequestLow"
+	default:
+		return fmt.Sprintf("CGLCPContextPriorityRequest(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type EvCmd int64
+
+const (
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
+	EVLEVEL EvCmd = 4
+)
+
+// String returns the EvCmd constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EvCmd) String() string {
+	switch e {
+	case EVNOP:
+		return "EVNOP"
+	case EVHIDE:
+		return "EVHIDE"
+	case EVSHOW:
+		return "EVSHOW"
+	case EVMOVE:
+		return "EVMOVE"
+	case EVLEVEL:
+		return "EVLEVEL"
+	default:
+		return fmt.Sprintf("EvCmd(%d)", int64(e))
+	}
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+type LaunchDataType int64
+
+const (
+	LaunchDataTypeDictionary LaunchDataType = 1
+	LaunchDataTypeArray      LaunchDataType = 2
+	LaunchDataTypeFd         LaunchDataType = 3
+	LaunchDataTypeInteger    LaunchDataType = 4
+	LaunchDataTypeReal       LaunchDataType = 5
+	LaunchDataTypeBool       LaunchDataType = 6
+	LaunchDataTypeString     LaunchDataType = 7
+	LaunchDataTypeOpaque     LaunchDataType = 8
+	LaunchDataTypeErrno      LaunchDataType = 9
+	LaunchDataTypeMachport   LaunchDataType = 10
+)
+
+// String returns the LaunchDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LaunchDataType) String() string {
+	switch e {
+	case LaunchDataTypeDictionary:
+		return "LaunchDataTypeDictionary"
+	case LaunchDataTypeArray:
+		return "LaunchDataTypeArray"
+	case LaunchDataTypeFd:
+		return "LaunchDataTypeFd"
+	case LaunchDataTypeInteger:
+		return "LaunchDataTypeInteger"
+	case LaunchDataTypeReal:
+		return "LaunchDataTypeReal"
+	case LaunchDataTypeBool:
+		return "LaunchDataTypeBool"
+	case LaunchDataTypeString:
+		return "LaunchDataTypeString"
+	case LaunchDataTypeOpaque:
+		return "LaunchDataTypeOpaque"
+	case LaunchDataTypeErrno:
+		return "LaunchDataTypeErrno"
+	case LaunchDataTypeMachport:
+		return "LaunchDataTypeMachport"
+	default:
+		return fmt.Sprintf("LaunchDataType(%d)", int64(e))
+	}
+}
+
+// These constants are used to specify a domain to MDLabelCreate().
+type MDLabelDomain int64
+
+const (
+	KMDLabelUserDomain  MDLabelDomain = 0
+	KMDLabelLocalDomain MDLabelDomain = 1
+)
+
+// String returns the MDLabelDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDLabelDomain) String() string {
+	switch e {
+	case KMDLabelUserDomain:
+		return "KMDLabelUserDomain"
+	case KMDLabelLocalDomain:
+		return "KMDLabelLocalDomain"
+	default:
+		return fmt.Sprintf("MDLabelDomain(%d)", int64(e))
+	}
+}
+
+type MDQueryOptionFlags int64
+
+const (
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
+	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
+)
+
+// String returns the MDQueryOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQueryOptionFlags) String() string {
+	switch e {
+	case KMDQuerySynchronous:
+		return "KMDQuerySynchronous"
+	case KMDQueryWantsUpdates:
+		return "KMDQueryWantsUpdates"
+	case KMDQueryAllowFSTranslation:
+		return "KMDQueryAllowFSTranslation"
+	default:
+		return fmt.Sprintf("MDQueryOptionFlags(%d)", int64(e))
+	}
+}
+
+type MDQuerySortOptionFlags int64
+
+const (
+	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
+)
+
+// String returns the MDQuerySortOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQuerySortOptionFlags) String() string {
+	switch e {
+	case KMDQueryReverseSortOrderFlag:
+		return "KMDQueryReverseSortOrderFlag"
+	default:
+		return fmt.Sprintf("MDQuerySortOptionFlags(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type NXMouseButton int64
+
+const (
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
+	NX_RightButton NXMouseButton = 2
+)
+
+// String returns the NXMouseButton constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NXMouseButton) String() string {
+	switch e {
+	case NX_OneButton:
+		return "NX_OneButton"
+	case NX_LeftButton:
+		return "NX_LeftButton"
+	case NX_RightButton:
+		return "NX_RightButton"
+	default:
+		return fmt.Sprintf("NXMouseButton(%d)", int64(e))
+	}
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+type PMPageToPaperMappingType int64
+
+const (
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
+)
+
+// String returns the PMPageToPaperMappingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PMPageToPaperMappingType) String() string {
+	switch e {
+	case KPMPageToPaperMappingNone:
+		return "KPMPageToPaperMappingNone"
+	case KPMPageToPaperMappingScaleToFit:
+		return "KPMPageToPaperMappingScaleToFit"
+	default:
+		return fmt.Sprintf("PMPageToPaperMappingType(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlags int64
+
+const (
+	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
+	XpcListenerCreateFlagsInactive        XpcListenerCreateFlags = 1
+	XpcListenerCreateFlagsForceMach       XpcListenerCreateFlags = 2
+	XpcListenerCreateFlagsForceXpcservice XpcListenerCreateFlags = 4
+)
+
+// String returns the XpcListenerCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcListenerCreateFlags) String() string {
+	var parts []string
+	if e&XpcListenerCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsInactive")
+	}
+	if e&XpcListenerCreateFlagsForceMach != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceMach")
+	}
+	if e&XpcListenerCreateFlagsForceXpcservice != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceXpcservice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlags int64
+
+const (
+	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0
+	XpcSessionCreateFlagsInactive       XpcSessionCreateFlags = 1
+	XpcSessionCreateFlagsMachPrivileged XpcSessionCreateFlags = 2
+)
+
+// String returns the XpcSessionCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcSessionCreateFlags) String() string {
+	var parts []string
+	if e&XpcSessionCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsInactive")
+	}
+	if e&XpcSessionCreateFlagsMachPrivileged != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsMachPrivileged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

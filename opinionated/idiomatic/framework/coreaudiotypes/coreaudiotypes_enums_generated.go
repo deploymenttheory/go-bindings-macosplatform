@@ -9,66 +9,6 @@ import (
 	"strings"
 )
 
-// Codes that describe error conditions that may occur when performing audio session operations.
-type AVAudioSessionErrorCode int64
-
-const (
-	AVAudioSessionErrorCodeNone                  AVAudioSessionErrorCode = 0
-	AVAudioSessionErrorCodeMediaServicesFailed   AVAudioSessionErrorCode = 1836282486
-	AVAudioSessionErrorCodeIsBusy                AVAudioSessionErrorCode = 560030580
-	AVAudioSessionErrorCodeIncompatibleCategory  AVAudioSessionErrorCode = 560161140
-	AVAudioSessionErrorCodeCannotInterruptOthers AVAudioSessionErrorCode = 560557684
-	AVAudioSessionErrorCodeMissingEntitlement    AVAudioSessionErrorCode = 1701737535
-	AVAudioSessionErrorCodeSiriIsRecording       AVAudioSessionErrorCode = 1936290409
-	AVAudioSessionErrorCodeCannotStartPlaying    AVAudioSessionErrorCode = 561015905
-	AVAudioSessionErrorCodeCannotStartRecording  AVAudioSessionErrorCode = 561145187
-	AVAudioSessionErrorCodeBadParam              AVAudioSessionErrorCode = -50
-	AVAudioSessionErrorCodeInsufficientPriority  AVAudioSessionErrorCode = 561017449
-	AVAudioSessionErrorCodeResourceNotAvailable  AVAudioSessionErrorCode = 561145203
-	AVAudioSessionErrorCodeUnspecified           AVAudioSessionErrorCode = 2003329396
-	AVAudioSessionErrorCodeExpiredSession        AVAudioSessionErrorCode = 561210739
-	AVAudioSessionErrorCodeSessionNotActive      AVAudioSessionErrorCode = 1768841571
-)
-
-// String returns the AVAudioSessionErrorCode constant's name, or its numeric form when the
-// value is not a known constant.
-func (e AVAudioSessionErrorCode) String() string {
-	switch e {
-	case AVAudioSessionErrorCodeNone:
-		return "AVAudioSessionErrorCodeNone"
-	case AVAudioSessionErrorCodeMediaServicesFailed:
-		return "AVAudioSessionErrorCodeMediaServicesFailed"
-	case AVAudioSessionErrorCodeIsBusy:
-		return "AVAudioSessionErrorCodeIsBusy"
-	case AVAudioSessionErrorCodeIncompatibleCategory:
-		return "AVAudioSessionErrorCodeIncompatibleCategory"
-	case AVAudioSessionErrorCodeCannotInterruptOthers:
-		return "AVAudioSessionErrorCodeCannotInterruptOthers"
-	case AVAudioSessionErrorCodeMissingEntitlement:
-		return "AVAudioSessionErrorCodeMissingEntitlement"
-	case AVAudioSessionErrorCodeSiriIsRecording:
-		return "AVAudioSessionErrorCodeSiriIsRecording"
-	case AVAudioSessionErrorCodeCannotStartPlaying:
-		return "AVAudioSessionErrorCodeCannotStartPlaying"
-	case AVAudioSessionErrorCodeCannotStartRecording:
-		return "AVAudioSessionErrorCodeCannotStartRecording"
-	case AVAudioSessionErrorCodeBadParam:
-		return "AVAudioSessionErrorCodeBadParam"
-	case AVAudioSessionErrorCodeInsufficientPriority:
-		return "AVAudioSessionErrorCodeInsufficientPriority"
-	case AVAudioSessionErrorCodeResourceNotAvailable:
-		return "AVAudioSessionErrorCodeResourceNotAvailable"
-	case AVAudioSessionErrorCodeUnspecified:
-		return "AVAudioSessionErrorCodeUnspecified"
-	case AVAudioSessionErrorCodeExpiredSession:
-		return "AVAudioSessionErrorCodeExpiredSession"
-	case AVAudioSessionErrorCodeSessionNotActive:
-		return "AVAudioSessionErrorCodeSessionNotActive"
-	default:
-		return fmt.Sprintf("AVAudioSessionErrorCode(%d)", int64(e))
-	}
-}
-
 // The supported channel bitmaps to use when defining channel layouts.
 // Bitmask — values may be combined with |.
 type AudioChannelBitmap int64
@@ -380,3 +320,588 @@ func (e SMPTETimeType) String() string {
 		return fmt.Sprintf("SMPTETimeType(%d)", int64(e))
 	}
 }
+
+// Codes that describe error conditions that may occur when performing audio session operations.
+type AVAudioSessionErrorCode int64
+
+const (
+	AVAudioSessionErrorCodeNone                  AVAudioSessionErrorCode = 0
+	AVAudioSessionErrorCodeMediaServicesFailed   AVAudioSessionErrorCode = 1836282486
+	AVAudioSessionErrorCodeIsBusy                AVAudioSessionErrorCode = 560030580
+	AVAudioSessionErrorCodeIncompatibleCategory  AVAudioSessionErrorCode = 560161140
+	AVAudioSessionErrorCodeCannotInterruptOthers AVAudioSessionErrorCode = 560557684
+	AVAudioSessionErrorCodeMissingEntitlement    AVAudioSessionErrorCode = 1701737535
+	AVAudioSessionErrorCodeSiriIsRecording       AVAudioSessionErrorCode = 1936290409
+	AVAudioSessionErrorCodeCannotStartPlaying    AVAudioSessionErrorCode = 561015905
+	AVAudioSessionErrorCodeCannotStartRecording  AVAudioSessionErrorCode = 561145187
+	AVAudioSessionErrorCodeBadParam              AVAudioSessionErrorCode = -50
+	AVAudioSessionErrorCodeInsufficientPriority  AVAudioSessionErrorCode = 561017449
+	AVAudioSessionErrorCodeResourceNotAvailable  AVAudioSessionErrorCode = 561145203
+	AVAudioSessionErrorCodeUnspecified           AVAudioSessionErrorCode = 2003329396
+	AVAudioSessionErrorCodeExpiredSession        AVAudioSessionErrorCode = 561210739
+	AVAudioSessionErrorCodeSessionNotActive      AVAudioSessionErrorCode = 1768841571
+)
+
+// String returns the AVAudioSessionErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AVAudioSessionErrorCode) String() string {
+	switch e {
+	case AVAudioSessionErrorCodeNone:
+		return "AVAudioSessionErrorCodeNone"
+	case AVAudioSessionErrorCodeMediaServicesFailed:
+		return "AVAudioSessionErrorCodeMediaServicesFailed"
+	case AVAudioSessionErrorCodeIsBusy:
+		return "AVAudioSessionErrorCodeIsBusy"
+	case AVAudioSessionErrorCodeIncompatibleCategory:
+		return "AVAudioSessionErrorCodeIncompatibleCategory"
+	case AVAudioSessionErrorCodeCannotInterruptOthers:
+		return "AVAudioSessionErrorCodeCannotInterruptOthers"
+	case AVAudioSessionErrorCodeMissingEntitlement:
+		return "AVAudioSessionErrorCodeMissingEntitlement"
+	case AVAudioSessionErrorCodeSiriIsRecording:
+		return "AVAudioSessionErrorCodeSiriIsRecording"
+	case AVAudioSessionErrorCodeCannotStartPlaying:
+		return "AVAudioSessionErrorCodeCannotStartPlaying"
+	case AVAudioSessionErrorCodeCannotStartRecording:
+		return "AVAudioSessionErrorCodeCannotStartRecording"
+	case AVAudioSessionErrorCodeBadParam:
+		return "AVAudioSessionErrorCodeBadParam"
+	case AVAudioSessionErrorCodeInsufficientPriority:
+		return "AVAudioSessionErrorCodeInsufficientPriority"
+	case AVAudioSessionErrorCodeResourceNotAvailable:
+		return "AVAudioSessionErrorCodeResourceNotAvailable"
+	case AVAudioSessionErrorCodeUnspecified:
+		return "AVAudioSessionErrorCodeUnspecified"
+	case AVAudioSessionErrorCodeExpiredSession:
+		return "AVAudioSessionErrorCodeExpiredSession"
+	case AVAudioSessionErrorCodeSessionNotActive:
+		return "AVAudioSessionErrorCodeSessionNotActive"
+	default:
+		return fmt.Sprintf("AVAudioSessionErrorCode(%d)", int64(e))
+	}
+}
+
+// Indexes the fields of the mCoordinates array in an AudioChannelDescription structure.
+type AudioChannelCoordinateIndex int64
+
+const (
+	// For rectangular coordinates, negative is left and positive is right. The units are specified by the mChannelFlags field of the AudioChannelDescription structure.
+	KAudioChannelCoordinates_LeftRight AudioChannelCoordinateIndex = 0
+	// For rectangular coordinates, negative is back and positive is front. The units are specified by the mChannelFlags field.
+	KAudioChannelCoordinates_BackFront AudioChannelCoordinateIndex = 1
+	// For rectangular coordinates, negative is below ground level, 0 is ground level, and positive is above ground level. The units are specified by the mChannelFlags field.
+	KAudioChannelCoordinates_DownUp AudioChannelCoordinateIndex = 2
+	// For spherical coordinates, 0 is front center, positive is right, negative is left, and measurements are in degrees.
+	KAudioChannelCoordinates_Azimuth AudioChannelCoordinateIndex = 0
+	// For spherical coordinates, +90 is zenith, 0 is horizontal, -90 is nadir, and measurements are in degrees.
+	KAudioChannelCoordinates_Elevation AudioChannelCoordinateIndex = 1
+	// For spherical coordinates, distance is radially from the center. The units are specified by the mChannelFlags field of the AudioChannelDescription structure.
+	KAudioChannelCoordinates_Distance AudioChannelCoordinateIndex = 2
+)
+
+// String returns the AudioChannelCoordinateIndex constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioChannelCoordinateIndex) String() string {
+	switch e {
+	case KAudioChannelCoordinates_LeftRight:
+		return "KAudioChannelCoordinates_LeftRight"
+	case KAudioChannelCoordinates_BackFront:
+		return "KAudioChannelCoordinates_BackFront"
+	case KAudioChannelCoordinates_DownUp:
+		return "KAudioChannelCoordinates_DownUp"
+	default:
+		return fmt.Sprintf("AudioChannelCoordinateIndex(%d)", int64(e))
+	}
+}
+
+// Constants that define the type of MPEG-4 audio data.
+type MPEG4ObjectID int64
+
+const (
+	// A constant that specifies advanced audio coding, which is the basic MPEG-4 technology.
+	KMPEG4Object_AAC_Main MPEG4ObjectID = 1
+	// A constant that specifies lossless coding, which provides compression with no loss of quality.
+	KMPEG4Object_AAC_LC MPEG4ObjectID = 2
+	// A constant that specifies scalable sampling rate, which provides different sampling frequencies for different targets.
+	KMPEG4Object_AAC_SSR MPEG4ObjectID = 3
+	// A constant that specifies long-term prediction, which reduces redundancy in a coded signal.
+	KMPEG4Object_AAC_LTP MPEG4ObjectID = 4
+	// A constant that specifies spectral band replication, which reconstructs high-frequency content from lower frequencies and side information.
+	KMPEG4Object_AAC_SBR MPEG4ObjectID = 5
+	// A constant that specifies scalable lossless coding.
+	KMPEG4Object_AAC_Scalable MPEG4ObjectID = 6
+	// A constant that specifies transform-domain weighted interleaved vector quantization.
+	KMPEG4Object_TwinVQ MPEG4ObjectID = 7
+	// A constant that specifies code-excited linear prediction, which is a narrow-band/wide-band speech codec.
+	KMPEG4Object_CELP MPEG4ObjectID = 8
+	// A constant that specifies harmonic vector excitation coding, which is a very-low bit-rate parametric speech codec.
+	KMPEG4Object_HVXC MPEG4ObjectID = 9
+)
+
+// String returns the MPEG4ObjectID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MPEG4ObjectID) String() string {
+	switch e {
+	case KMPEG4Object_AAC_Main:
+		return "KMPEG4Object_AAC_Main"
+	case KMPEG4Object_AAC_LC:
+		return "KMPEG4Object_AAC_LC"
+	case KMPEG4Object_AAC_SSR:
+		return "KMPEG4Object_AAC_SSR"
+	case KMPEG4Object_AAC_LTP:
+		return "KMPEG4Object_AAC_LTP"
+	case KMPEG4Object_AAC_SBR:
+		return "KMPEG4Object_AAC_SBR"
+	case KMPEG4Object_AAC_Scalable:
+		return "KMPEG4Object_AAC_Scalable"
+	case KMPEG4Object_TwinVQ:
+		return "KMPEG4Object_TwinVQ"
+	case KMPEG4Object_CELP:
+		return "KMPEG4Object_CELP"
+	case KMPEG4Object_HVXC:
+		return "KMPEG4Object_HVXC"
+	default:
+		return fmt.Sprintf("MPEG4ObjectID(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+const (
+	KAppleLosslessFormatFlag_16BitSourceData      = 1
+	KAppleLosslessFormatFlag_20BitSourceData      = 2
+	KAppleLosslessFormatFlag_24BitSourceData      = 3
+	KAppleLosslessFormatFlag_32BitSourceData      = 4
+	KAudioChannelLabel_Ambisonic_W                = 200
+	KAudioChannelLabel_Ambisonic_X                = 201
+	KAudioChannelLabel_Ambisonic_Y                = 202
+	KAudioChannelLabel_Ambisonic_Z                = 203
+	KAudioChannelLabel_BeginReserved              = 4026531840
+	KAudioChannelLabel_BinauralLeft               = 208
+	KAudioChannelLabel_BinauralRight              = 209
+	KAudioChannelLabel_Center                     = 3
+	KAudioChannelLabel_CenterBottom               = 59
+	KAudioChannelLabel_CenterSurround             = 9
+	KAudioChannelLabel_CenterSurroundDirect       = 44
+	KAudioChannelLabel_CenterTopFront             = 14
+	KAudioChannelLabel_CenterTopMiddle            = 12
+	KAudioChannelLabel_CenterTopRear              = 53
+	KAudioChannelLabel_ClickTrack                 = 304
+	KAudioChannelLabel_DialogCentricMix           = 43
+	KAudioChannelLabel_Discrete                   = 400
+	KAudioChannelLabel_Discrete_0                 = 65536
+	KAudioChannelLabel_Discrete_1                 = 65537
+	KAudioChannelLabel_Discrete_10                = 65546
+	KAudioChannelLabel_Discrete_11                = 65547
+	KAudioChannelLabel_Discrete_12                = 65548
+	KAudioChannelLabel_Discrete_13                = 65549
+	KAudioChannelLabel_Discrete_14                = 65550
+	KAudioChannelLabel_Discrete_15                = 65551
+	KAudioChannelLabel_Discrete_2                 = 65538
+	KAudioChannelLabel_Discrete_3                 = 65539
+	KAudioChannelLabel_Discrete_4                 = 65540
+	KAudioChannelLabel_Discrete_5                 = 65541
+	KAudioChannelLabel_Discrete_6                 = 65542
+	KAudioChannelLabel_Discrete_65535             = 131071
+	KAudioChannelLabel_Discrete_7                 = 65543
+	KAudioChannelLabel_Discrete_8                 = 65544
+	KAudioChannelLabel_Discrete_9                 = 65545
+	KAudioChannelLabel_EndReserved                = 4294967294
+	KAudioChannelLabel_ForeignLanguage            = 305
+	KAudioChannelLabel_HOA_ACN                    = 500
+	KAudioChannelLabel_HOA_ACN_0                  = 131072
+	KAudioChannelLabel_HOA_ACN_1                  = 131073
+	KAudioChannelLabel_HOA_ACN_10                 = 131082
+	KAudioChannelLabel_HOA_ACN_11                 = 131083
+	KAudioChannelLabel_HOA_ACN_12                 = 131084
+	KAudioChannelLabel_HOA_ACN_13                 = 131085
+	KAudioChannelLabel_HOA_ACN_14                 = 131086
+	KAudioChannelLabel_HOA_ACN_15                 = 131087
+	KAudioChannelLabel_HOA_ACN_2                  = 131074
+	KAudioChannelLabel_HOA_ACN_3                  = 131075
+	KAudioChannelLabel_HOA_ACN_4                  = 131076
+	KAudioChannelLabel_HOA_ACN_5                  = 131077
+	KAudioChannelLabel_HOA_ACN_6                  = 131078
+	KAudioChannelLabel_HOA_ACN_65024              = 196096
+	KAudioChannelLabel_HOA_ACN_7                  = 131079
+	KAudioChannelLabel_HOA_ACN_8                  = 131080
+	KAudioChannelLabel_HOA_ACN_9                  = 131081
+	KAudioChannelLabel_HOA_N3D                    = 196608
+	KAudioChannelLabel_HOA_SN3D                   = 131072
+	KAudioChannelLabel_Haptic                     = 45
+	KAudioChannelLabel_HeadphonesLeft             = 301
+	KAudioChannelLabel_HeadphonesRight            = 302
+	KAudioChannelLabel_HearingImpaired            = 40
+	KAudioChannelLabel_LFE2                       = 37
+	KAudioChannelLabel_LFE3                       = 62
+	KAudioChannelLabel_LFEScreen                  = 4
+	KAudioChannelLabel_Left                       = 1
+	KAudioChannelLabel_LeftBackSurround           = 63
+	KAudioChannelLabel_LeftBottom                 = 57
+	KAudioChannelLabel_LeftCenter                 = 7
+	KAudioChannelLabel_LeftEdgeOfScreen           = 65
+	KAudioChannelLabel_LeftSideSurround           = 55
+	KAudioChannelLabel_LeftSurround               = 5
+	KAudioChannelLabel_LeftSurroundDirect         = 10
+	KAudioChannelLabel_LeftTopFront               = 13
+	KAudioChannelLabel_LeftTopMiddle              = 49
+	KAudioChannelLabel_LeftTopRear                = 52
+	KAudioChannelLabel_LeftTopSurround            = 60
+	KAudioChannelLabel_LeftTotal                  = 38
+	KAudioChannelLabel_LeftWide                   = 35
+	KAudioChannelLabel_MS_Mid                     = 204
+	KAudioChannelLabel_MS_Side                    = 205
+	KAudioChannelLabel_Mono                       = 42
+	KAudioChannelLabel_Narration                  = 41
+	KAudioChannelLabel_Object                     = 262144
+	KAudioChannelLabel_RearSurroundLeft           = 33
+	KAudioChannelLabel_RearSurroundRight          = 34
+	KAudioChannelLabel_Right                      = 2
+	KAudioChannelLabel_RightBackSurround          = 64
+	KAudioChannelLabel_RightBottom                = 58
+	KAudioChannelLabel_RightCenter                = 8
+	KAudioChannelLabel_RightEdgeOfScreen          = 66
+	KAudioChannelLabel_RightSideSurround          = 56
+	KAudioChannelLabel_RightSurround              = 6
+	KAudioChannelLabel_RightSurroundDirect        = 11
+	KAudioChannelLabel_RightTopFront              = 15
+	KAudioChannelLabel_RightTopMiddle             = 51
+	KAudioChannelLabel_RightTopRear               = 54
+	KAudioChannelLabel_RightTopSurround           = 61
+	KAudioChannelLabel_RightTotal                 = 39
+	KAudioChannelLabel_RightWide                  = 36
+	KAudioChannelLabel_TopBackCenter              = 17
+	KAudioChannelLabel_TopBackLeft                = 16
+	KAudioChannelLabel_TopBackRight               = 18
+	KAudioChannelLabel_TopCenterSurround          = 12
+	KAudioChannelLabel_Unknown                    = 4294967295
+	KAudioChannelLabel_Unused                     = 0
+	KAudioChannelLabel_UseCoordinates             = 100
+	KAudioChannelLabel_VerticalHeightCenter       = 14
+	KAudioChannelLabel_VerticalHeightLeft         = 13
+	KAudioChannelLabel_VerticalHeightRight        = 15
+	KAudioChannelLabel_XY_X                       = 206
+	KAudioChannelLabel_XY_Y                       = 207
+	KAudioChannelLayoutTag_AAC_3_0                = 7471107
+	KAudioChannelLayoutTag_AAC_4_0                = 7602180
+	KAudioChannelLayoutTag_AAC_5_0                = 7864325
+	KAudioChannelLayoutTag_AAC_5_1                = 8126470
+	KAudioChannelLayoutTag_AAC_6_0                = 9240582
+	KAudioChannelLayoutTag_AAC_6_1                = 9306119
+	KAudioChannelLayoutTag_AAC_7_0                = 9371655
+	KAudioChannelLayoutTag_AAC_7_1                = 8323080
+	KAudioChannelLayoutTag_AAC_7_1_B              = 11993096
+	KAudioChannelLayoutTag_AAC_7_1_C              = 12058632
+	KAudioChannelLayoutTag_AAC_Octagonal          = 9437192
+	KAudioChannelLayoutTag_AAC_Quadraphonic       = 7077892
+	KAudioChannelLayoutTag_AC3_1_0_1              = 9764866
+	KAudioChannelLayoutTag_AC3_2_1_1              = 10027012
+	KAudioChannelLayoutTag_AC3_3_0                = 9830403
+	KAudioChannelLayoutTag_AC3_3_0_1              = 9961476
+	KAudioChannelLayoutTag_AC3_3_1                = 9895940
+	KAudioChannelLayoutTag_AC3_3_1_1              = 10092549
+	KAudioChannelLayoutTag_Ambisonic_B_Format     = 7012356
+	KAudioChannelLayoutTag_Atmos_5_1_2            = 12713992
+	KAudioChannelLayoutTag_Atmos_5_1_4            = 12779530
+	KAudioChannelLayoutTag_Atmos_7_1_2            = 12845066
+	KAudioChannelLayoutTag_Atmos_7_1_4            = 12582924
+	KAudioChannelLayoutTag_Atmos_9_1_6            = 12648464
+	KAudioChannelLayoutTag_AudioUnit_4            = 7077892
+	KAudioChannelLayoutTag_AudioUnit_5            = 7143429
+	KAudioChannelLayoutTag_AudioUnit_5_0          = 7733253
+	KAudioChannelLayoutTag_AudioUnit_5_1          = 7929862
+	KAudioChannelLayoutTag_AudioUnit_6            = 7208966
+	KAudioChannelLayoutTag_AudioUnit_6_0          = 9109510
+	KAudioChannelLayoutTag_AudioUnit_6_1          = 8192007
+	KAudioChannelLayoutTag_AudioUnit_7_0          = 9175047
+	KAudioChannelLayoutTag_AudioUnit_7_0_Front    = 9699335
+	KAudioChannelLayoutTag_AudioUnit_7_1          = 8388616
+	KAudioChannelLayoutTag_AudioUnit_7_1_Front    = 8257544
+	KAudioChannelLayoutTag_AudioUnit_8            = 7274504
+	KAudioChannelLayoutTag_BeginReserved          = 4026531840
+	KAudioChannelLayoutTag_Binaural               = 6946818
+	KAudioChannelLayoutTag_CICP_1                 = 6553601
+	KAudioChannelLayoutTag_CICP_10                = 8650756
+	KAudioChannelLayoutTag_CICP_11                = 8192007
+	KAudioChannelLayoutTag_CICP_12                = 8388616
+	KAudioChannelLayoutTag_CICP_13                = 13369368
+	KAudioChannelLayoutTag_CICP_14                = 13434888
+	KAudioChannelLayoutTag_CICP_15                = 13500428
+	KAudioChannelLayoutTag_CICP_16                = 13565962
+	KAudioChannelLayoutTag_CICP_17                = 13631500
+	KAudioChannelLayoutTag_CICP_18                = 13697038
+	KAudioChannelLayoutTag_CICP_19                = 13762572
+	KAudioChannelLayoutTag_CICP_2                 = 6619138
+	KAudioChannelLayoutTag_CICP_20                = 13828110
+	KAudioChannelLayoutTag_CICP_3                 = 7405571
+	KAudioChannelLayoutTag_CICP_4                 = 7536644
+	KAudioChannelLayoutTag_CICP_5                 = 7667717
+	KAudioChannelLayoutTag_CICP_6                 = 7929862
+	KAudioChannelLayoutTag_CICP_7                 = 8323080
+	KAudioChannelLayoutTag_CICP_9                 = 8585219
+	KAudioChannelLayoutTag_Cube                   = 7340040
+	KAudioChannelLayoutTag_DTS_3_1                = 11010052
+	KAudioChannelLayoutTag_DTS_4_1                = 11075589
+	KAudioChannelLayoutTag_DTS_6_0_A              = 11141126
+	KAudioChannelLayoutTag_DTS_6_0_B              = 11206662
+	KAudioChannelLayoutTag_DTS_6_0_C              = 11272198
+	KAudioChannelLayoutTag_DTS_6_1_A              = 11337735
+	KAudioChannelLayoutTag_DTS_6_1_B              = 11403271
+	KAudioChannelLayoutTag_DTS_6_1_C              = 11468807
+	KAudioChannelLayoutTag_DTS_6_1_D              = 11927559
+	KAudioChannelLayoutTag_DTS_7_0                = 11534343
+	KAudioChannelLayoutTag_DTS_7_1                = 11599880
+	KAudioChannelLayoutTag_DTS_8_0_A              = 11665416
+	KAudioChannelLayoutTag_DTS_8_0_B              = 11730952
+	KAudioChannelLayoutTag_DTS_8_1_A              = 11796489
+	KAudioChannelLayoutTag_DTS_8_1_B              = 11862025
+	KAudioChannelLayoutTag_DVD_0                  = 6553601
+	KAudioChannelLayoutTag_DVD_1                  = 6619138
+	KAudioChannelLayoutTag_DVD_10                 = 8912900
+	KAudioChannelLayoutTag_DVD_11                 = 8978437
+	KAudioChannelLayoutTag_DVD_12                 = 7929862
+	KAudioChannelLayoutTag_DVD_13                 = 7536644
+	KAudioChannelLayoutTag_DVD_14                 = 7667717
+	KAudioChannelLayoutTag_DVD_15                 = 8912900
+	KAudioChannelLayoutTag_DVD_16                 = 8978437
+	KAudioChannelLayoutTag_DVD_17                 = 7929862
+	KAudioChannelLayoutTag_DVD_18                 = 9043973
+	KAudioChannelLayoutTag_DVD_19                 = 7733253
+	KAudioChannelLayoutTag_DVD_2                  = 8585219
+	KAudioChannelLayoutTag_DVD_20                 = 7995398
+	KAudioChannelLayoutTag_DVD_3                  = 8650756
+	KAudioChannelLayoutTag_DVD_4                  = 8716291
+	KAudioChannelLayoutTag_DVD_5                  = 8781828
+	KAudioChannelLayoutTag_DVD_6                  = 8847365
+	KAudioChannelLayoutTag_DVD_7                  = 7405571
+	KAudioChannelLayoutTag_DVD_8                  = 7536644
+	KAudioChannelLayoutTag_DVD_9                  = 7667717
+	KAudioChannelLayoutTag_DiscreteInOrder        = 9633792
+	KAudioChannelLayoutTag_EAC3_6_1_A             = 10289159
+	KAudioChannelLayoutTag_EAC3_6_1_B             = 10354695
+	KAudioChannelLayoutTag_EAC3_6_1_C             = 10420231
+	KAudioChannelLayoutTag_EAC3_7_1_A             = 10485768
+	KAudioChannelLayoutTag_EAC3_7_1_B             = 10551304
+	KAudioChannelLayoutTag_EAC3_7_1_C             = 10616840
+	KAudioChannelLayoutTag_EAC3_7_1_D             = 10682376
+	KAudioChannelLayoutTag_EAC3_7_1_E             = 10747912
+	KAudioChannelLayoutTag_EAC3_7_1_F             = 10813448
+	KAudioChannelLayoutTag_EAC3_7_1_G             = 10878984
+	KAudioChannelLayoutTag_EAC3_7_1_H             = 10944520
+	KAudioChannelLayoutTag_EAC_6_0_A              = 10158086
+	KAudioChannelLayoutTag_EAC_7_0_A              = 10223623
+	KAudioChannelLayoutTag_Emagic_Default_7_1     = 8454152
+	KAudioChannelLayoutTag_EndReserved            = 4294901759
+	KAudioChannelLayoutTag_HOA_ACN_N3D            = 12517376
+	KAudioChannelLayoutTag_HOA_ACN_SN3D           = 12451840
+	KAudioChannelLayoutTag_Hexagonal              = 7208966
+	KAudioChannelLayoutTag_ITU_1_0                = 6553601
+	KAudioChannelLayoutTag_ITU_2_0                = 6619138
+	KAudioChannelLayoutTag_ITU_2_1                = 8585219
+	KAudioChannelLayoutTag_ITU_2_2                = 8650756
+	KAudioChannelLayoutTag_ITU_3_0                = 7405571
+	KAudioChannelLayoutTag_ITU_3_1                = 7536644
+	KAudioChannelLayoutTag_ITU_3_2                = 7667717
+	KAudioChannelLayoutTag_ITU_3_2_1              = 7929862
+	KAudioChannelLayoutTag_ITU_3_4_1              = 8388616
+	KAudioChannelLayoutTag_Logic_4_0_A            = 7536644
+	KAudioChannelLayoutTag_Logic_4_0_B            = 7602180
+	KAudioChannelLayoutTag_Logic_4_0_C            = 12910596
+	KAudioChannelLayoutTag_Logic_5_0_A            = 7667717
+	KAudioChannelLayoutTag_Logic_5_0_B            = 7733253
+	KAudioChannelLayoutTag_Logic_5_0_C            = 7798789
+	KAudioChannelLayoutTag_Logic_5_0_D            = 7864325
+	KAudioChannelLayoutTag_Logic_5_1_A            = 7929862
+	KAudioChannelLayoutTag_Logic_5_1_B            = 7995398
+	KAudioChannelLayoutTag_Logic_5_1_C            = 8060934
+	KAudioChannelLayoutTag_Logic_5_1_D            = 8126470
+	KAudioChannelLayoutTag_Logic_6_0_A            = 9240582
+	KAudioChannelLayoutTag_Logic_6_0_B            = 12976134
+	KAudioChannelLayoutTag_Logic_6_0_C            = 9109510
+	KAudioChannelLayoutTag_Logic_6_1_A            = 9306119
+	KAudioChannelLayoutTag_Logic_6_1_B            = 13041671
+	KAudioChannelLayoutTag_Logic_6_1_C            = 8192007
+	KAudioChannelLayoutTag_Logic_6_1_D            = 13107207
+	KAudioChannelLayoutTag_Logic_7_1_A            = 8388616
+	KAudioChannelLayoutTag_Logic_7_1_B            = 13172744
+	KAudioChannelLayoutTag_Logic_7_1_C            = 8388616
+	KAudioChannelLayoutTag_Logic_7_1_SDDS_A       = 8257544
+	KAudioChannelLayoutTag_Logic_7_1_SDDS_B       = 8323080
+	KAudioChannelLayoutTag_Logic_7_1_SDDS_C       = 8454152
+	KAudioChannelLayoutTag_Logic_Atmos_5_1_2      = 12713992
+	KAudioChannelLayoutTag_Logic_Atmos_5_1_4      = 12779530
+	KAudioChannelLayoutTag_Logic_Atmos_7_1_2      = 12845066
+	KAudioChannelLayoutTag_Logic_Atmos_7_1_4_A    = 12582924
+	KAudioChannelLayoutTag_Logic_Atmos_7_1_4_B    = 13238284
+	KAudioChannelLayoutTag_Logic_Atmos_7_1_6      = 13303822
+	KAudioChannelLayoutTag_Logic_Mono             = 6553601
+	KAudioChannelLayoutTag_Logic_Quadraphonic     = 7077892
+	KAudioChannelLayoutTag_Logic_Stereo           = 6619138
+	KAudioChannelLayoutTag_MPEG_1_0               = 6553601
+	KAudioChannelLayoutTag_MPEG_2_0               = 6619138
+	KAudioChannelLayoutTag_MPEG_3_0_A             = 7405571
+	KAudioChannelLayoutTag_MPEG_3_0_B             = 7471107
+	KAudioChannelLayoutTag_MPEG_4_0_A             = 7536644
+	KAudioChannelLayoutTag_MPEG_4_0_B             = 7602180
+	KAudioChannelLayoutTag_MPEG_5_0_A             = 7667717
+	KAudioChannelLayoutTag_MPEG_5_0_B             = 7733253
+	KAudioChannelLayoutTag_MPEG_5_0_C             = 7798789
+	KAudioChannelLayoutTag_MPEG_5_0_D             = 7864325
+	KAudioChannelLayoutTag_MPEG_5_0_E             = 14155781
+	KAudioChannelLayoutTag_MPEG_5_1_A             = 7929862
+	KAudioChannelLayoutTag_MPEG_5_1_B             = 7995398
+	KAudioChannelLayoutTag_MPEG_5_1_C             = 8060934
+	KAudioChannelLayoutTag_MPEG_5_1_D             = 8126470
+	KAudioChannelLayoutTag_MPEG_5_1_E             = 14221318
+	KAudioChannelLayoutTag_MPEG_6_1_A             = 8192007
+	KAudioChannelLayoutTag_MPEG_6_1_B             = 14286855
+	KAudioChannelLayoutTag_MPEG_7_1_A             = 8257544
+	KAudioChannelLayoutTag_MPEG_7_1_B             = 8323080
+	KAudioChannelLayoutTag_MPEG_7_1_C             = 8388616
+	KAudioChannelLayoutTag_MPEG_7_1_D             = 14352392
+	KAudioChannelLayoutTag_MatrixStereo           = 6750210
+	KAudioChannelLayoutTag_MidSide                = 6815746
+	KAudioChannelLayoutTag_Mono                   = 6553601
+	KAudioChannelLayoutTag_Octagonal              = 7274504
+	KAudioChannelLayoutTag_Ogg_3_0                = 9830403
+	KAudioChannelLayoutTag_Ogg_4_0                = 12124164
+	KAudioChannelLayoutTag_Ogg_5_0                = 13893637
+	KAudioChannelLayoutTag_Ogg_5_1                = 13959174
+	KAudioChannelLayoutTag_Ogg_6_1                = 14024711
+	KAudioChannelLayoutTag_Ogg_7_1                = 14090248
+	KAudioChannelLayoutTag_Pentagonal             = 7143429
+	KAudioChannelLayoutTag_Quadraphonic           = 7077892
+	KAudioChannelLayoutTag_SMPTE_DTV              = 8519688
+	KAudioChannelLayoutTag_Stereo                 = 6619138
+	KAudioChannelLayoutTag_StereoHeadphones       = 6684674
+	KAudioChannelLayoutTag_TMH_10_2_full          = 9568277
+	KAudioChannelLayoutTag_TMH_10_2_std           = 9502736
+	KAudioChannelLayoutTag_Unknown                = 4294901760
+	KAudioChannelLayoutTag_UseChannelBitmap       = 65536
+	KAudioChannelLayoutTag_UseChannelDescriptions = 0
+	KAudioChannelLayoutTag_WAVE_2_1               = 8716291
+	KAudioChannelLayoutTag_WAVE_3_0               = 7405571
+	KAudioChannelLayoutTag_WAVE_4_0_A             = 8650756
+	KAudioChannelLayoutTag_WAVE_4_0_B             = 12124164
+	KAudioChannelLayoutTag_WAVE_5_0_A             = 7667717
+	KAudioChannelLayoutTag_WAVE_5_0_B             = 12189701
+	KAudioChannelLayoutTag_WAVE_5_1_A             = 7929862
+	KAudioChannelLayoutTag_WAVE_5_1_B             = 12255238
+	KAudioChannelLayoutTag_WAVE_6_1               = 12320775
+	KAudioChannelLayoutTag_WAVE_7_1               = 12386312
+	KAudioChannelLayoutTag_XY                     = 6881282
+	KAudioFormat60958AC3                          = 1667326771
+	KAudioFormatAC3                               = 1633889587
+	KAudioFormatAES3                              = 1634038579
+	KAudioFormatALaw                              = 1634492791
+	KAudioFormatAMR                               = 1935764850
+	KAudioFormatAMR_WB                            = 1935767394
+	KAudioFormatAPAC                              = 1634754915
+	KAudioFormatAppleIMA4                         = 1768775988
+	KAudioFormatAppleLossless                     = 1634492771
+	KAudioFormatAudible                           = 1096107074
+	KAudioFormatDVIIntelIMA                       = 1836253201
+	KAudioFormatEnhancedAC3                       = 1700998451
+	KAudioFormatFLAC                              = 1718378851
+	KAudioFormatFlagIsAlignedHigh                 = 16
+	KAudioFormatFlagIsBigEndian                   = 2
+	KAudioFormatFlagIsFloat                       = 1
+	KAudioFormatFlagIsNonInterleaved              = 32
+	KAudioFormatFlagIsNonMixable                  = 64
+	KAudioFormatFlagIsPacked                      = 8
+	KAudioFormatFlagIsSignedInteger               = 4
+	KAudioFormatFlagsAreAllClear                  = 2147483648
+	KAudioFormatFlagsAudioUnitCanonical           = 41
+	KAudioFormatFlagsCanonical                    = 9
+	KAudioFormatFlagsNativeEndian                 = 0
+	KAudioFormatFlagsNativeFloatPacked            = 9
+	KAudioFormatLinearPCM                         = 1819304813
+	KAudioFormatMACE3                             = 1296122675
+	KAudioFormatMACE6                             = 1296122678
+	KAudioFormatMIDIStream                        = 1835623529
+	KAudioFormatMPEG4AAC                          = 1633772320
+	KAudioFormatMPEG4AAC_ELD                      = 1633772389
+	KAudioFormatMPEG4AAC_ELD_SBR                  = 1633772390
+	KAudioFormatMPEG4AAC_ELD_V2                   = 1633772391
+	KAudioFormatMPEG4AAC_HE                       = 1633772392
+	KAudioFormatMPEG4AAC_HE_V2                    = 1633772400
+	KAudioFormatMPEG4AAC_LD                       = 1633772396
+	KAudioFormatMPEG4AAC_Spatial                  = 1633772403
+	KAudioFormatMPEG4CELP                         = 1667591280
+	KAudioFormatMPEG4HVXC                         = 1752594531
+	KAudioFormatMPEG4TwinVQ                       = 1953986161
+	KAudioFormatMPEGD_USAC                        = 1970495843
+	KAudioFormatMPEGLayer1                        = 778924081
+	KAudioFormatMPEGLayer2                        = 778924082
+	KAudioFormatMPEGLayer3                        = 778924083
+	KAudioFormatMicrosoftGSM                      = 1836253233
+	KAudioFormatOpus                              = 1869641075
+	KAudioFormatParameterValueStream              = 1634760307
+	KAudioFormatQDesign                           = 1363430723
+	KAudioFormatQDesign2                          = 1363430706
+	KAudioFormatQUALCOMM                          = 1365470320
+	KAudioFormatTimeCode                          = 1953066341
+	KAudioFormatULaw                              = 1970037111
+	KAudioFormatiLBC                              = 1768710755
+	KAudio_BadFilePathError                       = 561017960
+	KAudio_FileNotFoundError                      = -43
+	KAudio_FilePermissionError                    = -54
+	KAudio_MemFullError                           = -108
+	KAudio_NoError                                = 0
+	KAudio_ParamError                             = -50
+	KAudio_TooManyFilesOpenError                  = -42
+	KAudio_UnimplementedError                     = -4
+	KLinearPCMFormatFlagIsAlignedHigh             = 16
+	KLinearPCMFormatFlagIsBigEndian               = 2
+	KLinearPCMFormatFlagIsFloat                   = 1
+	KLinearPCMFormatFlagIsNonInterleaved          = 32
+	KLinearPCMFormatFlagIsNonMixable              = 64
+	KLinearPCMFormatFlagIsPacked                  = 8
+	KLinearPCMFormatFlagIsSignedInteger           = 4
+	KLinearPCMFormatFlagsAreAllClear              = 2147483648
+	KLinearPCMFormatFlagsSampleFractionMask       = 8064
+	KLinearPCMFormatFlagsSampleFractionShift      = 7
+)

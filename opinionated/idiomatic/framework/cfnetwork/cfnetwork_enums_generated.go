@@ -6,6 +6,7 @@ package cfnetwork
 
 import (
 	"fmt"
+	"strings"
 )
 
 // Values indicating the type of data that is to be resolved or the type of data that was resolved.
@@ -53,3 +54,1050 @@ func (e CFNetServiceMonitorType) String() string {
 		return fmt.Sprintf("CFNetServiceMonitorType(%d)", int64(e))
 	}
 }
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Type int64
+
+const (
+	TypeExtended Type = 256
+	TypeAccess   Type = 0
+	TypeDefault  Type = 1
+	TypeAfs      Type = 2
+	TypeCoda     Type = 3
+	TypeNtfs     Type = 4
+	TypeNwfs     Type = 5
+)
+
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Type) String() string {
+	switch e {
+	case TypeExtended:
+		return "TypeExtended"
+	case TypeAccess:
+		return "TypeAccess"
+	case TypeDefault:
+		return "TypeDefault"
+	case TypeAfs:
+		return "TypeAfs"
+	case TypeCoda:
+		return "TypeCoda"
+	case TypeNtfs:
+		return "TypeNtfs"
+	case TypeNwfs:
+		return "TypeNwfs"
+	default:
+		return fmt.Sprintf("Type(%d)", int64(e))
+	}
+}
+
+// Constants for diagnostic status values.
+type CFNetDiagnosticStatusValues int32
+
+const (
+	// No error occurred but there is no status.
+	KCFNetDiagnosticNoErr CFNetDiagnosticStatusValues = 0
+	// An error occurred that prevented the call from completing.
+	KCFNetDiagnosticErr CFNetDiagnosticStatusValues = -66560
+	// The connection appears to be working.
+	KCFNetDiagnosticConnectionUp CFNetDiagnosticStatusValues = -66559
+	// The status of the connection is not known.
+	KCFNetDiagnosticConnectionIndeterminate CFNetDiagnosticStatusValues = -66558
+	// The connection does not appear to be working.
+	KCFNetDiagnosticConnectionDown CFNetDiagnosticStatusValues = -66557
+)
+
+// String returns the CFNetDiagnosticStatusValues constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFNetDiagnosticStatusValues) String() string {
+	switch e {
+	case KCFNetDiagnosticNoErr:
+		return "KCFNetDiagnosticNoErr"
+	case KCFNetDiagnosticErr:
+		return "KCFNetDiagnosticErr"
+	case KCFNetDiagnosticConnectionUp:
+		return "KCFNetDiagnosticConnectionUp"
+	case KCFNetDiagnosticConnectionIndeterminate:
+		return "KCFNetDiagnosticConnectionIndeterminate"
+	case KCFNetDiagnosticConnectionDown:
+		return "KCFNetDiagnosticConnectionDown"
+	default:
+		return fmt.Sprintf("CFNetDiagnosticStatusValues(%d)", int64(e))
+	}
+}
+
+// Flags that the system passes to net service browser callbacks.
+// Bitmask — values may be combined with |.
+type CFNetServiceBrowserFlags int64
+
+const (
+	// A hint that the system will call the client’s callback function again soon.
+	KCFNetServiceFlagMoreComing CFNetServiceBrowserFlags = 1
+	// Specifies whether the result pertains to a search for domains or services.
+	KCFNetServiceFlagIsDomain CFNetServiceBrowserFlags = 2
+	// Specifies whether the resulting domain is the default registration or browse domain.
+	KCFNetServiceFlagIsDefault            CFNetServiceBrowserFlags = 4
+	KCFNetServiceFlagIsRegistrationDomain CFNetServiceBrowserFlags = 4
+	// Specifies whether the client should remove the result instead of adding it.
+	KCFNetServiceFlagRemove CFNetServiceBrowserFlags = 8
+)
+
+// String returns the CFNetServiceBrowserFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFNetServiceBrowserFlags) String() string {
+	var parts []string
+	if e&KCFNetServiceFlagMoreComing != 0 {
+		parts = append(parts, "KCFNetServiceFlagMoreComing")
+	}
+	if e&KCFNetServiceFlagIsDomain != 0 {
+		parts = append(parts, "KCFNetServiceFlagIsDomain")
+	}
+	if e&KCFNetServiceFlagIsDefault != 0 {
+		parts = append(parts, "KCFNetServiceFlagIsDefault")
+	}
+	if e&KCFNetServiceFlagIsRegistrationDomain != 0 {
+		parts = append(parts, "KCFNetServiceFlagIsRegistrationDomain")
+	}
+	if e&KCFNetServiceFlagRemove != 0 {
+		parts = append(parts, "KCFNetServiceFlagRemove")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Options to use when registering a service on the network.
+// Bitmask — values may be combined with |.
+type CFNetServiceRegisterFlags int64
+
+const (
+	// Causes registrations to fail if a name conflict occurs.
+	KCFNetServiceFlagNoAutoRename CFNetServiceRegisterFlags = 1
+)
+
+// String returns the CFNetServiceRegisterFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFNetServiceRegisterFlags) String() string {
+	var parts []string
+	if e&KCFNetServiceFlagNoAutoRename != 0 {
+		parts = append(parts, "KCFNetServiceFlagNoAutoRename")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Error codes that may be returned by CFNetServices functions or passed to CFNetServices callback functions.
+type CFNetServicesError int32
+
+const (
+	// An unknown CFNetService error occurred.
+	KCFNetServicesErrorUnknown CFNetServicesError = -72000
+	// An attempt was made to use a name that is already in use.
+	KCFNetServicesErrorCollision CFNetServicesError = -72001
+	// Not used.
+	KCFNetServicesErrorNotFound CFNetServicesError = -72002
+	// A search is already in progress.
+	KCFNetServicesErrorInProgress CFNetServicesError = -72003
+	// A required argument was not provided.
+	KCFNetServicesErrorBadArgument CFNetServicesError = -72004
+	// The search or service was canceled.
+	KCFNetServicesErrorCancel CFNetServicesError = -72005
+	// Invalid data was passed to a CFNetServices function.
+	KCFNetServicesErrorInvalid CFNetServicesError = -72006
+	// Resolution failed because the timeout was reached.
+	KCFNetServicesErrorTimeout CFNetServicesError = -72007
+	// A required configuration for local network access is missing.
+	KCFNetServicesErrorMissingRequiredConfiguration CFNetServicesError = -72008
+)
+
+// String returns the CFNetServicesError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFNetServicesError) String() string {
+	switch e {
+	case KCFNetServicesErrorUnknown:
+		return "KCFNetServicesErrorUnknown"
+	case KCFNetServicesErrorCollision:
+		return "KCFNetServicesErrorCollision"
+	case KCFNetServicesErrorNotFound:
+		return "KCFNetServicesErrorNotFound"
+	case KCFNetServicesErrorInProgress:
+		return "KCFNetServicesErrorInProgress"
+	case KCFNetServicesErrorBadArgument:
+		return "KCFNetServicesErrorBadArgument"
+	case KCFNetServicesErrorCancel:
+		return "KCFNetServicesErrorCancel"
+	case KCFNetServicesErrorInvalid:
+		return "KCFNetServicesErrorInvalid"
+	case KCFNetServicesErrorTimeout:
+		return "KCFNetServicesErrorTimeout"
+	case KCFNetServicesErrorMissingRequiredConfiguration:
+		return "KCFNetServicesErrorMissingRequiredConfiguration"
+	default:
+		return fmt.Sprintf("CFNetServicesError(%d)", int64(e))
+	}
+}
+
+// This enumeration contains error codes returned under the error domain kCFErrorDomainCFNetwork.
+type CFNetworkErrors int32
+
+const (
+	// The specified host wasn’t found.
+	KCFHostErrorHostNotFound CFNetworkErrors = 1
+	// An unknown error.
+	KCFHostErrorUnknown CFNetworkErrors = 2
+	// The SOCKS server rejected access because it doesn’t support connections with the requested SOCKS version.
+	KCFSOCKSErrorUnknownClientVersion CFNetworkErrors = 100
+	// The SOCKS server doesn’t support the requested version.
+	KCFSOCKSErrorUnsupportedServerVersion CFNetworkErrors = 101
+	// The server rejected the request, or the request failed.
+	KCFSOCKS4ErrorRequestFailed CFNetworkErrors = 110
+	// The server couldn’t connect to the identd daemon on the client and rejected the request.
+	KCFSOCKS4ErrorIdentdFailed CFNetworkErrors = 111
+	// The server rejected the request because the client program and the identd daemon reported different user IDs.
+	KCFSOCKS4ErrorIdConflict CFNetworkErrors = 112
+	// The server returned an unknown status code.
+	KCFSOCKS4ErrorUnknownStatusCode CFNetworkErrors = 113
+	// The stream isn’t in a state that allows the requested operation.
+	KCFSOCKS5ErrorBadState CFNetworkErrors = 120
+	// The address type returned isn’t supported.
+	KCFSOCKS5ErrorBadResponseAddr CFNetworkErrors = 121
+	// The SOCKS server refused the client connection because of bad login credentials.
+	KCFSOCKS5ErrorBadCredentials CFNetworkErrors = 122
+	// The requested method isn’t supported.
+	KCFSOCKS5ErrorUnsupportedNegotiationMethod CFNetworkErrors = 123
+	// The client and server couldn’t find a mutually agreeable authentication method.
+	KCFSOCKS5ErrorNoAcceptableMethod CFNetworkErrors = 124
+	// The server returned an unexpected status code.
+	KCFFTPErrorUnexpectedStatusCode CFNetworkErrors = 200
+	// The client and server couldn’t agree on a supported authentication type.
+	KCFErrorHTTPAuthenticationTypeUnsupported CFNetworkErrors = 300
+	// The server rejected the credentials provided for an authenticated connection.
+	KCFErrorHTTPBadCredentials CFNetworkErrors = 301
+	// The connection to the server was dropped.
+	KCFErrorHTTPConnectionLost CFNetworkErrors = 302
+	// The HTTP server response couldn’t be parsed.
+	KCFErrorHTTPParseFailure CFNetworkErrors = 303
+	// Too many HTTP redirects occurred before reaching a page that didn’t redirect the client to another page.
+	KCFErrorHTTPRedirectionLoopDetected CFNetworkErrors = 304
+	// The requested URL couldn’t be retrieved.
+	KCFErrorHTTPBadURL CFNetworkErrors = 305
+	// A connection to the HTTPS proxy couldn’t be established.
+	KCFErrorHTTPProxyConnectionFailure CFNetworkErrors = 306
+	// The proxy rejected the authentication credentials provided for logging in.
+	KCFErrorHTTPBadProxyCredentials CFNetworkErrors = 307
+	// An error occurred with the proxy autoconfiguration file.
+	KCFErrorPACFileError CFNetworkErrors = 308
+	// The authentication credentials provided by the proxy autoconfiguration file were rejected.
+	KCFErrorPACFileAuth CFNetworkErrors = 309
+	// A connection couldn’t be established to the HTTPS proxy.
+	KCFErrorHTTPSProxyConnectionFailure CFNetworkErrors = 310
+	// The HTTPS proxy returned an unexpected status code, such as a 3xx redirect.
+	KCFStreamErrorHTTPSProxyFailureUnexpectedResponseToCONNECTMethod CFNetworkErrors = 311
+	// The background session failed because it was in use by another process.
+	KCFURLErrorBackgroundSessionInUseByAnotherProcess CFNetworkErrors = -996
+	// The background session failed because it was disconnected.
+	KCFURLErrorBackgroundSessionWasDisconnected CFNetworkErrors = -997
+	// An unknown error occurred.
+	KCFURLErrorUnknown CFNetworkErrors = -998
+	// The connection was cancelled.
+	KCFURLErrorCancelled CFNetworkErrors = -999
+	// The connection failed due to a malformed URL.
+	KCFURLErrorBadURL CFNetworkErrors = -1000
+	// The connection timed out.
+	KCFURLErrorTimedOut CFNetworkErrors = -1001
+	// The connection failed due to an unsupported URL scheme.
+	KCFURLErrorUnsupportedURL CFNetworkErrors = -1002
+	// The connection failed because the host couldn’t be found.
+	KCFURLErrorCannotFindHost CFNetworkErrors = -1003
+	// The connection failed because a connection can’t be made to the host.
+	KCFURLErrorCannotConnectToHost CFNetworkErrors = -1004
+	// The connection failed because the network connection was lost.
+	KCFURLErrorNetworkConnectionLost CFNetworkErrors = -1005
+	// The connection failed because the DNS lookup failed.
+	KCFURLErrorDNSLookupFailed CFNetworkErrors = -1006
+	// The HTTP connection failed due to too many redirects.
+	KCFURLErrorHTTPTooManyRedirects CFNetworkErrors = -1007
+	// The connection’s resource is unavailable.
+	KCFURLErrorResourceUnavailable CFNetworkErrors = -1008
+	// The connection failed because the device isn’t connected to the internet.
+	KCFURLErrorNotConnectedToInternet CFNetworkErrors = -1009
+	// The connection was redirected to a nonexistent location.
+	KCFURLErrorRedirectToNonExistentLocation CFNetworkErrors = -1010
+	// The connection received an invalid server response.
+	KCFURLErrorBadServerResponse CFNetworkErrors = -1011
+	// The connection failed because the user cancelled required authentication.
+	KCFURLErrorUserCancelledAuthentication CFNetworkErrors = -1012
+	// The connection failed because it requires authentication.
+	KCFURLErrorUserAuthenticationRequired CFNetworkErrors = -1013
+	// The resource retrieved by the connection is zero bytes.
+	KCFURLErrorZeroByteResource CFNetworkErrors = -1014
+	// The connection can’t decode data encoded with a known content encoding.
+	KCFURLErrorCannotDecodeRawData CFNetworkErrors = -1015
+	// The connection can’t decode data encoded with an unknown content encoding.
+	KCFURLErrorCannotDecodeContentData CFNetworkErrors = -1016
+	// The connection can’t parse the server’s response.
+	KCFURLErrorCannotParseResponse CFNetworkErrors = -1017
+	// The connection failed because international roaming is disabled on the device.
+	KCFURLErrorInternationalRoamingOff CFNetworkErrors = -1018
+	// The connection failed because a call is active.
+	KCFURLErrorCallIsActive CFNetworkErrors = -1019
+	// The connection failed because data use isn’t currently allowed on the device.
+	KCFURLErrorDataNotAllowed CFNetworkErrors = -1020
+	// The connection failed because the request’s body stream was exhausted.
+	KCFURLErrorRequestBodyStreamExhausted CFNetworkErrors = -1021
+	// The connection failed because the App Transport Security configuration requires a secure connection.
+	KCFURLErrorAppTransportSecurityRequiresSecureConnection CFNetworkErrors = -1022
+	// The file operation failed because the file doesn’t exist.
+	KCFURLErrorFileDoesNotExist CFNetworkErrors = -1100
+	// The file operation failed because the file is a directory.
+	KCFURLErrorFileIsDirectory CFNetworkErrors = -1101
+	// The file operation failed because it doesn’t have permission to read the file.
+	KCFURLErrorNoPermissionsToReadFile CFNetworkErrors = -1102
+	// The file operation failed because the file is too large.
+	KCFURLErrorDataLengthExceedsMaximum CFNetworkErrors = -1103
+	// The file is outside of the safe area.
+	KCFURLErrorFileOutsideSafeArea CFNetworkErrors = -1104
+	// The secure connection failed for an unknown reason.
+	KCFURLErrorSecureConnectionFailed CFNetworkErrors = -1200
+	// The secure connection failed because the server’s certificate has an invalid date.
+	KCFURLErrorServerCertificateHasBadDate CFNetworkErrors = -1201
+	// The secure connection failed because the server’s certificate isn’t trusted.
+	KCFURLErrorServerCertificateUntrusted CFNetworkErrors = -1202
+	// The secure connection failed because the server’s certificate has an unknown root.
+	KCFURLErrorServerCertificateHasUnknownRoot CFNetworkErrors = -1203
+	// The secure connection failed because the server’s certificate isn’t valid yet.
+	KCFURLErrorServerCertificateNotYetValid CFNetworkErrors = -1204
+	// The secure connection failed because the client’s certificate was rejected.
+	KCFURLErrorClientCertificateRejected CFNetworkErrors = -1205
+	// The secure connection failed because the server requires a client certificate.
+	KCFURLErrorClientCertificateRequired CFNetworkErrors = -1206
+	// The connection failed because it’s being required to return a cached resource, but one isn’t available.
+	KCFURLErrorCannotLoadFromNetwork CFNetworkErrors = -2000
+	// The file can’t be created.
+	KCFURLErrorCannotCreateFile CFNetworkErrors = -3000
+	// The file can’t be opened.
+	KCFURLErrorCannotOpenFile CFNetworkErrors = -3001
+	// The file can’t be closed.
+	KCFURLErrorCannotCloseFile CFNetworkErrors = -3002
+	// The file can’t be written.
+	KCFURLErrorCannotWriteToFile CFNetworkErrors = -3003
+	// The file can’t be removed.
+	KCFURLErrorCannotRemoveFile CFNetworkErrors = -3004
+	// The file can’t be moved.
+	KCFURLErrorCannotMoveFile CFNetworkErrors = -3005
+	// The download failed because decoding of the downloaded data failed midstream.
+	KCFURLErrorDownloadDecodingFailedMidStream CFNetworkErrors = -3006
+	// The download failed because decoding of the downloaded data failed to complete.
+	KCFURLErrorDownloadDecodingFailedToComplete CFNetworkErrors = -3007
+	// The cookie file can’t be parsed.
+	KCFHTTPCookieCannotParseCookieFile CFNetworkErrors = -4000
+	// An error of unknown type has occurred.
+	KCFNetServiceErrorUnknown CFNetworkErrors = -72000
+	// An attempt was made to use a name that’s already in use.
+	KCFNetServiceErrorCollision CFNetworkErrors = -72001
+	// This error isn’t used.
+	KCFNetServiceErrorNotFound CFNetworkErrors = -72002
+	// A new search couldn’t be started because a search is already in progress.
+	KCFNetServiceErrorInProgress CFNetworkErrors = -72003
+	// A required argument either wasn’t provided or wasn’t valid.
+	KCFNetServiceErrorBadArgument CFNetworkErrors = -72004
+	// The search or service was canceled.
+	KCFNetServiceErrorCancel CFNetworkErrors = -72005
+	// Invalid data was passed to a CFNetServices function.
+	KCFNetServiceErrorInvalid CFNetworkErrors = -72006
+	// Resolution failed because the timeout was reached.
+	KCFNetServiceErrorTimeout CFNetworkErrors = -72007
+	// The DNS service discovery returned an error.
+	KCFNetServiceErrorDNSServiceFailure CFNetworkErrors = -73000
+)
+
+// String returns the CFNetworkErrors constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFNetworkErrors) String() string {
+	switch e {
+	case KCFHostErrorHostNotFound:
+		return "KCFHostErrorHostNotFound"
+	case KCFHostErrorUnknown:
+		return "KCFHostErrorUnknown"
+	case KCFSOCKSErrorUnknownClientVersion:
+		return "KCFSOCKSErrorUnknownClientVersion"
+	case KCFSOCKSErrorUnsupportedServerVersion:
+		return "KCFSOCKSErrorUnsupportedServerVersion"
+	case KCFSOCKS4ErrorRequestFailed:
+		return "KCFSOCKS4ErrorRequestFailed"
+	case KCFSOCKS4ErrorIdentdFailed:
+		return "KCFSOCKS4ErrorIdentdFailed"
+	case KCFSOCKS4ErrorIdConflict:
+		return "KCFSOCKS4ErrorIdConflict"
+	case KCFSOCKS4ErrorUnknownStatusCode:
+		return "KCFSOCKS4ErrorUnknownStatusCode"
+	case KCFSOCKS5ErrorBadState:
+		return "KCFSOCKS5ErrorBadState"
+	case KCFSOCKS5ErrorBadResponseAddr:
+		return "KCFSOCKS5ErrorBadResponseAddr"
+	case KCFSOCKS5ErrorBadCredentials:
+		return "KCFSOCKS5ErrorBadCredentials"
+	case KCFSOCKS5ErrorUnsupportedNegotiationMethod:
+		return "KCFSOCKS5ErrorUnsupportedNegotiationMethod"
+	case KCFSOCKS5ErrorNoAcceptableMethod:
+		return "KCFSOCKS5ErrorNoAcceptableMethod"
+	case KCFFTPErrorUnexpectedStatusCode:
+		return "KCFFTPErrorUnexpectedStatusCode"
+	case KCFErrorHTTPAuthenticationTypeUnsupported:
+		return "KCFErrorHTTPAuthenticationTypeUnsupported"
+	case KCFErrorHTTPBadCredentials:
+		return "KCFErrorHTTPBadCredentials"
+	case KCFErrorHTTPConnectionLost:
+		return "KCFErrorHTTPConnectionLost"
+	case KCFErrorHTTPParseFailure:
+		return "KCFErrorHTTPParseFailure"
+	case KCFErrorHTTPRedirectionLoopDetected:
+		return "KCFErrorHTTPRedirectionLoopDetected"
+	case KCFErrorHTTPBadURL:
+		return "KCFErrorHTTPBadURL"
+	case KCFErrorHTTPProxyConnectionFailure:
+		return "KCFErrorHTTPProxyConnectionFailure"
+	case KCFErrorHTTPBadProxyCredentials:
+		return "KCFErrorHTTPBadProxyCredentials"
+	case KCFErrorPACFileError:
+		return "KCFErrorPACFileError"
+	case KCFErrorPACFileAuth:
+		return "KCFErrorPACFileAuth"
+	case KCFErrorHTTPSProxyConnectionFailure:
+		return "KCFErrorHTTPSProxyConnectionFailure"
+	case KCFStreamErrorHTTPSProxyFailureUnexpectedResponseToCONNECTMethod:
+		return "KCFStreamErrorHTTPSProxyFailureUnexpectedResponseToCONNECTMethod"
+	case KCFURLErrorBackgroundSessionInUseByAnotherProcess:
+		return "KCFURLErrorBackgroundSessionInUseByAnotherProcess"
+	case KCFURLErrorBackgroundSessionWasDisconnected:
+		return "KCFURLErrorBackgroundSessionWasDisconnected"
+	case KCFURLErrorUnknown:
+		return "KCFURLErrorUnknown"
+	case KCFURLErrorCancelled:
+		return "KCFURLErrorCancelled"
+	case KCFURLErrorBadURL:
+		return "KCFURLErrorBadURL"
+	case KCFURLErrorTimedOut:
+		return "KCFURLErrorTimedOut"
+	case KCFURLErrorUnsupportedURL:
+		return "KCFURLErrorUnsupportedURL"
+	case KCFURLErrorCannotFindHost:
+		return "KCFURLErrorCannotFindHost"
+	case KCFURLErrorCannotConnectToHost:
+		return "KCFURLErrorCannotConnectToHost"
+	case KCFURLErrorNetworkConnectionLost:
+		return "KCFURLErrorNetworkConnectionLost"
+	case KCFURLErrorDNSLookupFailed:
+		return "KCFURLErrorDNSLookupFailed"
+	case KCFURLErrorHTTPTooManyRedirects:
+		return "KCFURLErrorHTTPTooManyRedirects"
+	case KCFURLErrorResourceUnavailable:
+		return "KCFURLErrorResourceUnavailable"
+	case KCFURLErrorNotConnectedToInternet:
+		return "KCFURLErrorNotConnectedToInternet"
+	case KCFURLErrorRedirectToNonExistentLocation:
+		return "KCFURLErrorRedirectToNonExistentLocation"
+	case KCFURLErrorBadServerResponse:
+		return "KCFURLErrorBadServerResponse"
+	case KCFURLErrorUserCancelledAuthentication:
+		return "KCFURLErrorUserCancelledAuthentication"
+	case KCFURLErrorUserAuthenticationRequired:
+		return "KCFURLErrorUserAuthenticationRequired"
+	case KCFURLErrorZeroByteResource:
+		return "KCFURLErrorZeroByteResource"
+	case KCFURLErrorCannotDecodeRawData:
+		return "KCFURLErrorCannotDecodeRawData"
+	case KCFURLErrorCannotDecodeContentData:
+		return "KCFURLErrorCannotDecodeContentData"
+	case KCFURLErrorCannotParseResponse:
+		return "KCFURLErrorCannotParseResponse"
+	case KCFURLErrorInternationalRoamingOff:
+		return "KCFURLErrorInternationalRoamingOff"
+	case KCFURLErrorCallIsActive:
+		return "KCFURLErrorCallIsActive"
+	case KCFURLErrorDataNotAllowed:
+		return "KCFURLErrorDataNotAllowed"
+	case KCFURLErrorRequestBodyStreamExhausted:
+		return "KCFURLErrorRequestBodyStreamExhausted"
+	case KCFURLErrorAppTransportSecurityRequiresSecureConnection:
+		return "KCFURLErrorAppTransportSecurityRequiresSecureConnection"
+	case KCFURLErrorFileDoesNotExist:
+		return "KCFURLErrorFileDoesNotExist"
+	case KCFURLErrorFileIsDirectory:
+		return "KCFURLErrorFileIsDirectory"
+	case KCFURLErrorNoPermissionsToReadFile:
+		return "KCFURLErrorNoPermissionsToReadFile"
+	case KCFURLErrorDataLengthExceedsMaximum:
+		return "KCFURLErrorDataLengthExceedsMaximum"
+	case KCFURLErrorFileOutsideSafeArea:
+		return "KCFURLErrorFileOutsideSafeArea"
+	case KCFURLErrorSecureConnectionFailed:
+		return "KCFURLErrorSecureConnectionFailed"
+	case KCFURLErrorServerCertificateHasBadDate:
+		return "KCFURLErrorServerCertificateHasBadDate"
+	case KCFURLErrorServerCertificateUntrusted:
+		return "KCFURLErrorServerCertificateUntrusted"
+	case KCFURLErrorServerCertificateHasUnknownRoot:
+		return "KCFURLErrorServerCertificateHasUnknownRoot"
+	case KCFURLErrorServerCertificateNotYetValid:
+		return "KCFURLErrorServerCertificateNotYetValid"
+	case KCFURLErrorClientCertificateRejected:
+		return "KCFURLErrorClientCertificateRejected"
+	case KCFURLErrorClientCertificateRequired:
+		return "KCFURLErrorClientCertificateRequired"
+	case KCFURLErrorCannotLoadFromNetwork:
+		return "KCFURLErrorCannotLoadFromNetwork"
+	case KCFURLErrorCannotCreateFile:
+		return "KCFURLErrorCannotCreateFile"
+	case KCFURLErrorCannotOpenFile:
+		return "KCFURLErrorCannotOpenFile"
+	case KCFURLErrorCannotCloseFile:
+		return "KCFURLErrorCannotCloseFile"
+	case KCFURLErrorCannotWriteToFile:
+		return "KCFURLErrorCannotWriteToFile"
+	case KCFURLErrorCannotRemoveFile:
+		return "KCFURLErrorCannotRemoveFile"
+	case KCFURLErrorCannotMoveFile:
+		return "KCFURLErrorCannotMoveFile"
+	case KCFURLErrorDownloadDecodingFailedMidStream:
+		return "KCFURLErrorDownloadDecodingFailedMidStream"
+	case KCFURLErrorDownloadDecodingFailedToComplete:
+		return "KCFURLErrorDownloadDecodingFailedToComplete"
+	case KCFHTTPCookieCannotParseCookieFile:
+		return "KCFHTTPCookieCannotParseCookieFile"
+	case KCFNetServiceErrorUnknown:
+		return "KCFNetServiceErrorUnknown"
+	case KCFNetServiceErrorCollision:
+		return "KCFNetServiceErrorCollision"
+	case KCFNetServiceErrorNotFound:
+		return "KCFNetServiceErrorNotFound"
+	case KCFNetServiceErrorInProgress:
+		return "KCFNetServiceErrorInProgress"
+	case KCFNetServiceErrorBadArgument:
+		return "KCFNetServiceErrorBadArgument"
+	case KCFNetServiceErrorCancel:
+		return "KCFNetServiceErrorCancel"
+	case KCFNetServiceErrorInvalid:
+		return "KCFNetServiceErrorInvalid"
+	case KCFNetServiceErrorTimeout:
+		return "KCFNetServiceErrorTimeout"
+	case KCFNetServiceErrorDNSServiceFailure:
+		return "KCFNetServiceErrorDNSServiceFailure"
+	default:
+		return fmt.Sprintf("CFNetworkErrors(%d)", int64(e))
+	}
+}
+
+// Error codes that a read stream for an HTTP request may return.
+type CFStreamErrorHTTP int32
+
+const (
+	// A parsing error occurred while an incoming message was being deserialized and appended to a message object. The headers of the incoming message may be formatted improperly.
+	KCFStreamErrorHTTPParseFailure CFStreamErrorHTTP = -1
+	// A redirection loop has been detected.
+	KCFStreamErrorHTTPRedirectionLoop CFStreamErrorHTTP = -2
+	// The URL is not properly formatted.
+	KCFStreamErrorHTTPBadURL CFStreamErrorHTTP = -3
+)
+
+// String returns the CFStreamErrorHTTP constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFStreamErrorHTTP) String() string {
+	switch e {
+	case KCFStreamErrorHTTPParseFailure:
+		return "KCFStreamErrorHTTPParseFailure"
+	case KCFStreamErrorHTTPRedirectionLoop:
+		return "KCFStreamErrorHTTPRedirectionLoop"
+	case KCFStreamErrorHTTPBadURL:
+		return "KCFStreamErrorHTTPBadURL"
+	default:
+		return fmt.Sprintf("CFStreamErrorHTTP(%d)", int64(e))
+	}
+}
+
+// Authentication error codes that may be returned when trying to apply authentication to a request.
+type CFStreamErrorHTTPAuthentication int32
+
+const (
+	// Specified authentication type is not supported.
+	KCFStreamErrorHTTPAuthenticationTypeUnsupported CFStreamErrorHTTPAuthentication = -1000
+	// User name is in a format that is not suitable for the request. Currently, user names are decoded using kCFStringEncodingISOLatin1.
+	KCFStreamErrorHTTPAuthenticationBadUserName CFStreamErrorHTTPAuthentication = -1001
+	// Password is in a format that is not suitable for the request. Currently, passwords are decoded using kCFStringEncodingISOLatin1.
+	KCFStreamErrorHTTPAuthenticationBadPassword CFStreamErrorHTTPAuthentication = -1002
+)
+
+// String returns the CFStreamErrorHTTPAuthentication constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFStreamErrorHTTPAuthentication) String() string {
+	switch e {
+	case KCFStreamErrorHTTPAuthenticationTypeUnsupported:
+		return "KCFStreamErrorHTTPAuthenticationTypeUnsupported"
+	case KCFStreamErrorHTTPAuthenticationBadUserName:
+		return "KCFStreamErrorHTTPAuthenticationBadUserName"
+	case KCFStreamErrorHTTPAuthenticationBadPassword:
+		return "KCFStreamErrorHTTPAuthenticationBadPassword"
+	default:
+		return fmt.Sprintf("CFStreamErrorHTTPAuthentication(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+const (
+	KCFStreamErrorSOCKS4IdConflict          = 93
+	KCFStreamErrorSOCKS4IdentdFailed        = 92
+	KCFStreamErrorSOCKS4RequestFailed       = 91
+	KCFStreamErrorSOCKS4SubDomainResponse   = 2
+	KCFStreamErrorSOCKS5BadResponseAddr     = 1
+	KCFStreamErrorSOCKS5BadState            = 2
+	KCFStreamErrorSOCKS5SubDomainMethod     = 4
+	KCFStreamErrorSOCKS5SubDomainResponse   = 5
+	KCFStreamErrorSOCKS5SubDomainUserPass   = 3
+	KCFStreamErrorSOCKSSubDomainNone        = 0
+	KCFStreamErrorSOCKSSubDomainVersionCode = 1
+	KCFStreamErrorSOCKSUnknownClientVersion = 3
+	KSOCKS5NoAcceptableMethod               = 255
+)

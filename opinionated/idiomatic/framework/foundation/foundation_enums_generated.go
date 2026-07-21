@@ -2045,33 +2045,6 @@ func (e InsertionPosition) String() string {
 	}
 }
 
-// The error codes that describe problems with consuming data from an item provider.
-type ItemProviderErrorCode int64
-
-const (
-	ItemProviderUnknownError              ItemProviderErrorCode = -1
-	ItemProviderItemUnavailableError      ItemProviderErrorCode = -1000
-	ItemProviderUnexpectedValueClassError ItemProviderErrorCode = -1100
-	ItemProviderUnavailableCoercionError  ItemProviderErrorCode = -1200
-)
-
-// String returns the ItemProviderErrorCode constant's name, or its numeric form when the
-// value is not a known constant.
-func (e ItemProviderErrorCode) String() string {
-	switch e {
-	case ItemProviderUnknownError:
-		return "ItemProviderUnknownError"
-	case ItemProviderItemUnavailableError:
-		return "ItemProviderItemUnavailableError"
-	case ItemProviderUnexpectedValueClassError:
-		return "ItemProviderUnexpectedValueClassError"
-	case ItemProviderUnavailableCoercionError:
-		return "ItemProviderUnavailableCoercionError"
-	default:
-		return fmt.Sprintf("ItemProviderErrorCode(%d)", int64(e))
-	}
-}
-
 // Data-access specifications that declare how to handle items.
 // Bitmask — values may be combined with |.
 type ItemProviderFileOptions int64
@@ -4626,3 +4599,2034 @@ func (e XPCConnectionOptions) String() string {
 	}
 	return strings.Join(parts, "|")
 }
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Type int64
+
+const (
+	TypeExtended Type = 256
+	TypeAccess   Type = 0
+	TypeDefault  Type = 1
+	TypeAfs      Type = 2
+	TypeCoda     Type = 3
+	TypeNtfs     Type = 4
+	TypeNwfs     Type = 5
+)
+
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Type) String() string {
+	switch e {
+	case TypeExtended:
+		return "TypeExtended"
+	case TypeAccess:
+		return "TypeAccess"
+	case TypeDefault:
+		return "TypeDefault"
+	case TypeAfs:
+		return "TypeAfs"
+	case TypeCoda:
+		return "TypeCoda"
+	case TypeNtfs:
+		return "TypeNtfs"
+	case TypeNwfs:
+		return "TypeNwfs"
+	default:
+		return fmt.Sprintf("Type(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+type LaunchDataType int64
+
+const (
+	LaunchDataTypeDictionary LaunchDataType = 1
+	LaunchDataTypeArray      LaunchDataType = 2
+	LaunchDataTypeFd         LaunchDataType = 3
+	LaunchDataTypeInteger    LaunchDataType = 4
+	LaunchDataTypeReal       LaunchDataType = 5
+	LaunchDataTypeBool       LaunchDataType = 6
+	LaunchDataTypeString     LaunchDataType = 7
+	LaunchDataTypeOpaque     LaunchDataType = 8
+	LaunchDataTypeErrno      LaunchDataType = 9
+	LaunchDataTypeMachport   LaunchDataType = 10
+)
+
+// String returns the LaunchDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LaunchDataType) String() string {
+	switch e {
+	case LaunchDataTypeDictionary:
+		return "LaunchDataTypeDictionary"
+	case LaunchDataTypeArray:
+		return "LaunchDataTypeArray"
+	case LaunchDataTypeFd:
+		return "LaunchDataTypeFd"
+	case LaunchDataTypeInteger:
+		return "LaunchDataTypeInteger"
+	case LaunchDataTypeReal:
+		return "LaunchDataTypeReal"
+	case LaunchDataTypeBool:
+		return "LaunchDataTypeBool"
+	case LaunchDataTypeString:
+		return "LaunchDataTypeString"
+	case LaunchDataTypeOpaque:
+		return "LaunchDataTypeOpaque"
+	case LaunchDataTypeErrno:
+		return "LaunchDataTypeErrno"
+	case LaunchDataTypeMachport:
+		return "LaunchDataTypeMachport"
+	default:
+		return fmt.Sprintf("LaunchDataType(%d)", int64(e))
+	}
+}
+
+// These constants are used to specify a domain to MDLabelCreate().
+type MDLabelDomain int64
+
+const (
+	KMDLabelUserDomain  MDLabelDomain = 0
+	KMDLabelLocalDomain MDLabelDomain = 1
+)
+
+// String returns the MDLabelDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDLabelDomain) String() string {
+	switch e {
+	case KMDLabelUserDomain:
+		return "KMDLabelUserDomain"
+	case KMDLabelLocalDomain:
+		return "KMDLabelLocalDomain"
+	default:
+		return fmt.Sprintf("MDLabelDomain(%d)", int64(e))
+	}
+}
+
+type MDQueryOptionFlags int64
+
+const (
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
+	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
+)
+
+// String returns the MDQueryOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQueryOptionFlags) String() string {
+	switch e {
+	case KMDQuerySynchronous:
+		return "KMDQuerySynchronous"
+	case KMDQueryWantsUpdates:
+		return "KMDQueryWantsUpdates"
+	case KMDQueryAllowFSTranslation:
+		return "KMDQueryAllowFSTranslation"
+	default:
+		return fmt.Sprintf("MDQueryOptionFlags(%d)", int64(e))
+	}
+}
+
+type MDQuerySortOptionFlags int64
+
+const (
+	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
+)
+
+// String returns the MDQuerySortOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQuerySortOptionFlags) String() string {
+	switch e {
+	case KMDQueryReverseSortOrderFlag:
+		return "KMDQueryReverseSortOrderFlag"
+	default:
+		return fmt.Sprintf("MDQuerySortOptionFlags(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Options for enumerating attributes.
+// Bitmask — values may be combined with |.
+type AttributedStringEnumerationOptions uint64
+
+const (
+	AttributedStringEnumerationReverse                          AttributedStringEnumerationOptions = 2
+	AttributedStringEnumerationLongestEffectiveRangeNotRequired AttributedStringEnumerationOptions = 1048576
+)
+
+// String returns the AttributedStringEnumerationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AttributedStringEnumerationOptions) String() string {
+	var parts []string
+	if e&AttributedStringEnumerationReverse != 0 {
+		parts = append(parts, "AttributedStringEnumerationReverse")
+	}
+	if e&AttributedStringEnumerationLongestEffectiveRangeNotRequired != 0 {
+		parts = append(parts, "AttributedStringEnumerationLongestEffectiveRangeNotRequired")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// These constants indicate whether background activity has been completed successfully or whether additional processing should be deferred until a more optimal time.
+type BackgroundActivityResult int64
+
+const (
+	BackgroundActivityResultFinished BackgroundActivityResult = 1
+	BackgroundActivityResultDeferred BackgroundActivityResult = 2
+)
+
+// String returns the BackgroundActivityResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BackgroundActivityResult) String() string {
+	switch e {
+	case BackgroundActivityResultFinished:
+		return "BackgroundActivityResultFinished"
+	case BackgroundActivityResultDeferred:
+		return "BackgroundActivityResultDeferred"
+	default:
+		return fmt.Sprintf("BackgroundActivityResult(%d)", int64(e))
+	}
+}
+
+// Options for searches and insertions using indexOfObject:inSortedRange:options:usingComparator:.
+// Bitmask — values may be combined with |.
+type BinarySearchingOptions uint64
+
+const (
+	// Specifies that the search should return the first object in the range that is equal to the given object.
+	BinarySearchingFirstEqual BinarySearchingOptions = 256
+	// Specifies that the search should return the last object in the range that is equal to the given object.
+	BinarySearchingLastEqual BinarySearchingOptions = 512
+	// Returns the index at which you should insert the object in order to maintain a sorted array.
+	BinarySearchingInsertionIndex BinarySearchingOptions = 1024
+)
+
+// String returns the BinarySearchingOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BinarySearchingOptions) String() string {
+	var parts []string
+	if e&BinarySearchingFirstEqual != 0 {
+		parts = append(parts, "BinarySearchingFirstEqual")
+	}
+	if e&BinarySearchingLastEqual != 0 {
+		parts = append(parts, "BinarySearchingLastEqual")
+	}
+	if e&BinarySearchingInsertionIndex != 0 {
+		parts = append(parts, "BinarySearchingInsertionIndex")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type CalculationError uint64
+
+const (
+	CalculationNoError         CalculationError = 0
+	CalculationLossOfPrecision CalculationError = 1
+	CalculationUnderflow       CalculationError = 2
+	CalculationOverflow        CalculationError = 3
+	CalculationDivideByZero    CalculationError = 4
+)
+
+// String returns the CalculationError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CalculationError) String() string {
+	switch e {
+	case CalculationNoError:
+		return "CalculationNoError"
+	case CalculationLossOfPrecision:
+		return "CalculationLossOfPrecision"
+	case CalculationUnderflow:
+		return "CalculationUnderflow"
+	case CalculationOverflow:
+		return "CalculationOverflow"
+	case CalculationDivideByZero:
+		return "CalculationDivideByZero"
+	default:
+		return fmt.Sprintf("CalculationError(%d)", int64(e))
+	}
+}
+
+// An option set of the sync controls available for an item.
+// Bitmask — values may be combined with |.
+type FileManagerSupportedSyncControls uint64
+
+const (
+	// The file provider supports pausing the sync on the item.
+	FileManagerSupportedSyncControlsPauseSync FileManagerSupportedSyncControls = 1
+	// The file provider supports failing an upload if the local and server versions conflict.
+	FileManagerSupportedSyncControlsFailUploadOnConflict FileManagerSupportedSyncControls = 2
+)
+
+// String returns the FileManagerSupportedSyncControls constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FileManagerSupportedSyncControls) String() string {
+	var parts []string
+	if e&FileManagerSupportedSyncControlsPauseSync != 0 {
+		parts = append(parts, "FileManagerSupportedSyncControlsPauseSync")
+	}
+	if e&FileManagerSupportedSyncControlsFailUploadOnConflict != 0 {
+		parts = append(parts, "FileManagerSupportedSyncControlsFailUploadOnConflict")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// A type that defines presentation intent for runs of characters for traits like emphasis, strikethrough, and code voice.
+// Bitmask — values may be combined with |.
+type InlinePresentationIntent uint64
+
+const (
+	InlinePresentationIntentEmphasized         InlinePresentationIntent = 1
+	InlinePresentationIntentStronglyEmphasized InlinePresentationIntent = 2
+	InlinePresentationIntentCode               InlinePresentationIntent = 4
+	InlinePresentationIntentStrikethrough      InlinePresentationIntent = 32
+	InlinePresentationIntentSoftBreak          InlinePresentationIntent = 64
+	InlinePresentationIntentLineBreak          InlinePresentationIntent = 128
+	InlinePresentationIntentInlineHTML         InlinePresentationIntent = 256
+	InlinePresentationIntentBlockHTML          InlinePresentationIntent = 512
+)
+
+// String returns the InlinePresentationIntent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e InlinePresentationIntent) String() string {
+	var parts []string
+	if e&InlinePresentationIntentEmphasized != 0 {
+		parts = append(parts, "InlinePresentationIntentEmphasized")
+	}
+	if e&InlinePresentationIntentStronglyEmphasized != 0 {
+		parts = append(parts, "InlinePresentationIntentStronglyEmphasized")
+	}
+	if e&InlinePresentationIntentCode != 0 {
+		parts = append(parts, "InlinePresentationIntentCode")
+	}
+	if e&InlinePresentationIntentStrikethrough != 0 {
+		parts = append(parts, "InlinePresentationIntentStrikethrough")
+	}
+	if e&InlinePresentationIntentSoftBreak != 0 {
+		parts = append(parts, "InlinePresentationIntentSoftBreak")
+	}
+	if e&InlinePresentationIntentLineBreak != 0 {
+		parts = append(parts, "InlinePresentationIntentLineBreak")
+	}
+	if e&InlinePresentationIntentInlineHTML != 0 {
+		parts = append(parts, "InlinePresentationIntentInlineHTML")
+	}
+	if e&InlinePresentationIntentBlockHTML != 0 {
+		parts = append(parts, "InlinePresentationIntentBlockHTML")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// The error codes that describe problems with consuming data from an item provider.
+type ItemProviderErrorCode int64
+
+const (
+	ItemProviderUnknownError              ItemProviderErrorCode = -1
+	ItemProviderItemUnavailableError      ItemProviderErrorCode = -1000
+	ItemProviderUnexpectedValueClassError ItemProviderErrorCode = -1100
+	ItemProviderUnavailableCoercionError  ItemProviderErrorCode = -1200
+)
+
+// String returns the ItemProviderErrorCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ItemProviderErrorCode) String() string {
+	switch e {
+	case ItemProviderUnknownError:
+		return "ItemProviderUnknownError"
+	case ItemProviderItemUnavailableError:
+		return "ItemProviderItemUnavailableError"
+	case ItemProviderUnexpectedValueClassError:
+		return "ItemProviderUnexpectedValueClassError"
+	case ItemProviderUnavailableCoercionError:
+		return "ItemProviderUnavailableCoercionError"
+	default:
+		return fmt.Sprintf("ItemProviderErrorCode(%d)", int64(e))
+	}
+}
+
+// Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.
+// Bitmask — values may be combined with |.
+type LinguisticTaggerOptions uint64
+
+const (
+	LinguisticTaggerOmitWords       LinguisticTaggerOptions = 1
+	LinguisticTaggerOmitPunctuation LinguisticTaggerOptions = 2
+	LinguisticTaggerOmitWhitespace  LinguisticTaggerOptions = 4
+	LinguisticTaggerOmitOther       LinguisticTaggerOptions = 8
+	LinguisticTaggerJoinNames       LinguisticTaggerOptions = 16
+)
+
+// String returns the LinguisticTaggerOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LinguisticTaggerOptions) String() string {
+	var parts []string
+	if e&LinguisticTaggerOmitWords != 0 {
+		parts = append(parts, "LinguisticTaggerOmitWords")
+	}
+	if e&LinguisticTaggerOmitPunctuation != 0 {
+		parts = append(parts, "LinguisticTaggerOmitPunctuation")
+	}
+	if e&LinguisticTaggerOmitWhitespace != 0 {
+		parts = append(parts, "LinguisticTaggerOmitWhitespace")
+	}
+	if e&LinguisticTaggerOmitOther != 0 {
+		parts = append(parts, "LinguisticTaggerOmitOther")
+	}
+	if e&LinguisticTaggerJoinNames != 0 {
+		parts = append(parts, "LinguisticTaggerJoinNames")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type MatchingFlags uint64
+
+const (
+	MatchingProgress      MatchingFlags = 1
+	MatchingCompleted     MatchingFlags = 2
+	MatchingHitEnd        MatchingFlags = 4
+	MatchingRequiredEnd   MatchingFlags = 8
+	MatchingInternalError MatchingFlags = 16
+)
+
+// String returns the MatchingFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MatchingFlags) String() string {
+	var parts []string
+	if e&MatchingProgress != 0 {
+		parts = append(parts, "MatchingProgress")
+	}
+	if e&MatchingCompleted != 0 {
+		parts = append(parts, "MatchingCompleted")
+	}
+	if e&MatchingHitEnd != 0 {
+		parts = append(parts, "MatchingHitEnd")
+	}
+	if e&MatchingRequiredEnd != 0 {
+		parts = append(parts, "MatchingRequiredEnd")
+	}
+	if e&MatchingInternalError != 0 {
+		parts = append(parts, "MatchingInternalError")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// These constants identify errors that can occur when accessing net services.
+type NetServicesError int64
+
+const (
+	NetServicesUnknownError                      NetServicesError = -72000
+	NetServicesCollisionError                    NetServicesError = -72001
+	NetServicesNotFoundError                     NetServicesError = -72002
+	NetServicesActivityInProgress                NetServicesError = -72003
+	NetServicesBadArgumentError                  NetServicesError = -72004
+	NetServicesCancelledError                    NetServicesError = -72005
+	NetServicesInvalidError                      NetServicesError = -72006
+	NetServicesTimeoutError                      NetServicesError = -72007
+	NetServicesMissingRequiredConfigurationError NetServicesError = -72008
+)
+
+// String returns the NetServicesError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NetServicesError) String() string {
+	switch e {
+	case NetServicesUnknownError:
+		return "NetServicesUnknownError"
+	case NetServicesCollisionError:
+		return "NetServicesCollisionError"
+	case NetServicesNotFoundError:
+		return "NetServicesNotFoundError"
+	case NetServicesActivityInProgress:
+		return "NetServicesActivityInProgress"
+	case NetServicesBadArgumentError:
+		return "NetServicesBadArgumentError"
+	case NetServicesCancelledError:
+		return "NetServicesCancelledError"
+	case NetServicesInvalidError:
+		return "NetServicesInvalidError"
+	case NetServicesTimeoutError:
+		return "NetServicesTimeoutError"
+	case NetServicesMissingRequiredConfigurationError:
+		return "NetServicesMissingRequiredConfigurationError"
+	default:
+		return fmt.Sprintf("NetServicesError(%d)", int64(e))
+	}
+}
+
+// These constants specify the types of notification delivery suspension behaviors.
+type NotificationSuspensionBehavior uint64
+
+const (
+	NotificationSuspensionBehaviorDrop               NotificationSuspensionBehavior = 1
+	NotificationSuspensionBehaviorCoalesce           NotificationSuspensionBehavior = 2
+	NotificationSuspensionBehaviorHold               NotificationSuspensionBehavior = 3
+	NotificationSuspensionBehaviorDeliverImmediately NotificationSuspensionBehavior = 4
+)
+
+// String returns the NotificationSuspensionBehavior constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NotificationSuspensionBehavior) String() string {
+	switch e {
+	case NotificationSuspensionBehaviorDrop:
+		return "NotificationSuspensionBehaviorDrop"
+	case NotificationSuspensionBehaviorCoalesce:
+		return "NotificationSuspensionBehaviorCoalesce"
+	case NotificationSuspensionBehaviorHold:
+		return "NotificationSuspensionBehaviorHold"
+	case NotificationSuspensionBehaviorDeliverImmediately:
+		return "NotificationSuspensionBehaviorDeliverImmediately"
+	default:
+		return fmt.Sprintf("NotificationSuspensionBehavior(%d)", int64(e))
+	}
+}
+
+// An enumeration of values for aligning the contents of table columns.
+type PresentationIntentTableColumnAlignment int64
+
+const (
+	// A presentation style for columns with left-aligned text.
+	PresentationIntentTableColumnAlignmentLeft PresentationIntentTableColumnAlignment = 0
+	// A presentation style for columns with center-aligned text.
+	PresentationIntentTableColumnAlignmentCenter PresentationIntentTableColumnAlignment = 1
+	// A presentation style for columns with right-aligned text.
+	PresentationIntentTableColumnAlignmentRight PresentationIntentTableColumnAlignment = 2
+)
+
+// String returns the PresentationIntentTableColumnAlignment constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PresentationIntentTableColumnAlignment) String() string {
+	switch e {
+	case PresentationIntentTableColumnAlignmentLeft:
+		return "PresentationIntentTableColumnAlignmentLeft"
+	case PresentationIntentTableColumnAlignmentCenter:
+		return "PresentationIntentTableColumnAlignmentCenter"
+	case PresentationIntentTableColumnAlignmentRight:
+		return "PresentationIntentTableColumnAlignmentRight"
+	default:
+		return fmt.Sprintf("PresentationIntentTableColumnAlignment(%d)", int64(e))
+	}
+}
+
+type RectEdge uint64
+
+const (
+	// The minimum X edge.
+	RectEdgeMinX RectEdge = 0
+	// The minimum Y edge.
+	RectEdgeMinY RectEdge = 1
+	// The maximum X edge.
+	RectEdgeMaxX RectEdge = 2
+	// The maximum Y edge.
+	RectEdgeMaxY RectEdge = 3
+	// The minimum X edge.
+	MinXEdge RectEdge = 0
+	// The minimum Y edge.
+	MinYEdge RectEdge = 1
+	// The maximum X edge.
+	MaxXEdge RectEdge = 2
+	// The maximum Y edge.
+	MaxYEdge RectEdge = 3
+)
+
+// String returns the RectEdge constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RectEdge) String() string {
+	switch e {
+	case RectEdgeMinX:
+		return "RectEdgeMinX"
+	case RectEdgeMinY:
+		return "RectEdgeMinY"
+	case RectEdgeMaxX:
+		return "RectEdgeMaxX"
+	case RectEdgeMaxY:
+		return "RectEdgeMaxY"
+	default:
+		return fmt.Sprintf("RectEdge(%d)", int64(e))
+	}
+}
+
+// Constants to specify kinds of substrings and styles of enumeration.
+// Bitmask — values may be combined with |.
+type StringEnumerationOptions uint64
+
+const (
+	StringEnumerationByLines                      StringEnumerationOptions = 0
+	StringEnumerationByParagraphs                 StringEnumerationOptions = 1
+	StringEnumerationByComposedCharacterSequences StringEnumerationOptions = 2
+	StringEnumerationByWords                      StringEnumerationOptions = 3
+	StringEnumerationBySentences                  StringEnumerationOptions = 4
+	StringEnumerationByCaretPositions             StringEnumerationOptions = 5
+	StringEnumerationByDeletionClusters           StringEnumerationOptions = 6
+	StringEnumerationReverse                      StringEnumerationOptions = 256
+	StringEnumerationSubstringNotRequired         StringEnumerationOptions = 512
+	StringEnumerationLocalized                    StringEnumerationOptions = 1024
+)
+
+// String returns the StringEnumerationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e StringEnumerationOptions) String() string {
+	var parts []string
+	if e&StringEnumerationByParagraphs != 0 {
+		parts = append(parts, "StringEnumerationByParagraphs")
+	}
+	if e&StringEnumerationByComposedCharacterSequences != 0 {
+		parts = append(parts, "StringEnumerationByComposedCharacterSequences")
+	}
+	if e&StringEnumerationByWords != 0 {
+		parts = append(parts, "StringEnumerationByWords")
+	}
+	if e&StringEnumerationBySentences != 0 {
+		parts = append(parts, "StringEnumerationBySentences")
+	}
+	if e&StringEnumerationByCaretPositions != 0 {
+		parts = append(parts, "StringEnumerationByCaretPositions")
+	}
+	if e&StringEnumerationByDeletionClusters != 0 {
+		parts = append(parts, "StringEnumerationByDeletionClusters")
+	}
+	if e&StringEnumerationReverse != 0 {
+		parts = append(parts, "StringEnumerationReverse")
+	}
+	if e&StringEnumerationSubstringNotRequired != 0 {
+		parts = append(parts, "StringEnumerationSubstringNotRequired")
+	}
+	if e&StringEnumerationLocalized != 0 {
+		parts = append(parts, "StringEnumerationLocalized")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// An enumeration of reasons why a task couldn’t satisfy networking constraints.
+type URLErrorNetworkUnavailableReason int64
+
+const (
+	// A reason that indicates network is unavailable because the interface is cellular and cellular network is disabled.
+	URLErrorNetworkUnavailableReasonCellular URLErrorNetworkUnavailableReason = 0
+	// A reason that indicates network is unavailable because the system marked the interface as expensive.
+	URLErrorNetworkUnavailableReasonExpensive URLErrorNetworkUnavailableReason = 1
+	// A reason that indicates network is unavailable because the user enabled “Low Data Mode” in the Settings app.
+	URLErrorNetworkUnavailableReasonConstrained URLErrorNetworkUnavailableReason = 2
+	// The network is unavailable because the ultra-constrained interface is not available.
+	URLErrorNetworkUnavailableReasonUltraConstrained URLErrorNetworkUnavailableReason = 3
+)
+
+// String returns the URLErrorNetworkUnavailableReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e URLErrorNetworkUnavailableReason) String() string {
+	switch e {
+	case URLErrorNetworkUnavailableReasonCellular:
+		return "URLErrorNetworkUnavailableReasonCellular"
+	case URLErrorNetworkUnavailableReasonExpensive:
+		return "URLErrorNetworkUnavailableReasonExpensive"
+	case URLErrorNetworkUnavailableReasonConstrained:
+		return "URLErrorNetworkUnavailableReasonConstrained"
+	case URLErrorNetworkUnavailableReasonUltraConstrained:
+		return "URLErrorNetworkUnavailableReasonUltraConstrained"
+	default:
+		return fmt.Sprintf("URLErrorNetworkUnavailableReason(%d)", int64(e))
+	}
+}
+
+// Constants passed by session or task delegates to the provided continuation block in response to an authentication challenge.
+type URLSessionAuthChallengeDisposition int64
+
+const (
+	URLSessionAuthChallengeUseCredential                 URLSessionAuthChallengeDisposition = 0
+	URLSessionAuthChallengePerformDefaultHandling        URLSessionAuthChallengeDisposition = 1
+	URLSessionAuthChallengeCancelAuthenticationChallenge URLSessionAuthChallengeDisposition = 2
+	URLSessionAuthChallengeRejectProtectionSpace         URLSessionAuthChallengeDisposition = 3
+)
+
+// String returns the URLSessionAuthChallengeDisposition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e URLSessionAuthChallengeDisposition) String() string {
+	switch e {
+	case URLSessionAuthChallengeUseCredential:
+		return "URLSessionAuthChallengeUseCredential"
+	case URLSessionAuthChallengePerformDefaultHandling:
+		return "URLSessionAuthChallengePerformDefaultHandling"
+	case URLSessionAuthChallengeCancelAuthenticationChallenge:
+		return "URLSessionAuthChallengeCancelAuthenticationChallenge"
+	case URLSessionAuthChallengeRejectProtectionSpace:
+		return "URLSessionAuthChallengeRejectProtectionSpace"
+	default:
+		return fmt.Sprintf("URLSessionAuthChallengeDisposition(%d)", int64(e))
+	}
+}
+
+// The action to take on a delayed URL session task.
+type URLSessionDelayedRequestDisposition int64
+
+const (
+	URLSessionDelayedRequestContinueLoading URLSessionDelayedRequestDisposition = 0
+	URLSessionDelayedRequestUseNewRequest   URLSessionDelayedRequestDisposition = 1
+	URLSessionDelayedRequestCancel          URLSessionDelayedRequestDisposition = 2
+)
+
+// String returns the URLSessionDelayedRequestDisposition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e URLSessionDelayedRequestDisposition) String() string {
+	switch e {
+	case URLSessionDelayedRequestContinueLoading:
+		return "URLSessionDelayedRequestContinueLoading"
+	case URLSessionDelayedRequestUseNewRequest:
+		return "URLSessionDelayedRequestUseNewRequest"
+	case URLSessionDelayedRequestCancel:
+		return "URLSessionDelayedRequestCancel"
+	default:
+		return fmt.Sprintf("URLSessionDelayedRequestDisposition(%d)", int64(e))
+	}
+}
+
+// Constants indicating how a data or upload session should proceed after receiving the initial headers.
+type URLSessionResponseDisposition int64
+
+const (
+	URLSessionResponseCancel         URLSessionResponseDisposition = 0
+	URLSessionResponseAllow          URLSessionResponseDisposition = 1
+	URLSessionResponseBecomeDownload URLSessionResponseDisposition = 2
+	URLSessionResponseBecomeStream   URLSessionResponseDisposition = 3
+)
+
+// String returns the URLSessionResponseDisposition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e URLSessionResponseDisposition) String() string {
+	switch e {
+	case URLSessionResponseCancel:
+		return "URLSessionResponseCancel"
+	case URLSessionResponseAllow:
+		return "URLSessionResponseAllow"
+	case URLSessionResponseBecomeDownload:
+		return "URLSessionResponseBecomeDownload"
+	case URLSessionResponseBecomeStream:
+		return "URLSessionResponseBecomeStream"
+	default:
+		return fmt.Sprintf("URLSessionResponseDisposition(%d)", int64(e))
+	}
+}
+
+// The following error codes are defined by NSXMLParser. For error codes not listed here, see the <libxml/xmlerror.h> header file.
+type XMLParserError int64
+
+const (
+	XMLParserInternalError                         XMLParserError = 1
+	XMLParserOutOfMemoryError                      XMLParserError = 2
+	XMLParserDocumentStartError                    XMLParserError = 3
+	XMLParserEmptyDocumentError                    XMLParserError = 4
+	XMLParserPrematureDocumentEndError             XMLParserError = 5
+	XMLParserInvalidHexCharacterRefError           XMLParserError = 6
+	XMLParserInvalidDecimalCharacterRefError       XMLParserError = 7
+	XMLParserInvalidCharacterRefError              XMLParserError = 8
+	XMLParserInvalidCharacterError                 XMLParserError = 9
+	XMLParserCharacterRefAtEOFError                XMLParserError = 10
+	XMLParserCharacterRefInPrologError             XMLParserError = 11
+	XMLParserCharacterRefInEpilogError             XMLParserError = 12
+	XMLParserCharacterRefInDTDError                XMLParserError = 13
+	XMLParserEntityRefAtEOFError                   XMLParserError = 14
+	XMLParserEntityRefInPrologError                XMLParserError = 15
+	XMLParserEntityRefInEpilogError                XMLParserError = 16
+	XMLParserEntityRefInDTDError                   XMLParserError = 17
+	XMLParserParsedEntityRefAtEOFError             XMLParserError = 18
+	XMLParserParsedEntityRefInPrologError          XMLParserError = 19
+	XMLParserParsedEntityRefInEpilogError          XMLParserError = 20
+	XMLParserParsedEntityRefInInternalSubsetError  XMLParserError = 21
+	XMLParserEntityReferenceWithoutNameError       XMLParserError = 22
+	XMLParserEntityReferenceMissingSemiError       XMLParserError = 23
+	XMLParserParsedEntityRefNoNameError            XMLParserError = 24
+	XMLParserParsedEntityRefMissingSemiError       XMLParserError = 25
+	XMLParserUndeclaredEntityError                 XMLParserError = 26
+	XMLParserUnparsedEntityError                   XMLParserError = 28
+	XMLParserEntityIsExternalError                 XMLParserError = 29
+	XMLParserEntityIsParameterError                XMLParserError = 30
+	XMLParserUnknownEncodingError                  XMLParserError = 31
+	XMLParserEncodingNotSupportedError             XMLParserError = 32
+	XMLParserStringNotStartedError                 XMLParserError = 33
+	XMLParserStringNotClosedError                  XMLParserError = 34
+	XMLParserNamespaceDeclarationError             XMLParserError = 35
+	XMLParserEntityNotStartedError                 XMLParserError = 36
+	XMLParserEntityNotFinishedError                XMLParserError = 37
+	XMLParserLessThanSymbolInAttributeError        XMLParserError = 38
+	XMLParserAttributeNotStartedError              XMLParserError = 39
+	XMLParserAttributeNotFinishedError             XMLParserError = 40
+	XMLParserAttributeHasNoValueError              XMLParserError = 41
+	XMLParserAttributeRedefinedError               XMLParserError = 42
+	XMLParserLiteralNotStartedError                XMLParserError = 43
+	XMLParserLiteralNotFinishedError               XMLParserError = 44
+	XMLParserCommentNotFinishedError               XMLParserError = 45
+	XMLParserProcessingInstructionNotStartedError  XMLParserError = 46
+	XMLParserProcessingInstructionNotFinishedError XMLParserError = 47
+	XMLParserNotationNotStartedError               XMLParserError = 48
+	XMLParserNotationNotFinishedError              XMLParserError = 49
+	XMLParserAttributeListNotStartedError          XMLParserError = 50
+	XMLParserAttributeListNotFinishedError         XMLParserError = 51
+	XMLParserMixedContentDeclNotStartedError       XMLParserError = 52
+	XMLParserMixedContentDeclNotFinishedError      XMLParserError = 53
+	XMLParserElementContentDeclNotStartedError     XMLParserError = 54
+	XMLParserElementContentDeclNotFinishedError    XMLParserError = 55
+	XMLParserXMLDeclNotStartedError                XMLParserError = 56
+	XMLParserXMLDeclNotFinishedError               XMLParserError = 57
+	XMLParserConditionalSectionNotStartedError     XMLParserError = 58
+	XMLParserConditionalSectionNotFinishedError    XMLParserError = 59
+	XMLParserExternalSubsetNotFinishedError        XMLParserError = 60
+	XMLParserDOCTYPEDeclNotFinishedError           XMLParserError = 61
+	XMLParserMisplacedCDATAEndStringError          XMLParserError = 62
+	XMLParserCDATANotFinishedError                 XMLParserError = 63
+	XMLParserMisplacedXMLDeclarationError          XMLParserError = 64
+	XMLParserSpaceRequiredError                    XMLParserError = 65
+	XMLParserSeparatorRequiredError                XMLParserError = 66
+	XMLParserNMTOKENRequiredError                  XMLParserError = 67
+	XMLParserNAMERequiredError                     XMLParserError = 68
+	XMLParserPCDATARequiredError                   XMLParserError = 69
+	XMLParserURIRequiredError                      XMLParserError = 70
+	XMLParserPublicIdentifierRequiredError         XMLParserError = 71
+	XMLParserLTRequiredError                       XMLParserError = 72
+	XMLParserGTRequiredError                       XMLParserError = 73
+	XMLParserLTSlashRequiredError                  XMLParserError = 74
+	XMLParserEqualExpectedError                    XMLParserError = 75
+	XMLParserTagNameMismatchError                  XMLParserError = 76
+	XMLParserUnfinishedTagError                    XMLParserError = 77
+	XMLParserStandaloneValueError                  XMLParserError = 78
+	XMLParserInvalidEncodingNameError              XMLParserError = 79
+	XMLParserCommentContainsDoubleHyphenError      XMLParserError = 80
+	XMLParserInvalidEncodingError                  XMLParserError = 81
+	XMLParserExternalStandaloneEntityError         XMLParserError = 82
+	XMLParserInvalidConditionalSectionError        XMLParserError = 83
+	XMLParserEntityValueRequiredError              XMLParserError = 84
+	XMLParserNotWellBalancedError                  XMLParserError = 85
+	XMLParserExtraContentError                     XMLParserError = 86
+	XMLParserInvalidCharacterInEntityError         XMLParserError = 87
+	XMLParserParsedEntityRefInInternalError        XMLParserError = 88
+	XMLParserEntityRefLoopError                    XMLParserError = 89
+	XMLParserEntityBoundaryError                   XMLParserError = 90
+	XMLParserInvalidURIError                       XMLParserError = 91
+	XMLParserURIFragmentError                      XMLParserError = 92
+	XMLParserNoDTDError                            XMLParserError = 94
+	XMLParserDelegateAbortedParseError             XMLParserError = 512
+)
+
+// String returns the XMLParserError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XMLParserError) String() string {
+	switch e {
+	case XMLParserInternalError:
+		return "XMLParserInternalError"
+	case XMLParserOutOfMemoryError:
+		return "XMLParserOutOfMemoryError"
+	case XMLParserDocumentStartError:
+		return "XMLParserDocumentStartError"
+	case XMLParserEmptyDocumentError:
+		return "XMLParserEmptyDocumentError"
+	case XMLParserPrematureDocumentEndError:
+		return "XMLParserPrematureDocumentEndError"
+	case XMLParserInvalidHexCharacterRefError:
+		return "XMLParserInvalidHexCharacterRefError"
+	case XMLParserInvalidDecimalCharacterRefError:
+		return "XMLParserInvalidDecimalCharacterRefError"
+	case XMLParserInvalidCharacterRefError:
+		return "XMLParserInvalidCharacterRefError"
+	case XMLParserInvalidCharacterError:
+		return "XMLParserInvalidCharacterError"
+	case XMLParserCharacterRefAtEOFError:
+		return "XMLParserCharacterRefAtEOFError"
+	case XMLParserCharacterRefInPrologError:
+		return "XMLParserCharacterRefInPrologError"
+	case XMLParserCharacterRefInEpilogError:
+		return "XMLParserCharacterRefInEpilogError"
+	case XMLParserCharacterRefInDTDError:
+		return "XMLParserCharacterRefInDTDError"
+	case XMLParserEntityRefAtEOFError:
+		return "XMLParserEntityRefAtEOFError"
+	case XMLParserEntityRefInPrologError:
+		return "XMLParserEntityRefInPrologError"
+	case XMLParserEntityRefInEpilogError:
+		return "XMLParserEntityRefInEpilogError"
+	case XMLParserEntityRefInDTDError:
+		return "XMLParserEntityRefInDTDError"
+	case XMLParserParsedEntityRefAtEOFError:
+		return "XMLParserParsedEntityRefAtEOFError"
+	case XMLParserParsedEntityRefInPrologError:
+		return "XMLParserParsedEntityRefInPrologError"
+	case XMLParserParsedEntityRefInEpilogError:
+		return "XMLParserParsedEntityRefInEpilogError"
+	case XMLParserParsedEntityRefInInternalSubsetError:
+		return "XMLParserParsedEntityRefInInternalSubsetError"
+	case XMLParserEntityReferenceWithoutNameError:
+		return "XMLParserEntityReferenceWithoutNameError"
+	case XMLParserEntityReferenceMissingSemiError:
+		return "XMLParserEntityReferenceMissingSemiError"
+	case XMLParserParsedEntityRefNoNameError:
+		return "XMLParserParsedEntityRefNoNameError"
+	case XMLParserParsedEntityRefMissingSemiError:
+		return "XMLParserParsedEntityRefMissingSemiError"
+	case XMLParserUndeclaredEntityError:
+		return "XMLParserUndeclaredEntityError"
+	case XMLParserUnparsedEntityError:
+		return "XMLParserUnparsedEntityError"
+	case XMLParserEntityIsExternalError:
+		return "XMLParserEntityIsExternalError"
+	case XMLParserEntityIsParameterError:
+		return "XMLParserEntityIsParameterError"
+	case XMLParserUnknownEncodingError:
+		return "XMLParserUnknownEncodingError"
+	case XMLParserEncodingNotSupportedError:
+		return "XMLParserEncodingNotSupportedError"
+	case XMLParserStringNotStartedError:
+		return "XMLParserStringNotStartedError"
+	case XMLParserStringNotClosedError:
+		return "XMLParserStringNotClosedError"
+	case XMLParserNamespaceDeclarationError:
+		return "XMLParserNamespaceDeclarationError"
+	case XMLParserEntityNotStartedError:
+		return "XMLParserEntityNotStartedError"
+	case XMLParserEntityNotFinishedError:
+		return "XMLParserEntityNotFinishedError"
+	case XMLParserLessThanSymbolInAttributeError:
+		return "XMLParserLessThanSymbolInAttributeError"
+	case XMLParserAttributeNotStartedError:
+		return "XMLParserAttributeNotStartedError"
+	case XMLParserAttributeNotFinishedError:
+		return "XMLParserAttributeNotFinishedError"
+	case XMLParserAttributeHasNoValueError:
+		return "XMLParserAttributeHasNoValueError"
+	case XMLParserAttributeRedefinedError:
+		return "XMLParserAttributeRedefinedError"
+	case XMLParserLiteralNotStartedError:
+		return "XMLParserLiteralNotStartedError"
+	case XMLParserLiteralNotFinishedError:
+		return "XMLParserLiteralNotFinishedError"
+	case XMLParserCommentNotFinishedError:
+		return "XMLParserCommentNotFinishedError"
+	case XMLParserProcessingInstructionNotStartedError:
+		return "XMLParserProcessingInstructionNotStartedError"
+	case XMLParserProcessingInstructionNotFinishedError:
+		return "XMLParserProcessingInstructionNotFinishedError"
+	case XMLParserNotationNotStartedError:
+		return "XMLParserNotationNotStartedError"
+	case XMLParserNotationNotFinishedError:
+		return "XMLParserNotationNotFinishedError"
+	case XMLParserAttributeListNotStartedError:
+		return "XMLParserAttributeListNotStartedError"
+	case XMLParserAttributeListNotFinishedError:
+		return "XMLParserAttributeListNotFinishedError"
+	case XMLParserMixedContentDeclNotStartedError:
+		return "XMLParserMixedContentDeclNotStartedError"
+	case XMLParserMixedContentDeclNotFinishedError:
+		return "XMLParserMixedContentDeclNotFinishedError"
+	case XMLParserElementContentDeclNotStartedError:
+		return "XMLParserElementContentDeclNotStartedError"
+	case XMLParserElementContentDeclNotFinishedError:
+		return "XMLParserElementContentDeclNotFinishedError"
+	case XMLParserXMLDeclNotStartedError:
+		return "XMLParserXMLDeclNotStartedError"
+	case XMLParserXMLDeclNotFinishedError:
+		return "XMLParserXMLDeclNotFinishedError"
+	case XMLParserConditionalSectionNotStartedError:
+		return "XMLParserConditionalSectionNotStartedError"
+	case XMLParserConditionalSectionNotFinishedError:
+		return "XMLParserConditionalSectionNotFinishedError"
+	case XMLParserExternalSubsetNotFinishedError:
+		return "XMLParserExternalSubsetNotFinishedError"
+	case XMLParserDOCTYPEDeclNotFinishedError:
+		return "XMLParserDOCTYPEDeclNotFinishedError"
+	case XMLParserMisplacedCDATAEndStringError:
+		return "XMLParserMisplacedCDATAEndStringError"
+	case XMLParserCDATANotFinishedError:
+		return "XMLParserCDATANotFinishedError"
+	case XMLParserMisplacedXMLDeclarationError:
+		return "XMLParserMisplacedXMLDeclarationError"
+	case XMLParserSpaceRequiredError:
+		return "XMLParserSpaceRequiredError"
+	case XMLParserSeparatorRequiredError:
+		return "XMLParserSeparatorRequiredError"
+	case XMLParserNMTOKENRequiredError:
+		return "XMLParserNMTOKENRequiredError"
+	case XMLParserNAMERequiredError:
+		return "XMLParserNAMERequiredError"
+	case XMLParserPCDATARequiredError:
+		return "XMLParserPCDATARequiredError"
+	case XMLParserURIRequiredError:
+		return "XMLParserURIRequiredError"
+	case XMLParserPublicIdentifierRequiredError:
+		return "XMLParserPublicIdentifierRequiredError"
+	case XMLParserLTRequiredError:
+		return "XMLParserLTRequiredError"
+	case XMLParserGTRequiredError:
+		return "XMLParserGTRequiredError"
+	case XMLParserLTSlashRequiredError:
+		return "XMLParserLTSlashRequiredError"
+	case XMLParserEqualExpectedError:
+		return "XMLParserEqualExpectedError"
+	case XMLParserTagNameMismatchError:
+		return "XMLParserTagNameMismatchError"
+	case XMLParserUnfinishedTagError:
+		return "XMLParserUnfinishedTagError"
+	case XMLParserStandaloneValueError:
+		return "XMLParserStandaloneValueError"
+	case XMLParserInvalidEncodingNameError:
+		return "XMLParserInvalidEncodingNameError"
+	case XMLParserCommentContainsDoubleHyphenError:
+		return "XMLParserCommentContainsDoubleHyphenError"
+	case XMLParserInvalidEncodingError:
+		return "XMLParserInvalidEncodingError"
+	case XMLParserExternalStandaloneEntityError:
+		return "XMLParserExternalStandaloneEntityError"
+	case XMLParserInvalidConditionalSectionError:
+		return "XMLParserInvalidConditionalSectionError"
+	case XMLParserEntityValueRequiredError:
+		return "XMLParserEntityValueRequiredError"
+	case XMLParserNotWellBalancedError:
+		return "XMLParserNotWellBalancedError"
+	case XMLParserExtraContentError:
+		return "XMLParserExtraContentError"
+	case XMLParserInvalidCharacterInEntityError:
+		return "XMLParserInvalidCharacterInEntityError"
+	case XMLParserParsedEntityRefInInternalError:
+		return "XMLParserParsedEntityRefInInternalError"
+	case XMLParserEntityRefLoopError:
+		return "XMLParserEntityRefLoopError"
+	case XMLParserEntityBoundaryError:
+		return "XMLParserEntityBoundaryError"
+	case XMLParserInvalidURIError:
+		return "XMLParserInvalidURIError"
+	case XMLParserURIFragmentError:
+		return "XMLParserURIFragmentError"
+	case XMLParserNoDTDError:
+		return "XMLParserNoDTDError"
+	case XMLParserDelegateAbortedParseError:
+		return "XMLParserDelegateAbortedParseError"
+	default:
+		return fmt.Sprintf("XMLParserError(%d)", int64(e))
+	}
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlags int64
+
+const (
+	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
+	XpcListenerCreateFlagsInactive        XpcListenerCreateFlags = 1
+	XpcListenerCreateFlagsForceMach       XpcListenerCreateFlags = 2
+	XpcListenerCreateFlagsForceXpcservice XpcListenerCreateFlags = 4
+)
+
+// String returns the XpcListenerCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcListenerCreateFlags) String() string {
+	var parts []string
+	if e&XpcListenerCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsInactive")
+	}
+	if e&XpcListenerCreateFlagsForceMach != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceMach")
+	}
+	if e&XpcListenerCreateFlagsForceXpcservice != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceXpcservice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlags int64
+
+const (
+	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0
+	XpcSessionCreateFlagsInactive       XpcSessionCreateFlags = 1
+	XpcSessionCreateFlagsMachPrivileged XpcSessionCreateFlags = 2
+)
+
+// String returns the XpcSessionCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcSessionCreateFlags) String() string {
+	var parts []string
+	if e&XpcSessionCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsInactive")
+	}
+	if e&XpcSessionCreateFlagsMachPrivileged != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsMachPrivileged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+const (
+	ASCIIStringEncoding                                  = 1
+	ArgumentEvaluationScriptError                        = 3
+	ArgumentsWrongScriptError                            = 6
+	BundleErrorMaximum                                   = 5119
+	BundleErrorMinimum                                   = 4992
+	BundleExecutableArchitectureARM64                    = 16777228
+	BundleExecutableArchitectureI386                     = 7
+	BundleExecutableArchitecturePPC                      = 18
+	BundleExecutableArchitecturePPC64                    = 16777234
+	BundleExecutableArchitectureX86_64                   = 16777223
+	BundleOnDemandResourceExceededMaximumSizeError       = 4993
+	BundleOnDemandResourceInvalidTagError                = 4994
+	BundleOnDemandResourceOutOfSpaceError                = 4992
+	CannotCreateScriptCommandError                       = 10
+	CloudSharingConflictError                            = 5123
+	CloudSharingErrorMaximum                             = 5375
+	CloudSharingErrorMinimum                             = 5120
+	CloudSharingNetworkFailureError                      = 5120
+	CloudSharingNoPermissionError                        = 5124
+	CloudSharingOtherError                               = 5375
+	CloudSharingQuotaExceededError                       = 5121
+	CloudSharingTooManyParticipantsError                 = 5122
+	CoderErrorMaximum                                    = 4991
+	CoderErrorMinimum                                    = 4864
+	CoderInvalidValueError                               = 4866
+	CoderReadCorruptError                                = 4864
+	CoderValueNotFoundError                              = 4865
+	CollectorDisabledOption                              = 2
+	CompressionErrorMaximum                              = 5503
+	CompressionErrorMinimum                              = 5376
+	CompressionFailedError                               = 5376
+	ContainerSpecifierError                              = 2
+	DateComponentUndefined                               = 9223372036854775807
+	DecompressionFailedError                             = 5377
+	ExecutableArchitectureMismatchError                  = 3585
+	ExecutableErrorMaximum                               = 3839
+	ExecutableErrorMinimum                               = 3584
+	ExecutableLinkError                                  = 3588
+	ExecutableLoadError                                  = 3587
+	ExecutableNotLoadableError                           = 3584
+	ExecutableRuntimeMismatchError                       = 3586
+	FeatureUnsupportedError                              = 3328
+	FileErrorMaximum                                     = 1023
+	FileErrorMinimum                                     = 0
+	FileLockingError                                     = 255
+	FileManagerUnmountBusyError                          = 769
+	FileManagerUnmountUnknownError                       = 768
+	FileNoSuchFileError                                  = 4
+	FileReadCorruptFileError                             = 259
+	FileReadInapplicableStringEncodingError              = 261
+	FileReadInvalidFileNameError                         = 258
+	FileReadNoPermissionError                            = 257
+	FileReadNoSuchFileError                              = 260
+	FileReadTooLargeError                                = 263
+	FileReadUnknownError                                 = 256
+	FileReadUnknownStringEncodingError                   = 264
+	FileReadUnsupportedSchemeError                       = 262
+	FileWriteFileExistsError                             = 516
+	FileWriteInapplicableStringEncodingError             = 517
+	FileWriteInvalidFileNameError                        = 514
+	FileWriteNoPermissionError                           = 513
+	FileWriteOutOfSpaceError                             = 640
+	FileWriteUnknownError                                = 512
+	FileWriteUnsupportedSchemeError                      = 518
+	FileWriteVolumeReadOnlyError                         = 642
+	FormattingError                                      = 2048
+	FormattingErrorMaximum                               = 2559
+	FormattingErrorMinimum                               = 2048
+	HPUXOperatingSystem                                  = 4
+	ISO2022JPStringEncoding                              = 21
+	ISOLatin1StringEncoding                              = 5
+	ISOLatin2StringEncoding                              = 9
+	InternalScriptError                                  = 8
+	InternalSpecifierError                               = 5
+	InvalidIndexSpecifierError                           = 4
+	JapaneseEUCStringEncoding                            = 3
+	KeySpecifierEvaluationScriptError                    = 2
+	KeyValueValidationError                              = 1024
+	MACHOperatingSystem                                  = 5
+	MacOSRomanStringEncoding                             = 30
+	NEXTSTEPStringEncoding                               = 2
+	NoScriptError                                        = 0
+	NoSpecifierError                                     = 0
+	NoTopLevelContainersSpecifierError                   = 1
+	NonLossyASCIIStringEncoding                          = 7
+	OSF1OperatingSystem                                  = 7
+	OpenStepUnicodeReservedBase                          = 62464
+	OperationNotSupportedForKeyScriptError               = 9
+	OperationNotSupportedForKeySpecifierError            = 6
+	PropertyListErrorMaximum                             = 4095
+	PropertyListErrorMinimum                             = 3840
+	PropertyListReadCorruptError                         = 3840
+	PropertyListReadStreamError                          = 3842
+	PropertyListReadUnknownVersionError                  = 3841
+	PropertyListWriteInvalidError                        = 3852
+	PropertyListWriteStreamError                         = 3851
+	ProprietaryStringEncoding                            = 65536
+	ReceiverEvaluationScriptError                        = 1
+	ReceiversCantHandleCommandScriptError                = 4
+	RequiredArgumentsMissingScriptError                  = 5
+	ScannedOption                                        = 1
+	ShiftJISStringEncoding                               = 8
+	SolarisOperatingSystem                               = 3
+	SunOSOperatingSystem                                 = 6
+	SymbolStringEncoding                                 = 6
+	TextCheckingAllCustomTypes                           = 18446744069414584320
+	TextCheckingAllSystemTypes                           = 4294967295
+	TextCheckingAllTypes                                 = 18446744073709551615
+	URLErrorAppTransportSecurityRequiresSecureConnection = -1022
+	URLErrorBackgroundSessionInUseByAnotherProcess       = -996
+	URLErrorBackgroundSessionRequiresSharedContainer     = -995
+	URLErrorBackgroundSessionWasDisconnected             = -997
+	URLErrorBadServerResponse                            = -1011
+	URLErrorBadURL                                       = -1000
+	URLErrorCallIsActive                                 = -1019
+	URLErrorCancelled                                    = -999
+	URLErrorCancelledReasonBackgroundUpdatesDisabled     = 1
+	URLErrorCancelledReasonInsufficientSystemResources   = 2
+	URLErrorCancelledReasonUserForceQuitApplication      = 0
+	URLErrorCannotCloseFile                              = -3002
+	URLErrorCannotConnectToHost                          = -1004
+	URLErrorCannotCreateFile                             = -3000
+	URLErrorCannotDecodeContentData                      = -1016
+	URLErrorCannotDecodeRawData                          = -1015
+	URLErrorCannotFindHost                               = -1003
+	URLErrorCannotLoadFromNetwork                        = -2000
+	URLErrorCannotMoveFile                               = -3005
+	URLErrorCannotOpenFile                               = -3001
+	URLErrorCannotParseResponse                          = -1017
+	URLErrorCannotRemoveFile                             = -3004
+	URLErrorCannotWriteToFile                            = -3003
+	URLErrorClientCertificateRejected                    = -1205
+	URLErrorClientCertificateRequired                    = -1206
+	URLErrorDNSLookupFailed                              = -1006
+	URLErrorDataLengthExceedsMaximum                     = -1103
+	URLErrorDataNotAllowed                               = -1020
+	URLErrorDownloadDecodingFailedMidStream              = -3006
+	URLErrorDownloadDecodingFailedToComplete             = -3007
+	URLErrorFileDoesNotExist                             = -1100
+	URLErrorFileIsDirectory                              = -1101
+	URLErrorFileOutsideSafeArea                          = -1104
+	URLErrorHTTPTooManyRedirects                         = -1007
+	URLErrorInternationalRoamingOff                      = -1018
+	URLErrorNetworkConnectionLost                        = -1005
+	URLErrorNoPermissionsToReadFile                      = -1102
+	URLErrorNotConnectedToInternet                       = -1009
+	URLErrorRedirectToNonExistentLocation                = -1010
+	URLErrorRequestBodyStreamExhausted                   = -1021
+	URLErrorResourceUnavailable                          = -1008
+	URLErrorSecureConnectionFailed                       = -1200
+	URLErrorServerCertificateHasBadDate                  = -1201
+	URLErrorServerCertificateHasUnknownRoot              = -1203
+	URLErrorServerCertificateNotYetValid                 = -1204
+	URLErrorServerCertificateUntrusted                   = -1202
+	URLErrorTimedOut                                     = -1001
+	URLErrorUnknown                                      = -1
+	URLErrorUnsupportedURL                               = -1002
+	URLErrorUserAuthenticationRequired                   = -1013
+	URLErrorUserCancelledAuthentication                  = -1012
+	URLErrorZeroByteResource                             = -1014
+	UTF16BigEndianStringEncoding                         = 2415919360
+	UTF16LittleEndianStringEncoding                      = 2483028224
+	UTF16StringEncoding                                  = 10
+	UTF32BigEndianStringEncoding                         = 2550137088
+	UTF32LittleEndianStringEncoding                      = 2617245952
+	UTF32StringEncoding                                  = 2348810496
+	UTF8StringEncoding                                   = 4
+	UbiquitousFileErrorMaximum                           = 4607
+	UbiquitousFileErrorMinimum                           = 4352
+	UbiquitousFileNotUploadedDueToQuotaError             = 4354
+	UbiquitousFileUbiquityServerNotAvailable             = 4355
+	UbiquitousFileUnavailableError                       = 4353
+	UbiquitousKeyValueStoreAccountChange                 = 3
+	UbiquitousKeyValueStoreInitialSyncChange             = 1
+	UbiquitousKeyValueStoreQuotaViolationChange          = 2
+	UbiquitousKeyValueStoreServerChange                  = 0
+	// Deprecated: since macOS 10.10.
+	UndefinedDateComponent                     = 9223372036854775807
+	UnicodeStringEncoding                      = 10
+	UnknownKeyScriptError                      = 7
+	UnknownKeySpecifierError                   = 3
+	UserActivityConnectionUnavailableError     = 4609
+	UserActivityErrorMaximum                   = 4863
+	UserActivityErrorMinimum                   = 4608
+	UserActivityHandoffFailedError             = 4608
+	UserActivityHandoffUserInfoTooLargeError   = 4611
+	UserActivityRemoteApplicationTimedOutError = 4610
+	UserCancelledError                         = 3072
+	ValidationErrorMaximum                     = 2047
+	ValidationErrorMinimum                     = 1024
+	Windows95OperatingSystem                   = 2
+	WindowsCP1250StringEncoding                = 15
+	WindowsCP1251StringEncoding                = 11
+	WindowsCP1252StringEncoding                = 12
+	WindowsCP1253StringEncoding                = 13
+	WindowsCP1254StringEncoding                = 14
+	WindowsNTOperatingSystem                   = 1
+	// Deprecated: since macOS 10.10.
+	WrapCalendarComponents                     = 1
+	XPCConnectionCodeSigningRequirementFailure = 4102
+	XPCConnectionErrorMaximum                  = 4224
+	XPCConnectionErrorMinimum                  = 4096
+	XPCConnectionInterrupted                   = 4097
+	XPCConnectionInvalid                       = 4099
+	XPCConnectionReplyInvalid                  = 4101
+	NS_BigEndian                               = 2
+	NS_LittleEndian                            = 1
+	NS_UnknownByteOrder                        = 0
+)

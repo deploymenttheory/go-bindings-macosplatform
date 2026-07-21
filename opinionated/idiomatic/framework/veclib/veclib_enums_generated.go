@@ -6,6 +6,7 @@ package veclib
 
 import (
 	"fmt"
+	"strings"
 )
 
 type BlasThreading uint32
@@ -139,3 +140,3014 @@ func (e VdspDftRealtocomplex) String() string {
 		return fmt.Sprintf("VdspDftRealtocomplex(%d)", int64(e))
 	}
 }
+
+type EntryID int64
+
+const (
+	EntryIDFirstEntry EntryID = 0
+	EntryIDNextEntry  EntryID = -1
+	EntryIDLastEntry  EntryID = -2
+)
+
+// String returns the EntryID constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EntryID) String() string {
+	switch e {
+	case EntryIDFirstEntry:
+		return "EntryIDFirstEntry"
+	case EntryIDNextEntry:
+		return "EntryIDNextEntry"
+	case EntryIDLastEntry:
+		return "EntryIDLastEntry"
+	default:
+		return fmt.Sprintf("EntryID(%d)", int64(e))
+	}
+}
+
+type Flag int64
+
+const (
+	FlagFlagDeferInherit      Flag = 1
+	FlagFlagNoInherit         Flag = 131072
+	FlagEntryInherited        Flag = 16
+	FlagEntryFileInherit      Flag = 32
+	FlagEntryDirectoryInherit Flag = 64
+	FlagEntryLimitInherit     Flag = 128
+	FlagEntryOnlyInherit      Flag = 256
+)
+
+// String returns the Flag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Flag) String() string {
+	switch e {
+	case FlagFlagDeferInherit:
+		return "FlagFlagDeferInherit"
+	case FlagFlagNoInherit:
+		return "FlagFlagNoInherit"
+	case FlagEntryInherited:
+		return "FlagEntryInherited"
+	case FlagEntryFileInherit:
+		return "FlagEntryFileInherit"
+	case FlagEntryDirectoryInherit:
+		return "FlagEntryDirectoryInherit"
+	case FlagEntryLimitInherit:
+		return "FlagEntryLimitInherit"
+	case FlagEntryOnlyInherit:
+		return "FlagEntryOnlyInherit"
+	default:
+		return fmt.Sprintf("Flag(%d)", int64(e))
+	}
+}
+
+type Perm int64
+
+const (
+	PermReadData           Perm = 2
+	PermListDirectory      Perm = 2
+	PermWriteData          Perm = 4
+	PermAddFile            Perm = 4
+	PermExecute            Perm = 8
+	PermSearch             Perm = 8
+	PermDelete             Perm = 16
+	PermAppendData         Perm = 32
+	PermAddSubdirectory    Perm = 32
+	PermDeleteChild        Perm = 64
+	PermReadAttributes     Perm = 128
+	PermWriteAttributes    Perm = 256
+	PermReadExtattributes  Perm = 512
+	PermWriteExtattributes Perm = 1024
+	PermReadSecurity       Perm = 2048
+	PermWriteSecurity      Perm = 4096
+	PermChangeOwner        Perm = 8192
+	PermSynchronize        Perm = 1048576
+)
+
+// String returns the Perm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Perm) String() string {
+	switch e {
+	case PermReadData:
+		return "PermReadData"
+	case PermWriteData:
+		return "PermWriteData"
+	case PermExecute:
+		return "PermExecute"
+	case PermDelete:
+		return "PermDelete"
+	case PermAppendData:
+		return "PermAppendData"
+	case PermDeleteChild:
+		return "PermDeleteChild"
+	case PermReadAttributes:
+		return "PermReadAttributes"
+	case PermWriteAttributes:
+		return "PermWriteAttributes"
+	case PermReadExtattributes:
+		return "PermReadExtattributes"
+	case PermWriteExtattributes:
+		return "PermWriteExtattributes"
+	case PermReadSecurity:
+		return "PermReadSecurity"
+	case PermWriteSecurity:
+		return "PermWriteSecurity"
+	case PermChangeOwner:
+		return "PermChangeOwner"
+	case PermSynchronize:
+		return "PermSynchronize"
+	default:
+		return fmt.Sprintf("Perm(%d)", int64(e))
+	}
+}
+
+type Tag int64
+
+const (
+	TagUndefinedTag  Tag = 0
+	TagExtendedAllow Tag = 1
+	TagExtendedDeny  Tag = 2
+)
+
+// String returns the Tag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Tag) String() string {
+	switch e {
+	case TagUndefinedTag:
+		return "TagUndefinedTag"
+	case TagExtendedAllow:
+		return "TagExtendedAllow"
+	case TagExtendedDeny:
+		return "TagExtendedDeny"
+	default:
+		return fmt.Sprintf("Tag(%d)", int64(e))
+	}
+}
+
+type Type int64
+
+const (
+	TypeExtended Type = 256
+	TypeAccess   Type = 0
+	TypeDefault  Type = 1
+	TypeAfs      Type = 2
+	TypeCoda     Type = 3
+	TypeNtfs     Type = 4
+	TypeNwfs     Type = 5
+)
+
+// String returns the Type constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Type) String() string {
+	switch e {
+	case TypeExtended:
+		return "TypeExtended"
+	case TypeAccess:
+		return "TypeAccess"
+	case TypeDefault:
+		return "TypeDefault"
+	case TypeAfs:
+		return "TypeAfs"
+	case TypeCoda:
+		return "TypeCoda"
+	case TypeNtfs:
+		return "TypeNtfs"
+	case TypeNwfs:
+		return "TypeNwfs"
+	default:
+		return fmt.Sprintf("Type(%d)", int64(e))
+	}
+}
+
+type BNNSActivationFunction int64
+
+const (
+	BNNSActivationFunctionIdentity                        BNNSActivationFunction = 0
+	BNNSActivationFunctionRectifiedLinear                 BNNSActivationFunction = 1
+	BNNSActivationFunctionLeakyRectifiedLinear            BNNSActivationFunction = 2
+	BNNSActivationFunctionSigmoid                         BNNSActivationFunction = 3
+	BNNSActivationFunctionTanh                            BNNSActivationFunction = 4
+	BNNSActivationFunctionScaledTanh                      BNNSActivationFunction = 5
+	BNNSActivationFunctionAbs                             BNNSActivationFunction = 6
+	BNNSActivationFunctionLinear                          BNNSActivationFunction = 7
+	BNNSActivationFunctionClamp                           BNNSActivationFunction = 8
+	BNNSActivationFunctionIntegerLinearSaturate           BNNSActivationFunction = 9
+	BNNSActivationFunctionIntegerLinearSaturatePerChannel BNNSActivationFunction = 10
+	BNNSActivationFunctionSoftmax                         BNNSActivationFunction = 11
+	BNNSActivationFunctionGELUApproximation               BNNSActivationFunction = 12
+	BNNSActivationFunctionGumbel                          BNNSActivationFunction = 13
+	BNNSActivationFunctionGumbelMax                       BNNSActivationFunction = 14
+	BNNSActivationFunctionHardSigmoid                     BNNSActivationFunction = 15
+	BNNSActivationFunctionSoftplus                        BNNSActivationFunction = 16
+	BNNSActivationFunctionSoftsign                        BNNSActivationFunction = 17
+	BNNSActivationFunctionELU                             BNNSActivationFunction = 18
+	BNNSActivationFunctionClampedLeakyRectifiedLinear     BNNSActivationFunction = 19
+	BNNSActivationFunctionLinearWithBias                  BNNSActivationFunction = 20
+	BNNSActivationFunctionLogSoftmax                      BNNSActivationFunction = 21
+	BNNSActivationFunctionLogSigmoid                      BNNSActivationFunction = 22
+	BNNSActivationFunctionSELU                            BNNSActivationFunction = 23
+	BNNSActivationFunctionCELU                            BNNSActivationFunction = 24
+	BNNSActivationFunctionHardShrink                      BNNSActivationFunction = 25
+	BNNSActivationFunctionSoftShrink                      BNNSActivationFunction = 26
+	BNNSActivationFunctionTanhShrink                      BNNSActivationFunction = 27
+	BNNSActivationFunctionThreshold                       BNNSActivationFunction = 28
+	BNNSActivationFunctionPReLUPerChannel                 BNNSActivationFunction = 29
+	BNNSActivationFunctionGELUApproximation2              BNNSActivationFunction = 30
+	BNNSActivationFunctionHardSwish                       BNNSActivationFunction = 30
+	BNNSActivationFunctionSiLU                            BNNSActivationFunction = 31
+	BNNSActivationFunctionReLU6                           BNNSActivationFunction = 32
+	BNNSActivationFunctionErf                             BNNSActivationFunction = 33
+	BNNSActivationFunctionGELU                            BNNSActivationFunction = 34
+	BNNSActivationFunctionGELUApproximationSigmoid        BNNSActivationFunction = 35
+)
+
+// String returns the BNNSActivationFunction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSActivationFunction) String() string {
+	switch e {
+	case BNNSActivationFunctionIdentity:
+		return "BNNSActivationFunctionIdentity"
+	case BNNSActivationFunctionRectifiedLinear:
+		return "BNNSActivationFunctionRectifiedLinear"
+	case BNNSActivationFunctionLeakyRectifiedLinear:
+		return "BNNSActivationFunctionLeakyRectifiedLinear"
+	case BNNSActivationFunctionSigmoid:
+		return "BNNSActivationFunctionSigmoid"
+	case BNNSActivationFunctionTanh:
+		return "BNNSActivationFunctionTanh"
+	case BNNSActivationFunctionScaledTanh:
+		return "BNNSActivationFunctionScaledTanh"
+	case BNNSActivationFunctionAbs:
+		return "BNNSActivationFunctionAbs"
+	case BNNSActivationFunctionLinear:
+		return "BNNSActivationFunctionLinear"
+	case BNNSActivationFunctionClamp:
+		return "BNNSActivationFunctionClamp"
+	case BNNSActivationFunctionIntegerLinearSaturate:
+		return "BNNSActivationFunctionIntegerLinearSaturate"
+	case BNNSActivationFunctionIntegerLinearSaturatePerChannel:
+		return "BNNSActivationFunctionIntegerLinearSaturatePerChannel"
+	case BNNSActivationFunctionSoftmax:
+		return "BNNSActivationFunctionSoftmax"
+	case BNNSActivationFunctionGELUApproximation:
+		return "BNNSActivationFunctionGELUApproximation"
+	case BNNSActivationFunctionGumbel:
+		return "BNNSActivationFunctionGumbel"
+	case BNNSActivationFunctionGumbelMax:
+		return "BNNSActivationFunctionGumbelMax"
+	case BNNSActivationFunctionHardSigmoid:
+		return "BNNSActivationFunctionHardSigmoid"
+	case BNNSActivationFunctionSoftplus:
+		return "BNNSActivationFunctionSoftplus"
+	case BNNSActivationFunctionSoftsign:
+		return "BNNSActivationFunctionSoftsign"
+	case BNNSActivationFunctionELU:
+		return "BNNSActivationFunctionELU"
+	case BNNSActivationFunctionClampedLeakyRectifiedLinear:
+		return "BNNSActivationFunctionClampedLeakyRectifiedLinear"
+	case BNNSActivationFunctionLinearWithBias:
+		return "BNNSActivationFunctionLinearWithBias"
+	case BNNSActivationFunctionLogSoftmax:
+		return "BNNSActivationFunctionLogSoftmax"
+	case BNNSActivationFunctionLogSigmoid:
+		return "BNNSActivationFunctionLogSigmoid"
+	case BNNSActivationFunctionSELU:
+		return "BNNSActivationFunctionSELU"
+	case BNNSActivationFunctionCELU:
+		return "BNNSActivationFunctionCELU"
+	case BNNSActivationFunctionHardShrink:
+		return "BNNSActivationFunctionHardShrink"
+	case BNNSActivationFunctionSoftShrink:
+		return "BNNSActivationFunctionSoftShrink"
+	case BNNSActivationFunctionTanhShrink:
+		return "BNNSActivationFunctionTanhShrink"
+	case BNNSActivationFunctionThreshold:
+		return "BNNSActivationFunctionThreshold"
+	case BNNSActivationFunctionPReLUPerChannel:
+		return "BNNSActivationFunctionPReLUPerChannel"
+	case BNNSActivationFunctionGELUApproximation2:
+		return "BNNSActivationFunctionGELUApproximation2"
+	case BNNSActivationFunctionSiLU:
+		return "BNNSActivationFunctionSiLU"
+	case BNNSActivationFunctionReLU6:
+		return "BNNSActivationFunctionReLU6"
+	case BNNSActivationFunctionErf:
+		return "BNNSActivationFunctionErf"
+	case BNNSActivationFunctionGELU:
+		return "BNNSActivationFunctionGELU"
+	case BNNSActivationFunctionGELUApproximationSigmoid:
+		return "BNNSActivationFunctionGELUApproximationSigmoid"
+	default:
+		return fmt.Sprintf("BNNSActivationFunction(%d)", int64(e))
+	}
+}
+
+type BNNSArithmeticFunction int64
+
+const (
+	BNNSArithmeticAdd                  BNNSArithmeticFunction = 0
+	BNNSArithmeticSubtract             BNNSArithmeticFunction = 1
+	BNNSArithmeticMultiply             BNNSArithmeticFunction = 2
+	BNNSArithmeticDivide               BNNSArithmeticFunction = 3
+	BNNSArithmeticSquareRoot           BNNSArithmeticFunction = 4
+	BNNSArithmeticReciprocalSquareRoot BNNSArithmeticFunction = 5
+	BNNSArithmeticCeil                 BNNSArithmeticFunction = 6
+	BNNSArithmeticFloor                BNNSArithmeticFunction = 7
+	BNNSArithmeticRound                BNNSArithmeticFunction = 8
+	BNNSArithmeticSin                  BNNSArithmeticFunction = 9
+	BNNSArithmeticCos                  BNNSArithmeticFunction = 10
+	BNNSArithmeticTan                  BNNSArithmeticFunction = 11
+	BNNSArithmeticAsin                 BNNSArithmeticFunction = 12
+	BNNSArithmeticAcos                 BNNSArithmeticFunction = 13
+	BNNSArithmeticAtan                 BNNSArithmeticFunction = 14
+	BNNSArithmeticSinh                 BNNSArithmeticFunction = 15
+	BNNSArithmeticCosh                 BNNSArithmeticFunction = 16
+	BNNSArithmeticTanh                 BNNSArithmeticFunction = 17
+	BNNSArithmeticAsinh                BNNSArithmeticFunction = 18
+	BNNSArithmeticAcosh                BNNSArithmeticFunction = 19
+	BNNSArithmeticAtanh                BNNSArithmeticFunction = 20
+	BNNSArithmeticPow                  BNNSArithmeticFunction = 21
+	BNNSArithmeticExp                  BNNSArithmeticFunction = 22
+	BNNSArithmeticExp2                 BNNSArithmeticFunction = 23
+	BNNSArithmeticLog                  BNNSArithmeticFunction = 24
+	BNNSArithmeticLog2                 BNNSArithmeticFunction = 25
+	BNNSArithmeticMultiplyNoNaN        BNNSArithmeticFunction = 26
+	BNNSArithmeticDivideNoNaN          BNNSArithmeticFunction = 27
+	BNNSArithmeticMultiplyAdd          BNNSArithmeticFunction = 28
+	BNNSArithmeticMinimum              BNNSArithmeticFunction = 29
+	BNNSArithmeticMaximum              BNNSArithmeticFunction = 30
+	BNNSArithmeticSelect               BNNSArithmeticFunction = 31
+	BNNSArithmeticAbs                  BNNSArithmeticFunction = 32
+	BNNSArithmeticSign                 BNNSArithmeticFunction = 33
+	BNNSArithmeticNegate               BNNSArithmeticFunction = 34
+	BNNSArithmeticReciprocal           BNNSArithmeticFunction = 35
+	BNNSArithmeticSquare               BNNSArithmeticFunction = 36
+	BNNSArithmeticFloorDivide          BNNSArithmeticFunction = 37
+	BNNSArithmeticTruncDivide          BNNSArithmeticFunction = 38
+	BNNSArithmeticTruncRemainder       BNNSArithmeticFunction = 39
+	BNNSArithmeticErf                  BNNSArithmeticFunction = 40
+)
+
+// String returns the BNNSArithmeticFunction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSArithmeticFunction) String() string {
+	switch e {
+	case BNNSArithmeticAdd:
+		return "BNNSArithmeticAdd"
+	case BNNSArithmeticSubtract:
+		return "BNNSArithmeticSubtract"
+	case BNNSArithmeticMultiply:
+		return "BNNSArithmeticMultiply"
+	case BNNSArithmeticDivide:
+		return "BNNSArithmeticDivide"
+	case BNNSArithmeticSquareRoot:
+		return "BNNSArithmeticSquareRoot"
+	case BNNSArithmeticReciprocalSquareRoot:
+		return "BNNSArithmeticReciprocalSquareRoot"
+	case BNNSArithmeticCeil:
+		return "BNNSArithmeticCeil"
+	case BNNSArithmeticFloor:
+		return "BNNSArithmeticFloor"
+	case BNNSArithmeticRound:
+		return "BNNSArithmeticRound"
+	case BNNSArithmeticSin:
+		return "BNNSArithmeticSin"
+	case BNNSArithmeticCos:
+		return "BNNSArithmeticCos"
+	case BNNSArithmeticTan:
+		return "BNNSArithmeticTan"
+	case BNNSArithmeticAsin:
+		return "BNNSArithmeticAsin"
+	case BNNSArithmeticAcos:
+		return "BNNSArithmeticAcos"
+	case BNNSArithmeticAtan:
+		return "BNNSArithmeticAtan"
+	case BNNSArithmeticSinh:
+		return "BNNSArithmeticSinh"
+	case BNNSArithmeticCosh:
+		return "BNNSArithmeticCosh"
+	case BNNSArithmeticTanh:
+		return "BNNSArithmeticTanh"
+	case BNNSArithmeticAsinh:
+		return "BNNSArithmeticAsinh"
+	case BNNSArithmeticAcosh:
+		return "BNNSArithmeticAcosh"
+	case BNNSArithmeticAtanh:
+		return "BNNSArithmeticAtanh"
+	case BNNSArithmeticPow:
+		return "BNNSArithmeticPow"
+	case BNNSArithmeticExp:
+		return "BNNSArithmeticExp"
+	case BNNSArithmeticExp2:
+		return "BNNSArithmeticExp2"
+	case BNNSArithmeticLog:
+		return "BNNSArithmeticLog"
+	case BNNSArithmeticLog2:
+		return "BNNSArithmeticLog2"
+	case BNNSArithmeticMultiplyNoNaN:
+		return "BNNSArithmeticMultiplyNoNaN"
+	case BNNSArithmeticDivideNoNaN:
+		return "BNNSArithmeticDivideNoNaN"
+	case BNNSArithmeticMultiplyAdd:
+		return "BNNSArithmeticMultiplyAdd"
+	case BNNSArithmeticMinimum:
+		return "BNNSArithmeticMinimum"
+	case BNNSArithmeticMaximum:
+		return "BNNSArithmeticMaximum"
+	case BNNSArithmeticSelect:
+		return "BNNSArithmeticSelect"
+	case BNNSArithmeticAbs:
+		return "BNNSArithmeticAbs"
+	case BNNSArithmeticSign:
+		return "BNNSArithmeticSign"
+	case BNNSArithmeticNegate:
+		return "BNNSArithmeticNegate"
+	case BNNSArithmeticReciprocal:
+		return "BNNSArithmeticReciprocal"
+	case BNNSArithmeticSquare:
+		return "BNNSArithmeticSquare"
+	case BNNSArithmeticFloorDivide:
+		return "BNNSArithmeticFloorDivide"
+	case BNNSArithmeticTruncDivide:
+		return "BNNSArithmeticTruncDivide"
+	case BNNSArithmeticTruncRemainder:
+		return "BNNSArithmeticTruncRemainder"
+	case BNNSArithmeticErf:
+		return "BNNSArithmeticErf"
+	default:
+		return fmt.Sprintf("BNNSArithmeticFunction(%d)", int64(e))
+	}
+}
+
+type BNNSBoxCoordinateMode int64
+
+const (
+	BNNSCornersHeightFirst    BNNSBoxCoordinateMode = 0
+	BNNSCornersWidthFirst     BNNSBoxCoordinateMode = 1
+	BNNSCenterSizeHeightFirst BNNSBoxCoordinateMode = 2
+	BNNSCenterSizeWidthFirst  BNNSBoxCoordinateMode = 3
+)
+
+// String returns the BNNSBoxCoordinateMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSBoxCoordinateMode) String() string {
+	switch e {
+	case BNNSCornersHeightFirst:
+		return "BNNSCornersHeightFirst"
+	case BNNSCornersWidthFirst:
+		return "BNNSCornersWidthFirst"
+	case BNNSCenterSizeHeightFirst:
+		return "BNNSCenterSizeHeightFirst"
+	case BNNSCenterSizeWidthFirst:
+		return "BNNSCenterSizeWidthFirst"
+	default:
+		return fmt.Sprintf("BNNSBoxCoordinateMode(%d)", int64(e))
+	}
+}
+
+type BNNSDataLayout int64
+
+const (
+	BNNSDataLayoutVector                        BNNSDataLayout = 65536
+	BNNSDataLayout1DLastMajor                   BNNSDataLayout = 98304
+	BNNSDataLayout1DFirstMajor                  BNNSDataLayout = 98305
+	BNNSDataLayoutRowMajorMatrix                BNNSDataLayout = 131072
+	BNNSDataLayoutColumnMajorMatrix             BNNSDataLayout = 131073
+	BNNSDataLayout2DLastMajor                   BNNSDataLayout = 163840
+	BNNSDataLayout2DFirstMajor                  BNNSDataLayout = 163841
+	BNNSDataLayoutFullyConnectedSparse          BNNSDataLayout = 135169
+	BNNSDataLayoutImageCHW                      BNNSDataLayout = 196608
+	BNNSDataLayoutSNE                           BNNSDataLayout = 196609
+	BNNSDataLayoutNSE                           BNNSDataLayout = 196610
+	BNNSDataLayoutMHA_DHK                       BNNSDataLayout = 196611
+	BNNSDataLayout3DLastMajor                   BNNSDataLayout = 229376
+	BNNSDataLayout3DFirstMajor                  BNNSDataLayout = 229377
+	BNNSDataLayoutConvolutionWeightsOIHW        BNNSDataLayout = 262144
+	BNNSDataLayoutConvolutionWeightsOIHrWr      BNNSDataLayout = 262145
+	BNNSDataLayoutConvolutionWeightsIOHrWr      BNNSDataLayout = 262146
+	BNNSDataLayoutConvolutionWeightsOIHW_Pack32 BNNSDataLayout = 262160
+	BNNSDataLayout4DLastMajor                   BNNSDataLayout = 294912
+	BNNSDataLayout4DFirstMajor                  BNNSDataLayout = 294913
+	BNNSDataLayout5DLastMajor                   BNNSDataLayout = 360448
+	BNNSDataLayout5DFirstMajor                  BNNSDataLayout = 360449
+	BNNSDataLayout6DLastMajor                   BNNSDataLayout = 425984
+	BNNSDataLayout6DFirstMajor                  BNNSDataLayout = 425985
+	BNNSDataLayout7DLastMajor                   BNNSDataLayout = 491520
+	BNNSDataLayout7DFirstMajor                  BNNSDataLayout = 491521
+	BNNSDataLayout8DLastMajor                   BNNSDataLayout = 557056
+	BNNSDataLayout8DFirstMajor                  BNNSDataLayout = 557057
+)
+
+// String returns the BNNSDataLayout constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSDataLayout) String() string {
+	switch e {
+	case BNNSDataLayoutVector:
+		return "BNNSDataLayoutVector"
+	case BNNSDataLayout1DLastMajor:
+		return "BNNSDataLayout1DLastMajor"
+	case BNNSDataLayout1DFirstMajor:
+		return "BNNSDataLayout1DFirstMajor"
+	case BNNSDataLayoutRowMajorMatrix:
+		return "BNNSDataLayoutRowMajorMatrix"
+	case BNNSDataLayoutColumnMajorMatrix:
+		return "BNNSDataLayoutColumnMajorMatrix"
+	case BNNSDataLayout2DLastMajor:
+		return "BNNSDataLayout2DLastMajor"
+	case BNNSDataLayout2DFirstMajor:
+		return "BNNSDataLayout2DFirstMajor"
+	case BNNSDataLayoutFullyConnectedSparse:
+		return "BNNSDataLayoutFullyConnectedSparse"
+	case BNNSDataLayoutImageCHW:
+		return "BNNSDataLayoutImageCHW"
+	case BNNSDataLayoutSNE:
+		return "BNNSDataLayoutSNE"
+	case BNNSDataLayoutNSE:
+		return "BNNSDataLayoutNSE"
+	case BNNSDataLayoutMHA_DHK:
+		return "BNNSDataLayoutMHA_DHK"
+	case BNNSDataLayout3DLastMajor:
+		return "BNNSDataLayout3DLastMajor"
+	case BNNSDataLayout3DFirstMajor:
+		return "BNNSDataLayout3DFirstMajor"
+	case BNNSDataLayoutConvolutionWeightsOIHW:
+		return "BNNSDataLayoutConvolutionWeightsOIHW"
+	case BNNSDataLayoutConvolutionWeightsOIHrWr:
+		return "BNNSDataLayoutConvolutionWeightsOIHrWr"
+	case BNNSDataLayoutConvolutionWeightsIOHrWr:
+		return "BNNSDataLayoutConvolutionWeightsIOHrWr"
+	case BNNSDataLayoutConvolutionWeightsOIHW_Pack32:
+		return "BNNSDataLayoutConvolutionWeightsOIHW_Pack32"
+	case BNNSDataLayout4DLastMajor:
+		return "BNNSDataLayout4DLastMajor"
+	case BNNSDataLayout4DFirstMajor:
+		return "BNNSDataLayout4DFirstMajor"
+	case BNNSDataLayout5DLastMajor:
+		return "BNNSDataLayout5DLastMajor"
+	case BNNSDataLayout5DFirstMajor:
+		return "BNNSDataLayout5DFirstMajor"
+	case BNNSDataLayout6DLastMajor:
+		return "BNNSDataLayout6DLastMajor"
+	case BNNSDataLayout6DFirstMajor:
+		return "BNNSDataLayout6DFirstMajor"
+	case BNNSDataLayout7DLastMajor:
+		return "BNNSDataLayout7DLastMajor"
+	case BNNSDataLayout7DFirstMajor:
+		return "BNNSDataLayout7DFirstMajor"
+	case BNNSDataLayout8DLastMajor:
+		return "BNNSDataLayout8DLastMajor"
+	case BNNSDataLayout8DFirstMajor:
+		return "BNNSDataLayout8DFirstMajor"
+	default:
+		return fmt.Sprintf("BNNSDataLayout(%d)", int64(e))
+	}
+}
+
+type BNNSDataType int64
+
+const (
+	BNNSDataTypeFloatBit         BNNSDataType = 65536
+	BNNSDataTypeFloat16          BNNSDataType = 65552
+	BNNSDataTypeFloat32          BNNSDataType = 65568
+	BNNSDataTypeBFloat16         BNNSDataType = 98320
+	BNNSDataTypeIntBit           BNNSDataType = 131072
+	BNNSDataTypeInt1             BNNSDataType = 131073
+	BNNSDataTypeInt2             BNNSDataType = 131074
+	BNNSDataTypeInt4             BNNSDataType = 131076
+	BNNSDataTypeInt8             BNNSDataType = 131080
+	BNNSDataTypeInt16            BNNSDataType = 131088
+	BNNSDataTypeInt32            BNNSDataType = 131104
+	BNNSDataTypeInt64            BNNSDataType = 131136
+	BNNSDataTypeUIntBit          BNNSDataType = 262144
+	BNNSDataTypeUInt1            BNNSDataType = 262145
+	BNNSDataTypeUInt2            BNNSDataType = 262146
+	BNNSDataTypeUInt3            BNNSDataType = 262147
+	BNNSDataTypeUInt4            BNNSDataType = 262148
+	BNNSDataTypeUInt6            BNNSDataType = 262150
+	BNNSDataTypeUInt8            BNNSDataType = 262152
+	BNNSDataTypeUInt16           BNNSDataType = 262160
+	BNNSDataTypeUInt32           BNNSDataType = 262176
+	BNNSDataTypeUInt64           BNNSDataType = 262208
+	BNNSDataTypeIndexedBit       BNNSDataType = 524288
+	BNNSDataTypeIndexed1         BNNSDataType = 524289
+	BNNSDataTypeIndexed2         BNNSDataType = 524290
+	BNNSDataTypeIndexed4         BNNSDataType = 524292
+	BNNSDataTypeIndexed8         BNNSDataType = 524296
+	BNNSDataTypeMiscellaneousBit BNNSDataType = 1048576
+	BNNSDataTypeBoolean          BNNSDataType = 1048584
+)
+
+// String returns the BNNSDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSDataType) String() string {
+	switch e {
+	case BNNSDataTypeFloatBit:
+		return "BNNSDataTypeFloatBit"
+	case BNNSDataTypeFloat16:
+		return "BNNSDataTypeFloat16"
+	case BNNSDataTypeFloat32:
+		return "BNNSDataTypeFloat32"
+	case BNNSDataTypeBFloat16:
+		return "BNNSDataTypeBFloat16"
+	case BNNSDataTypeIntBit:
+		return "BNNSDataTypeIntBit"
+	case BNNSDataTypeInt1:
+		return "BNNSDataTypeInt1"
+	case BNNSDataTypeInt2:
+		return "BNNSDataTypeInt2"
+	case BNNSDataTypeInt4:
+		return "BNNSDataTypeInt4"
+	case BNNSDataTypeInt8:
+		return "BNNSDataTypeInt8"
+	case BNNSDataTypeInt16:
+		return "BNNSDataTypeInt16"
+	case BNNSDataTypeInt32:
+		return "BNNSDataTypeInt32"
+	case BNNSDataTypeInt64:
+		return "BNNSDataTypeInt64"
+	case BNNSDataTypeUIntBit:
+		return "BNNSDataTypeUIntBit"
+	case BNNSDataTypeUInt1:
+		return "BNNSDataTypeUInt1"
+	case BNNSDataTypeUInt2:
+		return "BNNSDataTypeUInt2"
+	case BNNSDataTypeUInt3:
+		return "BNNSDataTypeUInt3"
+	case BNNSDataTypeUInt4:
+		return "BNNSDataTypeUInt4"
+	case BNNSDataTypeUInt6:
+		return "BNNSDataTypeUInt6"
+	case BNNSDataTypeUInt8:
+		return "BNNSDataTypeUInt8"
+	case BNNSDataTypeUInt16:
+		return "BNNSDataTypeUInt16"
+	case BNNSDataTypeUInt32:
+		return "BNNSDataTypeUInt32"
+	case BNNSDataTypeUInt64:
+		return "BNNSDataTypeUInt64"
+	case BNNSDataTypeIndexedBit:
+		return "BNNSDataTypeIndexedBit"
+	case BNNSDataTypeIndexed1:
+		return "BNNSDataTypeIndexed1"
+	case BNNSDataTypeIndexed2:
+		return "BNNSDataTypeIndexed2"
+	case BNNSDataTypeIndexed4:
+		return "BNNSDataTypeIndexed4"
+	case BNNSDataTypeIndexed8:
+		return "BNNSDataTypeIndexed8"
+	case BNNSDataTypeMiscellaneousBit:
+		return "BNNSDataTypeMiscellaneousBit"
+	case BNNSDataTypeBoolean:
+		return "BNNSDataTypeBoolean"
+	default:
+		return fmt.Sprintf("BNNSDataType(%d)", int64(e))
+	}
+}
+
+type BNNSDescriptorType int64
+
+const (
+	BNNSConstant  BNNSDescriptorType = 0
+	BNNSSample    BNNSDescriptorType = 1
+	BNNSParameter BNNSDescriptorType = 2
+)
+
+// String returns the BNNSDescriptorType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSDescriptorType) String() string {
+	switch e {
+	case BNNSConstant:
+		return "BNNSConstant"
+	case BNNSSample:
+		return "BNNSSample"
+	case BNNSParameter:
+		return "BNNSParameter"
+	default:
+		return fmt.Sprintf("BNNSDescriptorType(%d)", int64(e))
+	}
+}
+
+type BNNSEmbeddingFlags int64
+
+const (
+	BNNSEmbeddingFlagScaleGradientByFrequency BNNSEmbeddingFlags = 1
+)
+
+// String returns the BNNSEmbeddingFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSEmbeddingFlags) String() string {
+	switch e {
+	case BNNSEmbeddingFlagScaleGradientByFrequency:
+		return "BNNSEmbeddingFlagScaleGradientByFrequency"
+	default:
+		return fmt.Sprintf("BNNSEmbeddingFlags(%d)", int64(e))
+	}
+}
+
+type BNNSFilterType int64
+
+const (
+	BNNSConvolution           BNNSFilterType = 0
+	BNNSFullyConnected        BNNSFilterType = 1
+	BNNSBatchNorm             BNNSFilterType = 2
+	BNNSInstanceNorm          BNNSFilterType = 3
+	BNNSLayerNorm             BNNSFilterType = 4
+	BNNSGroupNorm             BNNSFilterType = 5
+	BNNSTransposedConvolution BNNSFilterType = 6
+	BNNSQuantization          BNNSFilterType = 7
+	BNNSArithmetic            BNNSFilterType = 8
+)
+
+// String returns the BNNSFilterType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSFilterType) String() string {
+	switch e {
+	case BNNSConvolution:
+		return "BNNSConvolution"
+	case BNNSFullyConnected:
+		return "BNNSFullyConnected"
+	case BNNSBatchNorm:
+		return "BNNSBatchNorm"
+	case BNNSInstanceNorm:
+		return "BNNSInstanceNorm"
+	case BNNSLayerNorm:
+		return "BNNSLayerNorm"
+	case BNNSGroupNorm:
+		return "BNNSGroupNorm"
+	case BNNSTransposedConvolution:
+		return "BNNSTransposedConvolution"
+	case BNNSQuantization:
+		return "BNNSQuantization"
+	case BNNSArithmetic:
+		return "BNNSArithmetic"
+	default:
+		return fmt.Sprintf("BNNSFilterType(%d)", int64(e))
+	}
+}
+
+type BNNSFlags int64
+
+const (
+	BNNSFlagsUseClientPtr BNNSFlags = 1
+)
+
+// String returns the BNNSFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSFlags) String() string {
+	switch e {
+	case BNNSFlagsUseClientPtr:
+		return "BNNSFlagsUseClientPtr"
+	default:
+		return fmt.Sprintf("BNNSFlags(%d)", int64(e))
+	}
+}
+
+type BNNSGraphArgumentIntent int64
+
+const (
+	BNNSGraphArgumentIntentIn    BNNSGraphArgumentIntent = 1
+	BNNSGraphArgumentIntentOut   BNNSGraphArgumentIntent = 2
+	BNNSGraphArgumentIntentInOut BNNSGraphArgumentIntent = 3
+)
+
+// String returns the BNNSGraphArgumentIntent constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSGraphArgumentIntent) String() string {
+	switch e {
+	case BNNSGraphArgumentIntentIn:
+		return "BNNSGraphArgumentIntentIn"
+	case BNNSGraphArgumentIntentOut:
+		return "BNNSGraphArgumentIntentOut"
+	case BNNSGraphArgumentIntentInOut:
+		return "BNNSGraphArgumentIntentInOut"
+	default:
+		return fmt.Sprintf("BNNSGraphArgumentIntent(%d)", int64(e))
+	}
+}
+
+type BNNSGraphArgumentType int64
+
+const (
+	BNNSGraphArgumentTypePointer BNNSGraphArgumentType = 0
+	BNNSGraphArgumentTypeTensor  BNNSGraphArgumentType = 2
+)
+
+// String returns the BNNSGraphArgumentType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSGraphArgumentType) String() string {
+	switch e {
+	case BNNSGraphArgumentTypePointer:
+		return "BNNSGraphArgumentTypePointer"
+	case BNNSGraphArgumentTypeTensor:
+		return "BNNSGraphArgumentTypeTensor"
+	default:
+		return fmt.Sprintf("BNNSGraphArgumentType(%d)", int64(e))
+	}
+}
+
+type BNNSGraphMessageLevel int64
+
+const (
+	BNNSGraphMessageLevelInfo        BNNSGraphMessageLevel = 1
+	BNNSGraphMessageLevelUnsupported BNNSGraphMessageLevel = 2
+	BNNSGraphMessageLevelWarning     BNNSGraphMessageLevel = 4
+	BNNSGraphMessageLevelError       BNNSGraphMessageLevel = 8
+)
+
+// String returns the BNNSGraphMessageLevel constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSGraphMessageLevel) String() string {
+	switch e {
+	case BNNSGraphMessageLevelInfo:
+		return "BNNSGraphMessageLevelInfo"
+	case BNNSGraphMessageLevelUnsupported:
+		return "BNNSGraphMessageLevelUnsupported"
+	case BNNSGraphMessageLevelWarning:
+		return "BNNSGraphMessageLevelWarning"
+	case BNNSGraphMessageLevelError:
+		return "BNNSGraphMessageLevelError"
+	default:
+		return fmt.Sprintf("BNNSGraphMessageLevel(%d)", int64(e))
+	}
+}
+
+type BNNSGraphOptimizationPreference int64
+
+const (
+	BNNSGraphOptimizationPreferencePerformance BNNSGraphOptimizationPreference = 0
+	BNNSGraphOptimizationPreferenceIRSize      BNNSGraphOptimizationPreference = 1
+)
+
+// String returns the BNNSGraphOptimizationPreference constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSGraphOptimizationPreference) String() string {
+	switch e {
+	case BNNSGraphOptimizationPreferencePerformance:
+		return "BNNSGraphOptimizationPreferencePerformance"
+	case BNNSGraphOptimizationPreferenceIRSize:
+		return "BNNSGraphOptimizationPreferenceIRSize"
+	default:
+		return fmt.Sprintf("BNNSGraphOptimizationPreference(%d)", int64(e))
+	}
+}
+
+type BNNSInterpolationMethod int64
+
+const (
+	BNNSInterpolationMethodNearest BNNSInterpolationMethod = 0
+	BNNSInterpolationMethodLinear  BNNSInterpolationMethod = 1
+)
+
+// String returns the BNNSInterpolationMethod constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSInterpolationMethod) String() string {
+	switch e {
+	case BNNSInterpolationMethodNearest:
+		return "BNNSInterpolationMethodNearest"
+	case BNNSInterpolationMethodLinear:
+		return "BNNSInterpolationMethodLinear"
+	default:
+		return fmt.Sprintf("BNNSInterpolationMethod(%d)", int64(e))
+	}
+}
+
+type BNNSLayerFlags int64
+
+const (
+	BNNSLayerFlagsLSTMBidirectional      BNNSLayerFlags = 1
+	BNNSLayerFlagsLSTMDefaultActivations BNNSLayerFlags = 2
+)
+
+// String returns the BNNSLayerFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSLayerFlags) String() string {
+	switch e {
+	case BNNSLayerFlagsLSTMBidirectional:
+		return "BNNSLayerFlagsLSTMBidirectional"
+	case BNNSLayerFlagsLSTMDefaultActivations:
+		return "BNNSLayerFlagsLSTMDefaultActivations"
+	default:
+		return fmt.Sprintf("BNNSLayerFlags(%d)", int64(e))
+	}
+}
+
+type BNNSLinearSamplingMode int64
+
+const (
+	BNNSLinearSamplingDefault            BNNSLinearSamplingMode = 0
+	BNNSLinearSamplingAlignCorners       BNNSLinearSamplingMode = 1
+	BNNSLinearSamplingUnalignCorners     BNNSLinearSamplingMode = 2
+	BNNSLinearSamplingStrictAlignCorners BNNSLinearSamplingMode = 3
+	BNNSLinearSamplingOffsetCorners      BNNSLinearSamplingMode = 4
+)
+
+// String returns the BNNSLinearSamplingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSLinearSamplingMode) String() string {
+	switch e {
+	case BNNSLinearSamplingDefault:
+		return "BNNSLinearSamplingDefault"
+	case BNNSLinearSamplingAlignCorners:
+		return "BNNSLinearSamplingAlignCorners"
+	case BNNSLinearSamplingUnalignCorners:
+		return "BNNSLinearSamplingUnalignCorners"
+	case BNNSLinearSamplingStrictAlignCorners:
+		return "BNNSLinearSamplingStrictAlignCorners"
+	case BNNSLinearSamplingOffsetCorners:
+		return "BNNSLinearSamplingOffsetCorners"
+	default:
+		return fmt.Sprintf("BNNSLinearSamplingMode(%d)", int64(e))
+	}
+}
+
+type BNNSLossFunction int64
+
+const (
+	BNNSLossFunctionSoftmaxCrossEntropy     BNNSLossFunction = 1
+	BNNSLossFunctionSigmoidCrossEntropy     BNNSLossFunction = 2
+	BNNSLossFunctionMeanSquareError         BNNSLossFunction = 3
+	BNNSLossFunctionHuber                   BNNSLossFunction = 4
+	BNNSLossFunctionYolo                    BNNSLossFunction = 5
+	BNNSLossFunctionLog                     BNNSLossFunction = 6
+	BNNSLossFunctionCosineDistance          BNNSLossFunction = 7
+	BNNSLossFunctionHinge                   BNNSLossFunction = 8
+	BNNSLossFunctionMeanAbsoluteError       BNNSLossFunction = 9
+	BNNSLossFunctionCategoricalCrossEntropy BNNSLossFunction = 10
+)
+
+// String returns the BNNSLossFunction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSLossFunction) String() string {
+	switch e {
+	case BNNSLossFunctionSoftmaxCrossEntropy:
+		return "BNNSLossFunctionSoftmaxCrossEntropy"
+	case BNNSLossFunctionSigmoidCrossEntropy:
+		return "BNNSLossFunctionSigmoidCrossEntropy"
+	case BNNSLossFunctionMeanSquareError:
+		return "BNNSLossFunctionMeanSquareError"
+	case BNNSLossFunctionHuber:
+		return "BNNSLossFunctionHuber"
+	case BNNSLossFunctionYolo:
+		return "BNNSLossFunctionYolo"
+	case BNNSLossFunctionLog:
+		return "BNNSLossFunctionLog"
+	case BNNSLossFunctionCosineDistance:
+		return "BNNSLossFunctionCosineDistance"
+	case BNNSLossFunctionHinge:
+		return "BNNSLossFunctionHinge"
+	case BNNSLossFunctionMeanAbsoluteError:
+		return "BNNSLossFunctionMeanAbsoluteError"
+	case BNNSLossFunctionCategoricalCrossEntropy:
+		return "BNNSLossFunctionCategoricalCrossEntropy"
+	default:
+		return fmt.Sprintf("BNNSLossFunction(%d)", int64(e))
+	}
+}
+
+type BNNSLossReductionFunction int64
+
+const (
+	BNNSLossReductionNone              BNNSLossReductionFunction = 0
+	BNNSLossReductionSum               BNNSLossReductionFunction = 1
+	BNNSLossReductionWeightedMean      BNNSLossReductionFunction = 2
+	BNNSLossReductionMean              BNNSLossReductionFunction = 3
+	BNNSLossReductionNonZeroWeightMean BNNSLossReductionFunction = 4
+)
+
+// String returns the BNNSLossReductionFunction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSLossReductionFunction) String() string {
+	switch e {
+	case BNNSLossReductionNone:
+		return "BNNSLossReductionNone"
+	case BNNSLossReductionSum:
+		return "BNNSLossReductionSum"
+	case BNNSLossReductionWeightedMean:
+		return "BNNSLossReductionWeightedMean"
+	case BNNSLossReductionMean:
+		return "BNNSLossReductionMean"
+	case BNNSLossReductionNonZeroWeightMean:
+		return "BNNSLossReductionNonZeroWeightMean"
+	default:
+		return fmt.Sprintf("BNNSLossReductionFunction(%d)", int64(e))
+	}
+}
+
+type BNNSNDArrayFlags int64
+
+const (
+	BNNSNDArrayFlagBackpropSet        BNNSNDArrayFlags = 0
+	BNNSNDArrayFlagBackpropAccumulate BNNSNDArrayFlags = 1
+)
+
+// String returns the BNNSNDArrayFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSNDArrayFlags) String() string {
+	switch e {
+	case BNNSNDArrayFlagBackpropSet:
+		return "BNNSNDArrayFlagBackpropSet"
+	case BNNSNDArrayFlagBackpropAccumulate:
+		return "BNNSNDArrayFlagBackpropAccumulate"
+	default:
+		return fmt.Sprintf("BNNSNDArrayFlags(%d)", int64(e))
+	}
+}
+
+type BNNSNormType int64
+
+const (
+	BNNSL2Norm BNNSNormType = 1
+)
+
+// String returns the BNNSNormType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSNormType) String() string {
+	switch e {
+	case BNNSL2Norm:
+		return "BNNSL2Norm"
+	default:
+		return fmt.Sprintf("BNNSNormType(%d)", int64(e))
+	}
+}
+
+type BNNSOptimizerClippingFunction int64
+
+const (
+	BNNSOptimizerClippingNone         BNNSOptimizerClippingFunction = 0
+	BNNSOptimizerClippingByValue      BNNSOptimizerClippingFunction = 1
+	BNNSOptimizerClippingByNorm       BNNSOptimizerClippingFunction = 2
+	BNNSOptimizerClippingByGlobalNorm BNNSOptimizerClippingFunction = 3
+)
+
+// String returns the BNNSOptimizerClippingFunction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSOptimizerClippingFunction) String() string {
+	switch e {
+	case BNNSOptimizerClippingNone:
+		return "BNNSOptimizerClippingNone"
+	case BNNSOptimizerClippingByValue:
+		return "BNNSOptimizerClippingByValue"
+	case BNNSOptimizerClippingByNorm:
+		return "BNNSOptimizerClippingByNorm"
+	case BNNSOptimizerClippingByGlobalNorm:
+		return "BNNSOptimizerClippingByGlobalNorm"
+	default:
+		return fmt.Sprintf("BNNSOptimizerClippingFunction(%d)", int64(e))
+	}
+}
+
+type BNNSOptimizerFunction int64
+
+const (
+	BNNSOptimizerFunctionSGDMomentum              BNNSOptimizerFunction = 1
+	BNNSOptimizerFunctionAdam                     BNNSOptimizerFunction = 2
+	BNNSOptimizerFunctionRMSProp                  BNNSOptimizerFunction = 3
+	BNNSOptimizerFunctionAdamW                    BNNSOptimizerFunction = 4
+	BNNSOptimizerFunctionAdamAMSGrad              BNNSOptimizerFunction = 5
+	BNNSOptimizerFunctionAdamWAMSGrad             BNNSOptimizerFunction = 6
+	BNNSOptimizerFunctionSGDMomentumWithClipping  BNNSOptimizerFunction = 7
+	BNNSOptimizerFunctionAdamWithClipping         BNNSOptimizerFunction = 8
+	BNNSOptimizerFunctionRMSPropWithClipping      BNNSOptimizerFunction = 9
+	BNNSOptimizerFunctionAdamWWithClipping        BNNSOptimizerFunction = 10
+	BNNSOptimizerFunctionAdamAMSGradWithClipping  BNNSOptimizerFunction = 11
+	BNNSOptimizerFunctionAdamWAMSGradWithClipping BNNSOptimizerFunction = 12
+)
+
+// String returns the BNNSOptimizerFunction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSOptimizerFunction) String() string {
+	switch e {
+	case BNNSOptimizerFunctionSGDMomentum:
+		return "BNNSOptimizerFunctionSGDMomentum"
+	case BNNSOptimizerFunctionAdam:
+		return "BNNSOptimizerFunctionAdam"
+	case BNNSOptimizerFunctionRMSProp:
+		return "BNNSOptimizerFunctionRMSProp"
+	case BNNSOptimizerFunctionAdamW:
+		return "BNNSOptimizerFunctionAdamW"
+	case BNNSOptimizerFunctionAdamAMSGrad:
+		return "BNNSOptimizerFunctionAdamAMSGrad"
+	case BNNSOptimizerFunctionAdamWAMSGrad:
+		return "BNNSOptimizerFunctionAdamWAMSGrad"
+	case BNNSOptimizerFunctionSGDMomentumWithClipping:
+		return "BNNSOptimizerFunctionSGDMomentumWithClipping"
+	case BNNSOptimizerFunctionAdamWithClipping:
+		return "BNNSOptimizerFunctionAdamWithClipping"
+	case BNNSOptimizerFunctionRMSPropWithClipping:
+		return "BNNSOptimizerFunctionRMSPropWithClipping"
+	case BNNSOptimizerFunctionAdamWWithClipping:
+		return "BNNSOptimizerFunctionAdamWWithClipping"
+	case BNNSOptimizerFunctionAdamAMSGradWithClipping:
+		return "BNNSOptimizerFunctionAdamAMSGradWithClipping"
+	case BNNSOptimizerFunctionAdamWAMSGradWithClipping:
+		return "BNNSOptimizerFunctionAdamWAMSGradWithClipping"
+	default:
+		return fmt.Sprintf("BNNSOptimizerFunction(%d)", int64(e))
+	}
+}
+
+type BNNSOptimizerRegularizationFunction int64
+
+const (
+	BNNSOptimizerRegularizationNone BNNSOptimizerRegularizationFunction = 0
+	BNNSOptimizerRegularizationL1   BNNSOptimizerRegularizationFunction = 1
+	BNNSOptimizerRegularizationL2   BNNSOptimizerRegularizationFunction = 2
+)
+
+// String returns the BNNSOptimizerRegularizationFunction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSOptimizerRegularizationFunction) String() string {
+	switch e {
+	case BNNSOptimizerRegularizationNone:
+		return "BNNSOptimizerRegularizationNone"
+	case BNNSOptimizerRegularizationL1:
+		return "BNNSOptimizerRegularizationL1"
+	case BNNSOptimizerRegularizationL2:
+		return "BNNSOptimizerRegularizationL2"
+	default:
+		return fmt.Sprintf("BNNSOptimizerRegularizationFunction(%d)", int64(e))
+	}
+}
+
+type BNNSOptimizerSGDMomentumVariant int64
+
+const (
+	BNNSSGDMomentumVariant0 BNNSOptimizerSGDMomentumVariant = 0
+	BNNSSGDMomentumVariant1 BNNSOptimizerSGDMomentumVariant = 1
+	BNNSSGDMomentumVariant2 BNNSOptimizerSGDMomentumVariant = 2
+)
+
+// String returns the BNNSOptimizerSGDMomentumVariant constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSOptimizerSGDMomentumVariant) String() string {
+	switch e {
+	case BNNSSGDMomentumVariant0:
+		return "BNNSSGDMomentumVariant0"
+	case BNNSSGDMomentumVariant1:
+		return "BNNSSGDMomentumVariant1"
+	case BNNSSGDMomentumVariant2:
+		return "BNNSSGDMomentumVariant2"
+	default:
+		return fmt.Sprintf("BNNSOptimizerSGDMomentumVariant(%d)", int64(e))
+	}
+}
+
+type BNNSPaddingMode int64
+
+const (
+	BNNSPaddingModeConstant  BNNSPaddingMode = 0
+	BNNSPaddingModeReflect   BNNSPaddingMode = 1
+	BNNSPaddingModeSymmetric BNNSPaddingMode = 2
+)
+
+// String returns the BNNSPaddingMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSPaddingMode) String() string {
+	switch e {
+	case BNNSPaddingModeConstant:
+		return "BNNSPaddingModeConstant"
+	case BNNSPaddingModeReflect:
+		return "BNNSPaddingModeReflect"
+	case BNNSPaddingModeSymmetric:
+		return "BNNSPaddingModeSymmetric"
+	default:
+		return fmt.Sprintf("BNNSPaddingMode(%d)", int64(e))
+	}
+}
+
+type BNNSPointerSpecifier int64
+
+const (
+	BNNSPointerSpecifierAlpha BNNSPointerSpecifier = 0
+	BNNSPointerSpecifierBeta  BNNSPointerSpecifier = 1
+)
+
+// String returns the BNNSPointerSpecifier constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSPointerSpecifier) String() string {
+	switch e {
+	case BNNSPointerSpecifierAlpha:
+		return "BNNSPointerSpecifierAlpha"
+	case BNNSPointerSpecifierBeta:
+		return "BNNSPointerSpecifierBeta"
+	default:
+		return fmt.Sprintf("BNNSPointerSpecifier(%d)", int64(e))
+	}
+}
+
+type BNNSPoolingFunction int64
+
+const (
+	BNNSPoolingFunctionMax                        BNNSPoolingFunction = 0
+	BNNSPoolingFunctionAverageCountIncludePadding BNNSPoolingFunction = 1
+	BNNSPoolingFunctionAverageCountExcludePadding BNNSPoolingFunction = 2
+	BNNSPoolingFunctionUnMax                      BNNSPoolingFunction = 3
+	BNNSPoolingFunctionL2Norm                     BNNSPoolingFunction = 4
+	// Deprecated: since macOS 11.0.
+	BNNSPoolingFunctionAverage BNNSPoolingFunction = 1
+)
+
+// String returns the BNNSPoolingFunction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSPoolingFunction) String() string {
+	switch e {
+	case BNNSPoolingFunctionMax:
+		return "BNNSPoolingFunctionMax"
+	case BNNSPoolingFunctionAverageCountIncludePadding:
+		return "BNNSPoolingFunctionAverageCountIncludePadding"
+	case BNNSPoolingFunctionAverageCountExcludePadding:
+		return "BNNSPoolingFunctionAverageCountExcludePadding"
+	case BNNSPoolingFunctionUnMax:
+		return "BNNSPoolingFunctionUnMax"
+	case BNNSPoolingFunctionL2Norm:
+		return "BNNSPoolingFunctionL2Norm"
+	default:
+		return fmt.Sprintf("BNNSPoolingFunction(%d)", int64(e))
+	}
+}
+
+type BNNSQuantizerFunction int64
+
+const (
+	BNNSQuantizerFunctionQuantize   BNNSQuantizerFunction = 0
+	BNNSQuantizerFunctionDequantize BNNSQuantizerFunction = 1
+)
+
+// String returns the BNNSQuantizerFunction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSQuantizerFunction) String() string {
+	switch e {
+	case BNNSQuantizerFunctionQuantize:
+		return "BNNSQuantizerFunctionQuantize"
+	case BNNSQuantizerFunctionDequantize:
+		return "BNNSQuantizerFunctionDequantize"
+	default:
+		return fmt.Sprintf("BNNSQuantizerFunction(%d)", int64(e))
+	}
+}
+
+type BNNSRandomGeneratorMethod int64
+
+const (
+	BNNSRandomGeneratorMethodAES_CTR BNNSRandomGeneratorMethod = 0
+)
+
+// String returns the BNNSRandomGeneratorMethod constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSRandomGeneratorMethod) String() string {
+	switch e {
+	case BNNSRandomGeneratorMethodAES_CTR:
+		return "BNNSRandomGeneratorMethodAES_CTR"
+	default:
+		return fmt.Sprintf("BNNSRandomGeneratorMethod(%d)", int64(e))
+	}
+}
+
+type BNNSReduceFunction int64
+
+const (
+	BNNSReduceFunctionMax         BNNSReduceFunction = 0
+	BNNSReduceFunctionMin         BNNSReduceFunction = 1
+	BNNSReduceFunctionArgMax      BNNSReduceFunction = 2
+	BNNSReduceFunctionArgMin      BNNSReduceFunction = 3
+	BNNSReduceFunctionMean        BNNSReduceFunction = 4
+	BNNSReduceFunctionMeanNonZero BNNSReduceFunction = 5
+	BNNSReduceFunctionSum         BNNSReduceFunction = 6
+	BNNSReduceFunctionSumSquare   BNNSReduceFunction = 7
+	BNNSReduceFunctionSumLog      BNNSReduceFunction = 8
+	BNNSReduceFunctionL1Norm      BNNSReduceFunction = 9
+	BNNSReduceFunctionLogicalOr   BNNSReduceFunction = 10
+	BNNSReduceFunctionLogicalAnd  BNNSReduceFunction = 11
+	BNNSReduceFunctionL2Norm      BNNSReduceFunction = 12
+	BNNSReduceFunctionLogSumExp   BNNSReduceFunction = 13
+	BNNSReduceFunctionProduct     BNNSReduceFunction = 14
+	BNNSReduceFunctionNone        BNNSReduceFunction = 15
+	BNNSReduceFunctionLogSum      BNNSReduceFunction = 16
+	BNNSReduceFunctionAny         BNNSReduceFunction = 10
+	BNNSReduceFunctionAll         BNNSReduceFunction = 11
+)
+
+// String returns the BNNSReduceFunction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSReduceFunction) String() string {
+	switch e {
+	case BNNSReduceFunctionMax:
+		return "BNNSReduceFunctionMax"
+	case BNNSReduceFunctionMin:
+		return "BNNSReduceFunctionMin"
+	case BNNSReduceFunctionArgMax:
+		return "BNNSReduceFunctionArgMax"
+	case BNNSReduceFunctionArgMin:
+		return "BNNSReduceFunctionArgMin"
+	case BNNSReduceFunctionMean:
+		return "BNNSReduceFunctionMean"
+	case BNNSReduceFunctionMeanNonZero:
+		return "BNNSReduceFunctionMeanNonZero"
+	case BNNSReduceFunctionSum:
+		return "BNNSReduceFunctionSum"
+	case BNNSReduceFunctionSumSquare:
+		return "BNNSReduceFunctionSumSquare"
+	case BNNSReduceFunctionSumLog:
+		return "BNNSReduceFunctionSumLog"
+	case BNNSReduceFunctionL1Norm:
+		return "BNNSReduceFunctionL1Norm"
+	case BNNSReduceFunctionLogicalOr:
+		return "BNNSReduceFunctionLogicalOr"
+	case BNNSReduceFunctionLogicalAnd:
+		return "BNNSReduceFunctionLogicalAnd"
+	case BNNSReduceFunctionL2Norm:
+		return "BNNSReduceFunctionL2Norm"
+	case BNNSReduceFunctionLogSumExp:
+		return "BNNSReduceFunctionLogSumExp"
+	case BNNSReduceFunctionProduct:
+		return "BNNSReduceFunctionProduct"
+	case BNNSReduceFunctionNone:
+		return "BNNSReduceFunctionNone"
+	case BNNSReduceFunctionLogSum:
+		return "BNNSReduceFunctionLogSum"
+	default:
+		return fmt.Sprintf("BNNSReduceFunction(%d)", int64(e))
+	}
+}
+
+type BNNSRelationalOperator int64
+
+const (
+	BNNSRelationalOperatorEqual        BNNSRelationalOperator = 0
+	BNNSRelationalOperatorLess         BNNSRelationalOperator = 1
+	BNNSRelationalOperatorLessEqual    BNNSRelationalOperator = 2
+	BNNSRelationalOperatorGreater      BNNSRelationalOperator = 3
+	BNNSRelationalOperatorGreaterEqual BNNSRelationalOperator = 4
+	BNNSRelationalOperatorNotEqual     BNNSRelationalOperator = 5
+	BNNSRelationalOperatorLogicalAND   BNNSRelationalOperator = 6
+	BNNSRelationalOperatorLogicalOR    BNNSRelationalOperator = 7
+	BNNSRelationalOperatorLogicalNOT   BNNSRelationalOperator = 8
+	BNNSRelationalOperatorLogicalNAND  BNNSRelationalOperator = 9
+	BNNSRelationalOperatorLogicalNOR   BNNSRelationalOperator = 10
+	BNNSRelationalOperatorLogicalXOR   BNNSRelationalOperator = 11
+)
+
+// String returns the BNNSRelationalOperator constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSRelationalOperator) String() string {
+	switch e {
+	case BNNSRelationalOperatorEqual:
+		return "BNNSRelationalOperatorEqual"
+	case BNNSRelationalOperatorLess:
+		return "BNNSRelationalOperatorLess"
+	case BNNSRelationalOperatorLessEqual:
+		return "BNNSRelationalOperatorLessEqual"
+	case BNNSRelationalOperatorGreater:
+		return "BNNSRelationalOperatorGreater"
+	case BNNSRelationalOperatorGreaterEqual:
+		return "BNNSRelationalOperatorGreaterEqual"
+	case BNNSRelationalOperatorNotEqual:
+		return "BNNSRelationalOperatorNotEqual"
+	case BNNSRelationalOperatorLogicalAND:
+		return "BNNSRelationalOperatorLogicalAND"
+	case BNNSRelationalOperatorLogicalOR:
+		return "BNNSRelationalOperatorLogicalOR"
+	case BNNSRelationalOperatorLogicalNOT:
+		return "BNNSRelationalOperatorLogicalNOT"
+	case BNNSRelationalOperatorLogicalNAND:
+		return "BNNSRelationalOperatorLogicalNAND"
+	case BNNSRelationalOperatorLogicalNOR:
+		return "BNNSRelationalOperatorLogicalNOR"
+	case BNNSRelationalOperatorLogicalXOR:
+		return "BNNSRelationalOperatorLogicalXOR"
+	default:
+		return fmt.Sprintf("BNNSRelationalOperator(%d)", int64(e))
+	}
+}
+
+type BNNSShuffleType int64
+
+const (
+	BNNSShuffleTypePixelShuffleNCHW   BNNSShuffleType = 0
+	BNNSShuffleTypePixelUnshuffleNCHW BNNSShuffleType = 1
+	BNNSShuffleTypeDepthToSpaceNCHW   BNNSShuffleType = 2
+	BNNSShuffleTypeSpaceToDepthNCHW   BNNSShuffleType = 3
+)
+
+// String returns the BNNSShuffleType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSShuffleType) String() string {
+	switch e {
+	case BNNSShuffleTypePixelShuffleNCHW:
+		return "BNNSShuffleTypePixelShuffleNCHW"
+	case BNNSShuffleTypePixelUnshuffleNCHW:
+		return "BNNSShuffleTypePixelUnshuffleNCHW"
+	case BNNSShuffleTypeDepthToSpaceNCHW:
+		return "BNNSShuffleTypeDepthToSpaceNCHW"
+	case BNNSShuffleTypeSpaceToDepthNCHW:
+		return "BNNSShuffleTypeSpaceToDepthNCHW"
+	default:
+		return fmt.Sprintf("BNNSShuffleType(%d)", int64(e))
+	}
+}
+
+type BNNSSparsityType int64
+
+const (
+	BNNSSparsityTypeUnstructured BNNSSparsityType = 0
+)
+
+// String returns the BNNSSparsityType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSSparsityType) String() string {
+	switch e {
+	case BNNSSparsityTypeUnstructured:
+		return "BNNSSparsityTypeUnstructured"
+	default:
+		return fmt.Sprintf("BNNSSparsityType(%d)", int64(e))
+	}
+}
+
+type BNNSTargetSystem int64
+
+const (
+	BNNSTargetSystemGeneric BNNSTargetSystem = 0
+)
+
+// String returns the BNNSTargetSystem constant's name, or its numeric form when the
+// value is not a known constant.
+func (e BNNSTargetSystem) String() string {
+	switch e {
+	case BNNSTargetSystemGeneric:
+		return "BNNSTargetSystemGeneric"
+	default:
+		return fmt.Sprintf("BNNSTargetSystem(%d)", int64(e))
+	}
+}
+
+type CblasDiag int64
+
+const (
+	CblasNonUnit CblasDiag = 131
+	CblasUnit    CblasDiag = 132
+)
+
+// String returns the CblasDiag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CblasDiag) String() string {
+	switch e {
+	case CblasNonUnit:
+		return "CblasNonUnit"
+	case CblasUnit:
+		return "CblasUnit"
+	default:
+		return fmt.Sprintf("CblasDiag(%d)", int64(e))
+	}
+}
+
+type CblasSide int64
+
+const (
+	CblasLeft  CblasSide = 141
+	CblasRight CblasSide = 142
+)
+
+// String returns the CblasSide constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CblasSide) String() string {
+	switch e {
+	case CblasLeft:
+		return "CblasLeft"
+	case CblasRight:
+		return "CblasRight"
+	default:
+		return fmt.Sprintf("CblasSide(%d)", int64(e))
+	}
+}
+
+type CblasUplo int64
+
+const (
+	CblasUpper CblasUplo = 121
+	CblasLower CblasUplo = 122
+)
+
+// String returns the CblasUplo constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CblasUplo) String() string {
+	switch e {
+	case CblasUpper:
+		return "CblasUpper"
+	case CblasLower:
+		return "CblasLower"
+	default:
+		return fmt.Sprintf("CblasUplo(%d)", int64(e))
+	}
+}
+
+type Clockid int64
+
+const (
+	ClockidRealtime           Clockid = 0
+	ClockidMonotonic          Clockid = 6
+	ClockidMonotonicRaw       Clockid = 4
+	ClockidMonotonicRawApprox Clockid = 5
+	ClockidUptimeRaw          Clockid = 8
+	ClockidUptimeRawApprox    Clockid = 9
+	ClockidProcessCputimeID   Clockid = 12
+	ClockidThreadCputimeID    Clockid = 16
+)
+
+// String returns the Clockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Clockid) String() string {
+	switch e {
+	case ClockidRealtime:
+		return "ClockidRealtime"
+	case ClockidMonotonic:
+		return "ClockidMonotonic"
+	case ClockidMonotonicRaw:
+		return "ClockidMonotonicRaw"
+	case ClockidMonotonicRawApprox:
+		return "ClockidMonotonicRawApprox"
+	case ClockidUptimeRaw:
+		return "ClockidUptimeRaw"
+	case ClockidUptimeRawApprox:
+		return "ClockidUptimeRawApprox"
+	case ClockidProcessCputimeID:
+		return "ClockidProcessCputimeID"
+	case ClockidThreadCputimeID:
+		return "ClockidThreadCputimeID"
+	default:
+		return fmt.Sprintf("Clockid(%d)", int64(e))
+	}
+}
+
+type DispatchAutoreleaseFrequency uint64
+
+const (
+	DispatchAutoreleaseFrequencyInherit  DispatchAutoreleaseFrequency = 0
+	DispatchAutoreleaseFrequencyWorkItem DispatchAutoreleaseFrequency = 1
+	DispatchAutoreleaseFrequencyNever    DispatchAutoreleaseFrequency = 2
+)
+
+// String returns the DispatchAutoreleaseFrequency constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchAutoreleaseFrequency) String() string {
+	switch e {
+	case DispatchAutoreleaseFrequencyInherit:
+		return "DispatchAutoreleaseFrequencyInherit"
+	case DispatchAutoreleaseFrequencyWorkItem:
+		return "DispatchAutoreleaseFrequencyWorkItem"
+	case DispatchAutoreleaseFrequencyNever:
+		return "DispatchAutoreleaseFrequencyNever"
+	default:
+		return fmt.Sprintf("DispatchAutoreleaseFrequency(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type DispatchBlockFlags uint64
+
+const (
+	DispatchBlockFlagsBarrier         DispatchBlockFlags = 1
+	DispatchBlockFlagsDetached        DispatchBlockFlags = 2
+	DispatchBlockFlagsAssignCurrent   DispatchBlockFlags = 4
+	DispatchBlockFlagsNoQosClass      DispatchBlockFlags = 8
+	DispatchBlockFlagsInheritQosClass DispatchBlockFlags = 16
+	DispatchBlockFlagsEnforceQosClass DispatchBlockFlags = 32
+)
+
+// String returns the DispatchBlockFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e DispatchBlockFlags) String() string {
+	var parts []string
+	if e&DispatchBlockFlagsBarrier != 0 {
+		parts = append(parts, "DispatchBlockFlagsBarrier")
+	}
+	if e&DispatchBlockFlagsDetached != 0 {
+		parts = append(parts, "DispatchBlockFlagsDetached")
+	}
+	if e&DispatchBlockFlagsAssignCurrent != 0 {
+		parts = append(parts, "DispatchBlockFlagsAssignCurrent")
+	}
+	if e&DispatchBlockFlagsNoQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsNoQosClass")
+	}
+	if e&DispatchBlockFlagsInheritQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsInheritQosClass")
+	}
+	if e&DispatchBlockFlagsEnforceQosClass != 0 {
+		parts = append(parts, "DispatchBlockFlagsEnforceQosClass")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type EvCmd int64
+
+const (
+	EVNOP   EvCmd = 0
+	EVHIDE  EvCmd = 1
+	EVSHOW  EvCmd = 2
+	EVMOVE  EvCmd = 3
+	EVLEVEL EvCmd = 4
+)
+
+// String returns the EvCmd constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EvCmd) String() string {
+	switch e {
+	case EVNOP:
+		return "EVNOP"
+	case EVHIDE:
+		return "EVHIDE"
+	case EVSHOW:
+		return "EVSHOW"
+	case EVMOVE:
+		return "EVMOVE"
+	case EVLEVEL:
+		return "EVLEVEL"
+	default:
+		return fmt.Sprintf("EvCmd(%d)", int64(e))
+	}
+}
+
+type FilesecProperty int64
+
+const (
+	FilesecPropertyOwner        FilesecProperty = 1
+	FilesecPropertyGroup        FilesecProperty = 2
+	FilesecPropertyUUID         FilesecProperty = 3
+	FilesecPropertyMode         FilesecProperty = 4
+	FilesecPropertyACL          FilesecProperty = 5
+	FilesecPropertyGrpuuid      FilesecProperty = 6
+	FilesecPropertyACLRaw       FilesecProperty = 100
+	FilesecPropertyACLAllocsize FilesecProperty = 101
+)
+
+// String returns the FilesecProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FilesecProperty) String() string {
+	switch e {
+	case FilesecPropertyOwner:
+		return "FilesecPropertyOwner"
+	case FilesecPropertyGroup:
+		return "FilesecPropertyGroup"
+	case FilesecPropertyUUID:
+		return "FilesecPropertyUUID"
+	case FilesecPropertyMode:
+		return "FilesecPropertyMode"
+	case FilesecPropertyACL:
+		return "FilesecPropertyACL"
+	case FilesecPropertyGrpuuid:
+		return "FilesecPropertyGrpuuid"
+	case FilesecPropertyACLRaw:
+		return "FilesecPropertyACLRaw"
+	case FilesecPropertyACLAllocsize:
+		return "FilesecPropertyACLAllocsize"
+	default:
+		return fmt.Sprintf("FilesecProperty(%d)", int64(e))
+	}
+}
+
+type Idtype int64
+
+const (
+	IdtypeAll  Idtype = 0
+	IdtypePid  Idtype = 1
+	IdtypePgid Idtype = 2
+)
+
+// String returns the Idtype constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Idtype) String() string {
+	switch e {
+	case IdtypeAll:
+		return "IdtypeAll"
+	case IdtypePid:
+		return "IdtypePid"
+	case IdtypePgid:
+		return "IdtypePgid"
+	default:
+		return fmt.Sprintf("Idtype(%d)", int64(e))
+	}
+}
+
+type IpcInfoObjectType int64
+
+const (
+	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
+	IpcInfoObjectTypeThreadControl      IpcInfoObjectType = 1
+	IpcInfoObjectTypeTaskControl        IpcInfoObjectType = 2
+	IpcInfoObjectTypeHost               IpcInfoObjectType = 3
+	IpcInfoObjectTypeHostPriv           IpcInfoObjectType = 4
+	IpcInfoObjectTypeProcessor          IpcInfoObjectType = 5
+	IpcInfoObjectTypeProcessorSet       IpcInfoObjectType = 6
+	IpcInfoObjectTypeProcessorSetName   IpcInfoObjectType = 7
+	IpcInfoObjectTypeTimer              IpcInfoObjectType = 8
+	IpcInfoObjectTypePortSubstOnce      IpcInfoObjectType = 9
+	IpcInfoObjectTypeMig                IpcInfoObjectType = 10
+	IpcInfoObjectTypeMemoryObject       IpcInfoObjectType = 11
+	IpcInfoObjectTypeXmmPager           IpcInfoObjectType = 12
+	IpcInfoObjectTypeXmmKernel          IpcInfoObjectType = 13
+	IpcInfoObjectTypeXmmReply           IpcInfoObjectType = 14
+	IpcInfoObjectTypeUndReply           IpcInfoObjectType = 15
+	IpcInfoObjectTypeHostNotify         IpcInfoObjectType = 16
+	IpcInfoObjectTypeHostSecurity       IpcInfoObjectType = 17
+	IpcInfoObjectTypeLedger             IpcInfoObjectType = 18
+	IpcInfoObjectTypeMainDevice         IpcInfoObjectType = 19
+	IpcInfoObjectTypeTaskName           IpcInfoObjectType = 20
+	IpcInfoObjectTypeSubsystem          IpcInfoObjectType = 21
+	IpcInfoObjectTypeIODoneQueue        IpcInfoObjectType = 22
+	IpcInfoObjectTypeSemaphore          IpcInfoObjectType = 23
+	IpcInfoObjectTypeLockSet            IpcInfoObjectType = 24
+	IpcInfoObjectTypeClock              IpcInfoObjectType = 25
+	IpcInfoObjectTypeClockCtrl          IpcInfoObjectType = 26
+	IpcInfoObjectTypeIokitIdent         IpcInfoObjectType = 27
+	IpcInfoObjectTypeNamedEntry         IpcInfoObjectType = 28
+	IpcInfoObjectTypeIokitConnect       IpcInfoObjectType = 29
+	IpcInfoObjectTypeIokitObject        IpcInfoObjectType = 30
+	IpcInfoObjectTypeUpl                IpcInfoObjectType = 31
+	IpcInfoObjectTypeMemObjControl      IpcInfoObjectType = 32
+	IpcInfoObjectTypeAuSessionport      IpcInfoObjectType = 33
+	IpcInfoObjectTypeFileport           IpcInfoObjectType = 34
+	IpcInfoObjectTypeLabelh             IpcInfoObjectType = 35
+	IpcInfoObjectTypeTaskResume         IpcInfoObjectType = 36
+	IpcInfoObjectTypeVoucher            IpcInfoObjectType = 37
+	IpcInfoObjectTypeVoucherAttrControl IpcInfoObjectType = 38
+	IpcInfoObjectTypeWorkInterval       IpcInfoObjectType = 39
+	IpcInfoObjectTypeUxHandler          IpcInfoObjectType = 40
+	IpcInfoObjectTypeUextObject         IpcInfoObjectType = 41
+	IpcInfoObjectTypeArcadeReg          IpcInfoObjectType = 42
+	IpcInfoObjectTypeEventlink          IpcInfoObjectType = 43
+	IpcInfoObjectTypeTaskInspect        IpcInfoObjectType = 44
+	IpcInfoObjectTypeTaskRead           IpcInfoObjectType = 45
+	IpcInfoObjectTypeThreadInspect      IpcInfoObjectType = 46
+	IpcInfoObjectTypeThreadRead         IpcInfoObjectType = 47
+	IpcInfoObjectTypeSuidCred           IpcInfoObjectType = 48
+	IpcInfoObjectTypeHypervisor         IpcInfoObjectType = 49
+	IpcInfoObjectTypeTaskIDToken        IpcInfoObjectType = 50
+	IpcInfoObjectTypeTaskFatal          IpcInfoObjectType = 51
+	IpcInfoObjectTypeKcdata             IpcInfoObjectType = 52
+	IpcInfoObjectTypeExclavesResource   IpcInfoObjectType = 53
+	IpcInfoObjectTypeThreadResume       IpcInfoObjectType = 54
+	IpcInfoObjectTypeUnknown            IpcInfoObjectType = 4294967295
+)
+
+// String returns the IpcInfoObjectType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IpcInfoObjectType) String() string {
+	switch e {
+	case IpcInfoObjectTypeNone:
+		return "IpcInfoObjectTypeNone"
+	case IpcInfoObjectTypeThreadControl:
+		return "IpcInfoObjectTypeThreadControl"
+	case IpcInfoObjectTypeTaskControl:
+		return "IpcInfoObjectTypeTaskControl"
+	case IpcInfoObjectTypeHost:
+		return "IpcInfoObjectTypeHost"
+	case IpcInfoObjectTypeHostPriv:
+		return "IpcInfoObjectTypeHostPriv"
+	case IpcInfoObjectTypeProcessor:
+		return "IpcInfoObjectTypeProcessor"
+	case IpcInfoObjectTypeProcessorSet:
+		return "IpcInfoObjectTypeProcessorSet"
+	case IpcInfoObjectTypeProcessorSetName:
+		return "IpcInfoObjectTypeProcessorSetName"
+	case IpcInfoObjectTypeTimer:
+		return "IpcInfoObjectTypeTimer"
+	case IpcInfoObjectTypePortSubstOnce:
+		return "IpcInfoObjectTypePortSubstOnce"
+	case IpcInfoObjectTypeMig:
+		return "IpcInfoObjectTypeMig"
+	case IpcInfoObjectTypeMemoryObject:
+		return "IpcInfoObjectTypeMemoryObject"
+	case IpcInfoObjectTypeXmmPager:
+		return "IpcInfoObjectTypeXmmPager"
+	case IpcInfoObjectTypeXmmKernel:
+		return "IpcInfoObjectTypeXmmKernel"
+	case IpcInfoObjectTypeXmmReply:
+		return "IpcInfoObjectTypeXmmReply"
+	case IpcInfoObjectTypeUndReply:
+		return "IpcInfoObjectTypeUndReply"
+	case IpcInfoObjectTypeHostNotify:
+		return "IpcInfoObjectTypeHostNotify"
+	case IpcInfoObjectTypeHostSecurity:
+		return "IpcInfoObjectTypeHostSecurity"
+	case IpcInfoObjectTypeLedger:
+		return "IpcInfoObjectTypeLedger"
+	case IpcInfoObjectTypeMainDevice:
+		return "IpcInfoObjectTypeMainDevice"
+	case IpcInfoObjectTypeTaskName:
+		return "IpcInfoObjectTypeTaskName"
+	case IpcInfoObjectTypeSubsystem:
+		return "IpcInfoObjectTypeSubsystem"
+	case IpcInfoObjectTypeIODoneQueue:
+		return "IpcInfoObjectTypeIODoneQueue"
+	case IpcInfoObjectTypeSemaphore:
+		return "IpcInfoObjectTypeSemaphore"
+	case IpcInfoObjectTypeLockSet:
+		return "IpcInfoObjectTypeLockSet"
+	case IpcInfoObjectTypeClock:
+		return "IpcInfoObjectTypeClock"
+	case IpcInfoObjectTypeClockCtrl:
+		return "IpcInfoObjectTypeClockCtrl"
+	case IpcInfoObjectTypeIokitIdent:
+		return "IpcInfoObjectTypeIokitIdent"
+	case IpcInfoObjectTypeNamedEntry:
+		return "IpcInfoObjectTypeNamedEntry"
+	case IpcInfoObjectTypeIokitConnect:
+		return "IpcInfoObjectTypeIokitConnect"
+	case IpcInfoObjectTypeIokitObject:
+		return "IpcInfoObjectTypeIokitObject"
+	case IpcInfoObjectTypeUpl:
+		return "IpcInfoObjectTypeUpl"
+	case IpcInfoObjectTypeMemObjControl:
+		return "IpcInfoObjectTypeMemObjControl"
+	case IpcInfoObjectTypeAuSessionport:
+		return "IpcInfoObjectTypeAuSessionport"
+	case IpcInfoObjectTypeFileport:
+		return "IpcInfoObjectTypeFileport"
+	case IpcInfoObjectTypeLabelh:
+		return "IpcInfoObjectTypeLabelh"
+	case IpcInfoObjectTypeTaskResume:
+		return "IpcInfoObjectTypeTaskResume"
+	case IpcInfoObjectTypeVoucher:
+		return "IpcInfoObjectTypeVoucher"
+	case IpcInfoObjectTypeVoucherAttrControl:
+		return "IpcInfoObjectTypeVoucherAttrControl"
+	case IpcInfoObjectTypeWorkInterval:
+		return "IpcInfoObjectTypeWorkInterval"
+	case IpcInfoObjectTypeUxHandler:
+		return "IpcInfoObjectTypeUxHandler"
+	case IpcInfoObjectTypeUextObject:
+		return "IpcInfoObjectTypeUextObject"
+	case IpcInfoObjectTypeArcadeReg:
+		return "IpcInfoObjectTypeArcadeReg"
+	case IpcInfoObjectTypeEventlink:
+		return "IpcInfoObjectTypeEventlink"
+	case IpcInfoObjectTypeTaskInspect:
+		return "IpcInfoObjectTypeTaskInspect"
+	case IpcInfoObjectTypeTaskRead:
+		return "IpcInfoObjectTypeTaskRead"
+	case IpcInfoObjectTypeThreadInspect:
+		return "IpcInfoObjectTypeThreadInspect"
+	case IpcInfoObjectTypeThreadRead:
+		return "IpcInfoObjectTypeThreadRead"
+	case IpcInfoObjectTypeSuidCred:
+		return "IpcInfoObjectTypeSuidCred"
+	case IpcInfoObjectTypeHypervisor:
+		return "IpcInfoObjectTypeHypervisor"
+	case IpcInfoObjectTypeTaskIDToken:
+		return "IpcInfoObjectTypeTaskIDToken"
+	case IpcInfoObjectTypeTaskFatal:
+		return "IpcInfoObjectTypeTaskFatal"
+	case IpcInfoObjectTypeKcdata:
+		return "IpcInfoObjectTypeKcdata"
+	case IpcInfoObjectTypeExclavesResource:
+		return "IpcInfoObjectTypeExclavesResource"
+	case IpcInfoObjectTypeThreadResume:
+		return "IpcInfoObjectTypeThreadResume"
+	case IpcInfoObjectTypeUnknown:
+		return "IpcInfoObjectTypeUnknown"
+	default:
+		return fmt.Sprintf("IpcInfoObjectType(%d)", int64(e))
+	}
+}
+
+type LaunchDataType int64
+
+const (
+	LaunchDataTypeDictionary LaunchDataType = 1
+	LaunchDataTypeArray      LaunchDataType = 2
+	LaunchDataTypeFd         LaunchDataType = 3
+	LaunchDataTypeInteger    LaunchDataType = 4
+	LaunchDataTypeReal       LaunchDataType = 5
+	LaunchDataTypeBool       LaunchDataType = 6
+	LaunchDataTypeString     LaunchDataType = 7
+	LaunchDataTypeOpaque     LaunchDataType = 8
+	LaunchDataTypeErrno      LaunchDataType = 9
+	LaunchDataTypeMachport   LaunchDataType = 10
+)
+
+// String returns the LaunchDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LaunchDataType) String() string {
+	switch e {
+	case LaunchDataTypeDictionary:
+		return "LaunchDataTypeDictionary"
+	case LaunchDataTypeArray:
+		return "LaunchDataTypeArray"
+	case LaunchDataTypeFd:
+		return "LaunchDataTypeFd"
+	case LaunchDataTypeInteger:
+		return "LaunchDataTypeInteger"
+	case LaunchDataTypeReal:
+		return "LaunchDataTypeReal"
+	case LaunchDataTypeBool:
+		return "LaunchDataTypeBool"
+	case LaunchDataTypeString:
+		return "LaunchDataTypeString"
+	case LaunchDataTypeOpaque:
+		return "LaunchDataTypeOpaque"
+	case LaunchDataTypeErrno:
+		return "LaunchDataTypeErrno"
+	case LaunchDataTypeMachport:
+		return "LaunchDataTypeMachport"
+	default:
+		return fmt.Sprintf("LaunchDataType(%d)", int64(e))
+	}
+}
+
+// These constants are used to specify a domain to MDLabelCreate().
+type MDLabelDomain int64
+
+const (
+	KMDLabelUserDomain  MDLabelDomain = 0
+	KMDLabelLocalDomain MDLabelDomain = 1
+)
+
+// String returns the MDLabelDomain constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDLabelDomain) String() string {
+	switch e {
+	case KMDLabelUserDomain:
+		return "KMDLabelUserDomain"
+	case KMDLabelLocalDomain:
+		return "KMDLabelLocalDomain"
+	default:
+		return fmt.Sprintf("MDLabelDomain(%d)", int64(e))
+	}
+}
+
+type MDQueryOptionFlags int64
+
+const (
+	KMDQuerySynchronous        MDQueryOptionFlags = 1
+	KMDQueryWantsUpdates       MDQueryOptionFlags = 4
+	KMDQueryAllowFSTranslation MDQueryOptionFlags = 8
+)
+
+// String returns the MDQueryOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQueryOptionFlags) String() string {
+	switch e {
+	case KMDQuerySynchronous:
+		return "KMDQuerySynchronous"
+	case KMDQueryWantsUpdates:
+		return "KMDQueryWantsUpdates"
+	case KMDQueryAllowFSTranslation:
+		return "KMDQueryAllowFSTranslation"
+	default:
+		return fmt.Sprintf("MDQueryOptionFlags(%d)", int64(e))
+	}
+}
+
+type MDQuerySortOptionFlags int64
+
+const (
+	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
+)
+
+// String returns the MDQuerySortOptionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MDQuerySortOptionFlags) String() string {
+	switch e {
+	case KMDQueryReverseSortOrderFlag:
+		return "KMDQueryReverseSortOrderFlag"
+	default:
+		return fmt.Sprintf("MDQuerySortOptionFlags(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MachVMRangeFlags int64
+
+const (
+	MachVMRangeFlagsNone MachVMRangeFlags = 0
+)
+
+// String returns the MachVMRangeFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlags) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type MachVMRangeFlavor int64
+
+const (
+	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
+	MachVMRangeFlavorV1      MachVMRangeFlavor = 1
+)
+
+// String returns the MachVMRangeFlavor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeFlavor) String() string {
+	switch e {
+	case MachVMRangeFlavorInvalid:
+		return "MachVMRangeFlavorInvalid"
+	case MachVMRangeFlavorV1:
+		return "MachVMRangeFlavorV1"
+	default:
+		return fmt.Sprintf("MachVMRangeFlavor(%d)", int64(e))
+	}
+}
+
+type MachVMRangeTag int64
+
+const (
+	MachVMRangeTagDefault MachVMRangeTag = 0
+	MachVMRangeTagData    MachVMRangeTag = 1
+	MachVMRangeTagFixed   MachVMRangeTag = 2
+)
+
+// String returns the MachVMRangeTag constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MachVMRangeTag) String() string {
+	switch e {
+	case MachVMRangeTagDefault:
+		return "MachVMRangeTagDefault"
+	case MachVMRangeTagData:
+		return "MachVMRangeTagData"
+	case MachVMRangeTagFixed:
+		return "MachVMRangeTagFixed"
+	default:
+		return fmt.Sprintf("MachVMRangeTag(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type MpoFlags int64
+
+const (
+	MpoFlagsPort                        MpoFlags = 0
+	MpoFlagsServicePort                 MpoFlags = 1024
+	MpoFlagsConnectionPort              MpoFlags = 2048
+	MpoFlagsReplyPort                   MpoFlags = 4096
+	MpoFlagsWeakReplyPort               MpoFlags = 16384
+	MpoFlagsNotificationPort            MpoFlags = 17408
+	MpoFlagsExceptionPort               MpoFlags = 32768
+	MpoFlagsConnectionPortWithPortArray MpoFlags = 65536
+)
+
+// String returns the MpoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MpoFlags) String() string {
+	var parts []string
+	if e&MpoFlagsServicePort != 0 {
+		parts = append(parts, "MpoFlagsServicePort")
+	}
+	if e&MpoFlagsConnectionPort != 0 {
+		parts = append(parts, "MpoFlagsConnectionPort")
+	}
+	if e&MpoFlagsReplyPort != 0 {
+		parts = append(parts, "MpoFlagsReplyPort")
+	}
+	if e&MpoFlagsWeakReplyPort != 0 {
+		parts = append(parts, "MpoFlagsWeakReplyPort")
+	}
+	if e&MpoFlagsNotificationPort != 0 {
+		parts = append(parts, "MpoFlagsNotificationPort")
+	}
+	if e&MpoFlagsExceptionPort != 0 {
+		parts = append(parts, "MpoFlagsExceptionPort")
+	}
+	if e&MpoFlagsConnectionPortWithPortArray != 0 {
+		parts = append(parts, "MpoFlagsConnectionPortWithPortArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type NXMouseButton int64
+
+const (
+	NX_OneButton   NXMouseButton = 0
+	NX_LeftButton  NXMouseButton = 1
+	NX_RightButton NXMouseButton = 2
+)
+
+// String returns the NXMouseButton constant's name, or its numeric form when the
+// value is not a known constant.
+func (e NXMouseButton) String() string {
+	switch e {
+	case NX_OneButton:
+		return "NX_OneButton"
+	case NX_LeftButton:
+		return "NX_LeftButton"
+	case NX_RightButton:
+		return "NX_RightButton"
+	default:
+		return fmt.Sprintf("NXMouseButton(%d)", int64(e))
+	}
+}
+
+type OSClockid int64
+
+const (
+	OSClockidTime OSClockid = 32
+)
+
+// String returns the OSClockid constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSClockid) String() string {
+	switch e {
+	case OSClockidTime:
+		return "OSClockidTime"
+	default:
+		return fmt.Sprintf("OSClockid(%d)", int64(e))
+	}
+}
+
+type OSLogType int64
+
+const (
+	OSLogTypeDefault OSLogType = 0
+	OSLogTypeInfo    OSLogType = 1
+	OSLogTypeDebug   OSLogType = 2
+	OSLogTypeError   OSLogType = 16
+	OSLogTypeFault   OSLogType = 17
+)
+
+// String returns the OSLogType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e OSLogType) String() string {
+	switch e {
+	case OSLogTypeDefault:
+		return "OSLogTypeDefault"
+	case OSLogTypeInfo:
+		return "OSLogTypeInfo"
+	case OSLogTypeDebug:
+		return "OSLogTypeDebug"
+	case OSLogTypeError:
+		return "OSLogTypeError"
+	case OSLogTypeFault:
+		return "OSLogTypeFault"
+	default:
+		return fmt.Sprintf("OSLogType(%d)", int64(e))
+	}
+}
+
+type PMPageToPaperMappingType int64
+
+const (
+	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
+	KPMPageToPaperMappingScaleToFit PMPageToPaperMappingType = 2
+)
+
+// String returns the PMPageToPaperMappingType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PMPageToPaperMappingType) String() string {
+	switch e {
+	case KPMPageToPaperMappingNone:
+		return "KPMPageToPaperMappingNone"
+	case KPMPageToPaperMappingScaleToFit:
+		return "KPMPageToPaperMappingScaleToFit"
+	default:
+		return fmt.Sprintf("PMPageToPaperMappingType(%d)", int64(e))
+	}
+}
+
+type PtrauthKey int64
+
+const (
+	Ptrauth_key_none                     PtrauthKey = -1
+	Ptrauth_key_asia                     PtrauthKey = 0
+	Ptrauth_key_asib                     PtrauthKey = 1
+	Ptrauth_key_asda                     PtrauthKey = 2
+	Ptrauth_key_asdb                     PtrauthKey = 3
+	Ptrauth_key_process_independent_code PtrauthKey = 0
+	Ptrauth_key_process_dependent_code   PtrauthKey = 1
+	Ptrauth_key_process_independent_data PtrauthKey = 2
+	Ptrauth_key_process_dependent_data   PtrauthKey = 3
+	Ptrauth_key_return_address           PtrauthKey = 1
+	Ptrauth_key_frame_pointer            PtrauthKey = 3
+	Ptrauth_key_function_pointer         PtrauthKey = 0
+	Ptrauth_key_block_function           PtrauthKey = 0
+	Ptrauth_key_cxx_vtable_pointer       PtrauthKey = 2
+	Ptrauth_key_method_list_pointer      PtrauthKey = 2
+	Ptrauth_key_objc_isa_pointer         PtrauthKey = 2
+	Ptrauth_key_objc_super_pointer       PtrauthKey = 2
+	Ptrauth_key_objc_sel_pointer         PtrauthKey = 3
+	Ptrauth_key_objc_class_ro_pointer    PtrauthKey = 2
+	Ptrauth_key_block_descriptor_pointer PtrauthKey = 2
+	Ptrauth_key_init_fini_pointer        PtrauthKey = 0
+)
+
+// String returns the PtrauthKey constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PtrauthKey) String() string {
+	switch e {
+	case Ptrauth_key_none:
+		return "Ptrauth_key_none"
+	case Ptrauth_key_asia:
+		return "Ptrauth_key_asia"
+	case Ptrauth_key_asib:
+		return "Ptrauth_key_asib"
+	case Ptrauth_key_asda:
+		return "Ptrauth_key_asda"
+	case Ptrauth_key_asdb:
+		return "Ptrauth_key_asdb"
+	default:
+		return fmt.Sprintf("PtrauthKey(%d)", int64(e))
+	}
+}
+
+type QosClass uint32
+
+const (
+	QosClassUserInteractive QosClass = 33
+	QosClassUserInitiated   QosClass = 25
+	QosClassDefault         QosClass = 21
+	QosClassUtility         QosClass = 17
+	QosClassBackground      QosClass = 9
+	QosClassUnspecified     QosClass = 0
+)
+
+// String returns the QosClass constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QosClass) String() string {
+	switch e {
+	case QosClassUserInteractive:
+		return "QosClassUserInteractive"
+	case QosClassUserInitiated:
+		return "QosClassUserInitiated"
+	case QosClassDefault:
+		return "QosClassDefault"
+	case QosClassUtility:
+		return "QosClassUtility"
+	case QosClassBackground:
+		return "QosClassBackground"
+	case QosClassUnspecified:
+		return "QosClassUnspecified"
+	default:
+		return fmt.Sprintf("QosClass(%d)", int64(e))
+	}
+}
+
+// Integrators
+type QuadratureIntegrator int64
+
+const (
+	QuadratureIntegratorQng  QuadratureIntegrator = 0
+	QuadratureIntegratorQag  QuadratureIntegrator = 1
+	QuadratureIntegratorQags QuadratureIntegrator = 2
+)
+
+// String returns the QuadratureIntegrator constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QuadratureIntegrator) String() string {
+	switch e {
+	case QuadratureIntegratorQng:
+		return "QuadratureIntegratorQng"
+	case QuadratureIntegratorQag:
+		return "QuadratureIntegratorQag"
+	case QuadratureIntegratorQags:
+		return "QuadratureIntegratorQags"
+	default:
+		return fmt.Sprintf("QuadratureIntegrator(%d)", int64(e))
+	}
+}
+
+// Quadrature return status Success is 0, and errors have a negative value.
+type QuadratureStatus int64
+
+const (
+	QuadratureStatusSuccess                    QuadratureStatus = 0
+	QuadratureStatusError                      QuadratureStatus = -1
+	QuadratureStatusInvalidArgError            QuadratureStatus = -2
+	QuadratureStatusAllocError                 QuadratureStatus = -3
+	QuadratureStatusInternalError              QuadratureStatus = -99
+	QuadratureStatusIntegrateMaxEvalError      QuadratureStatus = -101
+	QuadratureStatusIntegrateBadBehaviourError QuadratureStatus = -102
+)
+
+// String returns the QuadratureStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e QuadratureStatus) String() string {
+	switch e {
+	case QuadratureStatusSuccess:
+		return "QuadratureStatusSuccess"
+	case QuadratureStatusError:
+		return "QuadratureStatusError"
+	case QuadratureStatusInvalidArgError:
+		return "QuadratureStatusInvalidArgError"
+	case QuadratureStatusAllocError:
+		return "QuadratureStatusAllocError"
+	case QuadratureStatusInternalError:
+		return "QuadratureStatusInternalError"
+	case QuadratureStatusIntegrateMaxEvalError:
+		return "QuadratureStatusIntegrateMaxEvalError"
+	case QuadratureStatusIntegrateBadBehaviourError:
+		return "QuadratureStatusIntegrateBadBehaviourError"
+	default:
+		return fmt.Sprintf("QuadratureStatus(%d)", int64(e))
+	}
+}
+
+type Sparsecontrol int64
+
+const (
+	SparseDefaultControl Sparsecontrol = 0
+)
+
+// String returns the Sparsecontrol constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Sparsecontrol) String() string {
+	switch e {
+	case SparseDefaultControl:
+		return "SparseDefaultControl"
+	default:
+		return fmt.Sprintf("Sparsecontrol(%d)", int64(e))
+	}
+}
+
+type Sparsefactorization int64
+
+const (
+	SparseFactorizationCholesky      Sparsefactorization = 0
+	SparseFactorizationLDLT          Sparsefactorization = 1
+	SparseFactorizationLDLTUnpivoted Sparsefactorization = 2
+	SparseFactorizationLDLTSBK       Sparsefactorization = 3
+	SparseFactorizationLDLTTPP       Sparsefactorization = 4
+	SparseFactorizationQR            Sparsefactorization = 40
+	SparseFactorizationCholeskyAtA   Sparsefactorization = 41
+	SparseFactorizationLU            Sparsefactorization = 80
+	SparseFactorizationLUUnpivoted   Sparsefactorization = 81
+	SparseFactorizationLUSPP         Sparsefactorization = 82
+	SparseFactorizationLUTPP         Sparsefactorization = 83
+)
+
+// String returns the Sparsefactorization constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Sparsefactorization) String() string {
+	switch e {
+	case SparseFactorizationCholesky:
+		return "SparseFactorizationCholesky"
+	case SparseFactorizationLDLT:
+		return "SparseFactorizationLDLT"
+	case SparseFactorizationLDLTUnpivoted:
+		return "SparseFactorizationLDLTUnpivoted"
+	case SparseFactorizationLDLTSBK:
+		return "SparseFactorizationLDLTSBK"
+	case SparseFactorizationLDLTTPP:
+		return "SparseFactorizationLDLTTPP"
+	case SparseFactorizationQR:
+		return "SparseFactorizationQR"
+	case SparseFactorizationCholeskyAtA:
+		return "SparseFactorizationCholeskyAtA"
+	case SparseFactorizationLU:
+		return "SparseFactorizationLU"
+	case SparseFactorizationLUUnpivoted:
+		return "SparseFactorizationLUUnpivoted"
+	case SparseFactorizationLUSPP:
+		return "SparseFactorizationLUSPP"
+	case SparseFactorizationLUTPP:
+		return "SparseFactorizationLUTPP"
+	default:
+		return fmt.Sprintf("Sparsefactorization(%d)", int64(e))
+	}
+}
+
+type Sparsegmresvariant int64
+
+const (
+	SparseVariantDQGMRES Sparsegmresvariant = 0
+	SparseVariantGMRES   Sparsegmresvariant = 1
+	SparseVariantFGMRES  Sparsegmresvariant = 2
+)
+
+// String returns the Sparsegmresvariant constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Sparsegmresvariant) String() string {
+	switch e {
+	case SparseVariantDQGMRES:
+		return "SparseVariantDQGMRES"
+	case SparseVariantGMRES:
+		return "SparseVariantGMRES"
+	case SparseVariantFGMRES:
+		return "SparseVariantFGMRES"
+	default:
+		return fmt.Sprintf("Sparsegmresvariant(%d)", int64(e))
+	}
+}
+
+type Sparseiterativestatus int32
+
+const (
+	SparseIterativeConverged      Sparseiterativestatus = 0
+	SparseIterativeMaxIterations  Sparseiterativestatus = 1
+	SparseIterativeParameterError Sparseiterativestatus = -1
+	SparseIterativeIllConditioned Sparseiterativestatus = -2
+	SparseIterativeInternalError  Sparseiterativestatus = -99
+)
+
+// String returns the Sparseiterativestatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Sparseiterativestatus) String() string {
+	switch e {
+	case SparseIterativeConverged:
+		return "SparseIterativeConverged"
+	case SparseIterativeMaxIterations:
+		return "SparseIterativeMaxIterations"
+	case SparseIterativeParameterError:
+		return "SparseIterativeParameterError"
+	case SparseIterativeIllConditioned:
+		return "SparseIterativeIllConditioned"
+	case SparseIterativeInternalError:
+		return "SparseIterativeInternalError"
+	default:
+		return fmt.Sprintf("Sparseiterativestatus(%d)", int64(e))
+	}
+}
+
+type Sparsekind uint32
+
+const (
+	SparseOrdinary       Sparsekind = 0
+	SparseTriangular     Sparsekind = 1
+	SparseUnitTriangular Sparsekind = 2
+	SparseSymmetric      Sparsekind = 3
+	SparseHermitian      Sparsekind = 7
+)
+
+// String returns the Sparsekind constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Sparsekind) String() string {
+	switch e {
+	case SparseOrdinary:
+		return "SparseOrdinary"
+	case SparseTriangular:
+		return "SparseTriangular"
+	case SparseUnitTriangular:
+		return "SparseUnitTriangular"
+	case SparseSymmetric:
+		return "SparseSymmetric"
+	case SparseHermitian:
+		return "SparseHermitian"
+	default:
+		return fmt.Sprintf("Sparsekind(%d)", int64(e))
+	}
+}
+
+type Sparselsmrconvergencetest int32
+
+const (
+	SparseLSMRCTDefault      Sparselsmrconvergencetest = 0
+	SparseLSMRCTFongSaunders Sparselsmrconvergencetest = 1
+)
+
+// String returns the Sparselsmrconvergencetest constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Sparselsmrconvergencetest) String() string {
+	switch e {
+	case SparseLSMRCTDefault:
+		return "SparseLSMRCTDefault"
+	case SparseLSMRCTFongSaunders:
+		return "SparseLSMRCTFongSaunders"
+	default:
+		return fmt.Sprintf("Sparselsmrconvergencetest(%d)", int64(e))
+	}
+}
+
+type Sparseorder int64
+
+const (
+	SparseOrderDefault Sparseorder = 0
+	SparseOrderUser    Sparseorder = 1
+	SparseOrderAMD     Sparseorder = 2
+	SparseOrderMetis   Sparseorder = 3
+	SparseOrderCOLAMD  Sparseorder = 4
+	SparseOrderMTMetis Sparseorder = 5
+)
+
+// String returns the Sparseorder constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Sparseorder) String() string {
+	switch e {
+	case SparseOrderDefault:
+		return "SparseOrderDefault"
+	case SparseOrderUser:
+		return "SparseOrderUser"
+	case SparseOrderAMD:
+		return "SparseOrderAMD"
+	case SparseOrderMetis:
+		return "SparseOrderMetis"
+	case SparseOrderCOLAMD:
+		return "SparseOrderCOLAMD"
+	case SparseOrderMTMetis:
+		return "SparseOrderMTMetis"
+	default:
+		return fmt.Sprintf("Sparseorder(%d)", int64(e))
+	}
+}
+
+type Sparsepreconditioner int32
+
+const (
+	SparsePreconditionerNone        Sparsepreconditioner = 0
+	SparsePreconditionerUser        Sparsepreconditioner = 1
+	SparsePreconditionerDiagonal    Sparsepreconditioner = 2
+	SparsePreconditionerDiagScaling Sparsepreconditioner = 3
+)
+
+// String returns the Sparsepreconditioner constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Sparsepreconditioner) String() string {
+	switch e {
+	case SparsePreconditionerNone:
+		return "SparsePreconditionerNone"
+	case SparsePreconditionerUser:
+		return "SparsePreconditionerUser"
+	case SparsePreconditionerDiagonal:
+		return "SparsePreconditionerDiagonal"
+	case SparsePreconditionerDiagScaling:
+		return "SparsePreconditionerDiagScaling"
+	default:
+		return fmt.Sprintf("Sparsepreconditioner(%d)", int64(e))
+	}
+}
+
+type Sparsescaling int64
+
+const (
+	SparseScalingDefault                     Sparsescaling = 0
+	SparseScalingUser                        Sparsescaling = 1
+	SparseScalingEquilibriationInf           Sparsescaling = 2
+	SparseScalingHungarianScalingOnly        Sparsescaling = 3
+	SparseScalingHungarianScalingAndOrdering Sparsescaling = 4
+)
+
+// String returns the Sparsescaling constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Sparsescaling) String() string {
+	switch e {
+	case SparseScalingDefault:
+		return "SparseScalingDefault"
+	case SparseScalingUser:
+		return "SparseScalingUser"
+	case SparseScalingEquilibriationInf:
+		return "SparseScalingEquilibriationInf"
+	case SparseScalingHungarianScalingOnly:
+		return "SparseScalingHungarianScalingOnly"
+	case SparseScalingHungarianScalingAndOrdering:
+		return "SparseScalingHungarianScalingAndOrdering"
+	default:
+		return fmt.Sprintf("Sparsescaling(%d)", int64(e))
+	}
+}
+
+type Sparsestatus int32
+
+const (
+	SparseStatusOK            Sparsestatus = 0
+	SparseFactorizationFailed Sparsestatus = -1
+	SparseMatrixIsSingular    Sparsestatus = -2
+	SparseInternalError       Sparsestatus = -3
+	SparseParameterError      Sparsestatus = -4
+	SparseStatusReleased      Sparsestatus = -2147483647
+)
+
+// String returns the Sparsestatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Sparsestatus) String() string {
+	switch e {
+	case SparseStatusOK:
+		return "SparseStatusOK"
+	case SparseFactorizationFailed:
+		return "SparseFactorizationFailed"
+	case SparseMatrixIsSingular:
+		return "SparseMatrixIsSingular"
+	case SparseInternalError:
+		return "SparseInternalError"
+	case SparseParameterError:
+		return "SparseParameterError"
+	case SparseStatusReleased:
+		return "SparseStatusReleased"
+	default:
+		return fmt.Sprintf("Sparsestatus(%d)", int64(e))
+	}
+}
+
+type Sparsesubfactor int64
+
+const (
+	SparseSubfactorInvalid Sparsesubfactor = 0
+	SparseSubfactorP       Sparsesubfactor = 1
+	SparseSubfactorS       Sparsesubfactor = 2
+	SparseSubfactorL       Sparsesubfactor = 3
+	SparseSubfactorD       Sparsesubfactor = 4
+	SparseSubfactorPLPS    Sparsesubfactor = 5
+	SparseSubfactorQ       Sparsesubfactor = 6
+	SparseSubfactorR       Sparsesubfactor = 7
+	SparseSubfactorRP      Sparsesubfactor = 8
+	SparseSubfactorSr      Sparsesubfactor = 9
+	SparseSubfactorSc      Sparsesubfactor = 10
+)
+
+// String returns the Sparsesubfactor constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Sparsesubfactor) String() string {
+	switch e {
+	case SparseSubfactorInvalid:
+		return "SparseSubfactorInvalid"
+	case SparseSubfactorP:
+		return "SparseSubfactorP"
+	case SparseSubfactorS:
+		return "SparseSubfactorS"
+	case SparseSubfactorL:
+		return "SparseSubfactorL"
+	case SparseSubfactorD:
+		return "SparseSubfactorD"
+	case SparseSubfactorPLPS:
+		return "SparseSubfactorPLPS"
+	case SparseSubfactorQ:
+		return "SparseSubfactorQ"
+	case SparseSubfactorR:
+		return "SparseSubfactorR"
+	case SparseSubfactorRP:
+		return "SparseSubfactorRP"
+	case SparseSubfactorSr:
+		return "SparseSubfactorSr"
+	case SparseSubfactorSc:
+		return "SparseSubfactorSc"
+	default:
+		return fmt.Sprintf("Sparsesubfactor(%d)", int64(e))
+	}
+}
+
+type Sparsetriangle uint8
+
+const (
+	SparseUpperTriangle Sparsetriangle = 0
+	SparseLowerTriangle Sparsetriangle = 1
+)
+
+// String returns the Sparsetriangle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Sparsetriangle) String() string {
+	switch e {
+	case SparseUpperTriangle:
+		return "SparseUpperTriangle"
+	case SparseLowerTriangle:
+		return "SparseLowerTriangle"
+	default:
+		return fmt.Sprintf("Sparsetriangle(%d)", int64(e))
+	}
+}
+
+type Sparseupdate int64
+
+const (
+	SparseUpdatePartialRefactor Sparseupdate = 0
+)
+
+// String returns the Sparseupdate constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Sparseupdate) String() string {
+	switch e {
+	case SparseUpdatePartialRefactor:
+		return "SparseUpdatePartialRefactor"
+	default:
+		return fmt.Sprintf("Sparseupdate(%d)", int64(e))
+	}
+}
+
+// The matrix property type
+type SparseMatrixProperty int64
+
+const (
+	SparseMatrixPropertyUpperTriangular SparseMatrixProperty = 1
+	SparseMatrixPropertyLowerTriangular SparseMatrixProperty = 2
+	SparseMatrixPropertyUpperSymmetric  SparseMatrixProperty = 4
+	SparseMatrixPropertyLowerSymmetric  SparseMatrixProperty = 8
+)
+
+// String returns the SparseMatrixProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SparseMatrixProperty) String() string {
+	switch e {
+	case SparseMatrixPropertyUpperTriangular:
+		return "SparseMatrixPropertyUpperTriangular"
+	case SparseMatrixPropertyLowerTriangular:
+		return "SparseMatrixPropertyLowerTriangular"
+	case SparseMatrixPropertyUpperSymmetric:
+		return "SparseMatrixPropertyUpperSymmetric"
+	case SparseMatrixPropertyLowerSymmetric:
+		return "SparseMatrixPropertyLowerSymmetric"
+	default:
+		return fmt.Sprintf("SparseMatrixProperty(%d)", int64(e))
+	}
+}
+
+// The norm specifier
+type SparseNorm int64
+
+const (
+	SparseNormOne SparseNorm = 171
+	SparseNormTwo SparseNorm = 173
+	SparseNormInf SparseNorm = 175
+	SparseNormR1  SparseNorm = 179
+)
+
+// String returns the SparseNorm constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SparseNorm) String() string {
+	switch e {
+	case SparseNormOne:
+		return "SparseNormOne"
+	case SparseNormTwo:
+		return "SparseNormTwo"
+	case SparseNormInf:
+		return "SparseNormInf"
+	case SparseNormR1:
+		return "SparseNormR1"
+	default:
+		return fmt.Sprintf("SparseNorm(%d)", int64(e))
+	}
+}
+
+// The type reflecting the status of an operations.
+type SparseStatus int64
+
+const (
+	SparseStatusSuccess           SparseStatus = 0
+	SparseStatusIllegalParameter  SparseStatus = -1000
+	SparseStatusCannotSetProperty SparseStatus = -1001
+	SparseStatusSystemError       SparseStatus = -1002
+)
+
+// String returns the SparseStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SparseStatus) String() string {
+	switch e {
+	case SparseStatusSuccess:
+		return "SparseStatusSuccess"
+	case SparseStatusIllegalParameter:
+		return "SparseStatusIllegalParameter"
+	case SparseStatusCannotSetProperty:
+		return "SparseStatusCannotSetProperty"
+	case SparseStatusSystemError:
+		return "SparseStatusSystemError"
+	default:
+		return fmt.Sprintf("SparseStatus(%d)", int64(e))
+	}
+}
+
+// An encoding of an image format type to be used with RGB <-> Y'CbCr conversions in vImage/Conversions.h These formats enumerate different vImage ARGB pixel formats.
+type VImageARGBType int64
+
+const (
+	KvImageARGB8888  VImageARGBType = 0
+	KvImageARGB16U   VImageARGBType = 1
+	KvImageARGB16Q12 VImageARGBType = 2
+)
+
+// String returns the VImageARGBType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VImageARGBType) String() string {
+	switch e {
+	case KvImageARGB8888:
+		return "KvImageARGB8888"
+	case KvImageARGB16U:
+		return "KvImageARGB16U"
+	case KvImageARGB16Q12:
+		return "KvImageARGB16Q12"
+	default:
+		return fmt.Sprintf("VImageARGBType(%d)", int64(e))
+	}
+}
+
+type VImageMDTableUsageHint int64
+
+const (
+	KvImageMDTableHint_16Q12 VImageMDTableUsageHint = 1
+	KvImageMDTableHint_Float VImageMDTableUsageHint = 2
+)
+
+// String returns the VImageMDTableUsageHint constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VImageMDTableUsageHint) String() string {
+	switch e {
+	case KvImageMDTableHint_16Q12:
+		return "KvImageMDTableHint_16Q12"
+	case KvImageMDTableHint_Float:
+		return "KvImageMDTableHint_Float"
+	default:
+		return fmt.Sprintf("VImageMDTableUsageHint(%d)", int64(e))
+	}
+}
+
+// An encoding of an image format type to be used with RGB <-> Y'CbCr conversions in vImage/Conversions.h These formats enumerate different vImage/CoreVideo Y'CbCr pixel formats.
+type VImageYpCbCrType int64
+
+const (
+	KvImage422CbYpCrYp8                  VImageYpCbCrType = 0
+	KvImage422YpCbYpCr8                  VImageYpCbCrType = 1
+	KvImage422CbYpCrYp8_AA8              VImageYpCbCrType = 2
+	KvImage420Yp8_Cb8_Cr8                VImageYpCbCrType = 3
+	KvImage420Yp8_CbCr8                  VImageYpCbCrType = 4
+	KvImage444AYpCbCr8                   VImageYpCbCrType = 5
+	KvImage444CrYpCb8                    VImageYpCbCrType = 6
+	KvImage444CbYpCrA8                   VImageYpCbCrType = 7
+	KvImage444CrYpCb10                   VImageYpCbCrType = 8
+	KvImage422CrYpCbYpCbYpCbYpCrYpCrYp10 VImageYpCbCrType = 9
+	KvImage422CbYpCrYp16                 VImageYpCbCrType = 13
+	KvImage444AYpCbCr16                  VImageYpCbCrType = 14
+)
+
+// String returns the VImageYpCbCrType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VImageYpCbCrType) String() string {
+	switch e {
+	case KvImage422CbYpCrYp8:
+		return "KvImage422CbYpCrYp8"
+	case KvImage422YpCbYpCr8:
+		return "KvImage422YpCbYpCr8"
+	case KvImage422CbYpCrYp8_AA8:
+		return "KvImage422CbYpCrYp8_AA8"
+	case KvImage420Yp8_Cb8_Cr8:
+		return "KvImage420Yp8_Cb8_Cr8"
+	case KvImage420Yp8_CbCr8:
+		return "KvImage420Yp8_CbCr8"
+	case KvImage444AYpCbCr8:
+		return "KvImage444AYpCbCr8"
+	case KvImage444CrYpCb8:
+		return "KvImage444CrYpCb8"
+	case KvImage444CbYpCrA8:
+		return "KvImage444CbYpCrA8"
+	case KvImage444CrYpCb10:
+		return "KvImage444CrYpCb10"
+	case KvImage422CrYpCbYpCbYpCbYpCrYpCrYp10:
+		return "KvImage422CrYpCbYpCbYpCbYpCrYpCrYp10"
+	case KvImage422CbYpCrYp16:
+		return "KvImage422CbYpCrYp16"
+	case KvImage444AYpCbCr16:
+		return "KvImage444AYpCbCr16"
+	default:
+		return fmt.Sprintf("VImageYpCbCrType(%d)", int64(e))
+	}
+}
+
+type VimageInterpolationmethod int64
+
+const (
+	KvImageNoInterpolation   VimageInterpolationmethod = 0
+	KvImageFullInterpolation VimageInterpolationmethod = 1
+	KvImageHalfInterpolation VimageInterpolationmethod = 2
+)
+
+// String returns the VimageInterpolationmethod constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VimageInterpolationmethod) String() string {
+	switch e {
+	case KvImageNoInterpolation:
+		return "KvImageNoInterpolation"
+	case KvImageFullInterpolation:
+		return "KvImageFullInterpolation"
+	case KvImageHalfInterpolation:
+		return "KvImageHalfInterpolation"
+	default:
+		return fmt.Sprintf("VimageInterpolationmethod(%d)", int64(e))
+	}
+}
+
+type VirtualMemoryGuardExceptionCode int64
+
+const (
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCode = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCode = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCode = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCode = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCode = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCode = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCode = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCode = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCode = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCode = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCode = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCode = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCode = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCode = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCode = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCode = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCode = 204
+)
+
+// String returns the VirtualMemoryGuardExceptionCode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VirtualMemoryGuardExceptionCode) String() string {
+	switch e {
+	case KGUARD_EXC_DEALLOC_GAP:
+		return "KGUARD_EXC_DEALLOC_GAP"
+	case KGUARD_EXC_RECLAIM_COPYIO_FAILURE:
+		return "KGUARD_EXC_RECLAIM_COPYIO_FAILURE"
+	case KGUARD_EXC_RECLAIM_INDEX_FAILURE:
+		return "KGUARD_EXC_RECLAIM_INDEX_FAILURE"
+	case KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE:
+		return "KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE"
+	case KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE:
+		return "KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE"
+	case KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE:
+		return "KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE"
+	case KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE:
+		return "KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE"
+	case KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION:
+		return "KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION"
+	case KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY:
+		return "KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY"
+	case KGUARD_EXC_SEC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT:
+		return "KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT"
+	case KGUARD_EXC_SEC_COPY_DENIED:
+		return "KGUARD_EXC_SEC_COPY_DENIED"
+	case KGUARD_EXC_SEC_SHARING_DENIED:
+		return "KGUARD_EXC_SEC_SHARING_DENIED"
+	case KGUARD_EXC_MTE_SYNC_FAULT:
+		return "KGUARD_EXC_MTE_SYNC_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_USER_FAULT"
+	case KGUARD_EXC_MTE_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_MTE_ASYNC_KERN_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT"
+	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
+		return "KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
+	default:
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCode(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type XpcListenerCreateFlags int64
+
+const (
+	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
+	XpcListenerCreateFlagsInactive        XpcListenerCreateFlags = 1
+	XpcListenerCreateFlagsForceMach       XpcListenerCreateFlags = 2
+	XpcListenerCreateFlagsForceXpcservice XpcListenerCreateFlags = 4
+)
+
+// String returns the XpcListenerCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcListenerCreateFlags) String() string {
+	var parts []string
+	if e&XpcListenerCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsInactive")
+	}
+	if e&XpcListenerCreateFlagsForceMach != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceMach")
+	}
+	if e&XpcListenerCreateFlagsForceXpcservice != 0 {
+		parts = append(parts, "XpcListenerCreateFlagsForceXpcservice")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type XpcSessionCreateFlags int64
+
+const (
+	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0
+	XpcSessionCreateFlagsInactive       XpcSessionCreateFlags = 1
+	XpcSessionCreateFlagsMachPrivileged XpcSessionCreateFlags = 2
+)
+
+// String returns the XpcSessionCreateFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XpcSessionCreateFlags) String() string {
+	var parts []string
+	if e&XpcSessionCreateFlagsInactive != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsInactive")
+	}
+	if e&XpcSessionCreateFlagsMachPrivileged != 0 {
+		parts = append(parts, "XpcSessionCreateFlagsMachPrivileged")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+const (
+	FFT_FORWARD           = 1
+	FFT_INVERSE           = -1
+	FFT_RADIX2            = 0
+	FFT_RADIX3            = 1
+	FFT_RADIX5            = 2
+	KFFTDirection_Forward = 1
+	KFFTDirection_Inverse = -1
+	KFFTRadix2            = 0
+	KFFTRadix3            = 1
+	KFFTRadix5            = 2
+	VDSP_HALF_WINDOW      = 1
+	VDSP_HANN_DENORM      = 0
+	VDSP_HANN_NORM        = 2
+)
