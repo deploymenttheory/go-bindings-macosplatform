@@ -4,7 +4,7 @@ ACC_ATTEST ?= acceptance-attestation.jsonl
 # Consumer project rebuilt against the local tree by canary-build.
 CANARY_DIR ?= ../go-macos-observability
 
-.PHONY: help generate build test lint version acc-generate acc-test act-acc idiomatic-regen-diff canary-build
+.PHONY: help generate build test lint version acc-generate acc-test act-acc regen-diff canary-build parity parity-update
 
 help:
 	@echo "Targets:"
@@ -16,8 +16,10 @@ help:
 	@echo "  acc-generate  Generate the dynamic acceptance test file (ACC_N, ACC_SEED)"
 	@echo "  acc-test      Generate and run acceptance tests locally"
 	@echo "  act-acc       Run the acceptance workflow via act (requires act in PATH)"
-	@echo "  idiomatic-regen-diff  Re-emit the idiomatic layer, build+vet it, and show the diff"
+	@echo "  regen-diff    Re-emit raw + idiomatic bindings, build+vet, and show the diff"
 	@echo "  canary-build  Build the consumer project in CANARY_DIR against this working tree"
+	@echo "  parity        Check idiomatic emittance covers the raw oracle (ratchet vs committed baseline)"
+	@echo "  parity-update Rewrite the parity baseline after a phase closes gaps"
 
 generate:
 	go run ./cmd/generate/ bindings
@@ -39,7 +41,7 @@ acc-generate:
 
 acc-test: acc-generate
 	GENACCEPT_ATTEST=$(ACC_ATTEST) \
-	go test ./acceptance/ -v -timeout 600s -count=1
+	go test ./bindings/acceptance/ -v -timeout 600s -count=1
 
 act-acc:
 	act workflow_dispatch \
@@ -47,18 +49,31 @@ act-acc:
 	  --input n=$(ACC_N) \
 	  --input seed=$(ACC_SEED)
 
-# Regenerate the idiomatic layer from committed metadata, prove it still
-# builds/vets, then show what changed. The diff is the review artifact for
-# every emitter change: an unexpected hunk means an unintended behavior change.
-idiomatic-regen-diff:
+# Regenerate raw + idiomatic bindings from committed metadata, prove they still
+# build/vet, then show what changed. The diff is the review artifact for every
+# emitter change: an unexpected hunk means an unintended behavior change. Raw
+# lands under bindings/internal/raw; the public idiomatic layer under
+# bindings/{frameworks,libraries}.
+regen-diff:
+	go run ./cmd/generate/ bindings
 	go run ./cmd/generate/ idiomatic
-	go build ./opinionated/...
+	go build ./bindings/...
 	# -unsafeptr=false: the generated extern accessors dereference dlsym
 	# addresses (uintptr → unsafe.Pointer), a known-safe FFI pattern that the
 	# unsafeptr check cannot prove.
-	go vet -unsafeptr=false ./opinionated/...
-	git --no-pager diff --stat -- opinionated/
-	@echo "Run 'git diff -- opinionated/' to review the full diff."
+	go vet -unsafeptr=false ./bindings/...
+	git --no-pager diff --stat -- bindings/
+	@echo "Run 'git diff -- bindings/' to review the full diff."
+
+# Prove the idiomatic emitter covers every construct the raw emitter does. The
+# ratchet fails only on a NEW gap not already in the committed baseline, so it
+# passes during the migration while gaps are being closed phase by phase, and
+# guards against regressions. Shrink the baseline with parity-update as gaps close.
+parity:
+	go run ./cmd/generate/ parity --baseline metadata/parity-baseline.json
+
+parity-update:
+	go run ./cmd/generate/ parity --write-baseline metadata/parity-baseline.json
 
 # Compile the consumer project against this working tree (no go.mod edits in
 # either repo: a throwaway workspace file under the gitignored tmp/ wires the

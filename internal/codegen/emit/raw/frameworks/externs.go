@@ -8,6 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -15,13 +16,18 @@ import (
 
 // EmitExterns writes accessor functions for extern global symbols.
 // Each extern is accessed via purego.Dlsym at runtime.
+//
+// rec, when non-nil, records every emitted extern accessor into the parity
+// manifest keyed on its C symbol. It never affects the emitted bytes.
 func EmitExterns(
 	w io.Writer,
 	framework *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
 	dylibVarName string,
+	rec *emitmanifest.Recorder,
 ) (typemap.ImportSet, error) {
 	imports := make(typemap.ImportSet)
+	pkgName := naming.PackageName(framework.Framework)
 
 	// Build set of function names to avoid declaring an extern accessor with
 	// the same name as an existing exported function (causes redeclaration).
@@ -48,6 +54,19 @@ func EmitExterns(
 		seen[ext.Name] = true
 		seenGoNames[goName] = true
 		externs = append(externs, ext)
+		rec.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleRaw,
+			Kind:      emitmanifest.KindExtern,
+			Framework: framework.Framework,
+			MetaKey: emitmanifest.MetaKey(
+				framework.Framework,
+				emitmanifest.KindExtern,
+				ext.Name,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: goName,
+		})
 	}
 	if len(externs) == 0 {
 		return imports, nil
@@ -72,7 +91,10 @@ func EmitExterns(
 		if !isClassPtr {
 			fromIDCall = ""
 		}
-		views = append(views, buildExternTypedView(ext, goType, dylibVarName, mapper.IsEnumType(goType), fromIDCall))
+		views = append(
+			views,
+			buildExternTypedView(ext, goType, dylibVarName, mapper.IsEnumType(goType), fromIDCall),
+		)
 	}
 
 	out, err := render.Externs(views)
@@ -136,7 +158,12 @@ func isUnexportedXPkg(goType string) bool {
 // buildExternTypedView resolves an extern with a usable Go type into a typed
 // accessor view, selecting the body Form by the type's nature (ObjC object,
 // char* string, or value type).
-func buildExternTypedView(ext meta.Extern, goType, dylibVarName string, isEnum bool, fromIDCall string) view.Extern {
+func buildExternTypedView(
+	ext meta.Extern,
+	goType, dylibVarName string,
+	isEnum bool,
+	fromIDCall string,
+) view.Extern {
 	built := view.Extern{
 		CommentBlock: externCommentBlock(ext),
 		GoName:       exportedExternName(ext.Name),

@@ -22,9 +22,9 @@ func TestEmitSupportPackages(t *testing.T) {
 
 	want := []string{
 		"internal/objref/objref_generated.go",
-		"rt/rt_generated.go",
-		"errkit/errkit_generated.go",
-		"obj/obj_generated.go",
+		"runtime/rt/rt_generated.go",
+		"runtime/errkit/errkit_generated.go",
+		"runtime/obj/obj_generated.go",
 		"internal/dispatch/dispatch_generated.go",
 	}
 	fset := token.NewFileSet()
@@ -43,11 +43,11 @@ func TestEmitSupportPackages(t *testing.T) {
 	}
 
 	// Idempotent: a second emission produces byte-identical output.
-	first, _ := os.ReadFile(filepath.Join(root, "rt/rt_generated.go"))
+	first, _ := os.ReadFile(filepath.Join(root, "runtime/rt/rt_generated.go"))
 	if err := EmitSupportPackages(root); err != nil {
 		t.Fatalf("second EmitSupportPackages: %v", err)
 	}
-	second, _ := os.ReadFile(filepath.Join(root, "rt/rt_generated.go"))
+	second, _ := os.ReadFile(filepath.Join(root, "runtime/rt/rt_generated.go"))
 	if string(first) != string(second) {
 		t.Fatal("EmitSupportPackages is not deterministic across runs")
 	}

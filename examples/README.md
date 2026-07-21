@@ -11,7 +11,7 @@ Everything here is macOS-only (`//go:build darwin`).
 
 | Example | What it shows | Bindings it uses |
 |---|---|---|
-| [`keychain`](keychain) | CRUD across keychain item classes (passwords, certificates, keys, identities) | the **custom** layer over the Security framework |
+| [`keychain`](keychain) | CRUD across keychain item classes (passwords, certificates, keys, identities) | the hand-crafted `opinionated/tools/keychain` helpers over the Security framework |
 | [`warden`](warden) | A declarative, policy-driven network firewall (NEFilter content filter + an XPC control daemon) | the **idiomatic** NetworkExtension/SystemExtensions/Foundation wrappers, the **idiomatic** libproc library, and the **runtime** for what has no typed wrapper (NSXPC, ObjC subclassing, dispatch) |
 
 Run either with `go run ./examples/<name>` (warden is a multi-binary app — see its
@@ -21,22 +21,27 @@ still exercise the code paths they can.
 
 ## Which layer should I use, and why?
 
-The repo offers the same macOS API at four levels. Pick the highest one that can do
-what you need — you only drop lower when the level above doesn't cover your case.
+The repo offers the same macOS API at three consumable levels. Pick the highest one
+that can do what you need — you only drop lower when the level above doesn't cover
+your case.
 
 | Layer | Import path | Use it for |
 |---|---|---|
-| **Idiomatic** | `opinionated/idiomatic/framework/<name>`, `opinionated/idiomatic/libraries/<name>` | **The default.** Calling a framework class or C function with Go types, Go errors, and automatic memory management. |
-| **Custom** | `opinionated/custom/<name>` | Hand-crafted, task-oriented helpers for a workflow that would otherwise be many low-level calls (e.g. `keychain` turns the whole SecItem dance into `CreateGenericPassword`). |
-| **Raw bindings** | `bindings/frameworks/<name>`, `bindings/libraries/<name>` | The exact ObjC/C surface, when you need a method the idiomatic wrapper doesn't expose. Closer to the raw API, but still GC-tracked and (for `@MainActor` classes) main-thread-wrapped like the idiomatic layer. |
+| **Idiomatic** (the framework/library API) | `bindings/frameworks/<name>`, `bindings/libraries/<name>` | **The default, and the only consumable binding API.** Calling a framework class or C function with Go types, Go errors, and automatic memory management. |
+| **Tools** | `opinionated/tools/<name>` | Hand-crafted, task-oriented helpers for a workflow that would otherwise be many low-level calls (e.g. `keychain` turns the whole SecItem dance into `CreateGenericPassword`). |
 | **Runtime** | `bindings/runtime/purego` (ObjC frameworks), `bindings/runtime/cgo` (C libraries) | The dispatch machinery the layers above are built on. Reach for it **only** for things that have no typed binding at all: defining a custom ObjC subclass, NSXPC, dispatch queues, or sending a selector by hand. |
+
+The RAW purego/CGo bindings still exist, but they are now **internal plumbing**
+under `bindings/internal/raw/...` — the implementation substrate the idiomatic layer
+is built on. Go's internal-package rule makes them unreachable from outside
+`bindings/`, so as a consumer you never import them: the idiomatic API at
+`bindings/frameworks/<name>` and `bindings/libraries/<name>` is the surface you use.
 
 Decision flow:
 
 ```
-Calling a framework class / C function?           → idiomatic
-A multi-step task with a provided helper package?  → custom
-Need an exact API the idiomatic layer lacks?       → raw bindings
+Calling a framework class / C function?            → idiomatic (bindings/frameworks|libraries)
+A multi-step task with a provided helper package?  → tools (opinionated/tools)
 Subclassing, NSXPC, dispatch, manual selectors?    → runtime
 ```
 
@@ -49,15 +54,12 @@ subclasses or model XPC/dispatch.
 
 ## Finding the binding for your framework
 
-Apple framework `Foo.framework` maps to package `foo` in every layer:
-`bindings/frameworks/foo`, `opinionated/idiomatic/framework/foo`. (Apple C
-libraries live under `…/libraries/<name>` instead.)
+Apple framework `Foo.framework` maps to package `foo` at `bindings/frameworks/foo`.
+(Apple C libraries live under `bindings/libraries/<name>` instead.)
 
-Type and method names:
+Type and method names in the idiomatic API:
 
-- **Raw bindings** keep the ObjC name exactly: class `NSView` → type
-  `appkit.NSView`; selector `setFrame:` → method `SetFrame`.
-- **Idiomatic** wrappers trim a class-name prefix **only when every class in the
+- Idiomatic wrappers trim a class-name prefix **only when every class in the
   framework shares one** (≥2 uppercase chars). Foundation and AppKit classes all
   start with `NS`, so `NSString` → `foundation.String` and `NSView` →
   `appkit.View`; SystemExtensions classes all start with `OS`, so
@@ -67,11 +69,14 @@ Type and method names:
   `networkextension.NEFilterNewFlowVerdict` (warden uses exactly that). Instance
   selector `objectAtIndex:` → method `ObjectAtIndex`; a class method like
   `+sharedManager` becomes a package-level function `SharedManager()`.
+- The internal RAW bindings (`bindings/internal/raw/...`) keep the ObjC name
+  exactly — class `NSView` → type `appkit.NSView`; selector `setFrame:` → method
+  `SetFrame` — but you don't import them; they're plumbing for the idiomatic layer.
 
 You don't have to guess the trimmed name. Two reliable lookups:
 
 1. Each idiomatic wrapper's doc comment says exactly which class it wraps —
-   `grep -rn "wrapper over the Objective-C class NSView" opinionated/idiomatic/framework/appkit`.
+   `grep -rn "wrapper over the Objective-C class NSView" bindings/frameworks/appkit`.
 2. Every generated package has a `doc.go` index listing its types.
 
 The full naming contract is [`docs/naming.md`](../docs/naming.md); the generated
@@ -81,7 +86,7 @@ package layout is described in [`CLAUDE.md`](../CLAUDE.md).
 
 When you mix levels (as `warden` does), you need to convert between a raw object
 pointer (`objc.ID`, used by the runtime) and an idiomatic wrapper. Use the public
-[`obj`](../opinionated/idiomatic/obj) package — never the internal `objref`:
+[`obj`](../bindings/runtime/obj) package — never the internal `objref`:
 
 | You have | You want | Use |
 |---|---|---|
@@ -104,10 +109,10 @@ a verdict's id with `obj.ID`) for live uses.
   APIs need a signed app bundle carrying the right entitlements (and sometimes an
   Apple Developer provisioning profile) — each example's README lists what it needs.
 - **The main thread.** AppKit and other UI-isolated (`@MainActor`) APIs must run on
-  the main thread. Both the idiomatic layer **and** the raw `bindings/frameworks/`
-  packages wrap those calls in `purego.Main` automatically. Only when you drop to the
-  runtime (`bindings/runtime/purego`) and send selectors by hand do you wrap UI calls
-  in `purego.Main` yourself. (You still need an AppKit run loop on the locked main
+  the main thread. The idiomatic `bindings/frameworks/` packages wrap those calls in
+  `purego.Main` automatically. Only when you drop to the runtime
+  (`bindings/runtime/purego`) and send selectors by hand do you wrap UI calls in
+  `purego.Main` yourself. (You still need an AppKit run loop on the locked main
   thread for the dispatch to be serviced.)
 - **Object lifetime.** Idiomatic wrappers are garbage-collected (they retain on
   creation and release via a finalizer) — just let them go out of scope. If you work

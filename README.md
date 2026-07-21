@@ -2,11 +2,12 @@
 
 Type-safe Go bindings for native macOS framework APIs, generated directly from the installed version of the Xcode SDK on macOS deterministically.
 
-This project provides three things:
+This project provides two things:
 
 - A **code generator** that introspects macOS SDK headers via Clang and produces idiomatic Go packages — ObjC frameworks are bound through [purego](https://github.com/ebitengine/purego) (no CGo, no Xcode needed to build your app), and Apple C libraries are bound through CGo bridges.
-- The **generated bindings** themselves — ready-to-import Go packages covering 251 ObjC frameworks (`bindings/frameworks/`) and 11 Apple C libraries (`bindings/libraries/`) discovered in the macOS SDK.
-- An **opinionated idiomatic layer** (`opinionated/idiomatic/`) built on top of the raw bindings — fluent, Go-shaped wrappers where constructors bundle `alloc`+`init`, properties become chainable `With*` setters, async completion handlers become `func(ctx) error`, `NSArray` getters become typed Go slices, and C functions get prefix-stripped Go names. Subclasses **embed their base** (inheriting its methods through Go promotion); an abstract base's setters accept a **sealed provider interface** so only real members of the hierarchy type-check; abstract bases emit no meaningless constructor; multi-value methods use **named returns**; and each package's `doc.go` carries a type index so `go doc` reads like a manual. Calls that Apple isolates to the **main thread** (`@MainActor` — AppKit and everything that inherits from it, like `MKMapView`) are wrapped in `purego.Main` **automatically**, so UI code is correct without the caller remembering to dispatch. The layer is **hermetic** — it never imports the raw bindings, dispatching straight through the runtime.
+- The **generated bindings** themselves — one fluent, Go-shaped package per SDK surface, ready to import: 252 ObjC frameworks (`bindings/frameworks/`) and 16 Apple C libraries (`bindings/libraries/`) discovered in the macOS SDK. Constructors bundle `alloc`+`init`, properties become chainable `With*` setters, async completion handlers become `func(ctx) error`, `NSArray` getters become typed Go slices, and C functions get prefix-stripped Go names. Subclasses **embed their base** (inheriting its methods through Go promotion); an abstract base's setters accept a **sealed provider interface** so only real members of the hierarchy type-check; abstract bases emit no meaningless constructor; multi-value methods use **named returns**; and each package's `doc.go` carries a type index so `go doc` reads like a manual. Calls that Apple isolates to the **main thread** (`@MainActor` — AppKit and everything that inherits from it, like `MKMapView`) are wrapped in `purego.Main` **automatically**, so UI code is correct without the caller remembering to dispatch.
+
+> **One consumable API.** These fluent packages are the *only* API you import. A lower-level "raw" binding (a near-1:1 purego/CGo mirror of the ObjC/C surface) is still generated as the implementation substrate, but it lives under `bindings/internal/raw/` — Go's internal-package rule makes it unreachable from outside this module. You never import it, and the compiler guarantees it.
 
 > **Platform:** macOS only (`darwin`). All generated code carries a `//go:build darwin` constraint.
 
@@ -17,7 +18,8 @@ This project provides three things:
 | Guide | Description |
 | --- | --- |
 | [Developer Guide](docs/developer_guide.md) | Build macOS apps with the SDK — app lifecycle, windows, menus, VM management, blocks, and more |
-| [Opinionated Library](docs/opinionated_library.md) | Why the opinionated layers exist, their benefits, and raw vs. opinionated side-by-side comparisons |
+| [Idiomatic Layer](docs/opinionated_library.md) | How the fluent API is shaped, its benefits, and before/after comparisons against the raw ObjC/C surface |
+| [Idiomatic Migration](docs/idiomatic-migration.md) | What changed when the idiomatic layer became the sole `bindings/` API, and how to update imports |
 | [Extraction Workflow](docs/extraction_workflow.md) | How Clang AST scanning produces `.gometa.json` files and how those drive Go code generation |
 | [Naming Standard](docs/naming.md) | The naming contract for generator code and generated identifiers |
 | [Metadata Overrides](docs/metadata_overrides.md) | Declarative per-framework metadata corrections applied at load time |
@@ -45,21 +47,21 @@ import (
 
 func main() {
     // ObjC class methods become package-level functions: +[NSProcessInfo processInfo]
-    info := foundation.NSProcessInfoProcessInfo()
+    info := foundation.NSProcessInfoProcessInfo() // *foundation.ProcessInfo
     fmt.Println(info.ProcessIdentifier(), info.ProcessorCount())
 
-    // Go strings convert at the boundary: +[NSString stringWithUTF8String:]
-    ns := foundation.NSStringStringWithUTF8String("Hello, macOS")
-    fmt.Println(ns.Length()) // 12
+    // Go strings convert at the boundary: -[NSString initWithUTF8String:]
+    s := foundation.NewStringWithUTF8String("Hello, macOS") // *foundation.String
+    fmt.Println(s.Length()) // 12
 }
 ```
 
-The idiomatic layer trades raw fidelity for fluency. Each `With*` setter returns the
+The idiomatic layer trades a raw 1:1 mirror for fluency. Each `With*` setter returns the
 receiver, so configuration reads as a single expression, and setters accept *sealed*
 provider interfaces so only a real member of a class hierarchy type-checks:
 
 ```go
-import vz "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/virtualization"
+import vz "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 
 config := vz.NewVirtualMachineConfiguration().
     WithBootLoader(vz.NewLinuxBootLoaderWithKernelURL("/var/vm/vmlinuz")).
@@ -110,20 +112,20 @@ flowchart LR
     Clang["clang\n-ast-dump=json"]
     Meta[".gometa.json\ncached metadata"]
     Gen["cmd/generate"]
-    Pure["bindings/frameworks/…\n(purego — no CGo)"]
-    CGo["bindings/libraries/…\n(CGo bridges)"]
-    Idio["opinionated/idiomatic/…\n(fluent wrappers)"]
+    Raw["bindings/internal/raw/…\n(near-1:1 mirror — internal)"]
+    Pure["bindings/frameworks/…\n(fluent purego — no CGo)"]
+    CGo["bindings/libraries/…\n(fluent CGo bridges)"]
     App["Your Go app"]
 
     SDK --> Clang --> Meta --> Gen
+    Gen --> Raw
     Gen --> Pure --> App
     Gen --> CGo --> App
-    Pure --> Idio --> App
 ```
 
 The generator uses Clang to dump the full AST of each framework header, extracts metadata (classes, protocols, enums, structs, free functions, extern constants, block types, availability windows, deprecation messages, and doc comments) into JSON, and then emits Go source files.
 
-ObjC frameworks are emitted as **pure Go** packages: classes resolve via `objc_getClass`, methods dispatch through `objc.Send`, and the framework dylib is `dlopen`ed lazily at package init. Apple C libraries (EndpointSecurity, xpc, dispatch, …) are emitted as **CGo** packages with generated `.h`/`.m` bridge files.
+ObjC frameworks are emitted as **pure Go** packages: classes resolve via `objc_getClass`, methods dispatch through `objc.Send`, and the framework dylib is `dlopen`ed lazily at package init. Apple C libraries (EndpointSecurity, xpc, dispatch, …) are emitted as **CGo** packages with generated `.h`/`.m` bridge files. Both surfaces are emitted twice — once as the internal raw mirror and once as the fluent `bindings/` API layered on top of it — from the same scanned metadata.
 
 The result is a set of Go packages where every Objective-C class becomes a Go struct, selectors become Go methods, inheritance is modelled via struct embedding, and C functions become exported Go functions — all with automatic memory management through Go finalizers.
 
@@ -167,81 +169,68 @@ import (
 )
 ```
 
-The idiomatic layer mirrors the same package names under `opinionated/idiomatic/framework/`
-(C-library wrappers live under `opinionated/idiomatic/libraries/`):
-
-```go
-import (
-    fluent "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
-)
-```
-
-Available packages mirror the frameworks in this repository — see [Framework Coverage](#framework-coverage) for the categories covered.
+These are the only packages you import. Available packages mirror the frameworks in this repository — see [Framework Coverage](#framework-coverage) for the categories covered.
 
 ### Object Model
 
-Every Objective-C class is a Go struct. Superclass relationships are modelled using struct embedding, giving you inherited methods directly on the subtype:
+Every Objective-C class is a Go struct, named without the framework's two-letter prefix (`NSString` → `foundation.String`, `NSMutableString` → `foundation.MutableString`). Superclass relationships are modelled using struct embedding, giving you inherited methods directly on the subtype:
 
 ```go
-// NSMutableString embeds NSString which embeds NSObject
-type NSMutableString struct {
-    NSString
+// MutableString embeds String which embeds Object
+type MutableString struct {
+    String
 }
 
-// Methods from NSObject and NSString are promoted automatically
-var s *foundation.NSMutableString
-_ = s.Length() // NSString method, available via embedding
+// Methods from Object and String are promoted automatically
+var s *foundation.MutableString
+_ = s.Length() // String method, available via embedding
 ```
 
-**Factory functions:** ObjC class methods (e.g. `+[NSString stringWithUTF8String:]`) are generated as package-level functions named after their class and selector:
+**Constructors:** an ObjC `alloc`+`init…` pair is bundled into a single `New…` function, and an ObjC class method (e.g. `+[NSProcessInfo processInfo]`) is generated as a package-level function named after its class and selector:
 
 ```go
-// +[NSString stringWithUTF8String:] → NSStringStringWithUTF8String
-ns := foundation.NSStringStringWithUTF8String("hello")
+// -[NSString initWithUTF8String:] → NewStringWithUTF8String
+s := foundation.NewStringWithUTF8String("hello")
 
-// +[NSDate date] → NSDateDate
-now := foundation.NSDateDate()
+// +[NSProcessInfo processInfo] → NSProcessInfoProcessInfo
+info := foundation.NSProcessInfoProcessInfo()
 ```
 
-**Wrapping a raw object id:** If you hold a raw `objc.ID` (from purego, a block callback, or an XPC/dispatch pointer), wrap it with the generated `<Class>FromID` constructor. This registers a Go finalizer so the underlying ObjC object is released when the Go wrapper is collected:
+Abstract base classes emit *no* constructor (there is nothing to instantiate); a concrete subclass provides one.
+
+**Wrapping a raw object id:** If you hold a raw `objc.ID` (from a block callback, or an XPC/dispatch pointer), wrap it with the generated `<Type>FromID` constructor. This registers a Go finalizer so the underlying ObjC object is released when the Go wrapper is collected:
 
 ```go
-str := foundation.NSStringFromID(id) // nil if id == 0
+str := foundation.StringFromID(id) // nil if id == 0
 ```
 
 > `FromID` registers a *releasing* finalizer but does **not** retain — retain first (`purego.Retain(id)`) if you don't own a +1 reference.
 
-**Generic containers:** Generic Objective-C containers use Go generics:
+**Containers:** Objective-C collections are concrete Go types whose element accessors return a runtime object handle (`obj.Object`); check its type with `IsKind` before treating it as a specific class:
 
 ```go
-var arr *foundation.NSArray[*foundation.NSString]
-count := arr.Count()
+arr := someAPI.Items()          // *foundation.Array
+count := arr.Count()            // int
+first := arr.ObjectAtIndex(0)   // obj.Object
+if first.IsKind("NSString") {
+    fmt.Println(first.Description())
+}
 ```
 
-**Protocols** are emitted as plain Go interfaces (`foundation.NSCopying`, …) for typing and duck-typed acceptance.
+**Protocols** are emitted as plain Go interfaces (`foundation.NSCopyingProtocol`, …) for typing and duck-typed acceptance. Delegate protocols get a richer interface you can implement.
 
 ### C Functions
 
-Free C functions are exported with Go-style names. Functions whose C names are already exported identifiers keep them byte-for-byte (`CFArrayCreate`, `SecItemAdd`); snake_case names become PascalCase, with the original symbol recorded in a doc comment:
+Free C functions are exported with Go-style names, with the library prefix stripped: `vmnet_start_interface` becomes `vmnet.StartInterface`, `vmnet_interface_add_ip_port_forwarding_rule` becomes `vmnet.InterfaceAddIpPortForwardingRule`. The original C symbol is recorded in a doc comment.
 
 ```go
 // C function: vmnet_start_interface
-iface := vmnet.VmnetStartInterface(desc, queue, handler)
+iface := vmnet.StartInterface(desc, queue, handler)
 ```
 
-The idiomatic layer additionally strips the framework prefix (types stay in the raw package):
+Functions with a `CFErrorRef *`/`NSError **` out-parameter return an idiomatic `error` as their last value instead of the pointer-out shape.
 
-```go
-import (
-    "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vmnet"
-    idvmnet "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/vmnet"
-)
-
-var status vmnet.Vmnet_return_t
-config := idvmnet.NetworkConfigurationCreate(vmnet.VMNET_SHARED_MODE, &status)
-```
-
-**Symbol availability:** some headers declare functions that have no dylib export (header-inline helpers, or symbols removed in newer macOS releases). Every generated package with C functions exposes a guard — calling a wrapper whose symbol failed to bind panics on a nil function variable, so probe first when in doubt:
+**Symbol availability:** some headers declare functions that have no dylib export (header-inline helpers, or symbols removed in newer macOS releases). Every generated framework package exposes a guard — calling a wrapper whose symbol failed to bind panics on a nil function variable, so probe first when in doubt:
 
 ```go
 if !vmnet.SymbolAvailable("vmnet_start_interface") {
@@ -261,7 +250,7 @@ sequenceDiagram
 
     Note over W,ObjC: method returns an object
     W->>ObjC: [obj retain]
-    W->>Go: purego.Track → runtime.SetFinalizer(wrapper, release)
+    W->>Go: Track → runtime.SetFinalizer(wrapper, release)
 
     Note over Go: wrapper unreachable
     Go->>W: finalizer fires
@@ -272,16 +261,7 @@ In the CGo `bindings/libraries/` packages, Objective-C ARC is **disabled** in al
 
 ### ObjC Blocks
 
-APIs that accept block callbacks take plain Go closures. The generated code wraps the closure in a real ObjC block object via `objc.NewBlock`, converts the callback arguments (object ids are retained and wrapped, `char*` becomes `string`), and releases the block after the call — escaping completion handlers stay alive because the callee copies them:
-
-```go
-done := make(chan vmnet.Vmnet_return_t, 1)
-
-iface := vmnet.VmnetStartInterface(desc, queue,
-    func(status vmnet.Vmnet_return_t, params *foundation.NSObject) {
-        done <- status
-    })
-```
+APIs that accept block callbacks take plain Go closures. The generated code wraps the closure in a real ObjC block object via `objc.NewBlock`, converts the callback arguments (object ids are retained and wrapped, `char*` becomes `string`), and releases the block after the call — escaping completion handlers stay alive because the callee copies them. Async APIs whose block is a single completion handler collapse to a `func(ctx) error`-shaped Go call.
 
 Block signatures whose components cannot cross purego's callback ABI (struct-by-value arguments, protocol interfaces, float returns) degrade to an `objc.Block` parameter instead — construct the block yourself with `objc.NewBlock` for those. Every degradation is recorded in the committed diagnostics baseline.
 
@@ -289,17 +269,17 @@ The CGo C-library packages use generated block trampolines (`bindings/runtime/bl
 
 ### Error Handling
 
-**ObjC errors as Go errors:** Methods with an `NSError **` out-parameter return a Go `error` as their last value, carrying the structured NSError domain, code, description, and failure reason:
+**ObjC errors as Go errors:** Methods with an `NSError **` out-parameter return a Go `error` as their last value, carrying the structured NSError domain, code, description, and failure reason. A `BOOL`-returning error method collapses to a plain `error`:
 
 ```go
-path := foundation.NSStringStringWithUTF8String("/etc/hosts")
-data, err := foundation.NSDataDataWithContentsOfFileOptionsError(path, 0)
+data, err := foundation.NewDataFromFile("/etc/hosts", 0)
 if err != nil {
     log.Fatal(err) // structured: domain, code, description, failure reason
 }
+_ = data
 ```
 
-In the idiomatic layer, `BOOL`-returning error methods collapse to a plain `error`, and C functions with `CFErrorRef *` out-parameters return `(result, error)` with the CFError converted via its toll-free NSError bridge.
+C functions with `CFErrorRef *` out-parameters return `(result, error)` with the CFError converted via its toll-free NSError bridge.
 
 **ObjC exceptions:** the CGo `bindings/libraries/` packages wrap every call in `@try`/`@catch` and re-raise exceptions as Go panics. The purego `bindings/frameworks/` packages do **not** intercept ObjC exceptions — an uncaught `NSException` terminates the process, as it would in an ObjC program.
 
@@ -307,12 +287,17 @@ In the idiomatic layer, `BOOL`-returning error methods collapse to a plain `erro
 
 All AppKit (and generally all UI-related) calls **must run on the macOS main thread**. Failure to do so causes undefined behaviour and crashes.
 
-**The idiomatic layer handles this for you.** Apple isolates UI APIs to Swift's `@MainActor`; that isolation is harvested from the Swift symbol graph and propagated down the class hierarchy, so every method, `With*` setter, and constructor of a main-thread-bound class — `NSWindow`, `NSView`, and everything that inherits from them, including `MKMapView`, `PDFView`, `SCNView` in other frameworks — is wrapped in `purego.Main` automatically. When you already hold the main thread the wrapper runs inline (no dispatch), so there is no cost on the hot path and no deadlock. Queue-based frameworks (Virtualization, Core Data) are left untouched, since they require a consistent serial queue rather than the main thread. You still need a running main run loop (`NSApplication.Run`, a CFRunLoop, or `dispatch_main`) for the dispatched work to execute.
+**The bindings handle this for you.** Apple isolates UI APIs to Swift's `@MainActor`; that isolation is harvested from the Swift symbol graph and propagated down the class hierarchy, so every method, `With*` setter, and constructor of a main-thread-bound class — `NSWindow`, `NSView`, and everything that inherits from them, including `MKMapView`, `PDFView`, `SCNView` in other frameworks — is wrapped in `purego.Main` automatically. When you already hold the main thread the wrapper runs inline (no dispatch), so there is no cost on the hot path and no deadlock. Queue-based frameworks (Virtualization, Core Data) are left untouched, since they require a consistent serial queue rather than the main thread.
 
-The **raw** `bindings/frameworks/` packages do this too: like the idiomatic layer, they now wrap `@MainActor`-isolated calls in `purego.Main` automatically, so individual UI method calls dispatch to the main thread on their own. You remain responsible for the app's main-thread *structure*, though — lock the main goroutine to the main OS thread, hand it to the AppKit run loop (so the main queue is actually serviced), and dispatch your own non-binding main-thread work via the `mainthread` helper package (pure Go, GCD main queue under the hood):
+You remain responsible for the app's main-thread *structure*, though — lock the main goroutine to the main OS thread, hand it to the AppKit run loop (so the main queue is actually serviced), and dispatch your own non-binding main-thread work via the `mainthread` helper package (pure Go, GCD main queue under the hood):
 
 ```go
-import "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/custom/mainthread"
+import (
+    "runtime"
+
+    "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+    "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/tools/grandcentraldispatch/mainthread"
+)
 
 func init() { runtime.LockOSThread() }
 
@@ -323,7 +308,7 @@ func main() {
         })
     }()
 
-    appkit.NSApplicationSharedApplication().Run() // run loop drains the main queue
+    appkit.SharedApplication().Run() // run loop drains the main queue
 }
 ```
 
@@ -344,10 +329,11 @@ go run ./cmd/generate/ <subcommand> [flags]
 | Subcommand | Description |
 | --- | --- |
 | `scan` | Invoke Clang on SDK headers and write `.gometa.json` metadata (requires Xcode) |
-| `bindings` | Re-emit bindings from committed metadata: purego ObjC frameworks + CGo C libraries (no Clang needed) |
-| `idiomatic` | Re-emit the `opinionated/idiomatic/` layer |
+| `bindings` | Re-emit the internal raw mirror from committed metadata: purego ObjC frameworks + CGo C libraries → `bindings/internal/raw/` (no Clang needed) |
+| `idiomatic` | Re-emit the fluent consumable layer → `bindings/frameworks/` + `bindings/libraries/` |
+| `parity` | Report (and ratchet) any construct the raw mirror emits that the fluent layer does not |
 | `class-hierarchy` | Derive the canonical ObjC class hierarchy → `metadata/objcclasshierarchy/` |
-| `all` | Run scan (optional) + bindings in sequence |
+| `all` | Run scan (optional) + raw `bindings` in sequence (then run `idiomatic` to refresh the consumable layer) |
 | `validate` | Structural integrity checks over committed metadata (runs in CI) |
 | `diff` | Semantic API diff between two metadata trees (for reviewable SDK bumps) |
 | `list` | List all frameworks the installed SDK exposes and exit |
@@ -357,8 +343,6 @@ go run ./cmd/generate/ <subcommand> [flags]
 | Flag | Description |
 | --- | --- |
 | `--framework <name\|all\|A,B,...>` | Framework(s) to operate on. Use `all` for every SDK framework. |
-| `--frameworks-out <path>` | Output directory for ObjC framework packages (default: `./bindings/frameworks`) |
-| `--libraries-out <path>` | Output directory for C library packages (default: `./bindings/libraries`) |
 | `--diagnostics-baseline <file>` | Fail if regeneration produces a type degradation not in the committed baseline (CI ratchet) |
 | `--diagnostics <file>` | Rewrite the diagnostics baseline (deliberate, reviewed change) |
 | `-v` | Verbose output (type degradations, cycle breaks) |
@@ -366,14 +350,18 @@ go run ./cmd/generate/ <subcommand> [flags]
 **Common workflows:**
 
 ```sh
-# Re-emit all bindings from committed metadata (fast — no Clang, no Xcode required)
+# Re-emit everything from committed metadata (fast — no Clang, no Xcode required):
+#   raw mirror → bindings/internal/raw/ ; fluent API → bindings/{frameworks,libraries}
 go run ./cmd/generate/ bindings
+go run ./cmd/generate/ idiomatic
 
-# Re-emit and enforce the committed diagnostics baseline (what CI runs)
+# Re-emit the raw mirror and enforce the committed diagnostics baseline (what CI runs)
 go run ./cmd/generate/ bindings --diagnostics-baseline metadata/diagnostics-baseline.json
 
-# Re-emit the idiomatic layer (all frameworks, or one)
-go run ./cmd/generate/ idiomatic
+# Prove the fluent layer covers everything the raw mirror emits
+go run ./cmd/generate/ parity
+
+# Re-emit the fluent layer for one framework
 go run ./cmd/generate/ idiomatic --framework Virtualization
 
 # Scan a single framework and write .gometa.json to metadata/ (requires Xcode)
@@ -391,7 +379,7 @@ go run ./cmd/generate/ diff --old /tmp/old/metadata --new ./metadata
 go run ./cmd/generate/ list
 ```
 
-> **Tip:** The repository ships with pre-built `.gometa.json` files for all discovered frameworks in `metadata/`. This means `go run ./cmd/generate/ bindings` is the fast everyday path — no Xcode or Clang invocation needed.
+> **Tip:** The repository ships with pre-built `.gometa.json` files for all discovered frameworks in `metadata/`. This means `go run ./cmd/generate/ bindings && go run ./cmd/generate/ idiomatic` is the fast everyday path — no Xcode or Clang invocation needed.
 
 ### Pipeline Phases
 
@@ -413,13 +401,13 @@ flowchart TD
         J2 --> REG
     end
 
-    subgraph Phase3["Phase 3 — Emit raw"]
+    subgraph Phase3["Phase 3 — Emit raw mirror"]
         PURE["purego frameworks\n(objc.Send, dlopen,\nblock adapters)"]
         CGO["CGo C libraries\n(.h/.m bridges,\ncontext-free, uninstrumented)"]
     end
 
-    subgraph Phase4["Phase 4 — Emit idiomatic"]
-        IDIO["opinionated/idiomatic/\n(constructors, With* chains,\nasync wrappers, typed slices,\nC-function wrappers)"]
+    subgraph Phase4["Phase 4 — Emit fluent API"]
+        IDIO["bindings/{frameworks,libraries}\n(constructors, With* chains,\nasync wrappers, typed slices,\nC-function wrappers)"]
     end
 
     Phase1 --> Phase2 --> Phase3 --> Phase4
@@ -429,9 +417,9 @@ flowchart TD
 
 **Phase 2 — Load:** All `.gometa.json` files are read and merged into a `Registry` that indexes every known class, its owning framework, and whether it uses generics. Canonical ownership is determined by the "fewest non-zero methods wins" heuristic; declarative per-framework fixups in `metadata/<kind>/<name>/overrides.json` are applied so committed metadata stays pure scanned output. When metadata exists for multiple architectures, `arm64` is preferred.
 
-**Phase 3 — Emit raw bindings:** ObjC frameworks are emitted as purego packages in topological dependency order; mutual-import cycles are detected via DFS and broken by degrading the cross-framework reference to `objc.ID`. C libraries are emitted as CGo packages with generated bridge files. Every type degradation is collected and checked against `metadata/diagnostics-baseline.json` — new degradations fail CI until deliberately accepted.
+**Phase 3 — Emit raw mirror:** ObjC frameworks are emitted as purego packages in topological dependency order under `bindings/internal/raw/frameworks/`; mutual-import cycles are detected via DFS and broken by degrading the cross-framework reference to `objc.ID`. C libraries are emitted as CGo packages with generated bridge files under `bindings/internal/raw/libraries/`. Every type degradation is collected and checked against `metadata/diagnostics-baseline.json` — new degradations fail CI until deliberately accepted.
 
-**Phase 4 — Emit idiomatic:** The `idiomatic` subcommand regenerates `opinionated/idiomatic/` — per-class fluent wrappers (subclasses embedding their base), sealed provider interfaces for abstract base classes, CFError-converting function wrappers, generic C-function wrappers, and a `doc.go` type index per package. The emitter is a compiler-style pipeline: a resolution pass turns scanned metadata into a pure-data intermediate representation (the `view` package), and a render pass turns that into Go source through `text/template` files only — no Go syntax is assembled by string concatenation, and imports are computed from the resolved types rather than scanned from the output. Hand-crafted packages under `opinionated/library/` and `opinionated/custom/`, and any hand-authored `example_test.go`, are never touched by the generator.
+**Phase 4 — Emit fluent API:** The `idiomatic` subcommand emits the consumable `bindings/frameworks/` + `bindings/libraries/` packages — per-class fluent wrappers (subclasses embedding their base), sealed provider interfaces for abstract base classes, error-returning function wrappers, generic C-function wrappers, and a `doc.go` type index per package. The emitter is a compiler-style pipeline: a resolution pass turns scanned metadata into a pure-data intermediate representation (the `view` package), and a render pass turns that into Go source through `text/template` files only — no Go syntax is assembled by string concatenation, and imports are computed from the resolved types rather than scanned from the output. The ObjC framework layer is **hermetic** — it never imports the raw mirror, dispatching straight through the runtime; the C-library layer re-exports raw value types via `type X = raw.X` aliases so consumers never name an internal package. The `parity` gate proves every construct the raw mirror emits has a fluent counterpart.
 
 ---
 
@@ -442,31 +430,32 @@ flowchart TD
 ```text
 go-bindings-macosplatform/
 ├── cmd/
-│   ├── generate/          # Main CLI (scan, bindings, idiomatic, class-hierarchy, all, list, validate, diff)
+│   ├── generate/          # Main CLI (scan, bindings, idiomatic, parity, class-hierarchy, all, list, validate, diff)
 │   ├── inspect/           # Debug utility to inspect .gometa.json files
 │   └── genacceptance/     # Regenerates the acceptance test corpus
-├── bindings/
-│   ├── frameworks/        # Generated purego packages for ObjC frameworks (250)
+├── bindings/              # Everything a consumer imports lives here
+│   ├── frameworks/        # Fluent ObjC framework packages — the consumable API (252)
 │   │   ├── foundation/
 │   │   ├── appkit/
 │   │   └── …
-│   ├── libraries/         # Generated CGo packages for Apple C libraries (11)
+│   ├── libraries/         # Fluent Apple C-library packages (16)
 │   │   ├── endpointsecurity/
 │   │   ├── xpc/
-│   │   ├── dispatch/
+│   │   ├── bsd/           #   public pure-Go helper package (no bridge)
 │   │   └── …
-│   └── runtime/           # Public runtime — imported by generated code AND by consumers
-│       ├── purego/        # purego runtime: Track/Retain/Release, GoString, NSErrorToError + ObjC dispatch re-exports (+ objcerrors/)
-│       ├── cgo/           # CGo runtime: retain/release, RunOnMainThread, exceptions
-│       ├── blocks/        # CGo block trampoline runtime
-│       └── callbacks/     # CGo method/callback trampoline runtime
+│   ├── runtime/           # Public runtime — imported by generated code AND by consumers
+│   │   ├── purego/        #   purego runtime: Track/Retain/Release, GoString, NSErrorToError + ObjC dispatch re-exports (+ objcerrors/)
+│   │   ├── cgo/           #   CGo runtime: retain/release, RunOnMainThread, exceptions
+│   │   ├── obj/ rt/ errkit/  #   fluent-layer runtime support (object handles, dispatch, structured errors)
+│   │   ├── blocks/        #   CGo block trampoline runtime
+│   │   └── callbacks/     #   CGo method/callback trampoline runtime
+│   └── internal/          # Not importable from outside the module (Go internal rule)
+│       ├── objref/ shim/ dispatch/   # private fluent-layer support packages
+│       └── raw/
+│           ├── frameworks/   #   near-1:1 purego mirror (implementation substrate)
+│           └── libraries/    #   near-1:1 CGo mirror + bridge .h/.m
 ├── opinionated/
-│   ├── idiomatic/         # Fully generated fluent layer
-│   │   ├── framework/     #   one package per ObjC framework
-│   │   ├── libraries/     #   one package per Apple C library
-│   │   └── obj/ rt/ errkit/ internal/objref/   # generated runtime support packages
-│   ├── library/           # Hand-crafted quality-of-life helpers (never regenerated)
-│   └── custom/            # Custom hand-crafted packages
+│   └── tools/             # Hand-written helper tools (e.g. grandcentraldispatch/mainthread)
 ├── internal/
 │   ├── macosplatformmetadata/  # Canonical scanned-SDK model + .gometa.json I/O (shared by scanner + both pipelines + QA)
 │   ├── scanner/           # Clang AST dump, metadata extraction, raw header parsing, C library registry
@@ -474,19 +463,22 @@ go-bindings-macosplatform/
 │   │   ├── frameworks/    # purego front-end: loader, typemap, naming, pipeline, appledocs, mainactor, overrides
 │   │   ├── libraries/     # CGo front-end: loader, typemap, naming, pipeline, classify
 │   │   ├── shared/        # shared file scaffold (fileasm)
+│   │   ├── emitmanifest/  # parity oracle (per-construct emit manifest, keyed on ObjC/C name)
 │   │   └── emit/          # all four emitters (view IR + render templates):
 │   │       │              #   raw/{frameworks,libraries} · idiomatic/{frameworks,libraries}
 │   ├── appledocs/ mainactor/ validate/ metadiff/ diagnostics/ overrides/  # Doc/main-thread sidecars + metadata QA
 │   └── swift/             # Swift-only framework support (.swiftinterface parser + stub emit)
 ├── examples/              # Runnable example apps + an adoption guide (examples/README.md)
-├── acceptance/            # Acceptance tests (sampled live calls + curated regression anchors)
-├── docs/                  # Guides, naming standard, overrides format
-└── metadata/              # Committed .gometa.json cache (per framework × arch)
-    ├── frameworks/        # ObjC framework metadata (+ optional overrides.json)
-    ├── libraries/         # Apple C library metadata (+ optional overrides.json)
-    ├── clibraries.json    # C library registry (name → link_lib/header)
-    └── diagnostics-baseline.json  # Known type degradations (CI ratchet)
+├── metadata/              # Committed .gometa.json cache (per framework × arch)
+│   ├── frameworks/        # ObjC framework metadata (+ optional overrides.json)
+│   ├── libraries/         # Apple C library metadata (+ optional overrides.json)
+│   ├── clibraries.json    # C library registry (name → link_lib/header)
+│   ├── diagnostics-baseline.json  # Known type degradations (CI ratchet)
+│   └── parity-baseline.json       # Accepted raw-vs-fluent coverage residuals (CI ratchet)
+└── docs/                  # Guides, naming standard, overrides format
 ```
+
+The acceptance tests live at `bindings/acceptance/` (sampled live calls + curated regression anchors) — they exercise both the fluent API and, co-located under `bindings/internal/raw/`, the raw mirror.
 
 ### Two Emission Pipelines
 
@@ -498,10 +490,11 @@ go-bindings-macosplatform/
 | Telemetry | None (zero-overhead dispatch) | None (context-free, uninstrumented dispatch) |
 | ObjC exceptions | Not intercepted | Caught and re-raised as Go panics |
 | Blocks | `purego.NewBlock` adapters from Go closures | Generated trampolines (`bindings/runtime/blocks`) |
+| Raw relationship | Hermetic — dispatches through the runtime, never imports raw | Re-exports raw value types via `type X = raw.X` aliases |
 
 ### Runtime Layer
 
-The runtime lives under `bindings/runtime/` — public packages imported both by the generated code and by your own application code (so consumers only ever import `bindings/…`). `bindings/runtime/purego` is imported by every generated framework package:
+The runtime lives under `bindings/runtime/` — public packages imported both by the generated code and by your own application code (so consumers only ever import `bindings/…`). `bindings/runtime/purego` backs every generated framework package:
 
 | Function | Purpose |
 | --- | --- |
@@ -512,62 +505,64 @@ The runtime lives under `bindings/runtime/` — public packages imported both by
 | `purego.NSErrorToError(id)` | Converts an `NSError` to a structured Go error (domain, code, reason, recovery, underlying) |
 | `purego.GoCString(ptr)` | Reads a null-terminated C string address (used by block adapters) |
 
-`bindings/runtime/purego` also re-exports the ObjC dynamic-dispatch surface (`ID`, `SEL`, `Send`, `RegisterName`, `RegisterClass`, `NewBlock`, …) so consumers performing raw message-sends never need to import the underlying `ebitengine/purego` directly.
+`bindings/runtime/purego` also re-exports the ObjC dynamic-dispatch surface (`ID`, `SEL`, `Send`, `RegisterName`, `RegisterClass`, `NewBlock`, …) so consumers performing raw message-sends never need to import the underlying `ebitengine/purego` directly. The fluent layer additionally uses `bindings/runtime/{obj,rt,errkit}` for object handles, main-thread dispatch, and structured errors.
 
-Each generated package also carries a small `<pkg>_runtime.go`: a `sync.Once`-guarded `dlopen` of the framework dylib, per-symbol function registration with failure tracking, and the public `SymbolAvailable(symbol string) bool` probe.
+Each generated package also carries a small `<pkg>_runtime_generated.go`: a `sync.Once`-guarded `dlopen` of the framework dylib, per-symbol function registration with failure tracking, and the public `SymbolAvailable(symbol string) bool` probe.
 
 The CGo library packages use `bindings/runtime/cgo` instead (retain/release, `RunOnMainThread`, string conversion, exception extraction, `RaiseIfException`, `NSErrorToError`). Their calls are context-free and uninstrumented — the same zero-overhead dispatch as the purego frameworks.
 
 ### Generated Package Structure
 
-Each purego ObjC framework package follows this layout:
+Each fluent ObjC framework package follows this layout:
 
 ```text
 bindings/frameworks/foundation/
-├── doc.go                   # Package documentation + Apple docs link
-├── foundation_runtime.go    # dlopen + symbol registration + SymbolAvailable
-├── foundation_enums.go      # Enum constants (+ String() methods)
-├── foundation_structs.go    # C struct bindings and typedef aliases
-├── foundation_externs.go    # Extern constant accessors (dlsym-backed)
-├── foundation_protocols.go  # Protocol Go interfaces
-├── foundation_functions.go  # Free C function wrappers (exported Go names)
-└── <ClassName>.go           # One file per ObjC class (type, selectors, FromID, methods)
+├── doc.go                          # Package documentation + a type index so `go doc` reads like a manual
+├── foundation_runtime_generated.go # dlopen + symbol registration + SymbolAvailable
+├── foundation_enums_generated.go   # Enum constants (+ String() methods)
+├── foundation_structs_generated.go # C value structs and typedef aliases
+├── foundation_constants_generated.go # Extern constant accessors
+├── foundation_errors_generated.go  # Error-code enums and domains
+├── foundation_protocols_generated.go # Protocol Go interfaces
+├── foundation_providers_generated.go # Sealed provider interfaces for abstract base classes
+├── foundation_classmethods_generated.go # Class-method (factory) package functions
+├── foundation_cfunctions_generated.go # Free C function wrappers (prefix-stripped Go names)
+├── <ClassName>_generated.go        # One file per ObjC class (type, New…, FromID, methods, With* setters)
+└── <Delegate>_delegate_generated.go # Delegate protocols as implementable interfaces
 ```
 
-C library packages add CGo plumbing:
+C library packages carry a thin fluent surface over the internal raw mirror:
 
 ```text
 bindings/libraries/xpc/
 ├── doc.go
-├── cgo.go                   # LDFLAGS: -lSystem (or -framework / -l<lib>)
-├── xpc_enums.go / xpc_structs.go / xpc_externs.go / xpc_protocols.go
-├── xpc_functions.go         # C function wrappers (exception-guarded)
-├── xpc_bridge_impl.m        # Block trampoline implementations
-└── bridge/
-    ├── xpc_bridge.h
-    └── xpc_bridge.m         # Compiled with -fno-objc-arc
+├── xpc_aliases_generated.go   # type/const/var re-exports of the raw mirror (type X = raw.X)
+└── xpc_cfunctions_generated.go # prefix-stripped, error-returning C function wrappers
 ```
 
-A typical generated class file (`NSString.go`):
+The CGo bridge (`.h`/`.m`, compiled with `-fno-objc-arc`) and the raw CGo package live under `bindings/internal/raw/libraries/xpc/`.
+
+A typical generated class file (`NSString_generated.go`):
 
 ```go
-// Code generated by go-bindings-purecg. DO NOT EDIT.
+// Code generated by go-bindings-codegen. DO NOT EDIT.
 //go:build darwin
 
 package foundation
 
+// String is the Go form of the Objective-C class NSString.
 // Apple documentation: https://developer.apple.com/documentation/foundation/nsstring
-type NSString struct {
-    NSObject
+type String struct {
+    Object
 }
 
-// NSStringFromID wraps a raw objc.ID and registers a releasing finalizer.
-func NSStringFromID(id objc.ID) *NSString { … }
+// StringFromID wraps a raw objc.ID and registers a releasing finalizer.
+func StringFromID(id objc.ID) *String { … }
 
-func (o *NSString) Length() uint { … }
+func (s *String) Length() int { … }
 
-// +[NSString stringWithUTF8String:]
-func NSStringStringWithUTF8String(nullTerminatedCString string) *NSString { … }
+// NewStringWithUTF8String bundles -[NSString initWithUTF8String:] with alloc.
+func NewStringWithUTF8String(nullTerminatedCString string) *String { … }
 ```
 
 ### Generated Code Annotations
@@ -579,13 +574,14 @@ Declarations in the generated output carry structured comments drawn from the Xc
 | `// Apple documentation: <url>` | Derived per class/package | `// Apple documentation: https://developer.apple.com/documentation/foundation/nsstring` |
 | `// <doc text>` | `///` or `/*!` comments in SDK headers | `// @function vmnet_start_interface @abstract …` |
 | `// Deprecated: …` | `API_DEPRECATED(...)` in header | `// Deprecated: replaced by vmnet_interface_add_ip_port_forwarding_rule` |
-| `// C function: <symbol>` | Export-rename provenance | `// C function: vmnet_start_interface` on `VmnetStartInterface` |
+| `// C function: <symbol>` | Export-rename provenance | `// C function: vmnet_start_interface` on `StartInterface` |
 
 ### Metadata QA
 
-Three mechanisms keep regeneration honest:
+Four mechanisms keep regeneration honest:
 
 - **`generate validate`** — structural integrity gate over committed metadata (dangling superclasses, ownership ties, enum base-type conflicts, availability anomalies). Errors fail CI.
+- **`generate parity`** — proves the fluent layer emits a counterpart for every construct the raw mirror emits (keyed on the ObjC/C name so renames are invisible and only *absence* is a finding). Ratchets against `metadata/parity-baseline.json`.
 - **Diagnostics ratchet** — `bindings --diagnostics-baseline` fails when regeneration produces a type degradation (an `unsafe.Pointer`/`objc.ID`/`objc.Block` fallback) not in the committed baseline. Fixing degradations shrinks the baseline; adding one requires a reviewed baseline edit.
 - **Overrides** — `metadata/<kind>/<name>/overrides.json` applies declarative per-framework corrections (exclude, remap type, availability fix) at load time, so committed `.gometa.json` stays pure scanned output. See [docs/metadata_overrides.md](docs/metadata_overrides.md).
 
@@ -593,7 +589,7 @@ Three mechanisms keep regeneration honest:
 
 ## Framework Coverage
 
-Bindings are committed for 251 ObjC frameworks and 11 Apple C libraries discovered in the macOS 26.5 SDK. For frameworks with a Swift-only API surface (e.g. `SwiftUI`, `SwiftUICore`), the generator emits documentation-only stub packages. Coverage spans:
+Bindings are committed for 252 ObjC frameworks and 16 Apple C libraries discovered in the macOS 26.5 SDK. For frameworks with a Swift-only API surface (e.g. `SwiftUI`, `SwiftUICore`), the generator emits documentation-only stub packages. Coverage spans:
 
 | Category | Examples |
 | --- | --- |
@@ -625,15 +621,15 @@ Use `go run ./cmd/generate/ list` to see the exact set available in the SDK inst
 
 **Header-only symbols** — Some declared functions have no dylib export (header-inline helpers, symbols dropped in newer macOS releases). Their wrappers exist but panic when called; use the per-package `SymbolAvailable("symbol_name")` probe to check first.
 
-**No ObjC subclassing / delegate implementation** — The purego framework packages do not currently generate Go-backed ObjC subclasses or delegate protocol implementations. Protocols are emitted as Go interfaces for typing only; APIs that require you to *implement* a delegate need a hand-written shim.
+**Delegate implementation** — Delegate protocols are surfaced as implementable Go interfaces, but the purego framework packages do not yet generate the ObjC-subclass shim that installs a Go value as a live delegate; APIs that require you to *be* a delegate at the ObjC level still need a hand-written shim. Non-delegate protocols are emitted as Go interfaces for typing only.
 
 **ObjC exceptions (frameworks)** — purego framework calls do not intercept `NSException`; an uncaught ObjC exception terminates the process. The CGo library packages catch exceptions and re-raise them as Go panics.
 
-**Go name collisions** — When two C symbols map to the same exported Go name (e.g. `__CGSizeEqualToSize` vs `CGSizeEqualToSize`, or `rb_hash` vs `rb_Hash`), the identity-named symbol wins and the transformed one is skipped with a diagnostics-baseline entry. Selector collisions on a class are disambiguated with numeric suffixes.
+**Go name collisions** — When two C symbols map to the same exported Go name (e.g. `__CGSizeEqualToSize` vs `CGSizeEqualToSize`), the identity-named symbol wins and the transformed one is skipped with a diagnostics-baseline entry. Selector collisions on a class are disambiguated with numeric suffixes.
 
 **Case-insensitive filenames** — On macOS APFS volumes (default, case-insensitive), two ObjC class names that differ only in case produce the same filename. The generator detects this and appends a numeric suffix (`_2`, `_3`) to disambiguate.
 
-**Main thread requirement** — All AppKit (and generally all UI framework) calls must be dispatched on the macOS main thread. The bindings do not enforce this automatically — see [Main Thread Dispatch](#main-thread-dispatch).
+**Main thread requirement** — All AppKit (and generally all UI framework) calls must run on the macOS main thread. The bindings wrap `@MainActor`-isolated calls in `purego.Main` automatically, but you still own the app's main-thread structure — see [Main Thread Dispatch](#main-thread-dispatch).
 
 **macOS only** — There is no iOS, tvOS, or watchOS support. All code is gated on `//go:build darwin`.
 
@@ -643,7 +639,7 @@ Use `go run ./cmd/generate/ list` to see the exact set available in the SDK inst
 
 **Sparse doc comments** — Most Apple SDK headers do not use structured doc comment syntax (`///` or `/*!`). Only declarations immediately preceded by such comments receive a doc annotation.
 
-**Importing only `bindings/…`** — Everything an external module needs is public under `bindings/`: the generated `bindings/frameworks/` and `bindings/libraries/` packages plus the shared runtime under `bindings/runtime/` (`purego`, `cgo`, `blocks`, `callbacks`). The generator itself (`internal/codegen/…`), the scanner, and the scanned-metadata model (`internal/macosplatformmetadata`) remain in `internal/` and are not importable from outside this module — only in-repo tooling uses them.
+**Importing only `bindings/…`** — Everything an external module needs is public under `bindings/`: the generated `bindings/frameworks/` and `bindings/libraries/` packages plus the shared runtime under `bindings/runtime/`. The raw mirror (`bindings/internal/raw/…`), the fluent-layer support packages (`bindings/internal/…`), the generator (`internal/codegen/…`), the scanner, and the scanned-metadata model (`internal/macosplatformmetadata`) are all under `internal/` and are not importable from outside this module.
 
 ---
 
@@ -651,7 +647,7 @@ Use `go run ./cmd/generate/ list` to see the exact set available in the SDK inst
 
 Contributions are welcome. Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) before opening a pull request.
 
-When modifying the generator (`internal/` or `cmd/generate/`), regenerate the affected bindings (`go run ./cmd/generate/ bindings` and, if applicable, `idiomatic`) and include the updated `bindings/` output in the same PR. The diagnostics ratchet (`--diagnostics-baseline metadata/diagnostics-baseline.json`) must pass; naming rules are defined in [docs/naming.md](docs/naming.md).
+When modifying the generator (`internal/` or `cmd/generate/`), regenerate the affected output (`go run ./cmd/generate/ bindings` and `go run ./cmd/generate/ idiomatic`) and include the updated `bindings/` tree in the same PR. The diagnostics ratchet (`--diagnostics-baseline metadata/diagnostics-baseline.json`) and the parity gate (`go run ./cmd/generate/ parity`) must pass; naming rules are defined in [docs/naming.md](docs/naming.md).
 
 ---
 

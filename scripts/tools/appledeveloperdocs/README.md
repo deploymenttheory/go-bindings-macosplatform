@@ -3,9 +3,9 @@
 Harvests Apple's developer documentation from the **DocC render API** and writes
 it into per-framework sidecar files (`appledocs.json`) next to the committed
 `.gometa.json` metadata. The codegen loaders merge these into the `Doc` fields at
-load time (Apple-preferred, header fallback), so the generated raw bindings
-(`bindings/frameworks/`, `bindings/libraries/`) and the idiomatic layer
-(`opinionated/idiomatic/`) carry Apple's prose alongside the code.
+load time (Apple-preferred, header fallback), so both the idiomatic bindings
+(`bindings/frameworks/`, `bindings/libraries/`) and the internal raw substrate
+(`bindings/internal/raw/...`) carry Apple's prose alongside the code.
 
 This is a Go mirror of [`csandrew-dev/AppleDocParser`](https://github.com/csandrew-dev/AppleDocParser).
 Where that tool drove a Selenium browser and scraped rendered HTML for Apple's

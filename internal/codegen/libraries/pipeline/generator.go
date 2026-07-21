@@ -10,8 +10,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/libraries"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries"
+	rawlib "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/libraries"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 	swiftemit "github.com/deploymenttheory/go-bindings-macosplatform/internal/swift/emit"
@@ -58,22 +57,11 @@ type BindingsConfig struct {
 const (
 	defaultBlocksDir    = "bindings/runtime/blocks"
 	defaultCallbacksDir = "bindings/runtime/callbacks"
+	// defaultBsdDir is the PUBLIC location of the POSIX/BSD support package
+	// (see typemap.BsdModulePath) — outside bindings/internal/raw so both the
+	// internal raw libraries and the public idiomatic ones can import it.
+	defaultBsdDir = "bindings/libraries/bsd"
 )
-
-// CustomConfig controls generation of the opinionated/custom layer.
-// Only *_generated.go files are written; hand-crafted files are never touched.
-type CustomConfig struct {
-	// Registry is the combined metadata for all frameworks.
-	Registry *Registry
-	// OutDir is the root output directory for the opinionated/custom layer.
-	// Canonical value: <repo-root>/opinionated/custom
-	OutDir string
-	// Frameworks is an optional filter: when non-empty, only the named frameworks
-	// are regenerated. Empty means regenerate all frameworks.
-	Frameworks []string
-	// Verbose enables diagnostic output.
-	Verbose bool
-}
 
 // buildMapper constructs the shared type mapper from a loaded registry.
 func buildMapper(reg *Registry, nsStringOverloads bool) *typemap.Mapper {
@@ -114,9 +102,11 @@ func GenerateBindings(cfg BindingsConfig) error {
 			return fmt.Errorf("clean libraries dir: %w", err)
 		}
 		// The bsd support package backs the typemap's POSIX/BSD struct
-		// resolution (bsd.Timespec, bsd.EtherAddr, …). The libraries tree is
-		// wiped above, so it is re-emitted on every run.
-		bsdDir := filepath.Join(cfg.LibrariesOutDir, "bsd")
+		// resolution (bsd.Timespec, bsd.EtherAddr, …). It is emitted to its own
+		// PUBLIC location (not under the raw LibrariesOutDir) so both the internal
+		// raw libraries and the public idiomatic ones can import it; re-emitted on
+		// every run.
+		bsdDir := defaultBsdDir
 		if err := os.MkdirAll(bsdDir, 0o755); err != nil {
 			return fmt.Errorf("mkdir bsd package dir: %w", err)
 		}
@@ -200,12 +190,16 @@ func GenerateBindings(cfg BindingsConfig) error {
 		}
 	}
 
-	if err := forEachFramework(reg, nil, func(framework *macosplatformmetadata.FrameworkMeta) error {
-		if err := emitFramework(cfg, framework, m, reg); err != nil {
-			return fmt.Errorf("generate %s: %w", framework.Framework, err)
-		}
-		return nil
-	}); err != nil {
+	if err := forEachFramework(
+		reg,
+		nil,
+		func(framework *macosplatformmetadata.FrameworkMeta) error {
+			if err := emitFramework(cfg, framework, m, reg); err != nil {
+				return fmt.Errorf("generate %s: %w", framework.Framework, err)
+			}
+			return nil
+		},
+	); err != nil {
 		return err
 	}
 
@@ -251,24 +245,14 @@ func GenerateBindings(cfg BindingsConfig) error {
 	return nil
 }
 
-// GenerateCustom writes *_generated.go files for the opinionated/custom layer.
-// Hand-crafted files in the output directories are never deleted.
-func GenerateCustom(cfg CustomConfig) error {
-	reg := cfg.Registry
-	m := buildMapper(reg, false)
-
-	return forEachFramework(reg, cfg.Frameworks, func(framework *macosplatformmetadata.FrameworkMeta) error {
-		if err := emitOpinionated(cfg, framework, m, reg); err != nil {
-			return fmt.Errorf("opinionated %s: %w", framework.Framework, err)
-		}
-		return nil
-	})
-}
-
 // forEachFramework calls fn for each framework in topological dependency order.
 // When filter is non-empty, only frameworks whose lowercase name appears in the
 // filter set are processed; an empty filter means all frameworks.
-func forEachFramework(reg *Registry, filter []string, fn func(*macosplatformmetadata.FrameworkMeta) error) error {
+func forEachFramework(
+	reg *Registry,
+	filter []string,
+	fn func(*macosplatformmetadata.FrameworkMeta) error,
+) error {
 	filterSet := make(map[string]bool, len(filter))
 	for _, frameworkName := range filter {
 		filterSet[strings.ToLower(frameworkName)] = true
@@ -315,8 +299,9 @@ func sortFrameworksByDependency(reg *Registry) []*macosplatformmetadata.Framewor
 			inDegree[frameworkName] = 0
 		}
 		for dep := range deps[frameworkName] {
-			inDegree[dep] = inDegree[dep] // ensure present
-			_ = dep
+			if _, ok := inDegree[dep]; !ok {
+				inDegree[dep] = 0 // ensure every referenced node is present
+			}
 		}
 	}
 	// recalculate: inDegree[A] = number of frameworks that A depends on
@@ -753,87 +738,6 @@ func emitFramework(
 	return nil
 }
 
-// emitOpinionated writes *_generated.go files for the opinionated layer for
-// one framework. Only files matching *_generated.go are removed on each run;
-// hand-crafted files in the same directory are never touched.
-// Swift-only, umbrella, and unsupported-bridge frameworks are skipped silently.
-func emitOpinionated(
-	cfg CustomConfig,
-	framework *macosplatformmetadata.FrameworkMeta,
-	m *typemap.Mapper,
-	reg *Registry,
-) error {
-	if framework.IsSwiftOnly || len(framework.UmbrellaFor) > 0 ||
-		unsupportedBridgeFrameworks[framework.Framework] {
-		return nil
-	}
-
-	packageName := strings.ToLower(framework.Framework)
-	opDir := filepath.Join(cfg.OutDir, packageName)
-
-	// Remove stale *_generated.go files; leave all other files untouched.
-	if entries, err := os.ReadDir(opDir); err == nil {
-		for _, e := range entries {
-			if !e.IsDir() && strings.HasSuffix(e.Name(), "_generated.go") {
-				_ = os.Remove(filepath.Join(opDir, e.Name()))
-			}
-		}
-	}
-
-	if err := os.MkdirAll(opDir, 0o755); err != nil {
-		return fmt.Errorf("mkdir %s: %w", opDir, err)
-	}
-
-	rawImportPath := m.ModulePrefix + "/" + packageName
-
-	if err := writeFile(
-		filepath.Join(opDir, packageName+"_async_generated.go"),
-		func(buf *bytes.Buffer) error {
-			return idiolib.EmitAsync(
-				buf,
-				packageName,
-				rawImportPath,
-				framework,
-				m,
-				reg.ClassNameIndex,
-			)
-		},
-	); err != nil {
-		return err
-	}
-	if err := writeFile(
-		filepath.Join(opDir, packageName+"_slices_generated.go"),
-		func(buf *bytes.Buffer) error {
-			return idiolib.EmitSlices(
-				buf,
-				packageName,
-				rawImportPath,
-				framework,
-				m,
-				reg.ClassNameIndex,
-			)
-		},
-	); err != nil {
-		return err
-	}
-	if err := writeFile(
-		filepath.Join(opDir, packageName+"_specs_generated.go"),
-		func(buf *bytes.Buffer) error {
-			return idiolib.EmitSpecs(
-				buf,
-				packageName,
-				rawImportPath,
-				framework,
-				m,
-				reg.ClassNameIndex,
-			)
-		},
-	); err != nil {
-		return err
-	}
-	return nil
-}
-
 // writeFile creates a file, invokes fn with a buffer, then writes the buffer.
 func writeFile(path string, fn func(*bytes.Buffer) error) error {
 	var buf bytes.Buffer
@@ -954,7 +858,10 @@ func writeGoHeaderRuntime(buf *bytes.Buffer, pkgName string) {
 	fmt.Fprintf(buf, "package %s\n\n", pkgName)
 	fmt.Fprintf(buf, "import (\n")
 	fmt.Fprintf(buf, "\t\"unsafe\"\n")
-	fmt.Fprintf(buf, "\t\"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo\"\n")
+	fmt.Fprintf(
+		buf,
+		"\t\"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo\"\n",
+	)
 	fmt.Fprintf(buf, ")\n\n")
 	fmt.Fprintf(buf, "var _ unsafe.Pointer   // suppress unused import\n")
 	fmt.Fprintf(buf, "var _ cgo.Object = nil // suppress unused import\n\n")

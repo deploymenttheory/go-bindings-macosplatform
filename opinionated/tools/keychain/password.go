@@ -3,8 +3,8 @@
 package keychain
 
 import (
-	foundation "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
-	security "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/security"
+	foundation "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	security "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
 )
 
 // ── Generic password (kSecClassGenericPassword) ──────────────────────────────

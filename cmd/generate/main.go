@@ -26,8 +26,8 @@ import (
 	"strings"
 	"sync"
 
-	cgopipeline  "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/pipeline"
 	purepipeline "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/pipeline"
+	cgopipeline "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/pipeline"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/diagnostics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/metadiff"
@@ -36,8 +36,19 @@ import (
 )
 
 const (
-	defaultFrameworksModulePrefix = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks"
-	defaultLibrariesModulePrefix  = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries"
+	// The raw (purego/CGo) bindings live under bindings/internal/raw so Go's
+	// internal-package rule makes them unreachable to external consumers. The
+	// idiomatic layer at bindings/{frameworks,libraries} is the only public API.
+	defaultFrameworksModulePrefix = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks"
+	defaultLibrariesModulePrefix  = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries"
+
+	// Filesystem output roots matching the module prefixes above.
+	defaultRawFrameworksOutDir = "./bindings/internal/raw/frameworks"
+	defaultRawLibrariesOutDir  = "./bindings/internal/raw/libraries"
+
+	// The public idiomatic layer's output roots.
+	defaultIdiomaticFrameworksOutDir = "./bindings/frameworks"
+	defaultIdiomaticLibrariesOutDir  = "./bindings/libraries"
 )
 
 func main() {
@@ -63,6 +74,8 @@ func main() {
 		runDiff(os.Args[2:])
 	case "idiomatic":
 		runIdiomatic(os.Args[2:])
+	case "parity":
+		runParity(os.Args[2:])
 	default:
 		fmt.Fprintf(os.Stderr, "unknown sub-command %q\n\n", os.Args[1])
 		printUsage()
@@ -82,6 +95,7 @@ Sub-commands:
   validate         Run structural integrity checks over committed metadata
   diff             Semantic API diff between two metadata trees
   idiomatic        Emit opinionated idiomatic layer (Go-friendly wrappers)
+  parity           Report raw constructs the idiomatic emitter does not yet emit
 
 Run 'generate <sub-command> -help' for flags.
 `)
@@ -94,10 +108,10 @@ Run 'generate <sub-command> -help' for flags.
 func runIdiomatic(args []string) {
 	fs := flag.NewFlagSet("idiomatic", flag.ExitOnError)
 	framework := fs.String("framework", "", `Framework/library(s) to emit: name, comma-separated list, or "all" (default: all)`)
-	metaDir   := fs.String("metadata-dir", "./metadata", "Directory containing .gometa.json files")
-	out       := fs.String("out", "./opinionated/idiomatic/framework", "Output directory for idiomatic ObjC-framework packages")
-	librariesOut := fs.String("libraries-out", "./opinionated/idiomatic/libraries", "Output directory for idiomatic CGo C-library packages")
-	verbose   := fs.Bool("v", false, "Verbose output")
+	metaDir := fs.String("metadata-dir", "./metadata", "Directory containing .gometa.json files")
+	out := fs.String("out", defaultIdiomaticFrameworksOutDir, "Output directory for idiomatic ObjC-framework packages")
+	librariesOut := fs.String("libraries-out", defaultIdiomaticLibrariesOutDir, "Output directory for idiomatic CGo C-library packages")
+	verbose := fs.Bool("v", false, "Verbose output")
 	_ = fs.Parse(args)
 
 	var names []string
@@ -105,7 +119,7 @@ func runIdiomatic(args []string) {
 		names = splitTrimmed(*framework, ",")
 	}
 
-	// ObjC frameworks → opinionated/idiomatic/framework (purego pipeline).
+	// ObjC frameworks → bindings/frameworks (purego pipeline).
 	reg := loadPureRegistry(*metaDir, defaultFrameworksModulePrefix, defaultLibrariesModulePrefix)
 	if err := purepipeline.GenerateIdiomatic(purepipeline.IdiomaticConfig{
 		Registry:   reg,
@@ -117,13 +131,14 @@ func runIdiomatic(args []string) {
 	}
 	log.Printf("idiomatic frameworks: done → %s", *out)
 
-	// CGo C libraries → opinionated/idiomatic/libraries (CGo pipeline).
+	// CGo C libraries → bindings/libraries (CGo pipeline).
 	cgoReg := loadCGORegistry(*metaDir, defaultLibrariesModulePrefix)
 	if err := cgopipeline.GenerateIdiomaticLibraries(cgopipeline.IdiomaticConfig{
-		Registry:  cgoReg,
-		OutDir:    *librariesOut,
-		Libraries: names,
-		Verbose:   *verbose,
+		Registry:      cgoReg,
+		OutDir:        *librariesOut,
+		Libraries:     names,
+		Verbose:       *verbose,
+		RawSourceRoot: defaultRawLibrariesOutDir, // read raw source from bindings/internal/raw/libraries
 	}); err != nil {
 		log.Fatalf("idiomatic (libraries): %v", err)
 	}
@@ -136,14 +151,14 @@ func runIdiomatic(args []string) {
 
 func runScan(args []string) {
 	fs := flag.NewFlagSet("scan", flag.ExitOnError)
-	framework  := fs.String("framework", "", `Framework(s) to scan: name, comma-separated list, or "all" (required)`)
-	metaDir    := fs.String("metadata-dir", "./metadata", "Directory for .gometa.json files (committed metadata)")
-	sdkPath    := fs.String("sdk", "", "macOS SDK path (default: auto-detected via xcrun)")
+	framework := fs.String("framework", "", `Framework(s) to scan: name, comma-separated list, or "all" (required)`)
+	metaDir := fs.String("metadata-dir", "./metadata", "Directory for .gometa.json files (committed metadata)")
+	sdkPath := fs.String("sdk", "", "macOS SDK path (default: auto-detected via xcrun)")
 	sdkVersion := fs.String("sdk-version", "", "SDK version string (default: auto-detected)")
-	arch       := fs.String("arch", "arm64", "Target architecture: arm64, x86_64, or comma-separated")
-	parallel   := fs.Int("parallel", runtime.NumCPU(), "Number of frameworks to scan concurrently")
+	arch := fs.String("arch", "arm64", "Target architecture: arm64, x86_64, or comma-separated")
+	parallel := fs.Int("parallel", runtime.NumCPU(), "Number of frameworks to scan concurrently")
 	clibraries := fs.String("clibraries", "./metadata/clibraries.json", "C library registry JSON (falls back to built-in defaults when absent)")
-	verbose    := fs.Bool("v", false, "Verbose output")
+	verbose := fs.Bool("v", false, "Verbose output")
 	_ = fs.Parse(args)
 
 	if *framework == "" {
@@ -185,16 +200,16 @@ func loadCLibraryRegistry(path string, verbose bool) {
 
 func runBindings(args []string) {
 	fs := flag.NewFlagSet("bindings", flag.ExitOnError)
-	metaDir       := fs.String("metadata-dir", "./metadata", "Directory containing .gometa.json files")
-	frameworksOut := fs.String("frameworks-out", "./bindings/frameworks", "Output directory for purego ObjC framework packages")
-	librariesOut  := fs.String("libraries-out", "./bindings/libraries", "Output directory for CGo C library packages")
-	diagnosticsOut      := fs.String("diagnostics", "", "Write type-degradation diagnostics to this JSON file (use to create or refresh the baseline)")
+	metaDir := fs.String("metadata-dir", "./metadata", "Directory containing .gometa.json files")
+	frameworksOut := fs.String("frameworks-out", defaultRawFrameworksOutDir, "Output directory for purego ObjC framework packages")
+	librariesOut := fs.String("libraries-out", defaultRawLibrariesOutDir, "Output directory for CGo C library packages")
+	diagnosticsOut := fs.String("diagnostics", "", "Write type-degradation diagnostics to this JSON file (use to create or refresh the baseline)")
 	diagnosticsBaseline := fs.String("diagnostics-baseline", "", "Fail when a diagnostic appears that is not in this baseline JSON file")
-	verbose       := fs.Bool("v", false, "Verbose output")
+	verbose := fs.Bool("v", false, "Verbose output")
 	_ = fs.Parse(args)
 
 	pureReg := loadPureRegistry(*metaDir, defaultFrameworksModulePrefix, defaultLibrariesModulePrefix)
-	cgoReg  := loadCGORegistry(*metaDir, defaultLibrariesModulePrefix)
+	cgoReg := loadCGORegistry(*metaDir, defaultLibrariesModulePrefix)
 
 	var collected []string
 
@@ -267,16 +282,16 @@ func reportDiagnostics(collected []string, outPath, baselinePath string) {
 
 func runAll(args []string) {
 	fs := flag.NewFlagSet("all", flag.ExitOnError)
-	framework    := fs.String("framework", "", `Framework(s) to scan before emitting (name, comma-separated, or "all"; omit to skip scan)`)
-	sdkPath      := fs.String("sdk", "", "macOS SDK path (default: auto-detected)")
-	sdkVersion   := fs.String("sdk-version", "", "SDK version string (default: auto-detected)")
-	parallel     := fs.Int("parallel", runtime.NumCPU(), "Number of frameworks to scan concurrently")
-	metaDir      := fs.String("metadata-dir", "./metadata", "Directory for .gometa.json files")
-	arch         := fs.String("arch", "arm64", "Target architecture")
-	frameworksOut := fs.String("frameworks-out", "./bindings/frameworks", "Output directory for purego ObjC framework packages")
-	librariesOut  := fs.String("libraries-out", "./bindings/libraries", "Output directory for CGo C library packages")
-	clibraries   := fs.String("clibraries", "./metadata/clibraries.json", "C library registry JSON (falls back to built-in defaults when absent)")
-	verbose      := fs.Bool("v", false, "Verbose output")
+	framework := fs.String("framework", "", `Framework(s) to scan before emitting (name, comma-separated, or "all"; omit to skip scan)`)
+	sdkPath := fs.String("sdk", "", "macOS SDK path (default: auto-detected)")
+	sdkVersion := fs.String("sdk-version", "", "SDK version string (default: auto-detected)")
+	parallel := fs.Int("parallel", runtime.NumCPU(), "Number of frameworks to scan concurrently")
+	metaDir := fs.String("metadata-dir", "./metadata", "Directory for .gometa.json files")
+	arch := fs.String("arch", "arm64", "Target architecture")
+	frameworksOut := fs.String("frameworks-out", defaultRawFrameworksOutDir, "Output directory for purego ObjC framework packages")
+	librariesOut := fs.String("libraries-out", defaultRawLibrariesOutDir, "Output directory for CGo C library packages")
+	clibraries := fs.String("clibraries", "./metadata/clibraries.json", "C library registry JSON (falls back to built-in defaults when absent)")
+	verbose := fs.Bool("v", false, "Verbose output")
 	_ = fs.Parse(args)
 
 	loadCLibraryRegistry(*clibraries, *verbose)
@@ -289,7 +304,7 @@ func runAll(args []string) {
 	}
 
 	pureReg := loadPureRegistry(*metaDir, defaultFrameworksModulePrefix, defaultLibrariesModulePrefix)
-	cgoReg  := loadCGORegistry(*metaDir, defaultLibrariesModulePrefix)
+	cgoReg := loadCGORegistry(*metaDir, defaultLibrariesModulePrefix)
 
 	log.Printf("emitting purego ObjC frameworks → %s", *frameworksOut)
 	if err := purepipeline.GenerateBindings(purepipeline.BindingsConfig{
@@ -322,7 +337,7 @@ func runClassHierarchy(args []string) {
 	fs := flag.NewFlagSet("class-hierarchy", flag.ExitOnError)
 	metaDir := fs.String("metadata-dir", "./metadata", "Directory containing .gometa.json files")
 	outPath := fs.String("out", "./metadata/objcclasshierarchy/objc_class_hierarchy_generated.go", "Output path for the ObjC class hierarchy Go file")
-	arch    := fs.String("arch", "arm64", "Target architecture")
+	arch := fs.String("arch", "arm64", "Target architecture")
 	_ = fs.Parse(args)
 
 	var all []string
@@ -380,8 +395,8 @@ func runList(args []string) {
 //	go run ./cmd/generate/ diff --old /tmp/old/metadata
 func runDiff(args []string) {
 	fs := flag.NewFlagSet("diff", flag.ExitOnError)
-	oldDir  := fs.String("old", "", "Old metadata directory (required)")
-	newDir  := fs.String("new", "./metadata", "New metadata directory")
+	oldDir := fs.String("old", "", "Old metadata directory (required)")
+	newDir := fs.String("new", "./metadata", "New metadata directory")
 	jsonOut := fs.Bool("json", false, "Emit the report as JSON instead of markdown")
 	_ = fs.Parse(args)
 

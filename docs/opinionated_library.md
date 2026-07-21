@@ -1,146 +1,133 @@
-# Opinionated Library
+# The Idiomatic Binding API
 
-The `opinionated/library/` tree is a collection of ergonomic helpers that sit on top of the raw `frameworks/` packages. This page explains why it exists, what it contains, and shows concrete side-by-side comparisons between using the raw bindings and using the opinionated layer.
+> **History.** This page used to describe a separate `opinionated/library/` tree of
+> ergonomic helpers layered on top of raw ObjC-shaped bindings. That split is gone.
+> The ergonomics are now **built into the single consumable binding API** at
+> `bindings/frameworks/<name>` and `bindings/libraries/<name>`. The old
+> `opinionated/library/`, `opinionated/idiomatic/`, and `opinionated/custom/` trees
+> no longer exist (`opinionated/` now holds only hand-written `opinionated/tools/`).
+> This page explains what "idiomatic" buys you, with before/after comparisons against
+> the ObjC-shaped **raw substrate** that now lives internally.
+
+There is **one** consumable binding API, and it is the idiomatic one:
+
+- `bindings/frameworks/<name>` — the ObjC frameworks (Foundation, AppKit, Virtualization, …). 252 packages.
+- `bindings/libraries/<name>` — the Apple C libraries (libproc, xpc, dispatch, EndpointSecurity, …). 16 packages.
+
+The **raw** purego/CGo bindings still exist, but they are now internal plumbing under
+`bindings/internal/raw/frameworks/<name>` and `bindings/internal/raw/libraries/<name>`.
+Go's internal-package rule makes them unreachable from outside `bindings/`, so as a
+consumer you never import them. The idiomatic layer is built on top of that substrate
+(and uses it as a parity oracle during generation), but you only ever name the
+idiomatic package.
 
 ---
 
 ## Contents
 
-- [Why It Exists](#why-it-exists)
-- [What It Contains](#what-it-contains)
+- [What "Idiomatic" Means](#what-idiomatic-means)
 - [Import Conventions](#import-conventions)
-- [Side-by-Side Comparisons](#side-by-side-comparisons)
-  - [1. String Conversion](#1-string-conversion)
+- [Before/After Comparisons](#beforeafter-comparisons)
+  - [1. Strings](#1-strings)
   - [2. Window Creation](#2-window-creation)
   - [3. Async Callbacks](#3-async-callbacks)
   - [4. Typed Collections](#4-typed-collections)
-  - [5. Configuration Builders (Spec Types)](#5-configuration-builders-spec-types)
-  - [6. Geometry Helpers](#6-geometry-helpers)
-  - [7. VM Configuration](#7-vm-configuration)
-- [Generated Helper Categories](#generated-helper-categories)
-- [Hand-Crafted Helpers by Domain](#hand-crafted-helpers-by-domain)
-- [Extending the Layer](#extending-the-layer)
+  - [5. Configuration Builders](#5-configuration-builders)
+  - [6. Geometry](#6-geometry)
+  - [7. VM Configuration and Lifecycle](#7-vm-configuration-and-lifecycle)
+- [Naming](#naming)
+- [Where the Hand-Written Helpers Went](#where-the-hand-written-helpers-went)
 
 ---
 
-## Why It Exists
+## What "Idiomatic" Means
 
-The raw `frameworks/` packages are **complete and correct**. Every Objective-C class, method, enum, and struct is faithfully represented with full CGo bridges. You can build real applications using only the raw bindings.
+The raw substrate reflects Objective-C idioms directly: `*NSString` everywhere,
+`completionHandler:` blocks, untyped `NSArray`, one setter per property, exact ObjC
+selector names. It is complete and correct, but it adds ceremony to every call site.
 
-However, the raw bindings reflect Objective-C idioms directly:
+The idiomatic layer reshapes that surface into Go:
 
-- **Callbacks via blocks** — async operations take a closure argument (`completionHandler:`). To use them from Go you need to create a channel, pass a closure that sends on it, and then select on both the channel and `ctx.Done()`.
-- **`NSArray` everywhere** — ObjC collections are untyped at the C level. Getting typed elements requires calling `ObjectAtIndex:` and casting the result.
-- **Setter-per-property configuration** — configuring an `NSURLSessionConfiguration` means calling 20+ individual setter methods, all of which must be dispatched on the right thread.
-- **Two-step string conversion** — going between Go `string` and `*NSString` requires calling through `objc.GoStringToNSString` / `objc.NSStringToGoString` via the `objc` internal package.
-- **Long generated names** — constructor names like `NewNSWindowWithContentRectStyleMaskBackingDefer` are faithful to the ObjC selector but noisy in Go call sites.
+- **Go types at the boundary** — methods take and return `string`, `[]byte`, `int`,
+  `bool`, `time.Time`, and typed Go slices instead of ObjC wrapper pointers.
+- **Go errors** — an `NSError **` out-parameter becomes a trailing `error` return; an
+  `OSStatus` becomes an `error`.
+- **`func(ctx) error` async** — a `completionHandler:` block becomes a blocking call
+  that takes a `context.Context` and returns when the operation completes or `ctx` is
+  cancelled.
+- **Chainable `With*` setters** — each settable property has a `WithX(v) *T` method
+  that sets and returns the receiver, so configuration reads as a fluent chain.
+- **Go-shaped names** — `NSString` → `foundation.String`, `NSView` → `appkit.View`
+  (see [Naming](#naming)).
+- **Automatic memory management** — wrappers retain on creation and release via a GC
+  finalizer; you just let them go out of scope.
+- **Automatic main-thread dispatch** — methods, setters, and constructors of an
+  `@MainActor`-isolated class (AppKit and everything that inherits it) are wrapped in
+  `purego.Main` for you, so UI calls land on the main thread automatically.
 
-None of these are bugs. They are accurate representations of how the macOS SDK works. But they add ceremony to every call site.
-
-The opinionated layer's purpose is to bridge the gap between "correct CGo binding" and "idiomatic Go code" — providing Go-shaped wrappers without hiding what is happening underneath.
-
-**The raw bindings are never modified.** The opinionated layer sits on top; everything compiles to the same CGo calls.
-
----
-
-## What It Contains
-
-```text
-opinionated/library/
-├── foundation/          # hand-crafted: string helpers, NSData, Progress, FileHandle
-│   ├── string.go
-│   ├── data.go
-│   ├── progress.go
-│   ├── foundation_async_generated.go    ← generated
-│   ├── foundation_slices_generated.go   ← generated
-│   └── foundation_specs_generated.go    ← generated
-├── appkit/              # hand-crafted: window, menu, alert, file picker, status item
-│   ├── window.go
-│   ├── menu.go
-│   ├── alert.go
-│   ├── filepicker.go
-│   ├── statusitem.go
-│   ├── appkit_async_generated.go        ← generated
-│   ├── appkit_slices_generated.go       ← generated
-│   └── appkit_specs_generated.go        ← generated
-├── virtualization/      # hand-crafted: VM lifecycle, platform config, storage, network
-│   ├── machine.go
-│   ├── macos.go
-│   ├── network.go
-│   ├── storage.go
-│   └── virtualization_specs_generated.go ← generated
-├── corefoundation/      # hand-crafted: CGSize/CGPoint/CGRect constructors
-│   └── geometry.go
-├── bsd/                 # hand-crafted: EtherAddr ↔ string helpers
-│   └── etheraddr.go
-├── reactive/            # hand-crafted: generic observable value
-│   └── observable.go
-└── <other frameworks>/  # generated only (*_async_generated.go, *_slices_generated.go,
-                         #              *_specs_generated.go)
-```
-
-There are three categories of generated helper, one category of hand-crafted helper, and one utility package (`reactive`):
-
-| Category | File suffix | What it does |
-| --- | --- | --- |
-| Async wrappers | `*_async_generated.go` | Wraps callback-based APIs into `func(ctx) error` calls |
-| Typed slices | `*_slices_generated.go` | Returns `[]*ConcreteType` instead of raw `NSArray` |
-| Spec types | `*_specs_generated.go` | Struct + `Apply*` function to configure objects declaratively |
-| Hand-crafted | (any non-generated file) | Domain-specific helpers too nuanced to generate |
+None of the raw idioms were bugs — they are accurate representations of how the macOS
+SDK works. The idiomatic layer bridges the gap between "correct binding" and
+"idiomatic Go" without hiding what happens underneath.
 
 ---
 
 ## Import Conventions
 
-Import raw bindings with the `raw` alias; import opinionated packages with a short domain alias:
+Import the idiomatic package directly — no `raw` alias, because you never import raw:
 
 ```go
 import (
-    raw    "github.com/deploymenttheory/go-bindings-macosplatform/frameworks/appkit"
-    oappkit "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/appkit"
-    of     "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/foundation"
+    "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+    "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+    "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 )
 ```
 
-Never import from `opinionated/` inside a `frameworks/` package, and never import from `frameworks/` inside `opinionated/` (only from `raw` aliases as shown above). The dependency flows one way: `opinionated` → `frameworks`.
+When you also drop to the runtime (for a custom ObjC subclass, NSXPC, or dispatch),
+import the public runtime and convert with the `obj` package:
+
+```go
+import (
+    rt  "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+    "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+```
 
 ---
 
-## Side-by-Side Comparisons
+## Before/After Comparisons
 
-### 1. String Conversion
+Each "raw" block below shows the ObjC-shaped surface (the shape the internal raw
+substrate exposes); the "idiomatic" block shows the consumable API you actually call.
 
-Converting between Go `string` and ObjC `*NSString` is one of the most frequent operations when using any Foundation API.
+### 1. Strings
 
-**Raw:**
+Converting between Go `string` and ObjC `*NSString` is the most frequent Foundation
+operation.
 
-```go
-import (
-    raw  "github.com/deploymenttheory/go-bindings-macosplatform/frameworks/foundation"
-    "github.com/deploymenttheory/go-bindings-macosplatform/internal/objc"
-)
+**Raw shape:** methods traffic in `*NSString`; to read one you call `UTF8String()`
+(returning an `unsafe.Pointer`) and copy it into Go; to build one you go through a
+runtime helper. Every hop needs a `KeepAlive` to stop the GC releasing the object
+mid-call.
 
-// Go string → *NSString
-ns := raw.NewNSString(objc.GoStringToNSString("Hello, macOS"))
-
-// *NSString → Go string
-s := objc.NSStringToGoString(ns.Ptr())
-objc.KeepAlive(ns)
-```
-
-**Opinionated:**
+**Idiomatic:** methods take and return Go `string` directly. There is almost nothing
+to convert:
 
 ```go
-import of "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/foundation"
-
-// Go string → *NSString
-ns := of.StringFromGo("Hello, macOS")
-
-// *NSString → Go string (returns "" if ns is nil)
-s := of.StringToGo(ns)
+info := foundation.NSProcessInfoProcessInfo()
+name := info.ProcessName()          // string, not *NSString
 ```
 
-The opinionated wrappers handle the `KeepAlive` call internally and guard against nil receivers — both common sources of bugs at raw call sites.
+When you genuinely need a `*String` wrapper (to pass where a Foundation object is
+expected), build it from a Go string and read it back with `.String()`:
+
+```go
+s := foundation.NewStringWithString("Hello, macOS") // *foundation.String
+go := s.String()                                     // back to a Go string
+```
+
+At the runtime level, `purego.NSString(goStr)` and `purego.GoString(id)` do the raw
+`objc.ID` conversion.
 
 ---
 
@@ -148,371 +135,181 @@ The opinionated wrappers handle the `KeepAlive` call internally and guard agains
 
 Creating a standard titled, closable, resizable window.
 
-**Raw:**
+**Raw shape:** call the constructor, then a separate `SetTitle:`, `SetMinSize:`,
+`SetFrameAutosaveName:`, `Center`, `MakeKeyAndOrderFront:` — every one an ObjC-shaped
+call taking `*NSString`/`NSSize`, and every one needing a manual main-thread dispatch.
+
+**Idiomatic:** chainable `With*` setters, Go values, and automatic main-thread
+dispatch:
 
 ```go
-import (
-    raw "github.com/deploymenttheory/go-bindings-macosplatform/frameworks/appkit"
-    ocf "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/corefoundation"
-    of  "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/foundation"
-)
-
-w := raw.NewNSWindowWithContentRectStyleMaskBackingDefer(
-    ctx,
-    ocf.NewRect(0, 0, 820, 480),
-    raw.NSWindowStyleMaskTitled |
-        raw.NSWindowStyleMaskClosable |
-        raw.NSWindowStyleMaskMiniaturizable |
-        raw.NSWindowStyleMaskResizable,
-    raw.NSBackingStoreBuffered,
+w := appkit.NewWindowWithContentRectStyleMaskBackingDefer(
+    corefoundation.CGRect{Size: corefoundation.CGSize{Width: 820, Height: 480}},
+    appkit.WindowStyleMaskTitled|appkit.WindowStyleMaskClosable|appkit.WindowStyleMaskResizable,
+    appkit.BackingStoreBuffered,
     false,
-)
-w.SetTitle(ctx, of.StringFromGo("VM Library"))
-w.SetMinSize(ctx, ocf.NewSize(680, 380))
-w.SetFrameAutosaveName(ctx, of.StringFromGo("OrinLibrary"))
-w.Center(ctx)
-w.MakeKeyAndOrderFront(ctx, nil)
+).
+    WithTitle("VM Library").
+    WithMinSize(corefoundation.CGSize{Width: 680, Height: 380})
+
+w.Center()
+w.MakeKeyAndOrderFront(nil)
 ```
 
-**Opinionated:**
-
-```go
-import oappkit "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/appkit"
-
-w := oappkit.NewWindow(ctx, oappkit.WindowConfig{
-    Title:        "VM Library",
-    Width:        820,
-    Height:       480,
-    Center:       true,
-    MinWidth:     680,
-    MinHeight:    380,
-    AutosaveName: "OrinLibrary",
-})
-oappkit.ShowWindow(ctx, w)
-```
-
-`NewWindow` applies sensible defaults (standard style mask, buffered backing store) and wires up `AutosaveName` automatically. You opt into only the properties you care about.
+`WithTitle` takes a Go `string`; every setter runs on the main thread automatically
+because `Window` inherits AppKit's `@MainActor` isolation.
 
 ---
 
 ### 3. Async Callbacks
 
-Many Foundation APIs are callback-based: they accept a completion block that fires asynchronously. Using them from Go requires boilerplate channel/select code to make them behave like normal Go functions.
+Many Foundation APIs are callback-based: they accept a completion block that fires
+asynchronously.
 
-**Raw (example: unmount a volume):**
+**Raw shape** (`NSFileManager`): the method is
+`UnmountVolumeAtURLOptionsCompletionHandler(url, mask, completionHandler func(...))`.
+To use it like a normal Go function you create a channel, pass a closure that sends on
+it, and `select` on both the channel and `ctx.Done()` — at every async call site.
 
-```go
-// You write this at every async call site:
-ch := make(chan error, 1)
-fileManager.UnmountVolumeAtURLOptionsCompletionHandler(ctx, url, mask, func(err error) {
-    ch <- err
-})
-var err error
-select {
-case err = <-ch:
-case <-ctx.Done():
-    err = ctx.Err()
-}
-return err
-```
-
-**Opinionated** (`foundation_async_generated.go`, auto-generated):
+**Idiomatic:** the completion handler is folded into a blocking, context-aware call:
 
 ```go
-import of "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/foundation"
-
 // Blocks until the operation completes or ctx is cancelled.
-err := of.UnmountVolumeAtURLOptions(ctx, fileManager, url, mask)
+err := fileManager.UnmountVolumeAtURLOptions(ctx, url, mask)
 ```
 
-The generated async wrapper is produced for every method whose name ends in `CompletionHandler` (or similar). The pattern is always:
-
-```go
-func OperationName(ctx context.Context, recv *raw.Type, args...) error {
-    ch := make(chan error, 1)
-    recv.OperationNameCompletionHandler(ctx, args..., func(err error) { ch <- err })
-    select {
-    case err := <-ch:
-        return err
-    case <-ctx.Done():
-        return ctx.Err()
-    }
-}
-```
-
-Context cancellation is handled uniformly — you never need to write the select block yourself.
+The idiomatic method takes `context.Context` as its first argument and returns the
+`NSError` (if any) as a Go `error`. Context cancellation is handled uniformly — you
+never write the `select` block.
 
 ---
 
 ### 4. Typed Collections
 
-ObjC collections (`NSArray`, `NSMutableArray`, etc.) are untyped at the C boundary. Getting elements requires calling `ObjectAtIndex:` and casting the `unsafe.Pointer` result to the concrete type.
+ObjC collections (`NSArray`, `NSMutableArray`) are untyped at the C boundary.
 
-**Raw (iterating over date formatter era symbols):**
+**Raw shape:** a getter returns an `NSArray`; to read elements you call
+`ObjectAtIndex:` and cast each `unsafe.Pointer` result to the concrete type.
+
+**Idiomatic:** getters return typed Go slices, and setters accept them:
 
 ```go
-symbols := formatter.EraSymbols(ctx) // *NSArray[objc.Object]
-count := int(symbols.Count(ctx))
-result := make([]string, count)
-for i := 0; i < count; i++ {
-    elem := raw.CastNSString(symbols.ObjectAtIndex(ctx, uint64(i)))
-    result[i] = objc.NSStringToGoString(elem.Ptr())
+// Returns []string — no casting, no index arithmetic.
+urls := fileManager.DirectoryURLs(foundation.DocumentDirectory,
+    foundation.UserDomainMask)
+for _, u := range urls {
+    // u is a Go string
 }
 ```
 
-**Opinionated** (`foundation_slices_generated.go`, auto-generated):
+Element conversion (`NSString` → `string`, `NSURL` → `string`, wrapper → wrapper) is
+done for you inside the accessor.
+
+---
+
+### 5. Configuration Builders
+
+Configuring an object with many properties — a session config, a date formatter, a VM
+config — is one setter per property in the raw shape.
+
+**Idiomatic:** the `With*` setters chain, so configuration is a single fluent
+expression and you set only what you care about:
 
 ```go
-import of "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/foundation"
+c := virtualization.NewVirtualMachineConfiguration().
+    WithCPUCount(4).
+    WithMemorySize(4 * 1024 * 1024 * 1024)
+```
 
-// Returns a typed Go slice — no casting, no index arithmetic.
-symbols := of.EraSymbolsList(ctx, formatter) // []*raw.NSString
-result := make([]string, len(symbols))
-for i, ns := range symbols {
-    result[i] = of.StringToGo(ns)
+Each `WithX` returns the receiver, so there is no intermediate variable and no
+per-setter main-thread bookkeeping.
+
+---
+
+### 6. Geometry
+
+CoreGraphics value types (`CGSize`, `CGPoint`, `CGRect`) are plain Go structs in the
+idiomatic `corefoundation` package — construct them with struct literals:
+
+```go
+rect := corefoundation.CGRect{
+    Origin: corefoundation.CGPoint{X: 0, Y: 0},
+    Size:   corefoundation.CGSize{Width: 820, Height: 480},
 }
 ```
 
-Generated slice helpers come in pairs: `XyzList(ctx, recv)` to read (returns a typed slice), and `SetXyzList(ctx, recv, items)` to write (accepts a typed slice, converts to `NSArray` internally).
+They are ordinary value types (no ObjC object, no memory management), so they pass by
+value into any method that takes a `CGRect`/`CGSize`/`CGPoint`.
 
 ---
 
-### 5. Configuration Builders (Spec Types)
+### 7. VM Configuration and Lifecycle
 
-Configuring objects with many properties — `NSURLSessionConfiguration`, `VZVirtualMachineConfiguration`, `NSDateFormatter`, etc. — normally requires calling a separate setter for each property.
+The Virtualization framework is queue-confined (not `@MainActor`), so its calls are
+**not** main-thread wrapped — you run them on the VM's own dispatch queue (see
+`opinionated/tools/grandcentraldispatch/serialqueue`).
 
-**Raw (configuring an NSURLSessionConfiguration):**
+**Configuration** chains the same way as any other object:
 
 ```go
-config := raw.NewNSURLSessionDefaultSessionConfiguration(ctx)
-config.SetRequestCachePolicy(ctx, raw.NSURLRequestReloadIgnoringLocalCacheData)
-config.SetTimeoutIntervalForRequest(ctx, 30.0)
-config.SetTimeoutIntervalForResource(ctx, 300.0)
-config.SetAllowsCellularAccess(ctx, true)
-config.SetAllowsExpensiveNetworkAccess(ctx, false)
-config.SetHTTPShouldUsePipelining(ctx, true)
-config.SetHTTPShouldSetCookies(ctx, true)
-config.SetWaitsForConnectivity(ctx, true)
-// ... 15 more setters
+c := virtualization.NewVirtualMachineConfiguration().
+    WithCPUCount(cfg.CPUCount).
+    WithMemorySize(uint64(cfg.MemoryGB) * 1024 * 1024 * 1024)
 ```
 
-**Opinionated** (`foundation_specs_generated.go`, auto-generated):
+**Lifecycle** commands (`start:`, `pause:`, `resume:`) are completion-handler based in
+ObjC; idiomatically they are blocking, context-aware calls:
 
 ```go
-import of "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/foundation"
-
-config := raw.NewNSURLSessionDefaultSessionConfiguration(ctx)
-of.ApplyNSURLSessionConfiguration(ctx, config, of.NSURLSessionConfigurationSpec{
-    RequestCachePolicy:           raw.NSURLRequestReloadIgnoringLocalCacheData,
-    TimeoutIntervalForRequest:    30.0,
-    TimeoutIntervalForResource:   300.0,
-    AllowsCellularAccess:         true,
-    AllowsExpensiveNetworkAccess: false,
-    HTTPShouldUsePipelining:      true,
-    HTTPShouldSetCookies:         true,
-    WaitsForConnectivity:         true,
-})
-```
-
-The `Apply*` function **only calls setters for non-zero fields**. Leave a field at its zero value and the corresponding setter is never called — the existing default is preserved. This also avoids redundant ObjC round-trips.
-
----
-
-### 6. Geometry Helpers
-
-CoreGraphics value types (`CGSize`, `CGPoint`, `CGRect`) require nested struct literals in the raw bindings.
-
-**Raw:**
-
-```go
-import cf "github.com/deploymenttheory/go-bindings-macosplatform/frameworks/corefoundation"
-
-rect := cf.CGRect{
-    Origin: cf.CGPoint{X: 0, Y: 0},
-    Size:   cf.CGSize{Width: 820, Height: 480},
+if err := machine.Start(ctx); err != nil {
+    return fmt.Errorf("VM start: %w", err)
 }
 ```
 
-**Opinionated:**
+---
 
-```go
-import ocf "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/corefoundation"
+## Naming
 
-rect  := ocf.NewRect(0, 0, 820, 480)
-size  := ocf.NewSize(820, 480)
-point := ocf.NewPoint(10, 20)
+The idiomatic layer trims a class-name prefix **only when every class in a framework
+shares one** (≥2 uppercase chars):
 
-// Geometry predicate
-inside := ocf.RectContainsPoint(rect, mouseX, mouseY)
-```
+| ObjC class | Idiomatic Go type |
+|---|---|
+| `NSString` | `foundation.String` |
+| `NSProcessInfo` | `foundation.ProcessInfo` |
+| `NSView` | `appkit.View` |
+| `OSSystemExtensionManager` | `systemextensions.SystemExtensionManager` |
+
+When a framework's classes don't share a prefix, the full name is kept (NetworkExtension
+mixes `NE…`/`NW…`, so it stays `networkextension.NEFilterNewFlowVerdict`).
+
+A class method keeps its full ObjC name as a package-level function but returns the
+idiomatic type — e.g. `foundation.NSProcessInfoProcessInfo() *foundation.ProcessInfo`,
+then `.ProcessIdentifier() int`. Instance selectors become methods
+(`objectAtIndex:` → `ObjectAtIndex`). Two reliable lookups when you're unsure of a
+trimmed name:
+
+1. Each wrapper's doc comment names the class it wraps —
+   `grep -rn "wrapper over the Objective-C class NSView" bindings/frameworks/appkit`.
+2. Every generated package has a `doc.go` index listing its types.
+
+The full naming contract is [`naming.md`](naming.md).
 
 ---
 
-### 7. VM Configuration
+## Where the Hand-Written Helpers Went
 
-Configuring a `VZVirtualMachineConfiguration` requires building multiple device arrays and passing them as `NSArray`.
+The old `opinionated/library/` helpers (declarative `NewWindow`, `Apply*` spec types,
+typed-slice wrappers, async wrappers, the `reactive` observable) are gone — the
+idiomatic layer provides the same ergonomics natively, as shown above. The only
+hand-written packages that remain are under `opinionated/tools/`, for capabilities that
+still don't map to "send a selector to an object":
 
-**Raw (storage + network + keyboard, stripped for brevity):**
+| Package | Purpose |
+|---|---|
+| `opinionated/tools/grandcentraldispatch/mainthread` | Own and service the main thread; `Do(fn)`, `IsMain()`, run-loop pumping |
+| `opinionated/tools/grandcentraldispatch/serialqueue` | A dedicated serial dispatch queue for queue-confined frameworks (e.g. Virtualization) |
+| `opinionated/tools/keychain` | Go-shaped `SecItem*` helpers (certificates, identities, passwords) |
+| `opinionated/tools/oslog` | Emit to the unified logging system (needs a small CGo shim) |
 
-```go
-// Disk
-attach, _ := rawvz.NewVZDiskImageStorageDeviceAttachmentWithURLReadOnlyError(
-    ctx, diskURL, false)
-diskDev := rawvz.NewVZVirtioBlockDeviceConfigurationWithAttachment(
-    ctx, &attach.VZStorageDeviceAttachment)
-c.SetStorageDevices(ctx, foundation.NSArrayOf[objc.Object](ctx, diskDev))
-
-// Network
-netDev := rawvz.NewVZVirtioNetworkDeviceConfiguration(ctx)
-natAtt := rawvz.NewVZNATNetworkDeviceAttachment(ctx)
-netDev.SetAttachment(ctx, &natAtt.VZNetworkDeviceAttachment)
-c.SetNetworkDevices(ctx, foundation.NSArrayOf[objc.Object](ctx, netDev))
-
-// Keyboard
-kbd := rawvz.NewVZUSBKeyboardConfiguration(ctx)
-c.SetKeyboards(ctx, foundation.NSArrayOf[objc.Object](ctx, kbd))
-```
-
-**Opinionated** (using a spec that handles all device arrays):
-
-```go
-import virt "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/virtualization"
-
-virt.ApplyVZVirtualMachineConfiguration(ctx, c, virt.VZVirtualMachineConfigurationSpec{
-    StorageDevices: []rawvz.VZStorageDeviceConfiguration{diskDev},
-    NetworkDevices: []rawvz.VZNetworkDeviceConfiguration{netDev},
-    Keyboards:      []rawvz.VZKeyboardConfiguration{kbd},
-})
-```
-
-The `Apply` function converts Go slices to `NSArray`, wraps items as `objc.Object`, and calls each setter exactly once.
-
----
-
-## Generated Helper Categories
-
-### Async wrappers (`*_async_generated.go`)
-
-Generated for every method whose Go name ends in `CompletionHandler`, `WithReply`, or similar. All follow the same channel-select pattern:
-
-```go
-// Auto-generated signature pattern:
-func OperationName(ctx context.Context, recv *raw.Type, args...) (result, error) {
-    ch := make(chan result, 1)
-    recv.OperationNameCompletionHandler(ctx, args..., func(r result, err error) {
-        // pack both into ch
-    })
-    select {
-    case v := <-ch:
-        return v.result, v.err
-    case <-ctx.Done():
-        return zero, ctx.Err()
-    }
-}
-```
-
-### Typed slices (`*_slices_generated.go`)
-
-Generated for every getter/setter that returns or accepts an `NSArray`:
-
-```go
-// Read: NSArray → typed Go slice
-func XyzList(ctx context.Context, recv *raw.Type) []*raw.ElementType
-
-// Write: typed Go slice → NSArray
-func SetXyzList(ctx context.Context, recv *raw.Type, items []*raw.ElementType)
-```
-
-### Spec types (`*_specs_generated.go`)
-
-Generated for every class with multiple settable properties:
-
-```go
-type TypeNameSpec struct {
-    FieldA TypeA  // zero value = skip setter
-    FieldB TypeB
-    // ...
-}
-
-func ApplyTypeName(ctx context.Context, recv *raw.TypeName, spec TypeNameSpec) error
-```
-
----
-
-## Hand-Crafted Helpers by Domain
-
-### `opinionated/library/foundation`
-
-| Helper | Purpose |
-| --- | --- |
-| `StringFromGo(s string) *NSString` | Go string → `*NSString` |
-| `StringToGo(ns *NSString) string` | `*NSString` → Go string, nil-safe |
-| `NSDataToBytes(d *NSData) []byte` | Efficient byte copy using `unsafe.Slice` |
-| `BytesToNSData(b []byte) *NSData` | `[]byte` → `*NSData` |
-| `GetProgress(p *NSProgress) ProgressSnapshot` | Read all progress fields in one call |
-
-### `opinionated/library/appkit`
-
-| Helper | Purpose |
-| --- | --- |
-| `NewWindow(ctx, WindowConfig) *NSWindow` | Declarative window creation |
-| `ShowWindow / HideWindow / CloseWindow` | Window visibility lifecycle |
-| `NewMenu / AddItem / AddSeparator / AddSubmenu` | Menu bar construction |
-| `NewMenuItemWithAction(ctx, title, key, mods, fn)` | Menu item with Go callback |
-| `NewStatusItem(ctx, StatusItemConfig) *NSStatusItem` | Status bar item |
-| `PickFile / PickFiles / PickDirectory / SaveFile` | File picker helpers |
-| `ShowAlert(ctx, AlertConfig)` | Modal alert without boilerplate |
-| `NewHSplitView / NewVSplitView` | Split view construction |
-| `SetWindowContentView` | Set content view on a window |
-
-### `opinionated/library/virtualization`
-
-| Helper | Purpose |
-| --- | --- |
-| `Start / Pause / Resume / RequestStop` | Blocking VM lifecycle commands with context |
-| `NewEFIBootLoader(ctx, nvramPath)` | EFI boot loader with optional NVRAM |
-| `NewLinuxBootLoader / NewLinuxBootLoaderWithInitrd` | Linux kernel boot loader |
-| `NewMacHardwareModelFromBytes` | Deserialise hardware model from stored bytes |
-| `NewMacMachineIdentifierFromBytes` | Deserialise machine ID from stored bytes |
-| `LoadMacAuxiliaryStorage / CreateMacAuxiliaryStorage` | Auxiliary storage management |
-| `NewDiskImageAttachment(ctx, path, readOnly)` | Disk image storage attachment |
-| `NewDisplayConfiguration(ctx, width, height, ppi)` | Short form display config |
-| `GetVMTransitions(ctx, machine)` | Read all allowed transitions in one call |
-
-### `opinionated/library/corefoundation`
-
-| Helper | Purpose |
-| --- | --- |
-| `NewSize(w, h float64) CGSize` | CGSize constructor |
-| `NewPoint(x, y float64) CGPoint` | CGPoint constructor |
-| `NewRect(x, y, w, h float64) CGRect` | CGRect constructor |
-| `RectContainsPoint(rect, x, y)` | Point-in-rect predicate |
-
-### `opinionated/library/reactive`
-
-| Helper | Purpose |
-| --- | --- |
-| `New[T](initial T) *Observable[T]` | Create a new observable |
-| `(o) Get() T` | Read current value |
-| `(o) Set(v T)` | Write new value, notify subscribers |
-| `(o) Subscribe(fn func(T))` | Register a subscriber |
-
----
-
-## Extending the Layer
-
-**Hand-crafted files are never deleted by the generator.** Only files ending in `_generated.go` are regenerated. You can add new helpers alongside generated files without risk.
-
-Naming conventions:
-- Hand-crafted files: descriptive name (`window.go`, `machine.go`, `geometry.go`)
-- Generated files: `<framework>_async_generated.go`, `<framework>_slices_generated.go`, `<framework>_specs_generated.go`
-
-Cross-package imports within `opinionated/library/` use the full module path:
-```go
-import oappkit "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/appkit"
-```
-
-Raw framework imports within opinionated files use the `raw` alias:
-```go
-import raw "github.com/deploymenttheory/go-bindings-macosplatform/frameworks/appkit"
-```
+See [`opinionated/tools/README.md`](../opinionated/tools/README.md) for details.

@@ -7,6 +7,12 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/naming"
 )
 
+// BsdModulePath is the fixed import path of the POSIX/BSD support package. It
+// stays public (outside bindings/internal/raw) because value structs it defines
+// — bsd.Timespec, bsd.EtherAddr, … — appear in the signatures of both the raw
+// libraries and the public idiomatic ones.
+const BsdModulePath = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/bsd"
+
 // qualifier resolves cross-framework type references and records the import
 // side effects and diagnostics that result from doing so.
 // It holds only the fields required for qualification; it is constructable
@@ -180,7 +186,7 @@ func (q qualifier) structType(name, owner string, addPointer bool) string {
 // bsdType returns the Go type for a POSIX/BSD struct from the bsd package
 // (e.g. bsd.Timespec, *bsd.EtherAddr). goName is the exported Go type name
 // in the bsd package (e.g. "Timespec", "EtherAddr"). The bsd import path is
-// derived from the module prefix by stripping the "/frameworks" suffix.
+// pinned to the public BsdModulePath (bsd stays outside bindings/internal/raw).
 func (q qualifier) bsdType(goName string, addPointer bool) string {
 	prefix := ""
 	if addPointer {
@@ -191,10 +197,10 @@ func (q qualifier) bsdType(goName string, addPointer bool) string {
 		return "unsafe.Pointer"
 	}
 	if q.usedImports != nil {
-		// Derive module root from the frameworks module prefix:
-		// "…/frameworks" → "…" → "…/bsd"
-		root := strings.TrimSuffix(q.modulePrefix, "/frameworks")
-		q.usedImports[pkgAlias] = root + "/" + pkgAlias
+		// bsd stays PUBLIC at bindings/libraries/bsd even after the raw bindings
+		// move under bindings/internal/raw, so its import path is pinned rather
+		// than derived from the (now internal) module prefix.
+		q.usedImports[pkgAlias] = BsdModulePath
 	}
 	return prefix + pkgAlias + "." + goName
 }
@@ -253,7 +259,11 @@ func (m *Mapper) qualifiedType(class, typeExpr string, ctx Context, imports Impo
 	return m.buildQualifier(ctx, imports).classType(class, typeExpr)
 }
 
-func (m *Mapper) qualifiedFrameworkCFType(name, owner string, ctx Context, imports ImportSet) string {
+func (m *Mapper) qualifiedFrameworkCFType(
+	name, owner string,
+	ctx Context,
+	imports ImportSet,
+) string {
 	return m.buildQualifier(ctx, imports).frameworkCFType(name, owner)
 }
 
@@ -269,11 +279,12 @@ func (m *Mapper) qualifiedProtocolIDType(proto string, ctx Context, imports Impo
 	return m.buildQualifier(ctx, imports).protocolIDType(proto, m.ProtocolProxyIndex)
 }
 
-func (m *Mapper) protocolGoName(proto, owner string, ctx Context, imports ImportSet) string {
-	return m.buildQualifier(ctx, imports).protocolGoName(proto, owner)
-}
-
-func (m *Mapper) qualifiedStructType(name, owner string, addPointer bool, ctx Context, imports ImportSet) string {
+func (m *Mapper) qualifiedStructType(
+	name, owner string,
+	addPointer bool,
+	ctx Context,
+	imports ImportSet,
+) string {
 	return m.buildQualifier(ctx, imports).structType(name, owner, addPointer)
 }
 
@@ -281,7 +292,12 @@ func (m *Mapper) qualifiedCFType(name string, ctx Context, imports ImportSet) st
 	return m.buildQualifier(ctx, imports).cfType(name)
 }
 
-func (m *Mapper) qualifiedBSDType(goName string, addPointer bool, ctx Context, imports ImportSet) string {
+func (m *Mapper) qualifiedBSDType(
+	goName string,
+	addPointer bool,
+	ctx Context,
+	imports ImportSet,
+) string {
 	return m.buildQualifier(ctx, imports).bsdType(goName, addPointer)
 }
 

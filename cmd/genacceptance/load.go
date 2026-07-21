@@ -4,8 +4,12 @@ package main
 
 import (
 	"fmt"
+	"go/ast"
+	"go/parser"
+	"go/token"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
@@ -113,6 +117,11 @@ func candidatesFromFramework(framework *meta.FrameworkMeta, modulePrefix string)
 
 	pkg := naming.PackageName(framework.Framework)
 	isLib := framework.LinkLib != ""
+	// Target the idiomatic layer — the public API developers consume — rather than
+	// the raw bindings. The zero-arg class-method factory function names are shared
+	// between the two layers (both use ClassMethodGoNameFromMeta), so only the
+	// import path changes here; the generated assertions call-and-discard so they
+	// compile against the idiomatic return types (obj.Object / value types).
 	var importSubdir string
 	if isLib {
 		importSubdir = "bindings/libraries"
@@ -171,6 +180,61 @@ func candidatesFromFramework(framework *meta.FrameworkMeta, modulePrefix string)
 		}
 	}
 
+	// The idiomatic layer renames many symbols (deprefixed class methods such as
+	// DCDeviceCurrentDevice → CurrentDevice), so a raw-derived name may not exist
+	// there. Keep only candidates whose function is actually present in the emitted
+	// idiomatic package, so the generated test file always compiles. When the
+	// package's source cannot be read (e.g. a stub with no callable API), drop the
+	// framework's candidates rather than emit unresolved calls.
+	idiomaticFuncs := idiomaticExportedFuncs(filepath.Join(importSubdir, pkg))
+	filtered := out[:0]
+	for _, rec := range out {
+		// C functions are excluded: the idiomatic wrappers bind lazily and panic on
+		// a symbol absent from the running OS, and the idiomatic layer has no
+		// SymbolAvailable guard to skip them (the raw layer did). Only ObjC
+		// class-method factories/singletons — dispatched via objc_msgSend, always
+		// safe — are sampled, and only when the idiomatic package actually declares
+		// the (often deprefixed) function name.
+		if rec.IsCFunction {
+			continue
+		}
+		if idiomaticFuncs[rec.GoFuncName] {
+			filtered = append(filtered, rec)
+		}
+	}
+	return filtered
+}
+
+// idiomaticExportedFuncs returns the exported, receiver-less, zero-parameter
+// function names the emitted idiomatic package at dir declares — the calls a
+// generated `pkg.Func()` test can resolve. An unreadable directory yields an
+// empty set.
+func idiomaticExportedFuncs(dir string) map[string]bool {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return nil
+	}
+	out := map[string]bool{}
+	fset := token.NewFileSet()
+	for _, ent := range entries {
+		name := ent.Name()
+		if ent.IsDir() || !strings.HasSuffix(name, ".go") || strings.HasSuffix(name, "_test.go") {
+			continue
+		}
+		file, perr := parser.ParseFile(fset, filepath.Join(dir, name), nil, parser.SkipObjectResolution)
+		if perr != nil {
+			continue
+		}
+		for _, decl := range file.Decls {
+			fn, ok := decl.(*ast.FuncDecl)
+			if !ok || fn.Recv != nil || !fn.Name.IsExported() {
+				continue
+			}
+			if fn.Type.Params.NumFields() == 0 {
+				out[fn.Name.Name] = true
+			}
+		}
+	}
 	return out
 }
 

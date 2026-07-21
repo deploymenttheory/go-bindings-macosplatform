@@ -15,24 +15,27 @@ import (
 // They carry no per-framework data, so they are stored verbatim (as .txt to
 // keep them out of this package's own compilation) and written unchanged on
 // every generation — making the whole idiomatic tree regenerable from scratch:
-// delete opinionated/idiomatic and a single `generate idiomatic` run restores
+// delete the generated tree and a single `generate idiomatic` run restores
 // objref, errkit, and rt byte-for-byte.
 //
 //go:embed support/*.txt
 var supportFS embed.FS
 
 // supportFile maps an embedded payload to its destination, relative to the
-// idiomatic output root (cfg.OutDir, canonically <repo>/opinionated/idiomatic).
+// idiomatic output root (cfg.OutDir, canonically <repo>/bindings).
 type supportFile struct {
 	src string // name under support/
 	rel string // destination relative to the idiomatic root
 }
 
+// The destinations are relative to the bindings root (the parent of the
+// idiomatic framework output dir): private support packages under internal/,
+// public runtime helpers under runtime/.
 var supportFiles = []supportFile{
 	{src: "objref.txt", rel: "internal/objref/objref_generated.go"},
-	{src: "rt.txt", rel: "rt/rt_generated.go"},
-	{src: "errkit.txt", rel: "errkit/errkit_generated.go"},
-	{src: "obj.txt", rel: "obj/obj_generated.go"},
+	{src: "rt.txt", rel: "runtime/rt/rt_generated.go"},
+	{src: "errkit.txt", rel: "runtime/errkit/errkit_generated.go"},
+	{src: "obj.txt", rel: "runtime/obj/obj_generated.go"},
 	{src: "dispatch.txt", rel: "internal/dispatch/dispatch_generated.go"},
 	{src: "shim.txt", rel: "internal/shim/shim_generated.go"},
 }

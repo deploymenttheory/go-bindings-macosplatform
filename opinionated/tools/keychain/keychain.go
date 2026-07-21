@@ -33,10 +33,10 @@ import (
 	"errors"
 	"fmt"
 
-	foundation "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
-	security "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/security"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
+	foundation "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	security "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )

@@ -21,7 +21,8 @@ func completionHandlerIndex(args []macosplatformmetadata.Param) int {
 			continue
 		}
 		t := arg.ObjCType
-		if strings.Contains(t, "void (^") && strings.Contains(t, "NSError *") && !strings.Contains(t, ", NSError") {
+		if strings.Contains(t, "void (^") && strings.Contains(t, "NSError *") &&
+			!strings.Contains(t, ", NSError") {
 			return i
 		}
 	}
@@ -124,7 +125,12 @@ func classGetterIsClassMethod(class macosplatformmetadata.Class, getterSel strin
 
 // writeOpinionatedHeader emits the standard file header for a *_generated.go file
 // in the opinionated layer.
-func writeOpinionatedHeader(w io.Writer, pkgName, rawImportPath string, extraImports, usedImports map[string]string, needsObjc bool) error {
+func writeOpinionatedHeader(
+	w io.Writer,
+	pkgName, rawImportPath string,
+	extraImports, usedImports map[string]string,
+	needsObjc bool,
+) error {
 	all := map[string]string{
 		"raw": rawImportPath,
 	}
@@ -183,7 +189,13 @@ type argInfo struct {
 
 // resolveOpinionatedArgType maps an ObjC arg type to a Go type, prepending
 // "raw." for types owned by the current framework.
-func resolveOpinionatedArgType(objcType string, ctx typemap.Context, m *typemap.Mapper, framework *macosplatformmetadata.FrameworkMeta, imports typemap.ImportSet) string {
+func resolveOpinionatedArgType(
+	objcType string,
+	ctx typemap.Context,
+	m *typemap.Mapper,
+	framework *macosplatformmetadata.FrameworkMeta,
+	imports typemap.ImportSet,
+) string {
 	goType := m.GoType(objcType, ctx, imports)
 	if goType == "" {
 		goType = "unsafe.Pointer"
@@ -216,15 +228,13 @@ func qualifyWithRawPackage(goType string, framework *macosplatformmetadata.Frame
 
 	var prefixBuf strings.Builder
 	rest := goType
-	for {
-		if strings.HasPrefix(rest, "*") {
+	for strings.HasPrefix(rest, "*") || strings.HasPrefix(rest, "[]") {
+		if rest[0] == '*' {
 			prefixBuf.WriteByte('*')
 			rest = rest[1:]
-		} else if strings.HasPrefix(rest, "[]") {
+		} else {
 			prefixBuf.WriteString("[]")
 			rest = rest[2:]
-		} else {
-			break
 		}
 	}
 	baseName := rest
@@ -264,6 +274,12 @@ func recordOpinionatedImports(goType string, m *typemap.Mapper, usedImports map[
 		}
 		packageName := part[:dot]
 		if packageName == "raw" || packageName == "cgo" || packageName == "unsafe" {
+			continue
+		}
+		if packageName == "bsd" {
+			// bsd stays PUBLIC (see typemap.BsdModulePath), not under the raw
+			// module prefix like the sibling C-library packages.
+			usedImports[packageName] = typemap.BsdModulePath
 			continue
 		}
 		if m.ModulePrefix != "" {

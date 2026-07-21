@@ -1,6 +1,6 @@
 # Developer Guide
 
-A practical walkthrough for building native macOS applications using `go-bindings-macosplatform`. Code examples are drawn from [Orin](../app/orin/), a full-featured macOS virtual machine manager built on top of these bindings.
+A practical walkthrough for building native macOS applications using `go-bindings-macosplatform`. All examples call the single consumable binding API — the **idiomatic** layer at `bindings/frameworks/<name>` and `bindings/libraries/<name>` — dropping to `bindings/runtime/...` only for things that have no typed wrapper. See the runnable [`examples/`](../examples/) (`keychain`, `warden`) for worked programs.
 
 For API reference, generated package docs, and generator CLI usage, see the [root README](../README.md).
 
@@ -47,7 +47,9 @@ All generated packages carry `//go:build darwin` — your application will only 
 
 AppKit — and any other UI framework — **must only be called from the macOS main OS thread**. This is a hard requirement imposed by the macOS window server, not a convention.
 
-`objc.RunOnMainThread` marshals a closure onto the main thread and blocks until it returns. Call it from any goroutine, including `main()`:
+**The idiomatic layer handles this for you.** Every method, setter, and constructor of an `@MainActor`-isolated class — AppKit and everything that inherits its isolation — is wrapped in `purego.Main` automatically, so a plain `w.WithTitle("…")` already runs on the main thread. You only manage the main thread yourself when you (a) drop to the runtime and send selectors by hand, or (b) need to own the run loop.
+
+`purego.Main` marshals a closure onto the main thread and blocks until it returns; call it from any goroutine. When called from the main thread it runs the closure inline (a `dispatch_sync` to the main queue from the main thread would deadlock):
 
 ```go
 //go:build darwin
@@ -55,25 +57,27 @@ AppKit — and any other UI framework — **must only be called from the macOS m
 package main
 
 import (
-    "context"
-
-    orinapp "github.com/deploymenttheory/go-bindings-macosplatform/app/orin/app"
-    orinlog "github.com/deploymenttheory/go-bindings-macosplatform/app/orin/log"
-    "github.com/deploymenttheory/go-bindings-macosplatform/internal/objc"
+    "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+    purego "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
 func main() {
-    orinlog.Init()
-
-    ctx := context.Background()
-    // AppKit requires all UI calls on the main OS thread.
-    objc.RunOnMainThread(func() {
-        orinapp.Run(ctx)
+    // The idiomatic AppKit calls below already dispatch to the main thread, but the
+    // process must own and service the main thread for that dispatch to be serviced.
+    purego.Main(func() {
+        run()
     })
+}
+
+func run() {
+    app := appkit.SharedApplication()
+    app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
+    // … build UI …
+    app.Run()
 }
 ```
 
-Under the hood `RunOnMainThread` calls `dispatch_sync_f(dispatch_get_main_queue(), ...)`. If you call it from the main thread itself, the closure runs inline without a dispatch round-trip.
+To own and pump the main run loop directly (drive it yourself rather than calling `[NSApp run]`), use the `opinionated/tools/grandcentraldispatch/mainthread` helper.
 
 **Non-UI work** (file I/O, networking, computation) is fine on any goroutine. Only calls into AppKit, CoreGraphics, Metal, and other UI frameworks need to be on the main thread.
 
@@ -89,33 +93,26 @@ An AppKit application needs three things: an `NSApplication` shared instance, an
 package app
 
 import (
-    "context"
-
-    rawappkit "github.com/deploymenttheory/go-bindings-macosplatform/frameworks/appkit"
-    "github.com/deploymenttheory/go-bindings-macosplatform/internal/objc"
+    "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 )
 
 // Run is the application entry point. Must be called on the main thread.
-func Run(ctx context.Context) {
-    app := rawappkit.NSApplicationSharedApplication(ctx)
-    // NSApplicationActivationPolicyRegular: show Dock icon + menu bar.
-    app.SetActivationPolicy(ctx, rawappkit.NSApplicationActivationPolicyRegular)
+func Run() {
+    app := appkit.SharedApplication()
+    // ApplicationActivationPolicyRegular: show Dock icon + menu bar.
+    app.SetActivationPolicy(appkit.ApplicationActivationPolicyRegular)
 
-    // Defer UI setup via dispatch_async so the Window Server connection is fully
-    // established by [NSApp run]'s internal finishLaunching before any windows
-    // or status items are created — equivalent to applicationDidFinishLaunching:.
-    objc.DispatchAsyncMain(func() {
-        setupUI(ctx, app)
-    })
+    // Build the UI (windows, menus, status items) before starting the run loop.
+    setupUI(app)
 
     // Blocks until the app terminates.
-    app.Run(ctx)
+    app.Run()
 }
 ```
 
-`NSApplicationSharedApplication` creates the singleton `NSApplication` (equivalent to `[NSApplication sharedApplication]`).
+`appkit.SharedApplication()` creates the singleton `NSApplication` (equivalent to `[NSApplication sharedApplication]`). It is a class method, so the ObjC selector `+sharedApplication` becomes a package-level function.
 
-`DispatchAsyncMain` schedules the closure to run on the next iteration of the main run loop, after AppKit completes its internal startup. This ensures the Window Server connection exists before you create any windows — equivalent to `applicationDidFinishLaunching:` in a delegate-based app.
+These idiomatic AppKit calls take no `context.Context` and are dispatched to the main thread automatically. If you need UI setup to run *after* AppKit finishes its internal startup (equivalent to `applicationDidFinishLaunching:`), schedule it onto the main queue with the `opinionated/tools/grandcentraldispatch/mainthread` helper so it fires on the next run-loop iteration.
 
 ---
 
@@ -133,9 +130,8 @@ var roots struct {
     settings   *ui.SettingsWindow
     library    *ui.LibraryWindow
     consoles   *ui.ConsoleWindows
-    statusItem *rawappkit.NSStatusItem
+    statusItem *appkit.StatusItem
     menuItems  *ui.AppMenuItems
-    selection  *reactive.Observable[string]
 }
 
 // ... later, after all objects are created:
@@ -145,7 +141,6 @@ roots.library    = library
 roots.consoles   = consoles
 roots.statusItem = statusItem
 roots.menuItems  = menuItems
-roots.selection  = selection
 ```
 
 Store all roots **before** starting goroutines that use them. The single struct makes it easy to audit what is pinned. Name it something obvious (`roots`, `appState`, `gcPins`) so the pattern is self-documenting.
@@ -154,130 +149,95 @@ Store all roots **before** starting goroutines that use them. The single struct 
 
 ## Creating a Window
 
-### Using the opinionated library (recommended)
-
-`opinionated/library/appkit` provides `NewWindow` with a `WindowConfig` struct that handles the full construction:
-
-```go
-import oappkit "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/appkit"
-
-win := oappkit.NewWindow(ctx, oappkit.WindowConfig{
-    Title:        "My App",
-    Width:        820,
-    Height:       480,
-    Center:       true,         // call Center() after creation
-    MinWidth:     680,
-    MinHeight:    380,
-    AutosaveName: "MyAppMain", // persists window position across launches
-})
-
-// Set the view that fills the window
-oappkit.SetWindowContentView(ctx, win, myContentView)
-
-// Show it
-oappkit.ShowWindow(ctx, win)
-```
-
-`AutosaveName` calls `setFrameAutosaveName:` on the window, which causes AppKit to automatically save and restore the window's position and size in `NSUserDefaults`.
-
-### Using raw bindings
-
-The raw path gives you full control, at the cost of more ceremony:
+Construct the window, then configure it with chainable `With*` setters. Each setter runs on the main thread automatically (`Window` inherits AppKit's `@MainActor` isolation), takes Go values, and returns the receiver so the calls chain:
 
 ```go
 import (
-    raw "github.com/deploymenttheory/go-bindings-macosplatform/frameworks/appkit"
-    ocf "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/corefoundation"
-    of  "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/foundation"
+    "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+    "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 )
 
-w := raw.NewNSWindowWithContentRectStyleMaskBackingDefer(
-    ctx,
-    ocf.NewRect(0, 0, 820, 480),
-    raw.NSWindowStyleMaskTitled |
-        raw.NSWindowStyleMaskClosable |
-        raw.NSWindowStyleMaskMiniaturizable |
-        raw.NSWindowStyleMaskResizable,
-    raw.NSBackingStoreBuffered,
+w := appkit.NewWindowWithContentRectStyleMaskBackingDefer(
+    corefoundation.CGRect{Size: corefoundation.CGSize{Width: 820, Height: 480}},
+    appkit.WindowStyleMaskTitled|
+        appkit.WindowStyleMaskClosable|
+        appkit.WindowStyleMaskMiniaturizable|
+        appkit.WindowStyleMaskResizable,
+    appkit.BackingStoreBuffered,
     false,
-)
-w.SetTitle(ctx, of.StringFromGo("My App"))
-w.SetMinSize(ctx, ocf.NewSize(680, 380))
-w.Center(ctx)
-w.MakeKeyAndOrderFront(ctx, nil)
+).
+    WithTitle("My App").
+    WithMinSize(corefoundation.CGSize{Width: 680, Height: 380}).
+    WithContentView(myContentView) // ViewProvider — any *appkit.View subclass
+
+w.Center()
+w.MakeKeyAndOrderFront(nil)
 ```
+
+`WithFrameAutosaveName` calls `setFrameAutosaveName:` on the window, which causes AppKit to automatically save and restore the window's position and size in `NSUserDefaults`.
 
 ---
 
 ## Building Menus
 
-Menu bars are hierarchical: `NSMenuBar` → `NSMenu` (per top-level item) → `NSMenuItem` (per command).
-
-The opinionated library's `appkit` package provides helpers that hide the boilerplate:
+Menu bars are hierarchical: the main menu (`NSMenu`) → a `NSMenu` per top-level item → `NSMenuItem` per command. Build the tree with the idiomatic `appkit` types and attach it with the chainable `WithMainMenu` setter:
 
 ```go
-import oappkit "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/appkit"
+import "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 
-bar := oappkit.NewMenuBar(ctx)
+bar      := appkit.NewMenuWithTitle("MainMenu")
+fileMenu := appkit.NewMenuWithTitle("File")
 
-// "File" menu
-fileMenu := oappkit.NewMenu(ctx, "File")
-oappkit.AddItem(ctx, fileMenu, oappkit.NewMenuItemWithAction(ctx, "New", "n", 0, func(_ unsafe.Pointer) {
-    onNewVM()
-}))
-oappkit.AddSeparator(ctx, fileMenu)
-oappkit.AddItem(ctx, fileMenu, oappkit.NewMenuItemWithAction(ctx, "Quit", "q", 0, func(_ unsafe.Pointer) {
-    rawappkit.NSApplicationSharedApplication(ctx).Terminate(ctx, nil)
-}))
-oappkit.AddSubmenu(ctx, bar, "File", fileMenu)
+// The top-level item and the command items are created through the runtime
+// (see note below); once you hold a *appkit.MenuItem you add it idiomatically.
+fileItem := newCommandItem("File", nil) // runtime-backed helper, returns *appkit.MenuItem
+bar.AddItem(fileItem)
+bar.SetSubmenuForItem(fileMenu, fileItem)
 
-app.SetMainMenu(ctx, bar)
+// A separator, by contrast, is a real idiomatic class method:
+fileMenu.AddItem(appkit.SeparatorItem())
+
+app.WithMainMenu(bar)
 ```
+
+**Creating a command item and wiring it to a Go function** is the part the idiomatic layer can't do on its own. It exposes no `initWithTitle:action:keyEquivalent:` constructor, and a menu item's action is an ObjC target + selector — the idiomatic wrappers configure *existing* objects, they can't define a new target class. So you build the command item and its target through the runtime (`bindings/runtime/purego`): alloc the `NSMenuItem`, register a delegate with `rt.NewDelegate`, and point the item's `setTarget:`/`setAction:` at a selector that delegate implements. Lift the resulting id into the idiomatic API with `obj.Wrap(id)` when you need to. See [`examples/warden`](../examples/warden/) for the runtime-subclass pattern and the [examples adoption guide](../examples/README.md) for crossing the idiomatic↔runtime boundary.
+
+Once you hold a `*appkit.MenuItem`, its title, key equivalent, and enabled state are chainable idiomatic setters — `WithTitle`, `WithKeyEquivalent`, `WithKeyEquivalentModifierMask`, `WithEnabled`.
 
 ### Keyboard modifier flags
 
-The generated `NSEventModifierFlags` enum has sequential index values, not the bitmask values AppKit actually uses. Define the correct values explicitly:
+The idiomatic `EventModifierFlags` enum carries the correct Apple bitmask values, so use the constants directly — no manual redefinition needed:
 
 ```go
-import raw "github.com/deploymenttheory/go-bindings-macosplatform/frameworks/appkit"
-
-// Keyboard modifier bitmasks — correct Apple values.
-const (
-    modCmd   = raw.NSEventModifierFlags(1 << 20) // ⌘
-    modOpt   = raw.NSEventModifierFlags(1 << 19) // ⌥
-    modCtrl  = raw.NSEventModifierFlags(1 << 18) // ⌃
-    modShift = raw.NSEventModifierFlags(1 << 17) // ⇧
-)
-
-// Item with ⌘⇧S shortcut:
-item := oappkit.NewMenuItemWithAction(ctx, "Save State", "s", modCmd|modShift, onSaveState)
+// EventModifierFlagCommand == 1<<20 (⌘), EventModifierFlagShift == 1<<17 (⇧), etc.
+mask := appkit.EventModifierFlagCommand | appkit.EventModifierFlagShift // ⌘⇧
 ```
 
 ### Enabling and disabling items dynamically
 
-Keep `*NSMenuItem` references and call `SetEnabled` as state changes:
+Keep `*appkit.MenuItem` references and use the `WithEnabled` setter as state changes:
 
 ```go
 type AppMenuItems struct {
-    StartItem  *raw.NSMenuItem
-    PauseItem  *raw.NSMenuItem
-    ResumeItem *raw.NSMenuItem
-    StopItem   *raw.NSMenuItem
+    StartItem  *appkit.MenuItem
+    PauseItem  *appkit.MenuItem
+    ResumeItem *appkit.MenuItem
+    StopItem   *appkit.MenuItem
 }
 
-func (m *AppMenuItems) UpdateForVM(ctx context.Context, inst *vm.VMInstance) {
+func (m *AppMenuItems) UpdateForVM(inst *vm.VMInstance) {
     if inst == nil {
-        m.StartItem.SetEnabled(ctx, false)
-        m.PauseItem.SetEnabled(ctx, false)
-        m.ResumeItem.SetEnabled(ctx, false)
-        m.StopItem.SetEnabled(ctx, false)
+        m.StartItem.WithEnabled(false)
+        m.PauseItem.WithEnabled(false)
+        m.ResumeItem.WithEnabled(false)
+        m.StopItem.WithEnabled(false)
         return
     }
-    t := inst.State.Get().Transitions
-    m.StartItem.SetEnabled(ctx, t.CanStart)
-    m.PauseItem.SetEnabled(ctx, t.CanPause)
-    m.ResumeItem.SetEnabled(ctx, t.CanResume)
-    m.StopItem.SetEnabled(ctx, t.CanRequestStop)
+    t := inst.Transitions()
+    m.StartItem.WithEnabled(t.CanStart)
+    m.PauseItem.WithEnabled(t.CanPause)
+    m.ResumeItem.WithEnabled(t.CanResume)
+    m.StopItem.WithEnabled(t.CanRequestStop)
 }
 ```
 
@@ -290,15 +250,16 @@ Objective-C uses **blocks** — its equivalent of Go closures — as callback ar
 You pass a plain Go closure; the generated code wraps it in an ObjC block, passes it to the bridge call, and releases the block after the call returns:
 
 ```go
-// NSArray.EnumerateObjectsUsingBlock takes a block: ^(id obj, NSUInteger idx, BOOL *stop)
-arr.EnumerateObjectsUsing(ctx, func(obj unsafe.Pointer, idx uint64, stop unsafe.Pointer) {
-    str := foundation.CastNSString(foundation.NSStringWithPtr(obj))
-    fmt.Printf("[%d] %s\n", idx, of.StringToGo(str))
-    // Set *stop = YES to terminate early
+// NSArray.enumerateObjectsUsingBlock: takes a block: ^(id obj, NSUInteger idx, BOOL *stop)
+arr.EnumerateObjectsUsing(func(item obj.Object, idx int, stop *bool) {
+    if s := foundation.StringFromID(obj.ID(item)); s != nil {
+        fmt.Printf("[%d] %s\n", idx, s.String())
+    }
+    // Set *stop = true to terminate early.
 })
 ```
 
-For block-based APIs that complete asynchronously (file operations, network calls, etc.), the opinionated library wraps them into straightforward `func(ctx) error` calls. See the [Opinionated Library](opinionated_library.md) guide for examples.
+For block-based APIs that complete asynchronously (file operations, network calls, etc.), the idiomatic layer folds the completion block into a blocking `func(ctx) error` call natively — no wrapper package needed. See the [idiomatic API guide](opinionated_library.md) for examples.
 
 ---
 
@@ -309,26 +270,26 @@ For block-based APIs that complete asynchronously (file operations, network call
 Methods with an `NSError **` out-parameter are generated to return a Go `error` as their last value:
 
 ```go
-str, err := foundation.NSStringStringWithContentsOfURLEncodingError(ctx, url, encoding)
+str, err := foundation.StringWithContentsOfURLEncoding(url, encoding)
 if err != nil {
     return fmt.Errorf("read file: %w", err)
 }
 ```
 
-The generated bridge captures the ObjC `NSError *`, converts it via `objc.NSErrorToError`, and returns it as a Go `error`. The ObjC object is released automatically.
+The generated code captures the ObjC `NSError *`, converts it via the runtime (`purego.NSErrorToError`, decoded into a structured `errkit`/`objcerrors` error), and returns it as a Go `error`. The ObjC object is released automatically.
 
 ### NSException → Go panic
 
 Every generated bridge call wraps the ObjC method in `@try`/`@catch`. If ObjC throws `NSException`, it is caught and re-raised as a Go `panic`. Recover in the normal Go way:
 
 ```go
-func safeObjectAt(arr *foundation.NSArray[*foundation.NSString], idx uint64) (result *foundation.NSString, err error) {
+func safeObjectAt(arr *foundation.Array, idx int) (result *foundation.String, err error) {
     defer func() {
         if r := recover(); r != nil {
             err = fmt.Errorf("ObjC exception: %v", r)
         }
     }()
-    result = arr.ObjectAtIndex(ctx, idx).(*foundation.NSString)
+    result = foundation.StringFromID(obj.ID(arr.ObjectAtIndex(idx)))
     return
 }
 ```
@@ -337,106 +298,65 @@ func safeObjectAt(arr *foundation.NSArray[*foundation.NSString], idx uint64) (re
 
 ## VM Lifecycle: An End-to-End Example
 
-The Orin app uses the Virtualization framework to run macOS and Linux VMs. This section walks through the key steps, showing both raw and opinionated APIs.
+The Virtualization framework runs macOS and Linux VMs. It is **queue-confined**, not `@MainActor`: a `VZVirtualMachine` and its configuration must be used on the serial dispatch queue you create it on (see `opinionated/tools/grandcentraldispatch/serialqueue`), so these calls are *not* main-thread wrapped.
 
 ### Configure and validate a VM
 
+Configuration chains with the idiomatic `With*` setters. The device setters take typed providers (or a variadic list of them), not untyped `NSArray`s:
+
 ```go
-import (
-    foundation "github.com/deploymenttheory/go-bindings-macosplatform/frameworks/foundation"
-    rawvz      "github.com/deploymenttheory/go-bindings-macosplatform/frameworks/virtualization"
-    virt       "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/virtualization"
-)
+import "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 
-func buildMacOSVM(ctx context.Context, cfg VMConfig) (*rawvz.VZVirtualMachine, error) {
-    c := virt.NewVZVirtualMachineConfiguration(ctx)
+func buildMacOSVM(cfg VMConfig) (*virtualization.VirtualMachine, error) {
+    c := virtualization.NewVirtualMachineConfiguration().
+        WithCPUCount(cfg.CPUCount).
+        WithMemorySize(uint64(cfg.MemoryGB) * 1024 * 1024 * 1024)
 
-    // CPU and memory
-    c.SetCPUCount(ctx, cfg.CPUCount)
-    c.SetMemorySize(ctx, uint64(cfg.MemoryGB)*1024*1024*1024)
+    // Attach the platform, boot loader, and devices with the chainable setters:
+    // WithPlatform, WithBootLoader, WithStorageDevices, WithGraphicsDevices, … .
+    // Build the provider objects (VZMacPlatformConfiguration, VZEFIBootLoader,
+    // VZVirtioBlockDeviceConfiguration, …) with their own idiomatic constructors
+    // in the virtualization package.
+    c.WithBootLoader(bootLoader).
+        WithPlatform(platform).
+        WithStorageDevices(diskDevice).
+        WithGraphicsDevices(graphicsDevice)
 
-    // macOS platform (hardware model + machine identifier + auxiliary storage)
-    hwModel    := virt.NewMacHardwareModelFromBytes(ctx, cfg.HardwareModelData)
-    machineID  := virt.NewMacMachineIdentifierFromBytes(ctx, cfg.MachineIDData)
-    auxStorage := virt.LoadMacAuxiliaryStorage(ctx, cfg.AuxStoragePath)
-
-    platform := rawvz.NewVZMacPlatformConfiguration(ctx)
-    if err := virt.ApplyVZMacPlatformConfiguration(ctx, platform, virt.VZMacPlatformConfigurationSpec{
-        HardwareModel:     hwModel,
-        MachineIdentifier: machineID,
-        AuxiliaryStorage:  auxStorage,
-    }); err != nil {
-        return nil, fmt.Errorf("mac platform: %w", err)
-    }
-    c.SetPlatform(ctx, &platform.VZPlatformConfiguration)
-
-    // EFI boot loader
-    bl, err := virt.NewEFIBootLoader(ctx, "")
-    if err != nil {
-        return nil, fmt.Errorf("EFI boot loader: %w", err)
-    }
-    c.SetBootLoader(ctx, &bl.VZBootLoader)
-
-    // Display (1920×1200 at 80 ppi)
-    display := virt.NewDisplayConfiguration(ctx, 1920, 1200, 80)
-    gfxDev  := rawvz.NewVZMacGraphicsDeviceConfiguration(ctx)
-    gfxDev.SetDisplays(ctx, foundation.NSArrayOf[objc.Object](ctx, display))
-    c.SetGraphicsDevices(ctx, foundation.NSArrayOf[objc.Object](ctx, gfxDev))
-
-    // Disk
-    if cfg.DiskPath != "" {
-        attach, err := virt.NewDiskImageAttachment(ctx, cfg.DiskPath, false)
-        if err != nil {
-            return nil, fmt.Errorf("disk attachment: %w", err)
-        }
-        diskDev := rawvz.NewVZVirtioBlockDeviceConfigurationWithAttachment(
-            ctx, &attach.VZStorageDeviceAttachment)
-        c.SetStorageDevices(ctx, foundation.NSArrayOf[objc.Object](ctx, diskDev))
+    // Validate before use — returns a Go error (nil when the config is valid).
+    if err := c.Validate(); err != nil {
+        return nil, fmt.Errorf("VM config invalid: %w", err)
     }
 
-    // Validate before use
-    if ok, err := c.ValidateWithError(ctx); !ok || err != nil {
-        if err != nil {
-            return nil, fmt.Errorf("VM config invalid: %w", err)
-        }
-        return nil, fmt.Errorf("VM config invalid")
-    }
-
-    return rawvz.NewVZVirtualMachineWithConfigurationQueue(ctx, c, nil), nil
+    return virtualization.NewVirtualMachineWithConfigurationQueue(c, queue), nil
 }
 ```
 
-### Lifecycle commands (opinionated library)
+### Lifecycle commands
 
-The opinionated `virtualization` package wraps the callback-based start/pause/resume/stop APIs into blocking, context-aware functions:
+The callback-based start/pause/resume APIs are folded into blocking, context-aware methods; `RequestStop` and `State` are synchronous:
 
 ```go
-// Start the VM — blocks until started or error.
-if err := virt.Start(ctx, machine); err != nil {
+if err := machine.Start(ctx); err != nil { // blocks until started or ctx cancelled
     return fmt.Errorf("VM start: %w", err)
 }
-
-// Pause
-if err := virt.Pause(ctx, machine); err != nil {
+if err := machine.Pause(ctx); err != nil {
     return fmt.Errorf("VM pause: %w", err)
 }
-
-// Resume
-if err := virt.Resume(ctx, machine); err != nil {
+if err := machine.Resume(ctx); err != nil {
     return fmt.Errorf("VM resume: %w", err)
 }
-
-// Request graceful shutdown
-if err := virt.RequestStop(ctx, machine); err != nil {
+if err := machine.RequestStop(); err != nil { // request graceful shutdown
     return fmt.Errorf("VM stop: %w", err)
 }
 ```
 
 ### Polling VM state
 
-`VZVirtualMachine.State` can only be read on the main thread:
+Because a `VZVirtualMachine` must be touched only on the serial queue it was created on, read `State()` from that queue:
 
 ```go
+import "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/tools/grandcentraldispatch/serialqueue"
+
 go func() {
     ticker := time.NewTicker(500 * time.Millisecond)
     defer ticker.Stop()
@@ -445,11 +365,11 @@ go func() {
         case <-stopCh:
             return
         case <-ticker.C:
-            var state rawvz.VZVirtualMachineState
-            objc.RunOnMainThread(func() {
-                state = machine.State(ctx)
+            var state virtualization.VirtualMachineState
+            vmQueue.Do(func() { // vmQueue is the serialqueue the VM was created on
+                state = machine.State()
             })
-            // update observable, trigger UI refresh, etc.
+            // trigger a UI refresh with the new state, etc.
         }
     }
 }()
@@ -457,38 +377,43 @@ go func() {
 
 ---
 
-## Reactive State with Observables
+## Reactive State (App-Level Pattern)
 
-`opinionated/library/reactive` provides a generic observable value that can be subscribed to by multiple consumers. It is safe to read and write from any goroutine.
+The SDK does not ship an observable/reactive helper — that is application concern, not a binding. A tiny plain-Go observable is all you need to connect background state changes (e.g. a VM state poller) to UI updates. The one SDK-specific rule: **dispatch the UI work back to the main thread** with `purego.Main`, since AppKit is `@MainActor`.
 
 ```go
-import reactive "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/reactive"
+import purego "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 
-// Create an observable with an initial value.
-selection := reactive.New("")  // Observable[string]
+// A minimal observable — a value plus subscribers, safe from any goroutine.
+type Observable[T any] struct {
+    mu   sync.Mutex
+    val  T
+    subs []func(T)
+}
 
-// Read the current value.
-id := selection.Get()
+func (o *Observable[T]) Set(v T) {
+    o.mu.Lock()
+    o.val = v
+    subs := append([]func(T){}, o.subs...)
+    o.mu.Unlock()
+    for _, fn := range subs {
+        fn(v)
+    }
+}
 
-// Write a new value — all subscribers are notified synchronously.
-selection.Set("vm-uuid-1234")
-
-// Subscribe — the closure is called immediately with the current value,
-// then again each time Set is called.
-selection.Subscribe(func(id string) {
-    // Always dispatch UI work back to the main thread.
-    objc.RunOnMainThread(func() {
-        menuItems.UpdateForVM(ctx, findVM(id))
-    })
-})
+func (o *Observable[T]) Subscribe(fn func(T)) {
+    o.mu.Lock()
+    o.subs = append(o.subs, fn)
+    o.mu.Unlock()
+}
 ```
 
-The Orin app uses observables to connect VM state changes to UI updates without any shared-mutex coordination:
+Wire a background poller to the UI without any shared-mutex coordination — the subscriber hops to the main thread itself:
 
 ```go
 // VM state poller (goroutine) → observable → UI subscriber (main thread)
-inst.State.Subscribe(func(s VMStateSnapshot) {
-    objc.RunOnMainThread(func() {
+state.Subscribe(func(s VMStateSnapshot) {
+    purego.Main(func() {
         rebuildAll()       // update list view, toolbar, menu items
         updateStatusIcon() // update system status bar
     })
@@ -545,7 +470,7 @@ The `os.WriteFile(tmp) + os.Rename` pattern is atomic on APFS: a crash during `W
 
 ## Structured Logging
 
-The Orin app uses [zerolog](https://github.com/rs/zerolog) to write structured JSON to `~/Library/Logs/orin/orin.log` while also printing human-readable output to stderr:
+A typical macOS app uses [zerolog](https://github.com/rs/zerolog) to write structured JSON to `~/Library/Logs/<app>/<app>.log` while also printing human-readable output to stderr:
 
 ```go
 import "github.com/rs/zerolog"

@@ -122,6 +122,26 @@ linters:
         linters:
           - tagliatelle
 
+      # The code generator (internal/codegen) has established, intentional
+      # conventions the following linters flag pervasively. These are recognised
+      # generator conventions, NOT defects (genuine bugs and dead code found here
+      # are fixed directly, not excluded):
+      #   - wrapcheck: emit/pipeline functions return render.* and WriteGoFile
+      #     errors directly; the caller chain adds the framework/construct context.
+      #   - err113: developer-facing dynamic error messages during regeneration.
+      #   - gocyclo: per-construct emit functions are inherently branch-heavy.
+      #   - gosec G306: generated Go SOURCE files are written 0644 by design (they
+      #     are not secrets), matching go/format + tooling expectations.
+      - path: internal/codegen/
+        linters:
+          - wrapcheck
+          - err113
+          - gocyclo
+      - path: internal/codegen/
+        linters:
+          - gosec
+        text: "G306:"
+
     # exclude entire files from reporting (still analyzed)
     paths:
       - ".*\\.gen\\.go$"          # Generated Go files

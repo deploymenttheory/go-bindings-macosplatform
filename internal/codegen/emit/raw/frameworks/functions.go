@@ -8,6 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -35,12 +36,29 @@ func EmitFunctions(
 	mapper *typemap.Mapper,
 	dylibVarName string,
 	ownerIndex map[string]string,
+	rec *emitmanifest.Recorder,
 ) (imports typemap.ImportSet, regLines []FunctionRegistration, err error) {
 	imports = make(typemap.ImportSet)
 
 	fns := EmittableFunctions(framework, mapper.AppendDiagnostic)
 	if len(fns) == 0 {
 		return imports, nil, nil
+	}
+	pkgName := naming.PackageName(framework.Framework)
+	for _, fn := range fns {
+		rec.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleRaw,
+			Kind:      emitmanifest.KindFunction,
+			Framework: framework.Framework,
+			MetaKey: emitmanifest.MetaKey(
+				framework.Framework,
+				emitmanifest.KindFunction,
+				fn.Name,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: naming.ExportedFunctionName(fn.Name),
+		})
 	}
 
 	ctx := typemap.Context{Framework: framework.Framework}
@@ -50,7 +68,10 @@ func EmitFunctions(
 	// wrapper functions use the high-level Go types.
 	functionFile := view.FunctionFile{}
 	for _, fn := range fns {
-		functionFile.Vars = append(functionFile.Vars, buildFunctionVarView(fn, ctx, mapper, imports, ownerIndex))
+		functionFile.Vars = append(
+			functionFile.Vars,
+			buildFunctionVarView(fn, ctx, mapper, imports, ownerIndex),
+		)
 	}
 
 	// Collect registration lines to be embedded in the runtime.go init()
@@ -73,7 +94,10 @@ func EmitFunctions(
 
 	// Gather the exported wrapper functions.
 	for _, fn := range fns {
-		functionFile.Wrappers = append(functionFile.Wrappers, buildFunctionWrapperView(fn, ctx, mapper, imports, ownerIndex))
+		functionFile.Wrappers = append(
+			functionFile.Wrappers,
+			buildFunctionWrapperView(fn, ctx, mapper, imports, ownerIndex),
+		)
 	}
 
 	out, err := render.Functions(functionFile)

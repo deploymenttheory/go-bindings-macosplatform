@@ -3,12 +3,14 @@
 package idiofw
 
 import (
+	"maps"
 	"path/filepath"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
+	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -32,6 +34,7 @@ func emitConstants(
 	mapper *typemap.Mapper,
 	handFuncs, takenNames map[string]bool,
 	trialNames trialNameMap,
+	rec *emitmanifest.Recorder,
 ) error {
 	ctx := typemap.Context{Framework: framework.Framework}
 	// Mirror EmitExterns' name reservations: an extern is skipped when its C name
@@ -51,7 +54,10 @@ func emitConstants(
 	// CoreFoundation references first, then Foundation *String constants, then
 	// non-Foundation objc.ID string constants, then same-framework ObjC class
 	// pointer globals.
-	var cfRefs, strItems, strIDs, classItems []view.Constant
+	var cfRefs, strItems, strIDs, classItems, valItems []view.Constant
+	// valImports collects the imports the value accessors need (unsafe, and any
+	// sibling idiomatic package a value-struct return names).
+	valImports := map[string]string{}
 
 	for _, ext := range framework.Externs {
 		if ext.Availability.IsUnavailable || seen[ext.Name] || funcNames[ext.Name] {
@@ -103,13 +109,23 @@ func emitConstants(
 				}
 			}
 		}
-		if !isCFRefExtern(ext.ObjCType) && !isFoundationString && !isObjcIDString && !isObjcClass {
-			continue
-		}
 		if takenNames[goName] || handFuncs[goName] {
 			continue
 		}
 		takenNames[goName] = true
+		rec.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleIdiomatic,
+			Kind:      emitmanifest.KindExtern,
+			Framework: framework.Framework,
+			MetaKey: emitmanifest.MetaKey(
+				framework.Framework,
+				emitmanifest.KindExtern,
+				ext.Name,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: goName,
+		})
 
 		_ = typedString // current accessors do not vary by typed-ness; reserved
 		comment := ""
@@ -148,7 +164,7 @@ func emitConstants(
 					GoTypeName:   objcIdiomaticType,
 				},
 			)
-		default: // isObjcIDString
+		case isObjcIDString:
 			strIDs = append(
 				strIDs,
 				view.Constant{
@@ -158,14 +174,33 @@ func emitConstants(
 					Kind:         view.ConstObjcID,
 				},
 			)
+		default:
+			// Every remaining extern (numeric/scalar globals, value structs, and
+			// anything unresolvable) is emitted rather than dropped, matching the raw
+			// layer: a value accessor that dereferences the symbol when the type is
+			// expressible, else a uintptr symbol-address accessor.
+			kind, valType, zero := resolveExternValue(ext, ctx, mapper, rawPkgAlias, valImports)
+			valItems = append(valItems, view.Constant{
+				GoName:       goName,
+				ExternName:   ext.Name,
+				CommentBlock: comment,
+				Kind:         kind,
+				GoTypeName:   valType,
+				Zero:         zero,
+			})
 		}
 	}
 
-	constants := make([]view.Constant, 0, len(cfRefs)+len(strItems)+len(strIDs)+len(classItems))
+	constants := make(
+		[]view.Constant,
+		0,
+		len(cfRefs)+len(strItems)+len(strIDs)+len(classItems)+len(valItems),
+	)
 	constants = append(constants, cfRefs...)
 	constants = append(constants, strItems...)
 	constants = append(constants, strIDs...)
 	constants = append(constants, classItems...)
+	constants = append(constants, valItems...)
 	if len(constants) == 0 {
 		return nil
 	}
@@ -178,11 +213,14 @@ func emitConstants(
 	_ = rawPkgPath
 	_ = rawPkgAlias
 	// Imports computed from the resolved constants, not by scanning the rendered
-	// text: every accessor calls purego.CFConstant; the obj wrapper is used only
-	// by the CF-reference and objc.ID-string accessors (the *String accessor uses
-	// StringFromID instead). ObjC class pointer accessors additionally need objc
-	// and unsafe to dereference the symbol address.
-	imports := map[string]string{"purego": pureobjcImportPath}
+	// text: the CF-reference/string accessors call purego.CFConstant; the obj
+	// wrapper is used only by the CF-reference and objc.ID-string accessors (the
+	// *String accessor uses StringFromID instead). ObjC class pointer and value
+	// accessors additionally need objc/unsafe to dereference the symbol address.
+	imports := map[string]string{}
+	if len(cfRefs) > 0 || len(strItems) > 0 || len(strIDs) > 0 {
+		imports["purego"] = pureobjcImportPath
+	}
 	if len(cfRefs) > 0 || len(strIDs) > 0 {
 		imports["obj"] = objImportPath
 	}
@@ -190,10 +228,48 @@ func emitConstants(
 		imports["objc"] = objcImportPath
 		imports["unsafe"] = "unsafe"
 	}
+	// Value accessors dereference the symbol address (unsafe) and may name a
+	// sibling idiomatic package for a value-struct return.
+	maps.Copy(imports, valImports)
 
 	fname := pkgName + "_constants_generated.go"
 	file := assembleFile(pkgName, imports, body)
 	return rawfw.WriteGoFile(filepath.Join(outDir, fname), file)
+}
+
+// resolveExternValue classifies an extern that is not one of the recognized
+// object/string shapes. It returns a value accessor (ConstValue) when the Go type
+// is expressible hermetically — a primitive, or a value struct owned by a sibling
+// idiomatic package — and otherwise a raw uintptr symbol-address accessor
+// (ConstRawAddr), matching the raw layer's degrade. Needed imports (unsafe, and
+// any sibling package) are added to imports.
+func resolveExternValue(
+	ext meta.Extern,
+	ctx typemap.Context,
+	mapper *typemap.Mapper,
+	rawPkgAlias string,
+	imports map[string]string,
+) (view.ConstKind, string, string) {
+	gt := ext.GoType
+	if gt == "" {
+		gt = mapper.GoType(ext.ObjCType, ctx, make(typemap.ImportSet))
+	}
+	if goPrimitives[gt] {
+		imports["unsafe"] = "unsafe"
+		zero := "0"
+		if gt == "bool" {
+			zero = "false"
+		}
+		return view.ConstValue, gt, zero
+	}
+	if resolved, imps, ok := crossFrameworkValueStruct(gt, mapper, rawPkgAlias); ok {
+		imports["unsafe"] = "unsafe"
+		maps.Copy(imports, imps)
+		return view.ConstValue, resolved, resolved + "{}"
+	}
+	// Pointers, ObjC objects, arrays, function pointers, own-package types, and
+	// anything unresolved: expose the raw symbol address.
+	return view.ConstRawAddr, "", ""
 }
 
 // foundationPkgName is the idiomatic foundation package name, used to decide

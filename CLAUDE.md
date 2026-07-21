@@ -15,10 +15,10 @@ go test ./internal/...
 go test ./internal/codegen/emit/raw/libraries/ -run TestWriteClass
 
 # Run acceptance tests (requires metadata/ directory)
-go test ./acceptance/
+go test ./bindings/acceptance/
 
 # Run acceptance tests skipping the slow build step
-go test ./acceptance/ -short
+go test ./bindings/acceptance/ -short
 
 # Run with verbose output
 go test -v ./internal/codegen/libraries/pipeline/ -run TestLoadAll
@@ -36,10 +36,11 @@ go run ./cmd/generate/ scan --framework AppKit,Foundation,CoreData
 # Scan every framework in the SDK
 go run ./cmd/generate/ scan --framework all
 
-# ── Bindings ──────────────────────────────────────────────────────────────────
-# Re-emit all bindings from committed metadata (no Clang needed)
-# ObjC frameworks (purego) → ./bindings/frameworks/
-# C libraries   (CGo)     → ./bindings/libraries/
+# ── Bindings (RAW mirror — internal) ──────────────────────────────────────────
+# Re-emit the raw ObjC/C mirror from committed metadata (no Clang needed).
+# This is the internal implementation substrate, NOT the consumable API.
+# ObjC frameworks (purego) → ./bindings/internal/raw/frameworks/
+# C libraries   (CGo)     → ./bindings/internal/raw/libraries/
 go run ./cmd/generate/ bindings
 
 # Re-emit with verbose diagnostic output (unsafe.Pointer degradations, cycle breaks)
@@ -51,8 +52,24 @@ go run ./cmd/generate/ bindings --diagnostics-baseline metadata/diagnostics-base
 # Rewrite the diagnostics baseline (after deliberately fixing or accepting degradations)
 go run ./cmd/generate/ bindings --diagnostics metadata/diagnostics-baseline.json
 
-# Override output directories
-go run ./cmd/generate/ bindings --frameworks-out ./bindings/frameworks --libraries-out ./bindings/libraries
+# Override output directories (defaults are the internal raw roots)
+go run ./cmd/generate/ bindings --frameworks-out ./bindings/internal/raw/frameworks --libraries-out ./bindings/internal/raw/libraries
+
+# ── Idiomatic (the CONSUMABLE API) ────────────────────────────────────────────
+# Re-emit the fluent, Go-shaped layer that consumers import, from committed metadata.
+# ObjC frameworks → ./bindings/frameworks/   (hermetic; never imports raw)
+# C libraries     → ./bindings/libraries/    (re-exports raw value types via aliases)
+# Reads the raw C-library source from ./bindings/internal/raw/libraries, so run
+# 'bindings' first (or 'all') if that tree is stale.
+go run ./cmd/generate/ idiomatic
+go run ./cmd/generate/ idiomatic --framework Virtualization
+go run ./cmd/generate/ idiomatic --out ./bindings/frameworks --libraries-out ./bindings/libraries
+
+# ── Parity (raw-vs-idiomatic coverage gate) ───────────────────────────────────
+# Report every construct the raw mirror emits that the idiomatic layer does not
+# (keyed on the ObjC/C name, so renames are invisible — only absence is a finding).
+# Ratchets against metadata/parity-baseline.json; used in CI.
+go run ./cmd/generate/ parity
 
 # ── Metadata QA ───────────────────────────────────────────────────────────────
 # Structural integrity checks over committed metadata (errors fail; warnings report)
@@ -116,11 +133,35 @@ All source files under `internal/scanner/` and `cmd/generate/` carry `//go:build
 
 ## Architecture
 
-This project is a **code generator** that reads macOS SDK headers via Clang and emits idiomatic Go packages. It produces the `bindings/frameworks/`, `bindings/libraries/`, and `opinionated/` trees in the same repository.
+> **Repository layout (post-promotion).** The **public API is the idiomatic layer**, and it is the
+> only thing external consumers may import:
+> ```
+> bindings/frameworks/<name>          ← idiomatic ObjC framework wrappers (public)
+> bindings/libraries/<name>           ← idiomatic CGo C-library wrappers (public)
+> bindings/libraries/bsd              ← public POSIX/BSD support (named by library signatures)
+> bindings/runtime/{purego,cgo,blocks,callbacks,obj,rt,errkit}   ← public runtime + support
+> bindings/internal/{objref,shim,dispatch}                       ← private generated support
+> bindings/internal/raw/frameworks/<name>   ← RAW purego bindings (internal; unreachable externally)
+> bindings/internal/raw/libraries/<name>    ← RAW CGo bindings + bridge .h/.m (internal)
+> bindings/acceptance/                ← acceptance tests (under bindings/ so they can import internal raw)
+> opinionated/tools                   ← hand-written helper tools (opinionated/idiomatic, library, custom are GONE)
+> ```
+> Go's internal-package rule enforces the boundary: only code under `bindings/` can import
+> `bindings/internal/...`, so the raw bindings are invisible to consumers. The idiomatic **frameworks**
+> are hermetic (they never import raw — a generation-time gate enforces it); the idiomatic **libraries**
+> import their raw counterpart under `bindings/internal/raw/libraries` and re-export its types as
+> aliases (`type X = raw.X`), so a consumer names `pkg.X` without importing raw.
+>
+> Emitter output paths: `generate bindings` → `bindings/internal/raw/...`; `generate idiomatic` →
+> `bindings/{frameworks,libraries}` + the support packages. **Sections below that still say
+> `opinionated/idiomatic/...` or `bindings/frameworks` (as the raw output) predate this switch and
+> describe the old locations.**
+
+This project is a **code generator** that reads macOS SDK headers via Clang and emits idiomatic Go packages. It produces the `bindings/` tree (public idiomatic layer, private raw layer under `bindings/internal/raw`) in the same repository.
 
 There are **two generator pipelines**, sharing the scanner and the scanned-metadata model but otherwise independent:
-- **`internal/codegen/frameworks/`** — emits the purego ObjC framework packages (`bindings/frameworks/`) and the idiomatic layer (`opinionated/idiomatic/`). Pure Go, no CGo.
-- **`internal/codegen/libraries/`** — emits the CGo Apple C-library packages (`bindings/libraries/`), with `.h`/`.m` bridge files. The three-phase description below traces this CGo pipeline; the frameworks pipeline mirrors it with a purego emitter.
+- **`internal/codegen/frameworks/`** — emits the purego ObjC framework packages (raw → `bindings/internal/raw/frameworks/`) and the public idiomatic layer (`bindings/frameworks/`). Pure Go, no CGo.
+- **`internal/codegen/libraries/`** — emits the CGo Apple C-library packages (raw → `bindings/internal/raw/libraries/`, with `.h`/`.m` bridge files) and the public idiomatic libraries (`bindings/libraries/`). The three-phase description below traces this CGo pipeline; the frameworks pipeline mirrors it with a purego emitter.
 
 ### Three-phase pipeline
 
@@ -159,10 +200,10 @@ front-ends (scanner/`meta`/`typemap`/`naming`/`pipeline`) stay under
 
 ```
 internal/codegen/emit/
-  raw/frameworks/    (pkg rawfw)   purego ObjC  → bindings/frameworks/
-  raw/libraries/     (pkg rawlib)  CGo C-libs   → bindings/libraries/
-  idiomatic/frameworks/ (pkg idiofw)            → opinionated/idiomatic/framework/
-  idiomatic/libraries/  (pkg idiolib)           → opinionated/idiomatic/libraries/
+  raw/frameworks/    (pkg rawfw)   purego ObjC  → bindings/internal/raw/frameworks/
+  raw/libraries/     (pkg rawlib)  CGo C-libs   → bindings/internal/raw/libraries/
+  idiomatic/frameworks/ (pkg idiofw)            → bindings/frameworks/    (public)
+  idiomatic/libraries/  (pkg idiolib)           → bindings/libraries/     (public)
 ```
 
 Every leaf has the **identical shape** — the view→render compiler:
@@ -241,11 +282,16 @@ Swift-only frameworks that cannot be parsed (missing `.swiftinterface`) receive 
 
 ### Generated package layout
 
-ObjC frameworks emit to `frameworks/<name>/`, Apple C libraries emit to `libraries/<name>/`:
+There are two generated surfaces for every framework: the **raw mirror** (internal) and the
+**public idiomatic layer**. Both begin every file with
+`// Code generated by go-bindings-codegen. DO NOT EDIT.` and `//go:build darwin`.
+
+**Raw mirror** — ObjC frameworks emit to `bindings/internal/raw/frameworks/<name>/`, Apple C
+libraries to `bindings/internal/raw/libraries/<name>/`:
 
 ```
-frameworks/<name>/          (ObjC frameworks)
-libraries/<name>/           (Apple C libraries, e.g. EndpointSecurity)
+bindings/internal/raw/frameworks/<name>/    (ObjC frameworks)
+bindings/internal/raw/libraries/<name>/     (Apple C libraries, e.g. EndpointSecurity)
 ├── doc.go
 ├── cgo.go                  # -framework <Name> for ObjC; -l<lib> for C libraries
 ├── <name>_enums.go
@@ -262,52 +308,58 @@ libraries/<name>/           (Apple C libraries, e.g. EndpointSecurity)
     └── <name>_bridge.m               # compiled with -fno-objc-arc
 ```
 
-All generated files begin with `// Code generated by go-bindings-codegen. DO NOT EDIT.` and `//go:build darwin`.
-
-### Opinionated layers
-
-Two generated opinionated layers sit on top of the raw `frameworks/` and `libraries/` packages:
-
-**`opinionated/library/`** — hand-crafted and generated quality-of-life helpers:
+**Public idiomatic layer** — the consumable API, emitted by `go run ./cmd/generate/ idiomatic`
+to `bindings/frameworks/<name>/` (ObjC) and `bindings/libraries/<name>/` (C). Every file is
+`*_generated.go`:
 
 ```
-opinionated/library/
-├── foundation/          # hand-crafted: FileURL, NSDataToBytes, StringFromGo, FileHandle, Progress, OSVersion
-├── corefoundation/      # hand-crafted: CGSize/CGPoint/CGRect constructors and predicates
-├── bsd/                 # hand-crafted: EtherAddr ↔ string helpers
-├── appkit/              # hand-crafted: screen helpers + generated *_generated.go
-├── virtualization/      # hand-crafted: capabilities, state, network, storage, bootloader,
-│                        #               machine_id, macos, display, installer, rosetta,
-│                        #               restore_image, socket, constants, create
-│                        #               + generated *_generated.go
-└── <other frameworks>/  # generated *_generated.go only (async wrappers, typed slices, spec types)
+bindings/frameworks/<name>/                  (fluent ObjC framework)
+├── doc.go                                   # package docs + a type index so `go doc` reads like a manual
+├── <name>_runtime_generated.go              # dlopen + symbol registration + SymbolAvailable
+├── <name>_enums_generated.go
+├── <name>_structs_generated.go
+├── <name>_constants_generated.go            # extern constant accessors
+├── <name>_errors_generated.go               # error-code enums / domains
+├── <name>_protocols_generated.go            # protocol Go interfaces
+├── <name>_providers_generated.go            # sealed provider interfaces for abstract bases
+├── <name>_classmethods_generated.go         # class-method (factory) package functions
+├── <name>_cfunctions_generated.go           # free C-function wrappers (prefix-stripped)
+├── <ClassName>_generated.go                 # one file per ObjC class (New…, FromID, methods, With* setters)
+└── <Delegate>_delegate_generated.go         # delegate protocols as implementable interfaces
+
+bindings/libraries/<name>/                   (fluent C library — thin surface over the raw mirror)
+├── doc.go
+├── <name>_aliases_generated.go              # type/const/var re-exports: type X = raw.X
+└── <name>_cfunctions_generated.go           # prefix-stripped, error-returning C-function wrappers
 ```
 
-**`opinionated/idiomatic/`** — fully generated fluent layer, emitted by the frameworks pipeline
-(`go run ./cmd/generate/ idiomatic`). This replaced the former `opinionated/ergonomic/` layer,
-which has been removed. The emitter is a compiler-style pipeline: a resolution pass builds a
-pure-data IR (the `view` package under `internal/codegen/emit/idiomatic/frameworks/view/`) and a
-render pass turns it into Go source through `text/template` files only (`…/render/templates/`) —
-no Go syntax is string-built, and imports are computed from resolved types (not scanned from the
-output). The emitter source is split by construct across the `idiomatic` package
-(`classes.go`, `constructors.go`, `setters.go`, `methods.go`, `typeresolve.go`, `docs.go`,
-`naming.go`, …). Wrappers embed their same-framework base (promoting its methods), abstract-base
-setters accept a **sealed** provider interface (`<Base>Provider` with an unexported marker), and
-the layer is hermetic (never imports `bindings/frameworks`).
+The idiomatic emitter is a compiler-style pipeline: a resolution pass builds a pure-data IR (the
+`view` package under `internal/codegen/emit/idiomatic/{frameworks,libraries}/view/`) and a render
+pass turns it into Go source through `text/template` files only (`…/render/templates/`) — no Go
+syntax is string-built, and imports are computed from resolved types (not scanned from the output).
+The emitter source is split by construct across the `idiofw`/`idiolib` packages (`classes.go`,
+`constructors.go`, `setters.go`, `methods.go`, `typeresolve.go`, `docs.go`, `naming.go`, …).
+Wrappers embed their same-framework base (promoting its methods), abstract-base setters accept a
+**sealed** provider interface (`<Base>Provider` with an unexported marker), and the framework layer
+is **hermetic** — a generation-time gate (`internal/codegen/emit/idiomatic/frameworks/gate.go`)
+fails the build if it ever imports `bindings/internal/raw`. The library layer is not hermetic: it
+imports its raw counterpart and re-exports the value types as aliases so consumers still name
+`pkg.X` without importing raw.
 
-```
-opinionated/idiomatic/framework/<name>/    # Go-friendly wrappers for each ObjC framework
-opinionated/idiomatic/libraries/<name>/    # wrappers for each Apple C library
-```
+### Hand-written code (`opinionated/`)
 
-`opinionated/custom/` holds additional hand-crafted packages.
+`opinionated/` now holds only **`opinionated/tools/`** — hand-written helper tools (e.g.
+`grandcentraldispatch/mainthread`, `keychain`, `oslog`) that consume the public `bindings/…`
+packages. The former generated `opinionated/idiomatic/` tree has moved to `bindings/` (see above),
+and the old hand-crafted `opinionated/library/`/`opinionated/custom/` trees have been removed.
 
-Rules for the opinionated layers:
-- All hand-crafted files use `//go:build darwin` and import raw frameworks as `raw "…/bindings/frameworks/<name>"`.
-- Cross-package imports inside `opinionated/library/` always use the full module path `github.com/deploymenttheory/go-bindings-macosplatform/opinionated/library/<name>`.
-- The generator **never deletes** hand-crafted files in `opinionated/library/`; only `*_generated.go` files are regenerated.
-- All files under `opinionated/idiomatic/` are generated — do not hand-edit them.
-- **Never modify `bindings/frameworks/` or `bindings/libraries/` as part of opinionated work.** Raw generated code must remain untouched.
+Rules:
+- Hand-written tools use `//go:build darwin` and import the public API as
+  `bindings/frameworks/<name>` / `bindings/libraries/<name>` — never the internal raw packages
+  (Go's internal rule forbids it anyway).
+- **Everything under `bindings/` is generated — do not hand-edit it.** To change generated output,
+  change the emitter and regenerate. The generator owns the whole `bindings/` tree (it cleans and
+  rewrites `bindings/frameworks`, `bindings/libraries`, and `bindings/internal/raw`).
 
 ### Metadata cache (`metadata/`)
 
@@ -359,7 +411,7 @@ non-negotiable — violations block PRs.
 ## Important constraints
 
 - **ARC disabled**: all bridge `.m` files use `-fno-objc-arc`. Do not mix ARC code with the bridges.
-- **Main thread**: Apple isolates AppKit and other UI APIs to Swift's `@MainActor` (the macro `NS_SWIFT_UI_ACTOR`). The **idiomatic** layer (`opinionated/idiomatic/framework/`) now wires this automatically: methods, setters, and constructors of an `@MainActor`-isolated class — and every subclass that inherits the isolation (e.g. `MKMapView`, `PDFView` via `NSView`) — are wrapped in `purego.Main`, which runs the call on the main thread (inline when already there). The isolation is harvested from the Swift symbol graph into committed `metadata/frameworks/<name>/mainactor.json` sidecars (see `go run ./scripts/tools/mainactorisolation`), merged and propagated down the class hierarchy at load time. The **raw** bindings (`bindings/frameworks/`) now do the same: each `@MainActor`-isolated method, setter, and constructor wraps its `objc.Send` dispatch in `purego.Main` (with a hoisted `_mainthread*` capture var for return values), so raw callers get correct main-thread dispatch automatically too. Only callers that drop to the runtime and send selectors by hand are responsible for `purego.Main`/`objc.RunOnMainThread`. Queue-based frameworks (Virtualization, Core Data) carry no `@MainActor` and are correctly left unwrapped.
+- **Main thread**: Apple isolates AppKit and other UI APIs to Swift's `@MainActor` (the macro `NS_SWIFT_UI_ACTOR`). The public **idiomatic** layer (`bindings/frameworks/<name>`) wires this automatically: methods, setters, and constructors of an `@MainActor`-isolated class — and every subclass that inherits the isolation (e.g. `MKMapView`, `PDFView` via `NSView`) — are wrapped in `purego.Main`, which runs the call on the main thread (inline when already there). The isolation is harvested from the Swift symbol graph into committed `metadata/frameworks/<name>/mainactor.json` sidecars (see `go run ./scripts/tools/mainactorisolation`), merged and propagated down the class hierarchy at load time. The internal **raw** mirror (`bindings/internal/raw/frameworks/<name>`) does the same: each `@MainActor`-isolated method, setter, and constructor wraps its `objc.Send` dispatch in `purego.Main` (with a hoisted `_mainthread*` capture var for return values). Only callers that drop to the runtime and send selectors by hand are responsible for `purego.Main`/`objc.RunOnMainThread`. Queue-based frameworks (Virtualization, Core Data) carry no `@MainActor` and are correctly left unwrapped.
 - **Single permitted external dependency**: `github.com/ebitengine/purego` is the only non-stdlib dependency, used by the purego framework runtime. The CGo C-library layer has no external runtime dependency (it is pure CGo over `bindings/runtime/cgo`). Do not add further external dependencies without a compelling reason reviewed by a maintainer. (OpenTelemetry was previously a foundational dependency of the CGo libraries layer via `bindings/runtime/tel`; that package and the dependency have been removed — library calls are now `context`-free and uninstrumented.)
 - **darwin-only**: scanner and generator are gated on `//go:build darwin`. Unit tests in `internal/` that don't call Clang run on any platform.
-- **Modifying the generator**: when changing `internal/` or `cmd/generate/`, re-run `go run ./cmd/generate/ bindings` and include updated `frameworks/` in the same PR. If a scanner-side change requires re-scanning a framework, run `go run ./cmd/generate/ scan --framework <Name>` so the new `.gometa.json` lands in the committed `metadata/` tree.
+- **Modifying the generator**: when changing `internal/` or `cmd/generate/`, re-run both `go run ./cmd/generate/ bindings` (raw mirror) and `go run ./cmd/generate/ idiomatic` (public layer), and include the updated `bindings/` tree in the same PR. Confirm `go run ./cmd/generate/ parity` still passes. If a scanner-side change requires re-scanning a framework, run `go run ./cmd/generate/ scan --framework <Name>` so the new `.gometa.json` lands in the committed `metadata/` tree.

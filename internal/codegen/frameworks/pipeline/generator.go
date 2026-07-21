@@ -10,6 +10,7 @@ import (
 
 	idiofw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks"
 	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -27,6 +28,12 @@ type BindingsConfig struct {
 	// fallbacks and cycle-forced objc.ID substitutions). The CLI uses this
 	// to enforce a committed diagnostics baseline.
 	DiagnosticsSink *[]string
+
+	// Manifest, when non-nil, receives one parity entry per emitted construct
+	// (keyed on its ObjC/C name), so the raw output can serve as the oracle the
+	// idiomatic emitter's coverage is checked against. It never affects the
+	// emitted bytes.
+	Manifest *emitmanifest.Recorder
 }
 
 // GenerateBindings generates all framework and library packages from the registry.
@@ -121,7 +128,14 @@ func generateFramework(m *meta.FrameworkMeta, outBase string, cfg BindingsConfig
 	// Collect C function registration lines before writing runtime.go so they
 	// can be embedded inside the init() after Dlopen — preventing the init-order
 	// bug that arises when registrations live in a separate file's init().
-	fnRegLines, err := writeFunctionsFile(outDir, packageName, m, mapper, reg.OwnerIndex)
+	fnRegLines, err := writeFunctionsFile(
+		outDir,
+		packageName,
+		m,
+		mapper,
+		reg.OwnerIndex,
+		cfg.Manifest,
+	)
 	if err != nil {
 		return err
 	}
@@ -131,24 +145,39 @@ func generateFramework(m *meta.FrameworkMeta, outBase string, cfg BindingsConfig
 		return err
 	}
 
-	if err := writeEnumsFile(outDir, packageName, m); err != nil {
+	if err := writeEnumsFile(outDir, packageName, m, cfg.Manifest); err != nil {
 		return err
 	}
-	if err := writeStructsFile(outDir, packageName, m, mapper); err != nil {
+	if err := writeStructsFile(outDir, packageName, m, mapper, cfg.Manifest); err != nil {
 		return err
 	}
 	if !isLibrary {
-		if err := writeProtocolsFile(outDir, packageName, m, mapper, reg.OwnerIndex); err != nil {
+		if err := writeProtocolsFile(
+			outDir,
+			packageName,
+			m,
+			mapper,
+			reg.OwnerIndex,
+			cfg.Manifest,
+		); err != nil {
 			return err
 		}
 	}
-	if err := writeExternsFile(outDir, packageName, m, mapper); err != nil {
+	if err := writeExternsFile(outDir, packageName, m, mapper, cfg.Manifest); err != nil {
 		return err
 	}
 
 	// Classes (ObjC frameworks only).
 	if !isLibrary && len(m.Classes) > 0 {
-		if err := rawfw.EmitClasses(outDir, packageName, m.Framework, m, mapper, snap); err != nil {
+		if err := rawfw.EmitClasses(
+			outDir,
+			packageName,
+			m.Framework,
+			m,
+			mapper,
+			snap,
+			cfg.Manifest,
+		); err != nil {
 			return fmt.Errorf("emit classes for %s: %w", m.Framework, err)
 		}
 	}
@@ -167,13 +196,14 @@ func writeFunctionsFile(
 	m *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
 	ownerIndex map[string]string,
+	rec *emitmanifest.Recorder,
 ) ([]rawfw.FunctionRegistration, error) {
 	if len(m.Functions) == 0 {
 		return nil, nil
 	}
 	var body bytes.Buffer
 	dylibVar := dylibVarName(m)
-	fnImports, regLines, err := rawfw.EmitFunctions(&body, m, mapper, dylibVar, ownerIndex)
+	fnImports, regLines, err := rawfw.EmitFunctions(&body, m, mapper, dylibVar, ownerIndex, rec)
 	if err != nil {
 		return nil, fmt.Errorf("emit functions for %s: %w", m.Framework, err)
 	}
@@ -203,7 +233,11 @@ func writeFunctionsFile(
 }
 
 // writeEnumsFile emits <packageName>_enums.go.
-func writeEnumsFile(outDir, packageName string, m *meta.FrameworkMeta) error {
+func writeEnumsFile(
+	outDir, packageName string,
+	m *meta.FrameworkMeta,
+	rec *emitmanifest.Recorder,
+) error {
 	if len(m.Enums) == 0 {
 		return nil
 	}
@@ -226,7 +260,7 @@ func writeEnumsFile(outDir, packageName string, m *meta.FrameworkMeta) error {
 		imports["fmt"] = "fmt"
 	}
 	writeFileHeaderRaw(&buf, packageName, imports)
-	if err := rawfw.EmitEnums(&buf, m); err != nil {
+	if err := rawfw.EmitEnums(&buf, m, rec); err != nil {
 		return fmt.Errorf("emit enums for %s: %w", m.Framework, err)
 	}
 	return writeGoFile(outDir, packageName+"_enums.go", buf.Bytes())
@@ -237,12 +271,13 @@ func writeStructsFile(
 	outDir, packageName string,
 	m *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
+	rec *emitmanifest.Recorder,
 ) error {
 	if len(m.Structs) == 0 {
 		return nil
 	}
 	var body bytes.Buffer
-	structImports, err := rawfw.EmitStructs(&body, m, mapper)
+	structImports, err := rawfw.EmitStructs(&body, m, mapper, rec)
 	if err != nil {
 		return fmt.Errorf("emit structs for %s: %w", m.Framework, err)
 	}
@@ -266,12 +301,13 @@ func writeProtocolsFile(
 	m *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
 	ownerIndex map[string]string,
+	rec *emitmanifest.Recorder,
 ) error {
 	if len(m.Protocols) == 0 {
 		return nil
 	}
 	var body bytes.Buffer
-	protoImports, err := rawfw.EmitProtocols(&body, m, mapper, ownerIndex)
+	protoImports, err := rawfw.EmitProtocols(&body, m, mapper, ownerIndex, rec)
 	if err != nil {
 		return fmt.Errorf("emit protocols for %s: %w", m.Framework, err)
 	}
@@ -297,12 +333,13 @@ func writeExternsFile(
 	outDir, packageName string,
 	m *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
+	rec *emitmanifest.Recorder,
 ) error {
 	if len(m.Externs) == 0 {
 		return nil
 	}
 	var body bytes.Buffer
-	extImports, err := rawfw.EmitExterns(&body, m, mapper, dylibVarName(m))
+	extImports, err := rawfw.EmitExterns(&body, m, mapper, dylibVarName(m), rec)
 	if err != nil {
 		return fmt.Errorf("emit externs for %s: %w", m.Framework, err)
 	}
@@ -603,12 +640,17 @@ type IdiomaticConfig struct {
 	// Registry is the combined metadata for all frameworks.
 	Registry *Registry
 	// OutDir is the root output directory. Each framework writes to OutDir/<pkgname>/.
-	// Canonical value: <repo-root>/opinionated/idiomatic
+	// Canonical value: <repo-root>/bindings
 	OutDir string
 	// Frameworks is an optional filter; empty means all frameworks.
 	Frameworks []string
 	// Verbose enables diagnostic output.
 	Verbose bool
+
+	// Manifest, when non-nil, receives one parity entry per emitted construct so
+	// the idiomatic layer's coverage can be checked against the raw oracle. It
+	// never affects the emitted bytes.
+	Manifest *emitmanifest.Recorder
 }
 
 // GenerateIdiomatic writes the opinionated idiomatic layer to cfg.OutDir.
@@ -635,11 +677,22 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 	}
 	mapper.IdiomaticClassIndex = idiofw.ComputeIdiomaticClassIndex(emittable, reg.OwnerIndex)
 
-	// Emit the layer's support packages (objref, errkit, rt) first so the whole
-	// idiomatic tree is regenerable from scratch on every run. They are
-	// framework-independent and live at the idiomatic root (the parent of the
-	// per-framework out dir, e.g. opinionated/idiomatic), matching their fixed
-	// import paths opinionated/idiomatic/{errkit,rt,internal/objref}.
+	// On a full regen (no framework filter) wipe the output tree so packages for
+	// frameworks that left the metadata — or the raw packages this public tree
+	// replaced during the switch — do not linger. The support packages and the
+	// raw internal tree are siblings of OutDir (bindings/{internal,runtime}), so
+	// they are untouched.
+	if len(cfg.Frameworks) == 0 {
+		if err := cleanDir(cfg.OutDir); err != nil {
+			return fmt.Errorf("clean idiomatic frameworks dir: %w", err)
+		}
+	}
+
+	// Emit the layer's support packages first so the whole idiomatic tree is
+	// regenerable from scratch on every run. They are framework-independent and
+	// live at the bindings root (the parent of the per-framework out dir): the
+	// private ones under bindings/internal, the public runtime helpers under
+	// bindings/runtime (see idiofw.supportFiles).
 	if err := idiofw.EmitSupportPackages(filepath.Dir(cfg.OutDir)); err != nil {
 		return fmt.Errorf("idiomatic support packages: %w", err)
 	}
@@ -650,9 +703,6 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 	}
 
 	for _, fw := range reg.Frameworks {
-		if fw.IsSwiftOnly || len(fw.UmbrellaFor) > 0 {
-			continue
-		}
 		if fw.LinkLib != "" {
 			continue // skip C libraries — idiomatic layer is for ObjC frameworks
 		}
@@ -662,6 +712,18 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 
 		pkgName := naming.PackageName(fw.Framework)
 		outDir := filepath.Join(cfg.OutDir, pkgName)
+
+		// Swift-only frameworks (no ObjC surface) and umbrella frameworks
+		// (re-exporting sub-frameworks) have no bridgeable API, but they keep a
+		// doc-only package so their public import path resolves — matching the
+		// raw layer, which emits the same stubs.
+		if fw.IsSwiftOnly || len(fw.UmbrellaFor) > 0 {
+			if err := emitIdiomaticStub(outDir, pkgName, fw); err != nil {
+				return fmt.Errorf("idiomatic stub %s: %w", fw.Framework, err)
+			}
+			continue
+		}
+
 		rawPkgPath := reg.ModulePrefix + "/" + pkgName
 
 		if err := idiofw.EmitFrameworkWrappers(
@@ -672,6 +734,7 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 			fw,
 			mapper,
 			reg.IdiomaticConfigIndex[fw.Framework],
+			cfg.Manifest,
 		); err != nil {
 			return fmt.Errorf("idiomatic %s: %w", fw.Framework, err)
 		}
@@ -680,12 +743,35 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 		}
 	}
 
-	// The per-framework opinionated/idiomatic/<framework> packages are themselves the
+	// The per-framework bindings/frameworks/<framework> packages are themselves the
 	// fluent entry points: callers import only the frameworks they use. No
 	// all-frameworks aggregator is emitted — one would transitively import (and,
 	// via each raw package's init, eagerly dlopen) every framework, defeating
 	// minimal imports.
 	return nil
+}
+
+// emitIdiomaticStub writes a doc-only package for a Swift-only or umbrella
+// framework: it has no ObjC surface to bridge, but a package must exist so the
+// import path resolves. removeGeneratedFiles first clears any stale output.
+func emitIdiomaticStub(outDir, pkgName string, fw *meta.FrameworkMeta) error {
+	if err := os.MkdirAll(outDir, 0o755); err != nil {
+		return fmt.Errorf("mkdir %s: %w", outDir, err)
+	}
+	reason := "is a Swift-only framework with no Objective-C surface to bridge"
+	if len(fw.UmbrellaFor) > 0 {
+		reason = "is an umbrella framework that only re-exports its sub-frameworks"
+	}
+	var buf bytes.Buffer
+	fmt.Fprint(&buf, "// Code generated by go-bindings-codegen. DO NOT EDIT.\n\n")
+	fmt.Fprint(&buf, "//go:build darwin\n\n")
+	fmt.Fprintf(&buf, "// Package %s %s, so it exposes no\n", pkgName, reason)
+	fmt.Fprint(
+		&buf,
+		"// generated API. This doc-only package exists so the import path resolves.\n",
+	)
+	fmt.Fprintf(&buf, "package %s\n", pkgName)
+	return rawfw.WriteGoFile(filepath.Join(outDir, "doc.go"), buf.Bytes())
 }
 
 // buildMapper constructs a type mapper from the registry.

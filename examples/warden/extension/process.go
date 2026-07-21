@@ -8,7 +8,7 @@ package extension
 import (
 	"unsafe"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/libraries/libproc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/libproc"
 )
 
 // procPidPathInfoMaxSize matches PROC_PIDPATHINFO_MAXSIZE (4 * PATH_MAX).

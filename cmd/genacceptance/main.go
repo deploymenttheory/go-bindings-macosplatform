@@ -22,7 +22,7 @@ func main() {
 	seedHex := flag.String("seed", "", "hex seed for the RNG (empty or 0 = use current time)")
 	useGit := flag.Bool("git", false, "derive seed from git HEAD commit SHA (overrides --seed)")
 	metaDir := flag.String("metadata-dir", "./metadata/frameworks", "directory containing .gometa.json files")
-	out := flag.String("out", "./acceptance/generated_acceptance_test.go", "output test file path")
+	out := flag.String("out", "./bindings/acceptance/generated_acceptance_test.go", "output test file path")
 	flag.Parse()
 
 	seed := resolveSeed(*seedHex, *useGit)

@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -32,11 +33,18 @@ const (
 )
 
 // EmitClasses writes one .go file per ObjC class in the framework to outDir.
+//
+// rec, when non-nil, records every emitted class into the parity manifest keyed
+// on the ObjC class name. (Class-method-level parity is intentionally not
+// recorded: the idiomatic layer emits a superset of methods under fluent shapes
+// that do not map one-to-one onto raw selectors, so a selector-keyed join would
+// report false gaps.) It never affects the emitted bytes.
 func EmitClasses(
 	outDir, packageName, framework string,
 	m *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
 	reg *RegistrySnapshot,
+	rec *emitmanifest.Recorder,
 ) error {
 	names := make([]string, 0, len(m.Classes))
 	for name := range m.Classes {
@@ -66,6 +74,15 @@ func EmitClasses(
 				baseName = fmt.Sprintf("%s_%d", name, lowerSeen[lower])
 			}
 		}
+
+		rec.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleRaw,
+			Kind:      emitmanifest.KindClass,
+			Framework: framework,
+			MetaKey:   emitmanifest.MetaKey(framework, emitmanifest.KindClass, name, ""),
+			GoPkg:     packageName,
+			GoSymbol:  name,
+		})
 
 		var buf bytes.Buffer
 		if err := emitClass(&buf, name, cls, packageName, framework, m, mapper, reg); err != nil {
@@ -131,7 +148,9 @@ func emitClass(
 	imports := make(typemap.ImportSet)
 
 	// Type declaration.
-	typeDeclOut, err := render.ClassTypeDecl(buildClassTypeDeclView(className, cls, isGeneric, genericParams, framework, reg, imports))
+	typeDeclOut, err := render.ClassTypeDecl(
+		buildClassTypeDeclView(className, cls, isGeneric, genericParams, framework, reg, imports),
+	)
 	if err != nil {
 		return err
 	}
@@ -145,7 +164,9 @@ func emitClass(
 	body.Write(classVarsOut)
 
 	// Constructor (XFromID).
-	fromIDOut, err := render.FromIDConstructor(buildFromIDConstructorView(className, isGeneric, genericParams))
+	fromIDOut, err := render.FromIDConstructor(
+		buildFromIDConstructorView(className, isGeneric, genericParams),
+	)
 	if err != nil {
 		return err
 	}
@@ -256,8 +277,12 @@ func buildClassTypeDeclView(
 	}
 	// Apple's class documentation URLs follow a deterministic lowercase scheme,
 	// so the link is computable from metadata alone (method URLs are not).
-	fmt.Fprintf(&comment, "// Apple documentation: https://developer.apple.com/documentation/%s/%s\n",
-		strings.ToLower(framework), strings.ToLower(className))
+	fmt.Fprintf(
+		&comment,
+		"// Apple documentation: https://developer.apple.com/documentation/%s/%s\n",
+		strings.ToLower(framework),
+		strings.ToLower(className),
+	)
 	comment.WriteString(deprecatedComment(cls.Availability))
 
 	typeHeader := className
@@ -364,7 +389,11 @@ func buildClassVarsView(className string, selectors []selectorEntry) view.ClassV
 // buildFromIDConstructorView resolves a class's XFromID factory: its signature
 // (generic when the class has type parameters) and the type literal allocated
 // for the wrapper.
-func buildFromIDConstructorView(className string, isGeneric bool, genericParams []string) view.FromIDConstructor {
+func buildFromIDConstructorView(
+	className string,
+	isGeneric bool,
+	genericParams []string,
+) view.FromIDConstructor {
 	signature := fmt.Sprintf("func %sFromID(id objc.ID) *%s", className, className)
 	if isGeneric {
 		// Generic version — use AnyObject constraint (= any) to accept both

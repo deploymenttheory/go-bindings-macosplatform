@@ -8,17 +8,23 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 )
 
 // EmitEnums writes all enum declarations for the framework to w. It gathers each
 // enum into a resolved view and renders the whole set through the enum template.
-func EmitEnums(w io.Writer, framework *meta.FrameworkMeta) error {
+//
+// rec, when non-nil, records every emitted enum type and member into the parity
+// manifest keyed on the ObjC/C name, so the idiomatic emitter's coverage can be
+// checked against this (the oracle) run. It never affects the emitted bytes.
+func EmitEnums(w io.Writer, framework *meta.FrameworkMeta, rec *emitmanifest.Recorder) error {
 	names := sortedEnumNames(framework.Enums)
 	if len(names) == 0 {
 		return nil
 	}
+	pkgName := naming.PackageName(framework.Framework)
 
 	// Track which named enums cover which anon members so we can skip
 	// pure-duplicate anon enums.
@@ -41,9 +47,25 @@ func EmitEnums(w io.Writer, framework *meta.FrameworkMeta) error {
 		if enum.IsAnon {
 			if built, ok := buildAnonEnumView(enum, namedMemberNames); ok {
 				enums = append(enums, built)
+				recordEnumMembers(rec, framework.Framework, pkgName, enum, namedMemberNames)
 			}
 		} else {
-			enums = append(enums, buildNamedEnumView(name, enum))
+			built := buildNamedEnumView(name, enum)
+			enums = append(enums, built)
+			rec.Record(emitmanifest.Entry{
+				Style:     emitmanifest.StyleRaw,
+				Kind:      emitmanifest.KindEnum,
+				Framework: framework.Framework,
+				MetaKey: emitmanifest.MetaKey(
+					framework.Framework,
+					emitmanifest.KindEnum,
+					name,
+					"",
+				),
+				GoPkg:    pkgName,
+				GoSymbol: built.GoName,
+			})
+			recordEnumMembers(rec, framework.Framework, pkgName, enum, nil)
 		}
 	}
 	if len(enums) == 0 {
@@ -56,6 +78,43 @@ func EmitEnums(w io.Writer, framework *meta.FrameworkMeta) error {
 	}
 	_, err = w.Write(out)
 	return err
+}
+
+// recordEnumMembers records each member the emitter will actually emit into the
+// parity manifest. Members are keyed on the bare ObjC member name (independent of
+// the owning enum) so the key matches regardless of how each style groups or
+// renames the enclosing type. namedMemberNames is non-nil only for anonymous
+// enums, where a member already covered by a named enum is not emitted here.
+func recordEnumMembers(
+	rec *emitmanifest.Recorder,
+	framework, pkgName string,
+	enum meta.Enum,
+	namedMemberNames map[string]bool,
+) {
+	if rec == nil {
+		return
+	}
+	for _, member := range enum.Members {
+		if member.Availability.IsUnavailable {
+			continue
+		}
+		if namedMemberNames != nil && namedMemberNames[member.Name] {
+			continue
+		}
+		rec.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleRaw,
+			Kind:      emitmanifest.KindEnumMember,
+			Framework: framework,
+			MetaKey: emitmanifest.MetaKey(
+				framework,
+				emitmanifest.KindEnumMember,
+				member.Name,
+				"",
+			),
+			GoPkg:    pkgName,
+			GoSymbol: naming.GoTypeName(member.Name),
+		})
+	}
 }
 
 // buildNamedEnumView resolves a named enum into its renderable view: the Go type
@@ -106,7 +165,10 @@ func buildNamedEnumView(name string, enum meta.Enum) view.Enum {
 			if member.Availability.IsUnavailable || member.Value == "0" {
 				continue
 			}
-			built.StringMembers = append(built.StringMembers, view.EnumMember{ConstName: naming.GoTypeName(member.Name)})
+			built.StringMembers = append(
+				built.StringMembers,
+				view.EnumMember{ConstName: naming.GoTypeName(member.Name)},
+			)
 		}
 	} else {
 		emittedValues := make(map[string]bool)
@@ -115,7 +177,10 @@ func buildNamedEnumView(name string, enum meta.Enum) view.Enum {
 				continue
 			}
 			emittedValues[member.Value] = true
-			built.StringMembers = append(built.StringMembers, view.EnumMember{ConstName: naming.GoTypeName(member.Name)})
+			built.StringMembers = append(
+				built.StringMembers,
+				view.EnumMember{ConstName: naming.GoTypeName(member.Name)},
+			)
 		}
 	}
 	return built

@@ -53,6 +53,41 @@ func Structs(structs []view.Struct) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
+// Protocols renders ObjC protocols as Go interfaces for a package as a Go source
+// fragment (a package body, before file assembly and gofmt).
+func Protocols(protocols []view.Protocol) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "protocols", protocols); err != nil {
+		return nil, fmt.Errorf("render protocols: %w", err)
+	}
+	return buf.Bytes(), nil
+}
+
+// AnonConsts renders anonymous-enum members as one untyped const block (e.g.
+// `const ( KAEISHandleCGI = 1935961955 )`), matching the raw layer's treatment of
+// enums the C headers declare without a tag name.
+func AnonConsts(members []view.EnumMember) ([]byte, error) {
+	if len(members) == 0 {
+		return nil, nil
+	}
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "anon_consts", members); err != nil {
+		return nil, fmt.Errorf("render anon consts: %w", err)
+	}
+	return buf.Bytes(), nil
+}
+
+// TypedefAliases renders C-typedef Go type aliases (e.g. NSRect = CGRect) for a
+// package as a Go source fragment (a package body, before file assembly and
+// gofmt).
+func TypedefAliases(aliases []view.TypedefAlias) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "typedef_alias", aliases); err != nil {
+		return nil, fmt.Errorf("render typedef aliases: %w", err)
+	}
+	return buf.Bytes(), nil
+}
+
 // Enums renders the concrete enum definitions for a package as a Go source
 // fragment (a package body, before file assembly and gofmt). Each enum becomes a
 // `type X <underlying>` declaration with a typed const block and a String method.

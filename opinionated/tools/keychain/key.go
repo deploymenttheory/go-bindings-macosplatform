@@ -5,9 +5,9 @@ package keychain
 import (
 	"fmt"
 
-	foundation "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
-	security "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/security"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	foundation "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	security "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // ── Key (kSecClassKey) ───────────────────────────────────────────────────────

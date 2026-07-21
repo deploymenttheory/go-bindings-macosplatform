@@ -1,8 +1,8 @@
 # Keychain example
 
 A runnable proof that the macOS **Security** framework bindings can drive the
-keychain item API as **CRUD across item classes** — using only the custom
-layer ([`opinionated/custom/keychain`](../../opinionated/custom/keychain)), with
+keychain item API as **CRUD across item classes** — using only the hand-written
+tools layer ([`opinionated/tools/keychain`](../../opinionated/tools/keychain)), with
 no raw FFI, CFDictionary building, or OSStatus decoding at the call site.
 
 ```sh
@@ -63,7 +63,7 @@ The example writes to your default login keychain and cleans up after itself
 
 ## Adopting this
 
-This example uses the **custom** layer — [`opinionated/custom/keychain`](../../opinionated/custom/keychain).
+This example uses the hand-written **tools** layer — [`opinionated/tools/keychain`](../../opinionated/tools/keychain).
 The keychain item API (`SecItemAdd`/`CopyMatching`/`Update`/`Delete`) is a workflow,
 not a single class: each call builds a `CFDictionary` of `kSec…` attributes and
 decodes an `OSStatus`. The custom layer collapses that into `CreateGenericPassword`,
