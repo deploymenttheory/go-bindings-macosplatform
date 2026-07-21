@@ -559,8 +559,41 @@ type ProfileT struct{}
 // AppleGssKrb5AuthdataIfRelevant is an alias for the apple_gss_krb5_authdata_if_relevant_key value type.
 type AppleGssKrb5AuthdataIfRelevant = AppleGssKrb5AuthdataIfRelevantKey
 
+// GssOID is an alias for the gss_OID_desc_struct value type.
+type GssOID = *gss.GssOIDDescStruct
+
+// GssOIDDesc is an alias for the gss_OID_desc_struct value type.
+type GssOIDDesc = gss.GssOIDDescStruct
+
+// GssOIDSet is an alias for the gss_OID_set_desc_struct value type.
+type GssOIDSet = *gss.GssOIDSetDescStruct
+
+// GssOIDSetDesc is an alias for the gss_OID_set_desc_struct value type.
+type GssOIDSetDesc = gss.GssOIDSetDescStruct
+
+// GssBufferDesc is an alias for the gss_buffer_desc_struct value type.
+type GssBufferDesc = gss.GssBufferDescStruct
+
+// GssBufferT is an alias for the gss_buffer_desc_struct value type.
+type GssBufferT = *gss.GssBufferDescStruct
+
+// GssChannelBindingsT is an alias for the gss_channel_bindings_struct value type.
+type GssChannelBindingsT = *gss.GssChannelBindingsStruct
+
+// GssKrb5CfxKeydataT is an alias for the gss_krb5_cfx_keydata value type.
+type GssKrb5CfxKeydataT = gss.GssKrb5CfxKeydata
+
+// GssKrb5LucidContextV1T is an alias for the gss_krb5_lucid_context_v1 value type.
+type GssKrb5LucidContextV1T = gss.GssKrb5LucidContextV1
+
 // GssKrb5LucidContextVersionT is an alias for the gss_krb5_lucid_context_version value type.
 type GssKrb5LucidContextVersionT = gss.GssKrb5LucidContextVersion
+
+// GssKrb5LucidKeyT is an alias for the gss_krb5_lucid_key value type.
+type GssKrb5LucidKeyT = gss.GssKrb5LucidKey
+
+// GssKrb5Rfc1964KeydataT is an alias for the gss_krb5_rfc1964_keydata value type.
+type GssKrb5Rfc1964KeydataT = gss.GssKrb5Rfc1964Keydata
 
 // Krb5KeytabEntry is an alias for the krb5_keytab_entry_st value type.
 type Krb5KeytabEntry = Krb5KeytabEntrySt

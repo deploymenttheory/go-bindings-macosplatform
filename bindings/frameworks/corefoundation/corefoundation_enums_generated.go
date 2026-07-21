@@ -1551,6 +1551,29 @@ func (e Type) String() string {
 	}
 }
 
+type CFByteOrder int64
+
+const (
+	CFByteOrderUnknown      CFByteOrder = 0
+	CFByteOrderLittleEndian CFByteOrder = 1
+	CFByteOrderBigEndian    CFByteOrder = 2
+)
+
+// String returns the CFByteOrder constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFByteOrder) String() string {
+	switch e {
+	case CFByteOrderUnknown:
+		return "CFByteOrderUnknown"
+	case CFByteOrderLittleEndian:
+		return "CFByteOrderLittleEndian"
+	case CFByteOrderBigEndian:
+		return "CFByteOrderBigEndian"
+	default:
+		return fmt.Sprintf("CFByteOrder(%d)", int64(e))
+	}
+}
+
 // These option flags are used as a mask to indicate a specific set of fields in the CFGregorianDate or CFGregorianUnits structures.
 // Bitmask — values may be combined with |.
 type CFGregorianUnitFlags int64

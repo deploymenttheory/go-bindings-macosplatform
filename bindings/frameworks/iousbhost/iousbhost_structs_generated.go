@@ -6,6 +6,9 @@ package iousbhost
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/bsm"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // Foundational IOUSBHostControllerInterface message structure used for commands, transfers, and interrupts IOUSBHostCIMessage structures are control structures passed between the IOUSBHostControllerInterface client and the kernel driver.  They are used to represent capabilities during initialization, commands and transfers sent from the kernel, and interrupt events sent to the kernel.
@@ -41,3 +44,45 @@ type IOUSBHostIsochronousTransaction struct {
 	TimeStamp     uint64
 	Options       HostIsochronousTransactionOptions
 }
+
+// AuEvclassMapT is an alias for the au_evclass_map value type.
+type AuEvclassMapT = bsm.AuEvclassMap
+
+// AuExpireAfterT is an alias for the au_expire_after value type.
+type AuExpireAfterT = bsm.AuExpireAfter
+
+// AuFstatT is an alias for the audit_fstat value type.
+type AuFstatT = bsm.AuditFstat
+
+// AuMaskT is an alias for the au_mask value type.
+type AuMaskT = bsm.AuMask
+
+// AuQctrlT is an alias for the au_qctrl value type.
+type AuQctrlT = bsm.AuQctrl
+
+// AuSessionT is an alias for the au_session value type.
+type AuSessionT = bsm.AuSession
+
+// AuStatT is an alias for the audit_stat value type.
+type AuStatT = bsm.AuditStat
+
+// AuTidAddrT is an alias for the au_tid_addr value type.
+type AuTidAddrT = bsm.AuTidAddr
+
+// AuTidT is an alias for the au_tid value type.
+type AuTidT = bsm.AuTid
+
+// AuditinfoAddrT is an alias for the auditinfo_addr value type.
+type AuditinfoAddrT = bsm.AuditinfoAddr
+
+// AuditinfoT is an alias for the auditinfo value type.
+type AuditinfoT = bsm.Auditinfo
+
+// AuditpinfoAddrT is an alias for the auditpinfo_addr value type.
+type AuditpinfoAddrT = bsm.AuditpinfoAddr
+
+// AuditpinfoT is an alias for the auditpinfo value type.
+type AuditpinfoT = bsm.Auditpinfo
+
+// Id is an alias for the objc_object value type.
+type Id = *foundation.ObjcObject

@@ -6,6 +6,8 @@ package directoryservice
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 type TAccessControlEntry struct {
@@ -47,3 +49,6 @@ type TRecordEntry struct {
 	FRecordAttributeCount uint
 	FRecordNameAndType    TDataBuffer
 }
+
+// Id is an alias for the objc_object value type.
+type Id = *foundation.ObjcObject

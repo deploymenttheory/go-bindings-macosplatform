@@ -4,6 +4,11 @@
 
 package avfaudio
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/bsm"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+)
+
 // A structure that represents the angular orientation of the listener in 3D space.
 type AVAudio3DAngularOrientation struct {
 	Yaw   float32
@@ -43,3 +48,45 @@ type AVBeatRange struct {
 
 // AVAudio3DVector is an alias for the AVAudio3DPoint value type.
 type AVAudio3DVector = AVAudio3DPoint
+
+// AuEvclassMapT is an alias for the au_evclass_map value type.
+type AuEvclassMapT = bsm.AuEvclassMap
+
+// AuExpireAfterT is an alias for the au_expire_after value type.
+type AuExpireAfterT = bsm.AuExpireAfter
+
+// AuFstatT is an alias for the audit_fstat value type.
+type AuFstatT = bsm.AuditFstat
+
+// AuMaskT is an alias for the au_mask value type.
+type AuMaskT = bsm.AuMask
+
+// AuQctrlT is an alias for the au_qctrl value type.
+type AuQctrlT = bsm.AuQctrl
+
+// AuSessionT is an alias for the au_session value type.
+type AuSessionT = bsm.AuSession
+
+// AuStatT is an alias for the audit_stat value type.
+type AuStatT = bsm.AuditStat
+
+// AuTidAddrT is an alias for the au_tid_addr value type.
+type AuTidAddrT = bsm.AuTidAddr
+
+// AuTidT is an alias for the au_tid value type.
+type AuTidT = bsm.AuTid
+
+// AuditinfoAddrT is an alias for the auditinfo_addr value type.
+type AuditinfoAddrT = bsm.AuditinfoAddr
+
+// AuditinfoT is an alias for the auditinfo value type.
+type AuditinfoT = bsm.Auditinfo
+
+// AuditpinfoAddrT is an alias for the auditpinfo_addr value type.
+type AuditpinfoAddrT = bsm.AuditpinfoAddr
+
+// AuditpinfoT is an alias for the auditpinfo value type.
+type AuditpinfoT = bsm.Auditpinfo
+
+// Id is an alias for the objc_object value type.
+type Id = *foundation.ObjcObject

@@ -6,6 +6,8 @@ package gss
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 type GssAuthIdentity struct{}
@@ -140,3 +142,6 @@ type GssKrb5LucidKeyT = GssKrb5LucidKey
 
 // GssKrb5Rfc1964KeydataT is an alias for the gss_krb5_rfc1964_keydata value type.
 type GssKrb5Rfc1964KeydataT = GssKrb5Rfc1964Keydata
+
+// Id is an alias for the objc_object value type.
+type Id = *foundation.ObjcObject

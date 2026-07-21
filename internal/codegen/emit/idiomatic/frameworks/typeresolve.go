@@ -33,8 +33,7 @@ func idiomaticBlockParam(
 	for i, a := range args {
 		v := fmt.Sprintf("_b%d", i)
 		an := normaliseObjC(a)
-		switch {
-		case strings.HasPrefix(an, "BOOL") && strings.Contains(an, "*"):
+		if strings.HasPrefix(an, "BOOL") && strings.Contains(an, "*") {
 			// The "stop" out-parameter: setting *stop = true halts enumeration.
 			goParams = append(goParams, "*bool")
 			abiParams = append(abiParams, v+" unsafe.Pointer")
@@ -562,6 +561,36 @@ func crossFrameworkValueStruct(
 	// Only reference a struct that the owning package actually emits, so the
 	// reference never dangles.
 	if !mapper.EmittableStructs[name] {
+		return "", nil, false
+	}
+	return goType, map[string]string{pkg: idiomaticFrameworkPrefix + pkg}, true
+}
+
+// crossFrameworkEmittedStruct is crossFrameworkValueStruct's counterpart for
+// typedef aliases: it accepts any cross-framework struct the idiomatic layer
+// physically emits (mapper.AllEmittedStructs), not just the all-clean-fields
+// EmittableStructs subset. An alias only names the target type — it never reads
+// its fields — so an opaque or degraded target is a perfectly valid alias RHS
+// (e.g. AudioComponentInstance = *carboncore.ComponentInstanceRecord), whereas a
+// struct FIELD referencing the same type would risk a non-hermetic field and so
+// stays gated on the stricter EmittableStructs via crossFrameworkValueStruct.
+func crossFrameworkEmittedStruct(
+	goType string,
+	mapper *typemap.Mapper,
+	rawPkgAlias string,
+) (string, map[string]string, bool) {
+	if strings.ContainsAny(goType, "*[] ") {
+		return "", nil, false
+	}
+	dot := strings.IndexByte(goType, '.')
+	if dot <= 0 {
+		return "", nil, false
+	}
+	pkg, name := goType[:dot], goType[dot+1:]
+	if pkg == rawPkgAlias || strings.Contains(name, ".") {
+		return "", nil, false
+	}
+	if !mapper.AllEmittedStructs[name] {
 		return "", nil, false
 	}
 	return goType, map[string]string{pkg: idiomaticFrameworkPrefix + pkg}, true

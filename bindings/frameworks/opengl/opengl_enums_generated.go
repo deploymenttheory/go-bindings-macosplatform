@@ -31,6 +31,523 @@ func (e CGLCPContextPriorityRequest) String() string {
 	}
 }
 
+type CGLContextEnable int64
+
+const (
+	KCGLCESwapRectangle           CGLContextEnable = 201
+	KCGLCESwapLimit               CGLContextEnable = 203
+	KCGLCERasterization           CGLContextEnable = 221
+	KCGLCEStateValidation         CGLContextEnable = 301
+	KCGLCESurfaceBackingSize      CGLContextEnable = 305
+	KCGLCEDisplayListOptimization CGLContextEnable = 307
+	KCGLCEMPEngine                CGLContextEnable = 313
+	KCGLCECrashOnRemovedFunctions CGLContextEnable = 316
+)
+
+// String returns the CGLContextEnable constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGLContextEnable) String() string {
+	switch e {
+	case KCGLCESwapRectangle:
+		return "KCGLCESwapRectangle"
+	case KCGLCESwapLimit:
+		return "KCGLCESwapLimit"
+	case KCGLCERasterization:
+		return "KCGLCERasterization"
+	case KCGLCEStateValidation:
+		return "KCGLCEStateValidation"
+	case KCGLCESurfaceBackingSize:
+		return "KCGLCESurfaceBackingSize"
+	case KCGLCEDisplayListOptimization:
+		return "KCGLCEDisplayListOptimization"
+	case KCGLCEMPEngine:
+		return "KCGLCEMPEngine"
+	case KCGLCECrashOnRemovedFunctions:
+		return "KCGLCECrashOnRemovedFunctions"
+	default:
+		return fmt.Sprintf("CGLContextEnable(%d)", int64(e))
+	}
+}
+
+type CGLContextParameter int64
+
+const (
+	KCGLCPSwapRectangle                      CGLContextParameter = 200
+	KCGLCPSwapInterval                       CGLContextParameter = 222
+	KCGLCPDispatchTableSize                  CGLContextParameter = 224
+	KCGLCPClientStorage                      CGLContextParameter = 226
+	KCGLCPSurfaceTexture                     CGLContextParameter = 228
+	KCGLCPSurfaceOrder                       CGLContextParameter = 235
+	KCGLCPSurfaceOpacity                     CGLContextParameter = 236
+	KCGLCPSurfaceBackingSize                 CGLContextParameter = 304
+	KCGLCPSurfaceSurfaceVolatile             CGLContextParameter = 306
+	KCGLCPReclaimResources                   CGLContextParameter = 308
+	KCGLCPCurrentRendererID                  CGLContextParameter = 309
+	KCGLCPGPUVertexProcessing                CGLContextParameter = 310
+	KCGLCPGPUFragmentProcessing              CGLContextParameter = 311
+	KCGLCPHasDrawable                        CGLContextParameter = 314
+	KCGLCPMPSwapsInFlight                    CGLContextParameter = 315
+	KCGLCPGPURestartStatus                   CGLContextParameter = 317
+	KCGLCPAbortOnGPURestartStatusBlacklisted CGLContextParameter = 318
+	KCGLCPAbortOnGPURestartStatusDenied      CGLContextParameter = 318
+	KCGLCPSupportGPURestart                  CGLContextParameter = 319
+	KCGLCPSupportSeparateAddressSpace        CGLContextParameter = 320
+	KCGLCPContextPriorityRequest             CGLContextParameter = 608
+)
+
+// String returns the CGLContextParameter constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGLContextParameter) String() string {
+	switch e {
+	case KCGLCPSwapRectangle:
+		return "KCGLCPSwapRectangle"
+	case KCGLCPSwapInterval:
+		return "KCGLCPSwapInterval"
+	case KCGLCPDispatchTableSize:
+		return "KCGLCPDispatchTableSize"
+	case KCGLCPClientStorage:
+		return "KCGLCPClientStorage"
+	case KCGLCPSurfaceTexture:
+		return "KCGLCPSurfaceTexture"
+	case KCGLCPSurfaceOrder:
+		return "KCGLCPSurfaceOrder"
+	case KCGLCPSurfaceOpacity:
+		return "KCGLCPSurfaceOpacity"
+	case KCGLCPSurfaceBackingSize:
+		return "KCGLCPSurfaceBackingSize"
+	case KCGLCPSurfaceSurfaceVolatile:
+		return "KCGLCPSurfaceSurfaceVolatile"
+	case KCGLCPReclaimResources:
+		return "KCGLCPReclaimResources"
+	case KCGLCPCurrentRendererID:
+		return "KCGLCPCurrentRendererID"
+	case KCGLCPGPUVertexProcessing:
+		return "KCGLCPGPUVertexProcessing"
+	case KCGLCPGPUFragmentProcessing:
+		return "KCGLCPGPUFragmentProcessing"
+	case KCGLCPHasDrawable:
+		return "KCGLCPHasDrawable"
+	case KCGLCPMPSwapsInFlight:
+		return "KCGLCPMPSwapsInFlight"
+	case KCGLCPGPURestartStatus:
+		return "KCGLCPGPURestartStatus"
+	case KCGLCPAbortOnGPURestartStatusBlacklisted:
+		return "KCGLCPAbortOnGPURestartStatusBlacklisted"
+	case KCGLCPSupportGPURestart:
+		return "KCGLCPSupportGPURestart"
+	case KCGLCPSupportSeparateAddressSpace:
+		return "KCGLCPSupportSeparateAddressSpace"
+	case KCGLCPContextPriorityRequest:
+		return "KCGLCPContextPriorityRequest"
+	default:
+		return fmt.Sprintf("CGLContextParameter(%d)", int64(e))
+	}
+}
+
+type CGLError int64
+
+const (
+	KCGLNoError         CGLError = 0
+	KCGLBadAttribute    CGLError = 10000
+	KCGLBadProperty     CGLError = 10001
+	KCGLBadPixelFormat  CGLError = 10002
+	KCGLBadRendererInfo CGLError = 10003
+	KCGLBadContext      CGLError = 10004
+	KCGLBadDrawable     CGLError = 10005
+	KCGLBadDisplay      CGLError = 10006
+	KCGLBadState        CGLError = 10007
+	KCGLBadValue        CGLError = 10008
+	KCGLBadMatch        CGLError = 10009
+	KCGLBadEnumeration  CGLError = 10010
+	KCGLBadOffScreen    CGLError = 10011
+	KCGLBadFullScreen   CGLError = 10012
+	KCGLBadWindow       CGLError = 10013
+	KCGLBadAddress      CGLError = 10014
+	KCGLBadCodeModule   CGLError = 10015
+	KCGLBadAlloc        CGLError = 10016
+	KCGLBadConnection   CGLError = 10017
+)
+
+// String returns the CGLError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGLError) String() string {
+	switch e {
+	case KCGLNoError:
+		return "KCGLNoError"
+	case KCGLBadAttribute:
+		return "KCGLBadAttribute"
+	case KCGLBadProperty:
+		return "KCGLBadProperty"
+	case KCGLBadPixelFormat:
+		return "KCGLBadPixelFormat"
+	case KCGLBadRendererInfo:
+		return "KCGLBadRendererInfo"
+	case KCGLBadContext:
+		return "KCGLBadContext"
+	case KCGLBadDrawable:
+		return "KCGLBadDrawable"
+	case KCGLBadDisplay:
+		return "KCGLBadDisplay"
+	case KCGLBadState:
+		return "KCGLBadState"
+	case KCGLBadValue:
+		return "KCGLBadValue"
+	case KCGLBadMatch:
+		return "KCGLBadMatch"
+	case KCGLBadEnumeration:
+		return "KCGLBadEnumeration"
+	case KCGLBadOffScreen:
+		return "KCGLBadOffScreen"
+	case KCGLBadFullScreen:
+		return "KCGLBadFullScreen"
+	case KCGLBadWindow:
+		return "KCGLBadWindow"
+	case KCGLBadAddress:
+		return "KCGLBadAddress"
+	case KCGLBadCodeModule:
+		return "KCGLBadCodeModule"
+	case KCGLBadAlloc:
+		return "KCGLBadAlloc"
+	case KCGLBadConnection:
+		return "KCGLBadConnection"
+	default:
+		return fmt.Sprintf("CGLError(%d)", int64(e))
+	}
+}
+
+type CGLGPURestartStatus int64
+
+const (
+	KCGLCPGPURestartStatusNone        CGLGPURestartStatus = 0
+	KCGLCPGPURestartStatusCaused      CGLGPURestartStatus = 1
+	KCGLCPGPURestartStatusBlacklisted CGLGPURestartStatus = 2
+	KCGLCPGPURestartStatusDenied      CGLGPURestartStatus = 2
+)
+
+// String returns the CGLGPURestartStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGLGPURestartStatus) String() string {
+	switch e {
+	case KCGLCPGPURestartStatusNone:
+		return "KCGLCPGPURestartStatusNone"
+	case KCGLCPGPURestartStatusCaused:
+		return "KCGLCPGPURestartStatusCaused"
+	case KCGLCPGPURestartStatusBlacklisted:
+		return "KCGLCPGPURestartStatusBlacklisted"
+	default:
+		return fmt.Sprintf("CGLGPURestartStatus(%d)", int64(e))
+	}
+}
+
+type CGLGlobalOption int64
+
+const (
+	KCGLGOFormatCacheSize  CGLGlobalOption = 501
+	KCGLGOClearFormatCache CGLGlobalOption = 502
+	KCGLGORetainRenderers  CGLGlobalOption = 503
+	KCGLGOUseBuildCache    CGLGlobalOption = 506
+	KCGLGOResetLibrary     CGLGlobalOption = 504
+	KCGLGOUseErrorHandler  CGLGlobalOption = 505
+)
+
+// String returns the CGLGlobalOption constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGLGlobalOption) String() string {
+	switch e {
+	case KCGLGOFormatCacheSize:
+		return "KCGLGOFormatCacheSize"
+	case KCGLGOClearFormatCache:
+		return "KCGLGOClearFormatCache"
+	case KCGLGORetainRenderers:
+		return "KCGLGORetainRenderers"
+	case KCGLGOUseBuildCache:
+		return "KCGLGOUseBuildCache"
+	case KCGLGOResetLibrary:
+		return "KCGLGOResetLibrary"
+	case KCGLGOUseErrorHandler:
+		return "KCGLGOUseErrorHandler"
+	default:
+		return fmt.Sprintf("CGLGlobalOption(%d)", int64(e))
+	}
+}
+
+type CGLOpenGLProfile int64
+
+const (
+	KCGLOGLPVersion_Legacy   CGLOpenGLProfile = 4096
+	KCGLOGLPVersion_3_2_Core CGLOpenGLProfile = 12800
+	KCGLOGLPVersion_GL3_Core CGLOpenGLProfile = 12800
+	KCGLOGLPVersion_GL4_Core CGLOpenGLProfile = 16640
+)
+
+// String returns the CGLOpenGLProfile constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGLOpenGLProfile) String() string {
+	switch e {
+	case KCGLOGLPVersion_Legacy:
+		return "KCGLOGLPVersion_Legacy"
+	case KCGLOGLPVersion_3_2_Core:
+		return "KCGLOGLPVersion_3_2_Core"
+	case KCGLOGLPVersion_GL4_Core:
+		return "KCGLOGLPVersion_GL4_Core"
+	default:
+		return fmt.Sprintf("CGLOpenGLProfile(%d)", int64(e))
+	}
+}
+
+type CGLPixelFormatAttribute int64
+
+const (
+	KCGLPFAAllRenderers                       CGLPixelFormatAttribute = 1
+	KCGLPFATripleBuffer                       CGLPixelFormatAttribute = 3
+	KCGLPFADoubleBuffer                       CGLPixelFormatAttribute = 5
+	KCGLPFAColorSize                          CGLPixelFormatAttribute = 8
+	KCGLPFAAlphaSize                          CGLPixelFormatAttribute = 11
+	KCGLPFADepthSize                          CGLPixelFormatAttribute = 12
+	KCGLPFAStencilSize                        CGLPixelFormatAttribute = 13
+	KCGLPFAMinimumPolicy                      CGLPixelFormatAttribute = 51
+	KCGLPFAMaximumPolicy                      CGLPixelFormatAttribute = 52
+	KCGLPFASampleBuffers                      CGLPixelFormatAttribute = 55
+	KCGLPFASamples                            CGLPixelFormatAttribute = 56
+	KCGLPFAColorFloat                         CGLPixelFormatAttribute = 58
+	KCGLPFAMultisample                        CGLPixelFormatAttribute = 59
+	KCGLPFASupersample                        CGLPixelFormatAttribute = 60
+	KCGLPFASampleAlpha                        CGLPixelFormatAttribute = 61
+	KCGLPFARendererID                         CGLPixelFormatAttribute = 70
+	KCGLPFANoRecovery                         CGLPixelFormatAttribute = 72
+	KCGLPFAAccelerated                        CGLPixelFormatAttribute = 73
+	KCGLPFAClosestPolicy                      CGLPixelFormatAttribute = 74
+	KCGLPFABackingStore                       CGLPixelFormatAttribute = 76
+	KCGLPFABackingVolatile                    CGLPixelFormatAttribute = 77
+	KCGLPFADisplayMask                        CGLPixelFormatAttribute = 84
+	KCGLPFAAllowOfflineRenderers              CGLPixelFormatAttribute = 96
+	KCGLPFAAcceleratedCompute                 CGLPixelFormatAttribute = 97
+	KCGLPFAOpenGLProfile                      CGLPixelFormatAttribute = 99
+	KCGLPFASupportsAutomaticGraphicsSwitching CGLPixelFormatAttribute = 101
+	KCGLPFAVirtualScreenCount                 CGLPixelFormatAttribute = 128
+	KCGLPFAAuxBuffers                         CGLPixelFormatAttribute = 7
+	KCGLPFAAccumSize                          CGLPixelFormatAttribute = 14
+	KCGLPFAAuxDepthStencil                    CGLPixelFormatAttribute = 57
+	KCGLPFAStereo                             CGLPixelFormatAttribute = 6
+	KCGLPFAOffScreen                          CGLPixelFormatAttribute = 53
+	KCGLPFAWindow                             CGLPixelFormatAttribute = 80
+	KCGLPFACompliant                          CGLPixelFormatAttribute = 83
+	KCGLPFAPBuffer                            CGLPixelFormatAttribute = 90
+	KCGLPFARemotePBuffer                      CGLPixelFormatAttribute = 91
+	KCGLPFASingleRenderer                     CGLPixelFormatAttribute = 71
+	KCGLPFARobust                             CGLPixelFormatAttribute = 75
+	KCGLPFAMPSafe                             CGLPixelFormatAttribute = 78
+	KCGLPFAMultiScreen                        CGLPixelFormatAttribute = 81
+	KCGLPFAFullScreen                         CGLPixelFormatAttribute = 54
+)
+
+// String returns the CGLPixelFormatAttribute constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGLPixelFormatAttribute) String() string {
+	switch e {
+	case KCGLPFAAllRenderers:
+		return "KCGLPFAAllRenderers"
+	case KCGLPFATripleBuffer:
+		return "KCGLPFATripleBuffer"
+	case KCGLPFADoubleBuffer:
+		return "KCGLPFADoubleBuffer"
+	case KCGLPFAColorSize:
+		return "KCGLPFAColorSize"
+	case KCGLPFAAlphaSize:
+		return "KCGLPFAAlphaSize"
+	case KCGLPFADepthSize:
+		return "KCGLPFADepthSize"
+	case KCGLPFAStencilSize:
+		return "KCGLPFAStencilSize"
+	case KCGLPFAMinimumPolicy:
+		return "KCGLPFAMinimumPolicy"
+	case KCGLPFAMaximumPolicy:
+		return "KCGLPFAMaximumPolicy"
+	case KCGLPFASampleBuffers:
+		return "KCGLPFASampleBuffers"
+	case KCGLPFASamples:
+		return "KCGLPFASamples"
+	case KCGLPFAColorFloat:
+		return "KCGLPFAColorFloat"
+	case KCGLPFAMultisample:
+		return "KCGLPFAMultisample"
+	case KCGLPFASupersample:
+		return "KCGLPFASupersample"
+	case KCGLPFASampleAlpha:
+		return "KCGLPFASampleAlpha"
+	case KCGLPFARendererID:
+		return "KCGLPFARendererID"
+	case KCGLPFANoRecovery:
+		return "KCGLPFANoRecovery"
+	case KCGLPFAAccelerated:
+		return "KCGLPFAAccelerated"
+	case KCGLPFAClosestPolicy:
+		return "KCGLPFAClosestPolicy"
+	case KCGLPFABackingStore:
+		return "KCGLPFABackingStore"
+	case KCGLPFABackingVolatile:
+		return "KCGLPFABackingVolatile"
+	case KCGLPFADisplayMask:
+		return "KCGLPFADisplayMask"
+	case KCGLPFAAllowOfflineRenderers:
+		return "KCGLPFAAllowOfflineRenderers"
+	case KCGLPFAAcceleratedCompute:
+		return "KCGLPFAAcceleratedCompute"
+	case KCGLPFAOpenGLProfile:
+		return "KCGLPFAOpenGLProfile"
+	case KCGLPFASupportsAutomaticGraphicsSwitching:
+		return "KCGLPFASupportsAutomaticGraphicsSwitching"
+	case KCGLPFAVirtualScreenCount:
+		return "KCGLPFAVirtualScreenCount"
+	case KCGLPFAAuxBuffers:
+		return "KCGLPFAAuxBuffers"
+	case KCGLPFAAccumSize:
+		return "KCGLPFAAccumSize"
+	case KCGLPFAAuxDepthStencil:
+		return "KCGLPFAAuxDepthStencil"
+	case KCGLPFAStereo:
+		return "KCGLPFAStereo"
+	case KCGLPFAOffScreen:
+		return "KCGLPFAOffScreen"
+	case KCGLPFAWindow:
+		return "KCGLPFAWindow"
+	case KCGLPFACompliant:
+		return "KCGLPFACompliant"
+	case KCGLPFAPBuffer:
+		return "KCGLPFAPBuffer"
+	case KCGLPFARemotePBuffer:
+		return "KCGLPFARemotePBuffer"
+	case KCGLPFASingleRenderer:
+		return "KCGLPFASingleRenderer"
+	case KCGLPFARobust:
+		return "KCGLPFARobust"
+	case KCGLPFAMPSafe:
+		return "KCGLPFAMPSafe"
+	case KCGLPFAMultiScreen:
+		return "KCGLPFAMultiScreen"
+	case KCGLPFAFullScreen:
+		return "KCGLPFAFullScreen"
+	default:
+		return fmt.Sprintf("CGLPixelFormatAttribute(%d)", int64(e))
+	}
+}
+
+type CGLRendererProperty int64
+
+const (
+	KCGLRPOffScreen              CGLRendererProperty = 53
+	KCGLRPRendererID             CGLRendererProperty = 70
+	KCGLRPAccelerated            CGLRendererProperty = 73
+	KCGLRPBackingStore           CGLRendererProperty = 76
+	KCGLRPWindow                 CGLRendererProperty = 80
+	KCGLRPCompliant              CGLRendererProperty = 83
+	KCGLRPDisplayMask            CGLRendererProperty = 84
+	KCGLRPBufferModes            CGLRendererProperty = 100
+	KCGLRPColorModes             CGLRendererProperty = 103
+	KCGLRPAccumModes             CGLRendererProperty = 104
+	KCGLRPDepthModes             CGLRendererProperty = 105
+	KCGLRPStencilModes           CGLRendererProperty = 106
+	KCGLRPMaxAuxBuffers          CGLRendererProperty = 107
+	KCGLRPMaxSampleBuffers       CGLRendererProperty = 108
+	KCGLRPMaxSamples             CGLRendererProperty = 109
+	KCGLRPSampleModes            CGLRendererProperty = 110
+	KCGLRPSampleAlpha            CGLRendererProperty = 111
+	KCGLRPGPUVertProcCapable     CGLRendererProperty = 122
+	KCGLRPGPUFragProcCapable     CGLRendererProperty = 123
+	KCGLRPRendererCount          CGLRendererProperty = 128
+	KCGLRPOnline                 CGLRendererProperty = 129
+	KCGLRPAcceleratedCompute     CGLRendererProperty = 130
+	KCGLRPVideoMemoryMegabytes   CGLRendererProperty = 131
+	KCGLRPTextureMemoryMegabytes CGLRendererProperty = 132
+	KCGLRPMajorGLVersion         CGLRendererProperty = 133
+	KCGLRPRegistryIDLow          CGLRendererProperty = 140
+	KCGLRPRegistryIDHigh         CGLRendererProperty = 141
+	KCGLRPRemovable              CGLRendererProperty = 142
+	KCGLRPRobust                 CGLRendererProperty = 75
+	KCGLRPMPSafe                 CGLRendererProperty = 78
+	KCGLRPMultiScreen            CGLRendererProperty = 81
+	KCGLRPFullScreen             CGLRendererProperty = 54
+	KCGLRPVideoMemory            CGLRendererProperty = 120
+	KCGLRPTextureMemory          CGLRendererProperty = 121
+)
+
+// String returns the CGLRendererProperty constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGLRendererProperty) String() string {
+	switch e {
+	case KCGLRPOffScreen:
+		return "KCGLRPOffScreen"
+	case KCGLRPRendererID:
+		return "KCGLRPRendererID"
+	case KCGLRPAccelerated:
+		return "KCGLRPAccelerated"
+	case KCGLRPBackingStore:
+		return "KCGLRPBackingStore"
+	case KCGLRPWindow:
+		return "KCGLRPWindow"
+	case KCGLRPCompliant:
+		return "KCGLRPCompliant"
+	case KCGLRPDisplayMask:
+		return "KCGLRPDisplayMask"
+	case KCGLRPBufferModes:
+		return "KCGLRPBufferModes"
+	case KCGLRPColorModes:
+		return "KCGLRPColorModes"
+	case KCGLRPAccumModes:
+		return "KCGLRPAccumModes"
+	case KCGLRPDepthModes:
+		return "KCGLRPDepthModes"
+	case KCGLRPStencilModes:
+		return "KCGLRPStencilModes"
+	case KCGLRPMaxAuxBuffers:
+		return "KCGLRPMaxAuxBuffers"
+	case KCGLRPMaxSampleBuffers:
+		return "KCGLRPMaxSampleBuffers"
+	case KCGLRPMaxSamples:
+		return "KCGLRPMaxSamples"
+	case KCGLRPSampleModes:
+		return "KCGLRPSampleModes"
+	case KCGLRPSampleAlpha:
+		return "KCGLRPSampleAlpha"
+	case KCGLRPGPUVertProcCapable:
+		return "KCGLRPGPUVertProcCapable"
+	case KCGLRPGPUFragProcCapable:
+		return "KCGLRPGPUFragProcCapable"
+	case KCGLRPRendererCount:
+		return "KCGLRPRendererCount"
+	case KCGLRPOnline:
+		return "KCGLRPOnline"
+	case KCGLRPAcceleratedCompute:
+		return "KCGLRPAcceleratedCompute"
+	case KCGLRPVideoMemoryMegabytes:
+		return "KCGLRPVideoMemoryMegabytes"
+	case KCGLRPTextureMemoryMegabytes:
+		return "KCGLRPTextureMemoryMegabytes"
+	case KCGLRPMajorGLVersion:
+		return "KCGLRPMajorGLVersion"
+	case KCGLRPRegistryIDLow:
+		return "KCGLRPRegistryIDLow"
+	case KCGLRPRegistryIDHigh:
+		return "KCGLRPRegistryIDHigh"
+	case KCGLRPRemovable:
+		return "KCGLRPRemovable"
+	case KCGLRPRobust:
+		return "KCGLRPRobust"
+	case KCGLRPMPSafe:
+		return "KCGLRPMPSafe"
+	case KCGLRPMultiScreen:
+		return "KCGLRPMultiScreen"
+	case KCGLRPFullScreen:
+		return "KCGLRPFullScreen"
+	case KCGLRPVideoMemory:
+		return "KCGLRPVideoMemory"
+	case KCGLRPTextureMemory:
+		return "KCGLRPTextureMemory"
+	default:
+		return fmt.Sprintf("CGLRendererProperty(%d)", int64(e))
+	}
+}
+
 const (
 	KCGLRendererATIRadeon8500ID  = 136704
 	KCGLRendererATIRadeon9700ID  = 137216

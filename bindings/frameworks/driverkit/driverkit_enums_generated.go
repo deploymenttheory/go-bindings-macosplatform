@@ -776,6 +776,9 @@ const (
 	THREAD_ABORTSAFE                           = 0
 	THREAD_INTERRUPTIBLE                       = 0
 	THREAD_UNINT                               = 0
+	KIOPMWakeEventFullWake                     = 2
+	KIOPMWakeEventPossibleFullWake             = 4
+	KIOPMWakeEventSource                       = 1
 	KIOConnectMethodVarOutputSize              = -3
 	KIODMACommandCompleteDMANoOptions          = 0
 	KIODMACommandCreateNoOptions               = 0

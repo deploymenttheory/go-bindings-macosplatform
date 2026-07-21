@@ -1128,6 +1128,19 @@ func (e OSUnfairLockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+type AssetPlaybackStyle int64
+
+const ()
+
+// String returns the AssetPlaybackStyle constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AssetPlaybackStyle) String() string {
+	switch e {
+	default:
+		return fmt.Sprintf("AssetPlaybackStyle(%d)", int64(e))
+	}
+}
+
 type PMPageToPaperMappingType int64
 
 const (

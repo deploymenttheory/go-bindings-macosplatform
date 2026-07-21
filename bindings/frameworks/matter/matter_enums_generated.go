@@ -16973,6 +16973,21 @@ func (e MTRPumpConfigurationAndControlPumpStatusBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Bitmask — values may be combined with |.
+type MTRRVCCleanModeFeature int64
+
+const ()
+
+// String returns the MTRRVCCleanModeFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRVCCleanModeFeature) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type MTRRVCCleanModeModeTag int64
 
 const (
@@ -17126,6 +17141,21 @@ func (e MTRRVCOperationalStateOperationalState) String() string {
 	default:
 		return fmt.Sprintf("MTRRVCOperationalStateOperationalState(%d)", int64(e))
 	}
+}
+
+// Bitmask — values may be combined with |.
+type MTRRVCRunModeFeature int64
+
+const ()
+
+// String returns the MTRRVCRunModeFeature constant's name, or its numeric form when the
+// value is not a known constant.
+func (e MTRRVCRunModeFeature) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }
 
 type MTRRVCRunModeModeTag int64

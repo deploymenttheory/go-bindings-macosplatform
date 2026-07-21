@@ -6,6 +6,8 @@ package coregraphics
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 type CGBitmapParameters struct {
@@ -231,3 +233,6 @@ type CGShading struct{}
 type ColorSyncProfile struct{}
 
 type IOSurface struct{}
+
+// Id is an alias for the objc_object value type.
+type Id = *foundation.ObjcObject

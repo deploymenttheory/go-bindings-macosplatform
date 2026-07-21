@@ -1473,6 +1473,20 @@ func (e AudioSessionPromptStyle) String() string {
 	}
 }
 
+// The values that define the current state of the record permission request.
+type AudioSessionRecordPermission uint64
+
+const ()
+
+// String returns the AudioSessionRecordPermission constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioSessionRecordPermission) String() string {
+	switch e {
+	default:
+		return fmt.Sprintf("AudioSessionRecordPermission(%d)", int64(e))
+	}
+}
+
 // Audio session rendering mode identifiers.
 type AudioSessionRenderingMode int64
 
