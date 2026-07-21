@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"sort"
 
+	idiolibraries "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/libraries"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	purepipeline "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/pipeline"
 )
@@ -86,7 +87,14 @@ func runParity(args []string) {
 	report := emitmanifest.Compare(rawRec.Entries(), idioRec.Entries())
 	printParityReport(report, *kindFilter, *limit, *showRenames)
 
+	// Library parity: the CGo library layer re-exports raw types/consts/vars as
+	// idiomatic aliases (identical names), so a plain exported-symbol comparison of
+	// the committed trees proves coverage without the metadata manifest.
+	libMissing := reportLibraryParity(*limit)
+
 	current := missingKeys(report)
+	current = append(current, libMissing...)
+	sort.Strings(current)
 
 	if *writeBaseline != "" {
 		if err := writeParityBaseline(*writeBaseline, current); err != nil {
@@ -126,6 +134,59 @@ func runParity(args []string) {
 	if len(report.Missing) > 0 {
 		os.Exit(1)
 	}
+}
+
+// reportLibraryParity compares each committed raw C-library package's
+// re-exportable exports (types, consts, vars) against the idiomatic package's
+// exported symbols (aliases plus ergonomic declarations), printing and returning
+// the raw symbols with no idiomatic counterpart as "library:<pkg>:<name>" keys.
+func reportLibraryParity(limit int) []string {
+	const rawRoot = "bindings/libraries"
+	const idioRoot = "opinionated/idiomatic/libraries"
+
+	entries, err := os.ReadDir(rawRoot)
+	if err != nil {
+		return nil
+	}
+	var missing []string
+	total, covered := 0, 0
+	for _, ent := range entries {
+		if !ent.IsDir() {
+			continue
+		}
+		pkg := ent.Name()
+		rawExports, err := idiolibraries.ReExportableExports(filepath.Join(rawRoot, pkg))
+		if err != nil {
+			continue
+		}
+		idioExports, err := idiolibraries.PackageExports(filepath.Join(idioRoot, pkg))
+		if err != nil {
+			idioExports = map[string]bool{} // idiomatic package absent → all missing
+		}
+		for name := range rawExports {
+			total++
+			if idioExports[name] {
+				covered++
+				continue
+			}
+			missing = append(missing, "library:"+pkg+":"+name)
+		}
+	}
+	sort.Strings(missing)
+
+	fmt.Printf("\nLibrary parity: %d raw type/const/var exports, %d covered by idiomatic; %d missing.\n",
+		total, covered, len(missing))
+	shown := missing
+	if limit > 0 && len(shown) > limit {
+		shown = shown[:limit]
+	}
+	for _, m := range shown {
+		fmt.Printf("    %s\n", m)
+	}
+	if limit > 0 && len(missing) > limit {
+		fmt.Printf("    … and %d more\n", len(missing)-limit)
+	}
+	return missing
 }
 
 // missingKeys renders the report's missing constructs as sorted, compact

@@ -19,6 +19,12 @@ type IdiomaticConfig struct {
 	OutDir    string   // output root, e.g. ./opinionated/idiomatic/libraries
 	Libraries []string // optional case-insensitive filter; empty = all libraries
 	Verbose   bool
+
+	// RawSourceRoot is the directory holding the raw C-library packages the
+	// idiomatic layer wraps and re-exports (one <name>/ subdirectory each).
+	// Defaults to ./bindings/libraries when empty. The alias emitter reads each
+	// raw package's emitted source from here to re-export its exported symbols.
+	RawSourceRoot string
 }
 
 // GenerateIdiomaticLibraries emits the opinionated idiomatic wrapper layer for
@@ -36,6 +42,11 @@ func GenerateIdiomaticLibraries(cfg IdiomaticConfig) error {
 		filter[strings.ToLower(name)] = true
 	}
 
+	rawSrcRoot := cfg.RawSourceRoot
+	if rawSrcRoot == "" {
+		rawSrcRoot = filepath.Join("bindings", "libraries")
+	}
+
 	for _, framework := range reg.Frameworks {
 		if framework.LinkLib == "" || framework.IsSwiftOnly {
 			continue // C libraries only
@@ -46,8 +57,9 @@ func GenerateIdiomaticLibraries(cfg IdiomaticConfig) error {
 		pkgName := strings.ToLower(framework.Framework)
 		outDir := filepath.Join(cfg.OutDir, pkgName)
 		rawImportPath := reg.ModulePrefix + "/" + pkgName
+		rawSrcDir := filepath.Join(rawSrcRoot, pkgName)
 
-		if err := emitIdiomaticLibrary(outDir, pkgName, rawImportPath, framework, m); err != nil {
+		if err := emitIdiomaticLibrary(outDir, pkgName, rawImportPath, rawSrcDir, framework, m); err != nil {
 			return fmt.Errorf("idiomatic library %s: %w", framework.Framework, err)
 		}
 		if cfg.Verbose {
@@ -60,12 +72,15 @@ func GenerateIdiomaticLibraries(cfg IdiomaticConfig) error {
 // emitIdiomaticLibrary runs every library emitter, writing only the non-empty
 // outputs (gofmt-formatted) plus a doc.go. Stale *_generated.go files are removed
 // first so a regeneration never leaves orphans behind.
-func emitIdiomaticLibrary(outDir, pkgName, rawImportPath string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper) error {
+func emitIdiomaticLibrary(outDir, pkgName, rawImportPath, rawSrcDir string, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper) error {
 	knownClasses := make(map[string]bool, len(framework.Classes))
 	for name := range framework.Classes {
 		knownClasses[name] = true
 	}
 
+	// The ergonomic emitters run first; the alias re-export runs last so it can
+	// skip any name they already declare (a handle wrapper the cfunctions emitter
+	// builds from a raw struct type would otherwise redeclare that type).
 	emitters := []struct {
 		suffix string
 		fn     func(*bytes.Buffer) error
@@ -85,6 +100,7 @@ func emitIdiomaticLibrary(outDir, pkgName, rawImportPath string, framework *maco
 	}
 
 	files := map[string][]byte{}
+	declared := map[string]bool{}
 	for _, e := range emitters {
 		var b bytes.Buffer
 		if err := e.fn(&b); err != nil {
@@ -97,8 +113,31 @@ func emitIdiomaticLibrary(outDir, pkgName, rawImportPath string, framework *maco
 		if err != nil {
 			return fmt.Errorf("%s: gofmt: %w", e.suffix, err)
 		}
+		names, err := idiolib.CollectDeclaredNames(formatted)
+		if err != nil {
+			return fmt.Errorf("%s: scan declared names: %w", e.suffix, err)
+		}
+		for n := range names {
+			declared[n] = true
+		}
 		files[pkgName+"_"+e.suffix+"_generated.go"] = formatted
 	}
+
+	// Alias re-export of every raw exported symbol the ergonomic emitters did not
+	// already provide, so callers reach the library's enums, structs, protocols,
+	// and globals through this package.
+	var aliasBuf bytes.Buffer
+	if err := idiolib.EmitAliases(&aliasBuf, pkgName, rawImportPath, rawSrcDir, declared); err != nil {
+		return fmt.Errorf("aliases: %w", err)
+	}
+	if aliasBuf.Len() > 0 {
+		formatted, err := format.Source(aliasBuf.Bytes())
+		if err != nil {
+			return fmt.Errorf("aliases: gofmt: %w", err)
+		}
+		files[pkgName+"_aliases_generated.go"] = formatted
+	}
+
 	if len(files) == 0 {
 		return nil // nothing idiomatic to emit for this library
 	}
