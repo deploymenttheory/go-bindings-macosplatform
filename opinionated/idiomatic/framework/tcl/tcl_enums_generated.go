@@ -31,6 +31,29 @@ func (e Pathtype) String() string {
 	}
 }
 
+type Queueposition int64
+
+const (
+	QueuepositionTail Queueposition = 0
+	QueuepositionHead Queueposition = 1
+	QueuepositionMark Queueposition = 2
+)
+
+// String returns the Queueposition constant's name, or its numeric form when the
+// value is not a known constant.
+func (e Queueposition) String() string {
+	switch e {
+	case QueuepositionTail:
+		return "QueuepositionTail"
+	case QueuepositionHead:
+		return "QueuepositionHead"
+	case QueuepositionMark:
+		return "QueuepositionMark"
+	default:
+		return fmt.Sprintf("Queueposition(%d)", int64(e))
+	}
+}
+
 type Valuetype int64
 
 const (
@@ -54,28 +77,5 @@ func (e Valuetype) String() string {
 		return "ValuetypeWideInt"
 	default:
 		return fmt.Sprintf("Valuetype(%d)", int64(e))
-	}
-}
-
-type Queueposition int64
-
-const (
-	QueuepositionTail Queueposition = 0
-	QueuepositionHead Queueposition = 1
-	QueuepositionMark Queueposition = 2
-)
-
-// String returns the Queueposition constant's name, or its numeric form when the
-// value is not a known constant.
-func (e Queueposition) String() string {
-	switch e {
-	case QueuepositionTail:
-		return "QueuepositionTail"
-	case QueuepositionHead:
-		return "QueuepositionHead"
-	case QueuepositionMark:
-		return "QueuepositionMark"
-	default:
-		return fmt.Sprintf("Queueposition(%d)", int64(e))
 	}
 }

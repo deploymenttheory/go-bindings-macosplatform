@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -28,6 +29,30 @@ func AVCaptureReactionSystemImageNameForType(reactionType obj.Object) string {
 		return ""
 	}
 	return purego.GoString(_ret)
+}
+
+var _fnAVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp func(unsafe.Pointer, coremedia.CMTime) objc.ID
+
+// AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp calls the AVFoundation framework function AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp.
+func AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp(timecode unsafe.Pointer, presentationTimeStamp coremedia.CMTime) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp == nil {
+		ebipurego.RegisterLibFunc(&_fnAVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp, _lib, "AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp")
+	}
+	_ret := _fnAVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp(timecode, presentationTimeStamp)
+	return obj.Wrap(_ret)
+}
+
+var _fnAVCaptureTimecodeCreateMetadataSampleBufferForDuration func(unsafe.Pointer, coremedia.CMTime) objc.ID
+
+// AVCaptureTimecodeCreateMetadataSampleBufferForDuration calls the AVFoundation framework function AVCaptureTimecodeCreateMetadataSampleBufferForDuration.
+func AVCaptureTimecodeCreateMetadataSampleBufferForDuration(timecode unsafe.Pointer, duration coremedia.CMTime) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAVCaptureTimecodeCreateMetadataSampleBufferForDuration == nil {
+		ebipurego.RegisterLibFunc(&_fnAVCaptureTimecodeCreateMetadataSampleBufferForDuration, _lib, "AVCaptureTimecodeCreateMetadataSampleBufferForDuration")
+	}
+	_ret := _fnAVCaptureTimecodeCreateMetadataSampleBufferForDuration(timecode, duration)
+	return obj.Wrap(_ret)
 }
 
 var _fnAVMakeRectWithAspectRatioInsideRect func(corefoundation.CGSize, corefoundation.CGRect) corefoundation.CGRect

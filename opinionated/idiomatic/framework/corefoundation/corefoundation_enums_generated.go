@@ -208,6 +208,31 @@ func (e CFComparisonResult) String() string {
 	}
 }
 
+// A CFOptionFlags type for specifying options for searching.
+// Bitmask — values may be combined with |.
+type CFDataSearchFlags int64
+
+const (
+	KCFDataSearchBackwards CFDataSearchFlags = 1
+	KCFDataSearchAnchored  CFDataSearchFlags = 2
+)
+
+// String returns the CFDataSearchFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFDataSearchFlags) String() string {
+	var parts []string
+	if e&KCFDataSearchBackwards != 0 {
+		parts = append(parts, "KCFDataSearchBackwards")
+	}
+	if e&KCFDataSearchAnchored != 0 {
+		parts = append(parts, "KCFDataSearchAnchored")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Data type for predefined date and time format styles.
 type CFDateFormatterStyle int64
 
@@ -1524,31 +1549,6 @@ func (e Type) String() string {
 	default:
 		return fmt.Sprintf("Type(%d)", int64(e))
 	}
-}
-
-// A CFOptionFlags type for specifying options for searching.
-// Bitmask — values may be combined with |.
-type CFDataSearchFlags int64
-
-const (
-	KCFDataSearchBackwards CFDataSearchFlags = 1
-	KCFDataSearchAnchored  CFDataSearchFlags = 2
-)
-
-// String returns the CFDataSearchFlags constant's name, or its numeric form when the
-// value is not a known constant.
-func (e CFDataSearchFlags) String() string {
-	var parts []string
-	if e&KCFDataSearchBackwards != 0 {
-		parts = append(parts, "KCFDataSearchBackwards")
-	}
-	if e&KCFDataSearchAnchored != 0 {
-		parts = append(parts, "KCFDataSearchAnchored")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // These option flags are used as a mask to indicate a specific set of fields in the CFGregorianDate or CFGregorianUnits structures.

@@ -395,6 +395,19 @@ func OSArrayAppendValue(value obj.Object) (ok bool, object int32) {
 	return _ret, _out0
 }
 
+var _fnOSArrayApply func(unsafe.Pointer, unsafe.Pointer) bool
+
+// OSArrayApply calls the DriverKit framework function OSArrayApply.
+func OSArrayApply(applier unsafe.Pointer) (ok bool, object int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSArrayApply == nil {
+		ebipurego.RegisterLibFunc(&_fnOSArrayApply, _lib, "OSArrayApply")
+	}
+	var _out0 int32
+	_ret := _fnOSArrayApply(unsafe.Pointer(&_out0), applier)
+	return _ret, _out0
+}
+
 var _fnOSArrayGetCount func(unsafe.Pointer) uint32
 
 // OSArrayGetCount calls the DriverKit framework function OSArrayGetCount.
@@ -581,6 +594,19 @@ func OSDataGetLength() (result int, object int32) {
 	}
 	var _out0 int32
 	_ret := _fnOSDataGetLength(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnOSDictionaryApply func(unsafe.Pointer, unsafe.Pointer) bool
+
+// OSDictionaryApply calls the DriverKit framework function OSDictionaryApply.
+func OSDictionaryApply(applier unsafe.Pointer) (ok bool, object int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOSDictionaryApply == nil {
+		ebipurego.RegisterLibFunc(&_fnOSDictionaryApply, _lib, "OSDictionaryApply")
+	}
+	var _out0 int32
+	_ret := _fnOSDictionaryApply(unsafe.Pointer(&_out0), applier)
 	return _ret, _out0
 }
 
@@ -771,6 +797,28 @@ func OSSynchronizeIO() {
 	_fnOSSynchronizeIO()
 }
 
+var _fnDEQUEUEELTCLEANUP func(unsafe.Pointer)
+
+// DEQUEUEELTCLEANUP calls the DriverKit framework function __DEQUEUE_ELT_CLEANUP.
+func DEQUEUEELTCLEANUP(elt unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDEQUEUEELTCLEANUP == nil {
+		ebipurego.RegisterLibFunc(&_fnDEQUEUEELTCLEANUP, _lib, "__DEQUEUE_ELT_CLEANUP")
+	}
+	_fnDEQUEUEELTCLEANUP(elt)
+}
+
+var _fnQUEUEELTVALIDATE func(unsafe.Pointer)
+
+// QUEUEELTVALIDATE calls the DriverKit framework function __QUEUE_ELT_VALIDATE.
+func QUEUEELTVALIDATE(elt unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnQUEUEELTVALIDATE == nil {
+		ebipurego.RegisterLibFunc(&_fnQUEUEELTVALIDATE, _lib, "__QUEUE_ELT_VALIDATE")
+	}
+	_fnQUEUEELTVALIDATE(elt)
+}
+
 var _fnBuiltinTrap func()
 
 // BuiltinTrap calls the DriverKit framework function __builtin_trap.
@@ -793,6 +841,72 @@ func Crc32(crc uint32, buf unsafe.Pointer, size int) uint32 {
 	return _fnCrc32(crc, buf, size)
 }
 
+var _fnEnqueueHead func(unsafe.Pointer, unsafe.Pointer)
+
+// EnqueueHead calls the DriverKit framework function enqueue_head.
+func EnqueueHead(que unsafe.Pointer, elt unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnEnqueueHead == nil {
+		ebipurego.RegisterLibFunc(&_fnEnqueueHead, _lib, "enqueue_head")
+	}
+	_fnEnqueueHead(que, elt)
+}
+
+var _fnEnqueueTail func(unsafe.Pointer, unsafe.Pointer)
+
+// EnqueueTail calls the DriverKit framework function enqueue_tail.
+func EnqueueTail(que unsafe.Pointer, elt unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnEnqueueTail == nil {
+		ebipurego.RegisterLibFunc(&_fnEnqueueTail, _lib, "enqueue_tail")
+	}
+	_fnEnqueueTail(que, elt)
+}
+
+var _fnInsque func(unsafe.Pointer, unsafe.Pointer)
+
+// Insque calls the DriverKit framework function insque.
+func Insque(entry unsafe.Pointer, pred unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInsque == nil {
+		ebipurego.RegisterLibFunc(&_fnInsque, _lib, "insque")
+	}
+	_fnInsque(entry, pred)
+}
+
+var _fnMovqueue func(unsafe.Pointer, unsafe.Pointer)
+
+// Movqueue calls the DriverKit framework function movqueue.
+func Movqueue(old unsafe.Pointer, new_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMovqueue == nil {
+		ebipurego.RegisterLibFunc(&_fnMovqueue, _lib, "movqueue")
+	}
+	_fnMovqueue(old, new_)
+}
+
+var _fnReQueueHead func(unsafe.Pointer, unsafe.Pointer)
+
+// ReQueueHead calls the DriverKit framework function re_queue_head.
+func ReQueueHead(que unsafe.Pointer, elt unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnReQueueHead == nil {
+		ebipurego.RegisterLibFunc(&_fnReQueueHead, _lib, "re_queue_head")
+	}
+	_fnReQueueHead(que, elt)
+}
+
+var _fnReQueueTail func(unsafe.Pointer, unsafe.Pointer)
+
+// ReQueueTail calls the DriverKit framework function re_queue_tail.
+func ReQueueTail(que unsafe.Pointer, elt unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnReQueueTail == nil {
+		ebipurego.RegisterLibFunc(&_fnReQueueTail, _lib, "re_queue_tail")
+	}
+	_fnReQueueTail(que, elt)
+}
+
 var _fnReadRandom func(unsafe.Pointer, int)
 
 // ReadRandom calls the DriverKit framework function read_random.
@@ -802,4 +916,26 @@ func ReadRandom(buffer unsafe.Pointer, numBytes int) {
 		ebipurego.RegisterLibFunc(&_fnReadRandom, _lib, "read_random")
 	}
 	_fnReadRandom(buffer, numBytes)
+}
+
+var _fnRemque func(unsafe.Pointer)
+
+// Remque calls the DriverKit framework function remque.
+func Remque(elt unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRemque == nil {
+		ebipurego.RegisterLibFunc(&_fnRemque, _lib, "remque")
+	}
+	_fnRemque(elt)
+}
+
+var _fnRemqueue func(unsafe.Pointer)
+
+// Remqueue calls the DriverKit framework function remqueue.
+func Remqueue(elt unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRemqueue == nil {
+		ebipurego.RegisterLibFunc(&_fnRemqueue, _lib, "remqueue")
+	}
+	_fnRemqueue(elt)
 }

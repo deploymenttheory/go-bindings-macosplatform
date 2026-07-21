@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,6 +49,17 @@ func AXNameFromColor(color obj.Object) string {
 		return ""
 	}
 	return purego.GoString(_ret)
+}
+
+var _fnAXOpenSettingsFeature func(SettingsFeature, unsafe.Pointer)
+
+// AXOpenSettingsFeature calls the Accessibility framework function AXOpenSettingsFeature.
+func AXOpenSettingsFeature(feature SettingsFeature, completionHandler unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAXOpenSettingsFeature == nil {
+		ebipurego.RegisterLibFunc(&_fnAXOpenSettingsFeature, _lib, "AXOpenSettingsFeature")
+	}
+	_fnAXOpenSettingsFeature(feature, completionHandler)
 }
 
 var _fnAXOpenSettingsFeatureIsSupported func(SettingsFeature) uint8

@@ -42,3 +42,14 @@ func MTLIOFlushAndDestroyCompressionContext(context_ unsafe.Pointer) IOCompressi
 	}
 	return _fnMTLIOFlushAndDestroyCompressionContext(context_)
 }
+
+var _fnMTLRemoveDeviceObserver func(unsafe.Pointer)
+
+// MTLRemoveDeviceObserver calls the Metal framework function MTLRemoveDeviceObserver.
+func MTLRemoveDeviceObserver(observer unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLRemoveDeviceObserver == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLRemoveDeviceObserver, _lib, "MTLRemoveDeviceObserver")
+	}
+	_fnMTLRemoveDeviceObserver(observer)
+}

@@ -26,6 +26,50 @@ func ICACloseSession(completion unsafe.Pointer) (result int16, pb ICACloseSessio
 	return _ret, _out0
 }
 
+var _fnICACopyObjectData func(unsafe.Pointer, unsafe.Pointer) int16
+
+// ICACopyObjectData calls the ICADevices framework function ICACopyObjectData.
+func ICACopyObjectData(params unsafe.Pointer, completionProc unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICACopyObjectData == nil {
+		ebipurego.RegisterLibFunc(&_fnICACopyObjectData, _lib, "ICACopyObjectData")
+	}
+	return _fnICACopyObjectData(params, completionProc)
+}
+
+var _fnICACopyObjectPropertyDictionary func(unsafe.Pointer, unsafe.Pointer) int16
+
+// ICACopyObjectPropertyDictionary calls the ICADevices framework function ICACopyObjectPropertyDictionary.
+func ICACopyObjectPropertyDictionary(pb unsafe.Pointer, completion unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICACopyObjectPropertyDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnICACopyObjectPropertyDictionary, _lib, "ICACopyObjectPropertyDictionary")
+	}
+	return _fnICACopyObjectPropertyDictionary(pb, completion)
+}
+
+var _fnICACopyObjectThumbnail func(unsafe.Pointer, unsafe.Pointer) int16
+
+// ICACopyObjectThumbnail calls the ICADevices framework function ICACopyObjectThumbnail.
+func ICACopyObjectThumbnail(pb unsafe.Pointer, completion unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICACopyObjectThumbnail == nil {
+		ebipurego.RegisterLibFunc(&_fnICACopyObjectThumbnail, _lib, "ICACopyObjectThumbnail")
+	}
+	return _fnICACopyObjectThumbnail(pb, completion)
+}
+
+var _fnICADownloadFile func(unsafe.Pointer, unsafe.Pointer) int16
+
+// ICADownloadFile calls the ICADevices framework function ICADownloadFile.
+func ICADownloadFile(pb unsafe.Pointer, completion unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICADownloadFile == nil {
+		ebipurego.RegisterLibFunc(&_fnICADownloadFile, _lib, "ICADownloadFile")
+	}
+	return _fnICADownloadFile(pb, completion)
+}
+
 var _fnICAGetDeviceList func(unsafe.Pointer, unsafe.Pointer) int16
 
 // ICAGetDeviceList calls the ICADevices framework function ICAGetDeviceList.
@@ -37,6 +81,39 @@ func ICAGetDeviceList(completion unsafe.Pointer) (result int16, pb ICAGetDeviceL
 	var _out0 ICAGetDeviceListPB
 	_ret := _fnICAGetDeviceList(unsafe.Pointer(&_out0), completion)
 	return _ret, _out0
+}
+
+var _fnICAImportImage func(unsafe.Pointer, unsafe.Pointer) int16
+
+// ICAImportImage calls the ICADevices framework function ICAImportImage.
+func ICAImportImage(pb unsafe.Pointer, completion unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICAImportImage == nil {
+		ebipurego.RegisterLibFunc(&_fnICAImportImage, _lib, "ICAImportImage")
+	}
+	return _fnICAImportImage(pb, completion)
+}
+
+var _fnICALoadDeviceModule func(unsafe.Pointer, unsafe.Pointer) int16
+
+// ICALoadDeviceModule calls the ICADevices framework function ICALoadDeviceModule.
+func ICALoadDeviceModule(pb unsafe.Pointer, completion unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICALoadDeviceModule == nil {
+		ebipurego.RegisterLibFunc(&_fnICALoadDeviceModule, _lib, "ICALoadDeviceModule")
+	}
+	return _fnICALoadDeviceModule(pb, completion)
+}
+
+var _fnICAObjectSendMessage func(unsafe.Pointer, unsafe.Pointer) int16
+
+// ICAObjectSendMessage calls the ICADevices framework function ICAObjectSendMessage.
+func ICAObjectSendMessage(pb unsafe.Pointer, completion unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICAObjectSendMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnICAObjectSendMessage, _lib, "ICAObjectSendMessage")
+	}
+	return _fnICAObjectSendMessage(pb, completion)
 }
 
 var _fnICAOpenSession func(unsafe.Pointer, unsafe.Pointer) int16
@@ -52,6 +129,17 @@ func ICAOpenSession(completion unsafe.Pointer) (result int16, pb ICAOpenSessionP
 	return _ret, _out0
 }
 
+var _fnICARegisterForEventNotification func(unsafe.Pointer, unsafe.Pointer) int16
+
+// ICARegisterForEventNotification calls the ICADevices framework function ICARegisterForEventNotification.
+func ICARegisterForEventNotification(params unsafe.Pointer, completionProc unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICARegisterForEventNotification == nil {
+		ebipurego.RegisterLibFunc(&_fnICARegisterForEventNotification, _lib, "ICARegisterForEventNotification")
+	}
+	return _fnICARegisterForEventNotification(params, completionProc)
+}
+
 var _fnICAScannerCloseSession func(unsafe.Pointer, unsafe.Pointer) int16
 
 // ICAScannerCloseSession calls the ICADevices framework function ICAScannerCloseSession.
@@ -63,6 +151,17 @@ func ICAScannerCloseSession(completion unsafe.Pointer) (result int16, pb ICAScan
 	var _out0 ICAScannerCloseSessionPB
 	_ret := _fnICAScannerCloseSession(unsafe.Pointer(&_out0), completion)
 	return _ret, _out0
+}
+
+var _fnICAScannerGetParameters func(unsafe.Pointer, unsafe.Pointer) int16
+
+// ICAScannerGetParameters calls the ICADevices framework function ICAScannerGetParameters.
+func ICAScannerGetParameters(pb unsafe.Pointer, completion unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICAScannerGetParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnICAScannerGetParameters, _lib, "ICAScannerGetParameters")
+	}
+	return _fnICAScannerGetParameters(pb, completion)
 }
 
 var _fnICAScannerInitialize func(unsafe.Pointer, unsafe.Pointer) int16
@@ -91,6 +190,17 @@ func ICAScannerOpenSession(completion unsafe.Pointer) (result int16, pb ICAScann
 	return _ret, _out0
 }
 
+var _fnICAScannerSetParameters func(unsafe.Pointer, unsafe.Pointer) int16
+
+// ICAScannerSetParameters calls the ICADevices framework function ICAScannerSetParameters.
+func ICAScannerSetParameters(pb unsafe.Pointer, completion unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICAScannerSetParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnICAScannerSetParameters, _lib, "ICAScannerSetParameters")
+	}
+	return _fnICAScannerSetParameters(pb, completion)
+}
+
 var _fnICAScannerStart func(unsafe.Pointer, unsafe.Pointer) int16
 
 // ICAScannerStart calls the ICADevices framework function ICAScannerStart.
@@ -117,6 +227,28 @@ func ICAScannerStatus(completion unsafe.Pointer) (result int16, pb ICAScannerSta
 	return _ret, _out0
 }
 
+var _fnICASendNotification func(unsafe.Pointer) int16
+
+// ICASendNotification calls the ICADevices framework function ICASendNotification.
+func ICASendNotification(pb unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICASendNotification == nil {
+		ebipurego.RegisterLibFunc(&_fnICASendNotification, _lib, "ICASendNotification")
+	}
+	return _fnICASendNotification(pb)
+}
+
+var _fnICASendNotificationAndWaitForReply func(unsafe.Pointer) int16
+
+// ICASendNotificationAndWaitForReply calls the ICADevices framework function ICASendNotificationAndWaitForReply.
+func ICASendNotificationAndWaitForReply(pb unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICASendNotificationAndWaitForReply == nil {
+		ebipurego.RegisterLibFunc(&_fnICASendNotificationAndWaitForReply, _lib, "ICASendNotificationAndWaitForReply")
+	}
+	return _fnICASendNotificationAndWaitForReply(pb)
+}
+
 var _fnICAShowDeviceBrowser func(objc.ID) int16
 
 // ICAShowDeviceBrowser calls the ICADevices framework function ICAShowDeviceBrowser.
@@ -139,6 +271,17 @@ func ICAUnloadDeviceModule(completion unsafe.Pointer) (result int16, pb ICAUnloa
 	var _out0 ICAUnloadDeviceModulePB
 	_ret := _fnICAUnloadDeviceModule(unsafe.Pointer(&_out0), completion)
 	return _ret, _out0
+}
+
+var _fnICAUploadFile func(unsafe.Pointer, unsafe.Pointer) int16
+
+// ICAUploadFile calls the ICADevices framework function ICAUploadFile.
+func ICAUploadFile(pb unsafe.Pointer, completion unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICAUploadFile == nil {
+		ebipurego.RegisterLibFunc(&_fnICAUploadFile, _lib, "ICAUploadFile")
+	}
+	return _fnICAUploadFile(pb, completion)
 }
 
 var _fnICDAddBandInfoToNotificationDictionary func(objc.ID, int, int, int, int, int, int, int, int, int, int, int, unsafe.Pointer) int16
@@ -366,6 +509,17 @@ func ICDDisposeObject(completion unsafe.Pointer) (result int16, pb ICD_DisposeOb
 	return _ret, _out0
 }
 
+var _fnICDGetStandardPropertyData func(unsafe.Pointer, unsafe.Pointer) int16
+
+// ICDGetStandardPropertyData calls the ICADevices framework function ICDGetStandardPropertyData.
+func ICDGetStandardPropertyData(objectInfo unsafe.Pointer, pb unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDGetStandardPropertyData == nil {
+		ebipurego.RegisterLibFunc(&_fnICDGetStandardPropertyData, _lib, "ICDGetStandardPropertyData")
+	}
+	return _fnICDGetStandardPropertyData(objectInfo, pb)
+}
+
 var _fnICDInitiateNotificationCallback func(unsafe.Pointer) int16
 
 // ICDInitiateNotificationCallback calls the ICADevices framework function ICDInitiateNotificationCallback.
@@ -387,6 +541,30 @@ func ICDNewObject(completion unsafe.Pointer) (result int16, pb ICD_NewObjectPB) 
 	}
 	var _out0 ICD_NewObjectPB
 	_ret := _fnICDNewObject(unsafe.Pointer(&_out0), completion)
+	return _ret, _out0
+}
+
+var _fnICDNewObjectCreated func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+
+// ICDNewObjectCreated calls the ICADevices framework function ICDNewObjectCreated.
+func ICDNewObjectCreated(parentInfo unsafe.Pointer, objectInfo unsafe.Pointer, completion unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDNewObjectCreated == nil {
+		ebipurego.RegisterLibFunc(&_fnICDNewObjectCreated, _lib, "ICDNewObjectCreated")
+	}
+	return _fnICDNewObjectCreated(parentInfo, objectInfo, completion)
+}
+
+var _fnICDNewObjectInfoCreated func(unsafe.Pointer, int, unsafe.Pointer) int16
+
+// ICDNewObjectInfoCreated calls the ICADevices framework function ICDNewObjectInfoCreated.
+func ICDNewObjectInfoCreated(parentInfo unsafe.Pointer, index int) (result int16, newICAObject int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDNewObjectInfoCreated == nil {
+		ebipurego.RegisterLibFunc(&_fnICDNewObjectInfoCreated, _lib, "ICDNewObjectInfoCreated")
+	}
+	var _out0 int
+	_ret := _fnICDNewObjectInfoCreated(parentInfo, index, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
@@ -557,6 +735,17 @@ func ICDScannerDisconnectUSBDeviceWithIORegPath(locationID int, ioregPath string
 	return _fnICDScannerDisconnectUSBDeviceWithIORegPath(locationID, ioregPath)
 }
 
+var _fnICDScannerGetStandardPropertyData func(unsafe.Pointer, unsafe.Pointer) int16
+
+// ICDScannerGetStandardPropertyData calls the ICADevices framework function ICDScannerGetStandardPropertyData.
+func ICDScannerGetStandardPropertyData(objectInfo unsafe.Pointer, pb unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerGetStandardPropertyData == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerGetStandardPropertyData, _lib, "ICDScannerGetStandardPropertyData")
+	}
+	return _fnICDScannerGetStandardPropertyData(objectInfo, pb)
+}
+
 var _fnICDScannerInitiateNotificationCallback func(unsafe.Pointer) int16
 
 // ICDScannerInitiateNotificationCallback calls the ICADevices framework function ICDScannerInitiateNotificationCallback.
@@ -566,6 +755,41 @@ func ICDScannerInitiateNotificationCallback(pb unsafe.Pointer) int16 {
 		ebipurego.RegisterLibFunc(&_fnICDScannerInitiateNotificationCallback, _lib, "ICDScannerInitiateNotificationCallback")
 	}
 	return _fnICDScannerInitiateNotificationCallback(pb)
+}
+
+var _fnICDScannerNewObjectInfoCreated func(unsafe.Pointer, int, unsafe.Pointer) int16
+
+// ICDScannerNewObjectInfoCreated calls the ICADevices framework function ICDScannerNewObjectInfoCreated.
+func ICDScannerNewObjectInfoCreated(parentInfo unsafe.Pointer, index int) (result int16, newICAObject int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerNewObjectInfoCreated == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerNewObjectInfoCreated, _lib, "ICDScannerNewObjectInfoCreated")
+	}
+	var _out0 int
+	_ret := _fnICDScannerNewObjectInfoCreated(parentInfo, index, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnICDSendNotification func(unsafe.Pointer) int16
+
+// ICDSendNotification calls the ICADevices framework function ICDSendNotification.
+func ICDSendNotification(pb unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDSendNotification == nil {
+		ebipurego.RegisterLibFunc(&_fnICDSendNotification, _lib, "ICDSendNotification")
+	}
+	return _fnICDSendNotification(pb)
+}
+
+var _fnICDSendNotificationAndWaitForReply func(unsafe.Pointer) int16
+
+// ICDSendNotificationAndWaitForReply calls the ICADevices framework function ICDSendNotificationAndWaitForReply.
+func ICDSendNotificationAndWaitForReply(pb unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDSendNotificationAndWaitForReply == nil {
+		ebipurego.RegisterLibFunc(&_fnICDSendNotificationAndWaitForReply, _lib, "ICDSendNotificationAndWaitForReply")
+	}
+	return _fnICDSendNotificationAndWaitForReply(pb)
 }
 
 var _fnICD_ScannerMain func(int, string) int32

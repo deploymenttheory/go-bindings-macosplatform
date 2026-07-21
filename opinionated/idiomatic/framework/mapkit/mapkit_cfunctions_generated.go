@@ -7,8 +7,21 @@ package mapkit
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
+
+var _fnMKMapPointEqualToPoint func(unsafe.Pointer, unsafe.Pointer) bool
+
+// MKMapPointEqualToPoint calls the MapKit framework function MKMapPointEqualToPoint.
+func MKMapPointEqualToPoint(point1 unsafe.Pointer, point2 unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapPointEqualToPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapPointEqualToPoint, _lib, "MKMapPointEqualToPoint")
+	}
+	return _fnMKMapPointEqualToPoint(point1, point2)
+}
 
 var _fnMKMapPointsPerMeterAtLatitude func(unsafe.Pointer) float64
 
@@ -21,6 +34,196 @@ func MKMapPointsPerMeterAtLatitude(latitude unsafe.Pointer) float64 {
 	return _fnMKMapPointsPerMeterAtLatitude(latitude)
 }
 
+var _fnMKMapRectContainsPoint func(unsafe.Pointer, unsafe.Pointer) bool
+
+// MKMapRectContainsPoint calls the MapKit framework function MKMapRectContainsPoint.
+func MKMapRectContainsPoint(rect unsafe.Pointer, point unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectContainsPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectContainsPoint, _lib, "MKMapRectContainsPoint")
+	}
+	return _fnMKMapRectContainsPoint(rect, point)
+}
+
+var _fnMKMapRectContainsRect func(unsafe.Pointer, unsafe.Pointer) bool
+
+// MKMapRectContainsRect calls the MapKit framework function MKMapRectContainsRect.
+func MKMapRectContainsRect(rect1 unsafe.Pointer, rect2 unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectContainsRect == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectContainsRect, _lib, "MKMapRectContainsRect")
+	}
+	return _fnMKMapRectContainsRect(rect1, rect2)
+}
+
+var _fnMKMapRectDivide func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float64, unsafe.Pointer)
+
+// MKMapRectDivide calls the MapKit framework function MKMapRectDivide.
+func MKMapRectDivide(rect unsafe.Pointer, amount float64, edge unsafe.Pointer) (slice MKMapRect, remainder MKMapRect) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectDivide == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectDivide, _lib, "MKMapRectDivide")
+	}
+	var _out0 MKMapRect
+	var _out1 MKMapRect
+	_fnMKMapRectDivide(rect, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), amount, edge)
+	return _out0, _out1
+}
+
+var _fnMKMapRectEqualToRect func(unsafe.Pointer, unsafe.Pointer) bool
+
+// MKMapRectEqualToRect calls the MapKit framework function MKMapRectEqualToRect.
+func MKMapRectEqualToRect(rect1 unsafe.Pointer, rect2 unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectEqualToRect == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectEqualToRect, _lib, "MKMapRectEqualToRect")
+	}
+	return _fnMKMapRectEqualToRect(rect1, rect2)
+}
+
+var _fnMKMapRectGetHeight func(unsafe.Pointer) float64
+
+// MKMapRectGetHeight calls the MapKit framework function MKMapRectGetHeight.
+func MKMapRectGetHeight(rect unsafe.Pointer) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectGetHeight == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectGetHeight, _lib, "MKMapRectGetHeight")
+	}
+	return _fnMKMapRectGetHeight(rect)
+}
+
+var _fnMKMapRectGetMaxX func(unsafe.Pointer) float64
+
+// MKMapRectGetMaxX calls the MapKit framework function MKMapRectGetMaxX.
+func MKMapRectGetMaxX(rect unsafe.Pointer) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectGetMaxX == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectGetMaxX, _lib, "MKMapRectGetMaxX")
+	}
+	return _fnMKMapRectGetMaxX(rect)
+}
+
+var _fnMKMapRectGetMaxY func(unsafe.Pointer) float64
+
+// MKMapRectGetMaxY calls the MapKit framework function MKMapRectGetMaxY.
+func MKMapRectGetMaxY(rect unsafe.Pointer) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectGetMaxY == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectGetMaxY, _lib, "MKMapRectGetMaxY")
+	}
+	return _fnMKMapRectGetMaxY(rect)
+}
+
+var _fnMKMapRectGetMidX func(unsafe.Pointer) float64
+
+// MKMapRectGetMidX calls the MapKit framework function MKMapRectGetMidX.
+func MKMapRectGetMidX(rect unsafe.Pointer) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectGetMidX == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectGetMidX, _lib, "MKMapRectGetMidX")
+	}
+	return _fnMKMapRectGetMidX(rect)
+}
+
+var _fnMKMapRectGetMidY func(unsafe.Pointer) float64
+
+// MKMapRectGetMidY calls the MapKit framework function MKMapRectGetMidY.
+func MKMapRectGetMidY(rect unsafe.Pointer) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectGetMidY == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectGetMidY, _lib, "MKMapRectGetMidY")
+	}
+	return _fnMKMapRectGetMidY(rect)
+}
+
+var _fnMKMapRectGetMinX func(unsafe.Pointer) float64
+
+// MKMapRectGetMinX calls the MapKit framework function MKMapRectGetMinX.
+func MKMapRectGetMinX(rect unsafe.Pointer) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectGetMinX == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectGetMinX, _lib, "MKMapRectGetMinX")
+	}
+	return _fnMKMapRectGetMinX(rect)
+}
+
+var _fnMKMapRectGetMinY func(unsafe.Pointer) float64
+
+// MKMapRectGetMinY calls the MapKit framework function MKMapRectGetMinY.
+func MKMapRectGetMinY(rect unsafe.Pointer) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectGetMinY == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectGetMinY, _lib, "MKMapRectGetMinY")
+	}
+	return _fnMKMapRectGetMinY(rect)
+}
+
+var _fnMKMapRectGetWidth func(unsafe.Pointer) float64
+
+// MKMapRectGetWidth calls the MapKit framework function MKMapRectGetWidth.
+func MKMapRectGetWidth(rect unsafe.Pointer) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectGetWidth == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectGetWidth, _lib, "MKMapRectGetWidth")
+	}
+	return _fnMKMapRectGetWidth(rect)
+}
+
+var _fnMKMapRectIntersectsRect func(unsafe.Pointer, unsafe.Pointer) bool
+
+// MKMapRectIntersectsRect calls the MapKit framework function MKMapRectIntersectsRect.
+func MKMapRectIntersectsRect(rect1 unsafe.Pointer, rect2 unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectIntersectsRect == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectIntersectsRect, _lib, "MKMapRectIntersectsRect")
+	}
+	return _fnMKMapRectIntersectsRect(rect1, rect2)
+}
+
+var _fnMKMapRectIsEmpty func(unsafe.Pointer) bool
+
+// MKMapRectIsEmpty calls the MapKit framework function MKMapRectIsEmpty.
+func MKMapRectIsEmpty(rect unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectIsEmpty == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectIsEmpty, _lib, "MKMapRectIsEmpty")
+	}
+	return _fnMKMapRectIsEmpty(rect)
+}
+
+var _fnMKMapRectIsNull func(unsafe.Pointer) bool
+
+// MKMapRectIsNull calls the MapKit framework function MKMapRectIsNull.
+func MKMapRectIsNull(rect unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectIsNull == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectIsNull, _lib, "MKMapRectIsNull")
+	}
+	return _fnMKMapRectIsNull(rect)
+}
+
+var _fnMKMapRectSpans180thMeridian func(unsafe.Pointer) bool
+
+// MKMapRectSpans180thMeridian calls the MapKit framework function MKMapRectSpans180thMeridian.
+func MKMapRectSpans180thMeridian(rect unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapRectSpans180thMeridian == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapRectSpans180thMeridian, _lib, "MKMapRectSpans180thMeridian")
+	}
+	return _fnMKMapRectSpans180thMeridian(rect)
+}
+
+var _fnMKMapSizeEqualToSize func(unsafe.Pointer, unsafe.Pointer) bool
+
+// MKMapSizeEqualToSize calls the MapKit framework function MKMapSizeEqualToSize.
+func MKMapSizeEqualToSize(size1 unsafe.Pointer, size2 unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKMapSizeEqualToSize == nil {
+		ebipurego.RegisterLibFunc(&_fnMKMapSizeEqualToSize, _lib, "MKMapSizeEqualToSize")
+	}
+	return _fnMKMapSizeEqualToSize(size1, size2)
+}
+
 var _fnMKRoadWidthAtZoomScale func(float64) float64
 
 // MKRoadWidthAtZoomScale calls the MapKit framework function MKRoadWidthAtZoomScale.
@@ -30,4 +233,49 @@ func MKRoadWidthAtZoomScale(zoomScale float64) float64 {
 		ebipurego.RegisterLibFunc(&_fnMKRoadWidthAtZoomScale, _lib, "MKRoadWidthAtZoomScale")
 	}
 	return _fnMKRoadWidthAtZoomScale(zoomScale)
+}
+
+var _fnMKStringFromMapPoint func(unsafe.Pointer) objc.ID
+
+// MKStringFromMapPoint calls the MapKit framework function MKStringFromMapPoint.
+func MKStringFromMapPoint(point unsafe.Pointer) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKStringFromMapPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnMKStringFromMapPoint, _lib, "MKStringFromMapPoint")
+	}
+	_ret := _fnMKStringFromMapPoint(point)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnMKStringFromMapRect func(unsafe.Pointer) objc.ID
+
+// MKStringFromMapRect calls the MapKit framework function MKStringFromMapRect.
+func MKStringFromMapRect(rect unsafe.Pointer) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKStringFromMapRect == nil {
+		ebipurego.RegisterLibFunc(&_fnMKStringFromMapRect, _lib, "MKStringFromMapRect")
+	}
+	_ret := _fnMKStringFromMapRect(rect)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnMKStringFromMapSize func(unsafe.Pointer) objc.ID
+
+// MKStringFromMapSize calls the MapKit framework function MKStringFromMapSize.
+func MKStringFromMapSize(size unsafe.Pointer) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMKStringFromMapSize == nil {
+		ebipurego.RegisterLibFunc(&_fnMKStringFromMapSize, _lib, "MKStringFromMapSize")
+	}
+	_ret := _fnMKStringFromMapSize(size)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }

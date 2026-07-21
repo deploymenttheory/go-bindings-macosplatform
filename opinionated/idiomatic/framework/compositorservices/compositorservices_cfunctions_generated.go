@@ -27,6 +27,18 @@ func CpDrawableAddMtl4RenderContext(drawable obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnCpDrawableAddRenderContext func(objc.ID, unsafe.Pointer) objc.ID
+
+// CpDrawableAddRenderContext calls the CompositorServices framework function cp_drawable_add_render_context.
+func CpDrawableAddRenderContext(drawable obj.Object, cmdBuffer unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpDrawableAddRenderContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCpDrawableAddRenderContext, _lib, "cp_drawable_add_render_context")
+	}
+	_ret := _fnCpDrawableAddRenderContext(objref.IDOf(drawable), cmdBuffer)
+	return obj.Wrap(_ret)
+}
+
 var _fnCpDrawableAddTrackingArea func(objc.ID, uint64) objc.ID
 
 // CpDrawableAddTrackingArea calls the CompositorServices framework function cp_drawable_add_tracking_area.
@@ -60,6 +72,17 @@ func CpDrawableArrayGetDrawable(drawableArray obj.Object, index int) obj.Object 
 	}
 	_ret := _fnCpDrawableArrayGetDrawable(objref.IDOf(drawableArray), index)
 	return obj.Wrap(_ret)
+}
+
+var _fnCpDrawableEncodePresent func(objc.ID, unsafe.Pointer)
+
+// CpDrawableEncodePresent calls the CompositorServices framework function cp_drawable_encode_present.
+func CpDrawableEncodePresent(drawable obj.Object, commandBuffer unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpDrawableEncodePresent == nil {
+		ebipurego.RegisterLibFunc(&_fnCpDrawableEncodePresent, _lib, "cp_drawable_encode_present")
+	}
+	_fnCpDrawableEncodePresent(objref.IDOf(drawable), commandBuffer)
 }
 
 var _fnCpDrawableGetDeviceAnchor func(objc.ID) objc.ID
@@ -184,6 +207,50 @@ func CpDrawableMtl4EncodePresent(drawable obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableMtl4EncodePresent, _lib, "cp_drawable_mtl4_encode_present")
 	}
 	_fnCpDrawableMtl4EncodePresent(objref.IDOf(drawable))
+}
+
+var _fnCpDrawableRenderContextDrawMaskOnStencilAttachment func(objc.ID, unsafe.Pointer, uint8)
+
+// CpDrawableRenderContextDrawMaskOnStencilAttachment calls the CompositorServices framework function cp_drawable_render_context_draw_mask_on_stencil_attachment.
+func CpDrawableRenderContextDrawMaskOnStencilAttachment(renderContext obj.Object, commandEncoder unsafe.Pointer, value uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpDrawableRenderContextDrawMaskOnStencilAttachment == nil {
+		ebipurego.RegisterLibFunc(&_fnCpDrawableRenderContextDrawMaskOnStencilAttachment, _lib, "cp_drawable_render_context_draw_mask_on_stencil_attachment")
+	}
+	_fnCpDrawableRenderContextDrawMaskOnStencilAttachment(objref.IDOf(renderContext), commandEncoder, value)
+}
+
+var _fnCpDrawableRenderContextEndEncoding func(objc.ID, unsafe.Pointer)
+
+// CpDrawableRenderContextEndEncoding calls the CompositorServices framework function cp_drawable_render_context_end_encoding.
+func CpDrawableRenderContextEndEncoding(renderContext obj.Object, commandEncoder unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpDrawableRenderContextEndEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCpDrawableRenderContextEndEncoding, _lib, "cp_drawable_render_context_end_encoding")
+	}
+	_fnCpDrawableRenderContextEndEncoding(objref.IDOf(renderContext), commandEncoder)
+}
+
+var _fnCpDrawableRenderContextMtl4DrawMaskOnStencilAttachment func(objc.ID, unsafe.Pointer, uint8)
+
+// CpDrawableRenderContextMtl4DrawMaskOnStencilAttachment calls the CompositorServices framework function cp_drawable_render_context_mtl4_draw_mask_on_stencil_attachment.
+func CpDrawableRenderContextMtl4DrawMaskOnStencilAttachment(renderContext obj.Object, commandEncoder unsafe.Pointer, value uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpDrawableRenderContextMtl4DrawMaskOnStencilAttachment == nil {
+		ebipurego.RegisterLibFunc(&_fnCpDrawableRenderContextMtl4DrawMaskOnStencilAttachment, _lib, "cp_drawable_render_context_mtl4_draw_mask_on_stencil_attachment")
+	}
+	_fnCpDrawableRenderContextMtl4DrawMaskOnStencilAttachment(objref.IDOf(renderContext), commandEncoder, value)
+}
+
+var _fnCpDrawableRenderContextMtl4EndEncoding func(objc.ID, unsafe.Pointer)
+
+// CpDrawableRenderContextMtl4EndEncoding calls the CompositorServices framework function cp_drawable_render_context_mtl4_end_encoding.
+func CpDrawableRenderContextMtl4EndEncoding(renderContext obj.Object, commandEncoder unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpDrawableRenderContextMtl4EndEncoding == nil {
+		ebipurego.RegisterLibFunc(&_fnCpDrawableRenderContextMtl4EndEncoding, _lib, "cp_drawable_render_context_mtl4_end_encoding")
+	}
+	_fnCpDrawableRenderContextMtl4EndEncoding(objref.IDOf(renderContext), commandEncoder)
 }
 
 var _fnCpDrawableSetDepthRange func(objc.ID, unsafe.Pointer)
@@ -463,6 +530,28 @@ func CpLayerRendererConfigurationGetSupportsMtl4(configuration *_cp_layer_render
 	return _fnCpLayerRendererConfigurationGetSupportsMtl4(objref.IDOf(configuration))
 }
 
+var _fnCpLayerRendererConfigurationSetColorFormat func(objc.ID, unsafe.Pointer)
+
+// CpLayerRendererConfigurationSetColorFormat calls the CompositorServices framework function cp_layer_renderer_configuration_set_color_format.
+func CpLayerRendererConfigurationSetColorFormat(configuration *_cp_layer_renderer_configuration, colorFormat unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpLayerRendererConfigurationSetColorFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCpLayerRendererConfigurationSetColorFormat, _lib, "cp_layer_renderer_configuration_set_color_format")
+	}
+	_fnCpLayerRendererConfigurationSetColorFormat(objref.IDOf(configuration), colorFormat)
+}
+
+var _fnCpLayerRendererConfigurationSetColorUsage func(objc.ID, unsafe.Pointer)
+
+// CpLayerRendererConfigurationSetColorUsage calls the CompositorServices framework function cp_layer_renderer_configuration_set_color_usage.
+func CpLayerRendererConfigurationSetColorUsage(configuration *_cp_layer_renderer_configuration, colorUsage unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpLayerRendererConfigurationSetColorUsage == nil {
+		ebipurego.RegisterLibFunc(&_fnCpLayerRendererConfigurationSetColorUsage, _lib, "cp_layer_renderer_configuration_set_color_usage")
+	}
+	_fnCpLayerRendererConfigurationSetColorUsage(objref.IDOf(configuration), colorUsage)
+}
+
 var _fnCpLayerRendererConfigurationSetDefaultDepthRange func(objc.ID, unsafe.Pointer)
 
 // CpLayerRendererConfigurationSetDefaultDepthRange calls the CompositorServices framework function cp_layer_renderer_configuration_set_default_depth_range.
@@ -474,6 +563,28 @@ func CpLayerRendererConfigurationSetDefaultDepthRange(configuration *_cp_layer_r
 	_fnCpLayerRendererConfigurationSetDefaultDepthRange(objref.IDOf(configuration), depthRange)
 }
 
+var _fnCpLayerRendererConfigurationSetDepthFormat func(objc.ID, unsafe.Pointer)
+
+// CpLayerRendererConfigurationSetDepthFormat calls the CompositorServices framework function cp_layer_renderer_configuration_set_depth_format.
+func CpLayerRendererConfigurationSetDepthFormat(configuration *_cp_layer_renderer_configuration, depthFormat unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpLayerRendererConfigurationSetDepthFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCpLayerRendererConfigurationSetDepthFormat, _lib, "cp_layer_renderer_configuration_set_depth_format")
+	}
+	_fnCpLayerRendererConfigurationSetDepthFormat(objref.IDOf(configuration), depthFormat)
+}
+
+var _fnCpLayerRendererConfigurationSetDepthUsage func(objc.ID, unsafe.Pointer)
+
+// CpLayerRendererConfigurationSetDepthUsage calls the CompositorServices framework function cp_layer_renderer_configuration_set_depth_usage.
+func CpLayerRendererConfigurationSetDepthUsage(configuration *_cp_layer_renderer_configuration, depthUsage unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpLayerRendererConfigurationSetDepthUsage == nil {
+		ebipurego.RegisterLibFunc(&_fnCpLayerRendererConfigurationSetDepthUsage, _lib, "cp_layer_renderer_configuration_set_depth_usage")
+	}
+	_fnCpLayerRendererConfigurationSetDepthUsage(objref.IDOf(configuration), depthUsage)
+}
+
 var _fnCpLayerRendererConfigurationSetDrawableRenderContextRasterSampleCount func(objc.ID, int)
 
 // CpLayerRendererConfigurationSetDrawableRenderContextRasterSampleCount calls the CompositorServices framework function cp_layer_renderer_configuration_set_drawable_render_context_raster_sample_count.
@@ -483,6 +594,17 @@ func CpLayerRendererConfigurationSetDrawableRenderContextRasterSampleCount(confi
 		ebipurego.RegisterLibFunc(&_fnCpLayerRendererConfigurationSetDrawableRenderContextRasterSampleCount, _lib, "cp_layer_renderer_configuration_set_drawable_render_context_raster_sample_count")
 	}
 	_fnCpLayerRendererConfigurationSetDrawableRenderContextRasterSampleCount(objref.IDOf(configuration), rasterSampleCount)
+}
+
+var _fnCpLayerRendererConfigurationSetDrawableRenderContextStencilFormat func(objc.ID, unsafe.Pointer)
+
+// CpLayerRendererConfigurationSetDrawableRenderContextStencilFormat calls the CompositorServices framework function cp_layer_renderer_configuration_set_drawable_render_context_stencil_format.
+func CpLayerRendererConfigurationSetDrawableRenderContextStencilFormat(configuration *_cp_layer_renderer_configuration, stencilFormat unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpLayerRendererConfigurationSetDrawableRenderContextStencilFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCpLayerRendererConfigurationSetDrawableRenderContextStencilFormat, _lib, "cp_layer_renderer_configuration_set_drawable_render_context_stencil_format")
+	}
+	_fnCpLayerRendererConfigurationSetDrawableRenderContextStencilFormat(objref.IDOf(configuration), stencilFormat)
 }
 
 var _fnCpLayerRendererConfigurationSetFoveationEnabled func(objc.ID, bool)
@@ -538,6 +660,28 @@ func CpLayerRendererConfigurationSetSupportsMtl4(configuration *_cp_layer_render
 		ebipurego.RegisterLibFunc(&_fnCpLayerRendererConfigurationSetSupportsMtl4, _lib, "cp_layer_renderer_configuration_set_supports_mtl4")
 	}
 	_fnCpLayerRendererConfigurationSetSupportsMtl4(objref.IDOf(configuration), supportsMtl4)
+}
+
+var _fnCpLayerRendererConfigurationSetTrackingAreasFormat func(objc.ID, unsafe.Pointer)
+
+// CpLayerRendererConfigurationSetTrackingAreasFormat calls the CompositorServices framework function cp_layer_renderer_configuration_set_tracking_areas_format.
+func CpLayerRendererConfigurationSetTrackingAreasFormat(configuration *_cp_layer_renderer_configuration, trackingAreasFormat unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpLayerRendererConfigurationSetTrackingAreasFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCpLayerRendererConfigurationSetTrackingAreasFormat, _lib, "cp_layer_renderer_configuration_set_tracking_areas_format")
+	}
+	_fnCpLayerRendererConfigurationSetTrackingAreasFormat(objref.IDOf(configuration), trackingAreasFormat)
+}
+
+var _fnCpLayerRendererConfigurationSetTrackingAreasUsage func(objc.ID, unsafe.Pointer)
+
+// CpLayerRendererConfigurationSetTrackingAreasUsage calls the CompositorServices framework function cp_layer_renderer_configuration_set_tracking_areas_usage.
+func CpLayerRendererConfigurationSetTrackingAreasUsage(configuration *_cp_layer_renderer_configuration, trackingAreasUsage unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpLayerRendererConfigurationSetTrackingAreasUsage == nil {
+		ebipurego.RegisterLibFunc(&_fnCpLayerRendererConfigurationSetTrackingAreasUsage, _lib, "cp_layer_renderer_configuration_set_tracking_areas_usage")
+	}
+	_fnCpLayerRendererConfigurationSetTrackingAreasUsage(objref.IDOf(configuration), trackingAreasUsage)
 }
 
 var _fnCpLayerRendererGetConfiguration func(objc.ID) objc.ID
@@ -707,6 +851,28 @@ func CpTextureTopologyGetArrayLength(textureTopology obj.Object) uint64 {
 		ebipurego.RegisterLibFunc(&_fnCpTextureTopologyGetArrayLength, _lib, "cp_texture_topology_get_array_length")
 	}
 	return _fnCpTextureTopologyGetArrayLength(objref.IDOf(textureTopology))
+}
+
+var _fnCpTimeToCfTimeInterval func(unsafe.Pointer) float64
+
+// CpTimeToCfTimeInterval calls the CompositorServices framework function cp_time_to_cf_time_interval.
+func CpTimeToCfTimeInterval(time_ unsafe.Pointer) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpTimeToCfTimeInterval == nil {
+		ebipurego.RegisterLibFunc(&_fnCpTimeToCfTimeInterval, _lib, "cp_time_to_cf_time_interval")
+	}
+	return _fnCpTimeToCfTimeInterval(time_)
+}
+
+var _fnCpTimeWaitUntil func(unsafe.Pointer)
+
+// CpTimeWaitUntil calls the CompositorServices framework function cp_time_wait_until.
+func CpTimeWaitUntil(time_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCpTimeWaitUntil == nil {
+		ebipurego.RegisterLibFunc(&_fnCpTimeWaitUntil, _lib, "cp_time_wait_until")
+	}
+	_fnCpTimeWaitUntil(time_)
 }
 
 var _fnCpTrackingAreaAddAutomaticHoverEffect func(objc.ID) objc.ID

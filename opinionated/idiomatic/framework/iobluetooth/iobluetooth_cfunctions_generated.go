@@ -85,6 +85,47 @@ func IOBluetoothL2CAPChannelRegisterForChannelCloseNotification(channel obj.Obje
 	return obj.Wrap(_ret)
 }
 
+var _fnIOBluetoothNSStringFromDeviceAddress func(unsafe.Pointer) objc.ID
+
+// IOBluetoothNSStringFromDeviceAddress calls the IOBluetooth framework function IOBluetoothNSStringFromDeviceAddress.
+func IOBluetoothNSStringFromDeviceAddress(deviceAddress unsafe.Pointer) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothNSStringFromDeviceAddress == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothNSStringFromDeviceAddress, _lib, "IOBluetoothNSStringFromDeviceAddress")
+	}
+	_ret := _fnIOBluetoothNSStringFromDeviceAddress(deviceAddress)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnIOBluetoothNSStringFromDeviceAddressColon func(unsafe.Pointer) objc.ID
+
+// IOBluetoothNSStringFromDeviceAddressColon calls the IOBluetooth framework function IOBluetoothNSStringFromDeviceAddressColon.
+func IOBluetoothNSStringFromDeviceAddressColon(deviceAddress unsafe.Pointer) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothNSStringFromDeviceAddressColon == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothNSStringFromDeviceAddressColon, _lib, "IOBluetoothNSStringFromDeviceAddressColon")
+	}
+	_ret := _fnIOBluetoothNSStringFromDeviceAddressColon(deviceAddress)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnIOBluetoothNSStringToDeviceAddress func(objc.ID, unsafe.Pointer) int32
+
+// IOBluetoothNSStringToDeviceAddress calls the IOBluetooth framework function IOBluetoothNSStringToDeviceAddress.
+func IOBluetoothNSStringToDeviceAddress(inNameString string, outDeviceAddress unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothNSStringToDeviceAddress == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothNSStringToDeviceAddress, _lib, "IOBluetoothNSStringToDeviceAddress")
+	}
+	return int(_fnIOBluetoothNSStringToDeviceAddress(purego.NSString(inNameString), outDeviceAddress))
+}
+
 var _fnIOBluetoothNumberOfAvailableHIDDevices func() int
 
 // IOBluetoothNumberOfAvailableHIDDevices calls the IOBluetooth framework function IOBluetoothNumberOfAvailableHIDDevices.

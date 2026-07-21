@@ -13,6 +13,83 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+var _fnAuthorizationCopyInfo func(objc.ID, string, unsafe.Pointer) int32
+
+// AuthorizationCopyInfo calls the Security framework function AuthorizationCopyInfo.
+func AuthorizationCopyInfo(authorization obj.Object, tag string, info unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAuthorizationCopyInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnAuthorizationCopyInfo, _lib, "AuthorizationCopyInfo")
+	}
+	return int(_fnAuthorizationCopyInfo(objref.IDOf(authorization), tag, info))
+}
+
+var _fnAuthorizationCopyRights func(objc.ID, unsafe.Pointer, unsafe.Pointer, AuthorizationFlags, unsafe.Pointer) int32
+
+// AuthorizationCopyRights calls the Security framework function AuthorizationCopyRights.
+func AuthorizationCopyRights(authorization obj.Object, rights unsafe.Pointer, environment unsafe.Pointer, flags AuthorizationFlags, authorizedRights unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAuthorizationCopyRights == nil {
+		ebipurego.RegisterLibFunc(&_fnAuthorizationCopyRights, _lib, "AuthorizationCopyRights")
+	}
+	return int(_fnAuthorizationCopyRights(objref.IDOf(authorization), rights, environment, flags, authorizedRights))
+}
+
+var _fnAuthorizationCopyRightsAsync func(objc.ID, unsafe.Pointer, unsafe.Pointer, AuthorizationFlags, unsafe.Pointer)
+
+// AuthorizationCopyRightsAsync calls the Security framework function AuthorizationCopyRightsAsync.
+func AuthorizationCopyRightsAsync(authorization obj.Object, rights unsafe.Pointer, environment unsafe.Pointer, flags AuthorizationFlags, callbackBlock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAuthorizationCopyRightsAsync == nil {
+		ebipurego.RegisterLibFunc(&_fnAuthorizationCopyRightsAsync, _lib, "AuthorizationCopyRightsAsync")
+	}
+	_fnAuthorizationCopyRightsAsync(objref.IDOf(authorization), rights, environment, flags, callbackBlock)
+}
+
+var _fnAuthorizationCreate func(unsafe.Pointer, unsafe.Pointer, AuthorizationFlags, unsafe.Pointer) int32
+
+// AuthorizationCreate calls the Security framework function AuthorizationCreate.
+func AuthorizationCreate(rights unsafe.Pointer, environment unsafe.Pointer, flags AuthorizationFlags, authorization unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAuthorizationCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnAuthorizationCreate, _lib, "AuthorizationCreate")
+	}
+	return int(_fnAuthorizationCreate(rights, environment, flags, authorization))
+}
+
+var _fnAuthorizationCreateFromExternalForm func(unsafe.Pointer, unsafe.Pointer) int32
+
+// AuthorizationCreateFromExternalForm calls the Security framework function AuthorizationCreateFromExternalForm.
+func AuthorizationCreateFromExternalForm(extForm unsafe.Pointer, authorization unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAuthorizationCreateFromExternalForm == nil {
+		ebipurego.RegisterLibFunc(&_fnAuthorizationCreateFromExternalForm, _lib, "AuthorizationCreateFromExternalForm")
+	}
+	return int(_fnAuthorizationCreateFromExternalForm(extForm, authorization))
+}
+
+var _fnAuthorizationFreeItemSet func(unsafe.Pointer) int32
+
+// AuthorizationFreeItemSet calls the Security framework function AuthorizationFreeItemSet.
+func AuthorizationFreeItemSet(set unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAuthorizationFreeItemSet == nil {
+		ebipurego.RegisterLibFunc(&_fnAuthorizationFreeItemSet, _lib, "AuthorizationFreeItemSet")
+	}
+	return int(_fnAuthorizationFreeItemSet(set))
+}
+
+var _fnAuthorizationMakeExternalForm func(objc.ID, unsafe.Pointer) int32
+
+// AuthorizationMakeExternalForm calls the Security framework function AuthorizationMakeExternalForm.
+func AuthorizationMakeExternalForm(authorization obj.Object, extForm unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAuthorizationMakeExternalForm == nil {
+		ebipurego.RegisterLibFunc(&_fnAuthorizationMakeExternalForm, _lib, "AuthorizationMakeExternalForm")
+	}
+	return int(_fnAuthorizationMakeExternalForm(objref.IDOf(authorization), extForm))
+}
+
 var _fnCMSDecoderCopySignerSigningTime func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerSigningTime calls the Security framework function CMSDecoderCopySignerSigningTime.
@@ -103,6 +180,17 @@ func CMSDecoderIsContentEncrypted(cmsDecoder obj.Object) (result int, isEncrypte
 	return _ret, _out0
 }
 
+var _fnCMSEncode func(objc.ID, objc.ID, unsafe.Pointer, uint8, CMSSignedAttributes, unsafe.Pointer, int, unsafe.Pointer) int32
+
+// CMSEncode calls the Security framework function CMSEncode.
+func CMSEncode(signers obj.Object, recipients obj.Object, eContentType unsafe.Pointer, detachedContent uint8, signedAttributes CMSSignedAttributes, content unsafe.Pointer, contentLen int, encodedContentOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSEncode == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSEncode, _lib, "CMSEncode")
+	}
+	return int(_fnCMSEncode(objref.IDOf(signers), objref.IDOf(recipients), eContentType, detachedContent, signedAttributes, content, contentLen, encodedContentOut))
+}
+
 var _fnCMSEncoderCopySignerTimestamp func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSEncoderCopySignerTimestamp calls the Security framework function CMSEncoderCopySignerTimestamp.
@@ -166,6 +254,39 @@ func CMSEncoderGetTypeID() int {
 	return _fnCMSEncoderGetTypeID()
 }
 
+var _fnCMSEncoderSetEncapsulatedContentType func(objc.ID, unsafe.Pointer) int32
+
+// CMSEncoderSetEncapsulatedContentType calls the Security framework function CMSEncoderSetEncapsulatedContentType.
+func CMSEncoderSetEncapsulatedContentType(cmsEncoder obj.Object, eContentType unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSEncoderSetEncapsulatedContentType == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSEncoderSetEncapsulatedContentType, _lib, "CMSEncoderSetEncapsulatedContentType")
+	}
+	return int(_fnCMSEncoderSetEncapsulatedContentType(objref.IDOf(cmsEncoder), eContentType))
+}
+
+var _fnCSSM_AC_AuthCompute func(int, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_AC_AuthCompute calls the Security framework function CSSM_AC_AuthCompute.
+func CSSM_AC_AuthCompute(acHandle int, baseAuthorizations unsafe.Pointer, credentials unsafe.Pointer, numberOfRequestors uint32, requestors unsafe.Pointer, requestedAuthorizationPeriod unsafe.Pointer, requestedAuthorization unsafe.Pointer, authorizationResult unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_AC_AuthCompute == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_AC_AuthCompute, _lib, "CSSM_AC_AuthCompute")
+	}
+	return _fnCSSM_AC_AuthCompute(acHandle, baseAuthorizations, credentials, numberOfRequestors, requestors, requestedAuthorizationPeriod, requestedAuthorization, authorizationResult)
+}
+
+var _fnCSSM_AC_PassThrough func(int, int, int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_AC_PassThrough calls the Security framework function CSSM_AC_PassThrough.
+func CSSM_AC_PassThrough(acHandle int, tpHandle int, clHandle int, ccHandle uint64, dbList unsafe.Pointer, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_AC_PassThrough == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_AC_PassThrough, _lib, "CSSM_AC_PassThrough")
+	}
+	return _fnCSSM_AC_PassThrough(acHandle, tpHandle, clHandle, ccHandle, dbList, passThroughId, inputParams, outputParams)
+}
+
 var _fnCSSM_CL_CertAbortCache func(int, int) int32
 
 // CSSM_CL_CertAbortCache calls the Security framework function CSSM_CL_CertAbortCache.
@@ -186,6 +307,187 @@ func CSSM_CL_CertAbortQuery(clHandle int, resultsHandle int) int32 {
 		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertAbortQuery, _lib, "CSSM_CL_CertAbortQuery")
 	}
 	return _fnCSSM_CL_CertAbortQuery(clHandle, resultsHandle)
+}
+
+var _fnCSSM_CL_CertCache func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CertCache calls the Security framework function CSSM_CL_CertCache.
+func CSSM_CL_CertCache(clHandle int, cert unsafe.Pointer) (result int32, certHandle int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertCache == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertCache, _lib, "CSSM_CL_CertCache")
+	}
+	var _out0 int
+	_ret := _fnCSSM_CL_CertCache(clHandle, cert, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnCSSM_CL_CertCreateTemplate func(int, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CertCreateTemplate calls the Security framework function CSSM_CL_CertCreateTemplate.
+func CSSM_CL_CertCreateTemplate(clHandle int, numberOfFields uint32, certFields unsafe.Pointer, certTemplate unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertCreateTemplate == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertCreateTemplate, _lib, "CSSM_CL_CertCreateTemplate")
+	}
+	return _fnCSSM_CL_CertCreateTemplate(clHandle, numberOfFields, certFields, certTemplate)
+}
+
+var _fnCSSM_CL_CertDescribeFormat func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CertDescribeFormat calls the Security framework function CSSM_CL_CertDescribeFormat.
+func CSSM_CL_CertDescribeFormat(clHandle int, oidList unsafe.Pointer) (result int32, numberOfFields uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertDescribeFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertDescribeFormat, _lib, "CSSM_CL_CertDescribeFormat")
+	}
+	var _out0 uint32
+	_ret := _fnCSSM_CL_CertDescribeFormat(clHandle, unsafe.Pointer(&_out0), oidList)
+	return _ret, _out0
+}
+
+var _fnCSSM_CL_CertGetAllFields func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CertGetAllFields calls the Security framework function CSSM_CL_CertGetAllFields.
+func CSSM_CL_CertGetAllFields(clHandle int, cert unsafe.Pointer, certFields unsafe.Pointer) (result int32, numberOfFields uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertGetAllFields == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertGetAllFields, _lib, "CSSM_CL_CertGetAllFields")
+	}
+	var _out0 uint32
+	_ret := _fnCSSM_CL_CertGetAllFields(clHandle, cert, unsafe.Pointer(&_out0), certFields)
+	return _ret, _out0
+}
+
+var _fnCSSM_CL_CertGetAllTemplateFields func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CertGetAllTemplateFields calls the Security framework function CSSM_CL_CertGetAllTemplateFields.
+func CSSM_CL_CertGetAllTemplateFields(clHandle int, certTemplate unsafe.Pointer, certFields unsafe.Pointer) (result int32, numberOfFields uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertGetAllTemplateFields == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertGetAllTemplateFields, _lib, "CSSM_CL_CertGetAllTemplateFields")
+	}
+	var _out0 uint32
+	_ret := _fnCSSM_CL_CertGetAllTemplateFields(clHandle, certTemplate, unsafe.Pointer(&_out0), certFields)
+	return _ret, _out0
+}
+
+var _fnCSSM_CL_CertGetFirstCachedFieldValue func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CertGetFirstCachedFieldValue calls the Security framework function CSSM_CL_CertGetFirstCachedFieldValue.
+func CSSM_CL_CertGetFirstCachedFieldValue(clHandle int, certHandle int, certField unsafe.Pointer, value unsafe.Pointer) (result int32, resultsHandle int, numberOfMatchedFields uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertGetFirstCachedFieldValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertGetFirstCachedFieldValue, _lib, "CSSM_CL_CertGetFirstCachedFieldValue")
+	}
+	var _out0 int
+	var _out1 uint32
+	_ret := _fnCSSM_CL_CertGetFirstCachedFieldValue(clHandle, certHandle, certField, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), value)
+	return _ret, _out0, _out1
+}
+
+var _fnCSSM_CL_CertGetFirstFieldValue func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CertGetFirstFieldValue calls the Security framework function CSSM_CL_CertGetFirstFieldValue.
+func CSSM_CL_CertGetFirstFieldValue(clHandle int, cert unsafe.Pointer, certField unsafe.Pointer, value unsafe.Pointer) (result int32, resultsHandle int, numberOfMatchedFields uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertGetFirstFieldValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertGetFirstFieldValue, _lib, "CSSM_CL_CertGetFirstFieldValue")
+	}
+	var _out0 int
+	var _out1 uint32
+	_ret := _fnCSSM_CL_CertGetFirstFieldValue(clHandle, cert, certField, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), value)
+	return _ret, _out0, _out1
+}
+
+var _fnCSSM_CL_CertGetKeyInfo func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CertGetKeyInfo calls the Security framework function CSSM_CL_CertGetKeyInfo.
+func CSSM_CL_CertGetKeyInfo(clHandle int, cert unsafe.Pointer, key unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertGetKeyInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertGetKeyInfo, _lib, "CSSM_CL_CertGetKeyInfo")
+	}
+	return _fnCSSM_CL_CertGetKeyInfo(clHandle, cert, key)
+}
+
+var _fnCSSM_CL_CertGetNextCachedFieldValue func(int, int, unsafe.Pointer) int32
+
+// CSSM_CL_CertGetNextCachedFieldValue calls the Security framework function CSSM_CL_CertGetNextCachedFieldValue.
+func CSSM_CL_CertGetNextCachedFieldValue(clHandle int, resultsHandle int, value unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertGetNextCachedFieldValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertGetNextCachedFieldValue, _lib, "CSSM_CL_CertGetNextCachedFieldValue")
+	}
+	return _fnCSSM_CL_CertGetNextCachedFieldValue(clHandle, resultsHandle, value)
+}
+
+var _fnCSSM_CL_CertGetNextFieldValue func(int, int, unsafe.Pointer) int32
+
+// CSSM_CL_CertGetNextFieldValue calls the Security framework function CSSM_CL_CertGetNextFieldValue.
+func CSSM_CL_CertGetNextFieldValue(clHandle int, resultsHandle int, value unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertGetNextFieldValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertGetNextFieldValue, _lib, "CSSM_CL_CertGetNextFieldValue")
+	}
+	return _fnCSSM_CL_CertGetNextFieldValue(clHandle, resultsHandle, value)
+}
+
+var _fnCSSM_CL_CertGroupFromVerifiedBundle func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CertGroupFromVerifiedBundle calls the Security framework function CSSM_CL_CertGroupFromVerifiedBundle.
+func CSSM_CL_CertGroupFromVerifiedBundle(clHandle int, ccHandle uint64, certBundle unsafe.Pointer, signerCert unsafe.Pointer, certGroup unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertGroupFromVerifiedBundle == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertGroupFromVerifiedBundle, _lib, "CSSM_CL_CertGroupFromVerifiedBundle")
+	}
+	return _fnCSSM_CL_CertGroupFromVerifiedBundle(clHandle, ccHandle, certBundle, signerCert, certGroup)
+}
+
+var _fnCSSM_CL_CertGroupToSignedBundle func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CertGroupToSignedBundle calls the Security framework function CSSM_CL_CertGroupToSignedBundle.
+func CSSM_CL_CertGroupToSignedBundle(clHandle int, ccHandle uint64, certGroupToBundle unsafe.Pointer, signedBundle unsafe.Pointer) (result int32, bundleInfo CssmCertBundleHeader) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertGroupToSignedBundle == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertGroupToSignedBundle, _lib, "CSSM_CL_CertGroupToSignedBundle")
+	}
+	var _out0 CssmCertBundleHeader
+	_ret := _fnCSSM_CL_CertGroupToSignedBundle(clHandle, ccHandle, certGroupToBundle, unsafe.Pointer(&_out0), signedBundle)
+	return _ret, _out0
+}
+
+var _fnCSSM_CL_CertSign func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32
+
+// CSSM_CL_CertSign calls the Security framework function CSSM_CL_CertSign.
+func CSSM_CL_CertSign(clHandle int, ccHandle uint64, certTemplate unsafe.Pointer, signScope unsafe.Pointer, scopeSize uint32, signedCert unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertSign == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertSign, _lib, "CSSM_CL_CertSign")
+	}
+	return _fnCSSM_CL_CertSign(clHandle, ccHandle, certTemplate, signScope, scopeSize, signedCert)
+}
+
+var _fnCSSM_CL_CertVerify func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int32
+
+// CSSM_CL_CertVerify calls the Security framework function CSSM_CL_CertVerify.
+func CSSM_CL_CertVerify(clHandle int, ccHandle uint64, certToBeVerified unsafe.Pointer, signerCert unsafe.Pointer, verifyScope unsafe.Pointer, scopeSize uint32) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertVerify == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertVerify, _lib, "CSSM_CL_CertVerify")
+	}
+	return _fnCSSM_CL_CertVerify(clHandle, ccHandle, certToBeVerified, signerCert, verifyScope, scopeSize)
+}
+
+var _fnCSSM_CL_CertVerifyWithKey func(int, uint64, unsafe.Pointer) int32
+
+// CSSM_CL_CertVerifyWithKey calls the Security framework function CSSM_CL_CertVerifyWithKey.
+func CSSM_CL_CertVerifyWithKey(clHandle int, ccHandle uint64, certToBeVerified unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertVerifyWithKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertVerifyWithKey, _lib, "CSSM_CL_CertVerifyWithKey")
+	}
+	return _fnCSSM_CL_CertVerifyWithKey(clHandle, ccHandle, certToBeVerified)
 }
 
 var _fnCSSM_CL_CrlAbortCache func(int, int) int32
@@ -210,6 +512,233 @@ func CSSM_CL_CrlAbortQuery(clHandle int, resultsHandle int) int32 {
 	return _fnCSSM_CL_CrlAbortQuery(clHandle, resultsHandle)
 }
 
+var _fnCSSM_CL_CrlAddCert func(int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CrlAddCert calls the Security framework function CSSM_CL_CrlAddCert.
+func CSSM_CL_CrlAddCert(clHandle int, ccHandle uint64, cert unsafe.Pointer, numberOfFields uint32, crlEntryFields unsafe.Pointer, oldCrl unsafe.Pointer, newCrl unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlAddCert == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlAddCert, _lib, "CSSM_CL_CrlAddCert")
+	}
+	return _fnCSSM_CL_CrlAddCert(clHandle, ccHandle, cert, numberOfFields, crlEntryFields, oldCrl, newCrl)
+}
+
+var _fnCSSM_CL_CrlCache func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CrlCache calls the Security framework function CSSM_CL_CrlCache.
+func CSSM_CL_CrlCache(clHandle int, crl unsafe.Pointer) (result int32, crlHandle int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlCache == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlCache, _lib, "CSSM_CL_CrlCache")
+	}
+	var _out0 int
+	_ret := _fnCSSM_CL_CrlCache(clHandle, crl, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnCSSM_CL_CrlCreateTemplate func(int, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CrlCreateTemplate calls the Security framework function CSSM_CL_CrlCreateTemplate.
+func CSSM_CL_CrlCreateTemplate(clHandle int, numberOfFields uint32, crlTemplate unsafe.Pointer, newCrl unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlCreateTemplate == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlCreateTemplate, _lib, "CSSM_CL_CrlCreateTemplate")
+	}
+	return _fnCSSM_CL_CrlCreateTemplate(clHandle, numberOfFields, crlTemplate, newCrl)
+}
+
+var _fnCSSM_CL_CrlDescribeFormat func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CrlDescribeFormat calls the Security framework function CSSM_CL_CrlDescribeFormat.
+func CSSM_CL_CrlDescribeFormat(clHandle int, oidList unsafe.Pointer) (result int32, numberOfFields uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlDescribeFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlDescribeFormat, _lib, "CSSM_CL_CrlDescribeFormat")
+	}
+	var _out0 uint32
+	_ret := _fnCSSM_CL_CrlDescribeFormat(clHandle, unsafe.Pointer(&_out0), oidList)
+	return _ret, _out0
+}
+
+var _fnCSSM_CL_CrlGetAllCachedRecordFields func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CrlGetAllCachedRecordFields calls the Security framework function CSSM_CL_CrlGetAllCachedRecordFields.
+func CSSM_CL_CrlGetAllCachedRecordFields(clHandle int, crlHandle int, crlRecordIndex unsafe.Pointer, crlFields unsafe.Pointer) (result int32, numberOfFields uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlGetAllCachedRecordFields == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlGetAllCachedRecordFields, _lib, "CSSM_CL_CrlGetAllCachedRecordFields")
+	}
+	var _out0 uint32
+	_ret := _fnCSSM_CL_CrlGetAllCachedRecordFields(clHandle, crlHandle, crlRecordIndex, unsafe.Pointer(&_out0), crlFields)
+	return _ret, _out0
+}
+
+var _fnCSSM_CL_CrlGetAllFields func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CrlGetAllFields calls the Security framework function CSSM_CL_CrlGetAllFields.
+func CSSM_CL_CrlGetAllFields(clHandle int, crl unsafe.Pointer, crlFields unsafe.Pointer) (result int32, numberOfCrlFields uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlGetAllFields == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlGetAllFields, _lib, "CSSM_CL_CrlGetAllFields")
+	}
+	var _out0 uint32
+	_ret := _fnCSSM_CL_CrlGetAllFields(clHandle, crl, unsafe.Pointer(&_out0), crlFields)
+	return _ret, _out0
+}
+
+var _fnCSSM_CL_CrlGetFirstCachedFieldValue func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CrlGetFirstCachedFieldValue calls the Security framework function CSSM_CL_CrlGetFirstCachedFieldValue.
+func CSSM_CL_CrlGetFirstCachedFieldValue(clHandle int, crlHandle int, crlRecordIndex unsafe.Pointer, crlField unsafe.Pointer, value unsafe.Pointer) (result int32, resultsHandle int, numberOfMatchedFields uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlGetFirstCachedFieldValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlGetFirstCachedFieldValue, _lib, "CSSM_CL_CrlGetFirstCachedFieldValue")
+	}
+	var _out0 int
+	var _out1 uint32
+	_ret := _fnCSSM_CL_CrlGetFirstCachedFieldValue(clHandle, crlHandle, crlRecordIndex, crlField, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), value)
+	return _ret, _out0, _out1
+}
+
+var _fnCSSM_CL_CrlGetFirstFieldValue func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CrlGetFirstFieldValue calls the Security framework function CSSM_CL_CrlGetFirstFieldValue.
+func CSSM_CL_CrlGetFirstFieldValue(clHandle int, crl unsafe.Pointer, crlField unsafe.Pointer, value unsafe.Pointer) (result int32, resultsHandle int, numberOfMatchedFields uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlGetFirstFieldValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlGetFirstFieldValue, _lib, "CSSM_CL_CrlGetFirstFieldValue")
+	}
+	var _out0 int
+	var _out1 uint32
+	_ret := _fnCSSM_CL_CrlGetFirstFieldValue(clHandle, crl, crlField, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), value)
+	return _ret, _out0, _out1
+}
+
+var _fnCSSM_CL_CrlGetNextCachedFieldValue func(int, int, unsafe.Pointer) int32
+
+// CSSM_CL_CrlGetNextCachedFieldValue calls the Security framework function CSSM_CL_CrlGetNextCachedFieldValue.
+func CSSM_CL_CrlGetNextCachedFieldValue(clHandle int, resultsHandle int, value unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlGetNextCachedFieldValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlGetNextCachedFieldValue, _lib, "CSSM_CL_CrlGetNextCachedFieldValue")
+	}
+	return _fnCSSM_CL_CrlGetNextCachedFieldValue(clHandle, resultsHandle, value)
+}
+
+var _fnCSSM_CL_CrlGetNextFieldValue func(int, int, unsafe.Pointer) int32
+
+// CSSM_CL_CrlGetNextFieldValue calls the Security framework function CSSM_CL_CrlGetNextFieldValue.
+func CSSM_CL_CrlGetNextFieldValue(clHandle int, resultsHandle int, value unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlGetNextFieldValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlGetNextFieldValue, _lib, "CSSM_CL_CrlGetNextFieldValue")
+	}
+	return _fnCSSM_CL_CrlGetNextFieldValue(clHandle, resultsHandle, value)
+}
+
+var _fnCSSM_CL_CrlRemoveCert func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CrlRemoveCert calls the Security framework function CSSM_CL_CrlRemoveCert.
+func CSSM_CL_CrlRemoveCert(clHandle int, cert unsafe.Pointer, oldCrl unsafe.Pointer, newCrl unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlRemoveCert == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlRemoveCert, _lib, "CSSM_CL_CrlRemoveCert")
+	}
+	return _fnCSSM_CL_CrlRemoveCert(clHandle, cert, oldCrl, newCrl)
+}
+
+var _fnCSSM_CL_CrlSetFields func(int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_CrlSetFields calls the Security framework function CSSM_CL_CrlSetFields.
+func CSSM_CL_CrlSetFields(clHandle int, numberOfFields uint32, crlTemplate unsafe.Pointer, oldCrl unsafe.Pointer, modifiedCrl unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlSetFields == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlSetFields, _lib, "CSSM_CL_CrlSetFields")
+	}
+	return _fnCSSM_CL_CrlSetFields(clHandle, numberOfFields, crlTemplate, oldCrl, modifiedCrl)
+}
+
+var _fnCSSM_CL_CrlSign func(int, uint64, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32
+
+// CSSM_CL_CrlSign calls the Security framework function CSSM_CL_CrlSign.
+func CSSM_CL_CrlSign(clHandle int, ccHandle uint64, unsignedCrl unsafe.Pointer, signScope unsafe.Pointer, scopeSize uint32, signedCrl unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlSign == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlSign, _lib, "CSSM_CL_CrlSign")
+	}
+	return _fnCSSM_CL_CrlSign(clHandle, ccHandle, unsignedCrl, signScope, scopeSize, signedCrl)
+}
+
+var _fnCSSM_CL_CrlVerify func(int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int32
+
+// CSSM_CL_CrlVerify calls the Security framework function CSSM_CL_CrlVerify.
+func CSSM_CL_CrlVerify(clHandle int, ccHandle uint64, crlToBeVerified unsafe.Pointer, signerCert unsafe.Pointer, verifyScope unsafe.Pointer, scopeSize uint32) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlVerify == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlVerify, _lib, "CSSM_CL_CrlVerify")
+	}
+	return _fnCSSM_CL_CrlVerify(clHandle, ccHandle, crlToBeVerified, signerCert, verifyScope, scopeSize)
+}
+
+var _fnCSSM_CL_CrlVerifyWithKey func(int, uint64, unsafe.Pointer) int32
+
+// CSSM_CL_CrlVerifyWithKey calls the Security framework function CSSM_CL_CrlVerifyWithKey.
+func CSSM_CL_CrlVerifyWithKey(clHandle int, ccHandle uint64, crlToBeVerified unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlVerifyWithKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlVerifyWithKey, _lib, "CSSM_CL_CrlVerifyWithKey")
+	}
+	return _fnCSSM_CL_CrlVerifyWithKey(clHandle, ccHandle, crlToBeVerified)
+}
+
+var _fnCSSM_CL_FreeFieldValue func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_FreeFieldValue calls the Security framework function CSSM_CL_FreeFieldValue.
+func CSSM_CL_FreeFieldValue(clHandle int, certOrCrlOid unsafe.Pointer, value unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_FreeFieldValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_FreeFieldValue, _lib, "CSSM_CL_FreeFieldValue")
+	}
+	return _fnCSSM_CL_FreeFieldValue(clHandle, certOrCrlOid, value)
+}
+
+var _fnCSSM_CL_FreeFields func(int, uint32, unsafe.Pointer) int32
+
+// CSSM_CL_FreeFields calls the Security framework function CSSM_CL_FreeFields.
+func CSSM_CL_FreeFields(clHandle int, numberOfFields uint32, fields unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_FreeFields == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_FreeFields, _lib, "CSSM_CL_FreeFields")
+	}
+	return _fnCSSM_CL_FreeFields(clHandle, numberOfFields, fields)
+}
+
+var _fnCSSM_CL_IsCertInCachedCrl func(int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_IsCertInCachedCrl calls the Security framework function CSSM_CL_IsCertInCachedCrl.
+func CSSM_CL_IsCertInCachedCrl(clHandle int, cert unsafe.Pointer, crlHandle int, crlRecordIndex unsafe.Pointer) (result int32, certFound int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_IsCertInCachedCrl == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_IsCertInCachedCrl, _lib, "CSSM_CL_IsCertInCachedCrl")
+	}
+	var _out0 int32
+	_ret := _fnCSSM_CL_IsCertInCachedCrl(clHandle, cert, crlHandle, unsafe.Pointer(&_out0), crlRecordIndex)
+	return _ret, _out0
+}
+
+var _fnCSSM_CL_IsCertInCrl func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CL_IsCertInCrl calls the Security framework function CSSM_CL_IsCertInCrl.
+func CSSM_CL_IsCertInCrl(clHandle int, cert unsafe.Pointer, crl unsafe.Pointer) (result int32, certFound int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_IsCertInCrl == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_IsCertInCrl, _lib, "CSSM_CL_IsCertInCrl")
+	}
+	var _out0 int32
+	_ret := _fnCSSM_CL_IsCertInCrl(clHandle, cert, crl, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnCSSM_CL_PassThrough func(int, uint64, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // CSSM_CL_PassThrough calls the Security framework function CSSM_CL_PassThrough.
@@ -219,6 +748,54 @@ func CSSM_CL_PassThrough(clHandle int, ccHandle uint64, passThroughId uint32, in
 		ebipurego.RegisterLibFunc(&_fnCSSM_CL_PassThrough, _lib, "CSSM_CL_PassThrough")
 	}
 	return _fnCSSM_CL_PassThrough(clHandle, ccHandle, passThroughId, inputParams, outputParams)
+}
+
+var _fnCSSM_CSP_ChangeLoginAcl func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CSP_ChangeLoginAcl calls the Security framework function CSSM_CSP_ChangeLoginAcl.
+func CSSM_CSP_ChangeLoginAcl(cspHandle int, accessCred unsafe.Pointer, aclEdit unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_ChangeLoginAcl == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_ChangeLoginAcl, _lib, "CSSM_CSP_ChangeLoginAcl")
+	}
+	return _fnCSSM_CSP_ChangeLoginAcl(cspHandle, accessCred, aclEdit)
+}
+
+var _fnCSSM_CSP_ChangeLoginOwner func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CSP_ChangeLoginOwner calls the Security framework function CSSM_CSP_ChangeLoginOwner.
+func CSSM_CSP_ChangeLoginOwner(cspHandle int, accessCred unsafe.Pointer, newOwner unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_ChangeLoginOwner == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_ChangeLoginOwner, _lib, "CSSM_CSP_ChangeLoginOwner")
+	}
+	return _fnCSSM_CSP_ChangeLoginOwner(cspHandle, accessCred, newOwner)
+}
+
+var _fnCSSM_CSP_CreateAsymmetricContext func(int, uint32, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32
+
+// CSSM_CSP_CreateAsymmetricContext calls the Security framework function CSSM_CSP_CreateAsymmetricContext.
+func CSSM_CSP_CreateAsymmetricContext(cspHandle int, algorithmID uint32, accessCred unsafe.Pointer, key unsafe.Pointer, padding uint32) (result int32, newContextHandle uint64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_CreateAsymmetricContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_CreateAsymmetricContext, _lib, "CSSM_CSP_CreateAsymmetricContext")
+	}
+	var _out0 uint64
+	_ret := _fnCSSM_CSP_CreateAsymmetricContext(cspHandle, algorithmID, accessCred, key, padding, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnCSSM_CSP_CreateDeriveKeyContext func(int, uint32, uint32, uint32, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CSP_CreateDeriveKeyContext calls the Security framework function CSSM_CSP_CreateDeriveKeyContext.
+func CSSM_CSP_CreateDeriveKeyContext(cspHandle int, algorithmID uint32, deriveKeyType uint32, deriveKeyLengthInBits uint32, accessCred unsafe.Pointer, baseKey unsafe.Pointer, iterationCount uint32, salt unsafe.Pointer, seed unsafe.Pointer) (result int32, newContextHandle uint64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_CreateDeriveKeyContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_CreateDeriveKeyContext, _lib, "CSSM_CSP_CreateDeriveKeyContext")
+	}
+	var _out0 uint64
+	_ret := _fnCSSM_CSP_CreateDeriveKeyContext(cspHandle, algorithmID, deriveKeyType, deriveKeyLengthInBits, accessCred, baseKey, iterationCount, salt, seed, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnCSSM_CSP_CreateDigestContext func(int, uint32, unsafe.Pointer) int32
@@ -231,6 +808,45 @@ func CSSM_CSP_CreateDigestContext(cspHandle int, algorithmID uint32) (result int
 	}
 	var _out0 uint64
 	_ret := _fnCSSM_CSP_CreateDigestContext(cspHandle, algorithmID, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnCSSM_CSP_CreateKeyGenContext func(int, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CSP_CreateKeyGenContext calls the Security framework function CSSM_CSP_CreateKeyGenContext.
+func CSSM_CSP_CreateKeyGenContext(cspHandle int, algorithmID uint32, keySizeInBits uint32, seed unsafe.Pointer, salt unsafe.Pointer, startDate unsafe.Pointer, endDate unsafe.Pointer, params unsafe.Pointer) (result int32, newContextHandle uint64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_CreateKeyGenContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_CreateKeyGenContext, _lib, "CSSM_CSP_CreateKeyGenContext")
+	}
+	var _out0 uint64
+	_ret := _fnCSSM_CSP_CreateKeyGenContext(cspHandle, algorithmID, keySizeInBits, seed, salt, startDate, endDate, params, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnCSSM_CSP_CreateMacContext func(int, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CSP_CreateMacContext calls the Security framework function CSSM_CSP_CreateMacContext.
+func CSSM_CSP_CreateMacContext(cspHandle int, algorithmID uint32, key unsafe.Pointer) (result int32, newContextHandle uint64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_CreateMacContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_CreateMacContext, _lib, "CSSM_CSP_CreateMacContext")
+	}
+	var _out0 uint64
+	_ret := _fnCSSM_CSP_CreateMacContext(cspHandle, algorithmID, key, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnCSSM_CSP_CreatePassThroughContext func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CSP_CreatePassThroughContext calls the Security framework function CSSM_CSP_CreatePassThroughContext.
+func CSSM_CSP_CreatePassThroughContext(cspHandle int, key unsafe.Pointer) (result int32, newContextHandle uint64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_CreatePassThroughContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_CreatePassThroughContext, _lib, "CSSM_CSP_CreatePassThroughContext")
+	}
+	var _out0 uint64
+	_ret := _fnCSSM_CSP_CreatePassThroughContext(cspHandle, key, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
@@ -247,6 +863,56 @@ func CSSM_CSP_CreateRandomGenContext(cspHandle int, algorithmID uint32, seed uns
 	return _ret, _out0
 }
 
+var _fnCSSM_CSP_CreateSignatureContext func(int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CSP_CreateSignatureContext calls the Security framework function CSSM_CSP_CreateSignatureContext.
+func CSSM_CSP_CreateSignatureContext(cspHandle int, algorithmID uint32, accessCred unsafe.Pointer, key unsafe.Pointer) (result int32, newContextHandle uint64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_CreateSignatureContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_CreateSignatureContext, _lib, "CSSM_CSP_CreateSignatureContext")
+	}
+	var _out0 uint64
+	_ret := _fnCSSM_CSP_CreateSignatureContext(cspHandle, algorithmID, accessCred, key, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnCSSM_CSP_CreateSymmetricContext func(int, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CSP_CreateSymmetricContext calls the Security framework function CSSM_CSP_CreateSymmetricContext.
+func CSSM_CSP_CreateSymmetricContext(cspHandle int, algorithmID uint32, mode uint32, accessCred unsafe.Pointer, key unsafe.Pointer, initVector unsafe.Pointer, padding uint32, reserved unsafe.Pointer) (result int32, newContextHandle uint64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_CreateSymmetricContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_CreateSymmetricContext, _lib, "CSSM_CSP_CreateSymmetricContext")
+	}
+	var _out0 uint64
+	_ret := _fnCSSM_CSP_CreateSymmetricContext(cspHandle, algorithmID, mode, accessCred, key, initVector, padding, reserved, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnCSSM_CSP_GetLoginAcl func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CSP_GetLoginAcl calls the Security framework function CSSM_CSP_GetLoginAcl.
+func CSSM_CSP_GetLoginAcl(cspHandle int, selectionTag unsafe.Pointer, aclInfos unsafe.Pointer) (result int32, numberOfAclInfos uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_GetLoginAcl == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_GetLoginAcl, _lib, "CSSM_CSP_GetLoginAcl")
+	}
+	var _out0 uint32
+	_ret := _fnCSSM_CSP_GetLoginAcl(cspHandle, selectionTag, unsafe.Pointer(&_out0), aclInfos)
+	return _ret, _out0
+}
+
+var _fnCSSM_CSP_GetLoginOwner func(int, unsafe.Pointer) int32
+
+// CSSM_CSP_GetLoginOwner calls the Security framework function CSSM_CSP_GetLoginOwner.
+func CSSM_CSP_GetLoginOwner(cspHandle int, owner unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_GetLoginOwner == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_GetLoginOwner, _lib, "CSSM_CSP_GetLoginOwner")
+	}
+	return _fnCSSM_CSP_GetLoginOwner(cspHandle, owner)
+}
+
 var _fnCSSM_CSP_GetOperationalStatistics func(int, unsafe.Pointer) int32
 
 // CSSM_CSP_GetOperationalStatistics calls the Security framework function CSSM_CSP_GetOperationalStatistics.
@@ -260,6 +926,17 @@ func CSSM_CSP_GetOperationalStatistics(cspHandle int) (result int32, statistics 
 	return _ret, _out0
 }
 
+var _fnCSSM_CSP_Login func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CSP_Login calls the Security framework function CSSM_CSP_Login.
+func CSSM_CSP_Login(cspHandle int, accessCred unsafe.Pointer, loginName unsafe.Pointer, reserved unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_Login == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_Login, _lib, "CSSM_CSP_Login")
+	}
+	return _fnCSSM_CSP_Login(cspHandle, accessCred, loginName, reserved)
+}
+
 var _fnCSSM_CSP_Logout func(int) int32
 
 // CSSM_CSP_Logout calls the Security framework function CSSM_CSP_Logout.
@@ -271,6 +948,17 @@ func CSSM_CSP_Logout(cspHandle int) int32 {
 	return _fnCSSM_CSP_Logout(cspHandle)
 }
 
+var _fnCSSM_CSP_ObtainPrivateKeyFromPublicKey func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_CSP_ObtainPrivateKeyFromPublicKey calls the Security framework function CSSM_CSP_ObtainPrivateKeyFromPublicKey.
+func CSSM_CSP_ObtainPrivateKeyFromPublicKey(cspHandle int, publicKey unsafe.Pointer, privateKey unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_ObtainPrivateKeyFromPublicKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_ObtainPrivateKeyFromPublicKey, _lib, "CSSM_CSP_ObtainPrivateKeyFromPublicKey")
+	}
+	return _fnCSSM_CSP_ObtainPrivateKeyFromPublicKey(cspHandle, publicKey, privateKey)
+}
+
 var _fnCSSM_CSP_PassThrough func(uint64, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // CSSM_CSP_PassThrough calls the Security framework function CSSM_CSP_PassThrough.
@@ -280,6 +968,315 @@ func CSSM_CSP_PassThrough(ccHandle uint64, passThroughId uint32, inData unsafe.P
 		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_PassThrough, _lib, "CSSM_CSP_PassThrough")
 	}
 	return _fnCSSM_CSP_PassThrough(ccHandle, passThroughId, inData, outData)
+}
+
+var _fnCSSM_ChangeKeyAcl func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_ChangeKeyAcl calls the Security framework function CSSM_ChangeKeyAcl.
+func CSSM_ChangeKeyAcl(cspHandle int, accessCred unsafe.Pointer, aclEdit unsafe.Pointer, key unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_ChangeKeyAcl == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_ChangeKeyAcl, _lib, "CSSM_ChangeKeyAcl")
+	}
+	return _fnCSSM_ChangeKeyAcl(cspHandle, accessCred, aclEdit, key)
+}
+
+var _fnCSSM_ChangeKeyOwner func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_ChangeKeyOwner calls the Security framework function CSSM_ChangeKeyOwner.
+func CSSM_ChangeKeyOwner(cspHandle int, accessCred unsafe.Pointer, key unsafe.Pointer, newOwner unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_ChangeKeyOwner == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_ChangeKeyOwner, _lib, "CSSM_ChangeKeyOwner")
+	}
+	return _fnCSSM_ChangeKeyOwner(cspHandle, accessCred, key, newOwner)
+}
+
+var _fnCSSM_DL_Authenticate func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+
+// CSSM_DL_Authenticate calls the Security framework function CSSM_DL_Authenticate.
+func CSSM_DL_Authenticate(dldbHandle unsafe.Pointer, accessRequest uint32, accessCred unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_Authenticate == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_Authenticate, _lib, "CSSM_DL_Authenticate")
+	}
+	return _fnCSSM_DL_Authenticate(dldbHandle, accessRequest, accessCred)
+}
+
+var _fnCSSM_DL_ChangeDbAcl func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_ChangeDbAcl calls the Security framework function CSSM_DL_ChangeDbAcl.
+func CSSM_DL_ChangeDbAcl(dldbHandle unsafe.Pointer, accessCred unsafe.Pointer, aclEdit unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_ChangeDbAcl == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_ChangeDbAcl, _lib, "CSSM_DL_ChangeDbAcl")
+	}
+	return _fnCSSM_DL_ChangeDbAcl(dldbHandle, accessCred, aclEdit)
+}
+
+var _fnCSSM_DL_ChangeDbOwner func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_ChangeDbOwner calls the Security framework function CSSM_DL_ChangeDbOwner.
+func CSSM_DL_ChangeDbOwner(dldbHandle unsafe.Pointer, accessCred unsafe.Pointer, newOwner unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_ChangeDbOwner == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_ChangeDbOwner, _lib, "CSSM_DL_ChangeDbOwner")
+	}
+	return _fnCSSM_DL_ChangeDbOwner(dldbHandle, accessCred, newOwner)
+}
+
+var _fnCSSM_DL_CreateRelation func(unsafe.Pointer, uint32, string, uint32, unsafe.Pointer, uint32, unsafe.Pointer) int32
+
+// CSSM_DL_CreateRelation calls the Security framework function CSSM_DL_CreateRelation.
+func CSSM_DL_CreateRelation(dldbHandle unsafe.Pointer, relationID uint32, relationName string, numberOfAttributes uint32, pAttributeInfo unsafe.Pointer, numberOfIndexes uint32) (result int32, pIndexInfo CssmDbSchemaIndexInfo) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_CreateRelation == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_CreateRelation, _lib, "CSSM_DL_CreateRelation")
+	}
+	var _out0 CssmDbSchemaIndexInfo
+	_ret := _fnCSSM_DL_CreateRelation(dldbHandle, relationID, relationName, numberOfAttributes, pAttributeInfo, numberOfIndexes, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnCSSM_DL_DataAbortQuery func(unsafe.Pointer, int) int32
+
+// CSSM_DL_DataAbortQuery calls the Security framework function CSSM_DL_DataAbortQuery.
+func CSSM_DL_DataAbortQuery(dldbHandle unsafe.Pointer, resultsHandle int) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_DataAbortQuery == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataAbortQuery, _lib, "CSSM_DL_DataAbortQuery")
+	}
+	return _fnCSSM_DL_DataAbortQuery(dldbHandle, resultsHandle)
+}
+
+var _fnCSSM_DL_DataDelete func(unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_DataDelete calls the Security framework function CSSM_DL_DataDelete.
+func CSSM_DL_DataDelete(dldbHandle unsafe.Pointer, uniqueRecordIdentifier unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_DataDelete == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataDelete, _lib, "CSSM_DL_DataDelete")
+	}
+	return _fnCSSM_DL_DataDelete(dldbHandle, uniqueRecordIdentifier)
+}
+
+var _fnCSSM_DL_DataGetFirst func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_DataGetFirst calls the Security framework function CSSM_DL_DataGetFirst.
+func CSSM_DL_DataGetFirst(dldbHandle unsafe.Pointer, query unsafe.Pointer, attributes unsafe.Pointer, data unsafe.Pointer, uniqueId unsafe.Pointer) (result int32, resultsHandle int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_DataGetFirst == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataGetFirst, _lib, "CSSM_DL_DataGetFirst")
+	}
+	var _out0 int
+	_ret := _fnCSSM_DL_DataGetFirst(dldbHandle, query, unsafe.Pointer(&_out0), attributes, data, uniqueId)
+	return _ret, _out0
+}
+
+var _fnCSSM_DL_DataGetFromUniqueRecordId func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_DataGetFromUniqueRecordId calls the Security framework function CSSM_DL_DataGetFromUniqueRecordId.
+func CSSM_DL_DataGetFromUniqueRecordId(dldbHandle unsafe.Pointer, uniqueRecord unsafe.Pointer, attributes unsafe.Pointer, data unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_DataGetFromUniqueRecordId == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataGetFromUniqueRecordId, _lib, "CSSM_DL_DataGetFromUniqueRecordId")
+	}
+	return _fnCSSM_DL_DataGetFromUniqueRecordId(dldbHandle, uniqueRecord, attributes, data)
+}
+
+var _fnCSSM_DL_DataGetNext func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_DataGetNext calls the Security framework function CSSM_DL_DataGetNext.
+func CSSM_DL_DataGetNext(dldbHandle unsafe.Pointer, resultsHandle int, attributes unsafe.Pointer, data unsafe.Pointer, uniqueId unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_DataGetNext == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataGetNext, _lib, "CSSM_DL_DataGetNext")
+	}
+	return _fnCSSM_DL_DataGetNext(dldbHandle, resultsHandle, attributes, data, uniqueId)
+}
+
+var _fnCSSM_DL_DataInsert func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_DataInsert calls the Security framework function CSSM_DL_DataInsert.
+func CSSM_DL_DataInsert(dldbHandle unsafe.Pointer, recordType uint32, attributes unsafe.Pointer, data unsafe.Pointer, uniqueId unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_DataInsert == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataInsert, _lib, "CSSM_DL_DataInsert")
+	}
+	return _fnCSSM_DL_DataInsert(dldbHandle, recordType, attributes, data, uniqueId)
+}
+
+var _fnCSSM_DL_DataModify func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int32
+
+// CSSM_DL_DataModify calls the Security framework function CSSM_DL_DataModify.
+func CSSM_DL_DataModify(dldbHandle unsafe.Pointer, recordType uint32, uniqueRecordIdentifier unsafe.Pointer, attributesToBeModified unsafe.Pointer, dataToBeModified unsafe.Pointer, modifyMode uint32) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_DataModify == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DataModify, _lib, "CSSM_DL_DataModify")
+	}
+	return _fnCSSM_DL_DataModify(dldbHandle, recordType, uniqueRecordIdentifier, attributesToBeModified, dataToBeModified, modifyMode)
+}
+
+var _fnCSSM_DL_DbClose func(unsafe.Pointer) int32
+
+// CSSM_DL_DbClose calls the Security framework function CSSM_DL_DbClose.
+func CSSM_DL_DbClose(dldbHandle unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_DbClose == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DbClose, _lib, "CSSM_DL_DbClose")
+	}
+	return _fnCSSM_DL_DbClose(dldbHandle)
+}
+
+var _fnCSSM_DL_DbCreate func(int, string, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_DbCreate calls the Security framework function CSSM_DL_DbCreate.
+func CSSM_DL_DbCreate(dlHandle int, dbName string, dbLocation unsafe.Pointer, dbInfo unsafe.Pointer, accessRequest uint32, credAndAclEntry unsafe.Pointer, openParameters unsafe.Pointer) (result int32, dbHandle int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_DbCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DbCreate, _lib, "CSSM_DL_DbCreate")
+	}
+	var _out0 int
+	_ret := _fnCSSM_DL_DbCreate(dlHandle, dbName, dbLocation, dbInfo, accessRequest, credAndAclEntry, openParameters, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnCSSM_DL_DbDelete func(int, string, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_DbDelete calls the Security framework function CSSM_DL_DbDelete.
+func CSSM_DL_DbDelete(dlHandle int, dbName string, dbLocation unsafe.Pointer, accessCred unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_DbDelete == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DbDelete, _lib, "CSSM_DL_DbDelete")
+	}
+	return _fnCSSM_DL_DbDelete(dlHandle, dbName, dbLocation, accessCred)
+}
+
+var _fnCSSM_DL_DbOpen func(int, string, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_DbOpen calls the Security framework function CSSM_DL_DbOpen.
+func CSSM_DL_DbOpen(dlHandle int, dbName string, dbLocation unsafe.Pointer, accessRequest uint32, accessCred unsafe.Pointer, openParameters unsafe.Pointer) (result int32, dbHandle int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_DbOpen == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DbOpen, _lib, "CSSM_DL_DbOpen")
+	}
+	var _out0 int
+	_ret := _fnCSSM_DL_DbOpen(dlHandle, dbName, dbLocation, accessRequest, accessCred, openParameters, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnCSSM_DL_DestroyRelation func(unsafe.Pointer, uint32) int32
+
+// CSSM_DL_DestroyRelation calls the Security framework function CSSM_DL_DestroyRelation.
+func CSSM_DL_DestroyRelation(dldbHandle unsafe.Pointer, relationID uint32) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_DestroyRelation == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_DestroyRelation, _lib, "CSSM_DL_DestroyRelation")
+	}
+	return _fnCSSM_DL_DestroyRelation(dldbHandle, relationID)
+}
+
+var _fnCSSM_DL_FreeNameList func(int, unsafe.Pointer) int32
+
+// CSSM_DL_FreeNameList calls the Security framework function CSSM_DL_FreeNameList.
+func CSSM_DL_FreeNameList(dlHandle int, nameList unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_FreeNameList == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_FreeNameList, _lib, "CSSM_DL_FreeNameList")
+	}
+	return _fnCSSM_DL_FreeNameList(dlHandle, nameList)
+}
+
+var _fnCSSM_DL_FreeUniqueRecord func(unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_FreeUniqueRecord calls the Security framework function CSSM_DL_FreeUniqueRecord.
+func CSSM_DL_FreeUniqueRecord(dldbHandle unsafe.Pointer, uniqueRecord unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_FreeUniqueRecord == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_FreeUniqueRecord, _lib, "CSSM_DL_FreeUniqueRecord")
+	}
+	return _fnCSSM_DL_FreeUniqueRecord(dldbHandle, uniqueRecord)
+}
+
+var _fnCSSM_DL_GetDbAcl func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_GetDbAcl calls the Security framework function CSSM_DL_GetDbAcl.
+func CSSM_DL_GetDbAcl(dldbHandle unsafe.Pointer, selectionTag unsafe.Pointer, aclInfos unsafe.Pointer) (result int32, numberOfAclInfos uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_GetDbAcl == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_GetDbAcl, _lib, "CSSM_DL_GetDbAcl")
+	}
+	var _out0 uint32
+	_ret := _fnCSSM_DL_GetDbAcl(dldbHandle, selectionTag, unsafe.Pointer(&_out0), aclInfos)
+	return _ret, _out0
+}
+
+var _fnCSSM_DL_GetDbNameFromHandle func(unsafe.Pointer, string) int32
+
+// CSSM_DL_GetDbNameFromHandle calls the Security framework function CSSM_DL_GetDbNameFromHandle.
+func CSSM_DL_GetDbNameFromHandle(dldbHandle unsafe.Pointer, dbName string) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_GetDbNameFromHandle == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_GetDbNameFromHandle, _lib, "CSSM_DL_GetDbNameFromHandle")
+	}
+	return _fnCSSM_DL_GetDbNameFromHandle(dldbHandle, dbName)
+}
+
+var _fnCSSM_DL_GetDbNames func(int, unsafe.Pointer) int32
+
+// CSSM_DL_GetDbNames calls the Security framework function CSSM_DL_GetDbNames.
+func CSSM_DL_GetDbNames(dlHandle int, nameList unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_GetDbNames == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_GetDbNames, _lib, "CSSM_DL_GetDbNames")
+	}
+	return _fnCSSM_DL_GetDbNames(dlHandle, nameList)
+}
+
+var _fnCSSM_DL_GetDbOwner func(unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_GetDbOwner calls the Security framework function CSSM_DL_GetDbOwner.
+func CSSM_DL_GetDbOwner(dldbHandle unsafe.Pointer, owner unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_GetDbOwner == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_GetDbOwner, _lib, "CSSM_DL_GetDbOwner")
+	}
+	return _fnCSSM_DL_GetDbOwner(dldbHandle, owner)
+}
+
+var _fnCSSM_DL_PassThrough func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DL_PassThrough calls the Security framework function CSSM_DL_PassThrough.
+func CSSM_DL_PassThrough(dldbHandle unsafe.Pointer, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DL_PassThrough == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DL_PassThrough, _lib, "CSSM_DL_PassThrough")
+	}
+	return _fnCSSM_DL_PassThrough(dldbHandle, passThroughId, inputParams, outputParams)
+}
+
+var _fnCSSM_DecryptData func(uint64, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DecryptData calls the Security framework function CSSM_DecryptData.
+func CSSM_DecryptData(ccHandle uint64, cipherBufs unsafe.Pointer, cipherBufCount uint32, clearBufs unsafe.Pointer, clearBufCount uint32, remData unsafe.Pointer) (result int32, bytesDecrypted int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DecryptData == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DecryptData, _lib, "CSSM_DecryptData")
+	}
+	var _out0 int
+	_ret := _fnCSSM_DecryptData(ccHandle, cipherBufs, cipherBufCount, clearBufs, clearBufCount, unsafe.Pointer(&_out0), remData)
+	return _ret, _out0
+}
+
+var _fnCSSM_DecryptDataFinal func(uint64, unsafe.Pointer) int32
+
+// CSSM_DecryptDataFinal calls the Security framework function CSSM_DecryptDataFinal.
+func CSSM_DecryptDataFinal(ccHandle uint64, remData unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DecryptDataFinal == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DecryptDataFinal, _lib, "CSSM_DecryptDataFinal")
+	}
+	return _fnCSSM_DecryptDataFinal(ccHandle, remData)
 }
 
 var _fnCSSM_DecryptDataInit func(uint64) int32
@@ -304,6 +1301,32 @@ func CSSM_DecryptDataInitP(ccHandle uint64, privilege uint64) int32 {
 	return _fnCSSM_DecryptDataInitP(ccHandle, privilege)
 }
 
+var _fnCSSM_DecryptDataP func(uint64, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, uint64) int32
+
+// CSSM_DecryptDataP calls the Security framework function CSSM_DecryptDataP.
+func CSSM_DecryptDataP(ccHandle uint64, cipherBufs unsafe.Pointer, cipherBufCount uint32, clearBufs unsafe.Pointer, clearBufCount uint32, remData unsafe.Pointer, privilege uint64) (result int32, bytesDecrypted int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DecryptDataP == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DecryptDataP, _lib, "CSSM_DecryptDataP")
+	}
+	var _out0 int
+	_ret := _fnCSSM_DecryptDataP(ccHandle, cipherBufs, cipherBufCount, clearBufs, clearBufCount, unsafe.Pointer(&_out0), remData, privilege)
+	return _ret, _out0
+}
+
+var _fnCSSM_DecryptDataUpdate func(uint64, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer) int32
+
+// CSSM_DecryptDataUpdate calls the Security framework function CSSM_DecryptDataUpdate.
+func CSSM_DecryptDataUpdate(ccHandle uint64, cipherBufs unsafe.Pointer, cipherBufCount uint32, clearBufs unsafe.Pointer, clearBufCount uint32) (result int32, bytesDecrypted int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DecryptDataUpdate == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DecryptDataUpdate, _lib, "CSSM_DecryptDataUpdate")
+	}
+	var _out0 int
+	_ret := _fnCSSM_DecryptDataUpdate(ccHandle, cipherBufs, cipherBufCount, clearBufs, clearBufCount, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnCSSM_DeleteContext func(uint64) int32
 
 // CSSM_DeleteContext calls the Security framework function CSSM_DeleteContext.
@@ -313,6 +1336,39 @@ func CSSM_DeleteContext(ccHandle uint64) int32 {
 		ebipurego.RegisterLibFunc(&_fnCSSM_DeleteContext, _lib, "CSSM_DeleteContext")
 	}
 	return _fnCSSM_DeleteContext(ccHandle)
+}
+
+var _fnCSSM_DeleteContextAttributes func(uint64, uint32, unsafe.Pointer) int32
+
+// CSSM_DeleteContextAttributes calls the Security framework function CSSM_DeleteContextAttributes.
+func CSSM_DeleteContextAttributes(ccHandle uint64, numberOfAttributes uint32, contextAttributes unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DeleteContextAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DeleteContextAttributes, _lib, "CSSM_DeleteContextAttributes")
+	}
+	return _fnCSSM_DeleteContextAttributes(ccHandle, numberOfAttributes, contextAttributes)
+}
+
+var _fnCSSM_DeriveKey func(uint64, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_DeriveKey calls the Security framework function CSSM_DeriveKey.
+func CSSM_DeriveKey(ccHandle uint64, param unsafe.Pointer, keyUsage uint32, keyAttr uint32, keyLabel unsafe.Pointer, credAndAclEntry unsafe.Pointer, derivedKey unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DeriveKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DeriveKey, _lib, "CSSM_DeriveKey")
+	}
+	return _fnCSSM_DeriveKey(ccHandle, param, keyUsage, keyAttr, keyLabel, credAndAclEntry, derivedKey)
+}
+
+var _fnCSSM_DigestData func(uint64, unsafe.Pointer, uint32, unsafe.Pointer) int32
+
+// CSSM_DigestData calls the Security framework function CSSM_DigestData.
+func CSSM_DigestData(ccHandle uint64, dataBufs unsafe.Pointer, dataBufCount uint32, digest unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DigestData == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DigestData, _lib, "CSSM_DigestData")
+	}
+	return _fnCSSM_DigestData(ccHandle, dataBufs, dataBufCount, digest)
 }
 
 var _fnCSSM_DigestDataClone func(uint64, unsafe.Pointer) int32
@@ -326,6 +1382,17 @@ func CSSM_DigestDataClone(ccHandle uint64) (result int32, clonednewCCHandle uint
 	var _out0 uint64
 	_ret := _fnCSSM_DigestDataClone(ccHandle, unsafe.Pointer(&_out0))
 	return _ret, _out0
+}
+
+var _fnCSSM_DigestDataFinal func(uint64, unsafe.Pointer) int32
+
+// CSSM_DigestDataFinal calls the Security framework function CSSM_DigestDataFinal.
+func CSSM_DigestDataFinal(ccHandle uint64, digest unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DigestDataFinal == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DigestDataFinal, _lib, "CSSM_DigestDataFinal")
+	}
+	return _fnCSSM_DigestDataFinal(ccHandle, digest)
 }
 
 var _fnCSSM_DigestDataInit func(uint64) int32
@@ -350,6 +1417,30 @@ func CSSM_DigestDataUpdate(ccHandle uint64, dataBufs unsafe.Pointer, dataBufCoun
 	return _fnCSSM_DigestDataUpdate(ccHandle, dataBufs, dataBufCount)
 }
 
+var _fnCSSM_EncryptData func(uint64, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_EncryptData calls the Security framework function CSSM_EncryptData.
+func CSSM_EncryptData(ccHandle uint64, clearBufs unsafe.Pointer, clearBufCount uint32, cipherBufs unsafe.Pointer, cipherBufCount uint32, remData unsafe.Pointer) (result int32, bytesEncrypted int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_EncryptData == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_EncryptData, _lib, "CSSM_EncryptData")
+	}
+	var _out0 int
+	_ret := _fnCSSM_EncryptData(ccHandle, clearBufs, clearBufCount, cipherBufs, cipherBufCount, unsafe.Pointer(&_out0), remData)
+	return _ret, _out0
+}
+
+var _fnCSSM_EncryptDataFinal func(uint64, unsafe.Pointer) int32
+
+// CSSM_EncryptDataFinal calls the Security framework function CSSM_EncryptDataFinal.
+func CSSM_EncryptDataFinal(ccHandle uint64, remData unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_EncryptDataFinal == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_EncryptDataFinal, _lib, "CSSM_EncryptDataFinal")
+	}
+	return _fnCSSM_EncryptDataFinal(ccHandle, remData)
+}
+
 var _fnCSSM_EncryptDataInit func(uint64) int32
 
 // CSSM_EncryptDataInit calls the Security framework function CSSM_EncryptDataInit.
@@ -370,6 +1461,131 @@ func CSSM_EncryptDataInitP(ccHandle uint64, privilege uint64) int32 {
 		ebipurego.RegisterLibFunc(&_fnCSSM_EncryptDataInitP, _lib, "CSSM_EncryptDataInitP")
 	}
 	return _fnCSSM_EncryptDataInitP(ccHandle, privilege)
+}
+
+var _fnCSSM_EncryptDataP func(uint64, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, uint64) int32
+
+// CSSM_EncryptDataP calls the Security framework function CSSM_EncryptDataP.
+func CSSM_EncryptDataP(ccHandle uint64, clearBufs unsafe.Pointer, clearBufCount uint32, cipherBufs unsafe.Pointer, cipherBufCount uint32, remData unsafe.Pointer, privilege uint64) (result int32, bytesEncrypted int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_EncryptDataP == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_EncryptDataP, _lib, "CSSM_EncryptDataP")
+	}
+	var _out0 int
+	_ret := _fnCSSM_EncryptDataP(ccHandle, clearBufs, clearBufCount, cipherBufs, cipherBufCount, unsafe.Pointer(&_out0), remData, privilege)
+	return _ret, _out0
+}
+
+var _fnCSSM_EncryptDataUpdate func(uint64, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer) int32
+
+// CSSM_EncryptDataUpdate calls the Security framework function CSSM_EncryptDataUpdate.
+func CSSM_EncryptDataUpdate(ccHandle uint64, clearBufs unsafe.Pointer, clearBufCount uint32, cipherBufs unsafe.Pointer, cipherBufCount uint32) (result int32, bytesEncrypted int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_EncryptDataUpdate == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_EncryptDataUpdate, _lib, "CSSM_EncryptDataUpdate")
+	}
+	var _out0 int
+	_ret := _fnCSSM_EncryptDataUpdate(ccHandle, clearBufs, clearBufCount, cipherBufs, cipherBufCount, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnCSSM_FreeContext func(unsafe.Pointer) int32
+
+// CSSM_FreeContext calls the Security framework function CSSM_FreeContext.
+func CSSM_FreeContext(context_ unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_FreeContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_FreeContext, _lib, "CSSM_FreeContext")
+	}
+	return _fnCSSM_FreeContext(context_)
+}
+
+var _fnCSSM_FreeKey func(int, unsafe.Pointer, unsafe.Pointer, int32) int32
+
+// CSSM_FreeKey calls the Security framework function CSSM_FreeKey.
+func CSSM_FreeKey(cspHandle int, accessCred unsafe.Pointer, keyPtr unsafe.Pointer, delete_ int32) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_FreeKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_FreeKey, _lib, "CSSM_FreeKey")
+	}
+	return _fnCSSM_FreeKey(cspHandle, accessCred, keyPtr, delete_)
+}
+
+var _fnCSSM_GenerateAlgorithmParams func(uint64, uint32, unsafe.Pointer) int32
+
+// CSSM_GenerateAlgorithmParams calls the Security framework function CSSM_GenerateAlgorithmParams.
+func CSSM_GenerateAlgorithmParams(ccHandle uint64, paramBits uint32, param unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GenerateAlgorithmParams == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GenerateAlgorithmParams, _lib, "CSSM_GenerateAlgorithmParams")
+	}
+	return _fnCSSM_GenerateAlgorithmParams(ccHandle, paramBits, param)
+}
+
+var _fnCSSM_GenerateKey func(uint64, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_GenerateKey calls the Security framework function CSSM_GenerateKey.
+func CSSM_GenerateKey(ccHandle uint64, keyUsage uint32, keyAttr uint32, keyLabel unsafe.Pointer, credAndAclEntry unsafe.Pointer, key unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GenerateKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GenerateKey, _lib, "CSSM_GenerateKey")
+	}
+	return _fnCSSM_GenerateKey(ccHandle, keyUsage, keyAttr, keyLabel, credAndAclEntry, key)
+}
+
+var _fnCSSM_GenerateKeyP func(uint64, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64) int32
+
+// CSSM_GenerateKeyP calls the Security framework function CSSM_GenerateKeyP.
+func CSSM_GenerateKeyP(ccHandle uint64, keyUsage uint32, keyAttr uint32, keyLabel unsafe.Pointer, credAndAclEntry unsafe.Pointer, key unsafe.Pointer, privilege uint64) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GenerateKeyP == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GenerateKeyP, _lib, "CSSM_GenerateKeyP")
+	}
+	return _fnCSSM_GenerateKeyP(ccHandle, keyUsage, keyAttr, keyLabel, credAndAclEntry, key, privilege)
+}
+
+var _fnCSSM_GenerateKeyPair func(uint64, uint32, uint32, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_GenerateKeyPair calls the Security framework function CSSM_GenerateKeyPair.
+func CSSM_GenerateKeyPair(ccHandle uint64, publicKeyUsage uint32, publicKeyAttr uint32, publicKeyLabel unsafe.Pointer, publicKey unsafe.Pointer, privateKeyUsage uint32, privateKeyAttr uint32, privateKeyLabel unsafe.Pointer, credAndAclEntry unsafe.Pointer, privateKey unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GenerateKeyPair == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GenerateKeyPair, _lib, "CSSM_GenerateKeyPair")
+	}
+	return _fnCSSM_GenerateKeyPair(ccHandle, publicKeyUsage, publicKeyAttr, publicKeyLabel, publicKey, privateKeyUsage, privateKeyAttr, privateKeyLabel, credAndAclEntry, privateKey)
+}
+
+var _fnCSSM_GenerateKeyPairP func(uint64, uint32, uint32, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64) int32
+
+// CSSM_GenerateKeyPairP calls the Security framework function CSSM_GenerateKeyPairP.
+func CSSM_GenerateKeyPairP(ccHandle uint64, publicKeyUsage uint32, publicKeyAttr uint32, publicKeyLabel unsafe.Pointer, publicKey unsafe.Pointer, privateKeyUsage uint32, privateKeyAttr uint32, privateKeyLabel unsafe.Pointer, credAndAclEntry unsafe.Pointer, privateKey unsafe.Pointer, privilege uint64) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GenerateKeyPairP == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GenerateKeyPairP, _lib, "CSSM_GenerateKeyPairP")
+	}
+	return _fnCSSM_GenerateKeyPairP(ccHandle, publicKeyUsage, publicKeyAttr, publicKeyLabel, publicKey, privateKeyUsage, privateKeyAttr, privateKeyLabel, credAndAclEntry, privateKey, privilege)
+}
+
+var _fnCSSM_GenerateMac func(uint64, unsafe.Pointer, uint32, unsafe.Pointer) int32
+
+// CSSM_GenerateMac calls the Security framework function CSSM_GenerateMac.
+func CSSM_GenerateMac(ccHandle uint64, dataBufs unsafe.Pointer, dataBufCount uint32, mac unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GenerateMac == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GenerateMac, _lib, "CSSM_GenerateMac")
+	}
+	return _fnCSSM_GenerateMac(ccHandle, dataBufs, dataBufCount, mac)
+}
+
+var _fnCSSM_GenerateMacFinal func(uint64, unsafe.Pointer) int32
+
+// CSSM_GenerateMacFinal calls the Security framework function CSSM_GenerateMacFinal.
+func CSSM_GenerateMacFinal(ccHandle uint64, mac unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GenerateMacFinal == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GenerateMacFinal, _lib, "CSSM_GenerateMacFinal")
+	}
+	return _fnCSSM_GenerateMacFinal(ccHandle, mac)
 }
 
 var _fnCSSM_GenerateMacInit func(uint64) int32
@@ -394,6 +1610,85 @@ func CSSM_GenerateMacUpdate(ccHandle uint64, dataBufs unsafe.Pointer, dataBufCou
 	return _fnCSSM_GenerateMacUpdate(ccHandle, dataBufs, dataBufCount)
 }
 
+var _fnCSSM_GenerateRandom func(uint64, unsafe.Pointer) int32
+
+// CSSM_GenerateRandom calls the Security framework function CSSM_GenerateRandom.
+func CSSM_GenerateRandom(ccHandle uint64, randomNumber unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GenerateRandom == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GenerateRandom, _lib, "CSSM_GenerateRandom")
+	}
+	return _fnCSSM_GenerateRandom(ccHandle, randomNumber)
+}
+
+var _fnCSSM_GetAPIMemoryFunctions func(int, unsafe.Pointer) int32
+
+// CSSM_GetAPIMemoryFunctions calls the Security framework function CSSM_GetAPIMemoryFunctions.
+func CSSM_GetAPIMemoryFunctions(addInHandle int, appMemoryFuncs unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GetAPIMemoryFunctions == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GetAPIMemoryFunctions, _lib, "CSSM_GetAPIMemoryFunctions")
+	}
+	return _fnCSSM_GetAPIMemoryFunctions(addInHandle, appMemoryFuncs)
+}
+
+var _fnCSSM_GetContext func(uint64, unsafe.Pointer) int32
+
+// CSSM_GetContext calls the Security framework function CSSM_GetContext.
+func CSSM_GetContext(ccHandle uint64, context_ unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GetContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GetContext, _lib, "CSSM_GetContext")
+	}
+	return _fnCSSM_GetContext(ccHandle, context_)
+}
+
+var _fnCSSM_GetContextAttribute func(unsafe.Pointer, uint32, unsafe.Pointer) int32
+
+// CSSM_GetContextAttribute calls the Security framework function CSSM_GetContextAttribute.
+func CSSM_GetContextAttribute(context_ unsafe.Pointer, attributeType uint32, contextAttribute unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GetContextAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GetContextAttribute, _lib, "CSSM_GetContextAttribute")
+	}
+	return _fnCSSM_GetContextAttribute(context_, attributeType, contextAttribute)
+}
+
+var _fnCSSM_GetKeyAcl func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_GetKeyAcl calls the Security framework function CSSM_GetKeyAcl.
+func CSSM_GetKeyAcl(cspHandle int, key unsafe.Pointer, selectionTag unsafe.Pointer, aclInfos unsafe.Pointer) (result int32, numberOfAclInfos uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GetKeyAcl == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GetKeyAcl, _lib, "CSSM_GetKeyAcl")
+	}
+	var _out0 uint32
+	_ret := _fnCSSM_GetKeyAcl(cspHandle, key, selectionTag, unsafe.Pointer(&_out0), aclInfos)
+	return _ret, _out0
+}
+
+var _fnCSSM_GetKeyOwner func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_GetKeyOwner calls the Security framework function CSSM_GetKeyOwner.
+func CSSM_GetKeyOwner(cspHandle int, key unsafe.Pointer, owner unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GetKeyOwner == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GetKeyOwner, _lib, "CSSM_GetKeyOwner")
+	}
+	return _fnCSSM_GetKeyOwner(cspHandle, key, owner)
+}
+
+var _fnCSSM_GetModuleGUIDFromHandle func(int, unsafe.Pointer) int32
+
+// CSSM_GetModuleGUIDFromHandle calls the Security framework function CSSM_GetModuleGUIDFromHandle.
+func CSSM_GetModuleGUIDFromHandle(moduleHandle int, moduleGUID unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GetModuleGUIDFromHandle == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GetModuleGUIDFromHandle, _lib, "CSSM_GetModuleGUIDFromHandle")
+	}
+	return _fnCSSM_GetModuleGUIDFromHandle(moduleHandle, moduleGUID)
+}
+
 var _fnCSSM_GetPrivilege func(unsafe.Pointer) int32
 
 // CSSM_GetPrivilege calls the Security framework function CSSM_GetPrivilege.
@@ -407,6 +1702,80 @@ func CSSM_GetPrivilege() (result int32, privilege uint64) {
 	return _ret, _out0
 }
 
+var _fnCSSM_GetSubserviceUIDFromHandle func(int, unsafe.Pointer) int32
+
+// CSSM_GetSubserviceUIDFromHandle calls the Security framework function CSSM_GetSubserviceUIDFromHandle.
+func CSSM_GetSubserviceUIDFromHandle(moduleHandle int, subserviceUID unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GetSubserviceUIDFromHandle == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GetSubserviceUIDFromHandle, _lib, "CSSM_GetSubserviceUIDFromHandle")
+	}
+	return _fnCSSM_GetSubserviceUIDFromHandle(moduleHandle, subserviceUID)
+}
+
+var _fnCSSM_GetTimeValue func(int, uint32, unsafe.Pointer) int32
+
+// CSSM_GetTimeValue calls the Security framework function CSSM_GetTimeValue.
+func CSSM_GetTimeValue(cspHandle int, timeAlgorithm uint32, timeData unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GetTimeValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GetTimeValue, _lib, "CSSM_GetTimeValue")
+	}
+	return _fnCSSM_GetTimeValue(cspHandle, timeAlgorithm, timeData)
+}
+
+var _fnCSSM_Init func(unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_Init calls the Security framework function CSSM_Init.
+func CSSM_Init(scope uint32, callerGuid unsafe.Pointer, keyHierarchy uint32, reserved unsafe.Pointer) (result int32, version CssmVersion, pvcPolicy uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_Init == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_Init, _lib, "CSSM_Init")
+	}
+	var _out0 CssmVersion
+	var _out1 uint32
+	_ret := _fnCSSM_Init(unsafe.Pointer(&_out0), scope, callerGuid, keyHierarchy, unsafe.Pointer(&_out1), reserved)
+	return _ret, _out0, _out1
+}
+
+var _fnCSSM_Introduce func(unsafe.Pointer, uint32) int32
+
+// CSSM_Introduce calls the Security framework function CSSM_Introduce.
+func CSSM_Introduce(moduleID unsafe.Pointer, keyHierarchy uint32) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_Introduce == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_Introduce, _lib, "CSSM_Introduce")
+	}
+	return _fnCSSM_Introduce(moduleID, keyHierarchy)
+}
+
+var _fnCSSM_ListAttachedModuleManagers func(unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_ListAttachedModuleManagers calls the Security framework function CSSM_ListAttachedModuleManagers.
+func CSSM_ListAttachedModuleManagers(moduleManagerGuids unsafe.Pointer) (result int32, numberOfModuleManagers uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_ListAttachedModuleManagers == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_ListAttachedModuleManagers, _lib, "CSSM_ListAttachedModuleManagers")
+	}
+	var _out0 uint32
+	_ret := _fnCSSM_ListAttachedModuleManagers(unsafe.Pointer(&_out0), moduleManagerGuids)
+	return _ret, _out0
+}
+
+var _fnCSSM_ModuleAttach func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, uint32, uint32, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_ModuleAttach calls the Security framework function CSSM_ModuleAttach.
+func CSSM_ModuleAttach(moduleGuid unsafe.Pointer, memoryFuncs unsafe.Pointer, subserviceID uint32, subServiceType uint32, attachFlags uint32, keyHierarchy uint32, functionTable unsafe.Pointer, numFunctionTable uint32, reserved unsafe.Pointer) (result int32, version CssmVersion, newModuleHandle int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_ModuleAttach == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_ModuleAttach, _lib, "CSSM_ModuleAttach")
+	}
+	var _out0 CssmVersion
+	var _out1 int
+	_ret := _fnCSSM_ModuleAttach(moduleGuid, unsafe.Pointer(&_out0), memoryFuncs, subserviceID, subServiceType, attachFlags, keyHierarchy, functionTable, numFunctionTable, reserved, unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
+}
+
 var _fnCSSM_ModuleDetach func(int) int32
 
 // CSSM_ModuleDetach calls the Security framework function CSSM_ModuleDetach.
@@ -416,6 +1785,41 @@ func CSSM_ModuleDetach(moduleHandle int) int32 {
 		ebipurego.RegisterLibFunc(&_fnCSSM_ModuleDetach, _lib, "CSSM_ModuleDetach")
 	}
 	return _fnCSSM_ModuleDetach(moduleHandle)
+}
+
+var _fnCSSM_ModuleLoad func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_ModuleLoad calls the Security framework function CSSM_ModuleLoad.
+func CSSM_ModuleLoad(moduleGuid unsafe.Pointer, keyHierarchy uint32, appNotifyCallback unsafe.Pointer, appNotifyCallbackCtx unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_ModuleLoad == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_ModuleLoad, _lib, "CSSM_ModuleLoad")
+	}
+	return _fnCSSM_ModuleLoad(moduleGuid, keyHierarchy, appNotifyCallback, appNotifyCallbackCtx)
+}
+
+var _fnCSSM_ModuleUnload func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_ModuleUnload calls the Security framework function CSSM_ModuleUnload.
+func CSSM_ModuleUnload(moduleGuid unsafe.Pointer, appNotifyCallback unsafe.Pointer, appNotifyCallbackCtx unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_ModuleUnload == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_ModuleUnload, _lib, "CSSM_ModuleUnload")
+	}
+	return _fnCSSM_ModuleUnload(moduleGuid, appNotifyCallback, appNotifyCallbackCtx)
+}
+
+var _fnCSSM_QueryKeySizeInBits func(int, uint64, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_QueryKeySizeInBits calls the Security framework function CSSM_QueryKeySizeInBits.
+func CSSM_QueryKeySizeInBits(cspHandle int, ccHandle uint64, key unsafe.Pointer) (result int32, keySize CssmKeySize) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_QueryKeySizeInBits == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_QueryKeySizeInBits, _lib, "CSSM_QueryKeySizeInBits")
+	}
+	var _out0 CssmKeySize
+	_ret := _fnCSSM_QueryKeySizeInBits(cspHandle, ccHandle, key, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnCSSM_QuerySize func(uint64, int32, uint32, unsafe.Pointer) int32
@@ -431,6 +1835,39 @@ func CSSM_QuerySize(ccHandle uint64, encrypt int32, querySizeCount uint32) (resu
 	return _ret, _out0
 }
 
+var _fnCSSM_RetrieveCounter func(int, unsafe.Pointer) int32
+
+// CSSM_RetrieveCounter calls the Security framework function CSSM_RetrieveCounter.
+func CSSM_RetrieveCounter(cspHandle int, counter unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_RetrieveCounter == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_RetrieveCounter, _lib, "CSSM_RetrieveCounter")
+	}
+	return _fnCSSM_RetrieveCounter(cspHandle, counter)
+}
+
+var _fnCSSM_RetrieveUniqueId func(int, unsafe.Pointer) int32
+
+// CSSM_RetrieveUniqueId calls the Security framework function CSSM_RetrieveUniqueId.
+func CSSM_RetrieveUniqueId(cspHandle int, uniqueID unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_RetrieveUniqueId == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_RetrieveUniqueId, _lib, "CSSM_RetrieveUniqueId")
+	}
+	return _fnCSSM_RetrieveUniqueId(cspHandle, uniqueID)
+}
+
+var _fnCSSM_SetContext func(uint64, unsafe.Pointer) int32
+
+// CSSM_SetContext calls the Security framework function CSSM_SetContext.
+func CSSM_SetContext(ccHandle uint64, context_ unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_SetContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_SetContext, _lib, "CSSM_SetContext")
+	}
+	return _fnCSSM_SetContext(ccHandle, context_)
+}
+
 var _fnCSSM_SetPrivilege func(uint64) int32
 
 // CSSM_SetPrivilege calls the Security framework function CSSM_SetPrivilege.
@@ -440,6 +1877,28 @@ func CSSM_SetPrivilege(privilege uint64) int32 {
 		ebipurego.RegisterLibFunc(&_fnCSSM_SetPrivilege, _lib, "CSSM_SetPrivilege")
 	}
 	return _fnCSSM_SetPrivilege(privilege)
+}
+
+var _fnCSSM_SignData func(uint64, unsafe.Pointer, uint32, uint32, unsafe.Pointer) int32
+
+// CSSM_SignData calls the Security framework function CSSM_SignData.
+func CSSM_SignData(ccHandle uint64, dataBufs unsafe.Pointer, dataBufCount uint32, digestAlgorithm uint32, signature unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_SignData == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_SignData, _lib, "CSSM_SignData")
+	}
+	return _fnCSSM_SignData(ccHandle, dataBufs, dataBufCount, digestAlgorithm, signature)
+}
+
+var _fnCSSM_SignDataFinal func(uint64, unsafe.Pointer) int32
+
+// CSSM_SignDataFinal calls the Security framework function CSSM_SignDataFinal.
+func CSSM_SignDataFinal(ccHandle uint64, signature unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_SignDataFinal == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_SignDataFinal, _lib, "CSSM_SignDataFinal")
+	}
+	return _fnCSSM_SignDataFinal(ccHandle, signature)
 }
 
 var _fnCSSM_SignDataInit func(uint64) int32
@@ -464,6 +1923,85 @@ func CSSM_SignDataUpdate(ccHandle uint64, dataBufs unsafe.Pointer, dataBufCount 
 	return _fnCSSM_SignDataUpdate(ccHandle, dataBufs, dataBufCount)
 }
 
+var _fnCSSM_TP_ApplyCrlToDb func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_ApplyCrlToDb calls the Security framework function CSSM_TP_ApplyCrlToDb.
+func CSSM_TP_ApplyCrlToDb(tpHandle int, clHandle int, cspHandle int, crlToBeApplied unsafe.Pointer, signerCertGroup unsafe.Pointer, applyCrlVerifyContext unsafe.Pointer, applyCrlVerifyResult unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_ApplyCrlToDb == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_ApplyCrlToDb, _lib, "CSSM_TP_ApplyCrlToDb")
+	}
+	return _fnCSSM_TP_ApplyCrlToDb(tpHandle, clHandle, cspHandle, crlToBeApplied, signerCertGroup, applyCrlVerifyContext, applyCrlVerifyResult)
+}
+
+var _fnCSSM_TP_CertCreateTemplate func(int, int, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_CertCreateTemplate calls the Security framework function CSSM_TP_CertCreateTemplate.
+func CSSM_TP_CertCreateTemplate(tpHandle int, clHandle int, numberOfFields uint32, certFields unsafe.Pointer, certTemplate unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CertCreateTemplate == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CertCreateTemplate, _lib, "CSSM_TP_CertCreateTemplate")
+	}
+	return _fnCSSM_TP_CertCreateTemplate(tpHandle, clHandle, numberOfFields, certFields, certTemplate)
+}
+
+var _fnCSSM_TP_CertGetAllTemplateFields func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_CertGetAllTemplateFields calls the Security framework function CSSM_TP_CertGetAllTemplateFields.
+func CSSM_TP_CertGetAllTemplateFields(tpHandle int, clHandle int, certTemplate unsafe.Pointer, certFields unsafe.Pointer) (result int32, numberOfFields uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CertGetAllTemplateFields == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CertGetAllTemplateFields, _lib, "CSSM_TP_CertGetAllTemplateFields")
+	}
+	var _out0 uint32
+	_ret := _fnCSSM_TP_CertGetAllTemplateFields(tpHandle, clHandle, certTemplate, unsafe.Pointer(&_out0), certFields)
+	return _ret, _out0
+}
+
+var _fnCSSM_TP_CertGroupConstruct func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_CertGroupConstruct calls the Security framework function CSSM_TP_CertGroupConstruct.
+func CSSM_TP_CertGroupConstruct(tpHandle int, clHandle int, cspHandle int, dbList unsafe.Pointer, constructParams unsafe.Pointer, certGroupFrag unsafe.Pointer, certGroup unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CertGroupConstruct == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CertGroupConstruct, _lib, "CSSM_TP_CertGroupConstruct")
+	}
+	return _fnCSSM_TP_CertGroupConstruct(tpHandle, clHandle, cspHandle, dbList, constructParams, certGroupFrag, certGroup)
+}
+
+var _fnCSSM_TP_CertGroupPrune func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_CertGroupPrune calls the Security framework function CSSM_TP_CertGroupPrune.
+func CSSM_TP_CertGroupPrune(tpHandle int, clHandle int, dbList unsafe.Pointer, orderedCertGroup unsafe.Pointer, prunedCertGroup unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CertGroupPrune == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CertGroupPrune, _lib, "CSSM_TP_CertGroupPrune")
+	}
+	return _fnCSSM_TP_CertGroupPrune(tpHandle, clHandle, dbList, orderedCertGroup, prunedCertGroup)
+}
+
+var _fnCSSM_TP_CertGroupToTupleGroup func(int, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_CertGroupToTupleGroup calls the Security framework function CSSM_TP_CertGroupToTupleGroup.
+func CSSM_TP_CertGroupToTupleGroup(tpHandle int, clHandle int, certGroup unsafe.Pointer, tupleGroup unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CertGroupToTupleGroup == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CertGroupToTupleGroup, _lib, "CSSM_TP_CertGroupToTupleGroup")
+	}
+	return _fnCSSM_TP_CertGroupToTupleGroup(tpHandle, clHandle, certGroup, tupleGroup)
+}
+
+var _fnCSSM_TP_CertGroupVerify func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_CertGroupVerify calls the Security framework function CSSM_TP_CertGroupVerify.
+func CSSM_TP_CertGroupVerify(tpHandle int, clHandle int, cspHandle int, certGroupToBeVerified unsafe.Pointer, verifyContext unsafe.Pointer, verifyContextResult unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CertGroupVerify == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CertGroupVerify, _lib, "CSSM_TP_CertGroupVerify")
+	}
+	return _fnCSSM_TP_CertGroupVerify(tpHandle, clHandle, cspHandle, certGroupToBeVerified, verifyContext, verifyContextResult)
+}
+
 var _fnCSSM_TP_CertReclaimAbort func(int, uint64) int32
 
 // CSSM_TP_CertReclaimAbort calls the Security framework function CSSM_TP_CertReclaimAbort.
@@ -475,6 +2013,178 @@ func CSSM_TP_CertReclaimAbort(tpHandle int, keyCacheHandle uint64) int32 {
 	return _fnCSSM_TP_CertReclaimAbort(tpHandle, keyCacheHandle)
 }
 
+var _fnCSSM_TP_CertReclaimKey func(int, unsafe.Pointer, uint32, uint64, int, unsafe.Pointer) int32
+
+// CSSM_TP_CertReclaimKey calls the Security framework function CSSM_TP_CertReclaimKey.
+func CSSM_TP_CertReclaimKey(tpHandle int, certGroup unsafe.Pointer, certIndex uint32, keyCacheHandle uint64, cspHandle int, credAndAclEntry unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CertReclaimKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CertReclaimKey, _lib, "CSSM_TP_CertReclaimKey")
+	}
+	return _fnCSSM_TP_CertReclaimKey(tpHandle, certGroup, certIndex, keyCacheHandle, cspHandle, credAndAclEntry)
+}
+
+var _fnCSSM_TP_CertRemoveFromCrlTemplate func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_CertRemoveFromCrlTemplate calls the Security framework function CSSM_TP_CertRemoveFromCrlTemplate.
+func CSSM_TP_CertRemoveFromCrlTemplate(tpHandle int, clHandle int, cspHandle int, oldCrlTemplate unsafe.Pointer, certGroupToBeRemoved unsafe.Pointer, revokerCertGroup unsafe.Pointer, revokerVerifyContext unsafe.Pointer, revokerVerifyResult unsafe.Pointer, newCrlTemplate unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CertRemoveFromCrlTemplate == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CertRemoveFromCrlTemplate, _lib, "CSSM_TP_CertRemoveFromCrlTemplate")
+	}
+	return _fnCSSM_TP_CertRemoveFromCrlTemplate(tpHandle, clHandle, cspHandle, oldCrlTemplate, certGroupToBeRemoved, revokerCertGroup, revokerVerifyContext, revokerVerifyResult, newCrlTemplate)
+}
+
+var _fnCSSM_TP_CertRevoke func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) int32
+
+// CSSM_TP_CertRevoke calls the Security framework function CSSM_TP_CertRevoke.
+func CSSM_TP_CertRevoke(tpHandle int, clHandle int, cspHandle int, oldCrlTemplate unsafe.Pointer, certGroupToBeRevoked unsafe.Pointer, revokerCertGroup unsafe.Pointer, revokerVerifyContext unsafe.Pointer, revokerVerifyResult unsafe.Pointer, reason uint32, newCrlTemplate unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CertRevoke == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CertRevoke, _lib, "CSSM_TP_CertRevoke")
+	}
+	return _fnCSSM_TP_CertRevoke(tpHandle, clHandle, cspHandle, oldCrlTemplate, certGroupToBeRevoked, revokerCertGroup, revokerVerifyContext, revokerVerifyResult, reason, newCrlTemplate)
+}
+
+var _fnCSSM_TP_CertSign func(int, int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_CertSign calls the Security framework function CSSM_TP_CertSign.
+func CSSM_TP_CertSign(tpHandle int, clHandle int, ccHandle uint64, certTemplateToBeSigned unsafe.Pointer, signerCertGroup unsafe.Pointer, signerVerifyContext unsafe.Pointer, signerVerifyResult unsafe.Pointer, signedCert unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CertSign == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CertSign, _lib, "CSSM_TP_CertSign")
+	}
+	return _fnCSSM_TP_CertSign(tpHandle, clHandle, ccHandle, certTemplateToBeSigned, signerCertGroup, signerVerifyContext, signerVerifyResult, signedCert)
+}
+
+var _fnCSSM_TP_ConfirmCredResult func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_ConfirmCredResult calls the Security framework function CSSM_TP_ConfirmCredResult.
+func CSSM_TP_ConfirmCredResult(tpHandle int, referenceIdentifier unsafe.Pointer, callerAuthCredentials unsafe.Pointer, responses unsafe.Pointer, preferredAuthority unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_ConfirmCredResult == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_ConfirmCredResult, _lib, "CSSM_TP_ConfirmCredResult")
+	}
+	return _fnCSSM_TP_ConfirmCredResult(tpHandle, referenceIdentifier, callerAuthCredentials, responses, preferredAuthority)
+}
+
+var _fnCSSM_TP_CrlCreateTemplate func(int, int, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_CrlCreateTemplate calls the Security framework function CSSM_TP_CrlCreateTemplate.
+func CSSM_TP_CrlCreateTemplate(tpHandle int, clHandle int, numberOfFields uint32, crlFields unsafe.Pointer, newCrlTemplate unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CrlCreateTemplate == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CrlCreateTemplate, _lib, "CSSM_TP_CrlCreateTemplate")
+	}
+	return _fnCSSM_TP_CrlCreateTemplate(tpHandle, clHandle, numberOfFields, crlFields, newCrlTemplate)
+}
+
+var _fnCSSM_TP_CrlSign func(int, int, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_CrlSign calls the Security framework function CSSM_TP_CrlSign.
+func CSSM_TP_CrlSign(tpHandle int, clHandle int, ccHandle uint64, crlToBeSigned unsafe.Pointer, signerCertGroup unsafe.Pointer, signerVerifyContext unsafe.Pointer, signerVerifyResult unsafe.Pointer, signedCrl unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CrlSign == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CrlSign, _lib, "CSSM_TP_CrlSign")
+	}
+	return _fnCSSM_TP_CrlSign(tpHandle, clHandle, ccHandle, crlToBeSigned, signerCertGroup, signerVerifyContext, signerVerifyResult, signedCrl)
+}
+
+var _fnCSSM_TP_CrlVerify func(int, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_CrlVerify calls the Security framework function CSSM_TP_CrlVerify.
+func CSSM_TP_CrlVerify(tpHandle int, clHandle int, cspHandle int, crlToBeVerified unsafe.Pointer, signerCertGroup unsafe.Pointer, verifyContext unsafe.Pointer, revokerVerifyResult unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CrlVerify == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CrlVerify, _lib, "CSSM_TP_CrlVerify")
+	}
+	return _fnCSSM_TP_CrlVerify(tpHandle, clHandle, cspHandle, crlToBeVerified, signerCertGroup, verifyContext, revokerVerifyResult)
+}
+
+var _fnCSSM_TP_FormRequest func(int, unsafe.Pointer, uint32, unsafe.Pointer) int32
+
+// CSSM_TP_FormRequest calls the Security framework function CSSM_TP_FormRequest.
+func CSSM_TP_FormRequest(tpHandle int, preferredAuthority unsafe.Pointer, formType uint32, blankForm unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_FormRequest == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_FormRequest, _lib, "CSSM_TP_FormRequest")
+	}
+	return _fnCSSM_TP_FormRequest(tpHandle, preferredAuthority, formType, blankForm)
+}
+
+var _fnCSSM_TP_FormSubmit func(int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_FormSubmit calls the Security framework function CSSM_TP_FormSubmit.
+func CSSM_TP_FormSubmit(tpHandle int, formType uint32, form unsafe.Pointer, clearanceAuthority unsafe.Pointer, representedAuthority unsafe.Pointer, credentials unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_FormSubmit == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_FormSubmit, _lib, "CSSM_TP_FormSubmit")
+	}
+	return _fnCSSM_TP_FormSubmit(tpHandle, formType, form, clearanceAuthority, representedAuthority, credentials)
+}
+
+var _fnCSSM_TP_PassThrough func(int, int, uint64, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_PassThrough calls the Security framework function CSSM_TP_PassThrough.
+func CSSM_TP_PassThrough(tpHandle int, clHandle int, ccHandle uint64, dbList unsafe.Pointer, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_PassThrough == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_PassThrough, _lib, "CSSM_TP_PassThrough")
+	}
+	return _fnCSSM_TP_PassThrough(tpHandle, clHandle, ccHandle, dbList, passThroughId, inputParams, outputParams)
+}
+
+var _fnCSSM_TP_ReceiveConfirmation func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_ReceiveConfirmation calls the Security framework function CSSM_TP_ReceiveConfirmation.
+func CSSM_TP_ReceiveConfirmation(tpHandle int, referenceIdentifier unsafe.Pointer, responses unsafe.Pointer) (result int32, elapsedTime int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_ReceiveConfirmation == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_ReceiveConfirmation, _lib, "CSSM_TP_ReceiveConfirmation")
+	}
+	var _out0 int32
+	_ret := _fnCSSM_TP_ReceiveConfirmation(tpHandle, referenceIdentifier, responses, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnCSSM_TP_RetrieveCredResult func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_RetrieveCredResult calls the Security framework function CSSM_TP_RetrieveCredResult.
+func CSSM_TP_RetrieveCredResult(tpHandle int, referenceIdentifier unsafe.Pointer, callerAuthCredentials unsafe.Pointer, retrieveOutput unsafe.Pointer) (result int32, estimatedTime int32, confirmationRequired int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_RetrieveCredResult == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_RetrieveCredResult, _lib, "CSSM_TP_RetrieveCredResult")
+	}
+	var _out0 int32
+	var _out1 int32
+	_ret := _fnCSSM_TP_RetrieveCredResult(tpHandle, referenceIdentifier, callerAuthCredentials, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), retrieveOutput)
+	return _ret, _out0, _out1
+}
+
+var _fnCSSM_TP_SubmitCredRequest func(int, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_SubmitCredRequest calls the Security framework function CSSM_TP_SubmitCredRequest.
+func CSSM_TP_SubmitCredRequest(tpHandle int, preferredAuthority unsafe.Pointer, requestType uint32, requestInput unsafe.Pointer, callerAuthContext unsafe.Pointer, referenceIdentifier unsafe.Pointer) (result int32, estimatedTime int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_SubmitCredRequest == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_SubmitCredRequest, _lib, "CSSM_TP_SubmitCredRequest")
+	}
+	var _out0 int32
+	_ret := _fnCSSM_TP_SubmitCredRequest(tpHandle, preferredAuthority, requestType, requestInput, callerAuthContext, unsafe.Pointer(&_out0), referenceIdentifier)
+	return _ret, _out0
+}
+
+var _fnCSSM_TP_TupleGroupToCertGroup func(int, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_TP_TupleGroupToCertGroup calls the Security framework function CSSM_TP_TupleGroupToCertGroup.
+func CSSM_TP_TupleGroupToCertGroup(tpHandle int, clHandle int, tupleGroup unsafe.Pointer, certTemplates unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_TupleGroupToCertGroup == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_TupleGroupToCertGroup, _lib, "CSSM_TP_TupleGroupToCertGroup")
+	}
+	return _fnCSSM_TP_TupleGroupToCertGroup(tpHandle, clHandle, tupleGroup, certTemplates)
+}
+
 var _fnCSSM_Terminate func() int32
 
 // CSSM_Terminate calls the Security framework function CSSM_Terminate.
@@ -484,6 +2194,72 @@ func CSSM_Terminate() int32 {
 		ebipurego.RegisterLibFunc(&_fnCSSM_Terminate, _lib, "CSSM_Terminate")
 	}
 	return _fnCSSM_Terminate()
+}
+
+var _fnCSSM_Unintroduce func(unsafe.Pointer) int32
+
+// CSSM_Unintroduce calls the Security framework function CSSM_Unintroduce.
+func CSSM_Unintroduce(moduleID unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_Unintroduce == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_Unintroduce, _lib, "CSSM_Unintroduce")
+	}
+	return _fnCSSM_Unintroduce(moduleID)
+}
+
+var _fnCSSM_UnwrapKey func(uint64, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_UnwrapKey calls the Security framework function CSSM_UnwrapKey.
+func CSSM_UnwrapKey(ccHandle uint64, publicKey unsafe.Pointer, wrappedKey unsafe.Pointer, keyUsage uint32, keyAttr uint32, keyLabel unsafe.Pointer, credAndAclEntry unsafe.Pointer, unwrappedKey unsafe.Pointer, descriptiveData unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_UnwrapKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_UnwrapKey, _lib, "CSSM_UnwrapKey")
+	}
+	return _fnCSSM_UnwrapKey(ccHandle, publicKey, wrappedKey, keyUsage, keyAttr, keyLabel, credAndAclEntry, unwrappedKey, descriptiveData)
+}
+
+var _fnCSSM_UnwrapKeyP func(uint64, unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64) int32
+
+// CSSM_UnwrapKeyP calls the Security framework function CSSM_UnwrapKeyP.
+func CSSM_UnwrapKeyP(ccHandle uint64, publicKey unsafe.Pointer, wrappedKey unsafe.Pointer, keyUsage uint32, keyAttr uint32, keyLabel unsafe.Pointer, credAndAclEntry unsafe.Pointer, unwrappedKey unsafe.Pointer, descriptiveData unsafe.Pointer, privilege uint64) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_UnwrapKeyP == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_UnwrapKeyP, _lib, "CSSM_UnwrapKeyP")
+	}
+	return _fnCSSM_UnwrapKeyP(ccHandle, publicKey, wrappedKey, keyUsage, keyAttr, keyLabel, credAndAclEntry, unwrappedKey, descriptiveData, privilege)
+}
+
+var _fnCSSM_UpdateContextAttributes func(uint64, uint32, unsafe.Pointer) int32
+
+// CSSM_UpdateContextAttributes calls the Security framework function CSSM_UpdateContextAttributes.
+func CSSM_UpdateContextAttributes(ccHandle uint64, numberOfAttributes uint32, contextAttributes unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_UpdateContextAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_UpdateContextAttributes, _lib, "CSSM_UpdateContextAttributes")
+	}
+	return _fnCSSM_UpdateContextAttributes(ccHandle, numberOfAttributes, contextAttributes)
+}
+
+var _fnCSSM_VerifyData func(uint64, unsafe.Pointer, uint32, uint32, unsafe.Pointer) int32
+
+// CSSM_VerifyData calls the Security framework function CSSM_VerifyData.
+func CSSM_VerifyData(ccHandle uint64, dataBufs unsafe.Pointer, dataBufCount uint32, digestAlgorithm uint32, signature unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_VerifyData == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_VerifyData, _lib, "CSSM_VerifyData")
+	}
+	return _fnCSSM_VerifyData(ccHandle, dataBufs, dataBufCount, digestAlgorithm, signature)
+}
+
+var _fnCSSM_VerifyDataFinal func(uint64, unsafe.Pointer) int32
+
+// CSSM_VerifyDataFinal calls the Security framework function CSSM_VerifyDataFinal.
+func CSSM_VerifyDataFinal(ccHandle uint64, signature unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_VerifyDataFinal == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_VerifyDataFinal, _lib, "CSSM_VerifyDataFinal")
+	}
+	return _fnCSSM_VerifyDataFinal(ccHandle, signature)
 }
 
 var _fnCSSM_VerifyDataInit func(uint64) int32
@@ -508,6 +2284,39 @@ func CSSM_VerifyDataUpdate(ccHandle uint64, dataBufs unsafe.Pointer, dataBufCoun
 	return _fnCSSM_VerifyDataUpdate(ccHandle, dataBufs, dataBufCount)
 }
 
+var _fnCSSM_VerifyDevice func(int, unsafe.Pointer) int32
+
+// CSSM_VerifyDevice calls the Security framework function CSSM_VerifyDevice.
+func CSSM_VerifyDevice(cspHandle int, deviceCert unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_VerifyDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_VerifyDevice, _lib, "CSSM_VerifyDevice")
+	}
+	return _fnCSSM_VerifyDevice(cspHandle, deviceCert)
+}
+
+var _fnCSSM_VerifyMac func(uint64, unsafe.Pointer, uint32, unsafe.Pointer) int32
+
+// CSSM_VerifyMac calls the Security framework function CSSM_VerifyMac.
+func CSSM_VerifyMac(ccHandle uint64, dataBufs unsafe.Pointer, dataBufCount uint32, mac unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_VerifyMac == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_VerifyMac, _lib, "CSSM_VerifyMac")
+	}
+	return _fnCSSM_VerifyMac(ccHandle, dataBufs, dataBufCount, mac)
+}
+
+var _fnCSSM_VerifyMacFinal func(uint64, unsafe.Pointer) int32
+
+// CSSM_VerifyMacFinal calls the Security framework function CSSM_VerifyMacFinal.
+func CSSM_VerifyMacFinal(ccHandle uint64, mac unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_VerifyMacFinal == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_VerifyMacFinal, _lib, "CSSM_VerifyMacFinal")
+	}
+	return _fnCSSM_VerifyMacFinal(ccHandle, mac)
+}
+
 var _fnCSSM_VerifyMacInit func(uint64) int32
 
 // CSSM_VerifyMacInit calls the Security framework function CSSM_VerifyMacInit.
@@ -528,6 +2337,41 @@ func CSSM_VerifyMacUpdate(ccHandle uint64, dataBufs unsafe.Pointer, dataBufCount
 		ebipurego.RegisterLibFunc(&_fnCSSM_VerifyMacUpdate, _lib, "CSSM_VerifyMacUpdate")
 	}
 	return _fnCSSM_VerifyMacUpdate(ccHandle, dataBufs, dataBufCount)
+}
+
+var _fnCSSM_WrapKey func(uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CSSM_WrapKey calls the Security framework function CSSM_WrapKey.
+func CSSM_WrapKey(ccHandle uint64, accessCred unsafe.Pointer, key unsafe.Pointer, descriptiveData unsafe.Pointer, wrappedKey unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_WrapKey == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_WrapKey, _lib, "CSSM_WrapKey")
+	}
+	return _fnCSSM_WrapKey(ccHandle, accessCred, key, descriptiveData, wrappedKey)
+}
+
+var _fnCSSM_WrapKeyP func(uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64) int32
+
+// CSSM_WrapKeyP calls the Security framework function CSSM_WrapKeyP.
+func CSSM_WrapKeyP(ccHandle uint64, accessCred unsafe.Pointer, key unsafe.Pointer, descriptiveData unsafe.Pointer, wrappedKey unsafe.Pointer, privilege uint64) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_WrapKeyP == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_WrapKeyP, _lib, "CSSM_WrapKeyP")
+	}
+	return _fnCSSM_WrapKeyP(ccHandle, accessCred, key, descriptiveData, wrappedKey, privilege)
+}
+
+var _fnMDS_Initialize func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// MDS_Initialize calls the Security framework function MDS_Initialize.
+func MDS_Initialize(pCallerGuid unsafe.Pointer, pMemoryFunctions unsafe.Pointer, pDlFunctions unsafe.Pointer) (result int32, hMds int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDS_Initialize == nil {
+		ebipurego.RegisterLibFunc(&_fnMDS_Initialize, _lib, "MDS_Initialize")
+	}
+	var _out0 int
+	_ret := _fnMDS_Initialize(pCallerGuid, pMemoryFunctions, pDlFunctions, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnMDS_Install func(int) int32
@@ -1115,6 +2959,30 @@ func SecAccessCopyOwnerAndACL(accessRef obj.Object, aclList unsafe.Pointer) (res
 	return _ret, _out0, _out1, _out2
 }
 
+var _fnSecAccessCreateFromOwnerAndACL func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
+
+// SecAccessCreateFromOwnerAndACL calls the Security framework function SecAccessCreateFromOwnerAndACL.
+func SecAccessCreateFromOwnerAndACL(owner unsafe.Pointer, aclCount uint32, acls unsafe.Pointer, accessRef unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecAccessCreateFromOwnerAndACL == nil {
+		ebipurego.RegisterLibFunc(&_fnSecAccessCreateFromOwnerAndACL, _lib, "SecAccessCreateFromOwnerAndACL")
+	}
+	return int(_fnSecAccessCreateFromOwnerAndACL(owner, aclCount, acls, accessRef))
+}
+
+var _fnSecAccessGetOwnerAndACL func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// SecAccessGetOwnerAndACL calls the Security framework function SecAccessGetOwnerAndACL.
+func SecAccessGetOwnerAndACL(accessRef obj.Object, owner unsafe.Pointer, acls unsafe.Pointer) (result int, aclCount uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecAccessGetOwnerAndACL == nil {
+		ebipurego.RegisterLibFunc(&_fnSecAccessGetOwnerAndACL, _lib, "SecAccessGetOwnerAndACL")
+	}
+	var _out0 uint32
+	_ret := int(_fnSecAccessGetOwnerAndACL(objref.IDOf(accessRef), owner, unsafe.Pointer(&_out0), acls))
+	return _ret, _out0
+}
+
 var _fnSecAccessGetTypeID func() int
 
 // SecAccessGetTypeID calls the Security framework function SecAccessGetTypeID.
@@ -1124,6 +2992,17 @@ func SecAccessGetTypeID() int {
 		ebipurego.RegisterLibFunc(&_fnSecAccessGetTypeID, _lib, "SecAccessGetTypeID")
 	}
 	return _fnSecAccessGetTypeID()
+}
+
+var _fnSecAddSharedWebCredential func(objc.ID, objc.ID, objc.ID, unsafe.Pointer)
+
+// SecAddSharedWebCredential calls the Security framework function SecAddSharedWebCredential.
+func SecAddSharedWebCredential(fqdn obj.Object, account obj.Object, password obj.Object, completionHandler unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecAddSharedWebCredential == nil {
+		ebipurego.RegisterLibFunc(&_fnSecAddSharedWebCredential, _lib, "SecAddSharedWebCredential")
+	}
+	_fnSecAddSharedWebCredential(objref.IDOf(fqdn), objref.IDOf(account), objref.IDOf(password), completionHandler)
 }
 
 var _fnSecCertificateCopyData func(objc.ID) objc.ID
@@ -1222,6 +3101,17 @@ func SecCertificateCopySubjectSummary(certificate obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnSecCertificateCreateFromData func(unsafe.Pointer, uint32, uint32, unsafe.Pointer) int32
+
+// SecCertificateCreateFromData calls the Security framework function SecCertificateCreateFromData.
+func SecCertificateCreateFromData(data unsafe.Pointer, type_ uint32, encoding uint32, certificate unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateCreateFromData == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateCreateFromData, _lib, "SecCertificateCreateFromData")
+	}
+	return int(_fnSecCertificateCreateFromData(data, type_, encoding, certificate))
+}
+
 var _fnSecCertificateCreateWithData func(objc.ID, objc.ID) objc.ID
 
 // SecCertificateCreateWithData calls the Security framework function SecCertificateCreateWithData.
@@ -1232,6 +3122,17 @@ func SecCertificateCreateWithData(allocator obj.Object, data obj.Object) obj.Obj
 	}
 	_ret := _fnSecCertificateCreateWithData(objref.IDOf(allocator), objref.IDOf(data))
 	return obj.Wrap(_ret)
+}
+
+var _fnSecCertificateGetAlgorithmID func(objc.ID, unsafe.Pointer) int32
+
+// SecCertificateGetAlgorithmID calls the Security framework function SecCertificateGetAlgorithmID.
+func SecCertificateGetAlgorithmID(certificate obj.Object, algid unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateGetAlgorithmID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateGetAlgorithmID, _lib, "SecCertificateGetAlgorithmID")
+	}
+	return int(_fnSecCertificateGetAlgorithmID(objref.IDOf(certificate), algid))
 }
 
 var _fnSecCertificateGetCLHandle func(objc.ID, unsafe.Pointer) int32
@@ -1245,6 +3146,39 @@ func SecCertificateGetCLHandle(certificate obj.Object) (result int, clHandle int
 	var _out0 int
 	_ret := int(_fnSecCertificateGetCLHandle(objref.IDOf(certificate), unsafe.Pointer(&_out0)))
 	return _ret, _out0
+}
+
+var _fnSecCertificateGetData func(objc.ID, unsafe.Pointer) int32
+
+// SecCertificateGetData calls the Security framework function SecCertificateGetData.
+func SecCertificateGetData(certificate obj.Object, data unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateGetData == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateGetData, _lib, "SecCertificateGetData")
+	}
+	return int(_fnSecCertificateGetData(objref.IDOf(certificate), data))
+}
+
+var _fnSecCertificateGetIssuer func(objc.ID, unsafe.Pointer) int32
+
+// SecCertificateGetIssuer calls the Security framework function SecCertificateGetIssuer.
+func SecCertificateGetIssuer(certificate obj.Object, issuer unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateGetIssuer == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateGetIssuer, _lib, "SecCertificateGetIssuer")
+	}
+	return int(_fnSecCertificateGetIssuer(objref.IDOf(certificate), issuer))
+}
+
+var _fnSecCertificateGetSubject func(objc.ID, unsafe.Pointer) int32
+
+// SecCertificateGetSubject calls the Security framework function SecCertificateGetSubject.
+func SecCertificateGetSubject(certificate obj.Object, subject unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateGetSubject == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateGetSubject, _lib, "SecCertificateGetSubject")
+	}
+	return int(_fnSecCertificateGetSubject(objref.IDOf(certificate), subject))
 }
 
 var _fnSecCertificateGetType func(objc.ID, unsafe.Pointer) int32
@@ -1422,6 +3356,31 @@ func SecIdentitySearchGetTypeID() int {
 	return _fnSecIdentitySearchGetTypeID()
 }
 
+var _fnSecItemExport func(objc.ID, SecExternalFormat, SecItemImportExportFlags, unsafe.Pointer, unsafe.Pointer) int32
+
+// SecItemExport calls the Security framework function SecItemExport.
+func SecItemExport(secItemOrArray obj.Object, outputFormat SecExternalFormat, flags SecItemImportExportFlags, keyParams unsafe.Pointer, exportedData unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecItemExport == nil {
+		ebipurego.RegisterLibFunc(&_fnSecItemExport, _lib, "SecItemExport")
+	}
+	return int(_fnSecItemExport(objref.IDOf(secItemOrArray), outputFormat, flags, keyParams, exportedData))
+}
+
+var _fnSecItemImport func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, SecItemImportExportFlags, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
+
+// SecItemImport calls the Security framework function SecItemImport.
+func SecItemImport(importedData obj.Object, fileNameOrExtension obj.Object, flags SecItemImportExportFlags, keyParams unsafe.Pointer, importKeychain obj.Object, outItems unsafe.Pointer) (result int, inputFormat SecExternalFormat, itemType SecExternalItemType) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecItemImport == nil {
+		ebipurego.RegisterLibFunc(&_fnSecItemImport, _lib, "SecItemImport")
+	}
+	var _out0 SecExternalFormat
+	var _out1 SecExternalItemType
+	_ret := int(_fnSecItemImport(objref.IDOf(importedData), objref.IDOf(fileNameOrExtension), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags, keyParams, objref.IDOf(importKeychain), outItems))
+	return _ret, _out0, _out1
+}
+
 var _fnSecKeyCopyAttributes func(objc.ID) objc.ID
 
 // SecKeyCopyAttributes calls the Security framework function SecKeyCopyAttributes.
@@ -1444,6 +3403,17 @@ func SecKeyCopyPublicKey(key obj.Object) obj.Object {
 	}
 	_ret := _fnSecKeyCopyPublicKey(objref.IDOf(key))
 	return obj.Wrap(_ret)
+}
+
+var _fnSecKeyGeneratePairAsync func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// SecKeyGeneratePairAsync calls the Security framework function SecKeyGeneratePairAsync.
+func SecKeyGeneratePairAsync(parameters obj.Object, deliveryQueue unsafe.Pointer, result unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeyGeneratePairAsync == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeyGeneratePairAsync, _lib, "SecKeyGeneratePairAsync")
+	}
+	_fnSecKeyGeneratePairAsync(objref.IDOf(parameters), deliveryQueue, result)
 }
 
 var _fnSecKeyGetBlockSize func(objc.ID) int
@@ -1470,6 +3440,28 @@ func SecKeyGetCSPHandle(keyRef obj.Object) (result int, cspHandle int) {
 	return _ret, _out0
 }
 
+var _fnSecKeyGetCSSMKey func(objc.ID, unsafe.Pointer) int32
+
+// SecKeyGetCSSMKey calls the Security framework function SecKeyGetCSSMKey.
+func SecKeyGetCSSMKey(key obj.Object, cssmKey unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeyGetCSSMKey == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeyGetCSSMKey, _lib, "SecKeyGetCSSMKey")
+	}
+	return int(_fnSecKeyGetCSSMKey(objref.IDOf(key), cssmKey))
+}
+
+var _fnSecKeyGetCredentials func(objc.ID, int32, SecCredentialType, unsafe.Pointer) int32
+
+// SecKeyGetCredentials calls the Security framework function SecKeyGetCredentials.
+func SecKeyGetCredentials(keyRef obj.Object, operation int32, credentialType SecCredentialType, outCredentials unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeyGetCredentials == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeyGetCredentials, _lib, "SecKeyGetCredentials")
+	}
+	return int(_fnSecKeyGetCredentials(objref.IDOf(keyRef), operation, credentialType, outCredentials))
+}
+
 var _fnSecKeyGetTypeID func() int
 
 // SecKeyGetTypeID calls the Security framework function SecKeyGetTypeID.
@@ -1490,6 +3482,17 @@ func SecKeyIsAlgorithmSupported(key obj.Object, operation SecKeyOperationType, a
 		ebipurego.RegisterLibFunc(&_fnSecKeyIsAlgorithmSupported, _lib, "SecKeyIsAlgorithmSupported")
 	}
 	return _fnSecKeyIsAlgorithmSupported(objref.IDOf(key), operation, algorithm)
+}
+
+var _fnSecKeychainAttributeInfoForItemID func(objc.ID, int, unsafe.Pointer) int32
+
+// SecKeychainAttributeInfoForItemID calls the Security framework function SecKeychainAttributeInfoForItemID.
+func SecKeychainAttributeInfoForItemID(keychain obj.Object, itemID int, info unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainAttributeInfoForItemID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainAttributeInfoForItemID, _lib, "SecKeychainAttributeInfoForItemID")
+	}
+	return int(_fnSecKeychainAttributeInfoForItemID(objref.IDOf(keychain), itemID, info))
 }
 
 var _fnSecKeychainCopySettings func(objc.ID, unsafe.Pointer) int32
@@ -1529,6 +3532,17 @@ func SecKeychainFindInternetPassword(keychainOrArray obj.Object, serverNameLengt
 	var _out0 int
 	_ret := int(_fnSecKeychainFindInternetPassword(objref.IDOf(keychainOrArray), serverNameLength, serverName, securityDomainLength, securityDomain, accountNameLength, accountName, pathLength, path, port, protocol, authenticationType, unsafe.Pointer(&_out0), passwordData, itemRef))
 	return _ret, _out0
+}
+
+var _fnSecKeychainFreeAttributeInfo func(unsafe.Pointer) int32
+
+// SecKeychainFreeAttributeInfo calls the Security framework function SecKeychainFreeAttributeInfo.
+func SecKeychainFreeAttributeInfo(info unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainFreeAttributeInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainFreeAttributeInfo, _lib, "SecKeychainFreeAttributeInfo")
+	}
+	return int(_fnSecKeychainFreeAttributeInfo(info))
 }
 
 var _fnSecKeychainGetCSPHandle func(objc.ID, unsafe.Pointer) int32
@@ -1633,6 +3647,20 @@ func SecKeychainGetVersion() (result int, returnVers int) {
 	return _ret, _out0
 }
 
+var _fnSecKeychainItemCopyAttributesAndData func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// SecKeychainItemCopyAttributesAndData calls the Security framework function SecKeychainItemCopyAttributesAndData.
+func SecKeychainItemCopyAttributesAndData(itemRef obj.Object, info unsafe.Pointer, attrList unsafe.Pointer, outData unsafe.Pointer) (result int, itemClass SecItemClass, length int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainItemCopyAttributesAndData == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCopyAttributesAndData, _lib, "SecKeychainItemCopyAttributesAndData")
+	}
+	var _out0 SecItemClass
+	var _out1 int
+	_ret := int(_fnSecKeychainItemCopyAttributesAndData(objref.IDOf(itemRef), info, unsafe.Pointer(&_out0), attrList, unsafe.Pointer(&_out1), outData))
+	return _ret, _out0, _out1
+}
+
 var _fnSecKeychainItemCopyContent func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecKeychainItemCopyContent calls the Security framework function SecKeychainItemCopyContent.
@@ -1656,6 +3684,39 @@ func SecKeychainItemCreateFromContent(itemClass SecItemClass, attrList unsafe.Po
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCreateFromContent, _lib, "SecKeychainItemCreateFromContent")
 	}
 	return int(_fnSecKeychainItemCreateFromContent(itemClass, attrList, length, data, objref.IDOf(keychainRef), objref.IDOf(initialAccess), itemRef))
+}
+
+var _fnSecKeychainItemExport func(objc.ID, SecExternalFormat, SecItemImportExportFlags, unsafe.Pointer, unsafe.Pointer) int32
+
+// SecKeychainItemExport calls the Security framework function SecKeychainItemExport.
+func SecKeychainItemExport(keychainItemOrArray obj.Object, outputFormat SecExternalFormat, flags SecItemImportExportFlags, keyParams unsafe.Pointer, exportedData unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainItemExport == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainItemExport, _lib, "SecKeychainItemExport")
+	}
+	return int(_fnSecKeychainItemExport(objref.IDOf(keychainItemOrArray), outputFormat, flags, keyParams, exportedData))
+}
+
+var _fnSecKeychainItemFreeAttributesAndData func(unsafe.Pointer, unsafe.Pointer) int32
+
+// SecKeychainItemFreeAttributesAndData calls the Security framework function SecKeychainItemFreeAttributesAndData.
+func SecKeychainItemFreeAttributesAndData(attrList unsafe.Pointer, data unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainItemFreeAttributesAndData == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainItemFreeAttributesAndData, _lib, "SecKeychainItemFreeAttributesAndData")
+	}
+	return int(_fnSecKeychainItemFreeAttributesAndData(attrList, data))
+}
+
+var _fnSecKeychainItemFreeContent func(unsafe.Pointer, unsafe.Pointer) int32
+
+// SecKeychainItemFreeContent calls the Security framework function SecKeychainItemFreeContent.
+func SecKeychainItemFreeContent(attrList unsafe.Pointer, data unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainItemFreeContent == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainItemFreeContent, _lib, "SecKeychainItemFreeContent")
+	}
+	return int(_fnSecKeychainItemFreeContent(attrList, data))
 }
 
 var _fnSecKeychainItemGetDLDBHandle func(objc.ID, unsafe.Pointer) int32
@@ -1682,6 +3743,31 @@ func SecKeychainItemGetTypeID() int {
 	return _fnSecKeychainItemGetTypeID()
 }
 
+var _fnSecKeychainItemGetUniqueRecordID func(objc.ID, unsafe.Pointer) int32
+
+// SecKeychainItemGetUniqueRecordID calls the Security framework function SecKeychainItemGetUniqueRecordID.
+func SecKeychainItemGetUniqueRecordID(itemRef obj.Object, uniqueRecordID unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainItemGetUniqueRecordID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainItemGetUniqueRecordID, _lib, "SecKeychainItemGetUniqueRecordID")
+	}
+	return int(_fnSecKeychainItemGetUniqueRecordID(objref.IDOf(itemRef), uniqueRecordID))
+}
+
+var _fnSecKeychainItemImport func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, SecItemImportExportFlags, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
+
+// SecKeychainItemImport calls the Security framework function SecKeychainItemImport.
+func SecKeychainItemImport(importedData obj.Object, fileNameOrExtension obj.Object, flags SecItemImportExportFlags, keyParams unsafe.Pointer, importKeychain obj.Object, outItems unsafe.Pointer) (result int, inputFormat SecExternalFormat, itemType SecExternalItemType) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainItemImport == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainItemImport, _lib, "SecKeychainItemImport")
+	}
+	var _out0 SecExternalFormat
+	var _out1 SecExternalItemType
+	_ret := int(_fnSecKeychainItemImport(objref.IDOf(importedData), objref.IDOf(fileNameOrExtension), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags, keyParams, objref.IDOf(importKeychain), outItems))
+	return _ret, _out0, _out1
+}
+
 var _fnSecKeychainItemModifyAttributesAndData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // SecKeychainItemModifyAttributesAndData calls the Security framework function SecKeychainItemModifyAttributesAndData.
@@ -1702,6 +3788,17 @@ func SecKeychainItemModifyContent(itemRef obj.Object, attrList unsafe.Pointer, l
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemModifyContent, _lib, "SecKeychainItemModifyContent")
 	}
 	return int(_fnSecKeychainItemModifyContent(objref.IDOf(itemRef), attrList, length, data))
+}
+
+var _fnSecKeychainSearchCreateFromAttributes func(objc.ID, SecItemClass, unsafe.Pointer, unsafe.Pointer) int32
+
+// SecKeychainSearchCreateFromAttributes calls the Security framework function SecKeychainSearchCreateFromAttributes.
+func SecKeychainSearchCreateFromAttributes(keychainOrArray obj.Object, itemClass SecItemClass, attrList unsafe.Pointer, searchRef unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainSearchCreateFromAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainSearchCreateFromAttributes, _lib, "SecKeychainSearchCreateFromAttributes")
+	}
+	return int(_fnSecKeychainSearchCreateFromAttributes(objref.IDOf(keychainOrArray), itemClass, attrList, searchRef))
 }
 
 var _fnSecKeychainSearchGetTypeID func() int
@@ -1800,6 +3897,17 @@ func SecPolicyCreateWithProperties(policyIdentifier obj.Object, properties obj.O
 	return obj.Wrap(_ret)
 }
 
+var _fnSecPolicyGetOID func(objc.ID, unsafe.Pointer) int32
+
+// SecPolicyGetOID calls the Security framework function SecPolicyGetOID.
+func SecPolicyGetOID(policyRef obj.Object, oid unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecPolicyGetOID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecPolicyGetOID, _lib, "SecPolicyGetOID")
+	}
+	return int(_fnSecPolicyGetOID(objref.IDOf(policyRef), oid))
+}
+
 var _fnSecPolicyGetTPHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecPolicyGetTPHandle calls the Security framework function SecPolicyGetTPHandle.
@@ -1824,6 +3932,28 @@ func SecPolicyGetTypeID() int {
 	return _fnSecPolicyGetTypeID()
 }
 
+var _fnSecPolicyGetValue func(objc.ID, unsafe.Pointer) int32
+
+// SecPolicyGetValue calls the Security framework function SecPolicyGetValue.
+func SecPolicyGetValue(policyRef obj.Object, value unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecPolicyGetValue == nil {
+		ebipurego.RegisterLibFunc(&_fnSecPolicyGetValue, _lib, "SecPolicyGetValue")
+	}
+	return int(_fnSecPolicyGetValue(objref.IDOf(policyRef), value))
+}
+
+var _fnSecPolicySearchCreate func(uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// SecPolicySearchCreate calls the Security framework function SecPolicySearchCreate.
+func SecPolicySearchCreate(certType uint32, policyOID unsafe.Pointer, value unsafe.Pointer, searchRef unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecPolicySearchCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnSecPolicySearchCreate, _lib, "SecPolicySearchCreate")
+	}
+	return int(_fnSecPolicySearchCreate(certType, policyOID, value, searchRef))
+}
+
 var _fnSecPolicySearchGetTypeID func() int
 
 // SecPolicySearchGetTypeID calls the Security framework function SecPolicySearchGetTypeID.
@@ -1835,6 +3965,17 @@ func SecPolicySearchGetTypeID() int {
 	return _fnSecPolicySearchGetTypeID()
 }
 
+var _fnSecPolicySetValue func(objc.ID, unsafe.Pointer) int32
+
+// SecPolicySetValue calls the Security framework function SecPolicySetValue.
+func SecPolicySetValue(policyRef obj.Object, value unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecPolicySetValue == nil {
+		ebipurego.RegisterLibFunc(&_fnSecPolicySetValue, _lib, "SecPolicySetValue")
+	}
+	return int(_fnSecPolicySetValue(objref.IDOf(policyRef), value))
+}
+
 var _fnSecRandomCopyBytes func(objc.ID, int, unsafe.Pointer) int32
 
 // SecRandomCopyBytes calls the Security framework function SecRandomCopyBytes.
@@ -1844,6 +3985,17 @@ func SecRandomCopyBytes(rnd obj.Object, count int, data unsafe.Pointer) int {
 		ebipurego.RegisterLibFunc(&_fnSecRandomCopyBytes, _lib, "SecRandomCopyBytes")
 	}
 	return int(_fnSecRandomCopyBytes(objref.IDOf(rnd), count, data))
+}
+
+var _fnSecRequestSharedWebCredential func(objc.ID, objc.ID, unsafe.Pointer)
+
+// SecRequestSharedWebCredential calls the Security framework function SecRequestSharedWebCredential.
+func SecRequestSharedWebCredential(fqdn obj.Object, account obj.Object, completionHandler unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecRequestSharedWebCredential == nil {
+		ebipurego.RegisterLibFunc(&_fnSecRequestSharedWebCredential, _lib, "SecRequestSharedWebCredential")
+	}
+	_fnSecRequestSharedWebCredential(objref.IDOf(fqdn), objref.IDOf(account), completionHandler)
 }
 
 var _fnSecRequirementGetTypeID func() int
@@ -1951,6 +4103,17 @@ func SecTransformCustomSetAttribute(ref obj.Object, attribute unsafe.Pointer, ty
 	return obj.Wrap(_ret)
 }
 
+var _fnSecTransformExecuteAsync func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+
+// SecTransformExecuteAsync calls the Security framework function SecTransformExecuteAsync.
+func SecTransformExecuteAsync(transformRef unsafe.Pointer, deliveryQueue unsafe.Pointer, deliveryBlock unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTransformExecuteAsync == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTransformExecuteAsync, _lib, "SecTransformExecuteAsync")
+	}
+	_fnSecTransformExecuteAsync(transformRef, deliveryQueue, deliveryBlock)
+}
+
 var _fnSecTransformGetAttribute func(unsafe.Pointer, objc.ID) objc.ID
 
 // SecTransformGetAttribute calls the Security framework function SecTransformGetAttribute.
@@ -1995,6 +4158,42 @@ func SecTransformPushbackAttribute(ref obj.Object, attribute unsafe.Pointer, val
 		ebipurego.RegisterLibFunc(&_fnSecTransformPushbackAttribute, _lib, "SecTransformPushbackAttribute")
 	}
 	_ret := _fnSecTransformPushbackAttribute(objref.IDOf(ref), attribute, objref.IDOf(value))
+	return obj.Wrap(_ret)
+}
+
+var _fnSecTransformSetAttributeAction func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
+
+// SecTransformSetAttributeAction calls the Security framework function SecTransformSetAttributeAction.
+func SecTransformSetAttributeAction(ref obj.Object, action obj.Object, attribute unsafe.Pointer, newAction unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTransformSetAttributeAction == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTransformSetAttributeAction, _lib, "SecTransformSetAttributeAction")
+	}
+	_ret := _fnSecTransformSetAttributeAction(objref.IDOf(ref), objref.IDOf(action), attribute, newAction)
+	return obj.Wrap(_ret)
+}
+
+var _fnSecTransformSetDataAction func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
+
+// SecTransformSetDataAction calls the Security framework function SecTransformSetDataAction.
+func SecTransformSetDataAction(ref obj.Object, action obj.Object, newAction unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTransformSetDataAction == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTransformSetDataAction, _lib, "SecTransformSetDataAction")
+	}
+	_ret := _fnSecTransformSetDataAction(objref.IDOf(ref), objref.IDOf(action), newAction)
+	return obj.Wrap(_ret)
+}
+
+var _fnSecTransformSetTransformAction func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
+
+// SecTransformSetTransformAction calls the Security framework function SecTransformSetTransformAction.
+func SecTransformSetTransformAction(ref obj.Object, action obj.Object, newAction unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTransformSetTransformAction == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTransformSetTransformAction, _lib, "SecTransformSetTransformAction")
+	}
+	_ret := _fnSecTransformSetTransformAction(objref.IDOf(ref), objref.IDOf(action), newAction)
 	return obj.Wrap(_ret)
 }
 
@@ -2083,6 +4282,28 @@ func SecTrustEvaluate(trust obj.Object) (result int, result_ SecTrustResultType)
 	return _ret, _out0
 }
 
+var _fnSecTrustEvaluateAsync func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// SecTrustEvaluateAsync calls the Security framework function SecTrustEvaluateAsync.
+func SecTrustEvaluateAsync(trust obj.Object, queue unsafe.Pointer, result unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustEvaluateAsync == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateAsync, _lib, "SecTrustEvaluateAsync")
+	}
+	return int(_fnSecTrustEvaluateAsync(objref.IDOf(trust), queue, result))
+}
+
+var _fnSecTrustEvaluateAsyncWithError func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// SecTrustEvaluateAsyncWithError calls the Security framework function SecTrustEvaluateAsyncWithError.
+func SecTrustEvaluateAsyncWithError(trust obj.Object, queue unsafe.Pointer, result unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustEvaluateAsyncWithError == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateAsyncWithError, _lib, "SecTrustEvaluateAsyncWithError")
+	}
+	return int(_fnSecTrustEvaluateAsyncWithError(objref.IDOf(trust), queue, result))
+}
+
 var _fnSecTrustEvaluateWithError func(objc.ID, unsafe.Pointer) bool
 
 // SecTrustEvaluateWithError calls the Security framework function SecTrustEvaluateWithError.
@@ -2117,6 +4338,17 @@ func SecTrustGetCertificateCount(trust obj.Object) int {
 	return _fnSecTrustGetCertificateCount(objref.IDOf(trust))
 }
 
+var _fnSecTrustGetCssmResult func(objc.ID, unsafe.Pointer) int32
+
+// SecTrustGetCssmResult calls the Security framework function SecTrustGetCssmResult.
+func SecTrustGetCssmResult(trust obj.Object, result unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustGetCssmResult == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustGetCssmResult, _lib, "SecTrustGetCssmResult")
+	}
+	return int(_fnSecTrustGetCssmResult(objref.IDOf(trust), result))
+}
+
 var _fnSecTrustGetCssmResultCode func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustGetCssmResultCode calls the Security framework function SecTrustGetCssmResultCode.
@@ -2140,6 +4372,19 @@ func SecTrustGetNetworkFetchAllowed(trust obj.Object) (result int, allowFetch ui
 	}
 	var _out0 uint8
 	_ret := int(_fnSecTrustGetNetworkFetchAllowed(objref.IDOf(trust), unsafe.Pointer(&_out0)))
+	return _ret, _out0
+}
+
+var _fnSecTrustGetResult func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// SecTrustGetResult calls the Security framework function SecTrustGetResult.
+func SecTrustGetResult(trustRef obj.Object, certChain unsafe.Pointer, statusChain unsafe.Pointer) (result int, result_ SecTrustResultType) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustGetResult == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustGetResult, _lib, "SecTrustGetResult")
+	}
+	var _out0 SecTrustResultType
+	_ret := int(_fnSecTrustGetResult(objref.IDOf(trustRef), unsafe.Pointer(&_out0), certChain, statusChain))
 	return _ret, _out0
 }
 
@@ -2227,6 +4472,19 @@ func SessionGetInfo(session int) (result int, sessionId int, attributes SessionA
 	return _ret, _out0, _out1
 }
 
+var _fnCssmOidToAlg func(unsafe.Pointer, unsafe.Pointer) bool
+
+// CssmOidToAlg calls the Security framework function cssmOidToAlg.
+func CssmOidToAlg(oid unsafe.Pointer) (ok bool, alg uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCssmOidToAlg == nil {
+		ebipurego.RegisterLibFunc(&_fnCssmOidToAlg, _lib, "cssmOidToAlg")
+	}
+	var _out0 uint32
+	_ret := _fnCssmOidToAlg(oid, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnCssmPerror func(string, int32)
 
 // CssmPerror calls the Security framework function cssmPerror.
@@ -2248,6 +4506,17 @@ func SecCertificateCopyRef(certificate unsafe.Pointer) obj.Object {
 	}
 	_ret := _fnSecCertificateCopyRef(certificate)
 	return obj.Wrap(_ret)
+}
+
+var _fnSecIdentityAccessCertificates func(unsafe.Pointer, unsafe.Pointer) bool
+
+// SecIdentityAccessCertificates calls the Security framework function sec_identity_access_certificates.
+func SecIdentityAccessCertificates(identity unsafe.Pointer, handler unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecIdentityAccessCertificates == nil {
+		ebipurego.RegisterLibFunc(&_fnSecIdentityAccessCertificates, _lib, "sec_identity_access_certificates")
+	}
+	return _fnSecIdentityAccessCertificates(identity, handler)
 }
 
 var _fnSecIdentityCopyCertificatesRef func(unsafe.Pointer) objc.ID
@@ -2272,6 +4541,50 @@ func SecIdentityCopyRef(identity unsafe.Pointer) obj.Object {
 	}
 	_ret := _fnSecIdentityCopyRef(identity)
 	return obj.Wrap(_ret)
+}
+
+var _fnSecProtocolMetadataAccessDistinguishedNames func(unsafe.Pointer, unsafe.Pointer) bool
+
+// SecProtocolMetadataAccessDistinguishedNames calls the Security framework function sec_protocol_metadata_access_distinguished_names.
+func SecProtocolMetadataAccessDistinguishedNames(metadata unsafe.Pointer, handler unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolMetadataAccessDistinguishedNames == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolMetadataAccessDistinguishedNames, _lib, "sec_protocol_metadata_access_distinguished_names")
+	}
+	return _fnSecProtocolMetadataAccessDistinguishedNames(metadata, handler)
+}
+
+var _fnSecProtocolMetadataAccessOcspResponse func(unsafe.Pointer, unsafe.Pointer) bool
+
+// SecProtocolMetadataAccessOcspResponse calls the Security framework function sec_protocol_metadata_access_ocsp_response.
+func SecProtocolMetadataAccessOcspResponse(metadata unsafe.Pointer, handler unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolMetadataAccessOcspResponse == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolMetadataAccessOcspResponse, _lib, "sec_protocol_metadata_access_ocsp_response")
+	}
+	return _fnSecProtocolMetadataAccessOcspResponse(metadata, handler)
+}
+
+var _fnSecProtocolMetadataAccessPeerCertificateChain func(unsafe.Pointer, unsafe.Pointer) bool
+
+// SecProtocolMetadataAccessPeerCertificateChain calls the Security framework function sec_protocol_metadata_access_peer_certificate_chain.
+func SecProtocolMetadataAccessPeerCertificateChain(metadata unsafe.Pointer, handler unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolMetadataAccessPeerCertificateChain == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolMetadataAccessPeerCertificateChain, _lib, "sec_protocol_metadata_access_peer_certificate_chain")
+	}
+	return _fnSecProtocolMetadataAccessPeerCertificateChain(metadata, handler)
+}
+
+var _fnSecProtocolMetadataAccessPreSharedKeys func(unsafe.Pointer, unsafe.Pointer) bool
+
+// SecProtocolMetadataAccessPreSharedKeys calls the Security framework function sec_protocol_metadata_access_pre_shared_keys.
+func SecProtocolMetadataAccessPreSharedKeys(metadata unsafe.Pointer, handler unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolMetadataAccessPreSharedKeys == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolMetadataAccessPreSharedKeys, _lib, "sec_protocol_metadata_access_pre_shared_keys")
+	}
+	return _fnSecProtocolMetadataAccessPreSharedKeys(metadata, handler)
 }
 
 var _fnSecProtocolMetadataAccessSupportedSignatureAlgorithms func(unsafe.Pointer, objc.Block) bool
@@ -2527,6 +4840,28 @@ func SecProtocolOptionsGetDefaultMinTlsProtocolVersion() TLSProtocolVersion {
 	return _fnSecProtocolOptionsGetDefaultMinTlsProtocolVersion()
 }
 
+var _fnSecProtocolOptionsSetChallengeBlock func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+
+// SecProtocolOptionsSetChallengeBlock calls the Security framework function sec_protocol_options_set_challenge_block.
+func SecProtocolOptionsSetChallengeBlock(options unsafe.Pointer, challengeBlock unsafe.Pointer, challengeQueue unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolOptionsSetChallengeBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetChallengeBlock, _lib, "sec_protocol_options_set_challenge_block")
+	}
+	_fnSecProtocolOptionsSetChallengeBlock(options, challengeBlock, challengeQueue)
+}
+
+var _fnSecProtocolOptionsSetKeyUpdateBlock func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+
+// SecProtocolOptionsSetKeyUpdateBlock calls the Security framework function sec_protocol_options_set_key_update_block.
+func SecProtocolOptionsSetKeyUpdateBlock(options unsafe.Pointer, keyUpdateBlock unsafe.Pointer, keyUpdateQueue unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolOptionsSetKeyUpdateBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetKeyUpdateBlock, _lib, "sec_protocol_options_set_key_update_block")
+	}
+	_fnSecProtocolOptionsSetKeyUpdateBlock(options, keyUpdateBlock, keyUpdateQueue)
+}
+
 var _fnSecProtocolOptionsSetLocalIdentity func(unsafe.Pointer, unsafe.Pointer)
 
 // SecProtocolOptionsSetLocalIdentity calls the Security framework function sec_protocol_options_set_local_identity.
@@ -2569,6 +4904,17 @@ func SecProtocolOptionsSetPeerAuthenticationRequired(options unsafe.Pointer, pee
 		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetPeerAuthenticationRequired, _lib, "sec_protocol_options_set_peer_authentication_required")
 	}
 	_fnSecProtocolOptionsSetPeerAuthenticationRequired(options, peerAuthenticationRequired)
+}
+
+var _fnSecProtocolOptionsSetPreSharedKeySelectionBlock func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+
+// SecProtocolOptionsSetPreSharedKeySelectionBlock calls the Security framework function sec_protocol_options_set_pre_shared_key_selection_block.
+func SecProtocolOptionsSetPreSharedKeySelectionBlock(options unsafe.Pointer, pskSelectionBlock unsafe.Pointer, pskSelectionQueue unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolOptionsSetPreSharedKeySelectionBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetPreSharedKeySelectionBlock, _lib, "sec_protocol_options_set_pre_shared_key_selection_block")
+	}
+	_fnSecProtocolOptionsSetPreSharedKeySelectionBlock(options, pskSelectionBlock, pskSelectionQueue)
 }
 
 var _fnSecProtocolOptionsSetTlsDiffieHellmanParameters func(unsafe.Pointer, unsafe.Pointer)
@@ -2701,6 +5047,17 @@ func SecProtocolOptionsSetTlsTicketsEnabled(options unsafe.Pointer, ticketsEnabl
 		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetTlsTicketsEnabled, _lib, "sec_protocol_options_set_tls_tickets_enabled")
 	}
 	_fnSecProtocolOptionsSetTlsTicketsEnabled(options, ticketsEnabled)
+}
+
+var _fnSecProtocolOptionsSetVerifyBlock func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+
+// SecProtocolOptionsSetVerifyBlock calls the Security framework function sec_protocol_options_set_verify_block.
+func SecProtocolOptionsSetVerifyBlock(options unsafe.Pointer, verifyBlock unsafe.Pointer, verifyBlockQueue unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolOptionsSetVerifyBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsSetVerifyBlock, _lib, "sec_protocol_options_set_verify_block")
+	}
+	_fnSecProtocolOptionsSetVerifyBlock(options, verifyBlock, verifyBlockQueue)
 }
 
 var _fnSecRelease func(unsafe.Pointer)

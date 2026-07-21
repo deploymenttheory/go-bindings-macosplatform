@@ -206,6 +206,20 @@ func ClCreateFromGLTexture3D(arg obj.Object, arg2 uint64, arg3 int, arg4 int, ar
 	return obj.Wrap(_ret), _out0
 }
 
+var _fnClCreateImage func(objc.ID, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
+
+// ClCreateImage calls the OpenCL framework function clCreateImage.
+func ClCreateImage(arg obj.Object, arg2 uint64, arg4 unsafe.Pointer, arg5 unsafe.Pointer) (result obj.Object, arg3 ClImageFormat, arg6 int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClCreateImage == nil {
+		ebipurego.RegisterLibFunc(&_fnClCreateImage, _lib, "clCreateImage")
+	}
+	var _out0 ClImageFormat
+	var _out1 int32
+	_ret := _fnClCreateImage(objref.IDOf(arg), arg2, unsafe.Pointer(&_out0), arg4, arg5, unsafe.Pointer(&_out1))
+	return obj.Wrap(_ret), _out0, _out1
+}
+
 var _fnClCreateImage2D func(objc.ID, uint64, unsafe.Pointer, int, int, int, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // ClCreateImage2D calls the OpenCL framework function clCreateImage2D.
@@ -246,6 +260,21 @@ func ClCreateImageFromIOSurface2DAPPLE(arg obj.Object, arg2 uint64, arg4 int, ar
 	var _out1 int32
 	_ret := _fnClCreateImageFromIOSurface2DAPPLE(objref.IDOf(arg), arg2, unsafe.Pointer(&_out0), arg4, arg5, objref.IDOf(arg6), unsafe.Pointer(&_out1))
 	return obj.Wrap(_ret), _out0, _out1
+}
+
+var _fnClCreateImageFromIOSurfaceWithPropertiesAPPLE func(objc.ID, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
+
+// ClCreateImageFromIOSurfaceWithPropertiesAPPLE calls the OpenCL framework function clCreateImageFromIOSurfaceWithPropertiesAPPLE.
+func ClCreateImageFromIOSurfaceWithPropertiesAPPLE(arg obj.Object, arg2 uint64, arg4 unsafe.Pointer) (result obj.Object, arg3 ClImageFormat, arg5 int, arg6 int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClCreateImageFromIOSurfaceWithPropertiesAPPLE == nil {
+		ebipurego.RegisterLibFunc(&_fnClCreateImageFromIOSurfaceWithPropertiesAPPLE, _lib, "clCreateImageFromIOSurfaceWithPropertiesAPPLE")
+	}
+	var _out0 ClImageFormat
+	var _out1 int
+	var _out2 int32
+	_ret := _fnClCreateImageFromIOSurfaceWithPropertiesAPPLE(objref.IDOf(arg), arg2, unsafe.Pointer(&_out0), arg4, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return obj.Wrap(_ret), _out0, _out1, _out2
 }
 
 var _fnClCreateKernel func(objc.ID, string, unsafe.Pointer) objc.ID
@@ -297,6 +326,21 @@ func ClCreateProgramAndKernelsWithSourceAPPLE(arg obj.Object, arg2 uint32, arg3 
 	var _out0 int
 	_ret := _fnClCreateProgramAndKernelsWithSourceAPPLE(objref.IDOf(arg), arg2, arg3, unsafe.Pointer(&_out0), arg5, arg6, arg7, arg8, arg9, arg10, arg11)
 	return _ret, _out0
+}
+
+var _fnClCreateProgramWithBinary func(objc.ID, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
+
+// ClCreateProgramWithBinary calls the OpenCL framework function clCreateProgramWithBinary.
+func ClCreateProgramWithBinary(arg obj.Object, arg2 uint32, arg3 unsafe.Pointer, arg5 unsafe.Pointer) (result obj.Object, arg4 int, arg6 int32, arg7 int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnClCreateProgramWithBinary == nil {
+		ebipurego.RegisterLibFunc(&_fnClCreateProgramWithBinary, _lib, "clCreateProgramWithBinary")
+	}
+	var _out0 int
+	var _out1 int32
+	var _out2 int32
+	_ret := _fnClCreateProgramWithBinary(objref.IDOf(arg), arg2, arg3, unsafe.Pointer(&_out0), arg5, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return obj.Wrap(_ret), _out0, _out1, _out2
 }
 
 var _fnClCreateProgramWithBuiltInKernels func(objc.ID, uint32, unsafe.Pointer, string, unsafe.Pointer) objc.ID

@@ -536,6 +536,19 @@ func GetFrontProcess(pPSN unsafe.Pointer) int16 {
 	return _fnGetFrontProcess(pPSN)
 }
 
+var _fnGetIconFamilyData func(unsafe.Pointer, int, unsafe.Pointer) int16
+
+// GetIconFamilyData calls the HIServices framework function GetIconFamilyData.
+func GetIconFamilyData(iconFamily unsafe.Pointer, iconType int) (result int16, h string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetIconFamilyData == nil {
+		ebipurego.RegisterLibFunc(&_fnGetIconFamilyData, _lib, "GetIconFamilyData")
+	}
+	var _out0 string
+	_ret := _fnGetIconFamilyData(iconFamily, iconType, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnGetIconRefVariant func(objc.ID, int, unsafe.Pointer) objc.ID
 
 // GetIconRefVariant calls the HIServices framework function GetIconRefVariant.
@@ -560,6 +573,28 @@ func GetNextProcess(pPSN unsafe.Pointer) int16 {
 	return _fnGetNextProcess(pPSN)
 }
 
+var _fnGetProcessBundleLocation func(unsafe.Pointer, unsafe.Pointer) int32
+
+// GetProcessBundleLocation calls the HIServices framework function GetProcessBundleLocation.
+func GetProcessBundleLocation(psn unsafe.Pointer, location unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetProcessBundleLocation == nil {
+		ebipurego.RegisterLibFunc(&_fnGetProcessBundleLocation, _lib, "GetProcessBundleLocation")
+	}
+	return int(_fnGetProcessBundleLocation(psn, location))
+}
+
+var _fnGetProcessInformation func(unsafe.Pointer, unsafe.Pointer) int16
+
+// GetProcessInformation calls the HIServices framework function GetProcessInformation.
+func GetProcessInformation(psn unsafe.Pointer, info unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetProcessInformation == nil {
+		ebipurego.RegisterLibFunc(&_fnGetProcessInformation, _lib, "GetProcessInformation")
+	}
+	return _fnGetProcessInformation(psn, info)
+}
+
 var _fnGetProcessPID func(unsafe.Pointer, unsafe.Pointer) int32
 
 // GetProcessPID calls the HIServices framework function GetProcessPID.
@@ -571,6 +606,17 @@ func GetProcessPID(psn unsafe.Pointer) (result int, pid int) {
 	var _out0 int
 	_ret := int(_fnGetProcessPID(psn, unsafe.Pointer(&_out0)))
 	return _ret, _out0
+}
+
+var _fnHIShapeContainsPoint func(objc.ID, unsafe.Pointer) uint8
+
+// HIShapeContainsPoint calls the HIServices framework function HIShapeContainsPoint.
+func HIShapeContainsPoint(inShape obj.Object, inPoint unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIShapeContainsPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnHIShapeContainsPoint, _lib, "HIShapeContainsPoint")
+	}
+	return _fnHIShapeContainsPoint(objref.IDOf(inShape), inPoint)
 }
 
 var _fnHIShapeCreateCopy func(objc.ID) objc.ID
@@ -645,6 +691,18 @@ func HIShapeCreateMutableCopy(inOrig obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnHIShapeCreateMutableWithRect func(unsafe.Pointer) objc.ID
+
+// HIShapeCreateMutableWithRect calls the HIServices framework function HIShapeCreateMutableWithRect.
+func HIShapeCreateMutableWithRect(inRect unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIShapeCreateMutableWithRect == nil {
+		ebipurego.RegisterLibFunc(&_fnHIShapeCreateMutableWithRect, _lib, "HIShapeCreateMutableWithRect")
+	}
+	_ret := _fnHIShapeCreateMutableWithRect(inRect)
+	return obj.Wrap(_ret)
+}
+
 var _fnHIShapeCreateUnion func(objc.ID, objc.ID) objc.ID
 
 // HIShapeCreateUnion calls the HIServices framework function HIShapeCreateUnion.
@@ -666,6 +724,18 @@ func HIShapeCreateWithQDRgn(inRgn obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnHIShapeCreateWithQDRgn, _lib, "HIShapeCreateWithQDRgn")
 	}
 	_ret := _fnHIShapeCreateWithQDRgn(objref.IDOf(inRgn))
+	return obj.Wrap(_ret)
+}
+
+var _fnHIShapeCreateWithRect func(unsafe.Pointer) objc.ID
+
+// HIShapeCreateWithRect calls the HIServices framework function HIShapeCreateWithRect.
+func HIShapeCreateWithRect(inRect unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIShapeCreateWithRect == nil {
+		ebipurego.RegisterLibFunc(&_fnHIShapeCreateWithRect, _lib, "HIShapeCreateWithRect")
+	}
+	_ret := _fnHIShapeCreateWithRect(inRect)
 	return obj.Wrap(_ret)
 }
 
@@ -692,6 +762,17 @@ func HIShapeGetTypeID() int {
 	return _fnHIShapeGetTypeID()
 }
 
+var _fnHIShapeIntersectsRect func(objc.ID, unsafe.Pointer) uint8
+
+// HIShapeIntersectsRect calls the HIServices framework function HIShapeIntersectsRect.
+func HIShapeIntersectsRect(inShape obj.Object, inRect unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIShapeIntersectsRect == nil {
+		ebipurego.RegisterLibFunc(&_fnHIShapeIntersectsRect, _lib, "HIShapeIntersectsRect")
+	}
+	return _fnHIShapeIntersectsRect(objref.IDOf(inShape), inRect)
+}
+
 var _fnHIShapeIsEmpty func(objc.ID) uint8
 
 // HIShapeIsEmpty calls the HIServices framework function HIShapeIsEmpty.
@@ -712,6 +793,30 @@ func HIShapeIsRectangular(inShape obj.Object) uint8 {
 		ebipurego.RegisterLibFunc(&_fnHIShapeIsRectangular, _lib, "HIShapeIsRectangular")
 	}
 	return _fnHIShapeIsRectangular(objref.IDOf(inShape))
+}
+
+var _fnHIShapeUnionWithRect func(objc.ID, unsafe.Pointer) int32
+
+// HIShapeUnionWithRect calls the HIServices framework function HIShapeUnionWithRect.
+func HIShapeUnionWithRect(inShape obj.Object, inRect unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIShapeUnionWithRect == nil {
+		ebipurego.RegisterLibFunc(&_fnHIShapeUnionWithRect, _lib, "HIShapeUnionWithRect")
+	}
+	return int(_fnHIShapeUnionWithRect(objref.IDOf(inShape), inRect))
+}
+
+var _fnICAddMapEntry func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// ICAddMapEntry calls the HIServices framework function ICAddMapEntry.
+func ICAddMapEntry(inst obj.Object, entry unsafe.Pointer) (result int, entries string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICAddMapEntry == nil {
+		ebipurego.RegisterLibFunc(&_fnICAddMapEntry, _lib, "ICAddMapEntry")
+	}
+	var _out0 string
+	_ret := int(_fnICAddMapEntry(objref.IDOf(inst), unsafe.Pointer(&_out0), entry))
+	return _ret, _out0
 }
 
 var _fnICAddProfile func(objc.ID, int, unsafe.Pointer) int32
@@ -764,6 +869,19 @@ func ICCountProfiles(inst obj.Object) (result int, count int64) {
 	}
 	var _out0 int64
 	_ret := int(_fnICCountProfiles(objref.IDOf(inst), unsafe.Pointer(&_out0)))
+	return _ret, _out0
+}
+
+var _fnICCreateGURLEvent func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// ICCreateGURLEvent calls the HIServices framework function ICCreateGURLEvent.
+func ICCreateGURLEvent(inst obj.Object, helperCreator int, theEvent unsafe.Pointer) (result int, urlH string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICCreateGURLEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnICCreateGURLEvent, _lib, "ICCreateGURLEvent")
+	}
+	var _out0 string
+	_ret := int(_fnICCreateGURLEvent(objref.IDOf(inst), helperCreator, unsafe.Pointer(&_out0), theEvent))
 	return _ret, _out0
 }
 
@@ -861,6 +979,20 @@ func ICGetDefaultPref(inst obj.Object) (result int, key uint8, prefH string) {
 	return _ret, _out0, _out1
 }
 
+var _fnICGetIndMapEntry func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// ICGetIndMapEntry calls the HIServices framework function ICGetIndMapEntry.
+func ICGetIndMapEntry(inst obj.Object, index int, entry unsafe.Pointer) (result int, entries string, pos int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICGetIndMapEntry == nil {
+		ebipurego.RegisterLibFunc(&_fnICGetIndMapEntry, _lib, "ICGetIndMapEntry")
+	}
+	var _out0 string
+	var _out1 int64
+	_ret := int(_fnICGetIndMapEntry(objref.IDOf(inst), unsafe.Pointer(&_out0), index, unsafe.Pointer(&_out1), entry))
+	return _ret, _out0, _out1
+}
+
 var _fnICGetIndPref func(objc.ID, int, unsafe.Pointer) int32
 
 // ICGetIndPref calls the HIServices framework function ICGetIndPref.
@@ -884,6 +1016,19 @@ func ICGetIndProfile(inst obj.Object, index int) (result int, thisID int) {
 	}
 	var _out0 int
 	_ret := int(_fnICGetIndProfile(objref.IDOf(inst), index, unsafe.Pointer(&_out0)))
+	return _ret, _out0
+}
+
+var _fnICGetMapEntry func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
+
+// ICGetMapEntry calls the HIServices framework function ICGetMapEntry.
+func ICGetMapEntry(inst obj.Object, pos int, entry unsafe.Pointer) (result int, entries string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICGetMapEntry == nil {
+		ebipurego.RegisterLibFunc(&_fnICGetMapEntry, _lib, "ICGetMapEntry")
+	}
+	var _out0 string
+	_ret := int(_fnICGetMapEntry(objref.IDOf(inst), unsafe.Pointer(&_out0), pos, entry))
 	return _ret, _out0
 }
 
@@ -913,6 +1058,20 @@ func ICGetPref(inst obj.Object, buf unsafe.Pointer) (result int, key uint8, attr
 	var _out2 int64
 	_ret := int(_fnICGetPref(objref.IDOf(inst), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), buf, unsafe.Pointer(&_out2)))
 	return _ret, _out0, _out1, _out2
+}
+
+var _fnICGetPrefHandle func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// ICGetPrefHandle calls the HIServices framework function ICGetPrefHandle.
+func ICGetPrefHandle(inst obj.Object, prefh unsafe.Pointer) (result int, key uint8, attr int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICGetPrefHandle == nil {
+		ebipurego.RegisterLibFunc(&_fnICGetPrefHandle, _lib, "ICGetPrefHandle")
+	}
+	var _out0 uint8
+	var _out1 int
+	_ret := int(_fnICGetPrefHandle(objref.IDOf(inst), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), prefh))
+	return _ret, _out0, _out1
 }
 
 var _fnICGetProfileName func(objc.ID, int, unsafe.Pointer) int32
@@ -969,6 +1128,60 @@ func ICLaunchURL(inst obj.Object, data unsafe.Pointer, length int) (result int, 
 	return _ret, _out0, _out1, _out2
 }
 
+var _fnICMapEntriesFilename func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// ICMapEntriesFilename calls the HIServices framework function ICMapEntriesFilename.
+func ICMapEntriesFilename(inst obj.Object, entry unsafe.Pointer) (result int, entries string, filename uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICMapEntriesFilename == nil {
+		ebipurego.RegisterLibFunc(&_fnICMapEntriesFilename, _lib, "ICMapEntriesFilename")
+	}
+	var _out0 string
+	var _out1 uint8
+	_ret := int(_fnICMapEntriesFilename(objref.IDOf(inst), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), entry))
+	return _ret, _out0, _out1
+}
+
+var _fnICMapEntriesTypeCreator func(objc.ID, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// ICMapEntriesTypeCreator calls the HIServices framework function ICMapEntriesTypeCreator.
+func ICMapEntriesTypeCreator(inst obj.Object, fType int, fCreator int, entry unsafe.Pointer) (result int, entries string, filename uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICMapEntriesTypeCreator == nil {
+		ebipurego.RegisterLibFunc(&_fnICMapEntriesTypeCreator, _lib, "ICMapEntriesTypeCreator")
+	}
+	var _out0 string
+	var _out1 uint8
+	_ret := int(_fnICMapEntriesTypeCreator(objref.IDOf(inst), unsafe.Pointer(&_out0), fType, fCreator, unsafe.Pointer(&_out1), entry))
+	return _ret, _out0, _out1
+}
+
+var _fnICMapFilename func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// ICMapFilename calls the HIServices framework function ICMapFilename.
+func ICMapFilename(inst obj.Object, entry unsafe.Pointer) (result int, filename uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICMapFilename == nil {
+		ebipurego.RegisterLibFunc(&_fnICMapFilename, _lib, "ICMapFilename")
+	}
+	var _out0 uint8
+	_ret := int(_fnICMapFilename(objref.IDOf(inst), unsafe.Pointer(&_out0), entry))
+	return _ret, _out0
+}
+
+var _fnICMapTypeCreator func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// ICMapTypeCreator calls the HIServices framework function ICMapTypeCreator.
+func ICMapTypeCreator(inst obj.Object, fType int, fCreator int, entry unsafe.Pointer) (result int, filename uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICMapTypeCreator == nil {
+		ebipurego.RegisterLibFunc(&_fnICMapTypeCreator, _lib, "ICMapTypeCreator")
+	}
+	var _out0 uint8
+	_ret := int(_fnICMapTypeCreator(objref.IDOf(inst), fType, fCreator, unsafe.Pointer(&_out0), entry))
+	return _ret, _out0
+}
+
 var _fnICParseURL func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // ICParseURL calls the HIServices framework function ICParseURL.
@@ -983,6 +1196,30 @@ func ICParseURL(inst obj.Object, data unsafe.Pointer, length int) (result int, h
 	var _out3 string
 	_ret := int(_fnICParseURL(objref.IDOf(inst), unsafe.Pointer(&_out0), data, length, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3)))
 	return _ret, _out0, _out1, _out2, _out3
+}
+
+var _fnICSendGURLEvent func(objc.ID, unsafe.Pointer) int32
+
+// ICSendGURLEvent calls the HIServices framework function ICSendGURLEvent.
+func ICSendGURLEvent(inst obj.Object, theEvent unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICSendGURLEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnICSendGURLEvent, _lib, "ICSendGURLEvent")
+	}
+	return int(_fnICSendGURLEvent(objref.IDOf(inst), theEvent))
+}
+
+var _fnICSetMapEntry func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
+
+// ICSetMapEntry calls the HIServices framework function ICSetMapEntry.
+func ICSetMapEntry(inst obj.Object, pos int, entry unsafe.Pointer) (result int, entries string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICSetMapEntry == nil {
+		ebipurego.RegisterLibFunc(&_fnICSetMapEntry, _lib, "ICSetMapEntry")
+	}
+	var _out0 string
+	_ret := int(_fnICSetMapEntry(objref.IDOf(inst), unsafe.Pointer(&_out0), pos, entry))
+	return _ret, _out0
 }
 
 var _fnICSetPref func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, int) int32
@@ -1025,6 +1262,62 @@ func ICSetProfileName(inst obj.Object, thisID int) (result int, name uint8) {
 	return _ret, _out0
 }
 
+var _fnIconRefContainsCGPoint func(unsafe.Pointer, unsafe.Pointer, int16, int, objc.ID) uint8
+
+// IconRefContainsCGPoint calls the HIServices framework function IconRefContainsCGPoint.
+func IconRefContainsCGPoint(testPt unsafe.Pointer, iconRect unsafe.Pointer, align int16, iconServicesUsageFlags int, theIconRef obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIconRefContainsCGPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnIconRefContainsCGPoint, _lib, "IconRefContainsCGPoint")
+	}
+	return _fnIconRefContainsCGPoint(testPt, iconRect, align, iconServicesUsageFlags, objref.IDOf(theIconRef))
+}
+
+var _fnIconRefIntersectsCGRect func(unsafe.Pointer, unsafe.Pointer, int16, int, objc.ID) uint8
+
+// IconRefIntersectsCGRect calls the HIServices framework function IconRefIntersectsCGRect.
+func IconRefIntersectsCGRect(testRect unsafe.Pointer, iconRect unsafe.Pointer, align int16, iconServicesUsageFlags int, theIconRef obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIconRefIntersectsCGRect == nil {
+		ebipurego.RegisterLibFunc(&_fnIconRefIntersectsCGRect, _lib, "IconRefIntersectsCGRect")
+	}
+	return _fnIconRefIntersectsCGRect(testRect, iconRect, align, iconServicesUsageFlags, objref.IDOf(theIconRef))
+}
+
+var _fnIconRefToHIShape func(unsafe.Pointer, int16, int, objc.ID) objc.ID
+
+// IconRefToHIShape calls the HIServices framework function IconRefToHIShape.
+func IconRefToHIShape(iconRect unsafe.Pointer, align int16, iconServicesUsageFlags int, theIconRef obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIconRefToHIShape == nil {
+		ebipurego.RegisterLibFunc(&_fnIconRefToHIShape, _lib, "IconRefToHIShape")
+	}
+	_ret := _fnIconRefToHIShape(iconRect, align, iconServicesUsageFlags, objref.IDOf(theIconRef))
+	return obj.Wrap(_ret)
+}
+
+var _fnIconRefToIconFamily func(objc.ID, int, unsafe.Pointer) int16
+
+// IconRefToIconFamily calls the HIServices framework function IconRefToIconFamily.
+func IconRefToIconFamily(theIconRef obj.Object, whichIcons int, iconFamily unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIconRefToIconFamily == nil {
+		ebipurego.RegisterLibFunc(&_fnIconRefToIconFamily, _lib, "IconRefToIconFamily")
+	}
+	return _fnIconRefToIconFamily(objref.IDOf(theIconRef), whichIcons, iconFamily)
+}
+
+var _fnInvokeIconActionUPP func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+
+// InvokeIconActionUPP calls the HIServices framework function InvokeIconActionUPP.
+func InvokeIconActionUPP(theType int, theIcon unsafe.Pointer, yourDataPtr unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeIconActionUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeIconActionUPP, _lib, "InvokeIconActionUPP")
+	}
+	return _fnInvokeIconActionUPP(theType, theIcon, yourDataPtr, userUPP)
+}
+
 var _fnIsIconRefMaskEmpty func(objc.ID) uint8
 
 // IsIconRefMaskEmpty calls the HIServices framework function IsIconRefMaskEmpty.
@@ -1056,6 +1349,17 @@ func KillProcess(inProcess unsafe.Pointer) int16 {
 		ebipurego.RegisterLibFunc(&_fnKillProcess, _lib, "KillProcess")
 	}
 	return _fnKillProcess(inProcess)
+}
+
+var _fnLaunchApplication func(unsafe.Pointer) int16
+
+// LaunchApplication calls the HIServices framework function LaunchApplication.
+func LaunchApplication(launchParams unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaunchApplication == nil {
+		ebipurego.RegisterLibFunc(&_fnLaunchApplication, _lib, "LaunchApplication")
+	}
+	return _fnLaunchApplication(launchParams)
 }
 
 var _fnPasteboardGetItemCount func(objc.ID, unsafe.Pointer) int32
@@ -1106,6 +1410,17 @@ func PasteboardSynchronize(inPasteboard obj.Object) PasteboardSyncFlags {
 	return _fnPasteboardSynchronize(objref.IDOf(inPasteboard))
 }
 
+var _fnPlotIconRefInContext func(objc.ID, unsafe.Pointer, int16, int16, unsafe.Pointer, int, objc.ID) int32
+
+// PlotIconRefInContext calls the HIServices framework function PlotIconRefInContext.
+func PlotIconRefInContext(inContext obj.Object, inRect unsafe.Pointer, inAlign int16, inTransform int16, inLabelColor unsafe.Pointer, inFlags int, inIconRef obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPlotIconRefInContext == nil {
+		ebipurego.RegisterLibFunc(&_fnPlotIconRefInContext, _lib, "PlotIconRefInContext")
+	}
+	return int(_fnPlotIconRefInContext(objref.IDOf(inContext), inRect, inAlign, inTransform, inLabelColor, inFlags, objref.IDOf(inIconRef)))
+}
+
 var _fnProcessInformationCopyDictionary func(unsafe.Pointer, int) objc.ID
 
 // ProcessInformationCopyDictionary calls the HIServices framework function ProcessInformationCopyDictionary.
@@ -1142,6 +1457,19 @@ func SetFrontProcess(pPSN unsafe.Pointer) int16 {
 	return _fnSetFrontProcess(pPSN)
 }
 
+var _fnSetIconFamilyData func(unsafe.Pointer, int, unsafe.Pointer) int16
+
+// SetIconFamilyData calls the HIServices framework function SetIconFamilyData.
+func SetIconFamilyData(iconFamily unsafe.Pointer, iconType int) (result int16, h string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetIconFamilyData == nil {
+		ebipurego.RegisterLibFunc(&_fnSetIconFamilyData, _lib, "SetIconFamilyData")
+	}
+	var _out0 string
+	_ret := _fnSetIconFamilyData(iconFamily, iconType, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnShowHideProcess func(unsafe.Pointer, uint8) int16
 
 // ShowHideProcess calls the HIServices framework function ShowHideProcess.
@@ -1175,6 +1503,28 @@ func TranslationGetTypeID() int {
 		ebipurego.RegisterLibFunc(&_fnTranslationGetTypeID, _lib, "TranslationGetTypeID")
 	}
 	return _fnTranslationGetTypeID()
+}
+
+var _fnTranslationPerformForFile func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
+
+// TranslationPerformForFile calls the HIServices framework function TranslationPerformForFile.
+func TranslationPerformForFile(inTranslation obj.Object, inSourceFile unsafe.Pointer, inDestinationDirectory unsafe.Pointer, inDestinationName obj.Object, outTranslatedFile unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTranslationPerformForFile == nil {
+		ebipurego.RegisterLibFunc(&_fnTranslationPerformForFile, _lib, "TranslationPerformForFile")
+	}
+	return int(_fnTranslationPerformForFile(objref.IDOf(inTranslation), inSourceFile, inDestinationDirectory, objref.IDOf(inDestinationName), outTranslatedFile))
+}
+
+var _fnUAZoomChangeFocus func(unsafe.Pointer, unsafe.Pointer, int) int32
+
+// UAZoomChangeFocus calls the HIServices framework function UAZoomChangeFocus.
+func UAZoomChangeFocus(inRect unsafe.Pointer, inHighlightRect unsafe.Pointer, inType int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUAZoomChangeFocus == nil {
+		ebipurego.RegisterLibFunc(&_fnUAZoomChangeFocus, _lib, "UAZoomChangeFocus")
+	}
+	return int(_fnUAZoomChangeFocus(inRect, inHighlightRect, inType))
 }
 
 var _fnUAZoomEnabled func() uint8

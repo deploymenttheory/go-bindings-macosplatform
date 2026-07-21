@@ -7,7 +7,10 @@ package securityhi
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
 var _fnDisposeURLNotifyUPP func(unsafe.Pointer)
@@ -30,6 +33,44 @@ func DisposeURLSystemEventUPP(userUPP unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnDisposeURLSystemEventUPP, _lib, "DisposeURLSystemEventUPP")
 	}
 	_fnDisposeURLSystemEventUPP(userUPP)
+}
+
+var _fnInvokeURLNotifyUPP func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// InvokeURLNotifyUPP calls the SecurityHI framework function InvokeURLNotifyUPP.
+func InvokeURLNotifyUPP(userContext unsafe.Pointer, event int, callbackInfo unsafe.Pointer, userUPP unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeURLNotifyUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeURLNotifyUPP, _lib, "InvokeURLNotifyUPP")
+	}
+	return int(_fnInvokeURLNotifyUPP(userContext, event, callbackInfo, userUPP))
+}
+
+var _fnInvokeURLSystemEventUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// InvokeURLSystemEventUPP calls the SecurityHI framework function InvokeURLSystemEventUPP.
+func InvokeURLSystemEventUPP(userContext unsafe.Pointer, event unsafe.Pointer, userUPP unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeURLSystemEventUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeURLSystemEventUPP, _lib, "InvokeURLSystemEventUPP")
+	}
+	return int(_fnInvokeURLSystemEventUPP(userContext, event, userUPP))
+}
+
+var _fnKCAddAppleSharePassword func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// KCAddAppleSharePassword calls the SecurityHI framework function KCAddAppleSharePassword.
+func KCAddAppleSharePassword(serverSignature unsafe.Pointer, passwordLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, serverAddress uint8, serverName uint8, volumeName uint8, accountName uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCAddAppleSharePassword == nil {
+		ebipurego.RegisterLibFunc(&_fnKCAddAppleSharePassword, _lib, "KCAddAppleSharePassword")
+	}
+	var _out0 uint8
+	var _out1 uint8
+	var _out2 uint8
+	var _out3 uint8
+	_ret := int(_fnKCAddAppleSharePassword(serverSignature, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), passwordLength, passwordData, item))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnKCAddGenericPassword func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
@@ -101,4 +142,26 @@ func KCUnlock(keychain unsafe.Pointer) (result int, password uint8) {
 	var _out0 uint8
 	_ret := int(_fnKCUnlock(keychain, unsafe.Pointer(&_out0)))
 	return _ret, _out0
+}
+
+var _fnSecDisplayCertificateGroup func(unsafe.Pointer, objc.ID) int32
+
+// SecDisplayCertificateGroup calls the SecurityHI framework function SecDisplayCertificateGroup.
+func SecDisplayCertificateGroup(certificates unsafe.Pointer, keychainList obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecDisplayCertificateGroup == nil {
+		ebipurego.RegisterLibFunc(&_fnSecDisplayCertificateGroup, _lib, "SecDisplayCertificateGroup")
+	}
+	return int(_fnSecDisplayCertificateGroup(certificates, objref.IDOf(keychainList)))
+}
+
+var _fnKcaddapplesharepassword func(unsafe.Pointer, string, string, string, string, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// Kcaddapplesharepassword calls the SecurityHI framework function kcaddapplesharepassword.
+func Kcaddapplesharepassword(serverSignature unsafe.Pointer, serverAddress string, serverName string, volumeName string, accountName string, passwordLength int, passwordData unsafe.Pointer, item unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKcaddapplesharepassword == nil {
+		ebipurego.RegisterLibFunc(&_fnKcaddapplesharepassword, _lib, "kcaddapplesharepassword")
+	}
+	return int(_fnKcaddapplesharepassword(serverSignature, serverAddress, serverName, volumeName, accountName, passwordLength, passwordData, item))
 }

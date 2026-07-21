@@ -333,6 +333,17 @@ func CVDisplayLinkSetOutputCallback(displayLink obj.Object, callback unsafe.Poin
 	return _fnCVDisplayLinkSetOutputCallback(objref.IDOf(displayLink), callback, userInfo)
 }
 
+var _fnCVDisplayLinkSetOutputHandler func(objc.ID, unsafe.Pointer) int32
+
+// CVDisplayLinkSetOutputHandler calls the CoreVideo framework function CVDisplayLinkSetOutputHandler.
+func CVDisplayLinkSetOutputHandler(displayLink obj.Object, handler unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVDisplayLinkSetOutputHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkSetOutputHandler, _lib, "CVDisplayLinkSetOutputHandler")
+	}
+	return _fnCVDisplayLinkSetOutputHandler(objref.IDOf(displayLink), handler)
+}
+
 var _fnCVDisplayLinkStart func(objc.ID) int32
 
 // CVDisplayLinkStart calls the CoreVideo framework function CVDisplayLinkStart.
@@ -481,6 +492,17 @@ func CVIsCompressedPixelFormatAvailable(pixelFormatType int) uint8 {
 	return _fnCVIsCompressedPixelFormatAvailable(pixelFormatType)
 }
 
+var _fnCVMetalBufferCacheCreate func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// CVMetalBufferCacheCreate calls the CoreVideo framework function CVMetalBufferCacheCreate.
+func CVMetalBufferCacheCreate(allocator obj.Object, cacheAttributes obj.Object, metalDevice unsafe.Pointer, cacheOut unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVMetalBufferCacheCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCVMetalBufferCacheCreate, _lib, "CVMetalBufferCacheCreate")
+	}
+	return _fnCVMetalBufferCacheCreate(objref.IDOf(allocator), objref.IDOf(cacheAttributes), metalDevice, cacheOut)
+}
+
 var _fnCVMetalBufferCacheCreateBufferFromImage func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // CVMetalBufferCacheCreateBufferFromImage calls the CoreVideo framework function CVMetalBufferCacheCreateBufferFromImage.
@@ -523,6 +545,28 @@ func CVMetalBufferGetTypeID() int {
 		ebipurego.RegisterLibFunc(&_fnCVMetalBufferGetTypeID, _lib, "CVMetalBufferGetTypeID")
 	}
 	return _fnCVMetalBufferGetTypeID()
+}
+
+var _fnCVMetalTextureCacheCreate func(objc.ID, objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
+
+// CVMetalTextureCacheCreate calls the CoreVideo framework function CVMetalTextureCacheCreate.
+func CVMetalTextureCacheCreate(allocator obj.Object, cacheAttributes obj.Object, metalDevice unsafe.Pointer, textureAttributes obj.Object, cacheOut unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVMetalTextureCacheCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCVMetalTextureCacheCreate, _lib, "CVMetalTextureCacheCreate")
+	}
+	return _fnCVMetalTextureCacheCreate(objref.IDOf(allocator), objref.IDOf(cacheAttributes), metalDevice, objref.IDOf(textureAttributes), cacheOut)
+}
+
+var _fnCVMetalTextureCacheCreateTextureFromImage func(objc.ID, objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer, int, int, int, unsafe.Pointer) int32
+
+// CVMetalTextureCacheCreateTextureFromImage calls the CoreVideo framework function CVMetalTextureCacheCreateTextureFromImage.
+func CVMetalTextureCacheCreateTextureFromImage(allocator obj.Object, textureCache obj.Object, sourceImage unsafe.Pointer, textureAttributes obj.Object, pixelFormat unsafe.Pointer, width int, height int, planeIndex int, textureOut unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCVMetalTextureCacheCreateTextureFromImage == nil {
+		ebipurego.RegisterLibFunc(&_fnCVMetalTextureCacheCreateTextureFromImage, _lib, "CVMetalTextureCacheCreateTextureFromImage")
+	}
+	return _fnCVMetalTextureCacheCreateTextureFromImage(objref.IDOf(allocator), objref.IDOf(textureCache), sourceImage, objref.IDOf(textureAttributes), pixelFormat, width, height, planeIndex, textureOut)
 }
 
 var _fnCVMetalTextureCacheFlush func(objc.ID, uint64)

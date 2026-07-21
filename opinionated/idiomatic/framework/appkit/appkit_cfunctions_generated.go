@@ -208,6 +208,17 @@ func NSBeep() {
 	_fnNSBeep()
 }
 
+var _fnNSBeginInformationalAlertSheet func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID)
+
+// NSBeginInformationalAlertSheet calls the AppKit framework function NSBeginInformationalAlertSheet.
+func NSBeginInformationalAlertSheet(title string, defaultButton string, alternateButton string, otherButton string, docWindow *Window, modalDelegate obj.Object, didEndSelector unsafe.Pointer, didDismissSelector unsafe.Pointer, contextInfo unsafe.Pointer, msgFormat string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSBeginInformationalAlertSheet == nil {
+		ebipurego.RegisterLibFunc(&_fnNSBeginInformationalAlertSheet, _lib, "NSBeginInformationalAlertSheet")
+	}
+	_fnNSBeginInformationalAlertSheet(purego.NSString(title), purego.NSString(defaultButton), purego.NSString(alternateButton), purego.NSString(otherButton), objref.IDOf(docWindow), objref.IDOf(modalDelegate), didEndSelector, didDismissSelector, contextInfo, purego.NSString(msgFormat))
+}
+
 var _fnNSBestDepth func(objc.ID, int, int, bool, unsafe.Pointer) WindowDepth
 
 // NSBestDepth calls the AppKit framework function NSBestDepth.
@@ -373,6 +384,17 @@ func NSDrawButton(rect corefoundation.CGRect, clipRect corefoundation.CGRect) {
 	_fnNSDrawButton(rect, clipRect)
 }
 
+var _fnNSDrawColorTiledRects func(corefoundation.CGRect, corefoundation.CGRect, unsafe.Pointer, objc.ID, int) corefoundation.CGRect
+
+// NSDrawColorTiledRects calls the AppKit framework function NSDrawColorTiledRects.
+func NSDrawColorTiledRects(boundsRect corefoundation.CGRect, clipRect corefoundation.CGRect, sides unsafe.Pointer, colors *Color, count int) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawColorTiledRects == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawColorTiledRects, _lib, "NSDrawColorTiledRects")
+	}
+	return _fnNSDrawColorTiledRects(boundsRect, clipRect, sides, objref.IDOf(colors), count)
+}
+
 var _fnNSDrawDarkBezel func(corefoundation.CGRect, corefoundation.CGRect)
 
 // NSDrawDarkBezel calls the AppKit framework function NSDrawDarkBezel.
@@ -437,6 +459,17 @@ func NSDrawThreePartImage(frame corefoundation.CGRect, startCap *Image, centerFi
 		ebipurego.RegisterLibFunc(&_fnNSDrawThreePartImage, _lib, "NSDrawThreePartImage")
 	}
 	_fnNSDrawThreePartImage(frame, objref.IDOf(startCap), objref.IDOf(centerFill), objref.IDOf(endCap), vertical, op, alphaFraction, flipped)
+}
+
+var _fnNSDrawTiledRects func(corefoundation.CGRect, corefoundation.CGRect, unsafe.Pointer, unsafe.Pointer, int) corefoundation.CGRect
+
+// NSDrawTiledRects calls the AppKit framework function NSDrawTiledRects.
+func NSDrawTiledRects(boundsRect corefoundation.CGRect, clipRect corefoundation.CGRect, sides unsafe.Pointer, grays unsafe.Pointer, count int) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDrawTiledRects == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDrawTiledRects, _lib, "NSDrawTiledRects")
+	}
+	return _fnNSDrawTiledRects(boundsRect, clipRect, sides, grays, count)
 }
 
 var _fnNSDrawWhiteBezel func(corefoundation.CGRect, corefoundation.CGRect)
@@ -751,6 +784,39 @@ func NSRectFillListUsingOperation(rects unsafe.Pointer, count int, op Compositin
 	_fnNSRectFillListUsingOperation(rects, count, op)
 }
 
+var _fnNSRectFillListWithColors func(unsafe.Pointer, objc.ID, int)
+
+// NSRectFillListWithColors calls the AppKit framework function NSRectFillListWithColors.
+func NSRectFillListWithColors(rects unsafe.Pointer, colors *Color, num int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectFillListWithColors == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectFillListWithColors, _lib, "NSRectFillListWithColors")
+	}
+	_fnNSRectFillListWithColors(rects, objref.IDOf(colors), num)
+}
+
+var _fnNSRectFillListWithColorsUsingOperation func(unsafe.Pointer, objc.ID, int, CompositingOperation)
+
+// NSRectFillListWithColorsUsingOperation calls the AppKit framework function NSRectFillListWithColorsUsingOperation.
+func NSRectFillListWithColorsUsingOperation(rects unsafe.Pointer, colors *Color, num int, op CompositingOperation) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectFillListWithColorsUsingOperation == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectFillListWithColorsUsingOperation, _lib, "NSRectFillListWithColorsUsingOperation")
+	}
+	_fnNSRectFillListWithColorsUsingOperation(rects, objref.IDOf(colors), num, op)
+}
+
+var _fnNSRectFillListWithGrays func(unsafe.Pointer, unsafe.Pointer, int)
+
+// NSRectFillListWithGrays calls the AppKit framework function NSRectFillListWithGrays.
+func NSRectFillListWithGrays(rects unsafe.Pointer, grays unsafe.Pointer, num int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRectFillListWithGrays == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRectFillListWithGrays, _lib, "NSRectFillListWithGrays")
+	}
+	_fnNSRectFillListWithGrays(rects, grays, num)
+}
+
 var _fnNSRectFillUsingOperation func(corefoundation.CGRect, CompositingOperation)
 
 // NSRectFillUsingOperation calls the AppKit framework function NSRectFillUsingOperation.
@@ -826,6 +892,17 @@ func NSSetShowsServicesMenuItem(itemName string, enabled bool) int {
 		ebipurego.RegisterLibFunc(&_fnNSSetShowsServicesMenuItem, _lib, "NSSetShowsServicesMenuItem")
 	}
 	return _fnNSSetShowsServicesMenuItem(purego.NSString(itemName), enabled)
+}
+
+var _fnNSShowAnimationEffect func(AnimationEffect, corefoundation.CGPoint, corefoundation.CGSize, objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// NSShowAnimationEffect calls the AppKit framework function NSShowAnimationEffect.
+func NSShowAnimationEffect(animationEffect AnimationEffect, centerLocation corefoundation.CGPoint, size corefoundation.CGSize, animationDelegate obj.Object, didEndSelector unsafe.Pointer, contextInfo unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSShowAnimationEffect == nil {
+		ebipurego.RegisterLibFunc(&_fnNSShowAnimationEffect, _lib, "NSShowAnimationEffect")
+	}
+	_fnNSShowAnimationEffect(animationEffect, centerLocation, size, objref.IDOf(animationDelegate), didEndSelector, contextInfo)
 }
 
 var _fnNSShowsServicesMenuItem func(objc.ID) bool

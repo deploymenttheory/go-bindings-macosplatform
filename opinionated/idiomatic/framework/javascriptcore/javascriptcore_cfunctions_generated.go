@@ -72,6 +72,18 @@ func JSCheckScriptSyntax(ctx obj.Object, script obj.Object, sourceURL obj.Object
 	return _fnJSCheckScriptSyntax(objref.IDOf(ctx), objref.IDOf(script), objref.IDOf(sourceURL), startingLineNumber, exception)
 }
 
+var _fnJSClassCreate func(unsafe.Pointer) objc.ID
+
+// JSClassCreate calls the JavaScriptCore framework function JSClassCreate.
+func JSClassCreate(definition unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJSClassCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnJSClassCreate, _lib, "JSClassCreate")
+	}
+	_ret := _fnJSClassCreate(definition)
+	return obj.Wrap(_ret)
+}
+
 var _fnJSClassRelease func(objc.ID)
 
 // JSClassRelease calls the JavaScriptCore framework function JSClassRelease.

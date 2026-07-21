@@ -13,6 +13,17 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+var _fnCGLErrorString func(unsafe.Pointer) string
+
+// CGLErrorString calls the OpenGL framework function CGLErrorString.
+func CGLErrorString(err unsafe.Pointer) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGLErrorString == nil {
+		ebipurego.RegisterLibFunc(&_fnCGLErrorString, _lib, "CGLErrorString")
+	}
+	return _fnCGLErrorString(err)
+}
+
 var _fnCGLGetContextRetainCount func(objc.ID) uint32
 
 // CGLGetContextRetainCount calls the OpenGL framework function CGLGetContextRetainCount.

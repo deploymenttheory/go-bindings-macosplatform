@@ -35,6 +35,39 @@ func AudioConvertNanosToHostTime(inNanos uint64) uint64 {
 	return _fnAudioConvertNanosToHostTime(inNanos)
 }
 
+var _fnAudioDeviceCreateIOProcIDWithBlock func(unsafe.Pointer, int, objc.ID, unsafe.Pointer) int32
+
+// AudioDeviceCreateIOProcIDWithBlock calls the CoreAudio framework function AudioDeviceCreateIOProcIDWithBlock.
+func AudioDeviceCreateIOProcIDWithBlock(outIOProcID unsafe.Pointer, inDevice int, inDispatchQueue obj.Object, inIOBlock unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioDeviceCreateIOProcIDWithBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioDeviceCreateIOProcIDWithBlock, _lib, "AudioDeviceCreateIOProcIDWithBlock")
+	}
+	return int(_fnAudioDeviceCreateIOProcIDWithBlock(outIOProcID, inDevice, objref.IDOf(inDispatchQueue), inIOBlock))
+}
+
+var _fnAudioDeviceGetCurrentTime func(int, unsafe.Pointer) int32
+
+// AudioDeviceGetCurrentTime calls the CoreAudio framework function AudioDeviceGetCurrentTime.
+func AudioDeviceGetCurrentTime(inDevice int, outTime unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioDeviceGetCurrentTime == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioDeviceGetCurrentTime, _lib, "AudioDeviceGetCurrentTime")
+	}
+	return int(_fnAudioDeviceGetCurrentTime(inDevice, outTime))
+}
+
+var _fnAudioDeviceGetNearestStartTime func(int, unsafe.Pointer, int) int32
+
+// AudioDeviceGetNearestStartTime calls the CoreAudio framework function AudioDeviceGetNearestStartTime.
+func AudioDeviceGetNearestStartTime(inDevice int, ioRequestedStartTime unsafe.Pointer, inFlags int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioDeviceGetNearestStartTime == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioDeviceGetNearestStartTime, _lib, "AudioDeviceGetNearestStartTime")
+	}
+	return int(_fnAudioDeviceGetNearestStartTime(inDevice, ioRequestedStartTime, inFlags))
+}
+
 var _fnAudioDeviceGetProperty func(int, int, uint8, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioDeviceGetProperty calls the CoreAudio framework function AudioDeviceGetProperty.
@@ -60,6 +93,50 @@ func AudioDeviceGetPropertyInfo(inDevice int, inChannel int, isInput uint8, inPr
 	var _out1 uint8
 	_ret := int(_fnAudioDeviceGetPropertyInfo(inDevice, inChannel, isInput, inPropertyID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
+}
+
+var _fnAudioDeviceRead func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// AudioDeviceRead calls the CoreAudio framework function AudioDeviceRead.
+func AudioDeviceRead(inDevice int, inStartTime unsafe.Pointer, outData unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioDeviceRead == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioDeviceRead, _lib, "AudioDeviceRead")
+	}
+	return int(_fnAudioDeviceRead(inDevice, inStartTime, outData))
+}
+
+var _fnAudioDeviceSetProperty func(int, unsafe.Pointer, int, uint8, int, int, unsafe.Pointer) int32
+
+// AudioDeviceSetProperty calls the CoreAudio framework function AudioDeviceSetProperty.
+func AudioDeviceSetProperty(inDevice int, inWhen unsafe.Pointer, inChannel int, isInput uint8, inPropertyID int, inPropertyDataSize int, inPropertyData unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioDeviceSetProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioDeviceSetProperty, _lib, "AudioDeviceSetProperty")
+	}
+	return int(_fnAudioDeviceSetProperty(inDevice, inWhen, inChannel, isInput, inPropertyID, inPropertyDataSize, inPropertyData))
+}
+
+var _fnAudioDeviceStartAtTime func(int, unsafe.Pointer, unsafe.Pointer, int) int32
+
+// AudioDeviceStartAtTime calls the CoreAudio framework function AudioDeviceStartAtTime.
+func AudioDeviceStartAtTime(inDevice int, inProcID unsafe.Pointer, ioRequestedStartTime unsafe.Pointer, inFlags int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioDeviceStartAtTime == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioDeviceStartAtTime, _lib, "AudioDeviceStartAtTime")
+	}
+	return int(_fnAudioDeviceStartAtTime(inDevice, inProcID, ioRequestedStartTime, inFlags))
+}
+
+var _fnAudioDeviceTranslateTime func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// AudioDeviceTranslateTime calls the CoreAudio framework function AudioDeviceTranslateTime.
+func AudioDeviceTranslateTime(inDevice int, inTime unsafe.Pointer, outTime unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioDeviceTranslateTime == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioDeviceTranslateTime, _lib, "AudioDeviceTranslateTime")
+	}
+	return int(_fnAudioDeviceTranslateTime(inDevice, inTime, outTime))
 }
 
 var _fnAudioGetCurrentHostTime func() uint64
@@ -148,6 +225,19 @@ func AudioObjectAddPropertyListener(inObjectID int, inListener unsafe.Pointer, i
 	return _ret, _out0
 }
 
+var _fnAudioObjectAddPropertyListenerBlock func(int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
+
+// AudioObjectAddPropertyListenerBlock calls the CoreAudio framework function AudioObjectAddPropertyListenerBlock.
+func AudioObjectAddPropertyListenerBlock(inObjectID int, inDispatchQueue obj.Object, inListener unsafe.Pointer) (result int, inAddress AudioObjectPropertyAddress) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioObjectAddPropertyListenerBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioObjectAddPropertyListenerBlock, _lib, "AudioObjectAddPropertyListenerBlock")
+	}
+	var _out0 AudioObjectPropertyAddress
+	_ret := int(_fnAudioObjectAddPropertyListenerBlock(inObjectID, unsafe.Pointer(&_out0), objref.IDOf(inDispatchQueue), inListener))
+	return _ret, _out0
+}
+
 var _fnAudioObjectGetPropertyData func(int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioObjectGetPropertyData calls the CoreAudio framework function AudioObjectGetPropertyData.
@@ -216,6 +306,19 @@ func AudioObjectRemovePropertyListener(inObjectID int, inListener unsafe.Pointer
 	return _ret, _out0
 }
 
+var _fnAudioObjectRemovePropertyListenerBlock func(int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
+
+// AudioObjectRemovePropertyListenerBlock calls the CoreAudio framework function AudioObjectRemovePropertyListenerBlock.
+func AudioObjectRemovePropertyListenerBlock(inObjectID int, inDispatchQueue obj.Object, inListener unsafe.Pointer) (result int, inAddress AudioObjectPropertyAddress) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioObjectRemovePropertyListenerBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioObjectRemovePropertyListenerBlock, _lib, "AudioObjectRemovePropertyListenerBlock")
+	}
+	var _out0 AudioObjectPropertyAddress
+	_ret := int(_fnAudioObjectRemovePropertyListenerBlock(inObjectID, unsafe.Pointer(&_out0), objref.IDOf(inDispatchQueue), inListener))
+	return _ret, _out0
+}
+
 var _fnAudioObjectSetPropertyData func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // AudioObjectSetPropertyData calls the CoreAudio framework function AudioObjectSetPropertyData.
@@ -265,4 +368,15 @@ func AudioStreamGetPropertyInfo(inStream int, inChannel int, inPropertyID int) (
 	var _out1 uint8
 	_ret := int(_fnAudioStreamGetPropertyInfo(inStream, inChannel, inPropertyID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
+}
+
+var _fnAudioStreamSetProperty func(int, unsafe.Pointer, int, int, int, unsafe.Pointer) int32
+
+// AudioStreamSetProperty calls the CoreAudio framework function AudioStreamSetProperty.
+func AudioStreamSetProperty(inStream int, inWhen unsafe.Pointer, inChannel int, inPropertyID int, inPropertyDataSize int, inPropertyData unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioStreamSetProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioStreamSetProperty, _lib, "AudioStreamSetProperty")
+	}
+	return int(_fnAudioStreamSetProperty(inStream, inWhen, inChannel, inPropertyID, inPropertyDataSize, inPropertyData))
 }

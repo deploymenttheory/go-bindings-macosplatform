@@ -14,6 +14,28 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+var _fnCMIODeviceProcessAVCCommand func(int, unsafe.Pointer) int32
+
+// CMIODeviceProcessAVCCommand calls the CoreMediaIO framework function CMIODeviceProcessAVCCommand.
+func CMIODeviceProcessAVCCommand(deviceID int, ioAVCCommand unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIODeviceProcessAVCCommand == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIODeviceProcessAVCCommand, _lib, "CMIODeviceProcessAVCCommand")
+	}
+	return int(_fnCMIODeviceProcessAVCCommand(deviceID, ioAVCCommand))
+}
+
+var _fnCMIODeviceProcessRS422Command func(int, unsafe.Pointer) int32
+
+// CMIODeviceProcessRS422Command calls the CoreMediaIO framework function CMIODeviceProcessRS422Command.
+func CMIODeviceProcessRS422Command(deviceID int, ioRS422Command unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIODeviceProcessRS422Command == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIODeviceProcessRS422Command, _lib, "CMIODeviceProcessRS422Command")
+	}
+	return int(_fnCMIODeviceProcessRS422Command(deviceID, ioRS422Command))
+}
+
 var _fnCMIOObjectAddPropertyListener func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMIOObjectAddPropertyListener calls the CoreMediaIO framework function CMIOObjectAddPropertyListener.
@@ -24,6 +46,19 @@ func CMIOObjectAddPropertyListener(objectID int, listener unsafe.Pointer, client
 	}
 	var _out0 CMIOObjectPropertyAddress
 	_ret := int(_fnCMIOObjectAddPropertyListener(objectID, unsafe.Pointer(&_out0), listener, clientData))
+	return _ret, _out0
+}
+
+var _fnCMIOObjectAddPropertyListenerBlock func(int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
+
+// CMIOObjectAddPropertyListenerBlock calls the CoreMediaIO framework function CMIOObjectAddPropertyListenerBlock.
+func CMIOObjectAddPropertyListenerBlock(objectID int, dispatchQueue obj.Object, listener unsafe.Pointer) (result int, address CMIOObjectPropertyAddress) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOObjectAddPropertyListenerBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOObjectAddPropertyListenerBlock, _lib, "CMIOObjectAddPropertyListenerBlock")
+	}
+	var _out0 CMIOObjectPropertyAddress
+	_ret := int(_fnCMIOObjectAddPropertyListenerBlock(objectID, unsafe.Pointer(&_out0), objref.IDOf(dispatchQueue), listener))
 	return _ret, _out0
 }
 
@@ -92,6 +127,19 @@ func CMIOObjectRemovePropertyListener(objectID int, listener unsafe.Pointer, cli
 	}
 	var _out0 CMIOObjectPropertyAddress
 	_ret := int(_fnCMIOObjectRemovePropertyListener(objectID, unsafe.Pointer(&_out0), listener, clientData))
+	return _ret, _out0
+}
+
+var _fnCMIOObjectRemovePropertyListenerBlock func(int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
+
+// CMIOObjectRemovePropertyListenerBlock calls the CoreMediaIO framework function CMIOObjectRemovePropertyListenerBlock.
+func CMIOObjectRemovePropertyListenerBlock(objectID int, dispatchQueue obj.Object, listener unsafe.Pointer) (result int, address CMIOObjectPropertyAddress) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMIOObjectRemovePropertyListenerBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMIOObjectRemovePropertyListenerBlock, _lib, "CMIOObjectRemovePropertyListenerBlock")
+	}
+	var _out0 CMIOObjectPropertyAddress
+	_ret := int(_fnCMIOObjectRemovePropertyListenerBlock(objectID, unsafe.Pointer(&_out0), objref.IDOf(dispatchQueue), listener))
 	return _ret, _out0
 }
 

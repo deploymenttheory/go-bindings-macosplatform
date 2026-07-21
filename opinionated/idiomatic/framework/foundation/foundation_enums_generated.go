@@ -397,6 +397,35 @@ func (e ByteCountFormatterUnits) String() string {
 	return strings.Join(parts, "|")
 }
 
+type CalculationError uint64
+
+const (
+	CalculationNoError         CalculationError = 0
+	CalculationLossOfPrecision CalculationError = 1
+	CalculationUnderflow       CalculationError = 2
+	CalculationOverflow        CalculationError = 3
+	CalculationDivideByZero    CalculationError = 4
+)
+
+// String returns the CalculationError constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CalculationError) String() string {
+	switch e {
+	case CalculationNoError:
+		return "CalculationNoError"
+	case CalculationLossOfPrecision:
+		return "CalculationLossOfPrecision"
+	case CalculationUnderflow:
+		return "CalculationUnderflow"
+	case CalculationOverflow:
+		return "CalculationOverflow"
+	case CalculationDivideByZero:
+		return "CalculationDivideByZero"
+	default:
+		return fmt.Sprintf("CalculationError(%d)", int64(e))
+	}
+}
+
 // The options for arithmetic operations involving calendars.
 // Bitmask — values may be combined with |.
 type CalendarOptions uint64
@@ -3100,6 +3129,44 @@ func (e QualityOfService) String() string {
 	}
 }
 
+type RectEdge uint64
+
+const (
+	// The minimum X edge.
+	RectEdgeMinX RectEdge = 0
+	// The minimum Y edge.
+	RectEdgeMinY RectEdge = 1
+	// The maximum X edge.
+	RectEdgeMaxX RectEdge = 2
+	// The maximum Y edge.
+	RectEdgeMaxY RectEdge = 3
+	// The minimum X edge.
+	MinXEdge RectEdge = 0
+	// The minimum Y edge.
+	MinYEdge RectEdge = 1
+	// The maximum X edge.
+	MaxXEdge RectEdge = 2
+	// The maximum Y edge.
+	MaxYEdge RectEdge = 3
+)
+
+// String returns the RectEdge constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RectEdge) String() string {
+	switch e {
+	case RectEdgeMinX:
+		return "RectEdgeMinX"
+	case RectEdgeMinY:
+		return "RectEdgeMinY"
+	case RectEdgeMaxX:
+		return "RectEdgeMaxX"
+	case RectEdgeMaxY:
+		return "RectEdgeMaxY"
+	default:
+		return fmt.Sprintf("RectEdge(%d)", int64(e))
+	}
+}
+
 // Bitmask — values may be combined with |.
 type RegularExpressionOptions uint64
 
@@ -5408,35 +5475,6 @@ func (e BinarySearchingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type CalculationError uint64
-
-const (
-	CalculationNoError         CalculationError = 0
-	CalculationLossOfPrecision CalculationError = 1
-	CalculationUnderflow       CalculationError = 2
-	CalculationOverflow        CalculationError = 3
-	CalculationDivideByZero    CalculationError = 4
-)
-
-// String returns the CalculationError constant's name, or its numeric form when the
-// value is not a known constant.
-func (e CalculationError) String() string {
-	switch e {
-	case CalculationNoError:
-		return "CalculationNoError"
-	case CalculationLossOfPrecision:
-		return "CalculationLossOfPrecision"
-	case CalculationUnderflow:
-		return "CalculationUnderflow"
-	case CalculationOverflow:
-		return "CalculationOverflow"
-	case CalculationDivideByZero:
-		return "CalculationDivideByZero"
-	default:
-		return fmt.Sprintf("CalculationError(%d)", int64(e))
-	}
-}
-
 // An option set of the sync controls available for an item.
 // Bitmask — values may be combined with |.
 type FileManagerSupportedSyncControls uint64
@@ -5706,44 +5744,6 @@ func (e PresentationIntentTableColumnAlignment) String() string {
 		return "PresentationIntentTableColumnAlignmentRight"
 	default:
 		return fmt.Sprintf("PresentationIntentTableColumnAlignment(%d)", int64(e))
-	}
-}
-
-type RectEdge uint64
-
-const (
-	// The minimum X edge.
-	RectEdgeMinX RectEdge = 0
-	// The minimum Y edge.
-	RectEdgeMinY RectEdge = 1
-	// The maximum X edge.
-	RectEdgeMaxX RectEdge = 2
-	// The maximum Y edge.
-	RectEdgeMaxY RectEdge = 3
-	// The minimum X edge.
-	MinXEdge RectEdge = 0
-	// The minimum Y edge.
-	MinYEdge RectEdge = 1
-	// The maximum X edge.
-	MaxXEdge RectEdge = 2
-	// The maximum Y edge.
-	MaxYEdge RectEdge = 3
-)
-
-// String returns the RectEdge constant's name, or its numeric form when the
-// value is not a known constant.
-func (e RectEdge) String() string {
-	switch e {
-	case RectEdgeMinX:
-		return "RectEdgeMinX"
-	case RectEdgeMinY:
-		return "RectEdgeMinY"
-	case RectEdgeMaxX:
-		return "RectEdgeMaxX"
-	case RectEdgeMaxY:
-		return "RectEdgeMaxY"
-	default:
-		return fmt.Sprintf("RectEdge(%d)", int64(e))
 	}
 }
 

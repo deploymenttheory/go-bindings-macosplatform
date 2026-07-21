@@ -5,11 +5,35 @@
 package imageio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
+
+var _fnCGAnimateImageAtURLWithBlock func(objc.ID, objc.ID, unsafe.Pointer) int32
+
+// CGAnimateImageAtURLWithBlock calls the ImageIO framework function CGAnimateImageAtURLWithBlock.
+func CGAnimateImageAtURLWithBlock(url obj.Object, options obj.Object, block unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAnimateImageAtURLWithBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAnimateImageAtURLWithBlock, _lib, "CGAnimateImageAtURLWithBlock")
+	}
+	return int(_fnCGAnimateImageAtURLWithBlock(objref.IDOf(url), objref.IDOf(options), block))
+}
+
+var _fnCGAnimateImageDataWithBlock func(objc.ID, objc.ID, unsafe.Pointer) int32
+
+// CGAnimateImageDataWithBlock calls the ImageIO framework function CGAnimateImageDataWithBlock.
+func CGAnimateImageDataWithBlock(data obj.Object, options obj.Object, block unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGAnimateImageDataWithBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnCGAnimateImageDataWithBlock, _lib, "CGAnimateImageDataWithBlock")
+	}
+	return int(_fnCGAnimateImageDataWithBlock(objref.IDOf(data), objref.IDOf(options), block))
+}
 
 var _fnCGImageDestinationAddAuxiliaryDataInfo func(objc.ID, objc.ID, objc.ID)
 
@@ -230,6 +254,17 @@ func CGImageMetadataCreateXMPData(metadata obj.Object, options obj.Object) obj.O
 	}
 	_ret := _fnCGImageMetadataCreateXMPData(objref.IDOf(metadata), objref.IDOf(options))
 	return obj.Wrap(_ret)
+}
+
+var _fnCGImageMetadataEnumerateTagsUsingBlock func(objc.ID, objc.ID, objc.ID, unsafe.Pointer)
+
+// CGImageMetadataEnumerateTagsUsingBlock calls the ImageIO framework function CGImageMetadataEnumerateTagsUsingBlock.
+func CGImageMetadataEnumerateTagsUsingBlock(metadata obj.Object, rootPath obj.Object, options obj.Object, block unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGImageMetadataEnumerateTagsUsingBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnCGImageMetadataEnumerateTagsUsingBlock, _lib, "CGImageMetadataEnumerateTagsUsingBlock")
+	}
+	_fnCGImageMetadataEnumerateTagsUsingBlock(objref.IDOf(metadata), objref.IDOf(rootPath), objref.IDOf(options), block)
 }
 
 var _fnCGImageMetadataGetTypeID func() int

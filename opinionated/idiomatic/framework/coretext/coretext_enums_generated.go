@@ -149,6 +149,39 @@ func (e CTFontManagerScope) String() string {
 	}
 }
 
+// Options for font creation and descriptor matching.
+// Bitmask — values may be combined with |.
+type CTFontOptions int64
+
+const (
+	// Default options are used.
+	KCTFontOptionsDefault CTFontOptions = 0
+	// Prevents automatic font activation.
+	KCTFontOptionsPreventAutoActivation CTFontOptions = 1
+	KCTFontOptionsPreventAutoDownload   CTFontOptions = 2
+	// Font matching prefers to match Apple system fonts.
+	KCTFontOptionsPreferSystemFont CTFontOptions = 4
+)
+
+// String returns the CTFontOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CTFontOptions) String() string {
+	var parts []string
+	if e&KCTFontOptionsPreventAutoActivation != 0 {
+		parts = append(parts, "KCTFontOptionsPreventAutoActivation")
+	}
+	if e&KCTFontOptionsPreventAutoDownload != 0 {
+		parts = append(parts, "KCTFontOptionsPreventAutoDownload")
+	}
+	if e&KCTFontOptionsPreferSystemFont != 0 {
+		parts = append(parts, "KCTFontOptionsPreferSystemFont")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // The intended rendering orientation of the font for obtaining glyph metrics.
 type CTFontOrientation int64
 
@@ -1211,39 +1244,6 @@ func (e CTFontManagerError) String() string {
 	default:
 		return fmt.Sprintf("CTFontManagerError(%d)", int64(e))
 	}
-}
-
-// Options for font creation and descriptor matching.
-// Bitmask — values may be combined with |.
-type CTFontOptions int64
-
-const (
-	// Default options are used.
-	KCTFontOptionsDefault CTFontOptions = 0
-	// Prevents automatic font activation.
-	KCTFontOptionsPreventAutoActivation CTFontOptions = 1
-	KCTFontOptionsPreventAutoDownload   CTFontOptions = 2
-	// Font matching prefers to match Apple system fonts.
-	KCTFontOptionsPreferSystemFont CTFontOptions = 4
-)
-
-// String returns the CTFontOptions constant's name, or its numeric form when the
-// value is not a known constant.
-func (e CTFontOptions) String() string {
-	var parts []string
-	if e&KCTFontOptionsPreventAutoActivation != 0 {
-		parts = append(parts, "KCTFontOptionsPreventAutoActivation")
-	}
-	if e&KCTFontOptionsPreventAutoDownload != 0 {
-		parts = append(parts, "KCTFontOptionsPreventAutoDownload")
-	}
-	if e&KCTFontOptionsPreferSystemFont != 0 {
-		parts = append(parts, "KCTFontOptionsPreferSystemFont")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // The stylistic class values of the font.

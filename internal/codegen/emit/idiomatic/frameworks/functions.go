@@ -196,7 +196,6 @@ func emitGenericFunctionWrappers(
 		var outs []view.DispatchOut
 		var outNames []string // readable return names for the signature (E7)
 		fnImports := map[string]string{}
-		ok := true
 		usedNames := make(map[string]int)
 		for i, param := range fn.Params {
 			pName := safeParamName(naming.ParamName(param.Name))
@@ -255,21 +254,20 @@ func emitGenericFunctionWrappers(
 				trialNames,
 			)
 			if !pok {
-				ok = false
-				break
+				// Degrade an unexpressible parameter to unsafe.Pointer and pass it
+				// through, rather than dropping the whole function — matching the raw
+				// layer's degrade-don't-drop policy so EmittableFunctions is the sole
+				// inclusion gate.
+				sigParts = append(sigParts, pName+" unsafe.Pointer")
+				abiParts = append(abiParts, "unsafe.Pointer")
+				callArgs = append(callArgs, pName)
+				fnImports["unsafe"] = "unsafe"
+				continue
 			}
 			maps.Copy(fnImports, imports)
 			sigParts = append(sigParts, pName+" "+sig)
 			abiParts = append(abiParts, cfuncABIType(sig, argExpr))
 			callArgs = append(callArgs, argExpr)
-		}
-		if !ok {
-			mapper.AppendDiagnostic(
-				"%s: idiomatic wrapper for %s left out (a parameter type is not yet expressible)",
-				framework.Framework,
-				fn.Name,
-			)
-			continue
 		}
 		retType, kind, wrap, _, rimps, rok := idiomaticRet(
 			fn.Return.ObjCType,

@@ -13,6 +13,17 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+var _fnCMCalibrateDisplay func(unsafe.Pointer) int16
+
+// CMCalibrateDisplay calls the CommonPanels framework function CMCalibrateDisplay.
+func CMCalibrateDisplay(theInfo unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMCalibrateDisplay == nil {
+		ebipurego.RegisterLibFunc(&_fnCMCalibrateDisplay, _lib, "CMCalibrateDisplay")
+	}
+	return _fnCMCalibrateDisplay(theInfo)
+}
+
 var _fnDisposeCalibrateEventUPP func(unsafe.Pointer)
 
 // DisposeCalibrateEventUPP calls the CommonPanels framework function DisposeCalibrateEventUPP.
@@ -116,6 +127,41 @@ func FPIsFontPanelVisible() uint8 {
 	return _fnFPIsFontPanelVisible()
 }
 
+var _fnGetColor func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+
+// GetColor calls the CommonPanels framework function GetColor.
+func GetColor(where unsafe.Pointer, inColor unsafe.Pointer, outColor unsafe.Pointer) (result uint8, prompt uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetColor == nil {
+		ebipurego.RegisterLibFunc(&_fnGetColor, _lib, "GetColor")
+	}
+	var _out0 uint8
+	_ret := _fnGetColor(where, unsafe.Pointer(&_out0), inColor, outColor)
+	return _ret, _out0
+}
+
+var _fnInvokeCalibrateEventUPP func(unsafe.Pointer, unsafe.Pointer)
+
+// InvokeCalibrateEventUPP calls the CommonPanels framework function InvokeCalibrateEventUPP.
+func InvokeCalibrateEventUPP(event unsafe.Pointer, userUPP unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeCalibrateEventUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeCalibrateEventUPP, _lib, "InvokeCalibrateEventUPP")
+	}
+	_fnInvokeCalibrateEventUPP(event, userUPP)
+}
+
+var _fnInvokeCalibrateUPP func(unsafe.Pointer, unsafe.Pointer) int16
+
+// InvokeCalibrateUPP calls the CommonPanels framework function InvokeCalibrateUPP.
+func InvokeCalibrateUPP(theInfo unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeCalibrateUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeCalibrateUPP, _lib, "InvokeCalibrateUPP")
+	}
+	return _fnInvokeCalibrateUPP(theInfo, userUPP)
+}
+
 var _fnInvokeCanCalibrateUPP func(int, unsafe.Pointer, unsafe.Pointer) uint8
 
 // InvokeCanCalibrateUPP calls the CommonPanels framework function InvokeCanCalibrateUPP.
@@ -127,4 +173,26 @@ func InvokeCanCalibrateUPP(displayID int, userUPP unsafe.Pointer) (result uint8,
 	var _out0 uint8
 	_ret := _fnInvokeCanCalibrateUPP(displayID, unsafe.Pointer(&_out0), userUPP)
 	return _ret, _out0
+}
+
+var _fnInvokeNColorChangedUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+
+// InvokeNColorChangedUPP calls the CommonPanels framework function InvokeNColorChangedUPP.
+func InvokeNColorChangedUPP(userData unsafe.Pointer, newColor unsafe.Pointer, userUPP unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeNColorChangedUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeNColorChangedUPP, _lib, "InvokeNColorChangedUPP")
+	}
+	_fnInvokeNColorChangedUPP(userData, newColor, userUPP)
+}
+
+var _fnNPickColor func(unsafe.Pointer) int16
+
+// NPickColor calls the CommonPanels framework function NPickColor.
+func NPickColor(theColorInfo unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNPickColor == nil {
+		ebipurego.RegisterLibFunc(&_fnNPickColor, _lib, "NPickColor")
+	}
+	return _fnNPickColor(theColorInfo)
 }

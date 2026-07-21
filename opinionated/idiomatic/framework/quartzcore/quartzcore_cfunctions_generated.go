@@ -5,6 +5,9 @@
 package quartzcore
 
 import (
+	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	ebipurego "github.com/ebitengine/purego"
 )
 
@@ -17,4 +20,59 @@ func CACurrentMediaTime() float64 {
 		ebipurego.RegisterLibFunc(&_fnCACurrentMediaTime, _lib, "CACurrentMediaTime")
 	}
 	return _fnCACurrentMediaTime()
+}
+
+var _fnCAFrameRateRangeIsEqualToRange func(unsafe.Pointer, unsafe.Pointer) bool
+
+// CAFrameRateRangeIsEqualToRange calls the QuartzCore framework function CAFrameRateRangeIsEqualToRange.
+func CAFrameRateRangeIsEqualToRange(range_ unsafe.Pointer, other unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCAFrameRateRangeIsEqualToRange == nil {
+		ebipurego.RegisterLibFunc(&_fnCAFrameRateRangeIsEqualToRange, _lib, "CAFrameRateRangeIsEqualToRange")
+	}
+	return _fnCAFrameRateRangeIsEqualToRange(range_, other)
+}
+
+var _fnCATransform3DEqualToTransform func(unsafe.Pointer, unsafe.Pointer) bool
+
+// CATransform3DEqualToTransform calls the QuartzCore framework function CATransform3DEqualToTransform.
+func CATransform3DEqualToTransform(a unsafe.Pointer, b unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCATransform3DEqualToTransform == nil {
+		ebipurego.RegisterLibFunc(&_fnCATransform3DEqualToTransform, _lib, "CATransform3DEqualToTransform")
+	}
+	return _fnCATransform3DEqualToTransform(a, b)
+}
+
+var _fnCATransform3DGetAffineTransform func(unsafe.Pointer) corefoundation.CGAffineTransform
+
+// CATransform3DGetAffineTransform calls the QuartzCore framework function CATransform3DGetAffineTransform.
+func CATransform3DGetAffineTransform(t unsafe.Pointer) corefoundation.CGAffineTransform {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCATransform3DGetAffineTransform == nil {
+		ebipurego.RegisterLibFunc(&_fnCATransform3DGetAffineTransform, _lib, "CATransform3DGetAffineTransform")
+	}
+	return _fnCATransform3DGetAffineTransform(t)
+}
+
+var _fnCATransform3DIsAffine func(unsafe.Pointer) bool
+
+// CATransform3DIsAffine calls the QuartzCore framework function CATransform3DIsAffine.
+func CATransform3DIsAffine(t unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCATransform3DIsAffine == nil {
+		ebipurego.RegisterLibFunc(&_fnCATransform3DIsAffine, _lib, "CATransform3DIsAffine")
+	}
+	return _fnCATransform3DIsAffine(t)
+}
+
+var _fnCATransform3DIsIdentity func(unsafe.Pointer) bool
+
+// CATransform3DIsIdentity calls the QuartzCore framework function CATransform3DIsIdentity.
+func CATransform3DIsIdentity(t unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCATransform3DIsIdentity == nil {
+		ebipurego.RegisterLibFunc(&_fnCATransform3DIsIdentity, _lib, "CATransform3DIsIdentity")
+	}
+	return _fnCATransform3DIsIdentity(t)
 }

@@ -133,6 +133,17 @@ func MDItemCreateWithURL(allocator obj.Object, url obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnMDItemGetCacheFileDescriptors func(objc.ID, unsafe.Pointer)
+
+// MDItemGetCacheFileDescriptors calls the Metadata framework function MDItemGetCacheFileDescriptors.
+func MDItemGetCacheFileDescriptors(items obj.Object, completionHandler unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDItemGetCacheFileDescriptors == nil {
+		ebipurego.RegisterLibFunc(&_fnMDItemGetCacheFileDescriptors, _lib, "MDItemGetCacheFileDescriptors")
+	}
+	_fnMDItemGetCacheFileDescriptors(objref.IDOf(items), completionHandler)
+}
+
 var _fnMDItemGetTypeID func() int
 
 // MDItemGetTypeID calls the Metadata framework function MDItemGetTypeID.
@@ -211,6 +222,18 @@ func MDLabelCopyAttributeName(label obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDLabelCopyAttributeName, _lib, "MDLabelCopyAttributeName")
 	}
 	_ret := _fnMDLabelCopyAttributeName(objref.IDOf(label))
+	return obj.Wrap(_ret)
+}
+
+var _fnMDLabelCreate func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
+
+// MDLabelCreate calls the Metadata framework function MDLabelCreate.
+func MDLabelCreate(allocator obj.Object, displayName obj.Object, kind obj.Object, domain unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDLabelCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnMDLabelCreate, _lib, "MDLabelCreate")
+	}
+	_ret := _fnMDLabelCreate(objref.IDOf(allocator), objref.IDOf(displayName), objref.IDOf(kind), domain)
 	return obj.Wrap(_ret)
 }
 
@@ -430,6 +453,39 @@ func MDQueryIsGatheringComplete(query obj.Object) uint8 {
 	return _fnMDQueryIsGatheringComplete(objref.IDOf(query))
 }
 
+var _fnMDQuerySetBatchingParameters func(objc.ID, unsafe.Pointer)
+
+// MDQuerySetBatchingParameters calls the Metadata framework function MDQuerySetBatchingParameters.
+func MDQuerySetBatchingParameters(query obj.Object, params unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQuerySetBatchingParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQuerySetBatchingParameters, _lib, "MDQuerySetBatchingParameters")
+	}
+	_fnMDQuerySetBatchingParameters(objref.IDOf(query), params)
+}
+
+var _fnMDQuerySetCreateResultFunction func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+
+// MDQuerySetCreateResultFunction calls the Metadata framework function MDQuerySetCreateResultFunction.
+func MDQuerySetCreateResultFunction(query obj.Object, func_ unsafe.Pointer, context_ unsafe.Pointer, cb unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQuerySetCreateResultFunction == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQuerySetCreateResultFunction, _lib, "MDQuerySetCreateResultFunction")
+	}
+	_fnMDQuerySetCreateResultFunction(objref.IDOf(query), func_, context_, cb)
+}
+
+var _fnMDQuerySetCreateValueFunction func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+
+// MDQuerySetCreateValueFunction calls the Metadata framework function MDQuerySetCreateValueFunction.
+func MDQuerySetCreateValueFunction(query obj.Object, func_ unsafe.Pointer, context_ unsafe.Pointer, cb unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQuerySetCreateValueFunction == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQuerySetCreateValueFunction, _lib, "MDQuerySetCreateValueFunction")
+	}
+	_fnMDQuerySetCreateValueFunction(objref.IDOf(query), func_, context_, cb)
+}
+
 var _fnMDQuerySetDispatchQueue func(objc.ID, objc.ID)
 
 // MDQuerySetDispatchQueue calls the Metadata framework function MDQuerySetDispatchQueue.
@@ -472,6 +528,17 @@ func MDQuerySetSortComparator(query obj.Object, comparator unsafe.Pointer, conte
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetSortComparator, _lib, "MDQuerySetSortComparator")
 	}
 	_fnMDQuerySetSortComparator(objref.IDOf(query), comparator, context_)
+}
+
+var _fnMDQuerySetSortComparatorBlock func(objc.ID, unsafe.Pointer)
+
+// MDQuerySetSortComparatorBlock calls the Metadata framework function MDQuerySetSortComparatorBlock.
+func MDQuerySetSortComparatorBlock(query obj.Object, comparator unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQuerySetSortComparatorBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQuerySetSortComparatorBlock, _lib, "MDQuerySetSortComparatorBlock")
+	}
+	_fnMDQuerySetSortComparatorBlock(objref.IDOf(query), comparator)
 }
 
 var _fnMDQuerySetSortOptionFlagsForAttribute func(objc.ID, objc.ID, uint32) uint8

@@ -156,3 +156,25 @@ func SCNMatrix4Translate(m quartzcore.CATransform3D, tx float64, ty float64, tz 
 	}
 	return _fnSCNMatrix4Translate(m, tx, ty, tz)
 }
+
+var _fnSCNVector3EqualToVector3 func(unsafe.Pointer, unsafe.Pointer) bool
+
+// SCNVector3EqualToVector3 calls the SceneKit framework function SCNVector3EqualToVector3.
+func SCNVector3EqualToVector3(a unsafe.Pointer, b unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNVector3EqualToVector3 == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNVector3EqualToVector3, _lib, "SCNVector3EqualToVector3")
+	}
+	return _fnSCNVector3EqualToVector3(a, b)
+}
+
+var _fnSCNVector4EqualToVector4 func(unsafe.Pointer, unsafe.Pointer) bool
+
+// SCNVector4EqualToVector4 calls the SceneKit framework function SCNVector4EqualToVector4.
+func SCNVector4EqualToVector4(a unsafe.Pointer, b unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNVector4EqualToVector4 == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNVector4EqualToVector4, _lib, "SCNVector4EqualToVector4")
+	}
+	return _fnSCNVector4EqualToVector4(a, b)
+}

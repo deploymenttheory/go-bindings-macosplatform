@@ -2174,6 +2174,50 @@ func RbDataObjectZalloc(arg int, arg2 int, arg3 unsafe.Pointer, arg4 unsafe.Poin
 	return _fnRbDataObjectZalloc(arg, arg2, arg3, arg4)
 }
 
+var _fnRbDataTypedObjectAlloc func(int, unsafe.Pointer, unsafe.Pointer) int
+
+// RbDataTypedObjectAlloc calls the Ruby framework function rb_data_typed_object_alloc.
+func RbDataTypedObjectAlloc(arg int, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDataTypedObjectAlloc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDataTypedObjectAlloc, _lib, "rb_data_typed_object_alloc")
+	}
+	return _fnRbDataTypedObjectAlloc(arg, arg2, arg3)
+}
+
+var _fnRbDataTypedObjectMake func(int, unsafe.Pointer, unsafe.Pointer, int) int
+
+// RbDataTypedObjectMake calls the Ruby framework function rb_data_typed_object_make.
+func RbDataTypedObjectMake(klass int, type_ unsafe.Pointer, datap unsafe.Pointer, size int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDataTypedObjectMake == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDataTypedObjectMake, _lib, "rb_data_typed_object_make")
+	}
+	return _fnRbDataTypedObjectMake(klass, type_, datap, size)
+}
+
+var _fnRbDataTypedObjectWrap func(int, unsafe.Pointer, unsafe.Pointer) int
+
+// RbDataTypedObjectWrap calls the Ruby framework function rb_data_typed_object_wrap.
+func RbDataTypedObjectWrap(klass int, datap unsafe.Pointer, arg unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDataTypedObjectWrap == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDataTypedObjectWrap, _lib, "rb_data_typed_object_wrap")
+	}
+	return _fnRbDataTypedObjectWrap(klass, datap, arg)
+}
+
+var _fnRbDataTypedObjectZalloc func(int, int, unsafe.Pointer) int
+
+// RbDataTypedObjectZalloc calls the Ruby framework function rb_data_typed_object_zalloc.
+func RbDataTypedObjectZalloc(klass int, size int, type_ unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDataTypedObjectZalloc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDataTypedObjectZalloc, _lib, "rb_data_typed_object_zalloc")
+	}
+	return _fnRbDataTypedObjectZalloc(klass, size, type_)
+}
+
 var _fnRbDbl2big func(float64) int
 
 // RbDbl2big calls the Ruby framework function rb_dbl2big.
@@ -3066,6 +3110,39 @@ func RbFUntraceVar(arg int) (result int, arg2 int) {
 	return _ret, _out0
 }
 
+var _fnRbFdClr func(int, unsafe.Pointer)
+
+// RbFdClr calls the Ruby framework function rb_fd_clr.
+func RbFdClr(arg int, arg2 unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFdClr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFdClr, _lib, "rb_fd_clr")
+	}
+	_fnRbFdClr(arg, arg2)
+}
+
+var _fnRbFdCopy func(unsafe.Pointer, unsafe.Pointer, int)
+
+// RbFdCopy calls the Ruby framework function rb_fd_copy.
+func RbFdCopy(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFdCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFdCopy, _lib, "rb_fd_copy")
+	}
+	_fnRbFdCopy(arg, arg2, arg3)
+}
+
+var _fnRbFdDup func(unsafe.Pointer, unsafe.Pointer)
+
+// RbFdDup calls the Ruby framework function rb_fd_dup.
+func RbFdDup(dst unsafe.Pointer, src unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFdDup == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFdDup, _lib, "rb_fd_dup")
+	}
+	_fnRbFdDup(dst, src)
+}
+
 var _fnRbFdFixCloexec func(int)
 
 // RbFdFixCloexec calls the Ruby framework function rb_fd_fix_cloexec.
@@ -3075,6 +3152,72 @@ func RbFdFixCloexec(fd int) {
 		ebipurego.RegisterLibFunc(&_fnRbFdFixCloexec, _lib, "rb_fd_fix_cloexec")
 	}
 	_fnRbFdFixCloexec(fd)
+}
+
+var _fnRbFdInit func(unsafe.Pointer)
+
+// RbFdInit calls the Ruby framework function rb_fd_init.
+func RbFdInit(arg unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFdInit == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFdInit, _lib, "rb_fd_init")
+	}
+	_fnRbFdInit(arg)
+}
+
+var _fnRbFdIsset func(int, unsafe.Pointer) int32
+
+// RbFdIsset calls the Ruby framework function rb_fd_isset.
+func RbFdIsset(arg int, arg2 unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFdIsset == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFdIsset, _lib, "rb_fd_isset")
+	}
+	return int(_fnRbFdIsset(arg, arg2))
+}
+
+var _fnRbFdSelect func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// RbFdSelect calls the Ruby framework function rb_fd_select.
+func RbFdSelect(arg int, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFdSelect == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFdSelect, _lib, "rb_fd_select")
+	}
+	return int(_fnRbFdSelect(arg, arg2, arg3, arg4, arg5))
+}
+
+var _fnRbFdSet func(int, unsafe.Pointer)
+
+// RbFdSet calls the Ruby framework function rb_fd_set.
+func RbFdSet(arg int, arg2 unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFdSet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFdSet, _lib, "rb_fd_set")
+	}
+	_fnRbFdSet(arg, arg2)
+}
+
+var _fnRbFdTerm func(unsafe.Pointer)
+
+// RbFdTerm calls the Ruby framework function rb_fd_term.
+func RbFdTerm(arg unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFdTerm == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFdTerm, _lib, "rb_fd_term")
+	}
+	_fnRbFdTerm(arg)
+}
+
+var _fnRbFdZero func(unsafe.Pointer)
+
+// RbFdZero calls the Ruby framework function rb_fd_zero.
+func RbFdZero(arg unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFdZero == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFdZero, _lib, "rb_fd_zero")
+	}
+	_fnRbFdZero(arg)
 }
 
 var _fnRbFeatureProvided func(string, string) int32
@@ -5207,6 +5350,39 @@ func RbMakeException(arg int) (result int, arg2 int) {
 	var _out0 int
 	_ret := _fnRbMakeException(arg, unsafe.Pointer(&_out0))
 	return _ret, _out0
+}
+
+var _fnRbMarkHash func(unsafe.Pointer)
+
+// RbMarkHash calls the Ruby framework function rb_mark_hash.
+func RbMarkHash(arg unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMarkHash == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMarkHash, _lib, "rb_mark_hash")
+	}
+	_fnRbMarkHash(arg)
+}
+
+var _fnRbMarkSet func(unsafe.Pointer)
+
+// RbMarkSet calls the Ruby framework function rb_mark_set.
+func RbMarkSet(arg unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMarkSet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMarkSet, _lib, "rb_mark_set")
+	}
+	_fnRbMarkSet(arg)
+}
+
+var _fnRbMarkTbl func(unsafe.Pointer)
+
+// RbMarkTbl calls the Ruby framework function rb_mark_tbl.
+func RbMarkTbl(arg unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMarkTbl == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMarkTbl, _lib, "rb_mark_tbl")
+	}
+	_fnRbMarkTbl(arg)
 }
 
 var _fnRbMarshalDefineCompat func(int, int, unsafe.Pointer, unsafe.Pointer)
@@ -8294,6 +8470,17 @@ func RbThreadFdClose(arg int) {
 	_fnRbThreadFdClose(arg)
 }
 
+var _fnRbThreadFdSelect func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// RbThreadFdSelect calls the Ruby framework function rb_thread_fd_select.
+func RbThreadFdSelect(arg int, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadFdSelect == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadFdSelect, _lib, "rb_thread_fd_select")
+	}
+	return int(_fnRbThreadFdSelect(arg, arg2, arg3, arg4, arg5))
+}
+
 var _fnRbThreadFdWritable func(int) int32
 
 // RbThreadFdWritable calls the Ruby framework function rb_thread_fd_writable.
@@ -8666,6 +8853,28 @@ func RbType(object int) int {
 		ebipurego.RegisterLibFunc(&_fnRbType, _lib, "rb_type")
 	}
 	return int(_fnRbType(object))
+}
+
+var _fnRbTypeddataInheritedP func(unsafe.Pointer, unsafe.Pointer) int32
+
+// RbTypeddataInheritedP calls the Ruby framework function rb_typeddata_inherited_p.
+func RbTypeddataInheritedP(child unsafe.Pointer, parent unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbTypeddataInheritedP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbTypeddataInheritedP, _lib, "rb_typeddata_inherited_p")
+	}
+	return int(_fnRbTypeddataInheritedP(child, parent))
+}
+
+var _fnRbTypeddataIsKindOf func(int, unsafe.Pointer) int32
+
+// RbTypeddataIsKindOf calls the Ruby framework function rb_typeddata_is_kind_of.
+func RbTypeddataIsKindOf(arg int, arg2 unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbTypeddataIsKindOf == nil {
+		ebipurego.RegisterLibFunc(&_fnRbTypeddataIsKindOf, _lib, "rb_typeddata_is_kind_of")
+	}
+	return int(_fnRbTypeddataIsKindOf(arg, arg2))
 }
 
 var _fnRbUint2big func(int) int
@@ -9259,6 +9468,17 @@ func StackCheck() int {
 	return int(_fnStackCheck())
 }
 
+var _fnStackLength func(unsafe.Pointer) int
+
+// StackLength calls the Ruby framework function ruby_stack_length.
+func StackLength(arg unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStackLength == nil {
+		ebipurego.RegisterLibFunc(&_fnStackLength, _lib, "ruby_stack_length")
+	}
+	return _fnStackLength(arg)
+}
+
 var _fnStop func(int)
 
 // Stop calls the Ruby framework function ruby_stop.
@@ -9316,6 +9536,124 @@ func Xfree(arg unsafe.Pointer) {
 	_fnXfree(arg)
 }
 
+var _fnStAddDirect func(unsafe.Pointer, int, int)
+
+// StAddDirect calls the Ruby framework function st_add_direct.
+func StAddDirect(arg unsafe.Pointer, arg2 int, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStAddDirect == nil {
+		ebipurego.RegisterLibFunc(&_fnStAddDirect, _lib, "st_add_direct")
+	}
+	_fnStAddDirect(arg, arg2, arg3)
+}
+
+var _fnStCleanupSafe func(unsafe.Pointer, int)
+
+// StCleanupSafe calls the Ruby framework function st_cleanup_safe.
+func StCleanupSafe(arg unsafe.Pointer, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStCleanupSafe == nil {
+		ebipurego.RegisterLibFunc(&_fnStCleanupSafe, _lib, "st_cleanup_safe")
+	}
+	_fnStCleanupSafe(arg, arg2)
+}
+
+var _fnStClear func(unsafe.Pointer)
+
+// StClear calls the Ruby framework function st_clear.
+func StClear(arg unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStClear == nil {
+		ebipurego.RegisterLibFunc(&_fnStClear, _lib, "st_clear")
+	}
+	_fnStClear(arg)
+}
+
+var _fnStDelete func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// StDelete calls the Ruby framework function st_delete.
+func StDelete(arg unsafe.Pointer) (result int, arg2 int, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStDelete == nil {
+		ebipurego.RegisterLibFunc(&_fnStDelete, _lib, "st_delete")
+	}
+	var _out0 int
+	var _out1 int
+	_ret := int(_fnStDelete(arg, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
+	return _ret, _out0, _out1
+}
+
+var _fnStDeleteSafe func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int32
+
+// StDeleteSafe calls the Ruby framework function st_delete_safe.
+func StDeleteSafe(arg unsafe.Pointer, arg4 int) (result int, arg2 int, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStDeleteSafe == nil {
+		ebipurego.RegisterLibFunc(&_fnStDeleteSafe, _lib, "st_delete_safe")
+	}
+	var _out0 int
+	var _out1 int
+	_ret := int(_fnStDeleteSafe(arg, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), arg4))
+	return _ret, _out0, _out1
+}
+
+var _fnStForeach func(unsafe.Pointer, unsafe.Pointer, int) int32
+
+// StForeach calls the Ruby framework function st_foreach.
+func StForeach(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStForeach == nil {
+		ebipurego.RegisterLibFunc(&_fnStForeach, _lib, "st_foreach")
+	}
+	return int(_fnStForeach(arg, arg2, arg3))
+}
+
+var _fnStForeachCheck func(unsafe.Pointer, unsafe.Pointer, int, int) int32
+
+// StForeachCheck calls the Ruby framework function st_foreach_check.
+func StForeachCheck(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 int, arg4 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStForeachCheck == nil {
+		ebipurego.RegisterLibFunc(&_fnStForeachCheck, _lib, "st_foreach_check")
+	}
+	return int(_fnStForeachCheck(arg, arg2, arg3, arg4))
+}
+
+var _fnStForeachSafe func(unsafe.Pointer, unsafe.Pointer, int)
+
+// StForeachSafe calls the Ruby framework function st_foreach_safe.
+func StForeachSafe(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStForeachSafe == nil {
+		ebipurego.RegisterLibFunc(&_fnStForeachSafe, _lib, "st_foreach_safe")
+	}
+	_fnStForeachSafe(arg, arg2, arg3)
+}
+
+var _fnStFreeTable func(unsafe.Pointer)
+
+// StFreeTable calls the Ruby framework function st_free_table.
+func StFreeTable(arg unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStFreeTable == nil {
+		ebipurego.RegisterLibFunc(&_fnStFreeTable, _lib, "st_free_table")
+	}
+	_fnStFreeTable(arg)
+}
+
+var _fnStGetKey func(unsafe.Pointer, int, unsafe.Pointer) int32
+
+// StGetKey calls the Ruby framework function st_get_key.
+func StGetKey(arg unsafe.Pointer, arg2 int) (result int, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStGetKey == nil {
+		ebipurego.RegisterLibFunc(&_fnStGetKey, _lib, "st_get_key")
+	}
+	var _out0 int
+	_ret := int(_fnStGetKey(arg, arg2, unsafe.Pointer(&_out0)))
+	return _ret, _out0
+}
+
 var _fnStHash func(unsafe.Pointer, int, int) int
 
 // StHash calls the Ruby framework function st_hash.
@@ -9371,6 +9709,50 @@ func StHashUint32(h int, i uint32) int {
 	return _fnStHashUint32(h, i)
 }
 
+var _fnStInsert func(unsafe.Pointer, int, int) int32
+
+// StInsert calls the Ruby framework function st_insert.
+func StInsert(arg unsafe.Pointer, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStInsert == nil {
+		ebipurego.RegisterLibFunc(&_fnStInsert, _lib, "st_insert")
+	}
+	return int(_fnStInsert(arg, arg2, arg3))
+}
+
+var _fnStInsert2 func(unsafe.Pointer, int, int, unsafe.Pointer) int32
+
+// StInsert2 calls the Ruby framework function st_insert2.
+func StInsert2(arg unsafe.Pointer, arg2 int, arg3 int, arg4 unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStInsert2 == nil {
+		ebipurego.RegisterLibFunc(&_fnStInsert2, _lib, "st_insert2")
+	}
+	return int(_fnStInsert2(arg, arg2, arg3, arg4))
+}
+
+var _fnStKeys func(unsafe.Pointer, unsafe.Pointer, int) int
+
+// StKeys calls the Ruby framework function st_keys.
+func StKeys(table unsafe.Pointer, keys unsafe.Pointer, size int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStKeys == nil {
+		ebipurego.RegisterLibFunc(&_fnStKeys, _lib, "st_keys")
+	}
+	return _fnStKeys(table, keys, size)
+}
+
+var _fnStKeysCheck func(unsafe.Pointer, unsafe.Pointer, int, int) int
+
+// StKeysCheck calls the Ruby framework function st_keys_check.
+func StKeysCheck(table unsafe.Pointer, keys unsafe.Pointer, size int, never int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStKeysCheck == nil {
+		ebipurego.RegisterLibFunc(&_fnStKeysCheck, _lib, "st_keys_check")
+	}
+	return _fnStKeysCheck(table, keys, size, never)
+}
+
 var _fnStLocaleInsensitiveStrcasecmp func(string, string) int32
 
 // StLocaleInsensitiveStrcasecmp calls the Ruby framework function st_locale_insensitive_strcasecmp.
@@ -9393,6 +9775,30 @@ func StLocaleInsensitiveStrncasecmp(s1 string, s2 unsafe.Pointer, n int) int {
 	return int(_fnStLocaleInsensitiveStrncasecmp(s1, s2, n))
 }
 
+var _fnStLookup func(unsafe.Pointer, int, unsafe.Pointer) int32
+
+// StLookup calls the Ruby framework function st_lookup.
+func StLookup(arg unsafe.Pointer, arg2 int) (result int, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStLookup == nil {
+		ebipurego.RegisterLibFunc(&_fnStLookup, _lib, "st_lookup")
+	}
+	var _out0 int
+	_ret := int(_fnStLookup(arg, arg2, unsafe.Pointer(&_out0)))
+	return _ret, _out0
+}
+
+var _fnStMemsize func(unsafe.Pointer) int
+
+// StMemsize calls the Ruby framework function st_memsize.
+func StMemsize(arg unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStMemsize == nil {
+		ebipurego.RegisterLibFunc(&_fnStMemsize, _lib, "st_memsize")
+	}
+	return _fnStMemsize(arg)
+}
+
 var _fnStNumcmp func(int, int) int32
 
 // StNumcmp calls the Ruby framework function st_numcmp.
@@ -9413,4 +9819,51 @@ func StNumhash(arg int) int {
 		ebipurego.RegisterLibFunc(&_fnStNumhash, _lib, "st_numhash")
 	}
 	return _fnStNumhash(arg)
+}
+
+var _fnStShift func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// StShift calls the Ruby framework function st_shift.
+func StShift(arg unsafe.Pointer) (result int, arg2 int, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStShift == nil {
+		ebipurego.RegisterLibFunc(&_fnStShift, _lib, "st_shift")
+	}
+	var _out0 int
+	var _out1 int
+	_ret := int(_fnStShift(arg, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
+	return _ret, _out0, _out1
+}
+
+var _fnStUpdate func(unsafe.Pointer, int, unsafe.Pointer, int) int32
+
+// StUpdate calls the Ruby framework function st_update.
+func StUpdate(table unsafe.Pointer, key int, func_ unsafe.Pointer, arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStUpdate == nil {
+		ebipurego.RegisterLibFunc(&_fnStUpdate, _lib, "st_update")
+	}
+	return int(_fnStUpdate(table, key, func_, arg))
+}
+
+var _fnStValues func(unsafe.Pointer, unsafe.Pointer, int) int
+
+// StValues calls the Ruby framework function st_values.
+func StValues(table unsafe.Pointer, values unsafe.Pointer, size int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStValues == nil {
+		ebipurego.RegisterLibFunc(&_fnStValues, _lib, "st_values")
+	}
+	return _fnStValues(table, values, size)
+}
+
+var _fnStValuesCheck func(unsafe.Pointer, unsafe.Pointer, int, int) int
+
+// StValuesCheck calls the Ruby framework function st_values_check.
+func StValuesCheck(table unsafe.Pointer, values unsafe.Pointer, size int, never int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStValuesCheck == nil {
+		ebipurego.RegisterLibFunc(&_fnStValuesCheck, _lib, "st_values_check")
+	}
+	return _fnStValuesCheck(table, values, size, never)
 }

@@ -297,6 +297,18 @@ func SCDynamicStoreCopyValue(store obj.Object, key obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnSCDynamicStoreCreate func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
+
+// SCDynamicStoreCreate calls the SystemConfiguration framework function SCDynamicStoreCreate.
+func SCDynamicStoreCreate(allocator obj.Object, name obj.Object, callout unsafe.Pointer, context_ unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCDynamicStoreCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCreate, _lib, "SCDynamicStoreCreate")
+	}
+	_ret := _fnSCDynamicStoreCreate(objref.IDOf(allocator), objref.IDOf(name), callout, context_)
+	return obj.Wrap(_ret)
+}
+
 var _fnSCDynamicStoreCreateRunLoopSource func(objc.ID, objc.ID, int) objc.ID
 
 // SCDynamicStoreCreateRunLoopSource calls the SystemConfiguration framework function SCDynamicStoreCreateRunLoopSource.
@@ -306,6 +318,18 @@ func SCDynamicStoreCreateRunLoopSource(allocator obj.Object, store obj.Object, o
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCreateRunLoopSource, _lib, "SCDynamicStoreCreateRunLoopSource")
 	}
 	_ret := _fnSCDynamicStoreCreateRunLoopSource(objref.IDOf(allocator), objref.IDOf(store), order)
+	return obj.Wrap(_ret)
+}
+
+var _fnSCDynamicStoreCreateWithOptions func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
+
+// SCDynamicStoreCreateWithOptions calls the SystemConfiguration framework function SCDynamicStoreCreateWithOptions.
+func SCDynamicStoreCreateWithOptions(allocator obj.Object, name obj.Object, storeOptions obj.Object, callout unsafe.Pointer, context_ unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCDynamicStoreCreateWithOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCreateWithOptions, _lib, "SCDynamicStoreCreateWithOptions")
+	}
+	_ret := _fnSCDynamicStoreCreateWithOptions(objref.IDOf(allocator), objref.IDOf(name), objref.IDOf(storeOptions), callout, context_)
 	return obj.Wrap(_ret)
 }
 
@@ -599,6 +623,18 @@ func SCNetworkConnectionCopyUserPreferences(selectionOptions obj.Object, service
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyUserPreferences, _lib, "SCNetworkConnectionCopyUserPreferences")
 	}
 	return _fnSCNetworkConnectionCopyUserPreferences(objref.IDOf(selectionOptions), serviceID, userOptions)
+}
+
+var _fnSCNetworkConnectionCreateWithServiceID func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
+
+// SCNetworkConnectionCreateWithServiceID calls the SystemConfiguration framework function SCNetworkConnectionCreateWithServiceID.
+func SCNetworkConnectionCreateWithServiceID(allocator obj.Object, serviceID obj.Object, callout unsafe.Pointer, context_ unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNetworkConnectionCreateWithServiceID == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCreateWithServiceID, _lib, "SCNetworkConnectionCreateWithServiceID")
+	}
+	_ret := _fnSCNetworkConnectionCreateWithServiceID(objref.IDOf(allocator), objref.IDOf(serviceID), callout, context_)
+	return obj.Wrap(_ret)
 }
 
 var _fnSCNetworkConnectionGetStatus func(objc.ID) SCNetworkConnectionStatus
@@ -1074,6 +1110,17 @@ func SCNetworkReachabilityScheduleWithRunLoop(target obj.Object, runLoop obj.Obj
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityScheduleWithRunLoop, _lib, "SCNetworkReachabilityScheduleWithRunLoop")
 	}
 	return _fnSCNetworkReachabilityScheduleWithRunLoop(objref.IDOf(target), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
+}
+
+var _fnSCNetworkReachabilitySetCallback func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
+
+// SCNetworkReachabilitySetCallback calls the SystemConfiguration framework function SCNetworkReachabilitySetCallback.
+func SCNetworkReachabilitySetCallback(target obj.Object, callout unsafe.Pointer, context_ unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCNetworkReachabilitySetCallback == nil {
+		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilitySetCallback, _lib, "SCNetworkReachabilitySetCallback")
+	}
+	return _fnSCNetworkReachabilitySetCallback(objref.IDOf(target), callout, context_)
 }
 
 var _fnSCNetworkReachabilitySetDispatchQueue func(objc.ID, objc.ID) uint8
@@ -1670,6 +1717,17 @@ func SCPreferencesScheduleWithRunLoop(prefs obj.Object, runLoop obj.Object, runL
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesScheduleWithRunLoop, _lib, "SCPreferencesScheduleWithRunLoop")
 	}
 	return _fnSCPreferencesScheduleWithRunLoop(objref.IDOf(prefs), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
+}
+
+var _fnSCPreferencesSetCallback func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
+
+// SCPreferencesSetCallback calls the SystemConfiguration framework function SCPreferencesSetCallback.
+func SCPreferencesSetCallback(prefs obj.Object, callout unsafe.Pointer, context_ unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCPreferencesSetCallback == nil {
+		ebipurego.RegisterLibFunc(&_fnSCPreferencesSetCallback, _lib, "SCPreferencesSetCallback")
+	}
+	return _fnSCPreferencesSetCallback(objref.IDOf(prefs), callout, context_)
 }
 
 var _fnSCPreferencesSetComputerName func(objc.ID, objc.ID, int) uint8

@@ -5,6 +5,8 @@
 package quicklook
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -57,6 +59,18 @@ func QLPreviewRequestCreateContext(preview obj.Object, size corefoundation.CGSiz
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCreateContext, _lib, "QLPreviewRequestCreateContext")
 	}
 	_ret := _fnQLPreviewRequestCreateContext(objref.IDOf(preview), size, isBitmap, objref.IDOf(properties))
+	return obj.Wrap(_ret)
+}
+
+var _fnQLPreviewRequestCreatePDFContext func(objc.ID, unsafe.Pointer, objc.ID, objc.ID) objc.ID
+
+// QLPreviewRequestCreatePDFContext calls the QuickLook framework function QLPreviewRequestCreatePDFContext.
+func QLPreviewRequestCreatePDFContext(preview obj.Object, mediaBox unsafe.Pointer, auxiliaryInfo obj.Object, properties obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnQLPreviewRequestCreatePDFContext == nil {
+		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCreatePDFContext, _lib, "QLPreviewRequestCreatePDFContext")
+	}
+	_ret := _fnQLPreviewRequestCreatePDFContext(objref.IDOf(preview), mediaBox, objref.IDOf(auxiliaryInfo), objref.IDOf(properties))
 	return obj.Wrap(_ret)
 }
 
@@ -114,6 +128,17 @@ func QLPreviewRequestSetDataRepresentation(preview obj.Object, data obj.Object, 
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestSetDataRepresentation, _lib, "QLPreviewRequestSetDataRepresentation")
 	}
 	_fnQLPreviewRequestSetDataRepresentation(objref.IDOf(preview), objref.IDOf(data), objref.IDOf(contentTypeUTI), objref.IDOf(properties))
+}
+
+var _fnQLPreviewRequestSetDocumentObject func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// QLPreviewRequestSetDocumentObject calls the QuickLook framework function QLPreviewRequestSetDocumentObject.
+func QLPreviewRequestSetDocumentObject(preview obj.Object, object unsafe.Pointer, callbacks unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnQLPreviewRequestSetDocumentObject == nil {
+		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestSetDocumentObject, _lib, "QLPreviewRequestSetDocumentObject")
+	}
+	_fnQLPreviewRequestSetDocumentObject(objref.IDOf(preview), object, callbacks)
 }
 
 var _fnQLPreviewRequestSetURLRepresentation func(objc.ID, objc.ID, objc.ID, objc.ID)
@@ -355,6 +380,17 @@ func QLThumbnailRequestIsCancelled(thumbnail obj.Object) uint8 {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestIsCancelled, _lib, "QLThumbnailRequestIsCancelled")
 	}
 	return _fnQLThumbnailRequestIsCancelled(objref.IDOf(thumbnail))
+}
+
+var _fnQLThumbnailRequestSetDocumentObject func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// QLThumbnailRequestSetDocumentObject calls the QuickLook framework function QLThumbnailRequestSetDocumentObject.
+func QLThumbnailRequestSetDocumentObject(thumbnail obj.Object, object unsafe.Pointer, callbacks unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnQLThumbnailRequestSetDocumentObject == nil {
+		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestSetDocumentObject, _lib, "QLThumbnailRequestSetDocumentObject")
+	}
+	_fnQLThumbnailRequestSetDocumentObject(objref.IDOf(thumbnail), object, callbacks)
 }
 
 var _fnQLThumbnailRequestSetImage func(objc.ID, objc.ID, objc.ID)

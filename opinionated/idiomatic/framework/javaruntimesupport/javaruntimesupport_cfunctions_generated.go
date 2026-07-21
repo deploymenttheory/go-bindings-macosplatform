@@ -59,6 +59,28 @@ func JRSFontCreateFallbackFontForCharacters(font obj.Object, unichars unsafe.Poi
 	return obj.Wrap(_ret)
 }
 
+var _fnJRSFontGetAdvancesForGlyphsAndStyle func(objc.ID, unsafe.Pointer, uint32, unsafe.Pointer, int, unsafe.Pointer) float64
+
+// JRSFontGetAdvancesForGlyphsAndStyle calls the JavaRuntimeSupport framework function JRSFontGetAdvancesForGlyphsAndStyle.
+func JRSFontGetAdvancesForGlyphsAndStyle(font obj.Object, tx unsafe.Pointer, style uint32, glyphs unsafe.Pointer, count int, advances unsafe.Pointer) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSFontGetAdvancesForGlyphsAndStyle == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSFontGetAdvancesForGlyphsAndStyle, _lib, "JRSFontGetAdvancesForGlyphsAndStyle")
+	}
+	return _fnJRSFontGetAdvancesForGlyphsAndStyle(objref.IDOf(font), tx, style, glyphs, count, advances)
+}
+
+var _fnJRSFontGetBoundingBoxesForGlyphsAndStyle func(objc.ID, unsafe.Pointer, uint32, unsafe.Pointer, int, unsafe.Pointer) corefoundation.CGRect
+
+// JRSFontGetBoundingBoxesForGlyphsAndStyle calls the JavaRuntimeSupport framework function JRSFontGetBoundingBoxesForGlyphsAndStyle.
+func JRSFontGetBoundingBoxesForGlyphsAndStyle(font obj.Object, tx unsafe.Pointer, style uint32, glyphs unsafe.Pointer, count int, bboxes unsafe.Pointer) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSFontGetBoundingBoxesForGlyphsAndStyle == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSFontGetBoundingBoxesForGlyphsAndStyle, _lib, "JRSFontGetBoundingBoxesForGlyphsAndStyle")
+	}
+	return _fnJRSFontGetBoundingBoxesForGlyphsAndStyle(objref.IDOf(font), tx, style, glyphs, count, bboxes)
+}
+
 var _fnJRSFontGetRenderingStyleForContext func(objc.ID) uint32
 
 // JRSFontGetRenderingStyleForContext calls the JavaRuntimeSupport framework function JRSFontGetRenderingStyleForContext.

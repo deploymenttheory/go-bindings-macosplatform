@@ -5,6 +5,8 @@
 package fsevents
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -32,6 +34,30 @@ func FSEventStreamCopyPathsBeingWatched(streamRef obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamCopyPathsBeingWatched, _lib, "FSEventStreamCopyPathsBeingWatched")
 	}
 	_ret := _fnFSEventStreamCopyPathsBeingWatched(objref.IDOf(streamRef))
+	return obj.Wrap(_ret)
+}
+
+var _fnFSEventStreamCreate func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID, uint64, float64, int) objc.ID
+
+// FSEventStreamCreate calls the FSEvents framework function FSEventStreamCreate.
+func FSEventStreamCreate(allocator obj.Object, callback unsafe.Pointer, context_ unsafe.Pointer, pathsToWatch obj.Object, sinceWhen uint64, latency float64, flags int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamCreate, _lib, "FSEventStreamCreate")
+	}
+	_ret := _fnFSEventStreamCreate(objref.IDOf(allocator), callback, context_, objref.IDOf(pathsToWatch), sinceWhen, latency, flags)
+	return obj.Wrap(_ret)
+}
+
+var _fnFSEventStreamCreateRelativeToDevice func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, objc.ID, uint64, float64, int) objc.ID
+
+// FSEventStreamCreateRelativeToDevice calls the FSEvents framework function FSEventStreamCreateRelativeToDevice.
+func FSEventStreamCreateRelativeToDevice(allocator obj.Object, callback unsafe.Pointer, context_ unsafe.Pointer, deviceToWatch int, pathsToWatchRelativeToDevice obj.Object, sinceWhen uint64, latency float64, flags int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamCreateRelativeToDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamCreateRelativeToDevice, _lib, "FSEventStreamCreateRelativeToDevice")
+	}
+	_ret := _fnFSEventStreamCreateRelativeToDevice(objref.IDOf(allocator), callback, context_, deviceToWatch, objref.IDOf(pathsToWatchRelativeToDevice), sinceWhen, latency, flags)
 	return obj.Wrap(_ret)
 }
 

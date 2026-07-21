@@ -7,6 +7,7 @@ package gamecontroller
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	ebipurego "github.com/ebitengine/purego"
@@ -114,6 +115,17 @@ func GCMicroGamepadSnapshotDataFromNSData(data []byte) (ok bool, snapshotData GC
 	return _ret, _out0
 }
 
+var _fnGCPoint2Equal func(unsafe.Pointer, unsafe.Pointer) bool
+
+// GCPoint2Equal calls the GameController framework function GCPoint2Equal.
+func GCPoint2Equal(point1 unsafe.Pointer, point2 unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGCPoint2Equal == nil {
+		ebipurego.RegisterLibFunc(&_fnGCPoint2Equal, _lib, "GCPoint2Equal")
+	}
+	return _fnGCPoint2Equal(point1, point2)
+}
+
 var _fnNSDataFromGCExtendedGamepadSnapShotDataV100 func(unsafe.Pointer) objc.ID
 
 // NSDataFromGCExtendedGamepadSnapShotDataV100 calls the GameController framework function NSDataFromGCExtendedGamepadSnapShotDataV100.
@@ -177,4 +189,19 @@ func NSDataFromGCMicroGamepadSnapshotData() (result []byte, snapshotData GCMicro
 	var _out0 GCMicroGamepadSnapshotData
 	_ret := _fnNSDataFromGCMicroGamepadSnapshotData(unsafe.Pointer(&_out0))
 	return rt.NSDataToBytes(_ret), _out0
+}
+
+var _fnNSStringFromGCPoint2 func(unsafe.Pointer) objc.ID
+
+// NSStringFromGCPoint2 calls the GameController framework function NSStringFromGCPoint2.
+func NSStringFromGCPoint2(point unsafe.Pointer) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSStringFromGCPoint2 == nil {
+		ebipurego.RegisterLibFunc(&_fnNSStringFromGCPoint2, _lib, "NSStringFromGCPoint2")
+	}
+	_ret := _fnNSStringFromGCPoint2(point)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }

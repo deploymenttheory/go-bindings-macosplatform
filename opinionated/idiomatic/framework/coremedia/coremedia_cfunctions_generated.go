@@ -28,6 +28,17 @@ func CMAudioDeviceClockGetAudioDevice(clock obj.Object, deviceUIDOut unsafe.Poin
 	return _ret, _out0, _out1
 }
 
+var _fnCMAudioFormatDescriptionCreate func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
+
+// CMAudioFormatDescriptionCreate calls the CoreMedia framework function CMAudioFormatDescriptionCreate.
+func CMAudioFormatDescriptionCreate(allocator obj.Object, asbd unsafe.Pointer, layoutSize int, layout unsafe.Pointer, magicCookieSize int, magicCookie unsafe.Pointer, extensions obj.Object, formatDescriptionOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMAudioFormatDescriptionCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionCreate, _lib, "CMAudioFormatDescriptionCreate")
+	}
+	return int(_fnCMAudioFormatDescriptionCreate(objref.IDOf(allocator), asbd, layoutSize, layout, magicCookieSize, magicCookie, objref.IDOf(extensions), formatDescriptionOut))
+}
+
 var _fnCMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData calls the CoreMedia framework function CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData.
@@ -50,6 +61,72 @@ func CMAudioFormatDescriptionEqual(formatDescription unsafe.Pointer, otherFormat
 	var _out0 uint32
 	_ret := _fnCMAudioFormatDescriptionEqual(formatDescription, otherFormatDescription, equalityMask, unsafe.Pointer(&_out0))
 	return _ret, _out0
+}
+
+var _fnCMAudioSampleBufferCreateReadyWithPacketDescriptions func(objc.ID, objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMAudioSampleBufferCreateReadyWithPacketDescriptions calls the CoreMedia framework function CMAudioSampleBufferCreateReadyWithPacketDescriptions.
+func CMAudioSampleBufferCreateReadyWithPacketDescriptions(allocator obj.Object, dataBuffer obj.Object, formatDescription obj.Object, numSamples int, presentationTimeStamp unsafe.Pointer, packetDescriptions unsafe.Pointer, sampleBufferOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMAudioSampleBufferCreateReadyWithPacketDescriptions == nil {
+		ebipurego.RegisterLibFunc(&_fnCMAudioSampleBufferCreateReadyWithPacketDescriptions, _lib, "CMAudioSampleBufferCreateReadyWithPacketDescriptions")
+	}
+	return int(_fnCMAudioSampleBufferCreateReadyWithPacketDescriptions(objref.IDOf(allocator), objref.IDOf(dataBuffer), objref.IDOf(formatDescription), numSamples, presentationTimeStamp, packetDescriptions, sampleBufferOut))
+}
+
+var _fnCMAudioSampleBufferCreateWithPacketDescriptions func(objc.ID, objc.ID, uint8, unsafe.Pointer, unsafe.Pointer, objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMAudioSampleBufferCreateWithPacketDescriptions calls the CoreMedia framework function CMAudioSampleBufferCreateWithPacketDescriptions.
+func CMAudioSampleBufferCreateWithPacketDescriptions(allocator obj.Object, dataBuffer obj.Object, dataReady uint8, makeDataReadyCallback unsafe.Pointer, makeDataReadyRefcon unsafe.Pointer, formatDescription obj.Object, numSamples int, presentationTimeStamp unsafe.Pointer, packetDescriptions unsafe.Pointer, sampleBufferOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMAudioSampleBufferCreateWithPacketDescriptions == nil {
+		ebipurego.RegisterLibFunc(&_fnCMAudioSampleBufferCreateWithPacketDescriptions, _lib, "CMAudioSampleBufferCreateWithPacketDescriptions")
+	}
+	return int(_fnCMAudioSampleBufferCreateWithPacketDescriptions(objref.IDOf(allocator), objref.IDOf(dataBuffer), dataReady, makeDataReadyCallback, makeDataReadyRefcon, objref.IDOf(formatDescription), numSamples, presentationTimeStamp, packetDescriptions, sampleBufferOut))
+}
+
+var _fnCMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler func(objc.ID, objc.ID, uint8, objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler calls the CoreMedia framework function CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler.
+func CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler(allocator obj.Object, dataBuffer obj.Object, dataReady uint8, formatDescription obj.Object, numSamples int, presentationTimeStamp unsafe.Pointer, packetDescriptions unsafe.Pointer, sampleBufferOut unsafe.Pointer, makeDataReadyHandler unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnCMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler, _lib, "CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler")
+	}
+	return int(_fnCMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler(objref.IDOf(allocator), objref.IDOf(dataBuffer), dataReady, objref.IDOf(formatDescription), numSamples, presentationTimeStamp, packetDescriptions, sampleBufferOut, makeDataReadyHandler))
+}
+
+var _fnCMBlockBufferAppendMemoryBlock func(objc.ID, unsafe.Pointer, int, objc.ID, unsafe.Pointer, int, int, uint32) int32
+
+// CMBlockBufferAppendMemoryBlock calls the CoreMedia framework function CMBlockBufferAppendMemoryBlock.
+func CMBlockBufferAppendMemoryBlock(theBuffer obj.Object, memoryBlock unsafe.Pointer, blockLength int, blockAllocator obj.Object, customBlockSource unsafe.Pointer, offsetToData int, dataLength int, flags uint32) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBlockBufferAppendMemoryBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBlockBufferAppendMemoryBlock, _lib, "CMBlockBufferAppendMemoryBlock")
+	}
+	return int(_fnCMBlockBufferAppendMemoryBlock(objref.IDOf(theBuffer), memoryBlock, blockLength, objref.IDOf(blockAllocator), customBlockSource, offsetToData, dataLength, flags))
+}
+
+var _fnCMBlockBufferCreateContiguous func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, int, int, uint32, unsafe.Pointer) int32
+
+// CMBlockBufferCreateContiguous calls the CoreMedia framework function CMBlockBufferCreateContiguous.
+func CMBlockBufferCreateContiguous(structureAllocator obj.Object, sourceBuffer obj.Object, blockAllocator obj.Object, customBlockSource unsafe.Pointer, offsetToData int, dataLength int, flags uint32, blockBufferOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBlockBufferCreateContiguous == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBlockBufferCreateContiguous, _lib, "CMBlockBufferCreateContiguous")
+	}
+	return int(_fnCMBlockBufferCreateContiguous(objref.IDOf(structureAllocator), objref.IDOf(sourceBuffer), objref.IDOf(blockAllocator), customBlockSource, offsetToData, dataLength, flags, blockBufferOut))
+}
+
+var _fnCMBlockBufferCreateWithMemoryBlock func(objc.ID, unsafe.Pointer, int, objc.ID, unsafe.Pointer, int, int, uint32, unsafe.Pointer) int32
+
+// CMBlockBufferCreateWithMemoryBlock calls the CoreMedia framework function CMBlockBufferCreateWithMemoryBlock.
+func CMBlockBufferCreateWithMemoryBlock(structureAllocator obj.Object, memoryBlock unsafe.Pointer, blockLength int, blockAllocator obj.Object, customBlockSource unsafe.Pointer, offsetToData int, dataLength int, flags uint32, blockBufferOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBlockBufferCreateWithMemoryBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBlockBufferCreateWithMemoryBlock, _lib, "CMBlockBufferCreateWithMemoryBlock")
+	}
+	return int(_fnCMBlockBufferCreateWithMemoryBlock(objref.IDOf(structureAllocator), memoryBlock, blockLength, objref.IDOf(blockAllocator), customBlockSource, offsetToData, dataLength, flags, blockBufferOut))
 }
 
 var _fnCMBlockBufferGetDataLength func(objc.ID) int
@@ -121,6 +198,28 @@ func CMBufferQueueContainsEndOfData(queue obj.Object) uint8 {
 	return _fnCMBufferQueueContainsEndOfData(objref.IDOf(queue))
 }
 
+var _fnCMBufferQueueCreate func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMBufferQueueCreate calls the CoreMedia framework function CMBufferQueueCreate.
+func CMBufferQueueCreate(allocator obj.Object, capacity int, callbacks unsafe.Pointer, queueOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueCreate, _lib, "CMBufferQueueCreate")
+	}
+	return int(_fnCMBufferQueueCreate(objref.IDOf(allocator), capacity, callbacks, queueOut))
+}
+
+var _fnCMBufferQueueCreateWithHandlers func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMBufferQueueCreateWithHandlers calls the CoreMedia framework function CMBufferQueueCreateWithHandlers.
+func CMBufferQueueCreateWithHandlers(allocator obj.Object, capacity int, handlers unsafe.Pointer, queueOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueCreateWithHandlers == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueCreateWithHandlers, _lib, "CMBufferQueueCreateWithHandlers")
+	}
+	return int(_fnCMBufferQueueCreateWithHandlers(objref.IDOf(allocator), capacity, handlers, queueOut))
+}
+
 var _fnCMBufferQueueGetBufferCount func(objc.ID) int
 
 // CMBufferQueueGetBufferCount calls the CoreMedia framework function CMBufferQueueGetBufferCount.
@@ -154,6 +253,39 @@ func CMBufferQueueGetTypeID() int {
 	return _fnCMBufferQueueGetTypeID()
 }
 
+var _fnCMBufferQueueInstallTrigger func(objc.ID, unsafe.Pointer, unsafe.Pointer, int32, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMBufferQueueInstallTrigger calls the CoreMedia framework function CMBufferQueueInstallTrigger.
+func CMBufferQueueInstallTrigger(queue obj.Object, callback unsafe.Pointer, refcon unsafe.Pointer, condition int32, time_ unsafe.Pointer, triggerTokenOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueInstallTrigger == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueInstallTrigger, _lib, "CMBufferQueueInstallTrigger")
+	}
+	return int(_fnCMBufferQueueInstallTrigger(objref.IDOf(queue), callback, refcon, condition, time_, triggerTokenOut))
+}
+
+var _fnCMBufferQueueInstallTriggerHandler func(objc.ID, int32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMBufferQueueInstallTriggerHandler calls the CoreMedia framework function CMBufferQueueInstallTriggerHandler.
+func CMBufferQueueInstallTriggerHandler(queue obj.Object, condition int32, time_ unsafe.Pointer, triggerTokenOut unsafe.Pointer, handler unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueInstallTriggerHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueInstallTriggerHandler, _lib, "CMBufferQueueInstallTriggerHandler")
+	}
+	return int(_fnCMBufferQueueInstallTriggerHandler(objref.IDOf(queue), condition, time_, triggerTokenOut, handler))
+}
+
+var _fnCMBufferQueueInstallTriggerHandlerWithIntegerThreshold func(objc.ID, int32, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMBufferQueueInstallTriggerHandlerWithIntegerThreshold calls the CoreMedia framework function CMBufferQueueInstallTriggerHandlerWithIntegerThreshold.
+func CMBufferQueueInstallTriggerHandlerWithIntegerThreshold(queue obj.Object, condition int32, threshold int, triggerTokenOut unsafe.Pointer, handler unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueInstallTriggerHandlerWithIntegerThreshold == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueInstallTriggerHandlerWithIntegerThreshold, _lib, "CMBufferQueueInstallTriggerHandlerWithIntegerThreshold")
+	}
+	return int(_fnCMBufferQueueInstallTriggerHandlerWithIntegerThreshold(objref.IDOf(queue), condition, threshold, triggerTokenOut, handler))
+}
+
 var _fnCMBufferQueueIsAtEndOfData func(objc.ID) uint8
 
 // CMBufferQueueIsAtEndOfData calls the CoreMedia framework function CMBufferQueueIsAtEndOfData.
@@ -176,6 +308,17 @@ func CMBufferQueueIsEmpty(queue obj.Object) uint8 {
 	return _fnCMBufferQueueIsEmpty(objref.IDOf(queue))
 }
 
+var _fnCMBufferQueueSetValidationHandler func(objc.ID, unsafe.Pointer) int32
+
+// CMBufferQueueSetValidationHandler calls the CoreMedia framework function CMBufferQueueSetValidationHandler.
+func CMBufferQueueSetValidationHandler(queue obj.Object, handler unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueSetValidationHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueSetValidationHandler, _lib, "CMBufferQueueSetValidationHandler")
+	}
+	return int(_fnCMBufferQueueSetValidationHandler(objref.IDOf(queue), handler))
+}
+
 var _fnCMBufferQueueTestTrigger func(objc.ID, objc.ID) uint8
 
 // CMBufferQueueTestTrigger calls the CoreMedia framework function CMBufferQueueTestTrigger.
@@ -185,6 +328,17 @@ func CMBufferQueueTestTrigger(queue obj.Object, triggerToken obj.Object) uint8 {
 		ebipurego.RegisterLibFunc(&_fnCMBufferQueueTestTrigger, _lib, "CMBufferQueueTestTrigger")
 	}
 	return _fnCMBufferQueueTestTrigger(objref.IDOf(queue), objref.IDOf(triggerToken))
+}
+
+var _fnCMClockConvertHostTimeToSystemUnits func(unsafe.Pointer) uint64
+
+// CMClockConvertHostTimeToSystemUnits calls the CoreMedia framework function CMClockConvertHostTimeToSystemUnits.
+func CMClockConvertHostTimeToSystemUnits(hostTime unsafe.Pointer) uint64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMClockConvertHostTimeToSystemUnits == nil {
+		ebipurego.RegisterLibFunc(&_fnCMClockConvertHostTimeToSystemUnits, _lib, "CMClockConvertHostTimeToSystemUnits")
+	}
+	return _fnCMClockConvertHostTimeToSystemUnits(hostTime)
 }
 
 var _fnCMClockGetAnchorTime func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
@@ -578,6 +732,28 @@ func CMRemoveAttachment(target unsafe.Pointer, key obj.Object) {
 	_fnCMRemoveAttachment(target, objref.IDOf(key))
 }
 
+var _fnCMSampleBufferCallBlockForEachSample func(objc.ID, unsafe.Pointer) int32
+
+// CMSampleBufferCallBlockForEachSample calls the CoreMedia framework function CMSampleBufferCallBlockForEachSample.
+func CMSampleBufferCallBlockForEachSample(sbuf obj.Object, handler unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferCallBlockForEachSample == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferCallBlockForEachSample, _lib, "CMSampleBufferCallBlockForEachSample")
+	}
+	return int(_fnCMSampleBufferCallBlockForEachSample(objref.IDOf(sbuf), handler))
+}
+
+var _fnCMSampleBufferCopyPCMDataIntoAudioBufferList func(objc.ID, int32, int32, unsafe.Pointer) int32
+
+// CMSampleBufferCopyPCMDataIntoAudioBufferList calls the CoreMedia framework function CMSampleBufferCopyPCMDataIntoAudioBufferList.
+func CMSampleBufferCopyPCMDataIntoAudioBufferList(sbuf obj.Object, frameOffset int32, numFrames int32, bufferList unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferCopyPCMDataIntoAudioBufferList == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferCopyPCMDataIntoAudioBufferList, _lib, "CMSampleBufferCopyPCMDataIntoAudioBufferList")
+	}
+	return int(_fnCMSampleBufferCopyPCMDataIntoAudioBufferList(objref.IDOf(sbuf), frameOffset, numFrames, bufferList))
+}
+
 var _fnCMSampleBufferCreate func(objc.ID, objc.ID, uint8, unsafe.Pointer, unsafe.Pointer, objc.ID, int, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSampleBufferCreate calls the CoreMedia framework function CMSampleBufferCreate.
@@ -618,6 +794,30 @@ func CMSampleBufferCreateForImageBuffer(allocator obj.Object, imageBuffer unsafe
 	return _ret, _out0
 }
 
+var _fnCMSampleBufferCreateForImageBufferWithMakeDataReadyHandler func(objc.ID, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler calls the CoreMedia framework function CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler.
+func CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler(allocator obj.Object, imageBuffer unsafe.Pointer, dataReady uint8, formatDescription unsafe.Pointer, sampleBufferOut unsafe.Pointer, makeDataReadyHandler unsafe.Pointer) (result int, sampleTiming CMSampleTimingInfo) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferCreateForImageBufferWithMakeDataReadyHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferCreateForImageBufferWithMakeDataReadyHandler, _lib, "CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler")
+	}
+	var _out0 CMSampleTimingInfo
+	_ret := int(_fnCMSampleBufferCreateForImageBufferWithMakeDataReadyHandler(objref.IDOf(allocator), imageBuffer, dataReady, formatDescription, unsafe.Pointer(&_out0), sampleBufferOut, makeDataReadyHandler))
+	return _ret, _out0
+}
+
+var _fnCMSampleBufferCreateForTaggedBufferGroup func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMSampleBufferCreateForTaggedBufferGroup calls the CoreMedia framework function CMSampleBufferCreateForTaggedBufferGroup.
+func CMSampleBufferCreateForTaggedBufferGroup(allocator obj.Object, taggedBufferGroup obj.Object, sbufPTS unsafe.Pointer, sbufDuration unsafe.Pointer, formatDescription unsafe.Pointer, sBufOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferCreateForTaggedBufferGroup == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferCreateForTaggedBufferGroup, _lib, "CMSampleBufferCreateForTaggedBufferGroup")
+	}
+	return int(_fnCMSampleBufferCreateForTaggedBufferGroup(objref.IDOf(allocator), objref.IDOf(taggedBufferGroup), sbufPTS, sbufDuration, formatDescription, sBufOut))
+}
+
 var _fnCMSampleBufferCreateReady func(objc.ID, objc.ID, objc.ID, int, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSampleBufferCreateReady calls the CoreMedia framework function CMSampleBufferCreateReady.
@@ -645,6 +845,20 @@ func CMSampleBufferCreateReadyWithImageBuffer(allocator obj.Object, imageBuffer 
 	return _ret, _out0
 }
 
+var _fnCMSampleBufferCreateWithMakeDataReadyHandler func(objc.ID, objc.ID, uint8, objc.ID, int, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMSampleBufferCreateWithMakeDataReadyHandler calls the CoreMedia framework function CMSampleBufferCreateWithMakeDataReadyHandler.
+func CMSampleBufferCreateWithMakeDataReadyHandler(allocator obj.Object, dataBuffer obj.Object, dataReady uint8, formatDescription obj.Object, numSamples int, numSampleTimingEntries int, numSampleSizeEntries int, sampleBufferOut unsafe.Pointer, makeDataReadyHandler unsafe.Pointer) (result int, sampleTimingArray CMSampleTimingInfo, sampleSizeArray int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferCreateWithMakeDataReadyHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferCreateWithMakeDataReadyHandler, _lib, "CMSampleBufferCreateWithMakeDataReadyHandler")
+	}
+	var _out0 CMSampleTimingInfo
+	var _out1 int
+	_ret := int(_fnCMSampleBufferCreateWithMakeDataReadyHandler(objref.IDOf(allocator), objref.IDOf(dataBuffer), dataReady, objref.IDOf(formatDescription), numSamples, numSampleTimingEntries, unsafe.Pointer(&_out0), numSampleSizeEntries, unsafe.Pointer(&_out1), sampleBufferOut, makeDataReadyHandler))
+	return _ret, _out0, _out1
+}
+
 var _fnCMSampleBufferDataIsReady func(objc.ID) uint8
 
 // CMSampleBufferDataIsReady calls the CoreMedia framework function CMSampleBufferDataIsReady.
@@ -654,6 +868,45 @@ func CMSampleBufferDataIsReady(sbuf obj.Object) uint8 {
 		ebipurego.RegisterLibFunc(&_fnCMSampleBufferDataIsReady, _lib, "CMSampleBufferDataIsReady")
 	}
 	return _fnCMSampleBufferDataIsReady(objref.IDOf(sbuf))
+}
+
+var _fnCMSampleBufferGetAudioBufferListWithRetainedBlockBuffer func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, objc.ID, objc.ID, uint32, unsafe.Pointer) int32
+
+// CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer calls the CoreMedia framework function CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer.
+func CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sbuf obj.Object, bufferListOut unsafe.Pointer, bufferListSize int, blockBufferStructureAllocator obj.Object, blockBufferBlockAllocator obj.Object, flags uint32, blockBufferOut unsafe.Pointer) (result int, bufferListSizeNeededOut int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferGetAudioBufferListWithRetainedBlockBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferGetAudioBufferListWithRetainedBlockBuffer, _lib, "CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer")
+	}
+	var _out0 int
+	_ret := int(_fnCMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(objref.IDOf(sbuf), unsafe.Pointer(&_out0), bufferListOut, bufferListSize, objref.IDOf(blockBufferStructureAllocator), objref.IDOf(blockBufferBlockAllocator), flags, blockBufferOut))
+	return _ret, _out0
+}
+
+var _fnCMSampleBufferGetAudioStreamPacketDescriptions func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMSampleBufferGetAudioStreamPacketDescriptions calls the CoreMedia framework function CMSampleBufferGetAudioStreamPacketDescriptions.
+func CMSampleBufferGetAudioStreamPacketDescriptions(sbuf obj.Object, packetDescriptionsSize int, packetDescriptionsOut unsafe.Pointer) (result int, packetDescriptionsSizeNeededOut int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferGetAudioStreamPacketDescriptions == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferGetAudioStreamPacketDescriptions, _lib, "CMSampleBufferGetAudioStreamPacketDescriptions")
+	}
+	var _out0 int
+	_ret := int(_fnCMSampleBufferGetAudioStreamPacketDescriptions(objref.IDOf(sbuf), packetDescriptionsSize, packetDescriptionsOut, unsafe.Pointer(&_out0)))
+	return _ret, _out0
+}
+
+var _fnCMSampleBufferGetAudioStreamPacketDescriptionsPtr func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMSampleBufferGetAudioStreamPacketDescriptionsPtr calls the CoreMedia framework function CMSampleBufferGetAudioStreamPacketDescriptionsPtr.
+func CMSampleBufferGetAudioStreamPacketDescriptionsPtr(sbuf obj.Object, packetDescriptionsPointerOut unsafe.Pointer) (result int, packetDescriptionsSizeOut int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferGetAudioStreamPacketDescriptionsPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferGetAudioStreamPacketDescriptionsPtr, _lib, "CMSampleBufferGetAudioStreamPacketDescriptionsPtr")
+	}
+	var _out0 int
+	_ret := int(_fnCMSampleBufferGetAudioStreamPacketDescriptionsPtr(objref.IDOf(sbuf), packetDescriptionsPointerOut, unsafe.Pointer(&_out0)))
+	return _ret, _out0
 }
 
 var _fnCMSampleBufferGetDataBuffer func(objc.ID) objc.ID
@@ -825,6 +1078,39 @@ func CMSampleBufferIsValid(sbuf obj.Object) uint8 {
 		ebipurego.RegisterLibFunc(&_fnCMSampleBufferIsValid, _lib, "CMSampleBufferIsValid")
 	}
 	return _fnCMSampleBufferIsValid(objref.IDOf(sbuf))
+}
+
+var _fnCMSampleBufferSetDataBufferFromAudioBufferList func(objc.ID, objc.ID, objc.ID, uint32, unsafe.Pointer) int32
+
+// CMSampleBufferSetDataBufferFromAudioBufferList calls the CoreMedia framework function CMSampleBufferSetDataBufferFromAudioBufferList.
+func CMSampleBufferSetDataBufferFromAudioBufferList(sbuf obj.Object, blockBufferStructureAllocator obj.Object, blockBufferBlockAllocator obj.Object, flags uint32, bufferList unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferSetDataBufferFromAudioBufferList == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferSetDataBufferFromAudioBufferList, _lib, "CMSampleBufferSetDataBufferFromAudioBufferList")
+	}
+	return int(_fnCMSampleBufferSetDataBufferFromAudioBufferList(objref.IDOf(sbuf), objref.IDOf(blockBufferStructureAllocator), objref.IDOf(blockBufferBlockAllocator), flags, bufferList))
+}
+
+var _fnCMSampleBufferSetInvalidateHandler func(objc.ID, unsafe.Pointer) int32
+
+// CMSampleBufferSetInvalidateHandler calls the CoreMedia framework function CMSampleBufferSetInvalidateHandler.
+func CMSampleBufferSetInvalidateHandler(sbuf obj.Object, invalidateHandler unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferSetInvalidateHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferSetInvalidateHandler, _lib, "CMSampleBufferSetInvalidateHandler")
+	}
+	return int(_fnCMSampleBufferSetInvalidateHandler(objref.IDOf(sbuf), invalidateHandler))
+}
+
+var _fnCMSampleBufferSetOutputPresentationTimeStamp func(objc.ID, unsafe.Pointer) int32
+
+// CMSampleBufferSetOutputPresentationTimeStamp calls the CoreMedia framework function CMSampleBufferSetOutputPresentationTimeStamp.
+func CMSampleBufferSetOutputPresentationTimeStamp(sbuf obj.Object, outputPresentationTimeStamp unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferSetOutputPresentationTimeStamp == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferSetOutputPresentationTimeStamp, _lib, "CMSampleBufferSetOutputPresentationTimeStamp")
+	}
+	return int(_fnCMSampleBufferSetOutputPresentationTimeStamp(objref.IDOf(sbuf), outputPresentationTimeStamp))
 }
 
 var _fnCMSetAttachment func(unsafe.Pointer, objc.ID, objc.ID, uint32)
@@ -1075,6 +1361,39 @@ func CMSyncMightDrift(clockOrTimebase1 unsafe.Pointer, clockOrTimebase2 unsafe.P
 	return _fnCMSyncMightDrift(clockOrTimebase1, clockOrTimebase2)
 }
 
+var _fnCMTagCategoryEqualToTagCategory func(unsafe.Pointer, unsafe.Pointer) uint8
+
+// CMTagCategoryEqualToTagCategory calls the CoreMedia framework function CMTagCategoryEqualToTagCategory.
+func CMTagCategoryEqualToTagCategory(tag1 unsafe.Pointer, tag2 unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCategoryEqualToTagCategory == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCategoryEqualToTagCategory, _lib, "CMTagCategoryEqualToTagCategory")
+	}
+	return _fnCMTagCategoryEqualToTagCategory(tag1, tag2)
+}
+
+var _fnCMTagCategoryValueEqualToValue func(unsafe.Pointer, unsafe.Pointer) uint8
+
+// CMTagCategoryValueEqualToValue calls the CoreMedia framework function CMTagCategoryValueEqualToValue.
+func CMTagCategoryValueEqualToValue(tag1 unsafe.Pointer, tag2 unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCategoryValueEqualToValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCategoryValueEqualToValue, _lib, "CMTagCategoryValueEqualToValue")
+	}
+	return _fnCMTagCategoryValueEqualToValue(tag1, tag2)
+}
+
+var _fnCMTagCollectionAddTag func(objc.ID, unsafe.Pointer) int32
+
+// CMTagCollectionAddTag calls the CoreMedia framework function CMTagCollectionAddTag.
+func CMTagCollectionAddTag(tagCollection obj.Object, tagToAdd unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionAddTag == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionAddTag, _lib, "CMTagCollectionAddTag")
+	}
+	return int(_fnCMTagCollectionAddTag(objref.IDOf(tagCollection), tagToAdd))
+}
+
 var _fnCMTagCollectionAddTagsFromArray func(objc.ID, unsafe.Pointer, int) int32
 
 // CMTagCollectionAddTagsFromArray calls the CoreMedia framework function CMTagCollectionAddTagsFromArray.
@@ -1117,6 +1436,17 @@ func CMTagCollectionContainsSpecifiedTags(tagCollection obj.Object, containedTag
 		ebipurego.RegisterLibFunc(&_fnCMTagCollectionContainsSpecifiedTags, _lib, "CMTagCollectionContainsSpecifiedTags")
 	}
 	return _fnCMTagCollectionContainsSpecifiedTags(objref.IDOf(tagCollection), containedTags, containedTagCount)
+}
+
+var _fnCMTagCollectionContainsTag func(objc.ID, unsafe.Pointer) uint8
+
+// CMTagCollectionContainsTag calls the CoreMedia framework function CMTagCollectionContainsTag.
+func CMTagCollectionContainsTag(tagCollection obj.Object, tag unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionContainsTag == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionContainsTag, _lib, "CMTagCollectionContainsTag")
+	}
+	return _fnCMTagCollectionContainsTag(objref.IDOf(tagCollection), tag)
 }
 
 var _fnCMTagCollectionContainsTagsOfCollection func(objc.ID, objc.ID) uint8
@@ -1282,6 +1612,206 @@ func CMTagCollectionIsEmpty(tagCollection obj.Object) uint8 {
 	return _fnCMTagCollectionIsEmpty(objref.IDOf(tagCollection))
 }
 
+var _fnCMTagCollectionRemoveTag func(objc.ID, unsafe.Pointer) int32
+
+// CMTagCollectionRemoveTag calls the CoreMedia framework function CMTagCollectionRemoveTag.
+func CMTagCollectionRemoveTag(tagCollection obj.Object, tagToRemove unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionRemoveTag == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionRemoveTag, _lib, "CMTagCollectionRemoveTag")
+	}
+	return int(_fnCMTagCollectionRemoveTag(objref.IDOf(tagCollection), tagToRemove))
+}
+
+var _fnCMTagCopyAsDictionary func(unsafe.Pointer, objc.ID) objc.ID
+
+// CMTagCopyAsDictionary calls the CoreMedia framework function CMTagCopyAsDictionary.
+func CMTagCopyAsDictionary(tag unsafe.Pointer, allocator obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCopyAsDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCopyAsDictionary, _lib, "CMTagCopyAsDictionary")
+	}
+	_ret := _fnCMTagCopyAsDictionary(tag, objref.IDOf(allocator))
+	return obj.Wrap(_ret)
+}
+
+var _fnCMTagCopyDescription func(objc.ID, unsafe.Pointer) objc.ID
+
+// CMTagCopyDescription calls the CoreMedia framework function CMTagCopyDescription.
+func CMTagCopyDescription(allocator obj.Object, tag unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCopyDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCopyDescription, _lib, "CMTagCopyDescription")
+	}
+	_ret := _fnCMTagCopyDescription(objref.IDOf(allocator), tag)
+	return obj.Wrap(_ret)
+}
+
+var _fnCMTagEqualToTag func(unsafe.Pointer, unsafe.Pointer) uint8
+
+// CMTagEqualToTag calls the CoreMedia framework function CMTagEqualToTag.
+func CMTagEqualToTag(tag1 unsafe.Pointer, tag2 unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagEqualToTag == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagEqualToTag, _lib, "CMTagEqualToTag")
+	}
+	return _fnCMTagEqualToTag(tag1, tag2)
+}
+
+var _fnCMTagGetCategory func(unsafe.Pointer) CMTagCategory
+
+// CMTagGetCategory calls the CoreMedia framework function CMTagGetCategory.
+func CMTagGetCategory(tag unsafe.Pointer) CMTagCategory {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagGetCategory == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagGetCategory, _lib, "CMTagGetCategory")
+	}
+	return _fnCMTagGetCategory(tag)
+}
+
+var _fnCMTagGetFlagsValue func(unsafe.Pointer) uint64
+
+// CMTagGetFlagsValue calls the CoreMedia framework function CMTagGetFlagsValue.
+func CMTagGetFlagsValue(tag unsafe.Pointer) uint64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagGetFlagsValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagGetFlagsValue, _lib, "CMTagGetFlagsValue")
+	}
+	return _fnCMTagGetFlagsValue(tag)
+}
+
+var _fnCMTagGetFloat64Value func(unsafe.Pointer) float64
+
+// CMTagGetFloat64Value calls the CoreMedia framework function CMTagGetFloat64Value.
+func CMTagGetFloat64Value(tag unsafe.Pointer) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagGetFloat64Value == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagGetFloat64Value, _lib, "CMTagGetFloat64Value")
+	}
+	return _fnCMTagGetFloat64Value(tag)
+}
+
+var _fnCMTagGetOSTypeValue func(unsafe.Pointer) uint32
+
+// CMTagGetOSTypeValue calls the CoreMedia framework function CMTagGetOSTypeValue.
+func CMTagGetOSTypeValue(tag unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagGetOSTypeValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagGetOSTypeValue, _lib, "CMTagGetOSTypeValue")
+	}
+	return int(_fnCMTagGetOSTypeValue(tag))
+}
+
+var _fnCMTagGetSInt64Value func(unsafe.Pointer) int64
+
+// CMTagGetSInt64Value calls the CoreMedia framework function CMTagGetSInt64Value.
+func CMTagGetSInt64Value(tag unsafe.Pointer) int64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagGetSInt64Value == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagGetSInt64Value, _lib, "CMTagGetSInt64Value")
+	}
+	return _fnCMTagGetSInt64Value(tag)
+}
+
+var _fnCMTagGetValue func(unsafe.Pointer) uint64
+
+// CMTagGetValue calls the CoreMedia framework function CMTagGetValue.
+func CMTagGetValue(tag unsafe.Pointer) uint64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagGetValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagGetValue, _lib, "CMTagGetValue")
+	}
+	return _fnCMTagGetValue(tag)
+}
+
+var _fnCMTagGetValueDataType func(unsafe.Pointer) CMTagDataType
+
+// CMTagGetValueDataType calls the CoreMedia framework function CMTagGetValueDataType.
+func CMTagGetValueDataType(tag unsafe.Pointer) CMTagDataType {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagGetValueDataType == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagGetValueDataType, _lib, "CMTagGetValueDataType")
+	}
+	return _fnCMTagGetValueDataType(tag)
+}
+
+var _fnCMTagHasCategory func(unsafe.Pointer, CMTagCategory) uint8
+
+// CMTagHasCategory calls the CoreMedia framework function CMTagHasCategory.
+func CMTagHasCategory(tag unsafe.Pointer, category CMTagCategory) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagHasCategory == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagHasCategory, _lib, "CMTagHasCategory")
+	}
+	return _fnCMTagHasCategory(tag, category)
+}
+
+var _fnCMTagHasFlagsValue func(unsafe.Pointer) uint8
+
+// CMTagHasFlagsValue calls the CoreMedia framework function CMTagHasFlagsValue.
+func CMTagHasFlagsValue(tag unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagHasFlagsValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagHasFlagsValue, _lib, "CMTagHasFlagsValue")
+	}
+	return _fnCMTagHasFlagsValue(tag)
+}
+
+var _fnCMTagHasFloat64Value func(unsafe.Pointer) uint8
+
+// CMTagHasFloat64Value calls the CoreMedia framework function CMTagHasFloat64Value.
+func CMTagHasFloat64Value(tag unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagHasFloat64Value == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagHasFloat64Value, _lib, "CMTagHasFloat64Value")
+	}
+	return _fnCMTagHasFloat64Value(tag)
+}
+
+var _fnCMTagHasOSTypeValue func(unsafe.Pointer) uint8
+
+// CMTagHasOSTypeValue calls the CoreMedia framework function CMTagHasOSTypeValue.
+func CMTagHasOSTypeValue(tag unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagHasOSTypeValue == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagHasOSTypeValue, _lib, "CMTagHasOSTypeValue")
+	}
+	return _fnCMTagHasOSTypeValue(tag)
+}
+
+var _fnCMTagHasSInt64Value func(unsafe.Pointer) uint8
+
+// CMTagHasSInt64Value calls the CoreMedia framework function CMTagHasSInt64Value.
+func CMTagHasSInt64Value(tag unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagHasSInt64Value == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagHasSInt64Value, _lib, "CMTagHasSInt64Value")
+	}
+	return _fnCMTagHasSInt64Value(tag)
+}
+
+var _fnCMTagHash func(unsafe.Pointer) int
+
+// CMTagHash calls the CoreMedia framework function CMTagHash.
+func CMTagHash(tag unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagHash == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagHash, _lib, "CMTagHash")
+	}
+	return _fnCMTagHash(tag)
+}
+
+var _fnCMTagIsValid func(unsafe.Pointer) uint8
+
+// CMTagIsValid calls the CoreMedia framework function CMTagIsValid.
+func CMTagIsValid(tag unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagIsValid == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagIsValid, _lib, "CMTagIsValid")
+	}
+	return _fnCMTagIsValid(tag)
+}
+
 var _fnCMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup func(unsafe.Pointer, objc.ID) uint8
 
 // CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup calls the CoreMedia framework function CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup.
@@ -1303,6 +1833,19 @@ func CMTaggedBufferGroupGetCMSampleBufferAtIndex(group obj.Object, index int) ob
 	}
 	_ret := _fnCMTaggedBufferGroupGetCMSampleBufferAtIndex(objref.IDOf(group), index)
 	return obj.Wrap(_ret)
+}
+
+var _fnCMTaggedBufferGroupGetCMSampleBufferForTag func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
+
+// CMTaggedBufferGroupGetCMSampleBufferForTag calls the CoreMedia framework function CMTaggedBufferGroupGetCMSampleBufferForTag.
+func CMTaggedBufferGroupGetCMSampleBufferForTag(group obj.Object, tag unsafe.Pointer) (result obj.Object, indexOut int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTaggedBufferGroupGetCMSampleBufferForTag == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTaggedBufferGroupGetCMSampleBufferForTag, _lib, "CMTaggedBufferGroupGetCMSampleBufferForTag")
+	}
+	var _out0 int
+	_ret := _fnCMTaggedBufferGroupGetCMSampleBufferForTag(objref.IDOf(group), tag, unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
 }
 
 var _fnCMTaggedBufferGroupGetCMSampleBufferForTagCollection func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -1392,6 +1935,17 @@ func CMTextFormatDescriptionGetDefaultStyle(desc obj.Object) (result int, localF
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
 }
 
+var _fnCMTextFormatDescriptionGetDefaultTextBox func(objc.ID, uint8, float64, unsafe.Pointer) int32
+
+// CMTextFormatDescriptionGetDefaultTextBox calls the CoreMedia framework function CMTextFormatDescriptionGetDefaultTextBox.
+func CMTextFormatDescriptionGetDefaultTextBox(desc obj.Object, originIsAtTopLeft uint8, heightOfTextTrack float64, defaultTextBoxOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTextFormatDescriptionGetDefaultTextBox == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTextFormatDescriptionGetDefaultTextBox, _lib, "CMTextFormatDescriptionGetDefaultTextBox")
+	}
+	return int(_fnCMTextFormatDescriptionGetDefaultTextBox(objref.IDOf(desc), originIsAtTopLeft, heightOfTextTrack, defaultTextBoxOut))
+}
+
 var _fnCMTextFormatDescriptionGetDisplayFlags func(objc.ID, unsafe.Pointer) int32
 
 // CMTextFormatDescriptionGetDisplayFlags calls the CoreMedia framework function CMTextFormatDescriptionGetDisplayFlags.
@@ -1417,6 +1971,17 @@ func CMTextFormatDescriptionGetJustification(desc obj.Object) (result int, horiz
 	var _out1 int8
 	_ret := int(_fnCMTextFormatDescriptionGetJustification(objref.IDOf(desc), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
+}
+
+var _fnCMTimeCodeFormatDescriptionCreate func(objc.ID, int, unsafe.Pointer, uint32, uint32, objc.ID, unsafe.Pointer) int32
+
+// CMTimeCodeFormatDescriptionCreate calls the CoreMedia framework function CMTimeCodeFormatDescriptionCreate.
+func CMTimeCodeFormatDescriptionCreate(allocator obj.Object, timeCodeFormatType int, frameDuration unsafe.Pointer, frameQuanta uint32, flags uint32, extensions obj.Object, formatDescriptionOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeCodeFormatDescriptionCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeCodeFormatDescriptionCreate, _lib, "CMTimeCodeFormatDescriptionCreate")
+	}
+	return int(_fnCMTimeCodeFormatDescriptionCreate(objref.IDOf(allocator), timeCodeFormatType, frameDuration, frameQuanta, flags, objref.IDOf(extensions), formatDescriptionOut))
 }
 
 var _fnCMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
@@ -1450,6 +2015,166 @@ func CMTimeCodeFormatDescriptionGetTimeCodeFlags(desc unsafe.Pointer) uint32 {
 		ebipurego.RegisterLibFunc(&_fnCMTimeCodeFormatDescriptionGetTimeCodeFlags, _lib, "CMTimeCodeFormatDescriptionGetTimeCodeFlags")
 	}
 	return _fnCMTimeCodeFormatDescriptionGetTimeCodeFlags(desc)
+}
+
+var _fnCMTimeCompare func(unsafe.Pointer, unsafe.Pointer) int32
+
+// CMTimeCompare calls the CoreMedia framework function CMTimeCompare.
+func CMTimeCompare(time1 unsafe.Pointer, time2 unsafe.Pointer) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeCompare == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeCompare, _lib, "CMTimeCompare")
+	}
+	return _fnCMTimeCompare(time1, time2)
+}
+
+var _fnCMTimeCopyAsDictionary func(unsafe.Pointer, objc.ID) objc.ID
+
+// CMTimeCopyAsDictionary calls the CoreMedia framework function CMTimeCopyAsDictionary.
+func CMTimeCopyAsDictionary(time_ unsafe.Pointer, allocator obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeCopyAsDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeCopyAsDictionary, _lib, "CMTimeCopyAsDictionary")
+	}
+	_ret := _fnCMTimeCopyAsDictionary(time_, objref.IDOf(allocator))
+	return obj.Wrap(_ret)
+}
+
+var _fnCMTimeCopyDescription func(objc.ID, unsafe.Pointer) objc.ID
+
+// CMTimeCopyDescription calls the CoreMedia framework function CMTimeCopyDescription.
+func CMTimeCopyDescription(allocator obj.Object, time_ unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeCopyDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeCopyDescription, _lib, "CMTimeCopyDescription")
+	}
+	_ret := _fnCMTimeCopyDescription(objref.IDOf(allocator), time_)
+	return obj.Wrap(_ret)
+}
+
+var _fnCMTimeGetSeconds func(unsafe.Pointer) float64
+
+// CMTimeGetSeconds calls the CoreMedia framework function CMTimeGetSeconds.
+func CMTimeGetSeconds(time_ unsafe.Pointer) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeGetSeconds == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeGetSeconds, _lib, "CMTimeGetSeconds")
+	}
+	return _fnCMTimeGetSeconds(time_)
+}
+
+var _fnCMTimeMappingCopyAsDictionary func(unsafe.Pointer, objc.ID) objc.ID
+
+// CMTimeMappingCopyAsDictionary calls the CoreMedia framework function CMTimeMappingCopyAsDictionary.
+func CMTimeMappingCopyAsDictionary(mapping unsafe.Pointer, allocator obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeMappingCopyAsDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeMappingCopyAsDictionary, _lib, "CMTimeMappingCopyAsDictionary")
+	}
+	_ret := _fnCMTimeMappingCopyAsDictionary(mapping, objref.IDOf(allocator))
+	return obj.Wrap(_ret)
+}
+
+var _fnCMTimeMappingCopyDescription func(objc.ID, unsafe.Pointer) objc.ID
+
+// CMTimeMappingCopyDescription calls the CoreMedia framework function CMTimeMappingCopyDescription.
+func CMTimeMappingCopyDescription(allocator obj.Object, mapping unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeMappingCopyDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeMappingCopyDescription, _lib, "CMTimeMappingCopyDescription")
+	}
+	_ret := _fnCMTimeMappingCopyDescription(objref.IDOf(allocator), mapping)
+	return obj.Wrap(_ret)
+}
+
+var _fnCMTimeMappingShow func(unsafe.Pointer)
+
+// CMTimeMappingShow calls the CoreMedia framework function CMTimeMappingShow.
+func CMTimeMappingShow(mapping unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeMappingShow == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeMappingShow, _lib, "CMTimeMappingShow")
+	}
+	_fnCMTimeMappingShow(mapping)
+}
+
+var _fnCMTimeRangeContainsTime func(unsafe.Pointer, unsafe.Pointer) uint8
+
+// CMTimeRangeContainsTime calls the CoreMedia framework function CMTimeRangeContainsTime.
+func CMTimeRangeContainsTime(range_ unsafe.Pointer, time_ unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeRangeContainsTime == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeRangeContainsTime, _lib, "CMTimeRangeContainsTime")
+	}
+	return _fnCMTimeRangeContainsTime(range_, time_)
+}
+
+var _fnCMTimeRangeContainsTimeRange func(unsafe.Pointer, unsafe.Pointer) uint8
+
+// CMTimeRangeContainsTimeRange calls the CoreMedia framework function CMTimeRangeContainsTimeRange.
+func CMTimeRangeContainsTimeRange(range_ unsafe.Pointer, otherRange unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeRangeContainsTimeRange == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeRangeContainsTimeRange, _lib, "CMTimeRangeContainsTimeRange")
+	}
+	return _fnCMTimeRangeContainsTimeRange(range_, otherRange)
+}
+
+var _fnCMTimeRangeCopyAsDictionary func(unsafe.Pointer, objc.ID) objc.ID
+
+// CMTimeRangeCopyAsDictionary calls the CoreMedia framework function CMTimeRangeCopyAsDictionary.
+func CMTimeRangeCopyAsDictionary(range_ unsafe.Pointer, allocator obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeRangeCopyAsDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeRangeCopyAsDictionary, _lib, "CMTimeRangeCopyAsDictionary")
+	}
+	_ret := _fnCMTimeRangeCopyAsDictionary(range_, objref.IDOf(allocator))
+	return obj.Wrap(_ret)
+}
+
+var _fnCMTimeRangeCopyDescription func(objc.ID, unsafe.Pointer) objc.ID
+
+// CMTimeRangeCopyDescription calls the CoreMedia framework function CMTimeRangeCopyDescription.
+func CMTimeRangeCopyDescription(allocator obj.Object, range_ unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeRangeCopyDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeRangeCopyDescription, _lib, "CMTimeRangeCopyDescription")
+	}
+	_ret := _fnCMTimeRangeCopyDescription(objref.IDOf(allocator), range_)
+	return obj.Wrap(_ret)
+}
+
+var _fnCMTimeRangeEqual func(unsafe.Pointer, unsafe.Pointer) uint8
+
+// CMTimeRangeEqual calls the CoreMedia framework function CMTimeRangeEqual.
+func CMTimeRangeEqual(range1 unsafe.Pointer, range2 unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeRangeEqual == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeRangeEqual, _lib, "CMTimeRangeEqual")
+	}
+	return _fnCMTimeRangeEqual(range1, range2)
+}
+
+var _fnCMTimeRangeShow func(unsafe.Pointer)
+
+// CMTimeRangeShow calls the CoreMedia framework function CMTimeRangeShow.
+func CMTimeRangeShow(range_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeRangeShow == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeRangeShow, _lib, "CMTimeRangeShow")
+	}
+	_fnCMTimeRangeShow(range_)
+}
+
+var _fnCMTimeShow func(unsafe.Pointer)
+
+// CMTimeShow calls the CoreMedia framework function CMTimeShow.
+func CMTimeShow(time_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimeShow == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimeShow, _lib, "CMTimeShow")
+	}
+	_fnCMTimeShow(time_)
 }
 
 var _fnCMTimebaseCopyMasterClock func(objc.ID) objc.ID
@@ -1605,6 +2330,61 @@ func CMTimebaseGetUltimateMasterClock(timebase obj.Object) obj.Object {
 	}
 	_ret := _fnCMTimebaseGetUltimateMasterClock(objref.IDOf(timebase))
 	return obj.Wrap(_ret)
+}
+
+var _fnCMTimebaseSetAnchorTime func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMTimebaseSetAnchorTime calls the CoreMedia framework function CMTimebaseSetAnchorTime.
+func CMTimebaseSetAnchorTime(timebase obj.Object, timebaseTime unsafe.Pointer, immediateSourceTime unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseSetAnchorTime == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseSetAnchorTime, _lib, "CMTimebaseSetAnchorTime")
+	}
+	return int(_fnCMTimebaseSetAnchorTime(objref.IDOf(timebase), timebaseTime, immediateSourceTime))
+}
+
+var _fnCMTimebaseSetRateAndAnchorTime func(objc.ID, float64, unsafe.Pointer, unsafe.Pointer) int32
+
+// CMTimebaseSetRateAndAnchorTime calls the CoreMedia framework function CMTimebaseSetRateAndAnchorTime.
+func CMTimebaseSetRateAndAnchorTime(timebase obj.Object, rate float64, timebaseTime unsafe.Pointer, immediateSourceTime unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseSetRateAndAnchorTime == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseSetRateAndAnchorTime, _lib, "CMTimebaseSetRateAndAnchorTime")
+	}
+	return int(_fnCMTimebaseSetRateAndAnchorTime(objref.IDOf(timebase), rate, timebaseTime, immediateSourceTime))
+}
+
+var _fnCMTimebaseSetTime func(objc.ID, unsafe.Pointer) int32
+
+// CMTimebaseSetTime calls the CoreMedia framework function CMTimebaseSetTime.
+func CMTimebaseSetTime(timebase obj.Object, time_ unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseSetTime == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseSetTime, _lib, "CMTimebaseSetTime")
+	}
+	return int(_fnCMTimebaseSetTime(objref.IDOf(timebase), time_))
+}
+
+var _fnCMTimebaseSetTimerDispatchSourceNextFireTime func(objc.ID, objc.ID, unsafe.Pointer, uint32) int32
+
+// CMTimebaseSetTimerDispatchSourceNextFireTime calls the CoreMedia framework function CMTimebaseSetTimerDispatchSourceNextFireTime.
+func CMTimebaseSetTimerDispatchSourceNextFireTime(timebase obj.Object, timerSource obj.Object, fireTime unsafe.Pointer, flags uint32) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseSetTimerDispatchSourceNextFireTime == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseSetTimerDispatchSourceNextFireTime, _lib, "CMTimebaseSetTimerDispatchSourceNextFireTime")
+	}
+	return int(_fnCMTimebaseSetTimerDispatchSourceNextFireTime(objref.IDOf(timebase), objref.IDOf(timerSource), fireTime, flags))
+}
+
+var _fnCMTimebaseSetTimerNextFireTime func(objc.ID, objc.ID, unsafe.Pointer, uint32) int32
+
+// CMTimebaseSetTimerNextFireTime calls the CoreMedia framework function CMTimebaseSetTimerNextFireTime.
+func CMTimebaseSetTimerNextFireTime(timebase obj.Object, timer obj.Object, fireTime unsafe.Pointer, flags uint32) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseSetTimerNextFireTime == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseSetTimerNextFireTime, _lib, "CMTimebaseSetTimerNextFireTime")
+	}
+	return int(_fnCMTimebaseSetTimerNextFireTime(objref.IDOf(timebase), objref.IDOf(timer), fireTime, flags))
 }
 
 var _fnCMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData func(objc.ID, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int32

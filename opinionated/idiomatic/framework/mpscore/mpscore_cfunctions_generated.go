@@ -24,6 +24,50 @@ func MPSDataTypeBitsCount(t DataType) int {
 	return _fnMPSDataTypeBitsCount(t)
 }
 
+var _fnMPSGetCustomKernelBatchedDestinationIndex func(unsafe.Pointer) int
+
+// MPSGetCustomKernelBatchedDestinationIndex calls the MPSCore framework function MPSGetCustomKernelBatchedDestinationIndex.
+func MPSGetCustomKernelBatchedDestinationIndex(c unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSGetCustomKernelBatchedDestinationIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSGetCustomKernelBatchedDestinationIndex, _lib, "MPSGetCustomKernelBatchedDestinationIndex")
+	}
+	return _fnMPSGetCustomKernelBatchedDestinationIndex(c)
+}
+
+var _fnMPSGetCustomKernelBatchedSourceIndex func(unsafe.Pointer, int, int) int
+
+// MPSGetCustomKernelBatchedSourceIndex calls the MPSCore framework function MPSGetCustomKernelBatchedSourceIndex.
+func MPSGetCustomKernelBatchedSourceIndex(c unsafe.Pointer, sourceIndex int, mpsMaxTextures int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSGetCustomKernelBatchedSourceIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSGetCustomKernelBatchedSourceIndex, _lib, "MPSGetCustomKernelBatchedSourceIndex")
+	}
+	return _fnMPSGetCustomKernelBatchedSourceIndex(c, sourceIndex, mpsMaxTextures)
+}
+
+var _fnMPSGetCustomKernelBroadcastSourceIndex func(unsafe.Pointer, int, int) int
+
+// MPSGetCustomKernelBroadcastSourceIndex calls the MPSCore framework function MPSGetCustomKernelBroadcastSourceIndex.
+func MPSGetCustomKernelBroadcastSourceIndex(c unsafe.Pointer, sourceIndex int, mpsMaxTextures int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSGetCustomKernelBroadcastSourceIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSGetCustomKernelBroadcastSourceIndex, _lib, "MPSGetCustomKernelBroadcastSourceIndex")
+	}
+	return _fnMPSGetCustomKernelBroadcastSourceIndex(c, sourceIndex, mpsMaxTextures)
+}
+
+var _fnMPSGetCustomKernelMaxBatchSize func(unsafe.Pointer, int) int
+
+// MPSGetCustomKernelMaxBatchSize calls the MPSCore framework function MPSGetCustomKernelMaxBatchSize.
+func MPSGetCustomKernelMaxBatchSize(c unsafe.Pointer, mpsMaxTextures int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSGetCustomKernelMaxBatchSize == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSGetCustomKernelMaxBatchSize, _lib, "MPSGetCustomKernelMaxBatchSize")
+	}
+	return _fnMPSGetCustomKernelMaxBatchSize(c, mpsMaxTextures)
+}
+
 var _fnMPSGetImageType func(objc.ID) objc.ID
 
 // MPSGetImageType calls the MPSCore framework function MPSGetImageType.
@@ -69,6 +113,17 @@ func MPSImageBatchResourceSize(batch unsafe.Pointer) int {
 	return _fnMPSImageBatchResourceSize(batch)
 }
 
+var _fnMPSImageBatchSynchronize func(unsafe.Pointer, unsafe.Pointer)
+
+// MPSImageBatchSynchronize calls the MPSCore framework function MPSImageBatchSynchronize.
+func MPSImageBatchSynchronize(batch unsafe.Pointer, cmdBuf unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSImageBatchSynchronize == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSImageBatchSynchronize, _lib, "MPSImageBatchSynchronize")
+	}
+	_fnMPSImageBatchSynchronize(batch, cmdBuf)
+}
+
 var _fnMPSSizeofMPSDataType func(DataType) int
 
 // MPSSizeofMPSDataType calls the MPSCore framework function MPSSizeofMPSDataType.
@@ -100,6 +155,17 @@ func MPSStateBatchResourceSize(batch unsafe.Pointer) int {
 		ebipurego.RegisterLibFunc(&_fnMPSStateBatchResourceSize, _lib, "MPSStateBatchResourceSize")
 	}
 	return _fnMPSStateBatchResourceSize(batch)
+}
+
+var _fnMPSStateBatchSynchronize func(unsafe.Pointer, unsafe.Pointer)
+
+// MPSStateBatchSynchronize calls the MPSCore framework function MPSStateBatchSynchronize.
+func MPSStateBatchSynchronize(batch unsafe.Pointer, cmdBuf unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSStateBatchSynchronize == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSStateBatchSynchronize, _lib, "MPSStateBatchSynchronize")
+	}
+	_fnMPSStateBatchSynchronize(batch, cmdBuf)
 }
 
 var _fnBuiltinClz func(int) int32

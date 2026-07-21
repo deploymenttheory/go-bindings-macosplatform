@@ -116,6 +116,17 @@ func CSIdentityAuthorityGetTypeID() int {
 	return _fnCSIdentityAuthorityGetTypeID()
 }
 
+var _fnCSIdentityCommitAsynchronously func(objc.ID, unsafe.Pointer, objc.ID, objc.ID, objc.ID) uint8
+
+// CSIdentityCommitAsynchronously calls the OSServices framework function CSIdentityCommitAsynchronously.
+func CSIdentityCommitAsynchronously(identity obj.Object, clientContext unsafe.Pointer, runLoop obj.Object, runLoopMode obj.Object, authorization obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSIdentityCommitAsynchronously == nil {
+		ebipurego.RegisterLibFunc(&_fnCSIdentityCommitAsynchronously, _lib, "CSIdentityCommitAsynchronously")
+	}
+	return _fnCSIdentityCommitAsynchronously(objref.IDOf(identity), clientContext, objref.IDOf(runLoop), objref.IDOf(runLoopMode), objref.IDOf(authorization))
+}
+
 var _fnCSIdentityCreate func(objc.ID, int, objc.ID, objc.ID, int, objc.ID) objc.ID
 
 // CSIdentityCreate calls the OSServices framework function CSIdentityCreate.
@@ -456,6 +467,17 @@ func CSIdentityQueryCreateForUUID(allocator obj.Object, uuid obj.Object, authori
 	return obj.Wrap(_ret)
 }
 
+var _fnCSIdentityQueryExecuteAsynchronously func(objc.ID, int, unsafe.Pointer, objc.ID, objc.ID) uint8
+
+// CSIdentityQueryExecuteAsynchronously calls the OSServices framework function CSIdentityQueryExecuteAsynchronously.
+func CSIdentityQueryExecuteAsynchronously(query obj.Object, flags int, clientContext unsafe.Pointer, runLoop obj.Object, runLoopMode obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSIdentityQueryExecuteAsynchronously == nil {
+		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryExecuteAsynchronously, _lib, "CSIdentityQueryExecuteAsynchronously")
+	}
+	return _fnCSIdentityQueryExecuteAsynchronously(objref.IDOf(query), flags, clientContext, objref.IDOf(runLoop), objref.IDOf(runLoopMode))
+}
+
 var _fnCSIdentityQueryGetTypeID func() int
 
 // CSIdentityQueryGetTypeID calls the OSServices framework function CSIdentityQueryGetTypeID.
@@ -632,6 +654,28 @@ func GetCPUSpeed() int {
 	return _fnGetCPUSpeed()
 }
 
+var _fnInvokeKCCallbackUPP func(uint16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// InvokeKCCallbackUPP calls the OSServices framework function InvokeKCCallbackUPP.
+func InvokeKCCallbackUPP(keychainEvent uint16, info unsafe.Pointer, userContext unsafe.Pointer, userUPP unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeKCCallbackUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeKCCallbackUPP, _lib, "InvokeKCCallbackUPP")
+	}
+	return int(_fnInvokeKCCallbackUPP(keychainEvent, info, userContext, userUPP))
+}
+
+var _fnInvokeSleepQUPP func(int, unsafe.Pointer, unsafe.Pointer) int
+
+// InvokeSleepQUPP calls the OSServices framework function InvokeSleepQUPP.
+func InvokeSleepQUPP(message int, qRecPtr unsafe.Pointer, userUPP unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeSleepQUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeSleepQUPP, _lib, "InvokeSleepQUPP")
+	}
+	return _fnInvokeSleepQUPP(message, qRecPtr, userUPP)
+}
+
 var _fnKCCountKeychains func() uint16
 
 // KCCountKeychains calls the OSServices framework function KCCountKeychains.
@@ -641,6 +685,34 @@ func KCCountKeychains() uint16 {
 		ebipurego.RegisterLibFunc(&_fnKCCountKeychains, _lib, "KCCountKeychains")
 	}
 	return _fnKCCountKeychains()
+}
+
+var _fnKCFindAppleSharePassword func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// KCFindAppleSharePassword calls the OSServices framework function KCFindAppleSharePassword.
+func KCFindAppleSharePassword(serverSignature unsafe.Pointer, maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, serverAddress uint8, serverName uint8, volumeName uint8, accountName uint8, actualLength int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCFindAppleSharePassword == nil {
+		ebipurego.RegisterLibFunc(&_fnKCFindAppleSharePassword, _lib, "KCFindAppleSharePassword")
+	}
+	var _out0 uint8
+	var _out1 uint8
+	var _out2 uint8
+	var _out3 uint8
+	var _out4 int
+	_ret := int(_fnKCFindAppleSharePassword(serverSignature, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), maxLength, passwordData, unsafe.Pointer(&_out4), item))
+	return _ret, _out0, _out1, _out2, _out3, _out4
+}
+
+var _fnKCFindFirstItem func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// KCFindFirstItem calls the OSServices framework function KCFindFirstItem.
+func KCFindFirstItem(keychain unsafe.Pointer, attrList unsafe.Pointer, search unsafe.Pointer, item unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCFindFirstItem == nil {
+		ebipurego.RegisterLibFunc(&_fnKCFindFirstItem, _lib, "KCFindFirstItem")
+	}
+	return int(_fnKCFindFirstItem(keychain, attrList, search, item))
 }
 
 var _fnKCFindGenericPassword func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -689,6 +761,19 @@ func KCFindInternetPasswordWithPath(port uint16, protocol int, authType int, max
 	var _out4 int
 	_ret := int(_fnKCFindInternetPasswordWithPath(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), port, protocol, authType, maxLength, passwordData, unsafe.Pointer(&_out4), item))
 	return _ret, _out0, _out1, _out2, _out3, _out4
+}
+
+var _fnKCGetAttribute func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// KCGetAttribute calls the OSServices framework function KCGetAttribute.
+func KCGetAttribute(item unsafe.Pointer, attr unsafe.Pointer) (result int, actualLength int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCGetAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnKCGetAttribute, _lib, "KCGetAttribute")
+	}
+	var _out0 int
+	_ret := int(_fnKCGetAttribute(item, attr, unsafe.Pointer(&_out0)))
+	return _ret, _out0
 }
 
 var _fnKCGetData func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
@@ -754,6 +839,50 @@ func KCIsInteractionAllowed() uint8 {
 	return _fnKCIsInteractionAllowed()
 }
 
+var _fnKCMakeAliasFromKCRef func(unsafe.Pointer, unsafe.Pointer) int32
+
+// KCMakeAliasFromKCRef calls the OSServices framework function KCMakeAliasFromKCRef.
+func KCMakeAliasFromKCRef(keychain unsafe.Pointer, keychainAlias unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCMakeAliasFromKCRef == nil {
+		ebipurego.RegisterLibFunc(&_fnKCMakeAliasFromKCRef, _lib, "KCMakeAliasFromKCRef")
+	}
+	return int(_fnKCMakeAliasFromKCRef(keychain, keychainAlias))
+}
+
+var _fnKCMakeKCRefFromAlias func(unsafe.Pointer, unsafe.Pointer) int32
+
+// KCMakeKCRefFromAlias calls the OSServices framework function KCMakeKCRefFromAlias.
+func KCMakeKCRefFromAlias(keychainAlias unsafe.Pointer, keychain unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCMakeKCRefFromAlias == nil {
+		ebipurego.RegisterLibFunc(&_fnKCMakeKCRefFromAlias, _lib, "KCMakeKCRefFromAlias")
+	}
+	return int(_fnKCMakeKCRefFromAlias(keychainAlias, keychain))
+}
+
+var _fnKCMakeKCRefFromFSRef func(unsafe.Pointer, unsafe.Pointer) int32
+
+// KCMakeKCRefFromFSRef calls the OSServices framework function KCMakeKCRefFromFSRef.
+func KCMakeKCRefFromFSRef(keychainFSRef unsafe.Pointer, keychain unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCMakeKCRefFromFSRef == nil {
+		ebipurego.RegisterLibFunc(&_fnKCMakeKCRefFromFSRef, _lib, "KCMakeKCRefFromFSRef")
+	}
+	return int(_fnKCMakeKCRefFromFSRef(keychainFSRef, keychain))
+}
+
+var _fnKCSetAttribute func(unsafe.Pointer, unsafe.Pointer) int32
+
+// KCSetAttribute calls the OSServices framework function KCSetAttribute.
+func KCSetAttribute(item unsafe.Pointer, attr unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCSetAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnKCSetAttribute, _lib, "KCSetAttribute")
+	}
+	return int(_fnKCSetAttribute(item, attr))
+}
+
 var _fnMaximumProcessorSpeed func() int16
 
 // MaximumProcessorSpeed calls the OSServices framework function MaximumProcessorSpeed.
@@ -774,6 +903,28 @@ func MinimumProcessorSpeed() int16 {
 		ebipurego.RegisterLibFunc(&_fnMinimumProcessorSpeed, _lib, "MinimumProcessorSpeed")
 	}
 	return _fnMinimumProcessorSpeed()
+}
+
+var _fnSleepQInstall func(unsafe.Pointer)
+
+// SleepQInstall calls the OSServices framework function SleepQInstall.
+func SleepQInstall(qRecPtr unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSleepQInstall == nil {
+		ebipurego.RegisterLibFunc(&_fnSleepQInstall, _lib, "SleepQInstall")
+	}
+	_fnSleepQInstall(qRecPtr)
+}
+
+var _fnSleepQRemove func(unsafe.Pointer)
+
+// SleepQRemove calls the OSServices framework function SleepQRemove.
+func SleepQRemove(qRecPtr unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSleepQRemove == nil {
+		ebipurego.RegisterLibFunc(&_fnSleepQRemove, _lib, "SleepQRemove")
+	}
+	_fnSleepQRemove(qRecPtr)
 }
 
 var _fnUpdateSystemActivity func(uint8) int16
@@ -807,6 +958,28 @@ func WSGetWSTypeIDFromCFType(ref obj.Object) WSTypeID {
 		ebipurego.RegisterLibFunc(&_fnWSGetWSTypeIDFromCFType, _lib, "WSGetWSTypeIDFromCFType")
 	}
 	return _fnWSGetWSTypeIDFromCFType(objref.IDOf(ref))
+}
+
+var _fnWSMethodInvocationAddDeserializationOverride func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// WSMethodInvocationAddDeserializationOverride calls the OSServices framework function WSMethodInvocationAddDeserializationOverride.
+func WSMethodInvocationAddDeserializationOverride(invocation obj.Object, typeNamespace obj.Object, typeName obj.Object, deserializationProc unsafe.Pointer, context_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWSMethodInvocationAddDeserializationOverride == nil {
+		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationAddDeserializationOverride, _lib, "WSMethodInvocationAddDeserializationOverride")
+	}
+	_fnWSMethodInvocationAddDeserializationOverride(objref.IDOf(invocation), objref.IDOf(typeNamespace), objref.IDOf(typeName), deserializationProc, context_)
+}
+
+var _fnWSMethodInvocationAddSerializationOverride func(objc.ID, int, unsafe.Pointer, unsafe.Pointer)
+
+// WSMethodInvocationAddSerializationOverride calls the OSServices framework function WSMethodInvocationAddSerializationOverride.
+func WSMethodInvocationAddSerializationOverride(invocation obj.Object, objType int, serializationProc unsafe.Pointer, context_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWSMethodInvocationAddSerializationOverride == nil {
+		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationAddSerializationOverride, _lib, "WSMethodInvocationAddSerializationOverride")
+	}
+	_fnWSMethodInvocationAddSerializationOverride(objref.IDOf(invocation), objType, serializationProc, context_)
 }
 
 var _fnWSMethodInvocationCopyParameters func(objc.ID, unsafe.Pointer) objc.ID
@@ -901,6 +1074,17 @@ func WSMethodInvocationScheduleWithRunLoop(invocation obj.Object, runLoop obj.Ob
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationScheduleWithRunLoop, _lib, "WSMethodInvocationScheduleWithRunLoop")
 	}
 	_fnWSMethodInvocationScheduleWithRunLoop(objref.IDOf(invocation), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
+}
+
+var _fnWSMethodInvocationSetCallBack func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// WSMethodInvocationSetCallBack calls the OSServices framework function WSMethodInvocationSetCallBack.
+func WSMethodInvocationSetCallBack(invocation obj.Object, clientCB unsafe.Pointer, context_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWSMethodInvocationSetCallBack == nil {
+		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationSetCallBack, _lib, "WSMethodInvocationSetCallBack")
+	}
+	_fnWSMethodInvocationSetCallBack(objref.IDOf(invocation), clientCB, context_)
 }
 
 var _fnWSMethodInvocationSetParameters func(objc.ID, objc.ID, objc.ID)
@@ -1042,6 +1226,17 @@ func WSProtocolHandlerGetTypeID() int {
 	return _fnWSProtocolHandlerGetTypeID()
 }
 
+var _fnWSProtocolHandlerSetDeserializationOverride func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// WSProtocolHandlerSetDeserializationOverride calls the OSServices framework function WSProtocolHandlerSetDeserializationOverride.
+func WSProtocolHandlerSetDeserializationOverride(protocol obj.Object, typeNamespace obj.Object, typeName obj.Object, deserializationProc unsafe.Pointer, context_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWSProtocolHandlerSetDeserializationOverride == nil {
+		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerSetDeserializationOverride, _lib, "WSProtocolHandlerSetDeserializationOverride")
+	}
+	_fnWSProtocolHandlerSetDeserializationOverride(objref.IDOf(protocol), objref.IDOf(typeNamespace), objref.IDOf(typeName), deserializationProc, context_)
+}
+
 var _fnWSProtocolHandlerSetProperty func(objc.ID, objc.ID, objc.ID)
 
 // WSProtocolHandlerSetProperty calls the OSServices framework function WSProtocolHandlerSetProperty.
@@ -1051,6 +1246,30 @@ func WSProtocolHandlerSetProperty(ref obj.Object, propertyName obj.Object, prope
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerSetProperty, _lib, "WSProtocolHandlerSetProperty")
 	}
 	_fnWSProtocolHandlerSetProperty(objref.IDOf(ref), objref.IDOf(propertyName), objref.IDOf(propertyValue))
+}
+
+var _fnWSProtocolHandlerSetSerializationOverride func(objc.ID, int, unsafe.Pointer, unsafe.Pointer)
+
+// WSProtocolHandlerSetSerializationOverride calls the OSServices framework function WSProtocolHandlerSetSerializationOverride.
+func WSProtocolHandlerSetSerializationOverride(protocol obj.Object, objType int, serializationProc unsafe.Pointer, context_ unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWSProtocolHandlerSetSerializationOverride == nil {
+		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerSetSerializationOverride, _lib, "WSProtocolHandlerSetSerializationOverride")
+	}
+	_fnWSProtocolHandlerSetSerializationOverride(objref.IDOf(protocol), objType, serializationProc, context_)
+}
+
+var _fnKcfindapplesharepassword func(unsafe.Pointer, string, string, string, string, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// Kcfindapplesharepassword calls the OSServices framework function kcfindapplesharepassword.
+func Kcfindapplesharepassword(serverSignature unsafe.Pointer, serverAddress string, serverName string, volumeName string, accountName string, maxLength int, passwordData unsafe.Pointer, item unsafe.Pointer) (result int, actualLength int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKcfindapplesharepassword == nil {
+		ebipurego.RegisterLibFunc(&_fnKcfindapplesharepassword, _lib, "kcfindapplesharepassword")
+	}
+	var _out0 int
+	_ret := int(_fnKcfindapplesharepassword(serverSignature, serverAddress, serverName, volumeName, accountName, maxLength, passwordData, unsafe.Pointer(&_out0), item))
+	return _ret, _out0
 }
 
 var _fnKcfindgenericpassword func(string, string, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32

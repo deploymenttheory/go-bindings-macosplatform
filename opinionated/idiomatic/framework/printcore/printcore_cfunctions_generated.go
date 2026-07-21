@@ -322,6 +322,17 @@ func PMPrinterGetIndexedPrinterResolution(printer obj.Object, index int) (result
 	return _ret, _out0
 }
 
+var _fnPMPrinterGetLanguageInfo func(objc.ID, unsafe.Pointer) int32
+
+// PMPrinterGetLanguageInfo calls the PrintCore framework function PMPrinterGetLanguageInfo.
+func PMPrinterGetLanguageInfo(printer obj.Object, info unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPMPrinterGetLanguageInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnPMPrinterGetLanguageInfo, _lib, "PMPrinterGetLanguageInfo")
+	}
+	return int(_fnPMPrinterGetLanguageInfo(objref.IDOf(printer), info))
+}
+
 var _fnPMPrinterGetLocation func(objc.ID) objc.ID
 
 // PMPrinterGetLocation calls the PrintCore framework function PMPrinterGetLocation.

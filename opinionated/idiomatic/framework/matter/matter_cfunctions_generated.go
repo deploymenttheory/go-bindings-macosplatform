@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -98,6 +100,17 @@ func MTRResponseCommandNameForID(clusterID MTRClusterIDType, commandID MTRComman
 		return ""
 	}
 	return purego.GoString(_ret)
+}
+
+var _fnMTRSetLogCallback func(MTRLogType, unsafe.Pointer)
+
+// MTRSetLogCallback calls the Matter framework function MTRSetLogCallback.
+func MTRSetLogCallback(logTypeThreshold MTRLogType, callback unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTRSetLogCallback == nil {
+		ebipurego.RegisterLibFunc(&_fnMTRSetLogCallback, _lib, "MTRSetLogCallback")
+	}
+	_fnMTRSetLogCallback(logTypeThreshold, callback)
 }
 
 var _fnMTRSetMessageReliabilityParameters func(objc.ID, objc.ID, objc.ID, objc.ID)

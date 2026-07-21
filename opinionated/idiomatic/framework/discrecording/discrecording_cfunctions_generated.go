@@ -586,6 +586,17 @@ func DRFSObjectGetParent(object unsafe.Pointer) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnDRFSObjectGetRealFSRef func(unsafe.Pointer, unsafe.Pointer)
+
+// DRFSObjectGetRealFSRef calls the DiscRecording framework function DRFSObjectGetRealFSRef.
+func DRFSObjectGetRealFSRef(object unsafe.Pointer, fsRef unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDRFSObjectGetRealFSRef == nil {
+		ebipurego.RegisterLibFunc(&_fnDRFSObjectGetRealFSRef, _lib, "DRFSObjectGetRealFSRef")
+	}
+	_fnDRFSObjectGetRealFSRef(object, fsRef)
+}
+
 var _fnDRFSObjectIsVirtual func(unsafe.Pointer) uint8
 
 // DRFSObjectIsVirtual calls the DiscRecording framework function DRFSObjectIsVirtual.
@@ -661,6 +672,18 @@ func DRFSObjectSetSpecificNames(object unsafe.Pointer, specificNames obj.Object)
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectSetSpecificNames, _lib, "DRFSObjectSetSpecificNames")
 	}
 	_fnDRFSObjectSetSpecificNames(object, objref.IDOf(specificNames))
+}
+
+var _fnDRFileCreateReal func(unsafe.Pointer) objc.ID
+
+// DRFileCreateReal calls the DiscRecording framework function DRFileCreateReal.
+func DRFileCreateReal(fsRef unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDRFileCreateReal == nil {
+		ebipurego.RegisterLibFunc(&_fnDRFileCreateReal, _lib, "DRFileCreateReal")
+	}
+	_ret := _fnDRFileCreateReal(fsRef)
+	return obj.Wrap(_ret)
 }
 
 var _fnDRFileCreateRealWithURL func(objc.ID) objc.ID
@@ -778,6 +801,18 @@ func DRFolderCountChildren(folder obj.Object) int {
 	return int(_fnDRFolderCountChildren(objref.IDOf(folder)))
 }
 
+var _fnDRFolderCreateReal func(unsafe.Pointer) objc.ID
+
+// DRFolderCreateReal calls the DiscRecording framework function DRFolderCreateReal.
+func DRFolderCreateReal(fsRef unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDRFolderCreateReal == nil {
+		ebipurego.RegisterLibFunc(&_fnDRFolderCreateReal, _lib, "DRFolderCreateReal")
+	}
+	_ret := _fnDRFolderCreateReal(fsRef)
+	return obj.Wrap(_ret)
+}
+
 var _fnDRFolderCreateRealWithURL func(objc.ID) objc.ID
 
 // DRFolderCreateRealWithURL calls the DiscRecording framework function DRFolderCreateRealWithURL.
@@ -879,6 +914,17 @@ func DRNotificationCenterRemoveObserver(center obj.Object, observer unsafe.Point
 		ebipurego.RegisterLibFunc(&_fnDRNotificationCenterRemoveObserver, _lib, "DRNotificationCenterRemoveObserver")
 	}
 	_fnDRNotificationCenterRemoveObserver(objref.IDOf(center), observer, objref.IDOf(name), object)
+}
+
+var _fnDRSetRefCon func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+
+// DRSetRefCon calls the DiscRecording framework function DRSetRefCon.
+func DRSetRefCon(ref unsafe.Pointer, refCon unsafe.Pointer, callbacks unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDRSetRefCon == nil {
+		ebipurego.RegisterLibFunc(&_fnDRSetRefCon, _lib, "DRSetRefCon")
+	}
+	_fnDRSetRefCon(ref, refCon, callbacks)
 }
 
 var _fnDRTrackCreate func(objc.ID, unsafe.Pointer) objc.ID

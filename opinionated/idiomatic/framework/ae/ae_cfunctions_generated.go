@@ -13,6 +13,63 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+var _fnAECallObjectAccessor func(int, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int16
+
+// AECallObjectAccessor calls the AE framework function AECallObjectAccessor.
+func AECallObjectAccessor(desiredClass int, containerToken unsafe.Pointer, containerClass int, keyForm int, keyData unsafe.Pointer, token unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAECallObjectAccessor == nil {
+		ebipurego.RegisterLibFunc(&_fnAECallObjectAccessor, _lib, "AECallObjectAccessor")
+	}
+	return _fnAECallObjectAccessor(desiredClass, containerToken, containerClass, keyForm, keyData, token)
+}
+
+var _fnAECheckIsRecord func(unsafe.Pointer) uint8
+
+// AECheckIsRecord calls the AE framework function AECheckIsRecord.
+func AECheckIsRecord(theDesc unsafe.Pointer) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAECheckIsRecord == nil {
+		ebipurego.RegisterLibFunc(&_fnAECheckIsRecord, _lib, "AECheckIsRecord")
+	}
+	return _fnAECheckIsRecord(theDesc)
+}
+
+var _fnAECoerceDesc func(unsafe.Pointer, int, unsafe.Pointer) int16
+
+// AECoerceDesc calls the AE framework function AECoerceDesc.
+func AECoerceDesc(theAEDesc unsafe.Pointer, toType int, result unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAECoerceDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAECoerceDesc, _lib, "AECoerceDesc")
+	}
+	return _fnAECoerceDesc(theAEDesc, toType, result)
+}
+
+var _fnAECoercePtr func(int, unsafe.Pointer, int, int, unsafe.Pointer) int16
+
+// AECoercePtr calls the AE framework function AECoercePtr.
+func AECoercePtr(typeCode int, dataPtr unsafe.Pointer, dataSize int, toType int, result unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAECoercePtr == nil {
+		ebipurego.RegisterLibFunc(&_fnAECoercePtr, _lib, "AECoercePtr")
+	}
+	return _fnAECoercePtr(typeCode, dataPtr, dataSize, toType, result)
+}
+
+var _fnAECompareDesc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// AECompareDesc calls the AE framework function AECompareDesc.
+func AECompareDesc(desc1 unsafe.Pointer, desc2 unsafe.Pointer) (result int, resultP uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAECompareDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAECompareDesc, _lib, "AECompareDesc")
+	}
+	var _out0 uint8
+	_ret := int(_fnAECompareDesc(desc1, desc2, unsafe.Pointer(&_out0)))
+	return _ret, _out0
+}
+
 var _fnAECountItems func(unsafe.Pointer, unsafe.Pointer) int16
 
 // AECountItems calls the AE framework function AECountItems.
@@ -24,6 +81,50 @@ func AECountItems(theAEDescList unsafe.Pointer) (result int16, theCount int64) {
 	var _out0 int64
 	_ret := _fnAECountItems(theAEDescList, unsafe.Pointer(&_out0))
 	return _ret, _out0
+}
+
+var _fnAECreateAppleEvent func(int, int, unsafe.Pointer, int16, int, unsafe.Pointer) int16
+
+// AECreateAppleEvent calls the AE framework function AECreateAppleEvent.
+func AECreateAppleEvent(theAEEventClass int, theAEEventID int, target unsafe.Pointer, returnID int16, transactionID int, result unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAECreateAppleEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnAECreateAppleEvent, _lib, "AECreateAppleEvent")
+	}
+	return _fnAECreateAppleEvent(theAEEventClass, theAEEventID, target, returnID, transactionID, result)
+}
+
+var _fnAECreateDesc func(int, unsafe.Pointer, int, unsafe.Pointer) int16
+
+// AECreateDesc calls the AE framework function AECreateDesc.
+func AECreateDesc(typeCode int, dataPtr unsafe.Pointer, dataSize int, result unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAECreateDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAECreateDesc, _lib, "AECreateDesc")
+	}
+	return _fnAECreateDesc(typeCode, dataPtr, dataSize, result)
+}
+
+var _fnAECreateDescFromExternalPtr func(int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// AECreateDescFromExternalPtr calls the AE framework function AECreateDescFromExternalPtr.
+func AECreateDescFromExternalPtr(descriptorType int, dataPtr unsafe.Pointer, dataLength int, disposeCallback unsafe.Pointer, disposeRefcon unsafe.Pointer, theDesc unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAECreateDescFromExternalPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnAECreateDescFromExternalPtr, _lib, "AECreateDescFromExternalPtr")
+	}
+	return int(_fnAECreateDescFromExternalPtr(descriptorType, dataPtr, dataLength, disposeCallback, disposeRefcon, theDesc))
+}
+
+var _fnAECreateList func(unsafe.Pointer, int, uint8, unsafe.Pointer) int16
+
+// AECreateList calls the AE framework function AECreateList.
+func AECreateList(factoringPtr unsafe.Pointer, factoredSize int, isRecord uint8, resultList unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAECreateList == nil {
+		ebipurego.RegisterLibFunc(&_fnAECreateList, _lib, "AECreateList")
+	}
+	return _fnAECreateList(factoringPtr, factoredSize, isRecord, resultList)
 }
 
 var _fnAECreateRemoteProcessResolver func(objc.ID, objc.ID) objc.ID
@@ -38,6 +139,61 @@ func AECreateRemoteProcessResolver(allocator obj.Object, url obj.Object) obj.Obj
 	return obj.Wrap(_ret)
 }
 
+var _fnAEDecodeMessage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// AEDecodeMessage calls the AE framework function AEDecodeMessage.
+func AEDecodeMessage(header unsafe.Pointer, event unsafe.Pointer, reply unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEDecodeMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnAEDecodeMessage, _lib, "AEDecodeMessage")
+	}
+	return int(_fnAEDecodeMessage(header, event, reply))
+}
+
+var _fnAEDeleteItem func(unsafe.Pointer, int) int16
+
+// AEDeleteItem calls the AE framework function AEDeleteItem.
+func AEDeleteItem(theAEDescList unsafe.Pointer, index int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEDeleteItem == nil {
+		ebipurego.RegisterLibFunc(&_fnAEDeleteItem, _lib, "AEDeleteItem")
+	}
+	return _fnAEDeleteItem(theAEDescList, index)
+}
+
+var _fnAEDeleteParam func(unsafe.Pointer, int) int16
+
+// AEDeleteParam calls the AE framework function AEDeleteParam.
+func AEDeleteParam(theAppleEvent unsafe.Pointer, theAEKeyword int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEDeleteParam == nil {
+		ebipurego.RegisterLibFunc(&_fnAEDeleteParam, _lib, "AEDeleteParam")
+	}
+	return _fnAEDeleteParam(theAppleEvent, theAEKeyword)
+}
+
+var _fnAEDeterminePermissionToAutomateTarget func(unsafe.Pointer, int, int, uint8) int32
+
+// AEDeterminePermissionToAutomateTarget calls the AE framework function AEDeterminePermissionToAutomateTarget.
+func AEDeterminePermissionToAutomateTarget(target unsafe.Pointer, theAEEventClass int, theAEEventID int, askUserIfNeeded uint8) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEDeterminePermissionToAutomateTarget == nil {
+		ebipurego.RegisterLibFunc(&_fnAEDeterminePermissionToAutomateTarget, _lib, "AEDeterminePermissionToAutomateTarget")
+	}
+	return int(_fnAEDeterminePermissionToAutomateTarget(target, theAEEventClass, theAEEventID, askUserIfNeeded))
+}
+
+var _fnAEDisposeDesc func(unsafe.Pointer) int16
+
+// AEDisposeDesc calls the AE framework function AEDisposeDesc.
+func AEDisposeDesc(theAEDesc unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEDisposeDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEDisposeDesc, _lib, "AEDisposeDesc")
+	}
+	return _fnAEDisposeDesc(theAEDesc)
+}
+
 var _fnAEDisposeRemoteProcessResolver func(objc.ID)
 
 // AEDisposeRemoteProcessResolver calls the AE framework function AEDisposeRemoteProcessResolver.
@@ -47,6 +203,80 @@ func AEDisposeRemoteProcessResolver(ref obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnAEDisposeRemoteProcessResolver, _lib, "AEDisposeRemoteProcessResolver")
 	}
 	_fnAEDisposeRemoteProcessResolver(objref.IDOf(ref))
+}
+
+var _fnAEDisposeToken func(unsafe.Pointer) int16
+
+// AEDisposeToken calls the AE framework function AEDisposeToken.
+func AEDisposeToken(theToken unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEDisposeToken == nil {
+		ebipurego.RegisterLibFunc(&_fnAEDisposeToken, _lib, "AEDisposeToken")
+	}
+	return _fnAEDisposeToken(theToken)
+}
+
+var _fnAEDuplicateDesc func(unsafe.Pointer, unsafe.Pointer) int16
+
+// AEDuplicateDesc calls the AE framework function AEDuplicateDesc.
+func AEDuplicateDesc(theAEDesc unsafe.Pointer, result unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEDuplicateDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEDuplicateDesc, _lib, "AEDuplicateDesc")
+	}
+	return _fnAEDuplicateDesc(theAEDesc, result)
+}
+
+var _fnAEFlattenDesc func(unsafe.Pointer, string, int, unsafe.Pointer) int32
+
+// AEFlattenDesc calls the AE framework function AEFlattenDesc.
+func AEFlattenDesc(theAEDesc unsafe.Pointer, buffer string, bufferSize int) (result int, actualSize int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEFlattenDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEFlattenDesc, _lib, "AEFlattenDesc")
+	}
+	var _out0 int
+	_ret := int(_fnAEFlattenDesc(theAEDesc, buffer, bufferSize, unsafe.Pointer(&_out0)))
+	return _ret, _out0
+}
+
+var _fnAEGetArray func(unsafe.Pointer, int8, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+
+// AEGetArray calls the AE framework function AEGetArray.
+func AEGetArray(theAEDescList unsafe.Pointer, arrayType int8, arrayPtr unsafe.Pointer, maximumSize int, itemSize unsafe.Pointer) (result int16, itemType int, itemCount int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEGetArray == nil {
+		ebipurego.RegisterLibFunc(&_fnAEGetArray, _lib, "AEGetArray")
+	}
+	var _out0 int
+	var _out1 int64
+	_ret := _fnAEGetArray(theAEDescList, arrayType, arrayPtr, maximumSize, unsafe.Pointer(&_out0), itemSize, unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
+}
+
+var _fnAEGetAttributeDesc func(unsafe.Pointer, int, int, unsafe.Pointer) int16
+
+// AEGetAttributeDesc calls the AE framework function AEGetAttributeDesc.
+func AEGetAttributeDesc(theAppleEvent unsafe.Pointer, theAEKeyword int, desiredType int, result unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEGetAttributeDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEGetAttributeDesc, _lib, "AEGetAttributeDesc")
+	}
+	return _fnAEGetAttributeDesc(theAppleEvent, theAEKeyword, desiredType, result)
+}
+
+var _fnAEGetAttributePtr func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int16
+
+// AEGetAttributePtr calls the AE framework function AEGetAttributePtr.
+func AEGetAttributePtr(theAppleEvent unsafe.Pointer, theAEKeyword int, desiredType int, dataPtr unsafe.Pointer, maximumSize int) (result int16, typeCode int, actualSize int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEGetAttributePtr == nil {
+		ebipurego.RegisterLibFunc(&_fnAEGetAttributePtr, _lib, "AEGetAttributePtr")
+	}
+	var _out0 int
+	var _out1 int
+	_ret := _fnAEGetAttributePtr(theAppleEvent, theAEKeyword, desiredType, unsafe.Pointer(&_out0), dataPtr, maximumSize, unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
 }
 
 var _fnAEGetCoercionHandler func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) int16
@@ -62,6 +292,39 @@ func AEGetCoercionHandler(fromType int, toType int, handler unsafe.Pointer, hand
 	return _ret, _out0
 }
 
+var _fnAEGetDescData func(unsafe.Pointer, unsafe.Pointer, int) int16
+
+// AEGetDescData calls the AE framework function AEGetDescData.
+func AEGetDescData(theAEDesc unsafe.Pointer, dataPtr unsafe.Pointer, maximumSize int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEGetDescData == nil {
+		ebipurego.RegisterLibFunc(&_fnAEGetDescData, _lib, "AEGetDescData")
+	}
+	return _fnAEGetDescData(theAEDesc, dataPtr, maximumSize)
+}
+
+var _fnAEGetDescDataRange func(unsafe.Pointer, unsafe.Pointer, int, int) int32
+
+// AEGetDescDataRange calls the AE framework function AEGetDescDataRange.
+func AEGetDescDataRange(dataDesc unsafe.Pointer, buffer unsafe.Pointer, offset int, length int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEGetDescDataRange == nil {
+		ebipurego.RegisterLibFunc(&_fnAEGetDescDataRange, _lib, "AEGetDescDataRange")
+	}
+	return int(_fnAEGetDescDataRange(dataDesc, buffer, offset, length))
+}
+
+var _fnAEGetDescDataSize func(unsafe.Pointer) int
+
+// AEGetDescDataSize calls the AE framework function AEGetDescDataSize.
+func AEGetDescDataSize(theAEDesc unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEGetDescDataSize == nil {
+		ebipurego.RegisterLibFunc(&_fnAEGetDescDataSize, _lib, "AEGetDescDataSize")
+	}
+	return _fnAEGetDescDataSize(theAEDesc)
+}
+
 var _fnAEGetEventHandler func(int, int, unsafe.Pointer, unsafe.Pointer, uint8) int16
 
 // AEGetEventHandler calls the AE framework function AEGetEventHandler.
@@ -73,6 +336,34 @@ func AEGetEventHandler(theAEEventClass int, theAEEventID int, handler unsafe.Poi
 	return _fnAEGetEventHandler(theAEEventClass, theAEEventID, handler, handlerRefcon, isSysHandler)
 }
 
+var _fnAEGetNthDesc func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int16
+
+// AEGetNthDesc calls the AE framework function AEGetNthDesc.
+func AEGetNthDesc(theAEDescList unsafe.Pointer, index int, desiredType int, result unsafe.Pointer) (result_ int16, theAEKeyword int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEGetNthDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEGetNthDesc, _lib, "AEGetNthDesc")
+	}
+	var _out0 int
+	_ret := _fnAEGetNthDesc(theAEDescList, index, desiredType, unsafe.Pointer(&_out0), result)
+	return _ret, _out0
+}
+
+var _fnAEGetNthPtr func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int16
+
+// AEGetNthPtr calls the AE framework function AEGetNthPtr.
+func AEGetNthPtr(theAEDescList unsafe.Pointer, index int, desiredType int, dataPtr unsafe.Pointer, maximumSize int) (result int16, theAEKeyword int, typeCode int, actualSize int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEGetNthPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnAEGetNthPtr, _lib, "AEGetNthPtr")
+	}
+	var _out0 int
+	var _out1 int
+	var _out2 int
+	_ret := _fnAEGetNthPtr(theAEDescList, index, desiredType, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), dataPtr, maximumSize, unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
+}
+
 var _fnAEGetObjectAccessor func(int, int, unsafe.Pointer, unsafe.Pointer, uint8) int16
 
 // AEGetObjectAccessor calls the AE framework function AEGetObjectAccessor.
@@ -82,6 +373,31 @@ func AEGetObjectAccessor(desiredClass int, containerType int, accessor unsafe.Po
 		ebipurego.RegisterLibFunc(&_fnAEGetObjectAccessor, _lib, "AEGetObjectAccessor")
 	}
 	return _fnAEGetObjectAccessor(desiredClass, containerType, accessor, accessorRefcon, isSysHandler)
+}
+
+var _fnAEGetParamDesc func(unsafe.Pointer, int, int, unsafe.Pointer) int16
+
+// AEGetParamDesc calls the AE framework function AEGetParamDesc.
+func AEGetParamDesc(theAppleEvent unsafe.Pointer, theAEKeyword int, desiredType int, result unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEGetParamDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEGetParamDesc, _lib, "AEGetParamDesc")
+	}
+	return _fnAEGetParamDesc(theAppleEvent, theAEKeyword, desiredType, result)
+}
+
+var _fnAEGetParamPtr func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int16
+
+// AEGetParamPtr calls the AE framework function AEGetParamPtr.
+func AEGetParamPtr(theAppleEvent unsafe.Pointer, theAEKeyword int, desiredType int, dataPtr unsafe.Pointer, maximumSize int) (result int16, actualType int, actualSize int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEGetParamPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnAEGetParamPtr, _lib, "AEGetParamPtr")
+	}
+	var _out0 int
+	var _out1 int
+	_ret := _fnAEGetParamPtr(theAppleEvent, theAEKeyword, desiredType, unsafe.Pointer(&_out0), dataPtr, maximumSize, unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
 }
 
 var _fnAEGetRegisteredMachPort func() uint32
@@ -104,6 +420,17 @@ func AEGetSpecialHandler(functionClass int, handler unsafe.Pointer, isSysHandler
 		ebipurego.RegisterLibFunc(&_fnAEGetSpecialHandler, _lib, "AEGetSpecialHandler")
 	}
 	return _fnAEGetSpecialHandler(functionClass, handler, isSysHandler)
+}
+
+var _fnAEInitializeDesc func(unsafe.Pointer)
+
+// AEInitializeDesc calls the AE framework function AEInitializeDesc.
+func AEInitializeDesc(desc unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEInitializeDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEInitializeDesc, _lib, "AEInitializeDesc")
+	}
+	_fnAEInitializeDesc(desc)
 }
 
 var _fnAEInstallCoercionHandler func(int, int, unsafe.Pointer, unsafe.Pointer, uint8, uint8) int16
@@ -174,6 +501,117 @@ func AEObjectInit() int16 {
 	return _fnAEObjectInit()
 }
 
+var _fnAEPrintDescToHandle func(unsafe.Pointer, unsafe.Pointer) int32
+
+// AEPrintDescToHandle calls the AE framework function AEPrintDescToHandle.
+func AEPrintDescToHandle(desc unsafe.Pointer, result unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEPrintDescToHandle == nil {
+		ebipurego.RegisterLibFunc(&_fnAEPrintDescToHandle, _lib, "AEPrintDescToHandle")
+	}
+	return int(_fnAEPrintDescToHandle(desc, result))
+}
+
+var _fnAEPutArray func(unsafe.Pointer, int8, unsafe.Pointer, int, int, int) int16
+
+// AEPutArray calls the AE framework function AEPutArray.
+func AEPutArray(theAEDescList unsafe.Pointer, arrayType int8, arrayPtr unsafe.Pointer, itemType int, itemSize int, itemCount int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEPutArray == nil {
+		ebipurego.RegisterLibFunc(&_fnAEPutArray, _lib, "AEPutArray")
+	}
+	return _fnAEPutArray(theAEDescList, arrayType, arrayPtr, itemType, itemSize, itemCount)
+}
+
+var _fnAEPutAttributeDesc func(unsafe.Pointer, int, unsafe.Pointer) int16
+
+// AEPutAttributeDesc calls the AE framework function AEPutAttributeDesc.
+func AEPutAttributeDesc(theAppleEvent unsafe.Pointer, theAEKeyword int, theAEDesc unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEPutAttributeDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEPutAttributeDesc, _lib, "AEPutAttributeDesc")
+	}
+	return _fnAEPutAttributeDesc(theAppleEvent, theAEKeyword, theAEDesc)
+}
+
+var _fnAEPutAttributePtr func(unsafe.Pointer, int, int, unsafe.Pointer, int) int16
+
+// AEPutAttributePtr calls the AE framework function AEPutAttributePtr.
+func AEPutAttributePtr(theAppleEvent unsafe.Pointer, theAEKeyword int, typeCode int, dataPtr unsafe.Pointer, dataSize int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEPutAttributePtr == nil {
+		ebipurego.RegisterLibFunc(&_fnAEPutAttributePtr, _lib, "AEPutAttributePtr")
+	}
+	return _fnAEPutAttributePtr(theAppleEvent, theAEKeyword, typeCode, dataPtr, dataSize)
+}
+
+var _fnAEPutDesc func(unsafe.Pointer, int, unsafe.Pointer) int16
+
+// AEPutDesc calls the AE framework function AEPutDesc.
+func AEPutDesc(theAEDescList unsafe.Pointer, index int, theAEDesc unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEPutDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEPutDesc, _lib, "AEPutDesc")
+	}
+	return _fnAEPutDesc(theAEDescList, index, theAEDesc)
+}
+
+var _fnAEPutParamDesc func(unsafe.Pointer, int, unsafe.Pointer) int16
+
+// AEPutParamDesc calls the AE framework function AEPutParamDesc.
+func AEPutParamDesc(theAppleEvent unsafe.Pointer, theAEKeyword int, theAEDesc unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEPutParamDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEPutParamDesc, _lib, "AEPutParamDesc")
+	}
+	return _fnAEPutParamDesc(theAppleEvent, theAEKeyword, theAEDesc)
+}
+
+var _fnAEPutParamPtr func(unsafe.Pointer, int, int, unsafe.Pointer, int) int16
+
+// AEPutParamPtr calls the AE framework function AEPutParamPtr.
+func AEPutParamPtr(theAppleEvent unsafe.Pointer, theAEKeyword int, typeCode int, dataPtr unsafe.Pointer, dataSize int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEPutParamPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnAEPutParamPtr, _lib, "AEPutParamPtr")
+	}
+	return _fnAEPutParamPtr(theAppleEvent, theAEKeyword, typeCode, dataPtr, dataSize)
+}
+
+var _fnAEPutPtr func(unsafe.Pointer, int, int, unsafe.Pointer, int) int16
+
+// AEPutPtr calls the AE framework function AEPutPtr.
+func AEPutPtr(theAEDescList unsafe.Pointer, index int, typeCode int, dataPtr unsafe.Pointer, dataSize int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEPutPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnAEPutPtr, _lib, "AEPutPtr")
+	}
+	return _fnAEPutPtr(theAEDescList, index, typeCode, dataPtr, dataSize)
+}
+
+var _fnAERemoteProcessResolverGetProcesses func(objc.ID, unsafe.Pointer) objc.ID
+
+// AERemoteProcessResolverGetProcesses calls the AE framework function AERemoteProcessResolverGetProcesses.
+func AERemoteProcessResolverGetProcesses(ref obj.Object, outError unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAERemoteProcessResolverGetProcesses == nil {
+		ebipurego.RegisterLibFunc(&_fnAERemoteProcessResolverGetProcesses, _lib, "AERemoteProcessResolverGetProcesses")
+	}
+	_ret := _fnAERemoteProcessResolverGetProcesses(objref.IDOf(ref), outError)
+	return obj.Wrap(_ret)
+}
+
+var _fnAERemoteProcessResolverScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
+
+// AERemoteProcessResolverScheduleWithRunLoop calls the AE framework function AERemoteProcessResolverScheduleWithRunLoop.
+func AERemoteProcessResolverScheduleWithRunLoop(ref obj.Object, runLoop obj.Object, runLoopMode obj.Object, callback unsafe.Pointer, ctx unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAERemoteProcessResolverScheduleWithRunLoop == nil {
+		ebipurego.RegisterLibFunc(&_fnAERemoteProcessResolverScheduleWithRunLoop, _lib, "AERemoteProcessResolverScheduleWithRunLoop")
+	}
+	_fnAERemoteProcessResolverScheduleWithRunLoop(objref.IDOf(ref), objref.IDOf(runLoop), objref.IDOf(runLoopMode), callback, ctx)
+}
+
 var _fnAERemoveCoercionHandler func(int, int, unsafe.Pointer, uint8) int16
 
 // AERemoveCoercionHandler calls the AE framework function AERemoveCoercionHandler.
@@ -218,6 +656,39 @@ func AERemoveSpecialHandler(functionClass int, handler unsafe.Pointer, isSysHand
 	return _fnAERemoveSpecialHandler(functionClass, handler, isSysHandler)
 }
 
+var _fnAEReplaceDescData func(int, unsafe.Pointer, int, unsafe.Pointer) int16
+
+// AEReplaceDescData calls the AE framework function AEReplaceDescData.
+func AEReplaceDescData(typeCode int, dataPtr unsafe.Pointer, dataSize int, theAEDesc unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEReplaceDescData == nil {
+		ebipurego.RegisterLibFunc(&_fnAEReplaceDescData, _lib, "AEReplaceDescData")
+	}
+	return _fnAEReplaceDescData(typeCode, dataPtr, dataSize, theAEDesc)
+}
+
+var _fnAEResolve func(unsafe.Pointer, int16, unsafe.Pointer) int16
+
+// AEResolve calls the AE framework function AEResolve.
+func AEResolve(objectSpecifier unsafe.Pointer, callbackFlags int16, theToken unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEResolve == nil {
+		ebipurego.RegisterLibFunc(&_fnAEResolve, _lib, "AEResolve")
+	}
+	return _fnAEResolve(objectSpecifier, callbackFlags, theToken)
+}
+
+var _fnAESendMessage func(unsafe.Pointer, unsafe.Pointer, int, int) int32
+
+// AESendMessage calls the AE framework function AESendMessage.
+func AESendMessage(event unsafe.Pointer, reply unsafe.Pointer, sendMode int, timeOutInTicks int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAESendMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnAESendMessage, _lib, "AESendMessage")
+	}
+	return int(_fnAESendMessage(event, reply, sendMode, timeOutInTicks))
+}
+
 var _fnAESetObjectCallbacks func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
 
 // AESetObjectCallbacks calls the AE framework function AESetObjectCallbacks.
@@ -227,6 +698,70 @@ func AESetObjectCallbacks(myCompareProc unsafe.Pointer, myCountProc unsafe.Point
 		ebipurego.RegisterLibFunc(&_fnAESetObjectCallbacks, _lib, "AESetObjectCallbacks")
 	}
 	return _fnAESetObjectCallbacks(myCompareProc, myCountProc, myDisposeTokenProc, myGetMarkTokenProc, myMarkProc, myAdjustMarksProc, myGetErrDescProcPtr)
+}
+
+var _fnAESizeOfAttribute func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int16
+
+// AESizeOfAttribute calls the AE framework function AESizeOfAttribute.
+func AESizeOfAttribute(theAppleEvent unsafe.Pointer, theAEKeyword int) (result int16, typeCode int, dataSize int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAESizeOfAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnAESizeOfAttribute, _lib, "AESizeOfAttribute")
+	}
+	var _out0 int
+	var _out1 int
+	_ret := _fnAESizeOfAttribute(theAppleEvent, theAEKeyword, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
+}
+
+var _fnAESizeOfFlattenedDesc func(unsafe.Pointer) int
+
+// AESizeOfFlattenedDesc calls the AE framework function AESizeOfFlattenedDesc.
+func AESizeOfFlattenedDesc(theAEDesc unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAESizeOfFlattenedDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAESizeOfFlattenedDesc, _lib, "AESizeOfFlattenedDesc")
+	}
+	return _fnAESizeOfFlattenedDesc(theAEDesc)
+}
+
+var _fnAESizeOfNthItem func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int16
+
+// AESizeOfNthItem calls the AE framework function AESizeOfNthItem.
+func AESizeOfNthItem(theAEDescList unsafe.Pointer, index int) (result int16, typeCode int, dataSize int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAESizeOfNthItem == nil {
+		ebipurego.RegisterLibFunc(&_fnAESizeOfNthItem, _lib, "AESizeOfNthItem")
+	}
+	var _out0 int
+	var _out1 int
+	_ret := _fnAESizeOfNthItem(theAEDescList, index, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
+}
+
+var _fnAESizeOfParam func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int16
+
+// AESizeOfParam calls the AE framework function AESizeOfParam.
+func AESizeOfParam(theAppleEvent unsafe.Pointer, theAEKeyword int) (result int16, typeCode int, dataSize int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAESizeOfParam == nil {
+		ebipurego.RegisterLibFunc(&_fnAESizeOfParam, _lib, "AESizeOfParam")
+	}
+	var _out0 int
+	var _out1 int
+	_ret := _fnAESizeOfParam(theAppleEvent, theAEKeyword, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
+}
+
+var _fnAEStreamClose func(objc.ID, unsafe.Pointer) int32
+
+// AEStreamClose calls the AE framework function AEStreamClose.
+func AEStreamClose(ref obj.Object, desc unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamClose == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamClose, _lib, "AEStreamClose")
+	}
+	return int(_fnAEStreamClose(objref.IDOf(ref), desc))
 }
 
 var _fnAEStreamCreateEvent func(int, int, int, unsafe.Pointer, int, int16, int) objc.ID
@@ -251,6 +786,106 @@ func AEStreamOpen() obj.Object {
 	}
 	_ret := _fnAEStreamOpen()
 	return obj.Wrap(_ret)
+}
+
+var _fnAEStreamOpenEvent func(unsafe.Pointer) objc.ID
+
+// AEStreamOpenEvent calls the AE framework function AEStreamOpenEvent.
+func AEStreamOpenEvent(event unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamOpenEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamOpenEvent, _lib, "AEStreamOpenEvent")
+	}
+	_ret := _fnAEStreamOpenEvent(event)
+	return obj.Wrap(_ret)
+}
+
+var _fnAEStreamWriteAEDesc func(objc.ID, unsafe.Pointer) int32
+
+// AEStreamWriteAEDesc calls the AE framework function AEStreamWriteAEDesc.
+func AEStreamWriteAEDesc(ref obj.Object, desc unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamWriteAEDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamWriteAEDesc, _lib, "AEStreamWriteAEDesc")
+	}
+	return int(_fnAEStreamWriteAEDesc(objref.IDOf(ref), desc))
+}
+
+var _fnAEUnflattenDesc func(unsafe.Pointer, unsafe.Pointer) int32
+
+// AEUnflattenDesc calls the AE framework function AEUnflattenDesc.
+func AEUnflattenDesc(buffer unsafe.Pointer, result unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEUnflattenDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEUnflattenDesc, _lib, "AEUnflattenDesc")
+	}
+	return int(_fnAEUnflattenDesc(buffer, result))
+}
+
+var _fnAEUnflattenDescFromBytes func(unsafe.Pointer, int, unsafe.Pointer) int32
+
+// AEUnflattenDescFromBytes calls the AE framework function AEUnflattenDescFromBytes.
+func AEUnflattenDescFromBytes(buffer unsafe.Pointer, bufferLen int, result unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEUnflattenDescFromBytes == nil {
+		ebipurego.RegisterLibFunc(&_fnAEUnflattenDescFromBytes, _lib, "AEUnflattenDescFromBytes")
+	}
+	return int(_fnAEUnflattenDescFromBytes(buffer, bufferLen, result))
+}
+
+var _fnCreateCompDescriptor func(int, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer) int16
+
+// CreateCompDescriptor calls the AE framework function CreateCompDescriptor.
+func CreateCompDescriptor(comparisonOperator int, operand1 unsafe.Pointer, operand2 unsafe.Pointer, disposeInputs uint8, theDescriptor unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateCompDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateCompDescriptor, _lib, "CreateCompDescriptor")
+	}
+	return _fnCreateCompDescriptor(comparisonOperator, operand1, operand2, disposeInputs, theDescriptor)
+}
+
+var _fnCreateLogicalDescriptor func(unsafe.Pointer, int, uint8, unsafe.Pointer) int16
+
+// CreateLogicalDescriptor calls the AE framework function CreateLogicalDescriptor.
+func CreateLogicalDescriptor(theLogicalTerms unsafe.Pointer, theLogicOperator int, disposeInputs uint8, theDescriptor unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateLogicalDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateLogicalDescriptor, _lib, "CreateLogicalDescriptor")
+	}
+	return _fnCreateLogicalDescriptor(theLogicalTerms, theLogicOperator, disposeInputs, theDescriptor)
+}
+
+var _fnCreateObjSpecifier func(int, unsafe.Pointer, int, unsafe.Pointer, uint8, unsafe.Pointer) int16
+
+// CreateObjSpecifier calls the AE framework function CreateObjSpecifier.
+func CreateObjSpecifier(desiredClass int, theContainer unsafe.Pointer, keyForm int, keyData unsafe.Pointer, disposeInputs uint8, objSpecifier unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateObjSpecifier == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateObjSpecifier, _lib, "CreateObjSpecifier")
+	}
+	return _fnCreateObjSpecifier(desiredClass, theContainer, keyForm, keyData, disposeInputs, objSpecifier)
+}
+
+var _fnCreateOffsetDescriptor func(int, unsafe.Pointer) int16
+
+// CreateOffsetDescriptor calls the AE framework function CreateOffsetDescriptor.
+func CreateOffsetDescriptor(theOffset int, theDescriptor unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateOffsetDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateOffsetDescriptor, _lib, "CreateOffsetDescriptor")
+	}
+	return _fnCreateOffsetDescriptor(theOffset, theDescriptor)
+}
+
+var _fnCreateRangeDescriptor func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer) int16
+
+// CreateRangeDescriptor calls the AE framework function CreateRangeDescriptor.
+func CreateRangeDescriptor(rangeStart unsafe.Pointer, rangeStop unsafe.Pointer, disposeInputs uint8, theDescriptor unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateRangeDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateRangeDescriptor, _lib, "CreateRangeDescriptor")
+	}
+	return _fnCreateRangeDescriptor(rangeStart, rangeStop, disposeInputs, theDescriptor)
 }
 
 var _fnDisposeAECoerceDescUPP func(unsafe.Pointer)
@@ -385,6 +1020,28 @@ func DisposeOSLMarkUPP(userUPP unsafe.Pointer) {
 	_fnDisposeOSLMarkUPP(userUPP)
 }
 
+var _fnInvokeAECoerceDescUPP func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+
+// InvokeAECoerceDescUPP calls the AE framework function InvokeAECoerceDescUPP.
+func InvokeAECoerceDescUPP(fromDesc unsafe.Pointer, toType int, handlerRefcon unsafe.Pointer, toDesc unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeAECoerceDescUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeAECoerceDescUPP, _lib, "InvokeAECoerceDescUPP")
+	}
+	return _fnInvokeAECoerceDescUPP(fromDesc, toType, handlerRefcon, toDesc, userUPP)
+}
+
+var _fnInvokeAECoercePtrUPP func(int, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+
+// InvokeAECoercePtrUPP calls the AE framework function InvokeAECoercePtrUPP.
+func InvokeAECoercePtrUPP(typeCode int, dataPtr unsafe.Pointer, dataSize int, toType int, handlerRefcon unsafe.Pointer, result unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeAECoercePtrUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeAECoercePtrUPP, _lib, "InvokeAECoercePtrUPP")
+	}
+	return _fnInvokeAECoercePtrUPP(typeCode, dataPtr, dataSize, toType, handlerRefcon, result, userUPP)
+}
+
 var _fnInvokeAEDisposeExternalUPP func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
 
 // InvokeAEDisposeExternalUPP calls the AE framework function InvokeAEDisposeExternalUPP.
@@ -394,4 +1051,146 @@ func InvokeAEDisposeExternalUPP(dataPtr unsafe.Pointer, dataLength int, refcon u
 		ebipurego.RegisterLibFunc(&_fnInvokeAEDisposeExternalUPP, _lib, "InvokeAEDisposeExternalUPP")
 	}
 	_fnInvokeAEDisposeExternalUPP(dataPtr, dataLength, refcon, userUPP)
+}
+
+var _fnInvokeAEEventHandlerUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+
+// InvokeAEEventHandlerUPP calls the AE framework function InvokeAEEventHandlerUPP.
+func InvokeAEEventHandlerUPP(theAppleEvent unsafe.Pointer, reply unsafe.Pointer, handlerRefcon unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeAEEventHandlerUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeAEEventHandlerUPP, _lib, "InvokeAEEventHandlerUPP")
+	}
+	return _fnInvokeAEEventHandlerUPP(theAppleEvent, reply, handlerRefcon, userUPP)
+}
+
+var _fnInvokeOSLAccessorUPP func(int, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+
+// InvokeOSLAccessorUPP calls the AE framework function InvokeOSLAccessorUPP.
+func InvokeOSLAccessorUPP(desiredClass int, container unsafe.Pointer, containerClass int, form int, selectionData unsafe.Pointer, value unsafe.Pointer, accessorRefcon unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeOSLAccessorUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeOSLAccessorUPP, _lib, "InvokeOSLAccessorUPP")
+	}
+	return _fnInvokeOSLAccessorUPP(desiredClass, container, containerClass, form, selectionData, value, accessorRefcon, userUPP)
+}
+
+var _fnInvokeOSLAdjustMarksUPP func(int, int, unsafe.Pointer, unsafe.Pointer) int16
+
+// InvokeOSLAdjustMarksUPP calls the AE framework function InvokeOSLAdjustMarksUPP.
+func InvokeOSLAdjustMarksUPP(newStart int, newStop int, markToken unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeOSLAdjustMarksUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeOSLAdjustMarksUPP, _lib, "InvokeOSLAdjustMarksUPP")
+	}
+	return _fnInvokeOSLAdjustMarksUPP(newStart, newStop, markToken, userUPP)
+}
+
+var _fnInvokeOSLCompareUPP func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+
+// InvokeOSLCompareUPP calls the AE framework function InvokeOSLCompareUPP.
+func InvokeOSLCompareUPP(oper int, obj1 unsafe.Pointer, obj2 unsafe.Pointer, userUPP unsafe.Pointer) (result int16, result_ uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeOSLCompareUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeOSLCompareUPP, _lib, "InvokeOSLCompareUPP")
+	}
+	var _out0 uint8
+	_ret := _fnInvokeOSLCompareUPP(oper, obj1, obj2, unsafe.Pointer(&_out0), userUPP)
+	return _ret, _out0
+}
+
+var _fnInvokeOSLCountUPP func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+
+// InvokeOSLCountUPP calls the AE framework function InvokeOSLCountUPP.
+func InvokeOSLCountUPP(desiredType int, containerClass int, container unsafe.Pointer, userUPP unsafe.Pointer) (result int16, result_ int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeOSLCountUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeOSLCountUPP, _lib, "InvokeOSLCountUPP")
+	}
+	var _out0 int64
+	_ret := _fnInvokeOSLCountUPP(desiredType, containerClass, container, unsafe.Pointer(&_out0), userUPP)
+	return _ret, _out0
+}
+
+var _fnInvokeOSLDisposeTokenUPP func(unsafe.Pointer, unsafe.Pointer) int16
+
+// InvokeOSLDisposeTokenUPP calls the AE framework function InvokeOSLDisposeTokenUPP.
+func InvokeOSLDisposeTokenUPP(unneededToken unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeOSLDisposeTokenUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeOSLDisposeTokenUPP, _lib, "InvokeOSLDisposeTokenUPP")
+	}
+	return _fnInvokeOSLDisposeTokenUPP(unneededToken, userUPP)
+}
+
+var _fnInvokeOSLGetErrDescUPP func(unsafe.Pointer, unsafe.Pointer) int16
+
+// InvokeOSLGetErrDescUPP calls the AE framework function InvokeOSLGetErrDescUPP.
+func InvokeOSLGetErrDescUPP(appDescPtr unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeOSLGetErrDescUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeOSLGetErrDescUPP, _lib, "InvokeOSLGetErrDescUPP")
+	}
+	return _fnInvokeOSLGetErrDescUPP(appDescPtr, userUPP)
+}
+
+var _fnInvokeOSLGetMarkTokenUPP func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int16
+
+// InvokeOSLGetMarkTokenUPP calls the AE framework function InvokeOSLGetMarkTokenUPP.
+func InvokeOSLGetMarkTokenUPP(dContainerToken unsafe.Pointer, containerClass int, result unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeOSLGetMarkTokenUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeOSLGetMarkTokenUPP, _lib, "InvokeOSLGetMarkTokenUPP")
+	}
+	return _fnInvokeOSLGetMarkTokenUPP(dContainerToken, containerClass, result, userUPP)
+}
+
+var _fnInvokeOSLMarkUPP func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int16
+
+// InvokeOSLMarkUPP calls the AE framework function InvokeOSLMarkUPP.
+func InvokeOSLMarkUPP(dToken unsafe.Pointer, markToken unsafe.Pointer, index int, userUPP unsafe.Pointer) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeOSLMarkUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeOSLMarkUPP, _lib, "InvokeOSLMarkUPP")
+	}
+	return _fnInvokeOSLMarkUPP(dToken, markToken, index, userUPP)
+}
+
+var _fnVAEBuildAppleEvent func(int, int, int, unsafe.Pointer, int, int16, int, unsafe.Pointer, unsafe.Pointer, string, string) int32
+
+// VAEBuildAppleEvent calls the AE framework function vAEBuildAppleEvent.
+func VAEBuildAppleEvent(theClass int, theID int, addressType int, addressData unsafe.Pointer, addressLength int, returnID int16, transactionID int, resultEvt unsafe.Pointer, paramsFmt string, args string) (result int, err AEBuildError) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVAEBuildAppleEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnVAEBuildAppleEvent, _lib, "vAEBuildAppleEvent")
+	}
+	var _out0 AEBuildError
+	_ret := int(_fnVAEBuildAppleEvent(theClass, theID, addressType, addressData, addressLength, returnID, transactionID, resultEvt, unsafe.Pointer(&_out0), paramsFmt, args))
+	return _ret, _out0
+}
+
+var _fnVAEBuildDesc func(unsafe.Pointer, unsafe.Pointer, string, string) int32
+
+// VAEBuildDesc calls the AE framework function vAEBuildDesc.
+func VAEBuildDesc(dst unsafe.Pointer, src string, args string) (result int, err AEBuildError) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVAEBuildDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnVAEBuildDesc, _lib, "vAEBuildDesc")
+	}
+	var _out0 AEBuildError
+	_ret := int(_fnVAEBuildDesc(dst, unsafe.Pointer(&_out0), src, args))
+	return _ret, _out0
+}
+
+var _fnVAEBuildParameters func(unsafe.Pointer, unsafe.Pointer, string, string) int32
+
+// VAEBuildParameters calls the AE framework function vAEBuildParameters.
+func VAEBuildParameters(event unsafe.Pointer, format string, args string) (result int, err AEBuildError) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVAEBuildParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnVAEBuildParameters, _lib, "vAEBuildParameters")
+	}
+	var _out0 AEBuildError
+	_ret := int(_fnVAEBuildParameters(event, unsafe.Pointer(&_out0), format, args))
+	return _ret, _out0
 }

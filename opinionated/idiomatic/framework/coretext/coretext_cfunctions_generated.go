@@ -431,6 +431,42 @@ func CTFontCopyVariationAxes(font obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnCTFontCreateCopyWithAttributes func(objc.ID, float64, unsafe.Pointer, objc.ID) objc.ID
+
+// CTFontCreateCopyWithAttributes calls the CoreText framework function CTFontCreateCopyWithAttributes.
+func CTFontCreateCopyWithAttributes(font obj.Object, size float64, matrix unsafe.Pointer, attributes obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontCreateCopyWithAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontCreateCopyWithAttributes, _lib, "CTFontCreateCopyWithAttributes")
+	}
+	_ret := _fnCTFontCreateCopyWithAttributes(objref.IDOf(font), size, matrix, objref.IDOf(attributes))
+	return obj.Wrap(_ret)
+}
+
+var _fnCTFontCreateCopyWithFamily func(objc.ID, float64, unsafe.Pointer, objc.ID) objc.ID
+
+// CTFontCreateCopyWithFamily calls the CoreText framework function CTFontCreateCopyWithFamily.
+func CTFontCreateCopyWithFamily(font obj.Object, size float64, matrix unsafe.Pointer, family obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontCreateCopyWithFamily == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontCreateCopyWithFamily, _lib, "CTFontCreateCopyWithFamily")
+	}
+	_ret := _fnCTFontCreateCopyWithFamily(objref.IDOf(font), size, matrix, objref.IDOf(family))
+	return obj.Wrap(_ret)
+}
+
+var _fnCTFontCreateCopyWithSymbolicTraits func(objc.ID, float64, unsafe.Pointer, CTFontSymbolicTraits, CTFontSymbolicTraits) objc.ID
+
+// CTFontCreateCopyWithSymbolicTraits calls the CoreText framework function CTFontCreateCopyWithSymbolicTraits.
+func CTFontCreateCopyWithSymbolicTraits(font obj.Object, size float64, matrix unsafe.Pointer, symTraitValue CTFontSymbolicTraits, symTraitMask CTFontSymbolicTraits) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontCreateCopyWithSymbolicTraits == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontCreateCopyWithSymbolicTraits, _lib, "CTFontCreateCopyWithSymbolicTraits")
+	}
+	_ret := _fnCTFontCreateCopyWithSymbolicTraits(objref.IDOf(font), size, matrix, symTraitValue, symTraitMask)
+	return obj.Wrap(_ret)
+}
+
 var _fnCTFontCreateForString func(objc.ID, objc.ID, corefoundation.CFRange) objc.ID
 
 // CTFontCreateForString calls the CoreText framework function CTFontCreateForString.
@@ -455,6 +491,18 @@ func CTFontCreateForStringWithLanguage(currentFont obj.Object, str obj.Object, r
 	return obj.Wrap(_ret)
 }
 
+var _fnCTFontCreatePathForGlyph func(objc.ID, uint16, unsafe.Pointer) objc.ID
+
+// CTFontCreatePathForGlyph calls the CoreText framework function CTFontCreatePathForGlyph.
+func CTFontCreatePathForGlyph(font obj.Object, glyph uint16, matrix unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontCreatePathForGlyph == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontCreatePathForGlyph, _lib, "CTFontCreatePathForGlyph")
+	}
+	_ret := _fnCTFontCreatePathForGlyph(objref.IDOf(font), glyph, matrix)
+	return obj.Wrap(_ret)
+}
+
 var _fnCTFontCreateUIFontForLanguage func(CTFontUIFontType, float64, objc.ID) objc.ID
 
 // CTFontCreateUIFontForLanguage calls the CoreText framework function CTFontCreateUIFontForLanguage.
@@ -464,6 +512,78 @@ func CTFontCreateUIFontForLanguage(uiType CTFontUIFontType, size float64, langua
 		ebipurego.RegisterLibFunc(&_fnCTFontCreateUIFontForLanguage, _lib, "CTFontCreateUIFontForLanguage")
 	}
 	_ret := _fnCTFontCreateUIFontForLanguage(uiType, size, objref.IDOf(language))
+	return obj.Wrap(_ret)
+}
+
+var _fnCTFontCreateWithFontDescriptor func(objc.ID, float64, unsafe.Pointer) objc.ID
+
+// CTFontCreateWithFontDescriptor calls the CoreText framework function CTFontCreateWithFontDescriptor.
+func CTFontCreateWithFontDescriptor(descriptor obj.Object, size float64, matrix unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontCreateWithFontDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontCreateWithFontDescriptor, _lib, "CTFontCreateWithFontDescriptor")
+	}
+	_ret := _fnCTFontCreateWithFontDescriptor(objref.IDOf(descriptor), size, matrix)
+	return obj.Wrap(_ret)
+}
+
+var _fnCTFontCreateWithFontDescriptorAndOptions func(objc.ID, float64, unsafe.Pointer, CTFontOptions) objc.ID
+
+// CTFontCreateWithFontDescriptorAndOptions calls the CoreText framework function CTFontCreateWithFontDescriptorAndOptions.
+func CTFontCreateWithFontDescriptorAndOptions(descriptor obj.Object, size float64, matrix unsafe.Pointer, options CTFontOptions) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontCreateWithFontDescriptorAndOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontCreateWithFontDescriptorAndOptions, _lib, "CTFontCreateWithFontDescriptorAndOptions")
+	}
+	_ret := _fnCTFontCreateWithFontDescriptorAndOptions(objref.IDOf(descriptor), size, matrix, options)
+	return obj.Wrap(_ret)
+}
+
+var _fnCTFontCreateWithGraphicsFont func(objc.ID, float64, unsafe.Pointer, objc.ID) objc.ID
+
+// CTFontCreateWithGraphicsFont calls the CoreText framework function CTFontCreateWithGraphicsFont.
+func CTFontCreateWithGraphicsFont(graphicsFont obj.Object, size float64, matrix unsafe.Pointer, attributes obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontCreateWithGraphicsFont == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontCreateWithGraphicsFont, _lib, "CTFontCreateWithGraphicsFont")
+	}
+	_ret := _fnCTFontCreateWithGraphicsFont(objref.IDOf(graphicsFont), size, matrix, objref.IDOf(attributes))
+	return obj.Wrap(_ret)
+}
+
+var _fnCTFontCreateWithName func(objc.ID, float64, unsafe.Pointer) objc.ID
+
+// CTFontCreateWithName calls the CoreText framework function CTFontCreateWithName.
+func CTFontCreateWithName(name obj.Object, size float64, matrix unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontCreateWithName == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontCreateWithName, _lib, "CTFontCreateWithName")
+	}
+	_ret := _fnCTFontCreateWithName(objref.IDOf(name), size, matrix)
+	return obj.Wrap(_ret)
+}
+
+var _fnCTFontCreateWithNameAndOptions func(objc.ID, float64, unsafe.Pointer, CTFontOptions) objc.ID
+
+// CTFontCreateWithNameAndOptions calls the CoreText framework function CTFontCreateWithNameAndOptions.
+func CTFontCreateWithNameAndOptions(name obj.Object, size float64, matrix unsafe.Pointer, options CTFontOptions) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontCreateWithNameAndOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontCreateWithNameAndOptions, _lib, "CTFontCreateWithNameAndOptions")
+	}
+	_ret := _fnCTFontCreateWithNameAndOptions(objref.IDOf(name), size, matrix, options)
+	return obj.Wrap(_ret)
+}
+
+var _fnCTFontCreateWithPlatformFont func(int, float64, unsafe.Pointer, objc.ID) objc.ID
+
+// CTFontCreateWithPlatformFont calls the CoreText framework function CTFontCreateWithPlatformFont.
+func CTFontCreateWithPlatformFont(platformFont int, size float64, matrix unsafe.Pointer, attributes obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontCreateWithPlatformFont == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontCreateWithPlatformFont, _lib, "CTFontCreateWithPlatformFont")
+	}
+	_ret := _fnCTFontCreateWithPlatformFont(platformFont, size, matrix, objref.IDOf(attributes))
 	return obj.Wrap(_ret)
 }
 
@@ -635,6 +755,17 @@ func CTFontDescriptorGetTypeID() int {
 	return _fnCTFontDescriptorGetTypeID()
 }
 
+var _fnCTFontDescriptorMatchFontDescriptorsWithProgressHandler func(objc.ID, objc.ID, unsafe.Pointer) bool
+
+// CTFontDescriptorMatchFontDescriptorsWithProgressHandler calls the CoreText framework function CTFontDescriptorMatchFontDescriptorsWithProgressHandler.
+func CTFontDescriptorMatchFontDescriptorsWithProgressHandler(descriptors obj.Object, mandatoryAttributes obj.Object, progressBlock unsafe.Pointer) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontDescriptorMatchFontDescriptorsWithProgressHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorMatchFontDescriptorsWithProgressHandler, _lib, "CTFontDescriptorMatchFontDescriptorsWithProgressHandler")
+	}
+	return _fnCTFontDescriptorMatchFontDescriptorsWithProgressHandler(objref.IDOf(descriptors), objref.IDOf(mandatoryAttributes), progressBlock)
+}
+
 var _fnCTFontDrawGlyphs func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, objc.ID)
 
 // CTFontDrawGlyphs calls the CoreText framework function CTFontDrawGlyphs.
@@ -646,6 +777,17 @@ func CTFontDrawGlyphs(font obj.Object, positions unsafe.Pointer, count int, cont
 	var _out0 uint16
 	_fnCTFontDrawGlyphs(objref.IDOf(font), unsafe.Pointer(&_out0), positions, count, objref.IDOf(context_))
 	return _out0
+}
+
+var _fnCTFontDrawImageFromAdaptiveImageProviderAtPoint func(objc.ID, unsafe.Pointer, corefoundation.CGPoint, objc.ID)
+
+// CTFontDrawImageFromAdaptiveImageProviderAtPoint calls the CoreText framework function CTFontDrawImageFromAdaptiveImageProviderAtPoint.
+func CTFontDrawImageFromAdaptiveImageProviderAtPoint(font obj.Object, provider unsafe.Pointer, point corefoundation.CGPoint, context_ obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontDrawImageFromAdaptiveImageProviderAtPoint == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontDrawImageFromAdaptiveImageProviderAtPoint, _lib, "CTFontDrawImageFromAdaptiveImageProviderAtPoint")
+	}
+	_fnCTFontDrawImageFromAdaptiveImageProviderAtPoint(objref.IDOf(font), provider, point, objref.IDOf(context_))
 }
 
 var _fnCTFontGetAdvancesForGlyphs func(objc.ID, CTFontOrientation, unsafe.Pointer, unsafe.Pointer, int) float64
@@ -867,6 +1009,17 @@ func CTFontGetTypeID() int {
 	return _fnCTFontGetTypeID()
 }
 
+var _fnCTFontGetTypographicBoundsForAdaptiveImageProvider func(objc.ID, unsafe.Pointer) corefoundation.CGRect
+
+// CTFontGetTypographicBoundsForAdaptiveImageProvider calls the CoreText framework function CTFontGetTypographicBoundsForAdaptiveImageProvider.
+func CTFontGetTypographicBoundsForAdaptiveImageProvider(font obj.Object, provider unsafe.Pointer) corefoundation.CGRect {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontGetTypographicBoundsForAdaptiveImageProvider == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontGetTypographicBoundsForAdaptiveImageProvider, _lib, "CTFontGetTypographicBoundsForAdaptiveImageProvider")
+	}
+	return _fnCTFontGetTypographicBoundsForAdaptiveImageProvider(objref.IDOf(font), provider)
+}
+
 var _fnCTFontGetUIFontType func(objc.ID) CTFontUIFontType
 
 // CTFontGetUIFontType calls the CoreText framework function CTFontGetUIFontType.
@@ -1018,6 +1171,18 @@ func CTFontManagerCreateFontDescriptorsFromURL(fileURL obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnCTFontManagerCreateFontRequestRunLoopSource func(int, unsafe.Pointer) objc.ID
+
+// CTFontManagerCreateFontRequestRunLoopSource calls the CoreText framework function CTFontManagerCreateFontRequestRunLoopSource.
+func CTFontManagerCreateFontRequestRunLoopSource(sourceOrder int, createMatchesCallback unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontManagerCreateFontRequestRunLoopSource == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontManagerCreateFontRequestRunLoopSource, _lib, "CTFontManagerCreateFontRequestRunLoopSource")
+	}
+	_ret := _fnCTFontManagerCreateFontRequestRunLoopSource(sourceOrder, createMatchesCallback)
+	return obj.Wrap(_ret)
+}
+
 var _fnCTFontManagerEnableFontDescriptors func(objc.ID, bool)
 
 // CTFontManagerEnableFontDescriptors calls the CoreText framework function CTFontManagerEnableFontDescriptors.
@@ -1062,6 +1227,28 @@ func CTFontManagerIsSupportedFont(fontURL obj.Object) bool {
 	return _fnCTFontManagerIsSupportedFont(objref.IDOf(fontURL))
 }
 
+var _fnCTFontManagerRegisterFontDescriptors func(objc.ID, CTFontManagerScope, bool, unsafe.Pointer)
+
+// CTFontManagerRegisterFontDescriptors calls the CoreText framework function CTFontManagerRegisterFontDescriptors.
+func CTFontManagerRegisterFontDescriptors(fontDescriptors obj.Object, scope CTFontManagerScope, enabled bool, registrationHandler unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontManagerRegisterFontDescriptors == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontManagerRegisterFontDescriptors, _lib, "CTFontManagerRegisterFontDescriptors")
+	}
+	_fnCTFontManagerRegisterFontDescriptors(objref.IDOf(fontDescriptors), scope, enabled, registrationHandler)
+}
+
+var _fnCTFontManagerRegisterFontURLs func(objc.ID, CTFontManagerScope, bool, unsafe.Pointer)
+
+// CTFontManagerRegisterFontURLs calls the CoreText framework function CTFontManagerRegisterFontURLs.
+func CTFontManagerRegisterFontURLs(fontURLs obj.Object, scope CTFontManagerScope, enabled bool, registrationHandler unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontManagerRegisterFontURLs == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontManagerRegisterFontURLs, _lib, "CTFontManagerRegisterFontURLs")
+	}
+	_fnCTFontManagerRegisterFontURLs(objref.IDOf(fontURLs), scope, enabled, registrationHandler)
+}
+
 var _fnCTFontManagerRegisterFontsForURLs func(objc.ID, CTFontManagerScope, unsafe.Pointer) bool
 
 // CTFontManagerRegisterFontsForURLs calls the CoreText framework function CTFontManagerRegisterFontsForURLs.
@@ -1082,6 +1269,28 @@ func CTFontManagerSetAutoActivationSetting(bundleIdentifier obj.Object, setting 
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerSetAutoActivationSetting, _lib, "CTFontManagerSetAutoActivationSetting")
 	}
 	_fnCTFontManagerSetAutoActivationSetting(objref.IDOf(bundleIdentifier), setting)
+}
+
+var _fnCTFontManagerUnregisterFontDescriptors func(objc.ID, CTFontManagerScope, unsafe.Pointer)
+
+// CTFontManagerUnregisterFontDescriptors calls the CoreText framework function CTFontManagerUnregisterFontDescriptors.
+func CTFontManagerUnregisterFontDescriptors(fontDescriptors obj.Object, scope CTFontManagerScope, registrationHandler unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontManagerUnregisterFontDescriptors == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontManagerUnregisterFontDescriptors, _lib, "CTFontManagerUnregisterFontDescriptors")
+	}
+	_fnCTFontManagerUnregisterFontDescriptors(objref.IDOf(fontDescriptors), scope, registrationHandler)
+}
+
+var _fnCTFontManagerUnregisterFontURLs func(objc.ID, CTFontManagerScope, unsafe.Pointer)
+
+// CTFontManagerUnregisterFontURLs calls the CoreText framework function CTFontManagerUnregisterFontURLs.
+func CTFontManagerUnregisterFontURLs(fontURLs obj.Object, scope CTFontManagerScope, registrationHandler unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontManagerUnregisterFontURLs == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontManagerUnregisterFontURLs, _lib, "CTFontManagerUnregisterFontURLs")
+	}
+	_fnCTFontManagerUnregisterFontURLs(objref.IDOf(fontURLs), scope, registrationHandler)
 }
 
 var _fnCTFontManagerUnregisterFontsForURLs func(objc.ID, CTFontManagerScope, unsafe.Pointer) bool
@@ -1116,6 +1325,17 @@ func CTFrameGetFrameAttributes(frame obj.Object) obj.Object {
 	}
 	_ret := _fnCTFrameGetFrameAttributes(objref.IDOf(frame))
 	return obj.Wrap(_ret)
+}
+
+var _fnCTFrameGetLineOrigins func(objc.ID, corefoundation.CFRange, unsafe.Pointer)
+
+// CTFrameGetLineOrigins calls the CoreText framework function CTFrameGetLineOrigins.
+func CTFrameGetLineOrigins(frame obj.Object, range_ corefoundation.CFRange, origins unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFrameGetLineOrigins == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFrameGetLineOrigins, _lib, "CTFrameGetLineOrigins")
+	}
+	_fnCTFrameGetLineOrigins(objref.IDOf(frame), range_, origins)
 }
 
 var _fnCTFrameGetLines func(objc.ID) objc.ID
@@ -1232,6 +1452,17 @@ func CTFramesetterGetTypesetter(framesetter obj.Object) obj.Object {
 	}
 	_ret := _fnCTFramesetterGetTypesetter(objref.IDOf(framesetter))
 	return obj.Wrap(_ret)
+}
+
+var _fnCTFramesetterSuggestFrameSizeWithConstraints func(objc.ID, corefoundation.CFRange, objc.ID, corefoundation.CGSize, unsafe.Pointer) corefoundation.CGSize
+
+// CTFramesetterSuggestFrameSizeWithConstraints calls the CoreText framework function CTFramesetterSuggestFrameSizeWithConstraints.
+func CTFramesetterSuggestFrameSizeWithConstraints(framesetter obj.Object, stringRange corefoundation.CFRange, frameAttributes obj.Object, constraints corefoundation.CGSize, fitRange unsafe.Pointer) corefoundation.CGSize {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFramesetterSuggestFrameSizeWithConstraints == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFramesetterSuggestFrameSizeWithConstraints, _lib, "CTFramesetterSuggestFrameSizeWithConstraints")
+	}
+	return _fnCTFramesetterSuggestFrameSizeWithConstraints(objref.IDOf(framesetter), stringRange, objref.IDOf(frameAttributes), constraints, fitRange)
 }
 
 var _fnCTGetCoreTextVersion func() uint32
@@ -1382,6 +1613,17 @@ func CTLineDraw(line obj.Object, context_ obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnCTLineDraw, _lib, "CTLineDraw")
 	}
 	_fnCTLineDraw(objref.IDOf(line), objref.IDOf(context_))
+}
+
+var _fnCTLineEnumerateCaretOffsets func(objc.ID, unsafe.Pointer)
+
+// CTLineEnumerateCaretOffsets calls the CoreText framework function CTLineEnumerateCaretOffsets.
+func CTLineEnumerateCaretOffsets(line obj.Object, block unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTLineEnumerateCaretOffsets == nil {
+		ebipurego.RegisterLibFunc(&_fnCTLineEnumerateCaretOffsets, _lib, "CTLineEnumerateCaretOffsets")
+	}
+	_fnCTLineEnumerateCaretOffsets(objref.IDOf(line), block)
 }
 
 var _fnCTLineGetBoundsWithOptions func(objc.ID, CTLineBoundsOptions) corefoundation.CGRect
@@ -1650,6 +1892,18 @@ func CTRubyAnnotationGetTypeID() int {
 	return _fnCTRubyAnnotationGetTypeID()
 }
 
+var _fnCTRunDelegateCreate func(unsafe.Pointer, unsafe.Pointer) objc.ID
+
+// CTRunDelegateCreate calls the CoreText framework function CTRunDelegateCreate.
+func CTRunDelegateCreate(callbacks unsafe.Pointer, refCon unsafe.Pointer) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTRunDelegateCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCTRunDelegateCreate, _lib, "CTRunDelegateCreate")
+	}
+	_ret := _fnCTRunDelegateCreate(callbacks, refCon)
+	return obj.Wrap(_ret)
+}
+
 var _fnCTRunDelegateGetTypeID func() int
 
 // CTRunDelegateGetTypeID calls the CoreText framework function CTRunDelegateGetTypeID.
@@ -1672,6 +1926,17 @@ func CTRunDraw(run obj.Object, context_ obj.Object, range_ corefoundation.CFRang
 	_fnCTRunDraw(objref.IDOf(run), objref.IDOf(context_), range_)
 }
 
+var _fnCTRunGetAdvances func(objc.ID, corefoundation.CFRange, unsafe.Pointer)
+
+// CTRunGetAdvances calls the CoreText framework function CTRunGetAdvances.
+func CTRunGetAdvances(run obj.Object, range_ corefoundation.CFRange, buffer unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTRunGetAdvances == nil {
+		ebipurego.RegisterLibFunc(&_fnCTRunGetAdvances, _lib, "CTRunGetAdvances")
+	}
+	_fnCTRunGetAdvances(objref.IDOf(run), range_, buffer)
+}
+
 var _fnCTRunGetAttributes func(objc.ID) objc.ID
 
 // CTRunGetAttributes calls the CoreText framework function CTRunGetAttributes.
@@ -1682,6 +1947,17 @@ func CTRunGetAttributes(run obj.Object) obj.Object {
 	}
 	_ret := _fnCTRunGetAttributes(objref.IDOf(run))
 	return obj.Wrap(_ret)
+}
+
+var _fnCTRunGetBaseAdvancesAndOrigins func(objc.ID, corefoundation.CFRange, unsafe.Pointer, unsafe.Pointer)
+
+// CTRunGetBaseAdvancesAndOrigins calls the CoreText framework function CTRunGetBaseAdvancesAndOrigins.
+func CTRunGetBaseAdvancesAndOrigins(runRef obj.Object, range_ corefoundation.CFRange, advancesBuffer unsafe.Pointer, originsBuffer unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTRunGetBaseAdvancesAndOrigins == nil {
+		ebipurego.RegisterLibFunc(&_fnCTRunGetBaseAdvancesAndOrigins, _lib, "CTRunGetBaseAdvancesAndOrigins")
+	}
+	_fnCTRunGetBaseAdvancesAndOrigins(objref.IDOf(runRef), range_, advancesBuffer, originsBuffer)
 }
 
 var _fnCTRunGetGlyphCount func(objc.ID) int
@@ -1717,6 +1993,17 @@ func CTRunGetImageBounds(run obj.Object, context_ obj.Object, range_ corefoundat
 		ebipurego.RegisterLibFunc(&_fnCTRunGetImageBounds, _lib, "CTRunGetImageBounds")
 	}
 	return _fnCTRunGetImageBounds(objref.IDOf(run), objref.IDOf(context_), range_)
+}
+
+var _fnCTRunGetPositions func(objc.ID, corefoundation.CFRange, unsafe.Pointer)
+
+// CTRunGetPositions calls the CoreText framework function CTRunGetPositions.
+func CTRunGetPositions(run obj.Object, range_ corefoundation.CFRange, buffer unsafe.Pointer) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTRunGetPositions == nil {
+		ebipurego.RegisterLibFunc(&_fnCTRunGetPositions, _lib, "CTRunGetPositions")
+	}
+	_fnCTRunGetPositions(objref.IDOf(run), range_, buffer)
 }
 
 var _fnCTRunGetStatus func(objc.ID) CTRunStatus
