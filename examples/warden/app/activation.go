@@ -5,8 +5,8 @@ package app
 import (
 	"errors"
 
-	sysext "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/systemextensions"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	sysext "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/systemextensions"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // ActivateExtension submits an OSSystemExtensionRequest to install/activate the

@@ -18,7 +18,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 func main() {

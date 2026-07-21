@@ -28,11 +28,14 @@ type supportFile struct {
 	rel string // destination relative to the idiomatic root
 }
 
+// The destinations are relative to the bindings root (the parent of the
+// idiomatic framework output dir): private support packages under internal/,
+// public runtime helpers under runtime/.
 var supportFiles = []supportFile{
 	{src: "objref.txt", rel: "internal/objref/objref_generated.go"},
-	{src: "rt.txt", rel: "rt/rt_generated.go"},
-	{src: "errkit.txt", rel: "errkit/errkit_generated.go"},
-	{src: "obj.txt", rel: "obj/obj_generated.go"},
+	{src: "rt.txt", rel: "runtime/rt/rt_generated.go"},
+	{src: "errkit.txt", rel: "runtime/errkit/errkit_generated.go"},
+	{src: "obj.txt", rel: "runtime/obj/obj_generated.go"},
 	{src: "dispatch.txt", rel: "internal/dispatch/dispatch_generated.go"},
 	{src: "shim.txt", rel: "internal/shim/shim_generated.go"},
 }

@@ -266,6 +266,12 @@ func recordOpinionatedImports(goType string, m *typemap.Mapper, usedImports map[
 		if packageName == "raw" || packageName == "cgo" || packageName == "unsafe" {
 			continue
 		}
+		if packageName == "bsd" {
+			// bsd stays PUBLIC (see typemap.BsdModulePath), not under the raw
+			// module prefix like the sibling C-library packages.
+			usedImports[packageName] = typemap.BsdModulePath
+			continue
+		}
 		if m.ModulePrefix != "" {
 			usedImports[packageName] = m.ModulePrefix + "/" + packageName
 		}

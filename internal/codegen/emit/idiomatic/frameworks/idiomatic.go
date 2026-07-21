@@ -38,16 +38,19 @@ const (
 	objcImportPath       = "github.com/ebitengine/purego/objc"
 	foundationImportPath = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 
-	// Support packages the generated wrappers depend on.
-	objrefImportPath = "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	objImportPath    = "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
-	rtImportPath     = "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
-	errkitImportPath = "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
-	shimImportPath   = "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
+	// Support packages the generated wrappers depend on. The private ones
+	// (objref, shim, dispatch) live under bindings/internal so external consumers
+	// cannot reach them; the public runtime helpers (obj, rt, errkit) sit beside
+	// the hand-written runtime under bindings/runtime.
+	objrefImportPath = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	objImportPath    = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	rtImportPath     = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
+	errkitImportPath = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
+	shimImportPath   = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
 	// idiomaticFrameworkPrefix is the import-path prefix of the generated
-	// idiomatic framework packages, used to import another framework's value
-	// struct (e.g. corefoundation.CGRect) by name.
-	idiomaticFrameworkPrefix = "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/"
+	// idiomatic framework packages (the public API), used to import another
+	// framework's value struct (e.g. corefoundation.CGRect) by name.
+	idiomaticFrameworkPrefix = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/"
 )
 
 // EmitFrameworkWrappers generates one *_generated.go file per ObjC class in

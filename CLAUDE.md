@@ -116,7 +116,31 @@ All source files under `internal/scanner/` and `cmd/generate/` carry `//go:build
 
 ## Architecture
 
-This project is a **code generator** that reads macOS SDK headers via Clang and emits idiomatic Go packages. It produces the `bindings/frameworks/`, `bindings/libraries/`, and `opinionated/` trees in the same repository.
+> **Repository layout (post-promotion).** The **public API is the idiomatic layer**, and it is the
+> only thing external consumers may import:
+> ```
+> bindings/frameworks/<name>          ← idiomatic ObjC framework wrappers (public)
+> bindings/libraries/<name>           ← idiomatic CGo C-library wrappers (public)
+> bindings/libraries/bsd              ← public POSIX/BSD support (named by library signatures)
+> bindings/runtime/{purego,cgo,blocks,callbacks,obj,rt,errkit}   ← public runtime + support
+> bindings/internal/{objref,shim,dispatch}                       ← private generated support
+> bindings/internal/raw/frameworks/<name>   ← RAW purego bindings (internal; unreachable externally)
+> bindings/internal/raw/libraries/<name>    ← RAW CGo bindings + bridge .h/.m (internal)
+> bindings/acceptance/                ← acceptance tests (under bindings/ so they can import internal raw)
+> opinionated/{tools,custom}          ← hand-written helpers (opinionated/idiomatic is GONE)
+> ```
+> Go's internal-package rule enforces the boundary: only code under `bindings/` can import
+> `bindings/internal/...`, so the raw bindings are invisible to consumers. The idiomatic **frameworks**
+> are hermetic (they never import raw — a generation-time gate enforces it); the idiomatic **libraries**
+> import their raw counterpart under `bindings/internal/raw/libraries` and re-export its types as
+> aliases (`type X = raw.X`), so a consumer names `pkg.X` without importing raw.
+>
+> Emitter output paths: `generate bindings` → `bindings/internal/raw/...`; `generate idiomatic` →
+> `bindings/{frameworks,libraries}` + the support packages. **Sections below that still say
+> `opinionated/idiomatic/...` or `bindings/frameworks` (as the raw output) predate this switch and
+> describe the old locations.**
+
+This project is a **code generator** that reads macOS SDK headers via Clang and emits idiomatic Go packages. It produces the `bindings/` tree (public idiomatic layer, private raw layer under `bindings/internal/raw`) in the same repository.
 
 There are **two generator pipelines**, sharing the scanner and the scanned-metadata model but otherwise independent:
 - **`internal/codegen/frameworks/`** — emits the purego ObjC framework packages (`bindings/frameworks/`) and the idiomatic layer (`opinionated/idiomatic/`). Pure Go, no CGo.

@@ -36,8 +36,19 @@ import (
 )
 
 const (
-	defaultFrameworksModulePrefix = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks"
-	defaultLibrariesModulePrefix  = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries"
+	// The raw (purego/CGo) bindings live under bindings/internal/raw so Go's
+	// internal-package rule makes them unreachable to external consumers. The
+	// idiomatic layer at bindings/{frameworks,libraries} is the only public API.
+	defaultFrameworksModulePrefix = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks"
+	defaultLibrariesModulePrefix  = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries"
+
+	// Filesystem output roots matching the module prefixes above.
+	defaultRawFrameworksOutDir = "./bindings/internal/raw/frameworks"
+	defaultRawLibrariesOutDir  = "./bindings/internal/raw/libraries"
+
+	// The public idiomatic layer's output roots.
+	defaultIdiomaticFrameworksOutDir = "./bindings/frameworks"
+	defaultIdiomaticLibrariesOutDir  = "./bindings/libraries"
 )
 
 func main() {
@@ -98,8 +109,8 @@ func runIdiomatic(args []string) {
 	fs := flag.NewFlagSet("idiomatic", flag.ExitOnError)
 	framework := fs.String("framework", "", `Framework/library(s) to emit: name, comma-separated list, or "all" (default: all)`)
 	metaDir := fs.String("metadata-dir", "./metadata", "Directory containing .gometa.json files")
-	out := fs.String("out", "./opinionated/idiomatic/framework", "Output directory for idiomatic ObjC-framework packages")
-	librariesOut := fs.String("libraries-out", "./opinionated/idiomatic/libraries", "Output directory for idiomatic CGo C-library packages")
+	out := fs.String("out", defaultIdiomaticFrameworksOutDir, "Output directory for idiomatic ObjC-framework packages")
+	librariesOut := fs.String("libraries-out", defaultIdiomaticLibrariesOutDir, "Output directory for idiomatic CGo C-library packages")
 	verbose := fs.Bool("v", false, "Verbose output")
 	_ = fs.Parse(args)
 
@@ -123,10 +134,11 @@ func runIdiomatic(args []string) {
 	// CGo C libraries → opinionated/idiomatic/libraries (CGo pipeline).
 	cgoReg := loadCGORegistry(*metaDir, defaultLibrariesModulePrefix)
 	if err := cgopipeline.GenerateIdiomaticLibraries(cgopipeline.IdiomaticConfig{
-		Registry:  cgoReg,
-		OutDir:    *librariesOut,
-		Libraries: names,
-		Verbose:   *verbose,
+		Registry:      cgoReg,
+		OutDir:        *librariesOut,
+		Libraries:     names,
+		Verbose:       *verbose,
+		RawSourceRoot: defaultRawLibrariesOutDir, // read raw source from bindings/internal/raw/libraries
 	}); err != nil {
 		log.Fatalf("idiomatic (libraries): %v", err)
 	}
@@ -189,8 +201,8 @@ func loadCLibraryRegistry(path string, verbose bool) {
 func runBindings(args []string) {
 	fs := flag.NewFlagSet("bindings", flag.ExitOnError)
 	metaDir := fs.String("metadata-dir", "./metadata", "Directory containing .gometa.json files")
-	frameworksOut := fs.String("frameworks-out", "./bindings/frameworks", "Output directory for purego ObjC framework packages")
-	librariesOut := fs.String("libraries-out", "./bindings/libraries", "Output directory for CGo C library packages")
+	frameworksOut := fs.String("frameworks-out", defaultRawFrameworksOutDir, "Output directory for purego ObjC framework packages")
+	librariesOut := fs.String("libraries-out", defaultRawLibrariesOutDir, "Output directory for CGo C library packages")
 	diagnosticsOut := fs.String("diagnostics", "", "Write type-degradation diagnostics to this JSON file (use to create or refresh the baseline)")
 	diagnosticsBaseline := fs.String("diagnostics-baseline", "", "Fail when a diagnostic appears that is not in this baseline JSON file")
 	verbose := fs.Bool("v", false, "Verbose output")
@@ -276,8 +288,8 @@ func runAll(args []string) {
 	parallel := fs.Int("parallel", runtime.NumCPU(), "Number of frameworks to scan concurrently")
 	metaDir := fs.String("metadata-dir", "./metadata", "Directory for .gometa.json files")
 	arch := fs.String("arch", "arm64", "Target architecture")
-	frameworksOut := fs.String("frameworks-out", "./bindings/frameworks", "Output directory for purego ObjC framework packages")
-	librariesOut := fs.String("libraries-out", "./bindings/libraries", "Output directory for CGo C library packages")
+	frameworksOut := fs.String("frameworks-out", defaultRawFrameworksOutDir, "Output directory for purego ObjC framework packages")
+	librariesOut := fs.String("libraries-out", defaultRawLibrariesOutDir, "Output directory for CGo C library packages")
 	clibraries := fs.String("clibraries", "./metadata/clibraries.json", "C library registry JSON (falls back to built-in defaults when absent)")
 	verbose := fs.Bool("v", false, "Verbose output")
 	_ = fs.Parse(args)

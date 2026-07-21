@@ -124,9 +124,9 @@ func candidatesFromFramework(framework *meta.FrameworkMeta, modulePrefix string)
 	// compile against the idiomatic return types (obj.Object / value types).
 	var importSubdir string
 	if isLib {
-		importSubdir = "opinionated/idiomatic/libraries"
+		importSubdir = "bindings/libraries"
 	} else {
-		importSubdir = "opinionated/idiomatic/framework"
+		importSubdir = "bindings/frameworks"
 	}
 	importPath := modulePrefix + "/" + importSubdir + "/" + pkg
 	needsMainThread := mainThreadFrameworks[framework.Framework]

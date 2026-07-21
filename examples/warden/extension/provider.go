@@ -12,8 +12,8 @@ import (
 	// and, by being imported, loads NetworkExtension.framework so its classes
 	// (NEFilterDataProvider, NEFilterNewFlowVerdict, NEProvider, …) resolve for the
 	// low-level flow inspection done via the runtime below.
-	ne "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/networkextension"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ne "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // ProviderClassName is the ObjC class the network extension's Info.plist names as

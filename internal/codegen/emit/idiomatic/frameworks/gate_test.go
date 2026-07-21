@@ -15,7 +15,7 @@ func TestVerifyHermetic(t *testing.T) {
 
 	clean := `//go:build darwin
 package foundation
-import "github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+import "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 func use() obj.Object { return nil }
 `
 	if err := os.WriteFile(filepath.Join(dir, "clean_generated.go"), []byte(clean), 0o644); err != nil {
@@ -27,7 +27,7 @@ func use() obj.Object { return nil }
 
 	raw := `//go:build darwin
 package foundation
-import raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+import raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 func use() *raw.NSString { return nil }
 `
 	if err := os.WriteFile(filepath.Join(dir, "leaky_generated.go"), []byte(raw), 0o644); err != nil {

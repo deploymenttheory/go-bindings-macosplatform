@@ -141,8 +141,8 @@ func runParity(args []string) {
 // exported symbols (aliases plus ergonomic declarations), printing and returning
 // the raw symbols with no idiomatic counterpart as "library:<pkg>:<name>" keys.
 func reportLibraryParity(limit int) []string {
-	const rawRoot = "bindings/libraries"
-	const idioRoot = "opinionated/idiomatic/libraries"
+	const rawRoot = "bindings/internal/raw/libraries"
+	const idioRoot = "bindings/libraries"
 
 	entries, err := os.ReadDir(rawRoot)
 	if err != nil {

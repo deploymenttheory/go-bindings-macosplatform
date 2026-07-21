@@ -651,11 +651,22 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 	}
 	mapper.IdiomaticClassIndex = idiofw.ComputeIdiomaticClassIndex(emittable, reg.OwnerIndex)
 
-	// Emit the layer's support packages (objref, errkit, rt) first so the whole
-	// idiomatic tree is regenerable from scratch on every run. They are
-	// framework-independent and live at the idiomatic root (the parent of the
-	// per-framework out dir, e.g. opinionated/idiomatic), matching their fixed
-	// import paths opinionated/idiomatic/{errkit,rt,internal/objref}.
+	// On a full regen (no framework filter) wipe the output tree so packages for
+	// frameworks that left the metadata — or the raw packages this public tree
+	// replaced during the switch — do not linger. The support packages and the
+	// raw internal tree are siblings of OutDir (bindings/{internal,runtime}), so
+	// they are untouched.
+	if len(cfg.Frameworks) == 0 {
+		if err := cleanDir(cfg.OutDir); err != nil {
+			return fmt.Errorf("clean idiomatic frameworks dir: %w", err)
+		}
+	}
+
+	// Emit the layer's support packages first so the whole idiomatic tree is
+	// regenerable from scratch on every run. They are framework-independent and
+	// live at the bindings root (the parent of the per-framework out dir): the
+	// private ones under bindings/internal, the public runtime helpers under
+	// bindings/runtime (see idiofw.supportFiles).
 	if err := idiofw.EmitSupportPackages(filepath.Dir(cfg.OutDir)); err != nil {
 		return fmt.Errorf("idiomatic support packages: %w", err)
 	}

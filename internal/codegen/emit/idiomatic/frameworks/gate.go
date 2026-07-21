@@ -10,10 +10,14 @@ import (
 	"strings"
 )
 
-// rawBindingsImportPath is the import path of the raw bindings. The generated
-// idiomatic packages must never import it: they dispatch to Objective-C through
-// the shared runtime instead.
-const rawBindingsImportPath = "bindings/frameworks"
+// rawBindingsImportPath is the import-path root of the raw bindings (now under
+// bindings/internal/raw). The generated idiomatic packages must never import it:
+// they dispatch to Objective-C through the shared runtime instead. The public
+// idiomatic packages themselves live at bindings/frameworks and freely import
+// each other, so the check targets the internal raw root specifically (it does
+// not clash with bindings/internal/objref or a cross-framework
+// bindings/frameworks import).
+const rawBindingsImportPath = "bindings/internal/raw"
 
 // verifyHermetic checks that no generated Go file in outDir imports the raw
 // bindings. It is run after a package is emitted, turning any accidental

@@ -47,6 +47,22 @@ func GenerateIdiomaticLibraries(cfg IdiomaticConfig) error {
 		rawSrcRoot = filepath.Join("bindings", "libraries")
 	}
 
+	// On a full regen (no library filter) drop every library package directory
+	// under OutDir except the public bsd support package, so raw packages this
+	// public tree replaced during the switch — and packages for libraries that
+	// left the metadata — do not linger.
+	if len(filter) == 0 {
+		if entries, err := os.ReadDir(cfg.OutDir); err == nil {
+			for _, ent := range entries {
+				if ent.IsDir() && ent.Name() != "bsd" {
+					if err := os.RemoveAll(filepath.Join(cfg.OutDir, ent.Name())); err != nil {
+						return fmt.Errorf("clean idiomatic library dir %s: %w", ent.Name(), err)
+					}
+				}
+			}
+		}
+	}
+
 	for _, framework := range reg.Frameworks {
 		if framework.LinkLib == "" || framework.IsSwiftOnly {
 			continue // C libraries only

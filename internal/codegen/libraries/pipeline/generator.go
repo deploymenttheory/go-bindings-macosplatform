@@ -58,6 +58,10 @@ type BindingsConfig struct {
 const (
 	defaultBlocksDir    = "bindings/runtime/blocks"
 	defaultCallbacksDir = "bindings/runtime/callbacks"
+	// defaultBsdDir is the PUBLIC location of the POSIX/BSD support package
+	// (see typemap.BsdModulePath) — outside bindings/internal/raw so both the
+	// internal raw libraries and the public idiomatic ones can import it.
+	defaultBsdDir = "bindings/libraries/bsd"
 )
 
 // CustomConfig controls generation of the opinionated/custom layer.
@@ -114,9 +118,11 @@ func GenerateBindings(cfg BindingsConfig) error {
 			return fmt.Errorf("clean libraries dir: %w", err)
 		}
 		// The bsd support package backs the typemap's POSIX/BSD struct
-		// resolution (bsd.Timespec, bsd.EtherAddr, …). The libraries tree is
-		// wiped above, so it is re-emitted on every run.
-		bsdDir := filepath.Join(cfg.LibrariesOutDir, "bsd")
+		// resolution (bsd.Timespec, bsd.EtherAddr, …). It is emitted to its own
+		// PUBLIC location (not under the raw LibrariesOutDir) so both the internal
+		// raw libraries and the public idiomatic ones can import it; re-emitted on
+		// every run.
+		bsdDir := defaultBsdDir
 		if err := os.MkdirAll(bsdDir, 0o755); err != nil {
 			return fmt.Errorf("mkdir bsd package dir: %w", err)
 		}
