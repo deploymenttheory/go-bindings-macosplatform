@@ -6,8 +6,6 @@ package ae
 
 import (
 	"unsafe"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 type AEBuildError struct {
@@ -80,6 +78,3 @@ type WritingCode struct {
 	TheScriptCode int16
 	TheLangCode   int16
 }
-
-// Id is an alias for the objc_object value type.
-type Id = *foundation.ObjcObject

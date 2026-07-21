@@ -8,7 +8,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // This structure describes which streams a given AudioDeviceIOProc will use. It is used in conjunction with kAudioDevicePropertyIOProcStreamUsage.
@@ -30,6 +29,3 @@ type AudioStreamRangedDescription struct {
 	MFormat          coreaudiotypes.AudioStreamBasicDescription
 	MSampleRateRange coreaudiotypes.AudioValueRange
 }
-
-// Id is an alias for the objc_object value type.
-type Id = *foundation.ObjcObject

@@ -6,8 +6,6 @@ package iokit
 
 import (
 	"unsafe"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 type IOAsyncCompletionContent struct {
@@ -55,6 +53,3 @@ type OSNotificationHeader64 struct {
 	Reference [8]uint64
 	Content   unsafe.Pointer
 }
-
-// Id is an alias for the objc_object value type.
-type Id = *foundation.ObjcObject
