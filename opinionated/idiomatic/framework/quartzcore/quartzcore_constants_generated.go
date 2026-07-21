@@ -505,3 +505,9 @@ func KCAValueFunctionTranslateY() obj.Object {
 func KCAValueFunctionTranslateZ() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCAValueFunctionTranslateZ")))
 }
+
+// CATransform3DIdentity returns the address of the symbol CATransform3DIdentity.
+func CATransform3DIdentity() uintptr { return _symbol("CATransform3DIdentity") }
+
+// CAFrameRateRangeDefault returns the address of the symbol CAFrameRateRangeDefault.
+func CAFrameRateRangeDefault() uintptr { return _symbol("CAFrameRateRangeDefault") }

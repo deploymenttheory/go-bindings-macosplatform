@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -174,3 +176,30 @@ func MTLBinaryArchiveDomain() obj.Object {
 
 // MTLIOErrorDomain returns the string constant MTLIOErrorDomain, for use as a dictionary key or argument.
 func MTLIOErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTLIOErrorDomain"))) }
+
+// NSDeviceCertificationiPhonePerformanceGaming returns the value of the constant NSDeviceCertificationiPhonePerformanceGaming.
+func NSDeviceCertificationiPhonePerformanceGaming() int {
+	addr := _symbol("NSDeviceCertificationiPhonePerformanceGaming")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// NSProcessPerformanceProfileDefault returns the value of the constant NSProcessPerformanceProfileDefault.
+func NSProcessPerformanceProfileDefault() int {
+	addr := _symbol("NSProcessPerformanceProfileDefault")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// NSProcessPerformanceProfileSustained returns the value of the constant NSProcessPerformanceProfileSustained.
+func NSProcessPerformanceProfileSustained() int {
+	addr := _symbol("NSProcessPerformanceProfileSustained")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}

@@ -278,12 +278,11 @@ func emitGenericFunctionWrappers(
 			trialNames,
 		)
 		if !rok {
-			mapper.AppendDiagnostic(
-				"%s: idiomatic wrapper for %s left out (the return type is not yet expressible)",
-				framework.Framework,
-				fn.Name,
-			)
-			continue
+			// Degrade an unexpressible return to unsafe.Pointer (a plain scalar-shaped
+			// return whose ABI width is a pointer), rather than dropping the function
+			// — matching the raw layer.
+			retType, kind, wrap = "unsafe.Pointer", kindScalar, ""
+			rimps = map[string]string{"unsafe": "unsafe"}
 		}
 		maps.Copy(fnImports, rimps)
 

@@ -1439,3 +1439,6 @@ func KSCNetworkProtocolTypeSMB() obj.Object {
 func KCFErrorDomainSystemConfiguration() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorDomainSystemConfiguration")))
 }
+
+// KSCNetworkInterfaceIPv4 returns the address of the symbol kSCNetworkInterfaceIPv4.
+func KSCNetworkInterfaceIPv4() uintptr { return _symbol("kSCNetworkInterfaceIPv4") }

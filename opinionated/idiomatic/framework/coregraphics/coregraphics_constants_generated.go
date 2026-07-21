@@ -5,7 +5,10 @@
 package coregraphics
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
@@ -529,3 +532,78 @@ func KCGDisplayShowDuplicateLowResolutionModes() obj.Object {
 func KCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995")))
 }
+
+// CGPointZero returns the value of the constant CGPointZero.
+func CGPointZero() corefoundation.CGPoint {
+	addr := _symbol("CGPointZero")
+	if addr == 0 {
+		return corefoundation.CGPoint{}
+	}
+	return *(*corefoundation.CGPoint)(unsafe.Pointer(addr))
+}
+
+// CGSizeZero returns the value of the constant CGSizeZero.
+func CGSizeZero() corefoundation.CGSize {
+	addr := _symbol("CGSizeZero")
+	if addr == 0 {
+		return corefoundation.CGSize{}
+	}
+	return *(*corefoundation.CGSize)(unsafe.Pointer(addr))
+}
+
+// CGRectZero returns the value of the constant CGRectZero.
+func CGRectZero() corefoundation.CGRect {
+	addr := _symbol("CGRectZero")
+	if addr == 0 {
+		return corefoundation.CGRect{}
+	}
+	return *(*corefoundation.CGRect)(unsafe.Pointer(addr))
+}
+
+// CGRectNull returns the value of the constant CGRectNull.
+func CGRectNull() corefoundation.CGRect {
+	addr := _symbol("CGRectNull")
+	if addr == 0 {
+		return corefoundation.CGRect{}
+	}
+	return *(*corefoundation.CGRect)(unsafe.Pointer(addr))
+}
+
+// CGRectInfinite returns the value of the constant CGRectInfinite.
+func CGRectInfinite() corefoundation.CGRect {
+	addr := _symbol("CGRectInfinite")
+	if addr == 0 {
+		return corefoundation.CGRect{}
+	}
+	return *(*corefoundation.CGRect)(unsafe.Pointer(addr))
+}
+
+// CGAffineTransformIdentity returns the value of the constant CGAffineTransformIdentity.
+func CGAffineTransformIdentity() corefoundation.CGAffineTransform {
+	addr := _symbol("CGAffineTransformIdentity")
+	if addr == 0 {
+		return corefoundation.CGAffineTransform{}
+	}
+	return *(*corefoundation.CGAffineTransform)(unsafe.Pointer(addr))
+}
+
+// KCGDefaultHDRImageContentHeadroom returns the value of the constant kCGDefaultHDRImageContentHeadroom.
+func KCGDefaultHDRImageContentHeadroom() float32 {
+	addr := _symbol("kCGDefaultHDRImageContentHeadroom")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float32)(unsafe.Pointer(addr))
+}
+
+// KCGPDFTagPropertyActualText returns the address of the symbol kCGPDFTagPropertyActualText.
+func KCGPDFTagPropertyActualText() uintptr { return _symbol("kCGPDFTagPropertyActualText") }
+
+// KCGPDFTagPropertyAlternativeText returns the address of the symbol kCGPDFTagPropertyAlternativeText.
+func KCGPDFTagPropertyAlternativeText() uintptr { return _symbol("kCGPDFTagPropertyAlternativeText") }
+
+// KCGPDFTagPropertyTitleText returns the address of the symbol kCGPDFTagPropertyTitleText.
+func KCGPDFTagPropertyTitleText() uintptr { return _symbol("kCGPDFTagPropertyTitleText") }
+
+// KCGPDFTagPropertyLanguageText returns the address of the symbol kCGPDFTagPropertyLanguageText.
+func KCGPDFTagPropertyLanguageText() uintptr { return _symbol("kCGPDFTagPropertyLanguageText") }

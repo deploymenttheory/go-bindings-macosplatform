@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -156,4 +158,58 @@ func MTRDeviceControllerRegistrationDeviceInternalStateKey() obj.Object {
 // MTRDeviceControllerRegistrationControllerCompressedFabricIDKey returns the string constant MTRDeviceControllerRegistrationControllerCompressedFabricIDKey, for use as a dictionary key or argument.
 func MTRDeviceControllerRegistrationControllerCompressedFabricIDKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MTRDeviceControllerRegistrationControllerCompressedFabricIDKey")))
+}
+
+// MTRSizeThreadNetworkName returns the value of the constant MTRSizeThreadNetworkName.
+func MTRSizeThreadNetworkName() uint {
+	addr := _symbol("MTRSizeThreadNetworkName")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint)(unsafe.Pointer(addr))
+}
+
+// MTRSizeThreadExtendedPanId returns the value of the constant MTRSizeThreadExtendedPanId.
+func MTRSizeThreadExtendedPanId() uint {
+	addr := _symbol("MTRSizeThreadExtendedPanId")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint)(unsafe.Pointer(addr))
+}
+
+// MTRSizeThreadExtendedPANID returns the value of the constant MTRSizeThreadExtendedPANID.
+func MTRSizeThreadExtendedPANID() uint {
+	addr := _symbol("MTRSizeThreadExtendedPANID")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint)(unsafe.Pointer(addr))
+}
+
+// MTRSizeThreadMasterKey returns the value of the constant MTRSizeThreadMasterKey.
+func MTRSizeThreadMasterKey() uint {
+	addr := _symbol("MTRSizeThreadMasterKey")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint)(unsafe.Pointer(addr))
+}
+
+// MTRSizeThreadPSKc returns the value of the constant MTRSizeThreadPSKc.
+func MTRSizeThreadPSKc() uint {
+	addr := _symbol("MTRSizeThreadPSKc")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint)(unsafe.Pointer(addr))
+}
+
+// MTRSizeThreadPANID returns the value of the constant MTRSizeThreadPANID.
+func MTRSizeThreadPANID() uint {
+	addr := _symbol("MTRSizeThreadPANID")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint)(unsafe.Pointer(addr))
 }

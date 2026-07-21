@@ -21,5 +21,13 @@ func {{.GoName}}() *{{.GoTypeName}} {
 	id := *(*objc.ID)(unsafe.Pointer(addr))
 	return {{.GoTypeName}}FromID(id)
 }
+{{else if eq .Kind "value"}}// {{.GoName}} returns the value of the constant {{.ExternName}}.
+func {{.GoName}}() {{.GoTypeName}} {
+	addr := _symbol({{.ExternName | printf "%q"}})
+	if addr == 0 { return {{.Zero}} }
+	return *(*{{.GoTypeName}})(unsafe.Pointer(addr))
+}
+{{else if eq .Kind "rawaddr"}}// {{.GoName}} returns the address of the symbol {{.ExternName}}.
+func {{.GoName}}() uintptr { return _symbol({{.ExternName | printf "%q"}}) }
 {{end}}
 {{end}}

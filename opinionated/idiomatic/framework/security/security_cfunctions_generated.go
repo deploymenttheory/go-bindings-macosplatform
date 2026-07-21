@@ -4079,6 +4079,28 @@ func SecTransformCopyExternalRepresentation(transformRef unsafe.Pointer) obj.Obj
 	return obj.Wrap(_ret)
 }
 
+var _fnSecTransformCreateGroupTransform func() unsafe.Pointer
+
+// SecTransformCreateGroupTransform calls the Security framework function SecTransformCreateGroupTransform.
+func SecTransformCreateGroupTransform() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTransformCreateGroupTransform == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTransformCreateGroupTransform, _lib, "SecTransformCreateGroupTransform")
+	}
+	return _fnSecTransformCreateGroupTransform()
+}
+
+var _fnSecTransformCreateReadTransformWithReadStream func(objc.ID) unsafe.Pointer
+
+// SecTransformCreateReadTransformWithReadStream calls the Security framework function SecTransformCreateReadTransformWithReadStream.
+func SecTransformCreateReadTransformWithReadStream(inputStream obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTransformCreateReadTransformWithReadStream == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTransformCreateReadTransformWithReadStream, _lib, "SecTransformCreateReadTransformWithReadStream")
+	}
+	return _fnSecTransformCreateReadTransformWithReadStream(objref.IDOf(inputStream))
+}
+
 var _fnSecTransformCustomGetAttribute func(objc.ID, unsafe.Pointer, SecTransformMetaAttributeType) objc.ID
 
 // SecTransformCustomGetAttribute calls the Security framework function SecTransformCustomGetAttribute.
@@ -4112,6 +4134,17 @@ func SecTransformExecuteAsync(transformRef unsafe.Pointer, deliveryQueue unsafe.
 		ebipurego.RegisterLibFunc(&_fnSecTransformExecuteAsync, _lib, "SecTransformExecuteAsync")
 	}
 	_fnSecTransformExecuteAsync(transformRef, deliveryQueue, deliveryBlock)
+}
+
+var _fnSecTransformFindByName func(unsafe.Pointer, objc.ID) unsafe.Pointer
+
+// SecTransformFindByName calls the Security framework function SecTransformFindByName.
+func SecTransformFindByName(transform unsafe.Pointer, name obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTransformFindByName == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTransformFindByName, _lib, "SecTransformFindByName")
+	}
+	return _fnSecTransformFindByName(transform, objref.IDOf(name))
 }
 
 var _fnSecTransformGetAttribute func(unsafe.Pointer, objc.ID) objc.ID
@@ -4472,6 +4505,17 @@ func SessionGetInfo(session int) (result int, sessionId int, attributes SessionA
 	return _ret, _out0, _out1
 }
 
+var _fnCssmAlgToOid func(uint32) unsafe.Pointer
+
+// CssmAlgToOid calls the Security framework function cssmAlgToOid.
+func CssmAlgToOid(algId uint32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCssmAlgToOid == nil {
+		ebipurego.RegisterLibFunc(&_fnCssmAlgToOid, _lib, "cssmAlgToOid")
+	}
+	return _fnCssmAlgToOid(algId)
+}
+
 var _fnCssmOidToAlg func(unsafe.Pointer, unsafe.Pointer) bool
 
 // CssmOidToAlg calls the Security framework function cssmOidToAlg.
@@ -4508,6 +4552,17 @@ func SecCertificateCopyRef(certificate unsafe.Pointer) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnSecCertificateCreate func(objc.ID) unsafe.Pointer
+
+// SecCertificateCreate calls the Security framework function sec_certificate_create.
+func SecCertificateCreate(certificate obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateCreate, _lib, "sec_certificate_create")
+	}
+	return _fnSecCertificateCreate(objref.IDOf(certificate))
+}
+
 var _fnSecIdentityAccessCertificates func(unsafe.Pointer, unsafe.Pointer) bool
 
 // SecIdentityAccessCertificates calls the Security framework function sec_identity_access_certificates.
@@ -4541,6 +4596,17 @@ func SecIdentityCopyRef(identity unsafe.Pointer) obj.Object {
 	}
 	_ret := _fnSecIdentityCopyRef(identity)
 	return obj.Wrap(_ret)
+}
+
+var _fnSecIdentityCreateWithCertificates func(objc.ID, objc.ID) unsafe.Pointer
+
+// SecIdentityCreateWithCertificates calls the Security framework function sec_identity_create_with_certificates.
+func SecIdentityCreateWithCertificates(identity obj.Object, certificates obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecIdentityCreateWithCertificates == nil {
+		ebipurego.RegisterLibFunc(&_fnSecIdentityCreateWithCertificates, _lib, "sec_identity_create_with_certificates")
+	}
+	return _fnSecIdentityCreateWithCertificates(objref.IDOf(identity), objref.IDOf(certificates))
 }
 
 var _fnSecProtocolMetadataAccessDistinguishedNames func(unsafe.Pointer, unsafe.Pointer) bool
@@ -4620,6 +4686,17 @@ func SecProtocolMetadataCopyNegotiatedProtocol(metadata unsafe.Pointer) string {
 	return _fnSecProtocolMetadataCopyNegotiatedProtocol(metadata)
 }
 
+var _fnSecProtocolMetadataCopyPeerPublicKey func(unsafe.Pointer) unsafe.Pointer
+
+// SecProtocolMetadataCopyPeerPublicKey calls the Security framework function sec_protocol_metadata_copy_peer_public_key.
+func SecProtocolMetadataCopyPeerPublicKey(metadata unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolMetadataCopyPeerPublicKey == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolMetadataCopyPeerPublicKey, _lib, "sec_protocol_metadata_copy_peer_public_key")
+	}
+	return _fnSecProtocolMetadataCopyPeerPublicKey(metadata)
+}
+
 var _fnSecProtocolMetadataCopyServerName func(unsafe.Pointer) string
 
 // SecProtocolMetadataCopyServerName calls the Security framework function sec_protocol_metadata_copy_server_name.
@@ -4629,6 +4706,28 @@ func SecProtocolMetadataCopyServerName(metadata unsafe.Pointer) string {
 		ebipurego.RegisterLibFunc(&_fnSecProtocolMetadataCopyServerName, _lib, "sec_protocol_metadata_copy_server_name")
 	}
 	return _fnSecProtocolMetadataCopyServerName(metadata)
+}
+
+var _fnSecProtocolMetadataCreateSecret func(unsafe.Pointer, int, unsafe.Pointer, int) unsafe.Pointer
+
+// SecProtocolMetadataCreateSecret calls the Security framework function sec_protocol_metadata_create_secret.
+func SecProtocolMetadataCreateSecret(metadata unsafe.Pointer, labelLen int, label unsafe.Pointer, exporterLength int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolMetadataCreateSecret == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolMetadataCreateSecret, _lib, "sec_protocol_metadata_create_secret")
+	}
+	return _fnSecProtocolMetadataCreateSecret(metadata, labelLen, label, exporterLength)
+}
+
+var _fnSecProtocolMetadataCreateSecretWithContext func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int) unsafe.Pointer
+
+// SecProtocolMetadataCreateSecretWithContext calls the Security framework function sec_protocol_metadata_create_secret_with_context.
+func SecProtocolMetadataCreateSecretWithContext(metadata unsafe.Pointer, labelLen int, label unsafe.Pointer, contextLen int, context_ unsafe.Pointer, exporterLength int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolMetadataCreateSecretWithContext == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolMetadataCreateSecretWithContext, _lib, "sec_protocol_metadata_create_secret_with_context")
+	}
+	return _fnSecProtocolMetadataCreateSecretWithContext(metadata, labelLen, label, contextLen, context_, exporterLength)
 }
 
 var _fnSecProtocolMetadataGetEarlyDataAccepted func(unsafe.Pointer) bool
@@ -5071,6 +5170,17 @@ func SecRelease(object unsafe.Pointer) {
 	_fnSecRelease(object)
 }
 
+var _fnSecRetain func(unsafe.Pointer) unsafe.Pointer
+
+// SecRetain calls the Security framework function sec_retain.
+func SecRetain(object unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnSecRetain, _lib, "sec_retain")
+	}
+	return _fnSecRetain(object)
+}
+
 var _fnSecTrustCopyRef func(unsafe.Pointer) objc.ID
 
 // SecTrustCopyRef calls the Security framework function sec_trust_copy_ref.
@@ -5081,4 +5191,15 @@ func SecTrustCopyRef(trust unsafe.Pointer) obj.Object {
 	}
 	_ret := _fnSecTrustCopyRef(trust)
 	return obj.Wrap(_ret)
+}
+
+var _fnSecTrustCreate func(objc.ID) unsafe.Pointer
+
+// SecTrustCreate calls the Security framework function sec_trust_create.
+func SecTrustCreate(trust obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustCreate, _lib, "sec_trust_create")
+	}
+	return _fnSecTrustCreate(objref.IDOf(trust))
 }

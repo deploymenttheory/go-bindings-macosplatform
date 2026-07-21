@@ -35,6 +35,17 @@ func InvokeSRCallBackUPP(param unsafe.Pointer, userUPP unsafe.Pointer) {
 	_fnInvokeSRCallBackUPP(param, userUPP)
 }
 
+var _fnNewSRCallBackUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewSRCallBackUPP calls the SpeechRecognition framework function NewSRCallBackUPP.
+func NewSRCallBackUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewSRCallBackUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewSRCallBackUPP, _lib, "NewSRCallBackUPP")
+	}
+	return _fnNewSRCallBackUPP(userRoutine)
+}
+
 var _fnSRAddLanguageObject func(unsafe.Pointer, unsafe.Pointer) int16
 
 // SRAddLanguageObject calls the SpeechRecognition framework function SRAddLanguageObject.

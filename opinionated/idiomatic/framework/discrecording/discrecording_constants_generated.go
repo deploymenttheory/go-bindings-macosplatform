@@ -2814,3 +2814,36 @@ func DRErrorStatusSenseCodeStringKey() obj.Object {
 func DRErrorStatusAdditionalSenseStringKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("DRErrorStatusAdditionalSenseStringKey")))
 }
+
+// KDRRefConCFTypeCallbacks returns the address of the symbol kDRRefConCFTypeCallbacks.
+func KDRRefConCFTypeCallbacks() uintptr { return _symbol("kDRRefConCFTypeCallbacks") }
+
+// KDRDeviceBurnSpeedCD1x returns the address of the symbol kDRDeviceBurnSpeedCD1x.
+func KDRDeviceBurnSpeedCD1x() uintptr { return _symbol("kDRDeviceBurnSpeedCD1x") }
+
+// KDRDeviceBurnSpeedDVD1x returns the address of the symbol kDRDeviceBurnSpeedDVD1x.
+func KDRDeviceBurnSpeedDVD1x() uintptr { return _symbol("kDRDeviceBurnSpeedDVD1x") }
+
+// KDRDeviceBurnSpeedBD1x returns the address of the symbol kDRDeviceBurnSpeedBD1x.
+func KDRDeviceBurnSpeedBD1x() uintptr { return _symbol("kDRDeviceBurnSpeedBD1x") }
+
+// KDRDeviceBurnSpeedHDDVD1x returns the address of the symbol kDRDeviceBurnSpeedHDDVD1x.
+func KDRDeviceBurnSpeedHDDVD1x() uintptr { return _symbol("kDRDeviceBurnSpeedHDDVD1x") }
+
+// KDRDeviceBurnSpeedMax returns the address of the symbol kDRDeviceBurnSpeedMax.
+func KDRDeviceBurnSpeedMax() uintptr { return _symbol("kDRDeviceBurnSpeedMax") }
+
+// DRDeviceBurnSpeedCD1x returns the address of the symbol DRDeviceBurnSpeedCD1x.
+func DRDeviceBurnSpeedCD1x() uintptr { return _symbol("DRDeviceBurnSpeedCD1x") }
+
+// DRDeviceBurnSpeedDVD1x returns the address of the symbol DRDeviceBurnSpeedDVD1x.
+func DRDeviceBurnSpeedDVD1x() uintptr { return _symbol("DRDeviceBurnSpeedDVD1x") }
+
+// DRDeviceBurnSpeedBD1x returns the address of the symbol DRDeviceBurnSpeedBD1x.
+func DRDeviceBurnSpeedBD1x() uintptr { return _symbol("DRDeviceBurnSpeedBD1x") }
+
+// DRDeviceBurnSpeedHDDVD1x returns the address of the symbol DRDeviceBurnSpeedHDDVD1x.
+func DRDeviceBurnSpeedHDDVD1x() uintptr { return _symbol("DRDeviceBurnSpeedHDDVD1x") }
+
+// DRDeviceBurnSpeedMax returns the address of the symbol DRDeviceBurnSpeedMax.
+func DRDeviceBurnSpeedMax() uintptr { return _symbol("DRDeviceBurnSpeedMax") }

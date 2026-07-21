@@ -16,6 +16,39 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+var _fnAVCaptionDimensionMake func(float64, CaptionUnitsType) unsafe.Pointer
+
+// AVCaptionDimensionMake calls the AVFoundation framework function AVCaptionDimensionMake.
+func AVCaptionDimensionMake(value float64, units CaptionUnitsType) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAVCaptionDimensionMake == nil {
+		ebipurego.RegisterLibFunc(&_fnAVCaptionDimensionMake, _lib, "AVCaptionDimensionMake")
+	}
+	return _fnAVCaptionDimensionMake(value, units)
+}
+
+var _fnAVCaptionPointMake func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// AVCaptionPointMake calls the AVFoundation framework function AVCaptionPointMake.
+func AVCaptionPointMake(x unsafe.Pointer, y unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAVCaptionPointMake == nil {
+		ebipurego.RegisterLibFunc(&_fnAVCaptionPointMake, _lib, "AVCaptionPointMake")
+	}
+	return _fnAVCaptionPointMake(x, y)
+}
+
+var _fnAVCaptionSizeMake func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// AVCaptionSizeMake calls the AVFoundation framework function AVCaptionSizeMake.
+func AVCaptionSizeMake(width unsafe.Pointer, height unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAVCaptionSizeMake == nil {
+		ebipurego.RegisterLibFunc(&_fnAVCaptionSizeMake, _lib, "AVCaptionSizeMake")
+	}
+	return _fnAVCaptionSizeMake(width, height)
+}
+
 var _fnAVCaptureReactionSystemImageNameForType func(objc.ID) objc.ID
 
 // AVCaptureReactionSystemImageNameForType calls the AVFoundation framework function AVCaptureReactionSystemImageNameForType.
@@ -29,6 +62,17 @@ func AVCaptureReactionSystemImageNameForType(reactionType obj.Object) string {
 		return ""
 	}
 	return purego.GoString(_ret)
+}
+
+var _fnAVCaptureTimecodeAdvancedByFrames func(unsafe.Pointer, int64) unsafe.Pointer
+
+// AVCaptureTimecodeAdvancedByFrames calls the AVFoundation framework function AVCaptureTimecodeAdvancedByFrames.
+func AVCaptureTimecodeAdvancedByFrames(timecode unsafe.Pointer, framesToAdd int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAVCaptureTimecodeAdvancedByFrames == nil {
+		ebipurego.RegisterLibFunc(&_fnAVCaptureTimecodeAdvancedByFrames, _lib, "AVCaptureTimecodeAdvancedByFrames")
+	}
+	return _fnAVCaptureTimecodeAdvancedByFrames(timecode, framesToAdd)
 }
 
 var _fnAVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp func(unsafe.Pointer, coremedia.CMTime) objc.ID

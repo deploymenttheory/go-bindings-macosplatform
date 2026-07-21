@@ -1156,6 +1156,138 @@ func InvokeOSLMarkUPP(dToken unsafe.Pointer, markToken unsafe.Pointer, index int
 	return _fnInvokeOSLMarkUPP(dToken, markToken, index, userUPP)
 }
 
+var _fnNewAECoerceDescUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewAECoerceDescUPP calls the AE framework function NewAECoerceDescUPP.
+func NewAECoerceDescUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewAECoerceDescUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewAECoerceDescUPP, _lib, "NewAECoerceDescUPP")
+	}
+	return _fnNewAECoerceDescUPP(userRoutine)
+}
+
+var _fnNewAECoercePtrUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewAECoercePtrUPP calls the AE framework function NewAECoercePtrUPP.
+func NewAECoercePtrUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewAECoercePtrUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewAECoercePtrUPP, _lib, "NewAECoercePtrUPP")
+	}
+	return _fnNewAECoercePtrUPP(userRoutine)
+}
+
+var _fnNewAEDisposeExternalUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewAEDisposeExternalUPP calls the AE framework function NewAEDisposeExternalUPP.
+func NewAEDisposeExternalUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewAEDisposeExternalUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewAEDisposeExternalUPP, _lib, "NewAEDisposeExternalUPP")
+	}
+	return _fnNewAEDisposeExternalUPP(userRoutine)
+}
+
+var _fnNewAEEventHandlerUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewAEEventHandlerUPP calls the AE framework function NewAEEventHandlerUPP.
+func NewAEEventHandlerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewAEEventHandlerUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewAEEventHandlerUPP, _lib, "NewAEEventHandlerUPP")
+	}
+	return _fnNewAEEventHandlerUPP(userRoutine)
+}
+
+var _fnNewOSLAccessorUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewOSLAccessorUPP calls the AE framework function NewOSLAccessorUPP.
+func NewOSLAccessorUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewOSLAccessorUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewOSLAccessorUPP, _lib, "NewOSLAccessorUPP")
+	}
+	return _fnNewOSLAccessorUPP(userRoutine)
+}
+
+var _fnNewOSLAdjustMarksUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewOSLAdjustMarksUPP calls the AE framework function NewOSLAdjustMarksUPP.
+func NewOSLAdjustMarksUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewOSLAdjustMarksUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewOSLAdjustMarksUPP, _lib, "NewOSLAdjustMarksUPP")
+	}
+	return _fnNewOSLAdjustMarksUPP(userRoutine)
+}
+
+var _fnNewOSLCompareUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewOSLCompareUPP calls the AE framework function NewOSLCompareUPP.
+func NewOSLCompareUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewOSLCompareUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewOSLCompareUPP, _lib, "NewOSLCompareUPP")
+	}
+	return _fnNewOSLCompareUPP(userRoutine)
+}
+
+var _fnNewOSLCountUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewOSLCountUPP calls the AE framework function NewOSLCountUPP.
+func NewOSLCountUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewOSLCountUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewOSLCountUPP, _lib, "NewOSLCountUPP")
+	}
+	return _fnNewOSLCountUPP(userRoutine)
+}
+
+var _fnNewOSLDisposeTokenUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewOSLDisposeTokenUPP calls the AE framework function NewOSLDisposeTokenUPP.
+func NewOSLDisposeTokenUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewOSLDisposeTokenUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewOSLDisposeTokenUPP, _lib, "NewOSLDisposeTokenUPP")
+	}
+	return _fnNewOSLDisposeTokenUPP(userRoutine)
+}
+
+var _fnNewOSLGetErrDescUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewOSLGetErrDescUPP calls the AE framework function NewOSLGetErrDescUPP.
+func NewOSLGetErrDescUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewOSLGetErrDescUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewOSLGetErrDescUPP, _lib, "NewOSLGetErrDescUPP")
+	}
+	return _fnNewOSLGetErrDescUPP(userRoutine)
+}
+
+var _fnNewOSLGetMarkTokenUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewOSLGetMarkTokenUPP calls the AE framework function NewOSLGetMarkTokenUPP.
+func NewOSLGetMarkTokenUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewOSLGetMarkTokenUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewOSLGetMarkTokenUPP, _lib, "NewOSLGetMarkTokenUPP")
+	}
+	return _fnNewOSLGetMarkTokenUPP(userRoutine)
+}
+
+var _fnNewOSLMarkUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewOSLMarkUPP calls the AE framework function NewOSLMarkUPP.
+func NewOSLMarkUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewOSLMarkUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewOSLMarkUPP, _lib, "NewOSLMarkUPP")
+	}
+	return _fnNewOSLMarkUPP(userRoutine)
+}
+
 var _fnVAEBuildAppleEvent func(int, int, int, unsafe.Pointer, int, int16, int, unsafe.Pointer, unsafe.Pointer, string, string) int32
 
 // VAEBuildAppleEvent calls the AE framework function vAEBuildAppleEvent.

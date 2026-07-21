@@ -144,6 +144,28 @@ func KCUnlock(keychain unsafe.Pointer) (result int, password uint8) {
 	return _ret, _out0
 }
 
+var _fnNewURLNotifyUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewURLNotifyUPP calls the SecurityHI framework function NewURLNotifyUPP.
+func NewURLNotifyUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewURLNotifyUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewURLNotifyUPP, _lib, "NewURLNotifyUPP")
+	}
+	return _fnNewURLNotifyUPP(userRoutine)
+}
+
+var _fnNewURLSystemEventUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewURLSystemEventUPP calls the SecurityHI framework function NewURLSystemEventUPP.
+func NewURLSystemEventUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewURLSystemEventUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewURLSystemEventUPP, _lib, "NewURLSystemEventUPP")
+	}
+	return _fnNewURLSystemEventUPP(userRoutine)
+}
+
 var _fnSecDisplayCertificateGroup func(unsafe.Pointer, objc.ID) int32
 
 // SecDisplayCertificateGroup calls the SecurityHI framework function SecDisplayCertificateGroup.

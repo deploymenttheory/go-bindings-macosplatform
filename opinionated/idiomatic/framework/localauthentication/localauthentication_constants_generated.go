@@ -5,9 +5,20 @@
 package localauthentication
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
 // LAErrorDomain returns the string constant LAErrorDomain, for use as a dictionary key or argument.
 func LAErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("LAErrorDomain"))) }
+
+// LATouchIDAuthenticationMaximumAllowableReuseDuration returns the value of the constant LATouchIDAuthenticationMaximumAllowableReuseDuration.
+func LATouchIDAuthenticationMaximumAllowableReuseDuration() float64 {
+	addr := _symbol("LATouchIDAuthenticationMaximumAllowableReuseDuration")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}

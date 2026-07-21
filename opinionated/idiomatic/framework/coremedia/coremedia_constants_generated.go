@@ -1679,3 +1679,132 @@ func KCMMetadataDataType_QuickTimeMetadataUUID() obj.Object {
 func KCMMetadataDataType_QuickTimeMetadataMilliLux() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCMMetadataDataType_QuickTimeMetadataMilliLux")))
 }
+
+// KCMTimeInvalid returns the address of the symbol kCMTimeInvalid.
+func KCMTimeInvalid() uintptr { return _symbol("kCMTimeInvalid") }
+
+// KCMTimeIndefinite returns the address of the symbol kCMTimeIndefinite.
+func KCMTimeIndefinite() uintptr { return _symbol("kCMTimeIndefinite") }
+
+// KCMTimePositiveInfinity returns the address of the symbol kCMTimePositiveInfinity.
+func KCMTimePositiveInfinity() uintptr { return _symbol("kCMTimePositiveInfinity") }
+
+// KCMTimeNegativeInfinity returns the address of the symbol kCMTimeNegativeInfinity.
+func KCMTimeNegativeInfinity() uintptr { return _symbol("kCMTimeNegativeInfinity") }
+
+// KCMTimeZero returns the address of the symbol kCMTimeZero.
+func KCMTimeZero() uintptr { return _symbol("kCMTimeZero") }
+
+// KCMTimeRangeZero returns the address of the symbol kCMTimeRangeZero.
+func KCMTimeRangeZero() uintptr { return _symbol("kCMTimeRangeZero") }
+
+// KCMTimeRangeInvalid returns the address of the symbol kCMTimeRangeInvalid.
+func KCMTimeRangeInvalid() uintptr { return _symbol("kCMTimeRangeInvalid") }
+
+// KCMTimeMappingInvalid returns the address of the symbol kCMTimeMappingInvalid.
+func KCMTimeMappingInvalid() uintptr { return _symbol("kCMTimeMappingInvalid") }
+
+// KCMImageDescriptionFlavor_QuickTimeMovie returns the address of the symbol kCMImageDescriptionFlavor_QuickTimeMovie.
+func KCMImageDescriptionFlavor_QuickTimeMovie() uintptr {
+	return _symbol("kCMImageDescriptionFlavor_QuickTimeMovie")
+}
+
+// KCMImageDescriptionFlavor_ISOFamily returns the address of the symbol kCMImageDescriptionFlavor_ISOFamily.
+func KCMImageDescriptionFlavor_ISOFamily() uintptr {
+	return _symbol("kCMImageDescriptionFlavor_ISOFamily")
+}
+
+// KCMImageDescriptionFlavor_3GPFamily returns the address of the symbol kCMImageDescriptionFlavor_3GPFamily.
+func KCMImageDescriptionFlavor_3GPFamily() uintptr {
+	return _symbol("kCMImageDescriptionFlavor_3GPFamily")
+}
+
+// KCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions returns the address of the symbol kCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions.
+func KCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions() uintptr {
+	return _symbol("kCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions")
+}
+
+// KCMSoundDescriptionFlavor_QuickTimeMovie returns the address of the symbol kCMSoundDescriptionFlavor_QuickTimeMovie.
+func KCMSoundDescriptionFlavor_QuickTimeMovie() uintptr {
+	return _symbol("kCMSoundDescriptionFlavor_QuickTimeMovie")
+}
+
+// KCMSoundDescriptionFlavor_QuickTimeMovieV2 returns the address of the symbol kCMSoundDescriptionFlavor_QuickTimeMovieV2.
+func KCMSoundDescriptionFlavor_QuickTimeMovieV2() uintptr {
+	return _symbol("kCMSoundDescriptionFlavor_QuickTimeMovieV2")
+}
+
+// KCMSoundDescriptionFlavor_ISOFamily returns the address of the symbol kCMSoundDescriptionFlavor_ISOFamily.
+func KCMSoundDescriptionFlavor_ISOFamily() uintptr {
+	return _symbol("kCMSoundDescriptionFlavor_ISOFamily")
+}
+
+// KCMSoundDescriptionFlavor_3GPFamily returns the address of the symbol kCMSoundDescriptionFlavor_3GPFamily.
+func KCMSoundDescriptionFlavor_3GPFamily() uintptr {
+	return _symbol("kCMSoundDescriptionFlavor_3GPFamily")
+}
+
+// KCMTimingInfoInvalid returns the address of the symbol kCMTimingInfoInvalid.
+func KCMTimingInfoInvalid() uintptr { return _symbol("kCMTimingInfoInvalid") }
+
+// KCMTagInvalid returns the address of the symbol kCMTagInvalid.
+func KCMTagInvalid() uintptr { return _symbol("kCMTagInvalid") }
+
+// KCMTagMediaTypeVideo returns the address of the symbol kCMTagMediaTypeVideo.
+func KCMTagMediaTypeVideo() uintptr { return _symbol("kCMTagMediaTypeVideo") }
+
+// KCMTagMediaSubTypeMebx returns the address of the symbol kCMTagMediaSubTypeMebx.
+func KCMTagMediaSubTypeMebx() uintptr { return _symbol("kCMTagMediaSubTypeMebx") }
+
+// KCMTagMediaTypeAudio returns the address of the symbol kCMTagMediaTypeAudio.
+func KCMTagMediaTypeAudio() uintptr { return _symbol("kCMTagMediaTypeAudio") }
+
+// KCMTagMediaTypeMetadata returns the address of the symbol kCMTagMediaTypeMetadata.
+func KCMTagMediaTypeMetadata() uintptr { return _symbol("kCMTagMediaTypeMetadata") }
+
+// KCMTagStereoLeftEye returns the address of the symbol kCMTagStereoLeftEye.
+func KCMTagStereoLeftEye() uintptr { return _symbol("kCMTagStereoLeftEye") }
+
+// KCMTagStereoRightEye returns the address of the symbol kCMTagStereoRightEye.
+func KCMTagStereoRightEye() uintptr { return _symbol("kCMTagStereoRightEye") }
+
+// KCMTagStereoLeftAndRightEye returns the address of the symbol kCMTagStereoLeftAndRightEye.
+func KCMTagStereoLeftAndRightEye() uintptr { return _symbol("kCMTagStereoLeftAndRightEye") }
+
+// KCMTagStereoNone returns the address of the symbol kCMTagStereoNone.
+func KCMTagStereoNone() uintptr { return _symbol("kCMTagStereoNone") }
+
+// KCMTagStereoInterpretationOrderReversed returns the address of the symbol kCMTagStereoInterpretationOrderReversed.
+func KCMTagStereoInterpretationOrderReversed() uintptr {
+	return _symbol("kCMTagStereoInterpretationOrderReversed")
+}
+
+// KCMTagProjectionTypeRectangular returns the address of the symbol kCMTagProjectionTypeRectangular.
+func KCMTagProjectionTypeRectangular() uintptr { return _symbol("kCMTagProjectionTypeRectangular") }
+
+// KCMTagProjectionTypeEquirectangular returns the address of the symbol kCMTagProjectionTypeEquirectangular.
+func KCMTagProjectionTypeEquirectangular() uintptr {
+	return _symbol("kCMTagProjectionTypeEquirectangular")
+}
+
+// KCMTagProjectionTypeHalfEquirectangular returns the address of the symbol kCMTagProjectionTypeHalfEquirectangular.
+func KCMTagProjectionTypeHalfEquirectangular() uintptr {
+	return _symbol("kCMTagProjectionTypeHalfEquirectangular")
+}
+
+// KCMTagProjectionTypeFisheye returns the address of the symbol kCMTagProjectionTypeFisheye.
+func KCMTagProjectionTypeFisheye() uintptr { return _symbol("kCMTagProjectionTypeFisheye") }
+
+// KCMTagProjectionTypeParametricImmersive returns the address of the symbol kCMTagProjectionTypeParametricImmersive.
+func KCMTagProjectionTypeParametricImmersive() uintptr {
+	return _symbol("kCMTagProjectionTypeParametricImmersive")
+}
+
+// KCMTagPackingTypeNone returns the address of the symbol kCMTagPackingTypeNone.
+func KCMTagPackingTypeNone() uintptr { return _symbol("kCMTagPackingTypeNone") }
+
+// KCMTagPackingTypeSideBySide returns the address of the symbol kCMTagPackingTypeSideBySide.
+func KCMTagPackingTypeSideBySide() uintptr { return _symbol("kCMTagPackingTypeSideBySide") }
+
+// KCMTagPackingTypeOverUnder returns the address of the symbol kCMTagPackingTypeOverUnder.
+func KCMTagPackingTypeOverUnder() uintptr { return _symbol("kCMTagPackingTypeOverUnder") }

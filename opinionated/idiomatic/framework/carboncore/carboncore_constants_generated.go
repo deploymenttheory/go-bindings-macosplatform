@@ -5,6 +5,8 @@
 package carboncore
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -57,4 +59,13 @@ func KFSOperationUserVisibleObjectsRemainingKey() obj.Object {
 // KFSOperationThroughputKey returns the value of the constant kFSOperationThroughputKey.
 func KFSOperationThroughputKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kFSOperationThroughputKey")))
+}
+
+// Pi returns the value of the constant pi.
+func Pi() float64 {
+	addr := _symbol("pi")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
 }

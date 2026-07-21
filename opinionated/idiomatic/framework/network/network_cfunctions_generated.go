@@ -14,6 +14,39 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+var _fnNwAdvertiseDescriptorCopyTxtRecordObject func(objc.ID) unsafe.Pointer
+
+// NwAdvertiseDescriptorCopyTxtRecordObject calls the Network framework function nw_advertise_descriptor_copy_txt_record_object.
+func NwAdvertiseDescriptorCopyTxtRecordObject(advertiseDescriptor obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwAdvertiseDescriptorCopyTxtRecordObject == nil {
+		ebipurego.RegisterLibFunc(&_fnNwAdvertiseDescriptorCopyTxtRecordObject, _lib, "nw_advertise_descriptor_copy_txt_record_object")
+	}
+	return _fnNwAdvertiseDescriptorCopyTxtRecordObject(objref.IDOf(advertiseDescriptor))
+}
+
+var _fnNwAdvertiseDescriptorCreateApplicationService func(string) unsafe.Pointer
+
+// NwAdvertiseDescriptorCreateApplicationService calls the Network framework function nw_advertise_descriptor_create_application_service.
+func NwAdvertiseDescriptorCreateApplicationService(applicationServiceName string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwAdvertiseDescriptorCreateApplicationService == nil {
+		ebipurego.RegisterLibFunc(&_fnNwAdvertiseDescriptorCreateApplicationService, _lib, "nw_advertise_descriptor_create_application_service")
+	}
+	return _fnNwAdvertiseDescriptorCreateApplicationService(applicationServiceName)
+}
+
+var _fnNwAdvertiseDescriptorCreateBonjourService func(string, string, string) unsafe.Pointer
+
+// NwAdvertiseDescriptorCreateBonjourService calls the Network framework function nw_advertise_descriptor_create_bonjour_service.
+func NwAdvertiseDescriptorCreateBonjourService(name string, type_ string, domain string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwAdvertiseDescriptorCreateBonjourService == nil {
+		ebipurego.RegisterLibFunc(&_fnNwAdvertiseDescriptorCreateBonjourService, _lib, "nw_advertise_descriptor_create_bonjour_service")
+	}
+	return _fnNwAdvertiseDescriptorCreateBonjourService(name, type_, domain)
+}
+
 var _fnNwAdvertiseDescriptorGetApplicationServiceName func(objc.ID) string
 
 // NwAdvertiseDescriptorGetApplicationServiceName calls the Network framework function nw_advertise_descriptor_get_application_service_name.
@@ -67,6 +100,28 @@ func NwAdvertiseDescriptorSetTxtRecordObject(advertiseDescriptor obj.Object, txt
 		ebipurego.RegisterLibFunc(&_fnNwAdvertiseDescriptorSetTxtRecordObject, _lib, "nw_advertise_descriptor_set_txt_record_object")
 	}
 	_fnNwAdvertiseDescriptorSetTxtRecordObject(objref.IDOf(advertiseDescriptor), objref.IDOf(txtRecord))
+}
+
+var _fnNwBrowseDescriptorCreateApplicationService func(string) unsafe.Pointer
+
+// NwBrowseDescriptorCreateApplicationService calls the Network framework function nw_browse_descriptor_create_application_service.
+func NwBrowseDescriptorCreateApplicationService(applicationServiceName string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwBrowseDescriptorCreateApplicationService == nil {
+		ebipurego.RegisterLibFunc(&_fnNwBrowseDescriptorCreateApplicationService, _lib, "nw_browse_descriptor_create_application_service")
+	}
+	return _fnNwBrowseDescriptorCreateApplicationService(applicationServiceName)
+}
+
+var _fnNwBrowseDescriptorCreateBonjourService func(string, string) unsafe.Pointer
+
+// NwBrowseDescriptorCreateBonjourService calls the Network framework function nw_browse_descriptor_create_bonjour_service.
+func NwBrowseDescriptorCreateBonjourService(type_ string, domain string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwBrowseDescriptorCreateBonjourService == nil {
+		ebipurego.RegisterLibFunc(&_fnNwBrowseDescriptorCreateBonjourService, _lib, "nw_browse_descriptor_create_bonjour_service")
+	}
+	return _fnNwBrowseDescriptorCreateBonjourService(type_, domain)
 }
 
 var _fnNwBrowseDescriptorGetApplicationServiceName func(objc.ID) string
@@ -124,6 +179,28 @@ func NwBrowseDescriptorSetIncludeTxtRecord(descriptor obj.Object, includeTxtReco
 	_fnNwBrowseDescriptorSetIncludeTxtRecord(objref.IDOf(descriptor), includeTxtRecord)
 }
 
+var _fnNwBrowseResultCopyEndpoint func(objc.ID) unsafe.Pointer
+
+// NwBrowseResultCopyEndpoint calls the Network framework function nw_browse_result_copy_endpoint.
+func NwBrowseResultCopyEndpoint(result obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwBrowseResultCopyEndpoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNwBrowseResultCopyEndpoint, _lib, "nw_browse_result_copy_endpoint")
+	}
+	return _fnNwBrowseResultCopyEndpoint(objref.IDOf(result))
+}
+
+var _fnNwBrowseResultCopyTxtRecordObject func(objc.ID) unsafe.Pointer
+
+// NwBrowseResultCopyTxtRecordObject calls the Network framework function nw_browse_result_copy_txt_record_object.
+func NwBrowseResultCopyTxtRecordObject(result obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwBrowseResultCopyTxtRecordObject == nil {
+		ebipurego.RegisterLibFunc(&_fnNwBrowseResultCopyTxtRecordObject, _lib, "nw_browse_result_copy_txt_record_object")
+	}
+	return _fnNwBrowseResultCopyTxtRecordObject(objref.IDOf(result))
+}
+
 var _fnNwBrowseResultEnumerateInterfaces func(objc.ID, unsafe.Pointer)
 
 // NwBrowseResultEnumerateInterfaces calls the Network framework function nw_browse_result_enumerate_interfaces.
@@ -166,6 +243,39 @@ func NwBrowserCancel(browser obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnNwBrowserCancel, _lib, "nw_browser_cancel")
 	}
 	_fnNwBrowserCancel(objref.IDOf(browser))
+}
+
+var _fnNwBrowserCopyBrowseDescriptor func(objc.ID) unsafe.Pointer
+
+// NwBrowserCopyBrowseDescriptor calls the Network framework function nw_browser_copy_browse_descriptor.
+func NwBrowserCopyBrowseDescriptor(browser obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwBrowserCopyBrowseDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnNwBrowserCopyBrowseDescriptor, _lib, "nw_browser_copy_browse_descriptor")
+	}
+	return _fnNwBrowserCopyBrowseDescriptor(objref.IDOf(browser))
+}
+
+var _fnNwBrowserCopyParameters func(objc.ID) unsafe.Pointer
+
+// NwBrowserCopyParameters calls the Network framework function nw_browser_copy_parameters.
+func NwBrowserCopyParameters(browser obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwBrowserCopyParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnNwBrowserCopyParameters, _lib, "nw_browser_copy_parameters")
+	}
+	return _fnNwBrowserCopyParameters(objref.IDOf(browser))
+}
+
+var _fnNwBrowserCreate func(objc.ID, objc.ID) unsafe.Pointer
+
+// NwBrowserCreate calls the Network framework function nw_browser_create.
+func NwBrowserCreate(descriptor obj.Object, parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwBrowserCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNwBrowserCreate, _lib, "nw_browser_create")
+	}
+	return _fnNwBrowserCreate(objref.IDOf(descriptor), objref.IDOf(parameters))
 }
 
 var _fnNwBrowserSetBrowseResultsChangedHandler func(objc.ID, unsafe.Pointer)
@@ -256,6 +366,17 @@ func NwConnectionCancelCurrentEndpoint(connection obj.Object) {
 	_fnNwConnectionCancelCurrentEndpoint(objref.IDOf(connection))
 }
 
+var _fnNwConnectionCopyCurrentPath func(objc.ID) unsafe.Pointer
+
+// NwConnectionCopyCurrentPath calls the Network framework function nw_connection_copy_current_path.
+func NwConnectionCopyCurrentPath(connection obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionCopyCurrentPath == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionCopyCurrentPath, _lib, "nw_connection_copy_current_path")
+	}
+	return _fnNwConnectionCopyCurrentPath(objref.IDOf(connection))
+}
+
 var _fnNwConnectionCopyDescription func(objc.ID) string
 
 // NwConnectionCopyDescription calls the Network framework function nw_connection_copy_description.
@@ -265,6 +386,61 @@ func NwConnectionCopyDescription(connection obj.Object) string {
 		ebipurego.RegisterLibFunc(&_fnNwConnectionCopyDescription, _lib, "nw_connection_copy_description")
 	}
 	return _fnNwConnectionCopyDescription(objref.IDOf(connection))
+}
+
+var _fnNwConnectionCopyEndpoint func(objc.ID) unsafe.Pointer
+
+// NwConnectionCopyEndpoint calls the Network framework function nw_connection_copy_endpoint.
+func NwConnectionCopyEndpoint(connection obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionCopyEndpoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionCopyEndpoint, _lib, "nw_connection_copy_endpoint")
+	}
+	return _fnNwConnectionCopyEndpoint(objref.IDOf(connection))
+}
+
+var _fnNwConnectionCopyParameters func(objc.ID) unsafe.Pointer
+
+// NwConnectionCopyParameters calls the Network framework function nw_connection_copy_parameters.
+func NwConnectionCopyParameters(connection obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionCopyParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionCopyParameters, _lib, "nw_connection_copy_parameters")
+	}
+	return _fnNwConnectionCopyParameters(objref.IDOf(connection))
+}
+
+var _fnNwConnectionCopyProtocolMetadata func(objc.ID, objc.ID) unsafe.Pointer
+
+// NwConnectionCopyProtocolMetadata calls the Network framework function nw_connection_copy_protocol_metadata.
+func NwConnectionCopyProtocolMetadata(connection obj.Object, definition obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionCopyProtocolMetadata == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionCopyProtocolMetadata, _lib, "nw_connection_copy_protocol_metadata")
+	}
+	return _fnNwConnectionCopyProtocolMetadata(objref.IDOf(connection), objref.IDOf(definition))
+}
+
+var _fnNwConnectionCreate func(objc.ID, objc.ID) unsafe.Pointer
+
+// NwConnectionCreate calls the Network framework function nw_connection_create.
+func NwConnectionCreate(endpoint obj.Object, parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionCreate, _lib, "nw_connection_create")
+	}
+	return _fnNwConnectionCreate(objref.IDOf(endpoint), objref.IDOf(parameters))
+}
+
+var _fnNwConnectionCreateNewDataTransferReport func(objc.ID) unsafe.Pointer
+
+// NwConnectionCreateNewDataTransferReport calls the Network framework function nw_connection_create_new_data_transfer_report.
+func NwConnectionCreateNewDataTransferReport(connection obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionCreateNewDataTransferReport == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionCreateNewDataTransferReport, _lib, "nw_connection_create_new_data_transfer_report")
+	}
+	return _fnNwConnectionCreateNewDataTransferReport(objref.IDOf(connection))
 }
 
 var _fnNwConnectionForceCancel func(objc.ID)
@@ -300,6 +476,50 @@ func NwConnectionGroupCancel(group obj.Object) {
 	_fnNwConnectionGroupCancel(objref.IDOf(group))
 }
 
+var _fnNwConnectionGroupCopyDescriptor func(objc.ID) unsafe.Pointer
+
+// NwConnectionGroupCopyDescriptor calls the Network framework function nw_connection_group_copy_descriptor.
+func NwConnectionGroupCopyDescriptor(group obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionGroupCopyDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionGroupCopyDescriptor, _lib, "nw_connection_group_copy_descriptor")
+	}
+	return _fnNwConnectionGroupCopyDescriptor(objref.IDOf(group))
+}
+
+var _fnNwConnectionGroupCopyLocalEndpointForMessage func(objc.ID, objc.ID) unsafe.Pointer
+
+// NwConnectionGroupCopyLocalEndpointForMessage calls the Network framework function nw_connection_group_copy_local_endpoint_for_message.
+func NwConnectionGroupCopyLocalEndpointForMessage(group obj.Object, context_ obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionGroupCopyLocalEndpointForMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionGroupCopyLocalEndpointForMessage, _lib, "nw_connection_group_copy_local_endpoint_for_message")
+	}
+	return _fnNwConnectionGroupCopyLocalEndpointForMessage(objref.IDOf(group), objref.IDOf(context_))
+}
+
+var _fnNwConnectionGroupCopyParameters func(objc.ID) unsafe.Pointer
+
+// NwConnectionGroupCopyParameters calls the Network framework function nw_connection_group_copy_parameters.
+func NwConnectionGroupCopyParameters(group obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionGroupCopyParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionGroupCopyParameters, _lib, "nw_connection_group_copy_parameters")
+	}
+	return _fnNwConnectionGroupCopyParameters(objref.IDOf(group))
+}
+
+var _fnNwConnectionGroupCopyPathForMessage func(objc.ID, objc.ID) unsafe.Pointer
+
+// NwConnectionGroupCopyPathForMessage calls the Network framework function nw_connection_group_copy_path_for_message.
+func NwConnectionGroupCopyPathForMessage(group obj.Object, context_ obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionGroupCopyPathForMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionGroupCopyPathForMessage, _lib, "nw_connection_group_copy_path_for_message")
+	}
+	return _fnNwConnectionGroupCopyPathForMessage(objref.IDOf(group), objref.IDOf(context_))
+}
+
 var _fnNwConnectionGroupCopyProtocolMetadata func(objc.ID, objc.ID) objc.ID
 
 // NwConnectionGroupCopyProtocolMetadata calls the Network framework function nw_connection_group_copy_protocol_metadata.
@@ -322,6 +542,50 @@ func NwConnectionGroupCopyProtocolMetadataForMessage(group obj.Object, context_ 
 	}
 	_ret := _fnNwConnectionGroupCopyProtocolMetadataForMessage(objref.IDOf(group), objref.IDOf(context_), objref.IDOf(definition))
 	return foundation.ObjectFromID(_ret)
+}
+
+var _fnNwConnectionGroupCopyRemoteEndpointForMessage func(objc.ID, objc.ID) unsafe.Pointer
+
+// NwConnectionGroupCopyRemoteEndpointForMessage calls the Network framework function nw_connection_group_copy_remote_endpoint_for_message.
+func NwConnectionGroupCopyRemoteEndpointForMessage(group obj.Object, context_ obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionGroupCopyRemoteEndpointForMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionGroupCopyRemoteEndpointForMessage, _lib, "nw_connection_group_copy_remote_endpoint_for_message")
+	}
+	return _fnNwConnectionGroupCopyRemoteEndpointForMessage(objref.IDOf(group), objref.IDOf(context_))
+}
+
+var _fnNwConnectionGroupCreate func(objc.ID, objc.ID) unsafe.Pointer
+
+// NwConnectionGroupCreate calls the Network framework function nw_connection_group_create.
+func NwConnectionGroupCreate(groupDescriptor obj.Object, parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionGroupCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionGroupCreate, _lib, "nw_connection_group_create")
+	}
+	return _fnNwConnectionGroupCreate(objref.IDOf(groupDescriptor), objref.IDOf(parameters))
+}
+
+var _fnNwConnectionGroupExtractConnection func(objc.ID, objc.ID, objc.ID) unsafe.Pointer
+
+// NwConnectionGroupExtractConnection calls the Network framework function nw_connection_group_extract_connection.
+func NwConnectionGroupExtractConnection(group obj.Object, endpoint obj.Object, protocolOptions obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionGroupExtractConnection == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionGroupExtractConnection, _lib, "nw_connection_group_extract_connection")
+	}
+	return _fnNwConnectionGroupExtractConnection(objref.IDOf(group), objref.IDOf(endpoint), objref.IDOf(protocolOptions))
+}
+
+var _fnNwConnectionGroupExtractConnectionForMessage func(objc.ID, objc.ID) unsafe.Pointer
+
+// NwConnectionGroupExtractConnectionForMessage calls the Network framework function nw_connection_group_extract_connection_for_message.
+func NwConnectionGroupExtractConnectionForMessage(group obj.Object, context_ obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwConnectionGroupExtractConnectionForMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnNwConnectionGroupExtractConnectionForMessage, _lib, "nw_connection_group_extract_connection_for_message")
+	}
+	return _fnNwConnectionGroupExtractConnectionForMessage(objref.IDOf(group), objref.IDOf(context_))
 }
 
 var _fnNwConnectionGroupReinsertExtractedConnection func(objc.ID, objc.ID) bool
@@ -522,6 +786,39 @@ func NwConnectionStart(connection obj.Object) {
 	_fnNwConnectionStart(objref.IDOf(connection))
 }
 
+var _fnNwContentContextCopyAntecedent func(objc.ID) unsafe.Pointer
+
+// NwContentContextCopyAntecedent calls the Network framework function nw_content_context_copy_antecedent.
+func NwContentContextCopyAntecedent(context_ obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwContentContextCopyAntecedent == nil {
+		ebipurego.RegisterLibFunc(&_fnNwContentContextCopyAntecedent, _lib, "nw_content_context_copy_antecedent")
+	}
+	return _fnNwContentContextCopyAntecedent(objref.IDOf(context_))
+}
+
+var _fnNwContentContextCopyProtocolMetadata func(objc.ID, objc.ID) unsafe.Pointer
+
+// NwContentContextCopyProtocolMetadata calls the Network framework function nw_content_context_copy_protocol_metadata.
+func NwContentContextCopyProtocolMetadata(context_ obj.Object, protocol obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwContentContextCopyProtocolMetadata == nil {
+		ebipurego.RegisterLibFunc(&_fnNwContentContextCopyProtocolMetadata, _lib, "nw_content_context_copy_protocol_metadata")
+	}
+	return _fnNwContentContextCopyProtocolMetadata(objref.IDOf(context_), objref.IDOf(protocol))
+}
+
+var _fnNwContentContextCreate func(string) unsafe.Pointer
+
+// NwContentContextCreate calls the Network framework function nw_content_context_create.
+func NwContentContextCreate(contextIdentifier string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwContentContextCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNwContentContextCreate, _lib, "nw_content_context_create")
+	}
+	return _fnNwContentContextCreate(contextIdentifier)
+}
+
 var _fnNwContentContextForeachProtocolMetadata func(objc.ID, objc.Block)
 
 // NwContentContextForeachProtocolMetadata calls the Network framework function nw_content_context_foreach_protocol_metadata.
@@ -643,6 +940,17 @@ func NwDataTransferReportCollect(report obj.Object, queue obj.Object, collectBlo
 	_fnNwDataTransferReportCollect(objref.IDOf(report), objref.IDOf(queue), collectBlock)
 }
 
+var _fnNwDataTransferReportCopyPathInterface func(objc.ID, uint32) unsafe.Pointer
+
+// NwDataTransferReportCopyPathInterface calls the Network framework function nw_data_transfer_report_copy_path_interface.
+func NwDataTransferReportCopyPathInterface(report obj.Object, pathIndex uint32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwDataTransferReportCopyPathInterface == nil {
+		ebipurego.RegisterLibFunc(&_fnNwDataTransferReportCopyPathInterface, _lib, "nw_data_transfer_report_copy_path_interface")
+	}
+	return _fnNwDataTransferReportCopyPathInterface(objref.IDOf(report), pathIndex)
+}
+
 var _fnNwDataTransferReportGetDurationMilliseconds func(objc.ID) uint64
 
 // NwDataTransferReportGetDurationMilliseconds calls the Network framework function nw_data_transfer_report_get_duration_milliseconds.
@@ -663,6 +971,17 @@ func NwDataTransferReportGetPathCount(report obj.Object) uint32 {
 		ebipurego.RegisterLibFunc(&_fnNwDataTransferReportGetPathCount, _lib, "nw_data_transfer_report_get_path_count")
 	}
 	return _fnNwDataTransferReportGetPathCount(objref.IDOf(report))
+}
+
+var _fnNwDataTransferReportGetPathRadioType func(objc.ID, uint32) unsafe.Pointer
+
+// NwDataTransferReportGetPathRadioType calls the Network framework function nw_data_transfer_report_get_path_radio_type.
+func NwDataTransferReportGetPathRadioType(report obj.Object, pathIndex uint32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwDataTransferReportGetPathRadioType == nil {
+		ebipurego.RegisterLibFunc(&_fnNwDataTransferReportGetPathRadioType, _lib, "nw_data_transfer_report_get_path_radio_type")
+	}
+	return _fnNwDataTransferReportGetPathRadioType(objref.IDOf(report), pathIndex)
 }
 
 var _fnNwDataTransferReportGetReceivedApplicationByteCount func(objc.ID, uint32) uint64
@@ -764,6 +1083,17 @@ func NwDataTransferReportGetSentTransportRetransmittedByteCount(report obj.Objec
 	return _fnNwDataTransferReportGetSentTransportRetransmittedByteCount(objref.IDOf(report), pathIndex)
 }
 
+var _fnNwDataTransferReportGetState func(objc.ID) unsafe.Pointer
+
+// NwDataTransferReportGetState calls the Network framework function nw_data_transfer_report_get_state.
+func NwDataTransferReportGetState(report obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwDataTransferReportGetState == nil {
+		ebipurego.RegisterLibFunc(&_fnNwDataTransferReportGetState, _lib, "nw_data_transfer_report_get_state")
+	}
+	return _fnNwDataTransferReportGetState(objref.IDOf(report))
+}
+
 var _fnNwDataTransferReportGetTransportMinimumRttMilliseconds func(objc.ID, uint32) uint64
 
 // NwDataTransferReportGetTransportMinimumRttMilliseconds calls the Network framework function nw_data_transfer_report_get_transport_minimum_rtt_milliseconds.
@@ -817,6 +1147,72 @@ func NwEndpointCopyPortString(endpoint obj.Object) string {
 		ebipurego.RegisterLibFunc(&_fnNwEndpointCopyPortString, _lib, "nw_endpoint_copy_port_string")
 	}
 	return _fnNwEndpointCopyPortString(objref.IDOf(endpoint))
+}
+
+var _fnNwEndpointCopyTxtRecord func(objc.ID) unsafe.Pointer
+
+// NwEndpointCopyTxtRecord calls the Network framework function nw_endpoint_copy_txt_record.
+func NwEndpointCopyTxtRecord(endpoint obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwEndpointCopyTxtRecord == nil {
+		ebipurego.RegisterLibFunc(&_fnNwEndpointCopyTxtRecord, _lib, "nw_endpoint_copy_txt_record")
+	}
+	return _fnNwEndpointCopyTxtRecord(objref.IDOf(endpoint))
+}
+
+var _fnNwEndpointCreateAddress func(unsafe.Pointer) unsafe.Pointer
+
+// NwEndpointCreateAddress calls the Network framework function nw_endpoint_create_address.
+func NwEndpointCreateAddress(address unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwEndpointCreateAddress == nil {
+		ebipurego.RegisterLibFunc(&_fnNwEndpointCreateAddress, _lib, "nw_endpoint_create_address")
+	}
+	return _fnNwEndpointCreateAddress(address)
+}
+
+var _fnNwEndpointCreateBonjourService func(string, string, string) unsafe.Pointer
+
+// NwEndpointCreateBonjourService calls the Network framework function nw_endpoint_create_bonjour_service.
+func NwEndpointCreateBonjourService(name string, type_ string, domain string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwEndpointCreateBonjourService == nil {
+		ebipurego.RegisterLibFunc(&_fnNwEndpointCreateBonjourService, _lib, "nw_endpoint_create_bonjour_service")
+	}
+	return _fnNwEndpointCreateBonjourService(name, type_, domain)
+}
+
+var _fnNwEndpointCreateHost func(string, string) unsafe.Pointer
+
+// NwEndpointCreateHost calls the Network framework function nw_endpoint_create_host.
+func NwEndpointCreateHost(hostname string, port string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwEndpointCreateHost == nil {
+		ebipurego.RegisterLibFunc(&_fnNwEndpointCreateHost, _lib, "nw_endpoint_create_host")
+	}
+	return _fnNwEndpointCreateHost(hostname, port)
+}
+
+var _fnNwEndpointCreateUrl func(string) unsafe.Pointer
+
+// NwEndpointCreateUrl calls the Network framework function nw_endpoint_create_url.
+func NwEndpointCreateUrl(url string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwEndpointCreateUrl == nil {
+		ebipurego.RegisterLibFunc(&_fnNwEndpointCreateUrl, _lib, "nw_endpoint_create_url")
+	}
+	return _fnNwEndpointCreateUrl(url)
+}
+
+var _fnNwEndpointGetAddress func(objc.ID) unsafe.Pointer
+
+// NwEndpointGetAddress calls the Network framework function nw_endpoint_get_address.
+func NwEndpointGetAddress(endpoint obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwEndpointGetAddress == nil {
+		ebipurego.RegisterLibFunc(&_fnNwEndpointGetAddress, _lib, "nw_endpoint_get_address")
+	}
+	return _fnNwEndpointGetAddress(objref.IDOf(endpoint))
 }
 
 var _fnNwEndpointGetBonjourServiceDomain func(objc.ID) string
@@ -874,6 +1270,30 @@ func NwEndpointGetPort(endpoint obj.Object) uint16 {
 	return _fnNwEndpointGetPort(objref.IDOf(endpoint))
 }
 
+var _fnNwEndpointGetSignature func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// NwEndpointGetSignature calls the Network framework function nw_endpoint_get_signature.
+func NwEndpointGetSignature(endpoint obj.Object) (result unsafe.Pointer, outSignatureLength int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwEndpointGetSignature == nil {
+		ebipurego.RegisterLibFunc(&_fnNwEndpointGetSignature, _lib, "nw_endpoint_get_signature")
+	}
+	var _out0 int
+	_ret := _fnNwEndpointGetSignature(objref.IDOf(endpoint), unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnNwEndpointGetType func(objc.ID) unsafe.Pointer
+
+// NwEndpointGetType calls the Network framework function nw_endpoint_get_type.
+func NwEndpointGetType(endpoint obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwEndpointGetType == nil {
+		ebipurego.RegisterLibFunc(&_fnNwEndpointGetType, _lib, "nw_endpoint_get_type")
+	}
+	return _fnNwEndpointGetType(objref.IDOf(endpoint))
+}
+
 var _fnNwEndpointGetUrl func(objc.ID) string
 
 // NwEndpointGetUrl calls the Network framework function nw_endpoint_get_url.
@@ -906,6 +1326,28 @@ func NwErrorGetErrorCode(err obj.Object) int {
 		ebipurego.RegisterLibFunc(&_fnNwErrorGetErrorCode, _lib, "nw_error_get_error_code")
 	}
 	return int(_fnNwErrorGetErrorCode(objref.IDOf(err)))
+}
+
+var _fnNwErrorGetErrorDomain func(objc.ID) unsafe.Pointer
+
+// NwErrorGetErrorDomain calls the Network framework function nw_error_get_error_domain.
+func NwErrorGetErrorDomain(err obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwErrorGetErrorDomain == nil {
+		ebipurego.RegisterLibFunc(&_fnNwErrorGetErrorDomain, _lib, "nw_error_get_error_domain")
+	}
+	return _fnNwErrorGetErrorDomain(objref.IDOf(err))
+}
+
+var _fnNwEstablishmentReportCopyProxyEndpoint func(objc.ID) unsafe.Pointer
+
+// NwEstablishmentReportCopyProxyEndpoint calls the Network framework function nw_establishment_report_copy_proxy_endpoint.
+func NwEstablishmentReportCopyProxyEndpoint(report obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwEstablishmentReportCopyProxyEndpoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNwEstablishmentReportCopyProxyEndpoint, _lib, "nw_establishment_report_copy_proxy_endpoint")
+	}
+	return _fnNwEstablishmentReportCopyProxyEndpoint(objref.IDOf(report))
 }
 
 var _fnNwEstablishmentReportEnumerateProtocols func(objc.ID, unsafe.Pointer)
@@ -1007,6 +1449,28 @@ func NwEthernetChannelCancel(ethernetChannel obj.Object) {
 	_fnNwEthernetChannelCancel(objref.IDOf(ethernetChannel))
 }
 
+var _fnNwEthernetChannelCreate func(uint16, objc.ID) unsafe.Pointer
+
+// NwEthernetChannelCreate calls the Network framework function nw_ethernet_channel_create.
+func NwEthernetChannelCreate(etherType uint16, interface_ obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwEthernetChannelCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNwEthernetChannelCreate, _lib, "nw_ethernet_channel_create")
+	}
+	return _fnNwEthernetChannelCreate(etherType, objref.IDOf(interface_))
+}
+
+var _fnNwEthernetChannelCreateWithParameters func(uint16, objc.ID, objc.ID) unsafe.Pointer
+
+// NwEthernetChannelCreateWithParameters calls the Network framework function nw_ethernet_channel_create_with_parameters.
+func NwEthernetChannelCreateWithParameters(etherType uint16, interface_ obj.Object, parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwEthernetChannelCreateWithParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnNwEthernetChannelCreateWithParameters, _lib, "nw_ethernet_channel_create_with_parameters")
+	}
+	return _fnNwEthernetChannelCreateWithParameters(etherType, objref.IDOf(interface_), objref.IDOf(parameters))
+}
+
 var _fnNwEthernetChannelGetMaximumPayloadSize func(objc.ID) uint32
 
 // NwEthernetChannelGetMaximumPayloadSize calls the Network framework function nw_ethernet_channel_get_maximum_payload_size.
@@ -1086,6 +1550,72 @@ func NwFramerAsync(framer obj.Object, asyncBlock func()) {
 	_fnNwFramerAsync(objref.IDOf(framer), asyncBlock)
 }
 
+var _fnNwFramerCopyLocalEndpoint func(objc.ID) unsafe.Pointer
+
+// NwFramerCopyLocalEndpoint calls the Network framework function nw_framer_copy_local_endpoint.
+func NwFramerCopyLocalEndpoint(framer obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwFramerCopyLocalEndpoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNwFramerCopyLocalEndpoint, _lib, "nw_framer_copy_local_endpoint")
+	}
+	return _fnNwFramerCopyLocalEndpoint(objref.IDOf(framer))
+}
+
+var _fnNwFramerCopyOptions func(objc.ID) unsafe.Pointer
+
+// NwFramerCopyOptions calls the Network framework function nw_framer_copy_options.
+func NwFramerCopyOptions(framer obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwFramerCopyOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnNwFramerCopyOptions, _lib, "nw_framer_copy_options")
+	}
+	return _fnNwFramerCopyOptions(objref.IDOf(framer))
+}
+
+var _fnNwFramerCopyParameters func(objc.ID) unsafe.Pointer
+
+// NwFramerCopyParameters calls the Network framework function nw_framer_copy_parameters.
+func NwFramerCopyParameters(framer obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwFramerCopyParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnNwFramerCopyParameters, _lib, "nw_framer_copy_parameters")
+	}
+	return _fnNwFramerCopyParameters(objref.IDOf(framer))
+}
+
+var _fnNwFramerCopyRemoteEndpoint func(objc.ID) unsafe.Pointer
+
+// NwFramerCopyRemoteEndpoint calls the Network framework function nw_framer_copy_remote_endpoint.
+func NwFramerCopyRemoteEndpoint(framer obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwFramerCopyRemoteEndpoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNwFramerCopyRemoteEndpoint, _lib, "nw_framer_copy_remote_endpoint")
+	}
+	return _fnNwFramerCopyRemoteEndpoint(objref.IDOf(framer))
+}
+
+var _fnNwFramerCreateDefinition func(string, uint32, unsafe.Pointer) unsafe.Pointer
+
+// NwFramerCreateDefinition calls the Network framework function nw_framer_create_definition.
+func NwFramerCreateDefinition(identifier string, flags uint32, startHandler unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwFramerCreateDefinition == nil {
+		ebipurego.RegisterLibFunc(&_fnNwFramerCreateDefinition, _lib, "nw_framer_create_definition")
+	}
+	return _fnNwFramerCreateDefinition(identifier, flags, startHandler)
+}
+
+var _fnNwFramerCreateOptions func(objc.ID) unsafe.Pointer
+
+// NwFramerCreateOptions calls the Network framework function nw_framer_create_options.
+func NwFramerCreateOptions(framerDefinition obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwFramerCreateOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnNwFramerCreateOptions, _lib, "nw_framer_create_options")
+	}
+	return _fnNwFramerCreateOptions(objref.IDOf(framerDefinition))
+}
+
 var _fnNwFramerDeliverInput func(objc.ID, unsafe.Pointer, int, objc.ID, bool)
 
 // NwFramerDeliverInput calls the Network framework function nw_framer_deliver_input.
@@ -1141,6 +1671,28 @@ func NwFramerMessageAccessValue(message obj.Object, key string, accessValue unsa
 	return _fnNwFramerMessageAccessValue(objref.IDOf(message), key, accessValue)
 }
 
+var _fnNwFramerMessageCopyObjectValue func(objc.ID, string) unsafe.Pointer
+
+// NwFramerMessageCopyObjectValue calls the Network framework function nw_framer_message_copy_object_value.
+func NwFramerMessageCopyObjectValue(message obj.Object, key string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwFramerMessageCopyObjectValue == nil {
+		ebipurego.RegisterLibFunc(&_fnNwFramerMessageCopyObjectValue, _lib, "nw_framer_message_copy_object_value")
+	}
+	return _fnNwFramerMessageCopyObjectValue(objref.IDOf(message), key)
+}
+
+var _fnNwFramerMessageCreate func(objc.ID) unsafe.Pointer
+
+// NwFramerMessageCreate calls the Network framework function nw_framer_message_create.
+func NwFramerMessageCreate(framer obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwFramerMessageCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNwFramerMessageCreate, _lib, "nw_framer_message_create")
+	}
+	return _fnNwFramerMessageCreate(objref.IDOf(framer))
+}
+
 var _fnNwFramerMessageSetObjectValue func(objc.ID, string, objc.ID)
 
 // NwFramerMessageSetObjectValue calls the Network framework function nw_framer_message_set_object_value.
@@ -1161,6 +1713,17 @@ func NwFramerMessageSetValue(message obj.Object, key string, value unsafe.Pointe
 		ebipurego.RegisterLibFunc(&_fnNwFramerMessageSetValue, _lib, "nw_framer_message_set_value")
 	}
 	_fnNwFramerMessageSetValue(objref.IDOf(message), key, value, disposeValue)
+}
+
+var _fnNwFramerOptionsCopyObjectValue func(objc.ID, string) unsafe.Pointer
+
+// NwFramerOptionsCopyObjectValue calls the Network framework function nw_framer_options_copy_object_value.
+func NwFramerOptionsCopyObjectValue(options obj.Object, key string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwFramerOptionsCopyObjectValue == nil {
+		ebipurego.RegisterLibFunc(&_fnNwFramerOptionsCopyObjectValue, _lib, "nw_framer_options_copy_object_value")
+	}
+	return _fnNwFramerOptionsCopyObjectValue(objref.IDOf(options), key)
 }
 
 var _fnNwFramerOptionsSetObjectValue func(objc.ID, string, objc.ID)
@@ -1231,6 +1794,17 @@ func NwFramerPrependApplicationProtocol(framer obj.Object, protocolOptions obj.O
 		ebipurego.RegisterLibFunc(&_fnNwFramerPrependApplicationProtocol, _lib, "nw_framer_prepend_application_protocol")
 	}
 	return _fnNwFramerPrependApplicationProtocol(objref.IDOf(framer), objref.IDOf(protocolOptions))
+}
+
+var _fnNwFramerProtocolCreateMessage func(objc.ID) unsafe.Pointer
+
+// NwFramerProtocolCreateMessage calls the Network framework function nw_framer_protocol_create_message.
+func NwFramerProtocolCreateMessage(definition obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwFramerProtocolCreateMessage == nil {
+		ebipurego.RegisterLibFunc(&_fnNwFramerProtocolCreateMessage, _lib, "nw_framer_protocol_create_message")
+	}
+	return _fnNwFramerProtocolCreateMessage(objref.IDOf(definition))
 }
 
 var _fnNwFramerScheduleWakeup func(objc.ID, uint64)
@@ -1343,6 +1917,28 @@ func NwGroupDescriptorAddEndpoint(descriptor obj.Object, endpoint obj.Object) bo
 	return _fnNwGroupDescriptorAddEndpoint(objref.IDOf(descriptor), objref.IDOf(endpoint))
 }
 
+var _fnNwGroupDescriptorCreateMulticast func(objc.ID) unsafe.Pointer
+
+// NwGroupDescriptorCreateMulticast calls the Network framework function nw_group_descriptor_create_multicast.
+func NwGroupDescriptorCreateMulticast(multicastGroup obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwGroupDescriptorCreateMulticast == nil {
+		ebipurego.RegisterLibFunc(&_fnNwGroupDescriptorCreateMulticast, _lib, "nw_group_descriptor_create_multicast")
+	}
+	return _fnNwGroupDescriptorCreateMulticast(objref.IDOf(multicastGroup))
+}
+
+var _fnNwGroupDescriptorCreateMultiplex func(objc.ID) unsafe.Pointer
+
+// NwGroupDescriptorCreateMultiplex calls the Network framework function nw_group_descriptor_create_multiplex.
+func NwGroupDescriptorCreateMultiplex(remoteEndpoint obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwGroupDescriptorCreateMultiplex == nil {
+		ebipurego.RegisterLibFunc(&_fnNwGroupDescriptorCreateMultiplex, _lib, "nw_group_descriptor_create_multiplex")
+	}
+	return _fnNwGroupDescriptorCreateMultiplex(objref.IDOf(remoteEndpoint))
+}
+
 var _fnNwGroupDescriptorEnumerateEndpoints func(objc.ID, unsafe.Pointer)
 
 // NwGroupDescriptorEnumerateEndpoints calls the Network framework function nw_group_descriptor_enumerate_endpoints.
@@ -1376,6 +1972,39 @@ func NwInterfaceGetName(interface_ obj.Object) string {
 	return _fnNwInterfaceGetName(objref.IDOf(interface_))
 }
 
+var _fnNwInterfaceGetType func(objc.ID) unsafe.Pointer
+
+// NwInterfaceGetType calls the Network framework function nw_interface_get_type.
+func NwInterfaceGetType(interface_ obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwInterfaceGetType == nil {
+		ebipurego.RegisterLibFunc(&_fnNwInterfaceGetType, _lib, "nw_interface_get_type")
+	}
+	return _fnNwInterfaceGetType(objref.IDOf(interface_))
+}
+
+var _fnNwIpCreateMetadata func() unsafe.Pointer
+
+// NwIpCreateMetadata calls the Network framework function nw_ip_create_metadata.
+func NwIpCreateMetadata() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwIpCreateMetadata == nil {
+		ebipurego.RegisterLibFunc(&_fnNwIpCreateMetadata, _lib, "nw_ip_create_metadata")
+	}
+	return _fnNwIpCreateMetadata()
+}
+
+var _fnNwIpMetadataGetEcnFlag func(objc.ID) unsafe.Pointer
+
+// NwIpMetadataGetEcnFlag calls the Network framework function nw_ip_metadata_get_ecn_flag.
+func NwIpMetadataGetEcnFlag(metadata obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwIpMetadataGetEcnFlag == nil {
+		ebipurego.RegisterLibFunc(&_fnNwIpMetadataGetEcnFlag, _lib, "nw_ip_metadata_get_ecn_flag")
+	}
+	return _fnNwIpMetadataGetEcnFlag(objref.IDOf(metadata))
+}
+
 var _fnNwIpMetadataGetReceiveTime func(objc.ID) uint64
 
 // NwIpMetadataGetReceiveTime calls the Network framework function nw_ip_metadata_get_receive_time.
@@ -1385,6 +2014,17 @@ func NwIpMetadataGetReceiveTime(metadata obj.Object) uint64 {
 		ebipurego.RegisterLibFunc(&_fnNwIpMetadataGetReceiveTime, _lib, "nw_ip_metadata_get_receive_time")
 	}
 	return _fnNwIpMetadataGetReceiveTime(objref.IDOf(metadata))
+}
+
+var _fnNwIpMetadataGetServiceClass func(objc.ID) unsafe.Pointer
+
+// NwIpMetadataGetServiceClass calls the Network framework function nw_ip_metadata_get_service_class.
+func NwIpMetadataGetServiceClass(metadata obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwIpMetadataGetServiceClass == nil {
+		ebipurego.RegisterLibFunc(&_fnNwIpMetadataGetServiceClass, _lib, "nw_ip_metadata_get_service_class")
+	}
+	return _fnNwIpMetadataGetServiceClass(objref.IDOf(metadata))
 }
 
 var _fnNwIpMetadataSetEcnFlag func(objc.ID, unsafe.Pointer)
@@ -1495,6 +2135,50 @@ func NwListenerCancel(listener obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnNwListenerCancel, _lib, "nw_listener_cancel")
 	}
 	_fnNwListenerCancel(objref.IDOf(listener))
+}
+
+var _fnNwListenerCreate func(objc.ID) unsafe.Pointer
+
+// NwListenerCreate calls the Network framework function nw_listener_create.
+func NwListenerCreate(parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwListenerCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNwListenerCreate, _lib, "nw_listener_create")
+	}
+	return _fnNwListenerCreate(objref.IDOf(parameters))
+}
+
+var _fnNwListenerCreateWithConnection func(objc.ID, objc.ID) unsafe.Pointer
+
+// NwListenerCreateWithConnection calls the Network framework function nw_listener_create_with_connection.
+func NwListenerCreateWithConnection(connection obj.Object, parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwListenerCreateWithConnection == nil {
+		ebipurego.RegisterLibFunc(&_fnNwListenerCreateWithConnection, _lib, "nw_listener_create_with_connection")
+	}
+	return _fnNwListenerCreateWithConnection(objref.IDOf(connection), objref.IDOf(parameters))
+}
+
+var _fnNwListenerCreateWithLaunchdKey func(objc.ID, string) unsafe.Pointer
+
+// NwListenerCreateWithLaunchdKey calls the Network framework function nw_listener_create_with_launchd_key.
+func NwListenerCreateWithLaunchdKey(parameters obj.Object, launchdKey string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwListenerCreateWithLaunchdKey == nil {
+		ebipurego.RegisterLibFunc(&_fnNwListenerCreateWithLaunchdKey, _lib, "nw_listener_create_with_launchd_key")
+	}
+	return _fnNwListenerCreateWithLaunchdKey(objref.IDOf(parameters), launchdKey)
+}
+
+var _fnNwListenerCreateWithPort func(string, objc.ID) unsafe.Pointer
+
+// NwListenerCreateWithPort calls the Network framework function nw_listener_create_with_port.
+func NwListenerCreateWithPort(port string, parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwListenerCreateWithPort == nil {
+		ebipurego.RegisterLibFunc(&_fnNwListenerCreateWithPort, _lib, "nw_listener_create_with_port")
+	}
+	return _fnNwListenerCreateWithPort(port, objref.IDOf(parameters))
 }
 
 var _fnNwListenerGetNewConnectionLimit func(objc.ID) uint32
@@ -1662,6 +2346,116 @@ func NwParametersClearProhibitedInterfaces(parameters obj.Object) {
 	_fnNwParametersClearProhibitedInterfaces(objref.IDOf(parameters))
 }
 
+var _fnNwParametersCopy func(objc.ID) unsafe.Pointer
+
+// NwParametersCopy calls the Network framework function nw_parameters_copy.
+func NwParametersCopy(parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersCopy, _lib, "nw_parameters_copy")
+	}
+	return _fnNwParametersCopy(objref.IDOf(parameters))
+}
+
+var _fnNwParametersCopyDefaultProtocolStack func(objc.ID) unsafe.Pointer
+
+// NwParametersCopyDefaultProtocolStack calls the Network framework function nw_parameters_copy_default_protocol_stack.
+func NwParametersCopyDefaultProtocolStack(parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersCopyDefaultProtocolStack == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersCopyDefaultProtocolStack, _lib, "nw_parameters_copy_default_protocol_stack")
+	}
+	return _fnNwParametersCopyDefaultProtocolStack(objref.IDOf(parameters))
+}
+
+var _fnNwParametersCopyLocalEndpoint func(objc.ID) unsafe.Pointer
+
+// NwParametersCopyLocalEndpoint calls the Network framework function nw_parameters_copy_local_endpoint.
+func NwParametersCopyLocalEndpoint(parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersCopyLocalEndpoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersCopyLocalEndpoint, _lib, "nw_parameters_copy_local_endpoint")
+	}
+	return _fnNwParametersCopyLocalEndpoint(objref.IDOf(parameters))
+}
+
+var _fnNwParametersCopyRequiredInterface func(objc.ID) unsafe.Pointer
+
+// NwParametersCopyRequiredInterface calls the Network framework function nw_parameters_copy_required_interface.
+func NwParametersCopyRequiredInterface(parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersCopyRequiredInterface == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersCopyRequiredInterface, _lib, "nw_parameters_copy_required_interface")
+	}
+	return _fnNwParametersCopyRequiredInterface(objref.IDOf(parameters))
+}
+
+var _fnNwParametersCreate func() unsafe.Pointer
+
+// NwParametersCreate calls the Network framework function nw_parameters_create.
+func NwParametersCreate() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersCreate, _lib, "nw_parameters_create")
+	}
+	return _fnNwParametersCreate()
+}
+
+var _fnNwParametersCreateApplicationService func() unsafe.Pointer
+
+// NwParametersCreateApplicationService calls the Network framework function nw_parameters_create_application_service.
+func NwParametersCreateApplicationService() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersCreateApplicationService == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersCreateApplicationService, _lib, "nw_parameters_create_application_service")
+	}
+	return _fnNwParametersCreateApplicationService()
+}
+
+var _fnNwParametersCreateCustomIp func(uint8, unsafe.Pointer) unsafe.Pointer
+
+// NwParametersCreateCustomIp calls the Network framework function nw_parameters_create_custom_ip.
+func NwParametersCreateCustomIp(customIpProtocolNumber uint8, configureIp unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersCreateCustomIp == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersCreateCustomIp, _lib, "nw_parameters_create_custom_ip")
+	}
+	return _fnNwParametersCreateCustomIp(customIpProtocolNumber, configureIp)
+}
+
+var _fnNwParametersCreateQuic func(unsafe.Pointer) unsafe.Pointer
+
+// NwParametersCreateQuic calls the Network framework function nw_parameters_create_quic.
+func NwParametersCreateQuic(configureQuic unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersCreateQuic == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersCreateQuic, _lib, "nw_parameters_create_quic")
+	}
+	return _fnNwParametersCreateQuic(configureQuic)
+}
+
+var _fnNwParametersCreateSecureTcp func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// NwParametersCreateSecureTcp calls the Network framework function nw_parameters_create_secure_tcp.
+func NwParametersCreateSecureTcp(configureTls unsafe.Pointer, configureTcp unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersCreateSecureTcp == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersCreateSecureTcp, _lib, "nw_parameters_create_secure_tcp")
+	}
+	return _fnNwParametersCreateSecureTcp(configureTls, configureTcp)
+}
+
+var _fnNwParametersCreateSecureUdp func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// NwParametersCreateSecureUdp calls the Network framework function nw_parameters_create_secure_udp.
+func NwParametersCreateSecureUdp(configureDtls unsafe.Pointer, configureUdp unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersCreateSecureUdp == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersCreateSecureUdp, _lib, "nw_parameters_create_secure_udp")
+	}
+	return _fnNwParametersCreateSecureUdp(configureDtls, configureUdp)
+}
+
 var _fnNwParametersGetAllowUltraConstrained func(objc.ID) bool
 
 // NwParametersGetAllowUltraConstrained calls the Network framework function nw_parameters_get_allow_ultra_constrained.
@@ -1682,6 +2476,17 @@ func NwParametersGetAttribution(parameters obj.Object) ParametersAttribution {
 		ebipurego.RegisterLibFunc(&_fnNwParametersGetAttribution, _lib, "nw_parameters_get_attribution")
 	}
 	return _fnNwParametersGetAttribution(objref.IDOf(parameters))
+}
+
+var _fnNwParametersGetExpiredDnsBehavior func(objc.ID) unsafe.Pointer
+
+// NwParametersGetExpiredDnsBehavior calls the Network framework function nw_parameters_get_expired_dns_behavior.
+func NwParametersGetExpiredDnsBehavior(parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersGetExpiredDnsBehavior == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersGetExpiredDnsBehavior, _lib, "nw_parameters_get_expired_dns_behavior")
+	}
+	return _fnNwParametersGetExpiredDnsBehavior(objref.IDOf(parameters))
 }
 
 var _fnNwParametersGetFastOpenEnabled func(objc.ID) bool
@@ -1717,6 +2522,17 @@ func NwParametersGetLocalOnly(parameters obj.Object) bool {
 	return _fnNwParametersGetLocalOnly(objref.IDOf(parameters))
 }
 
+var _fnNwParametersGetMultipathService func(objc.ID) unsafe.Pointer
+
+// NwParametersGetMultipathService calls the Network framework function nw_parameters_get_multipath_service.
+func NwParametersGetMultipathService(parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersGetMultipathService == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersGetMultipathService, _lib, "nw_parameters_get_multipath_service")
+	}
+	return _fnNwParametersGetMultipathService(objref.IDOf(parameters))
+}
+
 var _fnNwParametersGetPreferNoProxy func(objc.ID) bool
 
 // NwParametersGetPreferNoProxy calls the Network framework function nw_parameters_get_prefer_no_proxy.
@@ -1750,6 +2566,17 @@ func NwParametersGetProhibitExpensive(parameters obj.Object) bool {
 	return _fnNwParametersGetProhibitExpensive(objref.IDOf(parameters))
 }
 
+var _fnNwParametersGetRequiredInterfaceType func(objc.ID) unsafe.Pointer
+
+// NwParametersGetRequiredInterfaceType calls the Network framework function nw_parameters_get_required_interface_type.
+func NwParametersGetRequiredInterfaceType(parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersGetRequiredInterfaceType == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersGetRequiredInterfaceType, _lib, "nw_parameters_get_required_interface_type")
+	}
+	return _fnNwParametersGetRequiredInterfaceType(objref.IDOf(parameters))
+}
+
 var _fnNwParametersGetReuseLocalAddress func(objc.ID) bool
 
 // NwParametersGetReuseLocalAddress calls the Network framework function nw_parameters_get_reuse_local_address.
@@ -1759,6 +2586,17 @@ func NwParametersGetReuseLocalAddress(parameters obj.Object) bool {
 		ebipurego.RegisterLibFunc(&_fnNwParametersGetReuseLocalAddress, _lib, "nw_parameters_get_reuse_local_address")
 	}
 	return _fnNwParametersGetReuseLocalAddress(objref.IDOf(parameters))
+}
+
+var _fnNwParametersGetServiceClass func(objc.ID) unsafe.Pointer
+
+// NwParametersGetServiceClass calls the Network framework function nw_parameters_get_service_class.
+func NwParametersGetServiceClass(parameters obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwParametersGetServiceClass == nil {
+		ebipurego.RegisterLibFunc(&_fnNwParametersGetServiceClass, _lib, "nw_parameters_get_service_class")
+	}
+	return _fnNwParametersGetServiceClass(objref.IDOf(parameters))
 }
 
 var _fnNwParametersIterateProhibitedInterfaceTypes func(objc.ID, unsafe.Pointer)
@@ -2003,6 +2841,28 @@ func NwParametersSetServiceClass(parameters obj.Object, serviceClass unsafe.Poin
 	_fnNwParametersSetServiceClass(objref.IDOf(parameters), serviceClass)
 }
 
+var _fnNwPathCopyEffectiveLocalEndpoint func(objc.ID) unsafe.Pointer
+
+// NwPathCopyEffectiveLocalEndpoint calls the Network framework function nw_path_copy_effective_local_endpoint.
+func NwPathCopyEffectiveLocalEndpoint(path obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwPathCopyEffectiveLocalEndpoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNwPathCopyEffectiveLocalEndpoint, _lib, "nw_path_copy_effective_local_endpoint")
+	}
+	return _fnNwPathCopyEffectiveLocalEndpoint(objref.IDOf(path))
+}
+
+var _fnNwPathCopyEffectiveRemoteEndpoint func(objc.ID) unsafe.Pointer
+
+// NwPathCopyEffectiveRemoteEndpoint calls the Network framework function nw_path_copy_effective_remote_endpoint.
+func NwPathCopyEffectiveRemoteEndpoint(path obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwPathCopyEffectiveRemoteEndpoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNwPathCopyEffectiveRemoteEndpoint, _lib, "nw_path_copy_effective_remote_endpoint")
+	}
+	return _fnNwPathCopyEffectiveRemoteEndpoint(objref.IDOf(path))
+}
+
 var _fnNwPathEnumerateGateways func(objc.ID, unsafe.Pointer)
 
 // NwPathEnumerateGateways calls the Network framework function nw_path_enumerate_gateways.
@@ -2023,6 +2883,39 @@ func NwPathEnumerateInterfaces(path obj.Object, enumerateBlock unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnNwPathEnumerateInterfaces, _lib, "nw_path_enumerate_interfaces")
 	}
 	_fnNwPathEnumerateInterfaces(objref.IDOf(path), enumerateBlock)
+}
+
+var _fnNwPathGetLinkQuality func(objc.ID) unsafe.Pointer
+
+// NwPathGetLinkQuality calls the Network framework function nw_path_get_link_quality.
+func NwPathGetLinkQuality(path obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwPathGetLinkQuality == nil {
+		ebipurego.RegisterLibFunc(&_fnNwPathGetLinkQuality, _lib, "nw_path_get_link_quality")
+	}
+	return _fnNwPathGetLinkQuality(objref.IDOf(path))
+}
+
+var _fnNwPathGetStatus func(objc.ID) unsafe.Pointer
+
+// NwPathGetStatus calls the Network framework function nw_path_get_status.
+func NwPathGetStatus(path obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwPathGetStatus == nil {
+		ebipurego.RegisterLibFunc(&_fnNwPathGetStatus, _lib, "nw_path_get_status")
+	}
+	return _fnNwPathGetStatus(objref.IDOf(path))
+}
+
+var _fnNwPathGetUnsatisfiedReason func(objc.ID) unsafe.Pointer
+
+// NwPathGetUnsatisfiedReason calls the Network framework function nw_path_get_unsatisfied_reason.
+func NwPathGetUnsatisfiedReason(path obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwPathGetUnsatisfiedReason == nil {
+		ebipurego.RegisterLibFunc(&_fnNwPathGetUnsatisfiedReason, _lib, "nw_path_get_unsatisfied_reason")
+	}
+	return _fnNwPathGetUnsatisfiedReason(objref.IDOf(path))
 }
 
 var _fnNwPathHasDns func(objc.ID) bool
@@ -2113,6 +3006,39 @@ func NwPathMonitorCancel(monitor obj.Object) {
 	_fnNwPathMonitorCancel(objref.IDOf(monitor))
 }
 
+var _fnNwPathMonitorCreate func() unsafe.Pointer
+
+// NwPathMonitorCreate calls the Network framework function nw_path_monitor_create.
+func NwPathMonitorCreate() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwPathMonitorCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNwPathMonitorCreate, _lib, "nw_path_monitor_create")
+	}
+	return _fnNwPathMonitorCreate()
+}
+
+var _fnNwPathMonitorCreateForEthernetChannel func() unsafe.Pointer
+
+// NwPathMonitorCreateForEthernetChannel calls the Network framework function nw_path_monitor_create_for_ethernet_channel.
+func NwPathMonitorCreateForEthernetChannel() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwPathMonitorCreateForEthernetChannel == nil {
+		ebipurego.RegisterLibFunc(&_fnNwPathMonitorCreateForEthernetChannel, _lib, "nw_path_monitor_create_for_ethernet_channel")
+	}
+	return _fnNwPathMonitorCreateForEthernetChannel()
+}
+
+var _fnNwPathMonitorCreateWithType func(unsafe.Pointer) unsafe.Pointer
+
+// NwPathMonitorCreateWithType calls the Network framework function nw_path_monitor_create_with_type.
+func NwPathMonitorCreateWithType(requiredInterfaceType unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwPathMonitorCreateWithType == nil {
+		ebipurego.RegisterLibFunc(&_fnNwPathMonitorCreateWithType, _lib, "nw_path_monitor_create_with_type")
+	}
+	return _fnNwPathMonitorCreateWithType(requiredInterfaceType)
+}
+
 var _fnNwPathMonitorProhibitInterfaceType func(objc.ID, unsafe.Pointer)
 
 // NwPathMonitorProhibitInterfaceType calls the Network framework function nw_path_monitor_prohibit_interface_type.
@@ -2201,6 +3127,17 @@ func NwPrivacyContextClearProxies(privacyContext obj.Object) {
 	_fnNwPrivacyContextClearProxies(objref.IDOf(privacyContext))
 }
 
+var _fnNwPrivacyContextCreate func(string) unsafe.Pointer
+
+// NwPrivacyContextCreate calls the Network framework function nw_privacy_context_create.
+func NwPrivacyContextCreate(description string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwPrivacyContextCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNwPrivacyContextCreate, _lib, "nw_privacy_context_create")
+	}
+	return _fnNwPrivacyContextCreate(description)
+}
+
 var _fnNwPrivacyContextDisableLogging func(objc.ID)
 
 // NwPrivacyContextDisableLogging calls the Network framework function nw_privacy_context_disable_logging.
@@ -2234,6 +3171,72 @@ func NwPrivacyContextRequireEncryptedNameResolution(privacyContext obj.Object, r
 	_fnNwPrivacyContextRequireEncryptedNameResolution(objref.IDOf(privacyContext), requireEncryptedNameResolution, objref.IDOf(fallbackResolverConfig))
 }
 
+var _fnNwProtocolCopyIpDefinition func() unsafe.Pointer
+
+// NwProtocolCopyIpDefinition calls the Network framework function nw_protocol_copy_ip_definition.
+func NwProtocolCopyIpDefinition() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProtocolCopyIpDefinition == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProtocolCopyIpDefinition, _lib, "nw_protocol_copy_ip_definition")
+	}
+	return _fnNwProtocolCopyIpDefinition()
+}
+
+var _fnNwProtocolCopyQuicDefinition func() unsafe.Pointer
+
+// NwProtocolCopyQuicDefinition calls the Network framework function nw_protocol_copy_quic_definition.
+func NwProtocolCopyQuicDefinition() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProtocolCopyQuicDefinition == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProtocolCopyQuicDefinition, _lib, "nw_protocol_copy_quic_definition")
+	}
+	return _fnNwProtocolCopyQuicDefinition()
+}
+
+var _fnNwProtocolCopyTcpDefinition func() unsafe.Pointer
+
+// NwProtocolCopyTcpDefinition calls the Network framework function nw_protocol_copy_tcp_definition.
+func NwProtocolCopyTcpDefinition() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProtocolCopyTcpDefinition == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProtocolCopyTcpDefinition, _lib, "nw_protocol_copy_tcp_definition")
+	}
+	return _fnNwProtocolCopyTcpDefinition()
+}
+
+var _fnNwProtocolCopyTlsDefinition func() unsafe.Pointer
+
+// NwProtocolCopyTlsDefinition calls the Network framework function nw_protocol_copy_tls_definition.
+func NwProtocolCopyTlsDefinition() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProtocolCopyTlsDefinition == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProtocolCopyTlsDefinition, _lib, "nw_protocol_copy_tls_definition")
+	}
+	return _fnNwProtocolCopyTlsDefinition()
+}
+
+var _fnNwProtocolCopyUdpDefinition func() unsafe.Pointer
+
+// NwProtocolCopyUdpDefinition calls the Network framework function nw_protocol_copy_udp_definition.
+func NwProtocolCopyUdpDefinition() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProtocolCopyUdpDefinition == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProtocolCopyUdpDefinition, _lib, "nw_protocol_copy_udp_definition")
+	}
+	return _fnNwProtocolCopyUdpDefinition()
+}
+
+var _fnNwProtocolCopyWsDefinition func() unsafe.Pointer
+
+// NwProtocolCopyWsDefinition calls the Network framework function nw_protocol_copy_ws_definition.
+func NwProtocolCopyWsDefinition() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProtocolCopyWsDefinition == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProtocolCopyWsDefinition, _lib, "nw_protocol_copy_ws_definition")
+	}
+	return _fnNwProtocolCopyWsDefinition()
+}
+
 var _fnNwProtocolDefinitionIsEqual func(objc.ID, objc.ID) bool
 
 // NwProtocolDefinitionIsEqual calls the Network framework function nw_protocol_definition_is_equal.
@@ -2243,6 +3246,17 @@ func NwProtocolDefinitionIsEqual(definition1 obj.Object, definition2 obj.Object)
 		ebipurego.RegisterLibFunc(&_fnNwProtocolDefinitionIsEqual, _lib, "nw_protocol_definition_is_equal")
 	}
 	return _fnNwProtocolDefinitionIsEqual(objref.IDOf(definition1), objref.IDOf(definition2))
+}
+
+var _fnNwProtocolMetadataCopyDefinition func(objc.ID) unsafe.Pointer
+
+// NwProtocolMetadataCopyDefinition calls the Network framework function nw_protocol_metadata_copy_definition.
+func NwProtocolMetadataCopyDefinition(metadata obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProtocolMetadataCopyDefinition == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProtocolMetadataCopyDefinition, _lib, "nw_protocol_metadata_copy_definition")
+	}
+	return _fnNwProtocolMetadataCopyDefinition(objref.IDOf(metadata))
 }
 
 var _fnNwProtocolMetadataIsFramerMessage func(objc.ID) bool
@@ -2322,6 +3336,17 @@ func NwProtocolMetadataIsWs(metadata obj.Object) bool {
 	return _fnNwProtocolMetadataIsWs(objref.IDOf(metadata))
 }
 
+var _fnNwProtocolOptionsCopyDefinition func(objc.ID) unsafe.Pointer
+
+// NwProtocolOptionsCopyDefinition calls the Network framework function nw_protocol_options_copy_definition.
+func NwProtocolOptionsCopyDefinition(options obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProtocolOptionsCopyDefinition == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProtocolOptionsCopyDefinition, _lib, "nw_protocol_options_copy_definition")
+	}
+	return _fnNwProtocolOptionsCopyDefinition(objref.IDOf(options))
+}
+
 var _fnNwProtocolOptionsIsQuic func(objc.ID) bool
 
 // NwProtocolOptionsIsQuic calls the Network framework function nw_protocol_options_is_quic.
@@ -2342,6 +3367,28 @@ func NwProtocolStackClearApplicationProtocols(stack obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnNwProtocolStackClearApplicationProtocols, _lib, "nw_protocol_stack_clear_application_protocols")
 	}
 	_fnNwProtocolStackClearApplicationProtocols(objref.IDOf(stack))
+}
+
+var _fnNwProtocolStackCopyInternetProtocol func(objc.ID) unsafe.Pointer
+
+// NwProtocolStackCopyInternetProtocol calls the Network framework function nw_protocol_stack_copy_internet_protocol.
+func NwProtocolStackCopyInternetProtocol(stack obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProtocolStackCopyInternetProtocol == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProtocolStackCopyInternetProtocol, _lib, "nw_protocol_stack_copy_internet_protocol")
+	}
+	return _fnNwProtocolStackCopyInternetProtocol(objref.IDOf(stack))
+}
+
+var _fnNwProtocolStackCopyTransportProtocol func(objc.ID) unsafe.Pointer
+
+// NwProtocolStackCopyTransportProtocol calls the Network framework function nw_protocol_stack_copy_transport_protocol.
+func NwProtocolStackCopyTransportProtocol(stack obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProtocolStackCopyTransportProtocol == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProtocolStackCopyTransportProtocol, _lib, "nw_protocol_stack_copy_transport_protocol")
+	}
+	return _fnNwProtocolStackCopyTransportProtocol(objref.IDOf(stack))
 }
 
 var _fnNwProtocolStackIterateApplicationProtocols func(objc.ID, unsafe.Pointer)
@@ -2421,6 +3468,50 @@ func NwProxyConfigClearMatchDomains(config obj.Object) {
 	_fnNwProxyConfigClearMatchDomains(objref.IDOf(config))
 }
 
+var _fnNwProxyConfigCreateHttpConnect func(objc.ID, objc.ID) unsafe.Pointer
+
+// NwProxyConfigCreateHttpConnect calls the Network framework function nw_proxy_config_create_http_connect.
+func NwProxyConfigCreateHttpConnect(proxyEndpoint obj.Object, proxyTlsOptions obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProxyConfigCreateHttpConnect == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProxyConfigCreateHttpConnect, _lib, "nw_proxy_config_create_http_connect")
+	}
+	return _fnNwProxyConfigCreateHttpConnect(objref.IDOf(proxyEndpoint), objref.IDOf(proxyTlsOptions))
+}
+
+var _fnNwProxyConfigCreateObliviousHttp func(objc.ID, string, unsafe.Pointer, int) unsafe.Pointer
+
+// NwProxyConfigCreateObliviousHttp calls the Network framework function nw_proxy_config_create_oblivious_http.
+func NwProxyConfigCreateObliviousHttp(relay obj.Object, relayResourcePath string, gatewayKeyConfig unsafe.Pointer, gatewayKeyConfigLength int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProxyConfigCreateObliviousHttp == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProxyConfigCreateObliviousHttp, _lib, "nw_proxy_config_create_oblivious_http")
+	}
+	return _fnNwProxyConfigCreateObliviousHttp(objref.IDOf(relay), relayResourcePath, gatewayKeyConfig, gatewayKeyConfigLength)
+}
+
+var _fnNwProxyConfigCreateRelay func(objc.ID, objc.ID) unsafe.Pointer
+
+// NwProxyConfigCreateRelay calls the Network framework function nw_proxy_config_create_relay.
+func NwProxyConfigCreateRelay(firstHop obj.Object, secondHop obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProxyConfigCreateRelay == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProxyConfigCreateRelay, _lib, "nw_proxy_config_create_relay")
+	}
+	return _fnNwProxyConfigCreateRelay(objref.IDOf(firstHop), objref.IDOf(secondHop))
+}
+
+var _fnNwProxyConfigCreateSocksv5 func(objc.ID) unsafe.Pointer
+
+// NwProxyConfigCreateSocksv5 calls the Network framework function nw_proxy_config_create_socksv5.
+func NwProxyConfigCreateSocksv5(proxyEndpoint obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwProxyConfigCreateSocksv5 == nil {
+		ebipurego.RegisterLibFunc(&_fnNwProxyConfigCreateSocksv5, _lib, "nw_proxy_config_create_socksv5")
+	}
+	return _fnNwProxyConfigCreateSocksv5(objref.IDOf(proxyEndpoint))
+}
+
 var _fnNwProxyConfigEnumerateExcludedDomains func(objc.ID, func(string))
 
 // NwProxyConfigEnumerateExcludedDomains calls the Network framework function nw_proxy_config_enumerate_excluded_domains.
@@ -2485,6 +3576,39 @@ func NwQuicAddTlsApplicationProtocol(options obj.Object, applicationProtocol str
 		ebipurego.RegisterLibFunc(&_fnNwQuicAddTlsApplicationProtocol, _lib, "nw_quic_add_tls_application_protocol")
 	}
 	_fnNwQuicAddTlsApplicationProtocol(objref.IDOf(options), applicationProtocol)
+}
+
+var _fnNwQuicCopySecProtocolMetadata func(objc.ID) unsafe.Pointer
+
+// NwQuicCopySecProtocolMetadata calls the Network framework function nw_quic_copy_sec_protocol_metadata.
+func NwQuicCopySecProtocolMetadata(metadata obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwQuicCopySecProtocolMetadata == nil {
+		ebipurego.RegisterLibFunc(&_fnNwQuicCopySecProtocolMetadata, _lib, "nw_quic_copy_sec_protocol_metadata")
+	}
+	return _fnNwQuicCopySecProtocolMetadata(objref.IDOf(metadata))
+}
+
+var _fnNwQuicCopySecProtocolOptions func(objc.ID) unsafe.Pointer
+
+// NwQuicCopySecProtocolOptions calls the Network framework function nw_quic_copy_sec_protocol_options.
+func NwQuicCopySecProtocolOptions(options obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwQuicCopySecProtocolOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnNwQuicCopySecProtocolOptions, _lib, "nw_quic_copy_sec_protocol_options")
+	}
+	return _fnNwQuicCopySecProtocolOptions(objref.IDOf(options))
+}
+
+var _fnNwQuicCreateOptions func() unsafe.Pointer
+
+// NwQuicCreateOptions calls the Network framework function nw_quic_create_options.
+func NwQuicCreateOptions() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwQuicCreateOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnNwQuicCreateOptions, _lib, "nw_quic_create_options")
+	}
+	return _fnNwQuicCreateOptions()
 }
 
 var _fnNwQuicGetApplicationError func(objc.ID) uint64
@@ -2927,6 +4051,17 @@ func NwRelayHopAddAdditionalHttpHeaderField(relayHop obj.Object, fieldName strin
 	_fnNwRelayHopAddAdditionalHttpHeaderField(objref.IDOf(relayHop), fieldName, fieldValue)
 }
 
+var _fnNwRelayHopCreate func(objc.ID, objc.ID, objc.ID) unsafe.Pointer
+
+// NwRelayHopCreate calls the Network framework function nw_relay_hop_create.
+func NwRelayHopCreate(http3RelayEndpoint obj.Object, http2RelayEndpoint obj.Object, relayTlsOptions obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwRelayHopCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNwRelayHopCreate, _lib, "nw_relay_hop_create")
+	}
+	return _fnNwRelayHopCreate(objref.IDOf(http3RelayEndpoint), objref.IDOf(http2RelayEndpoint), objref.IDOf(relayTlsOptions))
+}
+
 var _fnNwRelease func(unsafe.Pointer)
 
 // NwRelease calls the Network framework function nw_release.
@@ -2936,6 +4071,28 @@ func NwRelease(object unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnNwRelease, _lib, "nw_release")
 	}
 	_fnNwRelease(object)
+}
+
+var _fnNwResolutionReportCopyPreferredEndpoint func(objc.ID) unsafe.Pointer
+
+// NwResolutionReportCopyPreferredEndpoint calls the Network framework function nw_resolution_report_copy_preferred_endpoint.
+func NwResolutionReportCopyPreferredEndpoint(resolutionReport obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwResolutionReportCopyPreferredEndpoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNwResolutionReportCopyPreferredEndpoint, _lib, "nw_resolution_report_copy_preferred_endpoint")
+	}
+	return _fnNwResolutionReportCopyPreferredEndpoint(objref.IDOf(resolutionReport))
+}
+
+var _fnNwResolutionReportCopySuccessfulEndpoint func(objc.ID) unsafe.Pointer
+
+// NwResolutionReportCopySuccessfulEndpoint calls the Network framework function nw_resolution_report_copy_successful_endpoint.
+func NwResolutionReportCopySuccessfulEndpoint(resolutionReport obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwResolutionReportCopySuccessfulEndpoint == nil {
+		ebipurego.RegisterLibFunc(&_fnNwResolutionReportCopySuccessfulEndpoint, _lib, "nw_resolution_report_copy_successful_endpoint")
+	}
+	return _fnNwResolutionReportCopySuccessfulEndpoint(objref.IDOf(resolutionReport))
 }
 
 var _fnNwResolutionReportGetEndpointCount func(objc.ID) uint32
@@ -2960,6 +4117,28 @@ func NwResolutionReportGetMilliseconds(resolutionReport obj.Object) uint64 {
 	return _fnNwResolutionReportGetMilliseconds(objref.IDOf(resolutionReport))
 }
 
+var _fnNwResolutionReportGetProtocol func(objc.ID) unsafe.Pointer
+
+// NwResolutionReportGetProtocol calls the Network framework function nw_resolution_report_get_protocol.
+func NwResolutionReportGetProtocol(resolutionReport obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwResolutionReportGetProtocol == nil {
+		ebipurego.RegisterLibFunc(&_fnNwResolutionReportGetProtocol, _lib, "nw_resolution_report_get_protocol")
+	}
+	return _fnNwResolutionReportGetProtocol(objref.IDOf(resolutionReport))
+}
+
+var _fnNwResolutionReportGetSource func(objc.ID) unsafe.Pointer
+
+// NwResolutionReportGetSource calls the Network framework function nw_resolution_report_get_source.
+func NwResolutionReportGetSource(resolutionReport obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwResolutionReportGetSource == nil {
+		ebipurego.RegisterLibFunc(&_fnNwResolutionReportGetSource, _lib, "nw_resolution_report_get_source")
+	}
+	return _fnNwResolutionReportGetSource(objref.IDOf(resolutionReport))
+}
+
 var _fnNwResolverConfigAddServerAddress func(objc.ID, objc.ID)
 
 // NwResolverConfigAddServerAddress calls the Network framework function nw_resolver_config_add_server_address.
@@ -2969,6 +4148,50 @@ func NwResolverConfigAddServerAddress(config obj.Object, serverAddress obj.Objec
 		ebipurego.RegisterLibFunc(&_fnNwResolverConfigAddServerAddress, _lib, "nw_resolver_config_add_server_address")
 	}
 	_fnNwResolverConfigAddServerAddress(objref.IDOf(config), objref.IDOf(serverAddress))
+}
+
+var _fnNwResolverConfigCreateHttps func(objc.ID) unsafe.Pointer
+
+// NwResolverConfigCreateHttps calls the Network framework function nw_resolver_config_create_https.
+func NwResolverConfigCreateHttps(urlEndpoint obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwResolverConfigCreateHttps == nil {
+		ebipurego.RegisterLibFunc(&_fnNwResolverConfigCreateHttps, _lib, "nw_resolver_config_create_https")
+	}
+	return _fnNwResolverConfigCreateHttps(objref.IDOf(urlEndpoint))
+}
+
+var _fnNwResolverConfigCreateTls func(objc.ID) unsafe.Pointer
+
+// NwResolverConfigCreateTls calls the Network framework function nw_resolver_config_create_tls.
+func NwResolverConfigCreateTls(serverEndpoint obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwResolverConfigCreateTls == nil {
+		ebipurego.RegisterLibFunc(&_fnNwResolverConfigCreateTls, _lib, "nw_resolver_config_create_tls")
+	}
+	return _fnNwResolverConfigCreateTls(objref.IDOf(serverEndpoint))
+}
+
+var _fnNwRetain func(unsafe.Pointer) unsafe.Pointer
+
+// NwRetain calls the Network framework function nw_retain.
+func NwRetain(object unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnNwRetain, _lib, "nw_retain")
+	}
+	return _fnNwRetain(object)
+}
+
+var _fnNwTcpCreateOptions func() unsafe.Pointer
+
+// NwTcpCreateOptions calls the Network framework function nw_tcp_create_options.
+func NwTcpCreateOptions() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwTcpCreateOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnNwTcpCreateOptions, _lib, "nw_tcp_create_options")
+	}
+	return _fnNwTcpCreateOptions()
 }
 
 var _fnNwTcpGetAvailableReceiveBuffer func(objc.ID) uint32
@@ -3169,6 +4392,39 @@ func NwTcpOptionsSetRetransmitFinDrop(options obj.Object, retransmitFinDrop bool
 	_fnNwTcpOptionsSetRetransmitFinDrop(objref.IDOf(options), retransmitFinDrop)
 }
 
+var _fnNwTlsCopySecProtocolMetadata func(objc.ID) unsafe.Pointer
+
+// NwTlsCopySecProtocolMetadata calls the Network framework function nw_tls_copy_sec_protocol_metadata.
+func NwTlsCopySecProtocolMetadata(metadata obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwTlsCopySecProtocolMetadata == nil {
+		ebipurego.RegisterLibFunc(&_fnNwTlsCopySecProtocolMetadata, _lib, "nw_tls_copy_sec_protocol_metadata")
+	}
+	return _fnNwTlsCopySecProtocolMetadata(objref.IDOf(metadata))
+}
+
+var _fnNwTlsCopySecProtocolOptions func(objc.ID) unsafe.Pointer
+
+// NwTlsCopySecProtocolOptions calls the Network framework function nw_tls_copy_sec_protocol_options.
+func NwTlsCopySecProtocolOptions(options obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwTlsCopySecProtocolOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnNwTlsCopySecProtocolOptions, _lib, "nw_tls_copy_sec_protocol_options")
+	}
+	return _fnNwTlsCopySecProtocolOptions(objref.IDOf(options))
+}
+
+var _fnNwTlsCreateOptions func() unsafe.Pointer
+
+// NwTlsCreateOptions calls the Network framework function nw_tls_create_options.
+func NwTlsCreateOptions() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwTlsCreateOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnNwTlsCreateOptions, _lib, "nw_tls_create_options")
+	}
+	return _fnNwTlsCreateOptions()
+}
+
 var _fnNwTxtRecordAccessBytes func(objc.ID, unsafe.Pointer) bool
 
 // NwTxtRecordAccessBytes calls the Network framework function nw_txt_record_access_bytes.
@@ -3200,6 +4456,50 @@ func NwTxtRecordApply(txtRecord obj.Object, applier unsafe.Pointer) bool {
 		ebipurego.RegisterLibFunc(&_fnNwTxtRecordApply, _lib, "nw_txt_record_apply")
 	}
 	return _fnNwTxtRecordApply(objref.IDOf(txtRecord), applier)
+}
+
+var _fnNwTxtRecordCopy func(objc.ID) unsafe.Pointer
+
+// NwTxtRecordCopy calls the Network framework function nw_txt_record_copy.
+func NwTxtRecordCopy(txtRecord obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwTxtRecordCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnNwTxtRecordCopy, _lib, "nw_txt_record_copy")
+	}
+	return _fnNwTxtRecordCopy(objref.IDOf(txtRecord))
+}
+
+var _fnNwTxtRecordCreateDictionary func() unsafe.Pointer
+
+// NwTxtRecordCreateDictionary calls the Network framework function nw_txt_record_create_dictionary.
+func NwTxtRecordCreateDictionary() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwTxtRecordCreateDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnNwTxtRecordCreateDictionary, _lib, "nw_txt_record_create_dictionary")
+	}
+	return _fnNwTxtRecordCreateDictionary()
+}
+
+var _fnNwTxtRecordCreateWithBytes func(unsafe.Pointer, int) unsafe.Pointer
+
+// NwTxtRecordCreateWithBytes calls the Network framework function nw_txt_record_create_with_bytes.
+func NwTxtRecordCreateWithBytes(txtBytes unsafe.Pointer, txtLen int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwTxtRecordCreateWithBytes == nil {
+		ebipurego.RegisterLibFunc(&_fnNwTxtRecordCreateWithBytes, _lib, "nw_txt_record_create_with_bytes")
+	}
+	return _fnNwTxtRecordCreateWithBytes(txtBytes, txtLen)
+}
+
+var _fnNwTxtRecordFindKey func(objc.ID, string) unsafe.Pointer
+
+// NwTxtRecordFindKey calls the Network framework function nw_txt_record_find_key.
+func NwTxtRecordFindKey(txtRecord obj.Object, key string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwTxtRecordFindKey == nil {
+		ebipurego.RegisterLibFunc(&_fnNwTxtRecordFindKey, _lib, "nw_txt_record_find_key")
+	}
+	return _fnNwTxtRecordFindKey(objref.IDOf(txtRecord), key)
 }
 
 var _fnNwTxtRecordGetKeyCount func(objc.ID) int
@@ -3257,6 +4557,28 @@ func NwTxtRecordSetKey(txtRecord obj.Object, key string, value unsafe.Pointer, v
 	return _fnNwTxtRecordSetKey(objref.IDOf(txtRecord), key, value, valueLen)
 }
 
+var _fnNwUdpCreateMetadata func() unsafe.Pointer
+
+// NwUdpCreateMetadata calls the Network framework function nw_udp_create_metadata.
+func NwUdpCreateMetadata() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwUdpCreateMetadata == nil {
+		ebipurego.RegisterLibFunc(&_fnNwUdpCreateMetadata, _lib, "nw_udp_create_metadata")
+	}
+	return _fnNwUdpCreateMetadata()
+}
+
+var _fnNwUdpCreateOptions func() unsafe.Pointer
+
+// NwUdpCreateOptions calls the Network framework function nw_udp_create_options.
+func NwUdpCreateOptions() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwUdpCreateOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnNwUdpCreateOptions, _lib, "nw_udp_create_options")
+	}
+	return _fnNwUdpCreateOptions()
+}
+
 var _fnNwUdpOptionsSetPreferNoChecksum func(objc.ID, bool)
 
 // NwUdpOptionsSetPreferNoChecksum calls the Network framework function nw_udp_options_set_prefer_no_checksum.
@@ -3266,6 +4588,61 @@ func NwUdpOptionsSetPreferNoChecksum(options obj.Object, preferNoChecksum bool) 
 		ebipurego.RegisterLibFunc(&_fnNwUdpOptionsSetPreferNoChecksum, _lib, "nw_udp_options_set_prefer_no_checksum")
 	}
 	_fnNwUdpOptionsSetPreferNoChecksum(objref.IDOf(options), preferNoChecksum)
+}
+
+var _fnNwWsCreateMetadata func(unsafe.Pointer) unsafe.Pointer
+
+// NwWsCreateMetadata calls the Network framework function nw_ws_create_metadata.
+func NwWsCreateMetadata(opcode unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwWsCreateMetadata == nil {
+		ebipurego.RegisterLibFunc(&_fnNwWsCreateMetadata, _lib, "nw_ws_create_metadata")
+	}
+	return _fnNwWsCreateMetadata(opcode)
+}
+
+var _fnNwWsCreateOptions func(unsafe.Pointer) unsafe.Pointer
+
+// NwWsCreateOptions calls the Network framework function nw_ws_create_options.
+func NwWsCreateOptions(version unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwWsCreateOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnNwWsCreateOptions, _lib, "nw_ws_create_options")
+	}
+	return _fnNwWsCreateOptions(version)
+}
+
+var _fnNwWsMetadataCopyServerResponse func(objc.ID) unsafe.Pointer
+
+// NwWsMetadataCopyServerResponse calls the Network framework function nw_ws_metadata_copy_server_response.
+func NwWsMetadataCopyServerResponse(metadata obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwWsMetadataCopyServerResponse == nil {
+		ebipurego.RegisterLibFunc(&_fnNwWsMetadataCopyServerResponse, _lib, "nw_ws_metadata_copy_server_response")
+	}
+	return _fnNwWsMetadataCopyServerResponse(objref.IDOf(metadata))
+}
+
+var _fnNwWsMetadataGetCloseCode func(objc.ID) unsafe.Pointer
+
+// NwWsMetadataGetCloseCode calls the Network framework function nw_ws_metadata_get_close_code.
+func NwWsMetadataGetCloseCode(metadata obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwWsMetadataGetCloseCode == nil {
+		ebipurego.RegisterLibFunc(&_fnNwWsMetadataGetCloseCode, _lib, "nw_ws_metadata_get_close_code")
+	}
+	return _fnNwWsMetadataGetCloseCode(objref.IDOf(metadata))
+}
+
+var _fnNwWsMetadataGetOpcode func(objc.ID) unsafe.Pointer
+
+// NwWsMetadataGetOpcode calls the Network framework function nw_ws_metadata_get_opcode.
+func NwWsMetadataGetOpcode(metadata obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwWsMetadataGetOpcode == nil {
+		ebipurego.RegisterLibFunc(&_fnNwWsMetadataGetOpcode, _lib, "nw_ws_metadata_get_opcode")
+	}
+	return _fnNwWsMetadataGetOpcode(objref.IDOf(metadata))
 }
 
 var _fnNwWsMetadataSetCloseCode func(objc.ID, unsafe.Pointer)
@@ -3389,6 +4766,17 @@ func NwWsResponseAddAdditionalHeader(response obj.Object, name string, value str
 	_fnNwWsResponseAddAdditionalHeader(objref.IDOf(response), name, value)
 }
 
+var _fnNwWsResponseCreate func(unsafe.Pointer, string) unsafe.Pointer
+
+// NwWsResponseCreate calls the Network framework function nw_ws_response_create.
+func NwWsResponseCreate(status unsafe.Pointer, selectedSubprotocol string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwWsResponseCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnNwWsResponseCreate, _lib, "nw_ws_response_create")
+	}
+	return _fnNwWsResponseCreate(status, selectedSubprotocol)
+}
+
 var _fnNwWsResponseEnumerateAdditionalHeaders func(objc.ID, func(string, string) bool) bool
 
 // NwWsResponseEnumerateAdditionalHeaders calls the Network framework function nw_ws_response_enumerate_additional_headers.
@@ -3409,4 +4797,15 @@ func NwWsResponseGetSelectedSubprotocol(response obj.Object) string {
 		ebipurego.RegisterLibFunc(&_fnNwWsResponseGetSelectedSubprotocol, _lib, "nw_ws_response_get_selected_subprotocol")
 	}
 	return _fnNwWsResponseGetSelectedSubprotocol(objref.IDOf(response))
+}
+
+var _fnNwWsResponseGetStatus func(objc.ID) unsafe.Pointer
+
+// NwWsResponseGetStatus calls the Network framework function nw_ws_response_get_status.
+func NwWsResponseGetStatus(response obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNwWsResponseGetStatus == nil {
+		ebipurego.RegisterLibFunc(&_fnNwWsResponseGetStatus, _lib, "nw_ws_response_get_status")
+	}
+	return _fnNwWsResponseGetStatus(objref.IDOf(response))
 }

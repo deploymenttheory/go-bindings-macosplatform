@@ -14,6 +14,17 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+var _fnCopySharedInterfaceList func() unsafe.Pointer
+
+// CopySharedInterfaceList calls the vmnet framework function vmnet_copy_shared_interface_list.
+func CopySharedInterfaceList() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCopySharedInterfaceList == nil {
+		ebipurego.RegisterLibFunc(&_fnCopySharedInterfaceList, _lib, "vmnet_copy_shared_interface_list")
+	}
+	return _fnCopySharedInterfaceList()
+}
+
 var _fnInterfaceAddIpPortForwardingRule func(objc.ID, uint8, uint16, uint8, unsafe.Pointer, uint16, unsafe.Pointer) VmnetReturn
 
 // InterfaceAddIpPortForwardingRule reports an error if the vmnet framework function vmnet_interface_add_ip_port_forwarding_rule fails.
@@ -305,6 +316,19 @@ func NetworkConfigurationSetMtu(config obj.Object, mtu uint32) error {
 		return _err
 	}
 	return nil
+}
+
+var _fnNetworkCopySerialization func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// NetworkCopySerialization calls the vmnet framework function vmnet_network_copy_serialization.
+func NetworkCopySerialization(network obj.Object) (result unsafe.Pointer, status VmnetReturn) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNetworkCopySerialization == nil {
+		ebipurego.RegisterLibFunc(&_fnNetworkCopySerialization, _lib, "vmnet_network_copy_serialization")
+	}
+	var _out0 VmnetReturn
+	_ret := _fnNetworkCopySerialization(objref.IDOf(network), unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnNetworkCreate func(objc.ID, unsafe.Pointer) objc.ID

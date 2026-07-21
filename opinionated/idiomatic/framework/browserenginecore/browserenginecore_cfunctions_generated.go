@@ -5,8 +5,54 @@
 package browserenginecore
 
 import (
+	"unsafe"
+
 	ebipurego "github.com/ebitengine/purego"
 )
+
+var _fnBeMemoryInlineJitRestrictRwxToRwWithWitness func() unsafe.Pointer
+
+// BeMemoryInlineJitRestrictRwxToRwWithWitness calls the BrowserEngineCore framework function be_memory_inline_jit_restrict_rwx_to_rw_with_witness.
+func BeMemoryInlineJitRestrictRwxToRwWithWitness() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBeMemoryInlineJitRestrictRwxToRwWithWitness == nil {
+		ebipurego.RegisterLibFunc(&_fnBeMemoryInlineJitRestrictRwxToRwWithWitness, _lib, "be_memory_inline_jit_restrict_rwx_to_rw_with_witness")
+	}
+	return _fnBeMemoryInlineJitRestrictRwxToRwWithWitness()
+}
+
+var _fnBeMemoryInlineJitRestrictRwxToRwWithWitnessImpl func() unsafe.Pointer
+
+// BeMemoryInlineJitRestrictRwxToRwWithWitnessImpl calls the BrowserEngineCore framework function be_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl.
+func BeMemoryInlineJitRestrictRwxToRwWithWitnessImpl() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBeMemoryInlineJitRestrictRwxToRwWithWitnessImpl == nil {
+		ebipurego.RegisterLibFunc(&_fnBeMemoryInlineJitRestrictRwxToRwWithWitnessImpl, _lib, "be_memory_inline_jit_restrict_rwx_to_rw_with_witness_impl")
+	}
+	return _fnBeMemoryInlineJitRestrictRwxToRwWithWitnessImpl()
+}
+
+var _fnBeMemoryInlineJitRestrictRwxToRxWithWitness func() unsafe.Pointer
+
+// BeMemoryInlineJitRestrictRwxToRxWithWitness calls the BrowserEngineCore framework function be_memory_inline_jit_restrict_rwx_to_rx_with_witness.
+func BeMemoryInlineJitRestrictRwxToRxWithWitness() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBeMemoryInlineJitRestrictRwxToRxWithWitness == nil {
+		ebipurego.RegisterLibFunc(&_fnBeMemoryInlineJitRestrictRwxToRxWithWitness, _lib, "be_memory_inline_jit_restrict_rwx_to_rx_with_witness")
+	}
+	return _fnBeMemoryInlineJitRestrictRwxToRxWithWitness()
+}
+
+var _fnBeMemoryInlineJitRestrictRwxToRxWithWitnessImpl func() unsafe.Pointer
+
+// BeMemoryInlineJitRestrictRwxToRxWithWitnessImpl calls the BrowserEngineCore framework function be_memory_inline_jit_restrict_rwx_to_rx_with_witness_impl.
+func BeMemoryInlineJitRestrictRwxToRxWithWitnessImpl() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBeMemoryInlineJitRestrictRwxToRxWithWitnessImpl == nil {
+		ebipurego.RegisterLibFunc(&_fnBeMemoryInlineJitRestrictRwxToRxWithWitnessImpl, _lib, "be_memory_inline_jit_restrict_rwx_to_rx_with_witness_impl")
+	}
+	return _fnBeMemoryInlineJitRestrictRwxToRxWithWitnessImpl()
+}
 
 var _fnBeMemoryInlineJitRestrictWithWitnessSupported func() int32
 

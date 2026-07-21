@@ -53,3 +53,21 @@ func NSFileProviderMaterializedSetDidChange() obj.Object {
 func NSFileProviderPendingSetDidChange() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSFileProviderPendingSetDidChange")))
 }
+
+// NSFileProviderFavoriteRankUnranked returns the address of the symbol NSFileProviderFavoriteRankUnranked.
+func NSFileProviderFavoriteRankUnranked() uintptr {
+	return _symbol("NSFileProviderFavoriteRankUnranked")
+}
+
+// NSFileProviderInitialPageSortedByDate returns the address of the symbol NSFileProviderInitialPageSortedByDate.
+func NSFileProviderInitialPageSortedByDate() uintptr {
+	return _symbol("NSFileProviderInitialPageSortedByDate")
+}
+
+// NSFileProviderInitialPageSortedByName returns the address of the symbol NSFileProviderInitialPageSortedByName.
+func NSFileProviderInitialPageSortedByName() uintptr {
+	return _symbol("NSFileProviderInitialPageSortedByName")
+}
+
+// NSFileProviderErrorItemKey returns the address of the symbol NSFileProviderErrorItemKey.
+func NSFileProviderErrorItemKey() uintptr { return _symbol("NSFileProviderErrorItemKey") }

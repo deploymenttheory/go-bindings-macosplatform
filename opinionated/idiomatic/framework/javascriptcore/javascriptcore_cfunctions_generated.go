@@ -362,6 +362,28 @@ func JSObjectGetArrayBufferByteLength(ctx obj.Object, object obj.Object, excepti
 	return _fnJSObjectGetArrayBufferByteLength(objref.IDOf(ctx), objref.IDOf(object), exception)
 }
 
+var _fnJSObjectGetArrayBufferBytesPtr func(objc.ID, objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// JSObjectGetArrayBufferBytesPtr calls the JavaScriptCore framework function JSObjectGetArrayBufferBytesPtr.
+func JSObjectGetArrayBufferBytesPtr(ctx obj.Object, object obj.Object, exception unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJSObjectGetArrayBufferBytesPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnJSObjectGetArrayBufferBytesPtr, _lib, "JSObjectGetArrayBufferBytesPtr")
+	}
+	return _fnJSObjectGetArrayBufferBytesPtr(objref.IDOf(ctx), objref.IDOf(object), exception)
+}
+
+var _fnJSObjectGetPrivate func(objc.ID) unsafe.Pointer
+
+// JSObjectGetPrivate calls the JavaScriptCore framework function JSObjectGetPrivate.
+func JSObjectGetPrivate(object obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJSObjectGetPrivate == nil {
+		ebipurego.RegisterLibFunc(&_fnJSObjectGetPrivate, _lib, "JSObjectGetPrivate")
+	}
+	return _fnJSObjectGetPrivate(objref.IDOf(object))
+}
+
 var _fnJSObjectGetProperty func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // JSObjectGetProperty calls the JavaScriptCore framework function JSObjectGetProperty.
@@ -442,6 +464,17 @@ func JSObjectGetTypedArrayByteOffset(ctx obj.Object, object obj.Object, exceptio
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetTypedArrayByteOffset, _lib, "JSObjectGetTypedArrayByteOffset")
 	}
 	return _fnJSObjectGetTypedArrayByteOffset(objref.IDOf(ctx), objref.IDOf(object), exception)
+}
+
+var _fnJSObjectGetTypedArrayBytesPtr func(objc.ID, objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// JSObjectGetTypedArrayBytesPtr calls the JavaScriptCore framework function JSObjectGetTypedArrayBytesPtr.
+func JSObjectGetTypedArrayBytesPtr(ctx obj.Object, object obj.Object, exception unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJSObjectGetTypedArrayBytesPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnJSObjectGetTypedArrayBytesPtr, _lib, "JSObjectGetTypedArrayBytesPtr")
+	}
+	return _fnJSObjectGetTypedArrayBytesPtr(objref.IDOf(ctx), objref.IDOf(object), exception)
 }
 
 var _fnJSObjectGetTypedArrayLength func(objc.ID, objc.ID, unsafe.Pointer) int
@@ -826,6 +859,17 @@ func JSStringCreateWithUTF8CString(str string) obj.Object {
 	}
 	_ret := _fnJSStringCreateWithUTF8CString(str)
 	return obj.Wrap(_ret)
+}
+
+var _fnJSStringGetCharactersPtr func(objc.ID) unsafe.Pointer
+
+// JSStringGetCharactersPtr calls the JavaScriptCore framework function JSStringGetCharactersPtr.
+func JSStringGetCharactersPtr(str obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJSStringGetCharactersPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnJSStringGetCharactersPtr, _lib, "JSStringGetCharactersPtr")
+	}
+	return _fnJSStringGetCharactersPtr(objref.IDOf(str))
 }
 
 var _fnJSStringGetLength func(objc.ID) int

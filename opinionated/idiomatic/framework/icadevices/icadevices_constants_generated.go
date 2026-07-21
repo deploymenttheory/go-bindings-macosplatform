@@ -696,3 +696,9 @@ func KICADevicePropCopyrightInfo() obj.Object {
 
 // KICUTTypeRaw returns the value of the constant kICUTTypeRaw.
 func KICUTTypeRaw() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICUTTypeRaw"))) }
+
+// GICDCallbackFunctions returns the address of the symbol gICDCallbackFunctions.
+func GICDCallbackFunctions() uintptr { return _symbol("gICDCallbackFunctions") }
+
+// GICDScannerCallbackFunctions returns the address of the symbol gICDScannerCallbackFunctions.
+func GICDScannerCallbackFunctions() uintptr { return _symbol("gICDScannerCallbackFunctions") }

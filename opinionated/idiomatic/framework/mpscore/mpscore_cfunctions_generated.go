@@ -24,6 +24,17 @@ func MPSDataTypeBitsCount(t DataType) int {
 	return _fnMPSDataTypeBitsCount(t)
 }
 
+var _fnMPSFindIntegerDivisionParams func(uint16) unsafe.Pointer
+
+// MPSFindIntegerDivisionParams calls the MPSCore framework function MPSFindIntegerDivisionParams.
+func MPSFindIntegerDivisionParams(divisor uint16) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSFindIntegerDivisionParams == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSFindIntegerDivisionParams, _lib, "MPSFindIntegerDivisionParams")
+	}
+	return _fnMPSFindIntegerDivisionParams(divisor)
+}
+
 var _fnMPSGetCustomKernelBatchedDestinationIndex func(unsafe.Pointer) int
 
 // MPSGetCustomKernelBatchedDestinationIndex calls the MPSCore framework function MPSGetCustomKernelBatchedDestinationIndex.

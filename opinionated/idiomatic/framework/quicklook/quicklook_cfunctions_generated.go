@@ -85,6 +85,17 @@ func QLPreviewRequestFlushContext(preview obj.Object, context_ obj.Object) {
 	_fnQLPreviewRequestFlushContext(objref.IDOf(preview), objref.IDOf(context_))
 }
 
+var _fnQLPreviewRequestGetDocumentObject func(objc.ID) unsafe.Pointer
+
+// QLPreviewRequestGetDocumentObject calls the QuickLook framework function QLPreviewRequestGetDocumentObject.
+func QLPreviewRequestGetDocumentObject(preview obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnQLPreviewRequestGetDocumentObject == nil {
+		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestGetDocumentObject, _lib, "QLPreviewRequestGetDocumentObject")
+	}
+	return _fnQLPreviewRequestGetDocumentObject(objref.IDOf(preview))
+}
+
 var _fnQLPreviewRequestGetGeneratorBundle func(objc.ID) objc.ID
 
 // QLPreviewRequestGetGeneratorBundle calls the QuickLook framework function QLPreviewRequestGetGeneratorBundle.
@@ -335,6 +346,17 @@ func QLThumbnailRequestFlushContext(thumbnail obj.Object, context_ obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestFlushContext, _lib, "QLThumbnailRequestFlushContext")
 	}
 	_fnQLThumbnailRequestFlushContext(objref.IDOf(thumbnail), objref.IDOf(context_))
+}
+
+var _fnQLThumbnailRequestGetDocumentObject func(objc.ID) unsafe.Pointer
+
+// QLThumbnailRequestGetDocumentObject calls the QuickLook framework function QLThumbnailRequestGetDocumentObject.
+func QLThumbnailRequestGetDocumentObject(thumbnail obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnQLThumbnailRequestGetDocumentObject == nil {
+		ebipurego.RegisterLibFunc(&_fnQLThumbnailRequestGetDocumentObject, _lib, "QLThumbnailRequestGetDocumentObject")
+	}
+	return _fnQLThumbnailRequestGetDocumentObject(objref.IDOf(thumbnail))
 }
 
 var _fnQLThumbnailRequestGetGeneratorBundle func(objc.ID) objc.ID

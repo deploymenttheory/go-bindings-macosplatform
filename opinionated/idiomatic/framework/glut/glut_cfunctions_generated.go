@@ -364,6 +364,17 @@ func GetModifiers() int {
 	return int(_fnGetModifiers())
 }
 
+var _fnGetProcAddress func(string) unsafe.Pointer
+
+// GetProcAddress calls the GLUT framework function glutGetProcAddress.
+func GetProcAddress(procName string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetProcAddress == nil {
+		ebipurego.RegisterLibFunc(&_fnGetProcAddress, _lib, "glutGetProcAddress")
+	}
+	return _fnGetProcAddress(procName)
+}
+
 var _fnGetWindow func() int32
 
 // GetWindow calls the GLUT framework function glutGetWindow.

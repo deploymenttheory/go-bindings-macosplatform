@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -393,4 +395,38 @@ func AVSpeechSynthesisAvailableVoicesDidChangeNotification() obj.Object {
 // AVAudioApplicationMuteStateKey returns the string constant AVAudioApplicationMuteStateKey, for use as a dictionary key or argument.
 func AVAudioApplicationMuteStateKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVAudioApplicationMuteStateKey")))
+}
+
+// AVAudioUnitComponentManagerRegistrationsChangedNotification returns the address of the symbol AVAudioUnitComponentManagerRegistrationsChangedNotification.
+func AVAudioUnitComponentManagerRegistrationsChangedNotification() uintptr {
+	return _symbol("AVAudioUnitComponentManagerRegistrationsChangedNotification")
+}
+
+// AVExtendedNoteOnEventDefaultInstrument returns the value of the constant AVExtendedNoteOnEventDefaultInstrument.
+func AVExtendedNoteOnEventDefaultInstrument() uint {
+	addr := _symbol("AVExtendedNoteOnEventDefaultInstrument")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint)(unsafe.Pointer(addr))
+}
+
+// AVSpeechUtteranceMinimumSpeechRate returns the address of the symbol AVSpeechUtteranceMinimumSpeechRate.
+func AVSpeechUtteranceMinimumSpeechRate() uintptr {
+	return _symbol("AVSpeechUtteranceMinimumSpeechRate")
+}
+
+// AVSpeechUtteranceMaximumSpeechRate returns the address of the symbol AVSpeechUtteranceMaximumSpeechRate.
+func AVSpeechUtteranceMaximumSpeechRate() uintptr {
+	return _symbol("AVSpeechUtteranceMaximumSpeechRate")
+}
+
+// AVSpeechUtteranceDefaultSpeechRate returns the address of the symbol AVSpeechUtteranceDefaultSpeechRate.
+func AVSpeechUtteranceDefaultSpeechRate() uintptr {
+	return _symbol("AVSpeechUtteranceDefaultSpeechRate")
+}
+
+// AVAudioApplicationInputMuteStateChangeNotification returns the address of the symbol AVAudioApplicationInputMuteStateChangeNotification.
+func AVAudioApplicationInputMuteStateChangeNotification() uintptr {
+	return _symbol("AVAudioApplicationInputMuteStateChangeNotification")
 }

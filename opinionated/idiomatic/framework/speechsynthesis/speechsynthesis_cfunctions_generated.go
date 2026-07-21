@@ -306,6 +306,72 @@ func NewSpeechChannel(chan_ unsafe.Pointer) (result int16, voice VoiceSpec) {
 	return _ret, _out0
 }
 
+var _fnNewSpeechDoneUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewSpeechDoneUPP calls the SpeechSynthesis framework function NewSpeechDoneUPP.
+func NewSpeechDoneUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewSpeechDoneUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewSpeechDoneUPP, _lib, "NewSpeechDoneUPP")
+	}
+	return _fnNewSpeechDoneUPP(userRoutine)
+}
+
+var _fnNewSpeechErrorUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewSpeechErrorUPP calls the SpeechSynthesis framework function NewSpeechErrorUPP.
+func NewSpeechErrorUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewSpeechErrorUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewSpeechErrorUPP, _lib, "NewSpeechErrorUPP")
+	}
+	return _fnNewSpeechErrorUPP(userRoutine)
+}
+
+var _fnNewSpeechPhonemeUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewSpeechPhonemeUPP calls the SpeechSynthesis framework function NewSpeechPhonemeUPP.
+func NewSpeechPhonemeUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewSpeechPhonemeUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewSpeechPhonemeUPP, _lib, "NewSpeechPhonemeUPP")
+	}
+	return _fnNewSpeechPhonemeUPP(userRoutine)
+}
+
+var _fnNewSpeechSyncUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewSpeechSyncUPP calls the SpeechSynthesis framework function NewSpeechSyncUPP.
+func NewSpeechSyncUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewSpeechSyncUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewSpeechSyncUPP, _lib, "NewSpeechSyncUPP")
+	}
+	return _fnNewSpeechSyncUPP(userRoutine)
+}
+
+var _fnNewSpeechTextDoneUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewSpeechTextDoneUPP calls the SpeechSynthesis framework function NewSpeechTextDoneUPP.
+func NewSpeechTextDoneUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewSpeechTextDoneUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewSpeechTextDoneUPP, _lib, "NewSpeechTextDoneUPP")
+	}
+	return _fnNewSpeechTextDoneUPP(userRoutine)
+}
+
+var _fnNewSpeechWordUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewSpeechWordUPP calls the SpeechSynthesis framework function NewSpeechWordUPP.
+func NewSpeechWordUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewSpeechWordUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewSpeechWordUPP, _lib, "NewSpeechWordUPP")
+	}
+	return _fnNewSpeechWordUPP(userRoutine)
+}
+
 var _fnPauseSpeechAt func(unsafe.Pointer, int) int16
 
 // PauseSpeechAt calls the SpeechSynthesis framework function PauseSpeechAt.
@@ -427,6 +493,17 @@ func SpeechBusySystemWide() int16 {
 		ebipurego.RegisterLibFunc(&_fnSpeechBusySystemWide, _lib, "SpeechBusySystemWide")
 	}
 	return _fnSpeechBusySystemWide()
+}
+
+var _fnSpeechManagerVersion func() unsafe.Pointer
+
+// SpeechManagerVersion calls the SpeechSynthesis framework function SpeechManagerVersion.
+func SpeechManagerVersion() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSpeechManagerVersion == nil {
+		ebipurego.RegisterLibFunc(&_fnSpeechManagerVersion, _lib, "SpeechManagerVersion")
+	}
+	return _fnSpeechManagerVersion()
 }
 
 var _fnSpeechSynthesisRegisterModuleURL func(objc.ID) int16

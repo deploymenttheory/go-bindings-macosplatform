@@ -18,3 +18,6 @@ func AENotInstalledParticipantsKey() obj.Object {
 func AERestrictedSystemParticipantsKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AERestrictedSystemParticipantsKey")))
 }
+
+// AEAssessmentErrorDomain returns the address of the symbol AEAssessmentErrorDomain.
+func AEAssessmentErrorDomain() uintptr { return _symbol("AEAssessmentErrorDomain") }

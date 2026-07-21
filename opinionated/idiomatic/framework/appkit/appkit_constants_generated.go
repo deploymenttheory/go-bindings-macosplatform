@@ -6572,3 +6572,628 @@ func NSApp() *Application {
 	id := *(*objc.ID)(unsafe.Pointer(addr))
 	return ApplicationFromID(id)
 }
+
+// NSWhite returns the value of the constant NSWhite.
+func NSWhite() float64 {
+	addr := _symbol("NSWhite")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSLightGray returns the value of the constant NSLightGray.
+func NSLightGray() float64 {
+	addr := _symbol("NSLightGray")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSDarkGray returns the value of the constant NSDarkGray.
+func NSDarkGray() float64 {
+	addr := _symbol("NSDarkGray")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSBlack returns the value of the constant NSBlack.
+func NSBlack() float64 {
+	addr := _symbol("NSBlack")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSAccessibilityException returns the address of the symbol NSAccessibilityException.
+func NSAccessibilityException() uintptr { return _symbol("NSAccessibilityException") }
+
+// NSAccessibilityAutocorrectedTextAttribute returns the address of the symbol NSAccessibilityAutocorrectedTextAttribute.
+func NSAccessibilityAutocorrectedTextAttribute() uintptr {
+	return _symbol("NSAccessibilityAutocorrectedTextAttribute")
+}
+
+// NSAccessibilityTextAlignmentAttribute returns the address of the symbol NSAccessibilityTextAlignmentAttribute.
+func NSAccessibilityTextAlignmentAttribute() uintptr {
+	return _symbol("NSAccessibilityTextAlignmentAttribute")
+}
+
+// NSAccessibilityFontBoldAttribute returns the address of the symbol NSAccessibilityFontBoldAttribute.
+func NSAccessibilityFontBoldAttribute() uintptr { return _symbol("NSAccessibilityFontBoldAttribute") }
+
+// NSAccessibilityFontItalicAttribute returns the address of the symbol NSAccessibilityFontItalicAttribute.
+func NSAccessibilityFontItalicAttribute() uintptr {
+	return _symbol("NSAccessibilityFontItalicAttribute")
+}
+
+// NSAccessibilityListItemPrefixTextAttribute returns the address of the symbol NSAccessibilityListItemPrefixTextAttribute.
+func NSAccessibilityListItemPrefixTextAttribute() uintptr {
+	return _symbol("NSAccessibilityListItemPrefixTextAttribute")
+}
+
+// NSAccessibilityListItemIndexTextAttribute returns the address of the symbol NSAccessibilityListItemIndexTextAttribute.
+func NSAccessibilityListItemIndexTextAttribute() uintptr {
+	return _symbol("NSAccessibilityListItemIndexTextAttribute")
+}
+
+// NSAccessibilityListItemLevelTextAttribute returns the address of the symbol NSAccessibilityListItemLevelTextAttribute.
+func NSAccessibilityListItemLevelTextAttribute() uintptr {
+	return _symbol("NSAccessibilityListItemLevelTextAttribute")
+}
+
+// NSAccessibilityMarkedMisspelledTextAttribute returns the address of the symbol NSAccessibilityMarkedMisspelledTextAttribute.
+func NSAccessibilityMarkedMisspelledTextAttribute() uintptr {
+	return _symbol("NSAccessibilityMarkedMisspelledTextAttribute")
+}
+
+// NSAccessibilityLanguageTextAttribute returns the address of the symbol NSAccessibilityLanguageTextAttribute.
+func NSAccessibilityLanguageTextAttribute() uintptr {
+	return _symbol("NSAccessibilityLanguageTextAttribute")
+}
+
+// NSAccessibilityCustomTextAttribute returns the address of the symbol NSAccessibilityCustomTextAttribute.
+func NSAccessibilityCustomTextAttribute() uintptr {
+	return _symbol("NSAccessibilityCustomTextAttribute")
+}
+
+// NSAccessibilityAnnotationTextAttribute returns the address of the symbol NSAccessibilityAnnotationTextAttribute.
+func NSAccessibilityAnnotationTextAttribute() uintptr {
+	return _symbol("NSAccessibilityAnnotationTextAttribute")
+}
+
+// NSWorkspaceDidHideApplicationNotification returns the address of the symbol NSWorkspaceDidHideApplicationNotification.
+func NSWorkspaceDidHideApplicationNotification() uintptr {
+	return _symbol("NSWorkspaceDidHideApplicationNotification")
+}
+
+// NSWorkspaceDidUnhideApplicationNotification returns the address of the symbol NSWorkspaceDidUnhideApplicationNotification.
+func NSWorkspaceDidUnhideApplicationNotification() uintptr {
+	return _symbol("NSWorkspaceDidUnhideApplicationNotification")
+}
+
+// NSWorkspaceDidActivateApplicationNotification returns the address of the symbol NSWorkspaceDidActivateApplicationNotification.
+func NSWorkspaceDidActivateApplicationNotification() uintptr {
+	return _symbol("NSWorkspaceDidActivateApplicationNotification")
+}
+
+// NSWorkspaceDidDeactivateApplicationNotification returns the address of the symbol NSWorkspaceDidDeactivateApplicationNotification.
+func NSWorkspaceDidDeactivateApplicationNotification() uintptr {
+	return _symbol("NSWorkspaceDidDeactivateApplicationNotification")
+}
+
+// NSWorkspaceDidRenameVolumeNotification returns the address of the symbol NSWorkspaceDidRenameVolumeNotification.
+func NSWorkspaceDidRenameVolumeNotification() uintptr {
+	return _symbol("NSWorkspaceDidRenameVolumeNotification")
+}
+
+// NSWorkspaceScreensDidSleepNotification returns the address of the symbol NSWorkspaceScreensDidSleepNotification.
+func NSWorkspaceScreensDidSleepNotification() uintptr {
+	return _symbol("NSWorkspaceScreensDidSleepNotification")
+}
+
+// NSWorkspaceScreensDidWakeNotification returns the address of the symbol NSWorkspaceScreensDidWakeNotification.
+func NSWorkspaceScreensDidWakeNotification() uintptr {
+	return _symbol("NSWorkspaceScreensDidWakeNotification")
+}
+
+// NSWorkspaceDidChangeFileLabelsNotification returns the address of the symbol NSWorkspaceDidChangeFileLabelsNotification.
+func NSWorkspaceDidChangeFileLabelsNotification() uintptr {
+	return _symbol("NSWorkspaceDidChangeFileLabelsNotification")
+}
+
+// NSWorkspaceActiveSpaceDidChangeNotification returns the address of the symbol NSWorkspaceActiveSpaceDidChangeNotification.
+func NSWorkspaceActiveSpaceDidChangeNotification() uintptr {
+	return _symbol("NSWorkspaceActiveSpaceDidChangeNotification")
+}
+
+// NSWorkspaceDidPerformFileOperationNotification returns the address of the symbol NSWorkspaceDidPerformFileOperationNotification.
+func NSWorkspaceDidPerformFileOperationNotification() uintptr {
+	return _symbol("NSWorkspaceDidPerformFileOperationNotification")
+}
+
+// NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification returns the address of the symbol NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification.
+func NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification() uintptr {
+	return _symbol("NSWorkspaceAccessibilityDisplayOptionsDidChangeNotification")
+}
+
+// NSViewFocusDidChangeNotification returns the address of the symbol NSViewFocusDidChangeNotification.
+func NSViewFocusDidChangeNotification() uintptr { return _symbol("NSViewFocusDidChangeNotification") }
+
+// NSViewGlobalFrameDidChangeNotification returns the address of the symbol NSViewGlobalFrameDidChangeNotification.
+func NSViewGlobalFrameDidChangeNotification() uintptr {
+	return _symbol("NSViewGlobalFrameDidChangeNotification")
+}
+
+// NSViewDidUpdateTrackingAreasNotification returns the address of the symbol NSViewDidUpdateTrackingAreasNotification.
+func NSViewDidUpdateTrackingAreasNotification() uintptr {
+	return _symbol("NSViewDidUpdateTrackingAreasNotification")
+}
+
+// NSControlTintDidChangeNotification returns the address of the symbol NSControlTintDidChangeNotification.
+func NSControlTintDidChangeNotification() uintptr {
+	return _symbol("NSControlTintDidChangeNotification")
+}
+
+// NSMultipleValuesMarker returns the address of the symbol NSMultipleValuesMarker.
+func NSMultipleValuesMarker() uintptr { return _symbol("NSMultipleValuesMarker") }
+
+// NSNoSelectionMarker returns the address of the symbol NSNoSelectionMarker.
+func NSNoSelectionMarker() uintptr { return _symbol("NSNoSelectionMarker") }
+
+// NSNotApplicableMarker returns the address of the symbol NSNotApplicableMarker.
+func NSNotApplicableMarker() uintptr { return _symbol("NSNotApplicableMarker") }
+
+// NSAppKitVersionNumber returns the value of the constant NSAppKitVersionNumber.
+func NSAppKitVersionNumber() float64 {
+	addr := _symbol("NSAppKitVersionNumber")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSApplicationProtectedDataWillBecomeUnavailableNotification returns the address of the symbol NSApplicationProtectedDataWillBecomeUnavailableNotification.
+func NSApplicationProtectedDataWillBecomeUnavailableNotification() uintptr {
+	return _symbol("NSApplicationProtectedDataWillBecomeUnavailableNotification")
+}
+
+// NSApplicationProtectedDataDidBecomeAvailableNotification returns the address of the symbol NSApplicationProtectedDataDidBecomeAvailableNotification.
+func NSApplicationProtectedDataDidBecomeAvailableNotification() uintptr {
+	return _symbol("NSApplicationProtectedDataDidBecomeAvailableNotification")
+}
+
+// NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification returns the address of the symbol NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification.
+func NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification() uintptr {
+	return _symbol("NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification")
+}
+
+// NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification returns the address of the symbol NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification.
+func NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification() uintptr {
+	return _symbol("NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification")
+}
+
+// NSApplicationDidChangeOcclusionStateNotification returns the address of the symbol NSApplicationDidChangeOcclusionStateNotification.
+func NSApplicationDidChangeOcclusionStateNotification() uintptr {
+	return _symbol("NSApplicationDidChangeOcclusionStateNotification")
+}
+
+// NSPopoverWillShowNotification returns the address of the symbol NSPopoverWillShowNotification.
+func NSPopoverWillShowNotification() uintptr { return _symbol("NSPopoverWillShowNotification") }
+
+// NSPopoverDidShowNotification returns the address of the symbol NSPopoverDidShowNotification.
+func NSPopoverDidShowNotification() uintptr { return _symbol("NSPopoverDidShowNotification") }
+
+// NSPopoverWillCloseNotification returns the address of the symbol NSPopoverWillCloseNotification.
+func NSPopoverWillCloseNotification() uintptr { return _symbol("NSPopoverWillCloseNotification") }
+
+// NSPopoverDidCloseNotification returns the address of the symbol NSPopoverDidCloseNotification.
+func NSPopoverDidCloseNotification() uintptr { return _symbol("NSPopoverDidCloseNotification") }
+
+// NSDirectionalEdgeInsetsZero returns the address of the symbol NSDirectionalEdgeInsetsZero.
+func NSDirectionalEdgeInsetsZero() uintptr { return _symbol("NSDirectionalEdgeInsetsZero") }
+
+// NSFontWeightUltraLight returns the value of the constant NSFontWeightUltraLight.
+func NSFontWeightUltraLight() float64 {
+	addr := _symbol("NSFontWeightUltraLight")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSFontWeightThin returns the value of the constant NSFontWeightThin.
+func NSFontWeightThin() float64 {
+	addr := _symbol("NSFontWeightThin")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSFontWeightLight returns the value of the constant NSFontWeightLight.
+func NSFontWeightLight() float64 {
+	addr := _symbol("NSFontWeightLight")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSFontWeightRegular returns the value of the constant NSFontWeightRegular.
+func NSFontWeightRegular() float64 {
+	addr := _symbol("NSFontWeightRegular")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSFontWeightMedium returns the value of the constant NSFontWeightMedium.
+func NSFontWeightMedium() float64 {
+	addr := _symbol("NSFontWeightMedium")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSFontWeightSemibold returns the value of the constant NSFontWeightSemibold.
+func NSFontWeightSemibold() float64 {
+	addr := _symbol("NSFontWeightSemibold")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSFontWeightBold returns the value of the constant NSFontWeightBold.
+func NSFontWeightBold() float64 {
+	addr := _symbol("NSFontWeightBold")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSFontWeightHeavy returns the value of the constant NSFontWeightHeavy.
+func NSFontWeightHeavy() float64 {
+	addr := _symbol("NSFontWeightHeavy")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSFontWeightBlack returns the value of the constant NSFontWeightBlack.
+func NSFontWeightBlack() float64 {
+	addr := _symbol("NSFontWeightBlack")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSFontWidthCompressed returns the value of the constant NSFontWidthCompressed.
+func NSFontWidthCompressed() float64 {
+	addr := _symbol("NSFontWidthCompressed")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSFontWidthCondensed returns the value of the constant NSFontWidthCondensed.
+func NSFontWidthCondensed() float64 {
+	addr := _symbol("NSFontWidthCondensed")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSFontWidthStandard returns the value of the constant NSFontWidthStandard.
+func NSFontWidthStandard() float64 {
+	addr := _symbol("NSFontWidthStandard")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSFontWidthExpanded returns the value of the constant NSFontWidthExpanded.
+func NSFontWidthExpanded() float64 {
+	addr := _symbol("NSFontWidthExpanded")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSFontIdentityMatrix returns the address of the symbol NSFontIdentityMatrix.
+func NSFontIdentityMatrix() uintptr { return _symbol("NSFontIdentityMatrix") }
+
+// NSFontCollectionDidChangeNotification returns the address of the symbol NSFontCollectionDidChangeNotification.
+func NSFontCollectionDidChangeNotification() uintptr {
+	return _symbol("NSFontCollectionDidChangeNotification")
+}
+
+// NSWindowDidChangeBackingPropertiesNotification returns the address of the symbol NSWindowDidChangeBackingPropertiesNotification.
+func NSWindowDidChangeBackingPropertiesNotification() uintptr {
+	return _symbol("NSWindowDidChangeBackingPropertiesNotification")
+}
+
+// NSWindowWillStartLiveResizeNotification returns the address of the symbol NSWindowWillStartLiveResizeNotification.
+func NSWindowWillStartLiveResizeNotification() uintptr {
+	return _symbol("NSWindowWillStartLiveResizeNotification")
+}
+
+// NSWindowDidEndLiveResizeNotification returns the address of the symbol NSWindowDidEndLiveResizeNotification.
+func NSWindowDidEndLiveResizeNotification() uintptr {
+	return _symbol("NSWindowDidEndLiveResizeNotification")
+}
+
+// NSWindowWillEnterFullScreenNotification returns the address of the symbol NSWindowWillEnterFullScreenNotification.
+func NSWindowWillEnterFullScreenNotification() uintptr {
+	return _symbol("NSWindowWillEnterFullScreenNotification")
+}
+
+// NSWindowDidEnterFullScreenNotification returns the address of the symbol NSWindowDidEnterFullScreenNotification.
+func NSWindowDidEnterFullScreenNotification() uintptr {
+	return _symbol("NSWindowDidEnterFullScreenNotification")
+}
+
+// NSWindowWillExitFullScreenNotification returns the address of the symbol NSWindowWillExitFullScreenNotification.
+func NSWindowWillExitFullScreenNotification() uintptr {
+	return _symbol("NSWindowWillExitFullScreenNotification")
+}
+
+// NSWindowDidExitFullScreenNotification returns the address of the symbol NSWindowDidExitFullScreenNotification.
+func NSWindowDidExitFullScreenNotification() uintptr {
+	return _symbol("NSWindowDidExitFullScreenNotification")
+}
+
+// NSWindowWillEnterVersionBrowserNotification returns the address of the symbol NSWindowWillEnterVersionBrowserNotification.
+func NSWindowWillEnterVersionBrowserNotification() uintptr {
+	return _symbol("NSWindowWillEnterVersionBrowserNotification")
+}
+
+// NSWindowDidEnterVersionBrowserNotification returns the address of the symbol NSWindowDidEnterVersionBrowserNotification.
+func NSWindowDidEnterVersionBrowserNotification() uintptr {
+	return _symbol("NSWindowDidEnterVersionBrowserNotification")
+}
+
+// NSWindowWillExitVersionBrowserNotification returns the address of the symbol NSWindowWillExitVersionBrowserNotification.
+func NSWindowWillExitVersionBrowserNotification() uintptr {
+	return _symbol("NSWindowWillExitVersionBrowserNotification")
+}
+
+// NSWindowDidExitVersionBrowserNotification returns the address of the symbol NSWindowDidExitVersionBrowserNotification.
+func NSWindowDidExitVersionBrowserNotification() uintptr {
+	return _symbol("NSWindowDidExitVersionBrowserNotification")
+}
+
+// NSWindowDidChangeOcclusionStateNotification returns the address of the symbol NSWindowDidChangeOcclusionStateNotification.
+func NSWindowDidChangeOcclusionStateNotification() uintptr {
+	return _symbol("NSWindowDidChangeOcclusionStateNotification")
+}
+
+// NSViewNoInstrinsicMetric returns the value of the constant NSViewNoInstrinsicMetric.
+func NSViewNoInstrinsicMetric() float64 {
+	addr := _symbol("NSViewNoInstrinsicMetric")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSViewNoIntrinsicMetric returns the value of the constant NSViewNoIntrinsicMetric.
+func NSViewNoIntrinsicMetric() float64 {
+	addr := _symbol("NSViewNoIntrinsicMetric")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSSliderAccessoryWidthDefault returns the value of the constant NSSliderAccessoryWidthDefault.
+func NSSliderAccessoryWidthDefault() float64 {
+	addr := _symbol("NSSliderAccessoryWidthDefault")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSSliderAccessoryWidthWide returns the value of the constant NSSliderAccessoryWidthWide.
+func NSSliderAccessoryWidthWide() float64 {
+	addr := _symbol("NSSliderAccessoryWidthWide")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification.
+func NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification() uintptr {
+	return _symbol("NSSpellCheckerDidChangeAutomaticSpellingCorrectionNotification")
+}
+
+// NSSpellCheckerDidChangeAutomaticTextReplacementNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticTextReplacementNotification.
+func NSSpellCheckerDidChangeAutomaticTextReplacementNotification() uintptr {
+	return _symbol("NSSpellCheckerDidChangeAutomaticTextReplacementNotification")
+}
+
+// NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification.
+func NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification() uintptr {
+	return _symbol("NSSpellCheckerDidChangeAutomaticQuoteSubstitutionNotification")
+}
+
+// NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification.
+func NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification() uintptr {
+	return _symbol("NSSpellCheckerDidChangeAutomaticDashSubstitutionNotification")
+}
+
+// NSSpellCheckerDidChangeAutomaticCapitalizationNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticCapitalizationNotification.
+func NSSpellCheckerDidChangeAutomaticCapitalizationNotification() uintptr {
+	return _symbol("NSSpellCheckerDidChangeAutomaticCapitalizationNotification")
+}
+
+// NSSpellCheckerDidChangeAutomaticPeriodSubstitutionNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticPeriodSubstitutionNotification.
+func NSSpellCheckerDidChangeAutomaticPeriodSubstitutionNotification() uintptr {
+	return _symbol("NSSpellCheckerDidChangeAutomaticPeriodSubstitutionNotification")
+}
+
+// NSSpellCheckerDidChangeAutomaticTextCompletionNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticTextCompletionNotification.
+func NSSpellCheckerDidChangeAutomaticTextCompletionNotification() uintptr {
+	return _symbol("NSSpellCheckerDidChangeAutomaticTextCompletionNotification")
+}
+
+// NSSpellCheckerDidChangeAutomaticInlinePredictionNotification returns the address of the symbol NSSpellCheckerDidChangeAutomaticInlinePredictionNotification.
+func NSSpellCheckerDidChangeAutomaticInlinePredictionNotification() uintptr {
+	return _symbol("NSSpellCheckerDidChangeAutomaticInlinePredictionNotification")
+}
+
+// NSSplitViewItemUnspecifiedDimension returns the value of the constant NSSplitViewItemUnspecifiedDimension.
+func NSSplitViewItemUnspecifiedDimension() float64 {
+	addr := _symbol("NSSplitViewItemUnspecifiedDimension")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSSplitViewControllerAutomaticDimension returns the value of the constant NSSplitViewControllerAutomaticDimension.
+func NSSplitViewControllerAutomaticDimension() float64 {
+	addr := _symbol("NSSplitViewControllerAutomaticDimension")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSScreenColorSpaceDidChangeNotification returns the address of the symbol NSScreenColorSpaceDidChangeNotification.
+func NSScreenColorSpaceDidChangeNotification() uintptr {
+	return _symbol("NSScreenColorSpaceDidChangeNotification")
+}
+
+// NSPreferredScrollerStyleDidChangeNotification returns the address of the symbol NSPreferredScrollerStyleDidChangeNotification.
+func NSPreferredScrollerStyleDidChangeNotification() uintptr {
+	return _symbol("NSPreferredScrollerStyleDidChangeNotification")
+}
+
+// NSScrollViewWillStartLiveMagnifyNotification returns the address of the symbol NSScrollViewWillStartLiveMagnifyNotification.
+func NSScrollViewWillStartLiveMagnifyNotification() uintptr {
+	return _symbol("NSScrollViewWillStartLiveMagnifyNotification")
+}
+
+// NSScrollViewDidEndLiveMagnifyNotification returns the address of the symbol NSScrollViewDidEndLiveMagnifyNotification.
+func NSScrollViewDidEndLiveMagnifyNotification() uintptr {
+	return _symbol("NSScrollViewDidEndLiveMagnifyNotification")
+}
+
+// NSScrollViewWillStartLiveScrollNotification returns the address of the symbol NSScrollViewWillStartLiveScrollNotification.
+func NSScrollViewWillStartLiveScrollNotification() uintptr {
+	return _symbol("NSScrollViewWillStartLiveScrollNotification")
+}
+
+// NSScrollViewDidLiveScrollNotification returns the address of the symbol NSScrollViewDidLiveScrollNotification.
+func NSScrollViewDidLiveScrollNotification() uintptr {
+	return _symbol("NSScrollViewDidLiveScrollNotification")
+}
+
+// NSScrollViewDidEndLiveScrollNotification returns the address of the symbol NSScrollViewDidEndLiveScrollNotification.
+func NSScrollViewDidEndLiveScrollNotification() uintptr {
+	return _symbol("NSScrollViewDidEndLiveScrollNotification")
+}
+
+// NSGridViewSizeForContent returns the value of the constant NSGridViewSizeForContent.
+func NSGridViewSizeForContent() float64 {
+	addr := _symbol("NSGridViewSizeForContent")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSTextAlternativesAttributeName returns the address of the symbol NSTextAlternativesAttributeName.
+func NSTextAlternativesAttributeName() uintptr { return _symbol("NSTextAlternativesAttributeName") }
+
+// NSCharacterShapeAttributeName returns the address of the symbol NSCharacterShapeAttributeName.
+func NSCharacterShapeAttributeName() uintptr { return _symbol("NSCharacterShapeAttributeName") }
+
+// NSUsesScreenFontsDocumentAttribute returns the address of the symbol NSUsesScreenFontsDocumentAttribute.
+func NSUsesScreenFontsDocumentAttribute() uintptr {
+	return _symbol("NSUsesScreenFontsDocumentAttribute")
+}
+
+// NSUnderlineStrikethroughMask returns the value of the constant NSUnderlineStrikethroughMask.
+func NSUnderlineStrikethroughMask() uint {
+	addr := _symbol("NSUnderlineStrikethroughMask")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint)(unsafe.Pointer(addr))
+}
+
+// NSUnderlineByWordMask returns the value of the constant NSUnderlineByWordMask.
+func NSUnderlineByWordMask() uint {
+	addr := _symbol("NSUnderlineByWordMask")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint)(unsafe.Pointer(addr))
+}
+
+// NSToolbarWillAddItemNotification returns the address of the symbol NSToolbarWillAddItemNotification.
+func NSToolbarWillAddItemNotification() uintptr { return _symbol("NSToolbarWillAddItemNotification") }
+
+// NSToolbarDidRemoveItemNotification returns the address of the symbol NSToolbarDidRemoveItemNotification.
+func NSToolbarDidRemoveItemNotification() uintptr {
+	return _symbol("NSToolbarDidRemoveItemNotification")
+}
+
+// NSTextViewWillSwitchToNSLayoutManagerNotification returns the address of the symbol NSTextViewWillSwitchToNSLayoutManagerNotification.
+func NSTextViewWillSwitchToNSLayoutManagerNotification() uintptr {
+	return _symbol("NSTextViewWillSwitchToNSLayoutManagerNotification")
+}
+
+// NSTextViewDidSwitchToNSLayoutManagerNotification returns the address of the symbol NSTextViewDidSwitchToNSLayoutManagerNotification.
+func NSTextViewDidSwitchToNSLayoutManagerNotification() uintptr {
+	return _symbol("NSTextViewDidSwitchToNSLayoutManagerNotification")
+}
+
+// NSDrawerWillOpenNotification returns the address of the symbol NSDrawerWillOpenNotification.
+func NSDrawerWillOpenNotification() uintptr { return _symbol("NSDrawerWillOpenNotification") }
+
+// NSDrawerDidOpenNotification returns the address of the symbol NSDrawerDidOpenNotification.
+func NSDrawerDidOpenNotification() uintptr { return _symbol("NSDrawerDidOpenNotification") }
+
+// NSDrawerWillCloseNotification returns the address of the symbol NSDrawerWillCloseNotification.
+func NSDrawerWillCloseNotification() uintptr { return _symbol("NSDrawerWillCloseNotification") }
+
+// NSDrawerDidCloseNotification returns the address of the symbol NSDrawerDidCloseNotification.
+func NSDrawerDidCloseNotification() uintptr { return _symbol("NSDrawerDidCloseNotification") }
+
+// NSTextInputContextKeyboardSelectionDidChangeNotification returns the address of the symbol NSTextInputContextKeyboardSelectionDidChangeNotification.
+func NSTextInputContextKeyboardSelectionDidChangeNotification() uintptr {
+	return _symbol("NSTextInputContextKeyboardSelectionDidChangeNotification")
+}
+
+// NSApplicationDidFinishRestoringWindowsNotification returns the address of the symbol NSApplicationDidFinishRestoringWindowsNotification.
+func NSApplicationDidFinishRestoringWindowsNotification() uintptr {
+	return _symbol("NSApplicationDidFinishRestoringWindowsNotification")
+}
+
+// NSTextAlternativesSelectedAlternativeStringNotification returns the address of the symbol NSTextAlternativesSelectedAlternativeStringNotification.
+func NSTextAlternativesSelectedAlternativeStringNotification() uintptr {
+	return _symbol("NSTextAlternativesSelectedAlternativeStringNotification")
+}
+
+// NSTextContentStorageUnsupportedAttributeAddedNotification returns the address of the symbol NSTextContentStorageUnsupportedAttributeAddedNotification.
+func NSTextContentStorageUnsupportedAttributeAddedNotification() uintptr {
+	return _symbol("NSTextContentStorageUnsupportedAttributeAddedNotification")
+}

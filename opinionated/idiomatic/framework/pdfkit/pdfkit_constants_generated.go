@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -720,4 +722,109 @@ func PDFDocumentOptimizeImagesForScreenOption() obj.Object {
 // PDFThumbnailViewDocumentEditedNotification returns the string constant PDFThumbnailViewDocumentEditedNotification, for use as a dictionary key or argument.
 func PDFThumbnailViewDocumentEditedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PDFThumbnailViewDocumentEditedNotification")))
+}
+
+// KPDFDestinationUnspecifiedValue returns the value of the constant kPDFDestinationUnspecifiedValue.
+func KPDFDestinationUnspecifiedValue() float64 {
+	addr := _symbol("kPDFDestinationUnspecifiedValue")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// PDFDocumentDidUnlockNotification returns the address of the symbol PDFDocumentDidUnlockNotification.
+func PDFDocumentDidUnlockNotification() uintptr { return _symbol("PDFDocumentDidUnlockNotification") }
+
+// PDFDocumentDidBeginFindNotification returns the address of the symbol PDFDocumentDidBeginFindNotification.
+func PDFDocumentDidBeginFindNotification() uintptr {
+	return _symbol("PDFDocumentDidBeginFindNotification")
+}
+
+// PDFDocumentDidEndFindNotification returns the address of the symbol PDFDocumentDidEndFindNotification.
+func PDFDocumentDidEndFindNotification() uintptr { return _symbol("PDFDocumentDidEndFindNotification") }
+
+// PDFDocumentDidBeginPageFindNotification returns the address of the symbol PDFDocumentDidBeginPageFindNotification.
+func PDFDocumentDidBeginPageFindNotification() uintptr {
+	return _symbol("PDFDocumentDidBeginPageFindNotification")
+}
+
+// PDFDocumentDidEndPageFindNotification returns the address of the symbol PDFDocumentDidEndPageFindNotification.
+func PDFDocumentDidEndPageFindNotification() uintptr {
+	return _symbol("PDFDocumentDidEndPageFindNotification")
+}
+
+// PDFDocumentDidFindMatchNotification returns the address of the symbol PDFDocumentDidFindMatchNotification.
+func PDFDocumentDidFindMatchNotification() uintptr {
+	return _symbol("PDFDocumentDidFindMatchNotification")
+}
+
+// PDFDocumentDidBeginWriteNotification returns the address of the symbol PDFDocumentDidBeginWriteNotification.
+func PDFDocumentDidBeginWriteNotification() uintptr {
+	return _symbol("PDFDocumentDidBeginWriteNotification")
+}
+
+// PDFDocumentDidEndWriteNotification returns the address of the symbol PDFDocumentDidEndWriteNotification.
+func PDFDocumentDidEndWriteNotification() uintptr {
+	return _symbol("PDFDocumentDidEndWriteNotification")
+}
+
+// PDFDocumentDidBeginPageWriteNotification returns the address of the symbol PDFDocumentDidBeginPageWriteNotification.
+func PDFDocumentDidBeginPageWriteNotification() uintptr {
+	return _symbol("PDFDocumentDidBeginPageWriteNotification")
+}
+
+// PDFDocumentDidEndPageWriteNotification returns the address of the symbol PDFDocumentDidEndPageWriteNotification.
+func PDFDocumentDidEndPageWriteNotification() uintptr {
+	return _symbol("PDFDocumentDidEndPageWriteNotification")
+}
+
+// PDFViewDocumentChangedNotification returns the address of the symbol PDFViewDocumentChangedNotification.
+func PDFViewDocumentChangedNotification() uintptr {
+	return _symbol("PDFViewDocumentChangedNotification")
+}
+
+// PDFViewChangedHistoryNotification returns the address of the symbol PDFViewChangedHistoryNotification.
+func PDFViewChangedHistoryNotification() uintptr { return _symbol("PDFViewChangedHistoryNotification") }
+
+// PDFViewPageChangedNotification returns the address of the symbol PDFViewPageChangedNotification.
+func PDFViewPageChangedNotification() uintptr { return _symbol("PDFViewPageChangedNotification") }
+
+// PDFViewScaleChangedNotification returns the address of the symbol PDFViewScaleChangedNotification.
+func PDFViewScaleChangedNotification() uintptr { return _symbol("PDFViewScaleChangedNotification") }
+
+// PDFViewAnnotationHitNotification returns the address of the symbol PDFViewAnnotationHitNotification.
+func PDFViewAnnotationHitNotification() uintptr { return _symbol("PDFViewAnnotationHitNotification") }
+
+// PDFViewCopyPermissionNotification returns the address of the symbol PDFViewCopyPermissionNotification.
+func PDFViewCopyPermissionNotification() uintptr { return _symbol("PDFViewCopyPermissionNotification") }
+
+// PDFViewPrintPermissionNotification returns the address of the symbol PDFViewPrintPermissionNotification.
+func PDFViewPrintPermissionNotification() uintptr {
+	return _symbol("PDFViewPrintPermissionNotification")
+}
+
+// PDFViewAnnotationWillHitNotification returns the address of the symbol PDFViewAnnotationWillHitNotification.
+func PDFViewAnnotationWillHitNotification() uintptr {
+	return _symbol("PDFViewAnnotationWillHitNotification")
+}
+
+// PDFViewSelectionChangedNotification returns the address of the symbol PDFViewSelectionChangedNotification.
+func PDFViewSelectionChangedNotification() uintptr {
+	return _symbol("PDFViewSelectionChangedNotification")
+}
+
+// PDFViewDisplayModeChangedNotification returns the address of the symbol PDFViewDisplayModeChangedNotification.
+func PDFViewDisplayModeChangedNotification() uintptr {
+	return _symbol("PDFViewDisplayModeChangedNotification")
+}
+
+// PDFViewDisplayBoxChangedNotification returns the address of the symbol PDFViewDisplayBoxChangedNotification.
+func PDFViewDisplayBoxChangedNotification() uintptr {
+	return _symbol("PDFViewDisplayBoxChangedNotification")
+}
+
+// PDFViewVisiblePagesChangedNotification returns the address of the symbol PDFViewVisiblePagesChangedNotification.
+func PDFViewVisiblePagesChangedNotification() uintptr {
+	return _symbol("PDFViewVisiblePagesChangedNotification")
 }

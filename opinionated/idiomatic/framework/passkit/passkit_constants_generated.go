@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -327,4 +329,13 @@ func PKStoredValuePassBalanceTypeCash() obj.Object {
 // PKStoredValuePassBalanceTypeLoyaltyPoints returns the string constant PKStoredValuePassBalanceTypeLoyaltyPoints, for use as a dictionary key or argument.
 func PKStoredValuePassBalanceTypeLoyaltyPoints() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PKStoredValuePassBalanceTypeLoyaltyPoints")))
+}
+
+// PKMerchantCategoryCodeNone returns the value of the constant PKMerchantCategoryCodeNone.
+func PKMerchantCategoryCodeNone() int16 {
+	addr := _symbol("PKMerchantCategoryCodeNone")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int16)(unsafe.Pointer(addr))
 }

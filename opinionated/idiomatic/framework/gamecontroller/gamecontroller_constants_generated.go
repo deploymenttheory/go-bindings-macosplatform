@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -828,3 +830,1225 @@ func GCHapticsLocalityLeftTrigger() obj.Object {
 func GCHapticsLocalityRightTrigger() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GCHapticsLocalityRightTrigger")))
 }
+
+// GCPoint2Zero returns the address of the symbol GCPoint2Zero.
+func GCPoint2Zero() uintptr { return _symbol("GCPoint2Zero") }
+
+// GCCurrentExtendedGamepadSnapshotDataVersion returns the address of the symbol GCCurrentExtendedGamepadSnapshotDataVersion.
+func GCCurrentExtendedGamepadSnapshotDataVersion() uintptr {
+	return _symbol("GCCurrentExtendedGamepadSnapshotDataVersion")
+}
+
+// GCKeyCodeKeyA returns the value of the constant GCKeyCodeKeyA.
+func GCKeyCodeKeyA() int {
+	addr := _symbol("GCKeyCodeKeyA")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyB returns the value of the constant GCKeyCodeKeyB.
+func GCKeyCodeKeyB() int {
+	addr := _symbol("GCKeyCodeKeyB")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyC returns the value of the constant GCKeyCodeKeyC.
+func GCKeyCodeKeyC() int {
+	addr := _symbol("GCKeyCodeKeyC")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyD returns the value of the constant GCKeyCodeKeyD.
+func GCKeyCodeKeyD() int {
+	addr := _symbol("GCKeyCodeKeyD")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyE returns the value of the constant GCKeyCodeKeyE.
+func GCKeyCodeKeyE() int {
+	addr := _symbol("GCKeyCodeKeyE")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyF returns the value of the constant GCKeyCodeKeyF.
+func GCKeyCodeKeyF() int {
+	addr := _symbol("GCKeyCodeKeyF")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyG returns the value of the constant GCKeyCodeKeyG.
+func GCKeyCodeKeyG() int {
+	addr := _symbol("GCKeyCodeKeyG")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyH returns the value of the constant GCKeyCodeKeyH.
+func GCKeyCodeKeyH() int {
+	addr := _symbol("GCKeyCodeKeyH")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyI returns the value of the constant GCKeyCodeKeyI.
+func GCKeyCodeKeyI() int {
+	addr := _symbol("GCKeyCodeKeyI")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyJ returns the value of the constant GCKeyCodeKeyJ.
+func GCKeyCodeKeyJ() int {
+	addr := _symbol("GCKeyCodeKeyJ")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyK returns the value of the constant GCKeyCodeKeyK.
+func GCKeyCodeKeyK() int {
+	addr := _symbol("GCKeyCodeKeyK")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyL returns the value of the constant GCKeyCodeKeyL.
+func GCKeyCodeKeyL() int {
+	addr := _symbol("GCKeyCodeKeyL")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyM returns the value of the constant GCKeyCodeKeyM.
+func GCKeyCodeKeyM() int {
+	addr := _symbol("GCKeyCodeKeyM")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyN returns the value of the constant GCKeyCodeKeyN.
+func GCKeyCodeKeyN() int {
+	addr := _symbol("GCKeyCodeKeyN")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyO returns the value of the constant GCKeyCodeKeyO.
+func GCKeyCodeKeyO() int {
+	addr := _symbol("GCKeyCodeKeyO")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyP returns the value of the constant GCKeyCodeKeyP.
+func GCKeyCodeKeyP() int {
+	addr := _symbol("GCKeyCodeKeyP")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyQ returns the value of the constant GCKeyCodeKeyQ.
+func GCKeyCodeKeyQ() int {
+	addr := _symbol("GCKeyCodeKeyQ")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyR returns the value of the constant GCKeyCodeKeyR.
+func GCKeyCodeKeyR() int {
+	addr := _symbol("GCKeyCodeKeyR")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyS returns the value of the constant GCKeyCodeKeyS.
+func GCKeyCodeKeyS() int {
+	addr := _symbol("GCKeyCodeKeyS")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyT returns the value of the constant GCKeyCodeKeyT.
+func GCKeyCodeKeyT() int {
+	addr := _symbol("GCKeyCodeKeyT")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyU returns the value of the constant GCKeyCodeKeyU.
+func GCKeyCodeKeyU() int {
+	addr := _symbol("GCKeyCodeKeyU")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyV returns the value of the constant GCKeyCodeKeyV.
+func GCKeyCodeKeyV() int {
+	addr := _symbol("GCKeyCodeKeyV")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyW returns the value of the constant GCKeyCodeKeyW.
+func GCKeyCodeKeyW() int {
+	addr := _symbol("GCKeyCodeKeyW")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyX returns the value of the constant GCKeyCodeKeyX.
+func GCKeyCodeKeyX() int {
+	addr := _symbol("GCKeyCodeKeyX")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyY returns the value of the constant GCKeyCodeKeyY.
+func GCKeyCodeKeyY() int {
+	addr := _symbol("GCKeyCodeKeyY")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeyZ returns the value of the constant GCKeyCodeKeyZ.
+func GCKeyCodeKeyZ() int {
+	addr := _symbol("GCKeyCodeKeyZ")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeOne returns the value of the constant GCKeyCodeOne.
+func GCKeyCodeOne() int {
+	addr := _symbol("GCKeyCodeOne")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeTwo returns the value of the constant GCKeyCodeTwo.
+func GCKeyCodeTwo() int {
+	addr := _symbol("GCKeyCodeTwo")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeThree returns the value of the constant GCKeyCodeThree.
+func GCKeyCodeThree() int {
+	addr := _symbol("GCKeyCodeThree")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeFour returns the value of the constant GCKeyCodeFour.
+func GCKeyCodeFour() int {
+	addr := _symbol("GCKeyCodeFour")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeFive returns the value of the constant GCKeyCodeFive.
+func GCKeyCodeFive() int {
+	addr := _symbol("GCKeyCodeFive")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeSix returns the value of the constant GCKeyCodeSix.
+func GCKeyCodeSix() int {
+	addr := _symbol("GCKeyCodeSix")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeSeven returns the value of the constant GCKeyCodeSeven.
+func GCKeyCodeSeven() int {
+	addr := _symbol("GCKeyCodeSeven")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeEight returns the value of the constant GCKeyCodeEight.
+func GCKeyCodeEight() int {
+	addr := _symbol("GCKeyCodeEight")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeNine returns the value of the constant GCKeyCodeNine.
+func GCKeyCodeNine() int {
+	addr := _symbol("GCKeyCodeNine")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeZero returns the value of the constant GCKeyCodeZero.
+func GCKeyCodeZero() int {
+	addr := _symbol("GCKeyCodeZero")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeReturnOrEnter returns the value of the constant GCKeyCodeReturnOrEnter.
+func GCKeyCodeReturnOrEnter() int {
+	addr := _symbol("GCKeyCodeReturnOrEnter")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeEscape returns the value of the constant GCKeyCodeEscape.
+func GCKeyCodeEscape() int {
+	addr := _symbol("GCKeyCodeEscape")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeDeleteOrBackspace returns the value of the constant GCKeyCodeDeleteOrBackspace.
+func GCKeyCodeDeleteOrBackspace() int {
+	addr := _symbol("GCKeyCodeDeleteOrBackspace")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeTab returns the value of the constant GCKeyCodeTab.
+func GCKeyCodeTab() int {
+	addr := _symbol("GCKeyCodeTab")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeSpacebar returns the value of the constant GCKeyCodeSpacebar.
+func GCKeyCodeSpacebar() int {
+	addr := _symbol("GCKeyCodeSpacebar")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeHyphen returns the value of the constant GCKeyCodeHyphen.
+func GCKeyCodeHyphen() int {
+	addr := _symbol("GCKeyCodeHyphen")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeEqualSign returns the value of the constant GCKeyCodeEqualSign.
+func GCKeyCodeEqualSign() int {
+	addr := _symbol("GCKeyCodeEqualSign")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeOpenBracket returns the value of the constant GCKeyCodeOpenBracket.
+func GCKeyCodeOpenBracket() int {
+	addr := _symbol("GCKeyCodeOpenBracket")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeCloseBracket returns the value of the constant GCKeyCodeCloseBracket.
+func GCKeyCodeCloseBracket() int {
+	addr := _symbol("GCKeyCodeCloseBracket")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeBackslash returns the value of the constant GCKeyCodeBackslash.
+func GCKeyCodeBackslash() int {
+	addr := _symbol("GCKeyCodeBackslash")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeNonUSPound returns the value of the constant GCKeyCodeNonUSPound.
+func GCKeyCodeNonUSPound() int {
+	addr := _symbol("GCKeyCodeNonUSPound")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeSemicolon returns the value of the constant GCKeyCodeSemicolon.
+func GCKeyCodeSemicolon() int {
+	addr := _symbol("GCKeyCodeSemicolon")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeQuote returns the value of the constant GCKeyCodeQuote.
+func GCKeyCodeQuote() int {
+	addr := _symbol("GCKeyCodeQuote")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeGraveAccentAndTilde returns the value of the constant GCKeyCodeGraveAccentAndTilde.
+func GCKeyCodeGraveAccentAndTilde() int {
+	addr := _symbol("GCKeyCodeGraveAccentAndTilde")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeComma returns the value of the constant GCKeyCodeComma.
+func GCKeyCodeComma() int {
+	addr := _symbol("GCKeyCodeComma")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodePeriod returns the value of the constant GCKeyCodePeriod.
+func GCKeyCodePeriod() int {
+	addr := _symbol("GCKeyCodePeriod")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeSlash returns the value of the constant GCKeyCodeSlash.
+func GCKeyCodeSlash() int {
+	addr := _symbol("GCKeyCodeSlash")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeCapsLock returns the value of the constant GCKeyCodeCapsLock.
+func GCKeyCodeCapsLock() int {
+	addr := _symbol("GCKeyCodeCapsLock")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF1 returns the value of the constant GCKeyCodeF1.
+func GCKeyCodeF1() int {
+	addr := _symbol("GCKeyCodeF1")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF2 returns the value of the constant GCKeyCodeF2.
+func GCKeyCodeF2() int {
+	addr := _symbol("GCKeyCodeF2")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF3 returns the value of the constant GCKeyCodeF3.
+func GCKeyCodeF3() int {
+	addr := _symbol("GCKeyCodeF3")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF4 returns the value of the constant GCKeyCodeF4.
+func GCKeyCodeF4() int {
+	addr := _symbol("GCKeyCodeF4")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF5 returns the value of the constant GCKeyCodeF5.
+func GCKeyCodeF5() int {
+	addr := _symbol("GCKeyCodeF5")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF6 returns the value of the constant GCKeyCodeF6.
+func GCKeyCodeF6() int {
+	addr := _symbol("GCKeyCodeF6")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF7 returns the value of the constant GCKeyCodeF7.
+func GCKeyCodeF7() int {
+	addr := _symbol("GCKeyCodeF7")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF8 returns the value of the constant GCKeyCodeF8.
+func GCKeyCodeF8() int {
+	addr := _symbol("GCKeyCodeF8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF9 returns the value of the constant GCKeyCodeF9.
+func GCKeyCodeF9() int {
+	addr := _symbol("GCKeyCodeF9")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF10 returns the value of the constant GCKeyCodeF10.
+func GCKeyCodeF10() int {
+	addr := _symbol("GCKeyCodeF10")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF11 returns the value of the constant GCKeyCodeF11.
+func GCKeyCodeF11() int {
+	addr := _symbol("GCKeyCodeF11")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF12 returns the value of the constant GCKeyCodeF12.
+func GCKeyCodeF12() int {
+	addr := _symbol("GCKeyCodeF12")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF13 returns the value of the constant GCKeyCodeF13.
+func GCKeyCodeF13() int {
+	addr := _symbol("GCKeyCodeF13")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF14 returns the value of the constant GCKeyCodeF14.
+func GCKeyCodeF14() int {
+	addr := _symbol("GCKeyCodeF14")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF15 returns the value of the constant GCKeyCodeF15.
+func GCKeyCodeF15() int {
+	addr := _symbol("GCKeyCodeF15")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF16 returns the value of the constant GCKeyCodeF16.
+func GCKeyCodeF16() int {
+	addr := _symbol("GCKeyCodeF16")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF17 returns the value of the constant GCKeyCodeF17.
+func GCKeyCodeF17() int {
+	addr := _symbol("GCKeyCodeF17")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF18 returns the value of the constant GCKeyCodeF18.
+func GCKeyCodeF18() int {
+	addr := _symbol("GCKeyCodeF18")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF19 returns the value of the constant GCKeyCodeF19.
+func GCKeyCodeF19() int {
+	addr := _symbol("GCKeyCodeF19")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeF20 returns the value of the constant GCKeyCodeF20.
+func GCKeyCodeF20() int {
+	addr := _symbol("GCKeyCodeF20")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodePrintScreen returns the value of the constant GCKeyCodePrintScreen.
+func GCKeyCodePrintScreen() int {
+	addr := _symbol("GCKeyCodePrintScreen")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeScrollLock returns the value of the constant GCKeyCodeScrollLock.
+func GCKeyCodeScrollLock() int {
+	addr := _symbol("GCKeyCodeScrollLock")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodePause returns the value of the constant GCKeyCodePause.
+func GCKeyCodePause() int {
+	addr := _symbol("GCKeyCodePause")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeInsert returns the value of the constant GCKeyCodeInsert.
+func GCKeyCodeInsert() int {
+	addr := _symbol("GCKeyCodeInsert")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeHome returns the value of the constant GCKeyCodeHome.
+func GCKeyCodeHome() int {
+	addr := _symbol("GCKeyCodeHome")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodePageUp returns the value of the constant GCKeyCodePageUp.
+func GCKeyCodePageUp() int {
+	addr := _symbol("GCKeyCodePageUp")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeDeleteForward returns the value of the constant GCKeyCodeDeleteForward.
+func GCKeyCodeDeleteForward() int {
+	addr := _symbol("GCKeyCodeDeleteForward")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeEnd returns the value of the constant GCKeyCodeEnd.
+func GCKeyCodeEnd() int {
+	addr := _symbol("GCKeyCodeEnd")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodePageDown returns the value of the constant GCKeyCodePageDown.
+func GCKeyCodePageDown() int {
+	addr := _symbol("GCKeyCodePageDown")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeRightArrow returns the value of the constant GCKeyCodeRightArrow.
+func GCKeyCodeRightArrow() int {
+	addr := _symbol("GCKeyCodeRightArrow")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLeftArrow returns the value of the constant GCKeyCodeLeftArrow.
+func GCKeyCodeLeftArrow() int {
+	addr := _symbol("GCKeyCodeLeftArrow")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeDownArrow returns the value of the constant GCKeyCodeDownArrow.
+func GCKeyCodeDownArrow() int {
+	addr := _symbol("GCKeyCodeDownArrow")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeUpArrow returns the value of the constant GCKeyCodeUpArrow.
+func GCKeyCodeUpArrow() int {
+	addr := _symbol("GCKeyCodeUpArrow")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypadNumLock returns the value of the constant GCKeyCodeKeypadNumLock.
+func GCKeyCodeKeypadNumLock() int {
+	addr := _symbol("GCKeyCodeKeypadNumLock")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypadSlash returns the value of the constant GCKeyCodeKeypadSlash.
+func GCKeyCodeKeypadSlash() int {
+	addr := _symbol("GCKeyCodeKeypadSlash")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypadAsterisk returns the value of the constant GCKeyCodeKeypadAsterisk.
+func GCKeyCodeKeypadAsterisk() int {
+	addr := _symbol("GCKeyCodeKeypadAsterisk")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypadHyphen returns the value of the constant GCKeyCodeKeypadHyphen.
+func GCKeyCodeKeypadHyphen() int {
+	addr := _symbol("GCKeyCodeKeypadHyphen")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypadPlus returns the value of the constant GCKeyCodeKeypadPlus.
+func GCKeyCodeKeypadPlus() int {
+	addr := _symbol("GCKeyCodeKeypadPlus")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypadEnter returns the value of the constant GCKeyCodeKeypadEnter.
+func GCKeyCodeKeypadEnter() int {
+	addr := _symbol("GCKeyCodeKeypadEnter")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypad1 returns the value of the constant GCKeyCodeKeypad1.
+func GCKeyCodeKeypad1() int {
+	addr := _symbol("GCKeyCodeKeypad1")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypad2 returns the value of the constant GCKeyCodeKeypad2.
+func GCKeyCodeKeypad2() int {
+	addr := _symbol("GCKeyCodeKeypad2")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypad3 returns the value of the constant GCKeyCodeKeypad3.
+func GCKeyCodeKeypad3() int {
+	addr := _symbol("GCKeyCodeKeypad3")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypad4 returns the value of the constant GCKeyCodeKeypad4.
+func GCKeyCodeKeypad4() int {
+	addr := _symbol("GCKeyCodeKeypad4")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypad5 returns the value of the constant GCKeyCodeKeypad5.
+func GCKeyCodeKeypad5() int {
+	addr := _symbol("GCKeyCodeKeypad5")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypad6 returns the value of the constant GCKeyCodeKeypad6.
+func GCKeyCodeKeypad6() int {
+	addr := _symbol("GCKeyCodeKeypad6")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypad7 returns the value of the constant GCKeyCodeKeypad7.
+func GCKeyCodeKeypad7() int {
+	addr := _symbol("GCKeyCodeKeypad7")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypad8 returns the value of the constant GCKeyCodeKeypad8.
+func GCKeyCodeKeypad8() int {
+	addr := _symbol("GCKeyCodeKeypad8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypad9 returns the value of the constant GCKeyCodeKeypad9.
+func GCKeyCodeKeypad9() int {
+	addr := _symbol("GCKeyCodeKeypad9")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypad0 returns the value of the constant GCKeyCodeKeypad0.
+func GCKeyCodeKeypad0() int {
+	addr := _symbol("GCKeyCodeKeypad0")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypadPeriod returns the value of the constant GCKeyCodeKeypadPeriod.
+func GCKeyCodeKeypadPeriod() int {
+	addr := _symbol("GCKeyCodeKeypadPeriod")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeKeypadEqualSign returns the value of the constant GCKeyCodeKeypadEqualSign.
+func GCKeyCodeKeypadEqualSign() int {
+	addr := _symbol("GCKeyCodeKeypadEqualSign")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeNonUSBackslash returns the value of the constant GCKeyCodeNonUSBackslash.
+func GCKeyCodeNonUSBackslash() int {
+	addr := _symbol("GCKeyCodeNonUSBackslash")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeApplication returns the value of the constant GCKeyCodeApplication.
+func GCKeyCodeApplication() int {
+	addr := _symbol("GCKeyCodeApplication")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodePower returns the value of the constant GCKeyCodePower.
+func GCKeyCodePower() int {
+	addr := _symbol("GCKeyCodePower")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeInternational1 returns the value of the constant GCKeyCodeInternational1.
+func GCKeyCodeInternational1() int {
+	addr := _symbol("GCKeyCodeInternational1")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeInternational2 returns the value of the constant GCKeyCodeInternational2.
+func GCKeyCodeInternational2() int {
+	addr := _symbol("GCKeyCodeInternational2")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeInternational3 returns the value of the constant GCKeyCodeInternational3.
+func GCKeyCodeInternational3() int {
+	addr := _symbol("GCKeyCodeInternational3")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeInternational4 returns the value of the constant GCKeyCodeInternational4.
+func GCKeyCodeInternational4() int {
+	addr := _symbol("GCKeyCodeInternational4")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeInternational5 returns the value of the constant GCKeyCodeInternational5.
+func GCKeyCodeInternational5() int {
+	addr := _symbol("GCKeyCodeInternational5")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeInternational6 returns the value of the constant GCKeyCodeInternational6.
+func GCKeyCodeInternational6() int {
+	addr := _symbol("GCKeyCodeInternational6")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeInternational7 returns the value of the constant GCKeyCodeInternational7.
+func GCKeyCodeInternational7() int {
+	addr := _symbol("GCKeyCodeInternational7")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeInternational8 returns the value of the constant GCKeyCodeInternational8.
+func GCKeyCodeInternational8() int {
+	addr := _symbol("GCKeyCodeInternational8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeInternational9 returns the value of the constant GCKeyCodeInternational9.
+func GCKeyCodeInternational9() int {
+	addr := _symbol("GCKeyCodeInternational9")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLANG1 returns the value of the constant GCKeyCodeLANG1.
+func GCKeyCodeLANG1() int {
+	addr := _symbol("GCKeyCodeLANG1")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLANG2 returns the value of the constant GCKeyCodeLANG2.
+func GCKeyCodeLANG2() int {
+	addr := _symbol("GCKeyCodeLANG2")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLANG3 returns the value of the constant GCKeyCodeLANG3.
+func GCKeyCodeLANG3() int {
+	addr := _symbol("GCKeyCodeLANG3")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLANG4 returns the value of the constant GCKeyCodeLANG4.
+func GCKeyCodeLANG4() int {
+	addr := _symbol("GCKeyCodeLANG4")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLANG5 returns the value of the constant GCKeyCodeLANG5.
+func GCKeyCodeLANG5() int {
+	addr := _symbol("GCKeyCodeLANG5")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLANG6 returns the value of the constant GCKeyCodeLANG6.
+func GCKeyCodeLANG6() int {
+	addr := _symbol("GCKeyCodeLANG6")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLANG7 returns the value of the constant GCKeyCodeLANG7.
+func GCKeyCodeLANG7() int {
+	addr := _symbol("GCKeyCodeLANG7")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLANG8 returns the value of the constant GCKeyCodeLANG8.
+func GCKeyCodeLANG8() int {
+	addr := _symbol("GCKeyCodeLANG8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLANG9 returns the value of the constant GCKeyCodeLANG9.
+func GCKeyCodeLANG9() int {
+	addr := _symbol("GCKeyCodeLANG9")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLeftControl returns the value of the constant GCKeyCodeLeftControl.
+func GCKeyCodeLeftControl() int {
+	addr := _symbol("GCKeyCodeLeftControl")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLeftShift returns the value of the constant GCKeyCodeLeftShift.
+func GCKeyCodeLeftShift() int {
+	addr := _symbol("GCKeyCodeLeftShift")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLeftAlt returns the value of the constant GCKeyCodeLeftAlt.
+func GCKeyCodeLeftAlt() int {
+	addr := _symbol("GCKeyCodeLeftAlt")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeLeftGUI returns the value of the constant GCKeyCodeLeftGUI.
+func GCKeyCodeLeftGUI() int {
+	addr := _symbol("GCKeyCodeLeftGUI")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeRightControl returns the value of the constant GCKeyCodeRightControl.
+func GCKeyCodeRightControl() int {
+	addr := _symbol("GCKeyCodeRightControl")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeRightShift returns the value of the constant GCKeyCodeRightShift.
+func GCKeyCodeRightShift() int {
+	addr := _symbol("GCKeyCodeRightShift")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeRightAlt returns the value of the constant GCKeyCodeRightAlt.
+func GCKeyCodeRightAlt() int {
+	addr := _symbol("GCKeyCodeRightAlt")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCKeyCodeRightGUI returns the value of the constant GCKeyCodeRightGUI.
+func GCKeyCodeRightGUI() int {
+	addr := _symbol("GCKeyCodeRightGUI")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// GCCurrentMicroGamepadSnapshotDataVersion returns the address of the symbol GCCurrentMicroGamepadSnapshotDataVersion.
+func GCCurrentMicroGamepadSnapshotDataVersion() uintptr {
+	return _symbol("GCCurrentMicroGamepadSnapshotDataVersion")
+}
+
+// GCHapticDurationInfinite returns the address of the symbol GCHapticDurationInfinite.
+func GCHapticDurationInfinite() uintptr { return _symbol("GCHapticDurationInfinite") }

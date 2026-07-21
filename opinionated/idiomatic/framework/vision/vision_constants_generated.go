@@ -5,7 +5,10 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
@@ -850,4 +853,22 @@ func VNHumanBodyPoseObservationJointsGroupNameRightLeg() obj.Object {
 // VNHumanBodyPoseObservationJointsGroupNameAll returns the string constant VNHumanBodyPoseObservationJointsGroupNameAll, for use as a dictionary key or argument.
 func VNHumanBodyPoseObservationJointsGroupNameAll() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("VNHumanBodyPoseObservationJointsGroupNameAll")))
+}
+
+// VNNormalizedIdentityRect returns the value of the constant VNNormalizedIdentityRect.
+func VNNormalizedIdentityRect() corefoundation.CGRect {
+	addr := _symbol("VNNormalizedIdentityRect")
+	if addr == 0 {
+		return corefoundation.CGRect{}
+	}
+	return *(*corefoundation.CGRect)(unsafe.Pointer(addr))
+}
+
+// VNVisionVersionNumber returns the value of the constant VNVisionVersionNumber.
+func VNVisionVersionNumber() float64 {
+	addr := _symbol("VNVisionVersionNumber")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
 }

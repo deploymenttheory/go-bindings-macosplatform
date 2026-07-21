@@ -5,7 +5,10 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 )
 
 // NSItemProviderPreferredImageSizeKey returns the string constant NSItemProviderPreferredImageSizeKey.
@@ -2831,4 +2834,863 @@ func NSClassDescriptionNeededForClassNotification() *String {
 // NSOperationNotSupportedForKeyException returns the string constant NSOperationNotSupportedForKeyException.
 func NSOperationNotSupportedForKeyException() *String {
 	return StringFromID(purego.CFConstant(_symbol("NSOperationNotSupportedForKeyException")))
+}
+
+// NSFoundationVersionNumber returns the value of the constant NSFoundationVersionNumber.
+func NSFoundationVersionNumber() float64 {
+	addr := _symbol("NSFoundationVersionNumber")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSProgressFileAnimationImageKey returns the address of the symbol NSProgressFileAnimationImageKey.
+func NSProgressFileAnimationImageKey() uintptr { return _symbol("NSProgressFileAnimationImageKey") }
+
+// NSProgressFileAnimationImageOriginalRectKey returns the address of the symbol NSProgressFileAnimationImageOriginalRectKey.
+func NSProgressFileAnimationImageOriginalRectKey() uintptr {
+	return _symbol("NSProgressFileAnimationImageOriginalRectKey")
+}
+
+// NSProgressFileIconKey returns the address of the symbol NSProgressFileIconKey.
+func NSProgressFileIconKey() uintptr { return _symbol("NSProgressFileIconKey") }
+
+// NSInlinePresentationIntentAttributeName returns the address of the symbol NSInlinePresentationIntentAttributeName.
+func NSInlinePresentationIntentAttributeName() uintptr {
+	return _symbol("NSInlinePresentationIntentAttributeName")
+}
+
+// NSAlternateDescriptionAttributeName returns the address of the symbol NSAlternateDescriptionAttributeName.
+func NSAlternateDescriptionAttributeName() uintptr {
+	return _symbol("NSAlternateDescriptionAttributeName")
+}
+
+// NSImageURLAttributeName returns the address of the symbol NSImageURLAttributeName.
+func NSImageURLAttributeName() uintptr { return _symbol("NSImageURLAttributeName") }
+
+// NSLanguageIdentifierAttributeName returns the address of the symbol NSLanguageIdentifierAttributeName.
+func NSLanguageIdentifierAttributeName() uintptr { return _symbol("NSLanguageIdentifierAttributeName") }
+
+// NSMarkdownSourcePositionAttributeName returns the address of the symbol NSMarkdownSourcePositionAttributeName.
+func NSMarkdownSourcePositionAttributeName() uintptr {
+	return _symbol("NSMarkdownSourcePositionAttributeName")
+}
+
+// NSReplacementIndexAttributeName returns the address of the symbol NSReplacementIndexAttributeName.
+func NSReplacementIndexAttributeName() uintptr { return _symbol("NSReplacementIndexAttributeName") }
+
+// NSMorphologyAttributeName returns the address of the symbol NSMorphologyAttributeName.
+func NSMorphologyAttributeName() uintptr { return _symbol("NSMorphologyAttributeName") }
+
+// NSInflectionRuleAttributeName returns the address of the symbol NSInflectionRuleAttributeName.
+func NSInflectionRuleAttributeName() uintptr { return _symbol("NSInflectionRuleAttributeName") }
+
+// NSInflectionAgreementArgumentAttributeName returns the address of the symbol NSInflectionAgreementArgumentAttributeName.
+func NSInflectionAgreementArgumentAttributeName() uintptr {
+	return _symbol("NSInflectionAgreementArgumentAttributeName")
+}
+
+// NSInflectionAgreementConceptAttributeName returns the address of the symbol NSInflectionAgreementConceptAttributeName.
+func NSInflectionAgreementConceptAttributeName() uintptr {
+	return _symbol("NSInflectionAgreementConceptAttributeName")
+}
+
+// NSInflectionReferentConceptAttributeName returns the address of the symbol NSInflectionReferentConceptAttributeName.
+func NSInflectionReferentConceptAttributeName() uintptr {
+	return _symbol("NSInflectionReferentConceptAttributeName")
+}
+
+// NSInflectionAlternativeAttributeName returns the address of the symbol NSInflectionAlternativeAttributeName.
+func NSInflectionAlternativeAttributeName() uintptr {
+	return _symbol("NSInflectionAlternativeAttributeName")
+}
+
+// NSLocalizedNumberFormatAttributeName returns the address of the symbol NSLocalizedNumberFormatAttributeName.
+func NSLocalizedNumberFormatAttributeName() uintptr {
+	return _symbol("NSLocalizedNumberFormatAttributeName")
+}
+
+// NSListItemDelimiterAttributeName returns the address of the symbol NSListItemDelimiterAttributeName.
+func NSListItemDelimiterAttributeName() uintptr { return _symbol("NSListItemDelimiterAttributeName") }
+
+// NSURLApplicationIsScriptableKey returns the address of the symbol NSURLApplicationIsScriptableKey.
+func NSURLApplicationIsScriptableKey() uintptr { return _symbol("NSURLApplicationIsScriptableKey") }
+
+// NSURLTagNamesKey returns the address of the symbol NSURLTagNamesKey.
+func NSURLTagNamesKey() uintptr { return _symbol("NSURLTagNamesKey") }
+
+// NSURLQuarantinePropertiesKey returns the address of the symbol NSURLQuarantinePropertiesKey.
+func NSURLQuarantinePropertiesKey() uintptr { return _symbol("NSURLQuarantinePropertiesKey") }
+
+// NSURLThumbnailKey returns the address of the symbol NSURLThumbnailKey.
+func NSURLThumbnailKey() uintptr { return _symbol("NSURLThumbnailKey") }
+
+// NSFileManagerUnmountDissentingProcessIdentifierErrorKey returns the address of the symbol NSFileManagerUnmountDissentingProcessIdentifierErrorKey.
+func NSFileManagerUnmountDissentingProcessIdentifierErrorKey() uintptr {
+	return _symbol("NSFileManagerUnmountDissentingProcessIdentifierErrorKey")
+}
+
+// NSIntegerHashCallBacks returns the address of the symbol NSIntegerHashCallBacks.
+func NSIntegerHashCallBacks() uintptr { return _symbol("NSIntegerHashCallBacks") }
+
+// NSNonOwnedPointerHashCallBacks returns the address of the symbol NSNonOwnedPointerHashCallBacks.
+func NSNonOwnedPointerHashCallBacks() uintptr { return _symbol("NSNonOwnedPointerHashCallBacks") }
+
+// NSNonRetainedObjectHashCallBacks returns the address of the symbol NSNonRetainedObjectHashCallBacks.
+func NSNonRetainedObjectHashCallBacks() uintptr { return _symbol("NSNonRetainedObjectHashCallBacks") }
+
+// NSObjectHashCallBacks returns the address of the symbol NSObjectHashCallBacks.
+func NSObjectHashCallBacks() uintptr { return _symbol("NSObjectHashCallBacks") }
+
+// NSOwnedObjectIdentityHashCallBacks returns the address of the symbol NSOwnedObjectIdentityHashCallBacks.
+func NSOwnedObjectIdentityHashCallBacks() uintptr {
+	return _symbol("NSOwnedObjectIdentityHashCallBacks")
+}
+
+// NSOwnedPointerHashCallBacks returns the address of the symbol NSOwnedPointerHashCallBacks.
+func NSOwnedPointerHashCallBacks() uintptr { return _symbol("NSOwnedPointerHashCallBacks") }
+
+// NSPointerToStructHashCallBacks returns the address of the symbol NSPointerToStructHashCallBacks.
+func NSPointerToStructHashCallBacks() uintptr { return _symbol("NSPointerToStructHashCallBacks") }
+
+// NSIntHashCallBacks returns the address of the symbol NSIntHashCallBacks.
+func NSIntHashCallBacks() uintptr { return _symbol("NSIntHashCallBacks") }
+
+// NSZeroPoint returns the value of the constant NSZeroPoint.
+func NSZeroPoint() corefoundation.CGPoint {
+	addr := _symbol("NSZeroPoint")
+	if addr == 0 {
+		return corefoundation.CGPoint{}
+	}
+	return *(*corefoundation.CGPoint)(unsafe.Pointer(addr))
+}
+
+// NSZeroSize returns the value of the constant NSZeroSize.
+func NSZeroSize() corefoundation.CGSize {
+	addr := _symbol("NSZeroSize")
+	if addr == 0 {
+		return corefoundation.CGSize{}
+	}
+	return *(*corefoundation.CGSize)(unsafe.Pointer(addr))
+}
+
+// NSZeroRect returns the value of the constant NSZeroRect.
+func NSZeroRect() corefoundation.CGRect {
+	addr := _symbol("NSZeroRect")
+	if addr == 0 {
+		return corefoundation.CGRect{}
+	}
+	return *(*corefoundation.CGRect)(unsafe.Pointer(addr))
+}
+
+// NSEdgeInsetsZero returns the address of the symbol NSEdgeInsetsZero.
+func NSEdgeInsetsZero() uintptr { return _symbol("NSEdgeInsetsZero") }
+
+// NSIntegerMapKeyCallBacks returns the address of the symbol NSIntegerMapKeyCallBacks.
+func NSIntegerMapKeyCallBacks() uintptr { return _symbol("NSIntegerMapKeyCallBacks") }
+
+// NSNonOwnedPointerMapKeyCallBacks returns the address of the symbol NSNonOwnedPointerMapKeyCallBacks.
+func NSNonOwnedPointerMapKeyCallBacks() uintptr { return _symbol("NSNonOwnedPointerMapKeyCallBacks") }
+
+// NSNonOwnedPointerOrNullMapKeyCallBacks returns the address of the symbol NSNonOwnedPointerOrNullMapKeyCallBacks.
+func NSNonOwnedPointerOrNullMapKeyCallBacks() uintptr {
+	return _symbol("NSNonOwnedPointerOrNullMapKeyCallBacks")
+}
+
+// NSNonRetainedObjectMapKeyCallBacks returns the address of the symbol NSNonRetainedObjectMapKeyCallBacks.
+func NSNonRetainedObjectMapKeyCallBacks() uintptr {
+	return _symbol("NSNonRetainedObjectMapKeyCallBacks")
+}
+
+// NSObjectMapKeyCallBacks returns the address of the symbol NSObjectMapKeyCallBacks.
+func NSObjectMapKeyCallBacks() uintptr { return _symbol("NSObjectMapKeyCallBacks") }
+
+// NSOwnedPointerMapKeyCallBacks returns the address of the symbol NSOwnedPointerMapKeyCallBacks.
+func NSOwnedPointerMapKeyCallBacks() uintptr { return _symbol("NSOwnedPointerMapKeyCallBacks") }
+
+// NSIntMapKeyCallBacks returns the address of the symbol NSIntMapKeyCallBacks.
+func NSIntMapKeyCallBacks() uintptr { return _symbol("NSIntMapKeyCallBacks") }
+
+// NSIntegerMapValueCallBacks returns the address of the symbol NSIntegerMapValueCallBacks.
+func NSIntegerMapValueCallBacks() uintptr { return _symbol("NSIntegerMapValueCallBacks") }
+
+// NSNonOwnedPointerMapValueCallBacks returns the address of the symbol NSNonOwnedPointerMapValueCallBacks.
+func NSNonOwnedPointerMapValueCallBacks() uintptr {
+	return _symbol("NSNonOwnedPointerMapValueCallBacks")
+}
+
+// NSObjectMapValueCallBacks returns the address of the symbol NSObjectMapValueCallBacks.
+func NSObjectMapValueCallBacks() uintptr { return _symbol("NSObjectMapValueCallBacks") }
+
+// NSNonRetainedObjectMapValueCallBacks returns the address of the symbol NSNonRetainedObjectMapValueCallBacks.
+func NSNonRetainedObjectMapValueCallBacks() uintptr {
+	return _symbol("NSNonRetainedObjectMapValueCallBacks")
+}
+
+// NSOwnedPointerMapValueCallBacks returns the address of the symbol NSOwnedPointerMapValueCallBacks.
+func NSOwnedPointerMapValueCallBacks() uintptr { return _symbol("NSOwnedPointerMapValueCallBacks") }
+
+// NSIntMapValueCallBacks returns the address of the symbol NSIntMapValueCallBacks.
+func NSIntMapValueCallBacks() uintptr { return _symbol("NSIntMapValueCallBacks") }
+
+// NSWeekDayNameArray returns the address of the symbol NSWeekDayNameArray.
+func NSWeekDayNameArray() uintptr { return _symbol("NSWeekDayNameArray") }
+
+// NSShortWeekDayNameArray returns the address of the symbol NSShortWeekDayNameArray.
+func NSShortWeekDayNameArray() uintptr { return _symbol("NSShortWeekDayNameArray") }
+
+// NSMonthNameArray returns the address of the symbol NSMonthNameArray.
+func NSMonthNameArray() uintptr { return _symbol("NSMonthNameArray") }
+
+// NSShortMonthNameArray returns the address of the symbol NSShortMonthNameArray.
+func NSShortMonthNameArray() uintptr { return _symbol("NSShortMonthNameArray") }
+
+// NSTimeFormatString returns the address of the symbol NSTimeFormatString.
+func NSTimeFormatString() uintptr { return _symbol("NSTimeFormatString") }
+
+// NSDateFormatString returns the address of the symbol NSDateFormatString.
+func NSDateFormatString() uintptr { return _symbol("NSDateFormatString") }
+
+// NSTimeDateFormatString returns the address of the symbol NSTimeDateFormatString.
+func NSTimeDateFormatString() uintptr { return _symbol("NSTimeDateFormatString") }
+
+// NSShortTimeDateFormatString returns the address of the symbol NSShortTimeDateFormatString.
+func NSShortTimeDateFormatString() uintptr { return _symbol("NSShortTimeDateFormatString") }
+
+// NSCurrencySymbol returns the address of the symbol NSCurrencySymbol.
+func NSCurrencySymbol() uintptr { return _symbol("NSCurrencySymbol") }
+
+// NSDecimalSeparator returns the address of the symbol NSDecimalSeparator.
+func NSDecimalSeparator() uintptr { return _symbol("NSDecimalSeparator") }
+
+// NSThousandsSeparator returns the address of the symbol NSThousandsSeparator.
+func NSThousandsSeparator() uintptr { return _symbol("NSThousandsSeparator") }
+
+// NSDecimalDigits returns the address of the symbol NSDecimalDigits.
+func NSDecimalDigits() uintptr { return _symbol("NSDecimalDigits") }
+
+// NSAMPMDesignation returns the address of the symbol NSAMPMDesignation.
+func NSAMPMDesignation() uintptr { return _symbol("NSAMPMDesignation") }
+
+// NSHourNameDesignations returns the address of the symbol NSHourNameDesignations.
+func NSHourNameDesignations() uintptr { return _symbol("NSHourNameDesignations") }
+
+// NSYearMonthWeekDesignations returns the address of the symbol NSYearMonthWeekDesignations.
+func NSYearMonthWeekDesignations() uintptr { return _symbol("NSYearMonthWeekDesignations") }
+
+// NSEarlierTimeDesignations returns the address of the symbol NSEarlierTimeDesignations.
+func NSEarlierTimeDesignations() uintptr { return _symbol("NSEarlierTimeDesignations") }
+
+// NSLaterTimeDesignations returns the address of the symbol NSLaterTimeDesignations.
+func NSLaterTimeDesignations() uintptr { return _symbol("NSLaterTimeDesignations") }
+
+// NSThisDayDesignations returns the address of the symbol NSThisDayDesignations.
+func NSThisDayDesignations() uintptr { return _symbol("NSThisDayDesignations") }
+
+// NSNextDayDesignations returns the address of the symbol NSNextDayDesignations.
+func NSNextDayDesignations() uintptr { return _symbol("NSNextDayDesignations") }
+
+// NSNextNextDayDesignations returns the address of the symbol NSNextNextDayDesignations.
+func NSNextNextDayDesignations() uintptr { return _symbol("NSNextNextDayDesignations") }
+
+// NSPriorDayDesignations returns the address of the symbol NSPriorDayDesignations.
+func NSPriorDayDesignations() uintptr { return _symbol("NSPriorDayDesignations") }
+
+// NSDateTimeOrdering returns the address of the symbol NSDateTimeOrdering.
+func NSDateTimeOrdering() uintptr { return _symbol("NSDateTimeOrdering") }
+
+// NSInternationalCurrencyString returns the address of the symbol NSInternationalCurrencyString.
+func NSInternationalCurrencyString() uintptr { return _symbol("NSInternationalCurrencyString") }
+
+// NSShortDateFormatString returns the address of the symbol NSShortDateFormatString.
+func NSShortDateFormatString() uintptr { return _symbol("NSShortDateFormatString") }
+
+// NSPositiveCurrencyFormatString returns the address of the symbol NSPositiveCurrencyFormatString.
+func NSPositiveCurrencyFormatString() uintptr { return _symbol("NSPositiveCurrencyFormatString") }
+
+// NSNegativeCurrencyFormatString returns the address of the symbol NSNegativeCurrencyFormatString.
+func NSNegativeCurrencyFormatString() uintptr { return _symbol("NSNegativeCurrencyFormatString") }
+
+// NSMetadataItemAttributeChangeDateKey returns the address of the symbol NSMetadataItemAttributeChangeDateKey.
+func NSMetadataItemAttributeChangeDateKey() uintptr {
+	return _symbol("NSMetadataItemAttributeChangeDateKey")
+}
+
+// NSMetadataItemKeywordsKey returns the address of the symbol NSMetadataItemKeywordsKey.
+func NSMetadataItemKeywordsKey() uintptr { return _symbol("NSMetadataItemKeywordsKey") }
+
+// NSMetadataItemTitleKey returns the address of the symbol NSMetadataItemTitleKey.
+func NSMetadataItemTitleKey() uintptr { return _symbol("NSMetadataItemTitleKey") }
+
+// NSMetadataItemAuthorsKey returns the address of the symbol NSMetadataItemAuthorsKey.
+func NSMetadataItemAuthorsKey() uintptr { return _symbol("NSMetadataItemAuthorsKey") }
+
+// NSMetadataItemEditorsKey returns the address of the symbol NSMetadataItemEditorsKey.
+func NSMetadataItemEditorsKey() uintptr { return _symbol("NSMetadataItemEditorsKey") }
+
+// NSMetadataItemParticipantsKey returns the address of the symbol NSMetadataItemParticipantsKey.
+func NSMetadataItemParticipantsKey() uintptr { return _symbol("NSMetadataItemParticipantsKey") }
+
+// NSMetadataItemProjectsKey returns the address of the symbol NSMetadataItemProjectsKey.
+func NSMetadataItemProjectsKey() uintptr { return _symbol("NSMetadataItemProjectsKey") }
+
+// NSMetadataItemDownloadedDateKey returns the address of the symbol NSMetadataItemDownloadedDateKey.
+func NSMetadataItemDownloadedDateKey() uintptr { return _symbol("NSMetadataItemDownloadedDateKey") }
+
+// NSMetadataItemWhereFromsKey returns the address of the symbol NSMetadataItemWhereFromsKey.
+func NSMetadataItemWhereFromsKey() uintptr { return _symbol("NSMetadataItemWhereFromsKey") }
+
+// NSMetadataItemCommentKey returns the address of the symbol NSMetadataItemCommentKey.
+func NSMetadataItemCommentKey() uintptr { return _symbol("NSMetadataItemCommentKey") }
+
+// NSMetadataItemCopyrightKey returns the address of the symbol NSMetadataItemCopyrightKey.
+func NSMetadataItemCopyrightKey() uintptr { return _symbol("NSMetadataItemCopyrightKey") }
+
+// NSMetadataItemLastUsedDateKey returns the address of the symbol NSMetadataItemLastUsedDateKey.
+func NSMetadataItemLastUsedDateKey() uintptr { return _symbol("NSMetadataItemLastUsedDateKey") }
+
+// NSMetadataItemContentCreationDateKey returns the address of the symbol NSMetadataItemContentCreationDateKey.
+func NSMetadataItemContentCreationDateKey() uintptr {
+	return _symbol("NSMetadataItemContentCreationDateKey")
+}
+
+// NSMetadataItemContentModificationDateKey returns the address of the symbol NSMetadataItemContentModificationDateKey.
+func NSMetadataItemContentModificationDateKey() uintptr {
+	return _symbol("NSMetadataItemContentModificationDateKey")
+}
+
+// NSMetadataItemDateAddedKey returns the address of the symbol NSMetadataItemDateAddedKey.
+func NSMetadataItemDateAddedKey() uintptr { return _symbol("NSMetadataItemDateAddedKey") }
+
+// NSMetadataItemDurationSecondsKey returns the address of the symbol NSMetadataItemDurationSecondsKey.
+func NSMetadataItemDurationSecondsKey() uintptr { return _symbol("NSMetadataItemDurationSecondsKey") }
+
+// NSMetadataItemContactKeywordsKey returns the address of the symbol NSMetadataItemContactKeywordsKey.
+func NSMetadataItemContactKeywordsKey() uintptr { return _symbol("NSMetadataItemContactKeywordsKey") }
+
+// NSMetadataItemVersionKey returns the address of the symbol NSMetadataItemVersionKey.
+func NSMetadataItemVersionKey() uintptr { return _symbol("NSMetadataItemVersionKey") }
+
+// NSMetadataItemPixelHeightKey returns the address of the symbol NSMetadataItemPixelHeightKey.
+func NSMetadataItemPixelHeightKey() uintptr { return _symbol("NSMetadataItemPixelHeightKey") }
+
+// NSMetadataItemPixelWidthKey returns the address of the symbol NSMetadataItemPixelWidthKey.
+func NSMetadataItemPixelWidthKey() uintptr { return _symbol("NSMetadataItemPixelWidthKey") }
+
+// NSMetadataItemPixelCountKey returns the address of the symbol NSMetadataItemPixelCountKey.
+func NSMetadataItemPixelCountKey() uintptr { return _symbol("NSMetadataItemPixelCountKey") }
+
+// NSMetadataItemColorSpaceKey returns the address of the symbol NSMetadataItemColorSpaceKey.
+func NSMetadataItemColorSpaceKey() uintptr { return _symbol("NSMetadataItemColorSpaceKey") }
+
+// NSMetadataItemBitsPerSampleKey returns the address of the symbol NSMetadataItemBitsPerSampleKey.
+func NSMetadataItemBitsPerSampleKey() uintptr { return _symbol("NSMetadataItemBitsPerSampleKey") }
+
+// NSMetadataItemFlashOnOffKey returns the address of the symbol NSMetadataItemFlashOnOffKey.
+func NSMetadataItemFlashOnOffKey() uintptr { return _symbol("NSMetadataItemFlashOnOffKey") }
+
+// NSMetadataItemFocalLengthKey returns the address of the symbol NSMetadataItemFocalLengthKey.
+func NSMetadataItemFocalLengthKey() uintptr { return _symbol("NSMetadataItemFocalLengthKey") }
+
+// NSMetadataItemAcquisitionMakeKey returns the address of the symbol NSMetadataItemAcquisitionMakeKey.
+func NSMetadataItemAcquisitionMakeKey() uintptr { return _symbol("NSMetadataItemAcquisitionMakeKey") }
+
+// NSMetadataItemAcquisitionModelKey returns the address of the symbol NSMetadataItemAcquisitionModelKey.
+func NSMetadataItemAcquisitionModelKey() uintptr { return _symbol("NSMetadataItemAcquisitionModelKey") }
+
+// NSMetadataItemISOSpeedKey returns the address of the symbol NSMetadataItemISOSpeedKey.
+func NSMetadataItemISOSpeedKey() uintptr { return _symbol("NSMetadataItemISOSpeedKey") }
+
+// NSMetadataItemOrientationKey returns the address of the symbol NSMetadataItemOrientationKey.
+func NSMetadataItemOrientationKey() uintptr { return _symbol("NSMetadataItemOrientationKey") }
+
+// NSMetadataItemLayerNamesKey returns the address of the symbol NSMetadataItemLayerNamesKey.
+func NSMetadataItemLayerNamesKey() uintptr { return _symbol("NSMetadataItemLayerNamesKey") }
+
+// NSMetadataItemWhiteBalanceKey returns the address of the symbol NSMetadataItemWhiteBalanceKey.
+func NSMetadataItemWhiteBalanceKey() uintptr { return _symbol("NSMetadataItemWhiteBalanceKey") }
+
+// NSMetadataItemApertureKey returns the address of the symbol NSMetadataItemApertureKey.
+func NSMetadataItemApertureKey() uintptr { return _symbol("NSMetadataItemApertureKey") }
+
+// NSMetadataItemProfileNameKey returns the address of the symbol NSMetadataItemProfileNameKey.
+func NSMetadataItemProfileNameKey() uintptr { return _symbol("NSMetadataItemProfileNameKey") }
+
+// NSMetadataItemResolutionWidthDPIKey returns the address of the symbol NSMetadataItemResolutionWidthDPIKey.
+func NSMetadataItemResolutionWidthDPIKey() uintptr {
+	return _symbol("NSMetadataItemResolutionWidthDPIKey")
+}
+
+// NSMetadataItemResolutionHeightDPIKey returns the address of the symbol NSMetadataItemResolutionHeightDPIKey.
+func NSMetadataItemResolutionHeightDPIKey() uintptr {
+	return _symbol("NSMetadataItemResolutionHeightDPIKey")
+}
+
+// NSMetadataItemExposureModeKey returns the address of the symbol NSMetadataItemExposureModeKey.
+func NSMetadataItemExposureModeKey() uintptr { return _symbol("NSMetadataItemExposureModeKey") }
+
+// NSMetadataItemExposureTimeSecondsKey returns the address of the symbol NSMetadataItemExposureTimeSecondsKey.
+func NSMetadataItemExposureTimeSecondsKey() uintptr {
+	return _symbol("NSMetadataItemExposureTimeSecondsKey")
+}
+
+// NSMetadataItemEXIFVersionKey returns the address of the symbol NSMetadataItemEXIFVersionKey.
+func NSMetadataItemEXIFVersionKey() uintptr { return _symbol("NSMetadataItemEXIFVersionKey") }
+
+// NSMetadataItemCameraOwnerKey returns the address of the symbol NSMetadataItemCameraOwnerKey.
+func NSMetadataItemCameraOwnerKey() uintptr { return _symbol("NSMetadataItemCameraOwnerKey") }
+
+// NSMetadataItemFocalLength35mmKey returns the address of the symbol NSMetadataItemFocalLength35mmKey.
+func NSMetadataItemFocalLength35mmKey() uintptr { return _symbol("NSMetadataItemFocalLength35mmKey") }
+
+// NSMetadataItemLensModelKey returns the address of the symbol NSMetadataItemLensModelKey.
+func NSMetadataItemLensModelKey() uintptr { return _symbol("NSMetadataItemLensModelKey") }
+
+// NSMetadataItemEXIFGPSVersionKey returns the address of the symbol NSMetadataItemEXIFGPSVersionKey.
+func NSMetadataItemEXIFGPSVersionKey() uintptr { return _symbol("NSMetadataItemEXIFGPSVersionKey") }
+
+// NSMetadataItemAltitudeKey returns the address of the symbol NSMetadataItemAltitudeKey.
+func NSMetadataItemAltitudeKey() uintptr { return _symbol("NSMetadataItemAltitudeKey") }
+
+// NSMetadataItemLatitudeKey returns the address of the symbol NSMetadataItemLatitudeKey.
+func NSMetadataItemLatitudeKey() uintptr { return _symbol("NSMetadataItemLatitudeKey") }
+
+// NSMetadataItemLongitudeKey returns the address of the symbol NSMetadataItemLongitudeKey.
+func NSMetadataItemLongitudeKey() uintptr { return _symbol("NSMetadataItemLongitudeKey") }
+
+// NSMetadataItemSpeedKey returns the address of the symbol NSMetadataItemSpeedKey.
+func NSMetadataItemSpeedKey() uintptr { return _symbol("NSMetadataItemSpeedKey") }
+
+// NSMetadataItemTimestampKey returns the address of the symbol NSMetadataItemTimestampKey.
+func NSMetadataItemTimestampKey() uintptr { return _symbol("NSMetadataItemTimestampKey") }
+
+// NSMetadataItemGPSTrackKey returns the address of the symbol NSMetadataItemGPSTrackKey.
+func NSMetadataItemGPSTrackKey() uintptr { return _symbol("NSMetadataItemGPSTrackKey") }
+
+// NSMetadataItemImageDirectionKey returns the address of the symbol NSMetadataItemImageDirectionKey.
+func NSMetadataItemImageDirectionKey() uintptr { return _symbol("NSMetadataItemImageDirectionKey") }
+
+// NSMetadataItemNamedLocationKey returns the address of the symbol NSMetadataItemNamedLocationKey.
+func NSMetadataItemNamedLocationKey() uintptr { return _symbol("NSMetadataItemNamedLocationKey") }
+
+// NSMetadataItemGPSStatusKey returns the address of the symbol NSMetadataItemGPSStatusKey.
+func NSMetadataItemGPSStatusKey() uintptr { return _symbol("NSMetadataItemGPSStatusKey") }
+
+// NSMetadataItemGPSMeasureModeKey returns the address of the symbol NSMetadataItemGPSMeasureModeKey.
+func NSMetadataItemGPSMeasureModeKey() uintptr { return _symbol("NSMetadataItemGPSMeasureModeKey") }
+
+// NSMetadataItemGPSDOPKey returns the address of the symbol NSMetadataItemGPSDOPKey.
+func NSMetadataItemGPSDOPKey() uintptr { return _symbol("NSMetadataItemGPSDOPKey") }
+
+// NSMetadataItemGPSMapDatumKey returns the address of the symbol NSMetadataItemGPSMapDatumKey.
+func NSMetadataItemGPSMapDatumKey() uintptr { return _symbol("NSMetadataItemGPSMapDatumKey") }
+
+// NSMetadataItemGPSDestLatitudeKey returns the address of the symbol NSMetadataItemGPSDestLatitudeKey.
+func NSMetadataItemGPSDestLatitudeKey() uintptr { return _symbol("NSMetadataItemGPSDestLatitudeKey") }
+
+// NSMetadataItemGPSDestLongitudeKey returns the address of the symbol NSMetadataItemGPSDestLongitudeKey.
+func NSMetadataItemGPSDestLongitudeKey() uintptr { return _symbol("NSMetadataItemGPSDestLongitudeKey") }
+
+// NSMetadataItemGPSDestBearingKey returns the address of the symbol NSMetadataItemGPSDestBearingKey.
+func NSMetadataItemGPSDestBearingKey() uintptr { return _symbol("NSMetadataItemGPSDestBearingKey") }
+
+// NSMetadataItemGPSDestDistanceKey returns the address of the symbol NSMetadataItemGPSDestDistanceKey.
+func NSMetadataItemGPSDestDistanceKey() uintptr { return _symbol("NSMetadataItemGPSDestDistanceKey") }
+
+// NSMetadataItemGPSProcessingMethodKey returns the address of the symbol NSMetadataItemGPSProcessingMethodKey.
+func NSMetadataItemGPSProcessingMethodKey() uintptr {
+	return _symbol("NSMetadataItemGPSProcessingMethodKey")
+}
+
+// NSMetadataItemGPSAreaInformationKey returns the address of the symbol NSMetadataItemGPSAreaInformationKey.
+func NSMetadataItemGPSAreaInformationKey() uintptr {
+	return _symbol("NSMetadataItemGPSAreaInformationKey")
+}
+
+// NSMetadataItemGPSDateStampKey returns the address of the symbol NSMetadataItemGPSDateStampKey.
+func NSMetadataItemGPSDateStampKey() uintptr { return _symbol("NSMetadataItemGPSDateStampKey") }
+
+// NSMetadataItemGPSDifferentalKey returns the address of the symbol NSMetadataItemGPSDifferentalKey.
+func NSMetadataItemGPSDifferentalKey() uintptr { return _symbol("NSMetadataItemGPSDifferentalKey") }
+
+// NSMetadataItemCodecsKey returns the address of the symbol NSMetadataItemCodecsKey.
+func NSMetadataItemCodecsKey() uintptr { return _symbol("NSMetadataItemCodecsKey") }
+
+// NSMetadataItemMediaTypesKey returns the address of the symbol NSMetadataItemMediaTypesKey.
+func NSMetadataItemMediaTypesKey() uintptr { return _symbol("NSMetadataItemMediaTypesKey") }
+
+// NSMetadataItemStreamableKey returns the address of the symbol NSMetadataItemStreamableKey.
+func NSMetadataItemStreamableKey() uintptr { return _symbol("NSMetadataItemStreamableKey") }
+
+// NSMetadataItemTotalBitRateKey returns the address of the symbol NSMetadataItemTotalBitRateKey.
+func NSMetadataItemTotalBitRateKey() uintptr { return _symbol("NSMetadataItemTotalBitRateKey") }
+
+// NSMetadataItemVideoBitRateKey returns the address of the symbol NSMetadataItemVideoBitRateKey.
+func NSMetadataItemVideoBitRateKey() uintptr { return _symbol("NSMetadataItemVideoBitRateKey") }
+
+// NSMetadataItemAudioBitRateKey returns the address of the symbol NSMetadataItemAudioBitRateKey.
+func NSMetadataItemAudioBitRateKey() uintptr { return _symbol("NSMetadataItemAudioBitRateKey") }
+
+// NSMetadataItemDeliveryTypeKey returns the address of the symbol NSMetadataItemDeliveryTypeKey.
+func NSMetadataItemDeliveryTypeKey() uintptr { return _symbol("NSMetadataItemDeliveryTypeKey") }
+
+// NSMetadataItemAlbumKey returns the address of the symbol NSMetadataItemAlbumKey.
+func NSMetadataItemAlbumKey() uintptr { return _symbol("NSMetadataItemAlbumKey") }
+
+// NSMetadataItemHasAlphaChannelKey returns the address of the symbol NSMetadataItemHasAlphaChannelKey.
+func NSMetadataItemHasAlphaChannelKey() uintptr { return _symbol("NSMetadataItemHasAlphaChannelKey") }
+
+// NSMetadataItemRedEyeOnOffKey returns the address of the symbol NSMetadataItemRedEyeOnOffKey.
+func NSMetadataItemRedEyeOnOffKey() uintptr { return _symbol("NSMetadataItemRedEyeOnOffKey") }
+
+// NSMetadataItemMeteringModeKey returns the address of the symbol NSMetadataItemMeteringModeKey.
+func NSMetadataItemMeteringModeKey() uintptr { return _symbol("NSMetadataItemMeteringModeKey") }
+
+// NSMetadataItemMaxApertureKey returns the address of the symbol NSMetadataItemMaxApertureKey.
+func NSMetadataItemMaxApertureKey() uintptr { return _symbol("NSMetadataItemMaxApertureKey") }
+
+// NSMetadataItemFNumberKey returns the address of the symbol NSMetadataItemFNumberKey.
+func NSMetadataItemFNumberKey() uintptr { return _symbol("NSMetadataItemFNumberKey") }
+
+// NSMetadataItemExposureProgramKey returns the address of the symbol NSMetadataItemExposureProgramKey.
+func NSMetadataItemExposureProgramKey() uintptr { return _symbol("NSMetadataItemExposureProgramKey") }
+
+// NSMetadataItemExposureTimeStringKey returns the address of the symbol NSMetadataItemExposureTimeStringKey.
+func NSMetadataItemExposureTimeStringKey() uintptr {
+	return _symbol("NSMetadataItemExposureTimeStringKey")
+}
+
+// NSMetadataItemHeadlineKey returns the address of the symbol NSMetadataItemHeadlineKey.
+func NSMetadataItemHeadlineKey() uintptr { return _symbol("NSMetadataItemHeadlineKey") }
+
+// NSMetadataItemInstructionsKey returns the address of the symbol NSMetadataItemInstructionsKey.
+func NSMetadataItemInstructionsKey() uintptr { return _symbol("NSMetadataItemInstructionsKey") }
+
+// NSMetadataItemCityKey returns the address of the symbol NSMetadataItemCityKey.
+func NSMetadataItemCityKey() uintptr { return _symbol("NSMetadataItemCityKey") }
+
+// NSMetadataItemStateOrProvinceKey returns the address of the symbol NSMetadataItemStateOrProvinceKey.
+func NSMetadataItemStateOrProvinceKey() uintptr { return _symbol("NSMetadataItemStateOrProvinceKey") }
+
+// NSMetadataItemCountryKey returns the address of the symbol NSMetadataItemCountryKey.
+func NSMetadataItemCountryKey() uintptr { return _symbol("NSMetadataItemCountryKey") }
+
+// NSMetadataItemTextContentKey returns the address of the symbol NSMetadataItemTextContentKey.
+func NSMetadataItemTextContentKey() uintptr { return _symbol("NSMetadataItemTextContentKey") }
+
+// NSMetadataItemAudioSampleRateKey returns the address of the symbol NSMetadataItemAudioSampleRateKey.
+func NSMetadataItemAudioSampleRateKey() uintptr { return _symbol("NSMetadataItemAudioSampleRateKey") }
+
+// NSMetadataItemAudioChannelCountKey returns the address of the symbol NSMetadataItemAudioChannelCountKey.
+func NSMetadataItemAudioChannelCountKey() uintptr {
+	return _symbol("NSMetadataItemAudioChannelCountKey")
+}
+
+// NSMetadataItemTempoKey returns the address of the symbol NSMetadataItemTempoKey.
+func NSMetadataItemTempoKey() uintptr { return _symbol("NSMetadataItemTempoKey") }
+
+// NSMetadataItemKeySignatureKey returns the address of the symbol NSMetadataItemKeySignatureKey.
+func NSMetadataItemKeySignatureKey() uintptr { return _symbol("NSMetadataItemKeySignatureKey") }
+
+// NSMetadataItemTimeSignatureKey returns the address of the symbol NSMetadataItemTimeSignatureKey.
+func NSMetadataItemTimeSignatureKey() uintptr { return _symbol("NSMetadataItemTimeSignatureKey") }
+
+// NSMetadataItemAudioEncodingApplicationKey returns the address of the symbol NSMetadataItemAudioEncodingApplicationKey.
+func NSMetadataItemAudioEncodingApplicationKey() uintptr {
+	return _symbol("NSMetadataItemAudioEncodingApplicationKey")
+}
+
+// NSMetadataItemComposerKey returns the address of the symbol NSMetadataItemComposerKey.
+func NSMetadataItemComposerKey() uintptr { return _symbol("NSMetadataItemComposerKey") }
+
+// NSMetadataItemLyricistKey returns the address of the symbol NSMetadataItemLyricistKey.
+func NSMetadataItemLyricistKey() uintptr { return _symbol("NSMetadataItemLyricistKey") }
+
+// NSMetadataItemAudioTrackNumberKey returns the address of the symbol NSMetadataItemAudioTrackNumberKey.
+func NSMetadataItemAudioTrackNumberKey() uintptr { return _symbol("NSMetadataItemAudioTrackNumberKey") }
+
+// NSMetadataItemRecordingDateKey returns the address of the symbol NSMetadataItemRecordingDateKey.
+func NSMetadataItemRecordingDateKey() uintptr { return _symbol("NSMetadataItemRecordingDateKey") }
+
+// NSMetadataItemMusicalGenreKey returns the address of the symbol NSMetadataItemMusicalGenreKey.
+func NSMetadataItemMusicalGenreKey() uintptr { return _symbol("NSMetadataItemMusicalGenreKey") }
+
+// NSMetadataItemIsGeneralMIDISequenceKey returns the address of the symbol NSMetadataItemIsGeneralMIDISequenceKey.
+func NSMetadataItemIsGeneralMIDISequenceKey() uintptr {
+	return _symbol("NSMetadataItemIsGeneralMIDISequenceKey")
+}
+
+// NSMetadataItemRecordingYearKey returns the address of the symbol NSMetadataItemRecordingYearKey.
+func NSMetadataItemRecordingYearKey() uintptr { return _symbol("NSMetadataItemRecordingYearKey") }
+
+// NSMetadataItemOrganizationsKey returns the address of the symbol NSMetadataItemOrganizationsKey.
+func NSMetadataItemOrganizationsKey() uintptr { return _symbol("NSMetadataItemOrganizationsKey") }
+
+// NSMetadataItemLanguagesKey returns the address of the symbol NSMetadataItemLanguagesKey.
+func NSMetadataItemLanguagesKey() uintptr { return _symbol("NSMetadataItemLanguagesKey") }
+
+// NSMetadataItemRightsKey returns the address of the symbol NSMetadataItemRightsKey.
+func NSMetadataItemRightsKey() uintptr { return _symbol("NSMetadataItemRightsKey") }
+
+// NSMetadataItemPublishersKey returns the address of the symbol NSMetadataItemPublishersKey.
+func NSMetadataItemPublishersKey() uintptr { return _symbol("NSMetadataItemPublishersKey") }
+
+// NSMetadataItemContributorsKey returns the address of the symbol NSMetadataItemContributorsKey.
+func NSMetadataItemContributorsKey() uintptr { return _symbol("NSMetadataItemContributorsKey") }
+
+// NSMetadataItemCoverageKey returns the address of the symbol NSMetadataItemCoverageKey.
+func NSMetadataItemCoverageKey() uintptr { return _symbol("NSMetadataItemCoverageKey") }
+
+// NSMetadataItemSubjectKey returns the address of the symbol NSMetadataItemSubjectKey.
+func NSMetadataItemSubjectKey() uintptr { return _symbol("NSMetadataItemSubjectKey") }
+
+// NSMetadataItemThemeKey returns the address of the symbol NSMetadataItemThemeKey.
+func NSMetadataItemThemeKey() uintptr { return _symbol("NSMetadataItemThemeKey") }
+
+// NSMetadataItemDescriptionKey returns the address of the symbol NSMetadataItemDescriptionKey.
+func NSMetadataItemDescriptionKey() uintptr { return _symbol("NSMetadataItemDescriptionKey") }
+
+// NSMetadataItemIdentifierKey returns the address of the symbol NSMetadataItemIdentifierKey.
+func NSMetadataItemIdentifierKey() uintptr { return _symbol("NSMetadataItemIdentifierKey") }
+
+// NSMetadataItemAudiencesKey returns the address of the symbol NSMetadataItemAudiencesKey.
+func NSMetadataItemAudiencesKey() uintptr { return _symbol("NSMetadataItemAudiencesKey") }
+
+// NSMetadataItemNumberOfPagesKey returns the address of the symbol NSMetadataItemNumberOfPagesKey.
+func NSMetadataItemNumberOfPagesKey() uintptr { return _symbol("NSMetadataItemNumberOfPagesKey") }
+
+// NSMetadataItemPageWidthKey returns the address of the symbol NSMetadataItemPageWidthKey.
+func NSMetadataItemPageWidthKey() uintptr { return _symbol("NSMetadataItemPageWidthKey") }
+
+// NSMetadataItemPageHeightKey returns the address of the symbol NSMetadataItemPageHeightKey.
+func NSMetadataItemPageHeightKey() uintptr { return _symbol("NSMetadataItemPageHeightKey") }
+
+// NSMetadataItemSecurityMethodKey returns the address of the symbol NSMetadataItemSecurityMethodKey.
+func NSMetadataItemSecurityMethodKey() uintptr { return _symbol("NSMetadataItemSecurityMethodKey") }
+
+// NSMetadataItemCreatorKey returns the address of the symbol NSMetadataItemCreatorKey.
+func NSMetadataItemCreatorKey() uintptr { return _symbol("NSMetadataItemCreatorKey") }
+
+// NSMetadataItemEncodingApplicationsKey returns the address of the symbol NSMetadataItemEncodingApplicationsKey.
+func NSMetadataItemEncodingApplicationsKey() uintptr {
+	return _symbol("NSMetadataItemEncodingApplicationsKey")
+}
+
+// NSMetadataItemDueDateKey returns the address of the symbol NSMetadataItemDueDateKey.
+func NSMetadataItemDueDateKey() uintptr { return _symbol("NSMetadataItemDueDateKey") }
+
+// NSMetadataItemStarRatingKey returns the address of the symbol NSMetadataItemStarRatingKey.
+func NSMetadataItemStarRatingKey() uintptr { return _symbol("NSMetadataItemStarRatingKey") }
+
+// NSMetadataItemPhoneNumbersKey returns the address of the symbol NSMetadataItemPhoneNumbersKey.
+func NSMetadataItemPhoneNumbersKey() uintptr { return _symbol("NSMetadataItemPhoneNumbersKey") }
+
+// NSMetadataItemEmailAddressesKey returns the address of the symbol NSMetadataItemEmailAddressesKey.
+func NSMetadataItemEmailAddressesKey() uintptr { return _symbol("NSMetadataItemEmailAddressesKey") }
+
+// NSMetadataItemInstantMessageAddressesKey returns the address of the symbol NSMetadataItemInstantMessageAddressesKey.
+func NSMetadataItemInstantMessageAddressesKey() uintptr {
+	return _symbol("NSMetadataItemInstantMessageAddressesKey")
+}
+
+// NSMetadataItemKindKey returns the address of the symbol NSMetadataItemKindKey.
+func NSMetadataItemKindKey() uintptr { return _symbol("NSMetadataItemKindKey") }
+
+// NSMetadataItemRecipientsKey returns the address of the symbol NSMetadataItemRecipientsKey.
+func NSMetadataItemRecipientsKey() uintptr { return _symbol("NSMetadataItemRecipientsKey") }
+
+// NSMetadataItemFinderCommentKey returns the address of the symbol NSMetadataItemFinderCommentKey.
+func NSMetadataItemFinderCommentKey() uintptr { return _symbol("NSMetadataItemFinderCommentKey") }
+
+// NSMetadataItemFontsKey returns the address of the symbol NSMetadataItemFontsKey.
+func NSMetadataItemFontsKey() uintptr { return _symbol("NSMetadataItemFontsKey") }
+
+// NSMetadataItemAppleLoopsRootKeyKey returns the address of the symbol NSMetadataItemAppleLoopsRootKeyKey.
+func NSMetadataItemAppleLoopsRootKeyKey() uintptr {
+	return _symbol("NSMetadataItemAppleLoopsRootKeyKey")
+}
+
+// NSMetadataItemAppleLoopsKeyFilterTypeKey returns the address of the symbol NSMetadataItemAppleLoopsKeyFilterTypeKey.
+func NSMetadataItemAppleLoopsKeyFilterTypeKey() uintptr {
+	return _symbol("NSMetadataItemAppleLoopsKeyFilterTypeKey")
+}
+
+// NSMetadataItemAppleLoopsLoopModeKey returns the address of the symbol NSMetadataItemAppleLoopsLoopModeKey.
+func NSMetadataItemAppleLoopsLoopModeKey() uintptr {
+	return _symbol("NSMetadataItemAppleLoopsLoopModeKey")
+}
+
+// NSMetadataItemAppleLoopDescriptorsKey returns the address of the symbol NSMetadataItemAppleLoopDescriptorsKey.
+func NSMetadataItemAppleLoopDescriptorsKey() uintptr {
+	return _symbol("NSMetadataItemAppleLoopDescriptorsKey")
+}
+
+// NSMetadataItemMusicalInstrumentCategoryKey returns the address of the symbol NSMetadataItemMusicalInstrumentCategoryKey.
+func NSMetadataItemMusicalInstrumentCategoryKey() uintptr {
+	return _symbol("NSMetadataItemMusicalInstrumentCategoryKey")
+}
+
+// NSMetadataItemMusicalInstrumentNameKey returns the address of the symbol NSMetadataItemMusicalInstrumentNameKey.
+func NSMetadataItemMusicalInstrumentNameKey() uintptr {
+	return _symbol("NSMetadataItemMusicalInstrumentNameKey")
+}
+
+// NSMetadataItemCFBundleIdentifierKey returns the address of the symbol NSMetadataItemCFBundleIdentifierKey.
+func NSMetadataItemCFBundleIdentifierKey() uintptr {
+	return _symbol("NSMetadataItemCFBundleIdentifierKey")
+}
+
+// NSMetadataItemInformationKey returns the address of the symbol NSMetadataItemInformationKey.
+func NSMetadataItemInformationKey() uintptr { return _symbol("NSMetadataItemInformationKey") }
+
+// NSMetadataItemDirectorKey returns the address of the symbol NSMetadataItemDirectorKey.
+func NSMetadataItemDirectorKey() uintptr { return _symbol("NSMetadataItemDirectorKey") }
+
+// NSMetadataItemProducerKey returns the address of the symbol NSMetadataItemProducerKey.
+func NSMetadataItemProducerKey() uintptr { return _symbol("NSMetadataItemProducerKey") }
+
+// NSMetadataItemGenreKey returns the address of the symbol NSMetadataItemGenreKey.
+func NSMetadataItemGenreKey() uintptr { return _symbol("NSMetadataItemGenreKey") }
+
+// NSMetadataItemPerformersKey returns the address of the symbol NSMetadataItemPerformersKey.
+func NSMetadataItemPerformersKey() uintptr { return _symbol("NSMetadataItemPerformersKey") }
+
+// NSMetadataItemOriginalFormatKey returns the address of the symbol NSMetadataItemOriginalFormatKey.
+func NSMetadataItemOriginalFormatKey() uintptr { return _symbol("NSMetadataItemOriginalFormatKey") }
+
+// NSMetadataItemOriginalSourceKey returns the address of the symbol NSMetadataItemOriginalSourceKey.
+func NSMetadataItemOriginalSourceKey() uintptr { return _symbol("NSMetadataItemOriginalSourceKey") }
+
+// NSMetadataItemAuthorEmailAddressesKey returns the address of the symbol NSMetadataItemAuthorEmailAddressesKey.
+func NSMetadataItemAuthorEmailAddressesKey() uintptr {
+	return _symbol("NSMetadataItemAuthorEmailAddressesKey")
+}
+
+// NSMetadataItemRecipientEmailAddressesKey returns the address of the symbol NSMetadataItemRecipientEmailAddressesKey.
+func NSMetadataItemRecipientEmailAddressesKey() uintptr {
+	return _symbol("NSMetadataItemRecipientEmailAddressesKey")
+}
+
+// NSMetadataItemAuthorAddressesKey returns the address of the symbol NSMetadataItemAuthorAddressesKey.
+func NSMetadataItemAuthorAddressesKey() uintptr { return _symbol("NSMetadataItemAuthorAddressesKey") }
+
+// NSMetadataItemRecipientAddressesKey returns the address of the symbol NSMetadataItemRecipientAddressesKey.
+func NSMetadataItemRecipientAddressesKey() uintptr {
+	return _symbol("NSMetadataItemRecipientAddressesKey")
+}
+
+// NSMetadataItemIsLikelyJunkKey returns the address of the symbol NSMetadataItemIsLikelyJunkKey.
+func NSMetadataItemIsLikelyJunkKey() uintptr { return _symbol("NSMetadataItemIsLikelyJunkKey") }
+
+// NSMetadataItemExecutableArchitecturesKey returns the address of the symbol NSMetadataItemExecutableArchitecturesKey.
+func NSMetadataItemExecutableArchitecturesKey() uintptr {
+	return _symbol("NSMetadataItemExecutableArchitecturesKey")
+}
+
+// NSMetadataItemExecutablePlatformKey returns the address of the symbol NSMetadataItemExecutablePlatformKey.
+func NSMetadataItemExecutablePlatformKey() uintptr {
+	return _symbol("NSMetadataItemExecutablePlatformKey")
+}
+
+// NSMetadataItemApplicationCategoriesKey returns the address of the symbol NSMetadataItemApplicationCategoriesKey.
+func NSMetadataItemApplicationCategoriesKey() uintptr {
+	return _symbol("NSMetadataItemApplicationCategoriesKey")
+}
+
+// NSMetadataItemIsApplicationManagedKey returns the address of the symbol NSMetadataItemIsApplicationManagedKey.
+func NSMetadataItemIsApplicationManagedKey() uintptr {
+	return _symbol("NSMetadataItemIsApplicationManagedKey")
+}
+
+// NSMetadataQueryUserHomeScope returns the address of the symbol NSMetadataQueryUserHomeScope.
+func NSMetadataQueryUserHomeScope() uintptr { return _symbol("NSMetadataQueryUserHomeScope") }
+
+// NSMetadataQueryLocalComputerScope returns the address of the symbol NSMetadataQueryLocalComputerScope.
+func NSMetadataQueryLocalComputerScope() uintptr { return _symbol("NSMetadataQueryLocalComputerScope") }
+
+// NSMetadataQueryNetworkScope returns the address of the symbol NSMetadataQueryNetworkScope.
+func NSMetadataQueryNetworkScope() uintptr { return _symbol("NSMetadataQueryNetworkScope") }
+
+// NSMetadataQueryIndexedLocalComputerScope returns the address of the symbol NSMetadataQueryIndexedLocalComputerScope.
+func NSMetadataQueryIndexedLocalComputerScope() uintptr {
+	return _symbol("NSMetadataQueryIndexedLocalComputerScope")
+}
+
+// NSMetadataQueryIndexedNetworkScope returns the address of the symbol NSMetadataQueryIndexedNetworkScope.
+func NSMetadataQueryIndexedNetworkScope() uintptr {
+	return _symbol("NSMetadataQueryIndexedNetworkScope")
+}
+
+// NSNetServicesErrorCode returns the address of the symbol NSNetServicesErrorCode.
+func NSNetServicesErrorCode() uintptr { return _symbol("NSNetServicesErrorCode") }
+
+// NSNetServicesErrorDomain returns the address of the symbol NSNetServicesErrorDomain.
+func NSNetServicesErrorDomain() uintptr { return _symbol("NSNetServicesErrorDomain") }
+
+// NSURLSessionTransferSizeUnknown returns the value of the constant NSURLSessionTransferSizeUnknown.
+func NSURLSessionTransferSizeUnknown() int64 {
+	addr := _symbol("NSURLSessionTransferSizeUnknown")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int64)(unsafe.Pointer(addr))
+}
+
+// NSURLSessionTaskPriorityDefault returns the address of the symbol NSURLSessionTaskPriorityDefault.
+func NSURLSessionTaskPriorityDefault() uintptr { return _symbol("NSURLSessionTaskPriorityDefault") }
+
+// NSURLSessionTaskPriorityLow returns the address of the symbol NSURLSessionTaskPriorityLow.
+func NSURLSessionTaskPriorityLow() uintptr { return _symbol("NSURLSessionTaskPriorityLow") }
+
+// NSURLSessionTaskPriorityHigh returns the address of the symbol NSURLSessionTaskPriorityHigh.
+func NSURLSessionTaskPriorityHigh() uintptr { return _symbol("NSURLSessionTaskPriorityHigh") }
+
+// NSAppleScriptErrorMessage returns the address of the symbol NSAppleScriptErrorMessage.
+func NSAppleScriptErrorMessage() uintptr { return _symbol("NSAppleScriptErrorMessage") }
+
+// NSAppleScriptErrorNumber returns the address of the symbol NSAppleScriptErrorNumber.
+func NSAppleScriptErrorNumber() uintptr { return _symbol("NSAppleScriptErrorNumber") }
+
+// NSAppleScriptErrorAppName returns the address of the symbol NSAppleScriptErrorAppName.
+func NSAppleScriptErrorAppName() uintptr { return _symbol("NSAppleScriptErrorAppName") }
+
+// NSAppleScriptErrorBriefMessage returns the address of the symbol NSAppleScriptErrorBriefMessage.
+func NSAppleScriptErrorBriefMessage() uintptr { return _symbol("NSAppleScriptErrorBriefMessage") }
+
+// NSAppleScriptErrorRange returns the address of the symbol NSAppleScriptErrorRange.
+func NSAppleScriptErrorRange() uintptr { return _symbol("NSAppleScriptErrorRange") }
+
+// NSConnectionReplyMode returns the address of the symbol NSConnectionReplyMode.
+func NSConnectionReplyMode() uintptr { return _symbol("NSConnectionReplyMode") }
+
+// NSConnectionDidDieNotification returns the address of the symbol NSConnectionDidDieNotification.
+func NSConnectionDidDieNotification() uintptr { return _symbol("NSConnectionDidDieNotification") }
+
+// NSFailedAuthenticationException returns the address of the symbol NSFailedAuthenticationException.
+func NSFailedAuthenticationException() uintptr { return _symbol("NSFailedAuthenticationException") }
+
+// NSConnectionDidInitializeNotification returns the address of the symbol NSConnectionDidInitializeNotification.
+func NSConnectionDidInitializeNotification() uintptr {
+	return _symbol("NSConnectionDidInitializeNotification")
+}
+
+// NSAppleEventTimeOutDefault returns the address of the symbol NSAppleEventTimeOutDefault.
+func NSAppleEventTimeOutDefault() uintptr { return _symbol("NSAppleEventTimeOutDefault") }
+
+// NSAppleEventTimeOutNone returns the address of the symbol NSAppleEventTimeOutNone.
+func NSAppleEventTimeOutNone() uintptr { return _symbol("NSAppleEventTimeOutNone") }
+
+// NSGrammarRange returns the address of the symbol NSGrammarRange.
+func NSGrammarRange() uintptr { return _symbol("NSGrammarRange") }
+
+// NSGrammarUserDescription returns the address of the symbol NSGrammarUserDescription.
+func NSGrammarUserDescription() uintptr { return _symbol("NSGrammarUserDescription") }
+
+// NSGrammarCorrections returns the address of the symbol NSGrammarCorrections.
+func NSGrammarCorrections() uintptr { return _symbol("NSGrammarCorrections") }
+
+// NSUserNotificationDefaultSoundName returns the address of the symbol NSUserNotificationDefaultSoundName.
+func NSUserNotificationDefaultSoundName() uintptr {
+	return _symbol("NSUserNotificationDefaultSoundName")
 }

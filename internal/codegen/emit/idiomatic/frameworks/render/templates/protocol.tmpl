@@ -1,0 +1,13 @@
+{{/*
+    protocol.tmpl — idiomatic re-emission of an ObjC protocol as a Go interface.
+    A Go value satisfies the protocol by declaring the listed methods. Signatures
+    are resolved to idiomatic Go types in the gather phase; the template is a pure
+    shape and gofmt canonicalises the result.
+*/}}
+{{define "protocols"}}{{range .}}{{template "protocol" .}}{{end}}{{end}}
+{{define "protocol"}}{{if .Doc}}{{comment .Doc}}
+{{end}}type {{.GoName}} interface {
+{{range .Methods}}{{.GoName}}{{.Signature}}
+{{end}}}
+
+{{end}}

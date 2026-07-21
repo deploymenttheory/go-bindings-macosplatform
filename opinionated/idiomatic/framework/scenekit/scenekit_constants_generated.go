@@ -5,7 +5,10 @@
 package scenekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
@@ -576,4 +579,19 @@ func SCNLightShadowNearClippingKey() obj.Object {
 // SCNLightShadowFarClippingKey returns the string constant SCNLightShadowFarClippingKey, for use as a dictionary key or argument.
 func SCNLightShadowFarClippingKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SCNLightShadowFarClippingKey")))
+}
+
+// SCNVector3Zero returns the address of the symbol SCNVector3Zero.
+func SCNVector3Zero() uintptr { return _symbol("SCNVector3Zero") }
+
+// SCNVector4Zero returns the address of the symbol SCNVector4Zero.
+func SCNVector4Zero() uintptr { return _symbol("SCNVector4Zero") }
+
+// SCNMatrix4Identity returns the value of the constant SCNMatrix4Identity.
+func SCNMatrix4Identity() quartzcore.CATransform3D {
+	addr := _symbol("SCNMatrix4Identity")
+	if addr == 0 {
+		return quartzcore.CATransform3D{}
+	}
+	return *(*quartzcore.CATransform3D)(unsafe.Pointer(addr))
 }

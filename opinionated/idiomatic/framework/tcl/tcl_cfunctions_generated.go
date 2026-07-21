@@ -90,6 +90,17 @@ func Tcl_Alloc(size int) string {
 	return _fnTcl_Alloc(size)
 }
 
+var _fnTcl_AllocStatBuf func() unsafe.Pointer
+
+// Tcl_AllocStatBuf calls the Tcl framework function Tcl_AllocStatBuf.
+func Tcl_AllocStatBuf() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_AllocStatBuf == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_AllocStatBuf, _lib, "Tcl_AllocStatBuf")
+	}
+	return _fnTcl_AllocStatBuf()
+}
+
 var _fnTcl_AllowExceptions func(unsafe.Pointer)
 
 // Tcl_AllowExceptions calls the Tcl framework function Tcl_AllowExceptions.
@@ -412,6 +423,17 @@ func Tcl_CancelIdleCall(idleProc unsafe.Pointer, clientData unsafe.Pointer) {
 	_fnTcl_CancelIdleCall(idleProc, clientData)
 }
 
+var _fnTcl_ChannelBlockModeProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelBlockModeProc calls the Tcl framework function Tcl_ChannelBlockModeProc.
+func Tcl_ChannelBlockModeProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelBlockModeProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelBlockModeProc, _lib, "Tcl_ChannelBlockModeProc")
+	}
+	return _fnTcl_ChannelBlockModeProc(chanTypePtr)
+}
+
 var _fnTcl_ChannelBuffered func(objc.ID) int32
 
 // Tcl_ChannelBuffered calls the Tcl framework function Tcl_ChannelBuffered.
@@ -421,6 +443,83 @@ func Tcl_ChannelBuffered(chan_ obj.Object) int {
 		ebipurego.RegisterLibFunc(&_fnTcl_ChannelBuffered, _lib, "Tcl_ChannelBuffered")
 	}
 	return int(_fnTcl_ChannelBuffered(objref.IDOf(chan_)))
+}
+
+var _fnTcl_ChannelClose2Proc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelClose2Proc calls the Tcl framework function Tcl_ChannelClose2Proc.
+func Tcl_ChannelClose2Proc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelClose2Proc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelClose2Proc, _lib, "Tcl_ChannelClose2Proc")
+	}
+	return _fnTcl_ChannelClose2Proc(chanTypePtr)
+}
+
+var _fnTcl_ChannelCloseProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelCloseProc calls the Tcl framework function Tcl_ChannelCloseProc.
+func Tcl_ChannelCloseProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelCloseProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelCloseProc, _lib, "Tcl_ChannelCloseProc")
+	}
+	return _fnTcl_ChannelCloseProc(chanTypePtr)
+}
+
+var _fnTcl_ChannelFlushProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelFlushProc calls the Tcl framework function Tcl_ChannelFlushProc.
+func Tcl_ChannelFlushProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelFlushProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelFlushProc, _lib, "Tcl_ChannelFlushProc")
+	}
+	return _fnTcl_ChannelFlushProc(chanTypePtr)
+}
+
+var _fnTcl_ChannelGetHandleProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelGetHandleProc calls the Tcl framework function Tcl_ChannelGetHandleProc.
+func Tcl_ChannelGetHandleProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelGetHandleProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelGetHandleProc, _lib, "Tcl_ChannelGetHandleProc")
+	}
+	return _fnTcl_ChannelGetHandleProc(chanTypePtr)
+}
+
+var _fnTcl_ChannelGetOptionProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelGetOptionProc calls the Tcl framework function Tcl_ChannelGetOptionProc.
+func Tcl_ChannelGetOptionProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelGetOptionProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelGetOptionProc, _lib, "Tcl_ChannelGetOptionProc")
+	}
+	return _fnTcl_ChannelGetOptionProc(chanTypePtr)
+}
+
+var _fnTcl_ChannelHandlerProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelHandlerProc calls the Tcl framework function Tcl_ChannelHandlerProc.
+func Tcl_ChannelHandlerProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelHandlerProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelHandlerProc, _lib, "Tcl_ChannelHandlerProc")
+	}
+	return _fnTcl_ChannelHandlerProc(chanTypePtr)
+}
+
+var _fnTcl_ChannelInputProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelInputProc calls the Tcl framework function Tcl_ChannelInputProc.
+func Tcl_ChannelInputProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelInputProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelInputProc, _lib, "Tcl_ChannelInputProc")
+	}
+	return _fnTcl_ChannelInputProc(chanTypePtr)
 }
 
 var _fnTcl_ChannelName func(unsafe.Pointer) string
@@ -434,6 +533,61 @@ func Tcl_ChannelName(chanTypePtr unsafe.Pointer) string {
 	return _fnTcl_ChannelName(chanTypePtr)
 }
 
+var _fnTcl_ChannelOutputProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelOutputProc calls the Tcl framework function Tcl_ChannelOutputProc.
+func Tcl_ChannelOutputProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelOutputProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelOutputProc, _lib, "Tcl_ChannelOutputProc")
+	}
+	return _fnTcl_ChannelOutputProc(chanTypePtr)
+}
+
+var _fnTcl_ChannelSeekProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelSeekProc calls the Tcl framework function Tcl_ChannelSeekProc.
+func Tcl_ChannelSeekProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelSeekProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelSeekProc, _lib, "Tcl_ChannelSeekProc")
+	}
+	return _fnTcl_ChannelSeekProc(chanTypePtr)
+}
+
+var _fnTcl_ChannelSetOptionProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelSetOptionProc calls the Tcl framework function Tcl_ChannelSetOptionProc.
+func Tcl_ChannelSetOptionProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelSetOptionProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelSetOptionProc, _lib, "Tcl_ChannelSetOptionProc")
+	}
+	return _fnTcl_ChannelSetOptionProc(chanTypePtr)
+}
+
+var _fnTcl_ChannelThreadActionProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelThreadActionProc calls the Tcl framework function Tcl_ChannelThreadActionProc.
+func Tcl_ChannelThreadActionProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelThreadActionProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelThreadActionProc, _lib, "Tcl_ChannelThreadActionProc")
+	}
+	return _fnTcl_ChannelThreadActionProc(chanTypePtr)
+}
+
+var _fnTcl_ChannelTruncateProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelTruncateProc calls the Tcl framework function Tcl_ChannelTruncateProc.
+func Tcl_ChannelTruncateProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelTruncateProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelTruncateProc, _lib, "Tcl_ChannelTruncateProc")
+	}
+	return _fnTcl_ChannelTruncateProc(chanTypePtr)
+}
+
 var _fnTcl_ChannelVersion func(unsafe.Pointer) objc.ID
 
 // Tcl_ChannelVersion calls the Tcl framework function Tcl_ChannelVersion.
@@ -444,6 +598,28 @@ func Tcl_ChannelVersion(chanTypePtr unsafe.Pointer) obj.Object {
 	}
 	_ret := _fnTcl_ChannelVersion(chanTypePtr)
 	return obj.Wrap(_ret)
+}
+
+var _fnTcl_ChannelWatchProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelWatchProc calls the Tcl framework function Tcl_ChannelWatchProc.
+func Tcl_ChannelWatchProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelWatchProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelWatchProc, _lib, "Tcl_ChannelWatchProc")
+	}
+	return _fnTcl_ChannelWatchProc(chanTypePtr)
+}
+
+var _fnTcl_ChannelWideSeekProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ChannelWideSeekProc calls the Tcl framework function Tcl_ChannelWideSeekProc.
+func Tcl_ChannelWideSeekProc(chanTypePtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ChannelWideSeekProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ChannelWideSeekProc, _lib, "Tcl_ChannelWideSeekProc")
+	}
+	return _fnTcl_ChannelWideSeekProc(chanTypePtr)
 }
 
 var _fnTcl_Chdir func(string) int32
@@ -490,6 +666,17 @@ func Tcl_CommandComplete(cmd string) int {
 	return int(_fnTcl_CommandComplete(cmd))
 }
 
+var _fnTcl_CommandTraceInfo func(unsafe.Pointer, string, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_CommandTraceInfo calls the Tcl framework function Tcl_CommandTraceInfo.
+func Tcl_CommandTraceInfo(interp unsafe.Pointer, varName string, flags int, procPtr unsafe.Pointer, prevClientData unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_CommandTraceInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_CommandTraceInfo, _lib, "Tcl_CommandTraceInfo")
+	}
+	return _fnTcl_CommandTraceInfo(interp, varName, flags, procPtr, prevClientData)
+}
+
 var _fnTcl_Concat func(int, string) string
 
 // Tcl_Concat calls the Tcl framework function Tcl_Concat.
@@ -499,6 +686,17 @@ func Tcl_Concat(argc int, argv string) string {
 		ebipurego.RegisterLibFunc(&_fnTcl_Concat, _lib, "Tcl_Concat")
 	}
 	return _fnTcl_Concat(argc, argv)
+}
+
+var _fnTcl_ConcatObj func(int, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_ConcatObj calls the Tcl framework function Tcl_ConcatObj.
+func Tcl_ConcatObj(objc_ int, objv unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ConcatObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ConcatObj, _lib, "Tcl_ConcatObj")
+	}
+	return _fnTcl_ConcatObj(objc_, objv)
 }
 
 var _fnTcl_ConditionFinalize func(unsafe.Pointer)
@@ -694,6 +892,30 @@ func Tcl_CreateFileHandler(fd int, mask int, proc unsafe.Pointer, clientData uns
 	_fnTcl_CreateFileHandler(fd, mask, proc, clientData)
 }
 
+var _fnTcl_CreateHashEntry func(unsafe.Pointer, string, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_CreateHashEntry calls the Tcl framework function Tcl_CreateHashEntry.
+func Tcl_CreateHashEntry(tablePtr unsafe.Pointer, key string) (result unsafe.Pointer, newPtr int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_CreateHashEntry == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_CreateHashEntry, _lib, "Tcl_CreateHashEntry")
+	}
+	var _out0 int32
+	_ret := _fnTcl_CreateHashEntry(tablePtr, key, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnTcl_CreateInterp func() unsafe.Pointer
+
+// Tcl_CreateInterp calls the Tcl framework function Tcl_CreateInterp.
+func Tcl_CreateInterp() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_CreateInterp == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_CreateInterp, _lib, "Tcl_CreateInterp")
+	}
+	return _fnTcl_CreateInterp()
+}
+
 var _fnTcl_CreateMathFunc func(unsafe.Pointer, string, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Tcl_CreateMathFunc calls the Tcl framework function Tcl_CreateMathFunc.
@@ -705,6 +927,17 @@ func Tcl_CreateMathFunc(interp unsafe.Pointer, name string, numArgs int, proc un
 	var _out0 Valuetype
 	_fnTcl_CreateMathFunc(interp, name, numArgs, unsafe.Pointer(&_out0), proc, clientData)
 	return _out0
+}
+
+var _fnTcl_CreateNamespace func(unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_CreateNamespace calls the Tcl framework function Tcl_CreateNamespace.
+func Tcl_CreateNamespace(interp unsafe.Pointer, name string, clientData unsafe.Pointer, deleteProc unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_CreateNamespace == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_CreateNamespace, _lib, "Tcl_CreateNamespace")
+	}
+	return _fnTcl_CreateNamespace(interp, name, clientData, deleteProc)
 }
 
 var _fnTcl_CreateObjCommand func(unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -729,6 +962,17 @@ func Tcl_CreateObjTrace(interp unsafe.Pointer, level int, flags int, objProc uns
 	}
 	_ret := _fnTcl_CreateObjTrace(interp, level, flags, objProc, clientData, delProc)
 	return obj.Wrap(_ret)
+}
+
+var _fnTcl_CreateSlave func(unsafe.Pointer, string, int) unsafe.Pointer
+
+// Tcl_CreateSlave calls the Tcl framework function Tcl_CreateSlave.
+func Tcl_CreateSlave(interp unsafe.Pointer, slaveName string, isSafe int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_CreateSlave == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_CreateSlave, _lib, "Tcl_CreateSlave")
+	}
+	return _fnTcl_CreateSlave(interp, slaveName, isSafe)
 }
 
 var _fnTcl_CreateThread func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int) int32
@@ -951,6 +1195,116 @@ func Tcl_DbIsShared(objPtr unsafe.Pointer, file string, line int) int {
 		ebipurego.RegisterLibFunc(&_fnTcl_DbIsShared, _lib, "Tcl_DbIsShared")
 	}
 	return int(_fnTcl_DbIsShared(objPtr, file, line))
+}
+
+var _fnTcl_DbNewBignumObj func(unsafe.Pointer, string, int) unsafe.Pointer
+
+// Tcl_DbNewBignumObj calls the Tcl framework function Tcl_DbNewBignumObj.
+func Tcl_DbNewBignumObj(value unsafe.Pointer, file string, line int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DbNewBignumObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DbNewBignumObj, _lib, "Tcl_DbNewBignumObj")
+	}
+	return _fnTcl_DbNewBignumObj(value, file, line)
+}
+
+var _fnTcl_DbNewBooleanObj func(int, string, int) unsafe.Pointer
+
+// Tcl_DbNewBooleanObj calls the Tcl framework function Tcl_DbNewBooleanObj.
+func Tcl_DbNewBooleanObj(boolValue int, file string, line int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DbNewBooleanObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DbNewBooleanObj, _lib, "Tcl_DbNewBooleanObj")
+	}
+	return _fnTcl_DbNewBooleanObj(boolValue, file, line)
+}
+
+var _fnTcl_DbNewByteArrayObj func(unsafe.Pointer, int, string, int) unsafe.Pointer
+
+// Tcl_DbNewByteArrayObj calls the Tcl framework function Tcl_DbNewByteArrayObj.
+func Tcl_DbNewByteArrayObj(data unsafe.Pointer, length int, file string, line int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DbNewByteArrayObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DbNewByteArrayObj, _lib, "Tcl_DbNewByteArrayObj")
+	}
+	return _fnTcl_DbNewByteArrayObj(data, length, file, line)
+}
+
+var _fnTcl_DbNewDictObj func(string, int) unsafe.Pointer
+
+// Tcl_DbNewDictObj calls the Tcl framework function Tcl_DbNewDictObj.
+func Tcl_DbNewDictObj(file string, line int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DbNewDictObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DbNewDictObj, _lib, "Tcl_DbNewDictObj")
+	}
+	return _fnTcl_DbNewDictObj(file, line)
+}
+
+var _fnTcl_DbNewDoubleObj func(float64, string, int) unsafe.Pointer
+
+// Tcl_DbNewDoubleObj calls the Tcl framework function Tcl_DbNewDoubleObj.
+func Tcl_DbNewDoubleObj(doubleValue float64, file string, line int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DbNewDoubleObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DbNewDoubleObj, _lib, "Tcl_DbNewDoubleObj")
+	}
+	return _fnTcl_DbNewDoubleObj(doubleValue, file, line)
+}
+
+var _fnTcl_DbNewListObj func(int, unsafe.Pointer, string, int) unsafe.Pointer
+
+// Tcl_DbNewListObj calls the Tcl framework function Tcl_DbNewListObj.
+func Tcl_DbNewListObj(objc_ int, objv unsafe.Pointer, file string, line int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DbNewListObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DbNewListObj, _lib, "Tcl_DbNewListObj")
+	}
+	return _fnTcl_DbNewListObj(objc_, objv, file, line)
+}
+
+var _fnTcl_DbNewLongObj func(int, string, int) unsafe.Pointer
+
+// Tcl_DbNewLongObj calls the Tcl framework function Tcl_DbNewLongObj.
+func Tcl_DbNewLongObj(longValue int, file string, line int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DbNewLongObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DbNewLongObj, _lib, "Tcl_DbNewLongObj")
+	}
+	return _fnTcl_DbNewLongObj(longValue, file, line)
+}
+
+var _fnTcl_DbNewObj func(string, int) unsafe.Pointer
+
+// Tcl_DbNewObj calls the Tcl framework function Tcl_DbNewObj.
+func Tcl_DbNewObj(file string, line int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DbNewObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DbNewObj, _lib, "Tcl_DbNewObj")
+	}
+	return _fnTcl_DbNewObj(file, line)
+}
+
+var _fnTcl_DbNewStringObj func(unsafe.Pointer, int, string, int) unsafe.Pointer
+
+// Tcl_DbNewStringObj calls the Tcl framework function Tcl_DbNewStringObj.
+func Tcl_DbNewStringObj(data unsafe.Pointer, length int, file string, line int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DbNewStringObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DbNewStringObj, _lib, "Tcl_DbNewStringObj")
+	}
+	return _fnTcl_DbNewStringObj(data, length, file, line)
+}
+
+var _fnTcl_DbNewWideIntObj func(int, string, int) unsafe.Pointer
+
+// Tcl_DbNewWideIntObj calls the Tcl framework function Tcl_DbNewWideIntObj.
+func Tcl_DbNewWideIntObj(wideValue int, file string, line int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DbNewWideIntObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DbNewWideIntObj, _lib, "Tcl_DbNewWideIntObj")
+	}
+	return _fnTcl_DbNewWideIntObj(wideValue, file, line)
 }
 
 var _fnTcl_DecrRefCount func(unsafe.Pointer)
@@ -1333,6 +1687,17 @@ func Tcl_DumpActiveMemory(fileName string) int {
 	return int(_fnTcl_DumpActiveMemory(fileName))
 }
 
+var _fnTcl_DuplicateObj func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_DuplicateObj calls the Tcl framework function Tcl_DuplicateObj.
+func Tcl_DuplicateObj(objPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_DuplicateObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_DuplicateObj, _lib, "Tcl_DuplicateObj")
+	}
+	return _fnTcl_DuplicateObj(objPtr)
+}
+
 var _fnTcl_Eof func(objc.ID) int32
 
 // Tcl_Eof calls the Tcl framework function Tcl_Eof.
@@ -1430,6 +1795,17 @@ func Tcl_EvalObjv(interp unsafe.Pointer, objc_ int, objv unsafe.Pointer, flags i
 		ebipurego.RegisterLibFunc(&_fnTcl_EvalObjv, _lib, "Tcl_EvalObjv")
 	}
 	return int(_fnTcl_EvalObjv(interp, objc_, objv, flags))
+}
+
+var _fnTcl_EvalTokens func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_EvalTokens calls the Tcl framework function Tcl_EvalTokens.
+func Tcl_EvalTokens(interp unsafe.Pointer, tokenPtr unsafe.Pointer, count int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_EvalTokens == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_EvalTokens, _lib, "Tcl_EvalTokens")
+	}
+	return _fnTcl_EvalTokens(interp, tokenPtr, count)
 }
 
 var _fnTcl_EvalTokensStandard func(unsafe.Pointer, unsafe.Pointer, int) int32
@@ -1690,6 +2066,17 @@ func Tcl_FSCreateDirectory(pathPtr unsafe.Pointer) int {
 	return int(_fnTcl_FSCreateDirectory(pathPtr))
 }
 
+var _fnTcl_FSData func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_FSData calls the Tcl framework function Tcl_FSData.
+func Tcl_FSData(fsPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSData == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSData, _lib, "Tcl_FSData")
+	}
+	return _fnTcl_FSData(fsPtr)
+}
+
 var _fnTcl_FSDeleteFile func(unsafe.Pointer) int32
 
 // Tcl_FSDeleteFile calls the Tcl framework function Tcl_FSDeleteFile.
@@ -1767,6 +2154,50 @@ func Tcl_FSFileAttrsSet(interp unsafe.Pointer, index int, pathPtr unsafe.Pointer
 	return int(_fnTcl_FSFileAttrsSet(interp, index, pathPtr, objPtr))
 }
 
+var _fnTcl_FSFileSystemInfo func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_FSFileSystemInfo calls the Tcl framework function Tcl_FSFileSystemInfo.
+func Tcl_FSFileSystemInfo(pathPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSFileSystemInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSFileSystemInfo, _lib, "Tcl_FSFileSystemInfo")
+	}
+	return _fnTcl_FSFileSystemInfo(pathPtr)
+}
+
+var _fnTcl_FSGetCwd func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_FSGetCwd calls the Tcl framework function Tcl_FSGetCwd.
+func Tcl_FSGetCwd(interp unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSGetCwd == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSGetCwd, _lib, "Tcl_FSGetCwd")
+	}
+	return _fnTcl_FSGetCwd(interp)
+}
+
+var _fnTcl_FSGetFileSystemForPath func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_FSGetFileSystemForPath calls the Tcl framework function Tcl_FSGetFileSystemForPath.
+func Tcl_FSGetFileSystemForPath(pathPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSGetFileSystemForPath == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSGetFileSystemForPath, _lib, "Tcl_FSGetFileSystemForPath")
+	}
+	return _fnTcl_FSGetFileSystemForPath(pathPtr)
+}
+
+var _fnTcl_FSGetInternalRep func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_FSGetInternalRep calls the Tcl framework function Tcl_FSGetInternalRep.
+func Tcl_FSGetInternalRep(pathPtr unsafe.Pointer, fsPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSGetInternalRep == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSGetInternalRep, _lib, "Tcl_FSGetInternalRep")
+	}
+	return _fnTcl_FSGetInternalRep(pathPtr, fsPtr)
+}
+
 var _fnTcl_FSGetNativePath func(unsafe.Pointer) string
 
 // Tcl_FSGetNativePath calls the Tcl framework function Tcl_FSGetNativePath.
@@ -1776,6 +2207,17 @@ func Tcl_FSGetNativePath(pathPtr unsafe.Pointer) string {
 		ebipurego.RegisterLibFunc(&_fnTcl_FSGetNativePath, _lib, "Tcl_FSGetNativePath")
 	}
 	return _fnTcl_FSGetNativePath(pathPtr)
+}
+
+var _fnTcl_FSGetNormalizedPath func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_FSGetNormalizedPath calls the Tcl framework function Tcl_FSGetNormalizedPath.
+func Tcl_FSGetNormalizedPath(interp unsafe.Pointer, pathPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSGetNormalizedPath == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSGetNormalizedPath, _lib, "Tcl_FSGetNormalizedPath")
+	}
+	return _fnTcl_FSGetNormalizedPath(interp, pathPtr)
 }
 
 var _fnTcl_FSGetPathType func(unsafe.Pointer) Pathtype
@@ -1789,6 +2231,17 @@ func Tcl_FSGetPathType(pathPtr unsafe.Pointer) Pathtype {
 	return _fnTcl_FSGetPathType(pathPtr)
 }
 
+var _fnTcl_FSGetTranslatedPath func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_FSGetTranslatedPath calls the Tcl framework function Tcl_FSGetTranslatedPath.
+func Tcl_FSGetTranslatedPath(interp unsafe.Pointer, pathPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSGetTranslatedPath == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSGetTranslatedPath, _lib, "Tcl_FSGetTranslatedPath")
+	}
+	return _fnTcl_FSGetTranslatedPath(interp, pathPtr)
+}
+
 var _fnTcl_FSGetTranslatedStringPath func(unsafe.Pointer, unsafe.Pointer) string
 
 // Tcl_FSGetTranslatedStringPath calls the Tcl framework function Tcl_FSGetTranslatedStringPath.
@@ -1798,6 +2251,50 @@ func Tcl_FSGetTranslatedStringPath(interp unsafe.Pointer, pathPtr unsafe.Pointer
 		ebipurego.RegisterLibFunc(&_fnTcl_FSGetTranslatedStringPath, _lib, "Tcl_FSGetTranslatedStringPath")
 	}
 	return _fnTcl_FSGetTranslatedStringPath(interp, pathPtr)
+}
+
+var _fnTcl_FSJoinPath func(unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_FSJoinPath calls the Tcl framework function Tcl_FSJoinPath.
+func Tcl_FSJoinPath(listObj unsafe.Pointer, elements int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSJoinPath == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSJoinPath, _lib, "Tcl_FSJoinPath")
+	}
+	return _fnTcl_FSJoinPath(listObj, elements)
+}
+
+var _fnTcl_FSJoinToPath func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_FSJoinToPath calls the Tcl framework function Tcl_FSJoinToPath.
+func Tcl_FSJoinToPath(pathPtr unsafe.Pointer, objc_ int, objv unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSJoinToPath == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSJoinToPath, _lib, "Tcl_FSJoinToPath")
+	}
+	return _fnTcl_FSJoinToPath(pathPtr, objc_, objv)
+}
+
+var _fnTcl_FSLink func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_FSLink calls the Tcl framework function Tcl_FSLink.
+func Tcl_FSLink(pathPtr unsafe.Pointer, toPtr unsafe.Pointer, linkAction int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSLink == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSLink, _lib, "Tcl_FSLink")
+	}
+	return _fnTcl_FSLink(pathPtr, toPtr, linkAction)
+}
+
+var _fnTcl_FSListVolumes func() unsafe.Pointer
+
+// Tcl_FSListVolumes calls the Tcl framework function Tcl_FSListVolumes.
+func Tcl_FSListVolumes() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSListVolumes == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSListVolumes, _lib, "Tcl_FSListVolumes")
+	}
+	return _fnTcl_FSListVolumes()
 }
 
 var _fnTcl_FSLoadFile func(unsafe.Pointer, unsafe.Pointer, string, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -1844,6 +2341,17 @@ func Tcl_FSMountsChanged(fsPtr unsafe.Pointer) {
 	_fnTcl_FSMountsChanged(fsPtr)
 }
 
+var _fnTcl_FSNewNativePath func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_FSNewNativePath calls the Tcl framework function Tcl_FSNewNativePath.
+func Tcl_FSNewNativePath(fromFilesystem unsafe.Pointer, clientData unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSNewNativePath == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSNewNativePath, _lib, "Tcl_FSNewNativePath")
+	}
+	return _fnTcl_FSNewNativePath(fromFilesystem, clientData)
+}
+
 var _fnTcl_FSOpenFileChannel func(unsafe.Pointer, unsafe.Pointer, string, int) objc.ID
 
 // Tcl_FSOpenFileChannel calls the Tcl framework function Tcl_FSOpenFileChannel.
@@ -1854,6 +2362,17 @@ func Tcl_FSOpenFileChannel(interp unsafe.Pointer, pathPtr unsafe.Pointer, modeSt
 	}
 	_ret := _fnTcl_FSOpenFileChannel(interp, pathPtr, modeString, permissions)
 	return obj.Wrap(_ret)
+}
+
+var _fnTcl_FSPathSeparator func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_FSPathSeparator calls the Tcl framework function Tcl_FSPathSeparator.
+func Tcl_FSPathSeparator(pathPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSPathSeparator == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSPathSeparator, _lib, "Tcl_FSPathSeparator")
+	}
+	return _fnTcl_FSPathSeparator(pathPtr)
 }
 
 var _fnTcl_FSRegister func(unsafe.Pointer, unsafe.Pointer) int32
@@ -1887,6 +2406,19 @@ func Tcl_FSRenameFile(srcPathPtr unsafe.Pointer, destPathPtr unsafe.Pointer) int
 		ebipurego.RegisterLibFunc(&_fnTcl_FSRenameFile, _lib, "Tcl_FSRenameFile")
 	}
 	return int(_fnTcl_FSRenameFile(srcPathPtr, destPathPtr))
+}
+
+var _fnTcl_FSSplitPath func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_FSSplitPath calls the Tcl framework function Tcl_FSSplitPath.
+func Tcl_FSSplitPath(pathPtr unsafe.Pointer) (result unsafe.Pointer, lenPtr int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FSSplitPath == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FSSplitPath, _lib, "Tcl_FSSplitPath")
+	}
+	var _out0 int32
+	_ret := _fnTcl_FSSplitPath(pathPtr, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnTcl_FSStat func(unsafe.Pointer, unsafe.Pointer) int32
@@ -1990,6 +2522,39 @@ func Tcl_FindExecutable(argv0 string) {
 	_fnTcl_FindExecutable(argv0)
 }
 
+var _fnTcl_FindHashEntry func(unsafe.Pointer, string) unsafe.Pointer
+
+// Tcl_FindHashEntry calls the Tcl framework function Tcl_FindHashEntry.
+func Tcl_FindHashEntry(tablePtr unsafe.Pointer, key string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FindHashEntry == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FindHashEntry, _lib, "Tcl_FindHashEntry")
+	}
+	return _fnTcl_FindHashEntry(tablePtr, key)
+}
+
+var _fnTcl_FindNamespace func(unsafe.Pointer, string, unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_FindNamespace calls the Tcl framework function Tcl_FindNamespace.
+func Tcl_FindNamespace(interp unsafe.Pointer, name string, contextNsPtr unsafe.Pointer, flags int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FindNamespace == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FindNamespace, _lib, "Tcl_FindNamespace")
+	}
+	return _fnTcl_FindNamespace(interp, name, contextNsPtr, flags)
+}
+
+var _fnTcl_FirstHashEntry func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_FirstHashEntry calls the Tcl framework function Tcl_FirstHashEntry.
+func Tcl_FirstHashEntry(tablePtr unsafe.Pointer, searchPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_FirstHashEntry == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_FirstHashEntry, _lib, "Tcl_FirstHashEntry")
+	}
+	return _fnTcl_FirstHashEntry(tablePtr, searchPtr)
+}
+
 var _fnTcl_Flush func(objc.ID) int32
 
 // Tcl_Flush calls the Tcl framework function Tcl_Flush.
@@ -2010,6 +2575,17 @@ func Tcl_ForgetImport(interp unsafe.Pointer, nsPtr unsafe.Pointer, pattern strin
 		ebipurego.RegisterLibFunc(&_fnTcl_ForgetImport, _lib, "Tcl_ForgetImport")
 	}
 	return int(_fnTcl_ForgetImport(interp, nsPtr, pattern))
+}
+
+var _fnTcl_Format func(unsafe.Pointer, string, int, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_Format calls the Tcl framework function Tcl_Format.
+func Tcl_Format(interp unsafe.Pointer, format string, objc_ int, objv unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_Format == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_Format, _lib, "Tcl_Format")
+	}
+	return _fnTcl_Format(interp, format, objc_, objv)
 }
 
 var _fnTcl_Free func(string)
@@ -2082,6 +2658,28 @@ func Tcl_GetAliasObj(interp unsafe.Pointer, slaveCmd string, targetInterpPtr uns
 	return _ret, _out0
 }
 
+var _fnTcl_GetAllocMutex func() unsafe.Pointer
+
+// Tcl_GetAllocMutex calls the Tcl framework function Tcl_GetAllocMutex.
+func Tcl_GetAllocMutex() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetAllocMutex == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetAllocMutex, _lib, "Tcl_GetAllocMutex")
+	}
+	return _fnTcl_GetAllocMutex()
+}
+
+var _fnTcl_GetAssocData func(unsafe.Pointer, string, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_GetAssocData calls the Tcl framework function Tcl_GetAssocData.
+func Tcl_GetAssocData(interp unsafe.Pointer, name string, procPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetAssocData == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetAssocData, _lib, "Tcl_GetAssocData")
+	}
+	return _fnTcl_GetAssocData(interp, name, procPtr)
+}
+
 var _fnTcl_GetBignumFromObj func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // Tcl_GetBignumFromObj calls the Tcl framework function Tcl_GetBignumFromObj.
@@ -2116,6 +2714,19 @@ func Tcl_GetBooleanFromObj(interp unsafe.Pointer, objPtr unsafe.Pointer) (result
 	}
 	var _out0 int32
 	_ret := int(_fnTcl_GetBooleanFromObj(interp, objPtr, unsafe.Pointer(&_out0)))
+	return _ret, _out0
+}
+
+var _fnTcl_GetByteArrayFromObj func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_GetByteArrayFromObj calls the Tcl framework function Tcl_GetByteArrayFromObj.
+func Tcl_GetByteArrayFromObj(objPtr unsafe.Pointer) (result unsafe.Pointer, lengthPtr int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetByteArrayFromObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetByteArrayFromObj, _lib, "Tcl_GetByteArrayFromObj")
+	}
+	var _out0 int32
+	_ret := _fnTcl_GetByteArrayFromObj(objPtr, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
@@ -2174,6 +2785,17 @@ func Tcl_GetChannelHandle(chan_ obj.Object, direction int, handlePtr unsafe.Poin
 		ebipurego.RegisterLibFunc(&_fnTcl_GetChannelHandle, _lib, "Tcl_GetChannelHandle")
 	}
 	return int(_fnTcl_GetChannelHandle(objref.IDOf(chan_), direction, handlePtr))
+}
+
+var _fnTcl_GetChannelInstanceData func(objc.ID) unsafe.Pointer
+
+// Tcl_GetChannelInstanceData calls the Tcl framework function Tcl_GetChannelInstanceData.
+func Tcl_GetChannelInstanceData(chan_ obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetChannelInstanceData == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetChannelInstanceData, _lib, "Tcl_GetChannelInstanceData")
+	}
+	return _fnTcl_GetChannelInstanceData(objref.IDOf(chan_))
 }
 
 var _fnTcl_GetChannelMode func(objc.ID) int32
@@ -2243,6 +2865,17 @@ func Tcl_GetChannelThread(channel obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnTcl_GetChannelType func(objc.ID) unsafe.Pointer
+
+// Tcl_GetChannelType calls the Tcl framework function Tcl_GetChannelType.
+func Tcl_GetChannelType(chan_ obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetChannelType == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetChannelType, _lib, "Tcl_GetChannelType")
+	}
+	return _fnTcl_GetChannelType(objref.IDOf(chan_))
+}
+
 var _fnTcl_GetCharLength func(unsafe.Pointer) int32
 
 // Tcl_GetCharLength calls the Tcl framework function Tcl_GetCharLength.
@@ -2308,6 +2941,17 @@ func Tcl_GetCommandName(interp unsafe.Pointer, command obj.Object) string {
 		ebipurego.RegisterLibFunc(&_fnTcl_GetCommandName, _lib, "Tcl_GetCommandName")
 	}
 	return _fnTcl_GetCommandName(interp, objref.IDOf(command))
+}
+
+var _fnTcl_GetCurrentNamespace func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_GetCurrentNamespace calls the Tcl framework function Tcl_GetCurrentNamespace.
+func Tcl_GetCurrentNamespace(interp unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetCurrentNamespace == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetCurrentNamespace, _lib, "Tcl_GetCurrentNamespace")
+	}
+	return _fnTcl_GetCurrentNamespace(interp)
 }
 
 var _fnTcl_GetCurrentThread func() objc.ID
@@ -2426,6 +3070,17 @@ func Tcl_GetEncodingNames(interp unsafe.Pointer) {
 	_fnTcl_GetEncodingNames(interp)
 }
 
+var _fnTcl_GetEncodingSearchPath func() unsafe.Pointer
+
+// Tcl_GetEncodingSearchPath calls the Tcl framework function Tcl_GetEncodingSearchPath.
+func Tcl_GetEncodingSearchPath() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetEncodingSearchPath == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetEncodingSearchPath, _lib, "Tcl_GetEncodingSearchPath")
+	}
+	return _fnTcl_GetEncodingSearchPath()
+}
+
 var _fnTcl_GetEnsembleFlags func(unsafe.Pointer, objc.ID, unsafe.Pointer) int32
 
 // Tcl_GetEnsembleFlags calls the Tcl framework function Tcl_GetEnsembleFlags.
@@ -2492,6 +3147,17 @@ func Tcl_GetErrno() int {
 		ebipurego.RegisterLibFunc(&_fnTcl_GetErrno, _lib, "Tcl_GetErrno")
 	}
 	return int(_fnTcl_GetErrno())
+}
+
+var _fnTcl_GetGlobalNamespace func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_GetGlobalNamespace calls the Tcl framework function Tcl_GetGlobalNamespace.
+func Tcl_GetGlobalNamespace(interp unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetGlobalNamespace == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetGlobalNamespace, _lib, "Tcl_GetGlobalNamespace")
+	}
+	return _fnTcl_GetGlobalNamespace(interp)
 }
 
 var _fnTcl_GetHostName func() string
@@ -2581,6 +3247,17 @@ func Tcl_GetLongFromObj(interp unsafe.Pointer, objPtr unsafe.Pointer) (result in
 	return _ret, _out0
 }
 
+var _fnTcl_GetMaster func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_GetMaster calls the Tcl framework function Tcl_GetMaster.
+func Tcl_GetMaster(interp unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetMaster == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetMaster, _lib, "Tcl_GetMaster")
+	}
+	return _fnTcl_GetMaster(interp)
+}
+
 var _fnTcl_GetMathFuncInfo func(unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // Tcl_GetMathFuncInfo calls the Tcl framework function Tcl_GetMathFuncInfo.
@@ -2616,6 +3293,39 @@ func Tcl_GetNameOfExecutable() string {
 	return _fnTcl_GetNameOfExecutable()
 }
 
+var _fnTcl_GetNamespaceUnknownHandler func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_GetNamespaceUnknownHandler calls the Tcl framework function Tcl_GetNamespaceUnknownHandler.
+func Tcl_GetNamespaceUnknownHandler(interp unsafe.Pointer, nsPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetNamespaceUnknownHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetNamespaceUnknownHandler, _lib, "Tcl_GetNamespaceUnknownHandler")
+	}
+	return _fnTcl_GetNamespaceUnknownHandler(interp, nsPtr)
+}
+
+var _fnTcl_GetObjResult func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_GetObjResult calls the Tcl framework function Tcl_GetObjResult.
+func Tcl_GetObjResult(interp unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetObjResult == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetObjResult, _lib, "Tcl_GetObjResult")
+	}
+	return _fnTcl_GetObjResult(interp)
+}
+
+var _fnTcl_GetObjType func(string) unsafe.Pointer
+
+// Tcl_GetObjType calls the Tcl framework function Tcl_GetObjType.
+func Tcl_GetObjType(typeName string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetObjType == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetObjType, _lib, "Tcl_GetObjType")
+	}
+	return _fnTcl_GetObjType(typeName)
+}
+
 var _fnTcl_GetOpenFile func(unsafe.Pointer, string, int, int, unsafe.Pointer) int32
 
 // Tcl_GetOpenFile calls the Tcl framework function Tcl_GetOpenFile.
@@ -2638,6 +3348,17 @@ func Tcl_GetPathType(path string) Pathtype {
 	return _fnTcl_GetPathType(path)
 }
 
+var _fnTcl_GetRange func(unsafe.Pointer, int, int) unsafe.Pointer
+
+// Tcl_GetRange calls the Tcl framework function Tcl_GetRange.
+func Tcl_GetRange(objPtr unsafe.Pointer, first int, last int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetRange == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetRange, _lib, "Tcl_GetRange")
+	}
+	return _fnTcl_GetRange(objPtr, first, last)
+}
+
 var _fnTcl_GetRegExpFromObj func(unsafe.Pointer, unsafe.Pointer, int) objc.ID
 
 // Tcl_GetRegExpFromObj calls the Tcl framework function Tcl_GetRegExpFromObj.
@@ -2650,6 +3371,17 @@ func Tcl_GetRegExpFromObj(interp unsafe.Pointer, patObj unsafe.Pointer, flags in
 	return obj.Wrap(_ret)
 }
 
+var _fnTcl_GetReturnOptions func(unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_GetReturnOptions calls the Tcl framework function Tcl_GetReturnOptions.
+func Tcl_GetReturnOptions(interp unsafe.Pointer, result int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetReturnOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetReturnOptions, _lib, "Tcl_GetReturnOptions")
+	}
+	return _fnTcl_GetReturnOptions(interp, result)
+}
+
 var _fnTcl_GetServiceMode func() int32
 
 // Tcl_GetServiceMode calls the Tcl framework function Tcl_GetServiceMode.
@@ -2659,6 +3391,17 @@ func Tcl_GetServiceMode() int {
 		ebipurego.RegisterLibFunc(&_fnTcl_GetServiceMode, _lib, "Tcl_GetServiceMode")
 	}
 	return int(_fnTcl_GetServiceMode())
+}
+
+var _fnTcl_GetSlave func(unsafe.Pointer, string) unsafe.Pointer
+
+// Tcl_GetSlave calls the Tcl framework function Tcl_GetSlave.
+func Tcl_GetSlave(interp unsafe.Pointer, slaveName string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetSlave == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetSlave, _lib, "Tcl_GetSlave")
+	}
+	return _fnTcl_GetSlave(interp, slaveName)
 }
 
 var _fnTcl_GetStackedChannel func(objc.ID) objc.ID
@@ -2720,6 +3463,17 @@ func Tcl_GetStringResult(interp unsafe.Pointer) string {
 	return _fnTcl_GetStringResult(interp)
 }
 
+var _fnTcl_GetThreadData func(unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_GetThreadData calls the Tcl framework function Tcl_GetThreadData.
+func Tcl_GetThreadData(keyPtr unsafe.Pointer, size int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetThreadData == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetThreadData, _lib, "Tcl_GetThreadData")
+	}
+	return _fnTcl_GetThreadData(keyPtr, size)
+}
+
 var _fnTcl_GetTime func(unsafe.Pointer)
 
 // Tcl_GetTime calls the Tcl framework function Tcl_GetTime.
@@ -2756,6 +3510,30 @@ func Tcl_GetUniChar(objPtr unsafe.Pointer, index int) uint16 {
 	return _fnTcl_GetUniChar(objPtr, index)
 }
 
+var _fnTcl_GetUnicode func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_GetUnicode calls the Tcl framework function Tcl_GetUnicode.
+func Tcl_GetUnicode(objPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetUnicode == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetUnicode, _lib, "Tcl_GetUnicode")
+	}
+	return _fnTcl_GetUnicode(objPtr)
+}
+
+var _fnTcl_GetUnicodeFromObj func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_GetUnicodeFromObj calls the Tcl framework function Tcl_GetUnicodeFromObj.
+func Tcl_GetUnicodeFromObj(objPtr unsafe.Pointer) (result unsafe.Pointer, lengthPtr int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetUnicodeFromObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetUnicodeFromObj, _lib, "Tcl_GetUnicodeFromObj")
+	}
+	var _out0 int32
+	_ret := _fnTcl_GetUnicodeFromObj(objPtr, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnTcl_GetVar func(unsafe.Pointer, string, int) string
 
 // Tcl_GetVar calls the Tcl framework function Tcl_GetVar.
@@ -2776,6 +3554,17 @@ func Tcl_GetVar2(interp unsafe.Pointer, part1 string, part2 string, flags int) s
 		ebipurego.RegisterLibFunc(&_fnTcl_GetVar2, _lib, "Tcl_GetVar2")
 	}
 	return _fnTcl_GetVar2(interp, part1, part2, flags)
+}
+
+var _fnTcl_GetVar2Ex func(unsafe.Pointer, string, string, int) unsafe.Pointer
+
+// Tcl_GetVar2Ex calls the Tcl framework function Tcl_GetVar2Ex.
+func Tcl_GetVar2Ex(interp unsafe.Pointer, part1 string, part2 string, flags int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_GetVar2Ex == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_GetVar2Ex, _lib, "Tcl_GetVar2Ex")
+	}
+	return _fnTcl_GetVar2Ex(interp, part1, part2, flags)
 }
 
 var _fnTcl_GetVersion func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -2948,6 +3737,17 @@ func Tcl_InitMemory(interp unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnTcl_InitMemory, _lib, "Tcl_InitMemory")
 	}
 	_fnTcl_InitMemory(interp)
+}
+
+var _fnTcl_InitNotifier func() unsafe.Pointer
+
+// Tcl_InitNotifier calls the Tcl framework function Tcl_InitNotifier.
+func Tcl_InitNotifier() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_InitNotifier == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_InitNotifier, _lib, "Tcl_InitNotifier")
+	}
+	return _fnTcl_InitNotifier()
 }
 
 var _fnTcl_InitObjHashTable func(unsafe.Pointer)
@@ -3297,6 +4097,17 @@ func Tcl_LinkVar(interp unsafe.Pointer, varName string, addr string, type_ int) 
 	return int(_fnTcl_LinkVar(interp, varName, addr, type_))
 }
 
+var _fnTcl_ListMathFuncs func(unsafe.Pointer, string) unsafe.Pointer
+
+// Tcl_ListMathFuncs calls the Tcl framework function Tcl_ListMathFuncs.
+func Tcl_ListMathFuncs(interp unsafe.Pointer, pattern string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ListMathFuncs == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ListMathFuncs, _lib, "Tcl_ListMathFuncs")
+	}
+	return _fnTcl_ListMathFuncs(interp, pattern)
+}
+
 var _fnTcl_ListObjAppendElement func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // Tcl_ListObjAppendElement calls the Tcl framework function Tcl_ListObjAppendElement.
@@ -3490,6 +4301,151 @@ func Tcl_MutexUnlock(mutexPtr unsafe.Pointer) {
 	_fnTcl_MutexUnlock(mutexPtr)
 }
 
+var _fnTcl_NewBignumObj func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_NewBignumObj calls the Tcl framework function Tcl_NewBignumObj.
+func Tcl_NewBignumObj(value unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NewBignumObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NewBignumObj, _lib, "Tcl_NewBignumObj")
+	}
+	return _fnTcl_NewBignumObj(value)
+}
+
+var _fnTcl_NewBooleanObj func(int) unsafe.Pointer
+
+// Tcl_NewBooleanObj calls the Tcl framework function Tcl_NewBooleanObj.
+func Tcl_NewBooleanObj(boolValue int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NewBooleanObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NewBooleanObj, _lib, "Tcl_NewBooleanObj")
+	}
+	return _fnTcl_NewBooleanObj(boolValue)
+}
+
+var _fnTcl_NewByteArrayObj func(unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_NewByteArrayObj calls the Tcl framework function Tcl_NewByteArrayObj.
+func Tcl_NewByteArrayObj(data unsafe.Pointer, length int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NewByteArrayObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NewByteArrayObj, _lib, "Tcl_NewByteArrayObj")
+	}
+	return _fnTcl_NewByteArrayObj(data, length)
+}
+
+var _fnTcl_NewDictObj func() unsafe.Pointer
+
+// Tcl_NewDictObj calls the Tcl framework function Tcl_NewDictObj.
+func Tcl_NewDictObj() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NewDictObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NewDictObj, _lib, "Tcl_NewDictObj")
+	}
+	return _fnTcl_NewDictObj()
+}
+
+var _fnTcl_NewDoubleObj func(float64) unsafe.Pointer
+
+// Tcl_NewDoubleObj calls the Tcl framework function Tcl_NewDoubleObj.
+func Tcl_NewDoubleObj(doubleValue float64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NewDoubleObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NewDoubleObj, _lib, "Tcl_NewDoubleObj")
+	}
+	return _fnTcl_NewDoubleObj(doubleValue)
+}
+
+var _fnTcl_NewIntObj func(int) unsafe.Pointer
+
+// Tcl_NewIntObj calls the Tcl framework function Tcl_NewIntObj.
+func Tcl_NewIntObj(intValue int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NewIntObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NewIntObj, _lib, "Tcl_NewIntObj")
+	}
+	return _fnTcl_NewIntObj(intValue)
+}
+
+var _fnTcl_NewListObj func(int, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_NewListObj calls the Tcl framework function Tcl_NewListObj.
+func Tcl_NewListObj(objc_ int, objv unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NewListObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NewListObj, _lib, "Tcl_NewListObj")
+	}
+	return _fnTcl_NewListObj(objc_, objv)
+}
+
+var _fnTcl_NewLongObj func(int) unsafe.Pointer
+
+// Tcl_NewLongObj calls the Tcl framework function Tcl_NewLongObj.
+func Tcl_NewLongObj(longValue int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NewLongObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NewLongObj, _lib, "Tcl_NewLongObj")
+	}
+	return _fnTcl_NewLongObj(longValue)
+}
+
+var _fnTcl_NewObj func() unsafe.Pointer
+
+// Tcl_NewObj calls the Tcl framework function Tcl_NewObj.
+func Tcl_NewObj() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NewObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NewObj, _lib, "Tcl_NewObj")
+	}
+	return _fnTcl_NewObj()
+}
+
+var _fnTcl_NewStringObj func(unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_NewStringObj calls the Tcl framework function Tcl_NewStringObj.
+func Tcl_NewStringObj(data unsafe.Pointer, length int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NewStringObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NewStringObj, _lib, "Tcl_NewStringObj")
+	}
+	return _fnTcl_NewStringObj(data, length)
+}
+
+var _fnTcl_NewUnicodeObj func(unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_NewUnicodeObj calls the Tcl framework function Tcl_NewUnicodeObj.
+func Tcl_NewUnicodeObj(numChars int) (result unsafe.Pointer, unicode uint16) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NewUnicodeObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NewUnicodeObj, _lib, "Tcl_NewUnicodeObj")
+	}
+	var _out0 uint16
+	_ret := _fnTcl_NewUnicodeObj(unsafe.Pointer(&_out0), numChars)
+	return _ret, _out0
+}
+
+var _fnTcl_NewWideIntObj func(int) unsafe.Pointer
+
+// Tcl_NewWideIntObj calls the Tcl framework function Tcl_NewWideIntObj.
+func Tcl_NewWideIntObj(wideValue int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NewWideIntObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NewWideIntObj, _lib, "Tcl_NewWideIntObj")
+	}
+	return _fnTcl_NewWideIntObj(wideValue)
+}
+
+var _fnTcl_NextHashEntry func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_NextHashEntry calls the Tcl framework function Tcl_NextHashEntry.
+func Tcl_NextHashEntry(searchPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_NextHashEntry == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_NextHashEntry, _lib, "Tcl_NextHashEntry")
+	}
+	return _fnTcl_NextHashEntry(searchPtr)
+}
+
 var _fnTcl_NotifyChannel func(objc.ID, int)
 
 // Tcl_NotifyChannel calls the Tcl framework function Tcl_NotifyChannel.
@@ -3510,6 +4466,39 @@ func Tcl_NumUtfChars(src unsafe.Pointer, length int) int {
 		ebipurego.RegisterLibFunc(&_fnTcl_NumUtfChars, _lib, "Tcl_NumUtfChars")
 	}
 	return int(_fnTcl_NumUtfChars(src, length))
+}
+
+var _fnTcl_ObjGetVar2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_ObjGetVar2 calls the Tcl framework function Tcl_ObjGetVar2.
+func Tcl_ObjGetVar2(interp unsafe.Pointer, part1Ptr unsafe.Pointer, part2Ptr unsafe.Pointer, flags int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ObjGetVar2 == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ObjGetVar2, _lib, "Tcl_ObjGetVar2")
+	}
+	return _fnTcl_ObjGetVar2(interp, part1Ptr, part2Ptr, flags)
+}
+
+var _fnTcl_ObjPrintf func(string) unsafe.Pointer
+
+// Tcl_ObjPrintf calls the Tcl framework function Tcl_ObjPrintf.
+func Tcl_ObjPrintf(format string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ObjPrintf == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ObjPrintf, _lib, "Tcl_ObjPrintf")
+	}
+	return _fnTcl_ObjPrintf(format)
+}
+
+var _fnTcl_ObjSetVar2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_ObjSetVar2 calls the Tcl framework function Tcl_ObjSetVar2.
+func Tcl_ObjSetVar2(interp unsafe.Pointer, part1Ptr unsafe.Pointer, part2Ptr unsafe.Pointer, newValuePtr unsafe.Pointer, flags int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_ObjSetVar2 == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_ObjSetVar2, _lib, "Tcl_ObjSetVar2")
+	}
+	return _fnTcl_ObjSetVar2(interp, part1Ptr, part2Ptr, newValuePtr, flags)
 }
 
 var _fnTcl_OpenCommandChannel func(unsafe.Pointer, int, string, int) objc.ID
@@ -4182,6 +5171,17 @@ func Tcl_SetBooleanObj(objPtr unsafe.Pointer, boolValue int) {
 	_fnTcl_SetBooleanObj(objPtr, boolValue)
 }
 
+var _fnTcl_SetByteArrayLength func(unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_SetByteArrayLength calls the Tcl framework function Tcl_SetByteArrayLength.
+func Tcl_SetByteArrayLength(objPtr unsafe.Pointer, length int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SetByteArrayLength == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SetByteArrayLength, _lib, "Tcl_SetByteArrayLength")
+	}
+	return _fnTcl_SetByteArrayLength(objPtr, length)
+}
+
 var _fnTcl_SetByteArrayObj func(unsafe.Pointer, unsafe.Pointer, int)
 
 // Tcl_SetByteArrayObj calls the Tcl framework function Tcl_SetByteArrayObj.
@@ -4356,6 +5356,17 @@ func Tcl_SetErrorCodeVA(interp unsafe.Pointer, argList string) {
 		ebipurego.RegisterLibFunc(&_fnTcl_SetErrorCodeVA, _lib, "Tcl_SetErrorCodeVA")
 	}
 	_fnTcl_SetErrorCodeVA(interp, argList)
+}
+
+var _fnTcl_SetExitProc func(unsafe.Pointer) unsafe.Pointer
+
+// Tcl_SetExitProc calls the Tcl framework function Tcl_SetExitProc.
+func Tcl_SetExitProc(proc unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SetExitProc == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SetExitProc, _lib, "Tcl_SetExitProc")
+	}
+	return _fnTcl_SetExitProc(proc)
 }
 
 var _fnTcl_SetIntObj func(unsafe.Pointer, int)
@@ -4617,6 +5628,17 @@ func Tcl_SetVar2(interp unsafe.Pointer, part1 string, part2 string, newValue str
 	return _fnTcl_SetVar2(interp, part1, part2, newValue, flags)
 }
 
+var _fnTcl_SetVar2Ex func(unsafe.Pointer, string, string, unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_SetVar2Ex calls the Tcl framework function Tcl_SetVar2Ex.
+func Tcl_SetVar2Ex(interp unsafe.Pointer, part1 string, part2 string, newValuePtr unsafe.Pointer, flags int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SetVar2Ex == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SetVar2Ex, _lib, "Tcl_SetVar2Ex")
+	}
+	return _fnTcl_SetVar2Ex(interp, part1, part2, newValuePtr, flags)
+}
+
 var _fnTcl_SetWideIntObj func(unsafe.Pointer, int)
 
 // Tcl_SetWideIntObj calls the Tcl framework function Tcl_SetWideIntObj.
@@ -4763,6 +5785,17 @@ func Tcl_StringMatch(str string, pattern string) int {
 		ebipurego.RegisterLibFunc(&_fnTcl_StringMatch, _lib, "Tcl_StringMatch")
 	}
 	return int(_fnTcl_StringMatch(str, pattern))
+}
+
+var _fnTcl_SubstObj func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+
+// Tcl_SubstObj calls the Tcl framework function Tcl_SubstObj.
+func Tcl_SubstObj(interp unsafe.Pointer, objPtr unsafe.Pointer, flags int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_SubstObj == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_SubstObj, _lib, "Tcl_SubstObj")
+	}
+	return _fnTcl_SubstObj(interp, objPtr, flags)
 }
 
 var _fnTcl_TakeBignumFromObj func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -5413,6 +6446,17 @@ func Tcl_UtfToUniChar(src string) (result int, chPtr uint16) {
 	return _ret, _out0
 }
 
+var _fnTcl_UtfToUniCharDString func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_UtfToUniCharDString calls the Tcl framework function Tcl_UtfToUniCharDString.
+func Tcl_UtfToUniCharDString(src unsafe.Pointer, length int, dsPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_UtfToUniCharDString == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_UtfToUniCharDString, _lib, "Tcl_UtfToUniCharDString")
+	}
+	return _fnTcl_UtfToUniCharDString(src, length, dsPtr)
+}
+
 var _fnTcl_UtfToUpper func(string) int32
 
 // Tcl_UtfToUpper calls the Tcl framework function Tcl_UtfToUpper.
@@ -5444,6 +6488,28 @@ func Tcl_VarEvalVA(interp unsafe.Pointer, argList string) int {
 		ebipurego.RegisterLibFunc(&_fnTcl_VarEvalVA, _lib, "Tcl_VarEvalVA")
 	}
 	return int(_fnTcl_VarEvalVA(interp, argList))
+}
+
+var _fnTcl_VarTraceInfo func(unsafe.Pointer, string, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_VarTraceInfo calls the Tcl framework function Tcl_VarTraceInfo.
+func Tcl_VarTraceInfo(interp unsafe.Pointer, varName string, flags int, procPtr unsafe.Pointer, prevClientData unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_VarTraceInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_VarTraceInfo, _lib, "Tcl_VarTraceInfo")
+	}
+	return _fnTcl_VarTraceInfo(interp, varName, flags, procPtr, prevClientData)
+}
+
+var _fnTcl_VarTraceInfo2 func(unsafe.Pointer, string, string, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Tcl_VarTraceInfo2 calls the Tcl framework function Tcl_VarTraceInfo2.
+func Tcl_VarTraceInfo2(interp unsafe.Pointer, part1 string, part2 string, flags int, procPtr unsafe.Pointer, prevClientData unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTcl_VarTraceInfo2 == nil {
+		ebipurego.RegisterLibFunc(&_fnTcl_VarTraceInfo2, _lib, "Tcl_VarTraceInfo2")
+	}
+	return _fnTcl_VarTraceInfo2(interp, part1, part2, flags, procPtr, prevClientData)
 }
 
 var _fnTcl_WaitForEvent func(unsafe.Pointer) int32

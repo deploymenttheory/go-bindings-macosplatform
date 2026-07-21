@@ -408,3 +408,6 @@ func ITLibPlaylistPropertyKind() obj.Object {
 func ITLibPlaylistPropertyMaster() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("ITLibPlaylistPropertyMaster")))
 }
+
+// ITLibraryDidChangeNotification returns the address of the symbol ITLibraryDidChangeNotification.
+func ITLibraryDidChangeNotification() uintptr { return _symbol("ITLibraryDidChangeNotification") }

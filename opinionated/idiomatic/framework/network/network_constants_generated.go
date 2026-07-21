@@ -5,6 +5,8 @@
 package network
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -23,4 +25,46 @@ func KNWErrorDomainTLS() obj.Object { return obj.Wrap(purego.CFConstant(_symbol(
 // KNWErrorDomainWiFiAware returns the value of the constant kNWErrorDomainWiFiAware.
 func KNWErrorDomainWiFiAware() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kNWErrorDomainWiFiAware")))
+}
+
+// Nw_privacy_context_default_context returns the address of the symbol _nw_privacy_context_default_context.
+func Nw_privacy_context_default_context() uintptr {
+	return _symbol("_nw_privacy_context_default_context")
+}
+
+// Nw_parameters_configure_protocol_default_configuration returns the address of the symbol _nw_parameters_configure_protocol_default_configuration.
+func Nw_parameters_configure_protocol_default_configuration() uintptr {
+	return _symbol("_nw_parameters_configure_protocol_default_configuration")
+}
+
+// Nw_parameters_configure_protocol_disable returns the address of the symbol _nw_parameters_configure_protocol_disable.
+func Nw_parameters_configure_protocol_disable() uintptr {
+	return _symbol("_nw_parameters_configure_protocol_disable")
+}
+
+// Nw_connection_send_idempotent_content returns the address of the symbol _nw_connection_send_idempotent_content.
+func Nw_connection_send_idempotent_content() uintptr {
+	return _symbol("_nw_connection_send_idempotent_content")
+}
+
+// Nw_content_context_default_message returns the address of the symbol _nw_content_context_default_message.
+func Nw_content_context_default_message() uintptr {
+	return _symbol("_nw_content_context_default_message")
+}
+
+// Nw_content_context_final_send returns the address of the symbol _nw_content_context_final_send.
+func Nw_content_context_final_send() uintptr { return _symbol("_nw_content_context_final_send") }
+
+// Nw_content_context_default_stream returns the address of the symbol _nw_content_context_default_stream.
+func Nw_content_context_default_stream() uintptr {
+	return _symbol("_nw_content_context_default_stream")
+}
+
+// Nw_data_transfer_report_all_paths returns the value of the constant _nw_data_transfer_report_all_paths.
+func Nw_data_transfer_report_all_paths() uint {
+	addr := _symbol("_nw_data_transfer_report_all_paths")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint)(unsafe.Pointer(addr))
 }

@@ -10,6 +10,17 @@ import (
 	ebipurego "github.com/ebitengine/purego"
 )
 
+var _fnIOUSBGetBillboardDescriptor func(unsafe.Pointer) unsafe.Pointer
+
+// IOUSBGetBillboardDescriptor calls the IOUSBHost framework function IOUSBGetBillboardDescriptor.
+func IOUSBGetBillboardDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetBillboardDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetBillboardDescriptor, _lib, "IOUSBGetBillboardDescriptor")
+	}
+	return _fnIOUSBGetBillboardDescriptor(bosDescriptor)
+}
+
 var _fnIOUSBGetConfigurationMaxPowerMilliAmps func(uint32, unsafe.Pointer) uint32
 
 // IOUSBGetConfigurationMaxPowerMilliAmps calls the IOUSBHost framework function IOUSBGetConfigurationMaxPowerMilliAmps.
@@ -19,6 +30,17 @@ func IOUSBGetConfigurationMaxPowerMilliAmps(usbDeviceSpeed uint32, descriptor un
 		ebipurego.RegisterLibFunc(&_fnIOUSBGetConfigurationMaxPowerMilliAmps, _lib, "IOUSBGetConfigurationMaxPowerMilliAmps")
 	}
 	return _fnIOUSBGetConfigurationMaxPowerMilliAmps(usbDeviceSpeed, descriptor)
+}
+
+var _fnIOUSBGetContainerIDDescriptor func(unsafe.Pointer) unsafe.Pointer
+
+// IOUSBGetContainerIDDescriptor calls the IOUSBHost framework function IOUSBGetContainerIDDescriptor.
+func IOUSBGetContainerIDDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetContainerIDDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetContainerIDDescriptor, _lib, "IOUSBGetContainerIDDescriptor")
+	}
+	return _fnIOUSBGetContainerIDDescriptor(bosDescriptor)
 }
 
 var _fnIOUSBGetEndpointAddress func(unsafe.Pointer) uint8
@@ -173,6 +195,162 @@ func IOUSBGetEndpointUsageType(descriptor unsafe.Pointer) uint8 {
 		ebipurego.RegisterLibFunc(&_fnIOUSBGetEndpointUsageType, _lib, "IOUSBGetEndpointUsageType")
 	}
 	return _fnIOUSBGetEndpointUsageType(descriptor)
+}
+
+var _fnIOUSBGetNextAssociatedDescriptor func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// IOUSBGetNextAssociatedDescriptor calls the IOUSBHost framework function IOUSBGetNextAssociatedDescriptor.
+func IOUSBGetNextAssociatedDescriptor(configurationDescriptor unsafe.Pointer, parentDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetNextAssociatedDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetNextAssociatedDescriptor, _lib, "IOUSBGetNextAssociatedDescriptor")
+	}
+	return _fnIOUSBGetNextAssociatedDescriptor(configurationDescriptor, parentDescriptor, currentDescriptor)
+}
+
+var _fnIOUSBGetNextAssociatedDescriptorWithType func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
+
+// IOUSBGetNextAssociatedDescriptorWithType calls the IOUSBHost framework function IOUSBGetNextAssociatedDescriptorWithType.
+func IOUSBGetNextAssociatedDescriptorWithType(configurationDescriptor unsafe.Pointer, parentDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer, type_ uint8) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetNextAssociatedDescriptorWithType == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetNextAssociatedDescriptorWithType, _lib, "IOUSBGetNextAssociatedDescriptorWithType")
+	}
+	return _fnIOUSBGetNextAssociatedDescriptorWithType(configurationDescriptor, parentDescriptor, currentDescriptor, type_)
+}
+
+var _fnIOUSBGetNextCapabilityDescriptor func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// IOUSBGetNextCapabilityDescriptor calls the IOUSBHost framework function IOUSBGetNextCapabilityDescriptor.
+func IOUSBGetNextCapabilityDescriptor(bosDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetNextCapabilityDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetNextCapabilityDescriptor, _lib, "IOUSBGetNextCapabilityDescriptor")
+	}
+	return _fnIOUSBGetNextCapabilityDescriptor(bosDescriptor, currentDescriptor)
+}
+
+var _fnIOUSBGetNextCapabilityDescriptorWithType func(unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
+
+// IOUSBGetNextCapabilityDescriptorWithType calls the IOUSBHost framework function IOUSBGetNextCapabilityDescriptorWithType.
+func IOUSBGetNextCapabilityDescriptorWithType(bosDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer, type_ uint8) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetNextCapabilityDescriptorWithType == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetNextCapabilityDescriptorWithType, _lib, "IOUSBGetNextCapabilityDescriptorWithType")
+	}
+	return _fnIOUSBGetNextCapabilityDescriptorWithType(bosDescriptor, currentDescriptor, type_)
+}
+
+var _fnIOUSBGetNextDescriptor func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// IOUSBGetNextDescriptor calls the IOUSBHost framework function IOUSBGetNextDescriptor.
+func IOUSBGetNextDescriptor(configurationDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetNextDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetNextDescriptor, _lib, "IOUSBGetNextDescriptor")
+	}
+	return _fnIOUSBGetNextDescriptor(configurationDescriptor, currentDescriptor)
+}
+
+var _fnIOUSBGetNextDescriptorWithType func(unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
+
+// IOUSBGetNextDescriptorWithType calls the IOUSBHost framework function IOUSBGetNextDescriptorWithType.
+func IOUSBGetNextDescriptorWithType(configurationDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer, type_ uint8) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetNextDescriptorWithType == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetNextDescriptorWithType, _lib, "IOUSBGetNextDescriptorWithType")
+	}
+	return _fnIOUSBGetNextDescriptorWithType(configurationDescriptor, currentDescriptor, type_)
+}
+
+var _fnIOUSBGetNextEndpointDescriptor func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// IOUSBGetNextEndpointDescriptor calls the IOUSBHost framework function IOUSBGetNextEndpointDescriptor.
+func IOUSBGetNextEndpointDescriptor(configurationDescriptor unsafe.Pointer, interfaceDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetNextEndpointDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetNextEndpointDescriptor, _lib, "IOUSBGetNextEndpointDescriptor")
+	}
+	return _fnIOUSBGetNextEndpointDescriptor(configurationDescriptor, interfaceDescriptor, currentDescriptor)
+}
+
+var _fnIOUSBGetNextInterfaceAssociationDescriptor func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// IOUSBGetNextInterfaceAssociationDescriptor calls the IOUSBHost framework function IOUSBGetNextInterfaceAssociationDescriptor.
+func IOUSBGetNextInterfaceAssociationDescriptor(configurationDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetNextInterfaceAssociationDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetNextInterfaceAssociationDescriptor, _lib, "IOUSBGetNextInterfaceAssociationDescriptor")
+	}
+	return _fnIOUSBGetNextInterfaceAssociationDescriptor(configurationDescriptor, currentDescriptor)
+}
+
+var _fnIOUSBGetNextInterfaceDescriptor func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// IOUSBGetNextInterfaceDescriptor calls the IOUSBHost framework function IOUSBGetNextInterfaceDescriptor.
+func IOUSBGetNextInterfaceDescriptor(configurationDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetNextInterfaceDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetNextInterfaceDescriptor, _lib, "IOUSBGetNextInterfaceDescriptor")
+	}
+	return _fnIOUSBGetNextInterfaceDescriptor(configurationDescriptor, currentDescriptor)
+}
+
+var _fnIOUSBGetPlatformCapabilityDescriptor func(unsafe.Pointer) unsafe.Pointer
+
+// IOUSBGetPlatformCapabilityDescriptor calls the IOUSBHost framework function IOUSBGetPlatformCapabilityDescriptor.
+func IOUSBGetPlatformCapabilityDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetPlatformCapabilityDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetPlatformCapabilityDescriptor, _lib, "IOUSBGetPlatformCapabilityDescriptor")
+	}
+	return _fnIOUSBGetPlatformCapabilityDescriptor(bosDescriptor)
+}
+
+var _fnIOUSBGetPlatformCapabilityDescriptorWithUUID func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// IOUSBGetPlatformCapabilityDescriptorWithUUID calls the IOUSBHost framework function IOUSBGetPlatformCapabilityDescriptorWithUUID.
+func IOUSBGetPlatformCapabilityDescriptorWithUUID(bosDescriptor unsafe.Pointer) (result unsafe.Pointer, uuid uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetPlatformCapabilityDescriptorWithUUID == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetPlatformCapabilityDescriptorWithUUID, _lib, "IOUSBGetPlatformCapabilityDescriptorWithUUID")
+	}
+	var _out0 uint8
+	_ret := _fnIOUSBGetPlatformCapabilityDescriptorWithUUID(bosDescriptor, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnIOUSBGetSuperSpeedDeviceCapabilityDescriptor func(unsafe.Pointer) unsafe.Pointer
+
+// IOUSBGetSuperSpeedDeviceCapabilityDescriptor calls the IOUSBHost framework function IOUSBGetSuperSpeedDeviceCapabilityDescriptor.
+func IOUSBGetSuperSpeedDeviceCapabilityDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetSuperSpeedDeviceCapabilityDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetSuperSpeedDeviceCapabilityDescriptor, _lib, "IOUSBGetSuperSpeedDeviceCapabilityDescriptor")
+	}
+	return _fnIOUSBGetSuperSpeedDeviceCapabilityDescriptor(bosDescriptor)
+}
+
+var _fnIOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor func(unsafe.Pointer) unsafe.Pointer
+
+// IOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor calls the IOUSBHost framework function IOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor.
+func IOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor, _lib, "IOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor")
+	}
+	return _fnIOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor(bosDescriptor)
+}
+
+var _fnIOUSBGetUSB20ExtensionDeviceCapabilityDescriptor func(unsafe.Pointer) unsafe.Pointer
+
+// IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor calls the IOUSBHost framework function IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor.
+func IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOUSBGetUSB20ExtensionDeviceCapabilityDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnIOUSBGetUSB20ExtensionDeviceCapabilityDescriptor, _lib, "IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor")
+	}
+	return _fnIOUSBGetUSB20ExtensionDeviceCapabilityDescriptor(bosDescriptor)
 }
 
 var _fnIOUSBHostCIControllerStateToString func(HostCIControllerState) string

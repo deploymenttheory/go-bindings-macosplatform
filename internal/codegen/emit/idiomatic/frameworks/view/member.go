@@ -41,8 +41,13 @@ type Constant struct {
 	CommentBlock string
 	// Kind selects how the symbol's value is produced and typed.
 	Kind ConstKind
-	// GoTypeName is the idiomatic wrapper type name; set only for ConstObjcClass.
+	// GoTypeName is the resolved Go return type: the wrapper type name for
+	// ConstObjcClass, or the value type (a scalar, enum, or value struct) for
+	// ConstValue.
 	GoTypeName string
+	// Zero is the zero-value literal returned when the symbol is missing; set only
+	// for ConstValue (e.g. "0", "corefoundation.CGPoint{}").
+	Zero string
 }
 
 // ConstKind says how a Constant accessor produces and types its value.
@@ -63,6 +68,12 @@ const (
 	// ConstObjcClass is a same-framework ObjC class pointer global returned as
 	// the idiomatic wrapper type for that class.
 	ConstObjcClass ConstKind = "objcclass"
+	// ConstValue is a value-typed global (a scalar, enum, or value struct)
+	// returned by dereferencing the symbol's address.
+	ConstValue ConstKind = "value"
+	// ConstRawAddr is a global whose type could not be expressed; its raw symbol
+	// address is returned as a uintptr (matching the raw layer's degrade).
+	ConstRawAddr ConstKind = "rawaddr"
 )
 
 // ErrorSentinel is a named error value for one member of a framework's

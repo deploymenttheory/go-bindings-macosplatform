@@ -1546,6 +1546,17 @@ func HIDictionaryWindowShow(dictionary obj.Object, textString obj.Object, select
 	_fnHIDictionaryWindowShow(objref.IDOf(dictionary), objref.IDOf(textString), selectionRange, objref.IDOf(textFont), textOrigin, verticalText, viewTransform)
 }
 
+var _fnHIGetMousePosition func(int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// HIGetMousePosition calls the HIToolbox framework function HIGetMousePosition.
+func HIGetMousePosition(inSpace int, inObject unsafe.Pointer, outPoint unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIGetMousePosition == nil {
+		ebipurego.RegisterLibFunc(&_fnHIGetMousePosition, _lib, "HIGetMousePosition")
+	}
+	return _fnHIGetMousePosition(inSpace, inObject, outPoint)
+}
+
 var _fnHIMouseTrackingGetParameters func(int, unsafe.Pointer, unsafe.Pointer) int32
 
 // HIMouseTrackingGetParameters calls the HIToolbox framework function HIMouseTrackingGetParameters.
@@ -1569,6 +1580,17 @@ func HIObjectCopyClassID(inObject obj.Object) obj.Object {
 	}
 	_ret := _fnHIObjectCopyClassID(objref.IDOf(inObject))
 	return obj.Wrap(_ret)
+}
+
+var _fnHIObjectDynamicCast func(objc.ID, objc.ID) unsafe.Pointer
+
+// HIObjectDynamicCast calls the HIToolbox framework function HIObjectDynamicCast.
+func HIObjectDynamicCast(inObject obj.Object, inClassID obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIObjectDynamicCast == nil {
+		ebipurego.RegisterLibFunc(&_fnHIObjectDynamicCast, _lib, "HIObjectDynamicCast")
+	}
+	return _fnHIObjectDynamicCast(objref.IDOf(inObject), objref.IDOf(inClassID))
 }
 
 var _fnHIObjectFromEventTarget func(objc.ID) objc.ID
@@ -2307,6 +2329,17 @@ func HIThemeGetTrackThumbShape(inDrawInfo unsafe.Pointer, outThumbShape unsafe.P
 		ebipurego.RegisterLibFunc(&_fnHIThemeGetTrackThumbShape, _lib, "HIThemeGetTrackThumbShape")
 	}
 	return int(_fnHIThemeGetTrackThumbShape(inDrawInfo, outThumbShape))
+}
+
+var _fnHIThemeGetUIFontType func(uint16) unsafe.Pointer
+
+// HIThemeGetUIFontType calls the HIToolbox framework function HIThemeGetUIFontType.
+func HIThemeGetUIFontType(inFontID uint16) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIThemeGetUIFontType == nil {
+		ebipurego.RegisterLibFunc(&_fnHIThemeGetUIFontType, _lib, "HIThemeGetUIFontType")
+	}
+	return _fnHIThemeGetUIFontType(inFontID)
 }
 
 var _fnHIThemeGetWindowRegionHit func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
@@ -3386,6 +3419,897 @@ func LMGetKeyThresh() int16 {
 	return _fnLMGetKeyThresh()
 }
 
+var _fnNewAEFilterUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewAEFilterUPP calls the HIToolbox framework function NewAEFilterUPP.
+func NewAEFilterUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewAEFilterUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewAEFilterUPP, _lib, "NewAEFilterUPP")
+	}
+	return _fnNewAEFilterUPP(userRoutine)
+}
+
+var _fnNewAEIdleUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewAEIdleUPP calls the HIToolbox framework function NewAEIdleUPP.
+func NewAEIdleUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewAEIdleUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewAEIdleUPP, _lib, "NewAEIdleUPP")
+	}
+	return _fnNewAEIdleUPP(userRoutine)
+}
+
+var _fnNewCaretHookUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewCaretHookUPP calls the HIToolbox framework function NewCaretHookUPP.
+func NewCaretHookUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewCaretHookUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewCaretHookUPP, _lib, "NewCaretHookUPP")
+	}
+	return _fnNewCaretHookUPP(userRoutine)
+}
+
+var _fnNewControlActionUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewControlActionUPP calls the HIToolbox framework function NewControlActionUPP.
+func NewControlActionUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewControlActionUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewControlActionUPP, _lib, "NewControlActionUPP")
+	}
+	return _fnNewControlActionUPP(userRoutine)
+}
+
+var _fnNewControlEditTextValidationUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewControlEditTextValidationUPP calls the HIToolbox framework function NewControlEditTextValidationUPP.
+func NewControlEditTextValidationUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewControlEditTextValidationUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewControlEditTextValidationUPP, _lib, "NewControlEditTextValidationUPP")
+	}
+	return _fnNewControlEditTextValidationUPP(userRoutine)
+}
+
+var _fnNewControlKeyFilterUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewControlKeyFilterUPP calls the HIToolbox framework function NewControlKeyFilterUPP.
+func NewControlKeyFilterUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewControlKeyFilterUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewControlKeyFilterUPP, _lib, "NewControlKeyFilterUPP")
+	}
+	return _fnNewControlKeyFilterUPP(userRoutine)
+}
+
+var _fnNewControlUserPaneActivateUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewControlUserPaneActivateUPP calls the HIToolbox framework function NewControlUserPaneActivateUPP.
+func NewControlUserPaneActivateUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewControlUserPaneActivateUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewControlUserPaneActivateUPP, _lib, "NewControlUserPaneActivateUPP")
+	}
+	return _fnNewControlUserPaneActivateUPP(userRoutine)
+}
+
+var _fnNewControlUserPaneDrawUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewControlUserPaneDrawUPP calls the HIToolbox framework function NewControlUserPaneDrawUPP.
+func NewControlUserPaneDrawUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewControlUserPaneDrawUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewControlUserPaneDrawUPP, _lib, "NewControlUserPaneDrawUPP")
+	}
+	return _fnNewControlUserPaneDrawUPP(userRoutine)
+}
+
+var _fnNewControlUserPaneFocusUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewControlUserPaneFocusUPP calls the HIToolbox framework function NewControlUserPaneFocusUPP.
+func NewControlUserPaneFocusUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewControlUserPaneFocusUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewControlUserPaneFocusUPP, _lib, "NewControlUserPaneFocusUPP")
+	}
+	return _fnNewControlUserPaneFocusUPP(userRoutine)
+}
+
+var _fnNewControlUserPaneHitTestUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewControlUserPaneHitTestUPP calls the HIToolbox framework function NewControlUserPaneHitTestUPP.
+func NewControlUserPaneHitTestUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewControlUserPaneHitTestUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewControlUserPaneHitTestUPP, _lib, "NewControlUserPaneHitTestUPP")
+	}
+	return _fnNewControlUserPaneHitTestUPP(userRoutine)
+}
+
+var _fnNewControlUserPaneIdleUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewControlUserPaneIdleUPP calls the HIToolbox framework function NewControlUserPaneIdleUPP.
+func NewControlUserPaneIdleUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewControlUserPaneIdleUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewControlUserPaneIdleUPP, _lib, "NewControlUserPaneIdleUPP")
+	}
+	return _fnNewControlUserPaneIdleUPP(userRoutine)
+}
+
+var _fnNewControlUserPaneKeyDownUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewControlUserPaneKeyDownUPP calls the HIToolbox framework function NewControlUserPaneKeyDownUPP.
+func NewControlUserPaneKeyDownUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewControlUserPaneKeyDownUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewControlUserPaneKeyDownUPP, _lib, "NewControlUserPaneKeyDownUPP")
+	}
+	return _fnNewControlUserPaneKeyDownUPP(userRoutine)
+}
+
+var _fnNewControlUserPaneTrackingUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewControlUserPaneTrackingUPP calls the HIToolbox framework function NewControlUserPaneTrackingUPP.
+func NewControlUserPaneTrackingUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewControlUserPaneTrackingUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewControlUserPaneTrackingUPP, _lib, "NewControlUserPaneTrackingUPP")
+	}
+	return _fnNewControlUserPaneTrackingUPP(userRoutine)
+}
+
+var _fnNewDataBrowserAcceptDragUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserAcceptDragUPP calls the HIToolbox framework function NewDataBrowserAcceptDragUPP.
+func NewDataBrowserAcceptDragUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserAcceptDragUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserAcceptDragUPP, _lib, "NewDataBrowserAcceptDragUPP")
+	}
+	return _fnNewDataBrowserAcceptDragUPP(userRoutine)
+}
+
+var _fnNewDataBrowserAddDragItemUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserAddDragItemUPP calls the HIToolbox framework function NewDataBrowserAddDragItemUPP.
+func NewDataBrowserAddDragItemUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserAddDragItemUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserAddDragItemUPP, _lib, "NewDataBrowserAddDragItemUPP")
+	}
+	return _fnNewDataBrowserAddDragItemUPP(userRoutine)
+}
+
+var _fnNewDataBrowserDrawItemUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserDrawItemUPP calls the HIToolbox framework function NewDataBrowserDrawItemUPP.
+func NewDataBrowserDrawItemUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserDrawItemUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserDrawItemUPP, _lib, "NewDataBrowserDrawItemUPP")
+	}
+	return _fnNewDataBrowserDrawItemUPP(userRoutine)
+}
+
+var _fnNewDataBrowserEditItemUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserEditItemUPP calls the HIToolbox framework function NewDataBrowserEditItemUPP.
+func NewDataBrowserEditItemUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserEditItemUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserEditItemUPP, _lib, "NewDataBrowserEditItemUPP")
+	}
+	return _fnNewDataBrowserEditItemUPP(userRoutine)
+}
+
+var _fnNewDataBrowserGetContextualMenuUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserGetContextualMenuUPP calls the HIToolbox framework function NewDataBrowserGetContextualMenuUPP.
+func NewDataBrowserGetContextualMenuUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserGetContextualMenuUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserGetContextualMenuUPP, _lib, "NewDataBrowserGetContextualMenuUPP")
+	}
+	return _fnNewDataBrowserGetContextualMenuUPP(userRoutine)
+}
+
+var _fnNewDataBrowserHitTestUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserHitTestUPP calls the HIToolbox framework function NewDataBrowserHitTestUPP.
+func NewDataBrowserHitTestUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserHitTestUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserHitTestUPP, _lib, "NewDataBrowserHitTestUPP")
+	}
+	return _fnNewDataBrowserHitTestUPP(userRoutine)
+}
+
+var _fnNewDataBrowserItemAcceptDragUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserItemAcceptDragUPP calls the HIToolbox framework function NewDataBrowserItemAcceptDragUPP.
+func NewDataBrowserItemAcceptDragUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserItemAcceptDragUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserItemAcceptDragUPP, _lib, "NewDataBrowserItemAcceptDragUPP")
+	}
+	return _fnNewDataBrowserItemAcceptDragUPP(userRoutine)
+}
+
+var _fnNewDataBrowserItemCompareUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserItemCompareUPP calls the HIToolbox framework function NewDataBrowserItemCompareUPP.
+func NewDataBrowserItemCompareUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserItemCompareUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserItemCompareUPP, _lib, "NewDataBrowserItemCompareUPP")
+	}
+	return _fnNewDataBrowserItemCompareUPP(userRoutine)
+}
+
+var _fnNewDataBrowserItemDataUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserItemDataUPP calls the HIToolbox framework function NewDataBrowserItemDataUPP.
+func NewDataBrowserItemDataUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserItemDataUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserItemDataUPP, _lib, "NewDataBrowserItemDataUPP")
+	}
+	return _fnNewDataBrowserItemDataUPP(userRoutine)
+}
+
+var _fnNewDataBrowserItemDragRgnUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserItemDragRgnUPP calls the HIToolbox framework function NewDataBrowserItemDragRgnUPP.
+func NewDataBrowserItemDragRgnUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserItemDragRgnUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserItemDragRgnUPP, _lib, "NewDataBrowserItemDragRgnUPP")
+	}
+	return _fnNewDataBrowserItemDragRgnUPP(userRoutine)
+}
+
+var _fnNewDataBrowserItemHelpContentUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserItemHelpContentUPP calls the HIToolbox framework function NewDataBrowserItemHelpContentUPP.
+func NewDataBrowserItemHelpContentUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserItemHelpContentUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserItemHelpContentUPP, _lib, "NewDataBrowserItemHelpContentUPP")
+	}
+	return _fnNewDataBrowserItemHelpContentUPP(userRoutine)
+}
+
+var _fnNewDataBrowserItemNotificationUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserItemNotificationUPP calls the HIToolbox framework function NewDataBrowserItemNotificationUPP.
+func NewDataBrowserItemNotificationUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserItemNotificationUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserItemNotificationUPP, _lib, "NewDataBrowserItemNotificationUPP")
+	}
+	return _fnNewDataBrowserItemNotificationUPP(userRoutine)
+}
+
+var _fnNewDataBrowserItemNotificationWithItemUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserItemNotificationWithItemUPP calls the HIToolbox framework function NewDataBrowserItemNotificationWithItemUPP.
+func NewDataBrowserItemNotificationWithItemUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserItemNotificationWithItemUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserItemNotificationWithItemUPP, _lib, "NewDataBrowserItemNotificationWithItemUPP")
+	}
+	return _fnNewDataBrowserItemNotificationWithItemUPP(userRoutine)
+}
+
+var _fnNewDataBrowserItemReceiveDragUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserItemReceiveDragUPP calls the HIToolbox framework function NewDataBrowserItemReceiveDragUPP.
+func NewDataBrowserItemReceiveDragUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserItemReceiveDragUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserItemReceiveDragUPP, _lib, "NewDataBrowserItemReceiveDragUPP")
+	}
+	return _fnNewDataBrowserItemReceiveDragUPP(userRoutine)
+}
+
+var _fnNewDataBrowserItemUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserItemUPP calls the HIToolbox framework function NewDataBrowserItemUPP.
+func NewDataBrowserItemUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserItemUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserItemUPP, _lib, "NewDataBrowserItemUPP")
+	}
+	return _fnNewDataBrowserItemUPP(userRoutine)
+}
+
+var _fnNewDataBrowserPostProcessDragUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserPostProcessDragUPP calls the HIToolbox framework function NewDataBrowserPostProcessDragUPP.
+func NewDataBrowserPostProcessDragUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserPostProcessDragUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserPostProcessDragUPP, _lib, "NewDataBrowserPostProcessDragUPP")
+	}
+	return _fnNewDataBrowserPostProcessDragUPP(userRoutine)
+}
+
+var _fnNewDataBrowserReceiveDragUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserReceiveDragUPP calls the HIToolbox framework function NewDataBrowserReceiveDragUPP.
+func NewDataBrowserReceiveDragUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserReceiveDragUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserReceiveDragUPP, _lib, "NewDataBrowserReceiveDragUPP")
+	}
+	return _fnNewDataBrowserReceiveDragUPP(userRoutine)
+}
+
+var _fnNewDataBrowserSelectContextualMenuUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserSelectContextualMenuUPP calls the HIToolbox framework function NewDataBrowserSelectContextualMenuUPP.
+func NewDataBrowserSelectContextualMenuUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserSelectContextualMenuUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserSelectContextualMenuUPP, _lib, "NewDataBrowserSelectContextualMenuUPP")
+	}
+	return _fnNewDataBrowserSelectContextualMenuUPP(userRoutine)
+}
+
+var _fnNewDataBrowserTrackingUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDataBrowserTrackingUPP calls the HIToolbox framework function NewDataBrowserTrackingUPP.
+func NewDataBrowserTrackingUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDataBrowserTrackingUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDataBrowserTrackingUPP, _lib, "NewDataBrowserTrackingUPP")
+	}
+	return _fnNewDataBrowserTrackingUPP(userRoutine)
+}
+
+var _fnNewDragDrawingUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDragDrawingUPP calls the HIToolbox framework function NewDragDrawingUPP.
+func NewDragDrawingUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDragDrawingUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDragDrawingUPP, _lib, "NewDragDrawingUPP")
+	}
+	return _fnNewDragDrawingUPP(userRoutine)
+}
+
+var _fnNewDragInputUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDragInputUPP calls the HIToolbox framework function NewDragInputUPP.
+func NewDragInputUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDragInputUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDragInputUPP, _lib, "NewDragInputUPP")
+	}
+	return _fnNewDragInputUPP(userRoutine)
+}
+
+var _fnNewDragReceiveHandlerUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDragReceiveHandlerUPP calls the HIToolbox framework function NewDragReceiveHandlerUPP.
+func NewDragReceiveHandlerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDragReceiveHandlerUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDragReceiveHandlerUPP, _lib, "NewDragReceiveHandlerUPP")
+	}
+	return _fnNewDragReceiveHandlerUPP(userRoutine)
+}
+
+var _fnNewDragSendDataUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDragSendDataUPP calls the HIToolbox framework function NewDragSendDataUPP.
+func NewDragSendDataUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDragSendDataUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDragSendDataUPP, _lib, "NewDragSendDataUPP")
+	}
+	return _fnNewDragSendDataUPP(userRoutine)
+}
+
+var _fnNewDragTrackingHandlerUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDragTrackingHandlerUPP calls the HIToolbox framework function NewDragTrackingHandlerUPP.
+func NewDragTrackingHandlerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDragTrackingHandlerUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDragTrackingHandlerUPP, _lib, "NewDragTrackingHandlerUPP")
+	}
+	return _fnNewDragTrackingHandlerUPP(userRoutine)
+}
+
+var _fnNewDrawHookUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDrawHookUPP calls the HIToolbox framework function NewDrawHookUPP.
+func NewDrawHookUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDrawHookUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDrawHookUPP, _lib, "NewDrawHookUPP")
+	}
+	return _fnNewDrawHookUPP(userRoutine)
+}
+
+var _fnNewEOLHookUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewEOLHookUPP calls the HIToolbox framework function NewEOLHookUPP.
+func NewEOLHookUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewEOLHookUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewEOLHookUPP, _lib, "NewEOLHookUPP")
+	}
+	return _fnNewEOLHookUPP(userRoutine)
+}
+
+var _fnNewEditUnicodePostUpdateUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewEditUnicodePostUpdateUPP calls the HIToolbox framework function NewEditUnicodePostUpdateUPP.
+func NewEditUnicodePostUpdateUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewEditUnicodePostUpdateUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewEditUnicodePostUpdateUPP, _lib, "NewEditUnicodePostUpdateUPP")
+	}
+	return _fnNewEditUnicodePostUpdateUPP(userRoutine)
+}
+
+var _fnNewEventComparatorUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewEventComparatorUPP calls the HIToolbox framework function NewEventComparatorUPP.
+func NewEventComparatorUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewEventComparatorUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewEventComparatorUPP, _lib, "NewEventComparatorUPP")
+	}
+	return _fnNewEventComparatorUPP(userRoutine)
+}
+
+var _fnNewEventHandlerUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewEventHandlerUPP calls the HIToolbox framework function NewEventHandlerUPP.
+func NewEventHandlerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewEventHandlerUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewEventHandlerUPP, _lib, "NewEventHandlerUPP")
+	}
+	return _fnNewEventHandlerUPP(userRoutine)
+}
+
+var _fnNewEventLoopIdleTimerUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewEventLoopIdleTimerUPP calls the HIToolbox framework function NewEventLoopIdleTimerUPP.
+func NewEventLoopIdleTimerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewEventLoopIdleTimerUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewEventLoopIdleTimerUPP, _lib, "NewEventLoopIdleTimerUPP")
+	}
+	return _fnNewEventLoopIdleTimerUPP(userRoutine)
+}
+
+var _fnNewEventLoopTimerUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewEventLoopTimerUPP calls the HIToolbox framework function NewEventLoopTimerUPP.
+func NewEventLoopTimerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewEventLoopTimerUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewEventLoopTimerUPP, _lib, "NewEventLoopTimerUPP")
+	}
+	return _fnNewEventLoopTimerUPP(userRoutine)
+}
+
+var _fnNewGetScrapDataUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewGetScrapDataUPP calls the HIToolbox framework function NewGetScrapDataUPP.
+func NewGetScrapDataUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewGetScrapDataUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewGetScrapDataUPP, _lib, "NewGetScrapDataUPP")
+	}
+	return _fnNewGetScrapDataUPP(userRoutine)
+}
+
+var _fnNewHMControlContentUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewHMControlContentUPP calls the HIToolbox framework function NewHMControlContentUPP.
+func NewHMControlContentUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewHMControlContentUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewHMControlContentUPP, _lib, "NewHMControlContentUPP")
+	}
+	return _fnNewHMControlContentUPP(userRoutine)
+}
+
+var _fnNewHMMenuItemContentUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewHMMenuItemContentUPP calls the HIToolbox framework function NewHMMenuItemContentUPP.
+func NewHMMenuItemContentUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewHMMenuItemContentUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewHMMenuItemContentUPP, _lib, "NewHMMenuItemContentUPP")
+	}
+	return _fnNewHMMenuItemContentUPP(userRoutine)
+}
+
+var _fnNewHMMenuTitleContentUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewHMMenuTitleContentUPP calls the HIToolbox framework function NewHMMenuTitleContentUPP.
+func NewHMMenuTitleContentUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewHMMenuTitleContentUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewHMMenuTitleContentUPP, _lib, "NewHMMenuTitleContentUPP")
+	}
+	return _fnNewHMMenuTitleContentUPP(userRoutine)
+}
+
+var _fnNewHMWindowContentUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewHMWindowContentUPP calls the HIToolbox framework function NewHMWindowContentUPP.
+func NewHMWindowContentUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewHMWindowContentUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewHMWindowContentUPP, _lib, "NewHMWindowContentUPP")
+	}
+	return _fnNewHMWindowContentUPP(userRoutine)
+}
+
+var _fnNewHighHookUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewHighHookUPP calls the HIToolbox framework function NewHighHookUPP.
+func NewHighHookUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewHighHookUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewHighHookUPP, _lib, "NewHighHookUPP")
+	}
+	return _fnNewHighHookUPP(userRoutine)
+}
+
+var _fnNewHitTestHookUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewHitTestHookUPP calls the HIToolbox framework function NewHitTestHookUPP.
+func NewHitTestHookUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewHitTestHookUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewHitTestHookUPP, _lib, "NewHitTestHookUPP")
+	}
+	return _fnNewHitTestHookUPP(userRoutine)
+}
+
+var _fnNewListClickLoopUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewListClickLoopUPP calls the HIToolbox framework function NewListClickLoopUPP.
+func NewListClickLoopUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewListClickLoopUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewListClickLoopUPP, _lib, "NewListClickLoopUPP")
+	}
+	return _fnNewListClickLoopUPP(userRoutine)
+}
+
+var _fnNewListDefUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewListDefUPP calls the HIToolbox framework function NewListDefUPP.
+func NewListDefUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewListDefUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewListDefUPP, _lib, "NewListDefUPP")
+	}
+	return _fnNewListDefUPP(userRoutine)
+}
+
+var _fnNewListSearchUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewListSearchUPP calls the HIToolbox framework function NewListSearchUPP.
+func NewListSearchUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewListSearchUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewListSearchUPP, _lib, "NewListSearchUPP")
+	}
+	return _fnNewListSearchUPP(userRoutine)
+}
+
+var _fnNewMenuItemDrawingUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewMenuItemDrawingUPP calls the HIToolbox framework function NewMenuItemDrawingUPP.
+func NewMenuItemDrawingUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewMenuItemDrawingUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewMenuItemDrawingUPP, _lib, "NewMenuItemDrawingUPP")
+	}
+	return _fnNewMenuItemDrawingUPP(userRoutine)
+}
+
+var _fnNewMenuTitleDrawingUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewMenuTitleDrawingUPP calls the HIToolbox framework function NewMenuTitleDrawingUPP.
+func NewMenuTitleDrawingUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewMenuTitleDrawingUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewMenuTitleDrawingUPP, _lib, "NewMenuTitleDrawingUPP")
+	}
+	return _fnNewMenuTitleDrawingUPP(userRoutine)
+}
+
+var _fnNewModalFilterUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewModalFilterUPP calls the HIToolbox framework function NewModalFilterUPP.
+func NewModalFilterUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewModalFilterUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewModalFilterUPP, _lib, "NewModalFilterUPP")
+	}
+	return _fnNewModalFilterUPP(userRoutine)
+}
+
+var _fnNewModalFilterYDUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewModalFilterYDUPP calls the HIToolbox framework function NewModalFilterYDUPP.
+func NewModalFilterYDUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewModalFilterYDUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewModalFilterYDUPP, _lib, "NewModalFilterYDUPP")
+	}
+	return _fnNewModalFilterYDUPP(userRoutine)
+}
+
+var _fnNewNMUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewNMUPP calls the HIToolbox framework function NewNMUPP.
+func NewNMUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewNMUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewNMUPP, _lib, "NewNMUPP")
+	}
+	return _fnNewNMUPP(userRoutine)
+}
+
+var _fnNewNWidthHookUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewNWidthHookUPP calls the HIToolbox framework function NewNWidthHookUPP.
+func NewNWidthHookUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewNWidthHookUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewNWidthHookUPP, _lib, "NewNWidthHookUPP")
+	}
+	return _fnNewNWidthHookUPP(userRoutine)
+}
+
+var _fnNewScrapPromiseKeeperUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewScrapPromiseKeeperUPP calls the HIToolbox framework function NewScrapPromiseKeeperUPP.
+func NewScrapPromiseKeeperUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewScrapPromiseKeeperUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewScrapPromiseKeeperUPP, _lib, "NewScrapPromiseKeeperUPP")
+	}
+	return _fnNewScrapPromiseKeeperUPP(userRoutine)
+}
+
+var _fnNewTEClickLoopUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewTEClickLoopUPP calls the HIToolbox framework function NewTEClickLoopUPP.
+func NewTEClickLoopUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewTEClickLoopUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewTEClickLoopUPP, _lib, "NewTEClickLoopUPP")
+	}
+	return _fnNewTEClickLoopUPP(userRoutine)
+}
+
+var _fnNewTEDoTextUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewTEDoTextUPP calls the HIToolbox framework function NewTEDoTextUPP.
+func NewTEDoTextUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewTEDoTextUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewTEDoTextUPP, _lib, "NewTEDoTextUPP")
+	}
+	return _fnNewTEDoTextUPP(userRoutine)
+}
+
+var _fnNewTEFindWordUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewTEFindWordUPP calls the HIToolbox framework function NewTEFindWordUPP.
+func NewTEFindWordUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewTEFindWordUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewTEFindWordUPP, _lib, "NewTEFindWordUPP")
+	}
+	return _fnNewTEFindWordUPP(userRoutine)
+}
+
+var _fnNewTERecalcUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewTERecalcUPP calls the HIToolbox framework function NewTERecalcUPP.
+func NewTERecalcUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewTERecalcUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewTERecalcUPP, _lib, "NewTERecalcUPP")
+	}
+	return _fnNewTERecalcUPP(userRoutine)
+}
+
+var _fnNewTSMTEPostUpdateUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewTSMTEPostUpdateUPP calls the HIToolbox framework function NewTSMTEPostUpdateUPP.
+func NewTSMTEPostUpdateUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewTSMTEPostUpdateUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewTSMTEPostUpdateUPP, _lib, "NewTSMTEPostUpdateUPP")
+	}
+	return _fnNewTSMTEPostUpdateUPP(userRoutine)
+}
+
+var _fnNewTSMTEPreUpdateUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewTSMTEPreUpdateUPP calls the HIToolbox framework function NewTSMTEPreUpdateUPP.
+func NewTSMTEPreUpdateUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewTSMTEPreUpdateUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewTSMTEPreUpdateUPP, _lib, "NewTSMTEPreUpdateUPP")
+	}
+	return _fnNewTSMTEPreUpdateUPP(userRoutine)
+}
+
+var _fnNewTXNActionKeyMapperUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewTXNActionKeyMapperUPP calls the HIToolbox framework function NewTXNActionKeyMapperUPP.
+func NewTXNActionKeyMapperUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewTXNActionKeyMapperUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewTXNActionKeyMapperUPP, _lib, "NewTXNActionKeyMapperUPP")
+	}
+	return _fnNewTXNActionKeyMapperUPP(userRoutine)
+}
+
+var _fnNewTXNActionNameMapperUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewTXNActionNameMapperUPP calls the HIToolbox framework function NewTXNActionNameMapperUPP.
+func NewTXNActionNameMapperUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewTXNActionNameMapperUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewTXNActionNameMapperUPP, _lib, "NewTXNActionNameMapperUPP")
+	}
+	return _fnNewTXNActionNameMapperUPP(userRoutine)
+}
+
+var _fnNewTXNContextualMenuSetupUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewTXNContextualMenuSetupUPP calls the HIToolbox framework function NewTXNContextualMenuSetupUPP.
+func NewTXNContextualMenuSetupUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewTXNContextualMenuSetupUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewTXNContextualMenuSetupUPP, _lib, "NewTXNContextualMenuSetupUPP")
+	}
+	return _fnNewTXNContextualMenuSetupUPP(userRoutine)
+}
+
+var _fnNewTXNFindUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewTXNFindUPP calls the HIToolbox framework function NewTXNFindUPP.
+func NewTXNFindUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewTXNFindUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewTXNFindUPP, _lib, "NewTXNFindUPP")
+	}
+	return _fnNewTXNFindUPP(userRoutine)
+}
+
+var _fnNewTXNScrollInfoUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewTXNScrollInfoUPP calls the HIToolbox framework function NewTXNScrollInfoUPP.
+func NewTXNScrollInfoUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewTXNScrollInfoUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewTXNScrollInfoUPP, _lib, "NewTXNScrollInfoUPP")
+	}
+	return _fnNewTXNScrollInfoUPP(userRoutine)
+}
+
+var _fnNewTextWidthHookUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewTextWidthHookUPP calls the HIToolbox framework function NewTextWidthHookUPP.
+func NewTextWidthHookUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewTextWidthHookUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewTextWidthHookUPP, _lib, "NewTextWidthHookUPP")
+	}
+	return _fnNewTextWidthHookUPP(userRoutine)
+}
+
+var _fnNewThemeButtonDrawUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewThemeButtonDrawUPP calls the HIToolbox framework function NewThemeButtonDrawUPP.
+func NewThemeButtonDrawUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewThemeButtonDrawUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewThemeButtonDrawUPP, _lib, "NewThemeButtonDrawUPP")
+	}
+	return _fnNewThemeButtonDrawUPP(userRoutine)
+}
+
+var _fnNewThemeEraseUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewThemeEraseUPP calls the HIToolbox framework function NewThemeEraseUPP.
+func NewThemeEraseUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewThemeEraseUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewThemeEraseUPP, _lib, "NewThemeEraseUPP")
+	}
+	return _fnNewThemeEraseUPP(userRoutine)
+}
+
+var _fnNewThemeIteratorUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewThemeIteratorUPP calls the HIToolbox framework function NewThemeIteratorUPP.
+func NewThemeIteratorUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewThemeIteratorUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewThemeIteratorUPP, _lib, "NewThemeIteratorUPP")
+	}
+	return _fnNewThemeIteratorUPP(userRoutine)
+}
+
+var _fnNewThemeTabTitleDrawUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewThemeTabTitleDrawUPP calls the HIToolbox framework function NewThemeTabTitleDrawUPP.
+func NewThemeTabTitleDrawUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewThemeTabTitleDrawUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewThemeTabTitleDrawUPP, _lib, "NewThemeTabTitleDrawUPP")
+	}
+	return _fnNewThemeTabTitleDrawUPP(userRoutine)
+}
+
+var _fnNewUserItemUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewUserItemUPP calls the HIToolbox framework function NewUserItemUPP.
+func NewUserItemUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewUserItemUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewUserItemUPP, _lib, "NewUserItemUPP")
+	}
+	return _fnNewUserItemUPP(userRoutine)
+}
+
+var _fnNewWidthHookUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewWidthHookUPP calls the HIToolbox framework function NewWidthHookUPP.
+func NewWidthHookUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewWidthHookUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewWidthHookUPP, _lib, "NewWidthHookUPP")
+	}
+	return _fnNewWidthHookUPP(userRoutine)
+}
+
+var _fnNewWindowPaintUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewWindowPaintUPP calls the HIToolbox framework function NewWindowPaintUPP.
+func NewWindowPaintUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewWindowPaintUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewWindowPaintUPP, _lib, "NewWindowPaintUPP")
+	}
+	return _fnNewWindowPaintUPP(userRoutine)
+}
+
+var _fnNewWindowTitleDrawingUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewWindowTitleDrawingUPP calls the HIToolbox framework function NewWindowTitleDrawingUPP.
+func NewWindowTitleDrawingUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewWindowTitleDrawingUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewWindowTitleDrawingUPP, _lib, "NewWindowTitleDrawingUPP")
+	}
+	return _fnNewWindowTitleDrawingUPP(userRoutine)
+}
+
 var _fnPopSymbolicHotKeyMode func(unsafe.Pointer)
 
 // PopSymbolicHotKeyMode calls the HIToolbox framework function PopSymbolicHotKeyMode.
@@ -3406,6 +4330,17 @@ func ProcessHICommand(inCommand unsafe.Pointer) int {
 		ebipurego.RegisterLibFunc(&_fnProcessHICommand, _lib, "ProcessHICommand")
 	}
 	return int(_fnProcessHICommand(inCommand))
+}
+
+var _fnPushSymbolicHotKeyMode func(int) unsafe.Pointer
+
+// PushSymbolicHotKeyMode calls the HIToolbox framework function PushSymbolicHotKeyMode.
+func PushSymbolicHotKeyMode(inOptions int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPushSymbolicHotKeyMode == nil {
+		ebipurego.RegisterLibFunc(&_fnPushSymbolicHotKeyMode, _lib, "PushSymbolicHotKeyMode")
+	}
+	return _fnPushSymbolicHotKeyMode(inOptions)
 }
 
 var _fnReceiveNextEvent func(int, unsafe.Pointer, float64, uint8, unsafe.Pointer) int32
@@ -3562,6 +4497,17 @@ func TISCreateInputSourceList(properties obj.Object, includeAllInstalled uint8) 
 	}
 	_ret := _fnTISCreateInputSourceList(objref.IDOf(properties), includeAllInstalled)
 	return obj.Wrap(_ret)
+}
+
+var _fnTISGetInputSourceProperty func(objc.ID, objc.ID) unsafe.Pointer
+
+// TISGetInputSourceProperty calls the HIToolbox framework function TISGetInputSourceProperty.
+func TISGetInputSourceProperty(inputSource obj.Object, propertyKey obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTISGetInputSourceProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnTISGetInputSourceProperty, _lib, "TISGetInputSourceProperty")
+	}
+	return _fnTISGetInputSourceProperty(objref.IDOf(inputSource), objref.IDOf(propertyKey))
 }
 
 var _fnTISInputSourceGetTypeID func() int

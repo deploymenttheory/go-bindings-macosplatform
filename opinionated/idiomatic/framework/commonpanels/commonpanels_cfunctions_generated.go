@@ -196,3 +196,47 @@ func NPickColor(theColorInfo unsafe.Pointer) int16 {
 	}
 	return _fnNPickColor(theColorInfo)
 }
+
+var _fnNewCalibrateEventUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewCalibrateEventUPP calls the CommonPanels framework function NewCalibrateEventUPP.
+func NewCalibrateEventUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewCalibrateEventUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewCalibrateEventUPP, _lib, "NewCalibrateEventUPP")
+	}
+	return _fnNewCalibrateEventUPP(userRoutine)
+}
+
+var _fnNewCalibrateUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewCalibrateUPP calls the CommonPanels framework function NewCalibrateUPP.
+func NewCalibrateUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewCalibrateUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewCalibrateUPP, _lib, "NewCalibrateUPP")
+	}
+	return _fnNewCalibrateUPP(userRoutine)
+}
+
+var _fnNewCanCalibrateUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewCanCalibrateUPP calls the CommonPanels framework function NewCanCalibrateUPP.
+func NewCanCalibrateUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewCanCalibrateUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewCanCalibrateUPP, _lib, "NewCanCalibrateUPP")
+	}
+	return _fnNewCanCalibrateUPP(userRoutine)
+}
+
+var _fnNewNColorChangedUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewNColorChangedUPP calls the CommonPanels framework function NewNColorChangedUPP.
+func NewNColorChangedUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewNColorChangedUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewNColorChangedUPP, _lib, "NewNColorChangedUPP")
+	}
+	return _fnNewNColorChangedUPP(userRoutine)
+}

@@ -27,6 +27,17 @@ func ArAnchorGetIdentifier(anchor obj.Object) (outIdentifier uint8) {
 	return _out0
 }
 
+var _fnArAnchorGetOriginFromAnchorTransform func(objc.ID) unsafe.Pointer
+
+// ArAnchorGetOriginFromAnchorTransform calls the ARKit framework function ar_anchor_get_origin_from_anchor_transform.
+func ArAnchorGetOriginFromAnchorTransform(anchor obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnArAnchorGetOriginFromAnchorTransform == nil {
+		ebipurego.RegisterLibFunc(&_fnArAnchorGetOriginFromAnchorTransform, _lib, "ar_anchor_get_origin_from_anchor_transform")
+	}
+	return _fnArAnchorGetOriginFromAnchorTransform(objref.IDOf(anchor))
+}
+
 var _fnArAnchorGetTimestamp func(objc.ID) float64
 
 // ArAnchorGetTimestamp calls the ARKit framework function ar_anchor_get_timestamp.
@@ -137,6 +148,17 @@ func ArDataProvidersAddDataProviders(dataProviders obj.Object, dataProvidersToAd
 	_fnArDataProvidersAddDataProviders(objref.IDOf(dataProviders), objref.IDOf(dataProvidersToAdd))
 }
 
+var _fnArDataProvidersCreate func() unsafe.Pointer
+
+// ArDataProvidersCreate calls the ARKit framework function ar_data_providers_create.
+func ArDataProvidersCreate() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnArDataProvidersCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnArDataProvidersCreate, _lib, "ar_data_providers_create")
+	}
+	return _fnArDataProvidersCreate()
+}
+
 var _fnArDataProvidersEnumerateDataProviders func(objc.ID, unsafe.Pointer)
 
 // ArDataProvidersEnumerateDataProviders calls the ARKit framework function ar_data_providers_enumerate_data_providers.
@@ -192,6 +214,17 @@ func ArDataProvidersRemoveDataProviders(dataProviders obj.Object, dataProvidersT
 	_fnArDataProvidersRemoveDataProviders(objref.IDOf(dataProviders), objref.IDOf(dataProvidersToRemove))
 }
 
+var _fnArDeviceAnchorCreate func() unsafe.Pointer
+
+// ArDeviceAnchorCreate calls the ARKit framework function ar_device_anchor_create.
+func ArDeviceAnchorCreate() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnArDeviceAnchorCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnArDeviceAnchorCreate, _lib, "ar_device_anchor_create")
+	}
+	return _fnArDeviceAnchorCreate()
+}
+
 var _fnArDeviceAnchorGetIdentifier func(objc.ID, unsafe.Pointer)
 
 // ArDeviceAnchorGetIdentifier calls the ARKit framework function ar_device_anchor_get_identifier.
@@ -203,6 +236,17 @@ func ArDeviceAnchorGetIdentifier(anchor obj.Object) (outIdentifier uint8) {
 	var _out0 uint8
 	_fnArDeviceAnchorGetIdentifier(objref.IDOf(anchor), unsafe.Pointer(&_out0))
 	return _out0
+}
+
+var _fnArDeviceAnchorGetOriginFromAnchorTransform func(objc.ID) unsafe.Pointer
+
+// ArDeviceAnchorGetOriginFromAnchorTransform calls the ARKit framework function ar_device_anchor_get_origin_from_anchor_transform.
+func ArDeviceAnchorGetOriginFromAnchorTransform(anchor obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnArDeviceAnchorGetOriginFromAnchorTransform == nil {
+		ebipurego.RegisterLibFunc(&_fnArDeviceAnchorGetOriginFromAnchorTransform, _lib, "ar_device_anchor_get_origin_from_anchor_transform")
+	}
+	return _fnArDeviceAnchorGetOriginFromAnchorTransform(objref.IDOf(anchor))
 }
 
 var _fnArDeviceAnchorGetTimestamp func(objc.ID) float64
@@ -272,6 +316,28 @@ func ArRelease(object unsafe.Pointer) {
 	_fnArRelease(object)
 }
 
+var _fnArRetain func(unsafe.Pointer) unsafe.Pointer
+
+// ArRetain calls the ARKit framework function ar_retain.
+func ArRetain(object unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnArRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnArRetain, _lib, "ar_retain")
+	}
+	return _fnArRetain(object)
+}
+
+var _fnArSessionCopyDataProviders func(objc.ID) unsafe.Pointer
+
+// ArSessionCopyDataProviders calls the ARKit framework function ar_session_copy_data_providers.
+func ArSessionCopyDataProviders(session obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnArSessionCopyDataProviders == nil {
+		ebipurego.RegisterLibFunc(&_fnArSessionCopyDataProviders, _lib, "ar_session_copy_data_providers")
+	}
+	return _fnArSessionCopyDataProviders(objref.IDOf(session))
+}
+
 var _fnArSessionCreateWithDevice func(objc.ID) objc.ID
 
 // ArSessionCreateWithDevice calls the ARKit framework function ar_session_create_with_device.
@@ -337,6 +403,28 @@ func ArTrackableAnchorIsTracked(anchor obj.Object) bool {
 		ebipurego.RegisterLibFunc(&_fnArTrackableAnchorIsTracked, _lib, "ar_trackable_anchor_is_tracked")
 	}
 	return _fnArTrackableAnchorIsTracked(objref.IDOf(anchor))
+}
+
+var _fnArWorldTrackingConfigurationCreate func() unsafe.Pointer
+
+// ArWorldTrackingConfigurationCreate calls the ARKit framework function ar_world_tracking_configuration_create.
+func ArWorldTrackingConfigurationCreate() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnArWorldTrackingConfigurationCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnArWorldTrackingConfigurationCreate, _lib, "ar_world_tracking_configuration_create")
+	}
+	return _fnArWorldTrackingConfigurationCreate()
+}
+
+var _fnArWorldTrackingProviderCreate func(objc.ID) unsafe.Pointer
+
+// ArWorldTrackingProviderCreate calls the ARKit framework function ar_world_tracking_provider_create.
+func ArWorldTrackingProviderCreate(worldTrackingConfiguration obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnArWorldTrackingProviderCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnArWorldTrackingProviderCreate, _lib, "ar_world_tracking_provider_create")
+	}
+	return _fnArWorldTrackingProviderCreate(objref.IDOf(worldTrackingConfiguration))
 }
 
 var _fnArWorldTrackingProviderGetRequiredAuthorizationType func() AuthorizationType

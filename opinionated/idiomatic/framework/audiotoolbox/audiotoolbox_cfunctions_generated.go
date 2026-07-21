@@ -573,6 +573,17 @@ func AudioCodecUninitialize(inCodec unsafe.Pointer) int {
 	return int(_fnAudioCodecUninitialize(inCodec))
 }
 
+var _fnAudioComponentCopyIcon func(objc.ID) unsafe.Pointer
+
+// AudioComponentCopyIcon calls the AudioToolbox framework function AudioComponentCopyIcon.
+func AudioComponentCopyIcon(comp obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioComponentCopyIcon == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioComponentCopyIcon, _lib, "AudioComponentCopyIcon")
+	}
+	return _fnAudioComponentCopyIcon(objref.IDOf(comp))
+}
+
 var _fnAudioComponentCount func(unsafe.Pointer) uint32
 
 // AudioComponentCount calls the AudioToolbox framework function AudioComponentCount.
@@ -2228,6 +2239,17 @@ func AudioUnitUninitialize(inUnit unsafe.Pointer) int {
 	return int(_fnAudioUnitUninitialize(inUnit))
 }
 
+var _fnAudioWorkIntervalCreate func(string, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// AudioWorkIntervalCreate calls the AudioToolbox framework function AudioWorkIntervalCreate.
+func AudioWorkIntervalCreate(name string, clock unsafe.Pointer, attr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioWorkIntervalCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioWorkIntervalCreate, _lib, "AudioWorkIntervalCreate")
+	}
+	return _fnAudioWorkIntervalCreate(name, clock, attr)
+}
+
 var _fnCAClockBarBeatTimeToBeats func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // CAClockBarBeatTimeToBeats calls the AudioToolbox framework function CAClockBarBeatTimeToBeats.
@@ -3034,6 +3056,17 @@ func MusicTrackNewUserEvent(inTrack obj.Object, inTimeStamp float64, inUserData 
 		ebipurego.RegisterLibFunc(&_fnMusicTrackNewUserEvent, _lib, "MusicTrackNewUserEvent")
 	}
 	return int(_fnMusicTrackNewUserEvent(objref.IDOf(inTrack), inTimeStamp, inUserData))
+}
+
+var _fnNextAudioFileRegion func(unsafe.Pointer) unsafe.Pointer
+
+// NextAudioFileRegion calls the AudioToolbox framework function NextAudioFileRegion.
+func NextAudioFileRegion(inAFRegionPtr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNextAudioFileRegion == nil {
+		ebipurego.RegisterLibFunc(&_fnNextAudioFileRegion, _lib, "NextAudioFileRegion")
+	}
+	return _fnNextAudioFileRegion(inAFRegionPtr)
 }
 
 var _fnNumAudioFileMarkersToNumBytes func(int) int

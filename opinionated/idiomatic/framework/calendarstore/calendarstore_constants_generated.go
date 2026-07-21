@@ -5,6 +5,8 @@
 package calendarstore
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -135,4 +137,13 @@ func CalAlarmActionSound() obj.Object {
 // CalCalendarStoreErrorDomain returns the string constant CalCalendarStoreErrorDomain, for use as a dictionary key or argument.
 func CalCalendarStoreErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CalCalendarStoreErrorDomain")))
+}
+
+// CalDefaultRecurrenceInterval returns the value of the constant CalDefaultRecurrenceInterval.
+func CalDefaultRecurrenceInterval() uint {
+	addr := _symbol("CalDefaultRecurrenceInterval")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint)(unsafe.Pointer(addr))
 }

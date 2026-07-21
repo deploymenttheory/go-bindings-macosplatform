@@ -5,7 +5,10 @@
 package photos
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
@@ -85,4 +88,13 @@ func PHImageErrorKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("P
 // PHLocalIdentifierNotFound returns the string constant PHLocalIdentifierNotFound, for use as a dictionary key or argument.
 func PHLocalIdentifierNotFound() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("PHLocalIdentifierNotFound")))
+}
+
+// PHImageManagerMaximumSize returns the value of the constant PHImageManagerMaximumSize.
+func PHImageManagerMaximumSize() corefoundation.CGSize {
+	addr := _symbol("PHImageManagerMaximumSize")
+	if addr == 0 {
+		return corefoundation.CGSize{}
+	}
+	return *(*corefoundation.CGSize)(unsafe.Pointer(addr))
 }

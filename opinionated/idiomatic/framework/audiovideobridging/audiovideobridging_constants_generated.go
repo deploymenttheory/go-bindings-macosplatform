@@ -5,9 +5,20 @@
 package audiovideobridging
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
 // AVBErrorDomain returns the string constant AVBErrorDomain, for use as a dictionary key or argument.
 func AVBErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVBErrorDomain"))) }
+
+// AVBNullEUI64 returns the value of the constant AVBNullEUI64.
+func AVBNullEUI64() uint64 {
+	addr := _symbol("AVBNullEUI64")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint64)(unsafe.Pointer(addr))
+}

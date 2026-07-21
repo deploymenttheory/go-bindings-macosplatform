@@ -411,3 +411,72 @@ func WebViewDidChangeTypingStyleNotification() obj.Object {
 func WebViewDidChangeSelectionNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("WebViewDidChangeSelectionNotification")))
 }
+
+// NSReadAccessURLDocumentOption returns the address of the symbol NSReadAccessURLDocumentOption.
+func NSReadAccessURLDocumentOption() uintptr { return _symbol("NSReadAccessURLDocumentOption") }
+
+// WKWebExtensionMatchPatternErrorDomain returns the address of the symbol WKWebExtensionMatchPatternErrorDomain.
+func WKWebExtensionMatchPatternErrorDomain() uintptr {
+	return _symbol("WKWebExtensionMatchPatternErrorDomain")
+}
+
+// WKWebExtensionErrorDomain returns the address of the symbol WKWebExtensionErrorDomain.
+func WKWebExtensionErrorDomain() uintptr { return _symbol("WKWebExtensionErrorDomain") }
+
+// WKWebExtensionContextErrorDomain returns the address of the symbol WKWebExtensionContextErrorDomain.
+func WKWebExtensionContextErrorDomain() uintptr { return _symbol("WKWebExtensionContextErrorDomain") }
+
+// WKWebExtensionContextErrorsDidUpdateNotification returns the address of the symbol WKWebExtensionContextErrorsDidUpdateNotification.
+func WKWebExtensionContextErrorsDidUpdateNotification() uintptr {
+	return _symbol("WKWebExtensionContextErrorsDidUpdateNotification")
+}
+
+// WKWebExtensionContextPermissionsWereGrantedNotification returns the address of the symbol WKWebExtensionContextPermissionsWereGrantedNotification.
+func WKWebExtensionContextPermissionsWereGrantedNotification() uintptr {
+	return _symbol("WKWebExtensionContextPermissionsWereGrantedNotification")
+}
+
+// WKWebExtensionContextPermissionsWereDeniedNotification returns the address of the symbol WKWebExtensionContextPermissionsWereDeniedNotification.
+func WKWebExtensionContextPermissionsWereDeniedNotification() uintptr {
+	return _symbol("WKWebExtensionContextPermissionsWereDeniedNotification")
+}
+
+// WKWebExtensionContextGrantedPermissionsWereRemovedNotification returns the address of the symbol WKWebExtensionContextGrantedPermissionsWereRemovedNotification.
+func WKWebExtensionContextGrantedPermissionsWereRemovedNotification() uintptr {
+	return _symbol("WKWebExtensionContextGrantedPermissionsWereRemovedNotification")
+}
+
+// WKWebExtensionContextDeniedPermissionsWereRemovedNotification returns the address of the symbol WKWebExtensionContextDeniedPermissionsWereRemovedNotification.
+func WKWebExtensionContextDeniedPermissionsWereRemovedNotification() uintptr {
+	return _symbol("WKWebExtensionContextDeniedPermissionsWereRemovedNotification")
+}
+
+// WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification returns the address of the symbol WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification.
+func WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification() uintptr {
+	return _symbol("WKWebExtensionContextPermissionMatchPatternsWereGrantedNotification")
+}
+
+// WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification returns the address of the symbol WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification.
+func WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification() uintptr {
+	return _symbol("WKWebExtensionContextPermissionMatchPatternsWereDeniedNotification")
+}
+
+// WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification returns the address of the symbol WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification.
+func WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification() uintptr {
+	return _symbol("WKWebExtensionContextGrantedPermissionMatchPatternsWereRemovedNotification")
+}
+
+// WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification returns the address of the symbol WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification.
+func WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification() uintptr {
+	return _symbol("WKWebExtensionContextDeniedPermissionMatchPatternsWereRemovedNotification")
+}
+
+// WKWebExtensionDataRecordErrorDomain returns the address of the symbol WKWebExtensionDataRecordErrorDomain.
+func WKWebExtensionDataRecordErrorDomain() uintptr {
+	return _symbol("WKWebExtensionDataRecordErrorDomain")
+}
+
+// WKWebExtensionMessagePortErrorDomain returns the address of the symbol WKWebExtensionMessagePortErrorDomain.
+func WKWebExtensionMessagePortErrorDomain() uintptr {
+	return _symbol("WKWebExtensionMessagePortErrorDomain")
+}

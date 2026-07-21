@@ -5,6 +5,8 @@
 package cfnetwork
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -610,4 +612,67 @@ func KCFNetworkProxiesProxyAutoConfigJavaScript() obj.Object {
 // KCFNetworkProxiesProxyAutoDiscoveryEnable returns the value of the constant kCFNetworkProxiesProxyAutoDiscoveryEnable.
 func KCFNetworkProxiesProxyAutoDiscoveryEnable() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesProxyAutoDiscoveryEnable")))
+}
+
+// KCFStreamErrorDomainNetDB returns the value of the constant kCFStreamErrorDomainNetDB.
+func KCFStreamErrorDomainNetDB() int {
+	addr := _symbol("kCFStreamErrorDomainNetDB")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCFStreamErrorDomainSystemConfiguration returns the value of the constant kCFStreamErrorDomainSystemConfiguration.
+func KCFStreamErrorDomainSystemConfiguration() int {
+	addr := _symbol("kCFStreamErrorDomainSystemConfiguration")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCFStreamErrorDomainMach returns the value of the constant kCFStreamErrorDomainMach.
+func KCFStreamErrorDomainMach() int {
+	addr := _symbol("kCFStreamErrorDomainMach")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCFStreamErrorDomainNetServices returns the value of the constant kCFStreamErrorDomainNetServices.
+func KCFStreamErrorDomainNetServices() int {
+	addr := _symbol("kCFStreamErrorDomainNetServices")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCFStreamErrorDomainWinSock returns the value of the constant kCFStreamErrorDomainWinSock.
+func KCFStreamErrorDomainWinSock() int {
+	addr := _symbol("kCFStreamErrorDomainWinSock")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCFStreamErrorDomainFTP returns the value of the constant kCFStreamErrorDomainFTP.
+func KCFStreamErrorDomainFTP() int {
+	addr := _symbol("kCFStreamErrorDomainFTP")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCFStreamErrorDomainHTTP returns the value of the constant kCFStreamErrorDomainHTTP.
+func KCFStreamErrorDomainHTTP() int {
+	addr := _symbol("kCFStreamErrorDomainHTTP")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
 }

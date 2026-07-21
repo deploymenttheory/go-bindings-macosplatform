@@ -10,6 +10,17 @@ import (
 	ebipurego "github.com/ebitengine/purego"
 )
 
+var _fnMPSGetPreferredDevice func(DeviceOptions) unsafe.Pointer
+
+// MPSGetPreferredDevice calls the MetalPerformanceShaders framework function MPSGetPreferredDevice.
+func MPSGetPreferredDevice(options DeviceOptions) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSGetPreferredDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSGetPreferredDevice, _lib, "MPSGetPreferredDevice")
+	}
+	return _fnMPSGetPreferredDevice(options)
+}
+
 var _fnMPSHintTemporaryMemoryHighWaterMark func(unsafe.Pointer, int)
 
 // MPSHintTemporaryMemoryHighWaterMark calls the MetalPerformanceShaders framework function MPSHintTemporaryMemoryHighWaterMark.

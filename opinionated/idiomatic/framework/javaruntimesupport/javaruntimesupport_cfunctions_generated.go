@@ -136,6 +136,17 @@ func JRSFontStyleUsesFractionalMetrics(style uint32) bool {
 	return _fnJRSFontStyleUsesFractionalMetrics(style)
 }
 
+var _fnJRSUIControlCreate func(uint8) unsafe.Pointer
+
+// JRSUIControlCreate calls the JavaRuntimeSupport framework function JRSUIControlCreate.
+func JRSUIControlCreate(isFlipped uint8) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIControlCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIControlCreate, _lib, "JRSUIControlCreate")
+	}
+	return _fnJRSUIControlCreate(isFlipped)
+}
+
 var _fnJRSUIControlDraw func(unsafe.Pointer, unsafe.Pointer, objc.ID, corefoundation.CGRect)
 
 // JRSUIControlDraw calls the JavaRuntimeSupport framework function JRSUIControlDraw.
@@ -388,6 +399,17 @@ func JRSUIGetKey(value int) obj.Object {
 	}
 	_ret := _fnJRSUIGetKey(value)
 	return obj.Wrap(_ret)
+}
+
+var _fnJRSUIRendererCreate func() unsafe.Pointer
+
+// JRSUIRendererCreate calls the JavaRuntimeSupport framework function JRSUIRendererCreate.
+func JRSUIRendererCreate() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnJRSUIRendererCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnJRSUIRendererCreate, _lib, "JRSUIRendererCreate")
+	}
+	return _fnJRSUIRendererCreate()
 }
 
 var _fnJRSUIRendererRelease func(unsafe.Pointer)

@@ -49,6 +49,17 @@ func SCBondInterfaceCopyStatus(bond unsafe.Pointer) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnSCBondInterfaceCreate func(objc.ID) unsafe.Pointer
+
+// SCBondInterfaceCreate calls the SystemConfiguration framework function SCBondInterfaceCreate.
+func SCBondInterfaceCreate(prefs obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCBondInterfaceCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceCreate, _lib, "SCBondInterfaceCreate")
+	}
+	return _fnSCBondInterfaceCreate(objref.IDOf(prefs))
+}
+
 var _fnSCBondInterfaceGetMemberInterfaces func(unsafe.Pointer) objc.ID
 
 // SCBondInterfaceGetMemberInterfaces calls the SystemConfiguration framework function SCBondInterfaceGetMemberInterfaces.
@@ -1829,6 +1840,17 @@ func SCVLANInterfaceCopyAvailablePhysicalInterfaces() obj.Object {
 	}
 	_ret := _fnSCVLANInterfaceCopyAvailablePhysicalInterfaces()
 	return obj.Wrap(_ret)
+}
+
+var _fnSCVLANInterfaceCreate func(objc.ID, objc.ID, objc.ID) unsafe.Pointer
+
+// SCVLANInterfaceCreate calls the SystemConfiguration framework function SCVLANInterfaceCreate.
+func SCVLANInterfaceCreate(prefs obj.Object, physical obj.Object, tag obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSCVLANInterfaceCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceCreate, _lib, "SCVLANInterfaceCreate")
+	}
+	return _fnSCVLANInterfaceCreate(objref.IDOf(prefs), objref.IDOf(physical), objref.IDOf(tag))
 }
 
 var _fnSCVLANInterfaceGetOptions func(unsafe.Pointer) objc.ID

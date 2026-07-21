@@ -5,6 +5,8 @@
 package storekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -60,4 +62,28 @@ func SKStoreProductParameterProviderToken() obj.Object {
 // SKStoreProductParameterAdvertisingPartnerToken returns the string constant SKStoreProductParameterAdvertisingPartnerToken, for use as a dictionary key or argument.
 func SKStoreProductParameterAdvertisingPartnerToken() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("SKStoreProductParameterAdvertisingPartnerToken")))
+}
+
+// SKCloudServiceCapabilitiesDidChangeNotification returns the address of the symbol SKCloudServiceCapabilitiesDidChangeNotification.
+func SKCloudServiceCapabilitiesDidChangeNotification() uintptr {
+	return _symbol("SKCloudServiceCapabilitiesDidChangeNotification")
+}
+
+// SKStorefrontCountryCodeDidChangeNotification returns the address of the symbol SKStorefrontCountryCodeDidChangeNotification.
+func SKStorefrontCountryCodeDidChangeNotification() uintptr {
+	return _symbol("SKStorefrontCountryCodeDidChangeNotification")
+}
+
+// SKStorefrontIdentifierDidChangeNotification returns the address of the symbol SKStorefrontIdentifierDidChangeNotification.
+func SKStorefrontIdentifierDidChangeNotification() uintptr {
+	return _symbol("SKStorefrontIdentifierDidChangeNotification")
+}
+
+// SKDownloadTimeRemainingUnknown returns the value of the constant SKDownloadTimeRemainingUnknown.
+func SKDownloadTimeRemainingUnknown() float64 {
+	addr := _symbol("SKDownloadTimeRemainingUnknown")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
 }

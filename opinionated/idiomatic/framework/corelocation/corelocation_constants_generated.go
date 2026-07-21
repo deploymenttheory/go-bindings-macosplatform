@@ -16,3 +16,6 @@ func KCLErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kC
 func KCLErrorUserInfoAlternateRegionKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCLErrorUserInfoAlternateRegionKey")))
 }
+
+// KCLHeadingFilterNone returns the address of the symbol kCLHeadingFilterNone.
+func KCLHeadingFilterNone() uintptr { return _symbol("kCLHeadingFilterNone") }

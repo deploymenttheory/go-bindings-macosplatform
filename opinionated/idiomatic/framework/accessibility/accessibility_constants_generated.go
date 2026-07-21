@@ -56,3 +56,23 @@ func AXPrefersHorizontalTextLayoutDidChangeNotification() obj.Object {
 func AXAnimatedImagesEnabledDidChangeNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AXAnimatedImagesEnabledDidChangeNotification")))
 }
+
+// AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification returns the address of the symbol AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification.
+func AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification() uintptr {
+	return _symbol("AXPrefersNonBlinkingTextInsertionIndicatorDidChangeNotification")
+}
+
+// AXPrefersActionSliderAlternativeDidChangeNotification returns the address of the symbol AXPrefersActionSliderAlternativeDidChangeNotification.
+func AXPrefersActionSliderAlternativeDidChangeNotification() uintptr {
+	return _symbol("AXPrefersActionSliderAlternativeDidChangeNotification")
+}
+
+// AXShowBordersEnabledStatusDidChangeNotification returns the address of the symbol AXShowBordersEnabledStatusDidChangeNotification.
+func AXShowBordersEnabledStatusDidChangeNotification() uintptr {
+	return _symbol("AXShowBordersEnabledStatusDidChangeNotification")
+}
+
+// AXReduceHighlightingEffectsEnabledDidChangeNotification returns the address of the symbol AXReduceHighlightingEffectsEnabledDidChangeNotification.
+func AXReduceHighlightingEffectsEnabledDidChangeNotification() uintptr {
+	return _symbol("AXReduceHighlightingEffectsEnabledDidChangeNotification")
+}

@@ -138,3 +138,38 @@ func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC() obj.O
 func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth")))
 }
+
+// ASAuthorizationProviderExtensionEncryptionAlgorithmECDHE_A256GCM returns the address of the symbol ASAuthorizationProviderExtensionEncryptionAlgorithmECDHE_A256GCM.
+func ASAuthorizationProviderExtensionEncryptionAlgorithmECDHE_A256GCM() uintptr {
+	return _symbol("ASAuthorizationProviderExtensionEncryptionAlgorithmECDHE_A256GCM")
+}
+
+// ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P256_SHA256_AES_GCM_256 returns the address of the symbol ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P256_SHA256_AES_GCM_256.
+func ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P256_SHA256_AES_GCM_256() uintptr {
+	return _symbol("ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P256_SHA256_AES_GCM_256")
+}
+
+// ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P384_SHA384_AES_GCM_256 returns the address of the symbol ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P384_SHA384_AES_GCM_256.
+func ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P384_SHA384_AES_GCM_256() uintptr {
+	return _symbol("ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_P384_SHA384_AES_GCM_256")
+}
+
+// ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_Curve25519_SHA256_ChachaPoly returns the address of the symbol ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_Curve25519_SHA256_ChachaPoly.
+func ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_Curve25519_SHA256_ChachaPoly() uintptr {
+	return _symbol("ASAuthorizationProviderExtensionEncryptionAlgorithmHPKE_Curve25519_SHA256_ChachaPoly")
+}
+
+// ASAuthorizationProviderExtensionSigningAlgorithmES256 returns the address of the symbol ASAuthorizationProviderExtensionSigningAlgorithmES256.
+func ASAuthorizationProviderExtensionSigningAlgorithmES256() uintptr {
+	return _symbol("ASAuthorizationProviderExtensionSigningAlgorithmES256")
+}
+
+// ASAuthorizationProviderExtensionSigningAlgorithmES384 returns the address of the symbol ASAuthorizationProviderExtensionSigningAlgorithmES384.
+func ASAuthorizationProviderExtensionSigningAlgorithmES384() uintptr {
+	return _symbol("ASAuthorizationProviderExtensionSigningAlgorithmES384")
+}
+
+// ASAuthorizationProviderExtensionSigningAlgorithmEd25519 returns the address of the symbol ASAuthorizationProviderExtensionSigningAlgorithmEd25519.
+func ASAuthorizationProviderExtensionSigningAlgorithmEd25519() uintptr {
+	return _symbol("ASAuthorizationProviderExtensionSigningAlgorithmEd25519")
+}

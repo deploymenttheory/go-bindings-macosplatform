@@ -48,6 +48,17 @@ func DsAddChildPIDToReference(inDirRef int, inValidChildPID int, inValidAPIRefer
 	return _fnDsAddChildPIDToReference(inDirRef, inValidChildPID, inValidAPIReferenceToGrantChild)
 }
 
+var _fnDsAllocAttributeValueEntry func(int, int, unsafe.Pointer, int) unsafe.Pointer
+
+// DsAllocAttributeValueEntry calls the DirectoryService framework function dsAllocAttributeValueEntry.
+func DsAllocAttributeValueEntry(inDirRef int, inAttrValueID int, inAttrValueData unsafe.Pointer, inAttrValueDataLen int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsAllocAttributeValueEntry == nil {
+		ebipurego.RegisterLibFunc(&_fnDsAllocAttributeValueEntry, _lib, "dsAllocAttributeValueEntry")
+	}
+	return _fnDsAllocAttributeValueEntry(inDirRef, inAttrValueID, inAttrValueData, inAttrValueDataLen)
+}
+
 var _fnDsAllocStringsFromList func(int, unsafe.Pointer) string
 
 // DsAllocStringsFromList calls the DirectoryService framework function dsAllocStringsFromList.
@@ -101,6 +112,17 @@ func DsAppendStringToListAlloc(inDirReferences int, inDataList unsafe.Pointer, i
 		ebipurego.RegisterLibFunc(&_fnDsAppendStringToListAlloc, _lib, "dsAppendStringToListAlloc")
 	}
 	return _fnDsAppendStringToListAlloc(inDirReferences, inDataList, inCString)
+}
+
+var _fnDsBuildFromPath func(int, string, string) unsafe.Pointer
+
+// DsBuildFromPath calls the DirectoryService framework function dsBuildFromPath.
+func DsBuildFromPath(inDirReference int, inPathCString string, inPathSeparatorCString string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsBuildFromPath == nil {
+		ebipurego.RegisterLibFunc(&_fnDsBuildFromPath, _lib, "dsBuildFromPath")
+	}
+	return _fnDsBuildFromPath(inDirReference, inPathCString, inPathSeparatorCString)
 }
 
 var _fnDsBuildListFromPathAlloc func(int, unsafe.Pointer, string, string) TDirStatus
@@ -215,6 +237,17 @@ func DsCreateRecordAndOpen(inDirNodeReference int, inRecordType unsafe.Pointer, 
 	return _ret, _out0
 }
 
+var _fnDsDataBufferAllocate func(int, int) unsafe.Pointer
+
+// DsDataBufferAllocate calls the DirectoryService framework function dsDataBufferAllocate.
+func DsDataBufferAllocate(inDirReference int, inBufferSize int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsDataBufferAllocate == nil {
+		ebipurego.RegisterLibFunc(&_fnDsDataBufferAllocate, _lib, "dsDataBufferAllocate")
+	}
+	return _fnDsDataBufferAllocate(inDirReference, inBufferSize)
+}
+
 var _fnDsDataBufferDeAllocate func(int, unsafe.Pointer) TDirStatus
 
 // DsDataBufferDeAllocate calls the DirectoryService framework function dsDataBufferDeAllocate.
@@ -224,6 +257,28 @@ func DsDataBufferDeAllocate(inDirReference int, inDataBufferPtr unsafe.Pointer) 
 		ebipurego.RegisterLibFunc(&_fnDsDataBufferDeAllocate, _lib, "dsDataBufferDeAllocate")
 	}
 	return _fnDsDataBufferDeAllocate(inDirReference, inDataBufferPtr)
+}
+
+var _fnDsDataListAllocate func(int) unsafe.Pointer
+
+// DsDataListAllocate calls the DirectoryService framework function dsDataListAllocate.
+func DsDataListAllocate(inDirReference int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsDataListAllocate == nil {
+		ebipurego.RegisterLibFunc(&_fnDsDataListAllocate, _lib, "dsDataListAllocate")
+	}
+	return _fnDsDataListAllocate(inDirReference)
+}
+
+var _fnDsDataListCopyList func(int, unsafe.Pointer) unsafe.Pointer
+
+// DsDataListCopyList calls the DirectoryService framework function dsDataListCopyList.
+func DsDataListCopyList(inDirReference int, inDataListSource unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsDataListCopyList == nil {
+		ebipurego.RegisterLibFunc(&_fnDsDataListCopyList, _lib, "dsDataListCopyList")
+	}
+	return _fnDsDataListCopyList(inDirReference, inDataListSource)
 }
 
 var _fnDsDataListDeAllocate func(int, unsafe.Pointer, int) TDirStatus
@@ -356,6 +411,28 @@ func DsDataListRemoveThisNode(inDataList unsafe.Pointer, inNodeIndex int, inDele
 		ebipurego.RegisterLibFunc(&_fnDsDataListRemoveThisNode, _lib, "dsDataListRemoveThisNode")
 	}
 	return _fnDsDataListRemoveThisNode(inDataList, inNodeIndex, inDeleteCount)
+}
+
+var _fnDsDataNodeAllocateBlock func(int, int, int, unsafe.Pointer) unsafe.Pointer
+
+// DsDataNodeAllocateBlock calls the DirectoryService framework function dsDataNodeAllocateBlock.
+func DsDataNodeAllocateBlock(inDirReference int, inDataNodeSize int, inDataNodeLength int, inDataNodeBuffer unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsDataNodeAllocateBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnDsDataNodeAllocateBlock, _lib, "dsDataNodeAllocateBlock")
+	}
+	return _fnDsDataNodeAllocateBlock(inDirReference, inDataNodeSize, inDataNodeLength, inDataNodeBuffer)
+}
+
+var _fnDsDataNodeAllocateString func(int, string) unsafe.Pointer
+
+// DsDataNodeAllocateString calls the DirectoryService framework function dsDataNodeAllocateString.
+func DsDataNodeAllocateString(inDirReference int, inCString string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDsDataNodeAllocateString == nil {
+		ebipurego.RegisterLibFunc(&_fnDsDataNodeAllocateString, _lib, "dsDataNodeAllocateString")
+	}
+	return _fnDsDataNodeAllocateString(inDirReference, inCString)
 }
 
 var _fnDsDataNodeDeAllocate func(int, unsafe.Pointer) TDirStatus

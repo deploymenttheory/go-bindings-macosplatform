@@ -905,6 +905,28 @@ func MinimumProcessorSpeed() int16 {
 	return _fnMinimumProcessorSpeed()
 }
 
+var _fnNewKCCallbackUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewKCCallbackUPP calls the OSServices framework function NewKCCallbackUPP.
+func NewKCCallbackUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewKCCallbackUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewKCCallbackUPP, _lib, "NewKCCallbackUPP")
+	}
+	return _fnNewKCCallbackUPP(userRoutine)
+}
+
+var _fnNewSleepQUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewSleepQUPP calls the OSServices framework function NewSleepQUPP.
+func NewSleepQUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewSleepQUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewSleepQUPP, _lib, "NewSleepQUPP")
+	}
+	return _fnNewSleepQUPP(userRoutine)
+}
+
 var _fnSleepQInstall func(unsafe.Pointer)
 
 // SleepQInstall calls the OSServices framework function SleepQInstall.

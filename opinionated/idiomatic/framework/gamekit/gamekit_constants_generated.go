@@ -5,6 +5,8 @@
 package gamekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -40,4 +42,40 @@ func GKVoiceChatServiceErrorDomain() obj.Object {
 // GKSessionErrorDomain returns the string constant GKSessionErrorDomain, for use as a dictionary key or argument.
 func GKSessionErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GKSessionErrorDomain")))
+}
+
+// GKTurnTimeoutDefault returns the value of the constant GKTurnTimeoutDefault.
+func GKTurnTimeoutDefault() float64 {
+	addr := _symbol("GKTurnTimeoutDefault")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// GKTurnTimeoutNone returns the value of the constant GKTurnTimeoutNone.
+func GKTurnTimeoutNone() float64 {
+	addr := _symbol("GKTurnTimeoutNone")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// GKExchangeTimeoutDefault returns the value of the constant GKExchangeTimeoutDefault.
+func GKExchangeTimeoutDefault() float64 {
+	addr := _symbol("GKExchangeTimeoutDefault")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// GKExchangeTimeoutNone returns the value of the constant GKExchangeTimeoutNone.
+func GKExchangeTimeoutNone() float64 {
+	addr := _symbol("GKExchangeTimeoutNone")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
 }

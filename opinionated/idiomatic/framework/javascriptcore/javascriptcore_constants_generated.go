@@ -38,3 +38,6 @@ func JSPropertyDescriptorGetKey() obj.Object {
 func JSPropertyDescriptorSetKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("JSPropertyDescriptorSetKey")))
 }
+
+// KJSClassDefinitionEmpty returns the address of the symbol kJSClassDefinitionEmpty.
+func KJSClassDefinitionEmpty() uintptr { return _symbol("kJSClassDefinitionEmpty") }

@@ -13,6 +13,28 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+var _fnDRAudioTrackCreate func(unsafe.Pointer) unsafe.Pointer
+
+// DRAudioTrackCreate calls the DiscRecording framework function DRAudioTrackCreate.
+func DRAudioTrackCreate(audioFile unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDRAudioTrackCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnDRAudioTrackCreate, _lib, "DRAudioTrackCreate")
+	}
+	return _fnDRAudioTrackCreate(audioFile)
+}
+
+var _fnDRAudioTrackCreateWithURL func(objc.ID) unsafe.Pointer
+
+// DRAudioTrackCreateWithURL calls the DiscRecording framework function DRAudioTrackCreateWithURL.
+func DRAudioTrackCreateWithURL(audioFileURL obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDRAudioTrackCreateWithURL == nil {
+		ebipurego.RegisterLibFunc(&_fnDRAudioTrackCreateWithURL, _lib, "DRAudioTrackCreateWithURL")
+	}
+	return _fnDRAudioTrackCreateWithURL(objref.IDOf(audioFileURL))
+}
+
 var _fnDRBurnAbort func(objc.ID)
 
 // DRBurnAbort calls the DiscRecording framework function DRBurnAbort.
@@ -745,6 +767,17 @@ func DRFileGetTypeID() int {
 	return _fnDRFileGetTypeID()
 }
 
+var _fnDRFilesystemTrackCreate func(objc.ID) unsafe.Pointer
+
+// DRFilesystemTrackCreate calls the DiscRecording framework function DRFilesystemTrackCreate.
+func DRFilesystemTrackCreate(rootFolder obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDRFilesystemTrackCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnDRFilesystemTrackCreate, _lib, "DRFilesystemTrackCreate")
+	}
+	return _fnDRFilesystemTrackCreate(objref.IDOf(rootFolder))
+}
+
 var _fnDRFilesystemTrackEstimateOverhead func(uint64, int, int) uint64
 
 // DRFilesystemTrackEstimateOverhead calls the DiscRecording framework function DRFilesystemTrackEstimateOverhead.
@@ -857,6 +890,28 @@ func DRFolderRemoveChild(parent obj.Object, child unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnDRFolderRemoveChild, _lib, "DRFolderRemoveChild")
 	}
 	_fnDRFolderRemoveChild(objref.IDOf(parent), child)
+}
+
+var _fnDRGetRefCon func(unsafe.Pointer) unsafe.Pointer
+
+// DRGetRefCon calls the DiscRecording framework function DRGetRefCon.
+func DRGetRefCon(ref unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDRGetRefCon == nil {
+		ebipurego.RegisterLibFunc(&_fnDRGetRefCon, _lib, "DRGetRefCon")
+	}
+	return _fnDRGetRefCon(ref)
+}
+
+var _fnDRGetVersion func() unsafe.Pointer
+
+// DRGetVersion calls the DiscRecording framework function DRGetVersion.
+func DRGetVersion() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDRGetVersion == nil {
+		ebipurego.RegisterLibFunc(&_fnDRGetVersion, _lib, "DRGetVersion")
+	}
+	return _fnDRGetVersion()
 }
 
 var _fnDRNotificationCenterAddObserver func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer)

@@ -189,6 +189,39 @@ func BNNSCopy(dest unsafe.Pointer, src unsafe.Pointer, filterParams unsafe.Point
 	return int(_fnBNNSCopy(dest, src, filterParams))
 }
 
+var _fnBNNSCreateNearestNeighbors func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSCreateNearestNeighbors calls the vecLib framework function BNNSCreateNearestNeighbors.
+func BNNSCreateNearestNeighbors(maxNSamples unsafe.Pointer, nFeatures unsafe.Pointer, nNeighbors unsafe.Pointer, dataType unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSCreateNearestNeighbors == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSCreateNearestNeighbors, _lib, "BNNSCreateNearestNeighbors")
+	}
+	return _fnBNNSCreateNearestNeighbors(maxNSamples, nFeatures, nNeighbors, dataType, filterParams)
+}
+
+var _fnBNNSCreateRandomGenerator func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSCreateRandomGenerator calls the vecLib framework function BNNSCreateRandomGenerator.
+func BNNSCreateRandomGenerator(method unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSCreateRandomGenerator == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSCreateRandomGenerator, _lib, "BNNSCreateRandomGenerator")
+	}
+	return _fnBNNSCreateRandomGenerator(method, filterParams)
+}
+
+var _fnBNNSCreateRandomGeneratorWithSeed func(unsafe.Pointer, uint64, unsafe.Pointer) unsafe.Pointer
+
+// BNNSCreateRandomGeneratorWithSeed calls the vecLib framework function BNNSCreateRandomGeneratorWithSeed.
+func BNNSCreateRandomGeneratorWithSeed(method unsafe.Pointer, seed uint64, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSCreateRandomGeneratorWithSeed == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSCreateRandomGeneratorWithSeed, _lib, "BNNSCreateRandomGeneratorWithSeed")
+	}
+	return _fnBNNSCreateRandomGeneratorWithSeed(method, seed, filterParams)
+}
+
 var _fnBNNSCropResize func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // BNNSCropResize calls the vecLib framework function BNNSCropResize.
@@ -398,6 +431,259 @@ func BNNSFilterApplyTwoInputBatch(filter unsafe.Pointer, batchSize int, inA unsa
 	return int(_fnBNNSFilterApplyTwoInputBatch(filter, batchSize, inA, inAStride, inB, inBStride, out, outStride))
 }
 
+var _fnBNNSFilterCreateConvolutionLayer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateConvolutionLayer calls the vecLib framework function BNNSFilterCreateConvolutionLayer.
+func BNNSFilterCreateConvolutionLayer(inDesc unsafe.Pointer, outDesc unsafe.Pointer, layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateConvolutionLayer == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateConvolutionLayer, _lib, "BNNSFilterCreateConvolutionLayer")
+	}
+	return _fnBNNSFilterCreateConvolutionLayer(inDesc, outDesc, layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateFullyConnectedLayer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateFullyConnectedLayer calls the vecLib framework function BNNSFilterCreateFullyConnectedLayer.
+func BNNSFilterCreateFullyConnectedLayer(inDesc unsafe.Pointer, outDesc unsafe.Pointer, layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateFullyConnectedLayer == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateFullyConnectedLayer, _lib, "BNNSFilterCreateFullyConnectedLayer")
+	}
+	return _fnBNNSFilterCreateFullyConnectedLayer(inDesc, outDesc, layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateFusedLayer func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateFusedLayer calls the vecLib framework function BNNSFilterCreateFusedLayer.
+func BNNSFilterCreateFusedLayer(numberOfFusedFilters int, filterType unsafe.Pointer, layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateFusedLayer == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateFusedLayer, _lib, "BNNSFilterCreateFusedLayer")
+	}
+	return _fnBNNSFilterCreateFusedLayer(numberOfFusedFilters, filterType, layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerActivation func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerActivation calls the vecLib framework function BNNSFilterCreateLayerActivation.
+func BNNSFilterCreateLayerActivation(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerActivation == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerActivation, _lib, "BNNSFilterCreateLayerActivation")
+	}
+	return _fnBNNSFilterCreateLayerActivation(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerArithmetic func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerArithmetic calls the vecLib framework function BNNSFilterCreateLayerArithmetic.
+func BNNSFilterCreateLayerArithmetic(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerArithmetic == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerArithmetic, _lib, "BNNSFilterCreateLayerArithmetic")
+	}
+	return _fnBNNSFilterCreateLayerArithmetic(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerBroadcastMatMul func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerBroadcastMatMul calls the vecLib framework function BNNSFilterCreateLayerBroadcastMatMul.
+func BNNSFilterCreateLayerBroadcastMatMul(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerBroadcastMatMul == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerBroadcastMatMul, _lib, "BNNSFilterCreateLayerBroadcastMatMul")
+	}
+	return _fnBNNSFilterCreateLayerBroadcastMatMul(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerConvolution func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerConvolution calls the vecLib framework function BNNSFilterCreateLayerConvolution.
+func BNNSFilterCreateLayerConvolution(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerConvolution == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerConvolution, _lib, "BNNSFilterCreateLayerConvolution")
+	}
+	return _fnBNNSFilterCreateLayerConvolution(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerDropout func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerDropout calls the vecLib framework function BNNSFilterCreateLayerDropout.
+func BNNSFilterCreateLayerDropout(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerDropout == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerDropout, _lib, "BNNSFilterCreateLayerDropout")
+	}
+	return _fnBNNSFilterCreateLayerDropout(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerEmbedding func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerEmbedding calls the vecLib framework function BNNSFilterCreateLayerEmbedding.
+func BNNSFilterCreateLayerEmbedding(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerEmbedding == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerEmbedding, _lib, "BNNSFilterCreateLayerEmbedding")
+	}
+	return _fnBNNSFilterCreateLayerEmbedding(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerFullyConnected func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerFullyConnected calls the vecLib framework function BNNSFilterCreateLayerFullyConnected.
+func BNNSFilterCreateLayerFullyConnected(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerFullyConnected == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerFullyConnected, _lib, "BNNSFilterCreateLayerFullyConnected")
+	}
+	return _fnBNNSFilterCreateLayerFullyConnected(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerGram func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerGram calls the vecLib framework function BNNSFilterCreateLayerGram.
+func BNNSFilterCreateLayerGram(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerGram == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerGram, _lib, "BNNSFilterCreateLayerGram")
+	}
+	return _fnBNNSFilterCreateLayerGram(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerLoss func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerLoss calls the vecLib framework function BNNSFilterCreateLayerLoss.
+func BNNSFilterCreateLayerLoss(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerLoss == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerLoss, _lib, "BNNSFilterCreateLayerLoss")
+	}
+	return _fnBNNSFilterCreateLayerLoss(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerMultiheadAttention func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerMultiheadAttention calls the vecLib framework function BNNSFilterCreateLayerMultiheadAttention.
+func BNNSFilterCreateLayerMultiheadAttention(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerMultiheadAttention == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerMultiheadAttention, _lib, "BNNSFilterCreateLayerMultiheadAttention")
+	}
+	return _fnBNNSFilterCreateLayerMultiheadAttention(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerNormalization func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerNormalization calls the vecLib framework function BNNSFilterCreateLayerNormalization.
+func BNNSFilterCreateLayerNormalization(normType unsafe.Pointer, layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerNormalization == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerNormalization, _lib, "BNNSFilterCreateLayerNormalization")
+	}
+	return _fnBNNSFilterCreateLayerNormalization(normType, layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerPadding func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerPadding calls the vecLib framework function BNNSFilterCreateLayerPadding.
+func BNNSFilterCreateLayerPadding(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerPadding == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerPadding, _lib, "BNNSFilterCreateLayerPadding")
+	}
+	return _fnBNNSFilterCreateLayerPadding(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerPermute func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerPermute calls the vecLib framework function BNNSFilterCreateLayerPermute.
+func BNNSFilterCreateLayerPermute(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerPermute == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerPermute, _lib, "BNNSFilterCreateLayerPermute")
+	}
+	return _fnBNNSFilterCreateLayerPermute(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerPooling func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerPooling calls the vecLib framework function BNNSFilterCreateLayerPooling.
+func BNNSFilterCreateLayerPooling(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerPooling == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerPooling, _lib, "BNNSFilterCreateLayerPooling")
+	}
+	return _fnBNNSFilterCreateLayerPooling(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerReduction func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerReduction calls the vecLib framework function BNNSFilterCreateLayerReduction.
+func BNNSFilterCreateLayerReduction(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerReduction == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerReduction, _lib, "BNNSFilterCreateLayerReduction")
+	}
+	return _fnBNNSFilterCreateLayerReduction(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerResize func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerResize calls the vecLib framework function BNNSFilterCreateLayerResize.
+func BNNSFilterCreateLayerResize(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerResize == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerResize, _lib, "BNNSFilterCreateLayerResize")
+	}
+	return _fnBNNSFilterCreateLayerResize(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerTensorContraction func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerTensorContraction calls the vecLib framework function BNNSFilterCreateLayerTensorContraction.
+func BNNSFilterCreateLayerTensorContraction(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerTensorContraction == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerTensorContraction, _lib, "BNNSFilterCreateLayerTensorContraction")
+	}
+	return _fnBNNSFilterCreateLayerTensorContraction(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateLayerTransposedConvolution func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateLayerTransposedConvolution calls the vecLib framework function BNNSFilterCreateLayerTransposedConvolution.
+func BNNSFilterCreateLayerTransposedConvolution(layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateLayerTransposedConvolution == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateLayerTransposedConvolution, _lib, "BNNSFilterCreateLayerTransposedConvolution")
+	}
+	return _fnBNNSFilterCreateLayerTransposedConvolution(layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreatePoolingLayer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreatePoolingLayer calls the vecLib framework function BNNSFilterCreatePoolingLayer.
+func BNNSFilterCreatePoolingLayer(inDesc unsafe.Pointer, outDesc unsafe.Pointer, layerParams unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreatePoolingLayer == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreatePoolingLayer, _lib, "BNNSFilterCreatePoolingLayer")
+	}
+	return _fnBNNSFilterCreatePoolingLayer(inDesc, outDesc, layerParams, filterParams)
+}
+
+var _fnBNNSFilterCreateVectorActivationLayer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSFilterCreateVectorActivationLayer calls the vecLib framework function BNNSFilterCreateVectorActivationLayer.
+func BNNSFilterCreateVectorActivationLayer(inDesc unsafe.Pointer, outDesc unsafe.Pointer, activation unsafe.Pointer, filterParams unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSFilterCreateVectorActivationLayer == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSFilterCreateVectorActivationLayer, _lib, "BNNSFilterCreateVectorActivationLayer")
+	}
+	return _fnBNNSFilterCreateVectorActivationLayer(inDesc, outDesc, activation, filterParams)
+}
+
 var _fnBNNSFilterDestroy func(unsafe.Pointer)
 
 // BNNSFilterDestroy calls the vecLib framework function BNNSFilterDestroy.
@@ -480,6 +766,28 @@ func BNNSGatherND(input unsafe.Pointer, indices unsafe.Pointer, output unsafe.Po
 	return int(_fnBNNSGatherND(input, indices, output, filterParams))
 }
 
+var _fnBNNSGetPointer func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// BNNSGetPointer calls the vecLib framework function BNNSGetPointer.
+func BNNSGetPointer(filter unsafe.Pointer, target unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSGetPointer == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSGetPointer, _lib, "BNNSGetPointer")
+	}
+	return _fnBNNSGetPointer(filter, target)
+}
+
+var _fnBNNSGraphCompileFromFile func(string, string, unsafe.Pointer) unsafe.Pointer
+
+// BNNSGraphCompileFromFile calls the vecLib framework function BNNSGraphCompileFromFile.
+func BNNSGraphCompileFromFile(filename string, function string, options unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSGraphCompileFromFile == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphCompileFromFile, _lib, "BNNSGraphCompileFromFile")
+	}
+	return _fnBNNSGraphCompileFromFile(filename, function, options)
+}
+
 var _fnBNNSGraphCompileOptionsDestroy func(unsafe.Pointer)
 
 // BNNSGraphCompileOptionsDestroy calls the vecLib framework function BNNSGraphCompileOptionsDestroy.
@@ -500,6 +808,17 @@ func BNNSGraphCompileOptionsGetGenerateDebugInfo(options unsafe.Pointer) bool {
 		ebipurego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsGetGenerateDebugInfo, _lib, "BNNSGraphCompileOptionsGetGenerateDebugInfo")
 	}
 	return _fnBNNSGraphCompileOptionsGetGenerateDebugInfo(options)
+}
+
+var _fnBNNSGraphCompileOptionsGetOptimizationPreference func(unsafe.Pointer) unsafe.Pointer
+
+// BNNSGraphCompileOptionsGetOptimizationPreference calls the vecLib framework function BNNSGraphCompileOptionsGetOptimizationPreference.
+func BNNSGraphCompileOptionsGetOptimizationPreference(options unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSGraphCompileOptionsGetOptimizationPreference == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsGetOptimizationPreference, _lib, "BNNSGraphCompileOptionsGetOptimizationPreference")
+	}
+	return _fnBNNSGraphCompileOptionsGetOptimizationPreference(options)
 }
 
 var _fnBNNSGraphCompileOptionsGetOutputFD func(unsafe.Pointer) int32
@@ -533,6 +852,17 @@ func BNNSGraphCompileOptionsGetTargetSingleThread(options unsafe.Pointer) bool {
 		ebipurego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsGetTargetSingleThread, _lib, "BNNSGraphCompileOptionsGetTargetSingleThread")
 	}
 	return _fnBNNSGraphCompileOptionsGetTargetSingleThread(options)
+}
+
+var _fnBNNSGraphCompileOptionsMakeDefault func() unsafe.Pointer
+
+// BNNSGraphCompileOptionsMakeDefault calls the vecLib framework function BNNSGraphCompileOptionsMakeDefault.
+func BNNSGraphCompileOptionsMakeDefault() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSGraphCompileOptionsMakeDefault == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphCompileOptionsMakeDefault, _lib, "BNNSGraphCompileOptionsMakeDefault")
+	}
+	return _fnBNNSGraphCompileOptionsMakeDefault()
 }
 
 var _fnBNNSGraphCompileOptionsSetGenerateDebugInfo func(unsafe.Pointer, bool)
@@ -665,6 +995,28 @@ func BNNSGraphContextGetWorkspaceSize(context_ unsafe.Pointer, function string) 
 		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextGetWorkspaceSize, _lib, "BNNSGraphContextGetWorkspaceSize")
 	}
 	return _fnBNNSGraphContextGetWorkspaceSize(context_, function)
+}
+
+var _fnBNNSGraphContextMake func(unsafe.Pointer) unsafe.Pointer
+
+// BNNSGraphContextMake calls the vecLib framework function BNNSGraphContextMake.
+func BNNSGraphContextMake(graph unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSGraphContextMake == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextMake, _lib, "BNNSGraphContextMake")
+	}
+	return _fnBNNSGraphContextMake(graph)
+}
+
+var _fnBNNSGraphContextMakeStreaming func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+
+// BNNSGraphContextMakeStreaming calls the vecLib framework function BNNSGraphContextMakeStreaming.
+func BNNSGraphContextMakeStreaming(graph unsafe.Pointer, function unsafe.Pointer, initialStatesCount int, initialStates unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBNNSGraphContextMakeStreaming == nil {
+		ebipurego.RegisterLibFunc(&_fnBNNSGraphContextMakeStreaming, _lib, "BNNSGraphContextMakeStreaming")
+	}
+	return _fnBNNSGraphContextMakeStreaming(graph, function, initialStatesCount, initialStates)
 }
 
 var _fnBNNSGraphContextSetArgumentType func(unsafe.Pointer, unsafe.Pointer) int32
@@ -1259,6 +1611,98 @@ func SparseCleanup(opaque unsafe.Pointer) {
 	_fnSparseCleanup(opaque)
 }
 
+var _fnSparseConjugateGradient func() unsafe.Pointer
+
+// SparseConjugateGradient calls the vecLib framework function SparseConjugateGradient.
+func SparseConjugateGradient() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseConjugateGradient == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseConjugateGradient, _lib, "SparseConjugateGradient")
+	}
+	return _fnSparseConjugateGradient()
+}
+
+var _fnSparseConvertFromCoordinate func(int, int, int, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseConvertFromCoordinate calls the vecLib framework function SparseConvertFromCoordinate.
+func SparseConvertFromCoordinate(rowCount int, columnCount int, blockCount int, blockSize uint8, attributes unsafe.Pointer) (result unsafe.Pointer, row int32, column int32, data float64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseConvertFromCoordinate == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseConvertFromCoordinate, _lib, "SparseConvertFromCoordinate")
+	}
+	var _out0 int32
+	var _out1 int32
+	var _out2 float64
+	_ret := _fnSparseConvertFromCoordinate(rowCount, columnCount, blockCount, blockSize, attributes, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
+}
+
+var _fnSparseConvertFromOpaque func(objc.ID) unsafe.Pointer
+
+// SparseConvertFromOpaque calls the vecLib framework function SparseConvertFromOpaque.
+func SparseConvertFromOpaque(matrix obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseConvertFromOpaque == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseConvertFromOpaque, _lib, "SparseConvertFromOpaque")
+	}
+	return _fnSparseConvertFromOpaque(objref.IDOf(matrix))
+}
+
+var _fnSparseCreatePreconditioner func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseCreatePreconditioner calls the vecLib framework function SparseCreatePreconditioner.
+func SparseCreatePreconditioner(type_ unsafe.Pointer, a unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseCreatePreconditioner == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseCreatePreconditioner, _lib, "SparseCreatePreconditioner")
+	}
+	return _fnSparseCreatePreconditioner(type_, a)
+}
+
+var _fnSparseCreateSubfactor func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseCreateSubfactor calls the vecLib framework function SparseCreateSubfactor.
+func SparseCreateSubfactor(subfactor unsafe.Pointer, factor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseCreateSubfactor == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseCreateSubfactor, _lib, "SparseCreateSubfactor")
+	}
+	return _fnSparseCreateSubfactor(subfactor, factor)
+}
+
+var _fnSparseFactor func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactor calls the vecLib framework function SparseFactor.
+func SparseFactor(type_ unsafe.Pointer, matrix unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactor == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactor, _lib, "SparseFactor")
+	}
+	return _fnSparseFactor(type_, matrix)
+}
+
+var _fnSparseGMRES func() unsafe.Pointer
+
+// SparseGMRES calls the vecLib framework function SparseGMRES.
+func SparseGMRES() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseGMRES == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseGMRES, _lib, "SparseGMRES")
+	}
+	return _fnSparseGMRES()
+}
+
+var _fnSparseGetConjugateTranspose func(unsafe.Pointer) unsafe.Pointer
+
+// SparseGetConjugateTranspose calls the vecLib framework function SparseGetConjugateTranspose.
+func SparseGetConjugateTranspose(matrix unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseGetConjugateTranspose == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseGetConjugateTranspose, _lib, "SparseGetConjugateTranspose")
+	}
+	return _fnSparseGetConjugateTranspose(matrix)
+}
+
 var _fnSparseGetInertia func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // SparseGetInertia calls the vecLib framework function SparseGetInertia.
@@ -1318,6 +1762,17 @@ func SparseGetStateSize_Float(method unsafe.Pointer, preconditioner bool, m int,
 	return _fnSparseGetStateSize_Float(method, preconditioner, m, n, nrhs)
 }
 
+var _fnSparseGetTranspose func(unsafe.Pointer) unsafe.Pointer
+
+// SparseGetTranspose calls the vecLib framework function SparseGetTranspose.
+func SparseGetTranspose(matrix unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseGetTranspose == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseGetTranspose, _lib, "SparseGetTranspose")
+	}
+	return _fnSparseGetTranspose(matrix)
+}
+
 var _fnSparseIterate func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseIterate calls the vecLib framework function SparseIterate.
@@ -1329,6 +1784,17 @@ func SparseIterate(method unsafe.Pointer, iteration int, state unsafe.Pointer, a
 	var _out0 bool
 	_fnSparseIterate(method, iteration, unsafe.Pointer(&_out0), state, applyOperator, b, r, x, preconditioner)
 	return _out0
+}
+
+var _fnSparseLSMR func() unsafe.Pointer
+
+// SparseLSMR calls the vecLib framework function SparseLSMR.
+func SparseLSMR() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseLSMR == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseLSMR, _lib, "SparseLSMR")
+	}
+	return _fnSparseLSMR()
 }
 
 var _fnSparseMultiply func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -1364,6 +1830,17 @@ func SparseRefactor(matrix unsafe.Pointer, factorization unsafe.Pointer) {
 	_fnSparseRefactor(matrix, factorization)
 }
 
+var _fnSparseRetain func(unsafe.Pointer) unsafe.Pointer
+
+// SparseRetain calls the vecLib framework function SparseRetain.
+func SparseRetain(symbolicFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseRetain, _lib, "SparseRetain")
+	}
+	return _fnSparseRetain(symbolicFactor)
+}
+
 var _fnSparseSolve func(unsafe.Pointer, unsafe.Pointer)
 
 // SparseSolve calls the vecLib framework function SparseSolve.
@@ -1386,6 +1863,50 @@ func SparseUpdateFactor(updateAlgorithm unsafe.Pointer, factorization unsafe.Poi
 	var _out0 int32
 	_fnSparseUpdateFactor(updateAlgorithm, factorization, updateCount, unsafe.Pointer(&_out0), update)
 	return _out0
+}
+
+var _fnDenseMatrixFromVectorComplexDouble func(unsafe.Pointer) unsafe.Pointer
+
+// DenseMatrixFromVectorComplexDouble calls the vecLib framework function _DenseMatrixFromVector_Complex_Double.
+func DenseMatrixFromVectorComplexDouble(x unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDenseMatrixFromVectorComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnDenseMatrixFromVectorComplexDouble, _lib, "_DenseMatrixFromVector_Complex_Double")
+	}
+	return _fnDenseMatrixFromVectorComplexDouble(x)
+}
+
+var _fnDenseMatrixFromVectorComplexFloat func(unsafe.Pointer) unsafe.Pointer
+
+// DenseMatrixFromVectorComplexFloat calls the vecLib framework function _DenseMatrixFromVector_Complex_Float.
+func DenseMatrixFromVectorComplexFloat(x unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDenseMatrixFromVectorComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnDenseMatrixFromVectorComplexFloat, _lib, "_DenseMatrixFromVector_Complex_Float")
+	}
+	return _fnDenseMatrixFromVectorComplexFloat(x)
+}
+
+var _fnDenseMatrixFromVectorDouble func(unsafe.Pointer) unsafe.Pointer
+
+// DenseMatrixFromVectorDouble calls the vecLib framework function _DenseMatrixFromVector_Double.
+func DenseMatrixFromVectorDouble(x unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDenseMatrixFromVectorDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnDenseMatrixFromVectorDouble, _lib, "_DenseMatrixFromVector_Double")
+	}
+	return _fnDenseMatrixFromVectorDouble(x)
+}
+
+var _fnDenseMatrixFromVectorFloat func(unsafe.Pointer) unsafe.Pointer
+
+// DenseMatrixFromVectorFloat calls the vecLib framework function _DenseMatrixFromVector_Float.
+func DenseMatrixFromVectorFloat(x unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDenseMatrixFromVectorFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnDenseMatrixFromVectorFloat, _lib, "_DenseMatrixFromVector_Float")
+	}
+	return _fnDenseMatrixFromVectorFloat(x)
 }
 
 var _fnSparseCGIterateComplexDouble func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -1438,6 +1959,200 @@ func SparseCGIterateFloat(options unsafe.Pointer, iteration int, state string, x
 	var _out0 bool
 	_fnSparseCGIterateFloat(options, iteration, state, unsafe.Pointer(&_out0), x, b, r, preconditioner, applyOperator)
 	return _out0
+}
+
+var _fnSparseCGSolveComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseCGSolveComplexDouble calls the vecLib framework function _SparseCGSolve_Complex_Double.
+func SparseCGSolveComplexDouble(options unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, applyOperator unsafe.Pointer, preconditioner unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseCGSolveComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseCGSolveComplexDouble, _lib, "_SparseCGSolve_Complex_Double")
+	}
+	return _fnSparseCGSolveComplexDouble(options, x, b, applyOperator, preconditioner)
+}
+
+var _fnSparseCGSolveComplexFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseCGSolveComplexFloat calls the vecLib framework function _SparseCGSolve_Complex_Float.
+func SparseCGSolveComplexFloat(options unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, applyOperator unsafe.Pointer, preconditioner unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseCGSolveComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseCGSolveComplexFloat, _lib, "_SparseCGSolve_Complex_Float")
+	}
+	return _fnSparseCGSolveComplexFloat(options, x, b, applyOperator, preconditioner)
+}
+
+var _fnSparseCGSolveDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseCGSolveDouble calls the vecLib framework function _SparseCGSolve_Double.
+func SparseCGSolveDouble(options unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, applyOperator unsafe.Pointer, preconditioner unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseCGSolveDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseCGSolveDouble, _lib, "_SparseCGSolve_Double")
+	}
+	return _fnSparseCGSolveDouble(options, x, b, applyOperator, preconditioner)
+}
+
+var _fnSparseCGSolveFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseCGSolveFloat calls the vecLib framework function _SparseCGSolve_Float.
+func SparseCGSolveFloat(options unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, applyOperator unsafe.Pointer, preconditioner unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseCGSolveFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseCGSolveFloat, _lib, "_SparseCGSolve_Float")
+	}
+	return _fnSparseCGSolveFloat(options, x, b, applyOperator, preconditioner)
+}
+
+var _fnSparseConvertFromCoordinateComplexDouble func(int, int, int, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) unsafe.Pointer
+
+// SparseConvertFromCoordinateComplexDouble calls the vecLib framework function _SparseConvertFromCoordinate_Complex_Double.
+func SparseConvertFromCoordinateComplexDouble(m int, n int, nBlock int, blockSize uint8, attributes unsafe.Pointer, val unsafe.Pointer, storage string) (result unsafe.Pointer, row int32, col int32, workspace int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseConvertFromCoordinateComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseConvertFromCoordinateComplexDouble, _lib, "_SparseConvertFromCoordinate_Complex_Double")
+	}
+	var _out0 int32
+	var _out1 int32
+	var _out2 int32
+	_ret := _fnSparseConvertFromCoordinateComplexDouble(m, n, nBlock, blockSize, attributes, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), val, storage, unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
+}
+
+var _fnSparseConvertFromCoordinateComplexFloat func(int, int, int, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) unsafe.Pointer
+
+// SparseConvertFromCoordinateComplexFloat calls the vecLib framework function _SparseConvertFromCoordinate_Complex_Float.
+func SparseConvertFromCoordinateComplexFloat(m int, n int, nBlock int, blockSize uint8, attributes unsafe.Pointer, val unsafe.Pointer, storage string) (result unsafe.Pointer, row int32, col int32, workspace int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseConvertFromCoordinateComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseConvertFromCoordinateComplexFloat, _lib, "_SparseConvertFromCoordinate_Complex_Float")
+	}
+	var _out0 int32
+	var _out1 int32
+	var _out2 int32
+	_ret := _fnSparseConvertFromCoordinateComplexFloat(m, n, nBlock, blockSize, attributes, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), val, storage, unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
+}
+
+var _fnSparseConvertFromCoordinateDouble func(int, int, int, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) unsafe.Pointer
+
+// SparseConvertFromCoordinateDouble calls the vecLib framework function _SparseConvertFromCoordinate_Double.
+func SparseConvertFromCoordinateDouble(m int, n int, nBlock int, blockSize uint8, attributes unsafe.Pointer, storage string) (result unsafe.Pointer, row int32, col int32, val float64, workspace int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseConvertFromCoordinateDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseConvertFromCoordinateDouble, _lib, "_SparseConvertFromCoordinate_Double")
+	}
+	var _out0 int32
+	var _out1 int32
+	var _out2 float64
+	var _out3 int32
+	_ret := _fnSparseConvertFromCoordinateDouble(m, n, nBlock, blockSize, attributes, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), storage, unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
+}
+
+var _fnSparseConvertFromCoordinateFloat func(int, int, int, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) unsafe.Pointer
+
+// SparseConvertFromCoordinateFloat calls the vecLib framework function _SparseConvertFromCoordinate_Float.
+func SparseConvertFromCoordinateFloat(m int, n int, nBlock int, blockSize uint8, attributes unsafe.Pointer, storage string) (result unsafe.Pointer, row int32, col int32, val float32, workspace int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseConvertFromCoordinateFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseConvertFromCoordinateFloat, _lib, "_SparseConvertFromCoordinate_Float")
+	}
+	var _out0 int32
+	var _out1 int32
+	var _out2 float32
+	var _out3 int32
+	_ret := _fnSparseConvertFromCoordinateFloat(m, n, nBlock, blockSize, attributes, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), storage, unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
+}
+
+var _fnSparseConvertFromOpaqueComplexDouble func(objc.ID) unsafe.Pointer
+
+// SparseConvertFromOpaqueComplexDouble calls the vecLib framework function _SparseConvertFromOpaque_Complex_Double.
+func SparseConvertFromOpaqueComplexDouble(matrix obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseConvertFromOpaqueComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseConvertFromOpaqueComplexDouble, _lib, "_SparseConvertFromOpaque_Complex_Double")
+	}
+	return _fnSparseConvertFromOpaqueComplexDouble(objref.IDOf(matrix))
+}
+
+var _fnSparseConvertFromOpaqueComplexFloat func(objc.ID) unsafe.Pointer
+
+// SparseConvertFromOpaqueComplexFloat calls the vecLib framework function _SparseConvertFromOpaque_Complex_Float.
+func SparseConvertFromOpaqueComplexFloat(matrix obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseConvertFromOpaqueComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseConvertFromOpaqueComplexFloat, _lib, "_SparseConvertFromOpaque_Complex_Float")
+	}
+	return _fnSparseConvertFromOpaqueComplexFloat(objref.IDOf(matrix))
+}
+
+var _fnSparseConvertFromOpaqueDouble func(objc.ID) unsafe.Pointer
+
+// SparseConvertFromOpaqueDouble calls the vecLib framework function _SparseConvertFromOpaque_Double.
+func SparseConvertFromOpaqueDouble(matrix obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseConvertFromOpaqueDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseConvertFromOpaqueDouble, _lib, "_SparseConvertFromOpaque_Double")
+	}
+	return _fnSparseConvertFromOpaqueDouble(objref.IDOf(matrix))
+}
+
+var _fnSparseConvertFromOpaqueFloat func(objc.ID) unsafe.Pointer
+
+// SparseConvertFromOpaqueFloat calls the vecLib framework function _SparseConvertFromOpaque_Float.
+func SparseConvertFromOpaqueFloat(matrix obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseConvertFromOpaqueFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseConvertFromOpaqueFloat, _lib, "_SparseConvertFromOpaque_Float")
+	}
+	return _fnSparseConvertFromOpaqueFloat(objref.IDOf(matrix))
+}
+
+var _fnSparseCreatePreconditionerComplexDouble func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseCreatePreconditionerComplexDouble calls the vecLib framework function _SparseCreatePreconditioner_Complex_Double.
+func SparseCreatePreconditionerComplexDouble(type_ unsafe.Pointer, a unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseCreatePreconditionerComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseCreatePreconditionerComplexDouble, _lib, "_SparseCreatePreconditioner_Complex_Double")
+	}
+	return _fnSparseCreatePreconditionerComplexDouble(type_, a)
+}
+
+var _fnSparseCreatePreconditionerComplexFloat func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseCreatePreconditionerComplexFloat calls the vecLib framework function _SparseCreatePreconditioner_Complex_Float.
+func SparseCreatePreconditionerComplexFloat(type_ unsafe.Pointer, a unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseCreatePreconditionerComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseCreatePreconditionerComplexFloat, _lib, "_SparseCreatePreconditioner_Complex_Float")
+	}
+	return _fnSparseCreatePreconditionerComplexFloat(type_, a)
+}
+
+var _fnSparseCreatePreconditionerDouble func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseCreatePreconditionerDouble calls the vecLib framework function _SparseCreatePreconditioner_Double.
+func SparseCreatePreconditionerDouble(type_ unsafe.Pointer, a unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseCreatePreconditionerDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseCreatePreconditionerDouble, _lib, "_SparseCreatePreconditioner_Double")
+	}
+	return _fnSparseCreatePreconditionerDouble(type_, a)
+}
+
+var _fnSparseCreatePreconditionerFloat func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseCreatePreconditionerFloat calls the vecLib framework function _SparseCreatePreconditioner_Float.
+func SparseCreatePreconditionerFloat(type_ unsafe.Pointer, a unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseCreatePreconditionerFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseCreatePreconditionerFloat, _lib, "_SparseCreatePreconditioner_Float")
+	}
+	return _fnSparseCreatePreconditionerFloat(type_, a)
 }
 
 var _fnSparseDestroyOpaqueNumericComplexDouble func(unsafe.Pointer)
@@ -1495,6 +2210,237 @@ func SparseDestroyOpaqueSymbolic(toFree unsafe.Pointer) {
 	_fnSparseDestroyOpaqueSymbolic(toFree)
 }
 
+var _fnSparseFactorHermitianComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorHermitianComplexDouble calls the vecLib framework function _SparseFactorHermitian_Complex_Double.
+func SparseFactorHermitianComplexDouble(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorHermitianComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorHermitianComplexDouble, _lib, "_SparseFactorHermitian_Complex_Double")
+	}
+	return _fnSparseFactorHermitianComplexDouble(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFactorHermitianComplexFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorHermitianComplexFloat calls the vecLib framework function _SparseFactorHermitian_Complex_Float.
+func SparseFactorHermitianComplexFloat(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorHermitianComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorHermitianComplexFloat, _lib, "_SparseFactorHermitian_Complex_Float")
+	}
+	return _fnSparseFactorHermitianComplexFloat(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFactorLUComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorLUComplexDouble calls the vecLib framework function _SparseFactorLU_Complex_Double.
+func SparseFactorLUComplexDouble(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorLUComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorLUComplexDouble, _lib, "_SparseFactorLU_Complex_Double")
+	}
+	return _fnSparseFactorLUComplexDouble(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFactorLUComplexFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorLUComplexFloat calls the vecLib framework function _SparseFactorLU_Complex_Float.
+func SparseFactorLUComplexFloat(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorLUComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorLUComplexFloat, _lib, "_SparseFactorLU_Complex_Float")
+	}
+	return _fnSparseFactorLUComplexFloat(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFactorLUDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorLUDouble calls the vecLib framework function _SparseFactorLU_Double.
+func SparseFactorLUDouble(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorLUDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorLUDouble, _lib, "_SparseFactorLU_Double")
+	}
+	return _fnSparseFactorLUDouble(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFactorLUFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorLUFloat calls the vecLib framework function _SparseFactorLU_Float.
+func SparseFactorLUFloat(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorLUFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorLUFloat, _lib, "_SparseFactorLU_Float")
+	}
+	return _fnSparseFactorLUFloat(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFactorQRComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorQRComplexDouble calls the vecLib framework function _SparseFactorQR_Complex_Double.
+func SparseFactorQRComplexDouble(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorQRComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorQRComplexDouble, _lib, "_SparseFactorQR_Complex_Double")
+	}
+	return _fnSparseFactorQRComplexDouble(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFactorQRComplexFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorQRComplexFloat calls the vecLib framework function _SparseFactorQR_Complex_Float.
+func SparseFactorQRComplexFloat(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorQRComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorQRComplexFloat, _lib, "_SparseFactorQR_Complex_Float")
+	}
+	return _fnSparseFactorQRComplexFloat(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFactorQRDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorQRDouble calls the vecLib framework function _SparseFactorQR_Double.
+func SparseFactorQRDouble(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorQRDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorQRDouble, _lib, "_SparseFactorQR_Double")
+	}
+	return _fnSparseFactorQRDouble(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFactorQRFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorQRFloat calls the vecLib framework function _SparseFactorQR_Float.
+func SparseFactorQRFloat(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorQRFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorQRFloat, _lib, "_SparseFactorQR_Float")
+	}
+	return _fnSparseFactorQRFloat(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFactorSymmetricComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorSymmetricComplexDouble calls the vecLib framework function _SparseFactorSymmetric_Complex_Double.
+func SparseFactorSymmetricComplexDouble(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorSymmetricComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorSymmetricComplexDouble, _lib, "_SparseFactorSymmetric_Complex_Double")
+	}
+	return _fnSparseFactorSymmetricComplexDouble(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFactorSymmetricComplexFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorSymmetricComplexFloat calls the vecLib framework function _SparseFactorSymmetric_Complex_Float.
+func SparseFactorSymmetricComplexFloat(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorSymmetricComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorSymmetricComplexFloat, _lib, "_SparseFactorSymmetric_Complex_Float")
+	}
+	return _fnSparseFactorSymmetricComplexFloat(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFactorSymmetricDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorSymmetricDouble calls the vecLib framework function _SparseFactorSymmetric_Double.
+func SparseFactorSymmetricDouble(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorSymmetricDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorSymmetricDouble, _lib, "_SparseFactorSymmetric_Double")
+	}
+	return _fnSparseFactorSymmetricDouble(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFactorSymmetricFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseFactorSymmetricFloat calls the vecLib framework function _SparseFactorSymmetric_Float.
+func SparseFactorSymmetricFloat(factorType unsafe.Pointer, matrix unsafe.Pointer, sfoptions unsafe.Pointer, nfoptions unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFactorSymmetricFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFactorSymmetricFloat, _lib, "_SparseFactorSymmetric_Float")
+	}
+	return _fnSparseFactorSymmetricFloat(factorType, matrix, sfoptions, nfoptions)
+}
+
+var _fnSparseFailedFactorComplexDouble func(unsafe.Pointer) unsafe.Pointer
+
+// SparseFailedFactorComplexDouble calls the vecLib framework function _SparseFailedFactor_Complex_Double.
+func SparseFailedFactorComplexDouble(status unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFailedFactorComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFailedFactorComplexDouble, _lib, "_SparseFailedFactor_Complex_Double")
+	}
+	return _fnSparseFailedFactorComplexDouble(status)
+}
+
+var _fnSparseFailedFactorComplexFloat func(unsafe.Pointer) unsafe.Pointer
+
+// SparseFailedFactorComplexFloat calls the vecLib framework function _SparseFailedFactor_Complex_Float.
+func SparseFailedFactorComplexFloat(status unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFailedFactorComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFailedFactorComplexFloat, _lib, "_SparseFailedFactor_Complex_Float")
+	}
+	return _fnSparseFailedFactorComplexFloat(status)
+}
+
+var _fnSparseFailedFactorDouble func(unsafe.Pointer) unsafe.Pointer
+
+// SparseFailedFactorDouble calls the vecLib framework function _SparseFailedFactor_Double.
+func SparseFailedFactorDouble(status unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFailedFactorDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFailedFactorDouble, _lib, "_SparseFailedFactor_Double")
+	}
+	return _fnSparseFailedFactorDouble(status)
+}
+
+var _fnSparseFailedFactorFloat func(unsafe.Pointer) unsafe.Pointer
+
+// SparseFailedFactorFloat calls the vecLib framework function _SparseFailedFactor_Float.
+func SparseFailedFactorFloat(status unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFailedFactorFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFailedFactorFloat, _lib, "_SparseFailedFactor_Float")
+	}
+	return _fnSparseFailedFactorFloat(status)
+}
+
+var _fnSparseFromAttributeComplex func(unsafe.Pointer) unsafe.Pointer
+
+// SparseFromAttributeComplex calls the vecLib framework function _SparseFromAttributeComplex.
+func SparseFromAttributeComplex(k unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFromAttributeComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFromAttributeComplex, _lib, "_SparseFromAttributeComplex")
+	}
+	return _fnSparseFromAttributeComplex(k)
+}
+
+var _fnSparseFromKindComplex func(unsafe.Pointer) unsafe.Pointer
+
+// SparseFromKindComplex calls the vecLib framework function _SparseFromKindComplex.
+func SparseFromKindComplex(k unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFromKindComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFromKindComplex, _lib, "_SparseFromKindComplex")
+	}
+	return _fnSparseFromKindComplex(k)
+}
+
+var _fnSparseFromStructureComplex func(unsafe.Pointer) unsafe.Pointer
+
+// SparseFromStructureComplex calls the vecLib framework function _SparseFromStructureComplex.
+func SparseFromStructureComplex(k unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseFromStructureComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseFromStructureComplex, _lib, "_SparseFromStructureComplex")
+	}
+	return _fnSparseFromStructureComplex(k)
+}
+
 var _fnSparseGMRESIterateComplexDouble func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseGMRESIterateComplexDouble calls the vecLib framework function _SparseGMRESIterate_Complex_Double.
@@ -1547,6 +2493,50 @@ func SparseGMRESIterateFloat(options unsafe.Pointer, iteration int, state string
 	return _out0
 }
 
+var _fnSparseGMRESSolveComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseGMRESSolveComplexDouble calls the vecLib framework function _SparseGMRESSolve_Complex_Double.
+func SparseGMRESSolveComplexDouble(options unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, applyOperator unsafe.Pointer, preconditioner unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseGMRESSolveComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseGMRESSolveComplexDouble, _lib, "_SparseGMRESSolve_Complex_Double")
+	}
+	return _fnSparseGMRESSolveComplexDouble(options, x, b, applyOperator, preconditioner)
+}
+
+var _fnSparseGMRESSolveComplexFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseGMRESSolveComplexFloat calls the vecLib framework function _SparseGMRESSolve_Complex_Float.
+func SparseGMRESSolveComplexFloat(options unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, applyOperator unsafe.Pointer, preconditioner unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseGMRESSolveComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseGMRESSolveComplexFloat, _lib, "_SparseGMRESSolve_Complex_Float")
+	}
+	return _fnSparseGMRESSolveComplexFloat(options, x, b, applyOperator, preconditioner)
+}
+
+var _fnSparseGMRESSolveDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseGMRESSolveDouble calls the vecLib framework function _SparseGMRESSolve_Double.
+func SparseGMRESSolveDouble(options unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, applyOperator unsafe.Pointer, preconditioner unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseGMRESSolveDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseGMRESSolveDouble, _lib, "_SparseGMRESSolve_Double")
+	}
+	return _fnSparseGMRESSolveDouble(options, x, b, applyOperator, preconditioner)
+}
+
+var _fnSparseGMRESSolveFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseGMRESSolveFloat calls the vecLib framework function _SparseGMRESSolve_Float.
+func SparseGMRESSolveFloat(options unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, applyOperator unsafe.Pointer, preconditioner unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseGMRESSolveFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseGMRESSolveFloat, _lib, "_SparseGMRESSolve_Float")
+	}
+	return _fnSparseGMRESSolveFloat(options, x, b, applyOperator, preconditioner)
+}
+
 var _fnSparseGetIterativeStateSizeComplexDouble func(unsafe.Pointer, bool, int, int, int) int
 
 // SparseGetIterativeStateSizeComplexDouble calls the vecLib framework function _SparseGetIterativeStateSize_Complex_Double.
@@ -1589,6 +2579,61 @@ func SparseGetIterativeStateSizeFloat(method unsafe.Pointer, preconditioner bool
 		ebipurego.RegisterLibFunc(&_fnSparseGetIterativeStateSizeFloat, _lib, "_SparseGetIterativeStateSize_Float")
 	}
 	return _fnSparseGetIterativeStateSizeFloat(method, preconditioner, m, n, nrhs)
+}
+
+var _fnSparseGetOptionsFromNumericFactorComplexDouble func(unsafe.Pointer) unsafe.Pointer
+
+// SparseGetOptionsFromNumericFactorComplexDouble calls the vecLib framework function _SparseGetOptionsFromNumericFactor_Complex_Double.
+func SparseGetOptionsFromNumericFactorComplexDouble(factor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseGetOptionsFromNumericFactorComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseGetOptionsFromNumericFactorComplexDouble, _lib, "_SparseGetOptionsFromNumericFactor_Complex_Double")
+	}
+	return _fnSparseGetOptionsFromNumericFactorComplexDouble(factor)
+}
+
+var _fnSparseGetOptionsFromNumericFactorComplexFloat func(unsafe.Pointer) unsafe.Pointer
+
+// SparseGetOptionsFromNumericFactorComplexFloat calls the vecLib framework function _SparseGetOptionsFromNumericFactor_Complex_Float.
+func SparseGetOptionsFromNumericFactorComplexFloat(factor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseGetOptionsFromNumericFactorComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseGetOptionsFromNumericFactorComplexFloat, _lib, "_SparseGetOptionsFromNumericFactor_Complex_Float")
+	}
+	return _fnSparseGetOptionsFromNumericFactorComplexFloat(factor)
+}
+
+var _fnSparseGetOptionsFromNumericFactorDouble func(unsafe.Pointer) unsafe.Pointer
+
+// SparseGetOptionsFromNumericFactorDouble calls the vecLib framework function _SparseGetOptionsFromNumericFactor_Double.
+func SparseGetOptionsFromNumericFactorDouble(factor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseGetOptionsFromNumericFactorDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseGetOptionsFromNumericFactorDouble, _lib, "_SparseGetOptionsFromNumericFactor_Double")
+	}
+	return _fnSparseGetOptionsFromNumericFactorDouble(factor)
+}
+
+var _fnSparseGetOptionsFromNumericFactorFloat func(unsafe.Pointer) unsafe.Pointer
+
+// SparseGetOptionsFromNumericFactorFloat calls the vecLib framework function _SparseGetOptionsFromNumericFactor_Float.
+func SparseGetOptionsFromNumericFactorFloat(factor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseGetOptionsFromNumericFactorFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseGetOptionsFromNumericFactorFloat, _lib, "_SparseGetOptionsFromNumericFactor_Float")
+	}
+	return _fnSparseGetOptionsFromNumericFactorFloat(factor)
+}
+
+var _fnSparseGetOptionsFromSymbolicFactor func(unsafe.Pointer) unsafe.Pointer
+
+// SparseGetOptionsFromSymbolicFactor calls the vecLib framework function _SparseGetOptionsFromSymbolicFactor.
+func SparseGetOptionsFromSymbolicFactor(factor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseGetOptionsFromSymbolicFactor == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseGetOptionsFromSymbolicFactor, _lib, "_SparseGetOptionsFromSymbolicFactor")
+	}
+	return _fnSparseGetOptionsFromSymbolicFactor(factor)
 }
 
 var _fnSparseGetWorkspaceRequiredComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -1647,6 +2692,50 @@ func SparseGetWorkspaceRequiredFloat(subfactor unsafe.Pointer, factor unsafe.Poi
 	return _out0, _out1
 }
 
+var _fnSparseInvalidSubfactorComplexDouble func() unsafe.Pointer
+
+// SparseInvalidSubfactorComplexDouble calls the vecLib framework function _SparseInvalidSubfactor_Complex_Double.
+func SparseInvalidSubfactorComplexDouble() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInvalidSubfactorComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInvalidSubfactorComplexDouble, _lib, "_SparseInvalidSubfactor_Complex_Double")
+	}
+	return _fnSparseInvalidSubfactorComplexDouble()
+}
+
+var _fnSparseInvalidSubfactorComplexFloat func() unsafe.Pointer
+
+// SparseInvalidSubfactorComplexFloat calls the vecLib framework function _SparseInvalidSubfactor_Complex_Float.
+func SparseInvalidSubfactorComplexFloat() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInvalidSubfactorComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInvalidSubfactorComplexFloat, _lib, "_SparseInvalidSubfactor_Complex_Float")
+	}
+	return _fnSparseInvalidSubfactorComplexFloat()
+}
+
+var _fnSparseInvalidSubfactorDouble func() unsafe.Pointer
+
+// SparseInvalidSubfactorDouble calls the vecLib framework function _SparseInvalidSubfactor_Double.
+func SparseInvalidSubfactorDouble() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInvalidSubfactorDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInvalidSubfactorDouble, _lib, "_SparseInvalidSubfactor_Double")
+	}
+	return _fnSparseInvalidSubfactorDouble()
+}
+
+var _fnSparseInvalidSubfactorFloat func() unsafe.Pointer
+
+// SparseInvalidSubfactorFloat calls the vecLib framework function _SparseInvalidSubfactor_Float.
+func SparseInvalidSubfactorFloat() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInvalidSubfactorFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInvalidSubfactorFloat, _lib, "_SparseInvalidSubfactor_Float")
+	}
+	return _fnSparseInvalidSubfactorFloat()
+}
+
 var _fnSparseLSMRIterateComplexDouble func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseLSMRIterateComplexDouble calls the vecLib framework function _SparseLSMRIterate_Complex_Double.
@@ -1699,6 +2788,50 @@ func SparseLSMRIterateFloat(options unsafe.Pointer, iteration int, state string,
 	return _out0
 }
 
+var _fnSparseLSMRSolveComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseLSMRSolveComplexDouble calls the vecLib framework function _SparseLSMRSolve_Complex_Double.
+func SparseLSMRSolveComplexDouble(options unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, applyOperator unsafe.Pointer, preconditioner unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseLSMRSolveComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseLSMRSolveComplexDouble, _lib, "_SparseLSMRSolve_Complex_Double")
+	}
+	return _fnSparseLSMRSolveComplexDouble(options, x, b, applyOperator, preconditioner)
+}
+
+var _fnSparseLSMRSolveComplexFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseLSMRSolveComplexFloat calls the vecLib framework function _SparseLSMRSolve_Complex_Float.
+func SparseLSMRSolveComplexFloat(options unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, applyOperator unsafe.Pointer, preconditioner unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseLSMRSolveComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseLSMRSolveComplexFloat, _lib, "_SparseLSMRSolve_Complex_Float")
+	}
+	return _fnSparseLSMRSolveComplexFloat(options, x, b, applyOperator, preconditioner)
+}
+
+var _fnSparseLSMRSolveDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseLSMRSolveDouble calls the vecLib framework function _SparseLSMRSolve_Double.
+func SparseLSMRSolveDouble(options unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, applyOperator unsafe.Pointer, preconditioner unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseLSMRSolveDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseLSMRSolveDouble, _lib, "_SparseLSMRSolve_Double")
+	}
+	return _fnSparseLSMRSolveDouble(options, x, b, applyOperator, preconditioner)
+}
+
+var _fnSparseLSMRSolveFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseLSMRSolveFloat calls the vecLib framework function _SparseLSMRSolve_Float.
+func SparseLSMRSolveFloat(options unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, applyOperator unsafe.Pointer, preconditioner unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseLSMRSolveFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseLSMRSolveFloat, _lib, "_SparseLSMRSolve_Float")
+	}
+	return _fnSparseLSMRSolveFloat(options, x, b, applyOperator, preconditioner)
+}
+
 var _fnSparseMultiplySubfactorComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string)
 
 // SparseMultiplySubfactorComplexDouble calls the vecLib framework function _SparseMultiplySubfactor_Complex_Double.
@@ -1741,6 +2874,160 @@ func SparseMultiplySubfactorFloat(subfactor unsafe.Pointer, x unsafe.Pointer, y 
 		ebipurego.RegisterLibFunc(&_fnSparseMultiplySubfactorFloat, _lib, "_SparseMultiplySubfactor_Float")
 	}
 	_fnSparseMultiplySubfactorFloat(subfactor, x, y, workspace)
+}
+
+var _fnSparseNumericFactorHermitianComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorHermitianComplexDouble calls the vecLib framework function _SparseNumericFactorHermitian_Complex_Double.
+func SparseNumericFactorHermitianComplexDouble(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorHermitianComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorHermitianComplexDouble, _lib, "_SparseNumericFactorHermitian_Complex_Double")
+	}
+	return _fnSparseNumericFactorHermitianComplexDouble(symbolicFactor, matrix, options, factorStorage, workspace)
+}
+
+var _fnSparseNumericFactorHermitianComplexFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorHermitianComplexFloat calls the vecLib framework function _SparseNumericFactorHermitian_Complex_Float.
+func SparseNumericFactorHermitianComplexFloat(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorHermitianComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorHermitianComplexFloat, _lib, "_SparseNumericFactorHermitian_Complex_Float")
+	}
+	return _fnSparseNumericFactorHermitianComplexFloat(symbolicFactor, matrix, options, factorStorage, workspace)
+}
+
+var _fnSparseNumericFactorLUComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorLUComplexDouble calls the vecLib framework function _SparseNumericFactorLU_Complex_Double.
+func SparseNumericFactorLUComplexDouble(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorLUComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorLUComplexDouble, _lib, "_SparseNumericFactorLU_Complex_Double")
+	}
+	return _fnSparseNumericFactorLUComplexDouble(symbolicFactor, matrix, options, factorStorage, workspace)
+}
+
+var _fnSparseNumericFactorLUComplexFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorLUComplexFloat calls the vecLib framework function _SparseNumericFactorLU_Complex_Float.
+func SparseNumericFactorLUComplexFloat(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorLUComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorLUComplexFloat, _lib, "_SparseNumericFactorLU_Complex_Float")
+	}
+	return _fnSparseNumericFactorLUComplexFloat(symbolicFactor, matrix, options, factorStorage, workspace)
+}
+
+var _fnSparseNumericFactorLUDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorLUDouble calls the vecLib framework function _SparseNumericFactorLU_Double.
+func SparseNumericFactorLUDouble(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorLUDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorLUDouble, _lib, "_SparseNumericFactorLU_Double")
+	}
+	return _fnSparseNumericFactorLUDouble(symbolicFactor, matrix, options, factorStorage, workspace)
+}
+
+var _fnSparseNumericFactorLUFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorLUFloat calls the vecLib framework function _SparseNumericFactorLU_Float.
+func SparseNumericFactorLUFloat(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorLUFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorLUFloat, _lib, "_SparseNumericFactorLU_Float")
+	}
+	return _fnSparseNumericFactorLUFloat(symbolicFactor, matrix, options, factorStorage, workspace)
+}
+
+var _fnSparseNumericFactorQRComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorQRComplexDouble calls the vecLib framework function _SparseNumericFactorQR_Complex_Double.
+func SparseNumericFactorQRComplexDouble(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorQRComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorQRComplexDouble, _lib, "_SparseNumericFactorQR_Complex_Double")
+	}
+	return _fnSparseNumericFactorQRComplexDouble(symbolicFactor, matrix, options, factorStorage, workspace)
+}
+
+var _fnSparseNumericFactorQRComplexFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorQRComplexFloat calls the vecLib framework function _SparseNumericFactorQR_Complex_Float.
+func SparseNumericFactorQRComplexFloat(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorQRComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorQRComplexFloat, _lib, "_SparseNumericFactorQR_Complex_Float")
+	}
+	return _fnSparseNumericFactorQRComplexFloat(symbolicFactor, matrix, options, factorStorage, workspace)
+}
+
+var _fnSparseNumericFactorQRDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorQRDouble calls the vecLib framework function _SparseNumericFactorQR_Double.
+func SparseNumericFactorQRDouble(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorQRDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorQRDouble, _lib, "_SparseNumericFactorQR_Double")
+	}
+	return _fnSparseNumericFactorQRDouble(symbolicFactor, matrix, options, factorStorage, workspace)
+}
+
+var _fnSparseNumericFactorQRFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorQRFloat calls the vecLib framework function _SparseNumericFactorQR_Float.
+func SparseNumericFactorQRFloat(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorQRFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorQRFloat, _lib, "_SparseNumericFactorQR_Float")
+	}
+	return _fnSparseNumericFactorQRFloat(symbolicFactor, matrix, options, factorStorage, workspace)
+}
+
+var _fnSparseNumericFactorSymmetricComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorSymmetricComplexDouble calls the vecLib framework function _SparseNumericFactorSymmetric_Complex_Double.
+func SparseNumericFactorSymmetricComplexDouble(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorSymmetricComplexDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorSymmetricComplexDouble, _lib, "_SparseNumericFactorSymmetric_Complex_Double")
+	}
+	return _fnSparseNumericFactorSymmetricComplexDouble(symbolicFactor, matrix, options, factorStorage, workspace)
+}
+
+var _fnSparseNumericFactorSymmetricComplexFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorSymmetricComplexFloat calls the vecLib framework function _SparseNumericFactorSymmetric_Complex_Float.
+func SparseNumericFactorSymmetricComplexFloat(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorSymmetricComplexFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorSymmetricComplexFloat, _lib, "_SparseNumericFactorSymmetric_Complex_Float")
+	}
+	return _fnSparseNumericFactorSymmetricComplexFloat(symbolicFactor, matrix, options, factorStorage, workspace)
+}
+
+var _fnSparseNumericFactorSymmetricDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorSymmetricDouble calls the vecLib framework function _SparseNumericFactorSymmetric_Double.
+func SparseNumericFactorSymmetricDouble(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorSymmetricDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorSymmetricDouble, _lib, "_SparseNumericFactorSymmetric_Double")
+	}
+	return _fnSparseNumericFactorSymmetricDouble(symbolicFactor, matrix, options, factorStorage, workspace)
+}
+
+var _fnSparseNumericFactorSymmetricFloat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseNumericFactorSymmetricFloat calls the vecLib framework function _SparseNumericFactorSymmetric_Float.
+func SparseNumericFactorSymmetricFloat(symbolicFactor unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer, factorStorage unsafe.Pointer, workspace unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseNumericFactorSymmetricFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseNumericFactorSymmetricFloat, _lib, "_SparseNumericFactorSymmetric_Float")
+	}
+	return _fnSparseNumericFactorSymmetricFloat(symbolicFactor, matrix, options, factorStorage, workspace)
 }
 
 var _fnSparseRefactorHermitianComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -2180,6 +3467,72 @@ func SparseSubFactorGetDimnFloat(subfactor unsafe.Pointer, m unsafe.Pointer) (n 
 	return _out0
 }
 
+var _fnSparseSymbolicFactorLU func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseSymbolicFactorLU calls the vecLib framework function _SparseSymbolicFactorLU.
+func SparseSymbolicFactorLU(factorType unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseSymbolicFactorLU == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseSymbolicFactorLU, _lib, "_SparseSymbolicFactorLU")
+	}
+	return _fnSparseSymbolicFactorLU(factorType, matrix, options)
+}
+
+var _fnSparseSymbolicFactorQR func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseSymbolicFactorQR calls the vecLib framework function _SparseSymbolicFactorQR.
+func SparseSymbolicFactorQR(factorType unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseSymbolicFactorQR == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseSymbolicFactorQR, _lib, "_SparseSymbolicFactorQR")
+	}
+	return _fnSparseSymbolicFactorQR(factorType, matrix, options)
+}
+
+var _fnSparseSymbolicFactorSymmetric func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseSymbolicFactorSymmetric calls the vecLib framework function _SparseSymbolicFactorSymmetric.
+func SparseSymbolicFactorSymmetric(factorType unsafe.Pointer, matrix unsafe.Pointer, options unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseSymbolicFactorSymmetric == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseSymbolicFactorSymmetric, _lib, "_SparseSymbolicFactorSymmetric")
+	}
+	return _fnSparseSymbolicFactorSymmetric(factorType, matrix, options)
+}
+
+var _fnSparseToAttributeComplex func(unsafe.Pointer) unsafe.Pointer
+
+// SparseToAttributeComplex calls the vecLib framework function _SparseToAttributeComplex.
+func SparseToAttributeComplex(k unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseToAttributeComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseToAttributeComplex, _lib, "_SparseToAttributeComplex")
+	}
+	return _fnSparseToAttributeComplex(k)
+}
+
+var _fnSparseToKindComplex func(unsafe.Pointer) unsafe.Pointer
+
+// SparseToKindComplex calls the vecLib framework function _SparseToKindComplex.
+func SparseToKindComplex(k unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseToKindComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseToKindComplex, _lib, "_SparseToKindComplex")
+	}
+	return _fnSparseToKindComplex(k)
+}
+
+var _fnSparseToStructureComplex func(unsafe.Pointer) unsafe.Pointer
+
+// SparseToStructureComplex calls the vecLib framework function _SparseToStructureComplex.
+func SparseToStructureComplex(k unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseToStructureComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseToStructureComplex, _lib, "_SparseToStructureComplex")
+	}
+	return _fnSparseToStructureComplex(k)
+}
+
 var _fnSparseTrap func()
 
 // SparseTrap calls the vecLib framework function _SparseTrap.
@@ -2263,6 +3616,17 @@ func BuiltinObjectSize(arg unsafe.Pointer, arg2 int) int {
 		ebipurego.RegisterLibFunc(&_fnBuiltinObjectSize, _lib, "__builtin_object_size")
 	}
 	return _fnBuiltinObjectSize(arg, arg2)
+}
+
+var _fnBuiltinOsLogFormat func(unsafe.Pointer, string) unsafe.Pointer
+
+// BuiltinOsLogFormat calls the vecLib framework function __builtin_os_log_format.
+func BuiltinOsLogFormat(arg unsafe.Pointer, arg2 string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBuiltinOsLogFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnBuiltinOsLogFormat, _lib, "__builtin_os_log_format")
+	}
+	return _fnBuiltinOsLogFormat(arg, arg2)
 }
 
 var _fnBuiltinOsLogFormatBufferSize func(string) int
@@ -21859,6 +23223,61 @@ func LaAddAttributes(object obj.Object, attributes int) {
 	_fnLaAddAttributes(objref.IDOf(object), attributes)
 }
 
+var _fnLaDiagonalMatrixFromVector func(objc.ID, int) unsafe.Pointer
+
+// LaDiagonalMatrixFromVector calls the vecLib framework function la_diagonal_matrix_from_vector.
+func LaDiagonalMatrixFromVector(vector obj.Object, matrixDiagonal int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaDiagonalMatrixFromVector == nil {
+		ebipurego.RegisterLibFunc(&_fnLaDiagonalMatrixFromVector, _lib, "la_diagonal_matrix_from_vector")
+	}
+	return _fnLaDiagonalMatrixFromVector(objref.IDOf(vector), matrixDiagonal)
+}
+
+var _fnLaDifference func(objc.ID, objc.ID) unsafe.Pointer
+
+// LaDifference calls the vecLib framework function la_difference.
+func LaDifference(objLeft obj.Object, objRight obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaDifference == nil {
+		ebipurego.RegisterLibFunc(&_fnLaDifference, _lib, "la_difference")
+	}
+	return _fnLaDifference(objref.IDOf(objLeft), objref.IDOf(objRight))
+}
+
+var _fnLaElementwiseProduct func(objc.ID, objc.ID) unsafe.Pointer
+
+// LaElementwiseProduct calls the vecLib framework function la_elementwise_product.
+func LaElementwiseProduct(objLeft obj.Object, objRight obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaElementwiseProduct == nil {
+		ebipurego.RegisterLibFunc(&_fnLaElementwiseProduct, _lib, "la_elementwise_product")
+	}
+	return _fnLaElementwiseProduct(objref.IDOf(objLeft), objref.IDOf(objRight))
+}
+
+var _fnLaIdentityMatrix func(int, int, int) unsafe.Pointer
+
+// LaIdentityMatrix calls the vecLib framework function la_identity_matrix.
+func LaIdentityMatrix(matrixSize int, scalarType int, attributes int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaIdentityMatrix == nil {
+		ebipurego.RegisterLibFunc(&_fnLaIdentityMatrix, _lib, "la_identity_matrix")
+	}
+	return _fnLaIdentityMatrix(matrixSize, scalarType, attributes)
+}
+
+var _fnLaInnerProduct func(objc.ID, objc.ID) unsafe.Pointer
+
+// LaInnerProduct calls the vecLib framework function la_inner_product.
+func LaInnerProduct(vectorLeft obj.Object, vectorRight obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaInnerProduct == nil {
+		ebipurego.RegisterLibFunc(&_fnLaInnerProduct, _lib, "la_inner_product")
+	}
+	return _fnLaInnerProduct(objref.IDOf(vectorLeft), objref.IDOf(vectorRight))
+}
+
 var _fnLaMatrixCols func(objc.ID) int
 
 // LaMatrixCols calls the vecLib framework function la_matrix_cols.
@@ -21870,6 +23289,80 @@ func LaMatrixCols(matrix obj.Object) int {
 	return _fnLaMatrixCols(objref.IDOf(matrix))
 }
 
+var _fnLaMatrixFromDoubleBuffer func(unsafe.Pointer, int, int, int, int, int) unsafe.Pointer
+
+// LaMatrixFromDoubleBuffer calls the vecLib framework function la_matrix_from_double_buffer.
+func LaMatrixFromDoubleBuffer(matrixRows int, matrixCols int, matrixRowStride int, matrixHint int, attributes int) (result unsafe.Pointer, buffer float64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaMatrixFromDoubleBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnLaMatrixFromDoubleBuffer, _lib, "la_matrix_from_double_buffer")
+	}
+	var _out0 float64
+	_ret := _fnLaMatrixFromDoubleBuffer(unsafe.Pointer(&_out0), matrixRows, matrixCols, matrixRowStride, matrixHint, attributes)
+	return _ret, _out0
+}
+
+var _fnLaMatrixFromDoubleBufferNocopy func(unsafe.Pointer, int, int, int, int, unsafe.Pointer, int) unsafe.Pointer
+
+// LaMatrixFromDoubleBufferNocopy calls the vecLib framework function la_matrix_from_double_buffer_nocopy.
+func LaMatrixFromDoubleBufferNocopy(matrixRows int, matrixCols int, matrixRowStride int, matrixHint int, deallocator unsafe.Pointer, attributes int) (result unsafe.Pointer, buffer float64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaMatrixFromDoubleBufferNocopy == nil {
+		ebipurego.RegisterLibFunc(&_fnLaMatrixFromDoubleBufferNocopy, _lib, "la_matrix_from_double_buffer_nocopy")
+	}
+	var _out0 float64
+	_ret := _fnLaMatrixFromDoubleBufferNocopy(unsafe.Pointer(&_out0), matrixRows, matrixCols, matrixRowStride, matrixHint, deallocator, attributes)
+	return _ret, _out0
+}
+
+var _fnLaMatrixFromFloatBuffer func(unsafe.Pointer, int, int, int, int, int) unsafe.Pointer
+
+// LaMatrixFromFloatBuffer calls the vecLib framework function la_matrix_from_float_buffer.
+func LaMatrixFromFloatBuffer(matrixRows int, matrixCols int, matrixRowStride int, matrixHint int, attributes int) (result unsafe.Pointer, buffer float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaMatrixFromFloatBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnLaMatrixFromFloatBuffer, _lib, "la_matrix_from_float_buffer")
+	}
+	var _out0 float32
+	_ret := _fnLaMatrixFromFloatBuffer(unsafe.Pointer(&_out0), matrixRows, matrixCols, matrixRowStride, matrixHint, attributes)
+	return _ret, _out0
+}
+
+var _fnLaMatrixFromFloatBufferNocopy func(unsafe.Pointer, int, int, int, int, unsafe.Pointer, int) unsafe.Pointer
+
+// LaMatrixFromFloatBufferNocopy calls the vecLib framework function la_matrix_from_float_buffer_nocopy.
+func LaMatrixFromFloatBufferNocopy(matrixRows int, matrixCols int, matrixRowStride int, matrixHint int, deallocator unsafe.Pointer, attributes int) (result unsafe.Pointer, buffer float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaMatrixFromFloatBufferNocopy == nil {
+		ebipurego.RegisterLibFunc(&_fnLaMatrixFromFloatBufferNocopy, _lib, "la_matrix_from_float_buffer_nocopy")
+	}
+	var _out0 float32
+	_ret := _fnLaMatrixFromFloatBufferNocopy(unsafe.Pointer(&_out0), matrixRows, matrixCols, matrixRowStride, matrixHint, deallocator, attributes)
+	return _ret, _out0
+}
+
+var _fnLaMatrixFromSplat func(objc.ID, int, int) unsafe.Pointer
+
+// LaMatrixFromSplat calls the vecLib framework function la_matrix_from_splat.
+func LaMatrixFromSplat(splat obj.Object, matrixRows int, matrixCols int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaMatrixFromSplat == nil {
+		ebipurego.RegisterLibFunc(&_fnLaMatrixFromSplat, _lib, "la_matrix_from_splat")
+	}
+	return _fnLaMatrixFromSplat(objref.IDOf(splat), matrixRows, matrixCols)
+}
+
+var _fnLaMatrixProduct func(objc.ID, objc.ID) unsafe.Pointer
+
+// LaMatrixProduct calls the vecLib framework function la_matrix_product.
+func LaMatrixProduct(matrixLeft obj.Object, matrixRight obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaMatrixProduct == nil {
+		ebipurego.RegisterLibFunc(&_fnLaMatrixProduct, _lib, "la_matrix_product")
+	}
+	return _fnLaMatrixProduct(objref.IDOf(matrixLeft), objref.IDOf(matrixRight))
+}
+
 var _fnLaMatrixRows func(objc.ID) int
 
 // LaMatrixRows calls the vecLib framework function la_matrix_rows.
@@ -21879,6 +23372,17 @@ func LaMatrixRows(matrix obj.Object) int {
 		ebipurego.RegisterLibFunc(&_fnLaMatrixRows, _lib, "la_matrix_rows")
 	}
 	return _fnLaMatrixRows(objref.IDOf(matrix))
+}
+
+var _fnLaMatrixSlice func(objc.ID, int, int, int, int, int, int) unsafe.Pointer
+
+// LaMatrixSlice calls the vecLib framework function la_matrix_slice.
+func LaMatrixSlice(matrix obj.Object, matrixFirstRow int, matrixFirstCol int, matrixRowStride int, matrixColStride int, sliceRows int, sliceCols int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaMatrixSlice == nil {
+		ebipurego.RegisterLibFunc(&_fnLaMatrixSlice, _lib, "la_matrix_slice")
+	}
+	return _fnLaMatrixSlice(objref.IDOf(matrix), matrixFirstRow, matrixFirstCol, matrixRowStride, matrixColStride, sliceRows, sliceCols)
 }
 
 var _fnLaMatrixToDoubleBuffer func(unsafe.Pointer, int, objc.ID) int
@@ -21929,6 +23433,28 @@ func LaNormAsFloat(vector obj.Object, vectorNorm int) float32 {
 	return _fnLaNormAsFloat(objref.IDOf(vector), vectorNorm)
 }
 
+var _fnLaNormalizedVector func(objc.ID, int) unsafe.Pointer
+
+// LaNormalizedVector calls the vecLib framework function la_normalized_vector.
+func LaNormalizedVector(vector obj.Object, vectorNorm int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaNormalizedVector == nil {
+		ebipurego.RegisterLibFunc(&_fnLaNormalizedVector, _lib, "la_normalized_vector")
+	}
+	return _fnLaNormalizedVector(objref.IDOf(vector), vectorNorm)
+}
+
+var _fnLaOuterProduct func(objc.ID, objc.ID) unsafe.Pointer
+
+// LaOuterProduct calls the vecLib framework function la_outer_product.
+func LaOuterProduct(vectorLeft obj.Object, vectorRight obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaOuterProduct == nil {
+		ebipurego.RegisterLibFunc(&_fnLaOuterProduct, _lib, "la_outer_product")
+	}
+	return _fnLaOuterProduct(objref.IDOf(vectorLeft), objref.IDOf(vectorRight))
+}
+
 var _fnLaRelease func(objc.ID)
 
 // LaRelease calls the vecLib framework function la_release.
@@ -21963,6 +23489,83 @@ func LaRetain(object obj.Object) *foundation.Object {
 	return foundation.ObjectFromID(_ret)
 }
 
+var _fnLaScaleWithDouble func(objc.ID, float64) unsafe.Pointer
+
+// LaScaleWithDouble calls the vecLib framework function la_scale_with_double.
+func LaScaleWithDouble(matrix obj.Object, scalar float64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaScaleWithDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnLaScaleWithDouble, _lib, "la_scale_with_double")
+	}
+	return _fnLaScaleWithDouble(objref.IDOf(matrix), scalar)
+}
+
+var _fnLaScaleWithFloat func(objc.ID, float32) unsafe.Pointer
+
+// LaScaleWithFloat calls the vecLib framework function la_scale_with_float.
+func LaScaleWithFloat(matrix obj.Object, scalar float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaScaleWithFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnLaScaleWithFloat, _lib, "la_scale_with_float")
+	}
+	return _fnLaScaleWithFloat(objref.IDOf(matrix), scalar)
+}
+
+var _fnLaSolve func(objc.ID, objc.ID) unsafe.Pointer
+
+// LaSolve calls the vecLib framework function la_solve.
+func LaSolve(matrixSystem obj.Object, objRhs obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaSolve == nil {
+		ebipurego.RegisterLibFunc(&_fnLaSolve, _lib, "la_solve")
+	}
+	return _fnLaSolve(objref.IDOf(matrixSystem), objref.IDOf(objRhs))
+}
+
+var _fnLaSplatFromDouble func(float64, int) unsafe.Pointer
+
+// LaSplatFromDouble calls the vecLib framework function la_splat_from_double.
+func LaSplatFromDouble(scalarValue float64, attributes int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaSplatFromDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnLaSplatFromDouble, _lib, "la_splat_from_double")
+	}
+	return _fnLaSplatFromDouble(scalarValue, attributes)
+}
+
+var _fnLaSplatFromFloat func(float32, int) unsafe.Pointer
+
+// LaSplatFromFloat calls the vecLib framework function la_splat_from_float.
+func LaSplatFromFloat(scalarValue float32, attributes int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaSplatFromFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnLaSplatFromFloat, _lib, "la_splat_from_float")
+	}
+	return _fnLaSplatFromFloat(scalarValue, attributes)
+}
+
+var _fnLaSplatFromMatrixElement func(objc.ID, int, int) unsafe.Pointer
+
+// LaSplatFromMatrixElement calls the vecLib framework function la_splat_from_matrix_element.
+func LaSplatFromMatrixElement(matrix obj.Object, matrixRow int, matrixCol int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaSplatFromMatrixElement == nil {
+		ebipurego.RegisterLibFunc(&_fnLaSplatFromMatrixElement, _lib, "la_splat_from_matrix_element")
+	}
+	return _fnLaSplatFromMatrixElement(objref.IDOf(matrix), matrixRow, matrixCol)
+}
+
+var _fnLaSplatFromVectorElement func(objc.ID, int) unsafe.Pointer
+
+// LaSplatFromVectorElement calls the vecLib framework function la_splat_from_vector_element.
+func LaSplatFromVectorElement(vector obj.Object, vectorIndex int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaSplatFromVectorElement == nil {
+		ebipurego.RegisterLibFunc(&_fnLaSplatFromVectorElement, _lib, "la_splat_from_vector_element")
+	}
+	return _fnLaSplatFromVectorElement(objref.IDOf(vector), vectorIndex)
+}
+
 var _fnLaStatus func(objc.ID) int
 
 // LaStatus calls the vecLib framework function la_status.
@@ -21974,6 +23577,72 @@ func LaStatus(object obj.Object) int {
 	return _fnLaStatus(objref.IDOf(object))
 }
 
+var _fnLaSum func(objc.ID, objc.ID) unsafe.Pointer
+
+// LaSum calls the vecLib framework function la_sum.
+func LaSum(objLeft obj.Object, objRight obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaSum == nil {
+		ebipurego.RegisterLibFunc(&_fnLaSum, _lib, "la_sum")
+	}
+	return _fnLaSum(objref.IDOf(objLeft), objref.IDOf(objRight))
+}
+
+var _fnLaTranspose func(objc.ID) unsafe.Pointer
+
+// LaTranspose calls the vecLib framework function la_transpose.
+func LaTranspose(matrix obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaTranspose == nil {
+		ebipurego.RegisterLibFunc(&_fnLaTranspose, _lib, "la_transpose")
+	}
+	return _fnLaTranspose(objref.IDOf(matrix))
+}
+
+var _fnLaVectorFromMatrixCol func(objc.ID, int) unsafe.Pointer
+
+// LaVectorFromMatrixCol calls the vecLib framework function la_vector_from_matrix_col.
+func LaVectorFromMatrixCol(matrix obj.Object, matrixCol int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaVectorFromMatrixCol == nil {
+		ebipurego.RegisterLibFunc(&_fnLaVectorFromMatrixCol, _lib, "la_vector_from_matrix_col")
+	}
+	return _fnLaVectorFromMatrixCol(objref.IDOf(matrix), matrixCol)
+}
+
+var _fnLaVectorFromMatrixDiagonal func(objc.ID, int) unsafe.Pointer
+
+// LaVectorFromMatrixDiagonal calls the vecLib framework function la_vector_from_matrix_diagonal.
+func LaVectorFromMatrixDiagonal(matrix obj.Object, matrixDiagonal int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaVectorFromMatrixDiagonal == nil {
+		ebipurego.RegisterLibFunc(&_fnLaVectorFromMatrixDiagonal, _lib, "la_vector_from_matrix_diagonal")
+	}
+	return _fnLaVectorFromMatrixDiagonal(objref.IDOf(matrix), matrixDiagonal)
+}
+
+var _fnLaVectorFromMatrixRow func(objc.ID, int) unsafe.Pointer
+
+// LaVectorFromMatrixRow calls the vecLib framework function la_vector_from_matrix_row.
+func LaVectorFromMatrixRow(matrix obj.Object, matrixRow int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaVectorFromMatrixRow == nil {
+		ebipurego.RegisterLibFunc(&_fnLaVectorFromMatrixRow, _lib, "la_vector_from_matrix_row")
+	}
+	return _fnLaVectorFromMatrixRow(objref.IDOf(matrix), matrixRow)
+}
+
+var _fnLaVectorFromSplat func(objc.ID, int) unsafe.Pointer
+
+// LaVectorFromSplat calls the vecLib framework function la_vector_from_splat.
+func LaVectorFromSplat(splat obj.Object, vectorLength int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaVectorFromSplat == nil {
+		ebipurego.RegisterLibFunc(&_fnLaVectorFromSplat, _lib, "la_vector_from_splat")
+	}
+	return _fnLaVectorFromSplat(objref.IDOf(splat), vectorLength)
+}
+
 var _fnLaVectorLength func(objc.ID) int
 
 // LaVectorLength calls the vecLib framework function la_vector_length.
@@ -21983,6 +23652,17 @@ func LaVectorLength(vector obj.Object) int {
 		ebipurego.RegisterLibFunc(&_fnLaVectorLength, _lib, "la_vector_length")
 	}
 	return _fnLaVectorLength(objref.IDOf(vector))
+}
+
+var _fnLaVectorSlice func(objc.ID, int, int, int) unsafe.Pointer
+
+// LaVectorSlice calls the vecLib framework function la_vector_slice.
+func LaVectorSlice(vector obj.Object, vectorFirst int, vectorStride int, sliceLength int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLaVectorSlice == nil {
+		ebipurego.RegisterLibFunc(&_fnLaVectorSlice, _lib, "la_vector_slice")
+	}
+	return _fnLaVectorSlice(objref.IDOf(vector), vectorFirst, vectorStride, sliceLength)
 }
 
 var _fnLaVectorToDoubleBuffer func(unsafe.Pointer, int, objc.ID) int
@@ -27921,6 +29601,17 @@ func Sormtr(side string, uplo string, trans string) (result int, m int, n int, a
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8, _out9
 }
 
+var _fnSparseCommit func(unsafe.Pointer) unsafe.Pointer
+
+// SparseCommit calls the vecLib framework function sparse_commit.
+func SparseCommit(a unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseCommit == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseCommit, _lib, "sparse_commit")
+	}
+	return _fnSparseCommit(a)
+}
+
 var _fnSparseElementwiseNormDouble func(objc.ID, unsafe.Pointer) float64
 
 // SparseElementwiseNormDouble calls the vecLib framework function sparse_elementwise_norm_double.
@@ -27963,6 +29654,154 @@ func SparseElementwiseNormFloatComplex(a obj.Object, norm unsafe.Pointer) float3
 		ebipurego.RegisterLibFunc(&_fnSparseElementwiseNormFloatComplex, _lib, "sparse_elementwise_norm_float_complex")
 	}
 	return _fnSparseElementwiseNormFloatComplex(objref.IDOf(a), norm)
+}
+
+var _fnSparseExtractBlockDouble func(objc.ID, int64, int64, uint64, uint64, unsafe.Pointer) unsafe.Pointer
+
+// SparseExtractBlockDouble calls the vecLib framework function sparse_extract_block_double.
+func SparseExtractBlockDouble(a obj.Object, bi int64, bj int64, rowStride uint64, colStride uint64, val unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseExtractBlockDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseExtractBlockDouble, _lib, "sparse_extract_block_double")
+	}
+	return _fnSparseExtractBlockDouble(objref.IDOf(a), bi, bj, rowStride, colStride, val)
+}
+
+var _fnSparseExtractBlockDoubleComplex func(objc.ID, int64, int64, uint64, uint64, unsafe.Pointer) unsafe.Pointer
+
+// SparseExtractBlockDoubleComplex calls the vecLib framework function sparse_extract_block_double_complex.
+func SparseExtractBlockDoubleComplex(a obj.Object, bi int64, bj int64, rowStride uint64, colStride uint64, val unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseExtractBlockDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseExtractBlockDoubleComplex, _lib, "sparse_extract_block_double_complex")
+	}
+	return _fnSparseExtractBlockDoubleComplex(objref.IDOf(a), bi, bj, rowStride, colStride, val)
+}
+
+var _fnSparseExtractBlockFloat func(objc.ID, int64, int64, uint64, uint64, unsafe.Pointer) unsafe.Pointer
+
+// SparseExtractBlockFloat calls the vecLib framework function sparse_extract_block_float.
+func SparseExtractBlockFloat(a obj.Object, bi int64, bj int64, rowStride uint64, colStride uint64, val unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseExtractBlockFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseExtractBlockFloat, _lib, "sparse_extract_block_float")
+	}
+	return _fnSparseExtractBlockFloat(objref.IDOf(a), bi, bj, rowStride, colStride, val)
+}
+
+var _fnSparseExtractBlockFloatComplex func(objc.ID, int64, int64, uint64, uint64, unsafe.Pointer) unsafe.Pointer
+
+// SparseExtractBlockFloatComplex calls the vecLib framework function sparse_extract_block_float_complex.
+func SparseExtractBlockFloatComplex(a obj.Object, bi int64, bj int64, rowStride uint64, colStride uint64, val unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseExtractBlockFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseExtractBlockFloatComplex, _lib, "sparse_extract_block_float_complex")
+	}
+	return _fnSparseExtractBlockFloatComplex(objref.IDOf(a), bi, bj, rowStride, colStride, val)
+}
+
+var _fnSparseExtractSparseColumnDouble func(objc.ID, int64, int64, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseExtractSparseColumnDouble calls the vecLib framework function sparse_extract_sparse_column_double.
+func SparseExtractSparseColumnDouble(a obj.Object, column int64, rowStart int64, nz uint64, val unsafe.Pointer, indx unsafe.Pointer) (result unsafe.Pointer, rowEnd int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseExtractSparseColumnDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseExtractSparseColumnDouble, _lib, "sparse_extract_sparse_column_double")
+	}
+	var _out0 int64
+	_ret := _fnSparseExtractSparseColumnDouble(objref.IDOf(a), column, rowStart, unsafe.Pointer(&_out0), nz, val, indx)
+	return _ret, _out0
+}
+
+var _fnSparseExtractSparseColumnDoubleComplex func(objc.ID, int64, int64, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseExtractSparseColumnDoubleComplex calls the vecLib framework function sparse_extract_sparse_column_double_complex.
+func SparseExtractSparseColumnDoubleComplex(a obj.Object, column int64, rowStart int64, nz uint64, val unsafe.Pointer, indx unsafe.Pointer) (result unsafe.Pointer, rowEnd int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseExtractSparseColumnDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseExtractSparseColumnDoubleComplex, _lib, "sparse_extract_sparse_column_double_complex")
+	}
+	var _out0 int64
+	_ret := _fnSparseExtractSparseColumnDoubleComplex(objref.IDOf(a), column, rowStart, unsafe.Pointer(&_out0), nz, val, indx)
+	return _ret, _out0
+}
+
+var _fnSparseExtractSparseColumnFloat func(objc.ID, int64, int64, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseExtractSparseColumnFloat calls the vecLib framework function sparse_extract_sparse_column_float.
+func SparseExtractSparseColumnFloat(a obj.Object, column int64, rowStart int64, nz uint64, val unsafe.Pointer, indx unsafe.Pointer) (result unsafe.Pointer, rowEnd int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseExtractSparseColumnFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseExtractSparseColumnFloat, _lib, "sparse_extract_sparse_column_float")
+	}
+	var _out0 int64
+	_ret := _fnSparseExtractSparseColumnFloat(objref.IDOf(a), column, rowStart, unsafe.Pointer(&_out0), nz, val, indx)
+	return _ret, _out0
+}
+
+var _fnSparseExtractSparseColumnFloatComplex func(objc.ID, int64, int64, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseExtractSparseColumnFloatComplex calls the vecLib framework function sparse_extract_sparse_column_float_complex.
+func SparseExtractSparseColumnFloatComplex(a obj.Object, column int64, rowStart int64, nz uint64, val unsafe.Pointer, indx unsafe.Pointer) (result unsafe.Pointer, rowEnd int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseExtractSparseColumnFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseExtractSparseColumnFloatComplex, _lib, "sparse_extract_sparse_column_float_complex")
+	}
+	var _out0 int64
+	_ret := _fnSparseExtractSparseColumnFloatComplex(objref.IDOf(a), column, rowStart, unsafe.Pointer(&_out0), nz, val, indx)
+	return _ret, _out0
+}
+
+var _fnSparseExtractSparseRowDouble func(objc.ID, int64, int64, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseExtractSparseRowDouble calls the vecLib framework function sparse_extract_sparse_row_double.
+func SparseExtractSparseRowDouble(a obj.Object, row int64, columnStart int64, nz uint64, val unsafe.Pointer, jndx unsafe.Pointer) (result unsafe.Pointer, columnEnd int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseExtractSparseRowDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseExtractSparseRowDouble, _lib, "sparse_extract_sparse_row_double")
+	}
+	var _out0 int64
+	_ret := _fnSparseExtractSparseRowDouble(objref.IDOf(a), row, columnStart, unsafe.Pointer(&_out0), nz, val, jndx)
+	return _ret, _out0
+}
+
+var _fnSparseExtractSparseRowDoubleComplex func(objc.ID, int64, int64, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseExtractSparseRowDoubleComplex calls the vecLib framework function sparse_extract_sparse_row_double_complex.
+func SparseExtractSparseRowDoubleComplex(a obj.Object, row int64, columnStart int64, nz uint64, val unsafe.Pointer, jndx unsafe.Pointer) (result unsafe.Pointer, columnEnd int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseExtractSparseRowDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseExtractSparseRowDoubleComplex, _lib, "sparse_extract_sparse_row_double_complex")
+	}
+	var _out0 int64
+	_ret := _fnSparseExtractSparseRowDoubleComplex(objref.IDOf(a), row, columnStart, unsafe.Pointer(&_out0), nz, val, jndx)
+	return _ret, _out0
+}
+
+var _fnSparseExtractSparseRowFloat func(objc.ID, int64, int64, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseExtractSparseRowFloat calls the vecLib framework function sparse_extract_sparse_row_float.
+func SparseExtractSparseRowFloat(a obj.Object, row int64, columnStart int64, nz uint64, val unsafe.Pointer, jndx unsafe.Pointer) (result unsafe.Pointer, columnEnd int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseExtractSparseRowFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseExtractSparseRowFloat, _lib, "sparse_extract_sparse_row_float")
+	}
+	var _out0 int64
+	_ret := _fnSparseExtractSparseRowFloat(objref.IDOf(a), row, columnStart, unsafe.Pointer(&_out0), nz, val, jndx)
+	return _ret, _out0
+}
+
+var _fnSparseExtractSparseRowFloatComplex func(objc.ID, int64, int64, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseExtractSparseRowFloatComplex calls the vecLib framework function sparse_extract_sparse_row_float_complex.
+func SparseExtractSparseRowFloatComplex(a obj.Object, row int64, columnStart int64, nz uint64, val unsafe.Pointer, jndx unsafe.Pointer) (result unsafe.Pointer, columnEnd int64) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseExtractSparseRowFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseExtractSparseRowFloatComplex, _lib, "sparse_extract_sparse_row_float_complex")
+	}
+	var _out0 int64
+	_ret := _fnSparseExtractSparseRowFloatComplex(objref.IDOf(a), row, columnStart, unsafe.Pointer(&_out0), nz, val, jndx)
+	return _ret, _out0
 }
 
 var _fnSparseGetBlockDimensionForCol func(unsafe.Pointer, int64) int
@@ -28108,6 +29947,17 @@ func SparseInnerProductDenseDouble(nz uint64, x unsafe.Pointer, indx unsafe.Poin
 	return _fnSparseInnerProductDenseDouble(nz, x, indx, y, incy)
 }
 
+var _fnSparseInnerProductDenseDoubleComplex func(uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int64) unsafe.Pointer
+
+// SparseInnerProductDenseDoubleComplex calls the vecLib framework function sparse_inner_product_dense_double_complex.
+func SparseInnerProductDenseDoubleComplex(nz uint64, x unsafe.Pointer, indx unsafe.Pointer, y unsafe.Pointer, incy int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInnerProductDenseDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInnerProductDenseDoubleComplex, _lib, "sparse_inner_product_dense_double_complex")
+	}
+	return _fnSparseInnerProductDenseDoubleComplex(nz, x, indx, y, incy)
+}
+
 var _fnSparseInnerProductDenseFloat func(uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int64) float32
 
 // SparseInnerProductDenseFloat calls the vecLib framework function sparse_inner_product_dense_float.
@@ -28117,6 +29967,17 @@ func SparseInnerProductDenseFloat(nz uint64, x unsafe.Pointer, indx unsafe.Point
 		ebipurego.RegisterLibFunc(&_fnSparseInnerProductDenseFloat, _lib, "sparse_inner_product_dense_float")
 	}
 	return _fnSparseInnerProductDenseFloat(nz, x, indx, y, incy)
+}
+
+var _fnSparseInnerProductDenseFloatComplex func(uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int64) unsafe.Pointer
+
+// SparseInnerProductDenseFloatComplex calls the vecLib framework function sparse_inner_product_dense_float_complex.
+func SparseInnerProductDenseFloatComplex(nz uint64, x unsafe.Pointer, indx unsafe.Pointer, y unsafe.Pointer, incy int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInnerProductDenseFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInnerProductDenseFloatComplex, _lib, "sparse_inner_product_dense_float_complex")
+	}
+	return _fnSparseInnerProductDenseFloatComplex(nz, x, indx, y, incy)
 }
 
 var _fnSparseInnerProductSparseDouble func(uint64, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
@@ -28130,6 +29991,17 @@ func SparseInnerProductSparseDouble(nzx uint64, nzy uint64, x unsafe.Pointer, in
 	return _fnSparseInnerProductSparseDouble(nzx, nzy, x, indx, y, indy)
 }
 
+var _fnSparseInnerProductSparseDoubleComplex func(uint64, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInnerProductSparseDoubleComplex calls the vecLib framework function sparse_inner_product_sparse_double_complex.
+func SparseInnerProductSparseDoubleComplex(nzx uint64, nzy uint64, x unsafe.Pointer, indx unsafe.Pointer, y unsafe.Pointer, indy unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInnerProductSparseDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInnerProductSparseDoubleComplex, _lib, "sparse_inner_product_sparse_double_complex")
+	}
+	return _fnSparseInnerProductSparseDoubleComplex(nzx, nzy, x, indx, y, indy)
+}
+
 var _fnSparseInnerProductSparseFloat func(uint64, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
 
 // SparseInnerProductSparseFloat calls the vecLib framework function sparse_inner_product_sparse_float.
@@ -28139,6 +30011,237 @@ func SparseInnerProductSparseFloat(nzx uint64, nzy uint64, x unsafe.Pointer, ind
 		ebipurego.RegisterLibFunc(&_fnSparseInnerProductSparseFloat, _lib, "sparse_inner_product_sparse_float")
 	}
 	return _fnSparseInnerProductSparseFloat(nzx, nzy, x, indx, y, indy)
+}
+
+var _fnSparseInnerProductSparseFloatComplex func(uint64, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInnerProductSparseFloatComplex calls the vecLib framework function sparse_inner_product_sparse_float_complex.
+func SparseInnerProductSparseFloatComplex(nzx uint64, nzy uint64, x unsafe.Pointer, indx unsafe.Pointer, y unsafe.Pointer, indy unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInnerProductSparseFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInnerProductSparseFloatComplex, _lib, "sparse_inner_product_sparse_float_complex")
+	}
+	return _fnSparseInnerProductSparseFloatComplex(nzx, nzy, x, indx, y, indy)
+}
+
+var _fnSparseInsertBlockDouble func(objc.ID, unsafe.Pointer, uint64, uint64, int64, int64) unsafe.Pointer
+
+// SparseInsertBlockDouble calls the vecLib framework function sparse_insert_block_double.
+func SparseInsertBlockDouble(a obj.Object, val unsafe.Pointer, rowStride uint64, colStride uint64, bi int64, bj int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertBlockDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertBlockDouble, _lib, "sparse_insert_block_double")
+	}
+	return _fnSparseInsertBlockDouble(objref.IDOf(a), val, rowStride, colStride, bi, bj)
+}
+
+var _fnSparseInsertBlockDoubleComplex func(objc.ID, unsafe.Pointer, uint64, uint64, int64, int64) unsafe.Pointer
+
+// SparseInsertBlockDoubleComplex calls the vecLib framework function sparse_insert_block_double_complex.
+func SparseInsertBlockDoubleComplex(a obj.Object, val unsafe.Pointer, rowStride uint64, colStride uint64, bi int64, bj int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertBlockDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertBlockDoubleComplex, _lib, "sparse_insert_block_double_complex")
+	}
+	return _fnSparseInsertBlockDoubleComplex(objref.IDOf(a), val, rowStride, colStride, bi, bj)
+}
+
+var _fnSparseInsertBlockFloat func(objc.ID, unsafe.Pointer, uint64, uint64, int64, int64) unsafe.Pointer
+
+// SparseInsertBlockFloat calls the vecLib framework function sparse_insert_block_float.
+func SparseInsertBlockFloat(a obj.Object, val unsafe.Pointer, rowStride uint64, colStride uint64, bi int64, bj int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertBlockFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertBlockFloat, _lib, "sparse_insert_block_float")
+	}
+	return _fnSparseInsertBlockFloat(objref.IDOf(a), val, rowStride, colStride, bi, bj)
+}
+
+var _fnSparseInsertBlockFloatComplex func(objc.ID, unsafe.Pointer, uint64, uint64, int64, int64) unsafe.Pointer
+
+// SparseInsertBlockFloatComplex calls the vecLib framework function sparse_insert_block_float_complex.
+func SparseInsertBlockFloatComplex(a obj.Object, val unsafe.Pointer, rowStride uint64, colStride uint64, bi int64, bj int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertBlockFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertBlockFloatComplex, _lib, "sparse_insert_block_float_complex")
+	}
+	return _fnSparseInsertBlockFloatComplex(objref.IDOf(a), val, rowStride, colStride, bi, bj)
+}
+
+var _fnSparseInsertColDouble func(objc.ID, int64, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInsertColDouble calls the vecLib framework function sparse_insert_col_double.
+func SparseInsertColDouble(a obj.Object, j int64, nz uint64, val unsafe.Pointer, indx unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertColDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertColDouble, _lib, "sparse_insert_col_double")
+	}
+	return _fnSparseInsertColDouble(objref.IDOf(a), j, nz, val, indx)
+}
+
+var _fnSparseInsertColDoubleComplex func(objc.ID, int64, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInsertColDoubleComplex calls the vecLib framework function sparse_insert_col_double_complex.
+func SparseInsertColDoubleComplex(a obj.Object, j int64, nz uint64, val unsafe.Pointer, indx unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertColDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertColDoubleComplex, _lib, "sparse_insert_col_double_complex")
+	}
+	return _fnSparseInsertColDoubleComplex(objref.IDOf(a), j, nz, val, indx)
+}
+
+var _fnSparseInsertColFloat func(objc.ID, int64, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInsertColFloat calls the vecLib framework function sparse_insert_col_float.
+func SparseInsertColFloat(a obj.Object, j int64, nz uint64, val unsafe.Pointer, indx unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertColFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertColFloat, _lib, "sparse_insert_col_float")
+	}
+	return _fnSparseInsertColFloat(objref.IDOf(a), j, nz, val, indx)
+}
+
+var _fnSparseInsertColFloatComplex func(objc.ID, int64, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInsertColFloatComplex calls the vecLib framework function sparse_insert_col_float_complex.
+func SparseInsertColFloatComplex(a obj.Object, j int64, nz uint64, val unsafe.Pointer, indx unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertColFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertColFloatComplex, _lib, "sparse_insert_col_float_complex")
+	}
+	return _fnSparseInsertColFloatComplex(objref.IDOf(a), j, nz, val, indx)
+}
+
+var _fnSparseInsertEntriesDouble func(objc.ID, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInsertEntriesDouble calls the vecLib framework function sparse_insert_entries_double.
+func SparseInsertEntriesDouble(a obj.Object, n uint64, val unsafe.Pointer, indx unsafe.Pointer, jndx unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertEntriesDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertEntriesDouble, _lib, "sparse_insert_entries_double")
+	}
+	return _fnSparseInsertEntriesDouble(objref.IDOf(a), n, val, indx, jndx)
+}
+
+var _fnSparseInsertEntriesDoubleComplex func(objc.ID, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInsertEntriesDoubleComplex calls the vecLib framework function sparse_insert_entries_double_complex.
+func SparseInsertEntriesDoubleComplex(a obj.Object, n uint64, val unsafe.Pointer, indx unsafe.Pointer, jndx unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertEntriesDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertEntriesDoubleComplex, _lib, "sparse_insert_entries_double_complex")
+	}
+	return _fnSparseInsertEntriesDoubleComplex(objref.IDOf(a), n, val, indx, jndx)
+}
+
+var _fnSparseInsertEntriesFloat func(objc.ID, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInsertEntriesFloat calls the vecLib framework function sparse_insert_entries_float.
+func SparseInsertEntriesFloat(a obj.Object, n uint64, val unsafe.Pointer, indx unsafe.Pointer, jndx unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertEntriesFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertEntriesFloat, _lib, "sparse_insert_entries_float")
+	}
+	return _fnSparseInsertEntriesFloat(objref.IDOf(a), n, val, indx, jndx)
+}
+
+var _fnSparseInsertEntriesFloatComplex func(objc.ID, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInsertEntriesFloatComplex calls the vecLib framework function sparse_insert_entries_float_complex.
+func SparseInsertEntriesFloatComplex(a obj.Object, n uint64, val unsafe.Pointer, indx unsafe.Pointer, jndx unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertEntriesFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertEntriesFloatComplex, _lib, "sparse_insert_entries_float_complex")
+	}
+	return _fnSparseInsertEntriesFloatComplex(objref.IDOf(a), n, val, indx, jndx)
+}
+
+var _fnSparseInsertEntryDouble func(objc.ID, float64, int64, int64) unsafe.Pointer
+
+// SparseInsertEntryDouble calls the vecLib framework function sparse_insert_entry_double.
+func SparseInsertEntryDouble(a obj.Object, val float64, i int64, j int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertEntryDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertEntryDouble, _lib, "sparse_insert_entry_double")
+	}
+	return _fnSparseInsertEntryDouble(objref.IDOf(a), val, i, j)
+}
+
+var _fnSparseInsertEntryDoubleComplex func(objc.ID, unsafe.Pointer, int64, int64) unsafe.Pointer
+
+// SparseInsertEntryDoubleComplex calls the vecLib framework function sparse_insert_entry_double_complex.
+func SparseInsertEntryDoubleComplex(a obj.Object, val unsafe.Pointer, i int64, j int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertEntryDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertEntryDoubleComplex, _lib, "sparse_insert_entry_double_complex")
+	}
+	return _fnSparseInsertEntryDoubleComplex(objref.IDOf(a), val, i, j)
+}
+
+var _fnSparseInsertEntryFloat func(objc.ID, float32, int64, int64) unsafe.Pointer
+
+// SparseInsertEntryFloat calls the vecLib framework function sparse_insert_entry_float.
+func SparseInsertEntryFloat(a obj.Object, val float32, i int64, j int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertEntryFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertEntryFloat, _lib, "sparse_insert_entry_float")
+	}
+	return _fnSparseInsertEntryFloat(objref.IDOf(a), val, i, j)
+}
+
+var _fnSparseInsertEntryFloatComplex func(objc.ID, unsafe.Pointer, int64, int64) unsafe.Pointer
+
+// SparseInsertEntryFloatComplex calls the vecLib framework function sparse_insert_entry_float_complex.
+func SparseInsertEntryFloatComplex(a obj.Object, val unsafe.Pointer, i int64, j int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertEntryFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertEntryFloatComplex, _lib, "sparse_insert_entry_float_complex")
+	}
+	return _fnSparseInsertEntryFloatComplex(objref.IDOf(a), val, i, j)
+}
+
+var _fnSparseInsertRowDouble func(objc.ID, int64, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInsertRowDouble calls the vecLib framework function sparse_insert_row_double.
+func SparseInsertRowDouble(a obj.Object, i int64, nz uint64, val unsafe.Pointer, jndx unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertRowDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertRowDouble, _lib, "sparse_insert_row_double")
+	}
+	return _fnSparseInsertRowDouble(objref.IDOf(a), i, nz, val, jndx)
+}
+
+var _fnSparseInsertRowDoubleComplex func(objc.ID, int64, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInsertRowDoubleComplex calls the vecLib framework function sparse_insert_row_double_complex.
+func SparseInsertRowDoubleComplex(a obj.Object, i int64, nz uint64, val unsafe.Pointer, jndx unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertRowDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertRowDoubleComplex, _lib, "sparse_insert_row_double_complex")
+	}
+	return _fnSparseInsertRowDoubleComplex(objref.IDOf(a), i, nz, val, jndx)
+}
+
+var _fnSparseInsertRowFloat func(objc.ID, int64, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInsertRowFloat calls the vecLib framework function sparse_insert_row_float.
+func SparseInsertRowFloat(a obj.Object, i int64, nz uint64, val unsafe.Pointer, jndx unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertRowFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertRowFloat, _lib, "sparse_insert_row_float")
+	}
+	return _fnSparseInsertRowFloat(objref.IDOf(a), i, nz, val, jndx)
+}
+
+var _fnSparseInsertRowFloatComplex func(objc.ID, int64, uint64, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseInsertRowFloatComplex calls the vecLib framework function sparse_insert_row_float_complex.
+func SparseInsertRowFloatComplex(a obj.Object, i int64, nz uint64, val unsafe.Pointer, jndx unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseInsertRowFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseInsertRowFloatComplex, _lib, "sparse_insert_row_float_complex")
+	}
+	return _fnSparseInsertRowFloatComplex(objref.IDOf(a), i, nz, val, jndx)
 }
 
 var _fnSparseMatrixBlockCreateDouble func(uint64, uint64, uint64, uint64) objc.ID
@@ -28237,6 +30340,105 @@ func SparseMatrixCreateFloatComplex(m uint64, n uint64) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnSparseMatrixDestroy func(unsafe.Pointer) unsafe.Pointer
+
+// SparseMatrixDestroy calls the vecLib framework function sparse_matrix_destroy.
+func SparseMatrixDestroy(a unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixDestroy == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixDestroy, _lib, "sparse_matrix_destroy")
+	}
+	return _fnSparseMatrixDestroy(a)
+}
+
+var _fnSparseMatrixProductDenseDouble func(CblasOrder, CblasTranspose, uint64, float64, objc.ID, unsafe.Pointer, uint64, unsafe.Pointer, uint64) unsafe.Pointer
+
+// SparseMatrixProductDenseDouble calls the vecLib framework function sparse_matrix_product_dense_double.
+func SparseMatrixProductDenseDouble(order CblasOrder, transa CblasTranspose, n uint64, alpha float64, a obj.Object, b unsafe.Pointer, ldb uint64, c unsafe.Pointer, ldc uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixProductDenseDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixProductDenseDouble, _lib, "sparse_matrix_product_dense_double")
+	}
+	return _fnSparseMatrixProductDenseDouble(order, transa, n, alpha, objref.IDOf(a), b, ldb, c, ldc)
+}
+
+var _fnSparseMatrixProductDenseDoubleComplex func(CblasOrder, CblasTranspose, uint64, unsafe.Pointer, objc.ID, unsafe.Pointer, uint64, unsafe.Pointer, uint64) unsafe.Pointer
+
+// SparseMatrixProductDenseDoubleComplex calls the vecLib framework function sparse_matrix_product_dense_double_complex.
+func SparseMatrixProductDenseDoubleComplex(order CblasOrder, transa CblasTranspose, n uint64, alpha unsafe.Pointer, a obj.Object, b unsafe.Pointer, ldb uint64, c unsafe.Pointer, ldc uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixProductDenseDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixProductDenseDoubleComplex, _lib, "sparse_matrix_product_dense_double_complex")
+	}
+	return _fnSparseMatrixProductDenseDoubleComplex(order, transa, n, alpha, objref.IDOf(a), b, ldb, c, ldc)
+}
+
+var _fnSparseMatrixProductDenseFloat func(CblasOrder, CblasTranspose, uint64, float32, objc.ID, unsafe.Pointer, uint64, unsafe.Pointer, uint64) unsafe.Pointer
+
+// SparseMatrixProductDenseFloat calls the vecLib framework function sparse_matrix_product_dense_float.
+func SparseMatrixProductDenseFloat(order CblasOrder, transa CblasTranspose, n uint64, alpha float32, a obj.Object, b unsafe.Pointer, ldb uint64, c unsafe.Pointer, ldc uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixProductDenseFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixProductDenseFloat, _lib, "sparse_matrix_product_dense_float")
+	}
+	return _fnSparseMatrixProductDenseFloat(order, transa, n, alpha, objref.IDOf(a), b, ldb, c, ldc)
+}
+
+var _fnSparseMatrixProductDenseFloatComplex func(CblasOrder, CblasTranspose, uint64, unsafe.Pointer, objc.ID, unsafe.Pointer, uint64, unsafe.Pointer, uint64) unsafe.Pointer
+
+// SparseMatrixProductDenseFloatComplex calls the vecLib framework function sparse_matrix_product_dense_float_complex.
+func SparseMatrixProductDenseFloatComplex(order CblasOrder, transa CblasTranspose, n uint64, alpha unsafe.Pointer, a obj.Object, b unsafe.Pointer, ldb uint64, c unsafe.Pointer, ldc uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixProductDenseFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixProductDenseFloatComplex, _lib, "sparse_matrix_product_dense_float_complex")
+	}
+	return _fnSparseMatrixProductDenseFloatComplex(order, transa, n, alpha, objref.IDOf(a), b, ldb, c, ldc)
+}
+
+var _fnSparseMatrixProductSparseDouble func(CblasOrder, CblasTranspose, float64, objc.ID, objc.ID, unsafe.Pointer, uint64) unsafe.Pointer
+
+// SparseMatrixProductSparseDouble calls the vecLib framework function sparse_matrix_product_sparse_double.
+func SparseMatrixProductSparseDouble(order CblasOrder, transa CblasTranspose, alpha float64, a obj.Object, b obj.Object, c unsafe.Pointer, ldc uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixProductSparseDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixProductSparseDouble, _lib, "sparse_matrix_product_sparse_double")
+	}
+	return _fnSparseMatrixProductSparseDouble(order, transa, alpha, objref.IDOf(a), objref.IDOf(b), c, ldc)
+}
+
+var _fnSparseMatrixProductSparseDoubleComplex func(CblasOrder, CblasTranspose, unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer, uint64) unsafe.Pointer
+
+// SparseMatrixProductSparseDoubleComplex calls the vecLib framework function sparse_matrix_product_sparse_double_complex.
+func SparseMatrixProductSparseDoubleComplex(order CblasOrder, transa CblasTranspose, alpha unsafe.Pointer, a obj.Object, b obj.Object, c unsafe.Pointer, ldc uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixProductSparseDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixProductSparseDoubleComplex, _lib, "sparse_matrix_product_sparse_double_complex")
+	}
+	return _fnSparseMatrixProductSparseDoubleComplex(order, transa, alpha, objref.IDOf(a), objref.IDOf(b), c, ldc)
+}
+
+var _fnSparseMatrixProductSparseFloat func(CblasOrder, CblasTranspose, float32, objc.ID, objc.ID, unsafe.Pointer, uint64) unsafe.Pointer
+
+// SparseMatrixProductSparseFloat calls the vecLib framework function sparse_matrix_product_sparse_float.
+func SparseMatrixProductSparseFloat(order CblasOrder, transa CblasTranspose, alpha float32, a obj.Object, b obj.Object, c unsafe.Pointer, ldc uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixProductSparseFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixProductSparseFloat, _lib, "sparse_matrix_product_sparse_float")
+	}
+	return _fnSparseMatrixProductSparseFloat(order, transa, alpha, objref.IDOf(a), objref.IDOf(b), c, ldc)
+}
+
+var _fnSparseMatrixProductSparseFloatComplex func(CblasOrder, CblasTranspose, unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer, uint64) unsafe.Pointer
+
+// SparseMatrixProductSparseFloatComplex calls the vecLib framework function sparse_matrix_product_sparse_float_complex.
+func SparseMatrixProductSparseFloatComplex(order CblasOrder, transa CblasTranspose, alpha unsafe.Pointer, a obj.Object, b obj.Object, c unsafe.Pointer, ldc uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixProductSparseFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixProductSparseFloatComplex, _lib, "sparse_matrix_product_sparse_float_complex")
+	}
+	return _fnSparseMatrixProductSparseFloatComplex(order, transa, alpha, objref.IDOf(a), objref.IDOf(b), c, ldc)
+}
+
 var _fnSparseMatrixTraceDouble func(objc.ID, int64) float64
 
 // SparseMatrixTraceDouble calls the vecLib framework function sparse_matrix_trace_double.
@@ -28248,6 +30450,17 @@ func SparseMatrixTraceDouble(a obj.Object, offset int64) float64 {
 	return _fnSparseMatrixTraceDouble(objref.IDOf(a), offset)
 }
 
+var _fnSparseMatrixTraceDoubleComplex func(objc.ID, int64) unsafe.Pointer
+
+// SparseMatrixTraceDoubleComplex calls the vecLib framework function sparse_matrix_trace_double_complex.
+func SparseMatrixTraceDoubleComplex(a obj.Object, offset int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixTraceDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixTraceDoubleComplex, _lib, "sparse_matrix_trace_double_complex")
+	}
+	return _fnSparseMatrixTraceDoubleComplex(objref.IDOf(a), offset)
+}
+
 var _fnSparseMatrixTraceFloat func(objc.ID, int64) float32
 
 // SparseMatrixTraceFloat calls the vecLib framework function sparse_matrix_trace_float.
@@ -28257,6 +30470,61 @@ func SparseMatrixTraceFloat(a obj.Object, offset int64) float32 {
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixTraceFloat, _lib, "sparse_matrix_trace_float")
 	}
 	return _fnSparseMatrixTraceFloat(objref.IDOf(a), offset)
+}
+
+var _fnSparseMatrixTraceFloatComplex func(objc.ID, int64) unsafe.Pointer
+
+// SparseMatrixTraceFloatComplex calls the vecLib framework function sparse_matrix_trace_float_complex.
+func SparseMatrixTraceFloatComplex(a obj.Object, offset int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixTraceFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixTraceFloatComplex, _lib, "sparse_matrix_trace_float_complex")
+	}
+	return _fnSparseMatrixTraceFloatComplex(objref.IDOf(a), offset)
+}
+
+var _fnSparseMatrixTriangularSolveDenseDouble func(CblasOrder, CblasTranspose, uint64, float64, objc.ID, unsafe.Pointer, uint64) unsafe.Pointer
+
+// SparseMatrixTriangularSolveDenseDouble calls the vecLib framework function sparse_matrix_triangular_solve_dense_double.
+func SparseMatrixTriangularSolveDenseDouble(order CblasOrder, transt CblasTranspose, nrhs uint64, alpha float64, t obj.Object, b unsafe.Pointer, ldb uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixTriangularSolveDenseDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixTriangularSolveDenseDouble, _lib, "sparse_matrix_triangular_solve_dense_double")
+	}
+	return _fnSparseMatrixTriangularSolveDenseDouble(order, transt, nrhs, alpha, objref.IDOf(t), b, ldb)
+}
+
+var _fnSparseMatrixTriangularSolveDenseDoubleComplex func(CblasOrder, CblasTranspose, uint64, unsafe.Pointer, objc.ID, unsafe.Pointer, uint64) unsafe.Pointer
+
+// SparseMatrixTriangularSolveDenseDoubleComplex calls the vecLib framework function sparse_matrix_triangular_solve_dense_double_complex.
+func SparseMatrixTriangularSolveDenseDoubleComplex(order CblasOrder, transt CblasTranspose, nrhs uint64, alpha unsafe.Pointer, t obj.Object, b unsafe.Pointer, ldb uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixTriangularSolveDenseDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixTriangularSolveDenseDoubleComplex, _lib, "sparse_matrix_triangular_solve_dense_double_complex")
+	}
+	return _fnSparseMatrixTriangularSolveDenseDoubleComplex(order, transt, nrhs, alpha, objref.IDOf(t), b, ldb)
+}
+
+var _fnSparseMatrixTriangularSolveDenseFloat func(CblasOrder, CblasTranspose, uint64, float32, objc.ID, unsafe.Pointer, uint64) unsafe.Pointer
+
+// SparseMatrixTriangularSolveDenseFloat calls the vecLib framework function sparse_matrix_triangular_solve_dense_float.
+func SparseMatrixTriangularSolveDenseFloat(order CblasOrder, transt CblasTranspose, nrhs uint64, alpha float32, t obj.Object, b unsafe.Pointer, ldb uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixTriangularSolveDenseFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixTriangularSolveDenseFloat, _lib, "sparse_matrix_triangular_solve_dense_float")
+	}
+	return _fnSparseMatrixTriangularSolveDenseFloat(order, transt, nrhs, alpha, objref.IDOf(t), b, ldb)
+}
+
+var _fnSparseMatrixTriangularSolveDenseFloatComplex func(CblasOrder, CblasTranspose, uint64, unsafe.Pointer, objc.ID, unsafe.Pointer, uint64) unsafe.Pointer
+
+// SparseMatrixTriangularSolveDenseFloatComplex calls the vecLib framework function sparse_matrix_triangular_solve_dense_float_complex.
+func SparseMatrixTriangularSolveDenseFloatComplex(order CblasOrder, transt CblasTranspose, nrhs uint64, alpha unsafe.Pointer, t obj.Object, b unsafe.Pointer, ldb uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixTriangularSolveDenseFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixTriangularSolveDenseFloatComplex, _lib, "sparse_matrix_triangular_solve_dense_float_complex")
+	}
+	return _fnSparseMatrixTriangularSolveDenseFloatComplex(order, transt, nrhs, alpha, objref.IDOf(t), b, ldb)
 }
 
 var _fnSparseMatrixVariableBlockCreateDouble func(uint64, uint64, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -28315,6 +30583,50 @@ func SparseMatrixVariableBlockCreateFloatComplex(mb uint64, nb uint64) (result o
 	return obj.Wrap(_ret), _out0, _out1
 }
 
+var _fnSparseMatrixVectorProductDenseDouble func(CblasTranspose, float64, objc.ID, unsafe.Pointer, int64, unsafe.Pointer, int64) unsafe.Pointer
+
+// SparseMatrixVectorProductDenseDouble calls the vecLib framework function sparse_matrix_vector_product_dense_double.
+func SparseMatrixVectorProductDenseDouble(transa CblasTranspose, alpha float64, a obj.Object, x unsafe.Pointer, incx int64, y unsafe.Pointer, incy int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixVectorProductDenseDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixVectorProductDenseDouble, _lib, "sparse_matrix_vector_product_dense_double")
+	}
+	return _fnSparseMatrixVectorProductDenseDouble(transa, alpha, objref.IDOf(a), x, incx, y, incy)
+}
+
+var _fnSparseMatrixVectorProductDenseDoubleComplex func(CblasTranspose, unsafe.Pointer, objc.ID, unsafe.Pointer, int64, unsafe.Pointer, int64) unsafe.Pointer
+
+// SparseMatrixVectorProductDenseDoubleComplex calls the vecLib framework function sparse_matrix_vector_product_dense_double_complex.
+func SparseMatrixVectorProductDenseDoubleComplex(transa CblasTranspose, alpha unsafe.Pointer, a obj.Object, x unsafe.Pointer, incx int64, y unsafe.Pointer, incy int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixVectorProductDenseDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixVectorProductDenseDoubleComplex, _lib, "sparse_matrix_vector_product_dense_double_complex")
+	}
+	return _fnSparseMatrixVectorProductDenseDoubleComplex(transa, alpha, objref.IDOf(a), x, incx, y, incy)
+}
+
+var _fnSparseMatrixVectorProductDenseFloat func(CblasTranspose, float32, objc.ID, unsafe.Pointer, int64, unsafe.Pointer, int64) unsafe.Pointer
+
+// SparseMatrixVectorProductDenseFloat calls the vecLib framework function sparse_matrix_vector_product_dense_float.
+func SparseMatrixVectorProductDenseFloat(transa CblasTranspose, alpha float32, a obj.Object, x unsafe.Pointer, incx int64, y unsafe.Pointer, incy int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixVectorProductDenseFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixVectorProductDenseFloat, _lib, "sparse_matrix_vector_product_dense_float")
+	}
+	return _fnSparseMatrixVectorProductDenseFloat(transa, alpha, objref.IDOf(a), x, incx, y, incy)
+}
+
+var _fnSparseMatrixVectorProductDenseFloatComplex func(CblasTranspose, unsafe.Pointer, objc.ID, unsafe.Pointer, int64, unsafe.Pointer, int64) unsafe.Pointer
+
+// SparseMatrixVectorProductDenseFloatComplex calls the vecLib framework function sparse_matrix_vector_product_dense_float_complex.
+func SparseMatrixVectorProductDenseFloatComplex(transa CblasTranspose, alpha unsafe.Pointer, a obj.Object, x unsafe.Pointer, incx int64, y unsafe.Pointer, incy int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseMatrixVectorProductDenseFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseMatrixVectorProductDenseFloatComplex, _lib, "sparse_matrix_vector_product_dense_float_complex")
+	}
+	return _fnSparseMatrixVectorProductDenseFloatComplex(transa, alpha, objref.IDOf(a), x, incx, y, incy)
+}
+
 var _fnSparseOperatorNormDouble func(objc.ID, unsafe.Pointer) float64
 
 // SparseOperatorNormDouble calls the vecLib framework function sparse_operator_norm_double.
@@ -28359,6 +30671,50 @@ func SparseOperatorNormFloatComplex(a obj.Object, norm unsafe.Pointer) float32 {
 	return _fnSparseOperatorNormFloatComplex(objref.IDOf(a), norm)
 }
 
+var _fnSparseOuterProductDenseDouble func(uint64, uint64, uint64, float64, unsafe.Pointer, int64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseOuterProductDenseDouble calls the vecLib framework function sparse_outer_product_dense_double.
+func SparseOuterProductDenseDouble(m uint64, n uint64, nz uint64, alpha float64, x unsafe.Pointer, incx int64, y unsafe.Pointer, indy unsafe.Pointer, c unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseOuterProductDenseDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseOuterProductDenseDouble, _lib, "sparse_outer_product_dense_double")
+	}
+	return _fnSparseOuterProductDenseDouble(m, n, nz, alpha, x, incx, y, indy, c)
+}
+
+var _fnSparseOuterProductDenseDoubleComplex func(uint64, uint64, uint64, unsafe.Pointer, unsafe.Pointer, int64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseOuterProductDenseDoubleComplex calls the vecLib framework function sparse_outer_product_dense_double_complex.
+func SparseOuterProductDenseDoubleComplex(m uint64, n uint64, nz uint64, alpha unsafe.Pointer, x unsafe.Pointer, incx int64, y unsafe.Pointer, indy unsafe.Pointer, c unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseOuterProductDenseDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseOuterProductDenseDoubleComplex, _lib, "sparse_outer_product_dense_double_complex")
+	}
+	return _fnSparseOuterProductDenseDoubleComplex(m, n, nz, alpha, x, incx, y, indy, c)
+}
+
+var _fnSparseOuterProductDenseFloat func(uint64, uint64, uint64, float32, unsafe.Pointer, int64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseOuterProductDenseFloat calls the vecLib framework function sparse_outer_product_dense_float.
+func SparseOuterProductDenseFloat(m uint64, n uint64, nz uint64, alpha float32, x unsafe.Pointer, incx int64, y unsafe.Pointer, indy unsafe.Pointer, c unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseOuterProductDenseFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseOuterProductDenseFloat, _lib, "sparse_outer_product_dense_float")
+	}
+	return _fnSparseOuterProductDenseFloat(m, n, nz, alpha, x, incx, y, indy, c)
+}
+
+var _fnSparseOuterProductDenseFloatComplex func(uint64, uint64, uint64, unsafe.Pointer, unsafe.Pointer, int64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseOuterProductDenseFloatComplex calls the vecLib framework function sparse_outer_product_dense_float_complex.
+func SparseOuterProductDenseFloatComplex(m uint64, n uint64, nz uint64, alpha unsafe.Pointer, x unsafe.Pointer, incx int64, y unsafe.Pointer, indy unsafe.Pointer, c unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseOuterProductDenseFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseOuterProductDenseFloatComplex, _lib, "sparse_outer_product_dense_float_complex")
+	}
+	return _fnSparseOuterProductDenseFloatComplex(m, n, nz, alpha, x, incx, y, indy, c)
+}
+
 var _fnSparsePackVectorDouble func(uint64, uint64, unsafe.Pointer, int64, unsafe.Pointer, unsafe.Pointer) int
 
 // SparsePackVectorDouble calls the vecLib framework function sparse_pack_vector_double.
@@ -28401,6 +30757,105 @@ func SparsePackVectorFloatComplex(n uint64, nz uint64, x unsafe.Pointer, incx in
 		ebipurego.RegisterLibFunc(&_fnSparsePackVectorFloatComplex, _lib, "sparse_pack_vector_float_complex")
 	}
 	return _fnSparsePackVectorFloatComplex(n, nz, x, incx, y, indy)
+}
+
+var _fnSparsePermuteColsDouble func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// SparsePermuteColsDouble calls the vecLib framework function sparse_permute_cols_double.
+func SparsePermuteColsDouble(a obj.Object, perm unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparsePermuteColsDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparsePermuteColsDouble, _lib, "sparse_permute_cols_double")
+	}
+	return _fnSparsePermuteColsDouble(objref.IDOf(a), perm)
+}
+
+var _fnSparsePermuteColsDoubleComplex func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// SparsePermuteColsDoubleComplex calls the vecLib framework function sparse_permute_cols_double_complex.
+func SparsePermuteColsDoubleComplex(a obj.Object, perm unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparsePermuteColsDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparsePermuteColsDoubleComplex, _lib, "sparse_permute_cols_double_complex")
+	}
+	return _fnSparsePermuteColsDoubleComplex(objref.IDOf(a), perm)
+}
+
+var _fnSparsePermuteColsFloat func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// SparsePermuteColsFloat calls the vecLib framework function sparse_permute_cols_float.
+func SparsePermuteColsFloat(a obj.Object, perm unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparsePermuteColsFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparsePermuteColsFloat, _lib, "sparse_permute_cols_float")
+	}
+	return _fnSparsePermuteColsFloat(objref.IDOf(a), perm)
+}
+
+var _fnSparsePermuteColsFloatComplex func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// SparsePermuteColsFloatComplex calls the vecLib framework function sparse_permute_cols_float_complex.
+func SparsePermuteColsFloatComplex(a obj.Object, perm unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparsePermuteColsFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparsePermuteColsFloatComplex, _lib, "sparse_permute_cols_float_complex")
+	}
+	return _fnSparsePermuteColsFloatComplex(objref.IDOf(a), perm)
+}
+
+var _fnSparsePermuteRowsDouble func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// SparsePermuteRowsDouble calls the vecLib framework function sparse_permute_rows_double.
+func SparsePermuteRowsDouble(a obj.Object, perm unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparsePermuteRowsDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparsePermuteRowsDouble, _lib, "sparse_permute_rows_double")
+	}
+	return _fnSparsePermuteRowsDouble(objref.IDOf(a), perm)
+}
+
+var _fnSparsePermuteRowsDoubleComplex func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// SparsePermuteRowsDoubleComplex calls the vecLib framework function sparse_permute_rows_double_complex.
+func SparsePermuteRowsDoubleComplex(a obj.Object, perm unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparsePermuteRowsDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparsePermuteRowsDoubleComplex, _lib, "sparse_permute_rows_double_complex")
+	}
+	return _fnSparsePermuteRowsDoubleComplex(objref.IDOf(a), perm)
+}
+
+var _fnSparsePermuteRowsFloat func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// SparsePermuteRowsFloat calls the vecLib framework function sparse_permute_rows_float.
+func SparsePermuteRowsFloat(a obj.Object, perm unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparsePermuteRowsFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparsePermuteRowsFloat, _lib, "sparse_permute_rows_float")
+	}
+	return _fnSparsePermuteRowsFloat(objref.IDOf(a), perm)
+}
+
+var _fnSparsePermuteRowsFloatComplex func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// SparsePermuteRowsFloatComplex calls the vecLib framework function sparse_permute_rows_float_complex.
+func SparsePermuteRowsFloatComplex(a obj.Object, perm unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparsePermuteRowsFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparsePermuteRowsFloatComplex, _lib, "sparse_permute_rows_float_complex")
+	}
+	return _fnSparsePermuteRowsFloatComplex(objref.IDOf(a), perm)
+}
+
+var _fnSparseSetMatrixProperty func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SparseSetMatrixProperty calls the vecLib framework function sparse_set_matrix_property.
+func SparseSetMatrixProperty(a unsafe.Pointer, pname unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseSetMatrixProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseSetMatrixProperty, _lib, "sparse_set_matrix_property")
+	}
+	return _fnSparseSetMatrixProperty(a, pname)
 }
 
 var _fnSparseUnpackVectorDouble func(uint64, uint64, bool, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int64)
@@ -28533,6 +30988,50 @@ func SparseVectorNormFloatComplex(nz uint64, x unsafe.Pointer, indx unsafe.Point
 		ebipurego.RegisterLibFunc(&_fnSparseVectorNormFloatComplex, _lib, "sparse_vector_norm_float_complex")
 	}
 	return _fnSparseVectorNormFloatComplex(nz, x, indx, norm)
+}
+
+var _fnSparseVectorTriangularSolveDenseDouble func(CblasTranspose, float64, objc.ID, unsafe.Pointer, int64) unsafe.Pointer
+
+// SparseVectorTriangularSolveDenseDouble calls the vecLib framework function sparse_vector_triangular_solve_dense_double.
+func SparseVectorTriangularSolveDenseDouble(transt CblasTranspose, alpha float64, t obj.Object, x unsafe.Pointer, incx int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseVectorTriangularSolveDenseDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseVectorTriangularSolveDenseDouble, _lib, "sparse_vector_triangular_solve_dense_double")
+	}
+	return _fnSparseVectorTriangularSolveDenseDouble(transt, alpha, objref.IDOf(t), x, incx)
+}
+
+var _fnSparseVectorTriangularSolveDenseDoubleComplex func(CblasTranspose, unsafe.Pointer, objc.ID, unsafe.Pointer, int64) unsafe.Pointer
+
+// SparseVectorTriangularSolveDenseDoubleComplex calls the vecLib framework function sparse_vector_triangular_solve_dense_double_complex.
+func SparseVectorTriangularSolveDenseDoubleComplex(transt CblasTranspose, alpha unsafe.Pointer, t obj.Object, x unsafe.Pointer, incx int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseVectorTriangularSolveDenseDoubleComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseVectorTriangularSolveDenseDoubleComplex, _lib, "sparse_vector_triangular_solve_dense_double_complex")
+	}
+	return _fnSparseVectorTriangularSolveDenseDoubleComplex(transt, alpha, objref.IDOf(t), x, incx)
+}
+
+var _fnSparseVectorTriangularSolveDenseFloat func(CblasTranspose, float32, objc.ID, unsafe.Pointer, int64) unsafe.Pointer
+
+// SparseVectorTriangularSolveDenseFloat calls the vecLib framework function sparse_vector_triangular_solve_dense_float.
+func SparseVectorTriangularSolveDenseFloat(transt CblasTranspose, alpha float32, t obj.Object, x unsafe.Pointer, incx int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseVectorTriangularSolveDenseFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseVectorTriangularSolveDenseFloat, _lib, "sparse_vector_triangular_solve_dense_float")
+	}
+	return _fnSparseVectorTriangularSolveDenseFloat(transt, alpha, objref.IDOf(t), x, incx)
+}
+
+var _fnSparseVectorTriangularSolveDenseFloatComplex func(CblasTranspose, unsafe.Pointer, objc.ID, unsafe.Pointer, int64) unsafe.Pointer
+
+// SparseVectorTriangularSolveDenseFloatComplex calls the vecLib framework function sparse_vector_triangular_solve_dense_float_complex.
+func SparseVectorTriangularSolveDenseFloatComplex(transt CblasTranspose, alpha unsafe.Pointer, t obj.Object, x unsafe.Pointer, incx int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSparseVectorTriangularSolveDenseFloatComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnSparseVectorTriangularSolveDenseFloatComplex, _lib, "sparse_vector_triangular_solve_dense_float_complex")
+	}
+	return _fnSparseVectorTriangularSolveDenseFloatComplex(transt, alpha, objref.IDOf(t), x, incx)
 }
 
 var _fnSpbcon func(string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -31846,6 +34345,17 @@ func VA1024Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
 	_fnVA1024Shift(a, shiftAmount, result)
 }
 
+var _fnVA128Shift func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VA128Shift calls the vecLib framework function vA128Shift.
+func VA128Shift(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVA128Shift == nil {
+		ebipurego.RegisterLibFunc(&_fnVA128Shift, _lib, "vA128Shift")
+	}
+	return _fnVA128Shift(vA, vShiftFactor)
+}
+
 var _fnVA256Shift func(unsafe.Pointer, uint32, unsafe.Pointer)
 
 // VA256Shift calls the vecLib framework function vA256Shift.
@@ -31866,6 +34376,28 @@ func VA512Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnVA512Shift, _lib, "vA512Shift")
 	}
 	_fnVA512Shift(a, shiftAmount, result)
+}
+
+var _fnVA64Shift func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VA64Shift calls the vecLib framework function vA64Shift.
+func VA64Shift(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVA64Shift == nil {
+		ebipurego.RegisterLibFunc(&_fnVA64Shift, _lib, "vA64Shift")
+	}
+	return _fnVA64Shift(vA, vShiftFactor)
+}
+
+var _fnVA64Shift2 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VA64Shift2 calls the vecLib framework function vA64Shift2.
+func VA64Shift2(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVA64Shift2 == nil {
+		ebipurego.RegisterLibFunc(&_fnVA64Shift2, _lib, "vA64Shift2")
+	}
+	return _fnVA64Shift2(vA, vShiftFactor)
 }
 
 var _fnVDSPDCTCreateSetup func(objc.ID, int, VdspDctType) objc.ID
@@ -38384,6 +40916,17 @@ func VL1024Rotate(a unsafe.Pointer, rotateAmount uint32, result unsafe.Pointer) 
 	_fnVL1024Rotate(a, rotateAmount, result)
 }
 
+var _fnVL128Rotate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VL128Rotate calls the vecLib framework function vL128Rotate.
+func VL128Rotate(vA unsafe.Pointer, vRotateFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVL128Rotate == nil {
+		ebipurego.RegisterLibFunc(&_fnVL128Rotate, _lib, "vL128Rotate")
+	}
+	return _fnVL128Rotate(vA, vRotateFactor)
+}
+
 var _fnVL256Rotate func(unsafe.Pointer, uint32, unsafe.Pointer)
 
 // VL256Rotate calls the vecLib framework function vL256Rotate.
@@ -38406,6 +40949,28 @@ func VL512Rotate(a unsafe.Pointer, rotateAmount uint32, result unsafe.Pointer) {
 	_fnVL512Rotate(a, rotateAmount, result)
 }
 
+var _fnVL64Rotate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VL64Rotate calls the vecLib framework function vL64Rotate.
+func VL64Rotate(vA unsafe.Pointer, vRotateFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVL64Rotate == nil {
+		ebipurego.RegisterLibFunc(&_fnVL64Rotate, _lib, "vL64Rotate")
+	}
+	return _fnVL64Rotate(vA, vRotateFactor)
+}
+
+var _fnVL64Rotate2 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VL64Rotate2 calls the vecLib framework function vL64Rotate2.
+func VL64Rotate2(vA unsafe.Pointer, vRotateFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVL64Rotate2 == nil {
+		ebipurego.RegisterLibFunc(&_fnVL64Rotate2, _lib, "vL64Rotate2")
+	}
+	return _fnVL64Rotate2(vA, vRotateFactor)
+}
+
 var _fnVLL1024Shift func(unsafe.Pointer, uint32, unsafe.Pointer)
 
 // VLL1024Shift calls the vecLib framework function vLL1024Shift.
@@ -38415,6 +40980,17 @@ func VLL1024Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnVLL1024Shift, _lib, "vLL1024Shift")
 	}
 	_fnVLL1024Shift(a, shiftAmount, result)
+}
+
+var _fnVLL128Shift func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VLL128Shift calls the vecLib framework function vLL128Shift.
+func VLL128Shift(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVLL128Shift == nil {
+		ebipurego.RegisterLibFunc(&_fnVLL128Shift, _lib, "vLL128Shift")
+	}
+	return _fnVLL128Shift(vA, vShiftFactor)
 }
 
 var _fnVLL256Shift func(unsafe.Pointer, uint32, unsafe.Pointer)
@@ -38439,6 +41015,28 @@ func VLL512Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
 	_fnVLL512Shift(a, shiftAmount, result)
 }
 
+var _fnVLL64Shift func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VLL64Shift calls the vecLib framework function vLL64Shift.
+func VLL64Shift(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVLL64Shift == nil {
+		ebipurego.RegisterLibFunc(&_fnVLL64Shift, _lib, "vLL64Shift")
+	}
+	return _fnVLL64Shift(vA, vShiftFactor)
+}
+
+var _fnVLL64Shift2 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VLL64Shift2 calls the vecLib framework function vLL64Shift2.
+func VLL64Shift2(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVLL64Shift2 == nil {
+		ebipurego.RegisterLibFunc(&_fnVLL64Shift2, _lib, "vLL64Shift2")
+	}
+	return _fnVLL64Shift2(vA, vShiftFactor)
+}
+
 var _fnVLR1024Shift func(unsafe.Pointer, uint32, unsafe.Pointer)
 
 // VLR1024Shift calls the vecLib framework function vLR1024Shift.
@@ -38448,6 +41046,17 @@ func VLR1024Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnVLR1024Shift, _lib, "vLR1024Shift")
 	}
 	_fnVLR1024Shift(a, shiftAmount, result)
+}
+
+var _fnVLR128Shift func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VLR128Shift calls the vecLib framework function vLR128Shift.
+func VLR128Shift(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVLR128Shift == nil {
+		ebipurego.RegisterLibFunc(&_fnVLR128Shift, _lib, "vLR128Shift")
+	}
+	return _fnVLR128Shift(vA, vShiftFactor)
 }
 
 var _fnVLR256Shift func(unsafe.Pointer, uint32, unsafe.Pointer)
@@ -38472,6 +41081,28 @@ func VLR512Shift(a unsafe.Pointer, shiftAmount uint32, result unsafe.Pointer) {
 	_fnVLR512Shift(a, shiftAmount, result)
 }
 
+var _fnVLR64Shift func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VLR64Shift calls the vecLib framework function vLR64Shift.
+func VLR64Shift(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVLR64Shift == nil {
+		ebipurego.RegisterLibFunc(&_fnVLR64Shift, _lib, "vLR64Shift")
+	}
+	return _fnVLR64Shift(vA, vShiftFactor)
+}
+
+var _fnVLR64Shift2 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VLR64Shift2 calls the vecLib framework function vLR64Shift2.
+func VLR64Shift2(vA unsafe.Pointer, vShiftFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVLR64Shift2 == nil {
+		ebipurego.RegisterLibFunc(&_fnVLR64Shift2, _lib, "vLR64Shift2")
+	}
+	return _fnVLR64Shift2(vA, vShiftFactor)
+}
+
 var _fnVR1024Rotate func(unsafe.Pointer, uint32, unsafe.Pointer)
 
 // VR1024Rotate calls the vecLib framework function vR1024Rotate.
@@ -38481,6 +41112,17 @@ func VR1024Rotate(a unsafe.Pointer, rotateAmount uint32, result unsafe.Pointer) 
 		ebipurego.RegisterLibFunc(&_fnVR1024Rotate, _lib, "vR1024Rotate")
 	}
 	_fnVR1024Rotate(a, rotateAmount, result)
+}
+
+var _fnVR128Rotate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VR128Rotate calls the vecLib framework function vR128Rotate.
+func VR128Rotate(vA unsafe.Pointer, vRotateFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVR128Rotate == nil {
+		ebipurego.RegisterLibFunc(&_fnVR128Rotate, _lib, "vR128Rotate")
+	}
+	return _fnVR128Rotate(vA, vRotateFactor)
 }
 
 var _fnVR256Rotate func(unsafe.Pointer, uint32, unsafe.Pointer)
@@ -38503,6 +41145,28 @@ func VR512Rotate(a unsafe.Pointer, rotateAmount uint32, result unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnVR512Rotate, _lib, "vR512Rotate")
 	}
 	_fnVR512Rotate(a, rotateAmount, result)
+}
+
+var _fnVR64Rotate func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VR64Rotate calls the vecLib framework function vR64Rotate.
+func VR64Rotate(vA unsafe.Pointer, vRotateFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVR64Rotate == nil {
+		ebipurego.RegisterLibFunc(&_fnVR64Rotate, _lib, "vR64Rotate")
+	}
+	return _fnVR64Rotate(vA, vRotateFactor)
+}
+
+var _fnVR64Rotate2 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VR64Rotate2 calls the vecLib framework function vR64Rotate2.
+func VR64Rotate2(vA unsafe.Pointer, vRotateFactor unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVR64Rotate2 == nil {
+		ebipurego.RegisterLibFunc(&_fnVR64Rotate2, _lib, "vR64Rotate2")
+	}
+	return _fnVR64Rotate2(vA, vRotateFactor)
 }
 
 var _fnVS1024Add func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -38593,6 +41257,39 @@ func VS1024SubS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
 	_fnVS1024SubS(a, b, result)
 }
 
+var _fnVS128Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS128Add calls the vecLib framework function vS128Add.
+func VS128Add(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS128Add == nil {
+		ebipurego.RegisterLibFunc(&_fnVS128Add, _lib, "vS128Add")
+	}
+	return _fnVS128Add(vA, vB)
+}
+
+var _fnVS128AddS func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS128AddS calls the vecLib framework function vS128AddS.
+func VS128AddS(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS128AddS == nil {
+		ebipurego.RegisterLibFunc(&_fnVS128AddS, _lib, "vS128AddS")
+	}
+	return _fnVS128AddS(vA, vB)
+}
+
+var _fnVS128Divide func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS128Divide calls the vecLib framework function vS128Divide.
+func VS128Divide(vN unsafe.Pointer, vD unsafe.Pointer, vRemainder unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS128Divide == nil {
+		ebipurego.RegisterLibFunc(&_fnVS128Divide, _lib, "vS128Divide")
+	}
+	return _fnVS128Divide(vN, vD, vRemainder)
+}
+
 var _fnVS128FullMultiply func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // VS128FullMultiply calls the vecLib framework function vS128FullMultiply.
@@ -38602,6 +41299,72 @@ func VS128FullMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer
 		ebipurego.RegisterLibFunc(&_fnVS128FullMultiply, _lib, "vS128FullMultiply")
 	}
 	_fnVS128FullMultiply(a, b, result)
+}
+
+var _fnVS128HalfMultiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS128HalfMultiply calls the vecLib framework function vS128HalfMultiply.
+func VS128HalfMultiply(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS128HalfMultiply == nil {
+		ebipurego.RegisterLibFunc(&_fnVS128HalfMultiply, _lib, "vS128HalfMultiply")
+	}
+	return _fnVS128HalfMultiply(vA, vB)
+}
+
+var _fnVS128Neg func(unsafe.Pointer) unsafe.Pointer
+
+// VS128Neg calls the vecLib framework function vS128Neg.
+func VS128Neg(vA unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS128Neg == nil {
+		ebipurego.RegisterLibFunc(&_fnVS128Neg, _lib, "vS128Neg")
+	}
+	return _fnVS128Neg(vA)
+}
+
+var _fnVS128Sub func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS128Sub calls the vecLib framework function vS128Sub.
+func VS128Sub(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS128Sub == nil {
+		ebipurego.RegisterLibFunc(&_fnVS128Sub, _lib, "vS128Sub")
+	}
+	return _fnVS128Sub(vA, vB)
+}
+
+var _fnVS128SubS func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS128SubS calls the vecLib framework function vS128SubS.
+func VS128SubS(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS128SubS == nil {
+		ebipurego.RegisterLibFunc(&_fnVS128SubS, _lib, "vS128SubS")
+	}
+	return _fnVS128SubS(vA, vB)
+}
+
+var _fnVS16Divide func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS16Divide calls the vecLib framework function vS16Divide.
+func VS16Divide(vN unsafe.Pointer, vD unsafe.Pointer, vRemainder unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS16Divide == nil {
+		ebipurego.RegisterLibFunc(&_fnVS16Divide, _lib, "vS16Divide")
+	}
+	return _fnVS16Divide(vN, vD, vRemainder)
+}
+
+var _fnVS16HalfMultiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS16HalfMultiply calls the vecLib framework function vS16HalfMultiply.
+func VS16HalfMultiply(vbasicopsVA unsafe.Pointer, vbasicopsVB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS16HalfMultiply == nil {
+		ebipurego.RegisterLibFunc(&_fnVS16HalfMultiply, _lib, "vS16HalfMultiply")
+	}
+	return _fnVS16HalfMultiply(vbasicopsVA, vbasicopsVB)
 }
 
 var _fnVS256Add func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -38703,6 +41466,50 @@ func VS256SubS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
 	_fnVS256SubS(a, b, result)
 }
 
+var _fnVS32Divide func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS32Divide calls the vecLib framework function vS32Divide.
+func VS32Divide(vN unsafe.Pointer, vD unsafe.Pointer, vRemainder unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS32Divide == nil {
+		ebipurego.RegisterLibFunc(&_fnVS32Divide, _lib, "vS32Divide")
+	}
+	return _fnVS32Divide(vN, vD, vRemainder)
+}
+
+var _fnVS32FullMulEven func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS32FullMulEven calls the vecLib framework function vS32FullMulEven.
+func VS32FullMulEven(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS32FullMulEven == nil {
+		ebipurego.RegisterLibFunc(&_fnVS32FullMulEven, _lib, "vS32FullMulEven")
+	}
+	return _fnVS32FullMulEven(vA, vB)
+}
+
+var _fnVS32FullMulOdd func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS32FullMulOdd calls the vecLib framework function vS32FullMulOdd.
+func VS32FullMulOdd(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS32FullMulOdd == nil {
+		ebipurego.RegisterLibFunc(&_fnVS32FullMulOdd, _lib, "vS32FullMulOdd")
+	}
+	return _fnVS32FullMulOdd(vA, vB)
+}
+
+var _fnVS32HalfMultiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS32HalfMultiply calls the vecLib framework function vS32HalfMultiply.
+func VS32HalfMultiply(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS32HalfMultiply == nil {
+		ebipurego.RegisterLibFunc(&_fnVS32HalfMultiply, _lib, "vS32HalfMultiply")
+	}
+	return _fnVS32HalfMultiply(vA, vB)
+}
+
 var _fnVS512Add func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // VS512Add calls the vecLib framework function vS512Add.
@@ -38800,6 +41607,127 @@ func VS512SubS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnVS512SubS, _lib, "vS512SubS")
 	}
 	_fnVS512SubS(a, b, result)
+}
+
+var _fnVS64Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS64Add calls the vecLib framework function vS64Add.
+func VS64Add(vbasicopsVA unsafe.Pointer, vbasicopsVB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS64Add == nil {
+		ebipurego.RegisterLibFunc(&_fnVS64Add, _lib, "vS64Add")
+	}
+	return _fnVS64Add(vbasicopsVA, vbasicopsVB)
+}
+
+var _fnVS64AddS func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS64AddS calls the vecLib framework function vS64AddS.
+func VS64AddS(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS64AddS == nil {
+		ebipurego.RegisterLibFunc(&_fnVS64AddS, _lib, "vS64AddS")
+	}
+	return _fnVS64AddS(vA, vB)
+}
+
+var _fnVS64Divide func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS64Divide calls the vecLib framework function vS64Divide.
+func VS64Divide(vN unsafe.Pointer, vD unsafe.Pointer, vRemainder unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS64Divide == nil {
+		ebipurego.RegisterLibFunc(&_fnVS64Divide, _lib, "vS64Divide")
+	}
+	return _fnVS64Divide(vN, vD, vRemainder)
+}
+
+var _fnVS64FullMulEven func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS64FullMulEven calls the vecLib framework function vS64FullMulEven.
+func VS64FullMulEven(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS64FullMulEven == nil {
+		ebipurego.RegisterLibFunc(&_fnVS64FullMulEven, _lib, "vS64FullMulEven")
+	}
+	return _fnVS64FullMulEven(vA, vB)
+}
+
+var _fnVS64FullMulOdd func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS64FullMulOdd calls the vecLib framework function vS64FullMulOdd.
+func VS64FullMulOdd(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS64FullMulOdd == nil {
+		ebipurego.RegisterLibFunc(&_fnVS64FullMulOdd, _lib, "vS64FullMulOdd")
+	}
+	return _fnVS64FullMulOdd(vA, vB)
+}
+
+var _fnVS64HalfMultiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS64HalfMultiply calls the vecLib framework function vS64HalfMultiply.
+func VS64HalfMultiply(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS64HalfMultiply == nil {
+		ebipurego.RegisterLibFunc(&_fnVS64HalfMultiply, _lib, "vS64HalfMultiply")
+	}
+	return _fnVS64HalfMultiply(vA, vB)
+}
+
+var _fnVS64Neg func(unsafe.Pointer) unsafe.Pointer
+
+// VS64Neg calls the vecLib framework function vS64Neg.
+func VS64Neg(vA unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS64Neg == nil {
+		ebipurego.RegisterLibFunc(&_fnVS64Neg, _lib, "vS64Neg")
+	}
+	return _fnVS64Neg(vA)
+}
+
+var _fnVS64Sub func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS64Sub calls the vecLib framework function vS64Sub.
+func VS64Sub(vbasicopsVA unsafe.Pointer, vbasicopsVB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS64Sub == nil {
+		ebipurego.RegisterLibFunc(&_fnVS64Sub, _lib, "vS64Sub")
+	}
+	return _fnVS64Sub(vbasicopsVA, vbasicopsVB)
+}
+
+var _fnVS64SubS func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS64SubS calls the vecLib framework function vS64SubS.
+func VS64SubS(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS64SubS == nil {
+		ebipurego.RegisterLibFunc(&_fnVS64SubS, _lib, "vS64SubS")
+	}
+	return _fnVS64SubS(vA, vB)
+}
+
+var _fnVS8Divide func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS8Divide calls the vecLib framework function vS8Divide.
+func VS8Divide(vN unsafe.Pointer, vD unsafe.Pointer, vRemainder unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS8Divide == nil {
+		ebipurego.RegisterLibFunc(&_fnVS8Divide, _lib, "vS8Divide")
+	}
+	return _fnVS8Divide(vN, vD, vRemainder)
+}
+
+var _fnVS8HalfMultiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VS8HalfMultiply calls the vecLib framework function vS8HalfMultiply.
+func VS8HalfMultiply(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVS8HalfMultiply == nil {
+		ebipurego.RegisterLibFunc(&_fnVS8HalfMultiply, _lib, "vS8HalfMultiply")
+	}
+	return _fnVS8HalfMultiply(vA, vB)
 }
 
 var _fnVSasum func(int32, unsafe.Pointer) float32
@@ -39156,6 +42084,39 @@ func VU1024SubS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
 	_fnVU1024SubS(a, b, result)
 }
 
+var _fnVU128Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU128Add calls the vecLib framework function vU128Add.
+func VU128Add(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU128Add == nil {
+		ebipurego.RegisterLibFunc(&_fnVU128Add, _lib, "vU128Add")
+	}
+	return _fnVU128Add(vA, vB)
+}
+
+var _fnVU128AddS func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU128AddS calls the vecLib framework function vU128AddS.
+func VU128AddS(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU128AddS == nil {
+		ebipurego.RegisterLibFunc(&_fnVU128AddS, _lib, "vU128AddS")
+	}
+	return _fnVU128AddS(vA, vB)
+}
+
+var _fnVU128Divide func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU128Divide calls the vecLib framework function vU128Divide.
+func VU128Divide(vN unsafe.Pointer, vD unsafe.Pointer, vRemainder unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU128Divide == nil {
+		ebipurego.RegisterLibFunc(&_fnVU128Divide, _lib, "vU128Divide")
+	}
+	return _fnVU128Divide(vN, vD, vRemainder)
+}
+
 var _fnVU128FullMultiply func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // VU128FullMultiply calls the vecLib framework function vU128FullMultiply.
@@ -39165,6 +42126,72 @@ func VU128FullMultiply(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer
 		ebipurego.RegisterLibFunc(&_fnVU128FullMultiply, _lib, "vU128FullMultiply")
 	}
 	_fnVU128FullMultiply(a, b, result)
+}
+
+var _fnVU128HalfMultiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU128HalfMultiply calls the vecLib framework function vU128HalfMultiply.
+func VU128HalfMultiply(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU128HalfMultiply == nil {
+		ebipurego.RegisterLibFunc(&_fnVU128HalfMultiply, _lib, "vU128HalfMultiply")
+	}
+	return _fnVU128HalfMultiply(vA, vB)
+}
+
+var _fnVU128Neg func(unsafe.Pointer) unsafe.Pointer
+
+// VU128Neg calls the vecLib framework function vU128Neg.
+func VU128Neg(vA unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU128Neg == nil {
+		ebipurego.RegisterLibFunc(&_fnVU128Neg, _lib, "vU128Neg")
+	}
+	return _fnVU128Neg(vA)
+}
+
+var _fnVU128Sub func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU128Sub calls the vecLib framework function vU128Sub.
+func VU128Sub(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU128Sub == nil {
+		ebipurego.RegisterLibFunc(&_fnVU128Sub, _lib, "vU128Sub")
+	}
+	return _fnVU128Sub(vA, vB)
+}
+
+var _fnVU128SubS func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU128SubS calls the vecLib framework function vU128SubS.
+func VU128SubS(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU128SubS == nil {
+		ebipurego.RegisterLibFunc(&_fnVU128SubS, _lib, "vU128SubS")
+	}
+	return _fnVU128SubS(vA, vB)
+}
+
+var _fnVU16Divide func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU16Divide calls the vecLib framework function vU16Divide.
+func VU16Divide(vN unsafe.Pointer, vD unsafe.Pointer, vRemainder unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU16Divide == nil {
+		ebipurego.RegisterLibFunc(&_fnVU16Divide, _lib, "vU16Divide")
+	}
+	return _fnVU16Divide(vN, vD, vRemainder)
+}
+
+var _fnVU16HalfMultiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU16HalfMultiply calls the vecLib framework function vU16HalfMultiply.
+func VU16HalfMultiply(vbasicopsVA unsafe.Pointer, vbasicopsVB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU16HalfMultiply == nil {
+		ebipurego.RegisterLibFunc(&_fnVU16HalfMultiply, _lib, "vU16HalfMultiply")
+	}
+	return _fnVU16HalfMultiply(vbasicopsVA, vbasicopsVB)
 }
 
 var _fnVU256Add func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -39266,6 +42293,50 @@ func VU256SubS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
 	_fnVU256SubS(a, b, result)
 }
 
+var _fnVU32Divide func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU32Divide calls the vecLib framework function vU32Divide.
+func VU32Divide(vN unsafe.Pointer, vD unsafe.Pointer, vRemainder unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU32Divide == nil {
+		ebipurego.RegisterLibFunc(&_fnVU32Divide, _lib, "vU32Divide")
+	}
+	return _fnVU32Divide(vN, vD, vRemainder)
+}
+
+var _fnVU32FullMulEven func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU32FullMulEven calls the vecLib framework function vU32FullMulEven.
+func VU32FullMulEven(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU32FullMulEven == nil {
+		ebipurego.RegisterLibFunc(&_fnVU32FullMulEven, _lib, "vU32FullMulEven")
+	}
+	return _fnVU32FullMulEven(vA, vB)
+}
+
+var _fnVU32FullMulOdd func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU32FullMulOdd calls the vecLib framework function vU32FullMulOdd.
+func VU32FullMulOdd(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU32FullMulOdd == nil {
+		ebipurego.RegisterLibFunc(&_fnVU32FullMulOdd, _lib, "vU32FullMulOdd")
+	}
+	return _fnVU32FullMulOdd(vA, vB)
+}
+
+var _fnVU32HalfMultiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU32HalfMultiply calls the vecLib framework function vU32HalfMultiply.
+func VU32HalfMultiply(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU32HalfMultiply == nil {
+		ebipurego.RegisterLibFunc(&_fnVU32HalfMultiply, _lib, "vU32HalfMultiply")
+	}
+	return _fnVU32HalfMultiply(vA, vB)
+}
+
 var _fnVU512Add func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // VU512Add calls the vecLib framework function vU512Add.
@@ -39363,6 +42434,646 @@ func VU512SubS(a unsafe.Pointer, b unsafe.Pointer, result unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnVU512SubS, _lib, "vU512SubS")
 	}
 	_fnVU512SubS(a, b, result)
+}
+
+var _fnVU64Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU64Add calls the vecLib framework function vU64Add.
+func VU64Add(vbasicopsVA unsafe.Pointer, vbasicopsVB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU64Add == nil {
+		ebipurego.RegisterLibFunc(&_fnVU64Add, _lib, "vU64Add")
+	}
+	return _fnVU64Add(vbasicopsVA, vbasicopsVB)
+}
+
+var _fnVU64AddS func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU64AddS calls the vecLib framework function vU64AddS.
+func VU64AddS(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU64AddS == nil {
+		ebipurego.RegisterLibFunc(&_fnVU64AddS, _lib, "vU64AddS")
+	}
+	return _fnVU64AddS(vA, vB)
+}
+
+var _fnVU64Divide func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU64Divide calls the vecLib framework function vU64Divide.
+func VU64Divide(vN unsafe.Pointer, vD unsafe.Pointer, vRemainder unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU64Divide == nil {
+		ebipurego.RegisterLibFunc(&_fnVU64Divide, _lib, "vU64Divide")
+	}
+	return _fnVU64Divide(vN, vD, vRemainder)
+}
+
+var _fnVU64FullMulEven func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU64FullMulEven calls the vecLib framework function vU64FullMulEven.
+func VU64FullMulEven(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU64FullMulEven == nil {
+		ebipurego.RegisterLibFunc(&_fnVU64FullMulEven, _lib, "vU64FullMulEven")
+	}
+	return _fnVU64FullMulEven(vA, vB)
+}
+
+var _fnVU64FullMulOdd func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU64FullMulOdd calls the vecLib framework function vU64FullMulOdd.
+func VU64FullMulOdd(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU64FullMulOdd == nil {
+		ebipurego.RegisterLibFunc(&_fnVU64FullMulOdd, _lib, "vU64FullMulOdd")
+	}
+	return _fnVU64FullMulOdd(vA, vB)
+}
+
+var _fnVU64HalfMultiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU64HalfMultiply calls the vecLib framework function vU64HalfMultiply.
+func VU64HalfMultiply(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU64HalfMultiply == nil {
+		ebipurego.RegisterLibFunc(&_fnVU64HalfMultiply, _lib, "vU64HalfMultiply")
+	}
+	return _fnVU64HalfMultiply(vA, vB)
+}
+
+var _fnVU64Neg func(unsafe.Pointer) unsafe.Pointer
+
+// VU64Neg calls the vecLib framework function vU64Neg.
+func VU64Neg(vA unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU64Neg == nil {
+		ebipurego.RegisterLibFunc(&_fnVU64Neg, _lib, "vU64Neg")
+	}
+	return _fnVU64Neg(vA)
+}
+
+var _fnVU64Sub func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU64Sub calls the vecLib framework function vU64Sub.
+func VU64Sub(vbasicopsVA unsafe.Pointer, vbasicopsVB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU64Sub == nil {
+		ebipurego.RegisterLibFunc(&_fnVU64Sub, _lib, "vU64Sub")
+	}
+	return _fnVU64Sub(vbasicopsVA, vbasicopsVB)
+}
+
+var _fnVU64SubS func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU64SubS calls the vecLib framework function vU64SubS.
+func VU64SubS(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU64SubS == nil {
+		ebipurego.RegisterLibFunc(&_fnVU64SubS, _lib, "vU64SubS")
+	}
+	return _fnVU64SubS(vA, vB)
+}
+
+var _fnVU8Divide func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU8Divide calls the vecLib framework function vU8Divide.
+func VU8Divide(vN unsafe.Pointer, vD unsafe.Pointer, vRemainder unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU8Divide == nil {
+		ebipurego.RegisterLibFunc(&_fnVU8Divide, _lib, "vU8Divide")
+	}
+	return _fnVU8Divide(vN, vD, vRemainder)
+}
+
+var _fnVU8HalfMultiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// VU8HalfMultiply calls the vecLib framework function vU8HalfMultiply.
+func VU8HalfMultiply(vA unsafe.Pointer, vB unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVU8HalfMultiply == nil {
+		ebipurego.RegisterLibFunc(&_fnVU8HalfMultiply, _lib, "vU8HalfMultiply")
+	}
+	return _fnVU8HalfMultiply(vA, vB)
+}
+
+var _fnVacosf func(unsafe.Pointer) unsafe.Pointer
+
+// Vacosf calls the vecLib framework function vacosf.
+func Vacosf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVacosf == nil {
+		ebipurego.RegisterLibFunc(&_fnVacosf, _lib, "vacosf")
+	}
+	return _fnVacosf(arg)
+}
+
+var _fnVacoshf func(unsafe.Pointer) unsafe.Pointer
+
+// Vacoshf calls the vecLib framework function vacoshf.
+func Vacoshf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVacoshf == nil {
+		ebipurego.RegisterLibFunc(&_fnVacoshf, _lib, "vacoshf")
+	}
+	return _fnVacoshf(arg)
+}
+
+var _fnVasinf func(unsafe.Pointer) unsafe.Pointer
+
+// Vasinf calls the vecLib framework function vasinf.
+func Vasinf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVasinf == nil {
+		ebipurego.RegisterLibFunc(&_fnVasinf, _lib, "vasinf")
+	}
+	return _fnVasinf(arg)
+}
+
+var _fnVasinhf func(unsafe.Pointer) unsafe.Pointer
+
+// Vasinhf calls the vecLib framework function vasinhf.
+func Vasinhf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVasinhf == nil {
+		ebipurego.RegisterLibFunc(&_fnVasinhf, _lib, "vasinhf")
+	}
+	return _fnVasinhf(arg)
+}
+
+var _fnVatan2f func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Vatan2f calls the vecLib framework function vatan2f.
+func Vatan2f(arg unsafe.Pointer, arg2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVatan2f == nil {
+		ebipurego.RegisterLibFunc(&_fnVatan2f, _lib, "vatan2f")
+	}
+	return _fnVatan2f(arg, arg2)
+}
+
+var _fnVatanf func(unsafe.Pointer) unsafe.Pointer
+
+// Vatanf calls the vecLib framework function vatanf.
+func Vatanf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVatanf == nil {
+		ebipurego.RegisterLibFunc(&_fnVatanf, _lib, "vatanf")
+	}
+	return _fnVatanf(arg)
+}
+
+var _fnVatanhf func(unsafe.Pointer) unsafe.Pointer
+
+// Vatanhf calls the vecLib framework function vatanhf.
+func Vatanhf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVatanhf == nil {
+		ebipurego.RegisterLibFunc(&_fnVatanhf, _lib, "vatanhf")
+	}
+	return _fnVatanhf(arg)
+}
+
+var _fnVceilf func(unsafe.Pointer) unsafe.Pointer
+
+// Vceilf calls the vecLib framework function vceilf.
+func Vceilf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVceilf == nil {
+		ebipurego.RegisterLibFunc(&_fnVceilf, _lib, "vceilf")
+	}
+	return _fnVceilf(arg)
+}
+
+var _fnVclassifyf func(unsafe.Pointer) unsafe.Pointer
+
+// Vclassifyf calls the vecLib framework function vclassifyf.
+func Vclassifyf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVclassifyf == nil {
+		ebipurego.RegisterLibFunc(&_fnVclassifyf, _lib, "vclassifyf")
+	}
+	return _fnVclassifyf(arg)
+}
+
+var _fnVcopysignf func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Vcopysignf calls the vecLib framework function vcopysignf.
+func Vcopysignf(arg unsafe.Pointer, arg2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVcopysignf == nil {
+		ebipurego.RegisterLibFunc(&_fnVcopysignf, _lib, "vcopysignf")
+	}
+	return _fnVcopysignf(arg, arg2)
+}
+
+var _fnVcosf func(unsafe.Pointer) unsafe.Pointer
+
+// Vcosf calls the vecLib framework function vcosf.
+func Vcosf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVcosf == nil {
+		ebipurego.RegisterLibFunc(&_fnVcosf, _lib, "vcosf")
+	}
+	return _fnVcosf(arg)
+}
+
+var _fnVcoshf func(unsafe.Pointer) unsafe.Pointer
+
+// Vcoshf calls the vecLib framework function vcoshf.
+func Vcoshf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVcoshf == nil {
+		ebipurego.RegisterLibFunc(&_fnVcoshf, _lib, "vcoshf")
+	}
+	return _fnVcoshf(arg)
+}
+
+var _fnVcospif func(unsafe.Pointer) unsafe.Pointer
+
+// Vcospif calls the vecLib framework function vcospif.
+func Vcospif(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVcospif == nil {
+		ebipurego.RegisterLibFunc(&_fnVcospif, _lib, "vcospif")
+	}
+	return _fnVcospif(arg)
+}
+
+var _fnVdivf func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Vdivf calls the vecLib framework function vdivf.
+func Vdivf(arg unsafe.Pointer, arg2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVdivf == nil {
+		ebipurego.RegisterLibFunc(&_fnVdivf, _lib, "vdivf")
+	}
+	return _fnVdivf(arg, arg2)
+}
+
+var _fnVexp2f func(unsafe.Pointer) unsafe.Pointer
+
+// Vexp2f calls the vecLib framework function vexp2f.
+func Vexp2f(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVexp2f == nil {
+		ebipurego.RegisterLibFunc(&_fnVexp2f, _lib, "vexp2f")
+	}
+	return _fnVexp2f(arg)
+}
+
+var _fnVexpf func(unsafe.Pointer) unsafe.Pointer
+
+// Vexpf calls the vecLib framework function vexpf.
+func Vexpf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVexpf == nil {
+		ebipurego.RegisterLibFunc(&_fnVexpf, _lib, "vexpf")
+	}
+	return _fnVexpf(arg)
+}
+
+var _fnVexpm1f func(unsafe.Pointer) unsafe.Pointer
+
+// Vexpm1f calls the vecLib framework function vexpm1f.
+func Vexpm1f(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVexpm1f == nil {
+		ebipurego.RegisterLibFunc(&_fnVexpm1f, _lib, "vexpm1f")
+	}
+	return _fnVexpm1f(arg)
+}
+
+var _fnVfabf func(unsafe.Pointer) unsafe.Pointer
+
+// Vfabf calls the vecLib framework function vfabf.
+func Vfabf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVfabf == nil {
+		ebipurego.RegisterLibFunc(&_fnVfabf, _lib, "vfabf")
+	}
+	return _fnVfabf(arg)
+}
+
+var _fnVfabsf func(unsafe.Pointer) unsafe.Pointer
+
+// Vfabsf calls the vecLib framework function vfabsf.
+func Vfabsf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVfabsf == nil {
+		ebipurego.RegisterLibFunc(&_fnVfabsf, _lib, "vfabsf")
+	}
+	return _fnVfabsf(arg)
+}
+
+var _fnVfloorf func(unsafe.Pointer) unsafe.Pointer
+
+// Vfloorf calls the vecLib framework function vfloorf.
+func Vfloorf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVfloorf == nil {
+		ebipurego.RegisterLibFunc(&_fnVfloorf, _lib, "vfloorf")
+	}
+	return _fnVfloorf(arg)
+}
+
+var _fnVfmodf func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Vfmodf calls the vecLib framework function vfmodf.
+func Vfmodf(arg unsafe.Pointer, arg2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVfmodf == nil {
+		ebipurego.RegisterLibFunc(&_fnVfmodf, _lib, "vfmodf")
+	}
+	return _fnVfmodf(arg, arg2)
+}
+
+var _fnVintf func(unsafe.Pointer) unsafe.Pointer
+
+// Vintf calls the vecLib framework function vintf.
+func Vintf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVintf == nil {
+		ebipurego.RegisterLibFunc(&_fnVintf, _lib, "vintf")
+	}
+	return _fnVintf(arg)
+}
+
+var _fnVipowf func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Vipowf calls the vecLib framework function vipowf.
+func Vipowf(arg unsafe.Pointer, arg2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVipowf == nil {
+		ebipurego.RegisterLibFunc(&_fnVipowf, _lib, "vipowf")
+	}
+	return _fnVipowf(arg, arg2)
+}
+
+var _fnVlog10f func(unsafe.Pointer) unsafe.Pointer
+
+// Vlog10f calls the vecLib framework function vlog10f.
+func Vlog10f(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVlog10f == nil {
+		ebipurego.RegisterLibFunc(&_fnVlog10f, _lib, "vlog10f")
+	}
+	return _fnVlog10f(arg)
+}
+
+var _fnVlog1pf func(unsafe.Pointer) unsafe.Pointer
+
+// Vlog1pf calls the vecLib framework function vlog1pf.
+func Vlog1pf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVlog1pf == nil {
+		ebipurego.RegisterLibFunc(&_fnVlog1pf, _lib, "vlog1pf")
+	}
+	return _fnVlog1pf(arg)
+}
+
+var _fnVlog2f func(unsafe.Pointer) unsafe.Pointer
+
+// Vlog2f calls the vecLib framework function vlog2f.
+func Vlog2f(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVlog2f == nil {
+		ebipurego.RegisterLibFunc(&_fnVlog2f, _lib, "vlog2f")
+	}
+	return _fnVlog2f(arg)
+}
+
+var _fnVlogbf func(unsafe.Pointer) unsafe.Pointer
+
+// Vlogbf calls the vecLib framework function vlogbf.
+func Vlogbf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVlogbf == nil {
+		ebipurego.RegisterLibFunc(&_fnVlogbf, _lib, "vlogbf")
+	}
+	return _fnVlogbf(arg)
+}
+
+var _fnVlogf func(unsafe.Pointer) unsafe.Pointer
+
+// Vlogf calls the vecLib framework function vlogf.
+func Vlogf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVlogf == nil {
+		ebipurego.RegisterLibFunc(&_fnVlogf, _lib, "vlogf")
+	}
+	return _fnVlogf(arg)
+}
+
+var _fnVnextafterf func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Vnextafterf calls the vecLib framework function vnextafterf.
+func Vnextafterf(arg unsafe.Pointer, arg2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVnextafterf == nil {
+		ebipurego.RegisterLibFunc(&_fnVnextafterf, _lib, "vnextafterf")
+	}
+	return _fnVnextafterf(arg, arg2)
+}
+
+var _fnVnintf func(unsafe.Pointer) unsafe.Pointer
+
+// Vnintf calls the vecLib framework function vnintf.
+func Vnintf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVnintf == nil {
+		ebipurego.RegisterLibFunc(&_fnVnintf, _lib, "vnintf")
+	}
+	return _fnVnintf(arg)
+}
+
+var _fnVpowf func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Vpowf calls the vecLib framework function vpowf.
+func Vpowf(arg unsafe.Pointer, arg2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVpowf == nil {
+		ebipurego.RegisterLibFunc(&_fnVpowf, _lib, "vpowf")
+	}
+	return _fnVpowf(arg, arg2)
+}
+
+var _fnVrecf func(unsafe.Pointer) unsafe.Pointer
+
+// Vrecf calls the vecLib framework function vrecf.
+func Vrecf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVrecf == nil {
+		ebipurego.RegisterLibFunc(&_fnVrecf, _lib, "vrecf")
+	}
+	return _fnVrecf(arg)
+}
+
+var _fnVremainderf func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Vremainderf calls the vecLib framework function vremainderf.
+func Vremainderf(arg unsafe.Pointer, arg2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVremainderf == nil {
+		ebipurego.RegisterLibFunc(&_fnVremainderf, _lib, "vremainderf")
+	}
+	return _fnVremainderf(arg, arg2)
+}
+
+var _fnVremquof func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Vremquof calls the vecLib framework function vremquof.
+func Vremquof(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVremquof == nil {
+		ebipurego.RegisterLibFunc(&_fnVremquof, _lib, "vremquof")
+	}
+	return _fnVremquof(arg, arg2, arg3)
+}
+
+var _fnVrsqrtf func(unsafe.Pointer) unsafe.Pointer
+
+// Vrsqrtf calls the vecLib framework function vrsqrtf.
+func Vrsqrtf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVrsqrtf == nil {
+		ebipurego.RegisterLibFunc(&_fnVrsqrtf, _lib, "vrsqrtf")
+	}
+	return _fnVrsqrtf(arg)
+}
+
+var _fnVscalbf func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Vscalbf calls the vecLib framework function vscalbf.
+func Vscalbf(arg unsafe.Pointer, arg2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVscalbf == nil {
+		ebipurego.RegisterLibFunc(&_fnVscalbf, _lib, "vscalbf")
+	}
+	return _fnVscalbf(arg, arg2)
+}
+
+var _fnVsignbitf func(unsafe.Pointer) unsafe.Pointer
+
+// Vsignbitf calls the vecLib framework function vsignbitf.
+func Vsignbitf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVsignbitf == nil {
+		ebipurego.RegisterLibFunc(&_fnVsignbitf, _lib, "vsignbitf")
+	}
+	return _fnVsignbitf(arg)
+}
+
+var _fnVsincosf func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Vsincosf calls the vecLib framework function vsincosf.
+func Vsincosf(arg unsafe.Pointer, arg2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVsincosf == nil {
+		ebipurego.RegisterLibFunc(&_fnVsincosf, _lib, "vsincosf")
+	}
+	return _fnVsincosf(arg, arg2)
+}
+
+var _fnVsinf func(unsafe.Pointer) unsafe.Pointer
+
+// Vsinf calls the vecLib framework function vsinf.
+func Vsinf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVsinf == nil {
+		ebipurego.RegisterLibFunc(&_fnVsinf, _lib, "vsinf")
+	}
+	return _fnVsinf(arg)
+}
+
+var _fnVsinhf func(unsafe.Pointer) unsafe.Pointer
+
+// Vsinhf calls the vecLib framework function vsinhf.
+func Vsinhf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVsinhf == nil {
+		ebipurego.RegisterLibFunc(&_fnVsinhf, _lib, "vsinhf")
+	}
+	return _fnVsinhf(arg)
+}
+
+var _fnVsinpif func(unsafe.Pointer) unsafe.Pointer
+
+// Vsinpif calls the vecLib framework function vsinpif.
+func Vsinpif(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVsinpif == nil {
+		ebipurego.RegisterLibFunc(&_fnVsinpif, _lib, "vsinpif")
+	}
+	return _fnVsinpif(arg)
+}
+
+var _fnVsqrtf func(unsafe.Pointer) unsafe.Pointer
+
+// Vsqrtf calls the vecLib framework function vsqrtf.
+func Vsqrtf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVsqrtf == nil {
+		ebipurego.RegisterLibFunc(&_fnVsqrtf, _lib, "vsqrtf")
+	}
+	return _fnVsqrtf(arg)
+}
+
+var _fnVtablelookup func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// Vtablelookup calls the vecLib framework function vtablelookup.
+func Vtablelookup(arg unsafe.Pointer) (result unsafe.Pointer, arg2 uint32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVtablelookup == nil {
+		ebipurego.RegisterLibFunc(&_fnVtablelookup, _lib, "vtablelookup")
+	}
+	var _out0 uint32
+	_ret := _fnVtablelookup(arg, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnVtanf func(unsafe.Pointer) unsafe.Pointer
+
+// Vtanf calls the vecLib framework function vtanf.
+func Vtanf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVtanf == nil {
+		ebipurego.RegisterLibFunc(&_fnVtanf, _lib, "vtanf")
+	}
+	return _fnVtanf(arg)
+}
+
+var _fnVtanhf func(unsafe.Pointer) unsafe.Pointer
+
+// Vtanhf calls the vecLib framework function vtanhf.
+func Vtanhf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVtanhf == nil {
+		ebipurego.RegisterLibFunc(&_fnVtanhf, _lib, "vtanhf")
+	}
+	return _fnVtanhf(arg)
+}
+
+var _fnVtanpif func(unsafe.Pointer) unsafe.Pointer
+
+// Vtanpif calls the vecLib framework function vtanpif.
+func Vtanpif(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVtanpif == nil {
+		ebipurego.RegisterLibFunc(&_fnVtanpif, _lib, "vtanpif")
+	}
+	return _fnVtanpif(arg)
+}
+
+var _fnVtruncf func(unsafe.Pointer) unsafe.Pointer
+
+// Vtruncf calls the vecLib framework function vtruncf.
+func Vtruncf(arg unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVtruncf == nil {
+		ebipurego.RegisterLibFunc(&_fnVtruncf, _lib, "vtruncf")
+	}
+	return _fnVtruncf(arg)
 }
 
 var _fnVvacos func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)

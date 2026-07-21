@@ -126,6 +126,17 @@ func GCPoint2Equal(point1 unsafe.Pointer, point2 unsafe.Pointer) bool {
 	return _fnGCPoint2Equal(point1, point2)
 }
 
+var _fnGCPoint2Make func(float32, float32) unsafe.Pointer
+
+// GCPoint2Make calls the GameController framework function GCPoint2Make.
+func GCPoint2Make(x float32, y float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGCPoint2Make == nil {
+		ebipurego.RegisterLibFunc(&_fnGCPoint2Make, _lib, "GCPoint2Make")
+	}
+	return _fnGCPoint2Make(x, y)
+}
+
 var _fnNSDataFromGCExtendedGamepadSnapShotDataV100 func(unsafe.Pointer) objc.ID
 
 // NSDataFromGCExtendedGamepadSnapShotDataV100 calls the GameController framework function NSDataFromGCExtendedGamepadSnapShotDataV100.

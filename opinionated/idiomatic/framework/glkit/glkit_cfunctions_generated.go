@@ -25,6 +25,19 @@ func GLKMathDegreesToRadians(degrees float32) float32 {
 	return _fnGLKMathDegreesToRadians(degrees)
 }
 
+var _fnGLKMathProject func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMathProject calls the GLKit framework function GLKMathProject.
+func GLKMathProject(object unsafe.Pointer, model unsafe.Pointer, projection unsafe.Pointer) (result unsafe.Pointer, viewport int32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMathProject == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMathProject, _lib, "GLKMathProject")
+	}
+	var _out0 int32
+	_ret := _fnGLKMathProject(object, model, projection, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnGLKMathRadiansToDegrees func(float32) float32
 
 // GLKMathRadiansToDegrees calls the GLKit framework function GLKMathRadiansToDegrees.
@@ -34,6 +47,248 @@ func GLKMathRadiansToDegrees(radians float32) float32 {
 		ebipurego.RegisterLibFunc(&_fnGLKMathRadiansToDegrees, _lib, "GLKMathRadiansToDegrees")
 	}
 	return _fnGLKMathRadiansToDegrees(radians)
+}
+
+var _fnGLKMathUnproject func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMathUnproject calls the GLKit framework function GLKMathUnproject.
+func GLKMathUnproject(window unsafe.Pointer, model unsafe.Pointer, projection unsafe.Pointer) (result unsafe.Pointer, viewport int32, success bool) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMathUnproject == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMathUnproject, _lib, "GLKMathUnproject")
+	}
+	var _out0 int32
+	var _out1 bool
+	_ret := _fnGLKMathUnproject(window, model, projection, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
+}
+
+var _fnGLKMatrix3Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3Add calls the GLKit framework function GLKMatrix3Add.
+func GLKMatrix3Add(matrixLeft unsafe.Pointer, matrixRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3Add == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3Add, _lib, "GLKMatrix3Add")
+	}
+	return _fnGLKMatrix3Add(matrixLeft, matrixRight)
+}
+
+var _fnGLKMatrix3GetColumn func(unsafe.Pointer, int) unsafe.Pointer
+
+// GLKMatrix3GetColumn calls the GLKit framework function GLKMatrix3GetColumn.
+func GLKMatrix3GetColumn(matrix unsafe.Pointer, column int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3GetColumn == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3GetColumn, _lib, "GLKMatrix3GetColumn")
+	}
+	return _fnGLKMatrix3GetColumn(matrix, column)
+}
+
+var _fnGLKMatrix3GetMatrix2 func(unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3GetMatrix2 calls the GLKit framework function GLKMatrix3GetMatrix2.
+func GLKMatrix3GetMatrix2(matrix unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3GetMatrix2 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3GetMatrix2, _lib, "GLKMatrix3GetMatrix2")
+	}
+	return _fnGLKMatrix3GetMatrix2(matrix)
+}
+
+var _fnGLKMatrix3GetRow func(unsafe.Pointer, int) unsafe.Pointer
+
+// GLKMatrix3GetRow calls the GLKit framework function GLKMatrix3GetRow.
+func GLKMatrix3GetRow(matrix unsafe.Pointer, row int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3GetRow == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3GetRow, _lib, "GLKMatrix3GetRow")
+	}
+	return _fnGLKMatrix3GetRow(matrix, row)
+}
+
+var _fnGLKMatrix3Invert func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3Invert calls the GLKit framework function GLKMatrix3Invert.
+func GLKMatrix3Invert(matrix unsafe.Pointer) (result unsafe.Pointer, isInvertible bool) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3Invert == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3Invert, _lib, "GLKMatrix3Invert")
+	}
+	var _out0 bool
+	_ret := _fnGLKMatrix3Invert(matrix, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGLKMatrix3InvertAndTranspose func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3InvertAndTranspose calls the GLKit framework function GLKMatrix3InvertAndTranspose.
+func GLKMatrix3InvertAndTranspose(matrix unsafe.Pointer) (result unsafe.Pointer, isInvertible bool) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3InvertAndTranspose == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3InvertAndTranspose, _lib, "GLKMatrix3InvertAndTranspose")
+	}
+	var _out0 bool
+	_ret := _fnGLKMatrix3InvertAndTranspose(matrix, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGLKMatrix3Make func(float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix3Make calls the GLKit framework function GLKMatrix3Make.
+func GLKMatrix3Make(m00 float32, m01 float32, m02 float32, m10 float32, m11 float32, m12 float32, m20 float32, m21 float32, m22 float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3Make == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3Make, _lib, "GLKMatrix3Make")
+	}
+	return _fnGLKMatrix3Make(m00, m01, m02, m10, m11, m12, m20, m21, m22)
+}
+
+var _fnGLKMatrix3MakeAndTranspose func(float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix3MakeAndTranspose calls the GLKit framework function GLKMatrix3MakeAndTranspose.
+func GLKMatrix3MakeAndTranspose(m00 float32, m01 float32, m02 float32, m10 float32, m11 float32, m12 float32, m20 float32, m21 float32, m22 float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3MakeAndTranspose == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3MakeAndTranspose, _lib, "GLKMatrix3MakeAndTranspose")
+	}
+	return _fnGLKMatrix3MakeAndTranspose(m00, m01, m02, m10, m11, m12, m20, m21, m22)
+}
+
+var _fnGLKMatrix3MakeRotation func(float32, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix3MakeRotation calls the GLKit framework function GLKMatrix3MakeRotation.
+func GLKMatrix3MakeRotation(radians float32, x float32, y float32, z float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3MakeRotation == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3MakeRotation, _lib, "GLKMatrix3MakeRotation")
+	}
+	return _fnGLKMatrix3MakeRotation(radians, x, y, z)
+}
+
+var _fnGLKMatrix3MakeScale func(float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix3MakeScale calls the GLKit framework function GLKMatrix3MakeScale.
+func GLKMatrix3MakeScale(sx float32, sy float32, sz float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3MakeScale == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3MakeScale, _lib, "GLKMatrix3MakeScale")
+	}
+	return _fnGLKMatrix3MakeScale(sx, sy, sz)
+}
+
+var _fnGLKMatrix3MakeWithArray func(unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3MakeWithArray calls the GLKit framework function GLKMatrix3MakeWithArray.
+func GLKMatrix3MakeWithArray() (result unsafe.Pointer, values float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3MakeWithArray == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3MakeWithArray, _lib, "GLKMatrix3MakeWithArray")
+	}
+	var _out0 float32
+	_ret := _fnGLKMatrix3MakeWithArray(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGLKMatrix3MakeWithArrayAndTranspose func(unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3MakeWithArrayAndTranspose calls the GLKit framework function GLKMatrix3MakeWithArrayAndTranspose.
+func GLKMatrix3MakeWithArrayAndTranspose() (result unsafe.Pointer, values float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3MakeWithArrayAndTranspose == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3MakeWithArrayAndTranspose, _lib, "GLKMatrix3MakeWithArrayAndTranspose")
+	}
+	var _out0 float32
+	_ret := _fnGLKMatrix3MakeWithArrayAndTranspose(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGLKMatrix3MakeWithColumns func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3MakeWithColumns calls the GLKit framework function GLKMatrix3MakeWithColumns.
+func GLKMatrix3MakeWithColumns(column0 unsafe.Pointer, column1 unsafe.Pointer, column2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3MakeWithColumns == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3MakeWithColumns, _lib, "GLKMatrix3MakeWithColumns")
+	}
+	return _fnGLKMatrix3MakeWithColumns(column0, column1, column2)
+}
+
+var _fnGLKMatrix3MakeWithQuaternion func(unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3MakeWithQuaternion calls the GLKit framework function GLKMatrix3MakeWithQuaternion.
+func GLKMatrix3MakeWithQuaternion(quaternion unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3MakeWithQuaternion == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3MakeWithQuaternion, _lib, "GLKMatrix3MakeWithQuaternion")
+	}
+	return _fnGLKMatrix3MakeWithQuaternion(quaternion)
+}
+
+var _fnGLKMatrix3MakeWithRows func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3MakeWithRows calls the GLKit framework function GLKMatrix3MakeWithRows.
+func GLKMatrix3MakeWithRows(row0 unsafe.Pointer, row1 unsafe.Pointer, row2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3MakeWithRows == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3MakeWithRows, _lib, "GLKMatrix3MakeWithRows")
+	}
+	return _fnGLKMatrix3MakeWithRows(row0, row1, row2)
+}
+
+var _fnGLKMatrix3MakeXRotation func(float32) unsafe.Pointer
+
+// GLKMatrix3MakeXRotation calls the GLKit framework function GLKMatrix3MakeXRotation.
+func GLKMatrix3MakeXRotation(radians float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3MakeXRotation == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3MakeXRotation, _lib, "GLKMatrix3MakeXRotation")
+	}
+	return _fnGLKMatrix3MakeXRotation(radians)
+}
+
+var _fnGLKMatrix3MakeYRotation func(float32) unsafe.Pointer
+
+// GLKMatrix3MakeYRotation calls the GLKit framework function GLKMatrix3MakeYRotation.
+func GLKMatrix3MakeYRotation(radians float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3MakeYRotation == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3MakeYRotation, _lib, "GLKMatrix3MakeYRotation")
+	}
+	return _fnGLKMatrix3MakeYRotation(radians)
+}
+
+var _fnGLKMatrix3MakeZRotation func(float32) unsafe.Pointer
+
+// GLKMatrix3MakeZRotation calls the GLKit framework function GLKMatrix3MakeZRotation.
+func GLKMatrix3MakeZRotation(radians float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3MakeZRotation == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3MakeZRotation, _lib, "GLKMatrix3MakeZRotation")
+	}
+	return _fnGLKMatrix3MakeZRotation(radians)
+}
+
+var _fnGLKMatrix3Multiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3Multiply calls the GLKit framework function GLKMatrix3Multiply.
+func GLKMatrix3Multiply(matrixLeft unsafe.Pointer, matrixRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3Multiply == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3Multiply, _lib, "GLKMatrix3Multiply")
+	}
+	return _fnGLKMatrix3Multiply(matrixLeft, matrixRight)
+}
+
+var _fnGLKMatrix3MultiplyVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3MultiplyVector3 calls the GLKit framework function GLKMatrix3MultiplyVector3.
+func GLKMatrix3MultiplyVector3(matrixLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3MultiplyVector3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3MultiplyVector3, _lib, "GLKMatrix3MultiplyVector3")
+	}
+	return _fnGLKMatrix3MultiplyVector3(matrixLeft, vectorRight)
 }
 
 var _fnGLKMatrix3MultiplyVector3Array func(unsafe.Pointer, unsafe.Pointer, int)
@@ -47,6 +302,443 @@ func GLKMatrix3MultiplyVector3Array(matrix unsafe.Pointer, vectors unsafe.Pointe
 	_fnGLKMatrix3MultiplyVector3Array(matrix, vectors, vectorCount)
 }
 
+var _fnGLKMatrix3Rotate func(unsafe.Pointer, float32, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix3Rotate calls the GLKit framework function GLKMatrix3Rotate.
+func GLKMatrix3Rotate(matrix unsafe.Pointer, radians float32, x float32, y float32, z float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3Rotate == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3Rotate, _lib, "GLKMatrix3Rotate")
+	}
+	return _fnGLKMatrix3Rotate(matrix, radians, x, y, z)
+}
+
+var _fnGLKMatrix3RotateWithVector3 func(unsafe.Pointer, float32, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3RotateWithVector3 calls the GLKit framework function GLKMatrix3RotateWithVector3.
+func GLKMatrix3RotateWithVector3(matrix unsafe.Pointer, radians float32, axisVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3RotateWithVector3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3RotateWithVector3, _lib, "GLKMatrix3RotateWithVector3")
+	}
+	return _fnGLKMatrix3RotateWithVector3(matrix, radians, axisVector)
+}
+
+var _fnGLKMatrix3RotateWithVector4 func(unsafe.Pointer, float32, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3RotateWithVector4 calls the GLKit framework function GLKMatrix3RotateWithVector4.
+func GLKMatrix3RotateWithVector4(matrix unsafe.Pointer, radians float32, axisVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3RotateWithVector4 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3RotateWithVector4, _lib, "GLKMatrix3RotateWithVector4")
+	}
+	return _fnGLKMatrix3RotateWithVector4(matrix, radians, axisVector)
+}
+
+var _fnGLKMatrix3RotateX func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKMatrix3RotateX calls the GLKit framework function GLKMatrix3RotateX.
+func GLKMatrix3RotateX(matrix unsafe.Pointer, radians float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3RotateX == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3RotateX, _lib, "GLKMatrix3RotateX")
+	}
+	return _fnGLKMatrix3RotateX(matrix, radians)
+}
+
+var _fnGLKMatrix3RotateY func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKMatrix3RotateY calls the GLKit framework function GLKMatrix3RotateY.
+func GLKMatrix3RotateY(matrix unsafe.Pointer, radians float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3RotateY == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3RotateY, _lib, "GLKMatrix3RotateY")
+	}
+	return _fnGLKMatrix3RotateY(matrix, radians)
+}
+
+var _fnGLKMatrix3RotateZ func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKMatrix3RotateZ calls the GLKit framework function GLKMatrix3RotateZ.
+func GLKMatrix3RotateZ(matrix unsafe.Pointer, radians float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3RotateZ == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3RotateZ, _lib, "GLKMatrix3RotateZ")
+	}
+	return _fnGLKMatrix3RotateZ(matrix, radians)
+}
+
+var _fnGLKMatrix3Scale func(unsafe.Pointer, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix3Scale calls the GLKit framework function GLKMatrix3Scale.
+func GLKMatrix3Scale(matrix unsafe.Pointer, sx float32, sy float32, sz float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3Scale == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3Scale, _lib, "GLKMatrix3Scale")
+	}
+	return _fnGLKMatrix3Scale(matrix, sx, sy, sz)
+}
+
+var _fnGLKMatrix3ScaleWithVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3ScaleWithVector3 calls the GLKit framework function GLKMatrix3ScaleWithVector3.
+func GLKMatrix3ScaleWithVector3(matrix unsafe.Pointer, scaleVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3ScaleWithVector3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3ScaleWithVector3, _lib, "GLKMatrix3ScaleWithVector3")
+	}
+	return _fnGLKMatrix3ScaleWithVector3(matrix, scaleVector)
+}
+
+var _fnGLKMatrix3ScaleWithVector4 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3ScaleWithVector4 calls the GLKit framework function GLKMatrix3ScaleWithVector4.
+func GLKMatrix3ScaleWithVector4(matrix unsafe.Pointer, scaleVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3ScaleWithVector4 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3ScaleWithVector4, _lib, "GLKMatrix3ScaleWithVector4")
+	}
+	return _fnGLKMatrix3ScaleWithVector4(matrix, scaleVector)
+}
+
+var _fnGLKMatrix3SetColumn func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3SetColumn calls the GLKit framework function GLKMatrix3SetColumn.
+func GLKMatrix3SetColumn(matrix unsafe.Pointer, column int, vector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3SetColumn == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3SetColumn, _lib, "GLKMatrix3SetColumn")
+	}
+	return _fnGLKMatrix3SetColumn(matrix, column, vector)
+}
+
+var _fnGLKMatrix3SetRow func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3SetRow calls the GLKit framework function GLKMatrix3SetRow.
+func GLKMatrix3SetRow(matrix unsafe.Pointer, row int, vector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3SetRow == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3SetRow, _lib, "GLKMatrix3SetRow")
+	}
+	return _fnGLKMatrix3SetRow(matrix, row, vector)
+}
+
+var _fnGLKMatrix3Subtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3Subtract calls the GLKit framework function GLKMatrix3Subtract.
+func GLKMatrix3Subtract(matrixLeft unsafe.Pointer, matrixRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3Subtract == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3Subtract, _lib, "GLKMatrix3Subtract")
+	}
+	return _fnGLKMatrix3Subtract(matrixLeft, matrixRight)
+}
+
+var _fnGLKMatrix3Transpose func(unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix3Transpose calls the GLKit framework function GLKMatrix3Transpose.
+func GLKMatrix3Transpose(matrix unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix3Transpose == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix3Transpose, _lib, "GLKMatrix3Transpose")
+	}
+	return _fnGLKMatrix3Transpose(matrix)
+}
+
+var _fnGLKMatrix4Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4Add calls the GLKit framework function GLKMatrix4Add.
+func GLKMatrix4Add(matrixLeft unsafe.Pointer, matrixRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4Add == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4Add, _lib, "GLKMatrix4Add")
+	}
+	return _fnGLKMatrix4Add(matrixLeft, matrixRight)
+}
+
+var _fnGLKMatrix4GetColumn func(unsafe.Pointer, int) unsafe.Pointer
+
+// GLKMatrix4GetColumn calls the GLKit framework function GLKMatrix4GetColumn.
+func GLKMatrix4GetColumn(matrix unsafe.Pointer, column int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4GetColumn == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4GetColumn, _lib, "GLKMatrix4GetColumn")
+	}
+	return _fnGLKMatrix4GetColumn(matrix, column)
+}
+
+var _fnGLKMatrix4GetMatrix2 func(unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4GetMatrix2 calls the GLKit framework function GLKMatrix4GetMatrix2.
+func GLKMatrix4GetMatrix2(matrix unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4GetMatrix2 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4GetMatrix2, _lib, "GLKMatrix4GetMatrix2")
+	}
+	return _fnGLKMatrix4GetMatrix2(matrix)
+}
+
+var _fnGLKMatrix4GetMatrix3 func(unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4GetMatrix3 calls the GLKit framework function GLKMatrix4GetMatrix3.
+func GLKMatrix4GetMatrix3(matrix unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4GetMatrix3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4GetMatrix3, _lib, "GLKMatrix4GetMatrix3")
+	}
+	return _fnGLKMatrix4GetMatrix3(matrix)
+}
+
+var _fnGLKMatrix4GetRow func(unsafe.Pointer, int) unsafe.Pointer
+
+// GLKMatrix4GetRow calls the GLKit framework function GLKMatrix4GetRow.
+func GLKMatrix4GetRow(matrix unsafe.Pointer, row int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4GetRow == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4GetRow, _lib, "GLKMatrix4GetRow")
+	}
+	return _fnGLKMatrix4GetRow(matrix, row)
+}
+
+var _fnGLKMatrix4Invert func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4Invert calls the GLKit framework function GLKMatrix4Invert.
+func GLKMatrix4Invert(matrix unsafe.Pointer) (result unsafe.Pointer, isInvertible bool) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4Invert == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4Invert, _lib, "GLKMatrix4Invert")
+	}
+	var _out0 bool
+	_ret := _fnGLKMatrix4Invert(matrix, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGLKMatrix4InvertAndTranspose func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4InvertAndTranspose calls the GLKit framework function GLKMatrix4InvertAndTranspose.
+func GLKMatrix4InvertAndTranspose(matrix unsafe.Pointer) (result unsafe.Pointer, isInvertible bool) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4InvertAndTranspose == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4InvertAndTranspose, _lib, "GLKMatrix4InvertAndTranspose")
+	}
+	var _out0 bool
+	_ret := _fnGLKMatrix4InvertAndTranspose(matrix, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGLKMatrix4Make func(float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix4Make calls the GLKit framework function GLKMatrix4Make.
+func GLKMatrix4Make(m00 float32, m01 float32, m02 float32, m03 float32, m10 float32, m11 float32, m12 float32, m13 float32, m20 float32, m21 float32, m22 float32, m23 float32, m30 float32, m31 float32, m32 float32, m33 float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4Make == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4Make, _lib, "GLKMatrix4Make")
+	}
+	return _fnGLKMatrix4Make(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33)
+}
+
+var _fnGLKMatrix4MakeAndTranspose func(float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix4MakeAndTranspose calls the GLKit framework function GLKMatrix4MakeAndTranspose.
+func GLKMatrix4MakeAndTranspose(m00 float32, m01 float32, m02 float32, m03 float32, m10 float32, m11 float32, m12 float32, m13 float32, m20 float32, m21 float32, m22 float32, m23 float32, m30 float32, m31 float32, m32 float32, m33 float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeAndTranspose == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeAndTranspose, _lib, "GLKMatrix4MakeAndTranspose")
+	}
+	return _fnGLKMatrix4MakeAndTranspose(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33)
+}
+
+var _fnGLKMatrix4MakeFrustum func(float32, float32, float32, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix4MakeFrustum calls the GLKit framework function GLKMatrix4MakeFrustum.
+func GLKMatrix4MakeFrustum(left float32, right float32, bottom float32, top float32, nearZ float32, farZ float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeFrustum == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeFrustum, _lib, "GLKMatrix4MakeFrustum")
+	}
+	return _fnGLKMatrix4MakeFrustum(left, right, bottom, top, nearZ, farZ)
+}
+
+var _fnGLKMatrix4MakeLookAt func(float32, float32, float32, float32, float32, float32, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix4MakeLookAt calls the GLKit framework function GLKMatrix4MakeLookAt.
+func GLKMatrix4MakeLookAt(eyeX float32, eyeY float32, eyeZ float32, centerX float32, centerY float32, centerZ float32, upX float32, upY float32, upZ float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeLookAt == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeLookAt, _lib, "GLKMatrix4MakeLookAt")
+	}
+	return _fnGLKMatrix4MakeLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ)
+}
+
+var _fnGLKMatrix4MakeOrtho func(float32, float32, float32, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix4MakeOrtho calls the GLKit framework function GLKMatrix4MakeOrtho.
+func GLKMatrix4MakeOrtho(left float32, right float32, bottom float32, top float32, nearZ float32, farZ float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeOrtho == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeOrtho, _lib, "GLKMatrix4MakeOrtho")
+	}
+	return _fnGLKMatrix4MakeOrtho(left, right, bottom, top, nearZ, farZ)
+}
+
+var _fnGLKMatrix4MakePerspective func(float32, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix4MakePerspective calls the GLKit framework function GLKMatrix4MakePerspective.
+func GLKMatrix4MakePerspective(fovyRadians float32, aspect float32, nearZ float32, farZ float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakePerspective == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakePerspective, _lib, "GLKMatrix4MakePerspective")
+	}
+	return _fnGLKMatrix4MakePerspective(fovyRadians, aspect, nearZ, farZ)
+}
+
+var _fnGLKMatrix4MakeRotation func(float32, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix4MakeRotation calls the GLKit framework function GLKMatrix4MakeRotation.
+func GLKMatrix4MakeRotation(radians float32, x float32, y float32, z float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeRotation == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeRotation, _lib, "GLKMatrix4MakeRotation")
+	}
+	return _fnGLKMatrix4MakeRotation(radians, x, y, z)
+}
+
+var _fnGLKMatrix4MakeScale func(float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix4MakeScale calls the GLKit framework function GLKMatrix4MakeScale.
+func GLKMatrix4MakeScale(sx float32, sy float32, sz float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeScale == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeScale, _lib, "GLKMatrix4MakeScale")
+	}
+	return _fnGLKMatrix4MakeScale(sx, sy, sz)
+}
+
+var _fnGLKMatrix4MakeTranslation func(float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix4MakeTranslation calls the GLKit framework function GLKMatrix4MakeTranslation.
+func GLKMatrix4MakeTranslation(tx float32, ty float32, tz float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeTranslation == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeTranslation, _lib, "GLKMatrix4MakeTranslation")
+	}
+	return _fnGLKMatrix4MakeTranslation(tx, ty, tz)
+}
+
+var _fnGLKMatrix4MakeWithArray func(unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4MakeWithArray calls the GLKit framework function GLKMatrix4MakeWithArray.
+func GLKMatrix4MakeWithArray() (result unsafe.Pointer, values float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeWithArray == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeWithArray, _lib, "GLKMatrix4MakeWithArray")
+	}
+	var _out0 float32
+	_ret := _fnGLKMatrix4MakeWithArray(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGLKMatrix4MakeWithArrayAndTranspose func(unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4MakeWithArrayAndTranspose calls the GLKit framework function GLKMatrix4MakeWithArrayAndTranspose.
+func GLKMatrix4MakeWithArrayAndTranspose() (result unsafe.Pointer, values float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeWithArrayAndTranspose == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeWithArrayAndTranspose, _lib, "GLKMatrix4MakeWithArrayAndTranspose")
+	}
+	var _out0 float32
+	_ret := _fnGLKMatrix4MakeWithArrayAndTranspose(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGLKMatrix4MakeWithColumns func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4MakeWithColumns calls the GLKit framework function GLKMatrix4MakeWithColumns.
+func GLKMatrix4MakeWithColumns(column0 unsafe.Pointer, column1 unsafe.Pointer, column2 unsafe.Pointer, column3 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeWithColumns == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeWithColumns, _lib, "GLKMatrix4MakeWithColumns")
+	}
+	return _fnGLKMatrix4MakeWithColumns(column0, column1, column2, column3)
+}
+
+var _fnGLKMatrix4MakeWithQuaternion func(unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4MakeWithQuaternion calls the GLKit framework function GLKMatrix4MakeWithQuaternion.
+func GLKMatrix4MakeWithQuaternion(quaternion unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeWithQuaternion == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeWithQuaternion, _lib, "GLKMatrix4MakeWithQuaternion")
+	}
+	return _fnGLKMatrix4MakeWithQuaternion(quaternion)
+}
+
+var _fnGLKMatrix4MakeWithRows func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4MakeWithRows calls the GLKit framework function GLKMatrix4MakeWithRows.
+func GLKMatrix4MakeWithRows(row0 unsafe.Pointer, row1 unsafe.Pointer, row2 unsafe.Pointer, row3 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeWithRows == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeWithRows, _lib, "GLKMatrix4MakeWithRows")
+	}
+	return _fnGLKMatrix4MakeWithRows(row0, row1, row2, row3)
+}
+
+var _fnGLKMatrix4MakeXRotation func(float32) unsafe.Pointer
+
+// GLKMatrix4MakeXRotation calls the GLKit framework function GLKMatrix4MakeXRotation.
+func GLKMatrix4MakeXRotation(radians float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeXRotation == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeXRotation, _lib, "GLKMatrix4MakeXRotation")
+	}
+	return _fnGLKMatrix4MakeXRotation(radians)
+}
+
+var _fnGLKMatrix4MakeYRotation func(float32) unsafe.Pointer
+
+// GLKMatrix4MakeYRotation calls the GLKit framework function GLKMatrix4MakeYRotation.
+func GLKMatrix4MakeYRotation(radians float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeYRotation == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeYRotation, _lib, "GLKMatrix4MakeYRotation")
+	}
+	return _fnGLKMatrix4MakeYRotation(radians)
+}
+
+var _fnGLKMatrix4MakeZRotation func(float32) unsafe.Pointer
+
+// GLKMatrix4MakeZRotation calls the GLKit framework function GLKMatrix4MakeZRotation.
+func GLKMatrix4MakeZRotation(radians float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MakeZRotation == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MakeZRotation, _lib, "GLKMatrix4MakeZRotation")
+	}
+	return _fnGLKMatrix4MakeZRotation(radians)
+}
+
+var _fnGLKMatrix4Multiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4Multiply calls the GLKit framework function GLKMatrix4Multiply.
+func GLKMatrix4Multiply(matrixLeft unsafe.Pointer, matrixRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4Multiply == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4Multiply, _lib, "GLKMatrix4Multiply")
+	}
+	return _fnGLKMatrix4Multiply(matrixLeft, matrixRight)
+}
+
+var _fnGLKMatrix4MultiplyAndProjectVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4MultiplyAndProjectVector3 calls the GLKit framework function GLKMatrix4MultiplyAndProjectVector3.
+func GLKMatrix4MultiplyAndProjectVector3(matrixLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MultiplyAndProjectVector3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MultiplyAndProjectVector3, _lib, "GLKMatrix4MultiplyAndProjectVector3")
+	}
+	return _fnGLKMatrix4MultiplyAndProjectVector3(matrixLeft, vectorRight)
+}
+
 var _fnGLKMatrix4MultiplyAndProjectVector3Array func(unsafe.Pointer, unsafe.Pointer, int)
 
 // GLKMatrix4MultiplyAndProjectVector3Array calls the GLKit framework function GLKMatrix4MultiplyAndProjectVector3Array.
@@ -56,6 +748,17 @@ func GLKMatrix4MultiplyAndProjectVector3Array(matrix unsafe.Pointer, vectors uns
 		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MultiplyAndProjectVector3Array, _lib, "GLKMatrix4MultiplyAndProjectVector3Array")
 	}
 	_fnGLKMatrix4MultiplyAndProjectVector3Array(matrix, vectors, vectorCount)
+}
+
+var _fnGLKMatrix4MultiplyVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4MultiplyVector3 calls the GLKit framework function GLKMatrix4MultiplyVector3.
+func GLKMatrix4MultiplyVector3(matrixLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MultiplyVector3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector3, _lib, "GLKMatrix4MultiplyVector3")
+	}
+	return _fnGLKMatrix4MultiplyVector3(matrixLeft, vectorRight)
 }
 
 var _fnGLKMatrix4MultiplyVector3Array func(unsafe.Pointer, unsafe.Pointer, int)
@@ -80,6 +783,28 @@ func GLKMatrix4MultiplyVector3ArrayWithTranslation(matrix unsafe.Pointer, vector
 	_fnGLKMatrix4MultiplyVector3ArrayWithTranslation(matrix, vectors, vectorCount)
 }
 
+var _fnGLKMatrix4MultiplyVector3WithTranslation func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4MultiplyVector3WithTranslation calls the GLKit framework function GLKMatrix4MultiplyVector3WithTranslation.
+func GLKMatrix4MultiplyVector3WithTranslation(matrixLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MultiplyVector3WithTranslation == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector3WithTranslation, _lib, "GLKMatrix4MultiplyVector3WithTranslation")
+	}
+	return _fnGLKMatrix4MultiplyVector3WithTranslation(matrixLeft, vectorRight)
+}
+
+var _fnGLKMatrix4MultiplyVector4 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4MultiplyVector4 calls the GLKit framework function GLKMatrix4MultiplyVector4.
+func GLKMatrix4MultiplyVector4(matrixLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4MultiplyVector4 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector4, _lib, "GLKMatrix4MultiplyVector4")
+	}
+	return _fnGLKMatrix4MultiplyVector4(matrixLeft, vectorRight)
+}
+
 var _fnGLKMatrix4MultiplyVector4Array func(unsafe.Pointer, unsafe.Pointer, int)
 
 // GLKMatrix4MultiplyVector4Array calls the GLKit framework function GLKMatrix4MultiplyVector4Array.
@@ -89,6 +814,182 @@ func GLKMatrix4MultiplyVector4Array(matrix unsafe.Pointer, vectors unsafe.Pointe
 		ebipurego.RegisterLibFunc(&_fnGLKMatrix4MultiplyVector4Array, _lib, "GLKMatrix4MultiplyVector4Array")
 	}
 	_fnGLKMatrix4MultiplyVector4Array(matrix, vectors, vectorCount)
+}
+
+var _fnGLKMatrix4Rotate func(unsafe.Pointer, float32, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix4Rotate calls the GLKit framework function GLKMatrix4Rotate.
+func GLKMatrix4Rotate(matrix unsafe.Pointer, radians float32, x float32, y float32, z float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4Rotate == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4Rotate, _lib, "GLKMatrix4Rotate")
+	}
+	return _fnGLKMatrix4Rotate(matrix, radians, x, y, z)
+}
+
+var _fnGLKMatrix4RotateWithVector3 func(unsafe.Pointer, float32, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4RotateWithVector3 calls the GLKit framework function GLKMatrix4RotateWithVector3.
+func GLKMatrix4RotateWithVector3(matrix unsafe.Pointer, radians float32, axisVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4RotateWithVector3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4RotateWithVector3, _lib, "GLKMatrix4RotateWithVector3")
+	}
+	return _fnGLKMatrix4RotateWithVector3(matrix, radians, axisVector)
+}
+
+var _fnGLKMatrix4RotateWithVector4 func(unsafe.Pointer, float32, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4RotateWithVector4 calls the GLKit framework function GLKMatrix4RotateWithVector4.
+func GLKMatrix4RotateWithVector4(matrix unsafe.Pointer, radians float32, axisVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4RotateWithVector4 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4RotateWithVector4, _lib, "GLKMatrix4RotateWithVector4")
+	}
+	return _fnGLKMatrix4RotateWithVector4(matrix, radians, axisVector)
+}
+
+var _fnGLKMatrix4RotateX func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKMatrix4RotateX calls the GLKit framework function GLKMatrix4RotateX.
+func GLKMatrix4RotateX(matrix unsafe.Pointer, radians float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4RotateX == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4RotateX, _lib, "GLKMatrix4RotateX")
+	}
+	return _fnGLKMatrix4RotateX(matrix, radians)
+}
+
+var _fnGLKMatrix4RotateY func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKMatrix4RotateY calls the GLKit framework function GLKMatrix4RotateY.
+func GLKMatrix4RotateY(matrix unsafe.Pointer, radians float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4RotateY == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4RotateY, _lib, "GLKMatrix4RotateY")
+	}
+	return _fnGLKMatrix4RotateY(matrix, radians)
+}
+
+var _fnGLKMatrix4RotateZ func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKMatrix4RotateZ calls the GLKit framework function GLKMatrix4RotateZ.
+func GLKMatrix4RotateZ(matrix unsafe.Pointer, radians float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4RotateZ == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4RotateZ, _lib, "GLKMatrix4RotateZ")
+	}
+	return _fnGLKMatrix4RotateZ(matrix, radians)
+}
+
+var _fnGLKMatrix4Scale func(unsafe.Pointer, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix4Scale calls the GLKit framework function GLKMatrix4Scale.
+func GLKMatrix4Scale(matrix unsafe.Pointer, sx float32, sy float32, sz float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4Scale == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4Scale, _lib, "GLKMatrix4Scale")
+	}
+	return _fnGLKMatrix4Scale(matrix, sx, sy, sz)
+}
+
+var _fnGLKMatrix4ScaleWithVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4ScaleWithVector3 calls the GLKit framework function GLKMatrix4ScaleWithVector3.
+func GLKMatrix4ScaleWithVector3(matrix unsafe.Pointer, scaleVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4ScaleWithVector3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4ScaleWithVector3, _lib, "GLKMatrix4ScaleWithVector3")
+	}
+	return _fnGLKMatrix4ScaleWithVector3(matrix, scaleVector)
+}
+
+var _fnGLKMatrix4ScaleWithVector4 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4ScaleWithVector4 calls the GLKit framework function GLKMatrix4ScaleWithVector4.
+func GLKMatrix4ScaleWithVector4(matrix unsafe.Pointer, scaleVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4ScaleWithVector4 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4ScaleWithVector4, _lib, "GLKMatrix4ScaleWithVector4")
+	}
+	return _fnGLKMatrix4ScaleWithVector4(matrix, scaleVector)
+}
+
+var _fnGLKMatrix4SetColumn func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4SetColumn calls the GLKit framework function GLKMatrix4SetColumn.
+func GLKMatrix4SetColumn(matrix unsafe.Pointer, column int, vector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4SetColumn == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4SetColumn, _lib, "GLKMatrix4SetColumn")
+	}
+	return _fnGLKMatrix4SetColumn(matrix, column, vector)
+}
+
+var _fnGLKMatrix4SetRow func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4SetRow calls the GLKit framework function GLKMatrix4SetRow.
+func GLKMatrix4SetRow(matrix unsafe.Pointer, row int, vector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4SetRow == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4SetRow, _lib, "GLKMatrix4SetRow")
+	}
+	return _fnGLKMatrix4SetRow(matrix, row, vector)
+}
+
+var _fnGLKMatrix4Subtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4Subtract calls the GLKit framework function GLKMatrix4Subtract.
+func GLKMatrix4Subtract(matrixLeft unsafe.Pointer, matrixRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4Subtract == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4Subtract, _lib, "GLKMatrix4Subtract")
+	}
+	return _fnGLKMatrix4Subtract(matrixLeft, matrixRight)
+}
+
+var _fnGLKMatrix4Translate func(unsafe.Pointer, float32, float32, float32) unsafe.Pointer
+
+// GLKMatrix4Translate calls the GLKit framework function GLKMatrix4Translate.
+func GLKMatrix4Translate(matrix unsafe.Pointer, tx float32, ty float32, tz float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4Translate == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4Translate, _lib, "GLKMatrix4Translate")
+	}
+	return _fnGLKMatrix4Translate(matrix, tx, ty, tz)
+}
+
+var _fnGLKMatrix4TranslateWithVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4TranslateWithVector3 calls the GLKit framework function GLKMatrix4TranslateWithVector3.
+func GLKMatrix4TranslateWithVector3(matrix unsafe.Pointer, translationVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4TranslateWithVector3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4TranslateWithVector3, _lib, "GLKMatrix4TranslateWithVector3")
+	}
+	return _fnGLKMatrix4TranslateWithVector3(matrix, translationVector)
+}
+
+var _fnGLKMatrix4TranslateWithVector4 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4TranslateWithVector4 calls the GLKit framework function GLKMatrix4TranslateWithVector4.
+func GLKMatrix4TranslateWithVector4(matrix unsafe.Pointer, translationVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4TranslateWithVector4 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4TranslateWithVector4, _lib, "GLKMatrix4TranslateWithVector4")
+	}
+	return _fnGLKMatrix4TranslateWithVector4(matrix, translationVector)
+}
+
+var _fnGLKMatrix4Transpose func(unsafe.Pointer) unsafe.Pointer
+
+// GLKMatrix4Transpose calls the GLKit framework function GLKMatrix4Transpose.
+func GLKMatrix4Transpose(matrix unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrix4Transpose == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrix4Transpose, _lib, "GLKMatrix4Transpose")
+	}
+	return _fnGLKMatrix4Transpose(matrix)
 }
 
 var _fnGLKMatrixStackCreate func(objc.ID) objc.ID
@@ -101,6 +1002,83 @@ func GLKMatrixStackCreate(alloc obj.Object) obj.Object {
 	}
 	_ret := _fnGLKMatrixStackCreate(objref.IDOf(alloc))
 	return obj.Wrap(_ret)
+}
+
+var _fnGLKMatrixStackGetMatrix2 func(objc.ID) unsafe.Pointer
+
+// GLKMatrixStackGetMatrix2 calls the GLKit framework function GLKMatrixStackGetMatrix2.
+func GLKMatrixStackGetMatrix2(stack obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackGetMatrix2 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix2, _lib, "GLKMatrixStackGetMatrix2")
+	}
+	return _fnGLKMatrixStackGetMatrix2(objref.IDOf(stack))
+}
+
+var _fnGLKMatrixStackGetMatrix3 func(objc.ID) unsafe.Pointer
+
+// GLKMatrixStackGetMatrix3 calls the GLKit framework function GLKMatrixStackGetMatrix3.
+func GLKMatrixStackGetMatrix3(stack obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackGetMatrix3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix3, _lib, "GLKMatrixStackGetMatrix3")
+	}
+	return _fnGLKMatrixStackGetMatrix3(objref.IDOf(stack))
+}
+
+var _fnGLKMatrixStackGetMatrix3Inverse func(objc.ID) unsafe.Pointer
+
+// GLKMatrixStackGetMatrix3Inverse calls the GLKit framework function GLKMatrixStackGetMatrix3Inverse.
+func GLKMatrixStackGetMatrix3Inverse(stack obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackGetMatrix3Inverse == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix3Inverse, _lib, "GLKMatrixStackGetMatrix3Inverse")
+	}
+	return _fnGLKMatrixStackGetMatrix3Inverse(objref.IDOf(stack))
+}
+
+var _fnGLKMatrixStackGetMatrix3InverseTranspose func(objc.ID) unsafe.Pointer
+
+// GLKMatrixStackGetMatrix3InverseTranspose calls the GLKit framework function GLKMatrixStackGetMatrix3InverseTranspose.
+func GLKMatrixStackGetMatrix3InverseTranspose(stack obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackGetMatrix3InverseTranspose == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix3InverseTranspose, _lib, "GLKMatrixStackGetMatrix3InverseTranspose")
+	}
+	return _fnGLKMatrixStackGetMatrix3InverseTranspose(objref.IDOf(stack))
+}
+
+var _fnGLKMatrixStackGetMatrix4 func(objc.ID) unsafe.Pointer
+
+// GLKMatrixStackGetMatrix4 calls the GLKit framework function GLKMatrixStackGetMatrix4.
+func GLKMatrixStackGetMatrix4(stack obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackGetMatrix4 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix4, _lib, "GLKMatrixStackGetMatrix4")
+	}
+	return _fnGLKMatrixStackGetMatrix4(objref.IDOf(stack))
+}
+
+var _fnGLKMatrixStackGetMatrix4Inverse func(objc.ID) unsafe.Pointer
+
+// GLKMatrixStackGetMatrix4Inverse calls the GLKit framework function GLKMatrixStackGetMatrix4Inverse.
+func GLKMatrixStackGetMatrix4Inverse(stack obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackGetMatrix4Inverse == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix4Inverse, _lib, "GLKMatrixStackGetMatrix4Inverse")
+	}
+	return _fnGLKMatrixStackGetMatrix4Inverse(objref.IDOf(stack))
+}
+
+var _fnGLKMatrixStackGetMatrix4InverseTranspose func(objc.ID) unsafe.Pointer
+
+// GLKMatrixStackGetMatrix4InverseTranspose calls the GLKit framework function GLKMatrixStackGetMatrix4InverseTranspose.
+func GLKMatrixStackGetMatrix4InverseTranspose(stack obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKMatrixStackGetMatrix4InverseTranspose == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKMatrixStackGetMatrix4InverseTranspose, _lib, "GLKMatrixStackGetMatrix4InverseTranspose")
+	}
+	return _fnGLKMatrixStackGetMatrix4InverseTranspose(objref.IDOf(stack))
 }
 
 var _fnGLKMatrixStackGetTypeID func() int
@@ -312,6 +1290,17 @@ func GLKMatrixStackTranslateWithVector4(stack obj.Object, translationVector unsa
 	_fnGLKMatrixStackTranslateWithVector4(objref.IDOf(stack), translationVector)
 }
 
+var _fnGLKQuaternionAdd func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKQuaternionAdd calls the GLKit framework function GLKQuaternionAdd.
+func GLKQuaternionAdd(quaternionLeft unsafe.Pointer, quaternionRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionAdd == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionAdd, _lib, "GLKQuaternionAdd")
+	}
+	return _fnGLKQuaternionAdd(quaternionLeft, quaternionRight)
+}
+
 var _fnGLKQuaternionAngle func(unsafe.Pointer) float32
 
 // GLKQuaternionAngle calls the GLKit framework function GLKQuaternionAngle.
@@ -321,6 +1310,39 @@ func GLKQuaternionAngle(quaternion unsafe.Pointer) float32 {
 		ebipurego.RegisterLibFunc(&_fnGLKQuaternionAngle, _lib, "GLKQuaternionAngle")
 	}
 	return _fnGLKQuaternionAngle(quaternion)
+}
+
+var _fnGLKQuaternionAxis func(unsafe.Pointer) unsafe.Pointer
+
+// GLKQuaternionAxis calls the GLKit framework function GLKQuaternionAxis.
+func GLKQuaternionAxis(quaternion unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionAxis == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionAxis, _lib, "GLKQuaternionAxis")
+	}
+	return _fnGLKQuaternionAxis(quaternion)
+}
+
+var _fnGLKQuaternionConjugate func(unsafe.Pointer) unsafe.Pointer
+
+// GLKQuaternionConjugate calls the GLKit framework function GLKQuaternionConjugate.
+func GLKQuaternionConjugate(quaternion unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionConjugate == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionConjugate, _lib, "GLKQuaternionConjugate")
+	}
+	return _fnGLKQuaternionConjugate(quaternion)
+}
+
+var _fnGLKQuaternionInvert func(unsafe.Pointer) unsafe.Pointer
+
+// GLKQuaternionInvert calls the GLKit framework function GLKQuaternionInvert.
+func GLKQuaternionInvert(quaternion unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionInvert == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionInvert, _lib, "GLKQuaternionInvert")
+	}
+	return _fnGLKQuaternionInvert(quaternion)
 }
 
 var _fnGLKQuaternionLength func(unsafe.Pointer) float32
@@ -334,6 +1356,118 @@ func GLKQuaternionLength(quaternion unsafe.Pointer) float32 {
 	return _fnGLKQuaternionLength(quaternion)
 }
 
+var _fnGLKQuaternionMake func(float32, float32, float32, float32) unsafe.Pointer
+
+// GLKQuaternionMake calls the GLKit framework function GLKQuaternionMake.
+func GLKQuaternionMake(x float32, y float32, z float32, w float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionMake == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionMake, _lib, "GLKQuaternionMake")
+	}
+	return _fnGLKQuaternionMake(x, y, z, w)
+}
+
+var _fnGLKQuaternionMakeWithAngleAndAxis func(float32, float32, float32, float32) unsafe.Pointer
+
+// GLKQuaternionMakeWithAngleAndAxis calls the GLKit framework function GLKQuaternionMakeWithAngleAndAxis.
+func GLKQuaternionMakeWithAngleAndAxis(radians float32, x float32, y float32, z float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionMakeWithAngleAndAxis == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionMakeWithAngleAndAxis, _lib, "GLKQuaternionMakeWithAngleAndAxis")
+	}
+	return _fnGLKQuaternionMakeWithAngleAndAxis(radians, x, y, z)
+}
+
+var _fnGLKQuaternionMakeWithAngleAndVector3Axis func(float32, unsafe.Pointer) unsafe.Pointer
+
+// GLKQuaternionMakeWithAngleAndVector3Axis calls the GLKit framework function GLKQuaternionMakeWithAngleAndVector3Axis.
+func GLKQuaternionMakeWithAngleAndVector3Axis(radians float32, axisVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionMakeWithAngleAndVector3Axis == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionMakeWithAngleAndVector3Axis, _lib, "GLKQuaternionMakeWithAngleAndVector3Axis")
+	}
+	return _fnGLKQuaternionMakeWithAngleAndVector3Axis(radians, axisVector)
+}
+
+var _fnGLKQuaternionMakeWithArray func(unsafe.Pointer) unsafe.Pointer
+
+// GLKQuaternionMakeWithArray calls the GLKit framework function GLKQuaternionMakeWithArray.
+func GLKQuaternionMakeWithArray() (result unsafe.Pointer, values float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionMakeWithArray == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionMakeWithArray, _lib, "GLKQuaternionMakeWithArray")
+	}
+	var _out0 float32
+	_ret := _fnGLKQuaternionMakeWithArray(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGLKQuaternionMakeWithMatrix3 func(unsafe.Pointer) unsafe.Pointer
+
+// GLKQuaternionMakeWithMatrix3 calls the GLKit framework function GLKQuaternionMakeWithMatrix3.
+func GLKQuaternionMakeWithMatrix3(matrix unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionMakeWithMatrix3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionMakeWithMatrix3, _lib, "GLKQuaternionMakeWithMatrix3")
+	}
+	return _fnGLKQuaternionMakeWithMatrix3(matrix)
+}
+
+var _fnGLKQuaternionMakeWithMatrix4 func(unsafe.Pointer) unsafe.Pointer
+
+// GLKQuaternionMakeWithMatrix4 calls the GLKit framework function GLKQuaternionMakeWithMatrix4.
+func GLKQuaternionMakeWithMatrix4(matrix unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionMakeWithMatrix4 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionMakeWithMatrix4, _lib, "GLKQuaternionMakeWithMatrix4")
+	}
+	return _fnGLKQuaternionMakeWithMatrix4(matrix)
+}
+
+var _fnGLKQuaternionMakeWithVector3 func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKQuaternionMakeWithVector3 calls the GLKit framework function GLKQuaternionMakeWithVector3.
+func GLKQuaternionMakeWithVector3(vector unsafe.Pointer, scalar float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionMakeWithVector3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionMakeWithVector3, _lib, "GLKQuaternionMakeWithVector3")
+	}
+	return _fnGLKQuaternionMakeWithVector3(vector, scalar)
+}
+
+var _fnGLKQuaternionMultiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKQuaternionMultiply calls the GLKit framework function GLKQuaternionMultiply.
+func GLKQuaternionMultiply(quaternionLeft unsafe.Pointer, quaternionRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionMultiply == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionMultiply, _lib, "GLKQuaternionMultiply")
+	}
+	return _fnGLKQuaternionMultiply(quaternionLeft, quaternionRight)
+}
+
+var _fnGLKQuaternionNormalize func(unsafe.Pointer) unsafe.Pointer
+
+// GLKQuaternionNormalize calls the GLKit framework function GLKQuaternionNormalize.
+func GLKQuaternionNormalize(quaternion unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionNormalize == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionNormalize, _lib, "GLKQuaternionNormalize")
+	}
+	return _fnGLKQuaternionNormalize(quaternion)
+}
+
+var _fnGLKQuaternionRotateVector3 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKQuaternionRotateVector3 calls the GLKit framework function GLKQuaternionRotateVector3.
+func GLKQuaternionRotateVector3(quaternion unsafe.Pointer, vector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionRotateVector3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionRotateVector3, _lib, "GLKQuaternionRotateVector3")
+	}
+	return _fnGLKQuaternionRotateVector3(quaternion, vector)
+}
+
 var _fnGLKQuaternionRotateVector3Array func(unsafe.Pointer, unsafe.Pointer, int)
 
 // GLKQuaternionRotateVector3Array calls the GLKit framework function GLKQuaternionRotateVector3Array.
@@ -345,6 +1479,17 @@ func GLKQuaternionRotateVector3Array(quaternion unsafe.Pointer, vectors unsafe.P
 	_fnGLKQuaternionRotateVector3Array(quaternion, vectors, vectorCount)
 }
 
+var _fnGLKQuaternionRotateVector4 func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKQuaternionRotateVector4 calls the GLKit framework function GLKQuaternionRotateVector4.
+func GLKQuaternionRotateVector4(quaternion unsafe.Pointer, vector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionRotateVector4 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionRotateVector4, _lib, "GLKQuaternionRotateVector4")
+	}
+	return _fnGLKQuaternionRotateVector4(quaternion, vector)
+}
+
 var _fnGLKQuaternionRotateVector4Array func(unsafe.Pointer, unsafe.Pointer, int)
 
 // GLKQuaternionRotateVector4Array calls the GLKit framework function GLKQuaternionRotateVector4Array.
@@ -354,6 +1499,50 @@ func GLKQuaternionRotateVector4Array(quaternion unsafe.Pointer, vectors unsafe.P
 		ebipurego.RegisterLibFunc(&_fnGLKQuaternionRotateVector4Array, _lib, "GLKQuaternionRotateVector4Array")
 	}
 	_fnGLKQuaternionRotateVector4Array(quaternion, vectors, vectorCount)
+}
+
+var _fnGLKQuaternionSlerp func(unsafe.Pointer, unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKQuaternionSlerp calls the GLKit framework function GLKQuaternionSlerp.
+func GLKQuaternionSlerp(quaternionStart unsafe.Pointer, quaternionEnd unsafe.Pointer, t float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionSlerp == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionSlerp, _lib, "GLKQuaternionSlerp")
+	}
+	return _fnGLKQuaternionSlerp(quaternionStart, quaternionEnd, t)
+}
+
+var _fnGLKQuaternionSubtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKQuaternionSubtract calls the GLKit framework function GLKQuaternionSubtract.
+func GLKQuaternionSubtract(quaternionLeft unsafe.Pointer, quaternionRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKQuaternionSubtract == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKQuaternionSubtract, _lib, "GLKQuaternionSubtract")
+	}
+	return _fnGLKQuaternionSubtract(quaternionLeft, quaternionRight)
+}
+
+var _fnGLKVector2Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector2Add calls the GLKit framework function GLKVector2Add.
+func GLKVector2Add(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2Add == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2Add, _lib, "GLKVector2Add")
+	}
+	return _fnGLKVector2Add(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector2AddScalar func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector2AddScalar calls the GLKit framework function GLKVector2AddScalar.
+func GLKVector2AddScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2AddScalar == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2AddScalar, _lib, "GLKVector2AddScalar")
+	}
+	return _fnGLKVector2AddScalar(vector, value)
 }
 
 var _fnGLKVector2AllEqualToScalar func(unsafe.Pointer, float32) bool
@@ -433,6 +1622,28 @@ func GLKVector2Distance(vectorStart unsafe.Pointer, vectorEnd unsafe.Pointer) fl
 	return _fnGLKVector2Distance(vectorStart, vectorEnd)
 }
 
+var _fnGLKVector2Divide func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector2Divide calls the GLKit framework function GLKVector2Divide.
+func GLKVector2Divide(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2Divide == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2Divide, _lib, "GLKVector2Divide")
+	}
+	return _fnGLKVector2Divide(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector2DivideScalar func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector2DivideScalar calls the GLKit framework function GLKVector2DivideScalar.
+func GLKVector2DivideScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2DivideScalar == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2DivideScalar, _lib, "GLKVector2DivideScalar")
+	}
+	return _fnGLKVector2DivideScalar(vector, value)
+}
+
 var _fnGLKVector2DotProduct func(unsafe.Pointer, unsafe.Pointer) float32
 
 // GLKVector2DotProduct calls the GLKit framework function GLKVector2DotProduct.
@@ -453,6 +1664,162 @@ func GLKVector2Length(vector unsafe.Pointer) float32 {
 		ebipurego.RegisterLibFunc(&_fnGLKVector2Length, _lib, "GLKVector2Length")
 	}
 	return _fnGLKVector2Length(vector)
+}
+
+var _fnGLKVector2Lerp func(unsafe.Pointer, unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector2Lerp calls the GLKit framework function GLKVector2Lerp.
+func GLKVector2Lerp(vectorStart unsafe.Pointer, vectorEnd unsafe.Pointer, t float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2Lerp == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2Lerp, _lib, "GLKVector2Lerp")
+	}
+	return _fnGLKVector2Lerp(vectorStart, vectorEnd, t)
+}
+
+var _fnGLKVector2Make func(float32, float32) unsafe.Pointer
+
+// GLKVector2Make calls the GLKit framework function GLKVector2Make.
+func GLKVector2Make(x float32, y float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2Make == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2Make, _lib, "GLKVector2Make")
+	}
+	return _fnGLKVector2Make(x, y)
+}
+
+var _fnGLKVector2MakeWithArray func(unsafe.Pointer) unsafe.Pointer
+
+// GLKVector2MakeWithArray calls the GLKit framework function GLKVector2MakeWithArray.
+func GLKVector2MakeWithArray() (result unsafe.Pointer, values float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2MakeWithArray == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2MakeWithArray, _lib, "GLKVector2MakeWithArray")
+	}
+	var _out0 float32
+	_ret := _fnGLKVector2MakeWithArray(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGLKVector2Maximum func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector2Maximum calls the GLKit framework function GLKVector2Maximum.
+func GLKVector2Maximum(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2Maximum == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2Maximum, _lib, "GLKVector2Maximum")
+	}
+	return _fnGLKVector2Maximum(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector2Minimum func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector2Minimum calls the GLKit framework function GLKVector2Minimum.
+func GLKVector2Minimum(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2Minimum == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2Minimum, _lib, "GLKVector2Minimum")
+	}
+	return _fnGLKVector2Minimum(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector2Multiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector2Multiply calls the GLKit framework function GLKVector2Multiply.
+func GLKVector2Multiply(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2Multiply == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2Multiply, _lib, "GLKVector2Multiply")
+	}
+	return _fnGLKVector2Multiply(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector2MultiplyScalar func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector2MultiplyScalar calls the GLKit framework function GLKVector2MultiplyScalar.
+func GLKVector2MultiplyScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2MultiplyScalar == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2MultiplyScalar, _lib, "GLKVector2MultiplyScalar")
+	}
+	return _fnGLKVector2MultiplyScalar(vector, value)
+}
+
+var _fnGLKVector2Negate func(unsafe.Pointer) unsafe.Pointer
+
+// GLKVector2Negate calls the GLKit framework function GLKVector2Negate.
+func GLKVector2Negate(vector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2Negate == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2Negate, _lib, "GLKVector2Negate")
+	}
+	return _fnGLKVector2Negate(vector)
+}
+
+var _fnGLKVector2Normalize func(unsafe.Pointer) unsafe.Pointer
+
+// GLKVector2Normalize calls the GLKit framework function GLKVector2Normalize.
+func GLKVector2Normalize(vector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2Normalize == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2Normalize, _lib, "GLKVector2Normalize")
+	}
+	return _fnGLKVector2Normalize(vector)
+}
+
+var _fnGLKVector2Project func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector2Project calls the GLKit framework function GLKVector2Project.
+func GLKVector2Project(vectorToProject unsafe.Pointer, projectionVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2Project == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2Project, _lib, "GLKVector2Project")
+	}
+	return _fnGLKVector2Project(vectorToProject, projectionVector)
+}
+
+var _fnGLKVector2Subtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector2Subtract calls the GLKit framework function GLKVector2Subtract.
+func GLKVector2Subtract(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2Subtract == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2Subtract, _lib, "GLKVector2Subtract")
+	}
+	return _fnGLKVector2Subtract(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector2SubtractScalar func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector2SubtractScalar calls the GLKit framework function GLKVector2SubtractScalar.
+func GLKVector2SubtractScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector2SubtractScalar == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector2SubtractScalar, _lib, "GLKVector2SubtractScalar")
+	}
+	return _fnGLKVector2SubtractScalar(vector, value)
+}
+
+var _fnGLKVector3Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector3Add calls the GLKit framework function GLKVector3Add.
+func GLKVector3Add(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3Add == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3Add, _lib, "GLKVector3Add")
+	}
+	return _fnGLKVector3Add(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector3AddScalar func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector3AddScalar calls the GLKit framework function GLKVector3AddScalar.
+func GLKVector3AddScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3AddScalar == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3AddScalar, _lib, "GLKVector3AddScalar")
+	}
+	return _fnGLKVector3AddScalar(vector, value)
 }
 
 var _fnGLKVector3AllEqualToScalar func(unsafe.Pointer, float32) bool
@@ -521,6 +1888,17 @@ func GLKVector3AllGreaterThanVector3(vectorLeft unsafe.Pointer, vectorRight unsa
 	return _fnGLKVector3AllGreaterThanVector3(vectorLeft, vectorRight)
 }
 
+var _fnGLKVector3CrossProduct func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector3CrossProduct calls the GLKit framework function GLKVector3CrossProduct.
+func GLKVector3CrossProduct(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3CrossProduct == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3CrossProduct, _lib, "GLKVector3CrossProduct")
+	}
+	return _fnGLKVector3CrossProduct(vectorLeft, vectorRight)
+}
+
 var _fnGLKVector3Distance func(unsafe.Pointer, unsafe.Pointer) float32
 
 // GLKVector3Distance calls the GLKit framework function GLKVector3Distance.
@@ -530,6 +1908,28 @@ func GLKVector3Distance(vectorStart unsafe.Pointer, vectorEnd unsafe.Pointer) fl
 		ebipurego.RegisterLibFunc(&_fnGLKVector3Distance, _lib, "GLKVector3Distance")
 	}
 	return _fnGLKVector3Distance(vectorStart, vectorEnd)
+}
+
+var _fnGLKVector3Divide func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector3Divide calls the GLKit framework function GLKVector3Divide.
+func GLKVector3Divide(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3Divide == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3Divide, _lib, "GLKVector3Divide")
+	}
+	return _fnGLKVector3Divide(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector3DivideScalar func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector3DivideScalar calls the GLKit framework function GLKVector3DivideScalar.
+func GLKVector3DivideScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3DivideScalar == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3DivideScalar, _lib, "GLKVector3DivideScalar")
+	}
+	return _fnGLKVector3DivideScalar(vector, value)
 }
 
 var _fnGLKVector3DotProduct func(unsafe.Pointer, unsafe.Pointer) float32
@@ -552,6 +1952,162 @@ func GLKVector3Length(vector unsafe.Pointer) float32 {
 		ebipurego.RegisterLibFunc(&_fnGLKVector3Length, _lib, "GLKVector3Length")
 	}
 	return _fnGLKVector3Length(vector)
+}
+
+var _fnGLKVector3Lerp func(unsafe.Pointer, unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector3Lerp calls the GLKit framework function GLKVector3Lerp.
+func GLKVector3Lerp(vectorStart unsafe.Pointer, vectorEnd unsafe.Pointer, t float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3Lerp == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3Lerp, _lib, "GLKVector3Lerp")
+	}
+	return _fnGLKVector3Lerp(vectorStart, vectorEnd, t)
+}
+
+var _fnGLKVector3Make func(float32, float32, float32) unsafe.Pointer
+
+// GLKVector3Make calls the GLKit framework function GLKVector3Make.
+func GLKVector3Make(x float32, y float32, z float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3Make == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3Make, _lib, "GLKVector3Make")
+	}
+	return _fnGLKVector3Make(x, y, z)
+}
+
+var _fnGLKVector3MakeWithArray func(unsafe.Pointer) unsafe.Pointer
+
+// GLKVector3MakeWithArray calls the GLKit framework function GLKVector3MakeWithArray.
+func GLKVector3MakeWithArray() (result unsafe.Pointer, values float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3MakeWithArray == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3MakeWithArray, _lib, "GLKVector3MakeWithArray")
+	}
+	var _out0 float32
+	_ret := _fnGLKVector3MakeWithArray(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGLKVector3Maximum func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector3Maximum calls the GLKit framework function GLKVector3Maximum.
+func GLKVector3Maximum(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3Maximum == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3Maximum, _lib, "GLKVector3Maximum")
+	}
+	return _fnGLKVector3Maximum(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector3Minimum func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector3Minimum calls the GLKit framework function GLKVector3Minimum.
+func GLKVector3Minimum(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3Minimum == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3Minimum, _lib, "GLKVector3Minimum")
+	}
+	return _fnGLKVector3Minimum(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector3Multiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector3Multiply calls the GLKit framework function GLKVector3Multiply.
+func GLKVector3Multiply(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3Multiply == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3Multiply, _lib, "GLKVector3Multiply")
+	}
+	return _fnGLKVector3Multiply(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector3MultiplyScalar func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector3MultiplyScalar calls the GLKit framework function GLKVector3MultiplyScalar.
+func GLKVector3MultiplyScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3MultiplyScalar == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3MultiplyScalar, _lib, "GLKVector3MultiplyScalar")
+	}
+	return _fnGLKVector3MultiplyScalar(vector, value)
+}
+
+var _fnGLKVector3Negate func(unsafe.Pointer) unsafe.Pointer
+
+// GLKVector3Negate calls the GLKit framework function GLKVector3Negate.
+func GLKVector3Negate(vector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3Negate == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3Negate, _lib, "GLKVector3Negate")
+	}
+	return _fnGLKVector3Negate(vector)
+}
+
+var _fnGLKVector3Normalize func(unsafe.Pointer) unsafe.Pointer
+
+// GLKVector3Normalize calls the GLKit framework function GLKVector3Normalize.
+func GLKVector3Normalize(vector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3Normalize == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3Normalize, _lib, "GLKVector3Normalize")
+	}
+	return _fnGLKVector3Normalize(vector)
+}
+
+var _fnGLKVector3Project func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector3Project calls the GLKit framework function GLKVector3Project.
+func GLKVector3Project(vectorToProject unsafe.Pointer, projectionVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3Project == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3Project, _lib, "GLKVector3Project")
+	}
+	return _fnGLKVector3Project(vectorToProject, projectionVector)
+}
+
+var _fnGLKVector3Subtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector3Subtract calls the GLKit framework function GLKVector3Subtract.
+func GLKVector3Subtract(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3Subtract == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3Subtract, _lib, "GLKVector3Subtract")
+	}
+	return _fnGLKVector3Subtract(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector3SubtractScalar func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector3SubtractScalar calls the GLKit framework function GLKVector3SubtractScalar.
+func GLKVector3SubtractScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector3SubtractScalar == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector3SubtractScalar, _lib, "GLKVector3SubtractScalar")
+	}
+	return _fnGLKVector3SubtractScalar(vector, value)
+}
+
+var _fnGLKVector4Add func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector4Add calls the GLKit framework function GLKVector4Add.
+func GLKVector4Add(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4Add == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4Add, _lib, "GLKVector4Add")
+	}
+	return _fnGLKVector4Add(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector4AddScalar func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector4AddScalar calls the GLKit framework function GLKVector4AddScalar.
+func GLKVector4AddScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4AddScalar == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4AddScalar, _lib, "GLKVector4AddScalar")
+	}
+	return _fnGLKVector4AddScalar(vector, value)
 }
 
 var _fnGLKVector4AllEqualToScalar func(unsafe.Pointer, float32) bool
@@ -620,6 +2176,17 @@ func GLKVector4AllGreaterThanVector4(vectorLeft unsafe.Pointer, vectorRight unsa
 	return _fnGLKVector4AllGreaterThanVector4(vectorLeft, vectorRight)
 }
 
+var _fnGLKVector4CrossProduct func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector4CrossProduct calls the GLKit framework function GLKVector4CrossProduct.
+func GLKVector4CrossProduct(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4CrossProduct == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4CrossProduct, _lib, "GLKVector4CrossProduct")
+	}
+	return _fnGLKVector4CrossProduct(vectorLeft, vectorRight)
+}
+
 var _fnGLKVector4Distance func(unsafe.Pointer, unsafe.Pointer) float32
 
 // GLKVector4Distance calls the GLKit framework function GLKVector4Distance.
@@ -629,6 +2196,28 @@ func GLKVector4Distance(vectorStart unsafe.Pointer, vectorEnd unsafe.Pointer) fl
 		ebipurego.RegisterLibFunc(&_fnGLKVector4Distance, _lib, "GLKVector4Distance")
 	}
 	return _fnGLKVector4Distance(vectorStart, vectorEnd)
+}
+
+var _fnGLKVector4Divide func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector4Divide calls the GLKit framework function GLKVector4Divide.
+func GLKVector4Divide(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4Divide == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4Divide, _lib, "GLKVector4Divide")
+	}
+	return _fnGLKVector4Divide(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector4DivideScalar func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector4DivideScalar calls the GLKit framework function GLKVector4DivideScalar.
+func GLKVector4DivideScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4DivideScalar == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4DivideScalar, _lib, "GLKVector4DivideScalar")
+	}
+	return _fnGLKVector4DivideScalar(vector, value)
 }
 
 var _fnGLKVector4DotProduct func(unsafe.Pointer, unsafe.Pointer) float32
@@ -651,6 +2240,162 @@ func GLKVector4Length(vector unsafe.Pointer) float32 {
 		ebipurego.RegisterLibFunc(&_fnGLKVector4Length, _lib, "GLKVector4Length")
 	}
 	return _fnGLKVector4Length(vector)
+}
+
+var _fnGLKVector4Lerp func(unsafe.Pointer, unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector4Lerp calls the GLKit framework function GLKVector4Lerp.
+func GLKVector4Lerp(vectorStart unsafe.Pointer, vectorEnd unsafe.Pointer, t float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4Lerp == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4Lerp, _lib, "GLKVector4Lerp")
+	}
+	return _fnGLKVector4Lerp(vectorStart, vectorEnd, t)
+}
+
+var _fnGLKVector4Make func(float32, float32, float32, float32) unsafe.Pointer
+
+// GLKVector4Make calls the GLKit framework function GLKVector4Make.
+func GLKVector4Make(x float32, y float32, z float32, w float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4Make == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4Make, _lib, "GLKVector4Make")
+	}
+	return _fnGLKVector4Make(x, y, z, w)
+}
+
+var _fnGLKVector4MakeWithArray func(unsafe.Pointer) unsafe.Pointer
+
+// GLKVector4MakeWithArray calls the GLKit framework function GLKVector4MakeWithArray.
+func GLKVector4MakeWithArray() (result unsafe.Pointer, values float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4MakeWithArray == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4MakeWithArray, _lib, "GLKVector4MakeWithArray")
+	}
+	var _out0 float32
+	_ret := _fnGLKVector4MakeWithArray(unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGLKVector4MakeWithVector3 func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector4MakeWithVector3 calls the GLKit framework function GLKVector4MakeWithVector3.
+func GLKVector4MakeWithVector3(vector unsafe.Pointer, w float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4MakeWithVector3 == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4MakeWithVector3, _lib, "GLKVector4MakeWithVector3")
+	}
+	return _fnGLKVector4MakeWithVector3(vector, w)
+}
+
+var _fnGLKVector4Maximum func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector4Maximum calls the GLKit framework function GLKVector4Maximum.
+func GLKVector4Maximum(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4Maximum == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4Maximum, _lib, "GLKVector4Maximum")
+	}
+	return _fnGLKVector4Maximum(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector4Minimum func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector4Minimum calls the GLKit framework function GLKVector4Minimum.
+func GLKVector4Minimum(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4Minimum == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4Minimum, _lib, "GLKVector4Minimum")
+	}
+	return _fnGLKVector4Minimum(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector4Multiply func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector4Multiply calls the GLKit framework function GLKVector4Multiply.
+func GLKVector4Multiply(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4Multiply == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4Multiply, _lib, "GLKVector4Multiply")
+	}
+	return _fnGLKVector4Multiply(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector4MultiplyScalar func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector4MultiplyScalar calls the GLKit framework function GLKVector4MultiplyScalar.
+func GLKVector4MultiplyScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4MultiplyScalar == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4MultiplyScalar, _lib, "GLKVector4MultiplyScalar")
+	}
+	return _fnGLKVector4MultiplyScalar(vector, value)
+}
+
+var _fnGLKVector4Negate func(unsafe.Pointer) unsafe.Pointer
+
+// GLKVector4Negate calls the GLKit framework function GLKVector4Negate.
+func GLKVector4Negate(vector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4Negate == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4Negate, _lib, "GLKVector4Negate")
+	}
+	return _fnGLKVector4Negate(vector)
+}
+
+var _fnGLKVector4Normalize func(unsafe.Pointer) unsafe.Pointer
+
+// GLKVector4Normalize calls the GLKit framework function GLKVector4Normalize.
+func GLKVector4Normalize(vector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4Normalize == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4Normalize, _lib, "GLKVector4Normalize")
+	}
+	return _fnGLKVector4Normalize(vector)
+}
+
+var _fnGLKVector4Project func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector4Project calls the GLKit framework function GLKVector4Project.
+func GLKVector4Project(vectorToProject unsafe.Pointer, projectionVector unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4Project == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4Project, _lib, "GLKVector4Project")
+	}
+	return _fnGLKVector4Project(vectorToProject, projectionVector)
+}
+
+var _fnGLKVector4Subtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// GLKVector4Subtract calls the GLKit framework function GLKVector4Subtract.
+func GLKVector4Subtract(vectorLeft unsafe.Pointer, vectorRight unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4Subtract == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4Subtract, _lib, "GLKVector4Subtract")
+	}
+	return _fnGLKVector4Subtract(vectorLeft, vectorRight)
+}
+
+var _fnGLKVector4SubtractScalar func(unsafe.Pointer, float32) unsafe.Pointer
+
+// GLKVector4SubtractScalar calls the GLKit framework function GLKVector4SubtractScalar.
+func GLKVector4SubtractScalar(vector unsafe.Pointer, value float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVector4SubtractScalar == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVector4SubtractScalar, _lib, "GLKVector4SubtractScalar")
+	}
+	return _fnGLKVector4SubtractScalar(vector, value)
+}
+
+var _fnGLKVertexAttributeParametersFromModelIO func(unsafe.Pointer) unsafe.Pointer
+
+// GLKVertexAttributeParametersFromModelIO calls the GLKit framework function GLKVertexAttributeParametersFromModelIO.
+func GLKVertexAttributeParametersFromModelIO(vertexFormat unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGLKVertexAttributeParametersFromModelIO == nil {
+		ebipurego.RegisterLibFunc(&_fnGLKVertexAttributeParametersFromModelIO, _lib, "GLKVertexAttributeParametersFromModelIO")
+	}
+	return _fnGLKVertexAttributeParametersFromModelIO(vertexFormat)
 }
 
 var _fnNSStringFromGLKMatrix2 func(unsafe.Pointer) objc.ID

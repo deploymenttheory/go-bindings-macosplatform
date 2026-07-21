@@ -38,6 +38,17 @@ func MTAudioProcessingTapGetSourceAudio(tap obj.Object, numberFrames int, buffer
 	return _ret, _out0, _out1
 }
 
+var _fnMTAudioProcessingTapGetStorage func(objc.ID) unsafe.Pointer
+
+// MTAudioProcessingTapGetStorage calls the MediaToolbox framework function MTAudioProcessingTapGetStorage.
+func MTAudioProcessingTapGetStorage(tap obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTAudioProcessingTapGetStorage == nil {
+		ebipurego.RegisterLibFunc(&_fnMTAudioProcessingTapGetStorage, _lib, "MTAudioProcessingTapGetStorage")
+	}
+	return _fnMTAudioProcessingTapGetStorage(objref.IDOf(tap))
+}
+
 var _fnMTAudioProcessingTapGetTypeID func() int
 
 // MTAudioProcessingTapGetTypeID calls the MediaToolbox framework function MTAudioProcessingTapGetTypeID.

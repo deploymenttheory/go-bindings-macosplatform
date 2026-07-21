@@ -5,11 +5,35 @@
 package iobluetoothui
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
+
+var _fnIOBluetoothGetDeviceSelectorController func() unsafe.Pointer
+
+// IOBluetoothGetDeviceSelectorController calls the IOBluetoothUI framework function IOBluetoothGetDeviceSelectorController.
+func IOBluetoothGetDeviceSelectorController() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothGetDeviceSelectorController == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothGetDeviceSelectorController, _lib, "IOBluetoothGetDeviceSelectorController")
+	}
+	return _fnIOBluetoothGetDeviceSelectorController()
+}
+
+var _fnIOBluetoothGetPairingController func() unsafe.Pointer
+
+// IOBluetoothGetPairingController calls the IOBluetoothUI framework function IOBluetoothGetPairingController.
+func IOBluetoothGetPairingController() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothGetPairingController == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothGetPairingController, _lib, "IOBluetoothGetPairingController")
+	}
+	return _fnIOBluetoothGetPairingController()
+}
 
 var _fnIOBluetoothValidateHardwareWithDescription func(objc.ID, objc.ID) int32
 

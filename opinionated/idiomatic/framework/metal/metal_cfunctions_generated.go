@@ -10,6 +10,72 @@ import (
 	ebipurego "github.com/ebitengine/purego"
 )
 
+var _fnMTL4BufferRangeMake func(uint64, uint64) unsafe.Pointer
+
+// MTL4BufferRangeMake calls the Metal framework function MTL4BufferRangeMake.
+func MTL4BufferRangeMake(bufferAddress uint64, length uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTL4BufferRangeMake == nil {
+		ebipurego.RegisterLibFunc(&_fnMTL4BufferRangeMake, _lib, "MTL4BufferRangeMake")
+	}
+	return _fnMTL4BufferRangeMake(bufferAddress, length)
+}
+
+var _fnMTLClearColorMake func(float64, float64, float64, float64) unsafe.Pointer
+
+// MTLClearColorMake calls the Metal framework function MTLClearColorMake.
+func MTLClearColorMake(red float64, green float64, blue float64, alpha float64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLClearColorMake == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLClearColorMake, _lib, "MTLClearColorMake")
+	}
+	return _fnMTLClearColorMake(red, green, blue, alpha)
+}
+
+var _fnMTLCoordinate2DMake func(float32, float32) unsafe.Pointer
+
+// MTLCoordinate2DMake calls the Metal framework function MTLCoordinate2DMake.
+func MTLCoordinate2DMake(x float32, y float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLCoordinate2DMake == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLCoordinate2DMake, _lib, "MTLCoordinate2DMake")
+	}
+	return _fnMTLCoordinate2DMake(x, y)
+}
+
+var _fnMTLCopyAllDevices func() unsafe.Pointer
+
+// MTLCopyAllDevices calls the Metal framework function MTLCopyAllDevices.
+func MTLCopyAllDevices() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLCopyAllDevices == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLCopyAllDevices, _lib, "MTLCopyAllDevices")
+	}
+	return _fnMTLCopyAllDevices()
+}
+
+var _fnMTLCopyAllDevicesWithObserver func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// MTLCopyAllDevicesWithObserver calls the Metal framework function MTLCopyAllDevicesWithObserver.
+func MTLCopyAllDevicesWithObserver(observer unsafe.Pointer, handler unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLCopyAllDevicesWithObserver == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLCopyAllDevicesWithObserver, _lib, "MTLCopyAllDevicesWithObserver")
+	}
+	return _fnMTLCopyAllDevicesWithObserver(observer, handler)
+}
+
+var _fnMTLCreateSystemDefaultDevice func() unsafe.Pointer
+
+// MTLCreateSystemDefaultDevice calls the Metal framework function MTLCreateSystemDefaultDevice.
+func MTLCreateSystemDefaultDevice() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLCreateSystemDefaultDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLCreateSystemDefaultDevice, _lib, "MTLCreateSystemDefaultDevice")
+	}
+	return _fnMTLCreateSystemDefaultDevice()
+}
+
 var _fnMTLIOCompressionContextAppendData func(unsafe.Pointer, unsafe.Pointer, int)
 
 // MTLIOCompressionContextAppendData calls the Metal framework function MTLIOCompressionContextAppendData.
@@ -32,6 +98,17 @@ func MTLIOCompressionContextDefaultChunkSize() int {
 	return _fnMTLIOCompressionContextDefaultChunkSize()
 }
 
+var _fnMTLIOCreateCompressionContext func(string, IOCompressionMethod, int) unsafe.Pointer
+
+// MTLIOCreateCompressionContext calls the Metal framework function MTLIOCreateCompressionContext.
+func MTLIOCreateCompressionContext(path string, type_ IOCompressionMethod, chunkSize int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLIOCreateCompressionContext == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLIOCreateCompressionContext, _lib, "MTLIOCreateCompressionContext")
+	}
+	return _fnMTLIOCreateCompressionContext(path, type_, chunkSize)
+}
+
 var _fnMTLIOFlushAndDestroyCompressionContext func(unsafe.Pointer) IOCompressionStatus
 
 // MTLIOFlushAndDestroyCompressionContext calls the Metal framework function MTLIOFlushAndDestroyCompressionContext.
@@ -43,6 +120,83 @@ func MTLIOFlushAndDestroyCompressionContext(context_ unsafe.Pointer) IOCompressi
 	return _fnMTLIOFlushAndDestroyCompressionContext(context_)
 }
 
+var _fnMTLIndirectCommandBufferExecutionRangeMake func(uint32, uint32) unsafe.Pointer
+
+// MTLIndirectCommandBufferExecutionRangeMake calls the Metal framework function MTLIndirectCommandBufferExecutionRangeMake.
+func MTLIndirectCommandBufferExecutionRangeMake(location uint32, length uint32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLIndirectCommandBufferExecutionRangeMake == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLIndirectCommandBufferExecutionRangeMake, _lib, "MTLIndirectCommandBufferExecutionRangeMake")
+	}
+	return _fnMTLIndirectCommandBufferExecutionRangeMake(location, length)
+}
+
+var _fnMTLOriginMake func(int, int, int) unsafe.Pointer
+
+// MTLOriginMake calls the Metal framework function MTLOriginMake.
+func MTLOriginMake(x int, y int, z int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLOriginMake == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLOriginMake, _lib, "MTLOriginMake")
+	}
+	return _fnMTLOriginMake(x, y, z)
+}
+
+var _fnMTLPackedFloat3Make func(float32, float32, float32) unsafe.Pointer
+
+// MTLPackedFloat3Make calls the Metal framework function MTLPackedFloat3Make.
+func MTLPackedFloat3Make(x float32, y float32, z float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLPackedFloat3Make == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLPackedFloat3Make, _lib, "MTLPackedFloat3Make")
+	}
+	return _fnMTLPackedFloat3Make(x, y, z)
+}
+
+var _fnMTLPackedFloatQuaternionMake func(float32, float32, float32, float32) unsafe.Pointer
+
+// MTLPackedFloatQuaternionMake calls the Metal framework function MTLPackedFloatQuaternionMake.
+func MTLPackedFloatQuaternionMake(x float32, y float32, z float32, w float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLPackedFloatQuaternionMake == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLPackedFloatQuaternionMake, _lib, "MTLPackedFloatQuaternionMake")
+	}
+	return _fnMTLPackedFloatQuaternionMake(x, y, z, w)
+}
+
+var _fnMTLRegionMake1D func(int, int) unsafe.Pointer
+
+// MTLRegionMake1D calls the Metal framework function MTLRegionMake1D.
+func MTLRegionMake1D(x int, width int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLRegionMake1D == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLRegionMake1D, _lib, "MTLRegionMake1D")
+	}
+	return _fnMTLRegionMake1D(x, width)
+}
+
+var _fnMTLRegionMake2D func(int, int, int, int) unsafe.Pointer
+
+// MTLRegionMake2D calls the Metal framework function MTLRegionMake2D.
+func MTLRegionMake2D(x int, y int, width int, height int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLRegionMake2D == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLRegionMake2D, _lib, "MTLRegionMake2D")
+	}
+	return _fnMTLRegionMake2D(x, y, width, height)
+}
+
+var _fnMTLRegionMake3D func(int, int, int, int, int, int) unsafe.Pointer
+
+// MTLRegionMake3D calls the Metal framework function MTLRegionMake3D.
+func MTLRegionMake3D(x int, y int, z int, width int, height int, depth int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLRegionMake3D == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLRegionMake3D, _lib, "MTLRegionMake3D")
+	}
+	return _fnMTLRegionMake3D(x, y, z, width, height, depth)
+}
+
 var _fnMTLRemoveDeviceObserver func(unsafe.Pointer)
 
 // MTLRemoveDeviceObserver calls the Metal framework function MTLRemoveDeviceObserver.
@@ -52,4 +206,37 @@ func MTLRemoveDeviceObserver(observer unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnMTLRemoveDeviceObserver, _lib, "MTLRemoveDeviceObserver")
 	}
 	_fnMTLRemoveDeviceObserver(observer)
+}
+
+var _fnMTLSamplePositionMake func(float32, float32) unsafe.Pointer
+
+// MTLSamplePositionMake calls the Metal framework function MTLSamplePositionMake.
+func MTLSamplePositionMake(x float32, y float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLSamplePositionMake == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLSamplePositionMake, _lib, "MTLSamplePositionMake")
+	}
+	return _fnMTLSamplePositionMake(x, y)
+}
+
+var _fnMTLSizeMake func(int, int, int) unsafe.Pointer
+
+// MTLSizeMake calls the Metal framework function MTLSizeMake.
+func MTLSizeMake(width int, height int, depth int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLSizeMake == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLSizeMake, _lib, "MTLSizeMake")
+	}
+	return _fnMTLSizeMake(width, height, depth)
+}
+
+var _fnMTLTextureSwizzleChannelsMake func(TextureSwizzle, TextureSwizzle, TextureSwizzle, TextureSwizzle) unsafe.Pointer
+
+// MTLTextureSwizzleChannelsMake calls the Metal framework function MTLTextureSwizzleChannelsMake.
+func MTLTextureSwizzleChannelsMake(r TextureSwizzle, g TextureSwizzle, b TextureSwizzle, a TextureSwizzle) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTLTextureSwizzleChannelsMake == nil {
+		ebipurego.RegisterLibFunc(&_fnMTLTextureSwizzleChannelsMake, _lib, "MTLTextureSwizzleChannelsMake")
+	}
+	return _fnMTLTextureSwizzleChannelsMake(r, g, b, a)
 }

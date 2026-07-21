@@ -5,6 +5,8 @@
 package corefoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -1121,3 +1123,525 @@ func KCFXMLTreeErrorLocation() obj.Object {
 func KCFXMLTreeErrorStatusCode() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCFXMLTreeErrorStatusCode")))
 }
+
+// KCFCoreFoundationVersionNumber returns the value of the constant kCFCoreFoundationVersionNumber.
+func KCFCoreFoundationVersionNumber() float64 {
+	addr := _symbol("kCFCoreFoundationVersionNumber")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// KCFTypeArrayCallBacks returns the address of the symbol kCFTypeArrayCallBacks.
+func KCFTypeArrayCallBacks() uintptr { return _symbol("kCFTypeArrayCallBacks") }
+
+// KCFTypeBagCallBacks returns the address of the symbol kCFTypeBagCallBacks.
+func KCFTypeBagCallBacks() uintptr { return _symbol("kCFTypeBagCallBacks") }
+
+// KCFCopyStringBagCallBacks returns the address of the symbol kCFCopyStringBagCallBacks.
+func KCFCopyStringBagCallBacks() uintptr { return _symbol("kCFCopyStringBagCallBacks") }
+
+// KCFStringBinaryHeapCallBacks returns the address of the symbol kCFStringBinaryHeapCallBacks.
+func KCFStringBinaryHeapCallBacks() uintptr { return _symbol("kCFStringBinaryHeapCallBacks") }
+
+// KCFTypeDictionaryKeyCallBacks returns the address of the symbol kCFTypeDictionaryKeyCallBacks.
+func KCFTypeDictionaryKeyCallBacks() uintptr { return _symbol("kCFTypeDictionaryKeyCallBacks") }
+
+// KCFCopyStringDictionaryKeyCallBacks returns the address of the symbol kCFCopyStringDictionaryKeyCallBacks.
+func KCFCopyStringDictionaryKeyCallBacks() uintptr {
+	return _symbol("kCFCopyStringDictionaryKeyCallBacks")
+}
+
+// KCFTypeDictionaryValueCallBacks returns the address of the symbol kCFTypeDictionaryValueCallBacks.
+func KCFTypeDictionaryValueCallBacks() uintptr { return _symbol("kCFTypeDictionaryValueCallBacks") }
+
+// KCFLocaleCurrentLocaleDidChangeNotification returns the address of the symbol kCFLocaleCurrentLocaleDidChangeNotification.
+func KCFLocaleCurrentLocaleDidChangeNotification() uintptr {
+	return _symbol("kCFLocaleCurrentLocaleDidChangeNotification")
+}
+
+// KCFLocaleIdentifier returns the address of the symbol kCFLocaleIdentifier.
+func KCFLocaleIdentifier() uintptr { return _symbol("kCFLocaleIdentifier") }
+
+// KCFLocaleLanguageCode returns the address of the symbol kCFLocaleLanguageCode.
+func KCFLocaleLanguageCode() uintptr { return _symbol("kCFLocaleLanguageCode") }
+
+// KCFLocaleCountryCode returns the address of the symbol kCFLocaleCountryCode.
+func KCFLocaleCountryCode() uintptr { return _symbol("kCFLocaleCountryCode") }
+
+// KCFLocaleScriptCode returns the address of the symbol kCFLocaleScriptCode.
+func KCFLocaleScriptCode() uintptr { return _symbol("kCFLocaleScriptCode") }
+
+// KCFLocaleVariantCode returns the address of the symbol kCFLocaleVariantCode.
+func KCFLocaleVariantCode() uintptr { return _symbol("kCFLocaleVariantCode") }
+
+// KCFLocaleExemplarCharacterSet returns the address of the symbol kCFLocaleExemplarCharacterSet.
+func KCFLocaleExemplarCharacterSet() uintptr { return _symbol("kCFLocaleExemplarCharacterSet") }
+
+// KCFLocaleCalendarIdentifier returns the address of the symbol kCFLocaleCalendarIdentifier.
+func KCFLocaleCalendarIdentifier() uintptr { return _symbol("kCFLocaleCalendarIdentifier") }
+
+// KCFLocaleCalendar returns the address of the symbol kCFLocaleCalendar.
+func KCFLocaleCalendar() uintptr { return _symbol("kCFLocaleCalendar") }
+
+// KCFLocaleCollationIdentifier returns the address of the symbol kCFLocaleCollationIdentifier.
+func KCFLocaleCollationIdentifier() uintptr { return _symbol("kCFLocaleCollationIdentifier") }
+
+// KCFLocaleUsesMetricSystem returns the address of the symbol kCFLocaleUsesMetricSystem.
+func KCFLocaleUsesMetricSystem() uintptr { return _symbol("kCFLocaleUsesMetricSystem") }
+
+// KCFLocaleMeasurementSystem returns the address of the symbol kCFLocaleMeasurementSystem.
+func KCFLocaleMeasurementSystem() uintptr { return _symbol("kCFLocaleMeasurementSystem") }
+
+// KCFLocaleDecimalSeparator returns the address of the symbol kCFLocaleDecimalSeparator.
+func KCFLocaleDecimalSeparator() uintptr { return _symbol("kCFLocaleDecimalSeparator") }
+
+// KCFLocaleGroupingSeparator returns the address of the symbol kCFLocaleGroupingSeparator.
+func KCFLocaleGroupingSeparator() uintptr { return _symbol("kCFLocaleGroupingSeparator") }
+
+// KCFLocaleCurrencySymbol returns the address of the symbol kCFLocaleCurrencySymbol.
+func KCFLocaleCurrencySymbol() uintptr { return _symbol("kCFLocaleCurrencySymbol") }
+
+// KCFLocaleCurrencyCode returns the address of the symbol kCFLocaleCurrencyCode.
+func KCFLocaleCurrencyCode() uintptr { return _symbol("kCFLocaleCurrencyCode") }
+
+// KCFLocaleCollatorIdentifier returns the address of the symbol kCFLocaleCollatorIdentifier.
+func KCFLocaleCollatorIdentifier() uintptr { return _symbol("kCFLocaleCollatorIdentifier") }
+
+// KCFLocaleQuotationBeginDelimiterKey returns the address of the symbol kCFLocaleQuotationBeginDelimiterKey.
+func KCFLocaleQuotationBeginDelimiterKey() uintptr {
+	return _symbol("kCFLocaleQuotationBeginDelimiterKey")
+}
+
+// KCFLocaleQuotationEndDelimiterKey returns the address of the symbol kCFLocaleQuotationEndDelimiterKey.
+func KCFLocaleQuotationEndDelimiterKey() uintptr { return _symbol("kCFLocaleQuotationEndDelimiterKey") }
+
+// KCFLocaleAlternateQuotationBeginDelimiterKey returns the address of the symbol kCFLocaleAlternateQuotationBeginDelimiterKey.
+func KCFLocaleAlternateQuotationBeginDelimiterKey() uintptr {
+	return _symbol("kCFLocaleAlternateQuotationBeginDelimiterKey")
+}
+
+// KCFLocaleAlternateQuotationEndDelimiterKey returns the address of the symbol kCFLocaleAlternateQuotationEndDelimiterKey.
+func KCFLocaleAlternateQuotationEndDelimiterKey() uintptr {
+	return _symbol("kCFLocaleAlternateQuotationEndDelimiterKey")
+}
+
+// KCFGregorianCalendar returns the address of the symbol kCFGregorianCalendar.
+func KCFGregorianCalendar() uintptr { return _symbol("kCFGregorianCalendar") }
+
+// KCFBuddhistCalendar returns the address of the symbol kCFBuddhistCalendar.
+func KCFBuddhistCalendar() uintptr { return _symbol("kCFBuddhistCalendar") }
+
+// KCFChineseCalendar returns the address of the symbol kCFChineseCalendar.
+func KCFChineseCalendar() uintptr { return _symbol("kCFChineseCalendar") }
+
+// KCFHebrewCalendar returns the address of the symbol kCFHebrewCalendar.
+func KCFHebrewCalendar() uintptr { return _symbol("kCFHebrewCalendar") }
+
+// KCFIslamicCalendar returns the address of the symbol kCFIslamicCalendar.
+func KCFIslamicCalendar() uintptr { return _symbol("kCFIslamicCalendar") }
+
+// KCFIslamicCivilCalendar returns the address of the symbol kCFIslamicCivilCalendar.
+func KCFIslamicCivilCalendar() uintptr { return _symbol("kCFIslamicCivilCalendar") }
+
+// KCFJapaneseCalendar returns the address of the symbol kCFJapaneseCalendar.
+func KCFJapaneseCalendar() uintptr { return _symbol("kCFJapaneseCalendar") }
+
+// KCFRepublicOfChinaCalendar returns the address of the symbol kCFRepublicOfChinaCalendar.
+func KCFRepublicOfChinaCalendar() uintptr { return _symbol("kCFRepublicOfChinaCalendar") }
+
+// KCFPersianCalendar returns the address of the symbol kCFPersianCalendar.
+func KCFPersianCalendar() uintptr { return _symbol("kCFPersianCalendar") }
+
+// KCFIndianCalendar returns the address of the symbol kCFIndianCalendar.
+func KCFIndianCalendar() uintptr { return _symbol("kCFIndianCalendar") }
+
+// KCFISO8601Calendar returns the address of the symbol kCFISO8601Calendar.
+func KCFISO8601Calendar() uintptr { return _symbol("kCFISO8601Calendar") }
+
+// KCFIslamicTabularCalendar returns the address of the symbol kCFIslamicTabularCalendar.
+func KCFIslamicTabularCalendar() uintptr { return _symbol("kCFIslamicTabularCalendar") }
+
+// KCFIslamicUmmAlQuraCalendar returns the address of the symbol kCFIslamicUmmAlQuraCalendar.
+func KCFIslamicUmmAlQuraCalendar() uintptr { return _symbol("kCFIslamicUmmAlQuraCalendar") }
+
+// KCFBanglaCalendar returns the address of the symbol kCFBanglaCalendar.
+func KCFBanglaCalendar() uintptr { return _symbol("kCFBanglaCalendar") }
+
+// KCFGujaratiCalendar returns the address of the symbol kCFGujaratiCalendar.
+func KCFGujaratiCalendar() uintptr { return _symbol("kCFGujaratiCalendar") }
+
+// KCFKannadaCalendar returns the address of the symbol kCFKannadaCalendar.
+func KCFKannadaCalendar() uintptr { return _symbol("kCFKannadaCalendar") }
+
+// KCFMalayalamCalendar returns the address of the symbol kCFMalayalamCalendar.
+func KCFMalayalamCalendar() uintptr { return _symbol("kCFMalayalamCalendar") }
+
+// KCFMarathiCalendar returns the address of the symbol kCFMarathiCalendar.
+func KCFMarathiCalendar() uintptr { return _symbol("kCFMarathiCalendar") }
+
+// KCFOdiaCalendar returns the address of the symbol kCFOdiaCalendar.
+func KCFOdiaCalendar() uintptr { return _symbol("kCFOdiaCalendar") }
+
+// KCFTamilCalendar returns the address of the symbol kCFTamilCalendar.
+func KCFTamilCalendar() uintptr { return _symbol("kCFTamilCalendar") }
+
+// KCFTeluguCalendar returns the address of the symbol kCFTeluguCalendar.
+func KCFTeluguCalendar() uintptr { return _symbol("kCFTeluguCalendar") }
+
+// KCFVikramCalendar returns the address of the symbol kCFVikramCalendar.
+func KCFVikramCalendar() uintptr { return _symbol("kCFVikramCalendar") }
+
+// KCFDangiCalendar returns the address of the symbol kCFDangiCalendar.
+func KCFDangiCalendar() uintptr { return _symbol("kCFDangiCalendar") }
+
+// KCFVietnameseCalendar returns the address of the symbol kCFVietnameseCalendar.
+func KCFVietnameseCalendar() uintptr { return _symbol("kCFVietnameseCalendar") }
+
+// KCFAbsoluteTimeIntervalSince1970 returns the value of the constant kCFAbsoluteTimeIntervalSince1970.
+func KCFAbsoluteTimeIntervalSince1970() float64 {
+	addr := _symbol("kCFAbsoluteTimeIntervalSince1970")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// KCFAbsoluteTimeIntervalSince1904 returns the value of the constant kCFAbsoluteTimeIntervalSince1904.
+func KCFAbsoluteTimeIntervalSince1904() float64 {
+	addr := _symbol("kCFAbsoluteTimeIntervalSince1904")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// KCFErrorDomainPOSIX returns the address of the symbol kCFErrorDomainPOSIX.
+func KCFErrorDomainPOSIX() uintptr { return _symbol("kCFErrorDomainPOSIX") }
+
+// KCFErrorDomainOSStatus returns the address of the symbol kCFErrorDomainOSStatus.
+func KCFErrorDomainOSStatus() uintptr { return _symbol("kCFErrorDomainOSStatus") }
+
+// KCFErrorDomainMach returns the address of the symbol kCFErrorDomainMach.
+func KCFErrorDomainMach() uintptr { return _symbol("kCFErrorDomainMach") }
+
+// KCFErrorDomainCocoa returns the address of the symbol kCFErrorDomainCocoa.
+func KCFErrorDomainCocoa() uintptr { return _symbol("kCFErrorDomainCocoa") }
+
+// KCFTimeZoneSystemTimeZoneDidChangeNotification returns the address of the symbol kCFTimeZoneSystemTimeZoneDidChangeNotification.
+func KCFTimeZoneSystemTimeZoneDidChangeNotification() uintptr {
+	return _symbol("kCFTimeZoneSystemTimeZoneDidChangeNotification")
+}
+
+// KCFDateFormatterIsLenient returns the address of the symbol kCFDateFormatterIsLenient.
+func KCFDateFormatterIsLenient() uintptr { return _symbol("kCFDateFormatterIsLenient") }
+
+// KCFDateFormatterTimeZone returns the address of the symbol kCFDateFormatterTimeZone.
+func KCFDateFormatterTimeZone() uintptr { return _symbol("kCFDateFormatterTimeZone") }
+
+// KCFDateFormatterCalendarName returns the address of the symbol kCFDateFormatterCalendarName.
+func KCFDateFormatterCalendarName() uintptr { return _symbol("kCFDateFormatterCalendarName") }
+
+// KCFDateFormatterDefaultFormat returns the address of the symbol kCFDateFormatterDefaultFormat.
+func KCFDateFormatterDefaultFormat() uintptr { return _symbol("kCFDateFormatterDefaultFormat") }
+
+// KCFDateFormatterTwoDigitStartDate returns the address of the symbol kCFDateFormatterTwoDigitStartDate.
+func KCFDateFormatterTwoDigitStartDate() uintptr { return _symbol("kCFDateFormatterTwoDigitStartDate") }
+
+// KCFDateFormatterDefaultDate returns the address of the symbol kCFDateFormatterDefaultDate.
+func KCFDateFormatterDefaultDate() uintptr { return _symbol("kCFDateFormatterDefaultDate") }
+
+// KCFDateFormatterCalendar returns the address of the symbol kCFDateFormatterCalendar.
+func KCFDateFormatterCalendar() uintptr { return _symbol("kCFDateFormatterCalendar") }
+
+// KCFDateFormatterEraSymbols returns the address of the symbol kCFDateFormatterEraSymbols.
+func KCFDateFormatterEraSymbols() uintptr { return _symbol("kCFDateFormatterEraSymbols") }
+
+// KCFDateFormatterMonthSymbols returns the address of the symbol kCFDateFormatterMonthSymbols.
+func KCFDateFormatterMonthSymbols() uintptr { return _symbol("kCFDateFormatterMonthSymbols") }
+
+// KCFDateFormatterShortMonthSymbols returns the address of the symbol kCFDateFormatterShortMonthSymbols.
+func KCFDateFormatterShortMonthSymbols() uintptr { return _symbol("kCFDateFormatterShortMonthSymbols") }
+
+// KCFDateFormatterWeekdaySymbols returns the address of the symbol kCFDateFormatterWeekdaySymbols.
+func KCFDateFormatterWeekdaySymbols() uintptr { return _symbol("kCFDateFormatterWeekdaySymbols") }
+
+// KCFDateFormatterShortWeekdaySymbols returns the address of the symbol kCFDateFormatterShortWeekdaySymbols.
+func KCFDateFormatterShortWeekdaySymbols() uintptr {
+	return _symbol("kCFDateFormatterShortWeekdaySymbols")
+}
+
+// KCFDateFormatterAMSymbol returns the address of the symbol kCFDateFormatterAMSymbol.
+func KCFDateFormatterAMSymbol() uintptr { return _symbol("kCFDateFormatterAMSymbol") }
+
+// KCFDateFormatterPMSymbol returns the address of the symbol kCFDateFormatterPMSymbol.
+func KCFDateFormatterPMSymbol() uintptr { return _symbol("kCFDateFormatterPMSymbol") }
+
+// KCFDateFormatterLongEraSymbols returns the address of the symbol kCFDateFormatterLongEraSymbols.
+func KCFDateFormatterLongEraSymbols() uintptr { return _symbol("kCFDateFormatterLongEraSymbols") }
+
+// KCFDateFormatterVeryShortMonthSymbols returns the address of the symbol kCFDateFormatterVeryShortMonthSymbols.
+func KCFDateFormatterVeryShortMonthSymbols() uintptr {
+	return _symbol("kCFDateFormatterVeryShortMonthSymbols")
+}
+
+// KCFDateFormatterStandaloneMonthSymbols returns the address of the symbol kCFDateFormatterStandaloneMonthSymbols.
+func KCFDateFormatterStandaloneMonthSymbols() uintptr {
+	return _symbol("kCFDateFormatterStandaloneMonthSymbols")
+}
+
+// KCFDateFormatterShortStandaloneMonthSymbols returns the address of the symbol kCFDateFormatterShortStandaloneMonthSymbols.
+func KCFDateFormatterShortStandaloneMonthSymbols() uintptr {
+	return _symbol("kCFDateFormatterShortStandaloneMonthSymbols")
+}
+
+// KCFDateFormatterVeryShortStandaloneMonthSymbols returns the address of the symbol kCFDateFormatterVeryShortStandaloneMonthSymbols.
+func KCFDateFormatterVeryShortStandaloneMonthSymbols() uintptr {
+	return _symbol("kCFDateFormatterVeryShortStandaloneMonthSymbols")
+}
+
+// KCFDateFormatterVeryShortWeekdaySymbols returns the address of the symbol kCFDateFormatterVeryShortWeekdaySymbols.
+func KCFDateFormatterVeryShortWeekdaySymbols() uintptr {
+	return _symbol("kCFDateFormatterVeryShortWeekdaySymbols")
+}
+
+// KCFDateFormatterStandaloneWeekdaySymbols returns the address of the symbol kCFDateFormatterStandaloneWeekdaySymbols.
+func KCFDateFormatterStandaloneWeekdaySymbols() uintptr {
+	return _symbol("kCFDateFormatterStandaloneWeekdaySymbols")
+}
+
+// KCFDateFormatterShortStandaloneWeekdaySymbols returns the address of the symbol kCFDateFormatterShortStandaloneWeekdaySymbols.
+func KCFDateFormatterShortStandaloneWeekdaySymbols() uintptr {
+	return _symbol("kCFDateFormatterShortStandaloneWeekdaySymbols")
+}
+
+// KCFDateFormatterVeryShortStandaloneWeekdaySymbols returns the address of the symbol kCFDateFormatterVeryShortStandaloneWeekdaySymbols.
+func KCFDateFormatterVeryShortStandaloneWeekdaySymbols() uintptr {
+	return _symbol("kCFDateFormatterVeryShortStandaloneWeekdaySymbols")
+}
+
+// KCFDateFormatterQuarterSymbols returns the address of the symbol kCFDateFormatterQuarterSymbols.
+func KCFDateFormatterQuarterSymbols() uintptr { return _symbol("kCFDateFormatterQuarterSymbols") }
+
+// KCFDateFormatterShortQuarterSymbols returns the address of the symbol kCFDateFormatterShortQuarterSymbols.
+func KCFDateFormatterShortQuarterSymbols() uintptr {
+	return _symbol("kCFDateFormatterShortQuarterSymbols")
+}
+
+// KCFDateFormatterStandaloneQuarterSymbols returns the address of the symbol kCFDateFormatterStandaloneQuarterSymbols.
+func KCFDateFormatterStandaloneQuarterSymbols() uintptr {
+	return _symbol("kCFDateFormatterStandaloneQuarterSymbols")
+}
+
+// KCFDateFormatterShortStandaloneQuarterSymbols returns the address of the symbol kCFDateFormatterShortStandaloneQuarterSymbols.
+func KCFDateFormatterShortStandaloneQuarterSymbols() uintptr {
+	return _symbol("kCFDateFormatterShortStandaloneQuarterSymbols")
+}
+
+// KCFDateFormatterGregorianStartDate returns the address of the symbol kCFDateFormatterGregorianStartDate.
+func KCFDateFormatterGregorianStartDate() uintptr {
+	return _symbol("kCFDateFormatterGregorianStartDate")
+}
+
+// KCFDateFormatterDoesRelativeDateFormattingKey returns the address of the symbol kCFDateFormatterDoesRelativeDateFormattingKey.
+func KCFDateFormatterDoesRelativeDateFormattingKey() uintptr {
+	return _symbol("kCFDateFormatterDoesRelativeDateFormattingKey")
+}
+
+// KCFNumberFormatterCurrencyCode returns the address of the symbol kCFNumberFormatterCurrencyCode.
+func KCFNumberFormatterCurrencyCode() uintptr { return _symbol("kCFNumberFormatterCurrencyCode") }
+
+// KCFNumberFormatterDecimalSeparator returns the address of the symbol kCFNumberFormatterDecimalSeparator.
+func KCFNumberFormatterDecimalSeparator() uintptr {
+	return _symbol("kCFNumberFormatterDecimalSeparator")
+}
+
+// KCFNumberFormatterCurrencyDecimalSeparator returns the address of the symbol kCFNumberFormatterCurrencyDecimalSeparator.
+func KCFNumberFormatterCurrencyDecimalSeparator() uintptr {
+	return _symbol("kCFNumberFormatterCurrencyDecimalSeparator")
+}
+
+// KCFNumberFormatterAlwaysShowDecimalSeparator returns the address of the symbol kCFNumberFormatterAlwaysShowDecimalSeparator.
+func KCFNumberFormatterAlwaysShowDecimalSeparator() uintptr {
+	return _symbol("kCFNumberFormatterAlwaysShowDecimalSeparator")
+}
+
+// KCFNumberFormatterGroupingSeparator returns the address of the symbol kCFNumberFormatterGroupingSeparator.
+func KCFNumberFormatterGroupingSeparator() uintptr {
+	return _symbol("kCFNumberFormatterGroupingSeparator")
+}
+
+// KCFNumberFormatterUseGroupingSeparator returns the address of the symbol kCFNumberFormatterUseGroupingSeparator.
+func KCFNumberFormatterUseGroupingSeparator() uintptr {
+	return _symbol("kCFNumberFormatterUseGroupingSeparator")
+}
+
+// KCFNumberFormatterPercentSymbol returns the address of the symbol kCFNumberFormatterPercentSymbol.
+func KCFNumberFormatterPercentSymbol() uintptr { return _symbol("kCFNumberFormatterPercentSymbol") }
+
+// KCFNumberFormatterZeroSymbol returns the address of the symbol kCFNumberFormatterZeroSymbol.
+func KCFNumberFormatterZeroSymbol() uintptr { return _symbol("kCFNumberFormatterZeroSymbol") }
+
+// KCFNumberFormatterNaNSymbol returns the address of the symbol kCFNumberFormatterNaNSymbol.
+func KCFNumberFormatterNaNSymbol() uintptr { return _symbol("kCFNumberFormatterNaNSymbol") }
+
+// KCFNumberFormatterInfinitySymbol returns the address of the symbol kCFNumberFormatterInfinitySymbol.
+func KCFNumberFormatterInfinitySymbol() uintptr { return _symbol("kCFNumberFormatterInfinitySymbol") }
+
+// KCFNumberFormatterMinusSign returns the address of the symbol kCFNumberFormatterMinusSign.
+func KCFNumberFormatterMinusSign() uintptr { return _symbol("kCFNumberFormatterMinusSign") }
+
+// KCFNumberFormatterPlusSign returns the address of the symbol kCFNumberFormatterPlusSign.
+func KCFNumberFormatterPlusSign() uintptr { return _symbol("kCFNumberFormatterPlusSign") }
+
+// KCFNumberFormatterCurrencySymbol returns the address of the symbol kCFNumberFormatterCurrencySymbol.
+func KCFNumberFormatterCurrencySymbol() uintptr { return _symbol("kCFNumberFormatterCurrencySymbol") }
+
+// KCFNumberFormatterExponentSymbol returns the address of the symbol kCFNumberFormatterExponentSymbol.
+func KCFNumberFormatterExponentSymbol() uintptr { return _symbol("kCFNumberFormatterExponentSymbol") }
+
+// KCFNumberFormatterMinIntegerDigits returns the address of the symbol kCFNumberFormatterMinIntegerDigits.
+func KCFNumberFormatterMinIntegerDigits() uintptr {
+	return _symbol("kCFNumberFormatterMinIntegerDigits")
+}
+
+// KCFNumberFormatterMaxIntegerDigits returns the address of the symbol kCFNumberFormatterMaxIntegerDigits.
+func KCFNumberFormatterMaxIntegerDigits() uintptr {
+	return _symbol("kCFNumberFormatterMaxIntegerDigits")
+}
+
+// KCFNumberFormatterMinFractionDigits returns the address of the symbol kCFNumberFormatterMinFractionDigits.
+func KCFNumberFormatterMinFractionDigits() uintptr {
+	return _symbol("kCFNumberFormatterMinFractionDigits")
+}
+
+// KCFNumberFormatterMaxFractionDigits returns the address of the symbol kCFNumberFormatterMaxFractionDigits.
+func KCFNumberFormatterMaxFractionDigits() uintptr {
+	return _symbol("kCFNumberFormatterMaxFractionDigits")
+}
+
+// KCFNumberFormatterGroupingSize returns the address of the symbol kCFNumberFormatterGroupingSize.
+func KCFNumberFormatterGroupingSize() uintptr { return _symbol("kCFNumberFormatterGroupingSize") }
+
+// KCFNumberFormatterSecondaryGroupingSize returns the address of the symbol kCFNumberFormatterSecondaryGroupingSize.
+func KCFNumberFormatterSecondaryGroupingSize() uintptr {
+	return _symbol("kCFNumberFormatterSecondaryGroupingSize")
+}
+
+// KCFNumberFormatterRoundingMode returns the address of the symbol kCFNumberFormatterRoundingMode.
+func KCFNumberFormatterRoundingMode() uintptr { return _symbol("kCFNumberFormatterRoundingMode") }
+
+// KCFNumberFormatterRoundingIncrement returns the address of the symbol kCFNumberFormatterRoundingIncrement.
+func KCFNumberFormatterRoundingIncrement() uintptr {
+	return _symbol("kCFNumberFormatterRoundingIncrement")
+}
+
+// KCFNumberFormatterFormatWidth returns the address of the symbol kCFNumberFormatterFormatWidth.
+func KCFNumberFormatterFormatWidth() uintptr { return _symbol("kCFNumberFormatterFormatWidth") }
+
+// KCFNumberFormatterPaddingPosition returns the address of the symbol kCFNumberFormatterPaddingPosition.
+func KCFNumberFormatterPaddingPosition() uintptr { return _symbol("kCFNumberFormatterPaddingPosition") }
+
+// KCFNumberFormatterPaddingCharacter returns the address of the symbol kCFNumberFormatterPaddingCharacter.
+func KCFNumberFormatterPaddingCharacter() uintptr {
+	return _symbol("kCFNumberFormatterPaddingCharacter")
+}
+
+// KCFNumberFormatterDefaultFormat returns the address of the symbol kCFNumberFormatterDefaultFormat.
+func KCFNumberFormatterDefaultFormat() uintptr { return _symbol("kCFNumberFormatterDefaultFormat") }
+
+// KCFNumberFormatterMultiplier returns the address of the symbol kCFNumberFormatterMultiplier.
+func KCFNumberFormatterMultiplier() uintptr { return _symbol("kCFNumberFormatterMultiplier") }
+
+// KCFNumberFormatterPositivePrefix returns the address of the symbol kCFNumberFormatterPositivePrefix.
+func KCFNumberFormatterPositivePrefix() uintptr { return _symbol("kCFNumberFormatterPositivePrefix") }
+
+// KCFNumberFormatterPositiveSuffix returns the address of the symbol kCFNumberFormatterPositiveSuffix.
+func KCFNumberFormatterPositiveSuffix() uintptr { return _symbol("kCFNumberFormatterPositiveSuffix") }
+
+// KCFNumberFormatterNegativePrefix returns the address of the symbol kCFNumberFormatterNegativePrefix.
+func KCFNumberFormatterNegativePrefix() uintptr { return _symbol("kCFNumberFormatterNegativePrefix") }
+
+// KCFNumberFormatterNegativeSuffix returns the address of the symbol kCFNumberFormatterNegativeSuffix.
+func KCFNumberFormatterNegativeSuffix() uintptr { return _symbol("kCFNumberFormatterNegativeSuffix") }
+
+// KCFNumberFormatterPerMillSymbol returns the address of the symbol kCFNumberFormatterPerMillSymbol.
+func KCFNumberFormatterPerMillSymbol() uintptr { return _symbol("kCFNumberFormatterPerMillSymbol") }
+
+// KCFNumberFormatterInternationalCurrencySymbol returns the address of the symbol kCFNumberFormatterInternationalCurrencySymbol.
+func KCFNumberFormatterInternationalCurrencySymbol() uintptr {
+	return _symbol("kCFNumberFormatterInternationalCurrencySymbol")
+}
+
+// KCFNumberFormatterCurrencyGroupingSeparator returns the address of the symbol kCFNumberFormatterCurrencyGroupingSeparator.
+func KCFNumberFormatterCurrencyGroupingSeparator() uintptr {
+	return _symbol("kCFNumberFormatterCurrencyGroupingSeparator")
+}
+
+// KCFNumberFormatterIsLenient returns the address of the symbol kCFNumberFormatterIsLenient.
+func KCFNumberFormatterIsLenient() uintptr { return _symbol("kCFNumberFormatterIsLenient") }
+
+// KCFNumberFormatterUseSignificantDigits returns the address of the symbol kCFNumberFormatterUseSignificantDigits.
+func KCFNumberFormatterUseSignificantDigits() uintptr {
+	return _symbol("kCFNumberFormatterUseSignificantDigits")
+}
+
+// KCFNumberFormatterMinSignificantDigits returns the address of the symbol kCFNumberFormatterMinSignificantDigits.
+func KCFNumberFormatterMinSignificantDigits() uintptr {
+	return _symbol("kCFNumberFormatterMinSignificantDigits")
+}
+
+// KCFNumberFormatterMaxSignificantDigits returns the address of the symbol kCFNumberFormatterMaxSignificantDigits.
+func KCFNumberFormatterMaxSignificantDigits() uintptr {
+	return _symbol("kCFNumberFormatterMaxSignificantDigits")
+}
+
+// KCFNumberFormatterMinGroupingDigits returns the address of the symbol kCFNumberFormatterMinGroupingDigits.
+func KCFNumberFormatterMinGroupingDigits() uintptr {
+	return _symbol("kCFNumberFormatterMinGroupingDigits")
+}
+
+// KCFRunLoopDefaultMode returns the address of the symbol kCFRunLoopDefaultMode.
+func KCFRunLoopDefaultMode() uintptr { return _symbol("kCFRunLoopDefaultMode") }
+
+// KCFRunLoopCommonModes returns the address of the symbol kCFRunLoopCommonModes.
+func KCFRunLoopCommonModes() uintptr { return _symbol("kCFRunLoopCommonModes") }
+
+// KCFStreamPropertyDataWritten returns the address of the symbol kCFStreamPropertyDataWritten.
+func KCFStreamPropertyDataWritten() uintptr { return _symbol("kCFStreamPropertyDataWritten") }
+
+// KCFStreamPropertyAppendToFile returns the address of the symbol kCFStreamPropertyAppendToFile.
+func KCFStreamPropertyAppendToFile() uintptr { return _symbol("kCFStreamPropertyAppendToFile") }
+
+// KCFStreamPropertyFileCurrentOffset returns the address of the symbol kCFStreamPropertyFileCurrentOffset.
+func KCFStreamPropertyFileCurrentOffset() uintptr {
+	return _symbol("kCFStreamPropertyFileCurrentOffset")
+}
+
+// KCFStreamPropertySocketNativeHandle returns the address of the symbol kCFStreamPropertySocketNativeHandle.
+func KCFStreamPropertySocketNativeHandle() uintptr {
+	return _symbol("kCFStreamPropertySocketNativeHandle")
+}
+
+// KCFStreamPropertySocketRemoteHostName returns the address of the symbol kCFStreamPropertySocketRemoteHostName.
+func KCFStreamPropertySocketRemoteHostName() uintptr {
+	return _symbol("kCFStreamPropertySocketRemoteHostName")
+}
+
+// KCFStreamPropertySocketRemotePortNumber returns the address of the symbol kCFStreamPropertySocketRemotePortNumber.
+func KCFStreamPropertySocketRemotePortNumber() uintptr {
+	return _symbol("kCFStreamPropertySocketRemotePortNumber")
+}
+
+// KCFStreamErrorDomainSOCKS returns the address of the symbol kCFStreamErrorDomainSOCKS.
+func KCFStreamErrorDomainSOCKS() uintptr { return _symbol("kCFStreamErrorDomainSOCKS") }
+
+// KCFStreamErrorDomainSSL returns the address of the symbol kCFStreamErrorDomainSSL.
+func KCFStreamErrorDomainSSL() uintptr { return _symbol("kCFStreamErrorDomainSSL") }
+
+// KCFTypeSetCallBacks returns the address of the symbol kCFTypeSetCallBacks.
+func KCFTypeSetCallBacks() uintptr { return _symbol("kCFTypeSetCallBacks") }
+
+// KCFCopyStringSetCallBacks returns the address of the symbol kCFCopyStringSetCallBacks.
+func KCFCopyStringSetCallBacks() uintptr { return _symbol("kCFCopyStringSetCallBacks") }

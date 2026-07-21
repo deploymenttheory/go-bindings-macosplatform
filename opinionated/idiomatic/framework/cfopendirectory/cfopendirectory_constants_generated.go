@@ -1942,3 +1942,6 @@ func KODPolicyAttributeDaysUntilExpiration() obj.Object {
 
 // KODBackOffSeconds returns the string constant kODBackOffSeconds, for use as a dictionary key or argument.
 func KODBackOffSeconds() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kODBackOffSeconds"))) }
+
+// KODSessionDefault returns the address of the symbol kODSessionDefault.
+func KODSessionDefault() uintptr { return _symbol("kODSessionDefault") }

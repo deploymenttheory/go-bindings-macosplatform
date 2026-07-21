@@ -13,3 +13,18 @@ import (
 func MediaExtensionErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MediaExtensionErrorDomain")))
 }
+
+// MEVideoDecoderReadyForMoreMediaDataDidChangeNotification returns the address of the symbol MEVideoDecoderReadyForMoreMediaDataDidChangeNotification.
+func MEVideoDecoderReadyForMoreMediaDataDidChangeNotification() uintptr {
+	return _symbol("MEVideoDecoderReadyForMoreMediaDataDidChangeNotification")
+}
+
+// MERAWProcessorValuesDidChangeNotification returns the address of the symbol MERAWProcessorValuesDidChangeNotification.
+func MERAWProcessorValuesDidChangeNotification() uintptr {
+	return _symbol("MERAWProcessorValuesDidChangeNotification")
+}
+
+// MERAWProcessorReadyForMoreMediaDataDidChangeNotification returns the address of the symbol MERAWProcessorReadyForMoreMediaDataDidChangeNotification.
+func MERAWProcessorReadyForMoreMediaDataDidChangeNotification() uintptr {
+	return _symbol("MERAWProcessorReadyForMoreMediaDataDidChangeNotification")
+}

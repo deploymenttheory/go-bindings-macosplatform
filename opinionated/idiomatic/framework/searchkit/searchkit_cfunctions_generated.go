@@ -26,6 +26,28 @@ func SKDocumentCopyURL(inDocument unsafe.Pointer) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnSKDocumentCreate func(objc.ID, unsafe.Pointer, objc.ID) unsafe.Pointer
+
+// SKDocumentCreate calls the SearchKit framework function SKDocumentCreate.
+func SKDocumentCreate(inScheme obj.Object, inParent unsafe.Pointer, inName obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKDocumentCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnSKDocumentCreate, _lib, "SKDocumentCreate")
+	}
+	return _fnSKDocumentCreate(objref.IDOf(inScheme), inParent, objref.IDOf(inName))
+}
+
+var _fnSKDocumentCreateWithURL func(objc.ID) unsafe.Pointer
+
+// SKDocumentCreateWithURL calls the SearchKit framework function SKDocumentCreateWithURL.
+func SKDocumentCreateWithURL(inURL obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKDocumentCreateWithURL == nil {
+		ebipurego.RegisterLibFunc(&_fnSKDocumentCreateWithURL, _lib, "SKDocumentCreateWithURL")
+	}
+	return _fnSKDocumentCreateWithURL(objref.IDOf(inURL))
+}
+
 var _fnSKDocumentGetName func(unsafe.Pointer) objc.ID
 
 // SKDocumentGetName calls the SearchKit framework function SKDocumentGetName.
@@ -36,6 +58,17 @@ func SKDocumentGetName(inDocument unsafe.Pointer) obj.Object {
 	}
 	_ret := _fnSKDocumentGetName(inDocument)
 	return obj.Wrap(_ret)
+}
+
+var _fnSKDocumentGetParent func(unsafe.Pointer) unsafe.Pointer
+
+// SKDocumentGetParent calls the SearchKit framework function SKDocumentGetParent.
+func SKDocumentGetParent(inDocument unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKDocumentGetParent == nil {
+		ebipurego.RegisterLibFunc(&_fnSKDocumentGetParent, _lib, "SKDocumentGetParent")
+	}
+	return _fnSKDocumentGetParent(inDocument)
 }
 
 var _fnSKDocumentGetSchemeName func(unsafe.Pointer) objc.ID
@@ -103,6 +136,17 @@ func SKIndexCompact(inIndex obj.Object) uint8 {
 		ebipurego.RegisterLibFunc(&_fnSKIndexCompact, _lib, "SKIndexCompact")
 	}
 	return _fnSKIndexCompact(objref.IDOf(inIndex))
+}
+
+var _fnSKIndexCopyDocumentForDocumentID func(objc.ID, int) unsafe.Pointer
+
+// SKIndexCopyDocumentForDocumentID calls the SearchKit framework function SKIndexCopyDocumentForDocumentID.
+func SKIndexCopyDocumentForDocumentID(inIndex obj.Object, inDocumentID int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexCopyDocumentForDocumentID == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexCopyDocumentForDocumentID, _lib, "SKIndexCopyDocumentForDocumentID")
+	}
+	return _fnSKIndexCopyDocumentForDocumentID(objref.IDOf(inIndex), inDocumentID)
 }
 
 var _fnSKIndexCopyDocumentIDArrayForTermID func(objc.ID, int) objc.ID
@@ -215,6 +259,17 @@ func SKIndexCreateWithURL(inURL obj.Object, inIndexName obj.Object, inIndexType 
 	}
 	_ret := _fnSKIndexCreateWithURL(objref.IDOf(inURL), objref.IDOf(inIndexName), inIndexType, objref.IDOf(inAnalysisProperties))
 	return obj.Wrap(_ret)
+}
+
+var _fnSKIndexDocumentIteratorCopyNext func(objc.ID) unsafe.Pointer
+
+// SKIndexDocumentIteratorCopyNext calls the SearchKit framework function SKIndexDocumentIteratorCopyNext.
+func SKIndexDocumentIteratorCopyNext(inIterator obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKIndexDocumentIteratorCopyNext == nil {
+		ebipurego.RegisterLibFunc(&_fnSKIndexDocumentIteratorCopyNext, _lib, "SKIndexDocumentIteratorCopyNext")
+	}
+	return _fnSKIndexDocumentIteratorCopyNext(objref.IDOf(inIterator))
 }
 
 var _fnSKIndexDocumentIteratorCreate func(objc.ID, unsafe.Pointer) objc.ID

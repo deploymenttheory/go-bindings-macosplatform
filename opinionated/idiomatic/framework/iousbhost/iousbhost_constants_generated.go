@@ -5,6 +5,8 @@
 package iousbhost
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -112,4 +114,25 @@ func IOUSBHostDevicePropertyKeyCurrentConfiguration() obj.Object {
 // IOUSBHostInterfacePropertyKeyAlternateSetting returns the string constant IOUSBHostInterfacePropertyKeyAlternateSetting, for use as a dictionary key or argument.
 func IOUSBHostInterfacePropertyKeyAlternateSetting() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostInterfacePropertyKeyAlternateSetting")))
+}
+
+// IOUSBHostVersionNumber returns the value of the constant IOUSBHostVersionNumber.
+func IOUSBHostVersionNumber() float64 {
+	addr := _symbol("IOUSBHostVersionNumber")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// IOUSBHostVersionString returns the address of the symbol IOUSBHostVersionString.
+func IOUSBHostVersionString() uintptr { return _symbol("IOUSBHostVersionString") }
+
+// IOUSBHostDefaultControlCompletionTimeout returns the value of the constant IOUSBHostDefaultControlCompletionTimeout.
+func IOUSBHostDefaultControlCompletionTimeout() float64 {
+	addr := _symbol("IOUSBHostDefaultControlCompletionTimeout")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
 }

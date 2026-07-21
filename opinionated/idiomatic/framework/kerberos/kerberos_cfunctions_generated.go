@@ -3279,6 +3279,17 @@ func Krb5GetProfile(arg obj.Object, arg2 unsafe.Pointer) int {
 	return int(_fnKrb5GetProfile(objref.IDOf(arg), arg2))
 }
 
+var _fnKrb5GetPromptTypes func(objc.ID) unsafe.Pointer
+
+// Krb5GetPromptTypes calls the Kerberos framework function krb5_get_prompt_types.
+func Krb5GetPromptTypes(context_ obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKrb5GetPromptTypes == nil {
+		ebipurego.RegisterLibFunc(&_fnKrb5GetPromptTypes, _lib, "krb5_get_prompt_types")
+	}
+	return _fnKrb5GetPromptTypes(objref.IDOf(context_))
+}
+
 var _fnKrb5GetRenewedCreds func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID, string) int32
 
 // Krb5GetRenewedCreds calls the Kerberos framework function krb5_get_renewed_creds.
@@ -4538,4 +4549,26 @@ func RemoveErrorTable(et unsafe.Pointer) int {
 		ebipurego.RegisterLibFunc(&_fnRemoveErrorTable, _lib, "remove_error_table")
 	}
 	return _fnRemoveErrorTable(et)
+}
+
+var _fnResetComErrHook func() unsafe.Pointer
+
+// ResetComErrHook calls the Kerberos framework function reset_com_err_hook.
+func ResetComErrHook() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnResetComErrHook == nil {
+		ebipurego.RegisterLibFunc(&_fnResetComErrHook, _lib, "reset_com_err_hook")
+	}
+	return _fnResetComErrHook()
+}
+
+var _fnSetComErrHook func(unsafe.Pointer) unsafe.Pointer
+
+// SetComErrHook calls the Kerberos framework function set_com_err_hook.
+func SetComErrHook(handler unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetComErrHook == nil {
+		ebipurego.RegisterLibFunc(&_fnSetComErrHook, _lib, "set_com_err_hook")
+	}
+	return _fnSetComErrHook(handler)
 }

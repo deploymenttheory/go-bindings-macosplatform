@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -116,3 +118,12 @@ func CKShareThumbnailImageDataKey() obj.Object {
 
 // CKShareTypeKey returns the string constant CKShareTypeKey, for use as a dictionary key or argument.
 func CKShareTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CKShareTypeKey"))) }
+
+// CKQueryOperationMaximumResults returns the value of the constant CKQueryOperationMaximumResults.
+func CKQueryOperationMaximumResults() uint {
+	addr := _symbol("CKQueryOperationMaximumResults")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint)(unsafe.Pointer(addr))
+}

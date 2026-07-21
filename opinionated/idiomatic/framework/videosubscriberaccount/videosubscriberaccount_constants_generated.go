@@ -23,3 +23,22 @@ func VSAccountProviderAuthenticationSchemeSAML() obj.Object {
 func VSAccountProviderAuthenticationSchemeAPI() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("VSAccountProviderAuthenticationSchemeAPI")))
 }
+
+// VSErrorDomain returns the address of the symbol VSErrorDomain.
+func VSErrorDomain() uintptr { return _symbol("VSErrorDomain") }
+
+// VSErrorInfoKeySAMLResponse returns the address of the symbol VSErrorInfoKeySAMLResponse.
+func VSErrorInfoKeySAMLResponse() uintptr { return _symbol("VSErrorInfoKeySAMLResponse") }
+
+// VSErrorInfoKeySAMLResponseStatus returns the address of the symbol VSErrorInfoKeySAMLResponseStatus.
+func VSErrorInfoKeySAMLResponseStatus() uintptr { return _symbol("VSErrorInfoKeySAMLResponseStatus") }
+
+// VSErrorInfoKeyAccountProviderResponse returns the address of the symbol VSErrorInfoKeyAccountProviderResponse.
+func VSErrorInfoKeyAccountProviderResponse() uintptr {
+	return _symbol("VSErrorInfoKeyAccountProviderResponse")
+}
+
+// VSErrorInfoKeyUnsupportedProviderIdentifier returns the address of the symbol VSErrorInfoKeyUnsupportedProviderIdentifier.
+func VSErrorInfoKeyUnsupportedProviderIdentifier() uintptr {
+	return _symbol("VSErrorInfoKeyUnsupportedProviderIdentifier")
+}

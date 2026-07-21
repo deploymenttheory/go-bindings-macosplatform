@@ -5,6 +5,9 @@
 package paravirtualizedgraphics
 
 import (
+	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -22,6 +25,17 @@ func PGCopyOptionROMURL() string {
 	return rt.URLString(_ret)
 }
 
+var _fnPGCreateDeviceWithDescriptor func(objc.ID) unsafe.Pointer
+
+// PGCreateDeviceWithDescriptor calls the ParavirtualizedGraphics framework function PGCreateDeviceWithDescriptor.
+func PGCreateDeviceWithDescriptor(descriptor *PGDeviceDescriptor) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPGCreateDeviceWithDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnPGCreateDeviceWithDescriptor, _lib, "PGCreateDeviceWithDescriptor")
+	}
+	return _fnPGCreateDeviceWithDescriptor(objref.IDOf(descriptor))
+}
+
 var _fnPGMaxDisplayPortCount func() uint32
 
 // PGMaxDisplayPortCount calls the ParavirtualizedGraphics framework function PGMaxDisplayPortCount.
@@ -31,4 +45,15 @@ func PGMaxDisplayPortCount() uint32 {
 		ebipurego.RegisterLibFunc(&_fnPGMaxDisplayPortCount, _lib, "PGMaxDisplayPortCount")
 	}
 	return _fnPGMaxDisplayPortCount()
+}
+
+var _fnPGNewDeviceWithDescriptor func(objc.ID) unsafe.Pointer
+
+// PGNewDeviceWithDescriptor calls the ParavirtualizedGraphics framework function PGNewDeviceWithDescriptor.
+func PGNewDeviceWithDescriptor(descriptor *PGDeviceDescriptor) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPGNewDeviceWithDescriptor == nil {
+		ebipurego.RegisterLibFunc(&_fnPGNewDeviceWithDescriptor, _lib, "PGNewDeviceWithDescriptor")
+	}
+	return _fnPGNewDeviceWithDescriptor(objref.IDOf(descriptor))
 }

@@ -354,6 +354,17 @@ func ColorSyncProfileGetDisplayTransferFormulaFromVCGT(profile obj.Object) (ok b
 	return _ret, _out0, _out1, _out2, _out3, _out4, _out5, _out6, _out7, _out8
 }
 
+var _fnColorSyncProfileGetMD5 func(objc.ID) unsafe.Pointer
+
+// ColorSyncProfileGetMD5 calls the ColorSync framework function ColorSyncProfileGetMD5.
+func ColorSyncProfileGetMD5(prof obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnColorSyncProfileGetMD5 == nil {
+		ebipurego.RegisterLibFunc(&_fnColorSyncProfileGetMD5, _lib, "ColorSyncProfileGetMD5")
+	}
+	return _fnColorSyncProfileGetMD5(objref.IDOf(prof))
+}
+
 var _fnColorSyncProfileGetTypeID func() int
 
 // ColorSyncProfileGetTypeID calls the ColorSync framework function ColorSyncProfileGetTypeID.

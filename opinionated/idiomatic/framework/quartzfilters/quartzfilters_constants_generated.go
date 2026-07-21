@@ -5,6 +5,8 @@
 package quartzfilters
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -42,4 +44,13 @@ func KQuartzFilterManagerDidModifyFilterNotification() obj.Object {
 // KQuartzFilterManagerDidSelectFilterNotification returns the string constant kQuartzFilterManagerDidSelectFilterNotification, for use as a dictionary key or argument.
 func KQuartzFilterManagerDidSelectFilterNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kQuartzFilterManagerDidSelectFilterNotification")))
+}
+
+// GlobalUpdateOK returns the value of the constant globalUpdateOK.
+func GlobalUpdateOK() uint8 {
+	addr := _symbol("globalUpdateOK")
+	if addr == 0 {
+		return 0
+	}
+	return *(*uint8)(unsafe.Pointer(addr))
 }

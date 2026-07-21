@@ -2381,3 +2381,2296 @@ func KSecInputIsDigest() obj.Object { return obj.Wrap(purego.CFConstant(_symbol(
 
 // KSecInputIsRaw returns the value of the constant kSecInputIsRaw.
 func KSecInputIsRaw() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecInputIsRaw"))) }
+
+// KSecKeyAlgorithmRSASignatureRaw returns the address of the symbol kSecKeyAlgorithmRSASignatureRaw.
+func KSecKeyAlgorithmRSASignatureRaw() uintptr { return _symbol("kSecKeyAlgorithmRSASignatureRaw") }
+
+// KSecKeyAlgorithmRSASignatureDigestPKCS1v15Raw returns the address of the symbol kSecKeyAlgorithmRSASignatureDigestPKCS1v15Raw.
+func KSecKeyAlgorithmRSASignatureDigestPKCS1v15Raw() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureDigestPKCS1v15Raw")
+}
+
+// KSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA1 returns the address of the symbol kSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA1.
+func KSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA1() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA1")
+}
+
+// KSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA224 returns the address of the symbol kSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA224.
+func KSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA224() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA224")
+}
+
+// KSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA256 returns the address of the symbol kSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA256.
+func KSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA256() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA256")
+}
+
+// KSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA384 returns the address of the symbol kSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA384.
+func KSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA384() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA384")
+}
+
+// KSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA512 returns the address of the symbol kSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA512.
+func KSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA512() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureDigestPKCS1v15SHA512")
+}
+
+// KSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA1 returns the address of the symbol kSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA1.
+func KSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA1() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA1")
+}
+
+// KSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA224 returns the address of the symbol kSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA224.
+func KSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA224() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA224")
+}
+
+// KSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA256 returns the address of the symbol kSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA256.
+func KSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA256() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA256")
+}
+
+// KSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA384 returns the address of the symbol kSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA384.
+func KSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA384() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA384")
+}
+
+// KSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA512 returns the address of the symbol kSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA512.
+func KSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA512() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureMessagePKCS1v15SHA512")
+}
+
+// KSecKeyAlgorithmRSASignatureDigestPSSSHA1 returns the address of the symbol kSecKeyAlgorithmRSASignatureDigestPSSSHA1.
+func KSecKeyAlgorithmRSASignatureDigestPSSSHA1() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureDigestPSSSHA1")
+}
+
+// KSecKeyAlgorithmRSASignatureDigestPSSSHA224 returns the address of the symbol kSecKeyAlgorithmRSASignatureDigestPSSSHA224.
+func KSecKeyAlgorithmRSASignatureDigestPSSSHA224() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureDigestPSSSHA224")
+}
+
+// KSecKeyAlgorithmRSASignatureDigestPSSSHA256 returns the address of the symbol kSecKeyAlgorithmRSASignatureDigestPSSSHA256.
+func KSecKeyAlgorithmRSASignatureDigestPSSSHA256() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureDigestPSSSHA256")
+}
+
+// KSecKeyAlgorithmRSASignatureDigestPSSSHA384 returns the address of the symbol kSecKeyAlgorithmRSASignatureDigestPSSSHA384.
+func KSecKeyAlgorithmRSASignatureDigestPSSSHA384() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureDigestPSSSHA384")
+}
+
+// KSecKeyAlgorithmRSASignatureDigestPSSSHA512 returns the address of the symbol kSecKeyAlgorithmRSASignatureDigestPSSSHA512.
+func KSecKeyAlgorithmRSASignatureDigestPSSSHA512() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureDigestPSSSHA512")
+}
+
+// KSecKeyAlgorithmRSASignatureMessagePSSSHA1 returns the address of the symbol kSecKeyAlgorithmRSASignatureMessagePSSSHA1.
+func KSecKeyAlgorithmRSASignatureMessagePSSSHA1() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureMessagePSSSHA1")
+}
+
+// KSecKeyAlgorithmRSASignatureMessagePSSSHA224 returns the address of the symbol kSecKeyAlgorithmRSASignatureMessagePSSSHA224.
+func KSecKeyAlgorithmRSASignatureMessagePSSSHA224() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureMessagePSSSHA224")
+}
+
+// KSecKeyAlgorithmRSASignatureMessagePSSSHA256 returns the address of the symbol kSecKeyAlgorithmRSASignatureMessagePSSSHA256.
+func KSecKeyAlgorithmRSASignatureMessagePSSSHA256() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureMessagePSSSHA256")
+}
+
+// KSecKeyAlgorithmRSASignatureMessagePSSSHA384 returns the address of the symbol kSecKeyAlgorithmRSASignatureMessagePSSSHA384.
+func KSecKeyAlgorithmRSASignatureMessagePSSSHA384() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureMessagePSSSHA384")
+}
+
+// KSecKeyAlgorithmRSASignatureMessagePSSSHA512 returns the address of the symbol kSecKeyAlgorithmRSASignatureMessagePSSSHA512.
+func KSecKeyAlgorithmRSASignatureMessagePSSSHA512() uintptr {
+	return _symbol("kSecKeyAlgorithmRSASignatureMessagePSSSHA512")
+}
+
+// KSecKeyAlgorithmECDSASignatureDigestX962 returns the address of the symbol kSecKeyAlgorithmECDSASignatureDigestX962.
+func KSecKeyAlgorithmECDSASignatureDigestX962() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureDigestX962")
+}
+
+// KSecKeyAlgorithmECDSASignatureDigestX962SHA1 returns the address of the symbol kSecKeyAlgorithmECDSASignatureDigestX962SHA1.
+func KSecKeyAlgorithmECDSASignatureDigestX962SHA1() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureDigestX962SHA1")
+}
+
+// KSecKeyAlgorithmECDSASignatureDigestX962SHA224 returns the address of the symbol kSecKeyAlgorithmECDSASignatureDigestX962SHA224.
+func KSecKeyAlgorithmECDSASignatureDigestX962SHA224() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureDigestX962SHA224")
+}
+
+// KSecKeyAlgorithmECDSASignatureDigestX962SHA256 returns the address of the symbol kSecKeyAlgorithmECDSASignatureDigestX962SHA256.
+func KSecKeyAlgorithmECDSASignatureDigestX962SHA256() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureDigestX962SHA256")
+}
+
+// KSecKeyAlgorithmECDSASignatureDigestX962SHA384 returns the address of the symbol kSecKeyAlgorithmECDSASignatureDigestX962SHA384.
+func KSecKeyAlgorithmECDSASignatureDigestX962SHA384() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureDigestX962SHA384")
+}
+
+// KSecKeyAlgorithmECDSASignatureDigestX962SHA512 returns the address of the symbol kSecKeyAlgorithmECDSASignatureDigestX962SHA512.
+func KSecKeyAlgorithmECDSASignatureDigestX962SHA512() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureDigestX962SHA512")
+}
+
+// KSecKeyAlgorithmECDSASignatureMessageX962SHA1 returns the address of the symbol kSecKeyAlgorithmECDSASignatureMessageX962SHA1.
+func KSecKeyAlgorithmECDSASignatureMessageX962SHA1() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureMessageX962SHA1")
+}
+
+// KSecKeyAlgorithmECDSASignatureMessageX962SHA224 returns the address of the symbol kSecKeyAlgorithmECDSASignatureMessageX962SHA224.
+func KSecKeyAlgorithmECDSASignatureMessageX962SHA224() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureMessageX962SHA224")
+}
+
+// KSecKeyAlgorithmECDSASignatureMessageX962SHA256 returns the address of the symbol kSecKeyAlgorithmECDSASignatureMessageX962SHA256.
+func KSecKeyAlgorithmECDSASignatureMessageX962SHA256() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureMessageX962SHA256")
+}
+
+// KSecKeyAlgorithmECDSASignatureMessageX962SHA384 returns the address of the symbol kSecKeyAlgorithmECDSASignatureMessageX962SHA384.
+func KSecKeyAlgorithmECDSASignatureMessageX962SHA384() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureMessageX962SHA384")
+}
+
+// KSecKeyAlgorithmECDSASignatureMessageX962SHA512 returns the address of the symbol kSecKeyAlgorithmECDSASignatureMessageX962SHA512.
+func KSecKeyAlgorithmECDSASignatureMessageX962SHA512() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureMessageX962SHA512")
+}
+
+// KSecKeyAlgorithmECDSASignatureDigestRFC4754 returns the address of the symbol kSecKeyAlgorithmECDSASignatureDigestRFC4754.
+func KSecKeyAlgorithmECDSASignatureDigestRFC4754() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureDigestRFC4754")
+}
+
+// KSecKeyAlgorithmECDSASignatureDigestRFC4754SHA1 returns the address of the symbol kSecKeyAlgorithmECDSASignatureDigestRFC4754SHA1.
+func KSecKeyAlgorithmECDSASignatureDigestRFC4754SHA1() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureDigestRFC4754SHA1")
+}
+
+// KSecKeyAlgorithmECDSASignatureDigestRFC4754SHA224 returns the address of the symbol kSecKeyAlgorithmECDSASignatureDigestRFC4754SHA224.
+func KSecKeyAlgorithmECDSASignatureDigestRFC4754SHA224() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureDigestRFC4754SHA224")
+}
+
+// KSecKeyAlgorithmECDSASignatureDigestRFC4754SHA256 returns the address of the symbol kSecKeyAlgorithmECDSASignatureDigestRFC4754SHA256.
+func KSecKeyAlgorithmECDSASignatureDigestRFC4754SHA256() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureDigestRFC4754SHA256")
+}
+
+// KSecKeyAlgorithmECDSASignatureDigestRFC4754SHA384 returns the address of the symbol kSecKeyAlgorithmECDSASignatureDigestRFC4754SHA384.
+func KSecKeyAlgorithmECDSASignatureDigestRFC4754SHA384() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureDigestRFC4754SHA384")
+}
+
+// KSecKeyAlgorithmECDSASignatureDigestRFC4754SHA512 returns the address of the symbol kSecKeyAlgorithmECDSASignatureDigestRFC4754SHA512.
+func KSecKeyAlgorithmECDSASignatureDigestRFC4754SHA512() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureDigestRFC4754SHA512")
+}
+
+// KSecKeyAlgorithmECDSASignatureMessageRFC4754SHA1 returns the address of the symbol kSecKeyAlgorithmECDSASignatureMessageRFC4754SHA1.
+func KSecKeyAlgorithmECDSASignatureMessageRFC4754SHA1() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureMessageRFC4754SHA1")
+}
+
+// KSecKeyAlgorithmECDSASignatureMessageRFC4754SHA224 returns the address of the symbol kSecKeyAlgorithmECDSASignatureMessageRFC4754SHA224.
+func KSecKeyAlgorithmECDSASignatureMessageRFC4754SHA224() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureMessageRFC4754SHA224")
+}
+
+// KSecKeyAlgorithmECDSASignatureMessageRFC4754SHA256 returns the address of the symbol kSecKeyAlgorithmECDSASignatureMessageRFC4754SHA256.
+func KSecKeyAlgorithmECDSASignatureMessageRFC4754SHA256() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureMessageRFC4754SHA256")
+}
+
+// KSecKeyAlgorithmECDSASignatureMessageRFC4754SHA384 returns the address of the symbol kSecKeyAlgorithmECDSASignatureMessageRFC4754SHA384.
+func KSecKeyAlgorithmECDSASignatureMessageRFC4754SHA384() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureMessageRFC4754SHA384")
+}
+
+// KSecKeyAlgorithmECDSASignatureMessageRFC4754SHA512 returns the address of the symbol kSecKeyAlgorithmECDSASignatureMessageRFC4754SHA512.
+func KSecKeyAlgorithmECDSASignatureMessageRFC4754SHA512() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureMessageRFC4754SHA512")
+}
+
+// KSecKeyAlgorithmECDSASignatureRFC4754 returns the address of the symbol kSecKeyAlgorithmECDSASignatureRFC4754.
+func KSecKeyAlgorithmECDSASignatureRFC4754() uintptr {
+	return _symbol("kSecKeyAlgorithmECDSASignatureRFC4754")
+}
+
+// KSecKeyAlgorithmRSAEncryptionRaw returns the address of the symbol kSecKeyAlgorithmRSAEncryptionRaw.
+func KSecKeyAlgorithmRSAEncryptionRaw() uintptr { return _symbol("kSecKeyAlgorithmRSAEncryptionRaw") }
+
+// KSecKeyAlgorithmRSAEncryptionPKCS1 returns the address of the symbol kSecKeyAlgorithmRSAEncryptionPKCS1.
+func KSecKeyAlgorithmRSAEncryptionPKCS1() uintptr {
+	return _symbol("kSecKeyAlgorithmRSAEncryptionPKCS1")
+}
+
+// KSecKeyAlgorithmRSAEncryptionOAEPSHA1 returns the address of the symbol kSecKeyAlgorithmRSAEncryptionOAEPSHA1.
+func KSecKeyAlgorithmRSAEncryptionOAEPSHA1() uintptr {
+	return _symbol("kSecKeyAlgorithmRSAEncryptionOAEPSHA1")
+}
+
+// KSecKeyAlgorithmRSAEncryptionOAEPSHA224 returns the address of the symbol kSecKeyAlgorithmRSAEncryptionOAEPSHA224.
+func KSecKeyAlgorithmRSAEncryptionOAEPSHA224() uintptr {
+	return _symbol("kSecKeyAlgorithmRSAEncryptionOAEPSHA224")
+}
+
+// KSecKeyAlgorithmRSAEncryptionOAEPSHA256 returns the address of the symbol kSecKeyAlgorithmRSAEncryptionOAEPSHA256.
+func KSecKeyAlgorithmRSAEncryptionOAEPSHA256() uintptr {
+	return _symbol("kSecKeyAlgorithmRSAEncryptionOAEPSHA256")
+}
+
+// KSecKeyAlgorithmRSAEncryptionOAEPSHA384 returns the address of the symbol kSecKeyAlgorithmRSAEncryptionOAEPSHA384.
+func KSecKeyAlgorithmRSAEncryptionOAEPSHA384() uintptr {
+	return _symbol("kSecKeyAlgorithmRSAEncryptionOAEPSHA384")
+}
+
+// KSecKeyAlgorithmRSAEncryptionOAEPSHA512 returns the address of the symbol kSecKeyAlgorithmRSAEncryptionOAEPSHA512.
+func KSecKeyAlgorithmRSAEncryptionOAEPSHA512() uintptr {
+	return _symbol("kSecKeyAlgorithmRSAEncryptionOAEPSHA512")
+}
+
+// KSecKeyAlgorithmRSAEncryptionOAEPSHA1AESGCM returns the address of the symbol kSecKeyAlgorithmRSAEncryptionOAEPSHA1AESGCM.
+func KSecKeyAlgorithmRSAEncryptionOAEPSHA1AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmRSAEncryptionOAEPSHA1AESGCM")
+}
+
+// KSecKeyAlgorithmRSAEncryptionOAEPSHA224AESGCM returns the address of the symbol kSecKeyAlgorithmRSAEncryptionOAEPSHA224AESGCM.
+func KSecKeyAlgorithmRSAEncryptionOAEPSHA224AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmRSAEncryptionOAEPSHA224AESGCM")
+}
+
+// KSecKeyAlgorithmRSAEncryptionOAEPSHA256AESGCM returns the address of the symbol kSecKeyAlgorithmRSAEncryptionOAEPSHA256AESGCM.
+func KSecKeyAlgorithmRSAEncryptionOAEPSHA256AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmRSAEncryptionOAEPSHA256AESGCM")
+}
+
+// KSecKeyAlgorithmRSAEncryptionOAEPSHA384AESGCM returns the address of the symbol kSecKeyAlgorithmRSAEncryptionOAEPSHA384AESGCM.
+func KSecKeyAlgorithmRSAEncryptionOAEPSHA384AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmRSAEncryptionOAEPSHA384AESGCM")
+}
+
+// KSecKeyAlgorithmRSAEncryptionOAEPSHA512AESGCM returns the address of the symbol kSecKeyAlgorithmRSAEncryptionOAEPSHA512AESGCM.
+func KSecKeyAlgorithmRSAEncryptionOAEPSHA512AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmRSAEncryptionOAEPSHA512AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionStandardX963SHA1AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionStandardX963SHA1AESGCM.
+func KSecKeyAlgorithmECIESEncryptionStandardX963SHA1AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionStandardX963SHA1AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionStandardX963SHA224AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionStandardX963SHA224AESGCM.
+func KSecKeyAlgorithmECIESEncryptionStandardX963SHA224AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionStandardX963SHA224AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionStandardX963SHA256AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionStandardX963SHA256AESGCM.
+func KSecKeyAlgorithmECIESEncryptionStandardX963SHA256AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionStandardX963SHA256AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionStandardX963SHA384AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionStandardX963SHA384AESGCM.
+func KSecKeyAlgorithmECIESEncryptionStandardX963SHA384AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionStandardX963SHA384AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionStandardX963SHA512AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionStandardX963SHA512AESGCM.
+func KSecKeyAlgorithmECIESEncryptionStandardX963SHA512AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionStandardX963SHA512AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionCofactorX963SHA1AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionCofactorX963SHA1AESGCM.
+func KSecKeyAlgorithmECIESEncryptionCofactorX963SHA1AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionCofactorX963SHA1AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionCofactorX963SHA224AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionCofactorX963SHA224AESGCM.
+func KSecKeyAlgorithmECIESEncryptionCofactorX963SHA224AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionCofactorX963SHA224AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionCofactorX963SHA256AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionCofactorX963SHA256AESGCM.
+func KSecKeyAlgorithmECIESEncryptionCofactorX963SHA256AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionCofactorX963SHA256AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionCofactorX963SHA384AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionCofactorX963SHA384AESGCM.
+func KSecKeyAlgorithmECIESEncryptionCofactorX963SHA384AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionCofactorX963SHA384AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionCofactorX963SHA512AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionCofactorX963SHA512AESGCM.
+func KSecKeyAlgorithmECIESEncryptionCofactorX963SHA512AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionCofactorX963SHA512AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA224AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA224AESGCM.
+func KSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA224AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA224AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA256AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA256AESGCM.
+func KSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA256AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA256AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA384AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA384AESGCM.
+func KSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA384AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA384AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA512AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA512AESGCM.
+func KSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA512AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA512AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA224AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA224AESGCM.
+func KSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA224AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA224AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA256AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA256AESGCM.
+func KSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA256AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA256AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA384AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA384AESGCM.
+func KSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA384AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA384AESGCM")
+}
+
+// KSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA512AESGCM returns the address of the symbol kSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA512AESGCM.
+func KSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA512AESGCM() uintptr {
+	return _symbol("kSecKeyAlgorithmECIESEncryptionCofactorVariableIVX963SHA512AESGCM")
+}
+
+// KSecKeyAlgorithmECDHKeyExchangeStandard returns the address of the symbol kSecKeyAlgorithmECDHKeyExchangeStandard.
+func KSecKeyAlgorithmECDHKeyExchangeStandard() uintptr {
+	return _symbol("kSecKeyAlgorithmECDHKeyExchangeStandard")
+}
+
+// KSecKeyAlgorithmECDHKeyExchangeStandardX963SHA1 returns the address of the symbol kSecKeyAlgorithmECDHKeyExchangeStandardX963SHA1.
+func KSecKeyAlgorithmECDHKeyExchangeStandardX963SHA1() uintptr {
+	return _symbol("kSecKeyAlgorithmECDHKeyExchangeStandardX963SHA1")
+}
+
+// KSecKeyAlgorithmECDHKeyExchangeStandardX963SHA224 returns the address of the symbol kSecKeyAlgorithmECDHKeyExchangeStandardX963SHA224.
+func KSecKeyAlgorithmECDHKeyExchangeStandardX963SHA224() uintptr {
+	return _symbol("kSecKeyAlgorithmECDHKeyExchangeStandardX963SHA224")
+}
+
+// KSecKeyAlgorithmECDHKeyExchangeStandardX963SHA256 returns the address of the symbol kSecKeyAlgorithmECDHKeyExchangeStandardX963SHA256.
+func KSecKeyAlgorithmECDHKeyExchangeStandardX963SHA256() uintptr {
+	return _symbol("kSecKeyAlgorithmECDHKeyExchangeStandardX963SHA256")
+}
+
+// KSecKeyAlgorithmECDHKeyExchangeStandardX963SHA384 returns the address of the symbol kSecKeyAlgorithmECDHKeyExchangeStandardX963SHA384.
+func KSecKeyAlgorithmECDHKeyExchangeStandardX963SHA384() uintptr {
+	return _symbol("kSecKeyAlgorithmECDHKeyExchangeStandardX963SHA384")
+}
+
+// KSecKeyAlgorithmECDHKeyExchangeStandardX963SHA512 returns the address of the symbol kSecKeyAlgorithmECDHKeyExchangeStandardX963SHA512.
+func KSecKeyAlgorithmECDHKeyExchangeStandardX963SHA512() uintptr {
+	return _symbol("kSecKeyAlgorithmECDHKeyExchangeStandardX963SHA512")
+}
+
+// KSecKeyAlgorithmECDHKeyExchangeCofactor returns the address of the symbol kSecKeyAlgorithmECDHKeyExchangeCofactor.
+func KSecKeyAlgorithmECDHKeyExchangeCofactor() uintptr {
+	return _symbol("kSecKeyAlgorithmECDHKeyExchangeCofactor")
+}
+
+// KSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA1 returns the address of the symbol kSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA1.
+func KSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA1() uintptr {
+	return _symbol("kSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA1")
+}
+
+// KSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA224 returns the address of the symbol kSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA224.
+func KSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA224() uintptr {
+	return _symbol("kSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA224")
+}
+
+// KSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA256 returns the address of the symbol kSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA256.
+func KSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA256() uintptr {
+	return _symbol("kSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA256")
+}
+
+// KSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA384 returns the address of the symbol kSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA384.
+func KSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA384() uintptr {
+	return _symbol("kSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA384")
+}
+
+// KSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA512 returns the address of the symbol kSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA512.
+func KSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA512() uintptr {
+	return _symbol("kSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA512")
+}
+
+// KSecKeyKeyExchangeParameterRequestedSize returns the address of the symbol kSecKeyKeyExchangeParameterRequestedSize.
+func KSecKeyKeyExchangeParameterRequestedSize() uintptr {
+	return _symbol("kSecKeyKeyExchangeParameterRequestedSize")
+}
+
+// KSecKeyKeyExchangeParameterSharedInfo returns the address of the symbol kSecKeyKeyExchangeParameterSharedInfo.
+func KSecKeyKeyExchangeParameterSharedInfo() uintptr {
+	return _symbol("kSecKeyKeyExchangeParameterSharedInfo")
+}
+
+// KSecRandomDefault returns the address of the symbol kSecRandomDefault.
+func KSecRandomDefault() uintptr { return _symbol("kSecRandomDefault") }
+
+// GGuidCssm returns the address of the symbol gGuidCssm.
+func GGuidCssm() uintptr { return _symbol("gGuidCssm") }
+
+// GGuidAppleFileDL returns the address of the symbol gGuidAppleFileDL.
+func GGuidAppleFileDL() uintptr { return _symbol("gGuidAppleFileDL") }
+
+// GGuidAppleCSP returns the address of the symbol gGuidAppleCSP.
+func GGuidAppleCSP() uintptr { return _symbol("gGuidAppleCSP") }
+
+// GGuidAppleCSPDL returns the address of the symbol gGuidAppleCSPDL.
+func GGuidAppleCSPDL() uintptr { return _symbol("gGuidAppleCSPDL") }
+
+// GGuidAppleX509CL returns the address of the symbol gGuidAppleX509CL.
+func GGuidAppleX509CL() uintptr { return _symbol("gGuidAppleX509CL") }
+
+// GGuidAppleX509TP returns the address of the symbol gGuidAppleX509TP.
+func GGuidAppleX509TP() uintptr { return _symbol("gGuidAppleX509TP") }
+
+// GGuidAppleLDAPDL returns the address of the symbol gGuidAppleLDAPDL.
+func GGuidAppleLDAPDL() uintptr { return _symbol("gGuidAppleLDAPDL") }
+
+// GGuidAppleDotMacTP returns the address of the symbol gGuidAppleDotMacTP.
+func GGuidAppleDotMacTP() uintptr { return _symbol("gGuidAppleDotMacTP") }
+
+// GGuidAppleSdCSPDL returns the address of the symbol gGuidAppleSdCSPDL.
+func GGuidAppleSdCSPDL() uintptr { return _symbol("gGuidAppleSdCSPDL") }
+
+// GGuidAppleDotMacDL returns the address of the symbol gGuidAppleDotMacDL.
+func GGuidAppleDotMacDL() uintptr { return _symbol("gGuidAppleDotMacDL") }
+
+// CSSMOID_MD2 returns the address of the symbol CSSMOID_MD2.
+func CSSMOID_MD2() uintptr { return _symbol("CSSMOID_MD2") }
+
+// CSSMOID_MD4 returns the address of the symbol CSSMOID_MD4.
+func CSSMOID_MD4() uintptr { return _symbol("CSSMOID_MD4") }
+
+// CSSMOID_MD5 returns the address of the symbol CSSMOID_MD5.
+func CSSMOID_MD5() uintptr { return _symbol("CSSMOID_MD5") }
+
+// CSSMOID_RSA returns the address of the symbol CSSMOID_RSA.
+func CSSMOID_RSA() uintptr { return _symbol("CSSMOID_RSA") }
+
+// CSSMOID_MD2WithRSA returns the address of the symbol CSSMOID_MD2WithRSA.
+func CSSMOID_MD2WithRSA() uintptr { return _symbol("CSSMOID_MD2WithRSA") }
+
+// CSSMOID_MD4WithRSA returns the address of the symbol CSSMOID_MD4WithRSA.
+func CSSMOID_MD4WithRSA() uintptr { return _symbol("CSSMOID_MD4WithRSA") }
+
+// CSSMOID_MD5WithRSA returns the address of the symbol CSSMOID_MD5WithRSA.
+func CSSMOID_MD5WithRSA() uintptr { return _symbol("CSSMOID_MD5WithRSA") }
+
+// CSSMOID_SHA1WithRSA returns the address of the symbol CSSMOID_SHA1WithRSA.
+func CSSMOID_SHA1WithRSA() uintptr { return _symbol("CSSMOID_SHA1WithRSA") }
+
+// CSSMOID_SHA224WithRSA returns the address of the symbol CSSMOID_SHA224WithRSA.
+func CSSMOID_SHA224WithRSA() uintptr { return _symbol("CSSMOID_SHA224WithRSA") }
+
+// CSSMOID_SHA256WithRSA returns the address of the symbol CSSMOID_SHA256WithRSA.
+func CSSMOID_SHA256WithRSA() uintptr { return _symbol("CSSMOID_SHA256WithRSA") }
+
+// CSSMOID_SHA384WithRSA returns the address of the symbol CSSMOID_SHA384WithRSA.
+func CSSMOID_SHA384WithRSA() uintptr { return _symbol("CSSMOID_SHA384WithRSA") }
+
+// CSSMOID_SHA512WithRSA returns the address of the symbol CSSMOID_SHA512WithRSA.
+func CSSMOID_SHA512WithRSA() uintptr { return _symbol("CSSMOID_SHA512WithRSA") }
+
+// CSSMOID_SHA1WithRSA_OIW returns the address of the symbol CSSMOID_SHA1WithRSA_OIW.
+func CSSMOID_SHA1WithRSA_OIW() uintptr { return _symbol("CSSMOID_SHA1WithRSA_OIW") }
+
+// CSSMOID_RSAWithOAEP returns the address of the symbol CSSMOID_RSAWithOAEP.
+func CSSMOID_RSAWithOAEP() uintptr { return _symbol("CSSMOID_RSAWithOAEP") }
+
+// CSSMOID_OAEP_MGF1 returns the address of the symbol CSSMOID_OAEP_MGF1.
+func CSSMOID_OAEP_MGF1() uintptr { return _symbol("CSSMOID_OAEP_MGF1") }
+
+// CSSMOID_OAEP_ID_PSPECIFIED returns the address of the symbol CSSMOID_OAEP_ID_PSPECIFIED.
+func CSSMOID_OAEP_ID_PSPECIFIED() uintptr { return _symbol("CSSMOID_OAEP_ID_PSPECIFIED") }
+
+// CSSMOID_DES_CBC returns the address of the symbol CSSMOID_DES_CBC.
+func CSSMOID_DES_CBC() uintptr { return _symbol("CSSMOID_DES_CBC") }
+
+// CSSMOID_ANSI_DH_PUB_NUMBER returns the address of the symbol CSSMOID_ANSI_DH_PUB_NUMBER.
+func CSSMOID_ANSI_DH_PUB_NUMBER() uintptr { return _symbol("CSSMOID_ANSI_DH_PUB_NUMBER") }
+
+// CSSMOID_ANSI_DH_STATIC returns the address of the symbol CSSMOID_ANSI_DH_STATIC.
+func CSSMOID_ANSI_DH_STATIC() uintptr { return _symbol("CSSMOID_ANSI_DH_STATIC") }
+
+// CSSMOID_ANSI_DH_ONE_FLOW returns the address of the symbol CSSMOID_ANSI_DH_ONE_FLOW.
+func CSSMOID_ANSI_DH_ONE_FLOW() uintptr { return _symbol("CSSMOID_ANSI_DH_ONE_FLOW") }
+
+// CSSMOID_ANSI_DH_EPHEM returns the address of the symbol CSSMOID_ANSI_DH_EPHEM.
+func CSSMOID_ANSI_DH_EPHEM() uintptr { return _symbol("CSSMOID_ANSI_DH_EPHEM") }
+
+// CSSMOID_ANSI_DH_HYBRID1 returns the address of the symbol CSSMOID_ANSI_DH_HYBRID1.
+func CSSMOID_ANSI_DH_HYBRID1() uintptr { return _symbol("CSSMOID_ANSI_DH_HYBRID1") }
+
+// CSSMOID_ANSI_DH_HYBRID2 returns the address of the symbol CSSMOID_ANSI_DH_HYBRID2.
+func CSSMOID_ANSI_DH_HYBRID2() uintptr { return _symbol("CSSMOID_ANSI_DH_HYBRID2") }
+
+// CSSMOID_ANSI_DH_HYBRID_ONEFLOW returns the address of the symbol CSSMOID_ANSI_DH_HYBRID_ONEFLOW.
+func CSSMOID_ANSI_DH_HYBRID_ONEFLOW() uintptr { return _symbol("CSSMOID_ANSI_DH_HYBRID_ONEFLOW") }
+
+// CSSMOID_ANSI_MQV1 returns the address of the symbol CSSMOID_ANSI_MQV1.
+func CSSMOID_ANSI_MQV1() uintptr { return _symbol("CSSMOID_ANSI_MQV1") }
+
+// CSSMOID_ANSI_MQV2 returns the address of the symbol CSSMOID_ANSI_MQV2.
+func CSSMOID_ANSI_MQV2() uintptr { return _symbol("CSSMOID_ANSI_MQV2") }
+
+// CSSMOID_ANSI_DH_STATIC_SHA1 returns the address of the symbol CSSMOID_ANSI_DH_STATIC_SHA1.
+func CSSMOID_ANSI_DH_STATIC_SHA1() uintptr { return _symbol("CSSMOID_ANSI_DH_STATIC_SHA1") }
+
+// CSSMOID_ANSI_DH_ONE_FLOW_SHA1 returns the address of the symbol CSSMOID_ANSI_DH_ONE_FLOW_SHA1.
+func CSSMOID_ANSI_DH_ONE_FLOW_SHA1() uintptr { return _symbol("CSSMOID_ANSI_DH_ONE_FLOW_SHA1") }
+
+// CSSMOID_ANSI_DH_EPHEM_SHA1 returns the address of the symbol CSSMOID_ANSI_DH_EPHEM_SHA1.
+func CSSMOID_ANSI_DH_EPHEM_SHA1() uintptr { return _symbol("CSSMOID_ANSI_DH_EPHEM_SHA1") }
+
+// CSSMOID_ANSI_DH_HYBRID1_SHA1 returns the address of the symbol CSSMOID_ANSI_DH_HYBRID1_SHA1.
+func CSSMOID_ANSI_DH_HYBRID1_SHA1() uintptr { return _symbol("CSSMOID_ANSI_DH_HYBRID1_SHA1") }
+
+// CSSMOID_ANSI_DH_HYBRID2_SHA1 returns the address of the symbol CSSMOID_ANSI_DH_HYBRID2_SHA1.
+func CSSMOID_ANSI_DH_HYBRID2_SHA1() uintptr { return _symbol("CSSMOID_ANSI_DH_HYBRID2_SHA1") }
+
+// CSSMOID_ANSI_MQV1_SHA1 returns the address of the symbol CSSMOID_ANSI_MQV1_SHA1.
+func CSSMOID_ANSI_MQV1_SHA1() uintptr { return _symbol("CSSMOID_ANSI_MQV1_SHA1") }
+
+// CSSMOID_ANSI_MQV2_SHA1 returns the address of the symbol CSSMOID_ANSI_MQV2_SHA1.
+func CSSMOID_ANSI_MQV2_SHA1() uintptr { return _symbol("CSSMOID_ANSI_MQV2_SHA1") }
+
+// CSSMOID_PKCS3 returns the address of the symbol CSSMOID_PKCS3.
+func CSSMOID_PKCS3() uintptr { return _symbol("CSSMOID_PKCS3") }
+
+// CSSMOID_DH returns the address of the symbol CSSMOID_DH.
+func CSSMOID_DH() uintptr { return _symbol("CSSMOID_DH") }
+
+// CSSMOID_DSA returns the address of the symbol CSSMOID_DSA.
+func CSSMOID_DSA() uintptr { return _symbol("CSSMOID_DSA") }
+
+// CSSMOID_DSA_CMS returns the address of the symbol CSSMOID_DSA_CMS.
+func CSSMOID_DSA_CMS() uintptr { return _symbol("CSSMOID_DSA_CMS") }
+
+// CSSMOID_DSA_JDK returns the address of the symbol CSSMOID_DSA_JDK.
+func CSSMOID_DSA_JDK() uintptr { return _symbol("CSSMOID_DSA_JDK") }
+
+// CSSMOID_SHA1WithDSA returns the address of the symbol CSSMOID_SHA1WithDSA.
+func CSSMOID_SHA1WithDSA() uintptr { return _symbol("CSSMOID_SHA1WithDSA") }
+
+// CSSMOID_SHA1WithDSA_CMS returns the address of the symbol CSSMOID_SHA1WithDSA_CMS.
+func CSSMOID_SHA1WithDSA_CMS() uintptr { return _symbol("CSSMOID_SHA1WithDSA_CMS") }
+
+// CSSMOID_SHA1WithDSA_JDK returns the address of the symbol CSSMOID_SHA1WithDSA_JDK.
+func CSSMOID_SHA1WithDSA_JDK() uintptr { return _symbol("CSSMOID_SHA1WithDSA_JDK") }
+
+// CSSMOID_SHA1 returns the address of the symbol CSSMOID_SHA1.
+func CSSMOID_SHA1() uintptr { return _symbol("CSSMOID_SHA1") }
+
+// CSSMOID_SHA224 returns the address of the symbol CSSMOID_SHA224.
+func CSSMOID_SHA224() uintptr { return _symbol("CSSMOID_SHA224") }
+
+// CSSMOID_SHA256 returns the address of the symbol CSSMOID_SHA256.
+func CSSMOID_SHA256() uintptr { return _symbol("CSSMOID_SHA256") }
+
+// CSSMOID_SHA384 returns the address of the symbol CSSMOID_SHA384.
+func CSSMOID_SHA384() uintptr { return _symbol("CSSMOID_SHA384") }
+
+// CSSMOID_SHA512 returns the address of the symbol CSSMOID_SHA512.
+func CSSMOID_SHA512() uintptr { return _symbol("CSSMOID_SHA512") }
+
+// CSSMOID_ecPublicKey returns the address of the symbol CSSMOID_ecPublicKey.
+func CSSMOID_ecPublicKey() uintptr { return _symbol("CSSMOID_ecPublicKey") }
+
+// CSSMOID_ECDSA_WithSHA1 returns the address of the symbol CSSMOID_ECDSA_WithSHA1.
+func CSSMOID_ECDSA_WithSHA1() uintptr { return _symbol("CSSMOID_ECDSA_WithSHA1") }
+
+// CSSMOID_ECDSA_WithSHA224 returns the address of the symbol CSSMOID_ECDSA_WithSHA224.
+func CSSMOID_ECDSA_WithSHA224() uintptr { return _symbol("CSSMOID_ECDSA_WithSHA224") }
+
+// CSSMOID_ECDSA_WithSHA256 returns the address of the symbol CSSMOID_ECDSA_WithSHA256.
+func CSSMOID_ECDSA_WithSHA256() uintptr { return _symbol("CSSMOID_ECDSA_WithSHA256") }
+
+// CSSMOID_ECDSA_WithSHA384 returns the address of the symbol CSSMOID_ECDSA_WithSHA384.
+func CSSMOID_ECDSA_WithSHA384() uintptr { return _symbol("CSSMOID_ECDSA_WithSHA384") }
+
+// CSSMOID_ECDSA_WithSHA512 returns the address of the symbol CSSMOID_ECDSA_WithSHA512.
+func CSSMOID_ECDSA_WithSHA512() uintptr { return _symbol("CSSMOID_ECDSA_WithSHA512") }
+
+// CSSMOID_ECDSA_WithSpecified returns the address of the symbol CSSMOID_ECDSA_WithSpecified.
+func CSSMOID_ECDSA_WithSpecified() uintptr { return _symbol("CSSMOID_ECDSA_WithSpecified") }
+
+// CSSMOID_APPLE_ISIGN returns the address of the symbol CSSMOID_APPLE_ISIGN.
+func CSSMOID_APPLE_ISIGN() uintptr { return _symbol("CSSMOID_APPLE_ISIGN") }
+
+// CSSMOID_APPLE_X509_BASIC returns the address of the symbol CSSMOID_APPLE_X509_BASIC.
+func CSSMOID_APPLE_X509_BASIC() uintptr { return _symbol("CSSMOID_APPLE_X509_BASIC") }
+
+// CSSMOID_APPLE_TP_SSL returns the address of the symbol CSSMOID_APPLE_TP_SSL.
+func CSSMOID_APPLE_TP_SSL() uintptr { return _symbol("CSSMOID_APPLE_TP_SSL") }
+
+// CSSMOID_APPLE_TP_LOCAL_CERT_GEN returns the address of the symbol CSSMOID_APPLE_TP_LOCAL_CERT_GEN.
+func CSSMOID_APPLE_TP_LOCAL_CERT_GEN() uintptr { return _symbol("CSSMOID_APPLE_TP_LOCAL_CERT_GEN") }
+
+// CSSMOID_APPLE_TP_CSR_GEN returns the address of the symbol CSSMOID_APPLE_TP_CSR_GEN.
+func CSSMOID_APPLE_TP_CSR_GEN() uintptr { return _symbol("CSSMOID_APPLE_TP_CSR_GEN") }
+
+// CSSMOID_APPLE_TP_REVOCATION_CRL returns the address of the symbol CSSMOID_APPLE_TP_REVOCATION_CRL.
+func CSSMOID_APPLE_TP_REVOCATION_CRL() uintptr { return _symbol("CSSMOID_APPLE_TP_REVOCATION_CRL") }
+
+// CSSMOID_APPLE_TP_REVOCATION_OCSP returns the address of the symbol CSSMOID_APPLE_TP_REVOCATION_OCSP.
+func CSSMOID_APPLE_TP_REVOCATION_OCSP() uintptr { return _symbol("CSSMOID_APPLE_TP_REVOCATION_OCSP") }
+
+// CSSMOID_APPLE_TP_SMIME returns the address of the symbol CSSMOID_APPLE_TP_SMIME.
+func CSSMOID_APPLE_TP_SMIME() uintptr { return _symbol("CSSMOID_APPLE_TP_SMIME") }
+
+// CSSMOID_APPLE_TP_EAP returns the address of the symbol CSSMOID_APPLE_TP_EAP.
+func CSSMOID_APPLE_TP_EAP() uintptr { return _symbol("CSSMOID_APPLE_TP_EAP") }
+
+// CSSMOID_APPLE_TP_CODE_SIGN returns the address of the symbol CSSMOID_APPLE_TP_CODE_SIGN.
+func CSSMOID_APPLE_TP_CODE_SIGN() uintptr { return _symbol("CSSMOID_APPLE_TP_CODE_SIGN") }
+
+// CSSMOID_APPLE_TP_SW_UPDATE_SIGNING returns the address of the symbol CSSMOID_APPLE_TP_SW_UPDATE_SIGNING.
+func CSSMOID_APPLE_TP_SW_UPDATE_SIGNING() uintptr {
+	return _symbol("CSSMOID_APPLE_TP_SW_UPDATE_SIGNING")
+}
+
+// CSSMOID_APPLE_TP_IP_SEC returns the address of the symbol CSSMOID_APPLE_TP_IP_SEC.
+func CSSMOID_APPLE_TP_IP_SEC() uintptr { return _symbol("CSSMOID_APPLE_TP_IP_SEC") }
+
+// CSSMOID_APPLE_TP_ICHAT returns the address of the symbol CSSMOID_APPLE_TP_ICHAT.
+func CSSMOID_APPLE_TP_ICHAT() uintptr { return _symbol("CSSMOID_APPLE_TP_ICHAT") }
+
+// CSSMOID_APPLE_TP_RESOURCE_SIGN returns the address of the symbol CSSMOID_APPLE_TP_RESOURCE_SIGN.
+func CSSMOID_APPLE_TP_RESOURCE_SIGN() uintptr { return _symbol("CSSMOID_APPLE_TP_RESOURCE_SIGN") }
+
+// CSSMOID_APPLE_TP_PKINIT_CLIENT returns the address of the symbol CSSMOID_APPLE_TP_PKINIT_CLIENT.
+func CSSMOID_APPLE_TP_PKINIT_CLIENT() uintptr { return _symbol("CSSMOID_APPLE_TP_PKINIT_CLIENT") }
+
+// CSSMOID_APPLE_TP_PKINIT_SERVER returns the address of the symbol CSSMOID_APPLE_TP_PKINIT_SERVER.
+func CSSMOID_APPLE_TP_PKINIT_SERVER() uintptr { return _symbol("CSSMOID_APPLE_TP_PKINIT_SERVER") }
+
+// CSSMOID_APPLE_TP_CODE_SIGNING returns the address of the symbol CSSMOID_APPLE_TP_CODE_SIGNING.
+func CSSMOID_APPLE_TP_CODE_SIGNING() uintptr { return _symbol("CSSMOID_APPLE_TP_CODE_SIGNING") }
+
+// CSSMOID_APPLE_TP_PACKAGE_SIGNING returns the address of the symbol CSSMOID_APPLE_TP_PACKAGE_SIGNING.
+func CSSMOID_APPLE_TP_PACKAGE_SIGNING() uintptr { return _symbol("CSSMOID_APPLE_TP_PACKAGE_SIGNING") }
+
+// CSSMOID_APPLE_TP_MACAPPSTORE_RECEIPT returns the address of the symbol CSSMOID_APPLE_TP_MACAPPSTORE_RECEIPT.
+func CSSMOID_APPLE_TP_MACAPPSTORE_RECEIPT() uintptr {
+	return _symbol("CSSMOID_APPLE_TP_MACAPPSTORE_RECEIPT")
+}
+
+// CSSMOID_APPLE_TP_APPLEID_SHARING returns the address of the symbol CSSMOID_APPLE_TP_APPLEID_SHARING.
+func CSSMOID_APPLE_TP_APPLEID_SHARING() uintptr { return _symbol("CSSMOID_APPLE_TP_APPLEID_SHARING") }
+
+// CSSMOID_APPLE_TP_TIMESTAMPING returns the address of the symbol CSSMOID_APPLE_TP_TIMESTAMPING.
+func CSSMOID_APPLE_TP_TIMESTAMPING() uintptr { return _symbol("CSSMOID_APPLE_TP_TIMESTAMPING") }
+
+// CSSMOID_APPLE_TP_REVOCATION returns the address of the symbol CSSMOID_APPLE_TP_REVOCATION.
+func CSSMOID_APPLE_TP_REVOCATION() uintptr { return _symbol("CSSMOID_APPLE_TP_REVOCATION") }
+
+// CSSMOID_APPLE_TP_PASSBOOK_SIGNING returns the address of the symbol CSSMOID_APPLE_TP_PASSBOOK_SIGNING.
+func CSSMOID_APPLE_TP_PASSBOOK_SIGNING() uintptr { return _symbol("CSSMOID_APPLE_TP_PASSBOOK_SIGNING") }
+
+// CSSMOID_APPLE_TP_MOBILE_STORE returns the address of the symbol CSSMOID_APPLE_TP_MOBILE_STORE.
+func CSSMOID_APPLE_TP_MOBILE_STORE() uintptr { return _symbol("CSSMOID_APPLE_TP_MOBILE_STORE") }
+
+// CSSMOID_APPLE_TP_ESCROW_SERVICE returns the address of the symbol CSSMOID_APPLE_TP_ESCROW_SERVICE.
+func CSSMOID_APPLE_TP_ESCROW_SERVICE() uintptr { return _symbol("CSSMOID_APPLE_TP_ESCROW_SERVICE") }
+
+// CSSMOID_APPLE_TP_PROFILE_SIGNING returns the address of the symbol CSSMOID_APPLE_TP_PROFILE_SIGNING.
+func CSSMOID_APPLE_TP_PROFILE_SIGNING() uintptr { return _symbol("CSSMOID_APPLE_TP_PROFILE_SIGNING") }
+
+// CSSMOID_APPLE_TP_QA_PROFILE_SIGNING returns the address of the symbol CSSMOID_APPLE_TP_QA_PROFILE_SIGNING.
+func CSSMOID_APPLE_TP_QA_PROFILE_SIGNING() uintptr {
+	return _symbol("CSSMOID_APPLE_TP_QA_PROFILE_SIGNING")
+}
+
+// CSSMOID_APPLE_TP_TEST_MOBILE_STORE returns the address of the symbol CSSMOID_APPLE_TP_TEST_MOBILE_STORE.
+func CSSMOID_APPLE_TP_TEST_MOBILE_STORE() uintptr {
+	return _symbol("CSSMOID_APPLE_TP_TEST_MOBILE_STORE")
+}
+
+// CSSMOID_APPLE_TP_PCS_ESCROW_SERVICE returns the address of the symbol CSSMOID_APPLE_TP_PCS_ESCROW_SERVICE.
+func CSSMOID_APPLE_TP_PCS_ESCROW_SERVICE() uintptr {
+	return _symbol("CSSMOID_APPLE_TP_PCS_ESCROW_SERVICE")
+}
+
+// CSSMOID_APPLE_TP_PROVISIONING_PROFILE_SIGNING returns the address of the symbol CSSMOID_APPLE_TP_PROVISIONING_PROFILE_SIGNING.
+func CSSMOID_APPLE_TP_PROVISIONING_PROFILE_SIGNING() uintptr {
+	return _symbol("CSSMOID_APPLE_TP_PROVISIONING_PROFILE_SIGNING")
+}
+
+// CSSMOID_APPLE_FEE returns the address of the symbol CSSMOID_APPLE_FEE.
+func CSSMOID_APPLE_FEE() uintptr { return _symbol("CSSMOID_APPLE_FEE") }
+
+// CSSMOID_APPLE_ASC returns the address of the symbol CSSMOID_APPLE_ASC.
+func CSSMOID_APPLE_ASC() uintptr { return _symbol("CSSMOID_APPLE_ASC") }
+
+// CSSMOID_APPLE_FEE_MD5 returns the address of the symbol CSSMOID_APPLE_FEE_MD5.
+func CSSMOID_APPLE_FEE_MD5() uintptr { return _symbol("CSSMOID_APPLE_FEE_MD5") }
+
+// CSSMOID_APPLE_FEE_SHA1 returns the address of the symbol CSSMOID_APPLE_FEE_SHA1.
+func CSSMOID_APPLE_FEE_SHA1() uintptr { return _symbol("CSSMOID_APPLE_FEE_SHA1") }
+
+// CSSMOID_APPLE_FEED returns the address of the symbol CSSMOID_APPLE_FEED.
+func CSSMOID_APPLE_FEED() uintptr { return _symbol("CSSMOID_APPLE_FEED") }
+
+// CSSMOID_APPLE_FEEDEXP returns the address of the symbol CSSMOID_APPLE_FEEDEXP.
+func CSSMOID_APPLE_FEEDEXP() uintptr { return _symbol("CSSMOID_APPLE_FEEDEXP") }
+
+// CSSMOID_APPLE_ECDSA returns the address of the symbol CSSMOID_APPLE_ECDSA.
+func CSSMOID_APPLE_ECDSA() uintptr { return _symbol("CSSMOID_APPLE_ECDSA") }
+
+// CSSMOID_DOTMAC_CERT returns the address of the symbol CSSMOID_DOTMAC_CERT.
+func CSSMOID_DOTMAC_CERT() uintptr { return _symbol("CSSMOID_DOTMAC_CERT") }
+
+// CSSMOID_DOTMAC_CERT_REQ returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ.
+func CSSMOID_DOTMAC_CERT_REQ() uintptr { return _symbol("CSSMOID_DOTMAC_CERT_REQ") }
+
+// CSSMOID_DOTMAC_CERT_REQ_IDENTITY returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_IDENTITY.
+func CSSMOID_DOTMAC_CERT_REQ_IDENTITY() uintptr { return _symbol("CSSMOID_DOTMAC_CERT_REQ_IDENTITY") }
+
+// CSSMOID_DOTMAC_CERT_REQ_EMAIL_SIGN returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_EMAIL_SIGN.
+func CSSMOID_DOTMAC_CERT_REQ_EMAIL_SIGN() uintptr {
+	return _symbol("CSSMOID_DOTMAC_CERT_REQ_EMAIL_SIGN")
+}
+
+// CSSMOID_DOTMAC_CERT_REQ_EMAIL_ENCRYPT returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_EMAIL_ENCRYPT.
+func CSSMOID_DOTMAC_CERT_REQ_EMAIL_ENCRYPT() uintptr {
+	return _symbol("CSSMOID_DOTMAC_CERT_REQ_EMAIL_ENCRYPT")
+}
+
+// CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_LIST returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_LIST.
+func CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_LIST() uintptr {
+	return _symbol("CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_LIST")
+}
+
+// CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_STORE returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_STORE.
+func CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_STORE() uintptr {
+	return _symbol("CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_STORE")
+}
+
+// CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_FETCH returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_FETCH.
+func CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_FETCH() uintptr {
+	return _symbol("CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_FETCH")
+}
+
+// CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_REMOVE returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_REMOVE.
+func CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_REMOVE() uintptr {
+	return _symbol("CSSMOID_DOTMAC_CERT_REQ_ARCHIVE_REMOVE")
+}
+
+// CSSMOID_DOTMAC_CERT_REQ_SHARED_SERVICES returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_SHARED_SERVICES.
+func CSSMOID_DOTMAC_CERT_REQ_SHARED_SERVICES() uintptr {
+	return _symbol("CSSMOID_DOTMAC_CERT_REQ_SHARED_SERVICES")
+}
+
+// CSSMOID_DOTMAC_CERT_REQ_VALUE_USERNAME returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_VALUE_USERNAME.
+func CSSMOID_DOTMAC_CERT_REQ_VALUE_USERNAME() uintptr {
+	return _symbol("CSSMOID_DOTMAC_CERT_REQ_VALUE_USERNAME")
+}
+
+// CSSMOID_DOTMAC_CERT_REQ_VALUE_PASSWORD returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_VALUE_PASSWORD.
+func CSSMOID_DOTMAC_CERT_REQ_VALUE_PASSWORD() uintptr {
+	return _symbol("CSSMOID_DOTMAC_CERT_REQ_VALUE_PASSWORD")
+}
+
+// CSSMOID_DOTMAC_CERT_REQ_VALUE_HOSTNAME returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_VALUE_HOSTNAME.
+func CSSMOID_DOTMAC_CERT_REQ_VALUE_HOSTNAME() uintptr {
+	return _symbol("CSSMOID_DOTMAC_CERT_REQ_VALUE_HOSTNAME")
+}
+
+// CSSMOID_DOTMAC_CERT_REQ_VALUE_RENEW returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_VALUE_RENEW.
+func CSSMOID_DOTMAC_CERT_REQ_VALUE_RENEW() uintptr {
+	return _symbol("CSSMOID_DOTMAC_CERT_REQ_VALUE_RENEW")
+}
+
+// CSSMOID_DOTMAC_CERT_REQ_VALUE_ASYNC returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_VALUE_ASYNC.
+func CSSMOID_DOTMAC_CERT_REQ_VALUE_ASYNC() uintptr {
+	return _symbol("CSSMOID_DOTMAC_CERT_REQ_VALUE_ASYNC")
+}
+
+// CSSMOID_DOTMAC_CERT_REQ_VALUE_IS_PENDING returns the address of the symbol CSSMOID_DOTMAC_CERT_REQ_VALUE_IS_PENDING.
+func CSSMOID_DOTMAC_CERT_REQ_VALUE_IS_PENDING() uintptr {
+	return _symbol("CSSMOID_DOTMAC_CERT_REQ_VALUE_IS_PENDING")
+}
+
+// CSSMOID_PKCS5_DIGEST_ALG returns the address of the symbol CSSMOID_PKCS5_DIGEST_ALG.
+func CSSMOID_PKCS5_DIGEST_ALG() uintptr { return _symbol("CSSMOID_PKCS5_DIGEST_ALG") }
+
+// CSSMOID_PKCS5_ENCRYPT_ALG returns the address of the symbol CSSMOID_PKCS5_ENCRYPT_ALG.
+func CSSMOID_PKCS5_ENCRYPT_ALG() uintptr { return _symbol("CSSMOID_PKCS5_ENCRYPT_ALG") }
+
+// CSSMOID_PKCS5_HMAC_SHA1 returns the address of the symbol CSSMOID_PKCS5_HMAC_SHA1.
+func CSSMOID_PKCS5_HMAC_SHA1() uintptr { return _symbol("CSSMOID_PKCS5_HMAC_SHA1") }
+
+// CSSMOID_PKCS5_pbeWithMD2AndDES returns the address of the symbol CSSMOID_PKCS5_pbeWithMD2AndDES.
+func CSSMOID_PKCS5_pbeWithMD2AndDES() uintptr { return _symbol("CSSMOID_PKCS5_pbeWithMD2AndDES") }
+
+// CSSMOID_PKCS5_pbeWithMD2AndRC2 returns the address of the symbol CSSMOID_PKCS5_pbeWithMD2AndRC2.
+func CSSMOID_PKCS5_pbeWithMD2AndRC2() uintptr { return _symbol("CSSMOID_PKCS5_pbeWithMD2AndRC2") }
+
+// CSSMOID_PKCS5_pbeWithMD5AndDES returns the address of the symbol CSSMOID_PKCS5_pbeWithMD5AndDES.
+func CSSMOID_PKCS5_pbeWithMD5AndDES() uintptr { return _symbol("CSSMOID_PKCS5_pbeWithMD5AndDES") }
+
+// CSSMOID_PKCS5_pbeWithMD5AndRC2 returns the address of the symbol CSSMOID_PKCS5_pbeWithMD5AndRC2.
+func CSSMOID_PKCS5_pbeWithMD5AndRC2() uintptr { return _symbol("CSSMOID_PKCS5_pbeWithMD5AndRC2") }
+
+// CSSMOID_PKCS5_pbeWithSHA1AndDES returns the address of the symbol CSSMOID_PKCS5_pbeWithSHA1AndDES.
+func CSSMOID_PKCS5_pbeWithSHA1AndDES() uintptr { return _symbol("CSSMOID_PKCS5_pbeWithSHA1AndDES") }
+
+// CSSMOID_PKCS5_pbeWithSHA1AndRC2 returns the address of the symbol CSSMOID_PKCS5_pbeWithSHA1AndRC2.
+func CSSMOID_PKCS5_pbeWithSHA1AndRC2() uintptr { return _symbol("CSSMOID_PKCS5_pbeWithSHA1AndRC2") }
+
+// CSSMOID_PKCS5_PBKDF2 returns the address of the symbol CSSMOID_PKCS5_PBKDF2.
+func CSSMOID_PKCS5_PBKDF2() uintptr { return _symbol("CSSMOID_PKCS5_PBKDF2") }
+
+// CSSMOID_PKCS5_PBES2 returns the address of the symbol CSSMOID_PKCS5_PBES2.
+func CSSMOID_PKCS5_PBES2() uintptr { return _symbol("CSSMOID_PKCS5_PBES2") }
+
+// CSSMOID_PKCS5_PBMAC1 returns the address of the symbol CSSMOID_PKCS5_PBMAC1.
+func CSSMOID_PKCS5_PBMAC1() uintptr { return _symbol("CSSMOID_PKCS5_PBMAC1") }
+
+// CSSMOID_PKCS5_RC2_CBC returns the address of the symbol CSSMOID_PKCS5_RC2_CBC.
+func CSSMOID_PKCS5_RC2_CBC() uintptr { return _symbol("CSSMOID_PKCS5_RC2_CBC") }
+
+// CSSMOID_PKCS5_DES_EDE3_CBC returns the address of the symbol CSSMOID_PKCS5_DES_EDE3_CBC.
+func CSSMOID_PKCS5_DES_EDE3_CBC() uintptr { return _symbol("CSSMOID_PKCS5_DES_EDE3_CBC") }
+
+// CSSMOID_PKCS5_RC5_CBC returns the address of the symbol CSSMOID_PKCS5_RC5_CBC.
+func CSSMOID_PKCS5_RC5_CBC() uintptr { return _symbol("CSSMOID_PKCS5_RC5_CBC") }
+
+// CSSMOID_PKCS12_pbeWithSHAAnd128BitRC4 returns the address of the symbol CSSMOID_PKCS12_pbeWithSHAAnd128BitRC4.
+func CSSMOID_PKCS12_pbeWithSHAAnd128BitRC4() uintptr {
+	return _symbol("CSSMOID_PKCS12_pbeWithSHAAnd128BitRC4")
+}
+
+// CSSMOID_PKCS12_pbeWithSHAAnd40BitRC4 returns the address of the symbol CSSMOID_PKCS12_pbeWithSHAAnd40BitRC4.
+func CSSMOID_PKCS12_pbeWithSHAAnd40BitRC4() uintptr {
+	return _symbol("CSSMOID_PKCS12_pbeWithSHAAnd40BitRC4")
+}
+
+// CSSMOID_PKCS12_pbeWithSHAAnd3Key3DESCBC returns the address of the symbol CSSMOID_PKCS12_pbeWithSHAAnd3Key3DESCBC.
+func CSSMOID_PKCS12_pbeWithSHAAnd3Key3DESCBC() uintptr {
+	return _symbol("CSSMOID_PKCS12_pbeWithSHAAnd3Key3DESCBC")
+}
+
+// CSSMOID_PKCS12_pbeWithSHAAnd2Key3DESCBC returns the address of the symbol CSSMOID_PKCS12_pbeWithSHAAnd2Key3DESCBC.
+func CSSMOID_PKCS12_pbeWithSHAAnd2Key3DESCBC() uintptr {
+	return _symbol("CSSMOID_PKCS12_pbeWithSHAAnd2Key3DESCBC")
+}
+
+// CSSMOID_PKCS12_pbeWithSHAAnd128BitRC2CBC returns the address of the symbol CSSMOID_PKCS12_pbeWithSHAAnd128BitRC2CBC.
+func CSSMOID_PKCS12_pbeWithSHAAnd128BitRC2CBC() uintptr {
+	return _symbol("CSSMOID_PKCS12_pbeWithSHAAnd128BitRC2CBC")
+}
+
+// CSSMOID_PKCS12_pbewithSHAAnd40BitRC2CBC returns the address of the symbol CSSMOID_PKCS12_pbewithSHAAnd40BitRC2CBC.
+func CSSMOID_PKCS12_pbewithSHAAnd40BitRC2CBC() uintptr {
+	return _symbol("CSSMOID_PKCS12_pbewithSHAAnd40BitRC2CBC")
+}
+
+// CSSMOID_ObjectClass returns the address of the symbol CSSMOID_ObjectClass.
+func CSSMOID_ObjectClass() uintptr { return _symbol("CSSMOID_ObjectClass") }
+
+// CSSMOID_AliasedEntryName returns the address of the symbol CSSMOID_AliasedEntryName.
+func CSSMOID_AliasedEntryName() uintptr { return _symbol("CSSMOID_AliasedEntryName") }
+
+// CSSMOID_KnowledgeInformation returns the address of the symbol CSSMOID_KnowledgeInformation.
+func CSSMOID_KnowledgeInformation() uintptr { return _symbol("CSSMOID_KnowledgeInformation") }
+
+// CSSMOID_CommonName returns the address of the symbol CSSMOID_CommonName.
+func CSSMOID_CommonName() uintptr { return _symbol("CSSMOID_CommonName") }
+
+// CSSMOID_Surname returns the address of the symbol CSSMOID_Surname.
+func CSSMOID_Surname() uintptr { return _symbol("CSSMOID_Surname") }
+
+// CSSMOID_SerialNumber returns the address of the symbol CSSMOID_SerialNumber.
+func CSSMOID_SerialNumber() uintptr { return _symbol("CSSMOID_SerialNumber") }
+
+// CSSMOID_CountryName returns the address of the symbol CSSMOID_CountryName.
+func CSSMOID_CountryName() uintptr { return _symbol("CSSMOID_CountryName") }
+
+// CSSMOID_LocalityName returns the address of the symbol CSSMOID_LocalityName.
+func CSSMOID_LocalityName() uintptr { return _symbol("CSSMOID_LocalityName") }
+
+// CSSMOID_StateProvinceName returns the address of the symbol CSSMOID_StateProvinceName.
+func CSSMOID_StateProvinceName() uintptr { return _symbol("CSSMOID_StateProvinceName") }
+
+// CSSMOID_CollectiveStateProvinceName returns the address of the symbol CSSMOID_CollectiveStateProvinceName.
+func CSSMOID_CollectiveStateProvinceName() uintptr {
+	return _symbol("CSSMOID_CollectiveStateProvinceName")
+}
+
+// CSSMOID_StreetAddress returns the address of the symbol CSSMOID_StreetAddress.
+func CSSMOID_StreetAddress() uintptr { return _symbol("CSSMOID_StreetAddress") }
+
+// CSSMOID_CollectiveStreetAddress returns the address of the symbol CSSMOID_CollectiveStreetAddress.
+func CSSMOID_CollectiveStreetAddress() uintptr { return _symbol("CSSMOID_CollectiveStreetAddress") }
+
+// CSSMOID_OrganizationName returns the address of the symbol CSSMOID_OrganizationName.
+func CSSMOID_OrganizationName() uintptr { return _symbol("CSSMOID_OrganizationName") }
+
+// CSSMOID_CollectiveOrganizationName returns the address of the symbol CSSMOID_CollectiveOrganizationName.
+func CSSMOID_CollectiveOrganizationName() uintptr {
+	return _symbol("CSSMOID_CollectiveOrganizationName")
+}
+
+// CSSMOID_OrganizationalUnitName returns the address of the symbol CSSMOID_OrganizationalUnitName.
+func CSSMOID_OrganizationalUnitName() uintptr { return _symbol("CSSMOID_OrganizationalUnitName") }
+
+// CSSMOID_CollectiveOrganizationalUnitName returns the address of the symbol CSSMOID_CollectiveOrganizationalUnitName.
+func CSSMOID_CollectiveOrganizationalUnitName() uintptr {
+	return _symbol("CSSMOID_CollectiveOrganizationalUnitName")
+}
+
+// CSSMOID_Title returns the address of the symbol CSSMOID_Title.
+func CSSMOID_Title() uintptr { return _symbol("CSSMOID_Title") }
+
+// CSSMOID_Description returns the address of the symbol CSSMOID_Description.
+func CSSMOID_Description() uintptr { return _symbol("CSSMOID_Description") }
+
+// CSSMOID_SearchGuide returns the address of the symbol CSSMOID_SearchGuide.
+func CSSMOID_SearchGuide() uintptr { return _symbol("CSSMOID_SearchGuide") }
+
+// CSSMOID_BusinessCategory returns the address of the symbol CSSMOID_BusinessCategory.
+func CSSMOID_BusinessCategory() uintptr { return _symbol("CSSMOID_BusinessCategory") }
+
+// CSSMOID_PostalAddress returns the address of the symbol CSSMOID_PostalAddress.
+func CSSMOID_PostalAddress() uintptr { return _symbol("CSSMOID_PostalAddress") }
+
+// CSSMOID_CollectivePostalAddress returns the address of the symbol CSSMOID_CollectivePostalAddress.
+func CSSMOID_CollectivePostalAddress() uintptr { return _symbol("CSSMOID_CollectivePostalAddress") }
+
+// CSSMOID_PostalCode returns the address of the symbol CSSMOID_PostalCode.
+func CSSMOID_PostalCode() uintptr { return _symbol("CSSMOID_PostalCode") }
+
+// CSSMOID_CollectivePostalCode returns the address of the symbol CSSMOID_CollectivePostalCode.
+func CSSMOID_CollectivePostalCode() uintptr { return _symbol("CSSMOID_CollectivePostalCode") }
+
+// CSSMOID_PostOfficeBox returns the address of the symbol CSSMOID_PostOfficeBox.
+func CSSMOID_PostOfficeBox() uintptr { return _symbol("CSSMOID_PostOfficeBox") }
+
+// CSSMOID_CollectivePostOfficeBox returns the address of the symbol CSSMOID_CollectivePostOfficeBox.
+func CSSMOID_CollectivePostOfficeBox() uintptr { return _symbol("CSSMOID_CollectivePostOfficeBox") }
+
+// CSSMOID_PhysicalDeliveryOfficeName returns the address of the symbol CSSMOID_PhysicalDeliveryOfficeName.
+func CSSMOID_PhysicalDeliveryOfficeName() uintptr {
+	return _symbol("CSSMOID_PhysicalDeliveryOfficeName")
+}
+
+// CSSMOID_CollectivePhysicalDeliveryOfficeName returns the address of the symbol CSSMOID_CollectivePhysicalDeliveryOfficeName.
+func CSSMOID_CollectivePhysicalDeliveryOfficeName() uintptr {
+	return _symbol("CSSMOID_CollectivePhysicalDeliveryOfficeName")
+}
+
+// CSSMOID_TelephoneNumber returns the address of the symbol CSSMOID_TelephoneNumber.
+func CSSMOID_TelephoneNumber() uintptr { return _symbol("CSSMOID_TelephoneNumber") }
+
+// CSSMOID_CollectiveTelephoneNumber returns the address of the symbol CSSMOID_CollectiveTelephoneNumber.
+func CSSMOID_CollectiveTelephoneNumber() uintptr { return _symbol("CSSMOID_CollectiveTelephoneNumber") }
+
+// CSSMOID_TelexNumber returns the address of the symbol CSSMOID_TelexNumber.
+func CSSMOID_TelexNumber() uintptr { return _symbol("CSSMOID_TelexNumber") }
+
+// CSSMOID_CollectiveTelexNumber returns the address of the symbol CSSMOID_CollectiveTelexNumber.
+func CSSMOID_CollectiveTelexNumber() uintptr { return _symbol("CSSMOID_CollectiveTelexNumber") }
+
+// CSSMOID_TelexTerminalIdentifier returns the address of the symbol CSSMOID_TelexTerminalIdentifier.
+func CSSMOID_TelexTerminalIdentifier() uintptr { return _symbol("CSSMOID_TelexTerminalIdentifier") }
+
+// CSSMOID_CollectiveTelexTerminalIdentifier returns the address of the symbol CSSMOID_CollectiveTelexTerminalIdentifier.
+func CSSMOID_CollectiveTelexTerminalIdentifier() uintptr {
+	return _symbol("CSSMOID_CollectiveTelexTerminalIdentifier")
+}
+
+// CSSMOID_FacsimileTelephoneNumber returns the address of the symbol CSSMOID_FacsimileTelephoneNumber.
+func CSSMOID_FacsimileTelephoneNumber() uintptr { return _symbol("CSSMOID_FacsimileTelephoneNumber") }
+
+// CSSMOID_CollectiveFacsimileTelephoneNumber returns the address of the symbol CSSMOID_CollectiveFacsimileTelephoneNumber.
+func CSSMOID_CollectiveFacsimileTelephoneNumber() uintptr {
+	return _symbol("CSSMOID_CollectiveFacsimileTelephoneNumber")
+}
+
+// CSSMOID_X_121Address returns the address of the symbol CSSMOID_X_121Address.
+func CSSMOID_X_121Address() uintptr { return _symbol("CSSMOID_X_121Address") }
+
+// CSSMOID_InternationalISDNNumber returns the address of the symbol CSSMOID_InternationalISDNNumber.
+func CSSMOID_InternationalISDNNumber() uintptr { return _symbol("CSSMOID_InternationalISDNNumber") }
+
+// CSSMOID_CollectiveInternationalISDNNumber returns the address of the symbol CSSMOID_CollectiveInternationalISDNNumber.
+func CSSMOID_CollectiveInternationalISDNNumber() uintptr {
+	return _symbol("CSSMOID_CollectiveInternationalISDNNumber")
+}
+
+// CSSMOID_RegisteredAddress returns the address of the symbol CSSMOID_RegisteredAddress.
+func CSSMOID_RegisteredAddress() uintptr { return _symbol("CSSMOID_RegisteredAddress") }
+
+// CSSMOID_DestinationIndicator returns the address of the symbol CSSMOID_DestinationIndicator.
+func CSSMOID_DestinationIndicator() uintptr { return _symbol("CSSMOID_DestinationIndicator") }
+
+// CSSMOID_PreferredDeliveryMethod returns the address of the symbol CSSMOID_PreferredDeliveryMethod.
+func CSSMOID_PreferredDeliveryMethod() uintptr { return _symbol("CSSMOID_PreferredDeliveryMethod") }
+
+// CSSMOID_PresentationAddress returns the address of the symbol CSSMOID_PresentationAddress.
+func CSSMOID_PresentationAddress() uintptr { return _symbol("CSSMOID_PresentationAddress") }
+
+// CSSMOID_SupportedApplicationContext returns the address of the symbol CSSMOID_SupportedApplicationContext.
+func CSSMOID_SupportedApplicationContext() uintptr {
+	return _symbol("CSSMOID_SupportedApplicationContext")
+}
+
+// CSSMOID_Member returns the address of the symbol CSSMOID_Member.
+func CSSMOID_Member() uintptr { return _symbol("CSSMOID_Member") }
+
+// CSSMOID_Owner returns the address of the symbol CSSMOID_Owner.
+func CSSMOID_Owner() uintptr { return _symbol("CSSMOID_Owner") }
+
+// CSSMOID_RoleOccupant returns the address of the symbol CSSMOID_RoleOccupant.
+func CSSMOID_RoleOccupant() uintptr { return _symbol("CSSMOID_RoleOccupant") }
+
+// CSSMOID_SeeAlso returns the address of the symbol CSSMOID_SeeAlso.
+func CSSMOID_SeeAlso() uintptr { return _symbol("CSSMOID_SeeAlso") }
+
+// CSSMOID_UserPassword returns the address of the symbol CSSMOID_UserPassword.
+func CSSMOID_UserPassword() uintptr { return _symbol("CSSMOID_UserPassword") }
+
+// CSSMOID_UserCertificate returns the address of the symbol CSSMOID_UserCertificate.
+func CSSMOID_UserCertificate() uintptr { return _symbol("CSSMOID_UserCertificate") }
+
+// CSSMOID_CACertificate returns the address of the symbol CSSMOID_CACertificate.
+func CSSMOID_CACertificate() uintptr { return _symbol("CSSMOID_CACertificate") }
+
+// CSSMOID_AuthorityRevocationList returns the address of the symbol CSSMOID_AuthorityRevocationList.
+func CSSMOID_AuthorityRevocationList() uintptr { return _symbol("CSSMOID_AuthorityRevocationList") }
+
+// CSSMOID_CertificateRevocationList returns the address of the symbol CSSMOID_CertificateRevocationList.
+func CSSMOID_CertificateRevocationList() uintptr { return _symbol("CSSMOID_CertificateRevocationList") }
+
+// CSSMOID_CrossCertificatePair returns the address of the symbol CSSMOID_CrossCertificatePair.
+func CSSMOID_CrossCertificatePair() uintptr { return _symbol("CSSMOID_CrossCertificatePair") }
+
+// CSSMOID_Name returns the address of the symbol CSSMOID_Name.
+func CSSMOID_Name() uintptr { return _symbol("CSSMOID_Name") }
+
+// CSSMOID_GivenName returns the address of the symbol CSSMOID_GivenName.
+func CSSMOID_GivenName() uintptr { return _symbol("CSSMOID_GivenName") }
+
+// CSSMOID_Initials returns the address of the symbol CSSMOID_Initials.
+func CSSMOID_Initials() uintptr { return _symbol("CSSMOID_Initials") }
+
+// CSSMOID_GenerationQualifier returns the address of the symbol CSSMOID_GenerationQualifier.
+func CSSMOID_GenerationQualifier() uintptr { return _symbol("CSSMOID_GenerationQualifier") }
+
+// CSSMOID_UniqueIdentifier returns the address of the symbol CSSMOID_UniqueIdentifier.
+func CSSMOID_UniqueIdentifier() uintptr { return _symbol("CSSMOID_UniqueIdentifier") }
+
+// CSSMOID_DNQualifier returns the address of the symbol CSSMOID_DNQualifier.
+func CSSMOID_DNQualifier() uintptr { return _symbol("CSSMOID_DNQualifier") }
+
+// CSSMOID_EnhancedSearchGuide returns the address of the symbol CSSMOID_EnhancedSearchGuide.
+func CSSMOID_EnhancedSearchGuide() uintptr { return _symbol("CSSMOID_EnhancedSearchGuide") }
+
+// CSSMOID_ProtocolInformation returns the address of the symbol CSSMOID_ProtocolInformation.
+func CSSMOID_ProtocolInformation() uintptr { return _symbol("CSSMOID_ProtocolInformation") }
+
+// CSSMOID_DistinguishedName returns the address of the symbol CSSMOID_DistinguishedName.
+func CSSMOID_DistinguishedName() uintptr { return _symbol("CSSMOID_DistinguishedName") }
+
+// CSSMOID_UniqueMember returns the address of the symbol CSSMOID_UniqueMember.
+func CSSMOID_UniqueMember() uintptr { return _symbol("CSSMOID_UniqueMember") }
+
+// CSSMOID_HouseIdentifier returns the address of the symbol CSSMOID_HouseIdentifier.
+func CSSMOID_HouseIdentifier() uintptr { return _symbol("CSSMOID_HouseIdentifier") }
+
+// CSSMOID_EmailAddress returns the address of the symbol CSSMOID_EmailAddress.
+func CSSMOID_EmailAddress() uintptr { return _symbol("CSSMOID_EmailAddress") }
+
+// CSSMOID_UnstructuredName returns the address of the symbol CSSMOID_UnstructuredName.
+func CSSMOID_UnstructuredName() uintptr { return _symbol("CSSMOID_UnstructuredName") }
+
+// CSSMOID_ContentType returns the address of the symbol CSSMOID_ContentType.
+func CSSMOID_ContentType() uintptr { return _symbol("CSSMOID_ContentType") }
+
+// CSSMOID_MessageDigest returns the address of the symbol CSSMOID_MessageDigest.
+func CSSMOID_MessageDigest() uintptr { return _symbol("CSSMOID_MessageDigest") }
+
+// CSSMOID_SigningTime returns the address of the symbol CSSMOID_SigningTime.
+func CSSMOID_SigningTime() uintptr { return _symbol("CSSMOID_SigningTime") }
+
+// CSSMOID_CounterSignature returns the address of the symbol CSSMOID_CounterSignature.
+func CSSMOID_CounterSignature() uintptr { return _symbol("CSSMOID_CounterSignature") }
+
+// CSSMOID_ChallengePassword returns the address of the symbol CSSMOID_ChallengePassword.
+func CSSMOID_ChallengePassword() uintptr { return _symbol("CSSMOID_ChallengePassword") }
+
+// CSSMOID_UnstructuredAddress returns the address of the symbol CSSMOID_UnstructuredAddress.
+func CSSMOID_UnstructuredAddress() uintptr { return _symbol("CSSMOID_UnstructuredAddress") }
+
+// CSSMOID_ExtendedCertificateAttributes returns the address of the symbol CSSMOID_ExtendedCertificateAttributes.
+func CSSMOID_ExtendedCertificateAttributes() uintptr {
+	return _symbol("CSSMOID_ExtendedCertificateAttributes")
+}
+
+// CSSMOID_PKCS9_Id_Ct_TSTInfo returns the address of the symbol CSSMOID_PKCS9_Id_Ct_TSTInfo.
+func CSSMOID_PKCS9_Id_Ct_TSTInfo() uintptr { return _symbol("CSSMOID_PKCS9_Id_Ct_TSTInfo") }
+
+// CSSMOID_PKCS9_TimeStampToken returns the address of the symbol CSSMOID_PKCS9_TimeStampToken.
+func CSSMOID_PKCS9_TimeStampToken() uintptr { return _symbol("CSSMOID_PKCS9_TimeStampToken") }
+
+// CSSMOID_QT_CPS returns the address of the symbol CSSMOID_QT_CPS.
+func CSSMOID_QT_CPS() uintptr { return _symbol("CSSMOID_QT_CPS") }
+
+// CSSMOID_QT_UNOTICE returns the address of the symbol CSSMOID_QT_UNOTICE.
+func CSSMOID_QT_UNOTICE() uintptr { return _symbol("CSSMOID_QT_UNOTICE") }
+
+// CSSMOID_AD_OCSP returns the address of the symbol CSSMOID_AD_OCSP.
+func CSSMOID_AD_OCSP() uintptr { return _symbol("CSSMOID_AD_OCSP") }
+
+// CSSMOID_AD_CA_ISSUERS returns the address of the symbol CSSMOID_AD_CA_ISSUERS.
+func CSSMOID_AD_CA_ISSUERS() uintptr { return _symbol("CSSMOID_AD_CA_ISSUERS") }
+
+// CSSMOID_AD_TIME_STAMPING returns the address of the symbol CSSMOID_AD_TIME_STAMPING.
+func CSSMOID_AD_TIME_STAMPING() uintptr { return _symbol("CSSMOID_AD_TIME_STAMPING") }
+
+// CSSMOID_AD_CA_REPOSITORY returns the address of the symbol CSSMOID_AD_CA_REPOSITORY.
+func CSSMOID_AD_CA_REPOSITORY() uintptr { return _symbol("CSSMOID_AD_CA_REPOSITORY") }
+
+// CSSMOID_PDA_DATE_OF_BIRTH returns the address of the symbol CSSMOID_PDA_DATE_OF_BIRTH.
+func CSSMOID_PDA_DATE_OF_BIRTH() uintptr { return _symbol("CSSMOID_PDA_DATE_OF_BIRTH") }
+
+// CSSMOID_PDA_PLACE_OF_BIRTH returns the address of the symbol CSSMOID_PDA_PLACE_OF_BIRTH.
+func CSSMOID_PDA_PLACE_OF_BIRTH() uintptr { return _symbol("CSSMOID_PDA_PLACE_OF_BIRTH") }
+
+// CSSMOID_PDA_GENDER returns the address of the symbol CSSMOID_PDA_GENDER.
+func CSSMOID_PDA_GENDER() uintptr { return _symbol("CSSMOID_PDA_GENDER") }
+
+// CSSMOID_PDA_COUNTRY_CITIZEN returns the address of the symbol CSSMOID_PDA_COUNTRY_CITIZEN.
+func CSSMOID_PDA_COUNTRY_CITIZEN() uintptr { return _symbol("CSSMOID_PDA_COUNTRY_CITIZEN") }
+
+// CSSMOID_PDA_COUNTRY_RESIDENCE returns the address of the symbol CSSMOID_PDA_COUNTRY_RESIDENCE.
+func CSSMOID_PDA_COUNTRY_RESIDENCE() uintptr { return _symbol("CSSMOID_PDA_COUNTRY_RESIDENCE") }
+
+// CSSMOID_OID_QCS_SYNTAX_V1 returns the address of the symbol CSSMOID_OID_QCS_SYNTAX_V1.
+func CSSMOID_OID_QCS_SYNTAX_V1() uintptr { return _symbol("CSSMOID_OID_QCS_SYNTAX_V1") }
+
+// CSSMOID_OID_QCS_SYNTAX_V2 returns the address of the symbol CSSMOID_OID_QCS_SYNTAX_V2.
+func CSSMOID_OID_QCS_SYNTAX_V2() uintptr { return _symbol("CSSMOID_OID_QCS_SYNTAX_V2") }
+
+// CSSMOID_ETSI_QCS_QC_COMPLIANCE returns the address of the symbol CSSMOID_ETSI_QCS_QC_COMPLIANCE.
+func CSSMOID_ETSI_QCS_QC_COMPLIANCE() uintptr { return _symbol("CSSMOID_ETSI_QCS_QC_COMPLIANCE") }
+
+// CSSMOID_ETSI_QCS_QC_LIMIT_VALUE returns the address of the symbol CSSMOID_ETSI_QCS_QC_LIMIT_VALUE.
+func CSSMOID_ETSI_QCS_QC_LIMIT_VALUE() uintptr { return _symbol("CSSMOID_ETSI_QCS_QC_LIMIT_VALUE") }
+
+// CSSMOID_ETSI_QCS_QC_RETENTION returns the address of the symbol CSSMOID_ETSI_QCS_QC_RETENTION.
+func CSSMOID_ETSI_QCS_QC_RETENTION() uintptr { return _symbol("CSSMOID_ETSI_QCS_QC_RETENTION") }
+
+// CSSMOID_ETSI_QCS_QC_SSCD returns the address of the symbol CSSMOID_ETSI_QCS_QC_SSCD.
+func CSSMOID_ETSI_QCS_QC_SSCD() uintptr { return _symbol("CSSMOID_ETSI_QCS_QC_SSCD") }
+
+// CSSMOID_PKCS7_Data returns the address of the symbol CSSMOID_PKCS7_Data.
+func CSSMOID_PKCS7_Data() uintptr { return _symbol("CSSMOID_PKCS7_Data") }
+
+// CSSMOID_PKCS7_SignedData returns the address of the symbol CSSMOID_PKCS7_SignedData.
+func CSSMOID_PKCS7_SignedData() uintptr { return _symbol("CSSMOID_PKCS7_SignedData") }
+
+// CSSMOID_PKCS7_EnvelopedData returns the address of the symbol CSSMOID_PKCS7_EnvelopedData.
+func CSSMOID_PKCS7_EnvelopedData() uintptr { return _symbol("CSSMOID_PKCS7_EnvelopedData") }
+
+// CSSMOID_PKCS7_SignedAndEnvelopedData returns the address of the symbol CSSMOID_PKCS7_SignedAndEnvelopedData.
+func CSSMOID_PKCS7_SignedAndEnvelopedData() uintptr {
+	return _symbol("CSSMOID_PKCS7_SignedAndEnvelopedData")
+}
+
+// CSSMOID_PKCS7_DigestedData returns the address of the symbol CSSMOID_PKCS7_DigestedData.
+func CSSMOID_PKCS7_DigestedData() uintptr { return _symbol("CSSMOID_PKCS7_DigestedData") }
+
+// CSSMOID_PKCS7_EncryptedData returns the address of the symbol CSSMOID_PKCS7_EncryptedData.
+func CSSMOID_PKCS7_EncryptedData() uintptr { return _symbol("CSSMOID_PKCS7_EncryptedData") }
+
+// CSSMOID_PKCS7_DataWithAttributes returns the address of the symbol CSSMOID_PKCS7_DataWithAttributes.
+func CSSMOID_PKCS7_DataWithAttributes() uintptr { return _symbol("CSSMOID_PKCS7_DataWithAttributes") }
+
+// CSSMOID_PKCS7_EncryptedPrivateKeyInfo returns the address of the symbol CSSMOID_PKCS7_EncryptedPrivateKeyInfo.
+func CSSMOID_PKCS7_EncryptedPrivateKeyInfo() uintptr {
+	return _symbol("CSSMOID_PKCS7_EncryptedPrivateKeyInfo")
+}
+
+// CSSMOID_PKCS9_FriendlyName returns the address of the symbol CSSMOID_PKCS9_FriendlyName.
+func CSSMOID_PKCS9_FriendlyName() uintptr { return _symbol("CSSMOID_PKCS9_FriendlyName") }
+
+// CSSMOID_PKCS9_LocalKeyId returns the address of the symbol CSSMOID_PKCS9_LocalKeyId.
+func CSSMOID_PKCS9_LocalKeyId() uintptr { return _symbol("CSSMOID_PKCS9_LocalKeyId") }
+
+// CSSMOID_PKCS9_CertTypes returns the address of the symbol CSSMOID_PKCS9_CertTypes.
+func CSSMOID_PKCS9_CertTypes() uintptr { return _symbol("CSSMOID_PKCS9_CertTypes") }
+
+// CSSMOID_PKCS9_CrlTypes returns the address of the symbol CSSMOID_PKCS9_CrlTypes.
+func CSSMOID_PKCS9_CrlTypes() uintptr { return _symbol("CSSMOID_PKCS9_CrlTypes") }
+
+// CSSMOID_PKCS9_X509Certificate returns the address of the symbol CSSMOID_PKCS9_X509Certificate.
+func CSSMOID_PKCS9_X509Certificate() uintptr { return _symbol("CSSMOID_PKCS9_X509Certificate") }
+
+// CSSMOID_PKCS9_SdsiCertificate returns the address of the symbol CSSMOID_PKCS9_SdsiCertificate.
+func CSSMOID_PKCS9_SdsiCertificate() uintptr { return _symbol("CSSMOID_PKCS9_SdsiCertificate") }
+
+// CSSMOID_PKCS9_X509Crl returns the address of the symbol CSSMOID_PKCS9_X509Crl.
+func CSSMOID_PKCS9_X509Crl() uintptr { return _symbol("CSSMOID_PKCS9_X509Crl") }
+
+// CSSMOID_PKCS12_keyBag returns the address of the symbol CSSMOID_PKCS12_keyBag.
+func CSSMOID_PKCS12_keyBag() uintptr { return _symbol("CSSMOID_PKCS12_keyBag") }
+
+// CSSMOID_PKCS12_shroudedKeyBag returns the address of the symbol CSSMOID_PKCS12_shroudedKeyBag.
+func CSSMOID_PKCS12_shroudedKeyBag() uintptr { return _symbol("CSSMOID_PKCS12_shroudedKeyBag") }
+
+// CSSMOID_PKCS12_certBag returns the address of the symbol CSSMOID_PKCS12_certBag.
+func CSSMOID_PKCS12_certBag() uintptr { return _symbol("CSSMOID_PKCS12_certBag") }
+
+// CSSMOID_PKCS12_crlBag returns the address of the symbol CSSMOID_PKCS12_crlBag.
+func CSSMOID_PKCS12_crlBag() uintptr { return _symbol("CSSMOID_PKCS12_crlBag") }
+
+// CSSMOID_PKCS12_secretBag returns the address of the symbol CSSMOID_PKCS12_secretBag.
+func CSSMOID_PKCS12_secretBag() uintptr { return _symbol("CSSMOID_PKCS12_secretBag") }
+
+// CSSMOID_PKCS12_safeContentsBag returns the address of the symbol CSSMOID_PKCS12_safeContentsBag.
+func CSSMOID_PKCS12_safeContentsBag() uintptr { return _symbol("CSSMOID_PKCS12_safeContentsBag") }
+
+// CSSMOID_UserID returns the address of the symbol CSSMOID_UserID.
+func CSSMOID_UserID() uintptr { return _symbol("CSSMOID_UserID") }
+
+// CSSMOID_DomainComponent returns the address of the symbol CSSMOID_DomainComponent.
+func CSSMOID_DomainComponent() uintptr { return _symbol("CSSMOID_DomainComponent") }
+
+// CSSMOID_KERBv5_PKINIT_AUTH_DATA returns the address of the symbol CSSMOID_KERBv5_PKINIT_AUTH_DATA.
+func CSSMOID_KERBv5_PKINIT_AUTH_DATA() uintptr { return _symbol("CSSMOID_KERBv5_PKINIT_AUTH_DATA") }
+
+// CSSMOID_KERBv5_PKINIT_DH_KEY_DATA returns the address of the symbol CSSMOID_KERBv5_PKINIT_DH_KEY_DATA.
+func CSSMOID_KERBv5_PKINIT_DH_KEY_DATA() uintptr { return _symbol("CSSMOID_KERBv5_PKINIT_DH_KEY_DATA") }
+
+// CSSMOID_KERBv5_PKINIT_RKEY_DATA returns the address of the symbol CSSMOID_KERBv5_PKINIT_RKEY_DATA.
+func CSSMOID_KERBv5_PKINIT_RKEY_DATA() uintptr { return _symbol("CSSMOID_KERBv5_PKINIT_RKEY_DATA") }
+
+// CSSMOID_X9_62 returns the address of the symbol CSSMOID_X9_62.
+func CSSMOID_X9_62() uintptr { return _symbol("CSSMOID_X9_62") }
+
+// CSSMOID_X9_62_FieldType returns the address of the symbol CSSMOID_X9_62_FieldType.
+func CSSMOID_X9_62_FieldType() uintptr { return _symbol("CSSMOID_X9_62_FieldType") }
+
+// CSSMOID_X9_62_PubKeyType returns the address of the symbol CSSMOID_X9_62_PubKeyType.
+func CSSMOID_X9_62_PubKeyType() uintptr { return _symbol("CSSMOID_X9_62_PubKeyType") }
+
+// CSSMOID_X9_62_EllCurve returns the address of the symbol CSSMOID_X9_62_EllCurve.
+func CSSMOID_X9_62_EllCurve() uintptr { return _symbol("CSSMOID_X9_62_EllCurve") }
+
+// CSSMOID_X9_62_C_TwoCurve returns the address of the symbol CSSMOID_X9_62_C_TwoCurve.
+func CSSMOID_X9_62_C_TwoCurve() uintptr { return _symbol("CSSMOID_X9_62_C_TwoCurve") }
+
+// CSSMOID_X9_62_PrimeCurve returns the address of the symbol CSSMOID_X9_62_PrimeCurve.
+func CSSMOID_X9_62_PrimeCurve() uintptr { return _symbol("CSSMOID_X9_62_PrimeCurve") }
+
+// CSSMOID_X9_62_SigType returns the address of the symbol CSSMOID_X9_62_SigType.
+func CSSMOID_X9_62_SigType() uintptr { return _symbol("CSSMOID_X9_62_SigType") }
+
+// CSSMOID_secp192r1 returns the address of the symbol CSSMOID_secp192r1.
+func CSSMOID_secp192r1() uintptr { return _symbol("CSSMOID_secp192r1") }
+
+// CSSMOID_secp256r1 returns the address of the symbol CSSMOID_secp256r1.
+func CSSMOID_secp256r1() uintptr { return _symbol("CSSMOID_secp256r1") }
+
+// CSSMOID_Certicom returns the address of the symbol CSSMOID_Certicom.
+func CSSMOID_Certicom() uintptr { return _symbol("CSSMOID_Certicom") }
+
+// CSSMOID_CerticomEllCurve returns the address of the symbol CSSMOID_CerticomEllCurve.
+func CSSMOID_CerticomEllCurve() uintptr { return _symbol("CSSMOID_CerticomEllCurve") }
+
+// CSSMOID_secp112r1 returns the address of the symbol CSSMOID_secp112r1.
+func CSSMOID_secp112r1() uintptr { return _symbol("CSSMOID_secp112r1") }
+
+// CSSMOID_secp112r2 returns the address of the symbol CSSMOID_secp112r2.
+func CSSMOID_secp112r2() uintptr { return _symbol("CSSMOID_secp112r2") }
+
+// CSSMOID_secp128r1 returns the address of the symbol CSSMOID_secp128r1.
+func CSSMOID_secp128r1() uintptr { return _symbol("CSSMOID_secp128r1") }
+
+// CSSMOID_secp128r2 returns the address of the symbol CSSMOID_secp128r2.
+func CSSMOID_secp128r2() uintptr { return _symbol("CSSMOID_secp128r2") }
+
+// CSSMOID_secp160k1 returns the address of the symbol CSSMOID_secp160k1.
+func CSSMOID_secp160k1() uintptr { return _symbol("CSSMOID_secp160k1") }
+
+// CSSMOID_secp160r1 returns the address of the symbol CSSMOID_secp160r1.
+func CSSMOID_secp160r1() uintptr { return _symbol("CSSMOID_secp160r1") }
+
+// CSSMOID_secp160r2 returns the address of the symbol CSSMOID_secp160r2.
+func CSSMOID_secp160r2() uintptr { return _symbol("CSSMOID_secp160r2") }
+
+// CSSMOID_secp192k1 returns the address of the symbol CSSMOID_secp192k1.
+func CSSMOID_secp192k1() uintptr { return _symbol("CSSMOID_secp192k1") }
+
+// CSSMOID_secp224k1 returns the address of the symbol CSSMOID_secp224k1.
+func CSSMOID_secp224k1() uintptr { return _symbol("CSSMOID_secp224k1") }
+
+// CSSMOID_secp224r1 returns the address of the symbol CSSMOID_secp224r1.
+func CSSMOID_secp224r1() uintptr { return _symbol("CSSMOID_secp224r1") }
+
+// CSSMOID_secp256k1 returns the address of the symbol CSSMOID_secp256k1.
+func CSSMOID_secp256k1() uintptr { return _symbol("CSSMOID_secp256k1") }
+
+// CSSMOID_secp384r1 returns the address of the symbol CSSMOID_secp384r1.
+func CSSMOID_secp384r1() uintptr { return _symbol("CSSMOID_secp384r1") }
+
+// CSSMOID_secp521r1 returns the address of the symbol CSSMOID_secp521r1.
+func CSSMOID_secp521r1() uintptr { return _symbol("CSSMOID_secp521r1") }
+
+// CSSMOID_sect113r1 returns the address of the symbol CSSMOID_sect113r1.
+func CSSMOID_sect113r1() uintptr { return _symbol("CSSMOID_sect113r1") }
+
+// CSSMOID_sect113r2 returns the address of the symbol CSSMOID_sect113r2.
+func CSSMOID_sect113r2() uintptr { return _symbol("CSSMOID_sect113r2") }
+
+// CSSMOID_sect131r1 returns the address of the symbol CSSMOID_sect131r1.
+func CSSMOID_sect131r1() uintptr { return _symbol("CSSMOID_sect131r1") }
+
+// CSSMOID_sect131r2 returns the address of the symbol CSSMOID_sect131r2.
+func CSSMOID_sect131r2() uintptr { return _symbol("CSSMOID_sect131r2") }
+
+// CSSMOID_sect163k1 returns the address of the symbol CSSMOID_sect163k1.
+func CSSMOID_sect163k1() uintptr { return _symbol("CSSMOID_sect163k1") }
+
+// CSSMOID_sect163r1 returns the address of the symbol CSSMOID_sect163r1.
+func CSSMOID_sect163r1() uintptr { return _symbol("CSSMOID_sect163r1") }
+
+// CSSMOID_sect163r2 returns the address of the symbol CSSMOID_sect163r2.
+func CSSMOID_sect163r2() uintptr { return _symbol("CSSMOID_sect163r2") }
+
+// CSSMOID_sect193r1 returns the address of the symbol CSSMOID_sect193r1.
+func CSSMOID_sect193r1() uintptr { return _symbol("CSSMOID_sect193r1") }
+
+// CSSMOID_sect193r2 returns the address of the symbol CSSMOID_sect193r2.
+func CSSMOID_sect193r2() uintptr { return _symbol("CSSMOID_sect193r2") }
+
+// CSSMOID_sect233k1 returns the address of the symbol CSSMOID_sect233k1.
+func CSSMOID_sect233k1() uintptr { return _symbol("CSSMOID_sect233k1") }
+
+// CSSMOID_sect233r1 returns the address of the symbol CSSMOID_sect233r1.
+func CSSMOID_sect233r1() uintptr { return _symbol("CSSMOID_sect233r1") }
+
+// CSSMOID_sect239k1 returns the address of the symbol CSSMOID_sect239k1.
+func CSSMOID_sect239k1() uintptr { return _symbol("CSSMOID_sect239k1") }
+
+// CSSMOID_sect283k1 returns the address of the symbol CSSMOID_sect283k1.
+func CSSMOID_sect283k1() uintptr { return _symbol("CSSMOID_sect283k1") }
+
+// CSSMOID_sect283r1 returns the address of the symbol CSSMOID_sect283r1.
+func CSSMOID_sect283r1() uintptr { return _symbol("CSSMOID_sect283r1") }
+
+// CSSMOID_sect409k1 returns the address of the symbol CSSMOID_sect409k1.
+func CSSMOID_sect409k1() uintptr { return _symbol("CSSMOID_sect409k1") }
+
+// CSSMOID_sect409r1 returns the address of the symbol CSSMOID_sect409r1.
+func CSSMOID_sect409r1() uintptr { return _symbol("CSSMOID_sect409r1") }
+
+// CSSMOID_sect571k1 returns the address of the symbol CSSMOID_sect571k1.
+func CSSMOID_sect571k1() uintptr { return _symbol("CSSMOID_sect571k1") }
+
+// CSSMOID_sect571r1 returns the address of the symbol CSSMOID_sect571r1.
+func CSSMOID_sect571r1() uintptr { return _symbol("CSSMOID_sect571r1") }
+
+// CSSMOID_X509V3SignedCertificate returns the address of the symbol CSSMOID_X509V3SignedCertificate.
+func CSSMOID_X509V3SignedCertificate() uintptr { return _symbol("CSSMOID_X509V3SignedCertificate") }
+
+// CSSMOID_X509V3SignedCertificateCStruct returns the address of the symbol CSSMOID_X509V3SignedCertificateCStruct.
+func CSSMOID_X509V3SignedCertificateCStruct() uintptr {
+	return _symbol("CSSMOID_X509V3SignedCertificateCStruct")
+}
+
+// CSSMOID_X509V3Certificate returns the address of the symbol CSSMOID_X509V3Certificate.
+func CSSMOID_X509V3Certificate() uintptr { return _symbol("CSSMOID_X509V3Certificate") }
+
+// CSSMOID_X509V3CertificateCStruct returns the address of the symbol CSSMOID_X509V3CertificateCStruct.
+func CSSMOID_X509V3CertificateCStruct() uintptr { return _symbol("CSSMOID_X509V3CertificateCStruct") }
+
+// CSSMOID_X509V1Version returns the address of the symbol CSSMOID_X509V1Version.
+func CSSMOID_X509V1Version() uintptr { return _symbol("CSSMOID_X509V1Version") }
+
+// CSSMOID_X509V1SerialNumber returns the address of the symbol CSSMOID_X509V1SerialNumber.
+func CSSMOID_X509V1SerialNumber() uintptr { return _symbol("CSSMOID_X509V1SerialNumber") }
+
+// CSSMOID_X509V1IssuerName returns the address of the symbol CSSMOID_X509V1IssuerName.
+func CSSMOID_X509V1IssuerName() uintptr { return _symbol("CSSMOID_X509V1IssuerName") }
+
+// CSSMOID_X509V1IssuerNameStd returns the address of the symbol CSSMOID_X509V1IssuerNameStd.
+func CSSMOID_X509V1IssuerNameStd() uintptr { return _symbol("CSSMOID_X509V1IssuerNameStd") }
+
+// CSSMOID_X509V1IssuerNameCStruct returns the address of the symbol CSSMOID_X509V1IssuerNameCStruct.
+func CSSMOID_X509V1IssuerNameCStruct() uintptr { return _symbol("CSSMOID_X509V1IssuerNameCStruct") }
+
+// CSSMOID_X509V1IssuerNameLDAP returns the address of the symbol CSSMOID_X509V1IssuerNameLDAP.
+func CSSMOID_X509V1IssuerNameLDAP() uintptr { return _symbol("CSSMOID_X509V1IssuerNameLDAP") }
+
+// CSSMOID_X509V1ValidityNotBefore returns the address of the symbol CSSMOID_X509V1ValidityNotBefore.
+func CSSMOID_X509V1ValidityNotBefore() uintptr { return _symbol("CSSMOID_X509V1ValidityNotBefore") }
+
+// CSSMOID_X509V1ValidityNotAfter returns the address of the symbol CSSMOID_X509V1ValidityNotAfter.
+func CSSMOID_X509V1ValidityNotAfter() uintptr { return _symbol("CSSMOID_X509V1ValidityNotAfter") }
+
+// CSSMOID_X509V1SubjectName returns the address of the symbol CSSMOID_X509V1SubjectName.
+func CSSMOID_X509V1SubjectName() uintptr { return _symbol("CSSMOID_X509V1SubjectName") }
+
+// CSSMOID_X509V1SubjectNameStd returns the address of the symbol CSSMOID_X509V1SubjectNameStd.
+func CSSMOID_X509V1SubjectNameStd() uintptr { return _symbol("CSSMOID_X509V1SubjectNameStd") }
+
+// CSSMOID_X509V1SubjectNameCStruct returns the address of the symbol CSSMOID_X509V1SubjectNameCStruct.
+func CSSMOID_X509V1SubjectNameCStruct() uintptr { return _symbol("CSSMOID_X509V1SubjectNameCStruct") }
+
+// CSSMOID_X509V1SubjectNameLDAP returns the address of the symbol CSSMOID_X509V1SubjectNameLDAP.
+func CSSMOID_X509V1SubjectNameLDAP() uintptr { return _symbol("CSSMOID_X509V1SubjectNameLDAP") }
+
+// CSSMOID_CSSMKeyStruct returns the address of the symbol CSSMOID_CSSMKeyStruct.
+func CSSMOID_CSSMKeyStruct() uintptr { return _symbol("CSSMOID_CSSMKeyStruct") }
+
+// CSSMOID_X509V1SubjectPublicKeyCStruct returns the address of the symbol CSSMOID_X509V1SubjectPublicKeyCStruct.
+func CSSMOID_X509V1SubjectPublicKeyCStruct() uintptr {
+	return _symbol("CSSMOID_X509V1SubjectPublicKeyCStruct")
+}
+
+// CSSMOID_X509V1SubjectPublicKeyAlgorithm returns the address of the symbol CSSMOID_X509V1SubjectPublicKeyAlgorithm.
+func CSSMOID_X509V1SubjectPublicKeyAlgorithm() uintptr {
+	return _symbol("CSSMOID_X509V1SubjectPublicKeyAlgorithm")
+}
+
+// CSSMOID_X509V1SubjectPublicKeyAlgorithmParameters returns the address of the symbol CSSMOID_X509V1SubjectPublicKeyAlgorithmParameters.
+func CSSMOID_X509V1SubjectPublicKeyAlgorithmParameters() uintptr {
+	return _symbol("CSSMOID_X509V1SubjectPublicKeyAlgorithmParameters")
+}
+
+// CSSMOID_X509V1SubjectPublicKey returns the address of the symbol CSSMOID_X509V1SubjectPublicKey.
+func CSSMOID_X509V1SubjectPublicKey() uintptr { return _symbol("CSSMOID_X509V1SubjectPublicKey") }
+
+// CSSMOID_X509V1CertificateIssuerUniqueId returns the address of the symbol CSSMOID_X509V1CertificateIssuerUniqueId.
+func CSSMOID_X509V1CertificateIssuerUniqueId() uintptr {
+	return _symbol("CSSMOID_X509V1CertificateIssuerUniqueId")
+}
+
+// CSSMOID_X509V1CertificateSubjectUniqueId returns the address of the symbol CSSMOID_X509V1CertificateSubjectUniqueId.
+func CSSMOID_X509V1CertificateSubjectUniqueId() uintptr {
+	return _symbol("CSSMOID_X509V1CertificateSubjectUniqueId")
+}
+
+// CSSMOID_X509V3CertificateExtensionsStruct returns the address of the symbol CSSMOID_X509V3CertificateExtensionsStruct.
+func CSSMOID_X509V3CertificateExtensionsStruct() uintptr {
+	return _symbol("CSSMOID_X509V3CertificateExtensionsStruct")
+}
+
+// CSSMOID_X509V3CertificateExtensionsCStruct returns the address of the symbol CSSMOID_X509V3CertificateExtensionsCStruct.
+func CSSMOID_X509V3CertificateExtensionsCStruct() uintptr {
+	return _symbol("CSSMOID_X509V3CertificateExtensionsCStruct")
+}
+
+// CSSMOID_X509V3CertificateNumberOfExtensions returns the address of the symbol CSSMOID_X509V3CertificateNumberOfExtensions.
+func CSSMOID_X509V3CertificateNumberOfExtensions() uintptr {
+	return _symbol("CSSMOID_X509V3CertificateNumberOfExtensions")
+}
+
+// CSSMOID_X509V3CertificateExtensionStruct returns the address of the symbol CSSMOID_X509V3CertificateExtensionStruct.
+func CSSMOID_X509V3CertificateExtensionStruct() uintptr {
+	return _symbol("CSSMOID_X509V3CertificateExtensionStruct")
+}
+
+// CSSMOID_X509V3CertificateExtensionCStruct returns the address of the symbol CSSMOID_X509V3CertificateExtensionCStruct.
+func CSSMOID_X509V3CertificateExtensionCStruct() uintptr {
+	return _symbol("CSSMOID_X509V3CertificateExtensionCStruct")
+}
+
+// CSSMOID_X509V3CertificateExtensionId returns the address of the symbol CSSMOID_X509V3CertificateExtensionId.
+func CSSMOID_X509V3CertificateExtensionId() uintptr {
+	return _symbol("CSSMOID_X509V3CertificateExtensionId")
+}
+
+// CSSMOID_X509V3CertificateExtensionCritical returns the address of the symbol CSSMOID_X509V3CertificateExtensionCritical.
+func CSSMOID_X509V3CertificateExtensionCritical() uintptr {
+	return _symbol("CSSMOID_X509V3CertificateExtensionCritical")
+}
+
+// CSSMOID_X509V3CertificateExtensionType returns the address of the symbol CSSMOID_X509V3CertificateExtensionType.
+func CSSMOID_X509V3CertificateExtensionType() uintptr {
+	return _symbol("CSSMOID_X509V3CertificateExtensionType")
+}
+
+// CSSMOID_X509V3CertificateExtensionValue returns the address of the symbol CSSMOID_X509V3CertificateExtensionValue.
+func CSSMOID_X509V3CertificateExtensionValue() uintptr {
+	return _symbol("CSSMOID_X509V3CertificateExtensionValue")
+}
+
+// CSSMOID_X509V1SignatureStruct returns the address of the symbol CSSMOID_X509V1SignatureStruct.
+func CSSMOID_X509V1SignatureStruct() uintptr { return _symbol("CSSMOID_X509V1SignatureStruct") }
+
+// CSSMOID_X509V1SignatureCStruct returns the address of the symbol CSSMOID_X509V1SignatureCStruct.
+func CSSMOID_X509V1SignatureCStruct() uintptr { return _symbol("CSSMOID_X509V1SignatureCStruct") }
+
+// CSSMOID_X509V1SignatureAlgorithm returns the address of the symbol CSSMOID_X509V1SignatureAlgorithm.
+func CSSMOID_X509V1SignatureAlgorithm() uintptr { return _symbol("CSSMOID_X509V1SignatureAlgorithm") }
+
+// CSSMOID_X509V1SignatureAlgorithmTBS returns the address of the symbol CSSMOID_X509V1SignatureAlgorithmTBS.
+func CSSMOID_X509V1SignatureAlgorithmTBS() uintptr {
+	return _symbol("CSSMOID_X509V1SignatureAlgorithmTBS")
+}
+
+// CSSMOID_X509V1SignatureAlgorithmParameters returns the address of the symbol CSSMOID_X509V1SignatureAlgorithmParameters.
+func CSSMOID_X509V1SignatureAlgorithmParameters() uintptr {
+	return _symbol("CSSMOID_X509V1SignatureAlgorithmParameters")
+}
+
+// CSSMOID_X509V1Signature returns the address of the symbol CSSMOID_X509V1Signature.
+func CSSMOID_X509V1Signature() uintptr { return _symbol("CSSMOID_X509V1Signature") }
+
+// CSSMOID_SubjectSignatureBitmap returns the address of the symbol CSSMOID_SubjectSignatureBitmap.
+func CSSMOID_SubjectSignatureBitmap() uintptr { return _symbol("CSSMOID_SubjectSignatureBitmap") }
+
+// CSSMOID_SubjectPicture returns the address of the symbol CSSMOID_SubjectPicture.
+func CSSMOID_SubjectPicture() uintptr { return _symbol("CSSMOID_SubjectPicture") }
+
+// CSSMOID_SubjectEmailAddress returns the address of the symbol CSSMOID_SubjectEmailAddress.
+func CSSMOID_SubjectEmailAddress() uintptr { return _symbol("CSSMOID_SubjectEmailAddress") }
+
+// CSSMOID_UseExemptions returns the address of the symbol CSSMOID_UseExemptions.
+func CSSMOID_UseExemptions() uintptr { return _symbol("CSSMOID_UseExemptions") }
+
+// CSSMOID_SubjectDirectoryAttributes returns the address of the symbol CSSMOID_SubjectDirectoryAttributes.
+func CSSMOID_SubjectDirectoryAttributes() uintptr {
+	return _symbol("CSSMOID_SubjectDirectoryAttributes")
+}
+
+// CSSMOID_SubjectKeyIdentifier returns the address of the symbol CSSMOID_SubjectKeyIdentifier.
+func CSSMOID_SubjectKeyIdentifier() uintptr { return _symbol("CSSMOID_SubjectKeyIdentifier") }
+
+// CSSMOID_KeyUsage returns the address of the symbol CSSMOID_KeyUsage.
+func CSSMOID_KeyUsage() uintptr { return _symbol("CSSMOID_KeyUsage") }
+
+// CSSMOID_PrivateKeyUsagePeriod returns the address of the symbol CSSMOID_PrivateKeyUsagePeriod.
+func CSSMOID_PrivateKeyUsagePeriod() uintptr { return _symbol("CSSMOID_PrivateKeyUsagePeriod") }
+
+// CSSMOID_SubjectAltName returns the address of the symbol CSSMOID_SubjectAltName.
+func CSSMOID_SubjectAltName() uintptr { return _symbol("CSSMOID_SubjectAltName") }
+
+// CSSMOID_IssuerAltName returns the address of the symbol CSSMOID_IssuerAltName.
+func CSSMOID_IssuerAltName() uintptr { return _symbol("CSSMOID_IssuerAltName") }
+
+// CSSMOID_BasicConstraints returns the address of the symbol CSSMOID_BasicConstraints.
+func CSSMOID_BasicConstraints() uintptr { return _symbol("CSSMOID_BasicConstraints") }
+
+// CSSMOID_CrlNumber returns the address of the symbol CSSMOID_CrlNumber.
+func CSSMOID_CrlNumber() uintptr { return _symbol("CSSMOID_CrlNumber") }
+
+// CSSMOID_CrlReason returns the address of the symbol CSSMOID_CrlReason.
+func CSSMOID_CrlReason() uintptr { return _symbol("CSSMOID_CrlReason") }
+
+// CSSMOID_HoldInstructionCode returns the address of the symbol CSSMOID_HoldInstructionCode.
+func CSSMOID_HoldInstructionCode() uintptr { return _symbol("CSSMOID_HoldInstructionCode") }
+
+// CSSMOID_InvalidityDate returns the address of the symbol CSSMOID_InvalidityDate.
+func CSSMOID_InvalidityDate() uintptr { return _symbol("CSSMOID_InvalidityDate") }
+
+// CSSMOID_DeltaCrlIndicator returns the address of the symbol CSSMOID_DeltaCrlIndicator.
+func CSSMOID_DeltaCrlIndicator() uintptr { return _symbol("CSSMOID_DeltaCrlIndicator") }
+
+// CSSMOID_IssuingDistributionPoint returns the address of the symbol CSSMOID_IssuingDistributionPoint.
+func CSSMOID_IssuingDistributionPoint() uintptr { return _symbol("CSSMOID_IssuingDistributionPoint") }
+
+// CSSMOID_IssuingDistributionPoints returns the address of the symbol CSSMOID_IssuingDistributionPoints.
+func CSSMOID_IssuingDistributionPoints() uintptr { return _symbol("CSSMOID_IssuingDistributionPoints") }
+
+// CSSMOID_CertIssuer returns the address of the symbol CSSMOID_CertIssuer.
+func CSSMOID_CertIssuer() uintptr { return _symbol("CSSMOID_CertIssuer") }
+
+// CSSMOID_NameConstraints returns the address of the symbol CSSMOID_NameConstraints.
+func CSSMOID_NameConstraints() uintptr { return _symbol("CSSMOID_NameConstraints") }
+
+// CSSMOID_CrlDistributionPoints returns the address of the symbol CSSMOID_CrlDistributionPoints.
+func CSSMOID_CrlDistributionPoints() uintptr { return _symbol("CSSMOID_CrlDistributionPoints") }
+
+// CSSMOID_CertificatePolicies returns the address of the symbol CSSMOID_CertificatePolicies.
+func CSSMOID_CertificatePolicies() uintptr { return _symbol("CSSMOID_CertificatePolicies") }
+
+// CSSMOID_PolicyMappings returns the address of the symbol CSSMOID_PolicyMappings.
+func CSSMOID_PolicyMappings() uintptr { return _symbol("CSSMOID_PolicyMappings") }
+
+// CSSMOID_PolicyConstraints returns the address of the symbol CSSMOID_PolicyConstraints.
+func CSSMOID_PolicyConstraints() uintptr { return _symbol("CSSMOID_PolicyConstraints") }
+
+// CSSMOID_AuthorityKeyIdentifier returns the address of the symbol CSSMOID_AuthorityKeyIdentifier.
+func CSSMOID_AuthorityKeyIdentifier() uintptr { return _symbol("CSSMOID_AuthorityKeyIdentifier") }
+
+// CSSMOID_ExtendedKeyUsage returns the address of the symbol CSSMOID_ExtendedKeyUsage.
+func CSSMOID_ExtendedKeyUsage() uintptr { return _symbol("CSSMOID_ExtendedKeyUsage") }
+
+// CSSMOID_InhibitAnyPolicy returns the address of the symbol CSSMOID_InhibitAnyPolicy.
+func CSSMOID_InhibitAnyPolicy() uintptr { return _symbol("CSSMOID_InhibitAnyPolicy") }
+
+// CSSMOID_AuthorityInfoAccess returns the address of the symbol CSSMOID_AuthorityInfoAccess.
+func CSSMOID_AuthorityInfoAccess() uintptr { return _symbol("CSSMOID_AuthorityInfoAccess") }
+
+// CSSMOID_BiometricInfo returns the address of the symbol CSSMOID_BiometricInfo.
+func CSSMOID_BiometricInfo() uintptr { return _symbol("CSSMOID_BiometricInfo") }
+
+// CSSMOID_QC_Statements returns the address of the symbol CSSMOID_QC_Statements.
+func CSSMOID_QC_Statements() uintptr { return _symbol("CSSMOID_QC_Statements") }
+
+// CSSMOID_SubjectInfoAccess returns the address of the symbol CSSMOID_SubjectInfoAccess.
+func CSSMOID_SubjectInfoAccess() uintptr { return _symbol("CSSMOID_SubjectInfoAccess") }
+
+// CSSMOID_ExtendedKeyUsageAny returns the address of the symbol CSSMOID_ExtendedKeyUsageAny.
+func CSSMOID_ExtendedKeyUsageAny() uintptr { return _symbol("CSSMOID_ExtendedKeyUsageAny") }
+
+// CSSMOID_ServerAuth returns the address of the symbol CSSMOID_ServerAuth.
+func CSSMOID_ServerAuth() uintptr { return _symbol("CSSMOID_ServerAuth") }
+
+// CSSMOID_ClientAuth returns the address of the symbol CSSMOID_ClientAuth.
+func CSSMOID_ClientAuth() uintptr { return _symbol("CSSMOID_ClientAuth") }
+
+// CSSMOID_ExtendedUseCodeSigning returns the address of the symbol CSSMOID_ExtendedUseCodeSigning.
+func CSSMOID_ExtendedUseCodeSigning() uintptr { return _symbol("CSSMOID_ExtendedUseCodeSigning") }
+
+// CSSMOID_EmailProtection returns the address of the symbol CSSMOID_EmailProtection.
+func CSSMOID_EmailProtection() uintptr { return _symbol("CSSMOID_EmailProtection") }
+
+// CSSMOID_TimeStamping returns the address of the symbol CSSMOID_TimeStamping.
+func CSSMOID_TimeStamping() uintptr { return _symbol("CSSMOID_TimeStamping") }
+
+// CSSMOID_OCSPSigning returns the address of the symbol CSSMOID_OCSPSigning.
+func CSSMOID_OCSPSigning() uintptr { return _symbol("CSSMOID_OCSPSigning") }
+
+// CSSMOID_KERBv5_PKINIT_KP_CLIENT_AUTH returns the address of the symbol CSSMOID_KERBv5_PKINIT_KP_CLIENT_AUTH.
+func CSSMOID_KERBv5_PKINIT_KP_CLIENT_AUTH() uintptr {
+	return _symbol("CSSMOID_KERBv5_PKINIT_KP_CLIENT_AUTH")
+}
+
+// CSSMOID_KERBv5_PKINIT_KP_KDC returns the address of the symbol CSSMOID_KERBv5_PKINIT_KP_KDC.
+func CSSMOID_KERBv5_PKINIT_KP_KDC() uintptr { return _symbol("CSSMOID_KERBv5_PKINIT_KP_KDC") }
+
+// CSSMOID_EKU_IPSec returns the address of the symbol CSSMOID_EKU_IPSec.
+func CSSMOID_EKU_IPSec() uintptr { return _symbol("CSSMOID_EKU_IPSec") }
+
+// CSSMOID_DOTMAC_CERT_EXTENSION returns the address of the symbol CSSMOID_DOTMAC_CERT_EXTENSION.
+func CSSMOID_DOTMAC_CERT_EXTENSION() uintptr { return _symbol("CSSMOID_DOTMAC_CERT_EXTENSION") }
+
+// CSSMOID_DOTMAC_CERT_IDENTITY returns the address of the symbol CSSMOID_DOTMAC_CERT_IDENTITY.
+func CSSMOID_DOTMAC_CERT_IDENTITY() uintptr { return _symbol("CSSMOID_DOTMAC_CERT_IDENTITY") }
+
+// CSSMOID_DOTMAC_CERT_EMAIL_SIGN returns the address of the symbol CSSMOID_DOTMAC_CERT_EMAIL_SIGN.
+func CSSMOID_DOTMAC_CERT_EMAIL_SIGN() uintptr { return _symbol("CSSMOID_DOTMAC_CERT_EMAIL_SIGN") }
+
+// CSSMOID_DOTMAC_CERT_EMAIL_ENCRYPT returns the address of the symbol CSSMOID_DOTMAC_CERT_EMAIL_ENCRYPT.
+func CSSMOID_DOTMAC_CERT_EMAIL_ENCRYPT() uintptr { return _symbol("CSSMOID_DOTMAC_CERT_EMAIL_ENCRYPT") }
+
+// CSSMOID_APPLE_CERT_POLICY returns the address of the symbol CSSMOID_APPLE_CERT_POLICY.
+func CSSMOID_APPLE_CERT_POLICY() uintptr { return _symbol("CSSMOID_APPLE_CERT_POLICY") }
+
+// CSSMOID_DOTMAC_CERT_POLICY returns the address of the symbol CSSMOID_DOTMAC_CERT_POLICY.
+func CSSMOID_DOTMAC_CERT_POLICY() uintptr { return _symbol("CSSMOID_DOTMAC_CERT_POLICY") }
+
+// CSSMOID_ADC_CERT_POLICY returns the address of the symbol CSSMOID_ADC_CERT_POLICY.
+func CSSMOID_ADC_CERT_POLICY() uintptr { return _symbol("CSSMOID_ADC_CERT_POLICY") }
+
+// CSSMOID_MACAPPSTORE_CERT_POLICY returns the address of the symbol CSSMOID_MACAPPSTORE_CERT_POLICY.
+func CSSMOID_MACAPPSTORE_CERT_POLICY() uintptr { return _symbol("CSSMOID_MACAPPSTORE_CERT_POLICY") }
+
+// CSSMOID_MACAPPSTORE_RECEIPT_CERT_POLICY returns the address of the symbol CSSMOID_MACAPPSTORE_RECEIPT_CERT_POLICY.
+func CSSMOID_MACAPPSTORE_RECEIPT_CERT_POLICY() uintptr {
+	return _symbol("CSSMOID_MACAPPSTORE_RECEIPT_CERT_POLICY")
+}
+
+// CSSMOID_APPLEID_CERT_POLICY returns the address of the symbol CSSMOID_APPLEID_CERT_POLICY.
+func CSSMOID_APPLEID_CERT_POLICY() uintptr { return _symbol("CSSMOID_APPLEID_CERT_POLICY") }
+
+// CSSMOID_APPLEID_SHARING_CERT_POLICY returns the address of the symbol CSSMOID_APPLEID_SHARING_CERT_POLICY.
+func CSSMOID_APPLEID_SHARING_CERT_POLICY() uintptr {
+	return _symbol("CSSMOID_APPLEID_SHARING_CERT_POLICY")
+}
+
+// CSSMOID_MOBILE_STORE_SIGNING_POLICY returns the address of the symbol CSSMOID_MOBILE_STORE_SIGNING_POLICY.
+func CSSMOID_MOBILE_STORE_SIGNING_POLICY() uintptr {
+	return _symbol("CSSMOID_MOBILE_STORE_SIGNING_POLICY")
+}
+
+// CSSMOID_TEST_MOBILE_STORE_SIGNING_POLICY returns the address of the symbol CSSMOID_TEST_MOBILE_STORE_SIGNING_POLICY.
+func CSSMOID_TEST_MOBILE_STORE_SIGNING_POLICY() uintptr {
+	return _symbol("CSSMOID_TEST_MOBILE_STORE_SIGNING_POLICY")
+}
+
+// CSSMOID_APPLE_EKU_CODE_SIGNING returns the address of the symbol CSSMOID_APPLE_EKU_CODE_SIGNING.
+func CSSMOID_APPLE_EKU_CODE_SIGNING() uintptr { return _symbol("CSSMOID_APPLE_EKU_CODE_SIGNING") }
+
+// CSSMOID_APPLE_EKU_CODE_SIGNING_DEV returns the address of the symbol CSSMOID_APPLE_EKU_CODE_SIGNING_DEV.
+func CSSMOID_APPLE_EKU_CODE_SIGNING_DEV() uintptr {
+	return _symbol("CSSMOID_APPLE_EKU_CODE_SIGNING_DEV")
+}
+
+// CSSMOID_APPLE_EKU_RESOURCE_SIGNING returns the address of the symbol CSSMOID_APPLE_EKU_RESOURCE_SIGNING.
+func CSSMOID_APPLE_EKU_RESOURCE_SIGNING() uintptr {
+	return _symbol("CSSMOID_APPLE_EKU_RESOURCE_SIGNING")
+}
+
+// CSSMOID_APPLE_EKU_ICHAT_SIGNING returns the address of the symbol CSSMOID_APPLE_EKU_ICHAT_SIGNING.
+func CSSMOID_APPLE_EKU_ICHAT_SIGNING() uintptr { return _symbol("CSSMOID_APPLE_EKU_ICHAT_SIGNING") }
+
+// CSSMOID_APPLE_EKU_ICHAT_ENCRYPTION returns the address of the symbol CSSMOID_APPLE_EKU_ICHAT_ENCRYPTION.
+func CSSMOID_APPLE_EKU_ICHAT_ENCRYPTION() uintptr {
+	return _symbol("CSSMOID_APPLE_EKU_ICHAT_ENCRYPTION")
+}
+
+// CSSMOID_APPLE_EKU_SYSTEM_IDENTITY returns the address of the symbol CSSMOID_APPLE_EKU_SYSTEM_IDENTITY.
+func CSSMOID_APPLE_EKU_SYSTEM_IDENTITY() uintptr { return _symbol("CSSMOID_APPLE_EKU_SYSTEM_IDENTITY") }
+
+// CSSMOID_APPLE_EKU_PASSBOOK_SIGNING returns the address of the symbol CSSMOID_APPLE_EKU_PASSBOOK_SIGNING.
+func CSSMOID_APPLE_EKU_PASSBOOK_SIGNING() uintptr {
+	return _symbol("CSSMOID_APPLE_EKU_PASSBOOK_SIGNING")
+}
+
+// CSSMOID_APPLE_EKU_PROFILE_SIGNING returns the address of the symbol CSSMOID_APPLE_EKU_PROFILE_SIGNING.
+func CSSMOID_APPLE_EKU_PROFILE_SIGNING() uintptr { return _symbol("CSSMOID_APPLE_EKU_PROFILE_SIGNING") }
+
+// CSSMOID_APPLE_EKU_QA_PROFILE_SIGNING returns the address of the symbol CSSMOID_APPLE_EKU_QA_PROFILE_SIGNING.
+func CSSMOID_APPLE_EKU_QA_PROFILE_SIGNING() uintptr {
+	return _symbol("CSSMOID_APPLE_EKU_QA_PROFILE_SIGNING")
+}
+
+// CSSMOID_APPLE_EXTENSION returns the address of the symbol CSSMOID_APPLE_EXTENSION.
+func CSSMOID_APPLE_EXTENSION() uintptr { return _symbol("CSSMOID_APPLE_EXTENSION") }
+
+// CSSMOID_APPLE_EXTENSION_CODE_SIGNING returns the address of the symbol CSSMOID_APPLE_EXTENSION_CODE_SIGNING.
+func CSSMOID_APPLE_EXTENSION_CODE_SIGNING() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_CODE_SIGNING")
+}
+
+// CSSMOID_APPLE_EXTENSION_APPLE_SIGNING returns the address of the symbol CSSMOID_APPLE_EXTENSION_APPLE_SIGNING.
+func CSSMOID_APPLE_EXTENSION_APPLE_SIGNING() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_APPLE_SIGNING")
+}
+
+// CSSMOID_APPLE_EXTENSION_ADC_DEV_SIGNING returns the address of the symbol CSSMOID_APPLE_EXTENSION_ADC_DEV_SIGNING.
+func CSSMOID_APPLE_EXTENSION_ADC_DEV_SIGNING() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_ADC_DEV_SIGNING")
+}
+
+// CSSMOID_APPLE_EXTENSION_ADC_APPLE_SIGNING returns the address of the symbol CSSMOID_APPLE_EXTENSION_ADC_APPLE_SIGNING.
+func CSSMOID_APPLE_EXTENSION_ADC_APPLE_SIGNING() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_ADC_APPLE_SIGNING")
+}
+
+// CSSMOID_APPLE_EXTENSION_PASSBOOK_SIGNING returns the address of the symbol CSSMOID_APPLE_EXTENSION_PASSBOOK_SIGNING.
+func CSSMOID_APPLE_EXTENSION_PASSBOOK_SIGNING() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_PASSBOOK_SIGNING")
+}
+
+// CSSMOID_APPLE_EXTENSION_MACAPPSTORE_RECEIPT returns the address of the symbol CSSMOID_APPLE_EXTENSION_MACAPPSTORE_RECEIPT.
+func CSSMOID_APPLE_EXTENSION_MACAPPSTORE_RECEIPT() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_MACAPPSTORE_RECEIPT")
+}
+
+// CSSMOID_APPLE_EXTENSION_INTERMEDIATE_MARKER returns the address of the symbol CSSMOID_APPLE_EXTENSION_INTERMEDIATE_MARKER.
+func CSSMOID_APPLE_EXTENSION_INTERMEDIATE_MARKER() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_INTERMEDIATE_MARKER")
+}
+
+// CSSMOID_APPLE_EXTENSION_WWDR_INTERMEDIATE returns the address of the symbol CSSMOID_APPLE_EXTENSION_WWDR_INTERMEDIATE.
+func CSSMOID_APPLE_EXTENSION_WWDR_INTERMEDIATE() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_WWDR_INTERMEDIATE")
+}
+
+// CSSMOID_APPLE_EXTENSION_ITMS_INTERMEDIATE returns the address of the symbol CSSMOID_APPLE_EXTENSION_ITMS_INTERMEDIATE.
+func CSSMOID_APPLE_EXTENSION_ITMS_INTERMEDIATE() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_ITMS_INTERMEDIATE")
+}
+
+// CSSMOID_APPLE_EXTENSION_AAI_INTERMEDIATE returns the address of the symbol CSSMOID_APPLE_EXTENSION_AAI_INTERMEDIATE.
+func CSSMOID_APPLE_EXTENSION_AAI_INTERMEDIATE() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_AAI_INTERMEDIATE")
+}
+
+// CSSMOID_APPLE_EXTENSION_APPLEID_INTERMEDIATE returns the address of the symbol CSSMOID_APPLE_EXTENSION_APPLEID_INTERMEDIATE.
+func CSSMOID_APPLE_EXTENSION_APPLEID_INTERMEDIATE() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_APPLEID_INTERMEDIATE")
+}
+
+// CSSMOID_APPLE_EXTENSION_APPLEID_SHARING returns the address of the symbol CSSMOID_APPLE_EXTENSION_APPLEID_SHARING.
+func CSSMOID_APPLE_EXTENSION_APPLEID_SHARING() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_APPLEID_SHARING")
+}
+
+// CSSMOID_APPLE_EXTENSION_SYSINT2_INTERMEDIATE returns the address of the symbol CSSMOID_APPLE_EXTENSION_SYSINT2_INTERMEDIATE.
+func CSSMOID_APPLE_EXTENSION_SYSINT2_INTERMEDIATE() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_SYSINT2_INTERMEDIATE")
+}
+
+// CSSMOID_APPLE_EXTENSION_DEVELOPER_AUTHENTICATION returns the address of the symbol CSSMOID_APPLE_EXTENSION_DEVELOPER_AUTHENTICATION.
+func CSSMOID_APPLE_EXTENSION_DEVELOPER_AUTHENTICATION() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_DEVELOPER_AUTHENTICATION")
+}
+
+// CSSMOID_APPLE_EXTENSION_SERVER_AUTHENTICATION returns the address of the symbol CSSMOID_APPLE_EXTENSION_SERVER_AUTHENTICATION.
+func CSSMOID_APPLE_EXTENSION_SERVER_AUTHENTICATION() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_SERVER_AUTHENTICATION")
+}
+
+// CSSMOID_APPLE_EXTENSION_ESCROW_SERVICE returns the address of the symbol CSSMOID_APPLE_EXTENSION_ESCROW_SERVICE.
+func CSSMOID_APPLE_EXTENSION_ESCROW_SERVICE() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_ESCROW_SERVICE")
+}
+
+// CSSMOID_APPLE_EXTENSION_PROVISIONING_PROFILE_SIGNING returns the address of the symbol CSSMOID_APPLE_EXTENSION_PROVISIONING_PROFILE_SIGNING.
+func CSSMOID_APPLE_EXTENSION_PROVISIONING_PROFILE_SIGNING() uintptr {
+	return _symbol("CSSMOID_APPLE_EXTENSION_PROVISIONING_PROFILE_SIGNING")
+}
+
+// CSSMOID_NetscapeCertType returns the address of the symbol CSSMOID_NetscapeCertType.
+func CSSMOID_NetscapeCertType() uintptr { return _symbol("CSSMOID_NetscapeCertType") }
+
+// CSSMOID_NetscapeCertSequence returns the address of the symbol CSSMOID_NetscapeCertSequence.
+func CSSMOID_NetscapeCertSequence() uintptr { return _symbol("CSSMOID_NetscapeCertSequence") }
+
+// CSSMOID_NetscapeSGC returns the address of the symbol CSSMOID_NetscapeSGC.
+func CSSMOID_NetscapeSGC() uintptr { return _symbol("CSSMOID_NetscapeSGC") }
+
+// CSSMOID_MicrosoftSGC returns the address of the symbol CSSMOID_MicrosoftSGC.
+func CSSMOID_MicrosoftSGC() uintptr { return _symbol("CSSMOID_MicrosoftSGC") }
+
+// CSSMOID_X509V2CRLSignedCrlStruct returns the address of the symbol CSSMOID_X509V2CRLSignedCrlStruct.
+func CSSMOID_X509V2CRLSignedCrlStruct() uintptr { return _symbol("CSSMOID_X509V2CRLSignedCrlStruct") }
+
+// CSSMOID_X509V2CRLSignedCrlCStruct returns the address of the symbol CSSMOID_X509V2CRLSignedCrlCStruct.
+func CSSMOID_X509V2CRLSignedCrlCStruct() uintptr { return _symbol("CSSMOID_X509V2CRLSignedCrlCStruct") }
+
+// CSSMOID_X509V2CRLTbsCertListStruct returns the address of the symbol CSSMOID_X509V2CRLTbsCertListStruct.
+func CSSMOID_X509V2CRLTbsCertListStruct() uintptr {
+	return _symbol("CSSMOID_X509V2CRLTbsCertListStruct")
+}
+
+// CSSMOID_X509V2CRLTbsCertListCStruct returns the address of the symbol CSSMOID_X509V2CRLTbsCertListCStruct.
+func CSSMOID_X509V2CRLTbsCertListCStruct() uintptr {
+	return _symbol("CSSMOID_X509V2CRLTbsCertListCStruct")
+}
+
+// CSSMOID_X509V2CRLVersion returns the address of the symbol CSSMOID_X509V2CRLVersion.
+func CSSMOID_X509V2CRLVersion() uintptr { return _symbol("CSSMOID_X509V2CRLVersion") }
+
+// CSSMOID_X509V1CRLIssuerStruct returns the address of the symbol CSSMOID_X509V1CRLIssuerStruct.
+func CSSMOID_X509V1CRLIssuerStruct() uintptr { return _symbol("CSSMOID_X509V1CRLIssuerStruct") }
+
+// CSSMOID_X509V1CRLIssuerNameCStruct returns the address of the symbol CSSMOID_X509V1CRLIssuerNameCStruct.
+func CSSMOID_X509V1CRLIssuerNameCStruct() uintptr {
+	return _symbol("CSSMOID_X509V1CRLIssuerNameCStruct")
+}
+
+// CSSMOID_X509V1CRLIssuerNameLDAP returns the address of the symbol CSSMOID_X509V1CRLIssuerNameLDAP.
+func CSSMOID_X509V1CRLIssuerNameLDAP() uintptr { return _symbol("CSSMOID_X509V1CRLIssuerNameLDAP") }
+
+// CSSMOID_X509V1CRLThisUpdate returns the address of the symbol CSSMOID_X509V1CRLThisUpdate.
+func CSSMOID_X509V1CRLThisUpdate() uintptr { return _symbol("CSSMOID_X509V1CRLThisUpdate") }
+
+// CSSMOID_X509V1CRLNextUpdate returns the address of the symbol CSSMOID_X509V1CRLNextUpdate.
+func CSSMOID_X509V1CRLNextUpdate() uintptr { return _symbol("CSSMOID_X509V1CRLNextUpdate") }
+
+// CSSMOID_X509V1CRLRevokedCertificatesStruct returns the address of the symbol CSSMOID_X509V1CRLRevokedCertificatesStruct.
+func CSSMOID_X509V1CRLRevokedCertificatesStruct() uintptr {
+	return _symbol("CSSMOID_X509V1CRLRevokedCertificatesStruct")
+}
+
+// CSSMOID_X509V1CRLRevokedCertificatesCStruct returns the address of the symbol CSSMOID_X509V1CRLRevokedCertificatesCStruct.
+func CSSMOID_X509V1CRLRevokedCertificatesCStruct() uintptr {
+	return _symbol("CSSMOID_X509V1CRLRevokedCertificatesCStruct")
+}
+
+// CSSMOID_X509V1CRLNumberOfRevokedCertEntries returns the address of the symbol CSSMOID_X509V1CRLNumberOfRevokedCertEntries.
+func CSSMOID_X509V1CRLNumberOfRevokedCertEntries() uintptr {
+	return _symbol("CSSMOID_X509V1CRLNumberOfRevokedCertEntries")
+}
+
+// CSSMOID_X509V1CRLRevokedEntryStruct returns the address of the symbol CSSMOID_X509V1CRLRevokedEntryStruct.
+func CSSMOID_X509V1CRLRevokedEntryStruct() uintptr {
+	return _symbol("CSSMOID_X509V1CRLRevokedEntryStruct")
+}
+
+// CSSMOID_X509V1CRLRevokedEntryCStruct returns the address of the symbol CSSMOID_X509V1CRLRevokedEntryCStruct.
+func CSSMOID_X509V1CRLRevokedEntryCStruct() uintptr {
+	return _symbol("CSSMOID_X509V1CRLRevokedEntryCStruct")
+}
+
+// CSSMOID_X509V1CRLRevokedEntrySerialNumber returns the address of the symbol CSSMOID_X509V1CRLRevokedEntrySerialNumber.
+func CSSMOID_X509V1CRLRevokedEntrySerialNumber() uintptr {
+	return _symbol("CSSMOID_X509V1CRLRevokedEntrySerialNumber")
+}
+
+// CSSMOID_X509V1CRLRevokedEntryRevocationDate returns the address of the symbol CSSMOID_X509V1CRLRevokedEntryRevocationDate.
+func CSSMOID_X509V1CRLRevokedEntryRevocationDate() uintptr {
+	return _symbol("CSSMOID_X509V1CRLRevokedEntryRevocationDate")
+}
+
+// CSSMOID_X509V2CRLRevokedEntryAllExtensionsStruct returns the address of the symbol CSSMOID_X509V2CRLRevokedEntryAllExtensionsStruct.
+func CSSMOID_X509V2CRLRevokedEntryAllExtensionsStruct() uintptr {
+	return _symbol("CSSMOID_X509V2CRLRevokedEntryAllExtensionsStruct")
+}
+
+// CSSMOID_X509V2CRLRevokedEntryAllExtensionsCStruct returns the address of the symbol CSSMOID_X509V2CRLRevokedEntryAllExtensionsCStruct.
+func CSSMOID_X509V2CRLRevokedEntryAllExtensionsCStruct() uintptr {
+	return _symbol("CSSMOID_X509V2CRLRevokedEntryAllExtensionsCStruct")
+}
+
+// CSSMOID_X509V2CRLRevokedEntryNumberOfExtensions returns the address of the symbol CSSMOID_X509V2CRLRevokedEntryNumberOfExtensions.
+func CSSMOID_X509V2CRLRevokedEntryNumberOfExtensions() uintptr {
+	return _symbol("CSSMOID_X509V2CRLRevokedEntryNumberOfExtensions")
+}
+
+// CSSMOID_X509V2CRLRevokedEntrySingleExtensionStruct returns the address of the symbol CSSMOID_X509V2CRLRevokedEntrySingleExtensionStruct.
+func CSSMOID_X509V2CRLRevokedEntrySingleExtensionStruct() uintptr {
+	return _symbol("CSSMOID_X509V2CRLRevokedEntrySingleExtensionStruct")
+}
+
+// CSSMOID_X509V2CRLRevokedEntrySingleExtensionCStruct returns the address of the symbol CSSMOID_X509V2CRLRevokedEntrySingleExtensionCStruct.
+func CSSMOID_X509V2CRLRevokedEntrySingleExtensionCStruct() uintptr {
+	return _symbol("CSSMOID_X509V2CRLRevokedEntrySingleExtensionCStruct")
+}
+
+// CSSMOID_X509V2CRLRevokedEntryExtensionId returns the address of the symbol CSSMOID_X509V2CRLRevokedEntryExtensionId.
+func CSSMOID_X509V2CRLRevokedEntryExtensionId() uintptr {
+	return _symbol("CSSMOID_X509V2CRLRevokedEntryExtensionId")
+}
+
+// CSSMOID_X509V2CRLRevokedEntryExtensionCritical returns the address of the symbol CSSMOID_X509V2CRLRevokedEntryExtensionCritical.
+func CSSMOID_X509V2CRLRevokedEntryExtensionCritical() uintptr {
+	return _symbol("CSSMOID_X509V2CRLRevokedEntryExtensionCritical")
+}
+
+// CSSMOID_X509V2CRLRevokedEntryExtensionType returns the address of the symbol CSSMOID_X509V2CRLRevokedEntryExtensionType.
+func CSSMOID_X509V2CRLRevokedEntryExtensionType() uintptr {
+	return _symbol("CSSMOID_X509V2CRLRevokedEntryExtensionType")
+}
+
+// CSSMOID_X509V2CRLRevokedEntryExtensionValue returns the address of the symbol CSSMOID_X509V2CRLRevokedEntryExtensionValue.
+func CSSMOID_X509V2CRLRevokedEntryExtensionValue() uintptr {
+	return _symbol("CSSMOID_X509V2CRLRevokedEntryExtensionValue")
+}
+
+// CSSMOID_X509V2CRLAllExtensionsStruct returns the address of the symbol CSSMOID_X509V2CRLAllExtensionsStruct.
+func CSSMOID_X509V2CRLAllExtensionsStruct() uintptr {
+	return _symbol("CSSMOID_X509V2CRLAllExtensionsStruct")
+}
+
+// CSSMOID_X509V2CRLAllExtensionsCStruct returns the address of the symbol CSSMOID_X509V2CRLAllExtensionsCStruct.
+func CSSMOID_X509V2CRLAllExtensionsCStruct() uintptr {
+	return _symbol("CSSMOID_X509V2CRLAllExtensionsCStruct")
+}
+
+// CSSMOID_X509V2CRLNumberOfExtensions returns the address of the symbol CSSMOID_X509V2CRLNumberOfExtensions.
+func CSSMOID_X509V2CRLNumberOfExtensions() uintptr {
+	return _symbol("CSSMOID_X509V2CRLNumberOfExtensions")
+}
+
+// CSSMOID_X509V2CRLSingleExtensionStruct returns the address of the symbol CSSMOID_X509V2CRLSingleExtensionStruct.
+func CSSMOID_X509V2CRLSingleExtensionStruct() uintptr {
+	return _symbol("CSSMOID_X509V2CRLSingleExtensionStruct")
+}
+
+// CSSMOID_X509V2CRLSingleExtensionCStruct returns the address of the symbol CSSMOID_X509V2CRLSingleExtensionCStruct.
+func CSSMOID_X509V2CRLSingleExtensionCStruct() uintptr {
+	return _symbol("CSSMOID_X509V2CRLSingleExtensionCStruct")
+}
+
+// CSSMOID_X509V2CRLExtensionId returns the address of the symbol CSSMOID_X509V2CRLExtensionId.
+func CSSMOID_X509V2CRLExtensionId() uintptr { return _symbol("CSSMOID_X509V2CRLExtensionId") }
+
+// CSSMOID_X509V2CRLExtensionCritical returns the address of the symbol CSSMOID_X509V2CRLExtensionCritical.
+func CSSMOID_X509V2CRLExtensionCritical() uintptr {
+	return _symbol("CSSMOID_X509V2CRLExtensionCritical")
+}
+
+// CSSMOID_X509V2CRLExtensionType returns the address of the symbol CSSMOID_X509V2CRLExtensionType.
+func CSSMOID_X509V2CRLExtensionType() uintptr { return _symbol("CSSMOID_X509V2CRLExtensionType") }
+
+// CSSMOID_PKIX_OCSP returns the address of the symbol CSSMOID_PKIX_OCSP.
+func CSSMOID_PKIX_OCSP() uintptr { return _symbol("CSSMOID_PKIX_OCSP") }
+
+// CSSMOID_PKIX_OCSP_BASIC returns the address of the symbol CSSMOID_PKIX_OCSP_BASIC.
+func CSSMOID_PKIX_OCSP_BASIC() uintptr { return _symbol("CSSMOID_PKIX_OCSP_BASIC") }
+
+// CSSMOID_PKIX_OCSP_NONCE returns the address of the symbol CSSMOID_PKIX_OCSP_NONCE.
+func CSSMOID_PKIX_OCSP_NONCE() uintptr { return _symbol("CSSMOID_PKIX_OCSP_NONCE") }
+
+// CSSMOID_PKIX_OCSP_CRL returns the address of the symbol CSSMOID_PKIX_OCSP_CRL.
+func CSSMOID_PKIX_OCSP_CRL() uintptr { return _symbol("CSSMOID_PKIX_OCSP_CRL") }
+
+// CSSMOID_PKIX_OCSP_RESPONSE returns the address of the symbol CSSMOID_PKIX_OCSP_RESPONSE.
+func CSSMOID_PKIX_OCSP_RESPONSE() uintptr { return _symbol("CSSMOID_PKIX_OCSP_RESPONSE") }
+
+// CSSMOID_PKIX_OCSP_NOCHECK returns the address of the symbol CSSMOID_PKIX_OCSP_NOCHECK.
+func CSSMOID_PKIX_OCSP_NOCHECK() uintptr { return _symbol("CSSMOID_PKIX_OCSP_NOCHECK") }
+
+// CSSMOID_PKIX_OCSP_ARCHIVE_CUTOFF returns the address of the symbol CSSMOID_PKIX_OCSP_ARCHIVE_CUTOFF.
+func CSSMOID_PKIX_OCSP_ARCHIVE_CUTOFF() uintptr { return _symbol("CSSMOID_PKIX_OCSP_ARCHIVE_CUTOFF") }
+
+// CSSMOID_PKIX_OCSP_SERVICE_LOCATOR returns the address of the symbol CSSMOID_PKIX_OCSP_SERVICE_LOCATOR.
+func CSSMOID_PKIX_OCSP_SERVICE_LOCATOR() uintptr { return _symbol("CSSMOID_PKIX_OCSP_SERVICE_LOCATOR") }
+
+// OidRsa returns the address of the symbol oidRsa.
+func OidRsa() uintptr { return _symbol("oidRsa") }
+
+// OidMd2Rsa returns the address of the symbol oidMd2Rsa.
+func OidMd2Rsa() uintptr { return _symbol("oidMd2Rsa") }
+
+// OidMd4Rsa returns the address of the symbol oidMd4Rsa.
+func OidMd4Rsa() uintptr { return _symbol("oidMd4Rsa") }
+
+// OidMd5Rsa returns the address of the symbol oidMd5Rsa.
+func OidMd5Rsa() uintptr { return _symbol("oidMd5Rsa") }
+
+// OidSha1Rsa returns the address of the symbol oidSha1Rsa.
+func OidSha1Rsa() uintptr { return _symbol("oidSha1Rsa") }
+
+// OidSha256Rsa returns the address of the symbol oidSha256Rsa.
+func OidSha256Rsa() uintptr { return _symbol("oidSha256Rsa") }
+
+// OidSha384Rsa returns the address of the symbol oidSha384Rsa.
+func OidSha384Rsa() uintptr { return _symbol("oidSha384Rsa") }
+
+// OidSha512Rsa returns the address of the symbol oidSha512Rsa.
+func OidSha512Rsa() uintptr { return _symbol("oidSha512Rsa") }
+
+// OidSha224Rsa returns the address of the symbol oidSha224Rsa.
+func OidSha224Rsa() uintptr { return _symbol("oidSha224Rsa") }
+
+// OidEcPubKey returns the address of the symbol oidEcPubKey.
+func OidEcPubKey() uintptr { return _symbol("oidEcPubKey") }
+
+// OidSha1Ecdsa returns the address of the symbol oidSha1Ecdsa.
+func OidSha1Ecdsa() uintptr { return _symbol("oidSha1Ecdsa") }
+
+// OidSha224Ecdsa returns the address of the symbol oidSha224Ecdsa.
+func OidSha224Ecdsa() uintptr { return _symbol("oidSha224Ecdsa") }
+
+// OidSha256Ecdsa returns the address of the symbol oidSha256Ecdsa.
+func OidSha256Ecdsa() uintptr { return _symbol("oidSha256Ecdsa") }
+
+// OidSha384Ecdsa returns the address of the symbol oidSha384Ecdsa.
+func OidSha384Ecdsa() uintptr { return _symbol("oidSha384Ecdsa") }
+
+// OidSha512Ecdsa returns the address of the symbol oidSha512Ecdsa.
+func OidSha512Ecdsa() uintptr { return _symbol("oidSha512Ecdsa") }
+
+// OidSha1Dsa returns the address of the symbol oidSha1Dsa.
+func OidSha1Dsa() uintptr { return _symbol("oidSha1Dsa") }
+
+// OidMd2 returns the address of the symbol oidMd2.
+func OidMd2() uintptr { return _symbol("oidMd2") }
+
+// OidMd4 returns the address of the symbol oidMd4.
+func OidMd4() uintptr { return _symbol("oidMd4") }
+
+// OidMd5 returns the address of the symbol oidMd5.
+func OidMd5() uintptr { return _symbol("oidMd5") }
+
+// OidSha1 returns the address of the symbol oidSha1.
+func OidSha1() uintptr { return _symbol("oidSha1") }
+
+// OidSha1DsaOIW returns the address of the symbol oidSha1DsaOIW.
+func OidSha1DsaOIW() uintptr { return _symbol("oidSha1DsaOIW") }
+
+// OidSha1DsaCommonOIW returns the address of the symbol oidSha1DsaCommonOIW.
+func OidSha1DsaCommonOIW() uintptr { return _symbol("oidSha1DsaCommonOIW") }
+
+// OidSha1RsaOIW returns the address of the symbol oidSha1RsaOIW.
+func OidSha1RsaOIW() uintptr { return _symbol("oidSha1RsaOIW") }
+
+// OidSha256 returns the address of the symbol oidSha256.
+func OidSha256() uintptr { return _symbol("oidSha256") }
+
+// OidSha384 returns the address of the symbol oidSha384.
+func OidSha384() uintptr { return _symbol("oidSha384") }
+
+// OidSha512 returns the address of the symbol oidSha512.
+func OidSha512() uintptr { return _symbol("oidSha512") }
+
+// OidSha224 returns the address of the symbol oidSha224.
+func OidSha224() uintptr { return _symbol("oidSha224") }
+
+// OidFee returns the address of the symbol oidFee.
+func OidFee() uintptr { return _symbol("oidFee") }
+
+// OidMd5Fee returns the address of the symbol oidMd5Fee.
+func OidMd5Fee() uintptr { return _symbol("oidMd5Fee") }
+
+// OidSha1Fee returns the address of the symbol oidSha1Fee.
+func OidSha1Fee() uintptr { return _symbol("oidSha1Fee") }
+
+// OidEcPrime192v1 returns the address of the symbol oidEcPrime192v1.
+func OidEcPrime192v1() uintptr { return _symbol("oidEcPrime192v1") }
+
+// OidEcPrime256v1 returns the address of the symbol oidEcPrime256v1.
+func OidEcPrime256v1() uintptr { return _symbol("oidEcPrime256v1") }
+
+// OidAnsip384r1 returns the address of the symbol oidAnsip384r1.
+func OidAnsip384r1() uintptr { return _symbol("oidAnsip384r1") }
+
+// OidAnsip521r1 returns the address of the symbol oidAnsip521r1.
+func OidAnsip521r1() uintptr { return _symbol("oidAnsip521r1") }
+
+// OidSubjectKeyIdentifier returns the address of the symbol oidSubjectKeyIdentifier.
+func OidSubjectKeyIdentifier() uintptr { return _symbol("oidSubjectKeyIdentifier") }
+
+// OidKeyUsage returns the address of the symbol oidKeyUsage.
+func OidKeyUsage() uintptr { return _symbol("oidKeyUsage") }
+
+// OidPrivateKeyUsagePeriod returns the address of the symbol oidPrivateKeyUsagePeriod.
+func OidPrivateKeyUsagePeriod() uintptr { return _symbol("oidPrivateKeyUsagePeriod") }
+
+// OidSubjectAltName returns the address of the symbol oidSubjectAltName.
+func OidSubjectAltName() uintptr { return _symbol("oidSubjectAltName") }
+
+// OidIssuerAltName returns the address of the symbol oidIssuerAltName.
+func OidIssuerAltName() uintptr { return _symbol("oidIssuerAltName") }
+
+// OidBasicConstraints returns the address of the symbol oidBasicConstraints.
+func OidBasicConstraints() uintptr { return _symbol("oidBasicConstraints") }
+
+// OidNameConstraints returns the address of the symbol oidNameConstraints.
+func OidNameConstraints() uintptr { return _symbol("oidNameConstraints") }
+
+// OidCrlDistributionPoints returns the address of the symbol oidCrlDistributionPoints.
+func OidCrlDistributionPoints() uintptr { return _symbol("oidCrlDistributionPoints") }
+
+// OidCertificatePolicies returns the address of the symbol oidCertificatePolicies.
+func OidCertificatePolicies() uintptr { return _symbol("oidCertificatePolicies") }
+
+// OidAnyPolicy returns the address of the symbol oidAnyPolicy.
+func OidAnyPolicy() uintptr { return _symbol("oidAnyPolicy") }
+
+// OidPolicyMappings returns the address of the symbol oidPolicyMappings.
+func OidPolicyMappings() uintptr { return _symbol("oidPolicyMappings") }
+
+// OidAuthorityKeyIdentifier returns the address of the symbol oidAuthorityKeyIdentifier.
+func OidAuthorityKeyIdentifier() uintptr { return _symbol("oidAuthorityKeyIdentifier") }
+
+// OidPolicyConstraints returns the address of the symbol oidPolicyConstraints.
+func OidPolicyConstraints() uintptr { return _symbol("oidPolicyConstraints") }
+
+// OidExtendedKeyUsage returns the address of the symbol oidExtendedKeyUsage.
+func OidExtendedKeyUsage() uintptr { return _symbol("oidExtendedKeyUsage") }
+
+// OidAnyExtendedKeyUsage returns the address of the symbol oidAnyExtendedKeyUsage.
+func OidAnyExtendedKeyUsage() uintptr { return _symbol("oidAnyExtendedKeyUsage") }
+
+// OidInhibitAnyPolicy returns the address of the symbol oidInhibitAnyPolicy.
+func OidInhibitAnyPolicy() uintptr { return _symbol("oidInhibitAnyPolicy") }
+
+// OidAuthorityInfoAccess returns the address of the symbol oidAuthorityInfoAccess.
+func OidAuthorityInfoAccess() uintptr { return _symbol("oidAuthorityInfoAccess") }
+
+// OidSubjectInfoAccess returns the address of the symbol oidSubjectInfoAccess.
+func OidSubjectInfoAccess() uintptr { return _symbol("oidSubjectInfoAccess") }
+
+// OidAdOCSP returns the address of the symbol oidAdOCSP.
+func OidAdOCSP() uintptr { return _symbol("oidAdOCSP") }
+
+// OidAdCAIssuer returns the address of the symbol oidAdCAIssuer.
+func OidAdCAIssuer() uintptr { return _symbol("oidAdCAIssuer") }
+
+// OidNetscapeCertType returns the address of the symbol oidNetscapeCertType.
+func OidNetscapeCertType() uintptr { return _symbol("oidNetscapeCertType") }
+
+// OidEntrustVersInfo returns the address of the symbol oidEntrustVersInfo.
+func OidEntrustVersInfo() uintptr { return _symbol("oidEntrustVersInfo") }
+
+// OidMSNTPrincipalName returns the address of the symbol oidMSNTPrincipalName.
+func OidMSNTPrincipalName() uintptr { return _symbol("oidMSNTPrincipalName") }
+
+// OidQtCps returns the address of the symbol oidQtCps.
+func OidQtCps() uintptr { return _symbol("oidQtCps") }
+
+// OidQtUNotice returns the address of the symbol oidQtUNotice.
+func OidQtUNotice() uintptr { return _symbol("oidQtUNotice") }
+
+// OidCommonName returns the address of the symbol oidCommonName.
+func OidCommonName() uintptr { return _symbol("oidCommonName") }
+
+// OidCountryName returns the address of the symbol oidCountryName.
+func OidCountryName() uintptr { return _symbol("oidCountryName") }
+
+// OidLocalityName returns the address of the symbol oidLocalityName.
+func OidLocalityName() uintptr { return _symbol("oidLocalityName") }
+
+// OidStateOrProvinceName returns the address of the symbol oidStateOrProvinceName.
+func OidStateOrProvinceName() uintptr { return _symbol("oidStateOrProvinceName") }
+
+// OidOrganizationName returns the address of the symbol oidOrganizationName.
+func OidOrganizationName() uintptr { return _symbol("oidOrganizationName") }
+
+// OidOrganizationalUnitName returns the address of the symbol oidOrganizationalUnitName.
+func OidOrganizationalUnitName() uintptr { return _symbol("oidOrganizationalUnitName") }
+
+// OidDescription returns the address of the symbol oidDescription.
+func OidDescription() uintptr { return _symbol("oidDescription") }
+
+// OidEmailAddress returns the address of the symbol oidEmailAddress.
+func OidEmailAddress() uintptr { return _symbol("oidEmailAddress") }
+
+// OidFriendlyName returns the address of the symbol oidFriendlyName.
+func OidFriendlyName() uintptr { return _symbol("oidFriendlyName") }
+
+// OidLocalKeyId returns the address of the symbol oidLocalKeyId.
+func OidLocalKeyId() uintptr { return _symbol("oidLocalKeyId") }
+
+// OidExtendedKeyUsageServerAuth returns the address of the symbol oidExtendedKeyUsageServerAuth.
+func OidExtendedKeyUsageServerAuth() uintptr { return _symbol("oidExtendedKeyUsageServerAuth") }
+
+// OidExtendedKeyUsageClientAuth returns the address of the symbol oidExtendedKeyUsageClientAuth.
+func OidExtendedKeyUsageClientAuth() uintptr { return _symbol("oidExtendedKeyUsageClientAuth") }
+
+// OidExtendedKeyUsageCodeSigning returns the address of the symbol oidExtendedKeyUsageCodeSigning.
+func OidExtendedKeyUsageCodeSigning() uintptr { return _symbol("oidExtendedKeyUsageCodeSigning") }
+
+// OidExtendedKeyUsageEmailProtection returns the address of the symbol oidExtendedKeyUsageEmailProtection.
+func OidExtendedKeyUsageEmailProtection() uintptr {
+	return _symbol("oidExtendedKeyUsageEmailProtection")
+}
+
+// OidExtendedKeyUsageTimeStamping returns the address of the symbol oidExtendedKeyUsageTimeStamping.
+func OidExtendedKeyUsageTimeStamping() uintptr { return _symbol("oidExtendedKeyUsageTimeStamping") }
+
+// OidExtendedKeyUsageOCSPSigning returns the address of the symbol oidExtendedKeyUsageOCSPSigning.
+func OidExtendedKeyUsageOCSPSigning() uintptr { return _symbol("oidExtendedKeyUsageOCSPSigning") }
+
+// OidExtendedKeyUsageIPSec returns the address of the symbol oidExtendedKeyUsageIPSec.
+func OidExtendedKeyUsageIPSec() uintptr { return _symbol("oidExtendedKeyUsageIPSec") }
+
+// OidExtendedKeyUsageMicrosoftSGC returns the address of the symbol oidExtendedKeyUsageMicrosoftSGC.
+func OidExtendedKeyUsageMicrosoftSGC() uintptr { return _symbol("oidExtendedKeyUsageMicrosoftSGC") }
+
+// OidExtendedKeyUsageNetscapeSGC returns the address of the symbol oidExtendedKeyUsageNetscapeSGC.
+func OidExtendedKeyUsageNetscapeSGC() uintptr { return _symbol("oidExtendedKeyUsageNetscapeSGC") }
+
+// OidGoogleEmbeddedSignedCertificateTimestamp returns the address of the symbol oidGoogleEmbeddedSignedCertificateTimestamp.
+func OidGoogleEmbeddedSignedCertificateTimestamp() uintptr {
+	return _symbol("oidGoogleEmbeddedSignedCertificateTimestamp")
+}
+
+// OidGoogleOCSPSignedCertificateTimestamp returns the address of the symbol oidGoogleOCSPSignedCertificateTimestamp.
+func OidGoogleOCSPSignedCertificateTimestamp() uintptr {
+	return _symbol("oidGoogleOCSPSignedCertificateTimestamp")
+}

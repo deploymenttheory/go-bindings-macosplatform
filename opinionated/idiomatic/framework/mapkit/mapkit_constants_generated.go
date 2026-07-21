@@ -451,3 +451,20 @@ func MKMapViewDefaultAnnotationViewReuseIdentifier() obj.Object {
 func MKMapViewDefaultClusterAnnotationViewReuseIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MKMapViewDefaultClusterAnnotationViewReuseIdentifier")))
 }
+
+// MKMapSizeWorld returns the address of the symbol MKMapSizeWorld.
+func MKMapSizeWorld() uintptr { return _symbol("MKMapSizeWorld") }
+
+// MKMapRectWorld returns the address of the symbol MKMapRectWorld.
+func MKMapRectWorld() uintptr { return _symbol("MKMapRectWorld") }
+
+// MKMapRectNull returns the address of the symbol MKMapRectNull.
+func MKMapRectNull() uintptr { return _symbol("MKMapRectNull") }
+
+// MKPointsOfInterestRequestMaxRadius returns the address of the symbol MKPointsOfInterestRequestMaxRadius.
+func MKPointsOfInterestRequestMaxRadius() uintptr {
+	return _symbol("MKPointsOfInterestRequestMaxRadius")
+}
+
+// MKMapCameraZoomDefault returns the address of the symbol MKMapCameraZoomDefault.
+func MKMapCameraZoomDefault() uintptr { return _symbol("MKMapCameraZoomDefault") }

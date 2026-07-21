@@ -5,6 +5,8 @@
 package corespotlight
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -50,4 +52,24 @@ func CSSearchQueryString() obj.Object {
 // CSIndexErrorDomain returns the string constant CSIndexErrorDomain, for use as a dictionary key or argument.
 func CSIndexErrorDomain() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("CSIndexErrorDomain")))
+}
+
+// CoreSpotlightVersionNumber returns the value of the constant CoreSpotlightVersionNumber.
+func CoreSpotlightVersionNumber() float64 {
+	addr := _symbol("CoreSpotlightVersionNumber")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// CoreSpotlightVersionString returns the address of the symbol CoreSpotlightVersionString.
+func CoreSpotlightVersionString() uintptr { return _symbol("CoreSpotlightVersionString") }
+
+// CSSearchQueryErrorDomain returns the address of the symbol CSSearchQueryErrorDomain.
+func CSSearchQueryErrorDomain() uintptr { return _symbol("CSSearchQueryErrorDomain") }
+
+// CSSuggestionHighlightAttributeName returns the address of the symbol CSSuggestionHighlightAttributeName.
+func CSSuggestionHighlightAttributeName() uintptr {
+	return _symbol("CSSuggestionHighlightAttributeName")
 }

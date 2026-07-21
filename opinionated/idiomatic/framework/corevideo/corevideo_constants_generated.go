@@ -873,3 +873,9 @@ func KCVPixelFormatOpenGLCompatibility() obj.Object {
 func KCVPixelFormatFillExtendedPixelsCallback() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatFillExtendedPixelsCallback")))
 }
+
+// KCVZeroTime returns the address of the symbol kCVZeroTime.
+func KCVZeroTime() uintptr { return _symbol("kCVZeroTime") }
+
+// KCVIndefiniteTime returns the address of the symbol kCVIndefiniteTime.
+func KCVIndefiniteTime() uintptr { return _symbol("kCVIndefiniteTime") }

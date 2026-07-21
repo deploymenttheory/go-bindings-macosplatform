@@ -51,3 +51,12 @@ func GLKTextureLoaderErrorKey() obj.Object {
 func GLKTextureLoaderGLErrorKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("GLKTextureLoaderGLErrorKey")))
 }
+
+// GLKQuaternionIdentity returns the address of the symbol GLKQuaternionIdentity.
+func GLKQuaternionIdentity() uintptr { return _symbol("GLKQuaternionIdentity") }
+
+// GLKMatrix3Identity returns the address of the symbol GLKMatrix3Identity.
+func GLKMatrix3Identity() uintptr { return _symbol("GLKMatrix3Identity") }
+
+// GLKMatrix4Identity returns the address of the symbol GLKMatrix4Identity.
+func GLKMatrix4Identity() uintptr { return _symbol("GLKMatrix4Identity") }

@@ -53,6 +53,16 @@ func Structs(structs []view.Struct) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
+// Protocols renders ObjC protocols as Go interfaces for a package as a Go source
+// fragment (a package body, before file assembly and gofmt).
+func Protocols(protocols []view.Protocol) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "protocols", protocols); err != nil {
+		return nil, fmt.Errorf("render protocols: %w", err)
+	}
+	return buf.Bytes(), nil
+}
+
 // AnonConsts renders anonymous-enum members as one untyped const block (e.g.
 // `const ( KAEISHandleCGI = 1935961955 )`), matching the raw layer's treatment of
 // enums the C headers declare without a tag name.

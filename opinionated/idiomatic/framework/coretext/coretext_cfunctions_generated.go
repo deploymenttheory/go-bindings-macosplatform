@@ -1099,6 +1099,17 @@ func CTFontHasTable(font obj.Object, tag int) bool {
 	return _fnCTFontHasTable(objref.IDOf(font), tag)
 }
 
+var _fnCTFontManagerCompareFontFamilyNames func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// CTFontManagerCompareFontFamilyNames calls the CoreText framework function CTFontManagerCompareFontFamilyNames.
+func CTFontManagerCompareFontFamilyNames(family1 unsafe.Pointer, family2 unsafe.Pointer, context_ unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTFontManagerCompareFontFamilyNames == nil {
+		ebipurego.RegisterLibFunc(&_fnCTFontManagerCompareFontFamilyNames, _lib, "CTFontManagerCompareFontFamilyNames")
+	}
+	return _fnCTFontManagerCompareFontFamilyNames(family1, family2, context_)
+}
+
 var _fnCTFontManagerCopyAvailableFontFamilyNames func() objc.ID
 
 // CTFontManagerCopyAvailableFontFamilyNames calls the CoreText framework function CTFontManagerCopyAvailableFontFamilyNames.
@@ -1904,6 +1915,17 @@ func CTRunDelegateCreate(callbacks unsafe.Pointer, refCon unsafe.Pointer) obj.Ob
 	return obj.Wrap(_ret)
 }
 
+var _fnCTRunDelegateGetRefCon func(objc.ID) unsafe.Pointer
+
+// CTRunDelegateGetRefCon calls the CoreText framework function CTRunDelegateGetRefCon.
+func CTRunDelegateGetRefCon(runDelegate obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTRunDelegateGetRefCon == nil {
+		ebipurego.RegisterLibFunc(&_fnCTRunDelegateGetRefCon, _lib, "CTRunDelegateGetRefCon")
+	}
+	return _fnCTRunDelegateGetRefCon(objref.IDOf(runDelegate))
+}
+
 var _fnCTRunDelegateGetTypeID func() int
 
 // CTRunDelegateGetTypeID calls the CoreText framework function CTRunDelegateGetTypeID.
@@ -1935,6 +1957,17 @@ func CTRunGetAdvances(run obj.Object, range_ corefoundation.CFRange, buffer unsa
 		ebipurego.RegisterLibFunc(&_fnCTRunGetAdvances, _lib, "CTRunGetAdvances")
 	}
 	_fnCTRunGetAdvances(objref.IDOf(run), range_, buffer)
+}
+
+var _fnCTRunGetAdvancesPtr func(objc.ID) unsafe.Pointer
+
+// CTRunGetAdvancesPtr calls the CoreText framework function CTRunGetAdvancesPtr.
+func CTRunGetAdvancesPtr(run obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTRunGetAdvancesPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnCTRunGetAdvancesPtr, _lib, "CTRunGetAdvancesPtr")
+	}
+	return _fnCTRunGetAdvancesPtr(objref.IDOf(run))
 }
 
 var _fnCTRunGetAttributes func(objc.ID) objc.ID
@@ -1984,6 +2017,17 @@ func CTRunGetGlyphs(run obj.Object, range_ corefoundation.CFRange) (buffer uint1
 	return _out0
 }
 
+var _fnCTRunGetGlyphsPtr func(objc.ID) unsafe.Pointer
+
+// CTRunGetGlyphsPtr calls the CoreText framework function CTRunGetGlyphsPtr.
+func CTRunGetGlyphsPtr(run obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTRunGetGlyphsPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnCTRunGetGlyphsPtr, _lib, "CTRunGetGlyphsPtr")
+	}
+	return _fnCTRunGetGlyphsPtr(objref.IDOf(run))
+}
+
 var _fnCTRunGetImageBounds func(objc.ID, objc.ID, corefoundation.CFRange) corefoundation.CGRect
 
 // CTRunGetImageBounds calls the CoreText framework function CTRunGetImageBounds.
@@ -2004,6 +2048,17 @@ func CTRunGetPositions(run obj.Object, range_ corefoundation.CFRange, buffer uns
 		ebipurego.RegisterLibFunc(&_fnCTRunGetPositions, _lib, "CTRunGetPositions")
 	}
 	_fnCTRunGetPositions(objref.IDOf(run), range_, buffer)
+}
+
+var _fnCTRunGetPositionsPtr func(objc.ID) unsafe.Pointer
+
+// CTRunGetPositionsPtr calls the CoreText framework function CTRunGetPositionsPtr.
+func CTRunGetPositionsPtr(run obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTRunGetPositionsPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnCTRunGetPositionsPtr, _lib, "CTRunGetPositionsPtr")
+	}
+	return _fnCTRunGetPositionsPtr(objref.IDOf(run))
 }
 
 var _fnCTRunGetStatus func(objc.ID) CTRunStatus
@@ -2028,6 +2083,17 @@ func CTRunGetStringIndices(run obj.Object, range_ corefoundation.CFRange) (buffe
 	var _out0 int
 	_fnCTRunGetStringIndices(objref.IDOf(run), range_, unsafe.Pointer(&_out0))
 	return _out0
+}
+
+var _fnCTRunGetStringIndicesPtr func(objc.ID) unsafe.Pointer
+
+// CTRunGetStringIndicesPtr calls the CoreText framework function CTRunGetStringIndicesPtr.
+func CTRunGetStringIndicesPtr(run obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCTRunGetStringIndicesPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnCTRunGetStringIndicesPtr, _lib, "CTRunGetStringIndicesPtr")
+	}
+	return _fnCTRunGetStringIndicesPtr(objref.IDOf(run))
 }
 
 var _fnCTRunGetStringRange func(objc.ID) corefoundation.CFRange

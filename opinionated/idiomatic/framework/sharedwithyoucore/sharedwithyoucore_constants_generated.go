@@ -5,6 +5,8 @@
 package sharedwithyoucore
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -13,3 +15,15 @@ import (
 func UTCollaborationOptionsTypeIdentifier() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("UTCollaborationOptionsTypeIdentifier")))
 }
+
+// SharedWithYouCoreVersionNumber returns the value of the constant SharedWithYouCoreVersionNumber.
+func SharedWithYouCoreVersionNumber() float64 {
+	addr := _symbol("SharedWithYouCoreVersionNumber")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// SharedWithYouCoreVersionString returns the address of the symbol SharedWithYouCoreVersionString.
+func SharedWithYouCoreVersionString() uintptr { return _symbol("SharedWithYouCoreVersionString") }

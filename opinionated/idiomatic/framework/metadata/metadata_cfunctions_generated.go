@@ -387,6 +387,28 @@ func MDQueryExecute(query obj.Object, optionFlags int) uint8 {
 	return _fnMDQueryExecute(objref.IDOf(query), optionFlags)
 }
 
+var _fnMDQueryGetAttributeValueOfResultAtIndex func(objc.ID, objc.ID, int) unsafe.Pointer
+
+// MDQueryGetAttributeValueOfResultAtIndex calls the Metadata framework function MDQueryGetAttributeValueOfResultAtIndex.
+func MDQueryGetAttributeValueOfResultAtIndex(query obj.Object, name obj.Object, idx int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryGetAttributeValueOfResultAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryGetAttributeValueOfResultAtIndex, _lib, "MDQueryGetAttributeValueOfResultAtIndex")
+	}
+	return _fnMDQueryGetAttributeValueOfResultAtIndex(objref.IDOf(query), objref.IDOf(name), idx)
+}
+
+var _fnMDQueryGetBatchingParameters func(objc.ID) unsafe.Pointer
+
+// MDQueryGetBatchingParameters calls the Metadata framework function MDQueryGetBatchingParameters.
+func MDQueryGetBatchingParameters(query obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryGetBatchingParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryGetBatchingParameters, _lib, "MDQueryGetBatchingParameters")
+	}
+	return _fnMDQueryGetBatchingParameters(objref.IDOf(query))
+}
+
 var _fnMDQueryGetCountOfResultsWithAttributeValue func(objc.ID, objc.ID, objc.ID) int
 
 // MDQueryGetCountOfResultsWithAttributeValue calls the Metadata framework function MDQueryGetCountOfResultsWithAttributeValue.
@@ -407,6 +429,17 @@ func MDQueryGetIndexOfResult(query obj.Object, result unsafe.Pointer) int {
 		ebipurego.RegisterLibFunc(&_fnMDQueryGetIndexOfResult, _lib, "MDQueryGetIndexOfResult")
 	}
 	return _fnMDQueryGetIndexOfResult(objref.IDOf(query), result)
+}
+
+var _fnMDQueryGetResultAtIndex func(objc.ID, int) unsafe.Pointer
+
+// MDQueryGetResultAtIndex calls the Metadata framework function MDQueryGetResultAtIndex.
+func MDQueryGetResultAtIndex(query obj.Object, idx int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDQueryGetResultAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnMDQueryGetResultAtIndex, _lib, "MDQueryGetResultAtIndex")
+	}
+	return _fnMDQueryGetResultAtIndex(objref.IDOf(query), idx)
 }
 
 var _fnMDQueryGetResultCount func(objc.ID) int

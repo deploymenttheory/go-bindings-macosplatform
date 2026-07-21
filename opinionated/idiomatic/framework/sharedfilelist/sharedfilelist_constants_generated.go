@@ -73,3 +73,9 @@ func KLSSharedFileListItemHidden() obj.Object {
 func KLSSharedFileListLoginItemHidden() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kLSSharedFileListLoginItemHidden")))
 }
+
+// KLSSharedFileListItemBeforeFirst returns the address of the symbol kLSSharedFileListItemBeforeFirst.
+func KLSSharedFileListItemBeforeFirst() uintptr { return _symbol("kLSSharedFileListItemBeforeFirst") }
+
+// KLSSharedFileListItemLast returns the address of the symbol kLSSharedFileListItemLast.
+func KLSSharedFileListItemLast() uintptr { return _symbol("kLSSharedFileListItemLast") }

@@ -389,3 +389,33 @@ func KTISNotifyEnabledKeyboardInputSourcesChanged() obj.Object {
 func IMKTextOrientationName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("IMKTextOrientationName")))
 }
+
+// KHIViewMenuContentID returns the address of the symbol kHIViewMenuContentID.
+func KHIViewMenuContentID() uintptr { return _symbol("kHIViewMenuContentID") }
+
+// KHIViewWindowContentID returns the address of the symbol kHIViewWindowContentID.
+func KHIViewWindowContentID() uintptr { return _symbol("kHIViewWindowContentID") }
+
+// KHIViewWindowCloseBoxID returns the address of the symbol kHIViewWindowCloseBoxID.
+func KHIViewWindowCloseBoxID() uintptr { return _symbol("kHIViewWindowCloseBoxID") }
+
+// KHIViewWindowCollapseBoxID returns the address of the symbol kHIViewWindowCollapseBoxID.
+func KHIViewWindowCollapseBoxID() uintptr { return _symbol("kHIViewWindowCollapseBoxID") }
+
+// KHIViewWindowZoomBoxID returns the address of the symbol kHIViewWindowZoomBoxID.
+func KHIViewWindowZoomBoxID() uintptr { return _symbol("kHIViewWindowZoomBoxID") }
+
+// KHIViewWindowToolbarButtonID returns the address of the symbol kHIViewWindowToolbarButtonID.
+func KHIViewWindowToolbarButtonID() uintptr { return _symbol("kHIViewWindowToolbarButtonID") }
+
+// KHIViewWindowTitleID returns the address of the symbol kHIViewWindowTitleID.
+func KHIViewWindowTitleID() uintptr { return _symbol("kHIViewWindowTitleID") }
+
+// KHIViewWindowToolbarID returns the address of the symbol kHIViewWindowToolbarID.
+func KHIViewWindowToolbarID() uintptr { return _symbol("kHIViewWindowToolbarID") }
+
+// KHIViewWindowGrowBoxID returns the address of the symbol kHIViewWindowGrowBoxID.
+func KHIViewWindowGrowBoxID() uintptr { return _symbol("kHIViewWindowGrowBoxID") }
+
+// KHIToolboxVersionNumber returns the address of the symbol kHIToolboxVersionNumber.
+func KHIToolboxVersionNumber() uintptr { return _symbol("kHIToolboxVersionNumber") }

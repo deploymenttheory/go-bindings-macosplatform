@@ -1571,3 +1571,41 @@ func KVTMotionEstimationSessionCreationOption_UseMultiPassSearch() obj.Object {
 func KVTMotionEstimationSessionCreationOption_Label() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kVTMotionEstimationSessionCreationOption_Label")))
 }
+
+// KVTExtensionProperties_ExtensionIdentifierKey returns the address of the symbol kVTExtensionProperties_ExtensionIdentifierKey.
+func KVTExtensionProperties_ExtensionIdentifierKey() uintptr {
+	return _symbol("kVTExtensionProperties_ExtensionIdentifierKey")
+}
+
+// KVTExtensionProperties_ExtensionNameKey returns the address of the symbol kVTExtensionProperties_ExtensionNameKey.
+func KVTExtensionProperties_ExtensionNameKey() uintptr {
+	return _symbol("kVTExtensionProperties_ExtensionNameKey")
+}
+
+// KVTExtensionProperties_ContainingBundleNameKey returns the address of the symbol kVTExtensionProperties_ContainingBundleNameKey.
+func KVTExtensionProperties_ContainingBundleNameKey() uintptr {
+	return _symbol("kVTExtensionProperties_ContainingBundleNameKey")
+}
+
+// KVTExtensionProperties_ExtensionURLKey returns the address of the symbol kVTExtensionProperties_ExtensionURLKey.
+func KVTExtensionProperties_ExtensionURLKey() uintptr {
+	return _symbol("kVTExtensionProperties_ExtensionURLKey")
+}
+
+// KVTExtensionProperties_ContainingBundleURLKey returns the address of the symbol kVTExtensionProperties_ContainingBundleURLKey.
+func KVTExtensionProperties_ContainingBundleURLKey() uintptr {
+	return _symbol("kVTExtensionProperties_ContainingBundleURLKey")
+}
+
+// KVTExtensionProperties_CodecNameKey returns the address of the symbol kVTExtensionProperties_CodecNameKey.
+func KVTExtensionProperties_CodecNameKey() uintptr {
+	return _symbol("kVTExtensionProperties_CodecNameKey")
+}
+
+// KVTHDRPerFrameMetadataGenerationHDRFormatType_DolbyVision returns the address of the symbol kVTHDRPerFrameMetadataGenerationHDRFormatType_DolbyVision.
+func KVTHDRPerFrameMetadataGenerationHDRFormatType_DolbyVision() uintptr {
+	return _symbol("kVTHDRPerFrameMetadataGenerationHDRFormatType_DolbyVision")
+}
+
+// VTFrameProcessorErrorDomain returns the address of the symbol VTFrameProcessorErrorDomain.
+func VTFrameProcessorErrorDomain() uintptr { return _symbol("VTFrameProcessorErrorDomain") }

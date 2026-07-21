@@ -5,7 +5,10 @@
 package healthkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
@@ -2023,4 +2026,13 @@ func HKPredicateKeyPathWorkoutActivityMaximumQuantity() obj.Object {
 // HKPredicateKeyPathWorkoutActivityAverageQuantity returns the string constant HKPredicateKeyPathWorkoutActivityAverageQuantity, for use as a dictionary key or argument.
 func HKPredicateKeyPathWorkoutActivityAverageQuantity() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("HKPredicateKeyPathWorkoutActivityAverageQuantity")))
+}
+
+// HKSourceRevisionAnyOperatingSystem returns the value of the constant HKSourceRevisionAnyOperatingSystem.
+func HKSourceRevisionAnyOperatingSystem() foundation.NSOperatingSystemVersion {
+	addr := _symbol("HKSourceRevisionAnyOperatingSystem")
+	if addr == 0 {
+		return foundation.NSOperatingSystemVersion{}
+	}
+	return *(*foundation.NSOperatingSystemVersion)(unsafe.Pointer(addr))
 }

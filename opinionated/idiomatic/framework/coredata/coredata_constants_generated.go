@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -436,4 +438,37 @@ func NSPersistentCloudKitContainerEventUserInfoKey() obj.Object {
 // NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification returns the string constant NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification, for use as a dictionary key or argument.
 func NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("NSCoreDataCoreSpotlightDelegateIndexDidUpdateNotification")))
+}
+
+// NSCoreDataVersionNumber returns the value of the constant NSCoreDataVersionNumber.
+func NSCoreDataVersionNumber() float64 {
+	addr := _symbol("NSCoreDataVersionNumber")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// NSErrorMergePolicy returns the address of the symbol NSErrorMergePolicy.
+func NSErrorMergePolicy() uintptr { return _symbol("NSErrorMergePolicy") }
+
+// NSMergeByPropertyStoreTrumpMergePolicy returns the address of the symbol NSMergeByPropertyStoreTrumpMergePolicy.
+func NSMergeByPropertyStoreTrumpMergePolicy() uintptr {
+	return _symbol("NSMergeByPropertyStoreTrumpMergePolicy")
+}
+
+// NSMergeByPropertyObjectTrumpMergePolicy returns the address of the symbol NSMergeByPropertyObjectTrumpMergePolicy.
+func NSMergeByPropertyObjectTrumpMergePolicy() uintptr {
+	return _symbol("NSMergeByPropertyObjectTrumpMergePolicy")
+}
+
+// NSOverwriteMergePolicy returns the address of the symbol NSOverwriteMergePolicy.
+func NSOverwriteMergePolicy() uintptr { return _symbol("NSOverwriteMergePolicy") }
+
+// NSRollbackMergePolicy returns the address of the symbol NSRollbackMergePolicy.
+func NSRollbackMergePolicy() uintptr { return _symbol("NSRollbackMergePolicy") }
+
+// NSPersistentCloudKitContainerEventChangedNotification returns the address of the symbol NSPersistentCloudKitContainerEventChangedNotification.
+func NSPersistentCloudKitContainerEventChangedNotification() uintptr {
+	return _symbol("NSPersistentCloudKitContainerEventChangedNotification")
 }

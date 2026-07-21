@@ -38,3 +38,8 @@ func MAMediaCharacteristicDescribesVideoForAccessibility() obj.Object {
 func KMADimFlashingLightsChangedNotification() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kMADimFlashingLightsChangedNotification")))
 }
+
+// MAMusicHapticsManagerActiveStatusDidChangeNotification returns the address of the symbol MAMusicHapticsManagerActiveStatusDidChangeNotification.
+func MAMusicHapticsManagerActiveStatusDidChangeNotification() uintptr {
+	return _symbol("MAMusicHapticsManagerActiveStatusDidChangeNotification")
+}

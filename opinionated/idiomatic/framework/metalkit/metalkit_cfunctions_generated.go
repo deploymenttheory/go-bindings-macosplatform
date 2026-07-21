@@ -37,6 +37,17 @@ func MTKMetalVertexDescriptorFromModelIOWithError(modelIODescriptor obj.Object, 
 	return obj.Wrap(_ret)
 }
 
+var _fnMTKMetalVertexFormatFromModelIO func(unsafe.Pointer) unsafe.Pointer
+
+// MTKMetalVertexFormatFromModelIO calls the MetalKit framework function MTKMetalVertexFormatFromModelIO.
+func MTKMetalVertexFormatFromModelIO(vertexFormat unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTKMetalVertexFormatFromModelIO == nil {
+		ebipurego.RegisterLibFunc(&_fnMTKMetalVertexFormatFromModelIO, _lib, "MTKMetalVertexFormatFromModelIO")
+	}
+	return _fnMTKMetalVertexFormatFromModelIO(vertexFormat)
+}
+
 var _fnMTKModelIOVertexDescriptorFromMetal func(objc.ID) objc.ID
 
 // MTKModelIOVertexDescriptorFromMetal calls the MetalKit framework function MTKModelIOVertexDescriptorFromMetal.
@@ -59,4 +70,15 @@ func MTKModelIOVertexDescriptorFromMetalWithError(metalDescriptor obj.Object, er
 	}
 	_ret := _fnMTKModelIOVertexDescriptorFromMetalWithError(objref.IDOf(metalDescriptor), err)
 	return obj.Wrap(_ret)
+}
+
+var _fnMTKModelIOVertexFormatFromMetal func(unsafe.Pointer) unsafe.Pointer
+
+// MTKModelIOVertexFormatFromMetal calls the MetalKit framework function MTKModelIOVertexFormatFromMetal.
+func MTKModelIOVertexFormatFromMetal(vertexFormat unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTKModelIOVertexFormatFromMetal == nil {
+		ebipurego.RegisterLibFunc(&_fnMTKModelIOVertexFormatFromMetal, _lib, "MTKModelIOVertexFormatFromMetal")
+	}
+	return _fnMTKModelIOVertexFormatFromMetal(vertexFormat)
 }

@@ -266,6 +266,11 @@ func EmitFrameworkWrappers(
 	); err != nil {
 		return fmt.Errorf("emit structs: %w", err)
 	}
+	// Go interfaces for the framework's Objective-C protocols not already surfaced
+	// as delegates. Runs after every other construct so takenNames is complete.
+	if err := emitProtocols(outDir, pkgName, rawPkgAlias, fc, mapper, trialNames, takenNames); err != nil {
+		return fmt.Errorf("emit protocols: %w", err)
+	}
 	// Named error values for errors.Is, derived from the framework's error-code
 	// enum and matching error domain.
 	if err := emitErrorSentinels(outDir, pkgName, fc, takenNames); err != nil {

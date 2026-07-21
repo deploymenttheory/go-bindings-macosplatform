@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -5045,4 +5047,91 @@ func AVSemanticSegmentationMatteTypeTeeth() obj.Object {
 // AVSemanticSegmentationMatteTypeGlasses returns the string constant AVSemanticSegmentationMatteTypeGlasses, for use as a dictionary key or argument.
 func AVSemanticSegmentationMatteTypeGlasses() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("AVSemanticSegmentationMatteTypeGlasses")))
+}
+
+// AVCoreAnimationBeginTimeAtZero returns the value of the constant AVCoreAnimationBeginTimeAtZero.
+func AVCoreAnimationBeginTimeAtZero() float64 {
+	addr := _symbol("AVCoreAnimationBeginTimeAtZero")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// AVPlaybackCoordinatorOtherParticipantsDidChangeNotification returns the address of the symbol AVPlaybackCoordinatorOtherParticipantsDidChangeNotification.
+func AVPlaybackCoordinatorOtherParticipantsDidChangeNotification() uintptr {
+	return _symbol("AVPlaybackCoordinatorOtherParticipantsDidChangeNotification")
+}
+
+// AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification returns the address of the symbol AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification.
+func AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification() uintptr {
+	return _symbol("AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification")
+}
+
+// AVRouteDetectorMultipleRoutesDetectedDidChangeNotification returns the address of the symbol AVRouteDetectorMultipleRoutesDetectedDidChangeNotification.
+func AVRouteDetectorMultipleRoutesDetectedDidChangeNotification() uintptr {
+	return _symbol("AVRouteDetectorMultipleRoutesDetectedDidChangeNotification")
+}
+
+// AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification returns the address of the symbol AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification.
+func AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification() uintptr {
+	return _symbol("AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification")
+}
+
+// AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification returns the address of the symbol AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification.
+func AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification() uintptr {
+	return _symbol("AVSampleBufferDisplayLayerReadyForDisplayDidChangeNotification")
+}
+
+// AVSampleBufferVideoRendererDidFailToDecodeNotification returns the address of the symbol AVSampleBufferVideoRendererDidFailToDecodeNotification.
+func AVSampleBufferVideoRendererDidFailToDecodeNotification() uintptr {
+	return _symbol("AVSampleBufferVideoRendererDidFailToDecodeNotification")
+}
+
+// AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification returns the address of the symbol AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification.
+func AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification() uintptr {
+	return _symbol("AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification")
+}
+
+// AVCaptureDeviceWasConnectedNotification returns the address of the symbol AVCaptureDeviceWasConnectedNotification.
+func AVCaptureDeviceWasConnectedNotification() uintptr {
+	return _symbol("AVCaptureDeviceWasConnectedNotification")
+}
+
+// AVCaptureDeviceWasDisconnectedNotification returns the address of the symbol AVCaptureDeviceWasDisconnectedNotification.
+func AVCaptureDeviceWasDisconnectedNotification() uintptr {
+	return _symbol("AVCaptureDeviceWasDisconnectedNotification")
+}
+
+// AVCaptureMaxAvailableTorchLevel returns the address of the symbol AVCaptureMaxAvailableTorchLevel.
+func AVCaptureMaxAvailableTorchLevel() uintptr { return _symbol("AVCaptureMaxAvailableTorchLevel") }
+
+// AVCaptureSessionRuntimeErrorNotification returns the address of the symbol AVCaptureSessionRuntimeErrorNotification.
+func AVCaptureSessionRuntimeErrorNotification() uintptr {
+	return _symbol("AVCaptureSessionRuntimeErrorNotification")
+}
+
+// AVCaptureSessionDidStartRunningNotification returns the address of the symbol AVCaptureSessionDidStartRunningNotification.
+func AVCaptureSessionDidStartRunningNotification() uintptr {
+	return _symbol("AVCaptureSessionDidStartRunningNotification")
+}
+
+// AVCaptureSessionDidStopRunningNotification returns the address of the symbol AVCaptureSessionDidStopRunningNotification.
+func AVCaptureSessionDidStopRunningNotification() uintptr {
+	return _symbol("AVCaptureSessionDidStopRunningNotification")
+}
+
+// AVCaptureSessionWasInterruptedNotification returns the address of the symbol AVCaptureSessionWasInterruptedNotification.
+func AVCaptureSessionWasInterruptedNotification() uintptr {
+	return _symbol("AVCaptureSessionWasInterruptedNotification")
+}
+
+// AVCaptureSessionInterruptionEndedNotification returns the address of the symbol AVCaptureSessionInterruptionEndedNotification.
+func AVCaptureSessionInterruptionEndedNotification() uintptr {
+	return _symbol("AVCaptureSessionInterruptionEndedNotification")
+}
+
+// AVCaptureInputPortFormatDescriptionDidChangeNotification returns the address of the symbol AVCaptureInputPortFormatDescriptionDidChangeNotification.
+func AVCaptureInputPortFormatDescriptionDidChangeNotification() uintptr {
+	return _symbol("AVCaptureInputPortFormatDescriptionDidChangeNotification")
 }

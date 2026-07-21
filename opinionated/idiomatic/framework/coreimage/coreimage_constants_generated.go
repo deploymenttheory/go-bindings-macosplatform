@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -1122,4 +1124,292 @@ func KCIFilterGeneratorExportedKeyTargetObject() obj.Object {
 // KCIFilterGeneratorExportedKeyName returns the string constant kCIFilterGeneratorExportedKeyName, for use as a dictionary key or argument.
 func KCIFilterGeneratorExportedKeyName() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("kCIFilterGeneratorExportedKeyName")))
+}
+
+// KCIFormatARGB8 returns the value of the constant kCIFormatARGB8.
+func KCIFormatARGB8() int {
+	addr := _symbol("kCIFormatARGB8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatBGRA8 returns the value of the constant kCIFormatBGRA8.
+func KCIFormatBGRA8() int {
+	addr := _symbol("kCIFormatBGRA8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRGBA8 returns the value of the constant kCIFormatRGBA8.
+func KCIFormatRGBA8() int {
+	addr := _symbol("kCIFormatRGBA8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRGBX8 returns the value of the constant kCIFormatRGBX8.
+func KCIFormatRGBX8() int {
+	addr := _symbol("kCIFormatRGBX8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatABGR8 returns the value of the constant kCIFormatABGR8.
+func KCIFormatABGR8() int {
+	addr := _symbol("kCIFormatABGR8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRGBAh returns the value of the constant kCIFormatRGBAh.
+func KCIFormatRGBAh() int {
+	addr := _symbol("kCIFormatRGBAh")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRGBA16 returns the value of the constant kCIFormatRGBA16.
+func KCIFormatRGBA16() int {
+	addr := _symbol("kCIFormatRGBA16")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRGBAf returns the value of the constant kCIFormatRGBAf.
+func KCIFormatRGBAf() int {
+	addr := _symbol("kCIFormatRGBAf")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRGBX16 returns the value of the constant kCIFormatRGBX16.
+func KCIFormatRGBX16() int {
+	addr := _symbol("kCIFormatRGBX16")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRGBXh returns the value of the constant kCIFormatRGBXh.
+func KCIFormatRGBXh() int {
+	addr := _symbol("kCIFormatRGBXh")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRGBXf returns the value of the constant kCIFormatRGBXf.
+func KCIFormatRGBXf() int {
+	addr := _symbol("kCIFormatRGBXf")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRGB10 returns the value of the constant kCIFormatRGB10.
+func KCIFormatRGB10() int {
+	addr := _symbol("kCIFormatRGB10")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatA8 returns the value of the constant kCIFormatA8.
+func KCIFormatA8() int {
+	addr := _symbol("kCIFormatA8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatA16 returns the value of the constant kCIFormatA16.
+func KCIFormatA16() int {
+	addr := _symbol("kCIFormatA16")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatAh returns the value of the constant kCIFormatAh.
+func KCIFormatAh() int {
+	addr := _symbol("kCIFormatAh")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatAf returns the value of the constant kCIFormatAf.
+func KCIFormatAf() int {
+	addr := _symbol("kCIFormatAf")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatR8 returns the value of the constant kCIFormatR8.
+func KCIFormatR8() int {
+	addr := _symbol("kCIFormatR8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatR16 returns the value of the constant kCIFormatR16.
+func KCIFormatR16() int {
+	addr := _symbol("kCIFormatR16")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRh returns the value of the constant kCIFormatRh.
+func KCIFormatRh() int {
+	addr := _symbol("kCIFormatRh")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRf returns the value of the constant kCIFormatRf.
+func KCIFormatRf() int {
+	addr := _symbol("kCIFormatRf")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRG8 returns the value of the constant kCIFormatRG8.
+func KCIFormatRG8() int {
+	addr := _symbol("kCIFormatRG8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRG16 returns the value of the constant kCIFormatRG16.
+func KCIFormatRG16() int {
+	addr := _symbol("kCIFormatRG16")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRGh returns the value of the constant kCIFormatRGh.
+func KCIFormatRGh() int {
+	addr := _symbol("kCIFormatRGh")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatRGf returns the value of the constant kCIFormatRGf.
+func KCIFormatRGf() int {
+	addr := _symbol("kCIFormatRGf")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatL8 returns the value of the constant kCIFormatL8.
+func KCIFormatL8() int {
+	addr := _symbol("kCIFormatL8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatL16 returns the value of the constant kCIFormatL16.
+func KCIFormatL16() int {
+	addr := _symbol("kCIFormatL16")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatLh returns the value of the constant kCIFormatLh.
+func KCIFormatLh() int {
+	addr := _symbol("kCIFormatLh")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatLf returns the value of the constant kCIFormatLf.
+func KCIFormatLf() int {
+	addr := _symbol("kCIFormatLf")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatLA8 returns the value of the constant kCIFormatLA8.
+func KCIFormatLA8() int {
+	addr := _symbol("kCIFormatLA8")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatLA16 returns the value of the constant kCIFormatLA16.
+func KCIFormatLA16() int {
+	addr := _symbol("kCIFormatLA16")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatLAh returns the value of the constant kCIFormatLAh.
+func KCIFormatLAh() int {
+	addr := _symbol("kCIFormatLAh")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
+}
+
+// KCIFormatLAf returns the value of the constant kCIFormatLAf.
+func KCIFormatLAf() int {
+	addr := _symbol("kCIFormatLAf")
+	if addr == 0 {
+		return 0
+	}
+	return *(*int)(unsafe.Pointer(addr))
 }

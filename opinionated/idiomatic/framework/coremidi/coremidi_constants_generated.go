@@ -301,3 +301,41 @@ func MIDICIDeviceObjectKey() obj.Object {
 func MIDICIProfileObjectKey() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("MIDICIProfileObjectKey")))
 }
+
+// MIDIUMPEndpointWasAddedNotification returns the address of the symbol MIDIUMPEndpointWasAddedNotification.
+func MIDIUMPEndpointWasAddedNotification() uintptr {
+	return _symbol("MIDIUMPEndpointWasAddedNotification")
+}
+
+// MIDIUMPEndpointWasRemovedNotification returns the address of the symbol MIDIUMPEndpointWasRemovedNotification.
+func MIDIUMPEndpointWasRemovedNotification() uintptr {
+	return _symbol("MIDIUMPEndpointWasRemovedNotification")
+}
+
+// MIDIUMPEndpointWasUpdatedNotification returns the address of the symbol MIDIUMPEndpointWasUpdatedNotification.
+func MIDIUMPEndpointWasUpdatedNotification() uintptr {
+	return _symbol("MIDIUMPEndpointWasUpdatedNotification")
+}
+
+// MIDIUMPFunctionBlockWasUpdatedNotification returns the address of the symbol MIDIUMPFunctionBlockWasUpdatedNotification.
+func MIDIUMPFunctionBlockWasUpdatedNotification() uintptr {
+	return _symbol("MIDIUMPFunctionBlockWasUpdatedNotification")
+}
+
+// MIDICIDeviceWasAddedNotification returns the address of the symbol MIDICIDeviceWasAddedNotification.
+func MIDICIDeviceWasAddedNotification() uintptr { return _symbol("MIDICIDeviceWasAddedNotification") }
+
+// MIDICIDeviceWasRemovedNotification returns the address of the symbol MIDICIDeviceWasRemovedNotification.
+func MIDICIDeviceWasRemovedNotification() uintptr {
+	return _symbol("MIDICIDeviceWasRemovedNotification")
+}
+
+// MIDICIProfileWasUpdatedNotification returns the address of the symbol MIDICIProfileWasUpdatedNotification.
+func MIDICIProfileWasUpdatedNotification() uintptr {
+	return _symbol("MIDICIProfileWasUpdatedNotification")
+}
+
+// MIDICIProfileWasRemovedNotification returns the address of the symbol MIDICIProfileWasRemovedNotification.
+func MIDICIProfileWasRemovedNotification() uintptr {
+	return _symbol("MIDICIProfileWasRemovedNotification")
+}

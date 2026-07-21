@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
@@ -83,3 +85,15 @@ func INPersonRelationshipSon() obj.Object {
 func INPersonRelationshipDaughter() obj.Object {
 	return obj.Wrap(purego.CFConstant(_symbol("INPersonRelationshipDaughter")))
 }
+
+// IntentsVersionNumber returns the value of the constant IntentsVersionNumber.
+func IntentsVersionNumber() float64 {
+	addr := _symbol("IntentsVersionNumber")
+	if addr == 0 {
+		return 0
+	}
+	return *(*float64)(unsafe.Pointer(addr))
+}
+
+// IntentsVersionString returns the address of the symbol IntentsVersionString.
+func IntentsVersionString() uintptr { return _symbol("IntentsVersionString") }

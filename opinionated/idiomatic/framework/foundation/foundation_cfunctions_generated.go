@@ -15,6 +15,17 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+var _fnCFBridgingRelease func(objc.ID) unsafe.Pointer
+
+// CFBridgingRelease calls the Foundation framework function CFBridgingRelease.
+func CFBridgingRelease(x obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBridgingRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBridgingRelease, _lib, "CFBridgingRelease")
+	}
+	return _fnCFBridgingRelease(objref.IDOf(x))
+}
+
 var _fnCFBridgingRetain func(objc.ID) objc.ID
 
 // CFBridgingRetain calls the Foundation framework function CFBridgingRetain.
@@ -63,6 +74,28 @@ func NSAllMapTableValues(table obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnNSAllocateCollectable func(int, int) unsafe.Pointer
+
+// NSAllocateCollectable calls the Foundation framework function NSAllocateCollectable.
+func NSAllocateCollectable(size int, options int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAllocateCollectable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAllocateCollectable, _lib, "NSAllocateCollectable")
+	}
+	return _fnNSAllocateCollectable(size, options)
+}
+
+var _fnNSAllocateMemoryPages func(int) unsafe.Pointer
+
+// NSAllocateMemoryPages calls the Foundation framework function NSAllocateMemoryPages.
+func NSAllocateMemoryPages(data int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAllocateMemoryPages == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAllocateMemoryPages, _lib, "NSAllocateMemoryPages")
+	}
+	return _fnNSAllocateMemoryPages(data)
+}
+
 var _fnNSAllocateObject func(unsafe.Pointer, int, unsafe.Pointer) objc.ID
 
 // NSAllocateObject calls the Foundation framework function NSAllocateObject.
@@ -73,6 +106,17 @@ func NSAllocateObject(aClass unsafe.Pointer, extraBytes int, zone unsafe.Pointer
 	}
 	_ret := _fnNSAllocateObject(aClass, extraBytes, zone)
 	return obj.Wrap(_ret)
+}
+
+var _fnNSClassFromString func(objc.ID) unsafe.Pointer
+
+// NSClassFromString calls the Foundation framework function NSClassFromString.
+func NSClassFromString(aClassName string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSClassFromString == nil {
+		ebipurego.RegisterLibFunc(&_fnNSClassFromString, _lib, "NSClassFromString")
+	}
+	return _fnNSClassFromString(purego.NSString(aClassName))
 }
 
 var _fnNSCompareHashTables func(objc.ID, objc.ID) bool
@@ -108,6 +152,28 @@ func NSContainsRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) bo
 	return _fnNSContainsRect(aRect, bRect)
 }
 
+var _fnNSConvertHostDoubleToSwapped func(float64) unsafe.Pointer
+
+// NSConvertHostDoubleToSwapped calls the Foundation framework function NSConvertHostDoubleToSwapped.
+func NSConvertHostDoubleToSwapped(x float64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSConvertHostDoubleToSwapped == nil {
+		ebipurego.RegisterLibFunc(&_fnNSConvertHostDoubleToSwapped, _lib, "NSConvertHostDoubleToSwapped")
+	}
+	return _fnNSConvertHostDoubleToSwapped(x)
+}
+
+var _fnNSConvertHostFloatToSwapped func(float32) unsafe.Pointer
+
+// NSConvertHostFloatToSwapped calls the Foundation framework function NSConvertHostFloatToSwapped.
+func NSConvertHostFloatToSwapped(x float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSConvertHostFloatToSwapped == nil {
+		ebipurego.RegisterLibFunc(&_fnNSConvertHostFloatToSwapped, _lib, "NSConvertHostFloatToSwapped")
+	}
+	return _fnNSConvertHostFloatToSwapped(x)
+}
+
 var _fnNSConvertSwappedDoubleToHost func(unsafe.Pointer) float64
 
 // NSConvertSwappedDoubleToHost calls the Foundation framework function NSConvertSwappedDoubleToHost.
@@ -140,6 +206,17 @@ func NSCopyHashTableWithZone(table obj.Object, zone unsafe.Pointer) obj.Object {
 	}
 	_ret := _fnNSCopyHashTableWithZone(objref.IDOf(table), zone)
 	return obj.Wrap(_ret)
+}
+
+var _fnNSCopyMapTableWithZone func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// NSCopyMapTableWithZone calls the Foundation framework function NSCopyMapTableWithZone.
+func NSCopyMapTableWithZone(table obj.Object, zone unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCopyMapTableWithZone == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCopyMapTableWithZone, _lib, "NSCopyMapTableWithZone")
+	}
+	return _fnNSCopyMapTableWithZone(objref.IDOf(table), zone)
 }
 
 var _fnNSCopyMemoryPages func(unsafe.Pointer, unsafe.Pointer, int)
@@ -209,6 +286,39 @@ func NSCreateHashTableWithZone(callBacks unsafe.Pointer, capacity int, zone unsa
 	}
 	_ret := _fnNSCreateHashTableWithZone(callBacks, capacity, zone)
 	return obj.Wrap(_ret)
+}
+
+var _fnNSCreateMapTable func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+
+// NSCreateMapTable calls the Foundation framework function NSCreateMapTable.
+func NSCreateMapTable(keyCallBacks unsafe.Pointer, valueCallBacks unsafe.Pointer, capacity int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCreateMapTable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCreateMapTable, _lib, "NSCreateMapTable")
+	}
+	return _fnNSCreateMapTable(keyCallBacks, valueCallBacks, capacity)
+}
+
+var _fnNSCreateMapTableWithZone func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+
+// NSCreateMapTableWithZone calls the Foundation framework function NSCreateMapTableWithZone.
+func NSCreateMapTableWithZone(keyCallBacks unsafe.Pointer, valueCallBacks unsafe.Pointer, capacity int, zone unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCreateMapTableWithZone == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCreateMapTableWithZone, _lib, "NSCreateMapTableWithZone")
+	}
+	return _fnNSCreateMapTableWithZone(keyCallBacks, valueCallBacks, capacity, zone)
+}
+
+var _fnNSCreateZone func(int, int, bool) unsafe.Pointer
+
+// NSCreateZone calls the Foundation framework function NSCreateZone.
+func NSCreateZone(startSize int, granularity int, canFree bool) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCreateZone == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCreateZone, _lib, "NSCreateZone")
+	}
+	return _fnNSCreateZone(startSize, granularity, canFree)
 }
 
 var _fnNSDeallocateMemoryPages func(unsafe.Pointer, int)
@@ -391,6 +501,17 @@ func NSDecrementExtraRefCountWasZero(object obj.Object) bool {
 	return _fnNSDecrementExtraRefCountWasZero(objref.IDOf(object))
 }
 
+var _fnNSDefaultMallocZone func() unsafe.Pointer
+
+// NSDefaultMallocZone calls the Foundation framework function NSDefaultMallocZone.
+func NSDefaultMallocZone() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDefaultMallocZone == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDefaultMallocZone, _lib, "NSDefaultMallocZone")
+	}
+	return _fnNSDefaultMallocZone()
+}
+
 var _fnNSDivideRect func(corefoundation.CGRect, unsafe.Pointer, unsafe.Pointer, float64, RectEdge)
 
 // NSDivideRect calls the Foundation framework function NSDivideRect.
@@ -413,6 +534,17 @@ func NSEdgeInsetsEqual(aInsets unsafe.Pointer, bInsets unsafe.Pointer) bool {
 	return _fnNSEdgeInsetsEqual(aInsets, bInsets)
 }
 
+var _fnNSEdgeInsetsMake func(float64, float64, float64, float64) unsafe.Pointer
+
+// NSEdgeInsetsMake calls the Foundation framework function NSEdgeInsetsMake.
+func NSEdgeInsetsMake(top float64, left float64, bottom float64, right float64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSEdgeInsetsMake == nil {
+		ebipurego.RegisterLibFunc(&_fnNSEdgeInsetsMake, _lib, "NSEdgeInsetsMake")
+	}
+	return _fnNSEdgeInsetsMake(top, left, bottom, right)
+}
+
 var _fnNSEndHashTableEnumeration func(unsafe.Pointer)
 
 // NSEndHashTableEnumeration calls the Foundation framework function NSEndHashTableEnumeration.
@@ -433,6 +565,28 @@ func NSEndMapTableEnumeration(enumerator unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnNSEndMapTableEnumeration, _lib, "NSEndMapTableEnumeration")
 	}
 	_fnNSEndMapTableEnumeration(enumerator)
+}
+
+var _fnNSEnumerateHashTable func(objc.ID) unsafe.Pointer
+
+// NSEnumerateHashTable calls the Foundation framework function NSEnumerateHashTable.
+func NSEnumerateHashTable(table obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSEnumerateHashTable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSEnumerateHashTable, _lib, "NSEnumerateHashTable")
+	}
+	return _fnNSEnumerateHashTable(objref.IDOf(table))
+}
+
+var _fnNSEnumerateMapTable func(objc.ID) unsafe.Pointer
+
+// NSEnumerateMapTable calls the Foundation framework function NSEnumerateMapTable.
+func NSEnumerateMapTable(table obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSEnumerateMapTable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSEnumerateMapTable, _lib, "NSEnumerateMapTable")
+	}
+	return _fnNSEnumerateMapTable(objref.IDOf(table))
 }
 
 var _fnNSEqualPoints func(corefoundation.CGPoint, corefoundation.CGPoint) bool
@@ -556,6 +710,17 @@ func NSGetSizeAndAlignment(typePtr string) (result string, sizep int, alignp int
 	return _ret, _out0, _out1
 }
 
+var _fnNSGetUncaughtExceptionHandler func() unsafe.Pointer
+
+// NSGetUncaughtExceptionHandler calls the Foundation framework function NSGetUncaughtExceptionHandler.
+func NSGetUncaughtExceptionHandler() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSGetUncaughtExceptionHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnNSGetUncaughtExceptionHandler, _lib, "NSGetUncaughtExceptionHandler")
+	}
+	return _fnNSGetUncaughtExceptionHandler()
+}
+
 var _fnNSHFSTypeCodeFromFileType func(objc.ID) uint32
 
 // NSHFSTypeCodeFromFileType calls the Foundation framework function NSHFSTypeCodeFromFileType.
@@ -582,6 +747,17 @@ func NSHFSTypeOfFile(fullFilePath string) string {
 	return purego.GoString(_ret)
 }
 
+var _fnNSHashGet func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// NSHashGet calls the Foundation framework function NSHashGet.
+func NSHashGet(table obj.Object, pointer unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSHashGet == nil {
+		ebipurego.RegisterLibFunc(&_fnNSHashGet, _lib, "NSHashGet")
+	}
+	return _fnNSHashGet(objref.IDOf(table), pointer)
+}
+
 var _fnNSHashInsert func(objc.ID, unsafe.Pointer)
 
 // NSHashInsert calls the Foundation framework function NSHashInsert.
@@ -591,6 +767,17 @@ func NSHashInsert(table obj.Object, pointer unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnNSHashInsert, _lib, "NSHashInsert")
 	}
 	_fnNSHashInsert(objref.IDOf(table), pointer)
+}
+
+var _fnNSHashInsertIfAbsent func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// NSHashInsertIfAbsent calls the Foundation framework function NSHashInsertIfAbsent.
+func NSHashInsertIfAbsent(table obj.Object, pointer unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSHashInsertIfAbsent == nil {
+		ebipurego.RegisterLibFunc(&_fnNSHashInsertIfAbsent, _lib, "NSHashInsertIfAbsent")
+	}
+	return _fnNSHashInsertIfAbsent(objref.IDOf(table), pointer)
 }
 
 var _fnNSHashInsertKnownAbsent func(objc.ID, unsafe.Pointer)
@@ -711,6 +898,17 @@ func NSIntegralRectWithOptions(aRect corefoundation.CGRect, opts AlignmentOption
 	return _fnNSIntegralRectWithOptions(aRect, opts)
 }
 
+var _fnNSIntersectionRange func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// NSIntersectionRange calls the Foundation framework function NSIntersectionRange.
+func NSIntersectionRange(range1 unsafe.Pointer, range2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSIntersectionRange == nil {
+		ebipurego.RegisterLibFunc(&_fnNSIntersectionRange, _lib, "NSIntersectionRange")
+	}
+	return _fnNSIntersectionRange(range1, range2)
+}
+
 var _fnNSIntersectionRect func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
 
 // NSIntersectionRect calls the Foundation framework function NSIntersectionRect.
@@ -777,6 +975,17 @@ func NSLogv(arg obj.Object, arg2 string) {
 	_fnNSLogv(objref.IDOf(arg), arg2)
 }
 
+var _fnNSMakeCollectable func(objc.ID) unsafe.Pointer
+
+// NSMakeCollectable calls the Foundation framework function NSMakeCollectable.
+func NSMakeCollectable(cf obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMakeCollectable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMakeCollectable, _lib, "NSMakeCollectable")
+	}
+	return _fnNSMakeCollectable(objref.IDOf(cf))
+}
+
 var _fnNSMakePoint func(float64, float64) corefoundation.CGPoint
 
 // NSMakePoint calls the Foundation framework function NSMakePoint.
@@ -786,6 +995,17 @@ func NSMakePoint(x float64, y float64) corefoundation.CGPoint {
 		ebipurego.RegisterLibFunc(&_fnNSMakePoint, _lib, "NSMakePoint")
 	}
 	return _fnNSMakePoint(x, y)
+}
+
+var _fnNSMakeRange func(int, int) unsafe.Pointer
+
+// NSMakeRange calls the Foundation framework function NSMakeRange.
+func NSMakeRange(loc int, length int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMakeRange == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMakeRange, _lib, "NSMakeRange")
+	}
+	return _fnNSMakeRange(loc, length)
 }
 
 var _fnNSMakeRect func(float64, float64, float64, float64) corefoundation.CGRect
@@ -810,6 +1030,17 @@ func NSMakeSize(w float64, h float64) corefoundation.CGSize {
 	return _fnNSMakeSize(w, h)
 }
 
+var _fnNSMapGet func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// NSMapGet calls the Foundation framework function NSMapGet.
+func NSMapGet(table obj.Object, key unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMapGet == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMapGet, _lib, "NSMapGet")
+	}
+	return _fnNSMapGet(objref.IDOf(table), key)
+}
+
 var _fnNSMapInsert func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // NSMapInsert calls the Foundation framework function NSMapInsert.
@@ -819,6 +1050,17 @@ func NSMapInsert(table obj.Object, key unsafe.Pointer, value unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnNSMapInsert, _lib, "NSMapInsert")
 	}
 	_fnNSMapInsert(objref.IDOf(table), key, value)
+}
+
+var _fnNSMapInsertIfAbsent func(objc.ID, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// NSMapInsertIfAbsent calls the Foundation framework function NSMapInsertIfAbsent.
+func NSMapInsertIfAbsent(table obj.Object, key unsafe.Pointer, value unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSMapInsertIfAbsent == nil {
+		ebipurego.RegisterLibFunc(&_fnNSMapInsertIfAbsent, _lib, "NSMapInsertIfAbsent")
+	}
+	return _fnNSMapInsertIfAbsent(objref.IDOf(table), key, value)
 }
 
 var _fnNSMapInsertKnownAbsent func(objc.ID, unsafe.Pointer, unsafe.Pointer)
@@ -942,6 +1184,17 @@ func NSMouseInRect(aPoint corefoundation.CGPoint, aRect corefoundation.CGRect, f
 	return _fnNSMouseInRect(aPoint, aRect, flipped)
 }
 
+var _fnNSNextHashEnumeratorItem func(unsafe.Pointer) unsafe.Pointer
+
+// NSNextHashEnumeratorItem calls the Foundation framework function NSNextHashEnumeratorItem.
+func NSNextHashEnumeratorItem(enumerator unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSNextHashEnumeratorItem == nil {
+		ebipurego.RegisterLibFunc(&_fnNSNextHashEnumeratorItem, _lib, "NSNextHashEnumeratorItem")
+	}
+	return _fnNSNextHashEnumeratorItem(enumerator)
+}
+
 var _fnNSNextMapEnumeratorPair func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
 
 // NSNextMapEnumeratorPair calls the Foundation framework function NSNextMapEnumeratorPair.
@@ -1034,6 +1287,28 @@ func NSPointToCGPoint(nspoint corefoundation.CGPoint) corefoundation.CGPoint {
 	return _fnNSPointToCGPoint(nspoint)
 }
 
+var _fnNSProtocolFromString func(objc.ID) unsafe.Pointer
+
+// NSProtocolFromString calls the Foundation framework function NSProtocolFromString.
+func NSProtocolFromString(namestr string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSProtocolFromString == nil {
+		ebipurego.RegisterLibFunc(&_fnNSProtocolFromString, _lib, "NSProtocolFromString")
+	}
+	return _fnNSProtocolFromString(purego.NSString(namestr))
+}
+
+var _fnNSRangeFromString func(objc.ID) unsafe.Pointer
+
+// NSRangeFromString calls the Foundation framework function NSRangeFromString.
+func NSRangeFromString(aString string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRangeFromString == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRangeFromString, _lib, "NSRangeFromString")
+	}
+	return _fnNSRangeFromString(purego.NSString(aString))
+}
+
 var _fnNSRealMemoryAvailable func() int
 
 // NSRealMemoryAvailable calls the Foundation framework function NSRealMemoryAvailable.
@@ -1043,6 +1318,17 @@ func NSRealMemoryAvailable() int {
 		ebipurego.RegisterLibFunc(&_fnNSRealMemoryAvailable, _lib, "NSRealMemoryAvailable")
 	}
 	return _fnNSRealMemoryAvailable()
+}
+
+var _fnNSReallocateCollectable func(unsafe.Pointer, int, int) unsafe.Pointer
+
+// NSReallocateCollectable calls the Foundation framework function NSReallocateCollectable.
+func NSReallocateCollectable(ptr unsafe.Pointer, size int, options int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSReallocateCollectable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSReallocateCollectable, _lib, "NSReallocateCollectable")
+	}
+	return _fnNSReallocateCollectable(ptr, size, options)
 }
 
 var _fnNSRectFromCGRect func(corefoundation.CGRect) corefoundation.CGRect
@@ -1143,6 +1429,17 @@ func NSSearchPathForDirectoriesInDomains(directory SearchPathDirectory, domainMa
 	}
 	_ret := _fnNSSearchPathForDirectoriesInDomains(directory, domainMask, expandTilde)
 	return purego.NSArrayToSlice(_ret, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
+var _fnNSSelectorFromString func(objc.ID) unsafe.Pointer
+
+// NSSelectorFromString calls the Foundation framework function NSSelectorFromString.
+func NSSelectorFromString(aSelectorName string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSelectorFromString == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSelectorFromString, _lib, "NSSelectorFromString")
+	}
+	return _fnNSSelectorFromString(purego.NSString(aSelectorName))
 }
 
 var _fnNSSetUncaughtExceptionHandler func(unsafe.Pointer)
@@ -1412,6 +1709,72 @@ func NSSwapBigShortToHost(x uint16) uint16 {
 	return _fnNSSwapBigShortToHost(x)
 }
 
+var _fnNSSwapDouble func(unsafe.Pointer) unsafe.Pointer
+
+// NSSwapDouble calls the Foundation framework function NSSwapDouble.
+func NSSwapDouble(x unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapDouble, _lib, "NSSwapDouble")
+	}
+	return _fnNSSwapDouble(x)
+}
+
+var _fnNSSwapFloat func(unsafe.Pointer) unsafe.Pointer
+
+// NSSwapFloat calls the Foundation framework function NSSwapFloat.
+func NSSwapFloat(x unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapFloat, _lib, "NSSwapFloat")
+	}
+	return _fnNSSwapFloat(x)
+}
+
+var _fnNSSwapHostDoubleToBig func(float64) unsafe.Pointer
+
+// NSSwapHostDoubleToBig calls the Foundation framework function NSSwapHostDoubleToBig.
+func NSSwapHostDoubleToBig(x float64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapHostDoubleToBig == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapHostDoubleToBig, _lib, "NSSwapHostDoubleToBig")
+	}
+	return _fnNSSwapHostDoubleToBig(x)
+}
+
+var _fnNSSwapHostDoubleToLittle func(float64) unsafe.Pointer
+
+// NSSwapHostDoubleToLittle calls the Foundation framework function NSSwapHostDoubleToLittle.
+func NSSwapHostDoubleToLittle(x float64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapHostDoubleToLittle == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapHostDoubleToLittle, _lib, "NSSwapHostDoubleToLittle")
+	}
+	return _fnNSSwapHostDoubleToLittle(x)
+}
+
+var _fnNSSwapHostFloatToBig func(float32) unsafe.Pointer
+
+// NSSwapHostFloatToBig calls the Foundation framework function NSSwapHostFloatToBig.
+func NSSwapHostFloatToBig(x float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapHostFloatToBig == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapHostFloatToBig, _lib, "NSSwapHostFloatToBig")
+	}
+	return _fnNSSwapHostFloatToBig(x)
+}
+
+var _fnNSSwapHostFloatToLittle func(float32) unsafe.Pointer
+
+// NSSwapHostFloatToLittle calls the Foundation framework function NSSwapHostFloatToLittle.
+func NSSwapHostFloatToLittle(x float32) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapHostFloatToLittle == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapHostFloatToLittle, _lib, "NSSwapHostFloatToLittle")
+	}
+	return _fnNSSwapHostFloatToLittle(x)
+}
+
 var _fnNSSwapHostIntToBig func(int) uint32
 
 // NSSwapHostIntToBig calls the Foundation framework function NSSwapHostIntToBig.
@@ -1625,6 +1988,17 @@ func NSTemporaryDirectory() string {
 	return purego.GoString(_ret)
 }
 
+var _fnNSUnionRange func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// NSUnionRange calls the Foundation framework function NSUnionRange.
+func NSUnionRange(range1 unsafe.Pointer, range2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSUnionRange == nil {
+		ebipurego.RegisterLibFunc(&_fnNSUnionRange, _lib, "NSUnionRange")
+	}
+	return _fnNSUnionRange(range1, range2)
+}
+
 var _fnNSUnionRect func(corefoundation.CGRect, corefoundation.CGRect) corefoundation.CGRect
 
 // NSUnionRect calls the Foundation framework function NSUnionRect.
@@ -1662,6 +2036,17 @@ func NSWidth(aRect corefoundation.CGRect) float64 {
 	return _fnNSWidth(aRect)
 }
 
+var _fnNSZoneCalloc func(unsafe.Pointer, int, int) unsafe.Pointer
+
+// NSZoneCalloc calls the Foundation framework function NSZoneCalloc.
+func NSZoneCalloc(zone unsafe.Pointer, numElems int, byteSize int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSZoneCalloc == nil {
+		ebipurego.RegisterLibFunc(&_fnNSZoneCalloc, _lib, "NSZoneCalloc")
+	}
+	return _fnNSZoneCalloc(zone, numElems, byteSize)
+}
+
 var _fnNSZoneFree func(unsafe.Pointer, unsafe.Pointer)
 
 // NSZoneFree calls the Foundation framework function NSZoneFree.
@@ -1671,6 +2056,28 @@ func NSZoneFree(zone unsafe.Pointer, ptr unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnNSZoneFree, _lib, "NSZoneFree")
 	}
 	_fnNSZoneFree(zone, ptr)
+}
+
+var _fnNSZoneFromPointer func(unsafe.Pointer) unsafe.Pointer
+
+// NSZoneFromPointer calls the Foundation framework function NSZoneFromPointer.
+func NSZoneFromPointer(ptr unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSZoneFromPointer == nil {
+		ebipurego.RegisterLibFunc(&_fnNSZoneFromPointer, _lib, "NSZoneFromPointer")
+	}
+	return _fnNSZoneFromPointer(ptr)
+}
+
+var _fnNSZoneMalloc func(unsafe.Pointer, int) unsafe.Pointer
+
+// NSZoneMalloc calls the Foundation framework function NSZoneMalloc.
+func NSZoneMalloc(zone unsafe.Pointer, size int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSZoneMalloc == nil {
+		ebipurego.RegisterLibFunc(&_fnNSZoneMalloc, _lib, "NSZoneMalloc")
+	}
+	return _fnNSZoneMalloc(zone, size)
 }
 
 var _fnNSZoneName func(unsafe.Pointer) objc.ID
@@ -1686,6 +2093,17 @@ func NSZoneName(zone unsafe.Pointer) string {
 		return ""
 	}
 	return purego.GoString(_ret)
+}
+
+var _fnNSZoneRealloc func(unsafe.Pointer, unsafe.Pointer, int) unsafe.Pointer
+
+// NSZoneRealloc calls the Foundation framework function NSZoneRealloc.
+func NSZoneRealloc(zone unsafe.Pointer, ptr unsafe.Pointer, size int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSZoneRealloc == nil {
+		ebipurego.RegisterLibFunc(&_fnNSZoneRealloc, _lib, "NSZoneRealloc")
+	}
+	return _fnNSZoneRealloc(zone, ptr, size)
 }
 
 var _fnNXReadNSObjectFromCoder func(objc.ID) objc.ID
@@ -1711,6 +2129,17 @@ func ObjectGetClassName(object obj.Object) string {
 	return _fnObjectGetClassName(objref.IDOf(object))
 }
 
+var _fnObjectGetIndexedIvars func(objc.ID) unsafe.Pointer
+
+// ObjectGetIndexedIvars calls the Foundation framework function object_getIndexedIvars.
+func ObjectGetIndexedIvars(object obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnObjectGetIndexedIvars == nil {
+		ebipurego.RegisterLibFunc(&_fnObjectGetIndexedIvars, _lib, "object_getIndexedIvars")
+	}
+	return _fnObjectGetIndexedIvars(objref.IDOf(object))
+}
+
 var _fnSelGetName func(unsafe.Pointer) string
 
 // SelGetName calls the Foundation framework function sel_getName.
@@ -1722,6 +2151,17 @@ func SelGetName(sel unsafe.Pointer) string {
 	return _fnSelGetName(sel)
 }
 
+var _fnSelGetUid func(string) unsafe.Pointer
+
+// SelGetUid calls the Foundation framework function sel_getUid.
+func SelGetUid(str string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSelGetUid == nil {
+		ebipurego.RegisterLibFunc(&_fnSelGetUid, _lib, "sel_getUid")
+	}
+	return _fnSelGetUid(str)
+}
+
 var _fnSelIsMapped func(unsafe.Pointer) bool
 
 // SelIsMapped calls the Foundation framework function sel_isMapped.
@@ -1731,4 +2171,15 @@ func SelIsMapped(sel unsafe.Pointer) bool {
 		ebipurego.RegisterLibFunc(&_fnSelIsMapped, _lib, "sel_isMapped")
 	}
 	return _fnSelIsMapped(sel)
+}
+
+var _fnSelRegisterName func(string) unsafe.Pointer
+
+// SelRegisterName calls the Foundation framework function sel_registerName.
+func SelRegisterName(str string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSelRegisterName == nil {
+		ebipurego.RegisterLibFunc(&_fnSelRegisterName, _lib, "sel_registerName")
+	}
+	return _fnSelRegisterName(str)
 }

@@ -82,6 +82,17 @@ func IOSurfaceCreateMachPort(buffer obj.Object) int {
 	return int(_fnIOSurfaceCreateMachPort(objref.IDOf(buffer)))
 }
 
+var _fnIOSurfaceCreateXPCObject func(objc.ID) unsafe.Pointer
+
+// IOSurfaceCreateXPCObject calls the IOSurface framework function IOSurfaceCreateXPCObject.
+func IOSurfaceCreateXPCObject(aSurface obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOSurfaceCreateXPCObject == nil {
+		ebipurego.RegisterLibFunc(&_fnIOSurfaceCreateXPCObject, _lib, "IOSurfaceCreateXPCObject")
+	}
+	return _fnIOSurfaceCreateXPCObject(objref.IDOf(aSurface))
+}
+
 var _fnIOSurfaceDecrementUseCount func(objc.ID)
 
 // IOSurfaceDecrementUseCount calls the IOSurface framework function IOSurfaceDecrementUseCount.
@@ -102,6 +113,28 @@ func IOSurfaceGetAllocSize(buffer obj.Object) int {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetAllocSize, _lib, "IOSurfaceGetAllocSize")
 	}
 	return _fnIOSurfaceGetAllocSize(objref.IDOf(buffer))
+}
+
+var _fnIOSurfaceGetBaseAddress func(objc.ID) unsafe.Pointer
+
+// IOSurfaceGetBaseAddress calls the IOSurface framework function IOSurfaceGetBaseAddress.
+func IOSurfaceGetBaseAddress(buffer obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOSurfaceGetBaseAddress == nil {
+		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetBaseAddress, _lib, "IOSurfaceGetBaseAddress")
+	}
+	return _fnIOSurfaceGetBaseAddress(objref.IDOf(buffer))
+}
+
+var _fnIOSurfaceGetBaseAddressOfPlane func(objc.ID, int) unsafe.Pointer
+
+// IOSurfaceGetBaseAddressOfPlane calls the IOSurface framework function IOSurfaceGetBaseAddressOfPlane.
+func IOSurfaceGetBaseAddressOfPlane(buffer obj.Object, planeIndex int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOSurfaceGetBaseAddressOfPlane == nil {
+		ebipurego.RegisterLibFunc(&_fnIOSurfaceGetBaseAddressOfPlane, _lib, "IOSurfaceGetBaseAddressOfPlane")
+	}
+	return _fnIOSurfaceGetBaseAddressOfPlane(objref.IDOf(buffer), planeIndex)
 }
 
 var _fnIOSurfaceGetBitDepthOfComponentOfPlane func(objc.ID, int, int) int

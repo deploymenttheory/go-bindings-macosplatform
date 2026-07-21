@@ -24,6 +24,17 @@ func AbsoluteDeltaToDuration(leftAbsoluteTime unsafe.Pointer, rightAbsoluteTime 
 	return int(_fnAbsoluteDeltaToDuration(leftAbsoluteTime, rightAbsoluteTime))
 }
 
+var _fnAbsoluteDeltaToNanoseconds func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// AbsoluteDeltaToNanoseconds calls the CarbonCore framework function AbsoluteDeltaToNanoseconds.
+func AbsoluteDeltaToNanoseconds(leftAbsoluteTime unsafe.Pointer, rightAbsoluteTime unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAbsoluteDeltaToNanoseconds == nil {
+		ebipurego.RegisterLibFunc(&_fnAbsoluteDeltaToNanoseconds, _lib, "AbsoluteDeltaToNanoseconds")
+	}
+	return _fnAbsoluteDeltaToNanoseconds(leftAbsoluteTime, rightAbsoluteTime)
+}
+
 var _fnAbsoluteToDuration func(unsafe.Pointer) int32
 
 // AbsoluteToDuration calls the CarbonCore framework function AbsoluteToDuration.
@@ -33,6 +44,28 @@ func AbsoluteToDuration(absoluteTime unsafe.Pointer) int {
 		ebipurego.RegisterLibFunc(&_fnAbsoluteToDuration, _lib, "AbsoluteToDuration")
 	}
 	return int(_fnAbsoluteToDuration(absoluteTime))
+}
+
+var _fnAbsoluteToNanoseconds func(unsafe.Pointer) unsafe.Pointer
+
+// AbsoluteToNanoseconds calls the CarbonCore framework function AbsoluteToNanoseconds.
+func AbsoluteToNanoseconds(absoluteTime unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAbsoluteToNanoseconds == nil {
+		ebipurego.RegisterLibFunc(&_fnAbsoluteToNanoseconds, _lib, "AbsoluteToNanoseconds")
+	}
+	return _fnAbsoluteToNanoseconds(absoluteTime)
+}
+
+var _fnAddAbsoluteToAbsolute func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// AddAbsoluteToAbsolute calls the CarbonCore framework function AddAbsoluteToAbsolute.
+func AddAbsoluteToAbsolute(absoluteTime1 unsafe.Pointer, absoluteTime2 unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAddAbsoluteToAbsolute == nil {
+		ebipurego.RegisterLibFunc(&_fnAddAbsoluteToAbsolute, _lib, "AddAbsoluteToAbsolute")
+	}
+	return _fnAddAbsoluteToAbsolute(absoluteTime1, absoluteTime2)
 }
 
 var _fnAddAtomic func(int, unsafe.Pointer) int32
@@ -98,6 +131,17 @@ func AddCollectionItemHdl(aCollection obj.Object, tag int, identifier int) (resu
 	return _ret, _out0
 }
 
+var _fnAddDurationToAbsolute func(int, unsafe.Pointer) unsafe.Pointer
+
+// AddDurationToAbsolute calls the CarbonCore framework function AddDurationToAbsolute.
+func AddDurationToAbsolute(duration int, absoluteTime unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAddDurationToAbsolute == nil {
+		ebipurego.RegisterLibFunc(&_fnAddDurationToAbsolute, _lib, "AddDurationToAbsolute")
+	}
+	return _fnAddDurationToAbsolute(duration, absoluteTime)
+}
+
 var _fnAddFolderDescriptor func(int, int, int, int, int, int, unsafe.Pointer, uint8) int16
 
 // AddFolderDescriptor calls the CarbonCore framework function AddFolderDescriptor.
@@ -109,6 +153,17 @@ func AddFolderDescriptor(foldType int, flags int, foldClass int, foldLocation in
 	var _out0 uint8
 	_ret := _fnAddFolderDescriptor(foldType, flags, foldClass, foldLocation, badgeSignature, badgeType, unsafe.Pointer(&_out0), replaceFlag)
 	return _ret, _out0
+}
+
+var _fnAddNanosecondsToAbsolute func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// AddNanosecondsToAbsolute calls the CarbonCore framework function AddNanosecondsToAbsolute.
+func AddNanosecondsToAbsolute(nanoseconds unsafe.Pointer, absoluteTime unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAddNanosecondsToAbsolute == nil {
+		ebipurego.RegisterLibFunc(&_fnAddNanosecondsToAbsolute, _lib, "AddNanosecondsToAbsolute")
+	}
+	return _fnAddNanosecondsToAbsolute(nanoseconds, absoluteTime)
 }
 
 var _fnAddResource func(unsafe.Pointer, int, int16, unsafe.Pointer)
@@ -567,6 +622,17 @@ func CallComponentVersion(ci unsafe.Pointer) int {
 		ebipurego.RegisterLibFunc(&_fnCallComponentVersion, _lib, "CallComponentVersion")
 	}
 	return int(_fnCallComponentVersion(ci))
+}
+
+var _fnCaptureComponent func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// CaptureComponent calls the CarbonCore framework function CaptureComponent.
+func CaptureComponent(capturedComponent unsafe.Pointer, capturingComponent unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCaptureComponent == nil {
+		ebipurego.RegisterLibFunc(&_fnCaptureComponent, _lib, "CaptureComponent")
+	}
+	return _fnCaptureComponent(capturedComponent, capturingComponent)
 }
 
 var _fnChangeTextToUnicodeInfo func(objc.ID, unsafe.Pointer) int32
@@ -1498,6 +1564,28 @@ func DisposeUnicodeToTextFallbackUPP(userUPP unsafe.Pointer) {
 		ebipurego.RegisterLibFunc(&_fnDisposeUnicodeToTextFallbackUPP, _lib, "DisposeUnicodeToTextFallbackUPP")
 	}
 	_fnDisposeUnicodeToTextFallbackUPP(userUPP)
+}
+
+var _fnDurationToAbsolute func(int) unsafe.Pointer
+
+// DurationToAbsolute calls the CarbonCore framework function DurationToAbsolute.
+func DurationToAbsolute(duration int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDurationToAbsolute == nil {
+		ebipurego.RegisterLibFunc(&_fnDurationToAbsolute, _lib, "DurationToAbsolute")
+	}
+	return _fnDurationToAbsolute(duration)
+}
+
+var _fnDurationToNanoseconds func(int) unsafe.Pointer
+
+// DurationToNanoseconds calls the CarbonCore framework function DurationToNanoseconds.
+func DurationToNanoseconds(theDuration int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDurationToNanoseconds == nil {
+		ebipurego.RegisterLibFunc(&_fnDurationToNanoseconds, _lib, "DurationToNanoseconds")
+	}
+	return _fnDurationToNanoseconds(theDuration)
 }
 
 var _fnEmptyCollection func(objc.ID)
@@ -2908,6 +2996,19 @@ func FindFolder(vRefNum int16, folderType int, createFolder uint8) (result int16
 	return _ret, _out0, _out1
 }
 
+var _fnFindNextComponent func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// FindNextComponent calls the CarbonCore framework function FindNextComponent.
+func FindNextComponent(aComponent unsafe.Pointer) (result unsafe.Pointer, looking ComponentDescription) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFindNextComponent == nil {
+		ebipurego.RegisterLibFunc(&_fnFindNextComponent, _lib, "FindNextComponent")
+	}
+	var _out0 ComponentDescription
+	_ret := _fnFindNextComponent(aComponent, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnFix2Frac func(int) int32
 
 // Fix2Frac calls the CarbonCore framework function Fix2Frac.
@@ -3121,6 +3222,17 @@ func Gestalt(selector int) (result int16, response int) {
 	return _ret, _out0
 }
 
+var _fnGet1IndResource func(int, int16) unsafe.Pointer
+
+// Get1IndResource calls the CarbonCore framework function Get1IndResource.
+func Get1IndResource(theType int, itemIndex int16) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGet1IndResource == nil {
+		ebipurego.RegisterLibFunc(&_fnGet1IndResource, _lib, "Get1IndResource")
+	}
+	return _fnGet1IndResource(theType, itemIndex)
+}
+
 var _fnGet1IndType func(unsafe.Pointer, int16)
 
 // Get1IndType calls the CarbonCore framework function Get1IndType.
@@ -3132,6 +3244,30 @@ func Get1IndType(itemIndex int16) (theType int) {
 	var _out0 int
 	_fnGet1IndType(unsafe.Pointer(&_out0), itemIndex)
 	return _out0
+}
+
+var _fnGet1NamedResource func(int, unsafe.Pointer) unsafe.Pointer
+
+// Get1NamedResource calls the CarbonCore framework function Get1NamedResource.
+func Get1NamedResource(theType int) (result unsafe.Pointer, name uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGet1NamedResource == nil {
+		ebipurego.RegisterLibFunc(&_fnGet1NamedResource, _lib, "Get1NamedResource")
+	}
+	var _out0 uint8
+	_ret := _fnGet1NamedResource(theType, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
+var _fnGet1Resource func(int, int16) unsafe.Pointer
+
+// Get1Resource calls the CarbonCore framework function Get1Resource.
+func Get1Resource(theType int, theID int16) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGet1Resource == nil {
+		ebipurego.RegisterLibFunc(&_fnGet1Resource, _lib, "Get1Resource")
+	}
+	return _fnGet1Resource(theType, theID)
 }
 
 var _fnGetAliasSize func(unsafe.Pointer) int
@@ -3187,6 +3323,17 @@ func GetCollectionDefaultAttributes(c obj.Object) int {
 		ebipurego.RegisterLibFunc(&_fnGetCollectionDefaultAttributes, _lib, "GetCollectionDefaultAttributes")
 	}
 	return int(_fnGetCollectionDefaultAttributes(objref.IDOf(c)))
+}
+
+var _fnGetCollectionExceptionProc func(objc.ID) unsafe.Pointer
+
+// GetCollectionExceptionProc calls the CarbonCore framework function GetCollectionExceptionProc.
+func GetCollectionExceptionProc(c obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetCollectionExceptionProc == nil {
+		ebipurego.RegisterLibFunc(&_fnGetCollectionExceptionProc, _lib, "GetCollectionExceptionProc")
+	}
+	return _fnGetCollectionExceptionProc(objref.IDOf(c))
 }
 
 var _fnGetCollectionItem func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer) int16
@@ -3279,6 +3426,17 @@ func GetComponentInstanceError(aComponentInstance unsafe.Pointer) int16 {
 		ebipurego.RegisterLibFunc(&_fnGetComponentInstanceError, _lib, "GetComponentInstanceError")
 	}
 	return _fnGetComponentInstanceError(aComponentInstance)
+}
+
+var _fnGetComponentInstanceStorage func(unsafe.Pointer) unsafe.Pointer
+
+// GetComponentInstanceStorage calls the CarbonCore framework function GetComponentInstanceStorage.
+func GetComponentInstanceStorage(aComponentInstance unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetComponentInstanceStorage == nil {
+		ebipurego.RegisterLibFunc(&_fnGetComponentInstanceStorage, _lib, "GetComponentInstanceStorage")
+	}
+	return _fnGetComponentInstanceStorage(aComponentInstance)
 }
 
 var _fnGetComponentListModSeed func() int32
@@ -3457,6 +3615,17 @@ func GetHandleSize() (result int, h string) {
 	return _ret, _out0
 }
 
+var _fnGetIndResource func(int, int16) unsafe.Pointer
+
+// GetIndResource calls the CarbonCore framework function GetIndResource.
+func GetIndResource(theType int, itemIndex int16) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetIndResource == nil {
+		ebipurego.RegisterLibFunc(&_fnGetIndResource, _lib, "GetIndResource")
+	}
+	return _fnGetIndResource(theType, itemIndex)
+}
+
 var _fnGetIndType func(unsafe.Pointer, int16)
 
 // GetIndType calls the CarbonCore framework function GetIndType.
@@ -3560,6 +3729,19 @@ func GetMaxResourceSize() (result int, theResource string) {
 	return _ret, _out0
 }
 
+var _fnGetNamedResource func(int, unsafe.Pointer) unsafe.Pointer
+
+// GetNamedResource calls the CarbonCore framework function GetNamedResource.
+func GetNamedResource(theType int) (result unsafe.Pointer, name uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetNamedResource == nil {
+		ebipurego.RegisterLibFunc(&_fnGetNamedResource, _lib, "GetNamedResource")
+	}
+	var _out0 uint8
+	_ret := _fnGetNamedResource(theType, unsafe.Pointer(&_out0))
+	return _ret, _out0
+}
+
 var _fnGetNewCollection func(int16) objc.ID
 
 // GetNewCollection calls the CarbonCore framework function GetNewCollection.
@@ -3570,6 +3752,19 @@ func GetNewCollection(collectionID int16) obj.Object {
 	}
 	_ret := _fnGetNewCollection(collectionID)
 	return obj.Wrap(_ret)
+}
+
+var _fnGetNextFOND func(unsafe.Pointer) unsafe.Pointer
+
+// GetNextFOND calls the CarbonCore framework function GetNextFOND.
+func GetNextFOND() (result unsafe.Pointer, fondHandle string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetNextFOND == nil {
+		ebipurego.RegisterLibFunc(&_fnGetNextFOND, _lib, "GetNextFOND")
+	}
+	var _out0 string
+	_ret := _fnGetNextFOND(unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnGetNextResourceFile func(int, unsafe.Pointer) int16
@@ -3634,6 +3829,17 @@ func GetResInfo() (theResource string, theID int16, theType int, name uint8) {
 	var _out3 uint8
 	_fnGetResInfo(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
 	return _out0, _out1, _out2, _out3
+}
+
+var _fnGetResource func(int, int16) unsafe.Pointer
+
+// GetResource calls the CarbonCore framework function GetResource.
+func GetResource(theType int, theID int16) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetResource == nil {
+		ebipurego.RegisterLibFunc(&_fnGetResource, _lib, "GetResource")
+	}
+	return _fnGetResource(theType, theID)
 }
 
 var _fnGetResourceSizeOnDisk func(unsafe.Pointer) int
@@ -4040,6 +4246,17 @@ func InstallDebugAssertOutputHandler(handler unsafe.Pointer) {
 	_fnInstallDebugAssertOutputHandler(handler)
 }
 
+var _fnInstallExceptionHandler func(unsafe.Pointer) unsafe.Pointer
+
+// InstallExceptionHandler calls the CarbonCore framework function InstallExceptionHandler.
+func InstallExceptionHandler(theHandler unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInstallExceptionHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnInstallExceptionHandler, _lib, "InstallExceptionHandler")
+	}
+	return _fnInstallExceptionHandler(theHandler)
+}
+
 var _fnInstallTimeTask func(unsafe.Pointer) int16
 
 // InstallTimeTask calls the CarbonCore framework function InstallTimeTask.
@@ -4305,6 +4522,17 @@ func InvokeSelectorFunctionUPP(selector int, userUPP unsafe.Pointer) (result int
 	var _out0 int
 	_ret := _fnInvokeSelectorFunctionUPP(selector, unsafe.Pointer(&_out0), userUPP)
 	return _ret, _out0
+}
+
+var _fnInvokeThreadEntryUPP func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// InvokeThreadEntryUPP calls the CarbonCore framework function InvokeThreadEntryUPP.
+func InvokeThreadEntryUPP(threadParam unsafe.Pointer, userUPP unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeThreadEntryUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeThreadEntryUPP, _lib, "InvokeThreadEntryUPP")
+	}
+	return _fnInvokeThreadEntryUPP(threadParam, userUPP)
 }
 
 var _fnInvokeThreadSchedulerUPP func(unsafe.Pointer, unsafe.Pointer) int
@@ -4793,6 +5021,28 @@ func LongDoubleToUInt64(value float64) uint64 {
 	return _fnLongDoubleToUInt64(value)
 }
 
+var _fnMPAllocate func(int) unsafe.Pointer
+
+// MPAllocate calls the CarbonCore framework function MPAllocate.
+func MPAllocate(size int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPAllocate == nil {
+		ebipurego.RegisterLibFunc(&_fnMPAllocate, _lib, "MPAllocate")
+	}
+	return _fnMPAllocate(size)
+}
+
+var _fnMPAllocateAligned func(int, uint8, int) unsafe.Pointer
+
+// MPAllocateAligned calls the CarbonCore framework function MPAllocateAligned.
+func MPAllocateAligned(size int, alignment uint8, options int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPAllocateAligned == nil {
+		ebipurego.RegisterLibFunc(&_fnMPAllocateAligned, _lib, "MPAllocateAligned")
+	}
+	return _fnMPAllocateAligned(size, alignment, options)
+}
+
 var _fnMPAllocateTaskStorageIndex func(unsafe.Pointer) int32
 
 // MPAllocateTaskStorageIndex calls the CarbonCore framework function MPAllocateTaskStorageIndex.
@@ -4873,6 +5123,17 @@ func MPGetAllocatedBlockSize(object unsafe.Pointer) int {
 	return _fnMPGetAllocatedBlockSize(object)
 }
 
+var _fnMPGetTaskStorageValue func(int) unsafe.Pointer
+
+// MPGetTaskStorageValue calls the CarbonCore framework function MPGetTaskStorageValue.
+func MPGetTaskStorageValue(taskIndex int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPGetTaskStorageValue == nil {
+		ebipurego.RegisterLibFunc(&_fnMPGetTaskStorageValue, _lib, "MPGetTaskStorageValue")
+	}
+	return _fnMPGetTaskStorageValue(taskIndex)
+}
+
 var _fnMPProcessors func() int
 
 // MPProcessors calls the CarbonCore framework function MPProcessors.
@@ -4893,6 +5154,28 @@ func MPProcessorsScheduled() int {
 		ebipurego.RegisterLibFunc(&_fnMPProcessorsScheduled, _lib, "MPProcessorsScheduled")
 	}
 	return _fnMPProcessorsScheduled()
+}
+
+var _fnMPRemoteCall func(unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
+
+// MPRemoteCall calls the CarbonCore framework function MPRemoteCall.
+func MPRemoteCall(remoteProc unsafe.Pointer, parameter unsafe.Pointer, context_ uint8) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPRemoteCall == nil {
+		ebipurego.RegisterLibFunc(&_fnMPRemoteCall, _lib, "MPRemoteCall")
+	}
+	return _fnMPRemoteCall(remoteProc, parameter, context_)
+}
+
+var _fnMPRemoteCallCFM func(unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
+
+// MPRemoteCallCFM calls the CarbonCore framework function MPRemoteCallCFM.
+func MPRemoteCallCFM(remoteProc unsafe.Pointer, parameter unsafe.Pointer, context_ uint8) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPRemoteCallCFM == nil {
+		ebipurego.RegisterLibFunc(&_fnMPRemoteCallCFM, _lib, "MPRemoteCallCFM")
+	}
+	return _fnMPRemoteCallCFM(remoteProc, parameter, context_)
 }
 
 var _fnMPTaskIsPreemptive func(objc.ID) uint8
@@ -4965,6 +5248,17 @@ func Munger(offset int, ptr1 unsafe.Pointer, len1 int, ptr2 unsafe.Pointer, len2
 	return _ret, _out0
 }
 
+var _fnNanosecondsToAbsolute func(unsafe.Pointer) unsafe.Pointer
+
+// NanosecondsToAbsolute calls the CarbonCore framework function NanosecondsToAbsolute.
+func NanosecondsToAbsolute(nanoseconds unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNanosecondsToAbsolute == nil {
+		ebipurego.RegisterLibFunc(&_fnNanosecondsToAbsolute, _lib, "NanosecondsToAbsolute")
+	}
+	return _fnNanosecondsToAbsolute(nanoseconds)
+}
+
 var _fnNanosecondsToDuration func(unsafe.Pointer) int32
 
 // NanosecondsToDuration calls the CarbonCore framework function NanosecondsToDuration.
@@ -5002,6 +5296,72 @@ func NewCollection() obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnNewCollectionExceptionUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewCollectionExceptionUPP calls the CarbonCore framework function NewCollectionExceptionUPP.
+func NewCollectionExceptionUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewCollectionExceptionUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewCollectionExceptionUPP, _lib, "NewCollectionExceptionUPP")
+	}
+	return _fnNewCollectionExceptionUPP(userRoutine)
+}
+
+var _fnNewCollectionFlattenUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewCollectionFlattenUPP calls the CarbonCore framework function NewCollectionFlattenUPP.
+func NewCollectionFlattenUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewCollectionFlattenUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewCollectionFlattenUPP, _lib, "NewCollectionFlattenUPP")
+	}
+	return _fnNewCollectionFlattenUPP(userRoutine)
+}
+
+var _fnNewComponentFunctionUPP func(unsafe.Pointer, int) unsafe.Pointer
+
+// NewComponentFunctionUPP calls the CarbonCore framework function NewComponentFunctionUPP.
+func NewComponentFunctionUPP(userRoutine unsafe.Pointer, procInfo int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewComponentFunctionUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewComponentFunctionUPP, _lib, "NewComponentFunctionUPP")
+	}
+	return _fnNewComponentFunctionUPP(userRoutine, procInfo)
+}
+
+var _fnNewComponentMPWorkFunctionUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewComponentMPWorkFunctionUPP calls the CarbonCore framework function NewComponentMPWorkFunctionUPP.
+func NewComponentMPWorkFunctionUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewComponentMPWorkFunctionUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewComponentMPWorkFunctionUPP, _lib, "NewComponentMPWorkFunctionUPP")
+	}
+	return _fnNewComponentMPWorkFunctionUPP(userRoutine)
+}
+
+var _fnNewComponentRoutineUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewComponentRoutineUPP calls the CarbonCore framework function NewComponentRoutineUPP.
+func NewComponentRoutineUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewComponentRoutineUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewComponentRoutineUPP, _lib, "NewComponentRoutineUPP")
+	}
+	return _fnNewComponentRoutineUPP(userRoutine)
+}
+
+var _fnNewDebugAssertOutputHandlerUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDebugAssertOutputHandlerUPP calls the CarbonCore framework function NewDebugAssertOutputHandlerUPP.
+func NewDebugAssertOutputHandlerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDebugAssertOutputHandlerUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDebugAssertOutputHandlerUPP, _lib, "NewDebugAssertOutputHandlerUPP")
+	}
+	return _fnNewDebugAssertOutputHandlerUPP(userRoutine)
+}
+
 var _fnNewDebugComponent func(int, unsafe.Pointer, unsafe.Pointer) int32
 
 // NewDebugComponent calls the CarbonCore framework function NewDebugComponent.
@@ -5013,6 +5373,17 @@ func NewDebugComponent(componentSignature int, componentCallback unsafe.Pointer)
 	var _out0 uint8
 	_ret := int(_fnNewDebugComponent(componentSignature, unsafe.Pointer(&_out0), componentCallback))
 	return _ret, _out0
+}
+
+var _fnNewDebugComponentCallbackUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDebugComponentCallbackUPP calls the CarbonCore framework function NewDebugComponentCallbackUPP.
+func NewDebugComponentCallbackUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDebugComponentCallbackUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDebugComponentCallbackUPP, _lib, "NewDebugComponentCallbackUPP")
+	}
+	return _fnNewDebugComponentCallbackUPP(userRoutine)
 }
 
 var _fnNewDebugOption func(int, int, unsafe.Pointer) int32
@@ -5028,6 +5399,127 @@ func NewDebugOption(componentSignature int, optionSelectorNum int) (result int, 
 	return _ret, _out0
 }
 
+var _fnNewDebuggerDisposeThreadUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDebuggerDisposeThreadUPP calls the CarbonCore framework function NewDebuggerDisposeThreadUPP.
+func NewDebuggerDisposeThreadUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDebuggerDisposeThreadUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDebuggerDisposeThreadUPP, _lib, "NewDebuggerDisposeThreadUPP")
+	}
+	return _fnNewDebuggerDisposeThreadUPP(userRoutine)
+}
+
+var _fnNewDebuggerNewThreadUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDebuggerNewThreadUPP calls the CarbonCore framework function NewDebuggerNewThreadUPP.
+func NewDebuggerNewThreadUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDebuggerNewThreadUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDebuggerNewThreadUPP, _lib, "NewDebuggerNewThreadUPP")
+	}
+	return _fnNewDebuggerNewThreadUPP(userRoutine)
+}
+
+var _fnNewDebuggerThreadSchedulerUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDebuggerThreadSchedulerUPP calls the CarbonCore framework function NewDebuggerThreadSchedulerUPP.
+func NewDebuggerThreadSchedulerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDebuggerThreadSchedulerUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDebuggerThreadSchedulerUPP, _lib, "NewDebuggerThreadSchedulerUPP")
+	}
+	return _fnNewDebuggerThreadSchedulerUPP(userRoutine)
+}
+
+var _fnNewDeferredTaskUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewDeferredTaskUPP calls the CarbonCore framework function NewDeferredTaskUPP.
+func NewDeferredTaskUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewDeferredTaskUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewDeferredTaskUPP, _lib, "NewDeferredTaskUPP")
+	}
+	return _fnNewDeferredTaskUPP(userRoutine)
+}
+
+var _fnNewEmptyHandle func() unsafe.Pointer
+
+// NewEmptyHandle calls the CarbonCore framework function NewEmptyHandle.
+func NewEmptyHandle() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewEmptyHandle == nil {
+		ebipurego.RegisterLibFunc(&_fnNewEmptyHandle, _lib, "NewEmptyHandle")
+	}
+	return _fnNewEmptyHandle()
+}
+
+var _fnNewExceptionHandlerUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewExceptionHandlerUPP calls the CarbonCore framework function NewExceptionHandlerUPP.
+func NewExceptionHandlerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewExceptionHandlerUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewExceptionHandlerUPP, _lib, "NewExceptionHandlerUPP")
+	}
+	return _fnNewExceptionHandlerUPP(userRoutine)
+}
+
+var _fnNewFNSubscriptionUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewFNSubscriptionUPP calls the CarbonCore framework function NewFNSubscriptionUPP.
+func NewFNSubscriptionUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewFNSubscriptionUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewFNSubscriptionUPP, _lib, "NewFNSubscriptionUPP")
+	}
+	return _fnNewFNSubscriptionUPP(userRoutine)
+}
+
+var _fnNewFSVolumeEjectUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewFSVolumeEjectUPP calls the CarbonCore framework function NewFSVolumeEjectUPP.
+func NewFSVolumeEjectUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewFSVolumeEjectUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewFSVolumeEjectUPP, _lib, "NewFSVolumeEjectUPP")
+	}
+	return _fnNewFSVolumeEjectUPP(userRoutine)
+}
+
+var _fnNewFSVolumeMountUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewFSVolumeMountUPP calls the CarbonCore framework function NewFSVolumeMountUPP.
+func NewFSVolumeMountUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewFSVolumeMountUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewFSVolumeMountUPP, _lib, "NewFSVolumeMountUPP")
+	}
+	return _fnNewFSVolumeMountUPP(userRoutine)
+}
+
+var _fnNewFSVolumeUnmountUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewFSVolumeUnmountUPP calls the CarbonCore framework function NewFSVolumeUnmountUPP.
+func NewFSVolumeUnmountUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewFSVolumeUnmountUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewFSVolumeUnmountUPP, _lib, "NewFSVolumeUnmountUPP")
+	}
+	return _fnNewFSVolumeUnmountUPP(userRoutine)
+}
+
+var _fnNewFolderManagerNotificationUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewFolderManagerNotificationUPP calls the CarbonCore framework function NewFolderManagerNotificationUPP.
+func NewFolderManagerNotificationUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewFolderManagerNotificationUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewFolderManagerNotificationUPP, _lib, "NewFolderManagerNotificationUPP")
+	}
+	return _fnNewFolderManagerNotificationUPP(userRoutine)
+}
+
 var _fnNewGestaltValue func(int, int) int16
 
 // NewGestaltValue calls the CarbonCore framework function NewGestaltValue.
@@ -5037,6 +5529,61 @@ func NewGestaltValue(selector int, newValue int) int16 {
 		ebipurego.RegisterLibFunc(&_fnNewGestaltValue, _lib, "NewGestaltValue")
 	}
 	return _fnNewGestaltValue(selector, newValue)
+}
+
+var _fnNewGetMissingComponentResourceUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewGetMissingComponentResourceUPP calls the CarbonCore framework function NewGetMissingComponentResourceUPP.
+func NewGetMissingComponentResourceUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewGetMissingComponentResourceUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewGetMissingComponentResourceUPP, _lib, "NewGetMissingComponentResourceUPP")
+	}
+	return _fnNewGetMissingComponentResourceUPP(userRoutine)
+}
+
+var _fnNewHandle func(int) unsafe.Pointer
+
+// NewHandle calls the CarbonCore framework function NewHandle.
+func NewHandle(byteCount int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewHandle == nil {
+		ebipurego.RegisterLibFunc(&_fnNewHandle, _lib, "NewHandle")
+	}
+	return _fnNewHandle(byteCount)
+}
+
+var _fnNewHandleClear func(int) unsafe.Pointer
+
+// NewHandleClear calls the CarbonCore framework function NewHandleClear.
+func NewHandleClear(byteCount int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewHandleClear == nil {
+		ebipurego.RegisterLibFunc(&_fnNewHandleClear, _lib, "NewHandleClear")
+	}
+	return _fnNewHandleClear(byteCount)
+}
+
+var _fnNewIOCompletionUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewIOCompletionUPP calls the CarbonCore framework function NewIOCompletionUPP.
+func NewIOCompletionUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewIOCompletionUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewIOCompletionUPP, _lib, "NewIOCompletionUPP")
+	}
+	return _fnNewIOCompletionUPP(userRoutine)
+}
+
+var _fnNewIndexToUCStringUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewIndexToUCStringUPP calls the CarbonCore framework function NewIndexToUCStringUPP.
+func NewIndexToUCStringUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewIndexToUCStringUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewIndexToUCStringUPP, _lib, "NewIndexToUCStringUPP")
+	}
+	return _fnNewIndexToUCStringUPP(userRoutine)
 }
 
 var _fnNewPtr func(int) string
@@ -5061,6 +5608,28 @@ func NewPtrClear(byteCount int) string {
 	return _fnNewPtrClear(byteCount)
 }
 
+var _fnNewResErrUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewResErrUPP calls the CarbonCore framework function NewResErrUPP.
+func NewResErrUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewResErrUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewResErrUPP, _lib, "NewResErrUPP")
+	}
+	return _fnNewResErrUPP(userRoutine)
+}
+
+var _fnNewSelectorFunctionUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewSelectorFunctionUPP calls the CarbonCore framework function NewSelectorFunctionUPP.
+func NewSelectorFunctionUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewSelectorFunctionUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewSelectorFunctionUPP, _lib, "NewSelectorFunctionUPP")
+	}
+	return _fnNewSelectorFunctionUPP(userRoutine)
+}
+
 var _fnNewThread func(int, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int16
 
 // NewThread calls the CarbonCore framework function NewThread.
@@ -5072,6 +5641,72 @@ func NewThread(threadStyle int, threadEntry unsafe.Pointer, threadParam unsafe.P
 	var _out0 int
 	_ret := _fnNewThread(threadStyle, threadEntry, threadParam, stackSize, options, threadResult, unsafe.Pointer(&_out0))
 	return _ret, _out0
+}
+
+var _fnNewThreadEntryUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewThreadEntryUPP calls the CarbonCore framework function NewThreadEntryUPP.
+func NewThreadEntryUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewThreadEntryUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewThreadEntryUPP, _lib, "NewThreadEntryUPP")
+	}
+	return _fnNewThreadEntryUPP(userRoutine)
+}
+
+var _fnNewThreadSchedulerUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewThreadSchedulerUPP calls the CarbonCore framework function NewThreadSchedulerUPP.
+func NewThreadSchedulerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewThreadSchedulerUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewThreadSchedulerUPP, _lib, "NewThreadSchedulerUPP")
+	}
+	return _fnNewThreadSchedulerUPP(userRoutine)
+}
+
+var _fnNewThreadSwitchUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewThreadSwitchUPP calls the CarbonCore framework function NewThreadSwitchUPP.
+func NewThreadSwitchUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewThreadSwitchUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewThreadSwitchUPP, _lib, "NewThreadSwitchUPP")
+	}
+	return _fnNewThreadSwitchUPP(userRoutine)
+}
+
+var _fnNewThreadTerminationUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewThreadTerminationUPP calls the CarbonCore framework function NewThreadTerminationUPP.
+func NewThreadTerminationUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewThreadTerminationUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewThreadTerminationUPP, _lib, "NewThreadTerminationUPP")
+	}
+	return _fnNewThreadTerminationUPP(userRoutine)
+}
+
+var _fnNewTimerUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewTimerUPP calls the CarbonCore framework function NewTimerUPP.
+func NewTimerUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewTimerUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewTimerUPP, _lib, "NewTimerUPP")
+	}
+	return _fnNewTimerUPP(userRoutine)
+}
+
+var _fnNewUnicodeToTextFallbackUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewUnicodeToTextFallbackUPP calls the CarbonCore framework function NewUnicodeToTextFallbackUPP.
+func NewUnicodeToTextFallbackUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewUnicodeToTextFallbackUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewUnicodeToTextFallbackUPP, _lib, "NewUnicodeToTextFallbackUPP")
+	}
+	return _fnNewUnicodeToTextFallbackUPP(userRoutine)
 }
 
 var _fnOpenAComponent func(unsafe.Pointer, unsafe.Pointer) int16
@@ -5109,6 +5744,17 @@ func OpenADefaultComponent(componentType int, componentSubType int, ci unsafe.Po
 	return _fnOpenADefaultComponent(componentType, componentSubType, ci)
 }
 
+var _fnOpenComponent func(unsafe.Pointer) unsafe.Pointer
+
+// OpenComponent calls the CarbonCore framework function OpenComponent.
+func OpenComponent(aComponent unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOpenComponent == nil {
+		ebipurego.RegisterLibFunc(&_fnOpenComponent, _lib, "OpenComponent")
+	}
+	return _fnOpenComponent(aComponent)
+}
+
 var _fnOpenComponentResFile func(unsafe.Pointer) int32
 
 // OpenComponentResFile calls the CarbonCore framework function OpenComponentResFile.
@@ -5118,6 +5764,17 @@ func OpenComponentResFile(aComponent unsafe.Pointer) int {
 		ebipurego.RegisterLibFunc(&_fnOpenComponentResFile, _lib, "OpenComponentResFile")
 	}
 	return int(_fnOpenComponentResFile(aComponent))
+}
+
+var _fnOpenDefaultComponent func(int, int) unsafe.Pointer
+
+// OpenDefaultComponent calls the CarbonCore framework function OpenDefaultComponent.
+func OpenDefaultComponent(componentType int, componentSubType int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOpenDefaultComponent == nil {
+		ebipurego.RegisterLibFunc(&_fnOpenDefaultComponent, _lib, "OpenDefaultComponent")
+	}
+	return _fnOpenDefaultComponent(componentType, componentSubType)
 }
 
 var _fnPBAllocateForkAsync func(unsafe.Pointer)
@@ -5948,6 +6605,20 @@ func PLpos() (result int16, str1 uint8, searchStr uint8) {
 	return _ret, _out0, _out1
 }
 
+var _fnPLstrcat func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// PLstrcat calls the CarbonCore framework function PLstrcat.
+func PLstrcat() (result unsafe.Pointer, str uint8, append_ uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPLstrcat == nil {
+		ebipurego.RegisterLibFunc(&_fnPLstrcat, _lib, "PLstrcat")
+	}
+	var _out0 uint8
+	var _out1 uint8
+	_ret := _fnPLstrcat(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
+}
+
 var _fnPLstrchr func(unsafe.Pointer, int16) string
 
 // PLstrchr calls the CarbonCore framework function PLstrchr.
@@ -5975,6 +6646,20 @@ func PLstrcmp() (result int16, str1 uint8, str2 uint8) {
 	return _ret, _out0, _out1
 }
 
+var _fnPLstrcpy func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// PLstrcpy calls the CarbonCore framework function PLstrcpy.
+func PLstrcpy() (result unsafe.Pointer, dest uint8, source uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPLstrcpy == nil {
+		ebipurego.RegisterLibFunc(&_fnPLstrcpy, _lib, "PLstrcpy")
+	}
+	var _out0 uint8
+	var _out1 uint8
+	_ret := _fnPLstrcpy(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
+}
+
 var _fnPLstrlen func(unsafe.Pointer) int16
 
 // PLstrlen calls the CarbonCore framework function PLstrlen.
@@ -5988,6 +6673,20 @@ func PLstrlen() (result int16, str uint8) {
 	return _ret, _out0
 }
 
+var _fnPLstrncat func(unsafe.Pointer, unsafe.Pointer, int16) unsafe.Pointer
+
+// PLstrncat calls the CarbonCore framework function PLstrncat.
+func PLstrncat(num int16) (result unsafe.Pointer, str1 uint8, append_ uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPLstrncat == nil {
+		ebipurego.RegisterLibFunc(&_fnPLstrncat, _lib, "PLstrncat")
+	}
+	var _out0 uint8
+	var _out1 uint8
+	_ret := _fnPLstrncat(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), num)
+	return _ret, _out0, _out1
+}
+
 var _fnPLstrncmp func(unsafe.Pointer, unsafe.Pointer, int16) int16
 
 // PLstrncmp calls the CarbonCore framework function PLstrncmp.
@@ -5999,6 +6698,20 @@ func PLstrncmp(num int16) (result int16, str1 uint8, str2 uint8) {
 	var _out0 uint8
 	var _out1 uint8
 	_ret := _fnPLstrncmp(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), num)
+	return _ret, _out0, _out1
+}
+
+var _fnPLstrncpy func(unsafe.Pointer, unsafe.Pointer, int16) unsafe.Pointer
+
+// PLstrncpy calls the CarbonCore framework function PLstrncpy.
+func PLstrncpy(num int16) (result unsafe.Pointer, dest uint8, source uint8) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPLstrncpy == nil {
+		ebipurego.RegisterLibFunc(&_fnPLstrncpy, _lib, "PLstrncpy")
+	}
+	var _out0 uint8
+	var _out1 uint8
+	_ret := _fnPLstrncpy(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), num)
 	return _ret, _out0, _out1
 }
 
@@ -6190,6 +6903,33 @@ func ReallocateHandle(byteCount int) (h string) {
 	return _out0
 }
 
+var _fnRecoverHandle func(string) unsafe.Pointer
+
+// RecoverHandle calls the CarbonCore framework function RecoverHandle.
+func RecoverHandle(p string) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRecoverHandle == nil {
+		ebipurego.RegisterLibFunc(&_fnRecoverHandle, _lib, "RecoverHandle")
+	}
+	return _fnRecoverHandle(p)
+}
+
+var _fnRegisterComponent func(unsafe.Pointer, unsafe.Pointer, int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// RegisterComponent calls the CarbonCore framework function RegisterComponent.
+func RegisterComponent(componentEntryPoint unsafe.Pointer, global int16) (result unsafe.Pointer, cd ComponentDescription, componentName string, componentInfo string, componentIcon string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRegisterComponent == nil {
+		ebipurego.RegisterLibFunc(&_fnRegisterComponent, _lib, "RegisterComponent")
+	}
+	var _out0 ComponentDescription
+	var _out1 string
+	var _out2 string
+	var _out3 string
+	_ret := _fnRegisterComponent(unsafe.Pointer(&_out0), componentEntryPoint, global, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
+}
+
 var _fnRegisterComponentFileRef func(unsafe.Pointer, int16) int16
 
 // RegisterComponentFileRef calls the CarbonCore framework function RegisterComponentFileRef.
@@ -6210,6 +6950,17 @@ func RegisterComponentFileRefEntries(ref unsafe.Pointer, global int16, toRegiste
 		ebipurego.RegisterLibFunc(&_fnRegisterComponentFileRefEntries, _lib, "RegisterComponentFileRefEntries")
 	}
 	return _fnRegisterComponentFileRefEntries(ref, global, toRegister, registerCount)
+}
+
+var _fnRegisterComponentResource func(unsafe.Pointer, int16) unsafe.Pointer
+
+// RegisterComponentResource calls the CarbonCore framework function RegisterComponentResource.
+func RegisterComponentResource(cr unsafe.Pointer, global int16) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRegisterComponentResource == nil {
+		ebipurego.RegisterLibFunc(&_fnRegisterComponentResource, _lib, "RegisterComponentResource")
+	}
+	return _fnRegisterComponentResource(cr, global)
 }
 
 var _fnRegisterComponentResourceFile func(int16, int16) int32
@@ -6348,6 +7099,17 @@ func ResError() int16 {
 		ebipurego.RegisterLibFunc(&_fnResError, _lib, "ResError")
 	}
 	return _fnResError()
+}
+
+var _fnResolveComponentAlias func(unsafe.Pointer) unsafe.Pointer
+
+// ResolveComponentAlias calls the CarbonCore framework function ResolveComponentAlias.
+func ResolveComponentAlias(aComponent unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnResolveComponentAlias == nil {
+		ebipurego.RegisterLibFunc(&_fnResolveComponentAlias, _lib, "ResolveComponentAlias")
+	}
+	return _fnResolveComponentAlias(aComponent)
 }
 
 var _fnResolveDefaultTextEncoding func(int) uint32
@@ -6675,6 +7437,17 @@ func SInt64ToUInt64(value int64) uint64 {
 	return _fnSInt64ToUInt64(value)
 }
 
+var _fnSInt64ToWide func(int64) unsafe.Pointer
+
+// SInt64ToWide calls the CarbonCore framework function SInt64ToWide.
+func SInt64ToWide(s int64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSInt64ToWide == nil {
+		ebipurego.RegisterLibFunc(&_fnSInt64ToWide, _lib, "SInt64ToWide")
+	}
+	return _fnSInt64ToWide(s)
+}
+
 var _fnSetAliasUserType func(unsafe.Pointer, int)
 
 // SetAliasUserType calls the CarbonCore framework function SetAliasUserType.
@@ -6981,6 +7754,39 @@ func SetThreadTerminator(thread int, threadTerminator unsafe.Pointer, terminatio
 		ebipurego.RegisterLibFunc(&_fnSetThreadTerminator, _lib, "SetThreadTerminator")
 	}
 	return _fnSetThreadTerminator(thread, threadTerminator, terminationProcParam)
+}
+
+var _fnSubAbsoluteFromAbsolute func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SubAbsoluteFromAbsolute calls the CarbonCore framework function SubAbsoluteFromAbsolute.
+func SubAbsoluteFromAbsolute(leftAbsoluteTime unsafe.Pointer, rightAbsoluteTime unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSubAbsoluteFromAbsolute == nil {
+		ebipurego.RegisterLibFunc(&_fnSubAbsoluteFromAbsolute, _lib, "SubAbsoluteFromAbsolute")
+	}
+	return _fnSubAbsoluteFromAbsolute(leftAbsoluteTime, rightAbsoluteTime)
+}
+
+var _fnSubDurationFromAbsolute func(int, unsafe.Pointer) unsafe.Pointer
+
+// SubDurationFromAbsolute calls the CarbonCore framework function SubDurationFromAbsolute.
+func SubDurationFromAbsolute(duration int, absoluteTime unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSubDurationFromAbsolute == nil {
+		ebipurego.RegisterLibFunc(&_fnSubDurationFromAbsolute, _lib, "SubDurationFromAbsolute")
+	}
+	return _fnSubDurationFromAbsolute(duration, absoluteTime)
+}
+
+var _fnSubNanosecondsFromAbsolute func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// SubNanosecondsFromAbsolute calls the CarbonCore framework function SubNanosecondsFromAbsolute.
+func SubNanosecondsFromAbsolute(nanoseconds unsafe.Pointer, absoluteTime unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSubNanosecondsFromAbsolute == nil {
+		ebipurego.RegisterLibFunc(&_fnSubNanosecondsFromAbsolute, _lib, "SubNanosecondsFromAbsolute")
+	}
+	return _fnSubNanosecondsFromAbsolute(nanoseconds, absoluteTime)
 }
 
 var _fnSysError func(int16)
@@ -7388,6 +8194,19 @@ func TaskLevel() int {
 		ebipurego.RegisterLibFunc(&_fnTaskLevel, _lib, "TaskLevel")
 	}
 	return int(_fnTaskLevel())
+}
+
+var _fnTempNewHandle func(int, unsafe.Pointer) unsafe.Pointer
+
+// TempNewHandle calls the CarbonCore framework function TempNewHandle.
+func TempNewHandle(logicalSize int) (result unsafe.Pointer, resultCode int16) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTempNewHandle == nil {
+		ebipurego.RegisterLibFunc(&_fnTempNewHandle, _lib, "TempNewHandle")
+	}
+	var _out0 int16
+	_ret := _fnTempNewHandle(logicalSize, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnTestAndClear func(int, unsafe.Pointer) uint8
@@ -8041,6 +8860,17 @@ func UInt64ToSInt64(value uint64) int64 {
 	return _fnUInt64ToSInt64(value)
 }
 
+var _fnUInt64ToUnsignedWide func(uint64) unsafe.Pointer
+
+// UInt64ToUnsignedWide calls the CarbonCore framework function UInt64ToUnsignedWide.
+func UInt64ToUnsignedWide(u uint64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUInt64ToUnsignedWide == nil {
+		ebipurego.RegisterLibFunc(&_fnUInt64ToUnsignedWide, _lib, "UInt64ToUnsignedWide")
+	}
+	return _fnUInt64ToUnsignedWide(u)
+}
+
 var _fnUncaptureComponent func(unsafe.Pointer) int16
 
 // UncaptureComponent calls the CarbonCore framework function UncaptureComponent.
@@ -8131,6 +8961,17 @@ func UnsignedWideToUInt64(uw unsafe.Pointer) uint64 {
 	return _fnUnsignedWideToUInt64(uw)
 }
 
+var _fnUpTime func() unsafe.Pointer
+
+// UpTime calls the CarbonCore framework function UpTime.
+func UpTime() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUpTime == nil {
+		ebipurego.RegisterLibFunc(&_fnUpTime, _lib, "UpTime")
+	}
+	return _fnUpTime()
+}
+
 var _fnUpdateResFile func(int)
 
 // UpdateResFile calls the CarbonCore framework function UpdateResFile.
@@ -8167,6 +9008,28 @@ func UseResFile(refNum int) {
 	_fnUseResFile(refNum)
 }
 
+var _fnWideAdd func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// WideAdd calls the CarbonCore framework function WideAdd.
+func WideAdd(target unsafe.Pointer, source unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWideAdd == nil {
+		ebipurego.RegisterLibFunc(&_fnWideAdd, _lib, "WideAdd")
+	}
+	return _fnWideAdd(target, source)
+}
+
+var _fnWideBitShift func(unsafe.Pointer, int) unsafe.Pointer
+
+// WideBitShift calls the CarbonCore framework function WideBitShift.
+func WideBitShift(target unsafe.Pointer, shift int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWideBitShift == nil {
+		ebipurego.RegisterLibFunc(&_fnWideBitShift, _lib, "WideBitShift")
+	}
+	return _fnWideBitShift(target, shift)
+}
+
 var _fnWideCompare func(unsafe.Pointer, unsafe.Pointer) int16
 
 // WideCompare calls the CarbonCore framework function WideCompare.
@@ -8191,6 +9054,39 @@ func WideDivide(dividend unsafe.Pointer, divisor int) (result int, remainder int
 	return _ret, _out0
 }
 
+var _fnWideMultiply func(int, int, unsafe.Pointer) unsafe.Pointer
+
+// WideMultiply calls the CarbonCore framework function WideMultiply.
+func WideMultiply(multiplicand int, multiplier int, target unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWideMultiply == nil {
+		ebipurego.RegisterLibFunc(&_fnWideMultiply, _lib, "WideMultiply")
+	}
+	return _fnWideMultiply(multiplicand, multiplier, target)
+}
+
+var _fnWideNegate func(unsafe.Pointer) unsafe.Pointer
+
+// WideNegate calls the CarbonCore framework function WideNegate.
+func WideNegate(target unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWideNegate == nil {
+		ebipurego.RegisterLibFunc(&_fnWideNegate, _lib, "WideNegate")
+	}
+	return _fnWideNegate(target)
+}
+
+var _fnWideShift func(unsafe.Pointer, int) unsafe.Pointer
+
+// WideShift calls the CarbonCore framework function WideShift.
+func WideShift(target unsafe.Pointer, shift int) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWideShift == nil {
+		ebipurego.RegisterLibFunc(&_fnWideShift, _lib, "WideShift")
+	}
+	return _fnWideShift(target, shift)
+}
+
 var _fnWideSquareRoot func(unsafe.Pointer) uint32
 
 // WideSquareRoot calls the CarbonCore framework function WideSquareRoot.
@@ -8202,6 +9098,17 @@ func WideSquareRoot(source unsafe.Pointer) int {
 	return int(_fnWideSquareRoot(source))
 }
 
+var _fnWideSubtract func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// WideSubtract calls the CarbonCore framework function WideSubtract.
+func WideSubtract(target unsafe.Pointer, source unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWideSubtract == nil {
+		ebipurego.RegisterLibFunc(&_fnWideSubtract, _lib, "WideSubtract")
+	}
+	return _fnWideSubtract(target, source)
+}
+
 var _fnWideToSInt64 func(unsafe.Pointer) int64
 
 // WideToSInt64 calls the CarbonCore framework function WideToSInt64.
@@ -8211,6 +9118,19 @@ func WideToSInt64(w unsafe.Pointer) int64 {
 		ebipurego.RegisterLibFunc(&_fnWideToSInt64, _lib, "WideToSInt64")
 	}
 	return _fnWideToSInt64(w)
+}
+
+var _fnWideWideDivide func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
+
+// WideWideDivide calls the CarbonCore framework function WideWideDivide.
+func WideWideDivide(dividend unsafe.Pointer, divisor int) (result unsafe.Pointer, remainder int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnWideWideDivide == nil {
+		ebipurego.RegisterLibFunc(&_fnWideWideDivide, _lib, "WideWideDivide")
+	}
+	var _out0 int
+	_ret := _fnWideWideDivide(dividend, divisor, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnWritePartialResource func(unsafe.Pointer, int, unsafe.Pointer, int)

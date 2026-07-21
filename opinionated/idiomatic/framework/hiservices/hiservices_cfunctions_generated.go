@@ -136,6 +136,17 @@ func AXTextMarkerCreate(allocator obj.Object, data unsafe.Pointer, length int) o
 	return obj.Wrap(_ret)
 }
 
+var _fnAXTextMarkerGetBytePtr func(objc.ID) unsafe.Pointer
+
+// AXTextMarkerGetBytePtr calls the HIServices framework function AXTextMarkerGetBytePtr.
+func AXTextMarkerGetBytePtr(theTextMarker obj.Object) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAXTextMarkerGetBytePtr == nil {
+		ebipurego.RegisterLibFunc(&_fnAXTextMarkerGetBytePtr, _lib, "AXTextMarkerGetBytePtr")
+	}
+	return _fnAXTextMarkerGetBytePtr(objref.IDOf(theTextMarker))
+}
+
 var _fnAXTextMarkerGetLength func(objc.ID) int
 
 // AXTextMarkerGetLength calls the HIServices framework function AXTextMarkerGetLength.
@@ -751,6 +762,17 @@ func HIShapeCreateXor(inShape1 obj.Object, inShape2 obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
+var _fnHIShapeGetBounds func(objc.ID, unsafe.Pointer) unsafe.Pointer
+
+// HIShapeGetBounds calls the HIServices framework function HIShapeGetBounds.
+func HIShapeGetBounds(inShape obj.Object, outRect unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIShapeGetBounds == nil {
+		ebipurego.RegisterLibFunc(&_fnHIShapeGetBounds, _lib, "HIShapeGetBounds")
+	}
+	return _fnHIShapeGetBounds(objref.IDOf(inShape), outRect)
+}
+
 var _fnHIShapeGetTypeID func() int
 
 // HIShapeGetTypeID calls the HIServices framework function HIShapeGetTypeID.
@@ -1318,6 +1340,17 @@ func InvokeIconActionUPP(theType int, theIcon unsafe.Pointer, yourDataPtr unsafe
 	return _fnInvokeIconActionUPP(theType, theIcon, yourDataPtr, userUPP)
 }
 
+var _fnInvokeIconGetterUPP func(int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+
+// InvokeIconGetterUPP calls the HIServices framework function InvokeIconGetterUPP.
+func InvokeIconGetterUPP(theType int, yourDataPtr unsafe.Pointer, userUPP unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnInvokeIconGetterUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnInvokeIconGetterUPP, _lib, "InvokeIconGetterUPP")
+	}
+	return _fnInvokeIconGetterUPP(theType, yourDataPtr, userUPP)
+}
+
 var _fnIsIconRefMaskEmpty func(objc.ID) uint8
 
 // IsIconRefMaskEmpty calls the HIServices framework function IsIconRefMaskEmpty.
@@ -1360,6 +1393,28 @@ func LaunchApplication(launchParams unsafe.Pointer) int16 {
 		ebipurego.RegisterLibFunc(&_fnLaunchApplication, _lib, "LaunchApplication")
 	}
 	return _fnLaunchApplication(launchParams)
+}
+
+var _fnNewIconActionUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewIconActionUPP calls the HIServices framework function NewIconActionUPP.
+func NewIconActionUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewIconActionUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewIconActionUPP, _lib, "NewIconActionUPP")
+	}
+	return _fnNewIconActionUPP(userRoutine)
+}
+
+var _fnNewIconGetterUPP func(unsafe.Pointer) unsafe.Pointer
+
+// NewIconGetterUPP calls the HIServices framework function NewIconGetterUPP.
+func NewIconGetterUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNewIconGetterUPP == nil {
+		ebipurego.RegisterLibFunc(&_fnNewIconGetterUPP, _lib, "NewIconGetterUPP")
+	}
+	return _fnNewIconGetterUPP(userRoutine)
 }
 
 var _fnPasteboardGetItemCount func(objc.ID, unsafe.Pointer) int32

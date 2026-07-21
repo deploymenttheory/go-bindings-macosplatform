@@ -197,6 +197,17 @@ func NSApplicationMain(argc int, argv string) int {
 	return int(_fnNSApplicationMain(argc, argv))
 }
 
+var _fnNSAvailableWindowDepths func() unsafe.Pointer
+
+// NSAvailableWindowDepths calls the AppKit framework function NSAvailableWindowDepths.
+func NSAvailableWindowDepths() unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAvailableWindowDepths == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAvailableWindowDepths, _lib, "NSAvailableWindowDepths")
+	}
+	return _fnNSAvailableWindowDepths()
+}
+
 var _fnNSBeep func()
 
 // NSBeep calls the AppKit framework function NSBeep.
@@ -336,6 +347,17 @@ func NSCreateFilenamePboardType(fileType string) *foundation.String {
 	}
 	_ret := _fnNSCreateFilenamePboardType(purego.NSString(fileType))
 	return foundation.StringFromID(_ret)
+}
+
+var _fnNSDirectionalEdgeInsetsMake func(float64, float64, float64, float64) unsafe.Pointer
+
+// NSDirectionalEdgeInsetsMake calls the AppKit framework function NSDirectionalEdgeInsetsMake.
+func NSDirectionalEdgeInsetsMake(top float64, leading float64, bottom float64, trailing float64) unsafe.Pointer {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDirectionalEdgeInsetsMake == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDirectionalEdgeInsetsMake, _lib, "NSDirectionalEdgeInsetsMake")
+	}
+	return _fnNSDirectionalEdgeInsetsMake(top, leading, bottom, trailing)
 }
 
 var _fnNSDisableScreenUpdates func()
