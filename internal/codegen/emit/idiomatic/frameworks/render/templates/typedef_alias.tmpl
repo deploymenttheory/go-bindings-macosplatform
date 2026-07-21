@@ -1,0 +1,7 @@
+{{define "typedef_alias" -}}
+{{range . -}}
+{{if .Doc}}{{comment .Doc}}
+{{end}}type {{.GoName}} = {{.RHS}}
+
+{{end -}}
+{{end}}

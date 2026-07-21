@@ -13,10 +13,30 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
 	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
 )
+
+// recordIdiomaticFunction records one emitted free-function wrapper into the
+// parity manifest, keyed on the C function name (identical to the raw oracle's
+// key). The idiomatic free-function emitters are split across three passes that
+// coordinate via takenNames, so a given C function is committed by exactly one
+// of them; Compare deduplicates in any case. No-op on a nil recorder.
+func recordIdiomaticFunction(rec *emitmanifest.Recorder, framework, pkgName, cName, goName string) {
+	if rec == nil {
+		return
+	}
+	rec.Record(emitmanifest.Entry{
+		Style:     emitmanifest.StyleIdiomatic,
+		Kind:      emitmanifest.KindFunction,
+		Framework: framework,
+		MetaKey:   emitmanifest.MetaKey(framework, emitmanifest.KindFunction, cName, ""),
+		GoPkg:     pkgName,
+		GoSymbol:  goName,
+	})
+}
 
 // emitGenericFunctionWrappers writes <pkgname>_cfunctions_generated.go with
 // one exported forwarding wrapper per emittable raw C function, giving
@@ -282,6 +302,7 @@ func emitGenericFunctionWrappers(
 			continue
 		}
 		takenNames[goName] = true
+		recordIdiomaticFunction(fc.manifest, framework.Framework, pkgName, fn.Name, goName)
 
 		varName := "_fn" + goName
 
@@ -774,6 +795,7 @@ func emitCFFunctionWrappers(
 		}
 
 		takenNames[goName] = true
+		recordIdiomaticFunction(fc.manifest, framework.Framework, pkgName, fn.Name, goName)
 		// The wrapper is committed: merge its type imports, and add objc when a
 		// non-reference parameter also crosses the ABI as an objc.ID.
 		maps.Copy(imports, fnImports)

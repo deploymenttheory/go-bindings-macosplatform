@@ -69,6 +69,192 @@ func (e AVAudioSessionErrorCode) String() string {
 	}
 }
 
+// The supported channel bitmaps to use when defining channel layouts.
+// Bitmask — values may be combined with |.
+type AudioChannelBitmap int64
+
+const (
+	// The left channel.
+	KAudioChannelBit_Left AudioChannelBitmap = 1
+	// The right channel.
+	KAudioChannelBit_Right AudioChannelBitmap = 2
+	// The center channel.
+	KAudioChannelBit_Center AudioChannelBitmap = 4
+	// The Low Frequency Effects (LFE) screen channel.
+	KAudioChannelBit_LFEScreen AudioChannelBitmap = 8
+	// The left surround channel.
+	KAudioChannelBit_LeftSurround AudioChannelBitmap = 16
+	// The rIght surround channel.
+	KAudioChannelBit_RightSurround AudioChannelBitmap = 32
+	// The left center channel.
+	KAudioChannelBit_LeftCenter AudioChannelBitmap = 64
+	// The right center channel.
+	KAudioChannelBit_RightCenter AudioChannelBitmap = 128
+	// The center surround channel.
+	KAudioChannelBit_CenterSurround AudioChannelBitmap = 256
+	// The left surround direct channel.
+	KAudioChannelBit_LeftSurroundDirect AudioChannelBitmap = 512
+	// The right surround direct channel.
+	KAudioChannelBit_RightSurroundDirect AudioChannelBitmap = 1024
+	// The top center surround channel.
+	KAudioChannelBit_TopCenterSurround AudioChannelBitmap = 2048
+	// The vertical height left channel.
+	KAudioChannelBit_VerticalHeightLeft AudioChannelBitmap = 4096
+	// The vertical height center channel.
+	KAudioChannelBit_VerticalHeightCenter AudioChannelBitmap = 8192
+	// The vertical height right channel.
+	KAudioChannelBit_VerticalHeightRight AudioChannelBitmap = 16384
+	// The top-back left channel.
+	KAudioChannelBit_TopBackLeft AudioChannelBitmap = 32768
+	// The top-back center channel.
+	KAudioChannelBit_TopBackCenter AudioChannelBitmap = 65536
+	// The top-back right channel.
+	KAudioChannelBit_TopBackRight AudioChannelBitmap = 131072
+	// The left-top front channel.
+	KAudioChannelBit_LeftTopFront AudioChannelBitmap = 4096
+	// The top-front center channel.
+	KAudioChannelBit_CenterTopFront AudioChannelBitmap = 8192
+	// The top-front front channel.
+	KAudioChannelBit_RightTopFront AudioChannelBitmap = 16384
+	// The left-top middle channel.
+	KAudioChannelBit_LeftTopMiddle AudioChannelBitmap = 2097152
+	// The top-middle center channel.
+	KAudioChannelBit_CenterTopMiddle AudioChannelBitmap = 2048
+	// The top-middle right channel.
+	KAudioChannelBit_RightTopMiddle AudioChannelBitmap = 8388608
+	// The left-top rear channel.
+	KAudioChannelBit_LeftTopRear AudioChannelBitmap = 16777216
+	// The top-right center channel.
+	KAudioChannelBit_CenterTopRear AudioChannelBitmap = 33554432
+	// The top-rear right channel.
+	KAudioChannelBit_RightTopRear AudioChannelBitmap = 67108864
+)
+
+// String returns the AudioChannelBitmap constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioChannelBitmap) String() string {
+	var parts []string
+	if e&KAudioChannelBit_Left != 0 {
+		parts = append(parts, "KAudioChannelBit_Left")
+	}
+	if e&KAudioChannelBit_Right != 0 {
+		parts = append(parts, "KAudioChannelBit_Right")
+	}
+	if e&KAudioChannelBit_Center != 0 {
+		parts = append(parts, "KAudioChannelBit_Center")
+	}
+	if e&KAudioChannelBit_LFEScreen != 0 {
+		parts = append(parts, "KAudioChannelBit_LFEScreen")
+	}
+	if e&KAudioChannelBit_LeftSurround != 0 {
+		parts = append(parts, "KAudioChannelBit_LeftSurround")
+	}
+	if e&KAudioChannelBit_RightSurround != 0 {
+		parts = append(parts, "KAudioChannelBit_RightSurround")
+	}
+	if e&KAudioChannelBit_LeftCenter != 0 {
+		parts = append(parts, "KAudioChannelBit_LeftCenter")
+	}
+	if e&KAudioChannelBit_RightCenter != 0 {
+		parts = append(parts, "KAudioChannelBit_RightCenter")
+	}
+	if e&KAudioChannelBit_CenterSurround != 0 {
+		parts = append(parts, "KAudioChannelBit_CenterSurround")
+	}
+	if e&KAudioChannelBit_LeftSurroundDirect != 0 {
+		parts = append(parts, "KAudioChannelBit_LeftSurroundDirect")
+	}
+	if e&KAudioChannelBit_RightSurroundDirect != 0 {
+		parts = append(parts, "KAudioChannelBit_RightSurroundDirect")
+	}
+	if e&KAudioChannelBit_TopCenterSurround != 0 {
+		parts = append(parts, "KAudioChannelBit_TopCenterSurround")
+	}
+	if e&KAudioChannelBit_VerticalHeightLeft != 0 {
+		parts = append(parts, "KAudioChannelBit_VerticalHeightLeft")
+	}
+	if e&KAudioChannelBit_VerticalHeightCenter != 0 {
+		parts = append(parts, "KAudioChannelBit_VerticalHeightCenter")
+	}
+	if e&KAudioChannelBit_VerticalHeightRight != 0 {
+		parts = append(parts, "KAudioChannelBit_VerticalHeightRight")
+	}
+	if e&KAudioChannelBit_TopBackLeft != 0 {
+		parts = append(parts, "KAudioChannelBit_TopBackLeft")
+	}
+	if e&KAudioChannelBit_TopBackCenter != 0 {
+		parts = append(parts, "KAudioChannelBit_TopBackCenter")
+	}
+	if e&KAudioChannelBit_TopBackRight != 0 {
+		parts = append(parts, "KAudioChannelBit_TopBackRight")
+	}
+	if e&KAudioChannelBit_LeftTopFront != 0 {
+		parts = append(parts, "KAudioChannelBit_LeftTopFront")
+	}
+	if e&KAudioChannelBit_CenterTopFront != 0 {
+		parts = append(parts, "KAudioChannelBit_CenterTopFront")
+	}
+	if e&KAudioChannelBit_RightTopFront != 0 {
+		parts = append(parts, "KAudioChannelBit_RightTopFront")
+	}
+	if e&KAudioChannelBit_LeftTopMiddle != 0 {
+		parts = append(parts, "KAudioChannelBit_LeftTopMiddle")
+	}
+	if e&KAudioChannelBit_CenterTopMiddle != 0 {
+		parts = append(parts, "KAudioChannelBit_CenterTopMiddle")
+	}
+	if e&KAudioChannelBit_RightTopMiddle != 0 {
+		parts = append(parts, "KAudioChannelBit_RightTopMiddle")
+	}
+	if e&KAudioChannelBit_LeftTopRear != 0 {
+		parts = append(parts, "KAudioChannelBit_LeftTopRear")
+	}
+	if e&KAudioChannelBit_CenterTopRear != 0 {
+		parts = append(parts, "KAudioChannelBit_CenterTopRear")
+	}
+	if e&KAudioChannelBit_RightTopRear != 0 {
+		parts = append(parts, "KAudioChannelBit_RightTopRear")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Constants that define the audio channel flags of an audio channel description.
+// Bitmask — values may be combined with |.
+type AudioChannelFlags int64
+
+const (
+	// All flags are clear.
+	KAudioChannelFlags_AllOff AudioChannelFlags = 0
+	// A flag that indicates the channel uses the speaker position’s cartesian coordinates.
+	KAudioChannelFlags_RectangularCoordinates AudioChannelFlags = 1
+	// A flag that indicates the channel uses the speaker position’s spherical coordinates.
+	KAudioChannelFlags_SphericalCoordinates AudioChannelFlags = 2
+	// A flag that indicates that unit values are in meters.
+	KAudioChannelFlags_Meters AudioChannelFlags = 4
+)
+
+// String returns the AudioChannelFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioChannelFlags) String() string {
+	var parts []string
+	if e&KAudioChannelFlags_RectangularCoordinates != 0 {
+		parts = append(parts, "KAudioChannelFlags_RectangularCoordinates")
+	}
+	if e&KAudioChannelFlags_SphericalCoordinates != 0 {
+		parts = append(parts, "KAudioChannelFlags_SphericalCoordinates")
+	}
+	if e&KAudioChannelFlags_Meters != 0 {
+		parts = append(parts, "KAudioChannelFlags_Meters")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // A structure that represents flags for a timestamp.
 // Bitmask — values may be combined with |.
 type AudioTimeStampFlags int64

@@ -8,6 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -15,13 +16,18 @@ import (
 
 // EmitExterns writes accessor functions for extern global symbols.
 // Each extern is accessed via purego.Dlsym at runtime.
+//
+// rec, when non-nil, records every emitted extern accessor into the parity
+// manifest keyed on its C symbol. It never affects the emitted bytes.
 func EmitExterns(
 	w io.Writer,
 	framework *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
 	dylibVarName string,
+	rec *emitmanifest.Recorder,
 ) (typemap.ImportSet, error) {
 	imports := make(typemap.ImportSet)
+	pkgName := naming.PackageName(framework.Framework)
 
 	// Build set of function names to avoid declaring an extern accessor with
 	// the same name as an existing exported function (causes redeclaration).
@@ -48,6 +54,14 @@ func EmitExterns(
 		seen[ext.Name] = true
 		seenGoNames[goName] = true
 		externs = append(externs, ext)
+		rec.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleRaw,
+			Kind:      emitmanifest.KindExtern,
+			Framework: framework.Framework,
+			MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindExtern, ext.Name, ""),
+			GoPkg:     pkgName,
+			GoSymbol:  goName,
+		})
 	}
 	if len(externs) == 0 {
 		return imports, nil

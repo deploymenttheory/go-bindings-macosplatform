@@ -8,6 +8,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -15,12 +16,17 @@ import (
 
 // EmitStructs writes all struct type declarations for the framework to w.
 // Returns cross-framework imports discovered during field type resolution.
+//
+// rec, when non-nil, records every emitted struct, field, and typedef alias into
+// the parity manifest keyed on its ObjC/C name. It never affects emitted bytes.
 func EmitStructs(
 	w io.Writer,
 	framework *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
+	rec *emitmanifest.Recorder,
 ) (typemap.ImportSet, error) {
 	imports := make(typemap.ImportSet)
+	pkgName := naming.PackageName(framework.Framework)
 
 	// Build the set of package-level identifiers structs must not collide
 	// with: function names (raw C and exported Go forms), class wrapper
@@ -67,7 +73,20 @@ func EmitStructs(
 			continue
 		}
 		seenGoNames[goName] = true
-		structs = append(structs, buildStructView(name, s, framework.Framework, mapper, imports))
+		built := buildStructView(name, s, framework.Framework, mapper, imports)
+		structs = append(structs, built)
+		rec.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleRaw,
+			Kind:      emitmanifest.KindStruct,
+			Framework: framework.Framework,
+			MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindStruct, name, ""),
+			GoPkg:     pkgName,
+			GoSymbol:  built.GoName,
+		})
+		// Struct-field-level parity is deferred until Phase 2 routes the idiomatic
+		// emitter through this same BuildStructView, so both styles derive field
+		// Go names identically; recording fields now (with divergent naming) would
+		// report every field as a false gap.
 	}
 	out, err := render.Structs(structs)
 	if err != nil {
@@ -85,6 +104,16 @@ func EmitStructs(
 		seenGoNames[name] = true
 	}
 	aliases := buildTypedefAliasViews(framework, mapper, imports, seenGoNames)
+	for _, alias := range aliases {
+		rec.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleRaw,
+			Kind:      emitmanifest.KindTypedefAlias,
+			Framework: framework.Framework,
+			MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindTypedefAlias, alias.GoName, ""),
+			GoPkg:     pkgName,
+			GoSymbol:  alias.GoName,
+		})
+	}
 	aliasOut, err := render.TypedefAliases(aliases)
 	if err != nil {
 		return nil, err

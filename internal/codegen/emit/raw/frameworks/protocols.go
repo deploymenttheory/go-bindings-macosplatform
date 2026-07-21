@@ -8,19 +8,26 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
 )
 
 // EmitProtocols writes Go interface types for all ObjC protocols in the framework.
+//
+// rec, when non-nil, records every emitted protocol and its (non-optional,
+// available) methods into the parity manifest keyed on the ObjC protocol name
+// and selector. It never affects the emitted bytes.
 func EmitProtocols(
 	w io.Writer,
 	framework *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
 	classNameOwner map[string]string,
+	rec *emitmanifest.Recorder,
 ) (typemap.ImportSet, error) {
 	imports := make(typemap.ImportSet)
+	pkgName := naming.PackageName(framework.Framework)
 
 	names := make([]string, 0, len(framework.Protocols))
 	for name := range framework.Protocols {
@@ -34,14 +41,16 @@ func EmitProtocols(
 		if proto.Availability.IsUnavailable {
 			continue
 		}
-		protocols = append(protocols, buildProtocolView(
+		built := buildProtocolView(
 			name,
 			proto,
 			framework.Framework,
 			mapper,
 			classNameOwner,
 			imports,
-		))
+		)
+		protocols = append(protocols, built)
+		recordProtocol(rec, framework.Framework, pkgName, name, built.GoName, proto)
 	}
 	out, err := render.Protocols(protocols)
 	if err != nil {
@@ -51,6 +60,43 @@ func EmitProtocols(
 		return nil, err
 	}
 	return imports, nil
+}
+
+// recordProtocol records an emitted protocol and the methods the interface will
+// actually declare (mirroring buildProtocolView's filter: available,
+// non-optional, deduplicated by Go method name) into the parity manifest.
+// Methods are keyed on the protocol name plus the ObjC selector.
+func recordProtocol(rec *emitmanifest.Recorder, framework, pkgName, name, goName string, proto meta.Protocol) {
+	if rec == nil {
+		return
+	}
+	rec.Record(emitmanifest.Entry{
+		Style:     emitmanifest.StyleRaw,
+		Kind:      emitmanifest.KindProtocol,
+		Framework: framework,
+		MetaKey:   emitmanifest.MetaKey(framework, emitmanifest.KindProtocol, name, ""),
+		GoPkg:     pkgName,
+		GoSymbol:  goName,
+	})
+	seenGoNames := make(map[string]bool)
+	for _, method := range proto.Methods {
+		if method.Availability.IsUnavailable || method.IsOptional {
+			continue
+		}
+		goMethodName := naming.MethodName(method.Selector)
+		if seenGoNames[goMethodName] {
+			continue
+		}
+		seenGoNames[goMethodName] = true
+		rec.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleRaw,
+			Kind:      emitmanifest.KindProtocolMethod,
+			Framework: framework,
+			MetaKey:   emitmanifest.MetaKey(framework, emitmanifest.KindProtocolMethod, name, method.Selector),
+			GoPkg:     pkgName,
+			GoSymbol:  goMethodName,
+		})
+	}
 }
 
 func buildProtocolView(

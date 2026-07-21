@@ -5,6 +5,7 @@ package idiofw
 import (
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/idioconf"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
@@ -51,6 +52,11 @@ type frameworkContext struct {
 	delegates map[string]string
 
 	referenced map[string]bool // enum names a resolved signature localized
+
+	// manifest, when non-nil, receives one parity entry per emitted construct
+	// (keyed on its ObjC/C name) so this framework's idiomatic coverage can be
+	// checked against the raw oracle. It never affects the emitted bytes.
+	manifest *emitmanifest.Recorder
 }
 
 // localEnumTypeName returns the idiomatic package-local spelling for one of

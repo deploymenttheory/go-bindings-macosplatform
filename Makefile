@@ -4,7 +4,7 @@ ACC_ATTEST ?= acceptance-attestation.jsonl
 # Consumer project rebuilt against the local tree by canary-build.
 CANARY_DIR ?= ../go-macos-observability
 
-.PHONY: help generate build test lint version acc-generate acc-test act-acc idiomatic-regen-diff canary-build
+.PHONY: help generate build test lint version acc-generate acc-test act-acc idiomatic-regen-diff canary-build parity parity-update
 
 help:
 	@echo "Targets:"
@@ -18,6 +18,8 @@ help:
 	@echo "  act-acc       Run the acceptance workflow via act (requires act in PATH)"
 	@echo "  idiomatic-regen-diff  Re-emit the idiomatic layer, build+vet it, and show the diff"
 	@echo "  canary-build  Build the consumer project in CANARY_DIR against this working tree"
+	@echo "  parity        Check idiomatic emittance covers the raw oracle (ratchet vs committed baseline)"
+	@echo "  parity-update Rewrite the parity baseline after a phase closes gaps"
 
 generate:
 	go run ./cmd/generate/ bindings
@@ -59,6 +61,16 @@ idiomatic-regen-diff:
 	go vet -unsafeptr=false ./opinionated/...
 	git --no-pager diff --stat -- opinionated/
 	@echo "Run 'git diff -- opinionated/' to review the full diff."
+
+# Prove the idiomatic emitter covers every construct the raw emitter does. The
+# ratchet fails only on a NEW gap not already in the committed baseline, so it
+# passes during the migration while gaps are being closed phase by phase, and
+# guards against regressions. Shrink the baseline with parity-update as gaps close.
+parity:
+	go run ./cmd/generate/ parity --baseline metadata/parity-baseline.json
+
+parity-update:
+	go run ./cmd/generate/ parity --write-baseline metadata/parity-baseline.json
 
 # Compile the consumer project against this working tree (no go.mod edits in
 # either repo: a throwaway workspace file under the gitignored tmp/ wires the

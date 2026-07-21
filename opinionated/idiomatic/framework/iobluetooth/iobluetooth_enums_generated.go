@@ -60,6 +60,38 @@ func (e BluetoothRFCOMMParityType) String() string {
 	}
 }
 
+type IOBluetoothL2CAPChannelEventType int64
+
+const (
+	KIOBluetoothL2CAPChannelEventTypeData                IOBluetoothL2CAPChannelEventType = 1
+	KIOBluetoothL2CAPChannelEventTypeOpenComplete        IOBluetoothL2CAPChannelEventType = 2
+	KIOBluetoothL2CAPChannelEventTypeClosed              IOBluetoothL2CAPChannelEventType = 3
+	KIOBluetoothL2CAPChannelEventTypeReconfigured        IOBluetoothL2CAPChannelEventType = 4
+	KIOBluetoothL2CAPChannelEventTypeWriteComplete       IOBluetoothL2CAPChannelEventType = 5
+	KIOBluetoothL2CAPChannelEventTypeQueueSpaceAvailable IOBluetoothL2CAPChannelEventType = 6
+)
+
+// String returns the IOBluetoothL2CAPChannelEventType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e IOBluetoothL2CAPChannelEventType) String() string {
+	switch e {
+	case KIOBluetoothL2CAPChannelEventTypeData:
+		return "KIOBluetoothL2CAPChannelEventTypeData"
+	case KIOBluetoothL2CAPChannelEventTypeOpenComplete:
+		return "KIOBluetoothL2CAPChannelEventTypeOpenComplete"
+	case KIOBluetoothL2CAPChannelEventTypeClosed:
+		return "KIOBluetoothL2CAPChannelEventTypeClosed"
+	case KIOBluetoothL2CAPChannelEventTypeReconfigured:
+		return "KIOBluetoothL2CAPChannelEventTypeReconfigured"
+	case KIOBluetoothL2CAPChannelEventTypeWriteComplete:
+		return "KIOBluetoothL2CAPChannelEventTypeWriteComplete"
+	case KIOBluetoothL2CAPChannelEventTypeQueueSpaceAvailable:
+		return "KIOBluetoothL2CAPChannelEventTypeQueueSpaceAvailable"
+	default:
+		return fmt.Sprintf("IOBluetoothL2CAPChannelEventType(%d)", int64(e))
+	}
+}
+
 type IOBluetoothSMSMode uint64
 
 const (

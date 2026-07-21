@@ -53,6 +53,17 @@ func Structs(structs []view.Struct) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
+// TypedefAliases renders C-typedef Go type aliases (e.g. NSRect = CGRect) for a
+// package as a Go source fragment (a package body, before file assembly and
+// gofmt).
+func TypedefAliases(aliases []view.TypedefAlias) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "typedef_alias", aliases); err != nil {
+		return nil, fmt.Errorf("render typedef aliases: %w", err)
+	}
+	return buf.Bytes(), nil
+}
+
 // Enums renders the concrete enum definitions for a package as a Go source
 // fragment (a package body, before file assembly and gofmt). Each enum becomes a
 // `type X <underlying>` declaration with a typed const block and a String method.

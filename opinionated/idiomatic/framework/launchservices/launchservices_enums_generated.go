@@ -56,6 +56,130 @@ func (e LSHandlerOptions) String() string {
 }
 
 // Bitmask — values may be combined with |.
+type LSItemInfoFlags int64
+
+const (
+	KLSItemInfoIsPlainFile       LSItemInfoFlags = 1
+	KLSItemInfoIsPackage         LSItemInfoFlags = 2
+	KLSItemInfoIsApplication     LSItemInfoFlags = 4
+	KLSItemInfoIsContainer       LSItemInfoFlags = 8
+	KLSItemInfoIsAliasFile       LSItemInfoFlags = 16
+	KLSItemInfoIsSymlink         LSItemInfoFlags = 32
+	KLSItemInfoIsInvisible       LSItemInfoFlags = 64
+	KLSItemInfoIsNativeApp       LSItemInfoFlags = 128
+	KLSItemInfoIsClassicApp      LSItemInfoFlags = 256
+	KLSItemInfoAppPrefersNative  LSItemInfoFlags = 512
+	KLSItemInfoAppPrefersClassic LSItemInfoFlags = 1024
+	KLSItemInfoAppIsScriptable   LSItemInfoFlags = 2048
+	KLSItemInfoIsVolume          LSItemInfoFlags = 4096
+	KLSItemInfoExtensionIsHidden LSItemInfoFlags = 1048576
+)
+
+// String returns the LSItemInfoFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LSItemInfoFlags) String() string {
+	var parts []string
+	if e&KLSItemInfoIsPlainFile != 0 {
+		parts = append(parts, "KLSItemInfoIsPlainFile")
+	}
+	if e&KLSItemInfoIsPackage != 0 {
+		parts = append(parts, "KLSItemInfoIsPackage")
+	}
+	if e&KLSItemInfoIsApplication != 0 {
+		parts = append(parts, "KLSItemInfoIsApplication")
+	}
+	if e&KLSItemInfoIsContainer != 0 {
+		parts = append(parts, "KLSItemInfoIsContainer")
+	}
+	if e&KLSItemInfoIsAliasFile != 0 {
+		parts = append(parts, "KLSItemInfoIsAliasFile")
+	}
+	if e&KLSItemInfoIsSymlink != 0 {
+		parts = append(parts, "KLSItemInfoIsSymlink")
+	}
+	if e&KLSItemInfoIsInvisible != 0 {
+		parts = append(parts, "KLSItemInfoIsInvisible")
+	}
+	if e&KLSItemInfoIsNativeApp != 0 {
+		parts = append(parts, "KLSItemInfoIsNativeApp")
+	}
+	if e&KLSItemInfoIsClassicApp != 0 {
+		parts = append(parts, "KLSItemInfoIsClassicApp")
+	}
+	if e&KLSItemInfoAppPrefersNative != 0 {
+		parts = append(parts, "KLSItemInfoAppPrefersNative")
+	}
+	if e&KLSItemInfoAppPrefersClassic != 0 {
+		parts = append(parts, "KLSItemInfoAppPrefersClassic")
+	}
+	if e&KLSItemInfoAppIsScriptable != 0 {
+		parts = append(parts, "KLSItemInfoAppIsScriptable")
+	}
+	if e&KLSItemInfoIsVolume != 0 {
+		parts = append(parts, "KLSItemInfoIsVolume")
+	}
+	if e&KLSItemInfoExtensionIsHidden != 0 {
+		parts = append(parts, "KLSItemInfoExtensionIsHidden")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type LSLaunchFlags int64
+
+const (
+	KLSLaunchDefaults         LSLaunchFlags = 1
+	KLSLaunchAndPrint         LSLaunchFlags = 2
+	KLSLaunchAndDisplayErrors LSLaunchFlags = 64
+	KLSLaunchDontAddToRecents LSLaunchFlags = 256
+	KLSLaunchDontSwitch       LSLaunchFlags = 512
+	KLSLaunchAsync            LSLaunchFlags = 65536
+	KLSLaunchNewInstance      LSLaunchFlags = 524288
+	KLSLaunchAndHide          LSLaunchFlags = 1048576
+	KLSLaunchAndHideOthers    LSLaunchFlags = 2097152
+)
+
+// String returns the LSLaunchFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e LSLaunchFlags) String() string {
+	var parts []string
+	if e&KLSLaunchDefaults != 0 {
+		parts = append(parts, "KLSLaunchDefaults")
+	}
+	if e&KLSLaunchAndPrint != 0 {
+		parts = append(parts, "KLSLaunchAndPrint")
+	}
+	if e&KLSLaunchAndDisplayErrors != 0 {
+		parts = append(parts, "KLSLaunchAndDisplayErrors")
+	}
+	if e&KLSLaunchDontAddToRecents != 0 {
+		parts = append(parts, "KLSLaunchDontAddToRecents")
+	}
+	if e&KLSLaunchDontSwitch != 0 {
+		parts = append(parts, "KLSLaunchDontSwitch")
+	}
+	if e&KLSLaunchAsync != 0 {
+		parts = append(parts, "KLSLaunchAsync")
+	}
+	if e&KLSLaunchNewInstance != 0 {
+		parts = append(parts, "KLSLaunchNewInstance")
+	}
+	if e&KLSLaunchAndHide != 0 {
+		parts = append(parts, "KLSLaunchAndHide")
+	}
+	if e&KLSLaunchAndHideOthers != 0 {
+		parts = append(parts, "KLSLaunchAndHideOthers")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type LSRequestedInfo int64
 
 const (

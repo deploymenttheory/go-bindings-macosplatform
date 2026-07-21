@@ -77,6 +77,56 @@ func (e CGBitmapInfo) String() string {
 	return strings.Join(parts, "|")
 }
 
+type CGBitmapLayout int64
+
+const (
+	KCGBitmapLayoutAlphaOnly CGBitmapLayout = 0
+	KCGBitmapLayoutGray      CGBitmapLayout = 1
+	KCGBitmapLayoutGrayAlpha CGBitmapLayout = 2
+	KCGBitmapLayoutRGBA      CGBitmapLayout = 3
+	KCGBitmapLayoutARGB      CGBitmapLayout = 4
+	KCGBitmapLayoutRGBX      CGBitmapLayout = 5
+	KCGBitmapLayoutXRGB      CGBitmapLayout = 6
+	KCGBitmapLayoutBGRA      CGBitmapLayout = 7
+	KCGBitmapLayoutBGRX      CGBitmapLayout = 8
+	KCGBitmapLayoutABGR      CGBitmapLayout = 9
+	KCGBitmapLayoutXBGR      CGBitmapLayout = 10
+	KCGBitmapLayoutCMYK      CGBitmapLayout = 11
+)
+
+// String returns the CGBitmapLayout constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGBitmapLayout) String() string {
+	switch e {
+	case KCGBitmapLayoutAlphaOnly:
+		return "KCGBitmapLayoutAlphaOnly"
+	case KCGBitmapLayoutGray:
+		return "KCGBitmapLayoutGray"
+	case KCGBitmapLayoutGrayAlpha:
+		return "KCGBitmapLayoutGrayAlpha"
+	case KCGBitmapLayoutRGBA:
+		return "KCGBitmapLayoutRGBA"
+	case KCGBitmapLayoutARGB:
+		return "KCGBitmapLayoutARGB"
+	case KCGBitmapLayoutRGBX:
+		return "KCGBitmapLayoutRGBX"
+	case KCGBitmapLayoutXRGB:
+		return "KCGBitmapLayoutXRGB"
+	case KCGBitmapLayoutBGRA:
+		return "KCGBitmapLayoutBGRA"
+	case KCGBitmapLayoutBGRX:
+		return "KCGBitmapLayoutBGRX"
+	case KCGBitmapLayoutABGR:
+		return "KCGBitmapLayoutABGR"
+	case KCGBitmapLayoutXBGR:
+		return "KCGBitmapLayoutXBGR"
+	case KCGBitmapLayoutCMYK:
+		return "KCGBitmapLayoutCMYK"
+	default:
+		return fmt.Sprintf("CGBitmapLayout(%d)", int64(e))
+	}
+}
+
 // Compositing operations for images.
 type CGBlendMode int64
 
@@ -1716,6 +1766,41 @@ func (e CGPathDrawingMode) String() string {
 		return "KCGPathEOFillStroke"
 	default:
 		return fmt.Sprintf("CGPathDrawingMode(%d)", int64(e))
+	}
+}
+
+// The type of element found in a path.
+type CGPathElementType int64
+
+const (
+	// The path element that starts a new subpath.
+	KCGPathElementMoveToPoint CGPathElementType = 0
+	// The path element that adds a line from the current point to a new point.
+	KCGPathElementAddLineToPoint CGPathElementType = 1
+	// The path element that adds a quadratic curve from the current point to the specified point.
+	KCGPathElementAddQuadCurveToPoint CGPathElementType = 2
+	// The path element that adds a cubic curve from the current point to the specified point.
+	KCGPathElementAddCurveToPoint CGPathElementType = 3
+	// The path element that closes and completes a subpath. The element does not contain any points. See the function CGPathCloseSubpath.
+	KCGPathElementCloseSubpath CGPathElementType = 4
+)
+
+// String returns the CGPathElementType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CGPathElementType) String() string {
+	switch e {
+	case KCGPathElementMoveToPoint:
+		return "KCGPathElementMoveToPoint"
+	case KCGPathElementAddLineToPoint:
+		return "KCGPathElementAddLineToPoint"
+	case KCGPathElementAddQuadCurveToPoint:
+		return "KCGPathElementAddQuadCurveToPoint"
+	case KCGPathElementAddCurveToPoint:
+		return "KCGPathElementAddCurveToPoint"
+	case KCGPathElementCloseSubpath:
+		return "KCGPathElementCloseSubpath"
+	default:
+		return fmt.Sprintf("CGPathElementType(%d)", int64(e))
 	}
 }
 

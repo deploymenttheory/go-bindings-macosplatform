@@ -189,6 +189,29 @@ func (e CMSSignerStatus) String() string {
 	}
 }
 
+type ExtensionDataFormat int64
+
+const (
+	ExtensionDataFormatEncoded ExtensionDataFormat = 0
+	ExtensionDataFormatParsed  ExtensionDataFormat = 1
+	ExtensionDataFormatPair    ExtensionDataFormat = 2
+)
+
+// String returns the ExtensionDataFormat constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ExtensionDataFormat) String() string {
+	switch e {
+	case ExtensionDataFormatEncoded:
+		return "ExtensionDataFormatEncoded"
+	case ExtensionDataFormatParsed:
+		return "ExtensionDataFormatParsed"
+	case ExtensionDataFormatPair:
+		return "ExtensionDataFormatPair"
+	default:
+		return fmt.Sprintf("ExtensionDataFormat(%d)", int64(e))
+	}
+}
+
 // The flags that represent the requirements for client-side authentication.
 type SSLAuthenticate int32
 
@@ -872,6 +895,38 @@ func (e SecItemImportExportFlags) String() string {
 	var parts []string
 	if e&KSecItemPemArmour != 0 {
 		parts = append(parts, "KSecItemPemArmour")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// The import/export parameter structure flags.
+// Bitmask — values may be combined with |.
+type SecKeyImportExportFlags int64
+
+const (
+	// A flag that you set to prevent importing more than one private key.
+	KSecKeyImportOnlyOne SecKeyImportExportFlags = 1
+	// A flag that indicates the user should be prompted for a passphrase on import or export.
+	KSecKeySecurePassphrase SecKeyImportExportFlags = 2
+	// A flag that indicates imported private keys have no access object attached to them.
+	KSecKeyNoAccessControl SecKeyImportExportFlags = 4
+)
+
+// String returns the SecKeyImportExportFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SecKeyImportExportFlags) String() string {
+	var parts []string
+	if e&KSecKeyImportOnlyOne != 0 {
+		parts = append(parts, "KSecKeyImportOnlyOne")
+	}
+	if e&KSecKeySecurePassphrase != 0 {
+		parts = append(parts, "KSecKeySecurePassphrase")
+	}
+	if e&KSecKeyNoAccessControl != 0 {
+		parts = append(parts, "KSecKeyNoAccessControl")
 	}
 	if len(parts) == 0 {
 		return "0"

@@ -24,6 +24,7 @@ import (
 	"strings"
 
 	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/idioconf"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
@@ -57,6 +58,7 @@ func EmitFrameworkWrappers(
 	framework *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
 	idio *idioconf.File,
+	manifest *emitmanifest.Recorder,
 ) error {
 	if err := os.MkdirAll(outDir, 0o755); err != nil {
 		return fmt.Errorf("mkdir %s: %w", outDir, err)
@@ -65,6 +67,7 @@ func EmitFrameworkWrappers(
 	// Per-framework derived data lives here for this call only, replacing the
 	// former package-level caches (P6: no shared mutable state).
 	fc := newFrameworkContext(framework, idio)
+	fc.manifest = manifest
 	prefix := fc.prefix
 	// Build the set of trial type names so we can use them in params.
 	trialNames := buildTrialNameMap(framework, prefix)
@@ -86,6 +89,19 @@ func EmitFrameworkWrappers(
 	fc.delegates = make(map[string]string, len(delegates))
 	for _, delegate := range delegates {
 		fc.delegates[delegate.protocolName] = delegate.view.IfaceName
+		// The idiomatic layer surfaces an ObjC protocol as a usable Go interface
+		// only when it is delegate-shaped; every other protocol is (for now) not
+		// re-emitted, which the parity manifest reports as a gap (closed in the
+		// protocols phase). Record the delegate-backed ones keyed on the protocol
+		// name so they match the raw oracle's protocol entry.
+		fc.manifest.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleIdiomatic,
+			Kind:      emitmanifest.KindProtocol,
+			Framework: framework.Framework,
+			MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindProtocol, delegate.protocolName, ""),
+			GoPkg:     pkgName,
+			GoSymbol:  delegate.view.IfaceName,
+		})
 	}
 
 	// Clear previously generated files so a regeneration never leaves stale
@@ -127,6 +143,14 @@ func EmitFrameworkWrappers(
 		if buf.Len() == 0 {
 			continue
 		}
+		fc.manifest.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleIdiomatic,
+			Kind:      emitmanifest.KindClass,
+			Framework: framework.Framework,
+			MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindClass, className, ""),
+			GoPkg:     pkgName,
+			GoSymbol:  goTypeName,
+		})
 
 		fname := className + "_generated.go"
 		if n := fileBaseCounts[strings.ToLower(className)]; n > 0 {
@@ -208,6 +232,7 @@ func EmitFrameworkWrappers(
 		handFuncs,
 		takenNames,
 		trialNames,
+		fc.manifest,
 	); err != nil {
 		return fmt.Errorf("emit constants: %w", err)
 	}
@@ -224,7 +249,7 @@ func EmitFrameworkWrappers(
 	// A locally re-declared value struct may have enum-typed fields; mark those
 	// enums referenced before emitEnums so they get a local definition (keeping the
 	// struct's field types hermetic).
-	registerLocalStructEnumRefs(fc, mapper)
+	registerLocalStructEnumRefs(fc, mapper, takenNames)
 	// Re-export raw enum types/constants referenced by the generated package so
 	// callers never need the raw import to name an enum or use its constants.
 	// Runs last: it scans the files written above.
@@ -233,13 +258,13 @@ func EmitFrameworkWrappers(
 	); err != nil {
 		return fmt.Errorf("emit enums: %w", err)
 	}
-	// Re-export the framework's own value-type structs (CGSize, CGRect, …) as
-	// idiomatic Go type aliases so callers never need the raw import to name them.
-	// Runs after emitEnums so takenNames is complete.
-	if err := emitStructTypeAliases(
+	// Re-declare the framework's value-type structs (CGSize, CGRect, NSRange, …
+	// and every opaque or degraded-field struct) so callers never need the raw
+	// import to name them. Runs after emitEnums so takenNames is complete.
+	if err := emitStructs(
 		outDir, pkgName, rawPkgAlias, rawPkgPath, fc, mapper, takenNames,
 	); err != nil {
-		return fmt.Errorf("emit struct type aliases: %w", err)
+		return fmt.Errorf("emit structs: %w", err)
 	}
 	// Named error values for errors.Is, derived from the framework's error-code
 	// enum and matching error domain.

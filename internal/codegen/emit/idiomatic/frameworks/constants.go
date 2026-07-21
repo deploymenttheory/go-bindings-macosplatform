@@ -6,9 +6,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -32,6 +33,7 @@ func emitConstants(
 	mapper *typemap.Mapper,
 	handFuncs, takenNames map[string]bool,
 	trialNames trialNameMap,
+	rec *emitmanifest.Recorder,
 ) error {
 	ctx := typemap.Context{Framework: framework.Framework}
 	// Mirror EmitExterns' name reservations: an extern is skipped when its C name
@@ -110,6 +112,14 @@ func emitConstants(
 			continue
 		}
 		takenNames[goName] = true
+		rec.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleIdiomatic,
+			Kind:      emitmanifest.KindExtern,
+			Framework: framework.Framework,
+			MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindExtern, ext.Name, ""),
+			GoPkg:     pkgName,
+			GoSymbol:  goName,
+		})
 
 		_ = typedString // current accessors do not vary by typed-ness; reserved
 		comment := ""

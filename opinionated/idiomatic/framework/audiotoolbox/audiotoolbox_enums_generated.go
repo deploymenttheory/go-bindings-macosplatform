@@ -54,6 +54,29 @@ func (e ParameterAutomationEventType) String() string {
 	}
 }
 
+// Audio unit parameter event types.
+type ParameterEventType int64
+
+const (
+	// An immediate change from the parameter’s previous value to a new value.
+	KParameterEvent_Immediate ParameterEventType = 1
+	// A gradual change from the parameter’s previous value to a new value, applied linearly over a specified period of time
+	KParameterEvent_Ramped ParameterEventType = 2
+)
+
+// String returns the ParameterEventType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ParameterEventType) String() string {
+	switch e {
+	case KParameterEvent_Immediate:
+		return "KParameterEvent_Immediate"
+	case KParameterEvent_Ramped:
+		return "KParameterEvent_Ramped"
+	default:
+		return fmt.Sprintf("ParameterEventType(%d)", int64(e))
+	}
+}
+
 // Bitmask — values may be combined with |.
 type ParameterMIDIMappingFlags int64
 
@@ -94,6 +117,79 @@ func (e ParameterMIDIMappingFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+type RenderEventType int64
+
+const (
+	// A parameter event.
+	RenderEventParameter RenderEventType = 1
+	// A ramped parameter event.
+	RenderEventParameterRamp RenderEventType = 2
+	// A MIDI event.
+	RenderEventMIDI RenderEventType = 8
+	// A system-exclusive MIDI event.
+	RenderEventMIDISysEx     RenderEventType = 9
+	RenderEventMIDIEventList RenderEventType = 10
+)
+
+// String returns the RenderEventType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RenderEventType) String() string {
+	switch e {
+	case RenderEventParameter:
+		return "RenderEventParameter"
+	case RenderEventParameterRamp:
+		return "RenderEventParameterRamp"
+	case RenderEventMIDI:
+		return "RenderEventMIDI"
+	case RenderEventMIDISysEx:
+		return "RenderEventMIDISysEx"
+	case RenderEventMIDIEventList:
+		return "RenderEventMIDIEventList"
+	default:
+		return fmt.Sprintf("RenderEventType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type ScheduledAudioSliceFlags int64
+
+const (
+	KScheduledAudioSliceFlag_Complete          ScheduledAudioSliceFlags = 1
+	KScheduledAudioSliceFlag_BeganToRender     ScheduledAudioSliceFlags = 2
+	KScheduledAudioSliceFlag_BeganToRenderLate ScheduledAudioSliceFlags = 4
+	KScheduledAudioSliceFlag_Loop              ScheduledAudioSliceFlags = 8
+	KScheduledAudioSliceFlag_Interrupt         ScheduledAudioSliceFlags = 16
+	KScheduledAudioSliceFlag_InterruptAtLoop   ScheduledAudioSliceFlags = 32
+)
+
+// String returns the ScheduledAudioSliceFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ScheduledAudioSliceFlags) String() string {
+	var parts []string
+	if e&KScheduledAudioSliceFlag_Complete != 0 {
+		parts = append(parts, "KScheduledAudioSliceFlag_Complete")
+	}
+	if e&KScheduledAudioSliceFlag_BeganToRender != 0 {
+		parts = append(parts, "KScheduledAudioSliceFlag_BeganToRender")
+	}
+	if e&KScheduledAudioSliceFlag_BeganToRenderLate != 0 {
+		parts = append(parts, "KScheduledAudioSliceFlag_BeganToRenderLate")
+	}
+	if e&KScheduledAudioSliceFlag_Loop != 0 {
+		parts = append(parts, "KScheduledAudioSliceFlag_Loop")
+	}
+	if e&KScheduledAudioSliceFlag_Interrupt != 0 {
+		parts = append(parts, "KScheduledAudioSliceFlag_Interrupt")
+	}
+	if e&KScheduledAudioSliceFlag_InterruptAtLoop != 0 {
+		parts = append(parts, "KScheduledAudioSliceFlag_InterruptAtLoop")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // The ducking level to apply to other non-voice audio.
 type VoiceIOOtherAudioDuckingLevel int64
 
@@ -122,6 +218,29 @@ func (e VoiceIOOtherAudioDuckingLevel) String() string {
 		return "KAUVoiceIOOtherAudioDuckingLevelMax"
 	default:
 		return fmt.Sprintf("VoiceIOOtherAudioDuckingLevel(%d)", int64(e))
+	}
+}
+
+// Identifiers for audio balance fade types.
+type AudioBalanceFadeType int64
+
+const (
+	// Ensures that the overall gain value never exceeds 1.0 by fading one channel as the other channel’s level rises. This can reduce overall loudness when the balance or fade is not in the center.
+	KAudioBalanceFadeType_MaxUnityGain AudioBalanceFadeType = 0
+	// Overall loudness remains constant, but gain can exceed 1.0. The gain value is 1.0 when the balance and fade are in the center. From there they can increase to +3dB (1.414) and decrease to silence.
+	KAudioBalanceFadeType_EqualPower AudioBalanceFadeType = 1
+)
+
+// String returns the AudioBalanceFadeType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioBalanceFadeType) String() string {
+	switch e {
+	case KAudioBalanceFadeType_MaxUnityGain:
+		return "KAudioBalanceFadeType_MaxUnityGain"
+	case KAudioBalanceFadeType_EqualPower:
+		return "KAudioBalanceFadeType_EqualPower"
+	default:
+		return fmt.Sprintf("AudioBalanceFadeType(%d)", int64(e))
 	}
 }
 
@@ -229,6 +348,38 @@ func (e AudioFilePermissions) String() string {
 	}
 }
 
+// Flags that specify a playback direction for an audio file region structure.
+// Bitmask — values may be combined with |.
+type AudioFileRegionFlags int64
+
+const (
+	// If set, the region is looped. You must set one or both of the remaining flags must also be set for the region to be looped.
+	KAudioFileRegionFlag_LoopEnable AudioFileRegionFlags = 1
+	// If set, the region is played forward.
+	KAudioFileRegionFlag_PlayForward AudioFileRegionFlags = 2
+	// If set, the region is played backward.
+	KAudioFileRegionFlag_PlayBackward AudioFileRegionFlags = 4
+)
+
+// String returns the AudioFileRegionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioFileRegionFlags) String() string {
+	var parts []string
+	if e&KAudioFileRegionFlag_LoopEnable != 0 {
+		parts = append(parts, "KAudioFileRegionFlag_LoopEnable")
+	}
+	if e&KAudioFileRegionFlag_PlayForward != 0 {
+		parts = append(parts, "KAudioFileRegionFlag_PlayForward")
+	}
+	if e&KAudioFileRegionFlag_PlayBackward != 0 {
+		parts = append(parts, "KAudioFileRegionFlag_PlayBackward")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Bitmask — values may be combined with |.
 type AudioFileStreamParseFlags int64
 
@@ -271,6 +422,29 @@ func (e AudioFileStreamSeekFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Identifiers for audio panning algorithms.
+type AudioPanningMode int64
+
+const (
+	// The SoundField panning algorithm.
+	KPanningMode_SoundField AudioPanningMode = 3
+	// A vector-based panning algorithm.
+	KPanningMode_VectorBasedPanning AudioPanningMode = 4
+)
+
+// String returns the AudioPanningMode constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioPanningMode) String() string {
+	switch e {
+	case KPanningMode_SoundField:
+		return "KPanningMode_SoundField"
+	case KPanningMode_VectorBasedPanning:
+		return "KPanningMode_VectorBasedPanning"
+	default:
+		return fmt.Sprintf("AudioPanningMode(%d)", int64(e))
+	}
+}
+
 // Bitmask — values may be combined with |.
 type AudioQueueProcessingTapFlags int64
 
@@ -305,6 +479,32 @@ func (e AudioQueueProcessingTapFlags) String() string {
 		return "0"
 	}
 	return strings.Join(parts, "|")
+}
+
+type AudioUnitEventType int64
+
+const (
+	KAudioUnitEvent_ParameterValueChange        AudioUnitEventType = 0
+	KAudioUnitEvent_BeginParameterChangeGesture AudioUnitEventType = 1
+	KAudioUnitEvent_EndParameterChangeGesture   AudioUnitEventType = 2
+	KAudioUnitEvent_PropertyChange              AudioUnitEventType = 3
+)
+
+// String returns the AudioUnitEventType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AudioUnitEventType) String() string {
+	switch e {
+	case KAudioUnitEvent_ParameterValueChange:
+		return "KAudioUnitEvent_ParameterValueChange"
+	case KAudioUnitEvent_BeginParameterChangeGesture:
+		return "KAudioUnitEvent_BeginParameterChangeGesture"
+	case KAudioUnitEvent_EndParameterChangeGesture:
+		return "KAudioUnitEvent_EndParameterChangeGesture"
+	case KAudioUnitEvent_PropertyChange:
+		return "KAudioUnitEvent_PropertyChange"
+	default:
+		return fmt.Sprintf("AudioUnitEventType(%d)", int64(e))
+	}
 }
 
 // Value options for audio unit parameters.
@@ -645,6 +845,34 @@ func (e CAFFormatFlags) String() string {
 	}
 	if e&KCAFLinearPCMFormatFlagIsLittleEndian != 0 {
 		parts = append(parts, "KCAFLinearPCMFormatFlagIsLittleEndian")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type CAFRegionFlags int64
+
+const (
+	KCAFRegionFlag_LoopEnable   CAFRegionFlags = 1
+	KCAFRegionFlag_PlayForward  CAFRegionFlags = 2
+	KCAFRegionFlag_PlayBackward CAFRegionFlags = 4
+)
+
+// String returns the CAFRegionFlags constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CAFRegionFlags) String() string {
+	var parts []string
+	if e&KCAFRegionFlag_LoopEnable != 0 {
+		parts = append(parts, "KCAFRegionFlag_LoopEnable")
+	}
+	if e&KCAFRegionFlag_PlayForward != 0 {
+		parts = append(parts, "KCAFRegionFlag_PlayForward")
+	}
+	if e&KCAFRegionFlag_PlayBackward != 0 {
+		parts = append(parts, "KCAFRegionFlag_PlayBackward")
 	}
 	if len(parts) == 0 {
 		return "0"

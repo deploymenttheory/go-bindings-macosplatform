@@ -144,3 +144,23 @@ func (e XIMCaretStyle) String() string {
 		return fmt.Sprintf("XIMCaretStyle(%d)", int64(e))
 	}
 }
+
+type XIMStatusDataType int64
+
+const (
+	XIMTextType   XIMStatusDataType = 0
+	XIMBitmapType XIMStatusDataType = 1
+)
+
+// String returns the XIMStatusDataType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e XIMStatusDataType) String() string {
+	switch e {
+	case XIMTextType:
+		return "XIMTextType"
+	case XIMBitmapType:
+		return "XIMBitmapType"
+	default:
+		return fmt.Sprintf("XIMStatusDataType(%d)", int64(e))
+	}
+}

@@ -11,9 +11,40 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
 	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 )
+
+// recordIdiomaticEnum records an emitted idiomatic enum type and its available
+// members into the parity manifest, keyed on the ObjC/C name (identical to the
+// raw oracle's key) so the two styles join. It is a no-op on a nil recorder.
+func recordIdiomaticEnum(rec *emitmanifest.Recorder, framework, pkgName, objcKey, localName string, enum meta.Enum) {
+	if rec == nil {
+		return
+	}
+	rec.Record(emitmanifest.Entry{
+		Style:     emitmanifest.StyleIdiomatic,
+		Kind:      emitmanifest.KindEnum,
+		Framework: framework,
+		MetaKey:   emitmanifest.MetaKey(framework, emitmanifest.KindEnum, objcKey, ""),
+		GoPkg:     pkgName,
+		GoSymbol:  localName,
+	})
+	for _, member := range enum.Members {
+		if member.Availability.IsUnavailable {
+			continue
+		}
+		rec.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleIdiomatic,
+			Kind:      emitmanifest.KindEnumMember,
+			Framework: framework,
+			MetaKey:   emitmanifest.MetaKey(framework, emitmanifest.KindEnumMember, member.Name, ""),
+			GoPkg:     pkgName,
+			GoSymbol:  naming.GoTypeName(member.Name),
+		})
+	}
+}
 
 // emitEnums writes <pkgname>_enums_generated.go: a concrete Go re-emission (type
 // + typed/valued const block + String) of every raw enum the idiomatic package's
@@ -31,6 +62,9 @@ func emitEnums(
 	// Index the framework's exported, available named enums by Go type name,
 	// derived exactly like the raw emitter (naming.GoTypeName on the enum key).
 	enumsByGoType := make(map[string]meta.Enum)
+	// goTypeToKey remembers the ObjC/C metadata key each Go type name came from,
+	// so a recorded parity entry can be keyed identically to the raw oracle's.
+	goTypeToKey := make(map[string]string)
 	for key, enum := range framework.Enums {
 		if enum.Availability.IsUnavailable || enum.IsAnon {
 			continue
@@ -40,6 +74,7 @@ func emitEnums(
 			continue
 		}
 		enumsByGoType[goType] = enum
+		goTypeToKey[goType] = key
 	}
 	if len(enumsByGoType) == 0 {
 		return nil
@@ -85,11 +120,13 @@ func emitEnums(
 		if emitted[localName] {
 			continue
 		}
-		v := buildEnumView(localName, enumsByGoType[goType], fc.prefix)
+		enum := enumsByGoType[goType]
+		v := buildEnumView(localName, enum, fc.prefix)
 		if len(v.Members) == 0 {
 			continue
 		}
 		emitted[localName] = true
+		recordIdiomaticEnum(fc.manifest, framework.Framework, pkgName, goTypeToKey[goType], localName, enum)
 		if v.IsBitmask {
 			needsStrings = true
 		} else {

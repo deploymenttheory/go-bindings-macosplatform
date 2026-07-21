@@ -1,9 +1,10 @@
 {{define "struct" -}}
 {{range . -}}
 {{if .Doc}}{{comment .Doc}}
-{{end}}type {{.GoName}} struct {
+{{end}}{{if .IsOpaque}}type {{.GoName}} struct{}
+{{else}}type {{.GoName}} struct {
 {{range .Fields}}{{.GoName}} {{.GoType}}
 {{end}}}
-
+{{end}}
 {{end -}}
 {{end}}

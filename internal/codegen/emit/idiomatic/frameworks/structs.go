@@ -3,12 +3,16 @@
 package idiofw
 
 import (
+	"fmt"
+	"maps"
 	"path/filepath"
 	"sort"
+	"strings"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
 	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -127,25 +131,24 @@ func ComputeEmittableStructs(
 }
 
 // registerLocalStructEnumRefs marks the framework's own enums that appear as
-// fields of an emittable value struct (e.g. hv_vcpu_exit_t's reason field of type
-// Hv_exit_reason_t) as referenced, so emitEnums — which runs before
-// emitStructTypeAliases — emits a local definition and the struct field names a
-// hermetic local type rather than the raw package's.
-func registerLocalStructEnumRefs(fc *frameworkContext, mapper *typemap.Mapper) {
+// fields of a value struct this package emits (e.g. hv_vcpu_exit_t's reason field
+// of type Hv_exit_reason_t) as referenced, so emitEnums — which runs before
+// emitStructs — emits a local definition and the struct field names a hermetic
+// local type rather than the raw package's. It must cover every struct emitStructs
+// will emit (not just the "simple" emittable set), or an own-enum field would name
+// a type emitEnums never wrote. takenNames is already fully populated at call time.
+func registerLocalStructEnumRefs(fc *frameworkContext, mapper *typemap.Mapper, takenNames map[string]bool) {
 	ctx := typemap.Context{Framework: fc.framework.Framework}
-	for name, s := range fc.framework.Structs {
-		if s.Availability.IsUnavailable || len(s.Fields) == 0 {
-			continue
-		}
-		goName := naming.ExportedTypeName(name)
-		if !mapper.EmittableStructs[goName] {
-			continue
-		}
-		_, goTypes, ok := resolveStructFields(s, ctx, mapper)
-		if !ok {
-			continue
-		}
-		for _, gt := range goTypes {
+	_, _, structOf := emittableStructNames(fc.framework, takenNames)
+	for _, s := range structOf {
+		for _, f := range s.Fields {
+			if strings.HasPrefix(f.Name, "_") {
+				continue
+			}
+			gt := f.GoType
+			if gt == "" {
+				gt = mapper.GoType(f.ObjCType, ctx, make(typemap.ImportSet))
+			}
 			if fc.ownEnums[gt] {
 				fc.referenced[gt] = true
 			}
@@ -164,72 +167,106 @@ func structFieldGoName(fieldName string) string {
 	return capitalizeFirst(fieldName)
 }
 
-func emitStructTypeAliases(
+// emittableStructNames returns the value structs this framework will emit: every
+// available, exported, non-duplicate struct whose Go name is not already claimed
+// by another package-level identifier (a class wrapper, enum, function, provider,
+// …). Both field-bearing and opaque (zero-member) structs qualify. The result
+// gates same-package field references so a field never names a struct that was
+// skipped. taken is the fully-populated set of claimed names at struct-emission
+// time (structs are emitted last, after every other construct).
+func emittableStructNames(framework *meta.FrameworkMeta, taken map[string]bool) (goNames []string, keyOf map[string]string, structOf map[string]meta.Struct) {
+	keyOf = make(map[string]string)
+	structOf = make(map[string]meta.Struct)
+	seen := make(map[string]bool)
+	for name, s := range framework.Structs {
+		if s.Availability.IsUnavailable {
+			continue
+		}
+		goName := naming.ExportedTypeName(name)
+		if !isExportedGoIdent(goName) || seen[goName] || taken[goName] {
+			continue
+		}
+		seen[goName] = true
+		keyOf[goName] = name
+		structOf[goName] = s
+		goNames = append(goNames, goName)
+	}
+	sort.Strings(goNames)
+	return goNames, keyOf, structOf
+}
+
+// emitStructs writes <pkgname>_structs_generated.go: a Go definition for every
+// value-type struct the framework declares, so callers can name and build them
+// through the idiomatic package and pass them to Objective-C by value. It mirrors
+// the raw layer's inclusion policy (degrade-don't-drop): a struct is always
+// emitted, an opaque one as `struct{}`, and a field whose type cannot be named
+// hermetically degrades to unsafe.Pointer rather than dropping the whole struct.
+//
+// Field Go types are resolved from each field's Objective-C type: a Go primitive
+// or array-of-primitive is kept (correct ABI), an own-framework enum names the
+// local idiomatic enum type, another value struct (this framework's or a sibling
+// idiomatic package's) is named directly, and anything else — pointers, ObjC
+// objects, function pointers, cross-package unexported types — becomes
+// unsafe.Pointer. Runs last, after every other package-level identifier is
+// claimed, so a struct name never redeclares one.
+func emitStructs(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
 	fc *frameworkContext,
 	mapper *typemap.Mapper,
 	takenNames map[string]bool,
 ) error {
-	_ = rawPkgAlias
 	_ = rawPkgPath
 	framework := fc.framework
 	ctx := typemap.Context{Framework: framework.Framework}
 
-	type structDef struct {
-		fieldNames, fieldTypes []string
-		doc                    string
-	}
-	defs := make(map[string]structDef)
-	for name, s := range framework.Structs {
-		if s.Availability.IsUnavailable || len(s.Fields) == 0 {
-			continue
-		}
-		goName := naming.ExportedTypeName(name)
-		if !isExportedGoIdent(goName) {
-			continue
-		}
-		if _, dup := defs[goName]; dup {
-			continue
-		}
-		if names, goTypes, ok := resolveStructFields(s, ctx, mapper); ok {
-			defs[goName] = structDef{fieldNames: names, fieldTypes: goTypes, doc: s.Doc}
-		}
+	goNames, keyOf, structOf := emittableStructNames(framework, takenNames)
+	willEmit := make(map[string]bool, len(goNames))
+	for _, goName := range goNames {
+		willEmit[goName] = true
 	}
 
-	names := make([]string, 0, len(defs))
-	for goName := range defs {
-		names = append(names, goName)
-	}
-	sort.Strings(names)
-
-	// Build the view, then render it through a template (render owns the Go
-	// syntax; this function only resolves the data).
+	imports := map[string]string{}
 	var structs []view.Struct
-	for _, goName := range names {
-		// Emit only structs in the global emittable set, so this definition and
-		// any cross-framework reference to it agree.
-		if !mapper.EmittableStructs[goName] || takenNames[goName] {
+	for _, goName := range goNames {
+		takenNames[goName] = true
+		s := structOf[goName]
+		if fc.manifest != nil {
+			fc.manifest.Record(emitmanifest.Entry{
+				Style:     emitmanifest.StyleIdiomatic,
+				Kind:      emitmanifest.KindStruct,
+				Framework: framework.Framework,
+				MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindStruct, keyOf[goName], ""),
+				GoPkg:     pkgName,
+				GoSymbol:  goName,
+			})
+		}
+		if len(s.Fields) == 0 {
+			structs = append(structs, view.Struct{GoName: goName, Doc: cleanDoc(s.Doc), IsOpaque: true})
 			continue
 		}
-		takenNames[goName] = true
-		def := defs[goName]
-		fields := make([]view.Field, len(def.fieldNames))
-		for i, fname := range def.fieldNames {
-			gt := def.fieldTypes[i]
-			// An own-enum field names the local enum type emitEnums emits, not
-			// the raw full name, so the reference resolves in-package.
-			if fc.ownEnums[gt] {
-				gt = fc.localEnumTypeName(gt)
+		var fields []view.Field
+		for i, f := range s.Fields {
+			// Skip underscore-prefixed private members (bitfields, padding),
+			// exactly as the raw emitter does — a struct whose members are all
+			// skipped renders with an empty body, not as opaque.
+			if strings.HasPrefix(f.Name, "_") {
+				continue
 			}
-			fields[i] = view.Field{GoName: structFieldGoName(fname), GoType: gt}
+			fieldName := f.Name
+			if fieldName == "" {
+				fieldName = fmt.Sprintf("Field%d", i)
+			}
+			gt := hermeticFieldType(f, ctx, mapper, fc, rawPkgAlias, willEmit, imports)
+			fields = append(fields, view.Field{GoName: structFieldGoName(fieldName), GoType: gt})
 		}
-		structs = append(structs, view.Struct{
-			GoName: goName,
-			Doc:    cleanDoc(def.doc),
-			Fields: fields,
-		})
+		structs = append(structs, view.Struct{GoName: goName, Doc: cleanDoc(s.Doc), Fields: fields})
 	}
-	if len(structs) == 0 {
+	// Typedef aliases (NSRect = CGRect, opaque-pointer FooRef = *Foo) share the
+	// file, matching the raw layer's single _structs.go. willEmit lets an alias
+	// reference a struct emitted just above; taken names avoid a redeclaration.
+	aliases := buildTypedefAliasViews(framework, mapper, fc, rawPkgAlias, willEmit, takenNames, imports)
+
+	if len(structs) == 0 && len(aliases) == 0 {
 		return nil
 	}
 
@@ -237,9 +274,177 @@ func emitStructTypeAliases(
 	if err != nil {
 		return err
 	}
-	fname := pkgName + "_type_aliases_generated.go"
-	file := assembleFile(pkgName, nil, body)
+	if len(aliases) > 0 {
+		aliasBody, err := render.TypedefAliases(aliases)
+		if err != nil {
+			return err
+		}
+		body = append(body, aliasBody...)
+	}
+	fname := pkgName + "_structs_generated.go"
+	file := assembleFile(pkgName, imports, body)
 	return rawfw.WriteGoFile(filepath.Join(outDir, fname), file)
+}
+
+// buildTypedefAliasViews resolves the framework's C struct typedefs into idiomatic
+// Go type aliases, mirroring the raw emitter's selection (a `struct Foo` typedef
+// becomes `Name = Foo`, a `struct Foo *` typedef the opaque-pointer `Name = *Foo`)
+// but localizing the right-hand side so the alias stays hermetic: the aliased
+// struct must be one this package emits (willEmit) or a sibling idiomatic package's
+// value struct. An alias whose name is already claimed, or whose target cannot be
+// named hermetically, is skipped. Names it does emit are added to takenNames, and
+// any sibling-package import is accumulated into imports.
+func buildTypedefAliasViews(
+	framework *meta.FrameworkMeta,
+	mapper *typemap.Mapper,
+	fc *frameworkContext,
+	rawPkgAlias string,
+	willEmit, takenNames map[string]bool,
+	imports map[string]string,
+) []view.TypedefAlias {
+	type alias struct {
+		name, target string
+		isPointer    bool
+	}
+	var candidates []alias
+	for tName, tTarget := range framework.Typedefs {
+		t := strings.TrimSpace(strings.TrimPrefix(strings.TrimSpace(tTarget), "const "))
+		if !strings.HasPrefix(t, "struct ") {
+			continue
+		}
+		bare := strings.TrimSpace(strings.TrimPrefix(t, "struct "))
+		if base, isPtr := strings.CutSuffix(bare, "*"); isPtr {
+			base = strings.TrimSpace(base)
+			if _, ok := framework.Structs[base]; ok {
+				candidates = append(candidates, alias{tName, base, true})
+			}
+			continue
+		}
+		if _, ok := framework.Structs[bare]; ok && bare != tName {
+			candidates = append(candidates, alias{tName, bare, false})
+		}
+	}
+	sort.Slice(candidates, func(i, j int) bool { return candidates[i].name < candidates[j].name })
+
+	ctx := typemap.Context{Framework: framework.Framework}
+	var out []view.TypedefAlias
+	for _, a := range candidates {
+		goName := naming.ExportedTypeName(a.name)
+		if !isExportedGoIdent(goName) || takenNames[goName] {
+			continue
+		}
+		// The target is a struct name; resolve it to the Go type this package (or a
+		// sibling) names, then confirm it is actually emitted so the alias never
+		// dangles.
+		targetType := mapper.GoType(a.target, ctx, make(typemap.ImportSet))
+		if targetType == "" {
+			continue
+		}
+		var rhsCore string
+		if resolved, imps, ok := crossFrameworkValueStruct(targetType, mapper, rawPkgAlias); ok {
+			maps.Copy(imports, imps)
+			rhsCore = resolved
+		} else if !strings.ContainsAny(targetType, ".*[] ") && willEmit[targetType] {
+			rhsCore = targetType
+		} else {
+			continue // not hermetically nameable
+		}
+		takenNames[goName] = true
+		rhs := rhsCore
+		if a.isPointer {
+			rhs = "*" + rhsCore
+		}
+		if fc.manifest != nil {
+			fc.manifest.Record(emitmanifest.Entry{
+				Style:     emitmanifest.StyleIdiomatic,
+				Kind:      emitmanifest.KindTypedefAlias,
+				Framework: framework.Framework,
+				MetaKey:   emitmanifest.MetaKey(framework.Framework, emitmanifest.KindTypedefAlias, goName, ""),
+				GoPkg:     naming.PackageName(framework.Framework),
+				GoSymbol:  goName,
+			})
+		}
+		out = append(out, view.TypedefAlias{
+			Doc:    fmt.Sprintf("%s is an alias for the %s value type.", goName, a.target),
+			GoName: goName,
+			RHS:    rhs,
+		})
+	}
+	return out
+}
+
+// hermeticFieldType resolves one struct field to a Go type the idiomatic package
+// can name without importing the raw bindings. It keeps primitives and arrays of
+// primitives (correct ABI), names an own-framework enum by its local idiomatic
+// spelling, names a same-package or sibling-package value struct directly, and
+// degrades everything else to unsafe.Pointer. Imports needed to name a type
+// (unsafe, or a sibling idiomatic package) are accumulated into imports.
+func hermeticFieldType(
+	f meta.StructField,
+	ctx typemap.Context,
+	mapper *typemap.Mapper,
+	fc *frameworkContext,
+	rawPkgAlias string,
+	willEmit map[string]bool,
+	imports map[string]string,
+) string {
+	gt := f.GoType
+	if gt == "" {
+		gt = mapper.GoType(f.ObjCType, ctx, make(typemap.ImportSet))
+	}
+	degrade := func() string {
+		imports["unsafe"] = "unsafe"
+		return "unsafe.Pointer"
+	}
+	if gt == "" {
+		return degrade()
+	}
+	if gt == "unsafe.Pointer" {
+		return degrade()
+	}
+	// An own-framework enum field names the local idiomatic enum type (emitted by
+	// emitEnums, which registerLocalStructEnumRefs primed to include it).
+	if fc.ownEnums[gt] {
+		return fc.localEnumTypeName(gt)
+	}
+	// A sibling framework's value struct (e.g. corefoundation.CGRect): name it
+	// through the sibling idiomatic package.
+	if resolved, imps, ok := crossFrameworkValueStruct(gt, mapper, rawPkgAlias); ok {
+		maps.Copy(imports, imps)
+		return resolved
+	}
+	// A Go primitive, or an array of one, keeps its ABI and needs no import.
+	if isPrimitiveOrArrayOf(gt, func(elem string) bool { return goPrimitives[elem] }) {
+		return gt
+	}
+	// A same-package value struct that will be emitted (bare name, or an array of
+	// one) can be named directly.
+	if isPrimitiveOrArrayOf(gt, func(elem string) bool { return willEmit[elem] }) {
+		return gt
+	}
+	return degrade()
+}
+
+// isPrimitiveOrArrayOf reports whether goType is a bare identifier accepted by
+// ok, or a (possibly multi-dimensional) fixed-size array whose element type is.
+// It rejects pointers, slices, and qualified (dotted) names.
+func isPrimitiveOrArrayOf(goType string, ok func(elem string) bool) bool {
+	elem := goType
+	for strings.HasPrefix(elem, "[") {
+		close := strings.IndexByte(elem, ']')
+		if close < 0 {
+			return false
+		}
+		inner := elem[1:close]
+		if inner == "" { // a slice "[]T", not a fixed array — not ABI-safe
+			return false
+		}
+		elem = elem[close+1:]
+	}
+	if elem == "" || strings.ContainsAny(elem, ".*[] ") {
+		return false
+	}
+	return ok(elem)
 }
 
 // ComputeIdiomaticClassIndex maps every ObjC class emitted by the idiomatic

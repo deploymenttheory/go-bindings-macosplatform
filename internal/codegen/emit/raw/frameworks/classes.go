@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -32,11 +33,18 @@ const (
 )
 
 // EmitClasses writes one .go file per ObjC class in the framework to outDir.
+//
+// rec, when non-nil, records every emitted class into the parity manifest keyed
+// on the ObjC class name. (Class-method-level parity is intentionally not
+// recorded: the idiomatic layer emits a superset of methods under fluent shapes
+// that do not map one-to-one onto raw selectors, so a selector-keyed join would
+// report false gaps.) It never affects the emitted bytes.
 func EmitClasses(
 	outDir, packageName, framework string,
 	m *meta.FrameworkMeta,
 	mapper *typemap.Mapper,
 	reg *RegistrySnapshot,
+	rec *emitmanifest.Recorder,
 ) error {
 	names := make([]string, 0, len(m.Classes))
 	for name := range m.Classes {
@@ -66,6 +74,15 @@ func EmitClasses(
 				baseName = fmt.Sprintf("%s_%d", name, lowerSeen[lower])
 			}
 		}
+
+		rec.Record(emitmanifest.Entry{
+			Style:     emitmanifest.StyleRaw,
+			Kind:      emitmanifest.KindClass,
+			Framework: framework,
+			MetaKey:   emitmanifest.MetaKey(framework, emitmanifest.KindClass, name, ""),
+			GoPkg:     packageName,
+			GoSymbol:  name,
+		})
 
 		var buf bytes.Buffer
 		if err := emitClass(&buf, name, cls, packageName, framework, m, mapper, reg); err != nil {

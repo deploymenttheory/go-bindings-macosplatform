@@ -9,9 +9,9 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
 )
@@ -118,6 +118,7 @@ func emitFunctionWrappers(
 			continue
 		}
 		emittedNames[goName] = true
+		recordIdiomaticFunction(fc.manifest, framework.Framework, pkgName, fn.Name, goName)
 		// The wrapper is committed: merge its parameter type imports.
 		maps.Copy(imports, fnImports)
 		varName := "_fn" + goName
