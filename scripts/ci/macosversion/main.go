@@ -18,9 +18,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 )
 
 func main() {
@@ -29,13 +27,7 @@ func main() {
 		fmt.Fprintln(os.Stderr, "NSProcessInfo.processInfo returned nil")
 		os.Exit(1)
 	}
-	nsStr := info.OperatingSystemVersionString()
-	if nsStr == nil {
-		fmt.Fprintln(os.Stderr, "operatingSystemVersionString returned nil")
-		os.Exit(1)
-	}
-	raw := purego.GoString(nsStr.Ptr())
-	cgo.KeepAlive(nsStr)
+	raw := info.OperatingSystemVersionString()
 
 	// NSProcessInfo returns e.g. "Version 26.5 (Build 26A5252d)" — extract "26.5".
 	re := regexp.MustCompile(`Version\s+(\d+)\.(\d+)`)

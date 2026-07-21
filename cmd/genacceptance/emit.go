@@ -89,28 +89,13 @@ func buildBody(r FuncRecord) string {
 // buildCallBody returns the call-and-assert statements for the test body.
 func buildCallBody(r FuncRecord, call string) string {
 
-	switch r.Category {
-	case CatZeroArgFactory:
-		if r.RetKind == RetPointer {
-			return fmt.Sprintf(
-				"result := %s\nif result == nil {\n\tt.Error(%q)\n}",
-				call, r.ID+": expected non-nil return",
-			)
-		}
-		return callStatement(r.RetKind, call)
-
-	case CatSingleton:
-		if r.RetKind == RetPointer {
-			return fmt.Sprintf(
-				"result := %s\nif result == nil {\n\tt.Skip(%q)\n}",
-				call, r.ID+": returned nil — environment may not provide this singleton",
-			)
-		}
-		return callStatement(r.RetKind, call)
-
-	case CatZeroArgScalar:
-		return callStatement(r.RetKind, call)
-	}
+	// The generated tests target the idiomatic layer, whose return types differ
+	// from the raw layer that RetKind was derived from (a raw *NSString becomes a
+	// Go string, an object becomes obj.Object, etc.). A raw-pointer nil check would
+	// not compile against those, and one non-compiling test breaks the whole file,
+	// so every category calls the function and discards the result — verifying the
+	// symbol links and dispatches without crashing. The curated and idiomatic
+	// acceptance tests carry the stronger value assertions.
 	return callStatement(r.RetKind, call)
 }
 

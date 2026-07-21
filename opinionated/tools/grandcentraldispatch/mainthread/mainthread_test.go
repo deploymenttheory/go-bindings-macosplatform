@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/tools/grandcentraldispatch/mainthread"
 )
 
@@ -22,8 +22,7 @@ func TestMain(m *testing.M) {
 		os.Exit(m.Run())
 	}()
 	for {
-		foundation.NSRunLoopMainRunLoop().
-			RunUntilDate(foundation.NSDateDateWithTimeIntervalSinceNow(0.05))
+		foundation.MainRunLoop().RunUntilDate(time.Now().Add(50 * time.Millisecond))
 	}
 }
 
