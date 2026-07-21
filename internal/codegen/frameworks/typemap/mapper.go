@@ -76,6 +76,12 @@ type Mapper struct {
 	ModulePrefix string
 	// LibraryModulePrefix is the import path prefix for library packages.
 	LibraryModulePrefix string
+	// LibraryPkgs is the set of idiomatic package names that are C libraries
+	// (their source FrameworkMeta carries a LinkLib), so they live under
+	// bindings/libraries/<pkg> rather than bindings/frameworks/<pkg>. A
+	// cross-framework typedef alias whose canonical owner is one of these must
+	// import it through LibraryModulePrefix, not the framework prefix.
+	LibraryPkgs map[string]bool
 	// BlockedImports is the set of import edges to suppress for cycle breaking.
 	// BlockedImports[srcFramework][dstFramework] = true means the src package
 	// must not import the dst package; types degrade to unsafe.Pointer.

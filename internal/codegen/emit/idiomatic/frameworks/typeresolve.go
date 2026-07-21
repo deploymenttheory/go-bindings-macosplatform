@@ -593,7 +593,16 @@ func crossFrameworkEmittedStruct(
 	if !mapper.AllEmittedStructs[name] {
 		return "", nil, false
 	}
-	return goType, map[string]string{pkg: idiomaticFrameworkPrefix + pkg}, true
+	// The owner may be a C library (bindings/libraries/<pkg>) rather than a
+	// framework (bindings/frameworks/<pkg>). The restored framework.Structs gather
+	// gate means no library target reaches here today (matching raw), but selecting
+	// the prefix by package kind guards against a future SDK bump silently emitting
+	// a non-existent bindings/frameworks/<lib> import.
+	prefix := idiomaticFrameworkPrefix
+	if mapper.LibraryPkgs[pkg] {
+		prefix = mapper.LibraryModulePrefix
+	}
+	return goType, map[string]string{pkg: prefix + pkg}, true
 }
 
 func localValueStructName(goType string, fc *frameworkContext, rawPkgAlias string) (string, bool) {

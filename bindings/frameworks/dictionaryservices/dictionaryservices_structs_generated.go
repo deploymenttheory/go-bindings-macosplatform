@@ -4,12 +4,5 @@
 
 package dictionaryservices
 
-import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-)
-
 // Opaque CF object that represents a dictionary file
 type DCSDictionary struct{}
-
-// Id is an alias for the objc_object value type.
-type Id = *foundation.ObjcObject

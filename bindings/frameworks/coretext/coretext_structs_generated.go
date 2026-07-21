@@ -6,8 +6,6 @@ package coretext
 
 import (
 	"unsafe"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 type ALMXGlyphEntry struct {
@@ -773,6 +771,3 @@ type TrakTableEntry struct {
 	NameTableIndex uint16
 	SizesOffset    uint16
 }
-
-// Id is an alias for the objc_object value type.
-type Id = *foundation.ObjcObject

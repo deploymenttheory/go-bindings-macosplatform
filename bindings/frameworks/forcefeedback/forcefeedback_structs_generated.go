@@ -6,8 +6,6 @@ package forcefeedback
 
 import (
 	"unsafe"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 // Used by the FFDeviceGetForceFeedbackCapabilities method to retrieve device force-feedback capabilities.
@@ -102,6 +100,3 @@ type FFRAMPFORCE struct {
 	LStart int
 	LEnd   int
 }
-
-// Id is an alias for the objc_object value type.
-type Id = *foundation.ObjcObject

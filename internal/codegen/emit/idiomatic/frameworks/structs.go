@@ -364,16 +364,22 @@ func buildTypedefAliasViews(
 		bare := strings.TrimSpace(strings.TrimPrefix(t, "struct "))
 		if base, isPtr := strings.CutSuffix(bare, "*"); isPtr {
 			base = strings.TrimSpace(base)
-			// The target struct need not live in this framework: an opaque-pointer
-			// typedef often aliases a struct owned by another framework (e.g.
-			// AudioComponentInstance → CarbonCore's ComponentInstanceRecord, the
-			// Kerberos GSS typedefs → the gss package's structs). The resolution
-			// pass below localizes and existence-checks the target, so a
-			// non-nameable one is dropped there rather than here.
-			candidates = append(candidates, alias{tName, base, true})
+			// Gate on this framework's own Structs, exactly as the raw emitter does
+			// (its buildTypedefAliasViews is the parity oracle). The aliased struct
+			// may be canonically owned by a SIBLING framework — the resolution pass
+			// below localizes the right-hand side to that owner's idiomatic package
+			// (e.g. AudioComponentInstance → carboncore.ComponentInstanceRecord, the
+			// Kerberos GSS typedefs → the gss package) — but the typedef itself must
+			// declare a struct this framework scans, or it is not our alias to emit.
+			// Without this gate, C-library structs reachable only through Typedefs
+			// (au_mask_t → bsm, xpc_*, dispatch_*) would be over-emitted into
+			// framework packages with a non-existent bindings/frameworks/<lib> import.
+			if _, ok := framework.Structs[base]; ok {
+				candidates = append(candidates, alias{tName, base, true})
+			}
 			continue
 		}
-		if bare != tName {
+		if _, ok := framework.Structs[bare]; ok && bare != tName {
 			candidates = append(candidates, alias{tName, bare, false})
 		}
 	}

@@ -4,15 +4,8 @@
 
 package diskarbitration
 
-import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-)
-
 type DADisk struct{}
 
 type DADissenter struct{}
 
 type DASession struct{}
-
-// Id is an alias for the objc_object value type.
-type Id = *foundation.ObjcObject

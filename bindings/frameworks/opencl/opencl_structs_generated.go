@@ -6,8 +6,6 @@ package opencl
 
 import (
 	"unsafe"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 type ClBufferRegion struct {
@@ -63,6 +61,3 @@ type ClSampler struct{}
 type GLsync struct{}
 
 type IOSurface struct{}
-
-// Id is an alias for the objc_object value type.
-type Id = *foundation.ObjcObject

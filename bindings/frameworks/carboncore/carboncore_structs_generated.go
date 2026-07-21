@@ -6,8 +6,6 @@ package carboncore
 
 import (
 	"unsafe"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 type AFPAlternateAddress struct {
@@ -1668,6 +1666,3 @@ type XLibExportedSymbol struct {
 	ClassAndName uint
 	BpOffset     uint
 }
-
-// Id is an alias for the objc_object value type.
-type Id = *foundation.ObjcObject

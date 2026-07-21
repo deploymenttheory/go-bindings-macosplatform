@@ -6,8 +6,6 @@ package fsevents
 
 import (
 	"unsafe"
-
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 )
 
 type FSEventStream struct{}
@@ -19,6 +17,3 @@ type FSEventStreamContext struct {
 	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
-
-// Id is an alias for the objc_object value type.
-type Id = *foundation.ObjcObject

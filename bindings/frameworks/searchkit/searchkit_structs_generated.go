@@ -4,10 +4,6 @@
 
 package searchkit
 
-import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-)
-
 type SKIndex struct{}
 
 type SKIndexDocumentIterator struct{}
@@ -19,6 +15,3 @@ type SKSearchGroup struct{}
 type SKSearchResults struct{}
 
 type SKSummary struct{}
-
-// Id is an alias for the objc_object value type.
-type Id = *foundation.ObjcObject
