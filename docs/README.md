@@ -12,7 +12,7 @@ commands; the documents here go deeper on specific areas.
 | [`naming.md`](naming.md) | The naming standard (the contract for generator code and generated identifiers). |
 | [`metadata_overrides.md`](metadata_overrides.md) | Declarative per-framework corrections (`overrides.json`) applied at load time. |
 | [`handling_variadics.md`](handling_variadics.md) | How ObjC variadic methods are bridged (and why most can't be). |
-| [`opinionated_library.md`](opinionated_library.md) | The `opinionated/library/` ergonomic helpers: why they exist, what they contain, and raw-vs-opinionated comparisons. |
+| [`opinionated_library.md`](opinionated_library.md) | The single idiomatic binding API at `bindings/`: the Go-shaped ergonomics it provides natively, with before/after comparisons against the internal raw substrate. |
 | [`appledocs.md`](appledocs.md) | Harvesting Apple's developer documentation into `appledocs.json` sidecars and merging it into the generated docs. |
 | [`markdown-syntax-guide.md`](markdown-syntax-guide.md) | Markdown reference. |
 

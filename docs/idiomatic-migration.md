@@ -1,9 +1,42 @@
 # Idiomatic layer migration guide
 
-This release rebuilds the emitted `opinionated/idiomatic/` surface to
-hand-crafted-quality Go. The changes below ship together as one breaking
-release train. The raw `bindings/` packages are unchanged except for
-parameter names (positional only — no call-site changes needed).
+This guide covers two breaking transitions, most recent first:
+
+1. **Promotion** — the idiomatic layer became the *sole* consumable API and moved
+   into `bindings/`; the raw bindings moved to `bindings/internal/raw/`
+   (see [Promotion](#promotion-to-the-sole-bindings-api-breaking--import-paths)).
+2. **Quality rebuild** — the idiomatic surface was rebuilt to hand-crafted-quality
+   Go (type mapping, renames, delegates); the sections from
+   [Type-mapping changes](#type-mapping-changes-breaking) onward describe it.
+
+## Promotion to the sole `bindings/` API (breaking — import paths)
+
+The idiomatic (fluent) layer is now the only API you import, and it lives under
+`bindings/`. The near-1:1 raw mirror still exists but has moved under
+`bindings/internal/raw/`, where Go's internal-package rule makes it unreachable
+from outside this module. Both surfaces are still generated from the same
+metadata; only the raw one stopped being consumable.
+
+Update your imports mechanically:
+
+| Old import | New import |
+|---|---|
+| `…/opinionated/idiomatic/framework/<name>` | `…/bindings/frameworks/<name>` |
+| `…/opinionated/idiomatic/libraries/<name>` | `…/bindings/libraries/<name>` |
+| `…/opinionated/idiomatic/{obj,rt}` | `…/bindings/runtime/{obj,rt}` |
+| `…/bindings/frameworks/<name>` *(as the raw purego API)* | `…/bindings/frameworks/<name>` *(now the fluent API — see the quality-rebuild sections below for the shape change)* |
+| `…/bindings/libraries/<name>` *(as the raw CGo API)* | `…/bindings/libraries/<name>` *(now fluent; raw value types are re-exported as `type X = raw.X` aliases, so names are unchanged)* |
+
+If you were a **raw** consumer of `bindings/frameworks/<name>` or
+`bindings/libraries/<name>`, those paths now serve the fluent API. The type and
+method shapes change accordingly (e.g. `*foundation.NSString` → `*foundation.String`,
+`NSStringStringWithUTF8String` → `NewStringWithUTF8String`); the quality-rebuild
+sections below enumerate the transformations. There is no supported way to import
+the raw mirror from another module — it is internal by design.
+
+`opinionated/` now contains only hand-written tools (`opinionated/tools/`). The
+former generated `opinionated/idiomatic/` tree, and the old hand-crafted
+`opinionated/library/`/`opinionated/custom/` trees, have been removed.
 
 ## Type-mapping changes (breaking)
 

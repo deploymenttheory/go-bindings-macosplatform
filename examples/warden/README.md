@@ -11,7 +11,7 @@ than interactive. It demonstrates three capabilities of this SDK:
 
 - **NEFilterDataProvider subclassing in Go** (`bindings/runtime/purego` `rt.NewDelegate`),
 - **NSXPCConnection from Go** (`bindings/runtime/purego` `XPCProtocol`/`XPCConn`/`XPCListener`),
-- **idiomatic CGo libraries** (`opinionated/idiomatic/libraries/libproc` for process attribution).
+- **idiomatic CGo libraries** (`bindings/libraries/libproc` for process attribution).
 
 Component layout (left: the LuLu target it's modeled on; right: this Go example):
 

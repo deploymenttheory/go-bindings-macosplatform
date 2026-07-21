@@ -2,8 +2,7 @@
 
 Hand-authored helper packages that provide capabilities the **generated** bindings
 can't express on their own. The code generator never touches anything under here
-(it only writes `opinionated/idiomatic/` and `bindings/`), so these are written and
-maintained by hand.
+(it only writes under `bindings/`), so these are written and maintained by hand.
 
 They exist because some Apple capabilities don't map cleanly to "send a selector
 to an Objective-C object": main-thread/queue dispatch (Grand Central Dispatch),
