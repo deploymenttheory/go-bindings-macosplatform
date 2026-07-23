@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -138,8 +139,8 @@ func (cp *CapturePhoto) FileDataRepresentation() []byte {
 }
 
 // CGImageRepresentation returns extracts and returns the captured photo’s primary image as a Core Graphics image object.
-func (cp *CapturePhoto) CGImageRepresentation() obj.Object {
+func (cp *CapturePhoto) CGImageRepresentation() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("CGImageRepresentation"))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }

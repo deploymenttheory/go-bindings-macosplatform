@@ -6,6 +6,8 @@ package javascriptcore
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // A structure that contains properties and callbacks that define a type of object.
@@ -57,3 +59,66 @@ type OpaqueJSPropertyNameArray struct{}
 type OpaqueJSString struct{}
 
 type OpaqueJSValue struct{}
+
+// JSClassRef is a handle for the opaque JSClassRef type.
+type JSClassRef struct{ obj.Object }
+
+// IsNil reports whether JSClassRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h JSClassRef) IsNil() bool { return h.Object == nil }
+
+// JSContextGroupRef is a handle for the opaque JSContextGroupRef type.
+type JSContextGroupRef struct{ obj.Object }
+
+// IsNil reports whether JSContextGroupRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h JSContextGroupRef) IsNil() bool { return h.Object == nil }
+
+// JSContextRef is a handle for the opaque JSContextRef type.
+type JSContextRef struct{ obj.Object }
+
+// IsNil reports whether JSContextRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h JSContextRef) IsNil() bool { return h.Object == nil }
+
+// JSGlobalContextRef is a handle for the opaque JSGlobalContextRef type.
+type JSGlobalContextRef struct{ obj.Object }
+
+// IsNil reports whether JSGlobalContextRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h JSGlobalContextRef) IsNil() bool { return h.Object == nil }
+
+// JSObjectRef is a handle for the opaque JSObjectRef type.
+type JSObjectRef struct{ obj.Object }
+
+// IsNil reports whether JSObjectRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h JSObjectRef) IsNil() bool { return h.Object == nil }
+
+// JSPropertyNameAccumulatorRef is a handle for the opaque JSPropertyNameAccumulatorRef type.
+type JSPropertyNameAccumulatorRef struct{ obj.Object }
+
+// IsNil reports whether JSPropertyNameAccumulatorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h JSPropertyNameAccumulatorRef) IsNil() bool { return h.Object == nil }
+
+// JSPropertyNameArrayRef is a handle for the opaque JSPropertyNameArrayRef type.
+type JSPropertyNameArrayRef struct{ obj.Object }
+
+// IsNil reports whether JSPropertyNameArrayRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h JSPropertyNameArrayRef) IsNil() bool { return h.Object == nil }
+
+// JSStringRef is a handle for the opaque JSStringRef type.
+type JSStringRef struct{ obj.Object }
+
+// IsNil reports whether JSStringRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h JSStringRef) IsNil() bool { return h.Object == nil }
+
+// JSValueRef is a handle for the opaque JSValueRef type.
+type JSValueRef struct{ obj.Object }
+
+// IsNil reports whether JSValueRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h JSValueRef) IsNil() bool { return h.Object == nil }

@@ -131,13 +131,13 @@ func AECreateList(factoringPtr unsafe.Pointer, factoredSize int, isRecord uint8,
 var _fnAECreateRemoteProcessResolver func(objc.ID, objc.ID) objc.ID
 
 // AECreateRemoteProcessResolver calls the AE framework function AECreateRemoteProcessResolver.
-func AECreateRemoteProcessResolver(allocator obj.Object, url obj.Object) obj.Object {
+func AECreateRemoteProcessResolver(allocator corefoundation.CFAllocatorRef, url corefoundation.CFURLRef) AERemoteProcessResolverRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAECreateRemoteProcessResolver == nil {
 		ebipurego.RegisterLibFunc(&_fnAECreateRemoteProcessResolver, _lib, "AECreateRemoteProcessResolver")
 	}
-	_ret := _fnAECreateRemoteProcessResolver(objref.IDOf(allocator), objref.IDOf(url))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnAECreateRemoteProcessResolver(objref.IDOf(allocator.Object), objref.IDOf(url.Object))
+	return AERemoteProcessResolverRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnAEDecodeMessage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -198,12 +198,12 @@ func AEDisposeDesc(theAEDesc unsafe.Pointer) int16 {
 var _fnAEDisposeRemoteProcessResolver func(objc.ID)
 
 // AEDisposeRemoteProcessResolver calls the AE framework function AEDisposeRemoteProcessResolver.
-func AEDisposeRemoteProcessResolver(ref obj.Object) {
+func AEDisposeRemoteProcessResolver(ref AERemoteProcessResolverRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEDisposeRemoteProcessResolver == nil {
 		ebipurego.RegisterLibFunc(&_fnAEDisposeRemoteProcessResolver, _lib, "AEDisposeRemoteProcessResolver")
 	}
-	_fnAEDisposeRemoteProcessResolver(objref.IDOf(ref))
+	_fnAEDisposeRemoteProcessResolver(objref.IDOf(ref.Object))
 }
 
 var _fnAEDisposeToken func(unsafe.Pointer) int16
@@ -593,24 +593,24 @@ func AEPutPtr(theAEDescList unsafe.Pointer, index int, typeCode int, dataPtr uns
 var _fnAERemoteProcessResolverGetProcesses func(objc.ID, unsafe.Pointer) objc.ID
 
 // AERemoteProcessResolverGetProcesses calls the AE framework function AERemoteProcessResolverGetProcesses.
-func AERemoteProcessResolverGetProcesses(ref obj.Object, outError *corefoundation.CFStreamError) obj.Object {
+func AERemoteProcessResolverGetProcesses(ref AERemoteProcessResolverRef, outError *corefoundation.CFStreamError) corefoundation.CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAERemoteProcessResolverGetProcesses == nil {
 		ebipurego.RegisterLibFunc(&_fnAERemoteProcessResolverGetProcesses, _lib, "AERemoteProcessResolverGetProcesses")
 	}
-	_ret := _fnAERemoteProcessResolverGetProcesses(objref.IDOf(ref), unsafe.Pointer(outError))
-	return obj.Wrap(_ret)
+	_ret := _fnAERemoteProcessResolverGetProcesses(objref.IDOf(ref.Object), unsafe.Pointer(outError))
+	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
 }
 
 var _fnAERemoteProcessResolverScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // AERemoteProcessResolverScheduleWithRunLoop calls the AE framework function AERemoteProcessResolverScheduleWithRunLoop.
-func AERemoteProcessResolverScheduleWithRunLoop(ref obj.Object, runLoop obj.Object, runLoopMode obj.Object, callback unsafe.Pointer, ctx unsafe.Pointer) {
+func AERemoteProcessResolverScheduleWithRunLoop(ref AERemoteProcessResolverRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef, callback unsafe.Pointer, ctx unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAERemoteProcessResolverScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnAERemoteProcessResolverScheduleWithRunLoop, _lib, "AERemoteProcessResolverScheduleWithRunLoop")
 	}
-	_fnAERemoteProcessResolverScheduleWithRunLoop(objref.IDOf(ref), objref.IDOf(runLoop), objref.IDOf(runLoopMode), callback, ctx)
+	_fnAERemoteProcessResolverScheduleWithRunLoop(objref.IDOf(ref.Object), objref.IDOf(runLoop.Object), objref.IDOf(runLoopMode.Object), callback, ctx)
 }
 
 var _fnAERemoveCoercionHandler func(int, int, unsafe.Pointer, uint8) int16
@@ -757,59 +757,59 @@ func AESizeOfParam(theAppleEvent unsafe.Pointer, theAEKeyword int) (result int16
 var _fnAEStreamClose func(objc.ID, unsafe.Pointer) int32
 
 // AEStreamClose calls the AE framework function AEStreamClose.
-func AEStreamClose(ref obj.Object, desc unsafe.Pointer) int {
+func AEStreamClose(ref AEStreamRef, desc unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamClose == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamClose, _lib, "AEStreamClose")
 	}
-	return int(_fnAEStreamClose(objref.IDOf(ref), desc))
+	return int(_fnAEStreamClose(objref.IDOf(ref.Object), desc))
 }
 
 var _fnAEStreamCreateEvent func(int, int, int, unsafe.Pointer, int, int16, int) objc.ID
 
 // AEStreamCreateEvent calls the AE framework function AEStreamCreateEvent.
-func AEStreamCreateEvent(clazz int, identifier int, targetType int, targetData unsafe.Pointer, targetLength int, returnID int16, transactionID int) obj.Object {
+func AEStreamCreateEvent(clazz int, identifier int, targetType int, targetData unsafe.Pointer, targetLength int, returnID int16, transactionID int) AEStreamRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamCreateEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamCreateEvent, _lib, "AEStreamCreateEvent")
 	}
 	_ret := _fnAEStreamCreateEvent(clazz, identifier, targetType, targetData, targetLength, returnID, transactionID)
-	return obj.WrapUnmanaged(_ret)
+	return AEStreamRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnAEStreamOpen func() objc.ID
 
 // AEStreamOpen calls the AE framework function AEStreamOpen.
-func AEStreamOpen() obj.Object {
+func AEStreamOpen() AEStreamRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamOpen == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpen, _lib, "AEStreamOpen")
 	}
 	_ret := _fnAEStreamOpen()
-	return obj.WrapUnmanaged(_ret)
+	return AEStreamRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnAEStreamOpenEvent func(unsafe.Pointer) objc.ID
 
 // AEStreamOpenEvent calls the AE framework function AEStreamOpenEvent.
-func AEStreamOpenEvent(event unsafe.Pointer) obj.Object {
+func AEStreamOpenEvent(event unsafe.Pointer) AEStreamRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamOpenEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpenEvent, _lib, "AEStreamOpenEvent")
 	}
 	_ret := _fnAEStreamOpenEvent(event)
-	return obj.WrapUnmanaged(_ret)
+	return AEStreamRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnAEStreamWriteAEDesc func(objc.ID, unsafe.Pointer) int32
 
 // AEStreamWriteAEDesc calls the AE framework function AEStreamWriteAEDesc.
-func AEStreamWriteAEDesc(ref obj.Object, desc unsafe.Pointer) int {
+func AEStreamWriteAEDesc(ref AEStreamRef, desc unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamWriteAEDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamWriteAEDesc, _lib, "AEStreamWriteAEDesc")
 	}
-	return int(_fnAEStreamWriteAEDesc(objref.IDOf(ref), desc))
+	return int(_fnAEStreamWriteAEDesc(objref.IDOf(ref.Object), desc))
 }
 
 var _fnAEUnflattenDesc func(unsafe.Pointer, unsafe.Pointer) int32

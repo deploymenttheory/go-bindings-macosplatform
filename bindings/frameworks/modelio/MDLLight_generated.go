@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -82,18 +83,18 @@ func (l *Light) WithHidden(hidden bool) *Light {
 }
 
 // IrradianceAtPoint returns the radiance of the light as received at a specific point in the same scene.
-func (l *Light) IrradianceAtPoint(point unsafe.Pointer) obj.Object {
+func (l *Light) IrradianceAtPoint(point unsafe.Pointer) coregraphics.CGColorRef {
 	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("irradianceAtPoint:"), point)
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // IrradianceAtPointColorSpace returns the radiance of the light as received at a specific point in the same scene, expressed using the specified color space.
-func (l *Light) IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace obj.Object) obj.Object {
+func (l *Light) IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace coregraphics.CGColorSpaceRef) coregraphics.CGColorRef {
 	defer runtime.KeepAlive(l)
 	defer runtime.KeepAlive(colorSpace)
-	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("irradianceAtPoint:colorSpace:"), point, objref.IDOf(colorSpace))
-	return obj.Wrap(_r)
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("irradianceAtPoint:colorSpace:"), point, objref.IDOf(colorSpace.Object))
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // LightType returns the light type.

@@ -56,10 +56,10 @@ func NewIOBluetoothRFCOMMChannel() *IOBluetoothRFCOMMChannel {
 }
 
 // RFCOMMChannelRef returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.
-func (ibrc *IOBluetoothRFCOMMChannel) RFCOMMChannelRef() obj.Object {
+func (ibrc *IOBluetoothRFCOMMChannel) RFCOMMChannelRef() IOBluetoothRFCOMMChannelRef {
 	defer runtime.KeepAlive(ibrc)
 	_r := objc.Send[objc.ID](objref.IDOf(ibrc), objc.RegisterName("getRFCOMMChannelRef"))
-	return obj.WrapUnmanaged(_r)
+	return IOBluetoothRFCOMMChannelRef{obj.WrapUnmanaged(_r)}
 }
 
 // CloseChannel returns close the channel.

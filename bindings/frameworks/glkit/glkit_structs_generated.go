@@ -4,6 +4,10 @@
 
 package glkit
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 type GLKEffectPropertyPrv struct{}
 
 type GLKMatrixStack struct{}
@@ -14,3 +18,17 @@ type GLKVertexAttributeParameters struct {
 	Size       int32
 	Normalized uint8
 }
+
+// GLKEffectPropertyPrvPtr is a handle for the opaque GLKEffectPropertyPrvPtr type.
+type GLKEffectPropertyPrvPtr struct{ obj.Object }
+
+// IsNil reports whether GLKEffectPropertyPrvPtr is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h GLKEffectPropertyPrvPtr) IsNil() bool { return h.Object == nil }
+
+// GLKMatrixStackRef is a handle for the opaque GLKMatrixStackRef type.
+type GLKMatrixStackRef struct{ obj.Object }
+
+// IsNil reports whether GLKMatrixStackRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h GLKMatrixStackRef) IsNil() bool { return h.Object == nil }

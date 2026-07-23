@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -76,45 +77,45 @@ func (i *Image) String() string {
 }
 
 // NewImageWithCGImage initializes an image object with a Quartz 2D image.
-func NewImageWithCGImage(image obj.Object) *Image {
+func NewImageWithCGImage(image coregraphics.CGImageRef) *Image {
 	defer runtime.KeepAlive(image)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:"), objref.IDOf(image))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:"), objref.IDOf(image.Object))
 	return imageAdopt(_id)
 }
 
 // NewImageWithCGImageOptions initializes an image object with a Quartz 2D image, using the specified options.
-func NewImageWithCGImageOptions(image obj.Object, options obj.Object) *Image {
+func NewImageWithCGImageOptions(image coregraphics.CGImageRef, options obj.Object) *Image {
 	defer runtime.KeepAlive(image)
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:options:"), objref.IDOf(image), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:options:"), objref.IDOf(image.Object), objref.IDOf(options))
 	return imageAdopt(_id)
 }
 
 // NewImageWithCGImageSourceIndexOptions creates a new Image.
-func NewImageWithCGImageSourceIndexOptions(source obj.Object, index int, dict obj.Object) *Image {
+func NewImageWithCGImageSourceIndexOptions(source coregraphics.CGImageSourceRef, index int, dict obj.Object) *Image {
 	defer runtime.KeepAlive(source)
 	defer runtime.KeepAlive(dict)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImageSource:index:options:"), objref.IDOf(source), index, objref.IDOf(dict))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImageSource:index:options:"), objref.IDOf(source.Object), index, objref.IDOf(dict))
 	return imageAdopt(_id)
 }
 
 // NewImageWithCGLayer initializes an image object from the contents supplied by a CGLayer object.
-func NewImageWithCGLayer(layer obj.Object) *Image {
+func NewImageWithCGLayer(layer coregraphics.CGLayerRef) *Image {
 	defer runtime.KeepAlive(layer)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLayer:"), objref.IDOf(layer))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLayer:"), objref.IDOf(layer.Object))
 	return imageAdopt(_id)
 }
 
 // NewImageWithCGLayerOptions initializes an image object from the contents supplied by a CGLayer object, using the specified options.
-func NewImageWithCGLayerOptions(layer obj.Object, options obj.Object) *Image {
+func NewImageWithCGLayerOptions(layer coregraphics.CGLayerRef, options obj.Object) *Image {
 	defer runtime.KeepAlive(layer)
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLayer:options:"), objref.IDOf(layer), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLayer:options:"), objref.IDOf(layer.Object), objref.IDOf(options))
 	return imageAdopt(_id)
 }
 
@@ -134,18 +135,18 @@ func NewImageWithDataOptions(data []byte, options obj.Object) *Image {
 }
 
 // NewImageWithBitmapDataBytesPerRowSizeFormatColorSpace initializes an image object with bitmap data.
-func NewImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data []byte, bytesPerRow int, size corefoundation.CGSize, format int, colorSpace obj.Object) *Image {
+func NewImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data []byte, bytesPerRow int, size corefoundation.CGSize, format int, colorSpace coregraphics.CGColorSpaceRef) *Image {
 	defer runtime.KeepAlive(colorSpace)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBitmapData:bytesPerRow:size:format:colorSpace:"), rt.BytesToNSData(data), bytesPerRow, size, format, objref.IDOf(colorSpace))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBitmapData:bytesPerRow:size:format:colorSpace:"), rt.BytesToNSData(data), bytesPerRow, size, format, objref.IDOf(colorSpace.Object))
 	return imageAdopt(_id)
 }
 
 // NewImageWithTextureSizeFlippedColorSpace initializes an image object with data supplied by an OpenGL texture.
-func NewImageWithTextureSizeFlippedColorSpace(name int, size corefoundation.CGSize, flipped bool, colorSpace obj.Object) *Image {
+func NewImageWithTextureSizeFlippedColorSpace(name int, size corefoundation.CGSize, flipped bool, colorSpace coregraphics.CGColorSpaceRef) *Image {
 	defer runtime.KeepAlive(colorSpace)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:size:flipped:colorSpace:"), name, size, flipped, objref.IDOf(colorSpace))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:size:flipped:colorSpace:"), name, size, flipped, objref.IDOf(colorSpace.Object))
 	return imageAdopt(_id)
 }
 
@@ -173,28 +174,28 @@ func NewImageWithContentsOfURLOptions(url string, options obj.Object) *Image {
 }
 
 // NewImageWithIOSurface initializes an image with the contents of an IOSurface.
-func NewImageWithIOSurface(surface obj.Object) *Image {
+func NewImageWithIOSurface(surface coregraphics.IOSurfaceRef) *Image {
 	defer runtime.KeepAlive(surface)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:"), objref.IDOf(surface))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:"), objref.IDOf(surface.Object))
 	return imageAdopt(_id)
 }
 
 // NewImageWithIOSurfaceOptions initializes, using the specified options, an image with the contents of an IOSurface.
-func NewImageWithIOSurfaceOptions(surface obj.Object, options obj.Object) *Image {
+func NewImageWithIOSurfaceOptions(surface coregraphics.IOSurfaceRef, options obj.Object) *Image {
 	defer runtime.KeepAlive(surface)
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:options:"), objref.IDOf(surface), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:options:"), objref.IDOf(surface.Object), objref.IDOf(options))
 	return imageAdopt(_id)
 }
 
 // NewImageWithIOSurfacePlaneFormatOptions initializes, using the specified format and options, an image with the contents of a specific data plane in an IOSurface.
-func NewImageWithIOSurfacePlaneFormatOptions(surface obj.Object, plane int, format int, options obj.Object) *Image {
+func NewImageWithIOSurfacePlaneFormatOptions(surface coregraphics.IOSurfaceRef, plane int, format int, options obj.Object) *Image {
 	defer runtime.KeepAlive(surface)
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:plane:format:options:"), objref.IDOf(surface), plane, format, objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:plane:format:options:"), objref.IDOf(surface.Object), plane, format, objref.IDOf(options))
 	return imageAdopt(_id)
 }
 
@@ -287,12 +288,12 @@ func NewImageWithSemanticSegmentationMatte(matte obj.Object) *Image {
 }
 
 // NewImageWithImageProviderSizeFormatColorSpaceOptions initializes an image object based on pixels from an image provider object.
-func NewImageWithImageProviderSizeFormatColorSpaceOptions(provider obj.Object, width int, height int, format int, colorSpace obj.Object, options obj.Object) *Image {
+func NewImageWithImageProviderSizeFormatColorSpaceOptions(provider obj.Object, width int, height int, format int, colorSpace coregraphics.CGColorSpaceRef, options obj.Object) *Image {
 	defer runtime.KeepAlive(provider)
 	defer runtime.KeepAlive(colorSpace)
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageProvider:size::format:colorSpace:options:"), objref.IDOf(provider), width, height, format, objref.IDOf(colorSpace), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageProvider:size::format:colorSpace:options:"), objref.IDOf(provider), width, height, format, objref.IDOf(colorSpace.Object), objref.IDOf(options))
 	return imageAdopt(_id)
 }
 
@@ -368,18 +369,18 @@ func (i *Image) ImageByApplyingFilter(filterName string) *Image {
 }
 
 // ImageByColorMatchingColorSpaceToWorkingSpace returns a new image created by color matching from the specified color space to the context’s working color space.
-func (i *Image) ImageByColorMatchingColorSpaceToWorkingSpace(colorSpace obj.Object) *Image {
+func (i *Image) ImageByColorMatchingColorSpaceToWorkingSpace(colorSpace coregraphics.CGColorSpaceRef) *Image {
 	defer runtime.KeepAlive(i)
 	defer runtime.KeepAlive(colorSpace)
-	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("imageByColorMatchingColorSpaceToWorkingSpace:"), objref.IDOf(colorSpace))
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("imageByColorMatchingColorSpaceToWorkingSpace:"), objref.IDOf(colorSpace.Object))
 	return ImageFromID(_r)
 }
 
 // ImageByColorMatchingWorkingSpaceToColorSpace returns a new image created by color matching from the context’s working color space to the specified color space.
-func (i *Image) ImageByColorMatchingWorkingSpaceToColorSpace(colorSpace obj.Object) *Image {
+func (i *Image) ImageByColorMatchingWorkingSpaceToColorSpace(colorSpace coregraphics.CGColorSpaceRef) *Image {
 	defer runtime.KeepAlive(i)
 	defer runtime.KeepAlive(colorSpace)
-	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("imageByColorMatchingWorkingSpaceToColorSpace:"), objref.IDOf(colorSpace))
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("imageByColorMatchingWorkingSpaceToColorSpace:"), objref.IDOf(colorSpace.Object))
 	return ImageFromID(_r)
 }
 
@@ -528,10 +529,10 @@ func (i *Image) URL() string {
 }
 
 // ColorSpace returns the color space.
-func (i *Image) ColorSpace() obj.Object {
+func (i *Image) ColorSpace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("colorSpace"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
 }
 
 // ContentHeadroom returns the content headroom of the image. If the image headroom is unknown, then the value 0.0 will be returned. If the image headroom is known, then a value greater than or equal to 1.0 will be returned. A value of 1.0 will be returned if the image is SDR. A value greater than 1.0 will be returned if the image is HDR. The image headroom may known when a CIImage is first initialized. If the a CIImage is initialized using: * `NSURL` or `NSData` : the headroom may be determined by associated metadata or deduced from pixel format or colorSpace information. * `CGImage` : headroom may be determined by `CGImageGetHeadroomInfo()` or deduced from pixel format or colorSpace information. * `IOSurface` : then the headroom will be determined by `kIOSurfaceContentHeadroom`. or deduced from pixel format or colorSpace information. * `CVPixelBuffer` : then the headroom will be determined by `kCVImageBufferContentLightLevelInfoKey`. or deduced from pixel format or colorSpace information. * `BitmapData` : headroom may be deduced from pixel format or colorSpace information. If the image is the result of applying a “CIFilter-class“ or “CIKernel“, this method will return `0.0`. There are exceptions to this.  Applying a `CIWarpKernel“ or certain “CIFilter-class“ (e.g. `CIGaussianBlur`, `CILanczosScaleTransform`, `CIAreaAverage` and some others) to an image will result in a “CIImage“ instance with the same `contentHeadroom` property value.
@@ -556,10 +557,10 @@ func (i *Image) PixelBuffer() unsafe.Pointer {
 }
 
 // CGImage returns the cg image.
-func (i *Image) CGImage() obj.Object {
+func (i *Image) CGImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("CGImage"))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // AutoAdjustmentFilters returns all possible automatically selected and configured filters for adjusting the image.

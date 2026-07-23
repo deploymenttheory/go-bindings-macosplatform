@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -73,31 +74,31 @@ func (r *Renderer) String() string {
 }
 
 // NewRendererWithCompositionColorSpace creates a new Renderer.
-func NewRendererWithCompositionColorSpace(composition obj.Object, colorSpace obj.Object) *Renderer {
+func NewRendererWithCompositionColorSpace(composition obj.Object, colorSpace coregraphics.CGColorSpaceRef) *Renderer {
 	defer runtime.KeepAlive(composition)
 	defer runtime.KeepAlive(colorSpace)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComposition:colorSpace:"), objref.IDOf(composition), objref.IDOf(colorSpace))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComposition:colorSpace:"), objref.IDOf(composition), objref.IDOf(colorSpace.Object))
 	return rendererAdopt(_id)
 }
 
 // NewRendererWithCGLContextPixelFormatColorSpaceComposition creates a new Renderer.
-func NewRendererWithCGLContextPixelFormatColorSpaceComposition(context_ obj.Object, format obj.Object, colorSpace obj.Object, composition obj.Object) *Renderer {
+func NewRendererWithCGLContextPixelFormatColorSpaceComposition(context_ obj.Object, format obj.Object, colorSpace coregraphics.CGColorSpaceRef, composition obj.Object) *Renderer {
 	defer runtime.KeepAlive(context_)
 	defer runtime.KeepAlive(format)
 	defer runtime.KeepAlive(colorSpace)
 	defer runtime.KeepAlive(composition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLContext:pixelFormat:colorSpace:composition:"), objref.IDOf(context_), objref.IDOf(format), objref.IDOf(colorSpace), objref.IDOf(composition))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLContext:pixelFormat:colorSpace:composition:"), objref.IDOf(context_), objref.IDOf(format), objref.IDOf(colorSpace.Object), objref.IDOf(composition))
 	return rendererAdopt(_id)
 }
 
 // NewRendererOffScreenWithSizeColorSpaceComposition creates a new Renderer.
-func NewRendererOffScreenWithSizeColorSpaceComposition(size corefoundation.CGSize, colorSpace obj.Object, composition obj.Object) *Renderer {
+func NewRendererOffScreenWithSizeColorSpaceComposition(size corefoundation.CGSize, colorSpace coregraphics.CGColorSpaceRef, composition obj.Object) *Renderer {
 	defer runtime.KeepAlive(colorSpace)
 	defer runtime.KeepAlive(composition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initOffScreenWithSize:colorSpace:composition:"), size, objref.IDOf(colorSpace), objref.IDOf(composition))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initOffScreenWithSize:colorSpace:composition:"), size, objref.IDOf(colorSpace.Object), objref.IDOf(composition))
 	return rendererAdopt(_id)
 }
 

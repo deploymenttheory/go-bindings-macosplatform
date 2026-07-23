@@ -4,6 +4,10 @@
 
 package opengl
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 type CGLContextObject struct{}
 
 type CGLPBufferObject struct{}
@@ -16,6 +20,46 @@ type CGLShareGroupRec struct{}
 
 type ClDeviceId struct{}
 
-type GLsync struct{}
-
 type IOSurface struct{}
+
+// GLsync is a handle for the opaque __GLsync type.
+type GLsync struct{ obj.Object }
+
+// IsNil reports whether GLsync is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h GLsync) IsNil() bool { return h.Object == nil }
+
+// CGLContextObj is a handle for the opaque CGLContextObj type.
+type CGLContextObj struct{ obj.Object }
+
+// IsNil reports whether CGLContextObj is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGLContextObj) IsNil() bool { return h.Object == nil }
+
+// CGLPBufferObj is a handle for the opaque CGLPBufferObj type.
+type CGLPBufferObj struct{ obj.Object }
+
+// IsNil reports whether CGLPBufferObj is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGLPBufferObj) IsNil() bool { return h.Object == nil }
+
+// CGLPixelFormatObj is a handle for the opaque CGLPixelFormatObj type.
+type CGLPixelFormatObj struct{ obj.Object }
+
+// IsNil reports whether CGLPixelFormatObj is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGLPixelFormatObj) IsNil() bool { return h.Object == nil }
+
+// CGLRendererInfoObj is a handle for the opaque CGLRendererInfoObj type.
+type CGLRendererInfoObj struct{ obj.Object }
+
+// IsNil reports whether CGLRendererInfoObj is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGLRendererInfoObj) IsNil() bool { return h.Object == nil }
+
+// CGLShareGroupObj is a handle for the opaque CGLShareGroupObj type.
+type CGLShareGroupObj struct{ obj.Object }
+
+// IsNil reports whether CGLShareGroupObj is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGLShareGroupObj) IsNil() bool { return h.Object == nil }

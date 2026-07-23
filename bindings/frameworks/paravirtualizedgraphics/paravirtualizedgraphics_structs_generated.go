@@ -4,6 +4,10 @@
 
 package paravirtualizedgraphics
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 // Coordinates that describe sizes or offsets within a 2D array of pixels.
 type PGDisplayCoord_t struct {
 	X uint16
@@ -24,3 +28,17 @@ type PGTraceRange_s struct{}
 
 // PGPhysicalMemoryRange_t is an alias for the PGPhysicalMemoryRange_s value type.
 type PGPhysicalMemoryRange_t = PGPhysicalMemoryRange_s
+
+// PGTask_t is a handle for the opaque PGTask_t type.
+type PGTask_t struct{ obj.Object }
+
+// IsNil reports whether PGTask_t is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h PGTask_t) IsNil() bool { return h.Object == nil }
+
+// PGTraceRange_t is a handle for the opaque PGTraceRange_t type.
+type PGTraceRange_t struct{ obj.Object }
+
+// IsNil reports whether PGTraceRange_t is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h PGTraceRange_t) IsNil() bool { return h.Object == nil }

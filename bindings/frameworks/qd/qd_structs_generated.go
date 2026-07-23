@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/commonpanels"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type AsscEntry struct {
@@ -862,3 +863,45 @@ type CMMultiFunctLutA2BType = CMMultiFunctLutType
 
 // CMMultiFunctLutB2AType is an alias for the CMMultiFunctLutType value type.
 type CMMultiFunctLutB2AType = CMMultiFunctLutType
+
+// CMProfileRef is a handle for the opaque CMProfileRef type.
+type CMProfileRef struct{ obj.Object }
+
+// IsNil reports whether CMProfileRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMProfileRef) IsNil() bool { return h.Object == nil }
+
+// CMWorldRef is a handle for the opaque CMWorldRef type.
+type CMWorldRef struct{ obj.Object }
+
+// IsNil reports whether CMWorldRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMWorldRef) IsNil() bool { return h.Object == nil }
+
+// DialogPtr is a handle for the opaque DialogPtr type.
+type DialogPtr struct{ obj.Object }
+
+// IsNil reports whether DialogPtr is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DialogPtr) IsNil() bool { return h.Object == nil }
+
+// GrafPtr is a handle for the opaque GrafPtr type.
+type GrafPtr struct{ obj.Object }
+
+// IsNil reports whether GrafPtr is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h GrafPtr) IsNil() bool { return h.Object == nil }
+
+// RgnHandle is a handle for the opaque RgnHandle type.
+type RgnHandle struct{ obj.Object }
+
+// IsNil reports whether RgnHandle is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h RgnHandle) IsNil() bool { return h.Object == nil }
+
+// WindowPtr is a handle for the opaque WindowPtr type.
+type WindowPtr struct{ obj.Object }
+
+// IsNil reports whether WindowPtr is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h WindowPtr) IsNil() bool { return h.Object == nil }

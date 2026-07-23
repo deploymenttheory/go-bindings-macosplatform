@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -189,9 +190,9 @@ func (ec *EmitterCell) WithSpinRange(spinRange float64) *EmitterCell {
 }
 
 // WithColor sets the color of each emitted object. Animatable.
-func (ec *EmitterCell) WithColor(color obj.Object) *EmitterCell {
+func (ec *EmitterCell) WithColor(color coregraphics.CGColorRef) *EmitterCell {
 	defer runtime.KeepAlive(color)
-	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("setColor:"), objref.IDOf(color))
+	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("setColor:"), objref.IDOf(color.Object))
 	return ec
 }
 
@@ -431,10 +432,10 @@ func (ec *EmitterCell) SpinRange() float64 {
 }
 
 // Color returns the color.
-func (ec *EmitterCell) Color() obj.Object {
+func (ec *EmitterCell) Color() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(ec)
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("color"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // RedRange returns the red range.

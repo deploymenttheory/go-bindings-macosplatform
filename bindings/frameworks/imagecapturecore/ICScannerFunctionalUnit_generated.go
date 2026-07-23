@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -338,10 +339,10 @@ func (sfu *ScannerFunctionalUnit) OverviewScanInProgress() bool {
 }
 
 // OverviewImage returns ￼Overview scan image. This property will be NULL for functional units that do not support overview scans.
-func (sfu *ScannerFunctionalUnit) OverviewImage() obj.Object {
+func (sfu *ScannerFunctionalUnit) OverviewImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(sfu)
 	_r := objc.Send[objc.ID](objref.IDOf(sfu), objc.RegisterName("overviewImage"))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // OverviewResolution returns ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.

@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -72,49 +73,49 @@ func DisposeNColorChangedUPP(userUPP unsafe.Pointer) {
 var _fnFCCopyCollectionNames func() objc.ID
 
 // FCCopyCollectionNames calls the CommonPanels framework function FCCopyCollectionNames.
-func FCCopyCollectionNames() obj.Object {
+func FCCopyCollectionNames() corefoundation.CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFCCopyCollectionNames == nil {
 		ebipurego.RegisterLibFunc(&_fnFCCopyCollectionNames, _lib, "FCCopyCollectionNames")
 	}
 	_ret := _fnFCCopyCollectionNames()
-	return obj.Wrap(_ret)
+	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
 }
 
 var _fnFCCopyFontDescriptorsInCollection func(objc.ID) objc.ID
 
 // FCCopyFontDescriptorsInCollection calls the CommonPanels framework function FCCopyFontDescriptorsInCollection.
-func FCCopyFontDescriptorsInCollection(iCollection obj.Object) obj.Object {
+func FCCopyFontDescriptorsInCollection(iCollection corefoundation.CFStringRef) corefoundation.CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFCCopyFontDescriptorsInCollection == nil {
 		ebipurego.RegisterLibFunc(&_fnFCCopyFontDescriptorsInCollection, _lib, "FCCopyFontDescriptorsInCollection")
 	}
-	_ret := _fnFCCopyFontDescriptorsInCollection(objref.IDOf(iCollection))
-	return obj.Wrap(_ret)
+	_ret := _fnFCCopyFontDescriptorsInCollection(objref.IDOf(iCollection.Object))
+	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
 }
 
 var _fnFCFontDescriptorCreateWithFontAttributes func(objc.ID) objc.ID
 
 // FCFontDescriptorCreateWithFontAttributes calls the CommonPanels framework function FCFontDescriptorCreateWithFontAttributes.
-func FCFontDescriptorCreateWithFontAttributes(iAttributes obj.Object) obj.Object {
+func FCFontDescriptorCreateWithFontAttributes(iAttributes corefoundation.CFDictionaryRef) FCFontDescriptorRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFCFontDescriptorCreateWithFontAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithFontAttributes, _lib, "FCFontDescriptorCreateWithFontAttributes")
 	}
-	_ret := _fnFCFontDescriptorCreateWithFontAttributes(objref.IDOf(iAttributes))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnFCFontDescriptorCreateWithFontAttributes(objref.IDOf(iAttributes.Object))
+	return FCFontDescriptorRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnFCFontDescriptorCreateWithName func(objc.ID, float64) objc.ID
 
 // FCFontDescriptorCreateWithName calls the CommonPanels framework function FCFontDescriptorCreateWithName.
-func FCFontDescriptorCreateWithName(iFontName obj.Object, iSize float64) obj.Object {
+func FCFontDescriptorCreateWithName(iFontName corefoundation.CFStringRef, iSize float64) FCFontDescriptorRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFCFontDescriptorCreateWithName == nil {
 		ebipurego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithName, _lib, "FCFontDescriptorCreateWithName")
 	}
-	_ret := _fnFCFontDescriptorCreateWithName(objref.IDOf(iFontName), iSize)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnFCFontDescriptorCreateWithName(objref.IDOf(iFontName.Object), iSize)
+	return FCFontDescriptorRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnFPIsFontPanelVisible func() uint8

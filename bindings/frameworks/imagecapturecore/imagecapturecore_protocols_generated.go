@@ -7,6 +7,7 @@ package imagecapturecore
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
@@ -14,7 +15,7 @@ import (
 type CameraDeviceDelegate interface {
 	CameraDeviceDidAddItems(camera *CameraDevice, items []*CameraItem)
 	CameraDeviceDidRemoveItems(camera *CameraDevice, items []*CameraItem)
-	CameraDeviceDidReceiveThumbnailForItemError(camera *CameraDevice, thumbnail obj.Object, item *CameraItem, err unsafe.Pointer)
+	CameraDeviceDidReceiveThumbnailForItemError(camera *CameraDevice, thumbnail coregraphics.CGImageRef, item *CameraItem, err unsafe.Pointer)
 	CameraDeviceDidReceiveMetadataForItemError(camera *CameraDevice, metadata obj.Object, item *CameraItem, err unsafe.Pointer)
 	CameraDeviceDidRenameItems(camera *CameraDevice, items []*CameraItem)
 	CameraDeviceDidChangeCapability(camera *CameraDevice)

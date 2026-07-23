@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -255,9 +256,9 @@ func (sl *ScrollLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *
 }
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
-func (sl *ScrollLayer) WithBackgroundColor(backgroundColor obj.Object) *ScrollLayer {
+func (sl *ScrollLayer) WithBackgroundColor(backgroundColor coregraphics.CGColorRef) *ScrollLayer {
 	defer runtime.KeepAlive(backgroundColor)
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor.Object))
 	return sl
 }
 
@@ -287,9 +288,9 @@ func (sl *ScrollLayer) WithBorderWidth(borderWidth float64) *ScrollLayer {
 }
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
-func (sl *ScrollLayer) WithBorderColor(borderColor obj.Object) *ScrollLayer {
+func (sl *ScrollLayer) WithBorderColor(borderColor coregraphics.CGColorRef) *ScrollLayer {
 	defer runtime.KeepAlive(borderColor)
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor.Object))
 	return sl
 }
 
@@ -325,9 +326,9 @@ func (sl *ScrollLayer) WithRasterizationScale(rasterizationScale float64) *Scrol
 }
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
-func (sl *ScrollLayer) WithShadowColor(shadowColor obj.Object) *ScrollLayer {
+func (sl *ScrollLayer) WithShadowColor(shadowColor coregraphics.CGColorRef) *ScrollLayer {
 	defer runtime.KeepAlive(shadowColor)
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor.Object))
 	return sl
 }
 
@@ -350,9 +351,9 @@ func (sl *ScrollLayer) WithShadowRadius(shadowRadius float64) *ScrollLayer {
 }
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
-func (sl *ScrollLayer) WithShadowPath(shadowPath obj.Object) *ScrollLayer {
+func (sl *ScrollLayer) WithShadowPath(shadowPath coregraphics.CGPathRef) *ScrollLayer {
 	defer runtime.KeepAlive(shadowPath)
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath.Object))
 	return sl
 }
 

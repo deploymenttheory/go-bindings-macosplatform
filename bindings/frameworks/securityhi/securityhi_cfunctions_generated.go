@@ -7,8 +7,8 @@ package securityhi
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -169,12 +169,12 @@ func NewURLSystemEventUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
 var _fnSecDisplayCertificateGroup func(unsafe.Pointer, objc.ID) int32
 
 // SecDisplayCertificateGroup calls the SecurityHI framework function SecDisplayCertificateGroup.
-func SecDisplayCertificateGroup(certificates unsafe.Pointer, keychainList obj.Object) int {
+func SecDisplayCertificateGroup(certificates unsafe.Pointer, keychainList corefoundation.CFArrayRef) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecDisplayCertificateGroup == nil {
 		ebipurego.RegisterLibFunc(&_fnSecDisplayCertificateGroup, _lib, "SecDisplayCertificateGroup")
 	}
-	return int(_fnSecDisplayCertificateGroup(certificates, objref.IDOf(keychainList)))
+	return int(_fnSecDisplayCertificateGroup(certificates, objref.IDOf(keychainList.Object)))
 }
 
 var _fnKcaddapplesharepassword func(unsafe.Pointer, string, string, string, string, int, unsafe.Pointer, unsafe.Pointer) int32

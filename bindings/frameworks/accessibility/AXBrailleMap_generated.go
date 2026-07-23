@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -94,10 +95,10 @@ func (bm *BrailleMap) HeightAtPoint(point corefoundation.CGPoint) float32 {
 }
 
 // PresentImage converts the data from the image you specify into the braille map.
-func (bm *BrailleMap) PresentImage(image obj.Object) {
+func (bm *BrailleMap) PresentImage(image coregraphics.CGImageRef) {
 	defer runtime.KeepAlive(bm)
 	defer runtime.KeepAlive(image)
-	objc.Send[objc.ID](objref.IDOf(bm), objc.RegisterName("presentImage:"), objref.IDOf(image))
+	objc.Send[objc.ID](objref.IDOf(bm), objc.RegisterName("presentImage:"), objref.IDOf(image.Object))
 }
 
 // Dimensions returns the dimensions.

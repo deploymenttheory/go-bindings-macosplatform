@@ -7,6 +7,7 @@ package mediaaccessibility
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -80,19 +81,19 @@ func NewFlashingLightsProcessor() *FlashingLightsProcessor {
 }
 
 // CanProcessSurface returns a Boolean value that indicates whether the flashing lights processor can process the content in the surface for sequences of flashing lights.
-func (flp *FlashingLightsProcessor) CanProcessSurface(surface obj.Object) bool {
+func (flp *FlashingLightsProcessor) CanProcessSurface(surface coregraphics.IOSurfaceRef) bool {
 	defer runtime.KeepAlive(flp)
 	defer runtime.KeepAlive(surface)
-	_r := objc.Send[bool](objref.IDOf(flp), objc.RegisterName("canProcessSurface:"), objref.IDOf(surface))
+	_r := objc.Send[bool](objref.IDOf(flp), objc.RegisterName("canProcessSurface:"), objref.IDOf(surface.Object))
 	return _r
 }
 
 // ProcessSurfaceOutSurfaceTimestampOptions processes a surface by analyzing pixels for sequences of flashing lights and mitigates them by dimming the content.
-func (flp *FlashingLightsProcessor) ProcessSurfaceOutSurfaceTimestampOptions(inSurface obj.Object, outSurface obj.Object, timestamp float64, options obj.Object) *FlashingLightsProcessorResult {
+func (flp *FlashingLightsProcessor) ProcessSurfaceOutSurfaceTimestampOptions(inSurface coregraphics.IOSurfaceRef, outSurface coregraphics.IOSurfaceRef, timestamp float64, options obj.Object) *FlashingLightsProcessorResult {
 	defer runtime.KeepAlive(flp)
 	defer runtime.KeepAlive(inSurface)
 	defer runtime.KeepAlive(outSurface)
 	defer runtime.KeepAlive(options)
-	_r := objc.Send[objc.ID](objref.IDOf(flp), objc.RegisterName("processSurface:outSurface:timestamp:options:"), objref.IDOf(inSurface), objref.IDOf(outSurface), timestamp, objref.IDOf(options))
+	_r := objc.Send[objc.ID](objref.IDOf(flp), objc.RegisterName("processSurface:outSurface:timestamp:options:"), objref.IDOf(inSurface.Object), objref.IDOf(outSurface.Object), timestamp, objref.IDOf(options))
 	return FlashingLightsProcessorResultFromID(_r)
 }

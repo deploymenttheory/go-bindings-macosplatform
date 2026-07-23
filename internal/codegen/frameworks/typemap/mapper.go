@@ -76,6 +76,14 @@ type Mapper struct {
 	// pointer crashes, so a return of one is wrapped with obj.WrapUnmanaged rather
 	// than obj.Wrap.
 	NonRefcountedHandles map[string]bool
+	// CFHandleIndex is the authoritative map from an opaque CF/CG/handle typedef
+	// name to the distinct struct-wrapper type the idiomatic layer names it with
+	// (e.g. "CFArrayRef" → {corefoundation, CFArrayRef}, "SecKeyRef" →
+	// {security, SecKeyRef}). The emitter declares `type <TypeName> struct{ obj.Object }`
+	// in the owner package, and the resolver references it (gated on acyclicity)
+	// instead of the generic obj.Object; both read this one index so a named
+	// reference can never dangle.
+	CFHandleIndex map[string]IdiomaticClassRef
 	// ModulePrefix is the import path prefix for framework packages,
 	// e.g. "github.com/deploymenttheory/go-bindings-macosplatform/purego-frameworks".
 	ModulePrefix string

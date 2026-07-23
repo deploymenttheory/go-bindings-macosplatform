@@ -6,22 +6,14 @@ package opencl
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type ClBufferRegion struct {
 	Origin uint
 	Size   uint
 }
-
-type ClCommandQueue struct{}
-
-type ClContext struct{}
-
-type ClDag struct{}
-
-type ClDeviceId struct{}
-
-type ClEvent struct{}
 
 type ClImageDesc struct {
 	ImageType       uint32
@@ -41,10 +33,6 @@ type ClImageFormat struct {
 	ImageChannelDataType uint32
 }
 
-type ClKernel struct{}
-
-type ClMem struct{}
-
 type ClNdrange struct {
 	WorkDim          uint
 	GlobalWorkOffset [3]uint
@@ -52,12 +40,83 @@ type ClNdrange struct {
 	LocalWorkSize    [3]uint
 }
 
-type ClPlatformId struct{}
-
-type ClProgram struct{}
-
-type ClSampler struct{}
-
 type GLsync struct{}
 
 type IOSurface struct{}
+
+// ClCommandQueue is a handle for the opaque _cl_command_queue type.
+type ClCommandQueue struct{ obj.Object }
+
+// IsNil reports whether ClCommandQueue is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ClCommandQueue) IsNil() bool { return h.Object == nil }
+
+// ClContext is a handle for the opaque _cl_context type.
+type ClContext struct{ obj.Object }
+
+// IsNil reports whether ClContext is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ClContext) IsNil() bool { return h.Object == nil }
+
+// ClDag is a handle for the opaque _cl_dag type.
+type ClDag struct{ obj.Object }
+
+// IsNil reports whether ClDag is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ClDag) IsNil() bool { return h.Object == nil }
+
+// ClDeviceId is a handle for the opaque _cl_device_id type.
+type ClDeviceId struct{ obj.Object }
+
+// IsNil reports whether ClDeviceId is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ClDeviceId) IsNil() bool { return h.Object == nil }
+
+// ClEvent is a handle for the opaque _cl_event type.
+type ClEvent struct{ obj.Object }
+
+// IsNil reports whether ClEvent is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ClEvent) IsNil() bool { return h.Object == nil }
+
+// ClKernel is a handle for the opaque _cl_kernel type.
+type ClKernel struct{ obj.Object }
+
+// IsNil reports whether ClKernel is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ClKernel) IsNil() bool { return h.Object == nil }
+
+// ClMem is a handle for the opaque _cl_mem type.
+type ClMem struct{ obj.Object }
+
+// IsNil reports whether ClMem is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ClMem) IsNil() bool { return h.Object == nil }
+
+// ClPlatformId is a handle for the opaque _cl_platform_id type.
+type ClPlatformId struct{ obj.Object }
+
+// IsNil reports whether ClPlatformId is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ClPlatformId) IsNil() bool { return h.Object == nil }
+
+// ClProgram is a handle for the opaque _cl_program type.
+type ClProgram struct{ obj.Object }
+
+// IsNil reports whether ClProgram is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ClProgram) IsNil() bool { return h.Object == nil }
+
+// ClSampler is a handle for the opaque _cl_sampler type.
+type ClSampler struct{ obj.Object }
+
+// IsNil reports whether ClSampler is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ClSampler) IsNil() bool { return h.Object == nil }
+
+// ClGLsync is a handle for the opaque cl_GLsync type.
+type ClGLsync struct{ obj.Object }
+
+// IsNil reports whether ClGLsync is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ClGLsync) IsNil() bool { return h.Object == nil }

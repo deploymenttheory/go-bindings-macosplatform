@@ -9,6 +9,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -150,11 +151,11 @@ func FeatureValueWithImageAtURLConstraintOptions(url string, constraint *ImageCo
 }
 
 // FeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptions construct image feature value from CGImage (orientation is assumed to be kCGImagePropertyOrientationUp)
-func FeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptions(cgImage obj.Object, pixelsWide int, pixelsHigh int, pixelFormatType int, options obj.Object) (result *FeatureValue, err error) {
+func FeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptions(cgImage coregraphics.CGImageRef, pixelsWide int, pixelsHigh int, pixelFormatType int, options obj.Object) (result *FeatureValue, err error) {
 	defer runtime.KeepAlive(cgImage)
 	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithCGImage:pixelsWide:pixelsHigh:pixelFormatType:options:error:"), objref.IDOf(cgImage), pixelsWide, pixelsHigh, pixelFormatType, objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithCGImage:pixelsWide:pixelsHigh:pixelFormatType:options:error:"), objref.IDOf(cgImage.Object), pixelsWide, pixelsHigh, pixelFormatType, objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -162,12 +163,12 @@ func FeatureValueWithCGImagePixelsWidePixelsHighPixelFormatTypeOptions(cgImage o
 }
 
 // FeatureValueWithCGImageConstraintOptions construct image feature value from CGImage, using the size and type information required by feature description (orientation is assumed to be kCGImagePropertyOrientationUp)
-func FeatureValueWithCGImageConstraintOptions(cgImage obj.Object, constraint *ImageConstraint, options obj.Object) (result *FeatureValue, err error) {
+func FeatureValueWithCGImageConstraintOptions(cgImage coregraphics.CGImageRef, constraint *ImageConstraint, options obj.Object) (result *FeatureValue, err error) {
 	defer runtime.KeepAlive(cgImage)
 	defer runtime.KeepAlive(constraint)
 	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithCGImage:constraint:options:error:"), objref.IDOf(cgImage), objref.IDOf(constraint), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("MLFeatureValue")), objc.RegisterName("featureValueWithCGImage:constraint:options:error:"), objref.IDOf(cgImage.Object), objref.IDOf(constraint), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}

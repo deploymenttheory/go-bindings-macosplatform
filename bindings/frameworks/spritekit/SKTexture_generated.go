@@ -9,6 +9,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -126,10 +127,10 @@ func (t *Texture) Size() corefoundation.CGSize {
 }
 
 // CGImage returns the texture’s image data as a Quartz 2D image.
-func (t *Texture) CGImage() obj.Object {
+func (t *Texture) CGImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("CGImage"))
-	return obj.Adopt(_r)
+	return coregraphics.CGImageRef{obj.Adopt(_r)}
 }
 
 // Preload load texture data into memory, calling a completion handler after the task completes.

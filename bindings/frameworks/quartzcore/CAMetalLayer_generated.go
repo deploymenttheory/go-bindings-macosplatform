@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -82,9 +83,9 @@ func (ml *MetalLayer) WithPresentsWithTransaction(presentsWithTransaction bool) 
 }
 
 // WithColorspace sets the color space of the rendered content.
-func (ml *MetalLayer) WithColorspace(colorspace obj.Object) *MetalLayer {
+func (ml *MetalLayer) WithColorspace(colorspace coregraphics.CGColorSpaceRef) *MetalLayer {
 	defer runtime.KeepAlive(colorspace)
-	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
+	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace.Object))
 	return ml
 }
 
@@ -304,9 +305,9 @@ func (ml *MetalLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *M
 }
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
-func (ml *MetalLayer) WithBackgroundColor(backgroundColor obj.Object) *MetalLayer {
+func (ml *MetalLayer) WithBackgroundColor(backgroundColor coregraphics.CGColorRef) *MetalLayer {
 	defer runtime.KeepAlive(backgroundColor)
-	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor.Object))
 	return ml
 }
 
@@ -336,9 +337,9 @@ func (ml *MetalLayer) WithBorderWidth(borderWidth float64) *MetalLayer {
 }
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
-func (ml *MetalLayer) WithBorderColor(borderColor obj.Object) *MetalLayer {
+func (ml *MetalLayer) WithBorderColor(borderColor coregraphics.CGColorRef) *MetalLayer {
 	defer runtime.KeepAlive(borderColor)
-	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor.Object))
 	return ml
 }
 
@@ -374,9 +375,9 @@ func (ml *MetalLayer) WithRasterizationScale(rasterizationScale float64) *MetalL
 }
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
-func (ml *MetalLayer) WithShadowColor(shadowColor obj.Object) *MetalLayer {
+func (ml *MetalLayer) WithShadowColor(shadowColor coregraphics.CGColorRef) *MetalLayer {
 	defer runtime.KeepAlive(shadowColor)
-	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor.Object))
 	return ml
 }
 
@@ -399,9 +400,9 @@ func (ml *MetalLayer) WithShadowRadius(shadowRadius float64) *MetalLayer {
 }
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
-func (ml *MetalLayer) WithShadowPath(shadowPath obj.Object) *MetalLayer {
+func (ml *MetalLayer) WithShadowPath(shadowPath coregraphics.CGPathRef) *MetalLayer {
 	defer runtime.KeepAlive(shadowPath)
-	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath.Object))
 	return ml
 }
 
@@ -476,10 +477,10 @@ func (ml *MetalLayer) PresentsWithTransaction() bool {
 }
 
 // Colorspace returns the colorspace.
-func (ml *MetalLayer) Colorspace() obj.Object {
+func (ml *MetalLayer) Colorspace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(ml)
 	_r := objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("colorspace"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
 }
 
 // EDRMetadata returns the edr metadata.

@@ -6,6 +6,8 @@ package fsevents
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type FSEventStream struct{}
@@ -17,3 +19,17 @@ type FSEventStreamContext struct {
 	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
+
+// ConstFSEventStreamRef is a handle for the opaque ConstFSEventStreamRef type.
+type ConstFSEventStreamRef struct{ obj.Object }
+
+// IsNil reports whether ConstFSEventStreamRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ConstFSEventStreamRef) IsNil() bool { return h.Object == nil }
+
+// FSEventStreamRef is a handle for the opaque FSEventStreamRef type.
+type FSEventStreamRef struct{ obj.Object }
+
+// IsNil reports whether FSEventStreamRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h FSEventStreamRef) IsNil() bool { return h.Object == nil }

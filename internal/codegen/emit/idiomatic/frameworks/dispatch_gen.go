@@ -145,7 +145,15 @@ func zeroValue(k objKind, idiomaticType string) string {
 		case "time.Time":
 			return "time.Time{}"
 		}
-		return "nil"
+		if idiomaticType == "obj.Object" || idiomaticType == "" ||
+			strings.HasPrefix(idiomaticType, "*") ||
+			strings.HasPrefix(idiomaticType, "[]") ||
+			strings.HasPrefix(idiomaticType, "map[") {
+			return "nil"
+		}
+		// A distinct struct-wrapper handle type (CFArrayRef, coregraphics.CGImageRef)
+		// has no nil — its zero value is the empty struct wrapping no object.
+		return idiomaticType + "{}"
 	case kindBool:
 		return "false"
 	case kindEnum:

@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -178,10 +179,10 @@ func (v_ *View) WithPaused(paused bool) *View {
 }
 
 // WithColorspace sets the color space of the rendered content.
-func (v_ *View) WithColorspace(colorspace obj.Object) *View {
+func (v_ *View) WithColorspace(colorspace coregraphics.CGColorSpaceRef) *View {
 	defer runtime.KeepAlive(colorspace)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace.Object))
 	})
 	return v_
 }
@@ -401,13 +402,13 @@ func (v_ *View) IsPaused() bool {
 }
 
 // Colorspace returns the colorspace of the rendered frames. ' If nil, no colormatching occurs.  If non-nil, the rendered content will be colormatched to the colorspace of the context containing this layer (typically the display's colorspace).  This property aliases the olorspace property or the view's CAMetalLayer
-func (v_ *View) Colorspace() obj.Object {
+func (v_ *View) Colorspace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(v_)
-	var _mainthread0 obj.Object
+	var _mainthread0 coregraphics.CGColorSpaceRef
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() coregraphics.CGColorSpaceRef {
 			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("colorspace"))
-			return obj.Wrap(_r)
+			return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
 		}()
 	})
 	return _mainthread0

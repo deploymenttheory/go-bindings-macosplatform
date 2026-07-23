@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,11 +51,11 @@ func checkerboardTextureAdopt(id objc.ID) *CheckerboardTexture {
 }
 
 // NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2 initializes a checkerboard texture with the specified colors and other properties.
-func NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2(divisions float32, name string, dimensions unsafe.Pointer, channelCount int, channelEncoding TextureChannelEncoding, color1 obj.Object, color2 obj.Object) *CheckerboardTexture {
+func NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2(divisions float32, name string, dimensions unsafe.Pointer, channelCount int, channelEncoding TextureChannelEncoding, color1 coregraphics.CGColorRef, color2 coregraphics.CGColorRef) *CheckerboardTexture {
 	defer runtime.KeepAlive(color1)
 	defer runtime.KeepAlive(color2)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLCheckerboardTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDivisions:name:dimensions:channelCount:channelEncoding:color1:color2:"), divisions, purego.NSString(name), dimensions, channelCount, channelEncoding, objref.IDOf(color1), objref.IDOf(color2))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDivisions:name:dimensions:channelCount:channelEncoding:color1:color2:"), divisions, purego.NSString(name), dimensions, channelCount, channelEncoding, objref.IDOf(color1.Object), objref.IDOf(color2.Object))
 	return checkerboardTextureAdopt(_id)
 }
 
@@ -65,16 +66,16 @@ func (ct *CheckerboardTexture) WithDivisions(divisions float32) *CheckerboardTex
 }
 
 // WithColor1 sets the color for half of the squares in the checkerboard pattern.
-func (ct *CheckerboardTexture) WithColor1(color1 obj.Object) *CheckerboardTexture {
+func (ct *CheckerboardTexture) WithColor1(color1 coregraphics.CGColorRef) *CheckerboardTexture {
 	defer runtime.KeepAlive(color1)
-	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setColor1:"), objref.IDOf(color1))
+	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setColor1:"), objref.IDOf(color1.Object))
 	return ct
 }
 
 // WithColor2 sets the color for the other half of the squares in the checkerboard pattern.
-func (ct *CheckerboardTexture) WithColor2(color2 obj.Object) *CheckerboardTexture {
+func (ct *CheckerboardTexture) WithColor2(color2 coregraphics.CGColorRef) *CheckerboardTexture {
 	defer runtime.KeepAlive(color2)
-	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setColor2:"), objref.IDOf(color2))
+	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setColor2:"), objref.IDOf(color2.Object))
 	return ct
 }
 
@@ -98,17 +99,17 @@ func (ct *CheckerboardTexture) Divisions() float32 {
 }
 
 // Color1 returns the color1.
-func (ct *CheckerboardTexture) Color1() obj.Object {
+func (ct *CheckerboardTexture) Color1() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(ct)
 	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("color1"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // Color2 returns the color2.
-func (ct *CheckerboardTexture) Color2() obj.Object {
+func (ct *CheckerboardTexture) Color2() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(ct)
 	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("color2"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 var _ TextureProvider = (*CheckerboardTexture)(nil)

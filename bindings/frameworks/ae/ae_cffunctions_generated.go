@@ -8,7 +8,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -32,12 +31,12 @@ func AEProcessMessage(header unsafe.Pointer) error {
 var _fnAEStreamCloseDesc func(objc.ID) int32
 
 // AEStreamCloseDesc reports an error if the AE framework function AEStreamCloseDesc fails.
-func AEStreamCloseDesc(ref obj.Object) error {
+func AEStreamCloseDesc(ref AEStreamRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamCloseDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamCloseDesc, _lib, "AEStreamCloseDesc")
 	}
-	_rc := _fnAEStreamCloseDesc(objref.IDOf(ref))
+	_rc := _fnAEStreamCloseDesc(objref.IDOf(ref.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -47,12 +46,12 @@ func AEStreamCloseDesc(ref obj.Object) error {
 var _fnAEStreamCloseList func(objc.ID) int32
 
 // AEStreamCloseList reports an error if the AE framework function AEStreamCloseList fails.
-func AEStreamCloseList(ref obj.Object) error {
+func AEStreamCloseList(ref AEStreamRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamCloseList == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamCloseList, _lib, "AEStreamCloseList")
 	}
-	_rc := _fnAEStreamCloseList(objref.IDOf(ref))
+	_rc := _fnAEStreamCloseList(objref.IDOf(ref.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -62,12 +61,12 @@ func AEStreamCloseList(ref obj.Object) error {
 var _fnAEStreamCloseRecord func(objc.ID) int32
 
 // AEStreamCloseRecord reports an error if the AE framework function AEStreamCloseRecord fails.
-func AEStreamCloseRecord(ref obj.Object) error {
+func AEStreamCloseRecord(ref AEStreamRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamCloseRecord == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamCloseRecord, _lib, "AEStreamCloseRecord")
 	}
-	_rc := _fnAEStreamCloseRecord(objref.IDOf(ref))
+	_rc := _fnAEStreamCloseRecord(objref.IDOf(ref.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -77,12 +76,12 @@ func AEStreamCloseRecord(ref obj.Object) error {
 var _fnAEStreamOpenDesc func(objc.ID, int) int32
 
 // AEStreamOpenDesc reports an error if the AE framework function AEStreamOpenDesc fails.
-func AEStreamOpenDesc(ref obj.Object, newType int) error {
+func AEStreamOpenDesc(ref AEStreamRef, newType int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamOpenDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpenDesc, _lib, "AEStreamOpenDesc")
 	}
-	_rc := _fnAEStreamOpenDesc(objref.IDOf(ref), newType)
+	_rc := _fnAEStreamOpenDesc(objref.IDOf(ref.Object), newType)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -92,12 +91,12 @@ func AEStreamOpenDesc(ref obj.Object, newType int) error {
 var _fnAEStreamOpenKeyDesc func(objc.ID, int, int) int32
 
 // AEStreamOpenKeyDesc reports an error if the AE framework function AEStreamOpenKeyDesc fails.
-func AEStreamOpenKeyDesc(ref obj.Object, key int, newType int) error {
+func AEStreamOpenKeyDesc(ref AEStreamRef, key int, newType int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamOpenKeyDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpenKeyDesc, _lib, "AEStreamOpenKeyDesc")
 	}
-	_rc := _fnAEStreamOpenKeyDesc(objref.IDOf(ref), key, newType)
+	_rc := _fnAEStreamOpenKeyDesc(objref.IDOf(ref.Object), key, newType)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -107,12 +106,12 @@ func AEStreamOpenKeyDesc(ref obj.Object, key int, newType int) error {
 var _fnAEStreamOpenList func(objc.ID) int32
 
 // AEStreamOpenList reports an error if the AE framework function AEStreamOpenList fails.
-func AEStreamOpenList(ref obj.Object) error {
+func AEStreamOpenList(ref AEStreamRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamOpenList == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpenList, _lib, "AEStreamOpenList")
 	}
-	_rc := _fnAEStreamOpenList(objref.IDOf(ref))
+	_rc := _fnAEStreamOpenList(objref.IDOf(ref.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -122,12 +121,12 @@ func AEStreamOpenList(ref obj.Object) error {
 var _fnAEStreamOpenRecord func(objc.ID, int) int32
 
 // AEStreamOpenRecord reports an error if the AE framework function AEStreamOpenRecord fails.
-func AEStreamOpenRecord(ref obj.Object, newType int) error {
+func AEStreamOpenRecord(ref AEStreamRef, newType int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamOpenRecord == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpenRecord, _lib, "AEStreamOpenRecord")
 	}
-	_rc := _fnAEStreamOpenRecord(objref.IDOf(ref), newType)
+	_rc := _fnAEStreamOpenRecord(objref.IDOf(ref.Object), newType)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -137,12 +136,12 @@ func AEStreamOpenRecord(ref obj.Object, newType int) error {
 var _fnAEStreamOptionalParam func(objc.ID, int) int32
 
 // AEStreamOptionalParam reports an error if the AE framework function AEStreamOptionalParam fails.
-func AEStreamOptionalParam(ref obj.Object, key int) error {
+func AEStreamOptionalParam(ref AEStreamRef, key int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamOptionalParam == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOptionalParam, _lib, "AEStreamOptionalParam")
 	}
-	_rc := _fnAEStreamOptionalParam(objref.IDOf(ref), key)
+	_rc := _fnAEStreamOptionalParam(objref.IDOf(ref.Object), key)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -152,12 +151,12 @@ func AEStreamOptionalParam(ref obj.Object, key int) error {
 var _fnAEStreamSetRecordType func(objc.ID, int) int32
 
 // AEStreamSetRecordType reports an error if the AE framework function AEStreamSetRecordType fails.
-func AEStreamSetRecordType(ref obj.Object, newType int) error {
+func AEStreamSetRecordType(ref AEStreamRef, newType int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamSetRecordType == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamSetRecordType, _lib, "AEStreamSetRecordType")
 	}
-	_rc := _fnAEStreamSetRecordType(objref.IDOf(ref), newType)
+	_rc := _fnAEStreamSetRecordType(objref.IDOf(ref.Object), newType)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -167,12 +166,12 @@ func AEStreamSetRecordType(ref obj.Object, newType int) error {
 var _fnAEStreamWriteData func(objc.ID, unsafe.Pointer, int) int32
 
 // AEStreamWriteData reports an error if the AE framework function AEStreamWriteData fails.
-func AEStreamWriteData(ref obj.Object, data unsafe.Pointer, length int) error {
+func AEStreamWriteData(ref AEStreamRef, data unsafe.Pointer, length int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamWriteData == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamWriteData, _lib, "AEStreamWriteData")
 	}
-	_rc := _fnAEStreamWriteData(objref.IDOf(ref), data, length)
+	_rc := _fnAEStreamWriteData(objref.IDOf(ref.Object), data, length)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -182,12 +181,12 @@ func AEStreamWriteData(ref obj.Object, data unsafe.Pointer, length int) error {
 var _fnAEStreamWriteDesc func(objc.ID, int, unsafe.Pointer, int) int32
 
 // AEStreamWriteDesc reports an error if the AE framework function AEStreamWriteDesc fails.
-func AEStreamWriteDesc(ref obj.Object, newType int, data unsafe.Pointer, length int) error {
+func AEStreamWriteDesc(ref AEStreamRef, newType int, data unsafe.Pointer, length int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamWriteDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamWriteDesc, _lib, "AEStreamWriteDesc")
 	}
-	_rc := _fnAEStreamWriteDesc(objref.IDOf(ref), newType, data, length)
+	_rc := _fnAEStreamWriteDesc(objref.IDOf(ref.Object), newType, data, length)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -197,12 +196,12 @@ func AEStreamWriteDesc(ref obj.Object, newType int, data unsafe.Pointer, length 
 var _fnAEStreamWriteKey func(objc.ID, int) int32
 
 // AEStreamWriteKey reports an error if the AE framework function AEStreamWriteKey fails.
-func AEStreamWriteKey(ref obj.Object, key int) error {
+func AEStreamWriteKey(ref AEStreamRef, key int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamWriteKey == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamWriteKey, _lib, "AEStreamWriteKey")
 	}
-	_rc := _fnAEStreamWriteKey(objref.IDOf(ref), key)
+	_rc := _fnAEStreamWriteKey(objref.IDOf(ref.Object), key)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -212,12 +211,12 @@ func AEStreamWriteKey(ref obj.Object, key int) error {
 var _fnAEStreamWriteKeyDesc func(objc.ID, int, int, unsafe.Pointer, int) int32
 
 // AEStreamWriteKeyDesc reports an error if the AE framework function AEStreamWriteKeyDesc fails.
-func AEStreamWriteKeyDesc(ref obj.Object, key int, newType int, data unsafe.Pointer, length int) error {
+func AEStreamWriteKeyDesc(ref AEStreamRef, key int, newType int, data unsafe.Pointer, length int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamWriteKeyDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamWriteKeyDesc, _lib, "AEStreamWriteKeyDesc")
 	}
-	_rc := _fnAEStreamWriteKeyDesc(objref.IDOf(ref), key, newType, data, length)
+	_rc := _fnAEStreamWriteKeyDesc(objref.IDOf(ref.Object), key, newType, data, length)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

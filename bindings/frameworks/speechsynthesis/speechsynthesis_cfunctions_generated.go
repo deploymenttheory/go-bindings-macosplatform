@@ -7,8 +7,8 @@ package speechsynthesis
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -29,26 +29,26 @@ func ContinueSpeech() (result int16, chan_ SpeechChannelRecord) {
 var _fnCopyPhonemesFromText func(unsafe.Pointer, objc.ID, unsafe.Pointer) int16
 
 // CopyPhonemesFromText calls the SpeechSynthesis framework function CopyPhonemesFromText.
-func CopyPhonemesFromText(text obj.Object, phonemes unsafe.Pointer) (result int16, chan_ SpeechChannelRecord) {
+func CopyPhonemesFromText(text corefoundation.CFStringRef, phonemes unsafe.Pointer) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCopyPhonemesFromText == nil {
 		ebipurego.RegisterLibFunc(&_fnCopyPhonemesFromText, _lib, "CopyPhonemesFromText")
 	}
 	var _out0 SpeechChannelRecord
-	_ret := _fnCopyPhonemesFromText(unsafe.Pointer(&_out0), objref.IDOf(text), phonemes)
+	_ret := _fnCopyPhonemesFromText(unsafe.Pointer(&_out0), objref.IDOf(text.Object), phonemes)
 	return _ret, _out0
 }
 
 var _fnCopySpeechProperty func(unsafe.Pointer, objc.ID, unsafe.Pointer) int16
 
 // CopySpeechProperty calls the SpeechSynthesis framework function CopySpeechProperty.
-func CopySpeechProperty(property obj.Object, object unsafe.Pointer) (result int16, chan_ SpeechChannelRecord) {
+func CopySpeechProperty(property corefoundation.CFStringRef, object unsafe.Pointer) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCopySpeechProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnCopySpeechProperty, _lib, "CopySpeechProperty")
 	}
 	var _out0 SpeechChannelRecord
-	_ret := _fnCopySpeechProperty(unsafe.Pointer(&_out0), objref.IDOf(property), object)
+	_ret := _fnCopySpeechProperty(unsafe.Pointer(&_out0), objref.IDOf(property.Object), object)
 	return _ret, _out0
 }
 
@@ -435,13 +435,13 @@ func SetSpeechPitch(pitch int) (result int16, chan_ SpeechChannelRecord) {
 var _fnSetSpeechProperty func(unsafe.Pointer, objc.ID, objc.ID) int16
 
 // SetSpeechProperty calls the SpeechSynthesis framework function SetSpeechProperty.
-func SetSpeechProperty(property obj.Object, object obj.Object) (result int16, chan_ SpeechChannelRecord) {
+func SetSpeechProperty(property corefoundation.CFStringRef, object corefoundation.CFTypeRef) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSetSpeechProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnSetSpeechProperty, _lib, "SetSpeechProperty")
 	}
 	var _out0 SpeechChannelRecord
-	_ret := _fnSetSpeechProperty(unsafe.Pointer(&_out0), objref.IDOf(property), objref.IDOf(object))
+	_ret := _fnSetSpeechProperty(unsafe.Pointer(&_out0), objref.IDOf(property.Object), objref.IDOf(object.Object))
 	return _ret, _out0
 }
 
@@ -474,13 +474,13 @@ func SpeakBuffer(textBuf unsafe.Pointer, textBytes int, controlFlags int) (resul
 var _fnSpeakCFString func(unsafe.Pointer, objc.ID, objc.ID) int16
 
 // SpeakCFString calls the SpeechSynthesis framework function SpeakCFString.
-func SpeakCFString(aString obj.Object, options obj.Object) (result int16, chan_ SpeechChannelRecord) {
+func SpeakCFString(aString corefoundation.CFStringRef, options corefoundation.CFDictionaryRef) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSpeakCFString == nil {
 		ebipurego.RegisterLibFunc(&_fnSpeakCFString, _lib, "SpeakCFString")
 	}
 	var _out0 SpeechChannelRecord
-	_ret := _fnSpeakCFString(unsafe.Pointer(&_out0), objref.IDOf(aString), objref.IDOf(options))
+	_ret := _fnSpeakCFString(unsafe.Pointer(&_out0), objref.IDOf(aString.Object), objref.IDOf(options.Object))
 	return _ret, _out0
 }
 
@@ -546,23 +546,23 @@ func SpeechManagerVersion() unsafe.Pointer {
 var _fnSpeechSynthesisRegisterModuleURL func(objc.ID) int16
 
 // SpeechSynthesisRegisterModuleURL calls the SpeechSynthesis framework function SpeechSynthesisRegisterModuleURL.
-func SpeechSynthesisRegisterModuleURL(url obj.Object) int16 {
+func SpeechSynthesisRegisterModuleURL(url corefoundation.CFURLRef) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSpeechSynthesisRegisterModuleURL == nil {
 		ebipurego.RegisterLibFunc(&_fnSpeechSynthesisRegisterModuleURL, _lib, "SpeechSynthesisRegisterModuleURL")
 	}
-	return _fnSpeechSynthesisRegisterModuleURL(objref.IDOf(url))
+	return _fnSpeechSynthesisRegisterModuleURL(objref.IDOf(url.Object))
 }
 
 var _fnSpeechSynthesisUnregisterModuleURL func(objc.ID) int16
 
 // SpeechSynthesisUnregisterModuleURL calls the SpeechSynthesis framework function SpeechSynthesisUnregisterModuleURL.
-func SpeechSynthesisUnregisterModuleURL(url obj.Object) int16 {
+func SpeechSynthesisUnregisterModuleURL(url corefoundation.CFURLRef) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSpeechSynthesisUnregisterModuleURL == nil {
 		ebipurego.RegisterLibFunc(&_fnSpeechSynthesisUnregisterModuleURL, _lib, "SpeechSynthesisUnregisterModuleURL")
 	}
-	return _fnSpeechSynthesisUnregisterModuleURL(objref.IDOf(url))
+	return _fnSpeechSynthesisUnregisterModuleURL(objref.IDOf(url.Object))
 }
 
 var _fnStopSpeech func(unsafe.Pointer) int16
@@ -623,12 +623,12 @@ func UseDictionary() (result int16, chan_ SpeechChannelRecord, dictionary string
 var _fnUseSpeechDictionary func(unsafe.Pointer, objc.ID) int16
 
 // UseSpeechDictionary calls the SpeechSynthesis framework function UseSpeechDictionary.
-func UseSpeechDictionary(speechDictionary obj.Object) (result int16, chan_ SpeechChannelRecord) {
+func UseSpeechDictionary(speechDictionary corefoundation.CFDictionaryRef) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnUseSpeechDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnUseSpeechDictionary, _lib, "UseSpeechDictionary")
 	}
 	var _out0 SpeechChannelRecord
-	_ret := _fnUseSpeechDictionary(unsafe.Pointer(&_out0), objref.IDOf(speechDictionary))
+	_ret := _fnUseSpeechDictionary(unsafe.Pointer(&_out0), objref.IDOf(speechDictionary.Object))
 	return _ret, _out0
 }

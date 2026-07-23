@@ -6,6 +6,8 @@ package launchservices
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type LSApplicationParameters struct {
@@ -43,3 +45,10 @@ type LSLaunchURLSpec struct {
 }
 
 type OpaqueIconRef struct{}
+
+// IconRef is a handle for the opaque IconRef type.
+type IconRef struct{ obj.Object }
+
+// IsNil reports whether IconRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h IconRef) IsNil() bool { return h.Object == nil }

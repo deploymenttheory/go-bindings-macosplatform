@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -66,9 +67,9 @@ func (ogl *OpenGLLayer) WithAsynchronous(asynchronous bool) *OpenGLLayer {
 }
 
 // WithColorspace sets the layer’s colorspace in Core Graphics.
-func (ogl *OpenGLLayer) WithColorspace(colorspace obj.Object) *OpenGLLayer {
+func (ogl *OpenGLLayer) WithColorspace(colorspace coregraphics.CGColorSpaceRef) *OpenGLLayer {
 	defer runtime.KeepAlive(colorspace)
-	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace.Object))
 	return ogl
 }
 
@@ -262,9 +263,9 @@ func (ogl *OpenGLLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) 
 }
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
-func (ogl *OpenGLLayer) WithBackgroundColor(backgroundColor obj.Object) *OpenGLLayer {
+func (ogl *OpenGLLayer) WithBackgroundColor(backgroundColor coregraphics.CGColorRef) *OpenGLLayer {
 	defer runtime.KeepAlive(backgroundColor)
-	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor.Object))
 	return ogl
 }
 
@@ -294,9 +295,9 @@ func (ogl *OpenGLLayer) WithBorderWidth(borderWidth float64) *OpenGLLayer {
 }
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
-func (ogl *OpenGLLayer) WithBorderColor(borderColor obj.Object) *OpenGLLayer {
+func (ogl *OpenGLLayer) WithBorderColor(borderColor coregraphics.CGColorRef) *OpenGLLayer {
 	defer runtime.KeepAlive(borderColor)
-	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor.Object))
 	return ogl
 }
 
@@ -332,9 +333,9 @@ func (ogl *OpenGLLayer) WithRasterizationScale(rasterizationScale float64) *Open
 }
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
-func (ogl *OpenGLLayer) WithShadowColor(shadowColor obj.Object) *OpenGLLayer {
+func (ogl *OpenGLLayer) WithShadowColor(shadowColor coregraphics.CGColorRef) *OpenGLLayer {
 	defer runtime.KeepAlive(shadowColor)
-	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor.Object))
 	return ogl
 }
 
@@ -357,9 +358,9 @@ func (ogl *OpenGLLayer) WithShadowRadius(shadowRadius float64) *OpenGLLayer {
 }
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
-func (ogl *OpenGLLayer) WithShadowPath(shadowPath obj.Object) *OpenGLLayer {
+func (ogl *OpenGLLayer) WithShadowPath(shadowPath coregraphics.CGPathRef) *OpenGLLayer {
 	defer runtime.KeepAlive(shadowPath)
-	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath.Object))
 	return ogl
 }
 
@@ -459,10 +460,10 @@ func (ogl *OpenGLLayer) IsAsynchronous() bool {
 }
 
 // Colorspace returns the colorspace.
-func (ogl *OpenGLLayer) Colorspace() obj.Object {
+func (ogl *OpenGLLayer) Colorspace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(ogl)
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("colorspace"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
 }
 
 var _ LayerProvider = (*OpenGLLayer)(nil)

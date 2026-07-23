@@ -6,6 +6,8 @@ package driverkit
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // A structure that describes the location and size of a block of memory.
@@ -362,9 +364,6 @@ type OSNumber_IVars struct{}
 
 type OSNumber_LocalIVars struct{}
 
-// The base class for DriverKit objects
-type OSObject struct{}
-
 type OSObject_IVars struct{}
 
 type OSObject_LocalIVars struct{}
@@ -406,3 +405,17 @@ type QueueHeadT = QueueEntry
 
 // QueueT is an alias for the queue_entry value type.
 type QueueT = *QueueEntry
+
+// OSObject is a handle for the opaque OSObject type.
+type OSObject struct{ obj.Object }
+
+// IsNil reports whether OSObject is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h OSObject) IsNil() bool { return h.Object == nil }
+
+// OSObjectPtr is a handle for the opaque OSObjectPtr type.
+type OSObjectPtr struct{ obj.Object }
+
+// IsNil reports whether OSObjectPtr is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h OSObjectPtr) IsNil() bool { return h.Object == nil }

@@ -7,10 +7,10 @@ package avfoundation
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -88,17 +88,17 @@ func (mc *MutableCaption) WithAnimation(animation CaptionAnimation) *MutableCapt
 }
 
 // SetTextColorInRange sets the text color for a range of text.
-func (mc *MutableCaption) SetTextColorInRange(color obj.Object, range_ foundation.NSRange) {
+func (mc *MutableCaption) SetTextColorInRange(color coregraphics.CGColorRef, range_ foundation.NSRange) {
 	defer runtime.KeepAlive(mc)
 	defer runtime.KeepAlive(color)
-	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setTextColor:inRange:"), objref.IDOf(color), range_)
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setTextColor:inRange:"), objref.IDOf(color.Object), range_)
 }
 
 // SetBackgroundColorInRange sets the background color for a range of text.
-func (mc *MutableCaption) SetBackgroundColorInRange(color obj.Object, range_ foundation.NSRange) {
+func (mc *MutableCaption) SetBackgroundColorInRange(color coregraphics.CGColorRef, range_ foundation.NSRange) {
 	defer runtime.KeepAlive(mc)
 	defer runtime.KeepAlive(color)
-	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setBackgroundColor:inRange:"), objref.IDOf(color), range_)
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setBackgroundColor:inRange:"), objref.IDOf(color.Object), range_)
 }
 
 // SetFontWeightInRange sets the font weight for a range of text.

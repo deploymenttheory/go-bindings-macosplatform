@@ -1,0 +1,11 @@
+{{define "handle_types" -}}
+{{range . -}}
+{{if .Doc}}{{comment .Doc}}
+{{end}}type {{.GoName}} struct{ obj.Object }
+
+// IsNil reports whether {{.GoName}} is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h {{.GoName}}) IsNil() bool { return h.Object == nil }
+
+{{end -}}
+{{end}}

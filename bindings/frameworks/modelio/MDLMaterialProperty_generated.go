@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -139,10 +140,10 @@ func NewMaterialPropertyWithNameSemanticTextureSampler(name string, semantic Mat
 }
 
 // NewMaterialPropertyWithNameSemanticColor initializes a material property with a color value.
-func NewMaterialPropertyWithNameSemanticColor(name string, semantic MaterialSemantic, color obj.Object) *MaterialProperty {
+func NewMaterialPropertyWithNameSemanticColor(name string, semantic MaterialSemantic, color coregraphics.CGColorRef) *MaterialProperty {
 	defer runtime.KeepAlive(color)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:color:"), purego.NSString(name), semantic, objref.IDOf(color))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:color:"), purego.NSString(name), semantic, objref.IDOf(color.Object))
 	return materialPropertyAdopt(_id)
 }
 
@@ -184,9 +185,9 @@ func (mp *MaterialProperty) WithTextureSamplerValue(textureSamplerValue *Texture
 }
 
 // WithColor sets the color value for the material property.
-func (mp *MaterialProperty) WithColor(color obj.Object) *MaterialProperty {
+func (mp *MaterialProperty) WithColor(color coregraphics.CGColorRef) *MaterialProperty {
 	defer runtime.KeepAlive(color)
-	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setColor:"), objref.IDOf(color))
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setColor:"), objref.IDOf(color.Object))
 	return mp
 }
 
@@ -282,10 +283,10 @@ func (mp *MaterialProperty) TextureSamplerValue() *TextureSampler {
 }
 
 // Color returns the color.
-func (mp *MaterialProperty) Color() obj.Object {
+func (mp *MaterialProperty) Color() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("color"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // FloatValue returns the float value.

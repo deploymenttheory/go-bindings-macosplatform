@@ -7,6 +7,7 @@ package screencapturekit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -80,16 +81,16 @@ func NewScreenshotOutput() *ScreenshotOutput {
 }
 
 // WithSdrImage sets an output property that specifies the standard dynamic range version of the screenshot.
-func (so *ScreenshotOutput) WithSdrImage(sdrImage obj.Object) *ScreenshotOutput {
+func (so *ScreenshotOutput) WithSdrImage(sdrImage coregraphics.CGImageRef) *ScreenshotOutput {
 	defer runtime.KeepAlive(sdrImage)
-	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setSdrImage:"), objref.IDOf(sdrImage))
+	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setSdrImage:"), objref.IDOf(sdrImage.Object))
 	return so
 }
 
 // WithHdrImage sets an output property that specifies the high dynamic range version of the screenshot.
-func (so *ScreenshotOutput) WithHdrImage(hdrImage obj.Object) *ScreenshotOutput {
+func (so *ScreenshotOutput) WithHdrImage(hdrImage coregraphics.CGImageRef) *ScreenshotOutput {
 	defer runtime.KeepAlive(hdrImage)
-	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setHdrImage:"), objref.IDOf(hdrImage))
+	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setHdrImage:"), objref.IDOf(hdrImage.Object))
 	return so
 }
 
@@ -100,17 +101,17 @@ func (so *ScreenshotOutput) WithFileURL(fileURL string) *ScreenshotOutput {
 }
 
 // SdrImage returns SCScreenshotOutput property that denotes the SDR CGimage.  The output CGImage uses the same color space as the display
-func (so *ScreenshotOutput) SdrImage() obj.Object {
+func (so *ScreenshotOutput) SdrImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(so)
 	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("sdrImage"))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // HdrImage returns SCScreenshotOutput property that denotes the HDR CGimage.  The output CGImage uses the extended sRGB color space.
-func (so *ScreenshotOutput) HdrImage() obj.Object {
+func (so *ScreenshotOutput) HdrImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(so)
 	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("hdrImage"))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // FileURL returns SCScreenshotOutput property to specify the location where the image was saved.  If a fileURL in the screenshot configuration was not specified, then the fileURL will be nil

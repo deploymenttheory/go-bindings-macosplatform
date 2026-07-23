@@ -6,6 +6,8 @@ package securityhi
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type OpaqueURLReference struct{}
@@ -17,3 +19,10 @@ type URLCallbackInfo struct {
 	CurrentSize uint32
 	SystemEvent unsafe.Pointer
 }
+
+// URLReference is a handle for the opaque URLReference type.
+type URLReference struct{ obj.Object }
+
+// IsNil reports whether URLReference is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h URLReference) IsNil() bool { return h.Object == nil }

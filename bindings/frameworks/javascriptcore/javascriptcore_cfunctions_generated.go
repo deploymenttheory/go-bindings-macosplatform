@@ -7,6 +7,7 @@ package javascriptcore
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -16,1363 +17,1363 @@ import (
 var _fnJSBigIntCreateWithDouble func(objc.ID, float64, unsafe.Pointer) objc.ID
 
 // JSBigIntCreateWithDouble calls the JavaScriptCore framework function JSBigIntCreateWithDouble.
-func JSBigIntCreateWithDouble(ctx obj.Object, value float64, exception unsafe.Pointer) obj.Object {
+func JSBigIntCreateWithDouble(ctx JSContextRef, value float64, exception unsafe.Pointer) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSBigIntCreateWithDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnJSBigIntCreateWithDouble, _lib, "JSBigIntCreateWithDouble")
 	}
-	_ret := _fnJSBigIntCreateWithDouble(objref.IDOf(ctx), value, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSBigIntCreateWithDouble(objref.IDOf(ctx.Object), value, exception)
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSBigIntCreateWithInt64 func(objc.ID, int64, unsafe.Pointer) objc.ID
 
 // JSBigIntCreateWithInt64 calls the JavaScriptCore framework function JSBigIntCreateWithInt64.
-func JSBigIntCreateWithInt64(ctx obj.Object, integer int64, exception unsafe.Pointer) obj.Object {
+func JSBigIntCreateWithInt64(ctx JSContextRef, integer int64, exception unsafe.Pointer) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSBigIntCreateWithInt64 == nil {
 		ebipurego.RegisterLibFunc(&_fnJSBigIntCreateWithInt64, _lib, "JSBigIntCreateWithInt64")
 	}
-	_ret := _fnJSBigIntCreateWithInt64(objref.IDOf(ctx), integer, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSBigIntCreateWithInt64(objref.IDOf(ctx.Object), integer, exception)
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSBigIntCreateWithString func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // JSBigIntCreateWithString calls the JavaScriptCore framework function JSBigIntCreateWithString.
-func JSBigIntCreateWithString(ctx obj.Object, str obj.Object, exception unsafe.Pointer) obj.Object {
+func JSBigIntCreateWithString(ctx JSContextRef, str JSStringRef, exception unsafe.Pointer) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSBigIntCreateWithString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSBigIntCreateWithString, _lib, "JSBigIntCreateWithString")
 	}
-	_ret := _fnJSBigIntCreateWithString(objref.IDOf(ctx), objref.IDOf(str), exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSBigIntCreateWithString(objref.IDOf(ctx.Object), objref.IDOf(str.Object), exception)
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSBigIntCreateWithUInt64 func(objc.ID, uint64, unsafe.Pointer) objc.ID
 
 // JSBigIntCreateWithUInt64 calls the JavaScriptCore framework function JSBigIntCreateWithUInt64.
-func JSBigIntCreateWithUInt64(ctx obj.Object, integer uint64, exception unsafe.Pointer) obj.Object {
+func JSBigIntCreateWithUInt64(ctx JSContextRef, integer uint64, exception unsafe.Pointer) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSBigIntCreateWithUInt64 == nil {
 		ebipurego.RegisterLibFunc(&_fnJSBigIntCreateWithUInt64, _lib, "JSBigIntCreateWithUInt64")
 	}
-	_ret := _fnJSBigIntCreateWithUInt64(objref.IDOf(ctx), integer, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSBigIntCreateWithUInt64(objref.IDOf(ctx.Object), integer, exception)
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSCheckScriptSyntax func(objc.ID, objc.ID, objc.ID, int, unsafe.Pointer) bool
 
 // JSCheckScriptSyntax calls the JavaScriptCore framework function JSCheckScriptSyntax.
-func JSCheckScriptSyntax(ctx obj.Object, script obj.Object, sourceURL obj.Object, startingLineNumber int, exception unsafe.Pointer) bool {
+func JSCheckScriptSyntax(ctx JSContextRef, script JSStringRef, sourceURL JSStringRef, startingLineNumber int, exception unsafe.Pointer) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSCheckScriptSyntax == nil {
 		ebipurego.RegisterLibFunc(&_fnJSCheckScriptSyntax, _lib, "JSCheckScriptSyntax")
 	}
-	return _fnJSCheckScriptSyntax(objref.IDOf(ctx), objref.IDOf(script), objref.IDOf(sourceURL), startingLineNumber, exception)
+	return _fnJSCheckScriptSyntax(objref.IDOf(ctx.Object), objref.IDOf(script.Object), objref.IDOf(sourceURL.Object), startingLineNumber, exception)
 }
 
 var _fnJSClassCreate func(unsafe.Pointer) objc.ID
 
 // JSClassCreate calls the JavaScriptCore framework function JSClassCreate.
-func JSClassCreate(definition unsafe.Pointer) obj.Object {
+func JSClassCreate(definition unsafe.Pointer) JSClassRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSClassCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnJSClassCreate, _lib, "JSClassCreate")
 	}
 	_ret := _fnJSClassCreate(definition)
-	return obj.WrapUnmanaged(_ret)
+	return JSClassRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSClassRelease func(objc.ID)
 
 // JSClassRelease calls the JavaScriptCore framework function JSClassRelease.
-func JSClassRelease(jsClass obj.Object) {
+func JSClassRelease(jsClass JSClassRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSClassRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnJSClassRelease, _lib, "JSClassRelease")
 	}
-	_fnJSClassRelease(objref.IDOf(jsClass))
+	_fnJSClassRelease(objref.IDOf(jsClass.Object))
 }
 
 var _fnJSClassRetain func(objc.ID) objc.ID
 
 // JSClassRetain calls the JavaScriptCore framework function JSClassRetain.
-func JSClassRetain(jsClass obj.Object) obj.Object {
+func JSClassRetain(jsClass JSClassRef) JSClassRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSClassRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnJSClassRetain, _lib, "JSClassRetain")
 	}
-	_ret := _fnJSClassRetain(objref.IDOf(jsClass))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSClassRetain(objref.IDOf(jsClass.Object))
+	return JSClassRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSContextGetGlobalContext func(objc.ID) objc.ID
 
 // JSContextGetGlobalContext calls the JavaScriptCore framework function JSContextGetGlobalContext.
-func JSContextGetGlobalContext(ctx obj.Object) obj.Object {
+func JSContextGetGlobalContext(ctx JSContextRef) JSGlobalContextRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSContextGetGlobalContext == nil {
 		ebipurego.RegisterLibFunc(&_fnJSContextGetGlobalContext, _lib, "JSContextGetGlobalContext")
 	}
-	_ret := _fnJSContextGetGlobalContext(objref.IDOf(ctx))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSContextGetGlobalContext(objref.IDOf(ctx.Object))
+	return JSGlobalContextRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSContextGetGlobalObject func(objc.ID) objc.ID
 
 // JSContextGetGlobalObject calls the JavaScriptCore framework function JSContextGetGlobalObject.
-func JSContextGetGlobalObject(ctx obj.Object) obj.Object {
+func JSContextGetGlobalObject(ctx JSContextRef) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSContextGetGlobalObject == nil {
 		ebipurego.RegisterLibFunc(&_fnJSContextGetGlobalObject, _lib, "JSContextGetGlobalObject")
 	}
-	_ret := _fnJSContextGetGlobalObject(objref.IDOf(ctx))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSContextGetGlobalObject(objref.IDOf(ctx.Object))
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSContextGetGroup func(objc.ID) objc.ID
 
 // JSContextGetGroup calls the JavaScriptCore framework function JSContextGetGroup.
-func JSContextGetGroup(ctx obj.Object) obj.Object {
+func JSContextGetGroup(ctx JSContextRef) JSContextGroupRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSContextGetGroup == nil {
 		ebipurego.RegisterLibFunc(&_fnJSContextGetGroup, _lib, "JSContextGetGroup")
 	}
-	_ret := _fnJSContextGetGroup(objref.IDOf(ctx))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSContextGetGroup(objref.IDOf(ctx.Object))
+	return JSContextGroupRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSContextGroupCreate func() objc.ID
 
 // JSContextGroupCreate calls the JavaScriptCore framework function JSContextGroupCreate.
-func JSContextGroupCreate() obj.Object {
+func JSContextGroupCreate() JSContextGroupRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSContextGroupCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnJSContextGroupCreate, _lib, "JSContextGroupCreate")
 	}
 	_ret := _fnJSContextGroupCreate()
-	return obj.WrapUnmanaged(_ret)
+	return JSContextGroupRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSContextGroupRelease func(objc.ID)
 
 // JSContextGroupRelease calls the JavaScriptCore framework function JSContextGroupRelease.
-func JSContextGroupRelease(group obj.Object) {
+func JSContextGroupRelease(group JSContextGroupRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSContextGroupRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnJSContextGroupRelease, _lib, "JSContextGroupRelease")
 	}
-	_fnJSContextGroupRelease(objref.IDOf(group))
+	_fnJSContextGroupRelease(objref.IDOf(group.Object))
 }
 
 var _fnJSContextGroupRetain func(objc.ID) objc.ID
 
 // JSContextGroupRetain calls the JavaScriptCore framework function JSContextGroupRetain.
-func JSContextGroupRetain(group obj.Object) obj.Object {
+func JSContextGroupRetain(group JSContextGroupRef) JSContextGroupRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSContextGroupRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnJSContextGroupRetain, _lib, "JSContextGroupRetain")
 	}
-	_ret := _fnJSContextGroupRetain(objref.IDOf(group))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSContextGroupRetain(objref.IDOf(group.Object))
+	return JSContextGroupRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSEvaluateScript func(objc.ID, objc.ID, objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
 
 // JSEvaluateScript calls the JavaScriptCore framework function JSEvaluateScript.
-func JSEvaluateScript(ctx obj.Object, script obj.Object, thisObject obj.Object, sourceURL obj.Object, startingLineNumber int, exception unsafe.Pointer) obj.Object {
+func JSEvaluateScript(ctx JSContextRef, script JSStringRef, thisObject JSObjectRef, sourceURL JSStringRef, startingLineNumber int, exception unsafe.Pointer) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSEvaluateScript == nil {
 		ebipurego.RegisterLibFunc(&_fnJSEvaluateScript, _lib, "JSEvaluateScript")
 	}
-	_ret := _fnJSEvaluateScript(objref.IDOf(ctx), objref.IDOf(script), objref.IDOf(thisObject), objref.IDOf(sourceURL), startingLineNumber, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSEvaluateScript(objref.IDOf(ctx.Object), objref.IDOf(script.Object), objref.IDOf(thisObject.Object), objref.IDOf(sourceURL.Object), startingLineNumber, exception)
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSGarbageCollect func(objc.ID)
 
 // JSGarbageCollect calls the JavaScriptCore framework function JSGarbageCollect.
-func JSGarbageCollect(ctx obj.Object) {
+func JSGarbageCollect(ctx JSContextRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSGarbageCollect == nil {
 		ebipurego.RegisterLibFunc(&_fnJSGarbageCollect, _lib, "JSGarbageCollect")
 	}
-	_fnJSGarbageCollect(objref.IDOf(ctx))
+	_fnJSGarbageCollect(objref.IDOf(ctx.Object))
 }
 
 var _fnJSGlobalContextCopyName func(objc.ID) objc.ID
 
 // JSGlobalContextCopyName calls the JavaScriptCore framework function JSGlobalContextCopyName.
-func JSGlobalContextCopyName(ctx obj.Object) obj.Object {
+func JSGlobalContextCopyName(ctx JSGlobalContextRef) JSStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSGlobalContextCopyName == nil {
 		ebipurego.RegisterLibFunc(&_fnJSGlobalContextCopyName, _lib, "JSGlobalContextCopyName")
 	}
-	_ret := _fnJSGlobalContextCopyName(objref.IDOf(ctx))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSGlobalContextCopyName(objref.IDOf(ctx.Object))
+	return JSStringRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSGlobalContextCreate func(objc.ID) objc.ID
 
 // JSGlobalContextCreate calls the JavaScriptCore framework function JSGlobalContextCreate.
-func JSGlobalContextCreate(globalObjectClass obj.Object) obj.Object {
+func JSGlobalContextCreate(globalObjectClass JSClassRef) JSGlobalContextRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSGlobalContextCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnJSGlobalContextCreate, _lib, "JSGlobalContextCreate")
 	}
-	_ret := _fnJSGlobalContextCreate(objref.IDOf(globalObjectClass))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSGlobalContextCreate(objref.IDOf(globalObjectClass.Object))
+	return JSGlobalContextRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSGlobalContextCreateInGroup func(objc.ID, objc.ID) objc.ID
 
 // JSGlobalContextCreateInGroup calls the JavaScriptCore framework function JSGlobalContextCreateInGroup.
-func JSGlobalContextCreateInGroup(group obj.Object, globalObjectClass obj.Object) obj.Object {
+func JSGlobalContextCreateInGroup(group JSContextGroupRef, globalObjectClass JSClassRef) JSGlobalContextRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSGlobalContextCreateInGroup == nil {
 		ebipurego.RegisterLibFunc(&_fnJSGlobalContextCreateInGroup, _lib, "JSGlobalContextCreateInGroup")
 	}
-	_ret := _fnJSGlobalContextCreateInGroup(objref.IDOf(group), objref.IDOf(globalObjectClass))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSGlobalContextCreateInGroup(objref.IDOf(group.Object), objref.IDOf(globalObjectClass.Object))
+	return JSGlobalContextRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSGlobalContextIsInspectable func(objc.ID) bool
 
 // JSGlobalContextIsInspectable calls the JavaScriptCore framework function JSGlobalContextIsInspectable.
-func JSGlobalContextIsInspectable(ctx obj.Object) bool {
+func JSGlobalContextIsInspectable(ctx JSGlobalContextRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSGlobalContextIsInspectable == nil {
 		ebipurego.RegisterLibFunc(&_fnJSGlobalContextIsInspectable, _lib, "JSGlobalContextIsInspectable")
 	}
-	return _fnJSGlobalContextIsInspectable(objref.IDOf(ctx))
+	return _fnJSGlobalContextIsInspectable(objref.IDOf(ctx.Object))
 }
 
 var _fnJSGlobalContextRelease func(objc.ID)
 
 // JSGlobalContextRelease calls the JavaScriptCore framework function JSGlobalContextRelease.
-func JSGlobalContextRelease(ctx obj.Object) {
+func JSGlobalContextRelease(ctx JSGlobalContextRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSGlobalContextRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnJSGlobalContextRelease, _lib, "JSGlobalContextRelease")
 	}
-	_fnJSGlobalContextRelease(objref.IDOf(ctx))
+	_fnJSGlobalContextRelease(objref.IDOf(ctx.Object))
 }
 
 var _fnJSGlobalContextRetain func(objc.ID) objc.ID
 
 // JSGlobalContextRetain calls the JavaScriptCore framework function JSGlobalContextRetain.
-func JSGlobalContextRetain(ctx obj.Object) obj.Object {
+func JSGlobalContextRetain(ctx JSGlobalContextRef) JSGlobalContextRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSGlobalContextRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnJSGlobalContextRetain, _lib, "JSGlobalContextRetain")
 	}
-	_ret := _fnJSGlobalContextRetain(objref.IDOf(ctx))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSGlobalContextRetain(objref.IDOf(ctx.Object))
+	return JSGlobalContextRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSGlobalContextSetInspectable func(objc.ID, bool)
 
 // JSGlobalContextSetInspectable calls the JavaScriptCore framework function JSGlobalContextSetInspectable.
-func JSGlobalContextSetInspectable(ctx obj.Object, inspectable bool) {
+func JSGlobalContextSetInspectable(ctx JSGlobalContextRef, inspectable bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSGlobalContextSetInspectable == nil {
 		ebipurego.RegisterLibFunc(&_fnJSGlobalContextSetInspectable, _lib, "JSGlobalContextSetInspectable")
 	}
-	_fnJSGlobalContextSetInspectable(objref.IDOf(ctx), inspectable)
+	_fnJSGlobalContextSetInspectable(objref.IDOf(ctx.Object), inspectable)
 }
 
 var _fnJSGlobalContextSetName func(objc.ID, objc.ID)
 
 // JSGlobalContextSetName calls the JavaScriptCore framework function JSGlobalContextSetName.
-func JSGlobalContextSetName(ctx obj.Object, name obj.Object) {
+func JSGlobalContextSetName(ctx JSGlobalContextRef, name JSStringRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSGlobalContextSetName == nil {
 		ebipurego.RegisterLibFunc(&_fnJSGlobalContextSetName, _lib, "JSGlobalContextSetName")
 	}
-	_fnJSGlobalContextSetName(objref.IDOf(ctx), objref.IDOf(name))
+	_fnJSGlobalContextSetName(objref.IDOf(ctx.Object), objref.IDOf(name.Object))
 }
 
 var _fnJSObjectCallAsConstructor func(objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // JSObjectCallAsConstructor calls the JavaScriptCore framework function JSObjectCallAsConstructor.
-func JSObjectCallAsConstructor(ctx obj.Object, object obj.Object, argumentCount int, arguments unsafe.Pointer, exception unsafe.Pointer) obj.Object {
+func JSObjectCallAsConstructor(ctx JSContextRef, object JSObjectRef, argumentCount int, arguments unsafe.Pointer, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectCallAsConstructor == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectCallAsConstructor, _lib, "JSObjectCallAsConstructor")
 	}
-	_ret := _fnJSObjectCallAsConstructor(objref.IDOf(ctx), objref.IDOf(object), argumentCount, arguments, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectCallAsConstructor(objref.IDOf(ctx.Object), objref.IDOf(object.Object), argumentCount, arguments, exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectCallAsFunction func(objc.ID, objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // JSObjectCallAsFunction calls the JavaScriptCore framework function JSObjectCallAsFunction.
-func JSObjectCallAsFunction(ctx obj.Object, object obj.Object, thisObject obj.Object, argumentCount int, arguments unsafe.Pointer, exception unsafe.Pointer) obj.Object {
+func JSObjectCallAsFunction(ctx JSContextRef, object JSObjectRef, thisObject JSObjectRef, argumentCount int, arguments unsafe.Pointer, exception unsafe.Pointer) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectCallAsFunction == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectCallAsFunction, _lib, "JSObjectCallAsFunction")
 	}
-	_ret := _fnJSObjectCallAsFunction(objref.IDOf(ctx), objref.IDOf(object), objref.IDOf(thisObject), argumentCount, arguments, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectCallAsFunction(objref.IDOf(ctx.Object), objref.IDOf(object.Object), objref.IDOf(thisObject.Object), argumentCount, arguments, exception)
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectCopyPropertyNames func(objc.ID, objc.ID) objc.ID
 
 // JSObjectCopyPropertyNames calls the JavaScriptCore framework function JSObjectCopyPropertyNames.
-func JSObjectCopyPropertyNames(ctx obj.Object, object obj.Object) obj.Object {
+func JSObjectCopyPropertyNames(ctx JSContextRef, object JSObjectRef) JSPropertyNameArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectCopyPropertyNames == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectCopyPropertyNames, _lib, "JSObjectCopyPropertyNames")
 	}
-	_ret := _fnJSObjectCopyPropertyNames(objref.IDOf(ctx), objref.IDOf(object))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectCopyPropertyNames(objref.IDOf(ctx.Object), objref.IDOf(object.Object))
+	return JSPropertyNameArrayRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectDeleteProperty func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 // JSObjectDeleteProperty calls the JavaScriptCore framework function JSObjectDeleteProperty.
-func JSObjectDeleteProperty(ctx obj.Object, object obj.Object, propertyName obj.Object, exception unsafe.Pointer) bool {
+func JSObjectDeleteProperty(ctx JSContextRef, object JSObjectRef, propertyName JSStringRef, exception unsafe.Pointer) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectDeleteProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectDeleteProperty, _lib, "JSObjectDeleteProperty")
 	}
-	return _fnJSObjectDeleteProperty(objref.IDOf(ctx), objref.IDOf(object), objref.IDOf(propertyName), exception)
+	return _fnJSObjectDeleteProperty(objref.IDOf(ctx.Object), objref.IDOf(object.Object), objref.IDOf(propertyName.Object), exception)
 }
 
 var _fnJSObjectDeletePropertyForKey func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 // JSObjectDeletePropertyForKey calls the JavaScriptCore framework function JSObjectDeletePropertyForKey.
-func JSObjectDeletePropertyForKey(ctx obj.Object, object obj.Object, propertyKey obj.Object, exception unsafe.Pointer) bool {
+func JSObjectDeletePropertyForKey(ctx JSContextRef, object JSObjectRef, propertyKey JSValueRef, exception unsafe.Pointer) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectDeletePropertyForKey == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectDeletePropertyForKey, _lib, "JSObjectDeletePropertyForKey")
 	}
-	return _fnJSObjectDeletePropertyForKey(objref.IDOf(ctx), objref.IDOf(object), objref.IDOf(propertyKey), exception)
+	return _fnJSObjectDeletePropertyForKey(objref.IDOf(ctx.Object), objref.IDOf(object.Object), objref.IDOf(propertyKey.Object), exception)
 }
 
 var _fnJSObjectGetArrayBufferByteLength func(objc.ID, objc.ID, unsafe.Pointer) int
 
 // JSObjectGetArrayBufferByteLength calls the JavaScriptCore framework function JSObjectGetArrayBufferByteLength.
-func JSObjectGetArrayBufferByteLength(ctx obj.Object, object obj.Object, exception unsafe.Pointer) int {
+func JSObjectGetArrayBufferByteLength(ctx JSContextRef, object JSObjectRef, exception unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectGetArrayBufferByteLength == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetArrayBufferByteLength, _lib, "JSObjectGetArrayBufferByteLength")
 	}
-	return _fnJSObjectGetArrayBufferByteLength(objref.IDOf(ctx), objref.IDOf(object), exception)
+	return _fnJSObjectGetArrayBufferByteLength(objref.IDOf(ctx.Object), objref.IDOf(object.Object), exception)
 }
 
 var _fnJSObjectGetArrayBufferBytesPtr func(objc.ID, objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // JSObjectGetArrayBufferBytesPtr calls the JavaScriptCore framework function JSObjectGetArrayBufferBytesPtr.
-func JSObjectGetArrayBufferBytesPtr(ctx obj.Object, object obj.Object, exception unsafe.Pointer) unsafe.Pointer {
+func JSObjectGetArrayBufferBytesPtr(ctx JSContextRef, object JSObjectRef, exception unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectGetArrayBufferBytesPtr == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetArrayBufferBytesPtr, _lib, "JSObjectGetArrayBufferBytesPtr")
 	}
-	return _fnJSObjectGetArrayBufferBytesPtr(objref.IDOf(ctx), objref.IDOf(object), exception)
+	return _fnJSObjectGetArrayBufferBytesPtr(objref.IDOf(ctx.Object), objref.IDOf(object.Object), exception)
 }
 
 var _fnJSObjectGetPrivate func(objc.ID) unsafe.Pointer
 
 // JSObjectGetPrivate calls the JavaScriptCore framework function JSObjectGetPrivate.
-func JSObjectGetPrivate(object obj.Object) unsafe.Pointer {
+func JSObjectGetPrivate(object JSObjectRef) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectGetPrivate == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetPrivate, _lib, "JSObjectGetPrivate")
 	}
-	return _fnJSObjectGetPrivate(objref.IDOf(object))
+	return _fnJSObjectGetPrivate(objref.IDOf(object.Object))
 }
 
 var _fnJSObjectGetProperty func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // JSObjectGetProperty calls the JavaScriptCore framework function JSObjectGetProperty.
-func JSObjectGetProperty(ctx obj.Object, object obj.Object, propertyName obj.Object, exception unsafe.Pointer) obj.Object {
+func JSObjectGetProperty(ctx JSContextRef, object JSObjectRef, propertyName JSStringRef, exception unsafe.Pointer) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectGetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetProperty, _lib, "JSObjectGetProperty")
 	}
-	_ret := _fnJSObjectGetProperty(objref.IDOf(ctx), objref.IDOf(object), objref.IDOf(propertyName), exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectGetProperty(objref.IDOf(ctx.Object), objref.IDOf(object.Object), objref.IDOf(propertyName.Object), exception)
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectGetPropertyAtIndex func(objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
 
 // JSObjectGetPropertyAtIndex calls the JavaScriptCore framework function JSObjectGetPropertyAtIndex.
-func JSObjectGetPropertyAtIndex(ctx obj.Object, object obj.Object, propertyIndex int, exception unsafe.Pointer) obj.Object {
+func JSObjectGetPropertyAtIndex(ctx JSContextRef, object JSObjectRef, propertyIndex int, exception unsafe.Pointer) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectGetPropertyAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetPropertyAtIndex, _lib, "JSObjectGetPropertyAtIndex")
 	}
-	_ret := _fnJSObjectGetPropertyAtIndex(objref.IDOf(ctx), objref.IDOf(object), propertyIndex, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectGetPropertyAtIndex(objref.IDOf(ctx.Object), objref.IDOf(object.Object), propertyIndex, exception)
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectGetPropertyForKey func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // JSObjectGetPropertyForKey calls the JavaScriptCore framework function JSObjectGetPropertyForKey.
-func JSObjectGetPropertyForKey(ctx obj.Object, object obj.Object, propertyKey obj.Object, exception unsafe.Pointer) obj.Object {
+func JSObjectGetPropertyForKey(ctx JSContextRef, object JSObjectRef, propertyKey JSValueRef, exception unsafe.Pointer) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectGetPropertyForKey == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetPropertyForKey, _lib, "JSObjectGetPropertyForKey")
 	}
-	_ret := _fnJSObjectGetPropertyForKey(objref.IDOf(ctx), objref.IDOf(object), objref.IDOf(propertyKey), exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectGetPropertyForKey(objref.IDOf(ctx.Object), objref.IDOf(object.Object), objref.IDOf(propertyKey.Object), exception)
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectGetPrototype func(objc.ID, objc.ID) objc.ID
 
 // JSObjectGetPrototype calls the JavaScriptCore framework function JSObjectGetPrototype.
-func JSObjectGetPrototype(ctx obj.Object, object obj.Object) obj.Object {
+func JSObjectGetPrototype(ctx JSContextRef, object JSObjectRef) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectGetPrototype == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetPrototype, _lib, "JSObjectGetPrototype")
 	}
-	_ret := _fnJSObjectGetPrototype(objref.IDOf(ctx), objref.IDOf(object))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectGetPrototype(objref.IDOf(ctx.Object), objref.IDOf(object.Object))
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectGetTypedArrayBuffer func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // JSObjectGetTypedArrayBuffer calls the JavaScriptCore framework function JSObjectGetTypedArrayBuffer.
-func JSObjectGetTypedArrayBuffer(ctx obj.Object, object obj.Object, exception unsafe.Pointer) obj.Object {
+func JSObjectGetTypedArrayBuffer(ctx JSContextRef, object JSObjectRef, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectGetTypedArrayBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetTypedArrayBuffer, _lib, "JSObjectGetTypedArrayBuffer")
 	}
-	_ret := _fnJSObjectGetTypedArrayBuffer(objref.IDOf(ctx), objref.IDOf(object), exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectGetTypedArrayBuffer(objref.IDOf(ctx.Object), objref.IDOf(object.Object), exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectGetTypedArrayByteLength func(objc.ID, objc.ID, unsafe.Pointer) int
 
 // JSObjectGetTypedArrayByteLength calls the JavaScriptCore framework function JSObjectGetTypedArrayByteLength.
-func JSObjectGetTypedArrayByteLength(ctx obj.Object, object obj.Object, exception unsafe.Pointer) int {
+func JSObjectGetTypedArrayByteLength(ctx JSContextRef, object JSObjectRef, exception unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectGetTypedArrayByteLength == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetTypedArrayByteLength, _lib, "JSObjectGetTypedArrayByteLength")
 	}
-	return _fnJSObjectGetTypedArrayByteLength(objref.IDOf(ctx), objref.IDOf(object), exception)
+	return _fnJSObjectGetTypedArrayByteLength(objref.IDOf(ctx.Object), objref.IDOf(object.Object), exception)
 }
 
 var _fnJSObjectGetTypedArrayByteOffset func(objc.ID, objc.ID, unsafe.Pointer) int
 
 // JSObjectGetTypedArrayByteOffset calls the JavaScriptCore framework function JSObjectGetTypedArrayByteOffset.
-func JSObjectGetTypedArrayByteOffset(ctx obj.Object, object obj.Object, exception unsafe.Pointer) int {
+func JSObjectGetTypedArrayByteOffset(ctx JSContextRef, object JSObjectRef, exception unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectGetTypedArrayByteOffset == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetTypedArrayByteOffset, _lib, "JSObjectGetTypedArrayByteOffset")
 	}
-	return _fnJSObjectGetTypedArrayByteOffset(objref.IDOf(ctx), objref.IDOf(object), exception)
+	return _fnJSObjectGetTypedArrayByteOffset(objref.IDOf(ctx.Object), objref.IDOf(object.Object), exception)
 }
 
 var _fnJSObjectGetTypedArrayBytesPtr func(objc.ID, objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // JSObjectGetTypedArrayBytesPtr calls the JavaScriptCore framework function JSObjectGetTypedArrayBytesPtr.
-func JSObjectGetTypedArrayBytesPtr(ctx obj.Object, object obj.Object, exception unsafe.Pointer) unsafe.Pointer {
+func JSObjectGetTypedArrayBytesPtr(ctx JSContextRef, object JSObjectRef, exception unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectGetTypedArrayBytesPtr == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetTypedArrayBytesPtr, _lib, "JSObjectGetTypedArrayBytesPtr")
 	}
-	return _fnJSObjectGetTypedArrayBytesPtr(objref.IDOf(ctx), objref.IDOf(object), exception)
+	return _fnJSObjectGetTypedArrayBytesPtr(objref.IDOf(ctx.Object), objref.IDOf(object.Object), exception)
 }
 
 var _fnJSObjectGetTypedArrayLength func(objc.ID, objc.ID, unsafe.Pointer) int
 
 // JSObjectGetTypedArrayLength calls the JavaScriptCore framework function JSObjectGetTypedArrayLength.
-func JSObjectGetTypedArrayLength(ctx obj.Object, object obj.Object, exception unsafe.Pointer) int {
+func JSObjectGetTypedArrayLength(ctx JSContextRef, object JSObjectRef, exception unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectGetTypedArrayLength == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetTypedArrayLength, _lib, "JSObjectGetTypedArrayLength")
 	}
-	return _fnJSObjectGetTypedArrayLength(objref.IDOf(ctx), objref.IDOf(object), exception)
+	return _fnJSObjectGetTypedArrayLength(objref.IDOf(ctx.Object), objref.IDOf(object.Object), exception)
 }
 
 var _fnJSObjectHasProperty func(objc.ID, objc.ID, objc.ID) bool
 
 // JSObjectHasProperty calls the JavaScriptCore framework function JSObjectHasProperty.
-func JSObjectHasProperty(ctx obj.Object, object obj.Object, propertyName obj.Object) bool {
+func JSObjectHasProperty(ctx JSContextRef, object JSObjectRef, propertyName JSStringRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectHasProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectHasProperty, _lib, "JSObjectHasProperty")
 	}
-	return _fnJSObjectHasProperty(objref.IDOf(ctx), objref.IDOf(object), objref.IDOf(propertyName))
+	return _fnJSObjectHasProperty(objref.IDOf(ctx.Object), objref.IDOf(object.Object), objref.IDOf(propertyName.Object))
 }
 
 var _fnJSObjectHasPropertyForKey func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 // JSObjectHasPropertyForKey calls the JavaScriptCore framework function JSObjectHasPropertyForKey.
-func JSObjectHasPropertyForKey(ctx obj.Object, object obj.Object, propertyKey obj.Object, exception unsafe.Pointer) bool {
+func JSObjectHasPropertyForKey(ctx JSContextRef, object JSObjectRef, propertyKey JSValueRef, exception unsafe.Pointer) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectHasPropertyForKey == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectHasPropertyForKey, _lib, "JSObjectHasPropertyForKey")
 	}
-	return _fnJSObjectHasPropertyForKey(objref.IDOf(ctx), objref.IDOf(object), objref.IDOf(propertyKey), exception)
+	return _fnJSObjectHasPropertyForKey(objref.IDOf(ctx.Object), objref.IDOf(object.Object), objref.IDOf(propertyKey.Object), exception)
 }
 
 var _fnJSObjectIsConstructor func(objc.ID, objc.ID) bool
 
 // JSObjectIsConstructor calls the JavaScriptCore framework function JSObjectIsConstructor.
-func JSObjectIsConstructor(ctx obj.Object, object obj.Object) bool {
+func JSObjectIsConstructor(ctx JSContextRef, object JSObjectRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectIsConstructor == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectIsConstructor, _lib, "JSObjectIsConstructor")
 	}
-	return _fnJSObjectIsConstructor(objref.IDOf(ctx), objref.IDOf(object))
+	return _fnJSObjectIsConstructor(objref.IDOf(ctx.Object), objref.IDOf(object.Object))
 }
 
 var _fnJSObjectIsFunction func(objc.ID, objc.ID) bool
 
 // JSObjectIsFunction calls the JavaScriptCore framework function JSObjectIsFunction.
-func JSObjectIsFunction(ctx obj.Object, object obj.Object) bool {
+func JSObjectIsFunction(ctx JSContextRef, object JSObjectRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectIsFunction == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectIsFunction, _lib, "JSObjectIsFunction")
 	}
-	return _fnJSObjectIsFunction(objref.IDOf(ctx), objref.IDOf(object))
+	return _fnJSObjectIsFunction(objref.IDOf(ctx.Object), objref.IDOf(object.Object))
 }
 
 var _fnJSObjectMake func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // JSObjectMake calls the JavaScriptCore framework function JSObjectMake.
-func JSObjectMake(ctx obj.Object, jsClass obj.Object, data unsafe.Pointer) obj.Object {
+func JSObjectMake(ctx JSContextRef, jsClass JSClassRef, data unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMake == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMake, _lib, "JSObjectMake")
 	}
-	_ret := _fnJSObjectMake(objref.IDOf(ctx), objref.IDOf(jsClass), data)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMake(objref.IDOf(ctx.Object), objref.IDOf(jsClass.Object), data)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectMakeArray func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // JSObjectMakeArray calls the JavaScriptCore framework function JSObjectMakeArray.
-func JSObjectMakeArray(ctx obj.Object, argumentCount int, arguments unsafe.Pointer, exception unsafe.Pointer) obj.Object {
+func JSObjectMakeArray(ctx JSContextRef, argumentCount int, arguments unsafe.Pointer, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeArray == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeArray, _lib, "JSObjectMakeArray")
 	}
-	_ret := _fnJSObjectMakeArray(objref.IDOf(ctx), argumentCount, arguments, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMakeArray(objref.IDOf(ctx.Object), argumentCount, arguments, exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectMakeArrayBufferWithBytesNoCopy func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // JSObjectMakeArrayBufferWithBytesNoCopy calls the JavaScriptCore framework function JSObjectMakeArrayBufferWithBytesNoCopy.
-func JSObjectMakeArrayBufferWithBytesNoCopy(ctx obj.Object, data unsafe.Pointer, byteLength int, bytesDeallocator unsafe.Pointer, deallocatorContext unsafe.Pointer, exception unsafe.Pointer) obj.Object {
+func JSObjectMakeArrayBufferWithBytesNoCopy(ctx JSContextRef, data unsafe.Pointer, byteLength int, bytesDeallocator unsafe.Pointer, deallocatorContext unsafe.Pointer, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeArrayBufferWithBytesNoCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeArrayBufferWithBytesNoCopy, _lib, "JSObjectMakeArrayBufferWithBytesNoCopy")
 	}
-	_ret := _fnJSObjectMakeArrayBufferWithBytesNoCopy(objref.IDOf(ctx), data, byteLength, bytesDeallocator, deallocatorContext, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMakeArrayBufferWithBytesNoCopy(objref.IDOf(ctx.Object), data, byteLength, bytesDeallocator, deallocatorContext, exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectMakeConstructor func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // JSObjectMakeConstructor calls the JavaScriptCore framework function JSObjectMakeConstructor.
-func JSObjectMakeConstructor(ctx obj.Object, jsClass obj.Object, callAsConstructor unsafe.Pointer) obj.Object {
+func JSObjectMakeConstructor(ctx JSContextRef, jsClass JSClassRef, callAsConstructor unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeConstructor == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeConstructor, _lib, "JSObjectMakeConstructor")
 	}
-	_ret := _fnJSObjectMakeConstructor(objref.IDOf(ctx), objref.IDOf(jsClass), callAsConstructor)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMakeConstructor(objref.IDOf(ctx.Object), objref.IDOf(jsClass.Object), callAsConstructor)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectMakeDate func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // JSObjectMakeDate calls the JavaScriptCore framework function JSObjectMakeDate.
-func JSObjectMakeDate(ctx obj.Object, argumentCount int, arguments unsafe.Pointer, exception unsafe.Pointer) obj.Object {
+func JSObjectMakeDate(ctx JSContextRef, argumentCount int, arguments unsafe.Pointer, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeDate == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeDate, _lib, "JSObjectMakeDate")
 	}
-	_ret := _fnJSObjectMakeDate(objref.IDOf(ctx), argumentCount, arguments, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMakeDate(objref.IDOf(ctx.Object), argumentCount, arguments, exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectMakeDeferredPromise func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // JSObjectMakeDeferredPromise calls the JavaScriptCore framework function JSObjectMakeDeferredPromise.
-func JSObjectMakeDeferredPromise(ctx obj.Object, resolve unsafe.Pointer, reject unsafe.Pointer, exception unsafe.Pointer) obj.Object {
+func JSObjectMakeDeferredPromise(ctx JSContextRef, resolve unsafe.Pointer, reject unsafe.Pointer, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeDeferredPromise == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeDeferredPromise, _lib, "JSObjectMakeDeferredPromise")
 	}
-	_ret := _fnJSObjectMakeDeferredPromise(objref.IDOf(ctx), resolve, reject, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMakeDeferredPromise(objref.IDOf(ctx.Object), resolve, reject, exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectMakeError func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // JSObjectMakeError calls the JavaScriptCore framework function JSObjectMakeError.
-func JSObjectMakeError(ctx obj.Object, argumentCount int, arguments unsafe.Pointer, exception unsafe.Pointer) obj.Object {
+func JSObjectMakeError(ctx JSContextRef, argumentCount int, arguments unsafe.Pointer, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeError == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeError, _lib, "JSObjectMakeError")
 	}
-	_ret := _fnJSObjectMakeError(objref.IDOf(ctx), argumentCount, arguments, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMakeError(objref.IDOf(ctx.Object), argumentCount, arguments, exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectMakeFunction func(objc.ID, objc.ID, int, unsafe.Pointer, objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
 
 // JSObjectMakeFunction calls the JavaScriptCore framework function JSObjectMakeFunction.
-func JSObjectMakeFunction(ctx obj.Object, name obj.Object, parameterCount int, parameterNames unsafe.Pointer, body obj.Object, sourceURL obj.Object, startingLineNumber int, exception unsafe.Pointer) obj.Object {
+func JSObjectMakeFunction(ctx JSContextRef, name JSStringRef, parameterCount int, parameterNames unsafe.Pointer, body JSStringRef, sourceURL JSStringRef, startingLineNumber int, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeFunction == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeFunction, _lib, "JSObjectMakeFunction")
 	}
-	_ret := _fnJSObjectMakeFunction(objref.IDOf(ctx), objref.IDOf(name), parameterCount, parameterNames, objref.IDOf(body), objref.IDOf(sourceURL), startingLineNumber, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMakeFunction(objref.IDOf(ctx.Object), objref.IDOf(name.Object), parameterCount, parameterNames, objref.IDOf(body.Object), objref.IDOf(sourceURL.Object), startingLineNumber, exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectMakeFunctionWithCallback func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // JSObjectMakeFunctionWithCallback calls the JavaScriptCore framework function JSObjectMakeFunctionWithCallback.
-func JSObjectMakeFunctionWithCallback(ctx obj.Object, name obj.Object, callAsFunction unsafe.Pointer) obj.Object {
+func JSObjectMakeFunctionWithCallback(ctx JSContextRef, name JSStringRef, callAsFunction unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeFunctionWithCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeFunctionWithCallback, _lib, "JSObjectMakeFunctionWithCallback")
 	}
-	_ret := _fnJSObjectMakeFunctionWithCallback(objref.IDOf(ctx), objref.IDOf(name), callAsFunction)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMakeFunctionWithCallback(objref.IDOf(ctx.Object), objref.IDOf(name.Object), callAsFunction)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectMakeRegExp func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // JSObjectMakeRegExp calls the JavaScriptCore framework function JSObjectMakeRegExp.
-func JSObjectMakeRegExp(ctx obj.Object, argumentCount int, arguments unsafe.Pointer, exception unsafe.Pointer) obj.Object {
+func JSObjectMakeRegExp(ctx JSContextRef, argumentCount int, arguments unsafe.Pointer, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeRegExp == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeRegExp, _lib, "JSObjectMakeRegExp")
 	}
-	_ret := _fnJSObjectMakeRegExp(objref.IDOf(ctx), argumentCount, arguments, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMakeRegExp(objref.IDOf(ctx.Object), argumentCount, arguments, exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectMakeTypedArray func(objc.ID, TypedArrayType, int, unsafe.Pointer) objc.ID
 
 // JSObjectMakeTypedArray calls the JavaScriptCore framework function JSObjectMakeTypedArray.
-func JSObjectMakeTypedArray(ctx obj.Object, arrayType TypedArrayType, length int, exception unsafe.Pointer) obj.Object {
+func JSObjectMakeTypedArray(ctx JSContextRef, arrayType TypedArrayType, length int, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeTypedArray == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeTypedArray, _lib, "JSObjectMakeTypedArray")
 	}
-	_ret := _fnJSObjectMakeTypedArray(objref.IDOf(ctx), arrayType, length, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMakeTypedArray(objref.IDOf(ctx.Object), arrayType, length, exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectMakeTypedArrayWithArrayBuffer func(objc.ID, TypedArrayType, objc.ID, unsafe.Pointer) objc.ID
 
 // JSObjectMakeTypedArrayWithArrayBuffer calls the JavaScriptCore framework function JSObjectMakeTypedArrayWithArrayBuffer.
-func JSObjectMakeTypedArrayWithArrayBuffer(ctx obj.Object, arrayType TypedArrayType, buffer obj.Object, exception unsafe.Pointer) obj.Object {
+func JSObjectMakeTypedArrayWithArrayBuffer(ctx JSContextRef, arrayType TypedArrayType, buffer JSObjectRef, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeTypedArrayWithArrayBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeTypedArrayWithArrayBuffer, _lib, "JSObjectMakeTypedArrayWithArrayBuffer")
 	}
-	_ret := _fnJSObjectMakeTypedArrayWithArrayBuffer(objref.IDOf(ctx), arrayType, objref.IDOf(buffer), exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMakeTypedArrayWithArrayBuffer(objref.IDOf(ctx.Object), arrayType, objref.IDOf(buffer.Object), exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectMakeTypedArrayWithArrayBufferAndOffset func(objc.ID, TypedArrayType, objc.ID, int, int, unsafe.Pointer) objc.ID
 
 // JSObjectMakeTypedArrayWithArrayBufferAndOffset calls the JavaScriptCore framework function JSObjectMakeTypedArrayWithArrayBufferAndOffset.
-func JSObjectMakeTypedArrayWithArrayBufferAndOffset(ctx obj.Object, arrayType TypedArrayType, buffer obj.Object, byteOffset int, length int, exception unsafe.Pointer) obj.Object {
+func JSObjectMakeTypedArrayWithArrayBufferAndOffset(ctx JSContextRef, arrayType TypedArrayType, buffer JSObjectRef, byteOffset int, length int, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeTypedArrayWithArrayBufferAndOffset == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeTypedArrayWithArrayBufferAndOffset, _lib, "JSObjectMakeTypedArrayWithArrayBufferAndOffset")
 	}
-	_ret := _fnJSObjectMakeTypedArrayWithArrayBufferAndOffset(objref.IDOf(ctx), arrayType, objref.IDOf(buffer), byteOffset, length, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMakeTypedArrayWithArrayBufferAndOffset(objref.IDOf(ctx.Object), arrayType, objref.IDOf(buffer.Object), byteOffset, length, exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectMakeTypedArrayWithBytesNoCopy func(objc.ID, TypedArrayType, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // JSObjectMakeTypedArrayWithBytesNoCopy calls the JavaScriptCore framework function JSObjectMakeTypedArrayWithBytesNoCopy.
-func JSObjectMakeTypedArrayWithBytesNoCopy(ctx obj.Object, arrayType TypedArrayType, data unsafe.Pointer, byteLength int, bytesDeallocator unsafe.Pointer, deallocatorContext unsafe.Pointer, exception unsafe.Pointer) obj.Object {
+func JSObjectMakeTypedArrayWithBytesNoCopy(ctx JSContextRef, arrayType TypedArrayType, data unsafe.Pointer, byteLength int, bytesDeallocator unsafe.Pointer, deallocatorContext unsafe.Pointer, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeTypedArrayWithBytesNoCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeTypedArrayWithBytesNoCopy, _lib, "JSObjectMakeTypedArrayWithBytesNoCopy")
 	}
-	_ret := _fnJSObjectMakeTypedArrayWithBytesNoCopy(objref.IDOf(ctx), arrayType, data, byteLength, bytesDeallocator, deallocatorContext, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSObjectMakeTypedArrayWithBytesNoCopy(objref.IDOf(ctx.Object), arrayType, data, byteLength, bytesDeallocator, deallocatorContext, exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSObjectSetPrivate func(objc.ID, unsafe.Pointer) bool
 
 // JSObjectSetPrivate calls the JavaScriptCore framework function JSObjectSetPrivate.
-func JSObjectSetPrivate(object obj.Object, data unsafe.Pointer) bool {
+func JSObjectSetPrivate(object JSObjectRef, data unsafe.Pointer) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectSetPrivate == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectSetPrivate, _lib, "JSObjectSetPrivate")
 	}
-	return _fnJSObjectSetPrivate(objref.IDOf(object), data)
+	return _fnJSObjectSetPrivate(objref.IDOf(object.Object), data)
 }
 
 var _fnJSObjectSetProperty func(objc.ID, objc.ID, objc.ID, objc.ID, int, unsafe.Pointer)
 
 // JSObjectSetProperty calls the JavaScriptCore framework function JSObjectSetProperty.
-func JSObjectSetProperty(ctx obj.Object, object obj.Object, propertyName obj.Object, value obj.Object, attributes int, exception unsafe.Pointer) {
+func JSObjectSetProperty(ctx JSContextRef, object JSObjectRef, propertyName JSStringRef, value JSValueRef, attributes int, exception unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectSetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectSetProperty, _lib, "JSObjectSetProperty")
 	}
-	_fnJSObjectSetProperty(objref.IDOf(ctx), objref.IDOf(object), objref.IDOf(propertyName), objref.IDOf(value), attributes, exception)
+	_fnJSObjectSetProperty(objref.IDOf(ctx.Object), objref.IDOf(object.Object), objref.IDOf(propertyName.Object), objref.IDOf(value.Object), attributes, exception)
 }
 
 var _fnJSObjectSetPropertyAtIndex func(objc.ID, objc.ID, int, objc.ID, unsafe.Pointer)
 
 // JSObjectSetPropertyAtIndex calls the JavaScriptCore framework function JSObjectSetPropertyAtIndex.
-func JSObjectSetPropertyAtIndex(ctx obj.Object, object obj.Object, propertyIndex int, value obj.Object, exception unsafe.Pointer) {
+func JSObjectSetPropertyAtIndex(ctx JSContextRef, object JSObjectRef, propertyIndex int, value JSValueRef, exception unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectSetPropertyAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectSetPropertyAtIndex, _lib, "JSObjectSetPropertyAtIndex")
 	}
-	_fnJSObjectSetPropertyAtIndex(objref.IDOf(ctx), objref.IDOf(object), propertyIndex, objref.IDOf(value), exception)
+	_fnJSObjectSetPropertyAtIndex(objref.IDOf(ctx.Object), objref.IDOf(object.Object), propertyIndex, objref.IDOf(value.Object), exception)
 }
 
 var _fnJSObjectSetPropertyForKey func(objc.ID, objc.ID, objc.ID, objc.ID, int, unsafe.Pointer)
 
 // JSObjectSetPropertyForKey calls the JavaScriptCore framework function JSObjectSetPropertyForKey.
-func JSObjectSetPropertyForKey(ctx obj.Object, object obj.Object, propertyKey obj.Object, value obj.Object, attributes int, exception unsafe.Pointer) {
+func JSObjectSetPropertyForKey(ctx JSContextRef, object JSObjectRef, propertyKey JSValueRef, value JSValueRef, attributes int, exception unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectSetPropertyForKey == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectSetPropertyForKey, _lib, "JSObjectSetPropertyForKey")
 	}
-	_fnJSObjectSetPropertyForKey(objref.IDOf(ctx), objref.IDOf(object), objref.IDOf(propertyKey), objref.IDOf(value), attributes, exception)
+	_fnJSObjectSetPropertyForKey(objref.IDOf(ctx.Object), objref.IDOf(object.Object), objref.IDOf(propertyKey.Object), objref.IDOf(value.Object), attributes, exception)
 }
 
 var _fnJSObjectSetPrototype func(objc.ID, objc.ID, objc.ID)
 
 // JSObjectSetPrototype calls the JavaScriptCore framework function JSObjectSetPrototype.
-func JSObjectSetPrototype(ctx obj.Object, object obj.Object, value obj.Object) {
+func JSObjectSetPrototype(ctx JSContextRef, object JSObjectRef, value JSValueRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectSetPrototype == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectSetPrototype, _lib, "JSObjectSetPrototype")
 	}
-	_fnJSObjectSetPrototype(objref.IDOf(ctx), objref.IDOf(object), objref.IDOf(value))
+	_fnJSObjectSetPrototype(objref.IDOf(ctx.Object), objref.IDOf(object.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSPropertyNameAccumulatorAddName func(objc.ID, objc.ID)
 
 // JSPropertyNameAccumulatorAddName calls the JavaScriptCore framework function JSPropertyNameAccumulatorAddName.
-func JSPropertyNameAccumulatorAddName(accumulator obj.Object, propertyName obj.Object) {
+func JSPropertyNameAccumulatorAddName(accumulator JSPropertyNameAccumulatorRef, propertyName JSStringRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSPropertyNameAccumulatorAddName == nil {
 		ebipurego.RegisterLibFunc(&_fnJSPropertyNameAccumulatorAddName, _lib, "JSPropertyNameAccumulatorAddName")
 	}
-	_fnJSPropertyNameAccumulatorAddName(objref.IDOf(accumulator), objref.IDOf(propertyName))
+	_fnJSPropertyNameAccumulatorAddName(objref.IDOf(accumulator.Object), objref.IDOf(propertyName.Object))
 }
 
 var _fnJSPropertyNameArrayGetCount func(objc.ID) int
 
 // JSPropertyNameArrayGetCount calls the JavaScriptCore framework function JSPropertyNameArrayGetCount.
-func JSPropertyNameArrayGetCount(array obj.Object) int {
+func JSPropertyNameArrayGetCount(array JSPropertyNameArrayRef) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSPropertyNameArrayGetCount == nil {
 		ebipurego.RegisterLibFunc(&_fnJSPropertyNameArrayGetCount, _lib, "JSPropertyNameArrayGetCount")
 	}
-	return _fnJSPropertyNameArrayGetCount(objref.IDOf(array))
+	return _fnJSPropertyNameArrayGetCount(objref.IDOf(array.Object))
 }
 
 var _fnJSPropertyNameArrayGetNameAtIndex func(objc.ID, int) objc.ID
 
 // JSPropertyNameArrayGetNameAtIndex calls the JavaScriptCore framework function JSPropertyNameArrayGetNameAtIndex.
-func JSPropertyNameArrayGetNameAtIndex(array obj.Object, index int) obj.Object {
+func JSPropertyNameArrayGetNameAtIndex(array JSPropertyNameArrayRef, index int) JSStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSPropertyNameArrayGetNameAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnJSPropertyNameArrayGetNameAtIndex, _lib, "JSPropertyNameArrayGetNameAtIndex")
 	}
-	_ret := _fnJSPropertyNameArrayGetNameAtIndex(objref.IDOf(array), index)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSPropertyNameArrayGetNameAtIndex(objref.IDOf(array.Object), index)
+	return JSStringRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSPropertyNameArrayRelease func(objc.ID)
 
 // JSPropertyNameArrayRelease calls the JavaScriptCore framework function JSPropertyNameArrayRelease.
-func JSPropertyNameArrayRelease(array obj.Object) {
+func JSPropertyNameArrayRelease(array JSPropertyNameArrayRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSPropertyNameArrayRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnJSPropertyNameArrayRelease, _lib, "JSPropertyNameArrayRelease")
 	}
-	_fnJSPropertyNameArrayRelease(objref.IDOf(array))
+	_fnJSPropertyNameArrayRelease(objref.IDOf(array.Object))
 }
 
 var _fnJSPropertyNameArrayRetain func(objc.ID) objc.ID
 
 // JSPropertyNameArrayRetain calls the JavaScriptCore framework function JSPropertyNameArrayRetain.
-func JSPropertyNameArrayRetain(array obj.Object) obj.Object {
+func JSPropertyNameArrayRetain(array JSPropertyNameArrayRef) JSPropertyNameArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSPropertyNameArrayRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnJSPropertyNameArrayRetain, _lib, "JSPropertyNameArrayRetain")
 	}
-	_ret := _fnJSPropertyNameArrayRetain(objref.IDOf(array))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSPropertyNameArrayRetain(objref.IDOf(array.Object))
+	return JSPropertyNameArrayRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSStringCopyCFString func(objc.ID, objc.ID) objc.ID
 
 // JSStringCopyCFString calls the JavaScriptCore framework function JSStringCopyCFString.
-func JSStringCopyCFString(alloc obj.Object, str obj.Object) obj.Object {
+func JSStringCopyCFString(alloc corefoundation.CFAllocatorRef, str JSStringRef) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringCopyCFString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringCopyCFString, _lib, "JSStringCopyCFString")
 	}
-	_ret := _fnJSStringCopyCFString(objref.IDOf(alloc), objref.IDOf(str))
-	return obj.Adopt(_ret)
+	_ret := _fnJSStringCopyCFString(objref.IDOf(alloc.Object), objref.IDOf(str.Object))
+	return corefoundation.CFStringRef{obj.Adopt(_ret)}
 }
 
 var _fnJSStringCreateWithCFString func(objc.ID) objc.ID
 
 // JSStringCreateWithCFString calls the JavaScriptCore framework function JSStringCreateWithCFString.
-func JSStringCreateWithCFString(str obj.Object) obj.Object {
+func JSStringCreateWithCFString(str corefoundation.CFStringRef) JSStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringCreateWithCFString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringCreateWithCFString, _lib, "JSStringCreateWithCFString")
 	}
-	_ret := _fnJSStringCreateWithCFString(objref.IDOf(str))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSStringCreateWithCFString(objref.IDOf(str.Object))
+	return JSStringRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSStringCreateWithCharacters func(unsafe.Pointer, int) objc.ID
 
 // JSStringCreateWithCharacters calls the JavaScriptCore framework function JSStringCreateWithCharacters.
-func JSStringCreateWithCharacters(chars unsafe.Pointer, numChars int) obj.Object {
+func JSStringCreateWithCharacters(chars unsafe.Pointer, numChars int) JSStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringCreateWithCharacters == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringCreateWithCharacters, _lib, "JSStringCreateWithCharacters")
 	}
 	_ret := _fnJSStringCreateWithCharacters(chars, numChars)
-	return obj.WrapUnmanaged(_ret)
+	return JSStringRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSStringCreateWithUTF8CString func(string) objc.ID
 
 // JSStringCreateWithUTF8CString calls the JavaScriptCore framework function JSStringCreateWithUTF8CString.
-func JSStringCreateWithUTF8CString(str string) obj.Object {
+func JSStringCreateWithUTF8CString(str string) JSStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringCreateWithUTF8CString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringCreateWithUTF8CString, _lib, "JSStringCreateWithUTF8CString")
 	}
 	_ret := _fnJSStringCreateWithUTF8CString(str)
-	return obj.WrapUnmanaged(_ret)
+	return JSStringRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSStringGetCharactersPtr func(objc.ID) unsafe.Pointer
 
 // JSStringGetCharactersPtr calls the JavaScriptCore framework function JSStringGetCharactersPtr.
-func JSStringGetCharactersPtr(str obj.Object) unsafe.Pointer {
+func JSStringGetCharactersPtr(str JSStringRef) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringGetCharactersPtr == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringGetCharactersPtr, _lib, "JSStringGetCharactersPtr")
 	}
-	return _fnJSStringGetCharactersPtr(objref.IDOf(str))
+	return _fnJSStringGetCharactersPtr(objref.IDOf(str.Object))
 }
 
 var _fnJSStringGetLength func(objc.ID) int
 
 // JSStringGetLength calls the JavaScriptCore framework function JSStringGetLength.
-func JSStringGetLength(str obj.Object) int {
+func JSStringGetLength(str JSStringRef) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringGetLength == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringGetLength, _lib, "JSStringGetLength")
 	}
-	return _fnJSStringGetLength(objref.IDOf(str))
+	return _fnJSStringGetLength(objref.IDOf(str.Object))
 }
 
 var _fnJSStringGetMaximumUTF8CStringSize func(objc.ID) int
 
 // JSStringGetMaximumUTF8CStringSize calls the JavaScriptCore framework function JSStringGetMaximumUTF8CStringSize.
-func JSStringGetMaximumUTF8CStringSize(str obj.Object) int {
+func JSStringGetMaximumUTF8CStringSize(str JSStringRef) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringGetMaximumUTF8CStringSize == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringGetMaximumUTF8CStringSize, _lib, "JSStringGetMaximumUTF8CStringSize")
 	}
-	return _fnJSStringGetMaximumUTF8CStringSize(objref.IDOf(str))
+	return _fnJSStringGetMaximumUTF8CStringSize(objref.IDOf(str.Object))
 }
 
 var _fnJSStringGetUTF8CString func(objc.ID, string, int) int
 
 // JSStringGetUTF8CString calls the JavaScriptCore framework function JSStringGetUTF8CString.
-func JSStringGetUTF8CString(str obj.Object, buffer string, bufferSize int) int {
+func JSStringGetUTF8CString(str JSStringRef, buffer string, bufferSize int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringGetUTF8CString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringGetUTF8CString, _lib, "JSStringGetUTF8CString")
 	}
-	return _fnJSStringGetUTF8CString(objref.IDOf(str), buffer, bufferSize)
+	return _fnJSStringGetUTF8CString(objref.IDOf(str.Object), buffer, bufferSize)
 }
 
 var _fnJSStringIsEqual func(objc.ID, objc.ID) bool
 
 // JSStringIsEqual calls the JavaScriptCore framework function JSStringIsEqual.
-func JSStringIsEqual(a obj.Object, b obj.Object) bool {
+func JSStringIsEqual(a JSStringRef, b JSStringRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringIsEqual == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringIsEqual, _lib, "JSStringIsEqual")
 	}
-	return _fnJSStringIsEqual(objref.IDOf(a), objref.IDOf(b))
+	return _fnJSStringIsEqual(objref.IDOf(a.Object), objref.IDOf(b.Object))
 }
 
 var _fnJSStringIsEqualToUTF8CString func(objc.ID, string) bool
 
 // JSStringIsEqualToUTF8CString calls the JavaScriptCore framework function JSStringIsEqualToUTF8CString.
-func JSStringIsEqualToUTF8CString(a obj.Object, b string) bool {
+func JSStringIsEqualToUTF8CString(a JSStringRef, b string) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringIsEqualToUTF8CString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringIsEqualToUTF8CString, _lib, "JSStringIsEqualToUTF8CString")
 	}
-	return _fnJSStringIsEqualToUTF8CString(objref.IDOf(a), b)
+	return _fnJSStringIsEqualToUTF8CString(objref.IDOf(a.Object), b)
 }
 
 var _fnJSStringRelease func(objc.ID)
 
 // JSStringRelease calls the JavaScriptCore framework function JSStringRelease.
-func JSStringRelease(str obj.Object) {
+func JSStringRelease(str JSStringRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringRelease, _lib, "JSStringRelease")
 	}
-	_fnJSStringRelease(objref.IDOf(str))
+	_fnJSStringRelease(objref.IDOf(str.Object))
 }
 
 var _fnJSStringRetain func(objc.ID) objc.ID
 
 // JSStringRetain calls the JavaScriptCore framework function JSStringRetain.
-func JSStringRetain(str obj.Object) obj.Object {
+func JSStringRetain(str JSStringRef) JSStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringRetain, _lib, "JSStringRetain")
 	}
-	_ret := _fnJSStringRetain(objref.IDOf(str))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSStringRetain(objref.IDOf(str.Object))
+	return JSStringRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSValueCompare func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) RelationCondition
 
 // JSValueCompare calls the JavaScriptCore framework function JSValueCompare.
-func JSValueCompare(ctx obj.Object, left obj.Object, right obj.Object, exception unsafe.Pointer) RelationCondition {
+func JSValueCompare(ctx JSContextRef, left JSValueRef, right JSValueRef, exception unsafe.Pointer) RelationCondition {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueCompare == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueCompare, _lib, "JSValueCompare")
 	}
-	return _fnJSValueCompare(objref.IDOf(ctx), objref.IDOf(left), objref.IDOf(right), exception)
+	return _fnJSValueCompare(objref.IDOf(ctx.Object), objref.IDOf(left.Object), objref.IDOf(right.Object), exception)
 }
 
 var _fnJSValueCompareDouble func(objc.ID, objc.ID, float64, unsafe.Pointer) RelationCondition
 
 // JSValueCompareDouble calls the JavaScriptCore framework function JSValueCompareDouble.
-func JSValueCompareDouble(ctx obj.Object, left obj.Object, right float64, exception unsafe.Pointer) RelationCondition {
+func JSValueCompareDouble(ctx JSContextRef, left JSValueRef, right float64, exception unsafe.Pointer) RelationCondition {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueCompareDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueCompareDouble, _lib, "JSValueCompareDouble")
 	}
-	return _fnJSValueCompareDouble(objref.IDOf(ctx), objref.IDOf(left), right, exception)
+	return _fnJSValueCompareDouble(objref.IDOf(ctx.Object), objref.IDOf(left.Object), right, exception)
 }
 
 var _fnJSValueCompareInt64 func(objc.ID, objc.ID, int64, unsafe.Pointer) RelationCondition
 
 // JSValueCompareInt64 calls the JavaScriptCore framework function JSValueCompareInt64.
-func JSValueCompareInt64(ctx obj.Object, left obj.Object, right int64, exception unsafe.Pointer) RelationCondition {
+func JSValueCompareInt64(ctx JSContextRef, left JSValueRef, right int64, exception unsafe.Pointer) RelationCondition {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueCompareInt64 == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueCompareInt64, _lib, "JSValueCompareInt64")
 	}
-	return _fnJSValueCompareInt64(objref.IDOf(ctx), objref.IDOf(left), right, exception)
+	return _fnJSValueCompareInt64(objref.IDOf(ctx.Object), objref.IDOf(left.Object), right, exception)
 }
 
 var _fnJSValueCompareUInt64 func(objc.ID, objc.ID, uint64, unsafe.Pointer) RelationCondition
 
 // JSValueCompareUInt64 calls the JavaScriptCore framework function JSValueCompareUInt64.
-func JSValueCompareUInt64(ctx obj.Object, left obj.Object, right uint64, exception unsafe.Pointer) RelationCondition {
+func JSValueCompareUInt64(ctx JSContextRef, left JSValueRef, right uint64, exception unsafe.Pointer) RelationCondition {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueCompareUInt64 == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueCompareUInt64, _lib, "JSValueCompareUInt64")
 	}
-	return _fnJSValueCompareUInt64(objref.IDOf(ctx), objref.IDOf(left), right, exception)
+	return _fnJSValueCompareUInt64(objref.IDOf(ctx.Object), objref.IDOf(left.Object), right, exception)
 }
 
 var _fnJSValueCreateJSONString func(objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
 
 // JSValueCreateJSONString calls the JavaScriptCore framework function JSValueCreateJSONString.
-func JSValueCreateJSONString(ctx obj.Object, value obj.Object, indent int, exception unsafe.Pointer) obj.Object {
+func JSValueCreateJSONString(ctx JSContextRef, value JSValueRef, indent int, exception unsafe.Pointer) JSStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueCreateJSONString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueCreateJSONString, _lib, "JSValueCreateJSONString")
 	}
-	_ret := _fnJSValueCreateJSONString(objref.IDOf(ctx), objref.IDOf(value), indent, exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSValueCreateJSONString(objref.IDOf(ctx.Object), objref.IDOf(value.Object), indent, exception)
+	return JSStringRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSValueGetType func(objc.ID, objc.ID) Type
 
 // JSValueGetType calls the JavaScriptCore framework function JSValueGetType.
-func JSValueGetType(ctx obj.Object, value obj.Object) Type {
+func JSValueGetType(ctx JSContextRef, value JSValueRef) Type {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueGetType == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueGetType, _lib, "JSValueGetType")
 	}
-	return _fnJSValueGetType(objref.IDOf(ctx), objref.IDOf(value))
+	return _fnJSValueGetType(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSValueGetTypedArrayType func(objc.ID, objc.ID, unsafe.Pointer) TypedArrayType
 
 // JSValueGetTypedArrayType calls the JavaScriptCore framework function JSValueGetTypedArrayType.
-func JSValueGetTypedArrayType(ctx obj.Object, value obj.Object, exception unsafe.Pointer) TypedArrayType {
+func JSValueGetTypedArrayType(ctx JSContextRef, value JSValueRef, exception unsafe.Pointer) TypedArrayType {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueGetTypedArrayType == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueGetTypedArrayType, _lib, "JSValueGetTypedArrayType")
 	}
-	return _fnJSValueGetTypedArrayType(objref.IDOf(ctx), objref.IDOf(value), exception)
+	return _fnJSValueGetTypedArrayType(objref.IDOf(ctx.Object), objref.IDOf(value.Object), exception)
 }
 
 var _fnJSValueIsArray func(objc.ID, objc.ID) bool
 
 // JSValueIsArray calls the JavaScriptCore framework function JSValueIsArray.
-func JSValueIsArray(ctx obj.Object, value obj.Object) bool {
+func JSValueIsArray(ctx JSContextRef, value JSValueRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsArray == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsArray, _lib, "JSValueIsArray")
 	}
-	return _fnJSValueIsArray(objref.IDOf(ctx), objref.IDOf(value))
+	return _fnJSValueIsArray(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSValueIsBigInt func(objc.ID, objc.ID) bool
 
 // JSValueIsBigInt calls the JavaScriptCore framework function JSValueIsBigInt.
-func JSValueIsBigInt(ctx obj.Object, value obj.Object) bool {
+func JSValueIsBigInt(ctx JSContextRef, value JSValueRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsBigInt == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsBigInt, _lib, "JSValueIsBigInt")
 	}
-	return _fnJSValueIsBigInt(objref.IDOf(ctx), objref.IDOf(value))
+	return _fnJSValueIsBigInt(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSValueIsBoolean func(objc.ID, objc.ID) bool
 
 // JSValueIsBoolean calls the JavaScriptCore framework function JSValueIsBoolean.
-func JSValueIsBoolean(ctx obj.Object, value obj.Object) bool {
+func JSValueIsBoolean(ctx JSContextRef, value JSValueRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsBoolean == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsBoolean, _lib, "JSValueIsBoolean")
 	}
-	return _fnJSValueIsBoolean(objref.IDOf(ctx), objref.IDOf(value))
+	return _fnJSValueIsBoolean(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSValueIsDate func(objc.ID, objc.ID) bool
 
 // JSValueIsDate calls the JavaScriptCore framework function JSValueIsDate.
-func JSValueIsDate(ctx obj.Object, value obj.Object) bool {
+func JSValueIsDate(ctx JSContextRef, value JSValueRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsDate == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsDate, _lib, "JSValueIsDate")
 	}
-	return _fnJSValueIsDate(objref.IDOf(ctx), objref.IDOf(value))
+	return _fnJSValueIsDate(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSValueIsEqual func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 // JSValueIsEqual calls the JavaScriptCore framework function JSValueIsEqual.
-func JSValueIsEqual(ctx obj.Object, a obj.Object, b obj.Object, exception unsafe.Pointer) bool {
+func JSValueIsEqual(ctx JSContextRef, a JSValueRef, b JSValueRef, exception unsafe.Pointer) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsEqual == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsEqual, _lib, "JSValueIsEqual")
 	}
-	return _fnJSValueIsEqual(objref.IDOf(ctx), objref.IDOf(a), objref.IDOf(b), exception)
+	return _fnJSValueIsEqual(objref.IDOf(ctx.Object), objref.IDOf(a.Object), objref.IDOf(b.Object), exception)
 }
 
 var _fnJSValueIsInstanceOfConstructor func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
 // JSValueIsInstanceOfConstructor calls the JavaScriptCore framework function JSValueIsInstanceOfConstructor.
-func JSValueIsInstanceOfConstructor(ctx obj.Object, value obj.Object, constructor obj.Object, exception unsafe.Pointer) bool {
+func JSValueIsInstanceOfConstructor(ctx JSContextRef, value JSValueRef, constructor JSObjectRef, exception unsafe.Pointer) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsInstanceOfConstructor == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsInstanceOfConstructor, _lib, "JSValueIsInstanceOfConstructor")
 	}
-	return _fnJSValueIsInstanceOfConstructor(objref.IDOf(ctx), objref.IDOf(value), objref.IDOf(constructor), exception)
+	return _fnJSValueIsInstanceOfConstructor(objref.IDOf(ctx.Object), objref.IDOf(value.Object), objref.IDOf(constructor.Object), exception)
 }
 
 var _fnJSValueIsNull func(objc.ID, objc.ID) bool
 
 // JSValueIsNull calls the JavaScriptCore framework function JSValueIsNull.
-func JSValueIsNull(ctx obj.Object, value obj.Object) bool {
+func JSValueIsNull(ctx JSContextRef, value JSValueRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsNull == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsNull, _lib, "JSValueIsNull")
 	}
-	return _fnJSValueIsNull(objref.IDOf(ctx), objref.IDOf(value))
+	return _fnJSValueIsNull(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSValueIsNumber func(objc.ID, objc.ID) bool
 
 // JSValueIsNumber calls the JavaScriptCore framework function JSValueIsNumber.
-func JSValueIsNumber(ctx obj.Object, value obj.Object) bool {
+func JSValueIsNumber(ctx JSContextRef, value JSValueRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsNumber == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsNumber, _lib, "JSValueIsNumber")
 	}
-	return _fnJSValueIsNumber(objref.IDOf(ctx), objref.IDOf(value))
+	return _fnJSValueIsNumber(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSValueIsObject func(objc.ID, objc.ID) bool
 
 // JSValueIsObject calls the JavaScriptCore framework function JSValueIsObject.
-func JSValueIsObject(ctx obj.Object, value obj.Object) bool {
+func JSValueIsObject(ctx JSContextRef, value JSValueRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsObject == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsObject, _lib, "JSValueIsObject")
 	}
-	return _fnJSValueIsObject(objref.IDOf(ctx), objref.IDOf(value))
+	return _fnJSValueIsObject(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSValueIsObjectOfClass func(objc.ID, objc.ID, objc.ID) bool
 
 // JSValueIsObjectOfClass calls the JavaScriptCore framework function JSValueIsObjectOfClass.
-func JSValueIsObjectOfClass(ctx obj.Object, value obj.Object, jsClass obj.Object) bool {
+func JSValueIsObjectOfClass(ctx JSContextRef, value JSValueRef, jsClass JSClassRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsObjectOfClass == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsObjectOfClass, _lib, "JSValueIsObjectOfClass")
 	}
-	return _fnJSValueIsObjectOfClass(objref.IDOf(ctx), objref.IDOf(value), objref.IDOf(jsClass))
+	return _fnJSValueIsObjectOfClass(objref.IDOf(ctx.Object), objref.IDOf(value.Object), objref.IDOf(jsClass.Object))
 }
 
 var _fnJSValueIsStrictEqual func(objc.ID, objc.ID, objc.ID) bool
 
 // JSValueIsStrictEqual calls the JavaScriptCore framework function JSValueIsStrictEqual.
-func JSValueIsStrictEqual(ctx obj.Object, a obj.Object, b obj.Object) bool {
+func JSValueIsStrictEqual(ctx JSContextRef, a JSValueRef, b JSValueRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsStrictEqual == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsStrictEqual, _lib, "JSValueIsStrictEqual")
 	}
-	return _fnJSValueIsStrictEqual(objref.IDOf(ctx), objref.IDOf(a), objref.IDOf(b))
+	return _fnJSValueIsStrictEqual(objref.IDOf(ctx.Object), objref.IDOf(a.Object), objref.IDOf(b.Object))
 }
 
 var _fnJSValueIsString func(objc.ID, objc.ID) bool
 
 // JSValueIsString calls the JavaScriptCore framework function JSValueIsString.
-func JSValueIsString(ctx obj.Object, value obj.Object) bool {
+func JSValueIsString(ctx JSContextRef, value JSValueRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsString, _lib, "JSValueIsString")
 	}
-	return _fnJSValueIsString(objref.IDOf(ctx), objref.IDOf(value))
+	return _fnJSValueIsString(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSValueIsSymbol func(objc.ID, objc.ID) bool
 
 // JSValueIsSymbol calls the JavaScriptCore framework function JSValueIsSymbol.
-func JSValueIsSymbol(ctx obj.Object, value obj.Object) bool {
+func JSValueIsSymbol(ctx JSContextRef, value JSValueRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsSymbol == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsSymbol, _lib, "JSValueIsSymbol")
 	}
-	return _fnJSValueIsSymbol(objref.IDOf(ctx), objref.IDOf(value))
+	return _fnJSValueIsSymbol(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSValueIsUndefined func(objc.ID, objc.ID) bool
 
 // JSValueIsUndefined calls the JavaScriptCore framework function JSValueIsUndefined.
-func JSValueIsUndefined(ctx obj.Object, value obj.Object) bool {
+func JSValueIsUndefined(ctx JSContextRef, value JSValueRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueIsUndefined == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueIsUndefined, _lib, "JSValueIsUndefined")
 	}
-	return _fnJSValueIsUndefined(objref.IDOf(ctx), objref.IDOf(value))
+	return _fnJSValueIsUndefined(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSValueMakeBoolean func(objc.ID, bool) objc.ID
 
 // JSValueMakeBoolean calls the JavaScriptCore framework function JSValueMakeBoolean.
-func JSValueMakeBoolean(ctx obj.Object, boolean bool) obj.Object {
+func JSValueMakeBoolean(ctx JSContextRef, boolean bool) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueMakeBoolean == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeBoolean, _lib, "JSValueMakeBoolean")
 	}
-	_ret := _fnJSValueMakeBoolean(objref.IDOf(ctx), boolean)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSValueMakeBoolean(objref.IDOf(ctx.Object), boolean)
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSValueMakeFromJSONString func(objc.ID, objc.ID) objc.ID
 
 // JSValueMakeFromJSONString calls the JavaScriptCore framework function JSValueMakeFromJSONString.
-func JSValueMakeFromJSONString(ctx obj.Object, str obj.Object) obj.Object {
+func JSValueMakeFromJSONString(ctx JSContextRef, str JSStringRef) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueMakeFromJSONString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeFromJSONString, _lib, "JSValueMakeFromJSONString")
 	}
-	_ret := _fnJSValueMakeFromJSONString(objref.IDOf(ctx), objref.IDOf(str))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSValueMakeFromJSONString(objref.IDOf(ctx.Object), objref.IDOf(str.Object))
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSValueMakeNull func(objc.ID) objc.ID
 
 // JSValueMakeNull calls the JavaScriptCore framework function JSValueMakeNull.
-func JSValueMakeNull(ctx obj.Object) obj.Object {
+func JSValueMakeNull(ctx JSContextRef) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueMakeNull == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeNull, _lib, "JSValueMakeNull")
 	}
-	_ret := _fnJSValueMakeNull(objref.IDOf(ctx))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSValueMakeNull(objref.IDOf(ctx.Object))
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSValueMakeNumber func(objc.ID, float64) objc.ID
 
 // JSValueMakeNumber calls the JavaScriptCore framework function JSValueMakeNumber.
-func JSValueMakeNumber(ctx obj.Object, number float64) obj.Object {
+func JSValueMakeNumber(ctx JSContextRef, number float64) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueMakeNumber == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeNumber, _lib, "JSValueMakeNumber")
 	}
-	_ret := _fnJSValueMakeNumber(objref.IDOf(ctx), number)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSValueMakeNumber(objref.IDOf(ctx.Object), number)
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSValueMakeString func(objc.ID, objc.ID) objc.ID
 
 // JSValueMakeString calls the JavaScriptCore framework function JSValueMakeString.
-func JSValueMakeString(ctx obj.Object, str obj.Object) obj.Object {
+func JSValueMakeString(ctx JSContextRef, str JSStringRef) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueMakeString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeString, _lib, "JSValueMakeString")
 	}
-	_ret := _fnJSValueMakeString(objref.IDOf(ctx), objref.IDOf(str))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSValueMakeString(objref.IDOf(ctx.Object), objref.IDOf(str.Object))
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSValueMakeSymbol func(objc.ID, objc.ID) objc.ID
 
 // JSValueMakeSymbol calls the JavaScriptCore framework function JSValueMakeSymbol.
-func JSValueMakeSymbol(ctx obj.Object, description obj.Object) obj.Object {
+func JSValueMakeSymbol(ctx JSContextRef, description JSStringRef) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueMakeSymbol == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeSymbol, _lib, "JSValueMakeSymbol")
 	}
-	_ret := _fnJSValueMakeSymbol(objref.IDOf(ctx), objref.IDOf(description))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSValueMakeSymbol(objref.IDOf(ctx.Object), objref.IDOf(description.Object))
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSValueMakeUndefined func(objc.ID) objc.ID
 
 // JSValueMakeUndefined calls the JavaScriptCore framework function JSValueMakeUndefined.
-func JSValueMakeUndefined(ctx obj.Object) obj.Object {
+func JSValueMakeUndefined(ctx JSContextRef) JSValueRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueMakeUndefined == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeUndefined, _lib, "JSValueMakeUndefined")
 	}
-	_ret := _fnJSValueMakeUndefined(objref.IDOf(ctx))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSValueMakeUndefined(objref.IDOf(ctx.Object))
+	return JSValueRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSValueProtect func(objc.ID, objc.ID)
 
 // JSValueProtect calls the JavaScriptCore framework function JSValueProtect.
-func JSValueProtect(ctx obj.Object, value obj.Object) {
+func JSValueProtect(ctx JSContextRef, value JSValueRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueProtect == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueProtect, _lib, "JSValueProtect")
 	}
-	_fnJSValueProtect(objref.IDOf(ctx), objref.IDOf(value))
+	_fnJSValueProtect(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSValueToBoolean func(objc.ID, objc.ID) bool
 
 // JSValueToBoolean calls the JavaScriptCore framework function JSValueToBoolean.
-func JSValueToBoolean(ctx obj.Object, value obj.Object) bool {
+func JSValueToBoolean(ctx JSContextRef, value JSValueRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueToBoolean == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueToBoolean, _lib, "JSValueToBoolean")
 	}
-	return _fnJSValueToBoolean(objref.IDOf(ctx), objref.IDOf(value))
+	return _fnJSValueToBoolean(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }
 
 var _fnJSValueToInt32 func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // JSValueToInt32 calls the JavaScriptCore framework function JSValueToInt32.
-func JSValueToInt32(ctx obj.Object, value obj.Object, exception unsafe.Pointer) int32 {
+func JSValueToInt32(ctx JSContextRef, value JSValueRef, exception unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueToInt32 == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueToInt32, _lib, "JSValueToInt32")
 	}
-	return _fnJSValueToInt32(objref.IDOf(ctx), objref.IDOf(value), exception)
+	return _fnJSValueToInt32(objref.IDOf(ctx.Object), objref.IDOf(value.Object), exception)
 }
 
 var _fnJSValueToInt64 func(objc.ID, objc.ID, unsafe.Pointer) int64
 
 // JSValueToInt64 calls the JavaScriptCore framework function JSValueToInt64.
-func JSValueToInt64(ctx obj.Object, value obj.Object, exception unsafe.Pointer) int64 {
+func JSValueToInt64(ctx JSContextRef, value JSValueRef, exception unsafe.Pointer) int64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueToInt64 == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueToInt64, _lib, "JSValueToInt64")
 	}
-	return _fnJSValueToInt64(objref.IDOf(ctx), objref.IDOf(value), exception)
+	return _fnJSValueToInt64(objref.IDOf(ctx.Object), objref.IDOf(value.Object), exception)
 }
 
 var _fnJSValueToNumber func(objc.ID, objc.ID, unsafe.Pointer) float64
 
 // JSValueToNumber calls the JavaScriptCore framework function JSValueToNumber.
-func JSValueToNumber(ctx obj.Object, value obj.Object, exception unsafe.Pointer) float64 {
+func JSValueToNumber(ctx JSContextRef, value JSValueRef, exception unsafe.Pointer) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueToNumber == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueToNumber, _lib, "JSValueToNumber")
 	}
-	return _fnJSValueToNumber(objref.IDOf(ctx), objref.IDOf(value), exception)
+	return _fnJSValueToNumber(objref.IDOf(ctx.Object), objref.IDOf(value.Object), exception)
 }
 
 var _fnJSValueToObject func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // JSValueToObject calls the JavaScriptCore framework function JSValueToObject.
-func JSValueToObject(ctx obj.Object, value obj.Object, exception unsafe.Pointer) obj.Object {
+func JSValueToObject(ctx JSContextRef, value JSValueRef, exception unsafe.Pointer) JSObjectRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueToObject == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueToObject, _lib, "JSValueToObject")
 	}
-	_ret := _fnJSValueToObject(objref.IDOf(ctx), objref.IDOf(value), exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSValueToObject(objref.IDOf(ctx.Object), objref.IDOf(value.Object), exception)
+	return JSObjectRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSValueToStringCopy func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // JSValueToStringCopy calls the JavaScriptCore framework function JSValueToStringCopy.
-func JSValueToStringCopy(ctx obj.Object, value obj.Object, exception unsafe.Pointer) obj.Object {
+func JSValueToStringCopy(ctx JSContextRef, value JSValueRef, exception unsafe.Pointer) JSStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueToStringCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueToStringCopy, _lib, "JSValueToStringCopy")
 	}
-	_ret := _fnJSValueToStringCopy(objref.IDOf(ctx), objref.IDOf(value), exception)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnJSValueToStringCopy(objref.IDOf(ctx.Object), objref.IDOf(value.Object), exception)
+	return JSStringRef{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnJSValueToUInt32 func(objc.ID, objc.ID, unsafe.Pointer) uint32
 
 // JSValueToUInt32 calls the JavaScriptCore framework function JSValueToUInt32.
-func JSValueToUInt32(ctx obj.Object, value obj.Object, exception unsafe.Pointer) uint32 {
+func JSValueToUInt32(ctx JSContextRef, value JSValueRef, exception unsafe.Pointer) uint32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueToUInt32 == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueToUInt32, _lib, "JSValueToUInt32")
 	}
-	return _fnJSValueToUInt32(objref.IDOf(ctx), objref.IDOf(value), exception)
+	return _fnJSValueToUInt32(objref.IDOf(ctx.Object), objref.IDOf(value.Object), exception)
 }
 
 var _fnJSValueToUInt64 func(objc.ID, objc.ID, unsafe.Pointer) uint64
 
 // JSValueToUInt64 calls the JavaScriptCore framework function JSValueToUInt64.
-func JSValueToUInt64(ctx obj.Object, value obj.Object, exception unsafe.Pointer) uint64 {
+func JSValueToUInt64(ctx JSContextRef, value JSValueRef, exception unsafe.Pointer) uint64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueToUInt64 == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueToUInt64, _lib, "JSValueToUInt64")
 	}
-	return _fnJSValueToUInt64(objref.IDOf(ctx), objref.IDOf(value), exception)
+	return _fnJSValueToUInt64(objref.IDOf(ctx.Object), objref.IDOf(value.Object), exception)
 }
 
 var _fnJSValueUnprotect func(objc.ID, objc.ID)
 
 // JSValueUnprotect calls the JavaScriptCore framework function JSValueUnprotect.
-func JSValueUnprotect(ctx obj.Object, value obj.Object) {
+func JSValueUnprotect(ctx JSContextRef, value JSValueRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueUnprotect == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueUnprotect, _lib, "JSValueUnprotect")
 	}
-	_fnJSValueUnprotect(objref.IDOf(ctx), objref.IDOf(value))
+	_fnJSValueUnprotect(objref.IDOf(ctx.Object), objref.IDOf(value.Object))
 }

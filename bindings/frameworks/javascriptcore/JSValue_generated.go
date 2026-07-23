@@ -436,8 +436,8 @@ func (v_ *Value) SetObjectAtIndexedSubscript(object obj.Object, index int) {
 }
 
 // JSValueRef returns the js value ref.
-func (v_ *Value) JSValueRef() obj.Object {
+func (v_ *Value) JSValueRef() JSValueRef {
 	defer runtime.KeepAlive(v_)
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("JSValueRef"))
-	return obj.WrapUnmanaged(_r)
+	return JSValueRef{obj.WrapUnmanaged(_r)}
 }

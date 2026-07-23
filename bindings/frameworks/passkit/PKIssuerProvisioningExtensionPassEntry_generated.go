@@ -7,6 +7,7 @@ package passkit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -96,10 +97,10 @@ func (ipepe *IssuerProvisioningExtensionPassEntry) Title() string {
 }
 
 // Art returns the art.
-func (ipepe *IssuerProvisioningExtensionPassEntry) Art() obj.Object {
+func (ipepe *IssuerProvisioningExtensionPassEntry) Art() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(ipepe)
 	_r := objc.Send[objc.ID](objref.IDOf(ipepe), objc.RegisterName("art"))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // isIssuerProvisioningExtensionPassEntry marks IssuerProvisioningExtensionPassEntry — and, by embedding promotion, its

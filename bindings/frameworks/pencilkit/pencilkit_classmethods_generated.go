@@ -7,6 +7,7 @@ package pencilkit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/ebitengine/purego/objc"
@@ -52,8 +53,8 @@ func MaximumWidthForInkType(inkType obj.Object) float64 {
 }
 
 // InvertColor converts a color from light to dark appearance or vice versa.
-func InvertColor(color obj.Object) obj.Object {
+func InvertColor(color coregraphics.CGColorRef) coregraphics.CGColorRef {
 	defer runtime.KeepAlive(color)
-	_r := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("invertColor:"), objref.IDOf(color))
-	return obj.Wrap(_r)
+	_r := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("invertColor:"), objref.IDOf(color.Object))
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }

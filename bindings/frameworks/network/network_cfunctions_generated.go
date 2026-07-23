@@ -7,6 +7,7 @@ package network
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
@@ -1315,13 +1316,13 @@ func NwEndpointGetUrl(endpoint obj.Object) string {
 var _fnNwErrorCopyCfError func(objc.ID) objc.ID
 
 // NwErrorCopyCfError calls the Network framework function nw_error_copy_cf_error.
-func NwErrorCopyCfError(err obj.Object) obj.Object {
+func NwErrorCopyCfError(err obj.Object) corefoundation.CFErrorRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNwErrorCopyCfError == nil {
 		ebipurego.RegisterLibFunc(&_fnNwErrorCopyCfError, _lib, "nw_error_copy_cf_error")
 	}
 	_ret := _fnNwErrorCopyCfError(objref.IDOf(err))
-	return obj.Wrap(_ret)
+	return corefoundation.CFErrorRef{obj.Wrap(_ret)}
 }
 
 var _fnNwErrorGetErrorCode func(objc.ID) int32

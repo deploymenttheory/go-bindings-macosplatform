@@ -7,6 +7,7 @@ package netfs
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -17,24 +18,24 @@ import (
 var _fnNetFSCopyURLForRemountingVolume func(objc.ID) objc.ID
 
 // NetFSCopyURLForRemountingVolume calls the NetFS framework function NetFSCopyURLForRemountingVolume.
-func NetFSCopyURLForRemountingVolume(localPathURL obj.Object) obj.Object {
+func NetFSCopyURLForRemountingVolume(localPathURL corefoundation.CFURLRef) corefoundation.CFURLRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetFSCopyURLForRemountingVolume == nil {
 		ebipurego.RegisterLibFunc(&_fnNetFSCopyURLForRemountingVolume, _lib, "NetFSCopyURLForRemountingVolume")
 	}
-	_ret := _fnNetFSCopyURLForRemountingVolume(objref.IDOf(localPathURL))
-	return obj.Wrap(_ret)
+	_ret := _fnNetFSCopyURLForRemountingVolume(objref.IDOf(localPathURL.Object))
+	return corefoundation.CFURLRef{obj.Wrap(_ret)}
 }
 
 var _fnNetFSMountURLAsync func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer, objc.ID, objc.Block) int32
 
 // NetFSMountURLAsync calls the NetFS framework function NetFSMountURLAsync.
-func NetFSMountURLAsync(url obj.Object, mountpath obj.Object, user obj.Object, passwd obj.Object, openOptions obj.Object, mountOptions obj.Object, requestID unsafe.Pointer, dispatchq dispatch.Queue, mountReport func(int, unsafe.Pointer, unsafe.Pointer)) int {
+func NetFSMountURLAsync(url corefoundation.CFURLRef, mountpath corefoundation.CFURLRef, user corefoundation.CFStringRef, passwd corefoundation.CFStringRef, openOptions corefoundation.CFMutableDictionaryRef, mountOptions corefoundation.CFMutableDictionaryRef, requestID unsafe.Pointer, dispatchq dispatch.Queue, mountReport func(int, unsafe.Pointer, unsafe.Pointer)) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetFSMountURLAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnNetFSMountURLAsync, _lib, "NetFSMountURLAsync")
 	}
-	return int(_fnNetFSMountURLAsync(objref.IDOf(url), objref.IDOf(mountpath), objref.IDOf(user), objref.IDOf(passwd), objref.IDOf(openOptions), objref.IDOf(mountOptions), requestID, objc.ID(uintptr(dispatchq.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer, _b2 unsafe.Pointer) { mountReport(_b0, _b1, _b2) })))
+	return int(_fnNetFSMountURLAsync(objref.IDOf(url.Object), objref.IDOf(mountpath.Object), objref.IDOf(user.Object), objref.IDOf(passwd.Object), objref.IDOf(openOptions.Object), objref.IDOf(mountOptions.Object), requestID, objc.ID(uintptr(dispatchq.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer, _b2 unsafe.Pointer) { mountReport(_b0, _b1, _b2) })))
 }
 
 var _fnNetFSMountURLCancel func(unsafe.Pointer) int32
@@ -51,22 +52,22 @@ func NetFSMountURLCancel(requestID unsafe.Pointer) int {
 var _fnNetFSMountURLProbe func(objc.ID) objc.ID
 
 // NetFSMountURLProbe calls the NetFS framework function NetFSMountURLProbe.
-func NetFSMountURLProbe(hostname obj.Object) obj.Object {
+func NetFSMountURLProbe(hostname corefoundation.CFStringRef) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetFSMountURLProbe == nil {
 		ebipurego.RegisterLibFunc(&_fnNetFSMountURLProbe, _lib, "NetFSMountURLProbe")
 	}
-	_ret := _fnNetFSMountURLProbe(objref.IDOf(hostname))
-	return obj.Wrap(_ret)
+	_ret := _fnNetFSMountURLProbe(objref.IDOf(hostname.Object))
+	return corefoundation.CFStringRef{obj.Wrap(_ret)}
 }
 
 var _fnNetFSMountURLSync func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32
 
 // NetFSMountURLSync calls the NetFS framework function NetFSMountURLSync.
-func NetFSMountURLSync(url obj.Object, mountpath obj.Object, user obj.Object, passwd obj.Object, openOptions obj.Object, mountOptions obj.Object, mountpoints unsafe.Pointer) int {
+func NetFSMountURLSync(url corefoundation.CFURLRef, mountpath corefoundation.CFURLRef, user corefoundation.CFStringRef, passwd corefoundation.CFStringRef, openOptions corefoundation.CFMutableDictionaryRef, mountOptions corefoundation.CFMutableDictionaryRef, mountpoints unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetFSMountURLSync == nil {
 		ebipurego.RegisterLibFunc(&_fnNetFSMountURLSync, _lib, "NetFSMountURLSync")
 	}
-	return int(_fnNetFSMountURLSync(objref.IDOf(url), objref.IDOf(mountpath), objref.IDOf(user), objref.IDOf(passwd), objref.IDOf(openOptions), objref.IDOf(mountOptions), mountpoints))
+	return int(_fnNetFSMountURLSync(objref.IDOf(url.Object), objref.IDOf(mountpath.Object), objref.IDOf(user.Object), objref.IDOf(passwd.Object), objref.IDOf(openOptions.Object), objref.IDOf(mountOptions.Object), mountpoints))
 }

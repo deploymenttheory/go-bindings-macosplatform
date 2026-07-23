@@ -4,8 +4,33 @@
 
 package latentsemanticmapping
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 type LSMMap struct{}
 
 type LSMResult struct{}
 
 type LSMText struct{}
+
+// LSMMapRef is a handle for the opaque LSMMapRef type.
+type LSMMapRef struct{ obj.Object }
+
+// IsNil reports whether LSMMapRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h LSMMapRef) IsNil() bool { return h.Object == nil }
+
+// LSMResultRef is a handle for the opaque LSMResultRef type.
+type LSMResultRef struct{ obj.Object }
+
+// IsNil reports whether LSMResultRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h LSMResultRef) IsNil() bool { return h.Object == nil }
+
+// LSMTextRef is a handle for the opaque LSMTextRef type.
+type LSMTextRef struct{ obj.Object }
+
+// IsNil reports whether LSMTextRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h LSMTextRef) IsNil() bool { return h.Object == nil }

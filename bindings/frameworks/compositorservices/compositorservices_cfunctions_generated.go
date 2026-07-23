@@ -17,516 +17,516 @@ import (
 var _fnCpDrawableAddMtl4RenderContext func(objc.ID) objc.ID
 
 // CpDrawableAddMtl4RenderContext calls the CompositorServices framework function cp_drawable_add_mtl4_render_context.
-func CpDrawableAddMtl4RenderContext(drawable obj.Object) obj.Object {
+func CpDrawableAddMtl4RenderContext(drawable CpDrawableT) CpDrawableRenderContextT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableAddMtl4RenderContext == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableAddMtl4RenderContext, _lib, "cp_drawable_add_mtl4_render_context")
 	}
-	_ret := _fnCpDrawableAddMtl4RenderContext(objref.IDOf(drawable))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnCpDrawableAddMtl4RenderContext(objref.IDOf(drawable.Object))
+	return CpDrawableRenderContextT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCpDrawableAddRenderContext func(objc.ID, unsafe.Pointer) objc.ID
 
 // CpDrawableAddRenderContext calls the CompositorServices framework function cp_drawable_add_render_context.
-func CpDrawableAddRenderContext(drawable obj.Object, cmdBuffer unsafe.Pointer) obj.Object {
+func CpDrawableAddRenderContext(drawable CpDrawableT, cmdBuffer unsafe.Pointer) CpDrawableRenderContextT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableAddRenderContext == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableAddRenderContext, _lib, "cp_drawable_add_render_context")
 	}
-	_ret := _fnCpDrawableAddRenderContext(objref.IDOf(drawable), cmdBuffer)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnCpDrawableAddRenderContext(objref.IDOf(drawable.Object), cmdBuffer)
+	return CpDrawableRenderContextT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCpDrawableAddTrackingArea func(objc.ID, uint64) objc.ID
 
 // CpDrawableAddTrackingArea calls the CompositorServices framework function cp_drawable_add_tracking_area.
-func CpDrawableAddTrackingArea(drawable obj.Object, identifier uint64) obj.Object {
+func CpDrawableAddTrackingArea(drawable CpDrawableT, identifier uint64) CpTrackingAreaT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableAddTrackingArea == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableAddTrackingArea, _lib, "cp_drawable_add_tracking_area")
 	}
-	_ret := _fnCpDrawableAddTrackingArea(objref.IDOf(drawable), identifier)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnCpDrawableAddTrackingArea(objref.IDOf(drawable.Object), identifier)
+	return CpTrackingAreaT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCpDrawableArrayGetCount func(objc.ID) int
 
 // CpDrawableArrayGetCount calls the CompositorServices framework function cp_drawable_array_get_count.
-func CpDrawableArrayGetCount(drawableArray obj.Object) int {
+func CpDrawableArrayGetCount(drawableArray CpDrawableArrayT) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableArrayGetCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableArrayGetCount, _lib, "cp_drawable_array_get_count")
 	}
-	return _fnCpDrawableArrayGetCount(objref.IDOf(drawableArray))
+	return _fnCpDrawableArrayGetCount(objref.IDOf(drawableArray.Object))
 }
 
 var _fnCpDrawableArrayGetDrawable func(objc.ID, int) objc.ID
 
 // CpDrawableArrayGetDrawable calls the CompositorServices framework function cp_drawable_array_get_drawable.
-func CpDrawableArrayGetDrawable(drawableArray obj.Object, index int) obj.Object {
+func CpDrawableArrayGetDrawable(drawableArray CpDrawableArrayT, index int) CpDrawableT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableArrayGetDrawable == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableArrayGetDrawable, _lib, "cp_drawable_array_get_drawable")
 	}
-	_ret := _fnCpDrawableArrayGetDrawable(objref.IDOf(drawableArray), index)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnCpDrawableArrayGetDrawable(objref.IDOf(drawableArray.Object), index)
+	return CpDrawableT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCpDrawableComputeProjection func(objc.ID, AxisDirectionConvention, int) unsafe.Pointer
 
 // CpDrawableComputeProjection calls the CompositorServices framework function cp_drawable_compute_projection.
-func CpDrawableComputeProjection(drawable obj.Object, normalizedDeviceCoordinatesConvension AxisDirectionConvention, viewIndex int) unsafe.Pointer {
+func CpDrawableComputeProjection(drawable CpDrawableT, normalizedDeviceCoordinatesConvension AxisDirectionConvention, viewIndex int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableComputeProjection == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableComputeProjection, _lib, "cp_drawable_compute_projection")
 	}
-	return _fnCpDrawableComputeProjection(objref.IDOf(drawable), normalizedDeviceCoordinatesConvension, viewIndex)
+	return _fnCpDrawableComputeProjection(objref.IDOf(drawable.Object), normalizedDeviceCoordinatesConvension, viewIndex)
 }
 
 var _fnCpDrawableEncodePresent func(objc.ID, unsafe.Pointer)
 
 // CpDrawableEncodePresent calls the CompositorServices framework function cp_drawable_encode_present.
-func CpDrawableEncodePresent(drawable obj.Object, commandBuffer unsafe.Pointer) {
+func CpDrawableEncodePresent(drawable CpDrawableT, commandBuffer unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableEncodePresent == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableEncodePresent, _lib, "cp_drawable_encode_present")
 	}
-	_fnCpDrawableEncodePresent(objref.IDOf(drawable), commandBuffer)
+	_fnCpDrawableEncodePresent(objref.IDOf(drawable.Object), commandBuffer)
 }
 
 var _fnCpDrawableGetColorTexture func(objc.ID, int) unsafe.Pointer
 
 // CpDrawableGetColorTexture calls the CompositorServices framework function cp_drawable_get_color_texture.
-func CpDrawableGetColorTexture(drawable obj.Object, index int) unsafe.Pointer {
+func CpDrawableGetColorTexture(drawable CpDrawableT, index int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetColorTexture == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetColorTexture, _lib, "cp_drawable_get_color_texture")
 	}
-	return _fnCpDrawableGetColorTexture(objref.IDOf(drawable), index)
+	return _fnCpDrawableGetColorTexture(objref.IDOf(drawable.Object), index)
 }
 
 var _fnCpDrawableGetDepthRange func(objc.ID) unsafe.Pointer
 
 // CpDrawableGetDepthRange calls the CompositorServices framework function cp_drawable_get_depth_range.
-func CpDrawableGetDepthRange(drawable obj.Object) unsafe.Pointer {
+func CpDrawableGetDepthRange(drawable CpDrawableT) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetDepthRange == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetDepthRange, _lib, "cp_drawable_get_depth_range")
 	}
-	return _fnCpDrawableGetDepthRange(objref.IDOf(drawable))
+	return _fnCpDrawableGetDepthRange(objref.IDOf(drawable.Object))
 }
 
 var _fnCpDrawableGetDepthTexture func(objc.ID, int) unsafe.Pointer
 
 // CpDrawableGetDepthTexture calls the CompositorServices framework function cp_drawable_get_depth_texture.
-func CpDrawableGetDepthTexture(drawable obj.Object, index int) unsafe.Pointer {
+func CpDrawableGetDepthTexture(drawable CpDrawableT, index int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetDepthTexture == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetDepthTexture, _lib, "cp_drawable_get_depth_texture")
 	}
-	return _fnCpDrawableGetDepthTexture(objref.IDOf(drawable), index)
+	return _fnCpDrawableGetDepthTexture(objref.IDOf(drawable.Object), index)
 }
 
 var _fnCpDrawableGetDeviceAnchor func(objc.ID) objc.ID
 
 // CpDrawableGetDeviceAnchor calls the CompositorServices framework function cp_drawable_get_device_anchor.
-func CpDrawableGetDeviceAnchor(drawable obj.Object) *foundation.Object {
+func CpDrawableGetDeviceAnchor(drawable CpDrawableT) *foundation.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetDeviceAnchor == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetDeviceAnchor, _lib, "cp_drawable_get_device_anchor")
 	}
-	_ret := _fnCpDrawableGetDeviceAnchor(objref.IDOf(drawable))
+	_ret := _fnCpDrawableGetDeviceAnchor(objref.IDOf(drawable.Object))
 	return foundation.ObjectFromID(_ret)
 }
 
 var _fnCpDrawableGetFlippedRasterizationRateMap func(objc.ID, int) unsafe.Pointer
 
 // CpDrawableGetFlippedRasterizationRateMap calls the CompositorServices framework function cp_drawable_get_flipped_rasterization_rate_map.
-func CpDrawableGetFlippedRasterizationRateMap(drawable obj.Object, index int) unsafe.Pointer {
+func CpDrawableGetFlippedRasterizationRateMap(drawable CpDrawableT, index int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetFlippedRasterizationRateMap == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetFlippedRasterizationRateMap, _lib, "cp_drawable_get_flipped_rasterization_rate_map")
 	}
-	return _fnCpDrawableGetFlippedRasterizationRateMap(objref.IDOf(drawable), index)
+	return _fnCpDrawableGetFlippedRasterizationRateMap(objref.IDOf(drawable.Object), index)
 }
 
 var _fnCpDrawableGetFrameTiming func(objc.ID) objc.ID
 
 // CpDrawableGetFrameTiming calls the CompositorServices framework function cp_drawable_get_frame_timing.
-func CpDrawableGetFrameTiming(drawable obj.Object) obj.Object {
+func CpDrawableGetFrameTiming(drawable CpDrawableT) CpFrameTimingT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetFrameTiming == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetFrameTiming, _lib, "cp_drawable_get_frame_timing")
 	}
-	_ret := _fnCpDrawableGetFrameTiming(objref.IDOf(drawable))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnCpDrawableGetFrameTiming(objref.IDOf(drawable.Object))
+	return CpFrameTimingT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCpDrawableGetPresentationFrameIndex func(objc.ID) uint64
 
 // CpDrawableGetPresentationFrameIndex calls the CompositorServices framework function cp_drawable_get_presentation_frame_index.
-func CpDrawableGetPresentationFrameIndex(drawable obj.Object) uint64 {
+func CpDrawableGetPresentationFrameIndex(drawable CpDrawableT) uint64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetPresentationFrameIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetPresentationFrameIndex, _lib, "cp_drawable_get_presentation_frame_index")
 	}
-	return _fnCpDrawableGetPresentationFrameIndex(objref.IDOf(drawable))
+	return _fnCpDrawableGetPresentationFrameIndex(objref.IDOf(drawable.Object))
 }
 
 var _fnCpDrawableGetRasterizationRateMap func(objc.ID, int) unsafe.Pointer
 
 // CpDrawableGetRasterizationRateMap calls the CompositorServices framework function cp_drawable_get_rasterization_rate_map.
-func CpDrawableGetRasterizationRateMap(drawable obj.Object, index int) unsafe.Pointer {
+func CpDrawableGetRasterizationRateMap(drawable CpDrawableT, index int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetRasterizationRateMap == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetRasterizationRateMap, _lib, "cp_drawable_get_rasterization_rate_map")
 	}
-	return _fnCpDrawableGetRasterizationRateMap(objref.IDOf(drawable), index)
+	return _fnCpDrawableGetRasterizationRateMap(objref.IDOf(drawable.Object), index)
 }
 
 var _fnCpDrawableGetRasterizationRateMapCount func(objc.ID) int
 
 // CpDrawableGetRasterizationRateMapCount calls the CompositorServices framework function cp_drawable_get_rasterization_rate_map_count.
-func CpDrawableGetRasterizationRateMapCount(drawable obj.Object) int {
+func CpDrawableGetRasterizationRateMapCount(drawable CpDrawableT) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetRasterizationRateMapCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetRasterizationRateMapCount, _lib, "cp_drawable_get_rasterization_rate_map_count")
 	}
-	return _fnCpDrawableGetRasterizationRateMapCount(objref.IDOf(drawable))
+	return _fnCpDrawableGetRasterizationRateMapCount(objref.IDOf(drawable.Object))
 }
 
 var _fnCpDrawableGetState func(objc.ID) DrawableState
 
 // CpDrawableGetState calls the CompositorServices framework function cp_drawable_get_state.
-func CpDrawableGetState(drawable obj.Object) DrawableState {
+func CpDrawableGetState(drawable CpDrawableT) DrawableState {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetState == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetState, _lib, "cp_drawable_get_state")
 	}
-	return _fnCpDrawableGetState(objref.IDOf(drawable))
+	return _fnCpDrawableGetState(objref.IDOf(drawable.Object))
 }
 
 var _fnCpDrawableGetTarget func(objc.ID) DrawableTarget
 
 // CpDrawableGetTarget calls the CompositorServices framework function cp_drawable_get_target.
-func CpDrawableGetTarget(drawable obj.Object) DrawableTarget {
+func CpDrawableGetTarget(drawable CpDrawableT) DrawableTarget {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetTarget == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetTarget, _lib, "cp_drawable_get_target")
 	}
-	return _fnCpDrawableGetTarget(objref.IDOf(drawable))
+	return _fnCpDrawableGetTarget(objref.IDOf(drawable.Object))
 }
 
 var _fnCpDrawableGetTextureCount func(objc.ID) int
 
 // CpDrawableGetTextureCount calls the CompositorServices framework function cp_drawable_get_texture_count.
-func CpDrawableGetTextureCount(drawable obj.Object) int {
+func CpDrawableGetTextureCount(drawable CpDrawableT) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetTextureCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetTextureCount, _lib, "cp_drawable_get_texture_count")
 	}
-	return _fnCpDrawableGetTextureCount(objref.IDOf(drawable))
+	return _fnCpDrawableGetTextureCount(objref.IDOf(drawable.Object))
 }
 
 var _fnCpDrawableGetTrackingAreasTexture func(objc.ID, int) unsafe.Pointer
 
 // CpDrawableGetTrackingAreasTexture calls the CompositorServices framework function cp_drawable_get_tracking_areas_texture.
-func CpDrawableGetTrackingAreasTexture(drawable obj.Object, index int) unsafe.Pointer {
+func CpDrawableGetTrackingAreasTexture(drawable CpDrawableT, index int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetTrackingAreasTexture == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetTrackingAreasTexture, _lib, "cp_drawable_get_tracking_areas_texture")
 	}
-	return _fnCpDrawableGetTrackingAreasTexture(objref.IDOf(drawable), index)
+	return _fnCpDrawableGetTrackingAreasTexture(objref.IDOf(drawable.Object), index)
 }
 
 var _fnCpDrawableGetTrackingAreasTextureCount func(objc.ID) int
 
 // CpDrawableGetTrackingAreasTextureCount calls the CompositorServices framework function cp_drawable_get_tracking_areas_texture_count.
-func CpDrawableGetTrackingAreasTextureCount(drawable obj.Object) int {
+func CpDrawableGetTrackingAreasTextureCount(drawable CpDrawableT) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetTrackingAreasTextureCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetTrackingAreasTextureCount, _lib, "cp_drawable_get_tracking_areas_texture_count")
 	}
-	return _fnCpDrawableGetTrackingAreasTextureCount(objref.IDOf(drawable))
+	return _fnCpDrawableGetTrackingAreasTextureCount(objref.IDOf(drawable.Object))
 }
 
 var _fnCpDrawableGetView func(objc.ID, int) objc.ID
 
 // CpDrawableGetView calls the CompositorServices framework function cp_drawable_get_view.
-func CpDrawableGetView(drawable obj.Object, index int) obj.Object {
+func CpDrawableGetView(drawable CpDrawableT, index int) CpViewT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetView == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetView, _lib, "cp_drawable_get_view")
 	}
-	_ret := _fnCpDrawableGetView(objref.IDOf(drawable), index)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnCpDrawableGetView(objref.IDOf(drawable.Object), index)
+	return CpViewT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCpDrawableGetViewCount func(objc.ID) int
 
 // CpDrawableGetViewCount calls the CompositorServices framework function cp_drawable_get_view_count.
-func CpDrawableGetViewCount(drawable obj.Object) int {
+func CpDrawableGetViewCount(drawable CpDrawableT) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableGetViewCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetViewCount, _lib, "cp_drawable_get_view_count")
 	}
-	return _fnCpDrawableGetViewCount(objref.IDOf(drawable))
+	return _fnCpDrawableGetViewCount(objref.IDOf(drawable.Object))
 }
 
 var _fnCpDrawableMtl4EncodePresent func(objc.ID)
 
 // CpDrawableMtl4EncodePresent calls the CompositorServices framework function cp_drawable_mtl4_encode_present.
-func CpDrawableMtl4EncodePresent(drawable obj.Object) {
+func CpDrawableMtl4EncodePresent(drawable CpDrawableT) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableMtl4EncodePresent == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableMtl4EncodePresent, _lib, "cp_drawable_mtl4_encode_present")
 	}
-	_fnCpDrawableMtl4EncodePresent(objref.IDOf(drawable))
+	_fnCpDrawableMtl4EncodePresent(objref.IDOf(drawable.Object))
 }
 
 var _fnCpDrawableRenderContextDrawMaskOnStencilAttachment func(objc.ID, unsafe.Pointer, uint8)
 
 // CpDrawableRenderContextDrawMaskOnStencilAttachment calls the CompositorServices framework function cp_drawable_render_context_draw_mask_on_stencil_attachment.
-func CpDrawableRenderContextDrawMaskOnStencilAttachment(renderContext obj.Object, commandEncoder unsafe.Pointer, value uint8) {
+func CpDrawableRenderContextDrawMaskOnStencilAttachment(renderContext CpDrawableRenderContextT, commandEncoder unsafe.Pointer, value uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableRenderContextDrawMaskOnStencilAttachment == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableRenderContextDrawMaskOnStencilAttachment, _lib, "cp_drawable_render_context_draw_mask_on_stencil_attachment")
 	}
-	_fnCpDrawableRenderContextDrawMaskOnStencilAttachment(objref.IDOf(renderContext), commandEncoder, value)
+	_fnCpDrawableRenderContextDrawMaskOnStencilAttachment(objref.IDOf(renderContext.Object), commandEncoder, value)
 }
 
 var _fnCpDrawableRenderContextEndEncoding func(objc.ID, unsafe.Pointer)
 
 // CpDrawableRenderContextEndEncoding calls the CompositorServices framework function cp_drawable_render_context_end_encoding.
-func CpDrawableRenderContextEndEncoding(renderContext obj.Object, commandEncoder unsafe.Pointer) {
+func CpDrawableRenderContextEndEncoding(renderContext CpDrawableRenderContextT, commandEncoder unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableRenderContextEndEncoding == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableRenderContextEndEncoding, _lib, "cp_drawable_render_context_end_encoding")
 	}
-	_fnCpDrawableRenderContextEndEncoding(objref.IDOf(renderContext), commandEncoder)
+	_fnCpDrawableRenderContextEndEncoding(objref.IDOf(renderContext.Object), commandEncoder)
 }
 
 var _fnCpDrawableRenderContextMtl4DrawMaskOnStencilAttachment func(objc.ID, unsafe.Pointer, uint8)
 
 // CpDrawableRenderContextMtl4DrawMaskOnStencilAttachment calls the CompositorServices framework function cp_drawable_render_context_mtl4_draw_mask_on_stencil_attachment.
-func CpDrawableRenderContextMtl4DrawMaskOnStencilAttachment(renderContext obj.Object, commandEncoder unsafe.Pointer, value uint8) {
+func CpDrawableRenderContextMtl4DrawMaskOnStencilAttachment(renderContext CpDrawableRenderContextT, commandEncoder unsafe.Pointer, value uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableRenderContextMtl4DrawMaskOnStencilAttachment == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableRenderContextMtl4DrawMaskOnStencilAttachment, _lib, "cp_drawable_render_context_mtl4_draw_mask_on_stencil_attachment")
 	}
-	_fnCpDrawableRenderContextMtl4DrawMaskOnStencilAttachment(objref.IDOf(renderContext), commandEncoder, value)
+	_fnCpDrawableRenderContextMtl4DrawMaskOnStencilAttachment(objref.IDOf(renderContext.Object), commandEncoder, value)
 }
 
 var _fnCpDrawableRenderContextMtl4EndEncoding func(objc.ID, unsafe.Pointer)
 
 // CpDrawableRenderContextMtl4EndEncoding calls the CompositorServices framework function cp_drawable_render_context_mtl4_end_encoding.
-func CpDrawableRenderContextMtl4EndEncoding(renderContext obj.Object, commandEncoder unsafe.Pointer) {
+func CpDrawableRenderContextMtl4EndEncoding(renderContext CpDrawableRenderContextT, commandEncoder unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableRenderContextMtl4EndEncoding == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableRenderContextMtl4EndEncoding, _lib, "cp_drawable_render_context_mtl4_end_encoding")
 	}
-	_fnCpDrawableRenderContextMtl4EndEncoding(objref.IDOf(renderContext), commandEncoder)
+	_fnCpDrawableRenderContextMtl4EndEncoding(objref.IDOf(renderContext.Object), commandEncoder)
 }
 
 var _fnCpDrawableSetDepthRange func(objc.ID, unsafe.Pointer)
 
 // CpDrawableSetDepthRange calls the CompositorServices framework function cp_drawable_set_depth_range.
-func CpDrawableSetDepthRange(drawable obj.Object, depthRange unsafe.Pointer) {
+func CpDrawableSetDepthRange(drawable CpDrawableT, depthRange unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableSetDepthRange == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableSetDepthRange, _lib, "cp_drawable_set_depth_range")
 	}
-	_fnCpDrawableSetDepthRange(objref.IDOf(drawable), depthRange)
+	_fnCpDrawableSetDepthRange(objref.IDOf(drawable.Object), depthRange)
 }
 
 var _fnCpDrawableSetDeviceAnchor func(objc.ID, objc.ID)
 
 // CpDrawableSetDeviceAnchor calls the CompositorServices framework function cp_drawable_set_device_anchor.
-func CpDrawableSetDeviceAnchor(drawable obj.Object, deviceAnchor obj.Object) {
+func CpDrawableSetDeviceAnchor(drawable CpDrawableT, deviceAnchor obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpDrawableSetDeviceAnchor == nil {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableSetDeviceAnchor, _lib, "cp_drawable_set_device_anchor")
 	}
-	_fnCpDrawableSetDeviceAnchor(objref.IDOf(drawable), objref.IDOf(deviceAnchor))
+	_fnCpDrawableSetDeviceAnchor(objref.IDOf(drawable.Object), objref.IDOf(deviceAnchor))
 }
 
 var _fnCpFrameBinocularFrustumMatrix func(objc.ID, AxisDirectionConvention, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // CpFrameBinocularFrustumMatrix calls the CompositorServices framework function cp_frame_binocular_frustum_matrix.
-func CpFrameBinocularFrustumMatrix(frame obj.Object, convention AxisDirectionConvention, increaseTangents unsafe.Pointer, depthRange unsafe.Pointer) unsafe.Pointer {
+func CpFrameBinocularFrustumMatrix(frame CpFrameT, convention AxisDirectionConvention, increaseTangents unsafe.Pointer, depthRange unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameBinocularFrustumMatrix == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameBinocularFrustumMatrix, _lib, "cp_frame_binocular_frustum_matrix")
 	}
-	return _fnCpFrameBinocularFrustumMatrix(objref.IDOf(frame), convention, increaseTangents, depthRange)
+	return _fnCpFrameBinocularFrustumMatrix(objref.IDOf(frame.Object), convention, increaseTangents, depthRange)
 }
 
 var _fnCpFrameBinocularFrustumMatrixForDrawableTarget func(objc.ID, DrawableTarget, AxisDirectionConvention, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // CpFrameBinocularFrustumMatrixForDrawableTarget calls the CompositorServices framework function cp_frame_binocular_frustum_matrix_for_drawable_target.
-func CpFrameBinocularFrustumMatrixForDrawableTarget(frame obj.Object, drawableTarget DrawableTarget, convention AxisDirectionConvention, increaseTangents unsafe.Pointer, depthRange unsafe.Pointer) unsafe.Pointer {
+func CpFrameBinocularFrustumMatrixForDrawableTarget(frame CpFrameT, drawableTarget DrawableTarget, convention AxisDirectionConvention, increaseTangents unsafe.Pointer, depthRange unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameBinocularFrustumMatrixForDrawableTarget == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameBinocularFrustumMatrixForDrawableTarget, _lib, "cp_frame_binocular_frustum_matrix_for_drawable_target")
 	}
-	return _fnCpFrameBinocularFrustumMatrixForDrawableTarget(objref.IDOf(frame), drawableTarget, convention, increaseTangents, depthRange)
+	return _fnCpFrameBinocularFrustumMatrixForDrawableTarget(objref.IDOf(frame.Object), drawableTarget, convention, increaseTangents, depthRange)
 }
 
 var _fnCpFrameEndSubmission func(objc.ID)
 
 // CpFrameEndSubmission calls the CompositorServices framework function cp_frame_end_submission.
-func CpFrameEndSubmission(frame obj.Object) {
+func CpFrameEndSubmission(frame CpFrameT) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameEndSubmission == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameEndSubmission, _lib, "cp_frame_end_submission")
 	}
-	_fnCpFrameEndSubmission(objref.IDOf(frame))
+	_fnCpFrameEndSubmission(objref.IDOf(frame.Object))
 }
 
 var _fnCpFrameEndUpdate func(objc.ID)
 
 // CpFrameEndUpdate calls the CompositorServices framework function cp_frame_end_update.
-func CpFrameEndUpdate(frame obj.Object) {
+func CpFrameEndUpdate(frame CpFrameT) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameEndUpdate == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameEndUpdate, _lib, "cp_frame_end_update")
 	}
-	_fnCpFrameEndUpdate(objref.IDOf(frame))
+	_fnCpFrameEndUpdate(objref.IDOf(frame.Object))
 }
 
 var _fnCpFrameGetDrawableTargetViewCount func(objc.ID, DrawableTarget) int
 
 // CpFrameGetDrawableTargetViewCount calls the CompositorServices framework function cp_frame_get_drawable_target_view_count.
-func CpFrameGetDrawableTargetViewCount(frame obj.Object, drawableTarget DrawableTarget) int {
+func CpFrameGetDrawableTargetViewCount(frame CpFrameT, drawableTarget DrawableTarget) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameGetDrawableTargetViewCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameGetDrawableTargetViewCount, _lib, "cp_frame_get_drawable_target_view_count")
 	}
-	return _fnCpFrameGetDrawableTargetViewCount(objref.IDOf(frame), drawableTarget)
+	return _fnCpFrameGetDrawableTargetViewCount(objref.IDOf(frame.Object), drawableTarget)
 }
 
 var _fnCpFrameGetFrameIndex func(objc.ID) uint64
 
 // CpFrameGetFrameIndex calls the CompositorServices framework function cp_frame_get_frame_index.
-func CpFrameGetFrameIndex(frame obj.Object) uint64 {
+func CpFrameGetFrameIndex(frame CpFrameT) uint64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameGetFrameIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameGetFrameIndex, _lib, "cp_frame_get_frame_index")
 	}
-	return _fnCpFrameGetFrameIndex(objref.IDOf(frame))
+	return _fnCpFrameGetFrameIndex(objref.IDOf(frame.Object))
 }
 
 var _fnCpFrameMonocularFrustumMatrix func(objc.ID, AxisDirectionConvention, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // CpFrameMonocularFrustumMatrix calls the CompositorServices framework function cp_frame_monocular_frustum_matrix.
-func CpFrameMonocularFrustumMatrix(frame obj.Object, normalizedDeviceCoordinatesConvension AxisDirectionConvention, viewIndex int, increaseTangents unsafe.Pointer, depthRange unsafe.Pointer) unsafe.Pointer {
+func CpFrameMonocularFrustumMatrix(frame CpFrameT, normalizedDeviceCoordinatesConvension AxisDirectionConvention, viewIndex int, increaseTangents unsafe.Pointer, depthRange unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameMonocularFrustumMatrix == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameMonocularFrustumMatrix, _lib, "cp_frame_monocular_frustum_matrix")
 	}
-	return _fnCpFrameMonocularFrustumMatrix(objref.IDOf(frame), normalizedDeviceCoordinatesConvension, viewIndex, increaseTangents, depthRange)
+	return _fnCpFrameMonocularFrustumMatrix(objref.IDOf(frame.Object), normalizedDeviceCoordinatesConvension, viewIndex, increaseTangents, depthRange)
 }
 
 var _fnCpFrameMonocularFrustumMatrixForDrawableTarget func(objc.ID, DrawableTarget, AxisDirectionConvention, int, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // CpFrameMonocularFrustumMatrixForDrawableTarget calls the CompositorServices framework function cp_frame_monocular_frustum_matrix_for_drawable_target.
-func CpFrameMonocularFrustumMatrixForDrawableTarget(frame obj.Object, drawableTarget DrawableTarget, normalizedDeviceCoordinatesConvension AxisDirectionConvention, viewIndex int, increaseTangents unsafe.Pointer, depthRange unsafe.Pointer) unsafe.Pointer {
+func CpFrameMonocularFrustumMatrixForDrawableTarget(frame CpFrameT, drawableTarget DrawableTarget, normalizedDeviceCoordinatesConvension AxisDirectionConvention, viewIndex int, increaseTangents unsafe.Pointer, depthRange unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameMonocularFrustumMatrixForDrawableTarget == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameMonocularFrustumMatrixForDrawableTarget, _lib, "cp_frame_monocular_frustum_matrix_for_drawable_target")
 	}
-	return _fnCpFrameMonocularFrustumMatrixForDrawableTarget(objref.IDOf(frame), drawableTarget, normalizedDeviceCoordinatesConvension, viewIndex, increaseTangents, depthRange)
+	return _fnCpFrameMonocularFrustumMatrixForDrawableTarget(objref.IDOf(frame.Object), drawableTarget, normalizedDeviceCoordinatesConvension, viewIndex, increaseTangents, depthRange)
 }
 
 var _fnCpFramePredictTiming func(objc.ID) objc.ID
 
 // CpFramePredictTiming calls the CompositorServices framework function cp_frame_predict_timing.
-func CpFramePredictTiming(frame obj.Object) obj.Object {
+func CpFramePredictTiming(frame CpFrameT) CpFrameTimingT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFramePredictTiming == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFramePredictTiming, _lib, "cp_frame_predict_timing")
 	}
-	_ret := _fnCpFramePredictTiming(objref.IDOf(frame))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnCpFramePredictTiming(objref.IDOf(frame.Object))
+	return CpFrameTimingT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCpFrameQueryDrawables func(objc.ID) objc.ID
 
 // CpFrameQueryDrawables calls the CompositorServices framework function cp_frame_query_drawables.
-func CpFrameQueryDrawables(frame obj.Object) obj.Object {
+func CpFrameQueryDrawables(frame CpFrameT) CpDrawableArrayT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameQueryDrawables == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameQueryDrawables, _lib, "cp_frame_query_drawables")
 	}
-	_ret := _fnCpFrameQueryDrawables(objref.IDOf(frame))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnCpFrameQueryDrawables(objref.IDOf(frame.Object))
+	return CpDrawableArrayT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCpFrameStartSubmission func(objc.ID)
 
 // CpFrameStartSubmission calls the CompositorServices framework function cp_frame_start_submission.
-func CpFrameStartSubmission(frame obj.Object) {
+func CpFrameStartSubmission(frame CpFrameT) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameStartSubmission == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameStartSubmission, _lib, "cp_frame_start_submission")
 	}
-	_fnCpFrameStartSubmission(objref.IDOf(frame))
+	_fnCpFrameStartSubmission(objref.IDOf(frame.Object))
 }
 
 var _fnCpFrameStartUpdate func(objc.ID)
 
 // CpFrameStartUpdate calls the CompositorServices framework function cp_frame_start_update.
-func CpFrameStartUpdate(frame obj.Object) {
+func CpFrameStartUpdate(frame CpFrameT) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameStartUpdate == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameStartUpdate, _lib, "cp_frame_start_update")
 	}
-	_fnCpFrameStartUpdate(objref.IDOf(frame))
+	_fnCpFrameStartUpdate(objref.IDOf(frame.Object))
 }
 
 var _fnCpFrameTimingGetOptimalInputTime func(objc.ID) unsafe.Pointer
 
 // CpFrameTimingGetOptimalInputTime calls the CompositorServices framework function cp_frame_timing_get_optimal_input_time.
-func CpFrameTimingGetOptimalInputTime(frameTiming obj.Object) unsafe.Pointer {
+func CpFrameTimingGetOptimalInputTime(frameTiming CpFrameTimingT) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameTimingGetOptimalInputTime == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameTimingGetOptimalInputTime, _lib, "cp_frame_timing_get_optimal_input_time")
 	}
-	return _fnCpFrameTimingGetOptimalInputTime(objref.IDOf(frameTiming))
+	return _fnCpFrameTimingGetOptimalInputTime(objref.IDOf(frameTiming.Object))
 }
 
 var _fnCpFrameTimingGetPresentationTime func(objc.ID) unsafe.Pointer
 
 // CpFrameTimingGetPresentationTime calls the CompositorServices framework function cp_frame_timing_get_presentation_time.
-func CpFrameTimingGetPresentationTime(frameTiming obj.Object) unsafe.Pointer {
+func CpFrameTimingGetPresentationTime(frameTiming CpFrameTimingT) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameTimingGetPresentationTime == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameTimingGetPresentationTime, _lib, "cp_frame_timing_get_presentation_time")
 	}
-	return _fnCpFrameTimingGetPresentationTime(objref.IDOf(frameTiming))
+	return _fnCpFrameTimingGetPresentationTime(objref.IDOf(frameTiming.Object))
 }
 
 var _fnCpFrameTimingGetRenderingDeadline func(objc.ID) unsafe.Pointer
 
 // CpFrameTimingGetRenderingDeadline calls the CompositorServices framework function cp_frame_timing_get_rendering_deadline.
-func CpFrameTimingGetRenderingDeadline(frameTiming obj.Object) unsafe.Pointer {
+func CpFrameTimingGetRenderingDeadline(frameTiming CpFrameTimingT) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameTimingGetRenderingDeadline == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameTimingGetRenderingDeadline, _lib, "cp_frame_timing_get_rendering_deadline")
 	}
-	return _fnCpFrameTimingGetRenderingDeadline(objref.IDOf(frameTiming))
+	return _fnCpFrameTimingGetRenderingDeadline(objref.IDOf(frameTiming.Object))
 }
 
 var _fnCpFrameTimingGetTrackableAnchorTime func(objc.ID) unsafe.Pointer
 
 // CpFrameTimingGetTrackableAnchorTime calls the CompositorServices framework function cp_frame_timing_get_trackable_anchor_time.
-func CpFrameTimingGetTrackableAnchorTime(frameTiming obj.Object) unsafe.Pointer {
+func CpFrameTimingGetTrackableAnchorTime(frameTiming CpFrameTimingT) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpFrameTimingGetTrackableAnchorTime == nil {
 		ebipurego.RegisterLibFunc(&_fnCpFrameTimingGetTrackableAnchorTime, _lib, "cp_frame_timing_get_trackable_anchor_time")
 	}
-	return _fnCpFrameTimingGetTrackableAnchorTime(objref.IDOf(frameTiming))
+	return _fnCpFrameTimingGetTrackableAnchorTime(objref.IDOf(frameTiming.Object))
 }
 
 var _fnCpLayerRendererCapabilitiesDrawableRenderContextSupportedStencilFormat func(objc.ID, int) unsafe.Pointer
@@ -1062,13 +1062,13 @@ func CpLayerRendererGetState(layerRenderer *_cp_layer_renderer) LayerRendererSta
 var _fnCpLayerRendererPropertiesGetTextureTopology func(objc.ID, int) objc.ID
 
 // CpLayerRendererPropertiesGetTextureTopology calls the CompositorServices framework function cp_layer_renderer_properties_get_texture_topology.
-func CpLayerRendererPropertiesGetTextureTopology(layerProperties *_cp_layer_renderer_properties, index int) obj.Object {
+func CpLayerRendererPropertiesGetTextureTopology(layerProperties *_cp_layer_renderer_properties, index int) CpTextureTopologyT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpLayerRendererPropertiesGetTextureTopology == nil {
 		ebipurego.RegisterLibFunc(&_fnCpLayerRendererPropertiesGetTextureTopology, _lib, "cp_layer_renderer_properties_get_texture_topology")
 	}
 	_ret := _fnCpLayerRendererPropertiesGetTextureTopology(objref.IDOf(layerProperties), index)
-	return obj.WrapUnmanaged(_ret)
+	return CpTextureTopologyT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCpLayerRendererPropertiesGetTextureTopologyCount func(objc.ID) int
@@ -1107,13 +1107,13 @@ func CpLayerRendererPropertiesGetViewCount(layerProperties *_cp_layer_renderer_p
 var _fnCpLayerRendererQueryNextFrame func(objc.ID) objc.ID
 
 // CpLayerRendererQueryNextFrame calls the CompositorServices framework function cp_layer_renderer_query_next_frame.
-func CpLayerRendererQueryNextFrame(layerRenderer *_cp_layer_renderer) obj.Object {
+func CpLayerRendererQueryNextFrame(layerRenderer *_cp_layer_renderer) CpFrameT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpLayerRendererQueryNextFrame == nil {
 		ebipurego.RegisterLibFunc(&_fnCpLayerRendererQueryNextFrame, _lib, "cp_layer_renderer_query_next_frame")
 	}
 	_ret := _fnCpLayerRendererQueryNextFrame(objref.IDOf(layerRenderer))
-	return obj.WrapUnmanaged(_ret)
+	return CpFrameT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCpLayerRendererSetMinimumFrameRepeatCount func(objc.ID, int)
@@ -1174,23 +1174,23 @@ func CpRetain(object unsafe.Pointer) unsafe.Pointer {
 var _fnCpTextureTopologyGetArrayLength func(objc.ID) uint64
 
 // CpTextureTopologyGetArrayLength calls the CompositorServices framework function cp_texture_topology_get_array_length.
-func CpTextureTopologyGetArrayLength(textureTopology obj.Object) uint64 {
+func CpTextureTopologyGetArrayLength(textureTopology CpTextureTopologyT) uint64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpTextureTopologyGetArrayLength == nil {
 		ebipurego.RegisterLibFunc(&_fnCpTextureTopologyGetArrayLength, _lib, "cp_texture_topology_get_array_length")
 	}
-	return _fnCpTextureTopologyGetArrayLength(objref.IDOf(textureTopology))
+	return _fnCpTextureTopologyGetArrayLength(objref.IDOf(textureTopology.Object))
 }
 
 var _fnCpTextureTopologyGetTextureType func(objc.ID) unsafe.Pointer
 
 // CpTextureTopologyGetTextureType calls the CompositorServices framework function cp_texture_topology_get_texture_type.
-func CpTextureTopologyGetTextureType(textureTopology obj.Object) unsafe.Pointer {
+func CpTextureTopologyGetTextureType(textureTopology CpTextureTopologyT) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpTextureTopologyGetTextureType == nil {
 		ebipurego.RegisterLibFunc(&_fnCpTextureTopologyGetTextureType, _lib, "cp_texture_topology_get_texture_type")
 	}
-	return _fnCpTextureTopologyGetTextureType(objref.IDOf(textureTopology))
+	return _fnCpTextureTopologyGetTextureType(objref.IDOf(textureTopology.Object))
 }
 
 var _fnCpTimeToCfTimeInterval func(unsafe.Pointer) float64
@@ -1218,89 +1218,89 @@ func CpTimeWaitUntil(time_ unsafe.Pointer) {
 var _fnCpTrackingAreaAddAutomaticHoverEffect func(objc.ID) objc.ID
 
 // CpTrackingAreaAddAutomaticHoverEffect calls the CompositorServices framework function cp_tracking_area_add_automatic_hover_effect.
-func CpTrackingAreaAddAutomaticHoverEffect(trackingArea obj.Object) obj.Object {
+func CpTrackingAreaAddAutomaticHoverEffect(trackingArea CpTrackingAreaT) CpHoverEffectT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpTrackingAreaAddAutomaticHoverEffect == nil {
 		ebipurego.RegisterLibFunc(&_fnCpTrackingAreaAddAutomaticHoverEffect, _lib, "cp_tracking_area_add_automatic_hover_effect")
 	}
-	_ret := _fnCpTrackingAreaAddAutomaticHoverEffect(objref.IDOf(trackingArea))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnCpTrackingAreaAddAutomaticHoverEffect(objref.IDOf(trackingArea.Object))
+	return CpHoverEffectT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCpTrackingAreaGetIdentifier func(objc.ID) uint64
 
 // CpTrackingAreaGetIdentifier calls the CompositorServices framework function cp_tracking_area_get_identifier.
-func CpTrackingAreaGetIdentifier(trackingArea obj.Object) uint64 {
+func CpTrackingAreaGetIdentifier(trackingArea CpTrackingAreaT) uint64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpTrackingAreaGetIdentifier == nil {
 		ebipurego.RegisterLibFunc(&_fnCpTrackingAreaGetIdentifier, _lib, "cp_tracking_area_get_identifier")
 	}
-	return _fnCpTrackingAreaGetIdentifier(objref.IDOf(trackingArea))
+	return _fnCpTrackingAreaGetIdentifier(objref.IDOf(trackingArea.Object))
 }
 
 var _fnCpTrackingAreaGetRenderValue func(objc.ID) uint16
 
 // CpTrackingAreaGetRenderValue calls the CompositorServices framework function cp_tracking_area_get_render_value.
-func CpTrackingAreaGetRenderValue(trackingArea obj.Object) uint16 {
+func CpTrackingAreaGetRenderValue(trackingArea CpTrackingAreaT) uint16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpTrackingAreaGetRenderValue == nil {
 		ebipurego.RegisterLibFunc(&_fnCpTrackingAreaGetRenderValue, _lib, "cp_tracking_area_get_render_value")
 	}
-	return _fnCpTrackingAreaGetRenderValue(objref.IDOf(trackingArea))
+	return _fnCpTrackingAreaGetRenderValue(objref.IDOf(trackingArea.Object))
 }
 
 var _fnCpViewGetTransform func(objc.ID) unsafe.Pointer
 
 // CpViewGetTransform calls the CompositorServices framework function cp_view_get_transform.
-func CpViewGetTransform(view obj.Object) unsafe.Pointer {
+func CpViewGetTransform(view CpViewT) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpViewGetTransform == nil {
 		ebipurego.RegisterLibFunc(&_fnCpViewGetTransform, _lib, "cp_view_get_transform")
 	}
-	return _fnCpViewGetTransform(objref.IDOf(view))
+	return _fnCpViewGetTransform(objref.IDOf(view.Object))
 }
 
 var _fnCpViewGetViewTextureMap func(objc.ID) objc.ID
 
 // CpViewGetViewTextureMap calls the CompositorServices framework function cp_view_get_view_texture_map.
-func CpViewGetViewTextureMap(view obj.Object) obj.Object {
+func CpViewGetViewTextureMap(view CpViewT) CpViewTextureMapT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpViewGetViewTextureMap == nil {
 		ebipurego.RegisterLibFunc(&_fnCpViewGetViewTextureMap, _lib, "cp_view_get_view_texture_map")
 	}
-	_ret := _fnCpViewGetViewTextureMap(objref.IDOf(view))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnCpViewGetViewTextureMap(objref.IDOf(view.Object))
+	return CpViewTextureMapT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnCpViewTextureMapGetSliceIndex func(objc.ID) int
 
 // CpViewTextureMapGetSliceIndex calls the CompositorServices framework function cp_view_texture_map_get_slice_index.
-func CpViewTextureMapGetSliceIndex(viewTextureMap obj.Object) int {
+func CpViewTextureMapGetSliceIndex(viewTextureMap CpViewTextureMapT) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpViewTextureMapGetSliceIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCpViewTextureMapGetSliceIndex, _lib, "cp_view_texture_map_get_slice_index")
 	}
-	return _fnCpViewTextureMapGetSliceIndex(objref.IDOf(viewTextureMap))
+	return _fnCpViewTextureMapGetSliceIndex(objref.IDOf(viewTextureMap.Object))
 }
 
 var _fnCpViewTextureMapGetTextureIndex func(objc.ID) int
 
 // CpViewTextureMapGetTextureIndex calls the CompositorServices framework function cp_view_texture_map_get_texture_index.
-func CpViewTextureMapGetTextureIndex(viewTextureMap obj.Object) int {
+func CpViewTextureMapGetTextureIndex(viewTextureMap CpViewTextureMapT) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpViewTextureMapGetTextureIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCpViewTextureMapGetTextureIndex, _lib, "cp_view_texture_map_get_texture_index")
 	}
-	return _fnCpViewTextureMapGetTextureIndex(objref.IDOf(viewTextureMap))
+	return _fnCpViewTextureMapGetTextureIndex(objref.IDOf(viewTextureMap.Object))
 }
 
 var _fnCpViewTextureMapGetViewport func(objc.ID) unsafe.Pointer
 
 // CpViewTextureMapGetViewport calls the CompositorServices framework function cp_view_texture_map_get_viewport.
-func CpViewTextureMapGetViewport(viewTextureMap obj.Object) unsafe.Pointer {
+func CpViewTextureMapGetViewport(viewTextureMap CpViewTextureMapT) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCpViewTextureMapGetViewport == nil {
 		ebipurego.RegisterLibFunc(&_fnCpViewTextureMapGetViewport, _lib, "cp_view_texture_map_get_viewport")
 	}
-	return _fnCpViewTextureMapGetViewport(objref.IDOf(viewTextureMap))
+	return _fnCpViewTextureMapGetViewport(objref.IDOf(viewTextureMap.Object))
 }

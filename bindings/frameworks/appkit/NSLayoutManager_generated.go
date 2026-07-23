@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -624,13 +625,13 @@ func (lm *LayoutManager) DrawGlyphsForGlyphRangeAtPoint(glyphsToShow foundation.
 }
 
 // ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext renders the glyphs at the specified positions, using the specified attributes.
-func (lm *LayoutManager) ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext(positions *corefoundation.CGPoint, glyphCount int, font *Font, textMatrix corefoundation.CGAffineTransform, attributes obj.Object, cgContext obj.Object) (glyphs uint16) {
+func (lm *LayoutManager) ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext(positions *corefoundation.CGPoint, glyphCount int, font *Font, textMatrix corefoundation.CGAffineTransform, attributes obj.Object, cgContext coregraphics.CGContextRef) (glyphs uint16) {
 	defer runtime.KeepAlive(lm)
 	defer runtime.KeepAlive(font)
 	defer runtime.KeepAlive(attributes)
 	defer runtime.KeepAlive(cgContext)
 	var _out0 uint16
-	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("showCGGlyphs:positions:count:font:textMatrix:attributes:inContext:"), unsafe.Pointer(&_out0), unsafe.Pointer(positions), glyphCount, objref.IDOf(font), textMatrix, objref.IDOf(attributes), objref.IDOf(cgContext))
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("showCGGlyphs:positions:count:font:textMatrix:attributes:inContext:"), unsafe.Pointer(&_out0), unsafe.Pointer(positions), glyphCount, objref.IDOf(font), textMatrix, objref.IDOf(attributes), objref.IDOf(cgContext.Object))
 	return _out0
 }
 

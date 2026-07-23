@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -145,17 +146,17 @@ func (p *Page) TransformForBox(box DisplayBox) corefoundation.CGAffineTransform 
 }
 
 // DrawWithBoxToContext draws with box to context.
-func (p *Page) DrawWithBoxToContext(box DisplayBox, context_ obj.Object) {
+func (p *Page) DrawWithBoxToContext(box DisplayBox, context_ coregraphics.CGContextRef) {
 	defer runtime.KeepAlive(p)
 	defer runtime.KeepAlive(context_)
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("drawWithBox:toContext:"), box, objref.IDOf(context_))
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("drawWithBox:toContext:"), box, objref.IDOf(context_.Object))
 }
 
 // TransformContextForBox wraps the corresponding Objective-C method.
-func (p *Page) TransformContextForBox(context_ obj.Object, box DisplayBox) {
+func (p *Page) TransformContextForBox(context_ coregraphics.CGContextRef, box DisplayBox) {
 	defer runtime.KeepAlive(p)
 	defer runtime.KeepAlive(context_)
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("transformContext:forBox:"), objref.IDOf(context_), box)
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("transformContext:forBox:"), objref.IDOf(context_.Object), box)
 }
 
 // ThumbnailOfSizeForBox wraps the corresponding Objective-C method.
@@ -222,10 +223,10 @@ func (p *Page) Document() *Document {
 }
 
 // PageRef returns the page ref.
-func (p *Page) PageRef() obj.Object {
+func (p *Page) PageRef() coregraphics.CGPDFPageRef {
 	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("pageRef"))
-	return obj.Wrap(_r)
+	return coregraphics.CGPDFPageRef{obj.Wrap(_r)}
 }
 
 // Label returns the label.

@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -265,9 +266,9 @@ func (tl *TiledLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *T
 }
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
-func (tl *TiledLayer) WithBackgroundColor(backgroundColor obj.Object) *TiledLayer {
+func (tl *TiledLayer) WithBackgroundColor(backgroundColor coregraphics.CGColorRef) *TiledLayer {
 	defer runtime.KeepAlive(backgroundColor)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor.Object))
 	return tl
 }
 
@@ -297,9 +298,9 @@ func (tl *TiledLayer) WithBorderWidth(borderWidth float64) *TiledLayer {
 }
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
-func (tl *TiledLayer) WithBorderColor(borderColor obj.Object) *TiledLayer {
+func (tl *TiledLayer) WithBorderColor(borderColor coregraphics.CGColorRef) *TiledLayer {
 	defer runtime.KeepAlive(borderColor)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor.Object))
 	return tl
 }
 
@@ -335,9 +336,9 @@ func (tl *TiledLayer) WithRasterizationScale(rasterizationScale float64) *TiledL
 }
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
-func (tl *TiledLayer) WithShadowColor(shadowColor obj.Object) *TiledLayer {
+func (tl *TiledLayer) WithShadowColor(shadowColor coregraphics.CGColorRef) *TiledLayer {
 	defer runtime.KeepAlive(shadowColor)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor.Object))
 	return tl
 }
 
@@ -360,9 +361,9 @@ func (tl *TiledLayer) WithShadowRadius(shadowRadius float64) *TiledLayer {
 }
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
-func (tl *TiledLayer) WithShadowPath(shadowPath obj.Object) *TiledLayer {
+func (tl *TiledLayer) WithShadowPath(shadowPath coregraphics.CGPathRef) *TiledLayer {
 	defer runtime.KeepAlive(shadowPath)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath.Object))
 	return tl
 }
 

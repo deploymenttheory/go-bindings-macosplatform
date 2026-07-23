@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -255,10 +256,10 @@ func (d *Document) DocumentURL() string {
 }
 
 // DocumentRef returns the document ref.
-func (d *Document) DocumentRef() obj.Object {
+func (d *Document) DocumentRef() coregraphics.CGPDFDocumentRef {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("documentRef"))
-	return obj.Wrap(_r)
+	return coregraphics.CGPDFDocumentRef{obj.Wrap(_r)}
 }
 
 // DocumentAttributes returns the document attributes.

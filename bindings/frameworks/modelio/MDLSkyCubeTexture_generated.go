@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -100,9 +101,9 @@ func (sct *SkyCubeTexture) WithHorizonElevation(horizonElevation float32) *SkyCu
 }
 
 // WithGroundColor sets the color of the simulated ground.
-func (sct *SkyCubeTexture) WithGroundColor(groundColor obj.Object) *SkyCubeTexture {
+func (sct *SkyCubeTexture) WithGroundColor(groundColor coregraphics.CGColorRef) *SkyCubeTexture {
 	defer runtime.KeepAlive(groundColor)
-	objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("setGroundColor:"), objref.IDOf(groundColor))
+	objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("setGroundColor:"), objref.IDOf(groundColor.Object))
 	return sct
 }
 
@@ -203,10 +204,10 @@ func (sct *SkyCubeTexture) HorizonElevation() float32 {
 }
 
 // GroundColor returns the ground color.
-func (sct *SkyCubeTexture) GroundColor() obj.Object {
+func (sct *SkyCubeTexture) GroundColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(sct)
 	_r := objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("groundColor"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // Gamma returns the gamma.

@@ -6,6 +6,8 @@ package coregraphics
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type CGBitmapParameters struct {
@@ -101,8 +103,6 @@ type CGDeviceColor struct {
 	Blue  float32
 }
 
-type CGDisplayConfigRef struct{}
-
 // A reference to a display mode object.
 type CGDisplayMode struct{}
 
@@ -128,8 +128,6 @@ type CGEventTapInformation struct {
 	AvgUsecLatency     float32
 	MaxUsecLatency     float32
 }
-
-type CGEventTapProxy struct{}
 
 // A set of character glyphs and layout information for drawing text.
 type CGFont struct{}
@@ -231,3 +229,283 @@ type CGShading struct{}
 type ColorSyncProfile struct{}
 
 type IOSurface struct{}
+
+// CGDisplayConfigRef is a handle for the opaque _CGDisplayConfigRef type.
+type CGDisplayConfigRef struct{ obj.Object }
+
+// IsNil reports whether CGDisplayConfigRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGDisplayConfigRef) IsNil() bool { return h.Object == nil }
+
+// CGEventTapProxy is a handle for the opaque __CGEventTapProxy type.
+type CGEventTapProxy struct{ obj.Object }
+
+// IsNil reports whether CGEventTapProxy is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGEventTapProxy) IsNil() bool { return h.Object == nil }
+
+// CGColorConversionInfoRef is a handle for the opaque CGColorConversionInfoRef type.
+type CGColorConversionInfoRef struct{ obj.Object }
+
+// IsNil reports whether CGColorConversionInfoRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGColorConversionInfoRef) IsNil() bool { return h.Object == nil }
+
+// CGColorRef is a handle for the opaque CGColorRef type.
+type CGColorRef struct{ obj.Object }
+
+// IsNil reports whether CGColorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGColorRef) IsNil() bool { return h.Object == nil }
+
+// CGColorSpaceRef is a handle for the opaque CGColorSpaceRef type.
+type CGColorSpaceRef struct{ obj.Object }
+
+// IsNil reports whether CGColorSpaceRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGColorSpaceRef) IsNil() bool { return h.Object == nil }
+
+// CGContextRef is a handle for the opaque CGContextRef type.
+type CGContextRef struct{ obj.Object }
+
+// IsNil reports whether CGContextRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGContextRef) IsNil() bool { return h.Object == nil }
+
+// CGDataConsumerRef is a handle for the opaque CGDataConsumerRef type.
+type CGDataConsumerRef struct{ obj.Object }
+
+// IsNil reports whether CGDataConsumerRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGDataConsumerRef) IsNil() bool { return h.Object == nil }
+
+// CGDataProviderRef is a handle for the opaque CGDataProviderRef type.
+type CGDataProviderRef struct{ obj.Object }
+
+// IsNil reports whether CGDataProviderRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGDataProviderRef) IsNil() bool { return h.Object == nil }
+
+// CGDisplayModeRef is a handle for the opaque CGDisplayModeRef type.
+type CGDisplayModeRef struct{ obj.Object }
+
+// IsNil reports whether CGDisplayModeRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGDisplayModeRef) IsNil() bool { return h.Object == nil }
+
+// CGDisplayStreamRef is a handle for the opaque CGDisplayStreamRef type.
+type CGDisplayStreamRef struct{ obj.Object }
+
+// IsNil reports whether CGDisplayStreamRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGDisplayStreamRef) IsNil() bool { return h.Object == nil }
+
+// CGDisplayStreamUpdateRef is a handle for the opaque CGDisplayStreamUpdateRef type.
+type CGDisplayStreamUpdateRef struct{ obj.Object }
+
+// IsNil reports whether CGDisplayStreamUpdateRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGDisplayStreamUpdateRef) IsNil() bool { return h.Object == nil }
+
+// CGEventRef is a handle for the opaque CGEventRef type.
+type CGEventRef struct{ obj.Object }
+
+// IsNil reports whether CGEventRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGEventRef) IsNil() bool { return h.Object == nil }
+
+// CGEventSourceRef is a handle for the opaque CGEventSourceRef type.
+type CGEventSourceRef struct{ obj.Object }
+
+// IsNil reports whether CGEventSourceRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGEventSourceRef) IsNil() bool { return h.Object == nil }
+
+// CGFontRef is a handle for the opaque CGFontRef type.
+type CGFontRef struct{ obj.Object }
+
+// IsNil reports whether CGFontRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGFontRef) IsNil() bool { return h.Object == nil }
+
+// CGFunctionRef is a handle for the opaque CGFunctionRef type.
+type CGFunctionRef struct{ obj.Object }
+
+// IsNil reports whether CGFunctionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGFunctionRef) IsNil() bool { return h.Object == nil }
+
+// CGGradientRef is a handle for the opaque CGGradientRef type.
+type CGGradientRef struct{ obj.Object }
+
+// IsNil reports whether CGGradientRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGGradientRef) IsNil() bool { return h.Object == nil }
+
+// CGImageDestinationRef is a handle for the opaque CGImageDestinationRef type.
+type CGImageDestinationRef struct{ obj.Object }
+
+// IsNil reports whether CGImageDestinationRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGImageDestinationRef) IsNil() bool { return h.Object == nil }
+
+// CGImageMetadataRef is a handle for the opaque CGImageMetadataRef type.
+type CGImageMetadataRef struct{ obj.Object }
+
+// IsNil reports whether CGImageMetadataRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGImageMetadataRef) IsNil() bool { return h.Object == nil }
+
+// CGImageMetadataTagRef is a handle for the opaque CGImageMetadataTagRef type.
+type CGImageMetadataTagRef struct{ obj.Object }
+
+// IsNil reports whether CGImageMetadataTagRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGImageMetadataTagRef) IsNil() bool { return h.Object == nil }
+
+// CGImageRef is a handle for the opaque CGImageRef type.
+type CGImageRef struct{ obj.Object }
+
+// IsNil reports whether CGImageRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGImageRef) IsNil() bool { return h.Object == nil }
+
+// CGImageSourceRef is a handle for the opaque CGImageSourceRef type.
+type CGImageSourceRef struct{ obj.Object }
+
+// IsNil reports whether CGImageSourceRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGImageSourceRef) IsNil() bool { return h.Object == nil }
+
+// CGLayerRef is a handle for the opaque CGLayerRef type.
+type CGLayerRef struct{ obj.Object }
+
+// IsNil reports whether CGLayerRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGLayerRef) IsNil() bool { return h.Object == nil }
+
+// CGMutableImageMetadataRef is a handle for the opaque CGMutableImageMetadataRef type.
+type CGMutableImageMetadataRef struct{ obj.Object }
+
+// IsNil reports whether CGMutableImageMetadataRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGMutableImageMetadataRef) IsNil() bool { return h.Object == nil }
+
+// CGMutablePathRef is a handle for the opaque CGMutablePathRef type.
+type CGMutablePathRef struct{ obj.Object }
+
+// IsNil reports whether CGMutablePathRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGMutablePathRef) IsNil() bool { return h.Object == nil }
+
+// CGPDFArrayRef is a handle for the opaque CGPDFArrayRef type.
+type CGPDFArrayRef struct{ obj.Object }
+
+// IsNil reports whether CGPDFArrayRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPDFArrayRef) IsNil() bool { return h.Object == nil }
+
+// CGPDFContentStreamRef is a handle for the opaque CGPDFContentStreamRef type.
+type CGPDFContentStreamRef struct{ obj.Object }
+
+// IsNil reports whether CGPDFContentStreamRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPDFContentStreamRef) IsNil() bool { return h.Object == nil }
+
+// CGPDFDictionaryRef is a handle for the opaque CGPDFDictionaryRef type.
+type CGPDFDictionaryRef struct{ obj.Object }
+
+// IsNil reports whether CGPDFDictionaryRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPDFDictionaryRef) IsNil() bool { return h.Object == nil }
+
+// CGPDFDocumentRef is a handle for the opaque CGPDFDocumentRef type.
+type CGPDFDocumentRef struct{ obj.Object }
+
+// IsNil reports whether CGPDFDocumentRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPDFDocumentRef) IsNil() bool { return h.Object == nil }
+
+// CGPDFObjectRef is a handle for the opaque CGPDFObjectRef type.
+type CGPDFObjectRef struct{ obj.Object }
+
+// IsNil reports whether CGPDFObjectRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPDFObjectRef) IsNil() bool { return h.Object == nil }
+
+// CGPDFOperatorTableRef is a handle for the opaque CGPDFOperatorTableRef type.
+type CGPDFOperatorTableRef struct{ obj.Object }
+
+// IsNil reports whether CGPDFOperatorTableRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPDFOperatorTableRef) IsNil() bool { return h.Object == nil }
+
+// CGPDFPageRef is a handle for the opaque CGPDFPageRef type.
+type CGPDFPageRef struct{ obj.Object }
+
+// IsNil reports whether CGPDFPageRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPDFPageRef) IsNil() bool { return h.Object == nil }
+
+// CGPDFScannerRef is a handle for the opaque CGPDFScannerRef type.
+type CGPDFScannerRef struct{ obj.Object }
+
+// IsNil reports whether CGPDFScannerRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPDFScannerRef) IsNil() bool { return h.Object == nil }
+
+// CGPDFStreamRef is a handle for the opaque CGPDFStreamRef type.
+type CGPDFStreamRef struct{ obj.Object }
+
+// IsNil reports whether CGPDFStreamRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPDFStreamRef) IsNil() bool { return h.Object == nil }
+
+// CGPDFStringRef is a handle for the opaque CGPDFStringRef type.
+type CGPDFStringRef struct{ obj.Object }
+
+// IsNil reports whether CGPDFStringRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPDFStringRef) IsNil() bool { return h.Object == nil }
+
+// CGPSConverterRef is a handle for the opaque CGPSConverterRef type.
+type CGPSConverterRef struct{ obj.Object }
+
+// IsNil reports whether CGPSConverterRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPSConverterRef) IsNil() bool { return h.Object == nil }
+
+// CGPathRef is a handle for the opaque CGPathRef type.
+type CGPathRef struct{ obj.Object }
+
+// IsNil reports whether CGPathRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPathRef) IsNil() bool { return h.Object == nil }
+
+// CGPatternRef is a handle for the opaque CGPatternRef type.
+type CGPatternRef struct{ obj.Object }
+
+// IsNil reports whether CGPatternRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGPatternRef) IsNil() bool { return h.Object == nil }
+
+// CGRenderingBufferProviderRef is a handle for the opaque CGRenderingBufferProviderRef type.
+type CGRenderingBufferProviderRef struct{ obj.Object }
+
+// IsNil reports whether CGRenderingBufferProviderRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGRenderingBufferProviderRef) IsNil() bool { return h.Object == nil }
+
+// CGShadingRef is a handle for the opaque CGShadingRef type.
+type CGShadingRef struct{ obj.Object }
+
+// IsNil reports whether CGShadingRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CGShadingRef) IsNil() bool { return h.Object == nil }
+
+// IOSurfaceRef is a handle for the opaque IOSurfaceRef type.
+type IOSurfaceRef struct{ obj.Object }
+
+// IsNil reports whether IOSurfaceRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h IOSurfaceRef) IsNil() bool { return h.Object == nil }

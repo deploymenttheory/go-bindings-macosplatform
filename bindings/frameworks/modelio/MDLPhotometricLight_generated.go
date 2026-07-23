@@ -7,8 +7,8 @@ package modelio
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
 	"github.com/ebitengine/purego/objc"
@@ -57,9 +57,9 @@ func NewPhotometricLightWithIESProfile(url string) *PhotometricLight {
 }
 
 // WithColor sets the color of the light source.
-func (pl *PhotometricLight) WithColor(color obj.Object) *PhotometricLight {
+func (pl *PhotometricLight) WithColor(color coregraphics.CGColorRef) *PhotometricLight {
 	defer runtime.KeepAlive(color)
-	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setColor:"), objref.IDOf(color))
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setColor:"), objref.IDOf(color.Object))
 	return pl
 }
 

@@ -40,9 +40,9 @@ func CurrentArguments() obj.Object {
 }
 
 // ContextWithJSGlobalContextRef create a JSContext, wrapping its C API counterpart.
-func ContextWithJSGlobalContextRef(jsGlobalContextRef obj.Object) *Context {
+func ContextWithJSGlobalContextRef(jsGlobalContextRef JSGlobalContextRef) *Context {
 	defer runtime.KeepAlive(jsGlobalContextRef)
-	_r := objc.Send[objc.ID](objc.ID(_class("JSContext")), objc.RegisterName("contextWithJSGlobalContextRef:"), objref.IDOf(jsGlobalContextRef))
+	_r := objc.Send[objc.ID](objc.ID(_class("JSContext")), objc.RegisterName("contextWithJSGlobalContextRef:"), objref.IDOf(jsGlobalContextRef.Object))
 	return ContextFromID(_r)
 }
 
@@ -226,9 +226,9 @@ func ValueWithSizeInContext(size corefoundation.CGSize, context_ *Context) *Valu
 }
 
 // ValueWithJSValueRefInContext creates a JSValue, wrapping its C API counterpart.
-func ValueWithJSValueRefInContext(value obj.Object, context_ *Context) *Value {
+func ValueWithJSValueRefInContext(value JSValueRef, context_ *Context) *Value {
 	defer runtime.KeepAlive(value)
 	defer runtime.KeepAlive(context_)
-	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithJSValueRef:inContext:"), objref.IDOf(value), objref.IDOf(context_))
+	_r := objc.Send[objc.ID](objc.ID(_class("JSValue")), objc.RegisterName("valueWithJSValueRef:inContext:"), objref.IDOf(value.Object), objref.IDOf(context_))
 	return ValueFromID(_r)
 }

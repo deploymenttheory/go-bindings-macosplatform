@@ -5,6 +5,7 @@
 package imagekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
@@ -15,8 +16,8 @@ type FilterCustomUIProvider interface {
 
 // ImageEditPanelDataSource is the Go form of the Objective-C protocol IKImageEditPanelDataSource.
 type ImageEditPanelDataSource interface {
-	SetImageImageProperties(image obj.Object, metaData obj.Object)
-	Image() obj.Object
+	SetImageImageProperties(image coregraphics.CGImageRef, metaData obj.Object)
+	Image() coregraphics.CGImageRef
 }
 
 // SlideshowDataSource is the Go form of the Objective-C protocol IKSlideshowDataSource.

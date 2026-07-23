@@ -9,6 +9,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -112,7 +113,7 @@ func (sa *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL str
 // AnalyzeCGImage analyzes an image for sensitive content and runs code on completion.
 //
 // AnalyzeCGImage blocks until the operation completes or ctx is cancelled.
-func (sa *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image obj.Object) (result *SensitivityAnalysis, err error) {
+func (sa *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image coregraphics.CGImageRef) (result *SensitivityAnalysis, err error) {
 	defer runtime.KeepAlive(sa)
 	defer runtime.KeepAlive(image)
 	type _result struct {
@@ -126,7 +127,7 @@ func (sa *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image obj.Obj
 		_o.val = SensitivityAnalysisFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("analyzeCGImage:completionHandler:"), objref.IDOf(image), _block)
+	objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("analyzeCGImage:completionHandler:"), objref.IDOf(image.Object), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

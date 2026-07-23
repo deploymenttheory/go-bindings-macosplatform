@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
@@ -26,7 +27,7 @@ type ImageProcessorInput interface {
 	BytesPerRow() int
 	Format() int
 	BaseAddress() unsafe.Pointer
-	Surface() obj.Object
+	Surface() coregraphics.IOSurfaceRef
 	PixelBuffer() unsafe.Pointer
 	MetalTexture() obj.Object
 	Digest() uint64
@@ -40,7 +41,7 @@ type ImageProcessorOutput interface {
 	BytesPerRow() int
 	Format() int
 	BaseAddress() unsafe.Pointer
-	Surface() obj.Object
+	Surface() coregraphics.IOSurfaceRef
 	PixelBuffer() unsafe.Pointer
 	MetalTexture() obj.Object
 	MetalCommandBuffer() obj.Object

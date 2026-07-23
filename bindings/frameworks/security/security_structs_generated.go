@@ -6,6 +6,8 @@ package security
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type AuditTokenT struct {
@@ -2254,3 +2256,206 @@ type SecAsn1Oid = CssmData
 
 // SecAsn1Template is an alias for the SecAsn1Template_struct value type.
 type SecAsn1Template = SecAsn1Template_struct
+
+// AuthorizationRef is a handle for the opaque AuthorizationRef type.
+type AuthorizationRef struct{ obj.Object }
+
+// IsNil reports whether AuthorizationRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AuthorizationRef) IsNil() bool { return h.Object == nil }
+
+// CMSDecoderRef is a handle for the opaque CMSDecoderRef type.
+type CMSDecoderRef struct{ obj.Object }
+
+// IsNil reports whether CMSDecoderRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMSDecoderRef) IsNil() bool { return h.Object == nil }
+
+// CMSEncoderRef is a handle for the opaque CMSEncoderRef type.
+type CMSEncoderRef struct{ obj.Object }
+
+// IsNil reports whether CMSEncoderRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMSEncoderRef) IsNil() bool { return h.Object == nil }
+
+// OpaqueSecAccessRef is a handle for the opaque OpaqueSecAccessRef type.
+type OpaqueSecAccessRef struct{ obj.Object }
+
+// IsNil reports whether OpaqueSecAccessRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h OpaqueSecAccessRef) IsNil() bool { return h.Object == nil }
+
+// OpaqueSecCertificateRef is a handle for the opaque OpaqueSecCertificateRef type.
+type OpaqueSecCertificateRef struct{ obj.Object }
+
+// IsNil reports whether OpaqueSecCertificateRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h OpaqueSecCertificateRef) IsNil() bool { return h.Object == nil }
+
+// OpaqueSecIdentityRef is a handle for the opaque OpaqueSecIdentityRef type.
+type OpaqueSecIdentityRef struct{ obj.Object }
+
+// IsNil reports whether OpaqueSecIdentityRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h OpaqueSecIdentityRef) IsNil() bool { return h.Object == nil }
+
+// OpaqueSecKeyRef is a handle for the opaque OpaqueSecKeyRef type.
+type OpaqueSecKeyRef struct{ obj.Object }
+
+// IsNil reports whether OpaqueSecKeyRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h OpaqueSecKeyRef) IsNil() bool { return h.Object == nil }
+
+// SSLContextRef is a handle for the opaque SSLContextRef type.
+type SSLContextRef struct{ obj.Object }
+
+// IsNil reports whether SSLContextRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SSLContextRef) IsNil() bool { return h.Object == nil }
+
+// SecACLRef is a handle for the opaque SecACLRef type.
+type SecACLRef struct{ obj.Object }
+
+// IsNil reports whether SecACLRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecACLRef) IsNil() bool { return h.Object == nil }
+
+// SecAccessControlRef is a handle for the opaque SecAccessControlRef type.
+type SecAccessControlRef struct{ obj.Object }
+
+// IsNil reports whether SecAccessControlRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecAccessControlRef) IsNil() bool { return h.Object == nil }
+
+// SecAccessRef is a handle for the opaque SecAccessRef type.
+type SecAccessRef struct{ obj.Object }
+
+// IsNil reports whether SecAccessRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecAccessRef) IsNil() bool { return h.Object == nil }
+
+// SecCertificateRef is a handle for the opaque SecCertificateRef type.
+type SecCertificateRef struct{ obj.Object }
+
+// IsNil reports whether SecCertificateRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecCertificateRef) IsNil() bool { return h.Object == nil }
+
+// SecCodeRef is a handle for the opaque SecCodeRef type.
+type SecCodeRef struct{ obj.Object }
+
+// IsNil reports whether SecCodeRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecCodeRef) IsNil() bool { return h.Object == nil }
+
+// SecIdentityRef is a handle for the opaque SecIdentityRef type.
+type SecIdentityRef struct{ obj.Object }
+
+// IsNil reports whether SecIdentityRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecIdentityRef) IsNil() bool { return h.Object == nil }
+
+// SecIdentitySearchRef is a handle for the opaque SecIdentitySearchRef type.
+type SecIdentitySearchRef struct{ obj.Object }
+
+// IsNil reports whether SecIdentitySearchRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecIdentitySearchRef) IsNil() bool { return h.Object == nil }
+
+// SecKeyRef is a handle for the opaque SecKeyRef type.
+type SecKeyRef struct{ obj.Object }
+
+// IsNil reports whether SecKeyRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecKeyRef) IsNil() bool { return h.Object == nil }
+
+// SecKeychainItemRef is a handle for the opaque SecKeychainItemRef type.
+type SecKeychainItemRef struct{ obj.Object }
+
+// IsNil reports whether SecKeychainItemRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecKeychainItemRef) IsNil() bool { return h.Object == nil }
+
+// SecKeychainRef is a handle for the opaque SecKeychainRef type.
+type SecKeychainRef struct{ obj.Object }
+
+// IsNil reports whether SecKeychainRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecKeychainRef) IsNil() bool { return h.Object == nil }
+
+// SecKeychainSearchRef is a handle for the opaque SecKeychainSearchRef type.
+type SecKeychainSearchRef struct{ obj.Object }
+
+// IsNil reports whether SecKeychainSearchRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecKeychainSearchRef) IsNil() bool { return h.Object == nil }
+
+// SecPasswordRef is a handle for the opaque SecPasswordRef type.
+type SecPasswordRef struct{ obj.Object }
+
+// IsNil reports whether SecPasswordRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecPasswordRef) IsNil() bool { return h.Object == nil }
+
+// SecPolicyRef is a handle for the opaque SecPolicyRef type.
+type SecPolicyRef struct{ obj.Object }
+
+// IsNil reports whether SecPolicyRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecPolicyRef) IsNil() bool { return h.Object == nil }
+
+// SecPolicySearchRef is a handle for the opaque SecPolicySearchRef type.
+type SecPolicySearchRef struct{ obj.Object }
+
+// IsNil reports whether SecPolicySearchRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecPolicySearchRef) IsNil() bool { return h.Object == nil }
+
+// SecRandomRef is a handle for the opaque SecRandomRef type.
+type SecRandomRef struct{ obj.Object }
+
+// IsNil reports whether SecRandomRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecRandomRef) IsNil() bool { return h.Object == nil }
+
+// SecRequirementRef is a handle for the opaque SecRequirementRef type.
+type SecRequirementRef struct{ obj.Object }
+
+// IsNil reports whether SecRequirementRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecRequirementRef) IsNil() bool { return h.Object == nil }
+
+// SecStaticCodeRef is a handle for the opaque SecStaticCodeRef type.
+type SecStaticCodeRef struct{ obj.Object }
+
+// IsNil reports whether SecStaticCodeRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecStaticCodeRef) IsNil() bool { return h.Object == nil }
+
+// SecTaskRef is a handle for the opaque SecTaskRef type.
+type SecTaskRef struct{ obj.Object }
+
+// IsNil reports whether SecTaskRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecTaskRef) IsNil() bool { return h.Object == nil }
+
+// SecTransformImplementationRef is a handle for the opaque SecTransformImplementationRef type.
+type SecTransformImplementationRef struct{ obj.Object }
+
+// IsNil reports whether SecTransformImplementationRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecTransformImplementationRef) IsNil() bool { return h.Object == nil }
+
+// SecTrustRef is a handle for the opaque SecTrustRef type.
+type SecTrustRef struct{ obj.Object }
+
+// IsNil reports whether SecTrustRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecTrustRef) IsNil() bool { return h.Object == nil }
+
+// SecTrustedApplicationRef is a handle for the opaque SecTrustedApplicationRef type.
+type SecTrustedApplicationRef struct{ obj.Object }
+
+// IsNil reports whether SecTrustedApplicationRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SecTrustedApplicationRef) IsNil() bool { return h.Object == nil }

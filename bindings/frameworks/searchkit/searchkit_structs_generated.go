@@ -4,6 +4,10 @@
 
 package searchkit
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 type SKIndex struct{}
 
 type SKIndexDocumentIterator struct{}
@@ -15,3 +19,45 @@ type SKSearchGroup struct{}
 type SKSearchResults struct{}
 
 type SKSummary struct{}
+
+// SKIndexDocumentIteratorRef is a handle for the opaque SKIndexDocumentIteratorRef type.
+type SKIndexDocumentIteratorRef struct{ obj.Object }
+
+// IsNil reports whether SKIndexDocumentIteratorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SKIndexDocumentIteratorRef) IsNil() bool { return h.Object == nil }
+
+// SKIndexRef is a handle for the opaque SKIndexRef type.
+type SKIndexRef struct{ obj.Object }
+
+// IsNil reports whether SKIndexRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SKIndexRef) IsNil() bool { return h.Object == nil }
+
+// SKSearchGroupRef is a handle for the opaque SKSearchGroupRef type.
+type SKSearchGroupRef struct{ obj.Object }
+
+// IsNil reports whether SKSearchGroupRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SKSearchGroupRef) IsNil() bool { return h.Object == nil }
+
+// SKSearchRef is a handle for the opaque SKSearchRef type.
+type SKSearchRef struct{ obj.Object }
+
+// IsNil reports whether SKSearchRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SKSearchRef) IsNil() bool { return h.Object == nil }
+
+// SKSearchResultsRef is a handle for the opaque SKSearchResultsRef type.
+type SKSearchResultsRef struct{ obj.Object }
+
+// IsNil reports whether SKSearchResultsRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SKSearchResultsRef) IsNil() bool { return h.Object == nil }
+
+// SKSummaryRef is a handle for the opaque SKSummaryRef type.
+type SKSummaryRef struct{ obj.Object }
+
+// IsNil reports whether SKSummaryRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SKSummaryRef) IsNil() bool { return h.Object == nil }

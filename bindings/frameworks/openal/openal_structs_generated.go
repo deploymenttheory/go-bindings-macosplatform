@@ -4,6 +4,24 @@
 
 package openal
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 type ALCcontext_struct struct{}
 
 type ALCdevice_struct struct{}
+
+// ALCcontext is a handle for the opaque ALCcontext type.
+type ALCcontext struct{ obj.Object }
+
+// IsNil reports whether ALCcontext is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ALCcontext) IsNil() bool { return h.Object == nil }
+
+// ALCdevice is a handle for the opaque ALCdevice type.
+type ALCdevice struct{ obj.Object }
+
+// IsNil reports whether ALCdevice is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ALCdevice) IsNil() bool { return h.Object == nil }

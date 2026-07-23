@@ -6,6 +6,8 @@ package videotoolbox
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type CMVideoDimensions struct {
@@ -51,3 +53,66 @@ type VTInt32Size struct {
 	Width  int32
 	Height int32
 }
+
+// VTCompressionSessionRef is a handle for the opaque VTCompressionSessionRef type.
+type VTCompressionSessionRef struct{ obj.Object }
+
+// IsNil reports whether VTCompressionSessionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VTCompressionSessionRef) IsNil() bool { return h.Object == nil }
+
+// VTDecompressionSessionRef is a handle for the opaque VTDecompressionSessionRef type.
+type VTDecompressionSessionRef struct{ obj.Object }
+
+// IsNil reports whether VTDecompressionSessionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VTDecompressionSessionRef) IsNil() bool { return h.Object == nil }
+
+// VTFrameSiloRef is a handle for the opaque VTFrameSiloRef type.
+type VTFrameSiloRef struct{ obj.Object }
+
+// IsNil reports whether VTFrameSiloRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VTFrameSiloRef) IsNil() bool { return h.Object == nil }
+
+// VTHDRPerFrameMetadataGenerationSessionRef is a handle for the opaque VTHDRPerFrameMetadataGenerationSessionRef type.
+type VTHDRPerFrameMetadataGenerationSessionRef struct{ obj.Object }
+
+// IsNil reports whether VTHDRPerFrameMetadataGenerationSessionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VTHDRPerFrameMetadataGenerationSessionRef) IsNil() bool { return h.Object == nil }
+
+// VTMotionEstimationSessionRef is a handle for the opaque VTMotionEstimationSessionRef type.
+type VTMotionEstimationSessionRef struct{ obj.Object }
+
+// IsNil reports whether VTMotionEstimationSessionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VTMotionEstimationSessionRef) IsNil() bool { return h.Object == nil }
+
+// VTMultiPassStorageRef is a handle for the opaque VTMultiPassStorageRef type.
+type VTMultiPassStorageRef struct{ obj.Object }
+
+// IsNil reports whether VTMultiPassStorageRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VTMultiPassStorageRef) IsNil() bool { return h.Object == nil }
+
+// VTPixelRotationSessionRef is a handle for the opaque VTPixelRotationSessionRef type.
+type VTPixelRotationSessionRef struct{ obj.Object }
+
+// IsNil reports whether VTPixelRotationSessionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VTPixelRotationSessionRef) IsNil() bool { return h.Object == nil }
+
+// VTPixelTransferSessionRef is a handle for the opaque VTPixelTransferSessionRef type.
+type VTPixelTransferSessionRef struct{ obj.Object }
+
+// IsNil reports whether VTPixelTransferSessionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VTPixelTransferSessionRef) IsNil() bool { return h.Object == nil }
+
+// VTRAWProcessingSessionRef is a handle for the opaque VTRAWProcessingSessionRef type.
+type VTRAWProcessingSessionRef struct{ obj.Object }
+
+// IsNil reports whether VTRAWProcessingSessionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VTRAWProcessingSessionRef) IsNil() bool { return h.Object == nil }

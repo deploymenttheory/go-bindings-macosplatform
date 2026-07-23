@@ -6,6 +6,8 @@ package systemconfiguration
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // This is the type of a reference to an object that represents the status of an Ethernet Bond interface.
@@ -70,3 +72,66 @@ type SCPreferencesContext struct {
 	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
+
+// SCBondStatusRef is a handle for the opaque SCBondStatusRef type.
+type SCBondStatusRef struct{ obj.Object }
+
+// IsNil reports whether SCBondStatusRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SCBondStatusRef) IsNil() bool { return h.Object == nil }
+
+// SCDynamicStoreRef is a handle for the opaque SCDynamicStoreRef type.
+type SCDynamicStoreRef struct{ obj.Object }
+
+// IsNil reports whether SCDynamicStoreRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SCDynamicStoreRef) IsNil() bool { return h.Object == nil }
+
+// SCNetworkConnectionRef is a handle for the opaque SCNetworkConnectionRef type.
+type SCNetworkConnectionRef struct{ obj.Object }
+
+// IsNil reports whether SCNetworkConnectionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SCNetworkConnectionRef) IsNil() bool { return h.Object == nil }
+
+// SCNetworkInterfaceRef is a handle for the opaque SCNetworkInterfaceRef type.
+type SCNetworkInterfaceRef struct{ obj.Object }
+
+// IsNil reports whether SCNetworkInterfaceRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SCNetworkInterfaceRef) IsNil() bool { return h.Object == nil }
+
+// SCNetworkProtocolRef is a handle for the opaque SCNetworkProtocolRef type.
+type SCNetworkProtocolRef struct{ obj.Object }
+
+// IsNil reports whether SCNetworkProtocolRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SCNetworkProtocolRef) IsNil() bool { return h.Object == nil }
+
+// SCNetworkReachabilityRef is a handle for the opaque SCNetworkReachabilityRef type.
+type SCNetworkReachabilityRef struct{ obj.Object }
+
+// IsNil reports whether SCNetworkReachabilityRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SCNetworkReachabilityRef) IsNil() bool { return h.Object == nil }
+
+// SCNetworkServiceRef is a handle for the opaque SCNetworkServiceRef type.
+type SCNetworkServiceRef struct{ obj.Object }
+
+// IsNil reports whether SCNetworkServiceRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SCNetworkServiceRef) IsNil() bool { return h.Object == nil }
+
+// SCNetworkSetRef is a handle for the opaque SCNetworkSetRef type.
+type SCNetworkSetRef struct{ obj.Object }
+
+// IsNil reports whether SCNetworkSetRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SCNetworkSetRef) IsNil() bool { return h.Object == nil }
+
+// SCPreferencesRef is a handle for the opaque SCPreferencesRef type.
+type SCPreferencesRef struct{ obj.Object }
+
+// IsNil reports whether SCPreferencesRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SCPreferencesRef) IsNil() bool { return h.Object == nil }

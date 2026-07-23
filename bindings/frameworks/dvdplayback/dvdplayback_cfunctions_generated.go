@@ -10,7 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -739,13 +738,13 @@ func DVDIsValidMediaRef(inRef *carboncore.FSRef) (result int, outIsValid uint8) 
 var _fnDVDIsValidMediaURL func(objc.ID, unsafe.Pointer) int32
 
 // DVDIsValidMediaURL calls the DVDPlayback framework function DVDIsValidMediaURL.
-func DVDIsValidMediaURL(inRef obj.Object) (result int, outIsValid uint8) {
+func DVDIsValidMediaURL(inRef corefoundation.CFURLRef) (result int, outIsValid uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDVDIsValidMediaURL == nil {
 		ebipurego.RegisterLibFunc(&_fnDVDIsValidMediaURL, _lib, "DVDIsValidMediaURL")
 	}
 	var _out0 uint8
-	_ret := int(_fnDVDIsValidMediaURL(objref.IDOf(inRef), unsafe.Pointer(&_out0)))
+	_ret := int(_fnDVDIsValidMediaURL(objref.IDOf(inRef.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 

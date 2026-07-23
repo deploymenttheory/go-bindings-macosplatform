@@ -7,6 +7,7 @@ package cfnetwork
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -17,13 +18,13 @@ import (
 // CFNetworkCopyProxiesForAutoConfigurationScript reports an error if the CFNetwork framework function CFNetworkCopyProxiesForAutoConfigurationScript fails.
 var _fnCFNetworkCopyProxiesForAutoConfigurationScript func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func CFNetworkCopyProxiesForAutoConfigurationScript(proxyAutoConfigurationScript obj.Object, targetURL obj.Object) (obj.Object, error) {
+func CFNetworkCopyProxiesForAutoConfigurationScript(proxyAutoConfigurationScript corefoundation.CFStringRef, targetURL corefoundation.CFURLRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetworkCopyProxiesForAutoConfigurationScript == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetworkCopyProxiesForAutoConfigurationScript, _lib, "CFNetworkCopyProxiesForAutoConfigurationScript")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnCFNetworkCopyProxiesForAutoConfigurationScript(objref.IDOf(proxyAutoConfigurationScript), objref.IDOf(targetURL), unsafe.Pointer(&_cfErr))
+	_r := _fnCFNetworkCopyProxiesForAutoConfigurationScript(objref.IDOf(proxyAutoConfigurationScript.Object), objref.IDOf(targetURL.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}

@@ -495,13 +495,13 @@ func IOThreadLocalStorageSet(key uint64, value unsafe.Pointer) int {
 var _fnOSArrayAppendValue func(unsafe.Pointer, objc.ID) bool
 
 // OSArrayAppendValue calls the DriverKit framework function OSArrayAppendValue.
-func OSArrayAppendValue(value obj.Object) (ok bool, object int32) {
+func OSArrayAppendValue(value OSObjectPtr) (ok bool, object int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSArrayAppendValue == nil {
 		ebipurego.RegisterLibFunc(&_fnOSArrayAppendValue, _lib, "OSArrayAppendValue")
 	}
 	var _out0 int32
-	_ret := _fnOSArrayAppendValue(unsafe.Pointer(&_out0), objref.IDOf(value))
+	_ret := _fnOSArrayAppendValue(unsafe.Pointer(&_out0), objref.IDOf(value.Object))
 	return _ret, _out0
 }
 
@@ -571,26 +571,26 @@ func OSArrayGetUInt64Value(index int) (result uint64, object int32) {
 var _fnOSArrayGetValue func(unsafe.Pointer, int) objc.ID
 
 // OSArrayGetValue calls the DriverKit framework function OSArrayGetValue.
-func OSArrayGetValue(index int) (result obj.Object, object int32) {
+func OSArrayGetValue(index int) (result OSObjectPtr, object int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSArrayGetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnOSArrayGetValue, _lib, "OSArrayGetValue")
 	}
 	var _out0 int32
 	_ret := _fnOSArrayGetValue(unsafe.Pointer(&_out0), index)
-	return obj.WrapUnmanaged(_ret), _out0
+	return OSObjectPtr{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnOSArrayReplaceValue func(unsafe.Pointer, int, objc.ID) bool
 
 // OSArrayReplaceValue calls the DriverKit framework function OSArrayReplaceValue.
-func OSArrayReplaceValue(index int, value obj.Object) (ok bool, object int32) {
+func OSArrayReplaceValue(index int, value OSObjectPtr) (ok bool, object int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSArrayReplaceValue == nil {
 		ebipurego.RegisterLibFunc(&_fnOSArrayReplaceValue, _lib, "OSArrayReplaceValue")
 	}
 	var _out0 int32
-	_ret := _fnOSArrayReplaceValue(unsafe.Pointer(&_out0), index, objref.IDOf(value))
+	_ret := _fnOSArrayReplaceValue(unsafe.Pointer(&_out0), index, objref.IDOf(value.Object))
 	return _ret, _out0
 }
 
@@ -623,25 +623,25 @@ func OSArraySetUInt64Value(index int, value uint64) (object int32) {
 var _fnOSArraySetValue func(unsafe.Pointer, int, objc.ID) bool
 
 // OSArraySetValue calls the DriverKit framework function OSArraySetValue.
-func OSArraySetValue(index int, value obj.Object) (ok bool, object int32) {
+func OSArraySetValue(index int, value OSObjectPtr) (ok bool, object int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSArraySetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnOSArraySetValue, _lib, "OSArraySetValue")
 	}
 	var _out0 int32
-	_ret := _fnOSArraySetValue(unsafe.Pointer(&_out0), index, objref.IDOf(value))
+	_ret := _fnOSArraySetValue(unsafe.Pointer(&_out0), index, objref.IDOf(value.Object))
 	return _ret, _out0
 }
 
 var _fnOSCollectionTypeID func(objc.ID) uint64
 
 // OSCollectionTypeID calls the DriverKit framework function OSCollectionTypeID.
-func OSCollectionTypeID(object obj.Object) uint64 {
+func OSCollectionTypeID(object OSObjectPtr) uint64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSCollectionTypeID == nil {
 		ebipurego.RegisterLibFunc(&_fnOSCollectionTypeID, _lib, "OSCollectionTypeID")
 	}
-	return _fnOSCollectionTypeID(objref.IDOf(object))
+	return _fnOSCollectionTypeID(objref.IDOf(object.Object))
 }
 
 var _fnOSCollectionTypeName func(uint64) string
@@ -669,14 +669,14 @@ func OSCollectionsInitialize() {
 var _fnOSCreateObjectFromSerialization func(unsafe.Pointer) objc.ID
 
 // OSCreateObjectFromSerialization calls the DriverKit framework function OSCreateObjectFromSerialization.
-func OSCreateObjectFromSerialization() (result obj.Object, serial int32) {
+func OSCreateObjectFromSerialization() (result OSObjectPtr, serial int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSCreateObjectFromSerialization == nil {
 		ebipurego.RegisterLibFunc(&_fnOSCreateObjectFromSerialization, _lib, "OSCreateObjectFromSerialization")
 	}
 	var _out0 int32
 	_ret := _fnOSCreateObjectFromSerialization(unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	return OSObjectPtr{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnOSCreateSerializationFromBytes func(unsafe.Pointer, int, objc.Block) unsafe.Pointer
@@ -693,12 +693,12 @@ func OSCreateSerializationFromBytes(data unsafe.Pointer, length int, freeBuffer 
 var _fnOSCreateSerializationFromObject func(objc.ID) unsafe.Pointer
 
 // OSCreateSerializationFromObject calls the DriverKit framework function OSCreateSerializationFromObject.
-func OSCreateSerializationFromObject(object obj.Object) unsafe.Pointer {
+func OSCreateSerializationFromObject(object OSObjectPtr) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSCreateSerializationFromObject == nil {
 		ebipurego.RegisterLibFunc(&_fnOSCreateSerializationFromObject, _lib, "OSCreateSerializationFromObject")
 	}
-	return _fnOSCreateSerializationFromObject(objref.IDOf(object))
+	return _fnOSCreateSerializationFromObject(objref.IDOf(object.Object))
 }
 
 var _fnOSDataAppendBytes func(unsafe.Pointer, unsafe.Pointer, int) bool
@@ -830,14 +830,14 @@ func OSDictionaryGetUInt64Value(key string) (result uint64, object int32) {
 var _fnOSDictionaryGetValue func(unsafe.Pointer, string) objc.ID
 
 // OSDictionaryGetValue calls the DriverKit framework function OSDictionaryGetValue.
-func OSDictionaryGetValue(key string) (result obj.Object, object int32) {
+func OSDictionaryGetValue(key string) (result OSObjectPtr, object int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSDictionaryGetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnOSDictionaryGetValue, _lib, "OSDictionaryGetValue")
 	}
 	var _out0 int32
 	_ret := _fnOSDictionaryGetValue(unsafe.Pointer(&_out0), key)
-	return obj.WrapUnmanaged(_ret), _out0
+	return OSObjectPtr{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnOSDictionarySetStringValue func(unsafe.Pointer, string, string)
@@ -869,13 +869,13 @@ func OSDictionarySetUInt64Value(key string, value uint64) (object int32) {
 var _fnOSDictionarySetValue func(unsafe.Pointer, string, objc.ID) bool
 
 // OSDictionarySetValue calls the DriverKit framework function OSDictionarySetValue.
-func OSDictionarySetValue(key string, value obj.Object) (ok bool, object int32) {
+func OSDictionarySetValue(key string, value OSObjectPtr) (ok bool, object int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSDictionarySetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnOSDictionarySetValue, _lib, "OSDictionarySetValue")
 	}
 	var _out0 int32
-	_ret := _fnOSDictionarySetValue(unsafe.Pointer(&_out0), key, objref.IDOf(value))
+	_ret := _fnOSDictionarySetValue(unsafe.Pointer(&_out0), key, objref.IDOf(value.Object))
 	return _ret, _out0
 }
 
@@ -919,34 +919,34 @@ func OSObjectAllocate(pObject obj.Object) (result int, meta int32) {
 var _fnOSObjectLog func(objc.ID)
 
 // OSObjectLog calls the DriverKit framework function OSObjectLog.
-func OSObjectLog(object obj.Object) {
+func OSObjectLog(object OSObjectPtr) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSObjectLog == nil {
 		ebipurego.RegisterLibFunc(&_fnOSObjectLog, _lib, "OSObjectLog")
 	}
-	_fnOSObjectLog(objref.IDOf(object))
+	_fnOSObjectLog(objref.IDOf(object.Object))
 }
 
 var _fnOSObjectRelease func(objc.ID)
 
 // OSObjectRelease calls the DriverKit framework function OSObjectRelease.
-func OSObjectRelease(container obj.Object) {
+func OSObjectRelease(container OSObjectPtr) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSObjectRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnOSObjectRelease, _lib, "OSObjectRelease")
 	}
-	_fnOSObjectRelease(objref.IDOf(container))
+	_fnOSObjectRelease(objref.IDOf(container.Object))
 }
 
 var _fnOSObjectRetain func(objc.ID)
 
 // OSObjectRetain calls the DriverKit framework function OSObjectRetain.
-func OSObjectRetain(container obj.Object) {
+func OSObjectRetain(container OSObjectPtr) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSObjectRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnOSObjectRetain, _lib, "OSObjectRetain")
 	}
-	_fnOSObjectRetain(objref.IDOf(container))
+	_fnOSObjectRetain(objref.IDOf(container.Object))
 }
 
 var _fnOSSerializationGetBytes func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer

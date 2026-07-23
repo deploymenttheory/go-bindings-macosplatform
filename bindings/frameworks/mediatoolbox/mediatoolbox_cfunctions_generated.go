@@ -7,6 +7,7 @@ package mediatoolbox
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -17,37 +18,37 @@ import (
 var _fnMTAudioProcessingTapCreate func(objc.ID, unsafe.Pointer, uint32, unsafe.Pointer) int32
 
 // MTAudioProcessingTapCreate calls the MediaToolbox framework function MTAudioProcessingTapCreate.
-func MTAudioProcessingTapCreate(allocator obj.Object, callbacks unsafe.Pointer, flags uint32, tapOut unsafe.Pointer) int {
+func MTAudioProcessingTapCreate(allocator corefoundation.CFAllocatorRef, callbacks unsafe.Pointer, flags uint32, tapOut unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTAudioProcessingTapCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnMTAudioProcessingTapCreate, _lib, "MTAudioProcessingTapCreate")
 	}
-	return int(_fnMTAudioProcessingTapCreate(objref.IDOf(allocator), callbacks, flags, tapOut))
+	return int(_fnMTAudioProcessingTapCreate(objref.IDOf(allocator.Object), callbacks, flags, tapOut))
 }
 
 var _fnMTAudioProcessingTapGetSourceAudio func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // MTAudioProcessingTapGetSourceAudio calls the MediaToolbox framework function MTAudioProcessingTapGetSourceAudio.
-func MTAudioProcessingTapGetSourceAudio(tap obj.Object, numberFrames int, bufferListInOut unsafe.Pointer, timeRangeOut *coremedia.CMTimeRange) (result int, flagsOut uint32, numberFramesOut int) {
+func MTAudioProcessingTapGetSourceAudio(tap MTAudioProcessingTapRef, numberFrames int, bufferListInOut unsafe.Pointer, timeRangeOut *coremedia.CMTimeRange) (result int, flagsOut uint32, numberFramesOut int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTAudioProcessingTapGetSourceAudio == nil {
 		ebipurego.RegisterLibFunc(&_fnMTAudioProcessingTapGetSourceAudio, _lib, "MTAudioProcessingTapGetSourceAudio")
 	}
 	var _out0 uint32
 	var _out1 int
-	_ret := int(_fnMTAudioProcessingTapGetSourceAudio(objref.IDOf(tap), numberFrames, bufferListInOut, unsafe.Pointer(&_out0), unsafe.Pointer(timeRangeOut), unsafe.Pointer(&_out1)))
+	_ret := int(_fnMTAudioProcessingTapGetSourceAudio(objref.IDOf(tap.Object), numberFrames, bufferListInOut, unsafe.Pointer(&_out0), unsafe.Pointer(timeRangeOut), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
 var _fnMTAudioProcessingTapGetStorage func(objc.ID) unsafe.Pointer
 
 // MTAudioProcessingTapGetStorage calls the MediaToolbox framework function MTAudioProcessingTapGetStorage.
-func MTAudioProcessingTapGetStorage(tap obj.Object) unsafe.Pointer {
+func MTAudioProcessingTapGetStorage(tap MTAudioProcessingTapRef) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTAudioProcessingTapGetStorage == nil {
 		ebipurego.RegisterLibFunc(&_fnMTAudioProcessingTapGetStorage, _lib, "MTAudioProcessingTapGetStorage")
 	}
-	return _fnMTAudioProcessingTapGetStorage(objref.IDOf(tap))
+	return _fnMTAudioProcessingTapGetStorage(objref.IDOf(tap.Object))
 }
 
 var _fnMTAudioProcessingTapGetTypeID func() int
@@ -64,25 +65,25 @@ func MTAudioProcessingTapGetTypeID() int {
 var _fnMTCopyLocalizedNameForMediaSubType func(int, int) objc.ID
 
 // MTCopyLocalizedNameForMediaSubType calls the MediaToolbox framework function MTCopyLocalizedNameForMediaSubType.
-func MTCopyLocalizedNameForMediaSubType(mediaType int, mediaSubType int) obj.Object {
+func MTCopyLocalizedNameForMediaSubType(mediaType int, mediaSubType int) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTCopyLocalizedNameForMediaSubType == nil {
 		ebipurego.RegisterLibFunc(&_fnMTCopyLocalizedNameForMediaSubType, _lib, "MTCopyLocalizedNameForMediaSubType")
 	}
 	_ret := _fnMTCopyLocalizedNameForMediaSubType(mediaType, mediaSubType)
-	return obj.Adopt(_ret)
+	return corefoundation.CFStringRef{obj.Adopt(_ret)}
 }
 
 var _fnMTCopyLocalizedNameForMediaType func(int) objc.ID
 
 // MTCopyLocalizedNameForMediaType calls the MediaToolbox framework function MTCopyLocalizedNameForMediaType.
-func MTCopyLocalizedNameForMediaType(mediaType int) obj.Object {
+func MTCopyLocalizedNameForMediaType(mediaType int) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTCopyLocalizedNameForMediaType == nil {
 		ebipurego.RegisterLibFunc(&_fnMTCopyLocalizedNameForMediaType, _lib, "MTCopyLocalizedNameForMediaType")
 	}
 	_ret := _fnMTCopyLocalizedNameForMediaType(mediaType)
-	return obj.Adopt(_ret)
+	return corefoundation.CFStringRef{obj.Adopt(_ret)}
 }
 
 var _fnMTRegisterProfessionalVideoWorkflowFormatReaders func()

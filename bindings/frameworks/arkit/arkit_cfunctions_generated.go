@@ -7,6 +7,7 @@ package arkit
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
@@ -286,13 +287,13 @@ func ArDeviceAnchorIsTracked(anchor obj.Object) bool {
 var _fnArErrorCopyCfError func(objc.ID) objc.ID
 
 // ArErrorCopyCfError calls the ARKit framework function ar_error_copy_cf_error.
-func ArErrorCopyCfError(err obj.Object) obj.Object {
+func ArErrorCopyCfError(err obj.Object) corefoundation.CFErrorRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArErrorCopyCfError == nil {
 		ebipurego.RegisterLibFunc(&_fnArErrorCopyCfError, _lib, "ar_error_copy_cf_error")
 	}
 	_ret := _fnArErrorCopyCfError(objref.IDOf(err))
-	return obj.Adopt(_ret)
+	return corefoundation.CFErrorRef{obj.Adopt(_ret)}
 }
 
 var _fnArErrorGetErrorCode func(objc.ID) int

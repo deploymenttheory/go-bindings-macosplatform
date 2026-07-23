@@ -7,6 +7,7 @@ package passkit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -76,18 +77,18 @@ func (apmp *AddPassMetadataPreview) String() string {
 }
 
 // NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription provides a preview of an image object that represents the pass you add to Wallet.
-func NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription(passThumbnail obj.Object, description string) *AddPassMetadataPreview {
+func NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription(passThumbnail coregraphics.CGImageRef, description string) *AddPassMetadataPreview {
 	defer runtime.KeepAlive(passThumbnail)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKAddPassMetadataPreview")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPassThumbnail:localizedDescription:"), objref.IDOf(passThumbnail), purego.NSString(description))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPassThumbnail:localizedDescription:"), objref.IDOf(passThumbnail.Object), purego.NSString(description))
 	return addPassMetadataPreviewAdopt(_id)
 }
 
 // PassThumbnailImage returns CGImage representing the pass in our provisioning UI.
-func (apmp *AddPassMetadataPreview) PassThumbnailImage() obj.Object {
+func (apmp *AddPassMetadataPreview) PassThumbnailImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(apmp)
 	_r := objc.Send[objc.ID](objref.IDOf(apmp), objc.RegisterName("passThumbnailImage"))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // LocalizedDescription returns localized description of the pass to be referenced during provisioning.

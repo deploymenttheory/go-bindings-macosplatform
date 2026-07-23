@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/commonpanels"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type AlertStdAlertParamRec struct {
@@ -1148,3 +1149,171 @@ type WindowDefSpec struct {
 	DefType uint32
 	U       unsafe.Pointer
 }
+
+// ControlRef is a handle for the opaque ControlRef type.
+type ControlRef struct{ obj.Object }
+
+// IsNil reports whether ControlRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ControlRef) IsNil() bool { return h.Object == nil }
+
+// DragRef is a handle for the opaque DragRef type.
+type DragRef struct{ obj.Object }
+
+// IsNil reports whether DragRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DragRef) IsNil() bool { return h.Object == nil }
+
+// EventHandlerCallRef is a handle for the opaque EventHandlerCallRef type.
+type EventHandlerCallRef struct{ obj.Object }
+
+// IsNil reports whether EventHandlerCallRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h EventHandlerCallRef) IsNil() bool { return h.Object == nil }
+
+// EventHandlerRef is a handle for the opaque EventHandlerRef type.
+type EventHandlerRef struct{ obj.Object }
+
+// IsNil reports whether EventHandlerRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h EventHandlerRef) IsNil() bool { return h.Object == nil }
+
+// EventHotKeyRef is a handle for the opaque EventHotKeyRef type.
+type EventHotKeyRef struct{ obj.Object }
+
+// IsNil reports whether EventHotKeyRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h EventHotKeyRef) IsNil() bool { return h.Object == nil }
+
+// EventLoopRef is a handle for the opaque EventLoopRef type.
+type EventLoopRef struct{ obj.Object }
+
+// IsNil reports whether EventLoopRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h EventLoopRef) IsNil() bool { return h.Object == nil }
+
+// EventLoopTimerRef is a handle for the opaque EventLoopTimerRef type.
+type EventLoopTimerRef struct{ obj.Object }
+
+// IsNil reports whether EventLoopTimerRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h EventLoopTimerRef) IsNil() bool { return h.Object == nil }
+
+// EventQueueRef is a handle for the opaque EventQueueRef type.
+type EventQueueRef struct{ obj.Object }
+
+// IsNil reports whether EventQueueRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h EventQueueRef) IsNil() bool { return h.Object == nil }
+
+// EventRef is a handle for the opaque EventRef type.
+type EventRef struct{ obj.Object }
+
+// IsNil reports whether EventRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h EventRef) IsNil() bool { return h.Object == nil }
+
+// EventTargetRef is a handle for the opaque EventTargetRef type.
+type EventTargetRef struct{ obj.Object }
+
+// IsNil reports whether EventTargetRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h EventTargetRef) IsNil() bool { return h.Object == nil }
+
+// HIArchiveRef is a handle for the opaque HIArchiveRef type.
+type HIArchiveRef struct{ obj.Object }
+
+// IsNil reports whether HIArchiveRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h HIArchiveRef) IsNil() bool { return h.Object == nil }
+
+// HIObjectClassRef is a handle for the opaque HIObjectClassRef type.
+type HIObjectClassRef struct{ obj.Object }
+
+// IsNil reports whether HIObjectClassRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h HIObjectClassRef) IsNil() bool { return h.Object == nil }
+
+// HIObjectRef is a handle for the opaque HIObjectRef type.
+type HIObjectRef struct{ obj.Object }
+
+// IsNil reports whether HIObjectRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h HIObjectRef) IsNil() bool { return h.Object == nil }
+
+// HIViewTrackingAreaRef is a handle for the opaque HIViewTrackingAreaRef type.
+type HIViewTrackingAreaRef struct{ obj.Object }
+
+// IsNil reports whether HIViewTrackingAreaRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h HIViewTrackingAreaRef) IsNil() bool { return h.Object == nil }
+
+// IBNibRef is a handle for the opaque IBNibRef type.
+type IBNibRef struct{ obj.Object }
+
+// IsNil reports whether IBNibRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h IBNibRef) IsNil() bool { return h.Object == nil }
+
+// KeyboardLayoutRef is a handle for the opaque KeyboardLayoutRef type.
+type KeyboardLayoutRef struct{ obj.Object }
+
+// IsNil reports whether KeyboardLayoutRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h KeyboardLayoutRef) IsNil() bool { return h.Object == nil }
+
+// MenuRef is a handle for the opaque MenuRef type.
+type MenuRef struct{ obj.Object }
+
+// IsNil reports whether MenuRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MenuRef) IsNil() bool { return h.Object == nil }
+
+// ScrapRef is a handle for the opaque ScrapRef type.
+type ScrapRef struct{ obj.Object }
+
+// IsNil reports whether ScrapRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ScrapRef) IsNil() bool { return h.Object == nil }
+
+// TISInputSourceRef is a handle for the opaque TISInputSourceRef type.
+type TISInputSourceRef struct{ obj.Object }
+
+// IsNil reports whether TISInputSourceRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h TISInputSourceRef) IsNil() bool { return h.Object == nil }
+
+// TSMDocumentID is a handle for the opaque TSMDocumentID type.
+type TSMDocumentID struct{ obj.Object }
+
+// IsNil reports whether TSMDocumentID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h TSMDocumentID) IsNil() bool { return h.Object == nil }
+
+// TXNObject is a handle for the opaque TXNObject type.
+type TXNObject struct{ obj.Object }
+
+// IsNil reports whether TXNObject is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h TXNObject) IsNil() bool { return h.Object == nil }
+
+// ThemeDrawingState is a handle for the opaque ThemeDrawingState type.
+type ThemeDrawingState struct{ obj.Object }
+
+// IsNil reports whether ThemeDrawingState is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ThemeDrawingState) IsNil() bool { return h.Object == nil }
+
+// ToolboxObjectClassRef is a handle for the opaque ToolboxObjectClassRef type.
+type ToolboxObjectClassRef struct{ obj.Object }
+
+// IsNil reports whether ToolboxObjectClassRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ToolboxObjectClassRef) IsNil() bool { return h.Object == nil }
+
+// WindowGroupRef is a handle for the opaque WindowGroupRef type.
+type WindowGroupRef struct{ obj.Object }
+
+// IsNil reports whether WindowGroupRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h WindowGroupRef) IsNil() bool { return h.Object == nil }

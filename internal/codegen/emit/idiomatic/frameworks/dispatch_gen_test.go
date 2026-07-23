@@ -115,6 +115,14 @@ func TestZeroValue(t *testing.T) {
 		{kindVoid, "", ""},
 		{kindString, "string", `""`},
 		{kindObject, "*String", "nil"},
+		{kindObject, "obj.Object", "nil"},
+		{kindObject, "", "nil"},
+		{kindArray, "[]string", "nil"},
+		{kindObject, "map[string]obj.Object", "nil"},
+		// Distinct struct-wrapper handle types have no nil; their zero is the empty
+		// struct literal, bare or package-qualified.
+		{kindObject, "CFArrayRef", "CFArrayRef{}"},
+		{kindObject, "coregraphics.CGImageRef", "coregraphics.CGImageRef{}"},
 		{kindBool, "bool", "false"},
 		{kindEnum, "ComparisonResult", "ComparisonResult(0)"},
 		{kindScalar, "int", "0"},

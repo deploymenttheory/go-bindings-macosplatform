@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -127,9 +128,9 @@ func (rd *RenderDestination) WithClamped(clamped bool) *RenderDestination {
 }
 
 // WithColorSpace sets the destination’s color space.
-func (rd *RenderDestination) WithColorSpace(colorSpace obj.Object) *RenderDestination {
+func (rd *RenderDestination) WithColorSpace(colorSpace coregraphics.CGColorSpaceRef) *RenderDestination {
 	defer runtime.KeepAlive(colorSpace)
-	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace.Object))
 	return rd
 }
 
@@ -195,10 +196,10 @@ func (rd *RenderDestination) IsClamped() bool {
 }
 
 // ColorSpace returns the color space.
-func (rd *RenderDestination) ColorSpace() obj.Object {
+func (rd *RenderDestination) ColorSpace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(rd)
 	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("colorSpace"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
 }
 
 // BlendKernel returns the blend kernel.

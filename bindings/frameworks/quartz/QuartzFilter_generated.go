@@ -7,6 +7,7 @@ package quartz
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -102,16 +103,16 @@ func (qf *QuartzFilter) LocalizedName() string {
 }
 
 // ApplyToContext applies to context.
-func (qf *QuartzFilter) ApplyToContext(aContext obj.Object) bool {
+func (qf *QuartzFilter) ApplyToContext(aContext coregraphics.CGContextRef) bool {
 	defer runtime.KeepAlive(qf)
 	defer runtime.KeepAlive(aContext)
-	_r := objc.Send[bool](objref.IDOf(qf), objc.RegisterName("applyToContext:"), objref.IDOf(aContext))
+	_r := objc.Send[bool](objref.IDOf(qf), objc.RegisterName("applyToContext:"), objref.IDOf(aContext.Object))
 	return _r
 }
 
 // RemoveFromContext removes from context.
-func (qf *QuartzFilter) RemoveFromContext(aContext obj.Object) {
+func (qf *QuartzFilter) RemoveFromContext(aContext coregraphics.CGContextRef) {
 	defer runtime.KeepAlive(qf)
 	defer runtime.KeepAlive(aContext)
-	objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("removeFromContext:"), objref.IDOf(aContext))
+	objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("removeFromContext:"), objref.IDOf(aContext.Object))
 }

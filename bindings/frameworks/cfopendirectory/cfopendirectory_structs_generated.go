@@ -4,6 +4,10 @@
 
 package cfopendirectory
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 // Opaque reference for the ODContext object
 type ODContext struct{}
 
@@ -18,3 +22,38 @@ type ODRecord struct{}
 
 // Opaque reference for ODSession object
 type ODSession struct{}
+
+// ODContextRef is a handle for the opaque ODContextRef type.
+type ODContextRef struct{ obj.Object }
+
+// IsNil reports whether ODContextRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ODContextRef) IsNil() bool { return h.Object == nil }
+
+// ODNodeRef is a handle for the opaque ODNodeRef type.
+type ODNodeRef struct{ obj.Object }
+
+// IsNil reports whether ODNodeRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ODNodeRef) IsNil() bool { return h.Object == nil }
+
+// ODQueryRef is a handle for the opaque ODQueryRef type.
+type ODQueryRef struct{ obj.Object }
+
+// IsNil reports whether ODQueryRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ODQueryRef) IsNil() bool { return h.Object == nil }
+
+// ODRecordRef is a handle for the opaque ODRecordRef type.
+type ODRecordRef struct{ obj.Object }
+
+// IsNil reports whether ODRecordRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ODRecordRef) IsNil() bool { return h.Object == nil }
+
+// ODSessionRef is a handle for the opaque ODSessionRef type.
+type ODSessionRef struct{ obj.Object }
+
+// IsNil reports whether ODSessionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ODSessionRef) IsNil() bool { return h.Object == nil }

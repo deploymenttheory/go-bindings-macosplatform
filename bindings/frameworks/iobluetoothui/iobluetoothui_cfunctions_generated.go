@@ -7,8 +7,8 @@ package iobluetoothui
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -38,10 +38,10 @@ func IOBluetoothGetPairingController() unsafe.Pointer {
 var _fnIOBluetoothValidateHardwareWithDescription func(objc.ID, objc.ID) int32
 
 // IOBluetoothValidateHardwareWithDescription calls the IOBluetoothUI framework function IOBluetoothValidateHardwareWithDescription.
-func IOBluetoothValidateHardwareWithDescription(cancelButtonTitle obj.Object, descriptionText obj.Object) int {
+func IOBluetoothValidateHardwareWithDescription(cancelButtonTitle corefoundation.CFStringRef, descriptionText corefoundation.CFStringRef) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothValidateHardwareWithDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothValidateHardwareWithDescription, _lib, "IOBluetoothValidateHardwareWithDescription")
 	}
-	return int(_fnIOBluetoothValidateHardwareWithDescription(objref.IDOf(cancelButtonTitle), objref.IDOf(descriptionText)))
+	return int(_fnIOBluetoothValidateHardwareWithDescription(objref.IDOf(cancelButtonTitle.Object), objref.IDOf(descriptionText.Object)))
 }

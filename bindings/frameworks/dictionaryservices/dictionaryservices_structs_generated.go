@@ -4,5 +4,16 @@
 
 package dictionaryservices
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 // Opaque CF object that represents a dictionary file
 type DCSDictionary struct{}
+
+// DCSDictionaryRef is a handle for the opaque DCSDictionaryRef type.
+type DCSDictionaryRef struct{ obj.Object }
+
+// IsNil reports whether DCSDictionaryRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DCSDictionaryRef) IsNil() bool { return h.Object == nil }

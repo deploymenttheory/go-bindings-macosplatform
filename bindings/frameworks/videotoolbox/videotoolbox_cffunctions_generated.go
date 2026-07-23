@@ -18,12 +18,12 @@ import (
 var _fnVTCompressionSessionCompleteFrames func(objc.ID, coremedia.CMTime) int32
 
 // VTCompressionSessionCompleteFrames reports an error if the VideoToolbox framework function VTCompressionSessionCompleteFrames fails.
-func VTCompressionSessionCompleteFrames(session obj.Object, completeUntilPresentationTimeStamp coremedia.CMTime) error {
+func VTCompressionSessionCompleteFrames(session VTCompressionSessionRef, completeUntilPresentationTimeStamp coremedia.CMTime) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionCompleteFrames == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionCompleteFrames, _lib, "VTCompressionSessionCompleteFrames")
 	}
-	_rc := _fnVTCompressionSessionCompleteFrames(objref.IDOf(session), completeUntilPresentationTimeStamp)
+	_rc := _fnVTCompressionSessionCompleteFrames(objref.IDOf(session.Object), completeUntilPresentationTimeStamp)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -48,12 +48,12 @@ func VTCompressionSessionCreate(allocator obj.Object, width int32, height int32,
 var _fnVTCompressionSessionPrepareToEncodeFrames func(objc.ID) int32
 
 // VTCompressionSessionPrepareToEncodeFrames reports an error if the VideoToolbox framework function VTCompressionSessionPrepareToEncodeFrames fails.
-func VTCompressionSessionPrepareToEncodeFrames(session obj.Object) error {
+func VTCompressionSessionPrepareToEncodeFrames(session VTCompressionSessionRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionPrepareToEncodeFrames == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionPrepareToEncodeFrames, _lib, "VTCompressionSessionPrepareToEncodeFrames")
 	}
-	_rc := _fnVTCompressionSessionPrepareToEncodeFrames(objref.IDOf(session))
+	_rc := _fnVTCompressionSessionPrepareToEncodeFrames(objref.IDOf(session.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -143,12 +143,12 @@ func VTCreateCGImageFromCVPixelBuffer(pixelBuffer unsafe.Pointer, options obj.Ob
 var _fnVTDecompressionSessionCopyBlackPixelBuffer func(objc.ID, unsafe.Pointer) int32
 
 // VTDecompressionSessionCopyBlackPixelBuffer reports an error if the VideoToolbox framework function VTDecompressionSessionCopyBlackPixelBuffer fails.
-func VTDecompressionSessionCopyBlackPixelBuffer(session obj.Object, pixelBufferOut unsafe.Pointer) error {
+func VTDecompressionSessionCopyBlackPixelBuffer(session VTDecompressionSessionRef, pixelBufferOut unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionCopyBlackPixelBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionCopyBlackPixelBuffer, _lib, "VTDecompressionSessionCopyBlackPixelBuffer")
 	}
-	_rc := _fnVTDecompressionSessionCopyBlackPixelBuffer(objref.IDOf(session), pixelBufferOut)
+	_rc := _fnVTDecompressionSessionCopyBlackPixelBuffer(objref.IDOf(session.Object), pixelBufferOut)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -158,12 +158,12 @@ func VTDecompressionSessionCopyBlackPixelBuffer(session obj.Object, pixelBufferO
 var _fnVTDecompressionSessionFinishDelayedFrames func(objc.ID) int32
 
 // VTDecompressionSessionFinishDelayedFrames reports an error if the VideoToolbox framework function VTDecompressionSessionFinishDelayedFrames fails.
-func VTDecompressionSessionFinishDelayedFrames(session obj.Object) error {
+func VTDecompressionSessionFinishDelayedFrames(session VTDecompressionSessionRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionFinishDelayedFrames == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionFinishDelayedFrames, _lib, "VTDecompressionSessionFinishDelayedFrames")
 	}
-	_rc := _fnVTDecompressionSessionFinishDelayedFrames(objref.IDOf(session))
+	_rc := _fnVTDecompressionSessionFinishDelayedFrames(objref.IDOf(session.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -173,12 +173,12 @@ func VTDecompressionSessionFinishDelayedFrames(session obj.Object) error {
 var _fnVTDecompressionSessionSetMultiImageCallback func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTDecompressionSessionSetMultiImageCallback reports an error if the VideoToolbox framework function VTDecompressionSessionSetMultiImageCallback fails.
-func VTDecompressionSessionSetMultiImageCallback(decompressionSession obj.Object, outputMultiImageCallback unsafe.Pointer, outputMultiImageRefcon unsafe.Pointer) error {
+func VTDecompressionSessionSetMultiImageCallback(decompressionSession VTDecompressionSessionRef, outputMultiImageCallback unsafe.Pointer, outputMultiImageRefcon unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionSetMultiImageCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionSetMultiImageCallback, _lib, "VTDecompressionSessionSetMultiImageCallback")
 	}
-	_rc := _fnVTDecompressionSessionSetMultiImageCallback(objref.IDOf(decompressionSession), outputMultiImageCallback, outputMultiImageRefcon)
+	_rc := _fnVTDecompressionSessionSetMultiImageCallback(objref.IDOf(decompressionSession.Object), outputMultiImageCallback, outputMultiImageRefcon)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -188,12 +188,12 @@ func VTDecompressionSessionSetMultiImageCallback(decompressionSession obj.Object
 var _fnVTDecompressionSessionWaitForAsynchronousFrames func(objc.ID) int32
 
 // VTDecompressionSessionWaitForAsynchronousFrames reports an error if the VideoToolbox framework function VTDecompressionSessionWaitForAsynchronousFrames fails.
-func VTDecompressionSessionWaitForAsynchronousFrames(session obj.Object) error {
+func VTDecompressionSessionWaitForAsynchronousFrames(session VTDecompressionSessionRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionWaitForAsynchronousFrames == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionWaitForAsynchronousFrames, _lib, "VTDecompressionSessionWaitForAsynchronousFrames")
 	}
-	_rc := _fnVTDecompressionSessionWaitForAsynchronousFrames(objref.IDOf(session))
+	_rc := _fnVTDecompressionSessionWaitForAsynchronousFrames(objref.IDOf(session.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -203,12 +203,12 @@ func VTDecompressionSessionWaitForAsynchronousFrames(session obj.Object) error {
 var _fnVTFrameSiloAddSampleBuffer func(objc.ID, objc.ID) int32
 
 // VTFrameSiloAddSampleBuffer reports an error if the VideoToolbox framework function VTFrameSiloAddSampleBuffer fails.
-func VTFrameSiloAddSampleBuffer(silo obj.Object, sampleBuffer obj.Object) error {
+func VTFrameSiloAddSampleBuffer(silo VTFrameSiloRef, sampleBuffer obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTFrameSiloAddSampleBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVTFrameSiloAddSampleBuffer, _lib, "VTFrameSiloAddSampleBuffer")
 	}
-	_rc := _fnVTFrameSiloAddSampleBuffer(objref.IDOf(silo), objref.IDOf(sampleBuffer))
+	_rc := _fnVTFrameSiloAddSampleBuffer(objref.IDOf(silo.Object), objref.IDOf(sampleBuffer))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -218,12 +218,12 @@ func VTFrameSiloAddSampleBuffer(silo obj.Object, sampleBuffer obj.Object) error 
 var _fnVTFrameSiloCallBlockForEachSampleBuffer func(objc.ID, coremedia.CMTimeRange, objc.Block) int32
 
 // VTFrameSiloCallBlockForEachSampleBuffer reports an error if the VideoToolbox framework function VTFrameSiloCallBlockForEachSampleBuffer fails.
-func VTFrameSiloCallBlockForEachSampleBuffer(silo obj.Object, timeRange coremedia.CMTimeRange, handler func(unsafe.Pointer) int) error {
+func VTFrameSiloCallBlockForEachSampleBuffer(silo VTFrameSiloRef, timeRange coremedia.CMTimeRange, handler func(unsafe.Pointer) int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTFrameSiloCallBlockForEachSampleBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVTFrameSiloCallBlockForEachSampleBuffer, _lib, "VTFrameSiloCallBlockForEachSampleBuffer")
 	}
-	_rc := _fnVTFrameSiloCallBlockForEachSampleBuffer(objref.IDOf(silo), timeRange, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) int { return handler(_b0) }))
+	_rc := _fnVTFrameSiloCallBlockForEachSampleBuffer(objref.IDOf(silo.Object), timeRange, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) int { return handler(_b0) }))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -233,12 +233,12 @@ func VTFrameSiloCallBlockForEachSampleBuffer(silo obj.Object, timeRange coremedi
 var _fnVTFrameSiloCallFunctionForEachSampleBuffer func(objc.ID, coremedia.CMTimeRange, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTFrameSiloCallFunctionForEachSampleBuffer reports an error if the VideoToolbox framework function VTFrameSiloCallFunctionForEachSampleBuffer fails.
-func VTFrameSiloCallFunctionForEachSampleBuffer(silo obj.Object, timeRange coremedia.CMTimeRange, refcon unsafe.Pointer, callback unsafe.Pointer) error {
+func VTFrameSiloCallFunctionForEachSampleBuffer(silo VTFrameSiloRef, timeRange coremedia.CMTimeRange, refcon unsafe.Pointer, callback unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTFrameSiloCallFunctionForEachSampleBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVTFrameSiloCallFunctionForEachSampleBuffer, _lib, "VTFrameSiloCallFunctionForEachSampleBuffer")
 	}
-	_rc := _fnVTFrameSiloCallFunctionForEachSampleBuffer(objref.IDOf(silo), timeRange, refcon, callback)
+	_rc := _fnVTFrameSiloCallFunctionForEachSampleBuffer(objref.IDOf(silo.Object), timeRange, refcon, callback)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -263,12 +263,12 @@ func VTFrameSiloCreate(allocator obj.Object, fileURL obj.Object, timeRange corem
 var _fnVTFrameSiloSetTimeRangesForNextPass func(objc.ID, int, unsafe.Pointer) int32
 
 // VTFrameSiloSetTimeRangesForNextPass reports an error if the VideoToolbox framework function VTFrameSiloSetTimeRangesForNextPass fails.
-func VTFrameSiloSetTimeRangesForNextPass(silo obj.Object, timeRangeCount int, timeRangeArray *coremedia.CMTimeRange) error {
+func VTFrameSiloSetTimeRangesForNextPass(silo VTFrameSiloRef, timeRangeCount int, timeRangeArray *coremedia.CMTimeRange) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTFrameSiloSetTimeRangesForNextPass == nil {
 		ebipurego.RegisterLibFunc(&_fnVTFrameSiloSetTimeRangesForNextPass, _lib, "VTFrameSiloSetTimeRangesForNextPass")
 	}
-	_rc := _fnVTFrameSiloSetTimeRangesForNextPass(objref.IDOf(silo), timeRangeCount, unsafe.Pointer(timeRangeArray))
+	_rc := _fnVTFrameSiloSetTimeRangesForNextPass(objref.IDOf(silo.Object), timeRangeCount, unsafe.Pointer(timeRangeArray))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -278,12 +278,12 @@ func VTFrameSiloSetTimeRangesForNextPass(silo obj.Object, timeRangeCount int, ti
 var _fnVTHDRPerFrameMetadataGenerationSessionAttachMetadata func(objc.ID, unsafe.Pointer, uint8) int32
 
 // VTHDRPerFrameMetadataGenerationSessionAttachMetadata reports an error if the VideoToolbox framework function VTHDRPerFrameMetadataGenerationSessionAttachMetadata fails.
-func VTHDRPerFrameMetadataGenerationSessionAttachMetadata(hdrPerFrameMetadataGenerationSession obj.Object, pixelBuffer unsafe.Pointer, sceneChange uint8) error {
+func VTHDRPerFrameMetadataGenerationSessionAttachMetadata(hdrPerFrameMetadataGenerationSession VTHDRPerFrameMetadataGenerationSessionRef, pixelBuffer unsafe.Pointer, sceneChange uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTHDRPerFrameMetadataGenerationSessionAttachMetadata == nil {
 		ebipurego.RegisterLibFunc(&_fnVTHDRPerFrameMetadataGenerationSessionAttachMetadata, _lib, "VTHDRPerFrameMetadataGenerationSessionAttachMetadata")
 	}
-	_rc := _fnVTHDRPerFrameMetadataGenerationSessionAttachMetadata(objref.IDOf(hdrPerFrameMetadataGenerationSession), pixelBuffer, sceneChange)
+	_rc := _fnVTHDRPerFrameMetadataGenerationSessionAttachMetadata(objref.IDOf(hdrPerFrameMetadataGenerationSession.Object), pixelBuffer, sceneChange)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -308,12 +308,12 @@ func VTHDRPerFrameMetadataGenerationSessionCreate(allocator obj.Object, framesPe
 var _fnVTMotionEstimationSessionCompleteFrames func(objc.ID) int32
 
 // VTMotionEstimationSessionCompleteFrames reports an error if the VideoToolbox framework function VTMotionEstimationSessionCompleteFrames fails.
-func VTMotionEstimationSessionCompleteFrames(session obj.Object) error {
+func VTMotionEstimationSessionCompleteFrames(session VTMotionEstimationSessionRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTMotionEstimationSessionCompleteFrames == nil {
 		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionCompleteFrames, _lib, "VTMotionEstimationSessionCompleteFrames")
 	}
-	_rc := _fnVTMotionEstimationSessionCompleteFrames(objref.IDOf(session))
+	_rc := _fnVTMotionEstimationSessionCompleteFrames(objref.IDOf(session.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -323,13 +323,13 @@ func VTMotionEstimationSessionCompleteFrames(session obj.Object) error {
 var _fnVTMotionEstimationSessionCopySourcePixelBufferAttributes func(objc.ID, unsafe.Pointer) int32
 
 // VTMotionEstimationSessionCopySourcePixelBufferAttributes reports an error if the VideoToolbox framework function VTMotionEstimationSessionCopySourcePixelBufferAttributes fails.
-func VTMotionEstimationSessionCopySourcePixelBufferAttributes(motionEstimationSession obj.Object) (obj.Object, error) {
+func VTMotionEstimationSessionCopySourcePixelBufferAttributes(motionEstimationSession VTMotionEstimationSessionRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTMotionEstimationSessionCopySourcePixelBufferAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionCopySourcePixelBufferAttributes, _lib, "VTMotionEstimationSessionCopySourcePixelBufferAttributes")
 	}
 	var _out0 uintptr
-	_rc := _fnVTMotionEstimationSessionCopySourcePixelBufferAttributes(objref.IDOf(motionEstimationSession), unsafe.Pointer(&_out0))
+	_rc := _fnVTMotionEstimationSessionCopySourcePixelBufferAttributes(objref.IDOf(motionEstimationSession.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -354,12 +354,12 @@ func VTMotionEstimationSessionCreate(allocator obj.Object, motionVectorProcessor
 var _fnVTMotionEstimationSessionEstimateMotionVectors func(objc.ID, unsafe.Pointer, unsafe.Pointer, MotionEstimationFrameFlags, objc.ID, objc.Block) int32
 
 // VTMotionEstimationSessionEstimateMotionVectors reports an error if the VideoToolbox framework function VTMotionEstimationSessionEstimateMotionVectors fails.
-func VTMotionEstimationSessionEstimateMotionVectors(session obj.Object, referenceImage unsafe.Pointer, currentImage unsafe.Pointer, motionEstimationFrameFlags MotionEstimationFrameFlags, additionalFrameOptions obj.Object, outputHandler func(int, MotionEstimationInfoFlags, unsafe.Pointer, unsafe.Pointer)) error {
+func VTMotionEstimationSessionEstimateMotionVectors(session VTMotionEstimationSessionRef, referenceImage unsafe.Pointer, currentImage unsafe.Pointer, motionEstimationFrameFlags MotionEstimationFrameFlags, additionalFrameOptions obj.Object, outputHandler func(int, MotionEstimationInfoFlags, unsafe.Pointer, unsafe.Pointer)) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTMotionEstimationSessionEstimateMotionVectors == nil {
 		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionEstimateMotionVectors, _lib, "VTMotionEstimationSessionEstimateMotionVectors")
 	}
-	_rc := _fnVTMotionEstimationSessionEstimateMotionVectors(objref.IDOf(session), referenceImage, currentImage, motionEstimationFrameFlags, objref.IDOf(additionalFrameOptions), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 MotionEstimationInfoFlags, _b2 unsafe.Pointer, _b3 unsafe.Pointer) {
+	_rc := _fnVTMotionEstimationSessionEstimateMotionVectors(objref.IDOf(session.Object), referenceImage, currentImage, motionEstimationFrameFlags, objref.IDOf(additionalFrameOptions), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 MotionEstimationInfoFlags, _b2 unsafe.Pointer, _b3 unsafe.Pointer) {
 		outputHandler(_b0, _b1, _b2, _b3)
 	}))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
@@ -371,12 +371,12 @@ func VTMotionEstimationSessionEstimateMotionVectors(session obj.Object, referenc
 var _fnVTMultiPassStorageClose func(objc.ID) int32
 
 // VTMultiPassStorageClose reports an error if the VideoToolbox framework function VTMultiPassStorageClose fails.
-func VTMultiPassStorageClose(multiPassStorage obj.Object) error {
+func VTMultiPassStorageClose(multiPassStorage VTMultiPassStorageRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTMultiPassStorageClose == nil {
 		ebipurego.RegisterLibFunc(&_fnVTMultiPassStorageClose, _lib, "VTMultiPassStorageClose")
 	}
-	_rc := _fnVTMultiPassStorageClose(objref.IDOf(multiPassStorage))
+	_rc := _fnVTMultiPassStorageClose(objref.IDOf(multiPassStorage.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -416,12 +416,12 @@ func VTPixelRotationSessionCreate(allocator obj.Object, pixelRotationSessionOut 
 var _fnVTPixelRotationSessionRotateImage func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTPixelRotationSessionRotateImage reports an error if the VideoToolbox framework function VTPixelRotationSessionRotateImage fails.
-func VTPixelRotationSessionRotateImage(session obj.Object, sourceBuffer unsafe.Pointer, destinationBuffer unsafe.Pointer) error {
+func VTPixelRotationSessionRotateImage(session VTPixelRotationSessionRef, sourceBuffer unsafe.Pointer, destinationBuffer unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTPixelRotationSessionRotateImage == nil {
 		ebipurego.RegisterLibFunc(&_fnVTPixelRotationSessionRotateImage, _lib, "VTPixelRotationSessionRotateImage")
 	}
-	_rc := _fnVTPixelRotationSessionRotateImage(objref.IDOf(session), sourceBuffer, destinationBuffer)
+	_rc := _fnVTPixelRotationSessionRotateImage(objref.IDOf(session.Object), sourceBuffer, destinationBuffer)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -446,12 +446,12 @@ func VTPixelTransferSessionCreate(allocator obj.Object, pixelTransferSessionOut 
 var _fnVTPixelTransferSessionTransferImage func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTPixelTransferSessionTransferImage reports an error if the VideoToolbox framework function VTPixelTransferSessionTransferImage fails.
-func VTPixelTransferSessionTransferImage(session obj.Object, sourceBuffer unsafe.Pointer, destinationBuffer unsafe.Pointer) error {
+func VTPixelTransferSessionTransferImage(session VTPixelTransferSessionRef, sourceBuffer unsafe.Pointer, destinationBuffer unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTPixelTransferSessionTransferImage == nil {
 		ebipurego.RegisterLibFunc(&_fnVTPixelTransferSessionTransferImage, _lib, "VTPixelTransferSessionTransferImage")
 	}
-	_rc := _fnVTPixelTransferSessionTransferImage(objref.IDOf(session), sourceBuffer, destinationBuffer)
+	_rc := _fnVTPixelTransferSessionTransferImage(objref.IDOf(session.Object), sourceBuffer, destinationBuffer)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -461,12 +461,12 @@ func VTPixelTransferSessionTransferImage(session obj.Object, sourceBuffer unsafe
 var _fnVTRAWProcessingSessionCompleteFrames func(objc.ID) int32
 
 // VTRAWProcessingSessionCompleteFrames reports an error if the VideoToolbox framework function VTRAWProcessingSessionCompleteFrames fails.
-func VTRAWProcessingSessionCompleteFrames(session obj.Object) error {
+func VTRAWProcessingSessionCompleteFrames(session VTRAWProcessingSessionRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionCompleteFrames == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionCompleteFrames, _lib, "VTRAWProcessingSessionCompleteFrames")
 	}
-	_rc := _fnVTRAWProcessingSessionCompleteFrames(objref.IDOf(session))
+	_rc := _fnVTRAWProcessingSessionCompleteFrames(objref.IDOf(session.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -476,13 +476,13 @@ func VTRAWProcessingSessionCompleteFrames(session obj.Object) error {
 var _fnVTRAWProcessingSessionCopyProcessingParameters func(objc.ID, unsafe.Pointer) int32
 
 // VTRAWProcessingSessionCopyProcessingParameters reports an error if the VideoToolbox framework function VTRAWProcessingSessionCopyProcessingParameters fails.
-func VTRAWProcessingSessionCopyProcessingParameters(session obj.Object) (obj.Object, error) {
+func VTRAWProcessingSessionCopyProcessingParameters(session VTRAWProcessingSessionRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionCopyProcessingParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionCopyProcessingParameters, _lib, "VTRAWProcessingSessionCopyProcessingParameters")
 	}
 	var _out0 uintptr
-	_rc := _fnVTRAWProcessingSessionCopyProcessingParameters(objref.IDOf(session), unsafe.Pointer(&_out0))
+	_rc := _fnVTRAWProcessingSessionCopyProcessingParameters(objref.IDOf(session.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -507,12 +507,12 @@ func VTRAWProcessingSessionCreate(allocator obj.Object, formatDescription unsafe
 var _fnVTRAWProcessingSessionProcessFrame func(objc.ID, unsafe.Pointer, objc.ID, objc.Block) int32
 
 // VTRAWProcessingSessionProcessFrame reports an error if the VideoToolbox framework function VTRAWProcessingSessionProcessFrame fails.
-func VTRAWProcessingSessionProcessFrame(session obj.Object, inputPixelBuffer unsafe.Pointer, frameOptions obj.Object, outputHandler func(int, unsafe.Pointer)) error {
+func VTRAWProcessingSessionProcessFrame(session VTRAWProcessingSessionRef, inputPixelBuffer unsafe.Pointer, frameOptions obj.Object, outputHandler func(int, unsafe.Pointer)) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionProcessFrame == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionProcessFrame, _lib, "VTRAWProcessingSessionProcessFrame")
 	}
-	_rc := _fnVTRAWProcessingSessionProcessFrame(objref.IDOf(session), inputPixelBuffer, objref.IDOf(frameOptions), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { outputHandler(_b0, _b1) }))
+	_rc := _fnVTRAWProcessingSessionProcessFrame(objref.IDOf(session.Object), inputPixelBuffer, objref.IDOf(frameOptions), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer) { outputHandler(_b0, _b1) }))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -522,12 +522,12 @@ func VTRAWProcessingSessionProcessFrame(session obj.Object, inputPixelBuffer uns
 var _fnVTRAWProcessingSessionSetParameterChangedHander func(objc.ID, objc.Block) int32
 
 // VTRAWProcessingSessionSetParameterChangedHander reports an error if the VideoToolbox framework function VTRAWProcessingSessionSetParameterChangedHander fails.
-func VTRAWProcessingSessionSetParameterChangedHander(session obj.Object, parameterChangeHandler func(unsafe.Pointer)) error {
+func VTRAWProcessingSessionSetParameterChangedHander(session VTRAWProcessingSessionRef, parameterChangeHandler func(unsafe.Pointer)) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionSetParameterChangedHander == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetParameterChangedHander, _lib, "VTRAWProcessingSessionSetParameterChangedHander")
 	}
-	_rc := _fnVTRAWProcessingSessionSetParameterChangedHander(objref.IDOf(session), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { parameterChangeHandler(_b0) }))
+	_rc := _fnVTRAWProcessingSessionSetParameterChangedHander(objref.IDOf(session.Object), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { parameterChangeHandler(_b0) }))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -537,12 +537,12 @@ func VTRAWProcessingSessionSetParameterChangedHander(session obj.Object, paramet
 var _fnVTRAWProcessingSessionSetParameterChangedHandler func(objc.ID, objc.Block) int32
 
 // VTRAWProcessingSessionSetParameterChangedHandler reports an error if the VideoToolbox framework function VTRAWProcessingSessionSetParameterChangedHandler fails.
-func VTRAWProcessingSessionSetParameterChangedHandler(session obj.Object, parameterChangeHandler func(unsafe.Pointer)) error {
+func VTRAWProcessingSessionSetParameterChangedHandler(session VTRAWProcessingSessionRef, parameterChangeHandler func(unsafe.Pointer)) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionSetParameterChangedHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetParameterChangedHandler, _lib, "VTRAWProcessingSessionSetParameterChangedHandler")
 	}
-	_rc := _fnVTRAWProcessingSessionSetParameterChangedHandler(objref.IDOf(session), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { parameterChangeHandler(_b0) }))
+	_rc := _fnVTRAWProcessingSessionSetParameterChangedHandler(objref.IDOf(session.Object), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { parameterChangeHandler(_b0) }))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -552,12 +552,12 @@ func VTRAWProcessingSessionSetParameterChangedHandler(session obj.Object, parame
 var _fnVTRAWProcessingSessionSetProcessingParameters func(objc.ID, objc.ID) int32
 
 // VTRAWProcessingSessionSetProcessingParameters reports an error if the VideoToolbox framework function VTRAWProcessingSessionSetProcessingParameters fails.
-func VTRAWProcessingSessionSetProcessingParameters(session obj.Object, processingParameters obj.Object) error {
+func VTRAWProcessingSessionSetProcessingParameters(session VTRAWProcessingSessionRef, processingParameters obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionSetProcessingParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetProcessingParameters, _lib, "VTRAWProcessingSessionSetProcessingParameters")
 	}
-	_rc := _fnVTRAWProcessingSessionSetProcessingParameters(objref.IDOf(session), objref.IDOf(processingParameters))
+	_rc := _fnVTRAWProcessingSessionSetProcessingParameters(objref.IDOf(session.Object), objref.IDOf(processingParameters))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

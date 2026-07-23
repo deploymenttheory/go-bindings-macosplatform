@@ -7,6 +7,7 @@ package launchservices
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -17,13 +18,13 @@ import (
 // LSCopyApplicationURLsForBundleIdentifier reports an error if the LaunchServices framework function LSCopyApplicationURLsForBundleIdentifier fails.
 var _fnLSCopyApplicationURLsForBundleIdentifier func(objc.ID, unsafe.Pointer) objc.ID
 
-func LSCopyApplicationURLsForBundleIdentifier(inBundleIdentifier obj.Object) (obj.Object, error) {
+func LSCopyApplicationURLsForBundleIdentifier(inBundleIdentifier corefoundation.CFStringRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyApplicationURLsForBundleIdentifier == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyApplicationURLsForBundleIdentifier, _lib, "LSCopyApplicationURLsForBundleIdentifier")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnLSCopyApplicationURLsForBundleIdentifier(objref.IDOf(inBundleIdentifier), unsafe.Pointer(&_cfErr))
+	_r := _fnLSCopyApplicationURLsForBundleIdentifier(objref.IDOf(inBundleIdentifier.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -33,13 +34,13 @@ func LSCopyApplicationURLsForBundleIdentifier(inBundleIdentifier obj.Object) (ob
 // LSCopyDefaultApplicationURLForContentType reports an error if the LaunchServices framework function LSCopyDefaultApplicationURLForContentType fails.
 var _fnLSCopyDefaultApplicationURLForContentType func(objc.ID, LSRolesMask, unsafe.Pointer) objc.ID
 
-func LSCopyDefaultApplicationURLForContentType(inContentType obj.Object, inRoleMask LSRolesMask) (obj.Object, error) {
+func LSCopyDefaultApplicationURLForContentType(inContentType corefoundation.CFStringRef, inRoleMask LSRolesMask) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyDefaultApplicationURLForContentType == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyDefaultApplicationURLForContentType, _lib, "LSCopyDefaultApplicationURLForContentType")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnLSCopyDefaultApplicationURLForContentType(objref.IDOf(inContentType), inRoleMask, unsafe.Pointer(&_cfErr))
+	_r := _fnLSCopyDefaultApplicationURLForContentType(objref.IDOf(inContentType.Object), inRoleMask, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -49,13 +50,13 @@ func LSCopyDefaultApplicationURLForContentType(inContentType obj.Object, inRoleM
 // LSCopyDefaultApplicationURLForURL reports an error if the LaunchServices framework function LSCopyDefaultApplicationURLForURL fails.
 var _fnLSCopyDefaultApplicationURLForURL func(objc.ID, LSRolesMask, unsafe.Pointer) objc.ID
 
-func LSCopyDefaultApplicationURLForURL(inURL obj.Object, inRoleMask LSRolesMask) (obj.Object, error) {
+func LSCopyDefaultApplicationURLForURL(inURL corefoundation.CFURLRef, inRoleMask LSRolesMask) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyDefaultApplicationURLForURL == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyDefaultApplicationURLForURL, _lib, "LSCopyDefaultApplicationURLForURL")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnLSCopyDefaultApplicationURLForURL(objref.IDOf(inURL), inRoleMask, unsafe.Pointer(&_cfErr))
+	_r := _fnLSCopyDefaultApplicationURLForURL(objref.IDOf(inURL.Object), inRoleMask, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}

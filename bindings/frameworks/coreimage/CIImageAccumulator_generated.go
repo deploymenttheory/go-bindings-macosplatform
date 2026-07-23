@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -82,10 +83,10 @@ func NewImageAccumulatorWithExtentFormat(extent corefoundation.CGRect, format in
 }
 
 // NewImageAccumulatorWithExtentFormatColorSpace initializes an image accumulator with the specified extent, pixel format, and color space.
-func NewImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace obj.Object) *ImageAccumulator {
+func NewImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace coregraphics.CGColorSpaceRef) *ImageAccumulator {
 	defer runtime.KeepAlive(colorSpace)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIImageAccumulator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExtent:format:colorSpace:"), extent, format, objref.IDOf(colorSpace))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExtent:format:colorSpace:"), extent, format, objref.IDOf(colorSpace.Object))
 	return imageAccumulatorAdopt(_id)
 }
 

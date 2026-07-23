@@ -306,10 +306,10 @@ func (au *AudioUnit) DisableProfileCableOnChannel(profile obj.Object, cable uint
 }
 
 // Component returns the AudioComponent which was found based on componentDescription when the audio unit was created.
-func (au *AudioUnit) Component() obj.Object {
+func (au *AudioUnit) Component() AudioComponent {
 	defer runtime.KeepAlive(au)
 	_r := objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("component"))
-	return obj.WrapUnmanaged(_r)
+	return AudioComponent{obj.WrapUnmanaged(_r)}
 }
 
 // ComponentName returns the unit's component's name. By convention, an audio unit's component name is its manufacturer's name, plus ": ", plus the audio unit's name. The audioUnitName and manufacturerName properties are derived from the component name.

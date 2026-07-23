@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -75,10 +76,10 @@ func (c *Color) String() string {
 }
 
 // NewColorWithCGColor create a Core Image color object with a Core Graphics color object.
-func NewColorWithCGColor(color obj.Object) *Color {
+func NewColorWithCGColor(color coregraphics.CGColorRef) *Color {
 	defer runtime.KeepAlive(color)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGColor:"), objref.IDOf(color))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGColor:"), objref.IDOf(color.Object))
 	return colorAdopt(_id)
 }
 
@@ -97,18 +98,18 @@ func NewColorWithRedGreenBlue(red float64, green float64, blue float64) *Color {
 }
 
 // NewColorWithRedGreenBlueAlphaColorSpace initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.
-func NewColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue float64, alpha float64, colorSpace obj.Object) *Color {
+func NewColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue float64, alpha float64, colorSpace coregraphics.CGColorSpaceRef) *Color {
 	defer runtime.KeepAlive(colorSpace)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:alpha:colorSpace:"), red, green, blue, alpha, objref.IDOf(colorSpace))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:alpha:colorSpace:"), red, green, blue, alpha, objref.IDOf(colorSpace.Object))
 	return colorAdopt(_id)
 }
 
 // NewColorWithRedGreenBlueColorSpace initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.
-func NewColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64, colorSpace obj.Object) *Color {
+func NewColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64, colorSpace coregraphics.CGColorSpaceRef) *Color {
 	defer runtime.KeepAlive(colorSpace)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:colorSpace:"), red, green, blue, objref.IDOf(colorSpace))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:colorSpace:"), red, green, blue, objref.IDOf(colorSpace.Object))
 	return colorAdopt(_id)
 }
 
@@ -134,10 +135,10 @@ func (c *Color) Alpha() float64 {
 }
 
 // ColorSpace returns the `CGColorSpace` associated with the color
-func (c *Color) ColorSpace() obj.Object {
+func (c *Color) ColorSpace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorSpace"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
 }
 
 // Red returns the unpremultiplied red component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the red component.

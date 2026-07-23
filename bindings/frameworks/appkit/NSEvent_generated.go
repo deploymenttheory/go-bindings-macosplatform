@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -350,10 +351,10 @@ func (e *Event) EventRef() unsafe.Pointer {
 }
 
 // CGEvent returns the cg event.
-func (e *Event) CGEvent() obj.Object {
+func (e *Event) CGEvent() coregraphics.CGEventRef {
 	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("CGEvent"))
-	return obj.Wrap(_r)
+	return coregraphics.CGEventRef{obj.Wrap(_r)}
 }
 
 // Magnification returns the magnification.

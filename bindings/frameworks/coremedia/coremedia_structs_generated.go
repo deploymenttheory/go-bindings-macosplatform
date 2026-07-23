@@ -6,6 +6,8 @@ package coremedia
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // A structure to support custom memory allocation and deallocation for a block used in a block buffer.
@@ -110,3 +112,87 @@ type OpaqueCMTagCollection struct{}
 type OpaqueCMTaggedBufferGroup struct{}
 
 type OpaqueCMTimebase struct{}
+
+// CMBlockBufferRef is a handle for the opaque CMBlockBufferRef type.
+type CMBlockBufferRef struct{ obj.Object }
+
+// IsNil reports whether CMBlockBufferRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMBlockBufferRef) IsNil() bool { return h.Object == nil }
+
+// CMBufferQueueRef is a handle for the opaque CMBufferQueueRef type.
+type CMBufferQueueRef struct{ obj.Object }
+
+// IsNil reports whether CMBufferQueueRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMBufferQueueRef) IsNil() bool { return h.Object == nil }
+
+// CMBufferQueueTriggerToken is a handle for the opaque CMBufferQueueTriggerToken type.
+type CMBufferQueueTriggerToken struct{ obj.Object }
+
+// IsNil reports whether CMBufferQueueTriggerToken is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMBufferQueueTriggerToken) IsNil() bool { return h.Object == nil }
+
+// CMClockRef is a handle for the opaque CMClockRef type.
+type CMClockRef struct{ obj.Object }
+
+// IsNil reports whether CMClockRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMClockRef) IsNil() bool { return h.Object == nil }
+
+// CMFormatDescriptionRef is a handle for the opaque CMFormatDescriptionRef type.
+type CMFormatDescriptionRef struct{ obj.Object }
+
+// IsNil reports whether CMFormatDescriptionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMFormatDescriptionRef) IsNil() bool { return h.Object == nil }
+
+// CMMemoryPoolRef is a handle for the opaque CMMemoryPoolRef type.
+type CMMemoryPoolRef struct{ obj.Object }
+
+// IsNil reports whether CMMemoryPoolRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMMemoryPoolRef) IsNil() bool { return h.Object == nil }
+
+// CMMutableTagCollectionRef is a handle for the opaque CMMutableTagCollectionRef type.
+type CMMutableTagCollectionRef struct{ obj.Object }
+
+// IsNil reports whether CMMutableTagCollectionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMMutableTagCollectionRef) IsNil() bool { return h.Object == nil }
+
+// CMSampleBufferRef is a handle for the opaque CMSampleBufferRef type.
+type CMSampleBufferRef struct{ obj.Object }
+
+// IsNil reports whether CMSampleBufferRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMSampleBufferRef) IsNil() bool { return h.Object == nil }
+
+// CMSimpleQueueRef is a handle for the opaque CMSimpleQueueRef type.
+type CMSimpleQueueRef struct{ obj.Object }
+
+// IsNil reports whether CMSimpleQueueRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMSimpleQueueRef) IsNil() bool { return h.Object == nil }
+
+// CMTagCollectionRef is a handle for the opaque CMTagCollectionRef type.
+type CMTagCollectionRef struct{ obj.Object }
+
+// IsNil reports whether CMTagCollectionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMTagCollectionRef) IsNil() bool { return h.Object == nil }
+
+// CMTaggedBufferGroupRef is a handle for the opaque CMTaggedBufferGroupRef type.
+type CMTaggedBufferGroupRef struct{ obj.Object }
+
+// IsNil reports whether CMTaggedBufferGroupRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMTaggedBufferGroupRef) IsNil() bool { return h.Object == nil }
+
+// CMTimebaseRef is a handle for the opaque CMTimebaseRef type.
+type CMTimebaseRef struct{ obj.Object }
+
+// IsNil reports whether CMTimebaseRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CMTimebaseRef) IsNil() bool { return h.Object == nil }

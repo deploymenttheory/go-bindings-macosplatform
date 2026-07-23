@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -89,10 +90,10 @@ func NewColorSpaceWithColorSyncProfile(prof unsafe.Pointer) *ColorSpace {
 }
 
 // NewColorSpaceWithCGColorSpace initializes and returns a color space object initialized from a Core Graphics color-space object.
-func NewColorSpaceWithCGColorSpace(cgColorSpace obj.Object) *ColorSpace {
+func NewColorSpaceWithCGColorSpace(cgColorSpace coregraphics.CGColorSpaceRef) *ColorSpace {
 	defer runtime.KeepAlive(cgColorSpace)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColorSpace")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGColorSpace:"), objref.IDOf(cgColorSpace))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGColorSpace:"), objref.IDOf(cgColorSpace.Object))
 	return colorSpaceAdopt(_id)
 }
 
@@ -111,10 +112,10 @@ func (cs *ColorSpace) ColorSyncProfile() unsafe.Pointer {
 }
 
 // CGColorSpace returns the cg color space.
-func (cs *ColorSpace) CGColorSpace() obj.Object {
+func (cs *ColorSpace) CGColorSpace() coregraphics.CGColorSpaceRef {
 	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("CGColorSpace"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorSpaceRef{obj.Wrap(_r)}
 }
 
 // NumberOfColorComponents returns the number of color components.

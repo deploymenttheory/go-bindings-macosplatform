@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -103,10 +104,10 @@ func (co *ContoursObservation) TopLevelContours() []*Contour {
 }
 
 // NormalizedPath returns obtain all of the contours represented as a CGPath in normalized coordinates. The path is owned by the observation and therefore will be alive as long as the the observation is alive.
-func (co *ContoursObservation) NormalizedPath() obj.Object {
+func (co *ContoursObservation) NormalizedPath() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(co)
 	_r := objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("normalizedPath"))
-	return obj.Wrap(_r)
+	return coregraphics.CGPathRef{obj.Wrap(_r)}
 }
 
 var _ ObservationProvider = (*ContoursObservation)(nil)

@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -59,16 +60,16 @@ func NewShapeLayer() *ShapeLayer {
 }
 
 // WithPath sets the path defining the shape to be rendered. Animatable.
-func (sl *ShapeLayer) WithPath(path obj.Object) *ShapeLayer {
+func (sl *ShapeLayer) WithPath(path coregraphics.CGPathRef) *ShapeLayer {
 	defer runtime.KeepAlive(path)
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPath:"), objref.IDOf(path))
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPath:"), objref.IDOf(path.Object))
 	return sl
 }
 
 // WithFillColor sets the color used to fill the shape’s path. Animatable.
-func (sl *ShapeLayer) WithFillColor(fillColor obj.Object) *ShapeLayer {
+func (sl *ShapeLayer) WithFillColor(fillColor coregraphics.CGColorRef) *ShapeLayer {
 	defer runtime.KeepAlive(fillColor)
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor.Object))
 	return sl
 }
 
@@ -80,9 +81,9 @@ func (sl *ShapeLayer) WithFillRule(fillRule obj.Object) *ShapeLayer {
 }
 
 // WithStrokeColor sets the color used to stroke the shape’s path. Animatable.
-func (sl *ShapeLayer) WithStrokeColor(strokeColor obj.Object) *ShapeLayer {
+func (sl *ShapeLayer) WithStrokeColor(strokeColor coregraphics.CGColorRef) *ShapeLayer {
 	defer runtime.KeepAlive(strokeColor)
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor.Object))
 	return sl
 }
 
@@ -327,9 +328,9 @@ func (sl *ShapeLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *S
 }
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
-func (sl *ShapeLayer) WithBackgroundColor(backgroundColor obj.Object) *ShapeLayer {
+func (sl *ShapeLayer) WithBackgroundColor(backgroundColor coregraphics.CGColorRef) *ShapeLayer {
 	defer runtime.KeepAlive(backgroundColor)
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor.Object))
 	return sl
 }
 
@@ -359,9 +360,9 @@ func (sl *ShapeLayer) WithBorderWidth(borderWidth float64) *ShapeLayer {
 }
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
-func (sl *ShapeLayer) WithBorderColor(borderColor obj.Object) *ShapeLayer {
+func (sl *ShapeLayer) WithBorderColor(borderColor coregraphics.CGColorRef) *ShapeLayer {
 	defer runtime.KeepAlive(borderColor)
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor.Object))
 	return sl
 }
 
@@ -397,9 +398,9 @@ func (sl *ShapeLayer) WithRasterizationScale(rasterizationScale float64) *ShapeL
 }
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
-func (sl *ShapeLayer) WithShadowColor(shadowColor obj.Object) *ShapeLayer {
+func (sl *ShapeLayer) WithShadowColor(shadowColor coregraphics.CGColorRef) *ShapeLayer {
 	defer runtime.KeepAlive(shadowColor)
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor.Object))
 	return sl
 }
 
@@ -422,9 +423,9 @@ func (sl *ShapeLayer) WithShadowRadius(shadowRadius float64) *ShapeLayer {
 }
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
-func (sl *ShapeLayer) WithShadowPath(shadowPath obj.Object) *ShapeLayer {
+func (sl *ShapeLayer) WithShadowPath(shadowPath coregraphics.CGPathRef) *ShapeLayer {
 	defer runtime.KeepAlive(shadowPath)
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath.Object))
 	return sl
 }
 
@@ -471,17 +472,17 @@ func (sl *ShapeLayer) WithConstraints(items ...*Constraint) *ShapeLayer {
 }
 
 // Path returns the path.
-func (sl *ShapeLayer) Path() obj.Object {
+func (sl *ShapeLayer) Path() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("path"))
-	return obj.Wrap(_r)
+	return coregraphics.CGPathRef{obj.Wrap(_r)}
 }
 
 // FillColor returns the fill color.
-func (sl *ShapeLayer) FillColor() obj.Object {
+func (sl *ShapeLayer) FillColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("fillColor"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // FillRule returns the fill rule.
@@ -492,10 +493,10 @@ func (sl *ShapeLayer) FillRule() *foundation.String {
 }
 
 // StrokeColor returns the stroke color.
-func (sl *ShapeLayer) StrokeColor() obj.Object {
+func (sl *ShapeLayer) StrokeColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("strokeColor"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // StrokeStart returns the stroke start.

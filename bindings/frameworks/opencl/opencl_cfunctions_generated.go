@@ -7,6 +7,7 @@ package opencl
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -17,75 +18,75 @@ import (
 var _fnClBuildProgram func(objc.ID, uint32, unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClBuildProgram calls the OpenCL framework function clBuildProgram.
-func ClBuildProgram(arg obj.Object, arg2 uint32, arg3 unsafe.Pointer, arg4 string, arg5 unsafe.Pointer, arg6 unsafe.Pointer) int32 {
+func ClBuildProgram(arg ClProgram, arg2 uint32, arg3 unsafe.Pointer, arg4 string, arg5 unsafe.Pointer, arg6 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClBuildProgram == nil {
 		ebipurego.RegisterLibFunc(&_fnClBuildProgram, _lib, "clBuildProgram")
 	}
-	return _fnClBuildProgram(objref.IDOf(arg), arg2, arg3, arg4, arg5, arg6)
+	return _fnClBuildProgram(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, arg6)
 }
 
 var _fnClCompileProgram func(objc.ID, uint32, unsafe.Pointer, string, uint32, unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClCompileProgram calls the OpenCL framework function clCompileProgram.
-func ClCompileProgram(arg obj.Object, arg2 uint32, arg3 unsafe.Pointer, arg4 string, arg5 uint32, arg6 unsafe.Pointer, arg7 string, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
+func ClCompileProgram(arg ClProgram, arg2 uint32, arg3 unsafe.Pointer, arg4 string, arg5 uint32, arg6 unsafe.Pointer, arg7 string, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCompileProgram == nil {
 		ebipurego.RegisterLibFunc(&_fnClCompileProgram, _lib, "clCompileProgram")
 	}
-	return _fnClCompileProgram(objref.IDOf(arg), arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+	return _fnClCompileProgram(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 }
 
 var _fnClCreateBuffer func(objc.ID, uint64, int, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // ClCreateBuffer calls the OpenCL framework function clCreateBuffer.
-func ClCreateBuffer(arg obj.Object, arg2 uint64, arg3 int, arg4 unsafe.Pointer) (result obj.Object, arg5 int32) {
+func ClCreateBuffer(arg ClContext, arg2 uint64, arg3 int, arg4 unsafe.Pointer) (result ClMem, arg5 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateBuffer, _lib, "clCreateBuffer")
 	}
 	var _out0 int32
-	_ret := _fnClCreateBuffer(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateBuffer(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateCommandQueue func(objc.ID, objc.ID, uint64, unsafe.Pointer) objc.ID
 
 // ClCreateCommandQueue calls the OpenCL framework function clCreateCommandQueue.
-func ClCreateCommandQueue(arg obj.Object, arg2 obj.Object, arg3 uint64) (result obj.Object, arg4 int32) {
+func ClCreateCommandQueue(arg ClContext, arg2 ClDeviceId, arg3 uint64) (result ClCommandQueue, arg4 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateCommandQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateCommandQueue, _lib, "clCreateCommandQueue")
 	}
 	var _out0 int32
-	_ret := _fnClCreateCommandQueue(objref.IDOf(arg), objref.IDOf(arg2), arg3, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateCommandQueue(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, unsafe.Pointer(&_out0))
+	return ClCommandQueue{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateCommandQueueWithPropertiesAPPLE func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // ClCreateCommandQueueWithPropertiesAPPLE calls the OpenCL framework function clCreateCommandQueueWithPropertiesAPPLE.
-func ClCreateCommandQueueWithPropertiesAPPLE(arg obj.Object, arg2 obj.Object, arg3 unsafe.Pointer) (result obj.Object, arg4 int32) {
+func ClCreateCommandQueueWithPropertiesAPPLE(arg ClContext, arg2 ClDeviceId, arg3 unsafe.Pointer) (result ClCommandQueue, arg4 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateCommandQueueWithPropertiesAPPLE == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateCommandQueueWithPropertiesAPPLE, _lib, "clCreateCommandQueueWithPropertiesAPPLE")
 	}
 	var _out0 int32
-	_ret := _fnClCreateCommandQueueWithPropertiesAPPLE(objref.IDOf(arg), objref.IDOf(arg2), arg3, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateCommandQueueWithPropertiesAPPLE(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, unsafe.Pointer(&_out0))
+	return ClCommandQueue{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateContext func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // ClCreateContext calls the OpenCL framework function clCreateContext.
-func ClCreateContext(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 unsafe.Pointer) (result obj.Object, arg6 int32) {
+func ClCreateContext(arg unsafe.Pointer, arg2 uint32, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 unsafe.Pointer) (result ClContext, arg6 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateContext == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateContext, _lib, "clCreateContext")
 	}
 	var _out0 int32
 	_ret := _fnClCreateContext(arg, arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	return ClContext{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateContextAndCommandQueueAPPLE func(unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer) int32
@@ -102,440 +103,440 @@ func ClCreateContextAndCommandQueueAPPLE(arg unsafe.Pointer, arg2 uint32, arg3 u
 var _fnClCreateContextFromType func(unsafe.Pointer, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // ClCreateContextFromType calls the OpenCL framework function clCreateContextFromType.
-func ClCreateContextFromType(arg unsafe.Pointer, arg2 uint64, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result obj.Object, arg5 int32) {
+func ClCreateContextFromType(arg unsafe.Pointer, arg2 uint64, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (result ClContext, arg5 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateContextFromType == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateContextFromType, _lib, "clCreateContextFromType")
 	}
 	var _out0 int32
 	_ret := _fnClCreateContextFromType(arg, arg2, arg3, arg4, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	return ClContext{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateDAGAPPLE func(objc.ID) objc.ID
 
 // ClCreateDAGAPPLE calls the OpenCL framework function clCreateDAGAPPLE.
-func ClCreateDAGAPPLE(c obj.Object) obj.Object {
+func ClCreateDAGAPPLE(c ClContext) ClDag {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateDAGAPPLE == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateDAGAPPLE, _lib, "clCreateDAGAPPLE")
 	}
-	_ret := _fnClCreateDAGAPPLE(objref.IDOf(c))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnClCreateDAGAPPLE(objref.IDOf(c.Object))
+	return ClDag{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnClCreateEventFromGLsyncKHR func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // ClCreateEventFromGLsyncKHR calls the OpenCL framework function clCreateEventFromGLsyncKHR.
-func ClCreateEventFromGLsyncKHR(arg obj.Object, arg2 obj.Object) (result obj.Object, arg3 int32) {
+func ClCreateEventFromGLsyncKHR(arg ClContext, arg2 ClGLsync) (result ClEvent, arg3 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateEventFromGLsyncKHR == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateEventFromGLsyncKHR, _lib, "clCreateEventFromGLsyncKHR")
 	}
 	var _out0 int32
-	_ret := _fnClCreateEventFromGLsyncKHR(objref.IDOf(arg), objref.IDOf(arg2), unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateEventFromGLsyncKHR(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), unsafe.Pointer(&_out0))
+	return ClEvent{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateFromGLBuffer func(objc.ID, uint64, int, unsafe.Pointer) objc.ID
 
 // ClCreateFromGLBuffer calls the OpenCL framework function clCreateFromGLBuffer.
-func ClCreateFromGLBuffer(arg obj.Object, arg2 uint64, arg3 int) (result obj.Object, arg4 int32) {
+func ClCreateFromGLBuffer(arg ClContext, arg2 uint64, arg3 int) (result ClMem, arg4 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateFromGLBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateFromGLBuffer, _lib, "clCreateFromGLBuffer")
 	}
 	var _out0 int32
-	_ret := _fnClCreateFromGLBuffer(objref.IDOf(arg), arg2, arg3, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateFromGLBuffer(objref.IDOf(arg.Object), arg2, arg3, unsafe.Pointer(&_out0))
+	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateFromGLRenderbuffer func(objc.ID, uint64, int, unsafe.Pointer) objc.ID
 
 // ClCreateFromGLRenderbuffer calls the OpenCL framework function clCreateFromGLRenderbuffer.
-func ClCreateFromGLRenderbuffer(arg obj.Object, arg2 uint64, arg3 int) (result obj.Object, arg4 int32) {
+func ClCreateFromGLRenderbuffer(arg ClContext, arg2 uint64, arg3 int) (result ClMem, arg4 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateFromGLRenderbuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateFromGLRenderbuffer, _lib, "clCreateFromGLRenderbuffer")
 	}
 	var _out0 int32
-	_ret := _fnClCreateFromGLRenderbuffer(objref.IDOf(arg), arg2, arg3, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateFromGLRenderbuffer(objref.IDOf(arg.Object), arg2, arg3, unsafe.Pointer(&_out0))
+	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateFromGLTexture func(objc.ID, uint64, int, int, int, unsafe.Pointer) objc.ID
 
 // ClCreateFromGLTexture calls the OpenCL framework function clCreateFromGLTexture.
-func ClCreateFromGLTexture(arg obj.Object, arg2 uint64, arg3 int, arg4 int, arg5 int) (result obj.Object, arg6 int32) {
+func ClCreateFromGLTexture(arg ClContext, arg2 uint64, arg3 int, arg4 int, arg5 int) (result ClMem, arg6 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateFromGLTexture == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateFromGLTexture, _lib, "clCreateFromGLTexture")
 	}
 	var _out0 int32
-	_ret := _fnClCreateFromGLTexture(objref.IDOf(arg), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateFromGLTexture(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
+	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateFromGLTexture2D func(objc.ID, uint64, int, int, int, unsafe.Pointer) objc.ID
 
 // ClCreateFromGLTexture2D calls the OpenCL framework function clCreateFromGLTexture2D.
-func ClCreateFromGLTexture2D(arg obj.Object, arg2 uint64, arg3 int, arg4 int, arg5 int) (result obj.Object, arg6 int32) {
+func ClCreateFromGLTexture2D(arg ClContext, arg2 uint64, arg3 int, arg4 int, arg5 int) (result ClMem, arg6 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateFromGLTexture2D == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateFromGLTexture2D, _lib, "clCreateFromGLTexture2D")
 	}
 	var _out0 int32
-	_ret := _fnClCreateFromGLTexture2D(objref.IDOf(arg), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateFromGLTexture2D(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
+	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateFromGLTexture3D func(objc.ID, uint64, int, int, int, unsafe.Pointer) objc.ID
 
 // ClCreateFromGLTexture3D calls the OpenCL framework function clCreateFromGLTexture3D.
-func ClCreateFromGLTexture3D(arg obj.Object, arg2 uint64, arg3 int, arg4 int, arg5 int) (result obj.Object, arg6 int32) {
+func ClCreateFromGLTexture3D(arg ClContext, arg2 uint64, arg3 int, arg4 int, arg5 int) (result ClMem, arg6 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateFromGLTexture3D == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateFromGLTexture3D, _lib, "clCreateFromGLTexture3D")
 	}
 	var _out0 int32
-	_ret := _fnClCreateFromGLTexture3D(objref.IDOf(arg), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateFromGLTexture3D(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
+	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateImage func(objc.ID, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // ClCreateImage calls the OpenCL framework function clCreateImage.
-func ClCreateImage(arg obj.Object, arg2 uint64, arg3 *ClImageFormat, arg4 unsafe.Pointer, arg5 unsafe.Pointer) (result obj.Object, arg6 int32) {
+func ClCreateImage(arg ClContext, arg2 uint64, arg3 *ClImageFormat, arg4 unsafe.Pointer, arg5 unsafe.Pointer) (result ClMem, arg6 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateImage == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateImage, _lib, "clCreateImage")
 	}
 	var _out0 int32
-	_ret := _fnClCreateImage(objref.IDOf(arg), arg2, unsafe.Pointer(arg3), arg4, arg5, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateImage(objref.IDOf(arg.Object), arg2, unsafe.Pointer(arg3), arg4, arg5, unsafe.Pointer(&_out0))
+	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateImage2D func(objc.ID, uint64, unsafe.Pointer, int, int, int, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // ClCreateImage2D calls the OpenCL framework function clCreateImage2D.
-func ClCreateImage2D(arg obj.Object, arg2 uint64, arg3 *ClImageFormat, arg4 int, arg5 int, arg6 int, arg7 unsafe.Pointer) (result obj.Object, arg8 int32) {
+func ClCreateImage2D(arg ClContext, arg2 uint64, arg3 *ClImageFormat, arg4 int, arg5 int, arg6 int, arg7 unsafe.Pointer) (result ClMem, arg8 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateImage2D == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateImage2D, _lib, "clCreateImage2D")
 	}
 	var _out0 int32
-	_ret := _fnClCreateImage2D(objref.IDOf(arg), arg2, unsafe.Pointer(arg3), arg4, arg5, arg6, arg7, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateImage2D(objref.IDOf(arg.Object), arg2, unsafe.Pointer(arg3), arg4, arg5, arg6, arg7, unsafe.Pointer(&_out0))
+	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateImage3D func(objc.ID, uint64, unsafe.Pointer, int, int, int, int, int, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // ClCreateImage3D calls the OpenCL framework function clCreateImage3D.
-func ClCreateImage3D(arg obj.Object, arg2 uint64, arg3 *ClImageFormat, arg4 int, arg5 int, arg6 int, arg7 int, arg8 int, arg9 unsafe.Pointer) (result obj.Object, arg10 int32) {
+func ClCreateImage3D(arg ClContext, arg2 uint64, arg3 *ClImageFormat, arg4 int, arg5 int, arg6 int, arg7 int, arg8 int, arg9 unsafe.Pointer) (result ClMem, arg10 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateImage3D == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateImage3D, _lib, "clCreateImage3D")
 	}
 	var _out0 int32
-	_ret := _fnClCreateImage3D(objref.IDOf(arg), arg2, unsafe.Pointer(arg3), arg4, arg5, arg6, arg7, arg8, arg9, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateImage3D(objref.IDOf(arg.Object), arg2, unsafe.Pointer(arg3), arg4, arg5, arg6, arg7, arg8, arg9, unsafe.Pointer(&_out0))
+	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateImageFromIOSurface2DAPPLE func(objc.ID, uint64, unsafe.Pointer, int, int, objc.ID, unsafe.Pointer) objc.ID
 
 // ClCreateImageFromIOSurface2DAPPLE calls the OpenCL framework function clCreateImageFromIOSurface2DAPPLE.
-func ClCreateImageFromIOSurface2DAPPLE(arg obj.Object, arg2 uint64, arg3 *ClImageFormat, arg4 int, arg5 int, arg6 obj.Object) (result obj.Object, arg7 int32) {
+func ClCreateImageFromIOSurface2DAPPLE(arg ClContext, arg2 uint64, arg3 *ClImageFormat, arg4 int, arg5 int, arg6 coregraphics.IOSurfaceRef) (result ClMem, arg7 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateImageFromIOSurface2DAPPLE == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateImageFromIOSurface2DAPPLE, _lib, "clCreateImageFromIOSurface2DAPPLE")
 	}
 	var _out0 int32
-	_ret := _fnClCreateImageFromIOSurface2DAPPLE(objref.IDOf(arg), arg2, unsafe.Pointer(arg3), arg4, arg5, objref.IDOf(arg6), unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateImageFromIOSurface2DAPPLE(objref.IDOf(arg.Object), arg2, unsafe.Pointer(arg3), arg4, arg5, objref.IDOf(arg6.Object), unsafe.Pointer(&_out0))
+	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateImageFromIOSurfaceWithPropertiesAPPLE func(objc.ID, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // ClCreateImageFromIOSurfaceWithPropertiesAPPLE calls the OpenCL framework function clCreateImageFromIOSurfaceWithPropertiesAPPLE.
-func ClCreateImageFromIOSurfaceWithPropertiesAPPLE(arg obj.Object, arg2 uint64, arg3 *ClImageFormat, arg4 unsafe.Pointer) (result obj.Object, arg5 int, arg6 int32) {
+func ClCreateImageFromIOSurfaceWithPropertiesAPPLE(arg ClContext, arg2 uint64, arg3 *ClImageFormat, arg4 unsafe.Pointer) (result ClMem, arg5 int, arg6 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateImageFromIOSurfaceWithPropertiesAPPLE == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateImageFromIOSurfaceWithPropertiesAPPLE, _lib, "clCreateImageFromIOSurfaceWithPropertiesAPPLE")
 	}
 	var _out0 int
 	var _out1 int32
-	_ret := _fnClCreateImageFromIOSurfaceWithPropertiesAPPLE(objref.IDOf(arg), arg2, unsafe.Pointer(arg3), arg4, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return obj.WrapUnmanaged(_ret), _out0, _out1
+	_ret := _fnClCreateImageFromIOSurfaceWithPropertiesAPPLE(objref.IDOf(arg.Object), arg2, unsafe.Pointer(arg3), arg4, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return ClMem{obj.WrapUnmanaged(_ret)}, _out0, _out1
 }
 
 var _fnClCreateKernel func(objc.ID, string, unsafe.Pointer) objc.ID
 
 // ClCreateKernel calls the OpenCL framework function clCreateKernel.
-func ClCreateKernel(arg obj.Object, arg2 string) (result obj.Object, arg3 int32) {
+func ClCreateKernel(arg ClProgram, arg2 string) (result ClKernel, arg3 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateKernel == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateKernel, _lib, "clCreateKernel")
 	}
 	var _out0 int32
-	_ret := _fnClCreateKernel(objref.IDOf(arg), arg2, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateKernel(objref.IDOf(arg.Object), arg2, unsafe.Pointer(&_out0))
+	return ClKernel{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateKernelFromDAGAPPLE func(objc.ID, uint32, unsafe.Pointer) objc.ID
 
 // ClCreateKernelFromDAGAPPLE calls the OpenCL framework function clCreateKernelFromDAGAPPLE.
-func ClCreateKernelFromDAGAPPLE(d obj.Object, n uint32, list unsafe.Pointer) obj.Object {
+func ClCreateKernelFromDAGAPPLE(d ClDag, n uint32, list unsafe.Pointer) ClKernel {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateKernelFromDAGAPPLE == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateKernelFromDAGAPPLE, _lib, "clCreateKernelFromDAGAPPLE")
 	}
-	_ret := _fnClCreateKernelFromDAGAPPLE(objref.IDOf(d), n, list)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnClCreateKernelFromDAGAPPLE(objref.IDOf(d.Object), n, list)
+	return ClKernel{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnClCreateKernelsInProgram func(objc.ID, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClCreateKernelsInProgram calls the OpenCL framework function clCreateKernelsInProgram.
-func ClCreateKernelsInProgram(arg obj.Object, arg2 uint32, arg3 unsafe.Pointer) (result int32, arg4 uint32) {
+func ClCreateKernelsInProgram(arg ClProgram, arg2 uint32, arg3 unsafe.Pointer) (result int32, arg4 uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateKernelsInProgram == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateKernelsInProgram, _lib, "clCreateKernelsInProgram")
 	}
 	var _out0 uint32
-	_ret := _fnClCreateKernelsInProgram(objref.IDOf(arg), arg2, arg3, unsafe.Pointer(&_out0))
+	_ret := _fnClCreateKernelsInProgram(objref.IDOf(arg.Object), arg2, arg3, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClCreateProgramAndKernelsWithSourceAPPLE func(objc.ID, uint32, string, unsafe.Pointer, uint32, unsafe.Pointer, string, uint32, string, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClCreateProgramAndKernelsWithSourceAPPLE calls the OpenCL framework function clCreateProgramAndKernelsWithSourceAPPLE.
-func ClCreateProgramAndKernelsWithSourceAPPLE(arg obj.Object, arg2 uint32, arg3 string, arg4 unsafe.Pointer, arg5 uint32, arg6 unsafe.Pointer, arg7 string, arg8 uint32, arg9 string, arg10 unsafe.Pointer, arg11 unsafe.Pointer) int32 {
+func ClCreateProgramAndKernelsWithSourceAPPLE(arg ClContext, arg2 uint32, arg3 string, arg4 unsafe.Pointer, arg5 uint32, arg6 unsafe.Pointer, arg7 string, arg8 uint32, arg9 string, arg10 unsafe.Pointer, arg11 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateProgramAndKernelsWithSourceAPPLE == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateProgramAndKernelsWithSourceAPPLE, _lib, "clCreateProgramAndKernelsWithSourceAPPLE")
 	}
-	return _fnClCreateProgramAndKernelsWithSourceAPPLE(objref.IDOf(arg), arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
+	return _fnClCreateProgramAndKernelsWithSourceAPPLE(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
 }
 
 var _fnClCreateProgramWithBinary func(objc.ID, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // ClCreateProgramWithBinary calls the OpenCL framework function clCreateProgramWithBinary.
-func ClCreateProgramWithBinary(arg obj.Object, arg2 uint32, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 unsafe.Pointer) (result obj.Object, arg6 int32, arg7 int32) {
+func ClCreateProgramWithBinary(arg ClContext, arg2 uint32, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 unsafe.Pointer) (result ClProgram, arg6 int32, arg7 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateProgramWithBinary == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateProgramWithBinary, _lib, "clCreateProgramWithBinary")
 	}
 	var _out0 int32
 	var _out1 int32
-	_ret := _fnClCreateProgramWithBinary(objref.IDOf(arg), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return obj.WrapUnmanaged(_ret), _out0, _out1
+	_ret := _fnClCreateProgramWithBinary(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return ClProgram{obj.WrapUnmanaged(_ret)}, _out0, _out1
 }
 
 var _fnClCreateProgramWithBuiltInKernels func(objc.ID, uint32, unsafe.Pointer, string, unsafe.Pointer) objc.ID
 
 // ClCreateProgramWithBuiltInKernels calls the OpenCL framework function clCreateProgramWithBuiltInKernels.
-func ClCreateProgramWithBuiltInKernels(arg obj.Object, arg2 uint32, arg3 unsafe.Pointer, arg4 string) (result obj.Object, arg5 int32) {
+func ClCreateProgramWithBuiltInKernels(arg ClContext, arg2 uint32, arg3 unsafe.Pointer, arg4 string) (result ClProgram, arg5 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateProgramWithBuiltInKernels == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateProgramWithBuiltInKernels, _lib, "clCreateProgramWithBuiltInKernels")
 	}
 	var _out0 int32
-	_ret := _fnClCreateProgramWithBuiltInKernels(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateProgramWithBuiltInKernels(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	return ClProgram{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateProgramWithSource func(objc.ID, uint32, string, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // ClCreateProgramWithSource calls the OpenCL framework function clCreateProgramWithSource.
-func ClCreateProgramWithSource(arg obj.Object, arg2 uint32, arg3 string, arg4 unsafe.Pointer) (result obj.Object, arg5 int32) {
+func ClCreateProgramWithSource(arg ClContext, arg2 uint32, arg3 string, arg4 unsafe.Pointer) (result ClProgram, arg5 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateProgramWithSource == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateProgramWithSource, _lib, "clCreateProgramWithSource")
 	}
 	var _out0 int32
-	_ret := _fnClCreateProgramWithSource(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateProgramWithSource(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	return ClProgram{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateSampler func(objc.ID, uint32, uint32, uint32, unsafe.Pointer) objc.ID
 
 // ClCreateSampler calls the OpenCL framework function clCreateSampler.
-func ClCreateSampler(arg obj.Object, arg2 uint32, arg3 uint32, arg4 uint32) (result obj.Object, arg5 int32) {
+func ClCreateSampler(arg ClContext, arg2 uint32, arg3 uint32, arg4 uint32) (result ClSampler, arg5 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateSampler == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateSampler, _lib, "clCreateSampler")
 	}
 	var _out0 int32
-	_ret := _fnClCreateSampler(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateSampler(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	return ClSampler{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateSubBuffer func(objc.ID, uint64, uint32, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // ClCreateSubBuffer calls the OpenCL framework function clCreateSubBuffer.
-func ClCreateSubBuffer(arg obj.Object, arg2 uint64, arg3 uint32, arg4 unsafe.Pointer) (result obj.Object, arg5 int32) {
+func ClCreateSubBuffer(arg ClMem, arg2 uint64, arg3 uint32, arg4 unsafe.Pointer) (result ClMem, arg5 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateSubBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateSubBuffer, _lib, "clCreateSubBuffer")
 	}
 	var _out0 int32
-	_ret := _fnClCreateSubBuffer(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateSubBuffer(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	return ClMem{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClCreateSubDevices func(objc.ID, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClCreateSubDevices calls the OpenCL framework function clCreateSubDevices.
-func ClCreateSubDevices(arg obj.Object, arg2 unsafe.Pointer, arg3 uint32, arg4 unsafe.Pointer) (result int32, arg5 uint32) {
+func ClCreateSubDevices(arg ClDeviceId, arg2 unsafe.Pointer, arg3 uint32, arg4 unsafe.Pointer) (result int32, arg5 uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateSubDevices == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateSubDevices, _lib, "clCreateSubDevices")
 	}
 	var _out0 uint32
-	_ret := _fnClCreateSubDevices(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClCreateSubDevices(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClCreateUserEvent func(objc.ID, unsafe.Pointer) objc.ID
 
 // ClCreateUserEvent calls the OpenCL framework function clCreateUserEvent.
-func ClCreateUserEvent(arg obj.Object) (result obj.Object, arg2 int32) {
+func ClCreateUserEvent(arg ClContext) (result ClEvent, arg2 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClCreateUserEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnClCreateUserEvent, _lib, "clCreateUserEvent")
 	}
 	var _out0 int32
-	_ret := _fnClCreateUserEvent(objref.IDOf(arg), unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClCreateUserEvent(objref.IDOf(arg.Object), unsafe.Pointer(&_out0))
+	return ClEvent{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClEnqueueAcquireGLObjects func(objc.ID, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueAcquireGLObjects calls the OpenCL framework function clEnqueueAcquireGLObjects.
-func ClEnqueueAcquireGLObjects(arg obj.Object, arg2 uint32, arg3 unsafe.Pointer, arg4 uint32, arg5 unsafe.Pointer, arg6 unsafe.Pointer) int32 {
+func ClEnqueueAcquireGLObjects(arg ClCommandQueue, arg2 uint32, arg3 unsafe.Pointer, arg4 uint32, arg5 unsafe.Pointer, arg6 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueAcquireGLObjects == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueAcquireGLObjects, _lib, "clEnqueueAcquireGLObjects")
 	}
-	return _fnClEnqueueAcquireGLObjects(objref.IDOf(arg), arg2, arg3, arg4, arg5, arg6)
+	return _fnClEnqueueAcquireGLObjects(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, arg6)
 }
 
 var _fnClEnqueueBarrier func(objc.ID) int32
 
 // ClEnqueueBarrier calls the OpenCL framework function clEnqueueBarrier.
-func ClEnqueueBarrier(arg obj.Object) int32 {
+func ClEnqueueBarrier(arg ClCommandQueue) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueBarrier == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueBarrier, _lib, "clEnqueueBarrier")
 	}
-	return _fnClEnqueueBarrier(objref.IDOf(arg))
+	return _fnClEnqueueBarrier(objref.IDOf(arg.Object))
 }
 
 var _fnClEnqueueBarrierWithWaitList func(objc.ID, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueBarrierWithWaitList calls the OpenCL framework function clEnqueueBarrierWithWaitList.
-func ClEnqueueBarrierWithWaitList(arg obj.Object, arg2 uint32, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int32 {
+func ClEnqueueBarrierWithWaitList(arg ClCommandQueue, arg2 uint32, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueBarrierWithWaitList == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueBarrierWithWaitList, _lib, "clEnqueueBarrierWithWaitList")
 	}
-	return _fnClEnqueueBarrierWithWaitList(objref.IDOf(arg), arg2, arg3, arg4)
+	return _fnClEnqueueBarrierWithWaitList(objref.IDOf(arg.Object), arg2, arg3, arg4)
 }
 
 var _fnClEnqueueCopyBuffer func(objc.ID, objc.ID, objc.ID, int, int, int, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueCopyBuffer calls the OpenCL framework function clEnqueueCopyBuffer.
-func ClEnqueueCopyBuffer(arg obj.Object, arg2 obj.Object, arg3 obj.Object, arg4 int, arg5 int, arg6 int, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
+func ClEnqueueCopyBuffer(arg ClCommandQueue, arg2 ClMem, arg3 ClMem, arg4 int, arg5 int, arg6 int, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueCopyBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueCopyBuffer, _lib, "clEnqueueCopyBuffer")
 	}
-	return _fnClEnqueueCopyBuffer(objref.IDOf(arg), objref.IDOf(arg2), objref.IDOf(arg3), arg4, arg5, arg6, arg7, arg8, arg9)
+	return _fnClEnqueueCopyBuffer(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), objref.IDOf(arg3.Object), arg4, arg5, arg6, arg7, arg8, arg9)
 }
 
 var _fnClEnqueueCopyBufferRect func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, int, int, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueCopyBufferRect calls the OpenCL framework function clEnqueueCopyBufferRect.
-func ClEnqueueCopyBufferRect(arg obj.Object, arg2 obj.Object, arg3 obj.Object, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 int, arg8 int, arg9 int, arg10 int, arg11 uint32, arg12 unsafe.Pointer, arg13 unsafe.Pointer) int32 {
+func ClEnqueueCopyBufferRect(arg ClCommandQueue, arg2 ClMem, arg3 ClMem, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 int, arg8 int, arg9 int, arg10 int, arg11 uint32, arg12 unsafe.Pointer, arg13 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueCopyBufferRect == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueCopyBufferRect, _lib, "clEnqueueCopyBufferRect")
 	}
-	return _fnClEnqueueCopyBufferRect(objref.IDOf(arg), objref.IDOf(arg2), objref.IDOf(arg3), arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13)
+	return _fnClEnqueueCopyBufferRect(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), objref.IDOf(arg3.Object), arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13)
 }
 
 var _fnClEnqueueCopyBufferToImage func(objc.ID, objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueCopyBufferToImage calls the OpenCL framework function clEnqueueCopyBufferToImage.
-func ClEnqueueCopyBufferToImage(arg obj.Object, arg2 obj.Object, arg3 obj.Object, arg4 int, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
+func ClEnqueueCopyBufferToImage(arg ClCommandQueue, arg2 ClMem, arg3 ClMem, arg4 int, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueCopyBufferToImage == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueCopyBufferToImage, _lib, "clEnqueueCopyBufferToImage")
 	}
-	return _fnClEnqueueCopyBufferToImage(objref.IDOf(arg), objref.IDOf(arg2), objref.IDOf(arg3), arg4, arg5, arg6, arg7, arg8, arg9)
+	return _fnClEnqueueCopyBufferToImage(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), objref.IDOf(arg3.Object), arg4, arg5, arg6, arg7, arg8, arg9)
 }
 
 var _fnClEnqueueCopyImage func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueCopyImage calls the OpenCL framework function clEnqueueCopyImage.
-func ClEnqueueCopyImage(arg obj.Object, arg2 obj.Object, arg3 obj.Object, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
+func ClEnqueueCopyImage(arg ClCommandQueue, arg2 ClMem, arg3 ClMem, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueCopyImage == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueCopyImage, _lib, "clEnqueueCopyImage")
 	}
-	return _fnClEnqueueCopyImage(objref.IDOf(arg), objref.IDOf(arg2), objref.IDOf(arg3), arg4, arg5, arg6, arg7, arg8, arg9)
+	return _fnClEnqueueCopyImage(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), objref.IDOf(arg3.Object), arg4, arg5, arg6, arg7, arg8, arg9)
 }
 
 var _fnClEnqueueCopyImageToBuffer func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, int, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueCopyImageToBuffer calls the OpenCL framework function clEnqueueCopyImageToBuffer.
-func ClEnqueueCopyImageToBuffer(arg obj.Object, arg2 obj.Object, arg3 obj.Object, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 int, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
+func ClEnqueueCopyImageToBuffer(arg ClCommandQueue, arg2 ClMem, arg3 ClMem, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 int, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueCopyImageToBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueCopyImageToBuffer, _lib, "clEnqueueCopyImageToBuffer")
 	}
-	return _fnClEnqueueCopyImageToBuffer(objref.IDOf(arg), objref.IDOf(arg2), objref.IDOf(arg3), arg4, arg5, arg6, arg7, arg8, arg9)
+	return _fnClEnqueueCopyImageToBuffer(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), objref.IDOf(arg3.Object), arg4, arg5, arg6, arg7, arg8, arg9)
 }
 
 var _fnClEnqueueFillBuffer func(objc.ID, objc.ID, unsafe.Pointer, int, int, int, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueFillBuffer calls the OpenCL framework function clEnqueueFillBuffer.
-func ClEnqueueFillBuffer(arg obj.Object, arg2 obj.Object, arg3 unsafe.Pointer, arg4 int, arg5 int, arg6 int, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
+func ClEnqueueFillBuffer(arg ClCommandQueue, arg2 ClMem, arg3 unsafe.Pointer, arg4 int, arg5 int, arg6 int, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueFillBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueFillBuffer, _lib, "clEnqueueFillBuffer")
 	}
-	return _fnClEnqueueFillBuffer(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+	return _fnClEnqueueFillBuffer(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 }
 
 var _fnClEnqueueFillImage func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueFillImage calls the OpenCL framework function clEnqueueFillImage.
-func ClEnqueueFillImage(arg obj.Object, arg2 obj.Object, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 uint32, arg7 unsafe.Pointer, arg8 unsafe.Pointer) int32 {
+func ClEnqueueFillImage(arg ClCommandQueue, arg2 ClMem, arg3 unsafe.Pointer, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 uint32, arg7 unsafe.Pointer, arg8 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueFillImage == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueFillImage, _lib, "clEnqueueFillImage")
 	}
-	return _fnClEnqueueFillImage(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, arg6, arg7, arg8)
+	return _fnClEnqueueFillImage(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, arg6, arg7, arg8)
 }
 
 var _fnClEnqueueMapBuffer func(objc.ID, objc.ID, uint32, uint64, int, int, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // ClEnqueueMapBuffer calls the OpenCL framework function clEnqueueMapBuffer.
-func ClEnqueueMapBuffer(arg obj.Object, arg2 obj.Object, arg3 uint32, arg4 uint64, arg5 int, arg6 int, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) (result unsafe.Pointer, arg10 int32) {
+func ClEnqueueMapBuffer(arg ClCommandQueue, arg2 ClMem, arg3 uint32, arg4 uint64, arg5 int, arg6 int, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) (result unsafe.Pointer, arg10 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueMapBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueMapBuffer, _lib, "clEnqueueMapBuffer")
 	}
 	var _out0 int32
-	_ret := _fnClEnqueueMapBuffer(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, arg6, arg7, arg8, arg9, unsafe.Pointer(&_out0))
+	_ret := _fnClEnqueueMapBuffer(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, arg6, arg7, arg8, arg9, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClEnqueueMapImage func(objc.ID, objc.ID, uint32, uint64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // ClEnqueueMapImage calls the OpenCL framework function clEnqueueMapImage.
-func ClEnqueueMapImage(arg obj.Object, arg2 obj.Object, arg3 uint32, arg4 uint64, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg9 uint32, arg10 unsafe.Pointer, arg11 unsafe.Pointer) (result unsafe.Pointer, arg7 int, arg8 int, arg12 int32) {
+func ClEnqueueMapImage(arg ClCommandQueue, arg2 ClMem, arg3 uint32, arg4 uint64, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg9 uint32, arg10 unsafe.Pointer, arg11 unsafe.Pointer) (result unsafe.Pointer, arg7 int, arg8 int, arg12 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueMapImage == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueMapImage, _lib, "clEnqueueMapImage")
@@ -543,286 +544,286 @@ func ClEnqueueMapImage(arg obj.Object, arg2 obj.Object, arg3 uint32, arg4 uint64
 	var _out0 int
 	var _out1 int
 	var _out2 int32
-	_ret := _fnClEnqueueMapImage(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, arg6, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), arg9, arg10, arg11, unsafe.Pointer(&_out2))
+	_ret := _fnClEnqueueMapImage(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, arg6, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), arg9, arg10, arg11, unsafe.Pointer(&_out2))
 	return _ret, _out0, _out1, _out2
 }
 
 var _fnClEnqueueMarker func(objc.ID, unsafe.Pointer) int32
 
 // ClEnqueueMarker calls the OpenCL framework function clEnqueueMarker.
-func ClEnqueueMarker(arg obj.Object, arg2 unsafe.Pointer) int32 {
+func ClEnqueueMarker(arg ClCommandQueue, arg2 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueMarker == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueMarker, _lib, "clEnqueueMarker")
 	}
-	return _fnClEnqueueMarker(objref.IDOf(arg), arg2)
+	return _fnClEnqueueMarker(objref.IDOf(arg.Object), arg2)
 }
 
 var _fnClEnqueueMarkerWithWaitList func(objc.ID, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueMarkerWithWaitList calls the OpenCL framework function clEnqueueMarkerWithWaitList.
-func ClEnqueueMarkerWithWaitList(arg obj.Object, arg2 uint32, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int32 {
+func ClEnqueueMarkerWithWaitList(arg ClCommandQueue, arg2 uint32, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueMarkerWithWaitList == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueMarkerWithWaitList, _lib, "clEnqueueMarkerWithWaitList")
 	}
-	return _fnClEnqueueMarkerWithWaitList(objref.IDOf(arg), arg2, arg3, arg4)
+	return _fnClEnqueueMarkerWithWaitList(objref.IDOf(arg.Object), arg2, arg3, arg4)
 }
 
 var _fnClEnqueueMigrateMemObjects func(objc.ID, uint32, unsafe.Pointer, uint64, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueMigrateMemObjects calls the OpenCL framework function clEnqueueMigrateMemObjects.
-func ClEnqueueMigrateMemObjects(arg obj.Object, arg2 uint32, arg3 unsafe.Pointer, arg4 uint64, arg5 uint32, arg6 unsafe.Pointer, arg7 unsafe.Pointer) int32 {
+func ClEnqueueMigrateMemObjects(arg ClCommandQueue, arg2 uint32, arg3 unsafe.Pointer, arg4 uint64, arg5 uint32, arg6 unsafe.Pointer, arg7 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueMigrateMemObjects == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueMigrateMemObjects, _lib, "clEnqueueMigrateMemObjects")
 	}
-	return _fnClEnqueueMigrateMemObjects(objref.IDOf(arg), arg2, arg3, arg4, arg5, arg6, arg7)
+	return _fnClEnqueueMigrateMemObjects(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, arg6, arg7)
 }
 
 var _fnClEnqueueNDRangeKernel func(objc.ID, objc.ID, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueNDRangeKernel calls the OpenCL framework function clEnqueueNDRangeKernel.
-func ClEnqueueNDRangeKernel(arg obj.Object, arg2 obj.Object, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
+func ClEnqueueNDRangeKernel(arg ClCommandQueue, arg2 ClKernel, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueNDRangeKernel == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueNDRangeKernel, _lib, "clEnqueueNDRangeKernel")
 	}
-	return _fnClEnqueueNDRangeKernel(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+	return _fnClEnqueueNDRangeKernel(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 }
 
 var _fnClEnqueueNativeKernel func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, uint32, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueNativeKernel calls the OpenCL framework function clEnqueueNativeKernel.
-func ClEnqueueNativeKernel(arg obj.Object, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 int, arg5 uint32, arg6 unsafe.Pointer, arg7 unsafe.Pointer, arg8 uint32, arg9 unsafe.Pointer, arg10 unsafe.Pointer) int32 {
+func ClEnqueueNativeKernel(arg ClCommandQueue, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 int, arg5 uint32, arg6 unsafe.Pointer, arg7 unsafe.Pointer, arg8 uint32, arg9 unsafe.Pointer, arg10 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueNativeKernel == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueNativeKernel, _lib, "clEnqueueNativeKernel")
 	}
-	return _fnClEnqueueNativeKernel(objref.IDOf(arg), arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10)
+	return _fnClEnqueueNativeKernel(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10)
 }
 
 var _fnClEnqueueReadBuffer func(objc.ID, objc.ID, uint32, int, int, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueReadBuffer calls the OpenCL framework function clEnqueueReadBuffer.
-func ClEnqueueReadBuffer(arg obj.Object, arg2 obj.Object, arg3 uint32, arg4 int, arg5 int, arg6 unsafe.Pointer, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
+func ClEnqueueReadBuffer(arg ClCommandQueue, arg2 ClMem, arg3 uint32, arg4 int, arg5 int, arg6 unsafe.Pointer, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueReadBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueReadBuffer, _lib, "clEnqueueReadBuffer")
 	}
-	return _fnClEnqueueReadBuffer(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+	return _fnClEnqueueReadBuffer(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 }
 
 var _fnClEnqueueReadBufferRect func(objc.ID, objc.ID, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, int, int, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueReadBufferRect calls the OpenCL framework function clEnqueueReadBufferRect.
-func ClEnqueueReadBufferRect(arg obj.Object, arg2 obj.Object, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 int, arg8 int, arg9 int, arg10 int, arg11 unsafe.Pointer, arg12 uint32, arg13 unsafe.Pointer, arg14 unsafe.Pointer) int32 {
+func ClEnqueueReadBufferRect(arg ClCommandQueue, arg2 ClMem, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 int, arg8 int, arg9 int, arg10 int, arg11 unsafe.Pointer, arg12 uint32, arg13 unsafe.Pointer, arg14 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueReadBufferRect == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueReadBufferRect, _lib, "clEnqueueReadBufferRect")
 	}
-	return _fnClEnqueueReadBufferRect(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14)
+	return _fnClEnqueueReadBufferRect(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14)
 }
 
 var _fnClEnqueueReadImage func(objc.ID, objc.ID, uint32, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueReadImage calls the OpenCL framework function clEnqueueReadImage.
-func ClEnqueueReadImage(arg obj.Object, arg2 obj.Object, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 int, arg7 int, arg8 unsafe.Pointer, arg9 uint32, arg10 unsafe.Pointer, arg11 unsafe.Pointer) int32 {
+func ClEnqueueReadImage(arg ClCommandQueue, arg2 ClMem, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 int, arg7 int, arg8 unsafe.Pointer, arg9 uint32, arg10 unsafe.Pointer, arg11 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueReadImage == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueReadImage, _lib, "clEnqueueReadImage")
 	}
-	return _fnClEnqueueReadImage(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
+	return _fnClEnqueueReadImage(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
 }
 
 var _fnClEnqueueReleaseGLObjects func(objc.ID, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueReleaseGLObjects calls the OpenCL framework function clEnqueueReleaseGLObjects.
-func ClEnqueueReleaseGLObjects(arg obj.Object, arg2 uint32, arg3 unsafe.Pointer, arg4 uint32, arg5 unsafe.Pointer, arg6 unsafe.Pointer) int32 {
+func ClEnqueueReleaseGLObjects(arg ClCommandQueue, arg2 uint32, arg3 unsafe.Pointer, arg4 uint32, arg5 unsafe.Pointer, arg6 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueReleaseGLObjects == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueReleaseGLObjects, _lib, "clEnqueueReleaseGLObjects")
 	}
-	return _fnClEnqueueReleaseGLObjects(objref.IDOf(arg), arg2, arg3, arg4, arg5, arg6)
+	return _fnClEnqueueReleaseGLObjects(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, arg6)
 }
 
 var _fnClEnqueueTask func(objc.ID, objc.ID, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueTask calls the OpenCL framework function clEnqueueTask.
-func ClEnqueueTask(arg obj.Object, arg2 obj.Object, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer) int32 {
+func ClEnqueueTask(arg ClCommandQueue, arg2 ClKernel, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueTask == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueTask, _lib, "clEnqueueTask")
 	}
-	return _fnClEnqueueTask(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5)
+	return _fnClEnqueueTask(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5)
 }
 
 var _fnClEnqueueUnmapMemObject func(objc.ID, objc.ID, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueUnmapMemObject calls the OpenCL framework function clEnqueueUnmapMemObject.
-func ClEnqueueUnmapMemObject(arg obj.Object, arg2 obj.Object, arg3 unsafe.Pointer, arg4 uint32, arg5 unsafe.Pointer, arg6 unsafe.Pointer) int32 {
+func ClEnqueueUnmapMemObject(arg ClCommandQueue, arg2 ClMem, arg3 unsafe.Pointer, arg4 uint32, arg5 unsafe.Pointer, arg6 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueUnmapMemObject == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueUnmapMemObject, _lib, "clEnqueueUnmapMemObject")
 	}
-	return _fnClEnqueueUnmapMemObject(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, arg6)
+	return _fnClEnqueueUnmapMemObject(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, arg6)
 }
 
 var _fnClEnqueueWaitForEvents func(objc.ID, uint32, unsafe.Pointer) int32
 
 // ClEnqueueWaitForEvents calls the OpenCL framework function clEnqueueWaitForEvents.
-func ClEnqueueWaitForEvents(arg obj.Object, arg2 uint32, arg3 unsafe.Pointer) int32 {
+func ClEnqueueWaitForEvents(arg ClCommandQueue, arg2 uint32, arg3 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueWaitForEvents == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueWaitForEvents, _lib, "clEnqueueWaitForEvents")
 	}
-	return _fnClEnqueueWaitForEvents(objref.IDOf(arg), arg2, arg3)
+	return _fnClEnqueueWaitForEvents(objref.IDOf(arg.Object), arg2, arg3)
 }
 
 var _fnClEnqueueWriteBuffer func(objc.ID, objc.ID, uint32, int, int, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueWriteBuffer calls the OpenCL framework function clEnqueueWriteBuffer.
-func ClEnqueueWriteBuffer(arg obj.Object, arg2 obj.Object, arg3 uint32, arg4 int, arg5 int, arg6 unsafe.Pointer, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
+func ClEnqueueWriteBuffer(arg ClCommandQueue, arg2 ClMem, arg3 uint32, arg4 int, arg5 int, arg6 unsafe.Pointer, arg7 uint32, arg8 unsafe.Pointer, arg9 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueWriteBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueWriteBuffer, _lib, "clEnqueueWriteBuffer")
 	}
-	return _fnClEnqueueWriteBuffer(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, arg6, arg7, arg8, arg9)
+	return _fnClEnqueueWriteBuffer(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, arg6, arg7, arg8, arg9)
 }
 
 var _fnClEnqueueWriteBufferRect func(objc.ID, objc.ID, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, int, int, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueWriteBufferRect calls the OpenCL framework function clEnqueueWriteBufferRect.
-func ClEnqueueWriteBufferRect(arg obj.Object, arg2 obj.Object, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 int, arg8 int, arg9 int, arg10 int, arg11 unsafe.Pointer, arg12 uint32, arg13 unsafe.Pointer, arg14 unsafe.Pointer) int32 {
+func ClEnqueueWriteBufferRect(arg ClCommandQueue, arg2 ClMem, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 unsafe.Pointer, arg7 int, arg8 int, arg9 int, arg10 int, arg11 unsafe.Pointer, arg12 uint32, arg13 unsafe.Pointer, arg14 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueWriteBufferRect == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueWriteBufferRect, _lib, "clEnqueueWriteBufferRect")
 	}
-	return _fnClEnqueueWriteBufferRect(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14)
+	return _fnClEnqueueWriteBufferRect(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14)
 }
 
 var _fnClEnqueueWriteImage func(objc.ID, objc.ID, uint32, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClEnqueueWriteImage calls the OpenCL framework function clEnqueueWriteImage.
-func ClEnqueueWriteImage(arg obj.Object, arg2 obj.Object, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 int, arg7 int, arg8 unsafe.Pointer, arg9 uint32, arg10 unsafe.Pointer, arg11 unsafe.Pointer) int32 {
+func ClEnqueueWriteImage(arg ClCommandQueue, arg2 ClMem, arg3 uint32, arg4 unsafe.Pointer, arg5 unsafe.Pointer, arg6 int, arg7 int, arg8 unsafe.Pointer, arg9 uint32, arg10 unsafe.Pointer, arg11 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClEnqueueWriteImage == nil {
 		ebipurego.RegisterLibFunc(&_fnClEnqueueWriteImage, _lib, "clEnqueueWriteImage")
 	}
-	return _fnClEnqueueWriteImage(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
+	return _fnClEnqueueWriteImage(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11)
 }
 
 var _fnClFinish func(objc.ID) int32
 
 // ClFinish calls the OpenCL framework function clFinish.
-func ClFinish(arg obj.Object) int32 {
+func ClFinish(arg ClCommandQueue) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClFinish == nil {
 		ebipurego.RegisterLibFunc(&_fnClFinish, _lib, "clFinish")
 	}
-	return _fnClFinish(objref.IDOf(arg))
+	return _fnClFinish(objref.IDOf(arg.Object))
 }
 
 var _fnClFlush func(objc.ID) int32
 
 // ClFlush calls the OpenCL framework function clFlush.
-func ClFlush(arg obj.Object) int32 {
+func ClFlush(arg ClCommandQueue) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClFlush == nil {
 		ebipurego.RegisterLibFunc(&_fnClFlush, _lib, "clFlush")
 	}
-	return _fnClFlush(objref.IDOf(arg))
+	return _fnClFlush(objref.IDOf(arg.Object))
 }
 
 var _fnClGetCommandQueueInfo func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetCommandQueueInfo calls the OpenCL framework function clGetCommandQueueInfo.
-func ClGetCommandQueueInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
+func ClGetCommandQueueInfo(arg ClCommandQueue, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetCommandQueueInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetCommandQueueInfo, _lib, "clGetCommandQueueInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetCommandQueueInfo(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClGetCommandQueueInfo(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetContextInfo func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetContextInfo calls the OpenCL framework function clGetContextInfo.
-func ClGetContextInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
+func ClGetContextInfo(arg ClContext, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetContextInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetContextInfo, _lib, "clGetContextInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetContextInfo(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClGetContextInfo(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetDAGNodeAPPLE func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, int) int32
 
 // ClGetDAGNodeAPPLE calls the OpenCL framework function clGetDAGNodeAPPLE.
-func ClGetDAGNodeAPPLE(d obj.Object, f obj.Object, nargs int) (result int, args int, argIndices uint32) {
+func ClGetDAGNodeAPPLE(d ClDag, f ClKernel, nargs int) (result int, args int, argIndices uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetDAGNodeAPPLE == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetDAGNodeAPPLE, _lib, "clGetDAGNodeAPPLE")
 	}
 	var _out0 int
 	var _out1 uint32
-	_ret := int(_fnClGetDAGNodeAPPLE(objref.IDOf(d), objref.IDOf(f), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), nargs))
+	_ret := int(_fnClGetDAGNodeAPPLE(objref.IDOf(d.Object), objref.IDOf(f.Object), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), nargs))
 	return _ret, _out0, _out1
 }
 
 var _fnClGetDeviceIDs func(objc.ID, uint64, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetDeviceIDs calls the OpenCL framework function clGetDeviceIDs.
-func ClGetDeviceIDs(arg obj.Object, arg2 uint64, arg3 uint32, arg4 unsafe.Pointer) (result int32, arg5 uint32) {
+func ClGetDeviceIDs(arg ClPlatformId, arg2 uint64, arg3 uint32, arg4 unsafe.Pointer) (result int32, arg5 uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetDeviceIDs == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetDeviceIDs, _lib, "clGetDeviceIDs")
 	}
 	var _out0 uint32
-	_ret := _fnClGetDeviceIDs(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClGetDeviceIDs(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetDeviceInfo func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetDeviceInfo calls the OpenCL framework function clGetDeviceInfo.
-func ClGetDeviceInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
+func ClGetDeviceInfo(arg ClDeviceId, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetDeviceInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetDeviceInfo, _lib, "clGetDeviceInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetDeviceInfo(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClGetDeviceInfo(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetEventInfo func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetEventInfo calls the OpenCL framework function clGetEventInfo.
-func ClGetEventInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
+func ClGetEventInfo(arg ClEvent, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetEventInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetEventInfo, _lib, "clGetEventInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetEventInfo(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClGetEventInfo(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetEventProfilingInfo func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetEventProfilingInfo calls the OpenCL framework function clGetEventProfilingInfo.
-func ClGetEventProfilingInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
+func ClGetEventProfilingInfo(arg ClEvent, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetEventProfilingInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetEventProfilingInfo, _lib, "clGetEventProfilingInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetEventProfilingInfo(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClGetEventProfilingInfo(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
@@ -840,116 +841,116 @@ func ClGetExtensionFunctionAddress(arg string) unsafe.Pointer {
 var _fnClGetExtensionFunctionAddressForPlatform func(objc.ID, string) unsafe.Pointer
 
 // ClGetExtensionFunctionAddressForPlatform calls the OpenCL framework function clGetExtensionFunctionAddressForPlatform.
-func ClGetExtensionFunctionAddressForPlatform(arg obj.Object, arg2 string) unsafe.Pointer {
+func ClGetExtensionFunctionAddressForPlatform(arg ClPlatformId, arg2 string) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetExtensionFunctionAddressForPlatform == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetExtensionFunctionAddressForPlatform, _lib, "clGetExtensionFunctionAddressForPlatform")
 	}
-	return _fnClGetExtensionFunctionAddressForPlatform(objref.IDOf(arg), arg2)
+	return _fnClGetExtensionFunctionAddressForPlatform(objref.IDOf(arg.Object), arg2)
 }
 
 var _fnClGetGLContextInfoAPPLE func(objc.ID, unsafe.Pointer, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetGLContextInfoAPPLE calls the OpenCL framework function clGetGLContextInfoAPPLE.
-func ClGetGLContextInfoAPPLE(arg obj.Object, arg2 unsafe.Pointer, arg3 uint32, arg4 int, arg5 unsafe.Pointer) (result int32, arg6 int) {
+func ClGetGLContextInfoAPPLE(arg ClContext, arg2 unsafe.Pointer, arg3 uint32, arg4 int, arg5 unsafe.Pointer) (result int32, arg6 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetGLContextInfoAPPLE == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetGLContextInfoAPPLE, _lib, "clGetGLContextInfoAPPLE")
 	}
 	var _out0 int
-	_ret := _fnClGetGLContextInfoAPPLE(objref.IDOf(arg), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
+	_ret := _fnClGetGLContextInfoAPPLE(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetGLObjectInfo func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetGLObjectInfo calls the OpenCL framework function clGetGLObjectInfo.
-func ClGetGLObjectInfo(arg obj.Object) (result int32, arg2 uint32, arg3 int) {
+func ClGetGLObjectInfo(arg ClMem) (result int32, arg2 uint32, arg3 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetGLObjectInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetGLObjectInfo, _lib, "clGetGLObjectInfo")
 	}
 	var _out0 uint32
 	var _out1 int
-	_ret := _fnClGetGLObjectInfo(objref.IDOf(arg), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := _fnClGetGLObjectInfo(objref.IDOf(arg.Object), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
 	return _ret, _out0, _out1
 }
 
 var _fnClGetGLTextureInfo func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetGLTextureInfo calls the OpenCL framework function clGetGLTextureInfo.
-func ClGetGLTextureInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
+func ClGetGLTextureInfo(arg ClMem, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetGLTextureInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetGLTextureInfo, _lib, "clGetGLTextureInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetGLTextureInfo(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClGetGLTextureInfo(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetImageInfo func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetImageInfo calls the OpenCL framework function clGetImageInfo.
-func ClGetImageInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
+func ClGetImageInfo(arg ClMem, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetImageInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetImageInfo, _lib, "clGetImageInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetImageInfo(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClGetImageInfo(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetKernelArgInfo func(objc.ID, uint32, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetKernelArgInfo calls the OpenCL framework function clGetKernelArgInfo.
-func ClGetKernelArgInfo(arg obj.Object, arg2 uint32, arg3 uint32, arg4 int, arg5 unsafe.Pointer) (result int32, arg6 int) {
+func ClGetKernelArgInfo(arg ClKernel, arg2 uint32, arg3 uint32, arg4 int, arg5 unsafe.Pointer) (result int32, arg6 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetKernelArgInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetKernelArgInfo, _lib, "clGetKernelArgInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetKernelArgInfo(objref.IDOf(arg), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
+	_ret := _fnClGetKernelArgInfo(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetKernelInfo func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetKernelInfo calls the OpenCL framework function clGetKernelInfo.
-func ClGetKernelInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
+func ClGetKernelInfo(arg ClKernel, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetKernelInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetKernelInfo, _lib, "clGetKernelInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetKernelInfo(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClGetKernelInfo(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetKernelWorkGroupInfo func(objc.ID, objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetKernelWorkGroupInfo calls the OpenCL framework function clGetKernelWorkGroupInfo.
-func ClGetKernelWorkGroupInfo(arg obj.Object, arg2 obj.Object, arg3 uint32, arg4 int, arg5 unsafe.Pointer) (result int32, arg6 int) {
+func ClGetKernelWorkGroupInfo(arg ClKernel, arg2 ClDeviceId, arg3 uint32, arg4 int, arg5 unsafe.Pointer) (result int32, arg6 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetKernelWorkGroupInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetKernelWorkGroupInfo, _lib, "clGetKernelWorkGroupInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetKernelWorkGroupInfo(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, unsafe.Pointer(&_out0))
+	_ret := _fnClGetKernelWorkGroupInfo(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetMemObjectInfo func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetMemObjectInfo calls the OpenCL framework function clGetMemObjectInfo.
-func ClGetMemObjectInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
+func ClGetMemObjectInfo(arg ClMem, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetMemObjectInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetMemObjectInfo, _lib, "clGetMemObjectInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetMemObjectInfo(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClGetMemObjectInfo(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
@@ -969,80 +970,80 @@ func ClGetPlatformIDs(arg uint32, arg2 unsafe.Pointer) (result int32, arg3 uint3
 var _fnClGetPlatformInfo func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetPlatformInfo calls the OpenCL framework function clGetPlatformInfo.
-func ClGetPlatformInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
+func ClGetPlatformInfo(arg ClPlatformId, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetPlatformInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetPlatformInfo, _lib, "clGetPlatformInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetPlatformInfo(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClGetPlatformInfo(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetProgramBuildInfo func(objc.ID, objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetProgramBuildInfo calls the OpenCL framework function clGetProgramBuildInfo.
-func ClGetProgramBuildInfo(arg obj.Object, arg2 obj.Object, arg3 uint32, arg4 int, arg5 unsafe.Pointer) (result int32, arg6 int) {
+func ClGetProgramBuildInfo(arg ClProgram, arg2 ClDeviceId, arg3 uint32, arg4 int, arg5 unsafe.Pointer) (result int32, arg6 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetProgramBuildInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetProgramBuildInfo, _lib, "clGetProgramBuildInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetProgramBuildInfo(objref.IDOf(arg), objref.IDOf(arg2), arg3, arg4, arg5, unsafe.Pointer(&_out0))
+	_ret := _fnClGetProgramBuildInfo(objref.IDOf(arg.Object), objref.IDOf(arg2.Object), arg3, arg4, arg5, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetProgramInfo func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetProgramInfo calls the OpenCL framework function clGetProgramInfo.
-func ClGetProgramInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
+func ClGetProgramInfo(arg ClProgram, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetProgramInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetProgramInfo, _lib, "clGetProgramInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetProgramInfo(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClGetProgramInfo(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetSamplerInfo func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetSamplerInfo calls the OpenCL framework function clGetSamplerInfo.
-func ClGetSamplerInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
+func ClGetSamplerInfo(arg ClSampler, arg2 uint32, arg3 int, arg4 unsafe.Pointer) (result int32, arg5 int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetSamplerInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetSamplerInfo, _lib, "clGetSamplerInfo")
 	}
 	var _out0 int
-	_ret := _fnClGetSamplerInfo(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0))
+	_ret := _fnClGetSamplerInfo(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnClGetSupportedImageFormats func(objc.ID, uint64, uint32, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClGetSupportedImageFormats calls the OpenCL framework function clGetSupportedImageFormats.
-func ClGetSupportedImageFormats(arg obj.Object, arg2 uint64, arg3 uint32, arg4 uint32) (result int32, arg5 ClImageFormat, arg6 uint32) {
+func ClGetSupportedImageFormats(arg ClContext, arg2 uint64, arg3 uint32, arg4 uint32) (result int32, arg5 ClImageFormat, arg6 uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetSupportedImageFormats == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetSupportedImageFormats, _lib, "clGetSupportedImageFormats")
 	}
 	var _out0 ClImageFormat
 	var _out1 uint32
-	_ret := _fnClGetSupportedImageFormats(objref.IDOf(arg), arg2, arg3, arg4, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_ret := _fnClGetSupportedImageFormats(objref.IDOf(arg.Object), arg2, arg3, arg4, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
 	return _ret, _out0, _out1
 }
 
 var _fnClLinkProgram func(objc.ID, uint32, unsafe.Pointer, string, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // ClLinkProgram calls the OpenCL framework function clLinkProgram.
-func ClLinkProgram(arg obj.Object, arg2 uint32, arg3 unsafe.Pointer, arg4 string, arg5 uint32, arg6 unsafe.Pointer, arg7 unsafe.Pointer, arg8 unsafe.Pointer) (result obj.Object, arg9 int32) {
+func ClLinkProgram(arg ClContext, arg2 uint32, arg3 unsafe.Pointer, arg4 string, arg5 uint32, arg6 unsafe.Pointer, arg7 unsafe.Pointer, arg8 unsafe.Pointer) (result ClProgram, arg9 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClLinkProgram == nil {
 		ebipurego.RegisterLibFunc(&_fnClLinkProgram, _lib, "clLinkProgram")
 	}
 	var _out0 int32
-	_ret := _fnClLinkProgram(objref.IDOf(arg), arg2, arg3, arg4, arg5, arg6, arg7, arg8, unsafe.Pointer(&_out0))
-	return obj.WrapUnmanaged(_ret), _out0
+	_ret := _fnClLinkProgram(objref.IDOf(arg.Object), arg2, arg3, arg4, arg5, arg6, arg7, arg8, unsafe.Pointer(&_out0))
+	return ClProgram{obj.WrapUnmanaged(_ret)}, _out0
 }
 
 var _fnClLogMessagesToStderrAPPLE func(string, unsafe.Pointer, int, unsafe.Pointer)
@@ -1081,265 +1082,265 @@ func ClLogMessagesToSystemLogAPPLE(arg string, arg2 unsafe.Pointer, arg3 int, ar
 var _fnClReleaseCommandQueue func(objc.ID) int32
 
 // ClReleaseCommandQueue calls the OpenCL framework function clReleaseCommandQueue.
-func ClReleaseCommandQueue(arg obj.Object) int32 {
+func ClReleaseCommandQueue(arg ClCommandQueue) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClReleaseCommandQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnClReleaseCommandQueue, _lib, "clReleaseCommandQueue")
 	}
-	return _fnClReleaseCommandQueue(objref.IDOf(arg))
+	return _fnClReleaseCommandQueue(objref.IDOf(arg.Object))
 }
 
 var _fnClReleaseContext func(objc.ID) int32
 
 // ClReleaseContext calls the OpenCL framework function clReleaseContext.
-func ClReleaseContext(arg obj.Object) int32 {
+func ClReleaseContext(arg ClContext) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClReleaseContext == nil {
 		ebipurego.RegisterLibFunc(&_fnClReleaseContext, _lib, "clReleaseContext")
 	}
-	return _fnClReleaseContext(objref.IDOf(arg))
+	return _fnClReleaseContext(objref.IDOf(arg.Object))
 }
 
 var _fnClReleaseDAGAPPLE func(objc.ID)
 
 // ClReleaseDAGAPPLE calls the OpenCL framework function clReleaseDAGAPPLE.
-func ClReleaseDAGAPPLE(dag obj.Object) {
+func ClReleaseDAGAPPLE(dag ClDag) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClReleaseDAGAPPLE == nil {
 		ebipurego.RegisterLibFunc(&_fnClReleaseDAGAPPLE, _lib, "clReleaseDAGAPPLE")
 	}
-	_fnClReleaseDAGAPPLE(objref.IDOf(dag))
+	_fnClReleaseDAGAPPLE(objref.IDOf(dag.Object))
 }
 
 var _fnClReleaseDevice func(objc.ID) int32
 
 // ClReleaseDevice calls the OpenCL framework function clReleaseDevice.
-func ClReleaseDevice(arg obj.Object) int32 {
+func ClReleaseDevice(arg ClDeviceId) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClReleaseDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnClReleaseDevice, _lib, "clReleaseDevice")
 	}
-	return _fnClReleaseDevice(objref.IDOf(arg))
+	return _fnClReleaseDevice(objref.IDOf(arg.Object))
 }
 
 var _fnClReleaseEvent func(objc.ID) int32
 
 // ClReleaseEvent calls the OpenCL framework function clReleaseEvent.
-func ClReleaseEvent(arg obj.Object) int32 {
+func ClReleaseEvent(arg ClEvent) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClReleaseEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnClReleaseEvent, _lib, "clReleaseEvent")
 	}
-	return _fnClReleaseEvent(objref.IDOf(arg))
+	return _fnClReleaseEvent(objref.IDOf(arg.Object))
 }
 
 var _fnClReleaseKernel func(objc.ID) int32
 
 // ClReleaseKernel calls the OpenCL framework function clReleaseKernel.
-func ClReleaseKernel(arg obj.Object) int32 {
+func ClReleaseKernel(arg ClKernel) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClReleaseKernel == nil {
 		ebipurego.RegisterLibFunc(&_fnClReleaseKernel, _lib, "clReleaseKernel")
 	}
-	return _fnClReleaseKernel(objref.IDOf(arg))
+	return _fnClReleaseKernel(objref.IDOf(arg.Object))
 }
 
 var _fnClReleaseMemObject func(objc.ID) int32
 
 // ClReleaseMemObject calls the OpenCL framework function clReleaseMemObject.
-func ClReleaseMemObject(arg obj.Object) int32 {
+func ClReleaseMemObject(arg ClMem) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClReleaseMemObject == nil {
 		ebipurego.RegisterLibFunc(&_fnClReleaseMemObject, _lib, "clReleaseMemObject")
 	}
-	return _fnClReleaseMemObject(objref.IDOf(arg))
+	return _fnClReleaseMemObject(objref.IDOf(arg.Object))
 }
 
 var _fnClReleaseProgram func(objc.ID) int32
 
 // ClReleaseProgram calls the OpenCL framework function clReleaseProgram.
-func ClReleaseProgram(arg obj.Object) int32 {
+func ClReleaseProgram(arg ClProgram) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClReleaseProgram == nil {
 		ebipurego.RegisterLibFunc(&_fnClReleaseProgram, _lib, "clReleaseProgram")
 	}
-	return _fnClReleaseProgram(objref.IDOf(arg))
+	return _fnClReleaseProgram(objref.IDOf(arg.Object))
 }
 
 var _fnClReleaseSampler func(objc.ID) int32
 
 // ClReleaseSampler calls the OpenCL framework function clReleaseSampler.
-func ClReleaseSampler(arg obj.Object) int32 {
+func ClReleaseSampler(arg ClSampler) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClReleaseSampler == nil {
 		ebipurego.RegisterLibFunc(&_fnClReleaseSampler, _lib, "clReleaseSampler")
 	}
-	return _fnClReleaseSampler(objref.IDOf(arg))
+	return _fnClReleaseSampler(objref.IDOf(arg.Object))
 }
 
 var _fnClRetainCommandQueue func(objc.ID) int32
 
 // ClRetainCommandQueue calls the OpenCL framework function clRetainCommandQueue.
-func ClRetainCommandQueue(arg obj.Object) int32 {
+func ClRetainCommandQueue(arg ClCommandQueue) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClRetainCommandQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnClRetainCommandQueue, _lib, "clRetainCommandQueue")
 	}
-	return _fnClRetainCommandQueue(objref.IDOf(arg))
+	return _fnClRetainCommandQueue(objref.IDOf(arg.Object))
 }
 
 var _fnClRetainContext func(objc.ID) int32
 
 // ClRetainContext calls the OpenCL framework function clRetainContext.
-func ClRetainContext(arg obj.Object) int32 {
+func ClRetainContext(arg ClContext) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClRetainContext == nil {
 		ebipurego.RegisterLibFunc(&_fnClRetainContext, _lib, "clRetainContext")
 	}
-	return _fnClRetainContext(objref.IDOf(arg))
+	return _fnClRetainContext(objref.IDOf(arg.Object))
 }
 
 var _fnClRetainDevice func(objc.ID) int32
 
 // ClRetainDevice calls the OpenCL framework function clRetainDevice.
-func ClRetainDevice(arg obj.Object) int32 {
+func ClRetainDevice(arg ClDeviceId) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClRetainDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnClRetainDevice, _lib, "clRetainDevice")
 	}
-	return _fnClRetainDevice(objref.IDOf(arg))
+	return _fnClRetainDevice(objref.IDOf(arg.Object))
 }
 
 var _fnClRetainEvent func(objc.ID) int32
 
 // ClRetainEvent calls the OpenCL framework function clRetainEvent.
-func ClRetainEvent(arg obj.Object) int32 {
+func ClRetainEvent(arg ClEvent) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClRetainEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnClRetainEvent, _lib, "clRetainEvent")
 	}
-	return _fnClRetainEvent(objref.IDOf(arg))
+	return _fnClRetainEvent(objref.IDOf(arg.Object))
 }
 
 var _fnClRetainKernel func(objc.ID) int32
 
 // ClRetainKernel calls the OpenCL framework function clRetainKernel.
-func ClRetainKernel(arg obj.Object) int32 {
+func ClRetainKernel(arg ClKernel) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClRetainKernel == nil {
 		ebipurego.RegisterLibFunc(&_fnClRetainKernel, _lib, "clRetainKernel")
 	}
-	return _fnClRetainKernel(objref.IDOf(arg))
+	return _fnClRetainKernel(objref.IDOf(arg.Object))
 }
 
 var _fnClRetainMemObject func(objc.ID) int32
 
 // ClRetainMemObject calls the OpenCL framework function clRetainMemObject.
-func ClRetainMemObject(arg obj.Object) int32 {
+func ClRetainMemObject(arg ClMem) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClRetainMemObject == nil {
 		ebipurego.RegisterLibFunc(&_fnClRetainMemObject, _lib, "clRetainMemObject")
 	}
-	return _fnClRetainMemObject(objref.IDOf(arg))
+	return _fnClRetainMemObject(objref.IDOf(arg.Object))
 }
 
 var _fnClRetainProgram func(objc.ID) int32
 
 // ClRetainProgram calls the OpenCL framework function clRetainProgram.
-func ClRetainProgram(arg obj.Object) int32 {
+func ClRetainProgram(arg ClProgram) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClRetainProgram == nil {
 		ebipurego.RegisterLibFunc(&_fnClRetainProgram, _lib, "clRetainProgram")
 	}
-	return _fnClRetainProgram(objref.IDOf(arg))
+	return _fnClRetainProgram(objref.IDOf(arg.Object))
 }
 
 var _fnClRetainSampler func(objc.ID) int32
 
 // ClRetainSampler calls the OpenCL framework function clRetainSampler.
-func ClRetainSampler(arg obj.Object) int32 {
+func ClRetainSampler(arg ClSampler) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClRetainSampler == nil {
 		ebipurego.RegisterLibFunc(&_fnClRetainSampler, _lib, "clRetainSampler")
 	}
-	return _fnClRetainSampler(objref.IDOf(arg))
+	return _fnClRetainSampler(objref.IDOf(arg.Object))
 }
 
 var _fnClSetEventCallback func(objc.ID, int32, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClSetEventCallback calls the OpenCL framework function clSetEventCallback.
-func ClSetEventCallback(arg obj.Object, arg2 int32, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int32 {
+func ClSetEventCallback(arg ClEvent, arg2 int32, arg3 unsafe.Pointer, arg4 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClSetEventCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnClSetEventCallback, _lib, "clSetEventCallback")
 	}
-	return _fnClSetEventCallback(objref.IDOf(arg), arg2, arg3, arg4)
+	return _fnClSetEventCallback(objref.IDOf(arg.Object), arg2, arg3, arg4)
 }
 
 var _fnClSetKernelArg func(objc.ID, uint32, int, unsafe.Pointer) int32
 
 // ClSetKernelArg calls the OpenCL framework function clSetKernelArg.
-func ClSetKernelArg(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer) int32 {
+func ClSetKernelArg(arg ClKernel, arg2 uint32, arg3 int, arg4 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClSetKernelArg == nil {
 		ebipurego.RegisterLibFunc(&_fnClSetKernelArg, _lib, "clSetKernelArg")
 	}
-	return _fnClSetKernelArg(objref.IDOf(arg), arg2, arg3, arg4)
+	return _fnClSetKernelArg(objref.IDOf(arg.Object), arg2, arg3, arg4)
 }
 
 var _fnClSetKernelArgByNameAPPLE func(objc.ID, string, int, unsafe.Pointer) int32
 
 // ClSetKernelArgByNameAPPLE calls the OpenCL framework function clSetKernelArgByNameAPPLE.
-func ClSetKernelArgByNameAPPLE(arg obj.Object, arg2 string, arg3 int, arg4 unsafe.Pointer) int32 {
+func ClSetKernelArgByNameAPPLE(arg ClKernel, arg2 string, arg3 int, arg4 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClSetKernelArgByNameAPPLE == nil {
 		ebipurego.RegisterLibFunc(&_fnClSetKernelArgByNameAPPLE, _lib, "clSetKernelArgByNameAPPLE")
 	}
-	return _fnClSetKernelArgByNameAPPLE(objref.IDOf(arg), arg2, arg3, arg4)
+	return _fnClSetKernelArgByNameAPPLE(objref.IDOf(arg.Object), arg2, arg3, arg4)
 }
 
 var _fnClSetKernelArgsVaListAPPLE func(objc.ID, uint32, string) int32
 
 // ClSetKernelArgsVaListAPPLE calls the OpenCL framework function clSetKernelArgsVaListAPPLE.
-func ClSetKernelArgsVaListAPPLE(arg obj.Object, arg2 uint32, arg3 string) int32 {
+func ClSetKernelArgsVaListAPPLE(arg ClKernel, arg2 uint32, arg3 string) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClSetKernelArgsVaListAPPLE == nil {
 		ebipurego.RegisterLibFunc(&_fnClSetKernelArgsVaListAPPLE, _lib, "clSetKernelArgsVaListAPPLE")
 	}
-	return _fnClSetKernelArgsVaListAPPLE(objref.IDOf(arg), arg2, arg3)
+	return _fnClSetKernelArgsVaListAPPLE(objref.IDOf(arg.Object), arg2, arg3)
 }
 
 var _fnClSetMemObjectDestructorAPPLE func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClSetMemObjectDestructorAPPLE calls the OpenCL framework function clSetMemObjectDestructorAPPLE.
-func ClSetMemObjectDestructorAPPLE(arg obj.Object, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int32 {
+func ClSetMemObjectDestructorAPPLE(arg ClMem, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClSetMemObjectDestructorAPPLE == nil {
 		ebipurego.RegisterLibFunc(&_fnClSetMemObjectDestructorAPPLE, _lib, "clSetMemObjectDestructorAPPLE")
 	}
-	return _fnClSetMemObjectDestructorAPPLE(objref.IDOf(arg), arg2, arg3)
+	return _fnClSetMemObjectDestructorAPPLE(objref.IDOf(arg.Object), arg2, arg3)
 }
 
 var _fnClSetMemObjectDestructorCallback func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // ClSetMemObjectDestructorCallback calls the OpenCL framework function clSetMemObjectDestructorCallback.
-func ClSetMemObjectDestructorCallback(arg obj.Object, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int32 {
+func ClSetMemObjectDestructorCallback(arg ClMem, arg2 unsafe.Pointer, arg3 unsafe.Pointer) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClSetMemObjectDestructorCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnClSetMemObjectDestructorCallback, _lib, "clSetMemObjectDestructorCallback")
 	}
-	return _fnClSetMemObjectDestructorCallback(objref.IDOf(arg), arg2, arg3)
+	return _fnClSetMemObjectDestructorCallback(objref.IDOf(arg.Object), arg2, arg3)
 }
 
 var _fnClSetUserEventStatus func(objc.ID, int32) int32
 
 // ClSetUserEventStatus calls the OpenCL framework function clSetUserEventStatus.
-func ClSetUserEventStatus(arg obj.Object, arg2 int32) int32 {
+func ClSetUserEventStatus(arg ClEvent, arg2 int32) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClSetUserEventStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnClSetUserEventStatus, _lib, "clSetUserEventStatus")
 	}
-	return _fnClSetUserEventStatus(objref.IDOf(arg), arg2)
+	return _fnClSetUserEventStatus(objref.IDOf(arg.Object), arg2)
 }
 
 var _fnClUnloadCompiler func() int32
@@ -1356,12 +1357,12 @@ func ClUnloadCompiler() int32 {
 var _fnClUnloadPlatformCompiler func(objc.ID) int32
 
 // ClUnloadPlatformCompiler calls the OpenCL framework function clUnloadPlatformCompiler.
-func ClUnloadPlatformCompiler(arg obj.Object) int32 {
+func ClUnloadPlatformCompiler(arg ClPlatformId) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClUnloadPlatformCompiler == nil {
 		ebipurego.RegisterLibFunc(&_fnClUnloadPlatformCompiler, _lib, "clUnloadPlatformCompiler")
 	}
-	return _fnClUnloadPlatformCompiler(objref.IDOf(arg))
+	return _fnClUnloadPlatformCompiler(objref.IDOf(arg.Object))
 }
 
 var _fnClWaitForEvents func(uint32, unsafe.Pointer) int32
@@ -1400,58 +1401,58 @@ func GclCopyImageToPtr(dstPtr unsafe.Pointer, srcImage unsafe.Pointer, srcOrigin
 var _fnGclCopyPtrToImage func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // GclCopyPtrToImage calls the OpenCL framework function gcl_copy_ptr_to_image.
-func GclCopyPtrToImage(dstImage obj.Object, srcPtr unsafe.Pointer, dstOrigin unsafe.Pointer, region unsafe.Pointer) {
+func GclCopyPtrToImage(dstImage ClMem, srcPtr unsafe.Pointer, dstOrigin unsafe.Pointer, region unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclCopyPtrToImage == nil {
 		ebipurego.RegisterLibFunc(&_fnGclCopyPtrToImage, _lib, "gcl_copy_ptr_to_image")
 	}
-	_fnGclCopyPtrToImage(objref.IDOf(dstImage), srcPtr, dstOrigin, region)
+	_fnGclCopyPtrToImage(objref.IDOf(dstImage.Object), srcPtr, dstOrigin, region)
 }
 
 var _fnGclCreateBufferFromPtr func(unsafe.Pointer) objc.ID
 
 // GclCreateBufferFromPtr calls the OpenCL framework function gcl_create_buffer_from_ptr.
-func GclCreateBufferFromPtr(ptr unsafe.Pointer) obj.Object {
+func GclCreateBufferFromPtr(ptr unsafe.Pointer) ClMem {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclCreateBufferFromPtr == nil {
 		ebipurego.RegisterLibFunc(&_fnGclCreateBufferFromPtr, _lib, "gcl_create_buffer_from_ptr")
 	}
 	_ret := _fnGclCreateBufferFromPtr(ptr)
-	return obj.WrapUnmanaged(_ret)
+	return ClMem{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGclCreateDispatchQueue func(uint64, objc.ID) unsafe.Pointer
 
 // GclCreateDispatchQueue calls the OpenCL framework function gcl_create_dispatch_queue.
-func GclCreateDispatchQueue(flags uint64, deviceId obj.Object) unsafe.Pointer {
+func GclCreateDispatchQueue(flags uint64, deviceId ClDeviceId) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclCreateDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnGclCreateDispatchQueue, _lib, "gcl_create_dispatch_queue")
 	}
-	return _fnGclCreateDispatchQueue(flags, objref.IDOf(deviceId))
+	return _fnGclCreateDispatchQueue(flags, objref.IDOf(deviceId.Object))
 }
 
 var _fnGclCreateImage func(unsafe.Pointer, int, int, int, objc.ID) unsafe.Pointer
 
 // GclCreateImage calls the OpenCL framework function gcl_create_image.
-func GclCreateImage(imageFormat *ClImageFormat, imageWidth int, imageHeight int, imageDepth int, ioSurface obj.Object) unsafe.Pointer {
+func GclCreateImage(imageFormat *ClImageFormat, imageWidth int, imageHeight int, imageDepth int, ioSurface coregraphics.IOSurfaceRef) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclCreateImage == nil {
 		ebipurego.RegisterLibFunc(&_fnGclCreateImage, _lib, "gcl_create_image")
 	}
-	return _fnGclCreateImage(unsafe.Pointer(imageFormat), imageWidth, imageHeight, imageDepth, objref.IDOf(ioSurface))
+	return _fnGclCreateImage(unsafe.Pointer(imageFormat), imageWidth, imageHeight, imageDepth, objref.IDOf(ioSurface.Object))
 }
 
 var _fnGclCreateKernelFromBlock func(unsafe.Pointer) objc.ID
 
 // GclCreateKernelFromBlock calls the OpenCL framework function gcl_create_kernel_from_block.
-func GclCreateKernelFromBlock(kernelBlockPtr unsafe.Pointer) obj.Object {
+func GclCreateKernelFromBlock(kernelBlockPtr unsafe.Pointer) ClKernel {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclCreateKernelFromBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnGclCreateKernelFromBlock, _lib, "gcl_create_kernel_from_block")
 	}
 	_ret := _fnGclCreateKernelFromBlock(kernelBlockPtr)
-	return obj.WrapUnmanaged(_ret)
+	return ClKernel{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGclFree func(unsafe.Pointer)
@@ -1468,25 +1469,25 @@ func GclFree(ptr unsafe.Pointer) {
 var _fnGclGetContext func() objc.ID
 
 // GclGetContext calls the OpenCL framework function gcl_get_context.
-func GclGetContext() obj.Object {
+func GclGetContext() ClContext {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclGetContext == nil {
 		ebipurego.RegisterLibFunc(&_fnGclGetContext, _lib, "gcl_get_context")
 	}
 	_ret := _fnGclGetContext()
-	return obj.WrapUnmanaged(_ret)
+	return ClContext{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGclGetDeviceIdWithDispatchQueue func(objc.ID) objc.ID
 
 // GclGetDeviceIdWithDispatchQueue calls the OpenCL framework function gcl_get_device_id_with_dispatch_queue.
-func GclGetDeviceIdWithDispatchQueue(queue dispatch.Queue) obj.Object {
+func GclGetDeviceIdWithDispatchQueue(queue dispatch.Queue) ClDeviceId {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclGetDeviceIdWithDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnGclGetDeviceIdWithDispatchQueue, _lib, "gcl_get_device_id_with_dispatch_queue")
 	}
 	_ret := _fnGclGetDeviceIdWithDispatchQueue(objc.ID(uintptr(queue.Ptr())))
-	return obj.WrapUnmanaged(_ret)
+	return ClDeviceId{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGclGetKernelBlockWorkgroupInfo func(unsafe.Pointer, uint32, int, unsafe.Pointer, unsafe.Pointer)
@@ -1505,14 +1506,14 @@ func GclGetKernelBlockWorkgroupInfo(kernelBlockPtr unsafe.Pointer, paramName uin
 var _fnGclGetSupportedImageFormats func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer)
 
 // GclGetSupportedImageFormats calls the OpenCL framework function gcl_get_supported_image_formats.
-func GclGetSupportedImageFormats(deviceId obj.Object, imageType uint32, numEntries int) (imageFormats ClImageFormat, numImageFormats uint32) {
+func GclGetSupportedImageFormats(deviceId ClDeviceId, imageType uint32, numEntries int) (imageFormats ClImageFormat, numImageFormats uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclGetSupportedImageFormats == nil {
 		ebipurego.RegisterLibFunc(&_fnGclGetSupportedImageFormats, _lib, "gcl_get_supported_image_formats")
 	}
 	var _out0 ClImageFormat
 	var _out1 uint32
-	_fnGclGetSupportedImageFormats(objref.IDOf(deviceId), imageType, numEntries, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_fnGclGetSupportedImageFormats(objref.IDOf(deviceId.Object), imageType, numEntries, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
 	return _out0, _out1
 }
 

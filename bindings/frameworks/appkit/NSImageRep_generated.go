@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -165,12 +166,12 @@ func (ir *ImageRep) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSp
 }
 
 // CGImageForProposedRectContextHints returns a Core Graphics image object that captures the drawing of the image.
-func (ir *ImageRep) CGImageForProposedRectContextHints(proposedDestRect *corefoundation.CGRect, context_ *GraphicsContext, hints obj.Object) obj.Object {
+func (ir *ImageRep) CGImageForProposedRectContextHints(proposedDestRect *corefoundation.CGRect, context_ *GraphicsContext, hints obj.Object) coregraphics.CGImageRef {
 	defer runtime.KeepAlive(ir)
 	defer runtime.KeepAlive(context_)
 	defer runtime.KeepAlive(hints)
 	_r := objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("CGImageForProposedRect:context:hints:"), unsafe.Pointer(proposedDestRect), objref.IDOf(context_), objref.IDOf(hints))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // Size returns the size.

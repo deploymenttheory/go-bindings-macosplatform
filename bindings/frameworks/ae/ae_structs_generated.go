@@ -6,6 +6,8 @@ package ae
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type AEBuildError struct {
@@ -78,3 +80,24 @@ type WritingCode struct {
 	TheScriptCode int16
 	TheLangCode   int16
 }
+
+// AEDataStorageType is a handle for the opaque AEDataStorageType type.
+type AEDataStorageType struct{ obj.Object }
+
+// IsNil reports whether AEDataStorageType is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AEDataStorageType) IsNil() bool { return h.Object == nil }
+
+// AERemoteProcessResolverRef is a handle for the opaque AERemoteProcessResolverRef type.
+type AERemoteProcessResolverRef struct{ obj.Object }
+
+// IsNil reports whether AERemoteProcessResolverRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AERemoteProcessResolverRef) IsNil() bool { return h.Object == nil }
+
+// AEStreamRef is a handle for the opaque AEStreamRef type.
+type AEStreamRef struct{ obj.Object }
+
+// IsNil reports whether AEStreamRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AEStreamRef) IsNil() bool { return h.Object == nil }

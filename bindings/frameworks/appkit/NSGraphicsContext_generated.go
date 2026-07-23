@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -144,10 +145,10 @@ func (gc *GraphicsContext) IsDrawingToScreen() bool {
 }
 
 // CGContext returns the cg context.
-func (gc *GraphicsContext) CGContext() obj.Object {
+func (gc *GraphicsContext) CGContext() coregraphics.CGContextRef {
 	defer runtime.KeepAlive(gc)
 	_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("CGContext"))
-	return obj.Wrap(_r)
+	return coregraphics.CGContextRef{obj.Wrap(_r)}
 }
 
 // IsFlipped reports whether the object is flipped.

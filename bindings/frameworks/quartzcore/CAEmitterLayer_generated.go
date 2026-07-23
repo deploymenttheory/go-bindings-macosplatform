@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -342,9 +343,9 @@ func (el *EmitterLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) 
 }
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
-func (el *EmitterLayer) WithBackgroundColor(backgroundColor obj.Object) *EmitterLayer {
+func (el *EmitterLayer) WithBackgroundColor(backgroundColor coregraphics.CGColorRef) *EmitterLayer {
 	defer runtime.KeepAlive(backgroundColor)
-	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor.Object))
 	return el
 }
 
@@ -374,9 +375,9 @@ func (el *EmitterLayer) WithBorderWidth(borderWidth float64) *EmitterLayer {
 }
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
-func (el *EmitterLayer) WithBorderColor(borderColor obj.Object) *EmitterLayer {
+func (el *EmitterLayer) WithBorderColor(borderColor coregraphics.CGColorRef) *EmitterLayer {
 	defer runtime.KeepAlive(borderColor)
-	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor.Object))
 	return el
 }
 
@@ -412,9 +413,9 @@ func (el *EmitterLayer) WithRasterizationScale(rasterizationScale float64) *Emit
 }
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
-func (el *EmitterLayer) WithShadowColor(shadowColor obj.Object) *EmitterLayer {
+func (el *EmitterLayer) WithShadowColor(shadowColor coregraphics.CGColorRef) *EmitterLayer {
 	defer runtime.KeepAlive(shadowColor)
-	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor.Object))
 	return el
 }
 
@@ -437,9 +438,9 @@ func (el *EmitterLayer) WithShadowRadius(shadowRadius float64) *EmitterLayer {
 }
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
-func (el *EmitterLayer) WithShadowPath(shadowPath obj.Object) *EmitterLayer {
+func (el *EmitterLayer) WithShadowPath(shadowPath coregraphics.CGPathRef) *EmitterLayer {
 	defer runtime.KeepAlive(shadowPath)
-	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath.Object))
 	return el
 }
 

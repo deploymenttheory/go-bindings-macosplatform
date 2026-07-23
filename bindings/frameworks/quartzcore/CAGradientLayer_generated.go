@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -274,9 +275,9 @@ func (gl *GradientLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool)
 }
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
-func (gl *GradientLayer) WithBackgroundColor(backgroundColor obj.Object) *GradientLayer {
+func (gl *GradientLayer) WithBackgroundColor(backgroundColor coregraphics.CGColorRef) *GradientLayer {
 	defer runtime.KeepAlive(backgroundColor)
-	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor.Object))
 	return gl
 }
 
@@ -306,9 +307,9 @@ func (gl *GradientLayer) WithBorderWidth(borderWidth float64) *GradientLayer {
 }
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
-func (gl *GradientLayer) WithBorderColor(borderColor obj.Object) *GradientLayer {
+func (gl *GradientLayer) WithBorderColor(borderColor coregraphics.CGColorRef) *GradientLayer {
 	defer runtime.KeepAlive(borderColor)
-	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor.Object))
 	return gl
 }
 
@@ -344,9 +345,9 @@ func (gl *GradientLayer) WithRasterizationScale(rasterizationScale float64) *Gra
 }
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
-func (gl *GradientLayer) WithShadowColor(shadowColor obj.Object) *GradientLayer {
+func (gl *GradientLayer) WithShadowColor(shadowColor coregraphics.CGColorRef) *GradientLayer {
 	defer runtime.KeepAlive(shadowColor)
-	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor.Object))
 	return gl
 }
 
@@ -369,9 +370,9 @@ func (gl *GradientLayer) WithShadowRadius(shadowRadius float64) *GradientLayer {
 }
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
-func (gl *GradientLayer) WithShadowPath(shadowPath obj.Object) *GradientLayer {
+func (gl *GradientLayer) WithShadowPath(shadowPath coregraphics.CGPathRef) *GradientLayer {
 	defer runtime.KeepAlive(shadowPath)
-	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath.Object))
 	return gl
 }
 

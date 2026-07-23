@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -70,10 +71,10 @@ func TextureWithContentsOfDataOptions(data []byte, options map[string]*foundatio
 }
 
 // TextureWithCGImageOptions loads a 2D texture image from a Quartz image and creates a new texture from the data.
-func TextureWithCGImageOptions(cgImage obj.Object, options map[string]*foundation.Number) (result *TextureInfo, err error) {
+func TextureWithCGImageOptions(cgImage coregraphics.CGImageRef, options map[string]*foundation.Number) (result *TextureInfo, err error) {
 	defer runtime.KeepAlive(cgImage)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("GLKTextureLoader")), objc.RegisterName("textureWithCGImage:options:error:"), objref.IDOf(cgImage), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("GLKTextureLoader")), objc.RegisterName("textureWithCGImage:options:error:"), objref.IDOf(cgImage.Object), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}

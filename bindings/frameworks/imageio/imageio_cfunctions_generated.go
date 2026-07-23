@@ -7,6 +7,8 @@ package imageio
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -16,126 +18,126 @@ import (
 var _fnCGAnimateImageAtURLWithBlock func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // CGAnimateImageAtURLWithBlock calls the ImageIO framework function CGAnimateImageAtURLWithBlock.
-func CGAnimateImageAtURLWithBlock(url obj.Object, options obj.Object, block unsafe.Pointer) int {
+func CGAnimateImageAtURLWithBlock(url corefoundation.CFURLRef, options corefoundation.CFDictionaryRef, block unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGAnimateImageAtURLWithBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCGAnimateImageAtURLWithBlock, _lib, "CGAnimateImageAtURLWithBlock")
 	}
-	return int(_fnCGAnimateImageAtURLWithBlock(objref.IDOf(url), objref.IDOf(options), block))
+	return int(_fnCGAnimateImageAtURLWithBlock(objref.IDOf(url.Object), objref.IDOf(options.Object), block))
 }
 
 var _fnCGAnimateImageDataWithBlock func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // CGAnimateImageDataWithBlock calls the ImageIO framework function CGAnimateImageDataWithBlock.
-func CGAnimateImageDataWithBlock(data obj.Object, options obj.Object, block unsafe.Pointer) int {
+func CGAnimateImageDataWithBlock(data corefoundation.CFDataRef, options corefoundation.CFDictionaryRef, block unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGAnimateImageDataWithBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCGAnimateImageDataWithBlock, _lib, "CGAnimateImageDataWithBlock")
 	}
-	return int(_fnCGAnimateImageDataWithBlock(objref.IDOf(data), objref.IDOf(options), block))
+	return int(_fnCGAnimateImageDataWithBlock(objref.IDOf(data.Object), objref.IDOf(options.Object), block))
 }
 
 var _fnCGImageDestinationAddAuxiliaryDataInfo func(objc.ID, objc.ID, objc.ID)
 
 // CGImageDestinationAddAuxiliaryDataInfo calls the ImageIO framework function CGImageDestinationAddAuxiliaryDataInfo.
-func CGImageDestinationAddAuxiliaryDataInfo(idst obj.Object, auxiliaryImageDataType obj.Object, auxiliaryDataInfoDictionary obj.Object) {
+func CGImageDestinationAddAuxiliaryDataInfo(idst coregraphics.CGImageDestinationRef, auxiliaryImageDataType corefoundation.CFStringRef, auxiliaryDataInfoDictionary corefoundation.CFDictionaryRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationAddAuxiliaryDataInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationAddAuxiliaryDataInfo, _lib, "CGImageDestinationAddAuxiliaryDataInfo")
 	}
-	_fnCGImageDestinationAddAuxiliaryDataInfo(objref.IDOf(idst), objref.IDOf(auxiliaryImageDataType), objref.IDOf(auxiliaryDataInfoDictionary))
+	_fnCGImageDestinationAddAuxiliaryDataInfo(objref.IDOf(idst.Object), objref.IDOf(auxiliaryImageDataType.Object), objref.IDOf(auxiliaryDataInfoDictionary.Object))
 }
 
 var _fnCGImageDestinationAddImage func(objc.ID, objc.ID, objc.ID)
 
 // CGImageDestinationAddImage calls the ImageIO framework function CGImageDestinationAddImage.
-func CGImageDestinationAddImage(idst obj.Object, image obj.Object, properties obj.Object) {
+func CGImageDestinationAddImage(idst coregraphics.CGImageDestinationRef, image coregraphics.CGImageRef, properties corefoundation.CFDictionaryRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationAddImage == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationAddImage, _lib, "CGImageDestinationAddImage")
 	}
-	_fnCGImageDestinationAddImage(objref.IDOf(idst), objref.IDOf(image), objref.IDOf(properties))
+	_fnCGImageDestinationAddImage(objref.IDOf(idst.Object), objref.IDOf(image.Object), objref.IDOf(properties.Object))
 }
 
 var _fnCGImageDestinationAddImageAndMetadata func(objc.ID, objc.ID, objc.ID, objc.ID)
 
 // CGImageDestinationAddImageAndMetadata calls the ImageIO framework function CGImageDestinationAddImageAndMetadata.
-func CGImageDestinationAddImageAndMetadata(idst obj.Object, image obj.Object, metadata obj.Object, options obj.Object) {
+func CGImageDestinationAddImageAndMetadata(idst coregraphics.CGImageDestinationRef, image coregraphics.CGImageRef, metadata coregraphics.CGImageMetadataRef, options corefoundation.CFDictionaryRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationAddImageAndMetadata == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationAddImageAndMetadata, _lib, "CGImageDestinationAddImageAndMetadata")
 	}
-	_fnCGImageDestinationAddImageAndMetadata(objref.IDOf(idst), objref.IDOf(image), objref.IDOf(metadata), objref.IDOf(options))
+	_fnCGImageDestinationAddImageAndMetadata(objref.IDOf(idst.Object), objref.IDOf(image.Object), objref.IDOf(metadata.Object), objref.IDOf(options.Object))
 }
 
 var _fnCGImageDestinationAddImageFromSource func(objc.ID, objc.ID, int, objc.ID)
 
 // CGImageDestinationAddImageFromSource calls the ImageIO framework function CGImageDestinationAddImageFromSource.
-func CGImageDestinationAddImageFromSource(idst obj.Object, isrc obj.Object, index int, properties obj.Object) {
+func CGImageDestinationAddImageFromSource(idst coregraphics.CGImageDestinationRef, isrc coregraphics.CGImageSourceRef, index int, properties corefoundation.CFDictionaryRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationAddImageFromSource == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationAddImageFromSource, _lib, "CGImageDestinationAddImageFromSource")
 	}
-	_fnCGImageDestinationAddImageFromSource(objref.IDOf(idst), objref.IDOf(isrc), index, objref.IDOf(properties))
+	_fnCGImageDestinationAddImageFromSource(objref.IDOf(idst.Object), objref.IDOf(isrc.Object), index, objref.IDOf(properties.Object))
 }
 
 var _fnCGImageDestinationCopyTypeIdentifiers func() objc.ID
 
 // CGImageDestinationCopyTypeIdentifiers calls the ImageIO framework function CGImageDestinationCopyTypeIdentifiers.
-func CGImageDestinationCopyTypeIdentifiers() obj.Object {
+func CGImageDestinationCopyTypeIdentifiers() corefoundation.CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationCopyTypeIdentifiers == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationCopyTypeIdentifiers, _lib, "CGImageDestinationCopyTypeIdentifiers")
 	}
 	_ret := _fnCGImageDestinationCopyTypeIdentifiers()
-	return obj.Adopt(_ret)
+	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageDestinationCreateWithData func(objc.ID, objc.ID, int, objc.ID) objc.ID
 
 // CGImageDestinationCreateWithData calls the ImageIO framework function CGImageDestinationCreateWithData.
-func CGImageDestinationCreateWithData(data obj.Object, type_ obj.Object, count int, options obj.Object) obj.Object {
+func CGImageDestinationCreateWithData(data corefoundation.CFMutableDataRef, type_ corefoundation.CFStringRef, count int, options corefoundation.CFDictionaryRef) coregraphics.CGImageDestinationRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationCreateWithData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationCreateWithData, _lib, "CGImageDestinationCreateWithData")
 	}
-	_ret := _fnCGImageDestinationCreateWithData(objref.IDOf(data), objref.IDOf(type_), count, objref.IDOf(options))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageDestinationCreateWithData(objref.IDOf(data.Object), objref.IDOf(type_.Object), count, objref.IDOf(options.Object))
+	return coregraphics.CGImageDestinationRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageDestinationCreateWithDataConsumer func(objc.ID, objc.ID, int, objc.ID) objc.ID
 
 // CGImageDestinationCreateWithDataConsumer calls the ImageIO framework function CGImageDestinationCreateWithDataConsumer.
-func CGImageDestinationCreateWithDataConsumer(consumer obj.Object, type_ obj.Object, count int, options obj.Object) obj.Object {
+func CGImageDestinationCreateWithDataConsumer(consumer coregraphics.CGDataConsumerRef, type_ corefoundation.CFStringRef, count int, options corefoundation.CFDictionaryRef) coregraphics.CGImageDestinationRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationCreateWithDataConsumer == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationCreateWithDataConsumer, _lib, "CGImageDestinationCreateWithDataConsumer")
 	}
-	_ret := _fnCGImageDestinationCreateWithDataConsumer(objref.IDOf(consumer), objref.IDOf(type_), count, objref.IDOf(options))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageDestinationCreateWithDataConsumer(objref.IDOf(consumer.Object), objref.IDOf(type_.Object), count, objref.IDOf(options.Object))
+	return coregraphics.CGImageDestinationRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageDestinationCreateWithURL func(objc.ID, objc.ID, int, objc.ID) objc.ID
 
 // CGImageDestinationCreateWithURL calls the ImageIO framework function CGImageDestinationCreateWithURL.
-func CGImageDestinationCreateWithURL(url obj.Object, type_ obj.Object, count int, options obj.Object) obj.Object {
+func CGImageDestinationCreateWithURL(url corefoundation.CFURLRef, type_ corefoundation.CFStringRef, count int, options corefoundation.CFDictionaryRef) coregraphics.CGImageDestinationRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationCreateWithURL, _lib, "CGImageDestinationCreateWithURL")
 	}
-	_ret := _fnCGImageDestinationCreateWithURL(objref.IDOf(url), objref.IDOf(type_), count, objref.IDOf(options))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageDestinationCreateWithURL(objref.IDOf(url.Object), objref.IDOf(type_.Object), count, objref.IDOf(options.Object))
+	return coregraphics.CGImageDestinationRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageDestinationFinalize func(objc.ID) bool
 
 // CGImageDestinationFinalize calls the ImageIO framework function CGImageDestinationFinalize.
-func CGImageDestinationFinalize(idst obj.Object) bool {
+func CGImageDestinationFinalize(idst coregraphics.CGImageDestinationRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationFinalize == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationFinalize, _lib, "CGImageDestinationFinalize")
 	}
-	return _fnCGImageDestinationFinalize(objref.IDOf(idst))
+	return _fnCGImageDestinationFinalize(objref.IDOf(idst.Object))
 }
 
 var _fnCGImageDestinationGetTypeID func() int
@@ -152,119 +154,119 @@ func CGImageDestinationGetTypeID() int {
 var _fnCGImageDestinationSetProperties func(objc.ID, objc.ID)
 
 // CGImageDestinationSetProperties calls the ImageIO framework function CGImageDestinationSetProperties.
-func CGImageDestinationSetProperties(idst obj.Object, properties obj.Object) {
+func CGImageDestinationSetProperties(idst coregraphics.CGImageDestinationRef, properties corefoundation.CFDictionaryRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationSetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationSetProperties, _lib, "CGImageDestinationSetProperties")
 	}
-	_fnCGImageDestinationSetProperties(objref.IDOf(idst), objref.IDOf(properties))
+	_fnCGImageDestinationSetProperties(objref.IDOf(idst.Object), objref.IDOf(properties.Object))
 }
 
 var _fnCGImageMetadataCopyStringValueWithPath func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // CGImageMetadataCopyStringValueWithPath calls the ImageIO framework function CGImageMetadataCopyStringValueWithPath.
-func CGImageMetadataCopyStringValueWithPath(metadata obj.Object, parent obj.Object, path obj.Object) obj.Object {
+func CGImageMetadataCopyStringValueWithPath(metadata coregraphics.CGImageMetadataRef, parent coregraphics.CGImageMetadataTagRef, path corefoundation.CFStringRef) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCopyStringValueWithPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCopyStringValueWithPath, _lib, "CGImageMetadataCopyStringValueWithPath")
 	}
-	_ret := _fnCGImageMetadataCopyStringValueWithPath(objref.IDOf(metadata), objref.IDOf(parent), objref.IDOf(path))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageMetadataCopyStringValueWithPath(objref.IDOf(metadata.Object), objref.IDOf(parent.Object), objref.IDOf(path.Object))
+	return corefoundation.CFStringRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCopyTagMatchingImageProperty func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // CGImageMetadataCopyTagMatchingImageProperty calls the ImageIO framework function CGImageMetadataCopyTagMatchingImageProperty.
-func CGImageMetadataCopyTagMatchingImageProperty(metadata obj.Object, dictionaryName obj.Object, propertyName obj.Object) obj.Object {
+func CGImageMetadataCopyTagMatchingImageProperty(metadata coregraphics.CGImageMetadataRef, dictionaryName corefoundation.CFStringRef, propertyName corefoundation.CFStringRef) coregraphics.CGImageMetadataTagRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCopyTagMatchingImageProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCopyTagMatchingImageProperty, _lib, "CGImageMetadataCopyTagMatchingImageProperty")
 	}
-	_ret := _fnCGImageMetadataCopyTagMatchingImageProperty(objref.IDOf(metadata), objref.IDOf(dictionaryName), objref.IDOf(propertyName))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageMetadataCopyTagMatchingImageProperty(objref.IDOf(metadata.Object), objref.IDOf(dictionaryName.Object), objref.IDOf(propertyName.Object))
+	return coregraphics.CGImageMetadataTagRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCopyTagWithPath func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // CGImageMetadataCopyTagWithPath calls the ImageIO framework function CGImageMetadataCopyTagWithPath.
-func CGImageMetadataCopyTagWithPath(metadata obj.Object, parent obj.Object, path obj.Object) obj.Object {
+func CGImageMetadataCopyTagWithPath(metadata coregraphics.CGImageMetadataRef, parent coregraphics.CGImageMetadataTagRef, path corefoundation.CFStringRef) coregraphics.CGImageMetadataTagRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCopyTagWithPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCopyTagWithPath, _lib, "CGImageMetadataCopyTagWithPath")
 	}
-	_ret := _fnCGImageMetadataCopyTagWithPath(objref.IDOf(metadata), objref.IDOf(parent), objref.IDOf(path))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageMetadataCopyTagWithPath(objref.IDOf(metadata.Object), objref.IDOf(parent.Object), objref.IDOf(path.Object))
+	return coregraphics.CGImageMetadataTagRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCopyTags func(objc.ID) objc.ID
 
 // CGImageMetadataCopyTags calls the ImageIO framework function CGImageMetadataCopyTags.
-func CGImageMetadataCopyTags(metadata obj.Object) obj.Object {
+func CGImageMetadataCopyTags(metadata coregraphics.CGImageMetadataRef) corefoundation.CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCopyTags == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCopyTags, _lib, "CGImageMetadataCopyTags")
 	}
-	_ret := _fnCGImageMetadataCopyTags(objref.IDOf(metadata))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageMetadataCopyTags(objref.IDOf(metadata.Object))
+	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCreateFromXMPData func(objc.ID) objc.ID
 
 // CGImageMetadataCreateFromXMPData calls the ImageIO framework function CGImageMetadataCreateFromXMPData.
-func CGImageMetadataCreateFromXMPData(data obj.Object) obj.Object {
+func CGImageMetadataCreateFromXMPData(data corefoundation.CFDataRef) coregraphics.CGImageMetadataRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCreateFromXMPData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCreateFromXMPData, _lib, "CGImageMetadataCreateFromXMPData")
 	}
-	_ret := _fnCGImageMetadataCreateFromXMPData(objref.IDOf(data))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageMetadataCreateFromXMPData(objref.IDOf(data.Object))
+	return coregraphics.CGImageMetadataRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCreateMutable func() objc.ID
 
 // CGImageMetadataCreateMutable calls the ImageIO framework function CGImageMetadataCreateMutable.
-func CGImageMetadataCreateMutable() obj.Object {
+func CGImageMetadataCreateMutable() coregraphics.CGMutableImageMetadataRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCreateMutable == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCreateMutable, _lib, "CGImageMetadataCreateMutable")
 	}
 	_ret := _fnCGImageMetadataCreateMutable()
-	return obj.Adopt(_ret)
+	return coregraphics.CGMutableImageMetadataRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCreateMutableCopy func(objc.ID) objc.ID
 
 // CGImageMetadataCreateMutableCopy calls the ImageIO framework function CGImageMetadataCreateMutableCopy.
-func CGImageMetadataCreateMutableCopy(metadata obj.Object) obj.Object {
+func CGImageMetadataCreateMutableCopy(metadata coregraphics.CGImageMetadataRef) coregraphics.CGMutableImageMetadataRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCreateMutableCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCreateMutableCopy, _lib, "CGImageMetadataCreateMutableCopy")
 	}
-	_ret := _fnCGImageMetadataCreateMutableCopy(objref.IDOf(metadata))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageMetadataCreateMutableCopy(objref.IDOf(metadata.Object))
+	return coregraphics.CGMutableImageMetadataRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataCreateXMPData func(objc.ID, objc.ID) objc.ID
 
 // CGImageMetadataCreateXMPData calls the ImageIO framework function CGImageMetadataCreateXMPData.
-func CGImageMetadataCreateXMPData(metadata obj.Object, options obj.Object) obj.Object {
+func CGImageMetadataCreateXMPData(metadata coregraphics.CGImageMetadataRef, options corefoundation.CFDictionaryRef) corefoundation.CFDataRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataCreateXMPData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataCreateXMPData, _lib, "CGImageMetadataCreateXMPData")
 	}
-	_ret := _fnCGImageMetadataCreateXMPData(objref.IDOf(metadata), objref.IDOf(options))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageMetadataCreateXMPData(objref.IDOf(metadata.Object), objref.IDOf(options.Object))
+	return corefoundation.CFDataRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataEnumerateTagsUsingBlock func(objc.ID, objc.ID, objc.ID, objc.Block)
 
 // CGImageMetadataEnumerateTagsUsingBlock calls the ImageIO framework function CGImageMetadataEnumerateTagsUsingBlock.
-func CGImageMetadataEnumerateTagsUsingBlock(metadata obj.Object, rootPath obj.Object, options obj.Object, block func(unsafe.Pointer, unsafe.Pointer) bool) {
+func CGImageMetadataEnumerateTagsUsingBlock(metadata coregraphics.CGImageMetadataRef, rootPath corefoundation.CFStringRef, options corefoundation.CFDictionaryRef, block func(unsafe.Pointer, unsafe.Pointer) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataEnumerateTagsUsingBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataEnumerateTagsUsingBlock, _lib, "CGImageMetadataEnumerateTagsUsingBlock")
 	}
-	_fnCGImageMetadataEnumerateTagsUsingBlock(objref.IDOf(metadata), objref.IDOf(rootPath), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) bool { return block(_b0, _b1) }))
+	_fnCGImageMetadataEnumerateTagsUsingBlock(objref.IDOf(metadata.Object), objref.IDOf(rootPath.Object), objref.IDOf(options.Object), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) bool { return block(_b0, _b1) }))
 }
 
 var _fnCGImageMetadataGetTypeID func() int
@@ -281,128 +283,128 @@ func CGImageMetadataGetTypeID() int {
 var _fnCGImageMetadataRemoveTagWithPath func(objc.ID, objc.ID, objc.ID) bool
 
 // CGImageMetadataRemoveTagWithPath calls the ImageIO framework function CGImageMetadataRemoveTagWithPath.
-func CGImageMetadataRemoveTagWithPath(metadata obj.Object, parent obj.Object, path obj.Object) bool {
+func CGImageMetadataRemoveTagWithPath(metadata coregraphics.CGMutableImageMetadataRef, parent coregraphics.CGImageMetadataTagRef, path corefoundation.CFStringRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataRemoveTagWithPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataRemoveTagWithPath, _lib, "CGImageMetadataRemoveTagWithPath")
 	}
-	return _fnCGImageMetadataRemoveTagWithPath(objref.IDOf(metadata), objref.IDOf(parent), objref.IDOf(path))
+	return _fnCGImageMetadataRemoveTagWithPath(objref.IDOf(metadata.Object), objref.IDOf(parent.Object), objref.IDOf(path.Object))
 }
 
 var _fnCGImageMetadataSetTagWithPath func(objc.ID, objc.ID, objc.ID, objc.ID) bool
 
 // CGImageMetadataSetTagWithPath calls the ImageIO framework function CGImageMetadataSetTagWithPath.
-func CGImageMetadataSetTagWithPath(metadata obj.Object, parent obj.Object, path obj.Object, tag obj.Object) bool {
+func CGImageMetadataSetTagWithPath(metadata coregraphics.CGMutableImageMetadataRef, parent coregraphics.CGImageMetadataTagRef, path corefoundation.CFStringRef, tag coregraphics.CGImageMetadataTagRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataSetTagWithPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataSetTagWithPath, _lib, "CGImageMetadataSetTagWithPath")
 	}
-	return _fnCGImageMetadataSetTagWithPath(objref.IDOf(metadata), objref.IDOf(parent), objref.IDOf(path), objref.IDOf(tag))
+	return _fnCGImageMetadataSetTagWithPath(objref.IDOf(metadata.Object), objref.IDOf(parent.Object), objref.IDOf(path.Object), objref.IDOf(tag.Object))
 }
 
 var _fnCGImageMetadataSetValueMatchingImageProperty func(objc.ID, objc.ID, objc.ID, objc.ID) bool
 
 // CGImageMetadataSetValueMatchingImageProperty calls the ImageIO framework function CGImageMetadataSetValueMatchingImageProperty.
-func CGImageMetadataSetValueMatchingImageProperty(metadata obj.Object, dictionaryName obj.Object, propertyName obj.Object, value obj.Object) bool {
+func CGImageMetadataSetValueMatchingImageProperty(metadata coregraphics.CGMutableImageMetadataRef, dictionaryName corefoundation.CFStringRef, propertyName corefoundation.CFStringRef, value corefoundation.CFTypeRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataSetValueMatchingImageProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataSetValueMatchingImageProperty, _lib, "CGImageMetadataSetValueMatchingImageProperty")
 	}
-	return _fnCGImageMetadataSetValueMatchingImageProperty(objref.IDOf(metadata), objref.IDOf(dictionaryName), objref.IDOf(propertyName), objref.IDOf(value))
+	return _fnCGImageMetadataSetValueMatchingImageProperty(objref.IDOf(metadata.Object), objref.IDOf(dictionaryName.Object), objref.IDOf(propertyName.Object), objref.IDOf(value.Object))
 }
 
 var _fnCGImageMetadataSetValueWithPath func(objc.ID, objc.ID, objc.ID, objc.ID) bool
 
 // CGImageMetadataSetValueWithPath calls the ImageIO framework function CGImageMetadataSetValueWithPath.
-func CGImageMetadataSetValueWithPath(metadata obj.Object, parent obj.Object, path obj.Object, value obj.Object) bool {
+func CGImageMetadataSetValueWithPath(metadata coregraphics.CGMutableImageMetadataRef, parent coregraphics.CGImageMetadataTagRef, path corefoundation.CFStringRef, value corefoundation.CFTypeRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataSetValueWithPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataSetValueWithPath, _lib, "CGImageMetadataSetValueWithPath")
 	}
-	return _fnCGImageMetadataSetValueWithPath(objref.IDOf(metadata), objref.IDOf(parent), objref.IDOf(path), objref.IDOf(value))
+	return _fnCGImageMetadataSetValueWithPath(objref.IDOf(metadata.Object), objref.IDOf(parent.Object), objref.IDOf(path.Object), objref.IDOf(value.Object))
 }
 
 var _fnCGImageMetadataTagCopyName func(objc.ID) objc.ID
 
 // CGImageMetadataTagCopyName calls the ImageIO framework function CGImageMetadataTagCopyName.
-func CGImageMetadataTagCopyName(tag obj.Object) obj.Object {
+func CGImageMetadataTagCopyName(tag coregraphics.CGImageMetadataTagRef) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCopyName == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyName, _lib, "CGImageMetadataTagCopyName")
 	}
-	_ret := _fnCGImageMetadataTagCopyName(objref.IDOf(tag))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageMetadataTagCopyName(objref.IDOf(tag.Object))
+	return corefoundation.CFStringRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataTagCopyNamespace func(objc.ID) objc.ID
 
 // CGImageMetadataTagCopyNamespace calls the ImageIO framework function CGImageMetadataTagCopyNamespace.
-func CGImageMetadataTagCopyNamespace(tag obj.Object) obj.Object {
+func CGImageMetadataTagCopyNamespace(tag coregraphics.CGImageMetadataTagRef) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCopyNamespace == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyNamespace, _lib, "CGImageMetadataTagCopyNamespace")
 	}
-	_ret := _fnCGImageMetadataTagCopyNamespace(objref.IDOf(tag))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageMetadataTagCopyNamespace(objref.IDOf(tag.Object))
+	return corefoundation.CFStringRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataTagCopyPrefix func(objc.ID) objc.ID
 
 // CGImageMetadataTagCopyPrefix calls the ImageIO framework function CGImageMetadataTagCopyPrefix.
-func CGImageMetadataTagCopyPrefix(tag obj.Object) obj.Object {
+func CGImageMetadataTagCopyPrefix(tag coregraphics.CGImageMetadataTagRef) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCopyPrefix == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyPrefix, _lib, "CGImageMetadataTagCopyPrefix")
 	}
-	_ret := _fnCGImageMetadataTagCopyPrefix(objref.IDOf(tag))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageMetadataTagCopyPrefix(objref.IDOf(tag.Object))
+	return corefoundation.CFStringRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataTagCopyQualifiers func(objc.ID) objc.ID
 
 // CGImageMetadataTagCopyQualifiers calls the ImageIO framework function CGImageMetadataTagCopyQualifiers.
-func CGImageMetadataTagCopyQualifiers(tag obj.Object) obj.Object {
+func CGImageMetadataTagCopyQualifiers(tag coregraphics.CGImageMetadataTagRef) corefoundation.CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCopyQualifiers == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyQualifiers, _lib, "CGImageMetadataTagCopyQualifiers")
 	}
-	_ret := _fnCGImageMetadataTagCopyQualifiers(objref.IDOf(tag))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageMetadataTagCopyQualifiers(objref.IDOf(tag.Object))
+	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataTagCopyValue func(objc.ID) objc.ID
 
 // CGImageMetadataTagCopyValue calls the ImageIO framework function CGImageMetadataTagCopyValue.
-func CGImageMetadataTagCopyValue(tag obj.Object) obj.Object {
+func CGImageMetadataTagCopyValue(tag coregraphics.CGImageMetadataTagRef) corefoundation.CFTypeRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCopyValue == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyValue, _lib, "CGImageMetadataTagCopyValue")
 	}
-	_ret := _fnCGImageMetadataTagCopyValue(objref.IDOf(tag))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageMetadataTagCopyValue(objref.IDOf(tag.Object))
+	return corefoundation.CFTypeRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataTagCreate func(objc.ID, objc.ID, objc.ID, CGImageMetadataType, objc.ID) objc.ID
 
 // CGImageMetadataTagCreate calls the ImageIO framework function CGImageMetadataTagCreate.
-func CGImageMetadataTagCreate(xmlns obj.Object, prefix obj.Object, name obj.Object, type_ CGImageMetadataType, value obj.Object) obj.Object {
+func CGImageMetadataTagCreate(xmlns corefoundation.CFStringRef, prefix corefoundation.CFStringRef, name corefoundation.CFStringRef, type_ CGImageMetadataType, value corefoundation.CFTypeRef) coregraphics.CGImageMetadataTagRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCreate, _lib, "CGImageMetadataTagCreate")
 	}
-	_ret := _fnCGImageMetadataTagCreate(objref.IDOf(xmlns), objref.IDOf(prefix), objref.IDOf(name), type_, objref.IDOf(value))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageMetadataTagCreate(objref.IDOf(xmlns.Object), objref.IDOf(prefix.Object), objref.IDOf(name.Object), type_, objref.IDOf(value.Object))
+	return coregraphics.CGImageMetadataTagRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageMetadataTagGetType func(objc.ID) CGImageMetadataType
 
 // CGImageMetadataTagGetType calls the ImageIO framework function CGImageMetadataTagGetType.
-func CGImageMetadataTagGetType(tag obj.Object) CGImageMetadataType {
+func CGImageMetadataTagGetType(tag coregraphics.CGImageMetadataTagRef) CGImageMetadataType {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagGetType == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagGetType, _lib, "CGImageMetadataTagGetType")
 	}
-	return _fnCGImageMetadataTagGetType(objref.IDOf(tag))
+	return _fnCGImageMetadataTagGetType(objref.IDOf(tag.Object))
 }
 
 var _fnCGImageMetadataTagGetTypeID func() int
@@ -419,189 +421,189 @@ func CGImageMetadataTagGetTypeID() int {
 var _fnCGImageSourceCopyAuxiliaryDataInfoAtIndex func(objc.ID, int, objc.ID) objc.ID
 
 // CGImageSourceCopyAuxiliaryDataInfoAtIndex calls the ImageIO framework function CGImageSourceCopyAuxiliaryDataInfoAtIndex.
-func CGImageSourceCopyAuxiliaryDataInfoAtIndex(isrc obj.Object, index int, auxiliaryImageDataType obj.Object) obj.Object {
+func CGImageSourceCopyAuxiliaryDataInfoAtIndex(isrc coregraphics.CGImageSourceRef, index int, auxiliaryImageDataType corefoundation.CFStringRef) corefoundation.CFDictionaryRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCopyAuxiliaryDataInfoAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyAuxiliaryDataInfoAtIndex, _lib, "CGImageSourceCopyAuxiliaryDataInfoAtIndex")
 	}
-	_ret := _fnCGImageSourceCopyAuxiliaryDataInfoAtIndex(objref.IDOf(isrc), index, objref.IDOf(auxiliaryImageDataType))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageSourceCopyAuxiliaryDataInfoAtIndex(objref.IDOf(isrc.Object), index, objref.IDOf(auxiliaryImageDataType.Object))
+	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCopyMetadataAtIndex func(objc.ID, int, objc.ID) objc.ID
 
 // CGImageSourceCopyMetadataAtIndex calls the ImageIO framework function CGImageSourceCopyMetadataAtIndex.
-func CGImageSourceCopyMetadataAtIndex(isrc obj.Object, index int, options obj.Object) obj.Object {
+func CGImageSourceCopyMetadataAtIndex(isrc coregraphics.CGImageSourceRef, index int, options corefoundation.CFDictionaryRef) coregraphics.CGImageMetadataRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCopyMetadataAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyMetadataAtIndex, _lib, "CGImageSourceCopyMetadataAtIndex")
 	}
-	_ret := _fnCGImageSourceCopyMetadataAtIndex(objref.IDOf(isrc), index, objref.IDOf(options))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageSourceCopyMetadataAtIndex(objref.IDOf(isrc.Object), index, objref.IDOf(options.Object))
+	return coregraphics.CGImageMetadataRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCopyProperties func(objc.ID, objc.ID) objc.ID
 
 // CGImageSourceCopyProperties calls the ImageIO framework function CGImageSourceCopyProperties.
-func CGImageSourceCopyProperties(isrc obj.Object, options obj.Object) obj.Object {
+func CGImageSourceCopyProperties(isrc coregraphics.CGImageSourceRef, options corefoundation.CFDictionaryRef) corefoundation.CFDictionaryRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCopyProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyProperties, _lib, "CGImageSourceCopyProperties")
 	}
-	_ret := _fnCGImageSourceCopyProperties(objref.IDOf(isrc), objref.IDOf(options))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageSourceCopyProperties(objref.IDOf(isrc.Object), objref.IDOf(options.Object))
+	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCopyPropertiesAtIndex func(objc.ID, int, objc.ID) objc.ID
 
 // CGImageSourceCopyPropertiesAtIndex calls the ImageIO framework function CGImageSourceCopyPropertiesAtIndex.
-func CGImageSourceCopyPropertiesAtIndex(isrc obj.Object, index int, options obj.Object) obj.Object {
+func CGImageSourceCopyPropertiesAtIndex(isrc coregraphics.CGImageSourceRef, index int, options corefoundation.CFDictionaryRef) corefoundation.CFDictionaryRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCopyPropertiesAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyPropertiesAtIndex, _lib, "CGImageSourceCopyPropertiesAtIndex")
 	}
-	_ret := _fnCGImageSourceCopyPropertiesAtIndex(objref.IDOf(isrc), index, objref.IDOf(options))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageSourceCopyPropertiesAtIndex(objref.IDOf(isrc.Object), index, objref.IDOf(options.Object))
+	return corefoundation.CFDictionaryRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCopyTypeIdentifiers func() objc.ID
 
 // CGImageSourceCopyTypeIdentifiers calls the ImageIO framework function CGImageSourceCopyTypeIdentifiers.
-func CGImageSourceCopyTypeIdentifiers() obj.Object {
+func CGImageSourceCopyTypeIdentifiers() corefoundation.CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCopyTypeIdentifiers == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCopyTypeIdentifiers, _lib, "CGImageSourceCopyTypeIdentifiers")
 	}
 	_ret := _fnCGImageSourceCopyTypeIdentifiers()
-	return obj.Adopt(_ret)
+	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCreateImageAtIndex func(objc.ID, int, objc.ID) objc.ID
 
 // CGImageSourceCreateImageAtIndex calls the ImageIO framework function CGImageSourceCreateImageAtIndex.
-func CGImageSourceCreateImageAtIndex(isrc obj.Object, index int, options obj.Object) obj.Object {
+func CGImageSourceCreateImageAtIndex(isrc coregraphics.CGImageSourceRef, index int, options corefoundation.CFDictionaryRef) coregraphics.CGImageRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCreateImageAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateImageAtIndex, _lib, "CGImageSourceCreateImageAtIndex")
 	}
-	_ret := _fnCGImageSourceCreateImageAtIndex(objref.IDOf(isrc), index, objref.IDOf(options))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageSourceCreateImageAtIndex(objref.IDOf(isrc.Object), index, objref.IDOf(options.Object))
+	return coregraphics.CGImageRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCreateIncremental func(objc.ID) objc.ID
 
 // CGImageSourceCreateIncremental calls the ImageIO framework function CGImageSourceCreateIncremental.
-func CGImageSourceCreateIncremental(options obj.Object) obj.Object {
+func CGImageSourceCreateIncremental(options corefoundation.CFDictionaryRef) coregraphics.CGImageSourceRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCreateIncremental == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateIncremental, _lib, "CGImageSourceCreateIncremental")
 	}
-	_ret := _fnCGImageSourceCreateIncremental(objref.IDOf(options))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageSourceCreateIncremental(objref.IDOf(options.Object))
+	return coregraphics.CGImageSourceRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCreateThumbnailAtIndex func(objc.ID, int, objc.ID) objc.ID
 
 // CGImageSourceCreateThumbnailAtIndex calls the ImageIO framework function CGImageSourceCreateThumbnailAtIndex.
-func CGImageSourceCreateThumbnailAtIndex(isrc obj.Object, index int, options obj.Object) obj.Object {
+func CGImageSourceCreateThumbnailAtIndex(isrc coregraphics.CGImageSourceRef, index int, options corefoundation.CFDictionaryRef) coregraphics.CGImageRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCreateThumbnailAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateThumbnailAtIndex, _lib, "CGImageSourceCreateThumbnailAtIndex")
 	}
-	_ret := _fnCGImageSourceCreateThumbnailAtIndex(objref.IDOf(isrc), index, objref.IDOf(options))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageSourceCreateThumbnailAtIndex(objref.IDOf(isrc.Object), index, objref.IDOf(options.Object))
+	return coregraphics.CGImageRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCreateWithData func(objc.ID, objc.ID) objc.ID
 
 // CGImageSourceCreateWithData calls the ImageIO framework function CGImageSourceCreateWithData.
-func CGImageSourceCreateWithData(data obj.Object, options obj.Object) obj.Object {
+func CGImageSourceCreateWithData(data corefoundation.CFDataRef, options corefoundation.CFDictionaryRef) coregraphics.CGImageSourceRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCreateWithData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateWithData, _lib, "CGImageSourceCreateWithData")
 	}
-	_ret := _fnCGImageSourceCreateWithData(objref.IDOf(data), objref.IDOf(options))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageSourceCreateWithData(objref.IDOf(data.Object), objref.IDOf(options.Object))
+	return coregraphics.CGImageSourceRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCreateWithDataProvider func(objc.ID, objc.ID) objc.ID
 
 // CGImageSourceCreateWithDataProvider calls the ImageIO framework function CGImageSourceCreateWithDataProvider.
-func CGImageSourceCreateWithDataProvider(provider obj.Object, options obj.Object) obj.Object {
+func CGImageSourceCreateWithDataProvider(provider coregraphics.CGDataProviderRef, options corefoundation.CFDictionaryRef) coregraphics.CGImageSourceRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCreateWithDataProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateWithDataProvider, _lib, "CGImageSourceCreateWithDataProvider")
 	}
-	_ret := _fnCGImageSourceCreateWithDataProvider(objref.IDOf(provider), objref.IDOf(options))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageSourceCreateWithDataProvider(objref.IDOf(provider.Object), objref.IDOf(options.Object))
+	return coregraphics.CGImageSourceRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceCreateWithURL func(objc.ID, objc.ID) objc.ID
 
 // CGImageSourceCreateWithURL calls the ImageIO framework function CGImageSourceCreateWithURL.
-func CGImageSourceCreateWithURL(url obj.Object, options obj.Object) obj.Object {
+func CGImageSourceCreateWithURL(url corefoundation.CFURLRef, options corefoundation.CFDictionaryRef) coregraphics.CGImageSourceRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceCreateWithURL, _lib, "CGImageSourceCreateWithURL")
 	}
-	_ret := _fnCGImageSourceCreateWithURL(objref.IDOf(url), objref.IDOf(options))
-	return obj.Adopt(_ret)
+	_ret := _fnCGImageSourceCreateWithURL(objref.IDOf(url.Object), objref.IDOf(options.Object))
+	return coregraphics.CGImageSourceRef{obj.Adopt(_ret)}
 }
 
 var _fnCGImageSourceGetCount func(objc.ID) int
 
 // CGImageSourceGetCount calls the ImageIO framework function CGImageSourceGetCount.
-func CGImageSourceGetCount(isrc obj.Object) int {
+func CGImageSourceGetCount(isrc coregraphics.CGImageSourceRef) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceGetCount == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceGetCount, _lib, "CGImageSourceGetCount")
 	}
-	return _fnCGImageSourceGetCount(objref.IDOf(isrc))
+	return _fnCGImageSourceGetCount(objref.IDOf(isrc.Object))
 }
 
 var _fnCGImageSourceGetPrimaryImageIndex func(objc.ID) int
 
 // CGImageSourceGetPrimaryImageIndex calls the ImageIO framework function CGImageSourceGetPrimaryImageIndex.
-func CGImageSourceGetPrimaryImageIndex(isrc obj.Object) int {
+func CGImageSourceGetPrimaryImageIndex(isrc coregraphics.CGImageSourceRef) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceGetPrimaryImageIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceGetPrimaryImageIndex, _lib, "CGImageSourceGetPrimaryImageIndex")
 	}
-	return _fnCGImageSourceGetPrimaryImageIndex(objref.IDOf(isrc))
+	return _fnCGImageSourceGetPrimaryImageIndex(objref.IDOf(isrc.Object))
 }
 
 var _fnCGImageSourceGetStatus func(objc.ID) CGImageSourceStatus
 
 // CGImageSourceGetStatus calls the ImageIO framework function CGImageSourceGetStatus.
-func CGImageSourceGetStatus(isrc obj.Object) CGImageSourceStatus {
+func CGImageSourceGetStatus(isrc coregraphics.CGImageSourceRef) CGImageSourceStatus {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceGetStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceGetStatus, _lib, "CGImageSourceGetStatus")
 	}
-	return _fnCGImageSourceGetStatus(objref.IDOf(isrc))
+	return _fnCGImageSourceGetStatus(objref.IDOf(isrc.Object))
 }
 
 var _fnCGImageSourceGetStatusAtIndex func(objc.ID, int) CGImageSourceStatus
 
 // CGImageSourceGetStatusAtIndex calls the ImageIO framework function CGImageSourceGetStatusAtIndex.
-func CGImageSourceGetStatusAtIndex(isrc obj.Object, index int) CGImageSourceStatus {
+func CGImageSourceGetStatusAtIndex(isrc coregraphics.CGImageSourceRef, index int) CGImageSourceStatus {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceGetStatusAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceGetStatusAtIndex, _lib, "CGImageSourceGetStatusAtIndex")
 	}
-	return _fnCGImageSourceGetStatusAtIndex(objref.IDOf(isrc), index)
+	return _fnCGImageSourceGetStatusAtIndex(objref.IDOf(isrc.Object), index)
 }
 
 var _fnCGImageSourceGetType func(objc.ID) objc.ID
 
 // CGImageSourceGetType calls the ImageIO framework function CGImageSourceGetType.
-func CGImageSourceGetType(isrc obj.Object) obj.Object {
+func CGImageSourceGetType(isrc coregraphics.CGImageSourceRef) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceGetType == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceGetType, _lib, "CGImageSourceGetType")
 	}
-	_ret := _fnCGImageSourceGetType(objref.IDOf(isrc))
-	return obj.Wrap(_ret)
+	_ret := _fnCGImageSourceGetType(objref.IDOf(isrc.Object))
+	return corefoundation.CFStringRef{obj.Wrap(_ret)}
 }
 
 var _fnCGImageSourceGetTypeID func() int
@@ -618,32 +620,32 @@ func CGImageSourceGetTypeID() int {
 var _fnCGImageSourceRemoveCacheAtIndex func(objc.ID, int)
 
 // CGImageSourceRemoveCacheAtIndex calls the ImageIO framework function CGImageSourceRemoveCacheAtIndex.
-func CGImageSourceRemoveCacheAtIndex(isrc obj.Object, index int) {
+func CGImageSourceRemoveCacheAtIndex(isrc coregraphics.CGImageSourceRef, index int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceRemoveCacheAtIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceRemoveCacheAtIndex, _lib, "CGImageSourceRemoveCacheAtIndex")
 	}
-	_fnCGImageSourceRemoveCacheAtIndex(objref.IDOf(isrc), index)
+	_fnCGImageSourceRemoveCacheAtIndex(objref.IDOf(isrc.Object), index)
 }
 
 var _fnCGImageSourceUpdateData func(objc.ID, objc.ID, bool)
 
 // CGImageSourceUpdateData calls the ImageIO framework function CGImageSourceUpdateData.
-func CGImageSourceUpdateData(isrc obj.Object, data obj.Object, final bool) {
+func CGImageSourceUpdateData(isrc coregraphics.CGImageSourceRef, data corefoundation.CFDataRef, final bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceUpdateData == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceUpdateData, _lib, "CGImageSourceUpdateData")
 	}
-	_fnCGImageSourceUpdateData(objref.IDOf(isrc), objref.IDOf(data), final)
+	_fnCGImageSourceUpdateData(objref.IDOf(isrc.Object), objref.IDOf(data.Object), final)
 }
 
 var _fnCGImageSourceUpdateDataProvider func(objc.ID, objc.ID, bool)
 
 // CGImageSourceUpdateDataProvider calls the ImageIO framework function CGImageSourceUpdateDataProvider.
-func CGImageSourceUpdateDataProvider(isrc obj.Object, provider obj.Object, final bool) {
+func CGImageSourceUpdateDataProvider(isrc coregraphics.CGImageSourceRef, provider coregraphics.CGDataProviderRef, final bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageSourceUpdateDataProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageSourceUpdateDataProvider, _lib, "CGImageSourceUpdateDataProvider")
 	}
-	_fnCGImageSourceUpdateDataProvider(objref.IDOf(isrc), objref.IDOf(provider), final)
+	_fnCGImageSourceUpdateDataProvider(objref.IDOf(isrc.Object), objref.IDOf(provider.Object), final)
 }

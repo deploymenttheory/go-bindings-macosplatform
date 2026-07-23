@@ -6,6 +6,8 @@ package iokit
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type IOAsyncCompletionContent struct {
@@ -53,3 +55,10 @@ type OSNotificationHeader64 struct {
 	Reference [8]uint64
 	Content   unsafe.Pointer
 }
+
+// IONotificationPortRef is a handle for the opaque IONotificationPortRef type.
+type IONotificationPortRef struct{ obj.Object }
+
+// IsNil reports whether IONotificationPortRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h IONotificationPortRef) IsNil() bool { return h.Object == nil }

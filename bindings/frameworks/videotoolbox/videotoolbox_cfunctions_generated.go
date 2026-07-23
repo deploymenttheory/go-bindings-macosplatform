@@ -7,6 +7,7 @@ package videotoolbox
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -17,104 +18,104 @@ import (
 var _fnVTCompressionSessionBeginPass func(objc.ID, CompressionSessionOptionFlags, unsafe.Pointer) int32
 
 // VTCompressionSessionBeginPass calls the VideoToolbox framework function VTCompressionSessionBeginPass.
-func VTCompressionSessionBeginPass(session obj.Object, beginPassFlags CompressionSessionOptionFlags) (result int, reserved uint32) {
+func VTCompressionSessionBeginPass(session VTCompressionSessionRef, beginPassFlags CompressionSessionOptionFlags) (result int, reserved uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionBeginPass == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionBeginPass, _lib, "VTCompressionSessionBeginPass")
 	}
 	var _out0 uint32
-	_ret := int(_fnVTCompressionSessionBeginPass(objref.IDOf(session), beginPassFlags, unsafe.Pointer(&_out0)))
+	_ret := int(_fnVTCompressionSessionBeginPass(objref.IDOf(session.Object), beginPassFlags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnVTCompressionSessionEncodeFrame func(objc.ID, unsafe.Pointer, coremedia.CMTime, coremedia.CMTime, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTCompressionSessionEncodeFrame calls the VideoToolbox framework function VTCompressionSessionEncodeFrame.
-func VTCompressionSessionEncodeFrame(session obj.Object, imageBuffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties obj.Object, sourceFrameRefcon unsafe.Pointer) (result int, infoFlagsOut EncodeInfoFlags) {
+func VTCompressionSessionEncodeFrame(session VTCompressionSessionRef, imageBuffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties corefoundation.CFDictionaryRef, sourceFrameRefcon unsafe.Pointer) (result int, infoFlagsOut EncodeInfoFlags) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionEncodeFrame == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionEncodeFrame, _lib, "VTCompressionSessionEncodeFrame")
 	}
 	var _out0 EncodeInfoFlags
-	_ret := int(_fnVTCompressionSessionEncodeFrame(objref.IDOf(session), imageBuffer, presentationTimeStamp, duration, objref.IDOf(frameProperties), sourceFrameRefcon, unsafe.Pointer(&_out0)))
+	_ret := int(_fnVTCompressionSessionEncodeFrame(objref.IDOf(session.Object), imageBuffer, presentationTimeStamp, duration, objref.IDOf(frameProperties.Object), sourceFrameRefcon, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnVTCompressionSessionEncodeFrameWithOutputHandler func(objc.ID, unsafe.Pointer, coremedia.CMTime, coremedia.CMTime, objc.ID, unsafe.Pointer, objc.Block) int32
 
 // VTCompressionSessionEncodeFrameWithOutputHandler calls the VideoToolbox framework function VTCompressionSessionEncodeFrameWithOutputHandler.
-func VTCompressionSessionEncodeFrameWithOutputHandler(session obj.Object, imageBuffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties obj.Object, outputHandler func(int, EncodeInfoFlags, unsafe.Pointer)) (result int, infoFlagsOut EncodeInfoFlags) {
+func VTCompressionSessionEncodeFrameWithOutputHandler(session VTCompressionSessionRef, imageBuffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties corefoundation.CFDictionaryRef, outputHandler func(int, EncodeInfoFlags, unsafe.Pointer)) (result int, infoFlagsOut EncodeInfoFlags) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionEncodeFrameWithOutputHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionEncodeFrameWithOutputHandler, _lib, "VTCompressionSessionEncodeFrameWithOutputHandler")
 	}
 	var _out0 EncodeInfoFlags
-	_ret := int(_fnVTCompressionSessionEncodeFrameWithOutputHandler(objref.IDOf(session), imageBuffer, presentationTimeStamp, duration, objref.IDOf(frameProperties), unsafe.Pointer(&_out0), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 EncodeInfoFlags, _b2 unsafe.Pointer) { outputHandler(_b0, _b1, _b2) })))
+	_ret := int(_fnVTCompressionSessionEncodeFrameWithOutputHandler(objref.IDOf(session.Object), imageBuffer, presentationTimeStamp, duration, objref.IDOf(frameProperties.Object), unsafe.Pointer(&_out0), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 EncodeInfoFlags, _b2 unsafe.Pointer) { outputHandler(_b0, _b1, _b2) })))
 	return _ret, _out0
 }
 
 var _fnVTCompressionSessionEncodeMultiImageFrame func(objc.ID, objc.ID, coremedia.CMTime, coremedia.CMTime, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTCompressionSessionEncodeMultiImageFrame calls the VideoToolbox framework function VTCompressionSessionEncodeMultiImageFrame.
-func VTCompressionSessionEncodeMultiImageFrame(session obj.Object, taggedBufferGroup obj.Object, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties obj.Object, sourceFrameRefcon unsafe.Pointer) (result int, infoFlagsOut EncodeInfoFlags) {
+func VTCompressionSessionEncodeMultiImageFrame(session VTCompressionSessionRef, taggedBufferGroup obj.Object, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties corefoundation.CFDictionaryRef, sourceFrameRefcon unsafe.Pointer) (result int, infoFlagsOut EncodeInfoFlags) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionEncodeMultiImageFrame == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionEncodeMultiImageFrame, _lib, "VTCompressionSessionEncodeMultiImageFrame")
 	}
 	var _out0 EncodeInfoFlags
-	_ret := int(_fnVTCompressionSessionEncodeMultiImageFrame(objref.IDOf(session), objref.IDOf(taggedBufferGroup), presentationTimeStamp, duration, objref.IDOf(frameProperties), sourceFrameRefcon, unsafe.Pointer(&_out0)))
+	_ret := int(_fnVTCompressionSessionEncodeMultiImageFrame(objref.IDOf(session.Object), objref.IDOf(taggedBufferGroup), presentationTimeStamp, duration, objref.IDOf(frameProperties.Object), sourceFrameRefcon, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnVTCompressionSessionEncodeMultiImageFrameWithOutputHandler func(objc.ID, objc.ID, coremedia.CMTime, coremedia.CMTime, objc.ID, unsafe.Pointer, objc.Block) int32
 
 // VTCompressionSessionEncodeMultiImageFrameWithOutputHandler calls the VideoToolbox framework function VTCompressionSessionEncodeMultiImageFrameWithOutputHandler.
-func VTCompressionSessionEncodeMultiImageFrameWithOutputHandler(session obj.Object, taggedBufferGroup obj.Object, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties obj.Object, outputHandler func(int, EncodeInfoFlags, unsafe.Pointer)) (result int, infoFlagsOut EncodeInfoFlags) {
+func VTCompressionSessionEncodeMultiImageFrameWithOutputHandler(session VTCompressionSessionRef, taggedBufferGroup obj.Object, presentationTimeStamp coremedia.CMTime, duration coremedia.CMTime, frameProperties corefoundation.CFDictionaryRef, outputHandler func(int, EncodeInfoFlags, unsafe.Pointer)) (result int, infoFlagsOut EncodeInfoFlags) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionEncodeMultiImageFrameWithOutputHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionEncodeMultiImageFrameWithOutputHandler, _lib, "VTCompressionSessionEncodeMultiImageFrameWithOutputHandler")
 	}
 	var _out0 EncodeInfoFlags
-	_ret := int(_fnVTCompressionSessionEncodeMultiImageFrameWithOutputHandler(objref.IDOf(session), objref.IDOf(taggedBufferGroup), presentationTimeStamp, duration, objref.IDOf(frameProperties), unsafe.Pointer(&_out0), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 EncodeInfoFlags, _b2 unsafe.Pointer) { outputHandler(_b0, _b1, _b2) })))
+	_ret := int(_fnVTCompressionSessionEncodeMultiImageFrameWithOutputHandler(objref.IDOf(session.Object), objref.IDOf(taggedBufferGroup), presentationTimeStamp, duration, objref.IDOf(frameProperties.Object), unsafe.Pointer(&_out0), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 EncodeInfoFlags, _b2 unsafe.Pointer) { outputHandler(_b0, _b1, _b2) })))
 	return _ret, _out0
 }
 
 var _fnVTCompressionSessionEndPass func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTCompressionSessionEndPass calls the VideoToolbox framework function VTCompressionSessionEndPass.
-func VTCompressionSessionEndPass(session obj.Object) (result int, furtherPassesRequestedOut uint8, reserved uint32) {
+func VTCompressionSessionEndPass(session VTCompressionSessionRef) (result int, furtherPassesRequestedOut uint8, reserved uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionEndPass == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionEndPass, _lib, "VTCompressionSessionEndPass")
 	}
 	var _out0 uint8
 	var _out1 uint32
-	_ret := int(_fnVTCompressionSessionEndPass(objref.IDOf(session), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
+	_ret := int(_fnVTCompressionSessionEndPass(objref.IDOf(session.Object), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
 var _fnVTCompressionSessionGetPixelBufferPool func(objc.ID) objc.ID
 
 // VTCompressionSessionGetPixelBufferPool calls the VideoToolbox framework function VTCompressionSessionGetPixelBufferPool.
-func VTCompressionSessionGetPixelBufferPool(session obj.Object) obj.Object {
+func VTCompressionSessionGetPixelBufferPool(session VTCompressionSessionRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionGetPixelBufferPool == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionGetPixelBufferPool, _lib, "VTCompressionSessionGetPixelBufferPool")
 	}
-	_ret := _fnVTCompressionSessionGetPixelBufferPool(objref.IDOf(session))
+	_ret := _fnVTCompressionSessionGetPixelBufferPool(objref.IDOf(session.Object))
 	return obj.Wrap(_ret)
 }
 
 var _fnVTCompressionSessionGetTimeRangesForNextPass func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTCompressionSessionGetTimeRangesForNextPass calls the VideoToolbox framework function VTCompressionSessionGetTimeRangesForNextPass.
-func VTCompressionSessionGetTimeRangesForNextPass(session obj.Object, timeRangeArrayOut *coremedia.CMTimeRange) (result int, timeRangeCountOut int) {
+func VTCompressionSessionGetTimeRangesForNextPass(session VTCompressionSessionRef, timeRangeArrayOut *coremedia.CMTimeRange) (result int, timeRangeCountOut int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionGetTimeRangesForNextPass == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionGetTimeRangesForNextPass, _lib, "VTCompressionSessionGetTimeRangesForNextPass")
 	}
 	var _out0 int
-	_ret := int(_fnVTCompressionSessionGetTimeRangesForNextPass(objref.IDOf(session), unsafe.Pointer(&_out0), unsafe.Pointer(timeRangeArrayOut)))
+	_ret := int(_fnVTCompressionSessionGetTimeRangesForNextPass(objref.IDOf(session.Object), unsafe.Pointer(&_out0), unsafe.Pointer(timeRangeArrayOut)))
 	return _ret, _out0
 }
 
@@ -132,98 +133,98 @@ func VTCompressionSessionGetTypeID() int {
 var _fnVTCompressionSessionInvalidate func(objc.ID)
 
 // VTCompressionSessionInvalidate calls the VideoToolbox framework function VTCompressionSessionInvalidate.
-func VTCompressionSessionInvalidate(session obj.Object) {
+func VTCompressionSessionInvalidate(session VTCompressionSessionRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionInvalidate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionInvalidate, _lib, "VTCompressionSessionInvalidate")
 	}
-	_fnVTCompressionSessionInvalidate(objref.IDOf(session))
+	_fnVTCompressionSessionInvalidate(objref.IDOf(session.Object))
 }
 
 var _fnVTDecompressionSessionCanAcceptFormatDescription func(objc.ID, objc.ID) uint8
 
 // VTDecompressionSessionCanAcceptFormatDescription calls the VideoToolbox framework function VTDecompressionSessionCanAcceptFormatDescription.
-func VTDecompressionSessionCanAcceptFormatDescription(session obj.Object, newFormatDesc obj.Object) uint8 {
+func VTDecompressionSessionCanAcceptFormatDescription(session VTDecompressionSessionRef, newFormatDesc obj.Object) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionCanAcceptFormatDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionCanAcceptFormatDescription, _lib, "VTDecompressionSessionCanAcceptFormatDescription")
 	}
-	return _fnVTDecompressionSessionCanAcceptFormatDescription(objref.IDOf(session), objref.IDOf(newFormatDesc))
+	return _fnVTDecompressionSessionCanAcceptFormatDescription(objref.IDOf(session.Object), objref.IDOf(newFormatDesc))
 }
 
 var _fnVTDecompressionSessionCreate func(objc.ID, unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTDecompressionSessionCreate calls the VideoToolbox framework function VTDecompressionSessionCreate.
-func VTDecompressionSessionCreate(allocator obj.Object, videoFormatDescription unsafe.Pointer, videoDecoderSpecification obj.Object, destinationImageBufferAttributes obj.Object, outputCallback unsafe.Pointer, decompressionSessionOut unsafe.Pointer) int {
+func VTDecompressionSessionCreate(allocator corefoundation.CFAllocatorRef, videoFormatDescription unsafe.Pointer, videoDecoderSpecification corefoundation.CFDictionaryRef, destinationImageBufferAttributes corefoundation.CFDictionaryRef, outputCallback unsafe.Pointer, decompressionSessionOut unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionCreate, _lib, "VTDecompressionSessionCreate")
 	}
-	return int(_fnVTDecompressionSessionCreate(objref.IDOf(allocator), videoFormatDescription, objref.IDOf(videoDecoderSpecification), objref.IDOf(destinationImageBufferAttributes), outputCallback, decompressionSessionOut))
+	return int(_fnVTDecompressionSessionCreate(objref.IDOf(allocator.Object), videoFormatDescription, objref.IDOf(videoDecoderSpecification.Object), objref.IDOf(destinationImageBufferAttributes.Object), outputCallback, decompressionSessionOut))
 }
 
 var _fnVTDecompressionSessionDecodeFrame func(objc.ID, objc.ID, DecodeFrameFlags, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTDecompressionSessionDecodeFrame calls the VideoToolbox framework function VTDecompressionSessionDecodeFrame.
-func VTDecompressionSessionDecodeFrame(session obj.Object, sampleBuffer obj.Object, decodeFlags DecodeFrameFlags, sourceFrameRefCon unsafe.Pointer) (result int, infoFlagsOut DecodeInfoFlags) {
+func VTDecompressionSessionDecodeFrame(session VTDecompressionSessionRef, sampleBuffer obj.Object, decodeFlags DecodeFrameFlags, sourceFrameRefCon unsafe.Pointer) (result int, infoFlagsOut DecodeInfoFlags) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionDecodeFrame == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrame, _lib, "VTDecompressionSessionDecodeFrame")
 	}
 	var _out0 DecodeInfoFlags
-	_ret := int(_fnVTDecompressionSessionDecodeFrame(objref.IDOf(session), objref.IDOf(sampleBuffer), decodeFlags, sourceFrameRefCon, unsafe.Pointer(&_out0)))
+	_ret := int(_fnVTDecompressionSessionDecodeFrame(objref.IDOf(session.Object), objref.IDOf(sampleBuffer), decodeFlags, sourceFrameRefCon, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnVTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler func(objc.ID, objc.ID, DecodeFrameFlags, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler calls the VideoToolbox framework function VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler.
-func VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler(session obj.Object, sampleBuffer obj.Object, decodeFlags DecodeFrameFlags, multiImageCapableOutputHandler unsafe.Pointer) (result int, infoFlagsOut DecodeInfoFlags) {
+func VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler(session VTDecompressionSessionRef, sampleBuffer obj.Object, decodeFlags DecodeFrameFlags, multiImageCapableOutputHandler unsafe.Pointer) (result int, infoFlagsOut DecodeInfoFlags) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler, _lib, "VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler")
 	}
 	var _out0 DecodeInfoFlags
-	_ret := int(_fnVTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler(objref.IDOf(session), objref.IDOf(sampleBuffer), decodeFlags, unsafe.Pointer(&_out0), multiImageCapableOutputHandler))
+	_ret := int(_fnVTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler(objref.IDOf(session.Object), objref.IDOf(sampleBuffer), decodeFlags, unsafe.Pointer(&_out0), multiImageCapableOutputHandler))
 	return _ret, _out0
 }
 
 var _fnVTDecompressionSessionDecodeFrameWithOptions func(objc.ID, objc.ID, DecodeFrameFlags, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTDecompressionSessionDecodeFrameWithOptions calls the VideoToolbox framework function VTDecompressionSessionDecodeFrameWithOptions.
-func VTDecompressionSessionDecodeFrameWithOptions(session obj.Object, sampleBuffer obj.Object, decodeFlags DecodeFrameFlags, frameOptions obj.Object, sourceFrameRefCon unsafe.Pointer) (result int, infoFlagsOut DecodeInfoFlags) {
+func VTDecompressionSessionDecodeFrameWithOptions(session VTDecompressionSessionRef, sampleBuffer obj.Object, decodeFlags DecodeFrameFlags, frameOptions corefoundation.CFDictionaryRef, sourceFrameRefCon unsafe.Pointer) (result int, infoFlagsOut DecodeInfoFlags) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionDecodeFrameWithOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrameWithOptions, _lib, "VTDecompressionSessionDecodeFrameWithOptions")
 	}
 	var _out0 DecodeInfoFlags
-	_ret := int(_fnVTDecompressionSessionDecodeFrameWithOptions(objref.IDOf(session), objref.IDOf(sampleBuffer), decodeFlags, objref.IDOf(frameOptions), sourceFrameRefCon, unsafe.Pointer(&_out0)))
+	_ret := int(_fnVTDecompressionSessionDecodeFrameWithOptions(objref.IDOf(session.Object), objref.IDOf(sampleBuffer), decodeFlags, objref.IDOf(frameOptions.Object), sourceFrameRefCon, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnVTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler func(objc.ID, objc.ID, DecodeFrameFlags, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler calls the VideoToolbox framework function VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler.
-func VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler(session obj.Object, sampleBuffer obj.Object, decodeFlags DecodeFrameFlags, frameOptions obj.Object, outputHandler unsafe.Pointer) (result int, infoFlagsOut DecodeInfoFlags) {
+func VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler(session VTDecompressionSessionRef, sampleBuffer obj.Object, decodeFlags DecodeFrameFlags, frameOptions corefoundation.CFDictionaryRef, outputHandler unsafe.Pointer) (result int, infoFlagsOut DecodeInfoFlags) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler, _lib, "VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler")
 	}
 	var _out0 DecodeInfoFlags
-	_ret := int(_fnVTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler(objref.IDOf(session), objref.IDOf(sampleBuffer), decodeFlags, objref.IDOf(frameOptions), unsafe.Pointer(&_out0), outputHandler))
+	_ret := int(_fnVTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler(objref.IDOf(session.Object), objref.IDOf(sampleBuffer), decodeFlags, objref.IDOf(frameOptions.Object), unsafe.Pointer(&_out0), outputHandler))
 	return _ret, _out0
 }
 
 var _fnVTDecompressionSessionDecodeFrameWithOutputHandler func(objc.ID, objc.ID, DecodeFrameFlags, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTDecompressionSessionDecodeFrameWithOutputHandler calls the VideoToolbox framework function VTDecompressionSessionDecodeFrameWithOutputHandler.
-func VTDecompressionSessionDecodeFrameWithOutputHandler(session obj.Object, sampleBuffer obj.Object, decodeFlags DecodeFrameFlags, outputHandler unsafe.Pointer) (result int, infoFlagsOut DecodeInfoFlags) {
+func VTDecompressionSessionDecodeFrameWithOutputHandler(session VTDecompressionSessionRef, sampleBuffer obj.Object, decodeFlags DecodeFrameFlags, outputHandler unsafe.Pointer) (result int, infoFlagsOut DecodeInfoFlags) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionDecodeFrameWithOutputHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionDecodeFrameWithOutputHandler, _lib, "VTDecompressionSessionDecodeFrameWithOutputHandler")
 	}
 	var _out0 DecodeInfoFlags
-	_ret := int(_fnVTDecompressionSessionDecodeFrameWithOutputHandler(objref.IDOf(session), objref.IDOf(sampleBuffer), decodeFlags, unsafe.Pointer(&_out0), outputHandler))
+	_ret := int(_fnVTDecompressionSessionDecodeFrameWithOutputHandler(objref.IDOf(session.Object), objref.IDOf(sampleBuffer), decodeFlags, unsafe.Pointer(&_out0), outputHandler))
 	return _ret, _out0
 }
 
@@ -241,24 +242,24 @@ func VTDecompressionSessionGetTypeID() int {
 var _fnVTDecompressionSessionInvalidate func(objc.ID)
 
 // VTDecompressionSessionInvalidate calls the VideoToolbox framework function VTDecompressionSessionInvalidate.
-func VTDecompressionSessionInvalidate(session obj.Object) {
+func VTDecompressionSessionInvalidate(session VTDecompressionSessionRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTDecompressionSessionInvalidate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionInvalidate, _lib, "VTDecompressionSessionInvalidate")
 	}
-	_fnVTDecompressionSessionInvalidate(objref.IDOf(session))
+	_fnVTDecompressionSessionInvalidate(objref.IDOf(session.Object))
 }
 
 var _fnVTFrameSiloGetProgressOfCurrentPass func(objc.ID, unsafe.Pointer) int32
 
 // VTFrameSiloGetProgressOfCurrentPass calls the VideoToolbox framework function VTFrameSiloGetProgressOfCurrentPass.
-func VTFrameSiloGetProgressOfCurrentPass(silo obj.Object) (result int, progressOut float32) {
+func VTFrameSiloGetProgressOfCurrentPass(silo VTFrameSiloRef) (result int, progressOut float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTFrameSiloGetProgressOfCurrentPass == nil {
 		ebipurego.RegisterLibFunc(&_fnVTFrameSiloGetProgressOfCurrentPass, _lib, "VTFrameSiloGetProgressOfCurrentPass")
 	}
 	var _out0 float32
-	_ret := int(_fnVTFrameSiloGetProgressOfCurrentPass(objref.IDOf(silo), unsafe.Pointer(&_out0)))
+	_ret := int(_fnVTFrameSiloGetProgressOfCurrentPass(objref.IDOf(silo.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -331,12 +332,12 @@ func VTMotionEstimationSessionGetTypeID() int {
 var _fnVTMotionEstimationSessionInvalidate func(objc.ID)
 
 // VTMotionEstimationSessionInvalidate calls the VideoToolbox framework function VTMotionEstimationSessionInvalidate.
-func VTMotionEstimationSessionInvalidate(session obj.Object) {
+func VTMotionEstimationSessionInvalidate(session VTMotionEstimationSessionRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTMotionEstimationSessionInvalidate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionInvalidate, _lib, "VTMotionEstimationSessionInvalidate")
 	}
-	_fnVTMotionEstimationSessionInvalidate(objref.IDOf(session))
+	_fnVTMotionEstimationSessionInvalidate(objref.IDOf(session.Object))
 }
 
 var _fnVTMultiPassStorageGetTypeID func() int
@@ -364,12 +365,12 @@ func VTPixelRotationSessionGetTypeID() int {
 var _fnVTPixelRotationSessionInvalidate func(objc.ID)
 
 // VTPixelRotationSessionInvalidate calls the VideoToolbox framework function VTPixelRotationSessionInvalidate.
-func VTPixelRotationSessionInvalidate(session obj.Object) {
+func VTPixelRotationSessionInvalidate(session VTPixelRotationSessionRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTPixelRotationSessionInvalidate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTPixelRotationSessionInvalidate, _lib, "VTPixelRotationSessionInvalidate")
 	}
-	_fnVTPixelRotationSessionInvalidate(objref.IDOf(session))
+	_fnVTPixelRotationSessionInvalidate(objref.IDOf(session.Object))
 }
 
 var _fnVTPixelTransferSessionGetTypeID func() int
@@ -386,12 +387,12 @@ func VTPixelTransferSessionGetTypeID() int {
 var _fnVTPixelTransferSessionInvalidate func(objc.ID)
 
 // VTPixelTransferSessionInvalidate calls the VideoToolbox framework function VTPixelTransferSessionInvalidate.
-func VTPixelTransferSessionInvalidate(session obj.Object) {
+func VTPixelTransferSessionInvalidate(session VTPixelTransferSessionRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTPixelTransferSessionInvalidate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTPixelTransferSessionInvalidate, _lib, "VTPixelTransferSessionInvalidate")
 	}
-	_fnVTPixelTransferSessionInvalidate(objref.IDOf(session))
+	_fnVTPixelTransferSessionInvalidate(objref.IDOf(session.Object))
 }
 
 var _fnVTRAWProcessingSessionGetTypeID func() int
@@ -408,12 +409,12 @@ func VTRAWProcessingSessionGetTypeID() int {
 var _fnVTRAWProcessingSessionInvalidate func(objc.ID)
 
 // VTRAWProcessingSessionInvalidate calls the VideoToolbox framework function VTRAWProcessingSessionInvalidate.
-func VTRAWProcessingSessionInvalidate(session obj.Object) {
+func VTRAWProcessingSessionInvalidate(session VTRAWProcessingSessionRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTRAWProcessingSessionInvalidate == nil {
 		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionInvalidate, _lib, "VTRAWProcessingSessionInvalidate")
 	}
-	_fnVTRAWProcessingSessionInvalidate(objref.IDOf(session))
+	_fnVTRAWProcessingSessionInvalidate(objref.IDOf(session.Object))
 }
 
 var _fnVTRegisterProfessionalVideoWorkflowVideoDecoders func()

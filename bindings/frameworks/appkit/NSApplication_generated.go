@@ -372,14 +372,14 @@ func (a *Application) AbortModal() {
 }
 
 // BeginModalSessionForWindow begins modal session for window.
-func (a *Application) BeginModalSessionForWindow(window *Window) obj.Object {
+func (a *Application) BeginModalSessionForWindow(window *Window) NSModalSession {
 	defer runtime.KeepAlive(a)
 	defer runtime.KeepAlive(window)
-	var _mainthread0 obj.Object
+	var _mainthread0 NSModalSession
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() NSModalSession {
 			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("beginModalSessionForWindow:"), objref.IDOf(window))
-			return obj.WrapUnmanaged(_r)
+			return NSModalSession{obj.WrapUnmanaged(_r)}
 		}()
 	})
 	return _mainthread0
@@ -387,13 +387,13 @@ func (a *Application) BeginModalSessionForWindow(window *Window) obj.Object {
 }
 
 // RunModalSession runs modal session.
-func (a *Application) RunModalSession(session obj.Object) int {
+func (a *Application) RunModalSession(session NSModalSession) int {
 	defer runtime.KeepAlive(a)
 	defer runtime.KeepAlive(session)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
-			_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("runModalSession:"), objref.IDOf(session))
+			_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("runModalSession:"), objref.IDOf(session.Object))
 			return _r
 		}()
 	})
@@ -402,11 +402,11 @@ func (a *Application) RunModalSession(session obj.Object) int {
 }
 
 // EndModalSession ends modal session.
-func (a *Application) EndModalSession(session obj.Object) {
+func (a *Application) EndModalSession(session NSModalSession) {
 	defer runtime.KeepAlive(a)
 	defer runtime.KeepAlive(session)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endModalSession:"), objref.IDOf(session))
+		objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endModalSession:"), objref.IDOf(session.Object))
 	})
 
 }
@@ -1107,15 +1107,15 @@ func (a *Application) RunModalForWindowRelativeToWindow(window *Window, docWindo
 }
 
 // BeginModalSessionForWindowRelativeToWindow `-beginModalSessionForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
-func (a *Application) BeginModalSessionForWindowRelativeToWindow(window *Window, docWindow *Window) obj.Object {
+func (a *Application) BeginModalSessionForWindowRelativeToWindow(window *Window, docWindow *Window) NSModalSession {
 	defer runtime.KeepAlive(a)
 	defer runtime.KeepAlive(window)
 	defer runtime.KeepAlive(docWindow)
-	var _mainthread0 obj.Object
+	var _mainthread0 NSModalSession
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() NSModalSession {
 			_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("beginModalSessionForWindow:relativeToWindow:"), objref.IDOf(window), objref.IDOf(docWindow))
-			return obj.WrapUnmanaged(_r)
+			return NSModalSession{obj.WrapUnmanaged(_r)}
 		}()
 	})
 	return _mainthread0

@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -100,10 +101,10 @@ func NewTextLineFragmentWithStringAttributesRange(str string, attributes obj.Obj
 }
 
 // DrawAtPointInContext renders the line fragment contents at the rendering origin.
-func (tlf *TextLineFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ obj.Object) {
+func (tlf *TextLineFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ coregraphics.CGContextRef) {
 	defer runtime.KeepAlive(tlf)
 	defer runtime.KeepAlive(context_)
-	objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("drawAtPoint:inContext:"), point, objref.IDOf(context_))
+	objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("drawAtPoint:inContext:"), point, objref.IDOf(context_.Object))
 }
 
 // LocationForCharacterAtIndex returns the location of the character at the specified index.

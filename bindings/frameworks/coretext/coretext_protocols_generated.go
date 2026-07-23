@@ -6,10 +6,10 @@ package coretext
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 )
 
 // CTAdaptiveImageProviding is the Go form of the Objective-C protocol CTAdaptiveImageProviding.
 type CTAdaptiveImageProviding interface {
-	ImageForProposedSizeScaleFactorImageOffsetImageSize(proposedSize corefoundation.CGSize, scaleFactor float64, outImageOffset *corefoundation.CGPoint, outImageSize *corefoundation.CGSize) obj.Object
+	ImageForProposedSizeScaleFactorImageOffsetImageSize(proposedSize corefoundation.CGSize, scaleFactor float64, outImageOffset *corefoundation.CGPoint, outImageSize *corefoundation.CGSize) coregraphics.CGImageRef
 }

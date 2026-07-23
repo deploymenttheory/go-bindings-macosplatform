@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -82,9 +83,9 @@ func NewBezierPath() *BezierPath {
 }
 
 // WithCGPath sets the cg path.
-func (bp *BezierPath) WithCGPath(cgPath obj.Object) *BezierPath {
+func (bp *BezierPath) WithCGPath(cgPath coregraphics.CGPathRef) *BezierPath {
 	defer runtime.KeepAlive(cgPath)
-	objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("setCGPath:"), objref.IDOf(cgPath))
+	objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("setCGPath:"), objref.IDOf(cgPath.Object))
 	return bp
 }
 
@@ -326,10 +327,10 @@ func (bp *BezierPath) ContainsPoint(point corefoundation.CGPoint) bool {
 }
 
 // CGPath returns the cg path.
-func (bp *BezierPath) CGPath() obj.Object {
+func (bp *BezierPath) CGPath() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(bp)
 	_r := objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("CGPath"))
-	return obj.Wrap(_r)
+	return coregraphics.CGPathRef{obj.Wrap(_r)}
 }
 
 // LineWidth returns the line width.

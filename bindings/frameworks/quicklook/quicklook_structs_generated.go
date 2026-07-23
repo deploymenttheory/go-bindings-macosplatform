@@ -4,9 +4,34 @@
 
 package quicklook
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 type QLPreviewRequest struct{}
 
 type QLThumbnail struct{}
 
 // This is the type of a reference to Thumbnail requests.
 type QLThumbnailRequest struct{}
+
+// QLPreviewRequestRef is a handle for the opaque QLPreviewRequestRef type.
+type QLPreviewRequestRef struct{ obj.Object }
+
+// IsNil reports whether QLPreviewRequestRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h QLPreviewRequestRef) IsNil() bool { return h.Object == nil }
+
+// QLThumbnailRef is a handle for the opaque QLThumbnailRef type.
+type QLThumbnailRef struct{ obj.Object }
+
+// IsNil reports whether QLThumbnailRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h QLThumbnailRef) IsNil() bool { return h.Object == nil }
+
+// QLThumbnailRequestRef is a handle for the opaque QLThumbnailRequestRef type.
+type QLThumbnailRequestRef struct{ obj.Object }
+
+// IsNil reports whether QLThumbnailRequestRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h QLThumbnailRequestRef) IsNil() bool { return h.Object == nil }

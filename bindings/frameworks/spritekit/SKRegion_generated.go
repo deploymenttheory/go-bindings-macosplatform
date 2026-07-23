@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -89,10 +90,10 @@ func NewRegionWithSize(size corefoundation.CGSize) *Region {
 }
 
 // NewRegionWithPath initializes a new region using a Core Graphics path.
-func NewRegionWithPath(path obj.Object) *Region {
+func NewRegionWithPath(path coregraphics.CGPathRef) *Region {
 	defer runtime.KeepAlive(path)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKRegion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), objref.IDOf(path))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), objref.IDOf(path.Object))
 	return regionAdopt(_id)
 }
 
@@ -135,8 +136,8 @@ func (r *Region) ContainsPoint(point corefoundation.CGPoint) bool {
 }
 
 // Path returns the path.
-func (r *Region) Path() obj.Object {
+func (r *Region) Path() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("path"))
-	return obj.Wrap(_r)
+	return coregraphics.CGPathRef{obj.Wrap(_r)}
 }

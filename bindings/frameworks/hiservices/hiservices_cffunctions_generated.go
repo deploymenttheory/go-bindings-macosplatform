@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -65,12 +66,12 @@ func GetProcessForPID(pid int, psn unsafe.Pointer) error {
 var _fnHIShapeDifference func(objc.ID, objc.ID, objc.ID) int32
 
 // HIShapeDifference reports an error if the HIServices framework function HIShapeDifference fails.
-func HIShapeDifference(inShape1 obj.Object, inShape2 obj.Object, outResult obj.Object) error {
+func HIShapeDifference(inShape1 HIShapeRef, inShape2 HIShapeRef, outResult HIMutableShapeRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeDifference == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeDifference, _lib, "HIShapeDifference")
 	}
-	_rc := _fnHIShapeDifference(objref.IDOf(inShape1), objref.IDOf(inShape2), objref.IDOf(outResult))
+	_rc := _fnHIShapeDifference(objref.IDOf(inShape1.Object), objref.IDOf(inShape2.Object), objref.IDOf(outResult.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -80,12 +81,12 @@ func HIShapeDifference(inShape1 obj.Object, inShape2 obj.Object, outResult obj.O
 var _fnHIShapeEnumerate func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // HIShapeEnumerate reports an error if the HIServices framework function HIShapeEnumerate fails.
-func HIShapeEnumerate(inShape obj.Object, inOptions int, inProc unsafe.Pointer, inRefcon unsafe.Pointer) error {
+func HIShapeEnumerate(inShape HIShapeRef, inOptions int, inProc unsafe.Pointer, inRefcon unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeEnumerate == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeEnumerate, _lib, "HIShapeEnumerate")
 	}
-	_rc := _fnHIShapeEnumerate(objref.IDOf(inShape), inOptions, inProc, inRefcon)
+	_rc := _fnHIShapeEnumerate(objref.IDOf(inShape.Object), inOptions, inProc, inRefcon)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -95,12 +96,12 @@ func HIShapeEnumerate(inShape obj.Object, inOptions int, inProc unsafe.Pointer, 
 var _fnHIShapeGetAsQDRgn func(objc.ID, objc.ID) int32
 
 // HIShapeGetAsQDRgn reports an error if the HIServices framework function HIShapeGetAsQDRgn fails.
-func HIShapeGetAsQDRgn(inShape obj.Object, outRgn obj.Object) error {
+func HIShapeGetAsQDRgn(inShape HIShapeRef, outRgn obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeGetAsQDRgn == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeGetAsQDRgn, _lib, "HIShapeGetAsQDRgn")
 	}
-	_rc := _fnHIShapeGetAsQDRgn(objref.IDOf(inShape), objref.IDOf(outRgn))
+	_rc := _fnHIShapeGetAsQDRgn(objref.IDOf(inShape.Object), objref.IDOf(outRgn))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -110,12 +111,12 @@ func HIShapeGetAsQDRgn(inShape obj.Object, outRgn obj.Object) error {
 var _fnHIShapeInset func(objc.ID, float64, float64) int32
 
 // HIShapeInset reports an error if the HIServices framework function HIShapeInset fails.
-func HIShapeInset(inShape obj.Object, inDX float64, inDY float64) error {
+func HIShapeInset(inShape HIMutableShapeRef, inDX float64, inDY float64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeInset == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeInset, _lib, "HIShapeInset")
 	}
-	_rc := _fnHIShapeInset(objref.IDOf(inShape), inDX, inDY)
+	_rc := _fnHIShapeInset(objref.IDOf(inShape.Object), inDX, inDY)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -125,12 +126,12 @@ func HIShapeInset(inShape obj.Object, inDX float64, inDY float64) error {
 var _fnHIShapeIntersect func(objc.ID, objc.ID, objc.ID) int32
 
 // HIShapeIntersect reports an error if the HIServices framework function HIShapeIntersect fails.
-func HIShapeIntersect(inShape1 obj.Object, inShape2 obj.Object, outResult obj.Object) error {
+func HIShapeIntersect(inShape1 HIShapeRef, inShape2 HIShapeRef, outResult HIMutableShapeRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeIntersect == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeIntersect, _lib, "HIShapeIntersect")
 	}
-	_rc := _fnHIShapeIntersect(objref.IDOf(inShape1), objref.IDOf(inShape2), objref.IDOf(outResult))
+	_rc := _fnHIShapeIntersect(objref.IDOf(inShape1.Object), objref.IDOf(inShape2.Object), objref.IDOf(outResult.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -140,12 +141,12 @@ func HIShapeIntersect(inShape1 obj.Object, inShape2 obj.Object, outResult obj.Ob
 var _fnHIShapeOffset func(objc.ID, float64, float64) int32
 
 // HIShapeOffset reports an error if the HIServices framework function HIShapeOffset fails.
-func HIShapeOffset(inShape obj.Object, inDX float64, inDY float64) error {
+func HIShapeOffset(inShape HIMutableShapeRef, inDX float64, inDY float64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeOffset == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeOffset, _lib, "HIShapeOffset")
 	}
-	_rc := _fnHIShapeOffset(objref.IDOf(inShape), inDX, inDY)
+	_rc := _fnHIShapeOffset(objref.IDOf(inShape.Object), inDX, inDY)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -155,12 +156,12 @@ func HIShapeOffset(inShape obj.Object, inDX float64, inDY float64) error {
 var _fnHIShapeReplacePathInCGContext func(objc.ID, objc.ID) int32
 
 // HIShapeReplacePathInCGContext reports an error if the HIServices framework function HIShapeReplacePathInCGContext fails.
-func HIShapeReplacePathInCGContext(inShape obj.Object, inContext obj.Object) error {
+func HIShapeReplacePathInCGContext(inShape HIShapeRef, inContext coregraphics.CGContextRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeReplacePathInCGContext == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeReplacePathInCGContext, _lib, "HIShapeReplacePathInCGContext")
 	}
-	_rc := _fnHIShapeReplacePathInCGContext(objref.IDOf(inShape), objref.IDOf(inContext))
+	_rc := _fnHIShapeReplacePathInCGContext(objref.IDOf(inShape.Object), objref.IDOf(inContext.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -170,12 +171,12 @@ func HIShapeReplacePathInCGContext(inShape obj.Object, inContext obj.Object) err
 var _fnHIShapeSetEmpty func(objc.ID) int32
 
 // HIShapeSetEmpty reports an error if the HIServices framework function HIShapeSetEmpty fails.
-func HIShapeSetEmpty(inShape obj.Object) error {
+func HIShapeSetEmpty(inShape HIMutableShapeRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeSetEmpty == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeSetEmpty, _lib, "HIShapeSetEmpty")
 	}
-	_rc := _fnHIShapeSetEmpty(objref.IDOf(inShape))
+	_rc := _fnHIShapeSetEmpty(objref.IDOf(inShape.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -185,12 +186,12 @@ func HIShapeSetEmpty(inShape obj.Object) error {
 var _fnHIShapeSetWithShape func(objc.ID, objc.ID) int32
 
 // HIShapeSetWithShape reports an error if the HIServices framework function HIShapeSetWithShape fails.
-func HIShapeSetWithShape(inDestShape obj.Object, inSrcShape obj.Object) error {
+func HIShapeSetWithShape(inDestShape HIMutableShapeRef, inSrcShape HIShapeRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeSetWithShape == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeSetWithShape, _lib, "HIShapeSetWithShape")
 	}
-	_rc := _fnHIShapeSetWithShape(objref.IDOf(inDestShape), objref.IDOf(inSrcShape))
+	_rc := _fnHIShapeSetWithShape(objref.IDOf(inDestShape.Object), objref.IDOf(inSrcShape.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -200,12 +201,12 @@ func HIShapeSetWithShape(inDestShape obj.Object, inSrcShape obj.Object) error {
 var _fnHIShapeUnion func(objc.ID, objc.ID, objc.ID) int32
 
 // HIShapeUnion reports an error if the HIServices framework function HIShapeUnion fails.
-func HIShapeUnion(inShape1 obj.Object, inShape2 obj.Object, outResult obj.Object) error {
+func HIShapeUnion(inShape1 HIShapeRef, inShape2 HIShapeRef, outResult HIMutableShapeRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeUnion == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeUnion, _lib, "HIShapeUnion")
 	}
-	_rc := _fnHIShapeUnion(objref.IDOf(inShape1), objref.IDOf(inShape2), objref.IDOf(outResult))
+	_rc := _fnHIShapeUnion(objref.IDOf(inShape1.Object), objref.IDOf(inShape2.Object), objref.IDOf(outResult.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -215,12 +216,12 @@ func HIShapeUnion(inShape1 obj.Object, inShape2 obj.Object, outResult obj.Object
 var _fnHIShapeUnionWithRect func(objc.ID, unsafe.Pointer) int32
 
 // HIShapeUnionWithRect reports an error if the HIServices framework function HIShapeUnionWithRect fails.
-func HIShapeUnionWithRect(inShape obj.Object, inRect *corefoundation.CGRect) error {
+func HIShapeUnionWithRect(inShape HIMutableShapeRef, inRect *corefoundation.CGRect) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeUnionWithRect == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeUnionWithRect, _lib, "HIShapeUnionWithRect")
 	}
-	_rc := _fnHIShapeUnionWithRect(objref.IDOf(inShape), unsafe.Pointer(inRect))
+	_rc := _fnHIShapeUnionWithRect(objref.IDOf(inShape.Object), unsafe.Pointer(inRect))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -230,12 +231,12 @@ func HIShapeUnionWithRect(inShape obj.Object, inRect *corefoundation.CGRect) err
 var _fnHIShapeXor func(objc.ID, objc.ID, objc.ID) int32
 
 // HIShapeXor reports an error if the HIServices framework function HIShapeXor fails.
-func HIShapeXor(inShape1 obj.Object, inShape2 obj.Object, outResult obj.Object) error {
+func HIShapeXor(inShape1 HIShapeRef, inShape2 HIShapeRef, outResult HIMutableShapeRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeXor == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeXor, _lib, "HIShapeXor")
 	}
-	_rc := _fnHIShapeXor(objref.IDOf(inShape1), objref.IDOf(inShape2), objref.IDOf(outResult))
+	_rc := _fnHIShapeXor(objref.IDOf(inShape1.Object), objref.IDOf(inShape2.Object), objref.IDOf(outResult.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -245,12 +246,12 @@ func HIShapeXor(inShape1 obj.Object, inShape2 obj.Object, outResult obj.Object) 
 var _fnICBegin func(objc.ID, uint8) int32
 
 // ICBegin reports an error if the HIServices framework function ICBegin fails.
-func ICBegin(inst obj.Object, perm uint8) error {
+func ICBegin(inst ICInstance, perm uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICBegin == nil {
 		ebipurego.RegisterLibFunc(&_fnICBegin, _lib, "ICBegin")
 	}
-	_rc := _fnICBegin(objref.IDOf(inst), perm)
+	_rc := _fnICBegin(objref.IDOf(inst.Object), perm)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -260,12 +261,12 @@ func ICBegin(inst obj.Object, perm uint8) error {
 var _fnICDeleteProfile func(objc.ID, int) int32
 
 // ICDeleteProfile reports an error if the HIServices framework function ICDeleteProfile fails.
-func ICDeleteProfile(inst obj.Object, thisID int) error {
+func ICDeleteProfile(inst ICInstance, thisID int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICDeleteProfile == nil {
 		ebipurego.RegisterLibFunc(&_fnICDeleteProfile, _lib, "ICDeleteProfile")
 	}
-	_rc := _fnICDeleteProfile(objref.IDOf(inst), thisID)
+	_rc := _fnICDeleteProfile(objref.IDOf(inst.Object), thisID)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -275,12 +276,12 @@ func ICDeleteProfile(inst obj.Object, thisID int) error {
 var _fnICEnd func(objc.ID) int32
 
 // ICEnd reports an error if the HIServices framework function ICEnd fails.
-func ICEnd(inst obj.Object) error {
+func ICEnd(inst ICInstance) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICEnd == nil {
 		ebipurego.RegisterLibFunc(&_fnICEnd, _lib, "ICEnd")
 	}
-	_rc := _fnICEnd(objref.IDOf(inst))
+	_rc := _fnICEnd(objref.IDOf(inst.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -290,12 +291,12 @@ func ICEnd(inst obj.Object) error {
 var _fnICSetCurrentProfile func(objc.ID, int) int32
 
 // ICSetCurrentProfile reports an error if the HIServices framework function ICSetCurrentProfile fails.
-func ICSetCurrentProfile(inst obj.Object, newID int) error {
+func ICSetCurrentProfile(inst ICInstance, newID int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICSetCurrentProfile == nil {
 		ebipurego.RegisterLibFunc(&_fnICSetCurrentProfile, _lib, "ICSetCurrentProfile")
 	}
-	_rc := _fnICSetCurrentProfile(objref.IDOf(inst), newID)
+	_rc := _fnICSetCurrentProfile(objref.IDOf(inst.Object), newID)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -320,12 +321,12 @@ func ICStart(inst unsafe.Pointer, signature int) error {
 var _fnICStop func(objc.ID) int32
 
 // ICStop reports an error if the HIServices framework function ICStop fails.
-func ICStop(inst obj.Object) error {
+func ICStop(inst ICInstance) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICStop == nil {
 		ebipurego.RegisterLibFunc(&_fnICStop, _lib, "ICStop")
 	}
-	_rc := _fnICStop(objref.IDOf(inst))
+	_rc := _fnICStop(objref.IDOf(inst.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -335,12 +336,12 @@ func ICStop(inst obj.Object) error {
 var _fnPasteboardClear func(objc.ID) int32
 
 // PasteboardClear reports an error if the HIServices framework function PasteboardClear fails.
-func PasteboardClear(inPasteboard obj.Object) error {
+func PasteboardClear(inPasteboard PasteboardRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardClear == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardClear, _lib, "PasteboardClear")
 	}
-	_rc := _fnPasteboardClear(objref.IDOf(inPasteboard))
+	_rc := _fnPasteboardClear(objref.IDOf(inPasteboard.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -350,13 +351,13 @@ func PasteboardClear(inPasteboard obj.Object) error {
 var _fnPasteboardCopyItemFlavorData func(objc.ID, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
 
 // PasteboardCopyItemFlavorData reports an error if the HIServices framework function PasteboardCopyItemFlavorData fails.
-func PasteboardCopyItemFlavorData(inPasteboard obj.Object, inItem unsafe.Pointer, inFlavorType obj.Object) (obj.Object, error) {
+func PasteboardCopyItemFlavorData(inPasteboard PasteboardRef, inItem unsafe.Pointer, inFlavorType obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardCopyItemFlavorData == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardCopyItemFlavorData, _lib, "PasteboardCopyItemFlavorData")
 	}
 	var _out0 uintptr
-	_rc := _fnPasteboardCopyItemFlavorData(objref.IDOf(inPasteboard), inItem, objref.IDOf(inFlavorType), unsafe.Pointer(&_out0))
+	_rc := _fnPasteboardCopyItemFlavorData(objref.IDOf(inPasteboard.Object), inItem, objref.IDOf(inFlavorType), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -366,13 +367,13 @@ func PasteboardCopyItemFlavorData(inPasteboard obj.Object, inItem unsafe.Pointer
 var _fnPasteboardCopyItemFlavors func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // PasteboardCopyItemFlavors reports an error if the HIServices framework function PasteboardCopyItemFlavors fails.
-func PasteboardCopyItemFlavors(inPasteboard obj.Object, inItem unsafe.Pointer) (obj.Object, error) {
+func PasteboardCopyItemFlavors(inPasteboard PasteboardRef, inItem unsafe.Pointer) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardCopyItemFlavors == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardCopyItemFlavors, _lib, "PasteboardCopyItemFlavors")
 	}
 	var _out0 uintptr
-	_rc := _fnPasteboardCopyItemFlavors(objref.IDOf(inPasteboard), inItem, unsafe.Pointer(&_out0))
+	_rc := _fnPasteboardCopyItemFlavors(objref.IDOf(inPasteboard.Object), inItem, unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -382,13 +383,13 @@ func PasteboardCopyItemFlavors(inPasteboard obj.Object, inItem unsafe.Pointer) (
 var _fnPasteboardCopyName func(objc.ID, unsafe.Pointer) int32
 
 // PasteboardCopyName reports an error if the HIServices framework function PasteboardCopyName fails.
-func PasteboardCopyName(inPasteboard obj.Object) (obj.Object, error) {
+func PasteboardCopyName(inPasteboard PasteboardRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardCopyName == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardCopyName, _lib, "PasteboardCopyName")
 	}
 	var _out0 uintptr
-	_rc := _fnPasteboardCopyName(objref.IDOf(inPasteboard), unsafe.Pointer(&_out0))
+	_rc := _fnPasteboardCopyName(objref.IDOf(inPasteboard.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -398,13 +399,13 @@ func PasteboardCopyName(inPasteboard obj.Object) (obj.Object, error) {
 var _fnPasteboardCopyPasteLocation func(objc.ID, unsafe.Pointer) int32
 
 // PasteboardCopyPasteLocation reports an error if the HIServices framework function PasteboardCopyPasteLocation fails.
-func PasteboardCopyPasteLocation(inPasteboard obj.Object) (obj.Object, error) {
+func PasteboardCopyPasteLocation(inPasteboard PasteboardRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardCopyPasteLocation == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardCopyPasteLocation, _lib, "PasteboardCopyPasteLocation")
 	}
 	var _out0 uintptr
-	_rc := _fnPasteboardCopyPasteLocation(objref.IDOf(inPasteboard), unsafe.Pointer(&_out0))
+	_rc := _fnPasteboardCopyPasteLocation(objref.IDOf(inPasteboard.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -429,12 +430,12 @@ func PasteboardCreate(inName obj.Object, outPasteboard unsafe.Pointer) error {
 var _fnPasteboardGetItemIdentifier func(objc.ID, int, unsafe.Pointer) int32
 
 // PasteboardGetItemIdentifier reports an error if the HIServices framework function PasteboardGetItemIdentifier fails.
-func PasteboardGetItemIdentifier(inPasteboard obj.Object, inIndex int, outItem unsafe.Pointer) error {
+func PasteboardGetItemIdentifier(inPasteboard PasteboardRef, inIndex int, outItem unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardGetItemIdentifier == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardGetItemIdentifier, _lib, "PasteboardGetItemIdentifier")
 	}
-	_rc := _fnPasteboardGetItemIdentifier(objref.IDOf(inPasteboard), inIndex, outItem)
+	_rc := _fnPasteboardGetItemIdentifier(objref.IDOf(inPasteboard.Object), inIndex, outItem)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -444,12 +445,12 @@ func PasteboardGetItemIdentifier(inPasteboard obj.Object, inIndex int, outItem u
 var _fnPasteboardPutItemFlavor func(objc.ID, unsafe.Pointer, objc.ID, objc.ID, PasteboardFlavorFlags) int32
 
 // PasteboardPutItemFlavor reports an error if the HIServices framework function PasteboardPutItemFlavor fails.
-func PasteboardPutItemFlavor(inPasteboard obj.Object, inItem unsafe.Pointer, inFlavorType obj.Object, inData obj.Object, inFlags PasteboardFlavorFlags) error {
+func PasteboardPutItemFlavor(inPasteboard PasteboardRef, inItem unsafe.Pointer, inFlavorType obj.Object, inData obj.Object, inFlags PasteboardFlavorFlags) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardPutItemFlavor == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardPutItemFlavor, _lib, "PasteboardPutItemFlavor")
 	}
-	_rc := _fnPasteboardPutItemFlavor(objref.IDOf(inPasteboard), inItem, objref.IDOf(inFlavorType), objref.IDOf(inData), inFlags)
+	_rc := _fnPasteboardPutItemFlavor(objref.IDOf(inPasteboard.Object), inItem, objref.IDOf(inFlavorType), objref.IDOf(inData), inFlags)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -459,12 +460,12 @@ func PasteboardPutItemFlavor(inPasteboard obj.Object, inItem unsafe.Pointer, inF
 var _fnPasteboardResolvePromises func(objc.ID) int32
 
 // PasteboardResolvePromises reports an error if the HIServices framework function PasteboardResolvePromises fails.
-func PasteboardResolvePromises(inPasteboard obj.Object) error {
+func PasteboardResolvePromises(inPasteboard PasteboardRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardResolvePromises == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardResolvePromises, _lib, "PasteboardResolvePromises")
 	}
-	_rc := _fnPasteboardResolvePromises(objref.IDOf(inPasteboard))
+	_rc := _fnPasteboardResolvePromises(objref.IDOf(inPasteboard.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -474,12 +475,12 @@ func PasteboardResolvePromises(inPasteboard obj.Object) error {
 var _fnPasteboardSetPasteLocation func(objc.ID, objc.ID) int32
 
 // PasteboardSetPasteLocation reports an error if the HIServices framework function PasteboardSetPasteLocation fails.
-func PasteboardSetPasteLocation(inPasteboard obj.Object, inPasteLocation obj.Object) error {
+func PasteboardSetPasteLocation(inPasteboard PasteboardRef, inPasteLocation obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardSetPasteLocation == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardSetPasteLocation, _lib, "PasteboardSetPasteLocation")
 	}
-	_rc := _fnPasteboardSetPasteLocation(objref.IDOf(inPasteboard), objref.IDOf(inPasteLocation))
+	_rc := _fnPasteboardSetPasteLocation(objref.IDOf(inPasteboard.Object), objref.IDOf(inPasteLocation))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -489,12 +490,12 @@ func PasteboardSetPasteLocation(inPasteboard obj.Object, inPasteLocation obj.Obj
 var _fnPasteboardSetPromiseKeeper func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // PasteboardSetPromiseKeeper reports an error if the HIServices framework function PasteboardSetPromiseKeeper fails.
-func PasteboardSetPromiseKeeper(inPasteboard obj.Object, inPromiseKeeper unsafe.Pointer, inContext unsafe.Pointer) error {
+func PasteboardSetPromiseKeeper(inPasteboard PasteboardRef, inPromiseKeeper unsafe.Pointer, inContext unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPasteboardSetPromiseKeeper == nil {
 		ebipurego.RegisterLibFunc(&_fnPasteboardSetPromiseKeeper, _lib, "PasteboardSetPromiseKeeper")
 	}
-	_rc := _fnPasteboardSetPromiseKeeper(objref.IDOf(inPasteboard), inPromiseKeeper, inContext)
+	_rc := _fnPasteboardSetPromiseKeeper(objref.IDOf(inPasteboard.Object), inPromiseKeeper, inContext)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -504,12 +505,12 @@ func PasteboardSetPromiseKeeper(inPasteboard obj.Object, inPromiseKeeper unsafe.
 var _fnPlotIconRefInContext func(objc.ID, unsafe.Pointer, int16, int16, objc.ID, int, objc.ID) int32
 
 // PlotIconRefInContext reports an error if the HIServices framework function PlotIconRefInContext fails.
-func PlotIconRefInContext(inContext obj.Object, inRect *corefoundation.CGRect, inAlign int16, inTransform int16, inLabelColor obj.Object, inFlags int, inIconRef obj.Object) error {
+func PlotIconRefInContext(inContext coregraphics.CGContextRef, inRect *corefoundation.CGRect, inAlign int16, inTransform int16, inLabelColor obj.Object, inFlags int, inIconRef obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPlotIconRefInContext == nil {
 		ebipurego.RegisterLibFunc(&_fnPlotIconRefInContext, _lib, "PlotIconRefInContext")
 	}
-	_rc := _fnPlotIconRefInContext(objref.IDOf(inContext), unsafe.Pointer(inRect), inAlign, inTransform, objref.IDOf(inLabelColor), inFlags, objref.IDOf(inIconRef))
+	_rc := _fnPlotIconRefInContext(objref.IDOf(inContext.Object), unsafe.Pointer(inRect), inAlign, inTransform, objref.IDOf(inLabelColor), inFlags, objref.IDOf(inIconRef))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -549,13 +550,13 @@ func TransformProcessType(psn unsafe.Pointer, transformState int) error {
 var _fnTranslationCopyDestinationType func(objc.ID, unsafe.Pointer) int32
 
 // TranslationCopyDestinationType reports an error if the HIServices framework function TranslationCopyDestinationType fails.
-func TranslationCopyDestinationType(inTranslation obj.Object) (obj.Object, error) {
+func TranslationCopyDestinationType(inTranslation TranslationRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTranslationCopyDestinationType == nil {
 		ebipurego.RegisterLibFunc(&_fnTranslationCopyDestinationType, _lib, "TranslationCopyDestinationType")
 	}
 	var _out0 uintptr
-	_rc := _fnTranslationCopyDestinationType(objref.IDOf(inTranslation), unsafe.Pointer(&_out0))
+	_rc := _fnTranslationCopyDestinationType(objref.IDOf(inTranslation.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -565,13 +566,13 @@ func TranslationCopyDestinationType(inTranslation obj.Object) (obj.Object, error
 var _fnTranslationCopySourceType func(objc.ID, unsafe.Pointer) int32
 
 // TranslationCopySourceType reports an error if the HIServices framework function TranslationCopySourceType fails.
-func TranslationCopySourceType(inTranslation obj.Object) (obj.Object, error) {
+func TranslationCopySourceType(inTranslation TranslationRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTranslationCopySourceType == nil {
 		ebipurego.RegisterLibFunc(&_fnTranslationCopySourceType, _lib, "TranslationCopySourceType")
 	}
 	var _out0 uintptr
-	_rc := _fnTranslationCopySourceType(objref.IDOf(inTranslation), unsafe.Pointer(&_out0))
+	_rc := _fnTranslationCopySourceType(objref.IDOf(inTranslation.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -613,13 +614,13 @@ func TranslationCreateWithSourceArray(inSourceTypes obj.Object, inTranslationFla
 var _fnTranslationPerformForData func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // TranslationPerformForData reports an error if the HIServices framework function TranslationPerformForData fails.
-func TranslationPerformForData(inTranslation obj.Object, inSourceData obj.Object) (obj.Object, error) {
+func TranslationPerformForData(inTranslation TranslationRef, inSourceData obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTranslationPerformForData == nil {
 		ebipurego.RegisterLibFunc(&_fnTranslationPerformForData, _lib, "TranslationPerformForData")
 	}
 	var _out0 uintptr
-	_rc := _fnTranslationPerformForData(objref.IDOf(inTranslation), objref.IDOf(inSourceData), unsafe.Pointer(&_out0))
+	_rc := _fnTranslationPerformForData(objref.IDOf(inTranslation.Object), objref.IDOf(inSourceData), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -629,12 +630,12 @@ func TranslationPerformForData(inTranslation obj.Object, inSourceData obj.Object
 var _fnTranslationPerformForFile func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
 
 // TranslationPerformForFile reports an error if the HIServices framework function TranslationPerformForFile fails.
-func TranslationPerformForFile(inTranslation obj.Object, inSourceFile *carboncore.FSRef, inDestinationDirectory *carboncore.FSRef, inDestinationName obj.Object, outTranslatedFile *carboncore.FSRef) error {
+func TranslationPerformForFile(inTranslation TranslationRef, inSourceFile *carboncore.FSRef, inDestinationDirectory *carboncore.FSRef, inDestinationName obj.Object, outTranslatedFile *carboncore.FSRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTranslationPerformForFile == nil {
 		ebipurego.RegisterLibFunc(&_fnTranslationPerformForFile, _lib, "TranslationPerformForFile")
 	}
-	_rc := _fnTranslationPerformForFile(objref.IDOf(inTranslation), unsafe.Pointer(inSourceFile), unsafe.Pointer(inDestinationDirectory), objref.IDOf(inDestinationName), unsafe.Pointer(outTranslatedFile))
+	_rc := _fnTranslationPerformForFile(objref.IDOf(inTranslation.Object), unsafe.Pointer(inSourceFile), unsafe.Pointer(inDestinationDirectory), objref.IDOf(inDestinationName), unsafe.Pointer(outTranslatedFile))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -644,13 +645,13 @@ func TranslationPerformForFile(inTranslation obj.Object, inSourceFile *carboncor
 var _fnTranslationPerformForURL func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32
 
 // TranslationPerformForURL reports an error if the HIServices framework function TranslationPerformForURL fails.
-func TranslationPerformForURL(inTranslation obj.Object, inSourceURL obj.Object, inDestinationURL obj.Object) (obj.Object, error) {
+func TranslationPerformForURL(inTranslation TranslationRef, inSourceURL obj.Object, inDestinationURL obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTranslationPerformForURL == nil {
 		ebipurego.RegisterLibFunc(&_fnTranslationPerformForURL, _lib, "TranslationPerformForURL")
 	}
 	var _out0 uintptr
-	_rc := _fnTranslationPerformForURL(objref.IDOf(inTranslation), objref.IDOf(inSourceURL), objref.IDOf(inDestinationURL), unsafe.Pointer(&_out0))
+	_rc := _fnTranslationPerformForURL(objref.IDOf(inTranslation.Object), objref.IDOf(inSourceURL), objref.IDOf(inDestinationURL), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
