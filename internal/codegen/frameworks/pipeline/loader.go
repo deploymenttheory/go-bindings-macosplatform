@@ -14,6 +14,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/overrides"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/pipeline/structindex"
 	"github.com/deploymenttheory/go-bindings-macosplatform/metadata/objcclasshierarchy"
 )
 
@@ -327,43 +328,9 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 		}
 	}
 
-	// Pass 6: struct registry — prefer non-empty definitions.
-	for _, framework := range frameworks {
-		for name, s := range framework.Structs {
-			existingOwner, has := reg.StructIndex[name]
-			if !has {
-				if len(s.Fields) > 0 {
-					reg.StructIndex[name] = framework.Framework
-				}
-				continue
-			}
-			if len(s.Fields) > 0 {
-				prior := lookupStruct(frameworks, existingOwner, name)
-				if prior == nil || len(prior.Fields) == 0 {
-					reg.StructIndex[name] = framework.Framework
-					continue
-				}
-				if framework.Framework < existingOwner {
-					reg.StructIndex[name] = framework.Framework
-				}
-			}
-		}
-	}
-
-	// Pass 6b: typedef aliases for underscore-prefixed struct tags.
-	for name, owner := range reg.StructIndex {
-		if !strings.HasPrefix(name, "_") {
-			continue
-		}
-		target := "struct " + name
-		for tName, tTarget := range reg.TypedefIndex {
-			if tTarget == target && !strings.HasPrefix(tName, "_") {
-				if _, already := reg.StructIndex[tName]; !already {
-					reg.StructIndex[tName] = owner
-				}
-			}
-		}
-	}
+	// Pass 6: struct registry — owner attribution + underscore-tag typedef
+	// backfill (shared with the libraries loader).
+	structindex.Build(frameworks, reg.StructIndex, reg.TypedefIndex)
 
 	// Pass 6c: framework-specific opaque CF pointer typedefs.
 	for _, framework := range frameworks {
@@ -979,17 +946,6 @@ func selectBestArch(files []string) []string {
 	return out
 }
 
-func lookupStruct(frameworks []*meta.FrameworkMeta, fwName, name string) *meta.Struct {
-	for _, framework := range frameworks {
-		if framework.Framework != fwName {
-			continue
-		}
-		if s, ok := framework.Structs[name]; ok {
-			return &s
-		}
-	}
-	return nil
-}
 
 func lookupProtocol(frameworks []*meta.FrameworkMeta, fwName, name string) *meta.Protocol {
 	for _, framework := range frameworks {

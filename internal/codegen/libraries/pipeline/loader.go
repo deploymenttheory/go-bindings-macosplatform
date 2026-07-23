@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/appledocs"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/pipeline/structindex"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/overrides"
 	"github.com/deploymenttheory/go-bindings-macosplatform/metadata/objcclasshierarchy"
@@ -373,54 +374,10 @@ func LoadAll(paths []string, modulePrefix string) (*Registry, error) {
 	// equally-complete entries we prefer the lexicographically smallest
 	// framework name for determinism. This guarantees that consumers always
 	// receive a complete definition for cross-framework value-type resolution.
-	for _, framework := range frameworks {
-		for name, s := range framework.Structs {
-			existingOwner, has := reg.StructIndex[name]
-			if !has {
-				// Only register structs with at least one field. Opaque C types
-				// (e.g. _CGLContextObject, ColorSyncProfile) have 0 fields and must
-				// not be resolved to typed Go structs — they should remain as
-				// unsafe.Pointer in generated code.
-				if len(s.Fields) > 0 {
-					reg.StructIndex[name] = framework.Framework
-				}
-				continue
-			}
-			// Replace placeholder (zero-fields) entries when we find a complete one.
-			if len(s.Fields) > 0 {
-				existing := reg.Frameworks
-				_ = existing
-				prior := lookupStruct(frameworks, existingOwner, name)
-				if prior == nil || len(prior.Fields) == 0 {
-					reg.StructIndex[name] = framework.Framework
-					continue
-				}
-				// Both have fields — keep lexicographically smaller owner for stability.
-				if framework.Framework < existingOwner {
-					reg.StructIndex[name] = framework.Framework
-				}
-			}
-		}
-	}
-
-	// Pass 7b: register typedef aliases for underscore-prefixed struct tags.
-	// C idiom: "typedef struct _NSRange NSRange;" stores the struct under "_NSRange" in
-	// metadata but exposes the public name "NSRange" via a typedef. Register the clean
-	// typedef name → same owner so the mapper finds "NSRange" directly and emits the
-	// exported alias (foundation.NSRange) rather than the unexported tag (foundation._NSRange).
-	for name, owner := range reg.StructIndex {
-		if !strings.HasPrefix(name, "_") {
-			continue
-		}
-		target := "struct " + name
-		for tName, tTarget := range reg.TypedefIndex {
-			if tTarget == target && !strings.HasPrefix(tName, "_") {
-				if _, already := reg.StructIndex[tName]; !already {
-					reg.StructIndex[tName] = owner
-				}
-			}
-		}
-	}
+	// Owner attribution (prefer field-bearing definitions, lexicographically-
+	// smallest owner tie-break) + underscore-tag typedef backfill, shared with the
+	// frameworks loader.
+	structindex.Build(frameworks, reg.StructIndex, reg.TypedefIndex)
 
 	// Pass 7c: register framework-specific opaque pointer typedef types.
 	// Pattern: any typedef XxxRef → "struct Opaque* *" (or "const struct * *") where
@@ -696,20 +653,6 @@ func selectBestArch(files []string) []string {
 // lookupStruct returns the struct metadata for `name` from the framework matching
 // `fwName`, or nil when absent. Used during ownership resolution to compare a
 // candidate entry's completeness against the prior winner without re-scanning.
-func lookupStruct(
-	frameworks []*macosplatformmetadata.FrameworkMeta,
-	fwName, name string,
-) *macosplatformmetadata.Struct {
-	for _, framework := range frameworks {
-		if framework.Framework != fwName {
-			continue
-		}
-		if s, ok := framework.Structs[name]; ok {
-			return &s
-		}
-	}
-	return nil
-}
 
 // lookupProtocol mirrors lookupStruct for protocol entries: forward declarations
 // across many frameworks would otherwise win the registry by alphabetical
