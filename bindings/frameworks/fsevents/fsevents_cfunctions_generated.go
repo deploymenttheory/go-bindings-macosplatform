@@ -23,7 +23,7 @@ func FSEventStreamCopyDescription(streamRef obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamCopyDescription, _lib, "FSEventStreamCopyDescription")
 	}
 	_ret := _fnFSEventStreamCopyDescription(objref.IDOf(streamRef))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnFSEventStreamCopyPathsBeingWatched func(objc.ID) objc.ID
@@ -35,7 +35,7 @@ func FSEventStreamCopyPathsBeingWatched(streamRef obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamCopyPathsBeingWatched, _lib, "FSEventStreamCopyPathsBeingWatched")
 	}
 	_ret := _fnFSEventStreamCopyPathsBeingWatched(objref.IDOf(streamRef))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnFSEventStreamCreate func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID, uint64, float64, int) objc.ID
@@ -225,7 +225,7 @@ func FSEventsCopyUUIDForDevice(dev int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnFSEventsCopyUUIDForDevice, _lib, "FSEventsCopyUUIDForDevice")
 	}
 	_ret := _fnFSEventsCopyUUIDForDevice(dev)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnFSEventsGetCurrentEventId func() uint64

@@ -4144,7 +4144,8 @@
         }
       ],
       "return": {
-        "objc_type": "OS_OBJECT_RETURNS_RETAINED cp_layer_renderer_properties_t  _Nullable"
+        "objc_type": "OS_OBJECT_RETURNS_RETAINED cp_layer_renderer_properties_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"

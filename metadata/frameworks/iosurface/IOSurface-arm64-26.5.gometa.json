@@ -1567,7 +1567,8 @@
         }
       ],
       "return": {
-        "objc_type": "IOSurfaceRef  _Nullable"
+        "objc_type": "IOSurfaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -1584,7 +1585,8 @@
         }
       ],
       "return": {
-        "objc_type": "IOSurfaceRef  _Nullable"
+        "objc_type": "IOSurfaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -2196,7 +2198,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef  _Nullable"
+        "objc_type": "CFTypeRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -2255,7 +2258,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -2289,7 +2293,8 @@
         }
       ],
       "return": {
-        "objc_type": "mach_port_t"
+        "objc_type": "mach_port_t",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -2306,7 +2311,8 @@
         }
       ],
       "return": {
-        "objc_type": "IOSurfaceRef  _Nullable"
+        "objc_type": "IOSurfaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -2518,7 +2524,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -2535,7 +2542,8 @@
         }
       ],
       "return": {
-        "objc_type": "IOSurfaceRef  _Nullable"
+        "objc_type": "IOSurfaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"

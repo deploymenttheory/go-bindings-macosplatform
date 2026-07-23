@@ -45,7 +45,7 @@ func MACaptionAppearanceCopyActiveProfileID() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyActiveProfileID, _lib, "MACaptionAppearanceCopyActiveProfileID")
 	}
 	_ret := _fnMACaptionAppearanceCopyActiveProfileID()
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMACaptionAppearanceCopyBackgroundColor func(CaptionAppearanceDomain, unsafe.Pointer) objc.ID
@@ -108,7 +108,7 @@ func MACaptionAppearanceCopyProfileIDs() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyProfileIDs, _lib, "MACaptionAppearanceCopyProfileIDs")
 	}
 	_ret := _fnMACaptionAppearanceCopyProfileIDs()
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMACaptionAppearanceCopyProfileName func(objc.ID) objc.ID
@@ -120,7 +120,7 @@ func MACaptionAppearanceCopyProfileName(profileID obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyProfileName, _lib, "MACaptionAppearanceCopyProfileName")
 	}
 	_ret := _fnMACaptionAppearanceCopyProfileName(objref.IDOf(profileID))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMACaptionAppearanceCopySelectedLanguages func(CaptionAppearanceDomain) objc.ID
@@ -312,7 +312,7 @@ func MAImageCaptioningCopyCaption(url obj.Object, err unsafe.Pointer) obj.Object
 		ebipurego.RegisterLibFunc(&_fnMAImageCaptioningCopyCaption, _lib, "MAImageCaptioningCopyCaption")
 	}
 	_ret := _fnMAImageCaptioningCopyCaption(objref.IDOf(url), err)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMAImageCaptioningCopyMetadataTagPath func() objc.ID
@@ -324,7 +324,7 @@ func MAImageCaptioningCopyMetadataTagPath() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMAImageCaptioningCopyMetadataTagPath, _lib, "MAImageCaptioningCopyMetadataTagPath")
 	}
 	_ret := _fnMAImageCaptioningCopyMetadataTagPath()
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMAImageCaptioningSetCaption func(objc.ID, objc.ID, unsafe.Pointer) bool

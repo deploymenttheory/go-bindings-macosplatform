@@ -5501,7 +5501,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef"
+        "objc_type": "CFDictionaryRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2",

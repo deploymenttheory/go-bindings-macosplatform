@@ -1517,7 +1517,8 @@
         }
       ],
       "return": {
-        "objc_type": "LSSharedFileListItemRef  _Nullable"
+        "objc_type": "LSSharedFileListItemRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5",
@@ -1564,7 +1565,8 @@
         }
       ],
       "return": {
-        "objc_type": "LSSharedFileListItemRef  _Nullable"
+        "objc_type": "LSSharedFileListItemRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5",

@@ -821,7 +821,7 @@ func JSStringCopyCFString(alloc obj.Object, str obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSStringCopyCFString, _lib, "JSStringCopyCFString")
 	}
 	_ret := _fnJSStringCopyCFString(objref.IDOf(alloc), objref.IDOf(str))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnJSStringCreateWithCFString func(objc.ID) objc.ID

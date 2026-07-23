@@ -1297,7 +1297,8 @@
         }
       ],
       "return": {
-        "objc_type": "DASessionRef  _Nullable"
+        "objc_type": "DASessionRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -1396,7 +1397,8 @@
         }
       ],
       "return": {
-        "objc_type": "DAApprovalSessionRef  _Nullable"
+        "objc_type": "DAApprovalSessionRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "DiskArbitration/DASession.h",
@@ -1477,7 +1479,8 @@
         }
       ],
       "return": {
-        "objc_type": "DADiskRef  _Nullable"
+        "objc_type": "DADiskRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -1503,7 +1506,8 @@
         }
       ],
       "return": {
-        "objc_type": "DADiskRef  _Nullable"
+        "objc_type": "DADiskRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -1529,7 +1533,8 @@
         }
       ],
       "return": {
-        "objc_type": "DADiskRef  _Nullable"
+        "objc_type": "DADiskRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -1563,7 +1568,8 @@
         }
       ],
       "return": {
-        "objc_type": "io_service_t"
+        "objc_type": "io_service_t",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -1580,7 +1586,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -1597,7 +1604,8 @@
         }
       ],
       "return": {
-        "objc_type": "DADiskRef  _Nullable"
+        "objc_type": "DADiskRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -1624,7 +1632,8 @@
         }
       ],
       "return": {
-        "objc_type": "DADissenterRef  _Nonnull"
+        "objc_type": "DADissenterRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"

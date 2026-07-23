@@ -70,7 +70,7 @@ func MTCopyLocalizedNameForMediaSubType(mediaType int, mediaSubType int) obj.Obj
 		ebipurego.RegisterLibFunc(&_fnMTCopyLocalizedNameForMediaSubType, _lib, "MTCopyLocalizedNameForMediaSubType")
 	}
 	_ret := _fnMTCopyLocalizedNameForMediaSubType(mediaType, mediaSubType)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMTCopyLocalizedNameForMediaType func(int) objc.ID
@@ -82,7 +82,7 @@ func MTCopyLocalizedNameForMediaType(mediaType int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMTCopyLocalizedNameForMediaType, _lib, "MTCopyLocalizedNameForMediaType")
 	}
 	_ret := _fnMTCopyLocalizedNameForMediaType(mediaType)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMTRegisterProfessionalVideoWorkflowFormatReaders func()

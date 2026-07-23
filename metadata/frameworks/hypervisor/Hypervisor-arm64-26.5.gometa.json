@@ -20682,7 +20682,8 @@
     {
       "name": "hv_gic_config_create",
       "return": {
-        "objc_type": "OS_OBJECT_RETURNS_RETAINED hv_gic_config_t  _Nonnull"
+        "objc_type": "OS_OBJECT_RETURNS_RETAINED hv_gic_config_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "15.0"
@@ -20943,7 +20944,8 @@
     {
       "name": "hv_gic_state_create",
       "return": {
-        "objc_type": "OS_OBJECT_RETURNS_RETAINED hv_gic_state_t  _Nonnull"
+        "objc_type": "OS_OBJECT_RETURNS_RETAINED hv_gic_state_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "15.0"
@@ -21014,7 +21016,8 @@
     {
       "name": "hv_vcpu_config_create",
       "return": {
-        "objc_type": "OS_OBJECT_RETURNS_RETAINED hv_vcpu_config_t  _Nonnull"
+        "objc_type": "OS_OBJECT_RETURNS_RETAINED hv_vcpu_config_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -21197,7 +21200,8 @@
     {
       "name": "hv_vm_config_create",
       "return": {
-        "objc_type": "OS_OBJECT_RETURNS_RETAINED hv_vm_config_t  _Nonnull"
+        "objc_type": "OS_OBJECT_RETURNS_RETAINED hv_vm_config_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"

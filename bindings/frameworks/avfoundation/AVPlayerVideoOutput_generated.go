@@ -88,5 +88,5 @@ func (pvo *PlayerVideoOutput) CopyTaggedBufferGroupForHostTimePresentationTimeSt
 	defer runtime.KeepAlive(pvo)
 	defer runtime.KeepAlive(activeConfigurationOut)
 	_r := objc.Send[objc.ID](objref.IDOf(pvo), objc.RegisterName("copyTaggedBufferGroupForHostTime:presentationTimeStamp:activeConfiguration:"), hostTime, unsafe.Pointer(presentationTimeStampOut), objref.IDOf(activeConfigurationOut))
-	return obj.Wrap(_r)
+	return obj.Adopt(_r)
 }

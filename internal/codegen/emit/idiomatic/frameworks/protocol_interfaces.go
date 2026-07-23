@@ -232,6 +232,7 @@ func buildProtocolMethodSignature(
 
 	retType, _, _, _, rimps, ok := idiomaticRet(
 		method.Return.ObjCType,
+		method.Return.IsAlreadyRetained,
 		ctx,
 		mapper,
 		fc,

@@ -135081,7 +135081,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/matrix.h",
@@ -135116,7 +135117,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/matrix.h",
@@ -135156,7 +135158,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/matrix.h",
@@ -135196,7 +135199,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/matrix.h",
@@ -135311,7 +135315,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/matrix.h",
@@ -135334,7 +135339,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/matrix.h",
@@ -135353,7 +135359,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/matrix.h",
@@ -135372,7 +135379,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/matrix.h",
@@ -135391,7 +135399,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/matrix.h",
@@ -135410,7 +135419,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/matrix.h",
@@ -135498,7 +135508,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/vector.h",
@@ -135517,7 +135528,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/splat.h",
@@ -135536,7 +135548,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/splat.h",
@@ -135555,7 +135568,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/splat.h",
@@ -135578,7 +135592,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/splat.h",
@@ -135597,7 +135612,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/splat.h",
@@ -135620,7 +135636,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/splat.h",
@@ -135635,7 +135652,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/arithmetic.h",
@@ -135654,7 +135672,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/arithmetic.h",
@@ -135673,7 +135692,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/arithmetic.h",
@@ -135692,7 +135712,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/arithmetic.h",
@@ -135711,7 +135732,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/arithmetic.h",
@@ -135730,7 +135752,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/arithmetic.h",
@@ -135749,7 +135772,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/arithmetic.h",
@@ -135768,7 +135792,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/arithmetic.h",
@@ -135787,7 +135812,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/arithmetic.h",
@@ -135806,7 +135832,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/linear_systems.h",
@@ -135863,7 +135890,8 @@
         }
       ],
       "return": {
-        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull"
+        "objc_type": "LA_RETURNS_RETAINED la_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "vecLib/LinearAlgebra/norms.h",

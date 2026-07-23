@@ -4082,7 +4082,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_queue_t  _Nullable"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_queue_t  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "OpenCL/gcl.h",

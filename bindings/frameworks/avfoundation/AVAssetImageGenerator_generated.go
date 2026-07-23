@@ -139,7 +139,7 @@ func (aig *AssetImageGenerator) CopyCGImageAtTimeActualTime(requestedTime coreme
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return obj.Adopt(_r), nil
 }
 
 // CancelAllCGImageGeneration cancels all pending image generation requests.

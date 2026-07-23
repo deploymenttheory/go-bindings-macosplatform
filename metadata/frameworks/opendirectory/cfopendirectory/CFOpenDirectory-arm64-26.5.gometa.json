@@ -2137,7 +2137,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef"
+        "objc_type": "CFDataRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "OpenDirectory.framework/Frameworks/CFOpenDirectory/CFODNode.h",
@@ -2164,7 +2165,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef"
+        "objc_type": "CFTypeRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "OpenDirectory.framework/Frameworks/CFOpenDirectory/CFODNode.h",
@@ -2371,7 +2373,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef"
+        "objc_type": "CFDictionaryRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "OpenDirectory.framework/Frameworks/CFOpenDirectory/CFODNode.h",
@@ -3323,7 +3326,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef"
+        "objc_type": "CFDictionaryRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "OpenDirectory.framework/Frameworks/CFOpenDirectory/CFODRecord.h",

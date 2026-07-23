@@ -130,21 +130,21 @@ func (apelm *AuthorizationProviderExtensionLoginManager) SaveCertificateKeyType(
 func (apelm *AuthorizationProviderExtensionLoginManager) CopyKeyForKeyType(keyType AuthorizationProviderExtensionKeyType) obj.Object {
 	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("copyKeyForKeyType:"), keyType)
-	return obj.Wrap(_r)
+	return obj.Adopt(_r)
 }
 
 // CopyIdentityForKeyType retrieves the identity for the specified platform single sign-on key type.
 func (apelm *AuthorizationProviderExtensionLoginManager) CopyIdentityForKeyType(keyType AuthorizationProviderExtensionKeyType) obj.Object {
 	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("copyIdentityForKeyType:"), keyType)
-	return obj.Wrap(_r)
+	return obj.Adopt(_r)
 }
 
 // BeginKeyRotationForKeyType generates a new key for the specified platform SSO key type using the strongest supported key strength returning the new key.  Nil is returned if there is an error generating the new key.
 func (apelm *AuthorizationProviderExtensionLoginManager) BeginKeyRotationForKeyType(keyType AuthorizationProviderExtensionKeyType) obj.Object {
 	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("beginKeyRotationForKeyType:"), keyType)
-	return obj.Wrap(_r)
+	return obj.Adopt(_r)
 }
 
 // CompleteKeyRotationForKeyType completes rotation for the key to replace the previous key.

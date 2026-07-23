@@ -22027,7 +22027,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecBase.h",
@@ -22057,7 +22058,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecCertificateRef  _Nullable"
+        "objc_type": "SecCertificateRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22072,7 +22074,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nonnull"
+        "objc_type": "CFDataRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22088,7 +22091,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22108,7 +22112,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22129,7 +22134,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22145,7 +22151,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22160,7 +22167,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22175,7 +22183,8 @@
         }
       ],
       "return": {
-        "objc_type": "CF_RETURNS_RETAINED SecKeyRef"
+        "objc_type": "CF_RETURNS_RETAINED SecKeyRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -22197,7 +22206,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.3",
@@ -22221,7 +22231,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.13"
@@ -22238,7 +22249,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDateRef  _Nullable"
+        "objc_type": "CFDateRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "15.0"
@@ -22255,7 +22267,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDateRef  _Nullable"
+        "objc_type": "CFDateRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "15.0"
@@ -22277,7 +22290,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -22308,7 +22322,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22477,7 +22492,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22498,7 +22514,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecCertificateRef  _Nullable"
+        "objc_type": "SecCertificateRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22578,7 +22595,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22603,7 +22621,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22628,7 +22647,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22648,7 +22668,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22668,7 +22689,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecCertificate.h",
@@ -22702,7 +22724,8 @@
         }
       ],
       "return": {
-        "objc_type": "CF_RETURNS_RETAINED SecIdentityRef"
+        "objc_type": "CF_RETURNS_RETAINED SecIdentityRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -22729,7 +22752,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecIdentity.h",
@@ -22750,7 +22774,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecIdentity.h",
@@ -22771,7 +22796,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecIdentity.h",
@@ -22801,7 +22827,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecIdentity.h",
@@ -22827,7 +22854,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecIdentityRef  _Nullable"
+        "objc_type": "SecIdentityRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecIdentity.h",
@@ -22902,7 +22930,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecIdentity.h",
@@ -22963,7 +22992,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecAccessControlRef  _Nullable"
+        "objc_type": "SecAccessControlRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.10"
@@ -22985,7 +23015,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -23090,7 +23121,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2",
@@ -23123,7 +23155,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecAccess.h",
@@ -23157,7 +23190,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecAccessRef  _Nullable"
+        "objc_type": "SecAccessRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -23226,7 +23260,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -23251,7 +23286,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2",
@@ -23280,7 +23316,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecAccess.h",
@@ -23300,7 +23337,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -23375,7 +23413,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecKey.h",
@@ -23513,7 +23552,8 @@
         }
       ],
       "return": {
-        "objc_type": "CF_RETURNS_RETAINED SecKeyRef"
+        "objc_type": "CF_RETURNS_RETAINED SecKeyRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -23541,7 +23581,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecKeyRef  _Nullable"
+        "objc_type": "SecKeyRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -23597,7 +23638,8 @@
         }
       ],
       "return": {
-        "objc_type": "CF_RETURNS_RETAINED SecKeyRef"
+        "objc_type": "CF_RETURNS_RETAINED SecKeyRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -23717,7 +23759,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecKeyRef  _Nullable"
+        "objc_type": "SecKeyRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -23744,7 +23787,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecKeyRef  _Nullable"
+        "objc_type": "SecKeyRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -23785,7 +23829,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -23803,7 +23848,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -23821,7 +23867,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecKeyRef  _Nullable"
+        "objc_type": "SecKeyRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -23852,7 +23899,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -23918,7 +23966,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -23949,7 +23998,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -23984,7 +24034,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -24038,7 +24089,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecPolicy.h",
@@ -24047,7 +24099,8 @@
     {
       "name": "SecPolicyCreateBasicX509",
       "return": {
-        "objc_type": "SecPolicyRef  _Nonnull"
+        "objc_type": "SecPolicyRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecPolicy.h",
@@ -24068,7 +24121,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecPolicyRef  _Nonnull"
+        "objc_type": "SecPolicyRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecPolicy.h",
@@ -24084,7 +24138,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecPolicyRef  _Nullable"
+        "objc_type": "SecPolicyRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecPolicy.h",
@@ -24104,7 +24159,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecPolicyRef  _Nullable"
+        "objc_type": "SecPolicyRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecPolicy.h",
@@ -24119,7 +24175,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecPolicyRef  _Nullable"
+        "objc_type": "SecPolicyRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecPolicy.h",
@@ -24243,7 +24300,8 @@
         }
       ],
       "return": {
-        "objc_type": "int"
+        "objc_type": "int",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecRandom.h",
@@ -25550,7 +25608,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecTrust.h",
@@ -25591,7 +25650,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecTrust.h",
@@ -25693,7 +25753,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecTrust.h",
@@ -25859,7 +25920,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecKeyRef  _Nullable"
+        "objc_type": "SecKeyRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -25877,7 +25939,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecKeyRef  _Nullable"
+        "objc_type": "SecKeyRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -25932,7 +25995,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecTrust.h",
@@ -25968,7 +26032,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -25986,7 +26051,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecTrust.h",
@@ -26045,7 +26111,8 @@
         }
       ],
       "return": {
-        "objc_type": "CF_RETURNS_RETAINED CFArrayRef"
+        "objc_type": "CF_RETURNS_RETAINED CFArrayRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.0"
@@ -26220,7 +26287,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecTrust.h",
@@ -26289,7 +26357,8 @@
     {
       "name": "SecCreateSharedWebCredentialPassword",
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -26336,7 +26405,8 @@
         }
       ],
       "return": {
-        "objc_type": "SEC_RETURNS_RETAINED sec_trust_t  _Nullable"
+        "objc_type": "SEC_RETURNS_RETAINED sec_trust_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -26370,7 +26440,8 @@
         }
       ],
       "return": {
-        "objc_type": "SEC_RETURNS_RETAINED sec_identity_t  _Nullable"
+        "objc_type": "SEC_RETURNS_RETAINED sec_identity_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -26391,7 +26462,8 @@
         }
       ],
       "return": {
-        "objc_type": "SEC_RETURNS_RETAINED sec_identity_t  _Nullable"
+        "objc_type": "SEC_RETURNS_RETAINED sec_identity_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -26464,7 +26536,8 @@
         }
       ],
       "return": {
-        "objc_type": "SEC_RETURNS_RETAINED sec_certificate_t  _Nullable"
+        "objc_type": "SEC_RETURNS_RETAINED sec_certificate_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -26533,7 +26606,8 @@
         }
       ],
       "return": {
-        "objc_type": "SEC_RETURNS_RETAINED dispatch_data_t  _Nullable"
+        "objc_type": "SEC_RETURNS_RETAINED dispatch_data_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -26830,7 +26904,8 @@
         }
       ],
       "return": {
-        "objc_type": "SEC_RETURNS_RETAINED dispatch_data_t  _Nullable"
+        "objc_type": "SEC_RETURNS_RETAINED dispatch_data_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -26867,7 +26942,8 @@
         }
       ],
       "return": {
-        "objc_type": "SEC_RETURNS_RETAINED dispatch_data_t  _Nullable"
+        "objc_type": "SEC_RETURNS_RETAINED dispatch_data_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -33018,7 +33094,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecACL.h",
@@ -33052,7 +33129,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -33106,7 +33184,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecACL.h",
@@ -33136,7 +33215,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -33242,7 +33322,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nonnull"
+        "objc_type": "CFArrayRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -34956,7 +35037,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecTaskRef  _Nullable"
+        "objc_type": "SecTaskRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecTask.h",
@@ -34972,7 +35054,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecTaskRef  _Nullable"
+        "objc_type": "SecTaskRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecTask.h",
@@ -34996,7 +35079,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef  _Nullable"
+        "objc_type": "CFTypeRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecTask.h",
@@ -35020,7 +35104,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecTask.h",
@@ -35040,7 +35125,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Security/SecTask.h",
@@ -36167,7 +36253,8 @@
         }
       ],
       "return": {
-        "objc_type": "SSLContextRef  _Nullable"
+        "objc_type": "SSLContextRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.8",
@@ -36680,7 +36767,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11",
@@ -36706,7 +36794,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11",
@@ -37168,7 +37257,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5",
@@ -37191,7 +37281,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5",
@@ -37214,7 +37305,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6",
@@ -37335,7 +37427,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.13",
@@ -37477,7 +37570,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5",
@@ -37500,7 +37594,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5",
@@ -37850,7 +37945,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecTransformRef  _Nullable"
+        "objc_type": "SecTransformRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -37869,7 +37965,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nonnull"
+        "objc_type": "CFDictionaryRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -37882,7 +37979,8 @@
     {
       "name": "SecTransformCreateGroupTransform",
       "return": {
-        "objc_type": "SecGroupTransformRef  _Nonnull"
+        "objc_type": "SecGroupTransformRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -38024,7 +38122,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef  _Nonnull"
+        "objc_type": "CFTypeRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -38298,7 +38397,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecTransformRef  _Nullable"
+        "objc_type": "SecTransformRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -38335,7 +38435,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecTransformRef  _Nullable"
+        "objc_type": "SecTransformRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -38359,7 +38460,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecTransformRef  _Nullable"
+        "objc_type": "SecTransformRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -38388,7 +38490,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecTransformRef  _Nonnull"
+        "objc_type": "SecTransformRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -38425,7 +38528,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecTransformRef  _Nonnull"
+        "objc_type": "SecTransformRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -38449,7 +38553,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecTransformRef  _Nonnull"
+        "objc_type": "SecTransformRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -38499,7 +38604,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecTransformRef  _Nullable"
+        "objc_type": "SecTransformRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -38528,7 +38634,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecTransformRef  _Nullable"
+        "objc_type": "SecTransformRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",
@@ -38547,7 +38654,8 @@
         }
       ],
       "return": {
-        "objc_type": "SecTransformRef  _Nonnull"
+        "objc_type": "SecTransformRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7",

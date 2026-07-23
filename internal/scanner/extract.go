@@ -1198,6 +1198,28 @@ func bareStructIdent(objcType string) string {
 
 // --- Functions ---
 
+// followsCreateRule reports whether a function name contains "Create" or "Copy"
+// as a camelCase word (followed by an upper-case letter or the end of the name) —
+// Apple's CF Create Rule for +1 (already-retained) ownership. The word-boundary
+// check avoids false positives like "…Copyright" (Copy + lowercase 'r') or a
+// substring that is part of a larger lower-case word.
+func followsCreateRule(name string) bool {
+	for _, kw := range []string{"Create", "Copy"} {
+		for i := 0; ; {
+			j := strings.Index(name[i:], kw)
+			if j < 0 {
+				break
+			}
+			after := i + j + len(kw)
+			if after == len(name) || (name[after] >= 'A' && name[after] <= 'Z') {
+				return true
+			}
+			i += j + 1
+		}
+	}
+	return false
+}
+
 func scanFunction(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *frameworkFilter) {
 	if node.IsImplicit {
 		return
@@ -1222,6 +1244,18 @@ func scanFunction(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta,
 		// as the portion before the first opening parenthesis.
 		if ret := parseFuncReturnType(node.Type.QualType); ret != "" && ret != "void" {
 			fn.Return = macosplatformmetadata.ReturnType{ObjCType: ret}
+		}
+	}
+	// CF ownership (the "Create Rule"): inside a CF-audited region (CFAuditedTransfer
+	// attribute) a function whose name contains "Create" or "Copy" returns a +1,
+	// already-retained reference the caller owns — the idiomatic layer must adopt it
+	// (not re-retain, which would leak). An explicit cf/ns_returns_retained says so
+	// directly. Clang does not annotate individual CF create functions; it relies on
+	// the audited-region + name convention, which is the authoritative contract there.
+	if fn.Return.ObjCType != "" {
+		if node.hasAttr("CFReturnsRetainedAttr") || node.hasAttr("NSReturnsRetainedAttr") ||
+			(node.hasAttr("CFAuditedTransferAttr") && followsCreateRule(node.Name)) {
+			fn.Return.IsAlreadyRetained = true
 		}
 	}
 	for i := range node.Inner {

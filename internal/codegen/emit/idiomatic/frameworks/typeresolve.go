@@ -443,6 +443,7 @@ func goSizeType(goType string) string {
 // that cannot yet be expressed without an Objective-C runtime type.
 func idiomaticRet(
 	objcType string,
+	alreadyRetained bool,
 	ctx typemap.Context,
 	mapper *typemap.Mapper,
 	fc *frameworkContext,
@@ -562,12 +563,17 @@ func idiomaticRet(
 	// integer-handle "…Ref" types fall through to the scalar case.
 	if goRet == "unsafe.Pointer" && isCFObjectType(objcType, mapper) {
 		imports["obj"] = objImportPath
-		// A non-reference-counted opaque handle (no CFTypeID) must NOT be retained
-		// or released — objc_retain/objc_release on the pointer crashes. Wrap it
-		// unmanaged (no retain, no finalizer); the caller owns its dispose lifetime.
 		wrap := "obj.Wrap(%s)"
-		if isNonRefcountedHandle(objcType, mapper) {
+		switch {
+		case isNonRefcountedHandle(objcType, mapper):
+			// A non-reference-counted opaque handle (no CFTypeID) must NOT be retained
+			// or released — objc_retain/objc_release on the pointer crashes. Wrap it
+			// unmanaged (no retain, no finalizer); the caller owns its dispose lifetime.
 			wrap = "obj.WrapUnmanaged(%s)"
+		case alreadyRetained:
+			// A +1 result (CF Create/Copy rule, cf/ns_returns_retained): adopt the
+			// existing reference. obj.Wrap would retain a second time and leak it.
+			wrap = "obj.Adopt(%s)"
 		}
 		return "obj.Object", kindObject, wrap, "objc.ID", imports, true
 	}

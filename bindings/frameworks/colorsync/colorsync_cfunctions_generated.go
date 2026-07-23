@@ -22,7 +22,7 @@ func CGDisplayCreateUUIDFromDisplayID(displayID uint32) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCGDisplayCreateUUIDFromDisplayID, _lib, "CGDisplayCreateUUIDFromDisplayID")
 	}
 	_ret := _fnCGDisplayCreateUUIDFromDisplayID(displayID)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCGDisplayGetDisplayIDFromUUID func(objc.ID) uint32
@@ -56,7 +56,7 @@ func ColorSyncCMMCopyCMMIdentifier(arg obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnColorSyncCMMCopyCMMIdentifier, _lib, "ColorSyncCMMCopyCMMIdentifier")
 	}
 	_ret := _fnColorSyncCMMCopyCMMIdentifier(objref.IDOf(arg))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnColorSyncCMMCopyLocalizedName func(objc.ID) objc.ID
@@ -68,7 +68,7 @@ func ColorSyncCMMCopyLocalizedName(arg obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnColorSyncCMMCopyLocalizedName, _lib, "ColorSyncCMMCopyLocalizedName")
 	}
 	_ret := _fnColorSyncCMMCopyLocalizedName(objref.IDOf(arg))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnColorSyncCMMCreate func(objc.ID) objc.ID
@@ -80,7 +80,7 @@ func ColorSyncCMMCreate(cmmBundle obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnColorSyncCMMCreate, _lib, "ColorSyncCMMCreate")
 	}
 	_ret := _fnColorSyncCMMCreate(objref.IDOf(cmmBundle))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnColorSyncCMMGetBundle func(objc.ID) objc.ID
@@ -115,7 +115,7 @@ func ColorSyncCreateCodeFragment(profileSequence obj.Object, options obj.Object)
 		ebipurego.RegisterLibFunc(&_fnColorSyncCreateCodeFragment, _lib, "ColorSyncCreateCodeFragment")
 	}
 	_ret := _fnColorSyncCreateCodeFragment(objref.IDOf(profileSequence), objref.IDOf(options))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnColorSyncDeviceCopyDeviceInfo func(objc.ID, objc.ID) objc.ID
@@ -127,7 +127,7 @@ func ColorSyncDeviceCopyDeviceInfo(deviceClass obj.Object, devID obj.Object) obj
 		ebipurego.RegisterLibFunc(&_fnColorSyncDeviceCopyDeviceInfo, _lib, "ColorSyncDeviceCopyDeviceInfo")
 	}
 	_ret := _fnColorSyncDeviceCopyDeviceInfo(objref.IDOf(deviceClass), objref.IDOf(devID))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnColorSyncDeviceSetCustomProfiles func(objc.ID, objc.ID, objc.ID) bool
@@ -209,7 +209,7 @@ func ColorSyncProfileCopyDescriptionString(prof obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyDescriptionString, _lib, "ColorSyncProfileCopyDescriptionString")
 	}
 	_ret := _fnColorSyncProfileCopyDescriptionString(objref.IDOf(prof))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnColorSyncProfileCopyHeader func(objc.ID) objc.ID
@@ -221,7 +221,7 @@ func ColorSyncProfileCopyHeader(prof obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyHeader, _lib, "ColorSyncProfileCopyHeader")
 	}
 	_ret := _fnColorSyncProfileCopyHeader(objref.IDOf(prof))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnColorSyncProfileCopyTag func(objc.ID, objc.ID) objc.ID
@@ -233,7 +233,7 @@ func ColorSyncProfileCopyTag(prof obj.Object, signature obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyTag, _lib, "ColorSyncProfileCopyTag")
 	}
 	_ret := _fnColorSyncProfileCopyTag(objref.IDOf(prof), objref.IDOf(signature))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnColorSyncProfileCopyTagSignatures func(objc.ID) objc.ID
@@ -245,7 +245,7 @@ func ColorSyncProfileCopyTagSignatures(prof obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyTagSignatures, _lib, "ColorSyncProfileCopyTagSignatures")
 	}
 	_ret := _fnColorSyncProfileCopyTagSignatures(objref.IDOf(prof))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnColorSyncProfileCreateDeviceProfile func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -270,7 +270,7 @@ func ColorSyncProfileCreateDisplayTransferTablesFromVCGT(profile obj.Object) (re
 	}
 	var _out0 int
 	_ret := _fnColorSyncProfileCreateDisplayTransferTablesFromVCGT(objref.IDOf(profile), unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return obj.Adopt(_ret), _out0
 }
 
 var _fnColorSyncProfileCreateLink func(objc.ID, objc.ID) objc.ID
@@ -484,7 +484,7 @@ func ColorSyncTransformCopyProperty(transform obj.Object, key obj.Object, option
 		ebipurego.RegisterLibFunc(&_fnColorSyncTransformCopyProperty, _lib, "ColorSyncTransformCopyProperty")
 	}
 	_ret := _fnColorSyncTransformCopyProperty(objref.IDOf(transform), objref.IDOf(key), objref.IDOf(options))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnColorSyncTransformCreate func(objc.ID, objc.ID) objc.ID
@@ -496,7 +496,7 @@ func ColorSyncTransformCreate(profileSequence obj.Object, options obj.Object) ob
 		ebipurego.RegisterLibFunc(&_fnColorSyncTransformCreate, _lib, "ColorSyncTransformCreate")
 	}
 	_ret := _fnColorSyncTransformCreate(objref.IDOf(profileSequence), objref.IDOf(options))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnColorSyncTransformGetProfileSequence func(objc.ID) objc.ID

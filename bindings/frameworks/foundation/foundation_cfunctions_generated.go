@@ -35,7 +35,7 @@ func CFBridgingRetain(x obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCFBridgingRetain, _lib, "CFBridgingRetain")
 	}
 	_ret := _fnCFBridgingRetain(objref.IDOf(x))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnNSAllHashTableObjects func(objc.ID) objc.ID

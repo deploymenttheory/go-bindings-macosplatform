@@ -4982,7 +4982,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nonnull"
+        "objc_type": "CFDictionaryRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -5022,7 +5023,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nonnull"
+        "objc_type": "CFDictionaryRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -5062,7 +5064,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nonnull"
+        "objc_type": "CFDictionaryRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -5654,7 +5657,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGDataProviderRef  _Nullable"
+        "objc_type": "CGDataProviderRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -5681,7 +5685,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGDataProviderRef  _Nullable"
+        "objc_type": "CGDataProviderRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -5713,7 +5718,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGDataProviderRef  _Nullable"
+        "objc_type": "CGDataProviderRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -5731,7 +5737,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGDataProviderRef  _Nullable"
+        "objc_type": "CGDataProviderRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -5749,7 +5756,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGDataProviderRef  _Nullable"
+        "objc_type": "CGDataProviderRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -5767,7 +5775,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGDataProviderRef  _Nullable"
+        "objc_type": "CGDataProviderRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -5821,7 +5830,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.3"
@@ -5850,7 +5860,8 @@
     {
       "name": "CGColorSpaceCreateDeviceGray",
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -5861,7 +5872,8 @@
     {
       "name": "CGColorSpaceCreateDeviceRGB",
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -5872,7 +5884,8 @@
     {
       "name": "CGColorSpaceCreateDeviceCMYK",
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -5898,7 +5911,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -5930,7 +5944,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -5957,7 +5972,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -5975,7 +5991,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -6007,7 +6024,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -6034,7 +6052,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -6052,7 +6071,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -6075,7 +6095,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.0"
@@ -6093,7 +6114,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2"
@@ -6164,7 +6186,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -6246,7 +6269,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nonnull"
+        "objc_type": "CGColorSpaceRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "15.0"
@@ -6305,7 +6329,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -6425,7 +6450,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFPropertyListRef  _Nullable"
+        "objc_type": "CFPropertyListRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -6442,7 +6468,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -6478,7 +6505,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -6496,7 +6524,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -6514,7 +6543,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -6532,7 +6562,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nonnull"
+        "objc_type": "CGColorSpaceRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -6550,7 +6581,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5",
@@ -6570,7 +6602,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5",
@@ -6590,7 +6623,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nullable"
+        "objc_type": "CGColorSpaceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -6650,7 +6684,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPatternRef  _Nullable"
+        "objc_type": "CGPatternRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -6709,7 +6744,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorRef  _Nullable"
+        "objc_type": "CGColorRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.3"
@@ -6730,7 +6766,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorRef  _Nonnull"
+        "objc_type": "CGColorRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -6759,7 +6796,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorRef  _Nonnull"
+        "objc_type": "CGColorRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -6792,7 +6830,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorRef  _Nonnull"
+        "objc_type": "CGColorRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -6813,7 +6852,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorRef  _Nonnull"
+        "objc_type": "CGColorRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -6842,7 +6882,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorRef  _Nonnull"
+        "objc_type": "CGColorRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -6880,7 +6921,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorRef  _Nullable"
+        "objc_type": "CGColorRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -6944,7 +6986,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorRef  _Nullable"
+        "objc_type": "CGColorRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.3"
@@ -6962,7 +7005,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorRef  _Nullable"
+        "objc_type": "CGColorRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.3"
@@ -6984,7 +7028,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorRef  _Nullable"
+        "objc_type": "CGColorRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.3"
@@ -7016,7 +7061,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorRef  _Nullable"
+        "objc_type": "CGColorRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11"
@@ -7205,7 +7251,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGFontRef  _Nullable"
+        "objc_type": "CGFontRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -7225,7 +7272,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGFontRef  _Nullable"
+        "objc_type": "CGFontRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -7243,7 +7291,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGFontRef  _Nullable"
+        "objc_type": "CGFontRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -7266,7 +7315,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGFontRef  _Nullable"
+        "objc_type": "CGFontRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -7356,7 +7406,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -7374,7 +7425,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -7536,7 +7588,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -7554,7 +7607,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -7659,7 +7713,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -7681,7 +7736,8 @@
         }
       ],
       "return": {
-        "objc_type": "bool"
+        "objc_type": "bool",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -7722,7 +7778,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -7745,7 +7802,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -7763,7 +7821,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -7785,7 +7844,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -7828,7 +7888,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGGradientRef  _Nullable"
+        "objc_type": "CGGradientRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -7864,7 +7925,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGGradientRef  _Nullable"
+        "objc_type": "CGGradientRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -7892,7 +7954,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGGradientRef  _Nullable"
+        "objc_type": "CGGradientRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -8046,7 +8109,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -8093,7 +8157,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -8111,7 +8176,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -8142,7 +8208,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.1"
@@ -8173,7 +8240,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2"
@@ -8195,7 +8263,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -8218,7 +8287,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -8241,7 +8311,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -8264,7 +8335,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.3"
@@ -8328,7 +8400,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "15.0"
@@ -8350,7 +8423,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "15.0"
@@ -8444,7 +8518,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -8462,7 +8537,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -8844,7 +8920,8 @@
     {
       "name": "CGPathCreateMutable",
       "return": {
-        "objc_type": "CGMutablePathRef  _Nonnull"
+        "objc_type": "CGMutablePathRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2"
@@ -8862,7 +8939,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2"
@@ -8885,7 +8963,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -8903,7 +8982,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGMutablePathRef  _Nullable"
+        "objc_type": "CGMutablePathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2"
@@ -8926,7 +9006,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGMutablePathRef  _Nullable"
+        "objc_type": "CGMutablePathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -8948,7 +9029,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nonnull"
+        "objc_type": "CGPathRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -8970,7 +9052,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nonnull"
+        "objc_type": "CGPathRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -9000,7 +9083,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nonnull"
+        "objc_type": "CGPathRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.9"
@@ -9071,7 +9155,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -9110,7 +9195,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -9812,7 +9898,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -9839,7 +9926,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -9866,7 +9954,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -9893,7 +9982,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -9920,7 +10010,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -9947,7 +10038,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -9974,7 +10066,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -9996,7 +10089,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -10018,7 +10112,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -10131,7 +10226,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.3"
@@ -10185,7 +10281,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.3"
@@ -10203,7 +10300,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDateRef  _Nullable"
+        "objc_type": "CFDateRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -11026,7 +11124,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPDFDocumentRef  _Nullable"
+        "objc_type": "CGPDFDocumentRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -11044,7 +11143,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPDFDocumentRef  _Nullable"
+        "objc_type": "CGPDFDocumentRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -11535,7 +11635,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGFunctionRef  _Nullable"
+        "objc_type": "CGFunctionRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2"
@@ -11621,7 +11722,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGShadingRef  _Nullable"
+        "objc_type": "CGShadingRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2"
@@ -11664,7 +11766,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGShadingRef  _Nullable"
+        "objc_type": "CGShadingRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -11711,7 +11814,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGShadingRef  _Nullable"
+        "objc_type": "CGShadingRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2"
@@ -11762,7 +11866,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGShadingRef  _Nullable"
+        "objc_type": "CGShadingRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -12628,7 +12733,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2"
@@ -14916,7 +15022,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGRenderingBufferProviderRef  _Nullable"
+        "objc_type": "CGRenderingBufferProviderRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -14933,7 +15040,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGRenderingBufferProviderRef  _Nullable"
+        "objc_type": "CGRenderingBufferProviderRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -15048,7 +15156,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGContextRef  _Nullable"
+        "objc_type": "CGContextRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -15091,7 +15200,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGContextRef  _Nullable"
+        "objc_type": "CGContextRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -15141,7 +15251,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGContextRef  _Nullable"
+        "objc_type": "CGContextRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -15321,7 +15432,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -15353,7 +15465,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorConversionInfoRef  _Nullable"
+        "objc_type": "CGColorConversionInfoRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -15379,7 +15492,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorConversionInfoRef  _Nullable"
+        "objc_type": "CGColorConversionInfoRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14.6"
@@ -15410,7 +15524,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorConversionInfoRef  _Nullable"
+        "objc_type": "CGColorConversionInfoRef  _Nullable",
+        "already_retained": true
       },
       "variadic": true,
       "availability": {
@@ -15446,7 +15561,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorConversionInfoRef  _Nullable"
+        "objc_type": "CGColorConversionInfoRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.13"
@@ -15489,7 +15605,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorConversionInfoRef  _Nullable"
+        "objc_type": "CGColorConversionInfoRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "15.0"
@@ -15608,7 +15725,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGDataConsumerRef  _Nullable"
+        "objc_type": "CGDataConsumerRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -15626,7 +15744,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGDataConsumerRef  _Nullable"
+        "objc_type": "CGDataConsumerRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -15644,7 +15763,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGDataConsumerRef  _Nullable"
+        "objc_type": "CGDataConsumerRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -15722,7 +15842,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGLayerRef  _Nullable"
+        "objc_type": "CGLayerRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -15876,7 +15997,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPDFContentStreamRef  _Nonnull"
+        "objc_type": "CGPDFContentStreamRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -15902,7 +16024,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPDFContentStreamRef  _Nonnull"
+        "objc_type": "CGPDFContentStreamRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -16006,7 +16129,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGContextRef  _Nullable"
+        "objc_type": "CGContextRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -16034,7 +16158,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGContextRef  _Nullable"
+        "objc_type": "CGContextRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -16367,7 +16492,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPDFScannerRef  _Nonnull"
+        "objc_type": "CGPDFScannerRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -16664,7 +16790,8 @@
     {
       "name": "CGPDFOperatorTableCreate",
       "return": {
-        "objc_type": "CGPDFOperatorTableRef  _Nullable"
+        "objc_type": "CGPDFOperatorTableRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -16749,7 +16876,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -16770,7 +16898,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -16788,7 +16917,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -16817,7 +16947,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreGraphics/CGWindow.h",
@@ -16840,7 +16971,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreGraphics/CGWindow.h",
@@ -17142,7 +17274,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -17159,7 +17292,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGDisplayModeRef  _Nullable"
+        "objc_type": "CGDisplayModeRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -17240,7 +17374,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6",
@@ -17808,7 +17943,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "unavailable": true
@@ -17829,7 +17965,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "unavailable": true
@@ -18666,7 +18803,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGColorSpaceRef  _Nonnull"
+        "objc_type": "CGColorSpaceRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -18892,7 +19030,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGDisplayStreamUpdateRef  _Nullable"
+        "objc_type": "CGDisplayStreamUpdateRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "unavailable": true
@@ -18990,7 +19129,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGDisplayStreamRef  _Nullable"
+        "objc_type": "CGDisplayStreamRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "unavailable": true
@@ -19034,7 +19174,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGDisplayStreamRef  _Nullable"
+        "objc_type": "CGDisplayStreamRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "unavailable": true
@@ -19343,7 +19484,8 @@
     {
       "name": "CGWindowServerCreateServerPort",
       "return": {
-        "objc_type": "CFMachPortRef  _Nullable"
+        "objc_type": "CFMachPortRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.8"
@@ -19517,7 +19659,8 @@
     {
       "name": "CGWindowServerCFMachPort",
       "return": {
-        "objc_type": "CFMachPortRef  _Nullable"
+        "objc_type": "CFMachPortRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.1",
@@ -19548,7 +19691,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGEventRef  _Nullable"
+        "objc_type": "CGEventRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -19571,7 +19715,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -19594,7 +19739,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGEventRef  _Nullable"
+        "objc_type": "CGEventRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -19624,7 +19770,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGEventRef  _Nullable"
+        "objc_type": "CGEventRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -19650,7 +19797,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGEventRef  _Nullable"
+        "objc_type": "CGEventRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -19680,7 +19828,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGEventRef  _Nullable"
+        "objc_type": "CGEventRef  _Nullable",
+        "already_retained": true
       },
       "variadic": true,
       "availability": {
@@ -19719,7 +19868,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGEventRef  _Nullable"
+        "objc_type": "CGEventRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.13"
@@ -19737,7 +19887,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGEventRef  _Nullable"
+        "objc_type": "CGEventRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -19755,7 +19906,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGEventSourceRef  _Nullable"
+        "objc_type": "CGEventSourceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -20149,7 +20301,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMachPortRef  _Nullable"
+        "objc_type": "CFMachPortRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -20187,7 +20340,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMachPortRef  _Nullable"
+        "objc_type": "CFMachPortRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -20225,7 +20379,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMachPortRef  _Nullable"
+        "objc_type": "CFMachPortRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11"
@@ -20452,7 +20607,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGEventSourceRef  _Nullable"
+        "objc_type": "CGEventSourceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.4"
@@ -20806,7 +20962,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPSConverterRef  _Nullable"
+        "objc_type": "CGPSConverterRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.3"
@@ -20892,7 +21049,8 @@
     {
       "name": "CGSessionCopyCurrentDictionary",
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.3"
@@ -20909,7 +21067,8 @@
         }
       ],
       "return": {
-        "objc_type": "NS_RETURNS_RETAINED id\u003cMTLDevice\u003e  _Nullable"
+        "objc_type": "NS_RETURNS_RETAINED id\u003cMTLDevice\u003e  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11"

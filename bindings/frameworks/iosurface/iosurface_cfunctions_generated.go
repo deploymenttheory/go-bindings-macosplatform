@@ -45,7 +45,7 @@ func IOSurfaceCopyAllValues(buffer obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCopyAllValues, _lib, "IOSurfaceCopyAllValues")
 	}
 	_ret := _fnIOSurfaceCopyAllValues(objref.IDOf(buffer))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnIOSurfaceCopyValue func(objc.ID, objc.ID) objc.ID
@@ -57,7 +57,7 @@ func IOSurfaceCopyValue(buffer obj.Object, key obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCopyValue, _lib, "IOSurfaceCopyValue")
 	}
 	_ret := _fnIOSurfaceCopyValue(objref.IDOf(buffer), objref.IDOf(key))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnIOSurfaceCreate func(objc.ID) objc.ID
