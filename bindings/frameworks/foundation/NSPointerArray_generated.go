@@ -107,6 +107,13 @@ func (pa *PointerArray) WithScriptingProperties(scriptingProperties map[string]o
 	return pa
 }
 
+// PointerAtIndex returns the pointer at a given index.
+func (pa *PointerArray) PointerAtIndex(index int) unsafe.Pointer {
+	defer runtime.KeepAlive(pa)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pa), objc.RegisterName("pointerAtIndex:"), index)
+	return _r
+}
+
 // AddPointer adds a given pointer to the receiver.
 func (pa *PointerArray) AddPointer(pointer unsafe.Pointer) {
 	defer runtime.KeepAlive(pa)

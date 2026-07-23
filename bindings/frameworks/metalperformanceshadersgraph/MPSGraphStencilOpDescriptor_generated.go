@@ -109,6 +109,34 @@ func (gsod *GraphStencilOpDescriptor) ReductionMode() GraphReductionMode {
 	return _r
 }
 
+// Offsets returns an array of length four that determines from which offset to start reading the input tensor. Only used when `paddingStyle` is `MPSGraphPaddingStyleExplicitOffset`. For example zero offset means that the first stencil window will align its top-left corner (in 4 dimensions) to the top-left corner of the input tensor. Default value: `
+func (gsod *GraphStencilOpDescriptor) Offsets() unsafe.Pointer {
+	defer runtime.KeepAlive(gsod)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(gsod), objc.RegisterName("offsets"))
+	return _r
+}
+
+// Strides returns the property that defines strides for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `
+func (gsod *GraphStencilOpDescriptor) Strides() unsafe.Pointer {
+	defer runtime.KeepAlive(gsod)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(gsod), objc.RegisterName("strides"))
+	return _r
+}
+
+// DilationRates returns the property that defines dilation rates for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `
+func (gsod *GraphStencilOpDescriptor) DilationRates() unsafe.Pointer {
+	defer runtime.KeepAlive(gsod)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(gsod), objc.RegisterName("dilationRates"))
+	return _r
+}
+
+// ExplicitPadding returns the property that defines padding values for spatial dimensions. Must be eight numbers, two for each spatial dimension. For example `paddingValues[0]` defines the explicit padding amount before the first spatial dimension (slowest running index of spatial dimensions), `paddingValues[1]` defines the padding amount after the first spatial dimension etc. Used only when `paddingStyle = MPSGraphPaddingStyleExplicit`. Default value: `
+func (gsod *GraphStencilOpDescriptor) ExplicitPadding() unsafe.Pointer {
+	defer runtime.KeepAlive(gsod)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(gsod), objc.RegisterName("explicitPadding"))
+	return _r
+}
+
 // BoundaryMode returns the property that determines which values to use for padding the input tensor. Default value: `MPSGraphPaddingModeZero`.
 func (gsod *GraphStencilOpDescriptor) BoundaryMode() GraphPaddingMode {
 	defer runtime.KeepAlive(gsod)

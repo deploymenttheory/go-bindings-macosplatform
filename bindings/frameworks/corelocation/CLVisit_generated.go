@@ -7,6 +7,7 @@ package corelocation
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -92,4 +93,18 @@ func (v_ *Visit) DepartureDate() time.Time {
 	defer runtime.KeepAlive(v_)
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("departureDate"))
 	return rt.NSDateToTime(_r)
+}
+
+// Coordinate returns the coordinate.
+func (v_ *Visit) Coordinate() unsafe.Pointer {
+	defer runtime.KeepAlive(v_)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(v_), objc.RegisterName("coordinate"))
+	return _r
+}
+
+// HorizontalAccuracy returns the horizontal accuracy.
+func (v_ *Visit) HorizontalAccuracy() unsafe.Pointer {
+	defer runtime.KeepAlive(v_)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(v_), objc.RegisterName("horizontalAccuracy"))
+	return _r
 }

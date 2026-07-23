@@ -257,6 +257,13 @@ func (ust *URLSessionTask) State() URLSessionTaskState {
 	return _r
 }
 
+// Error returns the error.
+func (ust *URLSessionTask) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(ust)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ust), objc.RegisterName("error"))
+	return _r
+}
+
 // Priority returns the priority.
 func (ust *URLSessionTask) Priority() float32 {
 	defer runtime.KeepAlive(ust)

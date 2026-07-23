@@ -54,6 +54,12 @@ func NewDualShockGamepad() *DualShockGamepad {
 	return dualShockGamepadAdopt(_id)
 }
 
+// WithValueChangedHandler sets the block that the profile calls when an element’s value changes.
+func (dsg *DualShockGamepad) WithValueChangedHandler(valueChangedHandler func(obj.Object, obj.Object)) *DualShockGamepad {
+	objc.Send[objc.ID](objref.IDOf(dsg), objc.RegisterName("setValueChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueChangedHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return dsg
+}
+
 // WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
 func (dsg *DualShockGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DualShockGamepad {
 	objc.Send[objc.ID](objref.IDOf(dsg), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))

@@ -6,8 +6,10 @@ package networkextension
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -51,6 +53,14 @@ func nEFilterPacketProviderAdopt(id objc.ID) *NEFilterPacketProvider {
 func NewNEFilterPacketProvider() *NEFilterPacketProvider {
 	_id := objc.Send[objc.ID](objc.ID(_class("NEFilterPacketProvider")), objc.RegisterName("new"))
 	return nEFilterPacketProviderAdopt(_id)
+}
+
+// WithPacketHandler sets a Swift closure or an ObjectiveC block that handles each packet received by the filter.
+func (nfpp *NEFilterPacketProvider) WithPacketHandler(packetHandler func(obj.Object, obj.Object, NETrafficDirection, unsafe.Pointer, unsafe.Pointer) int) *NEFilterPacketProvider {
+	objc.Send[objc.ID](objref.IDOf(nfpp), objc.RegisterName("setPacketHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 NETrafficDirection, _b3 unsafe.Pointer, _b4 unsafe.Pointer) int {
+		return packetHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2, _b3, _b4)
+	}))
+	return nfpp
 }
 
 // DelayCurrentPacket delay a packet currently processed by a packet handler.

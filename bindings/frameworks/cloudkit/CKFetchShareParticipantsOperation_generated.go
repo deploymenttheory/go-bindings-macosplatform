@@ -5,11 +5,10 @@
 package cloudkit
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -76,6 +75,20 @@ func (fspo *FetchShareParticipantsOperation) WithShareParticipantFetchedBlock(sh
 	return fspo
 }
 
+// WithPerShareParticipantCompletionBlock sets the closure to execute as the operation generates individual participants.
+func (fspo *FetchShareParticipantsOperation) WithPerShareParticipantCompletionBlock(perShareParticipantCompletionBlock func(obj.Object, obj.Object, unsafe.Pointer)) *FetchShareParticipantsOperation {
+	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setPerShareParticipantCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		perShareParticipantCompletionBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return fspo
+}
+
+// WithFetchShareParticipantsCompletionBlock sets the closure to execute when the operation finishes.
+func (fspo *FetchShareParticipantsOperation) WithFetchShareParticipantsCompletionBlock(fetchShareParticipantsCompletionBlock func(unsafe.Pointer)) *FetchShareParticipantsOperation {
+	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setFetchShareParticipantsCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { fetchShareParticipantsCompletionBlock(_b0) }))
+	return fspo
+}
+
 // WithConfiguration sets the operation’s configuration.
 func (fspo *FetchShareParticipantsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchShareParticipantsOperation {
 	defer runtime.KeepAlive(configuration)
@@ -134,26 +147,6 @@ func (fspo *FetchShareParticipantsOperation) UserIdentityLookupInfos() []*UserId
 	defer runtime.KeepAlive(fspo)
 	_arr := objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("userIdentityLookupInfos"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserIdentityLookupInfo { return UserIdentityLookupInfoFromID(_id) })
-}
-
-// SetFetchShareParticipantsCompletionBlock wraps the corresponding Objective-C method.
-//
-// SetFetchShareParticipantsCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (fspo *FetchShareParticipantsOperation) SetFetchShareParticipantsCompletionBlock(ctx context.Context) error {
-	defer runtime.KeepAlive(fspo)
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _err error
-		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
-		_ch <- _err
-	})
-	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setFetchShareParticipantsCompletionBlock:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
 }
 
 var _ OperationProvider = (*FetchShareParticipantsOperation)(nil)

@@ -7,6 +7,7 @@ package networkextension
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -89,6 +90,12 @@ func (ns *NWUDPSession) TryNextResolvedEndpoint() {
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("tryNextResolvedEndpoint"))
 }
 
+// SetReadHandlerMaxDatagrams set a read handler for datagrams.
+func (ns *NWUDPSession) SetReadHandlerMaxDatagrams(handler func(obj.Object, unsafe.Pointer), maxDatagrams int) {
+	defer runtime.KeepAlive(ns)
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setReadHandler:maxDatagrams:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { handler(obj.Wrap(_b0), _b1) }), maxDatagrams)
+}
+
 // WriteMultipleDatagrams write multiple datagrams.
 //
 // WriteMultipleDatagrams blocks until the operation completes or ctx is cancelled.
@@ -139,6 +146,20 @@ func (ns *NWUDPSession) Cancel() {
 func (ns *NWUDPSession) State() NWUDPSessionState {
 	defer runtime.KeepAlive(ns)
 	_r := objc.Send[NWUDPSessionState](objref.IDOf(ns), objc.RegisterName("state"))
+	return _r
+}
+
+// Endpoint returns the provided endpoint.
+func (ns *NWUDPSession) Endpoint() unsafe.Pointer {
+	defer runtime.KeepAlive(ns)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ns), objc.RegisterName("endpoint"))
+	return _r
+}
+
+// ResolvedEndpoint returns the currently targeted remote endpoint. Use KVO to watch for changes.
+func (ns *NWUDPSession) ResolvedEndpoint() unsafe.Pointer {
+	defer runtime.KeepAlive(ns)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ns), objc.RegisterName("resolvedEndpoint"))
 	return _r
 }
 

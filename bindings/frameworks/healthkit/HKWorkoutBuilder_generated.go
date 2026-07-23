@@ -7,6 +7,7 @@ package healthkit
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -84,6 +85,63 @@ func NewWorkoutBuilderWithHealthStoreConfigurationDevice(healthStore *HealthStor
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKWorkoutBuilder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:configuration:device:"), objref.IDOf(healthStore), objref.IDOf(configuration), objref.IDOf(device))
 	return workoutBuilderAdopt(_id)
+}
+
+// BeginCollectionWithStartDateCompletion sets the workout’s start date and begins building the workout.
+func (wb *WorkoutBuilder) BeginCollectionWithStartDateCompletion(startDate time.Time, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wb)
+	objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("beginCollectionWithStartDate:completion:"), rt.TimeToNSDate(startDate), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// AddSamplesCompletion adds a sample to be associated with the workout.
+func (wb *WorkoutBuilder) AddSamplesCompletion(samples []*Sample, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wb)
+	objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("addSamples:completion:"), purego.SliceToNSArray(samples, func(_v *Sample) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// AddWorkoutEventsCompletion adds a workout event to the builder.
+func (wb *WorkoutBuilder) AddWorkoutEventsCompletion(workoutEvents []*WorkoutEvent, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wb)
+	objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("addWorkoutEvents:completion:"), purego.SliceToNSArray(workoutEvents, func(_v *WorkoutEvent) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// AddMetadataCompletion adds metadata to be saved with the workout.
+func (wb *WorkoutBuilder) AddMetadataCompletion(metadata map[string]obj.Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wb)
+	objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("addMetadata:completion:"), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// AddWorkoutActivityCompletion adds a workout activity to the workout builder.
+func (wb *WorkoutBuilder) AddWorkoutActivityCompletion(workoutActivity *WorkoutActivity, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wb)
+	defer runtime.KeepAlive(workoutActivity)
+	objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("addWorkoutActivity:completion:"), objref.IDOf(workoutActivity), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// UpdateActivityWithUUIDEndDateCompletion sets the end date for a workout activity that you’ve already added to the workout builder.
+func (wb *WorkoutBuilder) UpdateActivityWithUUIDEndDateCompletion(uuid obj.Object, endDate time.Time, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wb)
+	defer runtime.KeepAlive(uuid)
+	objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("updateActivityWithUUID:endDate:completion:"), objref.IDOf(uuid), rt.TimeToNSDate(endDate), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// UpdateActivityWithUUIDAddMedatataCompletion adds metadata to a workout activity that you’ve already added to the workout builder.
+func (wb *WorkoutBuilder) UpdateActivityWithUUIDAddMedatataCompletion(uuid obj.Object, metadata map[string]obj.Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wb)
+	defer runtime.KeepAlive(uuid)
+	objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("updateActivityWithUUID:addMedatata:completion:"), objref.IDOf(uuid), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// EndCollectionWithEndDateCompletion stops the collection of data, sets the workout’s end date, and deactivates the workout builder.
+func (wb *WorkoutBuilder) EndCollectionWithEndDateCompletion(endDate time.Time, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wb)
+	objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("endCollectionWithEndDate:completion:"), rt.TimeToNSDate(endDate), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// FinishWorkoutWithCompletion creates the workout, using the samples and events added to the builder, and saves it to the HealthKit store.
+func (wb *WorkoutBuilder) FinishWorkoutWithCompletion(completion func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wb)
+	objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("finishWorkoutWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
 }
 
 // DiscardWorkout stops the collection of data and discards the current results without saving the workout.

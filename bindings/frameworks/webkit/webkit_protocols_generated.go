@@ -39,7 +39,7 @@ type NSProgressReporting interface {
 
 // WKDownloadDelegate is the Go form of the Objective-C protocol WKDownloadDelegate.
 type WKDownloadDelegate interface {
-	DownloadDecideDestinationUsingResponseSuggestedFilenameCompletionHandler(download *WKDownload, response obj.Object, suggestedFilename string, completionHandler func(obj.Object) int)
+	DownloadDecideDestinationUsingResponseSuggestedFilenameCompletionHandler(download *WKDownload, response obj.Object, suggestedFilename string, completionHandler func(obj.Object))
 }
 
 // WKScriptMessageHandler is the Go form of the Objective-C protocol WKScriptMessageHandler.

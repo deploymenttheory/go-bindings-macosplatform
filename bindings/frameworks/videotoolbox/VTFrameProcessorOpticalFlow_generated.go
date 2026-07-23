@@ -80,3 +80,17 @@ func NewFrameProcessorOpticalFlowWithForwardFlowBackwardFlow(forwardFlow unsafe.
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithForwardFlow:backwardFlow:"), forwardFlow, backwardFlow)
 	return frameProcessorOpticalFlowAdopt(_id)
 }
+
+// ForwardFlow returns the forward optical flow `CVPixelBuffer` that you provided when you initialized the object.
+func (fpof *FrameProcessorOpticalFlow) ForwardFlow() unsafe.Pointer {
+	defer runtime.KeepAlive(fpof)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(fpof), objc.RegisterName("forwardFlow"))
+	return _r
+}
+
+// BackwardFlow returns the backward optical flow `CVPixelBuffer` that you provided when you initialized the object.
+func (fpof *FrameProcessorOpticalFlow) BackwardFlow() unsafe.Pointer {
+	defer runtime.KeepAlive(fpof)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(fpof), objc.RegisterName("backwardFlow"))
+	return _r
+}

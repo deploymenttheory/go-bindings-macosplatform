@@ -79,6 +79,14 @@ func NewVoiceChat() *VoiceChat {
 	return voiceChatAdopt(_id)
 }
 
+// WithPlayerVoiceChatStateDidChangeHandler sets a method that handles when a player’s voice chat changes state.
+func (vc *VoiceChat) WithPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(obj.Object, VoiceChatPlayerState)) *VoiceChat {
+	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setPlayerVoiceChatStateDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 VoiceChatPlayerState) {
+		playerVoiceChatStateDidChangeHandler(obj.Wrap(_b0), _b1)
+	}))
+	return vc
+}
+
 // WithActive sets a Boolean value that indicates whether the channel is sampling the microphone.
 func (vc *VoiceChat) WithActive(active bool) *VoiceChat {
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setActive:"), active)
@@ -88,6 +96,14 @@ func (vc *VoiceChat) WithActive(active bool) *VoiceChat {
 // WithVolume sets the volume level for the channel.
 func (vc *VoiceChat) WithVolume(volume float32) *VoiceChat {
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setVolume:"), volume)
+	return vc
+}
+
+// WithPlayerStateUpdateHandler sets handles when a player in the chat changes state.
+func (vc *VoiceChat) WithPlayerStateUpdateHandler(playerStateUpdateHandler func(obj.Object, VoiceChatPlayerState)) *VoiceChat {
+	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setPlayerStateUpdateHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 VoiceChatPlayerState) {
+		playerStateUpdateHandler(obj.Wrap(_b0), _b1)
+	}))
 	return vc
 }
 

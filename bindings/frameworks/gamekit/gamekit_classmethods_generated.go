@@ -476,6 +476,13 @@ func SubmitScoreContextPlayerLeaderboardIDs(ctx context.Context, score int, cont
 	}
 }
 
+// LoadCategoriesWithCompletionHandler loads categories with completion handler.
+func LoadCategoriesWithCompletionHandler(completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) {
+	objc.Send[objc.ID](objc.ID(_class("GKLeaderboard")), objc.RegisterName("loadCategoriesWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+}
+
 // SetDefaultLeaderboard wraps the corresponding Objective-C method.
 //
 // SetDefaultLeaderboard blocks until the operation completes or ctx is cancelled.

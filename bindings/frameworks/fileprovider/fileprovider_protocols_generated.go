@@ -6,6 +6,7 @@ package fileprovider
 
 import (
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -14,7 +15,7 @@ import (
 
 // FileProviderCustomAction is the Go form of the Objective-C protocol NSFileProviderCustomAction.
 type FileProviderCustomAction interface {
-	PerformActionWithIdentifierOnItemsWithIdentifiersCompletionHandler(actionIdentifier obj.Object, itemIdentifiers []*foundation.String, completionHandler obj.Object) *foundation.Progress
+	PerformActionWithIdentifierOnItemsWithIdentifiersCompletionHandler(actionIdentifier obj.Object, itemIdentifiers []*foundation.String, completionHandler func(unsafe.Pointer)) *foundation.Progress
 }
 
 // FileProviderDomainState is the Go form of the Objective-C protocol NSFileProviderDomainState.
@@ -36,7 +37,7 @@ type FileProviderEnumerator interface {
 
 // FileProviderExternalVolumeHandling is the Go form of the Objective-C protocol NSFileProviderExternalVolumeHandling.
 type FileProviderExternalVolumeHandling interface {
-	ShouldConnectExternalDomainWithCompletionHandler(completionHandler obj.Object)
+	ShouldConnectExternalDomainWithCompletionHandler(completionHandler func(unsafe.Pointer))
 }
 
 // FileProviderIncrementalContentFetching is the Go form of the Objective-C protocol NSFileProviderIncrementalContentFetching.
@@ -58,7 +59,7 @@ type FileProviderItemDecorating interface {
 
 // FileProviderKnownFolderSupporting is the Go form of the Objective-C protocol NSFileProviderKnownFolderSupporting.
 type FileProviderKnownFolderSupporting interface {
-	GetKnownFolderLocationsCompletionHandler(knownFolders FileProviderKnownFolders, completionHandler obj.Object)
+	GetKnownFolderLocationsCompletionHandler(knownFolders FileProviderKnownFolders, completionHandler func(obj.Object, unsafe.Pointer))
 }
 
 // FileProviderPartialContentFetching is the Go form of the Objective-C protocol NSFileProviderPartialContentFetching.
@@ -75,13 +76,13 @@ type FileProviderPendingSetEnumerator interface {
 
 // FileProviderReplicatedExtension is the Go form of the Objective-C protocol NSFileProviderReplicatedExtension.
 type FileProviderReplicatedExtension interface {
-	InitWithDomain(domain *FileProviderDomain) obj.Object
+	InitWithDomain(domain *FileProviderDomain) unsafe.Pointer
 	Invalidate()
 	ItemForIdentifierRequestCompletionHandler(identifier obj.Object, request *FileProviderRequest, completionHandler obj.Object) *foundation.Progress
 	FetchContentsForItemWithIdentifierVersionRequestCompletionHandler(itemIdentifier obj.Object, requestedVersion *FileProviderItemVersion, request *FileProviderRequest, completionHandler obj.Object) *foundation.Progress
 	CreateItemBasedOnTemplateFieldsContentsOptionsRequestCompletionHandler(itemTemplate obj.Object, fields FileProviderItemFields, url string, options FileProviderCreateItemOptions, request *FileProviderRequest, completionHandler obj.Object) *foundation.Progress
 	ModifyItemBaseVersionChangedFieldsContentsOptionsRequestCompletionHandler(item obj.Object, version *FileProviderItemVersion, changedFields FileProviderItemFields, newContents string, options FileProviderModifyItemOptions, request *FileProviderRequest, completionHandler obj.Object) *foundation.Progress
-	DeleteItemWithIdentifierBaseVersionOptionsRequestCompletionHandler(identifier obj.Object, version *FileProviderItemVersion, options FileProviderDeleteItemOptions, request *FileProviderRequest, completionHandler obj.Object) *foundation.Progress
+	DeleteItemWithIdentifierBaseVersionOptionsRequestCompletionHandler(identifier obj.Object, version *FileProviderItemVersion, options FileProviderDeleteItemOptions, request *FileProviderRequest, completionHandler func(unsafe.Pointer)) *foundation.Progress
 }
 
 // FileProviderSearchEnumerator is the Go form of the Objective-C protocol NSFileProviderSearchEnumerator.
@@ -114,7 +115,7 @@ type FileProviderServiceSource interface {
 
 // FileProviderServicing is the Go form of the Objective-C protocol NSFileProviderServicing.
 type FileProviderServicing interface {
-	SupportedServiceSourcesForItemIdentifierCompletionHandler(itemIdentifier obj.Object, completionHandler obj.Object) *foundation.Progress
+	SupportedServiceSourcesForItemIdentifierCompletionHandler(itemIdentifier obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) *foundation.Progress
 }
 
 // FileProviderTestingChildrenEnumeration is the Go form of the Objective-C protocol NSFileProviderTestingChildrenEnumeration.
@@ -189,7 +190,7 @@ type FileProviderTestingOperation interface {
 
 // FileProviderThumbnailing is the Go form of the Objective-C protocol NSFileProviderThumbnailing.
 type FileProviderThumbnailing interface {
-	FetchThumbnailsForItemIdentifiersRequestedSizePerThumbnailCompletionHandlerCompletionHandler(itemIdentifiers []*foundation.String, size corefoundation.CGSize, perThumbnailCompletionHandler obj.Object, completionHandler obj.Object) *foundation.Progress
+	FetchThumbnailsForItemIdentifiersRequestedSizePerThumbnailCompletionHandlerCompletionHandler(itemIdentifiers []*foundation.String, size corefoundation.CGSize, perThumbnailCompletionHandler func(obj.Object, obj.Object, unsafe.Pointer), completionHandler func(unsafe.Pointer)) *foundation.Progress
 }
 
 // FileProviderUserInteractionSuppressing is the Go form of the Objective-C protocol NSFileProviderUserInteractionSuppressing.

@@ -108,6 +108,13 @@ func (isrs *ISyncRecordSnapshot) RecordsWithMatchingAttributes(attributes obj.Ob
 	return obj.Wrap(_r)
 }
 
+// RecordReferenceForRecordWithIdentifier wraps the corresponding Objective-C method.
+func (isrs *ISyncRecordSnapshot) RecordReferenceForRecordWithIdentifier(identifier string) unsafe.Pointer {
+	defer runtime.KeepAlive(isrs)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(isrs), objc.RegisterName("recordReferenceForRecordWithIdentifier:"), purego.NSString(identifier))
+	return _r
+}
+
 // RecordIdentifierForReferenceIsModified wraps the corresponding Objective-C method.
 func (isrs *ISyncRecordSnapshot) RecordIdentifierForReferenceIsModified(reference unsafe.Pointer) (result string, pModified bool) {
 	defer runtime.KeepAlive(isrs)

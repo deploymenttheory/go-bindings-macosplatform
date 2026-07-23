@@ -196,6 +196,13 @@ func NewStringWithBytesNoCopyLengthEncodingFreeWhenDone(data unsafe.Pointer, len
 	return stringAdopt(_id)
 }
 
+// NewStringWithBytesNoCopyLengthEncodingDeallocator creates a new String.
+func NewStringWithBytesNoCopyLengthEncodingDeallocator(data unsafe.Pointer, length int, encoding int, deallocator func(unsafe.Pointer, int)) *String {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytesNoCopy:length:encoding:deallocator:"), data, length, encoding, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 int) { deallocator(_b0, _b1) }))
+	return stringAdopt(_id)
+}
+
 // NewStringWithCStringEncoding returns an
 func NewStringWithCStringEncoding(nullTerminatedCString string, encoding int) *String {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("alloc"))
@@ -701,6 +708,13 @@ func (s *String) LocalizedCapitalizedString() string {
 	return purego.GoString(_r)
 }
 
+// UTF8String returns the UTF8 string.
+func (s *String) UTF8String() unsafe.Pointer {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("UTF8String"))
+	return _r
+}
+
 // FastestEncoding returns the fastest encoding.
 func (s *String) FastestEncoding() int {
 	defer runtime.KeepAlive(s)
@@ -969,6 +983,13 @@ func (s *String) StringByResolvingSymlinksInPath() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// FileSystemRepresentation returns the file system representation.
+func (s *String) FileSystemRepresentation() unsafe.Pointer {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("fileSystemRepresentation"))
+	return _r
 }
 
 // StringByAddingPercentEncodingWithAllowedCharacters returns a new string made from the receiver by replacing all characters not in the specified set with percent-encoded characters.

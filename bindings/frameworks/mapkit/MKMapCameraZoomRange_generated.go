@@ -94,3 +94,17 @@ func NewMapCameraZoomRangeWithMaxCenterCoordinateDistance(maxDistance unsafe.Poi
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMaxCenterCoordinateDistance:"), maxDistance)
 	return mapCameraZoomRangeAdopt(_id)
 }
+
+// MinCenterCoordinateDistance returns the min center coordinate distance.
+func (mczr *MapCameraZoomRange) MinCenterCoordinateDistance() unsafe.Pointer {
+	defer runtime.KeepAlive(mczr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mczr), objc.RegisterName("minCenterCoordinateDistance"))
+	return _r
+}
+
+// MaxCenterCoordinateDistance returns the max center coordinate distance.
+func (mczr *MapCameraZoomRange) MaxCenterCoordinateDistance() unsafe.Pointer {
+	defer runtime.KeepAlive(mczr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mczr), objc.RegisterName("maxCenterCoordinateDistance"))
+	return _r
+}

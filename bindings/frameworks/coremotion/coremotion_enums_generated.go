@@ -64,6 +64,27 @@ func (e DeviceMotionSensorLocation) String() string {
 	}
 }
 
+// Headphone connection status updates.
+type HeadphoneActivityStatus int64
+
+const (
+	HeadphoneActivityStatusDisconnected HeadphoneActivityStatus = 0
+	HeadphoneActivityStatusConnected    HeadphoneActivityStatus = 1
+)
+
+// String returns the HeadphoneActivityStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HeadphoneActivityStatus) String() string {
+	switch e {
+	case HeadphoneActivityStatusDisconnected:
+		return "HeadphoneActivityStatusDisconnected"
+	case HeadphoneActivityStatusConnected:
+		return "HeadphoneActivityStatusConnected"
+	default:
+		return fmt.Sprintf("HeadphoneActivityStatus(%d)", int64(e))
+	}
+}
+
 // Indicates the calibration accuracy of a magnetic field estimate
 type MagneticFieldCalibrationAccuracy int32
 
@@ -439,27 +460,6 @@ func (e Error) String() string {
 		return "ErrorSize"
 	default:
 		return fmt.Sprintf("Error(%d)", int64(e))
-	}
-}
-
-// Headphone connection status updates.
-type HeadphoneActivityStatus int64
-
-const (
-	HeadphoneActivityStatusDisconnected HeadphoneActivityStatus = 0
-	HeadphoneActivityStatusConnected    HeadphoneActivityStatus = 1
-)
-
-// String returns the HeadphoneActivityStatus constant's name, or its numeric form when the
-// value is not a known constant.
-func (e HeadphoneActivityStatus) String() string {
-	switch e {
-	case HeadphoneActivityStatusDisconnected:
-		return "HeadphoneActivityStatusDisconnected"
-	case HeadphoneActivityStatusConnected:
-		return "HeadphoneActivityStatusConnected"
-	default:
-		return fmt.Sprintf("HeadphoneActivityStatus(%d)", int64(e))
 	}
 }
 

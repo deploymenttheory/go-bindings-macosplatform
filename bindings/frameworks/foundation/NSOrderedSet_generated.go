@@ -338,6 +338,20 @@ func (os *OrderedSet) IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, o
 	return IndexSetFromID(_r)
 }
 
+// SortedArrayUsingComparator returns an array that lists the receiving ordered set’s elements in ascending order, as determined by the comparison method specified by a given NSComparator block
+func (os *OrderedSet) SortedArrayUsingComparator(cmptr func(obj.Object, obj.Object) int) []obj.Object {
+	defer runtime.KeepAlive(os)
+	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("sortedArrayUsingComparator:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmptr(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// SortedArrayWithOptionsUsingComparator returns an array that lists the receiving ordered set’s elements in ascending order, as determined by the comparison method specified by a given NSComparator block.
+func (os *OrderedSet) SortedArrayWithOptionsUsingComparator(opts SortOptions, cmptr func(obj.Object, obj.Object) int) []obj.Object {
+	defer runtime.KeepAlive(os)
+	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("sortedArrayWithOptions:usingComparator:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmptr(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
 // DescriptionWithLocale returns a string that represents the contents of the ordered set, formatted as a property list.
 func (os *OrderedSet) DescriptionWithLocale(locale obj.Object) string {
 	defer runtime.KeepAlive(os)

@@ -70,6 +70,13 @@ func (gg *GridGraph) ConnectNodeToAdjacentNodes(node *GridGraphNode) {
 	objc.Send[objc.ID](objref.IDOf(gg), objc.RegisterName("connectNodeToAdjacentNodes:"), objref.IDOf(node))
 }
 
+// GridOrigin returns the grid origin.
+func (gg *GridGraph) GridOrigin() unsafe.Pointer {
+	defer runtime.KeepAlive(gg)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(gg), objc.RegisterName("gridOrigin"))
+	return _r
+}
+
 // GridWidth returns the grid width.
 func (gg *GridGraph) GridWidth() int {
 	defer runtime.KeepAlive(gg)

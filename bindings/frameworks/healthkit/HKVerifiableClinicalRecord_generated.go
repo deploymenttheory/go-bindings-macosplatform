@@ -7,6 +7,7 @@ package healthkit
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -124,6 +125,13 @@ func (vcr *VerifiableClinicalRecord) DataRepresentation() []byte {
 	defer runtime.KeepAlive(vcr)
 	_r := objc.Send[objc.ID](objref.IDOf(vcr), objc.RegisterName("dataRepresentation"))
 	return rt.NSDataToBytes(_r)
+}
+
+// JWSRepresentation returns the record's entirety as JSON Web Signature (JWS) data.
+func (vcr *VerifiableClinicalRecord) JWSRepresentation() unsafe.Pointer {
+	defer runtime.KeepAlive(vcr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(vcr), objc.RegisterName("JWSRepresentation"))
+	return _r
 }
 
 var _ SampleProvider = (*VerifiableClinicalRecord)(nil)

@@ -6,6 +6,7 @@ package metalperformanceshaders
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -95,6 +96,13 @@ func (cc *CNNConvolution) ResultStateForSourceImageSourceStatesDestinationImage(
 	return obj.Wrap(_r)
 }
 
+// ResultStateBatchForSourceImageSourceStatesDestinationImage wraps the corresponding Objective-C method.
+func (cc *CNNConvolution) ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates []obj.Object, destinationImage unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(cc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cc), objc.RegisterName("resultStateBatchForSourceImage:sourceStates:destinationImage:"), sourceImage, purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), destinationImage)
+	return _r
+}
+
 // ReloadWeightsAndBiasesFromDataSource CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionGradientState object. Data provider passed in init call is used for this purpose.
 func (cc *CNNConvolution) ReloadWeightsAndBiasesFromDataSource() {
 	defer runtime.KeepAlive(cc)
@@ -126,6 +134,13 @@ func (cc *CNNConvolution) Groups() int {
 func (cc *CNNConvolution) SubPixelScaleFactor() int {
 	defer runtime.KeepAlive(cc)
 	_r := objc.Send[int](objref.IDOf(cc), objc.RegisterName("subPixelScaleFactor"))
+	return _r
+}
+
+// Neuron returns MPSCNNNeuron filter to be applied as part of convolution. Can be nil in wich case no neuron activation fuction is applied.
+func (cc *CNNConvolution) Neuron() unsafe.Pointer {
+	defer runtime.KeepAlive(cc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cc), objc.RegisterName("neuron"))
 	return _r
 }
 

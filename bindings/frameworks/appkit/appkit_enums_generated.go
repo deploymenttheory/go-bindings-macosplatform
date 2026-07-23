@@ -4623,6 +4623,26 @@ func (e PageControllerTransitionStyle) String() string {
 	}
 }
 
+type PageLayoutResult int64
+
+const (
+	PageLayoutResultCancelled PageLayoutResult = 0
+	PageLayoutResultChanged   PageLayoutResult = 1
+)
+
+// String returns the PageLayoutResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PageLayoutResult) String() string {
+	switch e {
+	case PageLayoutResultCancelled:
+		return "PageLayoutResultCancelled"
+	case PageLayoutResultChanged:
+		return "PageLayoutResultChanged"
+	default:
+		return fmt.Sprintf("PageLayoutResult(%d)", int64(e))
+	}
+}
+
 // Constants that describe the orientation of printing on a page.
 type PaperOrientation int64
 
@@ -4932,6 +4952,26 @@ func (e PrintPanelOptions) String() string {
 		return "0"
 	}
 	return strings.Join(parts, "|")
+}
+
+type PrintPanelResult int64
+
+const (
+	PrintPanelResultCancelled PrintPanelResult = 0
+	PrintPanelResultPrinted   PrintPanelResult = 1
+)
+
+// String returns the PrintPanelResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PrintPanelResult) String() string {
+	switch e {
+	case PrintPanelResultCancelled:
+		return "PrintPanelResultCancelled"
+	case PrintPanelResultPrinted:
+		return "PrintPanelResultPrinted"
+	default:
+		return fmt.Sprintf("PrintPanelResult(%d)", int64(e))
+	}
 }
 
 // Constants that specify the print quality in use.
@@ -10051,26 +10091,6 @@ func (e ImageRepLoadStatus) String() string {
 	}
 }
 
-type PageLayoutResult int64
-
-const (
-	PageLayoutResultCancelled PageLayoutResult = 0
-	PageLayoutResultChanged   PageLayoutResult = 1
-)
-
-// String returns the PageLayoutResult constant's name, or its numeric form when the
-// value is not a known constant.
-func (e PageLayoutResult) String() string {
-	switch e {
-	case PageLayoutResultCancelled:
-		return "PageLayoutResultCancelled"
-	case PageLayoutResultChanged:
-		return "PageLayoutResultChanged"
-	default:
-		return fmt.Sprintf("PageLayoutResult(%d)", int64(e))
-	}
-}
-
 // Options that specify how to interpret data on the pasteboard when initializing pasteboard data.
 // Bitmask — values may be combined with |.
 type PasteboardReadingOptions uint64
@@ -10148,26 +10168,6 @@ func (e PopoverAppearance) String() string {
 		return "PopoverAppearanceHUD"
 	default:
 		return fmt.Sprintf("PopoverAppearance(%d)", int64(e))
-	}
-}
-
-type PrintPanelResult int64
-
-const (
-	PrintPanelResultCancelled PrintPanelResult = 0
-	PrintPanelResultPrinted   PrintPanelResult = 1
-)
-
-// String returns the PrintPanelResult constant's name, or its numeric form when the
-// value is not a known constant.
-func (e PrintPanelResult) String() string {
-	switch e {
-	case PrintPanelResultCancelled:
-		return "PrintPanelResultCancelled"
-	case PrintPanelResultPrinted:
-		return "PrintPanelResultPrinted"
-	default:
-		return fmt.Sprintf("PrintPanelResult(%d)", int64(e))
 	}
 }
 

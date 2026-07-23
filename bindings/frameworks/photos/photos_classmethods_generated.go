@@ -182,6 +182,12 @@ func DefaultManager() *AssetResourceManager {
 	return AssetResourceManagerFromID(_r)
 }
 
+// NotFoundIdentifier returns DEPRECATED: If there is a failure to determine the global identifier for a local identifier, the notFoundIdentifier is provided in that array slot.
+func NotFoundIdentifier() unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("PHCloudIdentifier")), objc.RegisterName("notFoundIdentifier"))
+	return _r
+}
+
 // FetchCollectionsInCollectionListOptions retrieves collections from the specified collection list.
 func FetchCollectionsInCollectionListOptions(collectionList *CollectionList, options *FetchOptions) obj.Object {
 	defer runtime.KeepAlive(collectionList)
@@ -291,8 +297,18 @@ func AuthorizationStatusForAccessLevel(accessLevel AccessLevel) AuthorizationSta
 	return _r
 }
 
+// RequestAuthorizationForAccessLevelHandler prompts the user to grant the app permission to access the photo library.
+func RequestAuthorizationForAccessLevelHandler(accessLevel AccessLevel, handler func(AuthorizationStatus)) {
+	objc.Send[objc.ID](objc.ID(_class("PHPhotoLibrary")), objc.RegisterName("requestAuthorizationForAccessLevel:handler:"), accessLevel, objc.NewBlock(func(_ objc.Block, _b0 AuthorizationStatus) { handler(_b0) }))
+}
+
 // PHPhotoLibraryAuthorizationStatus returns information about your app’s authorization to access the user’s photo library.
 func PHPhotoLibraryAuthorizationStatus() AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objc.ID(_class("PHPhotoLibrary")), objc.RegisterName("authorizationStatus"))
 	return _r
+}
+
+// RequestAuthorization requests the user’s permission, if needed, to access the photo library.
+func RequestAuthorization(handler func(AuthorizationStatus)) {
+	objc.Send[objc.ID](objc.ID(_class("PHPhotoLibrary")), objc.RegisterName("requestAuthorization:"), objc.NewBlock(func(_ objc.Block, _b0 AuthorizationStatus) { handler(_b0) }))
 }

@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -102,6 +103,13 @@ func (pl *PlayerLooper) DisableLooping() {
 func (pl *PlayerLooper) Status() PlayerLooperStatus {
 	defer runtime.KeepAlive(pl)
 	_r := objc.Send[PlayerLooperStatus](objref.IDOf(pl), objc.RegisterName("status"))
+	return _r
+}
+
+// Error returns if the receiver's status is AVPlayerLooperStatusFailed, this describes the error that caused the failure. The value of this property is a NSError that describes what caused the receiver to not be able to perform looping playback. If the receiver's status is not AVPlayerLooperStatusFailed, the value of this property is nil.
+func (pl *PlayerLooper) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(pl)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pl), objc.RegisterName("error"))
 	return _r
 }
 

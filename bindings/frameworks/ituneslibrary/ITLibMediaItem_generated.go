@@ -7,6 +7,7 @@ package ituneslibrary
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -374,6 +375,13 @@ func (lmi *LibMediaItem) SkipDate() time.Time {
 	defer runtime.KeepAlive(lmi)
 	_r := objc.Send[objc.ID](objref.IDOf(lmi), objc.RegisterName("skipDate"))
 	return rt.NSDateToTime(_r)
+}
+
+// VoiceOverLanguage returns the voice-over language of this media item
+func (lmi *LibMediaItem) VoiceOverLanguage() unsafe.Pointer {
+	defer runtime.KeepAlive(lmi)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(lmi), objc.RegisterName("voiceOverLanguage"))
+	return _r
 }
 
 // VolumeAdjustment returns the volume adjustment used for this media item if any.

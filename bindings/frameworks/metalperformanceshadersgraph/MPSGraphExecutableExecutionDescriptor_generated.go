@@ -6,8 +6,10 @@ package metalperformanceshadersgraph
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -51,6 +53,18 @@ func graphExecutableExecutionDescriptorAdopt(id objc.ID) *GraphExecutableExecuti
 func NewGraphExecutableExecutionDescriptor() *GraphExecutableExecutionDescriptor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphExecutableExecutionDescriptor")), objc.RegisterName("new"))
 	return graphExecutableExecutionDescriptorAdopt(_id)
+}
+
+// WithScheduledHandler sets a notification that appears when graph-executable execution is scheduled.
+func (geed *GraphExecutableExecutionDescriptor) WithScheduledHandler(scheduledHandler func(obj.Object, unsafe.Pointer)) *GraphExecutableExecutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(geed), objc.RegisterName("setScheduledHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { scheduledHandler(obj.Wrap(_b0), _b1) }))
+	return geed
+}
+
+// WithCompletionHandler sets a notification that appears when graph-executable execution is finished.
+func (geed *GraphExecutableExecutionDescriptor) WithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer)) *GraphExecutableExecutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(geed), objc.RegisterName("setCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return geed
 }
 
 // WithWaitUntilCompleted sets flag for the graph executable to wait till the execution has completed.

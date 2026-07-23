@@ -104,6 +104,13 @@ func (epf *EffectPropertyFog) Mode() int32 {
 	return _r
 }
 
+// Color returns the color.
+func (epf *EffectPropertyFog) Color() unsafe.Pointer {
+	defer runtime.KeepAlive(epf)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(epf), objc.RegisterName("color"))
+	return _r
+}
+
 // Density returns the density.
 func (epf *EffectPropertyFog) Density() float32 {
 	defer runtime.KeepAlive(epf)

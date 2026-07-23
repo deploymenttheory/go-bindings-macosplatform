@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -64,6 +65,37 @@ func NewMTRClusterAdministratorCommissioningWithDeviceEndpointQueue(device *MTRD
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterAdministratorCommissioning")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterAdministratorCommissioningAdopt(_id)
+}
+
+// OpenCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletion opens commissioning window with params expected values expected value interval completion.
+func (mcac *MTRClusterAdministratorCommissioning) OpenCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("openCommissioningWindowWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// OpenBasicCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletion opens basic commissioning window with params expected values expected value interval completion.
+func (mcac *MTRClusterAdministratorCommissioning) OpenBasicCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("openBasicCommissioningWindowWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// RevokeCommissioningWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcac *MTRClusterAdministratorCommissioning) RevokeCommissioningWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRAdministratorCommissioningClusterRevokeCommissioningParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("revokeCommissioningWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// RevokeCommissioningWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcac *MTRClusterAdministratorCommissioning) RevokeCommissioningWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("revokeCommissioningWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeWindowStatusWithParams reads attribute window status with params.
@@ -128,6 +160,37 @@ func (mcac *MTRClusterAdministratorCommissioning) ReadAttributeClusterRevisionWi
 	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// OpenCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletionHandler opens commissioning window with params expected values expected value interval completion handler.
+func (mcac *MTRClusterAdministratorCommissioning) OpenCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("openCommissioningWindowWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// OpenBasicCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletionHandler opens basic commissioning window with params expected values expected value interval completion handler.
+func (mcac *MTRClusterAdministratorCommissioning) OpenBasicCommissioningWindowWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("openBasicCommissioningWindowWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// RevokeCommissioningWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mcac *MTRClusterAdministratorCommissioning) RevokeCommissioningWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRAdministratorCommissioningClusterRevokeCommissioningParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("revokeCommissioningWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// RevokeCommissioningWithExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mcac *MTRClusterAdministratorCommissioning) RevokeCommissioningWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("revokeCommissioningWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterAdministratorCommissioning)(nil)

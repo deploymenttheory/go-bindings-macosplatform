@@ -118,25 +118,25 @@ func (hp *HostPipe) SendControlRequest(request unsafe.Pointer) error {
 }
 
 // EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler enqueues a request on a control endpoint.
-func (hp *HostPipe) EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data obj.Object, completionTimeout float64, err unsafe.Pointer, completionHandler func(int, uint)) bool {
+func (hp *HostPipe) EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data obj.Object, completionTimeout float64, err unsafe.Pointer, completionHandler func(int, int)) bool {
 	defer runtime.KeepAlive(hp)
 	defer runtime.KeepAlive(data)
-	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:data:completionTimeout:error:completionHandler:"), request, objref.IDOf(data), completionTimeout, err, completionHandler)
+	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:data:completionTimeout:error:completionHandler:"), request, objref.IDOf(data), completionTimeout, err, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { completionHandler(_b0, _b1) }))
 	return _r
 }
 
 // EnqueueControlRequestDataErrorCompletionHandler enqueues a request on a control endpoint with a default completion timeout.
-func (hp *HostPipe) EnqueueControlRequestDataErrorCompletionHandler(request unsafe.Pointer, data obj.Object, err unsafe.Pointer, completionHandler func(int, uint)) bool {
+func (hp *HostPipe) EnqueueControlRequestDataErrorCompletionHandler(request unsafe.Pointer, data obj.Object, err unsafe.Pointer, completionHandler func(int, int)) bool {
 	defer runtime.KeepAlive(hp)
 	defer runtime.KeepAlive(data)
-	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:data:error:completionHandler:"), request, objref.IDOf(data), err, completionHandler)
+	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:data:error:completionHandler:"), request, objref.IDOf(data), err, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { completionHandler(_b0, _b1) }))
 	return _r
 }
 
 // EnqueueControlRequestErrorCompletionHandler enqueues a request on a control endpoint without a data phase and a default completion timeout.
-func (hp *HostPipe) EnqueueControlRequestErrorCompletionHandler(request unsafe.Pointer, err unsafe.Pointer, completionHandler func(int, uint)) bool {
+func (hp *HostPipe) EnqueueControlRequestErrorCompletionHandler(request unsafe.Pointer, err unsafe.Pointer, completionHandler func(int, int)) bool {
 	defer runtime.KeepAlive(hp)
-	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:error:completionHandler:"), request, err, completionHandler)
+	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueControlRequest:error:completionHandler:"), request, err, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { completionHandler(_b0, _b1) }))
 	return _r
 }
 
@@ -178,10 +178,10 @@ func (hp *HostPipe) SendIORequestWithDataBytesTransferredCompletionTimeout(data 
 }
 
 // EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler enqueues an input/output request on the pipe.
-func (hp *HostPipe) EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler(data obj.Object, completionTimeout float64, err unsafe.Pointer, completionHandler func(int, uint)) bool {
+func (hp *HostPipe) EnqueueIORequestWithDataCompletionTimeoutErrorCompletionHandler(data obj.Object, completionTimeout float64, err unsafe.Pointer, completionHandler func(int, int)) bool {
 	defer runtime.KeepAlive(hp)
 	defer runtime.KeepAlive(data)
-	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueIORequestWithData:completionTimeout:error:completionHandler:"), objref.IDOf(data), completionTimeout, err, completionHandler)
+	_r := objc.Send[bool](objref.IDOf(hp), objc.RegisterName("enqueueIORequestWithData:completionTimeout:error:completionHandler:"), objref.IDOf(data), completionTimeout, err, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { completionHandler(_b0, _b1) }))
 	return _r
 }
 

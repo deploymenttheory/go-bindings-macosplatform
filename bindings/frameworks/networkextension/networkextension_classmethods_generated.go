@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -206,6 +207,11 @@ func NETunnelProviderManagerLoadAllFromPreferences(ctx context.Context) (result 
 func ForPerAppVPN() *NETunnelProviderManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NETunnelProviderManager")), objc.RegisterName("forPerAppVPN"))
 	return NETunnelProviderManagerFromID(_r)
+}
+
+// VerdictForURLCompletionHandler determines if accessing the specified URL is allowed or denied.
+func VerdictForURLCompletionHandler(url string, completionHandler func(NEURLFilterVerdict)) {
+	objc.Send[objc.ID](objc.ID(_class("NEURLFilter")), objc.RegisterName("verdictForURL:completionHandler:"), rt.FileURL(url), objc.NewBlock(func(_ objc.Block, _b0 NEURLFilterVerdict) { completionHandler(_b0) }))
 }
 
 // NEVPNManagerSharedManager returns access the single instance of NEVPNManager.

@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -55,6 +56,22 @@ func NewMTRClusterBooleanStateConfigurationWithDeviceEndpointIDQueue(device *MTR
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBooleanStateConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterBooleanStateConfigurationAdopt(_id)
+}
+
+// SuppressAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcbsc *MTRClusterBooleanStateConfiguration) SuppressAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRBooleanStateConfigurationClusterSuppressAlarmParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcbsc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("suppressAlarmWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnableDisableAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion enables disable alarm with params expected values expected value interval completion.
+func (mcbsc *MTRClusterBooleanStateConfiguration) EnableDisableAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcbsc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcbsc), objc.RegisterName("enableDisableAlarmWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeCurrentSensitivityLevelWithParams reads attribute current sensitivity level with params.

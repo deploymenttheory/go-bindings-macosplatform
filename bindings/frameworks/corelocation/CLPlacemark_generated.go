@@ -6,6 +6,7 @@ package corelocation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -80,6 +81,13 @@ func NewPlacemarkWithPlacemark(placemark *Placemark) *Placemark {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CLPlacemark")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlacemark:"), objref.IDOf(placemark))
 	return placemarkAdopt(_id)
+}
+
+// Location returns the location.
+func (p *Placemark) Location() unsafe.Pointer {
+	defer runtime.KeepAlive(p)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(p), objc.RegisterName("location"))
+	return _r
 }
 
 // Region returns the region.

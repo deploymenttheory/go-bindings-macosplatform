@@ -1210,6 +1210,12 @@ func QueuePlayerWithItems(items []*PlayerItem) *QueuePlayer {
 	return QueuePlayerFromID(_r)
 }
 
+// NotifyOfDataReadyForSampleBufferCompletionHandler notifies the sample buffer generator when data is ready for the sample buffer reference or an error has occurred.
+func NotifyOfDataReadyForSampleBufferCompletionHandler(sbuf obj.Object, completionHandler func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(sbuf)
+	objc.Send[objc.ID](objc.ID(_class("AVSampleBufferGenerator")), objc.RegisterName("notifyOfDataReadyForSampleBuffer:completionHandler:"), objref.IDOf(sbuf), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
 // SemanticSegmentationMatteFromImageSourceAuxiliaryDataTypeDictionaryRepresentation returns a new semantic segmentation matte instance from auxiliary image information in an image file.
 func SemanticSegmentationMatteFromImageSourceAuxiliaryDataTypeDictionaryRepresentation(imageSourceAuxiliaryDataType obj.Object, imageSourceAuxiliaryDataInfoDictionary obj.Object) (result *SemanticSegmentationMatte, err error) {
 	defer runtime.KeepAlive(imageSourceAuxiliaryDataType)

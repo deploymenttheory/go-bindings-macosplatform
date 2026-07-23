@@ -6,6 +6,7 @@ package coremotion
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -79,10 +80,24 @@ func NewHeadphoneActivityManager() *HeadphoneActivityManager {
 	return headphoneActivityManagerAdopt(_id)
 }
 
+// StartActivityUpdatesToQueueWithHandler starts headphone activity updates, providing data to the given handler through the given queue.
+func (ham *HeadphoneActivityManager) StartActivityUpdatesToQueueWithHandler(queue obj.Object, handler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(ham)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(ham), objc.RegisterName("startActivityUpdatesToQueue:withHandler:"), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { handler(obj.Wrap(_b0), _b1) }))
+}
+
 // StopActivityUpdates stops headphone activity updates.
 func (ham *HeadphoneActivityManager) StopActivityUpdates() {
 	defer runtime.KeepAlive(ham)
 	objc.Send[objc.ID](objref.IDOf(ham), objc.RegisterName("stopActivityUpdates"))
+}
+
+// StartStatusUpdatesToQueueWithHandler starts headphone status updates, providing data to the given handler through the given queue.
+func (ham *HeadphoneActivityManager) StartStatusUpdatesToQueueWithHandler(queue obj.Object, handler func(HeadphoneActivityStatus, unsafe.Pointer)) {
+	defer runtime.KeepAlive(ham)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(ham), objc.RegisterName("startStatusUpdatesToQueue:withHandler:"), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 HeadphoneActivityStatus, _b1 unsafe.Pointer) { handler(_b0, _b1) }))
 }
 
 // StopStatusUpdates stops headphone status updates.

@@ -71,6 +71,13 @@ func (ain *AudioInputNode) WithVoiceProcessingInputMuted(voiceProcessingInputMut
 	return ain
 }
 
+// SetMutedSpeechActivityEventListener register a listener to be notified when speech activity event occurs while the input is muted. Continuous presence of or lack of speech activity during mute will not cause redundant notification. In order to use this API, it's expected to implement the mute via the voiceProcessingInputMuted.
+func (ain *AudioInputNode) SetMutedSpeechActivityEventListener(listenerBlock func(AudioVoiceProcessingSpeechActivityEvent)) bool {
+	defer runtime.KeepAlive(ain)
+	_r := objc.Send[bool](objref.IDOf(ain), objc.RegisterName("setMutedSpeechActivityEventListener:"), objc.NewBlock(func(_ objc.Block, _b0 AudioVoiceProcessingSpeechActivityEvent) { listenerBlock(_b0) }))
+	return _r
+}
+
 // IsVoiceProcessingBypassed reports whether bypass all processing for microphone uplink done by the voice processing unit. Querying this property when voice processing is disabled will return false.
 func (ain *AudioInputNode) IsVoiceProcessingBypassed() bool {
 	defer runtime.KeepAlive(ain)

@@ -150,6 +150,29 @@ func (e PlayerViewControlsStyle) String() string {
 	}
 }
 
+// Constants that specify an action a user takes when trimming media in a player view.
+type PlayerViewTrimResult int64
+
+const (
+	// The user clicked the Trim button.
+	PlayerViewTrimOKButton PlayerViewTrimResult = 0
+	// The user clicked the Cancel button.
+	PlayerViewTrimCancelButton PlayerViewTrimResult = 1
+)
+
+// String returns the PlayerViewTrimResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PlayerViewTrimResult) String() string {
+	switch e {
+	case PlayerViewTrimOKButton:
+		return "PlayerViewTrimOKButton"
+	case PlayerViewTrimCancelButton:
+		return "PlayerViewTrimCancelButton"
+	default:
+		return fmt.Sprintf("PlayerViewTrimResult(%d)", int64(e))
+	}
+}
+
 // Constants that describe the available button states.
 type RoutePickerViewButtonState int64
 
@@ -214,29 +237,6 @@ func (e VideoFrameAnalysisType) String() string {
 		return "0"
 	}
 	return strings.Join(parts, "|")
-}
-
-// Constants that specify an action a user takes when trimming media in a player view.
-type PlayerViewTrimResult int64
-
-const (
-	// The user clicked the Trim button.
-	PlayerViewTrimOKButton PlayerViewTrimResult = 0
-	// The user clicked the Cancel button.
-	PlayerViewTrimCancelButton PlayerViewTrimResult = 1
-)
-
-// String returns the PlayerViewTrimResult constant's name, or its numeric form when the
-// value is not a known constant.
-func (e PlayerViewTrimResult) String() string {
-	switch e {
-	case PlayerViewTrimOKButton:
-		return "PlayerViewTrimOKButton"
-	case PlayerViewTrimCancelButton:
-		return "PlayerViewTrimCancelButton"
-	default:
-		return fmt.Sprintf("PlayerViewTrimResult(%d)", int64(e))
-	}
 }
 
 type EntryID int64

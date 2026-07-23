@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -77,6 +78,13 @@ func (mp *MatchedPlayers) String() string {
 func NewMatchedPlayers() *MatchedPlayers {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKMatchedPlayers")), objc.RegisterName("new"))
 	return matchedPlayersAdopt(_id)
+}
+
+// Properties returns the properties.
+func (mp *MatchedPlayers) Properties() unsafe.Pointer {
+	defer runtime.KeepAlive(mp)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mp), objc.RegisterName("properties"))
+	return _r
 }
 
 // Players returns the players.

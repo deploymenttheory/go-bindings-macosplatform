@@ -70,6 +70,20 @@ func (av *AnimatedVector3) SetDouble3AtTime(value unsafe.Pointer, time_ float64)
 	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDouble3:atTime:"), value, time_)
 }
 
+// Float3AtTime wraps the corresponding Objective-C method.
+func (av *AnimatedVector3) Float3AtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(av)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(av), objc.RegisterName("float3AtTime:"), time_)
+	return _r
+}
+
+// Double3AtTime wraps the corresponding Objective-C method.
+func (av *AnimatedVector3) Double3AtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(av)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(av), objc.RegisterName("double3AtTime:"), time_)
+	return _r
+}
+
 // ResetWithFloat3ArrayAtTimesCount resets with float3 array at times count.
 func (av *AnimatedVector3) ResetWithFloat3ArrayAtTimesCount(valuesArray unsafe.Pointer, count int) (timesArray float64) {
 	defer runtime.KeepAlive(av)

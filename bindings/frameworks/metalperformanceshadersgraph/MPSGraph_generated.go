@@ -71,6 +71,30 @@ func (g *Graph) CompileWithDeviceFeedsTargetTensorsTargetOperationsCompilationDe
 	return GraphExecutableFromID(_r)
 }
 
+// RunWithFeedsTargetTensorsTargetOperations runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed.
+func (g *Graph) RunWithFeedsTargetTensorsTargetOperations(feeds unsafe.Pointer, targetTensors []*GraphTensor, targetOperations []*GraphOperation) unsafe.Pointer {
+	defer runtime.KeepAlive(g)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(g), objc.RegisterName("runWithFeeds:targetTensors:targetOperations:"), feeds, purego.SliceToNSArray(targetTensors, func(_v *GraphTensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(targetOperations, func(_v *GraphOperation) objc.ID { return objref.IDOf(_v) }))
+	return _r
+}
+
+// RunAsyncWithFeedsTargetTensorsTargetOperationsExecutionDescriptor runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed.
+func (g *Graph) RunAsyncWithFeedsTargetTensorsTargetOperationsExecutionDescriptor(feeds unsafe.Pointer, targetTensors []*GraphTensor, targetOperations []*GraphOperation, executionDescriptor *GraphExecutionDescriptor) unsafe.Pointer {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(executionDescriptor)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(g), objc.RegisterName("runAsyncWithFeeds:targetTensors:targetOperations:executionDescriptor:"), feeds, purego.SliceToNSArray(targetTensors, func(_v *GraphTensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(targetOperations, func(_v *GraphOperation) objc.ID { return objref.IDOf(_v) }), objref.IDOf(executionDescriptor))
+	return _r
+}
+
+// EncodeToCommandBufferFeedsTargetTensorsTargetOperationsExecutionDescriptor encodes the graph for the given feeds to returns the target tensor values, ensuring all target operations also executed.
+func (g *Graph) EncodeToCommandBufferFeedsTargetTensorsTargetOperationsExecutionDescriptor(commandBuffer obj.Object, feeds unsafe.Pointer, targetTensors []*GraphTensor, targetOperations []*GraphOperation, executionDescriptor *GraphExecutionDescriptor) unsafe.Pointer {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(commandBuffer)
+	defer runtime.KeepAlive(executionDescriptor)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(g), objc.RegisterName("encodeToCommandBuffer:feeds:targetTensors:targetOperations:executionDescriptor:"), objref.IDOf(commandBuffer), feeds, purego.SliceToNSArray(targetTensors, func(_v *GraphTensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(targetOperations, func(_v *GraphOperation) objc.ID { return objref.IDOf(_v) }), objref.IDOf(executionDescriptor))
+	return _r
+}
+
 // EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor encodes the graph for the given feeds to returns the target tensor values in the results dictionary provided by the user.
 func (g *Graph) EncodeToCommandBufferFeedsTargetOperationsResultsDictionaryExecutionDescriptor(commandBuffer obj.Object, feeds unsafe.Pointer, targetOperations []*GraphOperation, resultsDictionary unsafe.Pointer, executionDescriptor *GraphExecutionDescriptor) {
 	defer runtime.KeepAlive(g)

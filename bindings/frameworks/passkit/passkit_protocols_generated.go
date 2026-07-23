@@ -16,7 +16,7 @@ type PaymentAuthorizationControllerDelegate interface {
 
 // PaymentInformationRequestHandling is the Go form of the Objective-C protocol PKPaymentInformationRequestHandling.
 type PaymentInformationRequestHandling interface {
-	HandleInformationRequestCompletion(infoRequest *BarcodeEventMetadataRequest, completion obj.Object)
-	HandleSignatureRequestCompletion(signatureRequest *BarcodeEventSignatureRequest, completion obj.Object)
+	HandleInformationRequestCompletion(infoRequest *BarcodeEventMetadataRequest, completion func(obj.Object))
+	HandleSignatureRequestCompletion(signatureRequest *BarcodeEventSignatureRequest, completion func(obj.Object))
 	HandleConfigurationRequestCompletion(configurationRequest *BarcodeEventConfigurationRequest, completion func())
 }

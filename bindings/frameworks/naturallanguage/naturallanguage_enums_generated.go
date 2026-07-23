@@ -9,6 +9,33 @@ import (
 	"strings"
 )
 
+// The availability of the contextual embedding model assets.
+type ContextualEmbeddingAssetsResult int64
+
+const (
+	// A result that indicates that the assets are present on-device.
+	ContextualEmbeddingAssetsResultAvailable ContextualEmbeddingAssetsResult = 0
+	// A result that indicates that the assets aren't present on-device.
+	ContextualEmbeddingAssetsResultNotAvailable ContextualEmbeddingAssetsResult = 1
+	// A result that indicates the framework encounters an error.
+	ContextualEmbeddingAssetsResultError ContextualEmbeddingAssetsResult = 2
+)
+
+// String returns the ContextualEmbeddingAssetsResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ContextualEmbeddingAssetsResult) String() string {
+	switch e {
+	case ContextualEmbeddingAssetsResultAvailable:
+		return "ContextualEmbeddingAssetsResultAvailable"
+	case ContextualEmbeddingAssetsResultNotAvailable:
+		return "ContextualEmbeddingAssetsResultNotAvailable"
+	case ContextualEmbeddingAssetsResultError:
+		return "ContextualEmbeddingAssetsResultError"
+	default:
+		return fmt.Sprintf("ContextualEmbeddingAssetsResult(%d)", int64(e))
+	}
+}
+
 // The means of calculating a distance between two locations in a text embedding.
 type DistanceType int64
 
@@ -46,6 +73,30 @@ func (e ModelType) String() string {
 		return "ModelTypeSequence"
 	default:
 		return fmt.Sprintf("ModelType(%d)", int64(e))
+	}
+}
+
+// The response to an asset request.
+type TaggerAssetsResult int64
+
+const (
+	TaggerAssetsResultAvailable    TaggerAssetsResult = 0
+	TaggerAssetsResultNotAvailable TaggerAssetsResult = 1
+	TaggerAssetsResultError        TaggerAssetsResult = 2
+)
+
+// String returns the TaggerAssetsResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TaggerAssetsResult) String() string {
+	switch e {
+	case TaggerAssetsResultAvailable:
+		return "TaggerAssetsResultAvailable"
+	case TaggerAssetsResultNotAvailable:
+		return "TaggerAssetsResultNotAvailable"
+	case TaggerAssetsResultError:
+		return "TaggerAssetsResultError"
+	default:
+		return fmt.Sprintf("TaggerAssetsResult(%d)", int64(e))
 	}
 }
 
@@ -849,57 +900,6 @@ func (e MpoFlags) String() string {
 		return "0"
 	}
 	return strings.Join(parts, "|")
-}
-
-// The availability of the contextual embedding model assets.
-type ContextualEmbeddingAssetsResult int64
-
-const (
-	// A result that indicates that the assets are present on-device.
-	ContextualEmbeddingAssetsResultAvailable ContextualEmbeddingAssetsResult = 0
-	// A result that indicates that the assets aren't present on-device.
-	ContextualEmbeddingAssetsResultNotAvailable ContextualEmbeddingAssetsResult = 1
-	// A result that indicates the framework encounters an error.
-	ContextualEmbeddingAssetsResultError ContextualEmbeddingAssetsResult = 2
-)
-
-// String returns the ContextualEmbeddingAssetsResult constant's name, or its numeric form when the
-// value is not a known constant.
-func (e ContextualEmbeddingAssetsResult) String() string {
-	switch e {
-	case ContextualEmbeddingAssetsResultAvailable:
-		return "ContextualEmbeddingAssetsResultAvailable"
-	case ContextualEmbeddingAssetsResultNotAvailable:
-		return "ContextualEmbeddingAssetsResultNotAvailable"
-	case ContextualEmbeddingAssetsResultError:
-		return "ContextualEmbeddingAssetsResultError"
-	default:
-		return fmt.Sprintf("ContextualEmbeddingAssetsResult(%d)", int64(e))
-	}
-}
-
-// The response to an asset request.
-type TaggerAssetsResult int64
-
-const (
-	TaggerAssetsResultAvailable    TaggerAssetsResult = 0
-	TaggerAssetsResultNotAvailable TaggerAssetsResult = 1
-	TaggerAssetsResultError        TaggerAssetsResult = 2
-)
-
-// String returns the TaggerAssetsResult constant's name, or its numeric form when the
-// value is not a known constant.
-func (e TaggerAssetsResult) String() string {
-	switch e {
-	case TaggerAssetsResultAvailable:
-		return "TaggerAssetsResultAvailable"
-	case TaggerAssetsResultNotAvailable:
-		return "TaggerAssetsResultNotAvailable"
-	case TaggerAssetsResultError:
-		return "TaggerAssetsResultError"
-	default:
-		return fmt.Sprintf("TaggerAssetsResult(%d)", int64(e))
-	}
 }
 
 // Hints about the contents of the string for the tokenizer.

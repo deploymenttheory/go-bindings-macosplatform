@@ -270,6 +270,13 @@ func (s *Script) Language() *Language {
 	return LanguageFromID(_r)
 }
 
+// LanguageInstance returns the language instance.
+func (s *Script) LanguageInstance() unsafe.Pointer {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("languageInstance"))
+	return _r
+}
+
 // IsCompiled reports whether the object is compiled.
 func (s *Script) IsCompiled() bool {
 	defer runtime.KeepAlive(s)

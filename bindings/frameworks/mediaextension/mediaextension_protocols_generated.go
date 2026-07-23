@@ -14,20 +14,20 @@ import (
 
 // FormatReader is the Go form of the Objective-C protocol MEFormatReader.
 type FormatReader interface {
-	LoadFileInfoWithCompletionHandler(completionHandler obj.Object)
-	LoadMetadataWithCompletionHandler(completionHandler obj.Object)
-	LoadTrackReadersWithCompletionHandler(completionHandler obj.Object)
+	LoadFileInfoWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer))
+	LoadMetadataWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer))
+	LoadTrackReadersWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer))
 }
 
 // FormatReaderExtension is the Go form of the Objective-C protocol MEFormatReaderExtension.
 type FormatReaderExtension interface {
-	Init() obj.Object
+	Init() unsafe.Pointer
 	FormatReaderWithByteSourceOptionsError(primaryByteSource *ByteSource, options *FormatReaderInstantiationOptions) obj.Object
 }
 
 // RAWProcessor is the Go form of the Objective-C protocol MERAWProcessor.
 type RAWProcessor interface {
-	ProcessFrameFromImageBufferCompletionHandler(inputFrame unsafe.Pointer, completionHandler obj.Object)
+	ProcessFrameFromImageBufferCompletionHandler(inputFrame unsafe.Pointer, completionHandler func(unsafe.Pointer, unsafe.Pointer))
 	SetMetalDeviceRegistryID(metalDeviceRegistryID uint64)
 	ProcessingParameters() []*RAWProcessingParameter
 	IsReadyForMoreMediaData() bool
@@ -35,14 +35,14 @@ type RAWProcessor interface {
 
 // RAWProcessorExtension is the Go form of the Objective-C protocol MERAWProcessorExtension.
 type RAWProcessorExtension interface {
-	Init() obj.Object
+	Init() unsafe.Pointer
 	ProcessorWithFormatDescriptionExtensionPixelBufferManagerError(formatDescription unsafe.Pointer, extensionPixelBufferManager *RAWProcessorPixelBufferManager) obj.Object
 }
 
 // SampleCursor is the Go form of the Objective-C protocol MESampleCursor.
 type SampleCursor interface {
-	StepInDecodeOrderByCountCompletionHandler(stepCount int64, completionHandler obj.Object)
-	StepInPresentationOrderByCountCompletionHandler(stepCount int64, completionHandler obj.Object)
+	StepInDecodeOrderByCountCompletionHandler(stepCount int64, completionHandler func(int64, unsafe.Pointer))
+	StepInPresentationOrderByCountCompletionHandler(stepCount int64, completionHandler func(int64, unsafe.Pointer))
 	StepByDecodeTimeCompletionHandler(deltaDecodeTime coremedia.CMTime, completionHandler obj.Object)
 	StepByPresentationTimeCompletionHandler(deltaPresentationTime coremedia.CMTime, completionHandler obj.Object)
 	PresentationTimeStamp() coremedia.CMTime
@@ -53,7 +53,7 @@ type SampleCursor interface {
 
 // TrackReader is the Go form of the Objective-C protocol METrackReader.
 type TrackReader interface {
-	LoadTrackInfoWithCompletionHandler(completionHandler obj.Object)
+	LoadTrackInfoWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer))
 	GenerateSampleCursorAtPresentationTimeStampCompletionHandler(presentationTimeStamp coremedia.CMTime, completionHandler obj.Object)
 	GenerateSampleCursorAtFirstSampleInDecodeOrderWithCompletionHandler(completionHandler obj.Object)
 	GenerateSampleCursorAtLastSampleInDecodeOrderWithCompletionHandler(completionHandler obj.Object)
@@ -61,7 +61,7 @@ type TrackReader interface {
 
 // VideoDecoder is the Go form of the Objective-C protocol MEVideoDecoder.
 type VideoDecoder interface {
-	DecodeFrameFromSampleBufferOptionsCompletionHandler(sampleBuffer obj.Object, options *DecodeFrameOptions, completionHandler obj.Object)
+	DecodeFrameFromSampleBufferOptionsCompletionHandler(sampleBuffer obj.Object, options *DecodeFrameOptions, completionHandler func(unsafe.Pointer, DecodeFrameStatus, unsafe.Pointer))
 	SetRecommendedThreadCount(recommendedThreadCount int)
 	SetReducedResolution(reducedResolution corefoundation.CGSize)
 	IsReadyForMoreMediaData() bool
@@ -69,6 +69,6 @@ type VideoDecoder interface {
 
 // VideoDecoderExtension is the Go form of the Objective-C protocol MEVideoDecoderExtension.
 type VideoDecoderExtension interface {
-	Init() obj.Object
+	Init() unsafe.Pointer
 	VideoDecoderWithCodecTypeVideoFormatDescriptionVideoDecoderSpecificationsExtensionDecoderPixelBufferManagerError(codecType int, videoFormatDescription unsafe.Pointer, videoDecoderSpecifications map[string]obj.Object, extensionDecoderPixelBufferManager *VideoDecoderPixelBufferManager) obj.Object
 }

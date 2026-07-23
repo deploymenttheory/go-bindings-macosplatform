@@ -6,6 +6,7 @@ package mpsneuralnetwork
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -114,6 +115,13 @@ func (cc *CNNConvolution) Groups() int {
 func (cc *CNNConvolution) SubPixelScaleFactor() int {
 	defer runtime.KeepAlive(cc)
 	_r := objc.Send[int](objref.IDOf(cc), objc.RegisterName("subPixelScaleFactor"))
+	return _r
+}
+
+// Neuron returns MPSCNNNeuron filter to be applied as part of convolution. Can be nil in wich case no neuron activation fuction is applied.
+func (cc *CNNConvolution) Neuron() unsafe.Pointer {
+	defer runtime.KeepAlive(cc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cc), objc.RegisterName("neuron"))
 	return _r
 }
 

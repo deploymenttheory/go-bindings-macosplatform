@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -57,6 +58,22 @@ func NewMTRClusterDishwasherAlarmWithDeviceEndpointIDQueue(device *MTRDevice, en
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDishwasherAlarm")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterDishwasherAlarmAdopt(_id)
+}
+
+// ResetWithParamsExpectedValuesExpectedValueIntervalCompletion resets with params expected values expected value interval completion.
+func (mcda *MTRClusterDishwasherAlarm) ResetWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDishwasherAlarmClusterResetParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcda)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcda), objc.RegisterName("resetWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ModifyEnabledAlarmsWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcda *MTRClusterDishwasherAlarm) ModifyEnabledAlarmsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcda)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcda), objc.RegisterName("modifyEnabledAlarmsWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeMaskWithParams reads attribute mask with params.

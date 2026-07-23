@@ -5,7 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,9 +49,14 @@ func sourceQueryAdopt(id objc.ID) *SourceQuery {
 	return x
 }
 
-// NewSourceQuery creates a new SourceQuery.
-func NewSourceQuery() *SourceQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKSourceQuery")), objc.RegisterName("new"))
+// NewSourceQueryWithSampleTypeSamplePredicateCompletionHandler instantiates and returns a source query.
+func NewSourceQueryWithSampleTypeSamplePredicateCompletionHandler(sampleType *SampleType, objectPredicate obj.Object, completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) *SourceQuery {
+	defer runtime.KeepAlive(sampleType)
+	defer runtime.KeepAlive(objectPredicate)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKSourceQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleType:samplePredicate:completionHandler:"), objref.IDOf(sampleType), objref.IDOf(objectPredicate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 	return sourceQueryAdopt(_id)
 }
 

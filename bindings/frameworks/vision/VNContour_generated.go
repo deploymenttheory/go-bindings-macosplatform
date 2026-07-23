@@ -134,6 +134,13 @@ func (c *Contour) PointCount() int {
 	return _r
 }
 
+// NormalizedPoints returns the array of points in normalized coordinates that describe the contour. Provides the address of a buffer containing the array of (x,y) points stored as a simd_float2 value.  This buffer is owned by the target object and is guaranteed to exist as long as this VNContour instance exists.
+func (c *Contour) NormalizedPoints() unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("normalizedPoints"))
+	return _r
+}
+
 // NormalizedPath returns the contour represented as a CGPath in normalized coordinates. The path is owned by this object and therefore will be alive as long as the the observation is alive.
 func (c *Contour) NormalizedPath() obj.Object {
 	defer runtime.KeepAlive(c)

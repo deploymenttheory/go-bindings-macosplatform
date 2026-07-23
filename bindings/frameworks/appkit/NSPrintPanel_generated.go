@@ -158,6 +158,17 @@ func (pp *PrintPanel) DefaultButtonTitle() string {
 
 }
 
+// BeginSheetUsingPrintInfoOnWindowCompletionHandler begins sheet using print info on window completion handler.
+func (pp *PrintPanel) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *PrintInfo, parentWindow *Window, handler func(PrintPanelResult)) {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(printInfo)
+	defer runtime.KeepAlive(parentWindow)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("beginSheetUsingPrintInfo:onWindow:completionHandler:"), objref.IDOf(printInfo), objref.IDOf(parentWindow), objc.NewBlock(func(_ objc.Block, _b0 PrintPanelResult) { handler(_b0) }))
+	})
+
+}
+
 // RunModalWithPrintInfo displays the Print panel and runs the modal loop using the specified printing information.
 func (pp *PrintPanel) RunModalWithPrintInfo(printInfo *PrintInfo) int {
 	defer runtime.KeepAlive(pp)

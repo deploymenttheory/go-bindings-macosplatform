@@ -89,6 +89,13 @@ func NewSortDescriptorWithCoder(coder *Coder) *SortDescriptor {
 	return sortDescriptorAdopt(_id)
 }
 
+// NewSortDescriptorWithKeyAscendingComparator creates a sort descriptor with a specified string key path and ordering, and a comparator block.
+func NewSortDescriptorWithKeyAscendingComparator(key string, ascending bool, cmptr func(obj.Object, obj.Object) int) *SortDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSortDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKey:ascending:comparator:"), purego.NSString(key), ascending, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmptr(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return sortDescriptorAdopt(_id)
+}
+
 // WithObservationInfo sets the observation info.
 func (sd *SortDescriptor) WithObservationInfo(observationInfo unsafe.Pointer) *SortDescriptor {
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setObservationInfo:"), observationInfo)

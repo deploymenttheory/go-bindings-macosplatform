@@ -282,6 +282,17 @@ func (dc *DocumentController) BeginOpenPanelForTypesCompletionHandler(openPanel 
 
 }
 
+// OpenDocumentWithContentsOfURLDisplayCompletionHandler opens a document located by a URL, optionally presents its user interface, and calls the passed-in completion handler.
+func (dc *DocumentController) OpenDocumentWithContentsOfURLDisplayCompletionHandler(url string, displayDocument bool, completionHandler func(obj.Object, bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(dc)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("openDocumentWithContentsOfURL:display:completionHandler:"), rt.FileURL(url), displayDocument, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool, _b2 unsafe.Pointer) {
+			completionHandler(obj.Wrap(_b0), _b1, _b2)
+		}))
+	})
+
+}
+
 // MakeDocumentWithContentsOfURLOfTypeError instantiates a document located by a URL, of a specified type, and returns it if successful.
 func (dc *DocumentController) MakeDocumentWithContentsOfURLOfTypeError(url string, typeName string) (result *Document, err error) {
 	defer runtime.KeepAlive(dc)
@@ -298,6 +309,17 @@ func (dc *DocumentController) MakeDocumentWithContentsOfURLOfTypeError(url strin
 		}()
 	})
 	return _mainthread0, _mainthread1
+
+}
+
+// ReopenDocumentForURLWithContentsOfURLDisplayCompletionHandler reopens a document, optionally located by a URL, by reading the contents for the document from another URL, optionally presents its user interface, and calls the passed-in completion handler.
+func (dc *DocumentController) ReopenDocumentForURLWithContentsOfURLDisplayCompletionHandler(urlOrNil string, contentsURL string, displayDocument bool, completionHandler func(obj.Object, bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(dc)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("reopenDocumentForURL:withContentsOfURL:display:completionHandler:"), rt.FileURL(urlOrNil), rt.FileURL(contentsURL), displayDocument, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool, _b2 unsafe.Pointer) {
+			completionHandler(obj.Wrap(_b0), _b1, _b2)
+		}))
+	})
 
 }
 
@@ -370,6 +392,20 @@ func (dc *DocumentController) PresentError(err unsafe.Pointer) bool {
 	purego.Main(func() {
 		_mainthread0 = func() bool {
 			_r := objc.Send[bool](objref.IDOf(dc), objc.RegisterName("presentError:"), err)
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// WillPresentError indicates an error condition and provides the opportunity to return the same or a different error.
+func (dc *DocumentController) WillPresentError(err unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(dc)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(dc), objc.RegisterName("willPresentError:"), err)
 			return _r
 		}()
 	})

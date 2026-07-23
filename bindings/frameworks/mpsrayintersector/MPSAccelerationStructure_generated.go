@@ -103,6 +103,12 @@ func (as *AccelerationStructure) Rebuild() {
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("rebuild"))
 }
 
+// RebuildWithCompletionHandler rebuild the acceleration structure asynchronously This method must be called before any intersection tests can be scheduled with this acceleration structure. Before calling this method, fill out the properties of the acceleration structure such as vertex buffer, instance buffer, etc. The acceleration structure should be rebuilt when its contents (e.g. vertices in a triangle acceleration structure) have been modified significantly and must be rebuilt when properties such as triangle count, vertex stride, etc. have changed. When the contents of the acceleration structure have only been modified slightly, it may be cheaper to refit the acceleration structure instead. Until the rebuild has completed, the acceleration structure cannot be copied, encoded with NSSecureCoding, rebuilt, or refit. Before this method can be called, any pending GPU writes to the vertex buffer, index buffer, etc. must be completed (and, for managed buffers, synchronized). Any prior intersection tests must also be completed before the acceleration structure can be rebuilt.
+func (as *AccelerationStructure) RebuildWithCompletionHandler(completionHandler func(obj.Object)) {
+	defer runtime.KeepAlive(as)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("rebuildWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completionHandler(obj.Wrap(_b0)) }))
+}
+
 // CopyWithZoneGroup create a a copy of this acceleration structure The acceleration structure may be copied with a different acceleration structure group. Buffer properties of the acceleration structure such as the vertex buffer, instance buffer, etc. are set to nil. Copy these buffers with the new Metal device and assign them to the new acceleration structure instead. Do not copy the acceleration structure until any prior refit or rebuild operations have completed.
 func (as *AccelerationStructure) CopyWithZoneGroup(zone unsafe.Pointer, group *AccelerationStructureGroup) *AccelerationStructure {
 	defer runtime.KeepAlive(as)

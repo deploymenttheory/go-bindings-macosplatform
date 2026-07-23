@@ -5,6 +5,9 @@
 package vision
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +52,13 @@ func imageHomographicAlignmentObservationAdopt(id objc.ID) *ImageHomographicAlig
 func NewImageHomographicAlignmentObservation() *ImageHomographicAlignmentObservation {
 	_id := objc.Send[objc.ID](objc.ID(_class("VNImageHomographicAlignmentObservation")), objc.RegisterName("new"))
 	return imageHomographicAlignmentObservationAdopt(_id)
+}
+
+// WarpTransform returns the warp transform.
+func (ihao *ImageHomographicAlignmentObservation) WarpTransform() unsafe.Pointer {
+	defer runtime.KeepAlive(ihao)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ihao), objc.RegisterName("warpTransform"))
+	return _r
 }
 
 var _ ImageAlignmentObservationProvider = (*ImageHomographicAlignmentObservation)(nil)

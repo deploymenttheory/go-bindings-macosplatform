@@ -91,6 +91,16 @@ func NewSceneSourceWithDataOptions(data []byte, options obj.Object) *SceneSource
 	return sceneSourceAdopt(_id)
 }
 
+// SceneWithOptionsStatusHandler loads the entire scene graph from the scene source and calls the specified block to provide progress information.
+func (ss *SceneSource) SceneWithOptionsStatusHandler(options obj.Object, statusHandler func(float32, SceneSourceStatus, unsafe.Pointer, *bool)) *Scene {
+	defer runtime.KeepAlive(ss)
+	defer runtime.KeepAlive(options)
+	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("sceneWithOptions:statusHandler:"), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 float32, _b1 SceneSourceStatus, _b2 unsafe.Pointer, _b3 unsafe.Pointer) {
+		statusHandler(_b0, _b1, _b2, (*bool)(_b3))
+	}))
+	return SceneFromID(_r)
+}
+
 // SceneWithOptions instantiates a scene from the scene source with the specified options.
 func (ss *SceneSource) SceneWithOptions(options obj.Object) (result *Scene, err error) {
 	defer runtime.KeepAlive(ss)

@@ -5,11 +5,10 @@
 package cloudkit
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -99,6 +98,34 @@ func (mro *ModifyRecordsOperation) WithAtomic(atomic bool) *ModifyRecordsOperati
 // WithPerRecordProgressBlock sets the closure to execute with progress information for individual records.
 func (mro *ModifyRecordsOperation) WithPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64)) *ModifyRecordsOperation {
 	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setPerRecordProgressBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64) { perRecordProgressBlock(obj.Wrap(_b0), _b1) }))
+	return mro
+}
+
+// WithPerRecordCompletionBlock sets the closure to execute when CloudKit saves a record.
+func (mro *ModifyRecordsOperation) WithPerRecordCompletionBlock(perRecordCompletionBlock func(obj.Object, unsafe.Pointer)) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setPerRecordCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { perRecordCompletionBlock(obj.Wrap(_b0), _b1) }))
+	return mro
+}
+
+// WithPerRecordSaveBlock sets the closure to execute when CloudKit saves a record.
+func (mro *ModifyRecordsOperation) WithPerRecordSaveBlock(perRecordSaveBlock func(obj.Object, obj.Object, unsafe.Pointer)) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setPerRecordSaveBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		perRecordSaveBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return mro
+}
+
+// WithPerRecordDeleteBlock sets the closure to execute when CloudKit deletes a record.
+func (mro *ModifyRecordsOperation) WithPerRecordDeleteBlock(perRecordDeleteBlock func(obj.Object, unsafe.Pointer)) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setPerRecordDeleteBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { perRecordDeleteBlock(obj.Wrap(_b0), _b1) }))
+	return mro
+}
+
+// WithModifyRecordsCompletionBlock sets the closure to execute after CloudKit modifies all of the records.
+func (mro *ModifyRecordsOperation) WithModifyRecordsCompletionBlock(modifyRecordsCompletionBlock func(obj.Object, obj.Object, unsafe.Pointer)) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setModifyRecordsCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		modifyRecordsCompletionBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 	return mro
 }
 
@@ -197,58 +224,6 @@ func (mro *ModifyRecordsOperation) Atomic() bool {
 	defer runtime.KeepAlive(mro)
 	_r := objc.Send[bool](objref.IDOf(mro), objc.RegisterName("atomic"))
 	return _r
-}
-
-// SetPerRecordCompletionBlock wraps the corresponding Objective-C method.
-//
-// SetPerRecordCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (mro *ModifyRecordsOperation) SetPerRecordCompletionBlock(ctx context.Context) (result *Record, err error) {
-	defer runtime.KeepAlive(mro)
-	type _result struct {
-		val *Record
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
-		var _o _result
-		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
-		_o.val = RecordFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setPerRecordCompletionBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *Record
-		return _zero, ctx.Err()
-	}
-}
-
-// SetPerRecordDeleteBlock wraps the corresponding Objective-C method.
-//
-// SetPerRecordDeleteBlock blocks until the operation completes or ctx is cancelled.
-func (mro *ModifyRecordsOperation) SetPerRecordDeleteBlock(ctx context.Context) (result *RecordID, err error) {
-	defer runtime.KeepAlive(mro)
-	type _result struct {
-		val *RecordID
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
-		var _o _result
-		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
-		_o.val = RecordIDFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setPerRecordDeleteBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *RecordID
-		return _zero, ctx.Err()
-	}
 }
 
 var _ DatabaseOperationProvider = (*ModifyRecordsOperation)(nil)

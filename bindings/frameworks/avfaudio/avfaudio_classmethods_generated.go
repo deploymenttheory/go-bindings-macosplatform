@@ -135,6 +135,11 @@ func VoiceWithIdentifier(identifier string) *SpeechSynthesisVoice {
 	return SpeechSynthesisVoiceFromID(_r)
 }
 
+// RequestPersonalVoiceAuthorizationWithCompletionHandler prompts the user to authorize your app to use personal voices.
+func RequestPersonalVoiceAuthorizationWithCompletionHandler(handler func(SpeechSynthesisPersonalVoiceAuthorizationStatus)) {
+	objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesizer")), objc.RegisterName("requestPersonalVoiceAuthorizationWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 SpeechSynthesisPersonalVoiceAuthorizationStatus) { handler(_b0) }))
+}
+
 // PersonalVoiceAuthorizationStatus returns your app's current authorization to use personal voices.
 func PersonalVoiceAuthorizationStatus() SpeechSynthesisPersonalVoiceAuthorizationStatus {
 	_r := objc.Send[SpeechSynthesisPersonalVoiceAuthorizationStatus](objc.ID(_class("AVSpeechSynthesizer")), objc.RegisterName("personalVoiceAuthorizationStatus"))

@@ -5,6 +5,9 @@
 package mapkit
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -61,6 +64,20 @@ func (c *Circle) WithTitle(title string) *Circle {
 func (c *Circle) WithSubtitle(subtitle string) *Circle {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return c
+}
+
+// Coordinate returns the coordinate.
+func (c *Circle) Coordinate() unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("coordinate"))
+	return _r
+}
+
+// Radius returns the radius.
+func (c *Circle) Radius() unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("radius"))
+	return _r
 }
 
 var _ ShapeProvider = (*Circle)(nil)

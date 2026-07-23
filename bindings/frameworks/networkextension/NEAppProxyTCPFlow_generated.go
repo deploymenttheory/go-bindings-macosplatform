@@ -7,6 +7,7 @@ package networkextension
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -116,6 +117,13 @@ func (naptf *NEAppProxyTCPFlow) RemoteFlowEndpoint() *foundation.Object {
 	defer runtime.KeepAlive(naptf)
 	_r := objc.Send[objc.ID](objref.IDOf(naptf), objc.RegisterName("remoteFlowEndpoint"))
 	return foundation.ObjectFromID(_r)
+}
+
+// RemoteEndpoint returns an NWEndpoint object containing information about the intended remote endpoint of the flow.
+func (naptf *NEAppProxyTCPFlow) RemoteEndpoint() unsafe.Pointer {
+	defer runtime.KeepAlive(naptf)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(naptf), objc.RegisterName("remoteEndpoint"))
+	return _r
 }
 
 var _ NEAppProxyFlowProvider = (*NEAppProxyTCPFlow)(nil)

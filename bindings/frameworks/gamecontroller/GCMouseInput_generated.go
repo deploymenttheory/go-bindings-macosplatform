@@ -54,6 +54,12 @@ func NewMouseInput() *MouseInput {
 	return mouseInputAdopt(_id)
 }
 
+// WithMouseMovedHandler sets the block that the profile calls when the mouse moves.
+func (mi *MouseInput) WithMouseMovedHandler(mouseMovedHandler func(obj.Object, float32, float32)) *MouseInput {
+	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setMouseMovedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32, _b2 float32) { mouseMovedHandler(obj.Wrap(_b0), _b1, _b2) }))
+	return mi
+}
+
 // WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
 func (mi *MouseInput) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *MouseInput {
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))

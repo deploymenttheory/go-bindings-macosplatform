@@ -7,6 +7,7 @@ package photos
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -124,6 +125,13 @@ func (a *Asset) AddedDate() time.Time {
 	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addedDate"))
 	return rt.NSDateToTime(_r)
+}
+
+// Location returns the location.
+func (a *Asset) Location() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("location"))
+	return _r
 }
 
 // Duration returns the duration.

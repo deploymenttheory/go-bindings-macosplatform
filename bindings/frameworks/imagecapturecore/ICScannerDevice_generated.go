@@ -126,6 +126,20 @@ func (sd *ScannerDevice) CancelScan() {
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("cancelScan"))
 }
 
+// AvailableFunctionalUnitTypes returns ￼An array of functional unit types available on this scanner device. This is an array of NSNumber objects whose values are of type ICScannerFunctionalUnitType.
+func (sd *ScannerDevice) AvailableFunctionalUnitTypes() unsafe.Pointer {
+	defer runtime.KeepAlive(sd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sd), objc.RegisterName("availableFunctionalUnitTypes"))
+	return _r
+}
+
+// SelectedFunctionalUnit returns ￼The currently selected functional unit on the scanner device.
+func (sd *ScannerDevice) SelectedFunctionalUnit() unsafe.Pointer {
+	defer runtime.KeepAlive(sd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sd), objc.RegisterName("selectedFunctionalUnit"))
+	return _r
+}
+
 // TransferMode returns ￼The transfer mode for scanned document.
 func (sd *ScannerDevice) TransferMode() ScannerTransferMode {
 	defer runtime.KeepAlive(sd)
@@ -137,6 +151,34 @@ func (sd *ScannerDevice) TransferMode() ScannerTransferMode {
 func (sd *ScannerDevice) MaxMemoryBandSize() int {
 	defer runtime.KeepAlive(sd)
 	_r := objc.Send[int](objref.IDOf(sd), objc.RegisterName("maxMemoryBandSize"))
+	return _r
+}
+
+// DownloadsDirectory returns ￼The downloads directory.
+func (sd *ScannerDevice) DownloadsDirectory() unsafe.Pointer {
+	defer runtime.KeepAlive(sd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sd), objc.RegisterName("downloadsDirectory"))
+	return _r
+}
+
+// DocumentName returns ￼The document name.
+func (sd *ScannerDevice) DocumentName() unsafe.Pointer {
+	defer runtime.KeepAlive(sd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sd), objc.RegisterName("documentName"))
+	return _r
+}
+
+// DocumentUTI returns ￼The document UTI. Currently supported UTIs are: kUTTypeJPEG, kUTTypeJPEG2000, kUTTypeTIFF, kUTTypePNG etc.
+func (sd *ScannerDevice) DocumentUTI() unsafe.Pointer {
+	defer runtime.KeepAlive(sd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sd), objc.RegisterName("documentUTI"))
+	return _r
+}
+
+// DefaultUsername returns if the device is protected, instead of prompting the user for a username, this property can be set to default to a specific username as a convience.  The value will persist until reset by setting it to nil.
+func (sd *ScannerDevice) DefaultUsername() unsafe.Pointer {
+	defer runtime.KeepAlive(sd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sd), objc.RegisterName("defaultUsername"))
 	return _r
 }
 

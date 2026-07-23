@@ -1359,6 +1359,13 @@ func (sias *SearchableItemAttributeSet) RelatedUniqueIdentifier() string {
 	return purego.GoString(_r)
 }
 
+// WeakRelatedUniqueIdentifier returns the weak related unique identifier.
+func (sias *SearchableItemAttributeSet) WeakRelatedUniqueIdentifier() unsafe.Pointer {
+	defer runtime.KeepAlive(sias)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("weakRelatedUniqueIdentifier"))
+	return _r
+}
+
 // MetadataModificationDate returns the metadata modification date.
 func (sias *SearchableItemAttributeSet) MetadataModificationDate() time.Time {
 	defer runtime.KeepAlive(sias)
@@ -1402,6 +1409,41 @@ func (sias *SearchableItemAttributeSet) Title() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// IsUserCreated returns the is user created.
+func (sias *SearchableItemAttributeSet) IsUserCreated() unsafe.Pointer {
+	defer runtime.KeepAlive(sias)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("isUserCreated"))
+	return _r
+}
+
+// IsUserOwned returns the is user owned.
+func (sias *SearchableItemAttributeSet) IsUserOwned() unsafe.Pointer {
+	defer runtime.KeepAlive(sias)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("isUserOwned"))
+	return _r
+}
+
+// IsUserCurated returns the is user curated.
+func (sias *SearchableItemAttributeSet) IsUserCurated() unsafe.Pointer {
+	defer runtime.KeepAlive(sias)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("isUserCurated"))
+	return _r
+}
+
+// RankingHint returns the ranking hint.
+func (sias *SearchableItemAttributeSet) RankingHint() unsafe.Pointer {
+	defer runtime.KeepAlive(sias)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("rankingHint"))
+	return _r
+}
+
+// DomainIdentifier returns the domain identifier.
+func (sias *SearchableItemAttributeSet) DomainIdentifier() unsafe.Pointer {
+	defer runtime.KeepAlive(sias)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("domainIdentifier"))
+	return _r
 }
 
 // TextContentSummary returns the text content summary.
@@ -1473,6 +1515,27 @@ func (sias *SearchableItemAttributeSet) ContainerOrder() *foundation.Number {
 	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("containerOrder"))
 	return foundation.NumberFromID(_r)
+}
+
+// ProviderDataTypeIdentifiers returns the provider data type identifiers.
+func (sias *SearchableItemAttributeSet) ProviderDataTypeIdentifiers() unsafe.Pointer {
+	defer runtime.KeepAlive(sias)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("providerDataTypeIdentifiers"))
+	return _r
+}
+
+// ProviderFileTypeIdentifiers returns the provider file type identifiers.
+func (sias *SearchableItemAttributeSet) ProviderFileTypeIdentifiers() unsafe.Pointer {
+	defer runtime.KeepAlive(sias)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("providerFileTypeIdentifiers"))
+	return _r
+}
+
+// ProviderInPlaceFileTypeIdentifiers returns the provider in place file type identifiers.
+func (sias *SearchableItemAttributeSet) ProviderInPlaceFileTypeIdentifiers() unsafe.Pointer {
+	defer runtime.KeepAlive(sias)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sias), objc.RegisterName("providerInPlaceFileTypeIdentifiers"))
+	return _r
 }
 
 // Subject returns subject of the this item.

@@ -167,6 +167,13 @@ func (t *Texture) TexelDataWithBottomLeftOriginAtMipLevelCreate(level int, creat
 	return rt.NSDataToBytes(_r)
 }
 
+// Dimensions returns the dimensions.
+func (t *Texture) Dimensions() unsafe.Pointer {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(t), objc.RegisterName("dimensions"))
+	return _r
+}
+
 // RowStride returns the row stride.
 func (t *Texture) RowStride() int {
 	defer runtime.KeepAlive(t)

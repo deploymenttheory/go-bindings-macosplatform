@@ -129,6 +129,22 @@ func (mr *MatchRequest) WithRestrictToAutomatch(restrictToAutomatch bool) *Match
 	return mr
 }
 
+// WithRecipientResponseHandler sets a method that handles when a player responds to an invitation to join a match.
+func (mr *MatchRequest) WithRecipientResponseHandler(recipientResponseHandler func(obj.Object, InviteRecipientResponse)) *MatchRequest {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setRecipientResponseHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 InviteRecipientResponse) {
+		recipientResponseHandler(obj.Wrap(_b0), _b1)
+	}))
+	return mr
+}
+
+// WithInviteeResponseHandler sets handles when a player responds to an invitation.
+func (mr *MatchRequest) WithInviteeResponseHandler(inviteeResponseHandler func(obj.Object, InviteRecipientResponse)) *MatchRequest {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setInviteeResponseHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 InviteRecipientResponse) {
+		inviteeResponseHandler(obj.Wrap(_b0), _b1)
+	}))
+	return mr
+}
+
 // WithPlayersToInvite sets a list of player identifiers for players to invite to the match.
 func (mr *MatchRequest) WithPlayersToInvite(items ...obj.Object) *MatchRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
@@ -233,6 +249,13 @@ func (mr *MatchRequest) QueueName() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// Properties returns the match properties, if rule-based matchmaking is used.
+func (mr *MatchRequest) Properties() unsafe.Pointer {
+	defer runtime.KeepAlive(mr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mr), objc.RegisterName("properties"))
+	return _r
 }
 
 // RecipientProperties returns the recipient specific match properties, if rule-based matchmaking is used when inviting players.

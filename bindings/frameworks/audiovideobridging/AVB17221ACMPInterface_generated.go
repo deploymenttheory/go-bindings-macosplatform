@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -69,6 +70,14 @@ func (aai *AVB17221ACMPInterface) SendACMPResponseMessage(message *AVB17221ACMPM
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
+}
+
+// SendACMPCommandMessageCompletionHandler send an ACMP command message. This method synchronizes access to sending ACMP messages, and can safely be called from multiple threads. The completionHandler is synchronized with the reception of messages from the kernel object providing the command transport. This method handles the retry and message timeout per the IEEE Std 1722.1™-2013 standard timeouts.
+func (aai *AVB17221ACMPInterface) SendACMPCommandMessageCompletionHandler(message *AVB17221ACMPMessage, completionHandler func(unsafe.Pointer, obj.Object)) bool {
+	defer runtime.KeepAlive(aai)
+	defer runtime.KeepAlive(message)
+	_r := objc.Send[bool](objref.IDOf(aai), objc.RegisterName("sendACMPCommandMessage:completionHandler:"), objref.IDOf(message), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 objc.ID) { completionHandler(_b0, obj.Wrap(_b1)) }))
+	return _r
 }
 
 // MulticastDestinationAddress returns an AVBMACAddress of the multicast destination MAC address being used for all ACMP messages on the interface. The MAC Address pointed to by the property is pre-initialized with the IEEE Std 1722.1™-2013 standard value, 91:e0:f0:01:00:00

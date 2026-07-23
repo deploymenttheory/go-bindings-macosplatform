@@ -48,6 +48,12 @@ func microGamepadAdopt(id objc.ID) *MicroGamepad {
 	return x
 }
 
+// WithValueChangedHandler sets the block that this profile calls when an element’s value changes.
+func (mg *MicroGamepad) WithValueChangedHandler(valueChangedHandler func(obj.Object, obj.Object)) *MicroGamepad {
+	objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("setValueChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueChangedHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return mg
+}
+
 // WithReportsAbsoluteDpadValues sets a Boolean value that indicates whether the directional pad reports absolute or relative values.
 func (mg *MicroGamepad) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepad {
 	objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("setReportsAbsoluteDpadValues:"), reportsAbsoluteDpadValues)

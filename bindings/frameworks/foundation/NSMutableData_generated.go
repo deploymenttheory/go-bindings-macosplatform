@@ -83,6 +83,13 @@ func (md *MutableData) WithScriptingProperties(scriptingProperties map[string]ob
 	return md
 }
 
+// MutableBytes returns the mutable bytes.
+func (md *MutableData) MutableBytes() unsafe.Pointer {
+	defer runtime.KeepAlive(md)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(md), objc.RegisterName("mutableBytes"))
+	return _r
+}
+
 // AppendBytesLength appends to the receiver a given number of bytes from a given buffer.
 func (md *MutableData) AppendBytesLength(data unsafe.Pointer, length int) {
 	defer runtime.KeepAlive(md)

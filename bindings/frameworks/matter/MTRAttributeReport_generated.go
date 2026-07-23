@@ -97,3 +97,10 @@ func (mar *MTRAttributeReport) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mar), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
+
+// Error returns if this specific path resulted in an error, the error (in the MTRInteractionErrorDomain or MTRErrorDomain) that corresponds to this path.
+func (mar *MTRAttributeReport) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(mar)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mar), objc.RegisterName("error"))
+	return _r
+}

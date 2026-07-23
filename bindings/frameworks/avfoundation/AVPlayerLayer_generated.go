@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -99,6 +100,13 @@ func (pl *PlayerLayer) WithVideoGravity(videoGravity obj.Object) *PlayerLayer {
 func (pl *PlayerLayer) WithPixelBufferAttributes(pixelBufferAttributes map[string]obj.Object) *PlayerLayer {
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setPixelBufferAttributes:"), rt.MapToDict(pixelBufferAttributes, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pl
+}
+
+// CopyDisplayedPixelBuffer returns the pixel buffer that the player layer currently displays.
+func (pl *PlayerLayer) CopyDisplayedPixelBuffer() unsafe.Pointer {
+	defer runtime.KeepAlive(pl)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pl), objc.RegisterName("copyDisplayedPixelBuffer"))
+	return _r
 }
 
 // SetCaptionPreviewProfileIDPositionText starts displaying a caption preview with the specified accessibility profile.

@@ -5,7 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,10 +49,45 @@ func anchoredObjectQueryAdopt(id objc.ID) *AnchoredObjectQuery {
 	return x
 }
 
-// NewAnchoredObjectQuery creates a new AnchoredObjectQuery.
-func NewAnchoredObjectQuery() *AnchoredObjectQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKAnchoredObjectQuery")), objc.RegisterName("new"))
+// NewAnchoredObjectQueryWithTypePredicateAnchorLimitResultsHandler initializes a new anchored object query.
+func NewAnchoredObjectQueryWithTypePredicateAnchorLimitResultsHandler(type_ *SampleType, predicate obj.Object, anchor *QueryAnchor, limit int, handler func(obj.Object, obj.Object, obj.Object, obj.Object, unsafe.Pointer)) *AnchoredObjectQuery {
+	defer runtime.KeepAlive(type_)
+	defer runtime.KeepAlive(predicate)
+	defer runtime.KeepAlive(anchor)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKAnchoredObjectQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:predicate:anchor:limit:resultsHandler:"), objref.IDOf(type_), objref.IDOf(predicate), objref.IDOf(anchor), limit, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID, _b3 objc.ID, _b4 unsafe.Pointer) {
+		handler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2), obj.Wrap(_b3), _b4)
+	}))
 	return anchoredObjectQueryAdopt(_id)
+}
+
+// NewAnchoredObjectQueryWithTypePredicateAnchorLimitCompletionHandler initializes a new anchored object query.
+func NewAnchoredObjectQueryWithTypePredicateAnchorLimitCompletionHandler(type_ *SampleType, predicate obj.Object, anchor int, limit int, handler func(obj.Object, obj.Object, int, unsafe.Pointer)) *AnchoredObjectQuery {
+	defer runtime.KeepAlive(type_)
+	defer runtime.KeepAlive(predicate)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKAnchoredObjectQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:predicate:anchor:limit:completionHandler:"), objref.IDOf(type_), objref.IDOf(predicate), anchor, limit, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 int, _b3 unsafe.Pointer) {
+		handler(obj.Wrap(_b0), obj.Wrap(_b1), _b2, _b3)
+	}))
+	return anchoredObjectQueryAdopt(_id)
+}
+
+// NewAnchoredObjectQueryWithQueryDescriptorsAnchorLimitResultsHandler creates an anchored object query that matches any of the query descriptors you provided.
+func NewAnchoredObjectQueryWithQueryDescriptorsAnchorLimitResultsHandler(queryDescriptors []*QueryDescriptor, anchor *QueryAnchor, limit int, handler func(obj.Object, obj.Object, obj.Object, obj.Object, unsafe.Pointer)) *AnchoredObjectQuery {
+	defer runtime.KeepAlive(anchor)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKAnchoredObjectQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueryDescriptors:anchor:limit:resultsHandler:"), purego.SliceToNSArray(queryDescriptors, func(_v *QueryDescriptor) objc.ID { return objref.IDOf(_v) }), objref.IDOf(anchor), limit, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID, _b3 objc.ID, _b4 unsafe.Pointer) {
+		handler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2), obj.Wrap(_b3), _b4)
+	}))
+	return anchoredObjectQueryAdopt(_id)
+}
+
+// WithUpdateHandler sets handler for monitoring updates to the HealthKit store.
+func (aoq *AnchoredObjectQuery) WithUpdateHandler(updateHandler func(obj.Object, obj.Object, obj.Object, obj.Object, unsafe.Pointer)) *AnchoredObjectQuery {
+	objc.Send[objc.ID](objref.IDOf(aoq), objc.RegisterName("setUpdateHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID, _b3 objc.ID, _b4 unsafe.Pointer) {
+		updateHandler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2), obj.Wrap(_b3), _b4)
+	}))
+	return aoq
 }
 
 var _ QueryProvider = (*AnchoredObjectQuery)(nil)

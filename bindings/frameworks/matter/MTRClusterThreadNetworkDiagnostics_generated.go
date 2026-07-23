@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -64,6 +65,21 @@ func NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue(device *MTRDev
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterThreadNetworkDiagnosticsAdopt(_id)
+}
+
+// ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion resets counts with params expected values expected value interval completion.
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRThreadNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("resetCountsWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ResetCountsWithExpectedValuesExpectedValueIntervalCompletion resets counts with expected values expected value interval completion.
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ResetCountsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("resetCountsWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeChannelWithParams reads attribute channel with params.
@@ -608,6 +624,21 @@ func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWit
 	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler resets counts with params expected values expected value interval completion handler.
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRThreadNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("resetCountsWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler resets counts with expected values expected value interval completion handler.
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("resetCountsWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // ReadAttributeNeighborTableListWithParams reads attribute neighbor table list with params.

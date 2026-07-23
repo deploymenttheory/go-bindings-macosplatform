@@ -6,6 +6,7 @@ package photos
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -88,6 +89,14 @@ func (vro *VideoRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bo
 // WithDeliveryMode sets a mode specifying the requested video quality and delivery priority.
 func (vro *VideoRequestOptions) WithDeliveryMode(deliveryMode VideoRequestOptionsDeliveryMode) *VideoRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(vro), objc.RegisterName("setDeliveryMode:"), deliveryMode)
+	return vro
+}
+
+// WithProgressHandler sets a block Photos calls periodically while downloading the video.
+func (vro *VideoRequestOptions) WithProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, obj.Object)) *VideoRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(vro), objc.RegisterName("setProgressHandler:"), objc.NewBlock(func(_ objc.Block, _b0 float64, _b1 unsafe.Pointer, _b2 unsafe.Pointer, _b3 objc.ID) {
+		progressHandler(_b0, _b1, (*bool)(_b2), obj.Wrap(_b3))
+	}))
 	return vro
 }
 

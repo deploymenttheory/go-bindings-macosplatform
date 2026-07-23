@@ -79,6 +79,14 @@ func NewTechnique() *Technique {
 	return techniqueAdopt(_id)
 }
 
+// HandleBindingOfSymbolUsing specifies a block to be called before rendering using programs with the specified GLSL uniform variable or attribute name.
+func (t *Technique) HandleBindingOfSymbolUsing(symbol string, block func(int, int, obj.Object, obj.Object)) {
+	defer runtime.KeepAlive(t)
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("handleBindingOfSymbol:usingBlock:"), purego.NSString(symbol), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int, _b2 objc.ID, _b3 objc.ID) {
+		block(_b0, _b1, obj.Wrap(_b2), obj.Wrap(_b3))
+	}))
+}
+
 // ObjectForKeyedSubscript returns the value associated with the specified GLSL uniform variable or attribute name, using subscript syntax.
 func (t *Technique) ObjectForKeyedSubscript(key obj.Object) obj.Object {
 	defer runtime.KeepAlive(t)

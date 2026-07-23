@@ -5,12 +5,11 @@
 package cloudkit
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -75,6 +74,28 @@ func (mso *ModifySubscriptionsOperation) WithSubscriptionsToSave(items ...Subscr
 func (mso *ModifySubscriptionsOperation) WithSubscriptionIDsToDelete(items ...obj.Object) *ModifySubscriptionsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setSubscriptionIDsToDelete:"), _arr)
+	return mso
+}
+
+// WithPerSubscriptionSaveBlock sets the closure to execute when CloudKit saves a subscription.
+func (mso *ModifySubscriptionsOperation) WithPerSubscriptionSaveBlock(perSubscriptionSaveBlock func(obj.Object, obj.Object, unsafe.Pointer)) *ModifySubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setPerSubscriptionSaveBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		perSubscriptionSaveBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return mso
+}
+
+// WithPerSubscriptionDeleteBlock sets the closure to execute when CloudKit deletes a subscription.
+func (mso *ModifySubscriptionsOperation) WithPerSubscriptionDeleteBlock(perSubscriptionDeleteBlock func(obj.Object, unsafe.Pointer)) *ModifySubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setPerSubscriptionDeleteBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { perSubscriptionDeleteBlock(obj.Wrap(_b0), _b1) }))
+	return mso
+}
+
+// WithModifySubscriptionsCompletionBlock sets the block to execute after the operation modifies the subscriptions.
+func (mso *ModifySubscriptionsOperation) WithModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock func(obj.Object, obj.Object, unsafe.Pointer)) *ModifySubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setModifySubscriptionsCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		modifySubscriptionsCompletionBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 	return mso
 }
 
@@ -152,32 +173,6 @@ func (mso *ModifySubscriptionsOperation) SubscriptionIDsToDelete() []obj.Object 
 	defer runtime.KeepAlive(mso)
 	_arr := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("subscriptionIDsToDelete"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetPerSubscriptionDeleteBlock wraps the corresponding Objective-C method.
-//
-// SetPerSubscriptionDeleteBlock blocks until the operation completes or ctx is cancelled.
-func (mso *ModifySubscriptionsOperation) SetPerSubscriptionDeleteBlock(ctx context.Context) (result string, err error) {
-	defer runtime.KeepAlive(mso)
-	type _result struct {
-		val string
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
-		var _o _result
-		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
-		_o.val = purego.GoString(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setPerSubscriptionDeleteBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero string
-		return _zero, ctx.Err()
-	}
 }
 
 var _ DatabaseOperationProvider = (*ModifySubscriptionsOperation)(nil)

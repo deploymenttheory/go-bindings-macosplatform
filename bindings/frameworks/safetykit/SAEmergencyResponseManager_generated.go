@@ -6,6 +6,7 @@ package safetykit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -88,4 +89,10 @@ func (erm *EmergencyResponseManager) WithDelegate(delegate EmergencyResponseDele
 	objc.Send[objc.ID](objref.IDOf(erm), _sel, _shim)
 	_shim.Send(objc.RegisterName("release"))
 	return erm
+}
+
+// DialVoiceCallToPhoneNumberCompletionHandler request the system to dial a voice call on behalf of someone involved in a crash.
+func (erm *EmergencyResponseManager) DialVoiceCallToPhoneNumberCompletionHandler(phoneNumber string, handler func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(erm)
+	objc.Send[objc.ID](objref.IDOf(erm), objc.RegisterName("dialVoiceCallToPhoneNumber:completionHandler:"), purego.NSString(phoneNumber), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { handler(_b0, _b1) }))
 }

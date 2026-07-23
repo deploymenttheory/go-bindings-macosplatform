@@ -8,6 +8,7 @@ import (
 	"context"
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -118,6 +119,56 @@ func (md *MTRDevice) DescriptorClusters() obj.Object {
 	return obj.Wrap(_r)
 }
 
+// InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion invoke a command with a designated command path
+func (md *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalQueueCompletion(endpointID obj.Object, clusterID obj.Object, commandID obj.Object, commandFields map[string]obj.Object, expectedValues []obj.Object, expectedValueInterval obj.Object, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(clusterID)
+	defer runtime.KeepAlive(commandID)
+	defer runtime.KeepAlive(expectedValueInterval)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("invokeCommandWithEndpointID:clusterID:commandID:commandFields:expectedValues:expectedValueInterval:queue:completion:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(commandID), rt.MapToDict(commandFields, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueInterval), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion wraps the corresponding Objective-C method.
+func (md *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutQueueCompletion(endpointID obj.Object, clusterID obj.Object, commandID obj.Object, commandFields obj.Object, expectedValues []obj.Object, expectedValueInterval obj.Object, timeout obj.Object, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(clusterID)
+	defer runtime.KeepAlive(commandID)
+	defer runtime.KeepAlive(commandFields)
+	defer runtime.KeepAlive(expectedValueInterval)
+	defer runtime.KeepAlive(timeout)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("invokeCommandWithEndpointID:clusterID:commandID:commandFields:expectedValues:expectedValueInterval:timedInvokeTimeout:queue:completion:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(commandID), objref.IDOf(commandFields), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueInterval), objref.IDOf(timeout), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// InvokeCommandsQueueCompletion invoke one or more groups of commands.
+func (md *MTRDevice) InvokeCommandsQueueCompletion(commands []obj.Object, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("invokeCommands:queue:completion:"), purego.SliceToNSArray(commands, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion open a commissioning window on the device. On success, completion will be called on queue with the MTRSetupPayload that can be used to commission the device.
+func (md *MTRDevice) OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion(setupPasscode obj.Object, discriminator obj.Object, duration obj.Object, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(setupPasscode)
+	defer runtime.KeepAlive(discriminator)
+	defer runtime.KeepAlive(duration)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("openCommissioningWindowWithSetupPasscode:discriminator:duration:queue:completion:"), objref.IDOf(setupPasscode), objref.IDOf(discriminator), objref.IDOf(duration), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion open a commissioning window on the device, using a random setup passcode. On success, completion will be called on queue with the MTRSetupPayload that can be used to commission the device.
+func (md *MTRDevice) OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion(discriminator obj.Object, duration obj.Object, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(discriminator)
+	defer runtime.KeepAlive(duration)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("openCommissioningWindowWithDiscriminator:duration:queue:completion:"), objref.IDOf(discriminator), objref.IDOf(duration), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
 // DownloadLogOfTypeTimeoutQueueCompletion download log of the desired type from the device. Note: The consumer of this API should move the file that the url points to or open it for reading before the completion handler returns. Otherwise, the file will be deleted, and the data will be lost.
 //
 // DownloadLogOfTypeTimeoutQueueCompletion blocks until the operation completes or ctx is cancelled.
@@ -143,6 +194,15 @@ func (md *MTRDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// WaitForAttributeValuesTimeoutQueueCompletion sets up the provided completion to be called when any of the following happens:
+func (md *MTRDevice) WaitForAttributeValuesTimeoutQueueCompletion(values obj.Object, timeout float64, queue obj.Object, completion func(unsafe.Pointer)) *MTRAttributeValueWaiter {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(values)
+	defer runtime.KeepAlive(queue)
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("waitForAttributeValues:timeout:queue:completion:"), objref.IDOf(values), timeout, objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+	return MTRAttributeValueWaiterFromID(_r)
 }
 
 // State returns the current state of the device. The three states: MTRDeviceStateUnknown Unable to determine the state of the device at the moment. MTRDeviceStateReachable Communication with the device is expected to succeed. MTRDeviceStateUnreachable The device is currently unreachable.
@@ -206,4 +266,17 @@ func (md *MTRDevice) NetworkCommissioningFeatures() MTRNetworkCommissioningFeatu
 	defer runtime.KeepAlive(md)
 	_r := objc.Send[MTRNetworkCommissioningFeature](objref.IDOf(md), objc.RegisterName("networkCommissioningFeatures"))
 	return _r
+}
+
+// InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion wraps the corresponding Objective-C method.
+func (md *MTRDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutClientQueueCompletion(endpointID obj.Object, clusterID obj.Object, commandID obj.Object, commandFields obj.Object, expectedValues []obj.Object, expectedValueInterval obj.Object, timeout obj.Object, queue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(clusterID)
+	defer runtime.KeepAlive(commandID)
+	defer runtime.KeepAlive(commandFields)
+	defer runtime.KeepAlive(expectedValueInterval)
+	defer runtime.KeepAlive(timeout)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("invokeCommandWithEndpointID:clusterID:commandID:commandFields:expectedValues:expectedValueInterval:timedInvokeTimeout:clientQueue:completion:"), objref.IDOf(endpointID), objref.IDOf(clusterID), objref.IDOf(commandID), objref.IDOf(commandFields), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueInterval), objref.IDOf(timeout), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
 }

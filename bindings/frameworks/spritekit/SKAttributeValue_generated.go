@@ -110,3 +110,24 @@ func (av *AttributeValue) FloatValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(av), objc.RegisterName("floatValue"))
 	return _r
 }
+
+// VectorFloat2Value returns the vector float2 value.
+func (av *AttributeValue) VectorFloat2Value() unsafe.Pointer {
+	defer runtime.KeepAlive(av)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(av), objc.RegisterName("vectorFloat2Value"))
+	return _r
+}
+
+// VectorFloat3Value returns the vector float3 value.
+func (av *AttributeValue) VectorFloat3Value() unsafe.Pointer {
+	defer runtime.KeepAlive(av)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(av), objc.RegisterName("vectorFloat3Value"))
+	return _r
+}
+
+// VectorFloat4Value returns the vector float4 value.
+func (av *AttributeValue) VectorFloat4Value() unsafe.Pointer {
+	defer runtime.KeepAlive(av)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(av), objc.RegisterName("vectorFloat4Value"))
+	return _r
+}

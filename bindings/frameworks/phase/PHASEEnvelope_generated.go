@@ -88,6 +88,13 @@ func (e *Envelope) EvaluateForValue(x_ float64) float64 {
 	return _r
 }
 
+// StartPoint returns the start point of the envelope.
+func (e *Envelope) StartPoint() unsafe.Pointer {
+	defer runtime.KeepAlive(e)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(e), objc.RegisterName("startPoint"))
+	return _r
+}
+
 // Segments returns the segments of the envelope.
 //
 // Segments returns the collection as a Go slice.

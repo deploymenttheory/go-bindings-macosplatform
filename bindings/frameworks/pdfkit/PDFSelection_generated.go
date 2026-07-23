@@ -170,6 +170,13 @@ func (s *Selection) Pages() []*Page {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Page { return PageFromID(_id) })
 }
 
+// Color returns the color.
+func (s *Selection) Color() unsafe.Pointer {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("color"))
+	return _r
+}
+
 // String returns the string.
 func (s *Selection) String() string {
 	defer runtime.KeepAlive(s)

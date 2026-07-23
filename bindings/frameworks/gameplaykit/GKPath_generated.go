@@ -107,6 +107,27 @@ func (p *Path) WithCyclical(cyclical bool) *Path {
 	return p
 }
 
+// PointAtIndex returns the 2D point at the specified index in the path’s list of vertices.
+func (p *Path) PointAtIndex(index int) unsafe.Pointer {
+	defer runtime.KeepAlive(p)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(p), objc.RegisterName("pointAtIndex:"), index)
+	return _r
+}
+
+// Float2AtIndex returns the 2D point at the specified index in the path’s list of vertices.
+func (p *Path) Float2AtIndex(index int) unsafe.Pointer {
+	defer runtime.KeepAlive(p)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(p), objc.RegisterName("float2AtIndex:"), index)
+	return _r
+}
+
+// Float3AtIndex returns the 3D point at the specified index in the path’s list of vertices.
+func (p *Path) Float3AtIndex(index int) unsafe.Pointer {
+	defer runtime.KeepAlive(p)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(p), objc.RegisterName("float3AtIndex:"), index)
+	return _r
+}
+
 // Radius returns radius of the pathway.  Defines a spatial area that the path occupies. This can be though of as the union between rectangles between all points, and circles at each point
 func (p *Path) Radius() float32 {
 	defer runtime.KeepAlive(p)

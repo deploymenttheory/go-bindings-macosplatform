@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -110,6 +111,14 @@ func (fdco *FetchDatabaseChangesOperation) WithRecordZoneWithIDWasDeletedDueToUs
 // WithChangeTokenUpdatedBlock sets the closure to execute when the change token updates.
 func (fdco *FetchDatabaseChangesOperation) WithChangeTokenUpdatedBlock(changeTokenUpdatedBlock func(obj.Object)) *FetchDatabaseChangesOperation {
 	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setChangeTokenUpdatedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { changeTokenUpdatedBlock(obj.Wrap(_b0)) }))
+	return fdco
+}
+
+// WithFetchDatabaseChangesCompletionBlock sets the closure to execute when the operation finishes.
+func (fdco *FetchDatabaseChangesOperation) WithFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock func(obj.Object, bool, unsafe.Pointer)) *FetchDatabaseChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setFetchDatabaseChangesCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool, _b2 unsafe.Pointer) {
+		fetchDatabaseChangesCompletionBlock(obj.Wrap(_b0), _b1, _b2)
+	}))
 	return fdco
 }
 

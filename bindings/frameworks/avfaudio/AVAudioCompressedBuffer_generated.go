@@ -6,6 +6,7 @@ package avfaudio
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -93,6 +94,13 @@ func (acb *AudioCompressedBuffer) PacketCount() uint32 {
 func (acb *AudioCompressedBuffer) MaximumPacketSize() int {
 	defer runtime.KeepAlive(acb)
 	_r := objc.Send[int](objref.IDOf(acb), objc.RegisterName("maximumPacketSize"))
+	return _r
+}
+
+// Data returns access the buffer's data bytes.
+func (acb *AudioCompressedBuffer) Data() unsafe.Pointer {
+	defer runtime.KeepAlive(acb)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(acb), objc.RegisterName("data"))
 	return _r
 }
 

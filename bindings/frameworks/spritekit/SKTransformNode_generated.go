@@ -293,6 +293,20 @@ func (tn *TransformNode) SetEulerAngles(euler unsafe.Pointer) {
 
 }
 
+// EulerAngles returns the euler angles.
+func (tn *TransformNode) EulerAngles() unsafe.Pointer {
+	defer runtime.KeepAlive(tn)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(tn), objc.RegisterName("eulerAngles"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // SetRotationMatrix wraps the corresponding Objective-C method.
 func (tn *TransformNode) SetRotationMatrix(rotationMatrix unsafe.Pointer) {
 	defer runtime.KeepAlive(tn)
@@ -302,12 +316,40 @@ func (tn *TransformNode) SetRotationMatrix(rotationMatrix unsafe.Pointer) {
 
 }
 
+// RotationMatrix returns the rotation matrix.
+func (tn *TransformNode) RotationMatrix() unsafe.Pointer {
+	defer runtime.KeepAlive(tn)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(tn), objc.RegisterName("rotationMatrix"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // SetQuaternion wraps the corresponding Objective-C method.
 func (tn *TransformNode) SetQuaternion(quaternion unsafe.Pointer) {
 	defer runtime.KeepAlive(tn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("setQuaternion:"), quaternion)
 	})
+
+}
+
+// Quaternion returns the quaternion.
+func (tn *TransformNode) Quaternion() unsafe.Pointer {
+	defer runtime.KeepAlive(tn)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(tn), objc.RegisterName("quaternion"))
+			return _r
+		}()
+	})
+	return _mainthread0
 
 }
 

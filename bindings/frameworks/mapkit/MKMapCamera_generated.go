@@ -110,9 +110,37 @@ func (mc *MapCamera) WithAltitude(altitude unsafe.Pointer) *MapCamera {
 	return mc
 }
 
+// CenterCoordinate returns the center coordinate.
+func (mc *MapCamera) CenterCoordinate() unsafe.Pointer {
+	defer runtime.KeepAlive(mc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mc), objc.RegisterName("centerCoordinate"))
+	return _r
+}
+
+// CenterCoordinateDistance returns the center coordinate distance.
+func (mc *MapCamera) CenterCoordinateDistance() unsafe.Pointer {
+	defer runtime.KeepAlive(mc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mc), objc.RegisterName("centerCoordinateDistance"))
+	return _r
+}
+
+// Heading returns the heading.
+func (mc *MapCamera) Heading() unsafe.Pointer {
+	defer runtime.KeepAlive(mc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mc), objc.RegisterName("heading"))
+	return _r
+}
+
 // Pitch returns the pitch.
 func (mc *MapCamera) Pitch() float64 {
 	defer runtime.KeepAlive(mc)
 	_r := objc.Send[float64](objref.IDOf(mc), objc.RegisterName("pitch"))
+	return _r
+}
+
+// Altitude returns the altitude.
+func (mc *MapCamera) Altitude() unsafe.Pointer {
+	defer runtime.KeepAlive(mc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mc), objc.RegisterName("altitude"))
 	return _r
 }

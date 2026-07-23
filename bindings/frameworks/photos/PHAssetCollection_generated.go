@@ -7,6 +7,7 @@ package photos
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -56,6 +57,13 @@ func (ac *AssetCollection) AssetCollectionType() AssetCollectionType {
 	return _r
 }
 
+// AssetCollectionSubtype returns the asset collection subtype.
+func (ac *AssetCollection) AssetCollectionSubtype() unsafe.Pointer {
+	defer runtime.KeepAlive(ac)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ac), objc.RegisterName("assetCollectionSubtype"))
+	return _r
+}
+
 // EstimatedAssetCount returns the estimated asset count.
 func (ac *AssetCollection) EstimatedAssetCount() int {
 	defer runtime.KeepAlive(ac)
@@ -75,6 +83,13 @@ func (ac *AssetCollection) EndDate() time.Time {
 	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("endDate"))
 	return rt.NSDateToTime(_r)
+}
+
+// ApproximateLocation returns the approximate location.
+func (ac *AssetCollection) ApproximateLocation() unsafe.Pointer {
+	defer runtime.KeepAlive(ac)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ac), objc.RegisterName("approximateLocation"))
+	return _r
 }
 
 // LocalizedLocationNames returns the localized location names.

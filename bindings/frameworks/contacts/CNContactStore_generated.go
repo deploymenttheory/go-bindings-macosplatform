@@ -81,6 +81,12 @@ func NewContactStore() *ContactStore {
 	return contactStoreAdopt(_id)
 }
 
+// RequestAccessForEntityTypeCompletionHandler requests access to the user’s contacts.
+func (cs *ContactStore) RequestAccessForEntityTypeCompletionHandler(entityType EntityType, completionHandler func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(cs)
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("requestAccessForEntityType:completionHandler:"), entityType, objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
 // UnifiedContactsMatchingPredicateKeysToFetch fetches all unified contacts matching the specified predicate.
 func (cs *ContactStore) UnifiedContactsMatchingPredicateKeysToFetch(predicate obj.Object, keys []obj.Object) (result []*Contact, err error) {
 	defer runtime.KeepAlive(cs)

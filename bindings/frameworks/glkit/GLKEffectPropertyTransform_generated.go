@@ -5,6 +5,7 @@
 package glkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -63,6 +64,27 @@ func (ept *EffectPropertyTransform) WithModelviewMatrix(modelviewMatrix unsafe.P
 func (ept *EffectPropertyTransform) WithProjectionMatrix(projectionMatrix unsafe.Pointer) *EffectPropertyTransform {
 	objc.Send[objc.ID](objref.IDOf(ept), objc.RegisterName("setProjectionMatrix:"), projectionMatrix)
 	return ept
+}
+
+// ModelviewMatrix returns the modelview matrix.
+func (ept *EffectPropertyTransform) ModelviewMatrix() unsafe.Pointer {
+	defer runtime.KeepAlive(ept)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ept), objc.RegisterName("modelviewMatrix"))
+	return _r
+}
+
+// ProjectionMatrix returns the projection matrix.
+func (ept *EffectPropertyTransform) ProjectionMatrix() unsafe.Pointer {
+	defer runtime.KeepAlive(ept)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ept), objc.RegisterName("projectionMatrix"))
+	return _r
+}
+
+// NormalMatrix returns the normal matrix.
+func (ept *EffectPropertyTransform) NormalMatrix() unsafe.Pointer {
+	defer runtime.KeepAlive(ept)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ept), objc.RegisterName("normalMatrix"))
+	return _r
 }
 
 var _ EffectPropertyProvider = (*EffectPropertyTransform)(nil)

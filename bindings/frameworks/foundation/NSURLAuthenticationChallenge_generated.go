@@ -119,3 +119,10 @@ func (uac *URLAuthenticationChallenge) FailureResponse() *URLResponse {
 	_r := objc.Send[objc.ID](objref.IDOf(uac), objc.RegisterName("failureResponse"))
 	return URLResponseFromID(_r)
 }
+
+// Error get the error representing authentication failure. If there was a previous authentication failure, and this protocol uses errors to indicate authentication failure, then this method will return the error. Otherwise it will return nil.
+func (uac *URLAuthenticationChallenge) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(uac)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(uac), objc.RegisterName("error"))
+	return _r
+}

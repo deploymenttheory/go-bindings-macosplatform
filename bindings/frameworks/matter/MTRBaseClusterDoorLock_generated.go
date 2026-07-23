@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -67,6 +68,46 @@ func NewMTRBaseClusterDoorLockWithDeviceEndpointQueue(device *MTRBaseDevice, end
 	return mTRBaseClusterDoorLockAdopt(_id)
 }
 
+// LockDoorWithParamsCompletion command LockDoor This command causes the lock device to lock the door.
+func (mbcdl *MTRBaseClusterDoorLock) LockDoorWithParamsCompletion(params *MTRDoorLockClusterLockDoorParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("lockDoorWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// LockDoorWithCompletion locks door with completion.
+func (mbcdl *MTRBaseClusterDoorLock) LockDoorWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("lockDoorWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// UnlockDoorWithParamsCompletion command UnlockDoor This command causes the lock device to unlock the door.
+func (mbcdl *MTRBaseClusterDoorLock) UnlockDoorWithParamsCompletion(params *MTRDoorLockClusterUnlockDoorParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("unlockDoorWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// UnlockDoorWithCompletion unlocks door with completion.
+func (mbcdl *MTRBaseClusterDoorLock) UnlockDoorWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("unlockDoorWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// UnlockWithTimeoutWithParamsCompletion command UnlockWithTimeout This command causes the lock device to unlock the door with a timeout parameter.
+func (mbcdl *MTRBaseClusterDoorLock) UnlockWithTimeoutWithParamsCompletion(params *MTRDoorLockClusterUnlockWithTimeoutParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("unlockWithTimeoutWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetWeekDayScheduleWithParamsCompletion command SetWeekDaySchedule Set a weekly repeating schedule for a specified user.
+func (mbcdl *MTRBaseClusterDoorLock) SetWeekDayScheduleWithParamsCompletion(params *MTRDoorLockClusterSetWeekDayScheduleParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("setWeekDayScheduleWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // GetWeekDayScheduleWithParamsCompletion command GetWeekDaySchedule Retrieve the specific weekly schedule for the specific user.
 //
 // GetWeekDayScheduleWithParamsCompletion blocks until the operation completes or ctx is cancelled.
@@ -92,6 +133,20 @@ func (mbcdl *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParamsCompletion(ctx 
 		var _zero *MTRDoorLockClusterGetWeekDayScheduleResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ClearWeekDayScheduleWithParamsCompletion command ClearWeekDaySchedule Clear the specific weekly schedule or all weekly schedules for the specific user.
+func (mbcdl *MTRBaseClusterDoorLock) ClearWeekDayScheduleWithParamsCompletion(params *MTRDoorLockClusterClearWeekDayScheduleParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("clearWeekDayScheduleWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetYearDayScheduleWithParamsCompletion command SetYearDaySchedule Set a time-specific schedule ID for a specified user.
+func (mbcdl *MTRBaseClusterDoorLock) SetYearDayScheduleWithParamsCompletion(params *MTRDoorLockClusterSetYearDayScheduleParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("setYearDayScheduleWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // GetYearDayScheduleWithParamsCompletion command GetYearDaySchedule Returns the year day schedule data for the specified schedule and user indexes.
@@ -121,6 +176,20 @@ func (mbcdl *MTRBaseClusterDoorLock) GetYearDayScheduleWithParamsCompletion(ctx 
 	}
 }
 
+// ClearYearDayScheduleWithParamsCompletion command ClearYearDaySchedule Clears the specific year day schedule or all year day schedules for the specific user.
+func (mbcdl *MTRBaseClusterDoorLock) ClearYearDayScheduleWithParamsCompletion(params *MTRDoorLockClusterClearYearDayScheduleParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("clearYearDayScheduleWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetHolidayScheduleWithParamsCompletion command SetHolidaySchedule Set the holiday Schedule by specifying local start time and local end time with respect to any Lock Operating Mode.
+func (mbcdl *MTRBaseClusterDoorLock) SetHolidayScheduleWithParamsCompletion(params *MTRDoorLockClusterSetHolidayScheduleParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("setHolidayScheduleWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // GetHolidayScheduleWithParamsCompletion command GetHolidaySchedule Get the holiday schedule for the specified index.
 //
 // GetHolidayScheduleWithParamsCompletion blocks until the operation completes or ctx is cancelled.
@@ -148,6 +217,20 @@ func (mbcdl *MTRBaseClusterDoorLock) GetHolidayScheduleWithParamsCompletion(ctx 
 	}
 }
 
+// ClearHolidayScheduleWithParamsCompletion command ClearHolidaySchedule Clears the holiday schedule or all holiday schedules.
+func (mbcdl *MTRBaseClusterDoorLock) ClearHolidayScheduleWithParamsCompletion(params *MTRDoorLockClusterClearHolidayScheduleParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("clearHolidayScheduleWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetUserWithParamsCompletion command SetUser Set User into the lock.
+func (mbcdl *MTRBaseClusterDoorLock) SetUserWithParamsCompletion(params *MTRDoorLockClusterSetUserParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("setUserWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // GetUserWithParamsCompletion command GetUser Retrieve User.
 //
 // GetUserWithParamsCompletion blocks until the operation completes or ctx is cancelled.
@@ -173,6 +256,13 @@ func (mbcdl *MTRBaseClusterDoorLock) GetUserWithParamsCompletion(ctx context.Con
 		var _zero *MTRDoorLockClusterGetUserResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ClearUserWithParamsCompletion command ClearUser Clears a User or all Users.
+func (mbcdl *MTRBaseClusterDoorLock) ClearUserWithParamsCompletion(params *MTRDoorLockClusterClearUserParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("clearUserWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // SetCredentialWithParamsCompletion command SetCredential Set a credential (e.g. PIN, RFID, Fingerprint, etc.) into the lock for a new user, existing user, or ProgrammingUser.
@@ -229,6 +319,46 @@ func (mbcdl *MTRBaseClusterDoorLock) GetCredentialStatusWithParamsCompletion(ctx
 	}
 }
 
+// ClearCredentialWithParamsCompletion command ClearCredential Clear one, one type, or all credentials except ProgrammingPIN credential.
+func (mbcdl *MTRBaseClusterDoorLock) ClearCredentialWithParamsCompletion(params *MTRDoorLockClusterClearCredentialParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("clearCredentialWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// UnboltDoorWithParamsCompletion command UnboltDoor
+func (mbcdl *MTRBaseClusterDoorLock) UnboltDoorWithParamsCompletion(params *MTRDoorLockClusterUnboltDoorParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("unboltDoorWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// UnboltDoorWithCompletion wraps the corresponding Objective-C method.
+func (mbcdl *MTRBaseClusterDoorLock) UnboltDoorWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("unboltDoorWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetAliroReaderConfigWithParamsCompletion command SetAliroReaderConfig
+func (mbcdl *MTRBaseClusterDoorLock) SetAliroReaderConfigWithParamsCompletion(params *MTRDoorLockClusterSetAliroReaderConfigParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("setAliroReaderConfigWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ClearAliroReaderConfigWithParamsCompletion command ClearAliroReaderConfig
+func (mbcdl *MTRBaseClusterDoorLock) ClearAliroReaderConfigWithParamsCompletion(params *MTRDoorLockClusterClearAliroReaderConfigParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("clearAliroReaderConfigWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ClearAliroReaderConfigWithCompletion clears aliro reader config with completion.
+func (mbcdl *MTRBaseClusterDoorLock) ClearAliroReaderConfigWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("clearAliroReaderConfigWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeLockStateWithCompletion reads attribute lock state with completion.
 //
 // ReadAttributeLockStateWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -272,7 +402,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLockStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLockStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -325,7 +455,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithParamsSubscri
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLockTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLockTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -378,7 +508,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeActuatorEnabledWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeActuatorEnabledWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -431,7 +561,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDoorStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDoorStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -467,6 +597,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEventsWithCompletion(c
 	}
 }
 
+// WriteAttributeDoorOpenEventsWithValueCompletion writes attribute door open events with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeDoorOpenEventsWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeDoorOpenEventsWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeDoorOpenEventsWithValueParamsCompletion writes attribute door open events with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeDoorOpenEventsWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeDoorOpenEventsWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeDoorOpenEventsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDoorOpenEventsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -484,7 +629,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDoorOpenEventsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDoorOpenEventsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -520,6 +665,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEventsWithCompletion
 	}
 }
 
+// WriteAttributeDoorClosedEventsWithValueCompletion writes attribute door closed events with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeDoorClosedEventsWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeDoorClosedEventsWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeDoorClosedEventsWithValueParamsCompletion writes attribute door closed events with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeDoorClosedEventsWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeDoorClosedEventsWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeDoorClosedEventsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDoorClosedEventsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -537,7 +697,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDoorClosedEventsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDoorClosedEventsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -573,6 +733,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOpenPeriodWithCompletion(ctx c
 	}
 }
 
+// WriteAttributeOpenPeriodWithValueCompletion writes attribute open period with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeOpenPeriodWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeOpenPeriodWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeOpenPeriodWithValueParamsCompletion writes attribute open period with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeOpenPeriodWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeOpenPeriodWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeOpenPeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOpenPeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -590,7 +765,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeOpenPeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeOpenPeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -643,7 +818,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupport
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfTotalUsersSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfTotalUsersSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -696,7 +871,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupported
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfPINUsersSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfPINUsersSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -749,7 +924,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupporte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfRFIDUsersSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfRFIDUsersSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -802,7 +977,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -855,7 +1030,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -908,7 +1083,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfHolidaySchedulesSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfHolidaySchedulesSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -961,7 +1136,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMaxPINCodeLengthWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMaxPINCodeLengthWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1014,7 +1189,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMinPINCodeLengthWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMinPINCodeLengthWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1067,7 +1242,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMaxRFIDCodeLengthWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMaxRFIDCodeLengthWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1120,7 +1295,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMinRFIDCodeLengthWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMinRFIDCodeLengthWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1173,7 +1348,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeCredentialRulesSupportWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeCredentialRulesSupportWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1226,7 +1401,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSuppor
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfCredentialsSupportedPerUserWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfCredentialsSupportedPerUserWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1262,6 +1437,19 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLanguageWithCompletion(ctx con
 	}
 }
 
+// WriteAttributeLanguageWithValueCompletion writes attribute language with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeLanguageWithValueCompletion(value string, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeLanguageWithValue:completion:"), purego.NSString(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeLanguageWithValueParamsCompletion writes attribute language with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeLanguageWithValueParamsCompletion(value string, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeLanguageWithValue:params:completion:"), purego.NSString(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeLanguageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLanguageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1279,7 +1467,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithParamsSubscri
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLanguageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLanguageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1315,6 +1503,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLEDSettingsWithCompletion(ctx 
 	}
 }
 
+// WriteAttributeLEDSettingsWithValueCompletion writes attribute led settings with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeLEDSettingsWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeLEDSettingsWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeLEDSettingsWithValueParamsCompletion writes attribute led settings with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeLEDSettingsWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeLEDSettingsWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeLEDSettingsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLEDSettingsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1332,7 +1535,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLEDSettingsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLEDSettingsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1368,6 +1571,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTimeWithCompletion(c
 	}
 }
 
+// WriteAttributeAutoRelockTimeWithValueCompletion writes attribute auto relock time with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeAutoRelockTimeWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeAutoRelockTimeWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeAutoRelockTimeWithValueParamsCompletion writes attribute auto relock time with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeAutoRelockTimeWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeAutoRelockTimeWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeAutoRelockTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAutoRelockTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1385,7 +1603,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAutoRelockTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAutoRelockTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1421,6 +1639,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSoundVolumeWithCompletion(ctx 
 	}
 }
 
+// WriteAttributeSoundVolumeWithValueCompletion writes attribute sound volume with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeSoundVolumeWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeSoundVolumeWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeSoundVolumeWithValueParamsCompletion writes attribute sound volume with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeSoundVolumeWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeSoundVolumeWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeSoundVolumeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeSoundVolumeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1438,7 +1671,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeSoundVolumeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeSoundVolumeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1474,6 +1707,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOperatingModeWithCompletion(ct
 	}
 }
 
+// WriteAttributeOperatingModeWithValueCompletion writes attribute operating mode with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeOperatingModeWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeOperatingModeWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeOperatingModeWithValueParamsCompletion writes attribute operating mode with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeOperatingModeWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeOperatingModeWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeOperatingModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOperatingModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1491,7 +1739,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeOperatingModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeOperatingModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1544,7 +1792,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeSupportedOperatingModesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeSupportedOperatingModesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1597,7 +1845,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDefaultConfigurationRegisterWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDefaultConfigurationRegisterWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1633,6 +1881,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgrammingWithComp
 	}
 }
 
+// WriteAttributeEnableLocalProgrammingWithValueCompletion writes attribute enable local programming with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnableLocalProgrammingWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnableLocalProgrammingWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeEnableLocalProgrammingWithValueParamsCompletion writes attribute enable local programming with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnableLocalProgrammingWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnableLocalProgrammingWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeEnableLocalProgrammingWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnableLocalProgrammingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1650,7 +1913,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnableLocalProgrammingWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnableLocalProgrammingWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1686,6 +1949,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLockingWithCompl
 	}
 }
 
+// WriteAttributeEnableOneTouchLockingWithValueCompletion writes attribute enable one touch locking with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnableOneTouchLockingWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnableOneTouchLockingWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeEnableOneTouchLockingWithValueParamsCompletion writes attribute enable one touch locking with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnableOneTouchLockingWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnableOneTouchLockingWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeEnableOneTouchLockingWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnableOneTouchLockingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1703,7 +1981,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnableOneTouchLockingWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnableOneTouchLockingWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1739,6 +2017,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLEDWithCompl
 	}
 }
 
+// WriteAttributeEnableInsideStatusLEDWithValueCompletion writes attribute enable inside status led with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnableInsideStatusLEDWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnableInsideStatusLEDWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeEnableInsideStatusLEDWithValueParamsCompletion writes attribute enable inside status led with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnableInsideStatusLEDWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnableInsideStatusLEDWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeEnableInsideStatusLEDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnableInsideStatusLEDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1756,7 +2049,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnableInsideStatusLEDWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnableInsideStatusLEDWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1792,6 +2085,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButtonWithCom
 	}
 }
 
+// WriteAttributeEnablePrivacyModeButtonWithValueCompletion writes attribute enable privacy mode button with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnablePrivacyModeButtonWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnablePrivacyModeButtonWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeEnablePrivacyModeButtonWithValueParamsCompletion writes attribute enable privacy mode button with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnablePrivacyModeButtonWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnablePrivacyModeButtonWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeEnablePrivacyModeButtonWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnablePrivacyModeButtonWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1809,7 +2117,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnablePrivacyModeButtonWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnablePrivacyModeButtonWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1845,6 +2153,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeaturesWithCo
 	}
 }
 
+// WriteAttributeLocalProgrammingFeaturesWithValueCompletion writes attribute local programming features with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeLocalProgrammingFeaturesWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeLocalProgrammingFeaturesWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeLocalProgrammingFeaturesWithValueParamsCompletion writes attribute local programming features with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeLocalProgrammingFeaturesWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeLocalProgrammingFeaturesWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeLocalProgrammingFeaturesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLocalProgrammingFeaturesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1862,7 +2185,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLocalProgrammingFeaturesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLocalProgrammingFeaturesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1898,6 +2221,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimitWithComplet
 	}
 }
 
+// WriteAttributeWrongCodeEntryLimitWithValueCompletion writes attribute wrong code entry limit with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeWrongCodeEntryLimitWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeWrongCodeEntryLimitWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeWrongCodeEntryLimitWithValueParamsCompletion writes attribute wrong code entry limit with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeWrongCodeEntryLimitWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeWrongCodeEntryLimitWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeWrongCodeEntryLimitWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeWrongCodeEntryLimitWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1915,7 +2253,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeWrongCodeEntryLimitWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeWrongCodeEntryLimitWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1951,6 +2289,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTimeWi
 	}
 }
 
+// WriteAttributeUserCodeTemporaryDisableTimeWithValueCompletion writes attribute user code temporary disable time with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeUserCodeTemporaryDisableTimeWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeUserCodeTemporaryDisableTimeWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeUserCodeTemporaryDisableTimeWithValueParamsCompletion writes attribute user code temporary disable time with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeUserCodeTemporaryDisableTimeWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeUserCodeTemporaryDisableTimeWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeUserCodeTemporaryDisableTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUserCodeTemporaryDisableTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1968,7 +2321,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableT
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeUserCodeTemporaryDisableTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeUserCodeTemporaryDisableTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2004,6 +2357,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAirWithCompletio
 	}
 }
 
+// WriteAttributeSendPINOverTheAirWithValueCompletion writes attribute send pin over the air with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeSendPINOverTheAirWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeSendPINOverTheAirWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeSendPINOverTheAirWithValueParamsCompletion writes attribute send pin over the air with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeSendPINOverTheAirWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeSendPINOverTheAirWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeSendPINOverTheAirWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeSendPINOverTheAirWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2021,7 +2389,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeSendPINOverTheAirWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeSendPINOverTheAirWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2057,6 +2425,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperationWi
 	}
 }
 
+// WriteAttributeRequirePINforRemoteOperationWithValueCompletion writes attribute require pi nfor remote operation with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeRequirePINforRemoteOperationWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeRequirePINforRemoteOperationWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeRequirePINforRemoteOperationWithValueParamsCompletion writes attribute require pi nfor remote operation with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeRequirePINforRemoteOperationWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeRequirePINforRemoteOperationWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeRequirePINforRemoteOperationWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRequirePINforRemoteOperationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2074,7 +2457,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperat
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeRequirePINforRemoteOperationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeRequirePINforRemoteOperationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2110,6 +2493,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeoutWithComplet
 	}
 }
 
+// WriteAttributeExpiringUserTimeoutWithValueCompletion writes attribute expiring user timeout with value completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeExpiringUserTimeoutWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeExpiringUserTimeoutWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeExpiringUserTimeoutWithValueParamsCompletion writes attribute expiring user timeout with value params completion.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeExpiringUserTimeoutWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeExpiringUserTimeoutWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeExpiringUserTimeoutWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeExpiringUserTimeoutWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2127,7 +2525,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeExpiringUserTimeoutWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeExpiringUserTimeoutWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2180,7 +2578,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderVerificationKe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroReaderVerificationKeyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroReaderVerificationKeyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2233,7 +2631,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupIdentifie
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroReaderGroupIdentifierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroReaderGroupIdentifierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2286,7 +2684,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupSubIdenti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroReaderGroupSubIdentifierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroReaderGroupSubIdentifierWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2339,7 +2737,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroExpeditedTransaction
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2392,7 +2790,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroGroupResolvingKeyWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroGroupResolvingKeyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroGroupResolvingKeyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2445,7 +2843,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroSupportedBLEUWBProto
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroSupportedBLEUWBProtocolVersionsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroSupportedBLEUWBProtocolVersionsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2498,7 +2896,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroBLEAdvertisingVersio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroBLEAdvertisingVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAliroBLEAdvertisingVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2551,7 +2949,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroCredentialIs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2604,7 +3002,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroEndpointKeys
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfAliroEndpointKeysSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfAliroEndpointKeysSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2657,7 +3055,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2710,7 +3108,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2763,7 +3161,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2816,7 +3214,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2869,7 +3267,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeClusterRevisionWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2877,6 +3275,34 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeClusterRevisionWithParams
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// LockDoorWithParamsCompletionHandler locks door with params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) LockDoorWithParamsCompletionHandler(params *MTRDoorLockClusterLockDoorParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("lockDoorWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// UnlockDoorWithParamsCompletionHandler unlocks door with params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) UnlockDoorWithParamsCompletionHandler(params *MTRDoorLockClusterUnlockDoorParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("unlockDoorWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// UnlockWithTimeoutWithParamsCompletionHandler unlocks with timeout with params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) UnlockWithTimeoutWithParamsCompletionHandler(params *MTRDoorLockClusterUnlockWithTimeoutParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("unlockWithTimeoutWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// SetWeekDayScheduleWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcdl *MTRBaseClusterDoorLock) SetWeekDayScheduleWithParamsCompletionHandler(params *MTRDoorLockClusterSetWeekDayScheduleParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("setWeekDayScheduleWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // GetWeekDayScheduleWithParams wraps the corresponding Objective-C method.
@@ -2906,6 +3332,20 @@ func (mbcdl *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParams(ctx context.Co
 	}
 }
 
+// ClearWeekDayScheduleWithParamsCompletionHandler clears week day schedule with params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) ClearWeekDayScheduleWithParamsCompletionHandler(params *MTRDoorLockClusterClearWeekDayScheduleParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("clearWeekDayScheduleWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// SetYearDayScheduleWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcdl *MTRBaseClusterDoorLock) SetYearDayScheduleWithParamsCompletionHandler(params *MTRDoorLockClusterSetYearDayScheduleParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("setYearDayScheduleWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // GetYearDayScheduleWithParams wraps the corresponding Objective-C method.
 //
 // GetYearDayScheduleWithParams blocks until the operation completes or ctx is cancelled.
@@ -2931,6 +3371,20 @@ func (mbcdl *MTRBaseClusterDoorLock) GetYearDayScheduleWithParams(ctx context.Co
 		var _zero *MTRDoorLockClusterGetYearDayScheduleResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ClearYearDayScheduleWithParamsCompletionHandler clears year day schedule with params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) ClearYearDayScheduleWithParamsCompletionHandler(params *MTRDoorLockClusterClearYearDayScheduleParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("clearYearDayScheduleWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// SetHolidayScheduleWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcdl *MTRBaseClusterDoorLock) SetHolidayScheduleWithParamsCompletionHandler(params *MTRDoorLockClusterSetHolidayScheduleParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("setHolidayScheduleWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // GetHolidayScheduleWithParams wraps the corresponding Objective-C method.
@@ -2960,6 +3414,20 @@ func (mbcdl *MTRBaseClusterDoorLock) GetHolidayScheduleWithParams(ctx context.Co
 	}
 }
 
+// ClearHolidayScheduleWithParamsCompletionHandler clears holiday schedule with params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) ClearHolidayScheduleWithParamsCompletionHandler(params *MTRDoorLockClusterClearHolidayScheduleParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("clearHolidayScheduleWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// SetUserWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcdl *MTRBaseClusterDoorLock) SetUserWithParamsCompletionHandler(params *MTRDoorLockClusterSetUserParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("setUserWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // GetUserWithParams wraps the corresponding Objective-C method.
 //
 // GetUserWithParams blocks until the operation completes or ctx is cancelled.
@@ -2985,6 +3453,13 @@ func (mbcdl *MTRBaseClusterDoorLock) GetUserWithParams(ctx context.Context, para
 		var _zero *MTRDoorLockClusterGetUserResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ClearUserWithParamsCompletionHandler clears user with params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) ClearUserWithParamsCompletionHandler(params *MTRDoorLockClusterClearUserParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("clearUserWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // SetCredentialWithParams wraps the corresponding Objective-C method.
@@ -3041,6 +3516,13 @@ func (mbcdl *MTRBaseClusterDoorLock) GetCredentialStatusWithParams(ctx context.C
 	}
 }
 
+// ClearCredentialWithParamsCompletionHandler clears credential with params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) ClearCredentialWithParamsCompletionHandler(params *MTRDoorLockClusterClearCredentialParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("clearCredentialWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // ReadAttributeLockState reads attribute lock state.
 //
 // ReadAttributeLockState blocks until the operation completes or ctx is cancelled.
@@ -3086,7 +3568,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLockStateWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLockStateWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3141,7 +3623,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithMinIntervalMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLockTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLockTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3196,7 +3678,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeActuatorEnabledWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeActuatorEnabledWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3251,7 +3733,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDoorStateWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDoorStateWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3287,6 +3769,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEvents(ctx context.Con
 	}
 }
 
+// WriteAttributeDoorOpenEventsWithValueCompletionHandler writes attribute door open events with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeDoorOpenEventsWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeDoorOpenEventsWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeDoorOpenEventsWithValueParamsCompletionHandler writes attribute door open events with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeDoorOpenEventsWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeDoorOpenEventsWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeDoorOpenEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDoorOpenEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3306,7 +3803,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDoorOpenEventsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDoorOpenEventsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3342,6 +3839,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEvents(ctx context.C
 	}
 }
 
+// WriteAttributeDoorClosedEventsWithValueCompletionHandler writes attribute door closed events with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeDoorClosedEventsWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeDoorClosedEventsWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeDoorClosedEventsWithValueParamsCompletionHandler writes attribute door closed events with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeDoorClosedEventsWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeDoorClosedEventsWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeDoorClosedEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDoorClosedEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3361,7 +3873,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDoorClosedEventsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDoorClosedEventsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3397,6 +3909,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOpenPeriod(ctx context.Context
 	}
 }
 
+// WriteAttributeOpenPeriodWithValueCompletionHandler writes attribute open period with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeOpenPeriodWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeOpenPeriodWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeOpenPeriodWithValueParamsCompletionHandler writes attribute open period with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeOpenPeriodWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeOpenPeriodWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeOpenPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOpenPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3416,7 +3943,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithMinInterval
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeOpenPeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeOpenPeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3471,7 +3998,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupport
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfTotalUsersSupportedWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfTotalUsersSupportedWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3526,7 +4053,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupported
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfPINUsersSupportedWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfPINUsersSupportedWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3581,7 +4108,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupporte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfRFIDUsersSupportedWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfRFIDUsersSupportedWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3636,7 +4163,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3691,7 +4218,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3746,7 +4273,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfHolidaySchedulesSupportedWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfHolidaySchedulesSupportedWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3801,7 +4328,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMaxPINCodeLengthWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMaxPINCodeLengthWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3856,7 +4383,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMinPINCodeLengthWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMinPINCodeLengthWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3911,7 +4438,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMaxRFIDCodeLengthWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMaxRFIDCodeLengthWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3966,7 +4493,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMinRFIDCodeLengthWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeMinRFIDCodeLengthWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4021,7 +4548,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeCredentialRulesSupportWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeCredentialRulesSupportWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4076,7 +4603,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSuppor
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfCredentialsSupportedPerUserWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeNumberOfCredentialsSupportedPerUserWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4112,6 +4639,19 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLanguage(ctx context.Context) 
 	}
 }
 
+// WriteAttributeLanguageWithValueCompletionHandler writes attribute language with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeLanguageWithValueCompletionHandler(value string, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeLanguageWithValue:completionHandler:"), purego.NSString(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeLanguageWithValueParamsCompletionHandler writes attribute language with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeLanguageWithValueParamsCompletionHandler(value string, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeLanguageWithValue:params:completionHandler:"), purego.NSString(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeLanguageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLanguageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4131,7 +4671,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithMinIntervalMa
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLanguageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLanguageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4167,6 +4707,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLEDSettings(ctx context.Contex
 	}
 }
 
+// WriteAttributeLEDSettingsWithValueCompletionHandler writes attribute led settings with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeLEDSettingsWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeLEDSettingsWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeLEDSettingsWithValueParamsCompletionHandler writes attribute led settings with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeLEDSettingsWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeLEDSettingsWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeLEDSettingsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLEDSettingsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4186,7 +4741,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithMinInterva
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLEDSettingsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLEDSettingsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4222,6 +4777,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTime(ctx context.Con
 	}
 }
 
+// WriteAttributeAutoRelockTimeWithValueCompletionHandler writes attribute auto relock time with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeAutoRelockTimeWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeAutoRelockTimeWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeAutoRelockTimeWithValueParamsCompletionHandler writes attribute auto relock time with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeAutoRelockTimeWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeAutoRelockTimeWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeAutoRelockTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAutoRelockTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4241,7 +4811,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAutoRelockTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAutoRelockTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4277,6 +4847,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSoundVolume(ctx context.Contex
 	}
 }
 
+// WriteAttributeSoundVolumeWithValueCompletionHandler writes attribute sound volume with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeSoundVolumeWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeSoundVolumeWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeSoundVolumeWithValueParamsCompletionHandler writes attribute sound volume with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeSoundVolumeWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeSoundVolumeWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeSoundVolumeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeSoundVolumeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4296,7 +4881,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithMinInterva
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeSoundVolumeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeSoundVolumeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4332,6 +4917,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOperatingMode(ctx context.Cont
 	}
 }
 
+// WriteAttributeOperatingModeWithValueCompletionHandler writes attribute operating mode with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeOperatingModeWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeOperatingModeWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeOperatingModeWithValueParamsCompletionHandler writes attribute operating mode with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeOperatingModeWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeOperatingModeWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeOperatingModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOperatingModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4351,7 +4951,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeOperatingModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeOperatingModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4406,7 +5006,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeSupportedOperatingModesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeSupportedOperatingModesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4461,7 +5061,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDefaultConfigurationRegisterWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeDefaultConfigurationRegisterWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4497,6 +5097,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgramming(ctx con
 	}
 }
 
+// WriteAttributeEnableLocalProgrammingWithValueCompletionHandler writes attribute enable local programming with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnableLocalProgrammingWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnableLocalProgrammingWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeEnableLocalProgrammingWithValueParamsCompletionHandler writes attribute enable local programming with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnableLocalProgrammingWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnableLocalProgrammingWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeEnableLocalProgrammingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnableLocalProgrammingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4516,7 +5131,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnableLocalProgrammingWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnableLocalProgrammingWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4552,6 +5167,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLocking(ctx cont
 	}
 }
 
+// WriteAttributeEnableOneTouchLockingWithValueCompletionHandler writes attribute enable one touch locking with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnableOneTouchLockingWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnableOneTouchLockingWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeEnableOneTouchLockingWithValueParamsCompletionHandler writes attribute enable one touch locking with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnableOneTouchLockingWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnableOneTouchLockingWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeEnableOneTouchLockingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnableOneTouchLockingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4571,7 +5201,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnableOneTouchLockingWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnableOneTouchLockingWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4607,6 +5237,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLED(ctx cont
 	}
 }
 
+// WriteAttributeEnableInsideStatusLEDWithValueCompletionHandler writes attribute enable inside status led with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnableInsideStatusLEDWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnableInsideStatusLEDWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeEnableInsideStatusLEDWithValueParamsCompletionHandler writes attribute enable inside status led with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnableInsideStatusLEDWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnableInsideStatusLEDWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeEnableInsideStatusLEDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnableInsideStatusLEDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4626,7 +5271,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnableInsideStatusLEDWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnableInsideStatusLEDWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4662,6 +5307,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButton(ctx co
 	}
 }
 
+// WriteAttributeEnablePrivacyModeButtonWithValueCompletionHandler writes attribute enable privacy mode button with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnablePrivacyModeButtonWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnablePrivacyModeButtonWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeEnablePrivacyModeButtonWithValueParamsCompletionHandler writes attribute enable privacy mode button with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeEnablePrivacyModeButtonWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeEnablePrivacyModeButtonWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeEnablePrivacyModeButtonWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnablePrivacyModeButtonWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4681,7 +5341,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnablePrivacyModeButtonWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeEnablePrivacyModeButtonWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4717,6 +5377,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeatures(ctx c
 	}
 }
 
+// WriteAttributeLocalProgrammingFeaturesWithValueCompletionHandler writes attribute local programming features with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeLocalProgrammingFeaturesWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeLocalProgrammingFeaturesWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeLocalProgrammingFeaturesWithValueParamsCompletionHandler writes attribute local programming features with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeLocalProgrammingFeaturesWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeLocalProgrammingFeaturesWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeLocalProgrammingFeaturesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLocalProgrammingFeaturesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4736,7 +5411,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLocalProgrammingFeaturesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeLocalProgrammingFeaturesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4772,6 +5447,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimit(ctx contex
 	}
 }
 
+// WriteAttributeWrongCodeEntryLimitWithValueCompletionHandler writes attribute wrong code entry limit with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeWrongCodeEntryLimitWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeWrongCodeEntryLimitWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeWrongCodeEntryLimitWithValueParamsCompletionHandler writes attribute wrong code entry limit with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeWrongCodeEntryLimitWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeWrongCodeEntryLimitWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeWrongCodeEntryLimitWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeWrongCodeEntryLimitWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4791,7 +5481,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeWrongCodeEntryLimitWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeWrongCodeEntryLimitWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4827,6 +5517,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTime(c
 	}
 }
 
+// WriteAttributeUserCodeTemporaryDisableTimeWithValueCompletionHandler writes attribute user code temporary disable time with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeUserCodeTemporaryDisableTimeWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeUserCodeTemporaryDisableTimeWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeUserCodeTemporaryDisableTimeWithValueParamsCompletionHandler writes attribute user code temporary disable time with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeUserCodeTemporaryDisableTimeWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeUserCodeTemporaryDisableTimeWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeUserCodeTemporaryDisableTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUserCodeTemporaryDisableTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4846,7 +5551,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableT
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeUserCodeTemporaryDisableTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeUserCodeTemporaryDisableTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4882,6 +5587,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAir(ctx context.
 	}
 }
 
+// WriteAttributeSendPINOverTheAirWithValueCompletionHandler writes attribute send pin over the air with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeSendPINOverTheAirWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeSendPINOverTheAirWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeSendPINOverTheAirWithValueParamsCompletionHandler writes attribute send pin over the air with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeSendPINOverTheAirWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeSendPINOverTheAirWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeSendPINOverTheAirWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeSendPINOverTheAirWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4901,7 +5621,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeSendPINOverTheAirWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeSendPINOverTheAirWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4937,6 +5657,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperation(c
 	}
 }
 
+// WriteAttributeRequirePINforRemoteOperationWithValueCompletionHandler writes attribute require pi nfor remote operation with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeRequirePINforRemoteOperationWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeRequirePINforRemoteOperationWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeRequirePINforRemoteOperationWithValueParamsCompletionHandler writes attribute require pi nfor remote operation with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeRequirePINforRemoteOperationWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeRequirePINforRemoteOperationWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeRequirePINforRemoteOperationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRequirePINforRemoteOperationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4956,7 +5691,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperat
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeRequirePINforRemoteOperationWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeRequirePINforRemoteOperationWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4992,6 +5727,21 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeout(ctx contex
 	}
 }
 
+// WriteAttributeExpiringUserTimeoutWithValueCompletionHandler writes attribute expiring user timeout with value completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeExpiringUserTimeoutWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeExpiringUserTimeoutWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeExpiringUserTimeoutWithValueParamsCompletionHandler writes attribute expiring user timeout with value params completion handler.
+func (mbcdl *MTRBaseClusterDoorLock) WriteAttributeExpiringUserTimeoutWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("writeAttributeExpiringUserTimeoutWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeExpiringUserTimeoutWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeExpiringUserTimeoutWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -5011,7 +5761,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeExpiringUserTimeoutWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeExpiringUserTimeoutWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5066,7 +5816,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5121,7 +5871,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5176,7 +5926,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5231,7 +5981,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithMinInterval
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5286,7 +6036,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeClusterRevisionWithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdl), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

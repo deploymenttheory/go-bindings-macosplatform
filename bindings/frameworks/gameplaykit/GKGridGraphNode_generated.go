@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -52,6 +53,13 @@ func NewGridGraphNodeWithGridPosition(gridPosition unsafe.Pointer) *GridGraphNod
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGridGraphNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGridPosition:"), gridPosition)
 	return gridGraphNodeAdopt(_id)
+}
+
+// GridPosition returns the grid position.
+func (ggn *GridGraphNode) GridPosition() unsafe.Pointer {
+	defer runtime.KeepAlive(ggn)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ggn), objc.RegisterName("gridPosition"))
+	return _r
 }
 
 var _ GraphNodeProvider = (*GridGraphNode)(nil)

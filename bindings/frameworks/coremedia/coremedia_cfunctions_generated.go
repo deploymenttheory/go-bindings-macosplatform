@@ -157,15 +157,15 @@ func CMAudioSampleBufferCreateWithPacketDescriptions(allocator obj.Object, dataB
 	return int(_fnCMAudioSampleBufferCreateWithPacketDescriptions(objref.IDOf(allocator), objref.IDOf(dataBuffer), dataReady, makeDataReadyCallback, makeDataReadyRefcon, objref.IDOf(formatDescription), numSamples, presentationTimeStamp, packetDescriptions, sampleBufferOut))
 }
 
-var _fnCMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler func(objc.ID, objc.ID, uint8, objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler func(objc.ID, objc.ID, uint8, objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.Block) int32
 
 // CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler calls the CoreMedia framework function CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler.
-func CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler(allocator obj.Object, dataBuffer obj.Object, dataReady uint8, formatDescription obj.Object, numSamples int, presentationTimeStamp unsafe.Pointer, packetDescriptions unsafe.Pointer, sampleBufferOut unsafe.Pointer, makeDataReadyHandler unsafe.Pointer) int {
+func CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler(allocator obj.Object, dataBuffer obj.Object, dataReady uint8, formatDescription obj.Object, numSamples int, presentationTimeStamp unsafe.Pointer, packetDescriptions unsafe.Pointer, sampleBufferOut unsafe.Pointer, makeDataReadyHandler func(unsafe.Pointer) int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnCMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler, _lib, "CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler")
 	}
-	return int(_fnCMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler(objref.IDOf(allocator), objref.IDOf(dataBuffer), dataReady, objref.IDOf(formatDescription), numSamples, presentationTimeStamp, packetDescriptions, sampleBufferOut, makeDataReadyHandler))
+	return int(_fnCMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler(objref.IDOf(allocator), objref.IDOf(dataBuffer), dataReady, objref.IDOf(formatDescription), numSamples, presentationTimeStamp, packetDescriptions, sampleBufferOut, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) int { return makeDataReadyHandler(_b0) })))
 }
 
 var _fnCMBlockBufferAppendMemoryBlock func(objc.ID, unsafe.Pointer, int, objc.ID, unsafe.Pointer, int, int, uint32) int32
@@ -479,26 +479,15 @@ func CMBufferQueueInstallTrigger(queue obj.Object, callback unsafe.Pointer, refc
 	return int(_fnCMBufferQueueInstallTrigger(objref.IDOf(queue), callback, refcon, condition, time_, triggerTokenOut))
 }
 
-var _fnCMBufferQueueInstallTriggerHandler func(objc.ID, int32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCMBufferQueueInstallTriggerHandler func(objc.ID, int32, unsafe.Pointer, unsafe.Pointer, objc.Block) int32
 
 // CMBufferQueueInstallTriggerHandler calls the CoreMedia framework function CMBufferQueueInstallTriggerHandler.
-func CMBufferQueueInstallTriggerHandler(queue obj.Object, condition int32, time_ unsafe.Pointer, triggerTokenOut unsafe.Pointer, handler unsafe.Pointer) int {
+func CMBufferQueueInstallTriggerHandler(queue obj.Object, condition int32, time_ unsafe.Pointer, triggerTokenOut unsafe.Pointer, handler func(unsafe.Pointer)) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMBufferQueueInstallTriggerHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnCMBufferQueueInstallTriggerHandler, _lib, "CMBufferQueueInstallTriggerHandler")
 	}
-	return int(_fnCMBufferQueueInstallTriggerHandler(objref.IDOf(queue), condition, time_, triggerTokenOut, handler))
-}
-
-var _fnCMBufferQueueInstallTriggerHandlerWithIntegerThreshold func(objc.ID, int32, int, unsafe.Pointer, unsafe.Pointer) int32
-
-// CMBufferQueueInstallTriggerHandlerWithIntegerThreshold calls the CoreMedia framework function CMBufferQueueInstallTriggerHandlerWithIntegerThreshold.
-func CMBufferQueueInstallTriggerHandlerWithIntegerThreshold(queue obj.Object, condition int32, threshold int, triggerTokenOut unsafe.Pointer, handler unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnCMBufferQueueInstallTriggerHandlerWithIntegerThreshold == nil {
-		ebipurego.RegisterLibFunc(&_fnCMBufferQueueInstallTriggerHandlerWithIntegerThreshold, _lib, "CMBufferQueueInstallTriggerHandlerWithIntegerThreshold")
-	}
-	return int(_fnCMBufferQueueInstallTriggerHandlerWithIntegerThreshold(objref.IDOf(queue), condition, threshold, triggerTokenOut, handler))
+	return int(_fnCMBufferQueueInstallTriggerHandler(objref.IDOf(queue), condition, time_, triggerTokenOut, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { handler(_b0) })))
 }
 
 var _fnCMBufferQueueIsAtEndOfData func(objc.ID) uint8
@@ -521,17 +510,6 @@ func CMBufferQueueIsEmpty(queue obj.Object) uint8 {
 		ebipurego.RegisterLibFunc(&_fnCMBufferQueueIsEmpty, _lib, "CMBufferQueueIsEmpty")
 	}
 	return _fnCMBufferQueueIsEmpty(objref.IDOf(queue))
-}
-
-var _fnCMBufferQueueSetValidationHandler func(objc.ID, unsafe.Pointer) int32
-
-// CMBufferQueueSetValidationHandler calls the CoreMedia framework function CMBufferQueueSetValidationHandler.
-func CMBufferQueueSetValidationHandler(queue obj.Object, handler unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnCMBufferQueueSetValidationHandler == nil {
-		ebipurego.RegisterLibFunc(&_fnCMBufferQueueSetValidationHandler, _lib, "CMBufferQueueSetValidationHandler")
-	}
-	return int(_fnCMBufferQueueSetValidationHandler(objref.IDOf(queue), handler))
 }
 
 var _fnCMBufferQueueTestTrigger func(objc.ID, objc.ID) uint8
@@ -969,17 +947,6 @@ func CMRemoveAttachment(target unsafe.Pointer, key obj.Object) {
 	_fnCMRemoveAttachment(target, objref.IDOf(key))
 }
 
-var _fnCMSampleBufferCallBlockForEachSample func(objc.ID, unsafe.Pointer) int32
-
-// CMSampleBufferCallBlockForEachSample calls the CoreMedia framework function CMSampleBufferCallBlockForEachSample.
-func CMSampleBufferCallBlockForEachSample(sbuf obj.Object, handler unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnCMSampleBufferCallBlockForEachSample == nil {
-		ebipurego.RegisterLibFunc(&_fnCMSampleBufferCallBlockForEachSample, _lib, "CMSampleBufferCallBlockForEachSample")
-	}
-	return int(_fnCMSampleBufferCallBlockForEachSample(objref.IDOf(sbuf), handler))
-}
-
 var _fnCMSampleBufferCopyPCMDataIntoAudioBufferList func(objc.ID, int32, int32, unsafe.Pointer) int32
 
 // CMSampleBufferCopyPCMDataIntoAudioBufferList calls the CoreMedia framework function CMSampleBufferCopyPCMDataIntoAudioBufferList.
@@ -1031,16 +998,16 @@ func CMSampleBufferCreateForImageBuffer(allocator obj.Object, imageBuffer unsafe
 	return _ret, _out0
 }
 
-var _fnCMSampleBufferCreateForImageBufferWithMakeDataReadyHandler func(objc.ID, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCMSampleBufferCreateForImageBufferWithMakeDataReadyHandler func(objc.ID, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.Block) int32
 
 // CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler calls the CoreMedia framework function CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler.
-func CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler(allocator obj.Object, imageBuffer unsafe.Pointer, dataReady uint8, formatDescription unsafe.Pointer, sampleBufferOut unsafe.Pointer, makeDataReadyHandler unsafe.Pointer) (result int, sampleTiming CMSampleTimingInfo) {
+func CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler(allocator obj.Object, imageBuffer unsafe.Pointer, dataReady uint8, formatDescription unsafe.Pointer, sampleBufferOut unsafe.Pointer, makeDataReadyHandler func(unsafe.Pointer) int) (result int, sampleTiming CMSampleTimingInfo) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSampleBufferCreateForImageBufferWithMakeDataReadyHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSampleBufferCreateForImageBufferWithMakeDataReadyHandler, _lib, "CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler")
 	}
 	var _out0 CMSampleTimingInfo
-	_ret := int(_fnCMSampleBufferCreateForImageBufferWithMakeDataReadyHandler(objref.IDOf(allocator), imageBuffer, dataReady, formatDescription, unsafe.Pointer(&_out0), sampleBufferOut, makeDataReadyHandler))
+	_ret := int(_fnCMSampleBufferCreateForImageBufferWithMakeDataReadyHandler(objref.IDOf(allocator), imageBuffer, dataReady, formatDescription, unsafe.Pointer(&_out0), sampleBufferOut, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) int { return makeDataReadyHandler(_b0) })))
 	return _ret, _out0
 }
 
@@ -1082,17 +1049,17 @@ func CMSampleBufferCreateReadyWithImageBuffer(allocator obj.Object, imageBuffer 
 	return _ret, _out0
 }
 
-var _fnCMSampleBufferCreateWithMakeDataReadyHandler func(objc.ID, objc.ID, uint8, objc.ID, int, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+var _fnCMSampleBufferCreateWithMakeDataReadyHandler func(objc.ID, objc.ID, uint8, objc.ID, int, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, objc.Block) int32
 
 // CMSampleBufferCreateWithMakeDataReadyHandler calls the CoreMedia framework function CMSampleBufferCreateWithMakeDataReadyHandler.
-func CMSampleBufferCreateWithMakeDataReadyHandler(allocator obj.Object, dataBuffer obj.Object, dataReady uint8, formatDescription obj.Object, numSamples int, numSampleTimingEntries int, numSampleSizeEntries int, sampleBufferOut unsafe.Pointer, makeDataReadyHandler unsafe.Pointer) (result int, sampleTimingArray CMSampleTimingInfo, sampleSizeArray int) {
+func CMSampleBufferCreateWithMakeDataReadyHandler(allocator obj.Object, dataBuffer obj.Object, dataReady uint8, formatDescription obj.Object, numSamples int, numSampleTimingEntries int, numSampleSizeEntries int, sampleBufferOut unsafe.Pointer, makeDataReadyHandler func(unsafe.Pointer) int) (result int, sampleTimingArray CMSampleTimingInfo, sampleSizeArray int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSampleBufferCreateWithMakeDataReadyHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSampleBufferCreateWithMakeDataReadyHandler, _lib, "CMSampleBufferCreateWithMakeDataReadyHandler")
 	}
 	var _out0 CMSampleTimingInfo
 	var _out1 int
-	_ret := int(_fnCMSampleBufferCreateWithMakeDataReadyHandler(objref.IDOf(allocator), objref.IDOf(dataBuffer), dataReady, objref.IDOf(formatDescription), numSamples, numSampleTimingEntries, unsafe.Pointer(&_out0), numSampleSizeEntries, unsafe.Pointer(&_out1), sampleBufferOut, makeDataReadyHandler))
+	_ret := int(_fnCMSampleBufferCreateWithMakeDataReadyHandler(objref.IDOf(allocator), objref.IDOf(dataBuffer), dataReady, objref.IDOf(formatDescription), numSamples, numSampleTimingEntries, unsafe.Pointer(&_out0), numSampleSizeEntries, unsafe.Pointer(&_out1), sampleBufferOut, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) int { return makeDataReadyHandler(_b0) })))
 	return _ret, _out0, _out1
 }
 
@@ -1403,17 +1370,6 @@ func CMSampleBufferSetDataBufferFromAudioBufferList(sbuf obj.Object, blockBuffer
 		ebipurego.RegisterLibFunc(&_fnCMSampleBufferSetDataBufferFromAudioBufferList, _lib, "CMSampleBufferSetDataBufferFromAudioBufferList")
 	}
 	return int(_fnCMSampleBufferSetDataBufferFromAudioBufferList(objref.IDOf(sbuf), objref.IDOf(blockBufferStructureAllocator), objref.IDOf(blockBufferBlockAllocator), flags, bufferList))
-}
-
-var _fnCMSampleBufferSetInvalidateHandler func(objc.ID, unsafe.Pointer) int32
-
-// CMSampleBufferSetInvalidateHandler calls the CoreMedia framework function CMSampleBufferSetInvalidateHandler.
-func CMSampleBufferSetInvalidateHandler(sbuf obj.Object, invalidateHandler unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnCMSampleBufferSetInvalidateHandler == nil {
-		ebipurego.RegisterLibFunc(&_fnCMSampleBufferSetInvalidateHandler, _lib, "CMSampleBufferSetInvalidateHandler")
-	}
-	return int(_fnCMSampleBufferSetInvalidateHandler(objref.IDOf(sbuf), invalidateHandler))
 }
 
 var _fnCMSampleBufferSetOutputPresentationTimeStamp func(objc.ID, unsafe.Pointer) int32

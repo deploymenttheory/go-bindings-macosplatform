@@ -473,6 +473,55 @@ func (a *Annotation) ShouldPrint() bool {
 	return _r
 }
 
+// ModificationDate returns the modification date.
+func (a *Annotation) ModificationDate() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("modificationDate"))
+	return _r
+}
+
+// UserName returns the user name.
+func (a *Annotation) UserName() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("userName"))
+	return _r
+}
+
+// Popup returns the popup.
+func (a *Annotation) Popup() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("popup"))
+	return _r
+}
+
+// Border returns the border.
+func (a *Annotation) Border() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("border"))
+	return _r
+}
+
+// Color returns the color.
+func (a *Annotation) Color() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("color"))
+	return _r
+}
+
+// Contents returns the contents.
+func (a *Annotation) Contents() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("contents"))
+	return _r
+}
+
+// Action returns the action.
+func (a *Annotation) Action() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("action"))
+	return _r
+}
+
 // HasAppearanceStream reports whether the object has appearance stream.
 func (a *Annotation) HasAppearanceStream() bool {
 	defer runtime.KeepAlive(a)
@@ -487,6 +536,13 @@ func (a *Annotation) IsHighlighted() bool {
 	return _r
 }
 
+// AnnotationKeyValues returns the annotation key values.
+func (a *Annotation) AnnotationKeyValues() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("annotationKeyValues"))
+	return _r
+}
+
 // RemoveAllAppearanceStreams removes all appearance streams.
 func (a *Annotation) RemoveAllAppearanceStreams() {
 	defer runtime.KeepAlive(a)
@@ -497,6 +553,20 @@ func (a *Annotation) RemoveAllAppearanceStreams() {
 func (a *Annotation) DrawWithBox(box DisplayBox) {
 	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("drawWithBox:"), box)
+}
+
+// ToolTip returns the tool tip.
+func (a *Annotation) ToolTip() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("toolTip"))
+	return _r
+}
+
+// MouseUpAction returns the mouse up action.
+func (a *Annotation) MouseUpAction() unsafe.Pointer {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(a), objc.RegisterName("mouseUpAction"))
+	return _r
 }
 
 // AddBezierPath adds a bezier path to the ink annotation.

@@ -755,15 +755,17 @@ func CTFontDescriptorGetTypeID() int {
 	return _fnCTFontDescriptorGetTypeID()
 }
 
-var _fnCTFontDescriptorMatchFontDescriptorsWithProgressHandler func(objc.ID, objc.ID, unsafe.Pointer) bool
+var _fnCTFontDescriptorMatchFontDescriptorsWithProgressHandler func(objc.ID, objc.ID, objc.Block) bool
 
 // CTFontDescriptorMatchFontDescriptorsWithProgressHandler calls the CoreText framework function CTFontDescriptorMatchFontDescriptorsWithProgressHandler.
-func CTFontDescriptorMatchFontDescriptorsWithProgressHandler(descriptors obj.Object, mandatoryAttributes obj.Object, progressBlock unsafe.Pointer) bool {
+func CTFontDescriptorMatchFontDescriptorsWithProgressHandler(descriptors obj.Object, mandatoryAttributes obj.Object, progressBlock func(CTFontDescriptorMatchingState, unsafe.Pointer) bool) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontDescriptorMatchFontDescriptorsWithProgressHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorMatchFontDescriptorsWithProgressHandler, _lib, "CTFontDescriptorMatchFontDescriptorsWithProgressHandler")
 	}
-	return _fnCTFontDescriptorMatchFontDescriptorsWithProgressHandler(objref.IDOf(descriptors), objref.IDOf(mandatoryAttributes), progressBlock)
+	return _fnCTFontDescriptorMatchFontDescriptorsWithProgressHandler(objref.IDOf(descriptors), objref.IDOf(mandatoryAttributes), objc.NewBlock(func(_ objc.Block, _b0 CTFontDescriptorMatchingState, _b1 unsafe.Pointer) bool {
+		return progressBlock(_b0, _b1)
+	}))
 }
 
 var _fnCTFontDrawGlyphs func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, objc.ID)
@@ -1182,15 +1184,15 @@ func CTFontManagerCreateFontDescriptorsFromURL(fileURL obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnCTFontManagerCreateFontRequestRunLoopSource func(int, unsafe.Pointer) objc.ID
+var _fnCTFontManagerCreateFontRequestRunLoopSource func(int, objc.Block) objc.ID
 
 // CTFontManagerCreateFontRequestRunLoopSource calls the CoreText framework function CTFontManagerCreateFontRequestRunLoopSource.
-func CTFontManagerCreateFontRequestRunLoopSource(sourceOrder int, createMatchesCallback unsafe.Pointer) obj.Object {
+func CTFontManagerCreateFontRequestRunLoopSource(sourceOrder int, createMatchesCallback func(unsafe.Pointer, int) int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontManagerCreateFontRequestRunLoopSource == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerCreateFontRequestRunLoopSource, _lib, "CTFontManagerCreateFontRequestRunLoopSource")
 	}
-	_ret := _fnCTFontManagerCreateFontRequestRunLoopSource(sourceOrder, createMatchesCallback)
+	_ret := _fnCTFontManagerCreateFontRequestRunLoopSource(sourceOrder, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 int) int { return createMatchesCallback(_b0, _b1) }))
 	return obj.Wrap(_ret)
 }
 
@@ -1238,26 +1240,26 @@ func CTFontManagerIsSupportedFont(fontURL obj.Object) bool {
 	return _fnCTFontManagerIsSupportedFont(objref.IDOf(fontURL))
 }
 
-var _fnCTFontManagerRegisterFontDescriptors func(objc.ID, CTFontManagerScope, bool, unsafe.Pointer)
+var _fnCTFontManagerRegisterFontDescriptors func(objc.ID, CTFontManagerScope, bool, objc.Block)
 
 // CTFontManagerRegisterFontDescriptors calls the CoreText framework function CTFontManagerRegisterFontDescriptors.
-func CTFontManagerRegisterFontDescriptors(fontDescriptors obj.Object, scope CTFontManagerScope, enabled bool, registrationHandler unsafe.Pointer) {
+func CTFontManagerRegisterFontDescriptors(fontDescriptors obj.Object, scope CTFontManagerScope, enabled bool, registrationHandler func(unsafe.Pointer, bool) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontManagerRegisterFontDescriptors == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerRegisterFontDescriptors, _lib, "CTFontManagerRegisterFontDescriptors")
 	}
-	_fnCTFontManagerRegisterFontDescriptors(objref.IDOf(fontDescriptors), scope, enabled, registrationHandler)
+	_fnCTFontManagerRegisterFontDescriptors(objref.IDOf(fontDescriptors), scope, enabled, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 bool) bool { return registrationHandler(_b0, _b1) }))
 }
 
-var _fnCTFontManagerRegisterFontURLs func(objc.ID, CTFontManagerScope, bool, unsafe.Pointer)
+var _fnCTFontManagerRegisterFontURLs func(objc.ID, CTFontManagerScope, bool, objc.Block)
 
 // CTFontManagerRegisterFontURLs calls the CoreText framework function CTFontManagerRegisterFontURLs.
-func CTFontManagerRegisterFontURLs(fontURLs obj.Object, scope CTFontManagerScope, enabled bool, registrationHandler unsafe.Pointer) {
+func CTFontManagerRegisterFontURLs(fontURLs obj.Object, scope CTFontManagerScope, enabled bool, registrationHandler func(unsafe.Pointer, bool) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontManagerRegisterFontURLs == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerRegisterFontURLs, _lib, "CTFontManagerRegisterFontURLs")
 	}
-	_fnCTFontManagerRegisterFontURLs(objref.IDOf(fontURLs), scope, enabled, registrationHandler)
+	_fnCTFontManagerRegisterFontURLs(objref.IDOf(fontURLs), scope, enabled, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 bool) bool { return registrationHandler(_b0, _b1) }))
 }
 
 var _fnCTFontManagerRegisterFontsForURLs func(objc.ID, CTFontManagerScope, unsafe.Pointer) bool
@@ -1282,26 +1284,26 @@ func CTFontManagerSetAutoActivationSetting(bundleIdentifier obj.Object, setting 
 	_fnCTFontManagerSetAutoActivationSetting(objref.IDOf(bundleIdentifier), setting)
 }
 
-var _fnCTFontManagerUnregisterFontDescriptors func(objc.ID, CTFontManagerScope, unsafe.Pointer)
+var _fnCTFontManagerUnregisterFontDescriptors func(objc.ID, CTFontManagerScope, objc.Block)
 
 // CTFontManagerUnregisterFontDescriptors calls the CoreText framework function CTFontManagerUnregisterFontDescriptors.
-func CTFontManagerUnregisterFontDescriptors(fontDescriptors obj.Object, scope CTFontManagerScope, registrationHandler unsafe.Pointer) {
+func CTFontManagerUnregisterFontDescriptors(fontDescriptors obj.Object, scope CTFontManagerScope, registrationHandler func(unsafe.Pointer, bool) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontManagerUnregisterFontDescriptors == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerUnregisterFontDescriptors, _lib, "CTFontManagerUnregisterFontDescriptors")
 	}
-	_fnCTFontManagerUnregisterFontDescriptors(objref.IDOf(fontDescriptors), scope, registrationHandler)
+	_fnCTFontManagerUnregisterFontDescriptors(objref.IDOf(fontDescriptors), scope, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 bool) bool { return registrationHandler(_b0, _b1) }))
 }
 
-var _fnCTFontManagerUnregisterFontURLs func(objc.ID, CTFontManagerScope, unsafe.Pointer)
+var _fnCTFontManagerUnregisterFontURLs func(objc.ID, CTFontManagerScope, objc.Block)
 
 // CTFontManagerUnregisterFontURLs calls the CoreText framework function CTFontManagerUnregisterFontURLs.
-func CTFontManagerUnregisterFontURLs(fontURLs obj.Object, scope CTFontManagerScope, registrationHandler unsafe.Pointer) {
+func CTFontManagerUnregisterFontURLs(fontURLs obj.Object, scope CTFontManagerScope, registrationHandler func(unsafe.Pointer, bool) bool) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontManagerUnregisterFontURLs == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerUnregisterFontURLs, _lib, "CTFontManagerUnregisterFontURLs")
 	}
-	_fnCTFontManagerUnregisterFontURLs(objref.IDOf(fontURLs), scope, registrationHandler)
+	_fnCTFontManagerUnregisterFontURLs(objref.IDOf(fontURLs), scope, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 bool) bool { return registrationHandler(_b0, _b1) }))
 }
 
 var _fnCTFontManagerUnregisterFontsForURLs func(objc.ID, CTFontManagerScope, unsafe.Pointer) bool

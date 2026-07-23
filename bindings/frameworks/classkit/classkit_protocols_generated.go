@@ -5,12 +5,12 @@
 package classkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"unsafe"
 )
 
 // ContextProvider is the Go form of the Objective-C protocol CLSContextProvider.
 type ContextProvider interface {
-	UpdateDescendantsOfContextCompletion(context_ *Context, completion obj.Object)
+	UpdateDescendantsOfContextCompletion(context_ *Context, completion func(unsafe.Pointer))
 }
 
 // DataStoreDelegate is the Go form of the Objective-C protocol CLSDataStoreDelegate.

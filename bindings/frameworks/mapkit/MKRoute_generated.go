@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -96,6 +97,13 @@ func (r *Route) AdvisoryNotices() []string {
 	defer runtime.KeepAlive(r)
 	_arr := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("advisoryNotices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
+// Distance returns the distance.
+func (r *Route) Distance() unsafe.Pointer {
+	defer runtime.KeepAlive(r)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(r), objc.RegisterName("distance"))
+	return _r
 }
 
 // ExpectedTravelTime returns the expected travel time.

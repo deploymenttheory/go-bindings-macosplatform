@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -51,6 +52,12 @@ func controllerAxisInputAdopt(id objc.ID) *ControllerAxisInput {
 func NewControllerAxisInput() *ControllerAxisInput {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCControllerAxisInput")), objc.RegisterName("new"))
 	return controllerAxisInputAdopt(_id)
+}
+
+// WithValueChangedHandler sets the block that the element calls when the user changes the axis value.
+func (cai *ControllerAxisInput) WithValueChangedHandler(valueChangedHandler func(obj.Object, float32)) *ControllerAxisInput {
+	objc.Send[objc.ID](objref.IDOf(cai), objc.RegisterName("setValueChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32) { valueChangedHandler(obj.Wrap(_b0), _b1) }))
+	return cai
 }
 
 // WithValue sets the current value of the axis.

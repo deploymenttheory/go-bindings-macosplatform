@@ -6,8 +6,10 @@ package mediaextension
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -83,6 +85,17 @@ func NewVideoDecoderPixelBufferManager() *VideoDecoderPixelBufferManager {
 func (vdpbm *VideoDecoderPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes map[string]obj.Object) *VideoDecoderPixelBufferManager {
 	objc.Send[objc.ID](objref.IDOf(vdpbm), objc.RegisterName("setPixelBufferAttributes:"), rt.MapToDict(pixelBufferAttributes, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return vdpbm
+}
+
+// CreatePixelBuffer generates a pixel buffer using the session’s pixel buffer pool.
+func (vdpbm *VideoDecoderPixelBufferManager) CreatePixelBuffer() (result unsafe.Pointer, err error) {
+	defer runtime.KeepAlive(vdpbm)
+	var _nsErr uintptr
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(vdpbm), objc.RegisterName("createPixelBufferAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _r, nil
 }
 
 // RegisterCustomPixelFormat videoToolbox will register the described pixelFormat in both the Extension process and the client process. This property is appropriate for decoders which produce output in a custom pixel format.  This will generally only be used by decoders which produce RAW output, where the decoder's output buffers will only be consumed by an MERAWProcessor extension which registers the same pixel format. MERAWProcessor needs to manually register the custom pixel format using CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType().

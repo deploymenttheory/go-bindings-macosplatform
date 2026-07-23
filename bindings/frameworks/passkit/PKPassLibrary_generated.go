@@ -7,6 +7,7 @@ package passkit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -150,6 +151,12 @@ func (pl *PassLibrary) ReplacePass(pass *Pass) bool {
 	return _r
 }
 
+// AddPassesWithCompletionHandler presents a user interface for adding multiple passes at once.
+func (pl *PassLibrary) AddPassesWithCompletionHandler(passes []*Pass, completion func(PassLibraryAddPassesStatus)) {
+	defer runtime.KeepAlive(pl)
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("addPasses:withCompletionHandler:"), purego.SliceToNSArray(passes, func(_v *Pass) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 PassLibraryAddPassesStatus) { completion(_b0) }))
+}
+
 // OpenPaymentSetup opens the user interface to set up credit cards for Apple Pay.
 func (pl *PassLibrary) OpenPaymentSetup() {
 	defer runtime.KeepAlive(pl)
@@ -197,6 +204,43 @@ func (pl *PassLibrary) CanAddFelicaPass() bool {
 	return _r
 }
 
+// ActivatePaymentPassWithActivationDataCompletion wraps the corresponding Objective-C method.
+func (pl *PassLibrary) ActivatePaymentPassWithActivationDataCompletion(paymentPass *PaymentPass, activationData []byte, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(paymentPass)
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("activatePaymentPass:withActivationData:completion:"), objref.IDOf(paymentPass), rt.BytesToNSData(activationData), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// ActivatePaymentPassWithActivationCodeCompletion wraps the corresponding Objective-C method.
+func (pl *PassLibrary) ActivatePaymentPassWithActivationCodeCompletion(paymentPass *PaymentPass, activationCode string, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(paymentPass)
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("activatePaymentPass:withActivationCode:completion:"), objref.IDOf(paymentPass), purego.NSString(activationCode), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// ActivateSecureElementPassWithActivationDataCompletion activates a Secure Element pass using the specified data.
+func (pl *PassLibrary) ActivateSecureElementPassWithActivationDataCompletion(secureElementPass *SecureElementPass, activationData []byte, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(secureElementPass)
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("activateSecureElementPass:withActivationData:completion:"), objref.IDOf(secureElementPass), rt.BytesToNSData(activationData), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// SignDataWithSecureElementPassCompletion signs an opaque value using a cryptographic signature.
+func (pl *PassLibrary) SignDataWithSecureElementPassCompletion(signData []byte, secureElementPass *SecureElementPass, completion func(obj.Object, obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(secureElementPass)
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("signData:withSecureElementPass:completion:"), rt.BytesToNSData(signData), objref.IDOf(secureElementPass), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completion(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+}
+
+// EncryptedServiceProviderDataForSecureElementPassCompletion wraps the corresponding Objective-C method.
+func (pl *PassLibrary) EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass *SecureElementPass, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(secureElementPass)
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("encryptedServiceProviderDataForSecureElementPass:completion:"), objref.IDOf(secureElementPass), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
 // ServiceProviderDataForSecureElementPassCompletion calls a completion handler that returns the custom data for a Secure Element pass.
 //
 // ServiceProviderDataForSecureElementPassCompletion blocks until the operation completes or ctx is cancelled.
@@ -229,6 +273,12 @@ func (pl *PassLibrary) AuthorizationStatusForCapability(capability PassLibraryCa
 	defer runtime.KeepAlive(pl)
 	_r := objc.Send[PassLibraryAuthorizationStatus](objref.IDOf(pl), objc.RegisterName("authorizationStatusForCapability:"), capability)
 	return _r
+}
+
+// RequestAuthorizationForCapabilityCompletion requests authorization for capability completion.
+func (pl *PassLibrary) RequestAuthorizationForCapabilityCompletion(capability PassLibraryCapability, completion func(PassLibraryAuthorizationStatus)) {
+	defer runtime.KeepAlive(pl)
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("requestAuthorizationForCapability:completion:"), capability, objc.NewBlock(func(_ objc.Block, _b0 PassLibraryAuthorizationStatus) { completion(_b0) }))
 }
 
 // IsSecureElementPassActivationAvailable reports whether the object is secure element pass activation available.

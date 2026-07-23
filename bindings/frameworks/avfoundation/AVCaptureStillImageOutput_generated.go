@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -71,6 +72,13 @@ func (csio *CaptureStillImageOutput) WithHighResolutionStillImageOutputEnabled(h
 func (csio *CaptureStillImageOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureStillImageOutput {
 	objc.Send[objc.ID](objref.IDOf(csio), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
 	return csio
+}
+
+// CaptureStillImageAsynchronouslyFromConnectionCompletionHandler initiates a still image capture and returns immediately.
+func (csio *CaptureStillImageOutput) CaptureStillImageAsynchronouslyFromConnectionCompletionHandler(connection *CaptureConnection, handler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(csio)
+	defer runtime.KeepAlive(connection)
+	objc.Send[objc.ID](objref.IDOf(csio), objc.RegisterName("captureStillImageAsynchronouslyFromConnection:completionHandler:"), objref.IDOf(connection), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { handler(_b0, _b1) }))
 }
 
 // OutputSettings specifies the options the receiver uses to encode still images before they are delivered. See AVVideoSettings.h for more information on how to construct an output settings dictionary. On iOS, the only currently supported keys are AVVideoCodecKey and kCVPixelBufferPixelFormatTypeKey. Use -availableImageDataCVPixelFormatTypes and -availableImageDataCodecTypes to determine what codec keys and pixel formats are supported. AVVideoQualityKey is supported on iOS 6.0 and later and may only be used when AVVideoCodecKey is set to AVVideoCodecTypeJPEG.

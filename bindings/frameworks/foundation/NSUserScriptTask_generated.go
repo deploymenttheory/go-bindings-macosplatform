@@ -100,6 +100,12 @@ func (ust *UserScriptTask) WithScriptingProperties(scriptingProperties map[strin
 	return ust
 }
 
+// ExecuteWithCompletionHandler executes the script with no input and ignoring any result.
+func (ust *UserScriptTask) ExecuteWithCompletionHandler(handler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(ust)
+	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("executeWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { handler(_b0) }))
+}
+
 // ScriptURL returns the script URL.
 func (ust *UserScriptTask) ScriptURL() string {
 	defer runtime.KeepAlive(ust)

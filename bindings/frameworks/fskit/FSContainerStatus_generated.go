@@ -6,6 +6,7 @@ package fskit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -83,5 +84,12 @@ func NewContainerStatus() *ContainerStatus {
 func (cs *ContainerStatus) State() ContainerState {
 	defer runtime.KeepAlive(cs)
 	_r := objc.Send[ContainerState](objref.IDOf(cs), objc.RegisterName("state"))
+	return _r
+}
+
+// Status returns an optional error that provides further information about the state.
+func (cs *ContainerStatus) Status() unsafe.Pointer {
+	defer runtime.KeepAlive(cs)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cs), objc.RegisterName("status"))
 	return _r
 }

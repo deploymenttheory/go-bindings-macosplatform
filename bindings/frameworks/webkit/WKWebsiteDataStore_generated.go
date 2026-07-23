@@ -7,6 +7,7 @@ package webkit
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -97,28 +98,46 @@ func (wwds *WKWebsiteDataStore) WithProxyConfigurations(items ...obj.Object) *WK
 }
 
 // FetchDataRecordsOfTypesCompletionHandler fetches the specified types of records from the data store.
-func (wwds *WKWebsiteDataStore) FetchDataRecordsOfTypesCompletionHandler(dataTypes []string, completionHandler func(obj.Object) int) {
+func (wwds *WKWebsiteDataStore) FetchDataRecordsOfTypesCompletionHandler(dataTypes []string, completionHandler func(obj.Object)) {
 	defer runtime.KeepAlive(wwds)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("fetchDataRecordsOfTypes:completionHandler:"), rt.SliceToNSSet(dataTypes, func(_v string) objc.ID { return purego.NSString(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("fetchDataRecordsOfTypes:completionHandler:"), rt.SliceToNSSet(dataTypes, func(_v string) objc.ID { return purego.NSString(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completionHandler(obj.Wrap(_b0)) }))
 	})
 
 }
 
 // RemoveDataOfTypesForDataRecordsCompletionHandler removes the specified types of website data from one or more data records.
-func (wwds *WKWebsiteDataStore) RemoveDataOfTypesForDataRecordsCompletionHandler(dataTypes []string, dataRecords []*WKWebsiteDataRecord, completionHandler func() int) {
+func (wwds *WKWebsiteDataStore) RemoveDataOfTypesForDataRecordsCompletionHandler(dataTypes []string, dataRecords []*WKWebsiteDataRecord, completionHandler func()) {
 	defer runtime.KeepAlive(wwds)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("removeDataOfTypes:forDataRecords:completionHandler:"), rt.SliceToNSSet(dataTypes, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(dataRecords, func(_v *WKWebsiteDataRecord) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("removeDataOfTypes:forDataRecords:completionHandler:"), rt.SliceToNSSet(dataTypes, func(_v string) objc.ID { return purego.NSString(_v) }), purego.SliceToNSArray(dataRecords, func(_v *WKWebsiteDataRecord) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block) { completionHandler() }))
 	})
 
 }
 
 // RemoveDataOfTypesModifiedSinceCompletionHandler removes website data that changed after the specified date.
-func (wwds *WKWebsiteDataStore) RemoveDataOfTypesModifiedSinceCompletionHandler(dataTypes []string, date time.Time, completionHandler func() int) {
+func (wwds *WKWebsiteDataStore) RemoveDataOfTypesModifiedSinceCompletionHandler(dataTypes []string, date time.Time, completionHandler func()) {
 	defer runtime.KeepAlive(wwds)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("removeDataOfTypes:modifiedSince:completionHandler:"), rt.SliceToNSSet(dataTypes, func(_v string) objc.ID { return purego.NSString(_v) }), rt.TimeToNSDate(date), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("removeDataOfTypes:modifiedSince:completionHandler:"), rt.SliceToNSSet(dataTypes, func(_v string) objc.ID { return purego.NSString(_v) }), rt.TimeToNSDate(date), objc.NewBlock(func(_ objc.Block) { completionHandler() }))
+	})
+
+}
+
+// FetchDataOfTypesCompletionHandler fetches data of types completion handler.
+func (wwds *WKWebsiteDataStore) FetchDataOfTypesCompletionHandler(dataTypes []string, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wwds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("fetchDataOfTypes:completionHandler:"), rt.SliceToNSSet(dataTypes, func(_v string) objc.ID { return purego.NSString(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	})
+
+}
+
+// RestoreDataCompletionHandler wraps the corresponding Objective-C method.
+func (wwds *WKWebsiteDataStore) RestoreDataCompletionHandler(data []byte, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(wwds)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("restoreData:completionHandler:"), rt.BytesToNSData(data), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 	})
 
 }

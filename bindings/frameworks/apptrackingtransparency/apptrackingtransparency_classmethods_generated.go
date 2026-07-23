@@ -8,6 +8,11 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// RequestTrackingAuthorizationWithCompletionHandler the request for user authorization to access app-related data.
+func RequestTrackingAuthorizationWithCompletionHandler(completion func(TrackingManagerAuthorizationStatus)) {
+	objc.Send[objc.ID](objc.ID(_class("ATTrackingManager")), objc.RegisterName("requestTrackingAuthorizationWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 TrackingManagerAuthorizationStatus) { completion(_b0) }))
+}
+
 // TrackingAuthorizationStatus returns the authorization status that is current for the calling application. If the user has not yet been prompted to approve access, the return value will either be “ATTrackingManagerAuthorizationStatusNotDetermined“, or “ATTrackingManagerAuthorizationStatusRestricted“ if this value is managed. Once the user has been prompted, the return value will be either “ATTrackingManagerAuthorizationStatusDenied“ or “ATTrackingManagerAuthorizationStatusAuthorized“. Use the “ATTrackingManager/trackingAuthorizationStatus“ property to check authorization status. - Returns: Information about your application’s tracking authorization status. Users are able to grant or deny developers tracking privileges on a per-app basis. Application developers must call `requestTrackingAuthorizationWithCompletionHandler:` for the ability to track users.
 func TrackingAuthorizationStatus() TrackingManagerAuthorizationStatus {
 	_r := objc.Send[TrackingManagerAuthorizationStatus](objc.ID(_class("ATTrackingManager")), objc.RegisterName("trackingAuthorizationStatus"))

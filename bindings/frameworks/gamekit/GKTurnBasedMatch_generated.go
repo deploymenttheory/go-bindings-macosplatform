@@ -8,6 +8,7 @@ import (
 	"context"
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -184,6 +185,12 @@ func (tbm *TurnBasedMatch) Remove(ctx context.Context) error {
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// LoadMatchDataWithCompletionHandler fetches your game-specific data that you store in Game Center when ending a turn, saving a turn, or leaving a match.
+func (tbm *TurnBasedMatch) LoadMatchDataWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(tbm)
+	objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("loadMatchDataWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // EndTurnWithNextParticipantsTurnTimeoutMatchData passes the turn from the current participant to the next participant.

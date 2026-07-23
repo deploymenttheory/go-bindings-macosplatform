@@ -126,6 +126,13 @@ func (nad *NDArrayDescriptor) PermuteWithDimensionOrder() (dimensionOrder int) {
 	return _out0
 }
 
+// DimensionOrder returns the new ordering of dimensions If a transpose is applied, it will change the order of dimensions in the MPSNDArray. The default ordering is {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}.  After a transpose of dimensions 0 and 1, it will be: {1,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
+func (nad *NDArrayDescriptor) DimensionOrder() unsafe.Pointer {
+	defer runtime.KeepAlive(nad)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(nad), objc.RegisterName("dimensionOrder"))
+	return _r
+}
+
 // GetShape returns the shape of the NDArray as MPSShape The length of the array is the number of dimensions and the size of the fastest running dimension is the last element in the array.
 //
 // GetShape returns the collection as a Go slice.

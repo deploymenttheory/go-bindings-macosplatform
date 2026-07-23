@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -129,4 +130,46 @@ func (cis *CredentialIdentityStore) GetCredentialIdentitiesForServiceCredentialI
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// SaveCredentialIdentitiesCompletion saves the given credential identities to the store.
+func (cis *CredentialIdentityStore) SaveCredentialIdentitiesCompletion(credentialIdentities []*PasswordCredentialIdentity, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(cis)
+	objc.Send[objc.ID](objref.IDOf(cis), objc.RegisterName("saveCredentialIdentities:completion:"), purego.SliceToNSArray(credentialIdentities, func(_v *PasswordCredentialIdentity) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// SaveCredentialIdentityEntriesCompletion save the supplied credential identities to the store.
+func (cis *CredentialIdentityStore) SaveCredentialIdentityEntriesCompletion(credentialIdentities []obj.Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(cis)
+	objc.Send[objc.ID](objref.IDOf(cis), objc.RegisterName("saveCredentialIdentityEntries:completion:"), purego.SliceToNSArray(credentialIdentities, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// RemoveCredentialIdentitiesCompletion removes the given credential identities from the store.
+func (cis *CredentialIdentityStore) RemoveCredentialIdentitiesCompletion(credentialIdentities []*PasswordCredentialIdentity, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(cis)
+	objc.Send[objc.ID](objref.IDOf(cis), objc.RegisterName("removeCredentialIdentities:completion:"), purego.SliceToNSArray(credentialIdentities, func(_v *PasswordCredentialIdentity) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// RemoveCredentialIdentityEntriesCompletion remove the given credential identities from the store.
+func (cis *CredentialIdentityStore) RemoveCredentialIdentityEntriesCompletion(credentialIdentities []obj.Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(cis)
+	objc.Send[objc.ID](objref.IDOf(cis), objc.RegisterName("removeCredentialIdentityEntries:completion:"), purego.SliceToNSArray(credentialIdentities, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// RemoveAllCredentialIdentitiesWithCompletion removes all existing credential identities from the store.
+func (cis *CredentialIdentityStore) RemoveAllCredentialIdentitiesWithCompletion(completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(cis)
+	objc.Send[objc.ID](objref.IDOf(cis), objc.RegisterName("removeAllCredentialIdentitiesWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// ReplaceCredentialIdentitiesWithIdentitiesCompletion replaces existing credential identities with new credential identities.
+func (cis *CredentialIdentityStore) ReplaceCredentialIdentitiesWithIdentitiesCompletion(newCredentialIdentities []*PasswordCredentialIdentity, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(cis)
+	objc.Send[objc.ID](objref.IDOf(cis), objc.RegisterName("replaceCredentialIdentitiesWithIdentities:completion:"), purego.SliceToNSArray(newCredentialIdentities, func(_v *PasswordCredentialIdentity) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// ReplaceCredentialIdentityEntriesCompletion replaces existing credential identities with new credential identities.
+func (cis *CredentialIdentityStore) ReplaceCredentialIdentityEntriesCompletion(newCredentialIdentities []obj.Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(cis)
+	objc.Send[objc.ID](objref.IDOf(cis), objc.RegisterName("replaceCredentialIdentityEntries:completion:"), purego.SliceToNSArray(newCredentialIdentities, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
 }

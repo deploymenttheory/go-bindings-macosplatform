@@ -6,6 +6,7 @@ package modelio
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -138,6 +139,20 @@ func (ts *TransformStack) AnimatedValueWithName(name string) *AnimatedValue {
 	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("animatedValueWithName:"), purego.NSString(name))
 	return AnimatedValueFromID(_r)
+}
+
+// Float4x4AtTime wraps the corresponding Objective-C method.
+func (ts *TransformStack) Float4x4AtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(ts)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ts), objc.RegisterName("float4x4AtTime:"), time_)
+	return _r
+}
+
+// Double4x4AtTime wraps the corresponding Objective-C method.
+func (ts *TransformStack) Double4x4AtTime(time_ float64) unsafe.Pointer {
+	defer runtime.KeepAlive(ts)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ts), objc.RegisterName("double4x4AtTime:"), time_)
+	return _r
 }
 
 // Count returns the count.

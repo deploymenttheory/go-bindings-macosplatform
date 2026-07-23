@@ -102,6 +102,20 @@ func (r *Region) ContainsCoordinate(coordinate unsafe.Pointer) bool {
 	return _r
 }
 
+// Center returns the center.
+func (r *Region) Center() unsafe.Pointer {
+	defer runtime.KeepAlive(r)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(r), objc.RegisterName("center"))
+	return _r
+}
+
+// Radius returns the radius.
+func (r *Region) Radius() unsafe.Pointer {
+	defer runtime.KeepAlive(r)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(r), objc.RegisterName("radius"))
+	return _r
+}
+
 // Identifier returns the identifier.
 func (r *Region) Identifier() string {
 	defer runtime.KeepAlive(r)

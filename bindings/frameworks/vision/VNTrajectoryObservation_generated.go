@@ -6,6 +6,7 @@ package vision
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -69,6 +70,13 @@ func (to *TrajectoryObservation) ProjectedPoints() []*Point {
 	defer runtime.KeepAlive(to)
 	_arr := objc.Send[objc.ID](objref.IDOf(to), objc.RegisterName("projectedPoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Point { return PointFromID(_id) })
+}
+
+// EquationCoefficients returns the coefficients of the parabolic equation y = a*x^2 + b*x + c. This equation describes the parabola on which the detected contour is traveling. The equation and the projected points get refined over time of the detected trajectory.
+func (to *TrajectoryObservation) EquationCoefficients() unsafe.Pointer {
+	defer runtime.KeepAlive(to)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(to), objc.RegisterName("equationCoefficients"))
+	return _r
 }
 
 // MovingAverageRadius returns the moving average radius of the object being tracked. This is the radius of the object at each detected point (used to determine the trajectory) averaged.

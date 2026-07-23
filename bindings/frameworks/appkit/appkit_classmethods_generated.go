@@ -1242,6 +1242,24 @@ func HeaderColor() *Color {
 	return ColorFromID(_r)
 }
 
+// SecondarySelectedControlColor returns the background color of selected content or text that is unemphasized. Older alias for +unemphasizedSelectedContentBackgroundColor and +unemphasizedSelectedTextBackgroundColor
+func SecondarySelectedControlColor() unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("NSColor")), objc.RegisterName("secondarySelectedControlColor"))
+	return _r
+}
+
+// AlternateSelectedControlColor returns the background color of selected and emphasized (focused) content: table views rows, collection views, etc. Older alias for +selectedContentBackgroundColor
+func AlternateSelectedControlColor() unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("NSColor")), objc.RegisterName("alternateSelectedControlColor"))
+	return _r
+}
+
+// ControlAlternatingRowBackgroundColors returns the background colors for alternating content items: such as table view rows, collection view items. Older alias for +alternatingContentBackgroundColors
+func ControlAlternatingRowBackgroundColors() unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("NSColor")), objc.RegisterName("controlAlternatingRowBackgroundColors"))
+	return _r
+}
+
 // ColorWithCIColor wraps the corresponding Objective-C method.
 func ColorWithCIColor(color obj.Object) *Color {
 	defer runtime.KeepAlive(color)
@@ -2637,6 +2655,12 @@ func PaletteMenuWithColorsTitlesTemplateImageSelectionHandler(colors []*Color, i
 	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMenu")), objc.RegisterName("paletteMenuWithColors:titles:templateImage:selectionHandler:"), purego.SliceToNSArray(colors, func(_v *Color) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(itemTitles, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(image), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { onSelectionChange(obj.Wrap(_b0)) }))
 	return MenuFromID(_r)
+}
+
+// MenuZone returns the zone from which NSMenu objects should be allocated.
+func MenuZone() unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("NSMenu")), objc.RegisterName("menuZone"))
+	return _r
 }
 
 // SetMenuZone sets the zone from which NSMenu objects should be allocated

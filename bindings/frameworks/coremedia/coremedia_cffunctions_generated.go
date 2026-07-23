@@ -270,6 +270,21 @@ func CMBufferQueueEnqueue(queue obj.Object, buf unsafe.Pointer) error {
 	return nil
 }
 
+var _fnCMBufferQueueInstallTriggerHandlerWithIntegerThreshold func(objc.ID, int32, int, unsafe.Pointer, objc.Block) int32
+
+// CMBufferQueueInstallTriggerHandlerWithIntegerThreshold reports an error if the CoreMedia framework function CMBufferQueueInstallTriggerHandlerWithIntegerThreshold fails.
+func CMBufferQueueInstallTriggerHandlerWithIntegerThreshold(queue obj.Object, condition int32, threshold int, triggerTokenOut unsafe.Pointer, handler func(unsafe.Pointer)) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueInstallTriggerHandlerWithIntegerThreshold == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueInstallTriggerHandlerWithIntegerThreshold, _lib, "CMBufferQueueInstallTriggerHandlerWithIntegerThreshold")
+	}
+	_rc := _fnCMBufferQueueInstallTriggerHandlerWithIntegerThreshold(objref.IDOf(queue), condition, threshold, triggerTokenOut, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { handler(_b0) }))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnCMBufferQueueInstallTriggerWithIntegerThreshold func(objc.ID, unsafe.Pointer, unsafe.Pointer, int32, int, unsafe.Pointer) int32
 
 // CMBufferQueueInstallTriggerWithIntegerThreshold reports an error if the CoreMedia framework function CMBufferQueueInstallTriggerWithIntegerThreshold fails.
@@ -354,6 +369,21 @@ func CMBufferQueueSetValidationCallback(queue obj.Object, callback unsafe.Pointe
 		ebipurego.RegisterLibFunc(&_fnCMBufferQueueSetValidationCallback, _lib, "CMBufferQueueSetValidationCallback")
 	}
 	_rc := _fnCMBufferQueueSetValidationCallback(objref.IDOf(queue), callback, refcon)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMBufferQueueSetValidationHandler func(objc.ID, objc.Block) int32
+
+// CMBufferQueueSetValidationHandler reports an error if the CoreMedia framework function CMBufferQueueSetValidationHandler fails.
+func CMBufferQueueSetValidationHandler(queue obj.Object, handler func(unsafe.Pointer, unsafe.Pointer) int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueSetValidationHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueSetValidationHandler, _lib, "CMBufferQueueSetValidationHandler")
+	}
+	_rc := _fnCMBufferQueueSetValidationHandler(objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) int { return handler(_b0, _b1) }))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -589,6 +619,21 @@ func CMMuxedFormatDescriptionCreate(allocator obj.Object, muxType int, extension
 	return nil
 }
 
+var _fnCMSampleBufferCallBlockForEachSample func(objc.ID, objc.Block) int32
+
+// CMSampleBufferCallBlockForEachSample reports an error if the CoreMedia framework function CMSampleBufferCallBlockForEachSample fails.
+func CMSampleBufferCallBlockForEachSample(sbuf obj.Object, handler func(unsafe.Pointer, int) int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferCallBlockForEachSample == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferCallBlockForEachSample, _lib, "CMSampleBufferCallBlockForEachSample")
+	}
+	_rc := _fnCMSampleBufferCallBlockForEachSample(objref.IDOf(sbuf), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 int) int { return handler(_b0, _b1) }))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnCMSampleBufferCallForEachSample func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSampleBufferCallForEachSample reports an error if the CoreMedia framework function CMSampleBufferCallForEachSample fails.
@@ -718,6 +763,21 @@ func CMSampleBufferSetInvalidateCallback(sbuf obj.Object, invalidateCallback uns
 		ebipurego.RegisterLibFunc(&_fnCMSampleBufferSetInvalidateCallback, _lib, "CMSampleBufferSetInvalidateCallback")
 	}
 	_rc := _fnCMSampleBufferSetInvalidateCallback(objref.IDOf(sbuf), invalidateCallback, invalidateRefCon)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMSampleBufferSetInvalidateHandler func(objc.ID, objc.Block) int32
+
+// CMSampleBufferSetInvalidateHandler reports an error if the CoreMedia framework function CMSampleBufferSetInvalidateHandler fails.
+func CMSampleBufferSetInvalidateHandler(sbuf obj.Object, invalidateHandler func(unsafe.Pointer)) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferSetInvalidateHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferSetInvalidateHandler, _lib, "CMSampleBufferSetInvalidateHandler")
+	}
+	_rc := _fnCMSampleBufferSetInvalidateHandler(objref.IDOf(sbuf), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { invalidateHandler(_b0) }))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

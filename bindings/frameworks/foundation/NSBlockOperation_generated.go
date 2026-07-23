@@ -118,4 +118,11 @@ func (bo *BlockOperation) AddExecutionBlock(ctx context.Context) error {
 	}
 }
 
+// ExecutionBlocks returns the execution blocks.
+func (bo *BlockOperation) ExecutionBlocks() unsafe.Pointer {
+	defer runtime.KeepAlive(bo)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(bo), objc.RegisterName("executionBlocks"))
+	return _r
+}
+
 var _ OperationProvider = (*BlockOperation)(nil)

@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -131,6 +132,13 @@ func (nnr *NENetworkRule) MatchRemoteHostOrNetworkEndpoint() *foundation.Object 
 	return foundation.ObjectFromID(_r)
 }
 
+// MatchRemoteEndpoint returns the remote endpoint that the rule matches.
+func (nnr *NENetworkRule) MatchRemoteEndpoint() unsafe.Pointer {
+	defer runtime.KeepAlive(nnr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(nnr), objc.RegisterName("matchRemoteEndpoint"))
+	return _r
+}
+
 // MatchRemotePrefix returns a number that specifies the remote sub-network that the rule matches. This property is set to NSNotFound for rules where matchRemoteEndpoint does not contain an IP address.
 func (nnr *NENetworkRule) MatchRemotePrefix() int {
 	defer runtime.KeepAlive(nnr)
@@ -143,6 +151,13 @@ func (nnr *NENetworkRule) MatchLocalNetworkEndpoint() *foundation.Object {
 	defer runtime.KeepAlive(nnr)
 	_r := objc.Send[objc.ID](objref.IDOf(nnr), objc.RegisterName("matchLocalNetworkEndpoint"))
 	return foundation.ObjectFromID(_r)
+}
+
+// MatchLocalNetwork returns the local network that the rule matches.
+func (nnr *NENetworkRule) MatchLocalNetwork() unsafe.Pointer {
+	defer runtime.KeepAlive(nnr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(nnr), objc.RegisterName("matchLocalNetwork"))
+	return _r
 }
 
 // MatchLocalPrefix returns a number that specifies the local sub-network that the rule matches. This property is set to NSNotFound for rules with a nil matchLocalNetwork property.

@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -84,4 +85,11 @@ func (sefzs *SyncEngineFailedZoneSave) RecordZone() *RecordZone {
 	defer runtime.KeepAlive(sefzs)
 	_r := objc.Send[objc.ID](objref.IDOf(sefzs), objc.RegisterName("recordZone"))
 	return RecordZoneFromID(_r)
+}
+
+// Error returns a error that describes the reason for the unsuccessful attempt to modify the associated record zone.
+func (sefzs *SyncEngineFailedZoneSave) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(sefzs)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sefzs), objc.RegisterName("error"))
+	return _r
 }

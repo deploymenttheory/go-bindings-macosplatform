@@ -6,6 +6,7 @@ package externalaccessory
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -79,4 +80,32 @@ func NewSessionWithAccessoryForProtocol(accessory *Accessory, protocolString str
 	_alloc := objc.Send[objc.ID](objc.ID(_class("EASession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAccessory:forProtocol:"), objref.IDOf(accessory), purego.NSString(protocolString))
 	return sessionAdopt(_id)
+}
+
+// Accessory returns the accessory.
+func (s *Session) Accessory() unsafe.Pointer {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("accessory"))
+	return _r
+}
+
+// ProtocolString returns the protocol string.
+func (s *Session) ProtocolString() unsafe.Pointer {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("protocolString"))
+	return _r
+}
+
+// InputStream returns the input stream.
+func (s *Session) InputStream() unsafe.Pointer {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("inputStream"))
+	return _r
+}
+
+// OutputStream returns the output stream.
+func (s *Session) OutputStream() unsafe.Pointer {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("outputStream"))
+	return _r
 }

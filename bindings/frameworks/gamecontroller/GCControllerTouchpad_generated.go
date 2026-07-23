@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -51,6 +52,30 @@ func controllerTouchpadAdopt(id objc.ID) *ControllerTouchpad {
 func NewControllerTouchpad() *ControllerTouchpad {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCControllerTouchpad")), objc.RegisterName("new"))
 	return controllerTouchpadAdopt(_id)
+}
+
+// WithTouchDown sets the block that the element calls when the user begins touching the touchpad.
+func (ct *ControllerTouchpad) WithTouchDown(touchDown func(obj.Object, float32, float32, float32, bool)) *ControllerTouchpad {
+	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setTouchDown:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32, _b2 float32, _b3 float32, _b4 bool) {
+		touchDown(obj.Wrap(_b0), _b1, _b2, _b3, _b4)
+	}))
+	return ct
+}
+
+// WithTouchMoved sets the block that the element calls when the user continues touching the touchpad, not when the user begins or ends touching the touchpad.
+func (ct *ControllerTouchpad) WithTouchMoved(touchMoved func(obj.Object, float32, float32, float32, bool)) *ControllerTouchpad {
+	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setTouchMoved:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32, _b2 float32, _b3 float32, _b4 bool) {
+		touchMoved(obj.Wrap(_b0), _b1, _b2, _b3, _b4)
+	}))
+	return ct
+}
+
+// WithTouchUp sets the block that the element calls when the user finishes touching the touchpad.
+func (ct *ControllerTouchpad) WithTouchUp(touchUp func(obj.Object, float32, float32, float32, bool)) *ControllerTouchpad {
+	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setTouchUp:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32, _b2 float32, _b3 float32, _b4 bool) {
+		touchUp(obj.Wrap(_b0), _b1, _b2, _b3, _b4)
+	}))
+	return ct
 }
 
 // WithReportsAbsoluteTouchSurfaceValues sets a Boolean value that determines whether the touch values are absolute or relative.

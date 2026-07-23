@@ -118,6 +118,13 @@ func (vad *VertexAttributeData) Map() *MeshBufferMap {
 	return MeshBufferMapFromID(_r)
 }
 
+// DataStart returns the data start.
+func (vad *VertexAttributeData) DataStart() unsafe.Pointer {
+	defer runtime.KeepAlive(vad)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(vad), objc.RegisterName("dataStart"))
+	return _r
+}
+
 // Stride returns the stride.
 func (vad *VertexAttributeData) Stride() int {
 	defer runtime.KeepAlive(vad)

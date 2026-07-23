@@ -91,6 +91,12 @@ func (a *Action) WithTimingMode(timingMode ActionTimingMode) *Action {
 	return a
 }
 
+// WithTimingFunction sets a block used to customize the timing function.
+func (a *Action) WithTimingFunction(timingFunction func(float32) int) *Action {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setTimingFunction:"), objc.NewBlock(func(_ objc.Block, _b0 float32) int { return timingFunction(_b0) }))
+	return a
+}
+
 // WithSpeed sets a speed factor that modifies how fast an action runs.
 func (a *Action) WithSpeed(speed float64) *Action {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setSpeed:"), speed)

@@ -6,6 +6,7 @@ package corelocation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -79,6 +80,47 @@ func NewGeocoder() *Geocoder {
 	return geocoderAdopt(_id)
 }
 
+// ReverseGeocodeLocationCompletionHandler submits a reverse-geocoding request for the specified location.
+func (g *Geocoder) ReverseGeocodeLocationCompletionHandler(location unsafe.Pointer, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(g)
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("reverseGeocodeLocation:completionHandler:"), location, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+}
+
+// ReverseGeocodeLocationPreferredLocaleCompletionHandler submits a reverse-geocoding request for the specified location and locale.
+func (g *Geocoder) ReverseGeocodeLocationPreferredLocaleCompletionHandler(location unsafe.Pointer, locale obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(locale)
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("reverseGeocodeLocation:preferredLocale:completionHandler:"), location, objref.IDOf(locale), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+}
+
+// GeocodeAddressDictionaryCompletionHandler submits a forward-geocoding request using the specified address dictionary.
+func (g *Geocoder) GeocodeAddressDictionaryCompletionHandler(addressDictionary obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(addressDictionary)
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geocodeAddressDictionary:completionHandler:"), objref.IDOf(addressDictionary), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+}
+
+// GeocodeAddressStringInRegionCompletionHandler submits a forward-geocoding request using the specified string and region information.
+func (g *Geocoder) GeocodeAddressStringInRegionCompletionHandler(addressString string, region *Region, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(region)
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geocodeAddressString:inRegion:completionHandler:"), purego.NSString(addressString), objref.IDOf(region), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+}
+
+// GeocodeAddressStringInRegionPreferredLocaleCompletionHandler submits a forward-geocoding requesting using the specified address string and locale information.
+func (g *Geocoder) GeocodeAddressStringInRegionPreferredLocaleCompletionHandler(addressString string, region *Region, locale obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(region)
+	defer runtime.KeepAlive(locale)
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geocodeAddressString:inRegion:preferredLocale:completionHandler:"), purego.NSString(addressString), objref.IDOf(region), objref.IDOf(locale), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+}
+
+// GeocodeAddressStringCompletionHandler submits a forward-geocoding request using the specified string.
+func (g *Geocoder) GeocodeAddressStringCompletionHandler(addressString string, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(g)
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geocodeAddressString:completionHandler:"), purego.NSString(addressString), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+}
+
 // CancelGeocode cancels a pending geocoding request.
 func (g *Geocoder) CancelGeocode() {
 	defer runtime.KeepAlive(g)
@@ -90,4 +132,19 @@ func (g *Geocoder) IsGeocoding() bool {
 	defer runtime.KeepAlive(g)
 	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("isGeocoding"))
 	return _r
+}
+
+// GeocodePostalAddressCompletionHandler submits a forward-geocoding requesting using the specified Contacts framework information.
+func (g *Geocoder) GeocodePostalAddressCompletionHandler(postalAddress obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(postalAddress)
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geocodePostalAddress:completionHandler:"), objref.IDOf(postalAddress), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+}
+
+// GeocodePostalAddressPreferredLocaleCompletionHandler submits a forward-geocoding requesting using the specified locale and Contacts framework information.
+func (g *Geocoder) GeocodePostalAddressPreferredLocaleCompletionHandler(postalAddress obj.Object, locale obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(postalAddress)
+	defer runtime.KeepAlive(locale)
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geocodePostalAddress:preferredLocale:completionHandler:"), objref.IDOf(postalAddress), objref.IDOf(locale), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 }

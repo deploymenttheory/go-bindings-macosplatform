@@ -7,6 +7,7 @@ package quicklookthumbnailing
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -106,6 +107,15 @@ func (tg *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.C
 		var _zero *ThumbnailRepresentation
 		return _zero, ctx.Err()
 	}
+}
+
+// GenerateRepresentationsForRequestUpdateHandler generates various thumbnail representations for a file and calls the update handler for each thumbnail representation.
+func (tg *ThumbnailGenerator) GenerateRepresentationsForRequestUpdateHandler(request *ThumbnailGenerationRequest, updateHandler func(obj.Object, ThumbnailRepresentationType, unsafe.Pointer)) {
+	defer runtime.KeepAlive(tg)
+	defer runtime.KeepAlive(request)
+	objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("generateRepresentationsForRequest:updateHandler:"), objref.IDOf(request), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 ThumbnailRepresentationType, _b2 unsafe.Pointer) {
+		updateHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
 }
 
 // CancelRequest cancels the generation of a thumbnail for a given request.

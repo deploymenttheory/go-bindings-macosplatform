@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -58,6 +59,20 @@ func NewMTRBaseClusterBooleanStateConfigurationWithDeviceEndpointIDQueue(device 
 	return mTRBaseClusterBooleanStateConfigurationAdopt(_id)
 }
 
+// SuppressAlarmWithParamsCompletion command SuppressAlarm This command is used to suppress the specified alarm mode.
+func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SuppressAlarmWithParamsCompletion(params *MTRBooleanStateConfigurationClusterSuppressAlarmParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbsc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("suppressAlarmWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnableDisableAlarmWithParamsCompletion command EnableDisableAlarm This command is used to enable or disable the specified alarm mode.
+func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) EnableDisableAlarmWithParamsCompletion(params *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbsc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("enableDisableAlarmWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeCurrentSensitivityLevelWithCompletion reads attribute current sensitivity level with completion.
 //
 // ReadAttributeCurrentSensitivityLevelWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -84,6 +99,21 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) ReadAttributeCurrentSensi
 	}
 }
 
+// WriteAttributeCurrentSensitivityLevelWithValueCompletion writes attribute current sensitivity level with value completion.
+func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) WriteAttributeCurrentSensitivityLevelWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbsc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("writeAttributeCurrentSensitivityLevelWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeCurrentSensitivityLevelWithValueParamsCompletion writes attribute current sensitivity level with value params completion.
+func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) WriteAttributeCurrentSensitivityLevelWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbsc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("writeAttributeCurrentSensitivityLevelWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeCurrentSensitivityLevelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentSensitivityLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -101,7 +131,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeCurrent
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeCurrentSensitivityLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeCurrentSensitivityLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -154,7 +184,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeSupport
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeSupportedSensitivityLevelsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeSupportedSensitivityLevelsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -207,7 +237,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeDefault
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeDefaultSensitivityLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeDefaultSensitivityLevelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -260,7 +290,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeAlarmsA
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeAlarmsActiveWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeAlarmsActiveWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -313,7 +343,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeAlarmsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeAlarmsSuppressedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeAlarmsSuppressedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -366,7 +396,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeAlarmsE
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeAlarmsEnabledWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeAlarmsEnabledWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -419,7 +449,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeAlarmsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeAlarmsSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeAlarmsSupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -472,7 +502,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeSensorF
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeSensorFaultWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeSensorFaultWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -525,7 +555,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeGenerat
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -578,7 +608,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeAccepte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -631,7 +661,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeAttribu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -684,7 +714,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeFeature
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -737,7 +767,7 @@ func (mbcbsc *MTRBaseClusterBooleanStateConfiguration) SubscribeAttributeCluster
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbsc), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

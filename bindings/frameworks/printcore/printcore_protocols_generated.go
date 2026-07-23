@@ -5,6 +5,8 @@
 package printcore
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
@@ -23,7 +25,7 @@ type PDEPanel interface {
 
 // PDEPlugIn is the Go form of the Objective-C protocol PDEPlugIn.
 type PDEPlugIn interface {
-	InitWithBundle(theBundle obj.Object) obj.Object
+	InitWithBundle(theBundle obj.Object) unsafe.Pointer
 	PDEPanelsForTypeWithHostInfo(pdeType string, host obj.Object) []obj.Object
 }
 
@@ -33,6 +35,6 @@ type PDEPlugInCallbackProtocol interface {
 	PrintSettings() obj.Object
 	PageFormat() obj.Object
 	PMPrinter() obj.Object
-	PpdFile() obj.Object
+	PpdFile() unsafe.Pointer
 	WillChangePPDOptionKeyValuePpdChoice(option string, choice string) bool
 }

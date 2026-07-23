@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -67,6 +68,72 @@ func NewMTRBaseClusterOnOffWithDeviceEndpointQueue(device *MTRBaseDevice, endpoi
 	return mTRBaseClusterOnOffAdopt(_id)
 }
 
+// OffWithParamsCompletion command Off On receipt of this command, a device SHALL enter its ‘Off’ state. This state is device dependent, but it is recommended that it is used for power off or similar functions. On receipt of the Off command, the OnTime attribute SHALL be set to 0.
+func (mbcoo *MTRBaseClusterOnOff) OffWithParamsCompletion(params *MTROnOffClusterOffParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("offWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// OffWithCompletion wraps the corresponding Objective-C method.
+func (mbcoo *MTRBaseClusterOnOff) OffWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("offWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// OnWithParamsCompletion command On On receipt of this command, a device SHALL enter its ‘On’ state. This state is device dependent, but it is recommended that it is used for power on or similar functions. On receipt of the On command, if the value of the OnTime attribute is equal to 0, the device SHALL set the OffWaitTime attribute to 0.
+func (mbcoo *MTRBaseClusterOnOff) OnWithParamsCompletion(params *MTROnOffClusterOnParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("onWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// OnWithCompletion wraps the corresponding Objective-C method.
+func (mbcoo *MTRBaseClusterOnOff) OnWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("onWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ToggleWithParamsCompletion command Toggle On receipt of this command, if a device is in its ‘Off’ state it SHALL enter its ‘On’ state. Otherwise, if it is in its ‘On’ state it SHALL enter its ‘Off’ state. On receipt of the Toggle command, if the value of the OnOff attribute is equal to FALSE and if the value of the OnTime attribute is equal to 0, the device SHALL set the OffWaitTime attribute to 0. If the value of the OnOff attribute is equal to TRUE, the OnTime attribute SHALL be set to 0.
+func (mbcoo *MTRBaseClusterOnOff) ToggleWithParamsCompletion(params *MTROnOffClusterToggleParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("toggleWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ToggleWithCompletion toggles with completion.
+func (mbcoo *MTRBaseClusterOnOff) ToggleWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("toggleWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// OffWithEffectWithParamsCompletion command OffWithEffect The OffWithEffect command allows devices to be turned off using enhanced ways of fading.
+func (mbcoo *MTRBaseClusterOnOff) OffWithEffectWithParamsCompletion(params *MTROnOffClusterOffWithEffectParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("offWithEffectWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// OnWithRecallGlobalSceneWithParamsCompletion command OnWithRecallGlobalScene This command allows the recall of the settings when the device was turned off.
+func (mbcoo *MTRBaseClusterOnOff) OnWithRecallGlobalSceneWithParamsCompletion(params *MTROnOffClusterOnWithRecallGlobalSceneParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("onWithRecallGlobalSceneWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// OnWithRecallGlobalSceneWithCompletion wraps the corresponding Objective-C method.
+func (mbcoo *MTRBaseClusterOnOff) OnWithRecallGlobalSceneWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("onWithRecallGlobalSceneWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// OnWithTimedOffWithParamsCompletion command OnWithTimedOff This command allows devices to be turned on for a specific duration with a guarded off duration so that SHOULD the device be subsequently turned off, further OnWithTimedOff commands, received during this time, are prevented from turning the devices back on.
+func (mbcoo *MTRBaseClusterOnOff) OnWithTimedOffWithParamsCompletion(params *MTROnOffClusterOnWithTimedOffParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("onWithTimedOffWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeOnOffWithCompletion reads attribute on off with completion.
 //
 // ReadAttributeOnOffWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -110,7 +177,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeOnOffWithParamsSubscriptionE
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeOnOffWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeOnOffWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +230,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeGlobalSceneControlWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeGlobalSceneControlWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeGlobalSceneControlWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -199,6 +266,21 @@ func (mbcoo *MTRBaseClusterOnOff) ReadAttributeOnTimeWithCompletion(ctx context.
 	}
 }
 
+// WriteAttributeOnTimeWithValueCompletion writes attribute on time with value completion.
+func (mbcoo *MTRBaseClusterOnOff) WriteAttributeOnTimeWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("writeAttributeOnTimeWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeOnTimeWithValueParamsCompletion writes attribute on time with value params completion.
+func (mbcoo *MTRBaseClusterOnOff) WriteAttributeOnTimeWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("writeAttributeOnTimeWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeOnTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOnTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -216,7 +298,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeOnTimeWithParamsSubscription
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeOnTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeOnTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -252,6 +334,21 @@ func (mbcoo *MTRBaseClusterOnOff) ReadAttributeOffWaitTimeWithCompletion(ctx con
 	}
 }
 
+// WriteAttributeOffWaitTimeWithValueCompletion writes attribute off wait time with value completion.
+func (mbcoo *MTRBaseClusterOnOff) WriteAttributeOffWaitTimeWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("writeAttributeOffWaitTimeWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeOffWaitTimeWithValueParamsCompletion writes attribute off wait time with value params completion.
+func (mbcoo *MTRBaseClusterOnOff) WriteAttributeOffWaitTimeWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("writeAttributeOffWaitTimeWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeOffWaitTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOffWaitTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -269,7 +366,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeOffWaitTimeWithParamsSubscri
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeOffWaitTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeOffWaitTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -305,6 +402,21 @@ func (mbcoo *MTRBaseClusterOnOff) ReadAttributeStartUpOnOffWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeStartUpOnOffWithValueCompletion writes attribute start up on off with value completion.
+func (mbcoo *MTRBaseClusterOnOff) WriteAttributeStartUpOnOffWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("writeAttributeStartUpOnOffWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeStartUpOnOffWithValueParamsCompletion writes attribute start up on off with value params completion.
+func (mbcoo *MTRBaseClusterOnOff) WriteAttributeStartUpOnOffWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("writeAttributeStartUpOnOffWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeStartUpOnOffWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeStartUpOnOffWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -322,7 +434,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeStartUpOnOffWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeStartUpOnOffWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeStartUpOnOffWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -375,7 +487,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeGeneratedCommandListWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -428,7 +540,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeAcceptedCommandListWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +593,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeAttributeListWithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -534,7 +646,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeFeatureMapWithParamsSubscrip
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -587,7 +699,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeClusterRevisionWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -595,6 +707,72 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeClusterRevisionWithParamsSub
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// OffWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcoo *MTRBaseClusterOnOff) OffWithParamsCompletionHandler(params *MTROnOffClusterOffParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("offWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// OffWithCompletionHandler wraps the corresponding Objective-C method.
+func (mbcoo *MTRBaseClusterOnOff) OffWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("offWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// OnWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcoo *MTRBaseClusterOnOff) OnWithParamsCompletionHandler(params *MTROnOffClusterOnParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("onWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// OnWithCompletionHandler wraps the corresponding Objective-C method.
+func (mbcoo *MTRBaseClusterOnOff) OnWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("onWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// ToggleWithParamsCompletionHandler toggles with params completion handler.
+func (mbcoo *MTRBaseClusterOnOff) ToggleWithParamsCompletionHandler(params *MTROnOffClusterToggleParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("toggleWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// ToggleWithCompletionHandler toggles with completion handler.
+func (mbcoo *MTRBaseClusterOnOff) ToggleWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("toggleWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// OffWithEffectWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcoo *MTRBaseClusterOnOff) OffWithEffectWithParamsCompletionHandler(params *MTROnOffClusterOffWithEffectParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("offWithEffectWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// OnWithRecallGlobalSceneWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcoo *MTRBaseClusterOnOff) OnWithRecallGlobalSceneWithParamsCompletionHandler(params *MTROnOffClusterOnWithRecallGlobalSceneParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("onWithRecallGlobalSceneWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// OnWithRecallGlobalSceneWithCompletionHandler wraps the corresponding Objective-C method.
+func (mbcoo *MTRBaseClusterOnOff) OnWithRecallGlobalSceneWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("onWithRecallGlobalSceneWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// OnWithTimedOffWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcoo *MTRBaseClusterOnOff) OnWithTimedOffWithParamsCompletionHandler(params *MTROnOffClusterOnWithTimedOffParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("onWithTimedOffWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // ReadAttributeOnOff reads attribute on off.
@@ -642,7 +820,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeOnOffWithMinIntervalMaxInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeOnOffWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeOnOffWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -697,7 +875,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeGlobalSceneControlWithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeGlobalSceneControlWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeGlobalSceneControlWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -733,6 +911,21 @@ func (mbcoo *MTRBaseClusterOnOff) ReadAttributeOnTime(ctx context.Context) (resu
 	}
 }
 
+// WriteAttributeOnTimeWithValueCompletionHandler writes attribute on time with value completion handler.
+func (mbcoo *MTRBaseClusterOnOff) WriteAttributeOnTimeWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("writeAttributeOnTimeWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeOnTimeWithValueParamsCompletionHandler writes attribute on time with value params completion handler.
+func (mbcoo *MTRBaseClusterOnOff) WriteAttributeOnTimeWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("writeAttributeOnTimeWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeOnTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOnTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -752,7 +945,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeOnTimeWithMinIntervalMaxInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeOnTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeOnTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -788,6 +981,21 @@ func (mbcoo *MTRBaseClusterOnOff) ReadAttributeOffWaitTime(ctx context.Context) 
 	}
 }
 
+// WriteAttributeOffWaitTimeWithValueCompletionHandler writes attribute off wait time with value completion handler.
+func (mbcoo *MTRBaseClusterOnOff) WriteAttributeOffWaitTimeWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("writeAttributeOffWaitTimeWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeOffWaitTimeWithValueParamsCompletionHandler writes attribute off wait time with value params completion handler.
+func (mbcoo *MTRBaseClusterOnOff) WriteAttributeOffWaitTimeWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("writeAttributeOffWaitTimeWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeOffWaitTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOffWaitTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -807,7 +1015,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeOffWaitTimeWithMinIntervalMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeOffWaitTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeOffWaitTimeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -843,6 +1051,21 @@ func (mbcoo *MTRBaseClusterOnOff) ReadAttributeStartUpOnOff(ctx context.Context)
 	}
 }
 
+// WriteAttributeStartUpOnOffWithValueCompletionHandler writes attribute start up on off with value completion handler.
+func (mbcoo *MTRBaseClusterOnOff) WriteAttributeStartUpOnOffWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("writeAttributeStartUpOnOffWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeStartUpOnOffWithValueParamsCompletionHandler writes attribute start up on off with value params completion handler.
+func (mbcoo *MTRBaseClusterOnOff) WriteAttributeStartUpOnOffWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcoo)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("writeAttributeStartUpOnOffWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeStartUpOnOffWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeStartUpOnOffWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -862,7 +1085,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeStartUpOnOffWithMinIntervalM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeStartUpOnOffWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeStartUpOnOffWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -917,7 +1140,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeGeneratedCommandListWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -972,7 +1195,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeAcceptedCommandListWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1027,7 +1250,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeAttributeListWithMinInterval
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1082,7 +1305,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeFeatureMapWithMinIntervalMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1137,7 +1360,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeClusterRevisionWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoo), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

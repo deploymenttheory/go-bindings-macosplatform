@@ -187,3 +187,10 @@ func AvailableTagSchemesForUnitLanguage(unit TokenUnit, language obj.Object) []*
 	_r := objc.Send[objc.ID](objc.ID(_class("NLTagger")), objc.RegisterName("availableTagSchemesForUnit:language:"), unit, objref.IDOf(language))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 }
+
+// RequestAssetsForLanguageTagSchemeCompletionHandler asks the Natural Language framework to load any missing assets for a tag scheme onto the device for the given language.
+func RequestAssetsForLanguageTagSchemeCompletionHandler(language obj.Object, tagScheme obj.Object, completionHandler func(TaggerAssetsResult, unsafe.Pointer)) {
+	defer runtime.KeepAlive(language)
+	defer runtime.KeepAlive(tagScheme)
+	objc.Send[objc.ID](objc.ID(_class("NLTagger")), objc.RegisterName("requestAssetsForLanguage:tagScheme:completionHandler:"), objref.IDOf(language), objref.IDOf(tagScheme), objc.NewBlock(func(_ objc.Block, _b0 TaggerAssetsResult, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}

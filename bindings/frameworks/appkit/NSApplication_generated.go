@@ -1260,6 +1260,22 @@ func (a *Application) OrderedWindows() []*Window {
 	return _mainthread0
 }
 
+// RestoreWindowWithIdentifierStateCompletionHandler wraps the corresponding Objective-C method.
+func (a *Application) RestoreWindowWithIdentifierStateCompletionHandler(identifier obj.Object, state obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(identifier)
+	defer runtime.KeepAlive(state)
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("restoreWindowWithIdentifier:state:completionHandler:"), objref.IDOf(identifier), objref.IDOf(state), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // ExtendStateRestoration wraps the corresponding Objective-C method.
 func (a *Application) ExtendStateRestoration() {
 	defer runtime.KeepAlive(a)

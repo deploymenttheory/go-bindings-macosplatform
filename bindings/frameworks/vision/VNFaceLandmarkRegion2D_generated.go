@@ -6,6 +6,7 @@ package vision
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -52,6 +53,13 @@ func faceLandmarkRegion2DAdopt(id objc.ID) *FaceLandmarkRegion2D {
 func NewFaceLandmarkRegion2D() *FaceLandmarkRegion2D {
 	_id := objc.Send[objc.ID](objc.ID(_class("VNFaceLandmarkRegion2D")), objc.RegisterName("new"))
 	return faceLandmarkRegion2DAdopt(_id)
+}
+
+// NormalizedPoints returns obtains the array of normalized landmark points. Provides the address of a buffer containing the array of CGPoints representing the landmark points.  This buffer is owned by the target object and is guaranteed to exist as long as the VNFaceLandmarkRegion2D does.
+func (flrd *FaceLandmarkRegion2D) NormalizedPoints() unsafe.Pointer {
+	defer runtime.KeepAlive(flrd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(flrd), objc.RegisterName("normalizedPoints"))
+	return _r
 }
 
 // PrecisionEstimatesPerPoint returns obtains the array of accuracy placement estimates per landmark point. Provides the NSArray object containing landmarks accuracy placement estimates per landmark point. This property is only populated when VNDetectFaceLandmarksRequest object is configured with VNRequestFaceLandmarksConstellation76Points. It is set to nil for other constellations

@@ -66,6 +66,22 @@ func (napuf *NEAppProxyUDPFlow) WithNetworkInterface(networkInterface obj.Object
 	return napuf
 }
 
+// ReadDatagramsAndFlowEndpointsWithCompletionHandler read datagrams from the flow.
+func (napuf *NEAppProxyUDPFlow) ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(napuf)
+	objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("readDatagramsAndFlowEndpointsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+}
+
+// ReadDatagramsWithCompletionHandler read datagrams from the flow.
+func (napuf *NEAppProxyUDPFlow) ReadDatagramsWithCompletionHandler(completionHandler func(obj.Object, obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(napuf)
+	objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("readDatagramsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+}
+
 // WriteDatagramsSentByFlowEndpoints write datagrams to the flow.
 //
 // WriteDatagramsSentByFlowEndpoints blocks until the operation completes or ctx is cancelled.
@@ -111,6 +127,13 @@ func (napuf *NEAppProxyUDPFlow) LocalFlowEndpoint() *foundation.Object {
 	defer runtime.KeepAlive(napuf)
 	_r := objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("localFlowEndpoint"))
 	return foundation.ObjectFromID(_r)
+}
+
+// LocalEndpoint returns an NWEndpoint object containing the local endpoint of the flow's corresponding socket.
+func (napuf *NEAppProxyUDPFlow) LocalEndpoint() unsafe.Pointer {
+	defer runtime.KeepAlive(napuf)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(napuf), objc.RegisterName("localEndpoint"))
+	return _r
 }
 
 var _ NEAppProxyFlowProvider = (*NEAppProxyUDPFlow)(nil)

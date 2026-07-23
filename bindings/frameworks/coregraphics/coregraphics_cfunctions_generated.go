@@ -5369,15 +5369,15 @@ func CGOpenGLDisplayMaskToDisplayID(mask uint32) uint32 {
 	return _fnCGOpenGLDisplayMaskToDisplayID(mask)
 }
 
-var _fnCGPDFArrayApplyBlock func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+var _fnCGPDFArrayApplyBlock func(objc.ID, objc.Block, unsafe.Pointer)
 
 // CGPDFArrayApplyBlock calls the CoreGraphics framework function CGPDFArrayApplyBlock.
-func CGPDFArrayApplyBlock(array obj.Object, block unsafe.Pointer, info unsafe.Pointer) {
+func CGPDFArrayApplyBlock(array obj.Object, block func(int, unsafe.Pointer, unsafe.Pointer) bool, info unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFArrayApplyBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFArrayApplyBlock, _lib, "CGPDFArrayApplyBlock")
 	}
-	_fnCGPDFArrayApplyBlock(objref.IDOf(array), block, info)
+	_fnCGPDFArrayApplyBlock(objref.IDOf(array), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 unsafe.Pointer, _b2 unsafe.Pointer) bool { return block(_b0, _b1, _b2) }), info)
 }
 
 var _fnCGPDFArrayGetArray func(objc.ID, int, unsafe.Pointer) bool
@@ -5745,15 +5745,17 @@ func CGPDFContextSetURLForRect(context_ obj.Object, url obj.Object, rect corefou
 	_fnCGPDFContextSetURLForRect(objref.IDOf(context_), objref.IDOf(url), rect)
 }
 
-var _fnCGPDFDictionaryApplyBlock func(objc.ID, unsafe.Pointer, unsafe.Pointer)
+var _fnCGPDFDictionaryApplyBlock func(objc.ID, objc.Block, unsafe.Pointer)
 
 // CGPDFDictionaryApplyBlock calls the CoreGraphics framework function CGPDFDictionaryApplyBlock.
-func CGPDFDictionaryApplyBlock(dict obj.Object, block unsafe.Pointer, info unsafe.Pointer) {
+func CGPDFDictionaryApplyBlock(dict obj.Object, block func(string, unsafe.Pointer, unsafe.Pointer) bool, info unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFDictionaryApplyBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFDictionaryApplyBlock, _lib, "CGPDFDictionaryApplyBlock")
 	}
-	_fnCGPDFDictionaryApplyBlock(objref.IDOf(dict), block, info)
+	_fnCGPDFDictionaryApplyBlock(objref.IDOf(dict), objc.NewBlock(func(_ objc.Block, _b0 string, _b1 unsafe.Pointer, _b2 unsafe.Pointer) bool {
+		return block(_b0, _b1, _b2)
+	}), info)
 }
 
 var _fnCGPDFDictionaryApplyFunction func(objc.ID, unsafe.Pointer, unsafe.Pointer)
@@ -7654,15 +7656,15 @@ func CGRenderingBufferLockBytePtr(provider obj.Object) unsafe.Pointer {
 	return _fnCGRenderingBufferLockBytePtr(objref.IDOf(provider))
 }
 
-var _fnCGRenderingBufferProviderCreate func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
+var _fnCGRenderingBufferProviderCreate func(unsafe.Pointer, int, unsafe.Pointer, objc.Block, objc.Block) objc.ID
 
 // CGRenderingBufferProviderCreate calls the CoreGraphics framework function CGRenderingBufferProviderCreate.
-func CGRenderingBufferProviderCreate(info unsafe.Pointer, size int, lockPointer unsafe.Pointer, unlockPointer unsafe.Pointer, releaseInfo unsafe.Pointer) obj.Object {
+func CGRenderingBufferProviderCreate(info unsafe.Pointer, size int, lockPointer unsafe.Pointer, unlockPointer func(unsafe.Pointer, unsafe.Pointer), releaseInfo func(unsafe.Pointer)) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGRenderingBufferProviderCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGRenderingBufferProviderCreate, _lib, "CGRenderingBufferProviderCreate")
 	}
-	_ret := _fnCGRenderingBufferProviderCreate(info, size, lockPointer, unlockPointer, releaseInfo)
+	_ret := _fnCGRenderingBufferProviderCreate(info, size, lockPointer, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { unlockPointer(_b0, _b1) }), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { releaseInfo(_b0) }))
 	return obj.Wrap(_ret)
 }
 

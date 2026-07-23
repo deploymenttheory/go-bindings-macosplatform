@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -60,6 +61,20 @@ func NewMTRBaseClusterTimeSynchronizationWithDeviceEndpointIDQueue(device *MTRBa
 	return mTRBaseClusterTimeSynchronizationAdopt(_id)
 }
 
+// SetUTCTimeWithParamsCompletion command SetUTCTime
+func (mbcts *MTRBaseClusterTimeSynchronization) SetUTCTimeWithParamsCompletion(params *MTRTimeSynchronizationClusterSetUTCTimeParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcts)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("setUTCTimeWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetTrustedTimeSourceWithParamsCompletion command SetTrustedTimeSource
+func (mbcts *MTRBaseClusterTimeSynchronization) SetTrustedTimeSourceWithParamsCompletion(params *MTRTimeSynchronizationClusterSetTrustedTimeSourceParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcts)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("setTrustedTimeSourceWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SetTimeZoneWithParamsCompletion command SetTimeZone
 //
 // SetTimeZoneWithParamsCompletion blocks until the operation completes or ctx is cancelled.
@@ -85,6 +100,20 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SetTimeZoneWithParamsCompletion(
 		var _zero *MTRTimeSynchronizationClusterSetTimeZoneResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// SetDSTOffsetWithParamsCompletion command SetDSTOffset
+func (mbcts *MTRBaseClusterTimeSynchronization) SetDSTOffsetWithParamsCompletion(params *MTRTimeSynchronizationClusterSetDSTOffsetParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcts)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("setDSTOffsetWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetDefaultNTPWithParamsCompletion command SetDefaultNTP
+func (mbcts *MTRBaseClusterTimeSynchronization) SetDefaultNTPWithParamsCompletion(params *MTRTimeSynchronizationClusterSetDefaultNTPParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcts)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("setDefaultNTPWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeUTCTimeWithCompletion reads attribute utc time with completion.
@@ -130,7 +159,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeUTCTimeWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeUTCTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeUTCTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -183,7 +212,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeGranularityWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeGranularityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeGranularityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -236,7 +265,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeSourceWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTimeSourceWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTimeSourceWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -289,7 +318,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTrustedTimeSou
 		_o.val = MTRTimeSynchronizationClusterTrustedTimeSourceStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTrustedTimeSourceWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTrustedTimeSourceWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -342,7 +371,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeDefaultNTPWith
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeDefaultNTPWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeDefaultNTPWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -395,7 +424,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTimeZoneWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTimeZoneWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -448,7 +477,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeDSTOffsetWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeDSTOffsetWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeDSTOffsetWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -501,7 +530,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeLocalTimeWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeLocalTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeLocalTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -554,7 +583,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneDataba
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTimeZoneDatabaseWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTimeZoneDatabaseWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -607,7 +636,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeNTPServerAvail
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeNTPServerAvailableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeNTPServerAvailableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -660,7 +689,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneListMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTimeZoneListMaxSizeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTimeZoneListMaxSizeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -713,7 +742,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeDSTOffsetListM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeDSTOffsetListMaxSizeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeDSTOffsetListMaxSizeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -766,7 +795,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeSupportsDNSRes
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeSupportsDNSResolveWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeSupportsDNSResolveWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -819,7 +848,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeGeneratedComma
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -872,7 +901,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeAcceptedComman
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -925,7 +954,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeAttributeListW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -978,7 +1007,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeFeatureMapWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1031,7 +1060,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeClusterRevisio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

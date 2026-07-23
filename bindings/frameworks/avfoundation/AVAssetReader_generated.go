@@ -136,6 +136,13 @@ func (ar *AssetReader) Status() AssetReaderStatus {
 	return _r
 }
 
+// Error returns if the receiver's status is AVAssetReaderStatusFailed, this describes the error that caused the failure. The value of this property is an NSError that describes what caused the receiver to no longer be able to read its asset. If the receiver's status is not AVAssetReaderStatusFailed, the value of this property is nil. This property is thread safe.
+func (ar *AssetReader) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(ar)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ar), objc.RegisterName("error"))
+	return _r
+}
+
 // TimeRange specifies a range of time that may limit the temporal portion of the receiver's asset from which media data will be read. The intersection of the value of timeRange and CMTimeRangeMake(kCMTimeZero, asset.duration) will determine the time range of the asset from which media data will be read. The default value of timeRange is CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity). This property throws an exception if a value is set after reading has started.
 func (ar *AssetReader) TimeRange() coremedia.CMTimeRange {
 	defer runtime.KeepAlive(ar)

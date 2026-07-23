@@ -141,3 +141,10 @@ func (gc *GarbageCollector) EnableCollectorForPointer(ptr unsafe.Pointer) {
 	defer runtime.KeepAlive(gc)
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("enableCollectorForPointer:"), ptr)
 }
+
+// Zone returns a zone of unscanned memory.
+func (gc *GarbageCollector) Zone() unsafe.Pointer {
+	defer runtime.KeepAlive(gc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(gc), objc.RegisterName("zone"))
+	return _r
+}

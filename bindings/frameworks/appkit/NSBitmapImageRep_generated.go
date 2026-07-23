@@ -235,6 +235,13 @@ func (bir *BitmapImageRep) BitmapImageRepByRetagging(newSpace *ColorSpace) *Bitm
 	return BitmapImageRepFromID(_r)
 }
 
+// BitmapData returns the bitmap data.
+func (bir *BitmapImageRep) BitmapData() unsafe.Pointer {
+	defer runtime.KeepAlive(bir)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(bir), objc.RegisterName("bitmapData"))
+	return _r
+}
+
 // IsPlanar reports whether the object is planar.
 func (bir *BitmapImageRep) IsPlanar() bool {
 	defer runtime.KeepAlive(bir)

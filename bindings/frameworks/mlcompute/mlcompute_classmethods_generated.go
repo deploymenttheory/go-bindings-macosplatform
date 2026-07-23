@@ -1095,6 +1095,12 @@ func DataWithImmutableBytesNoCopyLength(data unsafe.Pointer, length int) *Tensor
 	return TensorDataFromID(_r)
 }
 
+// DataWithBytesNoCopyLengthDeallocator creates a tensor data instance with a data buffer, byte length, and custom deallocator closure you specify.
+func DataWithBytesNoCopyLengthDeallocator(data unsafe.Pointer, length int, deallocator func(unsafe.Pointer, int)) *TensorData {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorData")), objc.RegisterName("dataWithBytesNoCopy:length:deallocator:"), data, length, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 int) { deallocator(_b0, _b1) }))
+	return TensorDataFromID(_r)
+}
+
 // DescriptorWithShapeDataType creates a tensor descriptor with the shape and data type you specify.
 func DescriptorWithShapeDataType(shape []*foundation.Number, dataType DataType) *TensorDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("descriptorWithShape:dataType:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), dataType)

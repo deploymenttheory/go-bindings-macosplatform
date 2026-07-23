@@ -58,6 +58,33 @@ func (e AuthorizationAppleIDButtonType) String() string {
 	}
 }
 
+// Possible values for the credential state of a user.
+type AuthorizationAppleIDProviderCredentialState int64
+
+const (
+	AuthorizationAppleIDProviderCredentialRevoked     AuthorizationAppleIDProviderCredentialState = 0
+	AuthorizationAppleIDProviderCredentialAuthorized  AuthorizationAppleIDProviderCredentialState = 1
+	AuthorizationAppleIDProviderCredentialNotFound    AuthorizationAppleIDProviderCredentialState = 2
+	AuthorizationAppleIDProviderCredentialTransferred AuthorizationAppleIDProviderCredentialState = 3
+)
+
+// String returns the AuthorizationAppleIDProviderCredentialState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AuthorizationAppleIDProviderCredentialState) String() string {
+	switch e {
+	case AuthorizationAppleIDProviderCredentialRevoked:
+		return "AuthorizationAppleIDProviderCredentialRevoked"
+	case AuthorizationAppleIDProviderCredentialAuthorized:
+		return "AuthorizationAppleIDProviderCredentialAuthorized"
+	case AuthorizationAppleIDProviderCredentialNotFound:
+		return "AuthorizationAppleIDProviderCredentialNotFound"
+	case AuthorizationAppleIDProviderCredentialTransferred:
+		return "AuthorizationAppleIDProviderCredentialTransferred"
+	default:
+		return fmt.Sprintf("AuthorizationAppleIDProviderCredentialState(%d)", int64(e))
+	}
+}
+
 // Options that modify how a controller performs authorization requests.
 // Bitmask — values may be combined with |.
 type AuthorizationControllerRequestOptions uint64
@@ -445,33 +472,6 @@ func (e UserDetectionStatus) String() string {
 		return "UserDetectionStatusLikelyReal"
 	default:
 		return fmt.Sprintf("UserDetectionStatus(%d)", int64(e))
-	}
-}
-
-// Possible values for the credential state of a user.
-type AuthorizationAppleIDProviderCredentialState int64
-
-const (
-	AuthorizationAppleIDProviderCredentialRevoked     AuthorizationAppleIDProviderCredentialState = 0
-	AuthorizationAppleIDProviderCredentialAuthorized  AuthorizationAppleIDProviderCredentialState = 1
-	AuthorizationAppleIDProviderCredentialNotFound    AuthorizationAppleIDProviderCredentialState = 2
-	AuthorizationAppleIDProviderCredentialTransferred AuthorizationAppleIDProviderCredentialState = 3
-)
-
-// String returns the AuthorizationAppleIDProviderCredentialState constant's name, or its numeric form when the
-// value is not a known constant.
-func (e AuthorizationAppleIDProviderCredentialState) String() string {
-	switch e {
-	case AuthorizationAppleIDProviderCredentialRevoked:
-		return "AuthorizationAppleIDProviderCredentialRevoked"
-	case AuthorizationAppleIDProviderCredentialAuthorized:
-		return "AuthorizationAppleIDProviderCredentialAuthorized"
-	case AuthorizationAppleIDProviderCredentialNotFound:
-		return "AuthorizationAppleIDProviderCredentialNotFound"
-	case AuthorizationAppleIDProviderCredentialTransferred:
-		return "AuthorizationAppleIDProviderCredentialTransferred"
-	default:
-		return fmt.Sprintf("AuthorizationAppleIDProviderCredentialState(%d)", int64(e))
 	}
 }
 

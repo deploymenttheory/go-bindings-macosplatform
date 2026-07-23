@@ -7,7 +7,9 @@ package healthkit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -111,6 +113,14 @@ func (as *AttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataComple
 	}
 }
 
+// RemoveAttachmentFromObjectCompletion removes the specified attachment.
+func (as *AttachmentStore) RemoveAttachmentFromObjectCompletion(attachment *Attachment, object *Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(attachment)
+	defer runtime.KeepAlive(object)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("removeAttachment:fromObject:completion:"), objref.IDOf(attachment), objref.IDOf(object), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
 // GetAttachmentsForObjectCompletion returns all the attachments for the specified object.
 //
 // GetAttachmentsForObjectCompletion blocks until the operation completes or ctx is cancelled.
@@ -136,4 +146,20 @@ func (as *AttachmentStore) GetAttachmentsForObjectCompletion(ctx context.Context
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// GetDataForAttachmentCompletion returns an attachment’s data.
+func (as *AttachmentStore) GetDataForAttachmentCompletion(attachment *Attachment, completion func(obj.Object, unsafe.Pointer)) *foundation.Progress {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(attachment)
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("getDataForAttachment:completion:"), objref.IDOf(attachment), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+	return foundation.ProgressFromID(_r)
+}
+
+// StreamDataForAttachmentDataHandler asynchronously returns the attachment’s data.
+func (as *AttachmentStore) StreamDataForAttachmentDataHandler(attachment *Attachment, dataHandler func(obj.Object, unsafe.Pointer, bool)) *foundation.Progress {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(attachment)
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("streamDataForAttachment:dataHandler:"), objref.IDOf(attachment), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer, _b2 bool) { dataHandler(obj.Wrap(_b0), _b1, _b2) }))
+	return foundation.ProgressFromID(_r)
 }

@@ -6,6 +6,7 @@ package spritekit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -348,6 +349,34 @@ func (sdn *SK3DNode) HitTestOptions(point corefoundation.CGPoint, options map[st
 		_mainthread0 = func() []obj.Object {
 			_r := objc.Send[objc.ID](objref.IDOf(sdn), objc.RegisterName("hitTest:options:"), point, rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+		}()
+	})
+	return _mainthread0
+
+}
+
+// ProjectPoint projects a point from the 3D world coordinate system of the SceneKit scene to the 2D viewport coordinate system of the SpriteKit node.
+func (sdn *SK3DNode) ProjectPoint(point unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(sdn)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(sdn), objc.RegisterName("projectPoint:"), point)
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// UnprojectPoint unprojects a point from the SpriteKit node’s 2D viewport coordinate system to the 3D world coordinate system of the SceneKit scene.
+func (sdn *SK3DNode) UnprojectPoint(point unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(sdn)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(sdn), objc.RegisterName("unprojectPoint:"), point)
+			return _r
 		}()
 	})
 	return _mainthread0

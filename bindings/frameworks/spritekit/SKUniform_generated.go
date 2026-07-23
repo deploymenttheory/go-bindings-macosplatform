@@ -295,3 +295,87 @@ func (u *Uniform) FloatValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(u), objc.RegisterName("floatValue"))
 	return _r
 }
+
+// VectorFloat2Value returns the vector float2 value.
+func (u *Uniform) VectorFloat2Value() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("vectorFloat2Value"))
+	return _r
+}
+
+// VectorFloat3Value returns the vector float3 value.
+func (u *Uniform) VectorFloat3Value() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("vectorFloat3Value"))
+	return _r
+}
+
+// VectorFloat4Value returns the vector float4 value.
+func (u *Uniform) VectorFloat4Value() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("vectorFloat4Value"))
+	return _r
+}
+
+// MatrixFloat2x2Value returns the matrix float2x2 value.
+func (u *Uniform) MatrixFloat2x2Value() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("matrixFloat2x2Value"))
+	return _r
+}
+
+// MatrixFloat3x3Value returns the matrix float3x3 value.
+func (u *Uniform) MatrixFloat3x3Value() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("matrixFloat3x3Value"))
+	return _r
+}
+
+// MatrixFloat4x4Value returns the matrix float4x4 value.
+func (u *Uniform) MatrixFloat4x4Value() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("matrixFloat4x4Value"))
+	return _r
+}
+
+// FloatVector2Value returns the float vector2 value.
+func (u *Uniform) FloatVector2Value() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("floatVector2Value"))
+	return _r
+}
+
+// FloatVector3Value returns the float vector3 value.
+func (u *Uniform) FloatVector3Value() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("floatVector3Value"))
+	return _r
+}
+
+// FloatVector4Value returns the float vector4 value.
+func (u *Uniform) FloatVector4Value() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("floatVector4Value"))
+	return _r
+}
+
+// FloatMatrix2Value returns the float matrix2 value.
+func (u *Uniform) FloatMatrix2Value() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("floatMatrix2Value"))
+	return _r
+}
+
+// FloatMatrix3Value returns the float matrix3 value.
+func (u *Uniform) FloatMatrix3Value() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("floatMatrix3Value"))
+	return _r
+}
+
+// FloatMatrix4Value returns the float matrix4 value.
+func (u *Uniform) FloatMatrix4Value() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("floatMatrix4Value"))
+	return _r
+}

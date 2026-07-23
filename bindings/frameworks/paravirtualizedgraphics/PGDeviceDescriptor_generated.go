@@ -6,6 +6,7 @@ package paravirtualizedgraphics
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -85,9 +86,33 @@ func (pdd *PGDeviceDescriptor) WithMmioLength(mmioLength int) *PGDeviceDescripto
 	return pdd
 }
 
+// WithDestroyTask sets a handler that the framework calls to destroy a task object.
+func (pdd *PGDeviceDescriptor) WithDestroyTask(destroyTask func(unsafe.Pointer)) *PGDeviceDescriptor {
+	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setDestroyTask:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { destroyTask(_b0) }))
+	return pdd
+}
+
+// WithUnmapMemory sets a handler that the framework calls to unmap memory from the virtual machine.
+func (pdd *PGDeviceDescriptor) WithUnmapMemory(unmapMemory func(unsafe.Pointer, uint64, uint64) bool) *PGDeviceDescriptor {
+	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setUnmapMemory:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 uint64, _b2 uint64) bool { return unmapMemory(_b0, _b1, _b2) }))
+	return pdd
+}
+
+// WithReadMemory sets a handler that the framework calls to read data from the guest’s memory.
+func (pdd *PGDeviceDescriptor) WithReadMemory(readMemory func(uint64, uint64, unsafe.Pointer) bool) *PGDeviceDescriptor {
+	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setReadMemory:"), objc.NewBlock(func(_ objc.Block, _b0 uint64, _b1 uint64, _b2 unsafe.Pointer) bool { return readMemory(_b0, _b1, _b2) }))
+	return pdd
+}
+
 // WithRaiseInterrupt sets a handler that the system calls to raise an interrupt in the guest environment.
 func (pdd *PGDeviceDescriptor) WithRaiseInterrupt(raiseInterrupt func(uint32)) *PGDeviceDescriptor {
-	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setRaiseInterrupt:"), raiseInterrupt)
+	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setRaiseInterrupt:"), objc.NewBlock(func(_ objc.Block, _b0 uint32) { raiseInterrupt(_b0) }))
+	return pdd
+}
+
+// WithRemoveTraceRange sets a handler that the framework calls to remove a trace range.
+func (pdd *PGDeviceDescriptor) WithRemoveTraceRange(removeTraceRange func(unsafe.Pointer)) *PGDeviceDescriptor {
+	objc.Send[objc.ID](objref.IDOf(pdd), objc.RegisterName("setRemoveTraceRange:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { removeTraceRange(_b0) }))
 	return pdd
 }
 

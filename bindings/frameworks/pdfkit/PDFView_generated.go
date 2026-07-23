@@ -929,6 +929,20 @@ func (v_ *View) PageShadowsEnabled() bool {
 
 }
 
+// PageOverlayViewProvider returns the page overlay view provider.
+func (v_ *View) PageOverlayViewProvider() unsafe.Pointer {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(v_), objc.RegisterName("pageOverlayViewProvider"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // ScaleFactor returns the scale factor.
 func (v_ *View) ScaleFactor() float64 {
 	defer runtime.KeepAlive(v_)
@@ -1041,6 +1055,20 @@ func (v_ *View) CurrentSelection() *Selection {
 
 }
 
+// HighlightedSelections returns the highlighted selections.
+func (v_ *View) HighlightedSelections() unsafe.Pointer {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(v_), objc.RegisterName("highlightedSelections"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // DocumentView returns the document view.
 func (v_ *View) DocumentView() obj.Object {
 	defer runtime.KeepAlive(v_)
@@ -1062,6 +1090,20 @@ func (v_ *View) AcceptsDraggedFiles() bool {
 	purego.Main(func() {
 		_mainthread0 = func() bool {
 			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("acceptsDraggedFiles"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// VisiblePages returns the visible pages.
+func (v_ *View) VisiblePages() unsafe.Pointer {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(v_), objc.RegisterName("visiblePages"))
 			return _r
 		}()
 	})

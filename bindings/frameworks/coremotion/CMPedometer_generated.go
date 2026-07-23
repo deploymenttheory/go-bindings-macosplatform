@@ -6,6 +6,8 @@ package coremotion
 
 import (
 	"runtime"
+	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -77,6 +79,18 @@ func (p *Pedometer) String() string {
 func NewPedometer() *Pedometer {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMPedometer")), objc.RegisterName("new"))
 	return pedometerAdopt(_id)
+}
+
+// QueryPedometerDataFromDateToDateWithHandler retrieves the data between the specified start and end dates.
+func (p *Pedometer) QueryPedometerDataFromDateToDateWithHandler(start time.Time, end time.Time, handler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(p)
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("queryPedometerDataFromDate:toDate:withHandler:"), rt.TimeToNSDate(start), rt.TimeToNSDate(end), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { handler(obj.Wrap(_b0), _b1) }))
+}
+
+// StartPedometerUpdatesFromDateWithHandler starts the delivery of recent pedestrian-related data to your app.
+func (p *Pedometer) StartPedometerUpdatesFromDateWithHandler(start time.Time, handler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(p)
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("startPedometerUpdatesFromDate:withHandler:"), rt.TimeToNSDate(start), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { handler(obj.Wrap(_b0), _b1) }))
 }
 
 // StopPedometerUpdates stops the delivery of recent pedestrian data updates to your app.

@@ -8,27 +8,6 @@ import (
 	"fmt"
 )
 
-// Possible actions to take after the haptic engine finishes execution.
-type HapticEngineFinishedAction int64
-
-const (
-	HapticEngineFinishedActionStopEngine         HapticEngineFinishedAction = 1
-	HapticEngineFinishedActionLeaveEngineRunning HapticEngineFinishedAction = 2
-)
-
-// String returns the HapticEngineFinishedAction constant's name, or its numeric form when the
-// value is not a known constant.
-func (e HapticEngineFinishedAction) String() string {
-	switch e {
-	case HapticEngineFinishedActionStopEngine:
-		return "HapticEngineFinishedActionStopEngine"
-	case HapticEngineFinishedActionLeaveEngineRunning:
-		return "HapticEngineFinishedActionLeaveEngineRunning"
-	default:
-		return fmt.Sprintf("HapticEngineFinishedAction(%d)", int64(e))
-	}
-}
-
 // The enumeration of reasons the haptic engine stopped running.
 type HapticEngineStoppedReason int64
 
@@ -62,6 +41,27 @@ func (e HapticEngineStoppedReason) String() string {
 		return "HapticEngineStoppedReasonSystemError"
 	default:
 		return fmt.Sprintf("HapticEngineStoppedReason(%d)", int64(e))
+	}
+}
+
+// Possible actions to take after the haptic engine finishes execution.
+type HapticEngineFinishedAction int64
+
+const (
+	HapticEngineFinishedActionStopEngine         HapticEngineFinishedAction = 1
+	HapticEngineFinishedActionLeaveEngineRunning HapticEngineFinishedAction = 2
+)
+
+// String returns the HapticEngineFinishedAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e HapticEngineFinishedAction) String() string {
+	switch e {
+	case HapticEngineFinishedActionStopEngine:
+		return "HapticEngineFinishedActionStopEngine"
+	case HapticEngineFinishedActionLeaveEngineRunning:
+		return "HapticEngineFinishedActionLeaveEngineRunning"
+	default:
+		return fmt.Sprintf("HapticEngineFinishedAction(%d)", int64(e))
 	}
 }
 

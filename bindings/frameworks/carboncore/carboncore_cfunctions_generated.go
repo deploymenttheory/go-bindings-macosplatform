@@ -444,15 +444,15 @@ func CSDiskSpaceGetRecoveryEstimate(volumeURL obj.Object) uint64 {
 	return _fnCSDiskSpaceGetRecoveryEstimate(objref.IDOf(volumeURL))
 }
 
-var _fnCSDiskSpaceStartRecovery func(objc.ID, uint64, int, unsafe.Pointer, objc.ID, unsafe.Pointer)
+var _fnCSDiskSpaceStartRecovery func(objc.ID, uint64, int, unsafe.Pointer, objc.ID, objc.Block)
 
 // CSDiskSpaceStartRecovery calls the CarbonCore framework function CSDiskSpaceStartRecovery.
-func CSDiskSpaceStartRecovery(volumeURL obj.Object, bytesNeeded uint64, options int, outOperationUUID unsafe.Pointer, callbackQueue obj.Object, callback unsafe.Pointer) {
+func CSDiskSpaceStartRecovery(volumeURL obj.Object, bytesNeeded uint64, options int, outOperationUUID unsafe.Pointer, callbackQueue obj.Object, callback func(uint8, uint64, unsafe.Pointer)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSDiskSpaceStartRecovery == nil {
 		ebipurego.RegisterLibFunc(&_fnCSDiskSpaceStartRecovery, _lib, "CSDiskSpaceStartRecovery")
 	}
-	_fnCSDiskSpaceStartRecovery(objref.IDOf(volumeURL), bytesNeeded, options, outOperationUUID, objref.IDOf(callbackQueue), callback)
+	_fnCSDiskSpaceStartRecovery(objref.IDOf(volumeURL), bytesNeeded, options, outOperationUUID, objref.IDOf(callbackQueue), objc.NewBlock(func(_ objc.Block, _b0 uint8, _b1 uint64, _b2 unsafe.Pointer) { callback(_b0, _b1, _b2) }))
 }
 
 var _fnCSGetComponentsThreadMode func() uint32

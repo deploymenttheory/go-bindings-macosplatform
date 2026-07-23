@@ -25,9 +25,9 @@ type ImageProcessorInput interface {
 	Region() corefoundation.CGRect
 	BytesPerRow() int
 	Format() int
-	BaseAddress() obj.Object
+	BaseAddress() unsafe.Pointer
 	Surface() obj.Object
-	PixelBuffer() obj.Object
+	PixelBuffer() unsafe.Pointer
 	MetalTexture() obj.Object
 	Digest() uint64
 	RoiTileIndex() int
@@ -39,9 +39,9 @@ type ImageProcessorOutput interface {
 	Region() corefoundation.CGRect
 	BytesPerRow() int
 	Format() int
-	BaseAddress() obj.Object
+	BaseAddress() unsafe.Pointer
 	Surface() obj.Object
-	PixelBuffer() obj.Object
+	PixelBuffer() unsafe.Pointer
 	MetalTexture() obj.Object
 	MetalCommandBuffer() obj.Object
 	Digest() uint64

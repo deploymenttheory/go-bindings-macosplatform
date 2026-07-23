@@ -87,7 +87,7 @@ func (arro *AssetResourceRequestOptions) WithNetworkAccessAllowed(networkAccessA
 
 // WithProgressHandler sets a block that Photos calls periodically while downloading the asset resource data.
 func (arro *AssetResourceRequestOptions) WithProgressHandler(progressHandler func(float64)) *AssetResourceRequestOptions {
-	objc.Send[objc.ID](objref.IDOf(arro), objc.RegisterName("setProgressHandler:"), progressHandler)
+	objc.Send[objc.ID](objref.IDOf(arro), objc.RegisterName("setProgressHandler:"), objc.NewBlock(func(_ objc.Block, _b0 float64) { progressHandler(_b0) }))
 	return arro
 }
 

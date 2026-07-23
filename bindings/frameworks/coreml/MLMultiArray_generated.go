@@ -94,11 +94,29 @@ func NewMultiArrayWithShapeDataTypeStrides(shape []*foundation.Number, dataType 
 	return multiArrayAdopt(_id)
 }
 
+// NewMultiArrayWithDataPointerShapeDataTypeStridesDeallocator creates a multiarray from a data pointer.
+func NewMultiArrayWithDataPointerShapeDataTypeStridesDeallocator(dataPointer unsafe.Pointer, shape []*foundation.Number, dataType MultiArrayDataType, strides []*foundation.Number, deallocator func(unsafe.Pointer)) (result *MultiArray, err error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MLMultiArray")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataPointer:shape:dataType:strides:deallocator:error:"), dataPointer, purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), dataType, purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { deallocator(_b0) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return multiArrayAdopt(_id), nil
+}
+
 // NewMultiArrayWithPixelBufferShape creates a multiarray sharing the surface of a pixel buffer.
 func NewMultiArrayWithPixelBufferShape(pixelBuffer unsafe.Pointer, shape []*foundation.Number) *MultiArray {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MLMultiArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPixelBuffer:shape:"), pixelBuffer, purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return multiArrayAdopt(_id)
+}
+
+// DataPointer returns unsafe pointer to underlying buffer holding the data
+func (ma *MultiArray) DataPointer() unsafe.Pointer {
+	defer runtime.KeepAlive(ma)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ma), objc.RegisterName("dataPointer"))
+	return _r
 }
 
 // DataType returns scalar's data type.
@@ -131,6 +149,25 @@ func (ma *MultiArray) Count() int {
 	defer runtime.KeepAlive(ma)
 	_r := objc.Send[int](objref.IDOf(ma), objc.RegisterName("count"))
 	return _r
+}
+
+// PixelBuffer returns the backing pixel buffer if exists, otherwise nil.
+func (ma *MultiArray) PixelBuffer() unsafe.Pointer {
+	defer runtime.KeepAlive(ma)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ma), objc.RegisterName("pixelBuffer"))
+	return _r
+}
+
+// GetBytesWithHandler get the underlying buffer pointer to read.
+func (ma *MultiArray) GetBytesWithHandler(handler func(unsafe.Pointer, int)) {
+	defer runtime.KeepAlive(ma)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("getBytesWithHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 int) { handler(_b0, _b1) }))
+}
+
+// GetMutableBytesWithHandler get the underlying buffer pointer to mutate.
+func (ma *MultiArray) GetMutableBytesWithHandler(handler func(unsafe.Pointer, int, obj.Object)) {
+	defer runtime.KeepAlive(ma)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("getMutableBytesWithHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 int, _b2 objc.ID) { handler(_b0, _b1, obj.Wrap(_b2)) }))
 }
 
 // ObjectAtIndexedSubscript get a value by its linear index (assumes C-style index ordering)

@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -60,6 +61,80 @@ func NewMTRBaseClusterDeviceEnergyManagementWithDeviceEndpointIDQueue(device *MT
 	return mTRBaseClusterDeviceEnergyManagementAdopt(_id)
 }
 
+// PowerAdjustRequestWithParamsCompletion command PowerAdjustRequest
+func (mbcdem *MTRBaseClusterDeviceEnergyManagement) PowerAdjustRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("powerAdjustRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// CancelPowerAdjustRequestWithParamsCompletion command CancelPowerAdjustRequest
+func (mbcdem *MTRBaseClusterDeviceEnergyManagement) CancelPowerAdjustRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("cancelPowerAdjustRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// CancelPowerAdjustRequestWithCompletion cancels power adjust request with completion.
+func (mbcdem *MTRBaseClusterDeviceEnergyManagement) CancelPowerAdjustRequestWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdem)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("cancelPowerAdjustRequestWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StartTimeAdjustRequestWithParamsCompletion command StartTimeAdjustRequest
+func (mbcdem *MTRBaseClusterDeviceEnergyManagement) StartTimeAdjustRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("startTimeAdjustRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// PauseRequestWithParamsCompletion command PauseRequest
+func (mbcdem *MTRBaseClusterDeviceEnergyManagement) PauseRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterPauseRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("pauseRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ResumeRequestWithParamsCompletion command ResumeRequest
+func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ResumeRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterResumeRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("resumeRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ResumeRequestWithCompletion resumes request with completion.
+func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ResumeRequestWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdem)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("resumeRequestWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ModifyForecastRequestWithParamsCompletion command ModifyForecastRequest
+func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ModifyForecastRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterModifyForecastRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("modifyForecastRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// RequestConstraintBasedForecastWithParamsCompletion command RequestConstraintBasedForecast
+func (mbcdem *MTRBaseClusterDeviceEnergyManagement) RequestConstraintBasedForecastWithParamsCompletion(params *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("requestConstraintBasedForecastWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// CancelRequestWithParamsCompletion command CancelRequest
+func (mbcdem *MTRBaseClusterDeviceEnergyManagement) CancelRequestWithParamsCompletion(params *MTRDeviceEnergyManagementClusterCancelRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("cancelRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// CancelRequestWithCompletion cancels request with completion.
+func (mbcdem *MTRBaseClusterDeviceEnergyManagement) CancelRequestWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcdem)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("cancelRequestWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeESATypeWithCompletion reads attribute esa type with completion.
 //
 // ReadAttributeESATypeWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -103,7 +178,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESATypeWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeESATypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeESATypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -156,7 +231,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESACanGene
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeESACanGenerateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeESACanGenerateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -209,7 +284,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESAStateWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeESAStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeESAStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -262,7 +337,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMinPowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeAbsMinPowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeAbsMinPowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -315,7 +390,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMaxPowe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeAbsMaxPowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeAbsMaxPowerWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -368,7 +443,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributePowerAdjus
 		_o.val = MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributePowerAdjustmentCapabilityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributePowerAdjustmentCapabilityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -421,7 +496,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeForecastWi
 		_o.val = MTRDeviceEnergyManagementClusterForecastStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeForecastWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeForecastWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -474,7 +549,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeOptOutStat
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeOptOutStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeOptOutStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -527,7 +602,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeGeneratedC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -580,7 +655,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAcceptedCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -633,7 +708,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAttributeL
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -686,7 +761,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeFeatureMap
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -739,7 +814,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeClusterRev
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcdem), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

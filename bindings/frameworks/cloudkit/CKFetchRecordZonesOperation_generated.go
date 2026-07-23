@@ -6,8 +6,10 @@ package cloudkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -64,6 +66,22 @@ func NewFetchRecordZonesOperationWithRecordZoneIDs(zoneIDs []*RecordZoneID) *Fet
 func (frzo *FetchRecordZonesOperation) WithRecordZoneIDs(items ...*RecordZoneID) *FetchRecordZonesOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setRecordZoneIDs:"), _arr)
+	return frzo
+}
+
+// WithPerRecordZoneCompletionBlock sets the closure to execute as the operation fetches individual record zones.
+func (frzo *FetchRecordZonesOperation) WithPerRecordZoneCompletionBlock(perRecordZoneCompletionBlock func(obj.Object, obj.Object, unsafe.Pointer)) *FetchRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setPerRecordZoneCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		perRecordZoneCompletionBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return frzo
+}
+
+// WithFetchRecordZonesCompletionBlock sets the closure to execute after CloudKit retrieves all of the record zones.
+func (frzo *FetchRecordZonesOperation) WithFetchRecordZonesCompletionBlock(fetchRecordZonesCompletionBlock func(obj.Object, unsafe.Pointer)) *FetchRecordZonesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzo), objc.RegisterName("setFetchRecordZonesCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) {
+		fetchRecordZonesCompletionBlock(obj.Wrap(_b0), _b1)
+	}))
 	return frzo
 }
 

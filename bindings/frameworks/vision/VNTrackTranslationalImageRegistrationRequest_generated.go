@@ -5,8 +5,11 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -49,6 +52,13 @@ func trackTranslationalImageRegistrationRequestAdopt(id objc.ID) *TrackTranslati
 // NewTrackTranslationalImageRegistrationRequest creates a new TrackTranslationalImageRegistrationRequest.
 func NewTrackTranslationalImageRegistrationRequest() *TrackTranslationalImageRegistrationRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("VNTrackTranslationalImageRegistrationRequest")), objc.RegisterName("new"))
+	return trackTranslationalImageRegistrationRequestAdopt(_id)
+}
+
+// NewTrackTranslationalImageRegistrationRequestWithCompletionHandler creates a new request that tracks the translational registration of two images, with a system callback on completion.
+func NewTrackTranslationalImageRegistrationRequestWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer)) *TrackTranslationalImageRegistrationRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTrackTranslationalImageRegistrationRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	return trackTranslationalImageRegistrationRequestAdopt(_id)
 }
 

@@ -424,6 +424,13 @@ func (o *Object) DidChangeValueForKeyWithSetMutationUsingObjects(key string, mut
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("didChangeValueForKey:withSetMutation:usingObjects:"), purego.NSString(key), mutationKind, objref.IDOf(objects))
 }
 
+// ObservationInfo returns the observation info.
+func (o *Object) ObservationInfo() unsafe.Pointer {
+	defer runtime.KeepAlive(o)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(o), objc.RegisterName("observationInfo"))
+	return _r
+}
+
 // SetSharedObservers register shared observations. A shared observation collection might be shared between multiple observables to minimise registration work. Shared observers remain registered throughout the object's lifetime and do not need to be removed using `removeObserver:`. An observable may only have one set of shared observations. Subsequent calls to this method will replace existing shared observations. - Parameter sharedObservers: shared observer collection that was initialized with the class of this object - Invariant: `sharedObserers` was initialized with the class of this object - Throws: Exception if the class of the receiving observable object does not match the class with which `sharedObserers` was initialized.
 func (o *Object) SetSharedObservers(sharedObservers *KeyValueSharedObserversSnapshot) {
 	defer runtime.KeepAlive(o)

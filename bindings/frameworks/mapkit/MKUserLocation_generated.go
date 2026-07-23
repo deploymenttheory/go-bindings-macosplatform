@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -95,6 +96,13 @@ func (ul *UserLocation) WithSubtitle(subtitle string) *UserLocation {
 func (ul *UserLocation) IsUpdating() bool {
 	defer runtime.KeepAlive(ul)
 	_r := objc.Send[bool](objref.IDOf(ul), objc.RegisterName("isUpdating"))
+	return _r
+}
+
+// Location returns the location.
+func (ul *UserLocation) Location() unsafe.Pointer {
+	defer runtime.KeepAlive(ul)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ul), objc.RegisterName("location"))
 	return _r
 }
 

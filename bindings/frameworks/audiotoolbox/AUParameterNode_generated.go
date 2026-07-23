@@ -76,6 +76,26 @@ func (pn *ParameterNode) String() string {
 	return rt.Description(objref.IDOf(pn))
 }
 
+// WithImplementorValueObserver sets the callback for parameter value changes.
+func (pn *ParameterNode) WithImplementorValueObserver(implementorValueObserver func(obj.Object, float32)) *ParameterNode {
+	objc.Send[objc.ID](objref.IDOf(pn), objc.RegisterName("setImplementorValueObserver:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32) { implementorValueObserver(obj.Wrap(_b0), _b1) }))
+	return pn
+}
+
+// WithImplementorValueProvider sets the callback for refreshing known stale values in a parameter tree.
+func (pn *ParameterNode) WithImplementorValueProvider(implementorValueProvider func(obj.Object) int) *ParameterNode {
+	objc.Send[objc.ID](objref.IDOf(pn), objc.RegisterName("setImplementorValueProvider:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return implementorValueProvider(obj.Wrap(_b0)) }))
+	return pn
+}
+
+// WithImplementorValueFromStringCallback sets the callback for converting a string to a parameter value.
+func (pn *ParameterNode) WithImplementorValueFromStringCallback(implementorValueFromStringCallback func(obj.Object, obj.Object) int) *ParameterNode {
+	objc.Send[objc.ID](objref.IDOf(pn), objc.RegisterName("setImplementorValueFromStringCallback:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int {
+		return implementorValueFromStringCallback(obj.Wrap(_b0), obj.Wrap(_b1))
+	}))
+	return pn
+}
+
 // DisplayNameWithLength another version of the display name, possibly truncated to a desired length.
 func (pn *ParameterNode) DisplayNameWithLength(maximumLength int) string {
 	defer runtime.KeepAlive(pn)
@@ -84,6 +104,13 @@ func (pn *ParameterNode) DisplayNameWithLength(maximumLength int) string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// TokenByAddingParameterObserver adds an observer for a single parameter or all parameters in a group.
+func (pn *ParameterNode) TokenByAddingParameterObserver(observer func(uint64, float32)) unsafe.Pointer {
+	defer runtime.KeepAlive(pn)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pn), objc.RegisterName("tokenByAddingParameterObserver:"), objc.NewBlock(func(_ objc.Block, _b0 uint64, _b1 float32) { observer(_b0, _b1) }))
+	return _r
 }
 
 // RemoveParameterObserver remove a specific parameter observer.

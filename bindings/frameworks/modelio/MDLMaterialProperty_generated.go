@@ -295,6 +295,34 @@ func (mp *MaterialProperty) FloatValue() float32 {
 	return _r
 }
 
+// Float2Value returns the float2 value.
+func (mp *MaterialProperty) Float2Value() unsafe.Pointer {
+	defer runtime.KeepAlive(mp)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mp), objc.RegisterName("float2Value"))
+	return _r
+}
+
+// Float3Value returns the float3 value.
+func (mp *MaterialProperty) Float3Value() unsafe.Pointer {
+	defer runtime.KeepAlive(mp)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mp), objc.RegisterName("float3Value"))
+	return _r
+}
+
+// Float4Value returns the float4 value.
+func (mp *MaterialProperty) Float4Value() unsafe.Pointer {
+	defer runtime.KeepAlive(mp)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mp), objc.RegisterName("float4Value"))
+	return _r
+}
+
+// Matrix4x4 returns the matrix4x4.
+func (mp *MaterialProperty) Matrix4x4() unsafe.Pointer {
+	defer runtime.KeepAlive(mp)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mp), objc.RegisterName("matrix4x4"))
+	return _r
+}
+
 // Luminance returns the luminance.
 func (mp *MaterialProperty) Luminance() float32 {
 	defer runtime.KeepAlive(mp)

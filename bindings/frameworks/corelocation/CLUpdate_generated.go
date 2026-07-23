@@ -6,6 +6,7 @@ package corelocation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -146,5 +147,12 @@ func (u *Update) ServiceSessionRequired() bool {
 func (u *Update) AuthorizationRequestInProgress() bool {
 	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("authorizationRequestInProgress"))
+	return _r
+}
+
+// Location returns the location.
+func (u *Update) Location() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("location"))
 	return _r
 }

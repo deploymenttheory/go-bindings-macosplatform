@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,14 @@ func controllerDirectionPadAdopt(id objc.ID) *ControllerDirectionPad {
 	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
+}
+
+// WithValueChangedHandler sets the block that the directional pad calls when the user changes its values.
+func (cdp *ControllerDirectionPad) WithValueChangedHandler(valueChangedHandler func(obj.Object, float32, float32)) *ControllerDirectionPad {
+	objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("setValueChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32, _b2 float32) {
+		valueChangedHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+	return cdp
 }
 
 // WithPreferredSystemGestureState sets the preferred state for handling input when the user binds the element to a system gesture.

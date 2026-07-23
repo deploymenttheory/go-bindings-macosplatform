@@ -120,6 +120,13 @@ func (hbpdo *HumanBodyPose3DObservation) HeightEstimation() HumanBodyPose3DObser
 	return _r
 }
 
+// CameraOriginMatrix returns a transform from root (at hip) to Camera as projection center.
+func (hbpdo *HumanBodyPose3DObservation) CameraOriginMatrix() unsafe.Pointer {
+	defer runtime.KeepAlive(hbpdo)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(hbpdo), objc.RegisterName("cameraOriginMatrix"))
+	return _r
+}
+
 // AvailableJointsGroupNames returns all of the joints group names available in the observation.
 //
 // AvailableJointsGroupNames returns the collection as a Go slice.

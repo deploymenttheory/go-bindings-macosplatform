@@ -116,4 +116,11 @@ func (rme *ReflectionMapEffect) TextureCubeMap() *EffectPropertyTexture {
 	return EffectPropertyTextureFromID(_r)
 }
 
+// Matrix returns the matrix.
+func (rme *ReflectionMapEffect) Matrix() unsafe.Pointer {
+	defer runtime.KeepAlive(rme)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(rme), objc.RegisterName("matrix"))
+	return _r
+}
+
 var _ BaseEffectProvider = (*ReflectionMapEffect)(nil)

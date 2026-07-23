@@ -164,6 +164,13 @@ func (mi *MapItem) IsCurrentLocation() bool {
 	return _r
 }
 
+// Location returns the location.
+func (mi *MapItem) Location() unsafe.Pointer {
+	defer runtime.KeepAlive(mi)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mi), objc.RegisterName("location"))
+	return _r
+}
+
 // Address returns the address.
 func (mi *MapItem) Address() *Address {
 	defer runtime.KeepAlive(mi)

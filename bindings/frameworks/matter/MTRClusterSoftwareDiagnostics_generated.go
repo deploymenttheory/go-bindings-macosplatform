@@ -6,6 +6,7 @@ package matter
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -64,6 +65,21 @@ func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointQueue(device *MTRDevice, 
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterSoftwareDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterSoftwareDiagnosticsAdopt(_id)
+}
+
+// ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletion resets watermarks with params expected values expected value interval completion.
+func (mcsd *MTRClusterSoftwareDiagnostics) ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRSoftwareDiagnosticsClusterResetWatermarksParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcsd)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("resetWatermarksWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletion resets watermarks with expected values expected value interval completion.
+func (mcsd *MTRClusterSoftwareDiagnostics) ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcsd)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("resetWatermarksWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeThreadMetricsWithParams reads attribute thread metrics with params.
@@ -136,6 +152,21 @@ func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeClusterRevisionWithParam
 	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletionHandler resets watermarks with params expected values expected value interval completion handler.
+func (mcsd *MTRClusterSoftwareDiagnostics) ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRSoftwareDiagnosticsClusterResetWatermarksParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcsd)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("resetWatermarksWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletionHandler resets watermarks with expected values expected value interval completion handler.
+func (mcsd *MTRClusterSoftwareDiagnostics) ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcsd)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("resetWatermarksWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterSoftwareDiagnostics)(nil)

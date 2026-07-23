@@ -82,6 +82,13 @@ func NewProtocolCheckerWithTargetProtocol(anObject *Object, aProtocol unsafe.Poi
 	return protocolCheckerAdopt(_id)
 }
 
+// Protocol returns the protocol.
+func (pc *ProtocolChecker) Protocol() unsafe.Pointer {
+	defer runtime.KeepAlive(pc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pc), objc.RegisterName("protocol"))
+	return _r
+}
+
 // Target returns the target.
 func (pc *ProtocolChecker) Target() *Object {
 	defer runtime.KeepAlive(pc)

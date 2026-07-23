@@ -57,7 +57,14 @@ func NewAudioPlayerNode() *AudioPlayerNode {
 func (apn *AudioPlayerNode) ScheduleBufferCompletionHandler(buffer *AudioPCMBuffer, completionHandler func()) {
 	defer runtime.KeepAlive(apn)
 	defer runtime.KeepAlive(buffer)
-	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleBuffer:completionHandler:"), objref.IDOf(buffer), completionHandler)
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleBuffer:completionHandler:"), objref.IDOf(buffer), objc.NewBlock(func(_ objc.Block) { completionHandler() }))
+}
+
+// ScheduleBufferCompletionCallbackTypeCompletionHandler schedules the playing samples from an audio buffer with the callback option you specify.
+func (apn *AudioPlayerNode) ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *AudioPCMBuffer, callbackType AudioPlayerNodeCompletionCallbackType, completionHandler func(AudioPlayerNodeCompletionCallbackType)) {
+	defer runtime.KeepAlive(apn)
+	defer runtime.KeepAlive(buffer)
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleBuffer:completionCallbackType:completionHandler:"), objref.IDOf(buffer), callbackType, objc.NewBlock(func(_ objc.Block, _b0 AudioPlayerNodeCompletionCallbackType) { completionHandler(_b0) }))
 }
 
 // ScheduleBufferAtTimeOptionsCompletionHandler schedules the playing samples from an audio buffer at the time and playback options you specify.
@@ -65,7 +72,15 @@ func (apn *AudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionHandler(buffer 
 	defer runtime.KeepAlive(apn)
 	defer runtime.KeepAlive(buffer)
 	defer runtime.KeepAlive(when)
-	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleBuffer:atTime:options:completionHandler:"), objref.IDOf(buffer), objref.IDOf(when), options, completionHandler)
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleBuffer:atTime:options:completionHandler:"), objref.IDOf(buffer), objref.IDOf(when), options, objc.NewBlock(func(_ objc.Block) { completionHandler() }))
+}
+
+// ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler schedules the playing samples from an audio buffer with the playback options you specify.
+func (apn *AudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *AudioPCMBuffer, when *AudioTime, options AudioPlayerNodeBufferOptions, callbackType AudioPlayerNodeCompletionCallbackType, completionHandler func(AudioPlayerNodeCompletionCallbackType)) {
+	defer runtime.KeepAlive(apn)
+	defer runtime.KeepAlive(buffer)
+	defer runtime.KeepAlive(when)
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleBuffer:atTime:options:completionCallbackType:completionHandler:"), objref.IDOf(buffer), objref.IDOf(when), options, callbackType, objc.NewBlock(func(_ objc.Block, _b0 AudioPlayerNodeCompletionCallbackType) { completionHandler(_b0) }))
 }
 
 // ScheduleFileAtTimeCompletionHandler schedules the playing of an entire audio file.
@@ -73,7 +88,15 @@ func (apn *AudioPlayerNode) ScheduleFileAtTimeCompletionHandler(file *AudioFile,
 	defer runtime.KeepAlive(apn)
 	defer runtime.KeepAlive(file)
 	defer runtime.KeepAlive(when)
-	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleFile:atTime:completionHandler:"), objref.IDOf(file), objref.IDOf(when), completionHandler)
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleFile:atTime:completionHandler:"), objref.IDOf(file), objref.IDOf(when), objc.NewBlock(func(_ objc.Block) { completionHandler() }))
+}
+
+// ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler schedules the playing of an entire audio file with a callback option you specify.
+func (apn *AudioPlayerNode) ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler(file *AudioFile, when *AudioTime, callbackType AudioPlayerNodeCompletionCallbackType, completionHandler func(AudioPlayerNodeCompletionCallbackType)) {
+	defer runtime.KeepAlive(apn)
+	defer runtime.KeepAlive(file)
+	defer runtime.KeepAlive(when)
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleFile:atTime:completionCallbackType:completionHandler:"), objref.IDOf(file), objref.IDOf(when), callbackType, objc.NewBlock(func(_ objc.Block, _b0 AudioPlayerNodeCompletionCallbackType) { completionHandler(_b0) }))
 }
 
 // ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler schedules the playing of an audio file segment.
@@ -81,7 +104,15 @@ func (apn *AudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompleti
 	defer runtime.KeepAlive(apn)
 	defer runtime.KeepAlive(file)
 	defer runtime.KeepAlive(when)
-	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleSegment:startingFrame:frameCount:atTime:completionHandler:"), objref.IDOf(file), startFrame, numberFrames, objref.IDOf(when), completionHandler)
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleSegment:startingFrame:frameCount:atTime:completionHandler:"), objref.IDOf(file), startFrame, numberFrames, objref.IDOf(when), objc.NewBlock(func(_ objc.Block) { completionHandler() }))
+}
+
+// ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler schedules the playing of an audio file segment with a callback option you specify.
+func (apn *AudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler(file *AudioFile, startFrame int64, numberFrames uint32, when *AudioTime, callbackType AudioPlayerNodeCompletionCallbackType, completionHandler func(AudioPlayerNodeCompletionCallbackType)) {
+	defer runtime.KeepAlive(apn)
+	defer runtime.KeepAlive(file)
+	defer runtime.KeepAlive(when)
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleSegment:startingFrame:frameCount:atTime:completionCallbackType:completionHandler:"), objref.IDOf(file), startFrame, numberFrames, objref.IDOf(when), callbackType, objc.NewBlock(func(_ objc.Block, _b0 AudioPlayerNodeCompletionCallbackType) { completionHandler(_b0) }))
 }
 
 // Stop clears all of the node’s events you schedule and stops playback.

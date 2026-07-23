@@ -105,3 +105,10 @@ func (pem *PortraitEffectsMatte) PixelFormatType() int {
 	_r := objc.Send[int](objref.IDOf(pem), objc.RegisterName("pixelFormatType"))
 	return _r
 }
+
+// MattingImage provides access to the portrait effects matte's internal image. The pixel format can be queried using the pixelFormatType property.
+func (pem *PortraitEffectsMatte) MattingImage() unsafe.Pointer {
+	defer runtime.KeepAlive(pem)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pem), objc.RegisterName("mattingImage"))
+	return _r
+}

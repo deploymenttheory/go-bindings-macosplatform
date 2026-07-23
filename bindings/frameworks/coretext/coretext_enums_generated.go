@@ -89,6 +89,57 @@ func (e CTFontCollectionCopyOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that track the progress of font descriptor matching.
+type CTFontDescriptorMatchingState int64
+
+const (
+	// A state that indicates matching is about to begin.
+	KCTFontDescriptorMatchingDidBegin CTFontDescriptorMatchingState = 0
+	// A state that indicates matching is done.
+	KCTFontDescriptorMatchingDidFinish CTFontDescriptorMatchingState = 1
+	// A state that indicates communication with the server is about to begin.
+	KCTFontDescriptorMatchingWillBeginQuerying CTFontDescriptorMatchingState = 2
+	// A state that indicates that matching is stalled, such as while waiting for a server response.
+	KCTFontDescriptorMatchingStalled CTFontDescriptorMatchingState = 3
+	// A state that indicates downloading is about to begin.
+	KCTFontDescriptorMatchingWillBeginDownloading CTFontDescriptorMatchingState = 4
+	// A state that indicates downloading is in progress.
+	KCTFontDescriptorMatchingDownloading CTFontDescriptorMatchingState = 5
+	// A state that indicates downloading is done.
+	KCTFontDescriptorMatchingDidFinishDownloading CTFontDescriptorMatchingState = 6
+	// A state that indicates the font descriptor match is successful.
+	KCTFontDescriptorMatchingDidMatch CTFontDescriptorMatchingState = 7
+	// A state that indicates an error.
+	KCTFontDescriptorMatchingDidFailWithError CTFontDescriptorMatchingState = 8
+)
+
+// String returns the CTFontDescriptorMatchingState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CTFontDescriptorMatchingState) String() string {
+	switch e {
+	case KCTFontDescriptorMatchingDidBegin:
+		return "KCTFontDescriptorMatchingDidBegin"
+	case KCTFontDescriptorMatchingDidFinish:
+		return "KCTFontDescriptorMatchingDidFinish"
+	case KCTFontDescriptorMatchingWillBeginQuerying:
+		return "KCTFontDescriptorMatchingWillBeginQuerying"
+	case KCTFontDescriptorMatchingStalled:
+		return "KCTFontDescriptorMatchingStalled"
+	case KCTFontDescriptorMatchingWillBeginDownloading:
+		return "KCTFontDescriptorMatchingWillBeginDownloading"
+	case KCTFontDescriptorMatchingDownloading:
+		return "KCTFontDescriptorMatchingDownloading"
+	case KCTFontDescriptorMatchingDidFinishDownloading:
+		return "KCTFontDescriptorMatchingDidFinishDownloading"
+	case KCTFontDescriptorMatchingDidMatch:
+		return "KCTFontDescriptorMatchingDidMatch"
+	case KCTFontDescriptorMatchingDidFailWithError:
+		return "KCTFontDescriptorMatchingDidFailWithError"
+	default:
+		return fmt.Sprintf("CTFontDescriptorMatchingState(%d)", int64(e))
+	}
+}
+
 // Sets the auto-activation for the specified bundle identifier.
 type CTFontManagerAutoActivationSetting int64
 
@@ -1070,57 +1121,6 @@ func (e Type) String() string {
 		return "TypeNwfs"
 	default:
 		return fmt.Sprintf("Type(%d)", int64(e))
-	}
-}
-
-// Constants that track the progress of font descriptor matching.
-type CTFontDescriptorMatchingState int64
-
-const (
-	// A state that indicates matching is about to begin.
-	KCTFontDescriptorMatchingDidBegin CTFontDescriptorMatchingState = 0
-	// A state that indicates matching is done.
-	KCTFontDescriptorMatchingDidFinish CTFontDescriptorMatchingState = 1
-	// A state that indicates communication with the server is about to begin.
-	KCTFontDescriptorMatchingWillBeginQuerying CTFontDescriptorMatchingState = 2
-	// A state that indicates that matching is stalled, such as while waiting for a server response.
-	KCTFontDescriptorMatchingStalled CTFontDescriptorMatchingState = 3
-	// A state that indicates downloading is about to begin.
-	KCTFontDescriptorMatchingWillBeginDownloading CTFontDescriptorMatchingState = 4
-	// A state that indicates downloading is in progress.
-	KCTFontDescriptorMatchingDownloading CTFontDescriptorMatchingState = 5
-	// A state that indicates downloading is done.
-	KCTFontDescriptorMatchingDidFinishDownloading CTFontDescriptorMatchingState = 6
-	// A state that indicates the font descriptor match is successful.
-	KCTFontDescriptorMatchingDidMatch CTFontDescriptorMatchingState = 7
-	// A state that indicates an error.
-	KCTFontDescriptorMatchingDidFailWithError CTFontDescriptorMatchingState = 8
-)
-
-// String returns the CTFontDescriptorMatchingState constant's name, or its numeric form when the
-// value is not a known constant.
-func (e CTFontDescriptorMatchingState) String() string {
-	switch e {
-	case KCTFontDescriptorMatchingDidBegin:
-		return "KCTFontDescriptorMatchingDidBegin"
-	case KCTFontDescriptorMatchingDidFinish:
-		return "KCTFontDescriptorMatchingDidFinish"
-	case KCTFontDescriptorMatchingWillBeginQuerying:
-		return "KCTFontDescriptorMatchingWillBeginQuerying"
-	case KCTFontDescriptorMatchingStalled:
-		return "KCTFontDescriptorMatchingStalled"
-	case KCTFontDescriptorMatchingWillBeginDownloading:
-		return "KCTFontDescriptorMatchingWillBeginDownloading"
-	case KCTFontDescriptorMatchingDownloading:
-		return "KCTFontDescriptorMatchingDownloading"
-	case KCTFontDescriptorMatchingDidFinishDownloading:
-		return "KCTFontDescriptorMatchingDidFinishDownloading"
-	case KCTFontDescriptorMatchingDidMatch:
-		return "KCTFontDescriptorMatchingDidMatch"
-	case KCTFontDescriptorMatchingDidFailWithError:
-		return "KCTFontDescriptorMatchingDidFailWithError"
-	default:
-		return fmt.Sprintf("CTFontDescriptorMatchingState(%d)", int64(e))
 	}
 }
 

@@ -6,9 +6,11 @@ package vision
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -53,6 +55,14 @@ func NewTrackObjectRequestWithDetectedObjectObservation(observation *DetectedObj
 	defer runtime.KeepAlive(observation)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTrackObjectRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDetectedObjectObservation:"), objref.IDOf(observation))
+	return trackObjectRequestAdopt(_id)
+}
+
+// NewTrackObjectRequestWithDetectedObjectObservationCompletionHandler creates a new object tracking request with a detected object observation.
+func NewTrackObjectRequestWithDetectedObjectObservationCompletionHandler(observation *DetectedObjectObservation, completionHandler func(obj.Object, unsafe.Pointer)) *TrackObjectRequest {
+	defer runtime.KeepAlive(observation)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTrackObjectRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDetectedObjectObservation:completionHandler:"), objref.IDOf(observation), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	return trackObjectRequestAdopt(_id)
 }
 

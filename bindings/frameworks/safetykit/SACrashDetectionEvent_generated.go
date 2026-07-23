@@ -7,6 +7,7 @@ package safetykit
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -91,5 +92,12 @@ func (cde *CrashDetectionEvent) Date() time.Time {
 func (cde *CrashDetectionEvent) Response() CrashDetectionEventResponse {
 	defer runtime.KeepAlive(cde)
 	_r := objc.Send[CrashDetectionEventResponse](objref.IDOf(cde), objc.RegisterName("response"))
+	return _r
+}
+
+// Location returns location Location information describing the geographical location of where the Crash Detection occurred.
+func (cde *CrashDetectionEvent) Location() unsafe.Pointer {
+	defer runtime.KeepAlive(cde)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cde), objc.RegisterName("location"))
 	return _r
 }

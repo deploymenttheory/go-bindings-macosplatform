@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -61,6 +62,13 @@ func (nfsf *NEFilterSocketFlow) RemoteFlowEndpoint() *foundation.Object {
 	return foundation.ObjectFromID(_r)
 }
 
+// RemoteEndpoint returns the flow's remote endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
+func (nfsf *NEFilterSocketFlow) RemoteEndpoint() unsafe.Pointer {
+	defer runtime.KeepAlive(nfsf)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(nfsf), objc.RegisterName("remoteEndpoint"))
+	return _r
+}
+
 // RemoteHostname returns the flow's remote hostname. This property is only non-nil if the flow was created using Network.framework or NSURLSession.
 func (nfsf *NEFilterSocketFlow) RemoteHostname() string {
 	defer runtime.KeepAlive(nfsf)
@@ -76,6 +84,13 @@ func (nfsf *NEFilterSocketFlow) LocalFlowEndpoint() *foundation.Object {
 	defer runtime.KeepAlive(nfsf)
 	_r := objc.Send[objc.ID](objref.IDOf(nfsf), objc.RegisterName("localFlowEndpoint"))
 	return foundation.ObjectFromID(_r)
+}
+
+// LocalEndpoint returns the flow's local endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
+func (nfsf *NEFilterSocketFlow) LocalEndpoint() unsafe.Pointer {
+	defer runtime.KeepAlive(nfsf)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(nfsf), objc.RegisterName("localEndpoint"))
+	return _r
 }
 
 // SocketFamily returns socket family of the socket flow, such as PF_INET.

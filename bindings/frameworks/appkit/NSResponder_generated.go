@@ -693,6 +693,20 @@ func (r *Responder) PresentError(err unsafe.Pointer) bool {
 
 }
 
+// WillPresentError returns a custom version of the supplied error object that’s more suitable for presentation in alert sheets and dialogs.
+func (r *Responder) WillPresentError(err unsafe.Pointer) unsafe.Pointer {
+	defer runtime.KeepAlive(r)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(r), objc.RegisterName("willPresentError:"), err)
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // PerformTextFinderAction performs all find oriented actions.
 func (r *Responder) PerformTextFinderAction(sender obj.Object) {
 	defer runtime.KeepAlive(r)

@@ -6,6 +6,7 @@ package cryptotokenkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -96,6 +97,12 @@ func (scui *SmartCardUserInteraction) WithInitialTimeout(initialTimeout float64)
 func (scui *SmartCardUserInteraction) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteraction {
 	objc.Send[objc.ID](objref.IDOf(scui), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
 	return scui
+}
+
+// RunWithReply runs the user interaction and asynchronously receives a reply.
+func (scui *SmartCardUserInteraction) RunWithReply(reply func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(scui)
+	objc.Send[objc.ID](objref.IDOf(scui), objc.RegisterName("runWithReply:"), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { reply(_b0, _b1) }))
 }
 
 // Cancel reports whether attempts to cancel an interaction started by calling runWithReply:. For certain interactions, cancellation may not be available.

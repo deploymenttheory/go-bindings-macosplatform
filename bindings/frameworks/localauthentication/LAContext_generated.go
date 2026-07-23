@@ -130,6 +130,12 @@ func (c *Context) CanEvaluatePolicy(policy Policy) error {
 	return nil
 }
 
+// EvaluatePolicyLocalizedReasonReply evaluates the specified policy.
+func (c *Context) EvaluatePolicyLocalizedReasonReply(policy Policy, localizedReason string, reply func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(c)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("evaluatePolicy:localizedReason:reply:"), policy, purego.NSString(localizedReason), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { reply(_b0, _b1) }))
+}
+
 // Invalidate invalidates the authentication context.
 func (c *Context) Invalidate() {
 	defer runtime.KeepAlive(c)
@@ -148,6 +154,13 @@ func (c *Context) IsCredentialSet(type_ CredentialType) bool {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isCredentialSet:"), type_)
 	return _r
+}
+
+// EvaluateAccessControlOperationLocalizedReasonReply evaluates an access control for a given operation.
+func (c *Context) EvaluateAccessControlOperationLocalizedReasonReply(accessControl obj.Object, operation AccessControlOperation, localizedReason string, reply func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(accessControl)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("evaluateAccessControl:operation:localizedReason:reply:"), objref.IDOf(accessControl), operation, purego.NSString(localizedReason), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { reply(_b0, _b1) }))
 }
 
 // LocalizedFallbackTitle returns fallback button title. Allows fallback button title customization. If set to empty string, the button will be hidden. A default title "Use Password…" is used when this property is left nil.

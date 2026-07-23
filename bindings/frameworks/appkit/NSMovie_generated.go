@@ -92,3 +92,10 @@ func NewMovieWithMovie(movie unsafe.Pointer) *Movie {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMovie:"), movie)
 	return movieAdopt(_id)
 }
+
+// QTMovie returns the qt movie.
+func (m *Movie) QTMovie() unsafe.Pointer {
+	defer runtime.KeepAlive(m)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(m), objc.RegisterName("QTMovie"))
+	return _r
+}

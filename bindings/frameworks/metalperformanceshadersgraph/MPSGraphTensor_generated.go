@@ -6,6 +6,7 @@ package metalperformanceshadersgraph
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,6 +52,13 @@ func graphTensorAdopt(id objc.ID) *GraphTensor {
 func NewGraphTensor() *GraphTensor {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensor")), objc.RegisterName("new"))
 	return graphTensorAdopt(_id)
+}
+
+// Shape returns the shape of the tensor. nil shape represents an unranked tensor. -1 value for a dimension represents that it will be resolved via shape inference at runtime and it can be anything.
+func (gt *GraphTensor) Shape() unsafe.Pointer {
+	defer runtime.KeepAlive(gt)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(gt), objc.RegisterName("shape"))
+	return _r
 }
 
 // Operation returns the operation responsible for creating this tensor.

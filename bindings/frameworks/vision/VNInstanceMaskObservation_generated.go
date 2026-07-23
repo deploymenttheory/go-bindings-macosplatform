@@ -6,9 +6,12 @@ package vision
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -52,6 +55,51 @@ func instanceMaskObservationAdopt(id objc.ID) *InstanceMaskObservation {
 func NewInstanceMaskObservation() *InstanceMaskObservation {
 	_id := objc.Send[objc.ID](objc.ID(_class("VNInstanceMaskObservation")), objc.RegisterName("new"))
 	return instanceMaskObservationAdopt(_id)
+}
+
+// GenerateMaskForInstances creates a low-resolution mask from the instances you specify.
+func (imo *InstanceMaskObservation) GenerateMaskForInstances(instances obj.Object) (result unsafe.Pointer, err error) {
+	defer runtime.KeepAlive(imo)
+	defer runtime.KeepAlive(instances)
+	var _nsErr uintptr
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(imo), objc.RegisterName("generateMaskForInstances:error:"), objref.IDOf(instances), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _r, nil
+}
+
+// GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtent creates a high-resolution image where everything becomes transparent black, except for the instances you specify.
+func (imo *InstanceMaskObservation) GenerateMaskedImageOfInstancesFromRequestHandlerCroppedToInstancesExtent(instances obj.Object, requestHandler *ImageRequestHandler, cropResult bool) (result unsafe.Pointer, err error) {
+	defer runtime.KeepAlive(imo)
+	defer runtime.KeepAlive(instances)
+	defer runtime.KeepAlive(requestHandler)
+	var _nsErr uintptr
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(imo), objc.RegisterName("generateMaskedImageOfInstances:fromRequestHandler:croppedToInstancesExtent:error:"), objref.IDOf(instances), objref.IDOf(requestHandler), cropResult, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _r, nil
+}
+
+// GenerateScaledMaskForImageForInstancesFromRequestHandler creates a high-resolution mask where everything becomes transparent black, except for the instances you specify.
+func (imo *InstanceMaskObservation) GenerateScaledMaskForImageForInstancesFromRequestHandler(instances obj.Object, requestHandler *ImageRequestHandler) (result unsafe.Pointer, err error) {
+	defer runtime.KeepAlive(imo)
+	defer runtime.KeepAlive(instances)
+	defer runtime.KeepAlive(requestHandler)
+	var _nsErr uintptr
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(imo), objc.RegisterName("generateScaledMaskForImageForInstances:fromRequestHandler:error:"), objref.IDOf(instances), objref.IDOf(requestHandler), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _r, nil
+}
+
+// InstanceMask returns the resulting mask represents all instances in a mask image where 0 represents the background and all other values represent the indices of the instances identified. Note that a pixel can only correspond to one instance and not multiple instances.
+func (imo *InstanceMaskObservation) InstanceMask() unsafe.Pointer {
+	defer runtime.KeepAlive(imo)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(imo), objc.RegisterName("instanceMask"))
+	return _r
 }
 
 // AllInstances returns *The IndexSet that encompases all instances except the background

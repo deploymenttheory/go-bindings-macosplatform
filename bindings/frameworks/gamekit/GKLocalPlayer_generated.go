@@ -58,6 +58,12 @@ func NewLocalPlayer() *LocalPlayer {
 	return localPlayerAdopt(_id)
 }
 
+// WithAuthenticateHandler sets a handler that GameKit calls while initializing the local player.
+func (lp *LocalPlayer) WithAuthenticateHandler(authenticateHandler func(obj.Object, unsafe.Pointer)) *LocalPlayer {
+	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("setAuthenticateHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { authenticateHandler(obj.Wrap(_b0), _b1) }))
+	return lp
+}
+
 // LoadRecentPlayers loads players from the friends list or players that recently participated in a game with the local player.
 //
 // LoadRecentPlayers blocks until the operation completes or ctx is cancelled.
@@ -108,6 +114,14 @@ func (lp *LocalPlayer) LoadChallengableFriends(ctx context.Context) (result obj.
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// FetchItemsForIdentityVerificationSignature generates a signature that you can use to authenticate the local player on your own server.
+func (lp *LocalPlayer) FetchItemsForIdentityVerificationSignature(completionHandler func(obj.Object, obj.Object, obj.Object, uint64, unsafe.Pointer)) {
+	defer runtime.KeepAlive(lp)
+	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("fetchItemsForIdentityVerificationSignature:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID, _b3 uint64, _b4 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2), _b3, _b4)
+	}))
 }
 
 // IsAuthenticated reports whether authentication state
@@ -236,6 +250,14 @@ func (lp *LocalPlayer) LoadFriendPlayers(ctx context.Context) (result obj.Object
 	}
 }
 
+// GenerateIdentityVerificationSignatureWithCompletionHandler generates a signature allowing 3rd party server to authenticate the GKLocalPlayer Possible reasons for error: 1. Communications problem 2. Unauthenticated player
+func (lp *LocalPlayer) GenerateIdentityVerificationSignatureWithCompletionHandler(completionHandler func(obj.Object, obj.Object, obj.Object, uint64, unsafe.Pointer)) {
+	defer runtime.KeepAlive(lp)
+	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("generateIdentityVerificationSignatureWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID, _b3 uint64, _b4 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2), _b3, _b4)
+	}))
+}
+
 // LoadDefaultLeaderboardIdentifier loads the identifier for the local player’s default leaderboard.
 //
 // LoadDefaultLeaderboardIdentifier blocks until the operation completes or ctx is cancelled.
@@ -317,6 +339,12 @@ func (lp *LocalPlayer) Friends() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
+// LoadFriendsAuthorizationStatus returns whether the player authorizes your game to access their friends list.
+func (lp *LocalPlayer) LoadFriendsAuthorizationStatus(completionHandler func(FriendsAuthorizationStatus, unsafe.Pointer)) {
+	defer runtime.KeepAlive(lp)
+	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("loadFriendsAuthorizationStatus:"), objc.NewBlock(func(_ objc.Block, _b0 FriendsAuthorizationStatus, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
 // LoadFriendsWithIdentifiers loads the player’s friends list, scoped by the identifiers, if the player and their friends grant access.
 //
 // LoadFriendsWithIdentifiers blocks until the operation completes or ctx is cancelled.
@@ -353,32 +381,6 @@ func (lp *LocalPlayer) PresentFriendRequestCreatorFromWindow(window obj.Object) 
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
-}
-
-// SetAuthenticateHandler wraps the corresponding Objective-C method.
-//
-// SetAuthenticateHandler blocks until the operation completes or ctx is cancelled.
-func (lp *LocalPlayer) SetAuthenticateHandler(ctx context.Context) (result obj.Object, err error) {
-	defer runtime.KeepAlive(lp)
-	type _result struct {
-		val obj.Object
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
-		var _o _result
-		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
-		_o.val = obj.Wrap(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("setAuthenticateHandler:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero obj.Object
-		return _zero, ctx.Err()
-	}
 }
 
 // IsPresentingFriendRequestViewController reports whether observable property that becomes true when the friend request view controller is displayed. It becomes false when it is dismissed

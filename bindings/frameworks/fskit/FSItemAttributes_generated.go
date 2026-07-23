@@ -279,6 +279,48 @@ func (ia *ItemAttributes) InhibitKernelOffloadedIO() bool {
 	return _r
 }
 
+// ModifyTime returns the item's last-modified time. This property represents `mtime`, the last time the item's contents changed.
+func (ia *ItemAttributes) ModifyTime() unsafe.Pointer {
+	defer runtime.KeepAlive(ia)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ia), objc.RegisterName("modifyTime"))
+	return _r
+}
+
+// AddedTime returns the item's added time. This property represents the time the file system added the item to its parent directory.
+func (ia *ItemAttributes) AddedTime() unsafe.Pointer {
+	defer runtime.KeepAlive(ia)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ia), objc.RegisterName("addedTime"))
+	return _r
+}
+
+// ChangeTime returns the item's last-changed time. This property represents `ctime`, the last time the item's metadata changed.
+func (ia *ItemAttributes) ChangeTime() unsafe.Pointer {
+	defer runtime.KeepAlive(ia)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ia), objc.RegisterName("changeTime"))
+	return _r
+}
+
+// AccessTime returns the item's last-accessed time.
+func (ia *ItemAttributes) AccessTime() unsafe.Pointer {
+	defer runtime.KeepAlive(ia)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ia), objc.RegisterName("accessTime"))
+	return _r
+}
+
+// BirthTime returns the item's creation time.
+func (ia *ItemAttributes) BirthTime() unsafe.Pointer {
+	defer runtime.KeepAlive(ia)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ia), objc.RegisterName("birthTime"))
+	return _r
+}
+
+// BackupTime returns the item's last-backup time.
+func (ia *ItemAttributes) BackupTime() unsafe.Pointer {
+	defer runtime.KeepAlive(ia)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ia), objc.RegisterName("backupTime"))
+	return _r
+}
+
 // isItemAttributes marks ItemAttributes — and, by embedding promotion, its
 // subclasses — as a member of the ItemAttributes hierarchy, sealing its provider
 // interface so only real members satisfy it.

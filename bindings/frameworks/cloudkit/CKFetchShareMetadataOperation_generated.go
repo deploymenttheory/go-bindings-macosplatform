@@ -5,11 +5,10 @@
 package cloudkit
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -81,6 +80,20 @@ func (fsmo *FetchShareMetadataOperation) WithShouldFetchRootRecord(shouldFetchRo
 func (fsmo *FetchShareMetadataOperation) WithRootRecordDesiredKeys(items ...obj.Object) *FetchShareMetadataOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setRootRecordDesiredKeys:"), _arr)
+	return fsmo
+}
+
+// WithPerShareMetadataBlock sets the closure to execute as the operation fetches individual shares.
+func (fsmo *FetchShareMetadataOperation) WithPerShareMetadataBlock(perShareMetadataBlock func(obj.Object, obj.Object, unsafe.Pointer)) *FetchShareMetadataOperation {
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setPerShareMetadataBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		perShareMetadataBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return fsmo
+}
+
+// WithFetchShareMetadataCompletionBlock sets the closure to execute when the operation finishes.
+func (fsmo *FetchShareMetadataOperation) WithFetchShareMetadataCompletionBlock(fetchShareMetadataCompletionBlock func(unsafe.Pointer)) *FetchShareMetadataOperation {
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setFetchShareMetadataCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { fetchShareMetadataCompletionBlock(_b0) }))
 	return fsmo
 }
 
@@ -158,26 +171,6 @@ func (fsmo *FetchShareMetadataOperation) RootRecordDesiredKeys() []obj.Object {
 	defer runtime.KeepAlive(fsmo)
 	_arr := objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("rootRecordDesiredKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetFetchShareMetadataCompletionBlock wraps the corresponding Objective-C method.
-//
-// SetFetchShareMetadataCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (fsmo *FetchShareMetadataOperation) SetFetchShareMetadataCompletionBlock(ctx context.Context) error {
-	defer runtime.KeepAlive(fsmo)
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _err error
-		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
-		_ch <- _err
-	})
-	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setFetchShareMetadataCompletionBlock:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
 }
 
 var _ OperationProvider = (*FetchShareMetadataOperation)(nil)

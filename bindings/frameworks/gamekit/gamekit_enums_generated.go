@@ -92,6 +92,37 @@ func (e ConnectionState) String() string {
 	}
 }
 
+// Constants that indicate if the local player grants access to their friends list.
+type FriendsAuthorizationStatus int64
+
+const (
+	// The player hasn’t choosen whether your game may access their friends list.
+	FriendsAuthorizationStatusNotDetermined FriendsAuthorizationStatus = 0
+	// Access to the player’s list of friends restricted.
+	FriendsAuthorizationStatusRestricted FriendsAuthorizationStatus = 1
+	// Access to the player’s friends’ data denied.
+	FriendsAuthorizationStatusDenied FriendsAuthorizationStatus = 2
+	// The player authorized your game to access their list of friends.
+	FriendsAuthorizationStatusAuthorized FriendsAuthorizationStatus = 3
+)
+
+// String returns the FriendsAuthorizationStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e FriendsAuthorizationStatus) String() string {
+	switch e {
+	case FriendsAuthorizationStatusNotDetermined:
+		return "FriendsAuthorizationStatusNotDetermined"
+	case FriendsAuthorizationStatusRestricted:
+		return "FriendsAuthorizationStatusRestricted"
+	case FriendsAuthorizationStatusDenied:
+		return "FriendsAuthorizationStatusDenied"
+	case FriendsAuthorizationStatusAuthorized:
+		return "FriendsAuthorizationStatusAuthorized"
+	default:
+		return fmt.Sprintf("FriendsAuthorizationStatus(%d)", int64(e))
+	}
+}
+
 // Play Style of the game activity. It can be either Asynchronous or Synchronous.
 type GameActivityPlayStyle int64
 
@@ -190,6 +221,69 @@ func (e GameCenterViewControllerState) String() string {
 		return "GameCenterViewControllerStateLocalPlayerFriendsList"
 	default:
 		return fmt.Sprintf("GameCenterViewControllerState(%d)", int64(e))
+	}
+}
+
+// A player’s response to an invitation to join a match.
+type InviteRecipientResponse int64
+
+const (
+	// A response when the player accepts the invitation.
+	InviteRecipientResponseAccepted InviteRecipientResponse = 0
+	// A response when the player rejects the invitation.
+	InviteRecipientResponseDeclined InviteRecipientResponse = 1
+	// A response when the system fails to deliver the invitation to the player.
+	InviteRecipientResponseFailed InviteRecipientResponse = 2
+	// A response when the player isn’t running a compatible version of the game.
+	InviteRecipientResponseIncompatible InviteRecipientResponse = 3
+	// A response when the system can’t contact the player.
+	InviteRecipientResponseUnableToConnect InviteRecipientResponse = 4
+	// A response when the invitation times out because the player doesn’t answer it.
+	InviteRecipientResponseNoAnswer InviteRecipientResponse = 5
+	// The player accepted the invitation.
+	//
+	// Deprecated: since macOS 15.4.
+	InviteeResponseAccepted InviteRecipientResponse = 0
+	// The player rejected the invitation.
+	//
+	// Deprecated: since macOS 15.4.
+	InviteeResponseDeclined InviteRecipientResponse = 1
+	// The invitation was unable to be delivered.
+	//
+	// Deprecated: since macOS 15.4.
+	InviteeResponseFailed InviteRecipientResponse = 2
+	// The invitee isn’t running a compatible version of your game.
+	//
+	// Deprecated: since macOS 15.4.
+	InviteeResponseIncompatible InviteRecipientResponse = 3
+	// The invitee couldn’t be contacted.
+	//
+	// Deprecated: since macOS 15.4.
+	InviteeResponseUnableToConnect InviteRecipientResponse = 4
+	// The invitation timed out without an answer.
+	//
+	// Deprecated: since macOS 15.4.
+	InviteeResponseNoAnswer InviteRecipientResponse = 5
+)
+
+// String returns the InviteRecipientResponse constant's name, or its numeric form when the
+// value is not a known constant.
+func (e InviteRecipientResponse) String() string {
+	switch e {
+	case InviteRecipientResponseAccepted:
+		return "InviteRecipientResponseAccepted"
+	case InviteRecipientResponseDeclined:
+		return "InviteRecipientResponseDeclined"
+	case InviteRecipientResponseFailed:
+		return "InviteRecipientResponseFailed"
+	case InviteRecipientResponseIncompatible:
+		return "InviteRecipientResponseIncompatible"
+	case InviteRecipientResponseUnableToConnect:
+		return "InviteRecipientResponseUnableToConnect"
+	case InviteRecipientResponseNoAnswer:
+		return "InviteRecipientResponseNoAnswer"
+	default:
+		return fmt.Sprintf("InviteRecipientResponse(%d)", int64(e))
 	}
 }
 
@@ -676,6 +770,38 @@ func (e TurnBasedParticipantStatus) String() string {
 		return "TurnBasedParticipantStatusDone"
 	default:
 		return fmt.Sprintf("TurnBasedParticipantStatus(%d)", int64(e))
+	}
+}
+
+// The state of a player in a voice chat.
+//
+// Deprecated: No longer supported
+type VoiceChatPlayerState int64
+
+const (
+	VoiceChatPlayerConnected    VoiceChatPlayerState = 0
+	VoiceChatPlayerDisconnected VoiceChatPlayerState = 1
+	VoiceChatPlayerSpeaking     VoiceChatPlayerState = 2
+	VoiceChatPlayerSilent       VoiceChatPlayerState = 3
+	VoiceChatPlayerConnecting   VoiceChatPlayerState = 4
+)
+
+// String returns the VoiceChatPlayerState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e VoiceChatPlayerState) String() string {
+	switch e {
+	case VoiceChatPlayerConnected:
+		return "VoiceChatPlayerConnected"
+	case VoiceChatPlayerDisconnected:
+		return "VoiceChatPlayerDisconnected"
+	case VoiceChatPlayerSpeaking:
+		return "VoiceChatPlayerSpeaking"
+	case VoiceChatPlayerSilent:
+		return "VoiceChatPlayerSilent"
+	case VoiceChatPlayerConnecting:
+		return "VoiceChatPlayerConnecting"
+	default:
+		return fmt.Sprintf("VoiceChatPlayerState(%d)", int64(e))
 	}
 }
 
@@ -1228,37 +1354,6 @@ func (e ErrorCode) String() string {
 	}
 }
 
-// Constants that indicate if the local player grants access to their friends list.
-type FriendsAuthorizationStatus int64
-
-const (
-	// The player hasn’t choosen whether your game may access their friends list.
-	FriendsAuthorizationStatusNotDetermined FriendsAuthorizationStatus = 0
-	// Access to the player’s list of friends restricted.
-	FriendsAuthorizationStatusRestricted FriendsAuthorizationStatus = 1
-	// Access to the player’s friends’ data denied.
-	FriendsAuthorizationStatusDenied FriendsAuthorizationStatus = 2
-	// The player authorized your game to access their list of friends.
-	FriendsAuthorizationStatusAuthorized FriendsAuthorizationStatus = 3
-)
-
-// String returns the FriendsAuthorizationStatus constant's name, or its numeric form when the
-// value is not a known constant.
-func (e FriendsAuthorizationStatus) String() string {
-	switch e {
-	case FriendsAuthorizationStatusNotDetermined:
-		return "FriendsAuthorizationStatusNotDetermined"
-	case FriendsAuthorizationStatusRestricted:
-		return "FriendsAuthorizationStatusRestricted"
-	case FriendsAuthorizationStatusDenied:
-		return "FriendsAuthorizationStatusDenied"
-	case FriendsAuthorizationStatusAuthorized:
-		return "FriendsAuthorizationStatusAuthorized"
-	default:
-		return fmt.Sprintf("FriendsAuthorizationStatus(%d)", int64(e))
-	}
-}
-
 // Error codes for the game session domain.
 //
 // Deprecated: GKGameSession is deprecated, use real-time and turn-based matchmaking APIs instead.
@@ -1323,101 +1418,6 @@ func (e GameSessionErrorCode) String() string {
 		return "GameSessionErrorInvalidSession"
 	default:
 		return fmt.Sprintf("GameSessionErrorCode(%d)", int64(e))
-	}
-}
-
-// A player’s response to an invitation to join a match.
-type InviteRecipientResponse int64
-
-const (
-	// A response when the player accepts the invitation.
-	InviteRecipientResponseAccepted InviteRecipientResponse = 0
-	// A response when the player rejects the invitation.
-	InviteRecipientResponseDeclined InviteRecipientResponse = 1
-	// A response when the system fails to deliver the invitation to the player.
-	InviteRecipientResponseFailed InviteRecipientResponse = 2
-	// A response when the player isn’t running a compatible version of the game.
-	InviteRecipientResponseIncompatible InviteRecipientResponse = 3
-	// A response when the system can’t contact the player.
-	InviteRecipientResponseUnableToConnect InviteRecipientResponse = 4
-	// A response when the invitation times out because the player doesn’t answer it.
-	InviteRecipientResponseNoAnswer InviteRecipientResponse = 5
-	// The player accepted the invitation.
-	//
-	// Deprecated: since macOS 15.4.
-	InviteeResponseAccepted InviteRecipientResponse = 0
-	// The player rejected the invitation.
-	//
-	// Deprecated: since macOS 15.4.
-	InviteeResponseDeclined InviteRecipientResponse = 1
-	// The invitation was unable to be delivered.
-	//
-	// Deprecated: since macOS 15.4.
-	InviteeResponseFailed InviteRecipientResponse = 2
-	// The invitee isn’t running a compatible version of your game.
-	//
-	// Deprecated: since macOS 15.4.
-	InviteeResponseIncompatible InviteRecipientResponse = 3
-	// The invitee couldn’t be contacted.
-	//
-	// Deprecated: since macOS 15.4.
-	InviteeResponseUnableToConnect InviteRecipientResponse = 4
-	// The invitation timed out without an answer.
-	//
-	// Deprecated: since macOS 15.4.
-	InviteeResponseNoAnswer InviteRecipientResponse = 5
-)
-
-// String returns the InviteRecipientResponse constant's name, or its numeric form when the
-// value is not a known constant.
-func (e InviteRecipientResponse) String() string {
-	switch e {
-	case InviteRecipientResponseAccepted:
-		return "InviteRecipientResponseAccepted"
-	case InviteRecipientResponseDeclined:
-		return "InviteRecipientResponseDeclined"
-	case InviteRecipientResponseFailed:
-		return "InviteRecipientResponseFailed"
-	case InviteRecipientResponseIncompatible:
-		return "InviteRecipientResponseIncompatible"
-	case InviteRecipientResponseUnableToConnect:
-		return "InviteRecipientResponseUnableToConnect"
-	case InviteRecipientResponseNoAnswer:
-		return "InviteRecipientResponseNoAnswer"
-	default:
-		return fmt.Sprintf("InviteRecipientResponse(%d)", int64(e))
-	}
-}
-
-// The state of a player in a voice chat.
-//
-// Deprecated: No longer supported
-type VoiceChatPlayerState int64
-
-const (
-	VoiceChatPlayerConnected    VoiceChatPlayerState = 0
-	VoiceChatPlayerDisconnected VoiceChatPlayerState = 1
-	VoiceChatPlayerSpeaking     VoiceChatPlayerState = 2
-	VoiceChatPlayerSilent       VoiceChatPlayerState = 3
-	VoiceChatPlayerConnecting   VoiceChatPlayerState = 4
-)
-
-// String returns the VoiceChatPlayerState constant's name, or its numeric form when the
-// value is not a known constant.
-func (e VoiceChatPlayerState) String() string {
-	switch e {
-	case VoiceChatPlayerConnected:
-		return "VoiceChatPlayerConnected"
-	case VoiceChatPlayerDisconnected:
-		return "VoiceChatPlayerDisconnected"
-	case VoiceChatPlayerSpeaking:
-		return "VoiceChatPlayerSpeaking"
-	case VoiceChatPlayerSilent:
-		return "VoiceChatPlayerSilent"
-	case VoiceChatPlayerConnecting:
-		return "VoiceChatPlayerConnecting"
-	default:
-		return fmt.Sprintf("VoiceChatPlayerState(%d)", int64(e))
 	}
 }
 

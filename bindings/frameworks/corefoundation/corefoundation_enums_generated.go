@@ -606,6 +606,57 @@ func (e CFPropertyListFormat) String() string {
 	}
 }
 
+// Run loop activity stages in which run loop observers can be scheduled.
+// Bitmask — values may be combined with |.
+type CFRunLoopActivity int64
+
+const (
+	// The entrance of the run loop, before entering the event processing loop. This activity occurs once for each call to CFRunLoopRun and CFRunLoopRunInMode.
+	KCFRunLoopEntry CFRunLoopActivity = 1
+	// Inside the event processing loop before any timers are processed.
+	KCFRunLoopBeforeTimers CFRunLoopActivity = 2
+	// Inside the event processing loop before any sources are processed.
+	KCFRunLoopBeforeSources CFRunLoopActivity = 4
+	KCFRunLoopBeforeWaiting CFRunLoopActivity = 32
+	// Inside the event processing loop after the run loop wakes up, but before processing the event that woke it up. This activity occurs only if the run loop did in fact go to sleep during the current loop.
+	KCFRunLoopAfterWaiting CFRunLoopActivity = 64
+	// The exit of the run loop, after exiting the event processing loop. This activity occurs once for each call to CFRunLoopRun and CFRunLoopRunInMode.
+	KCFRunLoopExit CFRunLoopActivity = 128
+	// A combination of all the preceding stages.
+	KCFRunLoopAllActivities CFRunLoopActivity = 268435455
+)
+
+// String returns the CFRunLoopActivity constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CFRunLoopActivity) String() string {
+	var parts []string
+	if e&KCFRunLoopEntry != 0 {
+		parts = append(parts, "KCFRunLoopEntry")
+	}
+	if e&KCFRunLoopBeforeTimers != 0 {
+		parts = append(parts, "KCFRunLoopBeforeTimers")
+	}
+	if e&KCFRunLoopBeforeSources != 0 {
+		parts = append(parts, "KCFRunLoopBeforeSources")
+	}
+	if e&KCFRunLoopBeforeWaiting != 0 {
+		parts = append(parts, "KCFRunLoopBeforeWaiting")
+	}
+	if e&KCFRunLoopAfterWaiting != 0 {
+		parts = append(parts, "KCFRunLoopAfterWaiting")
+	}
+	if e&KCFRunLoopExit != 0 {
+		parts = append(parts, "KCFRunLoopExit")
+	}
+	if e&KCFRunLoopAllActivities != 0 {
+		parts = append(parts, "KCFRunLoopAllActivities")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CFRunLoopRunResult int64
 
 const (
@@ -1758,57 +1809,6 @@ func (e CFPropertyListMutabilityOptions) String() string {
 	}
 	if e&KCFPropertyListMutableContainersAndLeaves != 0 {
 		parts = append(parts, "KCFPropertyListMutableContainersAndLeaves")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-// Run loop activity stages in which run loop observers can be scheduled.
-// Bitmask — values may be combined with |.
-type CFRunLoopActivity int64
-
-const (
-	// The entrance of the run loop, before entering the event processing loop. This activity occurs once for each call to CFRunLoopRun and CFRunLoopRunInMode.
-	KCFRunLoopEntry CFRunLoopActivity = 1
-	// Inside the event processing loop before any timers are processed.
-	KCFRunLoopBeforeTimers CFRunLoopActivity = 2
-	// Inside the event processing loop before any sources are processed.
-	KCFRunLoopBeforeSources CFRunLoopActivity = 4
-	KCFRunLoopBeforeWaiting CFRunLoopActivity = 32
-	// Inside the event processing loop after the run loop wakes up, but before processing the event that woke it up. This activity occurs only if the run loop did in fact go to sleep during the current loop.
-	KCFRunLoopAfterWaiting CFRunLoopActivity = 64
-	// The exit of the run loop, after exiting the event processing loop. This activity occurs once for each call to CFRunLoopRun and CFRunLoopRunInMode.
-	KCFRunLoopExit CFRunLoopActivity = 128
-	// A combination of all the preceding stages.
-	KCFRunLoopAllActivities CFRunLoopActivity = 268435455
-)
-
-// String returns the CFRunLoopActivity constant's name, or its numeric form when the
-// value is not a known constant.
-func (e CFRunLoopActivity) String() string {
-	var parts []string
-	if e&KCFRunLoopEntry != 0 {
-		parts = append(parts, "KCFRunLoopEntry")
-	}
-	if e&KCFRunLoopBeforeTimers != 0 {
-		parts = append(parts, "KCFRunLoopBeforeTimers")
-	}
-	if e&KCFRunLoopBeforeSources != 0 {
-		parts = append(parts, "KCFRunLoopBeforeSources")
-	}
-	if e&KCFRunLoopBeforeWaiting != 0 {
-		parts = append(parts, "KCFRunLoopBeforeWaiting")
-	}
-	if e&KCFRunLoopAfterWaiting != 0 {
-		parts = append(parts, "KCFRunLoopAfterWaiting")
-	}
-	if e&KCFRunLoopExit != 0 {
-		parts = append(parts, "KCFRunLoopExit")
-	}
-	if e&KCFRunLoopAllActivities != 0 {
-		parts = append(parts, "KCFRunLoopAllActivities")
 	}
 	if len(parts) == 0 {
 		return "0"

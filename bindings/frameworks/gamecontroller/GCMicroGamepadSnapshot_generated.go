@@ -70,6 +70,12 @@ func (mgs *MicroGamepadSnapshot) WithSnapshotData(snapshotData []byte) *MicroGam
 	return mgs
 }
 
+// WithValueChangedHandler sets the block that this profile calls when an element’s value changes.
+func (mgs *MicroGamepadSnapshot) WithValueChangedHandler(valueChangedHandler func(obj.Object, obj.Object)) *MicroGamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(mgs), objc.RegisterName("setValueChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueChangedHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return mgs
+}
+
 // WithReportsAbsoluteDpadValues sets a Boolean value that indicates whether the directional pad reports absolute or relative values.
 func (mgs *MicroGamepadSnapshot) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepadSnapshot {
 	objc.Send[objc.ID](objref.IDOf(mgs), objc.RegisterName("setReportsAbsoluteDpadValues:"), reportsAbsoluteDpadValues)

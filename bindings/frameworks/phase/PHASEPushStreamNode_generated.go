@@ -61,12 +61,27 @@ func (psn *PushStreamNode) ScheduleBuffer(buffer obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(psn), objc.RegisterName("scheduleBuffer:"), objref.IDOf(buffer))
 }
 
+// ScheduleBufferCompletionCallbackTypeCompletionHandler schedules audio data playback with a completion handler.
+func (psn *PushStreamNode) ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer obj.Object, completionCallbackType PushStreamCompletionCallbackCondition, completionHandler func(PushStreamCompletionCallbackCondition)) {
+	defer runtime.KeepAlive(psn)
+	defer runtime.KeepAlive(buffer)
+	objc.Send[objc.ID](objref.IDOf(psn), objc.RegisterName("scheduleBuffer:completionCallbackType:completionHandler:"), objref.IDOf(buffer), completionCallbackType, objc.NewBlock(func(_ objc.Block, _b0 PushStreamCompletionCallbackCondition) { completionHandler(_b0) }))
+}
+
 // ScheduleBufferAtTime schedules audio data playback at a specific time.
 func (psn *PushStreamNode) ScheduleBufferAtTime(buffer obj.Object, when obj.Object, options PushStreamBufferOptions) {
 	defer runtime.KeepAlive(psn)
 	defer runtime.KeepAlive(buffer)
 	defer runtime.KeepAlive(when)
 	objc.Send[objc.ID](objref.IDOf(psn), objc.RegisterName("scheduleBuffer:atTime:options:"), objref.IDOf(buffer), objref.IDOf(when), options)
+}
+
+// ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler schedules audio data playback at a specific time with a completion handler.
+func (psn *PushStreamNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer obj.Object, when obj.Object, options PushStreamBufferOptions, completionCallbackType PushStreamCompletionCallbackCondition, completionHandler func(PushStreamCompletionCallbackCondition)) {
+	defer runtime.KeepAlive(psn)
+	defer runtime.KeepAlive(buffer)
+	defer runtime.KeepAlive(when)
+	objc.Send[objc.ID](objref.IDOf(psn), objc.RegisterName("scheduleBuffer:atTime:options:completionCallbackType:completionHandler:"), objref.IDOf(buffer), objref.IDOf(when), options, completionCallbackType, objc.NewBlock(func(_ objc.Block, _b0 PushStreamCompletionCallbackCondition) { completionHandler(_b0) }))
 }
 
 var _ StreamNodeProvider = (*PushStreamNode)(nil)

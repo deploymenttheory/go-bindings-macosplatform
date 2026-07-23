@@ -47,7 +47,7 @@ type PlugInInputImageSource interface {
 	BufferPixelsHigh() int
 	BufferPixelFormat() string
 	BufferColorSpace() obj.Object
-	BufferBaseAddress() obj.Object
+	BufferBaseAddress() unsafe.Pointer
 	BufferBytesPerRow() int
 	UnlockBufferRepresentation()
 	LockTextureRepresentationWithColorSpaceForBounds(colorSpace obj.Object, bounds corefoundation.CGRect) bool

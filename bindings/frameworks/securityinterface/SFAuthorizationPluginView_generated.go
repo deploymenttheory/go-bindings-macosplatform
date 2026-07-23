@@ -81,10 +81,31 @@ func NewAuthorizationPluginViewWithCallbacksAndEngineRef(callbacks unsafe.Pointe
 	return authorizationPluginViewAdopt(_id)
 }
 
+// EngineRef returns the authorization engine handle with which this instance was initialized.
+func (apv *AuthorizationPluginView) EngineRef() unsafe.Pointer {
+	defer runtime.KeepAlive(apv)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(apv), objc.RegisterName("engineRef"))
+	return _r
+}
+
+// Callbacks returns the authorization callbacks structure with which this instance was initialized.
+func (apv *AuthorizationPluginView) Callbacks() unsafe.Pointer {
+	defer runtime.KeepAlive(apv)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(apv), objc.RegisterName("callbacks"))
+	return _r
+}
+
 // ButtonPressed tells the authorization plug-in that the user pressed a button in the custom view.
 func (apv *AuthorizationPluginView) ButtonPressed(inButtonType ButtonType) {
 	defer runtime.KeepAlive(apv)
 	objc.Send[objc.ID](objref.IDOf(apv), objc.RegisterName("buttonPressed:"), inButtonType)
+}
+
+// LastError returns the last error that occurred during evaluation.
+func (apv *AuthorizationPluginView) LastError() unsafe.Pointer {
+	defer runtime.KeepAlive(apv)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(apv), objc.RegisterName("lastError"))
+	return _r
 }
 
 // DidActivate tells the authorization plug-in when its user interface has become active.

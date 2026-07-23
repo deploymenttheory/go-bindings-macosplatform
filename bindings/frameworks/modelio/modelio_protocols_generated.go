@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
@@ -77,8 +79,8 @@ type TransformComponent interface {
 
 // TransformOp is the Go form of the Objective-C protocol MDLTransformOp.
 type TransformOp interface {
-	Float4x4AtTime(time_ float64) obj.Object
-	Double4x4AtTime(time_ float64) obj.Object
+	Float4x4AtTime(time_ float64) unsafe.Pointer
+	Double4x4AtTime(time_ float64) unsafe.Pointer
 	IsInverseOp() bool
 	Name() string
 }

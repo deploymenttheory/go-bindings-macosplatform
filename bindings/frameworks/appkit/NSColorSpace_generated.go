@@ -103,6 +103,13 @@ func (cs *ColorSpace) ICCProfileData() []byte {
 	return rt.NSDataToBytes(_r)
 }
 
+// ColorSyncProfile returns the color sync profile.
+func (cs *ColorSpace) ColorSyncProfile() unsafe.Pointer {
+	defer runtime.KeepAlive(cs)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(cs), objc.RegisterName("colorSyncProfile"))
+	return _r
+}
+
 // CGColorSpace returns the cg color space.
 func (cs *ColorSpace) CGColorSpace() obj.Object {
 	defer runtime.KeepAlive(cs)

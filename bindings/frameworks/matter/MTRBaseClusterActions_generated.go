@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -67,6 +68,90 @@ func NewMTRBaseClusterActionsWithDeviceEndpointQueue(device *MTRBaseDevice, endp
 	return mTRBaseClusterActionsAdopt(_id)
 }
 
+// InstantActionWithParamsCompletion command InstantAction This command is used to trigger an instantaneous action.
+func (mbca *MTRBaseClusterActions) InstantActionWithParamsCompletion(params *MTRActionsClusterInstantActionParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("instantActionWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// InstantActionWithTransitionWithParamsCompletion command InstantActionWithTransition This command is used to trigger an instantaneous action with a transition over a given time.
+func (mbca *MTRBaseClusterActions) InstantActionWithTransitionWithParamsCompletion(params *MTRActionsClusterInstantActionWithTransitionParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("instantActionWithTransitionWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StartActionWithParamsCompletion command StartAction This command is used to trigger the commencement of an action.
+func (mbca *MTRBaseClusterActions) StartActionWithParamsCompletion(params *MTRActionsClusterStartActionParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("startActionWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StartActionWithDurationWithParamsCompletion command StartActionWithDuration This command is used to trigger the commencement of an action with a duration.
+func (mbca *MTRBaseClusterActions) StartActionWithDurationWithParamsCompletion(params *MTRActionsClusterStartActionWithDurationParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("startActionWithDurationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// StopActionWithParamsCompletion command StopAction This command is used to stop an action.
+func (mbca *MTRBaseClusterActions) StopActionWithParamsCompletion(params *MTRActionsClusterStopActionParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("stopActionWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// PauseActionWithParamsCompletion command PauseAction This command is used to pause an action.
+func (mbca *MTRBaseClusterActions) PauseActionWithParamsCompletion(params *MTRActionsClusterPauseActionParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("pauseActionWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// PauseActionWithDurationWithParamsCompletion command PauseActionWithDuration This command is used to pause an action with a duration.
+func (mbca *MTRBaseClusterActions) PauseActionWithDurationWithParamsCompletion(params *MTRActionsClusterPauseActionWithDurationParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("pauseActionWithDurationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ResumeActionWithParamsCompletion command ResumeAction This command is used to resume an action.
+func (mbca *MTRBaseClusterActions) ResumeActionWithParamsCompletion(params *MTRActionsClusterResumeActionParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("resumeActionWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnableActionWithParamsCompletion command EnableAction This command is used to enable an action.
+func (mbca *MTRBaseClusterActions) EnableActionWithParamsCompletion(params *MTRActionsClusterEnableActionParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("enableActionWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// EnableActionWithDurationWithParamsCompletion command EnableActionWithDuration This command is used to enable an action with a duration.
+func (mbca *MTRBaseClusterActions) EnableActionWithDurationWithParamsCompletion(params *MTRActionsClusterEnableActionWithDurationParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("enableActionWithDurationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// DisableActionWithParamsCompletion command DisableAction This command is used to disable an action.
+func (mbca *MTRBaseClusterActions) DisableActionWithParamsCompletion(params *MTRActionsClusterDisableActionParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("disableActionWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// DisableActionWithDurationWithParamsCompletion command DisableActionWithDuration This command is used to disable an action with a duration.
+func (mbca *MTRBaseClusterActions) DisableActionWithDurationWithParamsCompletion(params *MTRActionsClusterDisableActionWithDurationParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("disableActionWithDurationWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeActionListWithCompletion reads attribute action list with completion.
 //
 // ReadAttributeActionListWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -110,7 +195,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeActionListWithParamsSubscri
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeActionListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeActionListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +248,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeEndpointListsWithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeEndpointListsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeEndpointListsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -216,7 +301,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeSetupURLWithParamsSubscript
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeSetupURLWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeSetupURLWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -269,7 +354,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeGeneratedCommandListWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -322,7 +407,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeAcceptedCommandListWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -375,7 +460,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeAttributeListWithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -428,7 +513,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeFeatureMapWithParamsSubscri
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +566,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeClusterRevisionWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -489,6 +574,90 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeClusterRevisionWithParamsSu
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// InstantActionWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbca *MTRBaseClusterActions) InstantActionWithParamsCompletionHandler(params *MTRActionsClusterInstantActionParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("instantActionWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// InstantActionWithTransitionWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbca *MTRBaseClusterActions) InstantActionWithTransitionWithParamsCompletionHandler(params *MTRActionsClusterInstantActionWithTransitionParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("instantActionWithTransitionWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StartActionWithParamsCompletionHandler starts action with params completion handler.
+func (mbca *MTRBaseClusterActions) StartActionWithParamsCompletionHandler(params *MTRActionsClusterStartActionParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("startActionWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StartActionWithDurationWithParamsCompletionHandler starts action with duration with params completion handler.
+func (mbca *MTRBaseClusterActions) StartActionWithDurationWithParamsCompletionHandler(params *MTRActionsClusterStartActionWithDurationParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("startActionWithDurationWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// StopActionWithParamsCompletionHandler stops action with params completion handler.
+func (mbca *MTRBaseClusterActions) StopActionWithParamsCompletionHandler(params *MTRActionsClusterStopActionParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("stopActionWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// PauseActionWithParamsCompletionHandler pauses action with params completion handler.
+func (mbca *MTRBaseClusterActions) PauseActionWithParamsCompletionHandler(params *MTRActionsClusterPauseActionParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("pauseActionWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// PauseActionWithDurationWithParamsCompletionHandler pauses action with duration with params completion handler.
+func (mbca *MTRBaseClusterActions) PauseActionWithDurationWithParamsCompletionHandler(params *MTRActionsClusterPauseActionWithDurationParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("pauseActionWithDurationWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// ResumeActionWithParamsCompletionHandler resumes action with params completion handler.
+func (mbca *MTRBaseClusterActions) ResumeActionWithParamsCompletionHandler(params *MTRActionsClusterResumeActionParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("resumeActionWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// EnableActionWithParamsCompletionHandler enables action with params completion handler.
+func (mbca *MTRBaseClusterActions) EnableActionWithParamsCompletionHandler(params *MTRActionsClusterEnableActionParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("enableActionWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// EnableActionWithDurationWithParamsCompletionHandler enables action with duration with params completion handler.
+func (mbca *MTRBaseClusterActions) EnableActionWithDurationWithParamsCompletionHandler(params *MTRActionsClusterEnableActionWithDurationParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("enableActionWithDurationWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// DisableActionWithParamsCompletionHandler disables action with params completion handler.
+func (mbca *MTRBaseClusterActions) DisableActionWithParamsCompletionHandler(params *MTRActionsClusterDisableActionParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("disableActionWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// DisableActionWithDurationWithParamsCompletionHandler disables action with duration with params completion handler.
+func (mbca *MTRBaseClusterActions) DisableActionWithDurationWithParamsCompletionHandler(params *MTRActionsClusterDisableActionWithDurationParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbca)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("disableActionWithDurationWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // ReadAttributeActionList reads attribute action list.
@@ -536,7 +705,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeActionListWithMinIntervalMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeActionListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeActionListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -591,7 +760,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeEndpointListsWithMinInterva
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeEndpointListsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeEndpointListsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -646,7 +815,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeSetupURLWithMinIntervalMaxI
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeSetupURLWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeSetupURLWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -701,7 +870,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeGeneratedCommandListWithMin
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -756,7 +925,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeAcceptedCommandListWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -811,7 +980,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeAttributeListWithMinInterva
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -866,7 +1035,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeFeatureMapWithMinIntervalMa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -921,7 +1090,7 @@ func (mbca *MTRBaseClusterActions) SubscribeAttributeClusterRevisionWithMinInter
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbca), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

@@ -5420,15 +5420,15 @@ func CFRunLoopObserverCreate(allocator obj.Object, activities int, repeats uint8
 	return obj.Wrap(_ret)
 }
 
-var _fnCFRunLoopObserverCreateWithHandler func(objc.ID, int, uint8, int, unsafe.Pointer) objc.ID
+var _fnCFRunLoopObserverCreateWithHandler func(objc.ID, int, uint8, int, objc.Block) objc.ID
 
 // CFRunLoopObserverCreateWithHandler calls the CoreFoundation framework function CFRunLoopObserverCreateWithHandler.
-func CFRunLoopObserverCreateWithHandler(allocator obj.Object, activities int, repeats uint8, order int, block unsafe.Pointer) obj.Object {
+func CFRunLoopObserverCreateWithHandler(allocator obj.Object, activities int, repeats uint8, order int, block func(unsafe.Pointer, CFRunLoopActivity)) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFRunLoopObserverCreateWithHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnCFRunLoopObserverCreateWithHandler, _lib, "CFRunLoopObserverCreateWithHandler")
 	}
-	_ret := _fnCFRunLoopObserverCreateWithHandler(objref.IDOf(allocator), activities, repeats, order, block)
+	_ret := _fnCFRunLoopObserverCreateWithHandler(objref.IDOf(allocator), activities, repeats, order, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 CFRunLoopActivity) { block(_b0, _b1) }))
 	return obj.Wrap(_ret)
 }
 
@@ -5676,15 +5676,15 @@ func CFRunLoopTimerCreate(allocator obj.Object, fireDate float64, interval float
 	return obj.Wrap(_ret)
 }
 
-var _fnCFRunLoopTimerCreateWithHandler func(objc.ID, float64, float64, int, int, unsafe.Pointer) objc.ID
+var _fnCFRunLoopTimerCreateWithHandler func(objc.ID, float64, float64, int, int, objc.Block) objc.ID
 
 // CFRunLoopTimerCreateWithHandler calls the CoreFoundation framework function CFRunLoopTimerCreateWithHandler.
-func CFRunLoopTimerCreateWithHandler(allocator obj.Object, fireDate float64, interval float64, flags int, order int, block unsafe.Pointer) obj.Object {
+func CFRunLoopTimerCreateWithHandler(allocator obj.Object, fireDate float64, interval float64, flags int, order int, block func(unsafe.Pointer)) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFRunLoopTimerCreateWithHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnCFRunLoopTimerCreateWithHandler, _lib, "CFRunLoopTimerCreateWithHandler")
 	}
-	_ret := _fnCFRunLoopTimerCreateWithHandler(objref.IDOf(allocator), fireDate, interval, flags, order, block)
+	_ret := _fnCFRunLoopTimerCreateWithHandler(objref.IDOf(allocator), fireDate, interval, flags, order, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { block(_b0) }))
 	return obj.Wrap(_ret)
 }
 

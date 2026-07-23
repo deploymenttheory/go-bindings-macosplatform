@@ -6,6 +6,7 @@ package social
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -104,6 +105,14 @@ func (r *Request) PreparedURLRequest() *foundation.URLRequest {
 	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("preparedURLRequest"))
 	return foundation.URLRequestFromID(_r)
+}
+
+// PerformRequestWithHandler performs an asynchronous request and calls the specified handler when done.
+func (r *Request) PerformRequestWithHandler(handler func(obj.Object, obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(r)
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("performRequestWithHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		handler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 }
 
 // Account returns the account.

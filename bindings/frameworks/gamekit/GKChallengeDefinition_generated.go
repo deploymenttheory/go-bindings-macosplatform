@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -79,6 +80,12 @@ func NewChallengeDefinition() *ChallengeDefinition {
 	return challengeDefinitionAdopt(_id)
 }
 
+// LoadImageWithCompletionHandler loads the image set on the challenge definition, which may be nil if none was set.
+func (cd *ChallengeDefinition) LoadImageWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(cd)
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("loadImageWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
 // Identifier returns the developer defined identifier for a given challenge definition.
 func (cd *ChallengeDefinition) Identifier() string {
 	defer runtime.KeepAlive(cd)
@@ -147,4 +154,10 @@ func (cd *ChallengeDefinition) ReleaseState() ReleaseState {
 	defer runtime.KeepAlive(cd)
 	_r := objc.Send[ReleaseState](objref.IDOf(cd), objc.RegisterName("releaseState"))
 	return _r
+}
+
+// HasActiveChallengesWithCompletionHandler indicates if this definition has active challenges associated with it.
+func (cd *ChallengeDefinition) HasActiveChallengesWithCompletionHandler(completionHandler func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(cd)
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("hasActiveChallengesWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }

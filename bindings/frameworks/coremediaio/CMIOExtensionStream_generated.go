@@ -6,6 +6,7 @@ package coremediaio
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -92,6 +93,15 @@ func (es *ExtensionStream) SendSampleBufferDiscontinuityHostTimeInNanoseconds(sa
 	defer runtime.KeepAlive(es)
 	defer runtime.KeepAlive(sampleBuffer)
 	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("sendSampleBuffer:discontinuity:hostTimeInNanoseconds:"), objref.IDOf(sampleBuffer), discontinuity, hostTimeInNanoseconds)
+}
+
+// ConsumeSampleBufferFromClientCompletionHandler consumes a sample buffer from a client.
+func (es *ExtensionStream) ConsumeSampleBufferFromClientCompletionHandler(client *ExtensionClient, completionHandler func(unsafe.Pointer, uint64, ExtensionStreamDiscontinuityFlags, bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(es)
+	defer runtime.KeepAlive(client)
+	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("consumeSampleBufferFromClient:completionHandler:"), objref.IDOf(client), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 uint64, _b2 ExtensionStreamDiscontinuityFlags, _b3 bool, _b4 unsafe.Pointer) {
+		completionHandler(_b0, _b1, _b2, _b3, _b4)
+	}))
 }
 
 // NotifyScheduledOutputChanged notifies clients when a particular buffer is output.

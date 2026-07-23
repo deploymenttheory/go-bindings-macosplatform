@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -67,6 +68,26 @@ func NewMTRBaseClusterBarrierControlWithDeviceEndpointQueue(device *MTRBaseDevic
 	return mTRBaseClusterBarrierControlAdopt(_id)
 }
 
+// BarrierControlGoToPercentWithParamsCompletion command BarrierControlGoToPercent Command to instruct a barrier to go to a percent open state.
+func (mbcbc *MTRBaseClusterBarrierControl) BarrierControlGoToPercentWithParamsCompletion(params *MTRBarrierControlClusterBarrierControlGoToPercentParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("barrierControlGoToPercentWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// BarrierControlStopWithParamsCompletion command BarrierControlStop Command that instructs the barrier to stop moving.
+func (mbcbc *MTRBaseClusterBarrierControl) BarrierControlStopWithParamsCompletion(params *MTRBarrierControlClusterBarrierControlStopParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("barrierControlStopWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// BarrierControlStopWithCompletion wraps the corresponding Objective-C method.
+func (mbcbc *MTRBaseClusterBarrierControl) BarrierControlStopWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("barrierControlStopWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeBarrierMovingStateWithCompletion reads attribute barrier moving state with completion.
 //
 // ReadAttributeBarrierMovingStateWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -110,7 +131,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierMovingStateW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierMovingStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierMovingStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +184,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierSafetyStatus
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierSafetyStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierSafetyStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -216,7 +237,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCapabilities
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCapabilitiesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCapabilitiesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -252,6 +273,21 @@ func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierOpenEventsWithCom
 	}
 }
 
+// WriteAttributeBarrierOpenEventsWithValueCompletion writes attribute barrier open events with value completion.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierOpenEventsWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierOpenEventsWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeBarrierOpenEventsWithValueParamsCompletion writes attribute barrier open events with value params completion.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierOpenEventsWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierOpenEventsWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeBarrierOpenEventsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBarrierOpenEventsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -269,7 +305,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierOpenEventsWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierOpenEventsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierOpenEventsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -305,6 +341,21 @@ func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCloseEventsWithCo
 	}
 }
 
+// WriteAttributeBarrierCloseEventsWithValueCompletion writes attribute barrier close events with value completion.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierCloseEventsWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierCloseEventsWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeBarrierCloseEventsWithValueParamsCompletion writes attribute barrier close events with value params completion.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierCloseEventsWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierCloseEventsWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeBarrierCloseEventsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBarrierCloseEventsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -322,7 +373,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCloseEventsW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCloseEventsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCloseEventsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -358,6 +409,21 @@ func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCommandOpenEvents
 	}
 }
 
+// WriteAttributeBarrierCommandOpenEventsWithValueCompletion writes attribute barrier command open events with value completion.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierCommandOpenEventsWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierCommandOpenEventsWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeBarrierCommandOpenEventsWithValueParamsCompletion writes attribute barrier command open events with value params completion.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierCommandOpenEventsWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierCommandOpenEventsWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeBarrierCommandOpenEventsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBarrierCommandOpenEventsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -375,7 +441,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCommandOpenE
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCommandOpenEventsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCommandOpenEventsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -411,6 +477,21 @@ func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCommandCloseEvent
 	}
 }
 
+// WriteAttributeBarrierCommandCloseEventsWithValueCompletion writes attribute barrier command close events with value completion.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierCommandCloseEventsWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierCommandCloseEventsWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeBarrierCommandCloseEventsWithValueParamsCompletion writes attribute barrier command close events with value params completion.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierCommandCloseEventsWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierCommandCloseEventsWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeBarrierCommandCloseEventsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBarrierCommandCloseEventsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -428,7 +509,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCommandClose
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCommandCloseEventsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCommandCloseEventsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -464,6 +545,21 @@ func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierOpenPeriodWithCom
 	}
 }
 
+// WriteAttributeBarrierOpenPeriodWithValueCompletion writes attribute barrier open period with value completion.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierOpenPeriodWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierOpenPeriodWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeBarrierOpenPeriodWithValueParamsCompletion writes attribute barrier open period with value params completion.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierOpenPeriodWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierOpenPeriodWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeBarrierOpenPeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBarrierOpenPeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -481,7 +577,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierOpenPeriodWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierOpenPeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierOpenPeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -517,6 +613,21 @@ func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierClosePeriodWithCo
 	}
 }
 
+// WriteAttributeBarrierClosePeriodWithValueCompletion writes attribute barrier close period with value completion.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierClosePeriodWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierClosePeriodWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeBarrierClosePeriodWithValueParamsCompletion writes attribute barrier close period with value params completion.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierClosePeriodWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierClosePeriodWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeBarrierClosePeriodWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBarrierClosePeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -534,7 +645,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierClosePeriodW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierClosePeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierClosePeriodWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -587,7 +698,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierPositionWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierPositionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierPositionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -640,7 +751,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeGeneratedCommandLis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -693,7 +804,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeAcceptedCommandList
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -746,7 +857,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeAttributeListWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -799,7 +910,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeFeatureMapWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -852,7 +963,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeClusterRevisionWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -860,6 +971,26 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeClusterRevisionWith
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// BarrierControlGoToPercentWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcbc *MTRBaseClusterBarrierControl) BarrierControlGoToPercentWithParamsCompletionHandler(params *MTRBarrierControlClusterBarrierControlGoToPercentParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("barrierControlGoToPercentWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// BarrierControlStopWithParamsCompletionHandler wraps the corresponding Objective-C method.
+func (mbcbc *MTRBaseClusterBarrierControl) BarrierControlStopWithParamsCompletionHandler(params *MTRBarrierControlClusterBarrierControlStopParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("barrierControlStopWithParams:completionHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// BarrierControlStopWithCompletionHandler wraps the corresponding Objective-C method.
+func (mbcbc *MTRBaseClusterBarrierControl) BarrierControlStopWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("barrierControlStopWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // ReadAttributeBarrierMovingState reads attribute barrier moving state.
@@ -907,7 +1038,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierMovingStateW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierMovingStateWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierMovingStateWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -962,7 +1093,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierSafetyStatus
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierSafetyStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierSafetyStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1017,7 +1148,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCapabilities
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCapabilitiesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCapabilitiesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1053,6 +1184,21 @@ func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierOpenEvents(ctx co
 	}
 }
 
+// WriteAttributeBarrierOpenEventsWithValueCompletionHandler writes attribute barrier open events with value completion handler.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierOpenEventsWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierOpenEventsWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeBarrierOpenEventsWithValueParamsCompletionHandler writes attribute barrier open events with value params completion handler.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierOpenEventsWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierOpenEventsWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeBarrierOpenEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBarrierOpenEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1072,7 +1218,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierOpenEventsWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierOpenEventsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierOpenEventsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1108,6 +1254,21 @@ func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCloseEvents(ctx c
 	}
 }
 
+// WriteAttributeBarrierCloseEventsWithValueCompletionHandler writes attribute barrier close events with value completion handler.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierCloseEventsWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierCloseEventsWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeBarrierCloseEventsWithValueParamsCompletionHandler writes attribute barrier close events with value params completion handler.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierCloseEventsWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierCloseEventsWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeBarrierCloseEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBarrierCloseEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1127,7 +1288,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCloseEventsW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCloseEventsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCloseEventsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1163,6 +1324,21 @@ func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCommandOpenEvents
 	}
 }
 
+// WriteAttributeBarrierCommandOpenEventsWithValueCompletionHandler writes attribute barrier command open events with value completion handler.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierCommandOpenEventsWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierCommandOpenEventsWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeBarrierCommandOpenEventsWithValueParamsCompletionHandler writes attribute barrier command open events with value params completion handler.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierCommandOpenEventsWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierCommandOpenEventsWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeBarrierCommandOpenEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBarrierCommandOpenEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1182,7 +1358,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCommandOpenE
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCommandOpenEventsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCommandOpenEventsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1218,6 +1394,21 @@ func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCommandCloseEvent
 	}
 }
 
+// WriteAttributeBarrierCommandCloseEventsWithValueCompletionHandler writes attribute barrier command close events with value completion handler.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierCommandCloseEventsWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierCommandCloseEventsWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeBarrierCommandCloseEventsWithValueParamsCompletionHandler writes attribute barrier command close events with value params completion handler.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierCommandCloseEventsWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierCommandCloseEventsWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeBarrierCommandCloseEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBarrierCommandCloseEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1237,7 +1428,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCommandClose
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCommandCloseEventsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierCommandCloseEventsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1273,6 +1464,21 @@ func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierOpenPeriod(ctx co
 	}
 }
 
+// WriteAttributeBarrierOpenPeriodWithValueCompletionHandler writes attribute barrier open period with value completion handler.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierOpenPeriodWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierOpenPeriodWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeBarrierOpenPeriodWithValueParamsCompletionHandler writes attribute barrier open period with value params completion handler.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierOpenPeriodWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierOpenPeriodWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeBarrierOpenPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBarrierOpenPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1292,7 +1498,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierOpenPeriodWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierOpenPeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierOpenPeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1328,6 +1534,21 @@ func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierClosePeriod(ctx c
 	}
 }
 
+// WriteAttributeBarrierClosePeriodWithValueCompletionHandler writes attribute barrier close period with value completion handler.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierClosePeriodWithValueCompletionHandler(value obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierClosePeriodWithValue:completionHandler:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// WriteAttributeBarrierClosePeriodWithValueParamsCompletionHandler writes attribute barrier close period with value params completion handler.
+func (mbcbc *MTRBaseClusterBarrierControl) WriteAttributeBarrierClosePeriodWithValueParamsCompletionHandler(value obj.Object, params *MTRWriteParams, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcbc)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("writeAttributeBarrierClosePeriodWithValue:params:completionHandler:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // SubscribeAttributeBarrierClosePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBarrierClosePeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1347,7 +1568,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierClosePeriodW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierClosePeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierClosePeriodWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1402,7 +1623,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierPositionWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierPositionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeBarrierPositionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1457,7 +1678,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeGeneratedCommandLis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1512,7 +1733,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeAcceptedCommandList
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1567,7 +1788,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeAttributeListWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1622,7 +1843,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeFeatureMapWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1677,7 +1898,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeClusterRevisionWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcbc), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablishedHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

@@ -81,6 +81,13 @@ func NewAsynchronousVideoCompositionRequest() *AsynchronousVideoCompositionReque
 	return asynchronousVideoCompositionRequestAdopt(_id)
 }
 
+// SourceFrameByTrackID returns a source pixel buffer for the track that contains the specified identifier.
+func (avcr *AsynchronousVideoCompositionRequest) SourceFrameByTrackID(trackID int32) unsafe.Pointer {
+	defer runtime.KeepAlive(avcr)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(avcr), objc.RegisterName("sourceFrameByTrackID:"), trackID)
+	return _r
+}
+
 // SourceSampleBufferByTrackID returns a source sample buffer for the track that contains the specified identifier.
 func (avcr *AsynchronousVideoCompositionRequest) SourceSampleBufferByTrackID(trackID int32) obj.Object {
 	defer runtime.KeepAlive(avcr)

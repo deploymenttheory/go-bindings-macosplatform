@@ -122,6 +122,13 @@ func (dd *DepthData) DepthDataType() int {
 	return _r
 }
 
+// DepthDataMap provides access to the depth data object's internal map. The depth data map's pixel format can be queried using the depthDataType property.
+func (dd *DepthData) DepthDataMap() unsafe.Pointer {
+	defer runtime.KeepAlive(dd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(dd), objc.RegisterName("depthDataMap"))
+	return _r
+}
+
 // DepthDataQuality specifies the overall quality of the depth data map's values. See AVDepthDataQuality documentation for more information.
 func (dd *DepthData) DepthDataQuality() DepthDataQuality {
 	defer runtime.KeepAlive(dd)

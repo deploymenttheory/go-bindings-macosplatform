@@ -50,6 +50,26 @@ type File struct {
 	// ErrorTypedefs registers status-code typedefs whose function returns the
 	// idiomatic layer converts to Go errors.
 	ErrorTypedefs []ErrorTypedef `json:"error_typedefs,omitempty"`
+	// InOutCountParams marks specific C-function parameters as in/out element-
+	// count pointers.
+	InOutCountParams []InOutCountParam `json:"inout_count_params,omitempty"`
+}
+
+// InOutCountParam marks one C-function parameter as an in/out element-count
+// pointer — the C "(T *buf, int *count)" idiom where *count is the buffer
+// capacity on input and the number of elements processed on output (e.g.
+// vmnet_read / vmnet_write). Such a parameter is threaded through the idiomatic
+// wrapper as a caller-supplied *N rather than lifted into a return value: the
+// default emitter treats a lone scalar pointer as a pure out-parameter and
+// declares it as a zero-initialised local, which for an in/out count would tell
+// the framework the buffer holds zero elements and make the call a no-op. This
+// opt-in is needed only where the count is read on input; pure out counts (the
+// common case) are left to the default lift.
+//
+//nolint:tagliatelle // snake_case keys match the committed sidecar convention.
+type InOutCountParam struct {
+	CName string `json:"c_name"`
+	Param string `json:"param"`
 }
 
 // MethodRename maps one ObjC method to a curated Go name.
@@ -160,6 +180,13 @@ func (f *File) checkWellFormed() error {
 				ErrInvalidConfig, typedef.Typedef, typedef.Domain)
 		}
 	}
+	for _, e := range f.InOutCountParams {
+		if e.CName == "" || e.Param == "" {
+			return fmt.Errorf(
+				"%w: inout_count_params needs c_name and param (got c_name=%q param=%q)",
+				ErrInvalidConfig, e.CName, e.Param)
+		}
+	}
 	return nil
 }
 
@@ -217,6 +244,17 @@ func Validate(file *File, framework *meta.FrameworkMeta) []string {
 		}
 	}
 
+	for _, e := range file.InOutCountParams {
+		fn, ok := frameworkFunction(framework, e.CName)
+		if !ok {
+			stale("inout_count_params: no function %q", e.CName)
+			continue
+		}
+		if !functionHasParam(fn, e.Param) {
+			stale("inout_count_params: function %q has no parameter %q", e.CName, e.Param)
+		}
+	}
+
 	return warnings
 }
 
@@ -264,6 +302,20 @@ func (f *File) IsDelegateExcluded(protocolName string) bool {
 	return f != nil && slices.Contains(f.Delegates.Exclude, protocolName)
 }
 
+// IsInOutCountParam reports whether the named parameter of the C function is a
+// configured in/out element-count pointer. Safe to call on a nil receiver.
+func (f *File) IsInOutCountParam(cName, param string) bool {
+	if f == nil {
+		return false
+	}
+	for _, e := range f.InOutCountParams {
+		if e.CName == cName && e.Param == param {
+			return true
+		}
+	}
+	return false
+}
+
 // ErrorTypedefFor returns the status-code registration for the typedef, if one
 // is configured. Safe to call on a nil receiver.
 func (f *File) ErrorTypedefFor(typedefName string) (ErrorTypedef, bool) {
@@ -292,8 +344,22 @@ func classHasSelector(class meta.Class, selector string, isClassMethod *bool) bo
 }
 
 func frameworkHasFunction(framework *meta.FrameworkMeta, name string) bool {
+	_, ok := frameworkFunction(framework, name)
+	return ok
+}
+
+func frameworkFunction(framework *meta.FrameworkMeta, name string) (meta.Function, bool) {
 	for _, function := range framework.Functions {
 		if function.Name == name {
+			return function, true
+		}
+	}
+	return meta.Function{}, false
+}
+
+func functionHasParam(function meta.Function, param string) bool {
+	for _, p := range function.Params {
+		if p.Name == param {
 			return true
 		}
 	}

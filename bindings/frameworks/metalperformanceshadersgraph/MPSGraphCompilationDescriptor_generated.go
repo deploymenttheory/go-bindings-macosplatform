@@ -68,6 +68,12 @@ func (gcd *GraphCompilationDescriptor) WithWaitForCompilationCompletion(waitForC
 	return gcd
 }
 
+// WithCompilationCompletionHandler sets the handler that the graph calls when the compilation completes.
+func (gcd *GraphCompilationDescriptor) WithCompilationCompletionHandler(compilationCompletionHandler func(obj.Object, unsafe.Pointer)) *GraphCompilationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gcd), objc.RegisterName("setCompilationCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { compilationCompletionHandler(obj.Wrap(_b0), _b1) }))
+	return gcd
+}
+
 // WithDispatchQueue sets the dispatch queue used for the compilation.
 func (gcd *GraphCompilationDescriptor) WithDispatchQueue(dispatchQueue obj.Object) *GraphCompilationDescriptor {
 	defer runtime.KeepAlive(dispatchQueue)
@@ -130,6 +136,13 @@ func (gcd *GraphCompilationDescriptor) DispatchQueue() *foundation.Object {
 func (gcd *GraphCompilationDescriptor) OptimizationProfile() GraphOptimizationProfile {
 	defer runtime.KeepAlive(gcd)
 	_r := objc.Send[GraphOptimizationProfile](objref.IDOf(gcd), objc.RegisterName("optimizationProfile"))
+	return _r
+}
+
+// Callables returns the dictionary used during runtime to lookup the “MPSGraphExecutable“ which correspond to the “symbolName“.
+func (gcd *GraphCompilationDescriptor) Callables() unsafe.Pointer {
+	defer runtime.KeepAlive(gcd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(gcd), objc.RegisterName("callables"))
 	return _r
 }
 

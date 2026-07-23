@@ -88,3 +88,17 @@ func (mer *MessageEncodingResult) EncodedMessage() *EncodedOutgoingMessage {
 	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("encodedMessage"))
 	return EncodedOutgoingMessageFromID(_r)
 }
+
+// SigningError returns any error that occured while attempting to sign the outgoing message.
+func (mer *MessageEncodingResult) SigningError() unsafe.Pointer {
+	defer runtime.KeepAlive(mer)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mer), objc.RegisterName("signingError"))
+	return _r
+}
+
+// EncryptionError returns any error that occured while attempting to encrypt the outgoing message.
+func (mer *MessageEncodingResult) EncryptionError() unsafe.Pointer {
+	defer runtime.KeepAlive(mer)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(mer), objc.RegisterName("encryptionError"))
+	return _r
+}

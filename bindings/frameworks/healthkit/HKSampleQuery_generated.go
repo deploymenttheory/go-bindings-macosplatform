@@ -6,7 +6,9 @@ package healthkit
 
 import (
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,9 +50,32 @@ func sampleQueryAdopt(id objc.ID) *SampleQuery {
 	return x
 }
 
-// NewSampleQuery creates a new SampleQuery.
-func NewSampleQuery() *SampleQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKSampleQuery")), objc.RegisterName("new"))
+// NewSampleQueryWithSampleTypePredicateLimitSortDescriptorsResultsHandler instantiates and returns a sample query.
+func NewSampleQueryWithSampleTypePredicateLimitSortDescriptorsResultsHandler(sampleType *SampleType, predicate obj.Object, limit int, sortDescriptors []*foundation.SortDescriptor, resultsHandler func(obj.Object, obj.Object, unsafe.Pointer)) *SampleQuery {
+	defer runtime.KeepAlive(sampleType)
+	defer runtime.KeepAlive(predicate)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKSampleQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleType:predicate:limit:sortDescriptors:resultsHandler:"), objref.IDOf(sampleType), objref.IDOf(predicate), limit, purego.SliceToNSArray(sortDescriptors, func(_v *foundation.SortDescriptor) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		resultsHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return sampleQueryAdopt(_id)
+}
+
+// NewSampleQueryWithQueryDescriptorsLimitResultsHandler creates a query for samples that match any of the descriptors you provided.
+func NewSampleQueryWithQueryDescriptorsLimitResultsHandler(queryDescriptors []*QueryDescriptor, limit int, resultsHandler func(obj.Object, obj.Object, unsafe.Pointer)) *SampleQuery {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKSampleQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueryDescriptors:limit:resultsHandler:"), purego.SliceToNSArray(queryDescriptors, func(_v *QueryDescriptor) objc.ID { return objref.IDOf(_v) }), limit, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		resultsHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return sampleQueryAdopt(_id)
+}
+
+// NewSampleQueryWithQueryDescriptorsLimitSortDescriptorsResultsHandler creates a query for samples that match any of the query descriptors you provided, sorted by the sort descriptors you provided.
+func NewSampleQueryWithQueryDescriptorsLimitSortDescriptorsResultsHandler(queryDescriptors []*QueryDescriptor, limit int, sortDescriptors []*foundation.SortDescriptor, resultsHandler func(obj.Object, obj.Object, unsafe.Pointer)) *SampleQuery {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKSampleQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueryDescriptors:limit:sortDescriptors:resultsHandler:"), purego.SliceToNSArray(queryDescriptors, func(_v *QueryDescriptor) objc.ID { return objref.IDOf(_v) }), limit, purego.SliceToNSArray(sortDescriptors, func(_v *foundation.SortDescriptor) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		resultsHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 	return sampleQueryAdopt(_id)
 }
 

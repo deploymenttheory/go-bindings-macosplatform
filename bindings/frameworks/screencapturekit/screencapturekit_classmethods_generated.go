@@ -7,6 +7,7 @@ package screencapturekit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -28,6 +29,25 @@ func SharedPicker() *ContentSharingPicker {
 func SupportedContentTypes() []obj.Object {
 	_arr := objc.Send[objc.ID](objc.ID(_class("SCScreenshotConfiguration")), objc.RegisterName("supportedContentTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// CaptureSampleBufferWithFilterConfigurationCompletionHandler captures a single frame directly from a stream’s buffer, using a filter.
+func CaptureSampleBufferWithFilterConfigurationCompletionHandler(contentFilter *ContentFilter, config *StreamConfiguration, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(contentFilter)
+	defer runtime.KeepAlive(config)
+	objc.Send[objc.ID](objc.ID(_class("SCScreenshotManager")), objc.RegisterName("captureSampleBufferWithFilter:configuration:completionHandler:"), objref.IDOf(contentFilter), objref.IDOf(config), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
+// CaptureImageWithFilterConfigurationCompletionHandler captures a single frame from a stream as an image, using a filter.
+func CaptureImageWithFilterConfigurationCompletionHandler(contentFilter *ContentFilter, config *StreamConfiguration, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(contentFilter)
+	defer runtime.KeepAlive(config)
+	objc.Send[objc.ID](objc.ID(_class("SCScreenshotManager")), objc.RegisterName("captureImageWithFilter:configuration:completionHandler:"), objref.IDOf(contentFilter), objref.IDOf(config), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
+// CaptureImageInRectCompletionHandler captureImageInRect:completionHandler: this method returns an image containing the contents of the rectangle in points, specified in display space
+func CaptureImageInRectCompletionHandler(rect corefoundation.CGRect, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	objc.Send[objc.ID](objc.ID(_class("SCScreenshotManager")), objc.RegisterName("captureImageInRect:completionHandler:"), rect, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // CaptureScreenshotWithFilterConfiguration captureScreenshotWithFilter:configuration:completionHandler: this method returns an SCScreenshotOutput object containing CGImages of the screenshot requested by the client

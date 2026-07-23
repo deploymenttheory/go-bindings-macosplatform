@@ -97,6 +97,20 @@ func (ss *SpeechSynthesizer) SpeakUtterance(utterance *SpeechUtterance) {
 	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("speakUtterance:"), objref.IDOf(utterance))
 }
 
+// WriteUtteranceToBufferCallback generates speech for the utterance and invokes the callback with the audio buffer.
+func (ss *SpeechSynthesizer) WriteUtteranceToBufferCallback(utterance *SpeechUtterance, bufferCallback func(obj.Object)) {
+	defer runtime.KeepAlive(ss)
+	defer runtime.KeepAlive(utterance)
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("writeUtterance:toBufferCallback:"), objref.IDOf(utterance), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { bufferCallback(obj.Wrap(_b0)) }))
+}
+
+// WriteUtteranceToBufferCallbackToMarkerCallback generates audio buffers and associated metadata for storage or further speech synthesis processing.
+func (ss *SpeechSynthesizer) WriteUtteranceToBufferCallbackToMarkerCallback(utterance *SpeechUtterance, bufferCallback func(obj.Object), markerCallback func(obj.Object)) {
+	defer runtime.KeepAlive(ss)
+	defer runtime.KeepAlive(utterance)
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("writeUtterance:toBufferCallback:toMarkerCallback:"), objref.IDOf(utterance), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { bufferCallback(obj.Wrap(_b0)) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { markerCallback(obj.Wrap(_b0)) }))
+}
+
 // StopSpeakingAtBoundary stops speech at the boundary you specify.
 func (ss *SpeechSynthesizer) StopSpeakingAtBoundary(boundary SpeechBoundary) bool {
 	defer runtime.KeepAlive(ss)

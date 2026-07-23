@@ -6,9 +6,11 @@ package vision
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -53,6 +55,14 @@ func NewCoreMLRequestWithModel(model *CoreMLModel) *CoreMLRequest {
 	defer runtime.KeepAlive(model)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNCoreMLRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithModel:"), objref.IDOf(model))
+	return coreMLRequestAdopt(_id)
+}
+
+// NewCoreMLRequestWithModelCompletionHandler creates a model container to use with an image analysis request based on the model you provide, with an optional completion handler.
+func NewCoreMLRequestWithModelCompletionHandler(model *CoreMLModel, completionHandler func(obj.Object, unsafe.Pointer)) *CoreMLRequest {
+	defer runtime.KeepAlive(model)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNCoreMLRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithModel:completionHandler:"), objref.IDOf(model), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	return coreMLRequestAdopt(_id)
 }
 

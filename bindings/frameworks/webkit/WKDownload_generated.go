@@ -87,10 +87,10 @@ func NewWKDownload() *WKDownload {
 }
 
 // Cancel cancels the download, and optionally captures data so that you can resume the download later.
-func (wd *WKDownload) Cancel(completionHandler func(obj.Object) int) {
+func (wd *WKDownload) Cancel(completionHandler func(obj.Object)) {
 	defer runtime.KeepAlive(wd)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("cancel:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+		objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("cancel:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completionHandler(obj.Wrap(_b0)) }))
 	})
 
 }

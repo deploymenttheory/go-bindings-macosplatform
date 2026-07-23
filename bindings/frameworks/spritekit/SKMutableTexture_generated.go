@@ -5,6 +5,9 @@
 package spritekit
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -70,6 +73,12 @@ func (mt *MutableTexture) WithFilteringMode(filteringMode TextureFilteringMode) 
 func (mt *MutableTexture) WithUsesMipmaps(usesMipmaps bool) *MutableTexture {
 	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("setUsesMipmaps:"), usesMipmaps)
 	return mt
+}
+
+// ModifyPixelDataWith modifies the contents of a mutable texture.
+func (mt *MutableTexture) ModifyPixelDataWith(block func(unsafe.Pointer, int)) {
+	defer runtime.KeepAlive(mt)
+	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("modifyPixelDataWithBlock:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 int) { block(_b0, _b1) }))
 }
 
 var _ TextureProvider = (*MutableTexture)(nil)

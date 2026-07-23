@@ -425,6 +425,30 @@ func (e ReverbPreset) String() string {
 	}
 }
 
+// Indicates the results of sound-event preparation.
+type SoundEventPrepareHandlerReason int64
+
+const (
+	SoundEventPrepareHandlerReasonFailure    SoundEventPrepareHandlerReason = 0
+	SoundEventPrepareHandlerReasonPrepared   SoundEventPrepareHandlerReason = 1
+	SoundEventPrepareHandlerReasonTerminated SoundEventPrepareHandlerReason = 2
+)
+
+// String returns the SoundEventPrepareHandlerReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SoundEventPrepareHandlerReason) String() string {
+	switch e {
+	case SoundEventPrepareHandlerReasonFailure:
+		return "SoundEventPrepareHandlerReasonFailure"
+	case SoundEventPrepareHandlerReasonPrepared:
+		return "SoundEventPrepareHandlerReasonPrepared"
+	case SoundEventPrepareHandlerReasonTerminated:
+		return "SoundEventPrepareHandlerReasonTerminated"
+	default:
+		return fmt.Sprintf("SoundEventPrepareHandlerReason(%d)", int64(e))
+	}
+}
+
 // Indicates the state of sound-event preparation.
 type SoundEventPrepareState int64
 
@@ -446,6 +470,54 @@ func (e SoundEventPrepareState) String() string {
 		return "SoundEventPrepareStatePrepared"
 	default:
 		return fmt.Sprintf("SoundEventPrepareState(%d)", int64(e))
+	}
+}
+
+// Indicates the status after a sound event changes its playback position.
+type SoundEventSeekHandlerReason int64
+
+const (
+	SoundEventSeekHandlerReasonFailure                      SoundEventSeekHandlerReason = 0
+	SoundEventSeekHandlerReasonFailureSeekAlreadyInProgress SoundEventSeekHandlerReason = 1
+	SoundEventSeekHandlerReasonSeekSuccessful               SoundEventSeekHandlerReason = 2
+)
+
+// String returns the SoundEventSeekHandlerReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SoundEventSeekHandlerReason) String() string {
+	switch e {
+	case SoundEventSeekHandlerReasonFailure:
+		return "SoundEventSeekHandlerReasonFailure"
+	case SoundEventSeekHandlerReasonFailureSeekAlreadyInProgress:
+		return "SoundEventSeekHandlerReasonFailureSeekAlreadyInProgress"
+	case SoundEventSeekHandlerReasonSeekSuccessful:
+		return "SoundEventSeekHandlerReasonSeekSuccessful"
+	default:
+		return fmt.Sprintf("SoundEventSeekHandlerReason(%d)", int64(e))
+	}
+}
+
+// Indicates the status after starting a sound event.
+type SoundEventStartHandlerReason int64
+
+const (
+	SoundEventStartHandlerReasonFailure         SoundEventStartHandlerReason = 0
+	SoundEventStartHandlerReasonFinishedPlaying SoundEventStartHandlerReason = 1
+	SoundEventStartHandlerReasonTerminated      SoundEventStartHandlerReason = 2
+)
+
+// String returns the SoundEventStartHandlerReason constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SoundEventStartHandlerReason) String() string {
+	switch e {
+	case SoundEventStartHandlerReasonFailure:
+		return "SoundEventStartHandlerReasonFailure"
+	case SoundEventStartHandlerReasonFinishedPlaying:
+		return "SoundEventStartHandlerReasonFinishedPlaying"
+	case SoundEventStartHandlerReasonTerminated:
+		return "SoundEventStartHandlerReasonTerminated"
+	default:
+		return fmt.Sprintf("SoundEventStartHandlerReason(%d)", int64(e))
 	}
 }
 
@@ -1432,78 +1504,6 @@ func (e SoundEventError) String() string {
 		return "SoundEventErrorOutOfMemory"
 	default:
 		return fmt.Sprintf("SoundEventError(%d)", int64(e))
-	}
-}
-
-// Indicates the results of sound-event preparation.
-type SoundEventPrepareHandlerReason int64
-
-const (
-	SoundEventPrepareHandlerReasonFailure    SoundEventPrepareHandlerReason = 0
-	SoundEventPrepareHandlerReasonPrepared   SoundEventPrepareHandlerReason = 1
-	SoundEventPrepareHandlerReasonTerminated SoundEventPrepareHandlerReason = 2
-)
-
-// String returns the SoundEventPrepareHandlerReason constant's name, or its numeric form when the
-// value is not a known constant.
-func (e SoundEventPrepareHandlerReason) String() string {
-	switch e {
-	case SoundEventPrepareHandlerReasonFailure:
-		return "SoundEventPrepareHandlerReasonFailure"
-	case SoundEventPrepareHandlerReasonPrepared:
-		return "SoundEventPrepareHandlerReasonPrepared"
-	case SoundEventPrepareHandlerReasonTerminated:
-		return "SoundEventPrepareHandlerReasonTerminated"
-	default:
-		return fmt.Sprintf("SoundEventPrepareHandlerReason(%d)", int64(e))
-	}
-}
-
-// Indicates the status after a sound event changes its playback position.
-type SoundEventSeekHandlerReason int64
-
-const (
-	SoundEventSeekHandlerReasonFailure                      SoundEventSeekHandlerReason = 0
-	SoundEventSeekHandlerReasonFailureSeekAlreadyInProgress SoundEventSeekHandlerReason = 1
-	SoundEventSeekHandlerReasonSeekSuccessful               SoundEventSeekHandlerReason = 2
-)
-
-// String returns the SoundEventSeekHandlerReason constant's name, or its numeric form when the
-// value is not a known constant.
-func (e SoundEventSeekHandlerReason) String() string {
-	switch e {
-	case SoundEventSeekHandlerReasonFailure:
-		return "SoundEventSeekHandlerReasonFailure"
-	case SoundEventSeekHandlerReasonFailureSeekAlreadyInProgress:
-		return "SoundEventSeekHandlerReasonFailureSeekAlreadyInProgress"
-	case SoundEventSeekHandlerReasonSeekSuccessful:
-		return "SoundEventSeekHandlerReasonSeekSuccessful"
-	default:
-		return fmt.Sprintf("SoundEventSeekHandlerReason(%d)", int64(e))
-	}
-}
-
-// Indicates the status after starting a sound event.
-type SoundEventStartHandlerReason int64
-
-const (
-	SoundEventStartHandlerReasonFailure         SoundEventStartHandlerReason = 0
-	SoundEventStartHandlerReasonFinishedPlaying SoundEventStartHandlerReason = 1
-	SoundEventStartHandlerReasonTerminated      SoundEventStartHandlerReason = 2
-)
-
-// String returns the SoundEventStartHandlerReason constant's name, or its numeric form when the
-// value is not a known constant.
-func (e SoundEventStartHandlerReason) String() string {
-	switch e {
-	case SoundEventStartHandlerReasonFailure:
-		return "SoundEventStartHandlerReasonFailure"
-	case SoundEventStartHandlerReasonFinishedPlaying:
-		return "SoundEventStartHandlerReasonFinishedPlaying"
-	case SoundEventStartHandlerReasonTerminated:
-		return "SoundEventStartHandlerReasonTerminated"
-	default:
-		return fmt.Sprintf("SoundEventStartHandlerReason(%d)", int64(e))
 	}
 }
 

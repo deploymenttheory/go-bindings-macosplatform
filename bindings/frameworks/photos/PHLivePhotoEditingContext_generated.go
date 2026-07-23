@@ -7,6 +7,7 @@ package photos
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
@@ -115,6 +116,13 @@ func (lpec *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOp
 		var _zero *LivePhoto
 		return _zero, ctx.Err()
 	}
+}
+
+// SaveLivePhotoToOutputOptionsCompletionHandler processes and saves a full-quality Live Photo as the output of your editing session.
+func (lpec *LivePhotoEditingContext) SaveLivePhotoToOutputOptionsCompletionHandler(output *ContentEditingOutput, options map[string]obj.Object, handler func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(lpec)
+	defer runtime.KeepAlive(output)
+	objc.Send[objc.ID](objref.IDOf(lpec), objc.RegisterName("saveLivePhotoToOutput:options:completionHandler:"), objref.IDOf(output), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { handler(_b0, _b1) }))
 }
 
 // Cancel aborts any Live Photo processing in progress.

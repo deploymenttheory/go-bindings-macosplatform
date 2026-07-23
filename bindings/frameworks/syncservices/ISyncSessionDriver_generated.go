@@ -99,6 +99,13 @@ func (issd *ISyncSessionDriver) StartAsynchronousSync() error {
 	return nil
 }
 
+// LastError returns the last error.
+func (issd *ISyncSessionDriver) LastError() unsafe.Pointer {
+	defer runtime.KeepAlive(issd)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(issd), objc.RegisterName("lastError"))
+	return _r
+}
+
 // SetDelegate wraps the corresponding Objective-C method.
 func (issd *ISyncSessionDriver) SetDelegate(delegate obj.Object) {
 	defer runtime.KeepAlive(issd)

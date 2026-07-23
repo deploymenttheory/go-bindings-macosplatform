@@ -7,6 +7,7 @@ package healthkit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -58,6 +59,18 @@ func NewWorkoutRouteBuilderWithHealthStoreDevice(healthStore *HealthStore, devic
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKWorkoutRouteBuilder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:device:"), objref.IDOf(healthStore), objref.IDOf(device))
 	return workoutRouteBuilderAdopt(_id)
+}
+
+// InsertRouteDataCompletion adds route data to the builder.
+func (wrb *WorkoutRouteBuilder) InsertRouteDataCompletion(routeData []obj.Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wrb)
+	objc.Send[objc.ID](objref.IDOf(wrb), objc.RegisterName("insertRouteData:completion:"), purego.SliceToNSArray(routeData, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// AddMetadataCompletion adds metadata to the builder.
+func (wrb *WorkoutRouteBuilder) AddMetadataCompletion(metadata map[string]obj.Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wrb)
+	objc.Send[objc.ID](objref.IDOf(wrb), objc.RegisterName("addMetadata:completion:"), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
 }
 
 // FinishRouteWithWorkoutMetadataCompletion creates, saves, and associates the route with the provided workout.

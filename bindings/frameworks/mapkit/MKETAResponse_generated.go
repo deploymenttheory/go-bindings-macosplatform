@@ -7,6 +7,7 @@ package mapkit
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -98,6 +99,13 @@ func (er *ETAResponse) Destination() *MapItem {
 func (er *ETAResponse) ExpectedTravelTime() float64 {
 	defer runtime.KeepAlive(er)
 	_r := objc.Send[float64](objref.IDOf(er), objc.RegisterName("expectedTravelTime"))
+	return _r
+}
+
+// Distance returns the distance.
+func (er *ETAResponse) Distance() unsafe.Pointer {
+	defer runtime.KeepAlive(er)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(er), objc.RegisterName("distance"))
 	return _r
 }
 

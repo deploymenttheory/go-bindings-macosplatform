@@ -6,6 +6,7 @@ package webkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -355,11 +356,42 @@ func (wwv *WKWebView) StopLoading() {
 
 }
 
-// CloseAllMediaPresentationsWithCompletionHandler closes all media the web view is presenting, including picture-in-picture video and fullscreen video.
-func (wwv *WKWebView) CloseAllMediaPresentationsWithCompletionHandler(completionHandler func() int) {
+// EvaluateJavaScriptCompletionHandler evaluates the specified JavaScript string.
+func (wwv *WKWebView) EvaluateJavaScriptCompletionHandler(javaScriptString string, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
 	defer runtime.KeepAlive(wwv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("closeAllMediaPresentationsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("evaluateJavaScript:completionHandler:"), purego.NSString(javaScriptString), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+	})
+
+}
+
+// EvaluateJavaScriptInFrameInContentWorldCompletionHandler evaluates the specified JavaScript string in the specified frame and content world.
+func (wwv *WKWebView) EvaluateJavaScriptInFrameInContentWorldCompletionHandler(javaScriptString string, frame *WKFrameInfo, contentWorld *WKContentWorld, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wwv)
+	defer runtime.KeepAlive(frame)
+	defer runtime.KeepAlive(contentWorld)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("evaluateJavaScript:inFrame:inContentWorld:completionHandler:"), purego.NSString(javaScriptString), objref.IDOf(frame), objref.IDOf(contentWorld), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+	})
+
+}
+
+// CallAsyncJavaScriptArgumentsInFrameInContentWorldCompletionHandler executes the specified string as an asynchronous JavaScript function.
+func (wwv *WKWebView) CallAsyncJavaScriptArgumentsInFrameInContentWorldCompletionHandler(functionBody string, arguments map[string]obj.Object, frame *WKFrameInfo, contentWorld *WKContentWorld, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wwv)
+	defer runtime.KeepAlive(frame)
+	defer runtime.KeepAlive(contentWorld)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("callAsyncJavaScript:arguments:inFrame:inContentWorld:completionHandler:"), purego.NSString(functionBody), rt.MapToDict(arguments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(frame), objref.IDOf(contentWorld), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+	})
+
+}
+
+// CloseAllMediaPresentationsWithCompletionHandler closes all media the web view is presenting, including picture-in-picture video and fullscreen video.
+func (wwv *WKWebView) CloseAllMediaPresentationsWithCompletionHandler(completionHandler func()) {
+	defer runtime.KeepAlive(wwv)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("closeAllMediaPresentationsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block) { completionHandler() }))
 	})
 
 }
@@ -374,64 +406,111 @@ func (wwv *WKWebView) CloseAllMediaPresentations() {
 }
 
 // PauseAllMediaPlaybackWithCompletionHandler pauses playback of all media in the web view.
-func (wwv *WKWebView) PauseAllMediaPlaybackWithCompletionHandler(completionHandler func() int) {
+func (wwv *WKWebView) PauseAllMediaPlaybackWithCompletionHandler(completionHandler func()) {
 	defer runtime.KeepAlive(wwv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("pauseAllMediaPlaybackWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("pauseAllMediaPlaybackWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block) { completionHandler() }))
 	})
 
 }
 
 // PauseAllMediaPlayback pauses playback of all media in the web view.
-func (wwv *WKWebView) PauseAllMediaPlayback(completionHandler func() int) {
+func (wwv *WKWebView) PauseAllMediaPlayback(completionHandler func()) {
 	defer runtime.KeepAlive(wwv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("pauseAllMediaPlayback:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("pauseAllMediaPlayback:"), objc.NewBlock(func(_ objc.Block) { completionHandler() }))
 	})
 
 }
 
 // SetAllMediaPlaybackSuspendedCompletionHandler changes whether the webpage is suspending playback of all media in the page.
-func (wwv *WKWebView) SetAllMediaPlaybackSuspendedCompletionHandler(suspended bool, completionHandler func() int) {
+func (wwv *WKWebView) SetAllMediaPlaybackSuspendedCompletionHandler(suspended bool, completionHandler func()) {
 	defer runtime.KeepAlive(wwv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setAllMediaPlaybackSuspended:completionHandler:"), suspended, objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setAllMediaPlaybackSuspended:completionHandler:"), suspended, objc.NewBlock(func(_ objc.Block) { completionHandler() }))
 	})
 
 }
 
 // ResumeAllMediaPlayback resumes playback of all media in a web view.
-func (wwv *WKWebView) ResumeAllMediaPlayback(completionHandler func() int) {
+func (wwv *WKWebView) ResumeAllMediaPlayback(completionHandler func()) {
 	defer runtime.KeepAlive(wwv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("resumeAllMediaPlayback:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("resumeAllMediaPlayback:"), objc.NewBlock(func(_ objc.Block) { completionHandler() }))
 	})
 
 }
 
 // SuspendAllMediaPlayback changes whether the webpage is suspending playback of all media in the page.
-func (wwv *WKWebView) SuspendAllMediaPlayback(completionHandler func() int) {
+func (wwv *WKWebView) SuspendAllMediaPlayback(completionHandler func()) {
 	defer runtime.KeepAlive(wwv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("suspendAllMediaPlayback:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("suspendAllMediaPlayback:"), objc.NewBlock(func(_ objc.Block) { completionHandler() }))
+	})
+
+}
+
+// RequestMediaPlaybackStateWithCompletionHandler requests the playback status of media in the web view.
+func (wwv *WKWebView) RequestMediaPlaybackStateWithCompletionHandler(completionHandler func(WKMediaPlaybackState)) {
+	defer runtime.KeepAlive(wwv)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("requestMediaPlaybackStateWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 WKMediaPlaybackState) { completionHandler(_b0) }))
+	})
+
+}
+
+// RequestMediaPlaybackState requests the playback status of media in the web view.
+func (wwv *WKWebView) RequestMediaPlaybackState(completionHandler func(WKMediaPlaybackState)) {
+	defer runtime.KeepAlive(wwv)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("requestMediaPlaybackState:"), objc.NewBlock(func(_ objc.Block, _b0 WKMediaPlaybackState) { completionHandler(_b0) }))
 	})
 
 }
 
 // SetCameraCaptureStateCompletionHandler changes whether the webpage is using the camera to capture images or video.
-func (wwv *WKWebView) SetCameraCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func() int) {
+func (wwv *WKWebView) SetCameraCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func()) {
 	defer runtime.KeepAlive(wwv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setCameraCaptureState:completionHandler:"), state, objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setCameraCaptureState:completionHandler:"), state, objc.NewBlock(func(_ objc.Block) { completionHandler() }))
 	})
 
 }
 
 // SetMicrophoneCaptureStateCompletionHandler changes whether the webpage is using the microphone to capture audio.
-func (wwv *WKWebView) SetMicrophoneCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func() int) {
+func (wwv *WKWebView) SetMicrophoneCaptureStateCompletionHandler(state WKMediaCaptureState, completionHandler func()) {
 	defer runtime.KeepAlive(wwv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setMicrophoneCaptureState:completionHandler:"), state, objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setMicrophoneCaptureState:completionHandler:"), state, objc.NewBlock(func(_ objc.Block) { completionHandler() }))
+	})
+
+}
+
+// TakeSnapshotWithConfigurationCompletionHandler generates a platform-native image from the web view’s contents asynchronously.
+func (wwv *WKWebView) TakeSnapshotWithConfigurationCompletionHandler(snapshotConfiguration *WKSnapshotConfiguration, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wwv)
+	defer runtime.KeepAlive(snapshotConfiguration)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("takeSnapshotWithConfiguration:completionHandler:"), objref.IDOf(snapshotConfiguration), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	})
+
+}
+
+// CreatePDFWithConfigurationCompletionHandler generates PDF data from the web view’s contents asynchronously.
+func (wwv *WKWebView) CreatePDFWithConfigurationCompletionHandler(pdfConfiguration *WKPDFConfiguration, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wwv)
+	defer runtime.KeepAlive(pdfConfiguration)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("createPDFWithConfiguration:completionHandler:"), objref.IDOf(pdfConfiguration), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	})
+
+}
+
+// CreateWebArchiveDataWithCompletionHandler creates a web archive of the web view’s contents asynchronously.
+func (wwv *WKWebView) CreateWebArchiveDataWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wwv)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("createWebArchiveDataWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	})
 
 }
@@ -446,30 +525,30 @@ func (wwv *WKWebView) SetMagnificationCenteredAtPoint(magnification float64, poi
 }
 
 // FindStringWithConfigurationCompletionHandler searches for the specified string in the web view’s content.
-func (wwv *WKWebView) FindStringWithConfigurationCompletionHandler(str string, configuration *WKFindConfiguration, completionHandler func(obj.Object) int) {
+func (wwv *WKWebView) FindStringWithConfigurationCompletionHandler(str string, configuration *WKFindConfiguration, completionHandler func(obj.Object)) {
 	defer runtime.KeepAlive(wwv)
 	defer runtime.KeepAlive(configuration)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("findString:withConfiguration:completionHandler:"), purego.NSString(str), objref.IDOf(configuration), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("findString:withConfiguration:completionHandler:"), purego.NSString(str), objref.IDOf(configuration), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completionHandler(obj.Wrap(_b0)) }))
 	})
 
 }
 
 // StartDownloadUsingRequestCompletionHandler starts to download the resource at the URL in the request.
-func (wwv *WKWebView) StartDownloadUsingRequestCompletionHandler(request obj.Object, completionHandler func(obj.Object) int) {
+func (wwv *WKWebView) StartDownloadUsingRequestCompletionHandler(request obj.Object, completionHandler func(obj.Object)) {
 	defer runtime.KeepAlive(wwv)
 	defer runtime.KeepAlive(request)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("startDownloadUsingRequest:completionHandler:"), objref.IDOf(request), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("startDownloadUsingRequest:completionHandler:"), objref.IDOf(request), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completionHandler(obj.Wrap(_b0)) }))
 	})
 
 }
 
 // ResumeDownloadFromResumeDataCompletionHandler resumes a failed or canceled download.
-func (wwv *WKWebView) ResumeDownloadFromResumeDataCompletionHandler(resumeData []byte, completionHandler func(obj.Object) int) {
+func (wwv *WKWebView) ResumeDownloadFromResumeDataCompletionHandler(resumeData []byte, completionHandler func(obj.Object)) {
 	defer runtime.KeepAlive(wwv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("resumeDownloadFromResumeData:completionHandler:"), rt.BytesToNSData(resumeData), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("resumeDownloadFromResumeData:completionHandler:"), rt.BytesToNSData(resumeData), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completionHandler(obj.Wrap(_b0)) }))
 	})
 
 }
@@ -571,6 +650,24 @@ func (wwv *WKWebView) SetMinimumViewportInsetMaximumViewportInset(minimumViewpor
 	defer runtime.KeepAlive(wwv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setMinimumViewportInset:maximumViewportInset:"), minimumViewportInset, maximumViewportInset)
+	})
+
+}
+
+// FetchDataOfTypesCompletionHandler fetches data of types completion handler.
+func (wwv *WKWebView) FetchDataOfTypesCompletionHandler(dataTypes WKWebViewDataType, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(wwv)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("fetchDataOfTypes:completionHandler:"), dataTypes, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	})
+
+}
+
+// RestoreDataCompletionHandler wraps the corresponding Objective-C method.
+func (wwv *WKWebView) RestoreDataCompletionHandler(data []byte, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(wwv)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("restoreData:completionHandler:"), rt.BytesToNSData(data), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 	})
 
 }

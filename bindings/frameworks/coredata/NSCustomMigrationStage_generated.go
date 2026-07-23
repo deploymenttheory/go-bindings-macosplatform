@@ -6,8 +6,10 @@ package coredata
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -54,6 +56,22 @@ func NewCustomMigrationStageWithCurrentModelReferenceNextModelReference(currentM
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCustomMigrationStage")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCurrentModelReference:nextModelReference:"), objref.IDOf(currentModel), objref.IDOf(nextModel))
 	return customMigrationStageAdopt(_id)
+}
+
+// WithWillMigrateHandler sets the handler to execute before the stage runs.
+func (cms *CustomMigrationStage) WithWillMigrateHandler(willMigrateHandler func(obj.Object, obj.Object, unsafe.Pointer) bool) *CustomMigrationStage {
+	objc.Send[objc.ID](objref.IDOf(cms), objc.RegisterName("setWillMigrateHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) bool {
+		return willMigrateHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return cms
+}
+
+// WithDidMigrateHandler sets the handler to execute after the stage runs.
+func (cms *CustomMigrationStage) WithDidMigrateHandler(didMigrateHandler func(obj.Object, obj.Object, unsafe.Pointer) bool) *CustomMigrationStage {
+	objc.Send[objc.ID](objref.IDOf(cms), objc.RegisterName("setDidMigrateHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) bool {
+		return didMigrateHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return cms
 }
 
 // WithLabel sets the textual description of the migration stage’s purpose.

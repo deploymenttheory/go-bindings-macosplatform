@@ -79,6 +79,12 @@ func NewFocusStatusCenter() *FocusStatusCenter {
 	return focusStatusCenterAdopt(_id)
 }
 
+// RequestAuthorizationWithCompletionHandler asks the system for access to the user’s focus status.
+func (fsc *FocusStatusCenter) RequestAuthorizationWithCompletionHandler(completionHandler func(FocusStatusAuthorizationStatus)) {
+	defer runtime.KeepAlive(fsc)
+	objc.Send[objc.ID](objref.IDOf(fsc), objc.RegisterName("requestAuthorizationWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 FocusStatusAuthorizationStatus) { completionHandler(_b0) }))
+}
+
 // FocusStatus returns the focus status.
 func (fsc *FocusStatusCenter) FocusStatus() *FocusStatus {
 	defer runtime.KeepAlive(fsc)

@@ -6,6 +6,7 @@ package coreimage
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -115,6 +116,13 @@ func NewColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64
 func (c *Color) NumberOfComponents() int {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("numberOfComponents"))
+	return _r
+}
+
+// Components returns a pointer to an array of `CGFloat` values including alpha. Typically this array will contain `4` `CGFloat` values for red, green, blue, and alpha. If the “CIColor“ was initialized with a `CGColor` then returned pointer will be the same as calling `CGColorGetComponents()`
+func (c *Color) Components() unsafe.Pointer {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(c), objc.RegisterName("components"))
 	return _r
 }
 

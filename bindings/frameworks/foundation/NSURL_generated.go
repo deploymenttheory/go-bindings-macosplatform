@@ -421,6 +421,13 @@ func (u *URL) HasDirectoryPath() bool {
 	return _r
 }
 
+// FileSystemRepresentation returns the file system representation.
+func (u *URL) FileSystemRepresentation() unsafe.Pointer {
+	defer runtime.KeepAlive(u)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(u), objc.RegisterName("fileSystemRepresentation"))
+	return _r
+}
+
 // IsFileURL reports whether the object is file URL.
 func (u *URL) IsFileURL() bool {
 	defer runtime.KeepAlive(u)

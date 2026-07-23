@@ -6,6 +6,7 @@ package authenticationservices
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -73,9 +74,18 @@ func (was *WebAuthenticationSession) String() string {
 	return rt.Description(objref.IDOf(was))
 }
 
-// NewWebAuthenticationSession creates a new WebAuthenticationSession.
-func NewWebAuthenticationSession() *WebAuthenticationSession {
-	_id := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSession")), objc.RegisterName("new"))
+// NewWebAuthenticationSessionWithURLCallbackURLSchemeCompletionHandler creates a web authentication session instance.
+func NewWebAuthenticationSessionWithURLCallbackURLSchemeCompletionHandler(url string, callbackURLScheme string, completionHandler func(obj.Object, unsafe.Pointer)) *WebAuthenticationSession {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSession")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:callbackURLScheme:completionHandler:"), rt.FileURL(url), purego.NSString(callbackURLScheme), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return webAuthenticationSessionAdopt(_id)
+}
+
+// NewWebAuthenticationSessionWithURLCallbackCompletionHandler creates a web authentication session instance that uses a callback to evaluate a redirection URL.
+func NewWebAuthenticationSessionWithURLCallbackCompletionHandler(url string, callback *WebAuthenticationSessionCallback, completionHandler func(obj.Object, unsafe.Pointer)) *WebAuthenticationSession {
+	defer runtime.KeepAlive(callback)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSession")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:callback:completionHandler:"), rt.FileURL(url), objref.IDOf(callback), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	return webAuthenticationSessionAdopt(_id)
 }
 

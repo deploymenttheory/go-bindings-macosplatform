@@ -122,6 +122,13 @@ func (se *SkyboxEffect) Draw() {
 	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("draw"))
 }
 
+// Center returns the center.
+func (se *SkyboxEffect) Center() unsafe.Pointer {
+	defer runtime.KeepAlive(se)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(se), objc.RegisterName("center"))
+	return _r
+}
+
 // XSize returns the x size.
 func (se *SkyboxEffect) XSize() float32 {
 	defer runtime.KeepAlive(se)

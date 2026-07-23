@@ -6,6 +6,7 @@ package mpscore
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -149,4 +150,11 @@ func (s *State) Label() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// Resource get the private MTLResource underlying the MPSState When the state is not directly initialized with a MTLResource, the actuall MTLResource creation is deferred. Especially with temporary resources, it is important to delay this creation as late as possible to avoid increasing the memory footprint. The memory is returned for reuse when the readCount = 0. Calling the -resource method will force the resource to be allocated, so you should not use it lightly, for purposes such as finding the MTLPixelFormat of a texture in the state. By convention, except where otherwise documented, the MTLResources held by the MPSState are private to the MPSState object, owned by the MPSState subclass author. If the MPSState subclass author is MPS, then the identity (e.g. texture vs. buffer) and information contained in the resource should be considered implementation dependent. It may change by operating system version or device. If you are the author of the subclass then it is for your own use, and MPS will not look at it, except perhaps so as to pass it to a custom kernel.  Otherwise, the method is made available to facilitate debugging and to allow you to write your own state objects.
+func (s *State) Resource() unsafe.Pointer {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(s), objc.RegisterName("resource"))
+	return _r
 }

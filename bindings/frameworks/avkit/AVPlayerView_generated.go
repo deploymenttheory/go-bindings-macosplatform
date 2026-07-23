@@ -530,6 +530,15 @@ func (pv *PlayerView) ShowsTimecodes() bool {
 
 }
 
+// BeginTrimmingWithCompletionHandler puts the player view into trimming mode.
+func (pv *PlayerView) BeginTrimmingWithCompletionHandler(handler func(PlayerViewTrimResult)) {
+	defer runtime.KeepAlive(pv)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("beginTrimmingWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 PlayerViewTrimResult) { handler(_b0) }))
+	})
+
+}
+
 // CanBeginTrimming reports whether the current media can be trimmed.
 func (pv *PlayerView) CanBeginTrimming() bool {
 	defer runtime.KeepAlive(pv)

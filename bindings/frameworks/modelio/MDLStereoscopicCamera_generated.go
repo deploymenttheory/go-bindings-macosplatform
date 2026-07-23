@@ -258,6 +258,34 @@ func (sc *StereoscopicCamera) Overlap() float32 {
 	return _r
 }
 
+// LeftViewMatrix returns convenience utilities to create view and projection matrices. The view matrix calculations requires that the world to meters conversion scale be set.
+func (sc *StereoscopicCamera) LeftViewMatrix() unsafe.Pointer {
+	defer runtime.KeepAlive(sc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sc), objc.RegisterName("leftViewMatrix"))
+	return _r
+}
+
+// RightViewMatrix returns the right view matrix.
+func (sc *StereoscopicCamera) RightViewMatrix() unsafe.Pointer {
+	defer runtime.KeepAlive(sc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sc), objc.RegisterName("rightViewMatrix"))
+	return _r
+}
+
+// LeftProjectionMatrix returns the left projection matrix.
+func (sc *StereoscopicCamera) LeftProjectionMatrix() unsafe.Pointer {
+	defer runtime.KeepAlive(sc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sc), objc.RegisterName("leftProjectionMatrix"))
+	return _r
+}
+
+// RightProjectionMatrix returns the right projection matrix.
+func (sc *StereoscopicCamera) RightProjectionMatrix() unsafe.Pointer {
+	defer runtime.KeepAlive(sc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sc), objc.RegisterName("rightProjectionMatrix"))
+	return _r
+}
+
 var _ CameraProvider = (*StereoscopicCamera)(nil)
 
 var _ ObjectProvider = (*StereoscopicCamera)(nil)

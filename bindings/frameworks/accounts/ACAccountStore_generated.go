@@ -6,6 +6,7 @@ package accounts
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -99,6 +100,35 @@ func (as *AccountStore) AccountsWithAccountType(accountType *AccountType) obj.Ob
 	defer runtime.KeepAlive(accountType)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("accountsWithAccountType:"), objref.IDOf(accountType))
 	return obj.Wrap(_r)
+}
+
+// SaveAccountWithCompletionHandler saves an account to the Accounts database.
+func (as *AccountStore) SaveAccountWithCompletionHandler(account *Account, completionHandler func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(account)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("saveAccount:withCompletionHandler:"), objref.IDOf(account), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
+// RequestAccessToAccountsWithTypeOptionsCompletion obtains permission to access protected user properties.
+func (as *AccountStore) RequestAccessToAccountsWithTypeOptionsCompletion(accountType *AccountType, options obj.Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(accountType)
+	defer runtime.KeepAlive(options)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("requestAccessToAccountsWithType:options:completion:"), objref.IDOf(accountType), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// RenewCredentialsForAccountCompletion renews account credentials when the credentials are no longer valid.
+func (as *AccountStore) RenewCredentialsForAccountCompletion(account *Account, completionHandler func(AccountCredentialRenewResult, unsafe.Pointer)) {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(account)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("renewCredentialsForAccount:completion:"), objref.IDOf(account), objc.NewBlock(func(_ objc.Block, _b0 AccountCredentialRenewResult, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
+// RemoveAccountWithCompletionHandler removes an account from the account store.
+func (as *AccountStore) RemoveAccountWithCompletionHandler(account *Account, completionHandler func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(account)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("removeAccount:withCompletionHandler:"), objref.IDOf(account), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // Accounts returns the accounts.

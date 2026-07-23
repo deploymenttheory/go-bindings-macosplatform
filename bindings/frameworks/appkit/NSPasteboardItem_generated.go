@@ -7,6 +7,7 @@ package appkit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -165,6 +166,18 @@ func (pi *PasteboardItem) DetectPatternsForPatterns(ctx context.Context, pattern
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// DetectValuesForPatternsCompletionHandler determines whether this pasteboard item matches the specified patterns, reading the contents if it finds a match.
+func (pi *PasteboardItem) DetectValuesForPatternsCompletionHandler(patterns []*foundation.String, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(pi)
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("detectValuesForPatterns:completionHandler:"), rt.SliceToNSSet(patterns, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+}
+
+// DetectMetadataForTypesCompletionHandler determines available metadata from the specified metadata types for this pasteboard item, without notifying the person using the app.
+func (pi *PasteboardItem) DetectMetadataForTypesCompletionHandler(types []*foundation.String, completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(pi)
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("detectMetadataForTypes:completionHandler:"), rt.SliceToNSSet(types, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 }
 
 // Types returns the types.

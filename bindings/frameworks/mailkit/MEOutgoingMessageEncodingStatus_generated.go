@@ -95,6 +95,13 @@ func (omes *OutgoingMessageEncodingStatus) CanEncrypt() bool {
 	return _r
 }
 
+// SecurityError returns any error that occurred while verifying the security status for the outgoing mail message.
+func (omes *OutgoingMessageEncodingStatus) SecurityError() unsafe.Pointer {
+	defer runtime.KeepAlive(omes)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(omes), objc.RegisterName("securityError"))
+	return _r
+}
+
 // AddressesFailingEncryption returns a list of any recipients for which the message should be encrypted but an error occurred. This could include missing the public key for the recipient.
 //
 // AddressesFailingEncryption returns the collection as a Go slice.

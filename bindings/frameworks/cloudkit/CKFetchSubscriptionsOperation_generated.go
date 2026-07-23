@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -66,6 +67,22 @@ func NewFetchSubscriptionsOperationWithSubscriptionIDs(subscriptionIDs []*founda
 func (fso *FetchSubscriptionsOperation) WithSubscriptionIDs(items ...obj.Object) *FetchSubscriptionsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setSubscriptionIDs:"), _arr)
+	return fso
+}
+
+// WithPerSubscriptionCompletionBlock sets the closure to execute as the operation fetches individual subscriptions.
+func (fso *FetchSubscriptionsOperation) WithPerSubscriptionCompletionBlock(perSubscriptionCompletionBlock func(obj.Object, obj.Object, unsafe.Pointer)) *FetchSubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setPerSubscriptionCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		perSubscriptionCompletionBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return fso
+}
+
+// WithFetchSubscriptionCompletionBlock sets the block to execute after the operation fetches the subscriptions.
+func (fso *FetchSubscriptionsOperation) WithFetchSubscriptionCompletionBlock(fetchSubscriptionCompletionBlock func(obj.Object, unsafe.Pointer)) *FetchSubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setFetchSubscriptionCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) {
+		fetchSubscriptionCompletionBlock(obj.Wrap(_b0), _b1)
+	}))
 	return fso
 }
 

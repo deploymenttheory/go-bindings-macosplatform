@@ -107,3 +107,8 @@ func AuthorizationStatusClass() SpeechRecognizerAuthorizationStatus {
 	_r := objc.Send[SpeechRecognizerAuthorizationStatus](objc.ID(_class("SFSpeechRecognizer")), objc.RegisterName("authorizationStatus"))
 	return _r
 }
+
+// RequestAuthorization asks the user to allow your app to perform speech recognition.
+func RequestAuthorization(handler func(SpeechRecognizerAuthorizationStatus)) {
+	objc.Send[objc.ID](objc.ID(_class("SFSpeechRecognizer")), objc.RegisterName("requestAuthorization:"), objc.NewBlock(func(_ objc.Block, _b0 SpeechRecognizerAuthorizationStatus) { handler(_b0) }))
+}

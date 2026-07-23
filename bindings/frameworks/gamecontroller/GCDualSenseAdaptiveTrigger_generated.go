@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -51,6 +52,26 @@ func dualSenseAdaptiveTriggerAdopt(id objc.ID) *DualSenseAdaptiveTrigger {
 func NewDualSenseAdaptiveTrigger() *DualSenseAdaptiveTrigger {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCDualSenseAdaptiveTrigger")), objc.RegisterName("new"))
 	return dualSenseAdaptiveTriggerAdopt(_id)
+}
+
+// WithValueChangedHandler sets the block that the element calls when the user changes the level of pressure on the button.
+func (dsat *DualSenseAdaptiveTrigger) WithValueChangedHandler(valueChangedHandler func(obj.Object, float32, bool)) *DualSenseAdaptiveTrigger {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setValueChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32, _b2 bool) { valueChangedHandler(obj.Wrap(_b0), _b1, _b2) }))
+	return dsat
+}
+
+// WithPressedChangedHandler sets the block that the element calls when the user presses or releases the button.
+func (dsat *DualSenseAdaptiveTrigger) WithPressedChangedHandler(pressedChangedHandler func(obj.Object, float32, bool)) *DualSenseAdaptiveTrigger {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setPressedChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32, _b2 bool) { pressedChangedHandler(obj.Wrap(_b0), _b1, _b2) }))
+	return dsat
+}
+
+// WithTouchedChangedHandler sets the block that the element calls when the user touches the button.
+func (dsat *DualSenseAdaptiveTrigger) WithTouchedChangedHandler(touchedChangedHandler func(obj.Object, float32, bool, bool)) *DualSenseAdaptiveTrigger {
+	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setTouchedChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32, _b2 bool, _b3 bool) {
+		touchedChangedHandler(obj.Wrap(_b0), _b1, _b2, _b3)
+	}))
+	return dsat
 }
 
 // WithValue sets the level of pressure the user is applying to the button.

@@ -392,6 +392,24 @@ func NodeWithGeometry(geometry *Geometry) *Node {
 	return NodeFromID(_r)
 }
 
+// SimdLocalUp returns the SIMD local up.
+func SimdLocalUp() unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("SCNNode")), objc.RegisterName("simdLocalUp"))
+	return _r
+}
+
+// SimdLocalRight returns the SIMD local right.
+func SimdLocalRight() unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("SCNNode")), objc.RegisterName("simdLocalRight"))
+	return _r
+}
+
+// SimdLocalFront returns the SIMD local front.
+func SimdLocalFront() unsafe.Pointer {
+	_r := objc.Send[unsafe.Pointer](objc.ID(_class("SCNNode")), objc.RegisterName("simdLocalFront"))
+	return _r
+}
+
 // ControllerWithAnimation creates a particle property controller with the specified Core Animation animation.
 func ControllerWithAnimation(animation obj.Object) *ParticlePropertyController {
 	defer runtime.KeepAlive(animation)

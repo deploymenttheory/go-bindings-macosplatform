@@ -6,7 +6,9 @@ package quicklookui
 
 import (
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -71,6 +73,15 @@ func (pr *PreviewReply) IsKind(className string) bool {
 func (pr *PreviewReply) String() string {
 	defer runtime.KeepAlive(pr)
 	return rt.Description(objref.IDOf(pr))
+}
+
+// NewPreviewReplyWithContextSizeIsBitmapDrawingBlock use this method to provide a preview by drawing into a context.
+func NewPreviewReplyWithContextSizeIsBitmapDrawingBlock(contextSize corefoundation.CGSize, isBitmap bool, drawingBlock func(unsafe.Pointer, obj.Object, unsafe.Pointer) bool) *PreviewReply {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("QLPreviewReply")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContextSize:isBitmap:drawingBlock:"), contextSize, isBitmap, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 objc.ID, _b2 unsafe.Pointer) bool {
+		return drawingBlock(_b0, obj.Wrap(_b1), _b2)
+	}))
+	return previewReplyAdopt(_id)
 }
 
 // NewPreviewReplyWithFileURL creates a preview reply from an existing file URL.

@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -68,6 +69,52 @@ func NewMTRClusterDoorLockWithDeviceEndpointQueue(device *MTRDevice, endpoint ui
 	return mTRClusterDoorLockAdopt(_id)
 }
 
+// LockDoorWithParamsExpectedValuesExpectedValueIntervalCompletion locks door with params expected values expected value interval completion.
+func (mcdl *MTRClusterDoorLock) LockDoorWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterLockDoorParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("lockDoorWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// LockDoorWithExpectedValuesExpectedValueIntervalCompletion locks door with expected values expected value interval completion.
+func (mcdl *MTRClusterDoorLock) LockDoorWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("lockDoorWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// UnlockDoorWithParamsExpectedValuesExpectedValueIntervalCompletion unlocks door with params expected values expected value interval completion.
+func (mcdl *MTRClusterDoorLock) UnlockDoorWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterUnlockDoorParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("unlockDoorWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// UnlockDoorWithExpectedValuesExpectedValueIntervalCompletion unlocks door with expected values expected value interval completion.
+func (mcdl *MTRClusterDoorLock) UnlockDoorWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("unlockDoorWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// UnlockWithTimeoutWithParamsExpectedValuesExpectedValueIntervalCompletion unlocks with timeout with params expected values expected value interval completion.
+func (mcdl *MTRClusterDoorLock) UnlockWithTimeoutWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterUnlockWithTimeoutParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("unlockWithTimeoutWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcdl *MTRClusterDoorLock) SetWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterSetWeekDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("setWeekDayScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // GetWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // GetWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
@@ -94,6 +141,22 @@ func (mcdl *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpect
 		var _zero *MTRDoorLockClusterGetWeekDayScheduleResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ClearWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion clears week day schedule with params expected values expected value interval completion.
+func (mcdl *MTRClusterDoorLock) ClearWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterClearWeekDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("clearWeekDayScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcdl *MTRClusterDoorLock) SetYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterSetYearDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("setYearDayScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // GetYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
@@ -124,6 +187,22 @@ func (mcdl *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpect
 	}
 }
 
+// ClearYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion clears year day schedule with params expected values expected value interval completion.
+func (mcdl *MTRClusterDoorLock) ClearYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterClearYearDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("clearYearDayScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcdl *MTRClusterDoorLock) SetHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterSetHolidayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("setHolidayScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // GetHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // GetHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
@@ -152,6 +231,22 @@ func (mcdl *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpect
 	}
 }
 
+// ClearHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion clears holiday schedule with params expected values expected value interval completion.
+func (mcdl *MTRClusterDoorLock) ClearHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterClearHolidayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("clearHolidayScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetUserWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcdl *MTRClusterDoorLock) SetUserWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterSetUserParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("setUserWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // GetUserWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // GetUserWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
@@ -178,6 +273,14 @@ func (mcdl *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueInte
 		var _zero *MTRDoorLockClusterGetUserResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ClearUserWithParamsExpectedValuesExpectedValueIntervalCompletion clears user with params expected values expected value interval completion.
+func (mcdl *MTRClusterDoorLock) ClearUserWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterClearUserParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("clearUserWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // SetCredentialWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
@@ -234,6 +337,52 @@ func (mcdl *MTRClusterDoorLock) GetCredentialStatusWithParamsExpectedValuesExpec
 		var _zero *MTRDoorLockClusterGetCredentialStatusResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ClearCredentialWithParamsExpectedValuesExpectedValueIntervalCompletion clears credential with params expected values expected value interval completion.
+func (mcdl *MTRClusterDoorLock) ClearCredentialWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterClearCredentialParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("clearCredentialWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// UnboltDoorWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcdl *MTRClusterDoorLock) UnboltDoorWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterUnboltDoorParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("unboltDoorWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// UnboltDoorWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcdl *MTRClusterDoorLock) UnboltDoorWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("unboltDoorWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetAliroReaderConfigWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcdl *MTRClusterDoorLock) SetAliroReaderConfigWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterSetAliroReaderConfigParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("setAliroReaderConfigWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ClearAliroReaderConfigWithParamsExpectedValuesExpectedValueIntervalCompletion clears aliro reader config with params expected values expected value interval completion.
+func (mcdl *MTRClusterDoorLock) ClearAliroReaderConfigWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRDoorLockClusterClearAliroReaderConfigParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("clearAliroReaderConfigWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ClearAliroReaderConfigWithExpectedValuesExpectedValueIntervalCompletion clears aliro reader config with expected values expected value interval completion.
+func (mcdl *MTRClusterDoorLock) ClearAliroReaderConfigWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("clearAliroReaderConfigWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeLockStateWithParams reads attribute lock state with params.
@@ -906,6 +1055,38 @@ func (mcdl *MTRClusterDoorLock) ReadAttributeClusterRevisionWithParams(params *M
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// LockDoorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler locks door with params expected values expected value interval completion handler.
+func (mcdl *MTRClusterDoorLock) LockDoorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRDoorLockClusterLockDoorParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("lockDoorWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// UnlockDoorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler unlocks door with params expected values expected value interval completion handler.
+func (mcdl *MTRClusterDoorLock) UnlockDoorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRDoorLockClusterUnlockDoorParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("unlockDoorWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// UnlockWithTimeoutWithParamsExpectedValuesExpectedValueIntervalCompletionHandler unlocks with timeout with params expected values expected value interval completion handler.
+func (mcdl *MTRClusterDoorLock) UnlockWithTimeoutWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRDoorLockClusterUnlockWithTimeoutParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("unlockWithTimeoutWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// SetWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mcdl *MTRClusterDoorLock) SetWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRDoorLockClusterSetWeekDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("setWeekDayScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // GetWeekDayScheduleWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // GetWeekDayScheduleWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
@@ -932,6 +1113,22 @@ func (mcdl *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpect
 		var _zero *MTRDoorLockClusterGetWeekDayScheduleResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ClearWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler clears week day schedule with params expected values expected value interval completion handler.
+func (mcdl *MTRClusterDoorLock) ClearWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRDoorLockClusterClearWeekDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("clearWeekDayScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// SetYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mcdl *MTRClusterDoorLock) SetYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRDoorLockClusterSetYearDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("setYearDayScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // GetYearDayScheduleWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
@@ -962,6 +1159,22 @@ func (mcdl *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpect
 	}
 }
 
+// ClearYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler clears year day schedule with params expected values expected value interval completion handler.
+func (mcdl *MTRClusterDoorLock) ClearYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRDoorLockClusterClearYearDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("clearYearDayScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// SetHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mcdl *MTRClusterDoorLock) SetHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRDoorLockClusterSetHolidayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("setHolidayScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // GetHolidayScheduleWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // GetHolidayScheduleWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
@@ -990,6 +1203,22 @@ func (mcdl *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpect
 	}
 }
 
+// ClearHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler clears holiday schedule with params expected values expected value interval completion handler.
+func (mcdl *MTRClusterDoorLock) ClearHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRDoorLockClusterClearHolidayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("clearHolidayScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// SetUserWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mcdl *MTRClusterDoorLock) SetUserWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRDoorLockClusterSetUserParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("setUserWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // GetUserWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // GetUserWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
@@ -1016,6 +1245,14 @@ func (mcdl *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueInte
 		var _zero *MTRDoorLockClusterGetUserResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ClearUserWithParamsExpectedValuesExpectedValueIntervalCompletionHandler clears user with params expected values expected value interval completion handler.
+func (mcdl *MTRClusterDoorLock) ClearUserWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRDoorLockClusterClearUserParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("clearUserWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 // SetCredentialWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
@@ -1072,6 +1309,14 @@ func (mcdl *MTRClusterDoorLock) GetCredentialStatusWithParamsExpectedValuesExpec
 		var _zero *MTRDoorLockClusterGetCredentialStatusResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ClearCredentialWithParamsExpectedValuesExpectedValueIntervalCompletionHandler clears credential with params expected values expected value interval completion handler.
+func (mcdl *MTRClusterDoorLock) ClearCredentialWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRDoorLockClusterClearCredentialParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("clearCredentialWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterDoorLock)(nil)

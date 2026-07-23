@@ -9,6 +9,58 @@ import (
 	"strings"
 )
 
+// The status of an asset pack.
+// Bitmask — values may be combined with |.
+type AssetPackStatus uint64
+
+const (
+	// A status value that indicates that the asset pack is available to download.
+	AssetPackStatusDownloadAvailable AssetPackStatus = 1
+	// A status value that indicates that an update to the asset pack is available to download.
+	AssetPackStatusUpdateAvailable AssetPackStatus = 2
+	// A status value that indicates that the downloaded asset pack is up to date.
+	AssetPackStatusUpToDate AssetPackStatus = 4
+	// A status value that indicates that the downloaded asset pack is out of date.
+	AssetPackStatusOutOfDate AssetPackStatus = 8
+	// A status value that indicates that the asset pack is no longer available to download.
+	AssetPackStatusObsolete AssetPackStatus = 16
+	// A status value that indicates that the system is currently downloading the asset pack.
+	AssetPackStatusDownloading AssetPackStatus = 32
+	// A status value that indicates that the system finished downloading the asset pack.
+	AssetPackStatusDownloaded AssetPackStatus = 64
+)
+
+// String returns the AssetPackStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AssetPackStatus) String() string {
+	var parts []string
+	if e&AssetPackStatusDownloadAvailable != 0 {
+		parts = append(parts, "AssetPackStatusDownloadAvailable")
+	}
+	if e&AssetPackStatusUpdateAvailable != 0 {
+		parts = append(parts, "AssetPackStatusUpdateAvailable")
+	}
+	if e&AssetPackStatusUpToDate != 0 {
+		parts = append(parts, "AssetPackStatusUpToDate")
+	}
+	if e&AssetPackStatusOutOfDate != 0 {
+		parts = append(parts, "AssetPackStatusOutOfDate")
+	}
+	if e&AssetPackStatusObsolete != 0 {
+		parts = append(parts, "AssetPackStatusObsolete")
+	}
+	if e&AssetPackStatusDownloading != 0 {
+		parts = append(parts, "AssetPackStatusDownloading")
+	}
+	if e&AssetPackStatusDownloaded != 0 {
+		parts = append(parts, "AssetPackStatusDownloaded")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // The content request type used in the downloader extension.
 type ContentRequest int64
 
@@ -240,58 +292,6 @@ func (e Type) String() string {
 	default:
 		return fmt.Sprintf("Type(%d)", int64(e))
 	}
-}
-
-// The status of an asset pack.
-// Bitmask — values may be combined with |.
-type AssetPackStatus uint64
-
-const (
-	// A status value that indicates that the asset pack is available to download.
-	AssetPackStatusDownloadAvailable AssetPackStatus = 1
-	// A status value that indicates that an update to the asset pack is available to download.
-	AssetPackStatusUpdateAvailable AssetPackStatus = 2
-	// A status value that indicates that the downloaded asset pack is up to date.
-	AssetPackStatusUpToDate AssetPackStatus = 4
-	// A status value that indicates that the downloaded asset pack is out of date.
-	AssetPackStatusOutOfDate AssetPackStatus = 8
-	// A status value that indicates that the asset pack is no longer available to download.
-	AssetPackStatusObsolete AssetPackStatus = 16
-	// A status value that indicates that the system is currently downloading the asset pack.
-	AssetPackStatusDownloading AssetPackStatus = 32
-	// A status value that indicates that the system finished downloading the asset pack.
-	AssetPackStatusDownloaded AssetPackStatus = 64
-)
-
-// String returns the AssetPackStatus constant's name, or its numeric form when the
-// value is not a known constant.
-func (e AssetPackStatus) String() string {
-	var parts []string
-	if e&AssetPackStatusDownloadAvailable != 0 {
-		parts = append(parts, "AssetPackStatusDownloadAvailable")
-	}
-	if e&AssetPackStatusUpdateAvailable != 0 {
-		parts = append(parts, "AssetPackStatusUpdateAvailable")
-	}
-	if e&AssetPackStatusUpToDate != 0 {
-		parts = append(parts, "AssetPackStatusUpToDate")
-	}
-	if e&AssetPackStatusOutOfDate != 0 {
-		parts = append(parts, "AssetPackStatusOutOfDate")
-	}
-	if e&AssetPackStatusObsolete != 0 {
-		parts = append(parts, "AssetPackStatusObsolete")
-	}
-	if e&AssetPackStatusDownloading != 0 {
-		parts = append(parts, "AssetPackStatusDownloading")
-	}
-	if e&AssetPackStatusDownloaded != 0 {
-		parts = append(parts, "AssetPackStatusDownloaded")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 type ErrorCode int64

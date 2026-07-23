@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -78,6 +79,20 @@ func (fro *FetchRecordsOperation) WithDesiredKeys(items ...obj.Object) *FetchRec
 // WithPerRecordProgressBlock sets the closure to execute with progress information for individual records.
 func (fro *FetchRecordsOperation) WithPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64)) *FetchRecordsOperation {
 	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setPerRecordProgressBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64) { perRecordProgressBlock(obj.Wrap(_b0), _b1) }))
+	return fro
+}
+
+// WithPerRecordCompletionBlock sets the closure to execute when a record becomes available.
+func (fro *FetchRecordsOperation) WithPerRecordCompletionBlock(perRecordCompletionBlock func(obj.Object, obj.Object, unsafe.Pointer)) *FetchRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setPerRecordCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		perRecordCompletionBlock(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
+	return fro
+}
+
+// WithFetchRecordsCompletionBlock sets the closure to execute after CloudKit retrieves all of the records.
+func (fro *FetchRecordsOperation) WithFetchRecordsCompletionBlock(fetchRecordsCompletionBlock func(obj.Object, unsafe.Pointer)) *FetchRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(fro), objc.RegisterName("setFetchRecordsCompletionBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { fetchRecordsCompletionBlock(obj.Wrap(_b0), _b1) }))
 	return fro
 }
 

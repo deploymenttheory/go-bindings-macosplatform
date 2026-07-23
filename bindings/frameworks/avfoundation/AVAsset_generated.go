@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
@@ -147,6 +148,12 @@ func (a *Asset) TrackWithTrackID(trackID int32) *AssetTrack {
 	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("trackWithTrackID:"), trackID)
 	return AssetTrackFromID(_r)
+}
+
+// LoadTrackWithTrackIDCompletionHandler loads a track that contains the specified identifier.
+func (a *Asset) LoadTrackWithTrackIDCompletionHandler(trackID int32, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(a)
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("loadTrackWithTrackID:completionHandler:"), trackID, objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // TracksWithMediaType returns tracks that contain media of a specified type.
@@ -401,6 +408,13 @@ func (a *Asset) MediaSelectionGroupForMediaCharacteristic(mediaCharacteristic ob
 	return MediaSelectionGroupFromID(_r)
 }
 
+// LoadMediaSelectionGroupForMediaCharacteristicCompletionHandler loads a media selection group that contains one or more options with the specified media characteristic.
+func (a *Asset) LoadMediaSelectionGroupForMediaCharacteristicCompletionHandler(mediaCharacteristic obj.Object, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(mediaCharacteristic)
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("loadMediaSelectionGroupForMediaCharacteristic:completionHandler:"), objref.IDOf(mediaCharacteristic), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
 // AvailableMediaCharacteristicsWithMediaSelectionOptions provides an NSArray of NSStrings, each NSString indicating a media characteristic for which a media selection option is available.
 //
 // AvailableMediaCharacteristicsWithMediaSelectionOptions returns the collection as a Go slice.
@@ -494,6 +508,12 @@ func (a *Asset) UnusedTrackID() int32 {
 	defer runtime.KeepAlive(a)
 	_r := objc.Send[int32](objref.IDOf(a), objc.RegisterName("unusedTrackID"))
 	return _r
+}
+
+// FindUnusedTrackIDWithCompletionHandler loads an identifier that no other track in the asset uses.
+func (a *Asset) FindUnusedTrackIDWithCompletionHandler(completionHandler func(int32, unsafe.Pointer)) {
+	defer runtime.KeepAlive(a)
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("findUnusedTrackIDWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 int32, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // isAsset marks Asset — and, by embedding promotion, its

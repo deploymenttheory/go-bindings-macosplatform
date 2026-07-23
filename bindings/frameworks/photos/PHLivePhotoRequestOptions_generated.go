@@ -6,6 +6,7 @@ package photos
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -88,6 +89,14 @@ func (lpro *LivePhotoRequestOptions) WithDeliveryMode(deliveryMode ImageRequestO
 // WithNetworkAccessAllowed sets a Boolean value that specifies whether Photos can download the requested Live Photo data from iCloud.
 func (lpro *LivePhotoRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *LivePhotoRequestOptions {
 	objc.Send[objc.ID](objref.IDOf(lpro), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
+	return lpro
+}
+
+// WithProgressHandler sets a block that Photos calls periodically while downloading the Live Photo.
+func (lpro *LivePhotoRequestOptions) WithProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, obj.Object)) *LivePhotoRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(lpro), objc.RegisterName("setProgressHandler:"), objc.NewBlock(func(_ objc.Block, _b0 float64, _b1 unsafe.Pointer, _b2 unsafe.Pointer, _b3 objc.ID) {
+		progressHandler(_b0, _b1, (*bool)(_b2), obj.Wrap(_b3))
+	}))
 	return lpro
 }
 

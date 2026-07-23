@@ -6,6 +6,7 @@ package audiovideobridging
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -93,6 +94,13 @@ func (ma *MACAddress) WithStringRepresentation(stringRepresentation string) *MAC
 func (ma *MACAddress) WithMulticast(multicast bool) *MACAddress {
 	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setMulticast:"), multicast)
 	return ma
+}
+
+// Bytes returns the .
+func (ma *MACAddress) Bytes() unsafe.Pointer {
+	defer runtime.KeepAlive(ma)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(ma), objc.RegisterName("bytes"))
+	return _r
 }
 
 // DataRepresentation returns an NSData object containing the bytes of the MAC address.

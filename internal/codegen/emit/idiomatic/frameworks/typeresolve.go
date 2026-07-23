@@ -20,14 +20,15 @@ import (
 // void, a bool, or a number/ordering. ok is false for shapes it does not yet
 // handle (struct arguments, nested blocks, object results).
 func idiomaticBlockParam(
-	pName, blockType string,
+	pName string,
+	block typemap.BlockSignature,
 	ctx typemap.Context,
 	mapper *typemap.Mapper,
 	fc *frameworkContext,
 	rawPkgAlias string,
 ) (sig, adapter string, imports map[string]string, ok bool) {
 	imports = map[string]string{"objc": objcImportPath}
-	args := parseBlockObjCParams(blockType)
+	args := block.ParamObjCTypes
 
 	var goParams, abiParams, callArgs []string
 	for i, a := range args {
@@ -63,15 +64,31 @@ func idiomaticBlockParam(
 			abiParams = append(abiParams, v+" "+t)
 			callArgs = append(callArgs, v)
 		default:
+			// An enum block argument (vmnet's void(^)(vmnet_return_t, …)) is an
+			// integer; surface it with its localized Go enum type and pass it
+			// through unchanged, mirroring idiomaticArg's enum handling.
+			if sigEnum, _, isEnum := localizeEnumType(gt, fc, rawPkgAlias); isEnum {
+				goParams = append(goParams, sigEnum)
+				abiParams = append(abiParams, v+" "+sigEnum)
+				callArgs = append(callArgs, v)
+				continue
+			}
+			// A bare host pointer block argument (a void* context/refcon, e.g. an
+			// IOUSBHostInterestHandler's messageArgument) is passed through unchanged,
+			// mirroring the unsafe.Pointer input passthrough in idiomaticArg.
+			if gt == "unsafe.Pointer" {
+				goParams = append(goParams, "unsafe.Pointer")
+				abiParams = append(abiParams, v+" unsafe.Pointer")
+				callArgs = append(callArgs, v)
+				imports["unsafe"] = "unsafe"
+				continue
+			}
 			return "", "", imports, false
 		}
 	}
 
-	// Block result: the text before "(^".
-	retObjC := ""
-	if i := strings.Index(blockType, "(^"); i > 0 {
-		retObjC = normaliseObjC(blockType[:i])
-	}
+	// Block result.
+	retObjC := normaliseObjC(block.ReturnObjCType)
 	goRetSig, abiRetSig, retPrefix := "", "", ""
 	switch {
 	case retObjC == "" || retObjC == "void":
@@ -125,11 +142,12 @@ func idiomaticArg(
 		imports["rt"] = rtImportPath
 		return "[]byte", "rt.BytesToNSData(" + pName + ")", imports, true
 	}
-	// A block parameter becomes a Go function.
-	if strings.Contains(objcType, "(^") {
-		sig, adapter, bimps, bok := idiomaticBlockParam(
+	// A block parameter — a literal "(^" type or a typedef chain ending in one
+	// (vmnet's vmnet_interface_event_callback_t) — becomes a Go function.
+	if bsig, isBlock := mapper.ResolveBlockSignature(objcType); isBlock {
+		s, adapter, bimps, bok := idiomaticBlockParam(
 			pName,
-			objcType,
+			bsig,
 			ctx,
 			mapper,
 			fc,
@@ -139,7 +157,7 @@ func idiomaticArg(
 			return "", "", imports, false
 		}
 		maps.Copy(imports, bimps)
-		return sig, adapter, imports, true
+		return s, adapter, imports, true
 	}
 	// An array parameter is accepted as a Go slice and converted to an
 	// Objective-C array.
@@ -342,7 +360,7 @@ func zeroLiteral(goType string) string {
 	case "string":
 		return `""`
 	default:
-		if strings.HasPrefix(goType, "*") {
+		if strings.HasPrefix(goType, "*") || goType == "unsafe.Pointer" {
 			return "nil" // a lifted pointer out-value (e.g. *hvraw.HvVcpuExitT)
 		}
 		return "0" // scalars and enums (named integer types)
@@ -492,6 +510,15 @@ func idiomaticRet(
 	if goRet == "unsafe.Pointer" && isOSObjectReturn(objcType) {
 		imports["obj"] = objImportPath
 		return "obj.Object", kindObject, "obj.Adopt(%s)", "objc.ID", imports, true
+	}
+	// A bare host pointer return that is neither a toll-free-bridged CF object nor
+	// an os_object — a raw C struct pointer (IOKit's deviceDescriptor) or an inner
+	// pointer (NS_RETURNS_INNER_POINTER, e.g. -[NSMutableData mutableBytes]) — is
+	// surfaced unchanged as an opaque pointer for the caller to cast, mirroring the
+	// unsafe.Pointer input passthrough in idiomaticArg.
+	if goRet == "unsafe.Pointer" {
+		imports["unsafe"] = "unsafe"
+		return "unsafe.Pointer", kindScalar, "", "unsafe.Pointer", imports, true
 	}
 	if goRet == "bool" {
 		return "bool", kindBool, "", "bool", imports, true

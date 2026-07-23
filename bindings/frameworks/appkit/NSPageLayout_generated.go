@@ -105,6 +105,17 @@ func (pl *PageLayout) RemoveAccessoryController(accessoryController *ViewControl
 
 }
 
+// BeginSheetUsingPrintInfoOnWindowCompletionHandler begins sheet using print info on window completion handler.
+func (pl *PageLayout) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *PrintInfo, parentWindow *Window, handler func(PageLayoutResult)) {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(printInfo)
+	defer runtime.KeepAlive(parentWindow)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("beginSheetUsingPrintInfo:onWindow:completionHandler:"), objref.IDOf(printInfo), objref.IDOf(parentWindow), objc.NewBlock(func(_ objc.Block, _b0 PageLayoutResult) { handler(_b0) }))
+	})
+
+}
+
 // RunModalWithPrintInfo displays the page layout panel and begins the modal loop using the specified print info object.
 func (pl *PageLayout) RunModalWithPrintInfo(printInfo *PrintInfo) int {
 	defer runtime.KeepAlive(pl)

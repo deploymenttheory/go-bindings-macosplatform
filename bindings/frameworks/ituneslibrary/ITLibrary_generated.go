@@ -148,6 +148,13 @@ func (l *Library) APIMinorVersion() int {
 	return _r
 }
 
+// MediaFolderLocation returns the location of the iTunes music folder.
+func (l *Library) MediaFolderLocation() unsafe.Pointer {
+	defer runtime.KeepAlive(l)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(l), objc.RegisterName("mediaFolderLocation"))
+	return _r
+}
+
 // MusicFolderLocation returns the location of the iTunes music folder. Replaced by mediaFolderLocation.
 func (l *Library) MusicFolderLocation() string {
 	defer runtime.KeepAlive(l)

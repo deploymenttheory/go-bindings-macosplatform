@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -183,6 +184,13 @@ func (sbdl *SampleBufferDisplayLayer) Timebase() obj.Object {
 func (sbdl *SampleBufferDisplayLayer) Status() QueuedSampleBufferRenderingStatus {
 	defer runtime.KeepAlive(sbdl)
 	_r := objc.Send[QueuedSampleBufferRenderingStatus](objref.IDOf(sbdl), objc.RegisterName("status"))
+	return _r
+}
+
+// Error returns if the display layer's status is AVQueuedSampleBufferRenderingStatusFailed, this describes the error that caused the failure. The value of this property is an NSError that describes what caused the display layer to no longer be able to enqueue sample buffers. If the status is not AVQueuedSampleBufferRenderingStatusFailed, the value of this property is nil.
+func (sbdl *SampleBufferDisplayLayer) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(sbdl)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(sbdl), objc.RegisterName("error"))
 	return _r
 }
 

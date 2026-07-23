@@ -138,6 +138,20 @@ func (o *Object) Children() []*Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Object { return ObjectFromID(_id) })
 }
 
+// Transform returns the object's transform.
+func (o *Object) Transform() unsafe.Pointer {
+	defer runtime.KeepAlive(o)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(o), objc.RegisterName("transform"))
+	return _r
+}
+
+// WorldTransform returns the world transform applied to the object.
+func (o *Object) WorldTransform() unsafe.Pointer {
+	defer runtime.KeepAlive(o)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(o), objc.RegisterName("worldTransform"))
+	return _r
+}
+
 // isObject marks Object — and, by embedding promotion, its
 // subclasses — as a member of the Object hierarchy, sealing its provider
 // interface so only real members satisfy it.

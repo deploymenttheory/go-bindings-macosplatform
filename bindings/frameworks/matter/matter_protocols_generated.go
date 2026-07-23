@@ -21,14 +21,14 @@ type MTRDeviceControllerClientProtocol interface {
 
 // MTRDeviceControllerServerProtocol is the Go form of the Objective-C protocol MTRDeviceControllerServerProtocol.
 type MTRDeviceControllerServerProtocol interface {
-	GetAnyDeviceControllerWithCompletion(completion obj.Object)
-	ReadAttributeWithControllerNodeIDEndpointIDClusterIDAttributeIDParamsCompletion(controller obj.Object, nodeId uint64, endpointId obj.Object, clusterId obj.Object, attributeId obj.Object, params map[string]obj.Object, completion obj.Object)
-	WriteAttributeWithControllerNodeIDEndpointIDClusterIDAttributeIDValueTimedWriteTimeoutCompletion(controller obj.Object, nodeId uint64, endpointId obj.Object, clusterId obj.Object, attributeId obj.Object, value obj.Object, timeoutMs obj.Object, completion obj.Object)
-	InvokeCommandWithControllerNodeIDEndpointIDClusterIDCommandIDFieldsTimedInvokeTimeoutCompletion(controller obj.Object, nodeId uint64, endpointId obj.Object, clusterId obj.Object, commandId obj.Object, fields obj.Object, timeoutMs obj.Object, completion obj.Object)
+	GetAnyDeviceControllerWithCompletion(completion func(obj.Object, unsafe.Pointer))
+	ReadAttributeWithControllerNodeIDEndpointIDClusterIDAttributeIDParamsCompletion(controller obj.Object, nodeId uint64, endpointId obj.Object, clusterId obj.Object, attributeId obj.Object, params map[string]obj.Object, completion func(obj.Object, unsafe.Pointer))
+	WriteAttributeWithControllerNodeIDEndpointIDClusterIDAttributeIDValueTimedWriteTimeoutCompletion(controller obj.Object, nodeId uint64, endpointId obj.Object, clusterId obj.Object, attributeId obj.Object, value obj.Object, timeoutMs obj.Object, completion func(obj.Object, unsafe.Pointer))
+	InvokeCommandWithControllerNodeIDEndpointIDClusterIDCommandIDFieldsTimedInvokeTimeoutCompletion(controller obj.Object, nodeId uint64, endpointId obj.Object, clusterId obj.Object, commandId obj.Object, fields obj.Object, timeoutMs obj.Object, completion func(obj.Object, unsafe.Pointer))
 	SubscribeAttributeWithControllerNodeIDEndpointIDClusterIDAttributeIDMinIntervalMaxIntervalParamsEstablishedHandler(controller obj.Object, nodeId uint64, endpointId obj.Object, clusterId obj.Object, attributeId obj.Object, minInterval obj.Object, maxInterval obj.Object, params map[string]obj.Object, establishedHandler func())
 	StopReportsWithControllerNodeIDCompletion(controller obj.Object, nodeId uint64, completion func())
-	SubscribeWithControllerNodeIDMinIntervalMaxIntervalParamsShouldCacheCompletion(controller obj.Object, nodeId uint64, minInterval obj.Object, maxInterval obj.Object, params map[string]obj.Object, shouldCache bool, completion obj.Object)
-	ReadAttributeCacheWithControllerNodeIDEndpointIDClusterIDAttributeIDCompletion(controller obj.Object, nodeId uint64, endpointId obj.Object, clusterId obj.Object, attributeId obj.Object, completion obj.Object)
+	SubscribeWithControllerNodeIDMinIntervalMaxIntervalParamsShouldCacheCompletion(controller obj.Object, nodeId uint64, minInterval obj.Object, maxInterval obj.Object, params map[string]obj.Object, shouldCache bool, completion func(unsafe.Pointer))
+	ReadAttributeCacheWithControllerNodeIDEndpointIDClusterIDAttributeIDCompletion(controller obj.Object, nodeId uint64, endpointId obj.Object, clusterId obj.Object, attributeId obj.Object, completion func(obj.Object, unsafe.Pointer))
 }
 
 // MTRDeviceControllerStorageDelegate is the Go form of the Objective-C protocol MTRDeviceControllerStorageDelegate.
@@ -44,12 +44,12 @@ type MTRKeypair interface {
 
 // MTRNOCChainIssuer is the Go form of the Objective-C protocol MTRNOCChainIssuer.
 type MTRNOCChainIssuer interface {
-	OnNOCChainGenerationNeededAttestationInfoOnNOCChainGenerationComplete(csrInfo *CSRInfo, attestationInfo *AttestationInfo, onNOCChainGenerationComplete obj.Object)
+	OnNOCChainGenerationNeededAttestationInfoOnNOCChainGenerationComplete(csrInfo *CSRInfo, attestationInfo *AttestationInfo, onNOCChainGenerationComplete func(obj.Object, obj.Object, obj.Object, obj.Object, obj.Object, unsafe.Pointer))
 }
 
 // MTROperationalCertificateIssuer is the Go form of the Objective-C protocol MTROperationalCertificateIssuer.
 type MTROperationalCertificateIssuer interface {
-	IssueOperationalCertificateForRequestAttestationInfoControllerCompletion(csrInfo *MTROperationalCSRInfo, attestationInfo *MTRDeviceAttestationInfo, controller *MTRDeviceController, completion obj.Object)
+	IssueOperationalCertificateForRequestAttestationInfoControllerCompletion(csrInfo *MTROperationalCSRInfo, attestationInfo *MTRDeviceAttestationInfo, controller *MTRDeviceController, completion func(obj.Object, unsafe.Pointer))
 	ShouldSkipAttestationCertificateValidation() bool
 }
 
@@ -89,16 +89,16 @@ type MTRXPCServerProtocol interface {
 
 // MTRXPCServerProtocol_MTRDevice is the Go form of the Objective-C protocol MTRXPCServerProtocol_MTRDevice.
 type MTRXPCServerProtocol_MTRDevice interface {
-	DeviceControllerNodeIDGetStateWithReply(controller obj.Object, nodeID obj.Object, reply obj.Object)
+	DeviceControllerNodeIDGetStateWithReply(controller obj.Object, nodeID obj.Object, reply func(MTRDeviceState))
 	DeviceControllerNodeIDGetDeviceCachePrimedWithReply(controller obj.Object, nodeID obj.Object, reply func(bool))
 	DeviceControllerNodeIDGetEstimatedStartTimeWithReply(controller obj.Object, nodeID obj.Object, reply func(obj.Object))
 	DeviceControllerNodeIDGetEstimatedSubscriptionLatencyWithReply(controller obj.Object, nodeID obj.Object, reply func(obj.Object))
 	DeviceControllerNodeIDReadAttributeWithEndpointIDClusterIDAttributeIDParamsWithReply(controller obj.Object, nodeID obj.Object, endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, params *MTRReadParams, reply func(obj.Object))
 	DeviceControllerNodeIDWriteAttributeWithEndpointIDClusterIDAttributeIDValueExpectedValueIntervalTimedWriteTimeout(controller obj.Object, nodeID obj.Object, endpointID obj.Object, clusterID obj.Object, attributeID obj.Object, value obj.Object, expectedValueInterval obj.Object, timeout obj.Object)
 	DeviceControllerNodeIDReadAttributePathsWithReply(controller obj.Object, nodeID obj.Object, attributePaths []*MTRAttributeRequestPath, reply func(obj.Object))
-	DeviceControllerNodeIDInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutServerSideProcessingTimeoutCompletion(controller obj.Object, nodeID obj.Object, endpointID obj.Object, clusterID obj.Object, commandID obj.Object, commandFields obj.Object, expectedValues []obj.Object, expectedValueInterval obj.Object, timeout obj.Object, serverSideProcessingTimeout obj.Object, completion obj.Object)
-	DeviceControllerNodeIDOpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationCompletion(controller obj.Object, nodeID obj.Object, setupPasscode obj.Object, discriminator obj.Object, duration obj.Object, completion obj.Object)
-	DownloadLogOfTypeNodeIDTimeoutCompletion(type_ MTRDiagnosticLogType, nodeID obj.Object, timeout float64, completion obj.Object)
+	DeviceControllerNodeIDInvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsExpectedValuesExpectedValueIntervalTimedInvokeTimeoutServerSideProcessingTimeoutCompletion(controller obj.Object, nodeID obj.Object, endpointID obj.Object, clusterID obj.Object, commandID obj.Object, commandFields obj.Object, expectedValues []obj.Object, expectedValueInterval obj.Object, timeout obj.Object, serverSideProcessingTimeout obj.Object, completion func(obj.Object, unsafe.Pointer))
+	DeviceControllerNodeIDOpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationCompletion(controller obj.Object, nodeID obj.Object, setupPasscode obj.Object, discriminator obj.Object, duration obj.Object, completion func(obj.Object, unsafe.Pointer))
+	DownloadLogOfTypeNodeIDTimeoutCompletion(type_ MTRDiagnosticLogType, nodeID obj.Object, timeout float64, completion func(obj.Object, unsafe.Pointer))
 }
 
 // MTRXPCServerProtocol_MTRDeviceController is the Go form of the Objective-C protocol MTRXPCServerProtocol_MTRDeviceController.

@@ -104,11 +104,71 @@ func (hs *HealthStore) AuthorizationStatusForType(type_ *ObjectType) Authorizati
 	return _r
 }
 
+// RequestAuthorizationToShareTypesReadTypesCompletion requests permission to save and read the specified data types.
+func (hs *HealthStore) RequestAuthorizationToShareTypesReadTypesCompletion(typesToShare []*SampleType, typesToRead []*ObjectType, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("requestAuthorizationToShareTypes:readTypes:completion:"), rt.SliceToNSSet(typesToShare, func(_v *SampleType) objc.ID { return objref.IDOf(_v) }), rt.SliceToNSSet(typesToRead, func(_v *ObjectType) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// RequestPerObjectReadAuthorizationForTypePredicateCompletion asynchronously requests permission to read a data type that requires per-object authorization (such as vision prescriptions).
+func (hs *HealthStore) RequestPerObjectReadAuthorizationForTypePredicateCompletion(objectType *ObjectType, predicate obj.Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(objectType)
+	defer runtime.KeepAlive(predicate)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("requestPerObjectReadAuthorizationForType:predicate:completion:"), objref.IDOf(objectType), objref.IDOf(predicate), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion indicates whether the system presents the user with a permission sheet if your app requests authorization for the provided types.
+func (hs *HealthStore) GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion(typesToShare []*SampleType, typesToRead []*ObjectType, completion func(AuthorizationRequestStatus, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("getRequestStatusForAuthorizationToShareTypes:readTypes:completion:"), rt.SliceToNSSet(typesToShare, func(_v *SampleType) objc.ID { return objref.IDOf(_v) }), rt.SliceToNSSet(typesToRead, func(_v *ObjectType) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 AuthorizationRequestStatus, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// HandleAuthorizationForExtensionWithCompletion requests permission to save and read the data types specified by an extension.
+func (hs *HealthStore) HandleAuthorizationForExtensionWithCompletion(completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("handleAuthorizationForExtensionWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
 // EarliestPermittedSampleDate returns the earliest date that the framework permits your app to save or read samples.
 func (hs *HealthStore) EarliestPermittedSampleDate() time.Time {
 	defer runtime.KeepAlive(hs)
 	_r := objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("earliestPermittedSampleDate"))
 	return rt.NSDateToTime(_r)
+}
+
+// SaveObjectWithCompletion saves the provided object to the HealthKit store.
+func (hs *HealthStore) SaveObjectWithCompletion(object *Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(object)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("saveObject:withCompletion:"), objref.IDOf(object), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// SaveObjectsWithCompletion saves an array of objects to the HealthKit store.
+func (hs *HealthStore) SaveObjectsWithCompletion(objects []*Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("saveObjects:withCompletion:"), purego.SliceToNSArray(objects, func(_v *Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// DeleteObjectWithCompletion deletes the specified object from the HealthKit store.
+func (hs *HealthStore) DeleteObjectWithCompletion(object *Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(object)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("deleteObject:withCompletion:"), objref.IDOf(object), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// DeleteObjectsWithCompletion deletes the specified objects from the HealthKit store.
+func (hs *HealthStore) DeleteObjectsWithCompletion(objects []*Object, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("deleteObjects:withCompletion:"), purego.SliceToNSArray(objects, func(_v *Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// DeleteObjectsOfTypePredicateWithCompletion deletes objects saved by this application that match the provided type and predicate.
+func (hs *HealthStore) DeleteObjectsOfTypePredicateWithCompletion(objectType *ObjectType, predicate obj.Object, completion func(bool, int, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(objectType)
+	defer runtime.KeepAlive(predicate)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("deleteObjectsOfType:predicate:withCompletion:"), objref.IDOf(objectType), objref.IDOf(predicate), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 int, _b2 unsafe.Pointer) { completion(_b0, _b1, _b2) }))
 }
 
 // ExecuteQuery starts executing the provided query.
@@ -123,6 +183,15 @@ func (hs *HealthStore) StopQuery(query *Query) {
 	defer runtime.KeepAlive(hs)
 	defer runtime.KeepAlive(query)
 	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("stopQuery:"), objref.IDOf(query))
+}
+
+// SplitTotalEnergyStartDateEndDateResultsHandler calculates the active and resting energy burned based on the total energy burned over the given duration.
+func (hs *HealthStore) SplitTotalEnergyStartDateEndDateResultsHandler(totalEnergy *Quantity, startDate time.Time, endDate time.Time, resultsHandler func(obj.Object, obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(totalEnergy)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("splitTotalEnergy:startDate:endDate:resultsHandler:"), objref.IDOf(totalEnergy), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		resultsHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 }
 
 // DateOfBirth reads the user’s date of birth from the HealthKit store as a date value.
@@ -202,6 +271,13 @@ func (hs *HealthStore) ActivityMoveMode() (result *ActivityMoveModeObject, err e
 	return ActivityMoveModeObjectFromID(_r), nil
 }
 
+// AddSamplesToWorkoutCompletion associates the provided samples with the specified workout.
+func (hs *HealthStore) AddSamplesToWorkoutCompletion(samples []*Sample, workout *Workout, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(workout)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("addSamples:toWorkout:completion:"), purego.SliceToNSArray(samples, func(_v *Sample) objc.ID { return objref.IDOf(_v) }), objref.IDOf(workout), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
 // PauseWorkoutSession pauses the provided workout session.
 func (hs *HealthStore) PauseWorkoutSession(workoutSession *WorkoutSession) {
 	defer runtime.KeepAlive(hs)
@@ -214,4 +290,62 @@ func (hs *HealthStore) ResumeWorkoutSession(workoutSession *WorkoutSession) {
 	defer runtime.KeepAlive(hs)
 	defer runtime.KeepAlive(workoutSession)
 	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("resumeWorkoutSession:"), objref.IDOf(workoutSession))
+}
+
+// StartWatchAppWithWorkoutConfigurationCompletion launches or wakes the companion watchOS app to create a new workout session.
+func (hs *HealthStore) StartWatchAppWithWorkoutConfigurationCompletion(workoutConfiguration *WorkoutConfiguration, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(workoutConfiguration)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("startWatchAppWithWorkoutConfiguration:completion:"), objref.IDOf(workoutConfiguration), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// EnableBackgroundDeliveryForTypeFrequencyWithCompletion enables the delivery of updates to an app running in the background.
+func (hs *HealthStore) EnableBackgroundDeliveryForTypeFrequencyWithCompletion(type_ *ObjectType, frequency UpdateFrequency, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(type_)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("enableBackgroundDeliveryForType:frequency:withCompletion:"), objref.IDOf(type_), frequency, objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// DisableBackgroundDeliveryForTypeWithCompletion disables background deliveries of update notifications for the specified data type.
+func (hs *HealthStore) DisableBackgroundDeliveryForTypeWithCompletion(type_ *ObjectType, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(type_)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("disableBackgroundDeliveryForType:withCompletion:"), objref.IDOf(type_), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// DisableAllBackgroundDeliveryWithCompletion disables all background deliveries of update notifications.
+func (hs *HealthStore) DisableAllBackgroundDeliveryWithCompletion(completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("disableAllBackgroundDeliveryWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// PreferredUnitsForQuantityTypesCompletion returns the user’s preferred units for the given quantity types.
+func (hs *HealthStore) PreferredUnitsForQuantityTypesCompletion(quantityTypes []*QuantityType, completion func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("preferredUnitsForQuantityTypes:completion:"), rt.SliceToNSSet(quantityTypes, func(_v *QuantityType) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+}
+
+// RecalibrateEstimatesForSampleTypeAtDateCompletion recalibrates the prediction algorithm used to calculate the specified sample type.
+func (hs *HealthStore) RecalibrateEstimatesForSampleTypeAtDateCompletion(sampleType *SampleType, date time.Time, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(sampleType)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("recalibrateEstimatesForSampleType:atDate:completion:"), objref.IDOf(sampleType), rt.TimeToNSDate(date), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// RelateWorkoutEffortSampleWithWorkoutActivityCompletion relates a workout effort sample with a workout
+func (hs *HealthStore) RelateWorkoutEffortSampleWithWorkoutActivityCompletion(sample *Sample, workout *Workout, activity *WorkoutActivity, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(sample)
+	defer runtime.KeepAlive(workout)
+	defer runtime.KeepAlive(activity)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("relateWorkoutEffortSample:withWorkout:activity:completion:"), objref.IDOf(sample), objref.IDOf(workout), objref.IDOf(activity), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
+}
+
+// UnrelateWorkoutEffortSampleFromWorkoutActivityCompletion unrelates a workout effort sample from a workout
+func (hs *HealthStore) UnrelateWorkoutEffortSampleFromWorkoutActivityCompletion(sample *Sample, workout *Workout, activity *WorkoutActivity, completion func(bool, unsafe.Pointer)) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(sample)
+	defer runtime.KeepAlive(workout)
+	defer runtime.KeepAlive(activity)
+	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("unrelateWorkoutEffortSample:fromWorkout:activity:completion:"), objref.IDOf(sample), objref.IDOf(workout), objref.IDOf(activity), objc.NewBlock(func(_ objc.Block, _b0 bool, _b1 unsafe.Pointer) { completion(_b0, _b1) }))
 }

@@ -64,6 +64,20 @@ func NewWarpGeometryGridWithColumnsRowsSourcePositionsDestPositions(cols int, ro
 	return warpGeometryGridAdopt(_id)
 }
 
+// SourcePositionAtIndex returns the source position of a vertex.
+func (wgg *WarpGeometryGrid) SourcePositionAtIndex(index int) unsafe.Pointer {
+	defer runtime.KeepAlive(wgg)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(wgg), objc.RegisterName("sourcePositionAtIndex:"), index)
+	return _r
+}
+
+// DestPositionAtIndex returns the destination position of a vertex.
+func (wgg *WarpGeometryGrid) DestPositionAtIndex(index int) unsafe.Pointer {
+	defer runtime.KeepAlive(wgg)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(wgg), objc.RegisterName("destPositionAtIndex:"), index)
+	return _r
+}
+
 // GridByReplacingSourcePositions returns a copy of the receiver with the source positions replaced by a specified array.
 func (wgg *WarpGeometryGrid) GridByReplacingSourcePositions(sourcePositions unsafe.Pointer) *WarpGeometryGrid {
 	defer runtime.KeepAlive(wgg)

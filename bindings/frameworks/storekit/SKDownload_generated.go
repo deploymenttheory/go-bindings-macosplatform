@@ -6,6 +6,7 @@ package storekit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -86,6 +87,13 @@ func (d *Download) State() DownloadState {
 	return _r
 }
 
+// ContentLength returns the content length.
+func (d *Download) ContentLength() unsafe.Pointer {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(d), objc.RegisterName("contentLength"))
+	return _r
+}
+
 // ExpectedContentLength returns the expected content length.
 func (d *Download) ExpectedContentLength() int64 {
 	defer runtime.KeepAlive(d)
@@ -118,6 +126,13 @@ func (d *Download) ContentVersion() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// Error returns the error.
+func (d *Download) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(d), objc.RegisterName("error"))
+	return _r
 }
 
 // Progress returns the progress.

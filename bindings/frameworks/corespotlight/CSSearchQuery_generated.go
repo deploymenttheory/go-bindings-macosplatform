@@ -5,11 +5,10 @@
 package corespotlight
 
 import (
-	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -98,6 +97,12 @@ func (sq *SearchQuery) WithFoundItemsHandler(foundItemsHandler func(obj.Object))
 	return sq
 }
 
+// WithCompletionHandler sets the block to execute when the query finishes delivering all results.
+func (sq *SearchQuery) WithCompletionHandler(completionHandler func(unsafe.Pointer)) *SearchQuery {
+	objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("setCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+	return sq
+}
+
 // WithProtectionClasses sets the protection types of the indexes you want to search.
 func (sq *SearchQuery) WithProtectionClasses(items ...obj.Object) *SearchQuery {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
@@ -129,26 +134,6 @@ func (sq *SearchQuery) FoundItemCount() int {
 	defer runtime.KeepAlive(sq)
 	_r := objc.Send[int](objref.IDOf(sq), objc.RegisterName("foundItemCount"))
 	return _r
-}
-
-// Set wraps the corresponding Objective-C method.
-//
-// Set blocks until the operation completes or ctx is cancelled.
-func (sq *SearchQuery) Set(ctx context.Context) error {
-	defer runtime.KeepAlive(sq)
-	_ch := make(chan error, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _err error
-		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
-		_ch <- _err
-	})
-	objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("setCompletionHandler:"), _block)
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
 }
 
 // ProtectionClasses returns the protection classes.

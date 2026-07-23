@@ -6,8 +6,10 @@ package mediaextension
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -83,6 +85,17 @@ func NewRAWProcessorPixelBufferManager() *RAWProcessorPixelBufferManager {
 func (rppbm *RAWProcessorPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes map[string]obj.Object) *RAWProcessorPixelBufferManager {
 	objc.Send[objc.ID](objref.IDOf(rppbm), objc.RegisterName("setPixelBufferAttributes:"), rt.MapToDict(pixelBufferAttributes, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return rppbm
+}
+
+// CreatePixelBuffer generates a pixel buffer using the session’s pixel buffer pool.
+func (rppbm *RAWProcessorPixelBufferManager) CreatePixelBuffer() (result unsafe.Pointer, err error) {
+	defer runtime.KeepAlive(rppbm)
+	var _nsErr uintptr
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(rppbm), objc.RegisterName("createPixelBufferAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _r, nil
 }
 
 // PixelBufferAttributes returns videoToolbox will use these attributes when creating a pixelBuffer for the RAW Processor. This can be updated by the processor before requesting a new pixelBuffer.

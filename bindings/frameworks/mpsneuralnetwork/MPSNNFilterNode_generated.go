@@ -109,6 +109,16 @@ func (nfn *NNFilterNode) GradientFiltersWithSource(gradientImage *NNImageNode) [
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *NNGradientFilterNode { return NNGradientFilterNodeFromID(_id) })
 }
 
+// TrainingGraphWithSourceGradientNodeHandler build training graph from inference graph This method will iteratively build the training portion of a graph based on an inference graph. Self should be the last node in the inference graph. It is typically a loss layer, but can be anything. Typically, the "inference graph" used here is the desired inference graph with a dropout node and a loss layer node appended. The nodes that are created will have default properties. In certain cases, these may not be appropriate (e.g. if you want to do CPU based updates of convolution weights instead of default GPU updates.) In such cases, your application should use the nodeHandler to configure the new nodes as they are created. BUG: This method can not follow links to regions of the graph that are connected to the rest of the graph solely via MPSNNStateNodes. A gradient image input is required to construct a MPSNNGradientFilterNode from a inference filter node.
+func (nfn *NNFilterNode) TrainingGraphWithSourceGradientNodeHandler(gradientImage *NNImageNode, nodeHandler func(obj.Object, obj.Object, obj.Object, obj.Object)) []*NNFilterNode {
+	defer runtime.KeepAlive(nfn)
+	defer runtime.KeepAlive(gradientImage)
+	_r := objc.Send[objc.ID](objref.IDOf(nfn), objc.RegisterName("trainingGraphWithSourceGradient:nodeHandler:"), objref.IDOf(gradientImage), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID, _b3 objc.ID) {
+		nodeHandler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2), obj.Wrap(_b3))
+	}))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *NNFilterNode { return NNFilterNodeFromID(_id) })
+}
+
 // ResultImage get the node representing the image result of the filter Except where otherwise noted, the precision used for the result image (see format property) is copied from the precision from the first input image node.
 func (nfn *NNFilterNode) ResultImage() *NNImageNode {
 	defer runtime.KeepAlive(nfn)

@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -68,6 +69,22 @@ func NewMTRClusterThermostatWithDeviceEndpointQueue(device *MTRDevice, endpoint 
 	return mTRClusterThermostatAdopt(_id)
 }
 
+// SetpointRaiseLowerWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mct *MTRClusterThermostat) SetpointRaiseLowerWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRThermostatClusterSetpointRaiseLowerParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setpointRaiseLowerWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mct *MTRClusterThermostat) SetWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRThermostatClusterSetWeeklyScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setWeeklyScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // GetWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // GetWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
@@ -94,6 +111,37 @@ func (mct *MTRClusterThermostat) GetWeeklyScheduleWithParamsExpectedValuesExpect
 		var _zero *MTRThermostatClusterGetWeeklyScheduleResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ClearWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion clears weekly schedule with params expected values expected value interval completion.
+func (mct *MTRClusterThermostat) ClearWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRThermostatClusterClearWeeklyScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("clearWeeklyScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ClearWeeklyScheduleWithExpectedValuesExpectedValueIntervalCompletion clears weekly schedule with expected values expected value interval completion.
+func (mct *MTRClusterThermostat) ClearWeeklyScheduleWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("clearWeeklyScheduleWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetActiveScheduleRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mct *MTRClusterThermostat) SetActiveScheduleRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRThermostatClusterSetActiveScheduleRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setActiveScheduleRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// SetActivePresetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mct *MTRClusterThermostat) SetActivePresetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRThermostatClusterSetActivePresetRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setActivePresetRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // AtomicRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
@@ -1079,6 +1127,22 @@ func (mct *MTRClusterThermostat) ReadAttributeClusterRevisionWithParams(params *
 	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// SetpointRaiseLowerWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mct *MTRClusterThermostat) SetpointRaiseLowerWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRThermostatClusterSetpointRaiseLowerParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setpointRaiseLowerWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// SetWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler wraps the corresponding Objective-C method.
+func (mct *MTRClusterThermostat) SetWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRThermostatClusterSetWeeklyScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("setWeeklyScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
 // GetWeeklyScheduleWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // GetWeeklyScheduleWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
@@ -1105,6 +1169,21 @@ func (mct *MTRClusterThermostat) GetWeeklyScheduleWithParamsExpectedValuesExpect
 		var _zero *MTRThermostatClusterGetWeeklyScheduleResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ClearWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler clears weekly schedule with params expected values expected value interval completion handler.
+func (mct *MTRClusterThermostat) ClearWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *MTRThermostatClusterClearWeeklyScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("clearWeeklyScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
+}
+
+// ClearWeeklyScheduleWithExpectedValuesExpectedValueIntervalCompletionHandler clears weekly schedule with expected values expected value interval completion handler.
+func (mct *MTRClusterThermostat) ClearWeeklyScheduleWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completionHandler func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("clearWeeklyScheduleWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterThermostat)(nil)

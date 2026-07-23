@@ -228,6 +228,18 @@ func (mos *MutableOrderedSet) UnionSet(other []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("unionSet:"), rt.SliceToNSSet(other, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
+// SortUsingComparator sorts the mutable ordered set using the comparison method specified by the comparator block.
+func (mos *MutableOrderedSet) SortUsingComparator(cmptr func(obj.Object, obj.Object) int) {
+	defer runtime.KeepAlive(mos)
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("sortUsingComparator:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmptr(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+}
+
+// SortWithOptionsUsingComparator sorts the mutable ordered set using the specified options and the comparison method specified by a given comparator block.
+func (mos *MutableOrderedSet) SortWithOptionsUsingComparator(opts SortOptions, cmptr func(obj.Object, obj.Object) int) {
+	defer runtime.KeepAlive(mos)
+	objc.Send[objc.ID](objref.IDOf(mos), objc.RegisterName("sortWithOptions:usingComparator:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmptr(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+}
+
 // ApplyDifference applies difference.
 func (mos *MutableOrderedSet) ApplyDifference(difference obj.Object) {
 	defer runtime.KeepAlive(mos)

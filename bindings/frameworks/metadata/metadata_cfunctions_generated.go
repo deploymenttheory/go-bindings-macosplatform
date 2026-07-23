@@ -133,15 +133,15 @@ func MDItemCreateWithURL(allocator obj.Object, url obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnMDItemGetCacheFileDescriptors func(objc.ID, unsafe.Pointer)
+var _fnMDItemGetCacheFileDescriptors func(objc.ID, objc.Block)
 
 // MDItemGetCacheFileDescriptors calls the Metadata framework function MDItemGetCacheFileDescriptors.
-func MDItemGetCacheFileDescriptors(items obj.Object, completionHandler unsafe.Pointer) {
+func MDItemGetCacheFileDescriptors(items obj.Object, completionHandler func(unsafe.Pointer)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDItemGetCacheFileDescriptors == nil {
 		ebipurego.RegisterLibFunc(&_fnMDItemGetCacheFileDescriptors, _lib, "MDItemGetCacheFileDescriptors")
 	}
-	_fnMDItemGetCacheFileDescriptors(objref.IDOf(items), completionHandler)
+	_fnMDItemGetCacheFileDescriptors(objref.IDOf(items), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completionHandler(_b0) }))
 }
 
 var _fnMDItemGetTypeID func() int
@@ -563,15 +563,15 @@ func MDQuerySetSortComparator(query obj.Object, comparator unsafe.Pointer, conte
 	_fnMDQuerySetSortComparator(objref.IDOf(query), comparator, context_)
 }
 
-var _fnMDQuerySetSortComparatorBlock func(objc.ID, unsafe.Pointer)
+var _fnMDQuerySetSortComparatorBlock func(objc.ID, objc.Block)
 
 // MDQuerySetSortComparatorBlock calls the Metadata framework function MDQuerySetSortComparatorBlock.
-func MDQuerySetSortComparatorBlock(query obj.Object, comparator unsafe.Pointer) {
+func MDQuerySetSortComparatorBlock(query obj.Object, comparator func(unsafe.Pointer, unsafe.Pointer) int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQuerySetSortComparatorBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQuerySetSortComparatorBlock, _lib, "MDQuerySetSortComparatorBlock")
 	}
-	_fnMDQuerySetSortComparatorBlock(objref.IDOf(query), comparator)
+	_fnMDQuerySetSortComparatorBlock(objref.IDOf(query), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) int { return comparator(_b0, _b1) }))
 }
 
 var _fnMDQuerySetSortOptionFlagsForAttribute func(objc.ID, objc.ID, uint32) uint8

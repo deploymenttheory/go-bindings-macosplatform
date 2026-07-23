@@ -7,6 +7,7 @@ package cloudkit
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -126,6 +127,24 @@ func (c *Container) SharedCloudDatabase() *Database {
 	return DatabaseFromID(_r)
 }
 
+// AccountStatusWithCompletionHandler determines whether the system can access the user’s iCloud account.
+func (c *Container) AccountStatusWithCompletionHandler(completionHandler func(AccountStatus, unsafe.Pointer)) {
+	defer runtime.KeepAlive(c)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("accountStatusWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 AccountStatus, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
+// StatusForApplicationPermissionCompletionHandler determines the authorization status of the specified permission.
+func (c *Container) StatusForApplicationPermissionCompletionHandler(applicationPermission ApplicationPermissions, completionHandler func(ApplicationPermissionStatus, unsafe.Pointer)) {
+	defer runtime.KeepAlive(c)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("statusForApplicationPermission:completionHandler:"), applicationPermission, objc.NewBlock(func(_ objc.Block, _b0 ApplicationPermissionStatus, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
+// RequestApplicationPermissionCompletionHandler prompts the user to authorize the specified permission.
+func (c *Container) RequestApplicationPermissionCompletionHandler(applicationPermission ApplicationPermissions, completionHandler func(ApplicationPermissionStatus, unsafe.Pointer)) {
+	defer runtime.KeepAlive(c)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("requestApplicationPermission:completionHandler:"), applicationPermission, objc.NewBlock(func(_ objc.Block, _b0 ApplicationPermissionStatus, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
 // FetchUserRecordID fetches the user record ID of the current user.
 //
 // FetchUserRecordID blocks until the operation completes or ctx is cancelled.
@@ -176,6 +195,25 @@ func (c *Container) DiscoverAllIdentities(ctx context.Context) (result obj.Objec
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// DiscoverUserIdentityWithEmailAddressCompletionHandler fetches the user identity for the specified email address.
+func (c *Container) DiscoverUserIdentityWithEmailAddressCompletionHandler(email string, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(c)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("discoverUserIdentityWithEmailAddress:completionHandler:"), purego.NSString(email), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
+// DiscoverUserIdentityWithPhoneNumberCompletionHandler fetches the user identity for the specified phone number.
+func (c *Container) DiscoverUserIdentityWithPhoneNumberCompletionHandler(phoneNumber string, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(c)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("discoverUserIdentityWithPhoneNumber:completionHandler:"), purego.NSString(phoneNumber), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
+}
+
+// DiscoverUserIdentityWithUserRecordIDCompletionHandler fetches the user identity for the specified user record ID.
+func (c *Container) DiscoverUserIdentityWithUserRecordIDCompletionHandler(userRecordID *RecordID, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(userRecordID)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("discoverUserIdentityWithUserRecordID:completionHandler:"), objref.IDOf(userRecordID), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // FetchShareParticipantWithEmailAddress fetches the share participant with the specified email address.
@@ -334,4 +372,11 @@ func (c *Container) FetchAllLongLivedOperationIDs(ctx context.Context) (result o
 		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
+}
+
+// FetchLongLivedOperationWithIDCompletionHandler fetches the long-lived operation for the specified operation ID.
+func (c *Container) FetchLongLivedOperationWithIDCompletionHandler(operationID obj.Object, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(operationID)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("fetchLongLivedOperationWithID:completionHandler:"), objref.IDOf(operationID), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }

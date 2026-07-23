@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -590,6 +591,37 @@ func (mcmp *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueIn
 		var _zero *MTRMediaPlaybackClusterPlaybackResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// ActivateAudioTrackWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcmp *MTRClusterMediaPlayback) ActivateAudioTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterActivateAudioTrackParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcmp)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("activateAudioTrackWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// ActivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+func (mcmp *MTRClusterMediaPlayback) ActivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterActivateTextTrackParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcmp)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("activateTextTrackWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// DeactivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion deactivates text track with params expected values expected value interval completion.
+func (mcmp *MTRClusterMediaPlayback) DeactivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params *MTRMediaPlaybackClusterDeactivateTextTrackParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcmp)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("deactivateTextTrackWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// DeactivateTextTrackWithExpectedValuesExpectedValueIntervalCompletion deactivates text track with expected values expected value interval completion.
+func (mcmp *MTRClusterMediaPlayback) DeactivateTextTrackWithExpectedValuesExpectedValueIntervalCompletion(expectedValues []obj.Object, expectedValueIntervalMs obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mcmp)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("deactivateTextTrackWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // ReadAttributeCurrentStateWithParams reads attribute current state with params.

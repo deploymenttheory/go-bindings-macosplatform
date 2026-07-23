@@ -7,11 +7,13 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,6 +58,32 @@ func NewMTRBaseClusterUnitTestingWithDeviceEndpointIDQueue(device *MTRBaseDevice
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterUnitTesting")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterUnitTestingAdopt(_id)
+}
+
+// TestWithParamsCompletion command Test Simple command without any parameters and without a specific response. To aid in unit testing, this command will re-initialize attribute storage to defaults.
+func (mbcut *MTRBaseClusterUnitTesting) TestWithParamsCompletion(params *MTRUnitTestingClusterTestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// TestWithCompletion wraps the corresponding Objective-C method.
+func (mbcut *MTRBaseClusterUnitTesting) TestWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// TestNotHandledWithParamsCompletion command TestNotHandled Simple command without any parameters and without a specific response not handled by the server
+func (mbcut *MTRBaseClusterUnitTesting) TestNotHandledWithParamsCompletion(params *MTRUnitTestingClusterTestNotHandledParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testNotHandledWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// TestNotHandledWithCompletion wraps the corresponding Objective-C method.
+func (mbcut *MTRBaseClusterUnitTesting) TestNotHandledWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testNotHandledWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // TestSpecificWithParamsCompletion command TestSpecific Simple command without any parameters and with a specific response
@@ -109,6 +137,19 @@ func (mbcut *MTRBaseClusterUnitTesting) TestSpecificWithCompletion(ctx context.C
 		var _zero *MTRUnitTestingClusterTestSpecificResponseParams
 		return _zero, ctx.Err()
 	}
+}
+
+// TestUnknownCommandWithParamsCompletion command TestUnknownCommand Simple command that should not be added to the server.
+func (mbcut *MTRBaseClusterUnitTesting) TestUnknownCommandWithParamsCompletion(params *MTRUnitTestingClusterTestUnknownCommandParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testUnknownCommandWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// TestUnknownCommandWithCompletion wraps the corresponding Objective-C method.
+func (mbcut *MTRBaseClusterUnitTesting) TestUnknownCommandWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testUnknownCommandWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
 }
 
 // TestAddArgumentsWithParamsCompletion command TestAddArguments Command that takes two arguments and returns their sum.
@@ -515,6 +556,32 @@ func (mbcut *MTRBaseClusterUnitTesting) SimpleStructEchoRequestWithParamsComplet
 	}
 }
 
+// TimedInvokeRequestWithParamsCompletion command TimedInvokeRequest Command that just responds with a success status if the timed invoke conditions are met.
+func (mbcut *MTRBaseClusterUnitTesting) TimedInvokeRequestWithParamsCompletion(params *MTRUnitTestingClusterTimedInvokeRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("timedInvokeRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// TimedInvokeRequestWithCompletion wraps the corresponding Objective-C method.
+func (mbcut *MTRBaseClusterUnitTesting) TimedInvokeRequestWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("timedInvokeRequestWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// TestSimpleOptionalArgumentRequestWithParamsCompletion command TestSimpleOptionalArgumentRequest Command that takes an optional argument which is bool. It responds with a success value if the optional is set to any value.
+func (mbcut *MTRBaseClusterUnitTesting) TestSimpleOptionalArgumentRequestWithParamsCompletion(params *MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testSimpleOptionalArgumentRequestWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// TestSimpleOptionalArgumentRequestWithCompletion wraps the corresponding Objective-C method.
+func (mbcut *MTRBaseClusterUnitTesting) TestSimpleOptionalArgumentRequestWithCompletion(completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("testSimpleOptionalArgumentRequestWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // TestEmitTestEventRequestWithParamsCompletion command TestEmitTestEventRequest Command that takes identical arguments to the fields of the TestEvent and logs the TestEvent to the buffer.  Command returns an event ID as the response.
 //
 // TestEmitTestEventRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
@@ -595,6 +662,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBooleanWithCompletion(ctx c
 	}
 }
 
+// WriteAttributeBooleanWithValueCompletion writes attribute boolean with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeBooleanWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeBooleanWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeBooleanWithValueParamsCompletion writes attribute boolean with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeBooleanWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeBooleanWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeBooleanWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -612,7 +694,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBooleanWithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -648,6 +730,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap8WithCompletion(ctx c
 	}
 }
 
+// WriteAttributeBitmap8WithValueCompletion writes attribute bitmap8 with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeBitmap8WithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeBitmap8WithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeBitmap8WithValueParamsCompletion writes attribute bitmap8 with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeBitmap8WithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeBitmap8WithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeBitmap8WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBitmap8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -665,7 +762,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap8WithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBitmap8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBitmap8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -701,6 +798,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap16WithCompletion(ctx 
 	}
 }
 
+// WriteAttributeBitmap16WithValueCompletion writes attribute bitmap16 with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeBitmap16WithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeBitmap16WithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeBitmap16WithValueParamsCompletion writes attribute bitmap16 with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeBitmap16WithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeBitmap16WithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeBitmap16WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBitmap16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -718,7 +830,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap16WithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBitmap16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBitmap16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -754,6 +866,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap32WithCompletion(ctx 
 	}
 }
 
+// WriteAttributeBitmap32WithValueCompletion writes attribute bitmap32 with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeBitmap32WithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeBitmap32WithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeBitmap32WithValueParamsCompletion writes attribute bitmap32 with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeBitmap32WithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeBitmap32WithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeBitmap32WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBitmap32WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -771,7 +898,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap32WithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBitmap32WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBitmap32WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -807,6 +934,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap64WithCompletion(ctx 
 	}
 }
 
+// WriteAttributeBitmap64WithValueCompletion writes attribute bitmap64 with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeBitmap64WithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeBitmap64WithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeBitmap64WithValueParamsCompletion writes attribute bitmap64 with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeBitmap64WithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeBitmap64WithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeBitmap64WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBitmap64WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -824,7 +966,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap64WithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBitmap64WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeBitmap64WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -860,6 +1002,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt8uWithCompletion(ctx con
 	}
 }
 
+// WriteAttributeInt8uWithValueCompletion writes attribute int8u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt8uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt8uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt8uWithValueParamsCompletion writes attribute int8u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt8uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt8uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt8uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -877,7 +1034,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt8uWithParamsSubscri
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -913,6 +1070,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt16uWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt16uWithValueCompletion writes attribute int16u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt16uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt16uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt16uWithValueParamsCompletion writes attribute int16u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt16uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt16uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt16uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -930,7 +1102,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt16uWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -966,6 +1138,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt24uWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt24uWithValueCompletion writes attribute int24u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt24uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt24uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt24uWithValueParamsCompletion writes attribute int24u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt24uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt24uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt24uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt24uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -983,7 +1170,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt24uWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt24uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt24uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1019,6 +1206,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt32uWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt32uWithValueCompletion writes attribute int32u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt32uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt32uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt32uWithValueParamsCompletion writes attribute int32u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt32uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt32uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt32uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt32uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1036,7 +1238,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt32uWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt32uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt32uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1072,6 +1274,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt40uWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt40uWithValueCompletion writes attribute int40u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt40uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt40uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt40uWithValueParamsCompletion writes attribute int40u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt40uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt40uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt40uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt40uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1089,7 +1306,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt40uWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt40uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt40uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1125,6 +1342,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt48uWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt48uWithValueCompletion writes attribute int48u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt48uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt48uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt48uWithValueParamsCompletion writes attribute int48u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt48uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt48uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt48uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt48uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1142,7 +1374,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt48uWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt48uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt48uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1178,6 +1410,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt56uWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt56uWithValueCompletion writes attribute int56u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt56uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt56uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt56uWithValueParamsCompletion writes attribute int56u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt56uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt56uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt56uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt56uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1195,7 +1442,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt56uWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt56uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt56uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1231,6 +1478,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt64uWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt64uWithValueCompletion writes attribute int64u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt64uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt64uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt64uWithValueParamsCompletion writes attribute int64u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt64uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt64uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt64uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt64uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1248,7 +1510,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt64uWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt64uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt64uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1284,6 +1546,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt8sWithCompletion(ctx con
 	}
 }
 
+// WriteAttributeInt8sWithValueCompletion writes attribute int8s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt8sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt8sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt8sWithValueParamsCompletion writes attribute int8s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt8sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt8sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt8sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1301,7 +1578,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt8sWithParamsSubscri
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1337,6 +1614,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt16sWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt16sWithValueCompletion writes attribute int16s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt16sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt16sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt16sWithValueParamsCompletion writes attribute int16s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt16sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt16sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt16sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1354,7 +1646,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt16sWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1390,6 +1682,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt24sWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt24sWithValueCompletion writes attribute int24s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt24sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt24sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt24sWithValueParamsCompletion writes attribute int24s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt24sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt24sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt24sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt24sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1407,7 +1714,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt24sWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt24sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt24sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1443,6 +1750,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt32sWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt32sWithValueCompletion writes attribute int32s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt32sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt32sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt32sWithValueParamsCompletion writes attribute int32s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt32sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt32sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt32sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt32sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1460,7 +1782,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt32sWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt32sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt32sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1496,6 +1818,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt40sWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt40sWithValueCompletion writes attribute int40s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt40sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt40sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt40sWithValueParamsCompletion writes attribute int40s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt40sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt40sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt40sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt40sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1513,7 +1850,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt40sWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt40sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt40sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1549,6 +1886,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt48sWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt48sWithValueCompletion writes attribute int48s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt48sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt48sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt48sWithValueParamsCompletion writes attribute int48s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt48sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt48sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt48sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt48sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1566,7 +1918,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt48sWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt48sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt48sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1602,6 +1954,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt56sWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt56sWithValueCompletion writes attribute int56s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt56sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt56sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt56sWithValueParamsCompletion writes attribute int56s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt56sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt56sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt56sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt56sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1619,7 +1986,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt56sWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt56sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt56sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1655,6 +2022,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt64sWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeInt64sWithValueCompletion writes attribute int64s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt64sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt64sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeInt64sWithValueParamsCompletion writes attribute int64s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeInt64sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeInt64sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeInt64sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInt64sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1672,7 +2054,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt64sWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt64sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeInt64sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1708,6 +2090,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnum8WithCompletion(ctx con
 	}
 }
 
+// WriteAttributeEnum8WithValueCompletion writes attribute enum8 with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeEnum8WithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeEnum8WithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeEnum8WithValueParamsCompletion writes attribute enum8 with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeEnum8WithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeEnum8WithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeEnum8WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnum8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1725,7 +2122,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnum8WithParamsSubscri
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEnum8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEnum8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1761,6 +2158,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnum16WithCompletion(ctx co
 	}
 }
 
+// WriteAttributeEnum16WithValueCompletion writes attribute enum16 with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeEnum16WithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeEnum16WithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeEnum16WithValueParamsCompletion writes attribute enum16 with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeEnum16WithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeEnum16WithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeEnum16WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnum16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1778,7 +2190,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnum16WithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEnum16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEnum16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1814,6 +2226,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFloatSingleWithCompletion(c
 	}
 }
 
+// WriteAttributeFloatSingleWithValueCompletion writes attribute float single with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeFloatSingleWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeFloatSingleWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeFloatSingleWithValueParamsCompletion writes attribute float single with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeFloatSingleWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeFloatSingleWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeFloatSingleWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFloatSingleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1831,7 +2258,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFloatSingleWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeFloatSingleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeFloatSingleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1867,6 +2294,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFloatDoubleWithCompletion(c
 	}
 }
 
+// WriteAttributeFloatDoubleWithValueCompletion writes attribute float double with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeFloatDoubleWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeFloatDoubleWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeFloatDoubleWithValueParamsCompletion writes attribute float double with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeFloatDoubleWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeFloatDoubleWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeFloatDoubleWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFloatDoubleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1884,7 +2326,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFloatDoubleWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeFloatDoubleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeFloatDoubleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1920,6 +2362,19 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeOctetStringWithCompletion(c
 	}
 }
 
+// WriteAttributeOctetStringWithValueCompletion writes attribute octet string with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeOctetStringWithValueCompletion(value []byte, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeOctetStringWithValue:completion:"), rt.BytesToNSData(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeOctetStringWithValueParamsCompletion writes attribute octet string with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeOctetStringWithValueParamsCompletion(value []byte, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeOctetStringWithValue:params:completion:"), rt.BytesToNSData(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeOctetStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1937,7 +2392,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeOctetStringWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1973,6 +2428,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListInt8uWithCompletion(ctx
 	}
 }
 
+// WriteAttributeListInt8uWithValueCompletion writes attribute list int8u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeListInt8uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeListInt8uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeListInt8uWithValueParamsCompletion writes attribute list int8u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeListInt8uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeListInt8uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -1990,7 +2460,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListInt8uWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2026,6 +2496,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListOctetStringWithCompleti
 	}
 }
 
+// WriteAttributeListOctetStringWithValueCompletion writes attribute list octet string with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeListOctetStringWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeListOctetStringWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeListOctetStringWithValueParamsCompletion writes attribute list octet string with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeListOctetStringWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeListOctetStringWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2043,7 +2528,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListOctetStringWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2079,6 +2564,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListStructOctetStringWithCo
 	}
 }
 
+// WriteAttributeListStructOctetStringWithValueCompletion writes attribute list struct octet string with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeListStructOctetStringWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeListStructOctetStringWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeListStructOctetStringWithValueParamsCompletion writes attribute list struct octet string with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeListStructOctetStringWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeListStructOctetStringWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2096,7 +2596,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListStructOctetStringW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListStructOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListStructOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2132,6 +2632,19 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeLongOctetStringWithCompleti
 	}
 }
 
+// WriteAttributeLongOctetStringWithValueCompletion writes attribute long octet string with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeLongOctetStringWithValueCompletion(value []byte, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeLongOctetStringWithValue:completion:"), rt.BytesToNSData(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeLongOctetStringWithValueParamsCompletion writes attribute long octet string with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeLongOctetStringWithValueParamsCompletion(value []byte, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeLongOctetStringWithValue:params:completion:"), rt.BytesToNSData(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeLongOctetStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLongOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2149,7 +2662,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeLongOctetStringWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeLongOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeLongOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2185,6 +2698,19 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeCharStringWithCompletion(ct
 	}
 }
 
+// WriteAttributeCharStringWithValueCompletion writes attribute char string with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeCharStringWithValueCompletion(value string, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeCharStringWithValue:completion:"), purego.NSString(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeCharStringWithValueParamsCompletion writes attribute char string with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeCharStringWithValueParamsCompletion(value string, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeCharStringWithValue:params:completion:"), purego.NSString(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeCharStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCharStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2202,7 +2728,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeCharStringWithParamsSu
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeCharStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeCharStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2238,6 +2764,19 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeLongCharStringWithCompletio
 	}
 }
 
+// WriteAttributeLongCharStringWithValueCompletion writes attribute long char string with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeLongCharStringWithValueCompletion(value string, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeLongCharStringWithValue:completion:"), purego.NSString(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeLongCharStringWithValueParamsCompletion writes attribute long char string with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeLongCharStringWithValueParamsCompletion(value string, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeLongCharStringWithValue:params:completion:"), purego.NSString(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeLongCharStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLongCharStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2255,7 +2794,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeLongCharStringWithPara
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeLongCharStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeLongCharStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2291,6 +2830,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEpochUsWithCompletion(ctx c
 	}
 }
 
+// WriteAttributeEpochUsWithValueCompletion writes attribute epoch us with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeEpochUsWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeEpochUsWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeEpochUsWithValueParamsCompletion writes attribute epoch us with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeEpochUsWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeEpochUsWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeEpochUsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEpochUsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2308,7 +2862,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEpochUsWithParamsSubsc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEpochUsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEpochUsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2344,6 +2898,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEpochSWithCompletion(ctx co
 	}
 }
 
+// WriteAttributeEpochSWithValueCompletion writes attribute epoch s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeEpochSWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeEpochSWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeEpochSWithValueParamsCompletion writes attribute epoch s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeEpochSWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeEpochSWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeEpochSWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEpochSWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2361,7 +2930,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEpochSWithParamsSubscr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEpochSWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEpochSWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2397,6 +2966,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeVendorIDWithCompletion(ctx 
 	}
 }
 
+// WriteAttributeVendorIDWithValueCompletion writes attribute vendor ID with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeVendorIDWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeVendorIdWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeVendorIDWithValueParamsCompletion writes attribute vendor ID with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeVendorIDWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeVendorIdWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2414,7 +2998,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeVendorIDWithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeVendorIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeVendorIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2450,6 +3034,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListNullablesAndOptionalsSt
 	}
 }
 
+// WriteAttributeListNullablesAndOptionalsStructWithValueCompletion writes attribute list nullables and optionals struct with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeListNullablesAndOptionalsStructWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeListNullablesAndOptionalsStructWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeListNullablesAndOptionalsStructWithValueParamsCompletion writes attribute list nullables and optionals struct with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeListNullablesAndOptionalsStructWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeListNullablesAndOptionalsStructWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2467,7 +3066,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListNullablesAndOption
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListNullablesAndOptionalsStructWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListNullablesAndOptionalsStructWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2503,6 +3102,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnumAttrWithCompletion(ctx 
 	}
 }
 
+// WriteAttributeEnumAttrWithValueCompletion writes attribute enum attr with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeEnumAttrWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeEnumAttrWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeEnumAttrWithValueParamsCompletion writes attribute enum attr with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeEnumAttrWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeEnumAttrWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeEnumAttrWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEnumAttrWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2520,7 +3134,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnumAttrWithParamsSubs
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEnumAttrWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeEnumAttrWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2556,6 +3170,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeStructAttrWithCompletion(ct
 	}
 }
 
+// WriteAttributeStructAttrWithValueCompletion writes attribute struct attr with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeStructAttrWithValueCompletion(value *MTRUnitTestingClusterSimpleStruct, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeStructAttrWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeStructAttrWithValueParamsCompletion writes attribute struct attr with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeStructAttrWithValueParamsCompletion(value *MTRUnitTestingClusterSimpleStruct, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeStructAttrWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeStructAttrWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeStructAttrWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2573,7 +3202,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeStructAttrWithParamsSu
 		_o.val = MTRUnitTestingClusterSimpleStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeStructAttrWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeStructAttrWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2609,6 +3238,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8uWithCom
 	}
 }
 
+// WriteAttributeRangeRestrictedInt8uWithValueCompletion writes attribute range restricted int8u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt8uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeRangeRestrictedInt8uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeRangeRestrictedInt8uWithValueParamsCompletion writes attribute range restricted int8u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt8uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeRangeRestrictedInt8uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2626,7 +3270,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8uWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeRangeRestrictedInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeRangeRestrictedInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2662,6 +3306,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8sWithCom
 	}
 }
 
+// WriteAttributeRangeRestrictedInt8sWithValueCompletion writes attribute range restricted int8s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt8sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeRangeRestrictedInt8sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeRangeRestrictedInt8sWithValueParamsCompletion writes attribute range restricted int8s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt8sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeRangeRestrictedInt8sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2679,7 +3338,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8sWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeRangeRestrictedInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeRangeRestrictedInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2715,6 +3374,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16uWithCo
 	}
 }
 
+// WriteAttributeRangeRestrictedInt16uWithValueCompletion writes attribute range restricted int16u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt16uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeRangeRestrictedInt16uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeRangeRestrictedInt16uWithValueParamsCompletion writes attribute range restricted int16u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt16uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeRangeRestrictedInt16uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2732,7 +3406,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16uW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeRangeRestrictedInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeRangeRestrictedInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2768,6 +3442,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16sWithCo
 	}
 }
 
+// WriteAttributeRangeRestrictedInt16sWithValueCompletion writes attribute range restricted int16s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt16sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeRangeRestrictedInt16sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeRangeRestrictedInt16sWithValueParamsCompletion writes attribute range restricted int16s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt16sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeRangeRestrictedInt16sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2785,7 +3474,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16sW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeRangeRestrictedInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeRangeRestrictedInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2821,6 +3510,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListLongOctetStringWithComp
 	}
 }
 
+// WriteAttributeListLongOctetStringWithValueCompletion writes attribute list long octet string with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeListLongOctetStringWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeListLongOctetStringWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeListLongOctetStringWithValueParamsCompletion writes attribute list long octet string with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeListLongOctetStringWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeListLongOctetStringWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2838,7 +3542,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListLongOctetStringWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListLongOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListLongOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2875,6 +3579,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListFabricScopedWithParamsC
 	}
 }
 
+// WriteAttributeListFabricScopedWithValueCompletion writes attribute list fabric scoped with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeListFabricScopedWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeListFabricScopedWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeListFabricScopedWithValueParamsCompletion writes attribute list fabric scoped with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeListFabricScopedWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeListFabricScopedWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2892,7 +3611,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListFabricScopedWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListFabricScopedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeListFabricScopedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2928,6 +3647,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeTimedWriteBooleanWithComple
 	}
 }
 
+// WriteAttributeTimedWriteBooleanWithValueCompletion writes attribute timed write boolean with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeTimedWriteBooleanWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeTimedWriteBooleanWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeTimedWriteBooleanWithValueParamsCompletion writes attribute timed write boolean with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeTimedWriteBooleanWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeTimedWriteBooleanWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeTimedWriteBooleanWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTimedWriteBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2945,7 +3679,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeTimedWriteBooleanWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeTimedWriteBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeTimedWriteBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2981,6 +3715,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeGeneralErrorBooleanWithComp
 	}
 }
 
+// WriteAttributeGeneralErrorBooleanWithValueCompletion writes attribute general error boolean with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeGeneralErrorBooleanWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeGeneralErrorBooleanWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeGeneralErrorBooleanWithValueParamsCompletion writes attribute general error boolean with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeGeneralErrorBooleanWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeGeneralErrorBooleanWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeGeneralErrorBooleanWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneralErrorBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -2998,7 +3747,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeGeneralErrorBooleanWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeGeneralErrorBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeGeneralErrorBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3034,6 +3783,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeClusterErrorBooleanWithComp
 	}
 }
 
+// WriteAttributeClusterErrorBooleanWithValueCompletion writes attribute cluster error boolean with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeClusterErrorBooleanWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeClusterErrorBooleanWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeClusterErrorBooleanWithValueParamsCompletion writes attribute cluster error boolean with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeClusterErrorBooleanWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeClusterErrorBooleanWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeClusterErrorBooleanWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterErrorBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3051,7 +3815,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeClusterErrorBooleanWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeClusterErrorBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeClusterErrorBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3087,6 +3851,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeUnsupportedWithCompletion(c
 	}
 }
 
+// WriteAttributeUnsupportedWithValueCompletion writes attribute unsupported with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeUnsupportedWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeUnsupportedWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeUnsupportedWithValueParamsCompletion writes attribute unsupported with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeUnsupportedWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeUnsupportedWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeUnsupportedWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUnsupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3104,7 +3883,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeUnsupportedWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeUnsupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeUnsupportedWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3140,6 +3919,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBooleanWithCompleti
 	}
 }
 
+// WriteAttributeNullableBooleanWithValueCompletion writes attribute nullable boolean with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableBooleanWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableBooleanWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableBooleanWithValueParamsCompletion writes attribute nullable boolean with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableBooleanWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableBooleanWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableBooleanWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3157,7 +3951,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBooleanWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBooleanWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3193,6 +3987,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap8WithCompleti
 	}
 }
 
+// WriteAttributeNullableBitmap8WithValueCompletion writes attribute nullable bitmap8 with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap8WithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableBitmap8WithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableBitmap8WithValueParamsCompletion writes attribute nullable bitmap8 with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap8WithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableBitmap8WithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableBitmap8WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBitmap8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3210,7 +4019,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap8WithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBitmap8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBitmap8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3246,6 +4055,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap16WithComplet
 	}
 }
 
+// WriteAttributeNullableBitmap16WithValueCompletion writes attribute nullable bitmap16 with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap16WithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableBitmap16WithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableBitmap16WithValueParamsCompletion writes attribute nullable bitmap16 with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap16WithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableBitmap16WithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableBitmap16WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBitmap16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3263,7 +4087,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap16WithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBitmap16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBitmap16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3299,6 +4123,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap32WithComplet
 	}
 }
 
+// WriteAttributeNullableBitmap32WithValueCompletion writes attribute nullable bitmap32 with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap32WithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableBitmap32WithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableBitmap32WithValueParamsCompletion writes attribute nullable bitmap32 with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap32WithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableBitmap32WithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableBitmap32WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBitmap32WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3316,7 +4155,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap32WithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBitmap32WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBitmap32WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3352,6 +4191,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap64WithComplet
 	}
 }
 
+// WriteAttributeNullableBitmap64WithValueCompletion writes attribute nullable bitmap64 with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap64WithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableBitmap64WithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableBitmap64WithValueParamsCompletion writes attribute nullable bitmap64 with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap64WithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableBitmap64WithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableBitmap64WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableBitmap64WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3369,7 +4223,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap64WithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBitmap64WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableBitmap64WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3405,6 +4259,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8uWithCompletion
 	}
 }
 
+// WriteAttributeNullableInt8uWithValueCompletion writes attribute nullable int8u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt8uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt8uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt8uWithValueParamsCompletion writes attribute nullable int8u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt8uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt8uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt8uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3422,7 +4291,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8uWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3458,6 +4327,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16uWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt16uWithValueCompletion writes attribute nullable int16u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt16uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt16uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt16uWithValueParamsCompletion writes attribute nullable int16u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt16uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt16uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt16uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3475,7 +4359,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16uWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3511,6 +4395,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24uWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt24uWithValueCompletion writes attribute nullable int24u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt24uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt24uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt24uWithValueParamsCompletion writes attribute nullable int24u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt24uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt24uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt24uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt24uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3528,7 +4427,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24uWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt24uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt24uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3564,6 +4463,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32uWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt32uWithValueCompletion writes attribute nullable int32u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt32uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt32uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt32uWithValueParamsCompletion writes attribute nullable int32u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt32uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt32uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt32uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt32uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3581,7 +4495,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32uWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt32uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt32uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3617,6 +4531,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40uWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt40uWithValueCompletion writes attribute nullable int40u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt40uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt40uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt40uWithValueParamsCompletion writes attribute nullable int40u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt40uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt40uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt40uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt40uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3634,7 +4563,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40uWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt40uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt40uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3670,6 +4599,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48uWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt48uWithValueCompletion writes attribute nullable int48u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt48uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt48uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt48uWithValueParamsCompletion writes attribute nullable int48u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt48uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt48uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt48uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt48uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3687,7 +4631,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48uWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt48uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt48uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3723,6 +4667,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56uWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt56uWithValueCompletion writes attribute nullable int56u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt56uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt56uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt56uWithValueParamsCompletion writes attribute nullable int56u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt56uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt56uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt56uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt56uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3740,7 +4699,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56uWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt56uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt56uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3776,6 +4735,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64uWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt64uWithValueCompletion writes attribute nullable int64u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt64uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt64uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt64uWithValueParamsCompletion writes attribute nullable int64u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt64uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt64uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt64uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt64uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3793,7 +4767,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64uWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt64uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt64uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3829,6 +4803,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8sWithCompletion
 	}
 }
 
+// WriteAttributeNullableInt8sWithValueCompletion writes attribute nullable int8s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt8sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt8sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt8sWithValueParamsCompletion writes attribute nullable int8s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt8sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt8sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt8sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3846,7 +4835,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8sWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3882,6 +4871,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16sWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt16sWithValueCompletion writes attribute nullable int16s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt16sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt16sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt16sWithValueParamsCompletion writes attribute nullable int16s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt16sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt16sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt16sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3899,7 +4903,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16sWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3935,6 +4939,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24sWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt24sWithValueCompletion writes attribute nullable int24s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt24sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt24sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt24sWithValueParamsCompletion writes attribute nullable int24s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt24sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt24sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt24sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt24sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -3952,7 +4971,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24sWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt24sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt24sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3988,6 +5007,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32sWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt32sWithValueCompletion writes attribute nullable int32s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt32sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt32sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt32sWithValueParamsCompletion writes attribute nullable int32s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt32sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt32sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt32sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt32sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4005,7 +5039,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32sWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt32sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt32sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4041,6 +5075,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40sWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt40sWithValueCompletion writes attribute nullable int40s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt40sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt40sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt40sWithValueParamsCompletion writes attribute nullable int40s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt40sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt40sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt40sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt40sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4058,7 +5107,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40sWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt40sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt40sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4094,6 +5143,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48sWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt48sWithValueCompletion writes attribute nullable int48s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt48sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt48sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt48sWithValueParamsCompletion writes attribute nullable int48s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt48sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt48sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt48sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt48sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4111,7 +5175,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48sWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt48sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt48sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4147,6 +5211,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56sWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt56sWithValueCompletion writes attribute nullable int56s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt56sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt56sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt56sWithValueParamsCompletion writes attribute nullable int56s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt56sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt56sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt56sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt56sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4164,7 +5243,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56sWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt56sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt56sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4200,6 +5279,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64sWithCompletio
 	}
 }
 
+// WriteAttributeNullableInt64sWithValueCompletion writes attribute nullable int64s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt64sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt64sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableInt64sWithValueParamsCompletion writes attribute nullable int64s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableInt64sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableInt64sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableInt64sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableInt64sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4217,7 +5311,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64sWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt64sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableInt64sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4253,6 +5347,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum8WithCompletion
 	}
 }
 
+// WriteAttributeNullableEnum8WithValueCompletion writes attribute nullable enum8 with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableEnum8WithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableEnum8WithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableEnum8WithValueParamsCompletion writes attribute nullable enum8 with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableEnum8WithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableEnum8WithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableEnum8WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableEnum8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4270,7 +5379,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum8WithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableEnum8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableEnum8WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4306,6 +5415,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum16WithCompletio
 	}
 }
 
+// WriteAttributeNullableEnum16WithValueCompletion writes attribute nullable enum16 with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableEnum16WithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableEnum16WithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableEnum16WithValueParamsCompletion writes attribute nullable enum16 with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableEnum16WithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableEnum16WithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableEnum16WithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableEnum16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4323,7 +5447,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum16WithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableEnum16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableEnum16WithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4359,6 +5483,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatSingleWithComp
 	}
 }
 
+// WriteAttributeNullableFloatSingleWithValueCompletion writes attribute nullable float single with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableFloatSingleWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableFloatSingleWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableFloatSingleWithValueParamsCompletion writes attribute nullable float single with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableFloatSingleWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableFloatSingleWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableFloatSingleWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableFloatSingleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4376,7 +5515,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatSingleWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableFloatSingleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableFloatSingleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4412,6 +5551,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatDoubleWithComp
 	}
 }
 
+// WriteAttributeNullableFloatDoubleWithValueCompletion writes attribute nullable float double with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableFloatDoubleWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableFloatDoubleWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableFloatDoubleWithValueParamsCompletion writes attribute nullable float double with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableFloatDoubleWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableFloatDoubleWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableFloatDoubleWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableFloatDoubleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4429,7 +5583,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatDoubleWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableFloatDoubleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableFloatDoubleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4465,6 +5619,19 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableOctetStringWithComp
 	}
 }
 
+// WriteAttributeNullableOctetStringWithValueCompletion writes attribute nullable octet string with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableOctetStringWithValueCompletion(value []byte, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableOctetStringWithValue:completion:"), rt.BytesToNSData(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableOctetStringWithValueParamsCompletion writes attribute nullable octet string with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableOctetStringWithValueParamsCompletion(value []byte, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableOctetStringWithValue:params:completion:"), rt.BytesToNSData(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableOctetStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4482,7 +5649,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableOctetStringWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableOctetStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4518,6 +5685,19 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableCharStringWithCompl
 	}
 }
 
+// WriteAttributeNullableCharStringWithValueCompletion writes attribute nullable char string with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableCharStringWithValueCompletion(value string, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableCharStringWithValue:completion:"), purego.NSString(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableCharStringWithValueParamsCompletion writes attribute nullable char string with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableCharStringWithValueParamsCompletion(value string, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableCharStringWithValue:params:completion:"), purego.NSString(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableCharStringWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableCharStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4535,7 +5715,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableCharStringWith
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableCharStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableCharStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4571,6 +5751,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnumAttrWithComplet
 	}
 }
 
+// WriteAttributeNullableEnumAttrWithValueCompletion writes attribute nullable enum attr with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableEnumAttrWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableEnumAttrWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableEnumAttrWithValueParamsCompletion writes attribute nullable enum attr with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableEnumAttrWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableEnumAttrWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableEnumAttrWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableEnumAttrWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4588,7 +5783,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnumAttrWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableEnumAttrWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableEnumAttrWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4624,6 +5819,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableStructWithCompletio
 	}
 }
 
+// WriteAttributeNullableStructWithValueCompletion writes attribute nullable struct with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableStructWithValueCompletion(value *MTRUnitTestingClusterSimpleStruct, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableStructWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableStructWithValueParamsCompletion writes attribute nullable struct with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableStructWithValueParamsCompletion(value *MTRUnitTestingClusterSimpleStruct, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableStructWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableStructWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableStructWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4641,7 +5851,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableStructWithPara
 		_o.val = MTRUnitTestingClusterSimpleStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableStructWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableStructWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4677,6 +5887,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8
 	}
 }
 
+// WriteAttributeNullableRangeRestrictedInt8uWithValueCompletion writes attribute nullable range restricted int8u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt8uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableRangeRestrictedInt8uWithValueParamsCompletion writes attribute nullable range restricted int8u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt8uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4694,7 +5919,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestricte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4730,6 +5955,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8
 	}
 }
 
+// WriteAttributeNullableRangeRestrictedInt8sWithValueCompletion writes attribute nullable range restricted int8s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt8sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableRangeRestrictedInt8sWithValueParamsCompletion writes attribute nullable range restricted int8s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt8sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4747,7 +5987,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestricte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt8sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4783,6 +6023,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt1
 	}
 }
 
+// WriteAttributeNullableRangeRestrictedInt16uWithValueCompletion writes attribute nullable range restricted int16u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt16uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableRangeRestrictedInt16uWithValueParamsCompletion writes attribute nullable range restricted int16u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt16uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4800,7 +6055,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestricte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt16uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4836,6 +6091,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt1
 	}
 }
 
+// WriteAttributeNullableRangeRestrictedInt16sWithValueCompletion writes attribute nullable range restricted int16s with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16sWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt16sWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeNullableRangeRestrictedInt16sWithValueParamsCompletion writes attribute nullable range restricted int16s with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16sWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt16sWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeNullableRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNullableRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4853,7 +6123,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestricte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeNullableRangeRestrictedInt16sWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4889,6 +6159,21 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeWriteOnlyInt8uWithCompletio
 	}
 }
 
+// WriteAttributeWriteOnlyInt8uWithValueCompletion writes attribute write only int8u with value completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeWriteOnlyInt8uWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeWriteOnlyInt8uWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeWriteOnlyInt8uWithValueParamsCompletion writes attribute write only int8u with value params completion.
+func (mbcut *MTRBaseClusterUnitTesting) WriteAttributeWriteOnlyInt8uWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("writeAttributeWriteOnlyInt8uWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeWriteOnlyInt8uWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeWriteOnlyInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -4906,7 +6191,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeWriteOnlyInt8uWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeWriteOnlyInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeWriteOnlyInt8uWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4959,7 +6244,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeGeneratedCommandListWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5012,7 +6297,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeAcceptedCommandListWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5065,7 +6350,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeAttributeListWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5118,7 +6403,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFeatureMapWithParamsSu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5171,7 +6456,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeClusterRevisionWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcut), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

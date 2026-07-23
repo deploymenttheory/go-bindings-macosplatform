@@ -5,6 +5,8 @@
 package photosui
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
@@ -20,8 +22,8 @@ type ContentEditingController interface {
 
 // ProjectExtensionController is the Go form of the Objective-C protocol PHProjectExtensionController.
 type ProjectExtensionController interface {
-	BeginProjectWithExtensionContextProjectInfoCompletion(extensionContext *ProjectExtensionContext, projectInfo *ProjectInfo, completion obj.Object)
-	ResumeProjectWithExtensionContextCompletion(extensionContext *ProjectExtensionContext, completion obj.Object)
+	BeginProjectWithExtensionContextProjectInfoCompletion(extensionContext *ProjectExtensionContext, projectInfo *ProjectInfo, completion func(unsafe.Pointer))
+	ResumeProjectWithExtensionContextCompletion(extensionContext *ProjectExtensionContext, completion func(unsafe.Pointer))
 	FinishProjectWithCompletionHandler(completion func())
 }
 

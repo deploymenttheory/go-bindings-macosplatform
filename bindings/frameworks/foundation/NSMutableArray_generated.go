@@ -216,6 +216,18 @@ func (ma *MutableArray) SetObjectAtIndexedSubscript(object obj.Object, idx int) 
 	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(object), idx)
 }
 
+// SortUsingComparator sorts the receiver in ascending order using the comparison method specified by a given NSComparator block.
+func (ma *MutableArray) SortUsingComparator(cmptr func(obj.Object, obj.Object) int) {
+	defer runtime.KeepAlive(ma)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("sortUsingComparator:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmptr(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+}
+
+// SortWithOptionsUsingComparator sorts the receiver in ascending order using the specified options and the comparison method specified by a given NSComparator block.
+func (ma *MutableArray) SortWithOptionsUsingComparator(opts SortOptions, cmptr func(obj.Object, obj.Object) int) {
+	defer runtime.KeepAlive(ma)
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("sortWithOptions:usingComparator:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmptr(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+}
+
 // ApplyDifference applies difference.
 func (ma *MutableArray) ApplyDifference(difference obj.Object) {
 	defer runtime.KeepAlive(ma)

@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -91,6 +92,13 @@ func (ua *URLAsset) CompatibleTrackForCompositionTrack(compositionTrack *Composi
 	defer runtime.KeepAlive(compositionTrack)
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("compatibleTrackForCompositionTrack:"), objref.IDOf(compositionTrack))
 	return AssetTrackFromID(_r)
+}
+
+// FindCompatibleTrackForCompositionTrackCompletionHandler loads an asset track from which you can insert any time range into the composition track.
+func (ua *URLAsset) FindCompatibleTrackForCompositionTrackCompletionHandler(compositionTrack *CompositionTrack, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	defer runtime.KeepAlive(ua)
+	defer runtime.KeepAlive(compositionTrack)
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("findCompatibleTrackForCompositionTrack:completionHandler:"), objref.IDOf(compositionTrack), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 unsafe.Pointer) { completionHandler(_b0, _b1) }))
 }
 
 // Variants provides an array of AVAssetVariants contained in the asset Some variants may not be playable according to the current device configuration.

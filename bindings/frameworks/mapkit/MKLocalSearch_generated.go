@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -87,6 +88,15 @@ func NewLocalSearchWithPointsOfInterestRequest(request *LocalPointsOfInterestReq
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLocalSearch")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPointsOfInterestRequest:"), objref.IDOf(request))
 	return localSearchAdopt(_id)
+}
+
+// StartWithCompletionHandler starts the search and delivers the results to the specified completion handler.
+func (ls *LocalSearch) StartWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(ls)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("startWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	})
+
 }
 
 // Cancel cancels an in-progress search operation.

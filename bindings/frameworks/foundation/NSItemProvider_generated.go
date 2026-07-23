@@ -127,6 +127,29 @@ func (ip *ItemProvider) HasRepresentationConformingToTypeIdentifierFile(typeIden
 	return _r
 }
 
+// LoadDataRepresentationForTypeIdentifierCompletionHandler asynchronously copies the provided, typed data into a generic data object, returning a progress object.
+func (ip *ItemProvider) LoadDataRepresentationForTypeIdentifierCompletionHandler(typeIdentifier string, completionHandler func(obj.Object, unsafe.Pointer)) *Progress {
+	defer runtime.KeepAlive(ip)
+	_r := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("loadDataRepresentationForTypeIdentifier:completionHandler:"), purego.NSString(typeIdentifier), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return ProgressFromID(_r)
+}
+
+// LoadFileRepresentationForTypeIdentifierCompletionHandler asynchronously writes a copy of the provided, typed data to a temporary file, returning a progress object.
+func (ip *ItemProvider) LoadFileRepresentationForTypeIdentifierCompletionHandler(typeIdentifier string, completionHandler func(obj.Object, unsafe.Pointer)) *Progress {
+	defer runtime.KeepAlive(ip)
+	_r := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("loadFileRepresentationForTypeIdentifier:completionHandler:"), purego.NSString(typeIdentifier), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return ProgressFromID(_r)
+}
+
+// LoadInPlaceFileRepresentationForTypeIdentifierCompletionHandler asynchronously opens a file in place, if possible, returning a progress object.
+func (ip *ItemProvider) LoadInPlaceFileRepresentationForTypeIdentifierCompletionHandler(typeIdentifier string, completionHandler func(obj.Object, bool, unsafe.Pointer)) *Progress {
+	defer runtime.KeepAlive(ip)
+	_r := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("loadInPlaceFileRepresentationForTypeIdentifier:completionHandler:"), purego.NSString(typeIdentifier), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool, _b2 unsafe.Pointer) {
+		completionHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+	return ProgressFromID(_r)
+}
+
 // CanLoadObjectOfClass returns a Boolean value indicating whether an item provider can load objects of a specified class.
 func (ip *ItemProvider) CanLoadObjectOfClass(aClass unsafe.Pointer) bool {
 	defer runtime.KeepAlive(ip)

@@ -7,6 +7,7 @@ package networkextension
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -188,6 +189,13 @@ func (nc *NWTCPConnection) HasBetterPath() bool {
 	return _r
 }
 
+// Endpoint returns the destination endpoint with which this connection was created.
+func (nc *NWTCPConnection) Endpoint() unsafe.Pointer {
+	defer runtime.KeepAlive(nc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(nc), objc.RegisterName("endpoint"))
+	return _r
+}
+
 // ConnectedPath returns the network path over which the connection was established. The caller can query additional properties from the NWPath object for more information. Note that this contains a snapshot of information at the time of connection establishment for this connection only. As a result, some underlying properties might change in time and might not reflect the path for other connections that might be established at different times.
 func (nc *NWTCPConnection) ConnectedPath() *NWPath {
 	defer runtime.KeepAlive(nc)
@@ -195,9 +203,30 @@ func (nc *NWTCPConnection) ConnectedPath() *NWPath {
 	return NWPathFromID(_r)
 }
 
+// LocalAddress returns the IP address endpoint from which the connection was connected.
+func (nc *NWTCPConnection) LocalAddress() unsafe.Pointer {
+	defer runtime.KeepAlive(nc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(nc), objc.RegisterName("localAddress"))
+	return _r
+}
+
+// RemoteAddress returns the IP address endpoint to which the connection was connected.
+func (nc *NWTCPConnection) RemoteAddress() unsafe.Pointer {
+	defer runtime.KeepAlive(nc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(nc), objc.RegisterName("remoteAddress"))
+	return _r
+}
+
 // TxtRecord returns when the connection is connected to a Bonjour service endpoint, the TXT record associated with the Bonjour service is available via this property. Beware that the value comes from the network. Care must be taken when parsing this potentially malicious value.
 func (nc *NWTCPConnection) TxtRecord() []byte {
 	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("txtRecord"))
 	return rt.NSDataToBytes(_r)
+}
+
+// Error returns the connection-wide error property indicates any fatal error that occurred while processing the connection or performing data reading or writing.
+func (nc *NWTCPConnection) Error() unsafe.Pointer {
+	defer runtime.KeepAlive(nc)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(nc), objc.RegisterName("error"))
+	return _r
 }

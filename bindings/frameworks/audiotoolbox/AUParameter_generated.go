@@ -61,6 +61,26 @@ func (p *Parameter) WithValue(value float32) *Parameter {
 	return p
 }
 
+// WithImplementorValueObserver sets the callback for parameter value changes.
+func (p *Parameter) WithImplementorValueObserver(implementorValueObserver func(obj.Object, float32)) *Parameter {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setImplementorValueObserver:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float32) { implementorValueObserver(obj.Wrap(_b0), _b1) }))
+	return p
+}
+
+// WithImplementorValueProvider sets the callback for refreshing known stale values in a parameter tree.
+func (p *Parameter) WithImplementorValueProvider(implementorValueProvider func(obj.Object) int) *Parameter {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setImplementorValueProvider:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return implementorValueProvider(obj.Wrap(_b0)) }))
+	return p
+}
+
+// WithImplementorValueFromStringCallback sets the callback for converting a string to a parameter value.
+func (p *Parameter) WithImplementorValueFromStringCallback(implementorValueFromStringCallback func(obj.Object, obj.Object) int) *Parameter {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setImplementorValueFromStringCallback:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int {
+		return implementorValueFromStringCallback(obj.Wrap(_b0), obj.Wrap(_b1))
+	}))
+	return p
+}
+
 // SetValueOriginator sets the parameter’s value, avoiding redundant notifications to the originator.
 func (p *Parameter) SetValueOriginator(value float32, originator unsafe.Pointer) {
 	defer runtime.KeepAlive(p)

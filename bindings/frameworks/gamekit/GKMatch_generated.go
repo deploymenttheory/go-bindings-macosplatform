@@ -195,6 +195,13 @@ func (m *Match) ExpectedPlayerCount() int {
 	return _r
 }
 
+// Properties returns the properties.
+func (m *Match) Properties() unsafe.Pointer {
+	defer runtime.KeepAlive(m)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(m), objc.RegisterName("properties"))
+	return _r
+}
+
 // PlayerProperties returns the player properties.
 func (m *Match) PlayerProperties() obj.Object {
 	defer runtime.KeepAlive(m)

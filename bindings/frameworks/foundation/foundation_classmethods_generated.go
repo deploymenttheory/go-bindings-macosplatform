@@ -997,6 +997,12 @@ func ErrorWithDomainCodeUserInfo(domain *String, code int, dict obj.Object) *Err
 	return ErrorFromID(_r)
 }
 
+// SetUserInfoValueProviderForDomainProvider specifies a block to call when the corresponding property is not present in the user info dictionary.
+func SetUserInfoValueProviderForDomainProvider(errorDomain *String, provider func(unsafe.Pointer, obj.Object) int) {
+	defer runtime.KeepAlive(errorDomain)
+	objc.Send[objc.ID](objc.ID(_class("NSError")), objc.RegisterName("setUserInfoValueProviderForDomain:provider:"), objref.IDOf(errorDomain), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 objc.ID) int { return provider(_b0, obj.Wrap(_b1)) }))
+}
+
 // ExceptionWithNameReasonUserInfo creates and returns an exception object .
 func ExceptionWithNameReasonUserInfo(name *String, reason string, userInfo obj.Object) *Exception {
 	defer runtime.KeepAlive(name)
@@ -2678,6 +2684,12 @@ func ProgressWithTotalUnitCountParentPendingUnitCount(unitCount int64, parent *P
 	return ProgressFromID(_r)
 }
 
+// AddSubscriberForFileURLWithPublishingHandler adds subscriber for file URL with publishing handler.
+func AddSubscriberForFileURLWithPublishingHandler(url string, publishingHandler func(obj.Object) int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("addSubscriberForFileURL:withPublishingHandler:"), rt.FileURL(url), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return publishingHandler(obj.Wrap(_b0)) }))
+	return obj.Wrap(_r)
+}
+
 // RemoveSubscriber removes subscriber.
 func RemoveSubscriber(subscriber obj.Object) {
 	defer runtime.KeepAlive(subscriber)
@@ -2908,6 +2920,12 @@ func NSSocketPortNameServerSharedInstance() obj.Object {
 // SortDescriptorWithKeyAscending creates and returns a sort descriptor with the specified key path and ordering.
 func SortDescriptorWithKeyAscending(key string, ascending bool) *SortDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSortDescriptor")), objc.RegisterName("sortDescriptorWithKey:ascending:"), purego.NSString(key), ascending)
+	return SortDescriptorFromID(_r)
+}
+
+// SortDescriptorWithKeyAscendingComparator creates and returns a sort descriptor initialized with the specified key path and ordering, and a comparator block.
+func SortDescriptorWithKeyAscendingComparator(key string, ascending bool, cmptr func(obj.Object, obj.Object) int) *SortDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSSortDescriptor")), objc.RegisterName("sortDescriptorWithKey:ascending:comparator:"), purego.NSString(key), ascending, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) int { return cmptr(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return SortDescriptorFromID(_r)
 }
 
@@ -3499,6 +3517,15 @@ func SendSynchronousRequestReturningResponse(request *URLRequest, response *URLR
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return rt.NSDataToBytes(_r), nil
+}
+
+// SendAsynchronousRequestQueueCompletionHandler loads the data for a URL request and executes a handler block on an operation queue when the request completes or fails.
+func SendAsynchronousRequestQueueCompletionHandler(request *URLRequest, queue *OperationQueue, handler func(obj.Object, obj.Object, unsafe.Pointer)) {
+	defer runtime.KeepAlive(request)
+	defer runtime.KeepAlive(queue)
+	objc.Send[objc.ID](objc.ID(_class("NSURLConnection")), objc.RegisterName("sendAsynchronousRequest:queue:completionHandler:"), objref.IDOf(request), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		handler(obj.Wrap(_b0), obj.Wrap(_b1), _b2)
+	}))
 }
 
 // CredentialWithUserPasswordPersistence creates a URL credential instance for internet password authentication with a given user name and password, using a given persistence setting.

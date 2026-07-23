@@ -548,6 +548,13 @@ func (i *Image) ContentAverageLightLevel() float32 {
 	return _r
 }
 
+// PixelBuffer returns the pixel buffer.
+func (i *Image) PixelBuffer() unsafe.Pointer {
+	defer runtime.KeepAlive(i)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(i), objc.RegisterName("pixelBuffer"))
+	return _r
+}
+
 // CGImage returns the cg image.
 func (i *Image) CGImage() obj.Object {
 	defer runtime.KeepAlive(i)

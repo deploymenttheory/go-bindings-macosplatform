@@ -6,6 +6,7 @@ package speech
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -116,6 +117,14 @@ func (sr *SpeechRecognizer) WithQueue(queue obj.Object) *SpeechRecognizer {
 	defer runtime.KeepAlive(queue)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("setQueue:"), objref.IDOf(queue))
 	return sr
+}
+
+// RecognitionTaskWithRequestResultHandler executes the speech recognition request and delivers the results to the specified handler block.
+func (sr *SpeechRecognizer) RecognitionTaskWithRequestResultHandler(request *SpeechRecognitionRequest, resultHandler func(obj.Object, unsafe.Pointer)) *SpeechRecognitionTask {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(request)
+	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("recognitionTaskWithRequest:resultHandler:"), objref.IDOf(request), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { resultHandler(obj.Wrap(_b0), _b1) }))
+	return SpeechRecognitionTaskFromID(_r)
 }
 
 // IsAvailable reports whether the speech recognizer is currently available. When the value of this property is `true`, you may create new speech recognition tasks. When value of this property is `false`, speech recognition services are not available.

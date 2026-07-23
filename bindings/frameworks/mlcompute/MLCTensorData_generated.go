@@ -6,6 +6,7 @@ package mlcompute
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -77,6 +78,13 @@ func (td *TensorData) String() string {
 func NewTensorData() *TensorData {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLCTensorData")), objc.RegisterName("new"))
 	return tensorDataAdopt(_id)
+}
+
+// Bytes returns pointer to memory that contains or will be used for tensor data
+func (td *TensorData) Bytes() unsafe.Pointer {
+	defer runtime.KeepAlive(td)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(td), objc.RegisterName("bytes"))
+	return _r
 }
 
 // Length returns the size in bytes of the tensor data

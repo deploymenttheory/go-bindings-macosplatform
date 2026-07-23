@@ -5,7 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,9 +49,23 @@ func observerQueryAdopt(id objc.ID) *ObserverQuery {
 	return x
 }
 
-// NewObserverQuery creates a new ObserverQuery.
-func NewObserverQuery() *ObserverQuery {
-	_id := objc.Send[objc.ID](objc.ID(_class("HKObserverQuery")), objc.RegisterName("new"))
+// NewObserverQueryWithSampleTypePredicateUpdateHandler instantiates and returns a query that monitors the HealthKit store and responds to changes.
+func NewObserverQueryWithSampleTypePredicateUpdateHandler(sampleType *SampleType, predicate obj.Object, updateHandler func(obj.Object, func(), unsafe.Pointer)) *ObserverQuery {
+	defer runtime.KeepAlive(sampleType)
+	defer runtime.KeepAlive(predicate)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKObserverQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleType:predicate:updateHandler:"), objref.IDOf(sampleType), objref.IDOf(predicate), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 func(), _b2 unsafe.Pointer) {
+		updateHandler(obj.Wrap(_b0), _b1, _b2)
+	}))
+	return observerQueryAdopt(_id)
+}
+
+// NewObserverQueryWithQueryDescriptorsUpdateHandler creates a query that monitors the HealthKit store and responds to any changes matching any of the query descriptors you provided.
+func NewObserverQueryWithQueryDescriptorsUpdateHandler(queryDescriptors []*QueryDescriptor, updateHandler func(obj.Object, obj.Object, func(), unsafe.Pointer)) *ObserverQuery {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKObserverQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueryDescriptors:updateHandler:"), purego.SliceToNSArray(queryDescriptors, func(_v *QueryDescriptor) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 func(), _b3 unsafe.Pointer) {
+		updateHandler(obj.Wrap(_b0), obj.Wrap(_b1), _b2, _b3)
+	}))
 	return observerQueryAdopt(_id)
 }
 

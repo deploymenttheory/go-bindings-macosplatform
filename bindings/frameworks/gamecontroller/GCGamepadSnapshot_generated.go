@@ -70,6 +70,12 @@ func (gs *GamepadSnapshot) WithSnapshotData(snapshotData []byte) *GamepadSnapsho
 	return gs
 }
 
+// WithValueChangedHandler sets a block called when any element in the profile changes.
+func (gs *GamepadSnapshot) WithValueChangedHandler(valueChangedHandler func(obj.Object, obj.Object)) *GamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(gs), objc.RegisterName("setValueChangedHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueChangedHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return gs
+}
+
 // WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
 func (gs *GamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *GamepadSnapshot {
 	objc.Send[objc.ID](objref.IDOf(gs), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))

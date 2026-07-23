@@ -5,6 +5,7 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -57,6 +58,13 @@ func NewGraphShapedType() *GraphShapedType {
 func (gst *GraphShapedType) WithShape(shape unsafe.Pointer) *GraphShapedType {
 	objc.Send[objc.ID](objref.IDOf(gst), objc.RegisterName("setShape:"), shape)
 	return gst
+}
+
+// Shape returns the Shape of the shaped type.
+func (gst *GraphShapedType) Shape() unsafe.Pointer {
+	defer runtime.KeepAlive(gst)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(gst), objc.RegisterName("shape"))
+	return _r
 }
 
 var _ GraphTypeProvider = (*GraphShapedType)(nil)

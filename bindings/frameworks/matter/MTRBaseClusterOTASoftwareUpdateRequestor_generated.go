@@ -7,6 +7,7 @@ package matter
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -58,6 +59,13 @@ func NewMTRBaseClusterOTASoftwareUpdateRequestorWithDeviceEndpointIDQueue(device
 	return mTRBaseClusterOTASoftwareUpdateRequestorAdopt(_id)
 }
 
+// AnnounceOTAProviderWithParamsCompletion command AnnounceOTAProvider Announce the presence of an OTA Provider
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) AnnounceOTAProviderWithParamsCompletion(params *MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcosur)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("announceOTAProviderWithParams:completion:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // ReadAttributeDefaultOTAProvidersWithParamsCompletion reads attribute default ota providers with params completion.
 //
 // ReadAttributeDefaultOTAProvidersWithParamsCompletion blocks until the operation completes or ctx is cancelled.
@@ -85,6 +93,21 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeDefaultOTA
 	}
 }
 
+// WriteAttributeDefaultOTAProvidersWithValueCompletion writes attribute default ota providers with value completion.
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) WriteAttributeDefaultOTAProvidersWithValueCompletion(value obj.Object, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcosur)
+	defer runtime.KeepAlive(value)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("writeAttributeDefaultOTAProvidersWithValue:completion:"), objref.IDOf(value), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
+// WriteAttributeDefaultOTAProvidersWithValueParamsCompletion writes attribute default ota providers with value params completion.
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) WriteAttributeDefaultOTAProvidersWithValueParamsCompletion(value obj.Object, params *MTRWriteParams, completion func(unsafe.Pointer)) {
+	defer runtime.KeepAlive(mbcosur)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("writeAttributeDefaultOTAProvidersWithValue:params:completion:"), objref.IDOf(value), objref.IDOf(params), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer) { completion(_b0) }))
+}
+
 // SubscribeAttributeDefaultOTAProvidersWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDefaultOTAProvidersWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
@@ -102,7 +125,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeDefau
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeDefaultOTAProvidersWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeDefaultOTAProvidersWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -155,7 +178,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdat
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeUpdatePossibleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeUpdatePossibleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -208,7 +231,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdat
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeUpdateStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeUpdateStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -261,7 +284,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdat
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeUpdateStateProgressWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeUpdateStateProgressWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -314,7 +337,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeGener
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -367,7 +390,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeAccep
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -420,7 +443,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeAttri
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -473,7 +496,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeFeatu
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -526,7 +549,7 @@ func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeClust
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), objc.NewBlock(func(_ objc.Block) { subscriptionEstablished() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

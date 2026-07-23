@@ -7,7 +7,9 @@ package sensitivecontentanalysis
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -132,6 +134,13 @@ func (sa *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image obj.Obj
 		var _zero *SensitivityAnalysis
 		return _zero, ctx.Err()
 	}
+}
+
+// AnalyzeVideoFileCompletionHandler analyzes a video file on disk at the given URL and runs the given code on completion.
+func (sa *SensitivityAnalyzer) AnalyzeVideoFileCompletionHandler(fileURL string, completionHandler func(obj.Object, unsafe.Pointer)) *foundation.Progress {
+	defer runtime.KeepAlive(sa)
+	_r := objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("analyzeVideoFile:completionHandler:"), rt.FileURL(fileURL), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	return foundation.ProgressFromID(_r)
 }
 
 // AnalysisPolicy returns current SCSensitivityAnalysisPolicy set on device. Can be used to determine whether analysis is available or not

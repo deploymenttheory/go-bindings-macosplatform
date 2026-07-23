@@ -426,7 +426,7 @@ type AlignmentFeedbackToken interface {
 
 // AnimatablePropertyContainer is the Go form of the Objective-C protocol NSAnimatablePropertyContainer.
 type AnimatablePropertyContainer interface {
-	Animator() obj.Object
+	Animator() unsafe.Pointer
 	AnimationForKey(key obj.Object) obj.Object
 	DefaultAnimationForKey(key obj.Object) obj.Object
 	Animations() obj.Object
@@ -519,7 +519,7 @@ type ColorPickingCustom interface {
 
 // ColorPickingDefault is the Go form of the Objective-C protocol NSColorPickingDefault.
 type ColorPickingDefault interface {
-	InitWithPickerMaskColorPanel(mask int, owningColorPanel *ColorPanel) obj.Object
+	InitWithPickerMaskColorPanel(mask int, owningColorPanel *ColorPanel) unsafe.Pointer
 	ProvideNewButtonImage() *Image
 	InsertNewButtonImageIn(newButtonImage *Image, buttonCell *ButtonCell)
 	ViewSizeChanged(sender obj.Object)
@@ -590,7 +590,7 @@ type ExtensionRequestHandling interface {
 // FilePromiseProviderDelegate is the Go form of the Objective-C protocol NSFilePromiseProviderDelegate.
 type FilePromiseProviderDelegate interface {
 	FilePromiseProviderFileNameForType(filePromiseProvider *FilePromiseProvider, fileType string) string
-	FilePromiseProviderWritePromiseToURLCompletionHandler(filePromiseProvider *FilePromiseProvider, url string, completionHandler obj.Object)
+	FilePromiseProviderWritePromiseToURLCompletionHandler(filePromiseProvider *FilePromiseProvider, url string, completionHandler func(unsafe.Pointer))
 }
 
 // FontChanging is the Go form of the Objective-C protocol NSFontChanging.
@@ -775,7 +775,7 @@ type TextContentStorageDelegate interface {
 type TextElementProviderProtocol interface {
 	EnumerateTextElementsFromLocationOptionsUsing(textLocation obj.Object, options TextContentManagerEnumerationOptions, block func(obj.Object) bool) obj.Object
 	ReplaceContentsInRangeWithTextElements(range_ *TextRange, textElements []*TextElement)
-	SynchronizeToBackingStore(completionHandler obj.Object)
+	SynchronizeToBackingStore(completionHandler func(unsafe.Pointer))
 	DocumentRange() *TextRange
 }
 
@@ -922,7 +922,7 @@ type ViewToolTipOwner interface {
 
 // WindowRestoration is the Go form of the Objective-C protocol NSWindowRestoration.
 type WindowRestoration interface {
-	RestoreWindowWithIdentifierStateCompletionHandler(identifier obj.Object, state obj.Object, completionHandler obj.Object)
+	RestoreWindowWithIdentifierStateCompletionHandler(identifier obj.Object, state obj.Object, completionHandler func(obj.Object, unsafe.Pointer))
 }
 
 // WritingToolsCoordinatorDelegate is the Go form of the Objective-C protocol NSWritingToolsCoordinatorDelegate.

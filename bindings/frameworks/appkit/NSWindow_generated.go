@@ -3478,6 +3478,20 @@ func (w *Window) ShowsResizeIndicator() bool {
 
 }
 
+// WindowRef returns the window ref.
+func (w *Window) WindowRef() unsafe.Pointer {
+	defer runtime.KeepAlive(w)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(w), objc.RegisterName("windowRef"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // UpdateConstraintsIfNeeded updates the constraints based on changes to views in the window since the last layout.
 func (w *Window) UpdateConstraintsIfNeeded() {
 	defer runtime.KeepAlive(w)
@@ -3752,6 +3766,20 @@ func (w *Window) IsRestorable() bool {
 	purego.Main(func() {
 		_mainthread0 = func() bool {
 			_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isRestorable"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// RestorationClass returns the restoration class.
+func (w *Window) RestorationClass() unsafe.Pointer {
+	defer runtime.KeepAlive(w)
+	var _mainthread0 unsafe.Pointer
+	purego.Main(func() {
+		_mainthread0 = func() unsafe.Pointer {
+			_r := objc.Send[unsafe.Pointer](objref.IDOf(w), objc.RegisterName("restorationClass"))
 			return _r
 		}()
 	})

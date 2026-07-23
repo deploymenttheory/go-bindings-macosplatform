@@ -5,8 +5,11 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -49,6 +52,13 @@ func trackHomographicImageRegistrationRequestAdopt(id objc.ID) *TrackHomographic
 // NewTrackHomographicImageRegistrationRequest creates a new TrackHomographicImageRegistrationRequest.
 func NewTrackHomographicImageRegistrationRequest() *TrackHomographicImageRegistrationRequest {
 	_id := objc.Send[objc.ID](objc.ID(_class("VNTrackHomographicImageRegistrationRequest")), objc.RegisterName("new"))
+	return trackHomographicImageRegistrationRequestAdopt(_id)
+}
+
+// NewTrackHomographicImageRegistrationRequestWithCompletionHandler creates a new request that tracks the homographic transformation of two images, with a system callback on completion.
+func NewTrackHomographicImageRegistrationRequestWithCompletionHandler(completionHandler func(obj.Object, unsafe.Pointer)) *TrackHomographicImageRegistrationRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTrackHomographicImageRegistrationRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	return trackHomographicImageRegistrationRequestAdopt(_id)
 }
 

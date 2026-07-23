@@ -127,6 +127,20 @@ func (osa *OutputSettingsAssistant) OutputFileType() *foundation.String {
 	return foundation.StringFromID(_r)
 }
 
+// SourceAudioFormat returns a CMAudioFormatDescription object describing the format of you audio data Setting this property will allow the receiver to make a more informed recommendation for the audio settings that should be used.  After setting this property, you should re-query the audioSettings property to get the new recommendation.  The default value is NULL, which means that the receiver does not know anything about the format of your audio data. If you set a non-NULL value for this property, and are using the receiver to initialize an AVAssetWriterInput, the same format description should be used to initialize the AVAssetWriterInput, along with the dictionary from the audioSettings property.
+func (osa *OutputSettingsAssistant) SourceAudioFormat() unsafe.Pointer {
+	defer runtime.KeepAlive(osa)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(osa), objc.RegisterName("sourceAudioFormat"))
+	return _r
+}
+
+// SourceVideoFormat returns a CMVideoFormatDescription object describing the format of your video data Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation.  The default value is NULL, which means that the receiver does not know anything about the format of your video data. If you set a non-NULL value for this property, and are using the receiver to initialize an AVAssetWriterInput, the same format description should be used to initialize the AVAssetWriterInput, along with the dictionary from the videoSettings property.
+func (osa *OutputSettingsAssistant) SourceVideoFormat() unsafe.Pointer {
+	defer runtime.KeepAlive(osa)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(osa), objc.RegisterName("sourceVideoFormat"))
+	return _r
+}
+
 // SourceVideoAverageFrameDuration returns a CMTime describing the average frame duration (reciprocal of average frame rate) of your video data Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation. The default value is 1/30, which means that the receiver is assuming that your source video has an average frame rate of 30fps. It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
 func (osa *OutputSettingsAssistant) SourceVideoAverageFrameDuration() coremedia.CMTime {
 	defer runtime.KeepAlive(osa)
