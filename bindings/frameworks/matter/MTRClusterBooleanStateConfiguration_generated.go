@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -49,12 +50,11 @@ func mTRClusterBooleanStateConfigurationAdopt(id objc.ID) *MTRClusterBooleanStat
 }
 
 // NewMTRClusterBooleanStateConfigurationWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-func NewMTRClusterBooleanStateConfigurationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterBooleanStateConfiguration {
+func NewMTRClusterBooleanStateConfigurationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue dispatch.Queue) *MTRClusterBooleanStateConfiguration {
 	defer runtime.KeepAlive(device)
 	defer runtime.KeepAlive(endpointID)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBooleanStateConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objc.ID(uintptr(queue.Ptr())))
 	return mTRClusterBooleanStateConfigurationAdopt(_id)
 }
 

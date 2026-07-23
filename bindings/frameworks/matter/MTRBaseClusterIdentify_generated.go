@@ -10,6 +10,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,21 +51,19 @@ func mTRBaseClusterIdentifyAdopt(id objc.ID) *MTRBaseClusterIdentify {
 }
 
 // NewMTRBaseClusterIdentifyWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
-func NewMTRBaseClusterIdentifyWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterIdentify {
+func NewMTRBaseClusterIdentifyWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue dispatch.Queue) *MTRBaseClusterIdentify {
 	defer runtime.KeepAlive(device)
 	defer runtime.KeepAlive(endpointID)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterIdentify")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objc.ID(uintptr(queue.Ptr())))
 	return mTRBaseClusterIdentifyAdopt(_id)
 }
 
 // NewMTRBaseClusterIdentifyWithDeviceEndpointQueue creates a new MTRBaseClusterIdentify.
-func NewMTRBaseClusterIdentifyWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterIdentify {
+func NewMTRBaseClusterIdentifyWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue dispatch.Queue) *MTRBaseClusterIdentify {
 	defer runtime.KeepAlive(device)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterIdentify")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objc.ID(uintptr(queue.Ptr())))
 	return mTRBaseClusterIdentifyAdopt(_id)
 }
 

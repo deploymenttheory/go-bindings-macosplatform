@@ -51,6 +51,11 @@ const (
 	// idiomatic framework packages (the public API), used to import another
 	// framework's value struct (e.g. corefoundation.CGRect) by name.
 	idiomaticFrameworkPrefix = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/"
+	// idiomaticLibraryPrefix is the import-path prefix of the generated idiomatic
+	// C-library packages (dispatch, xpc, …) — the public counterpart to the raw
+	// libraries under bindings/internal/raw/libraries — used to surface an
+	// os_object handle parameter as its concrete library type.
+	idiomaticLibraryPrefix = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/"
 )
 
 // EmitFrameworkWrappers generates one *_generated.go file per ObjC class in

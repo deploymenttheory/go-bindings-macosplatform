@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -183,14 +184,13 @@ func (awi *AssetWriterInput) WithPerformsMultiPassEncodingIfSupported(performsMu
 // RequestMediaDataWhenReadyOnQueueUsing tells the input to request media data, at its convenience, to write to the output file.
 //
 // RequestMediaDataWhenReadyOnQueueUsing blocks until the operation completes or ctx is cancelled.
-func (awi *AssetWriterInput) RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue obj.Object) error {
+func (awi *AssetWriterInput) RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue dispatch.Queue) error {
 	defer runtime.KeepAlive(awi)
-	defer runtime.KeepAlive(queue)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(awi), objc.RegisterName("requestMediaDataWhenReadyOnQueue:usingBlock:"), objref.IDOf(queue), _block)
+	objc.Send[objc.ID](objref.IDOf(awi), objc.RegisterName("requestMediaDataWhenReadyOnQueue:usingBlock:"), objc.ID(uintptr(queue.Ptr())), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -356,10 +356,9 @@ func (awi *AssetWriterInput) AddTrackAssociationWithTrackOfInputType(input *Asse
 }
 
 // RespondToEachPassDescriptionOnQueueUsing tells the input to invoke a callback whenever it begins a new pass.
-func (awi *AssetWriterInput) RespondToEachPassDescriptionOnQueueUsing(queue obj.Object, block func()) {
+func (awi *AssetWriterInput) RespondToEachPassDescriptionOnQueueUsing(queue dispatch.Queue, block func()) {
 	defer runtime.KeepAlive(awi)
-	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(awi), objc.RegisterName("respondToEachPassDescriptionOnQueue:usingBlock:"), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { block() }))
+	objc.Send[objc.ID](objref.IDOf(awi), objc.RegisterName("respondToEachPassDescriptionOnQueue:usingBlock:"), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block) { block() }))
 }
 
 // MarkCurrentPassAsFinished tells the input to analyze the appended media to determine whether it can improve the results by reencoding certain segments.

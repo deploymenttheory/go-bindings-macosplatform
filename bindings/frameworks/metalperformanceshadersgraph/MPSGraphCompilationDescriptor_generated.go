@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -75,9 +76,8 @@ func (gcd *GraphCompilationDescriptor) WithCompilationCompletionHandler(compilat
 }
 
 // WithDispatchQueue sets the dispatch queue used for the compilation.
-func (gcd *GraphCompilationDescriptor) WithDispatchQueue(dispatchQueue obj.Object) *GraphCompilationDescriptor {
-	defer runtime.KeepAlive(dispatchQueue)
-	objc.Send[objc.ID](objref.IDOf(gcd), objc.RegisterName("setDispatchQueue:"), objref.IDOf(dispatchQueue))
+func (gcd *GraphCompilationDescriptor) WithDispatchQueue(dispatchQueue dispatch.Queue) *GraphCompilationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gcd), objc.RegisterName("setDispatchQueue:"), objc.ID(uintptr(dispatchQueue.Ptr())))
 	return gcd
 }
 

@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -410,12 +411,12 @@ func DASessionScheduleWithRunLoop(session obj.Object, runLoop obj.Object, runLoo
 var _fnDASessionSetDispatchQueue func(objc.ID, objc.ID)
 
 // DASessionSetDispatchQueue calls the DiskArbitration framework function DASessionSetDispatchQueue.
-func DASessionSetDispatchQueue(session obj.Object, queue obj.Object) {
+func DASessionSetDispatchQueue(session obj.Object, queue dispatch.Queue) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDASessionSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnDASessionSetDispatchQueue, _lib, "DASessionSetDispatchQueue")
 	}
-	_fnDASessionSetDispatchQueue(objref.IDOf(session), objref.IDOf(queue))
+	_fnDASessionSetDispatchQueue(objref.IDOf(session), objc.ID(uintptr(queue.Ptr())))
 }
 
 var _fnDASessionUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)

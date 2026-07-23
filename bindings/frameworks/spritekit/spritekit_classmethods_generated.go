@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -391,9 +392,8 @@ func RunBlock(block func()) *Action {
 }
 
 // RunBlockQueue creates an action that executes a block
-func RunBlockQueue(block func(), queue obj.Object) *Action {
-	defer runtime.KeepAlive(queue)
-	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("runBlock:queue:"), objc.NewBlock(func(_ objc.Block) { block() }), objref.IDOf(queue))
+func RunBlockQueue(block func(), queue dispatch.Queue) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("runBlock:queue:"), objc.NewBlock(func(_ objc.Block) { block() }), objc.ID(uintptr(queue.Ptr())))
 	return ActionFromID(_r)
 }
 

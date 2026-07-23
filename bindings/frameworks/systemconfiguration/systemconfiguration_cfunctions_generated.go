@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -488,12 +489,12 @@ func SCDynamicStoreRemoveValue(store obj.Object, key obj.Object) uint8 {
 var _fnSCDynamicStoreSetDispatchQueue func(objc.ID, objc.ID) uint8
 
 // SCDynamicStoreSetDispatchQueue calls the SystemConfiguration framework function SCDynamicStoreSetDispatchQueue.
-func SCDynamicStoreSetDispatchQueue(store obj.Object, queue obj.Object) uint8 {
+func SCDynamicStoreSetDispatchQueue(store obj.Object, queue dispatch.Queue) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCDynamicStoreSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreSetDispatchQueue, _lib, "SCDynamicStoreSetDispatchQueue")
 	}
-	return _fnSCDynamicStoreSetDispatchQueue(objref.IDOf(store), objref.IDOf(queue))
+	return _fnSCDynamicStoreSetDispatchQueue(objref.IDOf(store), objc.ID(uintptr(queue.Ptr())))
 }
 
 var _fnSCDynamicStoreSetMultiple func(objc.ID, objc.ID, objc.ID, objc.ID) uint8
@@ -684,12 +685,12 @@ func SCNetworkConnectionScheduleWithRunLoop(connection obj.Object, runLoop obj.O
 var _fnSCNetworkConnectionSetDispatchQueue func(objc.ID, objc.ID) uint8
 
 // SCNetworkConnectionSetDispatchQueue calls the SystemConfiguration framework function SCNetworkConnectionSetDispatchQueue.
-func SCNetworkConnectionSetDispatchQueue(connection obj.Object, queue obj.Object) uint8 {
+func SCNetworkConnectionSetDispatchQueue(connection obj.Object, queue dispatch.Queue) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkConnectionSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionSetDispatchQueue, _lib, "SCNetworkConnectionSetDispatchQueue")
 	}
-	return _fnSCNetworkConnectionSetDispatchQueue(objref.IDOf(connection), objref.IDOf(queue))
+	return _fnSCNetworkConnectionSetDispatchQueue(objref.IDOf(connection), objc.ID(uintptr(queue.Ptr())))
 }
 
 var _fnSCNetworkConnectionStart func(objc.ID, objc.ID, uint8) uint8
@@ -1137,12 +1138,12 @@ func SCNetworkReachabilitySetCallback(target obj.Object, callout unsafe.Pointer,
 var _fnSCNetworkReachabilitySetDispatchQueue func(objc.ID, objc.ID) uint8
 
 // SCNetworkReachabilitySetDispatchQueue calls the SystemConfiguration framework function SCNetworkReachabilitySetDispatchQueue.
-func SCNetworkReachabilitySetDispatchQueue(target obj.Object, queue obj.Object) uint8 {
+func SCNetworkReachabilitySetDispatchQueue(target obj.Object, queue dispatch.Queue) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCNetworkReachabilitySetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilitySetDispatchQueue, _lib, "SCNetworkReachabilitySetDispatchQueue")
 	}
-	return _fnSCNetworkReachabilitySetDispatchQueue(objref.IDOf(target), objref.IDOf(queue))
+	return _fnSCNetworkReachabilitySetDispatchQueue(objref.IDOf(target), objc.ID(uintptr(queue.Ptr())))
 }
 
 var _fnSCNetworkReachabilityUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID) uint8
@@ -1755,12 +1756,12 @@ func SCPreferencesSetComputerName(prefs obj.Object, name obj.Object, nameEncodin
 var _fnSCPreferencesSetDispatchQueue func(objc.ID, objc.ID) uint8
 
 // SCPreferencesSetDispatchQueue calls the SystemConfiguration framework function SCPreferencesSetDispatchQueue.
-func SCPreferencesSetDispatchQueue(prefs obj.Object, queue obj.Object) uint8 {
+func SCPreferencesSetDispatchQueue(prefs obj.Object, queue dispatch.Queue) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCPreferencesSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesSetDispatchQueue, _lib, "SCPreferencesSetDispatchQueue")
 	}
-	return _fnSCPreferencesSetDispatchQueue(objref.IDOf(prefs), objref.IDOf(queue))
+	return _fnSCPreferencesSetDispatchQueue(objref.IDOf(prefs), objc.ID(uintptr(queue.Ptr())))
 }
 
 var _fnSCPreferencesSetLocalHostName func(objc.ID, objc.ID) uint8

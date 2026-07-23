@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -191,11 +192,10 @@ func (mdc *MTRDeviceController) AddServerEndpoint(endpoint *MTRServerEndpoint) b
 }
 
 // RemoveServerEndpointQueueCompletion remove the given server endpoint from this controller.  If the endpoint is not attached to this controller, will just call the completion and do nothing else.
-func (mdc *MTRDeviceController) RemoveServerEndpointQueueCompletion(endpoint *MTRServerEndpoint, queue obj.Object, completion func()) {
+func (mdc *MTRDeviceController) RemoveServerEndpointQueueCompletion(endpoint *MTRServerEndpoint, queue dispatch.Queue, completion func()) {
 	defer runtime.KeepAlive(mdc)
 	defer runtime.KeepAlive(endpoint)
-	defer runtime.KeepAlive(queue)
-	objc.Send[objc.ID](objref.IDOf(mdc), objc.RegisterName("removeServerEndpoint:queue:completion:"), objref.IDOf(endpoint), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { completion() }))
+	objc.Send[objc.ID](objref.IDOf(mdc), objc.RegisterName("removeServerEndpoint:queue:completion:"), objref.IDOf(endpoint), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block) { completion() }))
 }
 
 // RemoveServerEndpoint remove the given server endpoint without being notified when the removal completes.
@@ -284,10 +284,9 @@ func (mdc *MTRDeviceController) FetchAttestationChallengeForDeviceID(deviceId ui
 }
 
 // GetBaseDeviceQueueCompletionHandler wraps the corresponding Objective-C method.
-func (mdc *MTRDeviceController) GetBaseDeviceQueueCompletionHandler(deviceID uint64, queue obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) bool {
+func (mdc *MTRDeviceController) GetBaseDeviceQueueCompletionHandler(deviceID uint64, queue dispatch.Queue, completionHandler func(obj.Object, unsafe.Pointer)) bool {
 	defer runtime.KeepAlive(mdc)
-	defer runtime.KeepAlive(queue)
-	_r := objc.Send[bool](objref.IDOf(mdc), objc.RegisterName("getBaseDevice:queue:completionHandler:"), deviceID, objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	_r := objc.Send[bool](objref.IDOf(mdc), objc.RegisterName("getBaseDevice:queue:completionHandler:"), deviceID, objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	return _r
 }
 

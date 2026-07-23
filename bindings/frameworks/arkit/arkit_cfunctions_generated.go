@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -364,12 +365,12 @@ func ArSessionRun(session obj.Object, dataProviders obj.Object) {
 var _fnArSessionSetDataProviderStateChangeHandler func(objc.ID, objc.ID, objc.Block)
 
 // ArSessionSetDataProviderStateChangeHandler calls the ARKit framework function ar_session_set_data_provider_state_change_handler.
-func ArSessionSetDataProviderStateChangeHandler(session obj.Object, queue obj.Object, dataProviderStateChangeHandler func(obj.Object, DataProviderState, obj.Object, obj.Object)) {
+func ArSessionSetDataProviderStateChangeHandler(session obj.Object, queue dispatch.Queue, dataProviderStateChangeHandler func(obj.Object, DataProviderState, obj.Object, obj.Object)) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArSessionSetDataProviderStateChangeHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnArSessionSetDataProviderStateChangeHandler, _lib, "ar_session_set_data_provider_state_change_handler")
 	}
-	_fnArSessionSetDataProviderStateChangeHandler(objref.IDOf(session), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 DataProviderState, _b2 objc.ID, _b3 objc.ID) {
+	_fnArSessionSetDataProviderStateChangeHandler(objref.IDOf(session), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 DataProviderState, _b2 objc.ID, _b3 objc.ID) {
 		dataProviderStateChangeHandler(obj.Wrap(_b0), _b1, obj.Wrap(_b2), obj.Wrap(_b3))
 	}))
 }
@@ -377,12 +378,12 @@ func ArSessionSetDataProviderStateChangeHandler(session obj.Object, queue obj.Ob
 var _fnArSessionSetDataProviderStateChangeHandlerF func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // ArSessionSetDataProviderStateChangeHandlerF calls the ARKit framework function ar_session_set_data_provider_state_change_handler_f.
-func ArSessionSetDataProviderStateChangeHandlerF(session obj.Object, queue obj.Object, context_ unsafe.Pointer, dataProviderStateChangeHandlerFunction unsafe.Pointer) {
+func ArSessionSetDataProviderStateChangeHandlerF(session obj.Object, queue dispatch.Queue, context_ unsafe.Pointer, dataProviderStateChangeHandlerFunction unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArSessionSetDataProviderStateChangeHandlerF == nil {
 		ebipurego.RegisterLibFunc(&_fnArSessionSetDataProviderStateChangeHandlerF, _lib, "ar_session_set_data_provider_state_change_handler_f")
 	}
-	_fnArSessionSetDataProviderStateChangeHandlerF(objref.IDOf(session), objref.IDOf(queue), context_, dataProviderStateChangeHandlerFunction)
+	_fnArSessionSetDataProviderStateChangeHandlerF(objref.IDOf(session), objc.ID(uintptr(queue.Ptr())), context_, dataProviderStateChangeHandlerFunction)
 }
 
 var _fnArSessionStop func(objc.ID)

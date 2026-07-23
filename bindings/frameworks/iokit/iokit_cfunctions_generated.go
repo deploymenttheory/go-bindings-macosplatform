@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -535,12 +536,12 @@ func IONotificationPortGetRunLoopSource(notify obj.Object) obj.Object {
 var _fnIONotificationPortSetDispatchQueue func(objc.ID, objc.ID)
 
 // IONotificationPortSetDispatchQueue calls the IOKit framework function IONotificationPortSetDispatchQueue.
-func IONotificationPortSetDispatchQueue(notify obj.Object, queue obj.Object) {
+func IONotificationPortSetDispatchQueue(notify obj.Object, queue dispatch.Queue) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIONotificationPortSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnIONotificationPortSetDispatchQueue, _lib, "IONotificationPortSetDispatchQueue")
 	}
-	_fnIONotificationPortSetDispatchQueue(objref.IDOf(notify), objref.IDOf(queue))
+	_fnIONotificationPortSetDispatchQueue(objref.IDOf(notify), objc.ID(uintptr(queue.Ptr())))
 }
 
 var _fnIONotificationPortSetImportanceReceiver func(objc.ID) int32

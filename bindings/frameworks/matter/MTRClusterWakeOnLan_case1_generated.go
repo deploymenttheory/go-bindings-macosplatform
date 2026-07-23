@@ -8,7 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -47,11 +47,10 @@ func mTRClusterWakeOnLanAdopt(id objc.ID) *MTRClusterWakeOnLan {
 }
 
 // NewMTRClusterWakeOnLanWithDeviceEndpointQueue creates a new MTRClusterWakeOnLan.
-func NewMTRClusterWakeOnLanWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterWakeOnLan {
+func NewMTRClusterWakeOnLanWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue dispatch.Queue) *MTRClusterWakeOnLan {
 	defer runtime.KeepAlive(device)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterWakeOnLan")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objc.ID(uintptr(queue.Ptr())))
 	return mTRClusterWakeOnLanAdopt(_id)
 }
 

@@ -8,6 +8,8 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/xpc"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -118,12 +120,12 @@ func InterfaceRemovePortForwardingRule(interface_ obj.Object, protocol uint8, ex
 var _fnInterfaceSetEventCallback func(objc.ID, InterfaceEvent, objc.ID, objc.Block) VmnetReturn
 
 // InterfaceSetEventCallback reports an error if the vmnet framework function vmnet_interface_set_event_callback fails.
-func InterfaceSetEventCallback(interface_ obj.Object, eventMask InterfaceEvent, queue obj.Object, callback func(InterfaceEvent, obj.Object)) error {
+func InterfaceSetEventCallback(interface_ obj.Object, eventMask InterfaceEvent, queue dispatch.Queue, callback func(InterfaceEvent, obj.Object)) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInterfaceSetEventCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnInterfaceSetEventCallback, _lib, "vmnet_interface_set_event_callback")
 	}
-	_rc := _fnInterfaceSetEventCallback(objref.IDOf(interface_), eventMask, objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 InterfaceEvent, _b1 objc.ID) { callback(_b0, obj.Wrap(_b1)) }))
+	_rc := _fnInterfaceSetEventCallback(objref.IDOf(interface_), eventMask, objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 InterfaceEvent, _b1 objc.ID) { callback(_b0, obj.Wrap(_b1)) }))
 	if _err := errkit.FromCode("VmnetReturnDomain", int64(_rc), 1000); _err != nil {
 		return _err
 	}
@@ -133,19 +135,19 @@ func InterfaceSetEventCallback(interface_ obj.Object, eventMask InterfaceEvent, 
 var _fnInterfaceStartWithNetwork func(objc.ID, objc.ID, objc.ID, objc.Block) objc.ID
 
 // InterfaceStartWithNetwork calls the vmnet framework function vmnet_interface_start_with_network.
-func InterfaceStartWithNetwork(network obj.Object, interfaceDesc obj.Object, queue obj.Object, startBlock func(VmnetReturn, obj.Object)) obj.Object {
+func InterfaceStartWithNetwork(network obj.Object, interfaceDesc xpc.Object, queue dispatch.Queue, startBlock func(VmnetReturn, obj.Object)) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInterfaceStartWithNetwork == nil {
 		ebipurego.RegisterLibFunc(&_fnInterfaceStartWithNetwork, _lib, "vmnet_interface_start_with_network")
 	}
-	_ret := _fnInterfaceStartWithNetwork(objref.IDOf(network), objref.IDOf(interfaceDesc), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 VmnetReturn, _b1 objc.ID) { startBlock(_b0, obj.Wrap(_b1)) }))
+	_ret := _fnInterfaceStartWithNetwork(objref.IDOf(network), objc.ID(uintptr(interfaceDesc.Ptr())), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 VmnetReturn, _b1 objc.ID) { startBlock(_b0, obj.Wrap(_b1)) }))
 	return obj.Wrap(_ret)
 }
 
 var _fnIpPortForwardingRuleGetDetails func(objc.ID, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer) VmnetReturn
 
 // IpPortForwardingRuleGetDetails reports an error if the vmnet framework function vmnet_ip_port_forwarding_rule_get_details fails.
-func IpPortForwardingRuleGetDetails(rule obj.Object, addressFamily uint8, internalAddress unsafe.Pointer) (protocol uint8, externalPort uint16, internalPort uint16, err error) {
+func IpPortForwardingRuleGetDetails(rule xpc.Object, addressFamily uint8, internalAddress unsafe.Pointer) (protocol uint8, externalPort uint16, internalPort uint16, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIpPortForwardingRuleGetDetails == nil {
 		ebipurego.RegisterLibFunc(&_fnIpPortForwardingRuleGetDetails, _lib, "vmnet_ip_port_forwarding_rule_get_details")
@@ -153,7 +155,7 @@ func IpPortForwardingRuleGetDetails(rule obj.Object, addressFamily uint8, intern
 	var _out0 uint8
 	var _out1 uint16
 	var _out2 uint16
-	_rc := _fnIpPortForwardingRuleGetDetails(objref.IDOf(rule), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), addressFamily, internalAddress, unsafe.Pointer(&_out2))
+	_rc := _fnIpPortForwardingRuleGetDetails(objc.ID(uintptr(rule.Ptr())), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), addressFamily, internalAddress, unsafe.Pointer(&_out2))
 	if _err := errkit.FromCode("VmnetReturnDomain", int64(_rc), 1000); _err != nil {
 		return 0, 0, 0, _err
 	}
@@ -347,13 +349,13 @@ func NetworkCreate(configuration obj.Object) (result obj.Object, status VmnetRet
 var _fnNetworkCreateWithSerialization func(objc.ID, unsafe.Pointer) objc.ID
 
 // NetworkCreateWithSerialization calls the vmnet framework function vmnet_network_create_with_serialization.
-func NetworkCreateWithSerialization(network obj.Object) (result obj.Object, status VmnetReturn) {
+func NetworkCreateWithSerialization(network xpc.Object) (result obj.Object, status VmnetReturn) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNetworkCreateWithSerialization == nil {
 		ebipurego.RegisterLibFunc(&_fnNetworkCreateWithSerialization, _lib, "vmnet_network_create_with_serialization")
 	}
 	var _out0 VmnetReturn
-	_ret := _fnNetworkCreateWithSerialization(objref.IDOf(network), unsafe.Pointer(&_out0))
+	_ret := _fnNetworkCreateWithSerialization(objc.ID(uintptr(network.Ptr())), unsafe.Pointer(&_out0))
 	return obj.Wrap(_ret), _out0
 }
 
@@ -384,7 +386,7 @@ func NetworkGetIpv6Prefix(network obj.Object, prefix unsafe.Pointer) (prefixLen 
 var _fnPortForwardingRuleGetDetails func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) VmnetReturn
 
 // PortForwardingRuleGetDetails reports an error if the vmnet framework function vmnet_port_forwarding_rule_get_details fails.
-func PortForwardingRuleGetDetails(rule obj.Object, internalAddress unsafe.Pointer) (protocol uint8, externalPort uint16, internalPort uint16, err error) {
+func PortForwardingRuleGetDetails(rule xpc.Object, internalAddress unsafe.Pointer) (protocol uint8, externalPort uint16, internalPort uint16, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPortForwardingRuleGetDetails == nil {
 		ebipurego.RegisterLibFunc(&_fnPortForwardingRuleGetDetails, _lib, "vmnet_port_forwarding_rule_get_details")
@@ -392,7 +394,7 @@ func PortForwardingRuleGetDetails(rule obj.Object, internalAddress unsafe.Pointe
 	var _out0 uint8
 	var _out1 uint16
 	var _out2 uint16
-	_rc := _fnPortForwardingRuleGetDetails(objref.IDOf(rule), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), internalAddress, unsafe.Pointer(&_out2))
+	_rc := _fnPortForwardingRuleGetDetails(objc.ID(uintptr(rule.Ptr())), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), internalAddress, unsafe.Pointer(&_out2))
 	if _err := errkit.FromCode("VmnetReturnDomain", int64(_rc), 1000); _err != nil {
 		return 0, 0, 0, _err
 	}
@@ -417,24 +419,24 @@ func Read(interface_ obj.Object, packets unsafe.Pointer, pktcnt *int32) error {
 var _fnStartInterface func(objc.ID, objc.ID, objc.Block) objc.ID
 
 // StartInterface calls the vmnet framework function vmnet_start_interface.
-func StartInterface(interfaceDesc obj.Object, queue obj.Object, handler func(VmnetReturn, obj.Object)) obj.Object {
+func StartInterface(interfaceDesc xpc.Object, queue dispatch.Queue, handler func(VmnetReturn, obj.Object)) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStartInterface == nil {
 		ebipurego.RegisterLibFunc(&_fnStartInterface, _lib, "vmnet_start_interface")
 	}
-	_ret := _fnStartInterface(objref.IDOf(interfaceDesc), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 VmnetReturn, _b1 objc.ID) { handler(_b0, obj.Wrap(_b1)) }))
+	_ret := _fnStartInterface(objc.ID(uintptr(interfaceDesc.Ptr())), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 VmnetReturn, _b1 objc.ID) { handler(_b0, obj.Wrap(_b1)) }))
 	return obj.Wrap(_ret)
 }
 
 var _fnStopInterface func(objc.ID, objc.ID, objc.Block) VmnetReturn
 
 // StopInterface reports an error if the vmnet framework function vmnet_stop_interface fails.
-func StopInterface(interface_ obj.Object, queue obj.Object, handler func(VmnetReturn)) error {
+func StopInterface(interface_ obj.Object, queue dispatch.Queue, handler func(VmnetReturn)) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStopInterface == nil {
 		ebipurego.RegisterLibFunc(&_fnStopInterface, _lib, "vmnet_stop_interface")
 	}
-	_rc := _fnStopInterface(objref.IDOf(interface_), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 VmnetReturn) { handler(_b0) }))
+	_rc := _fnStopInterface(objref.IDOf(interface_), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 VmnetReturn) { handler(_b0) }))
 	if _err := errkit.FromCode("VmnetReturnDomain", int64(_rc), 1000); _err != nil {
 		return _err
 	}

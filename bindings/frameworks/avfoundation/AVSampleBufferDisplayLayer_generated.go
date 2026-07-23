@@ -11,6 +11,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -151,14 +152,13 @@ func (sbdl *SampleBufferDisplayLayer) FlushAndRemoveImage() {
 // RequestMediaDataWhenReadyOnQueueUsing instructs the target to invoke a client-supplied block repeatedly, at its convenience, in order to gather sample buffers for display. The block should enqueue sample buffers to the layer either until the layer's readyForMoreMediaData property becomes NO or until there is no more data to supply. When the layer has decoded enough of the media data it has received that it becomes ready for more media data again, it will invoke the block again in order to obtain more. If this function is called multiple times, only the last call is effective. Call stopRequestingMediaData to cancel this request. Each call to requestMediaDataWhenReadyOnQueue:usingBlock: should be paired with a corresponding call to stopRequestingMediaData:. Releasing the AVSampleBufferDisplayLayer without a call to stopRequestingMediaData will result in undefined behavior.
 //
 // RequestMediaDataWhenReadyOnQueueUsing blocks until the operation completes or ctx is cancelled.
-func (sbdl *SampleBufferDisplayLayer) RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue obj.Object) error {
+func (sbdl *SampleBufferDisplayLayer) RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue dispatch.Queue) error {
 	defer runtime.KeepAlive(sbdl)
-	defer runtime.KeepAlive(queue)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("requestMediaDataWhenReadyOnQueue:usingBlock:"), objref.IDOf(queue), _block)
+	objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("requestMediaDataWhenReadyOnQueue:usingBlock:"), objc.ID(uintptr(queue.Ptr())), _block)
 	select {
 	case err := <-_ch:
 		return err

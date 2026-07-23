@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -81,10 +82,9 @@ func NewSharedEventListener() *SharedEventListener {
 }
 
 // NewSharedEventListenerWithDispatchQueue creates a new shareable event listener with a specific dispatch queue.
-func NewSharedEventListenerWithDispatchQueue(dispatchQueue obj.Object) *SharedEventListener {
-	defer runtime.KeepAlive(dispatchQueue)
+func NewSharedEventListenerWithDispatchQueue(dispatchQueue dispatch.Queue) *SharedEventListener {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTLSharedEventListener")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDispatchQueue:"), objref.IDOf(dispatchQueue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDispatchQueue:"), objc.ID(uintptr(dispatchQueue.Ptr())))
 	return sharedEventListenerAdopt(_id)
 }
 

@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -49,21 +50,19 @@ func mTRClusterSoftwareDiagnosticsAdopt(id objc.ID) *MTRClusterSoftwareDiagnosti
 }
 
 // NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
-func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterSoftwareDiagnostics {
+func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue dispatch.Queue) *MTRClusterSoftwareDiagnostics {
 	defer runtime.KeepAlive(device)
 	defer runtime.KeepAlive(endpointID)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterSoftwareDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objc.ID(uintptr(queue.Ptr())))
 	return mTRClusterSoftwareDiagnosticsAdopt(_id)
 }
 
 // NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointQueue creates a new MTRClusterSoftwareDiagnostics.
-func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterSoftwareDiagnostics {
+func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue dispatch.Queue) *MTRClusterSoftwareDiagnostics {
 	defer runtime.KeepAlive(device)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterSoftwareDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objc.ID(uintptr(queue.Ptr())))
 	return mTRClusterSoftwareDiagnosticsAdopt(_id)
 }
 

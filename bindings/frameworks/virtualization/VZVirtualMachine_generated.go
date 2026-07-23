@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -87,11 +88,10 @@ func NewVirtualMachineWithConfiguration(configuration *VirtualMachineConfigurati
 }
 
 // NewVirtualMachineWithConfigurationQueue creates and configures the VM with the specified data and dispatch queue.
-func NewVirtualMachineWithConfigurationQueue(configuration *VirtualMachineConfiguration, queue obj.Object) *VirtualMachine {
+func NewVirtualMachineWithConfigurationQueue(configuration *VirtualMachineConfiguration, queue dispatch.Queue) *VirtualMachine {
 	defer runtime.KeepAlive(configuration)
-	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVirtualMachine")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:queue:"), objref.IDOf(configuration), objref.IDOf(queue))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:queue:"), objref.IDOf(configuration), objc.ID(uintptr(queue.Ptr())))
 	return virtualMachineAdopt(_id)
 }
 

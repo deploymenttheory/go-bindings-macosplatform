@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -79,20 +80,18 @@ func (ho *HostObject) String() string {
 }
 
 // NewHostObjectWithIOServiceOptionsQueueErrorInterestHandler creates a USB host object and sets up a communication channel to the kernel.
-func NewHostObjectWithIOServiceOptionsQueueErrorInterestHandler(ioService int, options HostObjectInitOptions, queue obj.Object, err unsafe.Pointer, interestHandler func(obj.Object, uint32, unsafe.Pointer)) *HostObject {
-	defer runtime.KeepAlive(queue)
+func NewHostObjectWithIOServiceOptionsQueueErrorInterestHandler(ioService int, options HostObjectInitOptions, queue dispatch.Queue, err unsafe.Pointer, interestHandler func(obj.Object, uint32, unsafe.Pointer)) *HostObject {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOUSBHostObject")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOService:options:queue:error:interestHandler:"), ioService, options, objref.IDOf(queue), err, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 uint32, _b2 unsafe.Pointer) {
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOService:options:queue:error:interestHandler:"), ioService, options, objc.ID(uintptr(queue.Ptr())), err, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 uint32, _b2 unsafe.Pointer) {
 		interestHandler(obj.Wrap(_b0), _b1, _b2)
 	}))
 	return hostObjectAdopt(_id)
 }
 
 // NewHostObjectWithIOServiceQueueErrorInterestHandler creates a USB host object and sets up a default communication channel to the kernel.
-func NewHostObjectWithIOServiceQueueErrorInterestHandler(ioService int, queue obj.Object, err unsafe.Pointer, interestHandler func(obj.Object, uint32, unsafe.Pointer)) *HostObject {
-	defer runtime.KeepAlive(queue)
+func NewHostObjectWithIOServiceQueueErrorInterestHandler(ioService int, queue dispatch.Queue, err unsafe.Pointer, interestHandler func(obj.Object, uint32, unsafe.Pointer)) *HostObject {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOUSBHostObject")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOService:queue:error:interestHandler:"), ioService, objref.IDOf(queue), err, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 uint32, _b2 unsafe.Pointer) {
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOService:queue:error:interestHandler:"), ioService, objc.ID(uintptr(queue.Ptr())), err, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 uint32, _b2 unsafe.Pointer) {
 		interestHandler(obj.Wrap(_b0), _b1, _b2)
 	}))
 	return hostObjectAdopt(_id)

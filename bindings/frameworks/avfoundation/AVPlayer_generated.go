@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -418,10 +419,9 @@ func (p *Player) SourceClock() obj.Object {
 }
 
 // AddBoundaryTimeObserverForTimesQueueUsing requests the invocation of a block when specified times are traversed during normal playback.
-func (p *Player) AddBoundaryTimeObserverForTimesQueueUsing(times []*foundation.Value, queue obj.Object, block func()) obj.Object {
+func (p *Player) AddBoundaryTimeObserverForTimesQueueUsing(times []*foundation.Value, queue dispatch.Queue, block func()) obj.Object {
 	defer runtime.KeepAlive(p)
-	defer runtime.KeepAlive(queue)
-	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("addBoundaryTimeObserverForTimes:queue:usingBlock:"), purego.SliceToNSArray(times, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { block() }))
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("addBoundaryTimeObserverForTimes:queue:usingBlock:"), purego.SliceToNSArray(times, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block) { block() }))
 	return obj.Wrap(_r)
 }
 

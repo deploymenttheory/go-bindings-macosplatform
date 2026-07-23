@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/xpc"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -496,12 +497,12 @@ func IOSurfaceLookupFromMachPort(port int) obj.Object {
 var _fnIOSurfaceLookupFromXPCObject func(objc.ID) objc.ID
 
 // IOSurfaceLookupFromXPCObject calls the IOSurface framework function IOSurfaceLookupFromXPCObject.
-func IOSurfaceLookupFromXPCObject(xobj obj.Object) obj.Object {
+func IOSurfaceLookupFromXPCObject(xobj xpc.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceLookupFromXPCObject == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceLookupFromXPCObject, _lib, "IOSurfaceLookupFromXPCObject")
 	}
-	_ret := _fnIOSurfaceLookupFromXPCObject(objref.IDOf(xobj))
+	_ret := _fnIOSurfaceLookupFromXPCObject(objc.ID(uintptr(xobj.Ptr())))
 	return obj.Wrap(_ret)
 }
 

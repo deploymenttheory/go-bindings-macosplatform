@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -79,11 +80,10 @@ func NewMTRAttributeCacheContainer() *MTRAttributeCacheContainer {
 }
 
 // ReadAttributeWithEndpointIDClusterIDAttributeIDClientQueueCompletion reads attribute with endpoint ID cluster ID attribute ID client queue completion.
-func (macc *MTRAttributeCacheContainer) ReadAttributeWithEndpointIDClusterIDAttributeIDClientQueueCompletion(endpointId obj.Object, clusterId obj.Object, attributeId obj.Object, clientQueue obj.Object, completion func(obj.Object, unsafe.Pointer)) {
+func (macc *MTRAttributeCacheContainer) ReadAttributeWithEndpointIDClusterIDAttributeIDClientQueueCompletion(endpointId obj.Object, clusterId obj.Object, attributeId obj.Object, clientQueue dispatch.Queue, completion func(obj.Object, unsafe.Pointer)) {
 	defer runtime.KeepAlive(macc)
 	defer runtime.KeepAlive(endpointId)
 	defer runtime.KeepAlive(clusterId)
 	defer runtime.KeepAlive(attributeId)
-	defer runtime.KeepAlive(clientQueue)
-	objc.Send[objc.ID](objref.IDOf(macc), objc.RegisterName("readAttributeWithEndpointId:clusterId:attributeId:clientQueue:completion:"), objref.IDOf(endpointId), objref.IDOf(clusterId), objref.IDOf(attributeId), objref.IDOf(clientQueue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
+	objc.Send[objc.ID](objref.IDOf(macc), objc.RegisterName("readAttributeWithEndpointId:clusterId:attributeId:clientQueue:completion:"), objref.IDOf(endpointId), objref.IDOf(clusterId), objref.IDOf(attributeId), objc.ID(uintptr(clientQueue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completion(obj.Wrap(_b0), _b1) }))
 }

@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,10 +52,9 @@ func hostInterfaceAdopt(id objc.ID) *HostInterface {
 }
 
 // NewHostInterfaceWithIOServiceOptionsQueueErrorInterestHandler initializes IOUSBHostInterface object along with user client See IOUSBHostObject for documentation.
-func NewHostInterfaceWithIOServiceOptionsQueueErrorInterestHandler(ioService int, options HostObjectInitOptions, queue obj.Object, err unsafe.Pointer, interestHandler func(obj.Object, uint32, unsafe.Pointer)) *HostInterface {
-	defer runtime.KeepAlive(queue)
+func NewHostInterfaceWithIOServiceOptionsQueueErrorInterestHandler(ioService int, options HostObjectInitOptions, queue dispatch.Queue, err unsafe.Pointer, interestHandler func(obj.Object, uint32, unsafe.Pointer)) *HostInterface {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOUSBHostInterface")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOService:options:queue:error:interestHandler:"), ioService, options, objref.IDOf(queue), err, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 uint32, _b2 unsafe.Pointer) {
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOService:options:queue:error:interestHandler:"), ioService, options, objc.ID(uintptr(queue.Ptr())), err, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 uint32, _b2 unsafe.Pointer) {
 		interestHandler(obj.Wrap(_b0), _b1, _b2)
 	}))
 	return hostInterfaceAdopt(_id)

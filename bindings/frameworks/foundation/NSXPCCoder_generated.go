@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/xpc"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -69,10 +70,9 @@ func (xc *XPCCoder) WithScriptingProperties(scriptingProperties map[string]obj.O
 }
 
 // EncodeXPCObjectForKey encodes an object to send over an XPC connection.
-func (xc *XPCCoder) EncodeXPCObjectForKey(xpcObject *Object, key string) {
+func (xc *XPCCoder) EncodeXPCObjectForKey(xpcObject xpc.Object, key string) {
 	defer runtime.KeepAlive(xc)
-	defer runtime.KeepAlive(xpcObject)
-	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("encodeXPCObject:forKey:"), objref.IDOf(xpcObject), purego.NSString(key))
+	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("encodeXPCObject:forKey:"), objc.ID(uintptr(xpcObject.Ptr())), purego.NSString(key))
 }
 
 // DecodeXPCObjectOfTypeForKey decodes an object and validates that its type matches the type a service provides over XPC.

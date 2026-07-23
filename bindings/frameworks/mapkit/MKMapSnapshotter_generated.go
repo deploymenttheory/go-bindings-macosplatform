@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -92,11 +93,10 @@ func (ms *MapSnapshotter) StartWithCompletionHandler(completionHandler func(obj.
 }
 
 // StartWithQueueCompletionHandler submits the request to create a snapshot and executes the resulting block on the specified queue.
-func (ms *MapSnapshotter) StartWithQueueCompletionHandler(queue obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) {
+func (ms *MapSnapshotter) StartWithQueueCompletionHandler(queue dispatch.Queue, completionHandler func(obj.Object, unsafe.Pointer)) {
 	defer runtime.KeepAlive(ms)
-	defer runtime.KeepAlive(queue)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("startWithQueue:completionHandler:"), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+		objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("startWithQueue:completionHandler:"), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	})
 
 }

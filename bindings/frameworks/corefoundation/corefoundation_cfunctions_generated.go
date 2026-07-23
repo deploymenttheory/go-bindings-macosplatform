@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -4134,15 +4135,15 @@ func CFMessagePortSendRequest(remote obj.Object, msgid int, data obj.Object, sen
 	return int(_fnCFMessagePortSendRequest(objref.IDOf(remote), msgid, objref.IDOf(data), sendTimeout, rcvTimeout, objref.IDOf(replyMode), returnData))
 }
 
-var _fnCFMessagePortSetDispatchQueue func(objc.ID, unsafe.Pointer)
+var _fnCFMessagePortSetDispatchQueue func(objc.ID, objc.ID)
 
 // CFMessagePortSetDispatchQueue calls the CoreFoundation framework function CFMessagePortSetDispatchQueue.
-func CFMessagePortSetDispatchQueue(ms obj.Object, queue unsafe.Pointer) {
+func CFMessagePortSetDispatchQueue(ms obj.Object, queue dispatch.Queue) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFMessagePortSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnCFMessagePortSetDispatchQueue, _lib, "CFMessagePortSetDispatchQueue")
 	}
-	_fnCFMessagePortSetDispatchQueue(objref.IDOf(ms), queue)
+	_fnCFMessagePortSetDispatchQueue(objref.IDOf(ms), objc.ID(uintptr(queue.Ptr())))
 }
 
 var _fnCFMessagePortSetInvalidationCallBack func(objc.ID, unsafe.Pointer)
@@ -5195,15 +5196,15 @@ func CFReadStreamSetClient(stream obj.Object, streamEvents int, clientCB unsafe.
 	return _fnCFReadStreamSetClient(objref.IDOf(stream), streamEvents, clientCB, clientContext)
 }
 
-var _fnCFReadStreamSetDispatchQueue func(objc.ID, unsafe.Pointer)
+var _fnCFReadStreamSetDispatchQueue func(objc.ID, objc.ID)
 
 // CFReadStreamSetDispatchQueue calls the CoreFoundation framework function CFReadStreamSetDispatchQueue.
-func CFReadStreamSetDispatchQueue(stream obj.Object, q unsafe.Pointer) {
+func CFReadStreamSetDispatchQueue(stream obj.Object, q dispatch.Queue) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFReadStreamSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnCFReadStreamSetDispatchQueue, _lib, "CFReadStreamSetDispatchQueue")
 	}
-	_fnCFReadStreamSetDispatchQueue(objref.IDOf(stream), q)
+	_fnCFReadStreamSetDispatchQueue(objref.IDOf(stream), objc.ID(uintptr(q.Ptr())))
 }
 
 var _fnCFReadStreamSetProperty func(objc.ID, unsafe.Pointer, objc.ID) uint8
@@ -9248,15 +9249,15 @@ func CFWriteStreamSetClient(stream obj.Object, streamEvents int, clientCB unsafe
 	return _fnCFWriteStreamSetClient(objref.IDOf(stream), streamEvents, clientCB, clientContext)
 }
 
-var _fnCFWriteStreamSetDispatchQueue func(objc.ID, unsafe.Pointer)
+var _fnCFWriteStreamSetDispatchQueue func(objc.ID, objc.ID)
 
 // CFWriteStreamSetDispatchQueue calls the CoreFoundation framework function CFWriteStreamSetDispatchQueue.
-func CFWriteStreamSetDispatchQueue(stream obj.Object, q unsafe.Pointer) {
+func CFWriteStreamSetDispatchQueue(stream obj.Object, q dispatch.Queue) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFWriteStreamSetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnCFWriteStreamSetDispatchQueue, _lib, "CFWriteStreamSetDispatchQueue")
 	}
-	_fnCFWriteStreamSetDispatchQueue(objref.IDOf(stream), q)
+	_fnCFWriteStreamSetDispatchQueue(objref.IDOf(stream), objc.ID(uintptr(q.Ptr())))
 }
 
 var _fnCFWriteStreamSetProperty func(objc.ID, unsafe.Pointer, objc.ID) uint8
