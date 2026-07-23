@@ -8,6 +8,10 @@ import (
 	"unsafe"
 )
 
+type AuditTokenT struct {
+	Val [8]uint32
+}
+
 // The external representation of an authorization reference.
 type AuthorizationExternalForm struct {
 	Bytes [32]int8

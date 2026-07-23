@@ -30,7 +30,7 @@ func (e IOUSBHostAbortOption) String() string {
 }
 
 // @enum        IOUSBHostCIControllerState @brief       Host controller state managed by IOUSBHostCIControllerStateMachine @discussion  IOUSBHostCIControllerStateOff is the initial state of a newly created IOUSBHostCIControllerStateMachine instance, and represents a completely quiesced controller.  All root ports must be in the IOUSBHostCIPortStateOff state. IOUSBHostCIControllerStatePaused represents a controller that is idle.  In this state the controller is not processing IO requests, but can detect port changes such as connect events or remote wakes.  Root ports must not be in the IOUSBHostCIPortStateActive state. IOUSBHostCIControllerStateActive represents a controller that is fully functional and able to service IO requests.  Root ports may be in the IOUSBHostCIPortStateActive state.
-type IOUSBHostCIControllerState int64
+type IOUSBHostCIControllerState int32
 
 const (
 	IOUSBHostCIControllerStateOff    IOUSBHostCIControllerState = 0
@@ -52,7 +52,7 @@ func (e IOUSBHostCIControllerState) String() string {
 }
 
 // @enum        IOUSBHostCIDeviceSpeed @brief       Values to represent a connected device speed, to be used in IOUSBHostCIMessages and IOUSBHostsCIPortStatus
-type IOUSBHostCIDeviceSpeed int64
+type IOUSBHostCIDeviceSpeed int32
 
 const (
 	IOUSBHostCIDeviceSpeedNone         IOUSBHostCIDeviceSpeed = 0
@@ -89,7 +89,7 @@ func (e IOUSBHostCIDeviceSpeed) String() string {
 }
 
 // @enum        IOUSBHostCIDeviceState @brief       Device state managed by IOUSBHostCIDeviceStateMachine @discussion  IOUSBHostCIDeviceStateDestroyed represents a device that is no longer usable, and whose resources will be destroyed and freed IOUSBHostCIDeviceStatePaused represents a device that may have IO requests enqueued, but they are not active on the bus.  The state is closely correlated to IOUSBHostCIPortStateSuspended, and endpoints associated with this device may not be in the IOUSBHostCIEndpointStateActive state. IOUSBHostCIDeviceStateActive is the initial sate of a newly created IOUSBHsotCIDeviceStateMachine, and represents a device that can be processing IO requests.  Endpoints associated with this device may be in the IOUSBHostCIEndpointStateActive state.
-type IOUSBHostCIDeviceState int64
+type IOUSBHostCIDeviceState int32
 
 const (
 	IOUSBHostCIDeviceStateDestroyed IOUSBHostCIDeviceState = 0
@@ -111,7 +111,7 @@ func (e IOUSBHostCIDeviceState) String() string {
 }
 
 // @enum        IOUSBHostCIEndpointState @brief       Endpoint state managed by IOUSBHostCIEndpointStateMachine @discussion  IOUSBHostCIEndpointStateDestroyed represents an endpoint that is no longer usable, and whose resources will be destroyed and freed. IOUSBHostCIEndpointStateHalted represents an endpoint that has encountered an IO error.  The client must not access or modify transfer structures or IO buffers for an endpoint in this state. IOUSBHostCIEndpointStatePaused is the initial state of a newly created IOUSBHostCIEndpointStateMachine, and represents an endpoint that is not currently servicing IO requests.  The client must not access or modify transfer structures or IO buffers for an endpoint in this state. IOUSBHostCIEndpointStateActive represents an endpoint that is currently servicing an IO request, or is idle after successfully servicing its queue of IO requests.  In this state the client may access transfer structures and IO buffers.
-type IOUSBHostCIEndpointState int64
+type IOUSBHostCIEndpointState int32
 
 const (
 	IOUSBHostCIEndpointStateDestroyed IOUSBHostCIEndpointState = 0
@@ -136,7 +136,7 @@ func (e IOUSBHostCIEndpointState) String() string {
 }
 
 // @enum        IOUSBHostCIExceptionType @brief       Exception specifier included as message argument to <code>kUSBHostMessageControllerException</code> @discussion  The kernel driver sends a <code>kUSBHostMessageControllerException</code> message to its clients when a fatal problem has occurred, with a refCon of the IOUSBHostController instance and a <code>IOUSBHostCIExceptionType</code> in the message arguments. When any <code>kUSBHostMessageControllerException</code> message is received, the specified IOUSBHostControllerInterface must be destroyed.
-type IOUSBHostCIExceptionType int64
+type IOUSBHostCIExceptionType int32
 
 const (
 	IOUSBHostCIExceptionTypeUnknown               IOUSBHostCIExceptionType = 0
@@ -188,7 +188,7 @@ func (e IOUSBHostCIExceptionType) String() string {
 }
 
 // @enum        IOUSBHostCILinkState @brief       Values to represent a port's link state, to be used in IOUSBHostCIMessages and IOUSBHostCIPortStatus
-type IOUSBHostCILinkState int64
+type IOUSBHostCILinkState int32
 
 const (
 	IOUSBHostCILinkStateU0         IOUSBHostCILinkState = 0
@@ -240,7 +240,7 @@ func (e IOUSBHostCILinkState) String() string {
 }
 
 // @enum        IOUSBHostCIMessageStatus @brief       Values to be populated in IOUSBHostCIMessageControlStatus of an IOUSBHostCIMessage structure
-type IOUSBHostCIMessageStatus int64
+type IOUSBHostCIMessageStatus int32
 
 const (
 	IOUSBHostCIMessageStatusReserved           IOUSBHostCIMessageStatus = 0
@@ -295,7 +295,7 @@ func (e IOUSBHostCIMessageStatus) String() string {
 }
 
 // @enum        IOUSBHostCIMessageType @brief       Values to be populated in IOUSBHostCIMessageControlType of an IOUSBHostCIMessage structure
-type IOUSBHostCIMessageType int64
+type IOUSBHostCIMessageType int32
 
 const (
 	IOUSBHostCIMessageTypeControllerCapabilities  IOUSBHostCIMessageType = 0
@@ -417,7 +417,7 @@ func (e IOUSBHostCIMessageType) String() string {
 }
 
 // @enum        IOUSBHostCIPortState @brief       Port state managed by IOUSBHostCIPortStateMachine @discussion  IOUSBHostCIPortStateOff is the initial state of a newly created IOUSBHostCIPortStateMachine and represents an unpowered port which is unable to detect events such as connections.  Downstream devices, if any, must be in the IOUSBHostCIDeviceStateDestroyed state. IOUSBHostCIPortStatePowered represents a powered port which is able to detect events such as connections.  Downstream devices, if any, must be in the IOUSBHostCIDeviceStateDestroyed state. IOUSBHostCIPortStateSuspended represents a port with a downstream device that is in a low-power state such as U3 or L2.  The port is able to detect events such as remote wakes, and is not actively transmitting data.  Downstream devices must be in the IOUSBHostCIDeviceStatePaused state. IOUSBHostCIPortStateActive represents a port with a downstream device that is able to immediately transfer data.  The downstream device may be in the IOUSBHostCIDeviceStateActive state.
-type IOUSBHostCIPortState int64
+type IOUSBHostCIPortState int32
 
 const (
 	IOUSBHostCIPortStateOff       IOUSBHostCIPortState = 0
@@ -441,7 +441,7 @@ func (e IOUSBHostCIPortState) String() string {
 	}
 }
 
-type IOUSBHostCIUserClientVersion int64
+type IOUSBHostCIUserClientVersion int32
 
 const (
 	IOUSBHostCIUserClientVersion100 IOUSBHostCIUserClientVersion = 0
@@ -456,7 +456,7 @@ func (e IOUSBHostCIUserClientVersion) String() string {
 	}
 }
 
-type IOUSBHostIsochronousTransactionOptions int64
+type IOUSBHostIsochronousTransactionOptions uint32
 
 const (
 	IOUSBHostIsochronousTransactionOptionsNone IOUSBHostIsochronousTransactionOptions = 0
@@ -474,7 +474,7 @@ func (e IOUSBHostIsochronousTransactionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type IOUSBHostIsochronousTransferOptions int64
+type IOUSBHostIsochronousTransferOptions uint32
 
 const (
 	IOUSBHostIsochronousTransferOptionsNone IOUSBHostIsochronousTransferOptions = 0
@@ -532,7 +532,7 @@ func (e IOUSBHostObjectInitOptions) String() string {
 }
 
 // @typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -550,7 +550,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -572,7 +572,7 @@ func (e MDQueryOptionFlags) String() string {
 }
 
 // @enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order.
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -587,7 +587,7 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
-type Acl_entry_id_t int64
+type Acl_entry_id_t int32
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
@@ -608,7 +608,7 @@ func (e Acl_entry_id_t) String() string {
 	}
 }
 
-type Acl_flag_t int64
+type Acl_flag_t int32
 
 const (
 	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
@@ -641,7 +641,7 @@ func (e Acl_flag_t) String() string {
 	}
 }
 
-type Acl_perm_t int64
+type Acl_perm_t int32
 
 const (
 	ACL_READ_DATA           Acl_perm_t = 2
@@ -699,7 +699,7 @@ func (e Acl_perm_t) String() string {
 	}
 }
 
-type Acl_tag_t int64
+type Acl_tag_t int32
 
 const (
 	ACL_UNDEFINED_TAG  Acl_tag_t = 0
@@ -720,7 +720,7 @@ func (e Acl_tag_t) String() string {
 	}
 }
 
-type Acl_type_t int64
+type Acl_type_t int32
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
@@ -753,7 +753,7 @@ func (e Acl_type_t) String() string {
 	}
 }
 
-type Clockid_t int64
+type Clockid_t int32
 
 const (
 	_CLOCK_REALTIME             Clockid_t = 0
@@ -847,7 +847,7 @@ func (e Dispatch_block_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Filesec_property_t int64
+type Filesec_property_t int32
 
 const (
 	FILESEC_OWNER         Filesec_property_t = 1
@@ -883,7 +883,7 @@ func (e Filesec_property_t) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0
@@ -904,7 +904,7 @@ func (e Idtype_t) String() string {
 	}
 }
 
-type Ipc_info_object_type_t int64
+type Ipc_info_object_type_t uint32
 
 const (
 	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
@@ -1084,7 +1084,7 @@ func (e Ipc_info_object_type_t) String() string {
 	}
 }
 
-type Launch_data_type_t int64
+type Launch_data_type_t int32
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
@@ -1126,7 +1126,7 @@ func (e Launch_data_type_t) String() string {
 	}
 }
 
-type Mach_vm_range_flags_t int64
+type Mach_vm_range_flags_t uint64
 
 const (
 	MACH_VM_RANGE_NONE Mach_vm_range_flags_t = 0
@@ -1140,7 +1140,7 @@ func (e Mach_vm_range_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Mach_vm_range_flavor_t int64
+type Mach_vm_range_flavor_t uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
@@ -1158,7 +1158,7 @@ func (e Mach_vm_range_flavor_t) String() string {
 	}
 }
 
-type Mach_vm_range_tag_t int64
+type Mach_vm_range_tag_t uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
@@ -1179,7 +1179,7 @@ func (e Mach_vm_range_tag_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -1221,7 +1221,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
@@ -1236,7 +1236,7 @@ func (e Os_clockid_t) String() string {
 	}
 }
 
-type Ptrauth_key int64
+type Ptrauth_key int32
 
 const (
 	Ptrauth_key_none                     Ptrauth_key = -1
@@ -1309,7 +1309,7 @@ func (e Qos_class_t) String() string {
 	}
 }
 
-type Virtual_memory_guard_exception_code_t int64
+type Virtual_memory_guard_exception_code_t uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
@@ -1375,7 +1375,7 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 	}
 }
 
-type Xpc_listener_create_flags_t int64
+type Xpc_listener_create_flags_t uint64
 
 const (
 	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
@@ -1401,7 +1401,7 @@ func (e Xpc_listener_create_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Xpc_session_create_flags_t int64
+type Xpc_session_create_flags_t uint64
 
 const (
 	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0

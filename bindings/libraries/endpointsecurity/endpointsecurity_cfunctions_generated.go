@@ -9,15 +9,6 @@ import (
 	"unsafe"
 )
 
-// AuditToken wraps the C handle audit_token_t.
-type AuditToken struct{ ptr unsafe.Pointer }
-
-// WrapAuditToken adopts an existing audit_token_t handle.
-func WrapAuditToken(p unsafe.Pointer) AuditToken { return AuditToken{ptr: p} }
-
-// Ptr returns the underlying audit_token_t handle.
-func (h AuditToken) Ptr() unsafe.Pointer { return h.ptr }
-
 // Client wraps the C handle es_client_t.
 type Client struct{ ptr unsafe.Pointer }
 
@@ -27,154 +18,154 @@ func WrapClient(p unsafe.Pointer) Client { return Client{ptr: p} }
 // Ptr returns the underlying es_client_t handle.
 func (h Client) Ptr() unsafe.Pointer { return h.ptr }
 
-func (h Client) Subscribe(events *raw.Es_event_type_t, event_count uint32) raw.Es_return_t {
+func (h Client) Subscribe(events *raw.EsEventTypeT, event_count uint32) raw.EsReturnT {
 	return raw.Es_subscribe(h.ptr, events, event_count)
 }
 
-func (h Client) Unsubscribe(events *raw.Es_event_type_t, event_count uint32) raw.Es_return_t {
+func (h Client) Unsubscribe(events *raw.EsEventTypeT, event_count uint32) raw.EsReturnT {
 	return raw.Es_unsubscribe(h.ptr, events, event_count)
 }
 
-func (h Client) UnsubscribeAll() raw.Es_return_t {
+func (h Client) UnsubscribeAll() raw.EsReturnT {
 	return raw.Es_unsubscribe_all(h.ptr)
 }
 
-func (h Client) Subscriptions(count *uint64, subscriptions unsafe.Pointer) raw.Es_return_t {
+func (h Client) Subscriptions(count *uint64, subscriptions unsafe.Pointer) raw.EsReturnT {
 	return raw.Es_subscriptions(h.ptr, count, subscriptions)
 }
 
-func (h Client) RespondAuthResult(message *raw.Es_message_t, result raw.Es_auth_result_t, cache bool) raw.Es_respond_result_t {
+func (h Client) RespondAuthResult(message *raw.EsMessageT, result raw.EsAuthResultT, cache bool) raw.EsRespondResultT {
 	return raw.Es_respond_auth_result(h.ptr, message, result, cache)
 }
 
-func (h Client) RespondFlagsResult(message *raw.Es_message_t, authorized_flags uint32, cache bool) raw.Es_respond_result_t {
+func (h Client) RespondFlagsResult(message *raw.EsMessageT, authorized_flags uint32, cache bool) raw.EsRespondResultT {
 	return raw.Es_respond_flags_result(h.ptr, message, authorized_flags, cache)
 }
 
-func (h Client) MuteProcess(audit_token AuditToken) raw.Es_return_t {
-	return raw.Es_mute_process(h.ptr, audit_token.ptr)
+func (h Client) MuteProcess(audit_token *raw.AuditTokenT) raw.EsReturnT {
+	return raw.Es_mute_process(h.ptr, audit_token)
 }
 
-func (h Client) MuteProcessEvents(audit_token AuditToken, events *raw.Es_event_type_t, event_count uint64) raw.Es_return_t {
-	return raw.Es_mute_process_events(h.ptr, audit_token.ptr, events, event_count)
+func (h Client) MuteProcessEvents(audit_token *raw.AuditTokenT, events *raw.EsEventTypeT, event_count uint64) raw.EsReturnT {
+	return raw.Es_mute_process_events(h.ptr, audit_token, events, event_count)
 }
 
-func (h Client) UnmuteProcess(audit_token AuditToken) raw.Es_return_t {
-	return raw.Es_unmute_process(h.ptr, audit_token.ptr)
+func (h Client) UnmuteProcess(audit_token *raw.AuditTokenT) raw.EsReturnT {
+	return raw.Es_unmute_process(h.ptr, audit_token)
 }
 
-func (h Client) UnmuteProcessEvents(audit_token AuditToken, events *raw.Es_event_type_t, event_count uint64) raw.Es_return_t {
-	return raw.Es_unmute_process_events(h.ptr, audit_token.ptr, events, event_count)
+func (h Client) UnmuteProcessEvents(audit_token *raw.AuditTokenT, events *raw.EsEventTypeT, event_count uint64) raw.EsReturnT {
+	return raw.Es_unmute_process_events(h.ptr, audit_token, events, event_count)
 }
 
-func (h Client) MutedProcesses(count *uint64, audit_tokens AuditToken) raw.Es_return_t {
-	return raw.Es_muted_processes(h.ptr, count, audit_tokens.ptr)
+func (h Client) MutedProcesses(count *uint64, audit_tokens unsafe.Pointer) raw.EsReturnT {
+	return raw.Es_muted_processes(h.ptr, count, audit_tokens)
 }
 
-func (h Client) MutedProcessesEvents(muted_processes unsafe.Pointer) raw.Es_return_t {
+func (h Client) MutedProcessesEvents(muted_processes unsafe.Pointer) raw.EsReturnT {
 	return raw.Es_muted_processes_events(h.ptr, muted_processes)
 }
 
-func (h Client) MutePath(path string, type_ raw.Es_mute_path_type_t) raw.Es_return_t {
+func (h Client) MutePath(path string, type_ raw.EsMutePathTypeT) raw.EsReturnT {
 	return raw.Es_mute_path(h.ptr, path, type_)
 }
 
-func (h Client) MutePathEvents(path string, type_ raw.Es_mute_path_type_t, events *raw.Es_event_type_t, event_count uint64) raw.Es_return_t {
+func (h Client) MutePathEvents(path string, type_ raw.EsMutePathTypeT, events *raw.EsEventTypeT, event_count uint64) raw.EsReturnT {
 	return raw.Es_mute_path_events(h.ptr, path, type_, events, event_count)
 }
 
-func (h Client) MutePathPrefix(path_prefix string) raw.Es_return_t {
+func (h Client) MutePathPrefix(path_prefix string) raw.EsReturnT {
 	return raw.Es_mute_path_prefix(h.ptr, path_prefix)
 }
 
-func (h Client) MutePathLiteral(path_literal string) raw.Es_return_t {
+func (h Client) MutePathLiteral(path_literal string) raw.EsReturnT {
 	return raw.Es_mute_path_literal(h.ptr, path_literal)
 }
 
-func (h Client) UnmuteAllPaths() raw.Es_return_t {
+func (h Client) UnmuteAllPaths() raw.EsReturnT {
 	return raw.Es_unmute_all_paths(h.ptr)
 }
 
-func (h Client) UnmuteAllTargetPaths() raw.Es_return_t {
+func (h Client) UnmuteAllTargetPaths() raw.EsReturnT {
 	return raw.Es_unmute_all_target_paths(h.ptr)
 }
 
-func (h Client) UnmutePath(path string, type_ raw.Es_mute_path_type_t) raw.Es_return_t {
+func (h Client) UnmutePath(path string, type_ raw.EsMutePathTypeT) raw.EsReturnT {
 	return raw.Es_unmute_path(h.ptr, path, type_)
 }
 
-func (h Client) UnmutePathEvents(path string, type_ raw.Es_mute_path_type_t, events *raw.Es_event_type_t, event_count uint64) raw.Es_return_t {
+func (h Client) UnmutePathEvents(path string, type_ raw.EsMutePathTypeT, events *raw.EsEventTypeT, event_count uint64) raw.EsReturnT {
 	return raw.Es_unmute_path_events(h.ptr, path, type_, events, event_count)
 }
 
-func (h Client) MutedPathsEvents(muted_paths unsafe.Pointer) raw.Es_return_t {
+func (h Client) MutedPathsEvents(muted_paths unsafe.Pointer) raw.EsReturnT {
 	return raw.Es_muted_paths_events(h.ptr, muted_paths)
 }
 
-func (h Client) InvertMuting(mute_type raw.Es_mute_inversion_type_t) raw.Es_return_t {
+func (h Client) InvertMuting(mute_type raw.EsMuteInversionTypeT) raw.EsReturnT {
 	return raw.Es_invert_muting(h.ptr, mute_type)
 }
 
-func (h Client) MutingInverted(mute_type raw.Es_mute_inversion_type_t) raw.Es_mute_inverted_return_t {
+func (h Client) MutingInverted(mute_type raw.EsMuteInversionTypeT) raw.EsMuteInvertedReturnT {
 	return raw.Es_muting_inverted(h.ptr, mute_type)
 }
 
-func (h Client) ClearCache() raw.Es_clear_cache_result_t {
+func (h Client) ClearCache() raw.EsClearCacheResultT {
 	return raw.Es_clear_cache(h.ptr)
 }
 
-func (h Client) DeleteClient() raw.Es_return_t {
+func (h Client) DeleteClient() raw.EsReturnT {
 	return raw.Es_delete_client(h.ptr)
 }
 
-func MessageSize(msg *raw.Es_message_t) uint64 {
+func MessageSize(msg *raw.EsMessageT) uint64 {
 	return raw.Es_message_size(msg)
 }
 
-func CopyMessage(msg *raw.Es_message_t) unsafe.Pointer {
+func CopyMessage(msg *raw.EsMessageT) unsafe.Pointer {
 	return raw.Es_copy_message(msg)
 }
 
-func FreeMessage(msg *raw.Es_message_t) {
+func FreeMessage(msg *raw.EsMessageT) {
 	raw.Es_free_message(msg)
 }
 
-func RetainMessage(msg *raw.Es_message_t) {
+func RetainMessage(msg *raw.EsMessageT) {
 	raw.Es_retain_message(msg)
 }
 
-func ReleaseMessage(msg *raw.Es_message_t) {
+func ReleaseMessage(msg *raw.EsMessageT) {
 	raw.Es_release_message(msg)
 }
 
-func ExecArgCount(event *raw.Es_event_exec_t) uint32 {
+func ExecArgCount(event *raw.EsEventExecT) uint32 {
 	return raw.Es_exec_arg_count(event)
 }
 
-func ExecEnvCount(event *raw.Es_event_exec_t) uint32 {
+func ExecEnvCount(event *raw.EsEventExecT) uint32 {
 	return raw.Es_exec_env_count(event)
 }
 
-func ExecFdCount(event *raw.Es_event_exec_t) uint32 {
+func ExecFdCount(event *raw.EsEventExecT) uint32 {
 	return raw.Es_exec_fd_count(event)
 }
 
-func ExecArg(event *raw.Es_event_exec_t, index uint32) raw.Es_string_token_t {
+func ExecArg(event *raw.EsEventExecT, index uint32) raw.EsStringTokenT {
 	return raw.Es_exec_arg(event, index)
 }
 
-func ExecEnv(event *raw.Es_event_exec_t, index uint32) raw.Es_string_token_t {
+func ExecEnv(event *raw.EsEventExecT, index uint32) raw.EsStringTokenT {
 	return raw.Es_exec_env(event, index)
 }
 
-func ExecFd(event *raw.Es_event_exec_t, index uint32) unsafe.Pointer {
+func ExecFd(event *raw.EsEventExecT, index uint32) unsafe.Pointer {
 	return raw.Es_exec_fd(event, index)
 }
 
-func ReleaseMutedProcesses(muted_processes *raw.Es_muted_processes_t) {
+func ReleaseMutedProcesses(muted_processes *raw.EsMutedProcessesT) {
 	raw.Es_release_muted_processes(muted_processes)
 }
 
-func ReleaseMutedPaths(muted_paths *raw.Es_muted_paths_t) {
+func ReleaseMutedPaths(muted_paths *raw.EsMutedPathsT) {
 	raw.Es_release_muted_paths(muted_paths)
 }

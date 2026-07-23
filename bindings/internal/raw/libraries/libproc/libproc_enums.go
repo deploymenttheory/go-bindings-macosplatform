@@ -10,20 +10,20 @@ import (
 )
 
 // [_time.h:156]
-type Clockid_t int64
+type ClockidT int32
 
 const (
-	_CLOCK_REALTIME             Clockid_t = 0
-	_CLOCK_MONOTONIC            Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
-	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW           Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
+	_CLOCK_REALTIME             ClockidT = 0
+	_CLOCK_MONOTONIC            ClockidT = 6
+	_CLOCK_MONOTONIC_RAW        ClockidT = 4
+	_CLOCK_MONOTONIC_RAW_APPROX ClockidT = 5
+	_CLOCK_UPTIME_RAW           ClockidT = 8
+	_CLOCK_UPTIME_RAW_APPROX    ClockidT = 9
+	_CLOCK_PROCESS_CPUTIME_ID   ClockidT = 12
+	_CLOCK_THREAD_CPUTIME_ID    ClockidT = 16
 )
 
-func (i Clockid_t) String() string {
+func (i ClockidT) String() string {
 	switch i {
 	case _CLOCK_REALTIME:
 		return "_CLOCK_REALTIME"
@@ -42,11 +42,11 @@ func (i Clockid_t) String() string {
 	case _CLOCK_THREAD_CPUTIME_ID:
 		return "_CLOCK_THREAD_CPUTIME_ID"
 	default:
-		return fmt.Sprintf("Clockid_t(%d)", int64(i))
+		return fmt.Sprintf("ClockidT(%d)", int64(i))
 	}
 }
 
-func ParseClockid_t(v string) (any, error) {
+func ParseClockidT(v string) (any, error) {
 	result := _CLOCK_REALTIME
 	switch v {
 	case "_CLOCK_REALTIME":
@@ -71,7 +71,7 @@ func ParseClockid_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeClockid_t(values []Clockid_t) []string {
+func SerializeClockidT(values []ClockidT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -79,23 +79,23 @@ func SerializeClockid_t(values []Clockid_t) []string {
 	return result
 }
 
-func (i Clockid_t) isMultiValue() bool {
+func (i ClockidT) isMultiValue() bool {
 	return false
 }
 
 // [mount.h:188]
-type Cryptex_auth_type_t int64
+type CryptexAuthTypeT uint32
 
 const (
-	CRYPTEX1_AUTH_ENV_GENERIC              Cryptex_auth_type_t = 4
-	CRYPTEX1_AUTH_ENV_GENERIC_SUPPLEMENTAL Cryptex_auth_type_t = 5
-	CRYPTEX_AUTH_PDI_NONCE                 Cryptex_auth_type_t = 6
-	CRYPTEX_AUTH_MOBILE_ASSET              Cryptex_auth_type_t = 8
-	CRYPTEX_AUTH_MOBILE_ASSET_WITH_CODE    Cryptex_auth_type_t = 9
-	CRYPTEX_AUTH_MAX                       Cryptex_auth_type_t = 9
+	CRYPTEX1_AUTH_ENV_GENERIC              CryptexAuthTypeT = 4
+	CRYPTEX1_AUTH_ENV_GENERIC_SUPPLEMENTAL CryptexAuthTypeT = 5
+	CRYPTEX_AUTH_PDI_NONCE                 CryptexAuthTypeT = 6
+	CRYPTEX_AUTH_MOBILE_ASSET              CryptexAuthTypeT = 8
+	CRYPTEX_AUTH_MOBILE_ASSET_WITH_CODE    CryptexAuthTypeT = 9
+	CRYPTEX_AUTH_MAX                       CryptexAuthTypeT = 9
 )
 
-func (i Cryptex_auth_type_t) String() string {
+func (i CryptexAuthTypeT) String() string {
 	switch i {
 	case CRYPTEX1_AUTH_ENV_GENERIC:
 		return "CRYPTEX1_AUTH_ENV_GENERIC"
@@ -108,11 +108,11 @@ func (i Cryptex_auth_type_t) String() string {
 	case CRYPTEX_AUTH_MOBILE_ASSET_WITH_CODE:
 		return "CRYPTEX_AUTH_MOBILE_ASSET_WITH_CODE"
 	default:
-		return fmt.Sprintf("Cryptex_auth_type_t(%d)", int64(i))
+		return fmt.Sprintf("CryptexAuthTypeT(%d)", int64(i))
 	}
 }
 
-func ParseCryptex_auth_type_t(v string) (any, error) {
+func ParseCryptexAuthTypeT(v string) (any, error) {
 	result := CRYPTEX1_AUTH_ENV_GENERIC
 	switch v {
 	case "CRYPTEX1_AUTH_ENV_GENERIC":
@@ -133,7 +133,7 @@ func ParseCryptex_auth_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeCryptex_auth_type_t(values []Cryptex_auth_type_t) []string {
+func SerializeCryptexAuthTypeT(values []CryptexAuthTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -141,26 +141,26 @@ func SerializeCryptex_auth_type_t(values []Cryptex_auth_type_t) []string {
 	return result
 }
 
-func (i Cryptex_auth_type_t) isMultiValue() bool {
+func (i CryptexAuthTypeT) isMultiValue() bool {
 	return false
 }
 
 // [mount.h:188]
-type Graftdmg_type_t int64
+type GraftdmgTypeT uint32
 
 const (
-	GRAFTDMG_CRYPTEX_BOOT                   Graftdmg_type_t = 1
-	GRAFTDMG_CRYPTEX_PREBOOT                Graftdmg_type_t = 2
-	GRAFTDMG_CRYPTEX_DOWNLEVEL              Graftdmg_type_t = 3
-	GRAFTDMG_CRYPTEX_AUTH_ENV_GENERIC       Graftdmg_type_t = 4
-	GRAFTDMG_CRYPTEX_PDI_NONCE              Graftdmg_type_t = 6
-	GRAFTDMG_CRYPTEX_EFFECTIVE_AP           Graftdmg_type_t = 7
-	GRAFTDMG_CRYPTEX_MOBILE_ASSET           Graftdmg_type_t = 8
-	GRAFTDMG_CRYPTEX_MOBILE_ASSET_WITH_CODE Graftdmg_type_t = 9
-	GRAFTDMG_CRYPTEX_MAX                    Graftdmg_type_t = 9
+	GRAFTDMG_CRYPTEX_BOOT                   GraftdmgTypeT = 1
+	GRAFTDMG_CRYPTEX_PREBOOT                GraftdmgTypeT = 2
+	GRAFTDMG_CRYPTEX_DOWNLEVEL              GraftdmgTypeT = 3
+	GRAFTDMG_CRYPTEX_AUTH_ENV_GENERIC       GraftdmgTypeT = 4
+	GRAFTDMG_CRYPTEX_PDI_NONCE              GraftdmgTypeT = 6
+	GRAFTDMG_CRYPTEX_EFFECTIVE_AP           GraftdmgTypeT = 7
+	GRAFTDMG_CRYPTEX_MOBILE_ASSET           GraftdmgTypeT = 8
+	GRAFTDMG_CRYPTEX_MOBILE_ASSET_WITH_CODE GraftdmgTypeT = 9
+	GRAFTDMG_CRYPTEX_MAX                    GraftdmgTypeT = 9
 )
 
-func (i Graftdmg_type_t) String() string {
+func (i GraftdmgTypeT) String() string {
 	switch i {
 	case GRAFTDMG_CRYPTEX_BOOT:
 		return "GRAFTDMG_CRYPTEX_BOOT"
@@ -179,11 +179,11 @@ func (i Graftdmg_type_t) String() string {
 	case GRAFTDMG_CRYPTEX_MOBILE_ASSET_WITH_CODE:
 		return "GRAFTDMG_CRYPTEX_MOBILE_ASSET_WITH_CODE"
 	default:
-		return fmt.Sprintf("Graftdmg_type_t(%d)", int64(i))
+		return fmt.Sprintf("GraftdmgTypeT(%d)", int64(i))
 	}
 }
 
-func ParseGraftdmg_type_t(v string) (any, error) {
+func ParseGraftdmgTypeT(v string) (any, error) {
 	result := GRAFTDMG_CRYPTEX_BOOT
 	switch v {
 	case "GRAFTDMG_CRYPTEX_BOOT":
@@ -210,7 +210,7 @@ func ParseGraftdmg_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeGraftdmg_type_t(values []Graftdmg_type_t) []string {
+func SerializeGraftdmgTypeT(values []GraftdmgTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -218,26 +218,26 @@ func SerializeGraftdmg_type_t(values []Graftdmg_type_t) []string {
 	return result
 }
 
-func (i Graftdmg_type_t) isMultiValue() bool {
+func (i GraftdmgTypeT) isMultiValue() bool {
 	return false
 }
 
 // [port.h:1102]
 // Bitmask — values may be combined with |.
-type Mpo_flags_t int64
+type MpoFlagsT uint32
 
 const (
-	MPO_PORT                            Mpo_flags_t = 0
-	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
-	MPO_REPLY_PORT                      Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
-	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
+	MPO_PORT                            MpoFlagsT = 0
+	MPO_SERVICE_PORT                    MpoFlagsT = 1024
+	MPO_CONNECTION_PORT                 MpoFlagsT = 2048
+	MPO_REPLY_PORT                      MpoFlagsT = 4096
+	MPO_WEAK_REPLY_PORT                 MpoFlagsT = 16384
+	MPO_NOTIFICATION_PORT               MpoFlagsT = 17408
+	MPO_EXCEPTION_PORT                  MpoFlagsT = 32768
+	MPO_CONNECTION_PORT_WITH_PORT_ARRAY MpoFlagsT = 65536
 )
 
-func (i Mpo_flags_t) String() string {
+func (i MpoFlagsT) String() string {
 	var values []string
 	if i == 0 {
 		values = append(values, "MPO_PORT")
@@ -266,8 +266,8 @@ func (i Mpo_flags_t) String() string {
 	return strings.Join(values, ",")
 }
 
-func ParseMpo_flags_t(v string) (any, error) {
-	var result Mpo_flags_t
+func ParseMpoFlagsT(v string) (any, error) {
+	var result MpoFlagsT
 	for _, str := range strings.Split(v, ",") {
 		switch str {
 		case "MPO_PORT":
@@ -293,7 +293,7 @@ func ParseMpo_flags_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeMpo_flags_t(values []Mpo_flags_t) []string {
+func SerializeMpoFlagsT(values []MpoFlagsT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -301,6 +301,6 @@ func SerializeMpo_flags_t(values []Mpo_flags_t) []string {
 	return result
 }
 
-func (i Mpo_flags_t) isMultiValue() bool {
+func (i MpoFlagsT) isMultiValue() bool {
 	return true
 }

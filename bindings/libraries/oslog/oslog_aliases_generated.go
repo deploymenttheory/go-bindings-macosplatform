@@ -10,25 +10,25 @@ import raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/inter
 // types and values so callers name them through this package.
 
 type (
-	Clockid_t                             = raw.Clockid_t
-	Dispatch_autorelease_frequency_t      = raw.Dispatch_autorelease_frequency_t
-	Dispatch_block_flags_t                = raw.Dispatch_block_flags_t
-	Filesec_property_t                    = raw.Filesec_property_t
-	Idtype_t                              = raw.Idtype_t
-	Ipc_info_object_type_t                = raw.Ipc_info_object_type_t
-	Launch_data_type_t                    = raw.Launch_data_type_t
-	Mach_vm_range_flags_t                 = raw.Mach_vm_range_flags_t
-	Mach_vm_range_flavor_t                = raw.Mach_vm_range_flavor_t
-	Mach_vm_range_tag_t                   = raw.Mach_vm_range_tag_t
-	Mpo_flags_t                           = raw.Mpo_flags_t
-	OS_os_log                             = raw.OS_os_log
-	Os_clockid_t                          = raw.Os_clockid_t
-	Os_log_s                              = raw.Os_log_s
-	Os_log_type_t                         = raw.Os_log_type_t
-	Qos_class_t                           = raw.Qos_class_t
-	Virtual_memory_guard_exception_code_t = raw.Virtual_memory_guard_exception_code_t
-	Xpc_listener_create_flags_t           = raw.Xpc_listener_create_flags_t
-	Xpc_session_create_flags_t            = raw.Xpc_session_create_flags_t
+	ClockidT                         = raw.ClockidT
+	DispatchAutoreleaseFrequencyT    = raw.DispatchAutoreleaseFrequencyT
+	DispatchBlockFlagsT              = raw.DispatchBlockFlagsT
+	FilesecPropertyT                 = raw.FilesecPropertyT
+	IdtypeT                          = raw.IdtypeT
+	IpcInfoObjectTypeT               = raw.IpcInfoObjectTypeT
+	LaunchDataTypeT                  = raw.LaunchDataTypeT
+	MachVmRangeFlagsT                = raw.MachVmRangeFlagsT
+	MachVmRangeFlavorT               = raw.MachVmRangeFlavorT
+	MachVmRangeTagT                  = raw.MachVmRangeTagT
+	MpoFlagsT                        = raw.MpoFlagsT
+	OS_os_log                        = raw.OS_os_log
+	OsClockidT                       = raw.OsClockidT
+	OsLogS                           = raw.OsLogS
+	OsLogTypeT                       = raw.OsLogTypeT
+	QosClassT                        = raw.QosClassT
+	VirtualMemoryGuardExceptionCodeT = raw.VirtualMemoryGuardExceptionCodeT
+	XpcListenerCreateFlagsT          = raw.XpcListenerCreateFlagsT
+	XpcSessionCreateFlagsT           = raw.XpcSessionCreateFlagsT
 )
 
 const (

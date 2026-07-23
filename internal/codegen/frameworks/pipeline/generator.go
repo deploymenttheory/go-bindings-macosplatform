@@ -90,22 +90,10 @@ func generateFramework(m *meta.FrameworkMeta, outBase string, cfg BindingsConfig
 		return fmt.Errorf("mkdir %s: %w", outDir, err)
 	}
 
-	mapper := &typemap.Mapper{
-		OwnerIndex:               reg.OwnerIndex,
-		GenericClasses:           reg.GenericClasses,
-		GenericParamIndex:        reg.GenericParamIndex,
-		EnumIndex:                reg.EnumIndex,
-		EnumGoTypeIndex:          reg.EnumGoTypeIndex,
-		TypedefIndex:             reg.TypedefIndex,
-		StructIndex:              reg.StructIndex,
-		ProtocolIndex:            reg.ProtocolIndex,
-		CFTypeIndex:              reg.CFTypeIndex,
-		BlockedImports:           reg.BlockedImports,
-		UnavailableClasses:       reg.UnavailableClasses,
-		UnavailableEnumBaseTypes: reg.UnavailableEnumBaseTypes,
-		ModulePrefix:             reg.ModulePrefix,
-		LibraryModulePrefix:      reg.LibraryModulePrefix,
-	}
+	// buildMapper also populates LibraryPkgs, so the raw pipeline degrades a
+	// library-owned type (unreferenceable across the purego/cgo boundary) to
+	// unsafe.Pointer exactly as the idiomatic pipeline does.
+	mapper := buildMapper(reg)
 
 	snap := &rawfw.RegistrySnapshot{
 		OwnerIndex:         reg.OwnerIndex,
@@ -790,6 +778,16 @@ func emitIdiomaticStub(outDir, pkgName string, fw *meta.FrameworkMeta) error {
 
 // buildMapper constructs a type mapper from the registry.
 func buildMapper(reg *Registry) *typemap.Mapper {
+	// The idiomatic package names that are C libraries (LinkLib set): a frameworks
+	// binding cannot reference these across the purego/cgo boundary, so qualifyType
+	// degrades a library-owned type to unsafe.Pointer. Populated here (not only in
+	// GenerateIdiomatic) so the raw pipeline degrades consistently too.
+	libraryPkgs := make(map[string]bool)
+	for _, fw := range reg.Frameworks {
+		if fw.LinkLib != "" {
+			libraryPkgs[naming.PackageName(fw.Framework)] = true
+		}
+	}
 	return &typemap.Mapper{
 		OwnerIndex:               reg.OwnerIndex,
 		GenericClasses:           reg.GenericClasses,
@@ -805,6 +803,7 @@ func buildMapper(reg *Registry) *typemap.Mapper {
 		UnavailableEnumBaseTypes: reg.UnavailableEnumBaseTypes,
 		ModulePrefix:             reg.ModulePrefix,
 		LibraryModulePrefix:      reg.LibraryModulePrefix,
+		LibraryPkgs:              libraryPkgs,
 	}
 }
 

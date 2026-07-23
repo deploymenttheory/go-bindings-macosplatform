@@ -9,7 +9,7 @@ import (
 )
 
 // Component information for a bitmap image.
-type CGBitmapInfo int64
+type CGBitmapInfo uint32
 
 const (
 	KCGBitmapAlphaInfoMask       CGBitmapInfo = 31
@@ -73,7 +73,7 @@ func (e CGBitmapInfo) String() string {
 	return strings.Join(parts, "|")
 }
 
-type CGBitmapLayout int64
+type CGBitmapLayout uint32
 
 const (
 	KCGBitmapLayoutAlphaOnly CGBitmapLayout = 0
@@ -122,7 +122,7 @@ func (e CGBitmapLayout) String() string {
 }
 
 // Compositing operations for images.
-type CGBlendMode int64
+type CGBlendMode int32
 
 const (
 	// Paints the source image samples over the background image samples.
@@ -241,7 +241,7 @@ func (e CGBlendMode) String() string {
 }
 
 // Configuration parameters that are used when capturing displays.
-type CGCaptureOptions int64
+type CGCaptureOptions uint32
 
 const (
 	// The system should use the default fill behavior, which is fill with black.
@@ -262,7 +262,7 @@ func (e CGCaptureOptions) String() string {
 }
 
 // Constants describing how a color conversion uses color spaces.
-type CGColorConversionInfoTransformType int64
+type CGColorConversionInfoTransformType uint32
 
 const (
 	// Specifies a color conversion from a device color space to a color profile.
@@ -286,7 +286,7 @@ func (e CGColorConversionInfoTransformType) String() string {
 	}
 }
 
-type CGColorModel int64
+type CGColorModel uint32
 
 const (
 	KCGColorModelNoColorant CGColorModel = 0
@@ -321,7 +321,7 @@ func (e CGColorModel) String() string {
 }
 
 // Handling options for colors that are not located within the destination color space of a graphics context.
-type CGColorRenderingIntent int64
+type CGColorRenderingIntent int32
 
 const (
 	// The default rendering intent for the graphics context.
@@ -351,7 +351,7 @@ func (e CGColorRenderingIntent) String() string {
 }
 
 // Models for color spaces.
-type CGColorSpaceModel int64
+type CGColorSpaceModel int32
 
 const (
 	// An unknown color space model.
@@ -399,7 +399,7 @@ func (e CGColorSpaceModel) String() string {
 	}
 }
 
-type CGComponent int64
+type CGComponent uint32
 
 const (
 	KCGComponentUnknown      CGComponent = 0
@@ -433,7 +433,7 @@ func (e CGComponent) String() string {
 }
 
 // The scope of the changes in a display configuration transaction.
-type CGConfigureOption int64
+type CGConfigureOption uint32
 
 const (
 	// Changes persist for the lifetime of the current application. After the application terminates, the display configuration settings revert to the current login session.
@@ -458,7 +458,7 @@ func (e CGConfigureOption) String() string {
 }
 
 // The configuration parameters that are passed to a display reconfiguration callback function.
-type CGDisplayChangeSummaryFlags int64
+type CGDisplayChangeSummaryFlags uint32
 
 const (
 	// The display configuration is about to change.
@@ -526,7 +526,7 @@ func (e CGDisplayChangeSummaryFlags) String() string {
 }
 
 // Describes a frame update event.
-type CGDisplayStreamFrameStatus int64
+type CGDisplayStreamFrameStatus int32
 
 const (
 	// A new frame was generated.
@@ -555,7 +555,7 @@ func (e CGDisplayStreamFrameStatus) String() string {
 }
 
 // Use these constants to determine which rectangles your app is interested in.
-type CGDisplayStreamUpdateRectType int64
+type CGDisplayStreamUpdateRectType int32
 
 const (
 	// The rectangles for the portions of the display that were redrawn.
@@ -584,7 +584,7 @@ func (e CGDisplayStreamUpdateRectType) String() string {
 }
 
 // A uniform type for result codes returned by functions in Core Graphics.
-type CGError int64
+type CGError int32
 
 const (
 	// The requested operation was completed successfully.
@@ -641,7 +641,7 @@ func (e CGError) String() string {
 }
 
 // Constants used as keys to access specialized fields in low-level events.
-type CGEventField int64
+type CGEventField uint32
 
 const (
 	// Key to access an integer field that contains the mouse button event number. Matching mouse-down and mouse-up events will have the same event number.
@@ -902,7 +902,7 @@ func (e CGEventField) String() string {
 }
 
 // Specify masks for classes of low-level events that can be filtered during event suppression states.
-type CGEventFilterMask int64
+type CGEventFilterMask uint32
 
 const (
 	KCGEventFilterMaskPermitLocalMouseEvents    CGEventFilterMask = 1
@@ -928,7 +928,7 @@ func (e CGEventFilterMask) String() string {
 }
 
 // Constants that indicate the modifier key state at the time an event is created, as well as other event-related states.
-type CGEventFlags int64
+type CGEventFlags uint64
 
 const (
 	// Indicates that the Caps Lock key is down for a keyboard, mouse, or flag-changed event.
@@ -987,7 +987,7 @@ func (e CGEventFlags) String() string {
 }
 
 // Constants used with the kCGMouseEventSubtype event field.
-type CGEventMouseSubtype int64
+type CGEventMouseSubtype uint32
 
 const (
 	// Specifies that the event is an ordinary mouse event, and does not contain additional tablet device information.
@@ -1011,7 +1011,7 @@ func (e CGEventMouseSubtype) String() string {
 }
 
 // Constants that specify the possible source states of an event source.
-type CGEventSourceStateID int64
+type CGEventSourceStateID int32
 
 const (
 	// Specifies that an event source should use a private event state table.
@@ -1036,7 +1036,7 @@ func (e CGEventSourceStateID) String() string {
 }
 
 // Specify the event suppression states that can occur after posting an event.
-type CGEventSuppressionState int64
+type CGEventSuppressionState uint32
 
 const (
 	// Specifies that certain local hardware events may be suppressed for a short interval after posting an event.
@@ -1060,7 +1060,7 @@ func (e CGEventSuppressionState) String() string {
 }
 
 // Constants that specify possible tapping points for events.
-type CGEventTapLocation int64
+type CGEventTapLocation uint32
 
 const (
 	// Specifies that an event tap is placed at the point where HID system events enter the window server.
@@ -1085,7 +1085,7 @@ func (e CGEventTapLocation) String() string {
 }
 
 // Constants that specify whether a new event tap is an active filter or a passive listener.
-type CGEventTapOptions int64
+type CGEventTapOptions uint32
 
 const (
 	KCGEventTapOptionDefault    CGEventTapOptions = 0
@@ -1104,7 +1104,7 @@ func (e CGEventTapOptions) String() string {
 }
 
 // Constants that specify where a new event tap is inserted into the list of active event taps.
-type CGEventTapPlacement int64
+type CGEventTapPlacement uint32
 
 const (
 	// Specifies that a new event tap should be inserted before any pre-existing event taps at the same location.
@@ -1125,7 +1125,7 @@ func (e CGEventTapPlacement) String() string {
 }
 
 // Constants that specify the different types of input events.
-type CGEventType int64
+type CGEventType uint32
 
 const (
 	// Specifies a null event.
@@ -1214,7 +1214,7 @@ func (e CGEventType) String() string {
 }
 
 // Possible formats for a PostScript font subset.
-type CGFontPostScriptFormat int64
+type CGFontPostScriptFormat int32
 
 const (
 	// A Type 1 font format.
@@ -1238,7 +1238,7 @@ func (e CGFontPostScriptFormat) String() string {
 	}
 }
 
-type CGGesturePhase int64
+type CGGesturePhase uint32
 
 const (
 	KCGGesturePhaseNone      CGGesturePhase = 0
@@ -1268,7 +1268,7 @@ func (e CGGesturePhase) String() string {
 	}
 }
 
-type CGGlyphDeprecatedEnum int64
+type CGGlyphDeprecatedEnum int32
 
 const (
 	// Minimum font index value.
@@ -1289,7 +1289,7 @@ func (e CGGlyphDeprecatedEnum) String() string {
 }
 
 // Drawing locations for gradients.
-type CGGradientDrawingOptions int64
+type CGGradientDrawingOptions uint32
 
 const (
 	// The fill should extend beyond the starting location. The color that extends beyond the starting point is the solid color defined by the CGGradientRef object to be at location 0.
@@ -1313,7 +1313,7 @@ func (e CGGradientDrawingOptions) String() string {
 }
 
 // Storage options for alpha component data.
-type CGImageAlphaInfo int64
+type CGImageAlphaInfo uint32
 
 const (
 	// There is no alpha channel.
@@ -1357,7 +1357,7 @@ func (e CGImageAlphaInfo) String() string {
 	}
 }
 
-type CGImageByteOrderInfo int64
+type CGImageByteOrderInfo uint32
 
 const (
 	KCGImageByteOrderMask     CGImageByteOrderInfo = 28672
@@ -1389,7 +1389,7 @@ func (e CGImageByteOrderInfo) String() string {
 	}
 }
 
-type CGImageComponentInfo int64
+type CGImageComponentInfo uint32
 
 const (
 	KCGImageComponentInteger CGImageComponentInfo = 0
@@ -1407,7 +1407,7 @@ func (e CGImageComponentInfo) String() string {
 	}
 }
 
-type CGImagePixelFormatInfo int64
+type CGImagePixelFormatInfo uint32
 
 const (
 	KCGImagePixelFormatMask      CGImagePixelFormatInfo = 983040
@@ -1438,7 +1438,7 @@ func (e CGImagePixelFormatInfo) String() string {
 }
 
 // Levels of interpolation quality for rendering an image.
-type CGInterpolationQuality int64
+type CGInterpolationQuality int32
 
 const (
 	// The default level of quality.
@@ -1471,7 +1471,7 @@ func (e CGInterpolationQuality) String() string {
 }
 
 // Styles for rendering the endpoint of a stroked line.
-type CGLineCap int64
+type CGLineCap int32
 
 const (
 	// A line with a squared-off end. Core Graphics draws the line to extend only to the exact endpoint of the path. This is the default.
@@ -1496,7 +1496,7 @@ func (e CGLineCap) String() string {
 }
 
 // Junction types for stroked lines.
-type CGLineJoin int64
+type CGLineJoin int32
 
 const (
 	KCGLineJoinMiter CGLineJoin = 0
@@ -1519,7 +1519,7 @@ func (e CGLineJoin) String() string {
 	}
 }
 
-type CGMomentumScrollPhase int64
+type CGMomentumScrollPhase uint32
 
 const (
 	KCGMomentumScrollPhaseNone     CGMomentumScrollPhase = 0
@@ -1544,7 +1544,7 @@ func (e CGMomentumScrollPhase) String() string {
 }
 
 // Constants that specify buttons on a one, two, or three-button mouse.
-type CGMouseButton int64
+type CGMouseButton uint32
 
 const (
 	KCGMouseButtonLeft   CGMouseButton = 0
@@ -1565,7 +1565,7 @@ func (e CGMouseButton) String() string {
 	}
 }
 
-type CGPDFAccessPermissions int64
+type CGPDFAccessPermissions uint32
 
 const (
 	KCGPDFAllowsLowQualityPrinting   CGPDFAccessPermissions = 1
@@ -1611,7 +1611,7 @@ func (e CGPDFAccessPermissions) String() string {
 }
 
 // Box types for a PDF page.
-type CGPDFBox int64
+type CGPDFBox int32
 
 const (
 	// The page media box—a rectangle, expressed in default user space units, that defines the boundaries of the physical medium on which the page is intended to be displayed or printed
@@ -1644,7 +1644,7 @@ func (e CGPDFBox) String() string {
 }
 
 // The encoding format of PDF data.
-type CGPDFDataFormat int64
+type CGPDFDataFormat int32
 
 const (
 	// The data stream is not encoded.
@@ -1669,7 +1669,7 @@ func (e CGPDFDataFormat) String() string {
 }
 
 // Types of PDF object.
-type CGPDFObjectType int64
+type CGPDFObjectType int32
 
 const (
 	// The type for a PDF null.
@@ -1717,7 +1717,7 @@ func (e CGPDFObjectType) String() string {
 	}
 }
 
-type CGPDFTagType int64
+type CGPDFTagType int32
 
 const (
 	CGPDFTagTypeDocument           CGPDFTagType = 100
@@ -1880,7 +1880,7 @@ func (e CGPDFTagType) String() string {
 }
 
 // Options for rendering a path.
-type CGPathDrawingMode int64
+type CGPathDrawingMode int32
 
 const (
 	// Render the area contained within the path using the non-zero winding number rule.
@@ -1913,7 +1913,7 @@ func (e CGPathDrawingMode) String() string {
 }
 
 // The type of element found in a path.
-type CGPathElementType int64
+type CGPathElementType int32
 
 const (
 	// The path element that starts a new subpath.
@@ -1946,7 +1946,7 @@ func (e CGPathElementType) String() string {
 }
 
 // Different methods for rendering a tiled pattern.
-type CGPatternTiling int64
+type CGPatternTiling int32
 
 const (
 	// The pattern cell is not distorted when painted.The spacing between pattern cells may vary by as much as 1 devicepixel.
@@ -1971,7 +1971,7 @@ func (e CGPatternTiling) String() string {
 }
 
 // Types of screen-update operations.
-type CGScreenUpdateOperation int64
+type CGScreenUpdateOperation uint32
 
 const (
 	// A screen-refresh operation.
@@ -1996,7 +1996,7 @@ func (e CGScreenUpdateOperation) String() string {
 }
 
 // Constants that specify the unit of measurement for a scrolling event.
-type CGScrollEventUnit int64
+type CGScrollEventUnit uint32
 
 const (
 	// Specifies that the unit of measurement is pixels.
@@ -2016,7 +2016,7 @@ func (e CGScrollEventUnit) String() string {
 	}
 }
 
-type CGScrollPhase int64
+type CGScrollPhase uint32
 
 const (
 	KCGScrollPhaseBegan     CGScrollPhase = 1
@@ -2044,7 +2044,7 @@ func (e CGScrollPhase) String() string {
 }
 
 // Modes for rendering text.
-type CGTextDrawingMode int64
+type CGTextDrawingMode int32
 
 const (
 	// Perform a fill operation on the text.
@@ -2090,7 +2090,7 @@ func (e CGTextDrawingMode) String() string {
 
 // Text encodings for fonts.
 // Deprecated: No longer supported
-type CGTextEncoding int64
+type CGTextEncoding int32
 
 const (
 	// The built-in encoding of the font.
@@ -2110,7 +2110,7 @@ func (e CGTextEncoding) String() string {
 	}
 }
 
-type CGToneMapping int64
+type CGToneMapping uint32
 
 const (
 	KCGToneMappingDefault                  CGToneMapping = 0
@@ -2141,7 +2141,7 @@ func (e CGToneMapping) String() string {
 }
 
 // The data type used to specify the backing option for a given window.
-type CGWindowBackingType int64
+type CGWindowBackingType uint32
 
 const (
 	KCGBackingStoreRetained    CGWindowBackingType = 0
@@ -2163,7 +2163,7 @@ func (e CGWindowBackingType) String() string {
 }
 
 // The data type to use to specify the type of image to be generated for a window.
-type CGWindowImageOption int64
+type CGWindowImageOption uint32
 
 const (
 	KCGWindowImageDefault             CGWindowImageOption = 0
@@ -2200,7 +2200,7 @@ func (e CGWindowImageOption) String() string {
 }
 
 // Keys that represent the standard window levels in macOS. Quartz includes these keys to support application frameworks like Cocoa. Applications do not need to use them directly.
-type CGWindowLevelKey int64
+type CGWindowLevelKey int32
 
 const (
 	KCGBaseWindowLevelKey              CGWindowLevelKey = 0
@@ -2279,7 +2279,7 @@ func (e CGWindowLevelKey) String() string {
 }
 
 // The data type used to specify the options for gathering a list of windows.
-type CGWindowListOption int64
+type CGWindowListOption uint32
 
 const (
 	KCGWindowListOptionAll                 CGWindowListOption = 0
@@ -2314,7 +2314,7 @@ func (e CGWindowListOption) String() string {
 }
 
 // The data type used to specify the sharing mode used by a window.
-type CGWindowSharingType int64
+type CGWindowSharingType uint32
 
 const (
 	KCGWindowSharingNone      CGWindowSharingType = 0
@@ -2335,7 +2335,7 @@ func (e CGWindowSharingType) String() string {
 	}
 }
 
-type EvCmd int64
+type EvCmd int32
 
 const (
 	EVNOP   EvCmd = 0
@@ -2362,7 +2362,7 @@ func (e EvCmd) String() string {
 	}
 }
 
-type NXMouseButton int64
+type NXMouseButton int32
 
 const (
 	NX_OneButton   NXMouseButton = 0
@@ -2383,7 +2383,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
-type Acl_entry_id_t int64
+type Acl_entry_id_t int32
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
@@ -2404,7 +2404,7 @@ func (e Acl_entry_id_t) String() string {
 	}
 }
 
-type Acl_flag_t int64
+type Acl_flag_t int32
 
 const (
 	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
@@ -2437,7 +2437,7 @@ func (e Acl_flag_t) String() string {
 	}
 }
 
-type Acl_perm_t int64
+type Acl_perm_t int32
 
 const (
 	ACL_READ_DATA           Acl_perm_t = 2
@@ -2495,7 +2495,7 @@ func (e Acl_perm_t) String() string {
 	}
 }
 
-type Acl_tag_t int64
+type Acl_tag_t int32
 
 const (
 	ACL_UNDEFINED_TAG  Acl_tag_t = 0
@@ -2516,7 +2516,7 @@ func (e Acl_tag_t) String() string {
 	}
 }
 
-type Acl_type_t int64
+type Acl_type_t int32
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
@@ -2549,7 +2549,7 @@ func (e Acl_type_t) String() string {
 	}
 }
 
-type Clockid_t int64
+type Clockid_t int32
 
 const (
 	_CLOCK_REALTIME             Clockid_t = 0
@@ -2643,7 +2643,7 @@ func (e Dispatch_block_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Filesec_property_t int64
+type Filesec_property_t int32
 
 const (
 	FILESEC_OWNER         Filesec_property_t = 1
@@ -2679,7 +2679,7 @@ func (e Filesec_property_t) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0
@@ -2700,7 +2700,7 @@ func (e Idtype_t) String() string {
 	}
 }
 
-type Ipc_info_object_type_t int64
+type Ipc_info_object_type_t uint32
 
 const (
 	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
@@ -2880,7 +2880,7 @@ func (e Ipc_info_object_type_t) String() string {
 	}
 }
 
-type Mach_vm_range_flags_t int64
+type Mach_vm_range_flags_t uint64
 
 const (
 	MACH_VM_RANGE_NONE Mach_vm_range_flags_t = 0
@@ -2894,7 +2894,7 @@ func (e Mach_vm_range_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Mach_vm_range_flavor_t int64
+type Mach_vm_range_flavor_t uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
@@ -2912,7 +2912,7 @@ func (e Mach_vm_range_flavor_t) String() string {
 	}
 }
 
-type Mach_vm_range_tag_t int64
+type Mach_vm_range_tag_t uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
@@ -2933,7 +2933,7 @@ func (e Mach_vm_range_tag_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -2975,7 +2975,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
@@ -2990,7 +2990,7 @@ func (e Os_clockid_t) String() string {
 	}
 }
 
-type Ptrauth_key int64
+type Ptrauth_key int32
 
 const (
 	Ptrauth_key_none                     Ptrauth_key = -1
@@ -3063,7 +3063,7 @@ func (e Qos_class_t) String() string {
 	}
 }
 
-type Virtual_memory_guard_exception_code_t int64
+type Virtual_memory_guard_exception_code_t uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1

@@ -81,18 +81,19 @@ func (q qualifier) classType(class, typeExpr string) string {
 // with a package alias when the enum belongs to a different framework.
 // No leading "*" — enums are value types.
 func (q qualifier) enumType(name, owner string) string {
+	goName := naming.ExportedTypeName(name)
 	if owner == "" || strings.EqualFold(owner, q.framework) {
-		return name
+		return goName
 	}
 	if q.isBlocked(owner) {
 		q.appendDiag("%s: enum %s.%s replaced with unsafe.Pointer (import cycle %s→%s)",
-			q.framework, strings.ToLower(owner), name,
+			q.framework, strings.ToLower(owner), goName,
 			strings.ToLower(q.framework), strings.ToLower(owner))
 		return "unsafe.Pointer"
 	}
 	pkgAlias := strings.ToLower(owner)
 	q.recordImport(pkgAlias)
-	return pkgAlias + "." + name
+	return pkgAlias + "." + goName
 }
 
 // protocolType returns the Go interface type expression for an id<Protocol…>
@@ -168,7 +169,7 @@ func (q qualifier) structType(name, owner string, addPointer bool) string {
 	if addPointer {
 		prefix = "*"
 	}
-	goName := naming.GoTypeName(name)
+	goName := naming.ExportedTypeName(name)
 	if owner == "" || strings.EqualFold(owner, q.framework) {
 		return prefix + goName
 	}
@@ -209,7 +210,7 @@ func (q qualifier) bsdType(goName string, addPointer bool) string {
 // Within the CoreFoundation package: "*CFStringRef". Elsewhere: "*corefoundation.CFStringRef".
 func (q qualifier) cfType(name string) string {
 	const cfFramework = "CoreFoundation"
-	goName := naming.GoTypeName(name)
+	goName := naming.ExportedTypeName(name)
 	if strings.EqualFold(q.framework, cfFramework) {
 		return "*" + goName
 	}
@@ -221,6 +222,30 @@ func (q qualifier) cfType(name string) string {
 	const pkgAlias = "corefoundation"
 	q.recordImport(pkgAlias)
 	return "*" + pkgAlias + "." + goName
+}
+
+// RebuildGoNameIndices populates the Go-name-keyed lookup sets (structGoNames,
+// enumGoIntByGoName) from the C-name-keyed StructIndex and EnumGoTypeIndex, using
+// the same naming.ExportedTypeName mapping the emitters apply to type
+// declarations. Because that mapping (snake_case → PascalCase) is not invertible,
+// classification code cannot recover a C name from a resolved Go name; these
+// forward-built sets let it look the Go name up directly. Call once after the
+// C-name-keyed indices are assigned.
+func (m *Mapper) RebuildGoNameIndices() {
+	m.structGoNames = make(map[string]bool, len(m.StructIndex))
+	for cName := range m.StructIndex {
+		m.structGoNames[naming.ExportedTypeName(cName)] = true
+	}
+	m.enumGoIntByGoName = make(map[string]string, len(m.EnumGoTypeIndex))
+	for cName, goInt := range m.EnumGoTypeIndex {
+		m.enumGoIntByGoName[naming.ExportedTypeName(cName)] = goInt
+	}
+}
+
+// IsStructGoName reports whether goName (a resolved Go type name with any package
+// prefix already stripped) is the exported name of a registered value struct.
+func (m *Mapper) IsStructGoName(goName string) bool {
+	return m.structGoNames[goName]
 }
 
 // capitaliseFirst uppercases the first ASCII character of s.
@@ -239,7 +264,7 @@ func capitaliseFirst(s string) string {
 // Same-framework: "*TypedefName". Cross-framework: "*pkgAlias.TypedefName".
 // Import-blocked: "unsafe.Pointer".
 func (q qualifier) frameworkCFType(name, owner string) string {
-	goName := naming.GoTypeName(name)
+	goName := naming.ExportedTypeName(name)
 	if owner == "" || strings.EqualFold(owner, q.framework) {
 		return "*" + goName
 	}

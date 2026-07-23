@@ -9,7 +9,7 @@ import (
 )
 
 // The structure that describes an instruction or data cache element.
-type Hv_cache_type_t int64
+type Hv_cache_type_t uint32
 
 const (
 	// Data or unified cache
@@ -30,7 +30,7 @@ func (e Hv_cache_type_t) String() string {
 }
 
 // The type that describes the event that triggered a guest exit to the host.
-type Hv_exit_reason_t int64
+type Hv_exit_reason_t uint32
 
 const (
 	// asynchronous exit requested explicitly by hv_vcpus_exit() call
@@ -59,7 +59,7 @@ func (e Hv_exit_reason_t) String() string {
 }
 
 // The type that defines feature registers.
-type Hv_feature_reg_t int64
+type Hv_feature_reg_t uint32
 
 const (
 	HV_FEATURE_REG_ID_AA64DFR0_EL1  Hv_feature_reg_t = 0
@@ -113,7 +113,7 @@ func (e Hv_feature_reg_t) String() string {
 	}
 }
 
-type Hv_gic_distributor_reg_t int64
+type Hv_gic_distributor_reg_t uint16
 
 const (
 	HV_GIC_DISTRIBUTOR_REG_GICD_CTLR          Hv_gic_distributor_reg_t = 0
@@ -4727,7 +4727,7 @@ func (e Hv_gic_distributor_reg_t) String() string {
 	}
 }
 
-type Hv_gic_icc_reg_t int64
+type Hv_gic_icc_reg_t uint16
 
 const (
 	HV_GIC_ICC_REG_PMR_EL1     Hv_gic_icc_reg_t = 49712
@@ -4772,7 +4772,7 @@ func (e Hv_gic_icc_reg_t) String() string {
 	}
 }
 
-type Hv_gic_ich_reg_t int64
+type Hv_gic_ich_reg_t uint16
 
 const (
 	HV_GIC_ICH_REG_AP0R0_EL2 Hv_gic_ich_reg_t = 58944
@@ -4856,7 +4856,7 @@ func (e Hv_gic_ich_reg_t) String() string {
 	}
 }
 
-type Hv_gic_icv_reg_t int64
+type Hv_gic_icv_reg_t uint16
 
 const (
 	HV_GIC_ICV_REG_PMR_EL1     Hv_gic_icv_reg_t = 49712
@@ -4898,7 +4898,7 @@ func (e Hv_gic_icv_reg_t) String() string {
 	}
 }
 
-type Hv_gic_intid_t int64
+type Hv_gic_intid_t uint16
 
 const (
 	HV_GIC_INT_PERFORMANCE_MONITOR Hv_gic_intid_t = 23
@@ -4925,7 +4925,7 @@ func (e Hv_gic_intid_t) String() string {
 	}
 }
 
-type Hv_gic_msi_reg_t int64
+type Hv_gic_msi_reg_t uint16
 
 const (
 	HV_GIC_REG_GICM_TYPER       Hv_gic_msi_reg_t = 8
@@ -4943,7 +4943,7 @@ func (e Hv_gic_msi_reg_t) String() string {
 	}
 }
 
-type Hv_gic_redistributor_reg_t int64
+type Hv_gic_redistributor_reg_t uint32
 
 const (
 	HV_GIC_REDISTRIBUTOR_REG_GICR_TYPER       Hv_gic_redistributor_reg_t = 8
@@ -5013,7 +5013,7 @@ func (e Hv_gic_redistributor_reg_t) String() string {
 }
 
 // The type that defines the vCPU’s interrupts.
-type Hv_interrupt_type_t int64
+type Hv_interrupt_type_t uint32
 
 const (
 	// Corresponds to an ARM IRQ .
@@ -5033,7 +5033,7 @@ func (e Hv_interrupt_type_t) String() string {
 	}
 }
 
-type Hv_ipa_granule_t int64
+type Hv_ipa_granule_t uint32
 
 const (
 	HV_IPA_GRANULE_4KB  Hv_ipa_granule_t = 0
@@ -5052,7 +5052,7 @@ func (e Hv_ipa_granule_t) String() string {
 }
 
 // The type that defines general registers.
-type Hv_reg_t int64
+type Hv_reg_t uint32
 
 const (
 	HV_REG_X0   Hv_reg_t = 0
@@ -5172,7 +5172,7 @@ func (e Hv_reg_t) String() string {
 }
 
 // The type that defines SIMD and floating-point registers.
-type Hv_simd_fp_reg_t int64
+type Hv_simd_fp_reg_t uint32
 
 const (
 	HV_SIMD_FP_REG_Q0  Hv_simd_fp_reg_t = 0
@@ -5280,7 +5280,7 @@ func (e Hv_simd_fp_reg_t) String() string {
 	}
 }
 
-type Hv_sme_p_reg_t int64
+type Hv_sme_p_reg_t uint32
 
 const (
 	HV_SME_P_REG_0  Hv_sme_p_reg_t = 0
@@ -5340,7 +5340,7 @@ func (e Hv_sme_p_reg_t) String() string {
 	}
 }
 
-type Hv_sme_z_reg_t int64
+type Hv_sme_z_reg_t uint32
 
 const (
 	HV_SME_Z_REG_0  Hv_sme_z_reg_t = 0
@@ -5449,7 +5449,7 @@ func (e Hv_sme_z_reg_t) String() string {
 }
 
 // The type of system registers.
-type Hv_sys_reg_t int64
+type Hv_sys_reg_t uint16
 
 const (
 	HV_SYS_REG_DBGBVR0_EL1      Hv_sys_reg_t = 32772
@@ -5906,7 +5906,7 @@ func (e Hv_sys_reg_t) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0
@@ -5927,7 +5927,7 @@ func (e Idtype_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0

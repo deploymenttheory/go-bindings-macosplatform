@@ -691,6 +691,12 @@ func crossFrameworkValueStruct(
 	if !mapper.EmittableStructs[name] {
 		return "", nil, false
 	}
+	// A library-owned value struct (e.g. audit_token_t owned by bsm) cannot be
+	// referenced from a hermetic purego frameworks binding; let the caller degrade
+	// it to unsafe.Pointer rather than emit a cross-pipeline reference.
+	if mapper.LibraryPkgs[pkg] {
+		return "", nil, false
+	}
 	return goType, map[string]string{pkg: idiomaticFrameworkPrefix + pkg}, true
 }
 

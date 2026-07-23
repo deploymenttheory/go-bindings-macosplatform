@@ -8,7 +8,7 @@ import (
 )
 
 // Credentials versions These constants are used in several places in the API to discern between Kerberos v4 and Kerberos v5. Not all values are valid inputs and outputs for all functions; function specifications below detail the allowed values. Kerberos version constants will always be a bit-field, and can be tested as such; for example the following test will tell you if a ccacheVersion includes v5 credentials: if ((ccacheVersion & cc_credentials_v5) != 0)
-type Cc_credential_versions int64
+type Cc_credential_versions int32
 
 const (
 	Cc_credentials_v4    Cc_credential_versions = 1
@@ -30,7 +30,7 @@ func (e Cc_credential_versions) String() string {
 }
 
 // Locking Modes These constants are used in the advisory locking functions to describe whether or not the lock function should block waiting for a lock or return an error immediately.   For example, attempting to acquire a lock with a non-blocking call will result in an error if the lock cannot be acquired; otherwise, the call will block until the lock can be acquired.
-type Cc_lock_modes int64
+type Cc_lock_modes int32
 
 const (
 	Cc_lock_noblock Cc_lock_modes = 0
@@ -49,7 +49,7 @@ func (e Cc_lock_modes) String() string {
 }
 
 // Lock types These constants are used in the locking functions to describe the type of lock requested.  Note that all CCAPI locks are advisory so only callers using the lock calls will be blocked by each other. This is because locking functions were introduced after the CCAPI came into common use and we did not want to break existing callers.
-type Cc_lock_types int64
+type Cc_lock_types int32
 
 const (
 	Cc_lock_read      Cc_lock_types = 0
@@ -74,7 +74,7 @@ func (e Cc_lock_types) String() string {
 }
 
 // String to key type (Kerberos v4 only)
-type Cc_string_to_key_type int64
+type Cc_string_to_key_type int32
 
 const (
 	Cc_v4_stk_afs              Cc_string_to_key_type = 0
@@ -101,7 +101,7 @@ func (e Cc_string_to_key_type) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0

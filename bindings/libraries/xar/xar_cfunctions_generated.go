@@ -18,11 +18,11 @@ func WrapErrctx(p unsafe.Pointer) Errctx { return Errctx{ptr: p} }
 // Ptr returns the underlying xar_errctx_t handle.
 func (h Errctx) Ptr() unsafe.Pointer { return h.ptr }
 
-func (h Errctx) ErrGetArchive() *raw.Xar_t {
+func (h Errctx) ErrGetArchive() *raw.XarT {
 	return raw.Xar_err_get_archive(h.ptr)
 }
 
-func (h Errctx) ErrGetFile() *raw.Xar_file_t {
+func (h Errctx) ErrGetFile() *raw.XarFileT {
 	return raw.Xar_err_get_file(h.ptr)
 }
 
@@ -43,251 +43,251 @@ func WrapUint8(p unsafe.Pointer) Uint8 { return Uint8{ptr: p} }
 // Ptr returns the underlying uint8_t handle.
 func (h Uint8) Ptr() unsafe.Pointer { return h.ptr }
 
-func Open(file string, flags int32) *raw.Xar_t {
+func Open(file string, flags int32) *raw.XarT {
 	return raw.Xar_open(file, flags)
 }
 
-func OpenDigestVerify(file string, flags int32, expected_toc_digest unsafe.Pointer, expected_toc_digest_len uint64) *raw.Xar_t {
+func OpenDigestVerify(file string, flags int32, expected_toc_digest unsafe.Pointer, expected_toc_digest_len uint64) *raw.XarT {
 	return raw.Xar_open_digest_verify(file, flags, expected_toc_digest, expected_toc_digest_len)
 }
 
-func FdopenDigestVerify(fd int32, flags int32, expected_toc_digest unsafe.Pointer, expected_toc_digest_len uint64) *raw.Xar_t {
+func FdopenDigestVerify(fd int32, flags int32, expected_toc_digest unsafe.Pointer, expected_toc_digest_len uint64) *raw.XarT {
 	return raw.Xar_fdopen_digest_verify(fd, flags, expected_toc_digest, expected_toc_digest_len)
 }
 
-func Close(x *raw.Xar_t) int32 {
+func Close(x *raw.XarT) int32 {
 	return raw.Xar_close(x)
 }
 
-func HeaderGet(x *raw.Xar_t) raw.Xar_header {
+func HeaderGet(x *raw.XarT) raw.XarHeader {
 	return raw.Xar_header_get(x)
 }
 
-func Add(x *raw.Xar_t, path string) *raw.Xar_file_t {
+func Add(x *raw.XarT, path string) *raw.XarFileT {
 	return raw.Xar_add(x, path)
 }
 
-func AddFrombuffer(x *raw.Xar_t, parent *raw.Xar_file_t, name string, buffer string, length uint64) *raw.Xar_file_t {
+func AddFrombuffer(x *raw.XarT, parent *raw.XarFileT, name string, buffer string, length uint64) *raw.XarFileT {
 	return raw.Xar_add_frombuffer(x, parent, name, buffer, length)
 }
 
-func AddFolder(x *raw.Xar_t, f *raw.Xar_file_t, name string, info unsafe.Pointer) *raw.Xar_file_t {
+func AddFolder(x *raw.XarT, f *raw.XarFileT, name string, info unsafe.Pointer) *raw.XarFileT {
 	return raw.Xar_add_folder(x, f, name, info)
 }
 
-func AddFrompath(x *raw.Xar_t, parent *raw.Xar_file_t, name string, realpath string) *raw.Xar_file_t {
+func AddFrompath(x *raw.XarT, parent *raw.XarFileT, name string, realpath string) *raw.XarFileT {
 	return raw.Xar_add_frompath(x, parent, name, realpath)
 }
 
-func AddFromArchive(x *raw.Xar_t, parent *raw.Xar_file_t, name string, sourcearchive *raw.Xar_t, sourcefile *raw.Xar_file_t) *raw.Xar_file_t {
+func AddFromArchive(x *raw.XarT, parent *raw.XarFileT, name string, sourcearchive *raw.XarT, sourcefile *raw.XarFileT) *raw.XarFileT {
 	return raw.Xar_add_from_archive(x, parent, name, sourcearchive, sourcefile)
 }
 
-func Extract(x *raw.Xar_t, f *raw.Xar_file_t) int32 {
+func Extract(x *raw.XarT, f *raw.XarFileT) int32 {
 	return raw.Xar_extract(x, f)
 }
 
-func ExtractTofile(x *raw.Xar_t, f *raw.Xar_file_t, path string) int32 {
+func ExtractTofile(x *raw.XarT, f *raw.XarFileT, path string) int32 {
 	return raw.Xar_extract_tofile(x, f, path)
 }
 
-func ExtractTobuffer(x *raw.Xar_t, f *raw.Xar_file_t, buffer unsafe.Pointer) int32 {
+func ExtractTobuffer(x *raw.XarT, f *raw.XarFileT, buffer unsafe.Pointer) int32 {
 	return raw.Xar_extract_tobuffer(x, f, buffer)
 }
 
-func ExtractTobuffersz(x *raw.Xar_t, f *raw.Xar_file_t, buffer unsafe.Pointer, size *uint64) int32 {
+func ExtractTobuffersz(x *raw.XarT, f *raw.XarFileT, buffer unsafe.Pointer, size *uint64) int32 {
 	return raw.Xar_extract_tobuffersz(x, f, buffer, size)
 }
 
-func ExtractTostreamInit(x *raw.Xar_t, f *raw.Xar_file_t, stream *raw.Xar_stream) int32 {
+func ExtractTostreamInit(x *raw.XarT, f *raw.XarFileT, stream *raw.XarStream) int32 {
 	return raw.Xar_extract_tostream_init(x, f, stream)
 }
 
-func ExtractTostream(stream *raw.Xar_stream) int32 {
+func ExtractTostream(stream *raw.XarStream) int32 {
 	return raw.Xar_extract_tostream(stream)
 }
 
-func ExtractTostreamEnd(stream *raw.Xar_stream) int32 {
+func ExtractTostreamEnd(stream *raw.XarStream) int32 {
 	return raw.Xar_extract_tostream_end(stream)
 }
 
-func Verify(x *raw.Xar_t, f *raw.Xar_file_t) int32 {
+func Verify(x *raw.XarT, f *raw.XarFileT) int32 {
 	return raw.Xar_verify(x, f)
 }
 
-func GetTocChecksum(x *raw.Xar_t, buffer_size *uint64) unsafe.Pointer {
+func GetTocChecksum(x *raw.XarT, buffer_size *uint64) unsafe.Pointer {
 	return raw.Xar_get_toc_checksum(x, buffer_size)
 }
 
-func GetTocChecksumType(x *raw.Xar_t) int32 {
+func GetTocChecksumType(x *raw.XarT) int32 {
 	return raw.Xar_get_toc_checksum_type(x)
 }
 
-func OptGet(x *raw.Xar_t, option string) string {
+func OptGet(x *raw.XarT, option string) string {
 	return raw.Xar_opt_get(x, option)
 }
 
-func OptSet(x *raw.Xar_t, option string, value string) int32 {
+func OptSet(x *raw.XarT, option string, value string) int32 {
 	return raw.Xar_opt_set(x, option, value)
 }
 
-func OptUnset(x *raw.Xar_t, option string) int32 {
+func OptUnset(x *raw.XarT, option string) int32 {
 	return raw.Xar_opt_unset(x, option)
 }
 
-func PropSet(f *raw.Xar_file_t, key string, value string) int32 {
+func PropSet(f *raw.XarFileT, key string, value string) int32 {
 	return raw.Xar_prop_set(f, key, value)
 }
 
-func PropCreate(f *raw.Xar_file_t, key string, value string) int32 {
+func PropCreate(f *raw.XarFileT, key string, value string) int32 {
 	return raw.Xar_prop_create(f, key, value)
 }
 
-func PropGet(f *raw.Xar_file_t, key string, value unsafe.Pointer) int32 {
+func PropGet(f *raw.XarFileT, key string, value unsafe.Pointer) int32 {
 	return raw.Xar_prop_get(f, key, value)
 }
 
-func PropGetExpectNotnull(f *raw.Xar_file_t, key string, value unsafe.Pointer) int32 {
+func PropGetExpectNotnull(f *raw.XarFileT, key string, value unsafe.Pointer) int32 {
 	return raw.Xar_prop_get_expect_notnull(f, key, value)
 }
 
-func IterNew() *raw.Xar_iter_t {
+func IterNew() *raw.XarIterT {
 	return raw.Xar_iter_new()
 }
 
-func IterFree(i *raw.Xar_iter_t) {
+func IterFree(i *raw.XarIterT) {
 	raw.Xar_iter_free(i)
 }
 
-func PropFirst(f *raw.Xar_file_t, i *raw.Xar_iter_t) string {
+func PropFirst(f *raw.XarFileT, i *raw.XarIterT) string {
 	return raw.Xar_prop_first(f, i)
 }
 
-func PropNext(i *raw.Xar_iter_t) string {
+func PropNext(i *raw.XarIterT) string {
 	return raw.Xar_prop_next(i)
 }
 
-func PropUnset(f *raw.Xar_file_t, key string) {
+func PropUnset(f *raw.XarFileT, key string) {
 	raw.Xar_prop_unset(f, key)
 }
 
-func FileFirst(x *raw.Xar_t, i *raw.Xar_iter_t) *raw.Xar_file_t {
+func FileFirst(x *raw.XarT, i *raw.XarIterT) *raw.XarFileT {
 	return raw.Xar_file_first(x, i)
 }
 
-func FileNext(i *raw.Xar_iter_t) *raw.Xar_file_t {
+func FileNext(i *raw.XarIterT) *raw.XarFileT {
 	return raw.Xar_file_next(i)
 }
 
-func AttrGet(f *raw.Xar_file_t, prop string, key string) string {
+func AttrGet(f *raw.XarFileT, prop string, key string) string {
 	return raw.Xar_attr_get(f, prop, key)
 }
 
-func AttrSet(f *raw.Xar_file_t, prop string, key string, value string) int32 {
+func AttrSet(f *raw.XarFileT, prop string, key string, value string) int32 {
 	return raw.Xar_attr_set(f, prop, key, value)
 }
 
-func AttrFirst(f *raw.Xar_file_t, prop string, i *raw.Xar_iter_t) string {
+func AttrFirst(f *raw.XarFileT, prop string, i *raw.XarIterT) string {
 	return raw.Xar_attr_first(f, prop, i)
 }
 
-func AttrNext(i *raw.Xar_iter_t) string {
+func AttrNext(i *raw.XarIterT) string {
 	return raw.Xar_attr_next(i)
 }
 
-func SubdocNew(x *raw.Xar_t, name string) *raw.Xar_subdoc_t {
+func SubdocNew(x *raw.XarT, name string) *raw.XarSubdocT {
 	return raw.Xar_subdoc_new(x, name)
 }
 
-func SubdocPropSet(s *raw.Xar_subdoc_t, key string, value string) int32 {
+func SubdocPropSet(s *raw.XarSubdocT, key string, value string) int32 {
 	return raw.Xar_subdoc_prop_set(s, key, value)
 }
 
-func SubdocPropGet(s *raw.Xar_subdoc_t, key string, value unsafe.Pointer) int32 {
+func SubdocPropGet(s *raw.XarSubdocT, key string, value unsafe.Pointer) int32 {
 	return raw.Xar_subdoc_prop_get(s, key, value)
 }
 
-func SubdocAttrSet(s *raw.Xar_subdoc_t, prop string, key string, value string) int32 {
+func SubdocAttrSet(s *raw.XarSubdocT, prop string, key string, value string) int32 {
 	return raw.Xar_subdoc_attr_set(s, prop, key, value)
 }
 
-func SubdocAttrGet(s *raw.Xar_subdoc_t, prop string, key string) string {
+func SubdocAttrGet(s *raw.XarSubdocT, prop string, key string) string {
 	return raw.Xar_subdoc_attr_get(s, prop, key)
 }
 
-func SubdocFirst(x *raw.Xar_t) *raw.Xar_subdoc_t {
+func SubdocFirst(x *raw.XarT) *raw.XarSubdocT {
 	return raw.Xar_subdoc_first(x)
 }
 
-func SubdocNext(s *raw.Xar_subdoc_t) *raw.Xar_subdoc_t {
+func SubdocNext(s *raw.XarSubdocT) *raw.XarSubdocT {
 	return raw.Xar_subdoc_next(s)
 }
 
-func SubdocName(s *raw.Xar_subdoc_t) string {
+func SubdocName(s *raw.XarSubdocT) string {
 	return raw.Xar_subdoc_name(s)
 }
 
-func SubdocCopyout(s *raw.Xar_subdoc_t, arg unsafe.Pointer, arg2 *uint32) int32 {
+func SubdocCopyout(s *raw.XarSubdocT, arg unsafe.Pointer, arg2 *uint32) int32 {
 	return raw.Xar_subdoc_copyout(s, arg, arg2)
 }
 
-func SubdocCopyin(s *raw.Xar_subdoc_t, arg *uint8, arg2 uint32) int32 {
+func SubdocCopyin(s *raw.XarSubdocT, arg *uint8, arg2 uint32) int32 {
 	return raw.Xar_subdoc_copyin(s, arg, arg2)
 }
 
-func SubdocRemove(s *raw.Xar_subdoc_t) {
+func SubdocRemove(s *raw.XarSubdocT) {
 	raw.Xar_subdoc_remove(s)
 }
 
-func SignatureType(s *raw.Xar_signature_t) string {
+func SignatureType(s *raw.XarSignatureT) string {
 	return raw.Xar_signature_type(s)
 }
 
-func SignatureFirst(x *raw.Xar_t) *raw.Xar_signature_t {
+func SignatureFirst(x *raw.XarT) *raw.XarSignatureT {
 	return raw.Xar_signature_first(x)
 }
 
-func SignatureNext(s *raw.Xar_signature_t) *raw.Xar_signature_t {
+func SignatureNext(s *raw.XarSignatureT) *raw.XarSignatureT {
 	return raw.Xar_signature_next(s)
 }
 
-func SignatureAddX509certificate(sig *raw.Xar_signature_t, cert_data *uint8, cert_len uint32) int32 {
+func SignatureAddX509certificate(sig *raw.XarSignatureT, cert_data *uint8, cert_len uint32) int32 {
 	return raw.Xar_signature_add_x509certificate(sig, cert_data, cert_len)
 }
 
-func SignatureGetX509certificateCount(sig *raw.Xar_signature_t) int32 {
+func SignatureGetX509certificateCount(sig *raw.XarSignatureT) int32 {
 	return raw.Xar_signature_get_x509certificate_count(sig)
 }
 
-func SignatureGetX509certificateData(sig *raw.Xar_signature_t, index int32, cert_data Uint8, cert_len *uint32) int32 {
+func SignatureGetX509certificateData(sig *raw.XarSignatureT, index int32, cert_data Uint8, cert_len *uint32) int32 {
 	return raw.Xar_signature_get_x509certificate_data(sig, index, cert_data.ptr, cert_len)
 }
 
-func SignatureCopySignedData(sig *raw.Xar_signature_t, data Uint8, length *uint32, signed_data Uint8, signed_length *uint32, signed_offset *int64) uint8 {
+func SignatureCopySignedData(sig *raw.XarSignatureT, data Uint8, length *uint32, signed_data Uint8, signed_length *uint32, signed_offset *int64) uint8 {
 	return raw.Xar_signature_copy_signed_data(sig, data.ptr, length, signed_data.ptr, signed_length, signed_offset)
 }
 
-func GetSize(x *raw.Xar_t, f *raw.Xar_file_t) string {
+func GetSize(x *raw.XarT, f *raw.XarFileT) string {
 	return raw.Xar_get_size(x, f)
 }
 
-func GetType(x *raw.Xar_t, f *raw.Xar_file_t) string {
+func GetType(x *raw.XarT, f *raw.XarFileT) string {
 	return raw.Xar_get_type(x, f)
 }
 
-func GetMode(x *raw.Xar_t, f *raw.Xar_file_t) string {
+func GetMode(x *raw.XarT, f *raw.XarFileT) string {
 	return raw.Xar_get_mode(x, f)
 }
 
-func GetOwner(x *raw.Xar_t, f *raw.Xar_file_t) string {
+func GetOwner(x *raw.XarT, f *raw.XarFileT) string {
 	return raw.Xar_get_owner(x, f)
 }
 
-func GetGroup(x *raw.Xar_t, f *raw.Xar_file_t) string {
+func GetGroup(x *raw.XarT, f *raw.XarFileT) string {
 	return raw.Xar_get_group(x, f)
 }
 
-func GetMtime(x *raw.Xar_t, f *raw.Xar_file_t) string {
+func GetMtime(x *raw.XarT, f *raw.XarFileT) string {
 	return raw.Xar_get_mtime(x, f)
 }
 
@@ -295,39 +295,39 @@ func PathIssane(path string) int32 {
 	return raw.Xar_path_issane(path)
 }
 
-func ErrSetFile(x *raw.Xar_t, f *raw.Xar_file_t) {
+func ErrSetFile(x *raw.XarT, f *raw.XarFileT) {
 	raw.Xar_err_set_file(x, f)
 }
 
-func ErrSetString(x *raw.Xar_t, str string) {
+func ErrSetString(x *raw.XarT, str string) {
 	raw.Xar_err_set_string(x, str)
 }
 
-func ErrSetErrno(x *raw.Xar_t, e int32) {
+func ErrSetErrno(x *raw.XarT, e int32) {
 	raw.Xar_err_set_errno(x, e)
 }
 
-func ErrNew(x *raw.Xar_t) {
+func ErrNew(x *raw.XarT) {
 	raw.Xar_err_new(x)
 }
 
-func ErrCallback(x *raw.Xar_t, sev int32, err int32) int32 {
+func ErrCallback(x *raw.XarT, sev int32, err int32) int32 {
 	return raw.Xar_err_callback(x, sev, err)
 }
 
-func Serialize(x *raw.Xar_t, file string) {
+func Serialize(x *raw.XarT, file string) {
 	raw.Xar_serialize(x, file)
 }
 
-func GetPath(f *raw.Xar_file_t) string {
+func GetPath(f *raw.XarFileT) string {
 	return raw.Xar_get_path(f)
 }
 
-func GetSafePath(f *raw.Xar_file_t) string {
+func GetSafePath(f *raw.XarFileT) string {
 	return raw.Xar_get_safe_path(f)
 }
 
-func GetHeapOffset(x *raw.Xar_t) int64 {
+func GetHeapOffset(x *raw.XarT) int64 {
 	return raw.Xar_get_heap_offset(x)
 }
 
@@ -335,6 +335,6 @@ func Ntoh64(num uint64) uint64 {
 	return raw.Xar_ntoh64(num)
 }
 
-func GetArchiveFd(x *raw.Xar_t) int32 {
+func GetArchiveFd(x *raw.XarT) int32 {
 	return raw.Xar_get_archive_fd(x)
 }

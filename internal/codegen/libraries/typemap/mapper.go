@@ -82,6 +82,18 @@ type Mapper struct {
 	// with a "Go" suffix where NSString * args become plain Go string args.
 	IsNSStringOverloads bool
 
+	// structGoNames is the set of exported Go type names for every registered
+	// struct (naming.ExportedTypeName applied to each StructIndex key). It lets the
+	// emitters classify a resolved Go type name as a value struct without trying to
+	// invert the (non-invertible) C-name → Go-name mapping. Built by
+	// RebuildGoNameIndices; empty until then (classification then falls back to the
+	// C-name-keyed StructIndex, which suffices for single-word names).
+	structGoNames map[string]bool
+	// enumGoIntByGoName maps an enum's exported Go type name to its underlying Go
+	// integer type — the Go-name-keyed companion to EnumGoTypeIndex (keyed by C
+	// name). Built by RebuildGoNameIndices.
+	enumGoIntByGoName map[string]string
+
 	// cache stores resolved type strings keyed by (normalised type, context fields
 	// that affect resolution). It is populated lazily on first use.
 	// Values also carry the set of cross-framework imports that resolution produced
@@ -137,7 +149,12 @@ func (m *Mapper) EnumGoIntType(goType string) string {
 	if dot := strings.LastIndex(name, "."); dot >= 0 {
 		name = name[dot+1:]
 	}
-	return m.EnumGoTypeIndex[name]
+	if v := m.EnumGoTypeIndex[name]; v != "" {
+		return v
+	}
+	// name may already be the exported Go type name (e.g. "OsLogTypeT") rather
+	// than the C key ("os_log_type_t"); consult the Go-name-keyed index.
+	return m.enumGoIntByGoName[name]
 }
 
 // CType returns the C type for a bridge function parameter/return.
@@ -214,12 +231,11 @@ func (m *Mapper) CType(qt string, ctx Context, imports ImportSet) string {
 // "corefoundation.CFNotificationSuspensionBehavior"). Returns "" when goType
 // is not a known enum.
 func (m *Mapper) resolveEnumCType(goType string) string {
-	name := goType
-	if dot := strings.LastIndex(name, "."); dot >= 0 {
-		name = name[dot+1:]
-	}
-	goIntType, ok := m.EnumGoTypeIndex[name]
-	if !ok {
+	// EnumGoIntType strips any package qualifier and consults both the C-name and
+	// exported-Go-name enum indices, so the bridge C type stays consistent with the
+	// Go side regardless of which naming form the resolved type carries.
+	goIntType := m.EnumGoIntType(goType)
+	if goIntType == "" {
 		return ""
 	}
 	switch goIntType {
@@ -381,7 +397,7 @@ func (m *Mapper) resolveGoType(n string, ctx Context, imports ImportSet) string 
 		// not detected by ClassName (which requires an uppercase first letter). Check
 		// EnumIndex directly before falling through to unsafe.Pointer.
 		if owner, ok := m.EnumIndex[n]; ok {
-			return m.qualifiedEnumType(capitaliseFirst(n), owner, ctx, imports)
+			return m.qualifiedEnumType(n, owner, ctx, imports)
 		}
 		// Direct-name struct resolution for C-style lowercase struct names.
 		if owner, ok := m.StructIndex[n]; ok {
@@ -605,7 +621,7 @@ func (m *Mapper) resolvePointerType(n string, ctx Context, imports ImportSet) st
 			if ctx.IsReturn {
 				return "unsafe.Pointer"
 			}
-			return "*" + m.qualifiedEnumType(capitaliseFirst(bare), owner, ctx, imports)
+			return "*" + m.qualifiedEnumType(bare, owner, ctx, imports)
 		}
 		// Pointer to a lowercase/underscore typedef that resolves to a primitive
 		// (e.g. __CLPK_integer * → int * → *int32, __CLPK_real * → float * → *float32).

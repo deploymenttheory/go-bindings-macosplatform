@@ -1676,12 +1676,12 @@ func AudioQueueProcessingTapNew(inAQ obj.Object, inCallback unsafe.Pointer, inCl
 var _fnAudioQueueSetOfflineRenderFormat func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioQueueSetOfflineRenderFormat calls the AudioToolbox framework function AudioQueueSetOfflineRenderFormat.
-func AudioQueueSetOfflineRenderFormat(inAQ obj.Object, inFormat unsafe.Pointer, inLayout *coreaudiotypes.AudioChannelLayout) int {
+func AudioQueueSetOfflineRenderFormat(inAQ obj.Object, inFormat unsafe.Pointer, inLayout unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueSetOfflineRenderFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueSetOfflineRenderFormat, _lib, "AudioQueueSetOfflineRenderFormat")
 	}
-	return int(_fnAudioQueueSetOfflineRenderFormat(objref.IDOf(inAQ), inFormat, unsafe.Pointer(inLayout)))
+	return int(_fnAudioQueueSetOfflineRenderFormat(objref.IDOf(inAQ), inFormat, inLayout))
 }
 
 var _fnAudioServicesCreateSystemSoundID func(objc.ID, unsafe.Pointer) int32
@@ -2051,23 +2051,23 @@ func CAShowFile(inObject unsafe.Pointer, inFile unsafe.Pointer) {
 var _fnExtAudioFileCreateNew func(unsafe.Pointer, objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // ExtAudioFileCreateNew calls the AudioToolbox framework function ExtAudioFileCreateNew.
-func ExtAudioFileCreateNew(inParentDir *carboncore.FSRef, inFileName obj.Object, inFileType int, inStreamDesc unsafe.Pointer, inChannelLayout *coreaudiotypes.AudioChannelLayout, outExtAudioFile unsafe.Pointer) int {
+func ExtAudioFileCreateNew(inParentDir *carboncore.FSRef, inFileName obj.Object, inFileType int, inStreamDesc unsafe.Pointer, inChannelLayout unsafe.Pointer, outExtAudioFile unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnExtAudioFileCreateNew == nil {
 		ebipurego.RegisterLibFunc(&_fnExtAudioFileCreateNew, _lib, "ExtAudioFileCreateNew")
 	}
-	return int(_fnExtAudioFileCreateNew(unsafe.Pointer(inParentDir), objref.IDOf(inFileName), inFileType, inStreamDesc, unsafe.Pointer(inChannelLayout), outExtAudioFile))
+	return int(_fnExtAudioFileCreateNew(unsafe.Pointer(inParentDir), objref.IDOf(inFileName), inFileType, inStreamDesc, inChannelLayout, outExtAudioFile))
 }
 
 var _fnExtAudioFileCreateWithURL func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // ExtAudioFileCreateWithURL calls the AudioToolbox framework function ExtAudioFileCreateWithURL.
-func ExtAudioFileCreateWithURL(inURL obj.Object, inFileType int, inStreamDesc unsafe.Pointer, inChannelLayout *coreaudiotypes.AudioChannelLayout, inFlags int, outExtAudioFile unsafe.Pointer) int {
+func ExtAudioFileCreateWithURL(inURL obj.Object, inFileType int, inStreamDesc unsafe.Pointer, inChannelLayout unsafe.Pointer, inFlags int, outExtAudioFile unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnExtAudioFileCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnExtAudioFileCreateWithURL, _lib, "ExtAudioFileCreateWithURL")
 	}
-	return int(_fnExtAudioFileCreateWithURL(objref.IDOf(inURL), inFileType, inStreamDesc, unsafe.Pointer(inChannelLayout), inFlags, outExtAudioFile))
+	return int(_fnExtAudioFileCreateWithURL(objref.IDOf(inURL), inFileType, inStreamDesc, inChannelLayout, inFlags, outExtAudioFile))
 }
 
 var _fnExtAudioFileGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32

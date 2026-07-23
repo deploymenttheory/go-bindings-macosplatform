@@ -113,7 +113,7 @@ type IOMemoryMap_IVars struct{}
 type IOMemoryMap_LocalIVars struct{}
 
 type IONamedValue struct {
-	Value int
+	Value int32
 	Name  string
 }
 

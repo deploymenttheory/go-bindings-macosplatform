@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-type MTRAccessControlEntryAuthMode int64
+type MTRAccessControlEntryAuthMode uint8
 
 const (
 	MTRAccessControlEntryAuthModePASE  MTRAccessControlEntryAuthMode = 1
@@ -32,7 +32,7 @@ func (e MTRAccessControlEntryAuthMode) String() string {
 	}
 }
 
-type MTRAccessControlEntryPrivilege int64
+type MTRAccessControlEntryPrivilege uint8
 
 const (
 	MTRAccessControlEntryPrivilegeView       MTRAccessControlEntryPrivilege = 1
@@ -61,7 +61,7 @@ func (e MTRAccessControlEntryPrivilege) String() string {
 	}
 }
 
-type MTRAttributeIDType int64
+type MTRAttributeIDType uint32
 
 const (
 	MTRClusterGlobalAttributeGeneratedCommandListID                                                                     MTRAttributeIDType = 65528
@@ -3396,7 +3396,7 @@ func (e MTRAttributeIDType) String() string {
 	}
 }
 
-type MTRClusterIDType int64
+type MTRClusterIDType uint32
 
 const (
 	MTRClusterIdentifyID                                                    MTRClusterIDType = 3
@@ -3821,7 +3821,7 @@ func (e MTRClusterIDType) String() string {
 	}
 }
 
-type MTRCommandIDType int64
+type MTRCommandIDType uint32
 
 const (
 	MTRClusterIdentifyCommandIdentifyID                                                                 MTRCommandIDType = 0
@@ -4620,7 +4620,7 @@ func (e MTRDiscoveryCapabilities) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTREventIDType int64
+type MTREventIDType uint32
 
 const (
 	MTRClusterAccessControlEventAccessControlEntryChangedID                          MTREventIDType = 0
@@ -4884,7 +4884,7 @@ func (e MTRLogType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRNetworkCommissioningFeature int64
+type MTRNetworkCommissioningFeature uint32
 
 const (
 	MTRNetworkCommissioningFeatureWiFiNetworkInterface     MTRNetworkCommissioningFeature = 1
@@ -5056,7 +5056,7 @@ func (e MTRStorageSharingType) String() string {
 	}
 }
 
-type MTRTransportType int64
+type MTRTransportType uint8
 
 const (
 	MTRTransportTypeUndefined MTRTransportType = 0
@@ -5082,7 +5082,7 @@ func (e MTRTransportType) String() string {
 	}
 }
 
-type EntryID int64
+type EntryID int32
 
 const (
 	EntryIDFirstEntry EntryID = 0
@@ -5105,7 +5105,7 @@ func (e EntryID) String() string {
 	}
 }
 
-type Flag int64
+type Flag int32
 
 const (
 	FlagFlagDeferInherit      Flag = 1
@@ -5140,7 +5140,7 @@ func (e Flag) String() string {
 	}
 }
 
-type Perm int64
+type Perm int32
 
 const (
 	PermReadData           Perm = 2
@@ -5200,7 +5200,7 @@ func (e Perm) String() string {
 	}
 }
 
-type Tag int64
+type Tag int32
 
 const (
 	TagUndefinedTag  Tag = 0
@@ -5223,7 +5223,7 @@ func (e Tag) String() string {
 	}
 }
 
-type Type int64
+type Type int32
 
 const (
 	TypeExtended Type = 256
@@ -5258,7 +5258,7 @@ func (e Type) String() string {
 	}
 }
 
-type Clockid int64
+type Clockid int32
 
 const (
 	ClockidRealtime           Clockid = 0
@@ -5359,7 +5359,7 @@ func (e DispatchBlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -5397,7 +5397,7 @@ func (e FilesecProperty) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -5420,7 +5420,7 @@ func (e Idtype) String() string {
 	}
 }
 
-type IpcInfoObjectType int64
+type IpcInfoObjectType uint32
 
 const (
 	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
@@ -5602,7 +5602,7 @@ func (e IpcInfoObjectType) String() string {
 	}
 }
 
-type LaunchDataType int64
+type LaunchDataType int32
 
 const (
 	LaunchDataTypeDictionary LaunchDataType = 1
@@ -5647,7 +5647,7 @@ func (e LaunchDataType) String() string {
 }
 
 // These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -5667,7 +5667,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -5690,7 +5690,7 @@ func (e MDQueryOptionFlags) String() string {
 	}
 }
 
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -5707,7 +5707,7 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
-type MTRAccessControlAccessRestrictionType int64
+type MTRAccessControlAccessRestrictionType uint8
 
 const (
 	MTRAccessControlAccessRestrictionTypeAttributeAccessForbidden MTRAccessControlAccessRestrictionType = 0
@@ -5733,7 +5733,7 @@ func (e MTRAccessControlAccessRestrictionType) String() string {
 	}
 }
 
-type MTRAccessControlAuthMode int64
+type MTRAccessControlAuthMode uint8
 
 const (
 	MTRAccessControlAuthModePASE  MTRAccessControlAuthMode = 1
@@ -5756,7 +5756,7 @@ func (e MTRAccessControlAuthMode) String() string {
 	}
 }
 
-type MTRAccessControlChangeType int64
+type MTRAccessControlChangeType uint8
 
 const (
 	MTRAccessControlChangeTypeChanged MTRAccessControlChangeType = 0
@@ -5780,7 +5780,7 @@ func (e MTRAccessControlChangeType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRAccessControlFeature int64
+type MTRAccessControlFeature uint32
 
 const (
 	MTRAccessControlFeatureExtension     MTRAccessControlFeature = 1
@@ -5803,7 +5803,7 @@ func (e MTRAccessControlFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRAccessControlPrivilege int64
+type MTRAccessControlPrivilege uint8
 
 const (
 	MTRAccessControlPrivilegeView       MTRAccessControlPrivilege = 1
@@ -5832,7 +5832,7 @@ func (e MTRAccessControlPrivilege) String() string {
 	}
 }
 
-type MTRActionsActionError int64
+type MTRActionsActionError uint8
 
 const (
 	MTRActionsActionErrorUnknown     MTRActionsActionError = 0
@@ -5852,7 +5852,7 @@ func (e MTRActionsActionError) String() string {
 	}
 }
 
-type MTRActionsActionState int64
+type MTRActionsActionState uint8
 
 const (
 	MTRActionsActionStateInactive MTRActionsActionState = 0
@@ -5878,7 +5878,7 @@ func (e MTRActionsActionState) String() string {
 	}
 }
 
-type MTRActionsActionType int64
+type MTRActionsActionType uint8
 
 const (
 	MTRActionsActionTypeOther        MTRActionsActionType = 0
@@ -5914,7 +5914,7 @@ func (e MTRActionsActionType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRActionsCommandBits int64
+type MTRActionsCommandBits uint16
 
 const (
 	MTRActionsCommandBitsInstantAction               MTRActionsCommandBits = 1
@@ -5977,7 +5977,7 @@ func (e MTRActionsCommandBits) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRActionsEndpointListType int64
+type MTRActionsEndpointListType uint8
 
 const (
 	MTRActionsEndpointListTypeOther MTRActionsEndpointListType = 0
@@ -6000,7 +6000,7 @@ func (e MTRActionsEndpointListType) String() string {
 	}
 }
 
-type MTRActivatedCarbonFilterMonitoringChangeIndication int64
+type MTRActivatedCarbonFilterMonitoringChangeIndication uint8
 
 const (
 	MTRActivatedCarbonFilterMonitoringChangeIndicationOK       MTRActivatedCarbonFilterMonitoringChangeIndication = 0
@@ -6023,7 +6023,7 @@ func (e MTRActivatedCarbonFilterMonitoringChangeIndication) String() string {
 	}
 }
 
-type MTRActivatedCarbonFilterMonitoringDegradationDirection int64
+type MTRActivatedCarbonFilterMonitoringDegradationDirection uint8
 
 const (
 	MTRActivatedCarbonFilterMonitoringDegradationDirectionUp   MTRActivatedCarbonFilterMonitoringDegradationDirection = 0
@@ -6044,7 +6044,7 @@ func (e MTRActivatedCarbonFilterMonitoringDegradationDirection) String() string 
 }
 
 // Bitmask — values may be combined with |.
-type MTRActivatedCarbonFilterMonitoringFeature int64
+type MTRActivatedCarbonFilterMonitoringFeature uint32
 
 const (
 	MTRActivatedCarbonFilterMonitoringFeatureCondition              MTRActivatedCarbonFilterMonitoringFeature = 1
@@ -6071,7 +6071,7 @@ func (e MTRActivatedCarbonFilterMonitoringFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRActivatedCarbonFilterMonitoringProductIdentifierType int64
+type MTRActivatedCarbonFilterMonitoringProductIdentifierType uint8
 
 const (
 	MTRActivatedCarbonFilterMonitoringProductIdentifierTypeUPC    MTRActivatedCarbonFilterMonitoringProductIdentifierType = 0
@@ -6100,7 +6100,7 @@ func (e MTRActivatedCarbonFilterMonitoringProductIdentifierType) String() string
 	}
 }
 
-type MTRAdministratorCommissioningCommissioningWindowStatus int64
+type MTRAdministratorCommissioningCommissioningWindowStatus uint8
 
 const (
 	MTRAdministratorCommissioningCommissioningWindowStatusWindowNotOpen      MTRAdministratorCommissioningCommissioningWindowStatus = 0
@@ -6124,7 +6124,7 @@ func (e MTRAdministratorCommissioningCommissioningWindowStatus) String() string 
 }
 
 // Bitmask — values may be combined with |.
-type MTRAdministratorCommissioningFeature int64
+type MTRAdministratorCommissioningFeature uint32
 
 const (
 	MTRAdministratorCommissioningFeatureBasic MTRAdministratorCommissioningFeature = 1
@@ -6143,7 +6143,7 @@ func (e MTRAdministratorCommissioningFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRAdministratorCommissioningStatusCode int64
+type MTRAdministratorCommissioningStatusCode uint8
 
 const (
 	MTRAdministratorCommissioningStatusCodeBusy               MTRAdministratorCommissioningStatusCode = 2
@@ -6166,7 +6166,7 @@ func (e MTRAdministratorCommissioningStatusCode) String() string {
 	}
 }
 
-type MTRAirQuality int64
+type MTRAirQuality uint8
 
 const (
 	MTRAirQualityUnknown       MTRAirQuality = 0
@@ -6202,7 +6202,7 @@ func (e MTRAirQuality) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRAirQualityFeature int64
+type MTRAirQualityFeature uint32
 
 const (
 	MTRAirQualityFeatureFair          MTRAirQualityFeature = 1
@@ -6233,7 +6233,7 @@ func (e MTRAirQualityFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRApplicationBasicApplicationStatus int64
+type MTRApplicationBasicApplicationStatus uint8
 
 const (
 	MTRApplicationBasicApplicationStatusStopped               MTRApplicationBasicApplicationStatus = 0
@@ -6260,7 +6260,7 @@ func (e MTRApplicationBasicApplicationStatus) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRApplicationLauncherFeature int64
+type MTRApplicationLauncherFeature uint32
 
 const (
 	MTRApplicationLauncherFeatureApplicationPlatform MTRApplicationLauncherFeature = 1
@@ -6279,7 +6279,7 @@ func (e MTRApplicationLauncherFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRApplicationLauncherStatus int64
+type MTRApplicationLauncherStatus uint8
 
 const (
 	MTRApplicationLauncherStatusSuccess             MTRApplicationLauncherStatus = 0
@@ -6312,7 +6312,7 @@ func (e MTRApplicationLauncherStatus) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRAudioOutputFeature int64
+type MTRAudioOutputFeature uint32
 
 const (
 	MTRAudioOutputFeatureNameUpdates MTRAudioOutputFeature = 1
@@ -6331,7 +6331,7 @@ func (e MTRAudioOutputFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRAudioOutputOutputType int64
+type MTRAudioOutputOutputType uint8
 
 const (
 	MTRAudioOutputOutputTypeHDMI      MTRAudioOutputOutputType = 0
@@ -6365,7 +6365,7 @@ func (e MTRAudioOutputOutputType) String() string {
 	}
 }
 
-type MTRBasicInformationColor int64
+type MTRBasicInformationColor uint8
 
 const (
 	MTRBasicInformationColorBlack   MTRBasicInformationColor = 0
@@ -6442,7 +6442,7 @@ func (e MTRBasicInformationColor) String() string {
 	}
 }
 
-type MTRBasicInformationProductFinish int64
+type MTRBasicInformationProductFinish uint8
 
 const (
 	MTRBasicInformationProductFinishOther    MTRBasicInformationProductFinish = 0
@@ -6475,7 +6475,7 @@ func (e MTRBasicInformationProductFinish) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRBooleanStateConfigurationAlarmModeBitmap int64
+type MTRBooleanStateConfigurationAlarmModeBitmap uint8
 
 const (
 	MTRBooleanStateConfigurationAlarmModeBitmapVisual  MTRBooleanStateConfigurationAlarmModeBitmap = 1
@@ -6499,7 +6499,7 @@ func (e MTRBooleanStateConfigurationAlarmModeBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRBooleanStateConfigurationFeature int64
+type MTRBooleanStateConfigurationFeature uint32
 
 const (
 	MTRBooleanStateConfigurationFeatureVisual           MTRBooleanStateConfigurationFeature = 1
@@ -6531,7 +6531,7 @@ func (e MTRBooleanStateConfigurationFeature) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRBooleanStateConfigurationSensorFaultBitmap int64
+type MTRBooleanStateConfigurationSensorFaultBitmap uint16
 
 const (
 	MTRBooleanStateConfigurationSensorFaultBitmapGeneralFault MTRBooleanStateConfigurationSensorFaultBitmap = 1
@@ -6550,7 +6550,7 @@ func (e MTRBooleanStateConfigurationSensorFaultBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRBridgedDeviceBasicInformationColor int64
+type MTRBridgedDeviceBasicInformationColor uint8
 
 const (
 	MTRBridgedDeviceBasicInformationColorBlack   MTRBridgedDeviceBasicInformationColor = 0
@@ -6628,7 +6628,7 @@ func (e MTRBridgedDeviceBasicInformationColor) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRBridgedDeviceBasicInformationFeature int64
+type MTRBridgedDeviceBasicInformationFeature uint32
 
 const (
 	MTRBridgedDeviceBasicInformationFeatureBridgedICDSupport MTRBridgedDeviceBasicInformationFeature = 1048576
@@ -6647,7 +6647,7 @@ func (e MTRBridgedDeviceBasicInformationFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRBridgedDeviceBasicInformationProductFinish int64
+type MTRBridgedDeviceBasicInformationProductFinish uint8
 
 const (
 	MTRBridgedDeviceBasicInformationProductFinishOther    MTRBridgedDeviceBasicInformationProductFinish = 0
@@ -6680,7 +6680,7 @@ func (e MTRBridgedDeviceBasicInformationProductFinish) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRCarbonDioxideConcentrationMeasurementFeature int64
+type MTRCarbonDioxideConcentrationMeasurementFeature uint32
 
 const (
 	MTRCarbonDioxideConcentrationMeasurementFeatureNumericMeasurement MTRCarbonDioxideConcentrationMeasurementFeature = 1
@@ -6719,7 +6719,7 @@ func (e MTRCarbonDioxideConcentrationMeasurementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRCarbonDioxideConcentrationMeasurementLevelValue int64
+type MTRCarbonDioxideConcentrationMeasurementLevelValue uint8
 
 const (
 	MTRCarbonDioxideConcentrationMeasurementLevelValueUnknown  MTRCarbonDioxideConcentrationMeasurementLevelValue = 0
@@ -6748,7 +6748,7 @@ func (e MTRCarbonDioxideConcentrationMeasurementLevelValue) String() string {
 	}
 }
 
-type MTRCarbonDioxideConcentrationMeasurementMeasurementMedium int64
+type MTRCarbonDioxideConcentrationMeasurementMeasurementMedium uint8
 
 const (
 	MTRCarbonDioxideConcentrationMeasurementMeasurementMediumAir   MTRCarbonDioxideConcentrationMeasurementMeasurementMedium = 0
@@ -6771,7 +6771,7 @@ func (e MTRCarbonDioxideConcentrationMeasurementMeasurementMedium) String() stri
 	}
 }
 
-type MTRCarbonDioxideConcentrationMeasurementMeasurementUnit int64
+type MTRCarbonDioxideConcentrationMeasurementMeasurementUnit uint8
 
 const (
 	MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPPM  MTRCarbonDioxideConcentrationMeasurementMeasurementUnit = 0
@@ -6810,7 +6810,7 @@ func (e MTRCarbonDioxideConcentrationMeasurementMeasurementUnit) String() string
 }
 
 // Bitmask — values may be combined with |.
-type MTRCarbonMonoxideConcentrationMeasurementFeature int64
+type MTRCarbonMonoxideConcentrationMeasurementFeature uint32
 
 const (
 	MTRCarbonMonoxideConcentrationMeasurementFeatureNumericMeasurement MTRCarbonMonoxideConcentrationMeasurementFeature = 1
@@ -6849,7 +6849,7 @@ func (e MTRCarbonMonoxideConcentrationMeasurementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRCarbonMonoxideConcentrationMeasurementLevelValue int64
+type MTRCarbonMonoxideConcentrationMeasurementLevelValue uint8
 
 const (
 	MTRCarbonMonoxideConcentrationMeasurementLevelValueUnknown  MTRCarbonMonoxideConcentrationMeasurementLevelValue = 0
@@ -6878,7 +6878,7 @@ func (e MTRCarbonMonoxideConcentrationMeasurementLevelValue) String() string {
 	}
 }
 
-type MTRCarbonMonoxideConcentrationMeasurementMeasurementMedium int64
+type MTRCarbonMonoxideConcentrationMeasurementMeasurementMedium uint8
 
 const (
 	MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumAir   MTRCarbonMonoxideConcentrationMeasurementMeasurementMedium = 0
@@ -6901,7 +6901,7 @@ func (e MTRCarbonMonoxideConcentrationMeasurementMeasurementMedium) String() str
 	}
 }
 
-type MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit int64
+type MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit uint8
 
 const (
 	MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPPM  MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit = 0
@@ -6940,7 +6940,7 @@ func (e MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit) String() strin
 }
 
 // Bitmask — values may be combined with |.
-type MTRChannelFeature int64
+type MTRChannelFeature uint32
 
 const (
 	MTRChannelFeatureChannelList     MTRChannelFeature = 1
@@ -6971,7 +6971,7 @@ func (e MTRChannelFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRChannelLineupInfoType int64
+type MTRChannelLineupInfoType uint8
 
 const (
 	MTRChannelLineupInfoTypeMSO MTRChannelLineupInfoType = 0
@@ -6990,7 +6990,7 @@ func (e MTRChannelLineupInfoType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRChannelRecordingFlagBitmap int64
+type MTRChannelRecordingFlagBitmap uint32
 
 const (
 	MTRChannelRecordingFlagBitmapScheduled    MTRChannelRecordingFlagBitmap = 1
@@ -7017,7 +7017,7 @@ func (e MTRChannelRecordingFlagBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRChannelStatus int64
+type MTRChannelStatus uint8
 
 const (
 	MTRChannelStatusSuccess         MTRChannelStatus = 0
@@ -7040,7 +7040,7 @@ func (e MTRChannelStatus) String() string {
 	}
 }
 
-type MTRChannelType int64
+type MTRChannelType uint8
 
 const (
 	MTRChannelTypeSatellite   MTRChannelType = 0
@@ -7067,7 +7067,7 @@ func (e MTRChannelType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRColorControlColorCapabilities int64
+type MTRColorControlColorCapabilities uint16
 
 const (
 	MTRColorControlColorCapabilitiesHueSaturationSupported    MTRColorControlColorCapabilities = 1
@@ -7103,7 +7103,7 @@ func (e MTRColorControlColorCapabilities) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRColorControlColorCapabilitiesBitmap int64
+type MTRColorControlColorCapabilitiesBitmap uint16
 
 const (
 	MTRColorControlColorCapabilitiesBitmapHueSaturation    MTRColorControlColorCapabilitiesBitmap = 1
@@ -7138,7 +7138,7 @@ func (e MTRColorControlColorCapabilitiesBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRColorControlColorLoopAction int64
+type MTRColorControlColorLoopAction uint8
 
 const (
 	MTRColorControlColorLoopActionDeactivate                            MTRColorControlColorLoopAction = 0
@@ -7161,7 +7161,7 @@ func (e MTRColorControlColorLoopAction) String() string {
 	}
 }
 
-type MTRColorControlColorLoopDirection int64
+type MTRColorControlColorLoopDirection uint8
 
 const (
 	MTRColorControlColorLoopDirectionDecrement    MTRColorControlColorLoopDirection = 0
@@ -7184,7 +7184,7 @@ func (e MTRColorControlColorLoopDirection) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRColorControlColorLoopUpdateFlags int64
+type MTRColorControlColorLoopUpdateFlags uint8
 
 const (
 	MTRColorControlColorLoopUpdateFlagsUpdateAction    MTRColorControlColorLoopUpdateFlags = 1
@@ -7215,7 +7215,7 @@ func (e MTRColorControlColorLoopUpdateFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRColorControlColorMode int64
+type MTRColorControlColorMode uint8
 
 const (
 	MTRColorControlColorModeCurrentHueAndCurrentSaturation MTRColorControlColorMode = 0
@@ -7239,7 +7239,7 @@ func (e MTRColorControlColorMode) String() string {
 	}
 }
 
-type MTRColorControlDirection int64
+type MTRColorControlDirection uint8
 
 const (
 	MTRColorControlDirectionShortest MTRColorControlDirection = 0
@@ -7265,7 +7265,7 @@ func (e MTRColorControlDirection) String() string {
 	}
 }
 
-type MTRColorControlDriftCompensation int64
+type MTRColorControlDriftCompensation uint8
 
 const (
 	MTRColorControlDriftCompensationNone                                  MTRColorControlDriftCompensation = 0
@@ -7294,7 +7294,7 @@ func (e MTRColorControlDriftCompensation) String() string {
 	}
 }
 
-type MTRColorControlEnhancedColorMode int64
+type MTRColorControlEnhancedColorMode uint8
 
 const (
 	MTRColorControlEnhancedColorModeCurrentHueAndCurrentSaturation         MTRColorControlEnhancedColorMode = 0
@@ -7321,7 +7321,7 @@ func (e MTRColorControlEnhancedColorMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRColorControlFeature int64
+type MTRColorControlFeature uint32
 
 const (
 	MTRColorControlFeatureHueAndSaturation MTRColorControlFeature = 1
@@ -7356,7 +7356,7 @@ func (e MTRColorControlFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRColorControlHueDirection int64
+type MTRColorControlHueDirection uint8
 
 const (
 	MTRColorControlHueDirectionShortestDistance MTRColorControlHueDirection = 0
@@ -7382,7 +7382,7 @@ func (e MTRColorControlHueDirection) String() string {
 	}
 }
 
-type MTRColorControlHueMoveMode int64
+type MTRColorControlHueMoveMode uint8
 
 const (
 	MTRColorControlHueMoveModeStop MTRColorControlHueMoveMode = 0
@@ -7405,7 +7405,7 @@ func (e MTRColorControlHueMoveMode) String() string {
 	}
 }
 
-type MTRColorControlHueStepMode int64
+type MTRColorControlHueStepMode uint8
 
 const (
 	MTRColorControlHueStepModeUp   MTRColorControlHueStepMode = 1
@@ -7425,7 +7425,7 @@ func (e MTRColorControlHueStepMode) String() string {
 	}
 }
 
-type MTRColorControlMoveMode int64
+type MTRColorControlMoveMode uint8
 
 const (
 	MTRColorControlMoveModeStop MTRColorControlMoveMode = 0
@@ -7449,7 +7449,7 @@ func (e MTRColorControlMoveMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRColorControlOptionsBitmap int64
+type MTRColorControlOptionsBitmap uint8
 
 const (
 	MTRColorControlOptionsBitmapExecuteIfOff MTRColorControlOptionsBitmap = 1
@@ -7468,7 +7468,7 @@ func (e MTRColorControlOptionsBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRColorControlSaturationMoveMode int64
+type MTRColorControlSaturationMoveMode uint8
 
 const (
 	MTRColorControlSaturationMoveModeStop MTRColorControlSaturationMoveMode = 0
@@ -7491,7 +7491,7 @@ func (e MTRColorControlSaturationMoveMode) String() string {
 	}
 }
 
-type MTRColorControlSaturationStepMode int64
+type MTRColorControlSaturationStepMode uint8
 
 const (
 	MTRColorControlSaturationStepModeUp   MTRColorControlSaturationStepMode = 1
@@ -7511,7 +7511,7 @@ func (e MTRColorControlSaturationStepMode) String() string {
 	}
 }
 
-type MTRColorControlStepMode int64
+type MTRColorControlStepMode uint8
 
 const (
 	MTRColorControlStepModeUp   MTRColorControlStepMode = 1
@@ -7532,7 +7532,7 @@ func (e MTRColorControlStepMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRColorControlUpdateFlagsBitmap int64
+type MTRColorControlUpdateFlagsBitmap uint8
 
 const (
 	MTRColorControlUpdateFlagsBitmapUpdateAction    MTRColorControlUpdateFlagsBitmap = 1
@@ -7564,7 +7564,7 @@ func (e MTRColorControlUpdateFlagsBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRCommissionerControlSupportedDeviceCategoryBitmap int64
+type MTRCommissionerControlSupportedDeviceCategoryBitmap uint32
 
 const (
 	MTRCommissionerControlSupportedDeviceCategoryBitmapFabricSynchronization MTRCommissionerControlSupportedDeviceCategoryBitmap = 1
@@ -7583,7 +7583,7 @@ func (e MTRCommissionerControlSupportedDeviceCategoryBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRContentAppObserverStatus int64
+type MTRContentAppObserverStatus uint8
 
 const (
 	MTRContentAppObserverStatusSuccess        MTRContentAppObserverStatus = 0
@@ -7603,7 +7603,7 @@ func (e MTRContentAppObserverStatus) String() string {
 	}
 }
 
-type MTRContentLauncherContentLaunchStatus int64
+type MTRContentLauncherContentLaunchStatus uint8
 
 const (
 	MTRContentLauncherContentLaunchStatusSuccess         MTRContentLauncherContentLaunchStatus = 0
@@ -7627,7 +7627,7 @@ func (e MTRContentLauncherContentLaunchStatus) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRContentLauncherFeature int64
+type MTRContentLauncherFeature uint32
 
 const (
 	MTRContentLauncherFeatureContentSearch MTRContentLauncherFeature = 1
@@ -7662,7 +7662,7 @@ func (e MTRContentLauncherFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRContentLauncherMetricType int64
+type MTRContentLauncherMetricType uint8
 
 const (
 	MTRContentLauncherMetricTypePixels     MTRContentLauncherMetricType = 0
@@ -7684,7 +7684,7 @@ func (e MTRContentLauncherMetricType) String() string {
 	}
 }
 
-type MTRContentLauncherParameter int64
+type MTRContentLauncherParameter uint8
 
 const (
 	MTRContentLauncherParameterActor      MTRContentLauncherParameter = 0
@@ -7749,7 +7749,7 @@ func (e MTRContentLauncherParameter) String() string {
 	}
 }
 
-type MTRContentLauncherStatus int64
+type MTRContentLauncherStatus uint8
 
 const (
 	MTRContentLauncherStatusSuccess                MTRContentLauncherStatus = 0
@@ -7779,7 +7779,7 @@ func (e MTRContentLauncherStatus) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRContentLauncherSupportedProtocolsBitmap int64
+type MTRContentLauncherSupportedProtocolsBitmap uint32
 
 const (
 	MTRContentLauncherSupportedProtocolsBitmapDASH MTRContentLauncherSupportedProtocolsBitmap = 1
@@ -7803,7 +7803,7 @@ func (e MTRContentLauncherSupportedProtocolsBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRContentLauncherSupportedStreamingProtocol int64
+type MTRContentLauncherSupportedStreamingProtocol uint32
 
 const (
 	MTRContentLauncherSupportedStreamingProtocolDASH MTRContentLauncherSupportedStreamingProtocol = 1
@@ -7826,7 +7826,7 @@ func (e MTRContentLauncherSupportedStreamingProtocol) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRDataTypeAtomicRequestTypeEnum int64
+type MTRDataTypeAtomicRequestTypeEnum uint8
 
 const (
 	MTRDataTypeAtomicRequestTypeEnumBeginWrite    MTRDataTypeAtomicRequestTypeEnum = 0
@@ -7849,7 +7849,7 @@ func (e MTRDataTypeAtomicRequestTypeEnum) String() string {
 	}
 }
 
-type MTRDataTypeLandmarkTag int64
+type MTRDataTypeLandmarkTag uint8
 
 const (
 	MTRDataTypeLandmarkTagAirConditioner MTRDataTypeLandmarkTag = 0
@@ -8016,7 +8016,7 @@ func (e MTRDataTypeLandmarkTag) String() string {
 	}
 }
 
-type MTRDataTypePositionTag int64
+type MTRDataTypePositionTag uint8
 
 const (
 	MTRDataTypePositionTagLeft   MTRDataTypePositionTag = 0
@@ -8051,7 +8051,7 @@ func (e MTRDataTypePositionTag) String() string {
 	}
 }
 
-type MTRDataTypeRelativePositionTag int64
+type MTRDataTypeRelativePositionTag uint8
 
 const (
 	MTRDataTypeRelativePositionTagUnder   MTRDataTypeRelativePositionTag = 0
@@ -8086,7 +8086,7 @@ func (e MTRDataTypeRelativePositionTag) String() string {
 	}
 }
 
-type MTRDeviceEnergyManagementAdjustmentCause int64
+type MTRDeviceEnergyManagementAdjustmentCause uint8
 
 const (
 	MTRDeviceEnergyManagementAdjustmentCauseLocalOptimization MTRDeviceEnergyManagementAdjustmentCause = 0
@@ -8106,7 +8106,7 @@ func (e MTRDeviceEnergyManagementAdjustmentCause) String() string {
 	}
 }
 
-type MTRDeviceEnergyManagementCause int64
+type MTRDeviceEnergyManagementCause uint8
 
 const (
 	MTRDeviceEnergyManagementCauseNormalCompletion MTRDeviceEnergyManagementCause = 0
@@ -8135,7 +8135,7 @@ func (e MTRDeviceEnergyManagementCause) String() string {
 	}
 }
 
-type MTRDeviceEnergyManagementCostType int64
+type MTRDeviceEnergyManagementCostType uint8
 
 const (
 	MTRDeviceEnergyManagementCostTypeFinancial    MTRDeviceEnergyManagementCostType = 0
@@ -8161,7 +8161,7 @@ func (e MTRDeviceEnergyManagementCostType) String() string {
 	}
 }
 
-type MTRDeviceEnergyManagementESAState int64
+type MTRDeviceEnergyManagementESAState uint8
 
 const (
 	MTRDeviceEnergyManagementESAStateOffline           MTRDeviceEnergyManagementESAState = 0
@@ -8190,7 +8190,7 @@ func (e MTRDeviceEnergyManagementESAState) String() string {
 	}
 }
 
-type MTRDeviceEnergyManagementESAType int64
+type MTRDeviceEnergyManagementESAType uint8
 
 const (
 	MTRDeviceEnergyManagementESATypeEVSE                MTRDeviceEnergyManagementESAType = 0
@@ -8250,7 +8250,7 @@ func (e MTRDeviceEnergyManagementESAType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDeviceEnergyManagementFeature int64
+type MTRDeviceEnergyManagementFeature uint32
 
 const (
 	MTRDeviceEnergyManagementFeaturePowerAdjustment           MTRDeviceEnergyManagementFeature = 1
@@ -8293,7 +8293,7 @@ func (e MTRDeviceEnergyManagementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRDeviceEnergyManagementForecastUpdateReason int64
+type MTRDeviceEnergyManagementForecastUpdateReason uint8
 
 const (
 	MTRDeviceEnergyManagementForecastUpdateReasonInternalOptimization MTRDeviceEnergyManagementForecastUpdateReason = 0
@@ -8316,7 +8316,7 @@ func (e MTRDeviceEnergyManagementForecastUpdateReason) String() string {
 	}
 }
 
-type MTRDeviceEnergyManagementModeModeTag int64
+type MTRDeviceEnergyManagementModeModeTag uint16
 
 const (
 	MTRDeviceEnergyManagementModeModeTagAuto               MTRDeviceEnergyManagementModeModeTag = 0
@@ -8372,7 +8372,7 @@ func (e MTRDeviceEnergyManagementModeModeTag) String() string {
 	}
 }
 
-type MTRDeviceEnergyManagementOptOutState int64
+type MTRDeviceEnergyManagementOptOutState uint8
 
 const (
 	MTRDeviceEnergyManagementOptOutStateNoOptOut    MTRDeviceEnergyManagementOptOutState = 0
@@ -8398,7 +8398,7 @@ func (e MTRDeviceEnergyManagementOptOutState) String() string {
 	}
 }
 
-type MTRDeviceEnergyManagementPowerAdjustReason int64
+type MTRDeviceEnergyManagementPowerAdjustReason uint8
 
 const (
 	MTRDeviceEnergyManagementPowerAdjustReasonNoAdjustment                MTRDeviceEnergyManagementPowerAdjustReason = 0
@@ -8421,7 +8421,7 @@ func (e MTRDeviceEnergyManagementPowerAdjustReason) String() string {
 	}
 }
 
-type MTRDeviceTypeIDType int64
+type MTRDeviceTypeIDType uint32
 
 const (
 	MTRDeviceTypeIDTypeDoorLockID                     MTRDeviceTypeIDType = 10
@@ -8642,7 +8642,7 @@ func (e MTRDeviceTypeIDType) String() string {
 	}
 }
 
-type MTRDiagnosticLogsIntent int64
+type MTRDiagnosticLogsIntent uint8
 
 const (
 	MTRDiagnosticLogsIntentEndUserSupport MTRDiagnosticLogsIntent = 0
@@ -8665,7 +8665,7 @@ func (e MTRDiagnosticLogsIntent) String() string {
 	}
 }
 
-type MTRDiagnosticLogsLogsIntent int64
+type MTRDiagnosticLogsLogsIntent uint8
 
 const (
 	MTRDiagnosticLogsLogsIntentEndUserSupport MTRDiagnosticLogsLogsIntent = 0
@@ -8688,7 +8688,7 @@ func (e MTRDiagnosticLogsLogsIntent) String() string {
 	}
 }
 
-type MTRDiagnosticLogsLogsStatus int64
+type MTRDiagnosticLogsLogsStatus uint8
 
 const (
 	MTRDiagnosticLogsLogsStatusSuccess   MTRDiagnosticLogsLogsStatus = 0
@@ -8717,7 +8717,7 @@ func (e MTRDiagnosticLogsLogsStatus) String() string {
 	}
 }
 
-type MTRDiagnosticLogsLogsTransferProtocol int64
+type MTRDiagnosticLogsLogsTransferProtocol uint8
 
 const (
 	MTRDiagnosticLogsLogsTransferProtocolResponsePayload MTRDiagnosticLogsLogsTransferProtocol = 0
@@ -8737,7 +8737,7 @@ func (e MTRDiagnosticLogsLogsTransferProtocol) String() string {
 	}
 }
 
-type MTRDiagnosticLogsStatus int64
+type MTRDiagnosticLogsStatus uint8
 
 const (
 	MTRDiagnosticLogsStatusSuccess   MTRDiagnosticLogsStatus = 0
@@ -8766,7 +8766,7 @@ func (e MTRDiagnosticLogsStatus) String() string {
 	}
 }
 
-type MTRDiagnosticLogsTransferProtocol int64
+type MTRDiagnosticLogsTransferProtocol uint8
 
 const (
 	MTRDiagnosticLogsTransferProtocolResponsePayload MTRDiagnosticLogsTransferProtocol = 0
@@ -8787,7 +8787,7 @@ func (e MTRDiagnosticLogsTransferProtocol) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDishwasherAlarmAlarmBitmap int64
+type MTRDishwasherAlarmAlarmBitmap uint32
 
 const (
 	MTRDishwasherAlarmAlarmBitmapDoorError MTRDishwasherAlarmAlarmBitmap = 4
@@ -8807,7 +8807,7 @@ func (e MTRDishwasherAlarmAlarmBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDishwasherAlarmFeature int64
+type MTRDishwasherAlarmFeature uint32
 
 const (
 	MTRDishwasherAlarmFeatureReset MTRDishwasherAlarmFeature = 1
@@ -8826,7 +8826,7 @@ func (e MTRDishwasherAlarmFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRDishwasherModeModeTag int64
+type MTRDishwasherModeModeTag uint16
 
 const (
 	MTRDishwasherModeModeTagAuto      MTRDishwasherModeModeTag = 0
@@ -8879,7 +8879,7 @@ func (e MTRDishwasherModeModeTag) String() string {
 	}
 }
 
-type MTRDoorLockAlarmCode int64
+type MTRDoorLockAlarmCode uint8
 
 const (
 	MTRDoorLockAlarmCodeLockJammed              MTRDoorLockAlarmCode = 0
@@ -8917,7 +8917,7 @@ func (e MTRDoorLockAlarmCode) String() string {
 	}
 }
 
-type MTRDoorLockCredentialRule int64
+type MTRDoorLockCredentialRule uint8
 
 const (
 	MTRDoorLockCredentialRuleSingle MTRDoorLockCredentialRule = 0
@@ -8940,7 +8940,7 @@ func (e MTRDoorLockCredentialRule) String() string {
 	}
 }
 
-type MTRDoorLockCredentialType int64
+type MTRDoorLockCredentialType uint8
 
 const (
 	MTRDoorLockCredentialTypeProgrammingPIN               MTRDoorLockCredentialType = 0
@@ -8981,7 +8981,7 @@ func (e MTRDoorLockCredentialType) String() string {
 	}
 }
 
-type MTRDoorLockDataOperationType int64
+type MTRDoorLockDataOperationType uint8
 
 const (
 	MTRDoorLockDataOperationTypeAdd    MTRDoorLockDataOperationType = 0
@@ -9005,7 +9005,7 @@ func (e MTRDoorLockDataOperationType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDayOfWeek int64
+type MTRDoorLockDayOfWeek uint8
 
 const (
 	MTRDoorLockDayOfWeekSunday    MTRDoorLockDayOfWeek = 1
@@ -9049,7 +9049,7 @@ func (e MTRDoorLockDayOfWeek) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDaysMaskMap int64
+type MTRDoorLockDaysMaskMap uint8
 
 const (
 	MTRDoorLockDaysMaskMapSunday    MTRDoorLockDaysMaskMap = 1
@@ -9092,7 +9092,7 @@ func (e MTRDoorLockDaysMaskMap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRDoorLockDlAlarmCode int64
+type MTRDoorLockDlAlarmCode uint8
 
 const (
 	MTRDoorLockDlAlarmCodeLockJammed              MTRDoorLockDlAlarmCode = 0
@@ -9130,7 +9130,7 @@ func (e MTRDoorLockDlAlarmCode) String() string {
 	}
 }
 
-type MTRDoorLockDlCredentialRule int64
+type MTRDoorLockDlCredentialRule uint8
 
 const (
 	MTRDoorLockDlCredentialRuleSingle MTRDoorLockDlCredentialRule = 0
@@ -9151,7 +9151,7 @@ func (e MTRDoorLockDlCredentialRule) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDlCredentialRuleMask int64
+type MTRDoorLockDlCredentialRuleMask uint8
 
 const (
 	MTRDoorLockDlCredentialRuleMaskSingle MTRDoorLockDlCredentialRuleMask = 1
@@ -9179,7 +9179,7 @@ func (e MTRDoorLockDlCredentialRuleMask) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDlCredentialRulesSupport int64
+type MTRDoorLockDlCredentialRulesSupport uint8
 
 const (
 	MTRDoorLockDlCredentialRulesSupportSingle MTRDoorLockDlCredentialRulesSupport = 1
@@ -9206,7 +9206,7 @@ func (e MTRDoorLockDlCredentialRulesSupport) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRDoorLockDlCredentialType int64
+type MTRDoorLockDlCredentialType uint8
 
 const (
 	MTRDoorLockDlCredentialTypeProgrammingPIN MTRDoorLockDlCredentialType = 0
@@ -9238,7 +9238,7 @@ func (e MTRDoorLockDlCredentialType) String() string {
 	}
 }
 
-type MTRDoorLockDlDataOperationType int64
+type MTRDoorLockDlDataOperationType uint8
 
 const (
 	MTRDoorLockDlDataOperationTypeAdd    MTRDoorLockDlDataOperationType = 0
@@ -9262,7 +9262,7 @@ func (e MTRDoorLockDlDataOperationType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDlDaysMaskMap int64
+type MTRDoorLockDlDaysMaskMap uint8
 
 const (
 	MTRDoorLockDlDaysMaskMapSunday    MTRDoorLockDlDaysMaskMap = 1
@@ -9306,7 +9306,7 @@ func (e MTRDoorLockDlDaysMaskMap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDlDefaultConfigurationRegister int64
+type MTRDoorLockDlDefaultConfigurationRegister uint16
 
 const (
 	MTRDoorLockDlDefaultConfigurationRegisterEnableLocalProgrammingEnabled         MTRDoorLockDlDefaultConfigurationRegister = 1
@@ -9345,7 +9345,7 @@ func (e MTRDoorLockDlDefaultConfigurationRegister) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRDoorLockDlDoorState int64
+type MTRDoorLockDlDoorState uint8
 
 const (
 	MTRDoorLockDlDoorStateDoorOpen             MTRDoorLockDlDoorState = 0
@@ -9378,7 +9378,7 @@ func (e MTRDoorLockDlDoorState) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDlKeypadOperationEventMask int64
+type MTRDoorLockDlKeypadOperationEventMask uint16
 
 const (
 	MTRDoorLockDlKeypadOperationEventMaskUnknown               MTRDoorLockDlKeypadOperationEventMask = 1
@@ -9426,7 +9426,7 @@ func (e MTRDoorLockDlKeypadOperationEventMask) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDlKeypadProgrammingEventMask int64
+type MTRDoorLockDlKeypadProgrammingEventMask uint16
 
 const (
 	MTRDoorLockDlKeypadProgrammingEventMaskUnknown               MTRDoorLockDlKeypadProgrammingEventMask = 1
@@ -9462,7 +9462,7 @@ func (e MTRDoorLockDlKeypadProgrammingEventMask) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDlLocalProgrammingFeatures int64
+type MTRDoorLockDlLocalProgrammingFeatures uint8
 
 const (
 	MTRDoorLockDlLocalProgrammingFeaturesAddUsersCredentialsSchedulesLocally    MTRDoorLockDlLocalProgrammingFeatures = 1
@@ -9493,7 +9493,7 @@ func (e MTRDoorLockDlLocalProgrammingFeatures) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRDoorLockDlLockDataType int64
+type MTRDoorLockDlLockDataType uint8
 
 const (
 	MTRDoorLockDlLockDataTypeUnspecified     MTRDoorLockDlLockDataType = 0
@@ -9534,7 +9534,7 @@ func (e MTRDoorLockDlLockDataType) String() string {
 	}
 }
 
-type MTRDoorLockDlLockOperationType int64
+type MTRDoorLockDlLockOperationType uint8
 
 const (
 	MTRDoorLockDlLockOperationTypeLock               MTRDoorLockDlLockOperationType = 0
@@ -9560,7 +9560,7 @@ func (e MTRDoorLockDlLockOperationType) String() string {
 	}
 }
 
-type MTRDoorLockDlLockState int64
+type MTRDoorLockDlLockState uint8
 
 const (
 	MTRDoorLockDlLockStateNotFullyLocked MTRDoorLockDlLockState = 0
@@ -9586,7 +9586,7 @@ func (e MTRDoorLockDlLockState) String() string {
 	}
 }
 
-type MTRDoorLockDlLockType int64
+type MTRDoorLockDlLockType uint8
 
 const (
 	MTRDoorLockDlLockTypeDeadBolt           MTRDoorLockDlLockType = 0
@@ -9637,7 +9637,7 @@ func (e MTRDoorLockDlLockType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDlManualOperationEventMask int64
+type MTRDoorLockDlManualOperationEventMask uint16
 
 const (
 	MTRDoorLockDlManualOperationEventMaskUnknown         MTRDoorLockDlManualOperationEventMask = 1
@@ -9696,7 +9696,7 @@ func (e MTRDoorLockDlManualOperationEventMask) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRDoorLockDlOperatingMode int64
+type MTRDoorLockDlOperatingMode uint8
 
 const (
 	MTRDoorLockDlOperatingModeNormal             MTRDoorLockDlOperatingMode = 0
@@ -9725,7 +9725,7 @@ func (e MTRDoorLockDlOperatingMode) String() string {
 	}
 }
 
-type MTRDoorLockDlOperationError int64
+type MTRDoorLockDlOperationError uint8
 
 const (
 	MTRDoorLockDlOperationErrorUnspecified         MTRDoorLockDlOperationError = 0
@@ -9754,7 +9754,7 @@ func (e MTRDoorLockDlOperationError) String() string {
 	}
 }
 
-type MTRDoorLockDlOperationSource int64
+type MTRDoorLockDlOperationSource uint8
 
 const (
 	MTRDoorLockDlOperationSourceUnspecified       MTRDoorLockDlOperationSource = 0
@@ -9799,7 +9799,7 @@ func (e MTRDoorLockDlOperationSource) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDlRFIDOperationEventMask int64
+type MTRDoorLockDlRFIDOperationEventMask uint16
 
 const (
 	MTRDoorLockDlRFIDOperationEventMaskUnknown               MTRDoorLockDlRFIDOperationEventMask = 1
@@ -9843,7 +9843,7 @@ func (e MTRDoorLockDlRFIDOperationEventMask) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDlRFIDProgrammingEventMask int64
+type MTRDoorLockDlRFIDProgrammingEventMask uint16
 
 const (
 	MTRDoorLockDlRFIDProgrammingEventMaskUnknown         MTRDoorLockDlRFIDProgrammingEventMask = 1
@@ -9871,7 +9871,7 @@ func (e MTRDoorLockDlRFIDProgrammingEventMask) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDlRemoteOperationEventMask int64
+type MTRDoorLockDlRemoteOperationEventMask uint16
 
 const (
 	MTRDoorLockDlRemoteOperationEventMaskUnknown               MTRDoorLockDlRemoteOperationEventMask = 1
@@ -9915,7 +9915,7 @@ func (e MTRDoorLockDlRemoteOperationEventMask) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDlRemoteProgrammingEventMask int64
+type MTRDoorLockDlRemoteProgrammingEventMask uint16
 
 const (
 	MTRDoorLockDlRemoteProgrammingEventMaskUnknown               MTRDoorLockDlRemoteProgrammingEventMask = 1
@@ -9958,7 +9958,7 @@ func (e MTRDoorLockDlRemoteProgrammingEventMask) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRDoorLockDlStatus int64
+type MTRDoorLockDlStatus uint8
 
 const (
 	MTRDoorLockDlStatusSuccess           MTRDoorLockDlStatus = 0
@@ -9994,7 +9994,7 @@ func (e MTRDoorLockDlStatus) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockDlSupportedOperatingModes int64
+type MTRDoorLockDlSupportedOperatingModes uint16
 
 const (
 	MTRDoorLockDlSupportedOperatingModesNormal             MTRDoorLockDlSupportedOperatingModes = 1
@@ -10029,7 +10029,7 @@ func (e MTRDoorLockDlSupportedOperatingModes) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRDoorLockDlUserStatus int64
+type MTRDoorLockDlUserStatus uint8
 
 const (
 	MTRDoorLockDlUserStatusAvailable        MTRDoorLockDlUserStatus = 0
@@ -10052,7 +10052,7 @@ func (e MTRDoorLockDlUserStatus) String() string {
 	}
 }
 
-type MTRDoorLockDlUserType int64
+type MTRDoorLockDlUserType uint8
 
 const (
 	MTRDoorLockDlUserTypeUnrestrictedUser       MTRDoorLockDlUserType = 0
@@ -10096,7 +10096,7 @@ func (e MTRDoorLockDlUserType) String() string {
 	}
 }
 
-type MTRDoorLockDoorState int64
+type MTRDoorLockDoorState uint8
 
 const (
 	MTRDoorLockDoorStateDoorOpen             MTRDoorLockDoorState = 0
@@ -10129,7 +10129,7 @@ func (e MTRDoorLockDoorState) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRDoorLockFeature int64
+type MTRDoorLockFeature uint32
 
 const (
 	MTRDoorLockFeaturePINCredential               MTRDoorLockFeature = 1
@@ -10232,7 +10232,7 @@ func (e MTRDoorLockFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRDoorLockLockDataType int64
+type MTRDoorLockLockDataType uint8
 
 const (
 	MTRDoorLockLockDataTypeUnspecified                  MTRDoorLockLockDataType = 0
@@ -10288,7 +10288,7 @@ func (e MTRDoorLockLockDataType) String() string {
 	}
 }
 
-type MTRDoorLockLockOperationType int64
+type MTRDoorLockLockOperationType uint8
 
 const (
 	MTRDoorLockLockOperationTypeLock               MTRDoorLockLockOperationType = 0
@@ -10317,7 +10317,7 @@ func (e MTRDoorLockLockOperationType) String() string {
 	}
 }
 
-type MTRDoorLockOperatingMode int64
+type MTRDoorLockOperatingMode uint8
 
 const (
 	MTRDoorLockOperatingModeNormal             MTRDoorLockOperatingMode = 0
@@ -10346,7 +10346,7 @@ func (e MTRDoorLockOperatingMode) String() string {
 	}
 }
 
-type MTRDoorLockOperationError int64
+type MTRDoorLockOperationError uint8
 
 const (
 	MTRDoorLockOperationErrorUnspecified         MTRDoorLockOperationError = 0
@@ -10375,7 +10375,7 @@ func (e MTRDoorLockOperationError) String() string {
 	}
 }
 
-type MTRDoorLockOperationEventCode int64
+type MTRDoorLockOperationEventCode uint8
 
 const (
 	MTRDoorLockOperationEventCodeUnknownOrMfgSpecific  MTRDoorLockOperationEventCode = 0
@@ -10434,7 +10434,7 @@ func (e MTRDoorLockOperationEventCode) String() string {
 	}
 }
 
-type MTRDoorLockOperationSource int64
+type MTRDoorLockOperationSource uint8
 
 const (
 	MTRDoorLockOperationSourceUnspecified       MTRDoorLockOperationSource = 0
@@ -10481,7 +10481,7 @@ func (e MTRDoorLockOperationSource) String() string {
 	}
 }
 
-type MTRDoorLockProgrammingEventCode int64
+type MTRDoorLockProgrammingEventCode uint8
 
 const (
 	MTRDoorLockProgrammingEventCodeUnknownOrMfgSpecific MTRDoorLockProgrammingEventCode = 0
@@ -10516,7 +10516,7 @@ func (e MTRDoorLockProgrammingEventCode) String() string {
 	}
 }
 
-type MTRDoorLockSetPinOrIdStatus int64
+type MTRDoorLockSetPinOrIdStatus uint8
 
 const (
 	MTRDoorLockSetPinOrIdStatusSuccess            MTRDoorLockSetPinOrIdStatus = 0
@@ -10542,7 +10542,7 @@ func (e MTRDoorLockSetPinOrIdStatus) String() string {
 	}
 }
 
-type MTRDoorLockUserStatus int64
+type MTRDoorLockUserStatus uint8
 
 const (
 	MTRDoorLockUserStatusAvailable        MTRDoorLockUserStatus = 0
@@ -10568,7 +10568,7 @@ func (e MTRDoorLockUserStatus) String() string {
 	}
 }
 
-type MTRDoorLockUserType int64
+type MTRDoorLockUserType uint8
 
 const (
 	MTRDoorLockUserTypeUnrestrictedUser       MTRDoorLockUserType = 0
@@ -10618,7 +10618,7 @@ func (e MTRDoorLockUserType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRElectricalEnergyMeasurementFeature int64
+type MTRElectricalEnergyMeasurementFeature uint32
 
 const (
 	MTRElectricalEnergyMeasurementFeatureImportedEnergy   MTRElectricalEnergyMeasurementFeature = 1
@@ -10649,7 +10649,7 @@ func (e MTRElectricalEnergyMeasurementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRElectricalEnergyMeasurementMeasurementType int64
+type MTRElectricalEnergyMeasurementMeasurementType uint16
 
 const (
 	MTRElectricalEnergyMeasurementMeasurementTypeUnspecified      MTRElectricalEnergyMeasurementMeasurementType = 0
@@ -10709,7 +10709,7 @@ func (e MTRElectricalEnergyMeasurementMeasurementType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRElectricalPowerMeasurementFeature int64
+type MTRElectricalPowerMeasurementFeature uint32
 
 const (
 	MTRElectricalPowerMeasurementFeatureDirectCurrent      MTRElectricalPowerMeasurementFeature = 1
@@ -10744,7 +10744,7 @@ func (e MTRElectricalPowerMeasurementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRElectricalPowerMeasurementMeasurementType int64
+type MTRElectricalPowerMeasurementMeasurementType uint16
 
 const (
 	MTRElectricalPowerMeasurementMeasurementTypeUnspecified      MTRElectricalPowerMeasurementMeasurementType = 0
@@ -10803,7 +10803,7 @@ func (e MTRElectricalPowerMeasurementMeasurementType) String() string {
 	}
 }
 
-type MTRElectricalPowerMeasurementPowerMode int64
+type MTRElectricalPowerMeasurementPowerMode uint8
 
 const (
 	MTRElectricalPowerMeasurementPowerModeUnknown MTRElectricalPowerMeasurementPowerMode = 0
@@ -10826,7 +10826,7 @@ func (e MTRElectricalPowerMeasurementPowerMode) String() string {
 	}
 }
 
-type MTREnergyEVSEEnergyTransferStoppedReason int64
+type MTREnergyEVSEEnergyTransferStoppedReason uint8
 
 const (
 	MTREnergyEVSEEnergyTransferStoppedReasonEVStopped   MTREnergyEVSEEnergyTransferStoppedReason = 0
@@ -10849,7 +10849,7 @@ func (e MTREnergyEVSEEnergyTransferStoppedReason) String() string {
 	}
 }
 
-type MTREnergyEVSEFaultState int64
+type MTREnergyEVSEFaultState uint8
 
 const (
 	MTREnergyEVSEFaultStateNoError           MTREnergyEVSEFaultState = 0
@@ -10915,7 +10915,7 @@ func (e MTREnergyEVSEFaultState) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTREnergyEVSEFeature int64
+type MTREnergyEVSEFeature uint32
 
 const (
 	MTREnergyEVSEFeatureChargingPreferences MTREnergyEVSEFeature = 1
@@ -10938,7 +10938,7 @@ func (e MTREnergyEVSEFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTREnergyEVSEModeModeTag int64
+type MTREnergyEVSEModeModeTag uint16
 
 const (
 	MTREnergyEVSEModeModeTagAuto          MTREnergyEVSEModeModeTag = 0
@@ -10994,7 +10994,7 @@ func (e MTREnergyEVSEModeModeTag) String() string {
 	}
 }
 
-type MTREnergyEVSEState int64
+type MTREnergyEVSEState uint8
 
 const (
 	MTREnergyEVSEStateNotPluggedIn      MTREnergyEVSEState = 0
@@ -11026,7 +11026,7 @@ func (e MTREnergyEVSEState) String() string {
 	}
 }
 
-type MTREnergyEVSESupplyState int64
+type MTREnergyEVSESupplyState uint8
 
 const (
 	MTREnergyEVSESupplyStateDisabled            MTREnergyEVSESupplyState = 0
@@ -11053,7 +11053,7 @@ func (e MTREnergyEVSESupplyState) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTREnergyEVSETargetDayOfWeekBitmap int64
+type MTREnergyEVSETargetDayOfWeekBitmap uint8
 
 const (
 	MTREnergyEVSETargetDayOfWeekBitmapSunday    MTREnergyEVSETargetDayOfWeekBitmap = 1
@@ -11178,7 +11178,7 @@ func (e MTRErrorCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTREthernetNetworkDiagnosticsFeature int64
+type MTREthernetNetworkDiagnosticsFeature uint32
 
 const (
 	MTREthernetNetworkDiagnosticsFeaturePacketCounts MTREthernetNetworkDiagnosticsFeature = 1
@@ -11201,7 +11201,7 @@ func (e MTREthernetNetworkDiagnosticsFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTREthernetNetworkDiagnosticsPHYRate int64
+type MTREthernetNetworkDiagnosticsPHYRate uint8
 
 const (
 	MTREthernetNetworkDiagnosticsPHYRateRate10M  MTREthernetNetworkDiagnosticsPHYRate = 0
@@ -11245,7 +11245,7 @@ func (e MTREthernetNetworkDiagnosticsPHYRate) String() string {
 	}
 }
 
-type MTREthernetNetworkDiagnosticsPHYRateType int64
+type MTREthernetNetworkDiagnosticsPHYRateType uint8
 
 const (
 	MTREthernetNetworkDiagnosticsPHYRateType10M   MTREthernetNetworkDiagnosticsPHYRateType = 0
@@ -11312,7 +11312,7 @@ func (e MTREventPriority) String() string {
 	}
 }
 
-type MTRFanControlAirflowDirection int64
+type MTRFanControlAirflowDirection uint8
 
 const (
 	MTRFanControlAirflowDirectionForward MTRFanControlAirflowDirection = 0
@@ -11332,7 +11332,7 @@ func (e MTRFanControlAirflowDirection) String() string {
 	}
 }
 
-type MTRFanControlFanMode int64
+type MTRFanControlFanMode uint8
 
 const (
 	MTRFanControlFanModeOff    MTRFanControlFanMode = 0
@@ -11367,7 +11367,7 @@ func (e MTRFanControlFanMode) String() string {
 	}
 }
 
-type MTRFanControlFanModeSequence int64
+type MTRFanControlFanModeSequence uint8
 
 const (
 	MTRFanControlFanModeSequenceOffLowMedHigh     MTRFanControlFanModeSequence = 0
@@ -11401,7 +11401,7 @@ func (e MTRFanControlFanModeSequence) String() string {
 	}
 }
 
-type MTRFanControlFanModeSequenceType int64
+type MTRFanControlFanModeSequenceType uint8
 
 const (
 	MTRFanControlFanModeSequenceTypeOffLowMedHigh     MTRFanControlFanModeSequenceType = 0
@@ -11433,7 +11433,7 @@ func (e MTRFanControlFanModeSequenceType) String() string {
 	}
 }
 
-type MTRFanControlFanModeType int64
+type MTRFanControlFanModeType uint8
 
 const (
 	MTRFanControlFanModeTypeOff    MTRFanControlFanModeType = 0
@@ -11469,7 +11469,7 @@ func (e MTRFanControlFanModeType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRFanControlFeature int64
+type MTRFanControlFeature uint32
 
 const (
 	MTRFanControlFeatureMultiSpeed       MTRFanControlFeature = 1
@@ -11509,7 +11509,7 @@ func (e MTRFanControlFeature) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRFanControlRockBitmap int64
+type MTRFanControlRockBitmap uint8
 
 const (
 	MTRFanControlRockBitmapRockLeftRight MTRFanControlRockBitmap = 1
@@ -11537,7 +11537,7 @@ func (e MTRFanControlRockBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRFanControlRockSupportMask int64
+type MTRFanControlRockSupportMask uint8
 
 const (
 	MTRFanControlRockSupportMaskRockLeftRight MTRFanControlRockSupportMask = 1
@@ -11564,7 +11564,7 @@ func (e MTRFanControlRockSupportMask) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRFanControlStepDirection int64
+type MTRFanControlStepDirection uint8
 
 const (
 	MTRFanControlStepDirectionIncrease MTRFanControlStepDirection = 0
@@ -11585,7 +11585,7 @@ func (e MTRFanControlStepDirection) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRFanControlWindBitmap int64
+type MTRFanControlWindBitmap uint8
 
 const (
 	MTRFanControlWindBitmapSleepWind   MTRFanControlWindBitmap = 1
@@ -11609,7 +11609,7 @@ func (e MTRFanControlWindBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRFanControlWindSettingMask int64
+type MTRFanControlWindSettingMask uint8
 
 const (
 	MTRFanControlWindSettingMaskSleepWind   MTRFanControlWindSettingMask = 1
@@ -11633,7 +11633,7 @@ func (e MTRFanControlWindSettingMask) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRFanControlWindSupportMask int64
+type MTRFanControlWindSupportMask uint8
 
 const (
 	MTRFanControlWindSupportMaskSleepWind   MTRFanControlWindSupportMask = 1
@@ -11657,7 +11657,7 @@ func (e MTRFanControlWindSupportMask) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRFormaldehydeConcentrationMeasurementFeature int64
+type MTRFormaldehydeConcentrationMeasurementFeature uint32
 
 const (
 	MTRFormaldehydeConcentrationMeasurementFeatureNumericMeasurement MTRFormaldehydeConcentrationMeasurementFeature = 1
@@ -11696,7 +11696,7 @@ func (e MTRFormaldehydeConcentrationMeasurementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRFormaldehydeConcentrationMeasurementLevelValue int64
+type MTRFormaldehydeConcentrationMeasurementLevelValue uint8
 
 const (
 	MTRFormaldehydeConcentrationMeasurementLevelValueUnknown  MTRFormaldehydeConcentrationMeasurementLevelValue = 0
@@ -11725,7 +11725,7 @@ func (e MTRFormaldehydeConcentrationMeasurementLevelValue) String() string {
 	}
 }
 
-type MTRFormaldehydeConcentrationMeasurementMeasurementMedium int64
+type MTRFormaldehydeConcentrationMeasurementMeasurementMedium uint8
 
 const (
 	MTRFormaldehydeConcentrationMeasurementMeasurementMediumAir   MTRFormaldehydeConcentrationMeasurementMeasurementMedium = 0
@@ -11748,7 +11748,7 @@ func (e MTRFormaldehydeConcentrationMeasurementMeasurementMedium) String() strin
 	}
 }
 
-type MTRFormaldehydeConcentrationMeasurementMeasurementUnit int64
+type MTRFormaldehydeConcentrationMeasurementMeasurementUnit uint8
 
 const (
 	MTRFormaldehydeConcentrationMeasurementMeasurementUnitPPM  MTRFormaldehydeConcentrationMeasurementMeasurementUnit = 0
@@ -11786,7 +11786,7 @@ func (e MTRFormaldehydeConcentrationMeasurementMeasurementUnit) String() string 
 	}
 }
 
-type MTRGeneralCommissioningCommissioningError int64
+type MTRGeneralCommissioningCommissioningError uint8
 
 const (
 	MTRGeneralCommissioningCommissioningErrorOK                    MTRGeneralCommissioningCommissioningError = 0
@@ -11816,7 +11816,7 @@ func (e MTRGeneralCommissioningCommissioningError) String() string {
 	}
 }
 
-type MTRGeneralCommissioningRegulatoryLocationType int64
+type MTRGeneralCommissioningRegulatoryLocationType uint8
 
 const (
 	MTRGeneralCommissioningRegulatoryLocationTypeIndoor        MTRGeneralCommissioningRegulatoryLocationType = 0
@@ -11839,7 +11839,7 @@ func (e MTRGeneralCommissioningRegulatoryLocationType) String() string {
 	}
 }
 
-type MTRGeneralDiagnosticsBootReason int64
+type MTRGeneralDiagnosticsBootReason uint8
 
 const (
 	MTRGeneralDiagnosticsBootReasonUnspecified             MTRGeneralDiagnosticsBootReason = 0
@@ -11874,7 +11874,7 @@ func (e MTRGeneralDiagnosticsBootReason) String() string {
 	}
 }
 
-type MTRGeneralDiagnosticsBootReasonType int64
+type MTRGeneralDiagnosticsBootReasonType uint8
 
 const (
 	MTRGeneralDiagnosticsBootReasonTypeUnspecified             MTRGeneralDiagnosticsBootReasonType = 0
@@ -11910,7 +11910,7 @@ func (e MTRGeneralDiagnosticsBootReasonType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRGeneralDiagnosticsFeature int64
+type MTRGeneralDiagnosticsFeature uint32
 
 const (
 	MTRGeneralDiagnosticsFeatureDataModelTest MTRGeneralDiagnosticsFeature = 1
@@ -11929,7 +11929,7 @@ func (e MTRGeneralDiagnosticsFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRGeneralDiagnosticsHardwareFault int64
+type MTRGeneralDiagnosticsHardwareFault uint8
 
 const (
 	MTRGeneralDiagnosticsHardwareFaultUnspecified            MTRGeneralDiagnosticsHardwareFault = 0
@@ -11976,7 +11976,7 @@ func (e MTRGeneralDiagnosticsHardwareFault) String() string {
 	}
 }
 
-type MTRGeneralDiagnosticsHardwareFaultType int64
+type MTRGeneralDiagnosticsHardwareFaultType uint8
 
 const (
 	MTRGeneralDiagnosticsHardwareFaultTypeUnspecified            MTRGeneralDiagnosticsHardwareFaultType = 0
@@ -12023,7 +12023,7 @@ func (e MTRGeneralDiagnosticsHardwareFaultType) String() string {
 	}
 }
 
-type MTRGeneralDiagnosticsInterfaceType int64
+type MTRGeneralDiagnosticsInterfaceType uint8
 
 const (
 	MTRGeneralDiagnosticsInterfaceTypeUnspecified MTRGeneralDiagnosticsInterfaceType = 0
@@ -12052,7 +12052,7 @@ func (e MTRGeneralDiagnosticsInterfaceType) String() string {
 	}
 }
 
-type MTRGeneralDiagnosticsNetworkFault int64
+type MTRGeneralDiagnosticsNetworkFault uint8
 
 const (
 	MTRGeneralDiagnosticsNetworkFaultUnspecified      MTRGeneralDiagnosticsNetworkFault = 0
@@ -12078,7 +12078,7 @@ func (e MTRGeneralDiagnosticsNetworkFault) String() string {
 	}
 }
 
-type MTRGeneralDiagnosticsNetworkFaultType int64
+type MTRGeneralDiagnosticsNetworkFaultType uint8
 
 const (
 	MTRGeneralDiagnosticsNetworkFaultTypeUnspecified      MTRGeneralDiagnosticsNetworkFaultType = 0
@@ -12104,7 +12104,7 @@ func (e MTRGeneralDiagnosticsNetworkFaultType) String() string {
 	}
 }
 
-type MTRGeneralDiagnosticsRadioFault int64
+type MTRGeneralDiagnosticsRadioFault uint8
 
 const (
 	MTRGeneralDiagnosticsRadioFaultUnspecified   MTRGeneralDiagnosticsRadioFault = 0
@@ -12139,7 +12139,7 @@ func (e MTRGeneralDiagnosticsRadioFault) String() string {
 	}
 }
 
-type MTRGeneralDiagnosticsRadioFaultType int64
+type MTRGeneralDiagnosticsRadioFaultType uint8
 
 const (
 	MTRGeneralDiagnosticsRadioFaultTypeUnspecified   MTRGeneralDiagnosticsRadioFaultType = 0
@@ -12174,7 +12174,7 @@ func (e MTRGeneralDiagnosticsRadioFaultType) String() string {
 	}
 }
 
-type MTRGroupKeyManagementGroupKeySecurityPolicy int64
+type MTRGroupKeyManagementGroupKeySecurityPolicy uint8
 
 const (
 	MTRGroupKeyManagementGroupKeySecurityPolicyTrustFirst   MTRGroupKeyManagementGroupKeySecurityPolicy = 0
@@ -12195,7 +12195,7 @@ func (e MTRGroupKeyManagementGroupKeySecurityPolicy) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRGroupsFeature int64
+type MTRGroupsFeature uint32
 
 const (
 	MTRGroupsFeatureGroupNames MTRGroupsFeature = 1
@@ -12215,7 +12215,7 @@ func (e MTRGroupsFeature) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRGroupsGroupClusterFeature int64
+type MTRGroupsGroupClusterFeature uint32
 
 const (
 	MTRGroupsGroupClusterFeatureGroupNames MTRGroupsGroupClusterFeature = 1
@@ -12235,7 +12235,7 @@ func (e MTRGroupsGroupClusterFeature) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRGroupsNameSupportBitmap int64
+type MTRGroupsNameSupportBitmap uint8
 
 const (
 	MTRGroupsNameSupportBitmapGroupNames MTRGroupsNameSupportBitmap = 128
@@ -12254,7 +12254,7 @@ func (e MTRGroupsNameSupportBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRHEPAFilterMonitoringChangeIndication int64
+type MTRHEPAFilterMonitoringChangeIndication uint8
 
 const (
 	MTRHEPAFilterMonitoringChangeIndicationOK       MTRHEPAFilterMonitoringChangeIndication = 0
@@ -12277,7 +12277,7 @@ func (e MTRHEPAFilterMonitoringChangeIndication) String() string {
 	}
 }
 
-type MTRHEPAFilterMonitoringDegradationDirection int64
+type MTRHEPAFilterMonitoringDegradationDirection uint8
 
 const (
 	MTRHEPAFilterMonitoringDegradationDirectionUp   MTRHEPAFilterMonitoringDegradationDirection = 0
@@ -12298,7 +12298,7 @@ func (e MTRHEPAFilterMonitoringDegradationDirection) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRHEPAFilterMonitoringFeature int64
+type MTRHEPAFilterMonitoringFeature uint32
 
 const (
 	MTRHEPAFilterMonitoringFeatureCondition              MTRHEPAFilterMonitoringFeature = 1
@@ -12325,7 +12325,7 @@ func (e MTRHEPAFilterMonitoringFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRHEPAFilterMonitoringProductIdentifierType int64
+type MTRHEPAFilterMonitoringProductIdentifierType uint8
 
 const (
 	MTRHEPAFilterMonitoringProductIdentifierTypeUPC    MTRHEPAFilterMonitoringProductIdentifierType = 0
@@ -12354,7 +12354,7 @@ func (e MTRHEPAFilterMonitoringProductIdentifierType) String() string {
 	}
 }
 
-type MTRICDManagementClientType int64
+type MTRICDManagementClientType uint8
 
 const (
 	MTRICDManagementClientTypePermanent MTRICDManagementClientType = 0
@@ -12375,7 +12375,7 @@ func (e MTRICDManagementClientType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRICDManagementFeature int64
+type MTRICDManagementFeature uint32
 
 const (
 	MTRICDManagementFeatureCheckInProtocolSupport MTRICDManagementFeature = 1
@@ -12406,7 +12406,7 @@ func (e MTRICDManagementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRICDManagementOperatingMode int64
+type MTRICDManagementOperatingMode uint8
 
 const (
 	MTRICDManagementOperatingModeSIT MTRICDManagementOperatingMode = 0
@@ -12427,7 +12427,7 @@ func (e MTRICDManagementOperatingMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRICDManagementUserActiveModeTriggerBitmap int64
+type MTRICDManagementUserActiveModeTriggerBitmap uint32
 
 const (
 	MTRICDManagementUserActiveModeTriggerBitmapPowerCycle               MTRICDManagementUserActiveModeTriggerBitmap = 1
@@ -12510,7 +12510,7 @@ func (e MTRICDManagementUserActiveModeTriggerBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRIdentifyEffectIdentifier int64
+type MTRIdentifyEffectIdentifier uint8
 
 const (
 	MTRIdentifyEffectIdentifierBlink         MTRIdentifyEffectIdentifier = 0
@@ -12542,7 +12542,7 @@ func (e MTRIdentifyEffectIdentifier) String() string {
 	}
 }
 
-type MTRIdentifyEffectVariant int64
+type MTRIdentifyEffectVariant uint8
 
 const (
 	MTRIdentifyEffectVariantDefault MTRIdentifyEffectVariant = 0
@@ -12559,7 +12559,7 @@ func (e MTRIdentifyEffectVariant) String() string {
 	}
 }
 
-type MTRIdentifyType int64
+type MTRIdentifyType uint8
 
 const (
 	MTRIdentifyTypeNone             MTRIdentifyType = 0
@@ -12593,7 +12593,7 @@ func (e MTRIdentifyType) String() string {
 	}
 }
 
-type MTRIlluminanceMeasurementLightSensorType int64
+type MTRIlluminanceMeasurementLightSensorType uint8
 
 const (
 	MTRIlluminanceMeasurementLightSensorTypePhotodiode MTRIlluminanceMeasurementLightSensorType = 0
@@ -12711,7 +12711,7 @@ func (e MTRInteractionErrorCode) String() string {
 	}
 }
 
-type MTRKeypadInputCECKeyCode int64
+type MTRKeypadInputCECKeyCode uint8
 
 const (
 	MTRKeypadInputCECKeyCodeSelect                    MTRKeypadInputCECKeyCode = 0
@@ -12983,7 +12983,7 @@ func (e MTRKeypadInputCECKeyCode) String() string {
 	}
 }
 
-type MTRKeypadInputCecKeyCode int64
+type MTRKeypadInputCecKeyCode uint8
 
 const (
 	MTRKeypadInputCecKeyCodeSelect                    MTRKeypadInputCecKeyCode = 0
@@ -13256,7 +13256,7 @@ func (e MTRKeypadInputCecKeyCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRKeypadInputFeature int64
+type MTRKeypadInputFeature uint32
 
 const (
 	MTRKeypadInputFeatureNavigationKeyCodes MTRKeypadInputFeature = 1
@@ -13283,7 +13283,7 @@ func (e MTRKeypadInputFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRKeypadInputStatus int64
+type MTRKeypadInputStatus uint8
 
 const (
 	MTRKeypadInputStatusSuccess                  MTRKeypadInputStatus = 0
@@ -13306,7 +13306,7 @@ func (e MTRKeypadInputStatus) String() string {
 	}
 }
 
-type MTRLaundryDryerControlsDrynessLevel int64
+type MTRLaundryDryerControlsDrynessLevel uint8
 
 const (
 	MTRLaundryDryerControlsDrynessLevelLow    MTRLaundryDryerControlsDrynessLevel = 0
@@ -13333,7 +13333,7 @@ func (e MTRLaundryDryerControlsDrynessLevel) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRLaundryWasherControlsFeature int64
+type MTRLaundryWasherControlsFeature uint32
 
 const (
 	MTRLaundryWasherControlsFeatureSpin  MTRLaundryWasherControlsFeature = 1
@@ -13356,7 +13356,7 @@ func (e MTRLaundryWasherControlsFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRLaundryWasherControlsNumberOfRinses int64
+type MTRLaundryWasherControlsNumberOfRinses uint8
 
 const (
 	MTRLaundryWasherControlsNumberOfRinsesNone   MTRLaundryWasherControlsNumberOfRinses = 0
@@ -13382,7 +13382,7 @@ func (e MTRLaundryWasherControlsNumberOfRinses) String() string {
 	}
 }
 
-type MTRLaundryWasherModeModeTag int64
+type MTRLaundryWasherModeModeTag uint16
 
 const (
 	MTRLaundryWasherModeModeTagAuto      MTRLaundryWasherModeModeTag = 0
@@ -13439,7 +13439,7 @@ func (e MTRLaundryWasherModeModeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRLevelControlFeature int64
+type MTRLevelControlFeature uint32
 
 const (
 	MTRLevelControlFeatureOnOff     MTRLevelControlFeature = 1
@@ -13466,7 +13466,7 @@ func (e MTRLevelControlFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRLevelControlMoveMode int64
+type MTRLevelControlMoveMode uint8
 
 const (
 	MTRLevelControlMoveModeUp   MTRLevelControlMoveMode = 0
@@ -13487,7 +13487,7 @@ func (e MTRLevelControlMoveMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRLevelControlOptions int64
+type MTRLevelControlOptions uint8
 
 const (
 	MTRLevelControlOptionsExecuteIfOff           MTRLevelControlOptions = 1
@@ -13511,7 +13511,7 @@ func (e MTRLevelControlOptions) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRLevelControlOptionsBitmap int64
+type MTRLevelControlOptionsBitmap uint8
 
 const (
 	MTRLevelControlOptionsBitmapExecuteIfOff           MTRLevelControlOptionsBitmap = 1
@@ -13534,7 +13534,7 @@ func (e MTRLevelControlOptionsBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRLevelControlStepMode int64
+type MTRLevelControlStepMode uint8
 
 const (
 	MTRLevelControlStepModeUp   MTRLevelControlStepMode = 0
@@ -13555,7 +13555,7 @@ func (e MTRLevelControlStepMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRMediaInputFeature int64
+type MTRMediaInputFeature uint32
 
 const (
 	MTRMediaInputFeatureNameUpdates MTRMediaInputFeature = 1
@@ -13574,7 +13574,7 @@ func (e MTRMediaInputFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRMediaInputInputType int64
+type MTRMediaInputInputType uint8
 
 const (
 	MTRMediaInputInputTypeInternal  MTRMediaInputInputType = 0
@@ -13627,7 +13627,7 @@ func (e MTRMediaInputInputType) String() string {
 	}
 }
 
-type MTRMediaPlaybackCharacteristic int64
+type MTRMediaPlaybackCharacteristic uint8
 
 const (
 	MTRMediaPlaybackCharacteristicForcedSubtitles              MTRMediaPlaybackCharacteristic = 0
@@ -13696,7 +13696,7 @@ func (e MTRMediaPlaybackCharacteristic) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRMediaPlaybackFeature int64
+type MTRMediaPlaybackFeature uint32
 
 const (
 	MTRMediaPlaybackFeatureAdvancedSeek  MTRMediaPlaybackFeature = 1
@@ -13731,7 +13731,7 @@ func (e MTRMediaPlaybackFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRMediaPlaybackPlaybackState int64
+type MTRMediaPlaybackPlaybackState uint8
 
 const (
 	MTRMediaPlaybackPlaybackStatePlaying    MTRMediaPlaybackPlaybackState = 0
@@ -13757,7 +13757,7 @@ func (e MTRMediaPlaybackPlaybackState) String() string {
 	}
 }
 
-type MTRMediaPlaybackStatus int64
+type MTRMediaPlaybackStatus uint8
 
 const (
 	MTRMediaPlaybackStatusSuccess                MTRMediaPlaybackStatus = 0
@@ -13790,7 +13790,7 @@ func (e MTRMediaPlaybackStatus) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRMessagesFeature int64
+type MTRMessagesFeature uint32
 
 const (
 	MTRMessagesFeatureReceivedConfirmation MTRMessagesFeature = 1
@@ -13821,7 +13821,7 @@ func (e MTRMessagesFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRMessagesFutureMessagePreference int64
+type MTRMessagesFutureMessagePreference uint8
 
 const (
 	MTRMessagesFutureMessagePreferenceAllowed    MTRMessagesFutureMessagePreference = 0
@@ -13851,7 +13851,7 @@ func (e MTRMessagesFutureMessagePreference) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRMessagesMessageControlBitmap int64
+type MTRMessagesMessageControlBitmap uint8
 
 const (
 	MTRMessagesMessageControlBitmapConfirmationRequired MTRMessagesMessageControlBitmap = 1
@@ -13886,7 +13886,7 @@ func (e MTRMessagesMessageControlBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRMessagesMessagePriority int64
+type MTRMessagesMessagePriority uint8
 
 const (
 	MTRMessagesMessagePriorityLow      MTRMessagesMessagePriority = 0
@@ -13913,7 +13913,7 @@ func (e MTRMessagesMessagePriority) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRMicrowaveOvenControlFeature int64
+type MTRMicrowaveOvenControlFeature uint32
 
 const (
 	MTRMicrowaveOvenControlFeaturePowerAsNumber     MTRMicrowaveOvenControlFeature = 1
@@ -13936,7 +13936,7 @@ func (e MTRMicrowaveOvenControlFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRMicrowaveOvenModeModeTag int64
+type MTRMicrowaveOvenModeModeTag uint16
 
 const (
 	MTRMicrowaveOvenModeModeTagAuto      MTRMicrowaveOvenModeModeTag = 0
@@ -13987,7 +13987,7 @@ func (e MTRMicrowaveOvenModeModeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRModeSelectFeature int64
+type MTRModeSelectFeature uint32
 
 const (
 	MTRModeSelectFeatureOnOff    MTRModeSelectFeature = 1
@@ -14010,7 +14010,7 @@ func (e MTRModeSelectFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRNetworkCommissioningStatus int64
+type MTRNetworkCommissioningStatus uint8
 
 const (
 	MTRNetworkCommissioningStatusSuccess                MTRNetworkCommissioningStatus = 0
@@ -14064,7 +14064,7 @@ func (e MTRNetworkCommissioningStatus) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRNetworkCommissioningThreadCapabilitiesBitmap int64
+type MTRNetworkCommissioningThreadCapabilitiesBitmap uint16
 
 const (
 	MTRNetworkCommissioningThreadCapabilitiesBitmapIsBorderRouterCapable                MTRNetworkCommissioningThreadCapabilitiesBitmap = 1
@@ -14099,7 +14099,7 @@ func (e MTRNetworkCommissioningThreadCapabilitiesBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRNetworkCommissioningWiFiBand int64
+type MTRNetworkCommissioningWiFiBand uint8
 
 const (
 	MTRNetworkCommissioningWiFiBand2G4  MTRNetworkCommissioningWiFiBand = 0
@@ -14132,7 +14132,7 @@ func (e MTRNetworkCommissioningWiFiBand) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRNetworkCommissioningWiFiSecurity int64
+type MTRNetworkCommissioningWiFiSecurity uint8
 
 const (
 	MTRNetworkCommissioningWiFiSecurityUnencrypted  MTRNetworkCommissioningWiFiSecurity = 1
@@ -14184,7 +14184,7 @@ func (e MTRNetworkCommissioningWiFiSecurity) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRNetworkCommissioningWiFiSecurityBitmap int64
+type MTRNetworkCommissioningWiFiSecurityBitmap uint8
 
 const (
 	MTRNetworkCommissioningWiFiSecurityBitmapUnencrypted  MTRNetworkCommissioningWiFiSecurityBitmap = 1
@@ -14220,7 +14220,7 @@ func (e MTRNetworkCommissioningWiFiSecurityBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRNitrogenDioxideConcentrationMeasurementFeature int64
+type MTRNitrogenDioxideConcentrationMeasurementFeature uint32
 
 const (
 	MTRNitrogenDioxideConcentrationMeasurementFeatureNumericMeasurement MTRNitrogenDioxideConcentrationMeasurementFeature = 1
@@ -14259,7 +14259,7 @@ func (e MTRNitrogenDioxideConcentrationMeasurementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRNitrogenDioxideConcentrationMeasurementLevelValue int64
+type MTRNitrogenDioxideConcentrationMeasurementLevelValue uint8
 
 const (
 	MTRNitrogenDioxideConcentrationMeasurementLevelValueUnknown  MTRNitrogenDioxideConcentrationMeasurementLevelValue = 0
@@ -14288,7 +14288,7 @@ func (e MTRNitrogenDioxideConcentrationMeasurementLevelValue) String() string {
 	}
 }
 
-type MTRNitrogenDioxideConcentrationMeasurementMeasurementMedium int64
+type MTRNitrogenDioxideConcentrationMeasurementMeasurementMedium uint8
 
 const (
 	MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumAir   MTRNitrogenDioxideConcentrationMeasurementMeasurementMedium = 0
@@ -14311,7 +14311,7 @@ func (e MTRNitrogenDioxideConcentrationMeasurementMeasurementMedium) String() st
 	}
 }
 
-type MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit int64
+type MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit uint8
 
 const (
 	MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPPM  MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit = 0
@@ -14349,7 +14349,7 @@ func (e MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit) String() stri
 	}
 }
 
-type MTROTASoftwareUpdateProviderApplyUpdateAction int64
+type MTROTASoftwareUpdateProviderApplyUpdateAction uint8
 
 const (
 	MTROTASoftwareUpdateProviderApplyUpdateActionProceed         MTROTASoftwareUpdateProviderApplyUpdateAction = 0
@@ -14372,7 +14372,7 @@ func (e MTROTASoftwareUpdateProviderApplyUpdateAction) String() string {
 	}
 }
 
-type MTROTASoftwareUpdateProviderDownloadProtocol int64
+type MTROTASoftwareUpdateProviderDownloadProtocol uint8
 
 const (
 	MTROTASoftwareUpdateProviderDownloadProtocolBDXSynchronous  MTROTASoftwareUpdateProviderDownloadProtocol = 0
@@ -14398,7 +14398,7 @@ func (e MTROTASoftwareUpdateProviderDownloadProtocol) String() string {
 	}
 }
 
-type MTROTASoftwareUpdateProviderOTAApplyUpdateAction int64
+type MTROTASoftwareUpdateProviderOTAApplyUpdateAction uint8
 
 const (
 	MTROTASoftwareUpdateProviderOTAApplyUpdateActionProceed         MTROTASoftwareUpdateProviderOTAApplyUpdateAction = 0
@@ -14421,7 +14421,7 @@ func (e MTROTASoftwareUpdateProviderOTAApplyUpdateAction) String() string {
 	}
 }
 
-type MTROTASoftwareUpdateProviderOTADownloadProtocol int64
+type MTROTASoftwareUpdateProviderOTADownloadProtocol uint8
 
 const (
 	MTROTASoftwareUpdateProviderOTADownloadProtocolBDXSynchronous  MTROTASoftwareUpdateProviderOTADownloadProtocol = 0
@@ -14447,7 +14447,7 @@ func (e MTROTASoftwareUpdateProviderOTADownloadProtocol) String() string {
 	}
 }
 
-type MTROTASoftwareUpdateProviderOTAQueryStatus int64
+type MTROTASoftwareUpdateProviderOTAQueryStatus uint8
 
 const (
 	MTROTASoftwareUpdateProviderOTAQueryStatusUpdateAvailable              MTROTASoftwareUpdateProviderOTAQueryStatus = 0
@@ -14473,7 +14473,7 @@ func (e MTROTASoftwareUpdateProviderOTAQueryStatus) String() string {
 	}
 }
 
-type MTROTASoftwareUpdateProviderStatus int64
+type MTROTASoftwareUpdateProviderStatus uint8
 
 const (
 	MTROTASoftwareUpdateProviderStatusUpdateAvailable              MTROTASoftwareUpdateProviderStatus = 0
@@ -14499,7 +14499,7 @@ func (e MTROTASoftwareUpdateProviderStatus) String() string {
 	}
 }
 
-type MTROTASoftwareUpdateRequestorAnnouncementReason int64
+type MTROTASoftwareUpdateRequestorAnnouncementReason uint8
 
 const (
 	MTROTASoftwareUpdateRequestorAnnouncementReasonSimpleAnnouncement    MTROTASoftwareUpdateRequestorAnnouncementReason = 0
@@ -14522,7 +14522,7 @@ func (e MTROTASoftwareUpdateRequestorAnnouncementReason) String() string {
 	}
 }
 
-type MTROTASoftwareUpdateRequestorChangeReason int64
+type MTROTASoftwareUpdateRequestorChangeReason uint8
 
 const (
 	MTROTASoftwareUpdateRequestorChangeReasonUnknown         MTROTASoftwareUpdateRequestorChangeReason = 0
@@ -14551,7 +14551,7 @@ func (e MTROTASoftwareUpdateRequestorChangeReason) String() string {
 	}
 }
 
-type MTROTASoftwareUpdateRequestorOTAAnnouncementReason int64
+type MTROTASoftwareUpdateRequestorOTAAnnouncementReason uint8
 
 const (
 	MTROTASoftwareUpdateRequestorOTAAnnouncementReasonSimpleAnnouncement    MTROTASoftwareUpdateRequestorOTAAnnouncementReason = 0
@@ -14574,7 +14574,7 @@ func (e MTROTASoftwareUpdateRequestorOTAAnnouncementReason) String() string {
 	}
 }
 
-type MTROTASoftwareUpdateRequestorOTAChangeReason int64
+type MTROTASoftwareUpdateRequestorOTAChangeReason uint8
 
 const (
 	MTROTASoftwareUpdateRequestorOTAChangeReasonUnknown         MTROTASoftwareUpdateRequestorOTAChangeReason = 0
@@ -14603,7 +14603,7 @@ func (e MTROTASoftwareUpdateRequestorOTAChangeReason) String() string {
 	}
 }
 
-type MTROTASoftwareUpdateRequestorOTAUpdateState int64
+type MTROTASoftwareUpdateRequestorOTAUpdateState uint8
 
 const (
 	MTROTASoftwareUpdateRequestorOTAUpdateStateUnknown              MTROTASoftwareUpdateRequestorOTAUpdateState = 0
@@ -14644,7 +14644,7 @@ func (e MTROTASoftwareUpdateRequestorOTAUpdateState) String() string {
 	}
 }
 
-type MTROTASoftwareUpdateRequestorUpdateState int64
+type MTROTASoftwareUpdateRequestorUpdateState uint8
 
 const (
 	MTROTASoftwareUpdateRequestorUpdateStateUnknown              MTROTASoftwareUpdateRequestorUpdateState = 0
@@ -14686,7 +14686,7 @@ func (e MTROTASoftwareUpdateRequestorUpdateState) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTROccupancySensingFeature int64
+type MTROccupancySensingFeature uint32
 
 const (
 	MTROccupancySensingFeatureOther           MTROccupancySensingFeature = 1
@@ -14734,7 +14734,7 @@ func (e MTROccupancySensingFeature) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTROccupancySensingOccupancyBitmap int64
+type MTROccupancySensingOccupancyBitmap uint8
 
 const (
 	MTROccupancySensingOccupancyBitmapOccupied MTROccupancySensingOccupancyBitmap = 1
@@ -14753,7 +14753,7 @@ func (e MTROccupancySensingOccupancyBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTROccupancySensingOccupancySensorType int64
+type MTROccupancySensingOccupancySensorType uint8
 
 const (
 	MTROccupancySensingOccupancySensorTypePIR              MTROccupancySensingOccupancySensorType = 0
@@ -14780,7 +14780,7 @@ func (e MTROccupancySensingOccupancySensorType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTROccupancySensingOccupancySensorTypeBitmap int64
+type MTROccupancySensingOccupancySensorTypeBitmap uint8
 
 const (
 	MTROccupancySensingOccupancySensorTypeBitmapPIR             MTROccupancySensingOccupancySensorTypeBitmap = 1
@@ -14808,7 +14808,7 @@ func (e MTROccupancySensingOccupancySensorTypeBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTROnOffControl int64
+type MTROnOffControl uint8
 
 const (
 	MTROnOffControlAcceptOnlyWhenOn MTROnOffControl = 1
@@ -14828,7 +14828,7 @@ func (e MTROnOffControl) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTROnOffControlBitmap int64
+type MTROnOffControlBitmap uint8
 
 const (
 	MTROnOffControlBitmapAcceptOnlyWhenOn MTROnOffControlBitmap = 1
@@ -14847,7 +14847,7 @@ func (e MTROnOffControlBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTROnOffDelayedAllOffEffectVariant int64
+type MTROnOffDelayedAllOffEffectVariant uint8
 
 const (
 	MTROnOffDelayedAllOffEffectVariantDelayedOffFastFade                                   MTROnOffDelayedAllOffEffectVariant = 0
@@ -14872,7 +14872,7 @@ func (e MTROnOffDelayedAllOffEffectVariant) String() string {
 	}
 }
 
-type MTROnOffDyingLightEffectVariant int64
+type MTROnOffDyingLightEffectVariant uint8
 
 const (
 	MTROnOffDyingLightEffectVariantDyingLightFadeOff                                  MTROnOffDyingLightEffectVariant = 0
@@ -14890,7 +14890,7 @@ func (e MTROnOffDyingLightEffectVariant) String() string {
 	}
 }
 
-type MTROnOffEffectIdentifier int64
+type MTROnOffEffectIdentifier uint8
 
 const (
 	MTROnOffEffectIdentifierDelayedAllOff MTROnOffEffectIdentifier = 0
@@ -14911,7 +14911,7 @@ func (e MTROnOffEffectIdentifier) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTROnOffFeature int64
+type MTROnOffFeature uint32
 
 const (
 	MTROnOffFeatureLighting          MTROnOffFeature = 1
@@ -14942,7 +14942,7 @@ func (e MTROnOffFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTROnOffStartUpOnOff int64
+type MTROnOffStartUpOnOff uint8
 
 const (
 	MTROnOffStartUpOnOffOff                 MTROnOffStartUpOnOff = 0
@@ -14989,7 +14989,7 @@ func (e MTROnboardingPayloadType) String() string {
 	}
 }
 
-type MTROperationalCredentialsCertificateChainType int64
+type MTROperationalCredentialsCertificateChainType uint8
 
 const (
 	MTROperationalCredentialsCertificateChainTypeDACCertificate MTROperationalCredentialsCertificateChainType = 1
@@ -15009,7 +15009,7 @@ func (e MTROperationalCredentialsCertificateChainType) String() string {
 	}
 }
 
-type MTROperationalCredentialsNodeOperationalCertStatus int64
+type MTROperationalCredentialsNodeOperationalCertStatus uint8
 
 const (
 	MTROperationalCredentialsNodeOperationalCertStatusOK                  MTROperationalCredentialsNodeOperationalCertStatus = 0
@@ -15053,7 +15053,7 @@ func (e MTROperationalCredentialsNodeOperationalCertStatus) String() string {
 	}
 }
 
-type MTROperationalCredentialsOperationalCertStatus int64
+type MTROperationalCredentialsOperationalCertStatus uint8
 
 const (
 	MTROperationalCredentialsOperationalCertStatusSUCCESS             MTROperationalCredentialsOperationalCertStatus = 0
@@ -15097,7 +15097,7 @@ func (e MTROperationalCredentialsOperationalCertStatus) String() string {
 	}
 }
 
-type MTROperationalState int64
+type MTROperationalState uint8
 
 const (
 	MTROperationalStateStopped MTROperationalState = 0
@@ -15123,7 +15123,7 @@ func (e MTROperationalState) String() string {
 	}
 }
 
-type MTROperationalStateErrorState int64
+type MTROperationalStateErrorState uint8
 
 const (
 	MTROperationalStateErrorStateNoError                   MTROperationalStateErrorState = 0
@@ -15149,7 +15149,7 @@ func (e MTROperationalStateErrorState) String() string {
 	}
 }
 
-type MTROtaSoftwareUpdateProviderOTAApplyUpdateAction int64
+type MTROtaSoftwareUpdateProviderOTAApplyUpdateAction uint8
 
 const (
 	MTROtaSoftwareUpdateProviderOTAApplyUpdateActionProceed         MTROtaSoftwareUpdateProviderOTAApplyUpdateAction = 0
@@ -15172,7 +15172,7 @@ func (e MTROtaSoftwareUpdateProviderOTAApplyUpdateAction) String() string {
 	}
 }
 
-type MTROtaSoftwareUpdateProviderOTADownloadProtocol int64
+type MTROtaSoftwareUpdateProviderOTADownloadProtocol uint8
 
 const (
 	MTROtaSoftwareUpdateProviderOTADownloadProtocolBDXSynchronous  MTROtaSoftwareUpdateProviderOTADownloadProtocol = 0
@@ -15198,7 +15198,7 @@ func (e MTROtaSoftwareUpdateProviderOTADownloadProtocol) String() string {
 	}
 }
 
-type MTROtaSoftwareUpdateProviderOTAQueryStatus int64
+type MTROtaSoftwareUpdateProviderOTAQueryStatus uint8
 
 const (
 	MTROtaSoftwareUpdateProviderOTAQueryStatusUpdateAvailable              MTROtaSoftwareUpdateProviderOTAQueryStatus = 0
@@ -15224,7 +15224,7 @@ func (e MTROtaSoftwareUpdateProviderOTAQueryStatus) String() string {
 	}
 }
 
-type MTROtaSoftwareUpdateRequestorOTAAnnouncementReason int64
+type MTROtaSoftwareUpdateRequestorOTAAnnouncementReason uint8
 
 const (
 	MTROtaSoftwareUpdateRequestorOTAAnnouncementReasonSimpleAnnouncement    MTROtaSoftwareUpdateRequestorOTAAnnouncementReason = 0
@@ -15247,7 +15247,7 @@ func (e MTROtaSoftwareUpdateRequestorOTAAnnouncementReason) String() string {
 	}
 }
 
-type MTROtaSoftwareUpdateRequestorOTAChangeReason int64
+type MTROtaSoftwareUpdateRequestorOTAChangeReason uint8
 
 const (
 	MTROtaSoftwareUpdateRequestorOTAChangeReasonUnknown         MTROtaSoftwareUpdateRequestorOTAChangeReason = 0
@@ -15276,7 +15276,7 @@ func (e MTROtaSoftwareUpdateRequestorOTAChangeReason) String() string {
 	}
 }
 
-type MTROtaSoftwareUpdateRequestorOTAUpdateState int64
+type MTROtaSoftwareUpdateRequestorOTAUpdateState uint8
 
 const (
 	MTROtaSoftwareUpdateRequestorOTAUpdateStateUnknown              MTROtaSoftwareUpdateRequestorOTAUpdateState = 0
@@ -15317,7 +15317,7 @@ func (e MTROtaSoftwareUpdateRequestorOTAUpdateState) String() string {
 	}
 }
 
-type MTROvenCavityOperationalStateErrorState int64
+type MTROvenCavityOperationalStateErrorState uint8
 
 const (
 	MTROvenCavityOperationalStateErrorStateNoError                   MTROvenCavityOperationalStateErrorState = 0
@@ -15343,7 +15343,7 @@ func (e MTROvenCavityOperationalStateErrorState) String() string {
 	}
 }
 
-type MTROvenCavityOperationalStateOperationalState int64
+type MTROvenCavityOperationalStateOperationalState uint8
 
 const (
 	MTROvenCavityOperationalStateOperationalStateStopped MTROvenCavityOperationalStateOperationalState = 0
@@ -15369,7 +15369,7 @@ func (e MTROvenCavityOperationalStateOperationalState) String() string {
 	}
 }
 
-type MTROvenModeModeTag int64
+type MTROvenModeModeTag uint16
 
 const (
 	MTROvenModeModeTagAuto            MTROvenModeModeTag = 0
@@ -15441,7 +15441,7 @@ func (e MTROvenModeModeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTROzoneConcentrationMeasurementFeature int64
+type MTROzoneConcentrationMeasurementFeature uint32
 
 const (
 	MTROzoneConcentrationMeasurementFeatureNumericMeasurement MTROzoneConcentrationMeasurementFeature = 1
@@ -15480,7 +15480,7 @@ func (e MTROzoneConcentrationMeasurementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTROzoneConcentrationMeasurementLevelValue int64
+type MTROzoneConcentrationMeasurementLevelValue uint8
 
 const (
 	MTROzoneConcentrationMeasurementLevelValueUnknown  MTROzoneConcentrationMeasurementLevelValue = 0
@@ -15509,7 +15509,7 @@ func (e MTROzoneConcentrationMeasurementLevelValue) String() string {
 	}
 }
 
-type MTROzoneConcentrationMeasurementMeasurementMedium int64
+type MTROzoneConcentrationMeasurementMeasurementMedium uint8
 
 const (
 	MTROzoneConcentrationMeasurementMeasurementMediumAir   MTROzoneConcentrationMeasurementMeasurementMedium = 0
@@ -15532,7 +15532,7 @@ func (e MTROzoneConcentrationMeasurementMeasurementMedium) String() string {
 	}
 }
 
-type MTROzoneConcentrationMeasurementMeasurementUnit int64
+type MTROzoneConcentrationMeasurementMeasurementUnit uint8
 
 const (
 	MTROzoneConcentrationMeasurementMeasurementUnitPPM  MTROzoneConcentrationMeasurementMeasurementUnit = 0
@@ -15571,7 +15571,7 @@ func (e MTROzoneConcentrationMeasurementMeasurementUnit) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRPM10ConcentrationMeasurementFeature int64
+type MTRPM10ConcentrationMeasurementFeature uint32
 
 const (
 	MTRPM10ConcentrationMeasurementFeatureNumericMeasurement MTRPM10ConcentrationMeasurementFeature = 1
@@ -15610,7 +15610,7 @@ func (e MTRPM10ConcentrationMeasurementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRPM10ConcentrationMeasurementLevelValue int64
+type MTRPM10ConcentrationMeasurementLevelValue uint8
 
 const (
 	MTRPM10ConcentrationMeasurementLevelValueUnknown  MTRPM10ConcentrationMeasurementLevelValue = 0
@@ -15639,7 +15639,7 @@ func (e MTRPM10ConcentrationMeasurementLevelValue) String() string {
 	}
 }
 
-type MTRPM10ConcentrationMeasurementMeasurementMedium int64
+type MTRPM10ConcentrationMeasurementMeasurementMedium uint8
 
 const (
 	MTRPM10ConcentrationMeasurementMeasurementMediumAir   MTRPM10ConcentrationMeasurementMeasurementMedium = 0
@@ -15662,7 +15662,7 @@ func (e MTRPM10ConcentrationMeasurementMeasurementMedium) String() string {
 	}
 }
 
-type MTRPM10ConcentrationMeasurementMeasurementUnit int64
+type MTRPM10ConcentrationMeasurementMeasurementUnit uint8
 
 const (
 	MTRPM10ConcentrationMeasurementMeasurementUnitPPM  MTRPM10ConcentrationMeasurementMeasurementUnit = 0
@@ -15701,7 +15701,7 @@ func (e MTRPM10ConcentrationMeasurementMeasurementUnit) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRPM1ConcentrationMeasurementFeature int64
+type MTRPM1ConcentrationMeasurementFeature uint32
 
 const (
 	MTRPM1ConcentrationMeasurementFeatureNumericMeasurement MTRPM1ConcentrationMeasurementFeature = 1
@@ -15740,7 +15740,7 @@ func (e MTRPM1ConcentrationMeasurementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRPM1ConcentrationMeasurementLevelValue int64
+type MTRPM1ConcentrationMeasurementLevelValue uint8
 
 const (
 	MTRPM1ConcentrationMeasurementLevelValueUnknown  MTRPM1ConcentrationMeasurementLevelValue = 0
@@ -15769,7 +15769,7 @@ func (e MTRPM1ConcentrationMeasurementLevelValue) String() string {
 	}
 }
 
-type MTRPM1ConcentrationMeasurementMeasurementMedium int64
+type MTRPM1ConcentrationMeasurementMeasurementMedium uint8
 
 const (
 	MTRPM1ConcentrationMeasurementMeasurementMediumAir   MTRPM1ConcentrationMeasurementMeasurementMedium = 0
@@ -15792,7 +15792,7 @@ func (e MTRPM1ConcentrationMeasurementMeasurementMedium) String() string {
 	}
 }
 
-type MTRPM1ConcentrationMeasurementMeasurementUnit int64
+type MTRPM1ConcentrationMeasurementMeasurementUnit uint8
 
 const (
 	MTRPM1ConcentrationMeasurementMeasurementUnitPPM  MTRPM1ConcentrationMeasurementMeasurementUnit = 0
@@ -15831,7 +15831,7 @@ func (e MTRPM1ConcentrationMeasurementMeasurementUnit) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRPM25ConcentrationMeasurementFeature int64
+type MTRPM25ConcentrationMeasurementFeature uint32
 
 const (
 	MTRPM25ConcentrationMeasurementFeatureNumericMeasurement MTRPM25ConcentrationMeasurementFeature = 1
@@ -15870,7 +15870,7 @@ func (e MTRPM25ConcentrationMeasurementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRPM25ConcentrationMeasurementLevelValue int64
+type MTRPM25ConcentrationMeasurementLevelValue uint8
 
 const (
 	MTRPM25ConcentrationMeasurementLevelValueUnknown  MTRPM25ConcentrationMeasurementLevelValue = 0
@@ -15899,7 +15899,7 @@ func (e MTRPM25ConcentrationMeasurementLevelValue) String() string {
 	}
 }
 
-type MTRPM25ConcentrationMeasurementMeasurementMedium int64
+type MTRPM25ConcentrationMeasurementMeasurementMedium uint8
 
 const (
 	MTRPM25ConcentrationMeasurementMeasurementMediumAir   MTRPM25ConcentrationMeasurementMeasurementMedium = 0
@@ -15922,7 +15922,7 @@ func (e MTRPM25ConcentrationMeasurementMeasurementMedium) String() string {
 	}
 }
 
-type MTRPM25ConcentrationMeasurementMeasurementUnit int64
+type MTRPM25ConcentrationMeasurementMeasurementUnit uint8
 
 const (
 	MTRPM25ConcentrationMeasurementMeasurementUnitPPM  MTRPM25ConcentrationMeasurementMeasurementUnit = 0
@@ -15960,7 +15960,7 @@ func (e MTRPM25ConcentrationMeasurementMeasurementUnit) String() string {
 	}
 }
 
-type MTRPowerSourceBatApprovedChemistry int64
+type MTRPowerSourceBatApprovedChemistry uint16
 
 const (
 	MTRPowerSourceBatApprovedChemistryUnspecified             MTRPowerSourceBatApprovedChemistry = 0
@@ -16073,7 +16073,7 @@ func (e MTRPowerSourceBatApprovedChemistry) String() string {
 	}
 }
 
-type MTRPowerSourceBatChargeFault int64
+type MTRPowerSourceBatChargeFault uint8
 
 const (
 	MTRPowerSourceBatChargeFaultUnspecified         MTRPowerSourceBatChargeFault = 0
@@ -16121,7 +16121,7 @@ func (e MTRPowerSourceBatChargeFault) String() string {
 	}
 }
 
-type MTRPowerSourceBatChargeLevel int64
+type MTRPowerSourceBatChargeLevel uint8
 
 const (
 	MTRPowerSourceBatChargeLevelOK       MTRPowerSourceBatChargeLevel = 0
@@ -16145,7 +16145,7 @@ func (e MTRPowerSourceBatChargeLevel) String() string {
 	}
 }
 
-type MTRPowerSourceBatChargeState int64
+type MTRPowerSourceBatChargeState uint8
 
 const (
 	MTRPowerSourceBatChargeStateUnknown        MTRPowerSourceBatChargeState = 0
@@ -16171,7 +16171,7 @@ func (e MTRPowerSourceBatChargeState) String() string {
 	}
 }
 
-type MTRPowerSourceBatCommonDesignation int64
+type MTRPowerSourceBatCommonDesignation uint16
 
 const (
 	MTRPowerSourceBatCommonDesignationUnspecified MTRPowerSourceBatCommonDesignation = 0
@@ -16428,7 +16428,7 @@ func (e MTRPowerSourceBatCommonDesignation) String() string {
 	}
 }
 
-type MTRPowerSourceBatFault int64
+type MTRPowerSourceBatFault uint8
 
 const (
 	MTRPowerSourceBatFaultUnspecified MTRPowerSourceBatFault = 0
@@ -16452,7 +16452,7 @@ func (e MTRPowerSourceBatFault) String() string {
 	}
 }
 
-type MTRPowerSourceBatReplaceability int64
+type MTRPowerSourceBatReplaceability uint8
 
 const (
 	MTRPowerSourceBatReplaceabilityUnspecified        MTRPowerSourceBatReplaceability = 0
@@ -16479,7 +16479,7 @@ func (e MTRPowerSourceBatReplaceability) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRPowerSourceFeature int64
+type MTRPowerSourceFeature uint32
 
 const (
 	MTRPowerSourceFeatureWired        MTRPowerSourceFeature = 1
@@ -16510,7 +16510,7 @@ func (e MTRPowerSourceFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRPowerSourceStatus int64
+type MTRPowerSourceStatus uint8
 
 const (
 	MTRPowerSourceStatusUnspecified MTRPowerSourceStatus = 0
@@ -16537,7 +16537,7 @@ func (e MTRPowerSourceStatus) String() string {
 	}
 }
 
-type MTRPowerSourceWiredCurrentType int64
+type MTRPowerSourceWiredCurrentType uint8
 
 const (
 	MTRPowerSourceWiredCurrentTypeAC MTRPowerSourceWiredCurrentType = 0
@@ -16557,7 +16557,7 @@ func (e MTRPowerSourceWiredCurrentType) String() string {
 	}
 }
 
-type MTRPowerSourceWiredFault int64
+type MTRPowerSourceWiredFault uint8
 
 const (
 	MTRPowerSourceWiredFaultUnspecified  MTRPowerSourceWiredFault = 0
@@ -16582,7 +16582,7 @@ func (e MTRPowerSourceWiredFault) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRPowerTopologyFeature int64
+type MTRPowerTopologyFeature uint32
 
 const (
 	MTRPowerTopologyFeatureNodeTopology     MTRPowerTopologyFeature = 1
@@ -16614,7 +16614,7 @@ func (e MTRPowerTopologyFeature) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRPressureMeasurementFeature int64
+type MTRPressureMeasurementFeature uint32
 
 const (
 	MTRPressureMeasurementFeatureExtended MTRPressureMeasurementFeature = 1
@@ -16634,7 +16634,7 @@ func (e MTRPressureMeasurementFeature) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRPressureMeasurementPressureFeature int64
+type MTRPressureMeasurementPressureFeature uint32
 
 const (
 	MTRPressureMeasurementPressureFeatureExtended MTRPressureMeasurementPressureFeature = 1
@@ -16657,7 +16657,7 @@ func (e MTRPressureMeasurementPressureFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRPumpConfigurationAndControlControlMode int64
+type MTRPumpConfigurationAndControlControlMode uint8
 
 const (
 	MTRPumpConfigurationAndControlControlModeConstantSpeed        MTRPumpConfigurationAndControlControlMode = 0
@@ -16690,7 +16690,7 @@ func (e MTRPumpConfigurationAndControlControlMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRPumpConfigurationAndControlFeature int64
+type MTRPumpConfigurationAndControlFeature uint32
 
 const (
 	MTRPumpConfigurationAndControlFeatureConstantPressure    MTRPumpConfigurationAndControlFeature = 1
@@ -16733,7 +16733,7 @@ func (e MTRPumpConfigurationAndControlFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRPumpConfigurationAndControlOperationMode int64
+type MTRPumpConfigurationAndControlOperationMode uint8
 
 const (
 	MTRPumpConfigurationAndControlOperationModeNormal  MTRPumpConfigurationAndControlOperationMode = 0
@@ -16759,7 +16759,7 @@ func (e MTRPumpConfigurationAndControlOperationMode) String() string {
 	}
 }
 
-type MTRPumpConfigurationAndControlPumpControlMode int64
+type MTRPumpConfigurationAndControlPumpControlMode uint8
 
 const (
 	MTRPumpConfigurationAndControlPumpControlModeConstantSpeed        MTRPumpConfigurationAndControlPumpControlMode = 0
@@ -16792,7 +16792,7 @@ func (e MTRPumpConfigurationAndControlPumpControlMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRPumpConfigurationAndControlPumpFeature int64
+type MTRPumpConfigurationAndControlPumpFeature uint32
 
 const (
 	MTRPumpConfigurationAndControlPumpFeatureConstantPressure    MTRPumpConfigurationAndControlPumpFeature = 1
@@ -16839,7 +16839,7 @@ func (e MTRPumpConfigurationAndControlPumpFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRPumpConfigurationAndControlPumpOperationMode int64
+type MTRPumpConfigurationAndControlPumpOperationMode uint8
 
 const (
 	MTRPumpConfigurationAndControlPumpOperationModeNormal  MTRPumpConfigurationAndControlPumpOperationMode = 0
@@ -16866,7 +16866,7 @@ func (e MTRPumpConfigurationAndControlPumpOperationMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRPumpConfigurationAndControlPumpStatus int64
+type MTRPumpConfigurationAndControlPumpStatus uint16
 
 const (
 	MTRPumpConfigurationAndControlPumpStatusDeviceFault       MTRPumpConfigurationAndControlPumpStatus = 1
@@ -16918,7 +16918,7 @@ func (e MTRPumpConfigurationAndControlPumpStatus) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRPumpConfigurationAndControlPumpStatusBitmap int64
+type MTRPumpConfigurationAndControlPumpStatusBitmap uint16
 
 const (
 	MTRPumpConfigurationAndControlPumpStatusBitmapDeviceFault       MTRPumpConfigurationAndControlPumpStatusBitmap = 1
@@ -16974,7 +16974,7 @@ func (e MTRPumpConfigurationAndControlPumpStatusBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRRVCCleanModeFeature int64
+type MTRRVCCleanModeFeature uint32
 
 const ()
 
@@ -16988,7 +16988,7 @@ func (e MTRRVCCleanModeFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRRVCCleanModeModeTag int64
+type MTRRVCCleanModeModeTag uint16
 
 const (
 	MTRRVCCleanModeModeTagAuto      MTRRVCCleanModeModeTag = 0
@@ -17041,7 +17041,7 @@ func (e MTRRVCCleanModeModeTag) String() string {
 	}
 }
 
-type MTRRVCCleanModeStatusCode int64
+type MTRRVCCleanModeStatusCode uint8
 
 const (
 	MTRRVCCleanModeStatusCodeCleaningInProgress MTRRVCCleanModeStatusCode = 64
@@ -17058,7 +17058,7 @@ func (e MTRRVCCleanModeStatusCode) String() string {
 	}
 }
 
-type MTRRVCOperationalStateErrorState int64
+type MTRRVCOperationalStateErrorState uint8
 
 const (
 	MTRRVCOperationalStateErrorStateNoError                   MTRRVCOperationalStateErrorState = 0
@@ -17108,7 +17108,7 @@ func (e MTRRVCOperationalStateErrorState) String() string {
 	}
 }
 
-type MTRRVCOperationalStateOperationalState int64
+type MTRRVCOperationalStateOperationalState uint8
 
 const (
 	MTRRVCOperationalStateOperationalStateStopped        MTRRVCOperationalStateOperationalState = 0
@@ -17144,7 +17144,7 @@ func (e MTRRVCOperationalStateOperationalState) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRRVCRunModeFeature int64
+type MTRRVCRunModeFeature uint32
 
 const ()
 
@@ -17158,7 +17158,7 @@ func (e MTRRVCRunModeFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRRVCRunModeModeTag int64
+type MTRRVCRunModeModeTag uint16
 
 const (
 	MTRRVCRunModeModeTagAuto      MTRRVCRunModeModeTag = 0
@@ -17211,7 +17211,7 @@ func (e MTRRVCRunModeModeTag) String() string {
 	}
 }
 
-type MTRRVCRunModeStatusCode int64
+type MTRRVCRunModeStatusCode uint8
 
 const (
 	MTRRVCRunModeStatusCodeStuck                 MTRRVCRunModeStatusCode = 65
@@ -17250,7 +17250,7 @@ func (e MTRRVCRunModeStatusCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRRadonConcentrationMeasurementFeature int64
+type MTRRadonConcentrationMeasurementFeature uint32
 
 const (
 	MTRRadonConcentrationMeasurementFeatureNumericMeasurement MTRRadonConcentrationMeasurementFeature = 1
@@ -17289,7 +17289,7 @@ func (e MTRRadonConcentrationMeasurementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRRadonConcentrationMeasurementLevelValue int64
+type MTRRadonConcentrationMeasurementLevelValue uint8
 
 const (
 	MTRRadonConcentrationMeasurementLevelValueUnknown  MTRRadonConcentrationMeasurementLevelValue = 0
@@ -17318,7 +17318,7 @@ func (e MTRRadonConcentrationMeasurementLevelValue) String() string {
 	}
 }
 
-type MTRRadonConcentrationMeasurementMeasurementMedium int64
+type MTRRadonConcentrationMeasurementMeasurementMedium uint8
 
 const (
 	MTRRadonConcentrationMeasurementMeasurementMediumAir   MTRRadonConcentrationMeasurementMeasurementMedium = 0
@@ -17341,7 +17341,7 @@ func (e MTRRadonConcentrationMeasurementMeasurementMedium) String() string {
 	}
 }
 
-type MTRRadonConcentrationMeasurementMeasurementUnit int64
+type MTRRadonConcentrationMeasurementMeasurementUnit uint8
 
 const (
 	MTRRadonConcentrationMeasurementMeasurementUnitPPM  MTRRadonConcentrationMeasurementMeasurementUnit = 0
@@ -17380,7 +17380,7 @@ func (e MTRRadonConcentrationMeasurementMeasurementUnit) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRRefrigeratorAlarmAlarmBitmap int64
+type MTRRefrigeratorAlarmAlarmBitmap uint32
 
 const (
 	MTRRefrigeratorAlarmAlarmBitmapDoorOpen MTRRefrigeratorAlarmAlarmBitmap = 1
@@ -17399,7 +17399,7 @@ func (e MTRRefrigeratorAlarmAlarmBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag int64
+type MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag uint16
 
 const (
 	MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagAuto        MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag = 0
@@ -17450,7 +17450,7 @@ func (e MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag) String() stri
 }
 
 // Bitmask — values may be combined with |.
-type MTRServiceAreaFeature int64
+type MTRServiceAreaFeature uint32
 
 const (
 	MTRServiceAreaFeatureSelectWhileRunning MTRServiceAreaFeature = 1
@@ -17477,7 +17477,7 @@ func (e MTRServiceAreaFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRServiceAreaOperationalStatus int64
+type MTRServiceAreaOperationalStatus uint8
 
 const (
 	MTRServiceAreaOperationalStatusPending   MTRServiceAreaOperationalStatus = 0
@@ -17503,7 +17503,7 @@ func (e MTRServiceAreaOperationalStatus) String() string {
 	}
 }
 
-type MTRServiceAreaSelectAreasStatus int64
+type MTRServiceAreaSelectAreasStatus uint8
 
 const (
 	MTRServiceAreaSelectAreasStatusSuccess         MTRServiceAreaSelectAreasStatus = 0
@@ -17529,7 +17529,7 @@ func (e MTRServiceAreaSelectAreasStatus) String() string {
 	}
 }
 
-type MTRServiceAreaSkipAreaStatus int64
+type MTRServiceAreaSkipAreaStatus uint8
 
 const (
 	MTRServiceAreaSkipAreaStatusSuccess            MTRServiceAreaSkipAreaStatus = 0
@@ -17555,7 +17555,7 @@ func (e MTRServiceAreaSkipAreaStatus) String() string {
 	}
 }
 
-type MTRSmokeCOAlarmAlarmState int64
+type MTRSmokeCOAlarmAlarmState uint8
 
 const (
 	MTRSmokeCOAlarmAlarmStateNormal   MTRSmokeCOAlarmAlarmState = 0
@@ -17578,7 +17578,7 @@ func (e MTRSmokeCOAlarmAlarmState) String() string {
 	}
 }
 
-type MTRSmokeCOAlarmContaminationState int64
+type MTRSmokeCOAlarmContaminationState uint8
 
 const (
 	MTRSmokeCOAlarmContaminationStateNormal   MTRSmokeCOAlarmContaminationState = 0
@@ -17604,7 +17604,7 @@ func (e MTRSmokeCOAlarmContaminationState) String() string {
 	}
 }
 
-type MTRSmokeCOAlarmEndOfService int64
+type MTRSmokeCOAlarmEndOfService uint8
 
 const (
 	MTRSmokeCOAlarmEndOfServiceNormal  MTRSmokeCOAlarmEndOfService = 0
@@ -17624,7 +17624,7 @@ func (e MTRSmokeCOAlarmEndOfService) String() string {
 	}
 }
 
-type MTRSmokeCOAlarmExpressedState int64
+type MTRSmokeCOAlarmExpressedState uint8
 
 const (
 	MTRSmokeCOAlarmExpressedStateNormal            MTRSmokeCOAlarmExpressedState = 0
@@ -17666,7 +17666,7 @@ func (e MTRSmokeCOAlarmExpressedState) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRSmokeCOAlarmFeature int64
+type MTRSmokeCOAlarmFeature uint32
 
 const (
 	MTRSmokeCOAlarmFeatureSmokeAlarm MTRSmokeCOAlarmFeature = 1
@@ -17689,7 +17689,7 @@ func (e MTRSmokeCOAlarmFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRSmokeCOAlarmMuteState int64
+type MTRSmokeCOAlarmMuteState uint8
 
 const (
 	MTRSmokeCOAlarmMuteStateNotMuted MTRSmokeCOAlarmMuteState = 0
@@ -17709,7 +17709,7 @@ func (e MTRSmokeCOAlarmMuteState) String() string {
 	}
 }
 
-type MTRSmokeCOAlarmSensitivity int64
+type MTRSmokeCOAlarmSensitivity uint8
 
 const (
 	MTRSmokeCOAlarmSensitivityHigh     MTRSmokeCOAlarmSensitivity = 0
@@ -17733,7 +17733,7 @@ func (e MTRSmokeCOAlarmSensitivity) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRSoftwareDiagnosticsFeature int64
+type MTRSoftwareDiagnosticsFeature uint32
 
 const (
 	MTRSoftwareDiagnosticsFeatureWatermarks MTRSoftwareDiagnosticsFeature = 1
@@ -17757,7 +17757,7 @@ func (e MTRSoftwareDiagnosticsFeature) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRSwitchFeature int64
+type MTRSwitchFeature uint32
 
 const (
 	MTRSwitchFeatureLatchingSwitch            MTRSwitchFeature = 1
@@ -17796,7 +17796,7 @@ func (e MTRSwitchFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRTargetNavigatorStatus int64
+type MTRTargetNavigatorStatus uint8
 
 const (
 	MTRTargetNavigatorStatusSuccess        MTRTargetNavigatorStatus = 0
@@ -17820,7 +17820,7 @@ func (e MTRTargetNavigatorStatus) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRTemperatureControlFeature int64
+type MTRTemperatureControlFeature uint32
 
 const (
 	MTRTemperatureControlFeatureTemperatureNumber MTRTemperatureControlFeature = 1
@@ -17848,7 +17848,7 @@ func (e MTRTemperatureControlFeature) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRTestClusterBitmap16MaskMap int64
+type MTRTestClusterBitmap16MaskMap uint16
 
 const (
 	MTRTestClusterBitmap16MaskMapMaskVal1 MTRTestClusterBitmap16MaskMap = 1
@@ -17880,7 +17880,7 @@ func (e MTRTestClusterBitmap16MaskMap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRTestClusterBitmap32MaskMap int64
+type MTRTestClusterBitmap32MaskMap uint32
 
 const (
 	MTRTestClusterBitmap32MaskMapMaskVal1 MTRTestClusterBitmap32MaskMap = 1
@@ -17944,7 +17944,7 @@ func (e MTRTestClusterBitmap64MaskMap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRTestClusterBitmap8MaskMap int64
+type MTRTestClusterBitmap8MaskMap uint8
 
 const (
 	MTRTestClusterBitmap8MaskMapMaskVal1 MTRTestClusterBitmap8MaskMap = 1
@@ -17975,7 +17975,7 @@ func (e MTRTestClusterBitmap8MaskMap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRTestClusterSimple int64
+type MTRTestClusterSimple uint8
 
 const (
 	MTRTestClusterSimpleUnspecified MTRTestClusterSimple = 0
@@ -18002,7 +18002,7 @@ func (e MTRTestClusterSimple) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRTestClusterSimpleBitmap int64
+type MTRTestClusterSimpleBitmap uint8
 
 const (
 	MTRTestClusterSimpleBitmapValueA MTRTestClusterSimpleBitmap = 1
@@ -18029,7 +18029,7 @@ func (e MTRTestClusterSimpleBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRThermostatACCapacityFormat int64
+type MTRThermostatACCapacityFormat uint8
 
 const (
 	MTRThermostatACCapacityFormatBTUh MTRThermostatACCapacityFormat = 0
@@ -18046,7 +18046,7 @@ func (e MTRThermostatACCapacityFormat) String() string {
 	}
 }
 
-type MTRThermostatACCompressorType int64
+type MTRThermostatACCompressorType uint8
 
 const (
 	MTRThermostatACCompressorTypeUnknown MTRThermostatACCompressorType = 0
@@ -18073,7 +18073,7 @@ func (e MTRThermostatACCompressorType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThermostatACErrorCodeBitmap int64
+type MTRThermostatACErrorCodeBitmap uint32
 
 const (
 	MTRThermostatACErrorCodeBitmapCompressorFail    MTRThermostatACErrorCodeBitmap = 1
@@ -18108,7 +18108,7 @@ func (e MTRThermostatACErrorCodeBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRThermostatACLouverPosition int64
+type MTRThermostatACLouverPosition uint8
 
 const (
 	MTRThermostatACLouverPositionClosed        MTRThermostatACLouverPosition = 1
@@ -18137,7 +18137,7 @@ func (e MTRThermostatACLouverPosition) String() string {
 	}
 }
 
-type MTRThermostatACRefrigerantType int64
+type MTRThermostatACRefrigerantType uint8
 
 const (
 	MTRThermostatACRefrigerantTypeUnknown MTRThermostatACRefrigerantType = 0
@@ -18163,7 +18163,7 @@ func (e MTRThermostatACRefrigerantType) String() string {
 	}
 }
 
-type MTRThermostatACType int64
+type MTRThermostatACType uint8
 
 const (
 	MTRThermostatACTypeUnknown          MTRThermostatACType = 0
@@ -18192,7 +18192,7 @@ func (e MTRThermostatACType) String() string {
 	}
 }
 
-type MTRThermostatControlSequence int64
+type MTRThermostatControlSequence uint8
 
 const (
 	MTRThermostatControlSequenceCoolingOnly                 MTRThermostatControlSequence = 0
@@ -18224,7 +18224,7 @@ func (e MTRThermostatControlSequence) String() string {
 	}
 }
 
-type MTRThermostatControlSequenceOfOperation int64
+type MTRThermostatControlSequenceOfOperation uint8
 
 const (
 	MTRThermostatControlSequenceOfOperationCoolingOnly                 MTRThermostatControlSequenceOfOperation = 0
@@ -18257,7 +18257,7 @@ func (e MTRThermostatControlSequenceOfOperation) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThermostatDayOfWeek int64
+type MTRThermostatDayOfWeek uint8
 
 const (
 	MTRThermostatDayOfWeekSunday         MTRThermostatDayOfWeek = 1
@@ -18309,7 +18309,7 @@ func (e MTRThermostatDayOfWeek) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThermostatFeature int64
+type MTRThermostatFeature uint32
 
 const (
 	MTRThermostatFeatureHeating                     MTRThermostatFeature = 1
@@ -18369,7 +18369,7 @@ func (e MTRThermostatFeature) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThermostatHVACSystemTypeBitmap int64
+type MTRThermostatHVACSystemTypeBitmap uint8
 
 const (
 	MTRThermostatHVACSystemTypeBitmapCoolingStage      MTRThermostatHVACSystemTypeBitmap = 3
@@ -18401,7 +18401,7 @@ func (e MTRThermostatHVACSystemTypeBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThermostatModeForSequence int64
+type MTRThermostatModeForSequence uint8
 
 const (
 	MTRThermostatModeForSequenceHeatSetpointPresent      MTRThermostatModeForSequence = 1
@@ -18433,7 +18433,7 @@ func (e MTRThermostatModeForSequence) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThermostatOccupancyBitmap int64
+type MTRThermostatOccupancyBitmap uint8
 
 const (
 	MTRThermostatOccupancyBitmapOccupied MTRThermostatOccupancyBitmap = 1
@@ -18452,7 +18452,7 @@ func (e MTRThermostatOccupancyBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRThermostatPresetScenario int64
+type MTRThermostatPresetScenario uint8
 
 const (
 	MTRThermostatPresetScenarioOccupied     MTRThermostatPresetScenario = 1
@@ -18488,7 +18488,7 @@ func (e MTRThermostatPresetScenario) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThermostatPresetTypeFeaturesBitmap int64
+type MTRThermostatPresetTypeFeaturesBitmap uint16
 
 const (
 	MTRThermostatPresetTypeFeaturesBitmapAutomatic     MTRThermostatPresetTypeFeaturesBitmap = 1
@@ -18512,7 +18512,7 @@ func (e MTRThermostatPresetTypeFeaturesBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThermostatProgrammingOperationModeBitmap int64
+type MTRThermostatProgrammingOperationModeBitmap uint8
 
 const (
 	MTRThermostatProgrammingOperationModeBitmapScheduleActive MTRThermostatProgrammingOperationModeBitmap = 1
@@ -18540,7 +18540,7 @@ func (e MTRThermostatProgrammingOperationModeBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThermostatRelayStateBitmap int64
+type MTRThermostatRelayStateBitmap uint16
 
 const (
 	MTRThermostatRelayStateBitmapHeat       MTRThermostatRelayStateBitmap = 1
@@ -18584,7 +18584,7 @@ func (e MTRThermostatRelayStateBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThermostatRemoteSensingBitmap int64
+type MTRThermostatRemoteSensingBitmap uint8
 
 const (
 	MTRThermostatRemoteSensingBitmapLocalTemperature   MTRThermostatRemoteSensingBitmap = 1
@@ -18611,7 +18611,7 @@ func (e MTRThermostatRemoteSensingBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRThermostatRunningMode int64
+type MTRThermostatRunningMode uint8
 
 const (
 	MTRThermostatRunningModeOff  MTRThermostatRunningMode = 0
@@ -18635,7 +18635,7 @@ func (e MTRThermostatRunningMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThermostatScheduleDayOfWeekBitmap int64
+type MTRThermostatScheduleDayOfWeekBitmap uint8
 
 const (
 	MTRThermostatScheduleDayOfWeekBitmapSunday    MTRThermostatScheduleDayOfWeekBitmap = 1
@@ -18683,7 +18683,7 @@ func (e MTRThermostatScheduleDayOfWeekBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThermostatScheduleModeBitmap int64
+type MTRThermostatScheduleModeBitmap uint8
 
 const (
 	MTRThermostatScheduleModeBitmapHeatSetpointPresent MTRThermostatScheduleModeBitmap = 1
@@ -18707,7 +18707,7 @@ func (e MTRThermostatScheduleModeBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThermostatScheduleTypeFeaturesBitmap int64
+type MTRThermostatScheduleTypeFeaturesBitmap uint16
 
 const (
 	MTRThermostatScheduleTypeFeaturesBitmapSupportsPresets   MTRThermostatScheduleTypeFeaturesBitmap = 1
@@ -18738,7 +18738,7 @@ func (e MTRThermostatScheduleTypeFeaturesBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRThermostatSetpointAdjustMode int64
+type MTRThermostatSetpointAdjustMode uint8
 
 const (
 	MTRThermostatSetpointAdjustModeHeat                 MTRThermostatSetpointAdjustMode = 0
@@ -18764,7 +18764,7 @@ func (e MTRThermostatSetpointAdjustMode) String() string {
 	}
 }
 
-type MTRThermostatSetpointChangeSource int64
+type MTRThermostatSetpointChangeSource uint8
 
 const (
 	MTRThermostatSetpointChangeSourceManual   MTRThermostatSetpointChangeSource = 0
@@ -18787,7 +18787,7 @@ func (e MTRThermostatSetpointChangeSource) String() string {
 	}
 }
 
-type MTRThermostatSetpointRaiseLowerMode int64
+type MTRThermostatSetpointRaiseLowerMode uint8
 
 const (
 	MTRThermostatSetpointRaiseLowerModeHeat MTRThermostatSetpointRaiseLowerMode = 0
@@ -18810,7 +18810,7 @@ func (e MTRThermostatSetpointRaiseLowerMode) String() string {
 	}
 }
 
-type MTRThermostatStartOfWeek int64
+type MTRThermostatStartOfWeek uint8
 
 const (
 	MTRThermostatStartOfWeekSunday    MTRThermostatStartOfWeek = 0
@@ -18845,7 +18845,7 @@ func (e MTRThermostatStartOfWeek) String() string {
 	}
 }
 
-type MTRThermostatSystemMode int64
+type MTRThermostatSystemMode uint8
 
 const (
 	MTRThermostatSystemModeOff              MTRThermostatSystemMode = 0
@@ -18887,7 +18887,7 @@ func (e MTRThermostatSystemMode) String() string {
 	}
 }
 
-type MTRThermostatTemperatureSetpointHold int64
+type MTRThermostatTemperatureSetpointHold uint8
 
 const (
 	MTRThermostatTemperatureSetpointHoldSetpointHoldOff MTRThermostatTemperatureSetpointHold = 0
@@ -18907,7 +18907,7 @@ func (e MTRThermostatTemperatureSetpointHold) String() string {
 	}
 }
 
-type MTRThermostatUserInterfaceConfigurationKeypadLockout int64
+type MTRThermostatUserInterfaceConfigurationKeypadLockout uint8
 
 const (
 	MTRThermostatUserInterfaceConfigurationKeypadLockoutNoLockout MTRThermostatUserInterfaceConfigurationKeypadLockout = 0
@@ -18939,7 +18939,7 @@ func (e MTRThermostatUserInterfaceConfigurationKeypadLockout) String() string {
 	}
 }
 
-type MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibility int64
+type MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibility uint8
 
 const (
 	MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibilityScheduleProgrammingPermitted MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibility = 0
@@ -18959,7 +18959,7 @@ func (e MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibility) St
 	}
 }
 
-type MTRThermostatUserInterfaceConfigurationTemperatureDisplayMode int64
+type MTRThermostatUserInterfaceConfigurationTemperatureDisplayMode uint8
 
 const (
 	MTRThermostatUserInterfaceConfigurationTemperatureDisplayModeCelsius    MTRThermostatUserInterfaceConfigurationTemperatureDisplayMode = 0
@@ -18980,7 +18980,7 @@ func (e MTRThermostatUserInterfaceConfigurationTemperatureDisplayMode) String() 
 }
 
 // Bitmask — values may be combined with |.
-type MTRThreadBorderRouterManagementFeature int64
+type MTRThreadBorderRouterManagementFeature uint32
 
 const (
 	MTRThreadBorderRouterManagementFeaturePANChange MTRThreadBorderRouterManagementFeature = 1
@@ -18999,7 +18999,7 @@ func (e MTRThreadBorderRouterManagementFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRThreadNetworkDiagnosticsConnectionStatus int64
+type MTRThreadNetworkDiagnosticsConnectionStatus uint8
 
 const (
 	MTRThreadNetworkDiagnosticsConnectionStatusConnected    MTRThreadNetworkDiagnosticsConnectionStatus = 0
@@ -19020,7 +19020,7 @@ func (e MTRThreadNetworkDiagnosticsConnectionStatus) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRThreadNetworkDiagnosticsFeature int64
+type MTRThreadNetworkDiagnosticsFeature uint32
 
 const (
 	MTRThreadNetworkDiagnosticsFeaturePacketCounts MTRThreadNetworkDiagnosticsFeature = 1
@@ -19051,7 +19051,7 @@ func (e MTRThreadNetworkDiagnosticsFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRThreadNetworkDiagnosticsNetworkFault int64
+type MTRThreadNetworkDiagnosticsNetworkFault uint8
 
 const (
 	MTRThreadNetworkDiagnosticsNetworkFaultUnspecified     MTRThreadNetworkDiagnosticsNetworkFault = 0
@@ -19077,7 +19077,7 @@ func (e MTRThreadNetworkDiagnosticsNetworkFault) String() string {
 	}
 }
 
-type MTRThreadNetworkDiagnosticsRoutingRole int64
+type MTRThreadNetworkDiagnosticsRoutingRole uint8
 
 const (
 	MTRThreadNetworkDiagnosticsRoutingRoleUnspecified     MTRThreadNetworkDiagnosticsRoutingRole = 0
@@ -19112,7 +19112,7 @@ func (e MTRThreadNetworkDiagnosticsRoutingRole) String() string {
 	}
 }
 
-type MTRThreadNetworkDiagnosticsThreadConnectionStatus int64
+type MTRThreadNetworkDiagnosticsThreadConnectionStatus uint8
 
 const (
 	MTRThreadNetworkDiagnosticsThreadConnectionStatusConnected    MTRThreadNetworkDiagnosticsThreadConnectionStatus = 0
@@ -19132,7 +19132,7 @@ func (e MTRThreadNetworkDiagnosticsThreadConnectionStatus) String() string {
 	}
 }
 
-type MTRTimeFormatLocalizationCalendarType int64
+type MTRTimeFormatLocalizationCalendarType uint8
 
 const (
 	MTRTimeFormatLocalizationCalendarTypeBuddhist        MTRTimeFormatLocalizationCalendarType = 0
@@ -19186,7 +19186,7 @@ func (e MTRTimeFormatLocalizationCalendarType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRTimeFormatLocalizationFeature int64
+type MTRTimeFormatLocalizationFeature uint32
 
 const (
 	MTRTimeFormatLocalizationFeatureCalendarFormat MTRTimeFormatLocalizationFeature = 1
@@ -19205,7 +19205,7 @@ func (e MTRTimeFormatLocalizationFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRTimeFormatLocalizationHourFormat int64
+type MTRTimeFormatLocalizationHourFormat uint8
 
 const (
 	MTRTimeFormatLocalizationHourFormat12hr            MTRTimeFormatLocalizationHourFormat = 0
@@ -19229,7 +19229,7 @@ func (e MTRTimeFormatLocalizationHourFormat) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRTimeSynchronizationFeature int64
+type MTRTimeSynchronizationFeature uint32
 
 const (
 	MTRTimeSynchronizationFeatureTimeZone       MTRTimeSynchronizationFeature = 1
@@ -19260,7 +19260,7 @@ func (e MTRTimeSynchronizationFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRTimeSynchronizationGranularity int64
+type MTRTimeSynchronizationGranularity uint8
 
 const (
 	MTRTimeSynchronizationGranularityNoTimeGranularity       MTRTimeSynchronizationGranularity = 0
@@ -19289,7 +19289,7 @@ func (e MTRTimeSynchronizationGranularity) String() string {
 	}
 }
 
-type MTRTimeSynchronizationStatusCode int64
+type MTRTimeSynchronizationStatusCode uint8
 
 const (
 	MTRTimeSynchronizationStatusCodeTimeNotAccepted MTRTimeSynchronizationStatusCode = 2
@@ -19306,7 +19306,7 @@ func (e MTRTimeSynchronizationStatusCode) String() string {
 	}
 }
 
-type MTRTimeSynchronizationTimeSource int64
+type MTRTimeSynchronizationTimeSource uint8
 
 const (
 	MTRTimeSynchronizationTimeSourceNone             MTRTimeSynchronizationTimeSource = 0
@@ -19383,7 +19383,7 @@ func (e MTRTimeSynchronizationTimeSource) String() string {
 	}
 }
 
-type MTRTimeSynchronizationTimeZoneDatabase int64
+type MTRTimeSynchronizationTimeZoneDatabase uint8
 
 const (
 	MTRTimeSynchronizationTimeZoneDatabaseFull    MTRTimeSynchronizationTimeZoneDatabase = 0
@@ -19407,7 +19407,7 @@ func (e MTRTimeSynchronizationTimeZoneDatabase) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature int64
+type MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature uint32
 
 const (
 	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureNumericMeasurement MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature = 1
@@ -19446,7 +19446,7 @@ func (e MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature) String(
 	return strings.Join(parts, "|")
 }
 
-type MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue int64
+type MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue uint8
 
 const (
 	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueUnknown  MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue = 0
@@ -19475,7 +19475,7 @@ func (e MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue) Stri
 	}
 }
 
-type MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMedium int64
+type MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMedium uint8
 
 const (
 	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumAir   MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMedium = 0
@@ -19498,7 +19498,7 @@ func (e MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediu
 	}
 }
 
-type MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit int64
+type MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit uint8
 
 const (
 	MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPPM  MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit = 0
@@ -19537,7 +19537,7 @@ func (e MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit)
 }
 
 // Bitmask — values may be combined with |.
-type MTRUnitLocalizationFeature int64
+type MTRUnitLocalizationFeature uint32
 
 const (
 	MTRUnitLocalizationFeatureTemperatureUnit MTRUnitLocalizationFeature = 1
@@ -19556,7 +19556,7 @@ func (e MTRUnitLocalizationFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRUnitLocalizationTempUnit int64
+type MTRUnitLocalizationTempUnit uint8
 
 const (
 	MTRUnitLocalizationTempUnitFahrenheit MTRUnitLocalizationTempUnit = 0
@@ -19580,7 +19580,7 @@ func (e MTRUnitLocalizationTempUnit) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRUnitTestingBitmap16MaskMap int64
+type MTRUnitTestingBitmap16MaskMap uint16
 
 const (
 	MTRUnitTestingBitmap16MaskMapMaskVal1 MTRUnitTestingBitmap16MaskMap = 1
@@ -19612,7 +19612,7 @@ func (e MTRUnitTestingBitmap16MaskMap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRUnitTestingBitmap32MaskMap int64
+type MTRUnitTestingBitmap32MaskMap uint32
 
 const (
 	MTRUnitTestingBitmap32MaskMapMaskVal1 MTRUnitTestingBitmap32MaskMap = 1
@@ -19676,7 +19676,7 @@ func (e MTRUnitTestingBitmap64MaskMap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRUnitTestingBitmap8MaskMap int64
+type MTRUnitTestingBitmap8MaskMap uint8
 
 const (
 	MTRUnitTestingBitmap8MaskMapMaskVal1 MTRUnitTestingBitmap8MaskMap = 1
@@ -19707,7 +19707,7 @@ func (e MTRUnitTestingBitmap8MaskMap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRUnitTestingSimple int64
+type MTRUnitTestingSimple uint8
 
 const (
 	MTRUnitTestingSimpleUnspecified MTRUnitTestingSimple = 0
@@ -19734,7 +19734,7 @@ func (e MTRUnitTestingSimple) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRUnitTestingSimpleBitmap int64
+type MTRUnitTestingSimpleBitmap uint8
 
 const (
 	MTRUnitTestingSimpleBitmapValueA MTRUnitTestingSimpleBitmap = 1
@@ -19762,7 +19762,7 @@ func (e MTRUnitTestingSimpleBitmap) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRValveConfigurationAndControlFeature int64
+type MTRValveConfigurationAndControlFeature uint32
 
 const (
 	MTRValveConfigurationAndControlFeatureTimeSync MTRValveConfigurationAndControlFeature = 1
@@ -19785,7 +19785,7 @@ func (e MTRValveConfigurationAndControlFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRValveConfigurationAndControlStatusCode int64
+type MTRValveConfigurationAndControlStatusCode uint8
 
 const (
 	MTRValveConfigurationAndControlStatusCodeFailureDueToFault MTRValveConfigurationAndControlStatusCode = 2
@@ -19803,7 +19803,7 @@ func (e MTRValveConfigurationAndControlStatusCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRValveConfigurationAndControlValveFaultBitmap int64
+type MTRValveConfigurationAndControlValveFaultBitmap uint16
 
 const (
 	MTRValveConfigurationAndControlValveFaultBitmapGeneralFault    MTRValveConfigurationAndControlValveFaultBitmap = 1
@@ -19842,7 +19842,7 @@ func (e MTRValveConfigurationAndControlValveFaultBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRValveConfigurationAndControlValveState int64
+type MTRValveConfigurationAndControlValveState uint8
 
 const (
 	MTRValveConfigurationAndControlValveStateClosed        MTRValveConfigurationAndControlValveState = 0
@@ -19865,7 +19865,7 @@ func (e MTRValveConfigurationAndControlValveState) String() string {
 	}
 }
 
-type MTRWaterHeaterManagementBoostState int64
+type MTRWaterHeaterManagementBoostState uint8
 
 const (
 	MTRWaterHeaterManagementBoostStateInactive MTRWaterHeaterManagementBoostState = 0
@@ -19886,7 +19886,7 @@ func (e MTRWaterHeaterManagementBoostState) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRWaterHeaterManagementFeature int64
+type MTRWaterHeaterManagementFeature uint32
 
 const (
 	MTRWaterHeaterManagementFeatureEnergyManagement MTRWaterHeaterManagementFeature = 1
@@ -19910,7 +19910,7 @@ func (e MTRWaterHeaterManagementFeature) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRWaterHeaterManagementWaterHeaterHeatSourceBitmap int64
+type MTRWaterHeaterManagementWaterHeaterHeatSourceBitmap uint8
 
 const (
 	MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapImmersionElement1 MTRWaterHeaterManagementWaterHeaterHeatSourceBitmap = 1
@@ -19945,7 +19945,7 @@ func (e MTRWaterHeaterManagementWaterHeaterHeatSourceBitmap) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRWaterHeaterModeModeTag int64
+type MTRWaterHeaterModeModeTag uint16
 
 const (
 	MTRWaterHeaterModeModeTagAuto      MTRWaterHeaterModeModeTag = 0
@@ -19998,7 +19998,7 @@ func (e MTRWaterHeaterModeModeTag) String() string {
 	}
 }
 
-type MTRWiFiNetworkDiagnosticsAssociationFailureCause int64
+type MTRWiFiNetworkDiagnosticsAssociationFailureCause uint8
 
 const (
 	MTRWiFiNetworkDiagnosticsAssociationFailureCauseUnknown              MTRWiFiNetworkDiagnosticsAssociationFailureCause = 0
@@ -20024,7 +20024,7 @@ func (e MTRWiFiNetworkDiagnosticsAssociationFailureCause) String() string {
 	}
 }
 
-type MTRWiFiNetworkDiagnosticsConnectionStatus int64
+type MTRWiFiNetworkDiagnosticsConnectionStatus uint8
 
 const (
 	MTRWiFiNetworkDiagnosticsConnectionStatusConnected    MTRWiFiNetworkDiagnosticsConnectionStatus = 0
@@ -20045,7 +20045,7 @@ func (e MTRWiFiNetworkDiagnosticsConnectionStatus) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRWiFiNetworkDiagnosticsFeature int64
+type MTRWiFiNetworkDiagnosticsFeature uint32
 
 const (
 	MTRWiFiNetworkDiagnosticsFeaturePacketCounts MTRWiFiNetworkDiagnosticsFeature = 1
@@ -20068,7 +20068,7 @@ func (e MTRWiFiNetworkDiagnosticsFeature) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRWiFiNetworkDiagnosticsSecurityType int64
+type MTRWiFiNetworkDiagnosticsSecurityType uint8
 
 const (
 	MTRWiFiNetworkDiagnosticsSecurityTypeUnspecified MTRWiFiNetworkDiagnosticsSecurityType = 0
@@ -20100,7 +20100,7 @@ func (e MTRWiFiNetworkDiagnosticsSecurityType) String() string {
 	}
 }
 
-type MTRWiFiNetworkDiagnosticsWiFiConnectionStatus int64
+type MTRWiFiNetworkDiagnosticsWiFiConnectionStatus uint8
 
 const (
 	MTRWiFiNetworkDiagnosticsWiFiConnectionStatusConnected    MTRWiFiNetworkDiagnosticsWiFiConnectionStatus = 0
@@ -20120,7 +20120,7 @@ func (e MTRWiFiNetworkDiagnosticsWiFiConnectionStatus) String() string {
 	}
 }
 
-type MTRWiFiNetworkDiagnosticsWiFiVersion int64
+type MTRWiFiNetworkDiagnosticsWiFiVersion uint8
 
 const (
 	MTRWiFiNetworkDiagnosticsWiFiVersionA  MTRWiFiNetworkDiagnosticsWiFiVersion = 0
@@ -20155,7 +20155,7 @@ func (e MTRWiFiNetworkDiagnosticsWiFiVersion) String() string {
 	}
 }
 
-type MTRWiFiNetworkDiagnosticsWiFiVersionType int64
+type MTRWiFiNetworkDiagnosticsWiFiVersionType uint8
 
 const (
 	MTRWiFiNetworkDiagnosticsWiFiVersionTypeA       MTRWiFiNetworkDiagnosticsWiFiVersionType = 0
@@ -20194,7 +20194,7 @@ func (e MTRWiFiNetworkDiagnosticsWiFiVersionType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRWindowCoveringConfigStatus int64
+type MTRWindowCoveringConfigStatus uint8
 
 const (
 	MTRWindowCoveringConfigStatusOperational           MTRWindowCoveringConfigStatus = 1
@@ -20237,7 +20237,7 @@ func (e MTRWindowCoveringConfigStatus) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRWindowCoveringEndProductType int64
+type MTRWindowCoveringEndProductType uint8
 
 const (
 	MTRWindowCoveringEndProductTypeRollerShade               MTRWindowCoveringEndProductType = 0
@@ -20327,7 +20327,7 @@ func (e MTRWindowCoveringEndProductType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRWindowCoveringFeature int64
+type MTRWindowCoveringFeature uint32
 
 const (
 	MTRWindowCoveringFeatureLift              MTRWindowCoveringFeature = 1
@@ -20363,7 +20363,7 @@ func (e MTRWindowCoveringFeature) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRWindowCoveringMode int64
+type MTRWindowCoveringMode uint8
 
 const (
 	MTRWindowCoveringModeMotorDirectionReversed MTRWindowCoveringMode = 1
@@ -20395,7 +20395,7 @@ func (e MTRWindowCoveringMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRWindowCoveringOperationalStatus int64
+type MTRWindowCoveringOperationalStatus uint8
 
 const (
 	MTRWindowCoveringOperationalStatusGlobal MTRWindowCoveringOperationalStatus = 3
@@ -20423,7 +20423,7 @@ func (e MTRWindowCoveringOperationalStatus) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MTRWindowCoveringSafetyStatus int64
+type MTRWindowCoveringSafetyStatus uint16
 
 const (
 	MTRWindowCoveringSafetyStatusRemoteLockout       MTRWindowCoveringSafetyStatus = 1
@@ -20486,7 +20486,7 @@ func (e MTRWindowCoveringSafetyStatus) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTRWindowCoveringType int64
+type MTRWindowCoveringType uint8
 
 const (
 	MTRWindowCoveringTypeRollerShade               MTRWindowCoveringType = 0
@@ -20534,7 +20534,7 @@ func (e MTRWindowCoveringType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -20550,7 +20550,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -20570,7 +20570,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -20594,7 +20594,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -20638,7 +20638,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -20655,7 +20655,7 @@ func (e OSClockid) String() string {
 	}
 }
 
-type PtrauthKey int64
+type PtrauthKey int32
 
 const (
 	Ptrauth_key_none                     PtrauthKey = -1
@@ -20732,7 +20732,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -20801,7 +20801,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -20830,7 +20830,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

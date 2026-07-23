@@ -7,27 +7,17 @@ import (
 	"maps"
 	"path/filepath"
 	"sort"
-	"strconv"
 	"strings"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
 	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/structlayout"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
 )
-
-// goPrimitives is the set of Go primitive types a value-struct field may use
-// directly. A field of any other bare type must be another emittable struct in
-// the same package (checked via the emittable fixpoint below).
-var goPrimitives = map[string]bool{
-	"bool": true, "byte": true, "rune": true, "uintptr": true,
-	"int": true, "int8": true, "int16": true, "int32": true, "int64": true,
-	"uint": true, "uint8": true, "uint16": true, "uint32": true, "uint64": true,
-	"float32": true, "float64": true,
-}
 
 // emitStructTypeAliases writes <pkgname>_type_aliases_generated.go: a Go
 // definition for every plain value-type struct the framework defines (e.g.
@@ -55,172 +45,13 @@ func resolveStructFields(
 			return nil, nil, false
 		}
 		names = append(names, f.Name)
-		goTypes = append(goTypes, structFieldGoType(f.ObjCType, gt))
+		goTypes = append(goTypes, structlayout.StructFieldGoType(f.ObjCType, gt))
 	}
 	return names, goTypes, len(names) > 0
 }
 
-// structFieldGoType corrects a struct field's Go type to the exact C ABI width
-// where the type mapper widened a native C int to Go int/uint (8 bytes) even
-// though a C int is 4. Struct fields — unlike function parameters — must match the
-// C width exactly, or the Go struct would mislay every field after the first int.
-// Arrays are corrected element-wise (int[4] → [4]int32). Other types (short→int16,
-// long→int, stdint) already match and pass through.
-func structFieldGoType(objcType, mapped string) string {
-	base := objcType
-	for _, q := range []string{"const", "volatile", "_Nonnull", "_Nullable", "_Null_unspecified"} {
-		base = strings.ReplaceAll(base, q, " ")
-	}
-	if i := strings.IndexByte(base, '['); i >= 0 { // strip array dimensions
-		base = base[:i]
-	}
-	base = strings.Join(strings.Fields(base), " ")
-	var from, to string
-	switch base {
-	case "int", "signed int":
-		from, to = "int", "int32"
-	case "unsigned int", "unsigned":
-		from, to = "uint", "uint32"
-	default:
-		return mapped
-	}
-	if mapped == from {
-		return to
-	}
-	if strings.HasSuffix(mapped, "]"+from) {
-		return mapped[:len(mapped)-len(from)] + to
-	}
-	return mapped
-}
-
-// scalarGoSizeAlign returns the size and alignment (in bytes, arm64/amd64 LP64)
-// of a hermetic scalar Go type, and ok=false for anything else (a nested struct,
-// pointer, slice, or unresolved type). Only fixed-width types are admitted;
-// notably Go int/uint/uintptr are 8 bytes here, so a field the mapper resolved to
-// a platform-width int is treated as 8 — matching the LP64 C `long`/pointer it
-// came from.
-func scalarGoSizeAlign(goType string) (size, align int, ok bool) {
-	// A fixed-size array [N]elem lays out as N contiguous elements with the
-	// element's alignment; recurse on the element (which may itself be an array).
-	// A slice "[]T" or malformed dimension is not a fixed array and is rejected.
-	if strings.HasPrefix(goType, "[") {
-		closeIdx := strings.IndexByte(goType, ']')
-		if closeIdx <= 1 {
-			return 0, 0, false
-		}
-		n, err := strconv.Atoi(goType[1:closeIdx])
-		if err != nil || n < 0 {
-			return 0, 0, false
-		}
-		elemSize, elemAlign, elemOK := scalarGoSizeAlign(goType[closeIdx+1:])
-		if !elemOK {
-			return 0, 0, false
-		}
-		return n * elemSize, elemAlign, true
-	}
-	switch goType {
-	case "bool", "int8", "uint8", "byte":
-		return 1, 1, true
-	case "int16", "uint16":
-		return 2, 2, true
-	case "int32", "uint32", "float32", "rune":
-		return 4, 4, true
-	case "int64", "uint64", "float64", "int", "uint", "uintptr":
-		return 8, 8, true
-	}
-	return 0, 0, false
-}
-
-// layoutSafeFromGoTypes reports whether a plain Go struct reproduces the C ABI
-// field offsets of a struct — the condition under which reading fields through a
-// pointer to the C data is correct. An unpacked struct always qualifies (Go and C
-// use the same natural alignment for these scalar fields). A packed struct
-// qualifies when every field is already naturally aligned at its packed offset,
-// so Go inserts no inter-field padding. Trailing padding is deliberately NOT
-// required: a packed struct ending on an odd size (e.g. IOUSBConfiguration
-// Descriptor's 9 bytes) makes the Go value one byte larger, which is immaterial
-// for pointer field access (the only way these are surfaced) though it means the
-// value should not be bulk-copied out of a tightly-sized C allocation. A field
-// whose Go type is not a fixed-width scalar makes the result false (conservative:
-// the opaque path handles it).
-func layoutSafeFromGoTypes(packed bool, goTypes []string) bool {
-	if !packed {
-		return true
-	}
-	offset := 0
-	for _, gt := range goTypes {
-		sz, al, ok := scalarGoSizeAlign(gt)
-		if !ok {
-			return false
-		}
-		if offset%al != 0 {
-			return false // Go would insert padding before this field
-		}
-		offset += sz
-	}
-	return true
-}
-
-// goStructLayout computes each field's byte offset and the total size of a Go
-// struct with the given (width-corrected) field types, under Go's natural
-// alignment (packed=false) or tight packing (packed=true). ok is false if any
-// field's size is unknown.
-func goStructLayout(goTypes []string, packed bool) (offsets []int, size int, ok bool) {
-	pos, maxAlign := 0, 1
-	for _, gt := range goTypes {
-		sz, al, fieldOK := scalarGoSizeAlign(gt)
-		if !fieldOK {
-			return nil, 0, false
-		}
-		if !packed {
-			if al > maxAlign {
-				maxAlign = al
-			}
-			if r := pos % al; r != 0 {
-				pos += al - r
-			}
-		}
-		offsets = append(offsets, pos)
-		pos += sz
-	}
-	if !packed {
-		if r := pos % maxAlign; r != 0 {
-			pos += maxAlign - r
-		}
-	}
-	return offsets, pos, true
-}
-
-// layoutMatchesAuthoritative verifies the width-corrected Go layout reproduces
-// clang's authoritative record layout (per-field offsets + total size) when one
-// was captured (Struct.Size != 0). It returns true when no authoritative layout
-// exists (nothing to cross-check — clang only lays out value-used structs) or when
-// the Go layout matches exactly. A mismatch means the Go struct would not
-// reproduce the C ABI, so the struct stays opaque.
-func layoutMatchesAuthoritative(s meta.Struct, goTypes []string) bool {
-	if s.Size == 0 {
-		return true
-	}
-	offsets, size, ok := goStructLayout(goTypes, s.Packed)
-	if !ok {
-		// A nested struct / non-scalar field the layout computer cannot size — the
-		// emittable fixpoint already gates those recursively; skip the cross-check
-		// rather than wrongly excluding a valid nested-struct struct.
-		return true
-	}
-	if size != s.Size || len(offsets) != len(s.Fields) {
-		return false
-	}
-	for i := range offsets {
-		if offsets[i] != s.Fields[i].Offset {
-			return false
-		}
-	}
-	return true
-}
-
-// structLayoutSafe is layoutSafeFromGoTypes over a metadata struct's resolved
-// field Go types.
+// structLayoutSafe is structlayout.LayoutSafeFromGoTypes over a metadata struct's
+// resolved field Go types.
 func structLayoutSafe(s meta.Struct) bool {
 	if !s.Packed {
 		return true
@@ -229,7 +60,7 @@ func structLayoutSafe(s meta.Struct) bool {
 	for i, f := range s.Fields {
 		goTypes[i] = f.GoType
 	}
-	return layoutSafeFromGoTypes(true, goTypes)
+	return structlayout.LayoutSafeFromGoTypes(true, goTypes)
 }
 
 // ComputeEmittableStructs returns the set of value-struct Go names (across every
@@ -240,6 +71,35 @@ func structLayoutSafe(s meta.Struct) bool {
 // cross-framework references, so a reference never names a struct that was
 // skipped. An enum-typed field is allowed when the enum is one the same framework
 // emits locally (see ComputeEmittableStructs).
+// buildEnumFieldWidths maps each available named enum's GoTypeName to the size
+// and alignment of its underlying Go integer type, so the authoritative-layout
+// cross-check can size an enum-typed struct field. The integer type is chosen the
+// same way the enum emitter chooses it (MapEnumGoType + UpgradeEnumTypeIfOverflow),
+// so the cross-check agrees with the emitted layout.
+func buildEnumFieldWidths(frameworks []*meta.FrameworkMeta) map[string][2]int {
+	widths := make(map[string][2]int)
+	for _, framework := range frameworks {
+		for key, enum := range framework.Enums {
+			if enum.Availability.IsUnavailable || enum.IsAnon {
+				continue
+			}
+			goName := naming.GoTypeName(key)
+			if !isExportedGoIdent(goName) {
+				continue
+			}
+			goIntType := enum.GoType
+			if goIntType == "" {
+				goIntType = "int64"
+			}
+			goIntType = rawfw.UpgradeEnumTypeIfOverflow(rawfw.MapEnumGoType(goIntType), enum.Members)
+			if sz, al, ok := structlayout.ScalarGoSizeAlign(goIntType); ok {
+				widths[goName] = [2]int{sz, al}
+			}
+		}
+	}
+	return widths
+}
+
 func ComputeEmittableStructs(
 	frameworks []*meta.FrameworkMeta,
 	mapper *typemap.Mapper,
@@ -250,6 +110,19 @@ func ComputeEmittableStructs(
 	ownEnumsByFw := make(map[string]map[string]bool, len(frameworks))
 	resolved := make(map[string][]string) // struct Go name → field Go types
 	structFw := make(map[string]string)   // struct Go name → owning framework
+
+	// Enum field widths, so the authoritative-layout cross-check can validate a
+	// struct whose fields include enums (which resolve to a Go named type, not a
+	// bare scalar). Keyed by the enum's GoTypeName — the form resolveStructFields
+	// produces for an enum field.
+	enumWidths := buildEnumFieldWidths(frameworks)
+	enumSizer := func(goType string) (size, align int, ok bool) {
+		if w, found := enumWidths[goType]; found {
+			return w[0], w[1], true
+		}
+		return 0, 0, false
+	}
+
 	for _, framework := range frameworks {
 		ownEnumsByFw[framework.Framework] = buildOwnEnumNames(framework)
 		ctx := typemap.Context{Framework: framework.Framework}
@@ -270,8 +143,12 @@ func ComputeEmittableStructs(
 				// inserted); otherwise field reads would be misaligned. Drop unsafe
 				// packed structs from the emittable set so pointer/value uses fall back
 				// to the opaque unsafe.Pointer path rather than a wrong-layout struct.
-				if !layoutSafeFromGoTypes(s.Packed, goTypes) ||
-					!layoutMatchesAuthoritative(s, goTypes) {
+				fieldOffsets := make([]int, len(s.Fields))
+				for i, f := range s.Fields {
+					fieldOffsets[i] = f.Offset
+				}
+				if !structlayout.LayoutSafeFromGoTypes(s.Packed, goTypes) ||
+					!structlayout.LayoutMatchesAuthoritative(s.Size, s.Packed, fieldOffsets, goTypes, enumSizer) {
 					continue
 				}
 				resolved[goName] = goTypes
@@ -295,11 +172,11 @@ func ComputeEmittableStructs(
 				// bare name; cross-framework or non-emitted enums are rejected so the
 				// struct never names a type this package does not define) — or a
 				// fixed-size array of any of those (e.g. uint8[16], CGPoint[4]).
-				if goPrimitives[gt] || emittable[gt] || ownEnums[gt] {
+				if structlayout.Primitives[gt] || emittable[gt] || ownEnums[gt] {
 					continue
 				}
-				if isPrimitiveOrArrayOf(gt, func(elem string) bool {
-					return goPrimitives[elem] || emittable[elem] || ownEnums[elem]
+				if structlayout.IsPrimitiveOrArrayOf(gt, func(elem string) bool {
+					return structlayout.Primitives[elem] || emittable[elem] || ownEnums[elem]
 				}) {
 					continue
 				}
@@ -485,7 +362,7 @@ func emitStructs(
 			if fieldName == "" {
 				fieldName = fmt.Sprintf("Field%d", i)
 			}
-			gt := structFieldGoType(f.ObjCType, hermeticFieldType(f, ctx, mapper, fc, rawPkgAlias, willEmit, imports))
+			gt := structlayout.StructFieldGoType(f.ObjCType, hermeticFieldType(f, ctx, mapper, fc, rawPkgAlias, willEmit, imports))
 			fields = append(fields, view.Field{GoName: structFieldGoName(fieldName), GoType: gt})
 		}
 		structs = append(structs, view.Struct{GoName: goName, Doc: cleanDoc(s.Doc), Fields: fields})
@@ -669,37 +546,15 @@ func hermeticFieldType(
 		return resolved
 	}
 	// A Go primitive, or an array of one, keeps its ABI and needs no import.
-	if isPrimitiveOrArrayOf(gt, func(elem string) bool { return goPrimitives[elem] }) {
+	if structlayout.IsPrimitiveOrArrayOf(gt, func(elem string) bool { return structlayout.Primitives[elem] }) {
 		return gt
 	}
 	// A same-package value struct that will be emitted (bare name, or an array of
 	// one) can be named directly.
-	if isPrimitiveOrArrayOf(gt, func(elem string) bool { return willEmit[elem] }) {
+	if structlayout.IsPrimitiveOrArrayOf(gt, func(elem string) bool { return willEmit[elem] }) {
 		return gt
 	}
 	return degrade()
-}
-
-// isPrimitiveOrArrayOf reports whether goType is a bare identifier accepted by
-// ok, or a (possibly multi-dimensional) fixed-size array whose element type is.
-// It rejects pointers, slices, and qualified (dotted) names.
-func isPrimitiveOrArrayOf(goType string, ok func(elem string) bool) bool {
-	elem := goType
-	for strings.HasPrefix(elem, "[") {
-		close := strings.IndexByte(elem, ']')
-		if close < 0 {
-			return false
-		}
-		inner := elem[1:close]
-		if inner == "" { // a slice "[]T", not a fixed array — not ABI-safe
-			return false
-		}
-		elem = elem[close+1:]
-	}
-	if elem == "" || strings.ContainsAny(elem, ".*[] ") {
-		return false
-	}
-	return ok(elem)
 }
 
 // ComputeIdiomaticClassIndex maps every ObjC class emitted by the idiomatic

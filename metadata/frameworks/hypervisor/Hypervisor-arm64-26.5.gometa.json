@@ -9635,7 +9635,7 @@
       "availability": {}
     },
     "hv_cache_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "HV_CACHE_TYPE_DATA",
@@ -9655,7 +9655,7 @@
       "sdk_line": 188
     },
     "hv_exit_reason_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "HV_EXIT_REASON_CANCELED",
@@ -9687,7 +9687,7 @@
       "sdk_line": 188
     },
     "hv_feature_reg_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "HV_FEATURE_REG_ID_AA64DFR0_EL1",
@@ -9769,7 +9769,7 @@
       "sdk_line": 188
     },
     "hv_gic_distributor_reg_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "HV_GIC_DISTRIBUTOR_REG_GICD_CTLR",
@@ -17451,7 +17451,7 @@
       "sdk_line": 188
     },
     "hv_gic_icc_reg_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "HV_GIC_ICC_REG_PMR_EL1",
@@ -17520,7 +17520,7 @@
       "sdk_line": 188
     },
     "hv_gic_ich_reg_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "HV_GIC_ICH_REG_AP0R0_EL2",
@@ -17654,7 +17654,7 @@
       "sdk_line": 188
     },
     "hv_gic_icv_reg_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "HV_GIC_ICV_REG_PMR_EL1",
@@ -17718,7 +17718,7 @@
       "sdk_line": 188
     },
     "hv_gic_intid_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "HV_GIC_INT_PERFORMANCE_MONITOR",
@@ -17757,7 +17757,7 @@
       "sdk_line": 188
     },
     "hv_gic_msi_reg_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "HV_GIC_REG_GICM_TYPER",
@@ -17775,7 +17775,7 @@
       "sdk_line": 188
     },
     "hv_gic_redistributor_reg_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "HV_GIC_REDISTRIBUTOR_REG_GICR_TYPER",
@@ -17878,7 +17878,7 @@
       "sdk_line": 188
     },
     "hv_interrupt_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "HV_INTERRUPT_TYPE_IRQ",
@@ -17898,7 +17898,7 @@
       "sdk_line": 188
     },
     "hv_ipa_granule_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "HV_IPA_GRANULE_4KB",
@@ -17920,7 +17920,7 @@
       "sdk_line": 188
     },
     "hv_reg_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "HV_REG_X0",
@@ -18113,7 +18113,7 @@
       "sdk_line": 188
     },
     "hv_simd_fp_reg_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "HV_SIMD_FP_REG_Q0",
@@ -18281,7 +18281,7 @@
       "sdk_line": 188
     },
     "hv_sme_p_reg_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "HV_SME_P_REG_0",
@@ -18369,7 +18369,7 @@
       "sdk_line": 188
     },
     "hv_sme_z_reg_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "HV_SME_Z_REG_0",
@@ -18537,7 +18537,7 @@
       "sdk_line": 188
     },
     "hv_sys_reg_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "HV_SYS_REG_DBGBVR0_EL1",
@@ -19390,7 +19390,7 @@
       "sdk_line": 188
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -19413,7 +19413,7 @@
       "sdk_line": 79
     },
     "mpo_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPO_PORT",

@@ -81,7 +81,7 @@
       "availability": {}
     },
     "audit_session_flags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "AU_SESSION_FLAG_IS_INITIAL",
@@ -119,7 +119,7 @@
       "sdk_line": 338
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -167,7 +167,7 @@
       "sdk_line": 156
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",
@@ -456,7 +456,7 @@
       "is_extensible": true
     },
     "mach_vm_range_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MACH_VM_RANGE_NONE",
@@ -471,7 +471,7 @@
       "is_extensible": true
     },
     "mach_vm_range_flavor_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MACH_VM_RANGE_FLAVOR_INVALID",
@@ -490,7 +490,7 @@
       "is_extensible": true
     },
     "mach_vm_range_tag_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MACH_VM_RANGE_DEFAULT",
@@ -514,7 +514,7 @@
       "is_extensible": true
     },
     "mpo_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPO_PORT",
@@ -564,7 +564,7 @@
       "is_extensible": true
     },
     "virtual_memory_guard_exception_code_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kGUARD_EXC_DEALLOC_GAP",
@@ -2150,6 +2150,18 @@
       "availability": {},
       "sdk_file": "audit.h",
       "sdk_line": 299
+    },
+    "audit_token_t": {
+      "fields": [
+        {
+          "name": "val",
+          "objc_type": "unsigned int[8]"
+        }
+      ],
+      "size": 32,
+      "availability": {},
+      "sdk_file": "message.h",
+      "sdk_line": 506
     },
     "auditinfo": {
       "fields": [

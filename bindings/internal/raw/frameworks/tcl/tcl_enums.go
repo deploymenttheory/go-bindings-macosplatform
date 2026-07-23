@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-type Tcl_PathType int64
+type Tcl_PathType int32
 
 const (
 	TCL_PATH_ABSOLUTE        Tcl_PathType = 0
@@ -28,7 +28,7 @@ func (e Tcl_PathType) String() string {
 	}
 }
 
-type Tcl_QueuePosition int64
+type Tcl_QueuePosition int32
 
 const (
 	TCL_QUEUE_TAIL Tcl_QueuePosition = 0
@@ -49,7 +49,7 @@ func (e Tcl_QueuePosition) String() string {
 	}
 }
 
-type Tcl_ValueType int64
+type Tcl_ValueType int32
 
 const (
 	TCL_INT      Tcl_ValueType = 0

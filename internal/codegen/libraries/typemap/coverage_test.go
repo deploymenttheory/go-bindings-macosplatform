@@ -126,9 +126,9 @@ func TestResolveGoTypeLowercaseEnum(t *testing.T) {
 	m.EnumIndex = map[string]string{"interface_event_t": "vmnet"}
 	ctx := newTestCtx(m, "vmnet")
 	got := m.GoType("interface_event_t", ctx, nil)
-	// capitaliseFirst("interface_event_t") = "Interface_event_t"; same-fw → unqualified
-	if got != "Interface_event_t" {
-		t.Errorf("GoType(interface_event_t lowercase enum) = %q, want Interface_event_t", got)
+	// ExportedTypeName("interface_event_t") = "InterfaceEventT"; same-fw → unqualified
+	if got != "InterfaceEventT" {
+		t.Errorf("GoType(interface_event_t lowercase enum) = %q, want InterfaceEventT", got)
 	}
 }
 
@@ -139,8 +139,8 @@ func TestResolveGoTypeStructBareForm(t *testing.T) {
 	m.StructIndex = map[string]string{"ether_addr": "NetworkExtension"}
 	ctx := newTestCtx(m, "NetworkExtension")
 	got := m.GoType("struct ether_addr", ctx, nil)
-	if got != "Ether_addr" {
-		t.Errorf("GoType(struct ether_addr) = %q, want Ether_addr", got)
+	if got != "EtherAddr" {
+		t.Errorf("GoType(struct ether_addr) = %q, want EtherAddr", got)
 	}
 }
 
@@ -181,8 +181,8 @@ func TestGoPointerTypeLowercaseStructPointer(t *testing.T) {
 	ctx := newTestCtx(m, "Foundation")
 // "struct vmnet_network *" — ClassName returns "" (lowercase), so falls to bare strip path
 	got := m.GoType("struct vmnet_network *", ctx, nil)
-	if got != "*vmnet.Vmnet_network" {
-		t.Errorf("GoType(struct vmnet_network *) = %q, want *vmnet.Vmnet_network", got)
+	if got != "*vmnet.VmnetNetwork" {
+		t.Errorf("GoType(struct vmnet_network *) = %q, want *vmnet.VmnetNetwork", got)
 	}
 }
 
@@ -267,8 +267,8 @@ func TestResolveGoTypeLowercaseStruct(t *testing.T) {
 	m.StructIndex = map[string]string{"vmnet_network": "vmnet"}
 	ctx := newTestCtx(m, "vmnet")
 	got := m.GoType("vmnet_network", ctx, nil)
-	// qualifiedStructType with same-fw owner → bare name via naming.GoTypeName
-	if got != "Vmnet_network" {
-		t.Errorf("GoType(vmnet_network struct) = %q, want Vmnet_network", got)
+	// qualifiedStructType with same-fw owner → bare name via naming.ExportedTypeName
+	if got != "VmnetNetwork" {
+		t.Errorf("GoType(vmnet_network struct) = %q, want VmnetNetwork", got)
 	}
 }

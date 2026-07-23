@@ -3,10 +3,28 @@ package naming
 import (
 	"strings"
 	"unicode"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/naming/core"
 )
 
-// goReservedWords is the set of Go keywords and common builtins that cannot
-// be used as identifier names without escaping.
+// Shared naming helpers (identical across the purego/cgo pipelines) live in
+// internal/codegen/naming/core and are re-exported here. This is also where the
+// libraries pipeline gains ExportedFunctionName / ExportedTypeName (previously
+// frameworks-only), so library type names can be unified onto the PascalCase
+// ExportedTypeName form (audit_token_t → AuditTokenT) instead of the
+// underscore-preserving GoTypeName.
+var (
+	MethodName           = core.MethodName
+	PackageName          = core.PackageName
+	GoTypeName           = core.GoTypeName
+	ProtocolGoTypeName   = core.ProtocolGoTypeName
+	ExportedFunctionName = core.ExportedFunctionName
+	ExportedTypeName     = core.ExportedTypeName
+)
+
+// goReservedWords is the libraries pipeline's escape set. Unlike the frameworks
+// set it carries `inv` and `ctx` (shadowed by generated cgo method bodies) but
+// not the stdlib package names, so it stays pipeline-local.
 var goReservedWords = map[string]bool{
 	// keywords
 	"break": true, "case": true, "chan": true, "const": true,
@@ -43,49 +61,6 @@ var goReservedWords = map[string]bool{
 	"ctx": true,
 }
 
-// MethodName converts an ObjC selector to an exported Go method name.
-//
-//	"objectAtIndex:"               → "ObjectAtIndex"
-//	"writeToURL:error:"            → "WriteToURL"  (NSError** arg elided by scanner)
-//	"initWithContentsOfURL:encoding:error:" → "InitWithContentsOfURL"
-//	"enumerateObjectsUsingBlock:"  → "EnumerateObjectsUsing"
-//	"isKindOfClass:"               → "IsKindOfClass"
-//	"count"                        → "Count"
-func MethodName(selector string) string {
-	// Split on ':'
-	parts := strings.Split(selector, ":")
-	// Last element is always empty if selector ends with ':'
-	if len(parts) > 0 && parts[len(parts)-1] == "" {
-		parts = parts[:len(parts)-1]
-	}
-
-	var sb strings.Builder
-	for i, part := range parts {
-		if part == "" {
-			continue
-		}
-		if i == 0 {
-			// Capitalise first letter of the first part.
-			sb.WriteString(capitalise(part))
-		} else {
-			// Subsequent parts: capitalise first letter.
-			sb.WriteString(capitalise(part))
-		}
-	}
-
-	name := sb.String()
-
-	// Drop trailing "Block" and replace with "Using" (idiomatic Go convention).
-	if strings.HasSuffix(name, "UsingBlock") {
-		name = name[:len(name)-len("UsingBlock")] + "Using"
-	}
-	if strings.HasSuffix(name, "WithBlock") {
-		name = name[:len(name)-len("WithBlock")] + "With"
-	}
-
-	return name
-}
-
 // ParamName sanitises an ObjC parameter name for use as a Go argument name.
 // It lowercases the first letter and escapes Go reserved words.
 func ParamName(objcName string) string {
@@ -101,14 +76,6 @@ func ParamName(objcName string) string {
 		name += "_"
 	}
 	return name
-}
-
-// PackageName converts a framework name to a Go package name (lowercase).
-//
-//	"Foundation" → "foundation"
-//	"CoreML"     → "coreml"
-func PackageName(framework string) string {
-	return strings.ToLower(framework)
 }
 
 // BridgeFuncName produces the C bridge function name for a given class+selector.
@@ -184,38 +151,6 @@ func lowerLeadingAcronym(s string) string {
 	return string(out)
 }
 
-// GoTypeName ensures a type name is exported (first letter uppercase).
-func GoTypeName(name string) string {
-	if name == "" {
-		return name
-	}
-	return capitalise(name)
-}
-
-// ProtocolGoTypeName returns the Go interface type name for an ObjC protocol,
-// disambiguating from a class of the same name by appending "Protocol".
-//
-// Apple's ObjC root NSObject exists both as a class (objc/NSObject.h) and as
-// a protocol (the implicit parent of all ObjC protocols). Mac SDK headers use
-// the same identifier `NSObject` for both. The generated Go binding produces a
-// `type NSObject struct` for the class, so the protocol must use a distinct
-// type name (`NSObjectProtocol`) to be embeddable as an interface — matching
-// the convention Apple's own Swift bindings adopted for the same reason.
-//
-// classNameOwner is the registry of class names → owning framework (the same
-// map the mapper uses for cross-framework class references). When the protocol's
-// bare Go name appears there, we apply the suffix; otherwise we return the
-// bare name unchanged.
-func ProtocolGoTypeName(protoName string, classNameOwner map[string]string) string {
-	bare := GoTypeName(protoName)
-	if classNameOwner != nil {
-		if _, isClass := classNameOwner[protoName]; isClass {
-			return bare + "Protocol"
-		}
-	}
-	return bare
-}
-
 // BlockTypeName produces a named Go type for an ObjC block used in a framework.
 // Example: ("Foundation", "NSArray", "enumerateObjectsUsingBlock:") → "NSArrayEnumerationBlock"
 func BlockTypeName(className, selector string) string {
@@ -244,14 +179,4 @@ func MethodBridgeID(framework, class, selector string, isClassMethod bool) strin
 //	("CoreFoundation", "CFArrayCreateMutable") → "ID: objc-sym CoreFoundation.CFArrayCreateMutable"
 func FunctionBridgeID(framework, funcName string) string {
 	return "ID: objc-sym " + framework + "." + funcName
-}
-
-// capitalise returns s with its first Unicode letter uppercased.
-func capitalise(s string) string {
-	if s == "" {
-		return s
-	}
-	r := []rune(s)
-	r[0] = unicode.ToUpper(r[0])
-	return string(r)
 }

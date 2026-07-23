@@ -25,6 +25,13 @@ func EmitStructs(w io.Writer, framework *macosplatformmetadata.FrameworkMeta, m 
 		if cfOpaqueStructs[name] {
 			continue
 		}
+		// A struct several frameworks' headers define (e.g. audit_token_t, pulled in
+		// by bsm, endpointsecurity, and libproc) is emitted only by its StructIndex
+		// owner; the others reference the owner's type via the mapper. This prevents
+		// duplicate, mutually-incompatible declarations across packages.
+		if owner := m.StructIndex[name]; owner != "" && !strings.EqualFold(owner, framework.Framework) {
+			continue
+		}
 		model := buildStructModel(name, framework.Structs[name], framework.Framework, m, knownClasses, usedImports)
 		if err := render.Execute(w, "struct", model); err != nil {
 			return nil, err
@@ -36,13 +43,13 @@ func EmitStructs(w io.Writer, framework *macosplatformmetadata.FrameworkMeta, m 
 	for _, structName := range sortedStringKeys(cfOrdered) {
 		typedefNames := cfOrdered[structName]
 		primaryName := typedefNames[0]
-		goPrimary := naming.GoTypeName(primaryName)
+		goPrimary := naming.ExportedTypeName(primaryName)
 
 		if err := render.Execute(w, "cf_wrapper", view.CfWrapperModel{GoName: goPrimary}); err != nil {
 			return nil, err
 		}
 		for _, alias := range typedefNames[1:] {
-			model := view.CfAliasModel{GoAlias: naming.GoTypeName(alias), GoPrimary: goPrimary}
+			model := view.CfAliasModel{GoAlias: naming.ExportedTypeName(alias), GoPrimary: goPrimary}
 			if err := render.Execute(w, "cf_alias", model); err != nil {
 				return nil, err
 			}
@@ -65,8 +72,8 @@ func EmitStructs(w io.Writer, framework *macosplatformmetadata.FrameworkMeta, m 
 		if cfOpaqueStructs[structName] {
 			continue
 		}
-		goAlias := naming.GoTypeName(name)
-		goTarget := naming.GoTypeName(structName)
+		goAlias := naming.ExportedTypeName(name)
+		goTarget := naming.ExportedTypeName(structName)
 		if goAlias == goTarget {
 			continue
 		}
@@ -99,7 +106,7 @@ func buildStructModel(name string, s macosplatformmetadata.Struct, framework str
 		fields = append(fields, view.StructFieldModel{Name: fieldName, GoType: goType})
 	}
 	return view.StructModel{
-		GoName:       naming.GoTypeName(name),
+		GoName:       naming.ExportedTypeName(name),
 		CommentBlock: renderCommentBlock(s.Doc, s.SDKFile, s.SDKLine, s.Availability, ""),
 		Fields:       fields,
 	}

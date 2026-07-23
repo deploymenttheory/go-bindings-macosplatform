@@ -6,7 +6,6 @@ package avfoundation
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
@@ -43,8 +42,8 @@ func (o *AVCaptureResolvedPhotoSettings) UniqueID() int64 {
 }
 
 // @property photoDimensions @abstract The resolved dimensions of the photo buffer that will be delivered to the -captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error: callback. @discussion If you request a RAW capture with no processed companion image, photoDimensions resolve to { 0, 0 }.
-func (o *AVCaptureResolvedPhotoSettings) PhotoDimensions() coremedia.CMVideoDimensions {
-	_ret := objc.Send[coremedia.CMVideoDimensions](o.Ptr(), _aVCaptureResolvedPhotoSettingsSelPhotoDimensions)
+func (o *AVCaptureResolvedPhotoSettings) PhotoDimensions() CMVideoDimensions {
+	_ret := objc.Send[CMVideoDimensions](o.Ptr(), _aVCaptureResolvedPhotoSettingsSelPhotoDimensions)
 	return _ret
 }
 

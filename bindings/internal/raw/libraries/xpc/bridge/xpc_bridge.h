@@ -148,10 +148,10 @@ bool xpc_fn_xpc_rich_error_can_retry(void * error_, void **outException);
 const char * xpc_fn_xpc_session_copy_description(void * session, void **outException);
 
 // ID: objc-sym xpc.xpc_session_create_xpc_service
-void * xpc_fn_xpc_session_create_xpc_service(const char * name, void * target_queue, int64_t flags, void * error_out, void **outException);
+void * xpc_fn_xpc_session_create_xpc_service(const char * name, void * target_queue, uint64_t flags, void * error_out, void **outException);
 
 // ID: objc-sym xpc.xpc_session_create_mach_service
-void * xpc_fn_xpc_session_create_mach_service(const char * mach_service, void * target_queue, int64_t flags, void * error_out, void **outException);
+void * xpc_fn_xpc_session_create_mach_service(const char * mach_service, void * target_queue, uint64_t flags, void * error_out, void **outException);
 
 // ID: objc-sym xpc.xpc_session_set_incoming_message_handler
 void xpc_fn_xpc_session_set_incoming_message_handler(void * session, void * handler, void **outException);
@@ -187,7 +187,7 @@ void xpc_fn_xpc_session_set_peer_requirement(void * session, void * requirement,
 const char * xpc_fn_xpc_listener_copy_description(void * listener, void **outException);
 
 // ID: objc-sym xpc.xpc_listener_create
-void * xpc_fn_xpc_listener_create(const char * service, void * target_queue, int64_t flags, void * incoming_session_handler, void * error_out, void **outException);
+void * xpc_fn_xpc_listener_create(const char * service, void * target_queue, uint64_t flags, void * incoming_session_handler, void * error_out, void **outException);
 
 // ID: objc-sym xpc.xpc_listener_activate
 bool xpc_fn_xpc_listener_activate(void * listener, void * error_out, void **outException);

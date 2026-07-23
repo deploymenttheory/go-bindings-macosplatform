@@ -26,3 +26,11 @@ type MPSImageKeypointRangeInfo struct {
 	MaximumKeypoints      uint
 	MinimumThresholdValue float32
 }
+
+// @struct         MPSScaleTransform @abstract       Transform matrix for explict control over resampling in MPSImageScale. @discussion     The MPSScaleTransform is equivalent to: @code (CGAffineTransform) { .a = scaleX,        .b = 0, .c = 0,             .d = scaleY, .tx = translateX,   .ty = translateY } @endcode @memberof       MPSImageScale
+type MPSScaleTransform struct {
+	ScaleX     float64
+	ScaleY     float64
+	TranslateX float64
+	TranslateY float64
+}

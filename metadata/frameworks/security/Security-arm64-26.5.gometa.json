@@ -46,7 +46,7 @@
   },
   "enums": {
     "AuthorizationFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAuthorizationFlagDefaults",
@@ -95,7 +95,7 @@
       "is_extensible": true
     },
     "CMSCertificateChainMode": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kCMSCertificateNone",
@@ -128,7 +128,7 @@
       "is_extensible": true
     },
     "CMSSignedAttributes": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kCMSAttrNone",
@@ -177,7 +177,7 @@
       "is_extensible": true
     },
     "CMSSignerStatus": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kCMSSignerUnsigned",
@@ -515,7 +515,7 @@
       "is_extensible": true
     },
     "SecAccessControlCreateFlags": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "kSecAccessControlUserPresence",
@@ -611,7 +611,7 @@
       "is_extensible": true
     },
     "SecAuthenticationType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecAuthenticationTypeNTLM",
@@ -664,7 +664,7 @@
       "is_extensible": true
     },
     "SecCSDigestAlgorithm": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecCodeSignatureNoHash",
@@ -702,7 +702,7 @@
       "is_extensible": true
     },
     "SecCSFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecCSDefaultFlags",
@@ -761,7 +761,7 @@
       "is_extensible": true
     },
     "SecCodeSignatureFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecCodeSignatureHost",
@@ -820,7 +820,7 @@
       "is_extensible": true
     },
     "SecCodeStatus": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecCodeStatusValid",
@@ -854,7 +854,7 @@
       "is_extensible": true
     },
     "SecCredentialType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecCredentialTypeDefault",
@@ -881,7 +881,7 @@
       "is_extensible": true
     },
     "SecExternalFormat": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecFormatUnknown",
@@ -964,7 +964,7 @@
       "is_extensible": true
     },
     "SecExternalItemType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecItemTypeUnknown",
@@ -1002,7 +1002,7 @@
       "is_extensible": true
     },
     "SecItemAttr": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecCreationDateItemAttr",
@@ -1150,7 +1150,7 @@
       "is_extensible": true
     },
     "SecItemClass": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecInternetPasswordItemClass",
@@ -1193,7 +1193,7 @@
       "is_extensible": true
     },
     "SecItemImportExportFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecItemPemArmour",
@@ -1207,7 +1207,7 @@
       "is_extensible": true
     },
     "SecKeyImportExportFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecKeyImportOnlyOne",
@@ -1266,7 +1266,7 @@
       "is_extensible": true
     },
     "SecKeySizes": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecDefaultKeySize",
@@ -1333,7 +1333,7 @@
       "is_extensible": true
     },
     "SecKeyUsage": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecKeyUsageUnspecified",
@@ -1407,7 +1407,7 @@
       "is_extensible": true
     },
     "SecKeychainEvent": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecLockEvent",
@@ -1477,7 +1477,7 @@
       "is_extensible": true
     },
     "SecKeychainEventMask": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecLockEventMask",
@@ -1557,7 +1557,7 @@
       "is_extensible": true
     },
     "SecKeychainPromptSelector": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "kSecKeychainPromptRequirePassphase",
@@ -1591,7 +1591,7 @@
       "is_extensible": true
     },
     "SecPadding": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecPaddingNone",
@@ -1697,7 +1697,7 @@
       "is_extensible": true
     },
     "SecProtocolType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecProtocolTypeFTP",
@@ -1880,7 +1880,7 @@
       "is_extensible": true
     },
     "SecRequirementType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecHostRequirementType",
@@ -1990,7 +1990,7 @@
       "is_extensible": true
     },
     "SecTrustOptionFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecTrustOptionAllowExpired",
@@ -2034,7 +2034,7 @@
       "is_extensible": true
     },
     "SecTrustResultType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecTrustResultInvalid",
@@ -2082,7 +2082,7 @@
       "is_extensible": true
     },
     "SecTrustSettingsDomain": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecTrustSettingsDomainUser",
@@ -2105,7 +2105,7 @@
       "is_extensible": true
     },
     "SecTrustSettingsKeyUsage": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecTrustSettingsKeyUseSignature",
@@ -2149,7 +2149,7 @@
       "is_extensible": true
     },
     "SecTrustSettingsResult": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecTrustSettingsResultInvalid",
@@ -2182,7 +2182,7 @@
       "is_extensible": true
     },
     "SessionAttributeBits": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "sessionIsRoot",
@@ -2211,7 +2211,7 @@
       "is_extensible": true
     },
     "SessionCreationFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "sessionKeepCurrentBootstrap",
@@ -2225,7 +2225,7 @@
       "is_extensible": true
     },
     "__CE_CrlDistributionPointNameType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "CE_CDNT_FullName",
@@ -2243,7 +2243,7 @@
       "sdk_line": 530
     },
     "__CE_DataType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "DT_AuthorityKeyID",
@@ -2356,7 +2356,7 @@
       "sdk_line": 752
     },
     "__CE_GeneralNameType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "GNT_OtherName",
@@ -15934,7 +15934,7 @@
       "availability": {}
     },
     "acl_entry_id_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FIRST_ENTRY",
@@ -15957,7 +15957,7 @@
       "sdk_line": 118
     },
     "acl_flag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FLAG_DEFER_INHERIT",
@@ -16000,7 +16000,7 @@
       "sdk_line": 125
     },
     "acl_perm_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_READ_DATA",
@@ -16098,7 +16098,7 @@
       "sdk_line": 72
     },
     "acl_tag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_UNDEFINED_TAG",
@@ -16121,7 +16121,7 @@
       "sdk_line": 94
     },
     "acl_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_TYPE_EXTENDED",
@@ -16164,7 +16164,7 @@
       "sdk_line": 101
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -16212,7 +16212,7 @@
       "sdk_line": 156
     },
     "cssm_appledl_open_parameters_mask": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCSSM_APPLEDL_MASK_MODE",
@@ -16299,7 +16299,7 @@
       "is_extensible": true
     },
     "extension_data_format": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "CSSM_X509_DATAFORMAT_ENCODED",
@@ -16322,7 +16322,7 @@
       "sdk_line": 118
     },
     "filesec_property_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "FILESEC_OWNER",
@@ -16370,7 +16370,7 @@
       "sdk_line": 582
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -16393,7 +16393,7 @@
       "sdk_line": 79
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",
@@ -16682,7 +16682,7 @@
       "is_extensible": true
     },
     "launch_data_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "LAUNCH_DATA_DICTIONARY",
@@ -16740,7 +16740,7 @@
       "sdk_line": 204
     },
     "mach_vm_range_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MACH_VM_RANGE_NONE",
@@ -16755,7 +16755,7 @@
       "is_extensible": true
     },
     "mach_vm_range_flavor_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MACH_VM_RANGE_FLAVOR_INVALID",
@@ -16774,7 +16774,7 @@
       "is_extensible": true
     },
     "mach_vm_range_tag_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MACH_VM_RANGE_DEFAULT",
@@ -16798,7 +16798,7 @@
       "is_extensible": true
     },
     "mpo_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPO_PORT",
@@ -16848,7 +16848,7 @@
       "is_extensible": true
     },
     "os_clockid_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
@@ -16861,7 +16861,7 @@
       "sdk_line": 188
     },
     "ptrauth_key": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ptrauth_key_none",
@@ -17012,7 +17012,7 @@
       "sdk_line": 121
     },
     "tls_ciphersuite_group_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "tls_ciphersuite_group_default",
@@ -17061,7 +17061,7 @@
       "is_extensible": true
     },
     "tls_ciphersuite_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "tls_ciphersuite_RSA_WITH_3DES_EDE_CBC_SHA",
@@ -17199,7 +17199,7 @@
       "is_extensible": true
     },
     "tls_protocol_version_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "tls_protocol_version_TLSv10",
@@ -17268,7 +17268,7 @@
       "is_extensible": true
     },
     "virtual_memory_guard_exception_code_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kGUARD_EXC_DEALLOC_GAP",
@@ -17367,7 +17367,7 @@
       "is_extensible": true
     },
     "xpc_listener_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_LISTENER_CREATE_NONE",
@@ -17397,7 +17397,7 @@
       "is_extensible": true
     },
     "xpc_session_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_SESSION_CREATE_NONE",
@@ -18597,6 +18597,18 @@
       "sdk_file": "Security/SecBase.h",
       "sdk_line": 203,
       "doc": "@typedef SecTrustedApplicationRef @abstract Contains information about a trusted application."
+    },
+    "audit_token_t": {
+      "fields": [
+        {
+          "name": "val",
+          "objc_type": "unsigned int[8]"
+        }
+      ],
+      "size": 32,
+      "availability": {},
+      "sdk_file": "message.h",
+      "sdk_line": 506
     },
     "cssm_access_credentials": {
       "fields": [

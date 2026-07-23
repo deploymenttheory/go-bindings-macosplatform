@@ -2474,7 +2474,7 @@
       "is_extensible": true
     },
     "MDLabelDomain": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDLabelUserDomain",
@@ -2493,7 +2493,7 @@
       "doc": "@typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate()."
     },
     "MDQueryOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQuerySynchronous",
@@ -2516,7 +2516,7 @@
       "sdk_line": 83
     },
     "MDQuerySortOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQueryReverseSortOrderFlag",
@@ -2530,7 +2530,7 @@
       "doc": "@enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order."
     },
     "acl_entry_id_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FIRST_ENTRY",
@@ -2553,7 +2553,7 @@
       "sdk_line": 118
     },
     "acl_flag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FLAG_DEFER_INHERIT",
@@ -2596,7 +2596,7 @@
       "sdk_line": 125
     },
     "acl_perm_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_READ_DATA",
@@ -2694,7 +2694,7 @@
       "sdk_line": 72
     },
     "acl_tag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_UNDEFINED_TAG",
@@ -2717,7 +2717,7 @@
       "sdk_line": 94
     },
     "acl_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_TYPE_EXTENDED",
@@ -2760,7 +2760,7 @@
       "sdk_line": 101
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -2882,7 +2882,7 @@
       "is_extensible": true
     },
     "filesec_property_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "FILESEC_OWNER",
@@ -2930,7 +2930,7 @@
       "sdk_line": 582
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -2953,7 +2953,7 @@
       "sdk_line": 79
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",
@@ -3242,7 +3242,7 @@
       "is_extensible": true
     },
     "launch_data_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "LAUNCH_DATA_DICTIONARY",
@@ -3300,7 +3300,7 @@
       "sdk_line": 204
     },
     "mach_vm_range_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MACH_VM_RANGE_NONE",
@@ -3315,7 +3315,7 @@
       "is_extensible": true
     },
     "mach_vm_range_flavor_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MACH_VM_RANGE_FLAVOR_INVALID",
@@ -3334,7 +3334,7 @@
       "is_extensible": true
     },
     "mach_vm_range_tag_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MACH_VM_RANGE_DEFAULT",
@@ -3358,7 +3358,7 @@
       "is_extensible": true
     },
     "mpo_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPO_PORT",
@@ -3408,7 +3408,7 @@
       "is_extensible": true
     },
     "os_clockid_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
@@ -3421,7 +3421,7 @@
       "sdk_line": 188
     },
     "ptrauth_key": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ptrauth_key_none",
@@ -3572,7 +3572,7 @@
       "sdk_line": 121
     },
     "virtual_memory_guard_exception_code_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kGUARD_EXC_DEALLOC_GAP",
@@ -3671,7 +3671,7 @@
       "is_extensible": true
     },
     "xpc_listener_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_LISTENER_CREATE_NONE",
@@ -3701,7 +3701,7 @@
       "is_extensible": true
     },
     "xpc_session_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_SESSION_CREATE_NONE",

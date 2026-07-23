@@ -47,7 +47,7 @@ func writeEnum(w io.Writer, name string, e macosplatformmetadata.Enum) error {
 // All string-formatting decisions (comment rendering, name conversion, dedup)
 // live here so the template itself stays a pure structural description of the output.
 func buildEnumModel(name string, e macosplatformmetadata.Enum) view.EnumModel {
-	goName := naming.GoTypeName(name)
+	goName := naming.ExportedTypeName(name)
 
 	// Deduplicate members for the String() switch: skip constants whose Go name
 	// or formatted value has already appeared (ObjC allows aliased values).

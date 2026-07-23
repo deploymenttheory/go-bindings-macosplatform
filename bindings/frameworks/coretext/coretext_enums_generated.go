@@ -10,7 +10,7 @@ import (
 )
 
 // Constants that specify character collections.
-type CTCharacterCollection int64
+type CTCharacterCollection uint16
 
 const (
 	// The character identifier is equal to the glyph index.
@@ -62,7 +62,7 @@ func (e CTCharacterCollection) String() string {
 
 // Option bits for use with CTFontCollectionCopyFontAttribute(s).
 // Bitmask — values may be combined with |.
-type CTFontCollectionCopyOptions int64
+type CTFontCollectionCopyOptions uint32
 
 const (
 	// Passing this option indicates that defaults are to be used.
@@ -90,7 +90,7 @@ func (e CTFontCollectionCopyOptions) String() string {
 }
 
 // Constants that track the progress of font descriptor matching.
-type CTFontDescriptorMatchingState int64
+type CTFontDescriptorMatchingState uint32
 
 const (
 	// A state that indicates matching is about to begin.
@@ -141,7 +141,7 @@ func (e CTFontDescriptorMatchingState) String() string {
 }
 
 // Sets the auto-activation for the specified bundle identifier.
-type CTFontManagerAutoActivationSetting int64
+type CTFontManagerAutoActivationSetting uint32
 
 const (
 	KCTFontManagerAutoActivationDefault    CTFontManagerAutoActivationSetting = 0
@@ -168,7 +168,7 @@ func (e CTFontManagerAutoActivationSetting) String() string {
 }
 
 // Constants that define the scope for font registration.
-type CTFontManagerScope int64
+type CTFontManagerScope uint32
 
 const (
 	// No scope is defined.
@@ -202,7 +202,7 @@ func (e CTFontManagerScope) String() string {
 
 // Options for font creation and descriptor matching.
 // Bitmask — values may be combined with |.
-type CTFontOptions int64
+type CTFontOptions uint64
 
 const (
 	// Default options are used.
@@ -234,7 +234,7 @@ func (e CTFontOptions) String() string {
 }
 
 // The intended rendering orientation of the font for obtaining glyph metrics.
-type CTFontOrientation int64
+type CTFontOrientation uint32
 
 const (
 	// The native orientation of the font.
@@ -268,7 +268,7 @@ func (e CTFontOrientation) String() string {
 
 // The symbolic representation of stylistic font attributes.
 // Bitmask — values may be combined with |.
-type CTFontSymbolicTraits int64
+type CTFontSymbolicTraits uint32
 
 const (
 	// The font typestyle is italic.
@@ -385,7 +385,7 @@ func (e CTFontSymbolicTraits) String() string {
 
 // Constants that describe font table options.
 // Bitmask — values may be combined with |.
-type CTFontTableOptions int64
+type CTFontTableOptions uint32
 
 const (
 	// No font table options are specified.
@@ -408,7 +408,7 @@ func (e CTFontTableOptions) String() string {
 }
 
 // Constants that represent the specific user-interface purpose to specify for font creation.
-type CTFontUIFontType int64
+type CTFontUIFontType uint32
 
 const (
 	// The user-interface font type isn’t specified.
@@ -592,7 +592,7 @@ func (e CTFontUIFontType) String() string {
 
 // Options for getting the bounds of a line of text.
 // Bitmask — values may be combined with |.
-type CTLineBoundsOptions int64
+type CTLineBoundsOptions uint64
 
 const (
 	// An option to exclude typographic leading.
@@ -638,7 +638,7 @@ func (e CTLineBoundsOptions) String() string {
 }
 
 // Truncation types required by the CTLineCreateTruncatedLine function to tell the truncation engine which type of truncation is being requested.
-type CTLineTruncationType int64
+type CTLineTruncationType uint32
 
 const (
 	KCTLineTruncationStart  CTLineTruncationType = 0
@@ -662,7 +662,7 @@ func (e CTLineTruncationType) String() string {
 }
 
 // Constants used to query and modify a paragraph style object.
-type CTParagraphStyleSpecifier int64
+type CTParagraphStyleSpecifier uint32
 
 const (
 	// The text alignment.
@@ -753,7 +753,7 @@ func (e CTParagraphStyleSpecifier) String() string {
 }
 
 // Constants that specify how to align the ruby text and the base text relative to each other when they have different lengths.
-type CTRubyAlignment int64
+type CTRubyAlignment uint8
 
 const (
 	// The alignment is invalid.
@@ -800,7 +800,7 @@ func (e CTRubyAlignment) String() string {
 }
 
 // Constants that specify whether, and on which side, ruby text can overhang adjacent text if it’s wider than the base text.
-type CTRubyOverhang int64
+type CTRubyOverhang uint8
 
 const (
 	// The overhang specification is invalid.
@@ -835,7 +835,7 @@ func (e CTRubyOverhang) String() string {
 }
 
 // Constants that specify the position of the ruby text relative to to the base text.
-type CTRubyPosition int64
+type CTRubyPosition uint8
 
 const (
 	// The ruby text is positioned before the base text, appearing above horizontal text and to the right of vertical text.
@@ -871,7 +871,7 @@ func (e CTRubyPosition) String() string {
 
 // A bitfield that represents the disposition of the run.
 // Bitmask — values may be combined with |.
-type CTRunStatus int64
+type CTRunStatus uint32
 
 const (
 	// The run has no special attributes.
@@ -904,7 +904,7 @@ func (e CTRunStatus) String() string {
 }
 
 // Constants that specify text alignment.
-type CTTextAlignment int64
+type CTTextAlignment uint8
 
 const (
 	// Text is visually left-aligned.
@@ -948,7 +948,7 @@ func (e CTTextAlignment) String() string {
 	}
 }
 
-type EntryID int64
+type EntryID int32
 
 const (
 	EntryIDFirstEntry EntryID = 0
@@ -971,7 +971,7 @@ func (e EntryID) String() string {
 	}
 }
 
-type Flag int64
+type Flag int32
 
 const (
 	FlagFlagDeferInherit      Flag = 1
@@ -1006,7 +1006,7 @@ func (e Flag) String() string {
 	}
 }
 
-type Perm int64
+type Perm int32
 
 const (
 	PermReadData           Perm = 2
@@ -1066,7 +1066,7 @@ func (e Perm) String() string {
 	}
 }
 
-type Tag int64
+type Tag int32
 
 const (
 	TagUndefinedTag  Tag = 0
@@ -1089,7 +1089,7 @@ func (e Tag) String() string {
 	}
 }
 
-type Type int64
+type Type int32
 
 const (
 	TypeExtended Type = 256
@@ -1125,7 +1125,7 @@ func (e Type) String() string {
 }
 
 // The recognized format of the font.
-type CTFontFormat int64
+type CTFontFormat uint32
 
 const (
 	// The font is not a recognized format.
@@ -1248,7 +1248,7 @@ func (e CTFontManagerError) String() string {
 
 // The stylistic class values of the font.
 // Bitmask — values may be combined with |.
-type CTFontStylisticClass int64
+type CTFontStylisticClass uint32
 
 const (
 	// The font has no design classification.
@@ -1368,7 +1368,7 @@ func (e CTFontStylisticClass) String() string {
 }
 
 // These constants specify the fill rule used by a frame
-type CTFramePathFillRule int64
+type CTFramePathFillRule uint32
 
 const (
 	// Paints the area using the even-odd fill rule.
@@ -1391,7 +1391,7 @@ func (e CTFramePathFillRule) String() string {
 }
 
 // Constants that specify frame progression types.
-type CTFrameProgression int64
+type CTFrameProgression uint32
 
 const (
 	// Lines stack top to bottom for horizontal text.
@@ -1418,7 +1418,7 @@ func (e CTFrameProgression) String() string {
 }
 
 // These constants specify what happens when a line is too long for its frame.
-type CTLineBreakMode int64
+type CTLineBreakMode uint8
 
 const (
 	KCTLineBreakByWordWrapping     CTLineBreakMode = 0
@@ -1452,7 +1452,7 @@ func (e CTLineBreakMode) String() string {
 
 // Underline style specifiers.
 // Bitmask — values may be combined with |.
-type CTUnderlineStyle int64
+type CTUnderlineStyle int32
 
 const (
 	// A specifier that indicates not to draw an underline.
@@ -1486,7 +1486,7 @@ func (e CTUnderlineStyle) String() string {
 
 // Underline style modifiers.
 // Bitmask — values may be combined with |.
-type CTUnderlineStyleModifiers int64
+type CTUnderlineStyleModifiers int32
 
 const (
 	// A modifier that indicates to draw a solid underline.
@@ -1524,7 +1524,7 @@ func (e CTUnderlineStyleModifiers) String() string {
 }
 
 // These constants specify the writing direction.
-type CTWritingDirection int64
+type CTWritingDirection int8
 
 const (
 	KCTWritingDirectionNatural     CTWritingDirection = -1
@@ -1547,7 +1547,7 @@ func (e CTWritingDirection) String() string {
 	}
 }
 
-type Clockid int64
+type Clockid int32
 
 const (
 	ClockidRealtime           Clockid = 0
@@ -1648,7 +1648,7 @@ func (e DispatchBlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type EvCmd int64
+type EvCmd int32
 
 const (
 	EVNOP   EvCmd = 0
@@ -1677,7 +1677,7 @@ func (e EvCmd) String() string {
 	}
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -1715,7 +1715,7 @@ func (e FilesecProperty) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -1738,7 +1738,7 @@ func (e Idtype) String() string {
 	}
 }
 
-type IpcInfoObjectType int64
+type IpcInfoObjectType uint32
 
 const (
 	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
@@ -1921,7 +1921,7 @@ func (e IpcInfoObjectType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -1937,7 +1937,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -1957,7 +1957,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -1981,7 +1981,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -2025,7 +2025,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type NXMouseButton int64
+type NXMouseButton int32
 
 const (
 	NX_OneButton   NXMouseButton = 0
@@ -2048,7 +2048,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -2065,7 +2065,7 @@ func (e OSClockid) String() string {
 	}
 }
 
-type PtrauthKey int64
+type PtrauthKey int32
 
 const (
 	Ptrauth_key_none                     PtrauthKey = -1
@@ -2142,7 +2142,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1

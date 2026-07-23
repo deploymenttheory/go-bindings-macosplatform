@@ -11,7 +11,7 @@ import (
 
 // The supported channel bitmaps to use when defining channel layouts.
 // Bitmask — values may be combined with |.
-type AudioChannelBitmap int64
+type AudioChannelBitmap uint32
 
 const (
 	// The left channel.
@@ -163,7 +163,7 @@ func (e AudioChannelBitmap) String() string {
 
 // Constants that define the audio channel flags of an audio channel description.
 // Bitmask — values may be combined with |.
-type AudioChannelFlags int64
+type AudioChannelFlags uint32
 
 const (
 	// All flags are clear.
@@ -197,7 +197,7 @@ func (e AudioChannelFlags) String() string {
 
 // A structure that represents flags for a timestamp.
 // Bitmask — values may be combined with |.
-type AudioTimeStampFlags int64
+type AudioTimeStampFlags uint32
 
 const (
 	// A flag that indicates no fields are valid.
@@ -246,7 +246,7 @@ func (e AudioTimeStampFlags) String() string {
 
 // A structure that defines SMPTE time flags.
 // Bitmask — values may be combined with |.
-type SMPTETimeFlags int64
+type SMPTETimeFlags uint32
 
 const (
 	KSMPTETimeUnknown SMPTETimeFlags = 0
@@ -271,7 +271,7 @@ func (e SMPTETimeFlags) String() string {
 }
 
 // Constants that define SMPTE time types.
-type SMPTETimeType int64
+type SMPTETimeType uint32
 
 const (
 	KSMPTETimeType24       SMPTETimeType = 0
@@ -382,7 +382,7 @@ func (e AVAudioSessionErrorCode) String() string {
 }
 
 // Indexes the fields of the mCoordinates array in an AudioChannelDescription structure.
-type AudioChannelCoordinateIndex int64
+type AudioChannelCoordinateIndex uint32
 
 const (
 	// For rectangular coordinates, negative is left and positive is right. The units are specified by the mChannelFlags field of the AudioChannelDescription structure.
@@ -465,7 +465,7 @@ func (e MPEG4ObjectID) String() string {
 	}
 }
 
-type PtrauthKey int64
+type PtrauthKey int32
 
 const (
 	Ptrauth_key_none                     PtrauthKey = -1

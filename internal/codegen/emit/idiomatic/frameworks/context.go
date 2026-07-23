@@ -5,6 +5,7 @@ package idiofw
 import (
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/structlayout"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emitmanifest"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/idioconf"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
@@ -169,7 +170,7 @@ func buildLocalValueStructNames(framework *meta.FrameworkMeta) map[string]bool {
 			// array of one; a pointer, slice, or cross-package (dotted) type is not.
 			// isPrimitiveOrArrayOf peels [N] dimensions and rejects "*", ".", " ",
 			// and zero-length "[]" slices.
-			if f.GoType == "" || !isPrimitiveOrArrayOf(f.GoType, func(string) bool { return true }) {
+			if f.GoType == "" || !structlayout.IsPrimitiveOrArrayOf(f.GoType, func(string) bool { return true }) {
 				plain = false
 				break
 			}

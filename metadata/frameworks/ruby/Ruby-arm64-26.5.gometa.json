@@ -9,7 +9,7 @@
   "protocols": {},
   "enums": {
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -32,7 +32,7 @@
       "sdk_line": 79
     },
     "rb_io_wait_readwrite": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "RB_IO_WAIT_READABLE",
@@ -50,7 +50,7 @@
       "sdk_line": 1898
     },
     "ruby_fl_type": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "RUBY_FL_WB_PROTECTED",
@@ -223,7 +223,7 @@
       "sdk_line": 840
     },
     "ruby_rarray_flags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "RARRAY_EMBED_LEN_MAX",
@@ -261,7 +261,7 @@
       "sdk_line": 1020
     },
     "ruby_rmodule_flags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "RMODULE_IS_OVERLAID",
@@ -289,7 +289,7 @@
       "sdk_line": 947
     },
     "ruby_robject_flags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ROBJECT_EMBED_LEN_MAX",
@@ -312,7 +312,7 @@
       "sdk_line": 908
     },
     "ruby_rstring_flags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "RSTRING_NOEMBED",
@@ -350,7 +350,7 @@
       "sdk_line": 970
     },
     "ruby_special_consts": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "RUBY_Qfalse",
@@ -408,7 +408,7 @@
       "sdk_line": 435
     },
     "ruby_value_type": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "RUBY_T_NONE",
@@ -551,7 +551,7 @@
       "sdk_line": 485
     },
     "st_retval": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ST_CONTINUE",

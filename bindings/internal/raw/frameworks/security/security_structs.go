@@ -472,6 +472,11 @@ type SecTrust struct{}
 // SecTrustedApplication is an opaque type.
 type SecTrustedApplication struct{}
 
+// C struct: audit_token_t
+type AuditTokenT struct {
+	Val [8]uint32
+}
+
 // C struct: cssm_access_credentials
 type CssmAccessCredentials struct {
 	EntryTag  [68]int8
@@ -799,7 +804,7 @@ type CssmField struct {
 
 // C struct: cssm_fieldgroup
 type CssmFieldgroup struct {
-	NumberOfFields int
+	NumberOfFields int32
 	Fields         *CssmField
 }
 

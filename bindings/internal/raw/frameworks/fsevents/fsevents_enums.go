@@ -66,7 +66,7 @@ func (e Dispatch_block_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Filesec_property_t int64
+type Filesec_property_t int32
 
 const (
 	FILESEC_OWNER         Filesec_property_t = 1
@@ -102,7 +102,7 @@ func (e Filesec_property_t) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0
@@ -123,7 +123,7 @@ func (e Idtype_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -165,7 +165,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
@@ -180,7 +180,7 @@ func (e Os_clockid_t) String() string {
 	}
 }
 
-type Ptrauth_key int64
+type Ptrauth_key int32
 
 const (
 	Ptrauth_key_none                     Ptrauth_key = -1

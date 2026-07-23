@@ -6,72 +6,84 @@ package machhost
 
 import "unsafe"
 
+// [ndr.h:40]
+type NDR_record_t struct {
+	Mig_vers     uint8
+	If_vers      uint8
+	Reserved1    uint8
+	Mig_encoding uint8
+	Int_rep      uint8
+	Char_rep     uint8
+	Float_rep    uint8
+	Reserved2    uint8
+}
+
 // [mach_host.h:891]
-type __Reply___host_page_size_t struct {
+type ReplyHostPageSizeT struct {
 	Head          unsafe.Pointer
-	NDR           unsafe.Pointer
+	NDR           NDR_record_t
 	RetCode       int32
 	Out_page_size uint64
 }
 
 // [mach_host.h:1226]
-type __Reply__host_check_multiuser_mode_t struct {
+type ReplyHostCheckMultiuserModeT struct {
 	Head           unsafe.Pointer
-	NDR            unsafe.Pointer
+	NDR            NDR_record_t
 	RetCode        int32
 	Multiuser_mode uint32
 }
 
 // [mach_host.h:1112]
-type __Reply__host_create_mach_voucher_t struct {
+type ReplyHostCreateMachVoucherT struct {
 	Head      unsafe.Pointer
 	Msgh_body unsafe.Pointer
 	Voucher   unsafe.Pointer
 }
 
 // [mach_host.h:1168]
-type __Reply__host_get_atm_diagnostic_flag_t struct {
+type ReplyHostGetAtmDiagnosticFlagT struct {
 	Head            unsafe.Pointer
-	NDR             unsafe.Pointer
+	NDR             NDR_record_t
 	RetCode         int32
 	Diagnostic_flag uint32
 }
 
 // [mach_host.h:949]
-type __Reply__host_get_clock_service_t struct {
+type ReplyHostGetClockServiceT struct {
 	Head       unsafe.Pointer
 	Msgh_body  unsafe.Pointer
 	Clock_serv unsafe.Pointer
 }
 
 // [mach_host.h:935]
-type __Reply__host_get_io_main_t struct {
+type ReplyHostGetIoMainT struct {
 	Head      unsafe.Pointer
 	Msgh_body unsafe.Pointer
 	Io_main   unsafe.Pointer
 }
 
 // [mach_host.h:1213]
-type __Reply__host_get_multiuser_config_flags_t struct {
+type ReplyHostGetMultiuserConfigFlagsT struct {
 	Head            unsafe.Pointer
-	NDR             unsafe.Pointer
+	NDR             NDR_record_t
 	RetCode         int32
 	Multiuser_flags uint32
 }
 
 // [mach_host.h:862]
-type __Reply__host_info_t struct {
+type ReplyHostInfoT struct {
 	Head             unsafe.Pointer
-	NDR              unsafe.Pointer
+	NDR              NDR_record_t
 	RetCode          int32
 	Host_info_outCnt uint32
 	Host_info_out    [68]int32
 }
 
 // [mach_host.h:876]
-type __Reply__host_kernel_version_t struct {
+type ReplyHostKernelVersionT struct {
 	Head                 unsafe.Pointer
-	NDR                  unsafe.Pointer
+	NDR                  NDR_record_t
 	RetCode              int32
 	Kernel_versionOffset uint32
 	Kernel_versionCnt    uint32
@@ -79,158 +91,158 @@ type __Reply__host_kernel_version_t struct {
 }
 
 // [mach_host.h:1064]
-type __Reply__host_lockgroup_info_t struct {
+type ReplyHostLockgroupInfoT struct {
 	Head              unsafe.Pointer
 	Msgh_body         unsafe.Pointer
 	Lockgroup_info    unsafe.Pointer
-	NDR               unsafe.Pointer
+	NDR               NDR_record_t
 	Lockgroup_infoCnt uint32
 }
 
 // [mach_host.h:918]
-type __Reply__host_processor_info_t struct {
+type ReplyHostProcessorInfoT struct {
 	Head                  unsafe.Pointer
 	Msgh_body             unsafe.Pointer
 	Out_processor_info    unsafe.Pointer
-	NDR                   unsafe.Pointer
+	NDR                   NDR_record_t
 	Out_processor_count   uint32
 	Out_processor_infoCnt uint32
 }
 
 // [mach_host.h:1126]
-type __Reply__host_register_mach_voucher_attr_manager_t struct {
+type ReplyHostRegisterMachVoucherAttrManagerT struct {
 	Head             unsafe.Pointer
 	Msgh_body        unsafe.Pointer
 	New_attr_control unsafe.Pointer
-	NDR              unsafe.Pointer
+	NDR              NDR_record_t
 	New_key          uint32
 }
 
 // [mach_host.h:1142]
-type __Reply__host_register_well_known_mach_voucher_attr_manager_t struct {
+type ReplyHostRegisterWellKnownMachVoucherAttrManagerT struct {
 	Head             unsafe.Pointer
 	Msgh_body        unsafe.Pointer
 	New_attr_control unsafe.Pointer
 }
 
 // [mach_host.h:1052]
-type __Reply__host_request_notification_t struct {
+type ReplyHostRequestNotificationT struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     NDR_record_t
 	RetCode int32
 }
 
 // [mach_host.h:1156]
-type __Reply__host_set_atm_diagnostic_flag_t struct {
+type ReplyHostSetAtmDiagnosticFlagT struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     NDR_record_t
 	RetCode int32
 }
 
 // [mach_host.h:1201]
-type __Reply__host_set_multiuser_config_flags_t struct {
+type ReplyHostSetMultiuserConfigFlagsT struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     NDR_record_t
 	RetCode int32
 }
 
 // [mach_host.h:1080]
-type __Reply__host_statistics64_t struct {
+type ReplyHostStatistics64T struct {
 	Head               unsafe.Pointer
-	NDR                unsafe.Pointer
+	NDR                NDR_record_t
 	RetCode            int32
 	Host_info64_outCnt uint32
 	Host_info64_out    [256]int32
 }
 
 // [mach_host.h:1038]
-type __Reply__host_statistics_t struct {
+type ReplyHostStatisticsT struct {
 	Head             unsafe.Pointer
-	NDR              unsafe.Pointer
+	NDR              NDR_record_t
 	RetCode          int32
 	Host_info_outCnt uint32
 	Host_info_out    [68]int32
 }
 
 // [mach_host.h:979]
-type __Reply__host_virtual_physical_table_info_t struct {
+type ReplyHostVirtualPhysicalTableInfoT struct {
 	Head      unsafe.Pointer
 	Msgh_body unsafe.Pointer
 	Info      unsafe.Pointer
-	NDR       unsafe.Pointer
+	NDR       NDR_record_t
 	InfoCnt   uint32
 }
 
 // [mach_host.h:963]
-type __Reply__kmod_get_info_t struct {
+type ReplyKmodGetInfoT struct {
 	Head       unsafe.Pointer
 	Msgh_body  unsafe.Pointer
 	Modules    unsafe.Pointer
-	NDR        unsafe.Pointer
+	NDR        NDR_record_t
 	ModulesCnt uint32
 }
 
 // [mach_host.h:1252]
-type __Reply__mach_memory_info_redacted_t struct {
+type ReplyMachMemoryInfoRedactedT struct {
 	Head           unsafe.Pointer
 	Msgh_body      unsafe.Pointer
 	Names          unsafe.Pointer
 	Info           unsafe.Pointer
 	Memory_info    unsafe.Pointer
-	NDR            unsafe.Pointer
+	NDR            NDR_record_t
 	NamesCnt       uint32
 	InfoCnt        uint32
 	Memory_infoCnt uint32
 }
 
 // [mach_host.h:1181]
-type __Reply__mach_memory_info_t struct {
+type ReplyMachMemoryInfoT struct {
 	Head           unsafe.Pointer
 	Msgh_body      unsafe.Pointer
 	Names          unsafe.Pointer
 	Info           unsafe.Pointer
 	Memory_info    unsafe.Pointer
-	NDR            unsafe.Pointer
+	NDR            NDR_record_t
 	NamesCnt       uint32
 	InfoCnt        uint32
 	Memory_infoCnt uint32
 }
 
 // [mach_host.h:1024]
-type __Reply__mach_memory_object_memory_entry_64_t struct {
+type ReplyMachMemoryObjectMemoryEntry64T struct {
 	Head         unsafe.Pointer
 	Msgh_body    unsafe.Pointer
 	Entry_handle unsafe.Pointer
 }
 
 // [mach_host.h:904]
-type __Reply__mach_memory_object_memory_entry_t struct {
+type ReplyMachMemoryObjectMemoryEntryT struct {
 	Head         unsafe.Pointer
 	Msgh_body    unsafe.Pointer
 	Entry_handle unsafe.Pointer
 }
 
 // [mach_host.h:1239]
-type __Reply__mach_zone_info_for_zone_t struct {
+type ReplyMachZoneInfoForZoneT struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     NDR_record_t
 	RetCode int32
 	Info    unsafe.Pointer
 }
 
 // [mach_host.h:1094]
-type __Reply__mach_zone_info_t struct {
+type ReplyMachZoneInfoT struct {
 	Head      unsafe.Pointer
 	Msgh_body unsafe.Pointer
 	Names     unsafe.Pointer
 	Info      unsafe.Pointer
-	NDR       unsafe.Pointer
+	NDR       NDR_record_t
 	NamesCnt  uint32
 	InfoCnt   uint32
 }
 
 // [mach_host.h:1009]
-type __Reply__processor_set_create_t struct {
+type ReplyProcessorSetCreateT struct {
 	Head      unsafe.Pointer
 	Msgh_body unsafe.Pointer
 	New_set   unsafe.Pointer
@@ -238,195 +250,195 @@ type __Reply__processor_set_create_t struct {
 }
 
 // [mach_host.h:995]
-type __Reply__processor_set_default_t struct {
+type ReplyProcessorSetDefaultT struct {
 	Head        unsafe.Pointer
 	Msgh_body   unsafe.Pointer
 	Default_set unsafe.Pointer
 }
 
 // [mach_host.h:507]
-type __Request___host_page_size_t struct {
+type RequestHostPageSizeT struct {
 	Head unsafe.Pointer
 }
 
 // [mach_host.h:789]
-type __Request__host_check_multiuser_mode_t struct {
+type RequestHostCheckMultiuserModeT struct {
 	Head unsafe.Pointer
 }
 
 // [mach_host.h:689]
-type __Request__host_create_mach_voucher_t struct {
+type RequestHostCreateMachVoucherT struct {
 	Head       unsafe.Pointer
-	NDR        unsafe.Pointer
+	NDR        NDR_record_t
 	RecipesCnt uint32
 	Recipes    [5120]uint8
 }
 
 // [mach_host.h:747]
-type __Request__host_get_atm_diagnostic_flag_t struct {
+type RequestHostGetAtmDiagnosticFlagT struct {
 	Head unsafe.Pointer
 }
 
 // [mach_host.h:557]
-type __Request__host_get_clock_service_t struct {
+type RequestHostGetClockServiceT struct {
 	Head     unsafe.Pointer
-	NDR      unsafe.Pointer
+	NDR      NDR_record_t
 	Clock_id int32
 }
 
 // [mach_host.h:547]
-type __Request__host_get_io_main_t struct {
+type RequestHostGetIoMainT struct {
 	Head unsafe.Pointer
 }
 
 // [mach_host.h:779]
-type __Request__host_get_multiuser_config_flags_t struct {
+type RequestHostGetMultiuserConfigFlagsT struct {
 	Head unsafe.Pointer
 }
 
 // [mach_host.h:484]
-type __Request__host_info_t struct {
+type RequestHostInfoT struct {
 	Head             unsafe.Pointer
-	NDR              unsafe.Pointer
+	NDR              NDR_record_t
 	Flavor           int32
 	Host_info_outCnt uint32
 }
 
 // [mach_host.h:497]
-type __Request__host_kernel_version_t struct {
+type RequestHostKernelVersionT struct {
 	Head unsafe.Pointer
 }
 
 // [mach_host.h:656]
-type __Request__host_lockgroup_info_t struct {
+type RequestHostLockgroupInfoT struct {
 	Head unsafe.Pointer
 }
 
 // [mach_host.h:535]
-type __Request__host_processor_info_t struct {
+type RequestHostProcessorInfoT struct {
 	Head   unsafe.Pointer
-	NDR    unsafe.Pointer
+	NDR    NDR_record_t
 	Flavor int32
 }
 
 // [mach_host.h:702]
-type __Request__host_register_mach_voucher_attr_manager_t struct {
+type RequestHostRegisterMachVoucherAttrManagerT struct {
 	Head          unsafe.Pointer
 	Msgh_body     unsafe.Pointer
 	Attr_manager  unsafe.Pointer
-	NDR           unsafe.Pointer
+	NDR           NDR_record_t
 	Default_value uint64
 }
 
 // [mach_host.h:718]
-type __Request__host_register_well_known_mach_voucher_attr_manager_t struct {
+type RequestHostRegisterWellKnownMachVoucherAttrManagerT struct {
 	Head          unsafe.Pointer
 	Msgh_body     unsafe.Pointer
 	Attr_manager  unsafe.Pointer
-	NDR           unsafe.Pointer
+	NDR           NDR_record_t
 	Default_value uint64
 	Key           uint32
 }
 
 // [mach_host.h:640]
-type __Request__host_request_notification_t struct {
+type RequestHostRequestNotificationT struct {
 	Head        unsafe.Pointer
 	Msgh_body   unsafe.Pointer
 	Notify_port unsafe.Pointer
-	NDR         unsafe.Pointer
+	NDR         NDR_record_t
 	Notify_type int32
 }
 
 // [mach_host.h:735]
-type __Request__host_set_atm_diagnostic_flag_t struct {
+type RequestHostSetAtmDiagnosticFlagT struct {
 	Head            unsafe.Pointer
-	NDR             unsafe.Pointer
+	NDR             NDR_record_t
 	Diagnostic_flag uint32
 }
 
 // [mach_host.h:767]
-type __Request__host_set_multiuser_config_flags_t struct {
+type RequestHostSetMultiuserConfigFlagsT struct {
 	Head            unsafe.Pointer
-	NDR             unsafe.Pointer
+	NDR             NDR_record_t
 	Multiuser_flags uint32
 }
 
 // [mach_host.h:666]
-type __Request__host_statistics64_t struct {
+type RequestHostStatistics64T struct {
 	Head               unsafe.Pointer
-	NDR                unsafe.Pointer
+	NDR                NDR_record_t
 	Flavor             int32
 	Host_info64_outCnt uint32
 }
 
 // [mach_host.h:627]
-type __Request__host_statistics_t struct {
+type RequestHostStatisticsT struct {
 	Head             unsafe.Pointer
-	NDR              unsafe.Pointer
+	NDR              NDR_record_t
 	Flavor           int32
 	Host_info_outCnt uint32
 }
 
 // [mach_host.h:579]
-type __Request__host_virtual_physical_table_info_t struct {
+type RequestHostVirtualPhysicalTableInfoT struct {
 	Head unsafe.Pointer
 }
 
 // [mach_host.h:569]
-type __Request__kmod_get_info_t struct {
+type RequestKmodGetInfoT struct {
 	Head unsafe.Pointer
 }
 
 // [mach_host.h:811]
-type __Request__mach_memory_info_redacted_t struct {
+type RequestMachMemoryInfoRedactedT struct {
 	Head unsafe.Pointer
 }
 
 // [mach_host.h:757]
-type __Request__mach_memory_info_t struct {
+type RequestMachMemoryInfoT struct {
 	Head unsafe.Pointer
 }
 
 // [mach_host.h:609]
-type __Request__mach_memory_object_memory_entry_64_t struct {
+type RequestMachMemoryObjectMemoryEntry64T struct {
 	Head       unsafe.Pointer
 	Msgh_body  unsafe.Pointer
 	Pager      unsafe.Pointer
-	NDR        unsafe.Pointer
+	NDR        NDR_record_t
 	Internal   int32
 	Size       uint64
 	Permission int32
 }
 
 // [mach_host.h:517]
-type __Request__mach_memory_object_memory_entry_t struct {
+type RequestMachMemoryObjectMemoryEntryT struct {
 	Head       unsafe.Pointer
 	Msgh_body  unsafe.Pointer
 	Pager      unsafe.Pointer
-	NDR        unsafe.Pointer
+	NDR        NDR_record_t
 	Internal   int32
 	Size       uint64
 	Permission int32
 }
 
 // [mach_host.h:799]
-type __Request__mach_zone_info_for_zone_t struct {
+type RequestMachZoneInfoForZoneT struct {
 	Head unsafe.Pointer
-	NDR  unsafe.Pointer
+	NDR  NDR_record_t
 	Name unsafe.Pointer
 }
 
 // [mach_host.h:679]
-type __Request__mach_zone_info_t struct {
+type RequestMachZoneInfoT struct {
 	Head unsafe.Pointer
 }
 
 // [mach_host.h:599]
-type __Request__processor_set_create_t struct {
+type RequestProcessorSetCreateT struct {
 	Head unsafe.Pointer
 }
 
 // [mach_host.h:589]
-type __Request__processor_set_default_t struct {
+type RequestProcessorSetDefaultT struct {
 	Head unsafe.Pointer
 }

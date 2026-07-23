@@ -13,7 +13,7 @@ type IOAsyncCompletionContent struct {
 }
 
 type IONamedValue struct {
-	Value int
+	Value int32
 	Name  string
 }
 

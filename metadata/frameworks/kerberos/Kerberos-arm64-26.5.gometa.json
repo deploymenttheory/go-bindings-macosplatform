@@ -607,7 +607,7 @@
       "availability": {}
     },
     "cc_credential_versions": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "cc_credentials_v4",
@@ -631,7 +631,7 @@
       "doc": "Credentials versions These constants are used in several places in the API to discern between Kerberos v4 and Kerberos v5. Not all values are valid inputs and outputs for all functions; function specifications below detail the allowed values. Kerberos version constants will always be a bit-field, and can be tested as such; for example the following test will tell you if a ccacheVersion includes v5 credentials: if ((ccacheVersion \u0026 cc_credentials_v5) != 0)"
     },
     "cc_lock_modes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "cc_lock_noblock",
@@ -650,7 +650,7 @@
       "doc": "Locking Modes These constants are used in the advisory locking functions to describe whether or not the lock function should block waiting for a lock or return an error immediately.   For example, attempting to acquire a lock with a non-blocking call will result in an error if the lock cannot be acquired; otherwise, the call will block until the lock can be acquired."
     },
     "cc_lock_types": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "cc_lock_read",
@@ -679,7 +679,7 @@
       "doc": "Lock types These constants are used in the locking functions to describe the type of lock requested.  Note that all CCAPI locks are advisory so only callers using the lock calls will be blocked by each other. This is because locking functions were introduced after the CCAPI came into common use and we did not want to break existing callers."
     },
     "cc_string_to_key_type": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "cc_v4_stk_afs",
@@ -713,7 +713,7 @@
       "doc": "String to key type (Kerberos v4 only)"
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",

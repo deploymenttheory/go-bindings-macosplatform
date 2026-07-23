@@ -10,15 +10,15 @@ import raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/inter
 // types and values so callers name them through this package.
 
 type (
-	Dispatch_autorelease_frequency_t  = raw.Dispatch_autorelease_frequency_t
-	Dispatch_block_flags_t            = raw.Dispatch_block_flags_t
-	Dispatch_data_s                   = raw.Dispatch_data_s
-	Dispatch_queue_attr_s             = raw.Dispatch_queue_attr_s
-	Dispatch_queue_s                  = raw.Dispatch_queue_s
-	Dispatch_source_type_t            = raw.Dispatch_source_type_t
-	Filesec_property_t                = raw.Filesec_property_t
-	Idtype_t                          = raw.Idtype_t
-	Mpo_flags_t                       = raw.Mpo_flags_t
+	DispatchAutoreleaseFrequencyT     = raw.DispatchAutoreleaseFrequencyT
+	DispatchBlockFlagsT               = raw.DispatchBlockFlagsT
+	DispatchDataS                     = raw.DispatchDataS
+	DispatchQueueAttrS                = raw.DispatchQueueAttrS
+	DispatchQueueS                    = raw.DispatchQueueS
+	DispatchSourceTypeT               = raw.DispatchSourceTypeT
+	FilesecPropertyT                  = raw.FilesecPropertyT
+	IdtypeT                           = raw.IdtypeT
+	MpoFlagsT                         = raw.MpoFlagsT
 	OS_dispatch_data                  = raw.OS_dispatch_data
 	OS_dispatch_group                 = raw.OS_dispatch_group
 	OS_dispatch_io                    = raw.OS_dispatch_io
@@ -33,8 +33,8 @@ type (
 	OS_dispatch_semaphore             = raw.OS_dispatch_semaphore
 	OS_dispatch_source                = raw.OS_dispatch_source
 	OS_dispatch_workloop              = raw.OS_dispatch_workloop
-	Os_clockid_t                      = raw.Os_clockid_t
-	Qos_class_t                       = raw.Qos_class_t
+	OsClockidT                        = raw.OsClockidT
+	QosClassT                         = raw.QosClassT
 	Timespec                          = raw.Timespec
 )
 

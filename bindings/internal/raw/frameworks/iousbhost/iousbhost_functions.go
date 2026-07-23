@@ -9,67 +9,67 @@ import (
 
 var (
 	// @brief       Find the first BillboardCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first BillboardCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @return      BillboardCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-	_fnIOUSBGetBillboardDescriptor func(unsafe.Pointer) unsafe.Pointer
+	_fnIOUSBGetBillboardDescriptor func(*IOUSBBOSDescriptor) unsafe.Pointer
 	// @brief       Extract the maximum bus current required by a configuration descriptor @discussion  This method parses a configuration descriptor and returns the number of milliamps required to power the device @param       usbDeviceSpeed The operational speed of the device @param       descriptor The ConfigurationDescriptor to parse @return      uint32_t milliamps required
-	_fnIOUSBGetConfigurationMaxPowerMilliAmps func(uint32, unsafe.Pointer) uint32
+	_fnIOUSBGetConfigurationMaxPowerMilliAmps func(uint32, *IOUSBConfigurationDescriptor) uint32
 	// @brief       Find the first ContainerIDCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first ContainerIDCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @return      ContainerIDCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-	_fnIOUSBGetContainerIDDescriptor func(unsafe.Pointer) unsafe.Pointer
+	_fnIOUSBGetContainerIDDescriptor func(*IOUSBBOSDescriptor) *IOUSBDeviceCapabilityContainerID
 	// @brief       Extract the direction and number of an endpoint from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its address @param       descriptor The descriptor to parse @return      uint8_t representing direction and endpoint number
-	_fnIOUSBGetEndpointAddress func(unsafe.Pointer) uint8
+	_fnIOUSBGetEndpointAddress func(*IOUSBEndpointDescriptor) uint8
 	// @brief       Extract the burst size from endpoint descriptors @discussion  This method parses endpoint descriptors to determine burst size, which includes mult and burst factors as applicable.  SuperSpeed Plus isochronous endpoints will return the dwBytesPerInterval field from the SuperSpeedPlusIsochronousEndpointCompanionDescriptor parameter. @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to parse, or NULL @param       sspCompanionDescriptor The SuperSpeedPlusIsochronousEndpointCompanionDescriptor to parse, or NULL @return      uint32_t The burst size in bytes
-	_fnIOUSBGetEndpointBurstSize func(uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
+	_fnIOUSBGetEndpointBurstSize func(uint32, *IOUSBEndpointDescriptor, *IOUSBSuperSpeedEndpointCompanionDescriptor, *IOUSBSuperSpeedPlusIsochronousEndpointCompanionDescriptor) uint32
 	// @brief       Extract the direction of an endpoint from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its transfer direction @param       descriptor The descriptor to parse @return      tEndpointDirection indicating the direction found.  Control endpoints return tEndpointDirection.
-	_fnIOUSBGetEndpointDirection func(unsafe.Pointer) uint8
+	_fnIOUSBGetEndpointDirection func(*IOUSBEndpointDescriptor) uint8
 	// @brief       Extract the interval of an endpoint descriptor @discussion  This method parses an endpoint descriptor and returns the service interval as n in (2^(n-1)) microframes @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @return      uint32_t Encoded endpoint interval
-	_fnIOUSBGetEndpointIntervalEncodedMicroframes func(uint32, unsafe.Pointer) uint32
+	_fnIOUSBGetEndpointIntervalEncodedMicroframes func(uint32, *IOUSBEndpointDescriptor) uint32
 	// @brief       Extract the interval of an endpoint descriptor @discussion  This method parses an endpoint descriptor and returns the service interval in frames @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @return      uint32_t Endpoint interval in frames
-	_fnIOUSBGetEndpointIntervalFrames func(uint32, unsafe.Pointer) uint32
+	_fnIOUSBGetEndpointIntervalFrames func(uint32, *IOUSBEndpointDescriptor) uint32
 	// @brief       Extract the interval of an endpoint descriptor @discussion  This method parses an endpoint descriptor and returns the service interval in microframes @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @return      uint32_t Endpoint interval in microframes
-	_fnIOUSBGetEndpointIntervalMicroframes func(uint32, unsafe.Pointer) uint32
+	_fnIOUSBGetEndpointIntervalMicroframes func(uint32, *IOUSBEndpointDescriptor) uint32
 	// @brief       Extract the max packet size from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its max packet size, which does not take into account mult or burst factors. @param       usbDeviceSpeed The operational speed of the device @param       descriptor The descriptor to parse @return      uint16_t The max packet size in bytes
-	_fnIOUSBGetEndpointMaxPacketSize func(uint32, unsafe.Pointer) uint16
+	_fnIOUSBGetEndpointMaxPacketSize func(uint32, *IOUSBEndpointDescriptor) uint16
 	// @brief       Extract the number of streams supported by an endpoint @discussion  This method parses endpoint descriptors and returns the number of streams supported @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to parse @return      uint32_t Number of streams
-	_fnIOUSBGetEndpointMaxStreams func(uint32, unsafe.Pointer, unsafe.Pointer) uint32
+	_fnIOUSBGetEndpointMaxStreams func(uint32, *IOUSBEndpointDescriptor, *IOUSBSuperSpeedEndpointCompanionDescriptor) uint32
 	// @brief       Extract the number of streams supported by an endpoint @discussion  This method parses endpoint descriptors and returns the number of streams supported as n in (2^n) @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to parse @return      uint32_t Encoded number of streams
-	_fnIOUSBGetEndpointMaxStreamsEncoded func(uint32, unsafe.Pointer, unsafe.Pointer) uint32
+	_fnIOUSBGetEndpointMaxStreamsEncoded func(uint32, *IOUSBEndpointDescriptor, *IOUSBSuperSpeedEndpointCompanionDescriptor) uint32
 	// @brief       Extract the mult count from endpoint descriptors @discussion  This method parses endpoint descriptors to determine mult @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to parse, or NULL @param       sspCompanionDescriptor The SuperSpeedPlusIsochronousEndpointCompanionDescriptor to parse, or NULL @return      uint8_t The mult count
-	_fnIOUSBGetEndpointMult func(uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+	_fnIOUSBGetEndpointMult func(uint32, *IOUSBEndpointDescriptor, *IOUSBSuperSpeedEndpointCompanionDescriptor, *IOUSBSuperSpeedPlusIsochronousEndpointCompanionDescriptor) uint8
 	// @brief       Extract the number of an endpoint from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its number, excluding direction @param       descriptor The descriptor to parse @return      uint8_t representing endpoint number
-	_fnIOUSBGetEndpointNumber func(unsafe.Pointer) uint8
+	_fnIOUSBGetEndpointNumber func(*IOUSBEndpointDescriptor) uint8
 	// @brief       Extract the synchronization type of an  endpoint from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its synchronization type. Only Isochronous endpoints have non-zero synchronization types @param       descriptor The descriptor to parse @return      tEndpointSynchronizationType indicating the type found.
-	_fnIOUSBGetEndpointSynchronizationType func(unsafe.Pointer) uint8
+	_fnIOUSBGetEndpointSynchronizationType func(*IOUSBEndpointDescriptor) uint8
 	// @brief       Extract the type of an endpoint from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its type @param       descriptor The descriptor to parse @return      tEndpointType indicating the type found.
-	_fnIOUSBGetEndpointType func(unsafe.Pointer) uint8
+	_fnIOUSBGetEndpointType func(*IOUSBEndpointDescriptor) uint8
 	// @brief       Extract the usage type of an endpoint from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its usage type. Only periodic endpoints have usage types @param       descriptor The descriptor to parse @return      tEndpointUsageType indicating the type found.
-	_fnIOUSBGetEndpointUsageType func(unsafe.Pointer) uint8
+	_fnIOUSBGetEndpointUsageType func(*IOUSBEndpointDescriptor) uint8
 	// @brief       Get the next descriptor in a configuration descriptor that belongs to another container descriptor @discussion  This method uses getNextDescriptor, but will return NULL if another descriptor is found whose bDescriptorType field matches the value used for parentDescriptor's bDescriptorType.  Using NULL for currentDescriptor will return the first descriptor after parentDescriptor. @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       parentDescriptor A descriptor pointer within the bounds of configurationDescriptor @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @return      Descriptor pointer, or NULL if no descriptor can be returned
-	_fnIOUSBGetNextAssociatedDescriptor func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnIOUSBGetNextAssociatedDescriptor func(*IOUSBConfigurationDescriptor, *IOUSBDescriptorHeader, *IOUSBDescriptorHeader) *IOUSBDescriptorHeader
 	// @brief       Find the next descriptor matching a given type within a configuration descriptor that belongs to another container descriptor @discussion  This method uses getNextAssociatedDescriptor, and further validates that the returned descriptor's bDescriptorType field matches the type passed parameter. @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       parentDescriptor A descriptor pointer within the bounds of configurationDescriptor @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @param       type tDescriptorType representing the descriptor type to find @return      Descriptor pointer, or NULL if no matching descriptor can be found
-	_fnIOUSBGetNextAssociatedDescriptorWithType func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
+	_fnIOUSBGetNextAssociatedDescriptorWithType func(*IOUSBConfigurationDescriptor, *IOUSBDescriptorHeader, *IOUSBDescriptorHeader, uint8) *IOUSBDescriptorHeader
 	// @brief       Get the next device capability descriptor in a BOS descriptor @discussion  This method will advance currentDescriptor by its bLength, and validate that the new descriptor fits withing the bounds of bosDescriptor.  Using NULL for currentDescriptor will return the first descriptor after the BOS descriptor. @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @param       currentDescriptor A descriptor pointer within the bounds of bosDescriptor, or NULL @return      DeviceCapabilityDescriptor pointer, or NULL if no descriptor can be returned
-	_fnIOUSBGetNextCapabilityDescriptor func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnIOUSBGetNextCapabilityDescriptor func(*IOUSBBOSDescriptor, *IOUSBDeviceCapabilityDescriptorHeader) *IOUSBDeviceCapabilityDescriptorHeader
 	// @brief       Find the next descriptor matching a given type within a BOS descriptor @discussion  This method uses getNextCapabilityDescriptor, and further validates that the returned descriptor's bDevCapabilityType field matches the type parameter. @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @param       currentDescriptor A descriptor pointer within the bounds of bosDescriptor, or NULL @param       type tDeviceCapabilityType representing the descriptor type to find @return      DeviceCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-	_fnIOUSBGetNextCapabilityDescriptorWithType func(unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
+	_fnIOUSBGetNextCapabilityDescriptorWithType func(*IOUSBBOSDescriptor, *IOUSBDeviceCapabilityDescriptorHeader, uint8) *IOUSBDeviceCapabilityDescriptorHeader
 	// @brief       Get the next descriptor in a configuration descriptor @discussion  This method will advance currentDescriptor by its bLength, and validate that the new descriptor fits withing the bounds of configurationDescriptor.  Using NULL for currentDescriptor will return the first descriptor after the configuration descriptor. @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @return      Descriptor pointer, or NULL if no descriptor can be returned
-	_fnIOUSBGetNextDescriptor func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnIOUSBGetNextDescriptor func(*IOUSBConfigurationDescriptor, *IOUSBDescriptorHeader) *IOUSBDescriptorHeader
 	// @brief       Find the next descriptor matching a given type within a configuration descriptor @discussion  This method uses getNextDescriptor, and further validates that the returned descriptor's bDescriptorType field matches the type parameter. @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @param       type tDescriptorType representing the descriptor type to find @return      Descriptor pointer, or NULL if no matching descriptor can be found
-	_fnIOUSBGetNextDescriptorWithType func(unsafe.Pointer, unsafe.Pointer, uint8) unsafe.Pointer
+	_fnIOUSBGetNextDescriptorWithType func(*IOUSBConfigurationDescriptor, *IOUSBDescriptorHeader, uint8) *IOUSBDescriptorHeader
 	// @brief       Find the next endpoint descriptor associated with an interface descriptor @discussion  This method uses getNextAssociatedDescriptorWithType to fetch the next endpoint descriptor associated with a specific interface descriptor @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       interfaceDescriptor An interface descriptor within the bounds of configurationDescriptor @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @return      EndpointDescriptor pointer, or NULL if no matching descriptor can be found
-	_fnIOUSBGetNextEndpointDescriptor func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnIOUSBGetNextEndpointDescriptor func(*IOUSBConfigurationDescriptor, *IOUSBInterfaceDescriptor, *IOUSBDescriptorHeader) *IOUSBEndpointDescriptor
 	// @brief       Find the next interface association descriptor in a configuration descriptor @discussion  This method uses getNextDescriptorWithType to fetch the next interface association descriptor @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @return      InterfaceAssociationDescriptor pointer, or NULL if no matching descriptor can be found
-	_fnIOUSBGetNextInterfaceAssociationDescriptor func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnIOUSBGetNextInterfaceAssociationDescriptor func(*IOUSBConfigurationDescriptor, *IOUSBDescriptorHeader) *IOUSBInterfaceAssociationDescriptor
 	// @brief       Find the next interface descriptor in a configuration descriptor @discussion  This method uses getNextDescriptorWithType to fetch the next interface descriptor @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @return      InterfaceDescriptor pointer, or NULL if no matching descriptor can be found
-	_fnIOUSBGetNextInterfaceDescriptor func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
+	_fnIOUSBGetNextInterfaceDescriptor func(*IOUSBConfigurationDescriptor, *IOUSBDescriptorHeader) *IOUSBInterfaceDescriptor
 	// @brief       Find the first PlatformCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first PlatformCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @return      PlatformCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-	_fnIOUSBGetPlatformCapabilityDescriptor func(unsafe.Pointer) unsafe.Pointer
+	_fnIOUSBGetPlatformCapabilityDescriptor func(*IOUSBBOSDescriptor) unsafe.Pointer
 	// @brief       Find the first PlatformCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first PlatformCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @param       uuid UUID associated with the platform capability @return      PlatformCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-	_fnIOUSBGetPlatformCapabilityDescriptorWithUUID func(unsafe.Pointer, *uint8) unsafe.Pointer
+	_fnIOUSBGetPlatformCapabilityDescriptorWithUUID func(*IOUSBBOSDescriptor, *uint8) unsafe.Pointer
 	// @brief       Find the first SuperSpeedUSBDeviceCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first SuperSpeedUSBDeviceCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @return      SuperSpeedUSBDeviceCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-	_fnIOUSBGetSuperSpeedDeviceCapabilityDescriptor func(unsafe.Pointer) unsafe.Pointer
+	_fnIOUSBGetSuperSpeedDeviceCapabilityDescriptor func(*IOUSBBOSDescriptor) *IOUSBDeviceCapabilitySuperSpeedUSB
 	// @brief       Find the first SuperSpeedPlusUSBDeviceCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first SuperSpeedPlusUSBDeviceCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @return      SuperSpeedPlusUSBDeviceCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-	_fnIOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor func(unsafe.Pointer) unsafe.Pointer
+	_fnIOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor func(*IOUSBBOSDescriptor) unsafe.Pointer
 	// @brief       Find the first USB20ExtensionCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first USB20ExtensionCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @return      USB20ExtensionCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-	_fnIOUSBGetUSB20ExtensionDeviceCapabilityDescriptor func(unsafe.Pointer) unsafe.Pointer
+	_fnIOUSBGetUSB20ExtensionDeviceCapabilityDescriptor func(*IOUSBBOSDescriptor) unsafe.Pointer
 	_fnIOUSBHostCIControllerStateToString               func(IOUSBHostCIControllerState) string
 	_fnIOUSBHostCIDeviceSpeedToString                   func(IOUSBHostCIDeviceSpeed) string
 	_fnIOUSBHostCIDeviceStateToString                   func(IOUSBHostCIDeviceState) string
@@ -87,157 +87,157 @@ var (
 )
 
 // @brief       Find the first BillboardCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first BillboardCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @return      BillboardCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-func IOUSBGetBillboardDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
+func IOUSBGetBillboardDescriptor(bosDescriptor *IOUSBBOSDescriptor) unsafe.Pointer {
 	return _fnIOUSBGetBillboardDescriptor(bosDescriptor)
 }
 
 // @brief       Extract the maximum bus current required by a configuration descriptor @discussion  This method parses a configuration descriptor and returns the number of milliamps required to power the device @param       usbDeviceSpeed The operational speed of the device @param       descriptor The ConfigurationDescriptor to parse @return      uint32_t milliamps required
-func IOUSBGetConfigurationMaxPowerMilliAmps(usbDeviceSpeed uint32, descriptor unsafe.Pointer) uint32 {
+func IOUSBGetConfigurationMaxPowerMilliAmps(usbDeviceSpeed uint32, descriptor *IOUSBConfigurationDescriptor) uint32 {
 	return _fnIOUSBGetConfigurationMaxPowerMilliAmps(usbDeviceSpeed, descriptor)
 }
 
 // @brief       Find the first ContainerIDCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first ContainerIDCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @return      ContainerIDCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-func IOUSBGetContainerIDDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
+func IOUSBGetContainerIDDescriptor(bosDescriptor *IOUSBBOSDescriptor) *IOUSBDeviceCapabilityContainerID {
 	return _fnIOUSBGetContainerIDDescriptor(bosDescriptor)
 }
 
 // @brief       Extract the direction and number of an endpoint from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its address @param       descriptor The descriptor to parse @return      uint8_t representing direction and endpoint number
-func IOUSBGetEndpointAddress(descriptor unsafe.Pointer) uint8 {
+func IOUSBGetEndpointAddress(descriptor *IOUSBEndpointDescriptor) uint8 {
 	return _fnIOUSBGetEndpointAddress(descriptor)
 }
 
 // @brief       Extract the burst size from endpoint descriptors @discussion  This method parses endpoint descriptors to determine burst size, which includes mult and burst factors as applicable.  SuperSpeed Plus isochronous endpoints will return the dwBytesPerInterval field from the SuperSpeedPlusIsochronousEndpointCompanionDescriptor parameter. @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to parse, or NULL @param       sspCompanionDescriptor The SuperSpeedPlusIsochronousEndpointCompanionDescriptor to parse, or NULL @return      uint32_t The burst size in bytes
-func IOUSBGetEndpointBurstSize(usbDeviceSpeed uint32, descriptor unsafe.Pointer, companionDescriptor unsafe.Pointer, sspCompanionDescriptor unsafe.Pointer) uint32 {
+func IOUSBGetEndpointBurstSize(usbDeviceSpeed uint32, descriptor *IOUSBEndpointDescriptor, companionDescriptor *IOUSBSuperSpeedEndpointCompanionDescriptor, sspCompanionDescriptor *IOUSBSuperSpeedPlusIsochronousEndpointCompanionDescriptor) uint32 {
 	return _fnIOUSBGetEndpointBurstSize(usbDeviceSpeed, descriptor, companionDescriptor, sspCompanionDescriptor)
 }
 
 // @brief       Extract the direction of an endpoint from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its transfer direction @param       descriptor The descriptor to parse @return      tEndpointDirection indicating the direction found.  Control endpoints return tEndpointDirection.
-func IOUSBGetEndpointDirection(descriptor unsafe.Pointer) uint8 {
+func IOUSBGetEndpointDirection(descriptor *IOUSBEndpointDescriptor) uint8 {
 	return _fnIOUSBGetEndpointDirection(descriptor)
 }
 
 // @brief       Extract the interval of an endpoint descriptor @discussion  This method parses an endpoint descriptor and returns the service interval as n in (2^(n-1)) microframes @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @return      uint32_t Encoded endpoint interval
-func IOUSBGetEndpointIntervalEncodedMicroframes(usbDeviceSpeed uint32, descriptor unsafe.Pointer) uint32 {
+func IOUSBGetEndpointIntervalEncodedMicroframes(usbDeviceSpeed uint32, descriptor *IOUSBEndpointDescriptor) uint32 {
 	return _fnIOUSBGetEndpointIntervalEncodedMicroframes(usbDeviceSpeed, descriptor)
 }
 
 // @brief       Extract the interval of an endpoint descriptor @discussion  This method parses an endpoint descriptor and returns the service interval in frames @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @return      uint32_t Endpoint interval in frames
-func IOUSBGetEndpointIntervalFrames(usbDeviceSpeed uint32, descriptor unsafe.Pointer) uint32 {
+func IOUSBGetEndpointIntervalFrames(usbDeviceSpeed uint32, descriptor *IOUSBEndpointDescriptor) uint32 {
 	return _fnIOUSBGetEndpointIntervalFrames(usbDeviceSpeed, descriptor)
 }
 
 // @brief       Extract the interval of an endpoint descriptor @discussion  This method parses an endpoint descriptor and returns the service interval in microframes @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @return      uint32_t Endpoint interval in microframes
-func IOUSBGetEndpointIntervalMicroframes(usbDeviceSpeed uint32, descriptor unsafe.Pointer) uint32 {
+func IOUSBGetEndpointIntervalMicroframes(usbDeviceSpeed uint32, descriptor *IOUSBEndpointDescriptor) uint32 {
 	return _fnIOUSBGetEndpointIntervalMicroframes(usbDeviceSpeed, descriptor)
 }
 
 // @brief       Extract the max packet size from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its max packet size, which does not take into account mult or burst factors. @param       usbDeviceSpeed The operational speed of the device @param       descriptor The descriptor to parse @return      uint16_t The max packet size in bytes
-func IOUSBGetEndpointMaxPacketSize(usbDeviceSpeed uint32, descriptor unsafe.Pointer) uint16 {
+func IOUSBGetEndpointMaxPacketSize(usbDeviceSpeed uint32, descriptor *IOUSBEndpointDescriptor) uint16 {
 	return _fnIOUSBGetEndpointMaxPacketSize(usbDeviceSpeed, descriptor)
 }
 
 // @brief       Extract the number of streams supported by an endpoint @discussion  This method parses endpoint descriptors and returns the number of streams supported @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to parse @return      uint32_t Number of streams
-func IOUSBGetEndpointMaxStreams(usbDeviceSpeed uint32, descriptor unsafe.Pointer, companionDescriptor unsafe.Pointer) uint32 {
+func IOUSBGetEndpointMaxStreams(usbDeviceSpeed uint32, descriptor *IOUSBEndpointDescriptor, companionDescriptor *IOUSBSuperSpeedEndpointCompanionDescriptor) uint32 {
 	return _fnIOUSBGetEndpointMaxStreams(usbDeviceSpeed, descriptor, companionDescriptor)
 }
 
 // @brief       Extract the number of streams supported by an endpoint @discussion  This method parses endpoint descriptors and returns the number of streams supported as n in (2^n) @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to parse @return      uint32_t Encoded number of streams
-func IOUSBGetEndpointMaxStreamsEncoded(usbDeviceSpeed uint32, descriptor unsafe.Pointer, companionDescriptor unsafe.Pointer) uint32 {
+func IOUSBGetEndpointMaxStreamsEncoded(usbDeviceSpeed uint32, descriptor *IOUSBEndpointDescriptor, companionDescriptor *IOUSBSuperSpeedEndpointCompanionDescriptor) uint32 {
 	return _fnIOUSBGetEndpointMaxStreamsEncoded(usbDeviceSpeed, descriptor, companionDescriptor)
 }
 
 // @brief       Extract the mult count from endpoint descriptors @discussion  This method parses endpoint descriptors to determine mult @param       usbDeviceSpeed The operational speed of the device @param       descriptor The EndpointDescriptor to parse @param       companionDescriptor The SuperSpeedEndpointCompanionDescriptor to parse, or NULL @param       sspCompanionDescriptor The SuperSpeedPlusIsochronousEndpointCompanionDescriptor to parse, or NULL @return      uint8_t The mult count
-func IOUSBGetEndpointMult(usbDeviceSpeed uint32, descriptor unsafe.Pointer, companionDescriptor unsafe.Pointer, sspCompanionDescriptor unsafe.Pointer) uint8 {
+func IOUSBGetEndpointMult(usbDeviceSpeed uint32, descriptor *IOUSBEndpointDescriptor, companionDescriptor *IOUSBSuperSpeedEndpointCompanionDescriptor, sspCompanionDescriptor *IOUSBSuperSpeedPlusIsochronousEndpointCompanionDescriptor) uint8 {
 	return _fnIOUSBGetEndpointMult(usbDeviceSpeed, descriptor, companionDescriptor, sspCompanionDescriptor)
 }
 
 // @brief       Extract the number of an endpoint from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its number, excluding direction @param       descriptor The descriptor to parse @return      uint8_t representing endpoint number
-func IOUSBGetEndpointNumber(descriptor unsafe.Pointer) uint8 {
+func IOUSBGetEndpointNumber(descriptor *IOUSBEndpointDescriptor) uint8 {
 	return _fnIOUSBGetEndpointNumber(descriptor)
 }
 
 // @brief       Extract the synchronization type of an  endpoint from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its synchronization type. Only Isochronous endpoints have non-zero synchronization types @param       descriptor The descriptor to parse @return      tEndpointSynchronizationType indicating the type found.
-func IOUSBGetEndpointSynchronizationType(descriptor unsafe.Pointer) uint8 {
+func IOUSBGetEndpointSynchronizationType(descriptor *IOUSBEndpointDescriptor) uint8 {
 	return _fnIOUSBGetEndpointSynchronizationType(descriptor)
 }
 
 // @brief       Extract the type of an endpoint from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its type @param       descriptor The descriptor to parse @return      tEndpointType indicating the type found.
-func IOUSBGetEndpointType(descriptor unsafe.Pointer) uint8 {
+func IOUSBGetEndpointType(descriptor *IOUSBEndpointDescriptor) uint8 {
 	return _fnIOUSBGetEndpointType(descriptor)
 }
 
 // @brief       Extract the usage type of an endpoint from an endpoint descriptor @discussion  This method parses an endpoint descriptor to determine its usage type. Only periodic endpoints have usage types @param       descriptor The descriptor to parse @return      tEndpointUsageType indicating the type found.
-func IOUSBGetEndpointUsageType(descriptor unsafe.Pointer) uint8 {
+func IOUSBGetEndpointUsageType(descriptor *IOUSBEndpointDescriptor) uint8 {
 	return _fnIOUSBGetEndpointUsageType(descriptor)
 }
 
 // @brief       Get the next descriptor in a configuration descriptor that belongs to another container descriptor @discussion  This method uses getNextDescriptor, but will return NULL if another descriptor is found whose bDescriptorType field matches the value used for parentDescriptor's bDescriptorType.  Using NULL for currentDescriptor will return the first descriptor after parentDescriptor. @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       parentDescriptor A descriptor pointer within the bounds of configurationDescriptor @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @return      Descriptor pointer, or NULL if no descriptor can be returned
-func IOUSBGetNextAssociatedDescriptor(configurationDescriptor unsafe.Pointer, parentDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
+func IOUSBGetNextAssociatedDescriptor(configurationDescriptor *IOUSBConfigurationDescriptor, parentDescriptor *IOUSBDescriptorHeader, currentDescriptor *IOUSBDescriptorHeader) *IOUSBDescriptorHeader {
 	return _fnIOUSBGetNextAssociatedDescriptor(configurationDescriptor, parentDescriptor, currentDescriptor)
 }
 
 // @brief       Find the next descriptor matching a given type within a configuration descriptor that belongs to another container descriptor @discussion  This method uses getNextAssociatedDescriptor, and further validates that the returned descriptor's bDescriptorType field matches the type passed parameter. @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       parentDescriptor A descriptor pointer within the bounds of configurationDescriptor @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @param       type tDescriptorType representing the descriptor type to find @return      Descriptor pointer, or NULL if no matching descriptor can be found
-func IOUSBGetNextAssociatedDescriptorWithType(configurationDescriptor unsafe.Pointer, parentDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer, type_ uint8) unsafe.Pointer {
+func IOUSBGetNextAssociatedDescriptorWithType(configurationDescriptor *IOUSBConfigurationDescriptor, parentDescriptor *IOUSBDescriptorHeader, currentDescriptor *IOUSBDescriptorHeader, type_ uint8) *IOUSBDescriptorHeader {
 	return _fnIOUSBGetNextAssociatedDescriptorWithType(configurationDescriptor, parentDescriptor, currentDescriptor, type_)
 }
 
 // @brief       Get the next device capability descriptor in a BOS descriptor @discussion  This method will advance currentDescriptor by its bLength, and validate that the new descriptor fits withing the bounds of bosDescriptor.  Using NULL for currentDescriptor will return the first descriptor after the BOS descriptor. @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @param       currentDescriptor A descriptor pointer within the bounds of bosDescriptor, or NULL @return      DeviceCapabilityDescriptor pointer, or NULL if no descriptor can be returned
-func IOUSBGetNextCapabilityDescriptor(bosDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
+func IOUSBGetNextCapabilityDescriptor(bosDescriptor *IOUSBBOSDescriptor, currentDescriptor *IOUSBDeviceCapabilityDescriptorHeader) *IOUSBDeviceCapabilityDescriptorHeader {
 	return _fnIOUSBGetNextCapabilityDescriptor(bosDescriptor, currentDescriptor)
 }
 
 // @brief       Find the next descriptor matching a given type within a BOS descriptor @discussion  This method uses getNextCapabilityDescriptor, and further validates that the returned descriptor's bDevCapabilityType field matches the type parameter. @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @param       currentDescriptor A descriptor pointer within the bounds of bosDescriptor, or NULL @param       type tDeviceCapabilityType representing the descriptor type to find @return      DeviceCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-func IOUSBGetNextCapabilityDescriptorWithType(bosDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer, type_ uint8) unsafe.Pointer {
+func IOUSBGetNextCapabilityDescriptorWithType(bosDescriptor *IOUSBBOSDescriptor, currentDescriptor *IOUSBDeviceCapabilityDescriptorHeader, type_ uint8) *IOUSBDeviceCapabilityDescriptorHeader {
 	return _fnIOUSBGetNextCapabilityDescriptorWithType(bosDescriptor, currentDescriptor, type_)
 }
 
 // @brief       Get the next descriptor in a configuration descriptor @discussion  This method will advance currentDescriptor by its bLength, and validate that the new descriptor fits withing the bounds of configurationDescriptor.  Using NULL for currentDescriptor will return the first descriptor after the configuration descriptor. @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @return      Descriptor pointer, or NULL if no descriptor can be returned
-func IOUSBGetNextDescriptor(configurationDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
+func IOUSBGetNextDescriptor(configurationDescriptor *IOUSBConfigurationDescriptor, currentDescriptor *IOUSBDescriptorHeader) *IOUSBDescriptorHeader {
 	return _fnIOUSBGetNextDescriptor(configurationDescriptor, currentDescriptor)
 }
 
 // @brief       Find the next descriptor matching a given type within a configuration descriptor @discussion  This method uses getNextDescriptor, and further validates that the returned descriptor's bDescriptorType field matches the type parameter. @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @param       type tDescriptorType representing the descriptor type to find @return      Descriptor pointer, or NULL if no matching descriptor can be found
-func IOUSBGetNextDescriptorWithType(configurationDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer, type_ uint8) unsafe.Pointer {
+func IOUSBGetNextDescriptorWithType(configurationDescriptor *IOUSBConfigurationDescriptor, currentDescriptor *IOUSBDescriptorHeader, type_ uint8) *IOUSBDescriptorHeader {
 	return _fnIOUSBGetNextDescriptorWithType(configurationDescriptor, currentDescriptor, type_)
 }
 
 // @brief       Find the next endpoint descriptor associated with an interface descriptor @discussion  This method uses getNextAssociatedDescriptorWithType to fetch the next endpoint descriptor associated with a specific interface descriptor @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       interfaceDescriptor An interface descriptor within the bounds of configurationDescriptor @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @return      EndpointDescriptor pointer, or NULL if no matching descriptor can be found
-func IOUSBGetNextEndpointDescriptor(configurationDescriptor unsafe.Pointer, interfaceDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
+func IOUSBGetNextEndpointDescriptor(configurationDescriptor *IOUSBConfigurationDescriptor, interfaceDescriptor *IOUSBInterfaceDescriptor, currentDescriptor *IOUSBDescriptorHeader) *IOUSBEndpointDescriptor {
 	return _fnIOUSBGetNextEndpointDescriptor(configurationDescriptor, interfaceDescriptor, currentDescriptor)
 }
 
 // @brief       Find the next interface association descriptor in a configuration descriptor @discussion  This method uses getNextDescriptorWithType to fetch the next interface association descriptor @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @return      InterfaceAssociationDescriptor pointer, or NULL if no matching descriptor can be found
-func IOUSBGetNextInterfaceAssociationDescriptor(configurationDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
+func IOUSBGetNextInterfaceAssociationDescriptor(configurationDescriptor *IOUSBConfigurationDescriptor, currentDescriptor *IOUSBDescriptorHeader) *IOUSBInterfaceAssociationDescriptor {
 	return _fnIOUSBGetNextInterfaceAssociationDescriptor(configurationDescriptor, currentDescriptor)
 }
 
 // @brief       Find the next interface descriptor in a configuration descriptor @discussion  This method uses getNextDescriptorWithType to fetch the next interface descriptor @param       configurationDescriptor Configuration descriptor that contains the descriptors to iterate through @param       currentDescriptor A descriptor pointer within the bounds of configurationDescriptor, or NULL @return      InterfaceDescriptor pointer, or NULL if no matching descriptor can be found
-func IOUSBGetNextInterfaceDescriptor(configurationDescriptor unsafe.Pointer, currentDescriptor unsafe.Pointer) unsafe.Pointer {
+func IOUSBGetNextInterfaceDescriptor(configurationDescriptor *IOUSBConfigurationDescriptor, currentDescriptor *IOUSBDescriptorHeader) *IOUSBInterfaceDescriptor {
 	return _fnIOUSBGetNextInterfaceDescriptor(configurationDescriptor, currentDescriptor)
 }
 
 // @brief       Find the first PlatformCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first PlatformCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @return      PlatformCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-func IOUSBGetPlatformCapabilityDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
+func IOUSBGetPlatformCapabilityDescriptor(bosDescriptor *IOUSBBOSDescriptor) unsafe.Pointer {
 	return _fnIOUSBGetPlatformCapabilityDescriptor(bosDescriptor)
 }
 
 // @brief       Find the first PlatformCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first PlatformCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @param       uuid UUID associated with the platform capability @return      PlatformCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-func IOUSBGetPlatformCapabilityDescriptorWithUUID(bosDescriptor unsafe.Pointer, uuid *uint8) unsafe.Pointer {
+func IOUSBGetPlatformCapabilityDescriptorWithUUID(bosDescriptor *IOUSBBOSDescriptor, uuid *uint8) unsafe.Pointer {
 	return _fnIOUSBGetPlatformCapabilityDescriptorWithUUID(bosDescriptor, uuid)
 }
 
 // @brief       Find the first SuperSpeedUSBDeviceCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first SuperSpeedUSBDeviceCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @return      SuperSpeedUSBDeviceCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-func IOUSBGetSuperSpeedDeviceCapabilityDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
+func IOUSBGetSuperSpeedDeviceCapabilityDescriptor(bosDescriptor *IOUSBBOSDescriptor) *IOUSBDeviceCapabilitySuperSpeedUSB {
 	return _fnIOUSBGetSuperSpeedDeviceCapabilityDescriptor(bosDescriptor)
 }
 
 // @brief       Find the first SuperSpeedPlusUSBDeviceCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first SuperSpeedPlusUSBDeviceCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @return      SuperSpeedPlusUSBDeviceCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-func IOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
+func IOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor(bosDescriptor *IOUSBBOSDescriptor) unsafe.Pointer {
 	return _fnIOUSBGetSuperSpeedPlusDeviceCapabilityDescriptor(bosDescriptor)
 }
 
 // @brief       Find the first USB20ExtensionCapabilityDescriptor in a BOS descriptor @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first USB20ExtensionCapabilityDescriptor @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through @return      USB20ExtensionCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
-func IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor(bosDescriptor unsafe.Pointer) unsafe.Pointer {
+func IOUSBGetUSB20ExtensionDeviceCapabilityDescriptor(bosDescriptor *IOUSBBOSDescriptor) unsafe.Pointer {
 	return _fnIOUSBGetUSB20ExtensionDeviceCapabilityDescriptor(bosDescriptor)
 }
 

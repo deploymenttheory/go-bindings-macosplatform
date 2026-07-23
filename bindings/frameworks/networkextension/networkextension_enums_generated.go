@@ -834,7 +834,7 @@ func (e NWUDPSessionState) String() string {
 	}
 }
 
-type ACLEntryID int64
+type ACLEntryID int32
 
 const (
 	ACLEntryIDFirstEntry ACLEntryID = 0
@@ -857,7 +857,7 @@ func (e ACLEntryID) String() string {
 	}
 }
 
-type ACLFlag int64
+type ACLFlag int32
 
 const (
 	ACLFlagFlagDeferInherit      ACLFlag = 1
@@ -892,7 +892,7 @@ func (e ACLFlag) String() string {
 	}
 }
 
-type ACLPerm int64
+type ACLPerm int32
 
 const (
 	ACLPermReadData           ACLPerm = 2
@@ -952,7 +952,7 @@ func (e ACLPerm) String() string {
 	}
 }
 
-type ACLTag int64
+type ACLTag int32
 
 const (
 	ACLTagUndefinedTag  ACLTag = 0
@@ -975,7 +975,7 @@ func (e ACLTag) String() string {
 	}
 }
 
-type ACLType int64
+type ACLType int32
 
 const (
 	ACLTypeExtended ACLType = 256
@@ -1010,7 +1010,7 @@ func (e ACLType) String() string {
 	}
 }
 
-type Clockid int64
+type Clockid int32
 
 const (
 	ClockidRealtime           Clockid = 0
@@ -1048,7 +1048,7 @@ func (e Clockid) String() string {
 	}
 }
 
-type DNSServiceAAAAPolicy int64
+type DNSServiceAAAAPolicy int32
 
 const (
 	KDNSServiceAAAAPolicyNone     DNSServiceAAAAPolicy = 0
@@ -1131,7 +1131,7 @@ func (e DispatchBlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -1169,7 +1169,7 @@ func (e FilesecProperty) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -1192,7 +1192,7 @@ func (e Idtype) String() string {
 	}
 }
 
-type IpcInfoObjectType int64
+type IpcInfoObjectType uint32
 
 const (
 	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
@@ -1374,7 +1374,7 @@ func (e IpcInfoObjectType) String() string {
 	}
 }
 
-type LaunchDataType int64
+type LaunchDataType int32
 
 const (
 	LaunchDataTypeDictionary LaunchDataType = 1
@@ -1419,7 +1419,7 @@ func (e LaunchDataType) String() string {
 }
 
 // These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -1439,7 +1439,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -1462,7 +1462,7 @@ func (e MDQueryOptionFlags) String() string {
 	}
 }
 
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -1480,7 +1480,7 @@ func (e MDQuerySortOptionFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -1496,7 +1496,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -1516,7 +1516,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -1540,7 +1540,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -2027,7 +2027,7 @@ func (e NEVPNIKEv2PostQuantumKeyExchangeMethod) String() string {
 }
 
 // Browser states sent by nw_browser_set_state_changed_handler.
-type BrowserState int64
+type BrowserState int32
 
 const (
 	Nw_browser_state_invalid   BrowserState = 0
@@ -2057,7 +2057,7 @@ func (e BrowserState) String() string {
 }
 
 // Connection Group states sent by nw_connection_group_set_state_changed_handler. States progress forward and do not move backwards.
-type ConnectionGroupState int64
+type ConnectionGroupState int32
 
 const (
 	Nw_connection_group_state_invalid   ConnectionGroupState = 0
@@ -2087,7 +2087,7 @@ func (e ConnectionGroupState) String() string {
 }
 
 // Connection states sent by nw_connection_set_state_changed_handler. States generally progress forward and do not move backwards, with the exception of preparing and waiting, which may alternate before the connection becomes ready or failed.
-type ConnectionState int64
+type ConnectionState int32
 
 const (
 	Nw_connection_state_invalid   ConnectionState = 0
@@ -2120,7 +2120,7 @@ func (e ConnectionState) String() string {
 }
 
 // The state of a Data Transfer Report indicates whether or not the contents have been collected, and are ready to be accessed.
-type DataTransferReportState int64
+type DataTransferReportState int32
 
 const (
 	Nw_data_transfer_report_state_collecting DataTransferReportState = 1
@@ -2141,7 +2141,7 @@ func (e DataTransferReportState) String() string {
 }
 
 // Endpoint types represent a well-known form of endpoint. Values may be added to this enumeration, and some custom endpoint types may use values not defined in this enumeration.
-type EndpointType int64
+type EndpointType int32
 
 const (
 	Nw_endpoint_type_invalid         EndpointType = 0
@@ -2171,7 +2171,7 @@ func (e EndpointType) String() string {
 }
 
 // The enumeration of network error domains.
-type ErrorDomain int64
+type ErrorDomain int32
 
 const (
 	Nw_error_domain_invalid    ErrorDomain = 0
@@ -2200,7 +2200,7 @@ func (e ErrorDomain) String() string {
 	}
 }
 
-type EthernetChannelState int64
+type EthernetChannelState int32
 
 const (
 	Nw_ethernet_channel_state_invalid   EthernetChannelState = 0
@@ -2232,7 +2232,7 @@ func (e EthernetChannelState) String() string {
 	}
 }
 
-type FramerStartResult int64
+type FramerStartResult int32
 
 const (
 	Nw_framer_start_result_ready           FramerStartResult = 1
@@ -2253,7 +2253,7 @@ func (e FramerStartResult) String() string {
 }
 
 // Interface radio types represent the radio technology for a network link.
-type InterfaceRadioType int64
+type InterfaceRadioType int32
 
 const (
 	Nw_interface_radio_type_unknown         InterfaceRadioType = 0
@@ -2316,7 +2316,7 @@ func (e InterfaceRadioType) String() string {
 }
 
 // Interface types represent the underlying media for a network link, such as Wi-Fi or Cellular.
-type InterfaceType int64
+type InterfaceType int32
 
 const (
 	Nw_interface_type_other    InterfaceType = 0
@@ -2346,7 +2346,7 @@ func (e InterfaceType) String() string {
 }
 
 // ECN flags marked in IP headers to indicate congestion.
-type IPEcnFlag int64
+type IPEcnFlag int32
 
 const (
 	Nw_ip_ecn_flag_non_ect IPEcnFlag = 0
@@ -2373,7 +2373,7 @@ func (e IPEcnFlag) String() string {
 }
 
 // Preference for local addresses selection.
-type IPLocalAddressPreference int64
+type IPLocalAddressPreference int32
 
 const (
 	Nw_ip_local_address_preference_default   IPLocalAddressPreference = 0
@@ -2397,7 +2397,7 @@ func (e IPLocalAddressPreference) String() string {
 }
 
 // A specific version of the Internet Protocol.
-type IPVersion int64
+type IPVersion int32
 
 const (
 	Nw_ip_version_any IPVersion = 0
@@ -2421,7 +2421,7 @@ func (e IPVersion) String() string {
 }
 
 // Link quality measurement is a representation of the expected capabilities of the link layer network attachment. Use this value to tune initial values for algorithms that can scale with the capabilities of the network. Do not use this value to gate connection attempts or to override adjustments that would be made based on actual network performance.
-type LinkQuality int64
+type LinkQuality int32
 
 const (
 	Nw_link_quality_unknown  LinkQuality = 0
@@ -2448,7 +2448,7 @@ func (e LinkQuality) String() string {
 }
 
 // Listener states sent by nw_listener_set_state_changed_handler. States progress forward and do not move backwards.
-type ListenerState int64
+type ListenerState int32
 
 const (
 	Nw_listener_state_invalid   ListenerState = 0
@@ -2478,7 +2478,7 @@ func (e ListenerState) String() string {
 }
 
 // Multipath services represent the modes of multipath usage that are allowed for connections.
-type MultipathService int64
+type MultipathService int32
 
 const (
 	Nw_multipath_service_disabled    MultipathService = 0
@@ -2505,7 +2505,7 @@ func (e MultipathService) String() string {
 }
 
 // Multipath versions represent the MPTCP standard versions
-type MultipathVersion int64
+type MultipathVersion int32
 
 const (
 	Nw_multipath_version_unspecified MultipathVersion = -1
@@ -2529,7 +2529,7 @@ func (e MultipathVersion) String() string {
 }
 
 // Expired DNS behavior defines whether or not a connection will allow the use of expired DNS answers during connection establishment.
-type ParametersExpiredDNSBehavior int64
+type ParametersExpiredDNSBehavior int32
 
 const (
 	Nw_parameters_expired_dns_behavior_default    ParametersExpiredDNSBehavior = 0
@@ -2556,7 +2556,7 @@ func (e ParametersExpiredDNSBehavior) String() string {
 }
 
 // A network path status indicates if there is a usable route available upon which to send and receive data.
-type PathStatus int64
+type PathStatus int32
 
 const (
 	Nw_path_status_invalid     PathStatus = 0
@@ -2583,7 +2583,7 @@ func (e PathStatus) String() string {
 }
 
 // A network path unsatisfied reason may indicate the reason the path is currently unsatisfied for some conditions.
-type PathUnsatisfiedReason int64
+type PathUnsatisfiedReason int32
 
 const (
 	Nw_path_unsatisfied_reason_not_available        PathUnsatisfiedReason = 0
@@ -2613,7 +2613,7 @@ func (e PathUnsatisfiedReason) String() string {
 }
 
 // Represents the type of a QUIC stream.
-type QuicStreamType int64
+type QuicStreamType int32
 
 const (
 	Nw_quic_stream_type_unknown        QuicStreamType = 0
@@ -2640,7 +2640,7 @@ func (e QuicStreamType) String() string {
 }
 
 // The protocol used for endpoint resolution.
-type ReportResolutionProtocol int64
+type ReportResolutionProtocol int32
 
 const (
 	Nw_report_resolution_protocol_unknown ReportResolutionProtocol = 0
@@ -2670,7 +2670,7 @@ func (e ReportResolutionProtocol) String() string {
 }
 
 // The source of a resolution indicates if the set of endpoints was resolved locally using a cache, or sent a query over the network.
-type ReportResolutionSource int64
+type ReportResolutionSource int32
 
 const (
 	Nw_report_resolution_source_query         ReportResolutionSource = 1
@@ -2694,7 +2694,7 @@ func (e ReportResolutionSource) String() string {
 }
 
 // The network service class represents the network queuing priority to use for traffic generated by a connection.
-type ServiceClass int64
+type ServiceClass int32
 
 const (
 	Nw_service_class_best_effort       ServiceClass = 0
@@ -2727,7 +2727,7 @@ func (e ServiceClass) String() string {
 }
 
 // An enumeration of possible find results when trying to find a key-value pair in the TXT record object.
-type TxtRecordFindKey int64
+type TxtRecordFindKey int32
 
 const (
 	Nw_txt_record_find_key_invalid         TxtRecordFindKey = 0
@@ -2757,7 +2757,7 @@ func (e TxtRecordFindKey) String() string {
 }
 
 // WebSocket close codes that describe the reason for closing a WebSocket connection. Endpoints MAY use the following pre-defined status codes when sending a Close frame.
-type WsCloseCode int64
+type WsCloseCode int32
 
 const (
 	Nw_ws_close_code_normal_closure             WsCloseCode = 1000
@@ -2808,7 +2808,7 @@ func (e WsCloseCode) String() string {
 }
 
 // WebSocket opcodes that denote the type of frame sent or received by a WebSocket endpoint. Opcodes define the interpretation of their associated payload data.
-type WsOpcode int64
+type WsOpcode int32
 
 const (
 	Nw_ws_opcode_invalid WsOpcode = -1
@@ -2844,7 +2844,7 @@ func (e WsOpcode) String() string {
 }
 
 // The status of a WebSocket server's response to a client's request to connect.
-type WsResponseStatus int64
+type WsResponseStatus int32
 
 const (
 	Nw_ws_response_status_invalid WsResponseStatus = 0
@@ -2868,7 +2868,7 @@ func (e WsResponseStatus) String() string {
 }
 
 // The WebSocket Protocol version.
-type WsVersion int64
+type WsVersion int32
 
 const (
 	Nw_ws_version_invalid WsVersion = 0
@@ -2888,7 +2888,7 @@ func (e WsVersion) String() string {
 	}
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -2905,7 +2905,7 @@ func (e OSClockid) String() string {
 	}
 }
 
-type PtrauthKey int64
+type PtrauthKey int32
 
 const (
 	Ptrauth_key_none                     PtrauthKey = -1
@@ -2982,7 +2982,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -3051,7 +3051,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -3080,7 +3080,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

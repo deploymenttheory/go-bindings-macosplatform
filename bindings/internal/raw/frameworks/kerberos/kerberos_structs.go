@@ -13,7 +13,7 @@ import (
 type Krb5Address struct {
 	Magic    int
 	Addrtype int
-	Length   uint
+	Length   uint32
 	Contents *uint8
 }
 
@@ -48,7 +48,7 @@ type Krb5AuthContext struct{}
 type Krb5Authdata struct {
 	Magic    int
 	Ad_type  int
-	Length   uint
+	Length   uint32
 	Contents *uint8
 }
 
@@ -80,7 +80,7 @@ type Krb5CccolCursor struct{}
 type Krb5Checksum struct {
 	Magic         int
 	Checksum_type int
-	Length        uint
+	Length        uint32
 	Contents      *uint8
 }
 
@@ -140,7 +140,7 @@ type Krb5CryptosystemEntry struct{}
 // C struct: _krb5_data
 type Krb5Data struct {
 	Magic  int
-	Length uint
+	Length uint32
 	Data   string
 }
 
@@ -205,13 +205,13 @@ type Krb5GetInitCredsOpt struct {
 	Flags               int
 	Tkt_life            int
 	Renew_life          int
-	Forwardable         int
-	Proxiable           int
+	Forwardable         int32
+	Proxiable           int32
 	Etype_list          *int
-	Etype_list_length   int
+	Etype_list_length   int32
 	Address_list        *Krb5Address
 	Preauth_list        *int
-	Preauth_list_length int
+	Preauth_list_length int32
 	Salt                *Krb5Data
 }
 
@@ -245,7 +245,7 @@ type Krb5KdcReq struct {
 	Till               int
 	Rtime              int
 	Nonce              int
-	Nktypes            int
+	Nktypes            int32
 	Ktype              *int
 	Addresses          *Krb5Address
 	Authorization_data Krb5EncData
@@ -257,7 +257,7 @@ type Krb5KdcReq struct {
 type Krb5Keyblock struct {
 	Magic    int
 	Enctype  int
-	Length   uint
+	Length   uint32
 	Contents *uint8
 }
 
@@ -275,7 +275,7 @@ type Krb5LastReqEntry struct {
 // C struct: _krb5_octet_data
 type Krb5OctetData struct {
 	Magic  int
-	Length uint
+	Length uint32
 	Data   *uint8
 }
 
@@ -283,21 +283,21 @@ type Krb5OctetData struct {
 type Krb5PaData struct {
 	Magic    int
 	Pa_type  int
-	Length   uint
+	Length   uint32
 	Contents *uint8
 }
 
 // C struct: _krb5_prompt
 type Krb5Prompt struct {
 	Prompt string
-	Hidden int
+	Hidden int32
 	Reply  *Krb5Data
 }
 
 // C struct: _krb5_pwd_data
 type Krb5PwdData struct {
 	Magic          int
-	Sequence_count int
+	Sequence_count int32
 	Element        *PasswdPhraseElement
 }
 
@@ -345,7 +345,7 @@ type Krb5Transited struct {
 // C struct: _krb5_verify_init_creds_opt
 type Krb5VerifyInitCredsOpt struct {
 	Flags         int
-	Ap_req_nofail int
+	Ap_req_nofail int32
 }
 
 // C struct: _passwd_phrase_element

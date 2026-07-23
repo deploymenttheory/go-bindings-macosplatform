@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0
@@ -28,7 +28,7 @@ func (e Idtype_t) String() string {
 	}
 }
 
-type Rb_io_wait_readwrite int64
+type Rb_io_wait_readwrite int32
 
 const (
 	RB_IO_WAIT_READABLE Rb_io_wait_readwrite = 0
@@ -46,7 +46,7 @@ func (e Rb_io_wait_readwrite) String() string {
 	}
 }
 
-type Ruby_fl_type int64
+type Ruby_fl_type int32
 
 const (
 	RUBY_FL_WB_PROTECTED Ruby_fl_type = 32
@@ -149,7 +149,7 @@ func (e Ruby_fl_type) String() string {
 	}
 }
 
-type Ruby_rarray_flags int64
+type Ruby_rarray_flags int32
 
 const (
 	RARRAY_EMBED_LEN_MAX   Ruby_rarray_flags = 3
@@ -179,7 +179,7 @@ func (e Ruby_rarray_flags) String() string {
 	}
 }
 
-type Ruby_rmodule_flags int64
+type Ruby_rmodule_flags int32
 
 const (
 	RMODULE_IS_OVERLAID              Ruby_rmodule_flags = 16384
@@ -203,7 +203,7 @@ func (e Ruby_rmodule_flags) String() string {
 	}
 }
 
-type Ruby_robject_flags int64
+type Ruby_robject_flags int32
 
 const (
 	ROBJECT_EMBED_LEN_MAX Ruby_robject_flags = 3
@@ -224,7 +224,7 @@ func (e Ruby_robject_flags) String() string {
 	}
 }
 
-type Ruby_rstring_flags int64
+type Ruby_rstring_flags int32
 
 const (
 	RSTRING_NOEMBED         Ruby_rstring_flags = 8192
@@ -254,7 +254,7 @@ func (e Ruby_rstring_flags) String() string {
 	}
 }
 
-type Ruby_special_consts int64
+type Ruby_special_consts int32
 
 const (
 	RUBY_Qfalse         Ruby_special_consts = 0
@@ -294,7 +294,7 @@ func (e Ruby_special_consts) String() string {
 	}
 }
 
-type Ruby_value_type int64
+type Ruby_value_type int32
 
 const (
 	RUBY_T_NONE     Ruby_value_type = 0
@@ -387,7 +387,7 @@ func (e Ruby_value_type) String() string {
 	}
 }
 
-type St_retval int64
+type St_retval int32
 
 const (
 	ST_CONTINUE St_retval = 0

@@ -55,7 +55,7 @@ func (e CFNetServiceMonitorType) String() string {
 	}
 }
 
-type EntryID int64
+type EntryID int32
 
 const (
 	EntryIDFirstEntry EntryID = 0
@@ -78,7 +78,7 @@ func (e EntryID) String() string {
 	}
 }
 
-type Flag int64
+type Flag int32
 
 const (
 	FlagFlagDeferInherit      Flag = 1
@@ -113,7 +113,7 @@ func (e Flag) String() string {
 	}
 }
 
-type Perm int64
+type Perm int32
 
 const (
 	PermReadData           Perm = 2
@@ -173,7 +173,7 @@ func (e Perm) String() string {
 	}
 }
 
-type Tag int64
+type Tag int32
 
 const (
 	TagUndefinedTag  Tag = 0
@@ -196,7 +196,7 @@ func (e Tag) String() string {
 	}
 }
 
-type Type int64
+type Type int32
 
 const (
 	TypeExtended Type = 256
@@ -268,7 +268,7 @@ func (e CFNetDiagnosticStatusValues) String() string {
 
 // Flags that the system passes to net service browser callbacks.
 // Bitmask — values may be combined with |.
-type CFNetServiceBrowserFlags int64
+type CFNetServiceBrowserFlags uint64
 
 const (
 	// A hint that the system will call the client’s callback function again soon.
@@ -309,7 +309,7 @@ func (e CFNetServiceBrowserFlags) String() string {
 
 // Options to use when registering a service on the network.
 // Bitmask — values may be combined with |.
-type CFNetServiceRegisterFlags int64
+type CFNetServiceRegisterFlags uint64
 
 const (
 	// Causes registrations to fail if a name conflict occurs.
@@ -785,7 +785,7 @@ func (e CFStreamErrorHTTPAuthentication) String() string {
 	}
 }
 
-type Clockid int64
+type Clockid int32
 
 const (
 	ClockidRealtime           Clockid = 0
@@ -886,7 +886,7 @@ func (e DispatchBlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -924,7 +924,7 @@ func (e FilesecProperty) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -948,7 +948,7 @@ func (e Idtype) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -992,7 +992,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -1009,7 +1009,7 @@ func (e OSClockid) String() string {
 	}
 }
 
-type PtrauthKey int64
+type PtrauthKey int32
 
 const (
 	Ptrauth_key_none                     PtrauthKey = -1

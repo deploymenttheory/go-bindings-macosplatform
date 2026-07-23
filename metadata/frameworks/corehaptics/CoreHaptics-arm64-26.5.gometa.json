@@ -1899,7 +1899,7 @@
       "sdk_file": "CoreHaptics/CHHapticErrors.h"
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -1922,7 +1922,7 @@
       "sdk_line": 79
     },
     "ptrauth_key": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ptrauth_key_none",

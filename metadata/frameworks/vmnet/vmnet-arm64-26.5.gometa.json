@@ -9,7 +9,7 @@
   "protocols": {},
   "enums": {
     "acl_entry_id_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FIRST_ENTRY",
@@ -32,7 +32,7 @@
       "sdk_line": 118
     },
     "acl_flag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FLAG_DEFER_INHERIT",
@@ -75,7 +75,7 @@
       "sdk_line": 125
     },
     "acl_perm_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_READ_DATA",
@@ -173,7 +173,7 @@
       "sdk_line": 72
     },
     "acl_tag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_UNDEFINED_TAG",
@@ -196,7 +196,7 @@
       "sdk_line": 94
     },
     "acl_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_TYPE_EXTENDED",
@@ -239,7 +239,7 @@
       "sdk_line": 101
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -361,7 +361,7 @@
       "is_extensible": true
     },
     "filesec_property_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "FILESEC_OWNER",
@@ -409,7 +409,7 @@
       "sdk_line": 582
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -432,7 +432,7 @@
       "sdk_line": 79
     },
     "interface_event_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "VMNET_INTERFACE_PACKETS_AVAILABLE",
@@ -446,7 +446,7 @@
       "doc": "@typedef interface_event_t @abstract The interface event bitmask. @discussion The type of event provided to the interface event callback. @constant VMNET_INTERFACE_PACKETS_AVAILABLE Packets are available to be read. The event dictionary passed in the event may contain additional keys (vmnet_estimated_packets_available_key)."
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",
@@ -735,7 +735,7 @@
       "is_extensible": true
     },
     "launch_data_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "LAUNCH_DATA_DICTIONARY",
@@ -793,7 +793,7 @@
       "sdk_line": 204
     },
     "mach_vm_range_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MACH_VM_RANGE_NONE",
@@ -808,7 +808,7 @@
       "is_extensible": true
     },
     "mach_vm_range_flavor_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MACH_VM_RANGE_FLAVOR_INVALID",
@@ -827,7 +827,7 @@
       "is_extensible": true
     },
     "mach_vm_range_tag_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MACH_VM_RANGE_DEFAULT",
@@ -851,7 +851,7 @@
       "is_extensible": true
     },
     "mpo_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPO_PORT",
@@ -901,7 +901,7 @@
       "is_extensible": true
     },
     "operating_modes_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "VMNET_HOST_MODE",
@@ -927,7 +927,7 @@
       "doc": "@typedef operating_modes_t @abstract The list of operating modes for a vmnet interface. @discussion The VM specifies the operating mode by setting the vmnet_operation_mode_key property in the interface_desc dictionary. @constant VMNET_HOST_MODE Allows the vmnet interface to communicate with other vmnet interfaces that are in host mode and also with the native host. @constant VMNET_SHARED_MODE Allows traffic originating from the vmnet interface to reach the Internet through a network address translator (NAT). The vmnet interface can also communicate with the native host. By default, the vmnet interface is able to communicate with other shared mode interfaces. If a subnet range is specified, the vmnet interface can communicate with other shared mode interfaces on the same subnet. @constant VMNET_BRIDGED_MODE Bridges the vmnet interface with a physical network interface. In the call to vmnet_start_interface(), the interface_desc dictionary must contain the vmnet_shared_interface_name_key property specifying the name of the physical interface."
     },
     "os_clockid_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
@@ -940,7 +940,7 @@
       "sdk_line": 188
     },
     "ptrauth_key": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ptrauth_key_none",
@@ -1091,7 +1091,7 @@
       "sdk_line": 121
     },
     "virtual_memory_guard_exception_code_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kGUARD_EXC_DEALLOC_GAP",
@@ -1190,7 +1190,7 @@
       "is_extensible": true
     },
     "vmnet_return_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "VMNET_SUCCESS",
@@ -1254,7 +1254,7 @@
       "doc": "@typedef vmnet_return_t @abstract The status code returning the result of vmnet operations. @constant VMNET_SUCCESS\t\tSuccessfully completed. @constant VMNET_FAILURE\t\tGeneral failure. @constant VMNET_MEM_FAILURE \t\tMemory allocation failure. @constant VMNET_INVALID_ARGUMENT\tInvalid argument specified. @constant VMNET_SETUP_INCOMPLETE\tInterface setup is not complete. @constant VMNET_INVALID_ACCESS\tPermission denied. @constant VMNET_PACKET_TOO_BIG\tPacket size larger than MTU. @constant VMNET_BUFFER_EXHAUSTED\tBuffers exhausted in kernel. @constant VMNET_TOO_MANY_PACKETS \tPacket count exceeds limit. @constant VMNET_SHARING_SERVICE_BUSY\tVmnet Interface cannot be started as conflicting sharing service is in use. @constant VMNET_NOT_AUTHORIZED\tThe operation could not be completed due to missing authorization."
     },
     "xpc_listener_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_LISTENER_CREATE_NONE",
@@ -1284,7 +1284,7 @@
       "is_extensible": true
     },
     "xpc_session_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_SESSION_CREATE_NONE",

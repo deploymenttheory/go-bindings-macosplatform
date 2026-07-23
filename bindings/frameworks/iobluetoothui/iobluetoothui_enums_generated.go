@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-type EntryID int64
+type EntryID int32
 
 const (
 	EntryIDFirstEntry EntryID = 0
@@ -32,7 +32,7 @@ func (e EntryID) String() string {
 	}
 }
 
-type Flag int64
+type Flag int32
 
 const (
 	FlagFlagDeferInherit      Flag = 1
@@ -67,7 +67,7 @@ func (e Flag) String() string {
 	}
 }
 
-type Perm int64
+type Perm int32
 
 const (
 	PermReadData           Perm = 2
@@ -127,7 +127,7 @@ func (e Perm) String() string {
 	}
 }
 
-type Tag int64
+type Tag int32
 
 const (
 	TagUndefinedTag  Tag = 0
@@ -150,7 +150,7 @@ func (e Tag) String() string {
 	}
 }
 
-type Type int64
+type Type int32
 
 const (
 	TypeExtended Type = 256
@@ -185,7 +185,7 @@ func (e Type) String() string {
 	}
 }
 
-type BluetoothAMPCommandRejectReason int64
+type BluetoothAMPCommandRejectReason int32
 
 const (
 	KBluetoothAMPManagerCommandRejectReasonCommandNotRecognized BluetoothAMPCommandRejectReason = 0
@@ -202,7 +202,7 @@ func (e BluetoothAMPCommandRejectReason) String() string {
 	}
 }
 
-type BluetoothAMPCreatePhysicalLinkResponseStatus int64
+type BluetoothAMPCreatePhysicalLinkResponseStatus int32
 
 const (
 	KBluetoothAMPManagerCreatePhysicalLinkResponseSuccess                                    BluetoothAMPCreatePhysicalLinkResponseStatus = 0
@@ -237,7 +237,7 @@ func (e BluetoothAMPCreatePhysicalLinkResponseStatus) String() string {
 	}
 }
 
-type BluetoothAMPDisconnectPhysicalLinkResponseStatus int64
+type BluetoothAMPDisconnectPhysicalLinkResponseStatus int32
 
 const (
 	KBluetoothAMPManagerDisconnectPhysicalLinkResponseSuccess             BluetoothAMPDisconnectPhysicalLinkResponseStatus = 0
@@ -260,7 +260,7 @@ func (e BluetoothAMPDisconnectPhysicalLinkResponseStatus) String() string {
 	}
 }
 
-type BluetoothAMPDiscoverResponseControllerStatus int64
+type BluetoothAMPDiscoverResponseControllerStatus int32
 
 const (
 	KBluetoothAMPManagerDiscoverResponseControllerStatusPoweredDown    BluetoothAMPDiscoverResponseControllerStatus = 0
@@ -295,7 +295,7 @@ func (e BluetoothAMPDiscoverResponseControllerStatus) String() string {
 	}
 }
 
-type BluetoothAMPGetAssocResponseStatus int64
+type BluetoothAMPGetAssocResponseStatus int32
 
 const (
 	KBluetoothAMPManagerGetAssocResponseSuccess             BluetoothAMPGetAssocResponseStatus = 0
@@ -315,7 +315,7 @@ func (e BluetoothAMPGetAssocResponseStatus) String() string {
 	}
 }
 
-type BluetoothAMPGetInfoResponseStatus int64
+type BluetoothAMPGetInfoResponseStatus int32
 
 const (
 	KBluetoothAMPManagerGetInfoResponseSuccess             BluetoothAMPGetInfoResponseStatus = 0
@@ -335,7 +335,7 @@ func (e BluetoothAMPGetInfoResponseStatus) String() string {
 	}
 }
 
-type BluetoothAMPManagerCode int64
+type BluetoothAMPManagerCode int32
 
 const (
 	KBluetoothAMPManagerCodeReserved                          BluetoothAMPManagerCode = 0
@@ -391,7 +391,7 @@ func (e BluetoothAMPManagerCode) String() string {
 	}
 }
 
-type BluetoothHCIPowerState int64
+type BluetoothHCIPowerState int32
 
 const (
 	KBluetoothHCIPowerStateON           BluetoothHCIPowerState = 1
@@ -414,7 +414,7 @@ func (e BluetoothHCIPowerState) String() string {
 	}
 }
 
-type BluetoothKeyboardReturnType int64
+type BluetoothKeyboardReturnType int32
 
 const (
 	KBluetoothKeyboardANSIReturn BluetoothKeyboardReturnType = 0
@@ -440,7 +440,7 @@ func (e BluetoothKeyboardReturnType) String() string {
 	}
 }
 
-type BluetoothL2CAPCommandCode int64
+type BluetoothL2CAPCommandCode int32
 
 const (
 	KBluetoothL2CAPCommandCodeReserved                          BluetoothL2CAPCommandCode = 0
@@ -523,7 +523,7 @@ func (e BluetoothL2CAPCommandCode) String() string {
 	}
 }
 
-type BluetoothL2CAPCommandRejectReason int64
+type BluetoothL2CAPCommandRejectReason int32
 
 const (
 	KBluetoothL2CAPCommandRejectReasonCommandNotUnderstood  BluetoothL2CAPCommandRejectReason = 0
@@ -546,7 +546,7 @@ func (e BluetoothL2CAPCommandRejectReason) String() string {
 	}
 }
 
-type BluetoothL2CAPConfigurationOption int64
+type BluetoothL2CAPConfigurationOption int32
 
 const (
 	KBluetoothL2CAPConfigurationOptionMTU                          BluetoothL2CAPConfigurationOption = 1
@@ -581,7 +581,7 @@ func (e BluetoothL2CAPConfigurationOption) String() string {
 	}
 }
 
-type BluetoothL2CAPConfigurationResult int64
+type BluetoothL2CAPConfigurationResult int32
 
 const (
 	KBluetoothL2CAPConfigurationResultSuccess            BluetoothL2CAPConfigurationResult = 0
@@ -607,7 +607,7 @@ func (e BluetoothL2CAPConfigurationResult) String() string {
 	}
 }
 
-type BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags int64
+type BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags int32
 
 const (
 	KBluetoothL2CAPConfigurationBasicL2CAPModeFlag         BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags = 0
@@ -636,7 +636,7 @@ func (e BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags) String() s
 	}
 }
 
-type BluetoothL2CAPConnectionResult int64
+type BluetoothL2CAPConnectionResult int32
 
 const (
 	KBluetoothL2CAPConnectionResultSuccessful                       BluetoothL2CAPConnectionResult = 0
@@ -674,7 +674,7 @@ func (e BluetoothL2CAPConnectionResult) String() string {
 	}
 }
 
-type BluetoothL2CAPConnectionStatus int64
+type BluetoothL2CAPConnectionStatus int32
 
 const (
 	KBluetoothL2CAPConnectionStatusNoInfoAvailable       BluetoothL2CAPConnectionStatus = 0
@@ -697,7 +697,7 @@ func (e BluetoothL2CAPConnectionStatus) String() string {
 	}
 }
 
-type BluetoothL2CAPInformationExtendedFeaturesMask int64
+type BluetoothL2CAPInformationExtendedFeaturesMask int32
 
 const (
 	KBluetoothL2CAPInformationNoExtendedFeatures         BluetoothL2CAPInformationExtendedFeaturesMask = 0
@@ -744,7 +744,7 @@ func (e BluetoothL2CAPInformationExtendedFeaturesMask) String() string {
 	}
 }
 
-type BluetoothL2CAPInformationResult int64
+type BluetoothL2CAPInformationResult int32
 
 const (
 	KBluetoothL2CAPInformationResultSuccess      BluetoothL2CAPInformationResult = 0
@@ -764,7 +764,7 @@ func (e BluetoothL2CAPInformationResult) String() string {
 	}
 }
 
-type BluetoothL2CAPInformationType int64
+type BluetoothL2CAPInformationType int32
 
 const (
 	KBluetoothL2CAPInformationTypeConnectionlessMTU      BluetoothL2CAPInformationType = 1
@@ -787,7 +787,7 @@ func (e BluetoothL2CAPInformationType) String() string {
 	}
 }
 
-type BluetoothL2CAPQoSType int64
+type BluetoothL2CAPQoSType int32
 
 const (
 	KBluetoothL2CAPQoSTypeNoTraffic  BluetoothL2CAPQoSType = 0
@@ -810,7 +810,7 @@ func (e BluetoothL2CAPQoSType) String() string {
 	}
 }
 
-type BluetoothL2CAPSupervisoryFuctionType int64
+type BluetoothL2CAPSupervisoryFuctionType int32
 
 const (
 	KBluetoothL2CAPSupervisoryFuctionTypeReceiverReady    BluetoothL2CAPSupervisoryFuctionType = 0
@@ -836,7 +836,7 @@ func (e BluetoothL2CAPSupervisoryFuctionType) String() string {
 	}
 }
 
-type BluetoothLEAddressType int64
+type BluetoothLEAddressType int32
 
 const (
 	BluetoothLEAddressTypePublic BluetoothLEAddressType = 0
@@ -856,7 +856,7 @@ func (e BluetoothLEAddressType) String() string {
 	}
 }
 
-type BluetoothLEAdvertisingType int64
+type BluetoothLEAdvertisingType int32
 
 const (
 	BluetoothLEAdvertisingTypeConnectableUndirected    BluetoothLEAdvertisingType = 0
@@ -885,7 +885,7 @@ func (e BluetoothLEAdvertisingType) String() string {
 	}
 }
 
-type BluetoothLEConnectionInterval int64
+type BluetoothLEConnectionInterval int32
 
 const (
 	BluetoothLEConnectionIntervalMin BluetoothLEConnectionInterval = 6
@@ -905,7 +905,7 @@ func (e BluetoothLEConnectionInterval) String() string {
 	}
 }
 
-type BluetoothLEScan int64
+type BluetoothLEScan int32
 
 const (
 	BluetoothLEScanDisable BluetoothLEScan = 0
@@ -925,7 +925,7 @@ func (e BluetoothLEScan) String() string {
 	}
 }
 
-type BluetoothLEScanDuplicateFilter int64
+type BluetoothLEScanDuplicateFilter int32
 
 const (
 	BluetoothLEScanDuplicateFilterDisable BluetoothLEScanDuplicateFilter = 0
@@ -945,7 +945,7 @@ func (e BluetoothLEScanDuplicateFilter) String() string {
 	}
 }
 
-type BluetoothLEScanFilter int64
+type BluetoothLEScanFilter int32
 
 const (
 	BluetoothLEScanFilterNone      BluetoothLEScanFilter = 0
@@ -966,7 +966,7 @@ func (e BluetoothLEScanFilter) String() string {
 	}
 }
 
-type BluetoothLEScanType int64
+type BluetoothLEScanType int32
 
 const (
 	BluetoothLEScanTypePassive BluetoothLEScanType = 0
@@ -986,7 +986,7 @@ func (e BluetoothLEScanType) String() string {
 	}
 }
 
-type BluetoothLESecurityManagerCommandCode int64
+type BluetoothLESecurityManagerCommandCode int32
 
 const (
 	KBluetoothLESecurityManagerCommandCodeReserved                    BluetoothLESecurityManagerCommandCode = 0
@@ -1051,7 +1051,7 @@ func (e BluetoothLESecurityManagerCommandCode) String() string {
 	}
 }
 
-type BluetoothLESecurityManagerIOCapability int64
+type BluetoothLESecurityManagerIOCapability int32
 
 const (
 	KBluetoothLESecurityManagerIOCapabilityDisplayOnly     BluetoothLESecurityManagerIOCapability = 0
@@ -1086,7 +1086,7 @@ func (e BluetoothLESecurityManagerIOCapability) String() string {
 	}
 }
 
-type BluetoothLESecurityManagerKeypressNotificationType int64
+type BluetoothLESecurityManagerKeypressNotificationType int32
 
 const (
 	KBluetoothLESecurityManagerNotificationTypePasskeyEntryStarted   BluetoothLESecurityManagerKeypressNotificationType = 0
@@ -1121,7 +1121,7 @@ func (e BluetoothLESecurityManagerKeypressNotificationType) String() string {
 	}
 }
 
-type BluetoothLESecurityManagerOOBData int64
+type BluetoothLESecurityManagerOOBData int32
 
 const (
 	KBluetoothLESecurityManagerOOBAuthenticationDataNotPresent BluetoothLESecurityManagerOOBData = 0
@@ -1147,7 +1147,7 @@ func (e BluetoothLESecurityManagerOOBData) String() string {
 	}
 }
 
-type BluetoothLESecurityManagerPairingFailedReasonCode int64
+type BluetoothLESecurityManagerPairingFailedReasonCode int32
 
 const (
 	KBluetoothLESecurityManagerReasonCodeReserved                                        BluetoothLESecurityManagerPairingFailedReasonCode = 0
@@ -1212,7 +1212,7 @@ func (e BluetoothLESecurityManagerPairingFailedReasonCode) String() string {
 	}
 }
 
-type BluetoothLESecurityManagerUserInputCapability int64
+type BluetoothLESecurityManagerUserInputCapability int32
 
 const (
 	KBluetoothLESecurityManagerUserInputCapabilityNoInput  BluetoothLESecurityManagerUserInputCapability = 1
@@ -1235,7 +1235,7 @@ func (e BluetoothLESecurityManagerUserInputCapability) String() string {
 	}
 }
 
-type BluetoothLESecurityManagerUserOutputCapability int64
+type BluetoothLESecurityManagerUserOutputCapability int32
 
 const (
 	KBluetoothLESecurityManagerUserOutputCapabilityNoOutput      BluetoothLESecurityManagerUserOutputCapability = 1
@@ -1255,7 +1255,7 @@ func (e BluetoothLESecurityManagerUserOutputCapability) String() string {
 	}
 }
 
-type CGLCPContextPriorityRequest int64
+type CGLCPContextPriorityRequest int32
 
 const (
 	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
@@ -1278,7 +1278,7 @@ func (e CGLCPContextPriorityRequest) String() string {
 	}
 }
 
-type Clockid int64
+type Clockid int32
 
 const (
 	ClockidRealtime           Clockid = 0
@@ -1379,7 +1379,7 @@ func (e DispatchBlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type EvCmd int64
+type EvCmd int32
 
 const (
 	EVNOP   EvCmd = 0
@@ -1408,7 +1408,7 @@ func (e EvCmd) String() string {
 	}
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -1446,7 +1446,7 @@ func (e FilesecProperty) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -1469,7 +1469,7 @@ func (e Idtype) String() string {
 	}
 }
 
-type IpcInfoObjectType int64
+type IpcInfoObjectType uint32
 
 const (
 	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
@@ -1651,7 +1651,7 @@ func (e IpcInfoObjectType) String() string {
 	}
 }
 
-type LaunchDataType int64
+type LaunchDataType int32
 
 const (
 	LaunchDataTypeDictionary LaunchDataType = 1
@@ -1696,7 +1696,7 @@ func (e LaunchDataType) String() string {
 }
 
 // These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -1716,7 +1716,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -1739,7 +1739,7 @@ func (e MDQueryOptionFlags) String() string {
 	}
 }
 
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -1757,7 +1757,7 @@ func (e MDQuerySortOptionFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -1773,7 +1773,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -1793,7 +1793,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -1817,7 +1817,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -1861,7 +1861,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type NXMouseButton int64
+type NXMouseButton int32
 
 const (
 	NX_OneButton   NXMouseButton = 0
@@ -1884,7 +1884,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -1902,7 +1902,7 @@ func (e OSClockid) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type OSUnfairLockFlags int64
+type OSUnfairLockFlags uint32
 
 const (
 	OSUnfairLockFlagsNone         OSUnfairLockFlags = 0
@@ -1922,7 +1922,7 @@ func (e OSUnfairLockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type PMPageToPaperMappingType int64
+type PMPageToPaperMappingType int32
 
 const (
 	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
@@ -1942,7 +1942,7 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
-type PtrauthKey int64
+type PtrauthKey int32
 
 const (
 	Ptrauth_key_none                     PtrauthKey = -1
@@ -2019,7 +2019,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -2088,7 +2088,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -2117,7 +2117,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-type CGLCPContextPriorityRequest int64
+type CGLCPContextPriorityRequest int32
 
 const (
 	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
@@ -29,7 +29,7 @@ func (e CGLCPContextPriorityRequest) String() string {
 	}
 }
 
-type EvCmd int64
+type EvCmd int32
 
 const (
 	EVNOP   EvCmd = 0
@@ -57,7 +57,7 @@ func (e EvCmd) String() string {
 }
 
 // @typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -75,7 +75,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -97,7 +97,7 @@ func (e MDQueryOptionFlags) String() string {
 }
 
 // @enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order.
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -3220,7 +3220,7 @@ func (e NSFontCollectionVisibility) String() string {
 }
 
 // A symbolic description of the stylistic aspects of a font.
-type NSFontDescriptorSymbolicTraits int64
+type NSFontDescriptorSymbolicTraits uint32
 
 const (
 	NSFontDescriptorTraitItalic             NSFontDescriptorSymbolicTraits = 1
@@ -4749,7 +4749,7 @@ func (e NSOpenGLContextParameter) String() string {
 
 // Constants that specify OpenGL options.
 // Deprecated: since macOS 10.4.
-type NSOpenGLGlobalOption int64
+type NSOpenGLGlobalOption uint32
 
 const (
 	// Sets the size of the pixel format cache.
@@ -8596,7 +8596,7 @@ func (e NSWindowCollectionBehavior) String() string {
 }
 
 // A type that represents the depth, or amount of memory, for a single pixel in a window or screen.
-type NSWindowDepth int64
+type NSWindowDepth int32
 
 const (
 	NSWindowDepthTwentyfourBitRGB            NSWindowDepth = 520
@@ -9221,7 +9221,7 @@ func (e NSWritingToolsResultOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type NXMouseButton int64
+type NXMouseButton int32
 
 const (
 	NX_OneButton   NXMouseButton = 0
@@ -9242,7 +9242,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
-type PMPageToPaperMappingType int64
+type PMPageToPaperMappingType int32
 
 const (
 	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
@@ -9260,7 +9260,7 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
-type Acl_entry_id_t int64
+type Acl_entry_id_t int32
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
@@ -9281,7 +9281,7 @@ func (e Acl_entry_id_t) String() string {
 	}
 }
 
-type Acl_flag_t int64
+type Acl_flag_t int32
 
 const (
 	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
@@ -9314,7 +9314,7 @@ func (e Acl_flag_t) String() string {
 	}
 }
 
-type Acl_perm_t int64
+type Acl_perm_t int32
 
 const (
 	ACL_READ_DATA           Acl_perm_t = 2
@@ -9372,7 +9372,7 @@ func (e Acl_perm_t) String() string {
 	}
 }
 
-type Acl_tag_t int64
+type Acl_tag_t int32
 
 const (
 	ACL_UNDEFINED_TAG  Acl_tag_t = 0
@@ -9393,7 +9393,7 @@ func (e Acl_tag_t) String() string {
 	}
 }
 
-type Acl_type_t int64
+type Acl_type_t int32
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
@@ -9426,7 +9426,7 @@ func (e Acl_type_t) String() string {
 	}
 }
 
-type Clockid_t int64
+type Clockid_t int32
 
 const (
 	_CLOCK_REALTIME             Clockid_t = 0
@@ -9520,7 +9520,7 @@ func (e Dispatch_block_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Filesec_property_t int64
+type Filesec_property_t int32
 
 const (
 	FILESEC_OWNER         Filesec_property_t = 1
@@ -9556,7 +9556,7 @@ func (e Filesec_property_t) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0
@@ -9577,7 +9577,7 @@ func (e Idtype_t) String() string {
 	}
 }
 
-type Ipc_info_object_type_t int64
+type Ipc_info_object_type_t uint32
 
 const (
 	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
@@ -9757,7 +9757,7 @@ func (e Ipc_info_object_type_t) String() string {
 	}
 }
 
-type Launch_data_type_t int64
+type Launch_data_type_t int32
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
@@ -9799,7 +9799,7 @@ func (e Launch_data_type_t) String() string {
 	}
 }
 
-type Mach_vm_range_flags_t int64
+type Mach_vm_range_flags_t uint64
 
 const (
 	MACH_VM_RANGE_NONE Mach_vm_range_flags_t = 0
@@ -9813,7 +9813,7 @@ func (e Mach_vm_range_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Mach_vm_range_flavor_t int64
+type Mach_vm_range_flavor_t uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
@@ -9831,7 +9831,7 @@ func (e Mach_vm_range_flavor_t) String() string {
 	}
 }
 
-type Mach_vm_range_tag_t int64
+type Mach_vm_range_tag_t uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
@@ -9852,7 +9852,7 @@ func (e Mach_vm_range_tag_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -9894,7 +9894,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
@@ -9909,7 +9909,7 @@ func (e Os_clockid_t) String() string {
 	}
 }
 
-type Os_unfair_lock_flags_t int64
+type Os_unfair_lock_flags_t uint32
 
 const (
 	OS_UNFAIR_LOCK_FLAG_NONE          Os_unfair_lock_flags_t = 0
@@ -9927,7 +9927,7 @@ func (e Os_unfair_lock_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Ptrauth_key int64
+type Ptrauth_key int32
 
 const (
 	Ptrauth_key_none                     Ptrauth_key = -1
@@ -10000,7 +10000,7 @@ func (e Qos_class_t) String() string {
 	}
 }
 
-type Virtual_memory_guard_exception_code_t int64
+type Virtual_memory_guard_exception_code_t uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
@@ -10066,7 +10066,7 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 	}
 }
 
-type Xpc_listener_create_flags_t int64
+type Xpc_listener_create_flags_t uint64
 
 const (
 	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
@@ -10092,7 +10092,7 @@ func (e Xpc_listener_create_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Xpc_session_create_flags_t int64
+type Xpc_session_create_flags_t uint64
 
 const (
 	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0

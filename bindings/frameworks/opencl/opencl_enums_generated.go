@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-type CGLCPContextPriorityRequest int64
+type CGLCPContextPriorityRequest int32
 
 const (
 	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
@@ -32,7 +32,7 @@ func (e CGLCPContextPriorityRequest) String() string {
 	}
 }
 
-type ClkSamplerType int64
+type ClkSamplerType int32
 
 const (
 	ClkSamplerTypeAddressBase           ClkSamplerType = 0
@@ -143,7 +143,7 @@ func (e BlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -181,7 +181,7 @@ func (e FilesecProperty) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -205,7 +205,7 @@ func (e Idtype) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -249,7 +249,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32

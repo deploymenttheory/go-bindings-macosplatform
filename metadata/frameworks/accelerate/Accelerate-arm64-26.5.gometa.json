@@ -9,7 +9,7 @@
   "protocols": {},
   "enums": {
     "BNNSActivationFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSActivationFunctionIdentity",
@@ -276,7 +276,7 @@
       "sdk_line": 15
     },
     "BNNSArithmeticFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSArithmeticAdd",
@@ -571,7 +571,7 @@
       "sdk_line": 15
     },
     "BNNSBoxCoordinateMode": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSCornersHeightFirst",
@@ -607,7 +607,7 @@
       "sdk_line": 15
     },
     "BNNSDataLayout": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSDataLayoutVector",
@@ -811,7 +811,7 @@
       "sdk_line": 15
     },
     "BNNSDataType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSDataTypeFloatBit",
@@ -1022,7 +1022,7 @@
       "sdk_line": 15
     },
     "BNNSDescriptorType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSConstant",
@@ -1051,7 +1051,7 @@
       "sdk_line": 15
     },
     "BNNSEmbeddingFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSEmbeddingFlagScaleGradientByFrequency",
@@ -1066,7 +1066,7 @@
       "sdk_line": 15
     },
     "BNNSFilterType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSConvolution",
@@ -1137,7 +1137,7 @@
       "sdk_line": 15
     },
     "BNNSFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSFlagsUseClientPtr",
@@ -1152,7 +1152,7 @@
       "sdk_line": 15
     },
     "BNNSGraphArgumentIntent": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSGraphArgumentIntentIn",
@@ -1181,7 +1181,7 @@
       "sdk_line": 24
     },
     "BNNSGraphArgumentType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSGraphArgumentTypePointer",
@@ -1203,7 +1203,7 @@
       "sdk_line": 24
     },
     "BNNSGraphMessageLevel": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSGraphMessageLevelInfo",
@@ -1237,7 +1237,7 @@
       "sdk_line": 24
     },
     "BNNSGraphOptimizationPreference": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSGraphOptimizationPreferencePerformance",
@@ -1259,7 +1259,7 @@
       "sdk_line": 24
     },
     "BNNSInterpolationMethod": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSInterpolationMethodNearest",
@@ -1281,7 +1281,7 @@
       "sdk_line": 15
     },
     "BNNSLayerFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSLayerFlagsLSTMBidirectional",
@@ -1303,7 +1303,7 @@
       "sdk_line": 15
     },
     "BNNSLinearSamplingMode": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSLinearSamplingDefault",
@@ -1346,7 +1346,7 @@
       "sdk_line": 15
     },
     "BNNSLossFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSLossFunctionSoftmaxCrossEntropy",
@@ -1424,7 +1424,7 @@
       "sdk_line": 15
     },
     "BNNSLossReductionFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSLossReductionNone",
@@ -1467,7 +1467,7 @@
       "sdk_line": 15
     },
     "BNNSNDArrayFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSNDArrayFlagBackpropSet",
@@ -1489,7 +1489,7 @@
       "sdk_line": 15
     },
     "BNNSNormType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSL2Norm",
@@ -1504,7 +1504,7 @@
       "sdk_line": 15
     },
     "BNNSOptimizerClippingFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSOptimizerClippingNone",
@@ -1540,7 +1540,7 @@
       "sdk_line": 15
     },
     "BNNSOptimizerFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSOptimizerFunctionSGDMomentum",
@@ -1632,7 +1632,7 @@
       "sdk_line": 15
     },
     "BNNSOptimizerRegularizationFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSOptimizerRegularizationNone",
@@ -1661,7 +1661,7 @@
       "sdk_line": 15
     },
     "BNNSOptimizerSGDMomentumVariant": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSSGDMomentumVariant0",
@@ -1690,7 +1690,7 @@
       "sdk_line": 15
     },
     "BNNSPaddingMode": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSPaddingModeConstant",
@@ -1719,7 +1719,7 @@
       "sdk_line": 15
     },
     "BNNSPointerSpecifier": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSPointerSpecifierAlpha",
@@ -1741,7 +1741,7 @@
       "sdk_line": 15
     },
     "BNNSPoolingFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSPoolingFunctionMax",
@@ -1793,7 +1793,7 @@
       "sdk_line": 15
     },
     "BNNSQuantizerFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSQuantizerFunctionQuantize",
@@ -1815,7 +1815,7 @@
       "sdk_line": 15
     },
     "BNNSRandomGeneratorMethod": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSRandomGeneratorMethodAES_CTR",
@@ -1830,7 +1830,7 @@
       "sdk_line": 15
     },
     "BNNSReduceFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSReduceFunctionMax",
@@ -1971,7 +1971,7 @@
       "sdk_line": 15
     },
     "BNNSRelationalOperator": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSRelationalOperatorEqual",
@@ -2063,7 +2063,7 @@
       "sdk_line": 15
     },
     "BNNSShuffleType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSShuffleTypePixelShuffleNCHW",
@@ -2099,7 +2099,7 @@
       "sdk_line": 15
     },
     "BNNSSparsityType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSSparsityTypeUnstructured",
@@ -2114,7 +2114,7 @@
       "sdk_line": 15
     },
     "BNNSTargetSystem": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSTargetSystemGeneric",
@@ -2129,7 +2129,7 @@
       "sdk_line": 15
     },
     "EvCmd": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "EVNOP",
@@ -2162,7 +2162,7 @@
       "sdk_line": 148
     },
     "MDLabelDomain": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDLabelUserDomain",
@@ -2181,7 +2181,7 @@
       "doc": "@typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate()."
     },
     "MDQueryOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQuerySynchronous",
@@ -2204,7 +2204,7 @@
       "sdk_line": 83
     },
     "MDQuerySortOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQueryReverseSortOrderFlag",
@@ -2218,7 +2218,7 @@
       "doc": "@enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order."
     },
     "NXMouseButton": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "NX_OneButton",
@@ -2241,7 +2241,7 @@
       "sdk_line": 66
     },
     "PMPageToPaperMappingType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kPMPageToPaperMappingNone",
@@ -2259,7 +2259,7 @@
       "sdk_line": 197
     },
     "SparseControl_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "SparseDefaultControl",
@@ -2272,7 +2272,7 @@
       "sdk_line": 299
     },
     "SparseFactorization_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "SparseFactorizationCholesky",
@@ -2357,7 +2357,7 @@
       "sdk_line": 299
     },
     "SparseGMRESVariant_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "SparseVariantDQGMRES",
@@ -2474,7 +2474,7 @@
       "sdk_line": 299
     },
     "SparseOrder_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "SparseOrderDefault",
@@ -2552,7 +2552,7 @@
       "sdk_line": 299
     },
     "SparseScaling_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "SparseScalingDefault",
@@ -2633,7 +2633,7 @@
       "sdk_line": 299
     },
     "SparseSubfactor_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "SparseSubfactorInvalid",
@@ -2741,7 +2741,7 @@
       "is_extensible": true
     },
     "SparseUpdate_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "SparseUpdatePartialRefactor",
@@ -2784,7 +2784,7 @@
       "sdk_line": 299
     },
     "acl_entry_id_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FIRST_ENTRY",
@@ -2807,7 +2807,7 @@
       "sdk_line": 118
     },
     "acl_flag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FLAG_DEFER_INHERIT",
@@ -2850,7 +2850,7 @@
       "sdk_line": 125
     },
     "acl_perm_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_READ_DATA",
@@ -2948,7 +2948,7 @@
       "sdk_line": 72
     },
     "acl_tag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_UNDEFINED_TAG",
@@ -2971,7 +2971,7 @@
       "sdk_line": 94
     },
     "acl_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_TYPE_EXTENDED",
@@ -3014,7 +3014,7 @@
       "sdk_line": 101
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -3136,7 +3136,7 @@
       "is_extensible": true
     },
     "filesec_property_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "FILESEC_OWNER",
@@ -3184,7 +3184,7 @@
       "sdk_line": 582
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -3207,7 +3207,7 @@
       "sdk_line": 79
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",
@@ -3496,7 +3496,7 @@
       "is_extensible": true
     },
     "launch_data_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "LAUNCH_DATA_DICTIONARY",
@@ -3554,7 +3554,7 @@
       "sdk_line": 204
     },
     "mach_vm_range_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MACH_VM_RANGE_NONE",
@@ -3569,7 +3569,7 @@
       "is_extensible": true
     },
     "mach_vm_range_flavor_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MACH_VM_RANGE_FLAVOR_INVALID",
@@ -3588,7 +3588,7 @@
       "is_extensible": true
     },
     "mach_vm_range_tag_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MACH_VM_RANGE_DEFAULT",
@@ -3612,7 +3612,7 @@
       "is_extensible": true
     },
     "mpo_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPO_PORT",
@@ -3662,7 +3662,7 @@
       "is_extensible": true
     },
     "os_clockid_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
@@ -3675,7 +3675,7 @@
       "sdk_line": 188
     },
     "os_log_type_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "OS_LOG_TYPE_DEFAULT",
@@ -3708,7 +3708,7 @@
       "sdk_line": 188
     },
     "ptrauth_key": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ptrauth_key_none",
@@ -3859,7 +3859,7 @@
       "sdk_line": 121
     },
     "quadrature_integrator": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "QUADRATURE_INTEGRATE_QNG",
@@ -3883,7 +3883,7 @@
       "doc": "@enum quadrature_integrator @abstract Integrators @constant QUADRATURE_INTEGRATE_QNG Simple non-adaptive automatic integrator using Gauss-Kronrod-Patterson quadrature coefficients. Evaluates 21, or 43, or 87 points in the interval until the requested accuracy is reached. No workspace is necessary for this integrator. @constant QUADRATURE_INTEGRATE_QAG Simple globally adaptive integrator. Allows selection of the number of Gauss-Kronrod points used in each subinterval, and the max number of subintervals. @constant QUADRATURE_INTEGRATE_QAGS Global adaptive quadrature based on 21-point or 15-point (if at least one bound is infinite) Gauss–Kronrod quadrature within each subinterval, with acceleration by Peter Wynn's epsilon algorithm. If at least one of the interval bounds is infinite, this is equivalent to the QUADPACK QAGI routine. Otherwise, this is equivalent to the QUADPACK QAGS routine."
     },
     "quadrature_status": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "QUADRATURE_SUCCESS",
@@ -3927,7 +3927,7 @@
       "doc": "@enum quadrature_status @abstract Quadrature return status @discussion Success is 0, and errors have a negative value. @constant QUADRATURE_SUCCESS Success. @constant QUADRATURE_ERROR Generic error. @constant QUADRATURE_INVALID_ARG_ERROR Invalid argument. @constant QUADRATURE_ALLOC_ERROR Memory allocation failed. @constant QUADRATURE_INTERNAL_ERROR This is a bug in the Quadrature code, please file a bug report. @constant QUADRATURE_INTEGRATE_MAX_EVAL_ERROR The requested accuracy limit could not be reached with the allowed number of evals/subdivisions. @constant QUADRATURE_INTEGRATE_BAD_BEHAVIOUR_ERROR Extremely bad integrand behaviour, or excessive roundoff error occurs at some points of the integration interval."
     },
     "sparse_matrix_property": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "SPARSE_UPPER_TRIANGULAR",
@@ -3956,7 +3956,7 @@
       "doc": "@abstract The matrix property type"
     },
     "sparse_norm": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "SPARSE_NORM_ONE",
@@ -3985,7 +3985,7 @@
       "doc": "@abstract The norm specifier @constant SPARSE_NORM_ONE Matrix element wise: sum over i,j ( | A[i,j] | ) Matrix operator    : max over j ( sum over i ( | A[i,j] | ) Vector element wise: sum over i ( | x[i] | ) @constant SPARSE_NORM_TWO Matrix element wise: sqrt( sum over i,j (A[i,j])^2 ) Matrix operator    : Largest singular value of matrix, note that the operator SPARSE_NORM_TWO is significantly more expensive than other norm operations. Vector element wise: sqrt( sum over i (x[i])^2 ) @constant SPARSE_NORM_INF Matrix element wise: max over i,j ( | A[i,j] | ) Matrix operator    : max over i ( sum over j ( | A[i,j] | ) Vector element wise: max over i ( | x[i] | ) @constant SPARSE_NORM_R1 Matrix element wise: sum over j ( sqrt ( sum over i ( A[i,j]^2 ) ) ) Matrix operator    : Not supported. Undefined Vector element wise: Not supported. Undefined"
     },
     "sparse_status": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "SPARSE_SUCCESS",
@@ -4014,7 +4014,7 @@
       "doc": "@abstract The type reflecting the status of an operations. @constant SPARSE_SUCCESS Operation was a success @constant SPARSE_ILLEGAL_PARAMETER Operation was not completed because one or more of the arguments had an illegal value. @constant SPARSE_CANNOT_SET_PROPERTY Matrix properties can only be set before any values are inserted into the matrix.  This error occurs if that order is not repsected. @constant SPARSE_SYSTEM_ERROR An internal error has occured, such as non enough memory."
     },
     "vImageARGBType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kvImageARGB8888",
@@ -4038,7 +4038,7 @@
       "doc": "@typedef    vImageARGBType @abstract   An encoding of an image format type to be used with RGB \u003c-\u003e Y'CbCr conversions in vImage/Conversions.h @discussion These formats enumerate different vImage ARGB pixel formats."
     },
     "vImageMDTableUsageHint": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kvImageMDTableHint_16Q12",
@@ -4056,7 +4056,7 @@
       "sdk_line": 1541
     },
     "vImageYpCbCrType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kvImage422CbYpCrYp8",
@@ -4125,7 +4125,7 @@
       "doc": "@typedef    vImageYpCbCrType @abstract   An encoding of an image format type to be used with RGB \u003c-\u003e Y'CbCr conversions in vImage/Conversions.h @discussion These formats enumerate different vImage/CoreVideo Y'CbCr pixel formats. @seealso    CVPixelBuffer OSTypes in CVPixelBuffer.h"
     },
     "vImage_InterpolationMethod": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kvImageNoInterpolation",
@@ -4148,7 +4148,7 @@
       "sdk_line": 1636
     },
     "virtual_memory_guard_exception_code_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kGUARD_EXC_DEALLOC_GAP",
@@ -4247,7 +4247,7 @@
       "is_extensible": true
     },
     "xpc_listener_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_LISTENER_CREATE_NONE",
@@ -4277,7 +4277,7 @@
       "is_extensible": true
     },
     "xpc_session_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_SESSION_CREATE_NONE",

@@ -1812,8 +1812,9 @@ func TestExtractFunctionReturnTypeFromTypeQualType(t *testing.T) {
 	}
 }
 
-// TestExtractEnumNoFixedUnderlyingType covers the branch where an EnumDecl
-// has no FixedUnderlyingType (defaults to "int64").
+// TestExtractEnumNoFixedType covers a plain EnumDecl with no FixedUnderlyingType:
+// the Go integer type is inferred from the member values (matching clang's
+// implicit choice), not defaulted to int64.
 func TestExtractEnumNoFixedType(t *testing.T) {
 	sdkRoot := t.TempDir()
 	hdrDir := filepath.Join(sdkRoot, "System", "Library", "Frameworks", "TestFW.framework", "Headers")
@@ -1825,28 +1826,39 @@ func TestExtractEnumNoFixedType(t *testing.T) {
 		t.Fatalf("WriteFile: %v", err)
 	}
 
-	root := &ASTNode{
-		Kind: "TranslationUnitDecl",
-		Inner: []ASTNode{
-			{
+	cases := []struct {
+		name    string
+		values  []string
+		wantGo  string
+	}{
+		{"small non-negative → int32", []string{"0", "1", "2"}, "int32"},
+		{"negative fits int32", []string{"-1", "0", "2147483647"}, "int32"},
+		{"exceeds int32, fits uint32 → uint32", []string{"0", "2147483648"}, "uint32"},
+		{"exceeds uint32 → int64", []string{"0", "4294967296"}, "int64"},
+	}
+	for _, c := range cases {
+		var members []ASTNode
+		for i, v := range c.values {
+			members = append(members, ASTNode{Kind: "EnumConstantDecl", Name: "V" + string(rune('a'+i)), Value: RawValue(v)})
+		}
+		root := &ASTNode{
+			Kind: "TranslationUnitDecl",
+			Inner: []ASTNode{{
 				Kind:                "EnumDecl",
 				Name:                "MyEnum",
 				Loc:                 &Location{FilePath: fakeHdr},
-				FixedUnderlyingType: nil, // no type → defaults to "int64"
-				Inner: []ASTNode{
-					{Kind: "EnumConstantDecl", Name: "ValA", Value: RawValue("0")},
-				},
-			},
-		},
-	}
-
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
-	e, ok := framework.Enums["MyEnum"]
-	if !ok {
-		t.Fatal("MyEnum not found in Enums")
-	}
-	if e.GoType != "int64" {
-		t.Errorf("GoType = %q, want int64 (default when no FixedUnderlyingType)", e.GoType)
+				FixedUnderlyingType: nil,
+				Inner:               members,
+			}},
+		}
+		framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
+		e, ok := framework.Enums["MyEnum"]
+		if !ok {
+			t.Fatalf("%s: MyEnum not found", c.name)
+		}
+		if e.GoType != c.wantGo {
+			t.Errorf("%s: GoType = %q, want %q", c.name, e.GoType, c.wantGo)
+		}
 	}
 }
 

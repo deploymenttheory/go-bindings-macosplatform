@@ -15,18 +15,18 @@ const (
 
 // Constants indicating the frequency with which a dispatch queue creates autorelease pools for its tasks.
 // [queue.h:300]
-type Dispatch_autorelease_frequency_t uint64
+type DispatchAutoreleaseFrequencyT uint64
 
 const (
 	// The queue inherits its autorelease frequency from its target queue.
-	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT Dispatch_autorelease_frequency_t = 0
+	DISPATCH_AUTORELEASE_FREQUENCY_INHERIT DispatchAutoreleaseFrequencyT = 0
 	// The queue configures an autorelease pool before the execution of a block and releases the objects in that pool after the block finishes executing.
-	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM Dispatch_autorelease_frequency_t = 1
+	DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM DispatchAutoreleaseFrequencyT = 1
 	// The queue does not set up an autorelease pool around executed blocks.
-	DISPATCH_AUTORELEASE_FREQUENCY_NEVER Dispatch_autorelease_frequency_t = 2
+	DISPATCH_AUTORELEASE_FREQUENCY_NEVER DispatchAutoreleaseFrequencyT = 2
 )
 
-func (i Dispatch_autorelease_frequency_t) String() string {
+func (i DispatchAutoreleaseFrequencyT) String() string {
 	switch i {
 	case DISPATCH_AUTORELEASE_FREQUENCY_INHERIT:
 		return "DISPATCH_AUTORELEASE_FREQUENCY_INHERIT"
@@ -35,11 +35,11 @@ func (i Dispatch_autorelease_frequency_t) String() string {
 	case DISPATCH_AUTORELEASE_FREQUENCY_NEVER:
 		return "DISPATCH_AUTORELEASE_FREQUENCY_NEVER"
 	default:
-		return fmt.Sprintf("Dispatch_autorelease_frequency_t(%d)", int64(i))
+		return fmt.Sprintf("DispatchAutoreleaseFrequencyT(%d)", int64(i))
 	}
 }
 
-func ParseDispatch_autorelease_frequency_t(v string) (any, error) {
+func ParseDispatchAutoreleaseFrequencyT(v string) (any, error) {
 	result := DISPATCH_AUTORELEASE_FREQUENCY_INHERIT
 	switch v {
 	case "DISPATCH_AUTORELEASE_FREQUENCY_INHERIT":
@@ -54,7 +54,7 @@ func ParseDispatch_autorelease_frequency_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeDispatch_autorelease_frequency_t(values []Dispatch_autorelease_frequency_t) []string {
+func SerializeDispatchAutoreleaseFrequencyT(values []DispatchAutoreleaseFrequencyT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -62,36 +62,36 @@ func SerializeDispatch_autorelease_frequency_t(values []Dispatch_autorelease_fre
 	return result
 }
 
-func (i Dispatch_autorelease_frequency_t) isMultiValue() bool {
+func (i DispatchAutoreleaseFrequencyT) isMultiValue() bool {
 	return false
 }
 
 // Flags to pass to the dispatch_block_create and dispatch_block_create_with_qos_class functions.
 // [block.h:302]
 // Bitmask — values may be combined with |.
-type Dispatch_block_flags_t uint64
+type DispatchBlockFlagsT uint64
 
 const (
 	// Cause the work item to act as a barrier block when submitted to a concurrent queue.
-	DISPATCH_BLOCK_BARRIER Dispatch_block_flags_t = 1
+	DISPATCH_BLOCK_BARRIER DispatchBlockFlagsT = 1
 	// Disassociate the work item’s attributes from the current execution context.
 	// Introduced: macOS 10.10
-	DISPATCH_BLOCK_DETACHED Dispatch_block_flags_t = 2
+	DISPATCH_BLOCK_DETACHED DispatchBlockFlagsT = 2
 	// Set the attributes of the work item to match the attributes of the current execution context.
 	// Introduced: macOS 10.10
-	DISPATCH_BLOCK_ASSIGN_CURRENT Dispatch_block_flags_t = 4
+	DISPATCH_BLOCK_ASSIGN_CURRENT DispatchBlockFlagsT = 4
 	// Execute the work item without assigning a quality-of-service class.
 	// Introduced: macOS 10.10
-	DISPATCH_BLOCK_NO_QOS_CLASS Dispatch_block_flags_t = 8
+	DISPATCH_BLOCK_NO_QOS_CLASS DispatchBlockFlagsT = 8
 	// Prefer the quality-of-service class associated with the current execution context.
 	// Introduced: macOS 10.10
-	DISPATCH_BLOCK_INHERIT_QOS_CLASS Dispatch_block_flags_t = 16
+	DISPATCH_BLOCK_INHERIT_QOS_CLASS DispatchBlockFlagsT = 16
 	// Prefer the quality-of-service class associated with the block.
 	// Introduced: macOS 10.10
-	DISPATCH_BLOCK_ENFORCE_QOS_CLASS Dispatch_block_flags_t = 32
+	DISPATCH_BLOCK_ENFORCE_QOS_CLASS DispatchBlockFlagsT = 32
 )
 
-func (i Dispatch_block_flags_t) String() string {
+func (i DispatchBlockFlagsT) String() string {
 	var values []string
 	if i&DISPATCH_BLOCK_BARRIER == DISPATCH_BLOCK_BARRIER {
 		values = append(values, "DISPATCH_BLOCK_BARRIER")
@@ -114,8 +114,8 @@ func (i Dispatch_block_flags_t) String() string {
 	return strings.Join(values, ",")
 }
 
-func ParseDispatch_block_flags_t(v string) (any, error) {
-	var result Dispatch_block_flags_t
+func ParseDispatchBlockFlagsT(v string) (any, error) {
+	var result DispatchBlockFlagsT
 	for _, str := range strings.Split(v, ",") {
 		switch str {
 		case "DISPATCH_BLOCK_BARRIER":
@@ -137,7 +137,7 @@ func ParseDispatch_block_flags_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeDispatch_block_flags_t(values []Dispatch_block_flags_t) []string {
+func SerializeDispatchBlockFlagsT(values []DispatchBlockFlagsT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -145,25 +145,25 @@ func SerializeDispatch_block_flags_t(values []Dispatch_block_flags_t) []string {
 	return result
 }
 
-func (i Dispatch_block_flags_t) isMultiValue() bool {
+func (i DispatchBlockFlagsT) isMultiValue() bool {
 	return true
 }
 
 // [fcntl.h:582]
-type Filesec_property_t int64
+type FilesecPropertyT int32
 
 const (
-	FILESEC_OWNER         Filesec_property_t = 1
-	FILESEC_GROUP         Filesec_property_t = 2
-	FILESEC_UUID          Filesec_property_t = 3
-	FILESEC_MODE          Filesec_property_t = 4
-	FILESEC_ACL           Filesec_property_t = 5
-	FILESEC_GRPUUID       Filesec_property_t = 6
-	FILESEC_ACL_RAW       Filesec_property_t = 100
-	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
+	FILESEC_OWNER         FilesecPropertyT = 1
+	FILESEC_GROUP         FilesecPropertyT = 2
+	FILESEC_UUID          FilesecPropertyT = 3
+	FILESEC_MODE          FilesecPropertyT = 4
+	FILESEC_ACL           FilesecPropertyT = 5
+	FILESEC_GRPUUID       FilesecPropertyT = 6
+	FILESEC_ACL_RAW       FilesecPropertyT = 100
+	FILESEC_ACL_ALLOCSIZE FilesecPropertyT = 101
 )
 
-func (i Filesec_property_t) String() string {
+func (i FilesecPropertyT) String() string {
 	switch i {
 	case FILESEC_OWNER:
 		return "FILESEC_OWNER"
@@ -182,11 +182,11 @@ func (i Filesec_property_t) String() string {
 	case FILESEC_ACL_ALLOCSIZE:
 		return "FILESEC_ACL_ALLOCSIZE"
 	default:
-		return fmt.Sprintf("Filesec_property_t(%d)", int64(i))
+		return fmt.Sprintf("FilesecPropertyT(%d)", int64(i))
 	}
 }
 
-func ParseFilesec_property_t(v string) (any, error) {
+func ParseFilesecPropertyT(v string) (any, error) {
 	result := FILESEC_OWNER
 	switch v {
 	case "FILESEC_OWNER":
@@ -211,7 +211,7 @@ func ParseFilesec_property_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeFilesec_property_t(values []Filesec_property_t) []string {
+func SerializeFilesecPropertyT(values []FilesecPropertyT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -219,20 +219,20 @@ func SerializeFilesec_property_t(values []Filesec_property_t) []string {
 	return result
 }
 
-func (i Filesec_property_t) isMultiValue() bool {
+func (i FilesecPropertyT) isMultiValue() bool {
 	return false
 }
 
 // [wait.h:79]
-type Idtype_t int64
+type IdtypeT int32
 
 const (
-	P_ALL  Idtype_t = 0
-	P_PID  Idtype_t = 1
-	P_PGID Idtype_t = 2
+	P_ALL  IdtypeT = 0
+	P_PID  IdtypeT = 1
+	P_PGID IdtypeT = 2
 )
 
-func (i Idtype_t) String() string {
+func (i IdtypeT) String() string {
 	switch i {
 	case P_ALL:
 		return "P_ALL"
@@ -241,11 +241,11 @@ func (i Idtype_t) String() string {
 	case P_PGID:
 		return "P_PGID"
 	default:
-		return fmt.Sprintf("Idtype_t(%d)", int64(i))
+		return fmt.Sprintf("IdtypeT(%d)", int64(i))
 	}
 }
 
-func ParseIdtype_t(v string) (any, error) {
+func ParseIdtypeT(v string) (any, error) {
 	result := P_ALL
 	switch v {
 	case "P_ALL":
@@ -260,7 +260,7 @@ func ParseIdtype_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeIdtype_t(values []Idtype_t) []string {
+func SerializeIdtypeT(values []IdtypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -268,26 +268,26 @@ func SerializeIdtype_t(values []Idtype_t) []string {
 	return result
 }
 
-func (i Idtype_t) isMultiValue() bool {
+func (i IdtypeT) isMultiValue() bool {
 	return false
 }
 
 // [port.h:1102]
 // Bitmask — values may be combined with |.
-type Mpo_flags_t int64
+type MpoFlagsT uint32
 
 const (
-	MPO_PORT                            Mpo_flags_t = 0
-	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
-	MPO_REPLY_PORT                      Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
-	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
+	MPO_PORT                            MpoFlagsT = 0
+	MPO_SERVICE_PORT                    MpoFlagsT = 1024
+	MPO_CONNECTION_PORT                 MpoFlagsT = 2048
+	MPO_REPLY_PORT                      MpoFlagsT = 4096
+	MPO_WEAK_REPLY_PORT                 MpoFlagsT = 16384
+	MPO_NOTIFICATION_PORT               MpoFlagsT = 17408
+	MPO_EXCEPTION_PORT                  MpoFlagsT = 32768
+	MPO_CONNECTION_PORT_WITH_PORT_ARRAY MpoFlagsT = 65536
 )
 
-func (i Mpo_flags_t) String() string {
+func (i MpoFlagsT) String() string {
 	var values []string
 	if i == 0 {
 		values = append(values, "MPO_PORT")
@@ -316,8 +316,8 @@ func (i Mpo_flags_t) String() string {
 	return strings.Join(values, ",")
 }
 
-func ParseMpo_flags_t(v string) (any, error) {
-	var result Mpo_flags_t
+func ParseMpoFlagsT(v string) (any, error) {
+	var result MpoFlagsT
 	for _, str := range strings.Split(v, ",") {
 		switch str {
 		case "MPO_PORT":
@@ -343,7 +343,7 @@ func ParseMpo_flags_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeMpo_flags_t(values []Mpo_flags_t) []string {
+func SerializeMpoFlagsT(values []MpoFlagsT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -351,27 +351,27 @@ func SerializeMpo_flags_t(values []Mpo_flags_t) []string {
 	return result
 }
 
-func (i Mpo_flags_t) isMultiValue() bool {
+func (i MpoFlagsT) isMultiValue() bool {
 	return true
 }
 
 // [clock.h:188]
-type Os_clockid_t int64
+type OsClockidT uint32
 
 const (
-	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
+	OS_CLOCK_MACH_ABSOLUTE_TIME OsClockidT = 32
 )
 
-func (i Os_clockid_t) String() string {
+func (i OsClockidT) String() string {
 	switch i {
 	case OS_CLOCK_MACH_ABSOLUTE_TIME:
 		return "OS_CLOCK_MACH_ABSOLUTE_TIME"
 	default:
-		return fmt.Sprintf("Os_clockid_t(%d)", int64(i))
+		return fmt.Sprintf("OsClockidT(%d)", int64(i))
 	}
 }
 
-func ParseOs_clockid_t(v string) (any, error) {
+func ParseOsClockidT(v string) (any, error) {
 	result := OS_CLOCK_MACH_ABSOLUTE_TIME
 	switch v {
 	case "OS_CLOCK_MACH_ABSOLUTE_TIME":
@@ -382,7 +382,7 @@ func ParseOs_clockid_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeOs_clockid_t(values []Os_clockid_t) []string {
+func SerializeOsClockidT(values []OsClockidT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -390,23 +390,23 @@ func SerializeOs_clockid_t(values []Os_clockid_t) []string {
 	return result
 }
 
-func (i Os_clockid_t) isMultiValue() bool {
+func (i OsClockidT) isMultiValue() bool {
 	return false
 }
 
 // [qos.h:121]
-type Qos_class_t uint32
+type QosClassT uint32
 
 const (
-	QOS_CLASS_USER_INTERACTIVE Qos_class_t = 33
-	QOS_CLASS_USER_INITIATED   Qos_class_t = 25
-	QOS_CLASS_DEFAULT          Qos_class_t = 21
-	QOS_CLASS_UTILITY          Qos_class_t = 17
-	QOS_CLASS_BACKGROUND       Qos_class_t = 9
-	QOS_CLASS_UNSPECIFIED      Qos_class_t = 0
+	QOS_CLASS_USER_INTERACTIVE QosClassT = 33
+	QOS_CLASS_USER_INITIATED   QosClassT = 25
+	QOS_CLASS_DEFAULT          QosClassT = 21
+	QOS_CLASS_UTILITY          QosClassT = 17
+	QOS_CLASS_BACKGROUND       QosClassT = 9
+	QOS_CLASS_UNSPECIFIED      QosClassT = 0
 )
 
-func (i Qos_class_t) String() string {
+func (i QosClassT) String() string {
 	switch i {
 	case QOS_CLASS_USER_INTERACTIVE:
 		return "QOS_CLASS_USER_INTERACTIVE"
@@ -421,11 +421,11 @@ func (i Qos_class_t) String() string {
 	case QOS_CLASS_UNSPECIFIED:
 		return "QOS_CLASS_UNSPECIFIED"
 	default:
-		return fmt.Sprintf("Qos_class_t(%d)", int64(i))
+		return fmt.Sprintf("QosClassT(%d)", int64(i))
 	}
 }
 
-func ParseQos_class_t(v string) (any, error) {
+func ParseQosClassT(v string) (any, error) {
 	result := QOS_CLASS_USER_INTERACTIVE
 	switch v {
 	case "QOS_CLASS_USER_INTERACTIVE":
@@ -446,7 +446,7 @@ func ParseQos_class_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeQos_class_t(values []Qos_class_t) []string {
+func SerializeQosClassT(values []QosClassT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -454,6 +454,6 @@ func SerializeQos_class_t(values []Qos_class_t) []string {
 	return result
 }
 
-func (i Qos_class_t) isMultiValue() bool {
+func (i QosClassT) isMultiValue() bool {
 	return false
 }

@@ -775,6 +775,15 @@ func (m *Mapper) qualifyType(
 		return "objc.ID"
 	}
 	pkgName := strings.ToLower(ownerFramework)
+	// A library-owned type (e.g. a value struct such as audit_token_t owned by bsm,
+	// captured once int-admission is on) cannot be surfaced in a frameworks (purego)
+	// binding: the idiomatic frameworks layer is hermetic (must not import the raw
+	// packages), and a cgo library value struct cannot be passed by value through a
+	// purego func var anyway. Degrade to unsafe.Pointer, matching the pre-capture
+	// behaviour for these opaque cross-pipeline types.
+	if m.LibraryPkgs[pkgName] {
+		return "unsafe.Pointer"
+	}
 	importPath := m.ModulePrefix + "/" + pkgName
 	if imports != nil {
 		imports[pkgName] = importPath

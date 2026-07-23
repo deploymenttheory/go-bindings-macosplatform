@@ -11,39 +11,39 @@ import (
 
 // [data.h:55]
 // Introduced: macOS 10.7
-type Dispatch_data_s struct {
+type DispatchDataS struct {
 }
 
 // [queue.h:750]
 // Introduced: macOS 10.7
-type Dispatch_queue_attr_s struct {
+type DispatchQueueAttrS struct {
 }
 
 // [queue.h:590]
 // Introduced: macOS 10.6
-type Dispatch_queue_s struct {
+type DispatchQueueS struct {
 }
 
 // [time.h:62]
 type Timespec struct {
 }
 
-type Dispatch_source_type_t struct {
+type DispatchSourceTypeT struct {
 	ptr unsafe.Pointer
 }
 
-func (c *Dispatch_source_type_t) Ptr() unsafe.Pointer {
+func (c *DispatchSourceTypeT) Ptr() unsafe.Pointer {
 	if c == nil {
 		return nil
 	}
 	return c.ptr
 }
 
-func NewDispatch_source_type_t(ptr unsafe.Pointer) *Dispatch_source_type_t {
+func NewDispatchSourceTypeT(ptr unsafe.Pointer) *DispatchSourceTypeT {
 	if ptr == nil {
 		return nil
 	}
-	o := &Dispatch_source_type_t{ptr: ptr}
+	o := &DispatchSourceTypeT{ptr: ptr}
 	cgo.Track(o, o.Ptr)
 	return o
 }

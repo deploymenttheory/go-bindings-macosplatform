@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-type CIDeviceType int64
+type CIDeviceType uint8
 
 const (
 	KMIDICIDeviceTypeUnknown     CIDeviceType = 0
@@ -35,7 +35,7 @@ func (e CIDeviceType) String() string {
 	}
 }
 
-type CIProfileType int64
+type CIProfileType uint8
 
 const (
 	KMIDICIProfileTypeSingleChannel CIProfileType = 1
@@ -128,7 +128,7 @@ func (e NetworkConnectionPolicy) String() string {
 }
 
 // The types of state changes the system supports.
-type NotificationMessageID int64
+type NotificationMessageID int32
 
 const (
 	// Some aspect of the current MIDI setup changed.
@@ -171,7 +171,7 @@ func (e NotificationMessageID) String() string {
 }
 
 // The MIDI object types that the system supports.
-type ObjectType int64
+type ObjectType int32
 
 const (
 	// A MIDI object with an undefined type.
@@ -222,7 +222,7 @@ func (e ObjectType) String() string {
 }
 
 // Specifies a MIDI protocol variant.
-type ProtocolID int64
+type ProtocolID int32
 
 const (
 	KMIDIProtocol_1_0 ProtocolID = 1
@@ -243,7 +243,7 @@ func (e ProtocolID) String() string {
 }
 
 // A set of values that indicate how to interpret control numbers.
-type TransformControlType int64
+type TransformControlType uint8
 
 const (
 	// A 7-bit control type.
@@ -282,7 +282,7 @@ func (e TransformControlType) String() string {
 }
 
 // Values that specify the type of MIDI transformation.
-type TransformType int64
+type TransformType uint16
 
 const (
 	// No transformation.
@@ -328,7 +328,7 @@ func (e TransformType) String() string {
 	}
 }
 
-type UMPCIObjectBackingType int64
+type UMPCIObjectBackingType uint8
 
 const (
 	KMIDIUMPCIObjectBackingTypeUnknown      UMPCIObjectBackingType = 0
@@ -354,7 +354,7 @@ func (e UMPCIObjectBackingType) String() string {
 	}
 }
 
-type UMPFunctionBlockDirection int64
+type UMPFunctionBlockDirection int32
 
 const (
 	KMIDIUMPFunctionBlockDirectionUnknown       UMPFunctionBlockDirection = 0
@@ -380,7 +380,7 @@ func (e UMPFunctionBlockDirection) String() string {
 	}
 }
 
-type UMPFunctionBlockMIDI1Info int64
+type UMPFunctionBlockMIDI1Info int32
 
 const (
 	KMIDIUMPFunctionBlockMIDI1InfoNotMIDI1              UMPFunctionBlockMIDI1Info = 0
@@ -403,7 +403,7 @@ func (e UMPFunctionBlockMIDI1Info) String() string {
 	}
 }
 
-type UMPFunctionBlockUIHint int64
+type UMPFunctionBlockUIHint int32
 
 const (
 	KMIDIUMPFunctionBlockUIHintUnknown        UMPFunctionBlockUIHint = 0
@@ -430,7 +430,7 @@ func (e UMPFunctionBlockUIHint) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type UMPProtocolOptions int64
+type UMPProtocolOptions uint8
 
 const (
 	KMIDIUMPProtocolOptionsMIDI1 UMPProtocolOptions = 1
@@ -453,7 +453,7 @@ func (e UMPProtocolOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type UMPStreamMessageFormat int64
+type UMPStreamMessageFormat uint8
 
 const (
 	KUMPStreamMessageFormatComplete   UMPStreamMessageFormat = 0
@@ -529,7 +529,7 @@ func (e UMPStreamMessageStatus) String() string {
 	}
 }
 
-type EntryID int64
+type EntryID int32
 
 const (
 	EntryIDFirstEntry EntryID = 0
@@ -552,7 +552,7 @@ func (e EntryID) String() string {
 	}
 }
 
-type Flag int64
+type Flag int32
 
 const (
 	FlagFlagDeferInherit      Flag = 1
@@ -587,7 +587,7 @@ func (e Flag) String() string {
 	}
 }
 
-type Perm int64
+type Perm int32
 
 const (
 	PermReadData           Perm = 2
@@ -647,7 +647,7 @@ func (e Perm) String() string {
 	}
 }
 
-type Tag int64
+type Tag int32
 
 const (
 	TagUndefinedTag  Tag = 0
@@ -670,7 +670,7 @@ func (e Tag) String() string {
 	}
 }
 
-type Type int64
+type Type int32
 
 const (
 	TypeExtended Type = 256
@@ -705,7 +705,7 @@ func (e Type) String() string {
 	}
 }
 
-type Clockid int64
+type Clockid int32
 
 const (
 	ClockidRealtime           Clockid = 0
@@ -806,7 +806,7 @@ func (e DispatchBlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -844,7 +844,7 @@ func (e FilesecProperty) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -867,7 +867,7 @@ func (e Idtype) String() string {
 	}
 }
 
-type IpcInfoObjectType int64
+type IpcInfoObjectType uint32
 
 const (
 	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
@@ -1049,7 +1049,7 @@ func (e IpcInfoObjectType) String() string {
 	}
 }
 
-type LaunchDataType int64
+type LaunchDataType int32
 
 const (
 	LaunchDataTypeDictionary LaunchDataType = 1
@@ -1094,7 +1094,7 @@ func (e LaunchDataType) String() string {
 }
 
 // These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -1114,7 +1114,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -1137,7 +1137,7 @@ func (e MDQueryOptionFlags) String() string {
 	}
 }
 
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -1155,7 +1155,7 @@ func (e MDQuerySortOptionFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type CICategoryOptions int64
+type CICategoryOptions uint8
 
 const (
 	KMIDICICategoryOptionsProtocolNegotiation           CICategoryOptions = 2
@@ -1186,7 +1186,7 @@ func (e CICategoryOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type CIManagementMessageType int64
+type CIManagementMessageType uint8
 
 const (
 	KMIDICIManagementMessageTypeDiscovery                  CIManagementMessageType = 112
@@ -1221,7 +1221,7 @@ func (e CIManagementMessageType) String() string {
 	}
 }
 
-type CIProcessInquiryMessageType int64
+type CIProcessInquiryMessageType uint8
 
 const (
 	KMIDICIProcessInquiryMessageTypeInquiryProcessInquiryCapabilities CIProcessInquiryMessageType = 64
@@ -1250,7 +1250,7 @@ func (e CIProcessInquiryMessageType) String() string {
 	}
 }
 
-type CIProfileMessageType int64
+type CIProfileMessageType uint8
 
 const (
 	KMIDICIProfileMessageTypeProfileInquiry        CIProfileMessageType = 32
@@ -1297,7 +1297,7 @@ func (e CIProfileMessageType) String() string {
 	}
 }
 
-type CIPropertyExchangeMessageType int64
+type CIPropertyExchangeMessageType uint8
 
 const (
 	KMIDICIPropertyExchangeMessageTypeInquiryPropertyExchangeCapabilities    CIPropertyExchangeMessageType = 48
@@ -1404,7 +1404,7 @@ func (e CVStatus) String() string {
 	}
 }
 
-type NoteAttribute int64
+type NoteAttribute uint8
 
 const (
 	KMIDINoteAttributeNone                 NoteAttribute = 0
@@ -1431,7 +1431,7 @@ func (e NoteAttribute) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type PerNoteManagementOptions int64
+type PerNoteManagementOptions uint8
 
 const (
 	KMIDIPerNoteManagementReset  PerNoteManagementOptions = 1
@@ -1455,7 +1455,7 @@ func (e PerNoteManagementOptions) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type ProgramChangeOptions int64
+type ProgramChangeOptions uint8
 
 const (
 	KMIDIProgramChangeBankValid ProgramChangeOptions = 1
@@ -1589,7 +1589,7 @@ func (e UtilityStatus) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -1605,7 +1605,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -1625,7 +1625,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -1649,7 +1649,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -1693,7 +1693,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -1710,7 +1710,7 @@ func (e OSClockid) String() string {
 	}
 }
 
-type PtrauthKey int64
+type PtrauthKey int32
 
 const (
 	Ptrauth_key_none                     PtrauthKey = -1
@@ -1787,7 +1787,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -1856,7 +1856,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -1885,7 +1885,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

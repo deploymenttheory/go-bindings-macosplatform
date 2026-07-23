@@ -8,6 +8,7 @@ package bsm
 import "C"
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/endpointsecurity"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/bsd"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
@@ -64,7 +65,7 @@ func Setauid(arg0 *uint32) int32 {
 
 // [audit.h:382]
 // ID: objc-sym bsm.getaudit_addr
-func Getaudit_addr(arg0 *Auditinfo_addr, arg1 int32) int32 {
+func Getaudit_addr(arg0 *AuditinfoAddr, arg1 int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getaudit_addr(unsafe.Pointer(arg0), C.int32_t(arg1), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -73,7 +74,7 @@ func Getaudit_addr(arg0 *Auditinfo_addr, arg1 int32) int32 {
 
 // [audit.h:383]
 // ID: objc-sym bsm.setaudit_addr
-func Setaudit_addr(arg0 *Auditinfo_addr, arg1 int32) int32 {
+func Setaudit_addr(arg0 *AuditinfoAddr, arg1 int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_setaudit_addr(unsafe.Pointer(arg0), C.int32_t(arg1), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1000,7 +1001,7 @@ func Getauevent() unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevent_r
-func Getauevent_r(e *Au_event_ent) unsafe.Pointer {
+func Getauevent_r(e *AuEventEnt) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauevent_r(unsafe.Pointer(e), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1026,7 +1027,7 @@ func Getauevnam(name string) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevnam_r
-func Getauevnam_r(e *Au_event_ent, name string) unsafe.Pointer {
+func Getauevnam_r(e *AuEventEnt, name string) unsafe.Pointer {
 	_cstr_name := C.CString(name)
 	defer C.free(unsafe.Pointer(_cstr_name))
 	var _exc unsafe.Pointer
@@ -1052,7 +1053,7 @@ func Getauevnum(event_number uint16) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevnum_r
-func Getauevnum_r(e *Au_event_ent, event_number uint16) unsafe.Pointer {
+func Getauevnum_r(e *AuEventEnt, event_number uint16) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauevnum_r(unsafe.Pointer(e), C.uint16_t(event_number), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1126,7 +1127,7 @@ func Getauuserent() unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauuserent_r
-func Getauuserent_r(u *Au_user_ent) unsafe.Pointer {
+func Getauuserent_r(u *AuUserEnt) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauuserent_r(unsafe.Pointer(u), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1152,7 +1153,7 @@ func Getauusernam(name string) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauusernam_r
-func Getauusernam_r(u *Au_user_ent, name string) unsafe.Pointer {
+func Getauusernam_r(u *AuUserEnt, name string) unsafe.Pointer {
 	_cstr_name := C.CString(name)
 	defer C.free(unsafe.Pointer(_cstr_name))
 	var _exc unsafe.Pointer
@@ -1472,18 +1473,18 @@ func Audit_write_failure_na(event_code int16, errmsg string, errret int32, euid 
 // [libbsm.h:1455]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_au32
-func Audit_token_to_au32(atoken unsafe.Pointer, auidp *uint32, euidp *uint32, egidp *uint32, ruidp *uint32, rgidp *uint32, pidp *int32, asidp *int32, tidp unsafe.Pointer) {
+func Audit_token_to_au32(atoken endpointsecurity.AuditTokenT, auidp *uint32, euidp *uint32, egidp *uint32, ruidp *uint32, rgidp *uint32, pidp *int32, asidp *int32, tidp unsafe.Pointer) {
 	var _exc unsafe.Pointer
-	C.bsm_fn_audit_token_to_au32(atoken, unsafe.Pointer(auidp), unsafe.Pointer(euidp), unsafe.Pointer(egidp), unsafe.Pointer(ruidp), unsafe.Pointer(rgidp), unsafe.Pointer(pidp), unsafe.Pointer(asidp), tidp, &_exc)
+	C.bsm_fn_audit_token_to_au32(unsafe.Pointer(&atoken), unsafe.Pointer(auidp), unsafe.Pointer(euidp), unsafe.Pointer(egidp), unsafe.Pointer(ruidp), unsafe.Pointer(rgidp), unsafe.Pointer(pidp), unsafe.Pointer(asidp), tidp, &_exc)
 	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:1478]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_auid
-func Audit_token_to_auid(atoken unsafe.Pointer) uint32 {
+func Audit_token_to_auid(atoken endpointsecurity.AuditTokenT) uint32 {
 	var _exc unsafe.Pointer
-	_result := uint32(C.bsm_fn_audit_token_to_auid(atoken, &_exc))
+	_result := uint32(C.bsm_fn_audit_token_to_auid(unsafe.Pointer(&atoken), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -1491,9 +1492,9 @@ func Audit_token_to_auid(atoken unsafe.Pointer) uint32 {
 // [libbsm.h:1492]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_euid
-func Audit_token_to_euid(atoken unsafe.Pointer) uint32 {
+func Audit_token_to_euid(atoken endpointsecurity.AuditTokenT) uint32 {
 	var _exc unsafe.Pointer
-	_result := uint32(C.bsm_fn_audit_token_to_euid(atoken, &_exc))
+	_result := uint32(C.bsm_fn_audit_token_to_euid(unsafe.Pointer(&atoken), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -1501,9 +1502,9 @@ func Audit_token_to_euid(atoken unsafe.Pointer) uint32 {
 // [libbsm.h:1506]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_egid
-func Audit_token_to_egid(atoken unsafe.Pointer) uint32 {
+func Audit_token_to_egid(atoken endpointsecurity.AuditTokenT) uint32 {
 	var _exc unsafe.Pointer
-	_result := uint32(C.bsm_fn_audit_token_to_egid(atoken, &_exc))
+	_result := uint32(C.bsm_fn_audit_token_to_egid(unsafe.Pointer(&atoken), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -1511,9 +1512,9 @@ func Audit_token_to_egid(atoken unsafe.Pointer) uint32 {
 // [libbsm.h:1520]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_ruid
-func Audit_token_to_ruid(atoken unsafe.Pointer) uint32 {
+func Audit_token_to_ruid(atoken endpointsecurity.AuditTokenT) uint32 {
 	var _exc unsafe.Pointer
-	_result := uint32(C.bsm_fn_audit_token_to_ruid(atoken, &_exc))
+	_result := uint32(C.bsm_fn_audit_token_to_ruid(unsafe.Pointer(&atoken), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -1521,9 +1522,9 @@ func Audit_token_to_ruid(atoken unsafe.Pointer) uint32 {
 // [libbsm.h:1534]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_rgid
-func Audit_token_to_rgid(atoken unsafe.Pointer) uint32 {
+func Audit_token_to_rgid(atoken endpointsecurity.AuditTokenT) uint32 {
 	var _exc unsafe.Pointer
-	_result := uint32(C.bsm_fn_audit_token_to_rgid(atoken, &_exc))
+	_result := uint32(C.bsm_fn_audit_token_to_rgid(unsafe.Pointer(&atoken), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -1531,9 +1532,9 @@ func Audit_token_to_rgid(atoken unsafe.Pointer) uint32 {
 // [libbsm.h:1548]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_pid
-func Audit_token_to_pid(atoken unsafe.Pointer) int32 {
+func Audit_token_to_pid(atoken endpointsecurity.AuditTokenT) int32 {
 	var _exc unsafe.Pointer
-	_result := int32(C.bsm_fn_audit_token_to_pid(atoken, &_exc))
+	_result := int32(C.bsm_fn_audit_token_to_pid(unsafe.Pointer(&atoken), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -1541,9 +1542,9 @@ func Audit_token_to_pid(atoken unsafe.Pointer) int32 {
 // [libbsm.h:1562]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_asid
-func Audit_token_to_asid(atoken unsafe.Pointer) int32 {
+func Audit_token_to_asid(atoken endpointsecurity.AuditTokenT) int32 {
 	var _exc unsafe.Pointer
-	_result := int32(C.bsm_fn_audit_token_to_asid(atoken, &_exc))
+	_result := int32(C.bsm_fn_audit_token_to_asid(unsafe.Pointer(&atoken), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -1551,9 +1552,9 @@ func Audit_token_to_asid(atoken unsafe.Pointer) int32 {
 // [libbsm.h:1576]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_pidversion
-func Audit_token_to_pidversion(atoken unsafe.Pointer) int32 {
+func Audit_token_to_pidversion(atoken endpointsecurity.AuditTokenT) int32 {
 	var _exc unsafe.Pointer
-	_result := int32(C.bsm_fn_audit_token_to_pidversion(atoken, &_exc))
+	_result := int32(C.bsm_fn_audit_token_to_pidversion(unsafe.Pointer(&atoken), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }

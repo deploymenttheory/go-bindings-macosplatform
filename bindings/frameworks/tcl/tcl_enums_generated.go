@@ -8,7 +8,7 @@ import (
 	"fmt"
 )
 
-type Pathtype int64
+type Pathtype int32
 
 const (
 	PathtypeAbsolute       Pathtype = 0
@@ -31,7 +31,7 @@ func (e Pathtype) String() string {
 	}
 }
 
-type Queueposition int64
+type Queueposition int32
 
 const (
 	QueuepositionTail Queueposition = 0
@@ -54,7 +54,7 @@ func (e Queueposition) String() string {
 	}
 }
 
-type Valuetype int64
+type Valuetype int32
 
 const (
 	ValuetypeInt     Valuetype = 0

@@ -33,9 +33,9 @@ func Os_log_create(subsystem string, category string) unsafe.Pointer {
 // Introduced: macOS 10.12
 // Return value must not be discarded.
 // ID: objc-sym oslog.os_log_type_enabled
-func Os_log_type_enabled(oslog unsafe.Pointer, type_ Os_log_type_t) bool {
+func Os_log_type_enabled(oslog unsafe.Pointer, type_ OsLogTypeT) bool {
 	var _exc unsafe.Pointer
-	_result := bool(C.oslog_fn_os_log_type_enabled(oslog, C.int64_t(type_), &_exc))
+	_result := bool(C.oslog_fn_os_log_type_enabled(oslog, C.uint8_t(type_), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -43,44 +43,44 @@ func Os_log_type_enabled(oslog unsafe.Pointer, type_ Os_log_type_t) bool {
 // [log.h:436]
 // Introduced: macOS 10.12
 // ID: objc-sym oslog._os_log_impl
-func _os_log_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ Os_log_type_t, format string, buf *uint8, size uint32) {
+func _os_log_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT, format string, buf *uint8, size uint32) {
 	_cstr_format := C.CString(format)
 	defer C.free(unsafe.Pointer(_cstr_format))
 	var _exc unsafe.Pointer
-	C.oslog_fn__os_log_impl(dso, log, C.int64_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
+	C.oslog_fn__os_log_impl(dso, log, C.uint8_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
 	cgo.RaiseIfException(_exc)
 }
 
 // [log.h:448]
 // Introduced: macOS 10.15
 // ID: objc-sym oslog._os_log_debug_impl
-func _os_log_debug_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ Os_log_type_t, format string, buf *uint8, size uint32) {
+func _os_log_debug_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT, format string, buf *uint8, size uint32) {
 	_cstr_format := C.CString(format)
 	defer C.free(unsafe.Pointer(_cstr_format))
 	var _exc unsafe.Pointer
-	C.oslog_fn__os_log_debug_impl(dso, log, C.int64_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
+	C.oslog_fn__os_log_debug_impl(dso, log, C.uint8_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
 	cgo.RaiseIfException(_exc)
 }
 
 // [log.h:460]
 // Introduced: macOS 10.13
 // ID: objc-sym oslog._os_log_error_impl
-func _os_log_error_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ Os_log_type_t, format string, buf *uint8, size uint32) {
+func _os_log_error_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT, format string, buf *uint8, size uint32) {
 	_cstr_format := C.CString(format)
 	defer C.free(unsafe.Pointer(_cstr_format))
 	var _exc unsafe.Pointer
-	C.oslog_fn__os_log_error_impl(dso, log, C.int64_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
+	C.oslog_fn__os_log_error_impl(dso, log, C.uint8_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
 	cgo.RaiseIfException(_exc)
 }
 
 // [log.h:472]
 // Introduced: macOS 10.13
 // ID: objc-sym oslog._os_log_fault_impl
-func _os_log_fault_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ Os_log_type_t, format string, buf *uint8, size uint32) {
+func _os_log_fault_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT, format string, buf *uint8, size uint32) {
 	_cstr_format := C.CString(format)
 	defer C.free(unsafe.Pointer(_cstr_format))
 	var _exc unsafe.Pointer
-	C.oslog_fn__os_log_fault_impl(dso, log, C.int64_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
+	C.oslog_fn__os_log_fault_impl(dso, log, C.uint8_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
 	cgo.RaiseIfException(_exc)
 }
 

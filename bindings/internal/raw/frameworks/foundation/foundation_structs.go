@@ -86,7 +86,7 @@ type NSSwappedDouble struct {
 
 // Opaque type containing an endian-independent float value.
 type NSSwappedFloat struct {
-	V uint
+	V uint32
 }
 
 // C struct: _NSRange

@@ -211,7 +211,7 @@ func (e VirtualMachineState) String() string {
 	}
 }
 
-type EntryID int64
+type EntryID int32
 
 const (
 	EntryIDFirstEntry EntryID = 0
@@ -234,7 +234,7 @@ func (e EntryID) String() string {
 	}
 }
 
-type Flag int64
+type Flag int32
 
 const (
 	FlagFlagDeferInherit      Flag = 1
@@ -269,7 +269,7 @@ func (e Flag) String() string {
 	}
 }
 
-type Perm int64
+type Perm int32
 
 const (
 	PermReadData           Perm = 2
@@ -329,7 +329,7 @@ func (e Perm) String() string {
 	}
 }
 
-type Tag int64
+type Tag int32
 
 const (
 	TagUndefinedTag  Tag = 0
@@ -352,7 +352,7 @@ func (e Tag) String() string {
 	}
 }
 
-type Type int64
+type Type int32
 
 const (
 	TypeExtended Type = 256
@@ -387,7 +387,7 @@ func (e Type) String() string {
 	}
 }
 
-type CGLCPContextPriorityRequest int64
+type CGLCPContextPriorityRequest int32
 
 const (
 	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
@@ -410,7 +410,7 @@ func (e CGLCPContextPriorityRequest) String() string {
 	}
 }
 
-type Clockid int64
+type Clockid int32
 
 const (
 	ClockidRealtime           Clockid = 0
@@ -511,7 +511,7 @@ func (e DispatchBlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type EvCmd int64
+type EvCmd int32
 
 const (
 	EVNOP   EvCmd = 0
@@ -540,7 +540,7 @@ func (e EvCmd) String() string {
 	}
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -578,7 +578,7 @@ func (e FilesecProperty) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -601,7 +601,7 @@ func (e Idtype) String() string {
 	}
 }
 
-type IpcInfoObjectType int64
+type IpcInfoObjectType uint32
 
 const (
 	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
@@ -783,7 +783,7 @@ func (e IpcInfoObjectType) String() string {
 	}
 }
 
-type LaunchDataType int64
+type LaunchDataType int32
 
 const (
 	LaunchDataTypeDictionary LaunchDataType = 1
@@ -828,7 +828,7 @@ func (e LaunchDataType) String() string {
 }
 
 // These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -848,7 +848,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -871,7 +871,7 @@ func (e MDQueryOptionFlags) String() string {
 	}
 }
 
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -889,7 +889,7 @@ func (e MDQuerySortOptionFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -905,7 +905,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -925,7 +925,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -949,7 +949,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -993,7 +993,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type NXMouseButton int64
+type NXMouseButton int32
 
 const (
 	NX_OneButton   NXMouseButton = 0
@@ -1016,7 +1016,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -1034,7 +1034,7 @@ func (e OSClockid) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type OSUnfairLockFlags int64
+type OSUnfairLockFlags uint32
 
 const (
 	OSUnfairLockFlagsNone         OSUnfairLockFlags = 0
@@ -1054,7 +1054,7 @@ func (e OSUnfairLockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type PMPageToPaperMappingType int64
+type PMPageToPaperMappingType int32
 
 const (
 	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
@@ -1074,7 +1074,7 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
-type PtrauthKey int64
+type PtrauthKey int32
 
 const (
 	Ptrauth_key_none                     PtrauthKey = -1
@@ -1241,7 +1241,7 @@ func (e ErrorCode) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -1310,7 +1310,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -1339,7 +1339,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

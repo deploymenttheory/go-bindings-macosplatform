@@ -167,14 +167,19 @@ func TestStructAvailabilityComment(t *testing.T) {
 // where "_NSRange" is a known struct produces a Go type alias.
 func TestTypedefAlias(t *testing.T) {
 	var buf bytes.Buffer
+	// A typedef whose exported name differs from its target struct's exported name
+	// (ExportedTypeName("NSRange")="NSRange" vs ExportedTypeName("NSRangeImpl")=
+	// "NSRangeImpl") yields a real alias. Note the common `typedef struct _Foo Foo`
+	// pattern instead collapses to a single clean type, since ExportedTypeName strips
+	// the leading underscore (see TestTypedefAliasSkipsSameName).
 	framework := newStructFM(
 		map[string]macosplatformmetadata.Struct{
-			"_NSRange": {
+			"NSRangeImpl": {
 				Fields: []macosplatformmetadata.StructField{{Name: "location", GoType: "uint64"}},
 			},
 		},
 		map[string]string{
-			"NSRange": "struct _NSRange",
+			"NSRange": "struct NSRangeImpl",
 		},
 	)
 	m := newStructMapper()
@@ -182,7 +187,7 @@ func TestTypedefAlias(t *testing.T) {
 		t.Fatalf("unexpected error: %v", err)
 	}
 	out := buf.String()
-	if !strings.Contains(out, "type NSRange = _NSRange") {
+	if !strings.Contains(out, "type NSRange = NSRangeImpl") {
 		t.Errorf("missing typedef alias; got:\n%s", out)
 	}
 	if !strings.Contains(out, "is a typedef alias for") {

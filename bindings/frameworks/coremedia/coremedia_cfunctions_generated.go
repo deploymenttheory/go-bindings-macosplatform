@@ -32,12 +32,12 @@ func CMAudioDeviceClockGetAudioDevice(clock obj.Object, deviceUIDOut unsafe.Poin
 var _fnCMAudioFormatDescriptionCreate func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
 
 // CMAudioFormatDescriptionCreate calls the CoreMedia framework function CMAudioFormatDescriptionCreate.
-func CMAudioFormatDescriptionCreate(allocator obj.Object, asbd unsafe.Pointer, layoutSize int, layout *coreaudiotypes.AudioChannelLayout, magicCookieSize int, magicCookie unsafe.Pointer, extensions obj.Object, formatDescriptionOut unsafe.Pointer) int {
+func CMAudioFormatDescriptionCreate(allocator obj.Object, asbd unsafe.Pointer, layoutSize int, layout unsafe.Pointer, magicCookieSize int, magicCookie unsafe.Pointer, extensions obj.Object, formatDescriptionOut unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMAudioFormatDescriptionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionCreate, _lib, "CMAudioFormatDescriptionCreate")
 	}
-	return int(_fnCMAudioFormatDescriptionCreate(objref.IDOf(allocator), asbd, layoutSize, unsafe.Pointer(layout), magicCookieSize, magicCookie, objref.IDOf(extensions), formatDescriptionOut))
+	return int(_fnCMAudioFormatDescriptionCreate(objref.IDOf(allocator), asbd, layoutSize, layout, magicCookieSize, magicCookie, objref.IDOf(extensions), formatDescriptionOut))
 }
 
 var _fnCMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
@@ -64,10 +64,10 @@ func CMAudioFormatDescriptionEqual(formatDescription unsafe.Pointer, otherFormat
 	return _ret, _out0
 }
 
-var _fnCMAudioFormatDescriptionGetChannelLayout func(unsafe.Pointer, unsafe.Pointer) *coreaudiotypes.AudioChannelLayout
+var _fnCMAudioFormatDescriptionGetChannelLayout func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // CMAudioFormatDescriptionGetChannelLayout calls the CoreMedia framework function CMAudioFormatDescriptionGetChannelLayout.
-func CMAudioFormatDescriptionGetChannelLayout(desc unsafe.Pointer) (result *coreaudiotypes.AudioChannelLayout, sizeOut int) {
+func CMAudioFormatDescriptionGetChannelLayout(desc unsafe.Pointer) (result unsafe.Pointer, sizeOut int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMAudioFormatDescriptionGetChannelLayout == nil {
 		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionGetChannelLayout, _lib, "CMAudioFormatDescriptionGetChannelLayout")

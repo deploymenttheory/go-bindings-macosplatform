@@ -237,7 +237,7 @@ func (h Object) Release() {
 	raw.Xpc_release(h.ptr)
 }
 
-func (h Object) GetType() *raw.Xpc_type_t {
+func (h Object) GetType() *raw.XpcTypeT {
 	return raw.Xpc_get_type(h.ptr)
 }
 
@@ -636,15 +636,15 @@ func ConnectionCreateMachService(name string, targetq DispatchQueue, flags uint6
 	return WrapConnection(raw.Xpc_connection_create_mach_service(name, targetq.ptr, flags))
 }
 
-func SessionCreateXpcService(name string, target_queue DispatchQueue, flags oslog.Xpc_session_create_flags_t, error_out RichError) Session {
+func SessionCreateXpcService(name string, target_queue DispatchQueue, flags oslog.XpcSessionCreateFlagsT, error_out RichError) Session {
 	return WrapSession(raw.Xpc_session_create_xpc_service(name, target_queue.ptr, flags, error_out.ptr))
 }
 
-func SessionCreateMachService(mach_service string, target_queue DispatchQueue, flags oslog.Xpc_session_create_flags_t, error_out RichError) Session {
+func SessionCreateMachService(mach_service string, target_queue DispatchQueue, flags oslog.XpcSessionCreateFlagsT, error_out RichError) Session {
 	return WrapSession(raw.Xpc_session_create_mach_service(mach_service, target_queue.ptr, flags, error_out.ptr))
 }
 
-func TypeGetName(type_ *raw.Xpc_type_t) string {
+func TypeGetName(type_ *raw.XpcTypeT) string {
 	return raw.Xpc_type_get_name(type_)
 }
 

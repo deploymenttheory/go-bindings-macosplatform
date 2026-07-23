@@ -10,7 +10,7 @@ import (
 )
 
 // An activation type that you specify for an activation descriptor.
-type ActivationType int64
+type ActivationType int32
 
 const (
 	// An activation type that implements the identity function.
@@ -113,7 +113,7 @@ func (e ActivationType) String() string {
 }
 
 // Constants that describe an arithmetic operation.
-type ArithmeticOperation int64
+type ArithmeticOperation int32
 
 const (
 	// Calculates the element-wise sum of the inputs.
@@ -252,7 +252,7 @@ func (e ArithmeticOperation) String() string {
 }
 
 // A comparison operation.
-type ComparisonOperation int64
+type ComparisonOperation int32
 
 const (
 	ComparisonOperationEqual          ComparisonOperation = 0
@@ -307,7 +307,7 @@ func (e ComparisonOperation) String() string {
 }
 
 // The convolution type specified for a convolution layer.
-type ConvolutionType int64
+type ConvolutionType int32
 
 const (
 	// The standard convolution type.
@@ -334,7 +334,7 @@ func (e ConvolutionType) String() string {
 }
 
 // A tensor data type.
-type DataType int64
+type DataType int32
 
 const (
 	DataTypeInvalid DataType = 0
@@ -383,7 +383,7 @@ func (e DataType) String() string {
 }
 
 // A device type for execution of a neural network.
-type DeviceType int64
+type DeviceType int32
 
 const (
 	// A device type that represents the CPU.
@@ -419,7 +419,7 @@ func (e DeviceType) String() string {
 
 // A bitmask that specifies the options you use when executing a graph.
 // Bitmask — values may be combined with |.
-type ExecutionOptions int64
+type ExecutionOptions uint64
 
 const (
 	// The option to execute the graph in the most efficient way possible.
@@ -462,7 +462,7 @@ func (e ExecutionOptions) String() string {
 }
 
 // A clipping type the system applies to a gradient.
-type GradientClippingType int64
+type GradientClippingType int32
 
 const (
 	// An option that clips by value.
@@ -490,7 +490,7 @@ func (e GradientClippingType) String() string {
 
 // A bitmask that specifies the options you use when compiling a graph.
 // Bitmask — values may be combined with |.
-type GraphCompilationOptions int64
+type GraphCompilationOptions uint64
 
 const (
 	// The default option for graph compilation.
@@ -528,7 +528,7 @@ func (e GraphCompilationOptions) String() string {
 }
 
 // Constants that describe the result of an LSTM layer.
-type LSTMResultMode int64
+type LSTMResultMode uint64
 
 const (
 	// A result mode that indicates the layer produces a single result tensor that represents the final output of the LSTM.
@@ -551,7 +551,7 @@ func (e LSTMResultMode) String() string {
 }
 
 // A loss function.
-type LossType int64
+type LossType int32
 
 const (
 	// The mean absolute error loss.
@@ -605,7 +605,7 @@ func (e LossType) String() string {
 }
 
 // A padding policy that you specify for a convolution or pooling layer.
-type PaddingPolicy int64
+type PaddingPolicy int32
 
 const (
 	// The "same" padding policy.
@@ -632,7 +632,7 @@ func (e PaddingPolicy) String() string {
 }
 
 // A padding type that you specify for a padding layer.
-type PaddingType int64
+type PaddingType int32
 
 const (
 	// The zero padding type.
@@ -663,7 +663,7 @@ func (e PaddingType) String() string {
 }
 
 // A pooling function type for a pooling layer.
-type PoolingType int64
+type PoolingType int32
 
 const (
 	// The max pooling type.
@@ -693,7 +693,7 @@ func (e PoolingType) String() string {
 }
 
 // An initializer type you use to create a tensor with random data.
-type RandomInitializerType int64
+type RandomInitializerType int32
 
 const (
 	RandomInitializerTypeInvalid RandomInitializerType = 0
@@ -726,7 +726,7 @@ func (e RandomInitializerType) String() string {
 }
 
 // Constants that describe a reduction operation type.
-type ReductionType int64
+type ReductionType int32
 
 const (
 	// A reduction operation that applies no reduction.
@@ -785,7 +785,7 @@ func (e ReductionType) String() string {
 }
 
 // A regularization function to use with an optimizer.
-type RegularizationType int64
+type RegularizationType int32
 
 const (
 	// No regularization.
@@ -812,7 +812,7 @@ func (e RegularizationType) String() string {
 }
 
 // A sampling mode for an upsample layer.
-type SampleMode int64
+type SampleMode int32
 
 const (
 	// The nearest sample mode.
@@ -835,7 +835,7 @@ func (e SampleMode) String() string {
 }
 
 // A softmax operation.
-type SoftmaxOperation int64
+type SoftmaxOperation int32
 
 const (
 	// The standard softmax operation.
@@ -857,7 +857,7 @@ func (e SoftmaxOperation) String() string {
 	}
 }
 
-type EntryID int64
+type EntryID int32
 
 const (
 	EntryIDFirstEntry EntryID = 0
@@ -880,7 +880,7 @@ func (e EntryID) String() string {
 	}
 }
 
-type Flag int64
+type Flag int32
 
 const (
 	FlagFlagDeferInherit      Flag = 1
@@ -915,7 +915,7 @@ func (e Flag) String() string {
 	}
 }
 
-type Perm int64
+type Perm int32
 
 const (
 	PermReadData           Perm = 2
@@ -975,7 +975,7 @@ func (e Perm) String() string {
 	}
 }
 
-type Tag int64
+type Tag int32
 
 const (
 	TagUndefinedTag  Tag = 0
@@ -998,7 +998,7 @@ func (e Tag) String() string {
 	}
 }
 
-type Type int64
+type Type int32
 
 const (
 	TypeExtended Type = 256
@@ -1033,7 +1033,7 @@ func (e Type) String() string {
 	}
 }
 
-type Clockid int64
+type Clockid int32
 
 const (
 	ClockidRealtime           Clockid = 0
@@ -1134,7 +1134,7 @@ func (e DispatchBlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -1172,7 +1172,7 @@ func (e FilesecProperty) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -1195,7 +1195,7 @@ func (e Idtype) String() string {
 	}
 }
 
-type IpcInfoObjectType int64
+type IpcInfoObjectType uint32
 
 const (
 	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
@@ -1377,7 +1377,7 @@ func (e IpcInfoObjectType) String() string {
 	}
 }
 
-type LaunchDataType int64
+type LaunchDataType int32
 
 const (
 	LaunchDataTypeDictionary LaunchDataType = 1
@@ -1422,7 +1422,7 @@ func (e LaunchDataType) String() string {
 }
 
 // These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -1442,7 +1442,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -1465,7 +1465,7 @@ func (e MDQueryOptionFlags) String() string {
 	}
 }
 
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -1483,7 +1483,7 @@ func (e MDQuerySortOptionFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -1499,7 +1499,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -1519,7 +1519,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -1543,7 +1543,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -1587,7 +1587,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -1604,7 +1604,7 @@ func (e OSClockid) String() string {
 	}
 }
 
-type PtrauthKey int64
+type PtrauthKey int32
 
 const (
 	Ptrauth_key_none                     PtrauthKey = -1
@@ -1681,7 +1681,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -1750,7 +1750,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -1779,7 +1779,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

@@ -7,7 +7,7 @@ package applearchive
 import "fmt"
 
 // [AAEntryACLBlob.h:25]
-type AAACEQualifierTypes int64
+type AAACEQualifierTypes uint32
 
 const (
 	AA_ACE_QUALIFIER_TYPE_USER  AAACEQualifierTypes = 85
@@ -61,7 +61,7 @@ func (i AAACEQualifierTypes) isMultiValue() bool {
 }
 
 // [AADefs.h:32]
-type AACompressionAlgorithms int64
+type AACompressionAlgorithms uint32
 
 const (
 	AA_COMPRESSION_ALGORITHM_NONE     AACompressionAlgorithms = 0
@@ -125,7 +125,7 @@ func (i AACompressionAlgorithms) isMultiValue() bool {
 }
 
 // [AAEntryMessage.h:19]
-type AAEntryMessages int64
+type AAEntryMessages uint32
 
 const (
 	// @abstract Skip directory \p path in search? @discussion If the callback returns a >0 value, the directory is not searched. \p data is not used. If the callback returns a negative value, the current operation will be aborted as soon as possible.
@@ -243,7 +243,7 @@ func (i AAEntryMessages) isMultiValue() bool {
 }
 
 // [AADefs.h:48]
-type AAEntryTypes int64
+type AAEntryTypes uint32
 
 const (
 	AA_ENTRY_TYPE_REG      AAEntryTypes = 70
@@ -332,7 +332,7 @@ func (i AAEntryTypes) isMultiValue() bool {
 }
 
 // [AADefs.h:67]
-type AAFieldTypes int64
+type AAFieldTypes uint32
 
 const (
 	AA_FIELD_TYPE_FLAG     AAFieldTypes = 0
@@ -517,7 +517,7 @@ func (i AAFlags) isMultiValue() bool {
 }
 
 // [AADefs.h:19]
-type AAHashFunctions int64
+type AAHashFunctions uint32
 
 const (
 	AA_HASH_FUNCTION_CRC32  AAHashFunctions = 1
@@ -576,7 +576,7 @@ func (i AAHashFunctions) isMultiValue() bool {
 }
 
 // [AEADefs.h:62]
-type AEAContextFieldRepresentations int64
+type AEAContextFieldRepresentations uint32
 
 const (
 	AEA_CONTEXT_FIELD_REPRESENTATION_RAW      AEAContextFieldRepresentations = 0
@@ -625,7 +625,7 @@ func (i AEAContextFieldRepresentations) isMultiValue() bool {
 }
 
 // [AEADefs.h:70]
-type AEAContextFieldValues int64
+type AEAContextFieldValues uint32
 
 const (
 	AEA_CONTEXT_CIPHERSUITE_HKDF_SHA256_HMAC        AEAContextFieldValues = 0
@@ -711,7 +711,7 @@ func (i AEAContextFieldValues) isMultiValue() bool {
 }
 
 // [AEADefs.h:36]
-type AEAContextFields int64
+type AEAContextFields uint32
 
 const (
 	AEA_CONTEXT_FIELD_PROFILE                  AEAContextFields = 0
@@ -835,7 +835,7 @@ func (i AEAContextFields) isMultiValue() bool {
 }
 
 // [AEADefs.h:22]
-type AEAProfiles int64
+type AEAProfiles uint32
 
 const (
 	AEA_PROFILE__HKDF_SHA256_HMAC__NONE__ECDSA_P256              AEAProfiles = 0
@@ -899,20 +899,20 @@ func (i AEAProfiles) isMultiValue() bool {
 }
 
 // [_time.h:156]
-type Clockid_t int64
+type ClockidT int32
 
 const (
-	_CLOCK_REALTIME             Clockid_t = 0
-	_CLOCK_MONOTONIC            Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
-	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW           Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
+	_CLOCK_REALTIME             ClockidT = 0
+	_CLOCK_MONOTONIC            ClockidT = 6
+	_CLOCK_MONOTONIC_RAW        ClockidT = 4
+	_CLOCK_MONOTONIC_RAW_APPROX ClockidT = 5
+	_CLOCK_UPTIME_RAW           ClockidT = 8
+	_CLOCK_UPTIME_RAW_APPROX    ClockidT = 9
+	_CLOCK_PROCESS_CPUTIME_ID   ClockidT = 12
+	_CLOCK_THREAD_CPUTIME_ID    ClockidT = 16
 )
 
-func (i Clockid_t) String() string {
+func (i ClockidT) String() string {
 	switch i {
 	case _CLOCK_REALTIME:
 		return "_CLOCK_REALTIME"
@@ -931,11 +931,11 @@ func (i Clockid_t) String() string {
 	case _CLOCK_THREAD_CPUTIME_ID:
 		return "_CLOCK_THREAD_CPUTIME_ID"
 	default:
-		return fmt.Sprintf("Clockid_t(%d)", int64(i))
+		return fmt.Sprintf("ClockidT(%d)", int64(i))
 	}
 }
 
-func ParseClockid_t(v string) (any, error) {
+func ParseClockidT(v string) (any, error) {
 	result := _CLOCK_REALTIME
 	switch v {
 	case "_CLOCK_REALTIME":
@@ -960,7 +960,7 @@ func ParseClockid_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeClockid_t(values []Clockid_t) []string {
+func SerializeClockidT(values []ClockidT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -968,25 +968,25 @@ func SerializeClockid_t(values []Clockid_t) []string {
 	return result
 }
 
-func (i Clockid_t) isMultiValue() bool {
+func (i ClockidT) isMultiValue() bool {
 	return false
 }
 
 // [fcntl.h:582]
-type Filesec_property_t int64
+type FilesecPropertyT int32
 
 const (
-	FILESEC_OWNER         Filesec_property_t = 1
-	FILESEC_GROUP         Filesec_property_t = 2
-	FILESEC_UUID          Filesec_property_t = 3
-	FILESEC_MODE          Filesec_property_t = 4
-	FILESEC_ACL           Filesec_property_t = 5
-	FILESEC_GRPUUID       Filesec_property_t = 6
-	FILESEC_ACL_RAW       Filesec_property_t = 100
-	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
+	FILESEC_OWNER         FilesecPropertyT = 1
+	FILESEC_GROUP         FilesecPropertyT = 2
+	FILESEC_UUID          FilesecPropertyT = 3
+	FILESEC_MODE          FilesecPropertyT = 4
+	FILESEC_ACL           FilesecPropertyT = 5
+	FILESEC_GRPUUID       FilesecPropertyT = 6
+	FILESEC_ACL_RAW       FilesecPropertyT = 100
+	FILESEC_ACL_ALLOCSIZE FilesecPropertyT = 101
 )
 
-func (i Filesec_property_t) String() string {
+func (i FilesecPropertyT) String() string {
 	switch i {
 	case FILESEC_OWNER:
 		return "FILESEC_OWNER"
@@ -1005,11 +1005,11 @@ func (i Filesec_property_t) String() string {
 	case FILESEC_ACL_ALLOCSIZE:
 		return "FILESEC_ACL_ALLOCSIZE"
 	default:
-		return fmt.Sprintf("Filesec_property_t(%d)", int64(i))
+		return fmt.Sprintf("FilesecPropertyT(%d)", int64(i))
 	}
 }
 
-func ParseFilesec_property_t(v string) (any, error) {
+func ParseFilesecPropertyT(v string) (any, error) {
 	result := FILESEC_OWNER
 	switch v {
 	case "FILESEC_OWNER":
@@ -1034,7 +1034,7 @@ func ParseFilesec_property_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeFilesec_property_t(values []Filesec_property_t) []string {
+func SerializeFilesecPropertyT(values []FilesecPropertyT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -1042,6 +1042,6 @@ func SerializeFilesec_property_t(values []Filesec_property_t) []string {
 	return result
 }
 
-func (i Filesec_property_t) isMultiValue() bool {
+func (i FilesecPropertyT) isMultiValue() bool {
 	return false
 }

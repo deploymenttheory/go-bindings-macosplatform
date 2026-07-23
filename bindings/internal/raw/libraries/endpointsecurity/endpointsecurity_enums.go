@@ -10,15 +10,15 @@ import (
 )
 
 // [acl.h:118]
-type Acl_entry_id_t int64
+type AclEntryIdT int32
 
 const (
-	ACL_FIRST_ENTRY Acl_entry_id_t = 0
-	ACL_NEXT_ENTRY  Acl_entry_id_t = -1
-	ACL_LAST_ENTRY  Acl_entry_id_t = -2
+	ACL_FIRST_ENTRY AclEntryIdT = 0
+	ACL_NEXT_ENTRY  AclEntryIdT = -1
+	ACL_LAST_ENTRY  AclEntryIdT = -2
 )
 
-func (i Acl_entry_id_t) String() string {
+func (i AclEntryIdT) String() string {
 	switch i {
 	case ACL_FIRST_ENTRY:
 		return "ACL_FIRST_ENTRY"
@@ -27,11 +27,11 @@ func (i Acl_entry_id_t) String() string {
 	case ACL_LAST_ENTRY:
 		return "ACL_LAST_ENTRY"
 	default:
-		return fmt.Sprintf("Acl_entry_id_t(%d)", int64(i))
+		return fmt.Sprintf("AclEntryIdT(%d)", int64(i))
 	}
 }
 
-func ParseAcl_entry_id_t(v string) (any, error) {
+func ParseAclEntryIdT(v string) (any, error) {
 	result := ACL_FIRST_ENTRY
 	switch v {
 	case "ACL_FIRST_ENTRY":
@@ -46,7 +46,7 @@ func ParseAcl_entry_id_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeAcl_entry_id_t(values []Acl_entry_id_t) []string {
+func SerializeAclEntryIdT(values []AclEntryIdT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -54,24 +54,24 @@ func SerializeAcl_entry_id_t(values []Acl_entry_id_t) []string {
 	return result
 }
 
-func (i Acl_entry_id_t) isMultiValue() bool {
+func (i AclEntryIdT) isMultiValue() bool {
 	return false
 }
 
 // [acl.h:125]
-type Acl_flag_t int64
+type AclFlagT int32
 
 const (
-	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
-	ACL_FLAG_NO_INHERIT         Acl_flag_t = 131072
-	ACL_ENTRY_INHERITED         Acl_flag_t = 16
-	ACL_ENTRY_FILE_INHERIT      Acl_flag_t = 32
-	ACL_ENTRY_DIRECTORY_INHERIT Acl_flag_t = 64
-	ACL_ENTRY_LIMIT_INHERIT     Acl_flag_t = 128
-	ACL_ENTRY_ONLY_INHERIT      Acl_flag_t = 256
+	ACL_FLAG_DEFER_INHERIT      AclFlagT = 1
+	ACL_FLAG_NO_INHERIT         AclFlagT = 131072
+	ACL_ENTRY_INHERITED         AclFlagT = 16
+	ACL_ENTRY_FILE_INHERIT      AclFlagT = 32
+	ACL_ENTRY_DIRECTORY_INHERIT AclFlagT = 64
+	ACL_ENTRY_LIMIT_INHERIT     AclFlagT = 128
+	ACL_ENTRY_ONLY_INHERIT      AclFlagT = 256
 )
 
-func (i Acl_flag_t) String() string {
+func (i AclFlagT) String() string {
 	switch i {
 	case ACL_FLAG_DEFER_INHERIT:
 		return "ACL_FLAG_DEFER_INHERIT"
@@ -88,11 +88,11 @@ func (i Acl_flag_t) String() string {
 	case ACL_ENTRY_ONLY_INHERIT:
 		return "ACL_ENTRY_ONLY_INHERIT"
 	default:
-		return fmt.Sprintf("Acl_flag_t(%d)", int64(i))
+		return fmt.Sprintf("AclFlagT(%d)", int64(i))
 	}
 }
 
-func ParseAcl_flag_t(v string) (any, error) {
+func ParseAclFlagT(v string) (any, error) {
 	result := ACL_FLAG_DEFER_INHERIT
 	switch v {
 	case "ACL_FLAG_DEFER_INHERIT":
@@ -115,7 +115,7 @@ func ParseAcl_flag_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeAcl_flag_t(values []Acl_flag_t) []string {
+func SerializeAclFlagT(values []AclFlagT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -123,35 +123,35 @@ func SerializeAcl_flag_t(values []Acl_flag_t) []string {
 	return result
 }
 
-func (i Acl_flag_t) isMultiValue() bool {
+func (i AclFlagT) isMultiValue() bool {
 	return false
 }
 
 // [acl.h:72]
-type Acl_perm_t int64
+type AclPermT int32
 
 const (
-	ACL_READ_DATA           Acl_perm_t = 2
-	ACL_LIST_DIRECTORY      Acl_perm_t = 2
-	ACL_WRITE_DATA          Acl_perm_t = 4
-	ACL_ADD_FILE            Acl_perm_t = 4
-	ACL_EXECUTE             Acl_perm_t = 8
-	ACL_SEARCH              Acl_perm_t = 8
-	ACL_DELETE              Acl_perm_t = 16
-	ACL_APPEND_DATA         Acl_perm_t = 32
-	ACL_ADD_SUBDIRECTORY    Acl_perm_t = 32
-	ACL_DELETE_CHILD        Acl_perm_t = 64
-	ACL_READ_ATTRIBUTES     Acl_perm_t = 128
-	ACL_WRITE_ATTRIBUTES    Acl_perm_t = 256
-	ACL_READ_EXTATTRIBUTES  Acl_perm_t = 512
-	ACL_WRITE_EXTATTRIBUTES Acl_perm_t = 1024
-	ACL_READ_SECURITY       Acl_perm_t = 2048
-	ACL_WRITE_SECURITY      Acl_perm_t = 4096
-	ACL_CHANGE_OWNER        Acl_perm_t = 8192
-	ACL_SYNCHRONIZE         Acl_perm_t = 1048576
+	ACL_READ_DATA           AclPermT = 2
+	ACL_LIST_DIRECTORY      AclPermT = 2
+	ACL_WRITE_DATA          AclPermT = 4
+	ACL_ADD_FILE            AclPermT = 4
+	ACL_EXECUTE             AclPermT = 8
+	ACL_SEARCH              AclPermT = 8
+	ACL_DELETE              AclPermT = 16
+	ACL_APPEND_DATA         AclPermT = 32
+	ACL_ADD_SUBDIRECTORY    AclPermT = 32
+	ACL_DELETE_CHILD        AclPermT = 64
+	ACL_READ_ATTRIBUTES     AclPermT = 128
+	ACL_WRITE_ATTRIBUTES    AclPermT = 256
+	ACL_READ_EXTATTRIBUTES  AclPermT = 512
+	ACL_WRITE_EXTATTRIBUTES AclPermT = 1024
+	ACL_READ_SECURITY       AclPermT = 2048
+	ACL_WRITE_SECURITY      AclPermT = 4096
+	ACL_CHANGE_OWNER        AclPermT = 8192
+	ACL_SYNCHRONIZE         AclPermT = 1048576
 )
 
-func (i Acl_perm_t) String() string {
+func (i AclPermT) String() string {
 	switch i {
 	case ACL_READ_DATA:
 		return "ACL_READ_DATA"
@@ -182,11 +182,11 @@ func (i Acl_perm_t) String() string {
 	case ACL_SYNCHRONIZE:
 		return "ACL_SYNCHRONIZE"
 	default:
-		return fmt.Sprintf("Acl_perm_t(%d)", int64(i))
+		return fmt.Sprintf("AclPermT(%d)", int64(i))
 	}
 }
 
-func ParseAcl_perm_t(v string) (any, error) {
+func ParseAclPermT(v string) (any, error) {
 	result := ACL_READ_DATA
 	switch v {
 	case "ACL_READ_DATA":
@@ -231,7 +231,7 @@ func ParseAcl_perm_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeAcl_perm_t(values []Acl_perm_t) []string {
+func SerializeAclPermT(values []AclPermT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -239,20 +239,20 @@ func SerializeAcl_perm_t(values []Acl_perm_t) []string {
 	return result
 }
 
-func (i Acl_perm_t) isMultiValue() bool {
+func (i AclPermT) isMultiValue() bool {
 	return false
 }
 
 // [acl.h:94]
-type Acl_tag_t int64
+type AclTagT int32
 
 const (
-	ACL_UNDEFINED_TAG  Acl_tag_t = 0
-	ACL_EXTENDED_ALLOW Acl_tag_t = 1
-	ACL_EXTENDED_DENY  Acl_tag_t = 2
+	ACL_UNDEFINED_TAG  AclTagT = 0
+	ACL_EXTENDED_ALLOW AclTagT = 1
+	ACL_EXTENDED_DENY  AclTagT = 2
 )
 
-func (i Acl_tag_t) String() string {
+func (i AclTagT) String() string {
 	switch i {
 	case ACL_UNDEFINED_TAG:
 		return "ACL_UNDEFINED_TAG"
@@ -261,11 +261,11 @@ func (i Acl_tag_t) String() string {
 	case ACL_EXTENDED_DENY:
 		return "ACL_EXTENDED_DENY"
 	default:
-		return fmt.Sprintf("Acl_tag_t(%d)", int64(i))
+		return fmt.Sprintf("AclTagT(%d)", int64(i))
 	}
 }
 
-func ParseAcl_tag_t(v string) (any, error) {
+func ParseAclTagT(v string) (any, error) {
 	result := ACL_UNDEFINED_TAG
 	switch v {
 	case "ACL_UNDEFINED_TAG":
@@ -280,7 +280,7 @@ func ParseAcl_tag_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeAcl_tag_t(values []Acl_tag_t) []string {
+func SerializeAclTagT(values []AclTagT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -288,24 +288,24 @@ func SerializeAcl_tag_t(values []Acl_tag_t) []string {
 	return result
 }
 
-func (i Acl_tag_t) isMultiValue() bool {
+func (i AclTagT) isMultiValue() bool {
 	return false
 }
 
 // [acl.h:101]
-type Acl_type_t int64
+type AclTypeT int32
 
 const (
-	ACL_TYPE_EXTENDED Acl_type_t = 256
-	ACL_TYPE_ACCESS   Acl_type_t = 0
-	ACL_TYPE_DEFAULT  Acl_type_t = 1
-	ACL_TYPE_AFS      Acl_type_t = 2
-	ACL_TYPE_CODA     Acl_type_t = 3
-	ACL_TYPE_NTFS     Acl_type_t = 4
-	ACL_TYPE_NWFS     Acl_type_t = 5
+	ACL_TYPE_EXTENDED AclTypeT = 256
+	ACL_TYPE_ACCESS   AclTypeT = 0
+	ACL_TYPE_DEFAULT  AclTypeT = 1
+	ACL_TYPE_AFS      AclTypeT = 2
+	ACL_TYPE_CODA     AclTypeT = 3
+	ACL_TYPE_NTFS     AclTypeT = 4
+	ACL_TYPE_NWFS     AclTypeT = 5
 )
 
-func (i Acl_type_t) String() string {
+func (i AclTypeT) String() string {
 	switch i {
 	case ACL_TYPE_EXTENDED:
 		return "ACL_TYPE_EXTENDED"
@@ -322,11 +322,11 @@ func (i Acl_type_t) String() string {
 	case ACL_TYPE_NWFS:
 		return "ACL_TYPE_NWFS"
 	default:
-		return fmt.Sprintf("Acl_type_t(%d)", int64(i))
+		return fmt.Sprintf("AclTypeT(%d)", int64(i))
 	}
 }
 
-func ParseAcl_type_t(v string) (any, error) {
+func ParseAclTypeT(v string) (any, error) {
 	result := ACL_TYPE_EXTENDED
 	switch v {
 	case "ACL_TYPE_EXTENDED":
@@ -349,7 +349,7 @@ func ParseAcl_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeAcl_type_t(values []Acl_type_t) []string {
+func SerializeAclTypeT(values []AclTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -357,25 +357,25 @@ func SerializeAcl_type_t(values []Acl_type_t) []string {
 	return result
 }
 
-func (i Acl_type_t) isMultiValue() bool {
+func (i AclTypeT) isMultiValue() bool {
 	return false
 }
 
 // [_time.h:156]
-type Clockid_t int64
+type ClockidT int32
 
 const (
-	_CLOCK_REALTIME             Clockid_t = 0
-	_CLOCK_MONOTONIC            Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
-	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW           Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
+	_CLOCK_REALTIME             ClockidT = 0
+	_CLOCK_MONOTONIC            ClockidT = 6
+	_CLOCK_MONOTONIC_RAW        ClockidT = 4
+	_CLOCK_MONOTONIC_RAW_APPROX ClockidT = 5
+	_CLOCK_UPTIME_RAW           ClockidT = 8
+	_CLOCK_UPTIME_RAW_APPROX    ClockidT = 9
+	_CLOCK_PROCESS_CPUTIME_ID   ClockidT = 12
+	_CLOCK_THREAD_CPUTIME_ID    ClockidT = 16
 )
 
-func (i Clockid_t) String() string {
+func (i ClockidT) String() string {
 	switch i {
 	case _CLOCK_REALTIME:
 		return "_CLOCK_REALTIME"
@@ -394,11 +394,11 @@ func (i Clockid_t) String() string {
 	case _CLOCK_THREAD_CPUTIME_ID:
 		return "_CLOCK_THREAD_CPUTIME_ID"
 	default:
-		return fmt.Sprintf("Clockid_t(%d)", int64(i))
+		return fmt.Sprintf("ClockidT(%d)", int64(i))
 	}
 }
 
-func ParseClockid_t(v string) (any, error) {
+func ParseClockidT(v string) (any, error) {
 	result := _CLOCK_REALTIME
 	switch v {
 	case "_CLOCK_REALTIME":
@@ -423,7 +423,7 @@ func ParseClockid_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeClockid_t(values []Clockid_t) []string {
+func SerializeClockidT(values []ClockidT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -431,23 +431,23 @@ func SerializeClockid_t(values []Clockid_t) []string {
 	return result
 }
 
-func (i Clockid_t) isMultiValue() bool {
+func (i ClockidT) isMultiValue() bool {
 	return false
 }
 
 // [mount.h:188]
-type Cryptex_auth_type_t int64
+type CryptexAuthTypeT uint32
 
 const (
-	CRYPTEX1_AUTH_ENV_GENERIC              Cryptex_auth_type_t = 4
-	CRYPTEX1_AUTH_ENV_GENERIC_SUPPLEMENTAL Cryptex_auth_type_t = 5
-	CRYPTEX_AUTH_PDI_NONCE                 Cryptex_auth_type_t = 6
-	CRYPTEX_AUTH_MOBILE_ASSET              Cryptex_auth_type_t = 8
-	CRYPTEX_AUTH_MOBILE_ASSET_WITH_CODE    Cryptex_auth_type_t = 9
-	CRYPTEX_AUTH_MAX                       Cryptex_auth_type_t = 9
+	CRYPTEX1_AUTH_ENV_GENERIC              CryptexAuthTypeT = 4
+	CRYPTEX1_AUTH_ENV_GENERIC_SUPPLEMENTAL CryptexAuthTypeT = 5
+	CRYPTEX_AUTH_PDI_NONCE                 CryptexAuthTypeT = 6
+	CRYPTEX_AUTH_MOBILE_ASSET              CryptexAuthTypeT = 8
+	CRYPTEX_AUTH_MOBILE_ASSET_WITH_CODE    CryptexAuthTypeT = 9
+	CRYPTEX_AUTH_MAX                       CryptexAuthTypeT = 9
 )
 
-func (i Cryptex_auth_type_t) String() string {
+func (i CryptexAuthTypeT) String() string {
 	switch i {
 	case CRYPTEX1_AUTH_ENV_GENERIC:
 		return "CRYPTEX1_AUTH_ENV_GENERIC"
@@ -460,11 +460,11 @@ func (i Cryptex_auth_type_t) String() string {
 	case CRYPTEX_AUTH_MOBILE_ASSET_WITH_CODE:
 		return "CRYPTEX_AUTH_MOBILE_ASSET_WITH_CODE"
 	default:
-		return fmt.Sprintf("Cryptex_auth_type_t(%d)", int64(i))
+		return fmt.Sprintf("CryptexAuthTypeT(%d)", int64(i))
 	}
 }
 
-func ParseCryptex_auth_type_t(v string) (any, error) {
+func ParseCryptexAuthTypeT(v string) (any, error) {
 	result := CRYPTEX1_AUTH_ENV_GENERIC
 	switch v {
 	case "CRYPTEX1_AUTH_ENV_GENERIC":
@@ -485,7 +485,7 @@ func ParseCryptex_auth_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeCryptex_auth_type_t(values []Cryptex_auth_type_t) []string {
+func SerializeCryptexAuthTypeT(values []CryptexAuthTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -493,31 +493,31 @@ func SerializeCryptex_auth_type_t(values []Cryptex_auth_type_t) []string {
 	return result
 }
 
-func (i Cryptex_auth_type_t) isMultiValue() bool {
+func (i CryptexAuthTypeT) isMultiValue() bool {
 	return false
 }
 
 // The type of the message’s action.
 // [ESTypes.h:15]
-type Es_action_type_t int64
+type EsActionTypeT int32
 
 const (
-	ES_ACTION_TYPE_AUTH   Es_action_type_t = 0
-	ES_ACTION_TYPE_NOTIFY Es_action_type_t = 1
+	ES_ACTION_TYPE_AUTH   EsActionTypeT = 0
+	ES_ACTION_TYPE_NOTIFY EsActionTypeT = 1
 )
 
-func (i Es_action_type_t) String() string {
+func (i EsActionTypeT) String() string {
 	switch i {
 	case ES_ACTION_TYPE_AUTH:
 		return "ES_ACTION_TYPE_AUTH"
 	case ES_ACTION_TYPE_NOTIFY:
 		return "ES_ACTION_TYPE_NOTIFY"
 	default:
-		return fmt.Sprintf("Es_action_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsActionTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_action_type_t(v string) (any, error) {
+func ParseEsActionTypeT(v string) (any, error) {
 	result := ES_ACTION_TYPE_AUTH
 	switch v {
 	case "ES_ACTION_TYPE_AUTH":
@@ -530,7 +530,7 @@ func ParseEs_action_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_action_type_t(values []Es_action_type_t) []string {
+func SerializeEsActionTypeT(values []EsActionTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -538,25 +538,25 @@ func SerializeEs_action_type_t(values []Es_action_type_t) []string {
 	return result
 }
 
-func (i Es_action_type_t) isMultiValue() bool {
+func (i EsActionTypeT) isMultiValue() bool {
 	return false
 }
 
 // [ESTypes.h:491]
-type Es_address_type_t int64
+type EsAddressTypeT int32
 
 const (
 	// No source address available.
-	ES_ADDRESS_TYPE_NONE Es_address_type_t = 0
+	ES_ADDRESS_TYPE_NONE EsAddressTypeT = 0
 	// Source address is IPv4.
-	ES_ADDRESS_TYPE_IPV4 Es_address_type_t = 1
+	ES_ADDRESS_TYPE_IPV4 EsAddressTypeT = 1
 	// Source address is IPv6.
-	ES_ADDRESS_TYPE_IPV6 Es_address_type_t = 2
+	ES_ADDRESS_TYPE_IPV6 EsAddressTypeT = 2
 	// Source address is named UNIX socket.
-	ES_ADDRESS_TYPE_NAMED_SOCKET Es_address_type_t = 3
+	ES_ADDRESS_TYPE_NAMED_SOCKET EsAddressTypeT = 3
 )
 
-func (i Es_address_type_t) String() string {
+func (i EsAddressTypeT) String() string {
 	switch i {
 	case ES_ADDRESS_TYPE_NONE:
 		return "ES_ADDRESS_TYPE_NONE"
@@ -567,11 +567,11 @@ func (i Es_address_type_t) String() string {
 	case ES_ADDRESS_TYPE_NAMED_SOCKET:
 		return "ES_ADDRESS_TYPE_NAMED_SOCKET"
 	default:
-		return fmt.Sprintf("Es_address_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsAddressTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_address_type_t(v string) (any, error) {
+func ParseEsAddressTypeT(v string) (any, error) {
 	result := ES_ADDRESS_TYPE_NONE
 	switch v {
 	case "ES_ADDRESS_TYPE_NONE":
@@ -588,7 +588,7 @@ func ParseEs_address_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_address_type_t(values []Es_address_type_t) []string {
+func SerializeEsAddressTypeT(values []EsAddressTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -596,33 +596,33 @@ func SerializeEs_address_type_t(values []Es_address_type_t) []string {
 	return result
 }
 
-func (i Es_address_type_t) isMultiValue() bool {
+func (i EsAddressTypeT) isMultiValue() bool {
 	return false
 }
 
 // Values used when responding to an authorization event.
 // [ESTypes.h:299]
-type Es_auth_result_t int64
+type EsAuthResultT int32
 
 const (
 	// The event is authorized and should be allowed to continue
-	ES_AUTH_RESULT_ALLOW Es_auth_result_t = 0
+	ES_AUTH_RESULT_ALLOW EsAuthResultT = 0
 	// The event is not authorized and should be blocked
-	ES_AUTH_RESULT_DENY Es_auth_result_t = 1
+	ES_AUTH_RESULT_DENY EsAuthResultT = 1
 )
 
-func (i Es_auth_result_t) String() string {
+func (i EsAuthResultT) String() string {
 	switch i {
 	case ES_AUTH_RESULT_ALLOW:
 		return "ES_AUTH_RESULT_ALLOW"
 	case ES_AUTH_RESULT_DENY:
 		return "ES_AUTH_RESULT_DENY"
 	default:
-		return fmt.Sprintf("Es_auth_result_t(%d)", int64(i))
+		return fmt.Sprintf("EsAuthResultT(%d)", int64(i))
 	}
 }
 
-func ParseEs_auth_result_t(v string) (any, error) {
+func ParseEsAuthResultT(v string) (any, error) {
 	result := ES_AUTH_RESULT_ALLOW
 	switch v {
 	case "ES_AUTH_RESULT_ALLOW":
@@ -635,7 +635,7 @@ func ParseEs_auth_result_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_auth_result_t(values []Es_auth_result_t) []string {
+func SerializeEsAuthResultT(values []EsAuthResultT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -643,23 +643,23 @@ func SerializeEs_auth_result_t(values []Es_auth_result_t) []string {
 	return result
 }
 
-func (i Es_auth_result_t) isMultiValue() bool {
+func (i EsAuthResultT) isMultiValue() bool {
 	return false
 }
 
 // @brief This enum describes the types of authentications that ES_EVENT_TYPE_NOTIFY_AUTHENTICATION can describe.
 // [ESTypes.h:64]
-type Es_authentication_type_t int64
+type EsAuthenticationTypeT int32
 
 const (
-	ES_AUTHENTICATION_TYPE_OD          Es_authentication_type_t = 0
-	ES_AUTHENTICATION_TYPE_TOUCHID     Es_authentication_type_t = 1
-	ES_AUTHENTICATION_TYPE_TOKEN       Es_authentication_type_t = 2
-	ES_AUTHENTICATION_TYPE_AUTO_UNLOCK Es_authentication_type_t = 3
-	ES_AUTHENTICATION_TYPE_LAST        Es_authentication_type_t = 4
+	ES_AUTHENTICATION_TYPE_OD          EsAuthenticationTypeT = 0
+	ES_AUTHENTICATION_TYPE_TOUCHID     EsAuthenticationTypeT = 1
+	ES_AUTHENTICATION_TYPE_TOKEN       EsAuthenticationTypeT = 2
+	ES_AUTHENTICATION_TYPE_AUTO_UNLOCK EsAuthenticationTypeT = 3
+	ES_AUTHENTICATION_TYPE_LAST        EsAuthenticationTypeT = 4
 )
 
-func (i Es_authentication_type_t) String() string {
+func (i EsAuthenticationTypeT) String() string {
 	switch i {
 	case ES_AUTHENTICATION_TYPE_OD:
 		return "ES_AUTHENTICATION_TYPE_OD"
@@ -672,11 +672,11 @@ func (i Es_authentication_type_t) String() string {
 	case ES_AUTHENTICATION_TYPE_LAST:
 		return "ES_AUTHENTICATION_TYPE_LAST"
 	default:
-		return fmt.Sprintf("Es_authentication_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsAuthenticationTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_authentication_type_t(v string) (any, error) {
+func ParseEsAuthenticationTypeT(v string) (any, error) {
 	result := ES_AUTHENTICATION_TYPE_OD
 	switch v {
 	case "ES_AUTHENTICATION_TYPE_OD":
@@ -695,7 +695,7 @@ func ParseEs_authentication_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_authentication_type_t(values []Es_authentication_type_t) []string {
+func SerializeEsAuthenticationTypeT(values []EsAuthenticationTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -703,31 +703,31 @@ func SerializeEs_authentication_type_t(values []Es_authentication_type_t) []stri
 	return result
 }
 
-func (i Es_authentication_type_t) isMultiValue() bool {
+func (i EsAuthenticationTypeT) isMultiValue() bool {
 	return false
 }
 
 // [ESTypes.h:521]
-type Es_authorization_rule_class_t int64
+type EsAuthorizationRuleClassT int32
 
 const (
 	// Right is judged on user properties
-	ES_AUTHORIZATION_RULE_CLASS_USER Es_authorization_rule_class_t = 0
+	ES_AUTHORIZATION_RULE_CLASS_USER EsAuthorizationRuleClassT = 0
 	// Right is judged by a tree of sub-rules
-	ES_AUTHORIZATION_RULE_CLASS_RULE Es_authorization_rule_class_t = 1
+	ES_AUTHORIZATION_RULE_CLASS_RULE EsAuthorizationRuleClassT = 1
 	// Right is judged by one or more plugins
-	ES_AUTHORIZATION_RULE_CLASS_MECHANISM Es_authorization_rule_class_t = 2
+	ES_AUTHORIZATION_RULE_CLASS_MECHANISM EsAuthorizationRuleClassT = 2
 	// Right is always granted
-	ES_AUTHORIZATION_RULE_CLASS_ALLOW Es_authorization_rule_class_t = 3
+	ES_AUTHORIZATION_RULE_CLASS_ALLOW EsAuthorizationRuleClassT = 3
 	// Right is always denied
-	ES_AUTHORIZATION_RULE_CLASS_DENY Es_authorization_rule_class_t = 4
+	ES_AUTHORIZATION_RULE_CLASS_DENY EsAuthorizationRuleClassT = 4
 	// Right is unknown
-	ES_AUTHORIZATION_RULE_CLASS_UNKNOWN Es_authorization_rule_class_t = 5
+	ES_AUTHORIZATION_RULE_CLASS_UNKNOWN EsAuthorizationRuleClassT = 5
 	// Right is invalid
-	ES_AUTHORIZATION_RULE_CLASS_INVALID Es_authorization_rule_class_t = 6
+	ES_AUTHORIZATION_RULE_CLASS_INVALID EsAuthorizationRuleClassT = 6
 )
 
-func (i Es_authorization_rule_class_t) String() string {
+func (i EsAuthorizationRuleClassT) String() string {
 	switch i {
 	case ES_AUTHORIZATION_RULE_CLASS_USER:
 		return "ES_AUTHORIZATION_RULE_CLASS_USER"
@@ -744,11 +744,11 @@ func (i Es_authorization_rule_class_t) String() string {
 	case ES_AUTHORIZATION_RULE_CLASS_INVALID:
 		return "ES_AUTHORIZATION_RULE_CLASS_INVALID"
 	default:
-		return fmt.Sprintf("Es_authorization_rule_class_t(%d)", int64(i))
+		return fmt.Sprintf("EsAuthorizationRuleClassT(%d)", int64(i))
 	}
 }
 
-func ParseEs_authorization_rule_class_t(v string) (any, error) {
+func ParseEsAuthorizationRuleClassT(v string) (any, error) {
 	result := ES_AUTHORIZATION_RULE_CLASS_USER
 	switch v {
 	case "ES_AUTHORIZATION_RULE_CLASS_USER":
@@ -771,7 +771,7 @@ func ParseEs_authorization_rule_class_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_authorization_rule_class_t(values []Es_authorization_rule_class_t) []string {
+func SerializeEsAuthorizationRuleClassT(values []EsAuthorizationRuleClassT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -779,33 +779,33 @@ func SerializeEs_authorization_rule_class_t(values []Es_authorization_rule_class
 	return result
 }
 
-func (i Es_authorization_rule_class_t) isMultiValue() bool {
+func (i EsAuthorizationRuleClassT) isMultiValue() bool {
 	return false
 }
 
 // es_auto_unlock_type_t See es_event_authentication_auto_unlock_t
 // [ESTypes.h:680]
-type Es_auto_unlock_type_t int64
+type EsAutoUnlockTypeT int32
 
 const (
 	// Unlock the machine using Apple Watch.
-	ES_AUTO_UNLOCK_MACHINE_UNLOCK Es_auto_unlock_type_t = 1
+	ES_AUTO_UNLOCK_MACHINE_UNLOCK EsAutoUnlockTypeT = 1
 	// Approve an authorization prompt using Apple Watch.
-	ES_AUTO_UNLOCK_AUTH_PROMPT Es_auto_unlock_type_t = 2
+	ES_AUTO_UNLOCK_AUTH_PROMPT EsAutoUnlockTypeT = 2
 )
 
-func (i Es_auto_unlock_type_t) String() string {
+func (i EsAutoUnlockTypeT) String() string {
 	switch i {
 	case ES_AUTO_UNLOCK_MACHINE_UNLOCK:
 		return "ES_AUTO_UNLOCK_MACHINE_UNLOCK"
 	case ES_AUTO_UNLOCK_AUTH_PROMPT:
 		return "ES_AUTO_UNLOCK_AUTH_PROMPT"
 	default:
-		return fmt.Sprintf("Es_auto_unlock_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsAutoUnlockTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_auto_unlock_type_t(v string) (any, error) {
+func ParseEsAutoUnlockTypeT(v string) (any, error) {
 	result := ES_AUTO_UNLOCK_MACHINE_UNLOCK
 	switch v {
 	case "ES_AUTO_UNLOCK_MACHINE_UNLOCK":
@@ -818,7 +818,7 @@ func ParseEs_auto_unlock_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_auto_unlock_type_t(values []Es_auto_unlock_type_t) []string {
+func SerializeEsAutoUnlockTypeT(values []EsAutoUnlockTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -826,23 +826,23 @@ func SerializeEs_auto_unlock_type_t(values []Es_auto_unlock_type_t) []string {
 	return result
 }
 
-func (i Es_auto_unlock_type_t) isMultiValue() bool {
+func (i EsAutoUnlockTypeT) isMultiValue() bool {
 	return false
 }
 
 // es_btm_item_type_t See es_btm_launch_item_t
 // [ESTypes.h:692]
-type Es_btm_item_type_t int64
+type EsBtmItemTypeT int32
 
 const (
-	ES_BTM_ITEM_TYPE_USER_ITEM  Es_btm_item_type_t = 0
-	ES_BTM_ITEM_TYPE_APP        Es_btm_item_type_t = 1
-	ES_BTM_ITEM_TYPE_LOGIN_ITEM Es_btm_item_type_t = 2
-	ES_BTM_ITEM_TYPE_AGENT      Es_btm_item_type_t = 3
-	ES_BTM_ITEM_TYPE_DAEMON     Es_btm_item_type_t = 4
+	ES_BTM_ITEM_TYPE_USER_ITEM  EsBtmItemTypeT = 0
+	ES_BTM_ITEM_TYPE_APP        EsBtmItemTypeT = 1
+	ES_BTM_ITEM_TYPE_LOGIN_ITEM EsBtmItemTypeT = 2
+	ES_BTM_ITEM_TYPE_AGENT      EsBtmItemTypeT = 3
+	ES_BTM_ITEM_TYPE_DAEMON     EsBtmItemTypeT = 4
 )
 
-func (i Es_btm_item_type_t) String() string {
+func (i EsBtmItemTypeT) String() string {
 	switch i {
 	case ES_BTM_ITEM_TYPE_USER_ITEM:
 		return "ES_BTM_ITEM_TYPE_USER_ITEM"
@@ -855,11 +855,11 @@ func (i Es_btm_item_type_t) String() string {
 	case ES_BTM_ITEM_TYPE_DAEMON:
 		return "ES_BTM_ITEM_TYPE_DAEMON"
 	default:
-		return fmt.Sprintf("Es_btm_item_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsBtmItemTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_btm_item_type_t(v string) (any, error) {
+func ParseEsBtmItemTypeT(v string) (any, error) {
 	result := ES_BTM_ITEM_TYPE_USER_ITEM
 	switch v {
 	case "ES_BTM_ITEM_TYPE_USER_ITEM":
@@ -878,7 +878,7 @@ func ParseEs_btm_item_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_btm_item_type_t(values []Es_btm_item_type_t) []string {
+func SerializeEsBtmItemTypeT(values []EsBtmItemTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -886,23 +886,23 @@ func SerializeEs_btm_item_type_t(values []Es_btm_item_type_t) []string {
 	return result
 }
 
-func (i Es_btm_item_type_t) isMultiValue() bool {
+func (i EsBtmItemTypeT) isMultiValue() bool {
 	return false
 }
 
 // Values that indicate the result of clearing a cache.
 // [ESTypes.h:364]
-type Es_clear_cache_result_t int64
+type EsClearCacheResultT int32
 
 const (
-	ES_CLEAR_CACHE_RESULT_SUCCESS Es_clear_cache_result_t = 0
+	ES_CLEAR_CACHE_RESULT_SUCCESS EsClearCacheResultT = 0
 	// Communication with the ES subsystem failed
-	ES_CLEAR_CACHE_RESULT_ERR_INTERNAL Es_clear_cache_result_t = 1
+	ES_CLEAR_CACHE_RESULT_ERR_INTERNAL EsClearCacheResultT = 1
 	// Rate of calls is too high. Slow down.
-	ES_CLEAR_CACHE_RESULT_ERR_THROTTLE Es_clear_cache_result_t = 2
+	ES_CLEAR_CACHE_RESULT_ERR_THROTTLE EsClearCacheResultT = 2
 )
 
-func (i Es_clear_cache_result_t) String() string {
+func (i EsClearCacheResultT) String() string {
 	switch i {
 	case ES_CLEAR_CACHE_RESULT_SUCCESS:
 		return "ES_CLEAR_CACHE_RESULT_SUCCESS"
@@ -911,11 +911,11 @@ func (i Es_clear_cache_result_t) String() string {
 	case ES_CLEAR_CACHE_RESULT_ERR_THROTTLE:
 		return "ES_CLEAR_CACHE_RESULT_ERR_THROTTLE"
 	default:
-		return fmt.Sprintf("Es_clear_cache_result_t(%d)", int64(i))
+		return fmt.Sprintf("EsClearCacheResultT(%d)", int64(i))
 	}
 }
 
-func ParseEs_clear_cache_result_t(v string) (any, error) {
+func ParseEsClearCacheResultT(v string) (any, error) {
 	result := ES_CLEAR_CACHE_RESULT_SUCCESS
 	switch v {
 	case "ES_CLEAR_CACHE_RESULT_SUCCESS":
@@ -930,7 +930,7 @@ func ParseEs_clear_cache_result_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_clear_cache_result_t(values []Es_clear_cache_result_t) []string {
+func SerializeEsClearCacheResultT(values []EsClearCacheResultT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -938,29 +938,29 @@ func SerializeEs_clear_cache_result_t(values []Es_clear_cache_result_t) []string
 	return result
 }
 
-func (i Es_clear_cache_result_t) isMultiValue() bool {
+func (i EsClearCacheResultT) isMultiValue() bool {
 	return false
 }
 
 // es_cs_validation_category
 // [ESTypes.h:661]
-type Es_cs_validation_category_t int64
+type EsCsValidationCategoryT int32
 
 const (
-	ES_CS_VALIDATION_CATEGORY_INVALID       Es_cs_validation_category_t = 0
-	ES_CS_VALIDATION_CATEGORY_PLATFORM      Es_cs_validation_category_t = 1
-	ES_CS_VALIDATION_CATEGORY_TESTFLIGHT    Es_cs_validation_category_t = 2
-	ES_CS_VALIDATION_CATEGORY_DEVELOPMENT   Es_cs_validation_category_t = 3
-	ES_CS_VALIDATION_CATEGORY_APP_STORE     Es_cs_validation_category_t = 4
-	ES_CS_VALIDATION_CATEGORY_ENTERPRISE    Es_cs_validation_category_t = 5
-	ES_CS_VALIDATION_CATEGORY_DEVELOPER_ID  Es_cs_validation_category_t = 6
-	ES_CS_VALIDATION_CATEGORY_LOCAL_SIGNING Es_cs_validation_category_t = 7
-	ES_CS_VALIDATION_CATEGORY_ROSETTA       Es_cs_validation_category_t = 8
-	ES_CS_VALIDATION_CATEGORY_OOPJIT        Es_cs_validation_category_t = 9
-	ES_CS_VALIDATION_CATEGORY_NONE          Es_cs_validation_category_t = 10
+	ES_CS_VALIDATION_CATEGORY_INVALID       EsCsValidationCategoryT = 0
+	ES_CS_VALIDATION_CATEGORY_PLATFORM      EsCsValidationCategoryT = 1
+	ES_CS_VALIDATION_CATEGORY_TESTFLIGHT    EsCsValidationCategoryT = 2
+	ES_CS_VALIDATION_CATEGORY_DEVELOPMENT   EsCsValidationCategoryT = 3
+	ES_CS_VALIDATION_CATEGORY_APP_STORE     EsCsValidationCategoryT = 4
+	ES_CS_VALIDATION_CATEGORY_ENTERPRISE    EsCsValidationCategoryT = 5
+	ES_CS_VALIDATION_CATEGORY_DEVELOPER_ID  EsCsValidationCategoryT = 6
+	ES_CS_VALIDATION_CATEGORY_LOCAL_SIGNING EsCsValidationCategoryT = 7
+	ES_CS_VALIDATION_CATEGORY_ROSETTA       EsCsValidationCategoryT = 8
+	ES_CS_VALIDATION_CATEGORY_OOPJIT        EsCsValidationCategoryT = 9
+	ES_CS_VALIDATION_CATEGORY_NONE          EsCsValidationCategoryT = 10
 )
 
-func (i Es_cs_validation_category_t) String() string {
+func (i EsCsValidationCategoryT) String() string {
 	switch i {
 	case ES_CS_VALIDATION_CATEGORY_INVALID:
 		return "ES_CS_VALIDATION_CATEGORY_INVALID"
@@ -985,11 +985,11 @@ func (i Es_cs_validation_category_t) String() string {
 	case ES_CS_VALIDATION_CATEGORY_NONE:
 		return "ES_CS_VALIDATION_CATEGORY_NONE"
 	default:
-		return fmt.Sprintf("Es_cs_validation_category_t(%d)", int64(i))
+		return fmt.Sprintf("EsCsValidationCategoryT(%d)", int64(i))
 	}
 }
 
-func ParseEs_cs_validation_category_t(v string) (any, error) {
+func ParseEsCsValidationCategoryT(v string) (any, error) {
 	result := ES_CS_VALIDATION_CATEGORY_INVALID
 	switch v {
 	case "ES_CS_VALIDATION_CATEGORY_INVALID":
@@ -1020,7 +1020,7 @@ func ParseEs_cs_validation_category_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_cs_validation_category_t(values []Es_cs_validation_category_t) []string {
+func SerializeEsCsValidationCategoryT(values []EsCsValidationCategoryT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -1028,31 +1028,31 @@ func SerializeEs_cs_validation_category_t(values []Es_cs_validation_category_t) 
 	return result
 }
 
-func (i Es_cs_validation_category_t) isMultiValue() bool {
+func (i EsCsValidationCategoryT) isMultiValue() bool {
 	return false
 }
 
 // A type that indicates how a file event presents its destination to the client.
 // [ESTypes.h:705]
-type Es_destination_type_t int64
+type EsDestinationTypeT int32
 
 const (
-	ES_DESTINATION_TYPE_EXISTING_FILE Es_destination_type_t = 0
-	ES_DESTINATION_TYPE_NEW_PATH      Es_destination_type_t = 1
+	ES_DESTINATION_TYPE_EXISTING_FILE EsDestinationTypeT = 0
+	ES_DESTINATION_TYPE_NEW_PATH      EsDestinationTypeT = 1
 )
 
-func (i Es_destination_type_t) String() string {
+func (i EsDestinationTypeT) String() string {
 	switch i {
 	case ES_DESTINATION_TYPE_EXISTING_FILE:
 		return "ES_DESTINATION_TYPE_EXISTING_FILE"
 	case ES_DESTINATION_TYPE_NEW_PATH:
 		return "ES_DESTINATION_TYPE_NEW_PATH"
 	default:
-		return fmt.Sprintf("Es_destination_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsDestinationTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_destination_type_t(v string) (any, error) {
+func ParseEsDestinationTypeT(v string) (any, error) {
 	result := ES_DESTINATION_TYPE_EXISTING_FILE
 	switch v {
 	case "ES_DESTINATION_TYPE_EXISTING_FILE":
@@ -1065,7 +1065,7 @@ func ParseEs_destination_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_destination_type_t(values []Es_destination_type_t) []string {
+func SerializeEsDestinationTypeT(values []EsDestinationTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -1073,176 +1073,176 @@ func SerializeEs_destination_type_t(values []Es_destination_type_t) []string {
 	return result
 }
 
-func (i Es_destination_type_t) isMultiValue() bool {
+func (i EsDestinationTypeT) isMultiValue() bool {
 	return false
 }
 
 // A type used to identify a message’s event type and subscribe to events of that type.
 // [ESTypes.h:99]
-type Es_event_type_t int64
+type EsEventTypeT int32
 
 const (
-	ES_EVENT_TYPE_AUTH_EXEC                        Es_event_type_t = 0
-	ES_EVENT_TYPE_AUTH_OPEN                        Es_event_type_t = 1
-	ES_EVENT_TYPE_AUTH_KEXTLOAD                    Es_event_type_t = 2
-	ES_EVENT_TYPE_AUTH_MMAP                        Es_event_type_t = 3
-	ES_EVENT_TYPE_AUTH_MPROTECT                    Es_event_type_t = 4
-	ES_EVENT_TYPE_AUTH_MOUNT                       Es_event_type_t = 5
-	ES_EVENT_TYPE_AUTH_RENAME                      Es_event_type_t = 6
-	ES_EVENT_TYPE_AUTH_SIGNAL                      Es_event_type_t = 7
-	ES_EVENT_TYPE_AUTH_UNLINK                      Es_event_type_t = 8
-	ES_EVENT_TYPE_NOTIFY_EXEC                      Es_event_type_t = 9
-	ES_EVENT_TYPE_NOTIFY_OPEN                      Es_event_type_t = 10
-	ES_EVENT_TYPE_NOTIFY_FORK                      Es_event_type_t = 11
-	ES_EVENT_TYPE_NOTIFY_CLOSE                     Es_event_type_t = 12
-	ES_EVENT_TYPE_NOTIFY_CREATE                    Es_event_type_t = 13
-	ES_EVENT_TYPE_NOTIFY_EXCHANGEDATA              Es_event_type_t = 14
-	ES_EVENT_TYPE_NOTIFY_EXIT                      Es_event_type_t = 15
-	ES_EVENT_TYPE_NOTIFY_GET_TASK                  Es_event_type_t = 16
-	ES_EVENT_TYPE_NOTIFY_KEXTLOAD                  Es_event_type_t = 17
-	ES_EVENT_TYPE_NOTIFY_KEXTUNLOAD                Es_event_type_t = 18
-	ES_EVENT_TYPE_NOTIFY_LINK                      Es_event_type_t = 19
-	ES_EVENT_TYPE_NOTIFY_MMAP                      Es_event_type_t = 20
-	ES_EVENT_TYPE_NOTIFY_MPROTECT                  Es_event_type_t = 21
-	ES_EVENT_TYPE_NOTIFY_MOUNT                     Es_event_type_t = 22
-	ES_EVENT_TYPE_NOTIFY_UNMOUNT                   Es_event_type_t = 23
-	ES_EVENT_TYPE_NOTIFY_IOKIT_OPEN                Es_event_type_t = 24
-	ES_EVENT_TYPE_NOTIFY_RENAME                    Es_event_type_t = 25
-	ES_EVENT_TYPE_NOTIFY_SETATTRLIST               Es_event_type_t = 26
-	ES_EVENT_TYPE_NOTIFY_SETEXTATTR                Es_event_type_t = 27
-	ES_EVENT_TYPE_NOTIFY_SETFLAGS                  Es_event_type_t = 28
-	ES_EVENT_TYPE_NOTIFY_SETMODE                   Es_event_type_t = 29
-	ES_EVENT_TYPE_NOTIFY_SETOWNER                  Es_event_type_t = 30
-	ES_EVENT_TYPE_NOTIFY_SIGNAL                    Es_event_type_t = 31
-	ES_EVENT_TYPE_NOTIFY_UNLINK                    Es_event_type_t = 32
-	ES_EVENT_TYPE_NOTIFY_WRITE                     Es_event_type_t = 33
-	ES_EVENT_TYPE_AUTH_FILE_PROVIDER_MATERIALIZE   Es_event_type_t = 34
-	ES_EVENT_TYPE_NOTIFY_FILE_PROVIDER_MATERIALIZE Es_event_type_t = 35
-	ES_EVENT_TYPE_AUTH_FILE_PROVIDER_UPDATE        Es_event_type_t = 36
-	ES_EVENT_TYPE_NOTIFY_FILE_PROVIDER_UPDATE      Es_event_type_t = 37
-	ES_EVENT_TYPE_AUTH_READLINK                    Es_event_type_t = 38
-	ES_EVENT_TYPE_NOTIFY_READLINK                  Es_event_type_t = 39
-	ES_EVENT_TYPE_AUTH_TRUNCATE                    Es_event_type_t = 40
-	ES_EVENT_TYPE_NOTIFY_TRUNCATE                  Es_event_type_t = 41
-	ES_EVENT_TYPE_AUTH_LINK                        Es_event_type_t = 42
-	ES_EVENT_TYPE_NOTIFY_LOOKUP                    Es_event_type_t = 43
-	ES_EVENT_TYPE_AUTH_CREATE                      Es_event_type_t = 44
-	ES_EVENT_TYPE_AUTH_SETATTRLIST                 Es_event_type_t = 45
-	ES_EVENT_TYPE_AUTH_SETEXTATTR                  Es_event_type_t = 46
-	ES_EVENT_TYPE_AUTH_SETFLAGS                    Es_event_type_t = 47
-	ES_EVENT_TYPE_AUTH_SETMODE                     Es_event_type_t = 48
-	ES_EVENT_TYPE_AUTH_SETOWNER                    Es_event_type_t = 49
-	ES_EVENT_TYPE_AUTH_CHDIR                       Es_event_type_t = 50
-	ES_EVENT_TYPE_NOTIFY_CHDIR                     Es_event_type_t = 51
-	ES_EVENT_TYPE_AUTH_GETATTRLIST                 Es_event_type_t = 52
-	ES_EVENT_TYPE_NOTIFY_GETATTRLIST               Es_event_type_t = 53
-	ES_EVENT_TYPE_NOTIFY_STAT                      Es_event_type_t = 54
-	ES_EVENT_TYPE_NOTIFY_ACCESS                    Es_event_type_t = 55
-	ES_EVENT_TYPE_AUTH_CHROOT                      Es_event_type_t = 56
-	ES_EVENT_TYPE_NOTIFY_CHROOT                    Es_event_type_t = 57
-	ES_EVENT_TYPE_AUTH_UTIMES                      Es_event_type_t = 58
-	ES_EVENT_TYPE_NOTIFY_UTIMES                    Es_event_type_t = 59
-	ES_EVENT_TYPE_AUTH_CLONE                       Es_event_type_t = 60
-	ES_EVENT_TYPE_NOTIFY_CLONE                     Es_event_type_t = 61
-	ES_EVENT_TYPE_NOTIFY_FCNTL                     Es_event_type_t = 62
-	ES_EVENT_TYPE_AUTH_GETEXTATTR                  Es_event_type_t = 63
-	ES_EVENT_TYPE_NOTIFY_GETEXTATTR                Es_event_type_t = 64
-	ES_EVENT_TYPE_AUTH_LISTEXTATTR                 Es_event_type_t = 65
-	ES_EVENT_TYPE_NOTIFY_LISTEXTATTR               Es_event_type_t = 66
-	ES_EVENT_TYPE_AUTH_READDIR                     Es_event_type_t = 67
-	ES_EVENT_TYPE_NOTIFY_READDIR                   Es_event_type_t = 68
-	ES_EVENT_TYPE_AUTH_DELETEEXTATTR               Es_event_type_t = 69
-	ES_EVENT_TYPE_NOTIFY_DELETEEXTATTR             Es_event_type_t = 70
-	ES_EVENT_TYPE_AUTH_FSGETPATH                   Es_event_type_t = 71
-	ES_EVENT_TYPE_NOTIFY_FSGETPATH                 Es_event_type_t = 72
-	ES_EVENT_TYPE_NOTIFY_DUP                       Es_event_type_t = 73
-	ES_EVENT_TYPE_AUTH_SETTIME                     Es_event_type_t = 74
-	ES_EVENT_TYPE_NOTIFY_SETTIME                   Es_event_type_t = 75
-	ES_EVENT_TYPE_NOTIFY_UIPC_BIND                 Es_event_type_t = 76
-	ES_EVENT_TYPE_AUTH_UIPC_BIND                   Es_event_type_t = 77
-	ES_EVENT_TYPE_NOTIFY_UIPC_CONNECT              Es_event_type_t = 78
-	ES_EVENT_TYPE_AUTH_UIPC_CONNECT                Es_event_type_t = 79
-	ES_EVENT_TYPE_AUTH_EXCHANGEDATA                Es_event_type_t = 80
-	ES_EVENT_TYPE_AUTH_SETACL                      Es_event_type_t = 81
-	ES_EVENT_TYPE_NOTIFY_SETACL                    Es_event_type_t = 82
-	ES_EVENT_TYPE_NOTIFY_PTY_GRANT                 Es_event_type_t = 83
-	ES_EVENT_TYPE_NOTIFY_PTY_CLOSE                 Es_event_type_t = 84
-	ES_EVENT_TYPE_AUTH_PROC_CHECK                  Es_event_type_t = 85
-	ES_EVENT_TYPE_NOTIFY_PROC_CHECK                Es_event_type_t = 86
-	ES_EVENT_TYPE_AUTH_GET_TASK                    Es_event_type_t = 87
-	ES_EVENT_TYPE_AUTH_SEARCHFS                    Es_event_type_t = 88
-	ES_EVENT_TYPE_NOTIFY_SEARCHFS                  Es_event_type_t = 89
-	ES_EVENT_TYPE_AUTH_FCNTL                       Es_event_type_t = 90
-	ES_EVENT_TYPE_AUTH_IOKIT_OPEN                  Es_event_type_t = 91
-	ES_EVENT_TYPE_AUTH_PROC_SUSPEND_RESUME         Es_event_type_t = 92
-	ES_EVENT_TYPE_NOTIFY_PROC_SUSPEND_RESUME       Es_event_type_t = 93
-	ES_EVENT_TYPE_NOTIFY_CS_INVALIDATED            Es_event_type_t = 94
-	ES_EVENT_TYPE_NOTIFY_GET_TASK_NAME             Es_event_type_t = 95
-	ES_EVENT_TYPE_NOTIFY_TRACE                     Es_event_type_t = 96
-	ES_EVENT_TYPE_NOTIFY_REMOTE_THREAD_CREATE      Es_event_type_t = 97
-	ES_EVENT_TYPE_AUTH_REMOUNT                     Es_event_type_t = 98
-	ES_EVENT_TYPE_NOTIFY_REMOUNT                   Es_event_type_t = 99
-	ES_EVENT_TYPE_AUTH_GET_TASK_READ               Es_event_type_t = 100
-	ES_EVENT_TYPE_NOTIFY_GET_TASK_READ             Es_event_type_t = 101
-	ES_EVENT_TYPE_NOTIFY_GET_TASK_INSPECT          Es_event_type_t = 102
-	ES_EVENT_TYPE_NOTIFY_SETUID                    Es_event_type_t = 103
-	ES_EVENT_TYPE_NOTIFY_SETGID                    Es_event_type_t = 104
-	ES_EVENT_TYPE_NOTIFY_SETEUID                   Es_event_type_t = 105
-	ES_EVENT_TYPE_NOTIFY_SETEGID                   Es_event_type_t = 106
-	ES_EVENT_TYPE_NOTIFY_SETREUID                  Es_event_type_t = 107
-	ES_EVENT_TYPE_NOTIFY_SETREGID                  Es_event_type_t = 108
-	ES_EVENT_TYPE_AUTH_COPYFILE                    Es_event_type_t = 109
-	ES_EVENT_TYPE_NOTIFY_COPYFILE                  Es_event_type_t = 110
-	ES_EVENT_TYPE_NOTIFY_AUTHENTICATION            Es_event_type_t = 111
-	ES_EVENT_TYPE_NOTIFY_XP_MALWARE_DETECTED       Es_event_type_t = 112
-	ES_EVENT_TYPE_NOTIFY_XP_MALWARE_REMEDIATED     Es_event_type_t = 113
-	ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOGIN          Es_event_type_t = 114
-	ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOGOUT         Es_event_type_t = 115
-	ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOCK           Es_event_type_t = 116
-	ES_EVENT_TYPE_NOTIFY_LW_SESSION_UNLOCK         Es_event_type_t = 117
-	ES_EVENT_TYPE_NOTIFY_SCREENSHARING_ATTACH      Es_event_type_t = 118
-	ES_EVENT_TYPE_NOTIFY_SCREENSHARING_DETACH      Es_event_type_t = 119
-	ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGIN             Es_event_type_t = 120
-	ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGOUT            Es_event_type_t = 121
-	ES_EVENT_TYPE_NOTIFY_LOGIN_LOGIN               Es_event_type_t = 122
-	ES_EVENT_TYPE_NOTIFY_LOGIN_LOGOUT              Es_event_type_t = 123
-	ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_ADD       Es_event_type_t = 124
-	ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_REMOVE    Es_event_type_t = 125
-	ES_EVENT_TYPE_NOTIFY_PROFILE_ADD               Es_event_type_t = 126
-	ES_EVENT_TYPE_NOTIFY_PROFILE_REMOVE            Es_event_type_t = 127
-	ES_EVENT_TYPE_NOTIFY_SU                        Es_event_type_t = 128
-	ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_PETITION    Es_event_type_t = 129
-	ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_JUDGEMENT   Es_event_type_t = 130
-	ES_EVENT_TYPE_NOTIFY_SUDO                      Es_event_type_t = 131
-	ES_EVENT_TYPE_NOTIFY_OD_GROUP_ADD              Es_event_type_t = 132
-	ES_EVENT_TYPE_NOTIFY_OD_GROUP_REMOVE           Es_event_type_t = 133
-	ES_EVENT_TYPE_NOTIFY_OD_GROUP_SET              Es_event_type_t = 134
-	ES_EVENT_TYPE_NOTIFY_OD_MODIFY_PASSWORD        Es_event_type_t = 135
-	ES_EVENT_TYPE_NOTIFY_OD_DISABLE_USER           Es_event_type_t = 136
-	ES_EVENT_TYPE_NOTIFY_OD_ENABLE_USER            Es_event_type_t = 137
-	ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_VALUE_ADD    Es_event_type_t = 138
-	ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_VALUE_REMOVE Es_event_type_t = 139
-	ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_SET          Es_event_type_t = 140
-	ES_EVENT_TYPE_NOTIFY_OD_CREATE_USER            Es_event_type_t = 141
-	ES_EVENT_TYPE_NOTIFY_OD_CREATE_GROUP           Es_event_type_t = 142
-	ES_EVENT_TYPE_NOTIFY_OD_DELETE_USER            Es_event_type_t = 143
-	ES_EVENT_TYPE_NOTIFY_OD_DELETE_GROUP           Es_event_type_t = 144
-	ES_EVENT_TYPE_NOTIFY_XPC_CONNECT               Es_event_type_t = 145
-	ES_EVENT_TYPE_NOTIFY_GATEKEEPER_USER_OVERRIDE  Es_event_type_t = 146
-	ES_EVENT_TYPE_NOTIFY_TCC_MODIFY                Es_event_type_t = 147
-	ES_EVENT_TYPE_RESERVED_0                       Es_event_type_t = 148
-	ES_EVENT_TYPE_RESERVED_1                       Es_event_type_t = 149
-	ES_EVENT_TYPE_RESERVED_2                       Es_event_type_t = 150
-	ES_EVENT_TYPE_RESERVED_3                       Es_event_type_t = 151
-	ES_EVENT_TYPE_RESERVED_4                       Es_event_type_t = 152
-	ES_EVENT_TYPE_RESERVED_5                       Es_event_type_t = 153
-	ES_EVENT_TYPE_RESERVED_6                       Es_event_type_t = 154
-	ES_EVENT_TYPE_RESERVED_7                       Es_event_type_t = 155
-	ES_EVENT_TYPE_RESERVED_8                       Es_event_type_t = 156
-	ES_EVENT_TYPE_LAST                             Es_event_type_t = 157
+	ES_EVENT_TYPE_AUTH_EXEC                        EsEventTypeT = 0
+	ES_EVENT_TYPE_AUTH_OPEN                        EsEventTypeT = 1
+	ES_EVENT_TYPE_AUTH_KEXTLOAD                    EsEventTypeT = 2
+	ES_EVENT_TYPE_AUTH_MMAP                        EsEventTypeT = 3
+	ES_EVENT_TYPE_AUTH_MPROTECT                    EsEventTypeT = 4
+	ES_EVENT_TYPE_AUTH_MOUNT                       EsEventTypeT = 5
+	ES_EVENT_TYPE_AUTH_RENAME                      EsEventTypeT = 6
+	ES_EVENT_TYPE_AUTH_SIGNAL                      EsEventTypeT = 7
+	ES_EVENT_TYPE_AUTH_UNLINK                      EsEventTypeT = 8
+	ES_EVENT_TYPE_NOTIFY_EXEC                      EsEventTypeT = 9
+	ES_EVENT_TYPE_NOTIFY_OPEN                      EsEventTypeT = 10
+	ES_EVENT_TYPE_NOTIFY_FORK                      EsEventTypeT = 11
+	ES_EVENT_TYPE_NOTIFY_CLOSE                     EsEventTypeT = 12
+	ES_EVENT_TYPE_NOTIFY_CREATE                    EsEventTypeT = 13
+	ES_EVENT_TYPE_NOTIFY_EXCHANGEDATA              EsEventTypeT = 14
+	ES_EVENT_TYPE_NOTIFY_EXIT                      EsEventTypeT = 15
+	ES_EVENT_TYPE_NOTIFY_GET_TASK                  EsEventTypeT = 16
+	ES_EVENT_TYPE_NOTIFY_KEXTLOAD                  EsEventTypeT = 17
+	ES_EVENT_TYPE_NOTIFY_KEXTUNLOAD                EsEventTypeT = 18
+	ES_EVENT_TYPE_NOTIFY_LINK                      EsEventTypeT = 19
+	ES_EVENT_TYPE_NOTIFY_MMAP                      EsEventTypeT = 20
+	ES_EVENT_TYPE_NOTIFY_MPROTECT                  EsEventTypeT = 21
+	ES_EVENT_TYPE_NOTIFY_MOUNT                     EsEventTypeT = 22
+	ES_EVENT_TYPE_NOTIFY_UNMOUNT                   EsEventTypeT = 23
+	ES_EVENT_TYPE_NOTIFY_IOKIT_OPEN                EsEventTypeT = 24
+	ES_EVENT_TYPE_NOTIFY_RENAME                    EsEventTypeT = 25
+	ES_EVENT_TYPE_NOTIFY_SETATTRLIST               EsEventTypeT = 26
+	ES_EVENT_TYPE_NOTIFY_SETEXTATTR                EsEventTypeT = 27
+	ES_EVENT_TYPE_NOTIFY_SETFLAGS                  EsEventTypeT = 28
+	ES_EVENT_TYPE_NOTIFY_SETMODE                   EsEventTypeT = 29
+	ES_EVENT_TYPE_NOTIFY_SETOWNER                  EsEventTypeT = 30
+	ES_EVENT_TYPE_NOTIFY_SIGNAL                    EsEventTypeT = 31
+	ES_EVENT_TYPE_NOTIFY_UNLINK                    EsEventTypeT = 32
+	ES_EVENT_TYPE_NOTIFY_WRITE                     EsEventTypeT = 33
+	ES_EVENT_TYPE_AUTH_FILE_PROVIDER_MATERIALIZE   EsEventTypeT = 34
+	ES_EVENT_TYPE_NOTIFY_FILE_PROVIDER_MATERIALIZE EsEventTypeT = 35
+	ES_EVENT_TYPE_AUTH_FILE_PROVIDER_UPDATE        EsEventTypeT = 36
+	ES_EVENT_TYPE_NOTIFY_FILE_PROVIDER_UPDATE      EsEventTypeT = 37
+	ES_EVENT_TYPE_AUTH_READLINK                    EsEventTypeT = 38
+	ES_EVENT_TYPE_NOTIFY_READLINK                  EsEventTypeT = 39
+	ES_EVENT_TYPE_AUTH_TRUNCATE                    EsEventTypeT = 40
+	ES_EVENT_TYPE_NOTIFY_TRUNCATE                  EsEventTypeT = 41
+	ES_EVENT_TYPE_AUTH_LINK                        EsEventTypeT = 42
+	ES_EVENT_TYPE_NOTIFY_LOOKUP                    EsEventTypeT = 43
+	ES_EVENT_TYPE_AUTH_CREATE                      EsEventTypeT = 44
+	ES_EVENT_TYPE_AUTH_SETATTRLIST                 EsEventTypeT = 45
+	ES_EVENT_TYPE_AUTH_SETEXTATTR                  EsEventTypeT = 46
+	ES_EVENT_TYPE_AUTH_SETFLAGS                    EsEventTypeT = 47
+	ES_EVENT_TYPE_AUTH_SETMODE                     EsEventTypeT = 48
+	ES_EVENT_TYPE_AUTH_SETOWNER                    EsEventTypeT = 49
+	ES_EVENT_TYPE_AUTH_CHDIR                       EsEventTypeT = 50
+	ES_EVENT_TYPE_NOTIFY_CHDIR                     EsEventTypeT = 51
+	ES_EVENT_TYPE_AUTH_GETATTRLIST                 EsEventTypeT = 52
+	ES_EVENT_TYPE_NOTIFY_GETATTRLIST               EsEventTypeT = 53
+	ES_EVENT_TYPE_NOTIFY_STAT                      EsEventTypeT = 54
+	ES_EVENT_TYPE_NOTIFY_ACCESS                    EsEventTypeT = 55
+	ES_EVENT_TYPE_AUTH_CHROOT                      EsEventTypeT = 56
+	ES_EVENT_TYPE_NOTIFY_CHROOT                    EsEventTypeT = 57
+	ES_EVENT_TYPE_AUTH_UTIMES                      EsEventTypeT = 58
+	ES_EVENT_TYPE_NOTIFY_UTIMES                    EsEventTypeT = 59
+	ES_EVENT_TYPE_AUTH_CLONE                       EsEventTypeT = 60
+	ES_EVENT_TYPE_NOTIFY_CLONE                     EsEventTypeT = 61
+	ES_EVENT_TYPE_NOTIFY_FCNTL                     EsEventTypeT = 62
+	ES_EVENT_TYPE_AUTH_GETEXTATTR                  EsEventTypeT = 63
+	ES_EVENT_TYPE_NOTIFY_GETEXTATTR                EsEventTypeT = 64
+	ES_EVENT_TYPE_AUTH_LISTEXTATTR                 EsEventTypeT = 65
+	ES_EVENT_TYPE_NOTIFY_LISTEXTATTR               EsEventTypeT = 66
+	ES_EVENT_TYPE_AUTH_READDIR                     EsEventTypeT = 67
+	ES_EVENT_TYPE_NOTIFY_READDIR                   EsEventTypeT = 68
+	ES_EVENT_TYPE_AUTH_DELETEEXTATTR               EsEventTypeT = 69
+	ES_EVENT_TYPE_NOTIFY_DELETEEXTATTR             EsEventTypeT = 70
+	ES_EVENT_TYPE_AUTH_FSGETPATH                   EsEventTypeT = 71
+	ES_EVENT_TYPE_NOTIFY_FSGETPATH                 EsEventTypeT = 72
+	ES_EVENT_TYPE_NOTIFY_DUP                       EsEventTypeT = 73
+	ES_EVENT_TYPE_AUTH_SETTIME                     EsEventTypeT = 74
+	ES_EVENT_TYPE_NOTIFY_SETTIME                   EsEventTypeT = 75
+	ES_EVENT_TYPE_NOTIFY_UIPC_BIND                 EsEventTypeT = 76
+	ES_EVENT_TYPE_AUTH_UIPC_BIND                   EsEventTypeT = 77
+	ES_EVENT_TYPE_NOTIFY_UIPC_CONNECT              EsEventTypeT = 78
+	ES_EVENT_TYPE_AUTH_UIPC_CONNECT                EsEventTypeT = 79
+	ES_EVENT_TYPE_AUTH_EXCHANGEDATA                EsEventTypeT = 80
+	ES_EVENT_TYPE_AUTH_SETACL                      EsEventTypeT = 81
+	ES_EVENT_TYPE_NOTIFY_SETACL                    EsEventTypeT = 82
+	ES_EVENT_TYPE_NOTIFY_PTY_GRANT                 EsEventTypeT = 83
+	ES_EVENT_TYPE_NOTIFY_PTY_CLOSE                 EsEventTypeT = 84
+	ES_EVENT_TYPE_AUTH_PROC_CHECK                  EsEventTypeT = 85
+	ES_EVENT_TYPE_NOTIFY_PROC_CHECK                EsEventTypeT = 86
+	ES_EVENT_TYPE_AUTH_GET_TASK                    EsEventTypeT = 87
+	ES_EVENT_TYPE_AUTH_SEARCHFS                    EsEventTypeT = 88
+	ES_EVENT_TYPE_NOTIFY_SEARCHFS                  EsEventTypeT = 89
+	ES_EVENT_TYPE_AUTH_FCNTL                       EsEventTypeT = 90
+	ES_EVENT_TYPE_AUTH_IOKIT_OPEN                  EsEventTypeT = 91
+	ES_EVENT_TYPE_AUTH_PROC_SUSPEND_RESUME         EsEventTypeT = 92
+	ES_EVENT_TYPE_NOTIFY_PROC_SUSPEND_RESUME       EsEventTypeT = 93
+	ES_EVENT_TYPE_NOTIFY_CS_INVALIDATED            EsEventTypeT = 94
+	ES_EVENT_TYPE_NOTIFY_GET_TASK_NAME             EsEventTypeT = 95
+	ES_EVENT_TYPE_NOTIFY_TRACE                     EsEventTypeT = 96
+	ES_EVENT_TYPE_NOTIFY_REMOTE_THREAD_CREATE      EsEventTypeT = 97
+	ES_EVENT_TYPE_AUTH_REMOUNT                     EsEventTypeT = 98
+	ES_EVENT_TYPE_NOTIFY_REMOUNT                   EsEventTypeT = 99
+	ES_EVENT_TYPE_AUTH_GET_TASK_READ               EsEventTypeT = 100
+	ES_EVENT_TYPE_NOTIFY_GET_TASK_READ             EsEventTypeT = 101
+	ES_EVENT_TYPE_NOTIFY_GET_TASK_INSPECT          EsEventTypeT = 102
+	ES_EVENT_TYPE_NOTIFY_SETUID                    EsEventTypeT = 103
+	ES_EVENT_TYPE_NOTIFY_SETGID                    EsEventTypeT = 104
+	ES_EVENT_TYPE_NOTIFY_SETEUID                   EsEventTypeT = 105
+	ES_EVENT_TYPE_NOTIFY_SETEGID                   EsEventTypeT = 106
+	ES_EVENT_TYPE_NOTIFY_SETREUID                  EsEventTypeT = 107
+	ES_EVENT_TYPE_NOTIFY_SETREGID                  EsEventTypeT = 108
+	ES_EVENT_TYPE_AUTH_COPYFILE                    EsEventTypeT = 109
+	ES_EVENT_TYPE_NOTIFY_COPYFILE                  EsEventTypeT = 110
+	ES_EVENT_TYPE_NOTIFY_AUTHENTICATION            EsEventTypeT = 111
+	ES_EVENT_TYPE_NOTIFY_XP_MALWARE_DETECTED       EsEventTypeT = 112
+	ES_EVENT_TYPE_NOTIFY_XP_MALWARE_REMEDIATED     EsEventTypeT = 113
+	ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOGIN          EsEventTypeT = 114
+	ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOGOUT         EsEventTypeT = 115
+	ES_EVENT_TYPE_NOTIFY_LW_SESSION_LOCK           EsEventTypeT = 116
+	ES_EVENT_TYPE_NOTIFY_LW_SESSION_UNLOCK         EsEventTypeT = 117
+	ES_EVENT_TYPE_NOTIFY_SCREENSHARING_ATTACH      EsEventTypeT = 118
+	ES_EVENT_TYPE_NOTIFY_SCREENSHARING_DETACH      EsEventTypeT = 119
+	ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGIN             EsEventTypeT = 120
+	ES_EVENT_TYPE_NOTIFY_OPENSSH_LOGOUT            EsEventTypeT = 121
+	ES_EVENT_TYPE_NOTIFY_LOGIN_LOGIN               EsEventTypeT = 122
+	ES_EVENT_TYPE_NOTIFY_LOGIN_LOGOUT              EsEventTypeT = 123
+	ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_ADD       EsEventTypeT = 124
+	ES_EVENT_TYPE_NOTIFY_BTM_LAUNCH_ITEM_REMOVE    EsEventTypeT = 125
+	ES_EVENT_TYPE_NOTIFY_PROFILE_ADD               EsEventTypeT = 126
+	ES_EVENT_TYPE_NOTIFY_PROFILE_REMOVE            EsEventTypeT = 127
+	ES_EVENT_TYPE_NOTIFY_SU                        EsEventTypeT = 128
+	ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_PETITION    EsEventTypeT = 129
+	ES_EVENT_TYPE_NOTIFY_AUTHORIZATION_JUDGEMENT   EsEventTypeT = 130
+	ES_EVENT_TYPE_NOTIFY_SUDO                      EsEventTypeT = 131
+	ES_EVENT_TYPE_NOTIFY_OD_GROUP_ADD              EsEventTypeT = 132
+	ES_EVENT_TYPE_NOTIFY_OD_GROUP_REMOVE           EsEventTypeT = 133
+	ES_EVENT_TYPE_NOTIFY_OD_GROUP_SET              EsEventTypeT = 134
+	ES_EVENT_TYPE_NOTIFY_OD_MODIFY_PASSWORD        EsEventTypeT = 135
+	ES_EVENT_TYPE_NOTIFY_OD_DISABLE_USER           EsEventTypeT = 136
+	ES_EVENT_TYPE_NOTIFY_OD_ENABLE_USER            EsEventTypeT = 137
+	ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_VALUE_ADD    EsEventTypeT = 138
+	ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_VALUE_REMOVE EsEventTypeT = 139
+	ES_EVENT_TYPE_NOTIFY_OD_ATTRIBUTE_SET          EsEventTypeT = 140
+	ES_EVENT_TYPE_NOTIFY_OD_CREATE_USER            EsEventTypeT = 141
+	ES_EVENT_TYPE_NOTIFY_OD_CREATE_GROUP           EsEventTypeT = 142
+	ES_EVENT_TYPE_NOTIFY_OD_DELETE_USER            EsEventTypeT = 143
+	ES_EVENT_TYPE_NOTIFY_OD_DELETE_GROUP           EsEventTypeT = 144
+	ES_EVENT_TYPE_NOTIFY_XPC_CONNECT               EsEventTypeT = 145
+	ES_EVENT_TYPE_NOTIFY_GATEKEEPER_USER_OVERRIDE  EsEventTypeT = 146
+	ES_EVENT_TYPE_NOTIFY_TCC_MODIFY                EsEventTypeT = 147
+	ES_EVENT_TYPE_RESERVED_0                       EsEventTypeT = 148
+	ES_EVENT_TYPE_RESERVED_1                       EsEventTypeT = 149
+	ES_EVENT_TYPE_RESERVED_2                       EsEventTypeT = 150
+	ES_EVENT_TYPE_RESERVED_3                       EsEventTypeT = 151
+	ES_EVENT_TYPE_RESERVED_4                       EsEventTypeT = 152
+	ES_EVENT_TYPE_RESERVED_5                       EsEventTypeT = 153
+	ES_EVENT_TYPE_RESERVED_6                       EsEventTypeT = 154
+	ES_EVENT_TYPE_RESERVED_7                       EsEventTypeT = 155
+	ES_EVENT_TYPE_RESERVED_8                       EsEventTypeT = 156
+	ES_EVENT_TYPE_LAST                             EsEventTypeT = 157
 )
 
-func (i Es_event_type_t) String() string {
+func (i EsEventTypeT) String() string {
 	switch i {
 	case ES_EVENT_TYPE_AUTH_EXEC:
 		return "ES_EVENT_TYPE_AUTH_EXEC"
@@ -1561,11 +1561,11 @@ func (i Es_event_type_t) String() string {
 	case ES_EVENT_TYPE_LAST:
 		return "ES_EVENT_TYPE_LAST"
 	default:
-		return fmt.Sprintf("Es_event_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsEventTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_event_type_t(v string) (any, error) {
+func ParseEsEventTypeT(v string) (any, error) {
 	result := ES_EVENT_TYPE_AUTH_EXEC
 	switch v {
 	case "ES_EVENT_TYPE_AUTH_EXEC":
@@ -1890,7 +1890,7 @@ func ParseEs_event_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_event_type_t(values []Es_event_type_t) []string {
+func SerializeEsEventTypeT(values []EsEventTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -1898,32 +1898,32 @@ func SerializeEs_event_type_t(values []Es_event_type_t) []string {
 	return result
 }
 
-func (i Es_event_type_t) isMultiValue() bool {
+func (i EsEventTypeT) isMultiValue() bool {
 	return false
 }
 
 // [ESTypes.h:568]
-type Es_gatekeeper_user_override_file_type_t int64
+type EsGatekeeperUserOverrideFileTypeT int32
 
 const (
 	// Signals that file is a string of a path since file could not be resolved on disk at time of event submission
-	ES_GATEKEEPER_USER_OVERRIDE_FILE_TYPE_PATH Es_gatekeeper_user_override_file_type_t = 0
+	ES_GATEKEEPER_USER_OVERRIDE_FILE_TYPE_PATH EsGatekeeperUserOverrideFileTypeT = 0
 	// Signals that file is a es_file_t
-	ES_GATEKEEPER_USER_OVERRIDE_FILE_TYPE_FILE Es_gatekeeper_user_override_file_type_t = 1
+	ES_GATEKEEPER_USER_OVERRIDE_FILE_TYPE_FILE EsGatekeeperUserOverrideFileTypeT = 1
 )
 
-func (i Es_gatekeeper_user_override_file_type_t) String() string {
+func (i EsGatekeeperUserOverrideFileTypeT) String() string {
 	switch i {
 	case ES_GATEKEEPER_USER_OVERRIDE_FILE_TYPE_PATH:
 		return "ES_GATEKEEPER_USER_OVERRIDE_FILE_TYPE_PATH"
 	case ES_GATEKEEPER_USER_OVERRIDE_FILE_TYPE_FILE:
 		return "ES_GATEKEEPER_USER_OVERRIDE_FILE_TYPE_FILE"
 	default:
-		return fmt.Sprintf("Es_gatekeeper_user_override_file_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsGatekeeperUserOverrideFileTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_gatekeeper_user_override_file_type_t(v string) (any, error) {
+func ParseEsGatekeeperUserOverrideFileTypeT(v string) (any, error) {
 	result := ES_GATEKEEPER_USER_OVERRIDE_FILE_TYPE_PATH
 	switch v {
 	case "ES_GATEKEEPER_USER_OVERRIDE_FILE_TYPE_PATH":
@@ -1936,7 +1936,7 @@ func ParseEs_gatekeeper_user_override_file_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_gatekeeper_user_override_file_type_t(values []Es_gatekeeper_user_override_file_type_t) []string {
+func SerializeEsGatekeeperUserOverrideFileTypeT(values []EsGatekeeperUserOverrideFileTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -1944,21 +1944,21 @@ func SerializeEs_gatekeeper_user_override_file_type_t(values []Es_gatekeeper_use
 	return result
 }
 
-func (i Es_gatekeeper_user_override_file_type_t) isMultiValue() bool {
+func (i EsGatekeeperUserOverrideFileTypeT) isMultiValue() bool {
 	return false
 }
 
 // es_get_task_type_t See es_event_get_task_t
 // [ESTypes.h:715]
-type Es_get_task_type_t int64
+type EsGetTaskTypeT int32
 
 const (
-	ES_GET_TASK_TYPE_TASK_FOR_PID   Es_get_task_type_t = 0
-	ES_GET_TASK_TYPE_EXPOSE_TASK    Es_get_task_type_t = 1
-	ES_GET_TASK_TYPE_IDENTITY_TOKEN Es_get_task_type_t = 2
+	ES_GET_TASK_TYPE_TASK_FOR_PID   EsGetTaskTypeT = 0
+	ES_GET_TASK_TYPE_EXPOSE_TASK    EsGetTaskTypeT = 1
+	ES_GET_TASK_TYPE_IDENTITY_TOKEN EsGetTaskTypeT = 2
 )
 
-func (i Es_get_task_type_t) String() string {
+func (i EsGetTaskTypeT) String() string {
 	switch i {
 	case ES_GET_TASK_TYPE_TASK_FOR_PID:
 		return "ES_GET_TASK_TYPE_TASK_FOR_PID"
@@ -1967,11 +1967,11 @@ func (i Es_get_task_type_t) String() string {
 	case ES_GET_TASK_TYPE_IDENTITY_TOKEN:
 		return "ES_GET_TASK_TYPE_IDENTITY_TOKEN"
 	default:
-		return fmt.Sprintf("Es_get_task_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsGetTaskTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_get_task_type_t(v string) (any, error) {
+func ParseEsGetTaskTypeT(v string) (any, error) {
 	result := ES_GET_TASK_TYPE_TASK_FOR_PID
 	switch v {
 	case "ES_GET_TASK_TYPE_TASK_FOR_PID":
@@ -1986,7 +1986,7 @@ func ParseEs_get_task_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_get_task_type_t(values []Es_get_task_type_t) []string {
+func SerializeEsGetTaskTypeT(values []EsGetTaskTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -1994,24 +1994,24 @@ func SerializeEs_get_task_type_t(values []Es_get_task_type_t) []string {
 	return result
 }
 
-func (i Es_get_task_type_t) isMultiValue() bool {
+func (i EsGetTaskTypeT) isMultiValue() bool {
 	return false
 }
 
 // es_mount_disposition_t See es_event_mount_t
 // [ESTypes.h:753]
-type Es_mount_disposition_t int64
+type EsMountDispositionT int32
 
 const (
-	ES_MOUNT_DISPOSITION_EXTERNAL Es_mount_disposition_t = 0
-	ES_MOUNT_DISPOSITION_INTERNAL Es_mount_disposition_t = 1
-	ES_MOUNT_DISPOSITION_NETWORK  Es_mount_disposition_t = 2
-	ES_MOUNT_DISPOSITION_VIRTUAL  Es_mount_disposition_t = 3
-	ES_MOUNT_DISPOSITION_NULLFS   Es_mount_disposition_t = 4
-	ES_MOUNT_DISPOSITION_UNKNOWN  Es_mount_disposition_t = 5
+	ES_MOUNT_DISPOSITION_EXTERNAL EsMountDispositionT = 0
+	ES_MOUNT_DISPOSITION_INTERNAL EsMountDispositionT = 1
+	ES_MOUNT_DISPOSITION_NETWORK  EsMountDispositionT = 2
+	ES_MOUNT_DISPOSITION_VIRTUAL  EsMountDispositionT = 3
+	ES_MOUNT_DISPOSITION_NULLFS   EsMountDispositionT = 4
+	ES_MOUNT_DISPOSITION_UNKNOWN  EsMountDispositionT = 5
 )
 
-func (i Es_mount_disposition_t) String() string {
+func (i EsMountDispositionT) String() string {
 	switch i {
 	case ES_MOUNT_DISPOSITION_EXTERNAL:
 		return "ES_MOUNT_DISPOSITION_EXTERNAL"
@@ -2026,11 +2026,11 @@ func (i Es_mount_disposition_t) String() string {
 	case ES_MOUNT_DISPOSITION_UNKNOWN:
 		return "ES_MOUNT_DISPOSITION_UNKNOWN"
 	default:
-		return fmt.Sprintf("Es_mount_disposition_t(%d)", int64(i))
+		return fmt.Sprintf("EsMountDispositionT(%d)", int64(i))
 	}
 }
 
-func ParseEs_mount_disposition_t(v string) (any, error) {
+func ParseEsMountDispositionT(v string) (any, error) {
 	result := ES_MOUNT_DISPOSITION_EXTERNAL
 	switch v {
 	case "ES_MOUNT_DISPOSITION_EXTERNAL":
@@ -2051,7 +2051,7 @@ func ParseEs_mount_disposition_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_mount_disposition_t(values []Es_mount_disposition_t) []string {
+func SerializeEsMountDispositionT(values []EsMountDispositionT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2059,21 +2059,21 @@ func SerializeEs_mount_disposition_t(values []Es_mount_disposition_t) []string {
 	return result
 }
 
-func (i Es_mount_disposition_t) isMultiValue() bool {
+func (i EsMountDispositionT) isMultiValue() bool {
 	return false
 }
 
 // [ESTypes.h:502]
-type Es_mute_inversion_type_t int64
+type EsMuteInversionTypeT int32
 
 const (
-	ES_MUTE_INVERSION_TYPE_PROCESS     Es_mute_inversion_type_t = 0
-	ES_MUTE_INVERSION_TYPE_PATH        Es_mute_inversion_type_t = 1
-	ES_MUTE_INVERSION_TYPE_TARGET_PATH Es_mute_inversion_type_t = 2
-	ES_MUTE_INVERSION_TYPE_LAST        Es_mute_inversion_type_t = 3
+	ES_MUTE_INVERSION_TYPE_PROCESS     EsMuteInversionTypeT = 0
+	ES_MUTE_INVERSION_TYPE_PATH        EsMuteInversionTypeT = 1
+	ES_MUTE_INVERSION_TYPE_TARGET_PATH EsMuteInversionTypeT = 2
+	ES_MUTE_INVERSION_TYPE_LAST        EsMuteInversionTypeT = 3
 )
 
-func (i Es_mute_inversion_type_t) String() string {
+func (i EsMuteInversionTypeT) String() string {
 	switch i {
 	case ES_MUTE_INVERSION_TYPE_PROCESS:
 		return "ES_MUTE_INVERSION_TYPE_PROCESS"
@@ -2084,11 +2084,11 @@ func (i Es_mute_inversion_type_t) String() string {
 	case ES_MUTE_INVERSION_TYPE_LAST:
 		return "ES_MUTE_INVERSION_TYPE_LAST"
 	default:
-		return fmt.Sprintf("Es_mute_inversion_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsMuteInversionTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_mute_inversion_type_t(v string) (any, error) {
+func ParseEsMuteInversionTypeT(v string) (any, error) {
 	result := ES_MUTE_INVERSION_TYPE_PROCESS
 	switch v {
 	case "ES_MUTE_INVERSION_TYPE_PROCESS":
@@ -2105,7 +2105,7 @@ func ParseEs_mute_inversion_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_mute_inversion_type_t(values []Es_mute_inversion_type_t) []string {
+func SerializeEsMuteInversionTypeT(values []EsMuteInversionTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2113,25 +2113,25 @@ func SerializeEs_mute_inversion_type_t(values []Es_mute_inversion_type_t) []stri
 	return result
 }
 
-func (i Es_mute_inversion_type_t) isMultiValue() bool {
+func (i EsMuteInversionTypeT) isMultiValue() bool {
 	return false
 }
 
 // [ESTypes.h:509]
 // Introduced: macOS 13.0
-type Es_mute_inverted_return_t int64
+type EsMuteInvertedReturnT int32
 
 const (
 	// The type of muted queried was inverted
 	// Introduced: macOS 13.0
-	ES_MUTE_INVERTED Es_mute_inverted_return_t = 0
+	ES_MUTE_INVERTED EsMuteInvertedReturnT = 0
 	// The type of muted queried was not inverted
-	ES_MUTE_NOT_INVERTED Es_mute_inverted_return_t = 1
+	ES_MUTE_NOT_INVERTED EsMuteInvertedReturnT = 1
 	// There was an error querying mute inversion state
-	ES_MUTE_INVERTED_ERROR Es_mute_inverted_return_t = 2
+	ES_MUTE_INVERTED_ERROR EsMuteInvertedReturnT = 2
 )
 
-func (i Es_mute_inverted_return_t) String() string {
+func (i EsMuteInvertedReturnT) String() string {
 	switch i {
 	case ES_MUTE_INVERTED:
 		return "ES_MUTE_INVERTED"
@@ -2140,11 +2140,11 @@ func (i Es_mute_inverted_return_t) String() string {
 	case ES_MUTE_INVERTED_ERROR:
 		return "ES_MUTE_INVERTED_ERROR"
 	default:
-		return fmt.Sprintf("Es_mute_inverted_return_t(%d)", int64(i))
+		return fmt.Sprintf("EsMuteInvertedReturnT(%d)", int64(i))
 	}
 }
 
-func ParseEs_mute_inverted_return_t(v string) (any, error) {
+func ParseEsMuteInvertedReturnT(v string) (any, error) {
 	result := ES_MUTE_INVERTED
 	switch v {
 	case "ES_MUTE_INVERTED":
@@ -2159,7 +2159,7 @@ func ParseEs_mute_inverted_return_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_mute_inverted_return_t(values []Es_mute_inverted_return_t) []string {
+func SerializeEsMuteInvertedReturnT(values []EsMuteInvertedReturnT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2167,28 +2167,28 @@ func SerializeEs_mute_inverted_return_t(values []Es_mute_inverted_return_t) []st
 	return result
 }
 
-func (i Es_mute_inverted_return_t) isMultiValue() bool {
+func (i EsMuteInvertedReturnT) isMultiValue() bool {
 	return false
 }
 
 // The type of a path argument, such as a prefix or a path literal.
 // [ESTypes.h:415]
-type Es_mute_path_type_t int64
+type EsMutePathTypeT int32
 
 const (
 	// Value to describe a prefix for the path to the instigating program eg `/bin` would match `/bin/ls` and `/bin/sleep` This is a type of *program* muting. It could match multiple proccesses
-	ES_MUTE_PATH_TYPE_PREFIX Es_mute_path_type_t = 0
+	ES_MUTE_PATH_TYPE_PREFIX EsMutePathTypeT = 0
 	// Value to describe the exact path to the instigating program *must match exactly* eg `/bin/ls`would match `/bin/ls` but NOT match `/bin/lsa`
-	ES_MUTE_PATH_TYPE_LITERAL Es_mute_path_type_t = 1
+	ES_MUTE_PATH_TYPE_LITERAL EsMutePathTypeT = 1
 	// Value to describe a target path prefix target here has a very specific meaning @see es_mute_path() briefly, this type of muting matches the *argument(s)* to syscalls, rather than the instigating program prefix matching means `/private/tmp` would match `open(/private/tmp/cake)`
 	// Introduced: macOS 13.0
-	ES_MUTE_PATH_TYPE_TARGET_PREFIX Es_mute_path_type_t = 2
+	ES_MUTE_PATH_TYPE_TARGET_PREFIX EsMutePathTypeT = 2
 	// Value to describe a target path literal Behaves just like ES_MUTE_PATH_TYPE_TARGET_PREFIX except that the target path must match *exactly* eg `/private/tmp/foo` would match `open(/private/tmp/foo)` but NOT match `open(/private/tmp/foobar)`
 	// Introduced: macOS 13.0
-	ES_MUTE_PATH_TYPE_TARGET_LITERAL Es_mute_path_type_t = 3
+	ES_MUTE_PATH_TYPE_TARGET_LITERAL EsMutePathTypeT = 3
 )
 
-func (i Es_mute_path_type_t) String() string {
+func (i EsMutePathTypeT) String() string {
 	switch i {
 	case ES_MUTE_PATH_TYPE_PREFIX:
 		return "ES_MUTE_PATH_TYPE_PREFIX"
@@ -2199,11 +2199,11 @@ func (i Es_mute_path_type_t) String() string {
 	case ES_MUTE_PATH_TYPE_TARGET_LITERAL:
 		return "ES_MUTE_PATH_TYPE_TARGET_LITERAL"
 	default:
-		return fmt.Sprintf("Es_mute_path_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsMutePathTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_mute_path_type_t(v string) (any, error) {
+func ParseEsMutePathTypeT(v string) (any, error) {
 	result := ES_MUTE_PATH_TYPE_PREFIX
 	switch v {
 	case "ES_MUTE_PATH_TYPE_PREFIX":
@@ -2220,7 +2220,7 @@ func ParseEs_mute_path_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_mute_path_type_t(values []Es_mute_path_type_t) []string {
+func SerializeEsMutePathTypeT(values []EsMutePathTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2228,31 +2228,31 @@ func SerializeEs_mute_path_type_t(values []Es_mute_path_type_t) []string {
 	return result
 }
 
-func (i Es_mute_path_type_t) isMultiValue() bool {
+func (i EsMutePathTypeT) isMultiValue() bool {
 	return false
 }
 
 // The result of an attempt to create a new client.
 // [ESTypes.h:345]
-type Es_new_client_result_t int64
+type EsNewClientResultT int32
 
 const (
-	ES_NEW_CLIENT_RESULT_SUCCESS Es_new_client_result_t = 0
+	ES_NEW_CLIENT_RESULT_SUCCESS EsNewClientResultT = 0
 	// One or more invalid arguments were provided.
-	ES_NEW_CLIENT_RESULT_ERR_INVALID_ARGUMENT Es_new_client_result_t = 1
+	ES_NEW_CLIENT_RESULT_ERR_INVALID_ARGUMENT EsNewClientResultT = 1
 	// Communication with the ES subsystem failed, or other error condition.
-	ES_NEW_CLIENT_RESULT_ERR_INTERNAL Es_new_client_result_t = 2
+	ES_NEW_CLIENT_RESULT_ERR_INTERNAL EsNewClientResultT = 2
 	// The caller is not properly entitled to connect.
-	ES_NEW_CLIENT_RESULT_ERR_NOT_ENTITLED Es_new_client_result_t = 3
+	ES_NEW_CLIENT_RESULT_ERR_NOT_ENTITLED EsNewClientResultT = 3
 	// The caller lacks Transparency, Consent, and Control (TCC) approval from the user.
-	ES_NEW_CLIENT_RESULT_ERR_NOT_PERMITTED Es_new_client_result_t = 4
+	ES_NEW_CLIENT_RESULT_ERR_NOT_PERMITTED EsNewClientResultT = 4
 	// The caller is not running as root.
-	ES_NEW_CLIENT_RESULT_ERR_NOT_PRIVILEGED Es_new_client_result_t = 5
+	ES_NEW_CLIENT_RESULT_ERR_NOT_PRIVILEGED EsNewClientResultT = 5
 	// The caller has reached the maximum number of allowed simultaneously connected clients.
-	ES_NEW_CLIENT_RESULT_ERR_TOO_MANY_CLIENTS Es_new_client_result_t = 6
+	ES_NEW_CLIENT_RESULT_ERR_TOO_MANY_CLIENTS EsNewClientResultT = 6
 )
 
-func (i Es_new_client_result_t) String() string {
+func (i EsNewClientResultT) String() string {
 	switch i {
 	case ES_NEW_CLIENT_RESULT_SUCCESS:
 		return "ES_NEW_CLIENT_RESULT_SUCCESS"
@@ -2269,11 +2269,11 @@ func (i Es_new_client_result_t) String() string {
 	case ES_NEW_CLIENT_RESULT_ERR_TOO_MANY_CLIENTS:
 		return "ES_NEW_CLIENT_RESULT_ERR_TOO_MANY_CLIENTS"
 	default:
-		return fmt.Sprintf("Es_new_client_result_t(%d)", int64(i))
+		return fmt.Sprintf("EsNewClientResultT(%d)", int64(i))
 	}
 }
 
-func ParseEs_new_client_result_t(v string) (any, error) {
+func ParseEsNewClientResultT(v string) (any, error) {
 	result := ES_NEW_CLIENT_RESULT_SUCCESS
 	switch v {
 	case "ES_NEW_CLIENT_RESULT_SUCCESS":
@@ -2296,7 +2296,7 @@ func ParseEs_new_client_result_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_new_client_result_t(values []Es_new_client_result_t) []string {
+func SerializeEsNewClientResultT(values []EsNewClientResultT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2304,30 +2304,30 @@ func SerializeEs_new_client_result_t(values []Es_new_client_result_t) []string {
 	return result
 }
 
-func (i Es_new_client_result_t) isMultiValue() bool {
+func (i EsNewClientResultT) isMultiValue() bool {
 	return false
 }
 
 // [ESTypes.h:554]
-type Es_od_account_type_t int64
+type EsOdAccountTypeT int32
 
 const (
-	ES_OD_ACCOUNT_TYPE_USER     Es_od_account_type_t = 0
-	ES_OD_ACCOUNT_TYPE_COMPUTER Es_od_account_type_t = 1
+	ES_OD_ACCOUNT_TYPE_USER     EsOdAccountTypeT = 0
+	ES_OD_ACCOUNT_TYPE_COMPUTER EsOdAccountTypeT = 1
 )
 
-func (i Es_od_account_type_t) String() string {
+func (i EsOdAccountTypeT) String() string {
 	switch i {
 	case ES_OD_ACCOUNT_TYPE_USER:
 		return "ES_OD_ACCOUNT_TYPE_USER"
 	case ES_OD_ACCOUNT_TYPE_COMPUTER:
 		return "ES_OD_ACCOUNT_TYPE_COMPUTER"
 	default:
-		return fmt.Sprintf("Es_od_account_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsOdAccountTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_od_account_type_t(v string) (any, error) {
+func ParseEsOdAccountTypeT(v string) (any, error) {
 	result := ES_OD_ACCOUNT_TYPE_USER
 	switch v {
 	case "ES_OD_ACCOUNT_TYPE_USER":
@@ -2340,7 +2340,7 @@ func ParseEs_od_account_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_od_account_type_t(values []Es_od_account_type_t) []string {
+func SerializeEsOdAccountTypeT(values []EsOdAccountTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2348,23 +2348,23 @@ func SerializeEs_od_account_type_t(values []Es_od_account_type_t) []string {
 	return result
 }
 
-func (i Es_od_account_type_t) isMultiValue() bool {
+func (i EsOdAccountTypeT) isMultiValue() bool {
 	return false
 }
 
 // [ESTypes.h:542]
-type Es_od_member_type_t int64
+type EsOdMemberTypeT int32
 
 const (
 	// Group member is a user, designated by name
-	ES_OD_MEMBER_TYPE_USER_NAME Es_od_member_type_t = 0
+	ES_OD_MEMBER_TYPE_USER_NAME EsOdMemberTypeT = 0
 	// Group member is a user, designated by UUID
-	ES_OD_MEMBER_TYPE_USER_UUID Es_od_member_type_t = 1
+	ES_OD_MEMBER_TYPE_USER_UUID EsOdMemberTypeT = 1
 	// Group member is another group, designated by UUID
-	ES_OD_MEMBER_TYPE_GROUP_UUID Es_od_member_type_t = 2
+	ES_OD_MEMBER_TYPE_GROUP_UUID EsOdMemberTypeT = 2
 )
 
-func (i Es_od_member_type_t) String() string {
+func (i EsOdMemberTypeT) String() string {
 	switch i {
 	case ES_OD_MEMBER_TYPE_USER_NAME:
 		return "ES_OD_MEMBER_TYPE_USER_NAME"
@@ -2373,11 +2373,11 @@ func (i Es_od_member_type_t) String() string {
 	case ES_OD_MEMBER_TYPE_GROUP_UUID:
 		return "ES_OD_MEMBER_TYPE_GROUP_UUID"
 	default:
-		return fmt.Sprintf("Es_od_member_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsOdMemberTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_od_member_type_t(v string) (any, error) {
+func ParseEsOdMemberTypeT(v string) (any, error) {
 	result := ES_OD_MEMBER_TYPE_USER_NAME
 	switch v {
 	case "ES_OD_MEMBER_TYPE_USER_NAME":
@@ -2392,7 +2392,7 @@ func ParseEs_od_member_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_od_member_type_t(values []Es_od_member_type_t) []string {
+func SerializeEsOdMemberTypeT(values []EsOdMemberTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2400,30 +2400,30 @@ func SerializeEs_od_member_type_t(values []Es_od_member_type_t) []string {
 	return result
 }
 
-func (i Es_od_member_type_t) isMultiValue() bool {
+func (i EsOdMemberTypeT) isMultiValue() bool {
 	return false
 }
 
 // [ESTypes.h:562]
-type Es_od_record_type_t int64
+type EsOdRecordTypeT int32
 
 const (
-	ES_OD_RECORD_TYPE_USER  Es_od_record_type_t = 0
-	ES_OD_RECORD_TYPE_GROUP Es_od_record_type_t = 1
+	ES_OD_RECORD_TYPE_USER  EsOdRecordTypeT = 0
+	ES_OD_RECORD_TYPE_GROUP EsOdRecordTypeT = 1
 )
 
-func (i Es_od_record_type_t) String() string {
+func (i EsOdRecordTypeT) String() string {
 	switch i {
 	case ES_OD_RECORD_TYPE_USER:
 		return "ES_OD_RECORD_TYPE_USER"
 	case ES_OD_RECORD_TYPE_GROUP:
 		return "ES_OD_RECORD_TYPE_GROUP"
 	default:
-		return fmt.Sprintf("Es_od_record_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsOdRecordTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_od_record_type_t(v string) (any, error) {
+func ParseEsOdRecordTypeT(v string) (any, error) {
 	result := ES_OD_RECORD_TYPE_USER
 	switch v {
 	case "ES_OD_RECORD_TYPE_USER":
@@ -2436,7 +2436,7 @@ func ParseEs_od_record_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_od_record_type_t(values []Es_od_record_type_t) []string {
+func SerializeEsOdRecordTypeT(values []EsOdRecordTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2444,28 +2444,28 @@ func SerializeEs_od_record_type_t(values []Es_od_record_type_t) []string {
 	return result
 }
 
-func (i Es_od_record_type_t) isMultiValue() bool {
+func (i EsOdRecordTypeT) isMultiValue() bool {
 	return false
 }
 
 // es_openssh_login_result_type_t See es_event_openssh_login_t
 // [ESTypes.h:735]
-type Es_openssh_login_result_type_t int64
+type EsOpensshLoginResultTypeT int32
 
 const (
-	ES_OPENSSH_LOGIN_EXCEED_MAXTRIES Es_openssh_login_result_type_t = 0
-	ES_OPENSSH_LOGIN_ROOT_DENIED     Es_openssh_login_result_type_t = 1
-	ES_OPENSSH_AUTH_SUCCESS          Es_openssh_login_result_type_t = 2
-	ES_OPENSSH_AUTH_FAIL_NONE        Es_openssh_login_result_type_t = 3
-	ES_OPENSSH_AUTH_FAIL_PASSWD      Es_openssh_login_result_type_t = 4
-	ES_OPENSSH_AUTH_FAIL_KBDINT      Es_openssh_login_result_type_t = 5
-	ES_OPENSSH_AUTH_FAIL_PUBKEY      Es_openssh_login_result_type_t = 6
-	ES_OPENSSH_AUTH_FAIL_HOSTBASED   Es_openssh_login_result_type_t = 7
-	ES_OPENSSH_AUTH_FAIL_GSSAPI      Es_openssh_login_result_type_t = 8
-	ES_OPENSSH_INVALID_USER          Es_openssh_login_result_type_t = 9
+	ES_OPENSSH_LOGIN_EXCEED_MAXTRIES EsOpensshLoginResultTypeT = 0
+	ES_OPENSSH_LOGIN_ROOT_DENIED     EsOpensshLoginResultTypeT = 1
+	ES_OPENSSH_AUTH_SUCCESS          EsOpensshLoginResultTypeT = 2
+	ES_OPENSSH_AUTH_FAIL_NONE        EsOpensshLoginResultTypeT = 3
+	ES_OPENSSH_AUTH_FAIL_PASSWD      EsOpensshLoginResultTypeT = 4
+	ES_OPENSSH_AUTH_FAIL_KBDINT      EsOpensshLoginResultTypeT = 5
+	ES_OPENSSH_AUTH_FAIL_PUBKEY      EsOpensshLoginResultTypeT = 6
+	ES_OPENSSH_AUTH_FAIL_HOSTBASED   EsOpensshLoginResultTypeT = 7
+	ES_OPENSSH_AUTH_FAIL_GSSAPI      EsOpensshLoginResultTypeT = 8
+	ES_OPENSSH_INVALID_USER          EsOpensshLoginResultTypeT = 9
 )
 
-func (i Es_openssh_login_result_type_t) String() string {
+func (i EsOpensshLoginResultTypeT) String() string {
 	switch i {
 	case ES_OPENSSH_LOGIN_EXCEED_MAXTRIES:
 		return "ES_OPENSSH_LOGIN_EXCEED_MAXTRIES"
@@ -2488,11 +2488,11 @@ func (i Es_openssh_login_result_type_t) String() string {
 	case ES_OPENSSH_INVALID_USER:
 		return "ES_OPENSSH_INVALID_USER"
 	default:
-		return fmt.Sprintf("Es_openssh_login_result_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsOpensshLoginResultTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_openssh_login_result_type_t(v string) (any, error) {
+func ParseEsOpensshLoginResultTypeT(v string) (any, error) {
 	result := ES_OPENSSH_LOGIN_EXCEED_MAXTRIES
 	switch v {
 	case "ES_OPENSSH_LOGIN_EXCEED_MAXTRIES":
@@ -2521,7 +2521,7 @@ func ParseEs_openssh_login_result_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_openssh_login_result_type_t(values []Es_openssh_login_result_type_t) []string {
+func SerializeEsOpensshLoginResultTypeT(values []EsOpensshLoginResultTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2529,28 +2529,28 @@ func SerializeEs_openssh_login_result_type_t(values []Es_openssh_login_result_ty
 	return result
 }
 
-func (i Es_openssh_login_result_type_t) isMultiValue() bool {
+func (i EsOpensshLoginResultTypeT) isMultiValue() bool {
 	return false
 }
 
 // The type of call used when a process checks on the access of the target process.
 // [ESTypes.h:33]
-type Es_proc_check_type_t int64
+type EsProcCheckTypeT int32
 
 const (
-	ES_PROC_CHECK_TYPE_LISTPIDS        Es_proc_check_type_t = 1
-	ES_PROC_CHECK_TYPE_PIDINFO         Es_proc_check_type_t = 2
-	ES_PROC_CHECK_TYPE_PIDFDINFO       Es_proc_check_type_t = 3
-	ES_PROC_CHECK_TYPE_KERNMSGBUF      Es_proc_check_type_t = 4
-	ES_PROC_CHECK_TYPE_SETCONTROL      Es_proc_check_type_t = 5
-	ES_PROC_CHECK_TYPE_PIDFILEPORTINFO Es_proc_check_type_t = 6
-	ES_PROC_CHECK_TYPE_TERMINATE       Es_proc_check_type_t = 7
-	ES_PROC_CHECK_TYPE_DIRTYCONTROL    Es_proc_check_type_t = 8
-	ES_PROC_CHECK_TYPE_PIDRUSAGE       Es_proc_check_type_t = 9
-	ES_PROC_CHECK_TYPE_UDATA_INFO      Es_proc_check_type_t = 14
+	ES_PROC_CHECK_TYPE_LISTPIDS        EsProcCheckTypeT = 1
+	ES_PROC_CHECK_TYPE_PIDINFO         EsProcCheckTypeT = 2
+	ES_PROC_CHECK_TYPE_PIDFDINFO       EsProcCheckTypeT = 3
+	ES_PROC_CHECK_TYPE_KERNMSGBUF      EsProcCheckTypeT = 4
+	ES_PROC_CHECK_TYPE_SETCONTROL      EsProcCheckTypeT = 5
+	ES_PROC_CHECK_TYPE_PIDFILEPORTINFO EsProcCheckTypeT = 6
+	ES_PROC_CHECK_TYPE_TERMINATE       EsProcCheckTypeT = 7
+	ES_PROC_CHECK_TYPE_DIRTYCONTROL    EsProcCheckTypeT = 8
+	ES_PROC_CHECK_TYPE_PIDRUSAGE       EsProcCheckTypeT = 9
+	ES_PROC_CHECK_TYPE_UDATA_INFO      EsProcCheckTypeT = 14
 )
 
-func (i Es_proc_check_type_t) String() string {
+func (i EsProcCheckTypeT) String() string {
 	switch i {
 	case ES_PROC_CHECK_TYPE_LISTPIDS:
 		return "ES_PROC_CHECK_TYPE_LISTPIDS"
@@ -2573,11 +2573,11 @@ func (i Es_proc_check_type_t) String() string {
 	case ES_PROC_CHECK_TYPE_UDATA_INFO:
 		return "ES_PROC_CHECK_TYPE_UDATA_INFO"
 	default:
-		return fmt.Sprintf("Es_proc_check_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsProcCheckTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_proc_check_type_t(v string) (any, error) {
+func ParseEsProcCheckTypeT(v string) (any, error) {
 	result := ES_PROC_CHECK_TYPE_LISTPIDS
 	switch v {
 	case "ES_PROC_CHECK_TYPE_LISTPIDS":
@@ -2606,7 +2606,7 @@ func ParseEs_proc_check_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_proc_check_type_t(values []Es_proc_check_type_t) []string {
+func SerializeEsProcCheckTypeT(values []EsProcCheckTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2614,21 +2614,21 @@ func SerializeEs_proc_check_type_t(values []Es_proc_check_type_t) []string {
 	return result
 }
 
-func (i Es_proc_check_type_t) isMultiValue() bool {
+func (i EsProcCheckTypeT) isMultiValue() bool {
 	return false
 }
 
 // The type of a process suspension or resumption event.
 // [ESTypes.h:765]
-type Es_proc_suspend_resume_type_t int64
+type EsProcSuspendResumeTypeT int32
 
 const (
-	ES_PROC_SUSPEND_RESUME_TYPE_SUSPEND          Es_proc_suspend_resume_type_t = 0
-	ES_PROC_SUSPEND_RESUME_TYPE_RESUME           Es_proc_suspend_resume_type_t = 1
-	ES_PROC_SUSPEND_RESUME_TYPE_SHUTDOWN_SOCKETS Es_proc_suspend_resume_type_t = 3
+	ES_PROC_SUSPEND_RESUME_TYPE_SUSPEND          EsProcSuspendResumeTypeT = 0
+	ES_PROC_SUSPEND_RESUME_TYPE_RESUME           EsProcSuspendResumeTypeT = 1
+	ES_PROC_SUSPEND_RESUME_TYPE_SHUTDOWN_SOCKETS EsProcSuspendResumeTypeT = 3
 )
 
-func (i Es_proc_suspend_resume_type_t) String() string {
+func (i EsProcSuspendResumeTypeT) String() string {
 	switch i {
 	case ES_PROC_SUSPEND_RESUME_TYPE_SUSPEND:
 		return "ES_PROC_SUSPEND_RESUME_TYPE_SUSPEND"
@@ -2637,11 +2637,11 @@ func (i Es_proc_suspend_resume_type_t) String() string {
 	case ES_PROC_SUSPEND_RESUME_TYPE_SHUTDOWN_SOCKETS:
 		return "ES_PROC_SUSPEND_RESUME_TYPE_SHUTDOWN_SOCKETS"
 	default:
-		return fmt.Sprintf("Es_proc_suspend_resume_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsProcSuspendResumeTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_proc_suspend_resume_type_t(v string) (any, error) {
+func ParseEsProcSuspendResumeTypeT(v string) (any, error) {
 	result := ES_PROC_SUSPEND_RESUME_TYPE_SUSPEND
 	switch v {
 	case "ES_PROC_SUSPEND_RESUME_TYPE_SUSPEND":
@@ -2656,7 +2656,7 @@ func ParseEs_proc_suspend_resume_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_proc_suspend_resume_type_t(values []Es_proc_suspend_resume_type_t) []string {
+func SerializeEsProcSuspendResumeTypeT(values []EsProcSuspendResumeTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2664,31 +2664,31 @@ func SerializeEs_proc_suspend_resume_type_t(values []Es_proc_suspend_resume_type
 	return result
 }
 
-func (i Es_proc_suspend_resume_type_t) isMultiValue() bool {
+func (i EsProcSuspendResumeTypeT) isMultiValue() bool {
 	return false
 }
 
 // es_profile_source_t See es_profile_t
 // [ESTypes.h:776]
-type Es_profile_source_t int64
+type EsProfileSourceT int32
 
 const (
-	ES_PROFILE_SOURCE_MANAGED Es_profile_source_t = 0
-	ES_PROFILE_SOURCE_INSTALL Es_profile_source_t = 1
+	ES_PROFILE_SOURCE_MANAGED EsProfileSourceT = 0
+	ES_PROFILE_SOURCE_INSTALL EsProfileSourceT = 1
 )
 
-func (i Es_profile_source_t) String() string {
+func (i EsProfileSourceT) String() string {
 	switch i {
 	case ES_PROFILE_SOURCE_MANAGED:
 		return "ES_PROFILE_SOURCE_MANAGED"
 	case ES_PROFILE_SOURCE_INSTALL:
 		return "ES_PROFILE_SOURCE_INSTALL"
 	default:
-		return fmt.Sprintf("Es_profile_source_t(%d)", int64(i))
+		return fmt.Sprintf("EsProfileSourceT(%d)", int64(i))
 	}
 }
 
-func ParseEs_profile_source_t(v string) (any, error) {
+func ParseEsProfileSourceT(v string) (any, error) {
 	result := ES_PROFILE_SOURCE_MANAGED
 	switch v {
 	case "ES_PROFILE_SOURCE_MANAGED":
@@ -2701,7 +2701,7 @@ func ParseEs_profile_source_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_profile_source_t(values []Es_profile_source_t) []string {
+func SerializeEsProfileSourceT(values []EsProfileSourceT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2709,29 +2709,29 @@ func SerializeEs_profile_source_t(values []Es_profile_source_t) []string {
 	return result
 }
 
-func (i Es_profile_source_t) isMultiValue() bool {
+func (i EsProfileSourceT) isMultiValue() bool {
 	return false
 }
 
 // Values that indicate the result of responding to a message.
 // [ESTypes.h:327]
-type Es_respond_result_t int64
+type EsRespondResultT int32
 
 const (
-	ES_RESPOND_RESULT_SUCCESS Es_respond_result_t = 0
+	ES_RESPOND_RESULT_SUCCESS EsRespondResultT = 0
 	// One or more invalid arguments were provided
-	ES_RESPOND_RESULT_ERR_INVALID_ARGUMENT Es_respond_result_t = 1
+	ES_RESPOND_RESULT_ERR_INVALID_ARGUMENT EsRespondResultT = 1
 	// Communication with the ES subsystem failed
-	ES_RESPOND_RESULT_ERR_INTERNAL Es_respond_result_t = 2
+	ES_RESPOND_RESULT_ERR_INTERNAL EsRespondResultT = 2
 	// The message being responded to could not be found
-	ES_RESPOND_RESULT_NOT_FOUND Es_respond_result_t = 3
+	ES_RESPOND_RESULT_NOT_FOUND EsRespondResultT = 3
 	// The provided message has been responded to more than once
-	ES_RESPOND_RESULT_ERR_DUPLICATE_RESPONSE Es_respond_result_t = 4
+	ES_RESPOND_RESULT_ERR_DUPLICATE_RESPONSE EsRespondResultT = 4
 	// Either an inappropriate response API was used for the event type (ensure using proper es_respond_auth_result or es_respond_flags_result function) or the event is notification only.
-	ES_RESPOND_RESULT_ERR_EVENT_TYPE Es_respond_result_t = 5
+	ES_RESPOND_RESULT_ERR_EVENT_TYPE EsRespondResultT = 5
 )
 
-func (i Es_respond_result_t) String() string {
+func (i EsRespondResultT) String() string {
 	switch i {
 	case ES_RESPOND_RESULT_SUCCESS:
 		return "ES_RESPOND_RESULT_SUCCESS"
@@ -2746,11 +2746,11 @@ func (i Es_respond_result_t) String() string {
 	case ES_RESPOND_RESULT_ERR_EVENT_TYPE:
 		return "ES_RESPOND_RESULT_ERR_EVENT_TYPE"
 	default:
-		return fmt.Sprintf("Es_respond_result_t(%d)", int64(i))
+		return fmt.Sprintf("EsRespondResultT(%d)", int64(i))
 	}
 }
 
-func ParseEs_respond_result_t(v string) (any, error) {
+func ParseEsRespondResultT(v string) (any, error) {
 	result := ES_RESPOND_RESULT_SUCCESS
 	switch v {
 	case "ES_RESPOND_RESULT_SUCCESS":
@@ -2771,7 +2771,7 @@ func ParseEs_respond_result_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_respond_result_t(values []Es_respond_result_t) []string {
+func SerializeEsRespondResultT(values []EsRespondResultT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2779,33 +2779,33 @@ func SerializeEs_respond_result_t(values []Es_respond_result_t) []string {
 	return result
 }
 
-func (i Es_respond_result_t) isMultiValue() bool {
+func (i EsRespondResultT) isMultiValue() bool {
 	return false
 }
 
 // A type that indicates the type of a message’s result.
 // [ESTypes.h:309]
-type Es_result_type_t int64
+type EsResultTypeT int32
 
 const (
 	// The result is an auth result
-	ES_RESULT_TYPE_AUTH Es_result_type_t = 0
+	ES_RESULT_TYPE_AUTH EsResultTypeT = 0
 	// The result is a flags result
-	ES_RESULT_TYPE_FLAGS Es_result_type_t = 1
+	ES_RESULT_TYPE_FLAGS EsResultTypeT = 1
 )
 
-func (i Es_result_type_t) String() string {
+func (i EsResultTypeT) String() string {
 	switch i {
 	case ES_RESULT_TYPE_AUTH:
 		return "ES_RESULT_TYPE_AUTH"
 	case ES_RESULT_TYPE_FLAGS:
 		return "ES_RESULT_TYPE_FLAGS"
 	default:
-		return fmt.Sprintf("Es_result_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsResultTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_result_type_t(v string) (any, error) {
+func ParseEsResultTypeT(v string) (any, error) {
 	result := ES_RESULT_TYPE_AUTH
 	switch v {
 	case "ES_RESULT_TYPE_AUTH":
@@ -2818,7 +2818,7 @@ func ParseEs_result_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_result_type_t(values []Es_result_type_t) []string {
+func SerializeEsResultTypeT(values []EsResultTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2826,31 +2826,31 @@ func SerializeEs_result_type_t(values []Es_result_type_t) []string {
 	return result
 }
 
-func (i Es_result_type_t) isMultiValue() bool {
+func (i EsResultTypeT) isMultiValue() bool {
 	return false
 }
 
 // Values that indicate the result of an Endpoint Security action that can only succeed or fail.
 // [ESTypes.h:319]
-type Es_return_t int64
+type EsReturnT int32
 
 const (
-	ES_RETURN_SUCCESS Es_return_t = 0
-	ES_RETURN_ERROR   Es_return_t = 1
+	ES_RETURN_SUCCESS EsReturnT = 0
+	ES_RETURN_ERROR   EsReturnT = 1
 )
 
-func (i Es_return_t) String() string {
+func (i EsReturnT) String() string {
 	switch i {
 	case ES_RETURN_SUCCESS:
 		return "ES_RETURN_SUCCESS"
 	case ES_RETURN_ERROR:
 		return "ES_RETURN_ERROR"
 	default:
-		return fmt.Sprintf("Es_return_t(%d)", int64(i))
+		return fmt.Sprintf("EsReturnT(%d)", int64(i))
 	}
 }
 
-func ParseEs_return_t(v string) (any, error) {
+func ParseEsReturnT(v string) (any, error) {
 	result := ES_RETURN_SUCCESS
 	switch v {
 	case "ES_RETURN_SUCCESS":
@@ -2863,7 +2863,7 @@ func ParseEs_return_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_return_t(values []Es_return_t) []string {
+func SerializeEsReturnT(values []EsReturnT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2871,31 +2871,31 @@ func SerializeEs_return_t(values []Es_return_t) []string {
 	return result
 }
 
-func (i Es_return_t) isMultiValue() bool {
+func (i EsReturnT) isMultiValue() bool {
 	return false
 }
 
 // A type that indicates whether an event represents setting or clearing a file’s access control list.
 // [ESTypes.h:20]
-type Es_set_or_clear_t int64
+type EsSetOrClearT int32
 
 const (
-	ES_SET   Es_set_or_clear_t = 0
-	ES_CLEAR Es_set_or_clear_t = 1
+	ES_SET   EsSetOrClearT = 0
+	ES_CLEAR EsSetOrClearT = 1
 )
 
-func (i Es_set_or_clear_t) String() string {
+func (i EsSetOrClearT) String() string {
 	switch i {
 	case ES_SET:
 		return "ES_SET"
 	case ES_CLEAR:
 		return "ES_CLEAR"
 	default:
-		return fmt.Sprintf("Es_set_or_clear_t(%d)", int64(i))
+		return fmt.Sprintf("EsSetOrClearT(%d)", int64(i))
 	}
 }
 
-func ParseEs_set_or_clear_t(v string) (any, error) {
+func ParseEsSetOrClearT(v string) (any, error) {
 	result := ES_SET
 	switch v {
 	case "ES_SET":
@@ -2908,7 +2908,7 @@ func ParseEs_set_or_clear_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_set_or_clear_t(values []Es_set_or_clear_t) []string {
+func SerializeEsSetOrClearT(values []EsSetOrClearT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2916,24 +2916,24 @@ func SerializeEs_set_or_clear_t(values []Es_set_or_clear_t) []string {
 	return result
 }
 
-func (i Es_set_or_clear_t) isMultiValue() bool {
+func (i EsSetOrClearT) isMultiValue() bool {
 	return false
 }
 
 // @brief This enum describes the type of plugin types in sudo
 // [ESTypes.h:78]
-type Es_sudo_plugin_type_t int64
+type EsSudoPluginTypeT int32
 
 const (
-	ES_SUDO_PLUGIN_TYPE_UNKNOWN   Es_sudo_plugin_type_t = 0
-	ES_SUDO_PLUGIN_TYPE_FRONT_END Es_sudo_plugin_type_t = 1
-	ES_SUDO_PLUGIN_TYPE_POLICY    Es_sudo_plugin_type_t = 2
-	ES_SUDO_PLUGIN_TYPE_IO        Es_sudo_plugin_type_t = 3
-	ES_SUDO_PLUGIN_TYPE_AUDIT     Es_sudo_plugin_type_t = 4
-	ES_SUDO_PLUGIN_TYPE_APPROVAL  Es_sudo_plugin_type_t = 5
+	ES_SUDO_PLUGIN_TYPE_UNKNOWN   EsSudoPluginTypeT = 0
+	ES_SUDO_PLUGIN_TYPE_FRONT_END EsSudoPluginTypeT = 1
+	ES_SUDO_PLUGIN_TYPE_POLICY    EsSudoPluginTypeT = 2
+	ES_SUDO_PLUGIN_TYPE_IO        EsSudoPluginTypeT = 3
+	ES_SUDO_PLUGIN_TYPE_AUDIT     EsSudoPluginTypeT = 4
+	ES_SUDO_PLUGIN_TYPE_APPROVAL  EsSudoPluginTypeT = 5
 )
 
-func (i Es_sudo_plugin_type_t) String() string {
+func (i EsSudoPluginTypeT) String() string {
 	switch i {
 	case ES_SUDO_PLUGIN_TYPE_UNKNOWN:
 		return "ES_SUDO_PLUGIN_TYPE_UNKNOWN"
@@ -2948,11 +2948,11 @@ func (i Es_sudo_plugin_type_t) String() string {
 	case ES_SUDO_PLUGIN_TYPE_APPROVAL:
 		return "ES_SUDO_PLUGIN_TYPE_APPROVAL"
 	default:
-		return fmt.Sprintf("Es_sudo_plugin_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsSudoPluginTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_sudo_plugin_type_t(v string) (any, error) {
+func ParseEsSudoPluginTypeT(v string) (any, error) {
 	result := ES_SUDO_PLUGIN_TYPE_UNKNOWN
 	switch v {
 	case "ES_SUDO_PLUGIN_TYPE_UNKNOWN":
@@ -2973,7 +2973,7 @@ func ParseEs_sudo_plugin_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_sudo_plugin_type_t(values []Es_sudo_plugin_type_t) []string {
+func SerializeEsSudoPluginTypeT(values []EsSudoPluginTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -2981,32 +2981,32 @@ func SerializeEs_sudo_plugin_type_t(values []Es_sudo_plugin_type_t) []string {
 	return result
 }
 
-func (i Es_sudo_plugin_type_t) isMultiValue() bool {
+func (i EsSudoPluginTypeT) isMultiValue() bool {
 	return false
 }
 
 // ess_tcc_authorization_reason_t
 // [ESTypes.h:627]
-type Es_tcc_authorization_reason_t int64
+type EsTccAuthorizationReasonT int32
 
 const (
-	ES_TCC_AUTHORIZATION_REASON_NONE                    Es_tcc_authorization_reason_t = 0
-	ES_TCC_AUTHORIZATION_REASON_ERROR                   Es_tcc_authorization_reason_t = 1
-	ES_TCC_AUTHORIZATION_REASON_USER_CONSENT            Es_tcc_authorization_reason_t = 2
-	ES_TCC_AUTHORIZATION_REASON_USER_SET                Es_tcc_authorization_reason_t = 3
-	ES_TCC_AUTHORIZATION_REASON_SYSTEM_SET              Es_tcc_authorization_reason_t = 4
-	ES_TCC_AUTHORIZATION_REASON_SERVICE_POLICY          Es_tcc_authorization_reason_t = 5
-	ES_TCC_AUTHORIZATION_REASON_MDM_POLICY              Es_tcc_authorization_reason_t = 6
-	ES_TCC_AUTHORIZATION_REASON_SERVICE_OVERRIDE_POLICY Es_tcc_authorization_reason_t = 7
-	ES_TCC_AUTHORIZATION_REASON_MISSING_USAGE_STRING    Es_tcc_authorization_reason_t = 8
-	ES_TCC_AUTHORIZATION_REASON_PROMPT_TIMEOUT          Es_tcc_authorization_reason_t = 9
-	ES_TCC_AUTHORIZATION_REASON_PREFLIGHT_UNKNOWN       Es_tcc_authorization_reason_t = 10
-	ES_TCC_AUTHORIZATION_REASON_ENTITLED                Es_tcc_authorization_reason_t = 11
-	ES_TCC_AUTHORIZATION_REASON_APP_TYPE_POLICY         Es_tcc_authorization_reason_t = 12
-	ES_TCC_AUTHORIZATION_REASON_PROMPT_CANCEL           Es_tcc_authorization_reason_t = 13
+	ES_TCC_AUTHORIZATION_REASON_NONE                    EsTccAuthorizationReasonT = 0
+	ES_TCC_AUTHORIZATION_REASON_ERROR                   EsTccAuthorizationReasonT = 1
+	ES_TCC_AUTHORIZATION_REASON_USER_CONSENT            EsTccAuthorizationReasonT = 2
+	ES_TCC_AUTHORIZATION_REASON_USER_SET                EsTccAuthorizationReasonT = 3
+	ES_TCC_AUTHORIZATION_REASON_SYSTEM_SET              EsTccAuthorizationReasonT = 4
+	ES_TCC_AUTHORIZATION_REASON_SERVICE_POLICY          EsTccAuthorizationReasonT = 5
+	ES_TCC_AUTHORIZATION_REASON_MDM_POLICY              EsTccAuthorizationReasonT = 6
+	ES_TCC_AUTHORIZATION_REASON_SERVICE_OVERRIDE_POLICY EsTccAuthorizationReasonT = 7
+	ES_TCC_AUTHORIZATION_REASON_MISSING_USAGE_STRING    EsTccAuthorizationReasonT = 8
+	ES_TCC_AUTHORIZATION_REASON_PROMPT_TIMEOUT          EsTccAuthorizationReasonT = 9
+	ES_TCC_AUTHORIZATION_REASON_PREFLIGHT_UNKNOWN       EsTccAuthorizationReasonT = 10
+	ES_TCC_AUTHORIZATION_REASON_ENTITLED                EsTccAuthorizationReasonT = 11
+	ES_TCC_AUTHORIZATION_REASON_APP_TYPE_POLICY         EsTccAuthorizationReasonT = 12
+	ES_TCC_AUTHORIZATION_REASON_PROMPT_CANCEL           EsTccAuthorizationReasonT = 13
 )
 
-func (i Es_tcc_authorization_reason_t) String() string {
+func (i EsTccAuthorizationReasonT) String() string {
 	switch i {
 	case ES_TCC_AUTHORIZATION_REASON_NONE:
 		return "ES_TCC_AUTHORIZATION_REASON_NONE"
@@ -3037,11 +3037,11 @@ func (i Es_tcc_authorization_reason_t) String() string {
 	case ES_TCC_AUTHORIZATION_REASON_PROMPT_CANCEL:
 		return "ES_TCC_AUTHORIZATION_REASON_PROMPT_CANCEL"
 	default:
-		return fmt.Sprintf("Es_tcc_authorization_reason_t(%d)", int64(i))
+		return fmt.Sprintf("EsTccAuthorizationReasonT(%d)", int64(i))
 	}
 }
 
-func ParseEs_tcc_authorization_reason_t(v string) (any, error) {
+func ParseEsTccAuthorizationReasonT(v string) (any, error) {
 	result := ES_TCC_AUTHORIZATION_REASON_NONE
 	switch v {
 	case "ES_TCC_AUTHORIZATION_REASON_NONE":
@@ -3078,7 +3078,7 @@ func ParseEs_tcc_authorization_reason_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_tcc_authorization_reason_t(values []Es_tcc_authorization_reason_t) []string {
+func SerializeEsTccAuthorizationReasonT(values []EsTccAuthorizationReasonT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -3086,25 +3086,25 @@ func SerializeEs_tcc_authorization_reason_t(values []Es_tcc_authorization_reason
 	return result
 }
 
-func (i Es_tcc_authorization_reason_t) isMultiValue() bool {
+func (i EsTccAuthorizationReasonT) isMultiValue() bool {
 	return false
 }
 
 // ess_tcc_authorization_right_t
 // [ESTypes.h:612]
-type Es_tcc_authorization_right_t int64
+type EsTccAuthorizationRightT int32
 
 const (
-	ES_TCC_AUTHORIZATION_RIGHT_DENIED           Es_tcc_authorization_right_t = 0
-	ES_TCC_AUTHORIZATION_RIGHT_UNKNOWN          Es_tcc_authorization_right_t = 1
-	ES_TCC_AUTHORIZATION_RIGHT_ALLOWED          Es_tcc_authorization_right_t = 2
-	ES_TCC_AUTHORIZATION_RIGHT_LIMITED          Es_tcc_authorization_right_t = 3
-	ES_TCC_AUTHORIZATION_RIGHT_ADD_MODIFY_ADDED Es_tcc_authorization_right_t = 4
-	ES_TCC_AUTHORIZATION_RIGHT_SESSION_PID      Es_tcc_authorization_right_t = 5
-	ES_TCC_AUTHORIZATION_RIGHT_LEARN_MORE       Es_tcc_authorization_right_t = 6
+	ES_TCC_AUTHORIZATION_RIGHT_DENIED           EsTccAuthorizationRightT = 0
+	ES_TCC_AUTHORIZATION_RIGHT_UNKNOWN          EsTccAuthorizationRightT = 1
+	ES_TCC_AUTHORIZATION_RIGHT_ALLOWED          EsTccAuthorizationRightT = 2
+	ES_TCC_AUTHORIZATION_RIGHT_LIMITED          EsTccAuthorizationRightT = 3
+	ES_TCC_AUTHORIZATION_RIGHT_ADD_MODIFY_ADDED EsTccAuthorizationRightT = 4
+	ES_TCC_AUTHORIZATION_RIGHT_SESSION_PID      EsTccAuthorizationRightT = 5
+	ES_TCC_AUTHORIZATION_RIGHT_LEARN_MORE       EsTccAuthorizationRightT = 6
 )
 
-func (i Es_tcc_authorization_right_t) String() string {
+func (i EsTccAuthorizationRightT) String() string {
 	switch i {
 	case ES_TCC_AUTHORIZATION_RIGHT_DENIED:
 		return "ES_TCC_AUTHORIZATION_RIGHT_DENIED"
@@ -3121,11 +3121,11 @@ func (i Es_tcc_authorization_right_t) String() string {
 	case ES_TCC_AUTHORIZATION_RIGHT_LEARN_MORE:
 		return "ES_TCC_AUTHORIZATION_RIGHT_LEARN_MORE"
 	default:
-		return fmt.Sprintf("Es_tcc_authorization_right_t(%d)", int64(i))
+		return fmt.Sprintf("EsTccAuthorizationRightT(%d)", int64(i))
 	}
 }
 
-func ParseEs_tcc_authorization_right_t(v string) (any, error) {
+func ParseEsTccAuthorizationRightT(v string) (any, error) {
 	result := ES_TCC_AUTHORIZATION_RIGHT_DENIED
 	switch v {
 	case "ES_TCC_AUTHORIZATION_RIGHT_DENIED":
@@ -3148,7 +3148,7 @@ func ParseEs_tcc_authorization_right_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_tcc_authorization_right_t(values []Es_tcc_authorization_right_t) []string {
+func SerializeEsTccAuthorizationRightT(values []EsTccAuthorizationRightT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -3156,22 +3156,22 @@ func SerializeEs_tcc_authorization_right_t(values []Es_tcc_authorization_right_t
 	return result
 }
 
-func (i Es_tcc_authorization_right_t) isMultiValue() bool {
+func (i EsTccAuthorizationRightT) isMultiValue() bool {
 	return false
 }
 
 // @typedef ess_tcc_event_type_t Represent the type of TCC modification event. - ES_TCC_EVENT_TYPE_UNKNOWN: Unknown prior state. - ES_TCC_EVENT_TYPE_CREATE: A new TCC authorization record was created. - ES_TCC_EVENT_TYPE_MODIFY: An existing TCC authorization record was modified. - ES_TCC_EVENT_TYPE_DELETE: An existing TCC authorization record was deleted.
 // [ESTypes.h:600]
-type Es_tcc_event_type_t int64
+type EsTccEventTypeT int32
 
 const (
-	ES_TCC_EVENT_TYPE_UNKNOWN Es_tcc_event_type_t = 0
-	ES_TCC_EVENT_TYPE_CREATE  Es_tcc_event_type_t = 1
-	ES_TCC_EVENT_TYPE_MODIFY  Es_tcc_event_type_t = 2
-	ES_TCC_EVENT_TYPE_DELETE  Es_tcc_event_type_t = 3
+	ES_TCC_EVENT_TYPE_UNKNOWN EsTccEventTypeT = 0
+	ES_TCC_EVENT_TYPE_CREATE  EsTccEventTypeT = 1
+	ES_TCC_EVENT_TYPE_MODIFY  EsTccEventTypeT = 2
+	ES_TCC_EVENT_TYPE_DELETE  EsTccEventTypeT = 3
 )
 
-func (i Es_tcc_event_type_t) String() string {
+func (i EsTccEventTypeT) String() string {
 	switch i {
 	case ES_TCC_EVENT_TYPE_UNKNOWN:
 		return "ES_TCC_EVENT_TYPE_UNKNOWN"
@@ -3182,11 +3182,11 @@ func (i Es_tcc_event_type_t) String() string {
 	case ES_TCC_EVENT_TYPE_DELETE:
 		return "ES_TCC_EVENT_TYPE_DELETE"
 	default:
-		return fmt.Sprintf("Es_tcc_event_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsTccEventTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_tcc_event_type_t(v string) (any, error) {
+func ParseEsTccEventTypeT(v string) (any, error) {
 	result := ES_TCC_EVENT_TYPE_UNKNOWN
 	switch v {
 	case "ES_TCC_EVENT_TYPE_UNKNOWN":
@@ -3203,7 +3203,7 @@ func ParseEs_tcc_event_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_tcc_event_type_t(values []Es_tcc_event_type_t) []string {
+func SerializeEsTccEventTypeT(values []EsTccEventTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -3211,22 +3211,22 @@ func SerializeEs_tcc_event_type_t(values []Es_tcc_event_type_t) []string {
 	return result
 }
 
-func (i Es_tcc_event_type_t) isMultiValue() bool {
+func (i EsTccEventTypeT) isMultiValue() bool {
 	return false
 }
 
 // es_tcc_identity_type_t
 // [ESTypes.h:649]
-type Es_tcc_identity_type_t int64
+type EsTccIdentityTypeT int32
 
 const (
-	ES_TCC_IDENTITY_TYPE_BUNDLE_ID               Es_tcc_identity_type_t = 0
-	ES_TCC_IDENTITY_TYPE_EXECUTABLE_PATH         Es_tcc_identity_type_t = 1
-	ES_TCC_IDENTITY_TYPE_POLICY_ID               Es_tcc_identity_type_t = 2
-	ES_TCC_IDENTITY_TYPE_FILE_PROVIDER_DOMAIN_ID Es_tcc_identity_type_t = 3
+	ES_TCC_IDENTITY_TYPE_BUNDLE_ID               EsTccIdentityTypeT = 0
+	ES_TCC_IDENTITY_TYPE_EXECUTABLE_PATH         EsTccIdentityTypeT = 1
+	ES_TCC_IDENTITY_TYPE_POLICY_ID               EsTccIdentityTypeT = 2
+	ES_TCC_IDENTITY_TYPE_FILE_PROVIDER_DOMAIN_ID EsTccIdentityTypeT = 3
 )
 
-func (i Es_tcc_identity_type_t) String() string {
+func (i EsTccIdentityTypeT) String() string {
 	switch i {
 	case ES_TCC_IDENTITY_TYPE_BUNDLE_ID:
 		return "ES_TCC_IDENTITY_TYPE_BUNDLE_ID"
@@ -3237,11 +3237,11 @@ func (i Es_tcc_identity_type_t) String() string {
 	case ES_TCC_IDENTITY_TYPE_FILE_PROVIDER_DOMAIN_ID:
 		return "ES_TCC_IDENTITY_TYPE_FILE_PROVIDER_DOMAIN_ID"
 	default:
-		return fmt.Sprintf("Es_tcc_identity_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsTccIdentityTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_tcc_identity_type_t(v string) (any, error) {
+func ParseEsTccIdentityTypeT(v string) (any, error) {
 	result := ES_TCC_IDENTITY_TYPE_BUNDLE_ID
 	switch v {
 	case "ES_TCC_IDENTITY_TYPE_BUNDLE_ID":
@@ -3258,7 +3258,7 @@ func ParseEs_tcc_identity_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_tcc_identity_type_t(values []Es_tcc_identity_type_t) []string {
+func SerializeEsTccIdentityTypeT(values []EsTccIdentityTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -3266,31 +3266,31 @@ func SerializeEs_tcc_identity_type_t(values []Es_tcc_identity_type_t) []string {
 	return result
 }
 
-func (i Es_tcc_identity_type_t) isMultiValue() bool {
+func (i EsTccIdentityTypeT) isMultiValue() bool {
 	return false
 }
 
 // es_touchid_mode_t See es_event_authentication_touchid_t
 // [ESTypes.h:786]
-type Es_touchid_mode_t int64
+type EsTouchidModeT int32
 
 const (
-	ES_TOUCHID_MODE_VERIFICATION   Es_touchid_mode_t = 0
-	ES_TOUCHID_MODE_IDENTIFICATION Es_touchid_mode_t = 1
+	ES_TOUCHID_MODE_VERIFICATION   EsTouchidModeT = 0
+	ES_TOUCHID_MODE_IDENTIFICATION EsTouchidModeT = 1
 )
 
-func (i Es_touchid_mode_t) String() string {
+func (i EsTouchidModeT) String() string {
 	switch i {
 	case ES_TOUCHID_MODE_VERIFICATION:
 		return "ES_TOUCHID_MODE_VERIFICATION"
 	case ES_TOUCHID_MODE_IDENTIFICATION:
 		return "ES_TOUCHID_MODE_IDENTIFICATION"
 	default:
-		return fmt.Sprintf("Es_touchid_mode_t(%d)", int64(i))
+		return fmt.Sprintf("EsTouchidModeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_touchid_mode_t(v string) (any, error) {
+func ParseEsTouchidModeT(v string) (any, error) {
 	result := ES_TOUCHID_MODE_VERIFICATION
 	switch v {
 	case "ES_TOUCHID_MODE_VERIFICATION":
@@ -3303,7 +3303,7 @@ func ParseEs_touchid_mode_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_touchid_mode_t(values []Es_touchid_mode_t) []string {
+func SerializeEsTouchidModeT(values []EsTouchidModeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -3311,26 +3311,26 @@ func SerializeEs_touchid_mode_t(values []Es_touchid_mode_t) []string {
 	return result
 }
 
-func (i Es_touchid_mode_t) isMultiValue() bool {
+func (i EsTouchidModeT) isMultiValue() bool {
 	return false
 }
 
 // @brief This enum describes the types of XPC service domains.
 // [ESTypes.h:49]
-type Es_xpc_domain_type_t int64
+type EsXpcDomainTypeT int32
 
 const (
-	ES_XPC_DOMAIN_TYPE_SYSTEM     Es_xpc_domain_type_t = 1
-	ES_XPC_DOMAIN_TYPE_USER       Es_xpc_domain_type_t = 2
-	ES_XPC_DOMAIN_TYPE_USER_LOGIN Es_xpc_domain_type_t = 3
-	ES_XPC_DOMAIN_TYPE_SESSION    Es_xpc_domain_type_t = 4
-	ES_XPC_DOMAIN_TYPE_PID        Es_xpc_domain_type_t = 5
-	ES_XPC_DOMAIN_TYPE_MANAGER    Es_xpc_domain_type_t = 6
-	ES_XPC_DOMAIN_TYPE_PORT       Es_xpc_domain_type_t = 7
-	ES_XPC_DOMAIN_TYPE_GUI        Es_xpc_domain_type_t = 8
+	ES_XPC_DOMAIN_TYPE_SYSTEM     EsXpcDomainTypeT = 1
+	ES_XPC_DOMAIN_TYPE_USER       EsXpcDomainTypeT = 2
+	ES_XPC_DOMAIN_TYPE_USER_LOGIN EsXpcDomainTypeT = 3
+	ES_XPC_DOMAIN_TYPE_SESSION    EsXpcDomainTypeT = 4
+	ES_XPC_DOMAIN_TYPE_PID        EsXpcDomainTypeT = 5
+	ES_XPC_DOMAIN_TYPE_MANAGER    EsXpcDomainTypeT = 6
+	ES_XPC_DOMAIN_TYPE_PORT       EsXpcDomainTypeT = 7
+	ES_XPC_DOMAIN_TYPE_GUI        EsXpcDomainTypeT = 8
 )
 
-func (i Es_xpc_domain_type_t) String() string {
+func (i EsXpcDomainTypeT) String() string {
 	switch i {
 	case ES_XPC_DOMAIN_TYPE_SYSTEM:
 		return "ES_XPC_DOMAIN_TYPE_SYSTEM"
@@ -3349,11 +3349,11 @@ func (i Es_xpc_domain_type_t) String() string {
 	case ES_XPC_DOMAIN_TYPE_GUI:
 		return "ES_XPC_DOMAIN_TYPE_GUI"
 	default:
-		return fmt.Sprintf("Es_xpc_domain_type_t(%d)", int64(i))
+		return fmt.Sprintf("EsXpcDomainTypeT(%d)", int64(i))
 	}
 }
 
-func ParseEs_xpc_domain_type_t(v string) (any, error) {
+func ParseEsXpcDomainTypeT(v string) (any, error) {
 	result := ES_XPC_DOMAIN_TYPE_SYSTEM
 	switch v {
 	case "ES_XPC_DOMAIN_TYPE_SYSTEM":
@@ -3378,7 +3378,7 @@ func ParseEs_xpc_domain_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeEs_xpc_domain_type_t(values []Es_xpc_domain_type_t) []string {
+func SerializeEsXpcDomainTypeT(values []EsXpcDomainTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -3386,26 +3386,26 @@ func SerializeEs_xpc_domain_type_t(values []Es_xpc_domain_type_t) []string {
 	return result
 }
 
-func (i Es_xpc_domain_type_t) isMultiValue() bool {
+func (i EsXpcDomainTypeT) isMultiValue() bool {
 	return false
 }
 
 // [mount.h:188]
-type Graftdmg_type_t int64
+type GraftdmgTypeT uint32
 
 const (
-	GRAFTDMG_CRYPTEX_BOOT                   Graftdmg_type_t = 1
-	GRAFTDMG_CRYPTEX_PREBOOT                Graftdmg_type_t = 2
-	GRAFTDMG_CRYPTEX_DOWNLEVEL              Graftdmg_type_t = 3
-	GRAFTDMG_CRYPTEX_AUTH_ENV_GENERIC       Graftdmg_type_t = 4
-	GRAFTDMG_CRYPTEX_PDI_NONCE              Graftdmg_type_t = 6
-	GRAFTDMG_CRYPTEX_EFFECTIVE_AP           Graftdmg_type_t = 7
-	GRAFTDMG_CRYPTEX_MOBILE_ASSET           Graftdmg_type_t = 8
-	GRAFTDMG_CRYPTEX_MOBILE_ASSET_WITH_CODE Graftdmg_type_t = 9
-	GRAFTDMG_CRYPTEX_MAX                    Graftdmg_type_t = 9
+	GRAFTDMG_CRYPTEX_BOOT                   GraftdmgTypeT = 1
+	GRAFTDMG_CRYPTEX_PREBOOT                GraftdmgTypeT = 2
+	GRAFTDMG_CRYPTEX_DOWNLEVEL              GraftdmgTypeT = 3
+	GRAFTDMG_CRYPTEX_AUTH_ENV_GENERIC       GraftdmgTypeT = 4
+	GRAFTDMG_CRYPTEX_PDI_NONCE              GraftdmgTypeT = 6
+	GRAFTDMG_CRYPTEX_EFFECTIVE_AP           GraftdmgTypeT = 7
+	GRAFTDMG_CRYPTEX_MOBILE_ASSET           GraftdmgTypeT = 8
+	GRAFTDMG_CRYPTEX_MOBILE_ASSET_WITH_CODE GraftdmgTypeT = 9
+	GRAFTDMG_CRYPTEX_MAX                    GraftdmgTypeT = 9
 )
 
-func (i Graftdmg_type_t) String() string {
+func (i GraftdmgTypeT) String() string {
 	switch i {
 	case GRAFTDMG_CRYPTEX_BOOT:
 		return "GRAFTDMG_CRYPTEX_BOOT"
@@ -3424,11 +3424,11 @@ func (i Graftdmg_type_t) String() string {
 	case GRAFTDMG_CRYPTEX_MOBILE_ASSET_WITH_CODE:
 		return "GRAFTDMG_CRYPTEX_MOBILE_ASSET_WITH_CODE"
 	default:
-		return fmt.Sprintf("Graftdmg_type_t(%d)", int64(i))
+		return fmt.Sprintf("GraftdmgTypeT(%d)", int64(i))
 	}
 }
 
-func ParseGraftdmg_type_t(v string) (any, error) {
+func ParseGraftdmgTypeT(v string) (any, error) {
 	result := GRAFTDMG_CRYPTEX_BOOT
 	switch v {
 	case "GRAFTDMG_CRYPTEX_BOOT":
@@ -3455,7 +3455,7 @@ func ParseGraftdmg_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeGraftdmg_type_t(values []Graftdmg_type_t) []string {
+func SerializeGraftdmgTypeT(values []GraftdmgTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -3463,26 +3463,26 @@ func SerializeGraftdmg_type_t(values []Graftdmg_type_t) []string {
 	return result
 }
 
-func (i Graftdmg_type_t) isMultiValue() bool {
+func (i GraftdmgTypeT) isMultiValue() bool {
 	return false
 }
 
 // [port.h:1102]
 // Bitmask — values may be combined with |.
-type Mpo_flags_t int64
+type MpoFlagsT uint32
 
 const (
-	MPO_PORT                            Mpo_flags_t = 0
-	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
-	MPO_REPLY_PORT                      Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
-	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
+	MPO_PORT                            MpoFlagsT = 0
+	MPO_SERVICE_PORT                    MpoFlagsT = 1024
+	MPO_CONNECTION_PORT                 MpoFlagsT = 2048
+	MPO_REPLY_PORT                      MpoFlagsT = 4096
+	MPO_WEAK_REPLY_PORT                 MpoFlagsT = 16384
+	MPO_NOTIFICATION_PORT               MpoFlagsT = 17408
+	MPO_EXCEPTION_PORT                  MpoFlagsT = 32768
+	MPO_CONNECTION_PORT_WITH_PORT_ARRAY MpoFlagsT = 65536
 )
 
-func (i Mpo_flags_t) String() string {
+func (i MpoFlagsT) String() string {
 	var values []string
 	if i == 0 {
 		values = append(values, "MPO_PORT")
@@ -3511,8 +3511,8 @@ func (i Mpo_flags_t) String() string {
 	return strings.Join(values, ",")
 }
 
-func ParseMpo_flags_t(v string) (any, error) {
-	var result Mpo_flags_t
+func ParseMpoFlagsT(v string) (any, error) {
+	var result MpoFlagsT
 	for _, str := range strings.Split(v, ",") {
 		switch str {
 		case "MPO_PORT":
@@ -3538,7 +3538,7 @@ func ParseMpo_flags_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeMpo_flags_t(values []Mpo_flags_t) []string {
+func SerializeMpoFlagsT(values []MpoFlagsT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -3546,6 +3546,6 @@ func SerializeMpo_flags_t(values []Mpo_flags_t) []string {
 	return result
 }
 
-func (i Mpo_flags_t) isMultiValue() bool {
+func (i MpoFlagsT) isMultiValue() bool {
 	return true
 }

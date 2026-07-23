@@ -32,8 +32,8 @@ type (
 	AEAContextFieldValues          = raw.AEAContextFieldValues
 	AEAContextFields               = raw.AEAContextFields
 	AEAProfiles                    = raw.AEAProfiles
-	Clockid_t                      = raw.Clockid_t
-	Filesec_property_t             = raw.Filesec_property_t
+	ClockidT                       = raw.ClockidT
+	FilesecPropertyT               = raw.FilesecPropertyT
 )
 
 const (

@@ -303,6 +303,18 @@ type TkStubs struct {
 	TkCreateOldPhotoImageFormat      unsafe.Pointer
 }
 
+type Tk_FontMetrics struct {
+	Ascent    int32
+	Descent   int32
+	Linespace int32
+}
+
+type Tk_TSOffset struct {
+	Flags   int32
+	Xoffset int32
+	Yoffset int32
+}
+
 type XArc struct {
 	X      int16
 	Y      int16

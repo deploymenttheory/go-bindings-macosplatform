@@ -10,7 +10,7 @@ import (
 )
 
 // The structure that describes an instruction or data cache element.
-type CacheType int64
+type CacheType uint32
 
 const (
 	// Data or unified cache
@@ -33,7 +33,7 @@ func (e CacheType) String() string {
 }
 
 // The type that describes the event that triggered a guest exit to the host.
-type ExitReason int64
+type ExitReason uint32
 
 const (
 	// asynchronous exit requested explicitly by hv_vcpus_exit() call
@@ -64,7 +64,7 @@ func (e ExitReason) String() string {
 }
 
 // The type that defines feature registers.
-type FeatureReg int64
+type FeatureReg uint32
 
 const (
 	FeatureRegIDAa64dfr0EL1  FeatureReg = 0
@@ -120,7 +120,7 @@ func (e FeatureReg) String() string {
 	}
 }
 
-type GICDistributorReg int64
+type GICDistributorReg uint16
 
 const (
 	GICDistributorRegCtlr          GICDistributorReg = 0
@@ -4736,7 +4736,7 @@ func (e GICDistributorReg) String() string {
 	}
 }
 
-type GICIccReg int64
+type GICIccReg uint16
 
 const (
 	GICIccRegPmrEL1     GICIccReg = 49712
@@ -4783,7 +4783,7 @@ func (e GICIccReg) String() string {
 	}
 }
 
-type GICIchReg int64
+type GICIchReg uint16
 
 const (
 	GICIchRegAp0r0EL2 GICIchReg = 58944
@@ -4869,7 +4869,7 @@ func (e GICIchReg) String() string {
 	}
 }
 
-type GICIcvReg int64
+type GICIcvReg uint16
 
 const (
 	GICIcvRegPmrEL1     GICIcvReg = 49712
@@ -4913,7 +4913,7 @@ func (e GICIcvReg) String() string {
 	}
 }
 
-type GICIntid int64
+type GICIntid uint16
 
 const (
 	GICIntidPerformanceMonitor GICIntid = 23
@@ -4942,7 +4942,7 @@ func (e GICIntid) String() string {
 	}
 }
 
-type GICMSIReg int64
+type GICMSIReg uint16
 
 const (
 	GICMSIRegTyper     GICMSIReg = 8
@@ -4962,7 +4962,7 @@ func (e GICMSIReg) String() string {
 	}
 }
 
-type GICRedistributorReg int64
+type GICRedistributorReg uint32
 
 const (
 	GICRedistributorRegTyper       GICRedistributorReg = 8
@@ -5034,7 +5034,7 @@ func (e GICRedistributorReg) String() string {
 }
 
 // The type that defines the vCPU’s interrupts.
-type InterruptType int64
+type InterruptType uint32
 
 const (
 	// Corresponds to an ARM IRQ .
@@ -5056,7 +5056,7 @@ func (e InterruptType) String() string {
 	}
 }
 
-type IPAGranule int64
+type IPAGranule uint32
 
 const (
 	IPAGranule4kb  IPAGranule = 0
@@ -5077,7 +5077,7 @@ func (e IPAGranule) String() string {
 }
 
 // The type that defines general registers.
-type Reg int64
+type Reg uint32
 
 const (
 	RegX0   Reg = 0
@@ -5199,7 +5199,7 @@ func (e Reg) String() string {
 }
 
 // The type that defines SIMD and floating-point registers.
-type SIMDFPReg int64
+type SIMDFPReg uint32
 
 const (
 	SIMDFPRegQ0  SIMDFPReg = 0
@@ -5309,7 +5309,7 @@ func (e SIMDFPReg) String() string {
 	}
 }
 
-type SMEPReg int64
+type SMEPReg uint32
 
 const (
 	SMEPReg0  SMEPReg = 0
@@ -5371,7 +5371,7 @@ func (e SMEPReg) String() string {
 	}
 }
 
-type SMEZReg int64
+type SMEZReg uint32
 
 const (
 	SMEZReg0  SMEZReg = 0
@@ -5482,7 +5482,7 @@ func (e SMEZReg) String() string {
 }
 
 // The type of system registers.
-type SysReg int64
+type SysReg uint16
 
 const (
 	SysRegDbgbvr0EL1     SysReg = 32772
@@ -5941,7 +5941,7 @@ func (e SysReg) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -5965,7 +5965,7 @@ func (e Idtype) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0

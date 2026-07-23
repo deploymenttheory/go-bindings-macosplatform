@@ -1860,7 +1860,7 @@
       "availability": {}
     },
     "acl_entry_id_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FIRST_ENTRY",
@@ -1883,7 +1883,7 @@
       "sdk_line": 118
     },
     "acl_flag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FLAG_DEFER_INHERIT",
@@ -1926,7 +1926,7 @@
       "sdk_line": 125
     },
     "acl_perm_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_READ_DATA",
@@ -2024,7 +2024,7 @@
       "sdk_line": 72
     },
     "acl_tag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_UNDEFINED_TAG",
@@ -2047,7 +2047,7 @@
       "sdk_line": 94
     },
     "acl_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_TYPE_EXTENDED",
@@ -2090,7 +2090,7 @@
       "sdk_line": 101
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -2138,7 +2138,7 @@
       "sdk_line": 156
     },
     "cryptex_auth_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "CRYPTEX1_AUTH_ENV_GENERIC",
@@ -2176,7 +2176,7 @@
       "sdk_line": 188
     },
     "es_action_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_ACTION_TYPE_AUTH",
@@ -2194,7 +2194,7 @@
       "sdk_line": 15
     },
     "es_address_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_ADDRESS_TYPE_NONE",
@@ -2226,7 +2226,7 @@
       "sdk_line": 491
     },
     "es_auth_result_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_AUTH_RESULT_ALLOW",
@@ -2247,7 +2247,7 @@
       "doc": "@brief Valid authorization values to be used when responding to a es_message_t auth event"
     },
     "es_authentication_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_AUTHENTICATION_TYPE_OD",
@@ -2281,7 +2281,7 @@
       "doc": "@brief This enum describes the types of authentications that ES_EVENT_TYPE_NOTIFY_AUTHENTICATION can describe."
     },
     "es_authorization_rule_class_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_AUTHORIZATION_RULE_CLASS_USER",
@@ -2331,7 +2331,7 @@
       "sdk_line": 521
     },
     "es_auto_unlock_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_AUTO_UNLOCK_MACHINE_UNLOCK",
@@ -2352,7 +2352,7 @@
       "doc": "es_auto_unlock_type_t See es_event_authentication_auto_unlock_t"
     },
     "es_btm_item_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_BTM_ITEM_TYPE_USER_ITEM",
@@ -2386,7 +2386,7 @@
       "doc": "es_btm_item_type_t See es_btm_launch_item_t"
     },
     "es_clear_cache_result_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_CLEAR_CACHE_RESULT_SUCCESS",
@@ -2412,7 +2412,7 @@
       "doc": "@brief Error conditions for clearing the authorisation caches"
     },
     "es_cs_validation_category_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_CS_VALIDATION_CATEGORY_INVALID",
@@ -2476,7 +2476,7 @@
       "doc": "es_cs_validation_category Indicates the code signature validation policy that was applied to a binary"
     },
     "es_destination_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_DESTINATION_TYPE_EXISTING_FILE",
@@ -2495,7 +2495,7 @@
       "doc": "es_destination_type_t See es_event_create_t / es_event_rename_t"
     },
     "es_event_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_EVENT_TYPE_AUTH_EXEC",
@@ -3294,7 +3294,7 @@
       "doc": "The valid event types recognized by EndpointSecurity @discussion When a program subscribes to and receives an AUTH-related event, it must respond with an appropriate result indicating whether or not the operation should be allowed to continue. The valid API options are: - es_respond_auth_result - es_respond_flags_result Currently, only ES_EVENT_TYPE_AUTH_OPEN must use es_respond_flags_result. All other AUTH events must use es_respond_auth_result."
     },
     "es_gatekeeper_user_override_file_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_GATEKEEPER_USER_OVERRIDE_FILE_TYPE_PATH",
@@ -3314,7 +3314,7 @@
       "sdk_line": 568
     },
     "es_get_task_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_GET_TASK_TYPE_TASK_FOR_PID",
@@ -3338,7 +3338,7 @@
       "doc": "es_get_task_type_t See es_event_get_task_t"
     },
     "es_mount_disposition_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_MOUNT_DISPOSITION_EXTERNAL",
@@ -3377,7 +3377,7 @@
       "doc": "es_mount_disposition_t See es_event_mount_t"
     },
     "es_mute_inversion_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_MUTE_INVERSION_TYPE_PROCESS",
@@ -3405,7 +3405,7 @@
       "sdk_line": 502
     },
     "es_mute_inverted_return_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_MUTE_INVERTED",
@@ -3435,7 +3435,7 @@
       "sdk_line": 509
     },
     "es_mute_path_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_MUTE_PATH_TYPE_PREFIX",
@@ -3471,7 +3471,7 @@
       "sdk_line": 415
     },
     "es_new_client_result_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_NEW_CLIENT_RESULT_SUCCESS",
@@ -3521,7 +3521,7 @@
       "doc": "@brief Error conditions for creating a new client"
     },
     "es_od_account_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_OD_ACCOUNT_TYPE_USER",
@@ -3539,7 +3539,7 @@
       "sdk_line": 554
     },
     "es_od_member_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_OD_MEMBER_TYPE_USER_NAME",
@@ -3565,7 +3565,7 @@
       "sdk_line": 542
     },
     "es_od_record_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_OD_RECORD_TYPE_USER",
@@ -3583,7 +3583,7 @@
       "sdk_line": 562
     },
     "es_openssh_login_result_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_OPENSSH_LOGIN_EXCEED_MAXTRIES",
@@ -3642,7 +3642,7 @@
       "doc": "es_openssh_login_result_type_t See es_event_openssh_login_t"
     },
     "es_proc_check_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_PROC_CHECK_TYPE_LISTPIDS",
@@ -3701,7 +3701,7 @@
       "doc": "@brief This enum describes the type of the es_event_proc_check_t event that are currently used @note ES_PROC_CHECK_TYPE_KERNMSGBUF, ES_PROC_CHECK_TYPE_TERMINATE and ES_PROC_CHECK_TYPE_UDATA_INFO are deprecated and no proc_check messages will be generated for the corresponding proc_info call numbers. The terminate callnum is covered by the signal event."
     },
     "es_proc_suspend_resume_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_PROC_SUSPEND_RESUME_TYPE_SUSPEND",
@@ -3725,7 +3725,7 @@
       "doc": "@brief This enum describes the type of suspend/resume operations that are currently used."
     },
     "es_profile_source_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_PROFILE_SOURCE_MANAGED",
@@ -3744,7 +3744,7 @@
       "doc": "es_profile_source_t See es_profile_t"
     },
     "es_respond_result_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_RESPOND_RESULT_SUCCESS",
@@ -3788,7 +3788,7 @@
       "doc": "@brief Error conditions for responding to a message"
     },
     "es_result_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_RESULT_TYPE_AUTH",
@@ -3809,7 +3809,7 @@
       "doc": "@brief Valid values for the result_type of es_result_t to indicate the appropriate union member to use"
     },
     "es_return_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_RETURN_SUCCESS",
@@ -3828,7 +3828,7 @@
       "doc": "@brief Return value for functions that can only fail in one way"
     },
     "es_set_or_clear_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_SET",
@@ -3846,7 +3846,7 @@
       "sdk_line": 20
     },
     "es_sudo_plugin_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_SUDO_PLUGIN_TYPE_UNKNOWN",
@@ -3885,7 +3885,7 @@
       "doc": "@brief This enum describes the type of plugin types in sudo"
     },
     "es_tcc_authorization_reason_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_TCC_AUTHORIZATION_REASON_NONE",
@@ -3964,7 +3964,7 @@
       "doc": "ess_tcc_authorization_reason_t Represents the reason a TCC permission was updated."
     },
     "es_tcc_authorization_right_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_TCC_AUTHORIZATION_RIGHT_DENIED",
@@ -4008,7 +4008,7 @@
       "doc": "ess_tcc_authorization_right_t Represents the type of authorization permission an application has to a TCC Service."
     },
     "es_tcc_event_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_TCC_EVENT_TYPE_UNKNOWN",
@@ -4037,7 +4037,7 @@
       "doc": "@typedef ess_tcc_event_type_t Represent the type of TCC modification event. - ES_TCC_EVENT_TYPE_UNKNOWN: Unknown prior state. - ES_TCC_EVENT_TYPE_CREATE: A new TCC authorization record was created. - ES_TCC_EVENT_TYPE_MODIFY: An existing TCC authorization record was modified. - ES_TCC_EVENT_TYPE_DELETE: An existing TCC authorization record was deleted."
     },
     "es_tcc_identity_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_TCC_IDENTITY_TYPE_BUNDLE_ID",
@@ -4066,7 +4066,7 @@
       "doc": "es_tcc_identity_type_t Represent the identity type of an application which has access to a TCC service."
     },
     "es_touchid_mode_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_TOUCHID_MODE_VERIFICATION",
@@ -4085,7 +4085,7 @@
       "doc": "es_touchid_mode_t See es_event_authentication_touchid_t"
     },
     "es_xpc_domain_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ES_XPC_DOMAIN_TYPE_SYSTEM",
@@ -4134,7 +4134,7 @@
       "doc": "@brief This enum describes the types of XPC service domains."
     },
     "graftdmg_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "GRAFTDMG_CRYPTEX_BOOT",
@@ -4187,7 +4187,7 @@
       "sdk_line": 188
     },
     "mpo_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPO_PORT",
@@ -4238,6 +4238,18 @@
     }
   },
   "structs": {
+    "audit_token_t": {
+      "fields": [
+        {
+          "name": "val",
+          "objc_type": "unsigned int[8]"
+        }
+      ],
+      "size": 32,
+      "availability": {},
+      "sdk_file": "message.h",
+      "sdk_line": 506
+    },
     "es_authorization_result_t": {
       "fields": [
         {

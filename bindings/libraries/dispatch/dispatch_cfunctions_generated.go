@@ -138,7 +138,7 @@ func (h Object) Resume() {
 	raw.Dispatch_resume(h.ptr)
 }
 
-func (h Object) SetQosClassFloor(qos_class raw.Qos_class_t, relative_priority int32) {
+func (h Object) SetQosClassFloor(qos_class raw.QosClassT, relative_priority int32) {
 	raw.Dispatch_set_qos_class_floor(h.ptr, qos_class, relative_priority)
 }
 
@@ -180,7 +180,7 @@ func (h Queue) GetLabel() string {
 	return raw.Dispatch_queue_get_label(h.ptr)
 }
 
-func (h Queue) GetQosClass(relative_priority_ptr *int32) raw.Qos_class_t {
+func (h Queue) GetQosClass(relative_priority_ptr *int32) raw.QosClassT {
 	return raw.Dispatch_queue_get_qos_class(h.ptr, relative_priority_ptr)
 }
 
@@ -229,11 +229,11 @@ func (h QueueAttr) MakeInitiallyInactive() QueueAttr {
 	return WrapQueueAttr(raw.Dispatch_queue_attr_make_initially_inactive(h.ptr))
 }
 
-func (h QueueAttr) MakeWithAutoreleaseFrequency(frequency raw.Dispatch_autorelease_frequency_t) QueueAttr {
+func (h QueueAttr) MakeWithAutoreleaseFrequency(frequency raw.DispatchAutoreleaseFrequencyT) QueueAttr {
 	return WrapQueueAttr(raw.Dispatch_queue_attr_make_with_autorelease_frequency(h.ptr, frequency))
 }
 
-func (h QueueAttr) MakeWithQosClass(qos_class raw.Qos_class_t, relative_priority int32) QueueAttr {
+func (h QueueAttr) MakeWithQosClass(qos_class raw.QosClassT, relative_priority int32) QueueAttr {
 	return WrapQueueAttr(raw.Dispatch_queue_attr_make_with_qos_class(h.ptr, qos_class, relative_priority))
 }
 
@@ -330,7 +330,7 @@ func WrapWorkloop(p unsafe.Pointer) Workloop { return Workloop{ptr: p} }
 // Ptr returns the underlying dispatch_workloop_t handle.
 func (h Workloop) Ptr() unsafe.Pointer { return h.ptr }
 
-func (h Workloop) SetAutoreleaseFrequency(frequency raw.Dispatch_autorelease_frequency_t) {
+func (h Workloop) SetAutoreleaseFrequency(frequency raw.DispatchAutoreleaseFrequencyT) {
 	raw.Dispatch_workloop_set_autorelease_frequency(h.ptr, frequency)
 }
 
@@ -386,7 +386,7 @@ func AllowSendSignals(preserve_signum int32) int32 {
 	return raw.Dispatch_allow_send_signals(preserve_signum)
 }
 
-func SourceCreate(type_ *raw.Dispatch_source_type_t, handle uint64, mask uint64, queue Queue) Source {
+func SourceCreate(type_ *raw.DispatchSourceTypeT, handle uint64, mask uint64, queue Queue) Source {
 	return WrapSource(raw.Dispatch_source_create(type_, handle, mask, queue.ptr))
 }
 

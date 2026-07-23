@@ -86,7 +86,7 @@ type CGDataProvider struct{}
 
 // Defines pointers to client-defined callback functions that manage the sending of data for a direct-access data provider.
 type CGDataProviderDirectCallbacks struct {
-	Version            uint
+	Version            uint32
 	GetBytePointer     unsafe.Pointer
 	ReleaseBytePointer unsafe.Pointer
 	GetBytesAtPosition unsafe.Pointer
@@ -95,7 +95,7 @@ type CGDataProviderDirectCallbacks struct {
 
 // Defines a structure containing pointers to client-defined callback functions that manage the sending of data for a sequential-access data provider.
 type CGDataProviderSequentialCallbacks struct {
-	Version     uint
+	Version     uint32
 	GetBytes    unsafe.Pointer
 	SkipForward unsafe.Pointer
 	Rewind      unsafe.Pointer
@@ -130,7 +130,7 @@ type CGFunction struct{}
 
 // A structure that contains callbacks needed by a CGFunctionRef object.
 type CGFunctionCallbacks struct {
-	Version     uint
+	Version     uint32
 	Evaluate    unsafe.Pointer
 	ReleaseInfo unsafe.Pointer
 }
@@ -193,7 +193,7 @@ type CGPSConverter struct{}
 
 // A structure for holding the callbacks provided when you create a PostScript converter object.
 type CGPSConverterCallbacks struct {
-	Version       uint
+	Version       uint32
 	BeginDocument unsafe.Pointer
 	EndDocument   unsafe.Pointer
 	BeginPage     unsafe.Pointer
@@ -219,7 +219,7 @@ type CGPattern struct{}
 
 // A structure that holds a version and two callback functions for drawing a custom pattern.
 type CGPatternCallbacks struct {
-	Version     uint
+	Version     uint32
 	DrawPattern unsafe.Pointer
 	ReleaseInfo unsafe.Pointer
 }

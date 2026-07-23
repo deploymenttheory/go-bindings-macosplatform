@@ -980,8 +980,8 @@ func (o *AVCaptureDevice) DynamicAspectRatio() *foundation.NSString {
 }
 
 // A key-value observable property describing the output dimensions of the video buffer based on the device's dynamic aspect ratio. If the device's activeFormat's “AVCaptureDeviceFormat/supportedDynamicAspectRatios“ is an empty array, this property returns {0,0}.
-func (o *AVCaptureDevice) DynamicDimensions() coremedia.CMVideoDimensions {
-	_ret := objc.Send[coremedia.CMVideoDimensions](o.Ptr(), _aVCaptureDeviceSelDynamicDimensions)
+func (o *AVCaptureDevice) DynamicDimensions() CMVideoDimensions {
+	_ret := objc.Send[CMVideoDimensions](o.Ptr(), _aVCaptureDeviceSelDynamicDimensions)
 	return _ret
 }
 

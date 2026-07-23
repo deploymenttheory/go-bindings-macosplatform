@@ -103,13 +103,13 @@ func (o *IOUSBHostInterface) IdleTimeout() float64 {
 }
 
 // @brief       Retrieve the configuration descriptor associated with this interface @return      IOUSBConfigurationDescriptor pointer
-func (o *IOUSBHostInterface) ConfigurationDescriptor() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostInterfaceSelConfigurationDescriptor)
+func (o *IOUSBHostInterface) ConfigurationDescriptor() *IOUSBConfigurationDescriptor {
+	_ret := objc.Send[*IOUSBConfigurationDescriptor](o.Ptr(), _iOUSBHostInterfaceSelConfigurationDescriptor)
 	return _ret
 }
 
 // @brief       Retrieve the interface descriptor associated with this interface. @return      IOUSBInterfaceDescriptor pointer
-func (o *IOUSBHostInterface) InterfaceDescriptor() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostInterfaceSelInterfaceDescriptor)
+func (o *IOUSBHostInterface) InterfaceDescriptor() *IOUSBInterfaceDescriptor {
+	_ret := objc.Send[*IOUSBInterfaceDescriptor](o.Ptr(), _iOUSBHostInterfaceSelInterfaceDescriptor)
 	return _ret
 }

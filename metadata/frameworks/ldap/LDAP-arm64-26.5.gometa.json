@@ -9,7 +9,7 @@
   "protocols": {},
   "enums": {
     "ldap_sync_refresh_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "LDAP_SYNC_CAPI_NONE",

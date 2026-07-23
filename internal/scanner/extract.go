@@ -769,10 +769,16 @@ func scanEnum(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *
 		Doc:          docForNode(absFile, line),
 	}
 	if node.FixedUnderlyingType != nil {
-		e.GoType = objcIntTypeToGo(node.FixedUnderlyingType.QualType)
-	}
-	if e.GoType == "" {
-		e.GoType = "int64" // safe default
+		// Prefer the desugared canonical type so every typedef spelling of the same
+		// integer type resolves identically: uint32_t, UInt32, and unsigned int all
+		// desugar to "unsigned int" (→ uint32). Using qualType alone would leave the
+		// typedef spellings unrecognised and fall through to the int64 default,
+		// mis-sizing the enum (e.g. AudioChannelFlags is CF_OPTIONS(UInt32)).
+		underlying := node.FixedUnderlyingType.DesugaredQualType
+		if underlying == "" {
+			underlying = node.FixedUnderlyingType.QualType
+		}
+		e.GoType = objcIntTypeToGo(underlying)
 	}
 	var nextVal int64
 	for i := range node.Inner {
@@ -806,6 +812,15 @@ func scanEnum(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *
 			}
 			e.Members = append(e.Members, member)
 		}
+	}
+	if e.GoType == "" {
+		// The clang AST reports no fixedUnderlyingType for a plain enum (no
+		// `enum E : type` and no CF_ENUM/CF_OPTIONS macro); clang still chose an
+		// underlying integer type implicitly from the enumerator values. Reproduce
+		// that choice from the member values so the enum's width matches C. A blanket
+		// int64 default would make a plain int-sized enum 8 bytes and mislay any
+		// struct that embeds it (e.g. AudioChannelDescription's AudioChannelFlags).
+		e.GoType = enumGoTypeFromValues(e.Members)
 	}
 	framework.Enums[node.Name] = e
 }
@@ -972,20 +987,20 @@ func cScalarSizeAlign(cType string) (size, align int, ok bool) {
 	}
 	// Only fixed-width types whose Go mapping is unambiguous and identical in size
 	// are admitted, so the scanner's packed-contiguity check agrees with the
-	// emitter's (which computes from the resolved Go type). Native ints of
-	// platform-dependent or codegen-dependent width (int, unsigned, short) are
-	// deliberately excluded — a struct using them stays an opaque unsafe.Pointer
-	// rather than risk a scanner/emitter layout disagreement.
+	// emitter's (which computes from the resolved Go type).
 	switch t {
 	case "uint8_t", "int8_t", "char", "signed char", "unsigned char", "bool", "_Bool", "Boolean":
 		return 1, 1, true
 	case "uint16_t", "int16_t", "short", "unsigned short", "short int", "unsigned short int":
-		// The mapper resolves short/unsigned short to int16/uint16 (2 bytes), so
-		// these are safe. Plain int/unsigned are deliberately excluded: the mapper
-		// resolves them to Go int/uint (8 bytes), which does not match C's 4-byte
-		// int, so a struct using them stays an opaque unsafe.Pointer.
 		return 2, 2, true
-	case "uint32_t", "int32_t", "float":
+	case "uint32_t", "int32_t", "float", "int", "signed int", "unsigned int", "unsigned":
+		// Native C int/unsigned are 4 bytes. The mapper resolves them to Go int/uint
+		// (8 bytes) for ergonomic function signatures, but every struct-field emitter
+		// width-corrects them back to int32/uint32 (frameworks idiomatic via
+		// structlayout.StructFieldGoType, raw frameworks likewise, libraries via the
+		// mapper's int->int32 primitive), so the emitted 4-byte field matches C and
+		// this admission. This is what lets referenced-by-value structs like
+		// audit_token_t (unsigned int[8]) be captured as typed value structs.
 		return 4, 4, true
 	case "uint64_t", "int64_t", "double":
 		return 8, 8, true
@@ -1435,28 +1450,84 @@ func hasValueInitializer(node *ASTNode) bool {
 }
 
 // objcIntTypeToGo converts an ObjC integer type name to its Go equivalent.
+// enumGoTypeFromValues picks the Go integer type for a plain enum whose clang
+// AST reports no fixed underlying type, reproducing clang's implicit choice from
+// the enumerator values: the smallest of int/unsigned int/long/unsigned long
+// (int32/uint32/int64/uint64) that represents every value. This keeps a plain
+// int-sized enum at 4 bytes instead of defaulting to int64 (8 bytes), which would
+// mislay any struct that embeds it. An empty enum falls back to int32.
+func enumGoTypeFromValues(members []macosplatformmetadata.EnumMember) string {
+	const (
+		maxInt32  = 1<<31 - 1
+		minInt32  = -(1 << 31)
+		maxUint32 = 1<<32 - 1
+		maxInt64  = 1<<63 - 1
+	)
+	anyNeg := false
+	var maxU uint64
+	var minI int64
+	for _, m := range members {
+		v := strings.TrimSpace(m.Value)
+		if v == "" {
+			continue
+		}
+		if strings.HasPrefix(v, "-") {
+			anyNeg = true
+			if n, err := strconv.ParseInt(v, 0, 64); err == nil && n < minI {
+				minI = n
+			}
+			continue
+		}
+		if n, err := strconv.ParseUint(v, 0, 64); err == nil && n > maxU {
+			maxU = n
+		}
+	}
+	if anyNeg {
+		// Signed: int32 when the whole range fits, else int64.
+		if minI >= minInt32 && maxU <= maxInt32 {
+			return "int32"
+		}
+		return "int64"
+	}
+	switch {
+	case maxU <= maxInt32:
+		return "int32" // clang uses signed int for small non-negative enums
+	case maxU <= maxUint32:
+		return "uint32"
+	case maxU <= maxInt64:
+		return "int64"
+	default:
+		return "uint64"
+	}
+}
+
 func objcIntTypeToGo(qt string) string {
 	qt = strings.TrimSpace(qt)
+	// Both the keyword spelling ("unsigned int") and the stdint typedef spelling
+	// ("uint32_t") reach here: clang reports an enum's fixedUnderlyingType by its
+	// written form, so CF_OPTIONS(uint32_t, …) yields qualType "uint32_t". Handle
+	// both, or a fixed-width enum would fall through to the int64 default and be
+	// emitted 8 bytes wide — mislaying every struct that embeds it (e.g. CMTime).
 	switch qt {
-	case "int", "signed int":
+	case "int", "signed int", "int32_t":
 		return "int32"
-	case "unsigned int":
+	case "unsigned int", "uint32_t":
 		return "uint32"
 	case "long", "signed long":
 		return "int64"
 	case "unsigned long", "NSUInteger":
 		return "uint64"
-	case "long long", "signed long long", "NSInteger":
+	case "long long", "signed long long", "NSInteger", "int64_t":
 		return "int64"
-	case "unsigned long long":
+	case "unsigned long long", "uint64_t":
 		return "uint64"
-	case "short", "signed short":
+	case "short", "signed short", "int16_t":
 		return "int16"
-	case "unsigned short":
+	case "unsigned short", "uint16_t":
 		return "uint16"
-	case "char", "signed char":
+	case "char", "signed char", "int8_t":
 		return "int8"
-	case "unsigned char":
+	case "unsigned char", "uint8_t", "Boolean":
 		return "uint8"
 	}
 	// If it contains "unsigned", guess uint64

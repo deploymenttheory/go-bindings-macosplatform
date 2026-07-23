@@ -290,12 +290,14 @@ func Tk_CanvasPsY(canvas unsafe.Pointer, y float64) float64 {
 var _fnTk_CanvasSetOffset func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Tk_CanvasSetOffset calls the Tk framework function Tk_CanvasSetOffset.
-func Tk_CanvasSetOffset(canvas unsafe.Pointer, gc unsafe.Pointer, offset unsafe.Pointer) {
+func Tk_CanvasSetOffset(canvas unsafe.Pointer, gc unsafe.Pointer) (offset Tk_TSOffset) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTk_CanvasSetOffset == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_CanvasSetOffset, _lib, "Tk_CanvasSetOffset")
 	}
-	_fnTk_CanvasSetOffset(canvas, gc, offset)
+	var _out0 Tk_TSOffset
+	_fnTk_CanvasSetOffset(canvas, gc, unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnTk_CanvasSetStippleOrigin func(unsafe.Pointer, unsafe.Pointer)
@@ -1602,12 +1604,14 @@ func Tk_GetFontFromObj(tkwin unsafe.Pointer, objPtr unsafe.Pointer) unsafe.Point
 var _fnTk_GetFontMetrics func(unsafe.Pointer, unsafe.Pointer)
 
 // Tk_GetFontMetrics calls the Tk framework function Tk_GetFontMetrics.
-func Tk_GetFontMetrics(font unsafe.Pointer, fmPtr unsafe.Pointer) {
+func Tk_GetFontMetrics(font unsafe.Pointer) (fmPtr Tk_FontMetrics) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTk_GetFontMetrics == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_GetFontMetrics, _lib, "Tk_GetFontMetrics")
 	}
-	_fnTk_GetFontMetrics(font, fmPtr)
+	var _out0 Tk_FontMetrics
+	_fnTk_GetFontMetrics(font, unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnTk_GetGC func(unsafe.Pointer, int, unsafe.Pointer) unsafe.Pointer
