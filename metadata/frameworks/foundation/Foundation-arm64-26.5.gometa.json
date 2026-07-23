@@ -103791,7 +103791,8 @@
         }
       ],
       "return": {
-        "objc_type": "NS_RETURNS_RETAINED id  _Nullable"
+        "objc_type": "NS_RETURNS_RETAINED id  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Foundation/NSZone.h",
@@ -103806,7 +103807,8 @@
         }
       ],
       "return": {
-        "objc_type": "NS_RETURNS_RETAINED id  _Nullable"
+        "objc_type": "NS_RETURNS_RETAINED id  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Foundation/NSZone.h",
@@ -104081,7 +104083,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef  _Nullable"
+        "objc_type": "CFTypeRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Foundation/NSObject.h",
@@ -104097,7 +104100,8 @@
         }
       ],
       "return": {
-        "objc_type": "NS_RETURNS_RETAINED id  _Nullable"
+        "objc_type": "NS_RETURNS_RETAINED id  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Foundation/NSObject.h",
@@ -106285,7 +106289,8 @@
         }
       ],
       "return": {
-        "objc_type": "NS_RETURNS_RETAINED NSMapTable * _Nonnull"
+        "objc_type": "NS_RETURNS_RETAINED NSMapTable * _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Foundation/NSMapTable.h",
@@ -106572,7 +106577,8 @@
         }
       ],
       "return": {
-        "objc_type": "NS_RETURNS_RETAINED NSMapTable * _Nonnull"
+        "objc_type": "NS_RETURNS_RETAINED NSMapTable * _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Foundation/NSMapTable.h",
@@ -106595,7 +106601,8 @@
         }
       ],
       "return": {
-        "objc_type": "NS_RETURNS_RETAINED NSMapTable * _Nonnull"
+        "objc_type": "NS_RETURNS_RETAINED NSMapTable * _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "Foundation/NSMapTable.h",

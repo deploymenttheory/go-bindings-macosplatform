@@ -94,7 +94,7 @@ func NewIOBluetoothSDPDataElementWithTypeSizeDescriptorSizeValue(newType uint8, 
 func (ibsde *IOBluetoothSDPDataElement) SDPDataElementRef() obj.Object {
 	defer runtime.KeepAlive(ibsde)
 	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getSDPDataElementRef"))
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }
 
 // TypeDescriptor returns the SDP spec defined data element type descriptor for the target data element.

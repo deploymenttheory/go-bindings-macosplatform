@@ -3042,7 +3042,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.0"
@@ -3069,7 +3070,8 @@
         }
       ],
       "return": {
-        "objc_type": "CF_RETURNS_RETAINED CFTypeRef"
+        "objc_type": "CF_RETURNS_RETAINED CFTypeRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.0"
@@ -3855,7 +3857,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nonnull"
+        "objc_type": "CFDictionaryRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.0"
@@ -4986,7 +4989,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreVideo/CVPixelFormatDescription.h",
@@ -5002,7 +5006,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreVideo/CVPixelFormatDescription.h",
@@ -5036,7 +5041,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nonnull"
+        "objc_type": "CFStringRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"

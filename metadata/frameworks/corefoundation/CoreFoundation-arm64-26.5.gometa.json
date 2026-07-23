@@ -5426,7 +5426,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBase.h",
@@ -5539,7 +5540,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBase.h",
@@ -5605,7 +5607,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFArray.h",
@@ -5624,7 +5627,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFArray.h",
@@ -5647,7 +5651,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableArrayRef"
+        "objc_type": "CFMutableArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFArray.h",
@@ -5670,7 +5675,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableArrayRef"
+        "objc_type": "CFMutableArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFArray.h",
@@ -6113,7 +6119,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFBagRef"
+        "objc_type": "CFBagRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBag.h",
@@ -6132,7 +6139,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFBagRef"
+        "objc_type": "CFBagRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBag.h",
@@ -6155,7 +6163,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableBagRef"
+        "objc_type": "CFMutableBagRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBag.h",
@@ -6178,7 +6187,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableBagRef"
+        "objc_type": "CFMutableBagRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBag.h",
@@ -6444,7 +6454,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFBinaryHeapRef"
+        "objc_type": "CFBinaryHeapRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBinaryHeap.h",
@@ -6468,7 +6479,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFBinaryHeapRef"
+        "objc_type": "CFBinaryHeapRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBinaryHeap.h",
@@ -6690,7 +6702,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFBitVectorRef"
+        "objc_type": "CFBitVectorRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBitVector.h",
@@ -6709,7 +6722,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFBitVectorRef"
+        "objc_type": "CFBitVectorRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBitVector.h",
@@ -6728,7 +6742,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableBitVectorRef"
+        "objc_type": "CFMutableBitVectorRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBitVector.h",
@@ -6751,7 +6766,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableBitVectorRef"
+        "objc_type": "CFMutableBitVectorRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBitVector.h",
@@ -7429,7 +7445,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef"
+        "objc_type": "CFDictionaryRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFDictionary.h",
@@ -7448,7 +7465,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef"
+        "objc_type": "CFDictionaryRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFDictionary.h",
@@ -7475,7 +7493,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableDictionaryRef"
+        "objc_type": "CFMutableDictionaryRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFDictionary.h",
@@ -7498,7 +7517,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableDictionaryRef"
+        "objc_type": "CFMutableDictionaryRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFDictionary.h",
@@ -7987,7 +8007,8 @@
     {
       "name": "CFLocaleCopyCurrent",
       "return": {
-        "objc_type": "CFLocaleRef"
+        "objc_type": "CFLocaleRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFLocale.h",
@@ -7996,7 +8017,8 @@
     {
       "name": "CFLocaleCopyAvailableLocaleIdentifiers",
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFLocale.h",
@@ -8005,7 +8027,8 @@
     {
       "name": "CFLocaleCopyISOLanguageCodes",
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFLocale.h",
@@ -8014,7 +8037,8 @@
     {
       "name": "CFLocaleCopyISOCountryCodes",
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFLocale.h",
@@ -8023,7 +8047,8 @@
     {
       "name": "CFLocaleCopyISOCurrencyCodes",
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFLocale.h",
@@ -8032,7 +8057,8 @@
     {
       "name": "CFLocaleCopyCommonISOCurrencyCodes",
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -8043,7 +8069,8 @@
     {
       "name": "CFLocaleCopyPreferredLanguages",
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -8064,7 +8091,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFLocaleIdentifier"
+        "objc_type": "CFLocaleIdentifier",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -8085,7 +8113,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFLocaleIdentifier"
+        "objc_type": "CFLocaleIdentifier",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFLocale.h",
@@ -8108,7 +8137,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFLocaleIdentifier"
+        "objc_type": "CFLocaleIdentifier",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFLocale.h",
@@ -8127,7 +8157,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFLocaleIdentifier"
+        "objc_type": "CFLocaleIdentifier",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -8199,7 +8230,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef"
+        "objc_type": "CFDictionaryRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -8220,7 +8252,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFLocaleIdentifier"
+        "objc_type": "CFLocaleIdentifier",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFLocale.h",
@@ -8239,7 +8272,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFLocaleRef"
+        "objc_type": "CFLocaleRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFLocale.h",
@@ -8258,7 +8292,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFLocaleRef"
+        "objc_type": "CFLocaleRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFLocale.h",
@@ -8315,7 +8350,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFLocale.h",
@@ -8352,7 +8388,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDateRef"
+        "objc_type": "CFDateRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFDate.h",
@@ -8645,7 +8682,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef"
+        "objc_type": "CFDataRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFData.h",
@@ -8672,7 +8710,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef"
+        "objc_type": "CFDataRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFData.h",
@@ -8691,7 +8730,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef"
+        "objc_type": "CFDataRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFData.h",
@@ -8710,7 +8750,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableDataRef"
+        "objc_type": "CFMutableDataRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFData.h",
@@ -8733,7 +8774,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableDataRef"
+        "objc_type": "CFMutableDataRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFData.h",
@@ -8980,7 +9022,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFCharacterSetRef"
+        "objc_type": "CFCharacterSetRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFCharacterSet.h",
@@ -8999,7 +9042,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFCharacterSetRef"
+        "objc_type": "CFCharacterSetRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFCharacterSet.h",
@@ -9018,7 +9062,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFCharacterSetRef"
+        "objc_type": "CFCharacterSetRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFCharacterSet.h",
@@ -9037,7 +9082,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFCharacterSetRef"
+        "objc_type": "CFCharacterSetRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFCharacterSet.h",
@@ -9093,7 +9139,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableCharacterSetRef"
+        "objc_type": "CFMutableCharacterSetRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFCharacterSet.h",
@@ -9112,7 +9159,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFCharacterSetRef"
+        "objc_type": "CFCharacterSetRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFCharacterSet.h",
@@ -9131,7 +9179,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableCharacterSetRef"
+        "objc_type": "CFMutableCharacterSetRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFCharacterSet.h",
@@ -9189,7 +9238,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef"
+        "objc_type": "CFDataRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFCharacterSet.h",
@@ -9356,7 +9406,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFErrorRef"
+        "objc_type": "CFErrorRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -9393,7 +9444,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFErrorRef"
+        "objc_type": "CFErrorRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -9444,7 +9496,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef"
+        "objc_type": "CFDictionaryRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -9461,7 +9514,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -9478,7 +9532,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -9495,7 +9550,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -9529,7 +9585,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -9552,7 +9609,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -9583,7 +9641,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -9606,7 +9665,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -9633,7 +9693,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -9660,7 +9721,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -9695,7 +9757,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -9722,7 +9785,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -9745,7 +9809,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -9764,7 +9829,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -9787,7 +9853,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "variadic": true,
       "availability": {},
@@ -9815,7 +9882,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -9846,7 +9914,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "variadic": true,
       "availability": {
@@ -9884,7 +9953,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -9905,7 +9975,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableStringRef"
+        "objc_type": "CFMutableStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -9928,7 +9999,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableStringRef"
+        "objc_type": "CFMutableStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -9959,7 +10031,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableStringRef"
+        "objc_type": "CFMutableStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -10189,7 +10262,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -10216,7 +10290,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef"
+        "objc_type": "CFDataRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -10331,7 +10406,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -10513,7 +10589,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -10767,7 +10844,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -10790,7 +10868,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFString.h",
@@ -11608,7 +11687,8 @@
     {
       "name": "CFTimeZoneCopySystem",
       "return": {
-        "objc_type": "CFTimeZoneRef"
+        "objc_type": "CFTimeZoneRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFTimeZone.h",
@@ -11626,7 +11706,8 @@
     {
       "name": "CFTimeZoneCopyDefault",
       "return": {
-        "objc_type": "CFTimeZoneRef"
+        "objc_type": "CFTimeZoneRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFTimeZone.h",
@@ -11650,7 +11731,8 @@
     {
       "name": "CFTimeZoneCopyKnownNames",
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFTimeZone.h",
@@ -11659,7 +11741,8 @@
     {
       "name": "CFTimeZoneCopyAbbreviationDictionary",
       "return": {
-        "objc_type": "CFDictionaryRef"
+        "objc_type": "CFDictionaryRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFTimeZone.h",
@@ -11697,7 +11780,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTimeZoneRef"
+        "objc_type": "CFTimeZoneRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFTimeZone.h",
@@ -11716,7 +11800,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTimeZoneRef"
+        "objc_type": "CFTimeZoneRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFTimeZone.h",
@@ -11739,7 +11824,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTimeZoneRef"
+        "objc_type": "CFTimeZoneRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFTimeZone.h",
@@ -11807,7 +11893,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFTimeZone.h",
@@ -11891,7 +11978,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -11911,7 +11999,8 @@
     {
       "name": "CFCalendarCopyCurrent",
       "return": {
-        "objc_type": "CFCalendarRef"
+        "objc_type": "CFCalendarRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFCalendar.h",
@@ -11930,7 +12019,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFCalendarRef"
+        "objc_type": "CFCalendarRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFCalendar.h",
@@ -11960,7 +12050,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFLocaleRef"
+        "objc_type": "CFLocaleRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFCalendar.h",
@@ -11994,7 +12085,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTimeZoneRef"
+        "objc_type": "CFTimeZoneRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFCalendar.h",
@@ -12345,7 +12437,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -12377,7 +12470,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDateFormatterRef"
+        "objc_type": "CFDateFormatterRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -12406,7 +12500,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDateFormatterRef"
+        "objc_type": "CFDateFormatterRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -12510,7 +12605,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFDateFormatter.h",
@@ -12533,7 +12629,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFDateFormatter.h",
@@ -12560,7 +12657,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDateRef"
+        "objc_type": "CFDateRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFDateFormatter.h",
@@ -12629,7 +12727,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef"
+        "objc_type": "CFTypeRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFDateFormatter.h",
@@ -12685,7 +12784,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFNumberRef"
+        "objc_type": "CFNumberRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFNumber.h",
@@ -12808,7 +12908,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFNumberFormatterRef"
+        "objc_type": "CFNumberFormatterRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFNumberFormatter.h",
@@ -12895,7 +12996,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFNumberFormatter.h",
@@ -12922,7 +13024,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFNumberFormatter.h",
@@ -12953,7 +13056,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFNumberRef"
+        "objc_type": "CFNumberRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFNumberFormatter.h",
@@ -13026,7 +13130,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef"
+        "objc_type": "CFTypeRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFNumberFormatter.h",
@@ -13068,7 +13173,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFPropertyListRef  _Nullable"
+        "objc_type": "CFPropertyListRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFPreferences.h",
@@ -13220,7 +13326,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFPropertyListRef  _Nullable"
+        "objc_type": "CFPropertyListRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFPreferences.h",
@@ -13248,7 +13355,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nonnull"
+        "objc_type": "CFDictionaryRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFPreferences.h",
@@ -13355,7 +13463,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -13382,7 +13491,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFPreferences.h",
@@ -13441,7 +13551,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13468,7 +13579,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef"
+        "objc_type": "CFDataRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13491,7 +13603,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13526,7 +13639,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13553,7 +13667,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13580,7 +13695,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13611,7 +13727,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13642,7 +13759,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13684,7 +13802,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13744,7 +13863,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13759,7 +13879,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13774,7 +13895,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13793,7 +13915,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13812,7 +13935,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13842,7 +13966,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13857,7 +13982,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13887,7 +14013,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13902,7 +14029,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13921,7 +14049,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2",
@@ -13944,7 +14073,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.2",
@@ -13967,7 +14097,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13982,7 +14113,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -13997,7 +14129,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -14024,7 +14157,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -14043,7 +14177,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -14066,7 +14201,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -14085,7 +14221,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -14154,7 +14291,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFURL.h",
@@ -14181,7 +14319,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -14217,7 +14356,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -14308,7 +14448,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -14808,7 +14949,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopMode"
+        "objc_type": "CFRunLoopMode",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFRunLoop.h",
@@ -14823,7 +14965,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFRunLoop.h",
@@ -15207,7 +15350,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopSourceRef"
+        "objc_type": "CFRunLoopSourceRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFRunLoop.h",
@@ -15330,7 +15474,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopObserverRef"
+        "objc_type": "CFRunLoopObserverRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFRunLoop.h",
@@ -15362,7 +15507,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopObserverRef"
+        "objc_type": "CFRunLoopObserverRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -15510,7 +15656,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopTimerRef"
+        "objc_type": "CFRunLoopTimerRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFRunLoop.h",
@@ -15546,7 +15693,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopTimerRef"
+        "objc_type": "CFRunLoopTimerRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -15766,7 +15914,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFSocketRef"
+        "objc_type": "CFSocketRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFSocket.h",
@@ -15797,7 +15946,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFSocketRef"
+        "objc_type": "CFSocketRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFSocket.h",
@@ -15828,7 +15978,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFSocketRef"
+        "objc_type": "CFSocketRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFSocket.h",
@@ -15863,7 +16014,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFSocketRef"
+        "objc_type": "CFSocketRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFSocket.h",
@@ -15950,7 +16102,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef"
+        "objc_type": "CFDataRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFSocket.h",
@@ -15965,7 +16118,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef"
+        "objc_type": "CFDataRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFSocket.h",
@@ -16022,7 +16176,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopSourceRef"
+        "objc_type": "CFRunLoopSourceRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFSocket.h",
@@ -16179,7 +16334,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFSocketError"
+        "objc_type": "CFSocketError",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFSocket.h",
@@ -16237,7 +16393,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFSocketError"
+        "objc_type": "CFSocketError",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFSocket.h",
@@ -16329,7 +16486,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFReadStreamRef  _Null_unspecified"
+        "objc_type": "CFReadStreamRef  _Null_unspecified",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFStream.h",
@@ -16352,7 +16510,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFWriteStreamRef  _Null_unspecified"
+        "objc_type": "CFWriteStreamRef  _Null_unspecified",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFStream.h",
@@ -16371,7 +16530,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFWriteStreamRef  _Null_unspecified"
+        "objc_type": "CFWriteStreamRef  _Null_unspecified",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFStream.h",
@@ -16390,7 +16550,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFReadStreamRef  _Null_unspecified"
+        "objc_type": "CFReadStreamRef  _Null_unspecified",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFStream.h",
@@ -16409,7 +16570,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFWriteStreamRef  _Null_unspecified"
+        "objc_type": "CFWriteStreamRef  _Null_unspecified",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFStream.h",
@@ -16581,7 +16743,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFErrorRef  _Null_unspecified"
+        "objc_type": "CFErrorRef  _Null_unspecified",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -16598,7 +16761,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFErrorRef  _Null_unspecified"
+        "objc_type": "CFErrorRef  _Null_unspecified",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -16778,7 +16942,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef  _Null_unspecified"
+        "objc_type": "CFTypeRef  _Null_unspecified",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFStream.h",
@@ -16797,7 +16962,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef  _Null_unspecified"
+        "objc_type": "CFTypeRef  _Null_unspecified",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFStream.h",
@@ -17046,7 +17212,8 @@
         }
       ],
       "return": {
-        "objc_type": "dispatch_queue_t  _Null_unspecified"
+        "objc_type": "dispatch_queue_t  _Null_unspecified",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.9"
@@ -17063,7 +17230,8 @@
         }
       ],
       "return": {
-        "objc_type": "dispatch_queue_t  _Null_unspecified"
+        "objc_type": "dispatch_queue_t  _Null_unspecified",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.9"
@@ -17174,7 +17342,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFPropertyListRef"
+        "objc_type": "CFPropertyListRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFPropertyList.h",
@@ -17437,7 +17606,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFSetRef"
+        "objc_type": "CFSetRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFSet.h",
@@ -17456,7 +17626,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFSetRef"
+        "objc_type": "CFSetRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFSet.h",
@@ -17479,7 +17650,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableSetRef"
+        "objc_type": "CFMutableSetRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFSet.h",
@@ -17502,7 +17674,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableSetRef"
+        "objc_type": "CFMutableSetRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFSet.h",
@@ -17759,7 +17932,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTreeRef"
+        "objc_type": "CFTreeRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFTree.h",
@@ -18079,7 +18253,8 @@
         }
       ],
       "return": {
-        "objc_type": "Boolean"
+        "objc_type": "Boolean",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -18167,7 +18342,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef"
+        "objc_type": "CFTypeRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -18196,7 +18372,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFUUIDRef"
+        "objc_type": "CFUUIDRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFUUID.h",
@@ -18275,7 +18452,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFUUIDRef"
+        "objc_type": "CFUUIDRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFUUID.h",
@@ -18294,7 +18472,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFUUIDRef"
+        "objc_type": "CFUUIDRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFUUID.h",
@@ -18313,7 +18492,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFUUID.h",
@@ -18426,7 +18606,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFUUIDRef"
+        "objc_type": "CFUUIDRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFUUID.h",
@@ -18435,7 +18616,8 @@
     {
       "name": "CFCopyHomeDirectoryURL",
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {
         "unavailable": true
@@ -18498,7 +18680,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFBundleRef"
+        "objc_type": "CFBundleRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18521,7 +18704,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18536,7 +18720,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18668,7 +18853,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18683,7 +18869,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18698,7 +18885,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18713,7 +18901,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18728,7 +18917,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18743,7 +18933,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18758,7 +18949,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef"
+        "objc_type": "CFDictionaryRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18808,7 +19000,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18831,7 +19024,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18858,7 +19052,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18889,7 +19084,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "15.4"
@@ -18918,7 +19114,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18941,7 +19138,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18956,7 +19154,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18971,7 +19170,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -18990,7 +19190,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -19021,7 +19222,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -19048,7 +19250,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -19063,7 +19266,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef"
+        "objc_type": "CFDictionaryRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -19078,7 +19282,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -19093,7 +19298,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -19110,7 +19316,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -19125,7 +19332,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -19317,7 +19525,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLRef"
+        "objc_type": "CFURLRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFBundle.h",
@@ -19492,7 +19701,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMessagePortRef"
+        "objc_type": "CFMessagePortRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFMessagePort.h",
@@ -19511,7 +19721,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMessagePortRef"
+        "objc_type": "CFMessagePortRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFMessagePort.h",
@@ -19705,7 +19916,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopSourceRef"
+        "objc_type": "CFRunLoopSourceRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFMessagePort.h",
@@ -19754,7 +19966,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFPlugInRef"
+        "objc_type": "CFPlugInRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFPlugIn.h",
@@ -19818,7 +20031,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFPlugIn.h",
@@ -19837,7 +20051,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef"
+        "objc_type": "CFArrayRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFPlugIn.h",
@@ -19860,7 +20075,8 @@
         }
       ],
       "return": {
-        "objc_type": "void *"
+        "objc_type": "void *",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFPlugIn.h",
@@ -20023,7 +20239,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFPlugIn.h",
@@ -20078,7 +20295,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFPlugInInstanceRef"
+        "objc_type": "CFPlugInInstanceRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFPlugIn.h",
@@ -20114,7 +20332,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMachPortRef"
+        "objc_type": "CFMachPortRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFMachPort.h",
@@ -20145,7 +20364,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMachPortRef"
+        "objc_type": "CFMachPortRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFMachPort.h",
@@ -20266,7 +20486,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopSourceRef"
+        "objc_type": "CFRunLoopSourceRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFMachPort.h",
@@ -20299,7 +20520,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFAttributedStringRef"
+        "objc_type": "CFAttributedStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFAttributedString.h",
@@ -20323,7 +20545,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFAttributedStringRef"
+        "objc_type": "CFAttributedStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFAttributedString.h",
@@ -20343,7 +20566,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFAttributedStringRef"
+        "objc_type": "CFAttributedStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFAttributedString.h",
@@ -20511,7 +20735,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableAttributedStringRef"
+        "objc_type": "CFMutableAttributedStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFAttributedString.h",
@@ -20531,7 +20756,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFMutableAttributedStringRef"
+        "objc_type": "CFMutableAttributedStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFAttributedString.h",
@@ -20812,7 +21038,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLEnumeratorRef"
+        "objc_type": "CFURLEnumeratorRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -20837,7 +21064,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFURLEnumeratorRef"
+        "objc_type": "CFURLEnumeratorRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -20944,7 +21172,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFFileSecurityRef"
+        "objc_type": "CFFileSecurityRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -20965,7 +21194,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFFileSecurityRef"
+        "objc_type": "CFFileSecurityRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -20986,7 +21216,8 @@
         }
       ],
       "return": {
-        "objc_type": "Boolean"
+        "objc_type": "Boolean",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -21028,7 +21259,8 @@
         }
       ],
       "return": {
-        "objc_type": "Boolean"
+        "objc_type": "Boolean",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -21070,7 +21302,8 @@
         }
       ],
       "return": {
-        "objc_type": "Boolean"
+        "objc_type": "Boolean",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -21259,7 +21492,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -21303,7 +21537,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringTokenizerRef"
+        "objc_type": "CFStringTokenizerRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -21404,7 +21639,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef"
+        "objc_type": "CFTypeRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -21477,7 +21713,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFFileDescriptorRef"
+        "objc_type": "CFFileDescriptorRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -21616,7 +21853,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopSourceRef"
+        "objc_type": "CFRunLoopSourceRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.5"
@@ -21660,7 +21898,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFUserNotificationRef"
+        "objc_type": "CFUserNotificationRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -21802,7 +22041,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopSourceRef"
+        "objc_type": "CFRunLoopSourceRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0"
@@ -22000,7 +22240,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFXMLNodeRef"
+        "objc_type": "CFXMLNodeRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -22022,7 +22263,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFXMLNodeRef"
+        "objc_type": "CFXMLNodeRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -22116,7 +22358,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFXMLTreeRef"
+        "objc_type": "CFXMLTreeRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -22188,7 +22431,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFXMLParserRef"
+        "objc_type": "CFXMLParserRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -22226,7 +22470,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFXMLParserRef"
+        "objc_type": "CFXMLParserRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -22378,7 +22623,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -22456,7 +22702,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFXMLTreeRef"
+        "objc_type": "CFXMLTreeRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -22494,7 +22741,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFXMLTreeRef"
+        "objc_type": "CFXMLTreeRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -22524,7 +22772,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFXMLTreeRef"
+        "objc_type": "CFXMLTreeRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -22546,7 +22795,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef"
+        "objc_type": "CFDataRef",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.0",
@@ -22572,7 +22822,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFXMLParser.h",
@@ -22595,7 +22846,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreFoundation/CFXMLParser.h",

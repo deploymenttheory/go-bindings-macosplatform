@@ -1756,7 +1756,8 @@
     {
       "name": "vmnet_copy_shared_interface_list",
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -1778,7 +1779,8 @@
         }
       ],
       "return": {
-        "objc_type": "vmnet_network_configuration_ref  _Nullable"
+        "objc_type": "vmnet_network_configuration_ref  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -1800,7 +1802,8 @@
         }
       ],
       "return": {
-        "objc_type": "vmnet_network_ref  _Nullable"
+        "objc_type": "vmnet_network_ref  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -1872,7 +1875,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -1894,7 +1898,8 @@
         }
       ],
       "return": {
-        "objc_type": "vmnet_network_ref  _Nullable"
+        "objc_type": "vmnet_network_ref  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"

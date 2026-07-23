@@ -216,7 +216,7 @@ func (wf *WebFrame) WindowObject() *WebScriptObject {
 func (wf *WebFrame) GlobalContext() obj.Object {
 	defer runtime.KeepAlive(wf)
 	_r := objc.Send[objc.ID](objref.IDOf(wf), objc.RegisterName("globalContext"))
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }
 
 // JavaScriptContext returns the frame's global JavaScript execution context. Use this method to bridge between the WebKit and Objective-C JavaScriptCore API.

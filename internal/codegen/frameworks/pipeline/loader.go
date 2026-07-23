@@ -33,7 +33,14 @@ type Registry struct {
 	TypedefOwnerIndex map[string]string
 	StructIndex       map[string]string // struct name → owning framework
 	CFTypeIndex       map[string]string // CF opaque typedef → owning framework
-	ClassIndex        map[string]meta.Class
+	// NonRefcountedHandles is the subset of CFTypeIndex opaque handles that are NOT
+	// reference-counted — a plain C handle (e.g. AudioComponent, AudioQueueRef) with
+	// its own dispose function and no CFTypeID. Detected by the ABSENCE of a
+	// <Type>GetTypeID function. objc_retain/objc_release on such a pointer crashes,
+	// so the emitter wraps them with obj.WrapUnmanaged (no retain, no finalizer)
+	// rather than obj.Wrap.
+	NonRefcountedHandles map[string]bool
+	ClassIndex           map[string]meta.Class
 	// EmittableStructs is the set of value-struct Go names the idiomatic layer
 	// emits a definition for (computed lazily once during idiomatic generation).
 	EmittableStructs map[string]bool
@@ -73,6 +80,7 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 		TypedefOwnerIndex:        make(map[string]string),
 		StructIndex:              make(map[string]string),
 		CFTypeIndex:              make(map[string]string),
+		NonRefcountedHandles:     make(map[string]bool),
 		ClassIndex:               make(map[string]meta.Class),
 		UnavailableClasses:       make(map[string]bool),
 		UnavailableEnumBaseTypes: make(map[string]string),
@@ -340,6 +348,12 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 				zeroFieldStructs[name] = true
 			}
 		}
+		// A CF-registered (reference-counted) type declares <Type>GetTypeID; the
+		// absence of that function marks a plain, non-reference-counted C handle.
+		funcNames := make(map[string]bool, len(framework.Functions))
+		for _, fn := range framework.Functions {
+			funcNames[fn.Name] = true
+		}
 		for tName, target := range framework.Typedefs {
 			if typemap.IsCoreFoundationOpaqueRef(tName) {
 				continue
@@ -359,6 +373,13 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 			if zeroFieldStructs[bare] {
 				if _, already := reg.CFTypeIndex[tName]; !already {
 					reg.CFTypeIndex[tName] = framework.Framework
+				}
+				// Reference-counted iff a <Type>GetTypeID exists (the typedef name,
+				// or with a trailing Ref stripped: CFRunLoopRef → CFRunLoopGetTypeID).
+				refcounted := funcNames[tName+"GetTypeID"] ||
+					funcNames[strings.TrimSuffix(tName, "Ref")+"GetTypeID"]
+				if !refcounted {
+					reg.NonRefcountedHandles[tName] = true
 				}
 			}
 		}

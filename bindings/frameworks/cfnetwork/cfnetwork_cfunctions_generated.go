@@ -1032,7 +1032,7 @@ func CFNetworkExecuteProxyAutoConfigurationScript(proxyAutoConfigurationScript o
 		ebipurego.RegisterLibFunc(&_fnCFNetworkExecuteProxyAutoConfigurationScript, _lib, "CFNetworkExecuteProxyAutoConfigurationScript")
 	}
 	_ret := _fnCFNetworkExecuteProxyAutoConfigurationScript(objref.IDOf(proxyAutoConfigurationScript), objref.IDOf(targetURL), cb, clientContext)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCFNetworkExecuteProxyAutoConfigurationURL func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -1044,7 +1044,7 @@ func CFNetworkExecuteProxyAutoConfigurationURL(proxyAutoConfigURL obj.Object, ta
 		ebipurego.RegisterLibFunc(&_fnCFNetworkExecuteProxyAutoConfigurationURL, _lib, "CFNetworkExecuteProxyAutoConfigurationURL")
 	}
 	_ret := _fnCFNetworkExecuteProxyAutoConfigurationURL(objref.IDOf(proxyAutoConfigURL), objref.IDOf(targetURL), cb, clientContext)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCFReadStreamCreateForHTTPRequest func(objc.ID, objc.ID) objc.ID

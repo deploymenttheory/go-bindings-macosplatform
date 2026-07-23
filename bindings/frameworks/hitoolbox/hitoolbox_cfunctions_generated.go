@@ -136,7 +136,7 @@ func AcquireFirstMatchingEventInQueue(inQueue obj.Object, inNumTypes int, inList
 		ebipurego.RegisterLibFunc(&_fnAcquireFirstMatchingEventInQueue, _lib, "AcquireFirstMatchingEventInQueue")
 	}
 	_ret := _fnAcquireFirstMatchingEventInQueue(objref.IDOf(inQueue), inNumTypes, unsafe.Pointer(inList), inOptions)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnButton func() uint8
@@ -203,7 +203,7 @@ func CopyEvent(inOther obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCopyEvent, _lib, "CopyEvent")
 	}
 	_ret := _fnCopyEvent(objref.IDOf(inOther))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCopyEventAs func(objc.ID, objc.ID, int, int) objc.ID
@@ -215,7 +215,7 @@ func CopyEventAs(inAllocator obj.Object, inOther obj.Object, inEventClass int, i
 		ebipurego.RegisterLibFunc(&_fnCopyEventAs, _lib, "CopyEventAs")
 	}
 	_ret := _fnCopyEventAs(objref.IDOf(inAllocator), objref.IDOf(inOther), inEventClass, inEventKind)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCopyEventCGEvent func(objc.ID) objc.ID
@@ -1152,7 +1152,7 @@ func FindSpecificEventInQueue(inQueue obj.Object, inComparator unsafe.Pointer, i
 		ebipurego.RegisterLibFunc(&_fnFindSpecificEventInQueue, _lib, "FindSpecificEventInQueue")
 	}
 	_ret := _fnFindSpecificEventInQueue(objref.IDOf(inQueue), inComparator, inCompareData)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnFlushEvents func(uint16, uint16)
@@ -1175,7 +1175,7 @@ func GetApplicationEventTarget() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnGetApplicationEventTarget, _lib, "GetApplicationEventTarget")
 	}
 	_ret := _fnGetApplicationEventTarget()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnGetApplicationTextEncoding func() uint32
@@ -1221,7 +1221,7 @@ func GetCurrentEvent() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnGetCurrentEvent, _lib, "GetCurrentEvent")
 	}
 	_ret := _fnGetCurrentEvent()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnGetCurrentEventButtonState func() uint32
@@ -1255,7 +1255,7 @@ func GetCurrentEventLoop() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnGetCurrentEventLoop, _lib, "GetCurrentEventLoop")
 	}
 	_ret := _fnGetCurrentEventLoop()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnGetCurrentEventQueue func() objc.ID
@@ -1267,7 +1267,7 @@ func GetCurrentEventQueue() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnGetCurrentEventQueue, _lib, "GetCurrentEventQueue")
 	}
 	_ret := _fnGetCurrentEventQueue()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnGetCurrentEventTime func() float64
@@ -1312,7 +1312,7 @@ func GetEventDispatcherTarget() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnGetEventDispatcherTarget, _lib, "GetEventDispatcherTarget")
 	}
 	_ret := _fnGetEventDispatcherTarget()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnGetEventKind func(objc.ID) uint32
@@ -1335,7 +1335,7 @@ func GetEventMonitorTarget() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnGetEventMonitorTarget, _lib, "GetEventMonitorTarget")
 	}
 	_ret := _fnGetEventMonitorTarget()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnGetEventParameter func(objc.ID, int, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
@@ -1394,7 +1394,7 @@ func GetMainEventLoop() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnGetMainEventLoop, _lib, "GetMainEventLoop")
 	}
 	_ret := _fnGetMainEventLoop()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnGetMainEventQueue func() objc.ID
@@ -1406,7 +1406,7 @@ func GetMainEventQueue() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnGetMainEventQueue, _lib, "GetMainEventQueue")
 	}
 	_ret := _fnGetMainEventQueue()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnGetMenuTrackingData func(objc.ID, unsafe.Pointer) int32
@@ -1576,7 +1576,7 @@ func HIObjectFromEventTarget(inTarget obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnHIObjectFromEventTarget, _lib, "HIObjectFromEventTarget")
 	}
 	_ret := _fnHIObjectFromEventTarget(objref.IDOf(inTarget))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnHIObjectGetEventHandlerObject func(objc.ID) objc.ID
@@ -1588,7 +1588,7 @@ func HIObjectGetEventHandlerObject(inRef obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnHIObjectGetEventHandlerObject, _lib, "HIObjectGetEventHandlerObject")
 	}
 	_ret := _fnHIObjectGetEventHandlerObject(objref.IDOf(inRef))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnHIObjectGetEventTarget func(objc.ID) objc.ID
@@ -1600,7 +1600,7 @@ func HIObjectGetEventTarget(inObject obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnHIObjectGetEventTarget, _lib, "HIObjectGetEventTarget")
 	}
 	_ret := _fnHIObjectGetEventTarget(objref.IDOf(inObject))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnHIObjectIsArchivingIgnored func(objc.ID) uint8
@@ -3895,7 +3895,7 @@ func RetainEvent(inEvent obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnRetainEvent, _lib, "RetainEvent")
 	}
 	_ret := _fnRetainEvent(objref.IDOf(inEvent))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTISCopyCurrentASCIICapableKeyboardInputSource func() objc.ID
@@ -4025,7 +4025,7 @@ func TSMGetActiveDocument() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnTSMGetActiveDocument, _lib, "TSMGetActiveDocument")
 	}
 	_ret := _fnTSMGetActiveDocument()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTSMGetDocumentProperty func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer) int32

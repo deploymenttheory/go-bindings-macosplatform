@@ -93,7 +93,7 @@ func LSSharedFileListInsertItemFSRef(inList obj.Object, insertAfterThisItem obj.
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListInsertItemFSRef, _lib, "LSSharedFileListInsertItemFSRef")
 	}
 	_ret := _fnLSSharedFileListInsertItemFSRef(objref.IDOf(inList), objref.IDOf(insertAfterThisItem), objref.IDOf(inDisplayName), objref.IDOf(inIconRef), unsafe.Pointer(inFSRef), objref.IDOf(inPropertiesToSet), objref.IDOf(inPropertiesToClear))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnLSSharedFileListInsertItemURL func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -105,7 +105,7 @@ func LSSharedFileListInsertItemURL(inList obj.Object, insertAfterThisItem obj.Ob
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListInsertItemURL, _lib, "LSSharedFileListInsertItemURL")
 	}
 	_ret := _fnLSSharedFileListInsertItemURL(objref.IDOf(inList), objref.IDOf(insertAfterThisItem), objref.IDOf(inDisplayName), objref.IDOf(inIconRef), objref.IDOf(inURL), objref.IDOf(inPropertiesToSet), objref.IDOf(inPropertiesToClear))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnLSSharedFileListItemCopyDisplayName func(objc.ID) objc.ID
@@ -129,7 +129,7 @@ func LSSharedFileListItemCopyIconRef(inItem obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemCopyIconRef, _lib, "LSSharedFileListItemCopyIconRef")
 	}
 	_ret := _fnLSSharedFileListItemCopyIconRef(objref.IDOf(inItem))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnLSSharedFileListItemCopyProperty func(objc.ID, objc.ID) objc.ID

@@ -611,7 +611,7 @@ func CMCopyDictionaryOfAttachments(allocator obj.Object, target unsafe.Pointer, 
 		ebipurego.RegisterLibFunc(&_fnCMCopyDictionaryOfAttachments, _lib, "CMCopyDictionaryOfAttachments")
 	}
 	_ret := _fnCMCopyDictionaryOfAttachments(objref.IDOf(allocator), target, attachmentMode)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout func(objc.ID, unsafe.Pointer) uint8
@@ -726,7 +726,7 @@ func CMMemoryPoolCreate(options obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCMMemoryPoolCreate, _lib, "CMMemoryPoolCreate")
 	}
 	_ret := _fnCMMemoryPoolCreate(objref.IDOf(options))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMMemoryPoolFlush func(objc.ID)
@@ -1685,7 +1685,7 @@ func CMTagCollectionCopyAsData(tagCollection obj.Object, allocator obj.Object) o
 		ebipurego.RegisterLibFunc(&_fnCMTagCollectionCopyAsData, _lib, "CMTagCollectionCopyAsData")
 	}
 	_ret := _fnCMTagCollectionCopyAsData(objref.IDOf(tagCollection), objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTagCollectionCopyAsDictionary func(objc.ID, objc.ID) objc.ID
@@ -1697,7 +1697,7 @@ func CMTagCollectionCopyAsDictionary(tagCollection obj.Object, allocator obj.Obj
 		ebipurego.RegisterLibFunc(&_fnCMTagCollectionCopyAsDictionary, _lib, "CMTagCollectionCopyAsDictionary")
 	}
 	_ret := _fnCMTagCollectionCopyAsDictionary(objref.IDOf(tagCollection), objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTagCollectionCopyDescription func(objc.ID, objc.ID) objc.ID
@@ -1709,7 +1709,7 @@ func CMTagCollectionCopyDescription(allocator obj.Object, tagCollection obj.Obje
 		ebipurego.RegisterLibFunc(&_fnCMTagCollectionCopyDescription, _lib, "CMTagCollectionCopyDescription")
 	}
 	_ret := _fnCMTagCollectionCopyDescription(objref.IDOf(allocator), objref.IDOf(tagCollection))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTagCollectionCopyTagsOfCategories func(objc.ID, objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
@@ -1848,7 +1848,7 @@ func CMTagCopyAsDictionary(tag unsafe.Pointer, allocator obj.Object) obj.Object 
 		ebipurego.RegisterLibFunc(&_fnCMTagCopyAsDictionary, _lib, "CMTagCopyAsDictionary")
 	}
 	_ret := _fnCMTagCopyAsDictionary(tag, objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTagCopyDescription func(objc.ID, unsafe.Pointer) objc.ID
@@ -1860,7 +1860,7 @@ func CMTagCopyDescription(allocator obj.Object, tag unsafe.Pointer) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCMTagCopyDescription, _lib, "CMTagCopyDescription")
 	}
 	_ret := _fnCMTagCopyDescription(objref.IDOf(allocator), tag)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTagEqualToTag func(unsafe.Pointer, unsafe.Pointer) uint8
@@ -2389,7 +2389,7 @@ func CMTimeCopyAsDictionary(time_ unsafe.Pointer, allocator obj.Object) obj.Obje
 		ebipurego.RegisterLibFunc(&_fnCMTimeCopyAsDictionary, _lib, "CMTimeCopyAsDictionary")
 	}
 	_ret := _fnCMTimeCopyAsDictionary(time_, objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTimeCopyDescription func(objc.ID, unsafe.Pointer) objc.ID
@@ -2401,7 +2401,7 @@ func CMTimeCopyDescription(allocator obj.Object, time_ unsafe.Pointer) obj.Objec
 		ebipurego.RegisterLibFunc(&_fnCMTimeCopyDescription, _lib, "CMTimeCopyDescription")
 	}
 	_ret := _fnCMTimeCopyDescription(objref.IDOf(allocator), time_)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTimeFoldIntoRange func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
@@ -2501,7 +2501,7 @@ func CMTimeMappingCopyAsDictionary(mapping unsafe.Pointer, allocator obj.Object)
 		ebipurego.RegisterLibFunc(&_fnCMTimeMappingCopyAsDictionary, _lib, "CMTimeMappingCopyAsDictionary")
 	}
 	_ret := _fnCMTimeMappingCopyAsDictionary(mapping, objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTimeMappingCopyDescription func(objc.ID, unsafe.Pointer) objc.ID
@@ -2513,7 +2513,7 @@ func CMTimeMappingCopyDescription(allocator obj.Object, mapping unsafe.Pointer) 
 		ebipurego.RegisterLibFunc(&_fnCMTimeMappingCopyDescription, _lib, "CMTimeMappingCopyDescription")
 	}
 	_ret := _fnCMTimeMappingCopyDescription(objref.IDOf(allocator), mapping)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTimeMappingMake func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
@@ -2646,7 +2646,7 @@ func CMTimeRangeCopyAsDictionary(range_ unsafe.Pointer, allocator obj.Object) ob
 		ebipurego.RegisterLibFunc(&_fnCMTimeRangeCopyAsDictionary, _lib, "CMTimeRangeCopyAsDictionary")
 	}
 	_ret := _fnCMTimeRangeCopyAsDictionary(range_, objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTimeRangeCopyDescription func(objc.ID, unsafe.Pointer) objc.ID
@@ -2658,7 +2658,7 @@ func CMTimeRangeCopyDescription(allocator obj.Object, range_ unsafe.Pointer) obj
 		ebipurego.RegisterLibFunc(&_fnCMTimeRangeCopyDescription, _lib, "CMTimeRangeCopyDescription")
 	}
 	_ret := _fnCMTimeRangeCopyDescription(objref.IDOf(allocator), range_)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTimeRangeEqual func(unsafe.Pointer, unsafe.Pointer) uint8
@@ -2791,7 +2791,7 @@ func CMTimebaseCopyMasterClock(timebase obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCMTimebaseCopyMasterClock, _lib, "CMTimebaseCopyMasterClock")
 	}
 	_ret := _fnCMTimebaseCopyMasterClock(objref.IDOf(timebase))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTimebaseCopyMasterTimebase func(objc.ID) objc.ID
@@ -2803,7 +2803,7 @@ func CMTimebaseCopyMasterTimebase(timebase obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCMTimebaseCopyMasterTimebase, _lib, "CMTimebaseCopyMasterTimebase")
 	}
 	_ret := _fnCMTimebaseCopyMasterTimebase(objref.IDOf(timebase))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTimebaseCopySource func(objc.ID) unsafe.Pointer
@@ -2826,7 +2826,7 @@ func CMTimebaseCopySourceClock(timebase obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCMTimebaseCopySourceClock, _lib, "CMTimebaseCopySourceClock")
 	}
 	_ret := _fnCMTimebaseCopySourceClock(objref.IDOf(timebase))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTimebaseCopySourceTimebase func(objc.ID) objc.ID
@@ -2838,7 +2838,7 @@ func CMTimebaseCopySourceTimebase(timebase obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCMTimebaseCopySourceTimebase, _lib, "CMTimebaseCopySourceTimebase")
 	}
 	_ret := _fnCMTimebaseCopySourceTimebase(objref.IDOf(timebase))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTimebaseCopyUltimateMasterClock func(objc.ID) objc.ID
@@ -2850,7 +2850,7 @@ func CMTimebaseCopyUltimateMasterClock(timebase obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCMTimebaseCopyUltimateMasterClock, _lib, "CMTimebaseCopyUltimateMasterClock")
 	}
 	_ret := _fnCMTimebaseCopyUltimateMasterClock(objref.IDOf(timebase))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTimebaseCopyUltimateSourceClock func(objc.ID) objc.ID
@@ -2862,7 +2862,7 @@ func CMTimebaseCopyUltimateSourceClock(timebase obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCMTimebaseCopyUltimateSourceClock, _lib, "CMTimebaseCopyUltimateSourceClock")
 	}
 	_ret := _fnCMTimebaseCopyUltimateSourceClock(objref.IDOf(timebase))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCMTimebaseGetEffectiveRate func(objc.ID) float64

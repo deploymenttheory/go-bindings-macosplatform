@@ -9843,7 +9843,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontDescriptorRef  _Nonnull"
+        "objc_type": "CTFontDescriptorRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontDescriptor.h",
@@ -9858,7 +9859,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontDescriptorRef  _Nonnull"
+        "objc_type": "CTFontDescriptorRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontDescriptor.h",
@@ -9877,7 +9879,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontDescriptorRef  _Nonnull"
+        "objc_type": "CTFontDescriptorRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontDescriptor.h",
@@ -9896,7 +9899,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontDescriptorRef  _Nullable"
+        "objc_type": "CTFontDescriptorRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontDescriptor.h",
@@ -9919,7 +9923,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontDescriptorRef  _Nullable"
+        "objc_type": "CTFontDescriptorRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontDescriptor.h",
@@ -9942,7 +9947,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontDescriptorRef  _Nonnull"
+        "objc_type": "CTFontDescriptorRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontDescriptor.h",
@@ -9965,7 +9971,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontDescriptorRef  _Nonnull"
+        "objc_type": "CTFontDescriptorRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontDescriptor.h",
@@ -9985,7 +9992,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontDescriptor.h",
@@ -10005,7 +10013,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontDescriptorRef  _Nullable"
+        "objc_type": "CTFontDescriptorRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontDescriptor.h",
@@ -10044,7 +10053,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nonnull"
+        "objc_type": "CFDictionaryRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontDescriptor.h",
@@ -10063,7 +10073,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef  _Nullable"
+        "objc_type": "CFTypeRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontDescriptor.h",
@@ -10087,7 +10098,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef  _Nullable"
+        "objc_type": "CFTypeRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontDescriptor.h",
@@ -10120,7 +10132,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontRef  _Nonnull"
+        "objc_type": "CTFontRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10144,7 +10157,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontRef  _Nonnull"
+        "objc_type": "CTFontRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10172,7 +10186,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontRef  _Nonnull"
+        "objc_type": "CTFontRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10200,7 +10215,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontRef  _Nonnull"
+        "objc_type": "CTFontRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10224,7 +10240,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontRef  _Nullable"
+        "objc_type": "CTFontRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10268,7 +10285,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontRef  _Nonnull"
+        "objc_type": "CTFontRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10300,7 +10318,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontRef  _Nullable"
+        "objc_type": "CTFontRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10328,7 +10347,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontRef  _Nullable"
+        "objc_type": "CTFontRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10351,7 +10371,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontRef  _Nonnull"
+        "objc_type": "CTFontRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10379,7 +10400,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontRef  _Nonnull"
+        "objc_type": "CTFontRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10394,7 +10416,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontDescriptorRef  _Nonnull"
+        "objc_type": "CTFontDescriptorRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10413,7 +10436,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef  _Nullable"
+        "objc_type": "CFTypeRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10473,7 +10497,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nonnull"
+        "objc_type": "CFDictionaryRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10493,7 +10518,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10508,7 +10534,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nonnull"
+        "objc_type": "CFStringRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10523,7 +10550,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nonnull"
+        "objc_type": "CFStringRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10538,7 +10566,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nonnull"
+        "objc_type": "CFStringRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10553,7 +10582,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nonnull"
+        "objc_type": "CFStringRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10572,7 +10602,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10596,7 +10627,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10611,7 +10643,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFCharacterSetRef  _Nonnull"
+        "objc_type": "CFCharacterSetRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10641,7 +10674,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nonnull"
+        "objc_type": "CFArrayRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -10871,7 +10905,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -11018,7 +11053,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGPathRef  _Nullable"
+        "objc_type": "CGPathRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -11033,7 +11069,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -11048,7 +11085,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -11063,7 +11101,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -11078,7 +11117,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -11098,7 +11138,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGFontRef  _Nonnull"
+        "objc_type": "CGFontRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -11127,7 +11168,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontRef  _Nonnull"
+        "objc_type": "CTFontRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -11176,7 +11218,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontRef  _Nullable"
+        "objc_type": "CTFontRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -11204,7 +11247,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontRef  _Nonnull"
+        "objc_type": "CTFontRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -11223,7 +11267,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -11265,7 +11310,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFont.h",
@@ -11396,7 +11442,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontCollectionRef  _Nonnull"
+        "objc_type": "CTFontCollectionRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontCollection.h",
@@ -11417,7 +11464,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontCollectionRef  _Nonnull"
+        "objc_type": "CTFontCollectionRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontCollection.h",
@@ -11442,7 +11490,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontCollectionRef  _Nonnull"
+        "objc_type": "CTFontCollectionRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontCollection.h",
@@ -11457,7 +11506,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTMutableFontCollectionRef  _Nonnull"
+        "objc_type": "CTMutableFontCollectionRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontCollection.h",
@@ -11472,7 +11522,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontCollection.h",
@@ -11507,7 +11558,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontCollection.h",
@@ -11542,7 +11594,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontCollection.h",
@@ -11567,7 +11620,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontCollection.h",
@@ -11587,7 +11641,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontCollection.h",
@@ -11611,7 +11666,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontCollection.h",
@@ -11634,7 +11690,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nonnull"
+        "objc_type": "CFArrayRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontCollection.h",
@@ -11657,7 +11714,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nonnull"
+        "objc_type": "CFArrayRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontCollection.h",
@@ -11666,7 +11724,8 @@
     {
       "name": "CTFontManagerCopyAvailablePostScriptNames",
       "return": {
-        "objc_type": "CFArrayRef  _Nonnull"
+        "objc_type": "CFArrayRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontManager.h",
@@ -11675,7 +11734,8 @@
     {
       "name": "CTFontManagerCopyAvailableFontFamilyNames",
       "return": {
-        "objc_type": "CFArrayRef  _Nonnull"
+        "objc_type": "CFArrayRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontManager.h",
@@ -11684,7 +11744,8 @@
     {
       "name": "CTFontManagerCopyAvailableFontURLs",
       "return": {
-        "objc_type": "CFArrayRef  _Nonnull"
+        "objc_type": "CFArrayRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontManager.h",
@@ -11723,7 +11784,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontManager.h",
@@ -11738,7 +11800,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFontDescriptorRef  _Nullable"
+        "objc_type": "CTFontDescriptorRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontManager.h",
@@ -11753,7 +11816,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nonnull"
+        "objc_type": "CFArrayRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontManager.h",
@@ -12086,7 +12150,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nonnull"
+        "objc_type": "CFArrayRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "unavailable": true
@@ -12145,7 +12210,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopSourceRef  _Nullable"
+        "objc_type": "CFRunLoopSourceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFontManager.h",
@@ -12331,7 +12397,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTLineRef  _Nonnull"
+        "objc_type": "CTLineRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTLine.h",
@@ -12359,7 +12426,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTLineRef  _Nullable"
+        "objc_type": "CTLineRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTLine.h",
@@ -12382,7 +12450,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTLineRef  _Nullable"
+        "objc_type": "CTLineRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTLine.h",
@@ -12640,7 +12709,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTTypesetterRef  _Nonnull"
+        "objc_type": "CTTypesetterRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTTypesetter.h",
@@ -12660,7 +12730,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTTypesetterRef  _Nullable"
+        "objc_type": "CTTypesetterRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTTypesetter.h",
@@ -12683,7 +12754,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTLineRef  _Nonnull"
+        "objc_type": "CTLineRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTTypesetter.h",
@@ -12702,7 +12774,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTLineRef  _Nonnull"
+        "objc_type": "CTLineRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTTypesetter.h",
@@ -12826,7 +12899,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFramesetterRef  _Nonnull"
+        "objc_type": "CTFramesetterRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFramesetter.h",
@@ -12841,7 +12915,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFramesetterRef  _Nonnull"
+        "objc_type": "CTFramesetterRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFramesetter.h",
@@ -12869,7 +12944,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTFrameRef  _Nonnull"
+        "objc_type": "CTFrameRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTFramesetter.h",
@@ -12949,7 +13025,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTGlyphInfoRef  _Nullable"
+        "objc_type": "CTGlyphInfoRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTGlyphInfo.h",
@@ -12972,7 +13049,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTGlyphInfoRef  _Nullable"
+        "objc_type": "CTGlyphInfoRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTGlyphInfo.h",
@@ -12995,7 +13073,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTGlyphInfoRef  _Nullable"
+        "objc_type": "CTGlyphInfoRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTGlyphInfo.h",
@@ -13084,7 +13163,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTParagraphStyleRef  _Nonnull"
+        "objc_type": "CTParagraphStyleRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTParagraphStyle.h",
@@ -13099,7 +13179,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTParagraphStyleRef  _Nonnull"
+        "objc_type": "CTParagraphStyleRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTParagraphStyle.h",
@@ -13163,7 +13244,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTRubyAnnotationRef  _Nonnull"
+        "objc_type": "CTRubyAnnotationRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTRubyAnnotation.h",
@@ -13194,7 +13276,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTRubyAnnotationRef  _Nonnull"
+        "objc_type": "CTRubyAnnotationRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTRubyAnnotation.h",
@@ -13209,7 +13292,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTRubyAnnotationRef  _Nonnull"
+        "objc_type": "CTRubyAnnotationRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTRubyAnnotation.h",
@@ -13648,7 +13732,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTRunDelegateRef  _Nullable"
+        "objc_type": "CTRunDelegateRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTRunDelegate.h",
@@ -13696,7 +13781,8 @@
         }
       ],
       "return": {
-        "objc_type": "CTTextTabRef  _Nonnull"
+        "objc_type": "CTTextTabRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreText/CTTextTab.h",

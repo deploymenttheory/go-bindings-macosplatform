@@ -23,7 +23,7 @@ func MDCopyLabelKinds() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDCopyLabelKinds, _lib, "MDCopyLabelKinds")
 	}
 	_ret := _fnMDCopyLabelKinds()
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDCopyLabelWithUUID func(objc.ID) objc.ID
@@ -35,7 +35,7 @@ func MDCopyLabelWithUUID(labelUUID obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDCopyLabelWithUUID, _lib, "MDCopyLabelWithUUID")
 	}
 	_ret := _fnMDCopyLabelWithUUID(objref.IDOf(labelUUID))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDCopyLabelsMatchingExpression func(objc.ID) objc.ID
@@ -47,7 +47,7 @@ func MDCopyLabelsMatchingExpression(simpleQueryString obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDCopyLabelsMatchingExpression, _lib, "MDCopyLabelsMatchingExpression")
 	}
 	_ret := _fnMDCopyLabelsMatchingExpression(objref.IDOf(simpleQueryString))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDCopyLabelsWithKind func(objc.ID) objc.ID
@@ -59,7 +59,7 @@ func MDCopyLabelsWithKind(kind obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDCopyLabelsWithKind, _lib, "MDCopyLabelsWithKind")
 	}
 	_ret := _fnMDCopyLabelsWithKind(objref.IDOf(kind))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDItemCopyAttribute func(objc.ID, objc.ID) objc.ID
@@ -71,7 +71,7 @@ func MDItemCopyAttribute(item obj.Object, name obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDItemCopyAttribute, _lib, "MDItemCopyAttribute")
 	}
 	_ret := _fnMDItemCopyAttribute(objref.IDOf(item), objref.IDOf(name))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDItemCopyAttributeNames func(objc.ID) objc.ID
@@ -83,7 +83,7 @@ func MDItemCopyAttributeNames(item obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDItemCopyAttributeNames, _lib, "MDItemCopyAttributeNames")
 	}
 	_ret := _fnMDItemCopyAttributeNames(objref.IDOf(item))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDItemCopyAttributes func(objc.ID, objc.ID) objc.ID
@@ -95,7 +95,7 @@ func MDItemCopyAttributes(item obj.Object, names obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDItemCopyAttributes, _lib, "MDItemCopyAttributes")
 	}
 	_ret := _fnMDItemCopyAttributes(objref.IDOf(item), objref.IDOf(names))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDItemCopyLabels func(objc.ID) objc.ID
@@ -107,7 +107,7 @@ func MDItemCopyLabels(item obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDItemCopyLabels, _lib, "MDItemCopyLabels")
 	}
 	_ret := _fnMDItemCopyLabels(objref.IDOf(item))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDItemCreate func(objc.ID, objc.ID) objc.ID
@@ -119,7 +119,7 @@ func MDItemCreate(allocator obj.Object, path obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDItemCreate, _lib, "MDItemCreate")
 	}
 	_ret := _fnMDItemCreate(objref.IDOf(allocator), objref.IDOf(path))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDItemCreateWithURL func(objc.ID, objc.ID) objc.ID
@@ -131,7 +131,7 @@ func MDItemCreateWithURL(allocator obj.Object, url obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDItemCreateWithURL, _lib, "MDItemCreateWithURL")
 	}
 	_ret := _fnMDItemCreateWithURL(objref.IDOf(allocator), objref.IDOf(url))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDItemGetCacheFileDescriptors func(objc.ID, objc.Block)
@@ -187,7 +187,7 @@ func MDItemsCopyAttributes(items obj.Object, names obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDItemsCopyAttributes, _lib, "MDItemsCopyAttributes")
 	}
 	_ret := _fnMDItemsCopyAttributes(objref.IDOf(items), objref.IDOf(names))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDItemsCreateWithURLs func(objc.ID, objc.ID) objc.ID
@@ -199,7 +199,7 @@ func MDItemsCreateWithURLs(allocator obj.Object, urls obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDItemsCreateWithURLs, _lib, "MDItemsCreateWithURLs")
 	}
 	_ret := _fnMDItemsCreateWithURLs(objref.IDOf(allocator), objref.IDOf(urls))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDLabelCopyAttribute func(objc.ID, objc.ID) objc.ID
@@ -211,7 +211,7 @@ func MDLabelCopyAttribute(label obj.Object, name obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDLabelCopyAttribute, _lib, "MDLabelCopyAttribute")
 	}
 	_ret := _fnMDLabelCopyAttribute(objref.IDOf(label), objref.IDOf(name))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDLabelCopyAttributeName func(objc.ID) objc.ID
@@ -223,7 +223,7 @@ func MDLabelCopyAttributeName(label obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDLabelCopyAttributeName, _lib, "MDLabelCopyAttributeName")
 	}
 	_ret := _fnMDLabelCopyAttributeName(objref.IDOf(label))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDLabelCreate func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -235,7 +235,7 @@ func MDLabelCreate(allocator obj.Object, displayName obj.Object, kind obj.Object
 		ebipurego.RegisterLibFunc(&_fnMDLabelCreate, _lib, "MDLabelCreate")
 	}
 	_ret := _fnMDLabelCreate(objref.IDOf(allocator), objref.IDOf(displayName), objref.IDOf(kind), domain)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDLabelDelete func(objc.ID) uint8
@@ -280,7 +280,7 @@ func MDQueryCopyQueryString(query obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDQueryCopyQueryString, _lib, "MDQueryCopyQueryString")
 	}
 	_ret := _fnMDQueryCopyQueryString(objref.IDOf(query))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDQueryCopySortingAttributes func(objc.ID) objc.ID
@@ -292,7 +292,7 @@ func MDQueryCopySortingAttributes(query obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDQueryCopySortingAttributes, _lib, "MDQueryCopySortingAttributes")
 	}
 	_ret := _fnMDQueryCopySortingAttributes(objref.IDOf(query))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDQueryCopyValueListAttributes func(objc.ID) objc.ID
@@ -304,7 +304,7 @@ func MDQueryCopyValueListAttributes(query obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDQueryCopyValueListAttributes, _lib, "MDQueryCopyValueListAttributes")
 	}
 	_ret := _fnMDQueryCopyValueListAttributes(objref.IDOf(query))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDQueryCopyValuesOfAttribute func(objc.ID, objc.ID) objc.ID
@@ -316,7 +316,7 @@ func MDQueryCopyValuesOfAttribute(query obj.Object, name obj.Object) obj.Object 
 		ebipurego.RegisterLibFunc(&_fnMDQueryCopyValuesOfAttribute, _lib, "MDQueryCopyValuesOfAttribute")
 	}
 	_ret := _fnMDQueryCopyValuesOfAttribute(objref.IDOf(query), objref.IDOf(name))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDQueryCreate func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -328,7 +328,7 @@ func MDQueryCreate(allocator obj.Object, queryString obj.Object, valueListAttrs 
 		ebipurego.RegisterLibFunc(&_fnMDQueryCreate, _lib, "MDQueryCreate")
 	}
 	_ret := _fnMDQueryCreate(objref.IDOf(allocator), objref.IDOf(queryString), objref.IDOf(valueListAttrs), objref.IDOf(sortingAttrs))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDQueryCreateForItems func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -340,7 +340,7 @@ func MDQueryCreateForItems(allocator obj.Object, queryString obj.Object, valueLi
 		ebipurego.RegisterLibFunc(&_fnMDQueryCreateForItems, _lib, "MDQueryCreateForItems")
 	}
 	_ret := _fnMDQueryCreateForItems(objref.IDOf(allocator), objref.IDOf(queryString), objref.IDOf(valueListAttrs), objref.IDOf(sortingAttrs), objref.IDOf(items))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDQueryCreateSubset func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -352,7 +352,7 @@ func MDQueryCreateSubset(allocator obj.Object, query obj.Object, queryString obj
 		ebipurego.RegisterLibFunc(&_fnMDQueryCreateSubset, _lib, "MDQueryCreateSubset")
 	}
 	_ret := _fnMDQueryCreateSubset(objref.IDOf(allocator), objref.IDOf(query), objref.IDOf(queryString), objref.IDOf(valueListAttrs), objref.IDOf(sortingAttrs))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDQueryDisableUpdates func(objc.ID)
@@ -617,7 +617,7 @@ func MDSchemaCopyAllAttributes() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyAllAttributes, _lib, "MDSchemaCopyAllAttributes")
 	}
 	_ret := _fnMDSchemaCopyAllAttributes()
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDSchemaCopyAttributesForContentType func(objc.ID) objc.ID
@@ -629,7 +629,7 @@ func MDSchemaCopyAttributesForContentType(contentTypeUTI obj.Object) obj.Object 
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyAttributesForContentType, _lib, "MDSchemaCopyAttributesForContentType")
 	}
 	_ret := _fnMDSchemaCopyAttributesForContentType(objref.IDOf(contentTypeUTI))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDSchemaCopyDisplayDescriptionForAttribute func(objc.ID) objc.ID
@@ -641,7 +641,7 @@ func MDSchemaCopyDisplayDescriptionForAttribute(name obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyDisplayDescriptionForAttribute, _lib, "MDSchemaCopyDisplayDescriptionForAttribute")
 	}
 	_ret := _fnMDSchemaCopyDisplayDescriptionForAttribute(objref.IDOf(name))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDSchemaCopyDisplayNameForAttribute func(objc.ID) objc.ID
@@ -653,7 +653,7 @@ func MDSchemaCopyDisplayNameForAttribute(name obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyDisplayNameForAttribute, _lib, "MDSchemaCopyDisplayNameForAttribute")
 	}
 	_ret := _fnMDSchemaCopyDisplayNameForAttribute(objref.IDOf(name))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnMDSchemaCopyMetaAttributesForAttribute func(objc.ID) objc.ID
@@ -665,5 +665,5 @@ func MDSchemaCopyMetaAttributesForAttribute(name obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMDSchemaCopyMetaAttributesForAttribute, _lib, "MDSchemaCopyMetaAttributesForAttribute")
 	}
 	_ret := _fnMDSchemaCopyMetaAttributesForAttribute(objref.IDOf(name))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }

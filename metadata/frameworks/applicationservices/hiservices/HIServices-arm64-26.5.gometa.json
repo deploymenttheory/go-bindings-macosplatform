@@ -5868,7 +5868,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/Pasteboard.h",
@@ -5918,7 +5919,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/Pasteboard.h",
@@ -5985,7 +5987,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/Pasteboard.h",
@@ -6040,7 +6043,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/Pasteboard.h",
@@ -6092,7 +6096,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/Pasteboard.h",
@@ -6434,7 +6439,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXError"
+        "objc_type": "AXError",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6459,7 +6465,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXError"
+        "objc_type": "AXError",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6516,7 +6523,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXError"
+        "objc_type": "AXError",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6593,7 +6601,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXError"
+        "objc_type": "AXError",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6614,7 +6623,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXError"
+        "objc_type": "AXError",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6643,7 +6653,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXError"
+        "objc_type": "AXError",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6664,7 +6675,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXError"
+        "objc_type": "AXError",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6689,7 +6701,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXError"
+        "objc_type": "AXError",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6738,7 +6751,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXError"
+        "objc_type": "AXError",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6754,7 +6768,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXUIElementRef  _Nonnull"
+        "objc_type": "AXUIElementRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6764,7 +6779,8 @@
     {
       "name": "AXUIElementCreateSystemWide",
       "return": {
-        "objc_type": "AXUIElementRef  _Nonnull"
+        "objc_type": "AXUIElementRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6867,7 +6883,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXTextMarkerRef  _Nonnull"
+        "objc_type": "AXTextMarkerRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6934,7 +6951,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXTextMarkerRangeRef  _Nonnull"
+        "objc_type": "AXTextMarkerRangeRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6967,7 +6985,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXTextMarkerRangeRef  _Nonnull"
+        "objc_type": "AXTextMarkerRangeRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6983,7 +7002,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXTextMarkerRef  _Nonnull"
+        "objc_type": "AXTextMarkerRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -6999,7 +7019,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXTextMarkerRef  _Nonnull"
+        "objc_type": "AXTextMarkerRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -7034,7 +7055,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXError"
+        "objc_type": "AXError",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -7059,7 +7081,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXError"
+        "objc_type": "AXError",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXUIElement.h",
@@ -7158,7 +7181,8 @@
         }
       ],
       "return": {
-        "objc_type": "AXValueRef  _Nullable"
+        "objc_type": "AXValueRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/AXValue.h",

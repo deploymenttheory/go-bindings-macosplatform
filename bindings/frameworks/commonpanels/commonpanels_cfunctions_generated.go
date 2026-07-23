@@ -102,7 +102,7 @@ func FCFontDescriptorCreateWithFontAttributes(iAttributes obj.Object) obj.Object
 		ebipurego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithFontAttributes, _lib, "FCFontDescriptorCreateWithFontAttributes")
 	}
 	_ret := _fnFCFontDescriptorCreateWithFontAttributes(objref.IDOf(iAttributes))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnFCFontDescriptorCreateWithName func(objc.ID, float64) objc.ID
@@ -114,7 +114,7 @@ func FCFontDescriptorCreateWithName(iFontName obj.Object, iSize float64) obj.Obj
 		ebipurego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithName, _lib, "FCFontDescriptorCreateWithName")
 	}
 	_ret := _fnFCFontDescriptorCreateWithName(objref.IDOf(iFontName), iSize)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnFPIsFontPanelVisible func() uint8

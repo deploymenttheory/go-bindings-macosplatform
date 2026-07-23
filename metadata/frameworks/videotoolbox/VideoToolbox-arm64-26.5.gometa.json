@@ -7710,7 +7710,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "15.0"
@@ -7783,7 +7784,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -7805,7 +7807,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"

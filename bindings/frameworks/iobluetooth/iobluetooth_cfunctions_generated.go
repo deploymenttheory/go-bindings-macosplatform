@@ -82,7 +82,7 @@ func IOBluetoothL2CAPChannelRegisterForChannelCloseNotification(channel obj.Obje
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothL2CAPChannelRegisterForChannelCloseNotification, _lib, "IOBluetoothL2CAPChannelRegisterForChannelCloseNotification")
 	}
 	_ret := _fnIOBluetoothL2CAPChannelRegisterForChannelCloseNotification(objref.IDOf(channel), callback, inRefCon)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnIOBluetoothNSStringFromDeviceAddress func(unsafe.Pointer) objc.ID
@@ -502,7 +502,7 @@ func OBEXGetHeaders(inData unsafe.Pointer, inDataSize int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnOBEXGetHeaders, _lib, "OBEXGetHeaders")
 	}
 	_ret := _fnOBEXGetHeaders(inData, inDataSize)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnOBEXHeadersToBytes func(objc.ID) objc.ID

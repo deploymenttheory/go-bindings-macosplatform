@@ -968,7 +968,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_endpoint_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_endpoint_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "endpoint.h",
@@ -1018,7 +1019,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.9"
@@ -1137,7 +1139,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -1163,7 +1166,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -1186,7 +1190,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -1209,7 +1214,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -1231,7 +1237,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_peer_requirement_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -1280,7 +1287,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "connection.h",
@@ -1305,7 +1313,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -1323,7 +1332,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "connection.h",
@@ -1493,7 +1503,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "connection.h",
@@ -1905,7 +1916,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_session_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_session_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -1937,7 +1949,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_session_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_session_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -2062,7 +2075,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_rich_error_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_rich_error_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -2089,7 +2103,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -2211,7 +2226,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_listener_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_listener_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -2393,7 +2409,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2455,7 +2472,8 @@
     {
       "name": "xpc_null_create",
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2471,7 +2489,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2502,7 +2521,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2534,7 +2554,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2566,7 +2587,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2598,7 +2620,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2608,7 +2631,8 @@
     {
       "name": "xpc_date_create_from_current",
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2645,7 +2669,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2661,7 +2686,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2737,7 +2763,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2753,7 +2780,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "variadic": true,
       "availability": {},
@@ -2774,7 +2802,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2822,7 +2851,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2853,7 +2883,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2889,7 +2920,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2931,7 +2963,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -2941,7 +2974,8 @@
     {
       "name": "xpc_array_create_empty",
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -3480,7 +3514,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -3546,7 +3581,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -3556,7 +3592,8 @@
     {
       "name": "xpc_dictionary_create_empty",
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -3574,7 +3611,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_object_t  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",
@@ -4133,7 +4171,8 @@
         }
       ],
       "return": {
-        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nullable"
+        "objc_type": "XPC_RETURNS_RETAINED xpc_connection_t  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "xpc.h",

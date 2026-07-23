@@ -316,7 +316,7 @@ func (ae *AudioEngine) DisconnectMIDIOutput(node *AudioNode) {
 func (ae *AudioEngine) MusicSequence() obj.Object {
 	defer runtime.KeepAlive(ae)
 	_r := objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("musicSequence"))
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }
 
 // OutputNode returns the engine's singleton output node. Audio output is performed via an output node. The engine creates a singleton on demand when this property is first accessed. Connect another node to the input of the output node, or obtain a mixer that is connected there by default, using the "mainMixerNode" property. When the engine is rendering to/from an audio device, the AVAudioSesssion category and/or availability of hardware determine whether an app can perform output. Check the output format of output node (i.e. hardware format) for non-zero sample rate and channel count to see if output is enabled. Trying to perform output through the output node when it is not enabled or available will cause the engine to throw an error (when possible) or an exception. In manual rendering mode, the output format of the output node will determine the render format of the engine. It can be changed through `enableManualRenderingMode:format:maximumFrameCount:error:`.

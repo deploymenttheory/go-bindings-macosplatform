@@ -3900,7 +3900,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -3940,7 +3941,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -4246,7 +4248,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -4287,7 +4290,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -4368,7 +4372,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11"
@@ -4409,7 +4414,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11"
@@ -5181,7 +5187,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -5746,7 +5753,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -7373,7 +7381,8 @@
         }
       ],
       "return": {
-        "objc_type": "CMBufferRef  _Nullable"
+        "objc_type": "CMBufferRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -7391,7 +7400,8 @@
         }
       ],
       "return": {
-        "objc_type": "CMBufferRef  _Nullable"
+        "objc_type": "CMBufferRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -7428,7 +7438,8 @@
         }
       ],
       "return": {
-        "objc_type": "CMBufferRef  _Nullable"
+        "objc_type": "CMBufferRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -8789,7 +8800,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.9"
@@ -9823,7 +9835,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -9846,7 +9859,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10023,7 +10037,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10051,7 +10066,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10079,7 +10095,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10107,7 +10124,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10131,7 +10149,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10432,7 +10451,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10533,7 +10553,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10562,7 +10583,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10591,7 +10613,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10619,7 +10642,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10774,7 +10798,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10802,7 +10827,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10825,7 +10851,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10853,7 +10880,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10896,7 +10924,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -10924,7 +10953,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -11166,7 +11196,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -11198,7 +11229,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "26.0"
@@ -11258,7 +11290,8 @@
         }
       ],
       "return": {
-        "objc_type": "OSStatus"
+        "objc_type": "OSStatus",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -11450,7 +11483,8 @@
         }
       ],
       "return": {
-        "objc_type": "CMMemoryPoolRef  _Nonnull"
+        "objc_type": "CMMemoryPoolRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.8"
@@ -11779,7 +11813,8 @@
         }
       ],
       "return": {
-        "objc_type": "CMTimebaseRef  _Nullable"
+        "objc_type": "CMTimebaseRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11"
@@ -11796,7 +11831,8 @@
         }
       ],
       "return": {
-        "objc_type": "CMTimebaseRef  _Nullable"
+        "objc_type": "CMTimebaseRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11",
@@ -11814,7 +11850,8 @@
         }
       ],
       "return": {
-        "objc_type": "CMClockRef  _Nullable"
+        "objc_type": "CMClockRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11"
@@ -11831,7 +11868,8 @@
         }
       ],
       "return": {
-        "objc_type": "CMClockRef  _Nullable"
+        "objc_type": "CMClockRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11",
@@ -11849,7 +11887,8 @@
         }
       ],
       "return": {
-        "objc_type": "CMClockOrTimebaseRef  _Nonnull"
+        "objc_type": "CMClockOrTimebaseRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11"
@@ -11866,7 +11905,8 @@
         }
       ],
       "return": {
-        "objc_type": "CMClockOrTimebaseRef  _Nonnull"
+        "objc_type": "CMClockOrTimebaseRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11",
@@ -11884,7 +11924,8 @@
         }
       ],
       "return": {
-        "objc_type": "CMClockRef  _Nonnull"
+        "objc_type": "CMClockRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11"
@@ -11901,7 +11942,8 @@
         }
       ],
       "return": {
-        "objc_type": "CMClockRef  _Nonnull"
+        "objc_type": "CMClockRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11",

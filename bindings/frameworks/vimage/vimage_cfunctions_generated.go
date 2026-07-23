@@ -595,7 +595,7 @@ func VImageCVImageFormatCopy(format obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCopy, _lib, "vImageCVImageFormat_Copy")
 	}
 	_ret := _fnVImageCVImageFormatCopy(objref.IDOf(format))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnVImageCVImageFormatCopyChannelDescription func(objc.ID, unsafe.Pointer, uint32) int
@@ -629,7 +629,7 @@ func VImageCVImageFormatCreate(imageFormatType uint32, matrix *VImageARGBToYpCbC
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCreate, _lib, "vImageCVImageFormat_Create")
 	}
 	_ret := _fnVImageCVImageFormatCreate(imageFormatType, unsafe.Pointer(matrix), objref.IDOf(cvImageBufferChromaLocation), objref.IDOf(baseColorspace), alphaIsOneHint)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnVImageCVImageFormatCreateWithCVPixelBuffer func(unsafe.Pointer) objc.ID
@@ -641,7 +641,7 @@ func VImageCVImageFormatCreateWithCVPixelBuffer(buffer unsafe.Pointer) obj.Objec
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCreateWithCVPixelBuffer, _lib, "vImageCVImageFormat_CreateWithCVPixelBuffer")
 	}
 	_ret := _fnVImageCVImageFormatCreateWithCVPixelBuffer(buffer)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnVImageCVImageFormatGetAlphaHint func(objc.ID) int32
@@ -3000,7 +3000,7 @@ func VImageConverterCreateForCGToCVImageFormat(srcFormat unsafe.Pointer, destFor
 	}
 	var _out0 int
 	_ret := _fnVImageConverterCreateForCGToCVImageFormat(srcFormat, objref.IDOf(destFormat), backgroundColor, flags, unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return obj.WrapUnmanaged(_ret), _out0
 }
 
 var _fnVImageConverterCreateForCVToCGImageFormat func(objc.ID, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
@@ -3013,7 +3013,7 @@ func VImageConverterCreateForCVToCGImageFormat(srcFormat obj.Object, destFormat 
 	}
 	var _out0 int
 	_ret := _fnVImageConverterCreateForCVToCGImageFormat(objref.IDOf(srcFormat), destFormat, backgroundColor, flags, unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return obj.WrapUnmanaged(_ret), _out0
 }
 
 var _fnVImageConverterCreateWithCGColorConversionInfo func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
@@ -3026,7 +3026,7 @@ func VImageConverterCreateWithCGColorConversionInfo(colorConversionInfoRef obj.O
 	}
 	var _out0 int
 	_ret := _fnVImageConverterCreateWithCGColorConversionInfo(objref.IDOf(colorConversionInfoRef), sFormat, dFormat, bg, flags, unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return obj.WrapUnmanaged(_ret), _out0
 }
 
 var _fnVImageConverterCreateWithCGImageFormat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
@@ -3039,7 +3039,7 @@ func VImageConverterCreateWithCGImageFormat(srcFormat unsafe.Pointer, destFormat
 	}
 	var _out0 int
 	_ret := _fnVImageConverterCreateWithCGImageFormat(srcFormat, destFormat, backgroundColor, flags, unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return obj.WrapUnmanaged(_ret), _out0
 }
 
 var _fnVImageConverterCreateWithColorSyncCodeFragment func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
@@ -3052,7 +3052,7 @@ func VImageConverterCreateWithColorSyncCodeFragment(codeFragment obj.Object, src
 	}
 	var _out0 int
 	_ret := _fnVImageConverterCreateWithColorSyncCodeFragment(objref.IDOf(codeFragment), srcFormat, destFormat, backgroundColor, flags, unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return obj.WrapUnmanaged(_ret), _out0
 }
 
 var _fnVImageConverterGetDestinationBufferOrder func(objc.ID) unsafe.Pointer
@@ -4654,7 +4654,7 @@ func VImageMultidimensionalTableCreate(tableData unsafe.Pointer, numSrcChannels 
 	}
 	var _out0 int
 	_ret := _fnVImageMultidimensionalTableCreate(tableData, numSrcChannels, numDestChannels, tableEntriesPerDimension, hint, flags, unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return obj.WrapUnmanaged(_ret), _out0
 }
 
 var _fnVImageMultidimensionalTableRelease func(objc.ID) int

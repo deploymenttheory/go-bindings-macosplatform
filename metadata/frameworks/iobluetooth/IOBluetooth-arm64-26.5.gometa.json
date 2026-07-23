@@ -23774,7 +23774,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef"
+        "objc_type": "CFDictionaryRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "IOBluetooth/OBEX.h",

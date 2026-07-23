@@ -23,7 +23,7 @@ func SCBondInterfaceCopyAll(prefs obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceCopyAll, _lib, "SCBondInterfaceCopyAll")
 	}
 	_ret := _fnSCBondInterfaceCopyAll(objref.IDOf(prefs))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCBondInterfaceCopyAvailableMemberInterfaces func(objc.ID) objc.ID
@@ -35,7 +35,7 @@ func SCBondInterfaceCopyAvailableMemberInterfaces(prefs obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceCopyAvailableMemberInterfaces, _lib, "SCBondInterfaceCopyAvailableMemberInterfaces")
 	}
 	_ret := _fnSCBondInterfaceCopyAvailableMemberInterfaces(objref.IDOf(prefs))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCBondInterfaceCopyStatus func(unsafe.Pointer) objc.ID
@@ -47,7 +47,7 @@ func SCBondInterfaceCopyStatus(bond unsafe.Pointer) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCBondInterfaceCopyStatus, _lib, "SCBondInterfaceCopyStatus")
 	}
 	_ret := _fnSCBondInterfaceCopyStatus(bond)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCBondInterfaceCreate func(objc.ID) unsafe.Pointer
@@ -173,7 +173,7 @@ func SCCopyLastError() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCCopyLastError, _lib, "SCCopyLastError")
 	}
 	_ret := _fnSCCopyLastError()
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreAddTemporaryValue func(objc.ID, objc.ID, objc.ID) uint8
@@ -208,7 +208,7 @@ func SCDynamicStoreCopyComputerName(store obj.Object) (result obj.Object, nameEn
 	}
 	var _out0 int
 	_ret := _fnSCDynamicStoreCopyComputerName(objref.IDOf(store), unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return obj.Adopt(_ret), _out0
 }
 
 var _fnSCDynamicStoreCopyConsoleUser func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -222,7 +222,7 @@ func SCDynamicStoreCopyConsoleUser(store obj.Object) (result obj.Object, uid int
 	var _out0 int
 	var _out1 int
 	_ret := _fnSCDynamicStoreCopyConsoleUser(objref.IDOf(store), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return obj.Wrap(_ret), _out0, _out1
+	return obj.Adopt(_ret), _out0, _out1
 }
 
 var _fnSCDynamicStoreCopyKeyList func(objc.ID, objc.ID) objc.ID
@@ -234,7 +234,7 @@ func SCDynamicStoreCopyKeyList(store obj.Object, pattern obj.Object) obj.Object 
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyKeyList, _lib, "SCDynamicStoreCopyKeyList")
 	}
 	_ret := _fnSCDynamicStoreCopyKeyList(objref.IDOf(store), objref.IDOf(pattern))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreCopyLocalHostName func(objc.ID) objc.ID
@@ -246,7 +246,7 @@ func SCDynamicStoreCopyLocalHostName(store obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyLocalHostName, _lib, "SCDynamicStoreCopyLocalHostName")
 	}
 	_ret := _fnSCDynamicStoreCopyLocalHostName(objref.IDOf(store))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreCopyLocation func(objc.ID) objc.ID
@@ -258,7 +258,7 @@ func SCDynamicStoreCopyLocation(store obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyLocation, _lib, "SCDynamicStoreCopyLocation")
 	}
 	_ret := _fnSCDynamicStoreCopyLocation(objref.IDOf(store))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreCopyMultiple func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -270,7 +270,7 @@ func SCDynamicStoreCopyMultiple(store obj.Object, keys obj.Object, patterns obj.
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyMultiple, _lib, "SCDynamicStoreCopyMultiple")
 	}
 	_ret := _fnSCDynamicStoreCopyMultiple(objref.IDOf(store), objref.IDOf(keys), objref.IDOf(patterns))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreCopyNotifiedKeys func(objc.ID) objc.ID
@@ -282,7 +282,7 @@ func SCDynamicStoreCopyNotifiedKeys(store obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyNotifiedKeys, _lib, "SCDynamicStoreCopyNotifiedKeys")
 	}
 	_ret := _fnSCDynamicStoreCopyNotifiedKeys(objref.IDOf(store))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreCopyProxies func(objc.ID) objc.ID
@@ -294,7 +294,7 @@ func SCDynamicStoreCopyProxies(store obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyProxies, _lib, "SCDynamicStoreCopyProxies")
 	}
 	_ret := _fnSCDynamicStoreCopyProxies(objref.IDOf(store))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreCopyValue func(objc.ID, objc.ID) objc.ID
@@ -306,7 +306,7 @@ func SCDynamicStoreCopyValue(store obj.Object, key obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCopyValue, _lib, "SCDynamicStoreCopyValue")
 	}
 	_ret := _fnSCDynamicStoreCopyValue(objref.IDOf(store), objref.IDOf(key))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreCreate func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -318,7 +318,7 @@ func SCDynamicStoreCreate(allocator obj.Object, name obj.Object, callout unsafe.
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCreate, _lib, "SCDynamicStoreCreate")
 	}
 	_ret := _fnSCDynamicStoreCreate(objref.IDOf(allocator), objref.IDOf(name), callout, context_)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreCreateRunLoopSource func(objc.ID, objc.ID, int) objc.ID
@@ -330,7 +330,7 @@ func SCDynamicStoreCreateRunLoopSource(allocator obj.Object, store obj.Object, o
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCreateRunLoopSource, _lib, "SCDynamicStoreCreateRunLoopSource")
 	}
 	_ret := _fnSCDynamicStoreCreateRunLoopSource(objref.IDOf(allocator), objref.IDOf(store), order)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreCreateWithOptions func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -342,7 +342,7 @@ func SCDynamicStoreCreateWithOptions(allocator obj.Object, name obj.Object, stor
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreCreateWithOptions, _lib, "SCDynamicStoreCreateWithOptions")
 	}
 	_ret := _fnSCDynamicStoreCreateWithOptions(objref.IDOf(allocator), objref.IDOf(name), objref.IDOf(storeOptions), callout, context_)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreGetTypeID func() int
@@ -365,7 +365,7 @@ func SCDynamicStoreKeyCreateComputerName(allocator obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateComputerName, _lib, "SCDynamicStoreKeyCreateComputerName")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateComputerName(objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreKeyCreateConsoleUser func(objc.ID) objc.ID
@@ -377,7 +377,7 @@ func SCDynamicStoreKeyCreateConsoleUser(allocator obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateConsoleUser, _lib, "SCDynamicStoreKeyCreateConsoleUser")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateConsoleUser(objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreKeyCreateHostNames func(objc.ID) objc.ID
@@ -389,7 +389,7 @@ func SCDynamicStoreKeyCreateHostNames(allocator obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateHostNames, _lib, "SCDynamicStoreKeyCreateHostNames")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateHostNames(objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreKeyCreateLocation func(objc.ID) objc.ID
@@ -401,7 +401,7 @@ func SCDynamicStoreKeyCreateLocation(allocator obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateLocation, _lib, "SCDynamicStoreKeyCreateLocation")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateLocation(objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreKeyCreateNetworkGlobalEntity func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -413,7 +413,7 @@ func SCDynamicStoreKeyCreateNetworkGlobalEntity(allocator obj.Object, domain obj
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkGlobalEntity, _lib, "SCDynamicStoreKeyCreateNetworkGlobalEntity")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateNetworkGlobalEntity(objref.IDOf(allocator), objref.IDOf(domain), objref.IDOf(entity))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreKeyCreateNetworkInterface func(objc.ID, objc.ID) objc.ID
@@ -425,7 +425,7 @@ func SCDynamicStoreKeyCreateNetworkInterface(allocator obj.Object, domain obj.Ob
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkInterface, _lib, "SCDynamicStoreKeyCreateNetworkInterface")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateNetworkInterface(objref.IDOf(allocator), objref.IDOf(domain))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreKeyCreateNetworkInterfaceEntity func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -437,7 +437,7 @@ func SCDynamicStoreKeyCreateNetworkInterfaceEntity(allocator obj.Object, domain 
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkInterfaceEntity, _lib, "SCDynamicStoreKeyCreateNetworkInterfaceEntity")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateNetworkInterfaceEntity(objref.IDOf(allocator), objref.IDOf(domain), objref.IDOf(ifname), objref.IDOf(entity))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreKeyCreateNetworkServiceEntity func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -449,7 +449,7 @@ func SCDynamicStoreKeyCreateNetworkServiceEntity(allocator obj.Object, domain ob
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateNetworkServiceEntity, _lib, "SCDynamicStoreKeyCreateNetworkServiceEntity")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateNetworkServiceEntity(objref.IDOf(allocator), objref.IDOf(domain), objref.IDOf(serviceID), objref.IDOf(entity))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreKeyCreateProxies func(objc.ID) objc.ID
@@ -461,7 +461,7 @@ func SCDynamicStoreKeyCreateProxies(allocator obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCDynamicStoreKeyCreateProxies, _lib, "SCDynamicStoreKeyCreateProxies")
 	}
 	_ret := _fnSCDynamicStoreKeyCreateProxies(objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCDynamicStoreNotifyValue func(objc.ID, objc.ID) uint8
@@ -587,7 +587,7 @@ func SCNetworkConnectionCopyExtendedStatus(connection obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyExtendedStatus, _lib, "SCNetworkConnectionCopyExtendedStatus")
 	}
 	_ret := _fnSCNetworkConnectionCopyExtendedStatus(objref.IDOf(connection))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkConnectionCopyServiceID func(objc.ID) objc.ID
@@ -599,7 +599,7 @@ func SCNetworkConnectionCopyServiceID(connection obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyServiceID, _lib, "SCNetworkConnectionCopyServiceID")
 	}
 	_ret := _fnSCNetworkConnectionCopyServiceID(objref.IDOf(connection))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkConnectionCopyStatistics func(objc.ID) objc.ID
@@ -611,7 +611,7 @@ func SCNetworkConnectionCopyStatistics(connection obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyStatistics, _lib, "SCNetworkConnectionCopyStatistics")
 	}
 	_ret := _fnSCNetworkConnectionCopyStatistics(objref.IDOf(connection))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkConnectionCopyUserOptions func(objc.ID) objc.ID
@@ -623,7 +623,7 @@ func SCNetworkConnectionCopyUserOptions(connection obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCopyUserOptions, _lib, "SCNetworkConnectionCopyUserOptions")
 	}
 	_ret := _fnSCNetworkConnectionCopyUserOptions(objref.IDOf(connection))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkConnectionCopyUserPreferences func(objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
@@ -646,7 +646,7 @@ func SCNetworkConnectionCreateWithServiceID(allocator obj.Object, serviceID obj.
 		ebipurego.RegisterLibFunc(&_fnSCNetworkConnectionCreateWithServiceID, _lib, "SCNetworkConnectionCreateWithServiceID")
 	}
 	_ret := _fnSCNetworkConnectionCreateWithServiceID(objref.IDOf(allocator), objref.IDOf(serviceID), callout, context_)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkConnectionGetStatus func(objc.ID) SCNetworkConnectionStatus
@@ -735,7 +735,7 @@ func SCNetworkInterfaceCopyAll() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyAll, _lib, "SCNetworkInterfaceCopyAll")
 	}
 	_ret := _fnSCNetworkInterfaceCopyAll()
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkInterfaceCopyMTU func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
@@ -773,7 +773,7 @@ func SCNetworkInterfaceCopyMediaSubTypeOptions(available obj.Object, subType obj
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaSubTypeOptions, _lib, "SCNetworkInterfaceCopyMediaSubTypeOptions")
 	}
 	_ret := _fnSCNetworkInterfaceCopyMediaSubTypeOptions(objref.IDOf(available), objref.IDOf(subType))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkInterfaceCopyMediaSubTypes func(objc.ID) objc.ID
@@ -785,7 +785,7 @@ func SCNetworkInterfaceCopyMediaSubTypes(available obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCopyMediaSubTypes, _lib, "SCNetworkInterfaceCopyMediaSubTypes")
 	}
 	_ret := _fnSCNetworkInterfaceCopyMediaSubTypes(objref.IDOf(available))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkInterfaceCreateWithInterface func(objc.ID, objc.ID) objc.ID
@@ -797,7 +797,7 @@ func SCNetworkInterfaceCreateWithInterface(interface_ obj.Object, interfaceType 
 		ebipurego.RegisterLibFunc(&_fnSCNetworkInterfaceCreateWithInterface, _lib, "SCNetworkInterfaceCreateWithInterface")
 	}
 	_ret := _fnSCNetworkInterfaceCreateWithInterface(objref.IDOf(interface_), objref.IDOf(interfaceType))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkInterfaceForceConfigurationRefresh func(objc.ID) uint8
@@ -1062,7 +1062,7 @@ func SCNetworkReachabilityCreateWithAddress(allocator obj.Object, address unsafe
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithAddress, _lib, "SCNetworkReachabilityCreateWithAddress")
 	}
 	_ret := _fnSCNetworkReachabilityCreateWithAddress(objref.IDOf(allocator), address)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkReachabilityCreateWithAddressPair func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -1074,7 +1074,7 @@ func SCNetworkReachabilityCreateWithAddressPair(allocator obj.Object, localAddre
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithAddressPair, _lib, "SCNetworkReachabilityCreateWithAddressPair")
 	}
 	_ret := _fnSCNetworkReachabilityCreateWithAddressPair(objref.IDOf(allocator), localAddress, remoteAddress)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkReachabilityCreateWithName func(objc.ID, string) objc.ID
@@ -1086,7 +1086,7 @@ func SCNetworkReachabilityCreateWithName(allocator obj.Object, nodename string) 
 		ebipurego.RegisterLibFunc(&_fnSCNetworkReachabilityCreateWithName, _lib, "SCNetworkReachabilityCreateWithName")
 	}
 	_ret := _fnSCNetworkReachabilityCreateWithName(objref.IDOf(allocator), nodename)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkReachabilityGetFlags func(objc.ID, unsafe.Pointer) uint8
@@ -1177,7 +1177,7 @@ func SCNetworkServiceCopy(prefs obj.Object, serviceID obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCopy, _lib, "SCNetworkServiceCopy")
 	}
 	_ret := _fnSCNetworkServiceCopy(objref.IDOf(prefs), objref.IDOf(serviceID))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkServiceCopyAll func(objc.ID) objc.ID
@@ -1189,7 +1189,7 @@ func SCNetworkServiceCopyAll(prefs obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCopyAll, _lib, "SCNetworkServiceCopyAll")
 	}
 	_ret := _fnSCNetworkServiceCopyAll(objref.IDOf(prefs))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkServiceCopyProtocol func(objc.ID, objc.ID) objc.ID
@@ -1201,7 +1201,7 @@ func SCNetworkServiceCopyProtocol(service obj.Object, protocolType obj.Object) o
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCopyProtocol, _lib, "SCNetworkServiceCopyProtocol")
 	}
 	_ret := _fnSCNetworkServiceCopyProtocol(objref.IDOf(service), objref.IDOf(protocolType))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkServiceCopyProtocols func(objc.ID) objc.ID
@@ -1213,7 +1213,7 @@ func SCNetworkServiceCopyProtocols(service obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCopyProtocols, _lib, "SCNetworkServiceCopyProtocols")
 	}
 	_ret := _fnSCNetworkServiceCopyProtocols(objref.IDOf(service))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkServiceCreate func(objc.ID, objc.ID) objc.ID
@@ -1225,7 +1225,7 @@ func SCNetworkServiceCreate(prefs obj.Object, interface_ obj.Object) obj.Object 
 		ebipurego.RegisterLibFunc(&_fnSCNetworkServiceCreate, _lib, "SCNetworkServiceCreate")
 	}
 	_ret := _fnSCNetworkServiceCreate(objref.IDOf(prefs), objref.IDOf(interface_))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkServiceEstablishDefaultConfiguration func(objc.ID) uint8
@@ -1372,7 +1372,7 @@ func SCNetworkSetCopy(prefs obj.Object, setID obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCopy, _lib, "SCNetworkSetCopy")
 	}
 	_ret := _fnSCNetworkSetCopy(objref.IDOf(prefs), objref.IDOf(setID))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkSetCopyAll func(objc.ID) objc.ID
@@ -1384,7 +1384,7 @@ func SCNetworkSetCopyAll(prefs obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCopyAll, _lib, "SCNetworkSetCopyAll")
 	}
 	_ret := _fnSCNetworkSetCopyAll(objref.IDOf(prefs))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkSetCopyCurrent func(objc.ID) objc.ID
@@ -1396,7 +1396,7 @@ func SCNetworkSetCopyCurrent(prefs obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCopyCurrent, _lib, "SCNetworkSetCopyCurrent")
 	}
 	_ret := _fnSCNetworkSetCopyCurrent(objref.IDOf(prefs))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkSetCopyServices func(objc.ID) objc.ID
@@ -1408,7 +1408,7 @@ func SCNetworkSetCopyServices(set obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCopyServices, _lib, "SCNetworkSetCopyServices")
 	}
 	_ret := _fnSCNetworkSetCopyServices(objref.IDOf(set))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkSetCreate func(objc.ID) objc.ID
@@ -1420,7 +1420,7 @@ func SCNetworkSetCreate(prefs obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCNetworkSetCreate, _lib, "SCNetworkSetCreate")
 	}
 	_ret := _fnSCNetworkSetCreate(objref.IDOf(prefs))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCNetworkSetGetName func(objc.ID) objc.ID
@@ -1567,7 +1567,7 @@ func SCPreferencesCopyKeyList(prefs obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesCopyKeyList, _lib, "SCPreferencesCopyKeyList")
 	}
 	_ret := _fnSCPreferencesCopyKeyList(objref.IDOf(prefs))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCPreferencesCreate func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -1579,7 +1579,7 @@ func SCPreferencesCreate(allocator obj.Object, name obj.Object, prefsID obj.Obje
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesCreate, _lib, "SCPreferencesCreate")
 	}
 	_ret := _fnSCPreferencesCreate(objref.IDOf(allocator), objref.IDOf(name), objref.IDOf(prefsID))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCPreferencesCreateWithAuthorization func(objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
@@ -1591,7 +1591,7 @@ func SCPreferencesCreateWithAuthorization(allocator obj.Object, name obj.Object,
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesCreateWithAuthorization, _lib, "SCPreferencesCreateWithAuthorization")
 	}
 	_ret := _fnSCPreferencesCreateWithAuthorization(objref.IDOf(allocator), objref.IDOf(name), objref.IDOf(prefsID), objref.IDOf(authorization))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCPreferencesGetSignature func(objc.ID) objc.ID
@@ -1649,7 +1649,7 @@ func SCPreferencesPathCreateUniqueChild(prefs obj.Object, prefix obj.Object) obj
 		ebipurego.RegisterLibFunc(&_fnSCPreferencesPathCreateUniqueChild, _lib, "SCPreferencesPathCreateUniqueChild")
 	}
 	_ret := _fnSCPreferencesPathCreateUniqueChild(objref.IDOf(prefs), objref.IDOf(prefix))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCPreferencesPathGetLink func(objc.ID, objc.ID) objc.ID
@@ -1828,7 +1828,7 @@ func SCVLANInterfaceCopyAll(prefs obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceCopyAll, _lib, "SCVLANInterfaceCopyAll")
 	}
 	_ret := _fnSCVLANInterfaceCopyAll(objref.IDOf(prefs))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCVLANInterfaceCopyAvailablePhysicalInterfaces func() objc.ID
@@ -1840,7 +1840,7 @@ func SCVLANInterfaceCopyAvailablePhysicalInterfaces() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSCVLANInterfaceCopyAvailablePhysicalInterfaces, _lib, "SCVLANInterfaceCopyAvailablePhysicalInterfaces")
 	}
 	_ret := _fnSCVLANInterfaceCopyAvailablePhysicalInterfaces()
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSCVLANInterfaceCreate func(objc.ID, objc.ID, objc.ID) unsafe.Pointer

@@ -1073,7 +1073,7 @@ func WSMethodInvocationInvoke(invocation obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationInvoke, _lib, "WSMethodInvocationInvoke")
 	}
 	_ret := _fnWSMethodInvocationInvoke(objref.IDOf(invocation))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnWSMethodInvocationScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)

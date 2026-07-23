@@ -3564,7 +3564,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_txt_record_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_txt_record_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -3575,7 +3576,8 @@
     {
       "name": "nw_txt_record_create_dictionary",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_txt_record_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_txt_record_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -3593,7 +3595,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_txt_record_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_txt_record_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -3817,7 +3820,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_advertise_descriptor_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_advertise_descriptor_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -3920,7 +3924,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_txt_record_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_txt_record_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -3937,7 +3942,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_advertise_descriptor_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_advertise_descriptor_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -3992,7 +3998,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -4009,7 +4016,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -4098,7 +4106,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -4166,7 +4175,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -4225,7 +4235,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -4293,7 +4304,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -4327,7 +4339,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_txt_record_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_txt_record_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -4365,7 +4378,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_resolver_config_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_resolver_config_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -4382,7 +4396,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_resolver_config_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_resolver_config_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -4431,7 +4446,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_relay_hop_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_relay_hop_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -4478,7 +4494,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_proxy_config_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_proxy_config_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -4507,7 +4524,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_proxy_config_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_proxy_config_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -4529,7 +4547,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_proxy_config_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_proxy_config_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -4546,7 +4565,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_proxy_config_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_proxy_config_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "14.0"
@@ -4747,7 +4767,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_privacy_context_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_privacy_context_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -4866,7 +4887,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -4887,7 +4909,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -4908,7 +4931,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15",
@@ -4928,7 +4952,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.0"
@@ -4939,7 +4964,8 @@
     {
       "name": "nw_parameters_create_application_service",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -4950,7 +4976,8 @@
     {
       "name": "nw_parameters_create",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -4967,7 +4994,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -5065,7 +5093,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_interface_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_interface_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -5414,7 +5443,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -5583,7 +5613,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_stack_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_stack_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -5660,7 +5691,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -5698,7 +5730,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -5872,7 +5905,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_browse_descriptor_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_browse_descriptor_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -5961,7 +5995,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_browse_descriptor_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_browse_descriptor_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -5995,7 +6030,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -6052,7 +6088,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_txt_record_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_txt_record_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -6147,7 +6184,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_browser_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_browser_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -6263,7 +6301,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -6280,7 +6319,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_browse_descriptor_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_browse_descriptor_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -6497,7 +6537,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -6514,7 +6555,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -6570,7 +6612,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_content_context_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_content_context_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -6740,7 +6783,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_content_context_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_content_context_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -6782,7 +6826,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED NW_RETURNS_RETAINED nw_protocol_metadata_t"
+        "objc_type": "NW_RETURNS_RETAINED NW_RETURNS_RETAINED nw_protocol_metadata_t",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -6825,7 +6870,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_connection_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_connection_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -6842,7 +6888,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -6859,7 +6906,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -7193,7 +7241,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_path_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_path_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -7214,7 +7263,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_metadata_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_metadata_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -7248,7 +7298,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_group_descriptor_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_group_descriptor_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.0"
@@ -7265,7 +7316,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_group_descriptor_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_group_descriptor_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -7388,7 +7440,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_connection_group_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_connection_group_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -7405,7 +7458,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_group_descriptor_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_group_descriptor_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -7422,7 +7476,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -7550,7 +7605,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -7571,7 +7627,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -7592,7 +7649,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_path_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_path_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -7638,7 +7696,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_connection_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_connection_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -7695,7 +7754,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_connection_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_connection_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.0"
@@ -7921,7 +7981,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -7989,7 +8050,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -8006,7 +8068,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -8106,7 +8169,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_data_transfer_report_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_data_transfer_report_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -8455,7 +8519,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_interface_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_interface_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -8497,7 +8562,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_ethernet_channel_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_ethernet_channel_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15",
@@ -8525,7 +8591,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_ethernet_channel_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_ethernet_channel_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0",
@@ -8694,7 +8761,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_framer_message_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_framer_message_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -8728,7 +8796,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_framer_message_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_framer_message_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -8834,7 +8903,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED id  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED id  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -8859,7 +8929,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -8876,7 +8947,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -8923,7 +8995,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED id  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED id  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.3"
@@ -9379,7 +9452,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -9396,7 +9470,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_endpoint_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -9413,7 +9488,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_parameters_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -9430,7 +9506,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.3"
@@ -9441,7 +9518,8 @@
     {
       "name": "nw_protocol_copy_ip_definition",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -9599,7 +9677,8 @@
     {
       "name": "nw_ip_create_metadata",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_metadata_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_metadata_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -9730,7 +9809,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_listener_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_listener_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -9751,7 +9831,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_listener_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_listener_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -9768,7 +9849,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_listener_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_listener_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -9789,7 +9871,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_listener_t  _Nullable"
+        "objc_type": "NW_RETURNS_RETAINED nw_listener_t  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -10020,7 +10103,8 @@
     {
       "name": "nw_path_monitor_create",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_path_monitor_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_path_monitor_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -10037,7 +10121,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_path_monitor_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_path_monitor_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -10048,7 +10133,8 @@
     {
       "name": "nw_path_monitor_create_for_ethernet_channel",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_path_monitor_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_path_monitor_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "13.0"
@@ -10177,7 +10263,8 @@
     {
       "name": "nw_protocol_copy_quic_definition",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.0"
@@ -10188,7 +10275,8 @@
     {
       "name": "nw_quic_create_options",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.0"
@@ -10243,7 +10331,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED sec_protocol_options_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED sec_protocol_options_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.0"
@@ -10695,7 +10784,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED sec_protocol_metadata_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED sec_protocol_metadata_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "12.0"
@@ -11020,7 +11110,8 @@
     {
       "name": "nw_protocol_copy_tcp_definition",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -11031,7 +11122,8 @@
     {
       "name": "nw_tcp_create_options",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -11429,7 +11521,8 @@
     {
       "name": "nw_protocol_copy_tls_definition",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -11440,7 +11533,8 @@
     {
       "name": "nw_tls_create_options",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -11457,7 +11551,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED sec_protocol_options_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED sec_protocol_options_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -11491,7 +11586,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED sec_protocol_metadata_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED sec_protocol_metadata_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -11502,7 +11598,8 @@
     {
       "name": "nw_protocol_copy_udp_definition",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -11513,7 +11610,8 @@
     {
       "name": "nw_udp_create_options",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -11545,7 +11643,8 @@
     {
       "name": "nw_udp_create_metadata",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_metadata_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_metadata_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -11573,7 +11672,8 @@
     {
       "name": "nw_protocol_copy_ws_definition",
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_definition_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -11590,7 +11690,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_options_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -11733,7 +11834,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_protocol_metadata_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_protocol_metadata_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -11879,7 +11981,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_ws_response_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_ws_response_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -11956,7 +12059,8 @@
         }
       ],
       "return": {
-        "objc_type": "NW_RETURNS_RETAINED nw_ws_response_t  _Nonnull"
+        "objc_type": "NW_RETURNS_RETAINED nw_ws_response_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"

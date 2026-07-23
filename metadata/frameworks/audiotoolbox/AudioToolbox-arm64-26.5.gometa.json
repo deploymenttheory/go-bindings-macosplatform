@@ -18820,7 +18820,8 @@
         }
       ],
       "return": {
-        "objc_type": "API_AVAILABLE NSImage * _Nullable"
+        "objc_type": "API_AVAILABLE NSImage * _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"
@@ -23657,7 +23658,8 @@
         }
       ],
       "return": {
-        "objc_type": "OS_WORKGROUP_RETURNS_RETAINED os_workgroup_interval_t  _Nonnull"
+        "objc_type": "OS_WORKGROUP_RETURNS_RETAINED os_workgroup_interval_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "11.0"

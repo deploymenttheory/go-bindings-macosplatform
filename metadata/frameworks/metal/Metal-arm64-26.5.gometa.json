@@ -44991,7 +44991,8 @@
     {
       "name": "MTLCreateSystemDefaultDevice",
       "return": {
-        "objc_type": "NS_RETURNS_RETAINED id\u003cMTLDevice\u003e  _Nullable"
+        "objc_type": "NS_RETURNS_RETAINED id\u003cMTLDevice\u003e  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11"
@@ -45003,7 +45004,8 @@
     {
       "name": "MTLCopyAllDevices",
       "return": {
-        "objc_type": "NS_RETURNS_RETAINED NSArray\u003cid\u003cMTLDevice\u003e\u003e * _Nonnull"
+        "objc_type": "NS_RETURNS_RETAINED NSArray\u003cid\u003cMTLDevice\u003e\u003e * _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11"
@@ -45026,7 +45028,8 @@
         }
       ],
       "return": {
-        "objc_type": "NS_RETURNS_RETAINED NSArray\u003cid\u003cMTLDevice\u003e\u003e * _Nonnull"
+        "objc_type": "NS_RETURNS_RETAINED NSArray\u003cid\u003cMTLDevice\u003e\u003e * _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.13"

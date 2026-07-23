@@ -563,7 +563,7 @@ func AudioComponentFindNext(inComponent obj.Object, inDesc *AudioComponentDescri
 		ebipurego.RegisterLibFunc(&_fnAudioComponentFindNext, _lib, "AudioComponentFindNext")
 	}
 	_ret := _fnAudioComponentFindNext(objref.IDOf(inComponent), unsafe.Pointer(inDesc))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnAudioComponentGetIcon func(objc.ID) objc.ID
@@ -611,7 +611,7 @@ func AudioComponentInstanceGetComponent(inInstance *carboncore.ComponentInstance
 		ebipurego.RegisterLibFunc(&_fnAudioComponentInstanceGetComponent, _lib, "AudioComponentInstanceGetComponent")
 	}
 	_ret := _fnAudioComponentInstanceGetComponent(unsafe.Pointer(inInstance))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnAudioComponentInstanceNew func(objc.ID, unsafe.Pointer) int32
@@ -645,7 +645,7 @@ func AudioComponentRegister(inDesc *AudioComponentDescription, inName obj.Object
 		ebipurego.RegisterLibFunc(&_fnAudioComponentRegister, _lib, "AudioComponentRegister")
 	}
 	_ret := _fnAudioComponentRegister(unsafe.Pointer(inDesc), objref.IDOf(inName), inVersion, inFactory)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnAudioComponentValidate func(objc.ID, objc.ID, unsafe.Pointer) int32

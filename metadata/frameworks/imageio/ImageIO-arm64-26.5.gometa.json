@@ -1404,7 +1404,8 @@
     {
       "name": "CGImageMetadataCreateMutable",
       "return": {
-        "objc_type": "CGMutableImageMetadataRef  _Nonnull"
+        "objc_type": "CGMutableImageMetadataRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1420,7 +1421,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGMutableImageMetadataRef  _Nullable"
+        "objc_type": "CGMutableImageMetadataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1463,7 +1465,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageMetadataTagRef  _Nullable"
+        "objc_type": "CGImageMetadataTagRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1479,7 +1482,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1495,7 +1499,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1511,7 +1516,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1527,7 +1533,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef  _Nullable"
+        "objc_type": "CFTypeRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1559,7 +1566,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1575,7 +1583,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1600,7 +1609,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageMetadataTagRef  _Nullable"
+        "objc_type": "CGImageMetadataTagRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1625,7 +1635,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1791,7 +1802,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageMetadataTagRef  _Nullable"
+        "objc_type": "CGImageMetadataTagRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1840,7 +1852,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1856,7 +1869,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageMetadataRef  _Nullable"
+        "objc_type": "CGImageMetadataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageMetadata.h",
@@ -1875,7 +1889,8 @@
     {
       "name": "CGImageSourceCopyTypeIdentifiers",
       "return": {
-        "objc_type": "CFArrayRef  _Nonnull"
+        "objc_type": "CFArrayRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageSource.h",
@@ -1895,7 +1910,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageSourceRef  _Nullable"
+        "objc_type": "CGImageSourceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageSource.h",
@@ -1915,7 +1931,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageSourceRef  _Nullable"
+        "objc_type": "CGImageSourceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageSource.h",
@@ -1935,7 +1952,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageSourceRef  _Nullable"
+        "objc_type": "CGImageSourceRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageSource.h",
@@ -1985,7 +2003,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageSource.h",
@@ -2009,7 +2028,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageSource.h",
@@ -2033,7 +2053,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageMetadataRef  _Nullable"
+        "objc_type": "CGImageMetadataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageSource.h",
@@ -2057,7 +2078,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageSource.h",
@@ -2100,7 +2122,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageRef  _Nullable"
+        "objc_type": "CGImageRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageSource.h",
@@ -2116,7 +2139,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageSourceRef  _Nonnull"
+        "objc_type": "CGImageSourceRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageSource.h",
@@ -2234,7 +2258,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageSource.h",
@@ -2267,7 +2292,8 @@
     {
       "name": "CGImageDestinationCopyTypeIdentifiers",
       "return": {
-        "objc_type": "CFArrayRef  _Nonnull"
+        "objc_type": "CFArrayRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageDestination.h",
@@ -2295,7 +2321,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageDestinationRef  _Nullable"
+        "objc_type": "CGImageDestinationRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageDestination.h",
@@ -2323,7 +2350,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageDestinationRef  _Nullable"
+        "objc_type": "CGImageDestinationRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageDestination.h",
@@ -2351,7 +2379,8 @@
         }
       ],
       "return": {
-        "objc_type": "CGImageDestinationRef  _Nullable"
+        "objc_type": "CGImageDestinationRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageDestination.h",
@@ -2496,7 +2525,8 @@
         }
       ],
       "return": {
-        "objc_type": "bool"
+        "objc_type": "bool",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ImageIO/CGImageDestination.h",

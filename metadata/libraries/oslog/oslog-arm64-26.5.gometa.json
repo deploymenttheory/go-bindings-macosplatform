@@ -959,7 +959,8 @@
         }
       ],
       "return": {
-        "objc_type": "OS_OBJECT_RETURNS_RETAINED os_log_t"
+        "objc_type": "OS_OBJECT_RETURNS_RETAINED os_log_t",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -1183,7 +1184,8 @@
         }
       ],
       "return": {
-        "objc_type": "OS_OBJECT_RETURNS_RETAINED os_log_t"
+        "objc_type": "OS_OBJECT_RETURNS_RETAINED os_log_t",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.11"

@@ -292,7 +292,7 @@ func ArErrorCopyCfError(err obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnArErrorCopyCfError, _lib, "ar_error_copy_cf_error")
 	}
 	_ret := _fnArErrorCopyCfError(objref.IDOf(err))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnArErrorGetErrorCode func(objc.ID) int

@@ -302,6 +302,7 @@ func emitGenericFunctionWrappers(
 		}
 		retType, kind, wrap, _, rimps, rok := idiomaticRet(
 			fn.Return.ObjCType,
+			fn.Return.IsAlreadyRetained,
 			ctx,
 			mapper,
 			fc,

@@ -2837,7 +2837,8 @@
     {
       "name": "JRSUIRendererCreate",
       "return": {
-        "objc_type": "JRSUIRendererRef"
+        "objc_type": "JRSUIRendererRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "JavaRuntimeSupport/JRSUIControl.h",
@@ -2867,7 +2868,8 @@
         }
       ],
       "return": {
-        "objc_type": "JRSUIControlRef"
+        "objc_type": "JRSUIControlRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "JavaRuntimeSupport/JRSUIControl.h",

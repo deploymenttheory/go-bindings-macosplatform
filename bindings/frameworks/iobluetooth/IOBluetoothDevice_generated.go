@@ -61,7 +61,7 @@ func NewIOBluetoothDevice() *IOBluetoothDevice {
 func (ibd *IOBluetoothDevice) DeviceRef() obj.Object {
 	defer runtime.KeepAlive(ibd)
 	_r := objc.Send[objc.ID](objref.IDOf(ibd), objc.RegisterName("getDeviceRef"))
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }
 
 // OpenL2CAPChannelSyncWithPSMDelegate opens a new L2CAP channel to the target device. Returns only after the channel is opened.

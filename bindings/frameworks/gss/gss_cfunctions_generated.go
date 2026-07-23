@@ -22,7 +22,7 @@ func GSSCreateCredentialFromUUID(uuid obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnGSSCreateCredentialFromUUID, _lib, "GSSCreateCredentialFromUUID")
 	}
 	_ret := _fnGSSCreateCredentialFromUUID(objref.IDOf(uuid))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnGSSCreateError func(unsafe.Pointer, uint32, uint32) objc.ID
@@ -46,7 +46,7 @@ func GSSCreateName(name obj.Object, nameType unsafe.Pointer, err unsafe.Pointer)
 		ebipurego.RegisterLibFunc(&_fnGSSCreateName, _lib, "GSSCreateName")
 	}
 	_ret := _fnGSSCreateName(objref.IDOf(name), nameType, err)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnGSSCredentialCopyName func(objc.ID) objc.ID
@@ -58,7 +58,7 @@ func GSSCredentialCopyName(cred obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnGSSCredentialCopyName, _lib, "GSSCredentialCopyName")
 	}
 	_ret := _fnGSSCredentialCopyName(objref.IDOf(cred))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnGSSCredentialCopyUUID func(objc.ID) objc.ID

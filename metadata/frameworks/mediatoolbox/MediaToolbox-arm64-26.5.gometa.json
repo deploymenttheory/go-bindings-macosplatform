@@ -1571,7 +1571,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.9"
@@ -1592,7 +1593,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.9"

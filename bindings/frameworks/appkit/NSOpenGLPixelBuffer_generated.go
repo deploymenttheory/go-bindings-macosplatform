@@ -92,7 +92,7 @@ func NewOpenGLPixelBufferWithCGLPBufferObj(pbuffer obj.Object) *OpenGLPixelBuffe
 func (ogpb *OpenGLPixelBuffer) CGLPBufferObj() obj.Object {
 	defer runtime.KeepAlive(ogpb)
 	_r := objc.Send[objc.ID](objref.IDOf(ogpb), objc.RegisterName("CGLPBufferObj"))
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }
 
 // PixelsWide returns the pixels wide.

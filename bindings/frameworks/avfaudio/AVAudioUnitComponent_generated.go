@@ -184,7 +184,7 @@ func (auc *AudioUnitComponent) HasMIDIOutput() bool {
 func (auc *AudioUnitComponent) AudioComponent() obj.Object {
 	defer runtime.KeepAlive(auc)
 	_r := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("audioComponent"))
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }
 
 // UserTagNames returns user tags represent the tags from the current user.

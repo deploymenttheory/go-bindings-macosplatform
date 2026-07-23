@@ -426,7 +426,7 @@ func (ogl *OpenGLLayer) DrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx o
 func (ogl *OpenGLLayer) CopyCGLPixelFormatForDisplayMask(mask uint32) obj.Object {
 	defer runtime.KeepAlive(ogl)
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("copyCGLPixelFormatForDisplayMask:"), mask)
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }
 
 // ReleaseCGLPixelFormat releases the specified OpenGL pixel format object.
@@ -441,7 +441,7 @@ func (ogl *OpenGLLayer) CopyCGLContextForPixelFormat(pf obj.Object) obj.Object {
 	defer runtime.KeepAlive(ogl)
 	defer runtime.KeepAlive(pf)
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("copyCGLContextForPixelFormat:"), objref.IDOf(pf))
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }
 
 // ReleaseCGLContext releases the specified rendering context.

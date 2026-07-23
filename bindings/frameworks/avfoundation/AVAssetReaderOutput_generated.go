@@ -92,7 +92,7 @@ func (aro *AssetReaderOutput) WithSupportsRandomAccess(supportsRandomAccess bool
 func (aro *AssetReaderOutput) CopyNextSampleBuffer() obj.Object {
 	defer runtime.KeepAlive(aro)
 	_r := objc.Send[objc.ID](objref.IDOf(aro), objc.RegisterName("copyNextSampleBuffer"))
-	return obj.Wrap(_r)
+	return obj.Adopt(_r)
 }
 
 // MediaType returns the media type of the samples that can be read from the receiver. The value of this property is one of the media type strings defined in AVMediaFormat.h.

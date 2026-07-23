@@ -45,7 +45,7 @@ func IOSurfaceCopyAllValues(buffer obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCopyAllValues, _lib, "IOSurfaceCopyAllValues")
 	}
 	_ret := _fnIOSurfaceCopyAllValues(objref.IDOf(buffer))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnIOSurfaceCopyValue func(objc.ID, objc.ID) objc.ID
@@ -57,7 +57,7 @@ func IOSurfaceCopyValue(buffer obj.Object, key obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCopyValue, _lib, "IOSurfaceCopyValue")
 	}
 	_ret := _fnIOSurfaceCopyValue(objref.IDOf(buffer), objref.IDOf(key))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnIOSurfaceCreate func(objc.ID) objc.ID
@@ -69,7 +69,7 @@ func IOSurfaceCreate(properties obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCreate, _lib, "IOSurfaceCreate")
 	}
 	_ret := _fnIOSurfaceCreate(objref.IDOf(properties))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnIOSurfaceCreateMachPort func(objc.ID) uint32
@@ -479,7 +479,7 @@ func IOSurfaceLookup(csid uint32) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceLookup, _lib, "IOSurfaceLookup")
 	}
 	_ret := _fnIOSurfaceLookup(csid)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnIOSurfaceLookupFromMachPort func(int) objc.ID
@@ -491,7 +491,7 @@ func IOSurfaceLookupFromMachPort(port int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceLookupFromMachPort, _lib, "IOSurfaceLookupFromMachPort")
 	}
 	_ret := _fnIOSurfaceLookupFromMachPort(port)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnIOSurfaceLookupFromXPCObject func(objc.ID) objc.ID
@@ -503,7 +503,7 @@ func IOSurfaceLookupFromXPCObject(xobj xpc.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceLookupFromXPCObject, _lib, "IOSurfaceLookupFromXPCObject")
 	}
 	_ret := _fnIOSurfaceLookupFromXPCObject(objc.ID(uintptr(xobj.Ptr())))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnIOSurfaceRemoveAllValues func(objc.ID)

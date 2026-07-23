@@ -2037,7 +2037,8 @@
     {
       "name": "MACaptionAppearanceCopyProfileIDs",
       "return": {
-        "objc_type": "CFArrayRef  _Nonnull"
+        "objc_type": "CFArrayRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "MediaAccessibility/MACaptionAppearance.h",
@@ -2063,7 +2064,8 @@
     {
       "name": "MACaptionAppearanceCopyActiveProfileID",
       "return": {
-        "objc_type": "CFStringRef  _Nonnull"
+        "objc_type": "CFStringRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "MediaAccessibility/MACaptionAppearance.h",
@@ -2079,7 +2081,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nonnull"
+        "objc_type": "CFStringRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "MediaAccessibility/MACaptionAppearance.h",
@@ -2131,7 +2134,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"
@@ -2169,7 +2173,8 @@
     {
       "name": "MAImageCaptioningCopyMetadataTagPath",
       "return": {
-        "objc_type": "CFStringRef  _Nonnull"
+        "objc_type": "CFStringRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.15"

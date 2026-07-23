@@ -60,7 +60,7 @@ func NewVmnetNetworkDeviceAttachmentWithNetwork(network obj.Object) *VmnetNetwor
 func (vnda *VmnetNetworkDeviceAttachment) Network() obj.Object {
 	defer runtime.KeepAlive(vnda)
 	_r := objc.Send[objc.ID](objref.IDOf(vnda), objc.RegisterName("network"))
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }
 
 var _ NetworkDeviceAttachmentProvider = (*VmnetNetworkDeviceAttachment)(nil)

@@ -71,6 +71,11 @@ type Mapper struct {
 	ProtocolIndex map[string]string
 	// CFTypeIndex maps framework-specific CF opaque typedef names → owning framework.
 	CFTypeIndex map[string]string
+	// NonRefcountedHandles is the subset of CFTypeIndex opaque handles that are NOT
+	// reference-counted (no <Type>GetTypeID). objc_retain/objc_release on such a
+	// pointer crashes, so a return of one is wrapped with obj.WrapUnmanaged rather
+	// than obj.Wrap.
+	NonRefcountedHandles map[string]bool
 	// ModulePrefix is the import path prefix for framework packages,
 	// e.g. "github.com/deploymenttheory/go-bindings-macosplatform/purego-frameworks".
 	ModulePrefix string

@@ -1154,7 +1154,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_queue_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_queue_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.12"
@@ -1178,7 +1179,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_queue_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_queue_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -1612,7 +1614,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED_BLOCK dispatch_block_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED_BLOCK dispatch_block_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.10"
@@ -1642,7 +1645,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED_BLOCK dispatch_block_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED_BLOCK dispatch_block_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.10"
@@ -1776,7 +1780,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_source_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_source_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -2059,7 +2064,8 @@
     {
       "name": "dispatch_group_create",
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_group_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_group_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -2242,7 +2248,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_semaphore_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_semaphore_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.6"
@@ -2438,7 +2445,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_data_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_data_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -2483,7 +2491,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_data_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_data_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -2505,7 +2514,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_data_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_data_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -2531,7 +2541,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_data_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_data_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -2579,7 +2590,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_data_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_data_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -2671,7 +2683,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_io_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_io_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -2710,7 +2723,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_io_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_io_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -2741,7 +2755,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_io_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_io_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.7"
@@ -2953,7 +2968,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_workloop_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_workloop_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"
@@ -2972,7 +2988,8 @@
         }
       ],
       "return": {
-        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_workloop_t  _Nonnull"
+        "objc_type": "DISPATCH_RETURNS_RETAINED dispatch_workloop_t  _Nonnull",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "10.14"

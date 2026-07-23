@@ -24,7 +24,7 @@ func CVBufferCopyAttachment(buffer obj.Object, key obj.Object) (result obj.Objec
 	}
 	var _out0 CVAttachmentMode
 	_ret := _fnCVBufferCopyAttachment(objref.IDOf(buffer), objref.IDOf(key), unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return obj.Adopt(_ret), _out0
 }
 
 var _fnCVBufferCopyAttachments func(objc.ID, CVAttachmentMode) objc.ID
@@ -36,7 +36,7 @@ func CVBufferCopyAttachments(buffer obj.Object, attachmentMode CVAttachmentMode)
 		ebipurego.RegisterLibFunc(&_fnCVBufferCopyAttachments, _lib, "CVBufferCopyAttachments")
 	}
 	_ret := _fnCVBufferCopyAttachments(objref.IDOf(buffer), attachmentMode)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCVBufferGetAttachment func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -128,7 +128,7 @@ func CVBufferRetain(buffer obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCVBufferRetain, _lib, "CVBufferRetain")
 	}
 	_ret := _fnCVBufferRetain(objref.IDOf(buffer))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCVBufferSetAttachment func(objc.ID, objc.ID, objc.ID, CVAttachmentMode)
@@ -977,7 +977,7 @@ func CVPixelBufferCopyCreationAttributes(pixelBuffer unsafe.Pointer) obj.Object 
 		ebipurego.RegisterLibFunc(&_fnCVPixelBufferCopyCreationAttributes, _lib, "CVPixelBufferCopyCreationAttributes")
 	}
 	_ret := _fnCVPixelBufferCopyCreationAttributes(pixelBuffer)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCVPixelBufferCreate func(objc.ID, int, int, int, objc.ID, unsafe.Pointer) int32
@@ -1152,7 +1152,7 @@ func CVPixelBufferGetIOSurface(pixelBuffer unsafe.Pointer) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCVPixelBufferGetIOSurface, _lib, "CVPixelBufferGetIOSurface")
 	}
 	_ret := _fnCVPixelBufferGetIOSurface(pixelBuffer)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCVPixelBufferGetPixelFormatType func(unsafe.Pointer) uint32
@@ -1387,7 +1387,7 @@ func CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes(allocator obj.Ob
 		ebipurego.RegisterLibFunc(&_fnCVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes, _lib, "CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes")
 	}
 	_ret := _fnCVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes(objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCVPixelFormatDescriptionCreateWithPixelFormatType func(objc.ID, int) objc.ID
@@ -1399,7 +1399,7 @@ func CVPixelFormatDescriptionCreateWithPixelFormatType(allocator obj.Object, pix
 		ebipurego.RegisterLibFunc(&_fnCVPixelFormatDescriptionCreateWithPixelFormatType, _lib, "CVPixelFormatDescriptionCreateWithPixelFormatType")
 	}
 	_ret := _fnCVPixelFormatDescriptionCreateWithPixelFormatType(objref.IDOf(allocator), pixelFormat)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType func(objc.ID, int)
@@ -1422,7 +1422,7 @@ func CVPixelFormatTypeCopyFourCharCodeString(pixelFormat int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCVPixelFormatTypeCopyFourCharCodeString, _lib, "CVPixelFormatTypeCopyFourCharCodeString")
 	}
 	_ret := _fnCVPixelFormatTypeCopyFourCharCodeString(pixelFormat)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnCVTransferFunctionGetIntegerCodePointForString func(objc.ID) int32

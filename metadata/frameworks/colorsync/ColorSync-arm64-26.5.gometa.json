@@ -831,7 +831,8 @@
         }
       ],
       "return": {
-        "objc_type": "ColorSyncProfileRef  _Nullable"
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -851,7 +852,8 @@
         }
       ],
       "return": {
-        "objc_type": "ColorSyncProfileRef  _Nullable"
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -876,7 +878,8 @@
         }
       ],
       "return": {
-        "objc_type": "ColorSyncProfileRef  _Nullable"
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -891,7 +894,8 @@
         }
       ],
       "return": {
-        "objc_type": "ColorSyncProfileRef  _Nullable"
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -906,7 +910,8 @@
         }
       ],
       "return": {
-        "objc_type": "ColorSyncProfileRef  _Nullable"
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -929,7 +934,8 @@
         }
       ],
       "return": {
-        "objc_type": "ColorSyncProfileRef  _Nullable"
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -938,7 +944,8 @@
     {
       "name": "ColorSyncProfileCreateMutable",
       "return": {
-        "objc_type": "ColorSyncMutableProfileRef  _Nullable"
+        "objc_type": "ColorSyncMutableProfileRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -953,7 +960,8 @@
         }
       ],
       "return": {
-        "objc_type": "ColorSyncMutableProfileRef  _Nullable"
+        "objc_type": "ColorSyncMutableProfileRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -973,7 +981,8 @@
         }
       ],
       "return": {
-        "objc_type": "ColorSyncProfileRef  _Nullable"
+        "objc_type": "ColorSyncProfileRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -1148,7 +1157,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -1203,7 +1213,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nonnull"
+        "objc_type": "CFDataRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -1238,7 +1249,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nonnull"
+        "objc_type": "CFDataRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -1272,7 +1284,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -1287,7 +1300,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nullable"
+        "objc_type": "CFArrayRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -1325,7 +1339,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDataRef  _Nullable"
+        "objc_type": "CFDataRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncProfile.h",
@@ -1512,7 +1527,8 @@
         }
       ],
       "return": {
-        "objc_type": "ColorSyncTransformRef  _Nullable"
+        "objc_type": "ColorSyncTransformRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncTransform.h",
@@ -1536,7 +1552,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef  _Nullable"
+        "objc_type": "CFTypeRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncTransform.h",
@@ -1654,7 +1671,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFTypeRef  _Nonnull"
+        "objc_type": "CFTypeRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncTransform.h",
@@ -1678,7 +1696,8 @@
         }
       ],
       "return": {
-        "objc_type": "ColorSyncCMMRef  _Nullable"
+        "objc_type": "ColorSyncCMMRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncCMM.h",
@@ -1708,7 +1727,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncCMM.h",
@@ -1723,7 +1743,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nullable"
+        "objc_type": "CFStringRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncCMM.h",
@@ -1827,7 +1848,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFDictionaryRef  _Nullable"
+        "objc_type": "CFDictionaryRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncDevice.h",
@@ -1862,7 +1884,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFUUIDRef  _Nonnull"
+        "objc_type": "CFUUIDRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "ColorSync/ColorSyncDevice.h",

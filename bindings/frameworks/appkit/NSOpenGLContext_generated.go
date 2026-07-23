@@ -208,7 +208,7 @@ func (ogc *OpenGLContext) CurrentVirtualScreen() int32 {
 func (ogc *OpenGLContext) CGLContextObj() obj.Object {
 	defer runtime.KeepAlive(ogc)
 	_r := objc.Send[objc.ID](objref.IDOf(ogc), objc.RegisterName("CGLContextObj"))
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }
 
 // SetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen attaches the specified pixel buffer to the OpenGL context.

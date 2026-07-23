@@ -2431,7 +2431,7 @@ func SSLCreateContext(alloc obj.Object, protocolSide SSLProtocolSide, connection
 		ebipurego.RegisterLibFunc(&_fnSSLCreateContext, _lib, "SSLCreateContext")
 	}
 	_ret := _fnSSLCreateContext(objref.IDOf(alloc), protocolSide, connectionType)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSSLGetAllowsAnyRoot func(objc.ID, unsafe.Pointer) int32
@@ -2807,7 +2807,7 @@ func SecACLCopyAuthorizations(acl obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecACLCopyAuthorizations, _lib, "SecACLCopyAuthorizations")
 	}
 	_ret := _fnSecACLCopyAuthorizations(objref.IDOf(acl))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecACLCopyContents func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -2878,7 +2878,7 @@ func SecAccessCopyMatchingACLList(accessRef obj.Object, authorizationTag obj.Obj
 		ebipurego.RegisterLibFunc(&_fnSecAccessCopyMatchingACLList, _lib, "SecAccessCopyMatchingACLList")
 	}
 	_ret := _fnSecAccessCopyMatchingACLList(objref.IDOf(accessRef), objref.IDOf(authorizationTag))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecAccessCopyOwnerAndACL func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -2951,7 +2951,7 @@ func SecCertificateCopyData(certificate obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyData, _lib, "SecCertificateCopyData")
 	}
 	_ret := _fnSecCertificateCopyData(objref.IDOf(certificate))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecCertificateCopyKey func(objc.ID) objc.ID
@@ -2963,7 +2963,7 @@ func SecCertificateCopyKey(certificate obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyKey, _lib, "SecCertificateCopyKey")
 	}
 	_ret := _fnSecCertificateCopyKey(objref.IDOf(certificate))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecCertificateCopyNormalizedIssuerSequence func(objc.ID) objc.ID
@@ -2975,7 +2975,7 @@ func SecCertificateCopyNormalizedIssuerSequence(certificate obj.Object) obj.Obje
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedIssuerSequence, _lib, "SecCertificateCopyNormalizedIssuerSequence")
 	}
 	_ret := _fnSecCertificateCopyNormalizedIssuerSequence(objref.IDOf(certificate))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecCertificateCopyNormalizedSubjectSequence func(objc.ID) objc.ID
@@ -2987,7 +2987,7 @@ func SecCertificateCopyNormalizedSubjectSequence(certificate obj.Object) obj.Obj
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedSubjectSequence, _lib, "SecCertificateCopyNormalizedSubjectSequence")
 	}
 	_ret := _fnSecCertificateCopyNormalizedSubjectSequence(objref.IDOf(certificate))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecCertificateCopyNotValidAfterDate func(objc.ID) objc.ID
@@ -2999,7 +2999,7 @@ func SecCertificateCopyNotValidAfterDate(certificate obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNotValidAfterDate, _lib, "SecCertificateCopyNotValidAfterDate")
 	}
 	_ret := _fnSecCertificateCopyNotValidAfterDate(objref.IDOf(certificate))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecCertificateCopyNotValidBeforeDate func(objc.ID) objc.ID
@@ -3011,7 +3011,7 @@ func SecCertificateCopyNotValidBeforeDate(certificate obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNotValidBeforeDate, _lib, "SecCertificateCopyNotValidBeforeDate")
 	}
 	_ret := _fnSecCertificateCopyNotValidBeforeDate(objref.IDOf(certificate))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecCertificateCopyPreferred func(objc.ID, objc.ID) objc.ID
@@ -3023,7 +3023,7 @@ func SecCertificateCopyPreferred(name obj.Object, keyUsage obj.Object) obj.Objec
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyPreferred, _lib, "SecCertificateCopyPreferred")
 	}
 	_ret := _fnSecCertificateCopyPreferred(objref.IDOf(name), objref.IDOf(keyUsage))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecCertificateCopySubjectSummary func(objc.ID) objc.ID
@@ -3035,7 +3035,7 @@ func SecCertificateCopySubjectSummary(certificate obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopySubjectSummary, _lib, "SecCertificateCopySubjectSummary")
 	}
 	_ret := _fnSecCertificateCopySubjectSummary(objref.IDOf(certificate))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecCertificateCreateFromData func(unsafe.Pointer, uint32, uint32, unsafe.Pointer) int32
@@ -3058,7 +3058,7 @@ func SecCertificateCreateWithData(allocator obj.Object, data obj.Object) obj.Obj
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCreateWithData, _lib, "SecCertificateCreateWithData")
 	}
 	_ret := _fnSecCertificateCreateWithData(objref.IDOf(allocator), objref.IDOf(data))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecCertificateGetAlgorithmID func(objc.ID, unsafe.Pointer) int32
@@ -3162,7 +3162,7 @@ func SecCopyErrorMessageString(status int, reserved unsafe.Pointer) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecCopyErrorMessageString, _lib, "SecCopyErrorMessageString")
 	}
 	_ret := _fnSecCopyErrorMessageString(status, reserved)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecCreateSharedWebCredentialPassword func() objc.ID
@@ -3174,7 +3174,7 @@ func SecCreateSharedWebCredentialPassword() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecCreateSharedWebCredentialPassword, _lib, "SecCreateSharedWebCredentialPassword")
 	}
 	_ret := _fnSecCreateSharedWebCredentialPassword()
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecDecryptTransformGetTypeID func() int
@@ -3256,7 +3256,7 @@ func SecIdentityCopyPreferred(name obj.Object, keyUsage obj.Object, validIssuers
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCopyPreferred, _lib, "SecIdentityCopyPreferred")
 	}
 	_ret := _fnSecIdentityCopyPreferred(objref.IDOf(name), objref.IDOf(keyUsage), objref.IDOf(validIssuers))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecIdentityCreate func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -3268,7 +3268,7 @@ func SecIdentityCreate(allocator obj.Object, certificate obj.Object, privateKey 
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCreate, _lib, "SecIdentityCreate")
 	}
 	_ret := _fnSecIdentityCreate(objref.IDOf(allocator), objref.IDOf(certificate), objref.IDOf(privateKey))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecIdentityGetTypeID func() int
@@ -3327,7 +3327,7 @@ func SecKeyCopyAttributes(key obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCopyAttributes, _lib, "SecKeyCopyAttributes")
 	}
 	_ret := _fnSecKeyCopyAttributes(objref.IDOf(key))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecKeyCopyPublicKey func(objc.ID) objc.ID
@@ -3339,7 +3339,7 @@ func SecKeyCopyPublicKey(key obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCopyPublicKey, _lib, "SecKeyCopyPublicKey")
 	}
 	_ret := _fnSecKeyCopyPublicKey(objref.IDOf(key))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecKeyGeneratePairAsync func(objc.ID, objc.ID, objc.Block)
@@ -3719,7 +3719,7 @@ func SecPolicyCopyProperties(policyRef obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCopyProperties, _lib, "SecPolicyCopyProperties")
 	}
 	_ret := _fnSecPolicyCopyProperties(objref.IDOf(policyRef))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecPolicyCreateBasicX509 func() objc.ID
@@ -3731,7 +3731,7 @@ func SecPolicyCreateBasicX509() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateBasicX509, _lib, "SecPolicyCreateBasicX509")
 	}
 	_ret := _fnSecPolicyCreateBasicX509()
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecPolicyCreateRevocation func(int) objc.ID
@@ -3743,7 +3743,7 @@ func SecPolicyCreateRevocation(revocationFlags int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateRevocation, _lib, "SecPolicyCreateRevocation")
 	}
 	_ret := _fnSecPolicyCreateRevocation(revocationFlags)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecPolicyCreateSSL func(uint8, objc.ID) objc.ID
@@ -3755,7 +3755,7 @@ func SecPolicyCreateSSL(server uint8, hostname obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateSSL, _lib, "SecPolicyCreateSSL")
 	}
 	_ret := _fnSecPolicyCreateSSL(server, objref.IDOf(hostname))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecPolicyCreateWithOID func(objc.ID) objc.ID
@@ -3767,7 +3767,7 @@ func SecPolicyCreateWithOID(policyOID obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateWithOID, _lib, "SecPolicyCreateWithOID")
 	}
 	_ret := _fnSecPolicyCreateWithOID(objref.IDOf(policyOID))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecPolicyCreateWithProperties func(objc.ID, objc.ID) objc.ID
@@ -3779,7 +3779,7 @@ func SecPolicyCreateWithProperties(policyIdentifier obj.Object, properties obj.O
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateWithProperties, _lib, "SecPolicyCreateWithProperties")
 	}
 	_ret := _fnSecPolicyCreateWithProperties(objref.IDOf(policyIdentifier), objref.IDOf(properties))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecPolicyGetOID func(objc.ID, unsafe.Pointer) int32
@@ -3914,7 +3914,7 @@ func SecTaskCreateFromSelf(allocator obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecTaskCreateFromSelf, _lib, "SecTaskCreateFromSelf")
 	}
 	_ret := _fnSecTaskCreateFromSelf(objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecTaskCreateWithAuditToken func(objc.ID, unsafe.Pointer) objc.ID
@@ -3926,7 +3926,7 @@ func SecTaskCreateWithAuditToken(allocator obj.Object, token unsafe.Pointer) obj
 		ebipurego.RegisterLibFunc(&_fnSecTaskCreateWithAuditToken, _lib, "SecTaskCreateWithAuditToken")
 	}
 	_ret := _fnSecTaskCreateWithAuditToken(objref.IDOf(allocator), token)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecTaskGetTypeID func() int
@@ -3961,7 +3961,7 @@ func SecTransformCopyExternalRepresentation(transformRef unsafe.Pointer) obj.Obj
 		ebipurego.RegisterLibFunc(&_fnSecTransformCopyExternalRepresentation, _lib, "SecTransformCopyExternalRepresentation")
 	}
 	_ret := _fnSecTransformCopyExternalRepresentation(transformRef)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecTransformCreateGroupTransform func() unsafe.Pointer
@@ -4124,7 +4124,7 @@ func SecTrustCopyCertificateChain(trust obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyCertificateChain, _lib, "SecTrustCopyCertificateChain")
 	}
 	_ret := _fnSecTrustCopyCertificateChain(objref.IDOf(trust))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecTrustCopyExceptions func(objc.ID) objc.ID
@@ -4136,7 +4136,7 @@ func SecTrustCopyExceptions(trust obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyExceptions, _lib, "SecTrustCopyExceptions")
 	}
 	_ret := _fnSecTrustCopyExceptions(objref.IDOf(trust))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecTrustCopyKey func(objc.ID) objc.ID
@@ -4148,7 +4148,7 @@ func SecTrustCopyKey(trust obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyKey, _lib, "SecTrustCopyKey")
 	}
 	_ret := _fnSecTrustCopyKey(objref.IDOf(trust))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecTrustCopyProperties func(objc.ID) objc.ID
@@ -4160,7 +4160,7 @@ func SecTrustCopyProperties(trust obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyProperties, _lib, "SecTrustCopyProperties")
 	}
 	_ret := _fnSecTrustCopyProperties(objref.IDOf(trust))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecTrustCopyPublicKey func(objc.ID) objc.ID
@@ -4172,7 +4172,7 @@ func SecTrustCopyPublicKey(trust obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyPublicKey, _lib, "SecTrustCopyPublicKey")
 	}
 	_ret := _fnSecTrustCopyPublicKey(objref.IDOf(trust))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecTrustCopyResult func(objc.ID) objc.ID
@@ -4184,7 +4184,7 @@ func SecTrustCopyResult(trust obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyResult, _lib, "SecTrustCopyResult")
 	}
 	_ret := _fnSecTrustCopyResult(objref.IDOf(trust))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnSecTrustEvaluate func(objc.ID, unsafe.Pointer) int32

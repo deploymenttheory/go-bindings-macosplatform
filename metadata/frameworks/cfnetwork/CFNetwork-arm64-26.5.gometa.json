@@ -3644,7 +3644,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopSourceRef  _Nonnull"
+        "objc_type": "CFRunLoopSourceRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CFNetwork/CFProxySupport.h",
@@ -3671,7 +3672,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFRunLoopSourceRef  _Nonnull"
+        "objc_type": "CFRunLoopSourceRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CFNetwork/CFProxySupport.h",

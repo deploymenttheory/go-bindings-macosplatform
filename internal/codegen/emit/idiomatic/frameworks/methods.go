@@ -835,7 +835,7 @@ func buildPlainMethod(
 	}
 
 	retType, retKind, retWrap, sendType, retImps, ok := idiomaticRet(
-		method.Return.ObjCType, ctx, mapper, fc, rawPkgAlias, trialNames)
+		method.Return.ObjCType, method.Return.IsAlreadyRetained, ctx, mapper, fc, rawPkgAlias, trialNames)
 	if !ok {
 		return nil
 	}

@@ -731,7 +731,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFArrayRef  _Nonnull"
+        "objc_type": "CFArrayRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
@@ -755,7 +756,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFUUIDRef  _Nullable"
+        "objc_type": "CFUUIDRef  _Nullable",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",
@@ -1004,7 +1006,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef  _Nonnull"
+        "objc_type": "CFStringRef  _Nonnull",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/FSEvents/FSEvents.h",

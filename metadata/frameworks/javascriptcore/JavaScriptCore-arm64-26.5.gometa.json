@@ -6389,7 +6389,8 @@
         }
       ],
       "return": {
-        "objc_type": "CFStringRef"
+        "objc_type": "CFStringRef",
+        "already_retained": true
       },
       "availability": {},
       "sdk_file": "JavaScriptCore/JSStringRefCF.h",

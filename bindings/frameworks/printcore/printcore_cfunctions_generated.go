@@ -189,7 +189,7 @@ func PMPrinterCreateFromPrinterID(printerID obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterCreateFromPrinterID, _lib, "PMPrinterCreateFromPrinterID")
 	}
 	_ret := _fnPMPrinterCreateFromPrinterID(objref.IDOf(printerID))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnPMPrinterGetCommInfo func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32

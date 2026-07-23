@@ -93,7 +93,7 @@ func (sbg *SampleBufferGenerator) CreateSampleBufferForRequestError(request *Sam
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return obj.Adopt(_r), nil
 }
 
 // CreateSampleBufferForRequest creates a new sample buffer reference for the specified buffer request.
@@ -101,7 +101,7 @@ func (sbg *SampleBufferGenerator) CreateSampleBufferForRequest(request *SampleBu
 	defer runtime.KeepAlive(sbg)
 	defer runtime.KeepAlive(request)
 	_r := objc.Send[objc.ID](objref.IDOf(sbg), objc.RegisterName("createSampleBufferForRequest:"), objref.IDOf(request))
-	return obj.Wrap(_r)
+	return obj.Adopt(_r)
 }
 
 // MakeBatch creates a batch object to handle generating multiple sample buffers.
@@ -121,5 +121,5 @@ func (sbg *SampleBufferGenerator) CreateSampleBufferForRequestAddingToBatch(requ
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return obj.Adopt(_r), nil
 }

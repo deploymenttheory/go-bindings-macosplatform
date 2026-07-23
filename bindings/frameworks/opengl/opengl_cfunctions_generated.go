@@ -221,7 +221,7 @@ func CGLGetCurrentContext() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCGLGetCurrentContext, _lib, "CGLGetCurrentContext")
 	}
 	_ret := _fnCGLGetCurrentContext()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCGLGetDeviceFromGLRenderer func(int32) objc.ID
@@ -233,7 +233,7 @@ func CGLGetDeviceFromGLRenderer(rendererID int32) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCGLGetDeviceFromGLRenderer, _lib, "CGLGetDeviceFromGLRenderer")
 	}
 	_ret := _fnCGLGetDeviceFromGLRenderer(rendererID)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCGLGetGlobalOption func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
@@ -325,7 +325,7 @@ func CGLGetPixelFormat(ctx obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCGLGetPixelFormat, _lib, "CGLGetPixelFormat")
 	}
 	_ret := _fnCGLGetPixelFormat(objref.IDOf(ctx))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCGLGetPixelFormatRetainCount func(objc.ID) uint32
@@ -348,7 +348,7 @@ func CGLGetShareGroup(ctx obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCGLGetShareGroup, _lib, "CGLGetShareGroup")
 	}
 	_ret := _fnCGLGetShareGroup(objref.IDOf(ctx))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCGLGetVersion func(unsafe.Pointer, unsafe.Pointer)
@@ -457,7 +457,7 @@ func CGLRetainContext(ctx obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCGLRetainContext, _lib, "CGLRetainContext")
 	}
 	_ret := _fnCGLRetainContext(objref.IDOf(ctx))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCGLRetainPBuffer func(objc.ID) objc.ID
@@ -469,7 +469,7 @@ func CGLRetainPBuffer(pbuffer obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCGLRetainPBuffer, _lib, "CGLRetainPBuffer")
 	}
 	_ret := _fnCGLRetainPBuffer(objref.IDOf(pbuffer))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCGLRetainPixelFormat func(objc.ID) objc.ID
@@ -481,7 +481,7 @@ func CGLRetainPixelFormat(pix obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCGLRetainPixelFormat, _lib, "CGLRetainPixelFormat")
 	}
 	_ret := _fnCGLRetainPixelFormat(objref.IDOf(pix))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCGLSetCurrentContext func(objc.ID) unsafe.Pointer

@@ -145,7 +145,7 @@ func (sc *SampleCursor) DecodeTimeStamp() coremedia.CMTime {
 func (sc *SampleCursor) CopyCurrentSampleFormatDescription() obj.Object {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("copyCurrentSampleFormatDescription"))
-	return obj.Wrap(_r)
+	return obj.Adopt(_r)
 }
 
 // CurrentSampleDuration indicates the decode duration of the sample at the receiver's current position. If the receiver must be advanced past its current position in order to determine the decode duration of the current sample, the value of currentSampleDuration is equal to kCMTimeIndefinite. This can occur with streaming formats such as MPEG-2 transport streams.

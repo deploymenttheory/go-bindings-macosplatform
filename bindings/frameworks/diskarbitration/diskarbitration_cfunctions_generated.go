@@ -23,7 +23,7 @@ func DAApprovalSessionCreate(allocator obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnDAApprovalSessionCreate, _lib, "DAApprovalSessionCreate")
 	}
 	_ret := _fnDAApprovalSessionCreate(objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnDAApprovalSessionGetTypeID func() int
@@ -79,7 +79,7 @@ func DADiskCopyDescription(disk obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnDADiskCopyDescription, _lib, "DADiskCopyDescription")
 	}
 	_ret := _fnDADiskCopyDescription(objref.IDOf(disk))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnDADiskCopyIOMedia func(objc.ID) uint32
@@ -102,7 +102,7 @@ func DADiskCopyWholeDisk(disk obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnDADiskCopyWholeDisk, _lib, "DADiskCopyWholeDisk")
 	}
 	_ret := _fnDADiskCopyWholeDisk(objref.IDOf(disk))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnDADiskCreateFromBSDName func(objc.ID, objc.ID, string) objc.ID
@@ -114,7 +114,7 @@ func DADiskCreateFromBSDName(allocator obj.Object, session obj.Object, name stri
 		ebipurego.RegisterLibFunc(&_fnDADiskCreateFromBSDName, _lib, "DADiskCreateFromBSDName")
 	}
 	_ret := _fnDADiskCreateFromBSDName(objref.IDOf(allocator), objref.IDOf(session), name)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnDADiskCreateFromIOMedia func(objc.ID, objc.ID, int) objc.ID
@@ -126,7 +126,7 @@ func DADiskCreateFromIOMedia(allocator obj.Object, session obj.Object, media int
 		ebipurego.RegisterLibFunc(&_fnDADiskCreateFromIOMedia, _lib, "DADiskCreateFromIOMedia")
 	}
 	_ret := _fnDADiskCreateFromIOMedia(objref.IDOf(allocator), objref.IDOf(session), media)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnDADiskCreateFromVolumePath func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -138,7 +138,7 @@ func DADiskCreateFromVolumePath(allocator obj.Object, session obj.Object, path o
 		ebipurego.RegisterLibFunc(&_fnDADiskCreateFromVolumePath, _lib, "DADiskCreateFromVolumePath")
 	}
 	_ret := _fnDADiskCreateFromVolumePath(objref.IDOf(allocator), objref.IDOf(session), objref.IDOf(path))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnDADiskEject func(objc.ID, int, unsafe.Pointer, unsafe.Pointer)
@@ -271,7 +271,7 @@ func DADissenterCreate(allocator obj.Object, status int, str obj.Object) obj.Obj
 		ebipurego.RegisterLibFunc(&_fnDADissenterCreate, _lib, "DADissenterCreate")
 	}
 	_ret := _fnDADissenterCreate(objref.IDOf(allocator), status, objref.IDOf(str))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnDADissenterGetStatus func(objc.ID) int32
@@ -383,7 +383,7 @@ func DASessionCreate(allocator obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnDASessionCreate, _lib, "DASessionCreate")
 	}
 	_ret := _fnDASessionCreate(objref.IDOf(allocator))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnDASessionGetTypeID func() int

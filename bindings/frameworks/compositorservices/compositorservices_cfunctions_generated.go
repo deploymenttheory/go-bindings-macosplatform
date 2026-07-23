@@ -23,7 +23,7 @@ func CpDrawableAddMtl4RenderContext(drawable obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableAddMtl4RenderContext, _lib, "cp_drawable_add_mtl4_render_context")
 	}
 	_ret := _fnCpDrawableAddMtl4RenderContext(objref.IDOf(drawable))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCpDrawableAddRenderContext func(objc.ID, unsafe.Pointer) objc.ID
@@ -35,7 +35,7 @@ func CpDrawableAddRenderContext(drawable obj.Object, cmdBuffer unsafe.Pointer) o
 		ebipurego.RegisterLibFunc(&_fnCpDrawableAddRenderContext, _lib, "cp_drawable_add_render_context")
 	}
 	_ret := _fnCpDrawableAddRenderContext(objref.IDOf(drawable), cmdBuffer)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCpDrawableAddTrackingArea func(objc.ID, uint64) objc.ID
@@ -47,7 +47,7 @@ func CpDrawableAddTrackingArea(drawable obj.Object, identifier uint64) obj.Objec
 		ebipurego.RegisterLibFunc(&_fnCpDrawableAddTrackingArea, _lib, "cp_drawable_add_tracking_area")
 	}
 	_ret := _fnCpDrawableAddTrackingArea(objref.IDOf(drawable), identifier)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCpDrawableArrayGetCount func(objc.ID) int
@@ -70,7 +70,7 @@ func CpDrawableArrayGetDrawable(drawableArray obj.Object, index int) obj.Object 
 		ebipurego.RegisterLibFunc(&_fnCpDrawableArrayGetDrawable, _lib, "cp_drawable_array_get_drawable")
 	}
 	_ret := _fnCpDrawableArrayGetDrawable(objref.IDOf(drawableArray), index)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCpDrawableComputeProjection func(objc.ID, AxisDirectionConvention, int) unsafe.Pointer
@@ -160,7 +160,7 @@ func CpDrawableGetFrameTiming(drawable obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetFrameTiming, _lib, "cp_drawable_get_frame_timing")
 	}
 	_ret := _fnCpDrawableGetFrameTiming(objref.IDOf(drawable))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCpDrawableGetPresentationFrameIndex func(objc.ID) uint64
@@ -260,7 +260,7 @@ func CpDrawableGetView(drawable obj.Object, index int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCpDrawableGetView, _lib, "cp_drawable_get_view")
 	}
 	_ret := _fnCpDrawableGetView(objref.IDOf(drawable), index)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCpDrawableGetViewCount func(objc.ID) int
@@ -448,7 +448,7 @@ func CpFramePredictTiming(frame obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCpFramePredictTiming, _lib, "cp_frame_predict_timing")
 	}
 	_ret := _fnCpFramePredictTiming(objref.IDOf(frame))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCpFrameQueryDrawables func(objc.ID) objc.ID
@@ -460,7 +460,7 @@ func CpFrameQueryDrawables(frame obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCpFrameQueryDrawables, _lib, "cp_frame_query_drawables")
 	}
 	_ret := _fnCpFrameQueryDrawables(objref.IDOf(frame))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCpFrameStartSubmission func(objc.ID)
@@ -1068,7 +1068,7 @@ func CpLayerRendererPropertiesGetTextureTopology(layerProperties *_cp_layer_rend
 		ebipurego.RegisterLibFunc(&_fnCpLayerRendererPropertiesGetTextureTopology, _lib, "cp_layer_renderer_properties_get_texture_topology")
 	}
 	_ret := _fnCpLayerRendererPropertiesGetTextureTopology(objref.IDOf(layerProperties), index)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCpLayerRendererPropertiesGetTextureTopologyCount func(objc.ID) int
@@ -1113,7 +1113,7 @@ func CpLayerRendererQueryNextFrame(layerRenderer *_cp_layer_renderer) obj.Object
 		ebipurego.RegisterLibFunc(&_fnCpLayerRendererQueryNextFrame, _lib, "cp_layer_renderer_query_next_frame")
 	}
 	_ret := _fnCpLayerRendererQueryNextFrame(objref.IDOf(layerRenderer))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCpLayerRendererSetMinimumFrameRepeatCount func(objc.ID, int)
@@ -1224,7 +1224,7 @@ func CpTrackingAreaAddAutomaticHoverEffect(trackingArea obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCpTrackingAreaAddAutomaticHoverEffect, _lib, "cp_tracking_area_add_automatic_hover_effect")
 	}
 	_ret := _fnCpTrackingAreaAddAutomaticHoverEffect(objref.IDOf(trackingArea))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCpTrackingAreaGetIdentifier func(objc.ID) uint64
@@ -1269,7 +1269,7 @@ func CpViewGetViewTextureMap(view obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCpViewGetViewTextureMap, _lib, "cp_view_get_view_texture_map")
 	}
 	_ret := _fnCpViewGetViewTextureMap(objref.IDOf(view))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCpViewTextureMapGetSliceIndex func(objc.ID) int

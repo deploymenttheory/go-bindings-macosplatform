@@ -23,7 +23,7 @@ func FSEventStreamCopyDescription(streamRef obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamCopyDescription, _lib, "FSEventStreamCopyDescription")
 	}
 	_ret := _fnFSEventStreamCopyDescription(objref.IDOf(streamRef))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnFSEventStreamCopyPathsBeingWatched func(objc.ID) objc.ID
@@ -35,7 +35,7 @@ func FSEventStreamCopyPathsBeingWatched(streamRef obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamCopyPathsBeingWatched, _lib, "FSEventStreamCopyPathsBeingWatched")
 	}
 	_ret := _fnFSEventStreamCopyPathsBeingWatched(objref.IDOf(streamRef))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnFSEventStreamCreate func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID, uint64, float64, int) objc.ID
@@ -47,7 +47,7 @@ func FSEventStreamCreate(allocator obj.Object, callback unsafe.Pointer, context_
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamCreate, _lib, "FSEventStreamCreate")
 	}
 	_ret := _fnFSEventStreamCreate(objref.IDOf(allocator), callback, context_, objref.IDOf(pathsToWatch), sinceWhen, latency, flags)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnFSEventStreamCreateRelativeToDevice func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, objc.ID, uint64, float64, int) objc.ID
@@ -59,7 +59,7 @@ func FSEventStreamCreateRelativeToDevice(allocator obj.Object, callback unsafe.P
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamCreateRelativeToDevice, _lib, "FSEventStreamCreateRelativeToDevice")
 	}
 	_ret := _fnFSEventStreamCreateRelativeToDevice(objref.IDOf(allocator), callback, context_, deviceToWatch, objref.IDOf(pathsToWatchRelativeToDevice), sinceWhen, latency, flags)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnFSEventStreamFlushAsync func(objc.ID) uint64
@@ -225,7 +225,7 @@ func FSEventsCopyUUIDForDevice(dev int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnFSEventsCopyUUIDForDevice, _lib, "FSEventsCopyUUIDForDevice")
 	}
 	_ret := _fnFSEventsCopyUUIDForDevice(dev)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnFSEventsGetCurrentEventId func() uint64

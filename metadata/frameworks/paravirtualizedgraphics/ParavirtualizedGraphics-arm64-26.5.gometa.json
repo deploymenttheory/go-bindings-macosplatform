@@ -2722,7 +2722,8 @@
         }
       ],
       "return": {
-        "objc_type": "NS_RETURNS_RETAINED id\u003cPGDevice\u003e  _Nullable"
+        "objc_type": "NS_RETURNS_RETAINED id\u003cPGDevice\u003e  _Nullable",
+        "already_retained": true
       },
       "availability": {
         "macos_introduced": "15.2"

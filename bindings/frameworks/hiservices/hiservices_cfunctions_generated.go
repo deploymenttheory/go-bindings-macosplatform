@@ -134,7 +134,7 @@ func AXTextMarkerCreate(allocator obj.Object, data unsafe.Pointer, length int) o
 		ebipurego.RegisterLibFunc(&_fnAXTextMarkerCreate, _lib, "AXTextMarkerCreate")
 	}
 	_ret := _fnAXTextMarkerCreate(objref.IDOf(allocator), data, length)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnAXTextMarkerGetBytePtr func(objc.ID) unsafe.Pointer
@@ -179,7 +179,7 @@ func AXTextMarkerRangeCopyEndMarker(textMarkerRange obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnAXTextMarkerRangeCopyEndMarker, _lib, "AXTextMarkerRangeCopyEndMarker")
 	}
 	_ret := _fnAXTextMarkerRangeCopyEndMarker(objref.IDOf(textMarkerRange))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnAXTextMarkerRangeCopyStartMarker func(objc.ID) objc.ID
@@ -191,7 +191,7 @@ func AXTextMarkerRangeCopyStartMarker(textMarkerRange obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnAXTextMarkerRangeCopyStartMarker, _lib, "AXTextMarkerRangeCopyStartMarker")
 	}
 	_ret := _fnAXTextMarkerRangeCopyStartMarker(objref.IDOf(textMarkerRange))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnAXTextMarkerRangeCreate func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -203,7 +203,7 @@ func AXTextMarkerRangeCreate(allocator obj.Object, startMarker obj.Object, endMa
 		ebipurego.RegisterLibFunc(&_fnAXTextMarkerRangeCreate, _lib, "AXTextMarkerRangeCreate")
 	}
 	_ret := _fnAXTextMarkerRangeCreate(objref.IDOf(allocator), objref.IDOf(startMarker), objref.IDOf(endMarker))
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnAXTextMarkerRangeCreateWithBytes func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, int) objc.ID
@@ -215,7 +215,7 @@ func AXTextMarkerRangeCreateWithBytes(allocator obj.Object, startMarkerBytes uns
 		ebipurego.RegisterLibFunc(&_fnAXTextMarkerRangeCreateWithBytes, _lib, "AXTextMarkerRangeCreateWithBytes")
 	}
 	_ret := _fnAXTextMarkerRangeCreateWithBytes(objref.IDOf(allocator), startMarkerBytes, startMarkerLength, endMarkerBytes, endMarkerLength)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnAXTextMarkerRangeGetTypeID func() int
@@ -337,7 +337,7 @@ func AXUIElementCreateApplication(pid int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnAXUIElementCreateApplication, _lib, "AXUIElementCreateApplication")
 	}
 	_ret := _fnAXUIElementCreateApplication(pid)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnAXUIElementCreateSystemWide func() objc.ID
@@ -349,7 +349,7 @@ func AXUIElementCreateSystemWide() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnAXUIElementCreateSystemWide, _lib, "AXUIElementCreateSystemWide")
 	}
 	_ret := _fnAXUIElementCreateSystemWide()
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnAXUIElementGetAttributeValueCount func(objc.ID, objc.ID, unsafe.Pointer) AXError
@@ -455,7 +455,7 @@ func AXValueCreate(theType AXValueType, valuePtr unsafe.Pointer) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnAXValueCreate, _lib, "AXValueCreate")
 	}
 	_ret := _fnAXValueCreate(theType, valuePtr)
-	return obj.Wrap(_ret)
+	return obj.Adopt(_ret)
 }
 
 var _fnAXValueGetType func(objc.ID) AXValueType
@@ -569,7 +569,7 @@ func GetIconRefVariant(inIconRef obj.Object, inVariant int) (result obj.Object, 
 	}
 	var _out0 int16
 	_ret := _fnGetIconRefVariant(objref.IDOf(inIconRef), inVariant, unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return obj.WrapUnmanaged(_ret), _out0
 }
 
 var _fnGetNextProcess func(unsafe.Pointer) int16
@@ -675,7 +675,7 @@ func HIShapeCreateMutable() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnHIShapeCreateMutable, _lib, "HIShapeCreateMutable")
 	}
 	_ret := _fnHIShapeCreateMutable()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnHIShapeCreateMutableCopy func(objc.ID) objc.ID
@@ -687,7 +687,7 @@ func HIShapeCreateMutableCopy(inOrig obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnHIShapeCreateMutableCopy, _lib, "HIShapeCreateMutableCopy")
 	}
 	_ret := _fnHIShapeCreateMutableCopy(objref.IDOf(inOrig))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnHIShapeCreateMutableWithRect func(unsafe.Pointer) objc.ID
@@ -699,7 +699,7 @@ func HIShapeCreateMutableWithRect(inRect *corefoundation.CGRect) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnHIShapeCreateMutableWithRect, _lib, "HIShapeCreateMutableWithRect")
 	}
 	_ret := _fnHIShapeCreateMutableWithRect(unsafe.Pointer(inRect))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnHIShapeCreateUnion func(objc.ID, objc.ID) objc.ID
