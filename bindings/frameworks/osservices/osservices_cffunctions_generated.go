@@ -7,6 +7,7 @@ package osservices
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	ebipurego "github.com/ebitengine/purego"
 )
@@ -125,6 +126,21 @@ func KCLock(keychain unsafe.Pointer) error {
 		ebipurego.RegisterLibFunc(&_fnKCLock, _lib, "KCLock")
 	}
 	_rc := _fnKCLock(keychain)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnKCMakeKCRefFromFSRef func(unsafe.Pointer, unsafe.Pointer) int32
+
+// KCMakeKCRefFromFSRef reports an error if the OSServices framework function KCMakeKCRefFromFSRef fails.
+func KCMakeKCRefFromFSRef(keychainFSRef *carboncore.FSRef, keychain unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnKCMakeKCRefFromFSRef == nil {
+		ebipurego.RegisterLibFunc(&_fnKCMakeKCRefFromFSRef, _lib, "KCMakeKCRefFromFSRef")
+	}
+	_rc := _fnKCMakeKCRefFromFSRef(unsafe.Pointer(keychainFSRef), keychain)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

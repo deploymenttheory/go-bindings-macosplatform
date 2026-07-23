@@ -186,11 +186,17 @@ func emitClassFile(
 
 	// The wrapper struct already provides Description/IsEqual/IsKind (so it can be
 	// used as an obj.Object) and embeds objref.Handle (which promotes a field
-	// named Handle and the lifecycle method Release). Drop any generated method
-	// or setter that would redeclare one of those names.
+	// named Handle and the lifecycle method Release). A subclass additionally
+	// embeds its same-framework base wrapper, promoting a field of that type's
+	// name. Drop any generated method or setter that would redeclare one of those
+	// names (e.g. AUAudioUnitV2Bridge's audioUnit accessor vs its AudioUnit base).
+	baseType := sameFrameworkBase(class, goTypeName, fc, prefix)
 	objMethodNames := map[string]bool{
 		"Description": true, "IsEqual": true, "IsKind": true, "Handle": true,
 		"Release": true,
+	}
+	if baseType != "" {
+		objMethodNames[baseType] = true
 	}
 	methods = slices.DeleteFunc(
 		methods,
@@ -283,7 +289,6 @@ func emitClassFile(
 	// the obj.Object surface (+ String); a subclass embeds its same-framework base
 	// and promotes that surface. No raw inner, no Unwrap/ID — dispatch goes
 	// straight to the runtime.
-	baseType := sameFrameworkBase(class, goTypeName, fc, prefix)
 	embedsRoot := baseType == ""
 	subLinks := ""
 	if isAbstract {

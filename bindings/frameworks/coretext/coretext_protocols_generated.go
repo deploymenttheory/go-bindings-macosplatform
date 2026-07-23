@@ -11,5 +11,5 @@ import (
 
 // CTAdaptiveImageProviding is the Go form of the Objective-C protocol CTAdaptiveImageProviding.
 type CTAdaptiveImageProviding interface {
-	ImageForProposedSizeScaleFactorImageOffsetImageSize(proposedSize corefoundation.CGSize, scaleFactor float64, outImageOffset obj.Object, outImageSize obj.Object) obj.Object
+	ImageForProposedSizeScaleFactorImageOffsetImageSize(proposedSize corefoundation.CGSize, scaleFactor float64, outImageOffset *corefoundation.CGPoint, outImageSize *corefoundation.CGSize) obj.Object
 }

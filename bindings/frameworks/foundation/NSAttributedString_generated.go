@@ -179,6 +179,13 @@ func (as *AttributedString) WithScriptingProperties(scriptingProperties map[stri
 	return as
 }
 
+// AttributesAtIndexEffectiveRange returns the attributes for the character at the specified index.
+func (as *AttributedString) AttributesAtIndexEffectiveRange(location int, range_ *NSRange) obj.Object {
+	defer runtime.KeepAlive(as)
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("attributesAtIndex:effectiveRange:"), location, unsafe.Pointer(range_))
+	return obj.Wrap(_r)
+}
+
 // String returns the string.
 func (as *AttributedString) String() string {
 	defer runtime.KeepAlive(as)
@@ -187,6 +194,14 @@ func (as *AttributedString) String() string {
 		return ""
 	}
 	return purego.GoString(_r)
+}
+
+// AttributeAtIndexEffectiveRange returns the value for an attribute with the specified name of the character at the specified index and, by reference, the range where the attribute applies.
+func (as *AttributedString) AttributeAtIndexEffectiveRange(attrName *String, location int, range_ *NSRange) obj.Object {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(attrName)
+	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("attribute:atIndex:effectiveRange:"), objref.IDOf(attrName), location, unsafe.Pointer(range_))
+	return obj.Wrap(_r)
 }
 
 // IsEqualToAttributedString returns a Boolean value that indicates whether the attributed string is equal to the specified string.

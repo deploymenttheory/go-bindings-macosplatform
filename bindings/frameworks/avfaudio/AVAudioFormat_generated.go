@@ -75,6 +75,21 @@ func (af *AudioFormat) String() string {
 	return rt.Description(objref.IDOf(af))
 }
 
+// NewAudioFormatWithStreamDescription creates an audio format instance from a stream description.
+func NewAudioFormatWithStreamDescription(asbd *coreaudiotypes.AudioStreamBasicDescription) *AudioFormat {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStreamDescription:"), unsafe.Pointer(asbd))
+	return audioFormatAdopt(_id)
+}
+
+// NewAudioFormatWithStreamDescriptionChannelLayout creates an audio format instance from a stream description and channel layout.
+func NewAudioFormatWithStreamDescriptionChannelLayout(asbd *coreaudiotypes.AudioStreamBasicDescription, layout *AudioChannelLayout) *AudioFormat {
+	defer runtime.KeepAlive(layout)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStreamDescription:channelLayout:"), unsafe.Pointer(asbd), objref.IDOf(layout))
+	return audioFormatAdopt(_id)
+}
+
 // NewAudioFormatStandardFormatWithSampleRateChannels creates an audio format instance with the specified sample rate and channel count.
 func NewAudioFormatStandardFormatWithSampleRateChannels(sampleRate float64, channels uint32) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioFormat")), objc.RegisterName("alloc"))

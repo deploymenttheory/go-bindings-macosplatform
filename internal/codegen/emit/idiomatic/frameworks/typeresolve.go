@@ -302,6 +302,15 @@ func idiomaticArg(
 		imports["unsafe"] = "unsafe"
 		return "unsafe.Pointer", pName, imports, true
 	}
+	// A single pointer to a value struct — a `const IOUSBDeviceDescriptor *` input,
+	// or a non-const one the callee reads — is surfaced as *Struct so the caller
+	// passes a typed pointer instead of an opaque unsafe.Pointer. The C ABI receives
+	// the raw pointer. Mirrors pointerValueStructType on the return side.
+	if base, simps, ok := pointerValueStructType(goType, fc, mapper, rawPkgAlias); ok {
+		maps.Copy(imports, simps)
+		imports["unsafe"] = "unsafe"
+		return "*" + base, "unsafe.Pointer(" + pName + ")", imports, true
+	}
 	if sigEnum, _, isEnum := localizeEnumType(goType, fc, rawPkgAlias); isEnum {
 		// A Go enum type is an integer; pass it to the call unchanged.
 		return sigEnum, pName, imports, true

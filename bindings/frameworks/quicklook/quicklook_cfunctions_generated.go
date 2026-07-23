@@ -66,12 +66,12 @@ func QLPreviewRequestCreateContext(preview obj.Object, size corefoundation.CGSiz
 var _fnQLPreviewRequestCreatePDFContext func(objc.ID, unsafe.Pointer, objc.ID, objc.ID) objc.ID
 
 // QLPreviewRequestCreatePDFContext calls the QuickLook framework function QLPreviewRequestCreatePDFContext.
-func QLPreviewRequestCreatePDFContext(preview obj.Object, mediaBox unsafe.Pointer, auxiliaryInfo obj.Object, properties obj.Object) obj.Object {
+func QLPreviewRequestCreatePDFContext(preview obj.Object, mediaBox *corefoundation.CGRect, auxiliaryInfo obj.Object, properties obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnQLPreviewRequestCreatePDFContext == nil {
 		ebipurego.RegisterLibFunc(&_fnQLPreviewRequestCreatePDFContext, _lib, "QLPreviewRequestCreatePDFContext")
 	}
-	_ret := _fnQLPreviewRequestCreatePDFContext(objref.IDOf(preview), mediaBox, objref.IDOf(auxiliaryInfo), objref.IDOf(properties))
+	_ret := _fnQLPreviewRequestCreatePDFContext(objref.IDOf(preview), unsafe.Pointer(mediaBox), objref.IDOf(auxiliaryInfo), objref.IDOf(properties))
 	return obj.Wrap(_ret)
 }
 

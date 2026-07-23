@@ -231,12 +231,14 @@ func MSCGetKeyAttributes(pConnection unsafe.Pointer, keyNumber uint8) (result ui
 var _fnMSCGetObjectAttributes func(unsafe.Pointer, string, unsafe.Pointer) uint32
 
 // MSCGetObjectAttributes calls the PCSC framework function MSCGetObjectAttributes.
-func MSCGetObjectAttributes(pConnection unsafe.Pointer, objectID string, pObjectInfo unsafe.Pointer) uint32 {
+func MSCGetObjectAttributes(pConnection unsafe.Pointer, objectID string) (result uint32, pObjectInfo MSCObjectInfo) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMSCGetObjectAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnMSCGetObjectAttributes, _lib, "MSCGetObjectAttributes")
 	}
-	return _fnMSCGetObjectAttributes(pConnection, objectID, pObjectInfo)
+	var _out0 MSCObjectInfo
+	_ret := _fnMSCGetObjectAttributes(pConnection, objectID, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnMSCGetStatus func(unsafe.Pointer, unsafe.Pointer) uint32
@@ -327,12 +329,14 @@ func MSCListKeys(pConnection unsafe.Pointer, seqOption uint8) (result uint32, pK
 var _fnMSCListObjects func(unsafe.Pointer, uint8, unsafe.Pointer) uint32
 
 // MSCListObjects calls the PCSC framework function MSCListObjects.
-func MSCListObjects(pConnection unsafe.Pointer, seqOption uint8, pObjectInfo unsafe.Pointer) uint32 {
+func MSCListObjects(pConnection unsafe.Pointer, seqOption uint8) (result uint32, pObjectInfo MSCObjectInfo) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMSCListObjects == nil {
 		ebipurego.RegisterLibFunc(&_fnMSCListObjects, _lib, "MSCListObjects")
 	}
-	return _fnMSCListObjects(pConnection, seqOption, pObjectInfo)
+	var _out0 MSCObjectInfo
+	_ret := _fnMSCListObjects(pConnection, seqOption, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnMSCListPINs func(unsafe.Pointer, unsafe.Pointer) uint32
@@ -449,12 +453,14 @@ func MSCWaitForTokenEvent(tokenArray unsafe.Pointer, arraySize uint32, timeoutVa
 var _fnMSCWriteFramework func(unsafe.Pointer, unsafe.Pointer) uint32
 
 // MSCWriteFramework calls the PCSC framework function MSCWriteFramework.
-func MSCWriteFramework(pConnection unsafe.Pointer, pInitParams unsafe.Pointer) uint32 {
+func MSCWriteFramework(pConnection unsafe.Pointer) (result uint32, pInitParams MSCInitTokenParams) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMSCWriteFramework == nil {
 		ebipurego.RegisterLibFunc(&_fnMSCWriteFramework, _lib, "MSCWriteFramework")
 	}
-	return _fnMSCWriteFramework(pConnection, pInitParams)
+	var _out0 MSCInitTokenParams
+	_ret := _fnMSCWriteFramework(pConnection, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnMSCWriteObject func(unsafe.Pointer, string, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) uint32
@@ -667,14 +673,12 @@ func SCardReleaseContext(hContext int32) int32 {
 var _fnSCardSetAttrib func(int32, uint32, unsafe.Pointer, uint32) int32
 
 // SCardSetAttrib calls the PCSC framework function SCardSetAttrib.
-func SCardSetAttrib(hCard int32, dwAttrId uint32, cbAttrLen uint32) (result int32, pbAttr uint8) {
+func SCardSetAttrib(hCard int32, dwAttrId uint32, pbAttr unsafe.Pointer, cbAttrLen uint32) int32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCardSetAttrib == nil {
 		ebipurego.RegisterLibFunc(&_fnSCardSetAttrib, _lib, "SCardSetAttrib")
 	}
-	var _out0 uint8
-	_ret := _fnSCardSetAttrib(hCard, dwAttrId, unsafe.Pointer(&_out0), cbAttrLen)
-	return _ret, _out0
+	return _fnSCardSetAttrib(hCard, dwAttrId, pbAttr, cbAttrLen)
 }
 
 var _fnSCardSetTimeout func(int32, uint32) int32
@@ -708,17 +712,16 @@ func SCardStatus(hCard int32, mszReaderNames string) (result int32, pcchReaderLe
 var _fnSCardTransmit func(int32, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // SCardTransmit calls the PCSC framework function SCardTransmit.
-func SCardTransmit(hCard int32, pioSendPci unsafe.Pointer, cbSendLength uint32) (result int32, pbSendBuffer uint8, pioRecvPci SCARDIOREQUEST, pbRecvBuffer uint8, pcbRecvLength uint32) {
+func SCardTransmit(hCard int32, pioSendPci unsafe.Pointer, pbSendBuffer unsafe.Pointer, cbSendLength uint32) (result int32, pioRecvPci SCARDIOREQUEST, pbRecvBuffer uint8, pcbRecvLength uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSCardTransmit == nil {
 		ebipurego.RegisterLibFunc(&_fnSCardTransmit, _lib, "SCardTransmit")
 	}
-	var _out0 uint8
-	var _out1 SCARDIOREQUEST
-	var _out2 uint8
-	var _out3 uint32
-	_ret := _fnSCardTransmit(hCard, pioSendPci, unsafe.Pointer(&_out0), cbSendLength, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _ret, _out0, _out1, _out2, _out3
+	var _out0 SCARDIOREQUEST
+	var _out1 uint8
+	var _out2 uint32
+	_ret := _fnSCardTransmit(hCard, pioSendPci, pbSendBuffer, cbSendLength, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnSCardUnload func()

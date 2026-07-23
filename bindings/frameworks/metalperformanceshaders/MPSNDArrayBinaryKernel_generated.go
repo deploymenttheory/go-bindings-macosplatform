@@ -5,6 +5,9 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +50,62 @@ func nDArrayBinaryKernelAdopt(id objc.ID) *NDArrayBinaryKernel {
 func (nabk *NDArrayBinaryKernel) WithLabel(label string) *NDArrayBinaryKernel {
 	objc.Send[objc.ID](objref.IDOf(nabk), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return nabk
+}
+
+// PrimaryOffsets returns the coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. Default: 0,0,0...
+func (nabk *NDArrayBinaryKernel) PrimaryOffsets() mpsndarray.MPSNDArrayOffsets {
+	defer runtime.KeepAlive(nabk)
+	_r := objc.Send[mpsndarray.MPSNDArrayOffsets](objref.IDOf(nabk), objc.RegisterName("primaryOffsets"))
+	return _r
+}
+
+// PrimaryKernelSizes returns the diameters of the point spread function in each dimension for a source NDArray Default: 1
+func (nabk *NDArrayBinaryKernel) PrimaryKernelSizes() mpsndarray.MPSNDArraySizes {
+	defer runtime.KeepAlive(nabk)
+	_r := objc.Send[mpsndarray.MPSNDArraySizes](objref.IDOf(nabk), objc.RegisterName("primaryKernelSizes"))
+	return _r
+}
+
+// PrimaryStrides returns if the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result. Default: 1
+func (nabk *NDArrayBinaryKernel) PrimaryStrides() mpsndarray.MPSNDArrayOffsets {
+	defer runtime.KeepAlive(nabk)
+	_r := objc.Send[mpsndarray.MPSNDArrayOffsets](objref.IDOf(nabk), objc.RegisterName("primaryStrides"))
+	return _r
+}
+
+// PrimaryDilationRates returns the stride in each dimension from one PSF tap to an adjacent PSF tap. Default: 1
+func (nabk *NDArrayBinaryKernel) PrimaryDilationRates() mpsndarray.MPSNDArraySizes {
+	defer runtime.KeepAlive(nabk)
+	_r := objc.Send[mpsndarray.MPSNDArraySizes](objref.IDOf(nabk), objc.RegisterName("primaryDilationRates"))
+	return _r
+}
+
+// SecondaryOffsets returns the coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. Default: 0,0,0...
+func (nabk *NDArrayBinaryKernel) SecondaryOffsets() mpsndarray.MPSNDArrayOffsets {
+	defer runtime.KeepAlive(nabk)
+	_r := objc.Send[mpsndarray.MPSNDArrayOffsets](objref.IDOf(nabk), objc.RegisterName("secondaryOffsets"))
+	return _r
+}
+
+// SecondaryKernelSizes returns the diameters of the point spread function in each dimension for a source NDArray Default: 1
+func (nabk *NDArrayBinaryKernel) SecondaryKernelSizes() mpsndarray.MPSNDArraySizes {
+	defer runtime.KeepAlive(nabk)
+	_r := objc.Send[mpsndarray.MPSNDArraySizes](objref.IDOf(nabk), objc.RegisterName("secondaryKernelSizes"))
+	return _r
+}
+
+// SecondaryStrides returns if the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result. Default: 1
+func (nabk *NDArrayBinaryKernel) SecondaryStrides() mpsndarray.MPSNDArrayOffsets {
+	defer runtime.KeepAlive(nabk)
+	_r := objc.Send[mpsndarray.MPSNDArrayOffsets](objref.IDOf(nabk), objc.RegisterName("secondaryStrides"))
+	return _r
+}
+
+// SecondaryDilationRates returns the stride in each dimension from one PSF tap to an adjacent PSF tap. Default: 1
+func (nabk *NDArrayBinaryKernel) SecondaryDilationRates() mpsndarray.MPSNDArraySizes {
+	defer runtime.KeepAlive(nabk)
+	_r := objc.Send[mpsndarray.MPSNDArraySizes](objref.IDOf(nabk), objc.RegisterName("secondaryDilationRates"))
+	return _r
 }
 
 // isNDArrayBinaryKernel marks NDArrayBinaryKernel — and, by embedding promotion, its

@@ -7,6 +7,7 @@ package mediatoolbox
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -27,14 +28,14 @@ func MTAudioProcessingTapCreate(allocator obj.Object, callbacks unsafe.Pointer, 
 var _fnMTAudioProcessingTapGetSourceAudio func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // MTAudioProcessingTapGetSourceAudio calls the MediaToolbox framework function MTAudioProcessingTapGetSourceAudio.
-func MTAudioProcessingTapGetSourceAudio(tap obj.Object, numberFrames int, bufferListInOut unsafe.Pointer, timeRangeOut unsafe.Pointer) (result int, flagsOut uint32, numberFramesOut int) {
+func MTAudioProcessingTapGetSourceAudio(tap obj.Object, numberFrames int, bufferListInOut unsafe.Pointer, timeRangeOut *coremedia.CMTimeRange) (result int, flagsOut uint32, numberFramesOut int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTAudioProcessingTapGetSourceAudio == nil {
 		ebipurego.RegisterLibFunc(&_fnMTAudioProcessingTapGetSourceAudio, _lib, "MTAudioProcessingTapGetSourceAudio")
 	}
 	var _out0 uint32
 	var _out1 int
-	_ret := int(_fnMTAudioProcessingTapGetSourceAudio(objref.IDOf(tap), numberFrames, bufferListInOut, unsafe.Pointer(&_out0), timeRangeOut, unsafe.Pointer(&_out1)))
+	_ret := int(_fnMTAudioProcessingTapGetSourceAudio(objref.IDOf(tap), numberFrames, bufferListInOut, unsafe.Pointer(&_out0), unsafe.Pointer(timeRangeOut), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 

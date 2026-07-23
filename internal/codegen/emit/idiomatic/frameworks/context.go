@@ -165,7 +165,11 @@ func buildLocalValueStructNames(framework *meta.FrameworkMeta) map[string]bool {
 		}
 		plain := true
 		for _, f := range s.Fields {
-			if f.GoType == "" || strings.ContainsAny(f.GoType, ".*[]") {
+			// A plain field is a bare scalar or same-package type, or a fixed-size
+			// array of one; a pointer, slice, or cross-package (dotted) type is not.
+			// isPrimitiveOrArrayOf peels [N] dimensions and rejects "*", ".", " ",
+			// and zero-length "[]" slices.
+			if f.GoType == "" || !isPrimitiveOrArrayOf(f.GoType, func(string) bool { return true }) {
 				plain = false
 				break
 			}

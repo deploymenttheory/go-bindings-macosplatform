@@ -108,34 +108,32 @@ func IOConnectAddRef(connect int) int {
 var _fnIOConnectCallAsyncMethod func(int, uint32, int, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // IOConnectCallAsyncMethod calls the IOKit framework function IOConnectCallAsyncMethod.
-func IOConnectCallAsyncMethod(connection int, selector uint32, wakePort int, referenceCnt uint32, inputCnt uint32, inputStruct unsafe.Pointer, inputStructCnt int, outputStruct unsafe.Pointer) (result int, reference uint64, input uint64, output uint64, outputCnt uint32, outputStructCnt int) {
+func IOConnectCallAsyncMethod(connection int, selector uint32, wakePort int, referenceCnt uint32, input unsafe.Pointer, inputCnt uint32, inputStruct unsafe.Pointer, inputStructCnt int, outputStruct unsafe.Pointer) (result int, reference uint64, output uint64, outputCnt uint32, outputStructCnt int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOConnectCallAsyncMethod == nil {
 		ebipurego.RegisterLibFunc(&_fnIOConnectCallAsyncMethod, _lib, "IOConnectCallAsyncMethod")
 	}
 	var _out0 uint64
 	var _out1 uint64
-	var _out2 uint64
-	var _out3 uint32
-	var _out4 int
-	_ret := int(_fnIOConnectCallAsyncMethod(connection, selector, wakePort, unsafe.Pointer(&_out0), referenceCnt, unsafe.Pointer(&_out1), inputCnt, inputStruct, inputStructCnt, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), outputStruct, unsafe.Pointer(&_out4)))
-	return _ret, _out0, _out1, _out2, _out3, _out4
+	var _out2 uint32
+	var _out3 int
+	_ret := int(_fnIOConnectCallAsyncMethod(connection, selector, wakePort, unsafe.Pointer(&_out0), referenceCnt, input, inputCnt, inputStruct, inputStructCnt, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), outputStruct, unsafe.Pointer(&_out3)))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnIOConnectCallAsyncScalarMethod func(int, uint32, int, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // IOConnectCallAsyncScalarMethod calls the IOKit framework function IOConnectCallAsyncScalarMethod.
-func IOConnectCallAsyncScalarMethod(connection int, selector uint32, wakePort int, referenceCnt uint32, inputCnt uint32) (result int, reference uint64, input uint64, output uint64, outputCnt uint32) {
+func IOConnectCallAsyncScalarMethod(connection int, selector uint32, wakePort int, referenceCnt uint32, input unsafe.Pointer, inputCnt uint32) (result int, reference uint64, output uint64, outputCnt uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOConnectCallAsyncScalarMethod == nil {
 		ebipurego.RegisterLibFunc(&_fnIOConnectCallAsyncScalarMethod, _lib, "IOConnectCallAsyncScalarMethod")
 	}
 	var _out0 uint64
 	var _out1 uint64
-	var _out2 uint64
-	var _out3 uint32
-	_ret := int(_fnIOConnectCallAsyncScalarMethod(connection, selector, wakePort, unsafe.Pointer(&_out0), referenceCnt, unsafe.Pointer(&_out1), inputCnt, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3)))
-	return _ret, _out0, _out1, _out2, _out3
+	var _out2 uint32
+	_ret := int(_fnIOConnectCallAsyncScalarMethod(connection, selector, wakePort, unsafe.Pointer(&_out0), referenceCnt, input, inputCnt, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2)))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnIOConnectCallAsyncStructMethod func(int, uint32, int, unsafe.Pointer, uint32, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
@@ -155,32 +153,30 @@ func IOConnectCallAsyncStructMethod(connection int, selector uint32, wakePort in
 var _fnIOConnectCallMethod func(int, uint32, unsafe.Pointer, uint32, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // IOConnectCallMethod calls the IOKit framework function IOConnectCallMethod.
-func IOConnectCallMethod(connection int, selector uint32, inputCnt uint32, inputStruct unsafe.Pointer, inputStructCnt int, outputStruct unsafe.Pointer) (result int, input uint64, output uint64, outputCnt uint32, outputStructCnt int) {
+func IOConnectCallMethod(connection int, selector uint32, input unsafe.Pointer, inputCnt uint32, inputStruct unsafe.Pointer, inputStructCnt int, outputStruct unsafe.Pointer) (result int, output uint64, outputCnt uint32, outputStructCnt int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOConnectCallMethod == nil {
 		ebipurego.RegisterLibFunc(&_fnIOConnectCallMethod, _lib, "IOConnectCallMethod")
 	}
 	var _out0 uint64
-	var _out1 uint64
-	var _out2 uint32
-	var _out3 int
-	_ret := int(_fnIOConnectCallMethod(connection, selector, unsafe.Pointer(&_out0), inputCnt, inputStruct, inputStructCnt, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), outputStruct, unsafe.Pointer(&_out3)))
-	return _ret, _out0, _out1, _out2, _out3
+	var _out1 uint32
+	var _out2 int
+	_ret := int(_fnIOConnectCallMethod(connection, selector, input, inputCnt, inputStruct, inputStructCnt, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), outputStruct, unsafe.Pointer(&_out2)))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnIOConnectCallScalarMethod func(int, uint32, unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) int32
 
 // IOConnectCallScalarMethod calls the IOKit framework function IOConnectCallScalarMethod.
-func IOConnectCallScalarMethod(connection int, selector uint32, inputCnt uint32) (result int, input uint64, output uint64, outputCnt uint32) {
+func IOConnectCallScalarMethod(connection int, selector uint32, input unsafe.Pointer, inputCnt uint32) (result int, output uint64, outputCnt uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOConnectCallScalarMethod == nil {
 		ebipurego.RegisterLibFunc(&_fnIOConnectCallScalarMethod, _lib, "IOConnectCallScalarMethod")
 	}
 	var _out0 uint64
-	var _out1 uint64
-	var _out2 uint32
-	_ret := int(_fnIOConnectCallScalarMethod(connection, selector, unsafe.Pointer(&_out0), inputCnt, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2)))
-	return _ret, _out0, _out1, _out2
+	var _out1 uint32
+	_ret := int(_fnIOConnectCallScalarMethod(connection, selector, input, inputCnt, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
+	return _ret, _out0, _out1
 }
 
 var _fnIOConnectCallStructMethod func(int, uint32, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32

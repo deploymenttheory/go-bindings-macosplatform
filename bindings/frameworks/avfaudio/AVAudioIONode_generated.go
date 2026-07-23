@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -64,6 +65,13 @@ func (ain *AudioIONode) SetVoiceProcessingEnabled(enabled bool) error {
 func (ain *AudioIONode) PresentationLatency() float64 {
 	defer runtime.KeepAlive(ain)
 	_r := objc.Send[float64](objref.IDOf(ain), objc.RegisterName("presentationLatency"))
+	return _r
+}
+
+// AudioUnit returns the node's underlying AudioUnit, if any. This is only necessary for certain advanced usages.
+func (ain *AudioIONode) AudioUnit() *carboncore.ComponentInstanceRecord {
+	defer runtime.KeepAlive(ain)
+	_r := objc.Send[*carboncore.ComponentInstanceRecord](objref.IDOf(ain), objc.RegisterName("audioUnit"))
 	return _r
 }
 

@@ -6,8 +6,10 @@ package quartzcore
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -401,6 +403,23 @@ func (ogl *OpenGLLayer) WithConstraints(items ...*Constraint) *OpenGLLayer {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setConstraints:"), _arr)
 	return ogl
+}
+
+// CanDrawInCGLContextPixelFormatForLayerTimeDisplayTime returns whether the receiver should draw OpenGL content for the specified time.
+func (ogl *OpenGLLayer) CanDrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx obj.Object, pf obj.Object, t float64, ts *corevideo.CVTimeStamp) bool {
+	defer runtime.KeepAlive(ogl)
+	defer runtime.KeepAlive(ctx)
+	defer runtime.KeepAlive(pf)
+	_r := objc.Send[bool](objref.IDOf(ogl), objc.RegisterName("canDrawInCGLContext:pixelFormat:forLayerTime:displayTime:"), objref.IDOf(ctx), objref.IDOf(pf), t, unsafe.Pointer(ts))
+	return _r
+}
+
+// DrawInCGLContextPixelFormatForLayerTimeDisplayTime draws the OpenGL content for the specified time.
+func (ogl *OpenGLLayer) DrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx obj.Object, pf obj.Object, t float64, ts *corevideo.CVTimeStamp) {
+	defer runtime.KeepAlive(ogl)
+	defer runtime.KeepAlive(ctx)
+	defer runtime.KeepAlive(pf)
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("drawInCGLContext:pixelFormat:forLayerTime:displayTime:"), objref.IDOf(ctx), objref.IDOf(pf), t, unsafe.Pointer(ts))
 }
 
 // CopyCGLPixelFormatForDisplayMask returns the OpenGL pixel format suitable for rendering to the set of displays specified by the display mask.

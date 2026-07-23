@@ -839,14 +839,13 @@ func JSStringCreateWithCFString(str obj.Object) obj.Object {
 var _fnJSStringCreateWithCharacters func(unsafe.Pointer, int) objc.ID
 
 // JSStringCreateWithCharacters calls the JavaScriptCore framework function JSStringCreateWithCharacters.
-func JSStringCreateWithCharacters(numChars int) (result obj.Object, chars uint16) {
+func JSStringCreateWithCharacters(chars unsafe.Pointer, numChars int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringCreateWithCharacters == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringCreateWithCharacters, _lib, "JSStringCreateWithCharacters")
 	}
-	var _out0 uint16
-	_ret := _fnJSStringCreateWithCharacters(unsafe.Pointer(&_out0), numChars)
-	return obj.Wrap(_ret), _out0
+	_ret := _fnJSStringCreateWithCharacters(chars, numChars)
+	return obj.Wrap(_ret)
 }
 
 var _fnJSStringCreateWithUTF8CString func(string) objc.ID

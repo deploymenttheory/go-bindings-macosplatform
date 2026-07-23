@@ -92,6 +92,71 @@ func (hci *HostControllerInterface) Destroy() {
 	objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("destroy"))
 }
 
+// EnqueueInterrupt enqueue an interrupt for delivery to the kernel service This method enqueues one interrupt message for delivery to the kernel service.  interruptRateHz is used to determine when the interrupt message is delivered to the kernel service.
+func (hci *HostControllerInterface) EnqueueInterrupt(interrupt *IOUSBHostCIMessage) error {
+	defer runtime.KeepAlive(hci)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hci), objc.RegisterName("enqueueInterrupt:error:"), unsafe.Pointer(interrupt), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// EnqueueInterruptExpedite enqueue an interrupt for delivery to the kernel service This method enqueues one interrupt message for delivery to the kernel service.
+func (hci *HostControllerInterface) EnqueueInterruptExpedite(interrupt *IOUSBHostCIMessage, expedite bool) error {
+	defer runtime.KeepAlive(hci)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hci), objc.RegisterName("enqueueInterrupt:expedite:error:"), unsafe.Pointer(interrupt), expedite, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// EnqueueInterruptsCount enqueue interrupts for delivery to the kernel service This method enqueues one or more interrupt messages for delivery to the kernel service.   interruptRateHz is used to determine when the interrupt message is delivered to the kernel service.
+func (hci *HostControllerInterface) EnqueueInterruptsCount(interrupts *IOUSBHostCIMessage, count int) error {
+	defer runtime.KeepAlive(hci)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hci), objc.RegisterName("enqueueInterrupts:count:error:"), unsafe.Pointer(interrupts), count, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// EnqueueInterruptsCountExpedite enqueue interrupts for delivery to the kernel service This method enqueues one or more interrupt messages for delivery to the kernel service.   interruptRateHz is used to determine when the interrupt message is delivered to the kernel service.
+func (hci *HostControllerInterface) EnqueueInterruptsCountExpedite(interrupts *IOUSBHostCIMessage, count int, expedite bool) error {
+	defer runtime.KeepAlive(hci)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hci), objc.RegisterName("enqueueInterrupts:count:expedite:error:"), unsafe.Pointer(interrupts), count, expedite, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// DescriptionForMessage wraps the corresponding Objective-C method.
+func (hci *HostControllerInterface) DescriptionForMessage(message *IOUSBHostCIMessage) string {
+	defer runtime.KeepAlive(hci)
+	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("descriptionForMessage:"), unsafe.Pointer(message))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// GetPortStateMachineForCommand wraps the corresponding Objective-C method.
+func (hci *HostControllerInterface) GetPortStateMachineForCommand(command *IOUSBHostCIMessage) (result *HostCIPortStateMachine, err error) {
+	defer runtime.KeepAlive(hci)
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("getPortStateMachineForCommand:error:"), unsafe.Pointer(command), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return HostCIPortStateMachineFromID(_r), nil
+}
+
 // GetPortStateMachineForPort wraps the corresponding Objective-C method.
 func (hci *HostControllerInterface) GetPortStateMachineForPort(port int) (result *HostCIPortStateMachine, err error) {
 	defer runtime.KeepAlive(hci)

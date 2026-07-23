@@ -31,6 +31,21 @@ func AuthorizationCopyPrivilegedReference(authorization unsafe.Pointer, flags Au
 	return nil
 }
 
+var _fnAuthorizationCreateFromExternalForm func(unsafe.Pointer, unsafe.Pointer) int32
+
+// AuthorizationCreateFromExternalForm reports an error if the Security framework function AuthorizationCreateFromExternalForm fails.
+func AuthorizationCreateFromExternalForm(extForm *AuthorizationExternalForm, authorization unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAuthorizationCreateFromExternalForm == nil {
+		ebipurego.RegisterLibFunc(&_fnAuthorizationCreateFromExternalForm, _lib, "AuthorizationCreateFromExternalForm")
+	}
+	_rc := _fnAuthorizationCreateFromExternalForm(unsafe.Pointer(extForm), authorization)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnAuthorizationExecuteWithPrivileges func(objc.ID, string, AuthorizationFlags, string, unsafe.Pointer) int32
 
 // AuthorizationExecuteWithPrivileges reports an error if the Security framework function AuthorizationExecuteWithPrivileges fails.
@@ -55,6 +70,21 @@ func AuthorizationFree(authorization obj.Object, flags AuthorizationFlags) error
 		ebipurego.RegisterLibFunc(&_fnAuthorizationFree, _lib, "AuthorizationFree")
 	}
 	_rc := _fnAuthorizationFree(objref.IDOf(authorization), flags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAuthorizationMakeExternalForm func(objc.ID, unsafe.Pointer) int32
+
+// AuthorizationMakeExternalForm reports an error if the Security framework function AuthorizationMakeExternalForm fails.
+func AuthorizationMakeExternalForm(authorization obj.Object, extForm *AuthorizationExternalForm) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAuthorizationMakeExternalForm == nil {
+		ebipurego.RegisterLibFunc(&_fnAuthorizationMakeExternalForm, _lib, "AuthorizationMakeExternalForm")
+	}
+	_rc := _fnAuthorizationMakeExternalForm(objref.IDOf(authorization), unsafe.Pointer(extForm))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1144,6 +1174,38 @@ func SSLSetTrustedRoots(context_ obj.Object, trustedRoots obj.Object, replaceExi
 	return nil
 }
 
+var _fnSecACLCopySimpleContents func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// SecACLCopySimpleContents reports an error if the Security framework function SecACLCopySimpleContents fails.
+func SecACLCopySimpleContents(acl obj.Object, promptSelector *CssmAclKeychainPromptSelector) (obj.Object, obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecACLCopySimpleContents == nil {
+		ebipurego.RegisterLibFunc(&_fnSecACLCopySimpleContents, _lib, "SecACLCopySimpleContents")
+	}
+	var _out0 uintptr
+	var _out1 uintptr
+	_rc := _fnSecACLCopySimpleContents(objref.IDOf(acl), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(promptSelector))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), obj.Wrap(objc.ID(_out1)), nil
+}
+
+var _fnSecACLCreateFromSimpleContents func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// SecACLCreateFromSimpleContents reports an error if the Security framework function SecACLCreateFromSimpleContents fails.
+func SecACLCreateFromSimpleContents(access obj.Object, applicationList obj.Object, description obj.Object, promptSelector *CssmAclKeychainPromptSelector, newAcl unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecACLCreateFromSimpleContents == nil {
+		ebipurego.RegisterLibFunc(&_fnSecACLCreateFromSimpleContents, _lib, "SecACLCreateFromSimpleContents")
+	}
+	_rc := _fnSecACLCreateFromSimpleContents(objref.IDOf(access), objref.IDOf(applicationList), objref.IDOf(description), unsafe.Pointer(promptSelector), newAcl)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnSecACLCreateWithSimpleContents func(objc.ID, objc.ID, objc.ID, SecKeychainPromptSelector, unsafe.Pointer) int32
 
 // SecACLCreateWithSimpleContents reports an error if the Security framework function SecACLCreateWithSimpleContents fails.
@@ -1183,6 +1245,21 @@ func SecACLSetContents(acl obj.Object, applicationList obj.Object, description o
 		ebipurego.RegisterLibFunc(&_fnSecACLSetContents, _lib, "SecACLSetContents")
 	}
 	_rc := _fnSecACLSetContents(objref.IDOf(acl), objref.IDOf(applicationList), objref.IDOf(description), promptSelector)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnSecACLSetSimpleContents func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32
+
+// SecACLSetSimpleContents reports an error if the Security framework function SecACLSetSimpleContents fails.
+func SecACLSetSimpleContents(acl obj.Object, applicationList obj.Object, description obj.Object, promptSelector *CssmAclKeychainPromptSelector) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecACLSetSimpleContents == nil {
+		ebipurego.RegisterLibFunc(&_fnSecACLSetSimpleContents, _lib, "SecACLSetSimpleContents")
+	}
+	_rc := _fnSecACLSetSimpleContents(objref.IDOf(acl), objref.IDOf(applicationList), objref.IDOf(description), unsafe.Pointer(promptSelector))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1965,6 +2042,21 @@ func SecKeychainCopySearchList() (obj.Object, error) {
 	return obj.Wrap(objc.ID(_out0)), nil
 }
 
+var _fnSecKeychainCopySettings func(objc.ID, unsafe.Pointer) int32
+
+// SecKeychainCopySettings reports an error if the Security framework function SecKeychainCopySettings fails.
+func SecKeychainCopySettings(keychain obj.Object, outSettings *SecKeychainSettings) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainCopySettings == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainCopySettings, _lib, "SecKeychainCopySettings")
+	}
+	_rc := _fnSecKeychainCopySettings(objref.IDOf(keychain), unsafe.Pointer(outSettings))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnSecKeychainCreate func(string, int, unsafe.Pointer, uint8, objc.ID, unsafe.Pointer) int32
 
 // SecKeychainCreate reports an error if the Security framework function SecKeychainCreate fails.
@@ -1989,6 +2081,21 @@ func SecKeychainDelete(keychainOrArray obj.Object) error {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainDelete, _lib, "SecKeychainDelete")
 	}
 	_rc := _fnSecKeychainDelete(objref.IDOf(keychainOrArray))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnSecKeychainGetDLDBHandle func(objc.ID, unsafe.Pointer) int32
+
+// SecKeychainGetDLDBHandle reports an error if the Security framework function SecKeychainGetDLDBHandle fails.
+func SecKeychainGetDLDBHandle(keychain obj.Object, dldbHandle *CssmDlDbHandle) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainGetDLDBHandle == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainGetDLDBHandle, _lib, "SecKeychainGetDLDBHandle")
+	}
+	_rc := _fnSecKeychainGetDLDBHandle(objref.IDOf(keychain), unsafe.Pointer(dldbHandle))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2080,6 +2187,21 @@ func SecKeychainItemDelete(itemRef obj.Object) error {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemDelete, _lib, "SecKeychainItemDelete")
 	}
 	_rc := _fnSecKeychainItemDelete(objref.IDOf(itemRef))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnSecKeychainItemGetDLDBHandle func(objc.ID, unsafe.Pointer) int32
+
+// SecKeychainItemGetDLDBHandle reports an error if the Security framework function SecKeychainItemGetDLDBHandle fails.
+func SecKeychainItemGetDLDBHandle(keyItemRef obj.Object, dldbHandle *CssmDlDbHandle) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainItemGetDLDBHandle == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainItemGetDLDBHandle, _lib, "SecKeychainItemGetDLDBHandle")
+	}
+	_rc := _fnSecKeychainItemGetDLDBHandle(objref.IDOf(keyItemRef), unsafe.Pointer(dldbHandle))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2260,6 +2382,21 @@ func SecKeychainSetSearchList(searchList obj.Object) error {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSetSearchList, _lib, "SecKeychainSetSearchList")
 	}
 	_rc := _fnSecKeychainSetSearchList(objref.IDOf(searchList))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnSecKeychainSetSettings func(objc.ID, unsafe.Pointer) int32
+
+// SecKeychainSetSettings reports an error if the Security framework function SecKeychainSetSettings fails.
+func SecKeychainSetSettings(keychain obj.Object, newSettings *SecKeychainSettings) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainSetSettings == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainSetSettings, _lib, "SecKeychainSetSettings")
+	}
+	_rc := _fnSecKeychainSetSettings(objref.IDOf(keychain), unsafe.Pointer(newSettings))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

@@ -5,6 +5,9 @@
 package sharedfilelist
 
 import (
+	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -40,6 +43,22 @@ func LSSharedFileListItemRemove(inList obj.Object, inItem obj.Object) error {
 		return _err
 	}
 	return nil
+}
+
+var _fnLSSharedFileListItemResolve func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// LSSharedFileListItemResolve reports an error if the SharedFileList framework function LSSharedFileListItemResolve fails.
+func LSSharedFileListItemResolve(inItem obj.Object, inFlags int, outRef *carboncore.FSRef) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListItemResolve == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemResolve, _lib, "LSSharedFileListItemResolve")
+	}
+	var _out0 uintptr
+	_rc := _fnLSSharedFileListItemResolve(objref.IDOf(inItem), inFlags, unsafe.Pointer(&_out0), unsafe.Pointer(outRef))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
 var _fnLSSharedFileListItemSetProperty func(objc.ID, objc.ID, objc.ID) int32

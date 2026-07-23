@@ -7,6 +7,7 @@ package ae
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -592,12 +593,12 @@ func AEPutPtr(theAEDescList unsafe.Pointer, index int, typeCode int, dataPtr uns
 var _fnAERemoteProcessResolverGetProcesses func(objc.ID, unsafe.Pointer) objc.ID
 
 // AERemoteProcessResolverGetProcesses calls the AE framework function AERemoteProcessResolverGetProcesses.
-func AERemoteProcessResolverGetProcesses(ref obj.Object, outError unsafe.Pointer) obj.Object {
+func AERemoteProcessResolverGetProcesses(ref obj.Object, outError *corefoundation.CFStreamError) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAERemoteProcessResolverGetProcesses == nil {
 		ebipurego.RegisterLibFunc(&_fnAERemoteProcessResolverGetProcesses, _lib, "AERemoteProcessResolverGetProcesses")
 	}
-	_ret := _fnAERemoteProcessResolverGetProcesses(objref.IDOf(ref), outError)
+	_ret := _fnAERemoteProcessResolverGetProcesses(objref.IDOf(ref), unsafe.Pointer(outError))
 	return obj.Wrap(_ret)
 }
 

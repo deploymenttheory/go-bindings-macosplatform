@@ -93,6 +93,36 @@ func (lt *LinguisticTagger) WithScriptingProperties(scriptingProperties map[stri
 	return lt
 }
 
+// OrthographyAtIndexEffectiveRange returns the orthography at the index and also returns the effective range.
+func (lt *LinguisticTagger) OrthographyAtIndexEffectiveRange(charIndex int, effectiveRange *NSRange) *Orthography {
+	defer runtime.KeepAlive(lt)
+	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("orthographyAtIndex:effectiveRange:"), charIndex, unsafe.Pointer(effectiveRange))
+	return OrthographyFromID(_r)
+}
+
+// TagAtIndexUnitSchemeTokenRange returns a tag for a single scheme, for a given linguistic unit, at the specified character position.
+func (lt *LinguisticTagger) TagAtIndexUnitSchemeTokenRange(charIndex int, unit LinguisticTaggerUnit, scheme *String, tokenRange *NSRange) *String {
+	defer runtime.KeepAlive(lt)
+	defer runtime.KeepAlive(scheme)
+	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("tagAtIndex:unit:scheme:tokenRange:"), charIndex, unit, objref.IDOf(scheme), unsafe.Pointer(tokenRange))
+	return StringFromID(_r)
+}
+
+// TagAtIndexSchemeTokenRangeSentenceRange returns a tag for a single scheme at the specified character position.
+func (lt *LinguisticTagger) TagAtIndexSchemeTokenRangeSentenceRange(charIndex int, scheme *String, tokenRange *NSRange, sentenceRange *NSRange) *String {
+	defer runtime.KeepAlive(lt)
+	defer runtime.KeepAlive(scheme)
+	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("tagAtIndex:scheme:tokenRange:sentenceRange:"), charIndex, objref.IDOf(scheme), unsafe.Pointer(tokenRange), unsafe.Pointer(sentenceRange))
+	return StringFromID(_r)
+}
+
+// PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores returns an array of possible tags for the given scheme at the specified range, supplying matching scores.
+func (lt *LinguisticTagger) PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex int, tagScheme string, tokenRange *NSRange, sentenceRange *NSRange, scores []*Value) []string {
+	defer runtime.KeepAlive(lt)
+	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("possibleTagsAtIndex:scheme:tokenRange:sentenceRange:scores:"), charIndex, purego.NSString(tagScheme), unsafe.Pointer(tokenRange), unsafe.Pointer(sentenceRange), purego.SliceToNSArray(scores, func(_v *Value) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
 // TagSchemes returns the tag schemes.
 //
 // TagSchemes returns the collection as a Go slice.

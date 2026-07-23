@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -1021,6 +1022,37 @@ func (cv *CollectionView) SetDraggingSourceOperationMaskForLocal(dragOperationMa
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDraggingSourceOperationMask:forLocal:"), dragOperationMask, localDestination)
 	})
+
+}
+
+// DraggingImageForItemsAtIndexPathsWithEventOffset returns an image to use for dragging the specified items.
+func (cv *CollectionView) DraggingImageForItemsAtIndexPathsWithEventOffset(indexPaths []*foundation.IndexPath, event *Event, dragImageOffset *corefoundation.CGPoint) *Image {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(event)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("draggingImageForItemsAtIndexPaths:withEvent:offset:"), rt.SliceToNSSet(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }), objref.IDOf(event), unsafe.Pointer(dragImageOffset))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
+// DraggingImageForItemsAtIndexesWithEventOffset this method computes and returns an image to use for dragging.
+func (cv *CollectionView) DraggingImageForItemsAtIndexesWithEventOffset(indexes obj.Object, event *Event, dragImageOffset *corefoundation.CGPoint) *Image {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(indexes)
+	defer runtime.KeepAlive(event)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("draggingImageForItemsAtIndexes:withEvent:offset:"), objref.IDOf(indexes), objref.IDOf(event), unsafe.Pointer(dragImageOffset))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
 
 }
 

@@ -7,6 +7,7 @@ package coreaudio
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -74,6 +75,36 @@ func AudioDeviceDestroyIOProcID(inDevice int, inIOProcID unsafe.Pointer) error {
 	return nil
 }
 
+var _fnAudioDeviceGetCurrentTime func(int, unsafe.Pointer) int32
+
+// AudioDeviceGetCurrentTime reports an error if the CoreAudio framework function AudioDeviceGetCurrentTime fails.
+func AudioDeviceGetCurrentTime(inDevice int, outTime *coreaudiotypes.AudioTimeStamp) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioDeviceGetCurrentTime == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioDeviceGetCurrentTime, _lib, "AudioDeviceGetCurrentTime")
+	}
+	_rc := _fnAudioDeviceGetCurrentTime(inDevice, unsafe.Pointer(outTime))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioDeviceGetNearestStartTime func(int, unsafe.Pointer, int) int32
+
+// AudioDeviceGetNearestStartTime reports an error if the CoreAudio framework function AudioDeviceGetNearestStartTime fails.
+func AudioDeviceGetNearestStartTime(inDevice int, ioRequestedStartTime *coreaudiotypes.AudioTimeStamp, inFlags int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioDeviceGetNearestStartTime == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioDeviceGetNearestStartTime, _lib, "AudioDeviceGetNearestStartTime")
+	}
+	_rc := _fnAudioDeviceGetNearestStartTime(inDevice, unsafe.Pointer(ioRequestedStartTime), inFlags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnAudioDeviceRemoveIOProc func(int, unsafe.Pointer) int32
 
 // AudioDeviceRemoveIOProc reports an error if the CoreAudio framework function AudioDeviceRemoveIOProc fails.
@@ -104,6 +135,21 @@ func AudioDeviceRemovePropertyListener(inDevice int, inChannel int, isInput uint
 	return nil
 }
 
+var _fnAudioDeviceSetProperty func(int, unsafe.Pointer, int, uint8, int, int, unsafe.Pointer) int32
+
+// AudioDeviceSetProperty reports an error if the CoreAudio framework function AudioDeviceSetProperty fails.
+func AudioDeviceSetProperty(inDevice int, inWhen *coreaudiotypes.AudioTimeStamp, inChannel int, isInput uint8, inPropertyID int, inPropertyDataSize int, inPropertyData unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioDeviceSetProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioDeviceSetProperty, _lib, "AudioDeviceSetProperty")
+	}
+	_rc := _fnAudioDeviceSetProperty(inDevice, unsafe.Pointer(inWhen), inChannel, isInput, inPropertyID, inPropertyDataSize, inPropertyData)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnAudioDeviceStart func(int, unsafe.Pointer) int32
 
 // AudioDeviceStart reports an error if the CoreAudio framework function AudioDeviceStart fails.
@@ -119,6 +165,21 @@ func AudioDeviceStart(inDevice int, inProcID unsafe.Pointer) error {
 	return nil
 }
 
+var _fnAudioDeviceStartAtTime func(int, unsafe.Pointer, unsafe.Pointer, int) int32
+
+// AudioDeviceStartAtTime reports an error if the CoreAudio framework function AudioDeviceStartAtTime fails.
+func AudioDeviceStartAtTime(inDevice int, inProcID unsafe.Pointer, ioRequestedStartTime *coreaudiotypes.AudioTimeStamp, inFlags int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioDeviceStartAtTime == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioDeviceStartAtTime, _lib, "AudioDeviceStartAtTime")
+	}
+	_rc := _fnAudioDeviceStartAtTime(inDevice, inProcID, unsafe.Pointer(ioRequestedStartTime), inFlags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnAudioDeviceStop func(int, unsafe.Pointer) int32
 
 // AudioDeviceStop reports an error if the CoreAudio framework function AudioDeviceStop fails.
@@ -128,6 +189,21 @@ func AudioDeviceStop(inDevice int, inProcID unsafe.Pointer) error {
 		ebipurego.RegisterLibFunc(&_fnAudioDeviceStop, _lib, "AudioDeviceStop")
 	}
 	_rc := _fnAudioDeviceStop(inDevice, inProcID)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioDeviceTranslateTime func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// AudioDeviceTranslateTime reports an error if the CoreAudio framework function AudioDeviceTranslateTime fails.
+func AudioDeviceTranslateTime(inDevice int, inTime *coreaudiotypes.AudioTimeStamp, outTime *coreaudiotypes.AudioTimeStamp) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioDeviceTranslateTime == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioDeviceTranslateTime, _lib, "AudioDeviceTranslateTime")
+	}
+	_rc := _fnAudioDeviceTranslateTime(inDevice, unsafe.Pointer(inTime), unsafe.Pointer(outTime))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -239,6 +315,51 @@ func AudioHardwareUnload() error {
 	return nil
 }
 
+var _fnAudioObjectAddPropertyListener func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// AudioObjectAddPropertyListener reports an error if the CoreAudio framework function AudioObjectAddPropertyListener fails.
+func AudioObjectAddPropertyListener(inObjectID int, inAddress *AudioObjectPropertyAddress, inListener unsafe.Pointer, inClientData unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioObjectAddPropertyListener == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioObjectAddPropertyListener, _lib, "AudioObjectAddPropertyListener")
+	}
+	_rc := _fnAudioObjectAddPropertyListener(inObjectID, unsafe.Pointer(inAddress), inListener, inClientData)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioObjectRemovePropertyListener func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// AudioObjectRemovePropertyListener reports an error if the CoreAudio framework function AudioObjectRemovePropertyListener fails.
+func AudioObjectRemovePropertyListener(inObjectID int, inAddress *AudioObjectPropertyAddress, inListener unsafe.Pointer, inClientData unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioObjectRemovePropertyListener == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioObjectRemovePropertyListener, _lib, "AudioObjectRemovePropertyListener")
+	}
+	_rc := _fnAudioObjectRemovePropertyListener(inObjectID, unsafe.Pointer(inAddress), inListener, inClientData)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioObjectSetPropertyData func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer) int32
+
+// AudioObjectSetPropertyData reports an error if the CoreAudio framework function AudioObjectSetPropertyData fails.
+func AudioObjectSetPropertyData(inObjectID int, inAddress *AudioObjectPropertyAddress, inQualifierDataSize int, inQualifierData unsafe.Pointer, inDataSize int, inData unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioObjectSetPropertyData == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioObjectSetPropertyData, _lib, "AudioObjectSetPropertyData")
+	}
+	_rc := _fnAudioObjectSetPropertyData(inObjectID, unsafe.Pointer(inAddress), inQualifierDataSize, inQualifierData, inDataSize, inData)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnAudioStreamAddPropertyListener func(int, int, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioStreamAddPropertyListener reports an error if the CoreAudio framework function AudioStreamAddPropertyListener fails.
@@ -263,6 +384,21 @@ func AudioStreamRemovePropertyListener(inStream int, inChannel int, inPropertyID
 		ebipurego.RegisterLibFunc(&_fnAudioStreamRemovePropertyListener, _lib, "AudioStreamRemovePropertyListener")
 	}
 	_rc := _fnAudioStreamRemovePropertyListener(inStream, inChannel, inPropertyID, inProc)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAudioStreamSetProperty func(int, unsafe.Pointer, int, int, int, unsafe.Pointer) int32
+
+// AudioStreamSetProperty reports an error if the CoreAudio framework function AudioStreamSetProperty fails.
+func AudioStreamSetProperty(inStream int, inWhen *coreaudiotypes.AudioTimeStamp, inChannel int, inPropertyID int, inPropertyDataSize int, inPropertyData unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioStreamSetProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioStreamSetProperty, _lib, "AudioStreamSetProperty")
+	}
+	_rc := _fnAudioStreamSetProperty(inStream, unsafe.Pointer(inWhen), inChannel, inPropertyID, inPropertyDataSize, inPropertyData)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

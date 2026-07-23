@@ -87,6 +87,39 @@ func NewHostCIControllerStateMachineWithInterface(interface_ *HostControllerInte
 	return hostCIControllerStateMachineAdopt(_id), nil
 }
 
+// InspectCommand inspect an IOUSBHostCIMessage command The IOUSBHostCIMessage command is inspected to determine if it is handled by the state machine, and is appropriate for the current state.
+func (hccsm *HostCIControllerStateMachine) InspectCommand(command *IOUSBHostCIMessage) error {
+	defer runtime.KeepAlive(hccsm)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hccsm), objc.RegisterName("inspectCommand:error:"), unsafe.Pointer(command), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// RespondToCommandStatus advance the state machine and respond to an IOUSBHostCIMessage command If the command passes inspectCommand and the client indicates the command was processed successfully, the state machine is advanced, and a properly formatted command response message is sent to the kernel driver.  If the client indicates the command was not processed successfully, the state machine is not advanced but a properly formatted command response message is sent to the kernel driver.
+func (hccsm *HostCIControllerStateMachine) RespondToCommandStatus(command *IOUSBHostCIMessage, status HostCIMessageStatus) error {
+	defer runtime.KeepAlive(hccsm)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hccsm), objc.RegisterName("respondToCommand:status:error:"), unsafe.Pointer(command), status, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// RespondToCommandStatusFrameTimestamp advance the state machine and respond to an IOUSBHostCIMessageTypeControllerFrameNumber command If the command passes inspectCommand and the client indicates the command was processed successfully, enqueueUpdatedFrame:timestamp:error is called with the supplied parameters, and a properly formatted command response message is sent to the kernel driver.  If the client indicates the command was not processed successfully, enqueueUpdatedFrame:timestamp:error is not called but a properly formatted command response message is sent to the kernel driver.
+func (hccsm *HostCIControllerStateMachine) RespondToCommandStatusFrameTimestamp(command *IOUSBHostCIMessage, status HostCIMessageStatus, frame uint64, timestamp uint64) error {
+	defer runtime.KeepAlive(hccsm)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hccsm), objc.RegisterName("respondToCommand:status:frame:timestamp:error:"), unsafe.Pointer(command), status, frame, timestamp, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
 // EnqueueUpdatedFrameTimestamp enqueue frame and timestamp messages for delivery to the kernel driver If the controller interface is in the IOUSBHostCIControllerStateActive state, messages with the type IOUSBHostCIMessageTypeFrameNumberUpdate and IOUSBHostCIMessageTypeFrameTimestampUpdate will be generated using the provided inputs, and enqueued for delivery to the kernel driver. The frame and timestamp information provided effectively measure the duration of the controller's 1ms frame in terms of system time.  A 1% frame duration variation is permitted.  A larger frame duration variation will result in a IOUSBHostCIExceptionTypeFrameUpdateError.
 func (hccsm *HostCIControllerStateMachine) EnqueueUpdatedFrameTimestamp(frame uint64, timestamp uint64) error {
 	defer runtime.KeepAlive(hccsm)

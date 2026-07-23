@@ -6,8 +6,10 @@ package quartzcore
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -91,6 +93,12 @@ func (r *Renderer) WithLayer(layer LayerProvider) *Renderer {
 func (r *Renderer) WithBounds(bounds corefoundation.CGRect) *Renderer {
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setBounds:"), bounds)
 	return r
+}
+
+// BeginFrameAtTimeTimeStamp begin rendering a frame at the specified time.
+func (r *Renderer) BeginFrameAtTimeTimeStamp(t float64, ts *corevideo.CVTimeStamp) {
+	defer runtime.KeepAlive(r)
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("beginFrameAtTime:timeStamp:"), t, unsafe.Pointer(ts))
 }
 
 // UpdateBounds returns the bounds of the update region that contains all pixels that will be rendered by the current frame.

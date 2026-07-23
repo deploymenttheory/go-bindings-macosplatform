@@ -233,11 +233,24 @@ func (bp *BezierPath) TransformUsingAffineTransform(transform obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("transformUsingAffineTransform:"), objref.IDOf(transform))
 }
 
+// ElementAtIndexAssociatedPoints gets the element type and (and optionally) the associated points for the path element at the specified index.
+func (bp *BezierPath) ElementAtIndexAssociatedPoints(index int, points *corefoundation.CGPoint) BezierPathElement {
+	defer runtime.KeepAlive(bp)
+	_r := objc.Send[BezierPathElement](objref.IDOf(bp), objc.RegisterName("elementAtIndex:associatedPoints:"), index, unsafe.Pointer(points))
+	return _r
+}
+
 // ElementAtIndex returns the type of path element at the specified index.
 func (bp *BezierPath) ElementAtIndex(index int) BezierPathElement {
 	defer runtime.KeepAlive(bp)
 	_r := objc.Send[BezierPathElement](objref.IDOf(bp), objc.RegisterName("elementAtIndex:"), index)
 	return _r
+}
+
+// SetAssociatedPointsAtIndex changes the points associated with the specified path element.
+func (bp *BezierPath) SetAssociatedPointsAtIndex(points *corefoundation.CGPoint, index int) {
+	defer runtime.KeepAlive(bp)
+	objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("setAssociatedPoints:atIndex:"), unsafe.Pointer(points), index)
 }
 
 // AppendBezierPath appends the contents of the specified path object to the path.
@@ -251,6 +264,12 @@ func (bp *BezierPath) AppendBezierPath(path *BezierPath) {
 func (bp *BezierPath) AppendBezierPathWithRect(rect corefoundation.CGRect) {
 	defer runtime.KeepAlive(bp)
 	objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("appendBezierPathWithRect:"), rect)
+}
+
+// AppendBezierPathWithPointsCount appends a series of line segments to the path.
+func (bp *BezierPath) AppendBezierPathWithPointsCount(points *corefoundation.CGPoint, count int) {
+	defer runtime.KeepAlive(bp)
+	objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("appendBezierPathWithPoints:count:"), unsafe.Pointer(points), count)
 }
 
 // AppendBezierPathWithOvalInRect appends an oval path to the path, inscribing the oval in the specified rectangle.

@@ -6,6 +6,7 @@ package metal
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -151,6 +152,19 @@ func (mrpd *MTL4RenderPassDescriptor) WithVisibilityResultType(visibilityResultT
 func (mrpd *MTL4RenderPassDescriptor) WithSupportColorAttachmentMapping(supportColorAttachmentMapping bool) *MTL4RenderPassDescriptor {
 	objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("setSupportColorAttachmentMapping:"), supportColorAttachmentMapping)
 	return mrpd
+}
+
+// SetSamplePositionsCount configures the custom sample positions to use in MSAA rendering.
+func (mrpd *MTL4RenderPassDescriptor) SetSamplePositionsCount(positions *MTLSamplePosition, count int) {
+	defer runtime.KeepAlive(mrpd)
+	objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("setSamplePositions:count:"), unsafe.Pointer(positions), count)
+}
+
+// GetSamplePositionsCount retrieves the previously-configured custom sample positions.
+func (mrpd *MTL4RenderPassDescriptor) GetSamplePositionsCount(positions *MTLSamplePosition, count int) int {
+	defer runtime.KeepAlive(mrpd)
+	_r := objc.Send[int](objref.IDOf(mrpd), objc.RegisterName("getSamplePositions:count:"), unsafe.Pointer(positions), count)
+	return _r
 }
 
 // ColorAttachments returns accesses the array of state information for render attachments that store color data.

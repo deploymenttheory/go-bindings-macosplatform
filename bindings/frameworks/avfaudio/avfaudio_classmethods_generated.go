@@ -7,7 +7,9 @@ package avfaudio
 import (
 	"context"
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -32,10 +34,22 @@ func LayoutWithLayoutTag(layoutTag int) *AudioChannelLayout {
 	return AudioChannelLayoutFromID(_r)
 }
 
+// LayoutWithLayout creates an audio channel layout object from an existing one.
+func LayoutWithLayout(layout *coreaudiotypes.AudioChannelLayout) *AudioChannelLayout {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVAudioChannelLayout")), objc.RegisterName("layoutWithLayout:"), unsafe.Pointer(layout))
+	return AudioChannelLayoutFromID(_r)
+}
+
 // SharedRoutingArbiter returns the singleton AVAudioRoutingArbiter instance.
 func SharedRoutingArbiter() *AudioRoutingArbiter {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAudioRoutingArbiter")), objc.RegisterName("sharedRoutingArbiter"))
 	return AudioRoutingArbiterFromID(_r)
+}
+
+// TimeWithAudioTimeStampSampleRate creates an audio time object with the specified timestamp and sample rate.
+func TimeWithAudioTimeStampSampleRate(ts *coreaudiotypes.AudioTimeStamp, sampleRate float64) *AudioTime {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVAudioTime")), objc.RegisterName("timeWithAudioTimeStamp:sampleRate:"), unsafe.Pointer(ts), sampleRate)
+	return AudioTimeFromID(_r)
 }
 
 // TimeWithHostTime creates an audio time object with the specified host time.

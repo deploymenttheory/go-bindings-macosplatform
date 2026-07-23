@@ -391,15 +391,14 @@ func CVDisplayLinkStop(displayLink obj.Object) int32 {
 var _fnCVDisplayLinkTranslateTime func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // CVDisplayLinkTranslateTime calls the CoreVideo framework function CVDisplayLinkTranslateTime.
-func CVDisplayLinkTranslateTime(displayLink obj.Object) (result int32, inTime CVTimeStamp, outTime CVTimeStamp) {
+func CVDisplayLinkTranslateTime(displayLink obj.Object, inTime *CVTimeStamp) (result int32, outTime CVTimeStamp) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCVDisplayLinkTranslateTime == nil {
 		ebipurego.RegisterLibFunc(&_fnCVDisplayLinkTranslateTime, _lib, "CVDisplayLinkTranslateTime")
 	}
 	var _out0 CVTimeStamp
-	var _out1 CVTimeStamp
-	_ret := _fnCVDisplayLinkTranslateTime(objref.IDOf(displayLink), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	_ret := _fnCVDisplayLinkTranslateTime(objref.IDOf(displayLink), unsafe.Pointer(inTime), unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnCVGetCurrentHostTime func() uint64

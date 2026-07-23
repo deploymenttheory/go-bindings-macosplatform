@@ -15,6 +15,18 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// DeviceWithAddress returns the IOBluetoothDevice object for the given BluetoothDeviceAddress
+func DeviceWithAddress(address *BluetoothDeviceAddress) *IOBluetoothDevice {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDevice")), objc.RegisterName("deviceWithAddress:"), unsafe.Pointer(address))
+	return IOBluetoothDeviceFromID(_r)
+}
+
+// WithAddress wraps the corresponding Objective-C method.
+func WithAddress(address *BluetoothDeviceAddress) *IOBluetoothDevice {
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDevice")), objc.RegisterName("withAddress:"), unsafe.Pointer(address))
+	return IOBluetoothDeviceFromID(_r)
+}
+
 // DeviceWithAddressString returns the IOBluetoothDevice object for the given BluetoothDeviceAddress
 func DeviceWithAddressString(address string) *IOBluetoothDevice {
 	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDevice")), objc.RegisterName("deviceWithAddressString:"), purego.NSString(address))

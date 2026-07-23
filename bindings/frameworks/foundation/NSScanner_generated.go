@@ -266,3 +266,10 @@ func (s *Scanner) IsAtEnd() bool {
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isAtEnd"))
 	return _r
 }
+
+// ScanDecimal wraps the corresponding Objective-C method.
+func (s *Scanner) ScanDecimal(dcm *NSDecimal) bool {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanDecimal:"), unsafe.Pointer(dcm))
+	return _r
+}

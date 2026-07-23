@@ -178,6 +178,13 @@ func (ibd *IOBluetoothDevice) GetLastNameUpdate() time.Time {
 	return rt.NSDateToTime(_r)
 }
 
+// Address get the Bluetooth device address for the target device.
+func (ibd *IOBluetoothDevice) Address() *BluetoothDeviceAddress {
+	defer runtime.KeepAlive(ibd)
+	_r := objc.Send[*BluetoothDeviceAddress](objref.IDOf(ibd), objc.RegisterName("getAddress"))
+	return _r
+}
+
 // GetAddressString get a string representation of the Bluetooth device address for the target device. The format of the string is the same as returned by IOBluetoothNSStringFromDeviceAddress().
 func (ibd *IOBluetoothDevice) GetAddressString() string {
 	defer runtime.KeepAlive(ibd)

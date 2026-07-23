@@ -179,6 +179,22 @@ func MIDIEntityAddOrRemoveEndpoints(entity int, numSourceEndpoints int, numDesti
 	return nil
 }
 
+var _fnMIDIEventPacketSysexBytesForGroup func(unsafe.Pointer, uint8, unsafe.Pointer) int32
+
+// MIDIEventPacketSysexBytesForGroup reports an error if the CoreMIDI framework function MIDIEventPacketSysexBytesForGroup fails.
+func MIDIEventPacketSysexBytesForGroup(pkt *MIDIEventPacket, groupIndex uint8) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIEventPacketSysexBytesForGroup == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIEventPacketSysexBytesForGroup, _lib, "MIDIEventPacketSysexBytesForGroup")
+	}
+	var _out0 uintptr
+	_rc := _fnMIDIEventPacketSysexBytesForGroup(unsafe.Pointer(pkt), groupIndex, unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
 var _fnMIDIFlushOutput func(int) int32
 
 // MIDIFlushOutput reports an error if the CoreMIDI framework function MIDIFlushOutput fails.
@@ -410,6 +426,36 @@ func MIDIPortDispose(port int) error {
 	return nil
 }
 
+var _fnMIDIReceived func(int, unsafe.Pointer) int32
+
+// MIDIReceived reports an error if the CoreMIDI framework function MIDIReceived fails.
+func MIDIReceived(src int, pktlist *MIDIPacketList) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIReceived == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIReceived, _lib, "MIDIReceived")
+	}
+	_rc := _fnMIDIReceived(src, unsafe.Pointer(pktlist))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMIDIReceivedEventList func(int, unsafe.Pointer) int32
+
+// MIDIReceivedEventList reports an error if the CoreMIDI framework function MIDIReceivedEventList fails.
+func MIDIReceivedEventList(src int, evtlist *MIDIEventList) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIReceivedEventList == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIReceivedEventList, _lib, "MIDIReceivedEventList")
+	}
+	_rc := _fnMIDIReceivedEventList(src, unsafe.Pointer(evtlist))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnMIDIRestart func() int32
 
 // MIDIRestart reports an error if the CoreMIDI framework function MIDIRestart fails.
@@ -419,6 +465,36 @@ func MIDIRestart() error {
 		ebipurego.RegisterLibFunc(&_fnMIDIRestart, _lib, "MIDIRestart")
 	}
 	_rc := _fnMIDIRestart()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMIDISend func(int, int, unsafe.Pointer) int32
+
+// MIDISend reports an error if the CoreMIDI framework function MIDISend fails.
+func MIDISend(port int, dest int, pktlist *MIDIPacketList) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISend == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISend, _lib, "MIDISend")
+	}
+	_rc := _fnMIDISend(port, dest, unsafe.Pointer(pktlist))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnMIDISendEventList func(int, int, unsafe.Pointer) int32
+
+// MIDISendEventList reports an error if the CoreMIDI framework function MIDISendEventList fails.
+func MIDISendEventList(port int, dest int, evtlist *MIDIEventList) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISendEventList == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISendEventList, _lib, "MIDISendEventList")
+	}
+	_rc := _fnMIDISendEventList(port, dest, unsafe.Pointer(evtlist))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

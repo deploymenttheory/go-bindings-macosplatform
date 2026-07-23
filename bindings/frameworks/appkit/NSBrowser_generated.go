@@ -1400,6 +1400,22 @@ func (b *Browser) CanDragRowsWithIndexesInColumnWithEvent(rowIndexes obj.Object,
 
 }
 
+// DraggingImageForRowsWithIndexesInColumnWithEventOffset provides an image to represent dragged rows during a drag operation on the browser.
+func (b *Browser) DraggingImageForRowsWithIndexesInColumnWithEventOffset(rowIndexes obj.Object, column int, event *Event, dragImageOffset *corefoundation.CGPoint) *Image {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(rowIndexes)
+	defer runtime.KeepAlive(event)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("draggingImageForRowsWithIndexes:inColumn:withEvent:offset:"), objref.IDOf(rowIndexes), column, objref.IDOf(event), unsafe.Pointer(dragImageOffset))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
 // SetDraggingSourceOperationMaskForLocal specifies the drag-operation mask for dragging operations with local or external destinations.
 func (b *Browser) SetDraggingSourceOperationMaskForLocal(mask DragOperation, isLocal bool) {
 	defer runtime.KeepAlive(b)

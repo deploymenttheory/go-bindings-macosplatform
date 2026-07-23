@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -1098,6 +1099,22 @@ func (tv *TableView) CanDragRowsWithIndexesAtPoint(rowIndexes obj.Object, mouseD
 		_mainthread0 = func() bool {
 			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("canDragRowsWithIndexes:atPoint:"), objref.IDOf(rowIndexes), mouseDownPoint)
 			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
+// DragImageForRowsWithIndexesTableColumnsEventOffset computes and returns an image to use for dragging.
+func (tv *TableView) DragImageForRowsWithIndexesTableColumnsEventOffset(dragRows obj.Object, tableColumns []*TableColumn, dragEvent *Event, dragImageOffset *corefoundation.CGPoint) *Image {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(dragRows)
+	defer runtime.KeepAlive(dragEvent)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("dragImageForRowsWithIndexes:tableColumns:event:offset:"), objref.IDOf(dragRows), purego.SliceToNSArray(tableColumns, func(_v *TableColumn) objc.ID { return objref.IDOf(_v) }), objref.IDOf(dragEvent), unsafe.Pointer(dragImageOffset))
+			return ImageFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -2228,6 +2245,22 @@ func (tv *TableView) SelectedRowEnumerator() obj.Object {
 		_mainthread0 = func() obj.Object {
 			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectedRowEnumerator"))
 			return obj.Wrap(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
+// DragImageForRowsEventDragImageOffset computes and returns an image to use for dragging.
+func (tv *TableView) DragImageForRowsEventDragImageOffset(dragRows obj.Object, dragEvent *Event, dragImageOffset *corefoundation.CGPoint) *Image {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(dragRows)
+	defer runtime.KeepAlive(dragEvent)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("dragImageForRows:event:dragImageOffset:"), objref.IDOf(dragRows), objref.IDOf(dragEvent), unsafe.Pointer(dragImageOffset))
+			return ImageFromID(_r)
 		}()
 	})
 	return _mainthread0

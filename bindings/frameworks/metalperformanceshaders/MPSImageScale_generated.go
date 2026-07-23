@@ -6,6 +6,7 @@ package metalperformanceshaders
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -47,6 +48,12 @@ func imageScaleAdopt(id objc.ID) *ImageScale {
 	x.Handle = objref.Wrap(id)
 	objref.Track(x)
 	return x
+}
+
+// WithScaleTransform sets an optional transform that describes how to scale and translate the source image If the scaleTransform is NULL, then any image scaling factor such as MPSImageLanczosScale will rescale the image so that the source image fits exactly into the destination texture.  If the transform is not NULL, then the transform is used for determining how to map the source image to the destination. Default: NULL When the scaleTransform is set to non-NULL, the values pointed to by the new scaleTransform are copied to object storage, and the pointer is updated to point to internal storage. Do not attempt to free it.  You may free your copy of the MPSScaleTransform as soon as the property set operation is complete. When calculating a scaleTransform, use the limits of the bounding box for the intended source region of interest and the destination clipRect. Adjustments for pixel center coordinates are handled internally to the function.  For example, the scale transform to convert the entire source image to the entire destination image size (clipRect = MPSRectNoClip) would be:
+func (is *ImageScale) WithScaleTransform(scaleTransform *mpscore.MPSScaleTransform) *ImageScale {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScaleTransform:"), unsafe.Pointer(scaleTransform))
+	return is
 }
 
 // WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.

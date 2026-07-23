@@ -3930,14 +3930,12 @@ func Krb5SetDefaultRealm(arg obj.Object, arg2 string) int {
 var _fnKrb5SetDefaultTgsEnctypes func(objc.ID, unsafe.Pointer) int32
 
 // Krb5SetDefaultTgsEnctypes calls the Kerberos framework function krb5_set_default_tgs_enctypes.
-func Krb5SetDefaultTgsEnctypes(arg obj.Object) (result int, arg2 int) {
+func Krb5SetDefaultTgsEnctypes(arg obj.Object, arg2 unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5SetDefaultTgsEnctypes == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5SetDefaultTgsEnctypes, _lib, "krb5_set_default_tgs_enctypes")
 	}
-	var _out0 int
-	_ret := int(_fnKrb5SetDefaultTgsEnctypes(objref.IDOf(arg), unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	return int(_fnKrb5SetDefaultTgsEnctypes(objref.IDOf(arg), arg2))
 }
 
 var _fnKrb5SetPassword func(objc.ID, unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -4416,14 +4414,12 @@ func ProfileGetValues(profile obj.Object, names string, retValues string) int {
 var _fnProfileInit func(unsafe.Pointer, unsafe.Pointer) int
 
 // ProfileInit calls the Kerberos framework function profile_init.
-func ProfileInit(retProfile unsafe.Pointer) (result int, files string) {
+func ProfileInit(files unsafe.Pointer, retProfile unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileInit == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileInit, _lib, "profile_init")
 	}
-	var _out0 string
-	_ret := _fnProfileInit(unsafe.Pointer(&_out0), retProfile)
-	return _ret, _out0
+	return _fnProfileInit(files, retProfile)
 }
 
 var _fnProfileInitPath func(string, unsafe.Pointer) int

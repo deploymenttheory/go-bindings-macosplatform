@@ -933,16 +933,32 @@ func scanStruct(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f
 }
 
 // cScalarSizeAlign returns the size and alignment (bytes, LP64) of a fixed-width
-// scalar C field type, and ok=false for anything else (a pointer, array, nested
-// struct/union, enum, bitfield, or unrecognised typedef). Only types whose Go
-// representation is an unambiguous fixed-width primitive are admitted, so a struct
-// built from them lays out identically in Go and C.
+// scalar C field type — or a fixed-size array of one — and ok=false for anything
+// else (a pointer, nested struct/union, enum, bitfield, flexible array, or
+// unrecognised typedef). Only types whose Go representation is an unambiguous
+// fixed-width primitive (or an array thereof) are admitted, so a struct built from
+// them lays out identically in Go and C.
 func cScalarSizeAlign(cType string) (size, align int, ok bool) {
 	t := cType
 	for _, q := range []string{"const", "volatile", "_Nonnull", "_Nullable", "_Null_unspecified"} {
 		t = strings.ReplaceAll(t, q, " ")
 	}
 	t = strings.Join(strings.Fields(t), " ")
+	// A fixed-size array "elem[N]" lays out as N contiguous elements with the
+	// element's alignment; recurse on the element (which may itself be an array,
+	// e.g. "uint8_t[4][4]"). A flexible array "elem[]" or non-constant bound is
+	// rejected.
+	if idx := strings.LastIndex(t, "["); idx >= 0 && strings.HasSuffix(t, "]") {
+		n, err := strconv.Atoi(strings.TrimSpace(t[idx+1 : len(t)-1]))
+		if err != nil || n < 0 {
+			return 0, 0, false
+		}
+		elemSize, elemAlign, elemOK := cScalarSizeAlign(strings.TrimSpace(t[:idx]))
+		if !elemOK {
+			return 0, 0, false
+		}
+		return n * elemSize, elemAlign, true
+	}
 	// Only fixed-width types whose Go mapping is unambiguous and identical in size
 	// are admitted, so the scanner's packed-contiguity check agrees with the
 	// emitter's (which computes from the resolved Go type). Native ints of
@@ -968,11 +984,12 @@ func cScalarSizeAlign(cType string) (size, align int, ok bool) {
 
 // structCleanlyTypeable reports whether a RecordDecl can be surfaced as a plain
 // Go value struct that reproduces the C field offsets: it must have at least one
-// field, every field must be a fixed-width scalar, and — if packed — every field
-// must already be naturally aligned at its packed offset (so Go inserts no
-// inter-field padding). Structs that fail (arrays, nested structs, pointers,
-// bitfields, enum fields, or a misaligned packed layout) are left uncaptured so
-// their pointer stays an opaque unsafe.Pointer rather than a wrong-layout type.
+// field, every field must be a fixed-width scalar (or a fixed-size array of one),
+// and — if packed — every field must already be naturally aligned at its packed
+// offset (so Go inserts no inter-field padding). Structs that fail (nested
+// structs, pointers, bitfields, enum fields, flexible arrays, or a misaligned
+// packed layout) are left uncaptured so their pointer stays an opaque
+// unsafe.Pointer rather than a wrong-layout type.
 func structCleanlyTypeable(node *ASTNode) bool {
 	packed := hasPackedAttr(node)
 	offset, nFields := 0, 0

@@ -57,14 +57,12 @@ func BitmapCharacter(font unsafe.Pointer, character int) {
 var _fnBitmapLength func(unsafe.Pointer, unsafe.Pointer) int32
 
 // BitmapLength calls the GLUT framework function glutBitmapLength.
-func BitmapLength(font unsafe.Pointer) (result int, str uint8) {
+func BitmapLength(font unsafe.Pointer, str unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBitmapLength == nil {
 		ebipurego.RegisterLibFunc(&_fnBitmapLength, _lib, "glutBitmapLength")
 	}
-	var _out0 uint8
-	_ret := int(_fnBitmapLength(font, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	return int(_fnBitmapLength(font, str))
 }
 
 var _fnBitmapWidth func(unsafe.Pointer, int) int32
@@ -1051,14 +1049,12 @@ func StrokeCharacter(font unsafe.Pointer, character int) {
 var _fnStrokeLength func(unsafe.Pointer, unsafe.Pointer) int32
 
 // StrokeLength calls the GLUT framework function glutStrokeLength.
-func StrokeLength(font unsafe.Pointer) (result int, str uint8) {
+func StrokeLength(font unsafe.Pointer, str unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStrokeLength == nil {
 		ebipurego.RegisterLibFunc(&_fnStrokeLength, _lib, "glutStrokeLength")
 	}
-	var _out0 uint8
-	_ret := int(_fnStrokeLength(font, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	return int(_fnStrokeLength(font, str))
 }
 
 var _fnStrokeWidth func(unsafe.Pointer, int) int32

@@ -103,6 +103,22 @@ func (f *Font) AdvancementForCGGlyph(glyph uint16) corefoundation.CGSize {
 	return _r
 }
 
+// GetBoundingRectsForCGGlyphsCount wraps the corresponding Objective-C method.
+func (f *Font) GetBoundingRectsForCGGlyphsCount(bounds *corefoundation.CGRect, glyphCount int) (glyphs uint16) {
+	defer runtime.KeepAlive(f)
+	var _out0 uint16
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("getBoundingRects:forCGGlyphs:count:"), unsafe.Pointer(bounds), unsafe.Pointer(&_out0), glyphCount)
+	return _out0
+}
+
+// GetAdvancementsForCGGlyphsCount wraps the corresponding Objective-C method.
+func (f *Font) GetAdvancementsForCGGlyphsCount(advancements *corefoundation.CGSize, glyphCount int) (glyphs uint16) {
+	defer runtime.KeepAlive(f)
+	var _out0 uint16
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("getAdvancements:forCGGlyphs:count:"), unsafe.Pointer(advancements), unsafe.Pointer(&_out0), glyphCount)
+	return _out0
+}
+
 // Set sets this font as the font for the current graphics context.
 func (f *Font) Set() {
 	defer runtime.KeepAlive(f)
@@ -305,6 +321,28 @@ func (f *Font) AdvancementForGlyph(glyph int) corefoundation.CGSize {
 	defer runtime.KeepAlive(f)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(f), objc.RegisterName("advancementForGlyph:"), glyph)
 	return _r
+}
+
+// GetBoundingRectsForGlyphsCount returns an array of the bounding rectangles for the specified glyphs rendered by the receiver.
+func (f *Font) GetBoundingRectsForGlyphsCount(bounds *corefoundation.CGRect, glyphCount int) (glyphs int) {
+	defer runtime.KeepAlive(f)
+	var _out0 int
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("getBoundingRects:forGlyphs:count:"), unsafe.Pointer(bounds), unsafe.Pointer(&_out0), glyphCount)
+	return _out0
+}
+
+// GetAdvancementsForGlyphsCount returns an array of the advancements for the specified glyphs rendered by the receiver.
+func (f *Font) GetAdvancementsForGlyphsCount(advancements *corefoundation.CGSize, glyphCount int) (glyphs int) {
+	defer runtime.KeepAlive(f)
+	var _out0 int
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("getAdvancements:forGlyphs:count:"), unsafe.Pointer(advancements), unsafe.Pointer(&_out0), glyphCount)
+	return _out0
+}
+
+// GetAdvancementsForPackedGlyphsLength returns an array of the advancements for the specified packed glyphs and rendered by the receiver.
+func (f *Font) GetAdvancementsForPackedGlyphsLength(advancements *corefoundation.CGSize, packedGlyphs unsafe.Pointer, length int) {
+	defer runtime.KeepAlive(f)
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("getAdvancements:forPackedGlyphs:length:"), unsafe.Pointer(advancements), packedGlyphs, length)
 }
 
 // ScreenFontWithRenderingMode returns a bitmapped screen font, when sent to a font object representing a scalable PostScript font, with the specified rendering mode, matching the receiver in typeface and matrix (or size), or nil if such a font can’t be found.

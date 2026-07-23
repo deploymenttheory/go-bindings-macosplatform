@@ -1087,6 +1087,18 @@ func ShapeNodeWithEllipseOfSize(size corefoundation.CGSize) *ShapeNode {
 	return ShapeNodeFromID(_r)
 }
 
+// ShapeNodeWithPointsCount creates a shape node from a series of points.
+func ShapeNodeWithPointsCount(points *corefoundation.CGPoint, numPoints int) *ShapeNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithPoints:count:"), unsafe.Pointer(points), numPoints)
+	return ShapeNodeFromID(_r)
+}
+
+// ShapeNodeWithSplinePointsCount creates a shape node from a series of spline points.
+func ShapeNodeWithSplinePointsCount(points *corefoundation.CGPoint, numPoints int) *ShapeNode {
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithSplinePoints:count:"), unsafe.Pointer(points), numPoints)
+	return ShapeNodeFromID(_r)
+}
+
 // SpriteNodeWithTextureSize initializes a textured sprite using an existing texture object but with a specified size.
 func SpriteNodeWithTextureSize(texture *Texture, size corefoundation.CGSize) *SpriteNode {
 	defer runtime.KeepAlive(texture)

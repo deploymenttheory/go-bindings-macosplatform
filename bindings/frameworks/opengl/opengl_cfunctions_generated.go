@@ -520,14 +520,12 @@ func CGLSetFullScreenOnDisplay(ctx obj.Object, displayMask uint32) unsafe.Pointe
 var _fnCGLSetGlobalOption func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // CGLSetGlobalOption calls the OpenGL framework function CGLSetGlobalOption.
-func CGLSetGlobalOption(pname unsafe.Pointer) (result unsafe.Pointer, params int32) {
+func CGLSetGlobalOption(pname unsafe.Pointer, params unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLSetGlobalOption == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLSetGlobalOption, _lib, "CGLSetGlobalOption")
 	}
-	var _out0 int32
-	_ret := _fnCGLSetGlobalOption(pname, unsafe.Pointer(&_out0))
-	return _ret, _out0
+	return _fnCGLSetGlobalOption(pname, params)
 }
 
 var _fnCGLSetOffScreen func(objc.ID, int32, int32, int32, unsafe.Pointer) unsafe.Pointer
@@ -566,14 +564,12 @@ func CGLSetPBuffer(ctx obj.Object, pbuffer obj.Object, face uint32, level int32,
 var _fnCGLSetParameter func(objc.ID, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // CGLSetParameter calls the OpenGL framework function CGLSetParameter.
-func CGLSetParameter(ctx obj.Object, pname unsafe.Pointer) (result unsafe.Pointer, params int32) {
+func CGLSetParameter(ctx obj.Object, pname unsafe.Pointer, params unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGLSetParameter == nil {
 		ebipurego.RegisterLibFunc(&_fnCGLSetParameter, _lib, "CGLSetParameter")
 	}
-	var _out0 int32
-	_ret := _fnCGLSetParameter(objref.IDOf(ctx), pname, unsafe.Pointer(&_out0))
-	return _ret, _out0
+	return _fnCGLSetParameter(objref.IDOf(ctx), pname, params)
 }
 
 var _fnCGLSetVirtualScreen func(objc.ID, int32) unsafe.Pointer

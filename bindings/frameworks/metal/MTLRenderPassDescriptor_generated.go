@@ -6,6 +6,7 @@ package metal
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -151,6 +152,19 @@ func (rpd *RenderPassDescriptor) WithVisibilityResultType(visibilityResultType V
 func (rpd *RenderPassDescriptor) WithSupportColorAttachmentMapping(supportColorAttachmentMapping bool) *RenderPassDescriptor {
 	objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("setSupportColorAttachmentMapping:"), supportColorAttachmentMapping)
 	return rpd
+}
+
+// SetSamplePositionsCount sets the programmable sample positions for a render pass.
+func (rpd *RenderPassDescriptor) SetSamplePositionsCount(positions *MTLSamplePosition, count int) {
+	defer runtime.KeepAlive(rpd)
+	objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("setSamplePositions:count:"), unsafe.Pointer(positions), count)
+}
+
+// GetSamplePositionsCount retrieves the programmable sample positions set for a render pass.
+func (rpd *RenderPassDescriptor) GetSamplePositionsCount(positions *MTLSamplePosition, count int) int {
+	defer runtime.KeepAlive(rpd)
+	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("getSamplePositions:count:"), unsafe.Pointer(positions), count)
+	return _r
 }
 
 // ColorAttachments returns the color attachments.

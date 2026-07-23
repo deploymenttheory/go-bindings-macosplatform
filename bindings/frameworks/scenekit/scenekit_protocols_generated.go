@@ -72,9 +72,9 @@ type AnimationProtocol interface {
 
 // BoundingVolume is the Go form of the Objective-C protocol SCNBoundingVolume.
 type BoundingVolume interface {
-	GetBoundingBoxMinMax(min obj.Object, max obj.Object) bool
-	SetBoundingBoxMinMax(min obj.Object, max obj.Object)
-	GetBoundingSphereCenterRadius(center obj.Object, radius obj.Object) bool
+	GetBoundingBoxMinMax(min *SCNVector3, max *SCNVector3) bool
+	SetBoundingBoxMinMax(min *SCNVector3, max *SCNVector3)
+	GetBoundingSphereCenterRadius(center *SCNVector3, radius obj.Object) bool
 }
 
 // BufferStream is the Go form of the Objective-C protocol SCNBufferStream.

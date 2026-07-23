@@ -7,6 +7,7 @@ package openscripting
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -16,67 +17,67 @@ import (
 var _fnASCopySourceAttributes func(unsafe.Pointer, unsafe.Pointer) int32
 
 // ASCopySourceAttributes calls the OpenScripting framework function ASCopySourceAttributes.
-func ASCopySourceAttributes(scriptingComponent unsafe.Pointer, resultingSourceAttributes unsafe.Pointer) int {
+func ASCopySourceAttributes(scriptingComponent *carboncore.ComponentInstanceRecord, resultingSourceAttributes unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnASCopySourceAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnASCopySourceAttributes, _lib, "ASCopySourceAttributes")
 	}
-	return int(_fnASCopySourceAttributes(scriptingComponent, resultingSourceAttributes))
+	return int(_fnASCopySourceAttributes(unsafe.Pointer(scriptingComponent), resultingSourceAttributes))
 }
 
 var _fnASGetSourceStyleNames func(unsafe.Pointer, int, unsafe.Pointer) int32
 
 // ASGetSourceStyleNames calls the OpenScripting framework function ASGetSourceStyleNames.
-func ASGetSourceStyleNames(scriptingComponent unsafe.Pointer, modeFlags int, resultingSourceStyleNamesList unsafe.Pointer) int {
+func ASGetSourceStyleNames(scriptingComponent *carboncore.ComponentInstanceRecord, modeFlags int, resultingSourceStyleNamesList unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnASGetSourceStyleNames == nil {
 		ebipurego.RegisterLibFunc(&_fnASGetSourceStyleNames, _lib, "ASGetSourceStyleNames")
 	}
-	return int(_fnASGetSourceStyleNames(scriptingComponent, modeFlags, resultingSourceStyleNamesList))
+	return int(_fnASGetSourceStyleNames(unsafe.Pointer(scriptingComponent), modeFlags, resultingSourceStyleNamesList))
 }
 
 var _fnASGetSourceStyles func(unsafe.Pointer, unsafe.Pointer) int32
 
 // ASGetSourceStyles calls the OpenScripting framework function ASGetSourceStyles.
-func ASGetSourceStyles(scriptingComponent unsafe.Pointer, resultingSourceStyles unsafe.Pointer) int {
+func ASGetSourceStyles(scriptingComponent *carboncore.ComponentInstanceRecord, resultingSourceStyles unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnASGetSourceStyles == nil {
 		ebipurego.RegisterLibFunc(&_fnASGetSourceStyles, _lib, "ASGetSourceStyles")
 	}
-	return int(_fnASGetSourceStyles(scriptingComponent, resultingSourceStyles))
+	return int(_fnASGetSourceStyles(unsafe.Pointer(scriptingComponent), resultingSourceStyles))
 }
 
 var _fnASInit func(unsafe.Pointer, int, int, int, int, int, int, int) int32
 
 // ASInit calls the OpenScripting framework function ASInit.
-func ASInit(scriptingComponent unsafe.Pointer, modeFlags int, minStackSize int, preferredStackSize int, maxStackSize int, minHeapSize int, preferredHeapSize int, maxHeapSize int) int {
+func ASInit(scriptingComponent *carboncore.ComponentInstanceRecord, modeFlags int, minStackSize int, preferredStackSize int, maxStackSize int, minHeapSize int, preferredHeapSize int, maxHeapSize int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnASInit == nil {
 		ebipurego.RegisterLibFunc(&_fnASInit, _lib, "ASInit")
 	}
-	return int(_fnASInit(scriptingComponent, modeFlags, minStackSize, preferredStackSize, maxStackSize, minHeapSize, preferredHeapSize, maxHeapSize))
+	return int(_fnASInit(unsafe.Pointer(scriptingComponent), modeFlags, minStackSize, preferredStackSize, maxStackSize, minHeapSize, preferredHeapSize, maxHeapSize))
 }
 
 var _fnASSetSourceAttributes func(unsafe.Pointer, objc.ID) int32
 
 // ASSetSourceAttributes calls the OpenScripting framework function ASSetSourceAttributes.
-func ASSetSourceAttributes(scriptingComponent unsafe.Pointer, sourceAttributes obj.Object) int {
+func ASSetSourceAttributes(scriptingComponent *carboncore.ComponentInstanceRecord, sourceAttributes obj.Object) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnASSetSourceAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnASSetSourceAttributes, _lib, "ASSetSourceAttributes")
 	}
-	return int(_fnASSetSourceAttributes(scriptingComponent, objref.IDOf(sourceAttributes)))
+	return int(_fnASSetSourceAttributes(unsafe.Pointer(scriptingComponent), objref.IDOf(sourceAttributes)))
 }
 
 var _fnASSetSourceStyles func(unsafe.Pointer, unsafe.Pointer) int32
 
 // ASSetSourceStyles calls the OpenScripting framework function ASSetSourceStyles.
-func ASSetSourceStyles(scriptingComponent unsafe.Pointer, sourceStyles unsafe.Pointer) int {
+func ASSetSourceStyles(scriptingComponent *carboncore.ComponentInstanceRecord, sourceStyles unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnASSetSourceStyles == nil {
 		ebipurego.RegisterLibFunc(&_fnASSetSourceStyles, _lib, "ASSetSourceStyles")
 	}
-	return int(_fnASSetSourceStyles(scriptingComponent, sourceStyles))
+	return int(_fnASSetSourceStyles(unsafe.Pointer(scriptingComponent), sourceStyles))
 }
 
 var _fnOSAAddStorageType func(unsafe.Pointer, int) int16
@@ -93,121 +94,121 @@ func OSAAddStorageType(scriptData unsafe.Pointer, dscType int) int16 {
 var _fnOSAAvailableDialectCodeList func(unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAAvailableDialectCodeList calls the OpenScripting framework function OSAAvailableDialectCodeList.
-func OSAAvailableDialectCodeList(scriptingComponent unsafe.Pointer, resultingDialectCodeList unsafe.Pointer) int {
+func OSAAvailableDialectCodeList(scriptingComponent *carboncore.ComponentInstanceRecord, resultingDialectCodeList unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAAvailableDialectCodeList == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAAvailableDialectCodeList, _lib, "OSAAvailableDialectCodeList")
 	}
-	return int(_fnOSAAvailableDialectCodeList(scriptingComponent, resultingDialectCodeList))
+	return int(_fnOSAAvailableDialectCodeList(unsafe.Pointer(scriptingComponent), resultingDialectCodeList))
 }
 
 var _fnOSAAvailableDialects func(unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAAvailableDialects calls the OpenScripting framework function OSAAvailableDialects.
-func OSAAvailableDialects(scriptingComponent unsafe.Pointer, resultingDialectInfoList unsafe.Pointer) int {
+func OSAAvailableDialects(scriptingComponent *carboncore.ComponentInstanceRecord, resultingDialectInfoList unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAAvailableDialects == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAAvailableDialects, _lib, "OSAAvailableDialects")
 	}
-	return int(_fnOSAAvailableDialects(scriptingComponent, resultingDialectInfoList))
+	return int(_fnOSAAvailableDialects(unsafe.Pointer(scriptingComponent), resultingDialectInfoList))
 }
 
 var _fnOSACoerceFromDesc func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // OSACoerceFromDesc calls the OpenScripting framework function OSACoerceFromDesc.
-func OSACoerceFromDesc(scriptingComponent unsafe.Pointer, scriptData unsafe.Pointer, modeFlags int) (result int, resultingScriptID int) {
+func OSACoerceFromDesc(scriptingComponent *carboncore.ComponentInstanceRecord, scriptData unsafe.Pointer, modeFlags int) (result int, resultingScriptID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSACoerceFromDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnOSACoerceFromDesc, _lib, "OSACoerceFromDesc")
 	}
 	var _out0 int
-	_ret := int(_fnOSACoerceFromDesc(scriptingComponent, scriptData, modeFlags, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSACoerceFromDesc(unsafe.Pointer(scriptingComponent), scriptData, modeFlags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSACoerceToDesc func(unsafe.Pointer, int, int, int, unsafe.Pointer) int32
 
 // OSACoerceToDesc calls the OpenScripting framework function OSACoerceToDesc.
-func OSACoerceToDesc(scriptingComponent unsafe.Pointer, scriptID int, desiredType int, modeFlags int, result unsafe.Pointer) int {
+func OSACoerceToDesc(scriptingComponent *carboncore.ComponentInstanceRecord, scriptID int, desiredType int, modeFlags int, result unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSACoerceToDesc == nil {
 		ebipurego.RegisterLibFunc(&_fnOSACoerceToDesc, _lib, "OSACoerceToDesc")
 	}
-	return int(_fnOSACoerceToDesc(scriptingComponent, scriptID, desiredType, modeFlags, result))
+	return int(_fnOSACoerceToDesc(unsafe.Pointer(scriptingComponent), scriptID, desiredType, modeFlags, result))
 }
 
 var _fnOSACompile func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // OSACompile calls the OpenScripting framework function OSACompile.
-func OSACompile(scriptingComponent unsafe.Pointer, sourceData unsafe.Pointer, modeFlags int) (result int, previousAndResultingScriptID int) {
+func OSACompile(scriptingComponent *carboncore.ComponentInstanceRecord, sourceData unsafe.Pointer, modeFlags int) (result int, previousAndResultingScriptID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSACompile == nil {
 		ebipurego.RegisterLibFunc(&_fnOSACompile, _lib, "OSACompile")
 	}
 	var _out0 int
-	_ret := int(_fnOSACompile(scriptingComponent, sourceData, modeFlags, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSACompile(unsafe.Pointer(scriptingComponent), sourceData, modeFlags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSACompileExecute func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // OSACompileExecute calls the OpenScripting framework function OSACompileExecute.
-func OSACompileExecute(scriptingComponent unsafe.Pointer, sourceData unsafe.Pointer, contextID int, modeFlags int) (result int, resultingScriptValueID int) {
+func OSACompileExecute(scriptingComponent *carboncore.ComponentInstanceRecord, sourceData unsafe.Pointer, contextID int, modeFlags int) (result int, resultingScriptValueID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSACompileExecute == nil {
 		ebipurego.RegisterLibFunc(&_fnOSACompileExecute, _lib, "OSACompileExecute")
 	}
 	var _out0 int
-	_ret := int(_fnOSACompileExecute(scriptingComponent, sourceData, contextID, modeFlags, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSACompileExecute(unsafe.Pointer(scriptingComponent), sourceData, contextID, modeFlags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSACopyDisplayString func(unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // OSACopyDisplayString calls the OpenScripting framework function OSACopyDisplayString.
-func OSACopyDisplayString(scriptingComponent unsafe.Pointer, scriptID int, modeFlags int, result unsafe.Pointer) int {
+func OSACopyDisplayString(scriptingComponent *carboncore.ComponentInstanceRecord, scriptID int, modeFlags int, result unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSACopyDisplayString == nil {
 		ebipurego.RegisterLibFunc(&_fnOSACopyDisplayString, _lib, "OSACopyDisplayString")
 	}
-	return int(_fnOSACopyDisplayString(scriptingComponent, scriptID, modeFlags, result))
+	return int(_fnOSACopyDisplayString(unsafe.Pointer(scriptingComponent), scriptID, modeFlags, result))
 }
 
 var _fnOSACopyID func(unsafe.Pointer, int, unsafe.Pointer) int32
 
 // OSACopyID calls the OpenScripting framework function OSACopyID.
-func OSACopyID(scriptingComponent unsafe.Pointer, fromID int) (result int, toID int) {
+func OSACopyID(scriptingComponent *carboncore.ComponentInstanceRecord, fromID int) (result int, toID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSACopyID == nil {
 		ebipurego.RegisterLibFunc(&_fnOSACopyID, _lib, "OSACopyID")
 	}
 	var _out0 int
-	_ret := int(_fnOSACopyID(scriptingComponent, fromID, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSACopyID(unsafe.Pointer(scriptingComponent), fromID, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSACopyScript func(unsafe.Pointer, int, unsafe.Pointer) int32
 
 // OSACopyScript calls the OpenScripting framework function OSACopyScript.
-func OSACopyScript(scriptingComponent unsafe.Pointer, fromID int) (result int, toID int) {
+func OSACopyScript(scriptingComponent *carboncore.ComponentInstanceRecord, fromID int) (result int, toID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSACopyScript == nil {
 		ebipurego.RegisterLibFunc(&_fnOSACopyScript, _lib, "OSACopyScript")
 	}
 	var _out0 int
-	_ret := int(_fnOSACopyScript(scriptingComponent, fromID, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSACopyScript(unsafe.Pointer(scriptingComponent), fromID, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSACopyScriptingDefinition func(unsafe.Pointer, int, unsafe.Pointer) int32
 
 // OSACopyScriptingDefinition calls the OpenScripting framework function OSACopyScriptingDefinition.
-func OSACopyScriptingDefinition(ref unsafe.Pointer, modeFlags int, sdef unsafe.Pointer) int {
+func OSACopyScriptingDefinition(ref *carboncore.FSRef, modeFlags int, sdef unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSACopyScriptingDefinition == nil {
 		ebipurego.RegisterLibFunc(&_fnOSACopyScriptingDefinition, _lib, "OSACopyScriptingDefinition")
 	}
-	return int(_fnOSACopyScriptingDefinition(ref, modeFlags, sdef))
+	return int(_fnOSACopyScriptingDefinition(unsafe.Pointer(ref), modeFlags, sdef))
 }
 
 var _fnOSACopyScriptingDefinitionFromURL func(objc.ID, int, unsafe.Pointer) int32
@@ -224,224 +225,224 @@ func OSACopyScriptingDefinitionFromURL(url obj.Object, modeFlags int, sdef unsaf
 var _fnOSACopySourceString func(unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // OSACopySourceString calls the OpenScripting framework function OSACopySourceString.
-func OSACopySourceString(scriptingComponent unsafe.Pointer, scriptID int, modeFlags int, result unsafe.Pointer) int {
+func OSACopySourceString(scriptingComponent *carboncore.ComponentInstanceRecord, scriptID int, modeFlags int, result unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSACopySourceString == nil {
 		ebipurego.RegisterLibFunc(&_fnOSACopySourceString, _lib, "OSACopySourceString")
 	}
-	return int(_fnOSACopySourceString(scriptingComponent, scriptID, modeFlags, result))
+	return int(_fnOSACopySourceString(unsafe.Pointer(scriptingComponent), scriptID, modeFlags, result))
 }
 
 var _fnOSADisplay func(unsafe.Pointer, int, int, int, unsafe.Pointer) int32
 
 // OSADisplay calls the OpenScripting framework function OSADisplay.
-func OSADisplay(scriptingComponent unsafe.Pointer, scriptValueID int, desiredType int, modeFlags int, resultingText unsafe.Pointer) int {
+func OSADisplay(scriptingComponent *carboncore.ComponentInstanceRecord, scriptValueID int, desiredType int, modeFlags int, resultingText unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSADisplay == nil {
 		ebipurego.RegisterLibFunc(&_fnOSADisplay, _lib, "OSADisplay")
 	}
-	return int(_fnOSADisplay(scriptingComponent, scriptValueID, desiredType, modeFlags, resultingText))
+	return int(_fnOSADisplay(unsafe.Pointer(scriptingComponent), scriptValueID, desiredType, modeFlags, resultingText))
 }
 
 var _fnOSADispose func(unsafe.Pointer, int) int32
 
 // OSADispose calls the OpenScripting framework function OSADispose.
-func OSADispose(scriptingComponent unsafe.Pointer, scriptID int) int {
+func OSADispose(scriptingComponent *carboncore.ComponentInstanceRecord, scriptID int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSADispose == nil {
 		ebipurego.RegisterLibFunc(&_fnOSADispose, _lib, "OSADispose")
 	}
-	return int(_fnOSADispose(scriptingComponent, scriptID))
+	return int(_fnOSADispose(unsafe.Pointer(scriptingComponent), scriptID))
 }
 
 var _fnOSADoEvent func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // OSADoEvent calls the OpenScripting framework function OSADoEvent.
-func OSADoEvent(scriptingComponent unsafe.Pointer, theAppleEvent unsafe.Pointer, contextID int, modeFlags int, reply unsafe.Pointer) int {
+func OSADoEvent(scriptingComponent *carboncore.ComponentInstanceRecord, theAppleEvent unsafe.Pointer, contextID int, modeFlags int, reply unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSADoEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnOSADoEvent, _lib, "OSADoEvent")
 	}
-	return int(_fnOSADoEvent(scriptingComponent, theAppleEvent, contextID, modeFlags, reply))
+	return int(_fnOSADoEvent(unsafe.Pointer(scriptingComponent), theAppleEvent, contextID, modeFlags, reply))
 }
 
 var _fnOSADoScript func(unsafe.Pointer, unsafe.Pointer, int, int, int, unsafe.Pointer) int32
 
 // OSADoScript calls the OpenScripting framework function OSADoScript.
-func OSADoScript(scriptingComponent unsafe.Pointer, sourceData unsafe.Pointer, contextID int, desiredType int, modeFlags int, resultingText unsafe.Pointer) int {
+func OSADoScript(scriptingComponent *carboncore.ComponentInstanceRecord, sourceData unsafe.Pointer, contextID int, desiredType int, modeFlags int, resultingText unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSADoScript == nil {
 		ebipurego.RegisterLibFunc(&_fnOSADoScript, _lib, "OSADoScript")
 	}
-	return int(_fnOSADoScript(scriptingComponent, sourceData, contextID, desiredType, modeFlags, resultingText))
+	return int(_fnOSADoScript(unsafe.Pointer(scriptingComponent), sourceData, contextID, desiredType, modeFlags, resultingText))
 }
 
 var _fnOSADoScriptFile func(unsafe.Pointer, unsafe.Pointer, int, int, int, unsafe.Pointer) int32
 
 // OSADoScriptFile calls the OpenScripting framework function OSADoScriptFile.
-func OSADoScriptFile(scriptingComponent unsafe.Pointer, scriptFile unsafe.Pointer, contextID int, desiredType int, modeFlags int, resultingText unsafe.Pointer) int {
+func OSADoScriptFile(scriptingComponent *carboncore.ComponentInstanceRecord, scriptFile *carboncore.FSRef, contextID int, desiredType int, modeFlags int, resultingText unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSADoScriptFile == nil {
 		ebipurego.RegisterLibFunc(&_fnOSADoScriptFile, _lib, "OSADoScriptFile")
 	}
-	return int(_fnOSADoScriptFile(scriptingComponent, scriptFile, contextID, desiredType, modeFlags, resultingText))
+	return int(_fnOSADoScriptFile(unsafe.Pointer(scriptingComponent), unsafe.Pointer(scriptFile), contextID, desiredType, modeFlags, resultingText))
 }
 
 var _fnOSAExecute func(unsafe.Pointer, int, int, int, unsafe.Pointer) int32
 
 // OSAExecute calls the OpenScripting framework function OSAExecute.
-func OSAExecute(scriptingComponent unsafe.Pointer, compiledScriptID int, contextID int, modeFlags int) (result int, resultingScriptValueID int) {
+func OSAExecute(scriptingComponent *carboncore.ComponentInstanceRecord, compiledScriptID int, contextID int, modeFlags int) (result int, resultingScriptValueID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAExecute == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAExecute, _lib, "OSAExecute")
 	}
 	var _out0 int
-	_ret := int(_fnOSAExecute(scriptingComponent, compiledScriptID, contextID, modeFlags, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSAExecute(unsafe.Pointer(scriptingComponent), compiledScriptID, contextID, modeFlags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSAExecuteEvent func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // OSAExecuteEvent calls the OpenScripting framework function OSAExecuteEvent.
-func OSAExecuteEvent(scriptingComponent unsafe.Pointer, theAppleEvent unsafe.Pointer, contextID int, modeFlags int) (result int, resultingScriptValueID int) {
+func OSAExecuteEvent(scriptingComponent *carboncore.ComponentInstanceRecord, theAppleEvent unsafe.Pointer, contextID int, modeFlags int) (result int, resultingScriptValueID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAExecuteEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAExecuteEvent, _lib, "OSAExecuteEvent")
 	}
 	var _out0 int
-	_ret := int(_fnOSAExecuteEvent(scriptingComponent, theAppleEvent, contextID, modeFlags, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSAExecuteEvent(unsafe.Pointer(scriptingComponent), theAppleEvent, contextID, modeFlags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSAGenericToRealID func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAGenericToRealID calls the OpenScripting framework function OSAGenericToRealID.
-func OSAGenericToRealID(genericScriptingComponent unsafe.Pointer, theExactComponent unsafe.Pointer) (result int, theScriptID int) {
+func OSAGenericToRealID(genericScriptingComponent *carboncore.ComponentInstanceRecord, theExactComponent unsafe.Pointer) (result int, theScriptID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGenericToRealID == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGenericToRealID, _lib, "OSAGenericToRealID")
 	}
 	var _out0 int
-	_ret := int(_fnOSAGenericToRealID(genericScriptingComponent, unsafe.Pointer(&_out0), theExactComponent))
+	_ret := int(_fnOSAGenericToRealID(unsafe.Pointer(genericScriptingComponent), unsafe.Pointer(&_out0), theExactComponent))
 	return _ret, _out0
 }
 
 var _fnOSAGetActiveProc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAGetActiveProc calls the OpenScripting framework function OSAGetActiveProc.
-func OSAGetActiveProc(scriptingComponent unsafe.Pointer, activeProc unsafe.Pointer, refCon unsafe.Pointer) int {
+func OSAGetActiveProc(scriptingComponent *carboncore.ComponentInstanceRecord, activeProc unsafe.Pointer, refCon unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetActiveProc == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetActiveProc, _lib, "OSAGetActiveProc")
 	}
-	return int(_fnOSAGetActiveProc(scriptingComponent, activeProc, refCon))
+	return int(_fnOSAGetActiveProc(unsafe.Pointer(scriptingComponent), activeProc, refCon))
 }
 
 var _fnOSAGetCreateProc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAGetCreateProc calls the OpenScripting framework function OSAGetCreateProc.
-func OSAGetCreateProc(scriptingComponent unsafe.Pointer, createProc unsafe.Pointer, refCon unsafe.Pointer) int {
+func OSAGetCreateProc(scriptingComponent *carboncore.ComponentInstanceRecord, createProc unsafe.Pointer, refCon unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetCreateProc == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetCreateProc, _lib, "OSAGetCreateProc")
 	}
-	return int(_fnOSAGetCreateProc(scriptingComponent, createProc, refCon))
+	return int(_fnOSAGetCreateProc(unsafe.Pointer(scriptingComponent), createProc, refCon))
 }
 
 var _fnOSAGetCurrentDialect func(unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAGetCurrentDialect calls the OpenScripting framework function OSAGetCurrentDialect.
-func OSAGetCurrentDialect(scriptingComponent unsafe.Pointer) (result int, resultingDialectCode int16) {
+func OSAGetCurrentDialect(scriptingComponent *carboncore.ComponentInstanceRecord) (result int, resultingDialectCode int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetCurrentDialect == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetCurrentDialect, _lib, "OSAGetCurrentDialect")
 	}
 	var _out0 int16
-	_ret := int(_fnOSAGetCurrentDialect(scriptingComponent, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSAGetCurrentDialect(unsafe.Pointer(scriptingComponent), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSAGetDefaultScriptingComponent func(unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAGetDefaultScriptingComponent calls the OpenScripting framework function OSAGetDefaultScriptingComponent.
-func OSAGetDefaultScriptingComponent(genericScriptingComponent unsafe.Pointer) (result int, scriptingSubType int) {
+func OSAGetDefaultScriptingComponent(genericScriptingComponent *carboncore.ComponentInstanceRecord) (result int, scriptingSubType int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetDefaultScriptingComponent == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetDefaultScriptingComponent, _lib, "OSAGetDefaultScriptingComponent")
 	}
 	var _out0 int
-	_ret := int(_fnOSAGetDefaultScriptingComponent(genericScriptingComponent, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSAGetDefaultScriptingComponent(unsafe.Pointer(genericScriptingComponent), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSAGetDialectInfo func(unsafe.Pointer, int16, int, unsafe.Pointer) int32
 
 // OSAGetDialectInfo calls the OpenScripting framework function OSAGetDialectInfo.
-func OSAGetDialectInfo(scriptingComponent unsafe.Pointer, dialectCode int16, selector int, resultingDialectInfo unsafe.Pointer) int {
+func OSAGetDialectInfo(scriptingComponent *carboncore.ComponentInstanceRecord, dialectCode int16, selector int, resultingDialectInfo unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetDialectInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetDialectInfo, _lib, "OSAGetDialectInfo")
 	}
-	return int(_fnOSAGetDialectInfo(scriptingComponent, dialectCode, selector, resultingDialectInfo))
+	return int(_fnOSAGetDialectInfo(unsafe.Pointer(scriptingComponent), dialectCode, selector, resultingDialectInfo))
 }
 
 var _fnOSAGetHandler func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAGetHandler calls the OpenScripting framework function OSAGetHandler.
-func OSAGetHandler(scriptingComponent unsafe.Pointer, modeFlags int, contextID int, handlerName unsafe.Pointer) (result int, resultingCompiledScriptID int) {
+func OSAGetHandler(scriptingComponent *carboncore.ComponentInstanceRecord, modeFlags int, contextID int, handlerName unsafe.Pointer) (result int, resultingCompiledScriptID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetHandler, _lib, "OSAGetHandler")
 	}
 	var _out0 int
-	_ret := int(_fnOSAGetHandler(scriptingComponent, modeFlags, contextID, handlerName, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSAGetHandler(unsafe.Pointer(scriptingComponent), modeFlags, contextID, handlerName, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSAGetHandlerNames func(unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // OSAGetHandlerNames calls the OpenScripting framework function OSAGetHandlerNames.
-func OSAGetHandlerNames(scriptingComponent unsafe.Pointer, modeFlags int, contextID int, resultingHandlerNames unsafe.Pointer) int {
+func OSAGetHandlerNames(scriptingComponent *carboncore.ComponentInstanceRecord, modeFlags int, contextID int, resultingHandlerNames unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetHandlerNames == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetHandlerNames, _lib, "OSAGetHandlerNames")
 	}
-	return int(_fnOSAGetHandlerNames(scriptingComponent, modeFlags, contextID, resultingHandlerNames))
+	return int(_fnOSAGetHandlerNames(unsafe.Pointer(scriptingComponent), modeFlags, contextID, resultingHandlerNames))
 }
 
 var _fnOSAGetProperty func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAGetProperty calls the OpenScripting framework function OSAGetProperty.
-func OSAGetProperty(scriptingComponent unsafe.Pointer, modeFlags int, contextID int, variableName unsafe.Pointer) (result int, resultingScriptValueID int) {
+func OSAGetProperty(scriptingComponent *carboncore.ComponentInstanceRecord, modeFlags int, contextID int, variableName unsafe.Pointer) (result int, resultingScriptValueID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetProperty, _lib, "OSAGetProperty")
 	}
 	var _out0 int
-	_ret := int(_fnOSAGetProperty(scriptingComponent, modeFlags, contextID, variableName, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSAGetProperty(unsafe.Pointer(scriptingComponent), modeFlags, contextID, variableName, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSAGetPropertyNames func(unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // OSAGetPropertyNames calls the OpenScripting framework function OSAGetPropertyNames.
-func OSAGetPropertyNames(scriptingComponent unsafe.Pointer, modeFlags int, contextID int, resultingPropertyNames unsafe.Pointer) int {
+func OSAGetPropertyNames(scriptingComponent *carboncore.ComponentInstanceRecord, modeFlags int, contextID int, resultingPropertyNames unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetPropertyNames == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetPropertyNames, _lib, "OSAGetPropertyNames")
 	}
-	return int(_fnOSAGetPropertyNames(scriptingComponent, modeFlags, contextID, resultingPropertyNames))
+	return int(_fnOSAGetPropertyNames(unsafe.Pointer(scriptingComponent), modeFlags, contextID, resultingPropertyNames))
 }
 
 var _fnOSAGetResumeDispatchProc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAGetResumeDispatchProc calls the OpenScripting framework function OSAGetResumeDispatchProc.
-func OSAGetResumeDispatchProc(scriptingComponent unsafe.Pointer, resumeDispatchProc unsafe.Pointer, refCon unsafe.Pointer) int {
+func OSAGetResumeDispatchProc(scriptingComponent *carboncore.ComponentInstanceRecord, resumeDispatchProc unsafe.Pointer, refCon unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetResumeDispatchProc == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetResumeDispatchProc, _lib, "OSAGetResumeDispatchProc")
 	}
-	return int(_fnOSAGetResumeDispatchProc(scriptingComponent, resumeDispatchProc, refCon))
+	return int(_fnOSAGetResumeDispatchProc(unsafe.Pointer(scriptingComponent), resumeDispatchProc, refCon))
 }
 
 var _fnOSAGetScriptDataFromURL func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
@@ -460,60 +461,60 @@ func OSAGetScriptDataFromURL(scriptURL obj.Object, modeFlags int, resultingScrip
 var _fnOSAGetScriptInfo func(unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // OSAGetScriptInfo calls the OpenScripting framework function OSAGetScriptInfo.
-func OSAGetScriptInfo(scriptingComponent unsafe.Pointer, scriptID int, selector int) (result int, result_ int64) {
+func OSAGetScriptInfo(scriptingComponent *carboncore.ComponentInstanceRecord, scriptID int, selector int) (result int, result_ int64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetScriptInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetScriptInfo, _lib, "OSAGetScriptInfo")
 	}
 	var _out0 int64
-	_ret := int(_fnOSAGetScriptInfo(scriptingComponent, scriptID, selector, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSAGetScriptInfo(unsafe.Pointer(scriptingComponent), scriptID, selector, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSAGetScriptingComponent func(unsafe.Pointer, int, unsafe.Pointer) int32
 
 // OSAGetScriptingComponent calls the OpenScripting framework function OSAGetScriptingComponent.
-func OSAGetScriptingComponent(genericScriptingComponent unsafe.Pointer, scriptingSubType int, scriptingInstance unsafe.Pointer) int {
+func OSAGetScriptingComponent(genericScriptingComponent *carboncore.ComponentInstanceRecord, scriptingSubType int, scriptingInstance unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetScriptingComponent == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetScriptingComponent, _lib, "OSAGetScriptingComponent")
 	}
-	return int(_fnOSAGetScriptingComponent(genericScriptingComponent, scriptingSubType, scriptingInstance))
+	return int(_fnOSAGetScriptingComponent(unsafe.Pointer(genericScriptingComponent), scriptingSubType, scriptingInstance))
 }
 
 var _fnOSAGetScriptingComponentFromStored func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAGetScriptingComponentFromStored calls the OpenScripting framework function OSAGetScriptingComponentFromStored.
-func OSAGetScriptingComponentFromStored(genericScriptingComponent unsafe.Pointer, scriptData unsafe.Pointer) (result int, scriptingSubType int) {
+func OSAGetScriptingComponentFromStored(genericScriptingComponent *carboncore.ComponentInstanceRecord, scriptData unsafe.Pointer) (result int, scriptingSubType int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetScriptingComponentFromStored == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetScriptingComponentFromStored, _lib, "OSAGetScriptingComponentFromStored")
 	}
 	var _out0 int
-	_ret := int(_fnOSAGetScriptingComponentFromStored(genericScriptingComponent, scriptData, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSAGetScriptingComponentFromStored(unsafe.Pointer(genericScriptingComponent), scriptData, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSAGetSendProc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAGetSendProc calls the OpenScripting framework function OSAGetSendProc.
-func OSAGetSendProc(scriptingComponent unsafe.Pointer, sendProc unsafe.Pointer, refCon unsafe.Pointer) int {
+func OSAGetSendProc(scriptingComponent *carboncore.ComponentInstanceRecord, sendProc unsafe.Pointer, refCon unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetSendProc == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetSendProc, _lib, "OSAGetSendProc")
 	}
-	return int(_fnOSAGetSendProc(scriptingComponent, sendProc, refCon))
+	return int(_fnOSAGetSendProc(unsafe.Pointer(scriptingComponent), sendProc, refCon))
 }
 
 var _fnOSAGetSource func(unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // OSAGetSource calls the OpenScripting framework function OSAGetSource.
-func OSAGetSource(scriptingComponent unsafe.Pointer, scriptID int, desiredType int, resultingSourceData unsafe.Pointer) int {
+func OSAGetSource(scriptingComponent *carboncore.ComponentInstanceRecord, scriptID int, desiredType int, resultingSourceData unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetSource == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetSource, _lib, "OSAGetSource")
 	}
-	return int(_fnOSAGetSource(scriptingComponent, scriptID, desiredType, resultingSourceData))
+	return int(_fnOSAGetSource(unsafe.Pointer(scriptingComponent), scriptID, desiredType, resultingSourceData))
 }
 
 var _fnOSAGetStorageType func(unsafe.Pointer, unsafe.Pointer) int16
@@ -532,103 +533,103 @@ func OSAGetStorageType(scriptData unsafe.Pointer) (result int16, dscType int) {
 var _fnOSAGetSysTerminology func(unsafe.Pointer, int, int16, unsafe.Pointer) int32
 
 // OSAGetSysTerminology calls the OpenScripting framework function OSAGetSysTerminology.
-func OSAGetSysTerminology(scriptingComponent unsafe.Pointer, modeFlags int, terminologyID int16, terminologyList unsafe.Pointer) int {
+func OSAGetSysTerminology(scriptingComponent *carboncore.ComponentInstanceRecord, modeFlags int, terminologyID int16, terminologyList unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetSysTerminology == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetSysTerminology, _lib, "OSAGetSysTerminology")
 	}
-	return int(_fnOSAGetSysTerminology(scriptingComponent, modeFlags, terminologyID, terminologyList))
+	return int(_fnOSAGetSysTerminology(unsafe.Pointer(scriptingComponent), modeFlags, terminologyID, terminologyList))
 }
 
 var _fnOSALoad func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // OSALoad calls the OpenScripting framework function OSALoad.
-func OSALoad(scriptingComponent unsafe.Pointer, scriptData unsafe.Pointer, modeFlags int) (result int, resultingScriptID int) {
+func OSALoad(scriptingComponent *carboncore.ComponentInstanceRecord, scriptData unsafe.Pointer, modeFlags int) (result int, resultingScriptID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSALoad == nil {
 		ebipurego.RegisterLibFunc(&_fnOSALoad, _lib, "OSALoad")
 	}
 	var _out0 int
-	_ret := int(_fnOSALoad(scriptingComponent, scriptData, modeFlags, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSALoad(unsafe.Pointer(scriptingComponent), scriptData, modeFlags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSALoadExecute func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // OSALoadExecute calls the OpenScripting framework function OSALoadExecute.
-func OSALoadExecute(scriptingComponent unsafe.Pointer, scriptData unsafe.Pointer, contextID int, modeFlags int) (result int, resultingScriptValueID int) {
+func OSALoadExecute(scriptingComponent *carboncore.ComponentInstanceRecord, scriptData unsafe.Pointer, contextID int, modeFlags int) (result int, resultingScriptValueID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSALoadExecute == nil {
 		ebipurego.RegisterLibFunc(&_fnOSALoadExecute, _lib, "OSALoadExecute")
 	}
 	var _out0 int
-	_ret := int(_fnOSALoadExecute(scriptingComponent, scriptData, contextID, modeFlags, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSALoadExecute(unsafe.Pointer(scriptingComponent), scriptData, contextID, modeFlags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSALoadExecuteFile func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // OSALoadExecuteFile calls the OpenScripting framework function OSALoadExecuteFile.
-func OSALoadExecuteFile(scriptingComponent unsafe.Pointer, scriptFile unsafe.Pointer, contextID int, modeFlags int) (result int, resultingScriptValueID int) {
+func OSALoadExecuteFile(scriptingComponent *carboncore.ComponentInstanceRecord, scriptFile *carboncore.FSRef, contextID int, modeFlags int) (result int, resultingScriptValueID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSALoadExecuteFile == nil {
 		ebipurego.RegisterLibFunc(&_fnOSALoadExecuteFile, _lib, "OSALoadExecuteFile")
 	}
 	var _out0 int
-	_ret := int(_fnOSALoadExecuteFile(scriptingComponent, scriptFile, contextID, modeFlags, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSALoadExecuteFile(unsafe.Pointer(scriptingComponent), unsafe.Pointer(scriptFile), contextID, modeFlags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSALoadFile func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // OSALoadFile calls the OpenScripting framework function OSALoadFile.
-func OSALoadFile(scriptingComponent unsafe.Pointer, scriptFile unsafe.Pointer, modeFlags int) (result int, storable uint8, resultingScriptID int) {
+func OSALoadFile(scriptingComponent *carboncore.ComponentInstanceRecord, scriptFile *carboncore.FSRef, modeFlags int) (result int, storable uint8, resultingScriptID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSALoadFile == nil {
 		ebipurego.RegisterLibFunc(&_fnOSALoadFile, _lib, "OSALoadFile")
 	}
 	var _out0 uint8
 	var _out1 int
-	_ret := int(_fnOSALoadFile(scriptingComponent, scriptFile, unsafe.Pointer(&_out0), modeFlags, unsafe.Pointer(&_out1)))
+	_ret := int(_fnOSALoadFile(unsafe.Pointer(scriptingComponent), unsafe.Pointer(scriptFile), unsafe.Pointer(&_out0), modeFlags, unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
 var _fnOSALoadScriptData func(unsafe.Pointer, unsafe.Pointer, objc.ID, int, unsafe.Pointer) int32
 
 // OSALoadScriptData calls the OpenScripting framework function OSALoadScriptData.
-func OSALoadScriptData(scriptingComponent unsafe.Pointer, scriptData unsafe.Pointer, fromURL obj.Object, modeFlags int) (result int, resultingScriptID int) {
+func OSALoadScriptData(scriptingComponent *carboncore.ComponentInstanceRecord, scriptData unsafe.Pointer, fromURL obj.Object, modeFlags int) (result int, resultingScriptID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSALoadScriptData == nil {
 		ebipurego.RegisterLibFunc(&_fnOSALoadScriptData, _lib, "OSALoadScriptData")
 	}
 	var _out0 int
-	_ret := int(_fnOSALoadScriptData(scriptingComponent, scriptData, objref.IDOf(fromURL), modeFlags, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSALoadScriptData(unsafe.Pointer(scriptingComponent), scriptData, objref.IDOf(fromURL), modeFlags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSAMakeContext func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // OSAMakeContext calls the OpenScripting framework function OSAMakeContext.
-func OSAMakeContext(scriptingComponent unsafe.Pointer, contextName unsafe.Pointer, parentContext int) (result int, resultingContextID int) {
+func OSAMakeContext(scriptingComponent *carboncore.ComponentInstanceRecord, contextName unsafe.Pointer, parentContext int) (result int, resultingContextID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAMakeContext == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAMakeContext, _lib, "OSAMakeContext")
 	}
 	var _out0 int
-	_ret := int(_fnOSAMakeContext(scriptingComponent, contextName, parentContext, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSAMakeContext(unsafe.Pointer(scriptingComponent), contextName, parentContext, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSARealToGenericID func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // OSARealToGenericID calls the OpenScripting framework function OSARealToGenericID.
-func OSARealToGenericID(genericScriptingComponent unsafe.Pointer, theExactComponent unsafe.Pointer) (result int, theScriptID int) {
+func OSARealToGenericID(genericScriptingComponent *carboncore.ComponentInstanceRecord, theExactComponent *carboncore.ComponentInstanceRecord) (result int, theScriptID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSARealToGenericID == nil {
 		ebipurego.RegisterLibFunc(&_fnOSARealToGenericID, _lib, "OSARealToGenericID")
 	}
 	var _out0 int
-	_ret := int(_fnOSARealToGenericID(genericScriptingComponent, unsafe.Pointer(&_out0), theExactComponent))
+	_ret := int(_fnOSARealToGenericID(unsafe.Pointer(genericScriptingComponent), unsafe.Pointer(&_out0), unsafe.Pointer(theExactComponent)))
 	return _ret, _out0
 }
 
@@ -646,177 +647,177 @@ func OSARemoveStorageType(scriptData unsafe.Pointer) int16 {
 var _fnOSAScriptError func(unsafe.Pointer, int, int, unsafe.Pointer) int32
 
 // OSAScriptError calls the OpenScripting framework function OSAScriptError.
-func OSAScriptError(scriptingComponent unsafe.Pointer, selector int, desiredType int, resultingErrorDescription unsafe.Pointer) int {
+func OSAScriptError(scriptingComponent *carboncore.ComponentInstanceRecord, selector int, desiredType int, resultingErrorDescription unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAScriptError == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAScriptError, _lib, "OSAScriptError")
 	}
-	return int(_fnOSAScriptError(scriptingComponent, selector, desiredType, resultingErrorDescription))
+	return int(_fnOSAScriptError(unsafe.Pointer(scriptingComponent), selector, desiredType, resultingErrorDescription))
 }
 
 var _fnOSAScriptingComponentName func(unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAScriptingComponentName calls the OpenScripting framework function OSAScriptingComponentName.
-func OSAScriptingComponentName(scriptingComponent unsafe.Pointer, resultingScriptingComponentName unsafe.Pointer) int {
+func OSAScriptingComponentName(scriptingComponent *carboncore.ComponentInstanceRecord, resultingScriptingComponentName unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAScriptingComponentName == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAScriptingComponentName, _lib, "OSAScriptingComponentName")
 	}
-	return int(_fnOSAScriptingComponentName(scriptingComponent, resultingScriptingComponentName))
+	return int(_fnOSAScriptingComponentName(unsafe.Pointer(scriptingComponent), resultingScriptingComponentName))
 }
 
 var _fnOSASetActiveProc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // OSASetActiveProc calls the OpenScripting framework function OSASetActiveProc.
-func OSASetActiveProc(scriptingComponent unsafe.Pointer, activeProc unsafe.Pointer, refCon unsafe.Pointer) int {
+func OSASetActiveProc(scriptingComponent *carboncore.ComponentInstanceRecord, activeProc unsafe.Pointer, refCon unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSASetActiveProc == nil {
 		ebipurego.RegisterLibFunc(&_fnOSASetActiveProc, _lib, "OSASetActiveProc")
 	}
-	return int(_fnOSASetActiveProc(scriptingComponent, activeProc, refCon))
+	return int(_fnOSASetActiveProc(unsafe.Pointer(scriptingComponent), activeProc, refCon))
 }
 
 var _fnOSASetCreateProc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // OSASetCreateProc calls the OpenScripting framework function OSASetCreateProc.
-func OSASetCreateProc(scriptingComponent unsafe.Pointer, createProc unsafe.Pointer, refCon unsafe.Pointer) int {
+func OSASetCreateProc(scriptingComponent *carboncore.ComponentInstanceRecord, createProc unsafe.Pointer, refCon unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSASetCreateProc == nil {
 		ebipurego.RegisterLibFunc(&_fnOSASetCreateProc, _lib, "OSASetCreateProc")
 	}
-	return int(_fnOSASetCreateProc(scriptingComponent, createProc, refCon))
+	return int(_fnOSASetCreateProc(unsafe.Pointer(scriptingComponent), createProc, refCon))
 }
 
 var _fnOSASetCurrentDialect func(unsafe.Pointer, int16) int32
 
 // OSASetCurrentDialect calls the OpenScripting framework function OSASetCurrentDialect.
-func OSASetCurrentDialect(scriptingComponent unsafe.Pointer, dialectCode int16) int {
+func OSASetCurrentDialect(scriptingComponent *carboncore.ComponentInstanceRecord, dialectCode int16) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSASetCurrentDialect == nil {
 		ebipurego.RegisterLibFunc(&_fnOSASetCurrentDialect, _lib, "OSASetCurrentDialect")
 	}
-	return int(_fnOSASetCurrentDialect(scriptingComponent, dialectCode))
+	return int(_fnOSASetCurrentDialect(unsafe.Pointer(scriptingComponent), dialectCode))
 }
 
 var _fnOSASetDefaultScriptingComponent func(unsafe.Pointer, int) int32
 
 // OSASetDefaultScriptingComponent calls the OpenScripting framework function OSASetDefaultScriptingComponent.
-func OSASetDefaultScriptingComponent(genericScriptingComponent unsafe.Pointer, scriptingSubType int) int {
+func OSASetDefaultScriptingComponent(genericScriptingComponent *carboncore.ComponentInstanceRecord, scriptingSubType int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSASetDefaultScriptingComponent == nil {
 		ebipurego.RegisterLibFunc(&_fnOSASetDefaultScriptingComponent, _lib, "OSASetDefaultScriptingComponent")
 	}
-	return int(_fnOSASetDefaultScriptingComponent(genericScriptingComponent, scriptingSubType))
+	return int(_fnOSASetDefaultScriptingComponent(unsafe.Pointer(genericScriptingComponent), scriptingSubType))
 }
 
 var _fnOSASetDefaultTarget func(unsafe.Pointer, unsafe.Pointer) int32
 
 // OSASetDefaultTarget calls the OpenScripting framework function OSASetDefaultTarget.
-func OSASetDefaultTarget(scriptingComponent unsafe.Pointer, target unsafe.Pointer) int {
+func OSASetDefaultTarget(scriptingComponent *carboncore.ComponentInstanceRecord, target unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSASetDefaultTarget == nil {
 		ebipurego.RegisterLibFunc(&_fnOSASetDefaultTarget, _lib, "OSASetDefaultTarget")
 	}
-	return int(_fnOSASetDefaultTarget(scriptingComponent, target))
+	return int(_fnOSASetDefaultTarget(unsafe.Pointer(scriptingComponent), target))
 }
 
 var _fnOSASetHandler func(unsafe.Pointer, int, int, unsafe.Pointer, int) int32
 
 // OSASetHandler calls the OpenScripting framework function OSASetHandler.
-func OSASetHandler(scriptingComponent unsafe.Pointer, modeFlags int, contextID int, handlerName unsafe.Pointer, compiledScriptID int) int {
+func OSASetHandler(scriptingComponent *carboncore.ComponentInstanceRecord, modeFlags int, contextID int, handlerName unsafe.Pointer, compiledScriptID int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSASetHandler == nil {
 		ebipurego.RegisterLibFunc(&_fnOSASetHandler, _lib, "OSASetHandler")
 	}
-	return int(_fnOSASetHandler(scriptingComponent, modeFlags, contextID, handlerName, compiledScriptID))
+	return int(_fnOSASetHandler(unsafe.Pointer(scriptingComponent), modeFlags, contextID, handlerName, compiledScriptID))
 }
 
 var _fnOSASetProperty func(unsafe.Pointer, int, int, unsafe.Pointer, int) int32
 
 // OSASetProperty calls the OpenScripting framework function OSASetProperty.
-func OSASetProperty(scriptingComponent unsafe.Pointer, modeFlags int, contextID int, variableName unsafe.Pointer, scriptValueID int) int {
+func OSASetProperty(scriptingComponent *carboncore.ComponentInstanceRecord, modeFlags int, contextID int, variableName unsafe.Pointer, scriptValueID int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSASetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnOSASetProperty, _lib, "OSASetProperty")
 	}
-	return int(_fnOSASetProperty(scriptingComponent, modeFlags, contextID, variableName, scriptValueID))
+	return int(_fnOSASetProperty(unsafe.Pointer(scriptingComponent), modeFlags, contextID, variableName, scriptValueID))
 }
 
 var _fnOSASetResumeDispatchProc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // OSASetResumeDispatchProc calls the OpenScripting framework function OSASetResumeDispatchProc.
-func OSASetResumeDispatchProc(scriptingComponent unsafe.Pointer, resumeDispatchProc unsafe.Pointer, refCon unsafe.Pointer) int {
+func OSASetResumeDispatchProc(scriptingComponent *carboncore.ComponentInstanceRecord, resumeDispatchProc unsafe.Pointer, refCon unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSASetResumeDispatchProc == nil {
 		ebipurego.RegisterLibFunc(&_fnOSASetResumeDispatchProc, _lib, "OSASetResumeDispatchProc")
 	}
-	return int(_fnOSASetResumeDispatchProc(scriptingComponent, resumeDispatchProc, refCon))
+	return int(_fnOSASetResumeDispatchProc(unsafe.Pointer(scriptingComponent), resumeDispatchProc, refCon))
 }
 
 var _fnOSASetScriptInfo func(unsafe.Pointer, int, int, int) int32
 
 // OSASetScriptInfo calls the OpenScripting framework function OSASetScriptInfo.
-func OSASetScriptInfo(scriptingComponent unsafe.Pointer, scriptID int, selector int, value int) int {
+func OSASetScriptInfo(scriptingComponent *carboncore.ComponentInstanceRecord, scriptID int, selector int, value int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSASetScriptInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnOSASetScriptInfo, _lib, "OSASetScriptInfo")
 	}
-	return int(_fnOSASetScriptInfo(scriptingComponent, scriptID, selector, value))
+	return int(_fnOSASetScriptInfo(unsafe.Pointer(scriptingComponent), scriptID, selector, value))
 }
 
 var _fnOSASetSendProc func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // OSASetSendProc calls the OpenScripting framework function OSASetSendProc.
-func OSASetSendProc(scriptingComponent unsafe.Pointer, sendProc unsafe.Pointer, refCon unsafe.Pointer) int {
+func OSASetSendProc(scriptingComponent *carboncore.ComponentInstanceRecord, sendProc unsafe.Pointer, refCon unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSASetSendProc == nil {
 		ebipurego.RegisterLibFunc(&_fnOSASetSendProc, _lib, "OSASetSendProc")
 	}
-	return int(_fnOSASetSendProc(scriptingComponent, sendProc, refCon))
+	return int(_fnOSASetSendProc(unsafe.Pointer(scriptingComponent), sendProc, refCon))
 }
 
 var _fnOSAStartRecording func(unsafe.Pointer, unsafe.Pointer) int32
 
 // OSAStartRecording calls the OpenScripting framework function OSAStartRecording.
-func OSAStartRecording(scriptingComponent unsafe.Pointer) (result int, compiledScriptToModifyID int) {
+func OSAStartRecording(scriptingComponent *carboncore.ComponentInstanceRecord) (result int, compiledScriptToModifyID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAStartRecording == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAStartRecording, _lib, "OSAStartRecording")
 	}
 	var _out0 int
-	_ret := int(_fnOSAStartRecording(scriptingComponent, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSAStartRecording(unsafe.Pointer(scriptingComponent), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnOSAStopRecording func(unsafe.Pointer, int) int32
 
 // OSAStopRecording calls the OpenScripting framework function OSAStopRecording.
-func OSAStopRecording(scriptingComponent unsafe.Pointer, compiledScriptID int) int {
+func OSAStopRecording(scriptingComponent *carboncore.ComponentInstanceRecord, compiledScriptID int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAStopRecording == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAStopRecording, _lib, "OSAStopRecording")
 	}
-	return int(_fnOSAStopRecording(scriptingComponent, compiledScriptID))
+	return int(_fnOSAStopRecording(unsafe.Pointer(scriptingComponent), compiledScriptID))
 }
 
 var _fnOSAStore func(unsafe.Pointer, int, int, int, unsafe.Pointer) int32
 
 // OSAStore calls the OpenScripting framework function OSAStore.
-func OSAStore(scriptingComponent unsafe.Pointer, scriptID int, desiredType int, modeFlags int, resultingScriptData unsafe.Pointer) int {
+func OSAStore(scriptingComponent *carboncore.ComponentInstanceRecord, scriptID int, desiredType int, modeFlags int, resultingScriptData unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAStore == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAStore, _lib, "OSAStore")
 	}
-	return int(_fnOSAStore(scriptingComponent, scriptID, desiredType, modeFlags, resultingScriptData))
+	return int(_fnOSAStore(unsafe.Pointer(scriptingComponent), scriptID, desiredType, modeFlags, resultingScriptData))
 }
 
 var _fnOSAStoreFile func(unsafe.Pointer, int, int, int, unsafe.Pointer) int32
 
 // OSAStoreFile calls the OpenScripting framework function OSAStoreFile.
-func OSAStoreFile(scriptingComponent unsafe.Pointer, scriptID int, desiredType int, modeFlags int, scriptFile unsafe.Pointer) int {
+func OSAStoreFile(scriptingComponent *carboncore.ComponentInstanceRecord, scriptID int, desiredType int, modeFlags int, scriptFile *carboncore.FSRef) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAStoreFile == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAStoreFile, _lib, "OSAStoreFile")
 	}
-	return int(_fnOSAStoreFile(scriptingComponent, scriptID, desiredType, modeFlags, scriptFile))
+	return int(_fnOSAStoreFile(unsafe.Pointer(scriptingComponent), scriptID, desiredType, modeFlags, unsafe.Pointer(scriptFile)))
 }

@@ -5,6 +5,9 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +50,34 @@ func nDArrayUnaryKernelAdopt(id objc.ID) *NDArrayUnaryKernel {
 func (nauk *NDArrayUnaryKernel) WithLabel(label string) *NDArrayUnaryKernel {
 	objc.Send[objc.ID](objref.IDOf(nauk), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return nauk
+}
+
+// Offsets returns the coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. Default: 0,0,0...
+func (nauk *NDArrayUnaryKernel) Offsets() mpsndarray.MPSNDArrayOffsets {
+	defer runtime.KeepAlive(nauk)
+	_r := objc.Send[mpsndarray.MPSNDArrayOffsets](objref.IDOf(nauk), objc.RegisterName("offsets"))
+	return _r
+}
+
+// KernelSizes returns the diameters of the point spread function in each dimension for a source NDArray Default: 1
+func (nauk *NDArrayUnaryKernel) KernelSizes() mpsndarray.MPSNDArraySizes {
+	defer runtime.KeepAlive(nauk)
+	_r := objc.Send[mpsndarray.MPSNDArraySizes](objref.IDOf(nauk), objc.RegisterName("kernelSizes"))
+	return _r
+}
+
+// Strides returns if the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result. Default: 1
+func (nauk *NDArrayUnaryKernel) Strides() mpsndarray.MPSNDArrayOffsets {
+	defer runtime.KeepAlive(nauk)
+	_r := objc.Send[mpsndarray.MPSNDArrayOffsets](objref.IDOf(nauk), objc.RegisterName("strides"))
+	return _r
+}
+
+// DilationRates returns the stride in each dimension from one PSF tap to an adjacent PSF tap. Default: 1
+func (nauk *NDArrayUnaryKernel) DilationRates() mpsndarray.MPSNDArraySizes {
+	defer runtime.KeepAlive(nauk)
+	_r := objc.Send[mpsndarray.MPSNDArraySizes](objref.IDOf(nauk), objc.RegisterName("dilationRates"))
+	return _r
 }
 
 // isNDArrayUnaryKernel marks NDArrayUnaryKernel — and, by embedding promotion, its

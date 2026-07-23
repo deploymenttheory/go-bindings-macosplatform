@@ -861,17 +861,6 @@ func KCMakeKCRefFromAlias(keychainAlias unsafe.Pointer, keychain unsafe.Pointer)
 	return int(_fnKCMakeKCRefFromAlias(keychainAlias, keychain))
 }
 
-var _fnKCMakeKCRefFromFSRef func(unsafe.Pointer, unsafe.Pointer) int32
-
-// KCMakeKCRefFromFSRef calls the OSServices framework function KCMakeKCRefFromFSRef.
-func KCMakeKCRefFromFSRef(keychainFSRef unsafe.Pointer, keychain unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnKCMakeKCRefFromFSRef == nil {
-		ebipurego.RegisterLibFunc(&_fnKCMakeKCRefFromFSRef, _lib, "KCMakeKCRefFromFSRef")
-	}
-	return int(_fnKCMakeKCRefFromFSRef(keychainFSRef, keychain))
-}
-
 var _fnKCSetAttribute func(unsafe.Pointer, unsafe.Pointer) int32
 
 // KCSetAttribute calls the OSServices framework function KCSetAttribute.

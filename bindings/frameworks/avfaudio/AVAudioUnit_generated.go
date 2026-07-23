@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -67,6 +68,13 @@ func (au *AudioUnit) AudioComponentDescription() obj.Object {
 	defer runtime.KeepAlive(au)
 	_r := objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("audioComponentDescription"))
 	return obj.Wrap(_r)
+}
+
+// AudioUnit returns reference to the underlying audio unit. A reference to the underlying audio unit is provided so that parameters that are not exposed by AVAudioUnit subclasses can be modified using the AudioUnit C API. No operations that may conflict with state maintained by the engine should be performed directly on the audio unit. These include changing initialization state, stream formats, channel layouts or connections to other audio units.
+func (au *AudioUnit) AudioUnit() *carboncore.ComponentInstanceRecord {
+	defer runtime.KeepAlive(au)
+	_r := objc.Send[*carboncore.ComponentInstanceRecord](objref.IDOf(au), objc.RegisterName("audioUnit"))
+	return _r
 }
 
 // Name returns name of the audio unit.

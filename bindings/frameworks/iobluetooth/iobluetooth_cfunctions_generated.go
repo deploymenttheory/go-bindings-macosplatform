@@ -88,12 +88,12 @@ func IOBluetoothL2CAPChannelRegisterForChannelCloseNotification(channel obj.Obje
 var _fnIOBluetoothNSStringFromDeviceAddress func(unsafe.Pointer) objc.ID
 
 // IOBluetoothNSStringFromDeviceAddress calls the IOBluetooth framework function IOBluetoothNSStringFromDeviceAddress.
-func IOBluetoothNSStringFromDeviceAddress(deviceAddress unsafe.Pointer) string {
+func IOBluetoothNSStringFromDeviceAddress(deviceAddress *BluetoothDeviceAddress) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothNSStringFromDeviceAddress == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothNSStringFromDeviceAddress, _lib, "IOBluetoothNSStringFromDeviceAddress")
 	}
-	_ret := _fnIOBluetoothNSStringFromDeviceAddress(deviceAddress)
+	_ret := _fnIOBluetoothNSStringFromDeviceAddress(unsafe.Pointer(deviceAddress))
 	if _ret == 0 {
 		return ""
 	}
@@ -103,12 +103,12 @@ func IOBluetoothNSStringFromDeviceAddress(deviceAddress unsafe.Pointer) string {
 var _fnIOBluetoothNSStringFromDeviceAddressColon func(unsafe.Pointer) objc.ID
 
 // IOBluetoothNSStringFromDeviceAddressColon calls the IOBluetooth framework function IOBluetoothNSStringFromDeviceAddressColon.
-func IOBluetoothNSStringFromDeviceAddressColon(deviceAddress unsafe.Pointer) string {
+func IOBluetoothNSStringFromDeviceAddressColon(deviceAddress *BluetoothDeviceAddress) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothNSStringFromDeviceAddressColon == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothNSStringFromDeviceAddressColon, _lib, "IOBluetoothNSStringFromDeviceAddressColon")
 	}
-	_ret := _fnIOBluetoothNSStringFromDeviceAddressColon(deviceAddress)
+	_ret := _fnIOBluetoothNSStringFromDeviceAddressColon(unsafe.Pointer(deviceAddress))
 	if _ret == 0 {
 		return ""
 	}
@@ -118,12 +118,14 @@ func IOBluetoothNSStringFromDeviceAddressColon(deviceAddress unsafe.Pointer) str
 var _fnIOBluetoothNSStringToDeviceAddress func(objc.ID, unsafe.Pointer) int32
 
 // IOBluetoothNSStringToDeviceAddress calls the IOBluetooth framework function IOBluetoothNSStringToDeviceAddress.
-func IOBluetoothNSStringToDeviceAddress(inNameString string, outDeviceAddress unsafe.Pointer) int {
+func IOBluetoothNSStringToDeviceAddress(inNameString string) (result int, outDeviceAddress BluetoothDeviceAddress) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOBluetoothNSStringToDeviceAddress == nil {
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothNSStringToDeviceAddress, _lib, "IOBluetoothNSStringToDeviceAddress")
 	}
-	return int(_fnIOBluetoothNSStringToDeviceAddress(purego.NSString(inNameString), outDeviceAddress))
+	var _out0 BluetoothDeviceAddress
+	_ret := int(_fnIOBluetoothNSStringToDeviceAddress(purego.NSString(inNameString), unsafe.Pointer(&_out0)))
+	return _ret, _out0
 }
 
 var _fnIOBluetoothNumberOfAvailableHIDDevices func() int

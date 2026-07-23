@@ -5,6 +5,9 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -49,10 +52,23 @@ func NewNDArrayStridedSlice() *NDArrayStridedSlice {
 	return nDArrayStridedSliceAdopt(_id)
 }
 
+// WithStrides sets the strides to use when slicing the input array.
+func (nass *NDArrayStridedSlice) WithStrides(strides mpsndarray.MPSNDArrayOffsets) *NDArrayStridedSlice {
+	objc.Send[objc.ID](objref.IDOf(nass), objc.RegisterName("setStrides:"), strides)
+	return nass
+}
+
 // WithLabel sets the string that identifies the kernel.
 func (nass *NDArrayStridedSlice) WithLabel(label string) *NDArrayStridedSlice {
 	objc.Send[objc.ID](objref.IDOf(nass), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return nass
+}
+
+// Strides returns the strides to use when slicing the input array.
+func (nass *NDArrayStridedSlice) Strides() mpsndarray.MPSNDArrayOffsets {
+	defer runtime.KeepAlive(nass)
+	_r := objc.Send[mpsndarray.MPSNDArrayOffsets](objref.IDOf(nass), objc.RegisterName("strides"))
+	return _r
 }
 
 var _ NDArrayUnaryKernelProvider = (*NDArrayStridedSlice)(nil)

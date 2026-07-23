@@ -6,8 +6,10 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -98,6 +100,55 @@ func (c *Caption) TimeRange() coremedia.CMTimeRange {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(c), objc.RegisterName("timeRange"))
 	return _r
+}
+
+// TextColorAtIndexRange returns the text color at the index position.
+func (c *Caption) TextColorAtIndexRange(index int, outRange *foundation.NSRange) obj.Object {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("textColorAtIndex:range:"), index, unsafe.Pointer(outRange))
+	return obj.Wrap(_r)
+}
+
+// BackgroundColorAtIndexRange returns the background color at the index position.
+func (c *Caption) BackgroundColorAtIndexRange(index int, outRange *foundation.NSRange) obj.Object {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("backgroundColorAtIndex:range:"), index, unsafe.Pointer(outRange))
+	return obj.Wrap(_r)
+}
+
+// FontWeightAtIndexRange returns the font weight and range at the index position.
+func (c *Caption) FontWeightAtIndexRange(index int, outRange *foundation.NSRange) CaptionFontWeight {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[CaptionFontWeight](objref.IDOf(c), objc.RegisterName("fontWeightAtIndex:range:"), index, unsafe.Pointer(outRange))
+	return _r
+}
+
+// FontStyleAtIndexRange returns the font style and range at the index position.
+func (c *Caption) FontStyleAtIndexRange(index int, outRange *foundation.NSRange) CaptionFontStyle {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[CaptionFontStyle](objref.IDOf(c), objc.RegisterName("fontStyleAtIndex:range:"), index, unsafe.Pointer(outRange))
+	return _r
+}
+
+// DecorationAtIndexRange returns the text decoration at the index position.
+func (c *Caption) DecorationAtIndexRange(index int, outRange *foundation.NSRange) CaptionDecoration {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[CaptionDecoration](objref.IDOf(c), objc.RegisterName("decorationAtIndex:range:"), index, unsafe.Pointer(outRange))
+	return _r
+}
+
+// TextCombineAtIndexRange returns the text combine at the index position.
+func (c *Caption) TextCombineAtIndexRange(index int, outRange *foundation.NSRange) CaptionTextCombine {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[CaptionTextCombine](objref.IDOf(c), objc.RegisterName("textCombineAtIndex:range:"), index, unsafe.Pointer(outRange))
+	return _r
+}
+
+// RubyAtIndexRange returns the ruby text at the index position.
+func (c *Caption) RubyAtIndexRange(index int, outRange *foundation.NSRange) *CaptionRuby {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("rubyAtIndex:range:"), index, unsafe.Pointer(outRange))
+	return CaptionRubyFromID(_r)
 }
 
 // Region returns the region where the caption is placed. It can be nil when the underlying caption format doesn't support or use regions.

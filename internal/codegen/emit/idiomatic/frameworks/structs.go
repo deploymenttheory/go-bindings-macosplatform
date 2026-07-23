@@ -7,6 +7,7 @@ import (
 	"maps"
 	"path/filepath"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
@@ -66,6 +67,24 @@ func resolveStructFields(
 // a platform-width int is treated as 8 — matching the LP64 C `long`/pointer it
 // came from.
 func scalarGoSizeAlign(goType string) (size, align int, ok bool) {
+	// A fixed-size array [N]elem lays out as N contiguous elements with the
+	// element's alignment; recurse on the element (which may itself be an array).
+	// A slice "[]T" or malformed dimension is not a fixed array and is rejected.
+	if strings.HasPrefix(goType, "[") {
+		closeIdx := strings.IndexByte(goType, ']')
+		if closeIdx <= 1 {
+			return 0, 0, false
+		}
+		n, err := strconv.Atoi(goType[1:closeIdx])
+		if err != nil || n < 0 {
+			return 0, 0, false
+		}
+		elemSize, elemAlign, elemOK := scalarGoSizeAlign(goType[closeIdx+1:])
+		if !elemOK {
+			return 0, 0, false
+		}
+		return n * elemSize, elemAlign, true
+	}
 	switch goType {
 	case "bool", "int8", "uint8", "byte":
 		return 1, 1, true
@@ -182,8 +201,14 @@ func ComputeEmittableStructs(
 				// A field is acceptable when it is a Go primitive, another emittable
 				// struct, or one of this struct's own framework's emitted enums (a
 				// bare name; cross-framework or non-emitted enums are rejected so the
-				// struct never names a type this package does not define).
+				// struct never names a type this package does not define) — or a
+				// fixed-size array of any of those (e.g. uint8[16], CGPoint[4]).
 				if goPrimitives[gt] || emittable[gt] || ownEnums[gt] {
+					continue
+				}
+				if isPrimitiveOrArrayOf(gt, func(elem string) bool {
+					return goPrimitives[elem] || emittable[elem] || ownEnums[elem]
+				}) {
 					continue
 				}
 				good = false

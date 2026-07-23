@@ -6,7 +6,9 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -79,4 +81,12 @@ func NewPlayerVideoOutputWithSpecification(specification *VideoOutputSpecificati
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerVideoOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSpecification:"), objref.IDOf(specification))
 	return playerVideoOutputAdopt(_id)
+}
+
+// CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration retrieves a tagged buffer group that is appropriate for display at the specified host time. The client is responsible for releasing the returned CMTaggedBufferGroup.
+func (pvo *PlayerVideoOutput) CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration(hostTime coremedia.CMTime, presentationTimeStampOut *coremedia.CMTime, activeConfigurationOut *PlayerVideoOutputConfiguration) obj.Object {
+	defer runtime.KeepAlive(pvo)
+	defer runtime.KeepAlive(activeConfigurationOut)
+	_r := objc.Send[objc.ID](objref.IDOf(pvo), objc.RegisterName("copyTaggedBufferGroupForHostTime:presentationTimeStamp:activeConfiguration:"), hostTime, unsafe.Pointer(presentationTimeStampOut), objref.IDOf(activeConfigurationOut))
+	return obj.Wrap(_r)
 }

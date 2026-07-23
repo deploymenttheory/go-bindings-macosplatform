@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -75,6 +76,13 @@ func (pivo *PlayerItemVideoOutput) WithSuppressesPlayerRendering(suppressesPlaye
 func (pivo *PlayerItemVideoOutput) HasNewPixelBufferForItemTime(itemTime coremedia.CMTime) bool {
 	defer runtime.KeepAlive(pivo)
 	_r := objc.Send[bool](objref.IDOf(pivo), objc.RegisterName("hasNewPixelBufferForItemTime:"), itemTime)
+	return _r
+}
+
+// CopyPixelBufferForItemTimeItemTimeForDisplay retrieves an image that is appropriate for display at the specified item time, and marks the image as acquired.
+func (pivo *PlayerItemVideoOutput) CopyPixelBufferForItemTimeItemTimeForDisplay(itemTime coremedia.CMTime, outItemTimeForDisplay *coremedia.CMTime) unsafe.Pointer {
+	defer runtime.KeepAlive(pivo)
+	_r := objc.Send[unsafe.Pointer](objref.IDOf(pivo), objc.RegisterName("copyPixelBufferForItemTime:itemTimeForDisplay:"), itemTime, unsafe.Pointer(outItemTimeForDisplay))
 	return _r
 }
 

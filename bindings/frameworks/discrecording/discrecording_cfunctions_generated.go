@@ -7,6 +7,7 @@ package discrecording
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -16,12 +17,12 @@ import (
 var _fnDRAudioTrackCreate func(unsafe.Pointer) unsafe.Pointer
 
 // DRAudioTrackCreate calls the DiscRecording framework function DRAudioTrackCreate.
-func DRAudioTrackCreate(audioFile unsafe.Pointer) unsafe.Pointer {
+func DRAudioTrackCreate(audioFile *carboncore.FSRef) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRAudioTrackCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnDRAudioTrackCreate, _lib, "DRAudioTrackCreate")
 	}
-	return _fnDRAudioTrackCreate(audioFile)
+	return _fnDRAudioTrackCreate(unsafe.Pointer(audioFile))
 }
 
 var _fnDRAudioTrackCreateWithURL func(objc.ID) unsafe.Pointer
@@ -611,12 +612,12 @@ func DRFSObjectGetParent(object unsafe.Pointer) obj.Object {
 var _fnDRFSObjectGetRealFSRef func(unsafe.Pointer, unsafe.Pointer)
 
 // DRFSObjectGetRealFSRef calls the DiscRecording framework function DRFSObjectGetRealFSRef.
-func DRFSObjectGetRealFSRef(object unsafe.Pointer, fsRef unsafe.Pointer) {
+func DRFSObjectGetRealFSRef(object unsafe.Pointer, fsRef *carboncore.FSRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFSObjectGetRealFSRef == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectGetRealFSRef, _lib, "DRFSObjectGetRealFSRef")
 	}
-	_fnDRFSObjectGetRealFSRef(object, fsRef)
+	_fnDRFSObjectGetRealFSRef(object, unsafe.Pointer(fsRef))
 }
 
 var _fnDRFSObjectIsVirtual func(unsafe.Pointer) uint8
@@ -699,12 +700,12 @@ func DRFSObjectSetSpecificNames(object unsafe.Pointer, specificNames obj.Object)
 var _fnDRFileCreateReal func(unsafe.Pointer) objc.ID
 
 // DRFileCreateReal calls the DiscRecording framework function DRFileCreateReal.
-func DRFileCreateReal(fsRef unsafe.Pointer) obj.Object {
+func DRFileCreateReal(fsRef *carboncore.FSRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFileCreateReal == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFileCreateReal, _lib, "DRFileCreateReal")
 	}
-	_ret := _fnDRFileCreateReal(fsRef)
+	_ret := _fnDRFileCreateReal(unsafe.Pointer(fsRef))
 	return obj.Wrap(_ret)
 }
 
@@ -837,12 +838,12 @@ func DRFolderCountChildren(folder obj.Object) int {
 var _fnDRFolderCreateReal func(unsafe.Pointer) objc.ID
 
 // DRFolderCreateReal calls the DiscRecording framework function DRFolderCreateReal.
-func DRFolderCreateReal(fsRef unsafe.Pointer) obj.Object {
+func DRFolderCreateReal(fsRef *carboncore.FSRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFolderCreateReal == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFolderCreateReal, _lib, "DRFolderCreateReal")
 	}
-	_ret := _fnDRFolderCreateReal(fsRef)
+	_ret := _fnDRFolderCreateReal(unsafe.Pointer(fsRef))
 	return obj.Wrap(_ret)
 }
 

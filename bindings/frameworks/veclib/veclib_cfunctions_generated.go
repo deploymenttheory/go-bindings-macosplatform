@@ -66,28 +66,23 @@ func BNNSApplyMultiheadAttentionBackward(f unsafe.Pointer, batchSize int, query 
 var _fnBNNSArithmeticFilterApplyBackwardBatch func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int) int32
 
 // BNNSArithmeticFilterApplyBackwardBatch calls the vecLib framework function BNNSArithmeticFilterApplyBackwardBatch.
-func BNNSArithmeticFilterApplyBackwardBatch(filter unsafe.Pointer, batchSize int, numberOfInputs int, in unsafe.Pointer, inDelta unsafe.Pointer, out unsafe.Pointer, outStride int, outDelta unsafe.Pointer, outDeltaStride int) (result int, inStride int, inDeltaStride int) {
+func BNNSArithmeticFilterApplyBackwardBatch(filter unsafe.Pointer, batchSize int, numberOfInputs int, in unsafe.Pointer, inStride unsafe.Pointer, inDelta unsafe.Pointer, inDeltaStride unsafe.Pointer, out unsafe.Pointer, outStride int, outDelta unsafe.Pointer, outDeltaStride int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSArithmeticFilterApplyBackwardBatch == nil {
 		ebipurego.RegisterLibFunc(&_fnBNNSArithmeticFilterApplyBackwardBatch, _lib, "BNNSArithmeticFilterApplyBackwardBatch")
 	}
-	var _out0 int
-	var _out1 int
-	_ret := int(_fnBNNSArithmeticFilterApplyBackwardBatch(filter, batchSize, numberOfInputs, in, unsafe.Pointer(&_out0), inDelta, unsafe.Pointer(&_out1), out, outStride, outDelta, outDeltaStride))
-	return _ret, _out0, _out1
+	return int(_fnBNNSArithmeticFilterApplyBackwardBatch(filter, batchSize, numberOfInputs, in, inStride, inDelta, inDeltaStride, out, outStride, outDelta, outDeltaStride))
 }
 
 var _fnBNNSArithmeticFilterApplyBatch func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int32
 
 // BNNSArithmeticFilterApplyBatch calls the vecLib framework function BNNSArithmeticFilterApplyBatch.
-func BNNSArithmeticFilterApplyBatch(filter unsafe.Pointer, batchSize int, numberOfInputs int, in unsafe.Pointer, out unsafe.Pointer, outStride int) (result int, inStride int) {
+func BNNSArithmeticFilterApplyBatch(filter unsafe.Pointer, batchSize int, numberOfInputs int, in unsafe.Pointer, inStride unsafe.Pointer, out unsafe.Pointer, outStride int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSArithmeticFilterApplyBatch == nil {
 		ebipurego.RegisterLibFunc(&_fnBNNSArithmeticFilterApplyBatch, _lib, "BNNSArithmeticFilterApplyBatch")
 	}
-	var _out0 int
-	_ret := int(_fnBNNSArithmeticFilterApplyBatch(filter, batchSize, numberOfInputs, in, unsafe.Pointer(&_out0), out, outStride))
-	return _ret, _out0
+	return int(_fnBNNSArithmeticFilterApplyBatch(filter, batchSize, numberOfInputs, in, inStride, out, outStride))
 }
 
 var _fnBNNSBandPart func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -709,15 +704,12 @@ func BNNSFusedFilterApplyBackwardBatch(filter unsafe.Pointer, batchSize int, in 
 var _fnBNNSFusedFilterApplyBackwardMultiInputBatch func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // BNNSFusedFilterApplyBackwardMultiInputBatch calls the vecLib framework function BNNSFusedFilterApplyBackwardMultiInputBatch.
-func BNNSFusedFilterApplyBackwardMultiInputBatch(filter unsafe.Pointer, batchSize int, numberOfInputs int, in unsafe.Pointer, inDelta unsafe.Pointer, out unsafe.Pointer, outStride int, outDelta unsafe.Pointer, outDeltaStride int, deltaParameters unsafe.Pointer) (result int, inStride int, inDeltaStride int) {
+func BNNSFusedFilterApplyBackwardMultiInputBatch(filter unsafe.Pointer, batchSize int, numberOfInputs int, in unsafe.Pointer, inStride unsafe.Pointer, inDelta unsafe.Pointer, inDeltaStride unsafe.Pointer, out unsafe.Pointer, outStride int, outDelta unsafe.Pointer, outDeltaStride int, deltaParameters unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSFusedFilterApplyBackwardMultiInputBatch == nil {
 		ebipurego.RegisterLibFunc(&_fnBNNSFusedFilterApplyBackwardMultiInputBatch, _lib, "BNNSFusedFilterApplyBackwardMultiInputBatch")
 	}
-	var _out0 int
-	var _out1 int
-	_ret := int(_fnBNNSFusedFilterApplyBackwardMultiInputBatch(filter, batchSize, numberOfInputs, in, unsafe.Pointer(&_out0), inDelta, unsafe.Pointer(&_out1), out, outStride, outDelta, outDeltaStride, deltaParameters))
-	return _ret, _out0, _out1
+	return int(_fnBNNSFusedFilterApplyBackwardMultiInputBatch(filter, batchSize, numberOfInputs, in, inStride, inDelta, inDeltaStride, out, outStride, outDelta, outDeltaStride, deltaParameters))
 }
 
 var _fnBNNSFusedFilterApplyBatch func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, bool) int32
@@ -734,14 +726,12 @@ func BNNSFusedFilterApplyBatch(filter unsafe.Pointer, batchSize int, in unsafe.P
 var _fnBNNSFusedFilterApplyMultiInputBatch func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, bool) int32
 
 // BNNSFusedFilterApplyMultiInputBatch calls the vecLib framework function BNNSFusedFilterApplyMultiInputBatch.
-func BNNSFusedFilterApplyMultiInputBatch(filter unsafe.Pointer, batchSize int, numberOfInputs int, in unsafe.Pointer, out unsafe.Pointer, outStride int, training bool) (result int, inStride int) {
+func BNNSFusedFilterApplyMultiInputBatch(filter unsafe.Pointer, batchSize int, numberOfInputs int, in unsafe.Pointer, inStride unsafe.Pointer, out unsafe.Pointer, outStride int, training bool) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSFusedFilterApplyMultiInputBatch == nil {
 		ebipurego.RegisterLibFunc(&_fnBNNSFusedFilterApplyMultiInputBatch, _lib, "BNNSFusedFilterApplyMultiInputBatch")
 	}
-	var _out0 int
-	_ret := int(_fnBNNSFusedFilterApplyMultiInputBatch(filter, batchSize, numberOfInputs, in, unsafe.Pointer(&_out0), out, outStride, training))
-	return _ret, _out0
+	return int(_fnBNNSFusedFilterApplyMultiInputBatch(filter, batchSize, numberOfInputs, in, inStride, out, outStride, training))
 }
 
 var _fnBNNSGather func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -1132,15 +1122,14 @@ func BNNSGraphGetArgumentIntents(graph unsafe.Pointer, function unsafe.Pointer, 
 var _fnBNNSGraphGetArgumentInterleaveFactors func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // BNNSGraphGetArgumentInterleaveFactors calls the vecLib framework function BNNSGraphGetArgumentInterleaveFactors.
-func BNNSGraphGetArgumentInterleaveFactors(graph unsafe.Pointer, function unsafe.Pointer, argumentCount int) (result int, argumentInterleave uint16, argumentInterleaveCounts int) {
+func BNNSGraphGetArgumentInterleaveFactors(graph unsafe.Pointer, function unsafe.Pointer, argumentCount int, argumentInterleave unsafe.Pointer) (result int, argumentInterleaveCounts int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSGraphGetArgumentInterleaveFactors == nil {
 		ebipurego.RegisterLibFunc(&_fnBNNSGraphGetArgumentInterleaveFactors, _lib, "BNNSGraphGetArgumentInterleaveFactors")
 	}
-	var _out0 uint16
-	var _out1 int
-	_ret := int(_fnBNNSGraphGetArgumentInterleaveFactors(graph, function, argumentCount, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
-	return _ret, _out0, _out1
+	var _out0 int
+	_ret := int(_fnBNNSGraphGetArgumentInterleaveFactors(graph, function, argumentCount, argumentInterleave, unsafe.Pointer(&_out0)))
+	return _ret, _out0
 }
 
 var _fnBNNSGraphGetArgumentNames func(unsafe.Pointer, unsafe.Pointer, int, string) int32
@@ -1390,14 +1379,12 @@ func BNNSPermuteFilterApplyBackwardBatch(filter unsafe.Pointer, batchSize int, i
 var _fnBNNSPoolingFilterApplyBackwardBatch func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int) int32
 
 // BNNSPoolingFilterApplyBackwardBatch calls the vecLib framework function BNNSPoolingFilterApplyBackwardBatch.
-func BNNSPoolingFilterApplyBackwardBatch(filter unsafe.Pointer, batchSize int, in unsafe.Pointer, inStride int, inDelta unsafe.Pointer, inDeltaStride int, out unsafe.Pointer, outStride int, outDelta unsafe.Pointer, outDeltaStride int, biasDelta unsafe.Pointer, idxStride int) (result int, indices int) {
+func BNNSPoolingFilterApplyBackwardBatch(filter unsafe.Pointer, batchSize int, in unsafe.Pointer, inStride int, inDelta unsafe.Pointer, inDeltaStride int, out unsafe.Pointer, outStride int, outDelta unsafe.Pointer, outDeltaStride int, biasDelta unsafe.Pointer, indices unsafe.Pointer, idxStride int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnBNNSPoolingFilterApplyBackwardBatch == nil {
 		ebipurego.RegisterLibFunc(&_fnBNNSPoolingFilterApplyBackwardBatch, _lib, "BNNSPoolingFilterApplyBackwardBatch")
 	}
-	var _out0 int
-	_ret := int(_fnBNNSPoolingFilterApplyBackwardBatch(filter, batchSize, in, inStride, inDelta, inDeltaStride, out, outStride, outDelta, outDeltaStride, biasDelta, unsafe.Pointer(&_out0), idxStride))
-	return _ret, _out0
+	return int(_fnBNNSPoolingFilterApplyBackwardBatch(filter, batchSize, in, inStride, inDelta, inDeltaStride, out, outStride, outDelta, outDeltaStride, biasDelta, indices, idxStride))
 }
 
 var _fnBNNSPoolingFilterApplyBackwardBatchEx func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int32
@@ -1625,16 +1612,12 @@ func SparseConjugateGradient() unsafe.Pointer {
 var _fnSparseConvertFromCoordinate func(int, int, int, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // SparseConvertFromCoordinate calls the vecLib framework function SparseConvertFromCoordinate.
-func SparseConvertFromCoordinate(rowCount int, columnCount int, blockCount int, blockSize uint8, attributes unsafe.Pointer) (result unsafe.Pointer, row int32, column int32, data float64) {
+func SparseConvertFromCoordinate(rowCount int, columnCount int, blockCount int, blockSize uint8, attributes unsafe.Pointer, row unsafe.Pointer, column unsafe.Pointer, data unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseConvertFromCoordinate == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseConvertFromCoordinate, _lib, "SparseConvertFromCoordinate")
 	}
-	var _out0 int32
-	var _out1 int32
-	var _out2 float64
-	_ret := _fnSparseConvertFromCoordinate(rowCount, columnCount, blockCount, blockSize, attributes, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _ret, _out0, _out1, _out2
+	return _fnSparseConvertFromCoordinate(rowCount, columnCount, blockCount, blockSize, attributes, row, column, data)
 }
 
 var _fnSparseConvertFromOpaque func(objc.ID) unsafe.Pointer
@@ -1776,14 +1759,12 @@ func SparseGetTranspose(matrix unsafe.Pointer) unsafe.Pointer {
 var _fnSparseIterate func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseIterate calls the vecLib framework function SparseIterate.
-func SparseIterate(method unsafe.Pointer, iteration int, state unsafe.Pointer, applyOperator unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, x unsafe.Pointer, preconditioner unsafe.Pointer) (converged bool) {
+func SparseIterate(method unsafe.Pointer, iteration int, converged unsafe.Pointer, state unsafe.Pointer, applyOperator unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, x unsafe.Pointer, preconditioner unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseIterate == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseIterate, _lib, "SparseIterate")
 	}
-	var _out0 bool
-	_fnSparseIterate(method, iteration, unsafe.Pointer(&_out0), state, applyOperator, b, r, x, preconditioner)
-	return _out0
+	_fnSparseIterate(method, iteration, converged, state, applyOperator, b, r, x, preconditioner)
 }
 
 var _fnSparseLSMR func() unsafe.Pointer
@@ -1855,14 +1836,12 @@ func SparseSolve(factored unsafe.Pointer, xb unsafe.Pointer) {
 var _fnSparseUpdateFactor func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
 
 // SparseUpdateFactor calls the vecLib framework function SparseUpdateFactor.
-func SparseUpdateFactor(updateAlgorithm unsafe.Pointer, factorization unsafe.Pointer, updateCount int, update unsafe.Pointer) (updatedIndices int32) {
+func SparseUpdateFactor(updateAlgorithm unsafe.Pointer, factorization unsafe.Pointer, updateCount int, updatedIndices unsafe.Pointer, update unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseUpdateFactor == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseUpdateFactor, _lib, "SparseUpdateFactor")
 	}
-	var _out0 int32
-	_fnSparseUpdateFactor(updateAlgorithm, factorization, updateCount, unsafe.Pointer(&_out0), update)
-	return _out0
+	_fnSparseUpdateFactor(updateAlgorithm, factorization, updateCount, updatedIndices, update)
 }
 
 var _fnDenseMatrixFromVectorComplexDouble func(unsafe.Pointer) unsafe.Pointer
@@ -1912,53 +1891,45 @@ func DenseMatrixFromVectorFloat(x unsafe.Pointer) unsafe.Pointer {
 var _fnSparseCGIterateComplexDouble func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseCGIterateComplexDouble calls the vecLib framework function _SparseCGIterate_Complex_Double.
-func SparseCGIterateComplexDouble(options unsafe.Pointer, iteration int, state string, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) (converged bool) {
+func SparseCGIterateComplexDouble(options unsafe.Pointer, iteration int, state string, converged unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseCGIterateComplexDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseCGIterateComplexDouble, _lib, "_SparseCGIterate_Complex_Double")
 	}
-	var _out0 bool
-	_fnSparseCGIterateComplexDouble(options, iteration, state, unsafe.Pointer(&_out0), x, b, r, preconditioner, applyOperator)
-	return _out0
+	_fnSparseCGIterateComplexDouble(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 var _fnSparseCGIterateComplexFloat func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseCGIterateComplexFloat calls the vecLib framework function _SparseCGIterate_Complex_Float.
-func SparseCGIterateComplexFloat(options unsafe.Pointer, iteration int, state string, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) (converged bool) {
+func SparseCGIterateComplexFloat(options unsafe.Pointer, iteration int, state string, converged unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseCGIterateComplexFloat == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseCGIterateComplexFloat, _lib, "_SparseCGIterate_Complex_Float")
 	}
-	var _out0 bool
-	_fnSparseCGIterateComplexFloat(options, iteration, state, unsafe.Pointer(&_out0), x, b, r, preconditioner, applyOperator)
-	return _out0
+	_fnSparseCGIterateComplexFloat(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 var _fnSparseCGIterateDouble func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseCGIterateDouble calls the vecLib framework function _SparseCGIterate_Double.
-func SparseCGIterateDouble(options unsafe.Pointer, iteration int, state string, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) (converged bool) {
+func SparseCGIterateDouble(options unsafe.Pointer, iteration int, state string, converged unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseCGIterateDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseCGIterateDouble, _lib, "_SparseCGIterate_Double")
 	}
-	var _out0 bool
-	_fnSparseCGIterateDouble(options, iteration, state, unsafe.Pointer(&_out0), x, b, r, preconditioner, applyOperator)
-	return _out0
+	_fnSparseCGIterateDouble(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 var _fnSparseCGIterateFloat func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseCGIterateFloat calls the vecLib framework function _SparseCGIterate_Float.
-func SparseCGIterateFloat(options unsafe.Pointer, iteration int, state string, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) (converged bool) {
+func SparseCGIterateFloat(options unsafe.Pointer, iteration int, state string, converged unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseCGIterateFloat == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseCGIterateFloat, _lib, "_SparseCGIterate_Float")
 	}
-	var _out0 bool
-	_fnSparseCGIterateFloat(options, iteration, state, unsafe.Pointer(&_out0), x, b, r, preconditioner, applyOperator)
-	return _out0
+	_fnSparseCGIterateFloat(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 var _fnSparseCGSolveComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
@@ -2008,63 +1979,53 @@ func SparseCGSolveFloat(options unsafe.Pointer, x unsafe.Pointer, b unsafe.Point
 var _fnSparseConvertFromCoordinateComplexDouble func(int, int, int, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) unsafe.Pointer
 
 // SparseConvertFromCoordinateComplexDouble calls the vecLib framework function _SparseConvertFromCoordinate_Complex_Double.
-func SparseConvertFromCoordinateComplexDouble(m int, n int, nBlock int, blockSize uint8, attributes unsafe.Pointer, val unsafe.Pointer, storage string) (result unsafe.Pointer, row int32, col int32, workspace int32) {
+func SparseConvertFromCoordinateComplexDouble(m int, n int, nBlock int, blockSize uint8, attributes unsafe.Pointer, row unsafe.Pointer, col unsafe.Pointer, val unsafe.Pointer, storage string) (result unsafe.Pointer, workspace int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseConvertFromCoordinateComplexDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseConvertFromCoordinateComplexDouble, _lib, "_SparseConvertFromCoordinate_Complex_Double")
 	}
 	var _out0 int32
-	var _out1 int32
-	var _out2 int32
-	_ret := _fnSparseConvertFromCoordinateComplexDouble(m, n, nBlock, blockSize, attributes, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), val, storage, unsafe.Pointer(&_out2))
-	return _ret, _out0, _out1, _out2
+	_ret := _fnSparseConvertFromCoordinateComplexDouble(m, n, nBlock, blockSize, attributes, row, col, val, storage, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnSparseConvertFromCoordinateComplexFloat func(int, int, int, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) unsafe.Pointer
 
 // SparseConvertFromCoordinateComplexFloat calls the vecLib framework function _SparseConvertFromCoordinate_Complex_Float.
-func SparseConvertFromCoordinateComplexFloat(m int, n int, nBlock int, blockSize uint8, attributes unsafe.Pointer, val unsafe.Pointer, storage string) (result unsafe.Pointer, row int32, col int32, workspace int32) {
+func SparseConvertFromCoordinateComplexFloat(m int, n int, nBlock int, blockSize uint8, attributes unsafe.Pointer, row unsafe.Pointer, col unsafe.Pointer, val unsafe.Pointer, storage string) (result unsafe.Pointer, workspace int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseConvertFromCoordinateComplexFloat == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseConvertFromCoordinateComplexFloat, _lib, "_SparseConvertFromCoordinate_Complex_Float")
 	}
 	var _out0 int32
-	var _out1 int32
-	var _out2 int32
-	_ret := _fnSparseConvertFromCoordinateComplexFloat(m, n, nBlock, blockSize, attributes, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), val, storage, unsafe.Pointer(&_out2))
-	return _ret, _out0, _out1, _out2
+	_ret := _fnSparseConvertFromCoordinateComplexFloat(m, n, nBlock, blockSize, attributes, row, col, val, storage, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnSparseConvertFromCoordinateDouble func(int, int, int, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) unsafe.Pointer
 
 // SparseConvertFromCoordinateDouble calls the vecLib framework function _SparseConvertFromCoordinate_Double.
-func SparseConvertFromCoordinateDouble(m int, n int, nBlock int, blockSize uint8, attributes unsafe.Pointer, storage string) (result unsafe.Pointer, row int32, col int32, val float64, workspace int32) {
+func SparseConvertFromCoordinateDouble(m int, n int, nBlock int, blockSize uint8, attributes unsafe.Pointer, row unsafe.Pointer, col unsafe.Pointer, val unsafe.Pointer, storage string) (result unsafe.Pointer, workspace int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseConvertFromCoordinateDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseConvertFromCoordinateDouble, _lib, "_SparseConvertFromCoordinate_Double")
 	}
 	var _out0 int32
-	var _out1 int32
-	var _out2 float64
-	var _out3 int32
-	_ret := _fnSparseConvertFromCoordinateDouble(m, n, nBlock, blockSize, attributes, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), storage, unsafe.Pointer(&_out3))
-	return _ret, _out0, _out1, _out2, _out3
+	_ret := _fnSparseConvertFromCoordinateDouble(m, n, nBlock, blockSize, attributes, row, col, val, storage, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnSparseConvertFromCoordinateFloat func(int, int, int, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer) unsafe.Pointer
 
 // SparseConvertFromCoordinateFloat calls the vecLib framework function _SparseConvertFromCoordinate_Float.
-func SparseConvertFromCoordinateFloat(m int, n int, nBlock int, blockSize uint8, attributes unsafe.Pointer, storage string) (result unsafe.Pointer, row int32, col int32, val float32, workspace int32) {
+func SparseConvertFromCoordinateFloat(m int, n int, nBlock int, blockSize uint8, attributes unsafe.Pointer, row unsafe.Pointer, col unsafe.Pointer, val unsafe.Pointer, storage string) (result unsafe.Pointer, workspace int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseConvertFromCoordinateFloat == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseConvertFromCoordinateFloat, _lib, "_SparseConvertFromCoordinate_Float")
 	}
 	var _out0 int32
-	var _out1 int32
-	var _out2 float32
-	var _out3 int32
-	_ret := _fnSparseConvertFromCoordinateFloat(m, n, nBlock, blockSize, attributes, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), storage, unsafe.Pointer(&_out3))
-	return _ret, _out0, _out1, _out2, _out3
+	_ret := _fnSparseConvertFromCoordinateFloat(m, n, nBlock, blockSize, attributes, row, col, val, storage, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnSparseConvertFromOpaqueComplexDouble func(objc.ID) unsafe.Pointer
@@ -2444,53 +2405,45 @@ func SparseFromStructureComplex(k unsafe.Pointer) unsafe.Pointer {
 var _fnSparseGMRESIterateComplexDouble func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseGMRESIterateComplexDouble calls the vecLib framework function _SparseGMRESIterate_Complex_Double.
-func SparseGMRESIterateComplexDouble(options unsafe.Pointer, iteration int, state string, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) (converged bool) {
+func SparseGMRESIterateComplexDouble(options unsafe.Pointer, iteration int, state string, converged unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseGMRESIterateComplexDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseGMRESIterateComplexDouble, _lib, "_SparseGMRESIterate_Complex_Double")
 	}
-	var _out0 bool
-	_fnSparseGMRESIterateComplexDouble(options, iteration, state, unsafe.Pointer(&_out0), x, b, r, preconditioner, applyOperator)
-	return _out0
+	_fnSparseGMRESIterateComplexDouble(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 var _fnSparseGMRESIterateComplexFloat func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseGMRESIterateComplexFloat calls the vecLib framework function _SparseGMRESIterate_Complex_Float.
-func SparseGMRESIterateComplexFloat(options unsafe.Pointer, iteration int, state string, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) (converged bool) {
+func SparseGMRESIterateComplexFloat(options unsafe.Pointer, iteration int, state string, converged unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseGMRESIterateComplexFloat == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseGMRESIterateComplexFloat, _lib, "_SparseGMRESIterate_Complex_Float")
 	}
-	var _out0 bool
-	_fnSparseGMRESIterateComplexFloat(options, iteration, state, unsafe.Pointer(&_out0), x, b, r, preconditioner, applyOperator)
-	return _out0
+	_fnSparseGMRESIterateComplexFloat(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 var _fnSparseGMRESIterateDouble func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseGMRESIterateDouble calls the vecLib framework function _SparseGMRESIterate_Double.
-func SparseGMRESIterateDouble(options unsafe.Pointer, iteration int, state string, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) (converged bool) {
+func SparseGMRESIterateDouble(options unsafe.Pointer, iteration int, state string, converged unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseGMRESIterateDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseGMRESIterateDouble, _lib, "_SparseGMRESIterate_Double")
 	}
-	var _out0 bool
-	_fnSparseGMRESIterateDouble(options, iteration, state, unsafe.Pointer(&_out0), x, b, r, preconditioner, applyOperator)
-	return _out0
+	_fnSparseGMRESIterateDouble(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 var _fnSparseGMRESIterateFloat func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseGMRESIterateFloat calls the vecLib framework function _SparseGMRESIterate_Float.
-func SparseGMRESIterateFloat(options unsafe.Pointer, iteration int, state string, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) (converged bool) {
+func SparseGMRESIterateFloat(options unsafe.Pointer, iteration int, state string, converged unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseGMRESIterateFloat == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseGMRESIterateFloat, _lib, "_SparseGMRESIterate_Float")
 	}
-	var _out0 bool
-	_fnSparseGMRESIterateFloat(options, iteration, state, unsafe.Pointer(&_out0), x, b, r, preconditioner, applyOperator)
-	return _out0
+	_fnSparseGMRESIterateFloat(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 var _fnSparseGMRESSolveComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
@@ -2739,53 +2692,45 @@ func SparseInvalidSubfactorFloat() unsafe.Pointer {
 var _fnSparseLSMRIterateComplexDouble func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseLSMRIterateComplexDouble calls the vecLib framework function _SparseLSMRIterate_Complex_Double.
-func SparseLSMRIterateComplexDouble(options unsafe.Pointer, iteration int, state string, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) (converged bool) {
+func SparseLSMRIterateComplexDouble(options unsafe.Pointer, iteration int, state string, converged unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseLSMRIterateComplexDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseLSMRIterateComplexDouble, _lib, "_SparseLSMRIterate_Complex_Double")
 	}
-	var _out0 bool
-	_fnSparseLSMRIterateComplexDouble(options, iteration, state, unsafe.Pointer(&_out0), x, b, r, preconditioner, applyOperator)
-	return _out0
+	_fnSparseLSMRIterateComplexDouble(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 var _fnSparseLSMRIterateComplexFloat func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseLSMRIterateComplexFloat calls the vecLib framework function _SparseLSMRIterate_Complex_Float.
-func SparseLSMRIterateComplexFloat(options unsafe.Pointer, iteration int, state string, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) (converged bool) {
+func SparseLSMRIterateComplexFloat(options unsafe.Pointer, iteration int, state string, converged unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseLSMRIterateComplexFloat == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseLSMRIterateComplexFloat, _lib, "_SparseLSMRIterate_Complex_Float")
 	}
-	var _out0 bool
-	_fnSparseLSMRIterateComplexFloat(options, iteration, state, unsafe.Pointer(&_out0), x, b, r, preconditioner, applyOperator)
-	return _out0
+	_fnSparseLSMRIterateComplexFloat(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 var _fnSparseLSMRIterateDouble func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseLSMRIterateDouble calls the vecLib framework function _SparseLSMRIterate_Double.
-func SparseLSMRIterateDouble(options unsafe.Pointer, iteration int, state string, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) (converged bool) {
+func SparseLSMRIterateDouble(options unsafe.Pointer, iteration int, state string, converged unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseLSMRIterateDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseLSMRIterateDouble, _lib, "_SparseLSMRIterate_Double")
 	}
-	var _out0 bool
-	_fnSparseLSMRIterateDouble(options, iteration, state, unsafe.Pointer(&_out0), x, b, r, preconditioner, applyOperator)
-	return _out0
+	_fnSparseLSMRIterateDouble(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 var _fnSparseLSMRIterateFloat func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // SparseLSMRIterateFloat calls the vecLib framework function _SparseLSMRIterate_Float.
-func SparseLSMRIterateFloat(options unsafe.Pointer, iteration int, state string, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) (converged bool) {
+func SparseLSMRIterateFloat(options unsafe.Pointer, iteration int, state string, converged unsafe.Pointer, x unsafe.Pointer, b unsafe.Pointer, r unsafe.Pointer, preconditioner unsafe.Pointer, applyOperator unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseLSMRIterateFloat == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseLSMRIterateFloat, _lib, "_SparseLSMRIterate_Float")
 	}
-	var _out0 bool
-	_fnSparseLSMRIterateFloat(options, iteration, state, unsafe.Pointer(&_out0), x, b, r, preconditioner, applyOperator)
-	return _out0
+	_fnSparseLSMRIterateFloat(options, iteration, state, converged, x, b, r, preconditioner, applyOperator)
 }
 
 var _fnSparseLSMRSolveComplexDouble func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
@@ -3547,53 +3492,45 @@ func SparseTrap() {
 var _fnSparseUpdatePartialRefactorLUComplexDouble func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
 
 // SparseUpdatePartialRefactorLUComplexDouble calls the vecLib framework function _SparseUpdatePartialRefactorLU_Complex_Double.
-func SparseUpdatePartialRefactorLUComplexDouble(opaque unsafe.Pointer, updateCount int, newMatrix unsafe.Pointer) (updatedIndices int32) {
+func SparseUpdatePartialRefactorLUComplexDouble(opaque unsafe.Pointer, updateCount int, updatedIndices unsafe.Pointer, newMatrix unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseUpdatePartialRefactorLUComplexDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseUpdatePartialRefactorLUComplexDouble, _lib, "_SparseUpdatePartialRefactorLU_Complex_Double")
 	}
-	var _out0 int32
-	_fnSparseUpdatePartialRefactorLUComplexDouble(opaque, updateCount, unsafe.Pointer(&_out0), newMatrix)
-	return _out0
+	_fnSparseUpdatePartialRefactorLUComplexDouble(opaque, updateCount, updatedIndices, newMatrix)
 }
 
 var _fnSparseUpdatePartialRefactorLUComplexFloat func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
 
 // SparseUpdatePartialRefactorLUComplexFloat calls the vecLib framework function _SparseUpdatePartialRefactorLU_Complex_Float.
-func SparseUpdatePartialRefactorLUComplexFloat(opaque unsafe.Pointer, updateCount int, newMatrix unsafe.Pointer) (updatedIndices int32) {
+func SparseUpdatePartialRefactorLUComplexFloat(opaque unsafe.Pointer, updateCount int, updatedIndices unsafe.Pointer, newMatrix unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseUpdatePartialRefactorLUComplexFloat == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseUpdatePartialRefactorLUComplexFloat, _lib, "_SparseUpdatePartialRefactorLU_Complex_Float")
 	}
-	var _out0 int32
-	_fnSparseUpdatePartialRefactorLUComplexFloat(opaque, updateCount, unsafe.Pointer(&_out0), newMatrix)
-	return _out0
+	_fnSparseUpdatePartialRefactorLUComplexFloat(opaque, updateCount, updatedIndices, newMatrix)
 }
 
 var _fnSparseUpdatePartialRefactorLUDouble func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
 
 // SparseUpdatePartialRefactorLUDouble calls the vecLib framework function _SparseUpdatePartialRefactorLU_Double.
-func SparseUpdatePartialRefactorLUDouble(opaque unsafe.Pointer, updateCount int, newMatrix unsafe.Pointer) (updatedIndices int32) {
+func SparseUpdatePartialRefactorLUDouble(opaque unsafe.Pointer, updateCount int, updatedIndices unsafe.Pointer, newMatrix unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseUpdatePartialRefactorLUDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseUpdatePartialRefactorLUDouble, _lib, "_SparseUpdatePartialRefactorLU_Double")
 	}
-	var _out0 int32
-	_fnSparseUpdatePartialRefactorLUDouble(opaque, updateCount, unsafe.Pointer(&_out0), newMatrix)
-	return _out0
+	_fnSparseUpdatePartialRefactorLUDouble(opaque, updateCount, updatedIndices, newMatrix)
 }
 
 var _fnSparseUpdatePartialRefactorLUFloat func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer)
 
 // SparseUpdatePartialRefactorLUFloat calls the vecLib framework function _SparseUpdatePartialRefactorLU_Float.
-func SparseUpdatePartialRefactorLUFloat(opaque unsafe.Pointer, updateCount int, newMatrix unsafe.Pointer) (updatedIndices int32) {
+func SparseUpdatePartialRefactorLUFloat(opaque unsafe.Pointer, updateCount int, updatedIndices unsafe.Pointer, newMatrix unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseUpdatePartialRefactorLUFloat == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseUpdatePartialRefactorLUFloat, _lib, "_SparseUpdatePartialRefactorLU_Float")
 	}
-	var _out0 int32
-	_fnSparseUpdatePartialRefactorLUFloat(opaque, updateCount, unsafe.Pointer(&_out0), newMatrix)
-	return _out0
+	_fnSparseUpdatePartialRefactorLUFloat(opaque, updateCount, updatedIndices, newMatrix)
 }
 
 var _fnBuiltinSnprintfChk func(unsafe.Pointer, int, int, int, unsafe.Pointer) int32
@@ -3665,31 +3602,27 @@ func BuiltinVerboseTrap(arg string, arg2 string) {
 var _fnAppleblasDgeadd func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // AppleblasDgeadd calls the vecLib framework function appleblas_dgeadd.
-func AppleblasDgeadd(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, ldb unsafe.Pointer, ldc unsafe.Pointer) (a float64, b float64, c float64) {
+func AppleblasDgeadd(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, ldc unsafe.Pointer) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAppleblasDgeadd == nil {
 		ebipurego.RegisterLibFunc(&_fnAppleblasDgeadd, _lib, "appleblas_dgeadd")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnAppleblasDgeadd(order, transA, transB, m, n, alpha, unsafe.Pointer(&_out0), lda, beta, unsafe.Pointer(&_out1), ldb, unsafe.Pointer(&_out2), ldc)
-	return _out0, _out1, _out2
+	_fnAppleblasDgeadd(order, transA, transB, m, n, alpha, a, lda, beta, b, ldb, unsafe.Pointer(&_out0), ldc)
+	return _out0
 }
 
 var _fnAppleblasSgeadd func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // AppleblasSgeadd calls the vecLib framework function appleblas_sgeadd.
-func AppleblasSgeadd(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, ldb unsafe.Pointer, ldc unsafe.Pointer) (a float32, b float32, c float32) {
+func AppleblasSgeadd(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, ldc unsafe.Pointer) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAppleblasSgeadd == nil {
 		ebipurego.RegisterLibFunc(&_fnAppleblasSgeadd, _lib, "appleblas_sgeadd")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnAppleblasSgeadd(order, transA, transB, m, n, alpha, unsafe.Pointer(&_out0), lda, beta, unsafe.Pointer(&_out1), ldb, unsafe.Pointer(&_out2), ldc)
-	return _out0, _out1, _out2
+	_fnAppleblasSgeadd(order, transA, transB, m, n, alpha, a, lda, beta, b, ldb, unsafe.Pointer(&_out0), ldc)
+	return _out0
 }
 
 var _fnCatlasCaxpby func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -3717,15 +3650,14 @@ func CatlasCset(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX u
 var _fnCatlasDaxpby func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CatlasDaxpby calls the vecLib framework function catlas_daxpby.
-func CatlasDaxpby(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (x float64, y float64) {
+func CatlasDaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCatlasDaxpby == nil {
 		ebipurego.RegisterLibFunc(&_fnCatlasDaxpby, _lib, "catlas_daxpby")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCatlasDaxpby(n, alpha, unsafe.Pointer(&_out0), incX, beta, unsafe.Pointer(&_out1), incY)
-	return _out0, _out1
+	_fnCatlasDaxpby(n, alpha, x, incX, beta, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCatlasDset func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -3744,15 +3676,14 @@ func CatlasDset(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer) (x 
 var _fnCatlasSaxpby func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CatlasSaxpby calls the vecLib framework function catlas_saxpby.
-func CatlasSaxpby(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (x float32, y float32) {
+func CatlasSaxpby(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCatlasSaxpby == nil {
 		ebipurego.RegisterLibFunc(&_fnCatlasSaxpby, _lib, "catlas_saxpby")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCatlasSaxpby(n, alpha, unsafe.Pointer(&_out0), incX, beta, unsafe.Pointer(&_out1), incY)
-	return _out0, _out1
+	_fnCatlasSaxpby(n, alpha, x, incX, beta, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCatlasSset func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -4219,129 +4150,112 @@ func CblasCtrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer
 var _fnCblasDasum func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
 
 // CblasDasum calls the vecLib framework function cblas_dasum.
-func CblasDasum(n unsafe.Pointer, incX unsafe.Pointer) (result float64, x float64) {
+func CblasDasum(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDasum == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDasum, _lib, "cblas_dasum")
 	}
-	var _out0 float64
-	_ret := _fnCblasDasum(n, unsafe.Pointer(&_out0), incX)
-	return _ret, _out0
+	return _fnCblasDasum(n, x, incX)
 }
 
 var _fnCblasDaxpy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDaxpy calls the vecLib framework function cblas_daxpy.
-func CblasDaxpy(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x float64, y float64) {
+func CblasDaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDaxpy == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDaxpy, _lib, "cblas_daxpy")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCblasDaxpy(n, alpha, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY)
-	return _out0, _out1
+	_fnCblasDaxpy(n, alpha, x, incX, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasDcopy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDcopy calls the vecLib framework function cblas_dcopy.
-func CblasDcopy(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x float64, y float64) {
+func CblasDcopy(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDcopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDcopy, _lib, "cblas_dcopy")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCblasDcopy(n, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY)
-	return _out0, _out1
+	_fnCblasDcopy(n, x, incX, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasDdot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
 
 // CblasDdot calls the vecLib framework function cblas_ddot.
-func CblasDdot(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (result float64, x float64, y float64) {
+func CblasDdot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDdot == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDdot, _lib, "cblas_ddot")
 	}
-	var _out0 float64
-	var _out1 float64
-	_ret := _fnCblasDdot(n, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY)
-	return _ret, _out0, _out1
+	return _fnCblasDdot(n, x, incX, y, incY)
 }
 
 var _fnCblasDgbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDgbmv calls the vecLib framework function cblas_dgbmv.
-func CblasDgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, kl unsafe.Pointer, ku unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (a float64, x float64, y float64) {
+func CblasDgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, kl unsafe.Pointer, ku unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDgbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDgbmv, _lib, "cblas_dgbmv")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnCblasDgbmv(order, transA, m, n, kl, ku, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX, beta, unsafe.Pointer(&_out2), incY)
-	return _out0, _out1, _out2
+	_fnCblasDgbmv(order, transA, m, n, kl, ku, alpha, a, lda, x, incX, beta, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasDgemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDgemm calls the vecLib framework function cblas_dgemm.
-func CblasDgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (a float64, b float64, c float64) {
+func CblasDgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDgemm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDgemm, _lib, "cblas_dgemm")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnCblasDgemm(order, transA, transB, m, n, k, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), ldb, beta, unsafe.Pointer(&_out2), ldc)
-	return _out0, _out1, _out2
+	_fnCblasDgemm(order, transA, transB, m, n, k, alpha, a, lda, b, ldb, beta, unsafe.Pointer(&_out0), ldc)
+	return _out0
 }
 
 var _fnCblasDgemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDgemv calls the vecLib framework function cblas_dgemv.
-func CblasDgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (a float64, x float64, y float64) {
+func CblasDgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDgemv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDgemv, _lib, "cblas_dgemv")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnCblasDgemv(order, transA, m, n, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX, beta, unsafe.Pointer(&_out2), incY)
-	return _out0, _out1, _out2
+	_fnCblasDgemv(order, transA, m, n, alpha, a, lda, x, incX, beta, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasDger func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDger calls the vecLib framework function cblas_dger.
-func CblasDger(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer, lda unsafe.Pointer) (x float64, y float64, a float64) {
+func CblasDger(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, lda unsafe.Pointer) (a float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDger == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDger, _lib, "cblas_dger")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnCblasDger(order, m, n, alpha, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY, unsafe.Pointer(&_out2), lda)
-	return _out0, _out1, _out2
+	_fnCblasDger(order, m, n, alpha, x, incX, y, incY, unsafe.Pointer(&_out0), lda)
+	return _out0
 }
 
 var _fnCblasDnrm2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
 
 // CblasDnrm2 calls the vecLib framework function cblas_dnrm2.
-func CblasDnrm2(n unsafe.Pointer, incX unsafe.Pointer) (result float64, x float64) {
+func CblasDnrm2(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDnrm2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDnrm2, _lib, "cblas_dnrm2")
 	}
-	var _out0 float64
-	_ret := _fnCblasDnrm2(n, unsafe.Pointer(&_out0), incX)
-	return _ret, _out0
+	return _fnCblasDnrm2(n, x, incX)
 }
 
 var _fnCblasDrot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -4377,16 +4291,15 @@ func CblasDrotg() (a float64, b float64, c float64, s float64) {
 var _fnCblasDrotm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDrotm calls the vecLib framework function cblas_drotm.
-func CblasDrotm(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x float64, y float64, p float64) {
+func CblasDrotm(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer, p unsafe.Pointer) (x float64, y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDrotm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDrotm, _lib, "cblas_drotm")
 	}
 	var _out0 float64
 	var _out1 float64
-	var _out2 float64
-	_fnCblasDrotm(n, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY, unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnCblasDrotm(n, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY, p)
+	return _out0, _out1
 }
 
 var _fnCblasDrotmg func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -4408,16 +4321,14 @@ func CblasDrotmg(b2 unsafe.Pointer) (d1 float64, d2 float64, b1 float64, p float
 var _fnCblasDsbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDsbmv calls the vecLib framework function cblas_dsbmv.
-func CblasDsbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (a float64, x float64, y float64) {
+func CblasDsbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsbmv, _lib, "cblas_dsbmv")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnCblasDsbmv(order, uplo, n, k, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX, beta, unsafe.Pointer(&_out2), incY)
-	return _out0, _out1, _out2
+	_fnCblasDsbmv(order, uplo, n, k, alpha, a, lda, x, incX, beta, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasDscal func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -4436,59 +4347,51 @@ func CblasDscal(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer) (x 
 var _fnCblasDsdot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
 
 // CblasDsdot calls the vecLib framework function cblas_dsdot.
-func CblasDsdot(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (result float64, x float32, y float32) {
+func CblasDsdot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) float64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsdot == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsdot, _lib, "cblas_dsdot")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnCblasDsdot(n, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY)
-	return _ret, _out0, _out1
+	return _fnCblasDsdot(n, x, incX, y, incY)
 }
 
 var _fnCblasDspmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDspmv calls the vecLib framework function cblas_dspmv.
-func CblasDspmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (ap float64, x float64, y float64) {
+func CblasDspmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDspmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDspmv, _lib, "cblas_dspmv")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnCblasDspmv(order, uplo, n, alpha, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), incX, beta, unsafe.Pointer(&_out2), incY)
-	return _out0, _out1, _out2
+	_fnCblasDspmv(order, uplo, n, alpha, ap, x, incX, beta, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasDspr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDspr calls the vecLib framework function cblas_dspr.
-func CblasDspr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer) (x float64, ap float64) {
+func CblasDspr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) (ap float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDspr == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDspr, _lib, "cblas_dspr")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCblasDspr(order, uplo, n, alpha, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1))
-	return _out0, _out1
+	_fnCblasDspr(order, uplo, n, alpha, x, incX, unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnCblasDspr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDspr2 calls the vecLib framework function cblas_dspr2.
-func CblasDspr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x float64, y float64, a float64) {
+func CblasDspr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) (a float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDspr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDspr2, _lib, "cblas_dspr2")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnCblasDspr2(order, uplo, n, alpha, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY, unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnCblasDspr2(order, uplo, n, alpha, x, incX, y, incY, unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnCblasDswap func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -4508,201 +4411,183 @@ func CblasDswap(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x f
 var _fnCblasDsymm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDsymm calls the vecLib framework function cblas_dsymm.
-func CblasDsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (a float64, b float64, c float64) {
+func CblasDsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsymm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsymm, _lib, "cblas_dsymm")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnCblasDsymm(order, side, uplo, m, n, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), ldb, beta, unsafe.Pointer(&_out2), ldc)
-	return _out0, _out1, _out2
+	_fnCblasDsymm(order, side, uplo, m, n, alpha, a, lda, b, ldb, beta, unsafe.Pointer(&_out0), ldc)
+	return _out0
 }
 
 var _fnCblasDsymv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDsymv calls the vecLib framework function cblas_dsymv.
-func CblasDsymv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (a float64, x float64, y float64) {
+func CblasDsymv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsymv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsymv, _lib, "cblas_dsymv")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnCblasDsymv(order, uplo, n, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX, beta, unsafe.Pointer(&_out2), incY)
-	return _out0, _out1, _out2
+	_fnCblasDsymv(order, uplo, n, alpha, a, lda, x, incX, beta, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasDsyr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDsyr calls the vecLib framework function cblas_dsyr.
-func CblasDsyr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, lda unsafe.Pointer) (x float64, a float64) {
+func CblasDsyr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, lda unsafe.Pointer) (a float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsyr == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsyr, _lib, "cblas_dsyr")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCblasDsyr(order, uplo, n, alpha, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), lda)
-	return _out0, _out1
+	_fnCblasDsyr(order, uplo, n, alpha, x, incX, unsafe.Pointer(&_out0), lda)
+	return _out0
 }
 
 var _fnCblasDsyr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDsyr2 calls the vecLib framework function cblas_dsyr2.
-func CblasDsyr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer, lda unsafe.Pointer) (x float64, y float64, a float64) {
+func CblasDsyr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, lda unsafe.Pointer) (a float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsyr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsyr2, _lib, "cblas_dsyr2")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnCblasDsyr2(order, uplo, n, alpha, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY, unsafe.Pointer(&_out2), lda)
-	return _out0, _out1, _out2
+	_fnCblasDsyr2(order, uplo, n, alpha, x, incX, y, incY, unsafe.Pointer(&_out0), lda)
+	return _out0
 }
 
 var _fnCblasDsyr2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDsyr2k calls the vecLib framework function cblas_dsyr2k.
-func CblasDsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (a float64, b float64, c float64) {
+func CblasDsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsyr2k == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsyr2k, _lib, "cblas_dsyr2k")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnCblasDsyr2k(order, uplo, trans, n, k, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), ldb, beta, unsafe.Pointer(&_out2), ldc)
-	return _out0, _out1, _out2
+	_fnCblasDsyr2k(order, uplo, trans, n, k, alpha, a, lda, b, ldb, beta, unsafe.Pointer(&_out0), ldc)
+	return _out0
 }
 
 var _fnCblasDsyrk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDsyrk calls the vecLib framework function cblas_dsyrk.
-func CblasDsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (a float64, c float64) {
+func CblasDsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDsyrk == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDsyrk, _lib, "cblas_dsyrk")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCblasDsyrk(order, uplo, trans, n, k, alpha, unsafe.Pointer(&_out0), lda, beta, unsafe.Pointer(&_out1), ldc)
-	return _out0, _out1
+	_fnCblasDsyrk(order, uplo, trans, n, k, alpha, a, lda, beta, unsafe.Pointer(&_out0), ldc)
+	return _out0
 }
 
 var _fnCblasDtbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDtbmv calls the vecLib framework function cblas_dtbmv.
-func CblasDtbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (a float64, x float64) {
+func CblasDtbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtbmv, _lib, "cblas_dtbmv")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCblasDtbmv(order, uplo, transA, diag, n, k, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX)
-	return _out0, _out1
+	_fnCblasDtbmv(order, uplo, transA, diag, n, k, a, lda, unsafe.Pointer(&_out0), incX)
+	return _out0
 }
 
 var _fnCblasDtbsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDtbsv calls the vecLib framework function cblas_dtbsv.
-func CblasDtbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (a float64, x float64) {
+func CblasDtbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtbsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtbsv, _lib, "cblas_dtbsv")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCblasDtbsv(order, uplo, transA, diag, n, k, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX)
-	return _out0, _out1
+	_fnCblasDtbsv(order, uplo, transA, diag, n, k, a, lda, unsafe.Pointer(&_out0), incX)
+	return _out0
 }
 
 var _fnCblasDtpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDtpmv calls the vecLib framework function cblas_dtpmv.
-func CblasDtpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, incX unsafe.Pointer) (ap float64, x float64) {
+func CblasDtpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, incX unsafe.Pointer) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtpmv, _lib, "cblas_dtpmv")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCblasDtpmv(order, uplo, transA, diag, n, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), incX)
-	return _out0, _out1
+	_fnCblasDtpmv(order, uplo, transA, diag, n, ap, unsafe.Pointer(&_out0), incX)
+	return _out0
 }
 
 var _fnCblasDtpsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDtpsv calls the vecLib framework function cblas_dtpsv.
-func CblasDtpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, incX unsafe.Pointer) (ap float64, x float64) {
+func CblasDtpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, incX unsafe.Pointer) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtpsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtpsv, _lib, "cblas_dtpsv")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCblasDtpsv(order, uplo, transA, diag, n, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), incX)
-	return _out0, _out1
+	_fnCblasDtpsv(order, uplo, transA, diag, n, ap, unsafe.Pointer(&_out0), incX)
+	return _out0
 }
 
 var _fnCblasDtrmm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDtrmm calls the vecLib framework function cblas_dtrmm.
-func CblasDtrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer) (a float64, b float64) {
+func CblasDtrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer) (b float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtrmm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtrmm, _lib, "cblas_dtrmm")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCblasDtrmm(order, side, uplo, transA, diag, m, n, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), ldb)
-	return _out0, _out1
+	_fnCblasDtrmm(order, side, uplo, transA, diag, m, n, alpha, a, lda, unsafe.Pointer(&_out0), ldb)
+	return _out0
 }
 
 var _fnCblasDtrmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDtrmv calls the vecLib framework function cblas_dtrmv.
-func CblasDtrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (a float64, x float64) {
+func CblasDtrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtrmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtrmv, _lib, "cblas_dtrmv")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCblasDtrmv(order, uplo, transA, diag, n, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX)
-	return _out0, _out1
+	_fnCblasDtrmv(order, uplo, transA, diag, n, a, lda, unsafe.Pointer(&_out0), incX)
+	return _out0
 }
 
 var _fnCblasDtrsm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDtrsm calls the vecLib framework function cblas_dtrsm.
-func CblasDtrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer) (a float64, b float64) {
+func CblasDtrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer) (b float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtrsm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtrsm, _lib, "cblas_dtrsm")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCblasDtrsm(order, side, uplo, transA, diag, m, n, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), ldb)
-	return _out0, _out1
+	_fnCblasDtrsm(order, side, uplo, transA, diag, m, n, alpha, a, lda, unsafe.Pointer(&_out0), ldb)
+	return _out0
 }
 
 var _fnCblasDtrsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasDtrsv calls the vecLib framework function cblas_dtrsv.
-func CblasDtrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (a float64, x float64) {
+func CblasDtrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasDtrsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasDtrsv, _lib, "cblas_dtrsv")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnCblasDtrsv(order, uplo, transA, diag, n, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX)
-	return _out0, _out1
+	_fnCblasDtrsv(order, uplo, transA, diag, n, a, lda, unsafe.Pointer(&_out0), incX)
+	return _out0
 }
 
 var _fnCblasDzasum func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float64
@@ -4741,27 +4626,23 @@ func CblasIcamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
 var _fnCblasIdamax func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CblasIdamax calls the vecLib framework function cblas_idamax.
-func CblasIdamax(n unsafe.Pointer, incX unsafe.Pointer) (result int, x float64) {
+func CblasIdamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasIdamax == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasIdamax, _lib, "cblas_idamax")
 	}
-	var _out0 float64
-	_ret := int(_fnCblasIdamax(n, unsafe.Pointer(&_out0), incX))
-	return _ret, _out0
+	return int(_fnCblasIdamax(n, x, incX))
 }
 
 var _fnCblasIsamax func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CblasIsamax calls the vecLib framework function cblas_isamax.
-func CblasIsamax(n unsafe.Pointer, incX unsafe.Pointer) (result int, x float32) {
+func CblasIsamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasIsamax == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasIsamax, _lib, "cblas_isamax")
 	}
-	var _out0 float32
-	_ret := int(_fnCblasIsamax(n, unsafe.Pointer(&_out0), incX))
-	return _ret, _out0
+	return int(_fnCblasIsamax(n, x, incX))
 }
 
 var _fnCblasIzamax func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -4778,28 +4659,25 @@ func CblasIzamax(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) int {
 var _fnCblasSasum func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
 
 // CblasSasum calls the vecLib framework function cblas_sasum.
-func CblasSasum(n unsafe.Pointer, incX unsafe.Pointer) (result float32, x float32) {
+func CblasSasum(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSasum == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSasum, _lib, "cblas_sasum")
 	}
-	var _out0 float32
-	_ret := _fnCblasSasum(n, unsafe.Pointer(&_out0), incX)
-	return _ret, _out0
+	return _fnCblasSasum(n, x, incX)
 }
 
 var _fnCblasSaxpy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSaxpy calls the vecLib framework function cblas_saxpy.
-func CblasSaxpy(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x float32, y float32) {
+func CblasSaxpy(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSaxpy == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSaxpy, _lib, "cblas_saxpy")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCblasSaxpy(n, alpha, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY)
-	return _out0, _out1
+	_fnCblasSaxpy(n, alpha, x, incX, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasScasum func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
@@ -4827,116 +4705,99 @@ func CblasScnrm2(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float3
 var _fnCblasScopy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasScopy calls the vecLib framework function cblas_scopy.
-func CblasScopy(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x float32, y float32) {
+func CblasScopy(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasScopy == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasScopy, _lib, "cblas_scopy")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCblasScopy(n, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY)
-	return _out0, _out1
+	_fnCblasScopy(n, x, incX, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasSdot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
 
 // CblasSdot calls the vecLib framework function cblas_sdot.
-func CblasSdot(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (result float32, x float32, y float32) {
+func CblasSdot(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSdot == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSdot, _lib, "cblas_sdot")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnCblasSdot(n, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY)
-	return _ret, _out0, _out1
+	return _fnCblasSdot(n, x, incX, y, incY)
 }
 
 var _fnCblasSdsdot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
 
 // CblasSdsdot calls the vecLib framework function cblas_sdsdot.
-func CblasSdsdot(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (result float32, x float32, y float32) {
+func CblasSdsdot(n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSdsdot == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSdsdot, _lib, "cblas_sdsdot")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnCblasSdsdot(n, alpha, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY)
-	return _ret, _out0, _out1
+	return _fnCblasSdsdot(n, alpha, x, incX, y, incY)
 }
 
 var _fnCblasSgbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSgbmv calls the vecLib framework function cblas_sgbmv.
-func CblasSgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, kl unsafe.Pointer, ku unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (a float32, x float32, y float32) {
+func CblasSgbmv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, kl unsafe.Pointer, ku unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSgbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSgbmv, _lib, "cblas_sgbmv")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnCblasSgbmv(order, transA, m, n, kl, ku, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX, beta, unsafe.Pointer(&_out2), incY)
-	return _out0, _out1, _out2
+	_fnCblasSgbmv(order, transA, m, n, kl, ku, alpha, a, lda, x, incX, beta, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasSgemm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSgemm calls the vecLib framework function cblas_sgemm.
-func CblasSgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (a float32, b float32, c float32) {
+func CblasSgemm(order unsafe.Pointer, transA unsafe.Pointer, transB unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSgemm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSgemm, _lib, "cblas_sgemm")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnCblasSgemm(order, transA, transB, m, n, k, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), ldb, beta, unsafe.Pointer(&_out2), ldc)
-	return _out0, _out1, _out2
+	_fnCblasSgemm(order, transA, transB, m, n, k, alpha, a, lda, b, ldb, beta, unsafe.Pointer(&_out0), ldc)
+	return _out0
 }
 
 var _fnCblasSgemv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSgemv calls the vecLib framework function cblas_sgemv.
-func CblasSgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (a float32, x float32, y float32) {
+func CblasSgemv(order unsafe.Pointer, transA unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSgemv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSgemv, _lib, "cblas_sgemv")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnCblasSgemv(order, transA, m, n, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX, beta, unsafe.Pointer(&_out2), incY)
-	return _out0, _out1, _out2
+	_fnCblasSgemv(order, transA, m, n, alpha, a, lda, x, incX, beta, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasSger func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSger calls the vecLib framework function cblas_sger.
-func CblasSger(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer, lda unsafe.Pointer) (x float32, y float32, a float32) {
+func CblasSger(order unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, lda unsafe.Pointer) (a float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSger == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSger, _lib, "cblas_sger")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnCblasSger(order, m, n, alpha, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY, unsafe.Pointer(&_out2), lda)
-	return _out0, _out1, _out2
+	_fnCblasSger(order, m, n, alpha, x, incX, y, incY, unsafe.Pointer(&_out0), lda)
+	return _out0
 }
 
 var _fnCblasSnrm2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) float32
 
 // CblasSnrm2 calls the vecLib framework function cblas_snrm2.
-func CblasSnrm2(n unsafe.Pointer, incX unsafe.Pointer) (result float32, x float32) {
+func CblasSnrm2(n unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) float32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSnrm2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSnrm2, _lib, "cblas_snrm2")
 	}
-	var _out0 float32
-	_ret := _fnCblasSnrm2(n, unsafe.Pointer(&_out0), incX)
-	return _ret, _out0
+	return _fnCblasSnrm2(n, x, incX)
 }
 
 var _fnCblasSrot func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -4972,16 +4833,15 @@ func CblasSrotg() (a float32, b float32, c float32, s float32) {
 var _fnCblasSrotm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSrotm calls the vecLib framework function cblas_srotm.
-func CblasSrotm(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x float32, y float32, p float32) {
+func CblasSrotm(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer, p unsafe.Pointer) (x float32, y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSrotm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSrotm, _lib, "cblas_srotm")
 	}
 	var _out0 float32
 	var _out1 float32
-	var _out2 float32
-	_fnCblasSrotm(n, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY, unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnCblasSrotm(n, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY, p)
+	return _out0, _out1
 }
 
 var _fnCblasSrotmg func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -5003,16 +4863,14 @@ func CblasSrotmg(b2 unsafe.Pointer) (d1 float32, d2 float32, b1 float32, p float
 var _fnCblasSsbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSsbmv calls the vecLib framework function cblas_ssbmv.
-func CblasSsbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (a float32, x float32, y float32) {
+func CblasSsbmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsbmv, _lib, "cblas_ssbmv")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnCblasSsbmv(order, uplo, n, k, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX, beta, unsafe.Pointer(&_out2), incY)
-	return _out0, _out1, _out2
+	_fnCblasSsbmv(order, uplo, n, k, alpha, a, lda, x, incX, beta, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasSscal func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -5031,45 +4889,40 @@ func CblasSscal(n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer) (x 
 var _fnCblasSspmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSspmv calls the vecLib framework function cblas_sspmv.
-func CblasSspmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (ap float32, x float32, y float32) {
+func CblasSspmv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, ap unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSspmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSspmv, _lib, "cblas_sspmv")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnCblasSspmv(order, uplo, n, alpha, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), incX, beta, unsafe.Pointer(&_out2), incY)
-	return _out0, _out1, _out2
+	_fnCblasSspmv(order, uplo, n, alpha, ap, x, incX, beta, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasSspr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSspr calls the vecLib framework function cblas_sspr.
-func CblasSspr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer) (x float32, ap float32) {
+func CblasSspr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer) (ap float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSspr == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSspr, _lib, "cblas_sspr")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCblasSspr(order, uplo, n, alpha, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1))
-	return _out0, _out1
+	_fnCblasSspr(order, uplo, n, alpha, x, incX, unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnCblasSspr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSspr2 calls the vecLib framework function cblas_sspr2.
-func CblasSspr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x float32, y float32, a float32) {
+func CblasSspr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer) (a float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSspr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSspr2, _lib, "cblas_sspr2")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnCblasSspr2(order, uplo, n, alpha, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY, unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnCblasSspr2(order, uplo, n, alpha, x, incX, y, incY, unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnCblasSswap func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -5089,201 +4942,183 @@ func CblasSswap(n unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer) (x f
 var _fnCblasSsymm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSsymm calls the vecLib framework function cblas_ssymm.
-func CblasSsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (a float32, b float32, c float32) {
+func CblasSsymm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsymm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsymm, _lib, "cblas_ssymm")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnCblasSsymm(order, side, uplo, m, n, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), ldb, beta, unsafe.Pointer(&_out2), ldc)
-	return _out0, _out1, _out2
+	_fnCblasSsymm(order, side, uplo, m, n, alpha, a, lda, b, ldb, beta, unsafe.Pointer(&_out0), ldc)
+	return _out0
 }
 
 var _fnCblasSsymv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSsymv calls the vecLib framework function cblas_ssymv.
-func CblasSsymv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (a float32, x float32, y float32) {
+func CblasSsymv(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, beta unsafe.Pointer, incY unsafe.Pointer) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsymv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsymv, _lib, "cblas_ssymv")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnCblasSsymv(order, uplo, n, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX, beta, unsafe.Pointer(&_out2), incY)
-	return _out0, _out1, _out2
+	_fnCblasSsymv(order, uplo, n, alpha, a, lda, x, incX, beta, unsafe.Pointer(&_out0), incY)
+	return _out0
 }
 
 var _fnCblasSsyr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSsyr calls the vecLib framework function cblas_ssyr.
-func CblasSsyr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, lda unsafe.Pointer) (x float32, a float32) {
+func CblasSsyr(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, lda unsafe.Pointer) (a float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsyr == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsyr, _lib, "cblas_ssyr")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCblasSsyr(order, uplo, n, alpha, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), lda)
-	return _out0, _out1
+	_fnCblasSsyr(order, uplo, n, alpha, x, incX, unsafe.Pointer(&_out0), lda)
+	return _out0
 }
 
 var _fnCblasSsyr2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSsyr2 calls the vecLib framework function cblas_ssyr2.
-func CblasSsyr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, incX unsafe.Pointer, incY unsafe.Pointer, lda unsafe.Pointer) (x float32, y float32, a float32) {
+func CblasSsyr2(order unsafe.Pointer, uplo unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, x unsafe.Pointer, incX unsafe.Pointer, y unsafe.Pointer, incY unsafe.Pointer, lda unsafe.Pointer) (a float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsyr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsyr2, _lib, "cblas_ssyr2")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnCblasSsyr2(order, uplo, n, alpha, unsafe.Pointer(&_out0), incX, unsafe.Pointer(&_out1), incY, unsafe.Pointer(&_out2), lda)
-	return _out0, _out1, _out2
+	_fnCblasSsyr2(order, uplo, n, alpha, x, incX, y, incY, unsafe.Pointer(&_out0), lda)
+	return _out0
 }
 
 var _fnCblasSsyr2k func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSsyr2k calls the vecLib framework function cblas_ssyr2k.
-func CblasSsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (a float32, b float32, c float32) {
+func CblasSsyr2k(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, b unsafe.Pointer, ldb unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsyr2k == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsyr2k, _lib, "cblas_ssyr2k")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnCblasSsyr2k(order, uplo, trans, n, k, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), ldb, beta, unsafe.Pointer(&_out2), ldc)
-	return _out0, _out1, _out2
+	_fnCblasSsyr2k(order, uplo, trans, n, k, alpha, a, lda, b, ldb, beta, unsafe.Pointer(&_out0), ldc)
+	return _out0
 }
 
 var _fnCblasSsyrk func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasSsyrk calls the vecLib framework function cblas_ssyrk.
-func CblasSsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (a float32, c float32) {
+func CblasSsyrk(order unsafe.Pointer, uplo unsafe.Pointer, trans unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, beta unsafe.Pointer, ldc unsafe.Pointer) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasSsyrk == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasSsyrk, _lib, "cblas_ssyrk")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCblasSsyrk(order, uplo, trans, n, k, alpha, unsafe.Pointer(&_out0), lda, beta, unsafe.Pointer(&_out1), ldc)
-	return _out0, _out1
+	_fnCblasSsyrk(order, uplo, trans, n, k, alpha, a, lda, beta, unsafe.Pointer(&_out0), ldc)
+	return _out0
 }
 
 var _fnCblasStbmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasStbmv calls the vecLib framework function cblas_stbmv.
-func CblasStbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (a float32, x float32) {
+func CblasStbmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStbmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStbmv, _lib, "cblas_stbmv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCblasStbmv(order, uplo, transA, diag, n, k, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX)
-	return _out0, _out1
+	_fnCblasStbmv(order, uplo, transA, diag, n, k, a, lda, unsafe.Pointer(&_out0), incX)
+	return _out0
 }
 
 var _fnCblasStbsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasStbsv calls the vecLib framework function cblas_stbsv.
-func CblasStbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (a float32, x float32) {
+func CblasStbsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, k unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStbsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStbsv, _lib, "cblas_stbsv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCblasStbsv(order, uplo, transA, diag, n, k, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX)
-	return _out0, _out1
+	_fnCblasStbsv(order, uplo, transA, diag, n, k, a, lda, unsafe.Pointer(&_out0), incX)
+	return _out0
 }
 
 var _fnCblasStpmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasStpmv calls the vecLib framework function cblas_stpmv.
-func CblasStpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, incX unsafe.Pointer) (ap float32, x float32) {
+func CblasStpmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, incX unsafe.Pointer) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStpmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStpmv, _lib, "cblas_stpmv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCblasStpmv(order, uplo, transA, diag, n, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), incX)
-	return _out0, _out1
+	_fnCblasStpmv(order, uplo, transA, diag, n, ap, unsafe.Pointer(&_out0), incX)
+	return _out0
 }
 
 var _fnCblasStpsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasStpsv calls the vecLib framework function cblas_stpsv.
-func CblasStpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, incX unsafe.Pointer) (ap float32, x float32) {
+func CblasStpsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, ap unsafe.Pointer, incX unsafe.Pointer) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStpsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStpsv, _lib, "cblas_stpsv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCblasStpsv(order, uplo, transA, diag, n, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), incX)
-	return _out0, _out1
+	_fnCblasStpsv(order, uplo, transA, diag, n, ap, unsafe.Pointer(&_out0), incX)
+	return _out0
 }
 
 var _fnCblasStrmm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasStrmm calls the vecLib framework function cblas_strmm.
-func CblasStrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer) (a float32, b float32) {
+func CblasStrmm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer) (b float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStrmm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStrmm, _lib, "cblas_strmm")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCblasStrmm(order, side, uplo, transA, diag, m, n, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), ldb)
-	return _out0, _out1
+	_fnCblasStrmm(order, side, uplo, transA, diag, m, n, alpha, a, lda, unsafe.Pointer(&_out0), ldb)
+	return _out0
 }
 
 var _fnCblasStrmv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasStrmv calls the vecLib framework function cblas_strmv.
-func CblasStrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (a float32, x float32) {
+func CblasStrmv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStrmv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStrmv, _lib, "cblas_strmv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCblasStrmv(order, uplo, transA, diag, n, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX)
-	return _out0, _out1
+	_fnCblasStrmv(order, uplo, transA, diag, n, a, lda, unsafe.Pointer(&_out0), incX)
+	return _out0
 }
 
 var _fnCblasStrsm func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasStrsm calls the vecLib framework function cblas_strsm.
-func CblasStrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer) (a float32, b float32) {
+func CblasStrsm(order unsafe.Pointer, side unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, m unsafe.Pointer, n unsafe.Pointer, alpha unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, ldb unsafe.Pointer) (b float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStrsm == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStrsm, _lib, "cblas_strsm")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCblasStrsm(order, side, uplo, transA, diag, m, n, alpha, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), ldb)
-	return _out0, _out1
+	_fnCblasStrsm(order, side, uplo, transA, diag, m, n, alpha, a, lda, unsafe.Pointer(&_out0), ldb)
+	return _out0
 }
 
 var _fnCblasStrsv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // CblasStrsv calls the vecLib framework function cblas_strsv.
-func CblasStrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (a float32, x float32) {
+func CblasStrsv(order unsafe.Pointer, uplo unsafe.Pointer, transA unsafe.Pointer, diag unsafe.Pointer, n unsafe.Pointer, a unsafe.Pointer, lda unsafe.Pointer, incX unsafe.Pointer) (x float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCblasStrsv == nil {
 		ebipurego.RegisterLibFunc(&_fnCblasStrsv, _lib, "cblas_strsv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnCblasStrsv(order, uplo, transA, diag, n, unsafe.Pointer(&_out0), lda, unsafe.Pointer(&_out1), incX)
-	return _out0, _out1
+	_fnCblasStrsv(order, uplo, transA, diag, n, a, lda, unsafe.Pointer(&_out0), incX)
+	return _out0
 }
 
 var _fnCblasZaxpy func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -23292,14 +23127,12 @@ func LaMatrixCols(matrix obj.Object) int {
 var _fnLaMatrixFromDoubleBuffer func(unsafe.Pointer, int, int, int, int, int) unsafe.Pointer
 
 // LaMatrixFromDoubleBuffer calls the vecLib framework function la_matrix_from_double_buffer.
-func LaMatrixFromDoubleBuffer(matrixRows int, matrixCols int, matrixRowStride int, matrixHint int, attributes int) (result unsafe.Pointer, buffer float64) {
+func LaMatrixFromDoubleBuffer(buffer unsafe.Pointer, matrixRows int, matrixCols int, matrixRowStride int, matrixHint int, attributes int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLaMatrixFromDoubleBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnLaMatrixFromDoubleBuffer, _lib, "la_matrix_from_double_buffer")
 	}
-	var _out0 float64
-	_ret := _fnLaMatrixFromDoubleBuffer(unsafe.Pointer(&_out0), matrixRows, matrixCols, matrixRowStride, matrixHint, attributes)
-	return _ret, _out0
+	return _fnLaMatrixFromDoubleBuffer(buffer, matrixRows, matrixCols, matrixRowStride, matrixHint, attributes)
 }
 
 var _fnLaMatrixFromDoubleBufferNocopy func(unsafe.Pointer, int, int, int, int, unsafe.Pointer, int) unsafe.Pointer
@@ -23318,14 +23151,12 @@ func LaMatrixFromDoubleBufferNocopy(matrixRows int, matrixCols int, matrixRowStr
 var _fnLaMatrixFromFloatBuffer func(unsafe.Pointer, int, int, int, int, int) unsafe.Pointer
 
 // LaMatrixFromFloatBuffer calls the vecLib framework function la_matrix_from_float_buffer.
-func LaMatrixFromFloatBuffer(matrixRows int, matrixCols int, matrixRowStride int, matrixHint int, attributes int) (result unsafe.Pointer, buffer float32) {
+func LaMatrixFromFloatBuffer(buffer unsafe.Pointer, matrixRows int, matrixCols int, matrixRowStride int, matrixHint int, attributes int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLaMatrixFromFloatBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnLaMatrixFromFloatBuffer, _lib, "la_matrix_from_float_buffer")
 	}
-	var _out0 float32
-	_ret := _fnLaMatrixFromFloatBuffer(unsafe.Pointer(&_out0), matrixRows, matrixCols, matrixRowStride, matrixHint, attributes)
-	return _ret, _out0
+	return _fnLaMatrixFromFloatBuffer(buffer, matrixRows, matrixCols, matrixRowStride, matrixHint, attributes)
 }
 
 var _fnLaMatrixFromFloatBufferNocopy func(unsafe.Pointer, int, int, int, int, unsafe.Pointer, int) unsafe.Pointer
@@ -30530,57 +30361,49 @@ func SparseMatrixTriangularSolveDenseFloatComplex(order CblasOrder, transt Cblas
 var _fnSparseMatrixVariableBlockCreateDouble func(uint64, uint64, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // SparseMatrixVariableBlockCreateDouble calls the vecLib framework function sparse_matrix_variable_block_create_double.
-func SparseMatrixVariableBlockCreateDouble(mb uint64, nb uint64) (result obj.Object, k uint64, l uint64) {
+func SparseMatrixVariableBlockCreateDouble(mb uint64, nb uint64, k unsafe.Pointer, l unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseMatrixVariableBlockCreateDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixVariableBlockCreateDouble, _lib, "sparse_matrix_variable_block_create_double")
 	}
-	var _out0 uint64
-	var _out1 uint64
-	_ret := _fnSparseMatrixVariableBlockCreateDouble(mb, nb, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return obj.Wrap(_ret), _out0, _out1
+	_ret := _fnSparseMatrixVariableBlockCreateDouble(mb, nb, k, l)
+	return obj.Wrap(_ret)
 }
 
 var _fnSparseMatrixVariableBlockCreateDoubleComplex func(uint64, uint64, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // SparseMatrixVariableBlockCreateDoubleComplex calls the vecLib framework function sparse_matrix_variable_block_create_double_complex.
-func SparseMatrixVariableBlockCreateDoubleComplex(mb uint64, nb uint64) (result obj.Object, k uint64, l uint64) {
+func SparseMatrixVariableBlockCreateDoubleComplex(mb uint64, nb uint64, k unsafe.Pointer, l unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseMatrixVariableBlockCreateDoubleComplex == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixVariableBlockCreateDoubleComplex, _lib, "sparse_matrix_variable_block_create_double_complex")
 	}
-	var _out0 uint64
-	var _out1 uint64
-	_ret := _fnSparseMatrixVariableBlockCreateDoubleComplex(mb, nb, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return obj.Wrap(_ret), _out0, _out1
+	_ret := _fnSparseMatrixVariableBlockCreateDoubleComplex(mb, nb, k, l)
+	return obj.Wrap(_ret)
 }
 
 var _fnSparseMatrixVariableBlockCreateFloat func(uint64, uint64, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // SparseMatrixVariableBlockCreateFloat calls the vecLib framework function sparse_matrix_variable_block_create_float.
-func SparseMatrixVariableBlockCreateFloat(mb uint64, nb uint64) (result obj.Object, k uint64, l uint64) {
+func SparseMatrixVariableBlockCreateFloat(mb uint64, nb uint64, k unsafe.Pointer, l unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseMatrixVariableBlockCreateFloat == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixVariableBlockCreateFloat, _lib, "sparse_matrix_variable_block_create_float")
 	}
-	var _out0 uint64
-	var _out1 uint64
-	_ret := _fnSparseMatrixVariableBlockCreateFloat(mb, nb, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return obj.Wrap(_ret), _out0, _out1
+	_ret := _fnSparseMatrixVariableBlockCreateFloat(mb, nb, k, l)
+	return obj.Wrap(_ret)
 }
 
 var _fnSparseMatrixVariableBlockCreateFloatComplex func(uint64, uint64, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // SparseMatrixVariableBlockCreateFloatComplex calls the vecLib framework function sparse_matrix_variable_block_create_float_complex.
-func SparseMatrixVariableBlockCreateFloatComplex(mb uint64, nb uint64) (result obj.Object, k uint64, l uint64) {
+func SparseMatrixVariableBlockCreateFloatComplex(mb uint64, nb uint64, k unsafe.Pointer, l unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSparseMatrixVariableBlockCreateFloatComplex == nil {
 		ebipurego.RegisterLibFunc(&_fnSparseMatrixVariableBlockCreateFloatComplex, _lib, "sparse_matrix_variable_block_create_float_complex")
 	}
-	var _out0 uint64
-	var _out1 uint64
-	_ret := _fnSparseMatrixVariableBlockCreateFloatComplex(mb, nb, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return obj.Wrap(_ret), _out0, _out1
+	_ret := _fnSparseMatrixVariableBlockCreateFloatComplex(mb, nb, k, l)
+	return obj.Wrap(_ret)
 }
 
 var _fnSparseMatrixVectorProductDenseDouble func(CblasTranspose, float64, objc.ID, unsafe.Pointer, int64, unsafe.Pointer, int64) unsafe.Pointer
@@ -34415,15 +34238,14 @@ func VDSPDCTCreateSetup(previous obj.Object, length int, type_ VdspDctType) obj.
 var _fnVDSPDCTExecute func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // VDSPDCTExecute calls the vecLib framework function vDSP_DCT_Execute.
-func VDSPDCTExecute(setup unsafe.Pointer) (input float32, output float32) {
+func VDSPDCTExecute(setup unsafe.Pointer, input unsafe.Pointer) (output float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDCTExecute == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDCTExecute, _lib, "vDSP_DCT_Execute")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPDCTExecute(setup, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _out0, _out1
+	_fnVDSPDCTExecute(setup, input, unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnVDSPDFTCreateSetup func(objc.ID, int) objc.ID
@@ -34463,33 +34285,29 @@ func VDSPDFTDestroySetupD(setup obj.Object) {
 var _fnVDSPDFTExecute func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // VDSPDFTExecute calls the vecLib framework function vDSP_DFT_Execute.
-func VDSPDFTExecute(setup unsafe.Pointer) (ir float32, ii float32, or float32, oi float32) {
+func VDSPDFTExecute(setup unsafe.Pointer, ir unsafe.Pointer, ii unsafe.Pointer) (or float32, oi float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDFTExecute == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDFTExecute, _lib, "vDSP_DFT_Execute")
 	}
 	var _out0 float32
 	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPDFTExecute(setup, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVDSPDFTExecute(setup, ir, ii, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _out0, _out1
 }
 
 var _fnVDSPDFTExecuteD func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // VDSPDFTExecuteD calls the vecLib framework function vDSP_DFT_ExecuteD.
-func VDSPDFTExecuteD(setup unsafe.Pointer) (ir float64, ii float64, or float64, oi float64) {
+func VDSPDFTExecuteD(setup unsafe.Pointer, ir unsafe.Pointer, ii unsafe.Pointer) (or float64, oi float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDFTExecuteD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDFTExecuteD, _lib, "vDSP_DFT_ExecuteD")
 	}
 	var _out0 float64
 	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPDFTExecuteD(setup, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVDSPDFTExecuteD(setup, ir, ii, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _out0, _out1
 }
 
 var _fnVDSPDFTInterleavedCreateSetup func(objc.ID, int, VdspDftDirection, VdspDftRealtocomplex) objc.ID
@@ -34541,45 +34359,41 @@ func VDSPDFTInterleavedDestroySetupD(setup obj.Object) {
 var _fnVDSPDFTInterleavedExecute func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // VDSPDFTInterleavedExecute calls the vecLib framework function vDSP_DFT_Interleaved_Execute.
-func VDSPDFTInterleavedExecute(setup obj.Object) (iri DSPComplex, ori DSPComplex) {
+func VDSPDFTInterleavedExecute(setup obj.Object, iri *DSPComplex) (ori DSPComplex) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDFTInterleavedExecute == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDFTInterleavedExecute, _lib, "vDSP_DFT_Interleaved_Execute")
 	}
 	var _out0 DSPComplex
-	var _out1 DSPComplex
-	_fnVDSPDFTInterleavedExecute(objref.IDOf(setup), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _out0, _out1
+	_fnVDSPDFTInterleavedExecute(objref.IDOf(setup), unsafe.Pointer(iri), unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnVDSPDFTInterleavedExecuteD func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // VDSPDFTInterleavedExecuteD calls the vecLib framework function vDSP_DFT_Interleaved_ExecuteD.
-func VDSPDFTInterleavedExecuteD(setup obj.Object) (iri DSPDoubleComplex, ori DSPDoubleComplex) {
+func VDSPDFTInterleavedExecuteD(setup obj.Object, iri *DSPDoubleComplex) (ori DSPDoubleComplex) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDFTInterleavedExecuteD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDFTInterleavedExecuteD, _lib, "vDSP_DFT_Interleaved_ExecuteD")
 	}
 	var _out0 DSPDoubleComplex
-	var _out1 DSPDoubleComplex
-	_fnVDSPDFTInterleavedExecuteD(objref.IDOf(setup), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _out0, _out1
+	_fnVDSPDFTInterleavedExecuteD(objref.IDOf(setup), unsafe.Pointer(iri), unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnVDSPDFTZop func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, VdspDftDirection)
 
 // VDSPDFTZop calls the vecLib framework function vDSP_DFT_zop.
-func VDSPDFTZop(setup unsafe.Pointer, is int, os_ int, direction VdspDftDirection) (ir float32, ii float32, or float32, oi float32) {
+func VDSPDFTZop(setup unsafe.Pointer, ir unsafe.Pointer, ii unsafe.Pointer, is int, os_ int, direction VdspDftDirection) (or float32, oi float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDFTZop == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDFTZop, _lib, "vDSP_DFT_zop")
 	}
 	var _out0 float32
 	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPDFTZop(setup, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), is, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), os_, direction)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPDFTZop(setup, ir, ii, is, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), os_, direction)
+	return _out0, _out1
 }
 
 var _fnVDSPDFTZopCreateSetup func(objc.ID, int, VdspDftDirection) objc.ID
@@ -34633,117 +34447,107 @@ func VDSPDFTZropCreateSetupD(previous obj.Object, length int, direction VdspDftD
 var _fnVDSPFFT16Copv func(unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPFFT16Copv calls the vecLib framework function vDSP_FFT16_copv.
-func VDSPFFT16Copv(direction int) (output float32, input float32) {
+func VDSPFFT16Copv(input unsafe.Pointer, direction int) (output float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPFFT16Copv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPFFT16Copv, _lib, "vDSP_FFT16_copv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPFFT16Copv(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), direction)
-	return _out0, _out1
+	_fnVDSPFFT16Copv(unsafe.Pointer(&_out0), input, direction)
+	return _out0
 }
 
 var _fnVDSPFFT16Zopv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPFFT16Zopv calls the vecLib framework function vDSP_FFT16_zopv.
-func VDSPFFT16Zopv(direction int) (or float32, oi float32, ir float32, ii float32) {
+func VDSPFFT16Zopv(ir unsafe.Pointer, ii unsafe.Pointer, direction int) (or float32, oi float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPFFT16Zopv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPFFT16Zopv, _lib, "vDSP_FFT16_zopv")
 	}
 	var _out0 float32
 	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPFFT16Zopv(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), direction)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPFFT16Zopv(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ir, ii, direction)
+	return _out0, _out1
 }
 
 var _fnVDSPFFT32Copv func(unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPFFT32Copv calls the vecLib framework function vDSP_FFT32_copv.
-func VDSPFFT32Copv(direction int) (output float32, input float32) {
+func VDSPFFT32Copv(input unsafe.Pointer, direction int) (output float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPFFT32Copv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPFFT32Copv, _lib, "vDSP_FFT32_copv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPFFT32Copv(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), direction)
-	return _out0, _out1
+	_fnVDSPFFT32Copv(unsafe.Pointer(&_out0), input, direction)
+	return _out0
 }
 
 var _fnVDSPFFT32Zopv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPFFT32Zopv calls the vecLib framework function vDSP_FFT32_zopv.
-func VDSPFFT32Zopv(direction int) (or float32, oi float32, ir float32, ii float32) {
+func VDSPFFT32Zopv(ir unsafe.Pointer, ii unsafe.Pointer, direction int) (or float32, oi float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPFFT32Zopv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPFFT32Zopv, _lib, "vDSP_FFT32_zopv")
 	}
 	var _out0 float32
 	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPFFT32Zopv(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), direction)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPFFT32Zopv(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ir, ii, direction)
+	return _out0, _out1
 }
 
 var _fnVDSPBiquad func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPBiquad calls the vecLib framework function vDSP_biquad.
-func VDSPBiquad(setup unsafe.Pointer, ix int, iy int, n int) (delay float32, x float32, y float32) {
+func VDSPBiquad(setup unsafe.Pointer, x unsafe.Pointer, ix int, iy int, n int) (delay float32, y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquad == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquad, _lib, "vDSP_biquad")
 	}
 	var _out0 float32
 	var _out1 float32
-	var _out2 float32
-	_fnVDSPBiquad(setup, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ix, unsafe.Pointer(&_out2), iy, n)
-	return _out0, _out1, _out2
+	_fnVDSPBiquad(setup, unsafe.Pointer(&_out0), x, ix, unsafe.Pointer(&_out1), iy, n)
+	return _out0, _out1
 }
 
 var _fnVDSPBiquadD func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPBiquadD calls the vecLib framework function vDSP_biquadD.
-func VDSPBiquadD(setup unsafe.Pointer, ix int, iy int, n int) (delay float64, x float64, y float64) {
+func VDSPBiquadD(setup unsafe.Pointer, x unsafe.Pointer, ix int, iy int, n int) (delay float64, y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadD, _lib, "vDSP_biquadD")
 	}
 	var _out0 float64
 	var _out1 float64
-	var _out2 float64
-	_fnVDSPBiquadD(setup, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ix, unsafe.Pointer(&_out2), iy, n)
-	return _out0, _out1, _out2
+	_fnVDSPBiquadD(setup, unsafe.Pointer(&_out0), x, ix, unsafe.Pointer(&_out1), iy, n)
+	return _out0, _out1
 }
 
 var _fnVDSPBiquadCreateSetup func(unsafe.Pointer, int) objc.ID
 
 // VDSPBiquadCreateSetup calls the vecLib framework function vDSP_biquad_CreateSetup.
-func VDSPBiquadCreateSetup(m int) (result obj.Object, coefficients float64) {
+func VDSPBiquadCreateSetup(coefficients unsafe.Pointer, m int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadCreateSetup == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadCreateSetup, _lib, "vDSP_biquad_CreateSetup")
 	}
-	var _out0 float64
-	_ret := _fnVDSPBiquadCreateSetup(unsafe.Pointer(&_out0), m)
-	return obj.Wrap(_ret), _out0
+	_ret := _fnVDSPBiquadCreateSetup(coefficients, m)
+	return obj.Wrap(_ret)
 }
 
 var _fnVDSPBiquadCreateSetupD func(unsafe.Pointer, int) objc.ID
 
 // VDSPBiquadCreateSetupD calls the vecLib framework function vDSP_biquad_CreateSetupD.
-func VDSPBiquadCreateSetupD(m int) (result obj.Object, coefficients float64) {
+func VDSPBiquadCreateSetupD(coefficients unsafe.Pointer, m int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadCreateSetupD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadCreateSetupD, _lib, "vDSP_biquad_CreateSetupD")
 	}
-	var _out0 float64
-	_ret := _fnVDSPBiquadCreateSetupD(unsafe.Pointer(&_out0), m)
-	return obj.Wrap(_ret), _out0
+	_ret := _fnVDSPBiquadCreateSetupD(coefficients, m)
+	return obj.Wrap(_ret)
 }
 
 var _fnVDSPBiquadDestroySetup func(objc.ID)
@@ -34771,55 +34575,49 @@ func VDSPBiquadDestroySetupD(setup obj.Object) {
 var _fnVDSPBiquadSetCoefficientsDouble func(objc.ID, unsafe.Pointer, int, int)
 
 // VDSPBiquadSetCoefficientsDouble calls the vecLib framework function vDSP_biquad_SetCoefficientsDouble.
-func VDSPBiquadSetCoefficientsDouble(setup obj.Object, startSec int, nsec int) (coeffs float64) {
+func VDSPBiquadSetCoefficientsDouble(setup obj.Object, coeffs unsafe.Pointer, startSec int, nsec int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadSetCoefficientsDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadSetCoefficientsDouble, _lib, "vDSP_biquad_SetCoefficientsDouble")
 	}
-	var _out0 float64
-	_fnVDSPBiquadSetCoefficientsDouble(objref.IDOf(setup), unsafe.Pointer(&_out0), startSec, nsec)
-	return _out0
+	_fnVDSPBiquadSetCoefficientsDouble(objref.IDOf(setup), coeffs, startSec, nsec)
 }
 
 var _fnVDSPBiquadSetCoefficientsSingle func(objc.ID, unsafe.Pointer, int, int)
 
 // VDSPBiquadSetCoefficientsSingle calls the vecLib framework function vDSP_biquad_SetCoefficientsSingle.
-func VDSPBiquadSetCoefficientsSingle(setup obj.Object, startSec int, nsec int) (coeffs float32) {
+func VDSPBiquadSetCoefficientsSingle(setup obj.Object, coeffs unsafe.Pointer, startSec int, nsec int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadSetCoefficientsSingle == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadSetCoefficientsSingle, _lib, "vDSP_biquad_SetCoefficientsSingle")
 	}
-	var _out0 float32
-	_fnVDSPBiquadSetCoefficientsSingle(objref.IDOf(setup), unsafe.Pointer(&_out0), startSec, nsec)
-	return _out0
+	_fnVDSPBiquadSetCoefficientsSingle(objref.IDOf(setup), coeffs, startSec, nsec)
 }
 
 var _fnVDSPBiquadm func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPBiquadm calls the vecLib framework function vDSP_biquadm.
-func VDSPBiquadm(setup obj.Object, ix int, iy int, n int) (x float32, y float32) {
+func VDSPBiquadm(setup obj.Object, x unsafe.Pointer, ix int, iy int, n int) (y float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadm == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadm, _lib, "vDSP_biquadm")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPBiquadm(objref.IDOf(setup), unsafe.Pointer(&_out0), ix, unsafe.Pointer(&_out1), iy, n)
-	return _out0, _out1
+	_fnVDSPBiquadm(objref.IDOf(setup), x, ix, unsafe.Pointer(&_out0), iy, n)
+	return _out0
 }
 
 var _fnVDSPBiquadmD func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPBiquadmD calls the vecLib framework function vDSP_biquadmD.
-func VDSPBiquadmD(setup obj.Object, ix int, iy int, n int) (x float64, y float64) {
+func VDSPBiquadmD(setup obj.Object, x unsafe.Pointer, ix int, iy int, n int) (y float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadmD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmD, _lib, "vDSP_biquadmD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPBiquadmD(objref.IDOf(setup), unsafe.Pointer(&_out0), ix, unsafe.Pointer(&_out1), iy, n)
-	return _out0, _out1
+	_fnVDSPBiquadmD(objref.IDOf(setup), x, ix, unsafe.Pointer(&_out0), iy, n)
+	return _out0
 }
 
 var _fnVDSPBiquadmCopyState func(objc.ID, unsafe.Pointer)
@@ -34847,27 +34645,25 @@ func VDSPBiquadmCopyStateD(dest obj.Object, src unsafe.Pointer) {
 var _fnVDSPBiquadmCreateSetup func(unsafe.Pointer, int, int) objc.ID
 
 // VDSPBiquadmCreateSetup calls the vecLib framework function vDSP_biquadm_CreateSetup.
-func VDSPBiquadmCreateSetup(m int, n int) (result obj.Object, coeffs float64) {
+func VDSPBiquadmCreateSetup(coeffs unsafe.Pointer, m int, n int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadmCreateSetup == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmCreateSetup, _lib, "vDSP_biquadm_CreateSetup")
 	}
-	var _out0 float64
-	_ret := _fnVDSPBiquadmCreateSetup(unsafe.Pointer(&_out0), m, n)
-	return obj.Wrap(_ret), _out0
+	_ret := _fnVDSPBiquadmCreateSetup(coeffs, m, n)
+	return obj.Wrap(_ret)
 }
 
 var _fnVDSPBiquadmCreateSetupD func(unsafe.Pointer, int, int) objc.ID
 
 // VDSPBiquadmCreateSetupD calls the vecLib framework function vDSP_biquadm_CreateSetupD.
-func VDSPBiquadmCreateSetupD(m int, n int) (result obj.Object, coeffs float64) {
+func VDSPBiquadmCreateSetupD(coeffs unsafe.Pointer, m int, n int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadmCreateSetupD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmCreateSetupD, _lib, "vDSP_biquadm_CreateSetupD")
 	}
-	var _out0 float64
-	_ret := _fnVDSPBiquadmCreateSetupD(unsafe.Pointer(&_out0), m, n)
-	return obj.Wrap(_ret), _out0
+	_ret := _fnVDSPBiquadmCreateSetupD(coeffs, m, n)
+	return obj.Wrap(_ret)
 }
 
 var _fnVDSPBiquadmDestroySetup func(objc.ID)
@@ -34917,131 +34713,111 @@ func VDSPBiquadmResetStateD(setup obj.Object) {
 var _fnVDSPBiquadmSetActiveFilters func(objc.ID, unsafe.Pointer)
 
 // VDSPBiquadmSetActiveFilters calls the vecLib framework function vDSP_biquadm_SetActiveFilters.
-func VDSPBiquadmSetActiveFilters(setup obj.Object) (filterStates bool) {
+func VDSPBiquadmSetActiveFilters(setup obj.Object, filterStates unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadmSetActiveFilters == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmSetActiveFilters, _lib, "vDSP_biquadm_SetActiveFilters")
 	}
-	var _out0 bool
-	_fnVDSPBiquadmSetActiveFilters(objref.IDOf(setup), unsafe.Pointer(&_out0))
-	return _out0
+	_fnVDSPBiquadmSetActiveFilters(objref.IDOf(setup), filterStates)
 }
 
 var _fnVDSPBiquadmSetActiveFiltersD func(objc.ID, unsafe.Pointer)
 
 // VDSPBiquadmSetActiveFiltersD calls the vecLib framework function vDSP_biquadm_SetActiveFiltersD.
-func VDSPBiquadmSetActiveFiltersD(setup obj.Object) (filterStates bool) {
+func VDSPBiquadmSetActiveFiltersD(setup obj.Object, filterStates unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadmSetActiveFiltersD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmSetActiveFiltersD, _lib, "vDSP_biquadm_SetActiveFiltersD")
 	}
-	var _out0 bool
-	_fnVDSPBiquadmSetActiveFiltersD(objref.IDOf(setup), unsafe.Pointer(&_out0))
-	return _out0
+	_fnVDSPBiquadmSetActiveFiltersD(objref.IDOf(setup), filterStates)
 }
 
 var _fnVDSPBiquadmSetCoefficientsDouble func(objc.ID, unsafe.Pointer, int, int, int, int)
 
 // VDSPBiquadmSetCoefficientsDouble calls the vecLib framework function vDSP_biquadm_SetCoefficientsDouble.
-func VDSPBiquadmSetCoefficientsDouble(setup obj.Object, startSec int, startChn int, nsec int, nchn int) (coeffs float64) {
+func VDSPBiquadmSetCoefficientsDouble(setup obj.Object, coeffs unsafe.Pointer, startSec int, startChn int, nsec int, nchn int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadmSetCoefficientsDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmSetCoefficientsDouble, _lib, "vDSP_biquadm_SetCoefficientsDouble")
 	}
-	var _out0 float64
-	_fnVDSPBiquadmSetCoefficientsDouble(objref.IDOf(setup), unsafe.Pointer(&_out0), startSec, startChn, nsec, nchn)
-	return _out0
+	_fnVDSPBiquadmSetCoefficientsDouble(objref.IDOf(setup), coeffs, startSec, startChn, nsec, nchn)
 }
 
 var _fnVDSPBiquadmSetCoefficientsDoubleD func(objc.ID, unsafe.Pointer, int, int, int, int)
 
 // VDSPBiquadmSetCoefficientsDoubleD calls the vecLib framework function vDSP_biquadm_SetCoefficientsDoubleD.
-func VDSPBiquadmSetCoefficientsDoubleD(setup obj.Object, startSec int, startChn int, nsec int, nchn int) (coeffs float64) {
+func VDSPBiquadmSetCoefficientsDoubleD(setup obj.Object, coeffs unsafe.Pointer, startSec int, startChn int, nsec int, nchn int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadmSetCoefficientsDoubleD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmSetCoefficientsDoubleD, _lib, "vDSP_biquadm_SetCoefficientsDoubleD")
 	}
-	var _out0 float64
-	_fnVDSPBiquadmSetCoefficientsDoubleD(objref.IDOf(setup), unsafe.Pointer(&_out0), startSec, startChn, nsec, nchn)
-	return _out0
+	_fnVDSPBiquadmSetCoefficientsDoubleD(objref.IDOf(setup), coeffs, startSec, startChn, nsec, nchn)
 }
 
 var _fnVDSPBiquadmSetCoefficientsSingle func(objc.ID, unsafe.Pointer, int, int, int, int)
 
 // VDSPBiquadmSetCoefficientsSingle calls the vecLib framework function vDSP_biquadm_SetCoefficientsSingle.
-func VDSPBiquadmSetCoefficientsSingle(setup obj.Object, startSec int, startChn int, nsec int, nchn int) (coeffs float32) {
+func VDSPBiquadmSetCoefficientsSingle(setup obj.Object, coeffs unsafe.Pointer, startSec int, startChn int, nsec int, nchn int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadmSetCoefficientsSingle == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmSetCoefficientsSingle, _lib, "vDSP_biquadm_SetCoefficientsSingle")
 	}
-	var _out0 float32
-	_fnVDSPBiquadmSetCoefficientsSingle(objref.IDOf(setup), unsafe.Pointer(&_out0), startSec, startChn, nsec, nchn)
-	return _out0
+	_fnVDSPBiquadmSetCoefficientsSingle(objref.IDOf(setup), coeffs, startSec, startChn, nsec, nchn)
 }
 
 var _fnVDSPBiquadmSetCoefficientsSingleD func(objc.ID, unsafe.Pointer, int, int, int, int)
 
 // VDSPBiquadmSetCoefficientsSingleD calls the vecLib framework function vDSP_biquadm_SetCoefficientsSingleD.
-func VDSPBiquadmSetCoefficientsSingleD(setup obj.Object, startSec int, startChn int, nsec int, nchn int) (coeffs float32) {
+func VDSPBiquadmSetCoefficientsSingleD(setup obj.Object, coeffs unsafe.Pointer, startSec int, startChn int, nsec int, nchn int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadmSetCoefficientsSingleD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmSetCoefficientsSingleD, _lib, "vDSP_biquadm_SetCoefficientsSingleD")
 	}
-	var _out0 float32
-	_fnVDSPBiquadmSetCoefficientsSingleD(objref.IDOf(setup), unsafe.Pointer(&_out0), startSec, startChn, nsec, nchn)
-	return _out0
+	_fnVDSPBiquadmSetCoefficientsSingleD(objref.IDOf(setup), coeffs, startSec, startChn, nsec, nchn)
 }
 
 var _fnVDSPBiquadmSetTargetsDouble func(objc.ID, unsafe.Pointer, float32, float32, int, int, int, int)
 
 // VDSPBiquadmSetTargetsDouble calls the vecLib framework function vDSP_biquadm_SetTargetsDouble.
-func VDSPBiquadmSetTargetsDouble(setup obj.Object, interpRate float32, interpThreshold float32, startSec int, startChn int, nsec int, nchn int) (targets float64) {
+func VDSPBiquadmSetTargetsDouble(setup obj.Object, targets unsafe.Pointer, interpRate float32, interpThreshold float32, startSec int, startChn int, nsec int, nchn int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadmSetTargetsDouble == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmSetTargetsDouble, _lib, "vDSP_biquadm_SetTargetsDouble")
 	}
-	var _out0 float64
-	_fnVDSPBiquadmSetTargetsDouble(objref.IDOf(setup), unsafe.Pointer(&_out0), interpRate, interpThreshold, startSec, startChn, nsec, nchn)
-	return _out0
+	_fnVDSPBiquadmSetTargetsDouble(objref.IDOf(setup), targets, interpRate, interpThreshold, startSec, startChn, nsec, nchn)
 }
 
 var _fnVDSPBiquadmSetTargetsDoubleD func(objc.ID, unsafe.Pointer, float64, float64, int, int, int, int)
 
 // VDSPBiquadmSetTargetsDoubleD calls the vecLib framework function vDSP_biquadm_SetTargetsDoubleD.
-func VDSPBiquadmSetTargetsDoubleD(setup obj.Object, interpRate float64, interpThreshold float64, startSec int, startChn int, nsec int, nchn int) (targets float64) {
+func VDSPBiquadmSetTargetsDoubleD(setup obj.Object, targets unsafe.Pointer, interpRate float64, interpThreshold float64, startSec int, startChn int, nsec int, nchn int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadmSetTargetsDoubleD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmSetTargetsDoubleD, _lib, "vDSP_biquadm_SetTargetsDoubleD")
 	}
-	var _out0 float64
-	_fnVDSPBiquadmSetTargetsDoubleD(objref.IDOf(setup), unsafe.Pointer(&_out0), interpRate, interpThreshold, startSec, startChn, nsec, nchn)
-	return _out0
+	_fnVDSPBiquadmSetTargetsDoubleD(objref.IDOf(setup), targets, interpRate, interpThreshold, startSec, startChn, nsec, nchn)
 }
 
 var _fnVDSPBiquadmSetTargetsSingle func(objc.ID, unsafe.Pointer, float32, float32, int, int, int, int)
 
 // VDSPBiquadmSetTargetsSingle calls the vecLib framework function vDSP_biquadm_SetTargetsSingle.
-func VDSPBiquadmSetTargetsSingle(setup obj.Object, interpRate float32, interpThreshold float32, startSec int, startChn int, nsec int, nchn int) (targets float32) {
+func VDSPBiquadmSetTargetsSingle(setup obj.Object, targets unsafe.Pointer, interpRate float32, interpThreshold float32, startSec int, startChn int, nsec int, nchn int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadmSetTargetsSingle == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmSetTargetsSingle, _lib, "vDSP_biquadm_SetTargetsSingle")
 	}
-	var _out0 float32
-	_fnVDSPBiquadmSetTargetsSingle(objref.IDOf(setup), unsafe.Pointer(&_out0), interpRate, interpThreshold, startSec, startChn, nsec, nchn)
-	return _out0
+	_fnVDSPBiquadmSetTargetsSingle(objref.IDOf(setup), targets, interpRate, interpThreshold, startSec, startChn, nsec, nchn)
 }
 
 var _fnVDSPBiquadmSetTargetsSingleD func(objc.ID, unsafe.Pointer, float64, float64, int, int, int, int)
 
 // VDSPBiquadmSetTargetsSingleD calls the vecLib framework function vDSP_biquadm_SetTargetsSingleD.
-func VDSPBiquadmSetTargetsSingleD(setup obj.Object, interpRate float64, interpThreshold float64, startSec int, startChn int, nsec int, nchn int) (targets float32) {
+func VDSPBiquadmSetTargetsSingleD(setup obj.Object, targets unsafe.Pointer, interpRate float64, interpThreshold float64, startSec int, startChn int, nsec int, nchn int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPBiquadmSetTargetsSingleD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPBiquadmSetTargetsSingleD, _lib, "vDSP_biquadm_SetTargetsSingleD")
 	}
-	var _out0 float32
-	_fnVDSPBiquadmSetTargetsSingleD(objref.IDOf(setup), unsafe.Pointer(&_out0), interpRate, interpThreshold, startSec, startChn, nsec, nchn)
-	return _out0
+	_fnVDSPBiquadmSetTargetsSingleD(objref.IDOf(setup), targets, interpRate, interpThreshold, startSec, startChn, nsec, nchn)
 }
 
 var _fnVDSPBlkmanWindow func(unsafe.Pointer, int, int)
@@ -35073,31 +34849,27 @@ func VDSPBlkmanWindowD(n int, flag int) (c float64) {
 var _fnVDSPConv func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPConv calls the vecLib framework function vDSP_conv.
-func VDSPConv(ia int, if_ int, ic int, n int, p int) (a float32, f float32, c float32) {
+func VDSPConv(a unsafe.Pointer, ia int, f unsafe.Pointer, if_ int, ic int, n int, p int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPConv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPConv, _lib, "vDSP_conv")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPConv(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), if_, unsafe.Pointer(&_out2), ic, n, p)
-	return _out0, _out1, _out2
+	_fnVDSPConv(a, ia, f, if_, unsafe.Pointer(&_out0), ic, n, p)
+	return _out0
 }
 
 var _fnVDSPConvD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPConvD calls the vecLib framework function vDSP_convD.
-func VDSPConvD(ia int, if_ int, ic int, n int, p int) (a float64, f float64, c float64) {
+func VDSPConvD(a unsafe.Pointer, ia int, f unsafe.Pointer, if_ int, ic int, n int, p int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPConvD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPConvD, _lib, "vDSP_convD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPConvD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), if_, unsafe.Pointer(&_out2), ic, n, p)
-	return _out0, _out1, _out2
+	_fnVDSPConvD(a, ia, f, if_, unsafe.Pointer(&_out0), ic, n, p)
+	return _out0
 }
 
 var _fnVDSPCreateFftsetup func(int, int) objc.ID
@@ -35127,87 +34899,75 @@ func VDSPCreateFftsetupD(log2n int, radix int) obj.Object {
 var _fnVDSPCtoz func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPCtoz calls the vecLib framework function vDSP_ctoz.
-func VDSPCtoz(ic int, z unsafe.Pointer, iz int, n int) (c DSPComplex) {
+func VDSPCtoz(c *DSPComplex, ic int, z unsafe.Pointer, iz int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPCtoz == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPCtoz, _lib, "vDSP_ctoz")
 	}
-	var _out0 DSPComplex
-	_fnVDSPCtoz(unsafe.Pointer(&_out0), ic, z, iz, n)
-	return _out0
+	_fnVDSPCtoz(unsafe.Pointer(c), ic, z, iz, n)
 }
 
 var _fnVDSPCtozD func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPCtozD calls the vecLib framework function vDSP_ctozD.
-func VDSPCtozD(ic int, z unsafe.Pointer, iz int, n int) (c DSPDoubleComplex) {
+func VDSPCtozD(c *DSPDoubleComplex, ic int, z unsafe.Pointer, iz int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPCtozD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPCtozD, _lib, "vDSP_ctozD")
 	}
-	var _out0 DSPDoubleComplex
-	_fnVDSPCtozD(unsafe.Pointer(&_out0), ic, z, iz, n)
-	return _out0
+	_fnVDSPCtozD(unsafe.Pointer(c), ic, z, iz, n)
 }
 
 var _fnVDSPDeq22 func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPDeq22 calls the vecLib framework function vDSP_deq22.
-func VDSPDeq22(ia int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPDeq22(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDeq22 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDeq22, _lib, "vDSP_deq22")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPDeq22(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPDeq22(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPDeq22D func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPDeq22D calls the vecLib framework function vDSP_deq22D.
-func VDSPDeq22D(ia int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPDeq22D(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDeq22D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDeq22D, _lib, "vDSP_deq22D")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPDeq22D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPDeq22D(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPDesamp func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPDesamp calls the vecLib framework function vDSP_desamp.
-func VDSPDesamp(df int, n int, p int) (a float32, f float32, c float32) {
+func VDSPDesamp(a unsafe.Pointer, df int, f unsafe.Pointer, n int, p int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDesamp == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDesamp, _lib, "vDSP_desamp")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPDesamp(unsafe.Pointer(&_out0), df, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n, p)
-	return _out0, _out1, _out2
+	_fnVDSPDesamp(a, df, f, unsafe.Pointer(&_out0), n, p)
+	return _out0
 }
 
 var _fnVDSPDesampD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPDesampD calls the vecLib framework function vDSP_desampD.
-func VDSPDesampD(df int, n int, p int) (a float64, f float64, c float64) {
+func VDSPDesampD(a unsafe.Pointer, df int, f unsafe.Pointer, n int, p int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDesampD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDesampD, _lib, "vDSP_desampD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPDesampD(unsafe.Pointer(&_out0), df, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n, p)
-	return _out0, _out1, _out2
+	_fnVDSPDesampD(a, df, f, unsafe.Pointer(&_out0), n, p)
+	return _out0
 }
 
 var _fnVDSPDestroyFftsetup func(objc.ID)
@@ -35235,219 +34995,187 @@ func VDSPDestroyFftsetupD(setup obj.Object) {
 var _fnVDSPDistancesq func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPDistancesq calls the vecLib framework function vDSP_distancesq.
-func VDSPDistancesq(ia int, ib int, n int) (a float32, b float32, c float32) {
+func VDSPDistancesq(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDistancesq == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDistancesq, _lib, "vDSP_distancesq")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPDistancesq(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	_fnVDSPDistancesq(a, ia, b, ib, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPDistancesqD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPDistancesqD calls the vecLib framework function vDSP_distancesqD.
-func VDSPDistancesqD(ia int, ib int, n int) (a float64, b float64, c float64) {
+func VDSPDistancesqD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDistancesqD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDistancesqD, _lib, "vDSP_distancesqD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPDistancesqD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	_fnVDSPDistancesqD(a, ia, b, ib, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPDotpr func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPDotpr calls the vecLib framework function vDSP_dotpr.
-func VDSPDotpr(ia int, ib int, n int) (a float32, b float32, c float32) {
+func VDSPDotpr(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDotpr == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDotpr, _lib, "vDSP_dotpr")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPDotpr(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	_fnVDSPDotpr(a, ia, b, ib, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPDotpr2 func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPDotpr2 calls the vecLib framework function vDSP_dotpr2.
-func VDSPDotpr2(ia0 int, ia1 int, ib int, n int) (a0 float32, a1 float32, b float32, c0 float32, c1 float32) {
+func VDSPDotpr2(a0 unsafe.Pointer, ia0 int, a1 unsafe.Pointer, ia1 int, b unsafe.Pointer, ib int, n int) (c0 float32, c1 float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDotpr2 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDotpr2, _lib, "vDSP_dotpr2")
 	}
 	var _out0 float32
 	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	var _out4 float32
-	_fnVDSPDotpr2(unsafe.Pointer(&_out0), ia0, unsafe.Pointer(&_out1), ia1, unsafe.Pointer(&_out2), ib, unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPDotpr2(a0, ia0, a1, ia1, b, ib, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPDotpr2D func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPDotpr2D calls the vecLib framework function vDSP_dotpr2D.
-func VDSPDotpr2D(ia0 int, ia1 int, ib int, n int) (a0 float64, a1 float64, b float64, c0 float64, c1 float64) {
+func VDSPDotpr2D(a0 unsafe.Pointer, ia0 int, a1 unsafe.Pointer, ia1 int, b unsafe.Pointer, ib int, n int) (c0 float64, c1 float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDotpr2D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDotpr2D, _lib, "vDSP_dotpr2D")
 	}
 	var _out0 float64
 	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	var _out4 float64
-	_fnVDSPDotpr2D(unsafe.Pointer(&_out0), ia0, unsafe.Pointer(&_out1), ia1, unsafe.Pointer(&_out2), ib, unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPDotpr2D(a0, ia0, a1, ia1, b, ib, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPDotpr2S115 func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPDotpr2S115 calls the vecLib framework function vDSP_dotpr2_s1_15.
-func VDSPDotpr2S115(ia0 int, ia1 int, ib int, n int) (a0 int16, a1 int16, b int16, c0 int16, c1 int16) {
+func VDSPDotpr2S115(a0 unsafe.Pointer, ia0 int, a1 unsafe.Pointer, ia1 int, b unsafe.Pointer, ib int, n int) (c0 int16, c1 int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDotpr2S115 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDotpr2S115, _lib, "vDSP_dotpr2_s1_15")
 	}
 	var _out0 int16
 	var _out1 int16
-	var _out2 int16
-	var _out3 int16
-	var _out4 int16
-	_fnVDSPDotpr2S115(unsafe.Pointer(&_out0), ia0, unsafe.Pointer(&_out1), ia1, unsafe.Pointer(&_out2), ib, unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPDotpr2S115(a0, ia0, a1, ia1, b, ib, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPDotpr2S824 func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPDotpr2S824 calls the vecLib framework function vDSP_dotpr2_s8_24.
-func VDSPDotpr2S824(ia0 int, ia1 int, ib int, n int) (a0 int32, a1 int32, b int32, c0 int32, c1 int32) {
+func VDSPDotpr2S824(a0 unsafe.Pointer, ia0 int, a1 unsafe.Pointer, ia1 int, b unsafe.Pointer, ib int, n int) (c0 int32, c1 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDotpr2S824 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDotpr2S824, _lib, "vDSP_dotpr2_s8_24")
 	}
 	var _out0 int32
 	var _out1 int32
-	var _out2 int32
-	var _out3 int32
-	var _out4 int32
-	_fnVDSPDotpr2S824(unsafe.Pointer(&_out0), ia0, unsafe.Pointer(&_out1), ia1, unsafe.Pointer(&_out2), ib, unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPDotpr2S824(a0, ia0, a1, ia1, b, ib, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPDotprD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPDotprD calls the vecLib framework function vDSP_dotprD.
-func VDSPDotprD(ia int, ib int, n int) (a float64, b float64, c float64) {
+func VDSPDotprD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDotprD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDotprD, _lib, "vDSP_dotprD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPDotprD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	_fnVDSPDotprD(a, ia, b, ib, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPDotprS115 func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPDotprS115 calls the vecLib framework function vDSP_dotpr_s1_15.
-func VDSPDotprS115(ia int, ib int, n int) (a int16, b int16, c int16) {
+func VDSPDotprS115(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, n int) (c int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDotprS115 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDotprS115, _lib, "vDSP_dotpr_s1_15")
 	}
 	var _out0 int16
-	var _out1 int16
-	var _out2 int16
-	_fnVDSPDotprS115(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	_fnVDSPDotprS115(a, ia, b, ib, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPDotprS824 func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPDotprS824 calls the vecLib framework function vDSP_dotpr_s8_24.
-func VDSPDotprS824(ia int, ib int, n int) (a int32, b int32, c int32) {
+func VDSPDotprS824(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, n int) (c int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPDotprS824 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPDotprS824, _lib, "vDSP_dotpr_s8_24")
 	}
 	var _out0 int32
-	var _out1 int32
-	var _out2 int32
-	_fnVDSPDotprS824(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	_fnVDSPDotprS824(a, ia, b, ib, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPF3x3 func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer)
 
 // VDSPF3x3 calls the vecLib framework function vDSP_f3x3.
-func VDSPF3x3(nr int, nc int) (a float32, f float32, c float32) {
+func VDSPF3x3(a unsafe.Pointer, nr int, nc int, f unsafe.Pointer) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPF3x3 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPF3x3, _lib, "vDSP_f3x3")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPF3x3(unsafe.Pointer(&_out0), nr, nc, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVDSPF3x3(a, nr, nc, f, unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnVDSPF3x3D func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer)
 
 // VDSPF3x3D calls the vecLib framework function vDSP_f3x3D.
-func VDSPF3x3D(nr int, nc int) (a float64, f float64, c float64) {
+func VDSPF3x3D(a unsafe.Pointer, nr int, nc int, f unsafe.Pointer) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPF3x3D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPF3x3D, _lib, "vDSP_f3x3D")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPF3x3D(unsafe.Pointer(&_out0), nr, nc, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVDSPF3x3D(a, nr, nc, f, unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnVDSPF5x5 func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer)
 
 // VDSPF5x5 calls the vecLib framework function vDSP_f5x5.
-func VDSPF5x5(nr int, nc int) (a float32, f float32, c float32) {
+func VDSPF5x5(a unsafe.Pointer, nr int, nc int, f unsafe.Pointer) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPF5x5 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPF5x5, _lib, "vDSP_f5x5")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPF5x5(unsafe.Pointer(&_out0), nr, nc, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVDSPF5x5(a, nr, nc, f, unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnVDSPF5x5D func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer)
 
 // VDSPF5x5D calls the vecLib framework function vDSP_f5x5D.
-func VDSPF5x5D(nr int, nc int) (a float64, f float64, c float64) {
+func VDSPF5x5D(a unsafe.Pointer, nr int, nc int, f unsafe.Pointer) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPF5x5D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPF5x5D, _lib, "vDSP_f5x5D")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPF5x5D(unsafe.Pointer(&_out0), nr, nc, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVDSPF5x5D(a, nr, nc, f, unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnVDSPFft2dZip func(objc.ID, unsafe.Pointer, int, int, int, int, int)
@@ -36077,467 +35805,431 @@ func VDSPHannWindowD(n int, flag int) (c float64) {
 var _fnVDSPImgfir func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPImgfir calls the vecLib framework function vDSP_imgfir.
-func VDSPImgfir(nr int, nc int, p int, q int) (a float32, f float32, c float32) {
+func VDSPImgfir(a unsafe.Pointer, nr int, nc int, f unsafe.Pointer, p int, q int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPImgfir == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPImgfir, _lib, "vDSP_imgfir")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPImgfir(unsafe.Pointer(&_out0), nr, nc, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), p, q)
-	return _out0, _out1, _out2
+	_fnVDSPImgfir(a, nr, nc, f, unsafe.Pointer(&_out0), p, q)
+	return _out0
 }
 
 var _fnVDSPImgfirD func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPImgfirD calls the vecLib framework function vDSP_imgfirD.
-func VDSPImgfirD(nr int, nc int, p int, q int) (a float64, f float64, c float64) {
+func VDSPImgfirD(a unsafe.Pointer, nr int, nc int, f unsafe.Pointer, p int, q int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPImgfirD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPImgfirD, _lib, "vDSP_imgfirD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPImgfirD(unsafe.Pointer(&_out0), nr, nc, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), p, q)
-	return _out0, _out1, _out2
+	_fnVDSPImgfirD(a, nr, nc, f, unsafe.Pointer(&_out0), p, q)
+	return _out0
 }
 
 var _fnVDSPMaxmgv func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMaxmgv calls the vecLib framework function vDSP_maxmgv.
-func VDSPMaxmgv(ia int, n int) (a float32, c float32) {
+func VDSPMaxmgv(a unsafe.Pointer, ia int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMaxmgv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMaxmgv, _lib, "vDSP_maxmgv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPMaxmgv(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMaxmgv(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMaxmgvD func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMaxmgvD calls the vecLib framework function vDSP_maxmgvD.
-func VDSPMaxmgvD(ia int, n int) (a float64, c float64) {
+func VDSPMaxmgvD(a unsafe.Pointer, ia int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMaxmgvD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMaxmgvD, _lib, "vDSP_maxmgvD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPMaxmgvD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMaxmgvD(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMaxmgvi func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPMaxmgvi calls the vecLib framework function vDSP_maxmgvi.
-func VDSPMaxmgvi(ia int, n int) (a float32, c float32, i int) {
+func VDSPMaxmgvi(a unsafe.Pointer, ia int, n int) (c float32, i int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMaxmgvi == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMaxmgvi, _lib, "vDSP_maxmgvi")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int
-	_fnVDSPMaxmgvi(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	var _out1 int
+	_fnVDSPMaxmgvi(a, ia, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPMaxmgviD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPMaxmgviD calls the vecLib framework function vDSP_maxmgviD.
-func VDSPMaxmgviD(ia int, n int) (a float64, c float64, i int) {
+func VDSPMaxmgviD(a unsafe.Pointer, ia int, n int) (c float64, i int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMaxmgviD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMaxmgviD, _lib, "vDSP_maxmgviD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int
-	_fnVDSPMaxmgviD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	var _out1 int
+	_fnVDSPMaxmgviD(a, ia, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPMaxv func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMaxv calls the vecLib framework function vDSP_maxv.
-func VDSPMaxv(ia int, n int) (a float32, c float32) {
+func VDSPMaxv(a unsafe.Pointer, ia int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMaxv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMaxv, _lib, "vDSP_maxv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPMaxv(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMaxv(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMaxvD func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMaxvD calls the vecLib framework function vDSP_maxvD.
-func VDSPMaxvD(i int, n int) (a float64, c float64) {
+func VDSPMaxvD(a unsafe.Pointer, i int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMaxvD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMaxvD, _lib, "vDSP_maxvD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPMaxvD(unsafe.Pointer(&_out0), i, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMaxvD(a, i, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMaxvi func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPMaxvi calls the vecLib framework function vDSP_maxvi.
-func VDSPMaxvi(ia int, n int) (a float32, c float32, i int) {
+func VDSPMaxvi(a unsafe.Pointer, ia int, n int) (c float32, i int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMaxvi == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMaxvi, _lib, "vDSP_maxvi")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int
-	_fnVDSPMaxvi(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	var _out1 int
+	_fnVDSPMaxvi(a, ia, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPMaxviD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPMaxviD calls the vecLib framework function vDSP_maxviD.
-func VDSPMaxviD(ia int, n int) (a float64, c float64, i int) {
+func VDSPMaxviD(a unsafe.Pointer, ia int, n int) (c float64, i int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMaxviD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMaxviD, _lib, "vDSP_maxviD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int
-	_fnVDSPMaxviD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	var _out1 int
+	_fnVDSPMaxviD(a, ia, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPMeamgv func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMeamgv calls the vecLib framework function vDSP_meamgv.
-func VDSPMeamgv(ia int, n int) (a float32, c float32) {
+func VDSPMeamgv(a unsafe.Pointer, ia int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMeamgv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMeamgv, _lib, "vDSP_meamgv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPMeamgv(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMeamgv(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMeamgvD func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMeamgvD calls the vecLib framework function vDSP_meamgvD.
-func VDSPMeamgvD(ia int, n int) (a float64, c float64) {
+func VDSPMeamgvD(a unsafe.Pointer, ia int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMeamgvD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMeamgvD, _lib, "vDSP_meamgvD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPMeamgvD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMeamgvD(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMeanv func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMeanv calls the vecLib framework function vDSP_meanv.
-func VDSPMeanv(ia int, n int) (a float32, c float32) {
+func VDSPMeanv(a unsafe.Pointer, ia int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMeanv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMeanv, _lib, "vDSP_meanv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPMeanv(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMeanv(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMeanvD func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMeanvD calls the vecLib framework function vDSP_meanvD.
-func VDSPMeanvD(ia int, n int) (a float64, c float64) {
+func VDSPMeanvD(a unsafe.Pointer, ia int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMeanvD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMeanvD, _lib, "vDSP_meanvD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPMeanvD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMeanvD(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMeasqv func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMeasqv calls the vecLib framework function vDSP_measqv.
-func VDSPMeasqv(ia int, n int) (a float32, c float32) {
+func VDSPMeasqv(a unsafe.Pointer, ia int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMeasqv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMeasqv, _lib, "vDSP_measqv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPMeasqv(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMeasqv(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMeasqvD func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMeasqvD calls the vecLib framework function vDSP_measqvD.
-func VDSPMeasqvD(i int, n int) (a float64, c float64) {
+func VDSPMeasqvD(a unsafe.Pointer, i int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMeasqvD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMeasqvD, _lib, "vDSP_measqvD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPMeasqvD(unsafe.Pointer(&_out0), i, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMeasqvD(a, i, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMinmgv func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMinmgv calls the vecLib framework function vDSP_minmgv.
-func VDSPMinmgv(ia int, n int) (a float32, c float32) {
+func VDSPMinmgv(a unsafe.Pointer, ia int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMinmgv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMinmgv, _lib, "vDSP_minmgv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPMinmgv(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMinmgv(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMinmgvD func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMinmgvD calls the vecLib framework function vDSP_minmgvD.
-func VDSPMinmgvD(ia int, n int) (a float64, c float64) {
+func VDSPMinmgvD(a unsafe.Pointer, ia int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMinmgvD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMinmgvD, _lib, "vDSP_minmgvD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPMinmgvD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMinmgvD(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMinmgvi func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPMinmgvi calls the vecLib framework function vDSP_minmgvi.
-func VDSPMinmgvi(ia int, n int) (a float32, c float32, i int) {
+func VDSPMinmgvi(a unsafe.Pointer, ia int, n int) (c float32, i int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMinmgvi == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMinmgvi, _lib, "vDSP_minmgvi")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int
-	_fnVDSPMinmgvi(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	var _out1 int
+	_fnVDSPMinmgvi(a, ia, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPMinmgviD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPMinmgviD calls the vecLib framework function vDSP_minmgviD.
-func VDSPMinmgviD(ia int, n int) (a float64, c float64, i int) {
+func VDSPMinmgviD(a unsafe.Pointer, ia int, n int) (c float64, i int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMinmgviD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMinmgviD, _lib, "vDSP_minmgviD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int
-	_fnVDSPMinmgviD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	var _out1 int
+	_fnVDSPMinmgviD(a, ia, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPMinv func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMinv calls the vecLib framework function vDSP_minv.
-func VDSPMinv(ia int, n int) (a float32, c float32) {
+func VDSPMinv(a unsafe.Pointer, ia int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMinv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMinv, _lib, "vDSP_minv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPMinv(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMinv(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMinvD func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMinvD calls the vecLib framework function vDSP_minvD.
-func VDSPMinvD(ia int, n int) (a float64, c float64) {
+func VDSPMinvD(a unsafe.Pointer, ia int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMinvD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMinvD, _lib, "vDSP_minvD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPMinvD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMinvD(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMinvi func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPMinvi calls the vecLib framework function vDSP_minvi.
-func VDSPMinvi(ia int, n int) (a float32, c float32, i int) {
+func VDSPMinvi(a unsafe.Pointer, ia int, n int) (c float32, i int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMinvi == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMinvi, _lib, "vDSP_minvi")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int
-	_fnVDSPMinvi(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	var _out1 int
+	_fnVDSPMinvi(a, ia, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPMinviD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPMinviD calls the vecLib framework function vDSP_minviD.
-func VDSPMinviD(ia int, n int) (a float64, c float64, i int) {
+func VDSPMinviD(a unsafe.Pointer, ia int, n int) (c float64, i int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMinviD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMinviD, _lib, "vDSP_minviD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int
-	_fnVDSPMinviD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	var _out1 int
+	_fnVDSPMinviD(a, ia, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPMmov func(unsafe.Pointer, unsafe.Pointer, int, int, int, int)
 
 // VDSPMmov calls the vecLib framework function vDSP_mmov.
-func VDSPMmov(m int, n int, ta int, tc int) (a float32, c float32) {
+func VDSPMmov(a unsafe.Pointer, m int, n int, ta int, tc int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMmov == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMmov, _lib, "vDSP_mmov")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPMmov(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), m, n, ta, tc)
-	return _out0, _out1
+	_fnVDSPMmov(a, unsafe.Pointer(&_out0), m, n, ta, tc)
+	return _out0
 }
 
 var _fnVDSPMmovD func(unsafe.Pointer, unsafe.Pointer, int, int, int, int)
 
 // VDSPMmovD calls the vecLib framework function vDSP_mmovD.
-func VDSPMmovD(m int, n int, ta int, tc int) (a float64, c float64) {
+func VDSPMmovD(a unsafe.Pointer, m int, n int, ta int, tc int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMmovD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMmovD, _lib, "vDSP_mmovD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPMmovD(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), m, n, ta, tc)
-	return _out0, _out1
+	_fnVDSPMmovD(a, unsafe.Pointer(&_out0), m, n, ta, tc)
+	return _out0
 }
 
 var _fnVDSPMmul func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int, int, int)
 
 // VDSPMmul calls the vecLib framework function vDSP_mmul.
-func VDSPMmul(ia int, ib int, ic int, m int, n int, p int) (a float32, b float32, c float32) {
+func VDSPMmul(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, m int, n int, p int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMmul == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMmul, _lib, "vDSP_mmul")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPMmul(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, m, n, p)
-	return _out0, _out1, _out2
+	_fnVDSPMmul(a, ia, b, ib, unsafe.Pointer(&_out0), ic, m, n, p)
+	return _out0
 }
 
 var _fnVDSPMmulD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int, int, int)
 
 // VDSPMmulD calls the vecLib framework function vDSP_mmulD.
-func VDSPMmulD(ia int, ib int, ic int, m int, n int, p int) (a float64, b float64, c float64) {
+func VDSPMmulD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, m int, n int, p int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMmulD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMmulD, _lib, "vDSP_mmulD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPMmulD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, m, n, p)
-	return _out0, _out1, _out2
+	_fnVDSPMmulD(a, ia, b, ib, unsafe.Pointer(&_out0), ic, m, n, p)
+	return _out0
 }
 
 var _fnVDSPMtrans func(unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPMtrans calls the vecLib framework function vDSP_mtrans.
-func VDSPMtrans(ia int, ic int, m int, n int) (a float32, c float32) {
+func VDSPMtrans(a unsafe.Pointer, ia int, ic int, m int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMtrans == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMtrans, _lib, "vDSP_mtrans")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPMtrans(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, m, n)
-	return _out0, _out1
+	_fnVDSPMtrans(a, ia, unsafe.Pointer(&_out0), ic, m, n)
+	return _out0
 }
 
 var _fnVDSPMtransD func(unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPMtransD calls the vecLib framework function vDSP_mtransD.
-func VDSPMtransD(ia int, ic int, m int, n int) (a float64, c float64) {
+func VDSPMtransD(a unsafe.Pointer, ia int, ic int, m int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMtransD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMtransD, _lib, "vDSP_mtransD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPMtransD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, m, n)
-	return _out0, _out1
+	_fnVDSPMtransD(a, ia, unsafe.Pointer(&_out0), ic, m, n)
+	return _out0
 }
 
 var _fnVDSPMvessq func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMvessq calls the vecLib framework function vDSP_mvessq.
-func VDSPMvessq(ia int, n int) (a float32, c float32) {
+func VDSPMvessq(a unsafe.Pointer, ia int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMvessq == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMvessq, _lib, "vDSP_mvessq")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPMvessq(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMvessq(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPMvessqD func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPMvessqD calls the vecLib framework function vDSP_mvessqD.
-func VDSPMvessqD(ia int, n int) (a float64, c float64) {
+func VDSPMvessqD(a unsafe.Pointer, ia int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPMvessqD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPMvessqD, _lib, "vDSP_mvessqD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPMvessqD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPMvessqD(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPNormalize func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPNormalize calls the vecLib framework function vDSP_normalize.
-func VDSPNormalize(ia int, ic int, n int) (a float32, c float32, mean float32, standardDeviation float32) {
+func VDSPNormalize(a unsafe.Pointer, ia int, ic int, n int) (c float32, mean float32, standardDeviation float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPNormalize == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPNormalize, _lib, "vDSP_normalize")
@@ -36545,15 +36237,14 @@ func VDSPNormalize(ia int, ic int, n int) (a float32, c float32, mean float32, s
 	var _out0 float32
 	var _out1 float32
 	var _out2 float32
-	var _out3 float32
-	_fnVDSPNormalize(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPNormalize(a, ia, unsafe.Pointer(&_out0), ic, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPNormalizeD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPNormalizeD calls the vecLib framework function vDSP_normalizeD.
-func VDSPNormalizeD(ia int, ic int, n int) (a float64, c float64, mean float64, standardDeviation float64) {
+func VDSPNormalizeD(a unsafe.Pointer, ia int, ic int, n int) (c float64, mean float64, standardDeviation float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPNormalizeD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPNormalizeD, _lib, "vDSP_normalizeD")
@@ -36561,644 +36252,564 @@ func VDSPNormalizeD(ia int, ic int, n int) (a float64, c float64, mean float64, 
 	var _out0 float64
 	var _out1 float64
 	var _out2 float64
-	var _out3 float64
-	_fnVDSPNormalizeD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPNormalizeD(a, ia, unsafe.Pointer(&_out0), ic, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPNzcros func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPNzcros calls the vecLib framework function vDSP_nzcros.
-func VDSPNzcros(ia int, b int, n int) (a float32, c int, d int) {
+func VDSPNzcros(a unsafe.Pointer, ia int, b int, n int) (c int, d int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPNzcros == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPNzcros, _lib, "vDSP_nzcros")
 	}
-	var _out0 float32
+	var _out0 int
 	var _out1 int
-	var _out2 int
-	_fnVDSPNzcros(unsafe.Pointer(&_out0), ia, b, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	_fnVDSPNzcros(a, ia, b, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPNzcrosD func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPNzcrosD calls the vecLib framework function vDSP_nzcrosD.
-func VDSPNzcrosD(ia int, b int, n int) (a float64, c int, d int) {
+func VDSPNzcrosD(a unsafe.Pointer, ia int, b int, n int) (c int, d int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPNzcrosD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPNzcrosD, _lib, "vDSP_nzcrosD")
 	}
-	var _out0 float64
+	var _out0 int
 	var _out1 int
-	var _out2 int
-	_fnVDSPNzcrosD(unsafe.Pointer(&_out0), ia, b, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	_fnVDSPNzcrosD(a, ia, b, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPPolar func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPPolar calls the vecLib framework function vDSP_polar.
-func VDSPPolar(ia int, ic int, n int) (a float32, c float32) {
+func VDSPPolar(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPPolar == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPPolar, _lib, "vDSP_polar")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPPolar(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPPolar(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPPolarD func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPPolarD calls the vecLib framework function vDSP_polarD.
-func VDSPPolarD(ia int, ic int, n int) (a float64, c float64) {
+func VDSPPolarD(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPPolarD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPPolarD, _lib, "vDSP_polarD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPPolarD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPPolarD(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPRect func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPRect calls the vecLib framework function vDSP_rect.
-func VDSPRect(ia int, ic int, n int) (a float32, c float32) {
+func VDSPRect(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPRect == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPRect, _lib, "vDSP_rect")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPRect(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPRect(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPRectD func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPRectD calls the vecLib framework function vDSP_rectD.
-func VDSPRectD(ia int, ic int, n int) (a float64, c float64) {
+func VDSPRectD(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPRectD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPRectD, _lib, "vDSP_rectD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPRectD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPRectD(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPRmsqv func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPRmsqv calls the vecLib framework function vDSP_rmsqv.
-func VDSPRmsqv(ia int, n int) (a float32, c float32) {
+func VDSPRmsqv(a unsafe.Pointer, ia int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPRmsqv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPRmsqv, _lib, "vDSP_rmsqv")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPRmsqv(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPRmsqv(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPRmsqvD func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPRmsqvD calls the vecLib framework function vDSP_rmsqvD.
-func VDSPRmsqvD(ia int, n int) (a float64, c float64) {
+func VDSPRmsqvD(a unsafe.Pointer, ia int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPRmsqvD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPRmsqvD, _lib, "vDSP_rmsqvD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPRmsqvD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPRmsqvD(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPSvdiv func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPSvdiv calls the vecLib framework function vDSP_svdiv.
-func VDSPSvdiv(ib int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPSvdiv(a unsafe.Pointer, b unsafe.Pointer, ib int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPSvdiv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPSvdiv, _lib, "vDSP_svdiv")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPSvdiv(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPSvdiv(a, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPSvdivD func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPSvdivD calls the vecLib framework function vDSP_svdivD.
-func VDSPSvdivD(ib int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPSvdivD(a unsafe.Pointer, b unsafe.Pointer, ib int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPSvdivD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPSvdivD, _lib, "vDSP_svdivD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPSvdivD(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPSvdivD(a, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPSve func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPSve calls the vecLib framework function vDSP_sve.
-func VDSPSve(i int, n int) (a float32, c float32) {
+func VDSPSve(a unsafe.Pointer, i int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPSve == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPSve, _lib, "vDSP_sve")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPSve(unsafe.Pointer(&_out0), i, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPSve(a, i, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPSveD func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPSveD calls the vecLib framework function vDSP_sveD.
-func VDSPSveD(i int, n int) (a float64, c float64) {
+func VDSPSveD(a unsafe.Pointer, i int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPSveD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPSveD, _lib, "vDSP_sveD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPSveD(unsafe.Pointer(&_out0), i, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPSveD(a, i, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPSveSvesq func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPSveSvesq calls the vecLib framework function vDSP_sve_svesq.
-func VDSPSveSvesq(ia int, n int) (a float32, sum float32, sumOfSquares float32) {
+func VDSPSveSvesq(a unsafe.Pointer, ia int, n int) (sum float32, sumOfSquares float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPSveSvesq == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPSveSvesq, _lib, "vDSP_sve_svesq")
 	}
 	var _out0 float32
 	var _out1 float32
-	var _out2 float32
-	_fnVDSPSveSvesq(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	_fnVDSPSveSvesq(a, ia, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPSveSvesqD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPSveSvesqD calls the vecLib framework function vDSP_sve_svesqD.
-func VDSPSveSvesqD(ia int, n int) (a float64, sum float64, sumOfSquares float64) {
+func VDSPSveSvesqD(a unsafe.Pointer, ia int, n int) (sum float64, sumOfSquares float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPSveSvesqD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPSveSvesqD, _lib, "vDSP_sve_svesqD")
 	}
 	var _out0 float64
 	var _out1 float64
-	var _out2 float64
-	_fnVDSPSveSvesqD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	_fnVDSPSveSvesqD(a, ia, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n)
+	return _out0, _out1
 }
 
 var _fnVDSPSvemg func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPSvemg calls the vecLib framework function vDSP_svemg.
-func VDSPSvemg(ia int, n int) (a float32, c float32) {
+func VDSPSvemg(a unsafe.Pointer, ia int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPSvemg == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPSvemg, _lib, "vDSP_svemg")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPSvemg(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPSvemg(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPSvemgD func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPSvemgD calls the vecLib framework function vDSP_svemgD.
-func VDSPSvemgD(ia int, n int) (a float64, c float64) {
+func VDSPSvemgD(a unsafe.Pointer, ia int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPSvemgD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPSvemgD, _lib, "vDSP_svemgD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPSvemgD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPSvemgD(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPSvesq func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPSvesq calls the vecLib framework function vDSP_svesq.
-func VDSPSvesq(ia int, n int) (a float32, c float32) {
+func VDSPSvesq(a unsafe.Pointer, ia int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPSvesq == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPSvesq, _lib, "vDSP_svesq")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPSvesq(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPSvesq(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPSvesqD func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPSvesqD calls the vecLib framework function vDSP_svesqD.
-func VDSPSvesqD(ia int, n int) (a float64, c float64) {
+func VDSPSvesqD(a unsafe.Pointer, ia int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPSvesqD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPSvesqD, _lib, "vDSP_svesqD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPSvesqD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPSvesqD(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPSvs func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPSvs calls the vecLib framework function vDSP_svs.
-func VDSPSvs(ia int, n int) (a float32, c float32) {
+func VDSPSvs(a unsafe.Pointer, ia int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPSvs == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPSvs, _lib, "vDSP_svs")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPSvs(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPSvs(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPSvsD func(unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPSvsD calls the vecLib framework function vDSP_svsD.
-func VDSPSvsD(ia int, n int) (a float64, c float64) {
+func VDSPSvsD(a unsafe.Pointer, ia int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPSvsD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPSvsD, _lib, "vDSP_svsD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPSvsD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), n)
-	return _out0, _out1
+	_fnVDSPSvsD(a, ia, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPVaam func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVaam calls the vecLib framework function vDSP_vaam.
-func VDSPVaam(ia int, ib int, ic int, identifier int, ie int, n int) (a float32, b float32, c float32, d float32, e float32) {
+func VDSPVaam(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, d unsafe.Pointer, identifier int, ie int, n int) (e float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVaam == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVaam, _lib, "vDSP_vaam")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	var _out4 float32
-	_fnVDSPVaam(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVaam(a, ia, b, ib, c, ic, d, identifier, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVaamD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVaamD calls the vecLib framework function vDSP_vaamD.
-func VDSPVaamD(ia int, ib int, ic int, identifier int, ie int, n int) (a float64, b float64, c float64, d float64, e float64) {
+func VDSPVaamD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, d unsafe.Pointer, identifier int, ie int, n int) (e float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVaamD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVaamD, _lib, "vDSP_vaamD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	var _out4 float64
-	_fnVDSPVaamD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVaamD(a, ia, b, ib, c, ic, d, identifier, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVabs func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVabs calls the vecLib framework function vDSP_vabs.
-func VDSPVabs(ia int, ic int, n int) (a float32, c float32) {
+func VDSPVabs(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVabs == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVabs, _lib, "vDSP_vabs")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPVabs(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVabs(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVabsD func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVabsD calls the vecLib framework function vDSP_vabsD.
-func VDSPVabsD(ia int, ic int, n int) (a float64, c float64) {
+func VDSPVabsD(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVabsD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVabsD, _lib, "vDSP_vabsD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPVabsD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVabsD(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVabsi func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVabsi calls the vecLib framework function vDSP_vabsi.
-func VDSPVabsi(ia int, ic int, n int) (a int32, c int32) {
+func VDSPVabsi(a unsafe.Pointer, ia int, ic int, n int) (c int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVabsi == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVabsi, _lib, "vDSP_vabsi")
 	}
 	var _out0 int32
-	var _out1 int32
-	_fnVDSPVabsi(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVabsi(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVadd func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVadd calls the vecLib framework function vDSP_vadd.
-func VDSPVadd(ia int, ib int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVadd(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVadd == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVadd, _lib, "vDSP_vadd")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVadd(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVadd(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVaddD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVaddD calls the vecLib framework function vDSP_vaddD.
-func VDSPVaddD(ia int, ib int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVaddD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVaddD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVaddD, _lib, "vDSP_vaddD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVaddD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVaddD(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVaddi func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVaddi calls the vecLib framework function vDSP_vaddi.
-func VDSPVaddi(ia int, ib int, ic int, n int) (a int32, b int32, c int32) {
+func VDSPVaddi(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVaddi == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVaddi, _lib, "vDSP_vaddi")
 	}
 	var _out0 int32
-	var _out1 int32
-	var _out2 int32
-	_fnVDSPVaddi(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVaddi(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVaddsub func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVaddsub calls the vecLib framework function vDSP_vaddsub.
-func VDSPVaddsub(i0S int, i1S int, o0S int, o1S int, n int) (i0 float32, i1 float32, o0 float32, o1 float32) {
+func VDSPVaddsub(i0 unsafe.Pointer, i0S int, i1 unsafe.Pointer, i1S int, o0S int, o1S int, n int) (o0 float32, o1 float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVaddsub == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVaddsub, _lib, "vDSP_vaddsub")
 	}
 	var _out0 float32
 	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVaddsub(unsafe.Pointer(&_out0), i0S, unsafe.Pointer(&_out1), i1S, unsafe.Pointer(&_out2), o0S, unsafe.Pointer(&_out3), o1S, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVaddsub(i0, i0S, i1, i1S, unsafe.Pointer(&_out0), o0S, unsafe.Pointer(&_out1), o1S, n)
+	return _out0, _out1
 }
 
 var _fnVDSPVaddsubD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVaddsubD calls the vecLib framework function vDSP_vaddsubD.
-func VDSPVaddsubD(i0S int, i1S int, o0S int, o1S int, n int) (i0 float64, i1 float64, o0 float64, o1 float64) {
+func VDSPVaddsubD(i0 unsafe.Pointer, i0S int, i1 unsafe.Pointer, i1S int, o0S int, o1S int, n int) (o0 float64, o1 float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVaddsubD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVaddsubD, _lib, "vDSP_vaddsubD")
 	}
 	var _out0 float64
 	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVaddsubD(unsafe.Pointer(&_out0), i0S, unsafe.Pointer(&_out1), i1S, unsafe.Pointer(&_out2), o0S, unsafe.Pointer(&_out3), o1S, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVaddsubD(i0, i0S, i1, i1S, unsafe.Pointer(&_out0), o0S, unsafe.Pointer(&_out1), o1S, n)
+	return _out0, _out1
 }
 
 var _fnVDSPVam func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVam calls the vecLib framework function vDSP_vam.
-func VDSPVam(ia int, ib int, ic int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVam(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVam == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVam, _lib, "vDSP_vam")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVam(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVam(a, ia, b, ib, c, ic, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVamD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVamD calls the vecLib framework function vDSP_vamD.
-func VDSPVamD(ia int, ib int, ic int, idd int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVamD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, idd int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVamD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVamD, _lib, "vDSP_vamD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVamD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), idd, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVamD(a, ia, b, ib, c, ic, unsafe.Pointer(&_out0), idd, n)
+	return _out0
 }
 
 var _fnVDSPVasbm func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVasbm calls the vecLib framework function vDSP_vasbm.
-func VDSPVasbm(ia int, ib int, ic int, identifier int, ie int, n int) (a float32, b float32, c float32, d float32, e float32) {
+func VDSPVasbm(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, d unsafe.Pointer, identifier int, ie int, n int) (e float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVasbm == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVasbm, _lib, "vDSP_vasbm")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	var _out4 float32
-	_fnVDSPVasbm(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVasbm(a, ia, b, ib, c, ic, d, identifier, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVasbmD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVasbmD calls the vecLib framework function vDSP_vasbmD.
-func VDSPVasbmD(ia int, ib int, ic int, identifier int, ie int, n int) (a float64, b float64, c float64, d float64, e float64) {
+func VDSPVasbmD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, d unsafe.Pointer, identifier int, ie int, n int) (e float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVasbmD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVasbmD, _lib, "vDSP_vasbmD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	var _out4 float64
-	_fnVDSPVasbmD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVasbmD(a, ia, b, ib, c, ic, d, identifier, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVasm func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVasm calls the vecLib framework function vDSP_vasm.
-func VDSPVasm(ia int, ib int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVasm(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVasm == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVasm, _lib, "vDSP_vasm")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVasm(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVasm(a, ia, b, ib, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVasmD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVasmD calls the vecLib framework function vDSP_vasmD.
-func VDSPVasmD(ia int, ib int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVasmD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVasmD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVasmD, _lib, "vDSP_vasmD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVasmD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVasmD(a, ia, b, ib, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVavlin func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVavlin calls the vecLib framework function vDSP_vavlin.
-func VDSPVavlin(ia int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVavlin(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVavlin == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVavlin, _lib, "vDSP_vavlin")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVavlin(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVavlin(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVavlinD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVavlinD calls the vecLib framework function vDSP_vavlinD.
-func VDSPVavlinD(ia int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVavlinD(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVavlinD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVavlinD, _lib, "vDSP_vavlinD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVavlinD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVavlinD(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVclip func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVclip calls the vecLib framework function vDSP_vclip.
-func VDSPVclip(ia int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVclip(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVclip == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVclip, _lib, "vDSP_vclip")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVclip(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVclip(a, ia, b, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVclipD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVclipD calls the vecLib framework function vDSP_vclipD.
-func VDSPVclipD(ia int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVclipD(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVclipD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVclipD, _lib, "vDSP_vclipD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVclipD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVclipD(a, ia, b, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVclipc func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer)
 
 // VDSPVclipc calls the vecLib framework function vDSP_vclipc.
-func VDSPVclipc(ia int, identifier int, n int) (a float32, b float32, c float32, d float32, nLow int, nHigh int) {
+func VDSPVclipc(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, identifier int, n int) (d float32, nLow int, nHigh int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVclipc == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVclipc, _lib, "vDSP_vclipc")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	var _out4 int
-	var _out5 int
-	_fnVDSPVclipc(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n, unsafe.Pointer(&_out4), unsafe.Pointer(&_out5))
-	return _out0, _out1, _out2, _out3, _out4, _out5
+	var _out1 int
+	var _out2 int
+	_fnVDSPVclipc(a, ia, b, c, unsafe.Pointer(&_out0), identifier, n, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPVclipcD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer)
 
 // VDSPVclipcD calls the vecLib framework function vDSP_vclipcD.
-func VDSPVclipcD(ia int, identifier int, n int) (a float64, b float64, c float64, d float64, nLow int, nHigh int) {
+func VDSPVclipcD(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, identifier int, n int) (d float64, nLow int, nHigh int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVclipcD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVclipcD, _lib, "vDSP_vclipcD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	var _out4 int
-	var _out5 int
-	_fnVDSPVclipcD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n, unsafe.Pointer(&_out4), unsafe.Pointer(&_out5))
-	return _out0, _out1, _out2, _out3, _out4, _out5
+	var _out1 int
+	var _out2 int
+	_fnVDSPVclipcD(a, ia, b, c, unsafe.Pointer(&_out0), identifier, n, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPVclr func(unsafe.Pointer, int, int)
@@ -37230,640 +36841,578 @@ func VDSPVclrD(ic int, n int) (c float64) {
 var _fnVDSPVcmprs func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVcmprs calls the vecLib framework function vDSP_vcmprs.
-func VDSPVcmprs(ia int, ib int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVcmprs(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVcmprs == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVcmprs, _lib, "vDSP_vcmprs")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVcmprs(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVcmprs(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVcmprsD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVcmprsD calls the vecLib framework function vDSP_vcmprsD.
-func VDSPVcmprsD(ia int, ib int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVcmprsD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVcmprsD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVcmprsD, _lib, "vDSP_vcmprsD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVcmprsD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVcmprsD(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVdbcon func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int, int)
 
 // VDSPVdbcon calls the vecLib framework function vDSP_vdbcon.
-func VDSPVdbcon(ia int, ic int, n int, f int) (a float32, b float32, c float32) {
+func VDSPVdbcon(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int, f int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVdbcon == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVdbcon, _lib, "vDSP_vdbcon")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVdbcon(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n, f)
-	return _out0, _out1, _out2
+	_fnVDSPVdbcon(a, ia, b, unsafe.Pointer(&_out0), ic, n, f)
+	return _out0
 }
 
 var _fnVDSPVdbconD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int, int)
 
 // VDSPVdbconD calls the vecLib framework function vDSP_vdbconD.
-func VDSPVdbconD(ia int, ic int, n int, f int) (a float64, b float64, c float64) {
+func VDSPVdbconD(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int, f int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVdbconD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVdbconD, _lib, "vDSP_vdbconD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVdbconD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n, f)
-	return _out0, _out1, _out2
+	_fnVDSPVdbconD(a, ia, b, unsafe.Pointer(&_out0), ic, n, f)
+	return _out0
 }
 
 var _fnVDSPVdist func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVdist calls the vecLib framework function vDSP_vdist.
-func VDSPVdist(ia int, ib int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVdist(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVdist == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVdist, _lib, "vDSP_vdist")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVdist(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVdist(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVdistD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVdistD calls the vecLib framework function vDSP_vdistD.
-func VDSPVdistD(ia int, ib int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVdistD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVdistD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVdistD, _lib, "vDSP_vdistD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVdistD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVdistD(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVdiv func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVdiv calls the vecLib framework function vDSP_vdiv.
-func VDSPVdiv(ib int, ia int, ic int, n int) (b float32, a float32, c float32) {
+func VDSPVdiv(b unsafe.Pointer, ib int, a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVdiv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVdiv, _lib, "vDSP_vdiv")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVdiv(unsafe.Pointer(&_out0), ib, unsafe.Pointer(&_out1), ia, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVdiv(b, ib, a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVdivD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVdivD calls the vecLib framework function vDSP_vdivD.
-func VDSPVdivD(ib int, ia int, ic int, n int) (b float64, a float64, c float64) {
+func VDSPVdivD(b unsafe.Pointer, ib int, a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVdivD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVdivD, _lib, "vDSP_vdivD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVdivD(unsafe.Pointer(&_out0), ib, unsafe.Pointer(&_out1), ia, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVdivD(b, ib, a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVdivi func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVdivi calls the vecLib framework function vDSP_vdivi.
-func VDSPVdivi(ib int, ia int, ic int, n int) (b int32, a int32, c int32) {
+func VDSPVdivi(b unsafe.Pointer, ib int, a unsafe.Pointer, ia int, ic int, n int) (c int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVdivi == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVdivi, _lib, "vDSP_vdivi")
 	}
 	var _out0 int32
-	var _out1 int32
-	var _out2 int32
-	_fnVDSPVdivi(unsafe.Pointer(&_out0), ib, unsafe.Pointer(&_out1), ia, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVdivi(b, ib, a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVdpsp func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVdpsp calls the vecLib framework function vDSP_vdpsp.
-func VDSPVdpsp(ia int, ic int, n int) (a float64, c float32) {
+func VDSPVdpsp(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVdpsp == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVdpsp, _lib, "vDSP_vdpsp")
 	}
-	var _out0 float64
-	var _out1 float32
-	_fnVDSPVdpsp(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 float32
+	_fnVDSPVdpsp(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVenvlp func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVenvlp calls the vecLib framework function vDSP_venvlp.
-func VDSPVenvlp(ia int, ib int, ic int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVenvlp(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVenvlp == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVenvlp, _lib, "vDSP_venvlp")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVenvlp(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVenvlp(a, ia, b, ib, c, ic, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVenvlpD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVenvlpD calls the vecLib framework function vDSP_venvlpD.
-func VDSPVenvlpD(ia int, ib int, ic int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVenvlpD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVenvlpD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVenvlpD, _lib, "vDSP_venvlpD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVenvlpD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVenvlpD(a, ia, b, ib, c, ic, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVeqvi func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVeqvi calls the vecLib framework function vDSP_veqvi.
-func VDSPVeqvi(ia int, ib int, ic int, n int) (a int32, b int32, c int32) {
+func VDSPVeqvi(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVeqvi == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVeqvi, _lib, "vDSP_veqvi")
 	}
 	var _out0 int32
-	var _out1 int32
-	var _out2 int32
-	_fnVDSPVeqvi(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVeqvi(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfill func(unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVfill calls the vecLib framework function vDSP_vfill.
-func VDSPVfill(ic int, n int) (a float32, c float32) {
+func VDSPVfill(a unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfill == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfill, _lib, "vDSP_vfill")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPVfill(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVfill(a, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfillD func(unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVfillD calls the vecLib framework function vDSP_vfillD.
-func VDSPVfillD(ic int, n int) (a float64, c float64) {
+func VDSPVfillD(a unsafe.Pointer, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfillD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfillD, _lib, "vDSP_vfillD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPVfillD(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVfillD(a, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfilli func(unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVfilli calls the vecLib framework function vDSP_vfilli.
-func VDSPVfilli(ic int, n int) (a int32, c int32) {
+func VDSPVfilli(a unsafe.Pointer, ic int, n int) (c int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfilli == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfilli, _lib, "vDSP_vfilli")
 	}
 	var _out0 int32
-	var _out1 int32
-	_fnVDSPVfilli(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVfilli(a, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfix16 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfix16 calls the vecLib framework function vDSP_vfix16.
-func VDSPVfix16(ia int, ic int, n int) (a float32, c int16) {
+func VDSPVfix16(a unsafe.Pointer, ia int, ic int, n int) (c int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfix16 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfix16, _lib, "vDSP_vfix16")
 	}
-	var _out0 float32
-	var _out1 int16
-	_fnVDSPVfix16(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 int16
+	_fnVDSPVfix16(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfix16D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfix16D calls the vecLib framework function vDSP_vfix16D.
-func VDSPVfix16D(ia int, ic int, n int) (a float64, c int16) {
+func VDSPVfix16D(a unsafe.Pointer, ia int, ic int, n int) (c int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfix16D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfix16D, _lib, "vDSP_vfix16D")
 	}
-	var _out0 float64
-	var _out1 int16
-	_fnVDSPVfix16D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 int16
+	_fnVDSPVfix16D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfix32 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfix32 calls the vecLib framework function vDSP_vfix32.
-func VDSPVfix32(ia int, ic int, n int) (a float32, c int32) {
+func VDSPVfix32(a unsafe.Pointer, ia int, ic int, n int) (c int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfix32 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfix32, _lib, "vDSP_vfix32")
 	}
-	var _out0 float32
-	var _out1 int32
-	_fnVDSPVfix32(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 int32
+	_fnVDSPVfix32(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfix32D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfix32D calls the vecLib framework function vDSP_vfix32D.
-func VDSPVfix32D(ia int, ic int, n int) (a float64, c int32) {
+func VDSPVfix32D(a unsafe.Pointer, ia int, ic int, n int) (c int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfix32D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfix32D, _lib, "vDSP_vfix32D")
 	}
-	var _out0 float64
-	var _out1 int32
-	_fnVDSPVfix32D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 int32
+	_fnVDSPVfix32D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfix8 func(unsafe.Pointer, int, string, int, int)
 
 // VDSPVfix8 calls the vecLib framework function vDSP_vfix8.
-func VDSPVfix8(ia int, c string, ic int, n int) (a float32) {
+func VDSPVfix8(a unsafe.Pointer, ia int, c string, ic int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfix8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfix8, _lib, "vDSP_vfix8")
 	}
-	var _out0 float32
-	_fnVDSPVfix8(unsafe.Pointer(&_out0), ia, c, ic, n)
-	return _out0
+	_fnVDSPVfix8(a, ia, c, ic, n)
 }
 
 var _fnVDSPVfix8D func(unsafe.Pointer, int, string, int, int)
 
 // VDSPVfix8D calls the vecLib framework function vDSP_vfix8D.
-func VDSPVfix8D(ia int, c string, ic int, n int) (a float64) {
+func VDSPVfix8D(a unsafe.Pointer, ia int, c string, ic int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfix8D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfix8D, _lib, "vDSP_vfix8D")
 	}
-	var _out0 float64
-	_fnVDSPVfix8D(unsafe.Pointer(&_out0), ia, c, ic, n)
-	return _out0
+	_fnVDSPVfix8D(a, ia, c, ic, n)
 }
 
 var _fnVDSPVfixr16 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixr16 calls the vecLib framework function vDSP_vfixr16.
-func VDSPVfixr16(ia int, ic int, n int) (a float32, c int16) {
+func VDSPVfixr16(a unsafe.Pointer, ia int, ic int, n int) (c int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixr16 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixr16, _lib, "vDSP_vfixr16")
 	}
-	var _out0 float32
-	var _out1 int16
-	_fnVDSPVfixr16(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 int16
+	_fnVDSPVfixr16(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixr16D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixr16D calls the vecLib framework function vDSP_vfixr16D.
-func VDSPVfixr16D(ia int, ic int, n int) (a float64, c int16) {
+func VDSPVfixr16D(a unsafe.Pointer, ia int, ic int, n int) (c int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixr16D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixr16D, _lib, "vDSP_vfixr16D")
 	}
-	var _out0 float64
-	var _out1 int16
-	_fnVDSPVfixr16D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 int16
+	_fnVDSPVfixr16D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixr32 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixr32 calls the vecLib framework function vDSP_vfixr32.
-func VDSPVfixr32(ia int, ic int, n int) (a float32, c int32) {
+func VDSPVfixr32(a unsafe.Pointer, ia int, ic int, n int) (c int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixr32 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixr32, _lib, "vDSP_vfixr32")
 	}
-	var _out0 float32
-	var _out1 int32
-	_fnVDSPVfixr32(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 int32
+	_fnVDSPVfixr32(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixr32D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixr32D calls the vecLib framework function vDSP_vfixr32D.
-func VDSPVfixr32D(ia int, ic int, n int) (a float64, c int32) {
+func VDSPVfixr32D(a unsafe.Pointer, ia int, ic int, n int) (c int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixr32D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixr32D, _lib, "vDSP_vfixr32D")
 	}
-	var _out0 float64
-	var _out1 int32
-	_fnVDSPVfixr32D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 int32
+	_fnVDSPVfixr32D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixr8 func(unsafe.Pointer, int, string, int, int)
 
 // VDSPVfixr8 calls the vecLib framework function vDSP_vfixr8.
-func VDSPVfixr8(ia int, c string, ic int, n int) (a float32) {
+func VDSPVfixr8(a unsafe.Pointer, ia int, c string, ic int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixr8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixr8, _lib, "vDSP_vfixr8")
 	}
-	var _out0 float32
-	_fnVDSPVfixr8(unsafe.Pointer(&_out0), ia, c, ic, n)
-	return _out0
+	_fnVDSPVfixr8(a, ia, c, ic, n)
 }
 
 var _fnVDSPVfixr8D func(unsafe.Pointer, int, string, int, int)
 
 // VDSPVfixr8D calls the vecLib framework function vDSP_vfixr8D.
-func VDSPVfixr8D(ia int, c string, ic int, n int) (a float64) {
+func VDSPVfixr8D(a unsafe.Pointer, ia int, c string, ic int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixr8D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixr8D, _lib, "vDSP_vfixr8D")
 	}
-	var _out0 float64
-	_fnVDSPVfixr8D(unsafe.Pointer(&_out0), ia, c, ic, n)
-	return _out0
+	_fnVDSPVfixr8D(a, ia, c, ic, n)
 }
 
 var _fnVDSPVfixru16 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixru16 calls the vecLib framework function vDSP_vfixru16.
-func VDSPVfixru16(ia int, ic int, n int) (a float32, c uint16) {
+func VDSPVfixru16(a unsafe.Pointer, ia int, ic int, n int) (c uint16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixru16 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixru16, _lib, "vDSP_vfixru16")
 	}
-	var _out0 float32
-	var _out1 uint16
-	_fnVDSPVfixru16(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 uint16
+	_fnVDSPVfixru16(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixru16D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixru16D calls the vecLib framework function vDSP_vfixru16D.
-func VDSPVfixru16D(ia int, ic int, n int) (a float64, c uint16) {
+func VDSPVfixru16D(a unsafe.Pointer, ia int, ic int, n int) (c uint16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixru16D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixru16D, _lib, "vDSP_vfixru16D")
 	}
-	var _out0 float64
-	var _out1 uint16
-	_fnVDSPVfixru16D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 uint16
+	_fnVDSPVfixru16D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixru32 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixru32 calls the vecLib framework function vDSP_vfixru32.
-func VDSPVfixru32(ia int, ic int, n int) (a float32, c uint32) {
+func VDSPVfixru32(a unsafe.Pointer, ia int, ic int, n int) (c uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixru32 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixru32, _lib, "vDSP_vfixru32")
 	}
-	var _out0 float32
-	var _out1 uint32
-	_fnVDSPVfixru32(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 uint32
+	_fnVDSPVfixru32(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixru32D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixru32D calls the vecLib framework function vDSP_vfixru32D.
-func VDSPVfixru32D(ia int, ic int, n int) (a float64, c uint32) {
+func VDSPVfixru32D(a unsafe.Pointer, ia int, ic int, n int) (c uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixru32D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixru32D, _lib, "vDSP_vfixru32D")
 	}
-	var _out0 float64
-	var _out1 uint32
-	_fnVDSPVfixru32D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 uint32
+	_fnVDSPVfixru32D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixru8 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixru8 calls the vecLib framework function vDSP_vfixru8.
-func VDSPVfixru8(ia int, ic int, n int) (a float32, c uint8) {
+func VDSPVfixru8(a unsafe.Pointer, ia int, ic int, n int) (c uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixru8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixru8, _lib, "vDSP_vfixru8")
 	}
-	var _out0 float32
-	var _out1 uint8
-	_fnVDSPVfixru8(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 uint8
+	_fnVDSPVfixru8(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixru8D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixru8D calls the vecLib framework function vDSP_vfixru8D.
-func VDSPVfixru8D(ia int, ic int, n int) (a float64, c uint8) {
+func VDSPVfixru8D(a unsafe.Pointer, ia int, ic int, n int) (c uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixru8D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixru8D, _lib, "vDSP_vfixru8D")
 	}
-	var _out0 float64
-	var _out1 uint8
-	_fnVDSPVfixru8D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 uint8
+	_fnVDSPVfixru8D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixu16 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixu16 calls the vecLib framework function vDSP_vfixu16.
-func VDSPVfixu16(ia int, ic int, n int) (a float32, c uint16) {
+func VDSPVfixu16(a unsafe.Pointer, ia int, ic int, n int) (c uint16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixu16 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixu16, _lib, "vDSP_vfixu16")
 	}
-	var _out0 float32
-	var _out1 uint16
-	_fnVDSPVfixu16(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 uint16
+	_fnVDSPVfixu16(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixu16D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixu16D calls the vecLib framework function vDSP_vfixu16D.
-func VDSPVfixu16D(ia int, ic int, n int) (a float64, c uint16) {
+func VDSPVfixu16D(a unsafe.Pointer, ia int, ic int, n int) (c uint16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixu16D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixu16D, _lib, "vDSP_vfixu16D")
 	}
-	var _out0 float64
-	var _out1 uint16
-	_fnVDSPVfixu16D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 uint16
+	_fnVDSPVfixu16D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixu32 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixu32 calls the vecLib framework function vDSP_vfixu32.
-func VDSPVfixu32(ia int, ic int, n int) (a float32, c uint32) {
+func VDSPVfixu32(a unsafe.Pointer, ia int, ic int, n int) (c uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixu32 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixu32, _lib, "vDSP_vfixu32")
 	}
-	var _out0 float32
-	var _out1 uint32
-	_fnVDSPVfixu32(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 uint32
+	_fnVDSPVfixu32(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixu32D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixu32D calls the vecLib framework function vDSP_vfixu32D.
-func VDSPVfixu32D(ia int, ic int, n int) (a float64, c uint32) {
+func VDSPVfixu32D(a unsafe.Pointer, ia int, ic int, n int) (c uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixu32D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixu32D, _lib, "vDSP_vfixu32D")
 	}
-	var _out0 float64
-	var _out1 uint32
-	_fnVDSPVfixu32D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 uint32
+	_fnVDSPVfixu32D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixu8 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixu8 calls the vecLib framework function vDSP_vfixu8.
-func VDSPVfixu8(ia int, ic int, n int) (a float32, c uint8) {
+func VDSPVfixu8(a unsafe.Pointer, ia int, ic int, n int) (c uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixu8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixu8, _lib, "vDSP_vfixu8")
 	}
-	var _out0 float32
-	var _out1 uint8
-	_fnVDSPVfixu8(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 uint8
+	_fnVDSPVfixu8(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfixu8D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfixu8D calls the vecLib framework function vDSP_vfixu8D.
-func VDSPVfixu8D(ia int, ic int, n int) (a float64, c uint8) {
+func VDSPVfixu8D(a unsafe.Pointer, ia int, ic int, n int) (c uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfixu8D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfixu8D, _lib, "vDSP_vfixu8D")
 	}
-	var _out0 float64
-	var _out1 uint8
-	_fnVDSPVfixu8D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 uint8
+	_fnVDSPVfixu8D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVflt16 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVflt16 calls the vecLib framework function vDSP_vflt16.
-func VDSPVflt16(ia int, ic int, n int) (a int16, c float32) {
+func VDSPVflt16(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVflt16 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVflt16, _lib, "vDSP_vflt16")
 	}
-	var _out0 int16
-	var _out1 float32
-	_fnVDSPVflt16(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 float32
+	_fnVDSPVflt16(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVflt16D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVflt16D calls the vecLib framework function vDSP_vflt16D.
-func VDSPVflt16D(ia int, ic int, n int) (a int16, c float64) {
+func VDSPVflt16D(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVflt16D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVflt16D, _lib, "vDSP_vflt16D")
 	}
-	var _out0 int16
-	var _out1 float64
-	_fnVDSPVflt16D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 float64
+	_fnVDSPVflt16D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVflt24 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVflt24 calls the vecLib framework function vDSP_vflt24.
-func VDSPVflt24(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
+func VDSPVflt24(a *VDSPInt24, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVflt24 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVflt24, _lib, "vDSP_vflt24")
 	}
 	var _out0 float32
-	_fnVDSPVflt24(a, ia, unsafe.Pointer(&_out0), ic, n)
+	_fnVDSPVflt24(unsafe.Pointer(a), ia, unsafe.Pointer(&_out0), ic, n)
 	return _out0
 }
 
 var _fnVDSPVflt32 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVflt32 calls the vecLib framework function vDSP_vflt32.
-func VDSPVflt32(ia int, ic int, n int) (a int32, c float32) {
+func VDSPVflt32(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVflt32 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVflt32, _lib, "vDSP_vflt32")
 	}
-	var _out0 int32
-	var _out1 float32
-	_fnVDSPVflt32(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 float32
+	_fnVDSPVflt32(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVflt32D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVflt32D calls the vecLib framework function vDSP_vflt32D.
-func VDSPVflt32D(ia int, ic int, n int) (a int32, c float64) {
+func VDSPVflt32D(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVflt32D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVflt32D, _lib, "vDSP_vflt32D")
 	}
-	var _out0 int32
-	var _out1 float64
-	_fnVDSPVflt32D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 float64
+	_fnVDSPVflt32D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVflt8 func(string, int, unsafe.Pointer, int, int)
@@ -37895,944 +37444,814 @@ func VDSPVflt8D(a string, ia int, ic int, n int) (c float64) {
 var _fnVDSPVfltsm24 func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVfltsm24 calls the vecLib framework function vDSP_vfltsm24.
-func VDSPVfltsm24(a unsafe.Pointer, ia int, ic int, n int) (b float32, c float32) {
+func VDSPVfltsm24(a *VDSPInt24, ia int, b unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfltsm24 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfltsm24, _lib, "vDSP_vfltsm24")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPVfltsm24(a, ia, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVfltsm24(unsafe.Pointer(a), ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfltsmu24 func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVfltsmu24 calls the vecLib framework function vDSP_vfltsmu24.
-func VDSPVfltsmu24(a unsafe.Pointer, ia int, ic int, n int) (b float32, c float32) {
+func VDSPVfltsmu24(a *VDSPUint24, ia int, b unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfltsmu24 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfltsmu24, _lib, "vDSP_vfltsmu24")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPVfltsmu24(a, ia, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVfltsmu24(unsafe.Pointer(a), ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfltu16 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfltu16 calls the vecLib framework function vDSP_vfltu16.
-func VDSPVfltu16(ia int, ic int, n int) (a uint16, c float32) {
+func VDSPVfltu16(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfltu16 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfltu16, _lib, "vDSP_vfltu16")
 	}
-	var _out0 uint16
-	var _out1 float32
-	_fnVDSPVfltu16(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 float32
+	_fnVDSPVfltu16(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfltu16D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfltu16D calls the vecLib framework function vDSP_vfltu16D.
-func VDSPVfltu16D(ia int, ic int, n int) (a uint16, c float64) {
+func VDSPVfltu16D(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfltu16D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfltu16D, _lib, "vDSP_vfltu16D")
 	}
-	var _out0 uint16
-	var _out1 float64
-	_fnVDSPVfltu16D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 float64
+	_fnVDSPVfltu16D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfltu24 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfltu24 calls the vecLib framework function vDSP_vfltu24.
-func VDSPVfltu24(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
+func VDSPVfltu24(a *VDSPUint24, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfltu24 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfltu24, _lib, "vDSP_vfltu24")
 	}
 	var _out0 float32
-	_fnVDSPVfltu24(a, ia, unsafe.Pointer(&_out0), ic, n)
+	_fnVDSPVfltu24(unsafe.Pointer(a), ia, unsafe.Pointer(&_out0), ic, n)
 	return _out0
 }
 
 var _fnVDSPVfltu32 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfltu32 calls the vecLib framework function vDSP_vfltu32.
-func VDSPVfltu32(ia int, ic int, n int) (a uint32, c float32) {
+func VDSPVfltu32(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfltu32 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfltu32, _lib, "vDSP_vfltu32")
 	}
-	var _out0 uint32
-	var _out1 float32
-	_fnVDSPVfltu32(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 float32
+	_fnVDSPVfltu32(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfltu32D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfltu32D calls the vecLib framework function vDSP_vfltu32D.
-func VDSPVfltu32D(ia int, ic int, n int) (a uint32, c float64) {
+func VDSPVfltu32D(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfltu32D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfltu32D, _lib, "vDSP_vfltu32D")
 	}
-	var _out0 uint32
-	var _out1 float64
-	_fnVDSPVfltu32D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 float64
+	_fnVDSPVfltu32D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfltu8 func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfltu8 calls the vecLib framework function vDSP_vfltu8.
-func VDSPVfltu8(ia int, ic int, n int) (a uint8, c float32) {
+func VDSPVfltu8(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfltu8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfltu8, _lib, "vDSP_vfltu8")
 	}
-	var _out0 uint8
-	var _out1 float32
-	_fnVDSPVfltu8(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 float32
+	_fnVDSPVfltu8(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfltu8D func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfltu8D calls the vecLib framework function vDSP_vfltu8D.
-func VDSPVfltu8D(ia int, ic int, n int) (a uint8, c float64) {
+func VDSPVfltu8D(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfltu8D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfltu8D, _lib, "vDSP_vfltu8D")
 	}
-	var _out0 uint8
-	var _out1 float64
-	_fnVDSPVfltu8D(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 float64
+	_fnVDSPVfltu8D(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfrac func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfrac calls the vecLib framework function vDSP_vfrac.
-func VDSPVfrac(ia int, ic int, n int) (a float32, c float32) {
+func VDSPVfrac(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfrac == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfrac, _lib, "vDSP_vfrac")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPVfrac(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVfrac(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVfracD func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVfracD calls the vecLib framework function vDSP_vfracD.
-func VDSPVfracD(ia int, ic int, n int) (a float64, c float64) {
+func VDSPVfracD(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVfracD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVfracD, _lib, "vDSP_vfracD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPVfracD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVfracD(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVgathr func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVgathr calls the vecLib framework function vDSP_vgathr.
-func VDSPVgathr(ib int, ic int, n int) (a float32, b int, c float32) {
+func VDSPVgathr(a unsafe.Pointer, b unsafe.Pointer, ib int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVgathr == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVgathr, _lib, "vDSP_vgathr")
 	}
 	var _out0 float32
-	var _out1 int
-	var _out2 float32
-	_fnVDSPVgathr(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVgathr(a, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVgathrD func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVgathrD calls the vecLib framework function vDSP_vgathrD.
-func VDSPVgathrD(ib int, ic int, n int) (a float64, b int, c float64) {
+func VDSPVgathrD(a unsafe.Pointer, b unsafe.Pointer, ib int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVgathrD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVgathrD, _lib, "vDSP_vgathrD")
 	}
 	var _out0 float64
-	var _out1 int
-	var _out2 float64
-	_fnVDSPVgathrD(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVgathrD(a, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVgathra func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVgathra calls the vecLib framework function vDSP_vgathra.
-func VDSPVgathra(ia int, ic int, n int) (a float32, c float32) {
+func VDSPVgathra(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVgathra == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVgathra, _lib, "vDSP_vgathra")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPVgathra(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVgathra(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVgathraD func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVgathraD calls the vecLib framework function vDSP_vgathraD.
-func VDSPVgathraD(ia int, ic int, n int) (a float64, c float64) {
+func VDSPVgathraD(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVgathraD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVgathraD, _lib, "vDSP_vgathraD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPVgathraD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVgathraD(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVgen func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVgen calls the vecLib framework function vDSP_vgen.
-func VDSPVgen(ic int, n int) (a float32, b float32, c float32) {
+func VDSPVgen(a unsafe.Pointer, b unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVgen == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVgen, _lib, "vDSP_vgen")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVgen(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVgen(a, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVgenD func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVgenD calls the vecLib framework function vDSP_vgenD.
-func VDSPVgenD(ic int, n int) (a float64, b float64, c float64) {
+func VDSPVgenD(a unsafe.Pointer, b unsafe.Pointer, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVgenD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVgenD, _lib, "vDSP_vgenD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVgenD(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVgenD(a, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVgenp func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPVgenp calls the vecLib framework function vDSP_vgenp.
-func VDSPVgenp(ia int, ib int, ic int, n int, m int) (a float32, b float32, c float32) {
+func VDSPVgenp(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int, m int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVgenp == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVgenp, _lib, "vDSP_vgenp")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVgenp(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n, m)
-	return _out0, _out1, _out2
+	_fnVDSPVgenp(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n, m)
+	return _out0
 }
 
 var _fnVDSPVgenpD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPVgenpD calls the vecLib framework function vDSP_vgenpD.
-func VDSPVgenpD(ia int, ib int, ic int, n int, m int) (a float64, b float64, c float64) {
+func VDSPVgenpD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int, m int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVgenpD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVgenpD, _lib, "vDSP_vgenpD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVgenpD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n, m)
-	return _out0, _out1, _out2
+	_fnVDSPVgenpD(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n, m)
+	return _out0
 }
 
 var _fnVDSPViclip func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPViclip calls the vecLib framework function vDSP_viclip.
-func VDSPViclip(ia int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPViclip(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPViclip == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPViclip, _lib, "vDSP_viclip")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPViclip(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPViclip(a, ia, b, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPViclipD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPViclipD calls the vecLib framework function vDSP_viclipD.
-func VDSPViclipD(ia int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPViclipD(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPViclipD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPViclipD, _lib, "vDSP_viclipD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPViclipD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPViclipD(a, ia, b, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVindex func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVindex calls the vecLib framework function vDSP_vindex.
-func VDSPVindex(ib int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVindex(a unsafe.Pointer, b unsafe.Pointer, ib int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVindex == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVindex, _lib, "vDSP_vindex")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVindex(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVindex(a, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVindexD func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVindexD calls the vecLib framework function vDSP_vindexD.
-func VDSPVindexD(ib int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVindexD(a unsafe.Pointer, b unsafe.Pointer, ib int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVindexD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVindexD, _lib, "vDSP_vindexD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVindexD(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVindexD(a, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVintb func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVintb calls the vecLib framework function vDSP_vintb.
-func VDSPVintb(ia int, ib int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVintb(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVintb == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVintb, _lib, "vDSP_vintb")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVintb(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVintb(a, ia, b, ib, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVintbD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVintbD calls the vecLib framework function vDSP_vintbD.
-func VDSPVintbD(ia int, ib int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVintbD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVintbD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVintbD, _lib, "vDSP_vintbD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVintbD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVintbD(a, ia, b, ib, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVlim func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVlim calls the vecLib framework function vDSP_vlim.
-func VDSPVlim(ia int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVlim(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVlim == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVlim, _lib, "vDSP_vlim")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVlim(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVlim(a, ia, b, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVlimD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVlimD calls the vecLib framework function vDSP_vlimD.
-func VDSPVlimD(ia int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVlimD(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVlimD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVlimD, _lib, "vDSP_vlimD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVlimD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVlimD(a, ia, b, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVlint func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPVlint calls the vecLib framework function vDSP_vlint.
-func VDSPVlint(ib int, ic int, n int, m int) (a float32, b float32, c float32) {
+func VDSPVlint(a unsafe.Pointer, b unsafe.Pointer, ib int, ic int, n int, m int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVlint == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVlint, _lib, "vDSP_vlint")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVlint(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n, m)
-	return _out0, _out1, _out2
+	_fnVDSPVlint(a, b, ib, unsafe.Pointer(&_out0), ic, n, m)
+	return _out0
 }
 
 var _fnVDSPVlintD func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPVlintD calls the vecLib framework function vDSP_vlintD.
-func VDSPVlintD(ib int, ic int, n int, m int) (a float64, b float64, c float64) {
+func VDSPVlintD(a unsafe.Pointer, b unsafe.Pointer, ib int, ic int, n int, m int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVlintD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVlintD, _lib, "vDSP_vlintD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVlintD(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n, m)
-	return _out0, _out1, _out2
+	_fnVDSPVlintD(a, b, ib, unsafe.Pointer(&_out0), ic, n, m)
+	return _out0
 }
 
 var _fnVDSPVma func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVma calls the vecLib framework function vDSP_vma.
-func VDSPVma(ia int, ib int, ic int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVma(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVma == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVma, _lib, "vDSP_vma")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVma(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVma(a, ia, b, ib, c, ic, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVmaD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmaD calls the vecLib framework function vDSP_vmaD.
-func VDSPVmaD(ia int, ib int, ic int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVmaD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmaD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmaD, _lib, "vDSP_vmaD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVmaD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVmaD(a, ia, b, ib, c, ic, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVmax func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmax calls the vecLib framework function vDSP_vmax.
-func VDSPVmax(ia int, ib int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVmax(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmax == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmax, _lib, "vDSP_vmax")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVmax(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVmax(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVmaxD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmaxD calls the vecLib framework function vDSP_vmaxD.
-func VDSPVmaxD(ia int, ib int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVmaxD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmaxD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmaxD, _lib, "vDSP_vmaxD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVmaxD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVmaxD(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVmaxmg func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmaxmg calls the vecLib framework function vDSP_vmaxmg.
-func VDSPVmaxmg(ia int, ib int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVmaxmg(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmaxmg == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmaxmg, _lib, "vDSP_vmaxmg")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVmaxmg(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVmaxmg(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVmaxmgD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmaxmgD calls the vecLib framework function vDSP_vmaxmgD.
-func VDSPVmaxmgD(ia int, ib int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVmaxmgD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmaxmgD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmaxmgD, _lib, "vDSP_vmaxmgD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVmaxmgD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVmaxmgD(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVmin func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmin calls the vecLib framework function vDSP_vmin.
-func VDSPVmin(ia int, ib int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVmin(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmin == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmin, _lib, "vDSP_vmin")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVmin(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVmin(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVminD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVminD calls the vecLib framework function vDSP_vminD.
-func VDSPVminD(ia int, ib int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVminD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVminD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVminD, _lib, "vDSP_vminD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVminD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVminD(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVminmg func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVminmg calls the vecLib framework function vDSP_vminmg.
-func VDSPVminmg(ia int, ib int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVminmg(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVminmg == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVminmg, _lib, "vDSP_vminmg")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVminmg(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVminmg(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVminmgD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVminmgD calls the vecLib framework function vDSP_vminmgD.
-func VDSPVminmgD(ia int, ib int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVminmgD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVminmgD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVminmgD, _lib, "vDSP_vminmgD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVminmgD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVminmgD(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVmma func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmma calls the vecLib framework function vDSP_vmma.
-func VDSPVmma(ia int, ib int, ic int, identifier int, ie int, n int) (a float32, b float32, c float32, d float32, e float32) {
+func VDSPVmma(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, d unsafe.Pointer, identifier int, ie int, n int) (e float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmma == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmma, _lib, "vDSP_vmma")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	var _out4 float32
-	_fnVDSPVmma(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVmma(a, ia, b, ib, c, ic, d, identifier, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVmmaD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmmaD calls the vecLib framework function vDSP_vmmaD.
-func VDSPVmmaD(ia int, ib int, ic int, identifier int, ie int, n int) (a float64, b float64, c float64, d float64, e float64) {
+func VDSPVmmaD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, d unsafe.Pointer, identifier int, ie int, n int) (e float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmmaD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmmaD, _lib, "vDSP_vmmaD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	var _out4 float64
-	_fnVDSPVmmaD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVmmaD(a, ia, b, ib, c, ic, d, identifier, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVmmsb func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmmsb calls the vecLib framework function vDSP_vmmsb.
-func VDSPVmmsb(ia int, ib int, ic int, identifier int, ie int, n int) (a float32, b float32, c float32, d float32, e float32) {
+func VDSPVmmsb(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, d unsafe.Pointer, identifier int, ie int, n int) (e float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmmsb == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmmsb, _lib, "vDSP_vmmsb")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	var _out4 float32
-	_fnVDSPVmmsb(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVmmsb(a, ia, b, ib, c, ic, d, identifier, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVmmsbD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmmsbD calls the vecLib framework function vDSP_vmmsbD.
-func VDSPVmmsbD(ia int, ib int, ic int, identifier int, ie int, n int) (a float64, b float64, c float64, d float64, e float64) {
+func VDSPVmmsbD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, d unsafe.Pointer, identifier int, ie int, n int) (e float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmmsbD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmmsbD, _lib, "vDSP_vmmsbD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	var _out4 float64
-	_fnVDSPVmmsbD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVmmsbD(a, ia, b, ib, c, ic, d, identifier, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVmsa func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVmsa calls the vecLib framework function vDSP_vmsa.
-func VDSPVmsa(ia int, ib int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVmsa(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmsa == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmsa, _lib, "vDSP_vmsa")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVmsa(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVmsa(a, ia, b, ib, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVmsaD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVmsaD calls the vecLib framework function vDSP_vmsaD.
-func VDSPVmsaD(ia int, ib int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVmsaD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmsaD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmsaD, _lib, "vDSP_vmsaD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVmsaD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVmsaD(a, ia, b, ib, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVmsb func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmsb calls the vecLib framework function vDSP_vmsb.
-func VDSPVmsb(ia int, ib int, ic int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVmsb(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmsb == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmsb, _lib, "vDSP_vmsb")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVmsb(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVmsb(a, ia, b, ib, c, ic, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVmsbD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmsbD calls the vecLib framework function vDSP_vmsbD.
-func VDSPVmsbD(ia int, ib int, ic int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVmsbD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmsbD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmsbD, _lib, "vDSP_vmsbD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVmsbD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVmsbD(a, ia, b, ib, c, ic, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVmul func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmul calls the vecLib framework function vDSP_vmul.
-func VDSPVmul(ia int, ib int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVmul(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmul == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmul, _lib, "vDSP_vmul")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVmul(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVmul(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVmulD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVmulD calls the vecLib framework function vDSP_vmulD.
-func VDSPVmulD(ia int, ib int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVmulD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVmulD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVmulD, _lib, "vDSP_vmulD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVmulD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVmulD(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVnabs func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVnabs calls the vecLib framework function vDSP_vnabs.
-func VDSPVnabs(ia int, ic int, n int) (a float32, c float32) {
+func VDSPVnabs(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVnabs == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVnabs, _lib, "vDSP_vnabs")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPVnabs(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVnabs(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVnabsD func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVnabsD calls the vecLib framework function vDSP_vnabsD.
-func VDSPVnabsD(ia int, ic int, n int) (a float64, c float64) {
+func VDSPVnabsD(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVnabsD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVnabsD, _lib, "vDSP_vnabsD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPVnabsD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVnabsD(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVneg func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVneg calls the vecLib framework function vDSP_vneg.
-func VDSPVneg(ia int, ic int, n int) (a float32, c float32) {
+func VDSPVneg(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVneg == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVneg, _lib, "vDSP_vneg")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPVneg(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVneg(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVnegD func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVnegD calls the vecLib framework function vDSP_vnegD.
-func VDSPVnegD(ia int, ic int, n int) (a float64, c float64) {
+func VDSPVnegD(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVnegD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVnegD, _lib, "vDSP_vnegD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPVnegD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVnegD(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVpoly func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPVpoly calls the vecLib framework function vDSP_vpoly.
-func VDSPVpoly(ia int, ib int, ic int, n int, p int) (a float32, b float32, c float32) {
+func VDSPVpoly(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int, p int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVpoly == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVpoly, _lib, "vDSP_vpoly")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVpoly(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n, p)
-	return _out0, _out1, _out2
+	_fnVDSPVpoly(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n, p)
+	return _out0
 }
 
 var _fnVDSPVpolyD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPVpolyD calls the vecLib framework function vDSP_vpolyD.
-func VDSPVpolyD(ia int, ib int, ic int, n int, p int) (a float64, b float64, c float64) {
+func VDSPVpolyD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int, p int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVpolyD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVpolyD, _lib, "vDSP_vpolyD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVpolyD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n, p)
-	return _out0, _out1, _out2
+	_fnVDSPVpolyD(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n, p)
+	return _out0
 }
 
 var _fnVDSPVpythg func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVpythg calls the vecLib framework function vDSP_vpythg.
-func VDSPVpythg(ia int, ib int, ic int, identifier int, ie int, n int) (a float32, b float32, c float32, d float32, e float32) {
+func VDSPVpythg(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, d unsafe.Pointer, identifier int, ie int, n int) (e float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVpythg == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVpythg, _lib, "vDSP_vpythg")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	var _out4 float32
-	_fnVDSPVpythg(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVpythg(a, ia, b, ib, c, ic, d, identifier, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVpythgD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVpythgD calls the vecLib framework function vDSP_vpythgD.
-func VDSPVpythgD(ia int, ib int, ic int, identifier int, ie int, n int) (a float64, b float64, c float64, d float64, e float64) {
+func VDSPVpythgD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, d unsafe.Pointer, identifier int, ie int, n int) (e float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVpythgD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVpythgD, _lib, "vDSP_vpythgD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	var _out4 float64
-	_fnVDSPVpythgD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVpythgD(a, ia, b, ib, c, ic, d, identifier, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVqint func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPVqint calls the vecLib framework function vDSP_vqint.
-func VDSPVqint(ib int, ic int, n int, m int) (a float32, b float32, c float32) {
+func VDSPVqint(a unsafe.Pointer, b unsafe.Pointer, ib int, ic int, n int, m int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVqint == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVqint, _lib, "vDSP_vqint")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVqint(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n, m)
-	return _out0, _out1, _out2
+	_fnVDSPVqint(a, b, ib, unsafe.Pointer(&_out0), ic, n, m)
+	return _out0
 }
 
 var _fnVDSPVqintD func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPVqintD calls the vecLib framework function vDSP_vqintD.
-func VDSPVqintD(ib int, ic int, n int, m int) (a float64, b float64, c float64) {
+func VDSPVqintD(a unsafe.Pointer, b unsafe.Pointer, ib int, ic int, n int, m int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVqintD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVqintD, _lib, "vDSP_vqintD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVqintD(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n, m)
-	return _out0, _out1, _out2
+	_fnVDSPVqintD(a, b, ib, unsafe.Pointer(&_out0), ic, n, m)
+	return _out0
 }
 
 var _fnVDSPVramp func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVramp calls the vecLib framework function vDSP_vramp.
-func VDSPVramp(ic int, n int) (a float32, b float32, c float32) {
+func VDSPVramp(a unsafe.Pointer, b unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVramp == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVramp, _lib, "vDSP_vramp")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVramp(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVramp(a, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVrampD func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampD calls the vecLib framework function vDSP_vrampD.
-func VDSPVrampD(ic int, n int) (a float64, b float64, c float64) {
+func VDSPVrampD(a unsafe.Pointer, b unsafe.Pointer, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampD, _lib, "vDSP_vrampD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVrampD(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVrampD(a, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVrampmul func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmul calls the vecLib framework function vDSP_vrampmul.
-func VDSPVrampmul(is int, os_ int, n int) (i float32, start float32, step float32, o float32) {
+func VDSPVrampmul(i unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start float32, o float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmul == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmul, _lib, "vDSP_vrampmul")
 	}
 	var _out0 float32
 	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVrampmul(unsafe.Pointer(&_out0), is, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), os_, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVrampmul(i, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), os_, n)
+	return _out0, _out1
 }
 
 var _fnVDSPVrampmul2 func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmul2 calls the vecLib framework function vDSP_vrampmul2.
-func VDSPVrampmul2(is int, os_ int, n int) (i0 float32, i1 float32, start float32, step float32, o0 float32, o1 float32) {
+func VDSPVrampmul2(i0 unsafe.Pointer, i1 unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start float32, o0 float32, o1 float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmul2 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmul2, _lib, "vDSP_vrampmul2")
@@ -38840,17 +38259,14 @@ func VDSPVrampmul2(is int, os_ int, n int) (i0 float32, i1 float32, start float3
 	var _out0 float32
 	var _out1 float32
 	var _out2 float32
-	var _out3 float32
-	var _out4 float32
-	var _out5 float32
-	_fnVDSPVrampmul2(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), is, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), os_, n)
-	return _out0, _out1, _out2, _out3, _out4, _out5
+	_fnVDSPVrampmul2(i0, i1, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), os_, n)
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPVrampmul2D func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmul2D calls the vecLib framework function vDSP_vrampmul2D.
-func VDSPVrampmul2D(is int, os_ int, n int) (i0 float64, i1 float64, start float64, step float64, o0 float64, o1 float64) {
+func VDSPVrampmul2D(i0 unsafe.Pointer, i1 unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start float64, o0 float64, o1 float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmul2D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmul2D, _lib, "vDSP_vrampmul2D")
@@ -38858,17 +38274,14 @@ func VDSPVrampmul2D(is int, os_ int, n int) (i0 float64, i1 float64, start float
 	var _out0 float64
 	var _out1 float64
 	var _out2 float64
-	var _out3 float64
-	var _out4 float64
-	var _out5 float64
-	_fnVDSPVrampmul2D(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), is, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), os_, n)
-	return _out0, _out1, _out2, _out3, _out4, _out5
+	_fnVDSPVrampmul2D(i0, i1, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), os_, n)
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPVrampmul2S115 func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmul2S115 calls the vecLib framework function vDSP_vrampmul2_s1_15.
-func VDSPVrampmul2S115(is int, os_ int, n int) (i0 int16, i1 int16, start int16, step int16, o0 int16, o1 int16) {
+func VDSPVrampmul2S115(i0 unsafe.Pointer, i1 unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start int16, o0 int16, o1 int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmul2S115 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmul2S115, _lib, "vDSP_vrampmul2_s1_15")
@@ -38876,17 +38289,14 @@ func VDSPVrampmul2S115(is int, os_ int, n int) (i0 int16, i1 int16, start int16,
 	var _out0 int16
 	var _out1 int16
 	var _out2 int16
-	var _out3 int16
-	var _out4 int16
-	var _out5 int16
-	_fnVDSPVrampmul2S115(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), is, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), os_, n)
-	return _out0, _out1, _out2, _out3, _out4, _out5
+	_fnVDSPVrampmul2S115(i0, i1, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), os_, n)
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPVrampmul2S824 func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmul2S824 calls the vecLib framework function vDSP_vrampmul2_s8_24.
-func VDSPVrampmul2S824(is int, os_ int, n int) (i0 int32, i1 int32, start int32, step int32, o0 int32, o1 int32) {
+func VDSPVrampmul2S824(i0 unsafe.Pointer, i1 unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start int32, o0 int32, o1 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmul2S824 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmul2S824, _lib, "vDSP_vrampmul2_s8_24")
@@ -38894,81 +38304,70 @@ func VDSPVrampmul2S824(is int, os_ int, n int) (i0 int32, i1 int32, start int32,
 	var _out0 int32
 	var _out1 int32
 	var _out2 int32
-	var _out3 int32
-	var _out4 int32
-	var _out5 int32
-	_fnVDSPVrampmul2S824(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), is, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), os_, n)
-	return _out0, _out1, _out2, _out3, _out4, _out5
+	_fnVDSPVrampmul2S824(i0, i1, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), os_, n)
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPVrampmulD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmulD calls the vecLib framework function vDSP_vrampmulD.
-func VDSPVrampmulD(is int, os_ int, n int) (i float64, start float64, step float64, o float64) {
+func VDSPVrampmulD(i unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start float64, o float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmulD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmulD, _lib, "vDSP_vrampmulD")
 	}
 	var _out0 float64
 	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVrampmulD(unsafe.Pointer(&_out0), is, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), os_, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVrampmulD(i, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), os_, n)
+	return _out0, _out1
 }
 
 var _fnVDSPVrampmulS115 func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmulS115 calls the vecLib framework function vDSP_vrampmul_s1_15.
-func VDSPVrampmulS115(is int, os_ int, n int) (i int16, start int16, step int16, o int16) {
+func VDSPVrampmulS115(i unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start int16, o int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmulS115 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmulS115, _lib, "vDSP_vrampmul_s1_15")
 	}
 	var _out0 int16
 	var _out1 int16
-	var _out2 int16
-	var _out3 int16
-	_fnVDSPVrampmulS115(unsafe.Pointer(&_out0), is, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), os_, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVrampmulS115(i, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), os_, n)
+	return _out0, _out1
 }
 
 var _fnVDSPVrampmulS824 func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmulS824 calls the vecLib framework function vDSP_vrampmul_s8_24.
-func VDSPVrampmulS824(is int, os_ int, n int) (i int32, start int32, step int32, o int32) {
+func VDSPVrampmulS824(i unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start int32, o int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmulS824 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmulS824, _lib, "vDSP_vrampmul_s8_24")
 	}
 	var _out0 int32
 	var _out1 int32
-	var _out2 int32
-	var _out3 int32
-	_fnVDSPVrampmulS824(unsafe.Pointer(&_out0), is, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), os_, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVrampmulS824(i, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), os_, n)
+	return _out0, _out1
 }
 
 var _fnVDSPVrampmuladd func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmuladd calls the vecLib framework function vDSP_vrampmuladd.
-func VDSPVrampmuladd(is int, os_ int, n int) (i float32, start float32, step float32, o float32) {
+func VDSPVrampmuladd(i unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start float32, o float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmuladd == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmuladd, _lib, "vDSP_vrampmuladd")
 	}
 	var _out0 float32
 	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVrampmuladd(unsafe.Pointer(&_out0), is, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), os_, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVrampmuladd(i, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), os_, n)
+	return _out0, _out1
 }
 
 var _fnVDSPVrampmuladd2 func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmuladd2 calls the vecLib framework function vDSP_vrampmuladd2.
-func VDSPVrampmuladd2(is int, os_ int, n int) (i0 float32, i1 float32, start float32, step float32, o0 float32, o1 float32) {
+func VDSPVrampmuladd2(i0 unsafe.Pointer, i1 unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start float32, o0 float32, o1 float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmuladd2 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmuladd2, _lib, "vDSP_vrampmuladd2")
@@ -38976,17 +38375,14 @@ func VDSPVrampmuladd2(is int, os_ int, n int) (i0 float32, i1 float32, start flo
 	var _out0 float32
 	var _out1 float32
 	var _out2 float32
-	var _out3 float32
-	var _out4 float32
-	var _out5 float32
-	_fnVDSPVrampmuladd2(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), is, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), os_, n)
-	return _out0, _out1, _out2, _out3, _out4, _out5
+	_fnVDSPVrampmuladd2(i0, i1, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), os_, n)
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPVrampmuladd2D func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmuladd2D calls the vecLib framework function vDSP_vrampmuladd2D.
-func VDSPVrampmuladd2D(is int, os_ int, n int) (i0 float64, i1 float64, start float64, step float64, o0 float64, o1 float64) {
+func VDSPVrampmuladd2D(i0 unsafe.Pointer, i1 unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start float64, o0 float64, o1 float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmuladd2D == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmuladd2D, _lib, "vDSP_vrampmuladd2D")
@@ -38994,17 +38390,14 @@ func VDSPVrampmuladd2D(is int, os_ int, n int) (i0 float64, i1 float64, start fl
 	var _out0 float64
 	var _out1 float64
 	var _out2 float64
-	var _out3 float64
-	var _out4 float64
-	var _out5 float64
-	_fnVDSPVrampmuladd2D(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), is, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), os_, n)
-	return _out0, _out1, _out2, _out3, _out4, _out5
+	_fnVDSPVrampmuladd2D(i0, i1, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), os_, n)
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPVrampmuladd2S115 func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmuladd2S115 calls the vecLib framework function vDSP_vrampmuladd2_s1_15.
-func VDSPVrampmuladd2S115(is int, os_ int, n int) (i0 int16, i1 int16, start int16, step int16, o0 int16, o1 int16) {
+func VDSPVrampmuladd2S115(i0 unsafe.Pointer, i1 unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start int16, o0 int16, o1 int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmuladd2S115 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmuladd2S115, _lib, "vDSP_vrampmuladd2_s1_15")
@@ -39012,17 +38405,14 @@ func VDSPVrampmuladd2S115(is int, os_ int, n int) (i0 int16, i1 int16, start int
 	var _out0 int16
 	var _out1 int16
 	var _out2 int16
-	var _out3 int16
-	var _out4 int16
-	var _out5 int16
-	_fnVDSPVrampmuladd2S115(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), is, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), os_, n)
-	return _out0, _out1, _out2, _out3, _out4, _out5
+	_fnVDSPVrampmuladd2S115(i0, i1, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), os_, n)
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPVrampmuladd2S824 func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmuladd2S824 calls the vecLib framework function vDSP_vrampmuladd2_s8_24.
-func VDSPVrampmuladd2S824(is int, os_ int, n int) (i0 int32, i1 int32, start int32, step int32, o0 int32, o1 int32) {
+func VDSPVrampmuladd2S824(i0 unsafe.Pointer, i1 unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start int32, o0 int32, o1 int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmuladd2S824 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmuladd2S824, _lib, "vDSP_vrampmuladd2_s8_24")
@@ -39030,89 +38420,76 @@ func VDSPVrampmuladd2S824(is int, os_ int, n int) (i0 int32, i1 int32, start int
 	var _out0 int32
 	var _out1 int32
 	var _out2 int32
-	var _out3 int32
-	var _out4 int32
-	var _out5 int32
-	_fnVDSPVrampmuladd2S824(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), is, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), unsafe.Pointer(&_out5), os_, n)
-	return _out0, _out1, _out2, _out3, _out4, _out5
+	_fnVDSPVrampmuladd2S824(i0, i1, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), os_, n)
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPVrampmuladdD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmuladdD calls the vecLib framework function vDSP_vrampmuladdD.
-func VDSPVrampmuladdD(is int, os_ int, n int) (i float64, start float64, step float64, o float64) {
+func VDSPVrampmuladdD(i unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start float64, o float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmuladdD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmuladdD, _lib, "vDSP_vrampmuladdD")
 	}
 	var _out0 float64
 	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVrampmuladdD(unsafe.Pointer(&_out0), is, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), os_, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVrampmuladdD(i, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), os_, n)
+	return _out0, _out1
 }
 
 var _fnVDSPVrampmuladdS115 func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmuladdS115 calls the vecLib framework function vDSP_vrampmuladd_s1_15.
-func VDSPVrampmuladdS115(is int, os_ int, n int) (i int16, start int16, step int16, o int16) {
+func VDSPVrampmuladdS115(i unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start int16, o int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmuladdS115 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmuladdS115, _lib, "vDSP_vrampmuladd_s1_15")
 	}
 	var _out0 int16
 	var _out1 int16
-	var _out2 int16
-	var _out3 int16
-	_fnVDSPVrampmuladdS115(unsafe.Pointer(&_out0), is, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), os_, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVrampmuladdS115(i, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), os_, n)
+	return _out0, _out1
 }
 
 var _fnVDSPVrampmuladdS824 func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrampmuladdS824 calls the vecLib framework function vDSP_vrampmuladd_s8_24.
-func VDSPVrampmuladdS824(is int, os_ int, n int) (i int32, start int32, step int32, o int32) {
+func VDSPVrampmuladdS824(i unsafe.Pointer, is int, step unsafe.Pointer, os_ int, n int) (start int32, o int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrampmuladdS824 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrampmuladdS824, _lib, "vDSP_vrampmuladd_s8_24")
 	}
 	var _out0 int32
 	var _out1 int32
-	var _out2 int32
-	var _out3 int32
-	_fnVDSPVrampmuladdS824(unsafe.Pointer(&_out0), is, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), os_, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVrampmuladdS824(i, is, unsafe.Pointer(&_out0), step, unsafe.Pointer(&_out1), os_, n)
+	return _out0, _out1
 }
 
 var _fnVDSPVrsum func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrsum calls the vecLib framework function vDSP_vrsum.
-func VDSPVrsum(ia int, ic int, n int) (a float32, s float32, c float32) {
+func VDSPVrsum(a unsafe.Pointer, ia int, s unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrsum == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrsum, _lib, "vDSP_vrsum")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVrsum(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVrsum(a, ia, s, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVrsumD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVrsumD calls the vecLib framework function vDSP_vrsumD.
-func VDSPVrsumD(ia int, ic int, n int) (a float64, s float64, c float64) {
+func VDSPVrsumD(a unsafe.Pointer, ia int, s unsafe.Pointer, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVrsumD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVrsumD, _lib, "vDSP_vrsumD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVrsumD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVrsumD(a, ia, s, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVrvrs func(unsafe.Pointer, int, int)
@@ -39144,407 +38521,339 @@ func VDSPVrvrsD(ic int, n int) (c float64) {
 var _fnVDSPVsadd func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsadd calls the vecLib framework function vDSP_vsadd.
-func VDSPVsadd(ia int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVsadd(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsadd == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsadd, _lib, "vDSP_vsadd")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVsadd(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVsadd(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsaddD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsaddD calls the vecLib framework function vDSP_vsaddD.
-func VDSPVsaddD(ia int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVsaddD(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsaddD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsaddD, _lib, "vDSP_vsaddD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVsaddD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVsaddD(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsaddi func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsaddi calls the vecLib framework function vDSP_vsaddi.
-func VDSPVsaddi(ia int, ic int, n int) (a int32, b int32, c int32) {
+func VDSPVsaddi(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsaddi == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsaddi, _lib, "vDSP_vsaddi")
 	}
 	var _out0 int32
-	var _out1 int32
-	var _out2 int32
-	_fnVDSPVsaddi(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVsaddi(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsbm func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVsbm calls the vecLib framework function vDSP_vsbm.
-func VDSPVsbm(ia int, ib int, ic int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVsbm(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsbm == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsbm, _lib, "vDSP_vsbm")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVsbm(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVsbm(a, ia, b, ib, c, ic, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVsbmD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVsbmD calls the vecLib framework function vDSP_vsbmD.
-func VDSPVsbmD(ia int, ib int, ic int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVsbmD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsbmD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsbmD, _lib, "vDSP_vsbmD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVsbmD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVsbmD(a, ia, b, ib, c, ic, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVsbsbm func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVsbsbm calls the vecLib framework function vDSP_vsbsbm.
-func VDSPVsbsbm(ia int, ib int, ic int, identifier int, ie int, n int) (a float32, b float32, c float32, d float32, e float32) {
+func VDSPVsbsbm(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, d unsafe.Pointer, identifier int, ie int, n int) (e float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsbsbm == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsbsbm, _lib, "vDSP_vsbsbm")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	var _out4 float32
-	_fnVDSPVsbsbm(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVsbsbm(a, ia, b, ib, c, ic, d, identifier, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVsbsbmD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVsbsbmD calls the vecLib framework function vDSP_vsbsbmD.
-func VDSPVsbsbmD(ia int, ib int, ic int, identifier int, ie int, n int) (a float64, b float64, c float64, d float64, e float64) {
+func VDSPVsbsbmD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, d unsafe.Pointer, identifier int, ie int, n int) (e float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsbsbmD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsbsbmD, _lib, "vDSP_vsbsbmD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	var _out4 float64
-	_fnVDSPVsbsbmD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVsbsbmD(a, ia, b, ib, c, ic, d, identifier, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVsbsm func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsbsm calls the vecLib framework function vDSP_vsbsm.
-func VDSPVsbsm(ia int, ib int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVsbsm(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsbsm == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsbsm, _lib, "vDSP_vsbsm")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVsbsm(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVsbsm(a, ia, b, ib, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVsbsmD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsbsmD calls the vecLib framework function vDSP_vsbsmD.
-func VDSPVsbsmD(ia int, ib int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVsbsmD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsbsmD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsbsmD, _lib, "vDSP_vsbsmD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVsbsmD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVsbsmD(a, ia, b, ib, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVsdiv func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsdiv calls the vecLib framework function vDSP_vsdiv.
-func VDSPVsdiv(ia int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVsdiv(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsdiv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsdiv, _lib, "vDSP_vsdiv")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVsdiv(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVsdiv(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsdivD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsdivD calls the vecLib framework function vDSP_vsdivD.
-func VDSPVsdivD(ia int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVsdivD(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsdivD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsdivD, _lib, "vDSP_vsdivD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVsdivD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVsdivD(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsdivi func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsdivi calls the vecLib framework function vDSP_vsdivi.
-func VDSPVsdivi(ia int, ic int, n int) (a int32, b int32, c int32) {
+func VDSPVsdivi(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsdivi == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsdivi, _lib, "vDSP_vsdivi")
 	}
 	var _out0 int32
-	var _out1 int32
-	var _out2 int32
-	_fnVDSPVsdivi(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVsdivi(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsimps func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsimps calls the vecLib framework function vDSP_vsimps.
-func VDSPVsimps(ia int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVsimps(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsimps == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsimps, _lib, "vDSP_vsimps")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVsimps(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVsimps(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsimpsD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsimpsD calls the vecLib framework function vDSP_vsimpsD.
-func VDSPVsimpsD(ia int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVsimpsD(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsimpsD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsimpsD, _lib, "vDSP_vsimpsD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVsimpsD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVsimpsD(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsma func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVsma calls the vecLib framework function vDSP_vsma.
-func VDSPVsma(ia int, ic int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVsma(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, ic int, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsma == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsma, _lib, "vDSP_vsma")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVsma(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVsma(a, ia, b, c, ic, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVsmaD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVsmaD calls the vecLib framework function vDSP_vsmaD.
-func VDSPVsmaD(ia int, ic int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVsmaD(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, ic int, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsmaD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsmaD, _lib, "vDSP_vsmaD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVsmaD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVsmaD(a, ia, b, c, ic, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVsmfix24 func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsmfix24 calls the vecLib framework function vDSP_vsmfix24.
-func VDSPVsmfix24(ia int, c unsafe.Pointer, ic int, n int) (a float32, b float32) {
+func VDSPVsmfix24(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c VDSPInt24) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsmfix24 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsmfix24, _lib, "vDSP_vsmfix24")
 	}
-	var _out0 float32
-	var _out1 float32
-	_fnVDSPVsmfix24(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), c, ic, n)
-	return _out0, _out1
+	var _out0 VDSPInt24
+	_fnVDSPVsmfix24(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsmfixu24 func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsmfixu24 calls the vecLib framework function vDSP_vsmfixu24.
-func VDSPVsmfixu24(ia int, c unsafe.Pointer, ic int, n int) (a float32, b float32) {
+func VDSPVsmfixu24(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c VDSPUint24) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsmfixu24 == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsmfixu24, _lib, "vDSP_vsmfixu24")
 	}
-	var _out0 float32
-	var _out1 float32
-	_fnVDSPVsmfixu24(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), c, ic, n)
-	return _out0, _out1
+	var _out0 VDSPUint24
+	_fnVDSPVsmfixu24(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsmsa func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsmsa calls the vecLib framework function vDSP_vsmsa.
-func VDSPVsmsa(ia int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVsmsa(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsmsa == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsmsa, _lib, "vDSP_vsmsa")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVsmsa(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVsmsa(a, ia, b, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVsmsaD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsmsaD calls the vecLib framework function vDSP_vsmsaD.
-func VDSPVsmsaD(ia int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVsmsaD(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsmsaD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsmsaD, _lib, "vDSP_vsmsaD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVsmsaD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVsmsaD(a, ia, b, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVsmsb func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVsmsb calls the vecLib framework function vDSP_vsmsb.
-func VDSPVsmsb(ia int, ic int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVsmsb(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, ic int, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsmsb == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsmsb, _lib, "vDSP_vsmsb")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVsmsb(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVsmsb(a, ia, b, c, ic, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVsmsbD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVsmsbD calls the vecLib framework function vDSP_vsmsbD.
-func VDSPVsmsbD(ia int, ic int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVsmsbD(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, ic int, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsmsbD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsmsbD, _lib, "vDSP_vsmsbD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVsmsbD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVsmsbD(a, ia, b, c, ic, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVsmsma func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsmsma calls the vecLib framework function vDSP_vsmsma.
-func VDSPVsmsma(ia int, ic int, ie int, n int) (a float32, b float32, c float32, d float32, e float32) {
+func VDSPVsmsma(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, ic int, d unsafe.Pointer, ie int, n int) (e float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsmsma == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsmsma, _lib, "vDSP_vsmsma")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	var _out4 float32
-	_fnVDSPVsmsma(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVsmsma(a, ia, b, c, ic, d, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVsmsmaD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsmsmaD calls the vecLib framework function vDSP_vsmsmaD.
-func VDSPVsmsmaD(ia int, ic int, ie int, n int) (a float64, b float64, c float64, d float64, e float64) {
+func VDSPVsmsmaD(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, ic int, d unsafe.Pointer, ie int, n int) (e float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsmsmaD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsmsmaD, _lib, "vDSP_vsmsmaD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	var _out4 float64
-	_fnVDSPVsmsmaD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), ie, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVsmsmaD(a, ia, b, c, ic, d, unsafe.Pointer(&_out0), ie, n)
+	return _out0
 }
 
 var _fnVDSPVsmul func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsmul calls the vecLib framework function vDSP_vsmul.
-func VDSPVsmul(ia int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVsmul(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsmul == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsmul, _lib, "vDSP_vsmul")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVsmul(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVsmul(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsmulD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsmulD calls the vecLib framework function vDSP_vsmulD.
-func VDSPVsmulD(ia int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVsmulD(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsmulD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsmulD, _lib, "vDSP_vsmulD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVsmulD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVsmulD(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsort func(unsafe.Pointer, int, int)
@@ -39576,131 +38885,120 @@ func VDSPVsortD(n int, order int) (c float64) {
 var _fnVDSPVsorti func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsorti calls the vecLib framework function vDSP_vsorti.
-func VDSPVsorti(n int, order int) (c float32, i int, temporary int) {
+func VDSPVsorti(c unsafe.Pointer, n int, order int) (i int, temporary int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsorti == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsorti, _lib, "vDSP_vsorti")
 	}
-	var _out0 float32
+	var _out0 int
 	var _out1 int
-	var _out2 int
-	_fnVDSPVsorti(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n, order)
-	return _out0, _out1, _out2
+	_fnVDSPVsorti(c, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n, order)
+	return _out0, _out1
 }
 
 var _fnVDSPVsortiD func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVsortiD calls the vecLib framework function vDSP_vsortiD.
-func VDSPVsortiD(n int, order int) (c float64, i int, temporary int) {
+func VDSPVsortiD(c unsafe.Pointer, n int, order int) (i int, temporary int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsortiD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsortiD, _lib, "vDSP_vsortiD")
 	}
-	var _out0 float64
+	var _out0 int
 	var _out1 int
-	var _out2 int
-	_fnVDSPVsortiD(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), n, order)
-	return _out0, _out1, _out2
+	_fnVDSPVsortiD(c, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), n, order)
+	return _out0, _out1
 }
 
 var _fnVDSPVspdp func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVspdp calls the vecLib framework function vDSP_vspdp.
-func VDSPVspdp(ia int, ic int, n int) (a float32, c float64) {
+func VDSPVspdp(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVspdp == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVspdp, _lib, "vDSP_vspdp")
 	}
-	var _out0 float32
-	var _out1 float64
-	_fnVDSPVspdp(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	var _out0 float64
+	_fnVDSPVspdp(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsq func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVsq calls the vecLib framework function vDSP_vsq.
-func VDSPVsq(ia int, ic int, n int) (a float32, c float32) {
+func VDSPVsq(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsq == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsq, _lib, "vDSP_vsq")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPVsq(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVsq(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsqD func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVsqD calls the vecLib framework function vDSP_vsqD.
-func VDSPVsqD(ia int, ic int, n int) (a float64, c float64) {
+func VDSPVsqD(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsqD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsqD, _lib, "vDSP_vsqD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPVsqD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVsqD(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVssq func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVssq calls the vecLib framework function vDSP_vssq.
-func VDSPVssq(ia int, ic int, n int) (a float32, c float32) {
+func VDSPVssq(a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVssq == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVssq, _lib, "vDSP_vssq")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPVssq(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVssq(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVssqD func(unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVssqD calls the vecLib framework function vDSP_vssqD.
-func VDSPVssqD(ia int, ic int, n int) (a float64, c float64) {
+func VDSPVssqD(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVssqD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVssqD, _lib, "vDSP_vssqD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPVssqD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPVssqD(a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsub func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVsub calls the vecLib framework function vDSP_vsub.
-func VDSPVsub(ib int, ia int, ic int, n int) (b float32, a float32, c float32) {
+func VDSPVsub(b unsafe.Pointer, ib int, a unsafe.Pointer, ia int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsub == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsub, _lib, "vDSP_vsub")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVsub(unsafe.Pointer(&_out0), ib, unsafe.Pointer(&_out1), ia, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVsub(b, ib, a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVsubD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVsubD calls the vecLib framework function vDSP_vsubD.
-func VDSPVsubD(ib int, ia int, ic int, n int) (b float64, a float64, c float64) {
+func VDSPVsubD(b unsafe.Pointer, ib int, a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVsubD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVsubD, _lib, "vDSP_vsubD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVsubD(unsafe.Pointer(&_out0), ib, unsafe.Pointer(&_out1), ia, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVsubD(b, ib, a, ia, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVswap func(unsafe.Pointer, int, unsafe.Pointer, int, int)
@@ -39734,277 +39032,239 @@ func VDSPVswapD(ia int, ib int, n int) (a float64, b float64) {
 var _fnVDSPVswmax func(unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPVswmax calls the vecLib framework function vDSP_vswmax.
-func VDSPVswmax(ia int, ic int, n int, windowLength int) (a float32, c float32) {
+func VDSPVswmax(a unsafe.Pointer, ia int, ic int, n int, windowLength int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVswmax == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVswmax, _lib, "vDSP_vswmax")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPVswmax(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n, windowLength)
-	return _out0, _out1
+	_fnVDSPVswmax(a, ia, unsafe.Pointer(&_out0), ic, n, windowLength)
+	return _out0
 }
 
 var _fnVDSPVswmaxD func(unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPVswmaxD calls the vecLib framework function vDSP_vswmaxD.
-func VDSPVswmaxD(ia int, ic int, n int, windowLength int) (a float64, c float64) {
+func VDSPVswmaxD(a unsafe.Pointer, ia int, ic int, n int, windowLength int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVswmaxD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVswmaxD, _lib, "vDSP_vswmaxD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPVswmaxD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n, windowLength)
-	return _out0, _out1
+	_fnVDSPVswmaxD(a, ia, unsafe.Pointer(&_out0), ic, n, windowLength)
+	return _out0
 }
 
 var _fnVDSPVswsum func(unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPVswsum calls the vecLib framework function vDSP_vswsum.
-func VDSPVswsum(ia int, ic int, n int, p int) (a float32, c float32) {
+func VDSPVswsum(a unsafe.Pointer, ia int, ic int, n int, p int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVswsum == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVswsum, _lib, "vDSP_vswsum")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPVswsum(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n, p)
-	return _out0, _out1
+	_fnVDSPVswsum(a, ia, unsafe.Pointer(&_out0), ic, n, p)
+	return _out0
 }
 
 var _fnVDSPVswsumD func(unsafe.Pointer, int, unsafe.Pointer, int, int, int)
 
 // VDSPVswsumD calls the vecLib framework function vDSP_vswsumD.
-func VDSPVswsumD(ia int, ic int, n int, p int) (a float64, c float64) {
+func VDSPVswsumD(a unsafe.Pointer, ia int, ic int, n int, p int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVswsumD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVswsumD, _lib, "vDSP_vswsumD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPVswsumD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ic, n, p)
-	return _out0, _out1
+	_fnVDSPVswsumD(a, ia, unsafe.Pointer(&_out0), ic, n, p)
+	return _out0
 }
 
 var _fnVDSPVtabi func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVtabi calls the vecLib framework function vDSP_vtabi.
-func VDSPVtabi(ia int, m int, identifier int, n int) (a float32, s1 float32, s2 float32, c float32, d float32) {
+func VDSPVtabi(a unsafe.Pointer, ia int, s1 unsafe.Pointer, s2 unsafe.Pointer, c unsafe.Pointer, m int, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVtabi == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVtabi, _lib, "vDSP_vtabi")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	var _out4 float32
-	_fnVDSPVtabi(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), m, unsafe.Pointer(&_out4), identifier, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVtabi(a, ia, s1, s2, c, m, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVtabiD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVtabiD calls the vecLib framework function vDSP_vtabiD.
-func VDSPVtabiD(ia int, m int, identifier int, n int) (a float64, s1 float64, s2 float64, c float64, d float64) {
+func VDSPVtabiD(a unsafe.Pointer, ia int, s1 unsafe.Pointer, s2 unsafe.Pointer, c unsafe.Pointer, m int, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVtabiD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVtabiD, _lib, "vDSP_vtabiD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	var _out4 float64
-	_fnVDSPVtabiD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), m, unsafe.Pointer(&_out4), identifier, n)
-	return _out0, _out1, _out2, _out3, _out4
+	_fnVDSPVtabiD(a, ia, s1, s2, c, m, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVthr func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVthr calls the vecLib framework function vDSP_vthr.
-func VDSPVthr(ia int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVthr(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVthr == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVthr, _lib, "vDSP_vthr")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVthr(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVthr(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVthrD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVthrD calls the vecLib framework function vDSP_vthrD.
-func VDSPVthrD(ia int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVthrD(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVthrD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVthrD, _lib, "vDSP_vthrD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVthrD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVthrD(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVthres func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVthres calls the vecLib framework function vDSP_vthres.
-func VDSPVthres(ia int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVthres(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVthres == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVthres, _lib, "vDSP_vthres")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVthres(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVthres(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVthresD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVthresD calls the vecLib framework function vDSP_vthresD.
-func VDSPVthresD(ia int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVthresD(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVthresD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVthresD, _lib, "vDSP_vthresD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVthresD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVthresD(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVthrsc func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVthrsc calls the vecLib framework function vDSP_vthrsc.
-func VDSPVthrsc(ia int, identifier int, n int) (a float32, b float32, c float32, d float32) {
+func VDSPVthrsc(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, identifier int, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVthrsc == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVthrsc, _lib, "vDSP_vthrsc")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	_fnVDSPVthrsc(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVthrsc(a, ia, b, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVthrscD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVthrscD calls the vecLib framework function vDSP_vthrscD.
-func VDSPVthrscD(ia int, identifier int, n int) (a float64, b float64, c float64, d float64) {
+func VDSPVthrscD(a unsafe.Pointer, ia int, b unsafe.Pointer, c unsafe.Pointer, identifier int, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVthrscD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVthrscD, _lib, "vDSP_vthrscD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	_fnVDSPVthrscD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), identifier, n)
-	return _out0, _out1, _out2, _out3
+	_fnVDSPVthrscD(a, ia, b, c, unsafe.Pointer(&_out0), identifier, n)
+	return _out0
 }
 
 var _fnVDSPVtmerg func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVtmerg calls the vecLib framework function vDSP_vtmerg.
-func VDSPVtmerg(ia int, ib int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVtmerg(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVtmerg == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVtmerg, _lib, "vDSP_vtmerg")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVtmerg(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVtmerg(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVtmergD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPVtmergD calls the vecLib framework function vDSP_vtmergD.
-func VDSPVtmergD(ia int, ib int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVtmergD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVtmergD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVtmergD, _lib, "vDSP_vtmergD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVtmergD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), ib, unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVtmergD(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVtrapz func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVtrapz calls the vecLib framework function vDSP_vtrapz.
-func VDSPVtrapz(ia int, ic int, n int) (a float32, b float32, c float32) {
+func VDSPVtrapz(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVtrapz == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVtrapz, _lib, "vDSP_vtrapz")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPVtrapz(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVtrapz(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPVtrapzD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPVtrapzD calls the vecLib framework function vDSP_vtrapzD.
-func VDSPVtrapzD(ia int, ic int, n int) (a float64, b float64, c float64) {
+func VDSPVtrapzD(a unsafe.Pointer, ia int, b unsafe.Pointer, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPVtrapzD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPVtrapzD, _lib, "vDSP_vtrapzD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPVtrapzD(unsafe.Pointer(&_out0), ia, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), ic, n)
-	return _out0, _out1, _out2
+	_fnVDSPVtrapzD(a, ia, b, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPWiener func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer)
 
 // VDSPWiener calls the vecLib framework function vDSP_wiener.
-func VDSPWiener(l int, flag int) (a float32, c float32, f float32, p float32, err int32) {
+func VDSPWiener(l int, a unsafe.Pointer, c unsafe.Pointer, flag int) (f float32, p float32, err int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPWiener == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPWiener, _lib, "vDSP_wiener")
 	}
 	var _out0 float32
 	var _out1 float32
-	var _out2 float32
-	var _out3 float32
-	var _out4 int32
-	_fnVDSPWiener(l, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), flag, unsafe.Pointer(&_out4))
-	return _out0, _out1, _out2, _out3, _out4
+	var _out2 int32
+	_fnVDSPWiener(l, a, c, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flag, unsafe.Pointer(&_out2))
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPWienerD func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer)
 
 // VDSPWienerD calls the vecLib framework function vDSP_wienerD.
-func VDSPWienerD(l int, flag int) (a float64, c float64, f float64, p float64, err int32) {
+func VDSPWienerD(l int, a unsafe.Pointer, c unsafe.Pointer, flag int) (f float64, p float64, err int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPWienerD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPWienerD, _lib, "vDSP_wienerD")
 	}
 	var _out0 float64
 	var _out1 float64
-	var _out2 float64
-	var _out3 float64
-	var _out4 int32
-	_fnVDSPWienerD(l, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), flag, unsafe.Pointer(&_out4))
-	return _out0, _out1, _out2, _out3, _out4
+	var _out2 int32
+	_fnVDSPWienerD(l, a, c, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flag, unsafe.Pointer(&_out2))
+	return _out0, _out1, _out2
 }
 
 var _fnVDSPZaspec func(unsafe.Pointer, unsafe.Pointer, int)
@@ -40036,31 +39296,27 @@ func VDSPZaspecD(a unsafe.Pointer, n int) (c float64) {
 var _fnVDSPZcoher func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPZcoher calls the vecLib framework function vDSP_zcoher.
-func VDSPZcoher(c unsafe.Pointer, n int) (a float32, b float32, d float32) {
+func VDSPZcoher(a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, n int) (d float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZcoher == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZcoher, _lib, "vDSP_zcoher")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_fnVDSPZcoher(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), c, unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	_fnVDSPZcoher(a, b, c, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPZcoherD func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPZcoherD calls the vecLib framework function vDSP_zcoherD.
-func VDSPZcoherD(c unsafe.Pointer, n int) (a float64, b float64, d float64) {
+func VDSPZcoherD(a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, n int) (d float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZcoherD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZcoherD, _lib, "vDSP_zcoherD")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	_fnVDSPZcoherD(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), c, unsafe.Pointer(&_out2), n)
-	return _out0, _out1, _out2
+	_fnVDSPZcoherD(a, b, c, unsafe.Pointer(&_out0), n)
+	return _out0
 }
 
 var _fnVDSPZconv func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int, int)
@@ -40242,157 +39498,133 @@ func VDSPZmsmD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Poin
 var _fnVDSPZrdesamp func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPZrdesamp calls the vecLib framework function vDSP_zrdesamp.
-func VDSPZrdesamp(a unsafe.Pointer, df int, c unsafe.Pointer, n int, p int) (f float32) {
+func VDSPZrdesamp(a unsafe.Pointer, df int, f unsafe.Pointer, c unsafe.Pointer, n int, p int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZrdesamp == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZrdesamp, _lib, "vDSP_zrdesamp")
 	}
-	var _out0 float32
-	_fnVDSPZrdesamp(a, df, unsafe.Pointer(&_out0), c, n, p)
-	return _out0
+	_fnVDSPZrdesamp(a, df, f, c, n, p)
 }
 
 var _fnVDSPZrdesampD func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, int)
 
 // VDSPZrdesampD calls the vecLib framework function vDSP_zrdesampD.
-func VDSPZrdesampD(a unsafe.Pointer, df int, c unsafe.Pointer, n int, p int) (f float64) {
+func VDSPZrdesampD(a unsafe.Pointer, df int, f unsafe.Pointer, c unsafe.Pointer, n int, p int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZrdesampD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZrdesampD, _lib, "vDSP_zrdesampD")
 	}
-	var _out0 float64
-	_fnVDSPZrdesampD(a, df, unsafe.Pointer(&_out0), c, n, p)
-	return _out0
+	_fnVDSPZrdesampD(a, df, f, c, n, p)
 }
 
 var _fnVDSPZrdotpr func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPZrdotpr calls the vecLib framework function vDSP_zrdotpr.
-func VDSPZrdotpr(a unsafe.Pointer, ia int, ib int, c unsafe.Pointer, n int) (b float32) {
+func VDSPZrdotpr(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZrdotpr == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZrdotpr, _lib, "vDSP_zrdotpr")
 	}
-	var _out0 float32
-	_fnVDSPZrdotpr(a, ia, unsafe.Pointer(&_out0), ib, c, n)
-	return _out0
+	_fnVDSPZrdotpr(a, ia, b, ib, c, n)
 }
 
 var _fnVDSPZrdotprD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int)
 
 // VDSPZrdotprD calls the vecLib framework function vDSP_zrdotprD.
-func VDSPZrdotprD(a unsafe.Pointer, ia int, ib int, c unsafe.Pointer, n int) (b float64) {
+func VDSPZrdotprD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZrdotprD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZrdotprD, _lib, "vDSP_zrdotprD")
 	}
-	var _out0 float64
-	_fnVDSPZrdotprD(a, ia, unsafe.Pointer(&_out0), ib, c, n)
-	return _out0
+	_fnVDSPZrdotprD(a, ia, b, ib, c, n)
 }
 
 var _fnVDSPZrvadd func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPZrvadd calls the vecLib framework function vDSP_zrvadd.
-func VDSPZrvadd(a unsafe.Pointer, ia int, ib int, c unsafe.Pointer, ic int, n int) (b float32) {
+func VDSPZrvadd(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZrvadd == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZrvadd, _lib, "vDSP_zrvadd")
 	}
-	var _out0 float32
-	_fnVDSPZrvadd(a, ia, unsafe.Pointer(&_out0), ib, c, ic, n)
-	return _out0
+	_fnVDSPZrvadd(a, ia, b, ib, c, ic, n)
 }
 
 var _fnVDSPZrvaddD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPZrvaddD calls the vecLib framework function vDSP_zrvaddD.
-func VDSPZrvaddD(a unsafe.Pointer, ia int, ib int, c unsafe.Pointer, ic int, n int) (b float64) {
+func VDSPZrvaddD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZrvaddD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZrvaddD, _lib, "vDSP_zrvaddD")
 	}
-	var _out0 float64
-	_fnVDSPZrvaddD(a, ia, unsafe.Pointer(&_out0), ib, c, ic, n)
-	return _out0
+	_fnVDSPZrvaddD(a, ia, b, ib, c, ic, n)
 }
 
 var _fnVDSPZrvdiv func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPZrvdiv calls the vecLib framework function vDSP_zrvdiv.
-func VDSPZrvdiv(a unsafe.Pointer, ia int, ib int, c unsafe.Pointer, ic int, n int) (b float32) {
+func VDSPZrvdiv(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZrvdiv == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZrvdiv, _lib, "vDSP_zrvdiv")
 	}
-	var _out0 float32
-	_fnVDSPZrvdiv(a, ia, unsafe.Pointer(&_out0), ib, c, ic, n)
-	return _out0
+	_fnVDSPZrvdiv(a, ia, b, ib, c, ic, n)
 }
 
 var _fnVDSPZrvdivD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPZrvdivD calls the vecLib framework function vDSP_zrvdivD.
-func VDSPZrvdivD(a unsafe.Pointer, ia int, ib int, c unsafe.Pointer, ic int, n int) (b float64) {
+func VDSPZrvdivD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZrvdivD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZrvdivD, _lib, "vDSP_zrvdivD")
 	}
-	var _out0 float64
-	_fnVDSPZrvdivD(a, ia, unsafe.Pointer(&_out0), ib, c, ic, n)
-	return _out0
+	_fnVDSPZrvdivD(a, ia, b, ib, c, ic, n)
 }
 
 var _fnVDSPZrvmul func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPZrvmul calls the vecLib framework function vDSP_zrvmul.
-func VDSPZrvmul(a unsafe.Pointer, ia int, ib int, c unsafe.Pointer, ic int, n int) (b float32) {
+func VDSPZrvmul(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZrvmul == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZrvmul, _lib, "vDSP_zrvmul")
 	}
-	var _out0 float32
-	_fnVDSPZrvmul(a, ia, unsafe.Pointer(&_out0), ib, c, ic, n)
-	return _out0
+	_fnVDSPZrvmul(a, ia, b, ib, c, ic, n)
 }
 
 var _fnVDSPZrvmulD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPZrvmulD calls the vecLib framework function vDSP_zrvmulD.
-func VDSPZrvmulD(a unsafe.Pointer, ia int, ib int, c unsafe.Pointer, ic int, n int) (b float64) {
+func VDSPZrvmulD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZrvmulD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZrvmulD, _lib, "vDSP_zrvmulD")
 	}
-	var _out0 float64
-	_fnVDSPZrvmulD(a, ia, unsafe.Pointer(&_out0), ib, c, ic, n)
-	return _out0
+	_fnVDSPZrvmulD(a, ia, b, ib, c, ic, n)
 }
 
 var _fnVDSPZrvsub func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPZrvsub calls the vecLib framework function vDSP_zrvsub.
-func VDSPZrvsub(a unsafe.Pointer, ia int, ib int, c unsafe.Pointer, ic int, n int) (b float32) {
+func VDSPZrvsub(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZrvsub == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZrvsub, _lib, "vDSP_zrvsub")
 	}
-	var _out0 float32
-	_fnVDSPZrvsub(a, ia, unsafe.Pointer(&_out0), ib, c, ic, n)
-	return _out0
+	_fnVDSPZrvsub(a, ia, b, ib, c, ic, n)
 }
 
 var _fnVDSPZrvsubD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPZrvsubD calls the vecLib framework function vDSP_zrvsubD.
-func VDSPZrvsubD(a unsafe.Pointer, ia int, ib int, c unsafe.Pointer, ic int, n int) (b float64) {
+func VDSPZrvsubD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, c unsafe.Pointer, ic int, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZrvsubD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZrvsubD, _lib, "vDSP_zrvsubD")
 	}
-	var _out0 float64
-	_fnVDSPZrvsubD(a, ia, unsafe.Pointer(&_out0), ib, c, ic, n)
-	return _out0
+	_fnVDSPZrvsubD(a, ia, b, ib, c, ic, n)
 }
 
 var _fnVDSPZtoc func(unsafe.Pointer, int, unsafe.Pointer, int, int)
@@ -40424,27 +39656,23 @@ func VDSPZtocD(z unsafe.Pointer, iz int, ic int, n int) (c DSPDoubleComplex) {
 var _fnVDSPZtrans func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPZtrans calls the vecLib framework function vDSP_ztrans.
-func VDSPZtrans(b unsafe.Pointer, c unsafe.Pointer, n int) (a float32) {
+func VDSPZtrans(a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZtrans == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZtrans, _lib, "vDSP_ztrans")
 	}
-	var _out0 float32
-	_fnVDSPZtrans(unsafe.Pointer(&_out0), b, c, n)
-	return _out0
+	_fnVDSPZtrans(a, b, c, n)
 }
 
 var _fnVDSPZtransD func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int)
 
 // VDSPZtransD calls the vecLib framework function vDSP_ztransD.
-func VDSPZtransD(b unsafe.Pointer, c unsafe.Pointer, n int) (a float64) {
+func VDSPZtransD(a unsafe.Pointer, b unsafe.Pointer, c unsafe.Pointer, n int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZtransD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZtransD, _lib, "vDSP_ztransD")
 	}
-	var _out0 float64
-	_fnVDSPZtransD(unsafe.Pointer(&_out0), b, c, n)
-	return _out0
+	_fnVDSPZtransD(a, b, c, n)
 }
 
 var _fnVDSPZvabs func(unsafe.Pointer, int, unsafe.Pointer, int, int)
@@ -40656,29 +39884,27 @@ func VDSPZvmagsD(a unsafe.Pointer, ia int, ic int, n int) (c float64) {
 var _fnVDSPZvmgsa func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPZvmgsa calls the vecLib framework function vDSP_zvmgsa.
-func VDSPZvmgsa(a unsafe.Pointer, ia int, ib int, ic int, n int) (b float32, c float32) {
+func VDSPZvmgsa(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZvmgsa == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZvmgsa, _lib, "vDSP_zvmgsa")
 	}
 	var _out0 float32
-	var _out1 float32
-	_fnVDSPZvmgsa(a, ia, unsafe.Pointer(&_out0), ib, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPZvmgsa(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPZvmgsaD func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
 
 // VDSPZvmgsaD calls the vecLib framework function vDSP_zvmgsaD.
-func VDSPZvmgsaD(a unsafe.Pointer, ia int, ib int, ic int, n int) (b float64, c float64) {
+func VDSPZvmgsaD(a unsafe.Pointer, ia int, b unsafe.Pointer, ib int, ic int, n int) (c float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVDSPZvmgsaD == nil {
 		ebipurego.RegisterLibFunc(&_fnVDSPZvmgsaD, _lib, "vDSP_zvmgsaD")
 	}
 	var _out0 float64
-	var _out1 float64
-	_fnVDSPZvmgsaD(a, ia, unsafe.Pointer(&_out0), ib, unsafe.Pointer(&_out1), ic, n)
-	return _out0, _out1
+	_fnVDSPZvmgsaD(a, ia, b, ib, unsafe.Pointer(&_out0), ic, n)
+	return _out0
 }
 
 var _fnVDSPZvmmaa func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, int)
@@ -43079,1277 +42305,1091 @@ func Vtruncf(arg unsafe.Pointer) unsafe.Pointer {
 var _fnVvacos func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvacos calls the vecLib framework function vvacos.
-func Vvacos() (arg float64, arg2 float64, arg3 int32) {
+func Vvacos(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvacos == nil {
 		ebipurego.RegisterLibFunc(&_fnVvacos, _lib, "vvacos")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvacos(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvacos(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvacosf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvacosf calls the vecLib framework function vvacosf.
-func Vvacosf() (arg float32, arg2 float32, arg3 int32) {
+func Vvacosf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvacosf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvacosf, _lib, "vvacosf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvacosf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvacosf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvacosh func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvacosh calls the vecLib framework function vvacosh.
-func Vvacosh() (arg float64, arg2 float64, arg3 int32) {
+func Vvacosh(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvacosh == nil {
 		ebipurego.RegisterLibFunc(&_fnVvacosh, _lib, "vvacosh")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvacosh(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvacosh(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvacoshf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvacoshf calls the vecLib framework function vvacoshf.
-func Vvacoshf() (arg float32, arg2 float32, arg3 int32) {
+func Vvacoshf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvacoshf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvacoshf, _lib, "vvacoshf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvacoshf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvacoshf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvasin func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvasin calls the vecLib framework function vvasin.
-func Vvasin() (arg float64, arg2 float64, arg3 int32) {
+func Vvasin(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvasin == nil {
 		ebipurego.RegisterLibFunc(&_fnVvasin, _lib, "vvasin")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvasin(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvasin(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvasinf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvasinf calls the vecLib framework function vvasinf.
-func Vvasinf() (arg float32, arg2 float32, arg3 int32) {
+func Vvasinf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvasinf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvasinf, _lib, "vvasinf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvasinf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvasinf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvasinh func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvasinh calls the vecLib framework function vvasinh.
-func Vvasinh() (arg float64, arg2 float64, arg3 int32) {
+func Vvasinh(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvasinh == nil {
 		ebipurego.RegisterLibFunc(&_fnVvasinh, _lib, "vvasinh")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvasinh(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvasinh(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvasinhf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvasinhf calls the vecLib framework function vvasinhf.
-func Vvasinhf() (arg float32, arg2 float32, arg3 int32) {
+func Vvasinhf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvasinhf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvasinhf, _lib, "vvasinhf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvasinhf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvasinhf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvatan func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvatan calls the vecLib framework function vvatan.
-func Vvatan() (arg float64, arg2 float64, arg3 int32) {
+func Vvatan(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvatan == nil {
 		ebipurego.RegisterLibFunc(&_fnVvatan, _lib, "vvatan")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvatan(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvatan(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvatan2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvatan2 calls the vecLib framework function vvatan2.
-func Vvatan2() (arg float64, arg2 float64, arg3 float64, arg4 int32) {
+func Vvatan2(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvatan2 == nil {
 		ebipurego.RegisterLibFunc(&_fnVvatan2, _lib, "vvatan2")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 int32
-	_fnVvatan2(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvatan2(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvatan2f func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvatan2f calls the vecLib framework function vvatan2f.
-func Vvatan2f() (arg float32, arg2 float32, arg3 float32, arg4 int32) {
+func Vvatan2f(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvatan2f == nil {
 		ebipurego.RegisterLibFunc(&_fnVvatan2f, _lib, "vvatan2f")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 int32
-	_fnVvatan2f(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvatan2f(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvatanf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvatanf calls the vecLib framework function vvatanf.
-func Vvatanf() (arg float32, arg2 float32, arg3 int32) {
+func Vvatanf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvatanf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvatanf, _lib, "vvatanf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvatanf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvatanf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvatanh func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvatanh calls the vecLib framework function vvatanh.
-func Vvatanh() (arg float64, arg2 float64, arg3 int32) {
+func Vvatanh(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvatanh == nil {
 		ebipurego.RegisterLibFunc(&_fnVvatanh, _lib, "vvatanh")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvatanh(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvatanh(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvatanhf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvatanhf calls the vecLib framework function vvatanhf.
-func Vvatanhf() (arg float32, arg2 float32, arg3 int32) {
+func Vvatanhf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvatanhf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvatanhf, _lib, "vvatanhf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvatanhf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvatanhf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvcbrt func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvcbrt calls the vecLib framework function vvcbrt.
-func Vvcbrt() (arg float64, arg2 float64, arg3 int32) {
+func Vvcbrt(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvcbrt == nil {
 		ebipurego.RegisterLibFunc(&_fnVvcbrt, _lib, "vvcbrt")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvcbrt(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvcbrt(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvcbrtf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvcbrtf calls the vecLib framework function vvcbrtf.
-func Vvcbrtf() (arg float32, arg2 float32, arg3 int32) {
+func Vvcbrtf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvcbrtf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvcbrtf, _lib, "vvcbrtf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvcbrtf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvcbrtf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvceil func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvceil calls the vecLib framework function vvceil.
-func Vvceil() (arg float64, arg2 float64, arg3 int32) {
+func Vvceil(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvceil == nil {
 		ebipurego.RegisterLibFunc(&_fnVvceil, _lib, "vvceil")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvceil(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvceil(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvceilf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvceilf calls the vecLib framework function vvceilf.
-func Vvceilf() (arg float32, arg2 float32, arg3 int32) {
+func Vvceilf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvceilf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvceilf, _lib, "vvceilf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvceilf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvceilf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvcopysign func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvcopysign calls the vecLib framework function vvcopysign.
-func Vvcopysign() (arg float64, arg2 float64, arg3 float64, arg4 int32) {
+func Vvcopysign(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvcopysign == nil {
 		ebipurego.RegisterLibFunc(&_fnVvcopysign, _lib, "vvcopysign")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 int32
-	_fnVvcopysign(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvcopysign(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvcopysignf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvcopysignf calls the vecLib framework function vvcopysignf.
-func Vvcopysignf() (arg float32, arg2 float32, arg3 float32, arg4 int32) {
+func Vvcopysignf(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvcopysignf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvcopysignf, _lib, "vvcopysignf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 int32
-	_fnVvcopysignf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvcopysignf(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvcos func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvcos calls the vecLib framework function vvcos.
-func Vvcos() (arg float64, arg2 float64, arg3 int32) {
+func Vvcos(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvcos == nil {
 		ebipurego.RegisterLibFunc(&_fnVvcos, _lib, "vvcos")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvcos(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvcos(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvcosf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvcosf calls the vecLib framework function vvcosf.
-func Vvcosf() (arg float32, arg2 float32, arg3 int32) {
+func Vvcosf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvcosf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvcosf, _lib, "vvcosf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvcosf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvcosf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvcosh func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvcosh calls the vecLib framework function vvcosh.
-func Vvcosh() (arg float64, arg2 float64, arg3 int32) {
+func Vvcosh(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvcosh == nil {
 		ebipurego.RegisterLibFunc(&_fnVvcosh, _lib, "vvcosh")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvcosh(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvcosh(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvcoshf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvcoshf calls the vecLib framework function vvcoshf.
-func Vvcoshf() (arg float32, arg2 float32, arg3 int32) {
+func Vvcoshf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvcoshf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvcoshf, _lib, "vvcoshf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvcoshf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvcoshf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvcosisin func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvcosisin calls the vecLib framework function vvcosisin.
-func Vvcosisin(arg unsafe.Pointer) (arg2 float64, arg3 int32) {
+func Vvcosisin(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvcosisin == nil {
 		ebipurego.RegisterLibFunc(&_fnVvcosisin, _lib, "vvcosisin")
 	}
-	var _out0 float64
-	var _out1 int32
-	_fnVvcosisin(arg, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _out0, _out1
+	_fnVvcosisin(arg, arg2, arg3)
 }
 
 var _fnVvcosisinf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvcosisinf calls the vecLib framework function vvcosisinf.
-func Vvcosisinf(arg unsafe.Pointer) (arg2 float32, arg3 int32) {
+func Vvcosisinf(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvcosisinf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvcosisinf, _lib, "vvcosisinf")
 	}
-	var _out0 float32
-	var _out1 int32
-	_fnVvcosisinf(arg, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _out0, _out1
+	_fnVvcosisinf(arg, arg2, arg3)
 }
 
 var _fnVvcospi func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvcospi calls the vecLib framework function vvcospi.
-func Vvcospi() (arg float64, arg2 float64, arg3 int32) {
+func Vvcospi(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvcospi == nil {
 		ebipurego.RegisterLibFunc(&_fnVvcospi, _lib, "vvcospi")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvcospi(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvcospi(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvcospif func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvcospif calls the vecLib framework function vvcospif.
-func Vvcospif() (arg float32, arg2 float32, arg3 int32) {
+func Vvcospif(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvcospif == nil {
 		ebipurego.RegisterLibFunc(&_fnVvcospif, _lib, "vvcospif")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvcospif(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvcospif(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvdiv func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvdiv calls the vecLib framework function vvdiv.
-func Vvdiv() (arg float64, arg2 float64, arg3 float64, arg4 int32) {
+func Vvdiv(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvdiv == nil {
 		ebipurego.RegisterLibFunc(&_fnVvdiv, _lib, "vvdiv")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 int32
-	_fnVvdiv(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvdiv(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvdivf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvdivf calls the vecLib framework function vvdivf.
-func Vvdivf() (arg float32, arg2 float32, arg3 float32, arg4 int32) {
+func Vvdivf(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvdivf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvdivf, _lib, "vvdivf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 int32
-	_fnVvdivf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvdivf(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvexp func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvexp calls the vecLib framework function vvexp.
-func Vvexp() (arg float64, arg2 float64, arg3 int32) {
+func Vvexp(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvexp == nil {
 		ebipurego.RegisterLibFunc(&_fnVvexp, _lib, "vvexp")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvexp(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvexp(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvexp2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvexp2 calls the vecLib framework function vvexp2.
-func Vvexp2() (arg float64, arg2 float64, arg3 int32) {
+func Vvexp2(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvexp2 == nil {
 		ebipurego.RegisterLibFunc(&_fnVvexp2, _lib, "vvexp2")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvexp2(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvexp2(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvexp2f func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvexp2f calls the vecLib framework function vvexp2f.
-func Vvexp2f() (arg float32, arg2 float32, arg3 int32) {
+func Vvexp2f(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvexp2f == nil {
 		ebipurego.RegisterLibFunc(&_fnVvexp2f, _lib, "vvexp2f")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvexp2f(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvexp2f(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvexpf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvexpf calls the vecLib framework function vvexpf.
-func Vvexpf() (arg float32, arg2 float32, arg3 int32) {
+func Vvexpf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvexpf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvexpf, _lib, "vvexpf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvexpf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvexpf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvexpm1 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvexpm1 calls the vecLib framework function vvexpm1.
-func Vvexpm1() (arg float64, arg2 float64, arg3 int32) {
+func Vvexpm1(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvexpm1 == nil {
 		ebipurego.RegisterLibFunc(&_fnVvexpm1, _lib, "vvexpm1")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvexpm1(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvexpm1(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvexpm1f func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvexpm1f calls the vecLib framework function vvexpm1f.
-func Vvexpm1f() (arg float32, arg2 float32, arg3 int32) {
+func Vvexpm1f(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvexpm1f == nil {
 		ebipurego.RegisterLibFunc(&_fnVvexpm1f, _lib, "vvexpm1f")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvexpm1f(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvexpm1f(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvfabs func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvfabs calls the vecLib framework function vvfabs.
-func Vvfabs() (arg float64, arg2 float64, arg3 int32) {
+func Vvfabs(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvfabs == nil {
 		ebipurego.RegisterLibFunc(&_fnVvfabs, _lib, "vvfabs")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvfabs(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvfabs(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvfabsf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvfabsf calls the vecLib framework function vvfabsf.
-func Vvfabsf() (arg float32, arg2 float32, arg3 int32) {
+func Vvfabsf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvfabsf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvfabsf, _lib, "vvfabsf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvfabsf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvfabsf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvfloor func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvfloor calls the vecLib framework function vvfloor.
-func Vvfloor() (arg float64, arg2 float64, arg3 int32) {
+func Vvfloor(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvfloor == nil {
 		ebipurego.RegisterLibFunc(&_fnVvfloor, _lib, "vvfloor")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvfloor(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvfloor(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvfloorf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvfloorf calls the vecLib framework function vvfloorf.
-func Vvfloorf() (arg float32, arg2 float32, arg3 int32) {
+func Vvfloorf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvfloorf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvfloorf, _lib, "vvfloorf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvfloorf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvfloorf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvfmod func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvfmod calls the vecLib framework function vvfmod.
-func Vvfmod() (arg float64, arg2 float64, arg3 float64, arg4 int32) {
+func Vvfmod(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvfmod == nil {
 		ebipurego.RegisterLibFunc(&_fnVvfmod, _lib, "vvfmod")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 int32
-	_fnVvfmod(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvfmod(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvfmodf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvfmodf calls the vecLib framework function vvfmodf.
-func Vvfmodf() (arg float32, arg2 float32, arg3 float32, arg4 int32) {
+func Vvfmodf(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvfmodf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvfmodf, _lib, "vvfmodf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 int32
-	_fnVvfmodf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvfmodf(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvint func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvint calls the vecLib framework function vvint.
-func Vvint() (arg float64, arg2 float64, arg3 int32) {
+func Vvint(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvint == nil {
 		ebipurego.RegisterLibFunc(&_fnVvint, _lib, "vvint")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvint(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvint(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvintf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvintf calls the vecLib framework function vvintf.
-func Vvintf() (arg float32, arg2 float32, arg3 int32) {
+func Vvintf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvintf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvintf, _lib, "vvintf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvintf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvintf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvlog func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvlog calls the vecLib framework function vvlog.
-func Vvlog() (arg float64, arg2 float64, arg3 int32) {
+func Vvlog(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvlog == nil {
 		ebipurego.RegisterLibFunc(&_fnVvlog, _lib, "vvlog")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvlog(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvlog(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvlog10 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvlog10 calls the vecLib framework function vvlog10.
-func Vvlog10() (arg float64, arg2 float64, arg3 int32) {
+func Vvlog10(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvlog10 == nil {
 		ebipurego.RegisterLibFunc(&_fnVvlog10, _lib, "vvlog10")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvlog10(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvlog10(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvlog10f func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvlog10f calls the vecLib framework function vvlog10f.
-func Vvlog10f() (arg float32, arg2 float32, arg3 int32) {
+func Vvlog10f(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvlog10f == nil {
 		ebipurego.RegisterLibFunc(&_fnVvlog10f, _lib, "vvlog10f")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvlog10f(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvlog10f(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvlog1p func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvlog1p calls the vecLib framework function vvlog1p.
-func Vvlog1p() (arg float64, arg2 float64, arg3 int32) {
+func Vvlog1p(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvlog1p == nil {
 		ebipurego.RegisterLibFunc(&_fnVvlog1p, _lib, "vvlog1p")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvlog1p(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvlog1p(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvlog1pf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvlog1pf calls the vecLib framework function vvlog1pf.
-func Vvlog1pf() (arg float32, arg2 float32, arg3 int32) {
+func Vvlog1pf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvlog1pf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvlog1pf, _lib, "vvlog1pf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvlog1pf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvlog1pf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvlog2 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvlog2 calls the vecLib framework function vvlog2.
-func Vvlog2() (arg float64, arg2 float64, arg3 int32) {
+func Vvlog2(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvlog2 == nil {
 		ebipurego.RegisterLibFunc(&_fnVvlog2, _lib, "vvlog2")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvlog2(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvlog2(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvlog2f func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvlog2f calls the vecLib framework function vvlog2f.
-func Vvlog2f() (arg float32, arg2 float32, arg3 int32) {
+func Vvlog2f(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvlog2f == nil {
 		ebipurego.RegisterLibFunc(&_fnVvlog2f, _lib, "vvlog2f")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvlog2f(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvlog2f(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvlogb func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvlogb calls the vecLib framework function vvlogb.
-func Vvlogb() (arg float64, arg2 float64, arg3 int32) {
+func Vvlogb(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvlogb == nil {
 		ebipurego.RegisterLibFunc(&_fnVvlogb, _lib, "vvlogb")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvlogb(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvlogb(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvlogbf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvlogbf calls the vecLib framework function vvlogbf.
-func Vvlogbf() (arg float32, arg2 float32, arg3 int32) {
+func Vvlogbf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvlogbf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvlogbf, _lib, "vvlogbf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvlogbf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvlogbf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvlogf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvlogf calls the vecLib framework function vvlogf.
-func Vvlogf() (arg float32, arg2 float32, arg3 int32) {
+func Vvlogf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvlogf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvlogf, _lib, "vvlogf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvlogf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvlogf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvnextafter func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvnextafter calls the vecLib framework function vvnextafter.
-func Vvnextafter() (arg float64, arg2 float64, arg3 float64, arg4 int32) {
+func Vvnextafter(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvnextafter == nil {
 		ebipurego.RegisterLibFunc(&_fnVvnextafter, _lib, "vvnextafter")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 int32
-	_fnVvnextafter(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvnextafter(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvnextafterf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvnextafterf calls the vecLib framework function vvnextafterf.
-func Vvnextafterf() (arg float32, arg2 float32, arg3 float32, arg4 int32) {
+func Vvnextafterf(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvnextafterf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvnextafterf, _lib, "vvnextafterf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 int32
-	_fnVvnextafterf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvnextafterf(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvnint func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvnint calls the vecLib framework function vvnint.
-func Vvnint() (arg float64, arg2 float64, arg3 int32) {
+func Vvnint(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvnint == nil {
 		ebipurego.RegisterLibFunc(&_fnVvnint, _lib, "vvnint")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvnint(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvnint(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvnintf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvnintf calls the vecLib framework function vvnintf.
-func Vvnintf() (arg float32, arg2 float32, arg3 int32) {
+func Vvnintf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvnintf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvnintf, _lib, "vvnintf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvnintf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvnintf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvpow func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvpow calls the vecLib framework function vvpow.
-func Vvpow() (arg float64, arg2 float64, arg3 float64, arg4 int32) {
+func Vvpow(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvpow == nil {
 		ebipurego.RegisterLibFunc(&_fnVvpow, _lib, "vvpow")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 int32
-	_fnVvpow(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvpow(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvpowf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvpowf calls the vecLib framework function vvpowf.
-func Vvpowf() (arg float32, arg2 float32, arg3 float32, arg4 int32) {
+func Vvpowf(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvpowf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvpowf, _lib, "vvpowf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 int32
-	_fnVvpowf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvpowf(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvpows func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvpows calls the vecLib framework function vvpows.
-func Vvpows() (arg float64, arg2 float64, arg3 float64, arg4 int32) {
+func Vvpows(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvpows == nil {
 		ebipurego.RegisterLibFunc(&_fnVvpows, _lib, "vvpows")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 int32
-	_fnVvpows(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvpows(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvpowsf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvpowsf calls the vecLib framework function vvpowsf.
-func Vvpowsf() (arg float32, arg2 float32, arg3 float32, arg4 int32) {
+func Vvpowsf(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvpowsf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvpowsf, _lib, "vvpowsf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 int32
-	_fnVvpowsf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvpowsf(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvrec func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvrec calls the vecLib framework function vvrec.
-func Vvrec() (arg float64, arg2 float64, arg3 int32) {
+func Vvrec(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvrec == nil {
 		ebipurego.RegisterLibFunc(&_fnVvrec, _lib, "vvrec")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvrec(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvrec(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvrecf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvrecf calls the vecLib framework function vvrecf.
-func Vvrecf() (arg float32, arg2 float32, arg3 int32) {
+func Vvrecf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvrecf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvrecf, _lib, "vvrecf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvrecf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvrecf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvremainder func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvremainder calls the vecLib framework function vvremainder.
-func Vvremainder() (arg float64, arg2 float64, arg3 float64, arg4 int32) {
+func Vvremainder(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvremainder == nil {
 		ebipurego.RegisterLibFunc(&_fnVvremainder, _lib, "vvremainder")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 float64
-	var _out3 int32
-	_fnVvremainder(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvremainder(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvremainderf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvremainderf calls the vecLib framework function vvremainderf.
-func Vvremainderf() (arg float32, arg2 float32, arg3 float32, arg4 int32) {
+func Vvremainderf(arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvremainderf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvremainderf, _lib, "vvremainderf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	var _out3 int32
-	_fnVvremainderf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvremainderf(unsafe.Pointer(&_out0), arg2, arg3, arg4)
+	return _out0
 }
 
 var _fnVvrsqrt func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvrsqrt calls the vecLib framework function vvrsqrt.
-func Vvrsqrt() (arg float64, arg2 float64, arg3 int32) {
+func Vvrsqrt(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvrsqrt == nil {
 		ebipurego.RegisterLibFunc(&_fnVvrsqrt, _lib, "vvrsqrt")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvrsqrt(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvrsqrt(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvrsqrtf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvrsqrtf calls the vecLib framework function vvrsqrtf.
-func Vvrsqrtf() (arg float32, arg2 float32, arg3 int32) {
+func Vvrsqrtf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvrsqrtf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvrsqrtf, _lib, "vvrsqrtf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvrsqrtf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvrsqrtf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvsin func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvsin calls the vecLib framework function vvsin.
-func Vvsin() (arg float64, arg2 float64, arg3 int32) {
+func Vvsin(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvsin == nil {
 		ebipurego.RegisterLibFunc(&_fnVvsin, _lib, "vvsin")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvsin(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvsin(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvsincos func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvsincos calls the vecLib framework function vvsincos.
-func Vvsincos() (arg float64, arg2 float64, arg3 float64, arg4 int32) {
+func Vvsincos(arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float64, arg2 float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvsincos == nil {
 		ebipurego.RegisterLibFunc(&_fnVvsincos, _lib, "vvsincos")
 	}
 	var _out0 float64
 	var _out1 float64
-	var _out2 float64
-	var _out3 int32
-	_fnVvsincos(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvsincos(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), arg3, arg4)
+	return _out0, _out1
 }
 
 var _fnVvsincosf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvsincosf calls the vecLib framework function vvsincosf.
-func Vvsincosf() (arg float32, arg2 float32, arg3 float32, arg4 int32) {
+func Vvsincosf(arg3 unsafe.Pointer, arg4 unsafe.Pointer) (arg float32, arg2 float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvsincosf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvsincosf, _lib, "vvsincosf")
 	}
 	var _out0 float32
 	var _out1 float32
-	var _out2 float32
-	var _out3 int32
-	_fnVvsincosf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _out0, _out1, _out2, _out3
+	_fnVvsincosf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), arg3, arg4)
+	return _out0, _out1
 }
 
 var _fnVvsinf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvsinf calls the vecLib framework function vvsinf.
-func Vvsinf() (arg float32, arg2 float32, arg3 int32) {
+func Vvsinf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvsinf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvsinf, _lib, "vvsinf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvsinf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvsinf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvsinh func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvsinh calls the vecLib framework function vvsinh.
-func Vvsinh() (arg float64, arg2 float64, arg3 int32) {
+func Vvsinh(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvsinh == nil {
 		ebipurego.RegisterLibFunc(&_fnVvsinh, _lib, "vvsinh")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvsinh(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvsinh(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvsinhf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvsinhf calls the vecLib framework function vvsinhf.
-func Vvsinhf() (arg float32, arg2 float32, arg3 int32) {
+func Vvsinhf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvsinhf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvsinhf, _lib, "vvsinhf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvsinhf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvsinhf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvsinpi func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvsinpi calls the vecLib framework function vvsinpi.
-func Vvsinpi() (arg float64, arg2 float64, arg3 int32) {
+func Vvsinpi(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvsinpi == nil {
 		ebipurego.RegisterLibFunc(&_fnVvsinpi, _lib, "vvsinpi")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvsinpi(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvsinpi(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvsinpif func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvsinpif calls the vecLib framework function vvsinpif.
-func Vvsinpif() (arg float32, arg2 float32, arg3 int32) {
+func Vvsinpif(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvsinpif == nil {
 		ebipurego.RegisterLibFunc(&_fnVvsinpif, _lib, "vvsinpif")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvsinpif(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvsinpif(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvsqrt func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvsqrt calls the vecLib framework function vvsqrt.
-func Vvsqrt() (arg float64, arg2 float64, arg3 int32) {
+func Vvsqrt(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvsqrt == nil {
 		ebipurego.RegisterLibFunc(&_fnVvsqrt, _lib, "vvsqrt")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvsqrt(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvsqrt(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvsqrtf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvsqrtf calls the vecLib framework function vvsqrtf.
-func Vvsqrtf() (arg float32, arg2 float32, arg3 int32) {
+func Vvsqrtf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvsqrtf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvsqrtf, _lib, "vvsqrtf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvsqrtf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvsqrtf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvtan func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvtan calls the vecLib framework function vvtan.
-func Vvtan() (arg float64, arg2 float64, arg3 int32) {
+func Vvtan(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvtan == nil {
 		ebipurego.RegisterLibFunc(&_fnVvtan, _lib, "vvtan")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvtan(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvtan(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvtanf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvtanf calls the vecLib framework function vvtanf.
-func Vvtanf() (arg float32, arg2 float32, arg3 int32) {
+func Vvtanf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvtanf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvtanf, _lib, "vvtanf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvtanf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvtanf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvtanh func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvtanh calls the vecLib framework function vvtanh.
-func Vvtanh() (arg float64, arg2 float64, arg3 int32) {
+func Vvtanh(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvtanh == nil {
 		ebipurego.RegisterLibFunc(&_fnVvtanh, _lib, "vvtanh")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvtanh(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvtanh(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvtanhf func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvtanhf calls the vecLib framework function vvtanhf.
-func Vvtanhf() (arg float32, arg2 float32, arg3 int32) {
+func Vvtanhf(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvtanhf == nil {
 		ebipurego.RegisterLibFunc(&_fnVvtanhf, _lib, "vvtanhf")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvtanhf(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvtanhf(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvtanpi func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvtanpi calls the vecLib framework function vvtanpi.
-func Vvtanpi() (arg float64, arg2 float64, arg3 int32) {
+func Vvtanpi(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvtanpi == nil {
 		ebipurego.RegisterLibFunc(&_fnVvtanpi, _lib, "vvtanpi")
 	}
 	var _out0 float64
-	var _out1 float64
-	var _out2 int32
-	_fnVvtanpi(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvtanpi(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnVvtanpif func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // Vvtanpif calls the vecLib framework function vvtanpif.
-func Vvtanpif() (arg float32, arg2 float32, arg3 int32) {
+func Vvtanpif(arg2 unsafe.Pointer, arg3 unsafe.Pointer) (arg float32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVvtanpif == nil {
 		ebipurego.RegisterLibFunc(&_fnVvtanpif, _lib, "vvtanpif")
 	}
 	var _out0 float32
-	var _out1 float32
-	var _out2 int32
-	_fnVvtanpif(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _out0, _out1, _out2
+	_fnVvtanpif(unsafe.Pointer(&_out0), arg2, arg3)
+	return _out0
 }
 
 var _fnXerbla func(string, unsafe.Pointer) int32

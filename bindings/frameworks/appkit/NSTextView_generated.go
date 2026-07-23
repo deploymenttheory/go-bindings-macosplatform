@@ -1729,6 +1729,21 @@ func (tv *TextView) DragSelectionWithEventOffsetSlideBack(event *Event, mouseOff
 
 }
 
+// DragImageForSelectionWithEventOrigin returns an appropriate drag image for the drag initiated by the specified event.
+func (tv *TextView) DragImageForSelectionWithEventOrigin(event *Event, origin *corefoundation.CGPoint) *Image {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(event)
+	var _mainthread0 *Image
+	purego.Main(func() {
+		_mainthread0 = func() *Image {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("dragImageForSelectionWithEvent:origin:"), objref.IDOf(event), unsafe.Pointer(origin))
+			return ImageFromID(_r)
+		}()
+	})
+	return _mainthread0
+
+}
+
 // CleanUpAfterDragOperation releases the drag information still existing after the dragging session has completed.
 func (tv *TextView) CleanUpAfterDragOperation() {
 	defer runtime.KeepAlive(tv)

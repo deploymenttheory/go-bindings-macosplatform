@@ -56,6 +56,17 @@ func NewHostPipe() *HostPipe {
 	return hostPipeAdopt(_id)
 }
 
+// AdjustPipeWithDescriptors adjusts the behavior of periodic endpoints to consume a different amount of bus bandwidth.
+func (hp *HostPipe) AdjustPipeWithDescriptors(descriptors *IOUSBHostIOSourceDescriptors) error {
+	defer runtime.KeepAlive(hp)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hp), objc.RegisterName("adjustPipeWithDescriptors:error:"), unsafe.Pointer(descriptors), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
 // SetIdleTimeout sets the desired idle suspend timeout for the interface.
 func (hp *HostPipe) SetIdleTimeout(idleTimeout float64) error {
 	defer runtime.KeepAlive(hp)

@@ -939,17 +939,16 @@ func HvVcpuSetSmePReg(vcpu uint64, reg SMEPReg, value unsafe.Pointer, length int
 var _fnHvVcpuSetSmeState func(uint64, unsafe.Pointer) int32
 
 // HvVcpuSetSmeState reports an error if the Hypervisor framework function hv_vcpu_set_sme_state fails.
-func HvVcpuSetSmeState(vcpu uint64) (smeState HvVcpuSmeStateT, err error) {
+func HvVcpuSetSmeState(vcpu uint64, smeState *HvVcpuSmeStateT) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetSmeState == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetSmeState, _lib, "hv_vcpu_set_sme_state")
 	}
-	var _out0 HvVcpuSmeStateT
-	_rc := _fnHvVcpuSetSmeState(vcpu, unsafe.Pointer(&_out0))
+	_rc := _fnHvVcpuSetSmeState(vcpu, unsafe.Pointer(smeState))
 	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
-		return HvVcpuSmeStateT{}, _err
+		return _err
 	}
-	return _out0, nil
+	return nil
 }
 
 var _fnHvVcpuSetSmeZReg func(uint64, SMEZReg, unsafe.Pointer, int) int32
