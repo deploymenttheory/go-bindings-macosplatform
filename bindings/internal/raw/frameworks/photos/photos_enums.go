@@ -1420,7 +1420,7 @@ func (e Launch_data_type_t) String() string {
 	}
 }
 
-type Mach_vm_range_flags_t int64
+type Mach_vm_range_flags_t uint64
 
 const (
 	MACH_VM_RANGE_NONE Mach_vm_range_flags_t = 0
@@ -1434,7 +1434,7 @@ func (e Mach_vm_range_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Mach_vm_range_flavor_t int64
+type Mach_vm_range_flavor_t uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
@@ -1452,7 +1452,7 @@ func (e Mach_vm_range_flavor_t) String() string {
 	}
 }
 
-type Mach_vm_range_tag_t int64
+type Mach_vm_range_tag_t uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
@@ -1473,7 +1473,7 @@ func (e Mach_vm_range_tag_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -1515,7 +1515,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
@@ -1603,7 +1603,7 @@ func (e Qos_class_t) String() string {
 	}
 }
 
-type Virtual_memory_guard_exception_code_t int64
+type Virtual_memory_guard_exception_code_t uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
@@ -1669,7 +1669,7 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 	}
 }
 
-type Xpc_listener_create_flags_t int64
+type Xpc_listener_create_flags_t uint64
 
 const (
 	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
@@ -1695,7 +1695,7 @@ func (e Xpc_listener_create_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Xpc_session_create_flags_t int64
+type Xpc_session_create_flags_t uint64
 
 const (
 	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0

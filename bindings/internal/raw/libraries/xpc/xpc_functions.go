@@ -511,7 +511,7 @@ func Xpc_session_create_xpc_service(name string, target_queue unsafe.Pointer, fl
 	_cstr_name := C.CString(name)
 	defer C.free(unsafe.Pointer(_cstr_name))
 	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_session_create_xpc_service(_cstr_name, target_queue, C.int64_t(flags), error_out, &_exc))
+	_result := unsafe.Pointer(C.xpc_fn_xpc_session_create_xpc_service(_cstr_name, target_queue, C.uint64_t(flags), error_out, &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -524,7 +524,7 @@ func Xpc_session_create_mach_service(mach_service string, target_queue unsafe.Po
 	_cstr_mach_service := C.CString(mach_service)
 	defer C.free(unsafe.Pointer(_cstr_mach_service))
 	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_session_create_mach_service(_cstr_mach_service, target_queue, C.int64_t(flags), error_out, &_exc))
+	_result := unsafe.Pointer(C.xpc_fn_xpc_session_create_mach_service(_cstr_mach_service, target_queue, C.uint64_t(flags), error_out, &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -655,7 +655,7 @@ func Xpc_listener_create(service string, target_queue unsafe.Pointer, flags oslo
 	_blk_incoming_session_handler := blocks.MakeBlock_void_ptr(incoming_session_handler)
 	defer blocks.FreeBlock(_blk_incoming_session_handler)
 	var _exc unsafe.Pointer
-	_result := unsafe.Pointer(C.xpc_fn_xpc_listener_create(_cstr_service, target_queue, C.int64_t(flags), _blk_incoming_session_handler, error_out, &_exc))
+	_result := unsafe.Pointer(C.xpc_fn_xpc_listener_create(_cstr_service, target_queue, C.uint64_t(flags), _blk_incoming_session_handler, error_out, &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }

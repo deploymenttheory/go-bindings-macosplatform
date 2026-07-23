@@ -10,7 +10,7 @@ import (
 )
 
 // Constants that indicate the axis and direction to use for a perspective projection matrix.
-type AxisDirectionConvention int64
+type AxisDirectionConvention uint8
 
 const (
 	Cp_axis_direction_convention_right_up_back      AxisDirectionConvention = 0
@@ -37,7 +37,7 @@ func (e AxisDirectionConvention) String() string {
 }
 
 // The state of ownership for the drawable.
-type DrawableState int64
+type DrawableState uint32
 
 const (
 	// A drawable that is not in use and ready for assignment to a frame.
@@ -63,7 +63,7 @@ func (e DrawableState) String() string {
 	}
 }
 
-type DrawableTarget int64
+type DrawableTarget uint32
 
 const (
 	// A drawable that is targeting the built-in display, this is what a user will see in the device.
@@ -86,7 +86,7 @@ func (e DrawableTarget) String() string {
 }
 
 // Constants that specify the organization of the textures you use for drawing.
-type LayerRendererLayout int64
+type LayerRendererLayout uint32
 
 const (
 	// A layout that assigns a separate texture to each rendered view. When the layout contains multiple views, each view receives its own dedicated texture. The type of each texture is MTLTextureType2D.
@@ -113,7 +113,7 @@ func (e LayerRendererLayout) String() string {
 }
 
 // The states of the layer renderer, which tell you how to proceed with drawing operations.
-type LayerRendererState int64
+type LayerRendererState uint32
 
 const (
 	// A state that indicates the layer renderer isn't currently drawing. A layer renderer starts in this state and later transitions to the running or invalid states. Don't draw while in this state. Wait until the layer changes to one of the other states to take further action on the layer.
@@ -141,7 +141,7 @@ func (e LayerRendererState) String() string {
 
 // The options to provide when calling cp_layer_renderer_capabilities_supported_color_formats and cp_layer_renderer_capabilities_supported_color_formats_count
 // Bitmask — values may be combined with |.
-type SupportedColorFormatsOptions int64
+type SupportedColorFormatsOptions uint32
 
 const (
 	Cp_supported_color_formats_options_none                          SupportedColorFormatsOptions = 0
@@ -163,7 +163,7 @@ func (e SupportedColorFormatsOptions) String() string {
 
 // The options you can pass to functions that relate to rendering capabilities and layout support.
 // Bitmask — values may be combined with |.
-type SupportedLayoutsOptions int64
+type SupportedLayoutsOptions uint32
 
 const (
 	Cp_supported_layouts_options_none                          SupportedLayoutsOptions = 0
@@ -1089,7 +1089,7 @@ func (e MDQuerySortOptionFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -1105,7 +1105,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -1125,7 +1125,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -1149,7 +1149,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -1216,7 +1216,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -1330,7 +1330,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -1399,7 +1399,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -1428,7 +1428,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

@@ -18762,7 +18762,7 @@
       "sdk_line": 60
     },
     "MPSDeviceCapsValues": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPSDeviceCapsNull",
@@ -18845,7 +18845,7 @@
       "sdk_line": 18
     },
     "MPSGraphDeploymentPlatform": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MPSGraphDeploymentPlatformMacOS",
@@ -18877,7 +18877,7 @@
       "is_extensible": true
     },
     "MPSGraphDeviceType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPSGraphDeviceTypeMetal",
@@ -18891,7 +18891,7 @@
       "is_extensible": true
     },
     "MPSGraphExecutionStage": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MPSGraphExecutionStageCompleted",
@@ -18931,7 +18931,7 @@
       "is_extensible": true
     },
     "MPSGraphLossReductionType": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MPSGraphLossReductionTypeNone",
@@ -18991,7 +18991,7 @@
       "is_extensible": true
     },
     "MPSGraphOptimization": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MPSGraphOptimizationLevel0",
@@ -19011,7 +19011,7 @@
       "is_extensible": true
     },
     "MPSGraphOptimizationProfile": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MPSGraphOptimizationProfilePerformance",
@@ -19031,7 +19031,7 @@
       "is_extensible": true
     },
     "MPSGraphOptions": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MPSGraphOptionsNone",
@@ -19252,7 +19252,7 @@
       "is_extensible": true
     },
     "MPSGraphRandomDistribution": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MPSGraphRandomDistributionUniform",
@@ -19278,7 +19278,7 @@
       "is_extensible": true
     },
     "MPSGraphRandomNormalSamplingMethod": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MPSGraphRandomNormalSamplingInvCDF",
@@ -19495,7 +19495,7 @@
       "is_extensible": true
     },
     "MPSGraphSparseStorageType": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MPSGraphSparseStorageCOO",
@@ -19595,7 +19595,7 @@
       "is_extensible": true
     },
     "MPSImageType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPSImageType2d",
@@ -20473,7 +20473,7 @@
       "sdk_line": 204
     },
     "mach_vm_range_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MACH_VM_RANGE_NONE",
@@ -20488,7 +20488,7 @@
       "is_extensible": true
     },
     "mach_vm_range_flavor_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MACH_VM_RANGE_FLAVOR_INVALID",
@@ -20507,7 +20507,7 @@
       "is_extensible": true
     },
     "mach_vm_range_tag_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MACH_VM_RANGE_DEFAULT",
@@ -20531,7 +20531,7 @@
       "is_extensible": true
     },
     "mpo_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPO_PORT",
@@ -20581,7 +20581,7 @@
       "is_extensible": true
     },
     "os_clockid_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
@@ -20745,7 +20745,7 @@
       "sdk_line": 121
     },
     "virtual_memory_guard_exception_code_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kGUARD_EXC_DEALLOC_GAP",
@@ -20844,7 +20844,7 @@
       "is_extensible": true
     },
     "xpc_listener_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_LISTENER_CREATE_NONE",
@@ -20874,7 +20874,7 @@
       "is_extensible": true
     },
     "xpc_session_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_SESSION_CREATE_NONE",

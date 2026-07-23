@@ -436,7 +436,7 @@ func (i ClockidT) isMultiValue() bool {
 }
 
 // [mount.h:188]
-type CryptexAuthTypeT int64
+type CryptexAuthTypeT uint32
 
 const (
 	CRYPTEX1_AUTH_ENV_GENERIC              CryptexAuthTypeT = 4
@@ -3391,7 +3391,7 @@ func (i EsXpcDomainTypeT) isMultiValue() bool {
 }
 
 // [mount.h:188]
-type GraftdmgTypeT int64
+type GraftdmgTypeT uint32
 
 const (
 	GRAFTDMG_CRYPTEX_BOOT                   GraftdmgTypeT = 1
@@ -3469,7 +3469,7 @@ func (i GraftdmgTypeT) isMultiValue() bool {
 
 // [port.h:1102]
 // Bitmask — values may be combined with |.
-type MpoFlagsT int64
+type MpoFlagsT uint32
 
 const (
 	MPO_PORT                            MpoFlagsT = 0

@@ -69,7 +69,7 @@ func (e CMTagCategory) String() string {
 }
 
 // The data type of a tag’s value.
-type CMTagDataType int64
+type CMTagDataType uint32
 
 const (
 	// The tag value isn’t associated with any known data type.
@@ -105,7 +105,7 @@ func (e CMTagDataType) String() string {
 
 // A structure that defines the flags for a time value.
 // Bitmask — values may be combined with |.
-type CMTimeFlags int64
+type CMTimeFlags uint32
 
 const (
 	// A flag that indicates a time is valid.
@@ -151,7 +151,7 @@ func (e CMTimeFlags) String() string {
 }
 
 // An enumeration of rounding methods to use when performing time calculations.
-type CMTimeRoundingMethod int64
+type CMTimeRoundingMethod uint32
 
 const (
 	// Rounds half away from zero.
@@ -391,7 +391,7 @@ func (e CGLCPContextPriorityRequest) String() string {
 }
 
 // The type of packing within each video frame, if any.
-type CMPackingType int64
+type CMPackingType uint64
 
 const (
 	// Each frame contains only a single image, and isn’t frame-packed.
@@ -418,7 +418,7 @@ func (e CMPackingType) String() string {
 }
 
 // Constants describing the projection surface information in a 3D video buffer or channel.
-type CMProjectionType int64
+type CMProjectionType uint64
 
 const (
 	// Video content displays on a flat, rectangular 2D surface.
@@ -453,7 +453,7 @@ func (e CMProjectionType) String() string {
 
 // Constants describing the stereo views contained within a buffer or channel.
 // Bitmask — values may be combined with |.
-type CMStereoViewComponents int64
+type CMStereoViewComponents uint64
 
 const (
 	// A constant for video metadata to have no available stereo frames.
@@ -482,7 +482,7 @@ func (e CMStereoViewComponents) String() string {
 
 // Create a set of stereo view interpretation options from a constant.
 // Bitmask — values may be combined with |.
-type CMStereoViewInterpretationOptions int64
+type CMStereoViewInterpretationOptions uint64
 
 const (
 	// The default options for stereo video views.
@@ -1093,7 +1093,7 @@ func (e MDQuerySortOptionFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -1109,7 +1109,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -1129,7 +1129,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -1153,7 +1153,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -1220,7 +1220,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -1334,7 +1334,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -1403,7 +1403,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -1432,7 +1432,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

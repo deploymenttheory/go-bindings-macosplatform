@@ -11601,7 +11601,7 @@
       "doc": "@enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order."
     },
     "MLCActivationType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCActivationTypeNone",
@@ -11741,7 +11741,7 @@
       "is_extensible": true
     },
     "MLCArithmeticOperation": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCArithmeticOperationAdd",
@@ -11935,7 +11935,7 @@
       "is_extensible": true
     },
     "MLCComparisonOperation": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCComparisonOperationEqual",
@@ -12009,7 +12009,7 @@
       "is_extensible": true
     },
     "MLCConvolutionType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCConvolutionTypeStandard",
@@ -12036,7 +12036,7 @@
       "is_extensible": true
     },
     "MLCDataType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCDataTypeInvalid",
@@ -12097,7 +12097,7 @@
       "is_extensible": true
     },
     "MLCDeviceType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCDeviceTypeCPU",
@@ -12135,7 +12135,7 @@
       "is_extensible": true
     },
     "MLCExecutionOptions": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MLCExecutionOptionsNone",
@@ -12180,7 +12180,7 @@
       "is_extensible": true
     },
     "MLCGradientClippingType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCGradientClippingTypeByValue",
@@ -12204,7 +12204,7 @@
       "is_extensible": true
     },
     "MLCGraphCompilationOptions": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MLCGraphCompilationOptionsNone",
@@ -12244,7 +12244,7 @@
       "is_extensible": true
     },
     "MLCLSTMResultMode": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MLCLSTMResultModeOutput",
@@ -12265,7 +12265,7 @@
       "is_extensible": true
     },
     "MLCLossType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCLossTypeMeanAbsoluteError",
@@ -12333,7 +12333,7 @@
       "is_extensible": true
     },
     "MLCPaddingPolicy": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCPaddingPolicySame",
@@ -12360,7 +12360,7 @@
       "is_extensible": true
     },
     "MLCPaddingType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCPaddingTypeZero",
@@ -12393,7 +12393,7 @@
       "is_extensible": true
     },
     "MLCPoolingType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCPoolingTypeMax",
@@ -12425,7 +12425,7 @@
       "is_extensible": true
     },
     "MLCRandomInitializerType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCRandomInitializerTypeInvalid",
@@ -12462,7 +12462,7 @@
       "is_extensible": true
     },
     "MLCReductionType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCReductionTypeNone",
@@ -12536,7 +12536,7 @@
       "is_extensible": true
     },
     "MLCRegularizationType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCRegularizationTypeNone",
@@ -12563,7 +12563,7 @@
       "is_extensible": true
     },
     "MLCSampleMode": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCSampleModeNearest",
@@ -12584,7 +12584,7 @@
       "is_extensible": true
     },
     "MLCSoftmaxOperation": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "MLCSoftmaxOperationSoftmax",
@@ -13375,7 +13375,7 @@
       "sdk_line": 204
     },
     "mach_vm_range_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MACH_VM_RANGE_NONE",
@@ -13390,7 +13390,7 @@
       "is_extensible": true
     },
     "mach_vm_range_flavor_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MACH_VM_RANGE_FLAVOR_INVALID",
@@ -13409,7 +13409,7 @@
       "is_extensible": true
     },
     "mach_vm_range_tag_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MACH_VM_RANGE_DEFAULT",
@@ -13433,7 +13433,7 @@
       "is_extensible": true
     },
     "mpo_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPO_PORT",
@@ -13483,7 +13483,7 @@
       "is_extensible": true
     },
     "os_clockid_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
@@ -13647,7 +13647,7 @@
       "sdk_line": 121
     },
     "virtual_memory_guard_exception_code_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kGUARD_EXC_DEALLOC_GAP",
@@ -13746,7 +13746,7 @@
       "is_extensible": true
     },
     "xpc_listener_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_LISTENER_CREATE_NONE",
@@ -13776,7 +13776,7 @@
       "is_extensible": true
     },
     "xpc_session_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_SESSION_CREATE_NONE",

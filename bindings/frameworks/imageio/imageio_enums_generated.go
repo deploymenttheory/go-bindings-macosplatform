@@ -10,7 +10,7 @@ import (
 )
 
 // Constants that indicate the XMP type for a metadata tag.
-type CGImageMetadataType int64
+type CGImageMetadataType int32
 
 const (
 	// An invalid metadata type.
@@ -57,7 +57,7 @@ func (e CGImageMetadataType) String() string {
 }
 
 // The set of status values for images and image sources.
-type CGImageSourceStatus int64
+type CGImageSourceStatus int32
 
 const (
 	// The end of the file occurred unexpectedly.
@@ -302,7 +302,7 @@ func (e CGImageAnimationStatus) String() string {
 }
 
 // Constants for errors that occur when getting or setting metadata information.
-type CGImageMetadataErrors int64
+type CGImageMetadataErrors int32
 
 const (
 	// An error that indicates an unknown condition occurred.
@@ -337,7 +337,7 @@ func (e CGImageMetadataErrors) String() string {
 }
 
 // A value describing the intended display orientation for an image.
-type CGImagePropertyOrientation int64
+type CGImagePropertyOrientation uint32
 
 const (
 	// The encoded image data matches the image’s intended display orientation.
@@ -383,7 +383,7 @@ func (e CGImagePropertyOrientation) String() string {
 	}
 }
 
-type CGImagePropertyTGACompression int64
+type CGImagePropertyTGACompression uint32
 
 const (
 	KCGImageTGACompressionNone CGImagePropertyTGACompression = 0
@@ -777,7 +777,7 @@ func (e IpcInfoObjectType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -793,7 +793,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -813,7 +813,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -837,7 +837,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -904,7 +904,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -998,7 +998,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1

@@ -268,7 +268,7 @@ func (e AccelerationStructureInstanceDescriptorType) String() string {
 
 // Options for adjusting the behavior of an instanced acceleration structure.
 // Bitmask — values may be combined with |.
-type AccelerationStructureInstanceOptions int64
+type AccelerationStructureInstanceOptions uint32
 
 const (
 	// Specifies the default behavior for resulting acceleration structure.
@@ -2026,7 +2026,7 @@ func (e MatrixLayout) String() string {
 }
 
 // Options for specifying how the acceleration structure handles timestamps that are outside the specified range.
-type MotionBorderMode int64
+type MotionBorderMode uint32
 
 const (
 	// A mode that specifies treating times outside the specified endpoint as if they were at the endpoint.
@@ -3473,7 +3473,7 @@ func (e TextureCompressionType) String() string {
 }
 
 // A set of options to choose from when creating a texture swizzle pattern.
-type TextureSwizzle int64
+type TextureSwizzle uint8
 
 const (
 	// A value of 0.0 is copied to the destination channel.
@@ -6113,7 +6113,7 @@ func (e VisibilityResultMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -6129,7 +6129,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -6149,7 +6149,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -6173,7 +6173,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -6217,7 +6217,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -6311,7 +6311,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -6380,7 +6380,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -6409,7 +6409,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

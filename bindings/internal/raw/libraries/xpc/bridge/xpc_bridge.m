@@ -582,7 +582,7 @@ const char * xpc_fn_xpc_session_copy_description(void * session, void **outExcep
 }
 
 // ID: objc-sym xpc.xpc_session_create_xpc_service
-void * xpc_fn_xpc_session_create_xpc_service(const char * name, void * target_queue, int64_t flags, void * error_out, void **outException) {
+void * xpc_fn_xpc_session_create_xpc_service(const char * name, void * target_queue, uint64_t flags, void * error_out, void **outException) {
     @autoreleasepool {
         @try {
             void * _result = (void *)xpc_session_create_xpc_service(name, target_queue, flags, error_out);
@@ -595,7 +595,7 @@ void * xpc_fn_xpc_session_create_xpc_service(const char * name, void * target_qu
 }
 
 // ID: objc-sym xpc.xpc_session_create_mach_service
-void * xpc_fn_xpc_session_create_mach_service(const char * mach_service, void * target_queue, int64_t flags, void * error_out, void **outException) {
+void * xpc_fn_xpc_session_create_mach_service(const char * mach_service, void * target_queue, uint64_t flags, void * error_out, void **outException) {
     @autoreleasepool {
         @try {
             void * _result = (void *)xpc_session_create_mach_service(mach_service, target_queue, flags, error_out);
@@ -739,7 +739,7 @@ const char * xpc_fn_xpc_listener_copy_description(void * listener, void **outExc
 }
 
 // ID: objc-sym xpc.xpc_listener_create
-void * xpc_fn_xpc_listener_create(const char * service, void * target_queue, int64_t flags, void * incoming_session_handler, void * error_out, void **outException) {
+void * xpc_fn_xpc_listener_create(const char * service, void * target_queue, uint64_t flags, void * incoming_session_handler, void * error_out, void **outException) {
     @autoreleasepool {
         @try {
             void * _result = (void *)xpc_listener_create(service, target_queue, flags, (xpc_listener_incoming_session_handler_t)incoming_session_handler, error_out);

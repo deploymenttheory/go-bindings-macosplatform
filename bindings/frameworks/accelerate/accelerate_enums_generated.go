@@ -186,7 +186,7 @@ func (e Type) String() string {
 }
 
 // Constants that describe activation functions.
-type BNNSActivationFunction int64
+type BNNSActivationFunction uint32
 
 const (
 	// An activation function that returns its input.
@@ -322,7 +322,7 @@ func (e BNNSActivationFunction) String() string {
 }
 
 // Constants that define arithmetic operations.
-type BNNSArithmeticFunction int64
+type BNNSArithmeticFunction uint32
 
 const (
 	BNNSArithmeticAdd                  BNNSArithmeticFunction = 0
@@ -460,7 +460,7 @@ func (e BNNSArithmeticFunction) String() string {
 }
 
 // Constants that define the convention to specify the four bounding box coordinates for crop-resize operations.
-type BNNSBoxCoordinateMode int64
+type BNNSBoxCoordinateMode uint32
 
 const (
 	BNNSCornersHeightFirst    BNNSBoxCoordinateMode = 0
@@ -487,7 +487,7 @@ func (e BNNSBoxCoordinateMode) String() string {
 }
 
 // Constants that describe the data type of an n-dimensional array.
-type BNNSDataLayout int64
+type BNNSDataLayout uint32
 
 const (
 	BNNSDataLayoutVector                        BNNSDataLayout = 65536
@@ -586,7 +586,7 @@ func (e BNNSDataLayout) String() string {
 }
 
 // BNNS Data Types.
-type BNNSDataType int64
+type BNNSDataType uint32
 
 const (
 	BNNSDataTypeFloatBit         BNNSDataType = 65536
@@ -688,7 +688,7 @@ func (e BNNSDataType) String() string {
 }
 
 // Constants that describe the input and output types of an arithmetic operation.
-type BNNSDescriptorType int64
+type BNNSDescriptorType uint32
 
 const (
 	BNNSConstant  BNNSDescriptorType = 0
@@ -712,7 +712,7 @@ func (e BNNSDescriptorType) String() string {
 }
 
 // Flags that control behavior of embedding layers.
-type BNNSEmbeddingFlags int64
+type BNNSEmbeddingFlags uint32
 
 const (
 	BNNSEmbeddingFlagScaleGradientByFrequency BNNSEmbeddingFlags = 1
@@ -730,7 +730,7 @@ func (e BNNSEmbeddingFlags) String() string {
 }
 
 // Constants that define the component filters of a fused layer.
-type BNNSFilterType int64
+type BNNSFilterType uint32
 
 const (
 	BNNSConvolution           BNNSFilterType = 0
@@ -772,7 +772,7 @@ func (e BNNSFilterType) String() string {
 }
 
 // Options that control the behavior of a filter parameter.
-type BNNSFlags int64
+type BNNSFlags uint32
 
 const (
 	// A flag that instructs the filter to use pointers to data you provide at creation time.
@@ -791,7 +791,7 @@ func (e BNNSFlags) String() string {
 }
 
 // Constants that describe argument intents.
-type BNNSGraphArgumentIntent int64
+type BNNSGraphArgumentIntent uint32
 
 const (
 	BNNSGraphArgumentIntentIn    BNNSGraphArgumentIntent = 1
@@ -815,7 +815,7 @@ func (e BNNSGraphArgumentIntent) String() string {
 }
 
 // Constants that specify the argument type for a graph context.
-type BNNSGraphArgumentType int64
+type BNNSGraphArgumentType uint32
 
 const (
 	BNNSGraphArgumentTypePointer BNNSGraphArgumentType = 0
@@ -836,7 +836,7 @@ func (e BNNSGraphArgumentType) String() string {
 }
 
 // Constants that specify the mask for compile-time messages.
-type BNNSGraphMessageLevel int64
+type BNNSGraphMessageLevel uint32
 
 const (
 	BNNSGraphMessageLevelInfo        BNNSGraphMessageLevel = 1
@@ -863,7 +863,7 @@ func (e BNNSGraphMessageLevel) String() string {
 }
 
 // Constants that describe the compilation optimization preference.
-type BNNSGraphOptimizationPreference int64
+type BNNSGraphOptimizationPreference uint32
 
 const (
 	BNNSGraphOptimizationPreferencePerformance BNNSGraphOptimizationPreference = 0
@@ -884,7 +884,7 @@ func (e BNNSGraphOptimizationPreference) String() string {
 }
 
 // Constants that describe interpolation methods.
-type BNNSInterpolationMethod int64
+type BNNSInterpolationMethod uint32
 
 const (
 	BNNSInterpolationMethodNearest BNNSInterpolationMethod = 0
@@ -905,7 +905,7 @@ func (e BNNSInterpolationMethod) String() string {
 }
 
 // Options that control the behavior of a long short-term memory (LSTM) layer.
-type BNNSLayerFlags int64
+type BNNSLayerFlags uint32
 
 const (
 	BNNSLayerFlagsLSTMBidirectional      BNNSLayerFlags = 1
@@ -926,7 +926,7 @@ func (e BNNSLayerFlags) String() string {
 }
 
 // Constants that specify how a crop-resize layer samples a grid.
-type BNNSLinearSamplingMode int64
+type BNNSLinearSamplingMode uint32
 
 const (
 	BNNSLinearSamplingDefault            BNNSLinearSamplingMode = 0
@@ -956,7 +956,7 @@ func (e BNNSLinearSamplingMode) String() string {
 }
 
 // Constants that describe loss functions.
-type BNNSLossFunction int64
+type BNNSLossFunction uint32
 
 const (
 	BNNSLossFunctionSoftmaxCrossEntropy     BNNSLossFunction = 1
@@ -1001,7 +1001,7 @@ func (e BNNSLossFunction) String() string {
 }
 
 // Constants that describe reduction functions used by a loss layer.
-type BNNSLossReductionFunction int64
+type BNNSLossReductionFunction uint32
 
 const (
 	BNNSLossReductionNone              BNNSLossReductionFunction = 0
@@ -1031,7 +1031,7 @@ func (e BNNSLossReductionFunction) String() string {
 }
 
 // Options that control the behavior of an n-dimensional array.
-type BNNSNDArrayFlags int64
+type BNNSNDArrayFlags uint32
 
 const (
 	BNNSNDArrayFlagBackpropSet        BNNSNDArrayFlags = 0
@@ -1052,7 +1052,7 @@ func (e BNNSNDArrayFlags) String() string {
 }
 
 // Constants that describe norm types.
-type BNNSNormType int64
+type BNNSNormType uint32
 
 const (
 	BNNSL2Norm BNNSNormType = 1
@@ -1070,7 +1070,7 @@ func (e BNNSNormType) String() string {
 }
 
 // Constants that describe clipping functions.
-type BNNSOptimizerClippingFunction int64
+type BNNSOptimizerClippingFunction uint32
 
 const (
 	BNNSOptimizerClippingNone         BNNSOptimizerClippingFunction = 0
@@ -1097,7 +1097,7 @@ func (e BNNSOptimizerClippingFunction) String() string {
 }
 
 // A structure that contains optimizer functions.
-type BNNSOptimizerFunction int64
+type BNNSOptimizerFunction uint32
 
 const (
 	BNNSOptimizerFunctionSGDMomentum              BNNSOptimizerFunction = 1
@@ -1148,7 +1148,7 @@ func (e BNNSOptimizerFunction) String() string {
 }
 
 // A structure that contains optimizer regularization functions.
-type BNNSOptimizerRegularizationFunction int64
+type BNNSOptimizerRegularizationFunction uint32
 
 const (
 	BNNSOptimizerRegularizationNone BNNSOptimizerRegularizationFunction = 0
@@ -1172,7 +1172,7 @@ func (e BNNSOptimizerRegularizationFunction) String() string {
 }
 
 // Constants that define SGD momentum variants.
-type BNNSOptimizerSGDMomentumVariant int64
+type BNNSOptimizerSGDMomentumVariant uint32
 
 const (
 	BNNSSGDMomentumVariant0 BNNSOptimizerSGDMomentumVariant = 0
@@ -1196,7 +1196,7 @@ func (e BNNSOptimizerSGDMomentumVariant) String() string {
 }
 
 // Constants that define padding modes.
-type BNNSPaddingMode int64
+type BNNSPaddingMode uint32
 
 const (
 	BNNSPaddingModeConstant  BNNSPaddingMode = 0
@@ -1220,7 +1220,7 @@ func (e BNNSPaddingMode) String() string {
 }
 
 // Constants that specify which pointer the BNNS get filter function returns.
-type BNNSPointerSpecifier int64
+type BNNSPointerSpecifier uint32
 
 const (
 	BNNSPointerSpecifierAlpha BNNSPointerSpecifier = 0
@@ -1241,7 +1241,7 @@ func (e BNNSPointerSpecifier) String() string {
 }
 
 // Constants that describe pooling functions.
-type BNNSPoolingFunction int64
+type BNNSPoolingFunction uint32
 
 const (
 	// A function for pooling that computes the maximum of each element in the pooling kernel.
@@ -1276,7 +1276,7 @@ func (e BNNSPoolingFunction) String() string {
 }
 
 // Constants that describe quantization functions.
-type BNNSQuantizerFunction int64
+type BNNSQuantizerFunction uint32
 
 const (
 	BNNSQuantizerFunctionQuantize   BNNSQuantizerFunction = 0
@@ -1297,7 +1297,7 @@ func (e BNNSQuantizerFunction) String() string {
 }
 
 // Constants that describe random number generation methods.
-type BNNSRandomGeneratorMethod int64
+type BNNSRandomGeneratorMethod uint32
 
 const (
 	BNNSRandomGeneratorMethodAES_CTR BNNSRandomGeneratorMethod = 0
@@ -1315,7 +1315,7 @@ func (e BNNSRandomGeneratorMethod) String() string {
 }
 
 // Constants that describe reduction functions.
-type BNNSReduceFunction int64
+type BNNSReduceFunction uint32
 
 const (
 	BNNSReduceFunctionMax         BNNSReduceFunction = 0
@@ -1383,7 +1383,7 @@ func (e BNNSReduceFunction) String() string {
 }
 
 // Constants that describe relational operations.
-type BNNSRelationalOperator int64
+type BNNSRelationalOperator uint32
 
 const (
 	BNNSRelationalOperatorEqual        BNNSRelationalOperator = 0
@@ -1434,7 +1434,7 @@ func (e BNNSRelationalOperator) String() string {
 }
 
 // Constants that specify a shuffle type.
-type BNNSShuffleType int64
+type BNNSShuffleType uint32
 
 const (
 	BNNSShuffleTypePixelShuffleNCHW   BNNSShuffleType = 0
@@ -1460,7 +1460,7 @@ func (e BNNSShuffleType) String() string {
 	}
 }
 
-type BNNSSparsityType int64
+type BNNSSparsityType uint32
 
 const (
 	BNNSSparsityTypeUnstructured BNNSSparsityType = 0
@@ -1477,7 +1477,7 @@ func (e BNNSSparsityType) String() string {
 	}
 }
 
-type BNNSTargetSystem int64
+type BNNSTargetSystem uint32
 
 const (
 	BNNSTargetSystemGeneric BNNSTargetSystem = 0
@@ -1973,7 +1973,7 @@ func (e MDQuerySortOptionFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -1989,7 +1989,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -2009,7 +2009,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -2033,7 +2033,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -2100,7 +2100,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -2117,7 +2117,7 @@ func (e OSClockid) String() string {
 	}
 }
 
-type OSLogType int64
+type OSLogType uint8
 
 const (
 	OSLogTypeDefault OSLogType = 0
@@ -2304,7 +2304,7 @@ func (e QuadratureStatus) String() string {
 }
 
 // Options that control the computation.
-type Sparsecontrol int64
+type Sparsecontrol uint32
 
 const (
 	SparseDefaultControl Sparsecontrol = 0
@@ -2322,7 +2322,7 @@ func (e Sparsecontrol) String() string {
 }
 
 // Constants that define the factorization type.
-type Sparsefactorization int64
+type Sparsefactorization uint8
 
 const (
 	SparseFactorizationCholesky      Sparsefactorization = 0
@@ -2370,7 +2370,7 @@ func (e Sparsefactorization) String() string {
 }
 
 // Defines the exact variant of GMRES to implement
-type Sparsegmresvariant int64
+type Sparsegmresvariant uint8
 
 const (
 	SparseVariantDQGMRES Sparsegmresvariant = 0
@@ -2501,7 +2501,7 @@ func (e Sparselsmrconvergencetest) String() string {
 }
 
 // Options that define which ordering algorithm to use.
-type Sparseorder int64
+type Sparseorder uint8
 
 const (
 	SparseOrderDefault Sparseorder = 0
@@ -2561,7 +2561,7 @@ func (e Sparsepreconditioner) String() string {
 }
 
 // Options that define which scaling algorithm to use.
-type Sparsescaling int64
+type Sparsescaling uint8
 
 const (
 	SparseScalingDefault                     Sparsescaling = 0
@@ -2624,7 +2624,7 @@ func (e Sparsestatus) String() string {
 }
 
 // Constants that define the subfactor of a factorization.
-type Sparsesubfactor int64
+type Sparsesubfactor uint8
 
 const (
 	SparseSubfactorInvalid Sparsesubfactor = 0
@@ -2693,7 +2693,7 @@ func (e Sparsetriangle) String() string {
 }
 
 // Low-rank update algorithm selector
-type Sparseupdate int64
+type Sparseupdate uint8
 
 const (
 	SparseUpdatePartialRefactor Sparseupdate = 0
@@ -2911,7 +2911,7 @@ func (e VimageInterpolationmethod) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -2980,7 +2980,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -3009,7 +3009,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

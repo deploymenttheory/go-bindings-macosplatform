@@ -59,7 +59,7 @@ func (e AuthorizationFlags) String() string {
 }
 
 // Constants that can be set to specify what certificates to include in a signed message.
-type CMSCertificateChainMode int64
+type CMSCertificateChainMode uint32
 
 const (
 	// Don’t include any certificates.
@@ -91,7 +91,7 @@ func (e CMSCertificateChainMode) String() string {
 }
 
 // Optional attributes you can add to a signed message.
-type CMSSignedAttributes int64
+type CMSSignedAttributes uint32
 
 const (
 	// No attributes.
@@ -142,7 +142,7 @@ func (e CMSSignedAttributes) String() string {
 }
 
 // The constants that indicate the status of the signature and signer information in a signed message.
-type CMSSignerStatus int64
+type CMSSignerStatus uint32
 
 const (
 	// The message was not signed.
@@ -579,7 +579,7 @@ func (e SecAuthenticationType) String() string {
 }
 
 // The list of digest algorithms available for code signatures.
-type SecCSDigestAlgorithm int64
+type SecCSDigestAlgorithm uint32
 
 const (
 	KSecCodeSignatureNoHash              SecCSDigestAlgorithm = 0
@@ -610,7 +610,7 @@ func (e SecCSDigestAlgorithm) String() string {
 }
 
 // Values that can be used in the flags parameter to most code signing functions.
-type SecCSFlags int64
+type SecCSFlags uint32
 
 const (
 	// No flags (use the default behavior).
@@ -663,7 +663,7 @@ func (e SecCSFlags) String() string {
 }
 
 // Specify option flags that can be embedded in a code signature during signing and that govern the use of the signature.
-type SecCodeSignatureFlags int64
+type SecCodeSignatureFlags uint32
 
 const (
 	// May host guest code.
@@ -726,7 +726,7 @@ func (e SecCodeSignatureFlags) String() string {
 }
 
 // Operational flags attached by code signing services to running code.
-type SecCodeStatus int64
+type SecCodeStatus uint32
 
 const (
 	// The code is dynamically valid.
@@ -791,7 +791,7 @@ func (e SecCredentialType) String() string {
 }
 
 // The external format of a keychain item.
-type SecExternalFormat int64
+type SecExternalFormat uint32
 
 const (
 	KSecFormatUnknown SecExternalFormat = 0
@@ -863,7 +863,7 @@ func (e SecExternalFormat) String() string {
 }
 
 // The import item type.
-type SecExternalItemType int64
+type SecExternalItemType uint32
 
 const (
 	// Indicates that the caller does not know the type of information being imported or exported.
@@ -1066,7 +1066,7 @@ func (e SecItemClass) String() string {
 }
 
 // The import and export function flags.
-type SecItemImportExportFlags int64
+type SecItemImportExportFlags uint32
 
 const (
 	// A flag that indicates the exported data should have PEM armor.
@@ -1085,7 +1085,7 @@ func (e SecItemImportExportFlags) String() string {
 }
 
 // The import/export parameter structure flags.
-type SecKeyImportExportFlags int64
+type SecKeyImportExportFlags uint32
 
 const (
 	// A flag that you set to prevent importing more than one private key.
@@ -1143,7 +1143,7 @@ func (e SecKeyOperationType) String() string {
 
 // The supported sizes for keys of various common types.
 // Deprecated: No longer supported
-type SecKeySizes int64
+type SecKeySizes uint32
 
 const (
 	// The default key size for the specified type.
@@ -1194,7 +1194,7 @@ func (e SecKeySizes) String() string {
 }
 
 // The flags that indicate key usage in the KeyUsage extension of a certificate.
-type SecKeyUsage int64
+type SecKeyUsage uint32
 
 const (
 	KSecKeyUsageUnspecified SecKeyUsage = 0
@@ -1431,7 +1431,7 @@ func (e SecKeychainPromptSelector) String() string {
 
 // The types of padding to use when you create or verify a digital signature.
 // Deprecated: Replaced with SecKeyAlgorithm
-type SecPadding int64
+type SecPadding uint32
 
 const (
 	// No padding.
@@ -1653,7 +1653,7 @@ func (e SecProtocolType) String() string {
 }
 
 // An enumeration indicating different types of internal requirements for code.
-type SecRequirementType int64
+type SecRequirementType uint32
 
 const (
 	// What hosts may run this code.
@@ -1750,7 +1750,7 @@ func (e SecTransformMetaAttributeType) String() string {
 }
 
 // The option flags used to condition a trust evaluation.
-type SecTrustOptionFlags int64
+type SecTrustOptionFlags uint32
 
 const (
 	// Allow expired certificates (except for the root certificate).
@@ -1799,7 +1799,7 @@ func (e SecTrustOptionFlags) String() string {
 }
 
 // Trust evaluation result codes.
-type SecTrustResultType int64
+type SecTrustResultType uint32
 
 const (
 	// An indication of an invalid setting or result.
@@ -1844,7 +1844,7 @@ func (e SecTrustResultType) String() string {
 }
 
 // The trust settings domains.
-type SecTrustSettingsDomain int64
+type SecTrustSettingsDomain uint32
 
 const (
 	// Per-user trust settings.
@@ -1869,7 +1869,7 @@ func (e SecTrustSettingsDomain) String() string {
 }
 
 // Allowed uses for the encryption key in a certificate.
-type SecTrustSettingsKeyUsage int64
+type SecTrustSettingsKeyUsage uint32
 
 const (
 	// The key can be used to sign data or verify a signature.
@@ -1918,7 +1918,7 @@ func (e SecTrustSettingsKeyUsage) String() string {
 }
 
 // Trust settings returned in usage constraints dictionaries.
-type SecTrustSettingsResult int64
+type SecTrustSettingsResult uint32
 
 const (
 	// Never valid in a trust settings array or in an API call.
@@ -2710,7 +2710,7 @@ func (e Launch_data_type_t) String() string {
 	}
 }
 
-type Mach_vm_range_flags_t int64
+type Mach_vm_range_flags_t uint64
 
 const (
 	MACH_VM_RANGE_NONE Mach_vm_range_flags_t = 0
@@ -2724,7 +2724,7 @@ func (e Mach_vm_range_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Mach_vm_range_flavor_t int64
+type Mach_vm_range_flavor_t uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
@@ -2742,7 +2742,7 @@ func (e Mach_vm_range_flavor_t) String() string {
 	}
 }
 
-type Mach_vm_range_tag_t int64
+type Mach_vm_range_tag_t uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
@@ -2763,7 +2763,7 @@ func (e Mach_vm_range_tag_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -2805,7 +2805,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
@@ -2894,7 +2894,7 @@ func (e Qos_class_t) String() string {
 }
 
 // Groups that collect ciphersuites of comparable security properties.
-type Tls_ciphersuite_group_t int64
+type Tls_ciphersuite_group_t uint16
 
 const (
 	Tls_ciphersuite_group_default           Tls_ciphersuite_group_t = 0
@@ -2925,7 +2925,7 @@ func (e Tls_ciphersuite_group_t) String() string {
 }
 
 // The collection of valid ciphersuites.
-type Tls_ciphersuite_t int64
+type Tls_ciphersuite_t uint16
 
 const (
 	Tls_ciphersuite_RSA_WITH_3DES_EDE_CBC_SHA                 Tls_ciphersuite_t = 10
@@ -3016,7 +3016,7 @@ func (e Tls_ciphersuite_t) String() string {
 }
 
 // The collection of supported TLS and DTLS versions.
-type Tls_protocol_version_t int64
+type Tls_protocol_version_t uint16
 
 const (
 	// The TLS 1.0 protocol.
@@ -3052,7 +3052,7 @@ func (e Tls_protocol_version_t) String() string {
 	}
 }
 
-type Virtual_memory_guard_exception_code_t int64
+type Virtual_memory_guard_exception_code_t uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
@@ -3118,7 +3118,7 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 	}
 }
 
-type Xpc_listener_create_flags_t int64
+type Xpc_listener_create_flags_t uint64
 
 const (
 	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
@@ -3144,7 +3144,7 @@ func (e Xpc_listener_create_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Xpc_session_create_flags_t int64
+type Xpc_session_create_flags_t uint64
 
 const (
 	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0

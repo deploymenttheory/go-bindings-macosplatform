@@ -10,7 +10,7 @@ import (
 )
 
 // Bitmask — values may be combined with |.
-type AVB17221ACMPFlags int64
+type AVB17221ACMPFlags uint16
 
 const (
 	// The IEEE Std 1722.1™-2013 ACMP no flags.
@@ -78,7 +78,7 @@ func (e AVB17221ACMPFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AVB17221ACMPIPFlag int64
+type AVB17221ACMPIPFlag uint16
 
 const (
 	// The IEEE Std 1722.1™-2021 ACMP no ip_flags.
@@ -95,7 +95,7 @@ func (e AVB17221ACMPIPFlag) String() string {
 	return strings.Join(parts, "|")
 }
 
-type AVB17221ACMPMessageType int64
+type AVB17221ACMPMessageType uint8
 
 const (
 	// The IEEE Std 1722.1™-2013 ACMP CONNECT_TX_COMMAND message type.
@@ -165,7 +165,7 @@ func (e AVB17221ACMPMessageType) String() string {
 	}
 }
 
-type AVB17221ACMPStatusCode int64
+type AVB17221ACMPStatusCode uint8
 
 const (
 	// The IEEE Std 1722.1™-2013 ACMP SUCCESS status code.
@@ -264,7 +264,7 @@ func (e AVB17221ACMPStatusCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AVB17221ADPControllerCapabilities int64
+type AVB17221ADPControllerCapabilities uint32
 
 const (
 	// The IEEE Std 1722.1™-2013 entity has controller capabilities.
@@ -284,7 +284,7 @@ func (e AVB17221ADPControllerCapabilities) String() string {
 	return strings.Join(parts, "|")
 }
 
-type AVB17221ADPEntityCapabilities int64
+type AVB17221ADPEntityCapabilities uint32
 
 const (
 	// The IEEE Std 1722.1™-2013 entity supports firmware upgrade mode.
@@ -407,7 +407,7 @@ func (e AVB17221ADPEntityCapabilities) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AVB17221ADPListenerCapabilities int64
+type AVB17221ADPListenerCapabilities uint16
 
 const (
 	// The IEEE Std 1722.1™-2013 entity has listener capabilities.
@@ -463,7 +463,7 @@ func (e AVB17221ADPListenerCapabilities) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AVB17221ADPTalkerCapabilities int64
+type AVB17221ADPTalkerCapabilities uint16
 
 const (
 	// The IEEE Std 1722.1™-2013 entity has talker capabilities.
@@ -518,7 +518,7 @@ func (e AVB17221ADPTalkerCapabilities) String() string {
 	return strings.Join(parts, "|")
 }
 
-type AVB17221AECPAddressAccessTLVMode int64
+type AVB17221AECPAddressAccessTLVMode uint8
 
 const (
 	// The IEEE Std 1722.1™-2013 ACMP SUCCESS status code.
@@ -544,7 +544,7 @@ func (e AVB17221AECPAddressAccessTLVMode) String() string {
 	}
 }
 
-type AVB17221AECPMessageType int64
+type AVB17221AECPMessageType uint8
 
 const (
 	// The IEEE Std 1722.1™-2013 AECP AVDECC Entity Model command message.
@@ -590,7 +590,7 @@ func (e AVB17221AECPMessageType) String() string {
 	}
 }
 
-type AVB17221AECPStatusCode int64
+type AVB17221AECPStatusCode uint8
 
 const (
 	// The IEEE Std 1722.1™-2013 AECP SUCCESS status code.
@@ -670,7 +670,7 @@ func (e AVB17221AECPStatusCode) String() string {
 	}
 }
 
-type AVB17221AEMCommandType int64
+type AVB17221AEMCommandType uint16
 
 const (
 	// The command code for the IEEE Std 1722.1™-2013 AEM ACQUIRE_ENTITY command.
@@ -1847,7 +1847,7 @@ func (e MDQuerySortOptionFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -1863,7 +1863,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -1883,7 +1883,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -1907,7 +1907,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -1951,7 +1951,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -2045,7 +2045,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -2114,7 +2114,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -2143,7 +2143,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

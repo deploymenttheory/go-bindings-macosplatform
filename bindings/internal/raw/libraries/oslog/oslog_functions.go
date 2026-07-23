@@ -35,7 +35,7 @@ func Os_log_create(subsystem string, category string) unsafe.Pointer {
 // ID: objc-sym oslog.os_log_type_enabled
 func Os_log_type_enabled(oslog unsafe.Pointer, type_ OsLogTypeT) bool {
 	var _exc unsafe.Pointer
-	_result := bool(C.oslog_fn_os_log_type_enabled(oslog, C.int64_t(type_), &_exc))
+	_result := bool(C.oslog_fn_os_log_type_enabled(oslog, C.uint8_t(type_), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -47,7 +47,7 @@ func _os_log_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT, form
 	_cstr_format := C.CString(format)
 	defer C.free(unsafe.Pointer(_cstr_format))
 	var _exc unsafe.Pointer
-	C.oslog_fn__os_log_impl(dso, log, C.int64_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
+	C.oslog_fn__os_log_impl(dso, log, C.uint8_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
 	cgo.RaiseIfException(_exc)
 }
 
@@ -58,7 +58,7 @@ func _os_log_debug_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT
 	_cstr_format := C.CString(format)
 	defer C.free(unsafe.Pointer(_cstr_format))
 	var _exc unsafe.Pointer
-	C.oslog_fn__os_log_debug_impl(dso, log, C.int64_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
+	C.oslog_fn__os_log_debug_impl(dso, log, C.uint8_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
 	cgo.RaiseIfException(_exc)
 }
 
@@ -69,7 +69,7 @@ func _os_log_error_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT
 	_cstr_format := C.CString(format)
 	defer C.free(unsafe.Pointer(_cstr_format))
 	var _exc unsafe.Pointer
-	C.oslog_fn__os_log_error_impl(dso, log, C.int64_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
+	C.oslog_fn__os_log_error_impl(dso, log, C.uint8_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
 	cgo.RaiseIfException(_exc)
 }
 
@@ -80,7 +80,7 @@ func _os_log_fault_impl(dso unsafe.Pointer, log unsafe.Pointer, type_ OsLogTypeT
 	_cstr_format := C.CString(format)
 	defer C.free(unsafe.Pointer(_cstr_format))
 	var _exc unsafe.Pointer
-	C.oslog_fn__os_log_fault_impl(dso, log, C.int64_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
+	C.oslog_fn__os_log_fault_impl(dso, log, C.uint8_t(type_), _cstr_format, unsafe.Pointer(buf), C.uint32_t(size), &_exc)
 	cgo.RaiseIfException(_exc)
 }
 

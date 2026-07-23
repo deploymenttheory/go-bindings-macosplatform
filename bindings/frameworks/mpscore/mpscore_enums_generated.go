@@ -29,7 +29,7 @@ func (e DataLayout) String() string {
 	}
 }
 
-type DataType int64
+type DataType uint32
 
 const (
 	DataTypeInvalid              DataType = 0
@@ -957,7 +957,7 @@ func (e CustomKernelIndex) String() string {
 	}
 }
 
-type DeviceCapsValues int64
+type DeviceCapsValues uint32
 
 const (
 	DeviceCapsNull                        DeviceCapsValues = 0
@@ -1016,7 +1016,7 @@ func (e DeviceCapsValues) String() string {
 	}
 }
 
-type FloatDataTypeBit int64
+type FloatDataTypeBit uint32
 
 const (
 	FloatDataTypeSignBit     FloatDataTypeBit = 8388608
@@ -1039,7 +1039,7 @@ func (e FloatDataTypeBit) String() string {
 	}
 }
 
-type FloatDataTypeShift int64
+type FloatDataTypeShift uint32
 
 const (
 	FloatDataTypeSignShift     FloatDataTypeShift = 23
@@ -1096,7 +1096,7 @@ func (e ImageEdgeMode) String() string {
 	}
 }
 
-type ImageType int64
+type ImageType uint32
 
 const (
 	ImageType2d                    ImageType = 0
@@ -1157,7 +1157,7 @@ func (e ImageType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -1173,7 +1173,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -1193,7 +1193,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -1217,7 +1217,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -1261,7 +1261,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -1355,7 +1355,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -1424,7 +1424,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -1453,7 +1453,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

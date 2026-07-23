@@ -42,7 +42,7 @@
       "is_extensible": true
     },
     "CGImageMetadataErrors": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGImageMetadataErrorUnknown",
@@ -75,7 +75,7 @@
       "is_extensible": true
     },
     "CGImageMetadataType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGImageMetadataTypeInvalid",
@@ -123,7 +123,7 @@
       "is_extensible": true
     },
     "CGImagePropertyOrientation": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kCGImagePropertyOrientationUp",
@@ -171,7 +171,7 @@
       "is_extensible": true
     },
     "CGImagePropertyTGACompression": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kCGImageTGACompressionNone",
@@ -189,7 +189,7 @@
       "is_extensible": true
     },
     "CGImageSourceStatus": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGImageStatusUnexpectedEOF",
@@ -995,7 +995,7 @@
       "is_extensible": true
     },
     "mach_vm_range_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MACH_VM_RANGE_NONE",
@@ -1010,7 +1010,7 @@
       "is_extensible": true
     },
     "mach_vm_range_flavor_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MACH_VM_RANGE_FLAVOR_INVALID",
@@ -1029,7 +1029,7 @@
       "is_extensible": true
     },
     "mach_vm_range_tag_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MACH_VM_RANGE_DEFAULT",
@@ -1053,7 +1053,7 @@
       "is_extensible": true
     },
     "mpo_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPO_PORT",
@@ -1103,7 +1103,7 @@
       "is_extensible": true
     },
     "os_clockid_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
@@ -1267,7 +1267,7 @@
       "sdk_line": 121
     },
     "virtual_memory_guard_exception_code_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kGUARD_EXC_DEALLOC_GAP",

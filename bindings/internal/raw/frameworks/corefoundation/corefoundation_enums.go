@@ -2256,7 +2256,7 @@ func (e CFXMLParserStatusCode) String() string {
 	return strings.Join(parts, "|")
 }
 
-type CGRectEdge int64
+type CGRectEdge uint32
 
 const (
 	CGRectMinXEdge CGRectEdge = 0
@@ -2618,7 +2618,7 @@ func (e Idtype_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -2660,7 +2660,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32

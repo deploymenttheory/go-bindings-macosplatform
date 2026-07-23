@@ -468,7 +468,7 @@ func (e LaunchDataType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type VMRangeFlags int64
+type VMRangeFlags uint64
 
 const (
 	VMRangeFlagsNone VMRangeFlags = 0
@@ -484,7 +484,7 @@ func (e VMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type VMRangeFlavor int64
+type VMRangeFlavor uint32
 
 const (
 	VMRangeFlavorInvalid VMRangeFlavor = 0
@@ -504,7 +504,7 @@ func (e VMRangeFlavor) String() string {
 	}
 }
 
-type VMRangeTag int64
+type VMRangeTag uint16
 
 const (
 	VMRangeTagDefault VMRangeTag = 0
@@ -528,7 +528,7 @@ func (e VMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -572,7 +572,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -589,7 +589,7 @@ func (e OSClockid) String() string {
 	}
 }
 
-type OSLogType int64
+type OSLogType uint8
 
 const (
 	OSLogTypeDefault OSLogType = 0
@@ -650,7 +650,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -719,7 +719,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -748,7 +748,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

@@ -441,7 +441,7 @@ func (e MTLAccelerationStructureInstanceDescriptorType) String() string {
 }
 
 // Options for adjusting the behavior of an instanced acceleration structure.
-type MTLAccelerationStructureInstanceOptions int64
+type MTLAccelerationStructureInstanceOptions uint32
 
 const (
 	// Specifies the default behavior for resulting acceleration structure.
@@ -2985,7 +2985,7 @@ func (e MTLMatrixLayout) String() string {
 }
 
 // Options for specifying how the acceleration structure handles timestamps that are outside the specified range.
-type MTLMotionBorderMode int64
+type MTLMotionBorderMode uint32
 
 const (
 	// A mode that specifies treating times outside the specified endpoint as if they were at the endpoint.
@@ -4704,7 +4704,7 @@ func (e MTLTextureSparseTier) String() string {
 }
 
 // A set of options to choose from when creating a texture swizzle pattern.
-type MTLTextureSwizzle int64
+type MTLTextureSwizzle uint8
 
 const (
 	// A value of 0.0 is copied to the destination channel.
@@ -5743,7 +5743,7 @@ func (e Launch_data_type_t) String() string {
 	}
 }
 
-type Mach_vm_range_flags_t int64
+type Mach_vm_range_flags_t uint64
 
 const (
 	MACH_VM_RANGE_NONE Mach_vm_range_flags_t = 0
@@ -5757,7 +5757,7 @@ func (e Mach_vm_range_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Mach_vm_range_flavor_t int64
+type Mach_vm_range_flavor_t uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
@@ -5775,7 +5775,7 @@ func (e Mach_vm_range_flavor_t) String() string {
 	}
 }
 
-type Mach_vm_range_tag_t int64
+type Mach_vm_range_tag_t uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
@@ -5796,7 +5796,7 @@ func (e Mach_vm_range_tag_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -5838,7 +5838,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
@@ -5926,7 +5926,7 @@ func (e Qos_class_t) String() string {
 	}
 }
 
-type Virtual_memory_guard_exception_code_t int64
+type Virtual_memory_guard_exception_code_t uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
@@ -5992,7 +5992,7 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 	}
 }
 
-type Xpc_listener_create_flags_t int64
+type Xpc_listener_create_flags_t uint64
 
 const (
 	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
@@ -6018,7 +6018,7 @@ func (e Xpc_listener_create_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Xpc_session_create_flags_t int64
+type Xpc_session_create_flags_t uint64
 
 const (
 	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0

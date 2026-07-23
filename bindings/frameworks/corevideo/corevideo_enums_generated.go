@@ -10,7 +10,7 @@ import (
 )
 
 // The propagation modes of a Core Video buffer attachment.
-type CVAttachmentMode int64
+type CVAttachmentMode uint32
 
 const (
 	// Indicates to not propagate the attachment.
@@ -276,7 +276,7 @@ func (e CGLCPContextPriorityRequest) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type CVSMPTETimeFlags int64
+type CVSMPTETimeFlags uint32
 
 const (
 	// The full time is valid.
@@ -301,7 +301,7 @@ func (e CVSMPTETimeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type CVSMPTETimeType int64
+type CVSMPTETimeType uint32
 
 const (
 	// 24 frames per second (standard film).
@@ -348,7 +348,7 @@ func (e CVSMPTETimeType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type CVTimeFlags int64
+type CVTimeFlags int32
 
 const (
 	// The time value is unknown.
@@ -369,7 +369,7 @@ func (e CVTimeFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type CVTimeStampFlags int64
+type CVTimeStampFlags uint64
 
 const (
 	// The value in the video time field is valid.
@@ -908,7 +908,7 @@ func (e MDQuerySortOptionFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -924,7 +924,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -944,7 +944,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -968,7 +968,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -1035,7 +1035,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -1149,7 +1149,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -1218,7 +1218,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -1247,7 +1247,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

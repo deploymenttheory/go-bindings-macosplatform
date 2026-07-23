@@ -9,7 +9,7 @@
   "protocols": {},
   "enums": {
     "BNNSActivationFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSActivationFunctionIdentity",
@@ -276,7 +276,7 @@
       "sdk_line": 15
     },
     "BNNSArithmeticFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSArithmeticAdd",
@@ -571,7 +571,7 @@
       "sdk_line": 15
     },
     "BNNSBoxCoordinateMode": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSCornersHeightFirst",
@@ -607,7 +607,7 @@
       "sdk_line": 15
     },
     "BNNSDataLayout": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSDataLayoutVector",
@@ -811,7 +811,7 @@
       "sdk_line": 15
     },
     "BNNSDataType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSDataTypeFloatBit",
@@ -1022,7 +1022,7 @@
       "sdk_line": 15
     },
     "BNNSDescriptorType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSConstant",
@@ -1051,7 +1051,7 @@
       "sdk_line": 15
     },
     "BNNSEmbeddingFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSEmbeddingFlagScaleGradientByFrequency",
@@ -1066,7 +1066,7 @@
       "sdk_line": 15
     },
     "BNNSFilterType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSConvolution",
@@ -1137,7 +1137,7 @@
       "sdk_line": 15
     },
     "BNNSFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSFlagsUseClientPtr",
@@ -1152,7 +1152,7 @@
       "sdk_line": 15
     },
     "BNNSGraphArgumentIntent": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSGraphArgumentIntentIn",
@@ -1181,7 +1181,7 @@
       "sdk_line": 24
     },
     "BNNSGraphArgumentType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSGraphArgumentTypePointer",
@@ -1203,7 +1203,7 @@
       "sdk_line": 24
     },
     "BNNSGraphMessageLevel": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSGraphMessageLevelInfo",
@@ -1237,7 +1237,7 @@
       "sdk_line": 24
     },
     "BNNSGraphOptimizationPreference": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSGraphOptimizationPreferencePerformance",
@@ -1259,7 +1259,7 @@
       "sdk_line": 24
     },
     "BNNSInterpolationMethod": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSInterpolationMethodNearest",
@@ -1281,7 +1281,7 @@
       "sdk_line": 15
     },
     "BNNSLayerFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSLayerFlagsLSTMBidirectional",
@@ -1303,7 +1303,7 @@
       "sdk_line": 15
     },
     "BNNSLinearSamplingMode": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSLinearSamplingDefault",
@@ -1346,7 +1346,7 @@
       "sdk_line": 15
     },
     "BNNSLossFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSLossFunctionSoftmaxCrossEntropy",
@@ -1424,7 +1424,7 @@
       "sdk_line": 15
     },
     "BNNSLossReductionFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSLossReductionNone",
@@ -1467,7 +1467,7 @@
       "sdk_line": 15
     },
     "BNNSNDArrayFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSNDArrayFlagBackpropSet",
@@ -1489,7 +1489,7 @@
       "sdk_line": 15
     },
     "BNNSNormType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSL2Norm",
@@ -1504,7 +1504,7 @@
       "sdk_line": 15
     },
     "BNNSOptimizerClippingFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSOptimizerClippingNone",
@@ -1540,7 +1540,7 @@
       "sdk_line": 15
     },
     "BNNSOptimizerFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSOptimizerFunctionSGDMomentum",
@@ -1632,7 +1632,7 @@
       "sdk_line": 15
     },
     "BNNSOptimizerRegularizationFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSOptimizerRegularizationNone",
@@ -1661,7 +1661,7 @@
       "sdk_line": 15
     },
     "BNNSOptimizerSGDMomentumVariant": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSSGDMomentumVariant0",
@@ -1690,7 +1690,7 @@
       "sdk_line": 15
     },
     "BNNSPaddingMode": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSPaddingModeConstant",
@@ -1719,7 +1719,7 @@
       "sdk_line": 15
     },
     "BNNSPointerSpecifier": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSPointerSpecifierAlpha",
@@ -1741,7 +1741,7 @@
       "sdk_line": 15
     },
     "BNNSPoolingFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSPoolingFunctionMax",
@@ -1793,7 +1793,7 @@
       "sdk_line": 15
     },
     "BNNSQuantizerFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSQuantizerFunctionQuantize",
@@ -1815,7 +1815,7 @@
       "sdk_line": 15
     },
     "BNNSRandomGeneratorMethod": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSRandomGeneratorMethodAES_CTR",
@@ -1830,7 +1830,7 @@
       "sdk_line": 15
     },
     "BNNSReduceFunction": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSReduceFunctionMax",
@@ -1971,7 +1971,7 @@
       "sdk_line": 15
     },
     "BNNSRelationalOperator": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSRelationalOperatorEqual",
@@ -2063,7 +2063,7 @@
       "sdk_line": 15
     },
     "BNNSShuffleType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSShuffleTypePixelShuffleNCHW",
@@ -2099,7 +2099,7 @@
       "sdk_line": 15
     },
     "BNNSSparsityType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSSparsityTypeUnstructured",
@@ -2114,7 +2114,7 @@
       "sdk_line": 15
     },
     "BNNSTargetSystem": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "BNNSTargetSystemGeneric",
@@ -2259,7 +2259,7 @@
       "sdk_line": 197
     },
     "SparseControl_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "SparseDefaultControl",
@@ -2272,7 +2272,7 @@
       "sdk_line": 299
     },
     "SparseFactorization_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "SparseFactorizationCholesky",
@@ -2357,7 +2357,7 @@
       "sdk_line": 299
     },
     "SparseGMRESVariant_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "SparseVariantDQGMRES",
@@ -2474,7 +2474,7 @@
       "sdk_line": 299
     },
     "SparseOrder_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "SparseOrderDefault",
@@ -2552,7 +2552,7 @@
       "sdk_line": 299
     },
     "SparseScaling_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "SparseScalingDefault",
@@ -2633,7 +2633,7 @@
       "sdk_line": 299
     },
     "SparseSubfactor_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "SparseSubfactorInvalid",
@@ -2741,7 +2741,7 @@
       "is_extensible": true
     },
     "SparseUpdate_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "SparseUpdatePartialRefactor",
@@ -3554,7 +3554,7 @@
       "sdk_line": 204
     },
     "mach_vm_range_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MACH_VM_RANGE_NONE",
@@ -3569,7 +3569,7 @@
       "is_extensible": true
     },
     "mach_vm_range_flavor_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MACH_VM_RANGE_FLAVOR_INVALID",
@@ -3588,7 +3588,7 @@
       "is_extensible": true
     },
     "mach_vm_range_tag_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MACH_VM_RANGE_DEFAULT",
@@ -3612,7 +3612,7 @@
       "is_extensible": true
     },
     "mpo_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPO_PORT",
@@ -3662,7 +3662,7 @@
       "is_extensible": true
     },
     "os_clockid_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
@@ -3675,7 +3675,7 @@
       "sdk_line": 188
     },
     "os_log_type_t": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "OS_LOG_TYPE_DEFAULT",
@@ -4148,7 +4148,7 @@
       "sdk_line": 1636
     },
     "virtual_memory_guard_exception_code_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kGUARD_EXC_DEALLOC_GAP",
@@ -4247,7 +4247,7 @@
       "is_extensible": true
     },
     "xpc_listener_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_LISTENER_CREATE_NONE",
@@ -4277,7 +4277,7 @@
       "is_extensible": true
     },
     "xpc_session_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_SESSION_CREATE_NONE",

@@ -9,7 +9,7 @@
   "protocols": {},
   "enums": {
     "AAACEQualifierTypes": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "AA_ACE_QUALIFIER_TYPE_USER",
@@ -37,7 +37,7 @@
       "sdk_line": 25
     },
     "AACompressionAlgorithms": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "AA_COMPRESSION_ALGORITHM_NONE",
@@ -75,7 +75,7 @@
       "sdk_line": 32
     },
     "AAEntryMessages": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "AA_ENTRY_MESSAGE_SEARCH_PRUNE_DIR",
@@ -167,7 +167,7 @@
       "sdk_line": 19
     },
     "AAEntryTypes": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "AA_ENTRY_TYPE_REG",
@@ -230,7 +230,7 @@
       "sdk_line": 48
     },
     "AAFieldTypes": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "AA_FIELD_TYPE_FLAG",
@@ -363,7 +363,7 @@
       "sdk_line": 16
     },
     "AAHashFunctions": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "AA_HASH_FUNCTION_CRC32",
@@ -396,7 +396,7 @@
       "sdk_line": 19
     },
     "AEAContextFieldRepresentations": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "AEA_CONTEXT_FIELD_REPRESENTATION_RAW",
@@ -419,7 +419,7 @@
       "sdk_line": 62
     },
     "AEAContextFieldValues": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "AEA_CONTEXT_CIPHERSUITE_HKDF_SHA256_HMAC",
@@ -497,7 +497,7 @@
       "sdk_line": 70
     },
     "AEAContextFields": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "AEA_CONTEXT_FIELD_PROFILE",
@@ -595,7 +595,7 @@
       "sdk_line": 36
     },
     "AEAProfiles": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "AEA_PROFILE__HKDF_SHA256_HMAC__NONE__ECDSA_P256",

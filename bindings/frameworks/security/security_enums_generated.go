@@ -63,7 +63,7 @@ func (e AuthorizationFlags) String() string {
 }
 
 // Constants that can be set to specify what certificates to include in a signed message.
-type CMSCertificateChainMode int64
+type CMSCertificateChainMode uint32
 
 const (
 	// Don’t include any certificates.
@@ -98,7 +98,7 @@ func (e CMSCertificateChainMode) String() string {
 
 // Optional attributes you can add to a signed message.
 // Bitmask — values may be combined with |.
-type CMSSignedAttributes int64
+type CMSSignedAttributes uint32
 
 const (
 	// No attributes.
@@ -151,7 +151,7 @@ func (e CMSSignedAttributes) String() string {
 }
 
 // The constants that indicate the status of the signature and signer information in a signed message.
-type CMSSignerStatus int64
+type CMSSignerStatus uint32
 
 const (
 	// The message was not signed.
@@ -641,7 +641,7 @@ func (e SecAuthenticationType) String() string {
 
 // Values that can be used in the flags parameter to most code signing functions.
 // Bitmask — values may be combined with |.
-type SecCSFlags int64
+type SecCSFlags uint32
 
 const (
 	// No flags (use the default behavior).
@@ -725,7 +725,7 @@ func (e SecCredentialType) String() string {
 }
 
 // The external format of a keychain item.
-type SecExternalFormat int64
+type SecExternalFormat uint32
 
 const (
 	KSecFormatUnknown SecExternalFormat = 0
@@ -799,7 +799,7 @@ func (e SecExternalFormat) String() string {
 }
 
 // The import item type.
-type SecExternalItemType int64
+type SecExternalItemType uint32
 
 const (
 	// Indicates that the caller does not know the type of information being imported or exported.
@@ -882,7 +882,7 @@ func (e SecItemClass) String() string {
 
 // The import and export function flags.
 // Bitmask — values may be combined with |.
-type SecItemImportExportFlags int64
+type SecItemImportExportFlags uint32
 
 const (
 	// A flag that indicates the exported data should have PEM armor.
@@ -904,7 +904,7 @@ func (e SecItemImportExportFlags) String() string {
 
 // The import/export parameter structure flags.
 // Bitmask — values may be combined with |.
-type SecKeyImportExportFlags int64
+type SecKeyImportExportFlags uint32
 
 const (
 	// A flag that you set to prevent importing more than one private key.
@@ -1335,7 +1335,7 @@ func (e SecTransformMetaAttributeType) String() string {
 
 // The option flags used to condition a trust evaluation.
 // Bitmask — values may be combined with |.
-type SecTrustOptionFlags int64
+type SecTrustOptionFlags uint32
 
 const (
 	// Allow expired certificates (except for the root certificate).
@@ -1386,7 +1386,7 @@ func (e SecTrustOptionFlags) String() string {
 }
 
 // Trust evaluation result codes.
-type SecTrustResultType int64
+type SecTrustResultType uint32
 
 const (
 	// An indication of an invalid setting or result.
@@ -1433,7 +1433,7 @@ func (e SecTrustResultType) String() string {
 }
 
 // The trust settings domains.
-type SecTrustSettingsDomain int64
+type SecTrustSettingsDomain uint32
 
 const (
 	// Per-user trust settings.
@@ -1519,7 +1519,7 @@ func (e SessionCreationFlags) String() string {
 }
 
 // Groups that collect ciphersuites of comparable security properties.
-type TLSCiphersuiteGroup int64
+type TLSCiphersuiteGroup uint16
 
 const (
 	Tls_ciphersuite_group_default           TLSCiphersuiteGroup = 0
@@ -1552,7 +1552,7 @@ func (e TLSCiphersuiteGroup) String() string {
 }
 
 // The collection of valid ciphersuites.
-type TLSCiphersuite int64
+type TLSCiphersuite uint16
 
 const (
 	Tls_ciphersuite_RSA_WITH_3DES_EDE_CBC_SHA                 TLSCiphersuite = 10
@@ -1645,7 +1645,7 @@ func (e TLSCiphersuite) String() string {
 }
 
 // The collection of supported TLS and DTLS versions.
-type TLSProtocolVersion int64
+type TLSProtocolVersion uint16
 
 const (
 	// The TLS 1.0 protocol.
@@ -2415,7 +2415,7 @@ func (e LaunchDataType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -2431,7 +2431,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -2451,7 +2451,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -2475,7 +2475,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -2519,7 +2519,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -2614,7 +2614,7 @@ func (e QosClass) String() string {
 }
 
 // The list of digest algorithms available for code signatures.
-type SecCSDigestAlgorithm int64
+type SecCSDigestAlgorithm uint32
 
 const (
 	KSecCodeSignatureNoHash              SecCSDigestAlgorithm = 0
@@ -2648,7 +2648,7 @@ func (e SecCSDigestAlgorithm) String() string {
 
 // Specify option flags that can be embedded in a code signature during signing and that govern the use of the signature.
 // Bitmask — values may be combined with |.
-type SecCodeSignatureFlags int64
+type SecCodeSignatureFlags uint32
 
 const (
 	// May host guest code.
@@ -2714,7 +2714,7 @@ func (e SecCodeSignatureFlags) String() string {
 
 // Operational flags attached by code signing services to running code.
 // Bitmask — values may be combined with |.
-type SecCodeStatus int64
+type SecCodeStatus uint32
 
 const (
 	// The code is dynamically valid.
@@ -2884,7 +2884,7 @@ func (e SecItemAttr) String() string {
 // The supported sizes for keys of various common types.
 //
 // Deprecated: No longer supported
-type SecKeySizes int64
+type SecKeySizes uint32
 
 const (
 	// The default key size for the specified type.
@@ -2938,7 +2938,7 @@ func (e SecKeySizes) String() string {
 
 // The flags that indicate key usage in the KeyUsage extension of a certificate.
 // Bitmask — values may be combined with |.
-type SecKeyUsage int64
+type SecKeyUsage uint32
 
 const (
 	KSecKeyUsageUnspecified SecKeyUsage = 0
@@ -3079,7 +3079,7 @@ func (e SecKeychainEvent) String() string {
 //
 // Deprecated: Replaced with SecKeyAlgorithm
 // Bitmask — values may be combined with |.
-type SecPadding int64
+type SecPadding uint32
 
 const (
 	// No padding.
@@ -3121,7 +3121,7 @@ func (e SecPadding) String() string {
 }
 
 // An enumeration indicating different types of internal requirements for code.
-type SecRequirementType int64
+type SecRequirementType uint32
 
 const (
 	// What hosts may run this code.
@@ -3163,7 +3163,7 @@ func (e SecRequirementType) String() string {
 
 // Allowed uses for the encryption key in a certificate.
 // Bitmask — values may be combined with |.
-type SecTrustSettingsKeyUsage int64
+type SecTrustSettingsKeyUsage uint32
 
 const (
 	// The key can be used to sign data or verify a signature.
@@ -3214,7 +3214,7 @@ func (e SecTrustSettingsKeyUsage) String() string {
 }
 
 // Trust settings returned in usage constraints dictionaries.
-type SecTrustSettingsResult int64
+type SecTrustSettingsResult uint32
 
 const (
 	// Never valid in a trust settings array or in an API call.
@@ -3248,7 +3248,7 @@ func (e SecTrustSettingsResult) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -3317,7 +3317,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -3346,7 +3346,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

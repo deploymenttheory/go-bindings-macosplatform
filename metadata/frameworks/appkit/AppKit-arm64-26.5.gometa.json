@@ -173686,7 +173686,7 @@
       "is_extensible": true
     },
     "NSFontDescriptorSymbolicTraits": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "NSFontDescriptorTraitItalic",
@@ -175607,7 +175607,7 @@
       "is_extensible": true
     },
     "NSOpenGLGlobalOption": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "NSOpenGLGOFormatCacheSize",
@@ -180469,7 +180469,7 @@
       "doc": "@typedef NSWindowCollectionBehavior @discussion You may specify at most one of @c NSWindowCollectionBehaviorPrimary, @c NSWindowCollectionBehaviorAuxiliary, or @c NSWindowCollectionBehaviorCanJoinAllApplications. If unspecified, the window gets the default treatment determined by its other collection behaviors. @const NSWindowCollectionBehaviorPrimary Marks a window as primary. This collection behavior should commonly be used for document or viewer windows. @const NSWindowCollectionBehaviorAuxiliary Marks a window as auxiliary. This collection behavior should commonly be used for About or Settings windows, as well as utility panes. @const NSWindowCollectionBehaviorCanJoinAllApplications Marks a window as able to join all applications, allowing it to join other apps' sets and full screen spaces when eligible. This collection behavior should commonly be used for floating windows and system overlays. @const NSWindowCollectionBehaviorDefault @const NSWindowCollectionBehaviorCanJoinAllSpaces @const NSWindowCollectionBehaviorMoveToActiveSpace @discussion You may specify at most one of \\c NSWindowCollectionBehaviorManaged, \\c NSWindowCollectionBehaviorTransient, or \\c NSWindowCollectionBehaviorStationary.  If neither is specified, the window gets the default behavior determined by its window level. @const NSWindowCollectionBehaviorManaged Participates in spaces, exposé.  Default behavior if `windowLevel == NSNormalWindowLevel`. @const NSWindowCollectionBehaviorTransient Floats in spaces, hidden by exposé.  Default behavior if `windowLevel != NSNormalWindowLevel`. @const NSWindowCollectionBehaviorStationary Unaffected by exposé.  Stays visible and stationary, like desktop window. @discussion You may specify at most one of \\c NSWindowCollectionBehaviorParticipatesInCycle or \\c NSWindowCollectionBehaviorIgnoresCycle.  If unspecified, the window gets the default behavior determined by its window level. @const NSWindowCollectionBehaviorParticipatesInCycle Default behavior if `windowLevel == NSNormalWindowLevel`. @const NSWindowCollectionBehaviorIgnoresCycle Default behavior if `windowLevel != NSNormalWindowLevel`. @discussion You may specify at most one of \\c NSWindowCollectionBehaviorFullScreenPrimary, \\c NSWindowCollectionBehaviorFullScreenAuxiliary, or \\c NSWindowCollectionBehaviorFullScreenNone. @const NSWindowCollectionBehaviorFullScreenPrimary The frontmost window with this collection behavior will be the fullscreen window. @const NSWindowCollectionBehaviorFullScreenAuxiliary Windows with this collection behavior can be shown with the fullscreen window. @const NSWindowCollectionBehaviorFullScreenNone The window can not be made fullscreen when this bit is set. @discussion You may specify at most one of \\c NSWindowCollectionBehaviorFullScreenAllowsTiling or \\c NSWindowCollectionBehaviorFullScreenDisallowsTiling, or an assertion will be raised. The default behavior is to allow any window to participate in full screen tiling, as long as it meets certain requirements, such as being resizable and not a panel or sheet. Windows which are not full screen capable can still become a secondary tile in full screen. A window can explicitly allow itself to be placed into a full screen tile by including \\c NSWindowCollectionBehaviorFullScreenAllowsTiling. Even if a window allows itself to be placed in a tile, it still may not be put in the tile if its \\c minFullScreenContentSize is too large to fit. A window can explicitly disallow itself from being placed in a full screen tile by including \\c NSWindowCollectionBehaviorFullScreenDisallowsTiling. This is useful for non-full screen capable windows to explicitly prevent themselves from being tiled. It can also be used by a full screen window to prevent any other windows from being placed in its full screen tile. @const NSWindowCollectionBehaviorFullScreenAllowsTiling This window can be a full screen tile window. It does not have to have \\c NSWindowCollectionBehaviorFullScreenPrimary set. @const NSWindowCollectionBehaviorFullScreenDisallowsTiling This window can NOT be made a full screen tile window; it still may be allowed to be a regular \\c NSWindowCollectionBehaviorFullScreenPrimary window."
     },
     "NSWindowDepth": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "NSWindowDepthTwentyfourBitRGB",
@@ -183707,7 +183707,7 @@
       "sdk_line": 204
     },
     "mach_vm_range_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MACH_VM_RANGE_NONE",
@@ -183722,7 +183722,7 @@
       "is_extensible": true
     },
     "mach_vm_range_flavor_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MACH_VM_RANGE_FLAVOR_INVALID",
@@ -183741,7 +183741,7 @@
       "is_extensible": true
     },
     "mach_vm_range_tag_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MACH_VM_RANGE_DEFAULT",
@@ -183765,7 +183765,7 @@
       "is_extensible": true
     },
     "mpo_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPO_PORT",
@@ -183815,7 +183815,7 @@
       "is_extensible": true
     },
     "os_clockid_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
@@ -183828,7 +183828,7 @@
       "sdk_line": 188
     },
     "os_unfair_lock_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "OS_UNFAIR_LOCK_FLAG_NONE",
@@ -184001,7 +184001,7 @@
       "sdk_line": 121
     },
     "virtual_memory_guard_exception_code_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kGUARD_EXC_DEALLOC_GAP",
@@ -184100,7 +184100,7 @@
       "is_extensible": true
     },
     "xpc_listener_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_LISTENER_CREATE_NONE",
@@ -184130,7 +184130,7 @@
       "is_extensible": true
     },
     "xpc_session_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_SESSION_CREATE_NONE",

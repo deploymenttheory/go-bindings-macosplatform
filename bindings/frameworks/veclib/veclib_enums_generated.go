@@ -317,7 +317,7 @@ func (e Type) String() string {
 	}
 }
 
-type BNNSActivationFunction int64
+type BNNSActivationFunction uint32
 
 const (
 	BNNSActivationFunctionIdentity                        BNNSActivationFunction = 0
@@ -440,7 +440,7 @@ func (e BNNSActivationFunction) String() string {
 	}
 }
 
-type BNNSArithmeticFunction int64
+type BNNSArithmeticFunction uint32
 
 const (
 	BNNSArithmeticAdd                  BNNSArithmeticFunction = 0
@@ -577,7 +577,7 @@ func (e BNNSArithmeticFunction) String() string {
 	}
 }
 
-type BNNSBoxCoordinateMode int64
+type BNNSBoxCoordinateMode uint32
 
 const (
 	BNNSCornersHeightFirst    BNNSBoxCoordinateMode = 0
@@ -603,7 +603,7 @@ func (e BNNSBoxCoordinateMode) String() string {
 	}
 }
 
-type BNNSDataLayout int64
+type BNNSDataLayout uint32
 
 const (
 	BNNSDataLayoutVector                        BNNSDataLayout = 65536
@@ -701,7 +701,7 @@ func (e BNNSDataLayout) String() string {
 	}
 }
 
-type BNNSDataType int64
+type BNNSDataType uint32
 
 const (
 	BNNSDataTypeFloatBit         BNNSDataType = 65536
@@ -802,7 +802,7 @@ func (e BNNSDataType) String() string {
 	}
 }
 
-type BNNSDescriptorType int64
+type BNNSDescriptorType uint32
 
 const (
 	BNNSConstant  BNNSDescriptorType = 0
@@ -825,7 +825,7 @@ func (e BNNSDescriptorType) String() string {
 	}
 }
 
-type BNNSEmbeddingFlags int64
+type BNNSEmbeddingFlags uint32
 
 const (
 	BNNSEmbeddingFlagScaleGradientByFrequency BNNSEmbeddingFlags = 1
@@ -842,7 +842,7 @@ func (e BNNSEmbeddingFlags) String() string {
 	}
 }
 
-type BNNSFilterType int64
+type BNNSFilterType uint32
 
 const (
 	BNNSConvolution           BNNSFilterType = 0
@@ -883,7 +883,7 @@ func (e BNNSFilterType) String() string {
 	}
 }
 
-type BNNSFlags int64
+type BNNSFlags uint32
 
 const (
 	BNNSFlagsUseClientPtr BNNSFlags = 1
@@ -900,7 +900,7 @@ func (e BNNSFlags) String() string {
 	}
 }
 
-type BNNSGraphArgumentIntent int64
+type BNNSGraphArgumentIntent uint32
 
 const (
 	BNNSGraphArgumentIntentIn    BNNSGraphArgumentIntent = 1
@@ -923,7 +923,7 @@ func (e BNNSGraphArgumentIntent) String() string {
 	}
 }
 
-type BNNSGraphArgumentType int64
+type BNNSGraphArgumentType uint32
 
 const (
 	BNNSGraphArgumentTypePointer BNNSGraphArgumentType = 0
@@ -943,7 +943,7 @@ func (e BNNSGraphArgumentType) String() string {
 	}
 }
 
-type BNNSGraphMessageLevel int64
+type BNNSGraphMessageLevel uint32
 
 const (
 	BNNSGraphMessageLevelInfo        BNNSGraphMessageLevel = 1
@@ -969,7 +969,7 @@ func (e BNNSGraphMessageLevel) String() string {
 	}
 }
 
-type BNNSGraphOptimizationPreference int64
+type BNNSGraphOptimizationPreference uint32
 
 const (
 	BNNSGraphOptimizationPreferencePerformance BNNSGraphOptimizationPreference = 0
@@ -989,7 +989,7 @@ func (e BNNSGraphOptimizationPreference) String() string {
 	}
 }
 
-type BNNSInterpolationMethod int64
+type BNNSInterpolationMethod uint32
 
 const (
 	BNNSInterpolationMethodNearest BNNSInterpolationMethod = 0
@@ -1009,7 +1009,7 @@ func (e BNNSInterpolationMethod) String() string {
 	}
 }
 
-type BNNSLayerFlags int64
+type BNNSLayerFlags uint32
 
 const (
 	BNNSLayerFlagsLSTMBidirectional      BNNSLayerFlags = 1
@@ -1029,7 +1029,7 @@ func (e BNNSLayerFlags) String() string {
 	}
 }
 
-type BNNSLinearSamplingMode int64
+type BNNSLinearSamplingMode uint32
 
 const (
 	BNNSLinearSamplingDefault            BNNSLinearSamplingMode = 0
@@ -1058,7 +1058,7 @@ func (e BNNSLinearSamplingMode) String() string {
 	}
 }
 
-type BNNSLossFunction int64
+type BNNSLossFunction uint32
 
 const (
 	BNNSLossFunctionSoftmaxCrossEntropy     BNNSLossFunction = 1
@@ -1102,7 +1102,7 @@ func (e BNNSLossFunction) String() string {
 	}
 }
 
-type BNNSLossReductionFunction int64
+type BNNSLossReductionFunction uint32
 
 const (
 	BNNSLossReductionNone              BNNSLossReductionFunction = 0
@@ -1131,7 +1131,7 @@ func (e BNNSLossReductionFunction) String() string {
 	}
 }
 
-type BNNSNDArrayFlags int64
+type BNNSNDArrayFlags uint32
 
 const (
 	BNNSNDArrayFlagBackpropSet        BNNSNDArrayFlags = 0
@@ -1151,7 +1151,7 @@ func (e BNNSNDArrayFlags) String() string {
 	}
 }
 
-type BNNSNormType int64
+type BNNSNormType uint32
 
 const (
 	BNNSL2Norm BNNSNormType = 1
@@ -1168,7 +1168,7 @@ func (e BNNSNormType) String() string {
 	}
 }
 
-type BNNSOptimizerClippingFunction int64
+type BNNSOptimizerClippingFunction uint32
 
 const (
 	BNNSOptimizerClippingNone         BNNSOptimizerClippingFunction = 0
@@ -1194,7 +1194,7 @@ func (e BNNSOptimizerClippingFunction) String() string {
 	}
 }
 
-type BNNSOptimizerFunction int64
+type BNNSOptimizerFunction uint32
 
 const (
 	BNNSOptimizerFunctionSGDMomentum              BNNSOptimizerFunction = 1
@@ -1244,7 +1244,7 @@ func (e BNNSOptimizerFunction) String() string {
 	}
 }
 
-type BNNSOptimizerRegularizationFunction int64
+type BNNSOptimizerRegularizationFunction uint32
 
 const (
 	BNNSOptimizerRegularizationNone BNNSOptimizerRegularizationFunction = 0
@@ -1267,7 +1267,7 @@ func (e BNNSOptimizerRegularizationFunction) String() string {
 	}
 }
 
-type BNNSOptimizerSGDMomentumVariant int64
+type BNNSOptimizerSGDMomentumVariant uint32
 
 const (
 	BNNSSGDMomentumVariant0 BNNSOptimizerSGDMomentumVariant = 0
@@ -1290,7 +1290,7 @@ func (e BNNSOptimizerSGDMomentumVariant) String() string {
 	}
 }
 
-type BNNSPaddingMode int64
+type BNNSPaddingMode uint32
 
 const (
 	BNNSPaddingModeConstant  BNNSPaddingMode = 0
@@ -1313,7 +1313,7 @@ func (e BNNSPaddingMode) String() string {
 	}
 }
 
-type BNNSPointerSpecifier int64
+type BNNSPointerSpecifier uint32
 
 const (
 	BNNSPointerSpecifierAlpha BNNSPointerSpecifier = 0
@@ -1333,7 +1333,7 @@ func (e BNNSPointerSpecifier) String() string {
 	}
 }
 
-type BNNSPoolingFunction int64
+type BNNSPoolingFunction uint32
 
 const (
 	BNNSPoolingFunctionMax                        BNNSPoolingFunction = 0
@@ -1364,7 +1364,7 @@ func (e BNNSPoolingFunction) String() string {
 	}
 }
 
-type BNNSQuantizerFunction int64
+type BNNSQuantizerFunction uint32
 
 const (
 	BNNSQuantizerFunctionQuantize   BNNSQuantizerFunction = 0
@@ -1384,7 +1384,7 @@ func (e BNNSQuantizerFunction) String() string {
 	}
 }
 
-type BNNSRandomGeneratorMethod int64
+type BNNSRandomGeneratorMethod uint32
 
 const (
 	BNNSRandomGeneratorMethodAES_CTR BNNSRandomGeneratorMethod = 0
@@ -1401,7 +1401,7 @@ func (e BNNSRandomGeneratorMethod) String() string {
 	}
 }
 
-type BNNSReduceFunction int64
+type BNNSReduceFunction uint32
 
 const (
 	BNNSReduceFunctionMax         BNNSReduceFunction = 0
@@ -1468,7 +1468,7 @@ func (e BNNSReduceFunction) String() string {
 	}
 }
 
-type BNNSRelationalOperator int64
+type BNNSRelationalOperator uint32
 
 const (
 	BNNSRelationalOperatorEqual        BNNSRelationalOperator = 0
@@ -1518,7 +1518,7 @@ func (e BNNSRelationalOperator) String() string {
 	}
 }
 
-type BNNSShuffleType int64
+type BNNSShuffleType uint32
 
 const (
 	BNNSShuffleTypePixelShuffleNCHW   BNNSShuffleType = 0
@@ -1544,7 +1544,7 @@ func (e BNNSShuffleType) String() string {
 	}
 }
 
-type BNNSSparsityType int64
+type BNNSSparsityType uint32
 
 const (
 	BNNSSparsityTypeUnstructured BNNSSparsityType = 0
@@ -1561,7 +1561,7 @@ func (e BNNSSparsityType) String() string {
 	}
 }
 
-type BNNSTargetSystem int64
+type BNNSTargetSystem uint32
 
 const (
 	BNNSTargetSystemGeneric BNNSTargetSystem = 0
@@ -2117,7 +2117,7 @@ func (e MDQuerySortOptionFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -2133,7 +2133,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -2153,7 +2153,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -2177,7 +2177,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -2244,7 +2244,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -2261,7 +2261,7 @@ func (e OSClockid) String() string {
 	}
 }
 
-type OSLogType int64
+type OSLogType uint8
 
 const (
 	OSLogTypeDefault OSLogType = 0
@@ -2447,7 +2447,7 @@ func (e QuadratureStatus) String() string {
 	}
 }
 
-type Sparsecontrol int64
+type Sparsecontrol uint32
 
 const (
 	SparseDefaultControl Sparsecontrol = 0
@@ -2464,7 +2464,7 @@ func (e Sparsecontrol) String() string {
 	}
 }
 
-type Sparsefactorization int64
+type Sparsefactorization uint8
 
 const (
 	SparseFactorizationCholesky      Sparsefactorization = 0
@@ -2511,7 +2511,7 @@ func (e Sparsefactorization) String() string {
 	}
 }
 
-type Sparsegmresvariant int64
+type Sparsegmresvariant uint8
 
 const (
 	SparseVariantDQGMRES Sparsegmresvariant = 0
@@ -2638,7 +2638,7 @@ func (e Sparselsmrconvergencetest) String() string {
 	}
 }
 
-type Sparseorder int64
+type Sparseorder uint8
 
 const (
 	SparseOrderDefault Sparseorder = 0
@@ -2696,7 +2696,7 @@ func (e Sparsepreconditioner) String() string {
 	}
 }
 
-type Sparsescaling int64
+type Sparsescaling uint8
 
 const (
 	SparseScalingDefault                     Sparsescaling = 0
@@ -2757,7 +2757,7 @@ func (e Sparsestatus) String() string {
 	}
 }
 
-type Sparsesubfactor int64
+type Sparsesubfactor uint8
 
 const (
 	SparseSubfactorInvalid Sparsesubfactor = 0
@@ -2824,7 +2824,7 @@ func (e Sparsetriangle) String() string {
 	}
 }
 
-type Sparseupdate int64
+type Sparseupdate uint8
 
 const (
 	SparseUpdatePartialRefactor Sparseupdate = 0
@@ -3040,7 +3040,7 @@ func (e VimageInterpolationmethod) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -3109,7 +3109,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -3138,7 +3138,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

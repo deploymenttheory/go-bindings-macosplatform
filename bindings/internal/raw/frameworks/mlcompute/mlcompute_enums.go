@@ -65,7 +65,7 @@ func (e MDQuerySortOptionFlags) String() string {
 }
 
 // An activation type that you specify for an activation descriptor.
-type MLCActivationType int64
+type MLCActivationType int32
 
 const (
 	// An activation type that implements the identity function.
@@ -166,7 +166,7 @@ func (e MLCActivationType) String() string {
 }
 
 // Constants that describe an arithmetic operation.
-type MLCArithmeticOperation int64
+type MLCArithmeticOperation int32
 
 const (
 	// Calculates the element-wise sum of the inputs.
@@ -303,7 +303,7 @@ func (e MLCArithmeticOperation) String() string {
 }
 
 // A comparison operation.
-type MLCComparisonOperation int64
+type MLCComparisonOperation int32
 
 const (
 	MLCComparisonOperationEqual          MLCComparisonOperation = 0
@@ -356,7 +356,7 @@ func (e MLCComparisonOperation) String() string {
 }
 
 // The convolution type specified for a convolution layer.
-type MLCConvolutionType int64
+type MLCConvolutionType int32
 
 const (
 	// The standard convolution type.
@@ -381,7 +381,7 @@ func (e MLCConvolutionType) String() string {
 }
 
 // A tensor data type.
-type MLCDataType int64
+type MLCDataType int32
 
 const (
 	MLCDataTypeInvalid MLCDataType = 0
@@ -428,7 +428,7 @@ func (e MLCDataType) String() string {
 }
 
 // A device type for execution of a neural network.
-type MLCDeviceType int64
+type MLCDeviceType int32
 
 const (
 	// A device type that represents the CPU.
@@ -461,7 +461,7 @@ func (e MLCDeviceType) String() string {
 }
 
 // A bitmask that specifies the options you use when executing a graph.
-type MLCExecutionOptions int64
+type MLCExecutionOptions uint64
 
 const (
 	// The option to execute the graph in the most efficient way possible.
@@ -502,7 +502,7 @@ func (e MLCExecutionOptions) String() string {
 }
 
 // A clipping type the system applies to a gradient.
-type MLCGradientClippingType int64
+type MLCGradientClippingType int32
 
 const (
 	// An option that clips by value.
@@ -527,7 +527,7 @@ func (e MLCGradientClippingType) String() string {
 }
 
 // A bitmask that specifies the options you use when compiling a graph.
-type MLCGraphCompilationOptions int64
+type MLCGraphCompilationOptions uint64
 
 const (
 	// The default option for graph compilation.
@@ -563,7 +563,7 @@ func (e MLCGraphCompilationOptions) String() string {
 }
 
 // Constants that describe the result of an LSTM layer.
-type MLCLSTMResultMode int64
+type MLCLSTMResultMode uint64
 
 const (
 	// A result mode that indicates the layer produces a single result tensor that represents the final output of the LSTM.
@@ -584,7 +584,7 @@ func (e MLCLSTMResultMode) String() string {
 }
 
 // A loss function.
-type MLCLossType int64
+type MLCLossType int32
 
 const (
 	// The mean absolute error loss.
@@ -636,7 +636,7 @@ func (e MLCLossType) String() string {
 }
 
 // A padding policy that you specify for a convolution or pooling layer.
-type MLCPaddingPolicy int64
+type MLCPaddingPolicy int32
 
 const (
 	// The "same" padding policy.
@@ -661,7 +661,7 @@ func (e MLCPaddingPolicy) String() string {
 }
 
 // A padding type that you specify for a padding layer.
-type MLCPaddingType int64
+type MLCPaddingType int32
 
 const (
 	// The zero padding type.
@@ -690,7 +690,7 @@ func (e MLCPaddingType) String() string {
 }
 
 // A pooling function type for a pooling layer.
-type MLCPoolingType int64
+type MLCPoolingType int32
 
 const (
 	// The max pooling type.
@@ -718,7 +718,7 @@ func (e MLCPoolingType) String() string {
 }
 
 // An initializer type you use to create a tensor with random data.
-type MLCRandomInitializerType int64
+type MLCRandomInitializerType int32
 
 const (
 	MLCRandomInitializerTypeInvalid MLCRandomInitializerType = 0
@@ -749,7 +749,7 @@ func (e MLCRandomInitializerType) String() string {
 }
 
 // Constants that describe a reduction operation type.
-type MLCReductionType int64
+type MLCReductionType int32
 
 const (
 	// A reduction operation that applies no reduction.
@@ -806,7 +806,7 @@ func (e MLCReductionType) String() string {
 }
 
 // A regularization function to use with an optimizer.
-type MLCRegularizationType int64
+type MLCRegularizationType int32
 
 const (
 	// No regularization.
@@ -831,7 +831,7 @@ func (e MLCRegularizationType) String() string {
 }
 
 // A sampling mode for an upsample layer.
-type MLCSampleMode int64
+type MLCSampleMode int32
 
 const (
 	// The nearest sample mode.
@@ -852,7 +852,7 @@ func (e MLCSampleMode) String() string {
 }
 
 // A softmax operation.
-type MLCSoftmaxOperation int64
+type MLCSoftmaxOperation int32
 
 const (
 	// The standard softmax operation.
@@ -1411,7 +1411,7 @@ func (e Launch_data_type_t) String() string {
 	}
 }
 
-type Mach_vm_range_flags_t int64
+type Mach_vm_range_flags_t uint64
 
 const (
 	MACH_VM_RANGE_NONE Mach_vm_range_flags_t = 0
@@ -1425,7 +1425,7 @@ func (e Mach_vm_range_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Mach_vm_range_flavor_t int64
+type Mach_vm_range_flavor_t uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
@@ -1443,7 +1443,7 @@ func (e Mach_vm_range_flavor_t) String() string {
 	}
 }
 
-type Mach_vm_range_tag_t int64
+type Mach_vm_range_tag_t uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
@@ -1464,7 +1464,7 @@ func (e Mach_vm_range_tag_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -1506,7 +1506,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
@@ -1594,7 +1594,7 @@ func (e Qos_class_t) String() string {
 	}
 }
 
-type Virtual_memory_guard_exception_code_t int64
+type Virtual_memory_guard_exception_code_t uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
@@ -1660,7 +1660,7 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 	}
 }
 
-type Xpc_listener_create_flags_t int64
+type Xpc_listener_create_flags_t uint64
 
 const (
 	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
@@ -1686,7 +1686,7 @@ func (e Xpc_listener_create_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Xpc_session_create_flags_t int64
+type Xpc_session_create_flags_t uint64
 
 const (
 	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0

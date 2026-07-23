@@ -1437,26 +1437,31 @@ func hasValueInitializer(node *ASTNode) bool {
 // objcIntTypeToGo converts an ObjC integer type name to its Go equivalent.
 func objcIntTypeToGo(qt string) string {
 	qt = strings.TrimSpace(qt)
+	// Both the keyword spelling ("unsigned int") and the stdint typedef spelling
+	// ("uint32_t") reach here: clang reports an enum's fixedUnderlyingType by its
+	// written form, so CF_OPTIONS(uint32_t, …) yields qualType "uint32_t". Handle
+	// both, or a fixed-width enum would fall through to the int64 default and be
+	// emitted 8 bytes wide — mislaying every struct that embeds it (e.g. CMTime).
 	switch qt {
-	case "int", "signed int":
+	case "int", "signed int", "int32_t":
 		return "int32"
-	case "unsigned int":
+	case "unsigned int", "uint32_t":
 		return "uint32"
 	case "long", "signed long":
 		return "int64"
 	case "unsigned long", "NSUInteger":
 		return "uint64"
-	case "long long", "signed long long", "NSInteger":
+	case "long long", "signed long long", "NSInteger", "int64_t":
 		return "int64"
-	case "unsigned long long":
+	case "unsigned long long", "uint64_t":
 		return "uint64"
-	case "short", "signed short":
+	case "short", "signed short", "int16_t":
 		return "int16"
-	case "unsigned short":
+	case "unsigned short", "uint16_t":
 		return "uint16"
-	case "char", "signed char":
+	case "char", "signed char", "int8_t":
 		return "int8"
-	case "unsigned char":
+	case "unsigned char", "uint8_t", "Boolean":
 		return "uint8"
 	}
 	// If it contains "unsigned", guess uint64

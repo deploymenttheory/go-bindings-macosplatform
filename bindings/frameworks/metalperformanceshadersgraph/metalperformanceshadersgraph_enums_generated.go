@@ -10,7 +10,7 @@ import (
 )
 
 // The options available to a graph.
-type GraphDeploymentPlatform int64
+type GraphDeploymentPlatform uint64
 
 const (
 	// Deployment platofmr for macOS.
@@ -41,7 +41,7 @@ func (e GraphDeploymentPlatform) String() string {
 }
 
 // The device type.
-type GraphDeviceType int64
+type GraphDeviceType uint32
 
 const (
 	// Device of type Metal
@@ -87,7 +87,7 @@ func (e GraphFFTScalingMode) String() string {
 }
 
 // The type of the reduction the graph applies in the loss operations.
-type GraphLossReductionType int64
+type GraphLossReductionType uint64
 
 const (
 	// Computes the loss without reduction.
@@ -143,7 +143,7 @@ func (e GraphNonMaximumSuppressionCoordinateMode) String() string {
 }
 
 // The optimization levels to trade compilation time for even more runtime performance by running more passes.
-type GraphOptimization int64
+type GraphOptimization uint64
 
 const (
 	// Graph performs core optimizations only.
@@ -166,7 +166,7 @@ func (e GraphOptimization) String() string {
 }
 
 // The optimization profile used as a heuristic as the graph compiler optimizes the network.
-type GraphOptimizationProfile int64
+type GraphOptimizationProfile uint64
 
 const (
 	// Default, graph optimized for performance.
@@ -189,7 +189,7 @@ func (e GraphOptimizationProfile) String() string {
 }
 
 // The options available to a graph.
-type GraphOptions int64
+type GraphOptions uint64
 
 const (
 	// No Options.
@@ -382,7 +382,7 @@ func (e GraphRNNActivation) String() string {
 }
 
 // The distributions supported by random operations.
-type GraphRandomDistribution int64
+type GraphRandomDistribution uint64
 
 const (
 	// The uniform distribution, with samples drawn uniformly from [min, max) for float types, and [min, max] for integer types.
@@ -409,7 +409,7 @@ func (e GraphRandomDistribution) String() string {
 }
 
 // The sampling method to use when generating values in the normal distribution.
-type GraphRandomNormalSamplingMethod int64
+type GraphRandomNormalSamplingMethod uint64
 
 const (
 	// Use inverse erf to convert uniform values to values in the normal distribution
@@ -612,7 +612,7 @@ func (e GraphScatterMode) String() string {
 }
 
 // The sparse storage options in the Metal Performance Shaders Graph framework.
-type GraphSparseStorageType int64
+type GraphSparseStorageType uint64
 
 const (
 	// COO Storage
@@ -1355,7 +1355,7 @@ func (e CustomKernelIndex) String() string {
 	}
 }
 
-type DeviceCapsValues int64
+type DeviceCapsValues uint32
 
 const (
 	DeviceCapsNull                        DeviceCapsValues = 0
@@ -1415,7 +1415,7 @@ func (e DeviceCapsValues) String() string {
 }
 
 // Execution events that can be used with shared events.
-type GraphExecutionStage int64
+type GraphExecutionStage uint64
 
 const (
 	// stage when execution of the graph completes.
@@ -1433,7 +1433,7 @@ func (e GraphExecutionStage) String() string {
 	}
 }
 
-type ImageType int64
+type ImageType uint32
 
 const (
 	ImageType2d                    ImageType = 0
@@ -1494,7 +1494,7 @@ func (e ImageType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MachVMRangeFlags int64
+type MachVMRangeFlags uint64
 
 const (
 	MachVMRangeFlagsNone MachVMRangeFlags = 0
@@ -1510,7 +1510,7 @@ func (e MachVMRangeFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MachVMRangeFlavor int64
+type MachVMRangeFlavor uint32
 
 const (
 	MachVMRangeFlavorInvalid MachVMRangeFlavor = 0
@@ -1530,7 +1530,7 @@ func (e MachVMRangeFlavor) String() string {
 	}
 }
 
-type MachVMRangeTag int64
+type MachVMRangeTag uint16
 
 const (
 	MachVMRangeTagDefault MachVMRangeTag = 0
@@ -1554,7 +1554,7 @@ func (e MachVMRangeTag) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MpoFlags int64
+type MpoFlags uint32
 
 const (
 	MpoFlagsPort                        MpoFlags = 0
@@ -1598,7 +1598,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type OSClockid int64
+type OSClockid uint32
 
 const (
 	OSClockidTime OSClockid = 32
@@ -1692,7 +1692,7 @@ func (e QosClass) String() string {
 	}
 }
 
-type VirtualMemoryGuardExceptionCode int64
+type VirtualMemoryGuardExceptionCode uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCode = 1
@@ -1761,7 +1761,7 @@ func (e VirtualMemoryGuardExceptionCode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlags int64
+type XpcListenerCreateFlags uint64
 
 const (
 	XpcListenerCreateFlagsNone            XpcListenerCreateFlags = 0
@@ -1790,7 +1790,7 @@ func (e XpcListenerCreateFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlags int64
+type XpcSessionCreateFlags uint64
 
 const (
 	XpcSessionCreateFlagsNone           XpcSessionCreateFlags = 0

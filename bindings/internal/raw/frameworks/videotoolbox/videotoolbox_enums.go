@@ -152,7 +152,7 @@ func (e PMPageToPaperMappingType) String() string {
 }
 
 // Flags to pass to a compression session.
-type VTCompressionSessionOptionFlags int64
+type VTCompressionSessionOptionFlags uint32
 
 const (
 	// A flag that indicates the last pass in a multi-pass compression session.
@@ -171,7 +171,7 @@ func (e VTCompressionSessionOptionFlags) String() string {
 }
 
 // Flags to pass to a decompression session and the video decoder.
-type VTDecodeFrameFlags int64
+type VTDecodeFrameFlags uint32
 
 const (
 	// A flag that indicates to enable asynchronous decompression.
@@ -443,7 +443,7 @@ func (e VTMotionBlurParametersSubmissionMode) String() string {
 }
 
 // Flags to control processing of a frame you pass to the motion-estimation session.
-type VTMotionEstimationFrameFlags int64
+type VTMotionEstimationFrameFlags uint32
 
 const (
 	// A hint to the motion-estimation session that you are going to reuse the currentBuffer as referenceBuffer in the next call to VTMotionEstimationSessionEstimateMotionVectors. Using this flag allows the motion-estimation processor to deliver better performance.
@@ -462,7 +462,7 @@ func (e VTMotionEstimationFrameFlags) String() string {
 }
 
 // Directives that provide information back to you with the results of motion-estimation.
-type VTMotionEstimationInfoFlags int64
+type VTMotionEstimationInfoFlags uint32
 
 const (
 	KVTMotionEstimationInfoFlags_Reserved0 VTMotionEstimationInfoFlags = 1
@@ -1156,7 +1156,7 @@ func (e Launch_data_type_t) String() string {
 	}
 }
 
-type Mach_vm_range_flags_t int64
+type Mach_vm_range_flags_t uint64
 
 const (
 	MACH_VM_RANGE_NONE Mach_vm_range_flags_t = 0
@@ -1170,7 +1170,7 @@ func (e Mach_vm_range_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Mach_vm_range_flavor_t int64
+type Mach_vm_range_flavor_t uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
@@ -1188,7 +1188,7 @@ func (e Mach_vm_range_flavor_t) String() string {
 	}
 }
 
-type Mach_vm_range_tag_t int64
+type Mach_vm_range_tag_t uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
@@ -1209,7 +1209,7 @@ func (e Mach_vm_range_tag_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -1251,7 +1251,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
@@ -1339,7 +1339,7 @@ func (e Qos_class_t) String() string {
 	}
 }
 
-type Virtual_memory_guard_exception_code_t int64
+type Virtual_memory_guard_exception_code_t uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
@@ -1405,7 +1405,7 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 	}
 }
 
-type Xpc_listener_create_flags_t int64
+type Xpc_listener_create_flags_t uint64
 
 const (
 	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
@@ -1431,7 +1431,7 @@ func (e Xpc_listener_create_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Xpc_session_create_flags_t int64
+type Xpc_session_create_flags_t uint64
 
 const (
 	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0

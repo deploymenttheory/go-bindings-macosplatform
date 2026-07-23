@@ -510959,7 +510959,7 @@
       "doc": "@enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order."
     },
     "MTRAccessControlAccessRestrictionType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRAccessControlAccessRestrictionTypeAttributeAccessForbidden",
@@ -510987,7 +510987,7 @@
       "is_extensible": true
     },
     "MTRAccessControlAuthMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRAccessControlAuthModePASE",
@@ -511010,7 +511010,7 @@
       "is_extensible": true
     },
     "MTRAccessControlAuxiliaryType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRAccessControlAuxiliaryTypeSystem",
@@ -511034,7 +511034,7 @@
       "is_extensible": true
     },
     "MTRAccessControlChangeType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRAccessControlChangeTypeChanged",
@@ -511057,7 +511057,7 @@
       "is_extensible": true
     },
     "MTRAccessControlEntryAuthMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRAccessControlEntryAuthModePASE",
@@ -511080,7 +511080,7 @@
       "is_extensible": true
     },
     "MTRAccessControlEntryPrivilege": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRAccessControlEntryPrivilegeView",
@@ -511113,7 +511113,7 @@
       "is_extensible": true
     },
     "MTRAccessControlFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRAccessControlFeatureExtension",
@@ -511139,7 +511139,7 @@
       "is_extensible": true
     },
     "MTRAccessControlPrivilege": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRAccessControlPrivilegeView",
@@ -511172,7 +511172,7 @@
       "is_extensible": true
     },
     "MTRActionsActionError": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRActionsActionErrorUnknown",
@@ -511190,7 +511190,7 @@
       "is_extensible": true
     },
     "MTRActionsActionState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRActionsActionStateInactive",
@@ -511218,7 +511218,7 @@
       "is_extensible": true
     },
     "MTRActionsActionType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRActionsActionTypeOther",
@@ -511261,7 +511261,7 @@
       "is_extensible": true
     },
     "MTRActionsCommandBits": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRActionsCommandBitsInstantAction",
@@ -511330,7 +511330,7 @@
       "is_extensible": true
     },
     "MTRActionsEndpointListType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRActionsEndpointListTypeOther",
@@ -511353,7 +511353,7 @@
       "is_extensible": true
     },
     "MTRActivatedCarbonFilterMonitoringChangeIndication": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRActivatedCarbonFilterMonitoringChangeIndicationOK",
@@ -511376,7 +511376,7 @@
       "is_extensible": true
     },
     "MTRActivatedCarbonFilterMonitoringDegradationDirection": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRActivatedCarbonFilterMonitoringDegradationDirectionUp",
@@ -511394,7 +511394,7 @@
       "is_extensible": true
     },
     "MTRActivatedCarbonFilterMonitoringFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRActivatedCarbonFilterMonitoringFeatureCondition",
@@ -511418,7 +511418,7 @@
       "is_extensible": true
     },
     "MTRActivatedCarbonFilterMonitoringProductIdentifierType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRActivatedCarbonFilterMonitoringProductIdentifierTypeUPC",
@@ -511451,7 +511451,7 @@
       "is_extensible": true
     },
     "MTRAdministratorCommissioningCommissioningWindowStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRAdministratorCommissioningCommissioningWindowStatusWindowNotOpen",
@@ -511474,7 +511474,7 @@
       "is_extensible": true
     },
     "MTRAdministratorCommissioningFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRAdministratorCommissioningFeatureBasic",
@@ -511488,7 +511488,7 @@
       "is_extensible": true
     },
     "MTRAdministratorCommissioningStatusCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRAdministratorCommissioningStatusCodeBusy",
@@ -511511,7 +511511,7 @@
       "is_extensible": true
     },
     "MTRAirQuality": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRAirQualityUnknown",
@@ -511554,7 +511554,7 @@
       "is_extensible": true
     },
     "MTRAirQualityFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRAirQualityFeatureFair",
@@ -511583,7 +511583,7 @@
       "is_extensible": true
     },
     "MTRAppleLockClusterFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRAppleLockClusterFeatureDraftAliroProvisioning",
@@ -511608,7 +511608,7 @@
       "is_extensible": true
     },
     "MTRAppleLockClusterIntentDetectionBitmask": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRAppleLockClusterIntentDetectionBitmaskFL",
@@ -511661,7 +511661,7 @@
       "is_extensible": true
     },
     "MTRApplicationBasicApplicationStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRApplicationBasicApplicationStatusStopped",
@@ -511689,7 +511689,7 @@
       "is_extensible": true
     },
     "MTRApplicationLauncherFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRApplicationLauncherFeatureApplicationPlatform",
@@ -511703,7 +511703,7 @@
       "is_extensible": true
     },
     "MTRApplicationLauncherStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRApplicationLauncherStatusSuccess",
@@ -511741,7 +511741,7 @@
       "is_extensible": true
     },
     "MTRAttributeIDType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRClusterGlobalAttributeGeneratedCommandListID",
@@ -528331,7 +528331,7 @@
       "is_extensible": true
     },
     "MTRAudioOutputFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRAudioOutputFeatureNameUpdates",
@@ -528345,7 +528345,7 @@
       "is_extensible": true
     },
     "MTRAudioOutputOutputType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRAudioOutputOutputTypeHDMI",
@@ -528393,7 +528393,7 @@
       "is_extensible": true
     },
     "MTRBallastConfigurationBallastStatusBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRBallastConfigurationBallastStatusBitmapBallastNonOperational",
@@ -528418,7 +528418,7 @@
       "is_extensible": true
     },
     "MTRBallastConfigurationLampAlarmModeBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRBallastConfigurationLampAlarmModeBitmapLampBurnHours",
@@ -528436,7 +528436,7 @@
       "is_extensible": true
     },
     "MTRBasicInformationColor": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRBasicInformationColorBlack",
@@ -528549,7 +528549,7 @@
       "is_extensible": true
     },
     "MTRBasicInformationProductFinish": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRBasicInformationProductFinishOther",
@@ -528587,7 +528587,7 @@
       "is_extensible": true
     },
     "MTRBooleanStateConfigurationAlarmModeBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRBooleanStateConfigurationAlarmModeBitmapVisual",
@@ -528606,7 +528606,7 @@
       "is_extensible": true
     },
     "MTRBooleanStateConfigurationFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRBooleanStateConfigurationFeatureVisual",
@@ -528635,7 +528635,7 @@
       "is_extensible": true
     },
     "MTRBooleanStateConfigurationSensorFaultBitmap": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRBooleanStateConfigurationSensorFaultBitmapGeneralFault",
@@ -528649,7 +528649,7 @@
       "is_extensible": true
     },
     "MTRBridgedDeviceBasicInformationColor": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRBridgedDeviceBasicInformationColorBlack",
@@ -528762,7 +528762,7 @@
       "is_extensible": true
     },
     "MTRBridgedDeviceBasicInformationFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRBridgedDeviceBasicInformationFeatureBridgedICDSupport",
@@ -528776,7 +528776,7 @@
       "is_extensible": true
     },
     "MTRBridgedDeviceBasicInformationProductFinish": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRBridgedDeviceBasicInformationProductFinishOther",
@@ -528814,7 +528814,7 @@
       "is_extensible": true
     },
     "MTRCameraAVSettingsUserLevelManagementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRCameraAVSettingsUserLevelManagementFeatureDigitalPTZ",
@@ -528860,7 +528860,7 @@
       "is_extensible": true
     },
     "MTRCameraAVSettingsUserLevelManagementPhysicalMovement": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCameraAVSettingsUserLevelManagementPhysicalMovementIdle",
@@ -528884,7 +528884,7 @@
       "is_extensible": true
     },
     "MTRCameraAVStreamManagementAudioCodec": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCameraAVStreamManagementAudioCodecOPUS",
@@ -528908,7 +528908,7 @@
       "is_extensible": true
     },
     "MTRCameraAVStreamManagementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRCameraAVStreamManagementFeatureAudio",
@@ -528996,7 +528996,7 @@
       "is_extensible": true
     },
     "MTRCameraAVStreamManagementImageCodec": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCameraAVStreamManagementImageCodecJPEG",
@@ -529013,7 +529013,7 @@
       "is_extensible": true
     },
     "MTRCameraAVStreamManagementTriStateAuto": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCameraAVStreamManagementTriStateAutoOff",
@@ -529044,7 +529044,7 @@
       "is_extensible": true
     },
     "MTRCameraAVStreamManagementTwoWayTalkSupportType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCameraAVStreamManagementTwoWayTalkSupportTypeNotSupported",
@@ -529075,7 +529075,7 @@
       "is_extensible": true
     },
     "MTRCameraAVStreamManagementVideoCodec": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCameraAVStreamManagementVideoCodecH264",
@@ -529113,7 +529113,7 @@
       "is_extensible": true
     },
     "MTRCarbonDioxideConcentrationMeasurementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRCarbonDioxideConcentrationMeasurementFeatureNumericMeasurement",
@@ -529152,7 +529152,7 @@
       "is_extensible": true
     },
     "MTRCarbonDioxideConcentrationMeasurementLevelValue": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCarbonDioxideConcentrationMeasurementLevelValueUnknown",
@@ -529185,7 +529185,7 @@
       "is_extensible": true
     },
     "MTRCarbonDioxideConcentrationMeasurementMeasurementMedium": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCarbonDioxideConcentrationMeasurementMeasurementMediumAir",
@@ -529208,7 +529208,7 @@
       "is_extensible": true
     },
     "MTRCarbonDioxideConcentrationMeasurementMeasurementUnit": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCarbonDioxideConcentrationMeasurementMeasurementUnitPPM",
@@ -529256,7 +529256,7 @@
       "is_extensible": true
     },
     "MTRCarbonMonoxideConcentrationMeasurementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRCarbonMonoxideConcentrationMeasurementFeatureNumericMeasurement",
@@ -529295,7 +529295,7 @@
       "is_extensible": true
     },
     "MTRCarbonMonoxideConcentrationMeasurementLevelValue": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCarbonMonoxideConcentrationMeasurementLevelValueUnknown",
@@ -529328,7 +529328,7 @@
       "is_extensible": true
     },
     "MTRCarbonMonoxideConcentrationMeasurementMeasurementMedium": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCarbonMonoxideConcentrationMeasurementMeasurementMediumAir",
@@ -529351,7 +529351,7 @@
       "is_extensible": true
     },
     "MTRCarbonMonoxideConcentrationMeasurementMeasurementUnit": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCarbonMonoxideConcentrationMeasurementMeasurementUnitPPM",
@@ -529399,7 +529399,7 @@
       "is_extensible": true
     },
     "MTRChannelFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRChannelFeatureChannelList",
@@ -529428,7 +529428,7 @@
       "is_extensible": true
     },
     "MTRChannelLineupInfoType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRChannelLineupInfoTypeMSO",
@@ -529446,7 +529446,7 @@
       "is_extensible": true
     },
     "MTRChannelRecordingFlagBitmap": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRChannelRecordingFlagBitmapScheduled",
@@ -529470,7 +529470,7 @@
       "is_extensible": true
     },
     "MTRChannelStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRChannelStatusSuccess",
@@ -529493,7 +529493,7 @@
       "is_extensible": true
     },
     "MTRChannelType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRChannelTypeSatellite",
@@ -529521,7 +529521,7 @@
       "is_extensible": true
     },
     "MTRClosureControlClosureError": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRClosureControlClosureErrorPhysicallyBlocked",
@@ -529566,7 +529566,7 @@
       "is_extensible": true
     },
     "MTRClosureControlCurrentPosition": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRClosureControlCurrentPositionFullyClosed",
@@ -529618,7 +529618,7 @@
       "is_extensible": true
     },
     "MTRClosureControlFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRClosureControlFeaturePositioning",
@@ -529692,7 +529692,7 @@
       "is_extensible": true
     },
     "MTRClosureControlLatchControlModesBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRClosureControlLatchControlModesBitmapRemoteLatching",
@@ -529717,7 +529717,7 @@
       "is_extensible": true
     },
     "MTRClosureControlMainState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRClosureControlMainStateStopped",
@@ -529783,7 +529783,7 @@
       "is_extensible": true
     },
     "MTRClosureControlTargetPosition": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRClosureControlTargetPositionMoveToFullyClosed",
@@ -529828,7 +529828,7 @@
       "is_extensible": true
     },
     "MTRClosureDimensionClosureUnit": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRClosureDimensionClosureUnitMillimeter",
@@ -529852,7 +529852,7 @@
       "is_extensible": true
     },
     "MTRClosureDimensionFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRClosureDimensionFeaturePositioning",
@@ -529919,7 +529919,7 @@
       "is_extensible": true
     },
     "MTRClosureDimensionLatchControlModesBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRClosureDimensionLatchControlModesBitmapRemoteLatching",
@@ -529944,7 +529944,7 @@
       "is_extensible": true
     },
     "MTRClosureDimensionModulationType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRClosureDimensionModulationTypeSlatsOrientation",
@@ -529989,7 +529989,7 @@
       "is_extensible": true
     },
     "MTRClosureDimensionOverflow": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRClosureDimensionOverflowNoOverflow",
@@ -530076,7 +530076,7 @@
       "is_extensible": true
     },
     "MTRClosureDimensionRotationAxis": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRClosureDimensionRotationAxisLeft",
@@ -530163,7 +530163,7 @@
       "is_extensible": true
     },
     "MTRClosureDimensionStepDirection": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRClosureDimensionStepDirectionDecrease",
@@ -530187,7 +530187,7 @@
       "is_extensible": true
     },
     "MTRClosureDimensionTranslationDirection": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRClosureDimensionTranslationDirectionDownward",
@@ -530281,7 +530281,7 @@
       "is_extensible": true
     },
     "MTRClusterIDType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRClusterIdentifyID",
@@ -531397,7 +531397,7 @@
       "is_extensible": true
     },
     "MTRColorControlColorCapabilities": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRColorControlColorCapabilitiesHueSaturationSupported",
@@ -531431,7 +531431,7 @@
       "is_extensible": true
     },
     "MTRColorControlColorCapabilitiesBitmap": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRColorControlColorCapabilitiesBitmapHueSaturation",
@@ -531465,7 +531465,7 @@
       "is_extensible": true
     },
     "MTRColorControlColorLoopAction": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlColorLoopActionDeactivate",
@@ -531488,7 +531488,7 @@
       "is_extensible": true
     },
     "MTRColorControlColorLoopDirection": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlColorLoopDirectionDecrement",
@@ -531516,7 +531516,7 @@
       "is_extensible": true
     },
     "MTRColorControlColorLoopUpdateFlags": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlColorLoopUpdateFlagsUpdateAction",
@@ -531545,7 +531545,7 @@
       "is_extensible": true
     },
     "MTRColorControlColorMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlColorModeCurrentHueAndCurrentSaturation",
@@ -531573,7 +531573,7 @@
       "is_extensible": true
     },
     "MTRColorControlDirection": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlDirectionShortest",
@@ -531601,7 +531601,7 @@
       "is_extensible": true
     },
     "MTRColorControlDriftCompensation": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlDriftCompensationNone",
@@ -531634,7 +531634,7 @@
       "is_extensible": true
     },
     "MTRColorControlEnhancedColorMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlEnhancedColorModeCurrentHueAndCurrentSaturation",
@@ -531662,7 +531662,7 @@
       "is_extensible": true
     },
     "MTRColorControlFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRColorControlFeatureHueAndSaturation",
@@ -531696,7 +531696,7 @@
       "is_extensible": true
     },
     "MTRColorControlHueDirection": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlHueDirectionShortestDistance",
@@ -531724,7 +531724,7 @@
       "is_extensible": true
     },
     "MTRColorControlHueMoveMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlHueMoveModeStop",
@@ -531747,7 +531747,7 @@
       "is_extensible": true
     },
     "MTRColorControlHueStepMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlHueStepModeUp",
@@ -531765,7 +531765,7 @@
       "is_extensible": true
     },
     "MTRColorControlMoveMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlMoveModeStop",
@@ -531788,7 +531788,7 @@
       "is_extensible": true
     },
     "MTRColorControlOptionsBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlOptionsBitmapExecuteIfOff",
@@ -531802,7 +531802,7 @@
       "is_extensible": true
     },
     "MTRColorControlSaturationMoveMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlSaturationMoveModeStop",
@@ -531825,7 +531825,7 @@
       "is_extensible": true
     },
     "MTRColorControlSaturationStepMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlSaturationStepModeUp",
@@ -531843,7 +531843,7 @@
       "is_extensible": true
     },
     "MTRColorControlStepMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlStepModeUp",
@@ -531861,7 +531861,7 @@
       "is_extensible": true
     },
     "MTRColorControlUpdateFlagsBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRColorControlUpdateFlagsBitmapUpdateAction",
@@ -531890,7 +531890,7 @@
       "is_extensible": true
     },
     "MTRCommandIDType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRClusterIdentifyCommandIdentifyID",
@@ -535970,7 +535970,7 @@
       "is_extensible": true
     },
     "MTRCommissionerControlSupportedDeviceCategoryBitmap": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRCommissionerControlSupportedDeviceCategoryBitmapFabricSynchronization",
@@ -536040,7 +536040,7 @@
       "is_extensible": true
     },
     "MTRCommodityMeteringMeasurementType": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRCommodityMeteringMeasurementTypeUnspecified",
@@ -536169,7 +536169,7 @@
       "is_extensible": true
     },
     "MTRCommodityPriceDetailBitmap": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRCommodityPriceDetailBitmapDescription",
@@ -536194,7 +536194,7 @@
       "is_extensible": true
     },
     "MTRCommodityPriceFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRCommodityPriceFeatureForecasting",
@@ -536212,7 +536212,7 @@
       "is_extensible": true
     },
     "MTRCommodityTariffAuxiliaryLoadSetting": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCommodityTariffAuxiliaryLoadSettingOff",
@@ -536243,7 +536243,7 @@
       "is_extensible": true
     },
     "MTRCommodityTariffBlockMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCommodityTariffBlockModeNoBlock",
@@ -536274,7 +536274,7 @@
       "is_extensible": true
     },
     "MTRCommodityTariffDayEntryRandomizationType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCommodityTariffDayEntryRandomizationTypeNone",
@@ -536319,7 +536319,7 @@
       "is_extensible": true
     },
     "MTRCommodityTariffDayPatternDayOfWeekBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCommodityTariffDayPatternDayOfWeekBitmapSunday",
@@ -536379,7 +536379,7 @@
       "is_extensible": true
     },
     "MTRCommodityTariffDayType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCommodityTariffDayTypeStandard",
@@ -536417,7 +536417,7 @@
       "is_extensible": true
     },
     "MTRCommodityTariffFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRCommodityTariffFeaturePricing",
@@ -536470,7 +536470,7 @@
       "is_extensible": true
     },
     "MTRCommodityTariffPeakPeriodSeverity": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRCommodityTariffPeakPeriodSeverityUnused",
@@ -536508,7 +536508,7 @@
       "is_extensible": true
     },
     "MTRContentAppObserverStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRContentAppObserverStatusSuccess",
@@ -536526,7 +536526,7 @@
       "is_extensible": true
     },
     "MTRContentControlDayOfWeekBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRContentControlDayOfWeekBitmapSunday",
@@ -536586,7 +536586,7 @@
       "is_extensible": true
     },
     "MTRContentControlFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRContentControlFeatureScreenTime",
@@ -536653,7 +536653,7 @@
       "is_extensible": true
     },
     "MTRContentControlStatusCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRContentControlStatusCodeInvalidPINCode",
@@ -536733,7 +536733,7 @@
       "is_extensible": true
     },
     "MTRContentLauncherCharacteristic": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRContentLauncherCharacteristicForcedSubtitles",
@@ -536869,7 +536869,7 @@
       "is_extensible": true
     },
     "MTRContentLauncherContentLaunchStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRContentLauncherContentLaunchStatusSuccess",
@@ -536892,7 +536892,7 @@
       "is_extensible": true
     },
     "MTRContentLauncherFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRContentLauncherFeatureContentSearch",
@@ -536926,7 +536926,7 @@
       "is_extensible": true
     },
     "MTRContentLauncherMetricType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRContentLauncherMetricTypePixels",
@@ -536954,7 +536954,7 @@
       "is_extensible": true
     },
     "MTRContentLauncherParameter": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRContentLauncherParameterActor",
@@ -537047,7 +537047,7 @@
       "is_extensible": true
     },
     "MTRContentLauncherStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRContentLauncherStatusSuccess",
@@ -537080,7 +537080,7 @@
       "is_extensible": true
     },
     "MTRContentLauncherSupportedProtocolsBitmap": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRContentLauncherSupportedProtocolsBitmapDASH",
@@ -537099,7 +537099,7 @@
       "is_extensible": true
     },
     "MTRContentLauncherSupportedStreamingProtocol": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRContentLauncherSupportedStreamingProtocolDASH",
@@ -537118,7 +537118,7 @@
       "is_extensible": true
     },
     "MTRDataTypeAreaTypeTag": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDataTypeAreaTypeTagAisle",
@@ -537779,7 +537779,7 @@
       "is_extensible": true
     },
     "MTRDataTypeAtomicRequestTypeEnum": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDataTypeAtomicRequestTypeEnumBeginWrite",
@@ -537802,7 +537802,7 @@
       "is_extensible": true
     },
     "MTRDataTypeLandmarkTag": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDataTypeLandmarkTagAirConditioner",
@@ -538065,7 +538065,7 @@
       "is_extensible": true
     },
     "MTRDataTypeLocationTag": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDataTypeLocationTagIndoor",
@@ -538103,7 +538103,7 @@
       "is_extensible": true
     },
     "MTRDataTypeMeasurementTypeEnum": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRDataTypeMeasurementTypeEnumUnspecified",
@@ -538239,7 +538239,7 @@
       "is_extensible": true
     },
     "MTRDataTypePositionTag": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDataTypePositionTagLeft",
@@ -538282,7 +538282,7 @@
       "is_extensible": true
     },
     "MTRDataTypePowerThresholdSourceEnum": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDataTypePowerThresholdSourceEnumContract",
@@ -538313,7 +538313,7 @@
       "is_extensible": true
     },
     "MTRDataTypeRelativePositionTag": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDataTypeRelativePositionTagUnder",
@@ -538356,7 +538356,7 @@
       "is_extensible": true
     },
     "MTRDataTypeStreamUsageEnum": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDataTypeStreamUsageEnumInternal",
@@ -538394,7 +538394,7 @@
       "is_extensible": true
     },
     "MTRDataTypeTariffPriceTypeEnum": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDataTypeTariffPriceTypeEnumStandard",
@@ -538439,7 +538439,7 @@
       "is_extensible": true
     },
     "MTRDataTypeTariffUnitEnum": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDataTypeTariffUnitEnumKWh",
@@ -538463,7 +538463,7 @@
       "is_extensible": true
     },
     "MTRDataTypeTestGlobalEnum": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDataTypeTestGlobalEnumSomeValue",
@@ -538494,7 +538494,7 @@
       "is_extensible": true
     },
     "MTRDataTypeThreeLevelAutoEnum": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDataTypeThreeLevelAutoEnumAuto",
@@ -538532,7 +538532,7 @@
       "is_extensible": true
     },
     "MTRDataTypeWebRTCEndReasonEnum": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDataTypeWebRTCEndReasonEnumICEFailed",
@@ -538633,7 +538633,7 @@
       "is_extensible": true
     },
     "MTRDescriptorFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRDescriptorFeatureTagList",
@@ -538651,7 +538651,7 @@
       "is_extensible": true
     },
     "MTRDeviceEnergyManagementAdjustmentCause": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDeviceEnergyManagementAdjustmentCauseLocalOptimization",
@@ -538669,7 +538669,7 @@
       "is_extensible": true
     },
     "MTRDeviceEnergyManagementCause": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDeviceEnergyManagementCauseNormalCompletion",
@@ -538702,7 +538702,7 @@
       "is_extensible": true
     },
     "MTRDeviceEnergyManagementCostType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDeviceEnergyManagementCostTypeFinancial",
@@ -538730,7 +538730,7 @@
       "is_extensible": true
     },
     "MTRDeviceEnergyManagementESAState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDeviceEnergyManagementESAStateOffline",
@@ -538763,7 +538763,7 @@
       "is_extensible": true
     },
     "MTRDeviceEnergyManagementESAType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDeviceEnergyManagementESATypeEVSE",
@@ -538846,7 +538846,7 @@
       "is_extensible": true
     },
     "MTRDeviceEnergyManagementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRDeviceEnergyManagementFeaturePowerAdjustment",
@@ -538890,7 +538890,7 @@
       "is_extensible": true
     },
     "MTRDeviceEnergyManagementForecastUpdateReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDeviceEnergyManagementForecastUpdateReasonInternalOptimization",
@@ -538913,7 +538913,7 @@
       "is_extensible": true
     },
     "MTRDeviceEnergyManagementModeModeTag": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRDeviceEnergyManagementModeModeTagAuto",
@@ -538991,7 +538991,7 @@
       "is_extensible": true
     },
     "MTRDeviceEnergyManagementOptOutState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDeviceEnergyManagementOptOutStateNoOptOut",
@@ -539019,7 +539019,7 @@
       "is_extensible": true
     },
     "MTRDeviceEnergyManagementPowerAdjustReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDeviceEnergyManagementPowerAdjustReasonNoAdjustment",
@@ -539065,7 +539065,7 @@
       "is_extensible": true
     },
     "MTRDeviceTypeIDType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRDeviceTypeIDTypeDoorLockID",
@@ -539588,7 +539588,7 @@
       "is_extensible": true
     },
     "MTRDiagnosticLogsIntent": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDiagnosticLogsIntentEndUserSupport",
@@ -539611,7 +539611,7 @@
       "is_extensible": true
     },
     "MTRDiagnosticLogsLogsIntent": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDiagnosticLogsLogsIntentEndUserSupport",
@@ -539634,7 +539634,7 @@
       "is_extensible": true
     },
     "MTRDiagnosticLogsLogsStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDiagnosticLogsLogsStatusSuccess",
@@ -539667,7 +539667,7 @@
       "is_extensible": true
     },
     "MTRDiagnosticLogsLogsTransferProtocol": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDiagnosticLogsLogsTransferProtocolResponsePayload",
@@ -539685,7 +539685,7 @@
       "is_extensible": true
     },
     "MTRDiagnosticLogsStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDiagnosticLogsStatusSuccess",
@@ -539718,7 +539718,7 @@
       "is_extensible": true
     },
     "MTRDiagnosticLogsTransferProtocol": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDiagnosticLogsTransferProtocolResponsePayload",
@@ -539782,7 +539782,7 @@
       "is_extensible": true
     },
     "MTRDishwasherAlarmAlarmBitmap": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRDishwasherAlarmAlarmBitmapInflowError",
@@ -539831,7 +539831,7 @@
       "is_extensible": true
     },
     "MTRDishwasherAlarmFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRDishwasherAlarmFeatureReset",
@@ -539845,7 +539845,7 @@
       "is_extensible": true
     },
     "MTRDishwasherModeModeTag": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRDishwasherModeModeTagAuto",
@@ -539918,7 +539918,7 @@
       "is_extensible": true
     },
     "MTRDoorLockAlarmCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockAlarmCodeLockJammed",
@@ -539966,7 +539966,7 @@
       "is_extensible": true
     },
     "MTRDoorLockAppleAliroCredentialType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockAppleAliroCredentialTypeAliroCredentialIssuerKey",
@@ -539997,7 +539997,7 @@
       "is_extensible": true
     },
     "MTRDoorLockAppleAliroOperationSource": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockAppleAliroOperationSourceRemote",
@@ -540021,7 +540021,7 @@
       "is_extensible": true
     },
     "MTRDoorLockCredentialRule": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockCredentialRuleSingle",
@@ -540044,7 +540044,7 @@
       "is_extensible": true
     },
     "MTRDoorLockCredentialType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockCredentialTypeProgrammingPIN",
@@ -540097,7 +540097,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDataOperationType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDataOperationTypeAdd",
@@ -540120,7 +540120,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDayOfWeek": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDayOfWeekSunday",
@@ -540164,7 +540164,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDaysMaskMap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDaysMaskMapSunday",
@@ -540208,7 +540208,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlAlarmCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlAlarmCodeLockJammed",
@@ -540256,7 +540256,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlCredentialRule": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlCredentialRuleSingle",
@@ -540274,7 +540274,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlCredentialRuleMask": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlCredentialRuleMaskSingle",
@@ -540298,7 +540298,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlCredentialRulesSupport": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlCredentialRulesSupportSingle",
@@ -540322,7 +540322,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlCredentialType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlCredentialTypeProgrammingPIN",
@@ -540360,7 +540360,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlDataOperationType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlDataOperationTypeAdd",
@@ -540383,7 +540383,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlDaysMaskMap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlDaysMaskMapSunday",
@@ -540427,7 +540427,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlDefaultConfigurationRegister": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRDoorLockDlDefaultConfigurationRegisterEnableLocalProgrammingEnabled",
@@ -540466,7 +540466,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlDoorState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlDoorStateDoorOpen",
@@ -540504,7 +540504,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlKeypadOperationEventMask": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRDoorLockDlKeypadOperationEventMaskUnknown",
@@ -540553,7 +540553,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlKeypadProgrammingEventMask": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRDoorLockDlKeypadProgrammingEventMaskUnknown",
@@ -540587,7 +540587,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlLocalProgrammingFeatures": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlLocalProgrammingFeaturesAddUsersCredentialsSchedulesLocally",
@@ -540616,7 +540616,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlLockDataType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlLockDataTypeUnspecified",
@@ -540669,7 +540669,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlLockOperationType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlLockOperationTypeLock",
@@ -540697,7 +540697,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlLockState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlLockStateNotFullyLocked",
@@ -540725,7 +540725,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlLockType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlLockTypeDeadBolt",
@@ -540793,7 +540793,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlManualOperationEventMask": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRDoorLockDlManualOperationEventMaskUnknown",
@@ -540857,7 +540857,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlOperatingMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlOperatingModeNormal",
@@ -540890,7 +540890,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlOperationError": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlOperationErrorUnspecified",
@@ -540923,7 +540923,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlOperationSource": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlOperationSourceUnspecified",
@@ -540981,7 +540981,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlRFIDOperationEventMask": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRDoorLockDlRFIDOperationEventMaskUnknown",
@@ -541025,7 +541025,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlRFIDProgrammingEventMask": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRDoorLockDlRFIDProgrammingEventMaskUnknown",
@@ -541049,7 +541049,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlRemoteOperationEventMask": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRDoorLockDlRemoteOperationEventMaskUnknown",
@@ -541093,7 +541093,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlRemoteProgrammingEventMask": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRDoorLockDlRemoteProgrammingEventMaskUnknown",
@@ -541137,7 +541137,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlStatusSuccess",
@@ -541180,7 +541180,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlSupportedOperatingModes": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRDoorLockDlSupportedOperatingModesNormal",
@@ -541214,7 +541214,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlUserStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlUserStatusAvailable",
@@ -541237,7 +541237,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDlUserType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDlUserTypeUnrestrictedUser",
@@ -541295,7 +541295,7 @@
       "is_extensible": true
     },
     "MTRDoorLockDoorState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockDoorStateDoorOpen",
@@ -541333,7 +541333,7 @@
       "is_extensible": true
     },
     "MTRDoorLockFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRDoorLockFeaturePINCredential",
@@ -541452,7 +541452,7 @@
       "is_extensible": true
     },
     "MTRDoorLockLockDataType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockLockDataTypeUnspecified",
@@ -541530,7 +541530,7 @@
       "is_extensible": true
     },
     "MTRDoorLockLockOperationType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockLockOperationTypeLock",
@@ -541563,7 +541563,7 @@
       "is_extensible": true
     },
     "MTRDoorLockOperatingMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockOperatingModeNormal",
@@ -541596,7 +541596,7 @@
       "is_extensible": true
     },
     "MTRDoorLockOperationError": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockOperationErrorUnspecified",
@@ -541629,7 +541629,7 @@
       "is_extensible": true
     },
     "MTRDoorLockOperationEventCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockOperationEventCodeUnknownOrMfgSpecific",
@@ -541712,7 +541712,7 @@
       "is_extensible": true
     },
     "MTRDoorLockOperationSource": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockOperationSourceUnspecified",
@@ -541775,7 +541775,7 @@
       "is_extensible": true
     },
     "MTRDoorLockProgrammingEventCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockProgrammingEventCodeUnknownOrMfgSpecific",
@@ -541818,7 +541818,7 @@
       "is_extensible": true
     },
     "MTRDoorLockSetPinOrIdStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockSetPinOrIdStatusSuccess",
@@ -541846,7 +541846,7 @@
       "is_extensible": true
     },
     "MTRDoorLockUserStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockUserStatusAvailable",
@@ -541874,7 +541874,7 @@
       "is_extensible": true
     },
     "MTRDoorLockUserType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRDoorLockUserTypeUnrestrictedUser",
@@ -541947,7 +541947,7 @@
       "is_extensible": true
     },
     "MTRElectricalEnergyMeasurementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRElectricalEnergyMeasurementFeatureImportedEnergy",
@@ -541990,7 +541990,7 @@
       "is_extensible": true
     },
     "MTRElectricalEnergyMeasurementMeasurementType": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRElectricalEnergyMeasurementMeasurementTypeUnspecified",
@@ -542087,7 +542087,7 @@
       "is_extensible": true
     },
     "MTRElectricalGridConditionsFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRElectricalGridConditionsFeatureForecasting",
@@ -542105,7 +542105,7 @@
       "is_extensible": true
     },
     "MTRElectricalGridConditionsThreeLevel": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRElectricalGridConditionsThreeLevelLow",
@@ -542136,7 +542136,7 @@
       "is_extensible": true
     },
     "MTRElectricalPowerMeasurementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRElectricalPowerMeasurementFeatureDirectCurrent",
@@ -542170,7 +542170,7 @@
       "is_extensible": true
     },
     "MTRElectricalPowerMeasurementMeasurementType": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRElectricalPowerMeasurementMeasurementTypeUnspecified",
@@ -542267,7 +542267,7 @@
       "is_extensible": true
     },
     "MTRElectricalPowerMeasurementPowerMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRElectricalPowerMeasurementPowerModeUnknown",
@@ -542290,7 +542290,7 @@
       "is_extensible": true
     },
     "MTREnergyEVSEEnergyTransferStoppedReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTREnergyEVSEEnergyTransferStoppedReasonEVStopped",
@@ -542313,7 +542313,7 @@
       "is_extensible": true
     },
     "MTREnergyEVSEFaultState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTREnergyEVSEFaultStateNoError",
@@ -542406,7 +542406,7 @@
       "is_extensible": true
     },
     "MTREnergyEVSEFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTREnergyEVSEFeatureChargingPreferences",
@@ -542446,7 +542446,7 @@
       "is_extensible": true
     },
     "MTREnergyEVSEModeModeTag": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTREnergyEVSEModeModeTagAuto",
@@ -542524,7 +542524,7 @@
       "is_extensible": true
     },
     "MTREnergyEVSEState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTREnergyEVSEStateNotPluggedIn",
@@ -542569,7 +542569,7 @@
       "is_extensible": true
     },
     "MTREnergyEVSESupplyState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTREnergyEVSESupplyStateDisabled",
@@ -542611,7 +542611,7 @@
       "is_extensible": true
     },
     "MTREnergyEVSETargetDayOfWeekBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTREnergyEVSETargetDayOfWeekBitmapSunday",
@@ -542655,7 +542655,7 @@
       "is_extensible": true
     },
     "MTREnergyPreferenceEnergyPriority": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTREnergyPreferenceEnergyPriorityComfort",
@@ -542693,7 +542693,7 @@
       "is_extensible": true
     },
     "MTREnergyPreferenceFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTREnergyPreferenceFeatureEnergyBalance",
@@ -542830,7 +542830,7 @@
       "sdk_file": "Matter/MTRError.h"
     },
     "MTREthernetNetworkDiagnosticsFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTREthernetNetworkDiagnosticsFeaturePacketCounts",
@@ -542849,7 +542849,7 @@
       "is_extensible": true
     },
     "MTREthernetNetworkDiagnosticsPHYRate": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTREthernetNetworkDiagnosticsPHYRateRate10M",
@@ -542907,7 +542907,7 @@
       "is_extensible": true
     },
     "MTREthernetNetworkDiagnosticsPHYRateType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTREthernetNetworkDiagnosticsPHYRateType10M",
@@ -542965,7 +542965,7 @@
       "is_extensible": true
     },
     "MTREventIDType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRClusterAccessControlEventAccessControlEntryChangedID",
@@ -544046,7 +544046,7 @@
       "is_extensible": true
     },
     "MTRFanControlAirflowDirection": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFanControlAirflowDirectionForward",
@@ -544064,7 +544064,7 @@
       "is_extensible": true
     },
     "MTRFanControlFanMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFanControlFanModeOff",
@@ -544107,7 +544107,7 @@
       "is_extensible": true
     },
     "MTRFanControlFanModeSequence": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFanControlFanModeSequenceOffLowMedHigh",
@@ -544155,7 +544155,7 @@
       "is_extensible": true
     },
     "MTRFanControlFanModeSequenceType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFanControlFanModeSequenceTypeOffLowMedHigh",
@@ -544193,7 +544193,7 @@
       "is_extensible": true
     },
     "MTRFanControlFanModeType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFanControlFanModeTypeOff",
@@ -544236,7 +544236,7 @@
       "is_extensible": true
     },
     "MTRFanControlFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRFanControlFeatureMultiSpeed",
@@ -544275,7 +544275,7 @@
       "is_extensible": true
     },
     "MTRFanControlRockBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFanControlRockBitmapRockLeftRight",
@@ -544299,7 +544299,7 @@
       "is_extensible": true
     },
     "MTRFanControlRockSupportMask": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFanControlRockSupportMaskRockLeftRight",
@@ -544323,7 +544323,7 @@
       "is_extensible": true
     },
     "MTRFanControlStepDirection": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFanControlStepDirectionIncrease",
@@ -544341,7 +544341,7 @@
       "is_extensible": true
     },
     "MTRFanControlWindBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFanControlWindBitmapSleepWind",
@@ -544360,7 +544360,7 @@
       "is_extensible": true
     },
     "MTRFanControlWindSettingMask": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFanControlWindSettingMaskSleepWind",
@@ -544379,7 +544379,7 @@
       "is_extensible": true
     },
     "MTRFanControlWindSupportMask": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFanControlWindSupportMaskSleepWind",
@@ -544398,7 +544398,7 @@
       "is_extensible": true
     },
     "MTRFormaldehydeConcentrationMeasurementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRFormaldehydeConcentrationMeasurementFeatureNumericMeasurement",
@@ -544437,7 +544437,7 @@
       "is_extensible": true
     },
     "MTRFormaldehydeConcentrationMeasurementLevelValue": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFormaldehydeConcentrationMeasurementLevelValueUnknown",
@@ -544470,7 +544470,7 @@
       "is_extensible": true
     },
     "MTRFormaldehydeConcentrationMeasurementMeasurementMedium": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFormaldehydeConcentrationMeasurementMeasurementMediumAir",
@@ -544493,7 +544493,7 @@
       "is_extensible": true
     },
     "MTRFormaldehydeConcentrationMeasurementMeasurementUnit": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRFormaldehydeConcentrationMeasurementMeasurementUnitPPM",
@@ -544541,7 +544541,7 @@
       "is_extensible": true
     },
     "MTRGeneralCommissioningCommissioningError": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGeneralCommissioningCommissioningErrorOK",
@@ -544600,7 +544600,7 @@
       "is_extensible": true
     },
     "MTRGeneralCommissioningFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRGeneralCommissioningFeatureTermsAndConditions",
@@ -544625,7 +544625,7 @@
       "is_extensible": true
     },
     "MTRGeneralCommissioningNetworkRecoveryReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGeneralCommissioningNetworkRecoveryReasonUnspecified",
@@ -544656,7 +544656,7 @@
       "is_extensible": true
     },
     "MTRGeneralCommissioningRegulatoryLocationType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGeneralCommissioningRegulatoryLocationTypeIndoor",
@@ -544679,7 +544679,7 @@
       "is_extensible": true
     },
     "MTRGeneralDiagnosticsBootReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGeneralDiagnosticsBootReasonUnspecified",
@@ -544722,7 +544722,7 @@
       "is_extensible": true
     },
     "MTRGeneralDiagnosticsBootReasonType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGeneralDiagnosticsBootReasonTypeUnspecified",
@@ -544765,7 +544765,7 @@
       "is_extensible": true
     },
     "MTRGeneralDiagnosticsFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRGeneralDiagnosticsFeatureDataModelTest",
@@ -544779,7 +544779,7 @@
       "is_extensible": true
     },
     "MTRGeneralDiagnosticsHardwareFault": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGeneralDiagnosticsHardwareFaultUnspecified",
@@ -544842,7 +544842,7 @@
       "is_extensible": true
     },
     "MTRGeneralDiagnosticsHardwareFaultType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGeneralDiagnosticsHardwareFaultTypeUnspecified",
@@ -544905,7 +544905,7 @@
       "is_extensible": true
     },
     "MTRGeneralDiagnosticsInterfaceType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGeneralDiagnosticsInterfaceTypeUnspecified",
@@ -544938,7 +544938,7 @@
       "is_extensible": true
     },
     "MTRGeneralDiagnosticsNetworkFault": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGeneralDiagnosticsNetworkFaultUnspecified",
@@ -544966,7 +544966,7 @@
       "is_extensible": true
     },
     "MTRGeneralDiagnosticsNetworkFaultType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGeneralDiagnosticsNetworkFaultTypeUnspecified",
@@ -544994,7 +544994,7 @@
       "is_extensible": true
     },
     "MTRGeneralDiagnosticsRadioFault": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGeneralDiagnosticsRadioFaultUnspecified",
@@ -545037,7 +545037,7 @@
       "is_extensible": true
     },
     "MTRGeneralDiagnosticsRadioFaultType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGeneralDiagnosticsRadioFaultTypeUnspecified",
@@ -545080,7 +545080,7 @@
       "is_extensible": true
     },
     "MTRGroupKeyManagementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRGroupKeyManagementFeatureCacheAndSync",
@@ -545098,7 +545098,7 @@
       "is_extensible": true
     },
     "MTRGroupKeyManagementGroupKeySecurityPolicy": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGroupKeyManagementGroupKeySecurityPolicyTrustFirst",
@@ -545116,7 +545116,7 @@
       "is_extensible": true
     },
     "MTRGroupcastFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRGroupcastFeatureListener",
@@ -545141,7 +545141,7 @@
       "is_extensible": true
     },
     "MTRGroupsFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRGroupsFeatureGroupNames",
@@ -545155,7 +545155,7 @@
       "is_extensible": true
     },
     "MTRGroupsGroupClusterFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRGroupsGroupClusterFeatureGroupNames",
@@ -545169,7 +545169,7 @@
       "is_extensible": true
     },
     "MTRGroupsNameSupportBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRGroupsNameSupportBitmapGroupNames",
@@ -545183,7 +545183,7 @@
       "is_extensible": true
     },
     "MTRHEPAFilterMonitoringChangeIndication": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRHEPAFilterMonitoringChangeIndicationOK",
@@ -545206,7 +545206,7 @@
       "is_extensible": true
     },
     "MTRHEPAFilterMonitoringDegradationDirection": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRHEPAFilterMonitoringDegradationDirectionUp",
@@ -545224,7 +545224,7 @@
       "is_extensible": true
     },
     "MTRHEPAFilterMonitoringFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRHEPAFilterMonitoringFeatureCondition",
@@ -545248,7 +545248,7 @@
       "is_extensible": true
     },
     "MTRHEPAFilterMonitoringProductIdentifierType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRHEPAFilterMonitoringProductIdentifierTypeUPC",
@@ -545281,7 +545281,7 @@
       "is_extensible": true
     },
     "MTRICDManagementClientType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRICDManagementClientTypePermanent",
@@ -545299,7 +545299,7 @@
       "is_extensible": true
     },
     "MTRICDManagementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRICDManagementFeatureCheckInProtocolSupport",
@@ -545328,7 +545328,7 @@
       "is_extensible": true
     },
     "MTRICDManagementOperatingMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRICDManagementOperatingModeSIT",
@@ -545346,7 +545346,7 @@
       "is_extensible": true
     },
     "MTRICDManagementUserActiveModeTriggerBitmap": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRICDManagementUserActiveModeTriggerBitmapPowerCycle",
@@ -545440,7 +545440,7 @@
       "is_extensible": true
     },
     "MTRIdentifyEffectIdentifier": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRIdentifyEffectIdentifierBlink",
@@ -545478,7 +545478,7 @@
       "is_extensible": true
     },
     "MTRIdentifyEffectVariant": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRIdentifyEffectVariantDefault",
@@ -545491,7 +545491,7 @@
       "is_extensible": true
     },
     "MTRIdentifyType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRIdentifyTypeNone",
@@ -545539,7 +545539,7 @@
       "is_extensible": true
     },
     "MTRIlluminanceMeasurementLightSensorType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRIlluminanceMeasurementLightSensorTypePhotodiode",
@@ -545718,7 +545718,7 @@
       "sdk_file": "Matter/MTRError.h"
     },
     "MTRJointFabricAdministratorICACResponseStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRJointFabricAdministratorICACResponseStatusOK",
@@ -545749,7 +545749,7 @@
       "is_extensible": true
     },
     "MTRJointFabricAdministratorStatusCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRJointFabricAdministratorStatusCodeBusy",
@@ -545794,7 +545794,7 @@
       "is_extensible": true
     },
     "MTRJointFabricAdministratorTransferAnchorResponseStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRJointFabricAdministratorTransferAnchorResponseStatusOK",
@@ -545825,7 +545825,7 @@
       "is_extensible": true
     },
     "MTRJointFabricDatastoreDatastoreAccessControlEntryAuthMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRJointFabricDatastoreDatastoreAccessControlEntryAuthModePASE",
@@ -545856,7 +545856,7 @@
       "is_extensible": true
     },
     "MTRJointFabricDatastoreDatastoreAccessControlEntryPrivilege": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRJointFabricDatastoreDatastoreAccessControlEntryPrivilegeView",
@@ -545901,7 +545901,7 @@
       "is_extensible": true
     },
     "MTRJointFabricDatastoreDatastoreGroupKeyMulticastPolicy": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRJointFabricDatastoreDatastoreGroupKeyMulticastPolicyPerGroupID",
@@ -545925,7 +545925,7 @@
       "is_extensible": true
     },
     "MTRJointFabricDatastoreDatastoreGroupKeySecurityPolicy": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRJointFabricDatastoreDatastoreGroupKeySecurityPolicyTrustFirst",
@@ -545942,7 +545942,7 @@
       "is_extensible": true
     },
     "MTRJointFabricDatastoreDatastoreState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRJointFabricDatastoreDatastoreStatePending",
@@ -545980,7 +545980,7 @@
       "is_extensible": true
     },
     "MTRKeypadInputCECKeyCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRKeypadInputCECKeyCodeSelect",
@@ -546418,7 +546418,7 @@
       "is_extensible": true
     },
     "MTRKeypadInputCecKeyCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRKeypadInputCecKeyCodeSelect",
@@ -546856,7 +546856,7 @@
       "is_extensible": true
     },
     "MTRKeypadInputFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRKeypadInputFeatureNavigationKeyCodes",
@@ -546880,7 +546880,7 @@
       "is_extensible": true
     },
     "MTRKeypadInputStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRKeypadInputStatusSuccess",
@@ -546903,7 +546903,7 @@
       "is_extensible": true
     },
     "MTRLaundryDryerControlsDrynessLevel": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRLaundryDryerControlsDrynessLevelLow",
@@ -546931,7 +546931,7 @@
       "is_extensible": true
     },
     "MTRLaundryWasherControlsFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRLaundryWasherControlsFeatureSpin",
@@ -546950,7 +546950,7 @@
       "is_extensible": true
     },
     "MTRLaundryWasherControlsNumberOfRinses": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRLaundryWasherControlsNumberOfRinsesNone",
@@ -546978,7 +546978,7 @@
       "is_extensible": true
     },
     "MTRLaundryWasherModeModeTag": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRLaundryWasherModeModeTagAuto",
@@ -547056,7 +547056,7 @@
       "is_extensible": true
     },
     "MTRLevelControlFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRLevelControlFeatureOnOff",
@@ -547080,7 +547080,7 @@
       "is_extensible": true
     },
     "MTRLevelControlMoveMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRLevelControlMoveModeUp",
@@ -547098,7 +547098,7 @@
       "is_extensible": true
     },
     "MTRLevelControlOptions": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRLevelControlOptionsExecuteIfOff",
@@ -547117,7 +547117,7 @@
       "is_extensible": true
     },
     "MTRLevelControlOptionsBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRLevelControlOptionsBitmapExecuteIfOff",
@@ -547136,7 +547136,7 @@
       "is_extensible": true
     },
     "MTRLevelControlStepMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRLevelControlStepModeUp",
@@ -547177,7 +547177,7 @@
       "is_extensible": true
     },
     "MTRMediaInputFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRMediaInputFeatureNameUpdates",
@@ -547191,7 +547191,7 @@
       "is_extensible": true
     },
     "MTRMediaInputInputType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRMediaInputInputTypeInternal",
@@ -547274,7 +547274,7 @@
       "is_extensible": true
     },
     "MTRMediaPlaybackCharacteristic": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRMediaPlaybackCharacteristicForcedSubtitles",
@@ -547372,7 +547372,7 @@
       "is_extensible": true
     },
     "MTRMediaPlaybackFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRMediaPlaybackFeatureAdvancedSeek",
@@ -547406,7 +547406,7 @@
       "is_extensible": true
     },
     "MTRMediaPlaybackPlaybackState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRMediaPlaybackPlaybackStatePlaying",
@@ -547434,7 +547434,7 @@
       "is_extensible": true
     },
     "MTRMediaPlaybackStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRMediaPlaybackStatusSuccess",
@@ -547472,7 +547472,7 @@
       "is_extensible": true
     },
     "MTRMessagesFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRMessagesFeatureReceivedConfirmation",
@@ -547501,7 +547501,7 @@
       "is_extensible": true
     },
     "MTRMessagesFutureMessagePreference": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRMessagesFutureMessagePreferenceAllowed",
@@ -547534,7 +547534,7 @@
       "is_extensible": true
     },
     "MTRMessagesMessageControlBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRMessagesMessageControlBitmapConfirmationRequired",
@@ -547568,7 +547568,7 @@
       "is_extensible": true
     },
     "MTRMessagesMessagePriority": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRMessagesMessagePriorityLow",
@@ -547596,7 +547596,7 @@
       "is_extensible": true
     },
     "MTRMeterIdentificationFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRMeterIdentificationFeaturePowerThreshold",
@@ -547614,7 +547614,7 @@
       "is_extensible": true
     },
     "MTRMeterIdentificationMeterType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRMeterIdentificationMeterTypeUtility",
@@ -547645,7 +547645,7 @@
       "is_extensible": true
     },
     "MTRMicrowaveOvenControlFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRMicrowaveOvenControlFeaturePowerAsNumber",
@@ -547671,7 +547671,7 @@
       "is_extensible": true
     },
     "MTRMicrowaveOvenModeModeTag": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRMicrowaveOvenModeModeTagAuto",
@@ -547739,7 +547739,7 @@
       "is_extensible": true
     },
     "MTRModeSelectFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRModeSelectFeatureOnOff",
@@ -547758,7 +547758,7 @@
       "is_extensible": true
     },
     "MTRNetworkCommissioningFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRNetworkCommissioningFeatureWiFiNetworkInterface",
@@ -547789,7 +547789,7 @@
       "is_extensible": true
     },
     "MTRNetworkCommissioningStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRNetworkCommissioningStatusSuccess",
@@ -547862,7 +547862,7 @@
       "is_extensible": true
     },
     "MTRNetworkCommissioningThreadCapabilitiesBitmap": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRNetworkCommissioningThreadCapabilitiesBitmapIsBorderRouterCapable",
@@ -547896,7 +547896,7 @@
       "is_extensible": true
     },
     "MTRNetworkCommissioningWiFiBand": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRNetworkCommissioningWiFiBand2G4",
@@ -547934,7 +547934,7 @@
       "is_extensible": true
     },
     "MTRNetworkCommissioningWiFiSecurity": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRNetworkCommissioningWiFiSecurityUnencrypted",
@@ -547988,7 +547988,7 @@
       "is_extensible": true
     },
     "MTRNetworkCommissioningWiFiSecurityBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRNetworkCommissioningWiFiSecurityBitmapUnencrypted",
@@ -548029,7 +548029,7 @@
       "is_extensible": true
     },
     "MTRNitrogenDioxideConcentrationMeasurementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRNitrogenDioxideConcentrationMeasurementFeatureNumericMeasurement",
@@ -548068,7 +548068,7 @@
       "is_extensible": true
     },
     "MTRNitrogenDioxideConcentrationMeasurementLevelValue": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRNitrogenDioxideConcentrationMeasurementLevelValueUnknown",
@@ -548101,7 +548101,7 @@
       "is_extensible": true
     },
     "MTRNitrogenDioxideConcentrationMeasurementMeasurementMedium": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRNitrogenDioxideConcentrationMeasurementMeasurementMediumAir",
@@ -548124,7 +548124,7 @@
       "is_extensible": true
     },
     "MTRNitrogenDioxideConcentrationMeasurementMeasurementUnit": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRNitrogenDioxideConcentrationMeasurementMeasurementUnitPPM",
@@ -548240,7 +548240,7 @@
       "is_extensible": true
     },
     "MTROTASoftwareUpdateProviderApplyUpdateAction": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROTASoftwareUpdateProviderApplyUpdateActionProceed",
@@ -548263,7 +548263,7 @@
       "is_extensible": true
     },
     "MTROTASoftwareUpdateProviderDownloadProtocol": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROTASoftwareUpdateProviderDownloadProtocolBDXSynchronous",
@@ -548291,7 +548291,7 @@
       "is_extensible": true
     },
     "MTROTASoftwareUpdateProviderOTAApplyUpdateAction": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROTASoftwareUpdateProviderOTAApplyUpdateActionProceed",
@@ -548314,7 +548314,7 @@
       "is_extensible": true
     },
     "MTROTASoftwareUpdateProviderOTADownloadProtocol": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROTASoftwareUpdateProviderOTADownloadProtocolBDXSynchronous",
@@ -548342,7 +548342,7 @@
       "is_extensible": true
     },
     "MTROTASoftwareUpdateProviderOTAQueryStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROTASoftwareUpdateProviderOTAQueryStatusUpdateAvailable",
@@ -548370,7 +548370,7 @@
       "is_extensible": true
     },
     "MTROTASoftwareUpdateProviderStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROTASoftwareUpdateProviderStatusUpdateAvailable",
@@ -548398,7 +548398,7 @@
       "is_extensible": true
     },
     "MTROTASoftwareUpdateRequestorAnnouncementReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROTASoftwareUpdateRequestorAnnouncementReasonSimpleAnnouncement",
@@ -548421,7 +548421,7 @@
       "is_extensible": true
     },
     "MTROTASoftwareUpdateRequestorChangeReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROTASoftwareUpdateRequestorChangeReasonUnknown",
@@ -548454,7 +548454,7 @@
       "is_extensible": true
     },
     "MTROTASoftwareUpdateRequestorOTAAnnouncementReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROTASoftwareUpdateRequestorOTAAnnouncementReasonSimpleAnnouncement",
@@ -548477,7 +548477,7 @@
       "is_extensible": true
     },
     "MTROTASoftwareUpdateRequestorOTAChangeReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROTASoftwareUpdateRequestorOTAChangeReasonUnknown",
@@ -548510,7 +548510,7 @@
       "is_extensible": true
     },
     "MTROTASoftwareUpdateRequestorOTAUpdateState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROTASoftwareUpdateRequestorOTAUpdateStateUnknown",
@@ -548563,7 +548563,7 @@
       "is_extensible": true
     },
     "MTROTASoftwareUpdateRequestorUpdateState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROTASoftwareUpdateRequestorUpdateStateUnknown",
@@ -548616,7 +548616,7 @@
       "is_extensible": true
     },
     "MTROccupancySensingFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTROccupancySensingFeatureOther",
@@ -548665,7 +548665,7 @@
       "is_extensible": true
     },
     "MTROccupancySensingOccupancyBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROccupancySensingOccupancyBitmapOccupied",
@@ -548679,7 +548679,7 @@
       "is_extensible": true
     },
     "MTROccupancySensingOccupancySensorType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROccupancySensingOccupancySensorTypePIR",
@@ -548707,7 +548707,7 @@
       "is_extensible": true
     },
     "MTROccupancySensingOccupancySensorTypeBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROccupancySensingOccupancySensorTypeBitmapPIR",
@@ -548731,7 +548731,7 @@
       "is_extensible": true
     },
     "MTROnOffControl": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROnOffControlAcceptOnlyWhenOn",
@@ -548745,7 +548745,7 @@
       "is_extensible": true
     },
     "MTROnOffControlBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROnOffControlBitmapAcceptOnlyWhenOn",
@@ -548759,7 +548759,7 @@
       "is_extensible": true
     },
     "MTROnOffDelayedAllOffEffectVariant": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROnOffDelayedAllOffEffectVariantDelayedOffFastFade",
@@ -548792,7 +548792,7 @@
       "is_extensible": true
     },
     "MTROnOffDyingLightEffectVariant": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROnOffDyingLightEffectVariantDyingLightFadeOff",
@@ -548810,7 +548810,7 @@
       "is_extensible": true
     },
     "MTROnOffEffectIdentifier": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROnOffEffectIdentifierDelayedAllOff",
@@ -548828,7 +548828,7 @@
       "is_extensible": true
     },
     "MTROnOffFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTROnOffFeatureLighting",
@@ -548857,7 +548857,7 @@
       "is_extensible": true
     },
     "MTROnOffStartUpOnOff": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROnOffStartUpOnOffOff",
@@ -548908,7 +548908,7 @@
       "is_extensible": true
     },
     "MTROperationalCredentialsCertificateChainType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROperationalCredentialsCertificateChainTypeDACCertificate",
@@ -548926,7 +548926,7 @@
       "is_extensible": true
     },
     "MTROperationalCredentialsNodeOperationalCertStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROperationalCredentialsNodeOperationalCertStatusOK",
@@ -548984,7 +548984,7 @@
       "is_extensible": true
     },
     "MTROperationalCredentialsOperationalCertStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROperationalCredentialsOperationalCertStatusSUCCESS",
@@ -549042,7 +549042,7 @@
       "is_extensible": true
     },
     "MTROperationalState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROperationalStateStopped",
@@ -549070,7 +549070,7 @@
       "is_extensible": true
     },
     "MTROperationalStateErrorState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROperationalStateErrorStateNoError",
@@ -549121,7 +549121,7 @@
       "is_extensible": true
     },
     "MTROtaSoftwareUpdateProviderOTAApplyUpdateAction": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROtaSoftwareUpdateProviderOTAApplyUpdateActionProceed",
@@ -549144,7 +549144,7 @@
       "is_extensible": true
     },
     "MTROtaSoftwareUpdateProviderOTADownloadProtocol": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROtaSoftwareUpdateProviderOTADownloadProtocolBDXSynchronous",
@@ -549172,7 +549172,7 @@
       "is_extensible": true
     },
     "MTROtaSoftwareUpdateProviderOTAQueryStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROtaSoftwareUpdateProviderOTAQueryStatusUpdateAvailable",
@@ -549200,7 +549200,7 @@
       "is_extensible": true
     },
     "MTROtaSoftwareUpdateRequestorOTAAnnouncementReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROtaSoftwareUpdateRequestorOTAAnnouncementReasonSimpleAnnouncement",
@@ -549223,7 +549223,7 @@
       "is_extensible": true
     },
     "MTROtaSoftwareUpdateRequestorOTAChangeReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROtaSoftwareUpdateRequestorOTAChangeReasonUnknown",
@@ -549256,7 +549256,7 @@
       "is_extensible": true
     },
     "MTROtaSoftwareUpdateRequestorOTAUpdateState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROtaSoftwareUpdateRequestorOTAUpdateStateUnknown",
@@ -549309,7 +549309,7 @@
       "is_extensible": true
     },
     "MTROvenCavityOperationalStateErrorState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROvenCavityOperationalStateErrorStateNoError",
@@ -549337,7 +549337,7 @@
       "is_extensible": true
     },
     "MTROvenCavityOperationalStateOperationalState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROvenCavityOperationalStateOperationalStateStopped",
@@ -549365,7 +549365,7 @@
       "is_extensible": true
     },
     "MTROvenModeModeTag": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTROvenModeModeTagAuto",
@@ -549468,7 +549468,7 @@
       "is_extensible": true
     },
     "MTROzoneConcentrationMeasurementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTROzoneConcentrationMeasurementFeatureNumericMeasurement",
@@ -549507,7 +549507,7 @@
       "is_extensible": true
     },
     "MTROzoneConcentrationMeasurementLevelValue": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROzoneConcentrationMeasurementLevelValueUnknown",
@@ -549540,7 +549540,7 @@
       "is_extensible": true
     },
     "MTROzoneConcentrationMeasurementMeasurementMedium": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROzoneConcentrationMeasurementMeasurementMediumAir",
@@ -549563,7 +549563,7 @@
       "is_extensible": true
     },
     "MTROzoneConcentrationMeasurementMeasurementUnit": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTROzoneConcentrationMeasurementMeasurementUnitPPM",
@@ -549611,7 +549611,7 @@
       "is_extensible": true
     },
     "MTRPM10ConcentrationMeasurementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRPM10ConcentrationMeasurementFeatureNumericMeasurement",
@@ -549650,7 +549650,7 @@
       "is_extensible": true
     },
     "MTRPM10ConcentrationMeasurementLevelValue": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPM10ConcentrationMeasurementLevelValueUnknown",
@@ -549683,7 +549683,7 @@
       "is_extensible": true
     },
     "MTRPM10ConcentrationMeasurementMeasurementMedium": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPM10ConcentrationMeasurementMeasurementMediumAir",
@@ -549706,7 +549706,7 @@
       "is_extensible": true
     },
     "MTRPM10ConcentrationMeasurementMeasurementUnit": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPM10ConcentrationMeasurementMeasurementUnitPPM",
@@ -549754,7 +549754,7 @@
       "is_extensible": true
     },
     "MTRPM1ConcentrationMeasurementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRPM1ConcentrationMeasurementFeatureNumericMeasurement",
@@ -549793,7 +549793,7 @@
       "is_extensible": true
     },
     "MTRPM1ConcentrationMeasurementLevelValue": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPM1ConcentrationMeasurementLevelValueUnknown",
@@ -549826,7 +549826,7 @@
       "is_extensible": true
     },
     "MTRPM1ConcentrationMeasurementMeasurementMedium": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPM1ConcentrationMeasurementMeasurementMediumAir",
@@ -549849,7 +549849,7 @@
       "is_extensible": true
     },
     "MTRPM1ConcentrationMeasurementMeasurementUnit": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPM1ConcentrationMeasurementMeasurementUnitPPM",
@@ -549897,7 +549897,7 @@
       "is_extensible": true
     },
     "MTRPM25ConcentrationMeasurementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRPM25ConcentrationMeasurementFeatureNumericMeasurement",
@@ -549936,7 +549936,7 @@
       "is_extensible": true
     },
     "MTRPM25ConcentrationMeasurementLevelValue": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPM25ConcentrationMeasurementLevelValueUnknown",
@@ -549969,7 +549969,7 @@
       "is_extensible": true
     },
     "MTRPM25ConcentrationMeasurementMeasurementMedium": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPM25ConcentrationMeasurementMeasurementMediumAir",
@@ -549992,7 +549992,7 @@
       "is_extensible": true
     },
     "MTRPM25ConcentrationMeasurementMeasurementUnit": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPM25ConcentrationMeasurementMeasurementUnitPPM",
@@ -550068,7 +550068,7 @@
       "is_extensible": true
     },
     "MTRPowerSourceBatApprovedChemistry": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRPowerSourceBatApprovedChemistryUnspecified",
@@ -550241,7 +550241,7 @@
       "is_extensible": true
     },
     "MTRPowerSourceBatChargeFault": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPowerSourceBatChargeFaultUnspecified",
@@ -550309,7 +550309,7 @@
       "is_extensible": true
     },
     "MTRPowerSourceBatChargeLevel": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPowerSourceBatChargeLevelOK",
@@ -550337,7 +550337,7 @@
       "is_extensible": true
     },
     "MTRPowerSourceBatChargeState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPowerSourceBatChargeStateUnknown",
@@ -550365,7 +550365,7 @@
       "is_extensible": true
     },
     "MTRPowerSourceBatCommonDesignation": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRPowerSourceBatCommonDesignationUnspecified",
@@ -550778,7 +550778,7 @@
       "is_extensible": true
     },
     "MTRPowerSourceBatFault": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPowerSourceBatFaultUnspecified",
@@ -550806,7 +550806,7 @@
       "is_extensible": true
     },
     "MTRPowerSourceBatReplaceability": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPowerSourceBatReplaceabilityUnspecified",
@@ -550834,7 +550834,7 @@
       "is_extensible": true
     },
     "MTRPowerSourceFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRPowerSourceFeatureWired",
@@ -550863,7 +550863,7 @@
       "is_extensible": true
     },
     "MTRPowerSourceStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPowerSourceStatusUnspecified",
@@ -550896,7 +550896,7 @@
       "is_extensible": true
     },
     "MTRPowerSourceWiredCurrentType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPowerSourceWiredCurrentTypeAC",
@@ -550914,7 +550914,7 @@
       "is_extensible": true
     },
     "MTRPowerSourceWiredFault": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPowerSourceWiredFaultUnspecified",
@@ -550942,7 +550942,7 @@
       "is_extensible": true
     },
     "MTRPowerTopologyFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRPowerTopologyFeatureNodeTopology",
@@ -550978,7 +550978,7 @@
       "is_extensible": true
     },
     "MTRPressureMeasurementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRPressureMeasurementFeatureExtended",
@@ -550992,7 +550992,7 @@
       "is_extensible": true
     },
     "MTRPressureMeasurementPressureFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRPressureMeasurementPressureFeatureExtended",
@@ -551011,7 +551011,7 @@
       "is_extensible": true
     },
     "MTRPumpConfigurationAndControlControlMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPumpConfigurationAndControlControlModeConstantSpeed",
@@ -551049,7 +551049,7 @@
       "is_extensible": true
     },
     "MTRPumpConfigurationAndControlFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRPumpConfigurationAndControlFeatureConstantPressure",
@@ -551093,7 +551093,7 @@
       "is_extensible": true
     },
     "MTRPumpConfigurationAndControlOperationMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPumpConfigurationAndControlOperationModeNormal",
@@ -551121,7 +551121,7 @@
       "is_extensible": true
     },
     "MTRPumpConfigurationAndControlPumpControlMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPumpConfigurationAndControlPumpControlModeConstantSpeed",
@@ -551159,7 +551159,7 @@
       "is_extensible": true
     },
     "MTRPumpConfigurationAndControlPumpFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRPumpConfigurationAndControlPumpFeatureConstantPressure",
@@ -551208,7 +551208,7 @@
       "is_extensible": true
     },
     "MTRPumpConfigurationAndControlPumpOperationMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPumpConfigurationAndControlPumpOperationModeNormal",
@@ -551236,7 +551236,7 @@
       "is_extensible": true
     },
     "MTRPumpConfigurationAndControlPumpStatus": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRPumpConfigurationAndControlPumpStatusDeviceFault",
@@ -551290,7 +551290,7 @@
       "is_extensible": true
     },
     "MTRPumpConfigurationAndControlPumpStatusBitmap": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRPumpConfigurationAndControlPumpStatusBitmapDeviceFault",
@@ -551349,7 +551349,7 @@
       "is_extensible": true
     },
     "MTRPushAVStreamTransportCMAFInterface": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPushAVStreamTransportCMAFInterfaceInterface1",
@@ -551380,7 +551380,7 @@
       "is_extensible": true
     },
     "MTRPushAVStreamTransportContainerFormat": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPushAVStreamTransportContainerFormatCMAF",
@@ -551397,7 +551397,7 @@
       "is_extensible": true
     },
     "MTRPushAVStreamTransportFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRPushAVStreamTransportFeaturePerZoneSensitivity",
@@ -551422,7 +551422,7 @@
       "is_extensible": true
     },
     "MTRPushAVStreamTransportIngestMethods": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPushAVStreamTransportIngestMethodsCMAFIngest",
@@ -551439,7 +551439,7 @@
       "is_extensible": true
     },
     "MTRPushAVStreamTransportStatusCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPushAVStreamTransportStatusCodeInvalidTLSEndpoint",
@@ -551519,7 +551519,7 @@
       "is_extensible": true
     },
     "MTRPushAVStreamTransportTransportStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPushAVStreamTransportTransportStatusActive",
@@ -551543,7 +551543,7 @@
       "is_extensible": true
     },
     "MTRPushAVStreamTransportTransportTriggerType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPushAVStreamTransportTransportTriggerTypeCommand",
@@ -551574,7 +551574,7 @@
       "is_extensible": true
     },
     "MTRPushAVStreamTransportTriggerActivationReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRPushAVStreamTransportTriggerActivationReasonUserInitiated",
@@ -551605,7 +551605,7 @@
       "is_extensible": true
     },
     "MTRRVCCleanModeFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRRVCCleanModeFeatureDirectModeChange",
@@ -551621,7 +551621,7 @@
       "is_extensible": true
     },
     "MTRRVCCleanModeModeTag": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRRVCCleanModeModeTagAuto",
@@ -551701,7 +551701,7 @@
       "is_extensible": true
     },
     "MTRRVCCleanModeStatusCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRRVCCleanModeStatusCodeCleaningInProgress",
@@ -551714,7 +551714,7 @@
       "is_extensible": true
     },
     "MTRRVCOperationalStateErrorState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRRVCOperationalStateErrorStateNoError",
@@ -551831,7 +551831,7 @@
       "is_extensible": true
     },
     "MTRRVCOperationalStateOperationalState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRRVCOperationalStateOperationalStateStopped",
@@ -551902,7 +551902,7 @@
       "is_extensible": true
     },
     "MTRRVCRunModeFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRRVCRunModeFeatureDirectModeChange",
@@ -551918,7 +551918,7 @@
       "is_extensible": true
     },
     "MTRRVCRunModeModeTag": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRRVCRunModeModeTagAuto",
@@ -551991,7 +551991,7 @@
       "is_extensible": true
     },
     "MTRRVCRunModeStatusCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRRVCRunModeStatusCodeStuck",
@@ -552039,7 +552039,7 @@
       "is_extensible": true
     },
     "MTRRadonConcentrationMeasurementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRRadonConcentrationMeasurementFeatureNumericMeasurement",
@@ -552078,7 +552078,7 @@
       "is_extensible": true
     },
     "MTRRadonConcentrationMeasurementLevelValue": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRRadonConcentrationMeasurementLevelValueUnknown",
@@ -552111,7 +552111,7 @@
       "is_extensible": true
     },
     "MTRRadonConcentrationMeasurementMeasurementMedium": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRRadonConcentrationMeasurementMeasurementMediumAir",
@@ -552134,7 +552134,7 @@
       "is_extensible": true
     },
     "MTRRadonConcentrationMeasurementMeasurementUnit": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRRadonConcentrationMeasurementMeasurementUnitPPM",
@@ -552182,7 +552182,7 @@
       "is_extensible": true
     },
     "MTRRefrigeratorAlarmAlarmBitmap": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRRefrigeratorAlarmAlarmBitmapDoorOpen",
@@ -552196,7 +552196,7 @@
       "is_extensible": true
     },
     "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTag": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRRefrigeratorAndTemperatureControlledCabinetModeModeTagAuto",
@@ -552264,7 +552264,7 @@
       "is_extensible": true
     },
     "MTRScenesManagementCopyModeBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRScenesManagementCopyModeBitmapCopyAllScenes",
@@ -552282,7 +552282,7 @@
       "is_extensible": true
     },
     "MTRScenesManagementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRScenesManagementFeatureSceneNames",
@@ -552300,7 +552300,7 @@
       "is_extensible": true
     },
     "MTRServiceAreaFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRServiceAreaFeatureSelectWhileRunning",
@@ -552324,7 +552324,7 @@
       "is_extensible": true
     },
     "MTRServiceAreaOperationalStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRServiceAreaOperationalStatusPending",
@@ -552352,7 +552352,7 @@
       "is_extensible": true
     },
     "MTRServiceAreaSelectAreasStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRServiceAreaSelectAreasStatusSuccess",
@@ -552380,7 +552380,7 @@
       "is_extensible": true
     },
     "MTRServiceAreaSkipAreaStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRServiceAreaSkipAreaStatusSuccess",
@@ -552408,7 +552408,7 @@
       "is_extensible": true
     },
     "MTRSmokeCOAlarmAlarmState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRSmokeCOAlarmAlarmStateNormal",
@@ -552431,7 +552431,7 @@
       "is_extensible": true
     },
     "MTRSmokeCOAlarmContaminationState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRSmokeCOAlarmContaminationStateNormal",
@@ -552459,7 +552459,7 @@
       "is_extensible": true
     },
     "MTRSmokeCOAlarmEndOfService": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRSmokeCOAlarmEndOfServiceNormal",
@@ -552477,7 +552477,7 @@
       "is_extensible": true
     },
     "MTRSmokeCOAlarmExpressedState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRSmokeCOAlarmExpressedStateNormal",
@@ -552530,7 +552530,7 @@
       "is_extensible": true
     },
     "MTRSmokeCOAlarmFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRSmokeCOAlarmFeatureSmokeAlarm",
@@ -552549,7 +552549,7 @@
       "is_extensible": true
     },
     "MTRSmokeCOAlarmMuteState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRSmokeCOAlarmMuteStateNotMuted",
@@ -552567,7 +552567,7 @@
       "is_extensible": true
     },
     "MTRSmokeCOAlarmSensitivity": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRSmokeCOAlarmSensitivityHigh",
@@ -552590,7 +552590,7 @@
       "is_extensible": true
     },
     "MTRSoftwareDiagnosticsFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRSoftwareDiagnosticsFeatureWatermarks",
@@ -552655,7 +552655,7 @@
       "is_extensible": true
     },
     "MTRSwitchFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRSwitchFeatureLatchingSwitch",
@@ -552694,7 +552694,7 @@
       "is_extensible": true
     },
     "MTRTLSClientManagementStatusCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTLSClientManagementStatusCodeEndpointAlreadyInstalled",
@@ -552739,7 +552739,7 @@
       "is_extensible": true
     },
     "MTRTargetNavigatorStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTargetNavigatorStatusSuccess",
@@ -552762,7 +552762,7 @@
       "is_extensible": true
     },
     "MTRTemperatureControlFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRTemperatureControlFeatureTemperatureNumber",
@@ -552786,7 +552786,7 @@
       "is_extensible": true
     },
     "MTRTestClusterBitmap16MaskMap": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRTestClusterBitmap16MaskMapMaskVal1",
@@ -552815,7 +552815,7 @@
       "is_extensible": true
     },
     "MTRTestClusterBitmap32MaskMap": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRTestClusterBitmap32MaskMapMaskVal1",
@@ -552844,7 +552844,7 @@
       "is_extensible": true
     },
     "MTRTestClusterBitmap64MaskMap": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MTRTestClusterBitmap64MaskMapMaskVal1",
@@ -552873,7 +552873,7 @@
       "is_extensible": true
     },
     "MTRTestClusterBitmap8MaskMap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTestClusterBitmap8MaskMapMaskVal1",
@@ -552902,7 +552902,7 @@
       "is_extensible": true
     },
     "MTRTestClusterSimple": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTestClusterSimpleUnspecified",
@@ -552930,7 +552930,7 @@
       "is_extensible": true
     },
     "MTRTestClusterSimpleBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTestClusterSimpleBitmapValueA",
@@ -552954,7 +552954,7 @@
       "is_extensible": true
     },
     "MTRThermostatACCapacityFormat": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatACCapacityFormatBTUh",
@@ -552967,7 +552967,7 @@
       "is_extensible": true
     },
     "MTRThermostatACCompressorType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatACCompressorTypeUnknown",
@@ -552995,7 +552995,7 @@
       "is_extensible": true
     },
     "MTRThermostatACErrorCodeBitmap": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRThermostatACErrorCodeBitmapCompressorFail",
@@ -553029,7 +553029,7 @@
       "is_extensible": true
     },
     "MTRThermostatACLouverPosition": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatACLouverPositionClosed",
@@ -553062,7 +553062,7 @@
       "is_extensible": true
     },
     "MTRThermostatACRefrigerantType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatACRefrigerantTypeUnknown",
@@ -553090,7 +553090,7 @@
       "is_extensible": true
     },
     "MTRThermostatACType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatACTypeUnknown",
@@ -553123,7 +553123,7 @@
       "is_extensible": true
     },
     "MTRThermostatControlSequence": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatControlSequenceCoolingOnly",
@@ -553161,7 +553161,7 @@
       "is_extensible": true
     },
     "MTRThermostatControlSequenceOfOperation": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatControlSequenceOfOperationCoolingOnly",
@@ -553199,7 +553199,7 @@
       "is_extensible": true
     },
     "MTRThermostatDayOfWeek": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatDayOfWeekSunday",
@@ -553253,7 +553253,7 @@
       "is_extensible": true
     },
     "MTRThermostatFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRThermostatFeatureHeating",
@@ -553331,7 +553331,7 @@
       "is_extensible": true
     },
     "MTRThermostatHVACSystemTypeBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatHVACSystemTypeBitmapCoolingStage",
@@ -553360,7 +553360,7 @@
       "is_extensible": true
     },
     "MTRThermostatModeForSequence": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatModeForSequenceHeatSetpointPresent",
@@ -553389,7 +553389,7 @@
       "is_extensible": true
     },
     "MTRThermostatOccupancyBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatOccupancyBitmapOccupied",
@@ -553403,7 +553403,7 @@
       "is_extensible": true
     },
     "MTRThermostatPresetScenario": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatPresetScenarioOccupied",
@@ -553446,7 +553446,7 @@
       "is_extensible": true
     },
     "MTRThermostatPresetTypeFeaturesBitmap": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRThermostatPresetTypeFeaturesBitmapAutomatic",
@@ -553465,7 +553465,7 @@
       "is_extensible": true
     },
     "MTRThermostatProgrammingOperationModeBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatProgrammingOperationModeBitmapScheduleActive",
@@ -553489,7 +553489,7 @@
       "is_extensible": true
     },
     "MTRThermostatRelayStateBitmap": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRThermostatRelayStateBitmapHeat",
@@ -553533,7 +553533,7 @@
       "is_extensible": true
     },
     "MTRThermostatRemoteSensingBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatRemoteSensingBitmapLocalTemperature",
@@ -553557,7 +553557,7 @@
       "is_extensible": true
     },
     "MTRThermostatRunningMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatRunningModeOff",
@@ -553580,7 +553580,7 @@
       "is_extensible": true
     },
     "MTRThermostatScheduleDayOfWeekBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatScheduleDayOfWeekBitmapSunday",
@@ -553629,7 +553629,7 @@
       "is_extensible": true
     },
     "MTRThermostatScheduleModeBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatScheduleModeBitmapHeatSetpointPresent",
@@ -553648,7 +553648,7 @@
       "is_extensible": true
     },
     "MTRThermostatScheduleTypeFeaturesBitmap": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRThermostatScheduleTypeFeaturesBitmapSupportsPresets",
@@ -553677,7 +553677,7 @@
       "is_extensible": true
     },
     "MTRThermostatSetpointAdjustMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatSetpointAdjustModeHeat",
@@ -553715,7 +553715,7 @@
       "is_extensible": true
     },
     "MTRThermostatSetpointChangeSource": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatSetpointChangeSourceManual",
@@ -553738,7 +553738,7 @@
       "is_extensible": true
     },
     "MTRThermostatSetpointRaiseLowerMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatSetpointRaiseLowerModeHeat",
@@ -553761,7 +553761,7 @@
       "is_extensible": true
     },
     "MTRThermostatStartOfWeek": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatStartOfWeekSunday",
@@ -553804,7 +553804,7 @@
       "is_extensible": true
     },
     "MTRThermostatSuggestionNotFollowingReasonBitmap": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRThermostatSuggestionNotFollowingReasonBitmapDemandResponseEvent",
@@ -553871,7 +553871,7 @@
       "is_extensible": true
     },
     "MTRThermostatSystemMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatSystemModeOff",
@@ -553929,7 +553929,7 @@
       "is_extensible": true
     },
     "MTRThermostatTemperatureSetpointHold": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatTemperatureSetpointHoldSetpointHoldOff",
@@ -553947,7 +553947,7 @@
       "is_extensible": true
     },
     "MTRThermostatUserInterfaceConfigurationKeypadLockout": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatUserInterfaceConfigurationKeypadLockoutNoLockout",
@@ -553985,7 +553985,7 @@
       "is_extensible": true
     },
     "MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibility": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatUserInterfaceConfigurationScheduleProgrammingVisibilityScheduleProgrammingPermitted",
@@ -554003,7 +554003,7 @@
       "is_extensible": true
     },
     "MTRThermostatUserInterfaceConfigurationTemperatureDisplayMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThermostatUserInterfaceConfigurationTemperatureDisplayModeCelsius",
@@ -554021,7 +554021,7 @@
       "is_extensible": true
     },
     "MTRThreadBorderRouterManagementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRThreadBorderRouterManagementFeaturePANChange",
@@ -554035,7 +554035,7 @@
       "is_extensible": true
     },
     "MTRThreadNetworkDiagnosticsConnectionStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThreadNetworkDiagnosticsConnectionStatusConnected",
@@ -554053,7 +554053,7 @@
       "is_extensible": true
     },
     "MTRThreadNetworkDiagnosticsFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRThreadNetworkDiagnosticsFeaturePacketCounts",
@@ -554082,7 +554082,7 @@
       "is_extensible": true
     },
     "MTRThreadNetworkDiagnosticsNetworkFault": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThreadNetworkDiagnosticsNetworkFaultUnspecified",
@@ -554110,7 +554110,7 @@
       "is_extensible": true
     },
     "MTRThreadNetworkDiagnosticsRoutingRole": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThreadNetworkDiagnosticsRoutingRoleUnspecified",
@@ -554153,7 +554153,7 @@
       "is_extensible": true
     },
     "MTRThreadNetworkDiagnosticsThreadConnectionStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRThreadNetworkDiagnosticsThreadConnectionStatusConnected",
@@ -554171,7 +554171,7 @@
       "is_extensible": true
     },
     "MTRTimeFormatLocalizationCalendarType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTimeFormatLocalizationCalendarTypeBuddhist",
@@ -554244,7 +554244,7 @@
       "is_extensible": true
     },
     "MTRTimeFormatLocalizationFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRTimeFormatLocalizationFeatureCalendarFormat",
@@ -554258,7 +554258,7 @@
       "is_extensible": true
     },
     "MTRTimeFormatLocalizationHourFormat": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTimeFormatLocalizationHourFormat12hr",
@@ -554281,7 +554281,7 @@
       "is_extensible": true
     },
     "MTRTimeSynchronizationFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRTimeSynchronizationFeatureTimeZone",
@@ -554310,7 +554310,7 @@
       "is_extensible": true
     },
     "MTRTimeSynchronizationGranularity": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTimeSynchronizationGranularityNoTimeGranularity",
@@ -554343,7 +554343,7 @@
       "is_extensible": true
     },
     "MTRTimeSynchronizationStatusCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTimeSynchronizationStatusCodeTimeNotAccepted",
@@ -554356,7 +554356,7 @@
       "is_extensible": true
     },
     "MTRTimeSynchronizationTimeSource": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTimeSynchronizationTimeSourceNone",
@@ -554509,7 +554509,7 @@
       "is_extensible": true
     },
     "MTRTimeSynchronizationTimeZoneDatabase": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTimeSynchronizationTimeZoneDatabaseFull",
@@ -554532,7 +554532,7 @@
       "is_extensible": true
     },
     "MTRTimerFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRTimerFeatureReset",
@@ -554550,7 +554550,7 @@
       "is_extensible": true
     },
     "MTRTimerStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTimerStatusRunning",
@@ -554588,7 +554588,7 @@
       "is_extensible": true
     },
     "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementFeatureNumericMeasurement",
@@ -554627,7 +554627,7 @@
       "is_extensible": true
     },
     "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValue": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementLevelValueUnknown",
@@ -554660,7 +554660,7 @@
       "is_extensible": true
     },
     "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMedium": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementMediumAir",
@@ -554683,7 +554683,7 @@
       "is_extensible": true
     },
     "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnit": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTotalVolatileOrganicCompoundsConcentrationMeasurementMeasurementUnitPPM",
@@ -554731,7 +554731,7 @@
       "is_extensible": true
     },
     "MTRTransportType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRTransportTypeUndefined",
@@ -554759,7 +554759,7 @@
       "is_extensible": true
     },
     "MTRUnitLocalizationFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRUnitLocalizationFeatureTemperatureUnit",
@@ -554773,7 +554773,7 @@
       "is_extensible": true
     },
     "MTRUnitLocalizationTempUnit": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRUnitLocalizationTempUnitFahrenheit",
@@ -554796,7 +554796,7 @@
       "is_extensible": true
     },
     "MTRUnitTestingBitmap16MaskMap": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRUnitTestingBitmap16MaskMapMaskVal1",
@@ -554825,7 +554825,7 @@
       "is_extensible": true
     },
     "MTRUnitTestingBitmap32MaskMap": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRUnitTestingBitmap32MaskMapMaskVal1",
@@ -554854,7 +554854,7 @@
       "is_extensible": true
     },
     "MTRUnitTestingBitmap64MaskMap": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MTRUnitTestingBitmap64MaskMapMaskVal1",
@@ -554883,7 +554883,7 @@
       "is_extensible": true
     },
     "MTRUnitTestingBitmap8MaskMap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRUnitTestingBitmap8MaskMapMaskVal1",
@@ -554912,7 +554912,7 @@
       "is_extensible": true
     },
     "MTRUnitTestingSimple": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRUnitTestingSimpleUnspecified",
@@ -554940,7 +554940,7 @@
       "is_extensible": true
     },
     "MTRUnitTestingSimpleBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRUnitTestingSimpleBitmapValueA",
@@ -554964,7 +554964,7 @@
       "is_extensible": true
     },
     "MTRValveConfigurationAndControlFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRValveConfigurationAndControlFeatureTimeSync",
@@ -554983,7 +554983,7 @@
       "is_extensible": true
     },
     "MTRValveConfigurationAndControlStatusCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRValveConfigurationAndControlStatusCodeFailureDueToFault",
@@ -554996,7 +554996,7 @@
       "is_extensible": true
     },
     "MTRValveConfigurationAndControlValveFaultBitmap": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRValveConfigurationAndControlValveFaultBitmapGeneralFault",
@@ -555035,7 +555035,7 @@
       "is_extensible": true
     },
     "MTRValveConfigurationAndControlValveState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRValveConfigurationAndControlValveStateClosed",
@@ -555058,7 +555058,7 @@
       "is_extensible": true
     },
     "MTRWaterHeaterManagementBoostState": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWaterHeaterManagementBoostStateInactive",
@@ -555076,7 +555076,7 @@
       "is_extensible": true
     },
     "MTRWaterHeaterManagementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRWaterHeaterManagementFeatureEnergyManagement",
@@ -555095,7 +555095,7 @@
       "is_extensible": true
     },
     "MTRWaterHeaterManagementWaterHeaterHeatSourceBitmap": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWaterHeaterManagementWaterHeaterHeatSourceBitmapImmersionElement1",
@@ -555129,7 +555129,7 @@
       "is_extensible": true
     },
     "MTRWaterHeaterModeModeTag": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRWaterHeaterModeModeTagAuto",
@@ -555202,7 +555202,7 @@
       "is_extensible": true
     },
     "MTRWaterTankLevelMonitoringChangeIndication": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWaterTankLevelMonitoringChangeIndicationOK",
@@ -555233,7 +555233,7 @@
       "is_extensible": true
     },
     "MTRWaterTankLevelMonitoringDegradationDirection": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWaterTankLevelMonitoringDegradationDirectionUp",
@@ -555257,7 +555257,7 @@
       "is_extensible": true
     },
     "MTRWaterTankLevelMonitoringFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRWaterTankLevelMonitoringFeatureCondition",
@@ -555289,7 +555289,7 @@
       "is_extensible": true
     },
     "MTRWaterTankLevelMonitoringProductIdentifierType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWaterTankLevelMonitoringProductIdentifierTypeUPC",
@@ -555334,7 +555334,7 @@
       "is_extensible": true
     },
     "MTRWebRTCTransportProviderFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRWebRTCTransportProviderFeatureMetadata",
@@ -555352,7 +555352,7 @@
       "is_extensible": true
     },
     "MTRWiFiNetworkDiagnosticsAssociationFailureCause": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWiFiNetworkDiagnosticsAssociationFailureCauseUnknown",
@@ -555380,7 +555380,7 @@
       "is_extensible": true
     },
     "MTRWiFiNetworkDiagnosticsConnectionStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWiFiNetworkDiagnosticsConnectionStatusConnected",
@@ -555398,7 +555398,7 @@
       "is_extensible": true
     },
     "MTRWiFiNetworkDiagnosticsFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRWiFiNetworkDiagnosticsFeaturePacketCounts",
@@ -555417,7 +555417,7 @@
       "is_extensible": true
     },
     "MTRWiFiNetworkDiagnosticsSecurityType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWiFiNetworkDiagnosticsSecurityTypeUnspecified",
@@ -555455,7 +555455,7 @@
       "is_extensible": true
     },
     "MTRWiFiNetworkDiagnosticsWiFiConnectionStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWiFiNetworkDiagnosticsWiFiConnectionStatusConnected",
@@ -555473,7 +555473,7 @@
       "is_extensible": true
     },
     "MTRWiFiNetworkDiagnosticsWiFiVersion": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWiFiNetworkDiagnosticsWiFiVersionA",
@@ -555516,7 +555516,7 @@
       "is_extensible": true
     },
     "MTRWiFiNetworkDiagnosticsWiFiVersionType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWiFiNetworkDiagnosticsWiFiVersionTypeA",
@@ -555584,7 +555584,7 @@
       "is_extensible": true
     },
     "MTRWindowCoveringConfigStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWindowCoveringConfigStatusOperational",
@@ -555628,7 +555628,7 @@
       "is_extensible": true
     },
     "MTRWindowCoveringEndProductType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWindowCoveringEndProductTypeRollerShade",
@@ -555761,7 +555761,7 @@
       "is_extensible": true
     },
     "MTRWindowCoveringFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRWindowCoveringFeatureLift",
@@ -555795,7 +555795,7 @@
       "is_extensible": true
     },
     "MTRWindowCoveringMode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWindowCoveringModeMotorDirectionReversed",
@@ -555824,7 +555824,7 @@
       "is_extensible": true
     },
     "MTRWindowCoveringOperationalStatus": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWindowCoveringOperationalStatusGlobal",
@@ -555848,7 +555848,7 @@
       "is_extensible": true
     },
     "MTRWindowCoveringSafetyStatus": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MTRWindowCoveringSafetyStatusRemoteLockout",
@@ -555917,7 +555917,7 @@
       "is_extensible": true
     },
     "MTRWindowCoveringType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRWindowCoveringTypeRollerShade",
@@ -555980,7 +555980,7 @@
       "is_extensible": true
     },
     "MTRZoneManagementFeature": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MTRZoneManagementFeatureTwoDimensionalCartesianZone",
@@ -556019,7 +556019,7 @@
       "is_extensible": true
     },
     "MTRZoneManagementStatusCode": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRZoneManagementStatusCodeZoneNotFound",
@@ -556043,7 +556043,7 @@
       "is_extensible": true
     },
     "MTRZoneManagementZoneEventStoppedReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRZoneManagementZoneEventStoppedReasonActionStopped",
@@ -556067,7 +556067,7 @@
       "is_extensible": true
     },
     "MTRZoneManagementZoneEventTriggeredReason": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRZoneManagementZoneEventTriggeredReasonMotion",
@@ -556084,7 +556084,7 @@
       "is_extensible": true
     },
     "MTRZoneManagementZoneSource": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRZoneManagementZoneSourceMfg",
@@ -556108,7 +556108,7 @@
       "is_extensible": true
     },
     "MTRZoneManagementZoneType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRZoneManagementZoneTypeTwoDCARTZone",
@@ -556125,7 +556125,7 @@
       "is_extensible": true
     },
     "MTRZoneManagementZoneUse": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "MTRZoneManagementZoneUseMotion",
@@ -556926,7 +556926,7 @@
       "sdk_line": 204
     },
     "mach_vm_range_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "MACH_VM_RANGE_NONE",
@@ -556941,7 +556941,7 @@
       "is_extensible": true
     },
     "mach_vm_range_flavor_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MACH_VM_RANGE_FLAVOR_INVALID",
@@ -556960,7 +556960,7 @@
       "is_extensible": true
     },
     "mach_vm_range_tag_t": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "MACH_VM_RANGE_DEFAULT",
@@ -556984,7 +556984,7 @@
       "is_extensible": true
     },
     "mpo_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "MPO_PORT",
@@ -557034,7 +557034,7 @@
       "is_extensible": true
     },
     "os_clockid_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "OS_CLOCK_MACH_ABSOLUTE_TIME",
@@ -557198,7 +557198,7 @@
       "sdk_line": 121
     },
     "virtual_memory_guard_exception_code_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kGUARD_EXC_DEALLOC_GAP",
@@ -557297,7 +557297,7 @@
       "is_extensible": true
     },
     "xpc_listener_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_LISTENER_CREATE_NONE",
@@ -557327,7 +557327,7 @@
       "is_extensible": true
     },
     "xpc_session_create_flags_t": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "XPC_SESSION_CREATE_NONE",

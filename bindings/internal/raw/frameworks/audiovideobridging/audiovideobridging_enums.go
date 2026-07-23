@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-type AVB17221ACMPFlags int64
+type AVB17221ACMPFlags uint16
 
 const (
 	// @constant	AVB17221ACMPFlagsNone @abstract	The IEEE Std 1722.1™-2013 ACMP no flags.
@@ -73,7 +73,7 @@ func (e AVB17221ACMPFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type AVB17221ACMPIPFlag int64
+type AVB17221ACMPIPFlag uint16
 
 const (
 	// @constant	AVB17221ACMPIPFlagNone @abstract	The IEEE Std 1722.1™-2021 ACMP no ip_flags.
@@ -88,7 +88,7 @@ func (e AVB17221ACMPIPFlag) String() string {
 	return strings.Join(parts, "|")
 }
 
-type AVB17221ACMPMessageType int64
+type AVB17221ACMPMessageType uint8
 
 const (
 	// @constant	AVB17221ACMPMessageTypeConnectTXCommand @abstract	The IEEE Std 1722.1™-2013 ACMP CONNECT_TX_COMMAND message type.
@@ -156,7 +156,7 @@ func (e AVB17221ACMPMessageType) String() string {
 	}
 }
 
-type AVB17221ACMPStatusCode int64
+type AVB17221ACMPStatusCode uint8
 
 const (
 	// @constant	AVB17221ACMPStatusSuccess @abstract	The IEEE Std 1722.1™-2013 ACMP SUCCESS status code.
@@ -252,7 +252,7 @@ func (e AVB17221ACMPStatusCode) String() string {
 	}
 }
 
-type AVB17221ADPControllerCapabilities int64
+type AVB17221ADPControllerCapabilities uint32
 
 const (
 	// @constant	AVB17221ADPControllerCapabilitiesImplemented @abstract	The IEEE Std 1722.1™-2013 entity has controller capabilities.
@@ -270,7 +270,7 @@ func (e AVB17221ADPControllerCapabilities) String() string {
 	return strings.Join(parts, "|")
 }
 
-type AVB17221ADPEntityCapabilities int64
+type AVB17221ADPEntityCapabilities uint32
 
 const (
 	// @constant	AVB17221ADPEntityCapabilitiesDFUMode @abstract	The IEEE Std 1722.1™-2013 entity supports firmware upgrade mode.
@@ -390,7 +390,7 @@ func (e AVB17221ADPEntityCapabilities) String() string {
 	}
 }
 
-type AVB17221ADPListenerCapabilities int64
+type AVB17221ADPListenerCapabilities uint16
 
 const (
 	// @constant	AVB17221ADPListenerCapabilitiesImplemented @abstract	The IEEE Std 1722.1™-2013 entity has listener capabilities.
@@ -443,7 +443,7 @@ func (e AVB17221ADPListenerCapabilities) String() string {
 	return strings.Join(parts, "|")
 }
 
-type AVB17221ADPTalkerCapabilities int64
+type AVB17221ADPTalkerCapabilities uint16
 
 const (
 	// @constant	AVB17221ADPTalkerCapabilitiesImplemented @abstract	The IEEE Std 1722.1™-2013 entity has talker capabilities.
@@ -496,7 +496,7 @@ func (e AVB17221ADPTalkerCapabilities) String() string {
 	return strings.Join(parts, "|")
 }
 
-type AVB17221AECPAddressAccessTLVMode int64
+type AVB17221AECPAddressAccessTLVMode uint8
 
 const (
 	// @constant	AVB17221AECPAddressAccessTLVModeRead @abstract	The IEEE Std 1722.1™-2013 ACMP SUCCESS status code.
@@ -520,7 +520,7 @@ func (e AVB17221AECPAddressAccessTLVMode) String() string {
 	}
 }
 
-type AVB17221AECPMessageType int64
+type AVB17221AECPMessageType uint8
 
 const (
 	// @constant	AVB17221AECPMessageTypeAEMCommand @abstract	The IEEE Std 1722.1™-2013 AECP AVDECC Entity Model command message.
@@ -564,7 +564,7 @@ func (e AVB17221AECPMessageType) String() string {
 	}
 }
 
-type AVB17221AECPStatusCode int64
+type AVB17221AECPStatusCode uint8
 
 const (
 	// @constant	AVB17221AECPStatusSuccess @abstract	The IEEE Std 1722.1™-2013 AECP SUCCESS status code.
@@ -642,7 +642,7 @@ func (e AVB17221AECPStatusCode) String() string {
 	}
 }
 
-type AVB17221AEMCommandType int64
+type AVB17221AEMCommandType uint16
 
 const (
 	// @constant	AVB17221AEMCommandTypeAcquireEntity @abstract	The command code for the IEEE Std 1722.1™-2013 AEM ACQUIRE_ENTITY command.
@@ -1783,7 +1783,7 @@ func (e Launch_data_type_t) String() string {
 	}
 }
 
-type Mach_vm_range_flags_t int64
+type Mach_vm_range_flags_t uint64
 
 const (
 	MACH_VM_RANGE_NONE Mach_vm_range_flags_t = 0
@@ -1797,7 +1797,7 @@ func (e Mach_vm_range_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Mach_vm_range_flavor_t int64
+type Mach_vm_range_flavor_t uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
@@ -1815,7 +1815,7 @@ func (e Mach_vm_range_flavor_t) String() string {
 	}
 }
 
-type Mach_vm_range_tag_t int64
+type Mach_vm_range_tag_t uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
@@ -1836,7 +1836,7 @@ func (e Mach_vm_range_tag_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -1878,7 +1878,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
@@ -1966,7 +1966,7 @@ func (e Qos_class_t) String() string {
 	}
 }
 
-type Virtual_memory_guard_exception_code_t int64
+type Virtual_memory_guard_exception_code_t uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
@@ -2032,7 +2032,7 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 	}
 }
 
-type Xpc_listener_create_flags_t int64
+type Xpc_listener_create_flags_t uint64
 
 const (
 	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
@@ -2058,7 +2058,7 @@ func (e Xpc_listener_create_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Xpc_session_create_flags_t int64
+type Xpc_session_create_flags_t uint64
 
 const (
 	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0

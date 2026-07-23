@@ -37,7 +37,7 @@ func (e CGImageAnimationStatus) String() string {
 }
 
 // Constants for errors that occur when getting or setting metadata information.
-type CGImageMetadataErrors int64
+type CGImageMetadataErrors int32
 
 const (
 	// An error that indicates an unknown condition occurred.
@@ -70,7 +70,7 @@ func (e CGImageMetadataErrors) String() string {
 }
 
 // Constants that indicate the XMP type for a metadata tag.
-type CGImageMetadataType int64
+type CGImageMetadataType int32
 
 const (
 	// An invalid metadata type.
@@ -115,7 +115,7 @@ func (e CGImageMetadataType) String() string {
 }
 
 // A value describing the intended display orientation for an image.
-type CGImagePropertyOrientation int64
+type CGImagePropertyOrientation uint32
 
 const (
 	// The encoded image data matches the image’s intended display orientation.
@@ -159,7 +159,7 @@ func (e CGImagePropertyOrientation) String() string {
 	}
 }
 
-type CGImagePropertyTGACompression int64
+type CGImagePropertyTGACompression uint32
 
 const (
 	KCGImageTGACompressionNone CGImagePropertyTGACompression = 0
@@ -178,7 +178,7 @@ func (e CGImagePropertyTGACompression) String() string {
 }
 
 // The set of status values for images and image sources.
-type CGImageSourceStatus int64
+type CGImageSourceStatus int32
 
 const (
 	// The end of the file occurred unexpectedly.
@@ -759,7 +759,7 @@ func (e Ipc_info_object_type_t) String() string {
 	}
 }
 
-type Mach_vm_range_flags_t int64
+type Mach_vm_range_flags_t uint64
 
 const (
 	MACH_VM_RANGE_NONE Mach_vm_range_flags_t = 0
@@ -773,7 +773,7 @@ func (e Mach_vm_range_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Mach_vm_range_flavor_t int64
+type Mach_vm_range_flavor_t uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
@@ -791,7 +791,7 @@ func (e Mach_vm_range_flavor_t) String() string {
 	}
 }
 
-type Mach_vm_range_tag_t int64
+type Mach_vm_range_tag_t uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
@@ -812,7 +812,7 @@ func (e Mach_vm_range_tag_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -854,7 +854,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
@@ -942,7 +942,7 @@ func (e Qos_class_t) String() string {
 	}
 }
 
-type Virtual_memory_guard_exception_code_t int64
+type Virtual_memory_guard_exception_code_t uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1

@@ -479,7 +479,7 @@ func (i IpcInfoObjectTypeT) isMultiValue() bool {
 
 // [vm_types.h:1102]
 // Bitmask — values may be combined with |.
-type MachVmRangeFlagsT int64
+type MachVmRangeFlagsT uint64
 
 const (
 	MACH_VM_RANGE_NONE MachVmRangeFlagsT = 0
@@ -519,7 +519,7 @@ func (i MachVmRangeFlagsT) isMultiValue() bool {
 }
 
 // [vm_types.h:1098]
-type MachVmRangeFlavorT int64
+type MachVmRangeFlavorT uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID MachVmRangeFlavorT = 0
@@ -563,7 +563,7 @@ func (i MachVmRangeFlavorT) isMultiValue() bool {
 }
 
 // [vm_types.h:1098]
-type MachVmRangeTagT int64
+type MachVmRangeTagT uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT MachVmRangeTagT = 0
@@ -613,7 +613,7 @@ func (i MachVmRangeTagT) isMultiValue() bool {
 
 // [port.h:1102]
 // Bitmask — values may be combined with |.
-type MpoFlagsT int64
+type MpoFlagsT uint32
 
 const (
 	MPO_PORT                            MpoFlagsT = 0
@@ -695,7 +695,7 @@ func (i MpoFlagsT) isMultiValue() bool {
 }
 
 // [vm_statistics.h:1098]
-type VirtualMemoryGuardExceptionCodeT int64
+type VirtualMemoryGuardExceptionCodeT uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCodeT = 1

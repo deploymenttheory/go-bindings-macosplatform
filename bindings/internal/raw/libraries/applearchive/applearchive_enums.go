@@ -7,7 +7,7 @@ package applearchive
 import "fmt"
 
 // [AAEntryACLBlob.h:25]
-type AAACEQualifierTypes int64
+type AAACEQualifierTypes uint32
 
 const (
 	AA_ACE_QUALIFIER_TYPE_USER  AAACEQualifierTypes = 85
@@ -61,7 +61,7 @@ func (i AAACEQualifierTypes) isMultiValue() bool {
 }
 
 // [AADefs.h:32]
-type AACompressionAlgorithms int64
+type AACompressionAlgorithms uint32
 
 const (
 	AA_COMPRESSION_ALGORITHM_NONE     AACompressionAlgorithms = 0
@@ -125,7 +125,7 @@ func (i AACompressionAlgorithms) isMultiValue() bool {
 }
 
 // [AAEntryMessage.h:19]
-type AAEntryMessages int64
+type AAEntryMessages uint32
 
 const (
 	// @abstract Skip directory \p path in search? @discussion If the callback returns a >0 value, the directory is not searched. \p data is not used. If the callback returns a negative value, the current operation will be aborted as soon as possible.
@@ -243,7 +243,7 @@ func (i AAEntryMessages) isMultiValue() bool {
 }
 
 // [AADefs.h:48]
-type AAEntryTypes int64
+type AAEntryTypes uint32
 
 const (
 	AA_ENTRY_TYPE_REG      AAEntryTypes = 70
@@ -332,7 +332,7 @@ func (i AAEntryTypes) isMultiValue() bool {
 }
 
 // [AADefs.h:67]
-type AAFieldTypes int64
+type AAFieldTypes uint32
 
 const (
 	AA_FIELD_TYPE_FLAG     AAFieldTypes = 0
@@ -517,7 +517,7 @@ func (i AAFlags) isMultiValue() bool {
 }
 
 // [AADefs.h:19]
-type AAHashFunctions int64
+type AAHashFunctions uint32
 
 const (
 	AA_HASH_FUNCTION_CRC32  AAHashFunctions = 1
@@ -576,7 +576,7 @@ func (i AAHashFunctions) isMultiValue() bool {
 }
 
 // [AEADefs.h:62]
-type AEAContextFieldRepresentations int64
+type AEAContextFieldRepresentations uint32
 
 const (
 	AEA_CONTEXT_FIELD_REPRESENTATION_RAW      AEAContextFieldRepresentations = 0
@@ -625,7 +625,7 @@ func (i AEAContextFieldRepresentations) isMultiValue() bool {
 }
 
 // [AEADefs.h:70]
-type AEAContextFieldValues int64
+type AEAContextFieldValues uint32
 
 const (
 	AEA_CONTEXT_CIPHERSUITE_HKDF_SHA256_HMAC        AEAContextFieldValues = 0
@@ -711,7 +711,7 @@ func (i AEAContextFieldValues) isMultiValue() bool {
 }
 
 // [AEADefs.h:36]
-type AEAContextFields int64
+type AEAContextFields uint32
 
 const (
 	AEA_CONTEXT_FIELD_PROFILE                  AEAContextFields = 0
@@ -835,7 +835,7 @@ func (i AEAContextFields) isMultiValue() bool {
 }
 
 // [AEADefs.h:22]
-type AEAProfiles int64
+type AEAProfiles uint32
 
 const (
 	AEA_PROFILE__HKDF_SHA256_HMAC__NONE__ECDSA_P256              AEAProfiles = 0

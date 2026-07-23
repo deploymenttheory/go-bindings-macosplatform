@@ -486,7 +486,7 @@ func (e Clockid_t) String() string {
 }
 
 // Constants that indicate the axis and direction to use for a perspective projection matrix.
-type Cp_axis_direction_convention int64
+type Cp_axis_direction_convention uint8
 
 const (
 	Cp_axis_direction_convention_right_up_back      Cp_axis_direction_convention = 0
@@ -511,7 +511,7 @@ func (e Cp_axis_direction_convention) String() string {
 }
 
 // The state of ownership for the drawable.
-type Cp_drawable_state int64
+type Cp_drawable_state uint32
 
 const (
 	// A drawable that is not in use and ready for assignment to a frame.
@@ -535,7 +535,7 @@ func (e Cp_drawable_state) String() string {
 	}
 }
 
-type Cp_drawable_target int64
+type Cp_drawable_target uint32
 
 const (
 	// A drawable that is targeting the built-in display, this is what a user will see in the device.
@@ -633,7 +633,7 @@ func (e Cp_layer_renderer_configuration_error_code) String() string {
 }
 
 // Constants that specify the organization of the textures you use for drawing.
-type Cp_layer_renderer_layout int64
+type Cp_layer_renderer_layout uint32
 
 const (
 	// A layout that assigns a separate texture to each rendered view. When the layout contains multiple views, each view receives its own dedicated texture. The type of each texture is MTLTextureType2D.
@@ -658,7 +658,7 @@ func (e Cp_layer_renderer_layout) String() string {
 }
 
 // The states of the layer renderer, which tell you how to proceed with drawing operations.
-type Cp_layer_renderer_state int64
+type Cp_layer_renderer_state uint32
 
 const (
 	// A state that indicates the layer renderer isn't currently drawing. A layer renderer starts in this state and later transitions to the running or invalid states. Don't draw while in this state. Wait until the layer changes to one of the other states to take further action on the layer.
@@ -683,7 +683,7 @@ func (e Cp_layer_renderer_state) String() string {
 }
 
 // The options to provide when calling cp_layer_renderer_capabilities_supported_color_formats and cp_layer_renderer_capabilities_supported_color_formats_count
-type Cp_supported_color_formats_options int64
+type Cp_supported_color_formats_options uint32
 
 const (
 	Cp_supported_color_formats_options_none                          Cp_supported_color_formats_options = 0
@@ -702,7 +702,7 @@ func (e Cp_supported_color_formats_options) String() string {
 }
 
 // The options you can pass to functions that relate to rendering capabilities and layout support.
-type Cp_supported_layouts_options int64
+type Cp_supported_layouts_options uint32
 
 const (
 	Cp_supported_layouts_options_none                          Cp_supported_layouts_options = 0
@@ -1061,7 +1061,7 @@ func (e Launch_data_type_t) String() string {
 	}
 }
 
-type Mach_vm_range_flags_t int64
+type Mach_vm_range_flags_t uint64
 
 const (
 	MACH_VM_RANGE_NONE Mach_vm_range_flags_t = 0
@@ -1075,7 +1075,7 @@ func (e Mach_vm_range_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Mach_vm_range_flavor_t int64
+type Mach_vm_range_flavor_t uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
@@ -1093,7 +1093,7 @@ func (e Mach_vm_range_flavor_t) String() string {
 	}
 }
 
-type Mach_vm_range_tag_t int64
+type Mach_vm_range_tag_t uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
@@ -1114,7 +1114,7 @@ func (e Mach_vm_range_tag_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -1156,7 +1156,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
@@ -1244,7 +1244,7 @@ func (e Qos_class_t) String() string {
 	}
 }
 
-type Virtual_memory_guard_exception_code_t int64
+type Virtual_memory_guard_exception_code_t uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
@@ -1310,7 +1310,7 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 	}
 }
 
-type Xpc_listener_create_flags_t int64
+type Xpc_listener_create_flags_t uint64
 
 const (
 	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
@@ -1336,7 +1336,7 @@ func (e Xpc_listener_create_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Xpc_session_create_flags_t int64
+type Xpc_session_create_flags_t uint64
 
 const (
 	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0

@@ -16,7 +16,7 @@ void * oslog_fn_os_log_create(const char * subsystem, const char * category, voi
 }
 
 // ID: objc-sym oslog.os_log_type_enabled
-bool oslog_fn_os_log_type_enabled(void * oslog, int64_t type_, void **outException) {
+bool oslog_fn_os_log_type_enabled(void * oslog, uint8_t type_, void **outException) {
     @autoreleasepool {
         @try {
             bool _result = (bool)os_log_type_enabled(oslog, type_);
@@ -29,7 +29,7 @@ bool oslog_fn_os_log_type_enabled(void * oslog, int64_t type_, void **outExcepti
 }
 
 // ID: objc-sym oslog._os_log_impl
-void oslog_fn__os_log_impl(void * dso, void * log, int64_t type_, const char * format, void * buf, uint32_t size, void **outException) {
+void oslog_fn__os_log_impl(void * dso, void * log, uint8_t type_, const char * format, void * buf, uint32_t size, void **outException) {
     @autoreleasepool {
         @try {
             _os_log_impl(dso, log, type_, format, buf, size);
@@ -40,7 +40,7 @@ void oslog_fn__os_log_impl(void * dso, void * log, int64_t type_, const char * f
 }
 
 // ID: objc-sym oslog._os_log_debug_impl
-void oslog_fn__os_log_debug_impl(void * dso, void * log, int64_t type_, const char * format, void * buf, uint32_t size, void **outException) {
+void oslog_fn__os_log_debug_impl(void * dso, void * log, uint8_t type_, const char * format, void * buf, uint32_t size, void **outException) {
     @autoreleasepool {
         @try {
             _os_log_debug_impl(dso, log, type_, format, buf, size);
@@ -51,7 +51,7 @@ void oslog_fn__os_log_debug_impl(void * dso, void * log, int64_t type_, const ch
 }
 
 // ID: objc-sym oslog._os_log_error_impl
-void oslog_fn__os_log_error_impl(void * dso, void * log, int64_t type_, const char * format, void * buf, uint32_t size, void **outException) {
+void oslog_fn__os_log_error_impl(void * dso, void * log, uint8_t type_, const char * format, void * buf, uint32_t size, void **outException) {
     @autoreleasepool {
         @try {
             _os_log_error_impl(dso, log, type_, format, buf, size);
@@ -62,7 +62,7 @@ void oslog_fn__os_log_error_impl(void * dso, void * log, int64_t type_, const ch
 }
 
 // ID: objc-sym oslog._os_log_fault_impl
-void oslog_fn__os_log_fault_impl(void * dso, void * log, int64_t type_, const char * format, void * buf, uint32_t size, void **outException) {
+void oslog_fn__os_log_fault_impl(void * dso, void * log, uint8_t type_, const char * format, void * buf, uint32_t size, void **outException) {
     @autoreleasepool {
         @try {
             _os_log_fault_impl(dso, log, type_, format, buf, size);

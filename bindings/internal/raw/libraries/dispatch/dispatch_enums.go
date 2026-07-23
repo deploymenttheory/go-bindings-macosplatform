@@ -274,7 +274,7 @@ func (i IdtypeT) isMultiValue() bool {
 
 // [port.h:1102]
 // Bitmask — values may be combined with |.
-type MpoFlagsT int64
+type MpoFlagsT uint32
 
 const (
 	MPO_PORT                            MpoFlagsT = 0
@@ -356,7 +356,7 @@ func (i MpoFlagsT) isMultiValue() bool {
 }
 
 // [clock.h:188]
-type OsClockidT int64
+type OsClockidT uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME OsClockidT = 32

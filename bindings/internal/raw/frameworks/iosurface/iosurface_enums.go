@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-type IOSurfaceComponentName int64
+type IOSurfaceComponentName int32
 
 const (
 	KIOSurfaceComponentNameUnknown    IOSurfaceComponentName = 0
@@ -44,7 +44,7 @@ func (e IOSurfaceComponentName) String() string {
 	}
 }
 
-type IOSurfaceComponentRange int64
+type IOSurfaceComponentRange int32
 
 const (
 	KIOSurfaceComponentRangeUnknown    IOSurfaceComponentRange = 0
@@ -68,7 +68,7 @@ func (e IOSurfaceComponentRange) String() string {
 	}
 }
 
-type IOSurfaceComponentType int64
+type IOSurfaceComponentType int32
 
 const (
 	KIOSurfaceComponentTypeUnknown          IOSurfaceComponentType = 0
@@ -95,7 +95,7 @@ func (e IOSurfaceComponentType) String() string {
 	}
 }
 
-type IOSurfaceLockOptions int64
+type IOSurfaceLockOptions uint32
 
 const (
 	KIOSurfaceLockReadOnly  IOSurfaceLockOptions = 1
@@ -116,7 +116,7 @@ func (e IOSurfaceLockOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type IOSurfaceMemoryLedgerFlags int64
+type IOSurfaceMemoryLedgerFlags uint32
 
 const (
 	KIOSurfaceMemoryLedgerFlagNoFootprint IOSurfaceMemoryLedgerFlags = 1
@@ -160,7 +160,7 @@ func (e IOSurfaceMemoryLedgerTags) String() string {
 	}
 }
 
-type IOSurfacePurgeabilityState int64
+type IOSurfacePurgeabilityState uint32
 
 const (
 	KIOSurfacePurgeableNonVolatile IOSurfacePurgeabilityState = 0
@@ -186,7 +186,7 @@ func (e IOSurfacePurgeabilityState) String() string {
 	return strings.Join(parts, "|")
 }
 
-type IOSurfaceSubsampling int64
+type IOSurfaceSubsampling int32
 
 const (
 	KIOSurfaceSubsamplingUnknown IOSurfaceSubsampling = 0
@@ -752,7 +752,7 @@ func (e Launch_data_type_t) String() string {
 	}
 }
 
-type Mach_vm_range_flags_t int64
+type Mach_vm_range_flags_t uint64
 
 const (
 	MACH_VM_RANGE_NONE Mach_vm_range_flags_t = 0
@@ -766,7 +766,7 @@ func (e Mach_vm_range_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Mach_vm_range_flavor_t int64
+type Mach_vm_range_flavor_t uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
@@ -784,7 +784,7 @@ func (e Mach_vm_range_flavor_t) String() string {
 	}
 }
 
-type Mach_vm_range_tag_t int64
+type Mach_vm_range_tag_t uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
@@ -805,7 +805,7 @@ func (e Mach_vm_range_tag_t) String() string {
 	}
 }
 
-type Mpo_flags_t int64
+type Mpo_flags_t uint32
 
 const (
 	MPO_PORT                            Mpo_flags_t = 0
@@ -847,7 +847,7 @@ func (e Mpo_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Os_clockid_t int64
+type Os_clockid_t uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME Os_clockid_t = 32
@@ -935,7 +935,7 @@ func (e Qos_class_t) String() string {
 	}
 }
 
-type Virtual_memory_guard_exception_code_t int64
+type Virtual_memory_guard_exception_code_t uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
@@ -1001,7 +1001,7 @@ func (e Virtual_memory_guard_exception_code_t) String() string {
 	}
 }
 
-type Xpc_listener_create_flags_t int64
+type Xpc_listener_create_flags_t uint64
 
 const (
 	XPC_LISTENER_CREATE_NONE             Xpc_listener_create_flags_t = 0
@@ -1027,7 +1027,7 @@ func (e Xpc_listener_create_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Xpc_session_create_flags_t int64
+type Xpc_session_create_flags_t uint64
 
 const (
 	XPC_SESSION_CREATE_NONE            Xpc_session_create_flags_t = 0

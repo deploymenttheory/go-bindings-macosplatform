@@ -667,7 +667,7 @@ func (i LaunchDataTypeT) isMultiValue() bool {
 
 // [vm_types.h:1102]
 // Bitmask — values may be combined with |.
-type MachVmRangeFlagsT int64
+type MachVmRangeFlagsT uint64
 
 const (
 	MACH_VM_RANGE_NONE MachVmRangeFlagsT = 0
@@ -707,7 +707,7 @@ func (i MachVmRangeFlagsT) isMultiValue() bool {
 }
 
 // [vm_types.h:1098]
-type MachVmRangeFlavorT int64
+type MachVmRangeFlavorT uint32
 
 const (
 	MACH_VM_RANGE_FLAVOR_INVALID MachVmRangeFlavorT = 0
@@ -751,7 +751,7 @@ func (i MachVmRangeFlavorT) isMultiValue() bool {
 }
 
 // [vm_types.h:1098]
-type MachVmRangeTagT int64
+type MachVmRangeTagT uint16
 
 const (
 	MACH_VM_RANGE_DEFAULT MachVmRangeTagT = 0
@@ -801,7 +801,7 @@ func (i MachVmRangeTagT) isMultiValue() bool {
 
 // [port.h:1102]
 // Bitmask — values may be combined with |.
-type MpoFlagsT int64
+type MpoFlagsT uint32
 
 const (
 	MPO_PORT                            MpoFlagsT = 0
@@ -883,7 +883,7 @@ func (i MpoFlagsT) isMultiValue() bool {
 }
 
 // [clock.h:188]
-type OsClockidT int64
+type OsClockidT uint32
 
 const (
 	OS_CLOCK_MACH_ABSOLUTE_TIME OsClockidT = 32
@@ -986,7 +986,7 @@ func (i QosClassT) isMultiValue() bool {
 }
 
 // [vm_statistics.h:1098]
-type VirtualMemoryGuardExceptionCodeT int64
+type VirtualMemoryGuardExceptionCodeT uint32
 
 const (
 	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCodeT = 1
@@ -1112,7 +1112,7 @@ func (i VirtualMemoryGuardExceptionCodeT) isMultiValue() bool {
 // Options that control the listener’s configuration.
 // [listener.h:194]
 // Bitmask — values may be combined with |.
-type XpcListenerCreateFlagsT int64
+type XpcListenerCreateFlagsT uint64
 
 const (
 	// Configures the listener in a default state.
@@ -1173,7 +1173,7 @@ func (i XpcListenerCreateFlagsT) isMultiValue() bool {
 
 // [session.h:194]
 // Bitmask — values may be combined with |.
-type XpcSessionCreateFlagsT int64
+type XpcSessionCreateFlagsT uint64
 
 const (
 	XPC_SESSION_CREATE_NONE            XpcSessionCreateFlagsT = 0
