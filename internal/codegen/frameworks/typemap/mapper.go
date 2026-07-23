@@ -775,7 +775,15 @@ func (m *Mapper) qualifyType(
 		return "objc.ID"
 	}
 	pkgName := strings.ToLower(ownerFramework)
-	importPath := m.ModulePrefix + "/" + pkgName
+	// A library-owned type (e.g. a value struct such as audit_token_t owned by bsm)
+	// must import through the libraries prefix, not the frameworks one. Defensive:
+	// changes no output today, but guards a dangling import a future SDK bump could
+	// introduce once more library value structs are cross-referenced.
+	modulePrefix := m.ModulePrefix
+	if m.LibraryPkgs[pkgName] {
+		modulePrefix = m.LibraryModulePrefix
+	}
+	importPath := modulePrefix + "/" + pkgName
 	if imports != nil {
 		imports[pkgName] = importPath
 	}

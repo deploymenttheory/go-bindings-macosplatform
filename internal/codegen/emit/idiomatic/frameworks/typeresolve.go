@@ -691,7 +691,16 @@ func crossFrameworkValueStruct(
 	if !mapper.EmittableStructs[name] {
 		return "", nil, false
 	}
-	return goType, map[string]string{pkg: idiomaticFrameworkPrefix + pkg}, true
+	// Select the import prefix by package kind: a library-owned value struct
+	// (e.g. audit_token_t owned by bsm) must import through the libraries prefix,
+	// not the frameworks one. This mirrors crossFrameworkEmittedStruct; it changes
+	// no output today (no framework references a library value struct at a resolve
+	// site) but guards the cascade a future SDK bump could introduce.
+	prefix := idiomaticFrameworkPrefix
+	if mapper.LibraryPkgs[pkg] {
+		prefix = mapper.LibraryModulePrefix
+	}
+	return goType, map[string]string{pkg: prefix + pkg}, true
 }
 
 // crossFrameworkEmittedStruct is crossFrameworkValueStruct's counterpart for
