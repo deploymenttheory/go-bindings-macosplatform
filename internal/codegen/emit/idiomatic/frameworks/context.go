@@ -170,7 +170,7 @@ func buildLocalValueStructNames(framework *meta.FrameworkMeta) map[string]bool {
 				break
 			}
 		}
-		if plain {
+		if plain && structLayoutSafe(s) {
 			set[naming.ExportedTypeName(name)] = true
 		}
 	}

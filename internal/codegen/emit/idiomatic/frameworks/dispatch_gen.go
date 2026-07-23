@@ -151,9 +151,10 @@ func zeroValue(k objKind, idiomaticType string) string {
 	case kindEnum:
 		return idiomaticType + "(0)"
 	default:
-		// A bare host pointer result (an unsafe.Pointer surfaced from a raw C
-		// pointer or NS_RETURNS_INNER_POINTER return) zeroes to nil, not 0.
-		if idiomaticType == "unsafe.Pointer" {
+		// A pointer result — an unsafe.Pointer surfaced from a raw C pointer or an
+		// NS_RETURNS_INNER_POINTER return, or a typed *Struct pointer to a value
+		// struct — zeroes to nil, not 0.
+		if idiomaticType == "unsafe.Pointer" || strings.HasPrefix(idiomaticType, "*") {
 			return "nil"
 		}
 		// Numeric scalars.

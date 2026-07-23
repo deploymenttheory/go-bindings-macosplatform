@@ -106,3 +106,8 @@ type AVSampleCursorSyncInfo struct {
 	SampleIsPartialSync bool
 	SampleIsDroppable   bool
 }
+
+type CMVideoDimensions struct {
+	Width  int32
+	Height int32
+}

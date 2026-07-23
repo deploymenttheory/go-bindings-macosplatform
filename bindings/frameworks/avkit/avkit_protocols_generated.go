@@ -5,6 +5,7 @@
 package avkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 )
 
@@ -17,6 +18,6 @@ type PictureInPictureSampleBufferPlaybackDelegate interface {
 	PictureInPictureControllerSetPlaying(pictureInPictureController *PictureInPictureController, playing bool)
 	PictureInPictureControllerTimeRangeForPlayback(pictureInPictureController *PictureInPictureController) coremedia.CMTimeRange
 	PictureInPictureControllerIsPlaybackPaused(pictureInPictureController *PictureInPictureController) bool
-	PictureInPictureControllerDidTransitionToRenderSize(pictureInPictureController *PictureInPictureController, newRenderSize coremedia.CMVideoDimensions)
+	PictureInPictureControllerDidTransitionToRenderSize(pictureInPictureController *PictureInPictureController, newRenderSize avfoundation.CMVideoDimensions)
 	PictureInPictureControllerSkipByIntervalCompletionHandler(pictureInPictureController *PictureInPictureController, skipInterval coremedia.CMTime, completionHandler func())
 }

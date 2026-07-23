@@ -2948,6 +2948,37 @@
     }
   },
   "structs": {
+    "MTLViewport": {
+      "fields": [
+        {
+          "name": "originX",
+          "objc_type": "double"
+        },
+        {
+          "name": "originY",
+          "objc_type": "double"
+        },
+        {
+          "name": "width",
+          "objc_type": "double"
+        },
+        {
+          "name": "height",
+          "objc_type": "double"
+        },
+        {
+          "name": "znear",
+          "objc_type": "double"
+        },
+        {
+          "name": "zfar",
+          "objc_type": "double"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "Metal/MTLRenderCommandEncoder.h",
+      "sdk_line": 48
+    },
     "cp_drawable": {
       "availability": {
         "macos_introduced": "26.0"

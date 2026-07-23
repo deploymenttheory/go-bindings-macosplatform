@@ -113,6 +113,13 @@ func (hcesm *HostCIEndpointStateMachine) EndpointAddress() int {
 	return _r
 }
 
+// CurrentTransferMessage returns the current transfer message.
+func (hcesm *HostCIEndpointStateMachine) CurrentTransferMessage() *IOUSBHostCIMessage {
+	defer runtime.KeepAlive(hcesm)
+	_r := objc.Send[*IOUSBHostCIMessage](objref.IDOf(hcesm), objc.RegisterName("currentTransferMessage"))
+	return _r
+}
+
 // ControllerInterface returns the controller interface.
 func (hcesm *HostCIEndpointStateMachine) ControllerInterface() *HostControllerInterface {
 	defer runtime.KeepAlive(hcesm)

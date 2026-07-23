@@ -7,6 +7,7 @@ package hiservices
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -762,10 +763,10 @@ func HIShapeCreateXor(inShape1 obj.Object, inShape2 obj.Object) obj.Object {
 	return obj.Wrap(_ret)
 }
 
-var _fnHIShapeGetBounds func(objc.ID, unsafe.Pointer) unsafe.Pointer
+var _fnHIShapeGetBounds func(objc.ID, unsafe.Pointer) *corefoundation.CGRect
 
 // HIShapeGetBounds calls the HIServices framework function HIShapeGetBounds.
-func HIShapeGetBounds(inShape obj.Object, outRect unsafe.Pointer) unsafe.Pointer {
+func HIShapeGetBounds(inShape obj.Object, outRect unsafe.Pointer) *corefoundation.CGRect {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIShapeGetBounds == nil {
 		ebipurego.RegisterLibFunc(&_fnHIShapeGetBounds, _lib, "HIShapeGetBounds")
@@ -1465,15 +1466,15 @@ func PasteboardSynchronize(inPasteboard obj.Object) PasteboardSyncFlags {
 	return _fnPasteboardSynchronize(objref.IDOf(inPasteboard))
 }
 
-var _fnPlotIconRefInContext func(objc.ID, unsafe.Pointer, int16, int16, unsafe.Pointer, int, objc.ID) int32
+var _fnPlotIconRefInContext func(objc.ID, unsafe.Pointer, int16, int16, objc.ID, int, objc.ID) int32
 
 // PlotIconRefInContext calls the HIServices framework function PlotIconRefInContext.
-func PlotIconRefInContext(inContext obj.Object, inRect unsafe.Pointer, inAlign int16, inTransform int16, inLabelColor unsafe.Pointer, inFlags int, inIconRef obj.Object) int {
+func PlotIconRefInContext(inContext obj.Object, inRect unsafe.Pointer, inAlign int16, inTransform int16, inLabelColor obj.Object, inFlags int, inIconRef obj.Object) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPlotIconRefInContext == nil {
 		ebipurego.RegisterLibFunc(&_fnPlotIconRefInContext, _lib, "PlotIconRefInContext")
 	}
-	return int(_fnPlotIconRefInContext(objref.IDOf(inContext), inRect, inAlign, inTransform, inLabelColor, inFlags, objref.IDOf(inIconRef)))
+	return int(_fnPlotIconRefInContext(objref.IDOf(inContext), inRect, inAlign, inTransform, objref.IDOf(inLabelColor), inFlags, objref.IDOf(inIconRef)))
 }
 
 var _fnProcessInformationCopyDictionary func(unsafe.Pointer, int) objc.ID

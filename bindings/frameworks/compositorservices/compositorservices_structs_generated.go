@@ -39,5 +39,14 @@ type CpView struct{}
 // An opaque type that describes the relationship between a view and the underlying texture. A texture map helps you locate the content for a specific view within a texture. Texture maps are especially important when a layer uses a single texture to manage multiple views. For example, a head-mounted display might store the images for both the left and right eyes in a single texture. Pass this type to other functions to get specific details about the current texture, such as its view bounds or its index into a texture array.
 type CpViewTextureMap struct{}
 
+type MTLViewport struct {
+	OriginX float64
+	OriginY float64
+	Width   float64
+	Height  float64
+	Znear   float64
+	Zfar    float64
+}
+
 // CpTimeT is an alias for the cp_time value type.
 type CpTimeT = CpTime

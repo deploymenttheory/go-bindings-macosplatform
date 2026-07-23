@@ -7036,6 +7036,30 @@
       "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSImage/MPSImageKeypoint.h",
       "sdk_line": 18,
       "doc": "@brief      Specifies information to find the keypoints in an image."
+    },
+    "MPSScaleTransform": {
+      "fields": [
+        {
+          "name": "scaleX",
+          "objc_type": "double"
+        },
+        {
+          "name": "scaleY",
+          "objc_type": "double"
+        },
+        {
+          "name": "translateX",
+          "objc_type": "double"
+        },
+        {
+          "name": "translateY",
+          "objc_type": "double"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSCore/MPSCoreTypes.h",
+      "sdk_line": 413,
+      "doc": "@struct         MPSScaleTransform @abstract       Transform matrix for explict control over resampling in MPSImageScale. @discussion     The MPSScaleTransform is equivalent to: @code (CGAffineTransform) { .a = scaleX,        .b = 0, .c = 0,             .d = scaleY, .tx = translateX,   .ty = translateY } @endcode @memberof       MPSImageScale"
     }
   },
   "functions": null,

@@ -104,4 +104,11 @@ func (ncarb *NNCropAndResizeBilinear) NumberOfRegions() int {
 	return _r
 }
 
+// Regions returns this is a pointer to "numberOfRegions" boxes which specify the locations in the source image to use for each box/region to perform the resize operation. The coordinates specified are normalized values.  A normalized region outside the [0, 1] range is allowed, in which case we use extrapolation_value to extrapolate the input image values.
+func (ncarb *NNCropAndResizeBilinear) Regions() *mpscore.MPSRegion {
+	defer runtime.KeepAlive(ncarb)
+	_r := objc.Send[*mpscore.MPSRegion](objref.IDOf(ncarb), objc.RegisterName("regions"))
+	return _r
+}
+
 var _ CNNKernelProvider = (*NNCropAndResizeBilinear)(nil)

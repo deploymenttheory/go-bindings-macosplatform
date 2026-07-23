@@ -3400,7 +3400,31 @@
       "is_extensible": true
     }
   },
-  "structs": {},
+  "structs": {
+    "MTLClearColor": {
+      "fields": [
+        {
+          "name": "red",
+          "objc_type": "double"
+        },
+        {
+          "name": "green",
+          "objc_type": "double"
+        },
+        {
+          "name": "blue",
+          "objc_type": "double"
+        },
+        {
+          "name": "alpha",
+          "objc_type": "double"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "Metal/MTLRenderPass.h",
+      "sdk_line": 12
+    }
+  },
   "functions": [
     {
       "name": "MTKModelIOVertexDescriptorFromMetal",

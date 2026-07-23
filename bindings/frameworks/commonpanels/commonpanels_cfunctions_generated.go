@@ -7,6 +7,7 @@ package commonpanels
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -127,17 +128,19 @@ func FPIsFontPanelVisible() uint8 {
 	return _fnFPIsFontPanelVisible()
 }
 
-var _fnGetColor func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
+var _fnGetColor func(carboncore.Point, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
 
 // GetColor calls the CommonPanels framework function GetColor.
-func GetColor(where unsafe.Pointer, inColor unsafe.Pointer, outColor unsafe.Pointer) (result uint8, prompt uint8) {
+func GetColor(where carboncore.Point) (result uint8, prompt uint8, inColor RGBColor, outColor RGBColor) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetColor == nil {
 		ebipurego.RegisterLibFunc(&_fnGetColor, _lib, "GetColor")
 	}
 	var _out0 uint8
-	_ret := _fnGetColor(where, unsafe.Pointer(&_out0), inColor, outColor)
-	return _ret, _out0
+	var _out1 RGBColor
+	var _out2 RGBColor
+	_ret := _fnGetColor(where, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnInvokeCalibrateEventUPP func(unsafe.Pointer, unsafe.Pointer)

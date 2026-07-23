@@ -550,11 +550,52 @@ func idiomaticRet(
 		maps.Copy(imports, simps)
 		return sname, kindScalar, "", sname, imports, true
 	}
+	// A single pointer to a value struct — this framework's own (IOKit's
+	// const IOUSBDeviceDescriptor *) or another's — is returned as *Struct so the
+	// caller reads the fields directly instead of an opaque unsafe.Pointer. Gated
+	// on the struct being an emittable, layout-safe value struct, so the pointer
+	// never dangles or misreads a packed layout.
+	if base, simps, ok := pointerValueStructType(goRet, fc, mapper, rawPkgAlias); ok {
+		maps.Copy(imports, simps)
+		return "*" + base, kindScalar, "", "*" + base, imports, true
+	}
 	if isHermeticScalar(goRet) {
 		t := goSizeType(goRet)
 		return t, kindScalar, "", t, imports, true
 	}
 	return "", kindVoid, "", "", imports, false
+}
+
+// pointerValueStructType recognises a single pointer to an emittable value struct
+// — this framework's own ("*<rawAlias>.Foo") or another framework's ("*pkg.Foo")
+// — and returns the Go type to name the pointee ("Foo" or "pkg.Foo") plus any
+// import needed. ok is false for double pointers, slices, non-struct pointees, and
+// structs that are not emittable value structs. The local case is gated on the
+// authoritative mapper.EmittableStructs (which already excludes layout-unsafe
+// packed structs), mirroring outParamGoType — fc.localStruct relies on a scanner
+// field GoType the metadata omits and so under-reports newly captured structs.
+func pointerValueStructType(
+	goType string,
+	fc *frameworkContext,
+	mapper *typemap.Mapper,
+	rawPkgAlias string,
+) (string, map[string]string, bool) {
+	if !strings.HasPrefix(goType, "*") || strings.HasPrefix(goType, "**") {
+		return "", nil, false
+	}
+	pointee := goType[1:]
+	if strings.HasPrefix(pointee, rawPkgAlias+".") {
+		sname := pointee[len(rawPkgAlias)+1:]
+		if sname != "" && !strings.ContainsAny(sname, ".*[]") &&
+			fc.ownTypes[sname] && mapper.EmittableStructs[sname] {
+			return sname, map[string]string{}, true
+		}
+		return "", nil, false
+	}
+	if name, simps, ok := crossFrameworkValueStruct(pointee, mapper, rawPkgAlias); ok {
+		return name, simps, true
+	}
+	return "", nil, false
 }
 
 // localValueStructName reports the local value-struct name for a resolved Go

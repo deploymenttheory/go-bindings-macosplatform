@@ -62,6 +62,13 @@ func (mp *MultiPoint) WithSubtitle(subtitle string) *MultiPoint {
 	return mp
 }
 
+// Points returns an array of map points associated with the shape.
+func (mp *MultiPoint) Points() *MKMapPoint {
+	defer runtime.KeepAlive(mp)
+	_r := objc.Send[*MKMapPoint](objref.IDOf(mp), objc.RegisterName("points"))
+	return _r
+}
+
 // GetCoordinatesRange retrieves one or more points associated with the shape and converts them to coordinate values.
 func (mp *MultiPoint) GetCoordinatesRange(coords unsafe.Pointer, range_ foundation.NSRange) {
 	defer runtime.KeepAlive(mp)

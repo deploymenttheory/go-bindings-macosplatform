@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"runtime"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -92,12 +91,6 @@ func (cedc *CaptureExternalDisplayConfiguration) WithBypassColorSpaceConversion(
 	return cedc
 }
 
-// WithPreferredResolution sets your preferred external display resolution.
-func (cedc *CaptureExternalDisplayConfiguration) WithPreferredResolution(preferredResolution coremedia.CMVideoDimensions) *CaptureExternalDisplayConfiguration {
-	objc.Send[objc.ID](objref.IDOf(cedc), objc.RegisterName("setPreferredResolution:"), preferredResolution)
-	return cedc
-}
-
 // ShouldMatchFrameRate reports whether a property indicating whether the frame rate of the external display should be configured to match the camera's frame rate. If you want to configure your “AVCaptureVideoPreviewLayer“ to match its source “AVCaptureDevice/activeVideoMinFrameDuration“, set “shouldMatchFrameRate“ to `true`. The default value is `false`.
 func (cedc *CaptureExternalDisplayConfiguration) ShouldMatchFrameRate() bool {
 	defer runtime.KeepAlive(cedc)
@@ -109,12 +102,5 @@ func (cedc *CaptureExternalDisplayConfiguration) ShouldMatchFrameRate() bool {
 func (cedc *CaptureExternalDisplayConfiguration) BypassColorSpaceConversion() bool {
 	defer runtime.KeepAlive(cedc)
 	_r := objc.Send[bool](objref.IDOf(cedc), objc.RegisterName("bypassColorSpaceConversion"))
-	return _r
-}
-
-// PreferredResolution returns your preferred external display resolution. Use “preferredResolution“ to set your desired resolution of the external display. When left at the default value of { 0, 0 },  the native resolution of the external display is used.
-func (cedc *CaptureExternalDisplayConfiguration) PreferredResolution() coremedia.CMVideoDimensions {
-	defer runtime.KeepAlive(cedc)
-	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(cedc), objc.RegisterName("preferredResolution"))
 	return _r
 }

@@ -5865,6 +5865,22 @@
     }
   },
   "structs": {
+    "CMVideoDimensions": {
+      "fields": [
+        {
+          "name": "width",
+          "objc_type": "int32_t"
+        },
+        {
+          "name": "height",
+          "objc_type": "int32_t"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "CoreMedia/CMFormatDescription.h",
+      "sdk_line": 687,
+      "doc": "@typedef CMVideoDimensions Type used for video dimensions, units are pixels"
+    },
     "OpaqueVTCompressionSession": {
       "availability": {},
       "sdk_file": "VideoToolbox/VTCompressionSession.h",

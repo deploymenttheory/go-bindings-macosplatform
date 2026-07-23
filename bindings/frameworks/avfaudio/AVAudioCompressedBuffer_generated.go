@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -115,6 +116,20 @@ func (acb *AudioCompressedBuffer) ByteCapacity() uint32 {
 func (acb *AudioCompressedBuffer) ByteLength() uint32 {
 	defer runtime.KeepAlive(acb)
 	_r := objc.Send[uint32](objref.IDOf(acb), objc.RegisterName("byteLength"))
+	return _r
+}
+
+// PacketDescriptions returns access the buffer's array of packet descriptions, if any. If the format has constant bytes per packet (format.streamDescription->mBytesPerPacket != 0), then this will return nil.
+func (acb *AudioCompressedBuffer) PacketDescriptions() *coreaudiotypes.AudioStreamPacketDescription {
+	defer runtime.KeepAlive(acb)
+	_r := objc.Send[*coreaudiotypes.AudioStreamPacketDescription](objref.IDOf(acb), objc.RegisterName("packetDescriptions"))
+	return _r
+}
+
+// PacketDependencies returns access the buffer's array of packet dependencies, if any. If the format doesn't employ packet dependencies, this will be nil.
+func (acb *AudioCompressedBuffer) PacketDependencies() *coreaudiotypes.AudioStreamPacketDependencyDescription {
+	defer runtime.KeepAlive(acb)
+	_r := objc.Send[*coreaudiotypes.AudioStreamPacketDependencyDescription](objref.IDOf(acb), objc.RegisterName("packetDependencies"))
 	return _r
 }
 

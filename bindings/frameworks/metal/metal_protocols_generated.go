@@ -7,6 +7,7 @@ package metal
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/compositorservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
@@ -165,7 +166,7 @@ type MTL4PipelineDataSetSerializer interface {
 type MTL4RenderCommandEncoder interface {
 	SetColorAttachmentMap(mapping *LogicalToPhysicalColorAttachmentMap)
 	SetRenderPipelineState(pipelineState obj.Object)
-	SetViewport(viewport obj.Object)
+	SetViewport(viewport compositorservices.MTLViewport)
 	SetViewportsCount(viewports obj.Object, count int)
 	SetVertexAmplificationCountViewMappings(count int, viewMappings obj.Object)
 	SetCullMode(cullMode CullMode)

@@ -27,3 +27,11 @@ type MPSImageKeypointRangeInfo struct {
 	MaximumKeypoints      uint
 	MinimumThresholdValue float32
 }
+
+// Transform matrix for explict control over resampling in MPSImageScale. The MPSScaleTransform is equivalent to:
+type MPSScaleTransform struct {
+	ScaleX     float64
+	ScaleY     float64
+	TranslateX float64
+	TranslateY float64
+}

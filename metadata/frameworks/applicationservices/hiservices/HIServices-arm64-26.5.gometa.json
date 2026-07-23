@@ -3600,6 +3600,25 @@
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/Processes.h",
       "sdk_line": 163
     },
+    "RGBColor": {
+      "fields": [
+        {
+          "name": "red",
+          "objc_type": "unsigned short"
+        },
+        {
+          "name": "green",
+          "objc_type": "unsigned short"
+        },
+        {
+          "name": "blue",
+          "objc_type": "unsigned short"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "ApplicationServices.framework/Frameworks/QD/Quickdraw.h",
+      "sdk_line": 65
+    },
     "SizeResourceRec": {
       "fields": [
         {

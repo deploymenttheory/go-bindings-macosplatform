@@ -101,16 +101,16 @@ func (hi *HostInterface) IdleTimeout() float64 {
 }
 
 // ConfigurationDescriptor returns retrieve the configuration descriptor associated with this interface
-func (hi *HostInterface) ConfigurationDescriptor() unsafe.Pointer {
+func (hi *HostInterface) ConfigurationDescriptor() *IOUSBConfigurationDescriptor {
 	defer runtime.KeepAlive(hi)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(hi), objc.RegisterName("configurationDescriptor"))
+	_r := objc.Send[*IOUSBConfigurationDescriptor](objref.IDOf(hi), objc.RegisterName("configurationDescriptor"))
 	return _r
 }
 
 // InterfaceDescriptor returns retrieve the interface descriptor associated with this interface.
-func (hi *HostInterface) InterfaceDescriptor() unsafe.Pointer {
+func (hi *HostInterface) InterfaceDescriptor() *IOUSBInterfaceDescriptor {
 	defer runtime.KeepAlive(hi)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(hi), objc.RegisterName("interfaceDescriptor"))
+	_r := objc.Send[*IOUSBInterfaceDescriptor](objref.IDOf(hi), objc.RegisterName("interfaceDescriptor"))
 	return _r
 }
 

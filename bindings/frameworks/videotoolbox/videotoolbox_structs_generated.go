@@ -8,6 +8,11 @@ import (
 	"unsafe"
 )
 
+type CMVideoDimensions struct {
+	Width  int32
+	Height int32
+}
+
 type OpaqueVTCompressionSession struct{}
 
 type OpaqueVTDecompressionSession struct{}

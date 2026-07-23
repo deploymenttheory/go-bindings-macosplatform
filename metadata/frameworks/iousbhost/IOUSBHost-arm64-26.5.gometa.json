@@ -6155,6 +6155,278 @@
     }
   },
   "structs": {
+    "IOUSBBOSDescriptor": {
+      "fields": [
+        {
+          "name": "bLength",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDescriptorType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "wTotalLength",
+          "objc_type": "uint16_t"
+        },
+        {
+          "name": "bNumDeviceCaps",
+          "objc_type": "uint8_t"
+        }
+      ],
+      "packed": true,
+      "availability": {},
+      "sdk_file": "IOKit/usb/AppleUSBDefinitions.h",
+      "sdk_line": 476,
+      "doc": "@typedef    IOUSBBOSDescriptor @discussion USB BOS descriptor. See the USB Specification at \u003ca href=\"http://www.usb.org\" target=\"_blank\"\u003ehttp://www.usb.org\u003c/a\u003e. USB 3.0 9.6.2: Binary Device Object Store (BOS)"
+    },
+    "IOUSBConfigurationDescriptor": {
+      "fields": [
+        {
+          "name": "bLength",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDescriptorType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "wTotalLength",
+          "objc_type": "uint16_t"
+        },
+        {
+          "name": "bNumInterfaces",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bConfigurationValue",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "iConfiguration",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bmAttributes",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "MaxPower",
+          "objc_type": "uint8_t"
+        }
+      ],
+      "packed": true,
+      "availability": {},
+      "sdk_file": "IOKit/usb/AppleUSBDefinitions.h",
+      "sdk_line": 265,
+      "doc": "@typedef    IOUSBConfigurationDescriptor @discussion Standard USB Configuration Descriptor.  It is variable length, so this only specifies the known fields.  We use the wTotalLength field to read the whole descriptor. See the USB Specification at \u003ca href=\"http://www.usb.org\" target=\"_blank\"\u003ehttp://www.usb.org\u003c/a\u003e. USB 2.0 9.6.3: Configuration"
+    },
+    "IOUSBDescriptorHeader": {
+      "fields": [
+        {
+          "name": "bLength",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDescriptorType",
+          "objc_type": "uint8_t"
+        }
+      ],
+      "packed": true,
+      "availability": {},
+      "sdk_file": "IOKit/usb/AppleUSBDefinitions.h",
+      "sdk_line": 184,
+      "doc": "@struct      IOUSBDescriptorHeader @brief       Base descriptor defined by USB 2.0 9.5 @discussion  IOUSBDescriptorDefinitions declares structs to represent a variety of USB standard descriptors."
+    },
+    "IOUSBDeviceCapabilityDescriptorHeader": {
+      "fields": [
+        {
+          "name": "bLength",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDescriptorType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDevCapabilityType",
+          "objc_type": "uint8_t"
+        }
+      ],
+      "packed": true,
+      "availability": {},
+      "sdk_file": "IOKit/usb/AppleUSBDefinitions.h",
+      "sdk_line": 493,
+      "doc": "@typedef    IOUSBDeviceCapabilityDescriptorHeader @discussion Device Capability descriptor.  See the USB Specification at \u003ca href=\"http://www.usb.org\" target=\"_blank\"\u003ehttp://www.usb.org\u003c/a\u003e. USB 3.0 9.6.2: Binary Device Object Store (BOS)"
+    },
+    "IOUSBDeviceCapabilitySuperSpeedUSB": {
+      "fields": [
+        {
+          "name": "bLength",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDescriptorType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDevCapabilityType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bmAttributes",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "wSpeedsSupported",
+          "objc_type": "uint16_t"
+        },
+        {
+          "name": "bFunctionalitySupport",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bU1DevExitLat",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "wU2DevExitLat",
+          "objc_type": "uint16_t"
+        }
+      ],
+      "packed": true,
+      "availability": {},
+      "sdk_file": "IOKit/usb/AppleUSBDefinitions.h",
+      "sdk_line": 537,
+      "doc": "@typedef    IOUSBDeviceCapabilitySuperSpeedUSB @discussion Device Capability SuperSpeed USB. USB 3.0 9.6.2.2: SuperSpeed USB Device Capability"
+    },
+    "IOUSBDeviceDescriptor": {
+      "fields": [
+        {
+          "name": "bLength",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDescriptorType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bcdUSB",
+          "objc_type": "uint16_t"
+        },
+        {
+          "name": "bDeviceClass",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDeviceSubClass",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDeviceProtocol",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bMaxPacketSize0",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "idVendor",
+          "objc_type": "uint16_t"
+        },
+        {
+          "name": "idProduct",
+          "objc_type": "uint16_t"
+        },
+        {
+          "name": "bcdDevice",
+          "objc_type": "uint16_t"
+        },
+        {
+          "name": "iManufacturer",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "iProduct",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "iSerialNumber",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bNumConfigurations",
+          "objc_type": "uint8_t"
+        }
+      ],
+      "packed": true,
+      "availability": {},
+      "sdk_file": "IOKit/usb/AppleUSBDefinitions.h",
+      "sdk_line": 203,
+      "doc": "@typedef    IOUSBDeviceDescriptor @discussion Descriptor for a USB Device. See the USB Specification at \u003ca href=\"http://www.usb.org\" target=\"_blank\"\u003ehttp://www.usb.org\u003c/a\u003e."
+    },
+    "IOUSBDeviceRequest": {
+      "fields": [
+        {
+          "name": "bmRequestType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bRequest",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "wValue",
+          "objc_type": "uint16_t"
+        },
+        {
+          "name": "wIndex",
+          "objc_type": "uint16_t"
+        },
+        {
+          "name": "wLength",
+          "objc_type": "uint16_t"
+        }
+      ],
+      "packed": true,
+      "availability": {},
+      "sdk_file": "IOKit/usb/AppleUSBDefinitions.h",
+      "sdk_line": 948,
+      "doc": "@typedef    IOUSBDeviceRequest @discussion Standard device request. See the USB Specification at \u003ca href=\"http://www.usb.org\"TARGET=\"_blank\"\u003ehttp://www.usb.org\u003c/a\u003e. USB 2.0 9.3: USB Device Requests"
+    },
+    "IOUSBEndpointDescriptor": {
+      "fields": [
+        {
+          "name": "bLength",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDescriptorType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bEndpointAddress",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bmAttributes",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "wMaxPacketSize",
+          "objc_type": "uint16_t"
+        },
+        {
+          "name": "bInterval",
+          "objc_type": "uint8_t"
+        }
+      ],
+      "packed": true,
+      "availability": {},
+      "sdk_file": "IOKit/usb/AppleUSBDefinitions.h",
+      "sdk_line": 315,
+      "doc": "@typedef    IOUSBEndpointDescriptor @discussion Descriptor for a USB Endpoint.  See the USB Specification at \u003ca href=\"http://www.usb.org\" target=\"_blank\"\u003ehttp://www.usb.org\u003c/a\u003e. USB 2.0 9.6.6: Endpoint"
+    },
     "IOUSBHostCIMessage": {
       "fields": [
         {
@@ -6222,6 +6494,7 @@
           "objc_type": "IOUSBHostTime"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "IOUSBHost/IOUSBHostDefinitions.h",
       "sdk_line": 39,
@@ -6254,10 +6527,151 @@
           "objc_type": "IOUSBHostIsochronousTransactionOptions"
         }
       ],
+      "packed": true,
       "availability": {},
       "sdk_file": "IOUSBHost/IOUSBHostDefinitions.h",
       "sdk_line": 89,
       "doc": "@struct      IOUSBHostIsochronousTransaction @discussion  Structure representing a single frame or microframe in an isochronous transfer. @field       status Completion status for this individual transaction. IOUSBHostFamily will initialize this to kIOReturnInvalid and will update the field with a valid status code upon completion of the transaction. @field       requestCount The number of bytes requested to transfer for this transaction. This field must be initialized by the caller before the structure is submitted. @field       offset The number of bytes between the start of the memory descriptor in which this transaction resides and the start of the transaction.  The offset cannot exceed 4GB. @field       completeCount The number of bytes actually transferred for this transaction. IOUSBHostFamily will update this field upon completion of the transaction. @field       timeStamp The observed IOUSBHostTime for this transaction's completion.  Note that interrupt latency and system load may result in more than one transaction completing with the same timestamp. @field       options Flags that specify additional transaction behavior.  See @link IOUSBHostIsochronousTransactionOptions @/link for more details."
+    },
+    "IOUSBInterfaceAssociationDescriptor": {
+      "fields": [
+        {
+          "name": "bLength",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDescriptorType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bFirstInterface",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bInterfaceCount",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bFunctionClass",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bFunctionSubClass",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bFunctionProtocol",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "iFunction",
+          "objc_type": "uint8_t"
+        }
+      ],
+      "packed": true,
+      "availability": {},
+      "sdk_file": "IOKit/usb/AppleUSBDefinitions.h",
+      "sdk_line": 754,
+      "doc": "@typedef    IOUSBInterfaceAssociationDescriptor @discussion USB Inerface Association Descriptor.  ECN to the USB 2.0 Spec. See the USB Specification at \u003ca href=\"http://www.usb.org\" target=\"_blank\"\u003ehttp://www.usb.org\u003c/a\u003e. USB 3.0 9.6.4: Interface Association"
+    },
+    "IOUSBInterfaceDescriptor": {
+      "fields": [
+        {
+          "name": "bLength",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDescriptorType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bInterfaceNumber",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bAlternateSetting",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bNumEndpoints",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bInterfaceClass",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bInterfaceSubClass",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bInterfaceProtocol",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "iInterface",
+          "objc_type": "uint8_t"
+        }
+      ],
+      "packed": true,
+      "availability": {},
+      "sdk_file": "IOKit/usb/AppleUSBDefinitions.h",
+      "sdk_line": 293,
+      "doc": "@typedef    IOUSBInterfaceDescriptor @discussion Descriptor for a USB Interface.  See the USB Specification at \u003ca href=\"http://www.usb.org\" target=\"_blank\"\u003ehttp://www.usb.org\u003c/a\u003e. USB 2.0 9.6.5: Interface"
+    },
+    "IOUSBSuperSpeedEndpointCompanionDescriptor": {
+      "fields": [
+        {
+          "name": "bLength",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDescriptorType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bMaxBurst",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bmAttributes",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "wBytesPerInterval",
+          "objc_type": "uint16_t"
+        }
+      ],
+      "packed": true,
+      "availability": {},
+      "sdk_file": "IOKit/usb/AppleUSBDefinitions.h",
+      "sdk_line": 775,
+      "doc": "@typedef    IOUSBSuperSpeedEndpointCompanionDescriptor @discussion Descriptor for a SuperSpeed USB Endpoint Companion. See the USB Specification at \u003ca href=\"http://www.usb.org\"TARGET=\"_blank\"\u003ehttp://www.usb.org\u003c/a\u003e. USB 3.1 9.6.7: SuperSpeed Endpoint Companion"
+    },
+    "IOUSBSuperSpeedPlusIsochronousEndpointCompanionDescriptor": {
+      "fields": [
+        {
+          "name": "bLength",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDescriptorType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "wReserved",
+          "objc_type": "uint16_t"
+        },
+        {
+          "name": "dwBytesPerInterval",
+          "objc_type": "uint32_t"
+        }
+      ],
+      "packed": true,
+      "availability": {},
+      "sdk_file": "IOKit/usb/AppleUSBDefinitions.h",
+      "sdk_line": 809,
+      "doc": "@typedef    IOUSBSuperSpeedPlusIsochronousEndpointCompanionDescriptor @discussion Descriptor for a SuperSpeedPlus Isochronout USB Endpoint Companion. See the USB Specification at \u003ca href=\"http://www.usb.org\"TARGET=\"_blank\"\u003ehttp://www.usb.org\u003c/a\u003e. USB 3.1 9.6.8: SuperSpeedPlus Isochronous Endpoint Companion"
     }
   },
   "functions": [

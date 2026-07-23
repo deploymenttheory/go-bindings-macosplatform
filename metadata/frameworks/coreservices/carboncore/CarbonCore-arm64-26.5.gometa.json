@@ -38875,6 +38875,22 @@
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/PEFBinaryFormat.h",
       "sdk_line": 491
     },
+    "Point": {
+      "fields": [
+        {
+          "name": "v",
+          "objc_type": "short"
+        },
+        {
+          "name": "h",
+          "objc_type": "short"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "MacTypes.h",
+      "sdk_line": 544,
+      "doc": "****************************************************************************** Quickdraw Types Point               2D Quickdraw coordinate, range: -32K to +32K Rect                Rectangular Quickdraw area Style               Quickdraw font rendering styles StyleParameter      Style when used as a parameter (historical 68K convention) StyleField          Style when used as a field (historical 68K convention) CharParameter       Char when used as a parameter (historical 68K convention) Note:   The original Macintosh toolbox in 68K Pascal defined Style as a SET. Both Style and CHAR occupy 8-bits in packed records or 16-bits when used as fields in non-packed records or as parameters. *******************************************************************************"
+    },
     "QElem": {
       "fields": [
         {
@@ -38916,6 +38932,29 @@
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/OSUtils.h",
       "sdk_line": 77
+    },
+    "Rect": {
+      "fields": [
+        {
+          "name": "top",
+          "objc_type": "short"
+        },
+        {
+          "name": "left",
+          "objc_type": "short"
+        },
+        {
+          "name": "bottom",
+          "objc_type": "short"
+        },
+        {
+          "name": "right",
+          "objc_type": "short"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "MacTypes.h",
+      "sdk_line": 550
     },
     "RegisterInformation": {
       "fields": [

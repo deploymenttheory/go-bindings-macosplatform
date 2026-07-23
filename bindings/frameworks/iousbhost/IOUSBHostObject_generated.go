@@ -110,66 +110,6 @@ func (ho *HostObject) DestroyWith(options HostObjectDestroyOptions) {
 	objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("destroyWithOptions:"), options)
 }
 
-// SendDeviceRequestDataBytesTransferredCompletionTimeout sends a request on the default control endpoint.
-func (ho *HostObject) SendDeviceRequestDataBytesTransferredCompletionTimeout(request unsafe.Pointer, data obj.Object, completionTimeout float64) (bytesTransferred int, err error) {
-	defer runtime.KeepAlive(ho)
-	defer runtime.KeepAlive(data)
-	var _out0 int
-	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(ho), objc.RegisterName("sendDeviceRequest:data:bytesTransferred:completionTimeout:error:"), request, objref.IDOf(data), unsafe.Pointer(&_out0), completionTimeout, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return _out0, nil
-}
-
-// SendDeviceRequestDataBytesTransferred sends a request on the default control endpoint with a default completion timeout.
-func (ho *HostObject) SendDeviceRequestDataBytesTransferred(request unsafe.Pointer, data obj.Object) (bytesTransferred int, err error) {
-	defer runtime.KeepAlive(ho)
-	defer runtime.KeepAlive(data)
-	var _out0 int
-	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(ho), objc.RegisterName("sendDeviceRequest:data:bytesTransferred:error:"), request, objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return _out0, nil
-}
-
-// SendDeviceRequest sends a request on the default control endpoint without a data phase and default completion timeout.
-func (ho *HostObject) SendDeviceRequest(request unsafe.Pointer) error {
-	defer runtime.KeepAlive(ho)
-	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(ho), objc.RegisterName("sendDeviceRequest:error:"), request, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
-	}
-	return nil
-}
-
-// EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler enqueues a request on the default control endpoint.
-func (ho *HostObject) EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data obj.Object, completionTimeout float64, err unsafe.Pointer, completionHandler func(int, int)) bool {
-	defer runtime.KeepAlive(ho)
-	defer runtime.KeepAlive(data)
-	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("enqueueDeviceRequest:data:completionTimeout:error:completionHandler:"), request, objref.IDOf(data), completionTimeout, err, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { completionHandler(_b0, _b1) }))
-	return _r
-}
-
-// EnqueueDeviceRequestDataErrorCompletionHandler enqueues a request on the default control endpoint with a default completion timeout.
-func (ho *HostObject) EnqueueDeviceRequestDataErrorCompletionHandler(request unsafe.Pointer, data obj.Object, err unsafe.Pointer, completionHandler func(int, int)) bool {
-	defer runtime.KeepAlive(ho)
-	defer runtime.KeepAlive(data)
-	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("enqueueDeviceRequest:data:error:completionHandler:"), request, objref.IDOf(data), err, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { completionHandler(_b0, _b1) }))
-	return _r
-}
-
-// EnqueueDeviceRequestErrorCompletionHandler enqueues a request on the default control endpoint without a data phase and a default timeout.
-func (ho *HostObject) EnqueueDeviceRequestErrorCompletionHandler(request unsafe.Pointer, err unsafe.Pointer, completionHandler func(int, int)) bool {
-	defer runtime.KeepAlive(ho)
-	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("enqueueDeviceRequest:error:completionHandler:"), request, err, objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { completionHandler(_b0, _b1) }))
-	return _r
-}
-
 // AbortDeviceRequestsWithOption aborts device requests.
 func (ho *HostObject) AbortDeviceRequestsWithOption(option HostAbortOption) error {
 	defer runtime.KeepAlive(ho)
@@ -231,10 +171,10 @@ func (ho *HostObject) DescriptorWithTypeLength(type_ unsafe.Pointer) (result uns
 }
 
 // ConfigurationDescriptorWithIndex return the configuration descriptor at a specified index This method uses descriptorWithType to retrieve the configuration descriptor.
-func (ho *HostObject) ConfigurationDescriptorWithIndex(index int) (result unsafe.Pointer, err error) {
+func (ho *HostObject) ConfigurationDescriptorWithIndex(index int) (result *IOUSBConfigurationDescriptor, err error) {
 	defer runtime.KeepAlive(ho)
 	var _nsErr uintptr
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(ho), objc.RegisterName("configurationDescriptorWithIndex:error:"), index, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[*IOUSBConfigurationDescriptor](objref.IDOf(ho), objc.RegisterName("configurationDescriptorWithIndex:error:"), index, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -242,10 +182,10 @@ func (ho *HostObject) ConfigurationDescriptorWithIndex(index int) (result unsafe
 }
 
 // ConfigurationDescriptorWithConfigurationValue return the configuration descriptor with a specified value This method uses descriptorWithType to search for a configuration descriptor with a specific <code>bConfigurationValue</code> field.
-func (ho *HostObject) ConfigurationDescriptorWithConfigurationValue(configurationValue int) (result unsafe.Pointer, err error) {
+func (ho *HostObject) ConfigurationDescriptorWithConfigurationValue(configurationValue int) (result *IOUSBConfigurationDescriptor, err error) {
 	defer runtime.KeepAlive(ho)
 	var _nsErr uintptr
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(ho), objc.RegisterName("configurationDescriptorWithConfigurationValue:error:"), configurationValue, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[*IOUSBConfigurationDescriptor](objref.IDOf(ho), objc.RegisterName("configurationDescriptorWithConfigurationValue:error:"), configurationValue, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -332,16 +272,16 @@ func (ho *HostObject) Queue() *foundation.Object {
 }
 
 // DeviceDescriptor returns the device descriptor This method uses descriptorWithType to retrieve the device descriptor.
-func (ho *HostObject) DeviceDescriptor() unsafe.Pointer {
+func (ho *HostObject) DeviceDescriptor() *IOUSBDeviceDescriptor {
 	defer runtime.KeepAlive(ho)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(ho), objc.RegisterName("deviceDescriptor"))
+	_r := objc.Send[*IOUSBDeviceDescriptor](objref.IDOf(ho), objc.RegisterName("deviceDescriptor"))
 	return _r
 }
 
 // CapabilityDescriptors returns the capability descriptors of the device This method uses descriptorWithType to return the device's BOS descriptors
-func (ho *HostObject) CapabilityDescriptors() unsafe.Pointer {
+func (ho *HostObject) CapabilityDescriptors() *IOUSBBOSDescriptor {
 	defer runtime.KeepAlive(ho)
-	_r := objc.Send[unsafe.Pointer](objref.IDOf(ho), objc.RegisterName("capabilityDescriptors"))
+	_r := objc.Send[*IOUSBBOSDescriptor](objref.IDOf(ho), objc.RegisterName("capabilityDescriptors"))
 	return _r
 }
 

@@ -1961,10 +1961,10 @@ func CTRunGetAdvances(run obj.Object, range_ corefoundation.CFRange, buffer unsa
 	_fnCTRunGetAdvances(objref.IDOf(run), range_, buffer)
 }
 
-var _fnCTRunGetAdvancesPtr func(objc.ID) unsafe.Pointer
+var _fnCTRunGetAdvancesPtr func(objc.ID) *corefoundation.CGSize
 
 // CTRunGetAdvancesPtr calls the CoreText framework function CTRunGetAdvancesPtr.
-func CTRunGetAdvancesPtr(run obj.Object) unsafe.Pointer {
+func CTRunGetAdvancesPtr(run obj.Object) *corefoundation.CGSize {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTRunGetAdvancesPtr == nil {
 		ebipurego.RegisterLibFunc(&_fnCTRunGetAdvancesPtr, _lib, "CTRunGetAdvancesPtr")
@@ -2052,10 +2052,10 @@ func CTRunGetPositions(run obj.Object, range_ corefoundation.CFRange, buffer uns
 	_fnCTRunGetPositions(objref.IDOf(run), range_, buffer)
 }
 
-var _fnCTRunGetPositionsPtr func(objc.ID) unsafe.Pointer
+var _fnCTRunGetPositionsPtr func(objc.ID) *corefoundation.CGPoint
 
 // CTRunGetPositionsPtr calls the CoreText framework function CTRunGetPositionsPtr.
-func CTRunGetPositionsPtr(run obj.Object) unsafe.Pointer {
+func CTRunGetPositionsPtr(run obj.Object) *corefoundation.CGPoint {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTRunGetPositionsPtr == nil {
 		ebipurego.RegisterLibFunc(&_fnCTRunGetPositionsPtr, _lib, "CTRunGetPositionsPtr")

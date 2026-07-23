@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -53,6 +54,13 @@ func faceLandmarkRegion2DAdopt(id objc.ID) *FaceLandmarkRegion2D {
 func NewFaceLandmarkRegion2D() *FaceLandmarkRegion2D {
 	_id := objc.Send[objc.ID](objc.ID(_class("VNFaceLandmarkRegion2D")), objc.RegisterName("new"))
 	return faceLandmarkRegion2DAdopt(_id)
+}
+
+// PointsInImageOfSize a buffer in memory containing landmark points in the coordinate space of the specified image size.
+func (flrd *FaceLandmarkRegion2D) PointsInImageOfSize(imageSize corefoundation.CGSize) *corefoundation.CGPoint {
+	defer runtime.KeepAlive(flrd)
+	_r := objc.Send[*corefoundation.CGPoint](objref.IDOf(flrd), objc.RegisterName("pointsInImageOfSize:"), imageSize)
+	return _r
 }
 
 // NormalizedPoints returns obtains the array of normalized landmark points. Provides the address of a buffer containing the array of CGPoints representing the landmark points.  This buffer is owned by the target object and is guaranteed to exist as long as the VNFaceLandmarkRegion2D does.

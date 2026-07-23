@@ -5440,7 +5440,24 @@
       "is_extensible": true
     }
   },
-  "structs": {},
+  "structs": {
+    "AVSampleCursorStorageRange": {
+      "fields": [
+        {
+          "name": "offset",
+          "objc_type": "int64_t"
+        },
+        {
+          "name": "length",
+          "objc_type": "int64_t"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "AVFoundation/AVSampleCursor.h",
+      "sdk_line": 268,
+      "doc": "@struct\t\tAVSampleCursorStorageRange @abstract   A struct for indicating the offset and length of storage occupied by a media sample or its chunk. @field      offset The offset of the first byte of storage occupied by a media sample or its chunk. @field      length The count of bytes of storage occupied by a media sample or its chunk. @discussion Like NSRange, but rangier."
+    }
+  },
   "functions": null,
   "externs": [
     {
