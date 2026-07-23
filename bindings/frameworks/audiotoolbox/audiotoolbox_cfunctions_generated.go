@@ -169,15 +169,14 @@ func AUGraphGetMaxCPULoad(inGraph obj.Object) (result int, outMaxLoad float32) {
 var _fnAUGraphGetNodeConnections func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AUGraphGetNodeConnections calls the AudioToolbox framework function AUGraphGetNodeConnections.
-func AUGraphGetNodeConnections(inGraph obj.Object, inNode int) (result int, outConnections AudioUnitNodeConnection, ioNumConnections int) {
+func AUGraphGetNodeConnections(inGraph obj.Object, inNode int, outConnections unsafe.Pointer) (result int, ioNumConnections int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphGetNodeConnections == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetNodeConnections, _lib, "AUGraphGetNodeConnections")
 	}
-	var _out0 AudioUnitNodeConnection
-	var _out1 int
-	_ret := int(_fnAUGraphGetNodeConnections(objref.IDOf(inGraph), inNode, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
-	return _ret, _out0, _out1
+	var _out0 int
+	_ret := int(_fnAUGraphGetNodeConnections(objref.IDOf(inGraph), inNode, outConnections, unsafe.Pointer(&_out0)))
+	return _ret, _out0
 }
 
 var _fnAUGraphGetNodeCount func(objc.ID, unsafe.Pointer) int32
@@ -196,13 +195,13 @@ func AUGraphGetNodeCount(inGraph obj.Object) (result int, outNumberOfNodes int) 
 var _fnAUGraphGetNodeInfo func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // AUGraphGetNodeInfo calls the AudioToolbox framework function AUGraphGetNodeInfo.
-func AUGraphGetNodeInfo(inGraph obj.Object, inNode int, outDescription *carboncore.ComponentDescription, outClassData unsafe.Pointer, outAudioUnit unsafe.Pointer) (result int, outClassDataSize int) {
+func AUGraphGetNodeInfo(inGraph obj.Object, inNode int, outDescription unsafe.Pointer, outClassData unsafe.Pointer, outAudioUnit unsafe.Pointer) (result int, outClassDataSize int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphGetNodeInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphGetNodeInfo, _lib, "AUGraphGetNodeInfo")
 	}
 	var _out0 int
-	_ret := int(_fnAUGraphGetNodeInfo(objref.IDOf(inGraph), inNode, unsafe.Pointer(outDescription), unsafe.Pointer(&_out0), outClassData, outAudioUnit))
+	_ret := int(_fnAUGraphGetNodeInfo(objref.IDOf(inGraph), inNode, outDescription, unsafe.Pointer(&_out0), outClassData, outAudioUnit))
 	return _ret, _out0
 }
 
@@ -300,13 +299,13 @@ func AUGraphIsRunning(inGraph obj.Object) (result int, outIsRunning uint8) {
 var _fnAUGraphNewNode func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // AUGraphNewNode calls the AudioToolbox framework function AUGraphNewNode.
-func AUGraphNewNode(inGraph obj.Object, inDescription *carboncore.ComponentDescription, inClassDataSize int, inClassData unsafe.Pointer) (result int, outNode int) {
+func AUGraphNewNode(inGraph obj.Object, inDescription unsafe.Pointer, inClassDataSize int, inClassData unsafe.Pointer) (result int, outNode int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAUGraphNewNode == nil {
 		ebipurego.RegisterLibFunc(&_fnAUGraphNewNode, _lib, "AUGraphNewNode")
 	}
 	var _out0 int
-	_ret := int(_fnAUGraphNewNode(objref.IDOf(inGraph), unsafe.Pointer(inDescription), inClassDataSize, inClassData, unsafe.Pointer(&_out0)))
+	_ret := int(_fnAUGraphNewNode(objref.IDOf(inGraph), inDescription, inClassDataSize, inClassData, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -501,6 +500,17 @@ func AudioCodecGetPropertyInfo(inCodec *carboncore.ComponentInstanceRecord, inPr
 	var _out1 uint8
 	_ret := int(_fnAudioCodecGetPropertyInfo(unsafe.Pointer(inCodec), inPropertyID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
+}
+
+var _fnAudioCodecInitialize func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int32
+
+// AudioCodecInitialize calls the AudioToolbox framework function AudioCodecInitialize.
+func AudioCodecInitialize(inCodec *carboncore.ComponentInstanceRecord, inInputFormat unsafe.Pointer, inOutputFormat unsafe.Pointer, inMagicCookie unsafe.Pointer, inMagicCookieByteSize int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioCodecInitialize == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioCodecInitialize, _lib, "AudioCodecInitialize")
+	}
+	return int(_fnAudioCodecInitialize(unsafe.Pointer(inCodec), inInputFormat, inOutputFormat, inMagicCookie, inMagicCookieByteSize))
 }
 
 var _fnAudioCodecProduceOutputBufferList func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -764,6 +774,39 @@ func AudioConverterGetPropertyInfo(inAudioConverter obj.Object, inPropertyID int
 	return _ret, _out0, _out1
 }
 
+var _fnAudioConverterNew func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// AudioConverterNew calls the AudioToolbox framework function AudioConverterNew.
+func AudioConverterNew(inSourceFormat unsafe.Pointer, inDestinationFormat unsafe.Pointer, outAudioConverter unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioConverterNew == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioConverterNew, _lib, "AudioConverterNew")
+	}
+	return int(_fnAudioConverterNew(inSourceFormat, inDestinationFormat, outAudioConverter))
+}
+
+var _fnAudioConverterNewSpecific func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// AudioConverterNewSpecific calls the AudioToolbox framework function AudioConverterNewSpecific.
+func AudioConverterNewSpecific(inSourceFormat unsafe.Pointer, inDestinationFormat unsafe.Pointer, inNumberClassDescriptions int, inClassDescriptions *coreaudiotypes.AudioClassDescription, outAudioConverter unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioConverterNewSpecific == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioConverterNewSpecific, _lib, "AudioConverterNewSpecific")
+	}
+	return int(_fnAudioConverterNewSpecific(inSourceFormat, inDestinationFormat, inNumberClassDescriptions, unsafe.Pointer(inClassDescriptions), outAudioConverter))
+}
+
+var _fnAudioConverterNewWithOptions func(unsafe.Pointer, unsafe.Pointer, AudioConverterOptions, unsafe.Pointer) int32
+
+// AudioConverterNewWithOptions calls the AudioToolbox framework function AudioConverterNewWithOptions.
+func AudioConverterNewWithOptions(inSourceFormat unsafe.Pointer, inDestinationFormat unsafe.Pointer, inOptions AudioConverterOptions, outAudioConverter unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioConverterNewWithOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioConverterNewWithOptions, _lib, "AudioConverterNewWithOptions")
+	}
+	return int(_fnAudioConverterNewWithOptions(inSourceFormat, inDestinationFormat, inOptions, outAudioConverter))
+}
+
 var _fnAudioConverterPrepare func(int, unsafe.Pointer, objc.Block)
 
 // AudioConverterPrepare calls the AudioToolbox framework function AudioConverterPrepare.
@@ -786,6 +829,28 @@ func AudioFileComponentCountUserData(inComponent *carboncore.ComponentInstanceRe
 	var _out0 int
 	_ret := int(_fnAudioFileComponentCountUserData(unsafe.Pointer(inComponent), inUserDataID, unsafe.Pointer(&_out0)))
 	return _ret, _out0
+}
+
+var _fnAudioFileComponentCreate func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
+
+// AudioFileComponentCreate calls the AudioToolbox framework function AudioFileComponentCreate.
+func AudioFileComponentCreate(inComponent *carboncore.ComponentInstanceRecord, inParentRef *carboncore.FSRef, inFileName obj.Object, inFormat unsafe.Pointer, inFlags int, outNewFileRef *carboncore.FSRef) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileComponentCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileComponentCreate, _lib, "AudioFileComponentCreate")
+	}
+	return int(_fnAudioFileComponentCreate(unsafe.Pointer(inComponent), unsafe.Pointer(inParentRef), objref.IDOf(inFileName), inFormat, inFlags, unsafe.Pointer(outNewFileRef)))
+}
+
+var _fnAudioFileComponentCreateURL func(unsafe.Pointer, objc.ID, unsafe.Pointer, int) int32
+
+// AudioFileComponentCreateURL calls the AudioToolbox framework function AudioFileComponentCreateURL.
+func AudioFileComponentCreateURL(inComponent *carboncore.ComponentInstanceRecord, inFileRef obj.Object, inFormat unsafe.Pointer, inFlags int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileComponentCreateURL == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileComponentCreateURL, _lib, "AudioFileComponentCreateURL")
+	}
+	return int(_fnAudioFileComponentCreateURL(unsafe.Pointer(inComponent), objref.IDOf(inFileRef), inFormat, inFlags))
 }
 
 var _fnAudioFileComponentDataIsThisFormat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -945,6 +1010,28 @@ func AudioFileComponentGetUserDataSize64(inComponent *carboncore.ComponentInstan
 	return _ret, _out0
 }
 
+var _fnAudioFileComponentInitialize func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int) int32
+
+// AudioFileComponentInitialize calls the AudioToolbox framework function AudioFileComponentInitialize.
+func AudioFileComponentInitialize(inComponent *carboncore.ComponentInstanceRecord, inFileRef *carboncore.FSRef, inFormat unsafe.Pointer, inFlags int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileComponentInitialize == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileComponentInitialize, _lib, "AudioFileComponentInitialize")
+	}
+	return int(_fnAudioFileComponentInitialize(unsafe.Pointer(inComponent), unsafe.Pointer(inFileRef), inFormat, inFlags))
+}
+
+var _fnAudioFileComponentInitializeWithCallbacks func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, int) int32
+
+// AudioFileComponentInitializeWithCallbacks calls the AudioToolbox framework function AudioFileComponentInitializeWithCallbacks.
+func AudioFileComponentInitializeWithCallbacks(inComponent *carboncore.ComponentInstanceRecord, inClientData unsafe.Pointer, inReadFunc unsafe.Pointer, inWriteFunc unsafe.Pointer, inGetSizeFunc unsafe.Pointer, inSetSizeFunc unsafe.Pointer, inFileType int, inFormat unsafe.Pointer, inFlags int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileComponentInitializeWithCallbacks == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileComponentInitializeWithCallbacks, _lib, "AudioFileComponentInitializeWithCallbacks")
+	}
+	return int(_fnAudioFileComponentInitializeWithCallbacks(unsafe.Pointer(inComponent), inClientData, inReadFunc, inWriteFunc, inGetSizeFunc, inSetSizeFunc, inFileType, inFormat, inFlags))
+}
+
 var _fnAudioFileComponentReadBytes func(unsafe.Pointer, uint8, int64, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioFileComponentReadBytes calls the AudioToolbox framework function AudioFileComponentReadBytes.
@@ -1023,6 +1110,28 @@ func AudioFileCountUserData(inAudioFile unsafe.Pointer, inUserDataID int) (resul
 	var _out0 int
 	_ret := int(_fnAudioFileCountUserData(inAudioFile, inUserDataID, unsafe.Pointer(&_out0)))
 	return _ret, _out0
+}
+
+var _fnAudioFileCreate func(unsafe.Pointer, objc.ID, int, unsafe.Pointer, AudioFileFlags, unsafe.Pointer, unsafe.Pointer) int32
+
+// AudioFileCreate calls the AudioToolbox framework function AudioFileCreate.
+func AudioFileCreate(inParentRef *carboncore.FSRef, inFileName obj.Object, inFileType int, inFormat unsafe.Pointer, inFlags AudioFileFlags, outNewFileRef *carboncore.FSRef, outAudioFile unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileCreate, _lib, "AudioFileCreate")
+	}
+	return int(_fnAudioFileCreate(unsafe.Pointer(inParentRef), objref.IDOf(inFileName), inFileType, inFormat, inFlags, unsafe.Pointer(outNewFileRef), outAudioFile))
+}
+
+var _fnAudioFileCreateWithURL func(objc.ID, int, unsafe.Pointer, AudioFileFlags, unsafe.Pointer) int32
+
+// AudioFileCreateWithURL calls the AudioToolbox framework function AudioFileCreateWithURL.
+func AudioFileCreateWithURL(inFileRef obj.Object, inFileType int, inFormat unsafe.Pointer, inFlags AudioFileFlags, outAudioFile unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileCreateWithURL == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileCreateWithURL, _lib, "AudioFileCreateWithURL")
+	}
+	return int(_fnAudioFileCreateWithURL(objref.IDOf(inFileRef), inFileType, inFormat, inFlags, outAudioFile))
 }
 
 var _fnAudioFileGetGlobalInfo func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -1128,6 +1237,28 @@ func AudioFileGetUserDataSize64(inAudioFile unsafe.Pointer, inUserDataID int, in
 	var _out0 uint64
 	_ret := int(_fnAudioFileGetUserDataSize64(inAudioFile, inUserDataID, inIndex, unsafe.Pointer(&_out0)))
 	return _ret, _out0
+}
+
+var _fnAudioFileInitialize func(unsafe.Pointer, int, unsafe.Pointer, AudioFileFlags, unsafe.Pointer) int32
+
+// AudioFileInitialize calls the AudioToolbox framework function AudioFileInitialize.
+func AudioFileInitialize(inFileRef *carboncore.FSRef, inFileType int, inFormat unsafe.Pointer, inFlags AudioFileFlags, outAudioFile unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileInitialize == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileInitialize, _lib, "AudioFileInitialize")
+	}
+	return int(_fnAudioFileInitialize(unsafe.Pointer(inFileRef), inFileType, inFormat, inFlags, outAudioFile))
+}
+
+var _fnAudioFileInitializeWithCallbacks func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, AudioFileFlags, unsafe.Pointer) int32
+
+// AudioFileInitializeWithCallbacks calls the AudioToolbox framework function AudioFileInitializeWithCallbacks.
+func AudioFileInitializeWithCallbacks(inClientData unsafe.Pointer, inReadFunc unsafe.Pointer, inWriteFunc unsafe.Pointer, inGetSizeFunc unsafe.Pointer, inSetSizeFunc unsafe.Pointer, inFileType int, inFormat unsafe.Pointer, inFlags AudioFileFlags, outAudioFile unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioFileInitializeWithCallbacks == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioFileInitializeWithCallbacks, _lib, "AudioFileInitializeWithCallbacks")
+	}
+	return int(_fnAudioFileInitializeWithCallbacks(inClientData, inReadFunc, inWriteFunc, inGetSizeFunc, inSetSizeFunc, inFileType, inFormat, inFlags, outAudioFile))
 }
 
 var _fnAudioFileReadBytes func(unsafe.Pointer, uint8, int64, unsafe.Pointer, unsafe.Pointer) int32
@@ -1434,26 +1565,48 @@ func AudioQueueGetPropertySize(inAQ obj.Object, inID int) (result int, outDataSi
 	return _ret, _out0
 }
 
+var _fnAudioQueueNewInput func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, objc.ID, int, unsafe.Pointer) int32
+
+// AudioQueueNewInput calls the AudioToolbox framework function AudioQueueNewInput.
+func AudioQueueNewInput(inFormat unsafe.Pointer, inCallbackProc unsafe.Pointer, inUserData unsafe.Pointer, inCallbackRunLoop obj.Object, inCallbackRunLoopMode obj.Object, inFlags int, outAQ unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueueNewInput == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueueNewInput, _lib, "AudioQueueNewInput")
+	}
+	return int(_fnAudioQueueNewInput(inFormat, inCallbackProc, inUserData, objref.IDOf(inCallbackRunLoop), objref.IDOf(inCallbackRunLoopMode), inFlags, outAQ))
+}
+
 var _fnAudioQueueNewInputWithDispatchQueue func(unsafe.Pointer, unsafe.Pointer, int, objc.ID, unsafe.Pointer) int32
 
 // AudioQueueNewInputWithDispatchQueue calls the AudioToolbox framework function AudioQueueNewInputWithDispatchQueue.
-func AudioQueueNewInputWithDispatchQueue(outAQ unsafe.Pointer, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags int, inCallbackDispatchQueue dispatch.Queue, inCallbackBlock unsafe.Pointer) int {
+func AudioQueueNewInputWithDispatchQueue(outAQ unsafe.Pointer, inFormat unsafe.Pointer, inFlags int, inCallbackDispatchQueue dispatch.Queue, inCallbackBlock unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueNewInputWithDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueNewInputWithDispatchQueue, _lib, "AudioQueueNewInputWithDispatchQueue")
 	}
-	return int(_fnAudioQueueNewInputWithDispatchQueue(outAQ, unsafe.Pointer(inFormat), inFlags, objc.ID(uintptr(inCallbackDispatchQueue.Ptr())), inCallbackBlock))
+	return int(_fnAudioQueueNewInputWithDispatchQueue(outAQ, inFormat, inFlags, objc.ID(uintptr(inCallbackDispatchQueue.Ptr())), inCallbackBlock))
+}
+
+var _fnAudioQueueNewOutput func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, objc.ID, int, unsafe.Pointer) int32
+
+// AudioQueueNewOutput calls the AudioToolbox framework function AudioQueueNewOutput.
+func AudioQueueNewOutput(inFormat unsafe.Pointer, inCallbackProc unsafe.Pointer, inUserData unsafe.Pointer, inCallbackRunLoop obj.Object, inCallbackRunLoopMode obj.Object, inFlags int, outAQ unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueueNewOutput == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueueNewOutput, _lib, "AudioQueueNewOutput")
+	}
+	return int(_fnAudioQueueNewOutput(inFormat, inCallbackProc, inUserData, objref.IDOf(inCallbackRunLoop), objref.IDOf(inCallbackRunLoopMode), inFlags, outAQ))
 }
 
 var _fnAudioQueueNewOutputWithDispatchQueue func(unsafe.Pointer, unsafe.Pointer, int, objc.ID, unsafe.Pointer) int32
 
 // AudioQueueNewOutputWithDispatchQueue calls the AudioToolbox framework function AudioQueueNewOutputWithDispatchQueue.
-func AudioQueueNewOutputWithDispatchQueue(outAQ unsafe.Pointer, inFormat *coreaudiotypes.AudioStreamBasicDescription, inFlags int, inCallbackDispatchQueue dispatch.Queue, inCallbackBlock unsafe.Pointer) int {
+func AudioQueueNewOutputWithDispatchQueue(outAQ unsafe.Pointer, inFormat unsafe.Pointer, inFlags int, inCallbackDispatchQueue dispatch.Queue, inCallbackBlock unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueNewOutputWithDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueNewOutputWithDispatchQueue, _lib, "AudioQueueNewOutputWithDispatchQueue")
 	}
-	return int(_fnAudioQueueNewOutputWithDispatchQueue(outAQ, unsafe.Pointer(inFormat), inFlags, objc.ID(uintptr(inCallbackDispatchQueue.Ptr())), inCallbackBlock))
+	return int(_fnAudioQueueNewOutputWithDispatchQueue(outAQ, inFormat, inFlags, objc.ID(uintptr(inCallbackDispatchQueue.Ptr())), inCallbackBlock))
 }
 
 var _fnAudioQueueOfflineRender func(objc.ID, unsafe.Pointer, unsafe.Pointer, int) int32
@@ -1510,14 +1663,25 @@ func AudioQueueProcessingTapGetSourceAudio(inAQTap obj.Object, inNumberFrames in
 var _fnAudioQueueProcessingTapNew func(objc.ID, unsafe.Pointer, unsafe.Pointer, AudioQueueProcessingTapFlags, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // AudioQueueProcessingTapNew calls the AudioToolbox framework function AudioQueueProcessingTapNew.
-func AudioQueueProcessingTapNew(inAQ obj.Object, inCallback unsafe.Pointer, inClientData unsafe.Pointer, inFlags AudioQueueProcessingTapFlags, outProcessingFormat *coreaudiotypes.AudioStreamBasicDescription, outAQTap unsafe.Pointer) (result int, outMaxFrames int) {
+func AudioQueueProcessingTapNew(inAQ obj.Object, inCallback unsafe.Pointer, inClientData unsafe.Pointer, inFlags AudioQueueProcessingTapFlags, outProcessingFormat unsafe.Pointer, outAQTap unsafe.Pointer) (result int, outMaxFrames int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioQueueProcessingTapNew == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioQueueProcessingTapNew, _lib, "AudioQueueProcessingTapNew")
 	}
 	var _out0 int
-	_ret := int(_fnAudioQueueProcessingTapNew(objref.IDOf(inAQ), inCallback, inClientData, inFlags, unsafe.Pointer(&_out0), unsafe.Pointer(outProcessingFormat), outAQTap))
+	_ret := int(_fnAudioQueueProcessingTapNew(objref.IDOf(inAQ), inCallback, inClientData, inFlags, unsafe.Pointer(&_out0), outProcessingFormat, outAQTap))
 	return _ret, _out0
+}
+
+var _fnAudioQueueSetOfflineRenderFormat func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// AudioQueueSetOfflineRenderFormat calls the AudioToolbox framework function AudioQueueSetOfflineRenderFormat.
+func AudioQueueSetOfflineRenderFormat(inAQ obj.Object, inFormat unsafe.Pointer, inLayout *coreaudiotypes.AudioChannelLayout) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioQueueSetOfflineRenderFormat == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioQueueSetOfflineRenderFormat, _lib, "AudioQueueSetOfflineRenderFormat")
+	}
+	return int(_fnAudioQueueSetOfflineRenderFormat(objref.IDOf(inAQ), inFormat, unsafe.Pointer(inLayout)))
 }
 
 var _fnAudioServicesCreateSystemSoundID func(objc.ID, unsafe.Pointer) int32
@@ -1884,6 +2048,28 @@ func CAShowFile(inObject unsafe.Pointer, inFile unsafe.Pointer) {
 	_fnCAShowFile(inObject, inFile)
 }
 
+var _fnExtAudioFileCreateNew func(unsafe.Pointer, objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
+
+// ExtAudioFileCreateNew calls the AudioToolbox framework function ExtAudioFileCreateNew.
+func ExtAudioFileCreateNew(inParentDir *carboncore.FSRef, inFileName obj.Object, inFileType int, inStreamDesc unsafe.Pointer, inChannelLayout *coreaudiotypes.AudioChannelLayout, outExtAudioFile unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnExtAudioFileCreateNew == nil {
+		ebipurego.RegisterLibFunc(&_fnExtAudioFileCreateNew, _lib, "ExtAudioFileCreateNew")
+	}
+	return int(_fnExtAudioFileCreateNew(unsafe.Pointer(inParentDir), objref.IDOf(inFileName), inFileType, inStreamDesc, unsafe.Pointer(inChannelLayout), outExtAudioFile))
+}
+
+var _fnExtAudioFileCreateWithURL func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
+
+// ExtAudioFileCreateWithURL calls the AudioToolbox framework function ExtAudioFileCreateWithURL.
+func ExtAudioFileCreateWithURL(inURL obj.Object, inFileType int, inStreamDesc unsafe.Pointer, inChannelLayout *coreaudiotypes.AudioChannelLayout, inFlags int, outExtAudioFile unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnExtAudioFileCreateWithURL == nil {
+		ebipurego.RegisterLibFunc(&_fnExtAudioFileCreateWithURL, _lib, "ExtAudioFileCreateWithURL")
+	}
+	return int(_fnExtAudioFileCreateWithURL(objref.IDOf(inURL), inFileType, inStreamDesc, unsafe.Pointer(inChannelLayout), inFlags, outExtAudioFile))
+}
+
 var _fnExtAudioFileGetProperty func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ExtAudioFileGetProperty calls the AudioToolbox framework function ExtAudioFileGetProperty.
@@ -1973,13 +2159,13 @@ func GetAudioUnitParameterDisplayType(flags AudioUnitParameterOptions) AudioUnit
 var _fnMusicDeviceStartNote func(unsafe.Pointer, int, int, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // MusicDeviceStartNote calls the AudioToolbox framework function MusicDeviceStartNote.
-func MusicDeviceStartNote(inUnit *carboncore.ComponentInstanceRecord, inInstrument int, inGroupID int, inOffsetSampleFrame int, inParams *MusicDeviceNoteParams) (result int, outNoteInstanceID int) {
+func MusicDeviceStartNote(inUnit *carboncore.ComponentInstanceRecord, inInstrument int, inGroupID int, inOffsetSampleFrame int, inParams unsafe.Pointer) (result int, outNoteInstanceID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMusicDeviceStartNote == nil {
 		ebipurego.RegisterLibFunc(&_fnMusicDeviceStartNote, _lib, "MusicDeviceStartNote")
 	}
 	var _out0 int
-	_ret := int(_fnMusicDeviceStartNote(unsafe.Pointer(inUnit), inInstrument, inGroupID, unsafe.Pointer(&_out0), inOffsetSampleFrame, unsafe.Pointer(inParams)))
+	_ret := int(_fnMusicDeviceStartNote(unsafe.Pointer(inUnit), inInstrument, inGroupID, unsafe.Pointer(&_out0), inOffsetSampleFrame, inParams))
 	return _ret, _out0
 }
 
@@ -2276,6 +2462,17 @@ func MusicTrackNewAUPresetEvent(inTrack obj.Object, inTimeStamp float64, inPrese
 		ebipurego.RegisterLibFunc(&_fnMusicTrackNewAUPresetEvent, _lib, "MusicTrackNewAUPresetEvent")
 	}
 	return int(_fnMusicTrackNewAUPresetEvent(objref.IDOf(inTrack), inTimeStamp, inPresetEvent))
+}
+
+var _fnMusicTrackNewExtendedNoteEvent func(objc.ID, float64, unsafe.Pointer) int32
+
+// MusicTrackNewExtendedNoteEvent calls the AudioToolbox framework function MusicTrackNewExtendedNoteEvent.
+func MusicTrackNewExtendedNoteEvent(inTrack obj.Object, inTimeStamp float64, inInfo unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMusicTrackNewExtendedNoteEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnMusicTrackNewExtendedNoteEvent, _lib, "MusicTrackNewExtendedNoteEvent")
+	}
+	return int(_fnMusicTrackNewExtendedNoteEvent(objref.IDOf(inTrack), inTimeStamp, inInfo))
 }
 
 var _fnNextAudioFileRegion func(unsafe.Pointer) unsafe.Pointer

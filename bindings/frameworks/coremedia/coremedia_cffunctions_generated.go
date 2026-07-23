@@ -7,7 +7,6 @@ package coremedia
 import (
 	"unsafe"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -85,21 +84,6 @@ func CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer(allocato
 		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer, _lib, "CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer")
 	}
 	_rc := _fnCMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer(objref.IDOf(allocator), audioFormatDescription, flavor, blockBufferOut)
-	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-var _fnCMAudioFormatDescriptionCreate func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
-
-// CMAudioFormatDescriptionCreate reports an error if the CoreMedia framework function CMAudioFormatDescriptionCreate fails.
-func CMAudioFormatDescriptionCreate(allocator obj.Object, asbd *coreaudiotypes.AudioStreamBasicDescription, layoutSize int, layout *coreaudiotypes.AudioChannelLayout, magicCookieSize int, magicCookie unsafe.Pointer, extensions obj.Object, formatDescriptionOut unsafe.Pointer) error {
-	_loadOnce.Do(_loadLibrary)
-	if _fnCMAudioFormatDescriptionCreate == nil {
-		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionCreate, _lib, "CMAudioFormatDescriptionCreate")
-	}
-	_rc := _fnCMAudioFormatDescriptionCreate(objref.IDOf(allocator), unsafe.Pointer(asbd), layoutSize, unsafe.Pointer(layout), magicCookieSize, magicCookie, objref.IDOf(extensions), formatDescriptionOut)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

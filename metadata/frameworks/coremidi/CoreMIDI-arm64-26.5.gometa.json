@@ -5401,21 +5401,26 @@
         },
         {
           "name": "profileBank",
-          "objc_type": "MIDIUInteger7"
+          "objc_type": "MIDIUInteger7",
+          "offset": 1
         },
         {
           "name": "profileNumber",
-          "objc_type": "MIDIUInteger7"
+          "objc_type": "MIDIUInteger7",
+          "offset": 2
         },
         {
           "name": "profileVersion",
-          "objc_type": "MIDIUInteger7"
+          "objc_type": "MIDIUInteger7",
+          "offset": 3
         },
         {
           "name": "profileLevel",
-          "objc_type": "MIDIUInteger7"
+          "objc_type": "MIDIUInteger7",
+          "offset": 4
         }
       ],
+      "size": 5,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIUMPCI.h",
       "sdk_line": 184,
@@ -5429,21 +5434,26 @@
         },
         {
           "name": "remappedControlType",
-          "objc_type": "MIDITransformControlType"
+          "objc_type": "MIDITransformControlType",
+          "offset": 1
         },
         {
           "name": "controlNumber",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "transform",
-          "objc_type": "MIDITransformType"
+          "objc_type": "MIDITransformType",
+          "offset": 4
         },
         {
           "name": "param",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 6
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIThruConnection.h",
       "sdk_line": 159,
@@ -5541,13 +5551,16 @@
         },
         {
           "name": "wordCount",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         },
         {
           "name": "words",
-          "objc_type": "UInt32[64]"
+          "objc_type": "UInt32[64]",
+          "offset": 12
         }
       ],
+      "size": 268,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIServices.h",
       "sdk_line": 481,
@@ -5607,9 +5620,11 @@
         },
         {
           "name": "word1",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIMessages.h",
       "sdk_line": 235
@@ -5717,13 +5732,16 @@
         },
         {
           "name": "length",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 8
         },
         {
           "name": "data",
-          "objc_type": "Byte[256]"
+          "objc_type": "Byte[256]",
+          "offset": 10
         }
       ],
+      "size": 268,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIServices.h",
       "sdk_line": 564,
@@ -5821,9 +5839,11 @@
         },
         {
           "name": "uniqueID",
-          "objc_type": "MIDIUniqueID"
+          "objc_type": "MIDIUniqueID",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIThruConnection.h",
       "sdk_line": 181,
@@ -5837,101 +5857,126 @@
         },
         {
           "name": "numSources",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "sources",
-          "objc_type": "MIDIThruConnectionEndpoint[8]"
+          "objc_type": "MIDIThruConnectionEndpoint[8]",
+          "offset": 8
         },
         {
           "name": "numDestinations",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 72
         },
         {
           "name": "destinations",
-          "objc_type": "MIDIThruConnectionEndpoint[8]"
+          "objc_type": "MIDIThruConnectionEndpoint[8]",
+          "offset": 76
         },
         {
           "name": "channelMap",
-          "objc_type": "UInt8[16]"
+          "objc_type": "UInt8[16]",
+          "offset": 140
         },
         {
           "name": "lowVelocity",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 156
         },
         {
           "name": "highVelocity",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 157
         },
         {
           "name": "lowNote",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 158
         },
         {
           "name": "highNote",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 159
         },
         {
           "name": "noteNumber",
-          "objc_type": "MIDITransform"
+          "objc_type": "MIDITransform",
+          "offset": 160
         },
         {
           "name": "velocity",
-          "objc_type": "MIDITransform"
+          "objc_type": "MIDITransform",
+          "offset": 164
         },
         {
           "name": "keyPressure",
-          "objc_type": "MIDITransform"
+          "objc_type": "MIDITransform",
+          "offset": 168
         },
         {
           "name": "channelPressure",
-          "objc_type": "MIDITransform"
+          "objc_type": "MIDITransform",
+          "offset": 172
         },
         {
           "name": "programChange",
-          "objc_type": "MIDITransform"
+          "objc_type": "MIDITransform",
+          "offset": 176
         },
         {
           "name": "pitchBend",
-          "objc_type": "MIDITransform"
+          "objc_type": "MIDITransform",
+          "offset": 180
         },
         {
           "name": "filterOutSysEx",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 184
         },
         {
           "name": "filterOutMTC",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 185
         },
         {
           "name": "filterOutBeatClock",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 186
         },
         {
           "name": "filterOutTuneRequest",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 187
         },
         {
           "name": "reserved2",
-          "objc_type": "UInt8[3]"
+          "objc_type": "UInt8[3]",
+          "offset": 188
         },
         {
           "name": "filterOutAllControls",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 191
         },
         {
           "name": "numControlTransforms",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 192
         },
         {
           "name": "numMaps",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 194
         },
         {
           "name": "reserved3",
-          "objc_type": "UInt16[4]"
+          "objc_type": "UInt16[4]",
+          "offset": 196
         }
       ],
+      "size": 204,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIThruConnection.h",
       "sdk_line": 226,
@@ -5945,9 +5990,11 @@
         },
         {
           "name": "param",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIThruConnection.h",
       "sdk_line": 126,
@@ -5984,6 +6031,7 @@
           "objc_type": "UInt8[128]"
         }
       ],
+      "size": 128,
       "availability": {},
       "sdk_file": "CoreMIDI/MIDIThruConnection.h",
       "sdk_line": 51,

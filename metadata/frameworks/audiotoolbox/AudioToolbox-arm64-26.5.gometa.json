@@ -15263,17 +15263,21 @@
         },
         {
           "name": "eventSampleTime",
-          "objc_type": "AUEventSampleTime"
+          "objc_type": "AUEventSampleTime",
+          "offset": 8
         },
         {
           "name": "eventType",
-          "objc_type": "AURenderEventType"
+          "objc_type": "AURenderEventType",
+          "offset": 16
         },
         {
           "name": "reserved",
-          "objc_type": "uint8_t"
+          "objc_type": "uint8_t",
+          "offset": 17
         }
       ],
+      "size": 20,
       "availability": {},
       "sdk_file": "AudioToolbox/AUAudioUnitImplementation.h",
       "sdk_line": 125,
@@ -15622,29 +15626,36 @@
         },
         {
           "name": "mName",
-          "objc_type": "CFStringRef _Nullable"
+          "objc_type": "CFStringRef _Nullable",
+          "offset": 8
         },
         {
           "name": "mMarkerID",
-          "objc_type": "SInt32"
+          "objc_type": "SInt32",
+          "offset": 16
         },
         {
           "name": "mSMPTETime",
-          "objc_type": "AudioFile_SMPTE_Time"
+          "objc_type": "AudioFile_SMPTE_Time",
+          "offset": 20
         },
         {
           "name": "mType",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 28
         },
         {
           "name": "mReserved",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 32
         },
         {
           "name": "mChannel",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 34
         }
       ],
+      "size": 40,
       "availability": {},
       "sdk_file": "AudioToolbox/AudioFile.h",
       "sdk_line": 272,
@@ -15658,13 +15669,16 @@
         },
         {
           "name": "mNumberMarkers",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "mMarkers",
-          "objc_type": "AudioFileMarker[1]"
+          "objc_type": "AudioFileMarker[1]",
+          "offset": 8
         }
       ],
+      "size": 48,
       "availability": {},
       "sdk_file": "AudioToolbox/AudioFile.h",
       "sdk_line": 296,
@@ -15698,21 +15712,26 @@
         },
         {
           "name": "mName",
-          "objc_type": "CFStringRef _Nonnull"
+          "objc_type": "CFStringRef _Nonnull",
+          "offset": 8
         },
         {
           "name": "mFlags",
-          "objc_type": "AudioFileRegionFlags"
+          "objc_type": "AudioFileRegionFlags",
+          "offset": 16
         },
         {
           "name": "mNumberMarkers",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 20
         },
         {
           "name": "mMarkers",
-          "objc_type": "AudioFileMarker[1]"
+          "objc_type": "AudioFileMarker[1]",
+          "offset": 24
         }
       ],
+      "size": 64,
       "availability": {},
       "sdk_file": "AudioToolbox/AudioFile.h",
       "sdk_line": 377,
@@ -15762,21 +15781,26 @@
         },
         {
           "name": "mMinutes",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 1
         },
         {
           "name": "mSeconds",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 2
         },
         {
           "name": "mFrames",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 3
         },
         {
           "name": "mSubFrameSampleOffset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "AudioToolbox/AudioFile.h",
       "sdk_line": 238,
@@ -16180,17 +16204,21 @@
         },
         {
           "name": "sourceOutputNumber",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "destNode",
-          "objc_type": "AUNode"
+          "objc_type": "AUNode",
+          "offset": 8
         },
         {
           "name": "destInputNumber",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 12
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "AudioToolbox/AUGraph.h",
       "sdk_line": 279,
@@ -16204,9 +16232,11 @@
         },
         {
           "name": "plugin",
-          "objc_type": "AudioClassDescription"
+          "objc_type": "AudioClassDescription",
+          "offset": 4
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "AudioToolbox/AudioUnitProperties.h",
       "sdk_line": 2337,
@@ -16220,17 +16250,21 @@
         },
         {
           "name": "mParameterID",
-          "objc_type": "AudioUnitParameterID"
+          "objc_type": "AudioUnitParameterID",
+          "offset": 8
         },
         {
           "name": "mScope",
-          "objc_type": "AudioUnitScope"
+          "objc_type": "AudioUnitScope",
+          "offset": 12
         },
         {
           "name": "mElement",
-          "objc_type": "AudioUnitElement"
+          "objc_type": "AudioUnitElement",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "AudioToolbox/AUComponent.h",
       "sdk_line": 997,
@@ -16439,17 +16473,21 @@
         },
         {
           "name": "settingID",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "dataLen",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         },
         {
           "name": "data",
-          "objc_type": "UInt8[1]"
+          "objc_type": "UInt8[1]",
+          "offset": 12
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "AudioToolbox/AudioUnitProperties.h",
       "sdk_line": 2362,
@@ -16582,30 +16620,37 @@
         },
         {
           "name": "mFormatID",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         },
         {
           "name": "mFormatFlags",
-          "objc_type": "CAFFormatFlags"
+          "objc_type": "CAFFormatFlags",
+          "offset": 12
         },
         {
           "name": "mBytesPerPacket",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 16
         },
         {
           "name": "mFramesPerPacket",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 20
         },
         {
           "name": "mChannelsPerFrame",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 24
         },
         {
           "name": "mBitsPerChannel",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 28
         }
       ],
       "packed": true,
+      "size": 32,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 91
@@ -16634,10 +16679,12 @@
         },
         {
           "name": "mChunkSize",
-          "objc_type": "SInt64"
+          "objc_type": "SInt64",
+          "offset": 4
         }
       ],
       "packed": true,
+      "size": 12,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 63
@@ -16746,22 +16793,27 @@
         },
         {
           "name": "mFramePosition",
-          "objc_type": "Float64"
+          "objc_type": "Float64",
+          "offset": 4
         },
         {
           "name": "mMarkerID",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 12
         },
         {
           "name": "mSMPTETime",
-          "objc_type": "CAF_SMPTE_Time"
+          "objc_type": "CAF_SMPTE_Time",
+          "offset": 16
         },
         {
           "name": "mChannel",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 24
         }
       ],
       "packed": true,
+      "size": 28,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 228
@@ -16814,10 +16866,12 @@
         },
         {
           "name": "mMaxValue",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 2
         }
       ],
       "packed": true,
+      "size": 4,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 339
@@ -16874,10 +16928,12 @@
         },
         {
           "name": "mFrameNumber",
-          "objc_type": "UInt64"
+          "objc_type": "UInt64",
+          "offset": 4
         }
       ],
       "packed": true,
+      "size": 12,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 324
@@ -16890,18 +16946,22 @@
         },
         {
           "name": "mFlags",
-          "objc_type": "CAFRegionFlags"
+          "objc_type": "CAFRegionFlags",
+          "offset": 4
         },
         {
           "name": "mNumberMarkers",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         },
         {
           "name": "mMarkers",
-          "objc_type": "CAFMarker[1]"
+          "objc_type": "CAFMarker[1]",
+          "offset": 12
         }
       ],
       "packed": true,
+      "size": 40,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 254
@@ -16934,10 +16994,12 @@
         },
         {
           "name": "mStringStartByteOffset",
-          "objc_type": "SInt64"
+          "objc_type": "SInt64",
+          "offset": 4
         }
       ],
       "packed": true,
+      "size": 12,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 295
@@ -16978,22 +17040,27 @@
         },
         {
           "name": "mMinutes",
-          "objc_type": "SInt8"
+          "objc_type": "SInt8",
+          "offset": 1
         },
         {
           "name": "mSeconds",
-          "objc_type": "SInt8"
+          "objc_type": "SInt8",
+          "offset": 2
         },
         {
           "name": "mFrames",
-          "objc_type": "SInt8"
+          "objc_type": "SInt8",
+          "offset": 3
         },
         {
           "name": "mSubFrameSampleOffset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         }
       ],
       "packed": true,
+      "size": 8,
       "availability": {},
       "sdk_file": "AudioToolbox/CAFFile.h",
       "sdk_line": 218
@@ -17388,9 +17455,11 @@
         },
         {
           "name": "mValue",
-          "objc_type": "AudioUnitParameterValue"
+          "objc_type": "AudioUnitParameterValue",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "AudioToolbox/MusicDevice.h",
       "sdk_line": 100,

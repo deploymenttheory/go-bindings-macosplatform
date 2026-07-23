@@ -8,7 +8,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -25,21 +24,6 @@ func GetIconRefFromComponent(inComponent *carboncore.ComponentRecord, outIconRef
 		ebipurego.RegisterLibFunc(&_fnGetIconRefFromComponent, _lib, "GetIconRefFromComponent")
 	}
 	_rc := _fnGetIconRefFromComponent(unsafe.Pointer(inComponent), outIconRef)
-	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-var _fnGetIconRefFromIconFamilyPtr func(unsafe.Pointer, int, unsafe.Pointer) int32
-
-// GetIconRefFromIconFamilyPtr reports an error if the LaunchServices framework function GetIconRefFromIconFamilyPtr fails.
-func GetIconRefFromIconFamilyPtr(inIconFamilyPtr *osservices.IconFamilyResource, inSize int, outIconRef unsafe.Pointer) error {
-	_loadOnce.Do(_loadLibrary)
-	if _fnGetIconRefFromIconFamilyPtr == nil {
-		ebipurego.RegisterLibFunc(&_fnGetIconRefFromIconFamilyPtr, _lib, "GetIconRefFromIconFamilyPtr")
-	}
-	_rc := _fnGetIconRefFromIconFamilyPtr(unsafe.Pointer(inIconFamilyPtr), inSize, outIconRef)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

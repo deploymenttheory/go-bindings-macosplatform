@@ -2231,9 +2231,11 @@
         },
         {
           "name": "rowBytes",
-          "objc_type": "uint32_t"
+          "objc_type": "uint32_t",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "CoreVideo/CVPixelBuffer.h",
       "sdk_line": 210

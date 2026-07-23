@@ -68223,9 +68223,11 @@
         },
         {
           "name": "units",
-          "objc_type": "AVCaptionUnitsType"
+          "objc_type": "AVCaptionUnitsType",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "AVFoundation/AVCaption.h",
       "sdk_line": 47,

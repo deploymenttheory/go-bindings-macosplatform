@@ -8516,9 +8516,11 @@
         },
         {
           "name": "y",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {
         "macos_introduced": "14.3"
       },

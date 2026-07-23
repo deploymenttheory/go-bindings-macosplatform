@@ -542,7 +542,16 @@ func doScan(framework, sdk, sdkVersion, metaDir, arch string, parallel int, verb
 					return
 				}
 
-				framework := scanner.Extract(root, sdk, fw, sdkVersion, arch)
+				// Authoritative C record layouts (offsets + sizes) from a second
+				// clang pass; nil on failure so extraction degrades to computed
+				// layout rather than skipping the framework.
+				layouts, err := scanner.DumpRecordLayouts(sdk, fw, arch)
+				if err != nil {
+					log.Printf("  %s: record-layout dump failed (%v); using computed layout", fw, err)
+					layouts = nil
+				}
+
+				framework := scanner.Extract(root, sdk, fw, sdkVersion, arch, layouts)
 				framework.ClangVersion = clangVersion
 				framework.XcodeVersion = xcodeVersion
 

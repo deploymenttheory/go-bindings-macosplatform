@@ -2085,9 +2085,11 @@
         },
         {
           "name": "y",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "Tk/X11/Xlib.h",
       "sdk_line": 381
@@ -2100,17 +2102,21 @@
         },
         {
           "name": "y",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         },
         {
           "name": "width",
-          "objc_type": "unsigned short"
+          "objc_type": "unsigned short",
+          "offset": 4
         },
         {
           "name": "height",
-          "objc_type": "unsigned short"
+          "objc_type": "unsigned short",
+          "offset": 6
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "Tk/X11/Xlib.h",
       "sdk_line": 385

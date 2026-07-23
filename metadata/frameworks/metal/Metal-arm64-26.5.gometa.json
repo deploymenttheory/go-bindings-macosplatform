@@ -43777,9 +43777,11 @@
         },
         {
           "name": "length",
-          "objc_type": "uint64_t"
+          "objc_type": "uint64_t",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "Metal/MTL4BufferRange.h",
       "sdk_line": 33,
@@ -43793,9 +43795,11 @@
         },
         {
           "name": "destinationOffset",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {
         "macos_introduced": "26.0"
       },
@@ -43811,25 +43815,31 @@
         },
         {
           "name": "sourceLevel",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 48
         },
         {
           "name": "sourceSlice",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 56
         },
         {
           "name": "destinationOrigin",
-          "objc_type": "MTLOrigin"
+          "objc_type": "MTLOrigin",
+          "offset": 64
         },
         {
           "name": "destinationLevel",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 88
         },
         {
           "name": "destinationSlice",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 96
         }
       ],
+      "size": 104,
       "availability": {
         "macos_introduced": "26.0"
       },
@@ -43857,13 +43867,16 @@
         },
         {
           "name": "bufferRange",
-          "objc_type": "NSRange"
+          "objc_type": "NSRange",
+          "offset": 8
         },
         {
           "name": "heapOffset",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 24
         }
       ],
+      "size": 32,
       "availability": {
         "macos_introduced": "26.0"
       },
@@ -43879,21 +43892,26 @@
         },
         {
           "name": "textureRegion",
-          "objc_type": "MTLRegion"
+          "objc_type": "MTLRegion",
+          "offset": 8
         },
         {
           "name": "textureLevel",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 56
         },
         {
           "name": "textureSlice",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 64
         },
         {
           "name": "heapOffset",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 72
         }
       ],
+      "size": 80,
       "availability": {},
       "sdk_file": "Metal/MTL4CommandQueue.h",
       "sdk_line": 95,
@@ -44040,17 +44058,21 @@
         },
         {
           "name": "green",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 8
         },
         {
           "name": "blue",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 16
         },
         {
           "name": "alpha",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 24
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "Metal/MTLRenderPass.h",
       "sdk_line": 12
@@ -44367,9 +44389,11 @@
         },
         {
           "name": "length",
-          "objc_type": "uint32_t"
+          "objc_type": "uint32_t",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "Metal/MTLIndirectCommandBuffer.h",
       "sdk_line": 36,
@@ -44443,13 +44467,16 @@
         },
         {
           "name": "y",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 8
         },
         {
           "name": "z",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "Metal/MTLTypes.h",
       "sdk_line": 15,
@@ -44463,17 +44490,21 @@
         },
         {
           "name": "y",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 4
         },
         {
           "name": "z",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 8
         },
         {
           "name": "w",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 12
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "Metal/MTLAccelerationStructureTypes.h",
       "sdk_line": 58
@@ -44501,9 +44532,11 @@
         },
         {
           "name": "size",
-          "objc_type": "MTLSize"
+          "objc_type": "MTLSize",
+          "offset": 24
         }
       ],
+      "size": 48,
       "availability": {},
       "sdk_file": "Metal/MTLTypes.h",
       "sdk_line": 44
@@ -44528,9 +44561,11 @@
         },
         {
           "name": "y",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "Metal/MTLTypes.h",
       "sdk_line": 79
@@ -44543,17 +44578,21 @@
         },
         {
           "name": "y",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 8
         },
         {
           "name": "width",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 16
         },
         {
           "name": "height",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 24
         }
       ],
+      "size": 32,
       "availability": {
         "macos_introduced": "10.11"
       },
@@ -44568,13 +44607,16 @@
         },
         {
           "name": "height",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 8
         },
         {
           "name": "depth",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "Metal/MTLTypes.h",
       "sdk_line": 29,
@@ -44619,17 +44661,21 @@
         },
         {
           "name": "green",
-          "objc_type": "MTLTextureSwizzle"
+          "objc_type": "MTLTextureSwizzle",
+          "offset": 1
         },
         {
           "name": "blue",
-          "objc_type": "MTLTextureSwizzle"
+          "objc_type": "MTLTextureSwizzle",
+          "offset": 2
         },
         {
           "name": "alpha",
-          "objc_type": "MTLTextureSwizzle"
+          "objc_type": "MTLTextureSwizzle",
+          "offset": 3
         }
       ],
+      "size": 4,
       "availability": {
         "macos_introduced": "10.15"
       },
@@ -44674,25 +44720,31 @@
         },
         {
           "name": "originY",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 8
         },
         {
           "name": "width",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 16
         },
         {
           "name": "height",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 24
         },
         {
           "name": "znear",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 32
         },
         {
           "name": "zfar",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 40
         }
       ],
+      "size": 48,
       "availability": {},
       "sdk_file": "Metal/MTLRenderCommandEncoder.h",
       "sdk_line": 48
@@ -44720,6 +44772,7 @@
           "objc_type": "union _MTLPackedFloat3::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Metal.framework/Headers/MTLAccelerationStructureTypes.h:19:5)"
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "Metal/MTLAccelerationStructureTypes.h",
       "sdk_line": 18
@@ -44731,6 +44784,7 @@
           "objc_type": "MTLPackedFloat3[4]"
         }
       ],
+      "size": 48,
       "availability": {},
       "sdk_file": "Metal/MTLAccelerationStructureTypes.h",
       "sdk_line": 101

@@ -1753,9 +1753,11 @@
         },
         {
           "name": "color",
-          "objc_type": "CMColor"
+          "objc_type": "CMColor",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/CommonPanels/ColorPicker.h",
       "sdk_line": 138
@@ -1809,9 +1811,11 @@
         },
         {
           "name": "h",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "MacTypes.h",
       "sdk_line": 544,
@@ -1825,13 +1829,16 @@
         },
         {
           "name": "green",
-          "objc_type": "unsigned short"
+          "objc_type": "unsigned short",
+          "offset": 2
         },
         {
           "name": "blue",
-          "objc_type": "unsigned short"
+          "objc_type": "unsigned short",
+          "offset": 4
         }
       ],
+      "size": 6,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/Quickdraw.h",
       "sdk_line": 65

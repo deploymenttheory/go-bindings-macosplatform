@@ -695,17 +695,21 @@
         },
         {
           "name": "val",
-          "objc_type": "u_int32_t"
+          "objc_type": "u_int32_t",
+          "offset": 4
         },
         {
           "name": "len",
-          "objc_type": "u_int16_t"
+          "objc_type": "u_int16_t",
+          "offset": 8
         },
         {
           "name": "text",
-          "objc_type": "char *"
+          "objc_type": "char *",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "libbsm.h",
       "sdk_line": 193

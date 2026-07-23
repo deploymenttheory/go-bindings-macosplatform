@@ -5534,6 +5534,7 @@
           "objc_type": "union _MPSPackedFloat3::(anonymous at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/MetalPerformanceShaders.framework/Frameworks/MPSRayIntersector.framework/Headers/MPSRayIntersectorTypes.h:27:5)"
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSRayIntersector/MPSRayIntersectorTypes.h",
       "sdk_line": 26

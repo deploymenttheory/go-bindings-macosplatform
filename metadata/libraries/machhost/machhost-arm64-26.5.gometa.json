@@ -514,33 +514,41 @@
         },
         {
           "name": "if_vers",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 1
         },
         {
           "name": "reserved1",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 2
         },
         {
           "name": "mig_encoding",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 3
         },
         {
           "name": "int_rep",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 4
         },
         {
           "name": "char_rep",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 5
         },
         {
           "name": "float_rep",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 6
         },
         {
           "name": "reserved2",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 7
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "ndr.h",
       "sdk_line": 40
@@ -702,21 +710,26 @@
         },
         {
           "name": "NDR",
-          "objc_type": "NDR_record_t"
+          "objc_type": "NDR_record_t",
+          "offset": 24
         },
         {
           "name": "RetCode",
-          "objc_type": "kern_return_t"
+          "objc_type": "kern_return_t",
+          "offset": 32
         },
         {
           "name": "host_info_outCnt",
-          "objc_type": "mach_msg_type_number_t"
+          "objc_type": "mach_msg_type_number_t",
+          "offset": 36
         },
         {
           "name": "host_info_out",
-          "objc_type": "integer_t[68]"
+          "objc_type": "integer_t[68]",
+          "offset": 40
         }
       ],
+      "size": 312,
       "availability": {},
       "sdk_file": "mach_host.h",
       "sdk_line": 862
@@ -1350,17 +1363,21 @@
         },
         {
           "name": "NDR",
-          "objc_type": "NDR_record_t"
+          "objc_type": "NDR_record_t",
+          "offset": 24
         },
         {
           "name": "flavor",
-          "objc_type": "host_flavor_t"
+          "objc_type": "host_flavor_t",
+          "offset": 32
         },
         {
           "name": "host_info_outCnt",
-          "objc_type": "mach_msg_type_number_t"
+          "objc_type": "mach_msg_type_number_t",
+          "offset": 36
         }
       ],
+      "size": 40,
       "availability": {},
       "sdk_file": "mach_host.h",
       "sdk_line": 484

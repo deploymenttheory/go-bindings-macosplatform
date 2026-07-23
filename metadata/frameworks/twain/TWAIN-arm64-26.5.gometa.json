@@ -189,33 +189,41 @@
         },
         {
           "name": "BreakIn",
-          "objc_type": "TW_FIX32"
+          "objc_type": "TW_FIX32",
+          "offset": 4
         },
         {
           "name": "EndIn",
-          "objc_type": "TW_FIX32"
+          "objc_type": "TW_FIX32",
+          "offset": 8
         },
         {
           "name": "StartOut",
-          "objc_type": "TW_FIX32"
+          "objc_type": "TW_FIX32",
+          "offset": 12
         },
         {
           "name": "BreakOut",
-          "objc_type": "TW_FIX32"
+          "objc_type": "TW_FIX32",
+          "offset": 16
         },
         {
           "name": "EndOut",
-          "objc_type": "TW_FIX32"
+          "objc_type": "TW_FIX32",
+          "offset": 20
         },
         {
           "name": "Gamma",
-          "objc_type": "TW_FIX32"
+          "objc_type": "TW_FIX32",
+          "offset": 24
         },
         {
           "name": "SampleCount",
-          "objc_type": "TW_FIX32"
+          "objc_type": "TW_FIX32",
+          "offset": 28
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 191
@@ -279,17 +287,21 @@
         },
         {
           "name": "Channel1",
-          "objc_type": "TW_UINT8"
+          "objc_type": "TW_UINT8",
+          "offset": 1
         },
         {
           "name": "Channel2",
-          "objc_type": "TW_UINT8"
+          "objc_type": "TW_UINT8",
+          "offset": 2
         },
         {
           "name": "Channel3",
-          "objc_type": "TW_UINT8"
+          "objc_type": "TW_UINT8",
+          "offset": 3
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 203
@@ -422,9 +434,11 @@
         },
         {
           "name": "Frac",
-          "objc_type": "TW_UINT16"
+          "objc_type": "TW_UINT16",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 174
@@ -437,17 +451,21 @@
         },
         {
           "name": "Top",
-          "objc_type": "TW_FIX32"
+          "objc_type": "TW_FIX32",
+          "offset": 4
         },
         {
           "name": "Right",
-          "objc_type": "TW_FIX32"
+          "objc_type": "TW_FIX32",
+          "offset": 8
         },
         {
           "name": "Bottom",
-          "objc_type": "TW_FIX32"
+          "objc_type": "TW_FIX32",
+          "offset": 12
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 211
@@ -471,33 +489,41 @@
         },
         {
           "name": "Version",
-          "objc_type": "TW_VERSION"
+          "objc_type": "TW_VERSION",
+          "offset": 8
         },
         {
           "name": "ProtocolMajor",
-          "objc_type": "TW_UINT16"
+          "objc_type": "TW_UINT16",
+          "offset": 50
         },
         {
           "name": "ProtocolMinor",
-          "objc_type": "TW_UINT16"
+          "objc_type": "TW_UINT16",
+          "offset": 52
         },
         {
           "name": "SupportedGroups",
-          "objc_type": "TW_UINT32"
+          "objc_type": "TW_UINT32",
+          "offset": 56
         },
         {
           "name": "Manufacturer",
-          "objc_type": "TW_STR32"
+          "objc_type": "TW_STR32",
+          "offset": 60
         },
         {
           "name": "ProductFamily",
-          "objc_type": "TW_STR32"
+          "objc_type": "TW_STR32",
+          "offset": 94
         },
         {
           "name": "ProductName",
-          "objc_type": "TW_STR32"
+          "objc_type": "TW_STR32",
+          "offset": 128
         }
       ],
+      "size": 168,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 306
@@ -619,21 +645,26 @@
         },
         {
           "name": "ItemType",
-          "objc_type": "TW_UINT16"
+          "objc_type": "TW_UINT16",
+          "offset": 2
         },
         {
           "name": "NumItems",
-          "objc_type": "TW_UINT16"
+          "objc_type": "TW_UINT16",
+          "offset": 4
         },
         {
           "name": "CondCode",
-          "objc_type": "TW_UINT16"
+          "objc_type": "TW_UINT16",
+          "offset": 6
         },
         {
           "name": "Item",
-          "objc_type": "TW_UINT32"
+          "objc_type": "TW_UINT32",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 486
@@ -689,13 +720,16 @@
         },
         {
           "name": "Length",
-          "objc_type": "TW_UINT32"
+          "objc_type": "TW_UINT32",
+          "offset": 4
         },
         {
           "name": "TheMem",
-          "objc_type": "TW_MEMREF"
+          "objc_type": "TW_MEMREF",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 219
@@ -1028,21 +1062,26 @@
         },
         {
           "name": "MinorNum",
-          "objc_type": "TW_UINT16"
+          "objc_type": "TW_UINT16",
+          "offset": 2
         },
         {
           "name": "Language",
-          "objc_type": "TW_UINT16"
+          "objc_type": "TW_UINT16",
+          "offset": 4
         },
         {
           "name": "Country",
-          "objc_type": "TW_UINT16"
+          "objc_type": "TW_UINT16",
+          "offset": 6
         },
         {
           "name": "Info",
-          "objc_type": "TW_STR32"
+          "objc_type": "TW_STR32",
+          "offset": 8
         }
       ],
+      "size": 42,
       "availability": {},
       "sdk_file": "TWAIN/TWAIN.h",
       "sdk_line": 232

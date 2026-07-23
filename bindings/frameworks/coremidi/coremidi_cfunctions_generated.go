@@ -715,53 +715,59 @@ func MIDIEntityGetSource(entity int, sourceIndex0 int) int {
 	return int(_fnMIDIEntityGetSource(entity, sourceIndex0))
 }
 
-var _fnMIDIEventListAdd func(unsafe.Pointer, int, unsafe.Pointer, uint64, int, unsafe.Pointer) *MIDIEventPacket
+var _fnMIDIEventListAdd func(unsafe.Pointer, int, unsafe.Pointer, uint64, int, unsafe.Pointer) unsafe.Pointer
 
 // MIDIEventListAdd calls the CoreMIDI framework function MIDIEventListAdd.
-func MIDIEventListAdd(listSize int, time_ uint64, wordCount int, words unsafe.Pointer) (result *MIDIEventPacket, evtlist MIDIEventList, curPacket MIDIEventPacket) {
+func MIDIEventListAdd(evtlist unsafe.Pointer, listSize int, curPacket unsafe.Pointer, time_ uint64, wordCount int, words unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIEventListAdd == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIEventListAdd, _lib, "MIDIEventListAdd")
 	}
-	var _out0 MIDIEventList
-	var _out1 MIDIEventPacket
-	_ret := _fnMIDIEventListAdd(unsafe.Pointer(&_out0), listSize, unsafe.Pointer(&_out1), time_, wordCount, words)
-	return _ret, _out0, _out1
+	return _fnMIDIEventListAdd(evtlist, listSize, curPacket, time_, wordCount, words)
 }
 
 var _fnMIDIEventListForEachEvent func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // MIDIEventListForEachEvent calls the CoreMIDI framework function MIDIEventListForEachEvent.
-func MIDIEventListForEachEvent(evtlist *MIDIEventList, visitor unsafe.Pointer, visitorContext unsafe.Pointer) {
+func MIDIEventListForEachEvent(evtlist unsafe.Pointer, visitor unsafe.Pointer, visitorContext unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIEventListForEachEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIEventListForEachEvent, _lib, "MIDIEventListForEachEvent")
 	}
-	_fnMIDIEventListForEachEvent(unsafe.Pointer(evtlist), visitor, visitorContext)
+	_fnMIDIEventListForEachEvent(evtlist, visitor, visitorContext)
 }
 
-var _fnMIDIEventListInit func(unsafe.Pointer, ProtocolID) *MIDIEventPacket
+var _fnMIDIEventListInit func(unsafe.Pointer, ProtocolID) unsafe.Pointer
 
 // MIDIEventListInit calls the CoreMIDI framework function MIDIEventListInit.
-func MIDIEventListInit(protocol ProtocolID) (result *MIDIEventPacket, evtlist MIDIEventList) {
+func MIDIEventListInit(evtlist unsafe.Pointer, protocol ProtocolID) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIEventListInit == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIEventListInit, _lib, "MIDIEventListInit")
 	}
-	var _out0 MIDIEventList
-	_ret := _fnMIDIEventListInit(unsafe.Pointer(&_out0), protocol)
-	return _ret, _out0
+	return _fnMIDIEventListInit(evtlist, protocol)
 }
 
-var _fnMIDIEventPacketNext func(unsafe.Pointer) *MIDIEventPacket
+var _fnMIDIEventPacketNext func(unsafe.Pointer) unsafe.Pointer
 
 // MIDIEventPacketNext calls the CoreMIDI framework function MIDIEventPacketNext.
-func MIDIEventPacketNext(pkt *MIDIEventPacket) *MIDIEventPacket {
+func MIDIEventPacketNext(pkt unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIEventPacketNext == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIEventPacketNext, _lib, "MIDIEventPacketNext")
 	}
-	return _fnMIDIEventPacketNext(unsafe.Pointer(pkt))
+	return _fnMIDIEventPacketNext(pkt)
+}
+
+var _fnMIDIEventPacketSysexBytesForGroup func(unsafe.Pointer, uint8, unsafe.Pointer) int32
+
+// MIDIEventPacketSysexBytesForGroup calls the CoreMIDI framework function MIDIEventPacketSysexBytesForGroup.
+func MIDIEventPacketSysexBytesForGroup(pkt unsafe.Pointer, groupIndex uint8, outData unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIEventPacketSysexBytesForGroup == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIEventPacketSysexBytesForGroup, _lib, "MIDIEventPacketSysexBytesForGroup")
+	}
+	return int(_fnMIDIEventPacketSysexBytesForGroup(pkt, groupIndex, outData))
 }
 
 var _fnMIDIExternalDeviceCreate func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32
@@ -1011,42 +1017,81 @@ func MIDIOutputPortCreate(client int, portName obj.Object) (result int, outPort 
 	return _ret, _out0
 }
 
-var _fnMIDIPacketListAdd func(unsafe.Pointer, int, unsafe.Pointer, uint64, int, unsafe.Pointer) *MIDIPacket
+var _fnMIDIPacketListAdd func(unsafe.Pointer, int, unsafe.Pointer, uint64, int, unsafe.Pointer) unsafe.Pointer
 
 // MIDIPacketListAdd calls the CoreMIDI framework function MIDIPacketListAdd.
-func MIDIPacketListAdd(listSize int, time_ uint64, nData int, data unsafe.Pointer) (result *MIDIPacket, pktlist MIDIPacketList, curPacket MIDIPacket) {
+func MIDIPacketListAdd(pktlist unsafe.Pointer, listSize int, curPacket unsafe.Pointer, time_ uint64, nData int, data unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIPacketListAdd == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIPacketListAdd, _lib, "MIDIPacketListAdd")
 	}
-	var _out0 MIDIPacketList
-	var _out1 MIDIPacket
-	_ret := _fnMIDIPacketListAdd(unsafe.Pointer(&_out0), listSize, unsafe.Pointer(&_out1), time_, nData, data)
-	return _ret, _out0, _out1
+	return _fnMIDIPacketListAdd(pktlist, listSize, curPacket, time_, nData, data)
 }
 
-var _fnMIDIPacketListInit func(unsafe.Pointer) *MIDIPacket
+var _fnMIDIPacketListInit func(unsafe.Pointer) unsafe.Pointer
 
 // MIDIPacketListInit calls the CoreMIDI framework function MIDIPacketListInit.
-func MIDIPacketListInit() (result *MIDIPacket, pktlist MIDIPacketList) {
+func MIDIPacketListInit(pktlist unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIPacketListInit == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIPacketListInit, _lib, "MIDIPacketListInit")
 	}
-	var _out0 MIDIPacketList
-	_ret := _fnMIDIPacketListInit(unsafe.Pointer(&_out0))
-	return _ret, _out0
+	return _fnMIDIPacketListInit(pktlist)
 }
 
-var _fnMIDIPacketNext func(unsafe.Pointer) *MIDIPacket
+var _fnMIDIPacketNext func(unsafe.Pointer) unsafe.Pointer
 
 // MIDIPacketNext calls the CoreMIDI framework function MIDIPacketNext.
-func MIDIPacketNext(pkt *MIDIPacket) *MIDIPacket {
+func MIDIPacketNext(pkt unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIPacketNext == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIPacketNext, _lib, "MIDIPacketNext")
 	}
-	return _fnMIDIPacketNext(unsafe.Pointer(pkt))
+	return _fnMIDIPacketNext(pkt)
+}
+
+var _fnMIDIReceived func(int, unsafe.Pointer) int32
+
+// MIDIReceived calls the CoreMIDI framework function MIDIReceived.
+func MIDIReceived(src int, pktlist unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIReceived == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIReceived, _lib, "MIDIReceived")
+	}
+	return int(_fnMIDIReceived(src, pktlist))
+}
+
+var _fnMIDIReceivedEventList func(int, unsafe.Pointer) int32
+
+// MIDIReceivedEventList calls the CoreMIDI framework function MIDIReceivedEventList.
+func MIDIReceivedEventList(src int, evtlist unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIReceivedEventList == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIReceivedEventList, _lib, "MIDIReceivedEventList")
+	}
+	return int(_fnMIDIReceivedEventList(src, evtlist))
+}
+
+var _fnMIDISend func(int, int, unsafe.Pointer) int32
+
+// MIDISend calls the CoreMIDI framework function MIDISend.
+func MIDISend(port int, dest int, pktlist unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISend == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISend, _lib, "MIDISend")
+	}
+	return int(_fnMIDISend(port, dest, pktlist))
+}
+
+var _fnMIDISendEventList func(int, int, unsafe.Pointer) int32
+
+// MIDISendEventList calls the CoreMIDI framework function MIDISendEventList.
+func MIDISendEventList(port int, dest int, evtlist unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISendEventList == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISendEventList, _lib, "MIDISendEventList")
+	}
+	return int(_fnMIDISendEventList(port, dest, evtlist))
 }
 
 var _fnMIDISendSysex func(unsafe.Pointer) int32
@@ -1163,25 +1208,23 @@ func MIDIThruConnectionCreate(inPersistentOwnerID obj.Object, inConnectionParams
 var _fnMIDIThruConnectionParamsInitialize func(unsafe.Pointer)
 
 // MIDIThruConnectionParamsInitialize calls the CoreMIDI framework function MIDIThruConnectionParamsInitialize.
-func MIDIThruConnectionParamsInitialize() (inConnectionParams MIDIThruConnectionParams) {
+func MIDIThruConnectionParamsInitialize(inConnectionParams unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIThruConnectionParamsInitialize == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIThruConnectionParamsInitialize, _lib, "MIDIThruConnectionParamsInitialize")
 	}
-	var _out0 MIDIThruConnectionParams
-	_fnMIDIThruConnectionParamsInitialize(unsafe.Pointer(&_out0))
-	return _out0
+	_fnMIDIThruConnectionParamsInitialize(inConnectionParams)
 }
 
 var _fnMIDIThruConnectionParamsSize func(unsafe.Pointer) int
 
 // MIDIThruConnectionParamsSize calls the CoreMIDI framework function MIDIThruConnectionParamsSize.
-func MIDIThruConnectionParamsSize(ptr *MIDIThruConnectionParams) int {
+func MIDIThruConnectionParamsSize(ptr unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMIDIThruConnectionParamsSize == nil {
 		ebipurego.RegisterLibFunc(&_fnMIDIThruConnectionParamsSize, _lib, "MIDIThruConnectionParamsSize")
 	}
-	return _fnMIDIThruConnectionParamsSize(unsafe.Pointer(ptr))
+	return _fnMIDIThruConnectionParamsSize(ptr)
 }
 
 var _fnMIDITicksSinceLastEventMessage func(int) uint32

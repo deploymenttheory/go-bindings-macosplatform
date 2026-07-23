@@ -3459,17 +3459,21 @@
         },
         {
           "name": "start",
-          "objc_type": "const char *"
+          "objc_type": "const char *",
+          "offset": 8
         },
         {
           "name": "size",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 16
         },
         {
           "name": "numComponents",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 20
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "Tcl/Tcl.h",
       "sdk_line": 1853

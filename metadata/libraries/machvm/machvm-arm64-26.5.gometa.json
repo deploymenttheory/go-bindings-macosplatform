@@ -514,33 +514,41 @@
         },
         {
           "name": "if_vers",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 1
         },
         {
           "name": "reserved1",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 2
         },
         {
           "name": "mig_encoding",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 3
         },
         {
           "name": "int_rep",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 4
         },
         {
           "name": "char_rep",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 5
         },
         {
           "name": "float_rep",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 6
         },
         {
           "name": "reserved2",
-          "objc_type": "unsigned char"
+          "objc_type": "unsigned char",
+          "offset": 7
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "ndr.h",
       "sdk_line": 40
@@ -1203,33 +1211,41 @@
         },
         {
           "name": "msgh_body",
-          "objc_type": "mach_msg_body_t"
+          "objc_type": "mach_msg_body_t",
+          "offset": 24
         },
         {
           "name": "object_name",
-          "objc_type": "mach_msg_port_descriptor_t"
+          "objc_type": "mach_msg_port_descriptor_t",
+          "offset": 28
         },
         {
           "name": "NDR",
-          "objc_type": "NDR_record_t"
+          "objc_type": "NDR_record_t",
+          "offset": 40
         },
         {
           "name": "address",
-          "objc_type": "vm_address_t"
+          "objc_type": "vm_address_t",
+          "offset": 48
         },
         {
           "name": "size",
-          "objc_type": "vm_size_t"
+          "objc_type": "vm_size_t",
+          "offset": 56
         },
         {
           "name": "infoCnt",
-          "objc_type": "mach_msg_type_number_t"
+          "objc_type": "mach_msg_type_number_t",
+          "offset": 64
         },
         {
           "name": "info",
-          "objc_type": "int[10]"
+          "objc_type": "int[10]",
+          "offset": 68
         }
       ],
+      "size": 108,
       "availability": {},
       "sdk_file": "vm_map.h",
       "sdk_line": 1058
@@ -2053,21 +2069,26 @@
         },
         {
           "name": "NDR",
-          "objc_type": "NDR_record_t"
+          "objc_type": "NDR_record_t",
+          "offset": 24
         },
         {
           "name": "address",
-          "objc_type": "vm_address_t"
+          "objc_type": "vm_address_t",
+          "offset": 32
         },
         {
           "name": "flavor",
-          "objc_type": "vm_region_flavor_t"
+          "objc_type": "vm_region_flavor_t",
+          "offset": 40
         },
         {
           "name": "infoCnt",
-          "objc_type": "mach_msg_type_number_t"
+          "objc_type": "mach_msg_type_number_t",
+          "offset": 44
         }
       ],
+      "size": 48,
       "availability": {},
       "sdk_file": "vm_map.h",
       "sdk_line": 559

@@ -15154,13 +15154,16 @@
         },
         {
           "name": "pitch",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 4
         },
         {
           "name": "roll",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "AVFAudio/AVAudioTypes.h",
       "sdk_line": 155
@@ -15173,13 +15176,16 @@
         },
         {
           "name": "y",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 4
         },
         {
           "name": "z",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "AVFAudio/AVAudioTypes.h",
       "sdk_line": 73

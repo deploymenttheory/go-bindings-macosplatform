@@ -2956,25 +2956,31 @@
         },
         {
           "name": "originY",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 8
         },
         {
           "name": "width",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 16
         },
         {
           "name": "height",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 24
         },
         {
           "name": "znear",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 32
         },
         {
           "name": "zfar",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 40
         }
       ],
+      "size": 48,
       "availability": {},
       "sdk_file": "Metal/MTLRenderCommandEncoder.h",
       "sdk_line": 48

@@ -7206,9 +7206,11 @@
         },
         {
           "name": "dataHandle",
-          "objc_type": "AEDataStorage"
+          "objc_type": "AEDataStorage",
+          "offset": 4
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/AE/AEDataModel.h",
       "sdk_line": 353
@@ -7221,9 +7223,11 @@
         },
         {
           "name": "descContent",
-          "objc_type": "AEDesc"
+          "objc_type": "AEDesc",
+          "offset": 4
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/AE/AEDataModel.h",
       "sdk_line": 359
@@ -7347,13 +7351,16 @@
         },
         {
           "name": "fEnd",
-          "objc_type": "SInt32"
+          "objc_type": "SInt32",
+          "offset": 4
         },
         {
           "name": "fHiliteStyle",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 8
         }
       ],
+      "size": 10,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/AE/AERegistry.h",
       "sdk_line": 688

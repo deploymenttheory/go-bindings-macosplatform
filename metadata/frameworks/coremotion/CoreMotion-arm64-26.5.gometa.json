@@ -5769,13 +5769,16 @@
         },
         {
           "name": "y",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 8
         },
         {
           "name": "z",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "CoreMotion/CMMagnetometer.h",
       "sdk_line": 30

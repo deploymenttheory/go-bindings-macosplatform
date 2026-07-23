@@ -84,6 +84,17 @@ func GetIconRefFromFolder(vRefNum int16, parentFolderID int, folderID int, attri
 	return _fnGetIconRefFromFolder(vRefNum, parentFolderID, folderID, attributes, accessPrivileges, theIconRef)
 }
 
+var _fnGetIconRefFromIconFamilyPtr func(unsafe.Pointer, int, unsafe.Pointer) int32
+
+// GetIconRefFromIconFamilyPtr calls the LaunchServices framework function GetIconRefFromIconFamilyPtr.
+func GetIconRefFromIconFamilyPtr(inIconFamilyPtr unsafe.Pointer, inSize int, outIconRef unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetIconRefFromIconFamilyPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnGetIconRefFromIconFamilyPtr, _lib, "GetIconRefFromIconFamilyPtr")
+	}
+	return int(_fnGetIconRefFromIconFamilyPtr(inIconFamilyPtr, inSize, outIconRef))
+}
+
 var _fnGetIconRefFromTypeInfo func(int, int, objc.ID, objc.ID, int, unsafe.Pointer) int16
 
 // GetIconRefFromTypeInfo calls the LaunchServices framework function GetIconRefFromTypeInfo.

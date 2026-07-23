@@ -73,6 +73,10 @@ type frameworkFilter struct {
 	currentFile    string          // last non-empty file path seen while walking nodes
 	sdkPath        string          // root SDK path
 	allowedClasses map[string]bool // ObjC class names from .tbd; nil → use path filter
+	// layouts holds clang's authoritative record layouts keyed by bare record
+	// name, threaded as scan context so scanStruct stamps each struct's Size and
+	// its fields' Offset. nil when the layout dump was unavailable.
+	layouts map[string]RecordLayout
 }
 
 func newFilter(sdkPath, framework string) frameworkFilter {

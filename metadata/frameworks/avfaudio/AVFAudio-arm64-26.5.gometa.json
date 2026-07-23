@@ -19492,13 +19492,16 @@
         },
         {
           "name": "pitch",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 4
         },
         {
           "name": "roll",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "AVFAudio/AVAudioTypes.h",
       "sdk_line": 155
@@ -19511,13 +19514,16 @@
         },
         {
           "name": "y",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 4
         },
         {
           "name": "z",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "AVFAudio/AVAudioTypes.h",
       "sdk_line": 73
@@ -19530,9 +19536,11 @@
         },
         {
           "name": "up",
-          "objc_type": "AVAudio3DVector"
+          "objc_type": "AVAudio3DVector",
+          "offset": 12
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "AVFAudio/AVAudioTypes.h",
       "sdk_line": 117
@@ -19577,9 +19585,11 @@
         },
         {
           "name": "length",
-          "objc_type": "AVMusicTimeStamp"
+          "objc_type": "AVMusicTimeStamp",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "AVFAudio/AVAudioSequencer.h",
       "sdk_line": 48

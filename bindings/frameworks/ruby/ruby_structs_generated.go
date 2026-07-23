@@ -62,7 +62,7 @@ type RbArithmeticSequenceComponentsT struct {
 	Begin      uint
 	End        uint
 	Step       uint
-	ExcludeEnd int
+	ExcludeEnd int32
 }
 
 type RbDataTypeStruct struct {
@@ -74,7 +74,7 @@ type RbDataTypeStruct struct {
 }
 
 type RbFdsetT struct {
-	Maxfd int
+	Maxfd int32
 	Fdset unsafe.Pointer
 }
 
@@ -89,7 +89,7 @@ type StTable struct {
 	EntryPower   uint8
 	BinPower     uint8
 	SizeInd      uint8
-	RebuildsNum  uint
+	RebuildsNum  uint32
 	Type         unsafe.Pointer
 	NumEntries   uint
 	Bins         unsafe.Pointer

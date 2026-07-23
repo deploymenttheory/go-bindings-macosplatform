@@ -666,6 +666,28 @@ func CaptureComponent() (result *ComponentRecord, capturedComponent ComponentRec
 	return _ret, _out0, _out1
 }
 
+var _fnChangeTextToUnicodeInfo func(objc.ID, unsafe.Pointer) int32
+
+// ChangeTextToUnicodeInfo calls the CarbonCore framework function ChangeTextToUnicodeInfo.
+func ChangeTextToUnicodeInfo(ioTextToUnicodeInfo obj.Object, iUnicodeMapping unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnChangeTextToUnicodeInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnChangeTextToUnicodeInfo, _lib, "ChangeTextToUnicodeInfo")
+	}
+	return int(_fnChangeTextToUnicodeInfo(objref.IDOf(ioTextToUnicodeInfo), iUnicodeMapping))
+}
+
+var _fnChangeUnicodeToTextInfo func(objc.ID, unsafe.Pointer) int32
+
+// ChangeUnicodeToTextInfo calls the CarbonCore framework function ChangeUnicodeToTextInfo.
+func ChangeUnicodeToTextInfo(ioUnicodeToTextInfo obj.Object, iUnicodeMapping unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnChangeUnicodeToTextInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnChangeUnicodeToTextInfo, _lib, "ChangeUnicodeToTextInfo")
+	}
+	return int(_fnChangeUnicodeToTextInfo(objref.IDOf(ioUnicodeToTextInfo), iUnicodeMapping))
+}
+
 var _fnChangedResource func(unsafe.Pointer)
 
 // ChangedResource calls the CarbonCore framework function ChangedResource.
@@ -798,7 +820,7 @@ func ConvertFromUnicodeToPString(iUnicodeToTextInfo obj.Object, iUnicodeLen int,
 var _fnConvertFromUnicodeToScriptCodeRun func(objc.ID, int, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ConvertFromUnicodeToScriptCodeRun calls the CarbonCore framework function ConvertFromUnicodeToScriptCodeRun.
-func ConvertFromUnicodeToScriptCodeRun(iUnicodeToTextInfo obj.Object, iUnicodeLen int, iUnicodeStr unsafe.Pointer, iControlFlags int, iOffsetCount int, iOffsetArray unsafe.Pointer, iOutputBufLen int, oOutputStr unsafe.Pointer, iScriptRunBufLen int) (result int, oOffsetCount int, oOffsetArray int, oInputRead int, oOutputLen int, oScriptRunOutLen int, oScriptCodeRuns ScriptCodeRun) {
+func ConvertFromUnicodeToScriptCodeRun(iUnicodeToTextInfo obj.Object, iUnicodeLen int, iUnicodeStr unsafe.Pointer, iControlFlags int, iOffsetCount int, iOffsetArray unsafe.Pointer, iOutputBufLen int, oOutputStr unsafe.Pointer, iScriptRunBufLen int, oScriptCodeRuns unsafe.Pointer) (result int, oOffsetCount int, oOffsetArray int, oInputRead int, oOutputLen int, oScriptRunOutLen int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnConvertFromUnicodeToScriptCodeRun == nil {
 		ebipurego.RegisterLibFunc(&_fnConvertFromUnicodeToScriptCodeRun, _lib, "ConvertFromUnicodeToScriptCodeRun")
@@ -808,9 +830,8 @@ func ConvertFromUnicodeToScriptCodeRun(iUnicodeToTextInfo obj.Object, iUnicodeLe
 	var _out2 int
 	var _out3 int
 	var _out4 int
-	var _out5 ScriptCodeRun
-	_ret := int(_fnConvertFromUnicodeToScriptCodeRun(objref.IDOf(iUnicodeToTextInfo), iUnicodeLen, iUnicodeStr, iControlFlags, iOffsetCount, iOffsetArray, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), iOutputBufLen, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), oOutputStr, iScriptRunBufLen, unsafe.Pointer(&_out4), unsafe.Pointer(&_out5)))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
+	_ret := int(_fnConvertFromUnicodeToScriptCodeRun(objref.IDOf(iUnicodeToTextInfo), iUnicodeLen, iUnicodeStr, iControlFlags, iOffsetCount, iOffsetArray, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), iOutputBufLen, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), oOutputStr, iScriptRunBufLen, unsafe.Pointer(&_out4), oScriptCodeRuns))
+	return _ret, _out0, _out1, _out2, _out3, _out4
 }
 
 var _fnConvertFromUnicodeToText func(objc.ID, int, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -832,7 +853,7 @@ func ConvertFromUnicodeToText(iUnicodeToTextInfo obj.Object, iUnicodeLen int, iU
 var _fnConvertFromUnicodeToTextRun func(objc.ID, int, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ConvertFromUnicodeToTextRun calls the CarbonCore framework function ConvertFromUnicodeToTextRun.
-func ConvertFromUnicodeToTextRun(iUnicodeToTextInfo obj.Object, iUnicodeLen int, iUnicodeStr unsafe.Pointer, iControlFlags int, iOffsetCount int, iOffsetArray unsafe.Pointer, iOutputBufLen int, oOutputStr unsafe.Pointer, iEncodingRunBufLen int) (result int, oOffsetCount int, oOffsetArray int, oInputRead int, oOutputLen int, oEncodingRunOutLen int, oEncodingRuns TextEncodingRun) {
+func ConvertFromUnicodeToTextRun(iUnicodeToTextInfo obj.Object, iUnicodeLen int, iUnicodeStr unsafe.Pointer, iControlFlags int, iOffsetCount int, iOffsetArray unsafe.Pointer, iOutputBufLen int, oOutputStr unsafe.Pointer, iEncodingRunBufLen int, oEncodingRuns unsafe.Pointer) (result int, oOffsetCount int, oOffsetArray int, oInputRead int, oOutputLen int, oEncodingRunOutLen int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnConvertFromUnicodeToTextRun == nil {
 		ebipurego.RegisterLibFunc(&_fnConvertFromUnicodeToTextRun, _lib, "ConvertFromUnicodeToTextRun")
@@ -842,9 +863,8 @@ func ConvertFromUnicodeToTextRun(iUnicodeToTextInfo obj.Object, iUnicodeLen int,
 	var _out2 int
 	var _out3 int
 	var _out4 int
-	var _out5 TextEncodingRun
-	_ret := int(_fnConvertFromUnicodeToTextRun(objref.IDOf(iUnicodeToTextInfo), iUnicodeLen, iUnicodeStr, iControlFlags, iOffsetCount, iOffsetArray, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), iOutputBufLen, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), oOutputStr, iEncodingRunBufLen, unsafe.Pointer(&_out4), unsafe.Pointer(&_out5)))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
+	_ret := int(_fnConvertFromUnicodeToTextRun(objref.IDOf(iUnicodeToTextInfo), iUnicodeLen, iUnicodeStr, iControlFlags, iOffsetCount, iOffsetArray, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), iOutputBufLen, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), oOutputStr, iEncodingRunBufLen, unsafe.Pointer(&_out4), oEncodingRuns))
+	return _ret, _out0, _out1, _out2, _out3, _out4
 }
 
 var _fnCopyCollection func(objc.ID, objc.ID) objc.ID
@@ -930,14 +950,12 @@ func CountComponentInstances() (result int, aComponent ComponentRecord) {
 var _fnCountComponents func(unsafe.Pointer) int
 
 // CountComponents calls the CarbonCore framework function CountComponents.
-func CountComponents() (result int, looking ComponentDescription) {
+func CountComponents(looking unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCountComponents == nil {
 		ebipurego.RegisterLibFunc(&_fnCountComponents, _lib, "CountComponents")
 	}
-	var _out0 ComponentDescription
-	_ret := _fnCountComponents(unsafe.Pointer(&_out0))
-	return _ret, _out0
+	return _fnCountComponents(looking)
 }
 
 var _fnCountResources func(int) int16
@@ -976,15 +994,14 @@ func CountTypes() int16 {
 var _fnCountUnicodeMappings func(int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CountUnicodeMappings calls the CarbonCore framework function CountUnicodeMappings.
-func CountUnicodeMappings(iFilter int) (result int, iFindMapping UnicodeMapping, oActualCount int) {
+func CountUnicodeMappings(iFilter int, iFindMapping unsafe.Pointer) (result int, oActualCount int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCountUnicodeMappings == nil {
 		ebipurego.RegisterLibFunc(&_fnCountUnicodeMappings, _lib, "CountUnicodeMappings")
 	}
-	var _out0 UnicodeMapping
-	var _out1 int
-	_ret := int(_fnCountUnicodeMappings(iFilter, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
-	return _ret, _out0, _out1
+	var _out0 int
+	_ret := int(_fnCountUnicodeMappings(iFilter, iFindMapping, unsafe.Pointer(&_out0)))
+	return _ret, _out0
 }
 
 var _fnCreateTextEncoding func(int, int, int) uint32
@@ -998,6 +1015,17 @@ func CreateTextEncoding(encodingBase int, encodingVariant int, encodingFormat in
 	return int(_fnCreateTextEncoding(encodingBase, encodingVariant, encodingFormat))
 }
 
+var _fnCreateTextToUnicodeInfo func(unsafe.Pointer, unsafe.Pointer) int32
+
+// CreateTextToUnicodeInfo calls the CarbonCore framework function CreateTextToUnicodeInfo.
+func CreateTextToUnicodeInfo(iUnicodeMapping unsafe.Pointer, oTextToUnicodeInfo unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateTextToUnicodeInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateTextToUnicodeInfo, _lib, "CreateTextToUnicodeInfo")
+	}
+	return int(_fnCreateTextToUnicodeInfo(iUnicodeMapping, oTextToUnicodeInfo))
+}
+
 var _fnCreateThreadPool func(int, int16, int) int16
 
 // CreateThreadPool calls the CarbonCore framework function CreateThreadPool.
@@ -1007,6 +1035,28 @@ func CreateThreadPool(threadStyle int, numToCreate int16, stackSize int) int16 {
 		ebipurego.RegisterLibFunc(&_fnCreateThreadPool, _lib, "CreateThreadPool")
 	}
 	return _fnCreateThreadPool(threadStyle, numToCreate, stackSize)
+}
+
+var _fnCreateUnicodeToTextInfo func(unsafe.Pointer, unsafe.Pointer) int32
+
+// CreateUnicodeToTextInfo calls the CarbonCore framework function CreateUnicodeToTextInfo.
+func CreateUnicodeToTextInfo(iUnicodeMapping unsafe.Pointer, oUnicodeToTextInfo unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateUnicodeToTextInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateUnicodeToTextInfo, _lib, "CreateUnicodeToTextInfo")
+	}
+	return int(_fnCreateUnicodeToTextInfo(iUnicodeMapping, oUnicodeToTextInfo))
+}
+
+var _fnCreateUnicodeToTextRunInfo func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CreateUnicodeToTextRunInfo calls the CarbonCore framework function CreateUnicodeToTextRunInfo.
+func CreateUnicodeToTextRunInfo(iNumberOfMappings int, iUnicodeMappings unsafe.Pointer, oUnicodeToTextInfo unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateUnicodeToTextRunInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateUnicodeToTextRunInfo, _lib, "CreateUnicodeToTextRunInfo")
+	}
+	return int(_fnCreateUnicodeToTextRunInfo(iNumberOfMappings, iUnicodeMappings, oUnicodeToTextInfo))
 }
 
 var _fnCreateUnicodeToTextRunInfoByEncoding func(int, unsafe.Pointer, unsafe.Pointer) int32
@@ -1674,15 +1724,14 @@ func FSCompareFSRefs(ref1 *FSRef, ref2 *FSRef) int16 {
 var _fnFSCopyAliasInfo func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // FSCopyAliasInfo calls the CarbonCore framework function FSCopyAliasInfo.
-func FSCopyAliasInfo(inAlias unsafe.Pointer, targetName unsafe.Pointer, volumeName unsafe.Pointer, pathString unsafe.Pointer) (result int, whichInfo int, info FSAliasInfo) {
+func FSCopyAliasInfo(inAlias unsafe.Pointer, targetName unsafe.Pointer, volumeName unsafe.Pointer, pathString unsafe.Pointer, info unsafe.Pointer) (result int, whichInfo int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSCopyAliasInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnFSCopyAliasInfo, _lib, "FSCopyAliasInfo")
 	}
 	var _out0 int
-	var _out1 FSAliasInfo
-	_ret := int(_fnFSCopyAliasInfo(inAlias, targetName, volumeName, pathString, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
-	return _ret, _out0, _out1
+	_ret := int(_fnFSCopyAliasInfo(inAlias, targetName, volumeName, pathString, unsafe.Pointer(&_out0), info))
+	return _ret, _out0
 }
 
 var _fnFSCopyObjectAsync func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID, int, unsafe.Pointer, float64, unsafe.Pointer) int32
@@ -2193,16 +2242,15 @@ func FSGetVolumeForDiskID(diskID obj.Object) (result int, vRefNum int16) {
 var _fnFSGetVolumeInfo func(int16, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
 
 // FSGetVolumeInfo calls the CarbonCore framework function FSGetVolumeInfo.
-func FSGetVolumeInfo(volume int16, volumeIndex int, whichInfo int, volumeName unsafe.Pointer) (result int16, actualVolume int16, info FSVolumeInfo, rootDirectory FSRef) {
+func FSGetVolumeInfo(volume int16, volumeIndex int, whichInfo int, info unsafe.Pointer, volumeName unsafe.Pointer) (result int16, actualVolume int16, rootDirectory FSRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSGetVolumeInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnFSGetVolumeInfo, _lib, "FSGetVolumeInfo")
 	}
 	var _out0 int16
-	var _out1 FSVolumeInfo
-	var _out2 FSRef
-	_ret := _fnFSGetVolumeInfo(volume, volumeIndex, unsafe.Pointer(&_out0), whichInfo, unsafe.Pointer(&_out1), volumeName, unsafe.Pointer(&_out2))
-	return _ret, _out0, _out1, _out2
+	var _out1 FSRef
+	_ret := _fnFSGetVolumeInfo(volume, volumeIndex, unsafe.Pointer(&_out0), whichInfo, info, volumeName, unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
 }
 
 var _fnFSGetVolumeMountInfo func(int16, unsafe.Pointer, int, unsafe.Pointer) int32
@@ -2729,12 +2777,12 @@ func FSSetForkSize(forkRefNum int, positionMode uint16, positionOffset int64) in
 var _fnFSSetVolumeInfo func(int16, int, unsafe.Pointer) int16
 
 // FSSetVolumeInfo calls the CarbonCore framework function FSSetVolumeInfo.
-func FSSetVolumeInfo(volume int16, whichInfo int, info *FSVolumeInfo) int16 {
+func FSSetVolumeInfo(volume int16, whichInfo int, info unsafe.Pointer) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSSetVolumeInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnFSSetVolumeInfo, _lib, "FSSetVolumeInfo")
 	}
-	return _fnFSSetVolumeInfo(volume, whichInfo, unsafe.Pointer(info))
+	return _fnFSSetVolumeInfo(volume, whichInfo, info)
 }
 
 var _fnFSUnlinkObject func(unsafe.Pointer) int16
@@ -2831,15 +2879,14 @@ func FindFolder(vRefNum int16, folderType int, createFolder uint8) (result int16
 var _fnFindNextComponent func(unsafe.Pointer, unsafe.Pointer) *ComponentRecord
 
 // FindNextComponent calls the CarbonCore framework function FindNextComponent.
-func FindNextComponent() (result *ComponentRecord, aComponent ComponentRecord, looking ComponentDescription) {
+func FindNextComponent(looking unsafe.Pointer) (result *ComponentRecord, aComponent ComponentRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFindNextComponent == nil {
 		ebipurego.RegisterLibFunc(&_fnFindNextComponent, _lib, "FindNextComponent")
 	}
 	var _out0 ComponentRecord
-	var _out1 ComponentDescription
-	_ret := _fnFindNextComponent(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	_ret := _fnFindNextComponent(unsafe.Pointer(&_out0), looking)
+	return _ret, _out0
 }
 
 var _fnFix2Frac func(int) int32
@@ -3238,18 +3285,17 @@ func GetComponentIndString(strListID int16, index int16) (result int16, aCompone
 var _fnGetComponentInfo func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
 
 // GetComponentInfo calls the CarbonCore framework function GetComponentInfo.
-func GetComponentInfo() (result int16, aComponent ComponentRecord, cd ComponentDescription, componentName string, componentInfo string, componentIcon string) {
+func GetComponentInfo(cd unsafe.Pointer) (result int16, aComponent ComponentRecord, componentName string, componentInfo string, componentIcon string) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetComponentInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnGetComponentInfo, _lib, "GetComponentInfo")
 	}
 	var _out0 ComponentRecord
-	var _out1 ComponentDescription
+	var _out1 string
 	var _out2 string
 	var _out3 string
-	var _out4 string
-	_ret := _fnGetComponentInfo(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4))
-	return _ret, _out0, _out1, _out2, _out3, _out4
+	_ret := _fnGetComponentInfo(unsafe.Pointer(&_out0), cd, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnGetComponentInstanceError func(unsafe.Pointer) int16
@@ -3319,14 +3365,12 @@ func GetComponentPublicResource(resourceType int, resourceID int16, theResource 
 var _fnGetComponentPublicResourceList func(int, int16, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
 
 // GetComponentPublicResourceList calls the CarbonCore framework function GetComponentPublicResourceList.
-func GetComponentPublicResourceList(resourceType int, resourceID int16, flags int, missingProc unsafe.Pointer, refCon unsafe.Pointer, atomContainerPtr unsafe.Pointer) (result int16, cd ComponentDescription) {
+func GetComponentPublicResourceList(resourceType int, resourceID int16, flags int, cd unsafe.Pointer, missingProc unsafe.Pointer, refCon unsafe.Pointer, atomContainerPtr unsafe.Pointer) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetComponentPublicResourceList == nil {
 		ebipurego.RegisterLibFunc(&_fnGetComponentPublicResourceList, _lib, "GetComponentPublicResourceList")
 	}
-	var _out0 ComponentDescription
-	_ret := _fnGetComponentPublicResourceList(resourceType, resourceID, flags, unsafe.Pointer(&_out0), missingProc, refCon, atomContainerPtr)
-	return _ret, _out0
+	return _fnGetComponentPublicResourceList(resourceType, resourceID, flags, cd, missingProc, refCon, atomContainerPtr)
 }
 
 var _fnGetComponentRefcon func(unsafe.Pointer) int
@@ -4433,7 +4477,7 @@ func InvokeTimerUPP(tmTaskPtr unsafe.Pointer, userUPP unsafe.Pointer) {
 var _fnInvokeUnicodeToTextFallbackUPP func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // InvokeUnicodeToTextFallbackUPP calls the CarbonCore framework function InvokeUnicodeToTextFallbackUPP.
-func InvokeUnicodeToTextFallbackUPP(iSrcUniStrLen int, iDestStrLen int, iInfoPtr unsafe.Pointer, userUPP unsafe.Pointer) (result int, iSrcUniStr uint16, oSrcConvLen int, oDestStr uint8, oDestConvLen int, iUnicodeMappingPtr UnicodeMapping) {
+func InvokeUnicodeToTextFallbackUPP(iSrcUniStrLen int, iDestStrLen int, iInfoPtr unsafe.Pointer, iUnicodeMappingPtr unsafe.Pointer, userUPP unsafe.Pointer) (result int, iSrcUniStr uint16, oSrcConvLen int, oDestStr uint8, oDestConvLen int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeUnicodeToTextFallbackUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeUnicodeToTextFallbackUPP, _lib, "InvokeUnicodeToTextFallbackUPP")
@@ -4442,9 +4486,8 @@ func InvokeUnicodeToTextFallbackUPP(iSrcUniStrLen int, iDestStrLen int, iInfoPtr
 	var _out1 int
 	var _out2 uint8
 	var _out3 int
-	var _out4 UnicodeMapping
-	_ret := int(_fnInvokeUnicodeToTextFallbackUPP(unsafe.Pointer(&_out0), iSrcUniStrLen, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), iDestStrLen, unsafe.Pointer(&_out3), iInfoPtr, unsafe.Pointer(&_out4), userUPP))
-	return _ret, _out0, _out1, _out2, _out3, _out4
+	_ret := int(_fnInvokeUnicodeToTextFallbackUPP(unsafe.Pointer(&_out0), iSrcUniStrLen, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), iDestStrLen, unsafe.Pointer(&_out3), iInfoPtr, iUnicodeMappingPtr, userUPP))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnIsHandleValid func(unsafe.Pointer) uint8
@@ -6710,16 +6753,14 @@ func PurgeCollectionTag(c obj.Object, tag int) {
 var _fnQueryUnicodeMappings func(int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // QueryUnicodeMappings calls the CarbonCore framework function QueryUnicodeMappings.
-func QueryUnicodeMappings(iFilter int, iMaxCount int) (result int, iFindMapping UnicodeMapping, oActualCount int, oReturnedMappings UnicodeMapping) {
+func QueryUnicodeMappings(iFilter int, iFindMapping unsafe.Pointer, iMaxCount int, oReturnedMappings unsafe.Pointer) (result int, oActualCount int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnQueryUnicodeMappings == nil {
 		ebipurego.RegisterLibFunc(&_fnQueryUnicodeMappings, _lib, "QueryUnicodeMappings")
 	}
-	var _out0 UnicodeMapping
-	var _out1 int
-	var _out2 UnicodeMapping
-	_ret := int(_fnQueryUnicodeMappings(iFilter, unsafe.Pointer(&_out0), iMaxCount, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2)))
-	return _ret, _out0, _out1, _out2
+	var _out0 int
+	_ret := int(_fnQueryUnicodeMappings(iFilter, iFindMapping, iMaxCount, unsafe.Pointer(&_out0), oReturnedMappings))
+	return _ret, _out0
 }
 
 var _fnReadLocation func(unsafe.Pointer)
@@ -6773,17 +6814,16 @@ func RecoverHandle(p string) unsafe.Pointer {
 var _fnRegisterComponent func(unsafe.Pointer, unsafe.Pointer, int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) *ComponentRecord
 
 // RegisterComponent calls the CarbonCore framework function RegisterComponent.
-func RegisterComponent(componentEntryPoint unsafe.Pointer, global int16) (result *ComponentRecord, cd ComponentDescription, componentName string, componentInfo string, componentIcon string) {
+func RegisterComponent(cd unsafe.Pointer, componentEntryPoint unsafe.Pointer, global int16) (result *ComponentRecord, componentName string, componentInfo string, componentIcon string) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnRegisterComponent == nil {
 		ebipurego.RegisterLibFunc(&_fnRegisterComponent, _lib, "RegisterComponent")
 	}
-	var _out0 ComponentDescription
+	var _out0 string
 	var _out1 string
 	var _out2 string
-	var _out3 string
-	_ret := _fnRegisterComponent(unsafe.Pointer(&_out0), componentEntryPoint, global, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
-	return _ret, _out0, _out1, _out2, _out3
+	_ret := _fnRegisterComponent(cd, componentEntryPoint, global, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnRegisterComponentFileRef func(unsafe.Pointer, int16) int16
@@ -7686,7 +7726,7 @@ func TECConvertText(encodingConverter obj.Object, inputBufferLength int, outputB
 var _fnTECConvertTextToMultipleEncodings func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // TECConvertTextToMultipleEncodings calls the CarbonCore framework function TECConvertTextToMultipleEncodings.
-func TECConvertTextToMultipleEncodings(encodingConverter obj.Object, inputBufferLength int, outputBufferLength int, maxOutEncodingRuns int) (result int, inputBuffer uint8, actualInputLength int, outputBuffer uint8, actualOutputLength int, outEncodingsBuffer TextEncodingRun, actualOutEncodingRuns int) {
+func TECConvertTextToMultipleEncodings(encodingConverter obj.Object, inputBufferLength int, outputBufferLength int, outEncodingsBuffer unsafe.Pointer, maxOutEncodingRuns int) (result int, inputBuffer uint8, actualInputLength int, outputBuffer uint8, actualOutputLength int, actualOutEncodingRuns int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTECConvertTextToMultipleEncodings == nil {
 		ebipurego.RegisterLibFunc(&_fnTECConvertTextToMultipleEncodings, _lib, "TECConvertTextToMultipleEncodings")
@@ -7695,10 +7735,9 @@ func TECConvertTextToMultipleEncodings(encodingConverter obj.Object, inputBuffer
 	var _out1 int
 	var _out2 uint8
 	var _out3 int
-	var _out4 TextEncodingRun
-	var _out5 int
-	_ret := int(_fnTECConvertTextToMultipleEncodings(objref.IDOf(encodingConverter), unsafe.Pointer(&_out0), inputBufferLength, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), outputBufferLength, unsafe.Pointer(&_out3), unsafe.Pointer(&_out4), maxOutEncodingRuns, unsafe.Pointer(&_out5)))
-	return _ret, _out0, _out1, _out2, _out3, _out4, _out5
+	var _out4 int
+	_ret := int(_fnTECConvertTextToMultipleEncodings(objref.IDOf(encodingConverter), unsafe.Pointer(&_out0), inputBufferLength, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), outputBufferLength, unsafe.Pointer(&_out3), outEncodingsBuffer, maxOutEncodingRuns, unsafe.Pointer(&_out4)))
+	return _ret, _out0, _out1, _out2, _out3, _out4
 }
 
 var _fnTECCopyTextEncodingInternetNameAndMIB func(int, int, unsafe.Pointer, unsafe.Pointer) int32
@@ -7841,17 +7880,16 @@ func TECCreateSniffer(encodingSniffer unsafe.Pointer, testEncodings unsafe.Point
 var _fnTECFlushMultipleEncodings func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // TECFlushMultipleEncodings calls the CarbonCore framework function TECFlushMultipleEncodings.
-func TECFlushMultipleEncodings(encodingConverter obj.Object, outputBufferLength int, maxOutEncodingRuns int) (result int, outputBuffer uint8, actualOutputLength int, outEncodingsBuffer TextEncodingRun, actualOutEncodingRuns int) {
+func TECFlushMultipleEncodings(encodingConverter obj.Object, outputBufferLength int, outEncodingsBuffer unsafe.Pointer, maxOutEncodingRuns int) (result int, outputBuffer uint8, actualOutputLength int, actualOutEncodingRuns int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTECFlushMultipleEncodings == nil {
 		ebipurego.RegisterLibFunc(&_fnTECFlushMultipleEncodings, _lib, "TECFlushMultipleEncodings")
 	}
 	var _out0 uint8
 	var _out1 int
-	var _out2 TextEncodingRun
-	var _out3 int
-	_ret := int(_fnTECFlushMultipleEncodings(objref.IDOf(encodingConverter), unsafe.Pointer(&_out0), outputBufferLength, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), maxOutEncodingRuns, unsafe.Pointer(&_out3)))
-	return _ret, _out0, _out1, _out2, _out3
+	var _out2 int
+	_ret := int(_fnTECFlushMultipleEncodings(objref.IDOf(encodingConverter), unsafe.Pointer(&_out0), outputBufferLength, unsafe.Pointer(&_out1), outEncodingsBuffer, maxOutEncodingRuns, unsafe.Pointer(&_out2)))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnTECFlushText func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
@@ -7913,15 +7951,14 @@ func TECGetDestinationTextEncodings(inputEncoding int, maxDestinationEncodings i
 var _fnTECGetDirectTextEncodingConversions func(unsafe.Pointer, int, unsafe.Pointer) int32
 
 // TECGetDirectTextEncodingConversions calls the CarbonCore framework function TECGetDirectTextEncodingConversions.
-func TECGetDirectTextEncodingConversions(maxAvailableConversions int) (result int, availableConversions TECConversionInfo, actualAvailableConversions int) {
+func TECGetDirectTextEncodingConversions(availableConversions unsafe.Pointer, maxAvailableConversions int) (result int, actualAvailableConversions int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTECGetDirectTextEncodingConversions == nil {
 		ebipurego.RegisterLibFunc(&_fnTECGetDirectTextEncodingConversions, _lib, "TECGetDirectTextEncodingConversions")
 	}
-	var _out0 TECConversionInfo
-	var _out1 int
-	_ret := int(_fnTECGetDirectTextEncodingConversions(unsafe.Pointer(&_out0), maxAvailableConversions, unsafe.Pointer(&_out1)))
-	return _ret, _out0, _out1
+	var _out0 int
+	_ret := int(_fnTECGetDirectTextEncodingConversions(availableConversions, maxAvailableConversions, unsafe.Pointer(&_out0)))
+	return _ret, _out0
 }
 
 var _fnTECGetEncodingList func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
@@ -8483,6 +8520,17 @@ func UCConvertCFAbsoluteTimeToSeconds(iCFTime float64) (result int, oSeconds int
 	return _ret, _out0
 }
 
+var _fnUCConvertCFAbsoluteTimeToUTCDateTime func(float64, unsafe.Pointer) int32
+
+// UCConvertCFAbsoluteTimeToUTCDateTime calls the CarbonCore framework function UCConvertCFAbsoluteTimeToUTCDateTime.
+func UCConvertCFAbsoluteTimeToUTCDateTime(iCFTime float64, oUTCDate unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUCConvertCFAbsoluteTimeToUTCDateTime == nil {
+		ebipurego.RegisterLibFunc(&_fnUCConvertCFAbsoluteTimeToUTCDateTime, _lib, "UCConvertCFAbsoluteTimeToUTCDateTime")
+	}
+	return int(_fnUCConvertCFAbsoluteTimeToUTCDateTime(iCFTime, oUTCDate))
+}
+
 var _fnUCConvertLongDateTimeToCFAbsoluteTime func(int64, unsafe.Pointer) int32
 
 // UCConvertLongDateTimeToCFAbsoluteTime calls the CarbonCore framework function UCConvertLongDateTimeToCFAbsoluteTime.
@@ -8512,13 +8560,13 @@ func UCConvertSecondsToCFAbsoluteTime(iSeconds int) (result int, oCFTime float64
 var _fnUCConvertUTCDateTimeToCFAbsoluteTime func(unsafe.Pointer, unsafe.Pointer) int32
 
 // UCConvertUTCDateTimeToCFAbsoluteTime calls the CarbonCore framework function UCConvertUTCDateTimeToCFAbsoluteTime.
-func UCConvertUTCDateTimeToCFAbsoluteTime(iUTCDate *UTCDateTime) (result int, oCFTime float64) {
+func UCConvertUTCDateTimeToCFAbsoluteTime(iUTCDate unsafe.Pointer) (result int, oCFTime float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnUCConvertUTCDateTimeToCFAbsoluteTime == nil {
 		ebipurego.RegisterLibFunc(&_fnUCConvertUTCDateTimeToCFAbsoluteTime, _lib, "UCConvertUTCDateTimeToCFAbsoluteTime")
 	}
 	var _out0 float64
-	_ret := int(_fnUCConvertUTCDateTimeToCFAbsoluteTime(unsafe.Pointer(iUTCDate), unsafe.Pointer(&_out0)))
+	_ret := int(_fnUCConvertUTCDateTimeToCFAbsoluteTime(iUTCDate, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -8598,7 +8646,7 @@ func UCIsSurrogateLowCharacter(character uint16) uint8 {
 var _fnUCKeyTranslate func(unsafe.Pointer, uint16, uint16, int, int, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // UCKeyTranslate calls the CarbonCore framework function UCKeyTranslate.
-func UCKeyTranslate(keyLayoutPtr *UCKeyboardLayout, virtualKeyCode uint16, keyAction uint16, modifierKeyState int, keyboardType int, keyTranslateOptions int, maxStringLength int) (result int, deadKeyState int, actualStringLength int, unicodeString uint16) {
+func UCKeyTranslate(keyLayoutPtr unsafe.Pointer, virtualKeyCode uint16, keyAction uint16, modifierKeyState int, keyboardType int, keyTranslateOptions int, maxStringLength int) (result int, deadKeyState int, actualStringLength int, unicodeString uint16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnUCKeyTranslate == nil {
 		ebipurego.RegisterLibFunc(&_fnUCKeyTranslate, _lib, "UCKeyTranslate")
@@ -8606,7 +8654,7 @@ func UCKeyTranslate(keyLayoutPtr *UCKeyboardLayout, virtualKeyCode uint16, keyAc
 	var _out0 int
 	var _out1 int
 	var _out2 uint16
-	_ret := int(_fnUCKeyTranslate(unsafe.Pointer(keyLayoutPtr), virtualKeyCode, keyAction, modifierKeyState, keyboardType, keyTranslateOptions, unsafe.Pointer(&_out0), maxStringLength, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2)))
+	_ret := int(_fnUCKeyTranslate(keyLayoutPtr, virtualKeyCode, keyAction, modifierKeyState, keyboardType, keyTranslateOptions, unsafe.Pointer(&_out0), maxStringLength, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2)))
 	return _ret, _out0, _out1, _out2
 }
 

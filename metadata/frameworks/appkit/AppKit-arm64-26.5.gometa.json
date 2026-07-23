@@ -184164,17 +184164,21 @@
         },
         {
           "name": "leading",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 8
         },
         {
           "name": "bottom",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 16
         },
         {
           "name": "trailing",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 24
         }
       ],
+      "size": 32,
       "availability": {
         "macos_introduced": "10.15"
       },

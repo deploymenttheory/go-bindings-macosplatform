@@ -6508,22 +6508,27 @@
         },
         {
           "name": "requestCount",
-          "objc_type": "uint32_t"
+          "objc_type": "uint32_t",
+          "offset": 4
         },
         {
           "name": "completeCount",
-          "objc_type": "uint32_t"
+          "objc_type": "uint32_t",
+          "offset": 8
         },
         {
           "name": "reserved",
-          "objc_type": "uint32_t"
+          "objc_type": "uint32_t",
+          "offset": 12
         },
         {
           "name": "timeStamp",
-          "objc_type": "IOUSBHostTime"
+          "objc_type": "IOUSBHostTime",
+          "offset": 16
         }
       ],
       "packed": true,
+      "size": 24,
       "availability": {},
       "sdk_file": "IOUSBHost/IOUSBHostDefinitions.h",
       "sdk_line": 39,
@@ -6537,26 +6542,32 @@
         },
         {
           "name": "requestCount",
-          "objc_type": "uint32_t"
+          "objc_type": "uint32_t",
+          "offset": 4
         },
         {
           "name": "offset",
-          "objc_type": "uint32_t"
+          "objc_type": "uint32_t",
+          "offset": 8
         },
         {
           "name": "completeCount",
-          "objc_type": "uint32_t"
+          "objc_type": "uint32_t",
+          "offset": 12
         },
         {
           "name": "timeStamp",
-          "objc_type": "IOUSBHostTime"
+          "objc_type": "IOUSBHostTime",
+          "offset": 16
         },
         {
           "name": "options",
-          "objc_type": "IOUSBHostIsochronousTransactionOptions"
+          "objc_type": "IOUSBHostIsochronousTransactionOptions",
+          "offset": 24
         }
       ],
       "packed": true,
+      "size": 28,
       "availability": {},
       "sdk_file": "IOUSBHost/IOUSBHostDefinitions.h",
       "sdk_line": 89,

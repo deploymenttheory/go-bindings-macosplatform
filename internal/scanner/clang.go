@@ -13,6 +13,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"sort"
+	"strconv"
 	"strings"
 )
 
@@ -434,4 +435,163 @@ func DumpAST(sdkPath, framework, arch string) (*ASTNode, error) {
 		return nil, fmt.Errorf("parsing AST JSON for %s: %w", framework, err)
 	}
 	return &root, nil
+}
+
+// RecordLayout is a C record's authoritative ABI layout from clang: the total
+// size and each field's offset, in BYTES.
+type RecordLayout struct {
+	Size         int
+	FieldOffsets []int
+}
+
+// DumpRecordLayouts invokes xcrun clang with -fdump-record-layouts-simple on the
+// framework's umbrella header and returns the authoritative record layouts keyed
+// by bare record name (struct/union tag or typedef name). Record layout is
+// target-dependent, so the target/isysroot/header args mirror DumpAST exactly.
+// The dump lands on stdout during codegen (-emit-llvm), so stdout is parsed. A
+// record with a non-byte-aligned field offset (a bitfield) or an unnamed tag is
+// omitted; the emitter falls back to its computed layout for those. clang only
+// lays out records used by value, so pointer-only-referenced structs are absent.
+func DumpRecordLayouts(sdkPath, framework, arch string) (map[string]RecordLayout, error) {
+	header := FrameworkHeader(sdkPath, framework)
+
+	args := []string{
+		"clang",
+		"-x", "objective-c",
+		"-target", arch + "-apple-macos",
+		"-isysroot", sdkPath,
+		"-emit-llvm", "-c", // record layouts are emitted during codegen, not -fsyntax-only
+		"-Wno-everything",
+		"-fno-color-diagnostics",
+		"-Xclang", "-fdump-record-layouts-simple",
+		"-o", os.DevNull,
+		header,
+	}
+
+	cmd := exec.CommandContext(context.Background(), "xcrun", args...)
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+
+	if err := cmd.Run(); err != nil {
+		if stdout.Len() == 0 {
+			return nil, fmt.Errorf("clang record-layout dump failed for %s: %w\nstderr: %s",
+				framework, err, stderr.String())
+		}
+	}
+	return parseRecordLayouts(stdout.String()), nil
+}
+
+// parseRecordLayouts parses clang's -fdump-record-layouts-simple output. Each AST
+// record block looks like:
+//
+//	*** Dumping AST Record Layout
+//	Type: struct Foo
+//	Layout: <ASTRecordLayout
+//	  Size:64
+//	  DataSize:64
+//	  Alignment:16
+//	  FieldOffsets: [0, 16, 32]>
+//
+// Sizes and offsets are in BITS. Interleaved "*** Dumping IRgen Record Layout"
+// blocks (no Size/FieldOffsets) are ignored.
+func parseRecordLayouts(dump string) map[string]RecordLayout {
+	out := map[string]RecordLayout{}
+	const marker = "*** Dumping AST Record Layout"
+	for _, block := range strings.Split(dump, marker) {
+		if i := strings.Index(block, "*** Dumping"); i >= 0 {
+			block = block[:i]
+		}
+		name := recordLayoutName(block)
+		if name == "" {
+			continue
+		}
+		sizeBits, ok := layoutIntField(block, "Size:")
+		if !ok || sizeBits%8 != 0 {
+			continue
+		}
+		offsetsBits, ok := layoutFieldOffsets(block)
+		if !ok {
+			continue
+		}
+		layout := RecordLayout{Size: sizeBits / 8}
+		byteAligned := true
+		for _, ob := range offsetsBits {
+			if ob%8 != 0 { // a bitfield boundary — Go cannot represent it
+				byteAligned = false
+				break
+			}
+			layout.FieldOffsets = append(layout.FieldOffsets, ob/8)
+		}
+		if !byteAligned {
+			continue
+		}
+		out[name] = layout
+	}
+	return out
+}
+
+// recordLayoutName extracts the bare record name from a block's "Type:" line,
+// stripping a leading struct/union/class tag. Anonymous or qualified names are
+// rejected.
+func recordLayoutName(block string) string {
+	line := layoutLine(block, "Type:")
+	for _, tag := range []string{"struct ", "union ", "class "} {
+		line = strings.TrimPrefix(line, tag)
+	}
+	line = strings.TrimSpace(line)
+	if line == "" || strings.ContainsAny(line, "(:<> \t") {
+		return ""
+	}
+	return line
+}
+
+// layoutLine returns the trimmed remainder of the first line whose trimmed form
+// begins with key (so "Size:" does not match "DataSize:").
+func layoutLine(block, key string) string {
+	for _, line := range strings.Split(block, "\n") {
+		t := strings.TrimSpace(line)
+		if strings.HasPrefix(t, key) {
+			return strings.TrimSpace(t[len(key):])
+		}
+	}
+	return ""
+}
+
+// layoutIntField parses the leading integer after key (e.g. "Size:64").
+func layoutIntField(block, key string) (int, bool) {
+	v := layoutLine(block, key)
+	end := 0
+	for end < len(v) && v[end] >= '0' && v[end] <= '9' {
+		end++
+	}
+	if end == 0 {
+		return 0, false
+	}
+	n, err := strconv.Atoi(v[:end])
+	return n, err == nil
+}
+
+// layoutFieldOffsets parses the "FieldOffsets: [0, 16, 32]" list (bits). A record
+// with no fields yields an empty list and ok=true.
+func layoutFieldOffsets(block string) ([]int, bool) {
+	line := layoutLine(block, "FieldOffsets:")
+	open := strings.IndexByte(line, '[')
+	closeIdx := strings.IndexByte(line, ']')
+	if open < 0 || closeIdx < open {
+		return nil, false
+	}
+	inner := strings.TrimSpace(line[open+1 : closeIdx])
+	if inner == "" {
+		return []int{}, true
+	}
+	var out []int
+	for _, part := range strings.Split(inner, ",") {
+		n, err := strconv.Atoi(strings.TrimSpace(part))
+		if err != nil {
+			return nil, false
+		}
+		out = append(out, n)
+	}
+	return out, true
 }

@@ -15040,9 +15040,11 @@
         },
         {
           "name": "span",
-          "objc_type": "MKCoordinateSpan"
+          "objc_type": "MKCoordinateSpan",
+          "offset": 16
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "MapKit/MKGeometry.h",
       "sdk_line": 19
@@ -15055,9 +15057,11 @@
         },
         {
           "name": "longitudeDelta",
-          "objc_type": "CLLocationDegrees"
+          "objc_type": "CLLocationDegrees",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "MapKit/MKGeometry.h",
       "sdk_line": 14
@@ -15070,9 +15074,11 @@
         },
         {
           "name": "y",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "MapKit/MKGeometry.h",
       "sdk_line": 49
@@ -15085,9 +15091,11 @@
         },
         {
           "name": "size",
-          "objc_type": "MKMapSize"
+          "objc_type": "MKMapSize",
+          "offset": 16
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "MapKit/MKGeometry.h",
       "sdk_line": 59
@@ -15100,9 +15108,11 @@
         },
         {
           "name": "height",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "MapKit/MKGeometry.h",
       "sdk_line": 54

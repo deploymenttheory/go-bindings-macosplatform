@@ -3228,9 +3228,11 @@
         },
         {
           "name": "name",
-          "objc_type": "Str63"
+          "objc_type": "Str63",
+          "offset": 4
         }
       ],
+      "size": 68,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/InternetConfig.h",
       "sdk_line": 222,
@@ -3275,17 +3277,21 @@
         },
         {
           "name": "volCreationDate",
-          "objc_type": "SInt32"
+          "objc_type": "SInt32",
+          "offset": 32
         },
         {
           "name": "fss",
-          "objc_type": "FSSpec"
+          "objc_type": "FSSpec",
+          "offset": 36
         },
         {
           "name": "alias",
-          "objc_type": "AliasRecord"
+          "objc_type": "AliasRecord",
+          "offset": 106
         }
       ],
+      "size": 112,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/InternetConfig.h",
       "sdk_line": 240,
@@ -3378,13 +3384,16 @@
         },
         {
           "name": "port",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 256
         },
         {
           "name": "flags",
-          "objc_type": "ICServiceEntryFlags"
+          "objc_type": "ICServiceEntryFlags",
+          "offset": 258
         }
       ],
+      "size": 260,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/InternetConfig.h",
       "sdk_line": 304
@@ -3412,49 +3421,61 @@
         },
         {
           "name": "reserved2",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 4
         },
         {
           "name": "launchBlockID",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 6
         },
         {
           "name": "launchEPBLength",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         },
         {
           "name": "launchFileFlags",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 12
         },
         {
           "name": "launchControlFlags",
-          "objc_type": "LaunchFlags"
+          "objc_type": "LaunchFlags",
+          "offset": 14
         },
         {
           "name": "launchAppRef",
-          "objc_type": "FSRefPtr"
+          "objc_type": "FSRefPtr",
+          "offset": 16
         },
         {
           "name": "launchProcessSN",
-          "objc_type": "ProcessSerialNumber"
+          "objc_type": "ProcessSerialNumber",
+          "offset": 24
         },
         {
           "name": "launchPreferredSize",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 32
         },
         {
           "name": "launchMinimumSize",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 36
         },
         {
           "name": "launchAvailableSize",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 40
         },
         {
           "name": "launchAppParameters",
-          "objc_type": "AppParametersPtr"
+          "objc_type": "AppParametersPtr",
+          "offset": 44
         }
       ],
+      "size": 52,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/HIServices/Processes.h",
       "sdk_line": 71
@@ -3608,13 +3629,16 @@
         },
         {
           "name": "green",
-          "objc_type": "unsigned short"
+          "objc_type": "unsigned short",
+          "offset": 2
         },
         {
           "name": "blue",
-          "objc_type": "unsigned short"
+          "objc_type": "unsigned short",
+          "offset": 4
         }
       ],
+      "size": 6,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/Quickdraw.h",
       "sdk_line": 65

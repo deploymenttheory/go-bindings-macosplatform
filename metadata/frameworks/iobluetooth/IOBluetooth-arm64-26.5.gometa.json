@@ -20221,6 +20221,7 @@
           "objc_type": "uint8_t[6]"
         }
       ],
+      "size": 6,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 225
@@ -21502,6 +21503,7 @@
           "objc_type": "uint8_t[3]"
         }
       ],
+      "size": 3,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 1645
@@ -21514,25 +21516,31 @@
         },
         {
           "name": "pageScanRepetitionMode",
-          "objc_type": "BluetoothPageScanRepetitionMode"
+          "objc_type": "BluetoothPageScanRepetitionMode",
+          "offset": 6
         },
         {
           "name": "pageScanPeriodMode",
-          "objc_type": "BluetoothHCIPageScanPeriodMode"
+          "objc_type": "BluetoothHCIPageScanPeriodMode",
+          "offset": 7
         },
         {
           "name": "pageScanMode",
-          "objc_type": "BluetoothHCIPageScanMode"
+          "objc_type": "BluetoothHCIPageScanMode",
+          "offset": 8
         },
         {
           "name": "classOfDevice",
-          "objc_type": "BluetoothClassOfDevice"
+          "objc_type": "BluetoothClassOfDevice",
+          "offset": 12
         },
         {
           "name": "clockOffset",
-          "objc_type": "BluetoothClockOffset"
+          "objc_type": "BluetoothClockOffset",
+          "offset": 16
         }
       ],
+      "size": 20,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 1777
@@ -21560,25 +21568,31 @@
         },
         {
           "name": "pageScanRepetitionMode",
-          "objc_type": "BluetoothPageScanRepetitionMode"
+          "objc_type": "BluetoothPageScanRepetitionMode",
+          "offset": 6
         },
         {
           "name": "reserved",
-          "objc_type": "uint8_t"
+          "objc_type": "uint8_t",
+          "offset": 7
         },
         {
           "name": "classOfDevice",
-          "objc_type": "BluetoothClassOfDevice"
+          "objc_type": "BluetoothClassOfDevice",
+          "offset": 8
         },
         {
           "name": "clockOffset",
-          "objc_type": "BluetoothClockOffset"
+          "objc_type": "BluetoothClockOffset",
+          "offset": 12
         },
         {
           "name": "RSSIValue",
-          "objc_type": "BluetoothHCIRSSIValue"
+          "objc_type": "BluetoothHCIRSSIValue",
+          "offset": 14
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 1799
@@ -21848,6 +21862,7 @@
           "objc_type": "uint8_t[16]"
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 1896
@@ -21972,6 +21987,7 @@
           "objc_type": "uint8_t[16]"
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "IOBluetooth/Bluetooth.h",
       "sdk_line": 231
@@ -22275,9 +22291,11 @@
         },
         {
           "name": "dataSize",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "IOBluetooth/objc/IOBluetoothL2CAPChannel.h",
       "sdk_line": 35
@@ -22370,25 +22388,31 @@
         },
         {
           "name": "headerDataPtr",
-          "objc_type": "void *"
+          "objc_type": "void *",
+          "offset": 8
         },
         {
           "name": "headerDataLength",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 16
         },
         {
           "name": "maxPacketSize",
-          "objc_type": "OBEXMaxPacketLength"
+          "objc_type": "OBEXMaxPacketLength",
+          "offset": 24
         },
         {
           "name": "version",
-          "objc_type": "OBEXVersion"
+          "objc_type": "OBEXVersion",
+          "offset": 26
         },
         {
           "name": "flags",
-          "objc_type": "OBEXFlags"
+          "objc_type": "OBEXFlags",
+          "offset": 27
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "IOBluetooth/OBEX.h",
       "sdk_line": 545

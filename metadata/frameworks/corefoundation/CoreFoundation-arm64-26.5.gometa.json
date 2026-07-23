@@ -4034,9 +4034,11 @@
         },
         {
           "name": "length",
-          "objc_type": "CFIndex"
+          "objc_type": "CFIndex",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "CoreFoundation/CFBase.h",
       "sdk_line": 596
@@ -4351,6 +4353,7 @@
           "objc_type": "uint32_t"
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "CoreFoundation/CFByteOrder.h",
       "sdk_line": 203
@@ -4362,6 +4365,7 @@
           "objc_type": "uint64_t"
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "CoreFoundation/CFByteOrder.h",
       "sdk_line": 204
@@ -4601,9 +4605,11 @@
         },
         {
           "name": "publicID",
-          "objc_type": "CFStringRef"
+          "objc_type": "CFStringRef",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "CoreFoundation/CFXMLNode.h",
       "sdk_line": 92
@@ -4750,9 +4756,11 @@
         },
         {
           "name": "y",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "CoreFoundation/CFCGTypes.h",
       "sdk_line": 51
@@ -4780,9 +4788,11 @@
         },
         {
           "name": "height",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "CoreFoundation/CFCGTypes.h",
       "sdk_line": 59

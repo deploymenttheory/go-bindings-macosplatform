@@ -740,7 +740,7 @@ func TestIsMetadataEmptyDirect(t *testing.T) {
 	// isMetadataEmpty is unexported and only in extract.go (same package).
 	// We call Extract with an empty AST to exercise the post-scan path.
 	root := &ASTNode{Kind: "TranslationUnitDecl", Inner: []ASTNode{}}
-	framework := Extract(root, "/nonexistent/sdk", "Foundation", "14.0", "arm64")
+	framework := Extract(root, "/nonexistent/sdk", "Foundation", "14.0", "arm64", nil)
 	// When there are no declarations, the function checks IsSwiftOnly and
 	// DetectSubFrameworkNames. With a non-existent SDK path both return empty/false.
 	if framework == nil {
@@ -755,7 +755,7 @@ func TestIsMetadataEmptyDirect(t *testing.T) {
 // framework names and sets ParentFramework.
 func TestExtractSubFramework(t *testing.T) {
 	root := &ASTNode{Kind: "TranslationUnitDecl", Inner: []ASTNode{}}
-	framework := Extract(root, "/nonexistent/sdk", "Carbon/HIToolbox", "14.0", "arm64")
+	framework := Extract(root, "/nonexistent/sdk", "Carbon/HIToolbox", "14.0", "arm64", nil)
 	if framework.Framework != "HIToolbox" {
 		t.Errorf("framework.Framework = %q, want HIToolbox", framework.Framework)
 	}
@@ -776,7 +776,7 @@ func TestExtractWithSwiftOnlyBundle(t *testing.T) {
 	}
 
 	root := &ASTNode{Kind: "TranslationUnitDecl", Inner: []ASTNode{}}
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	if !framework.IsSwiftOnly {
 		t.Error("SwiftOnly = false, want true for bundle with .swiftmodule and no declarations")
 	}
@@ -797,7 +797,7 @@ func TestExtractWithUmbrellaBundle(t *testing.T) {
 	}
 
 	root := &ASTNode{Kind: "TranslationUnitDecl", Inner: []ASTNode{}}
-	framework := Extract(root, sdkRoot, "Umbrella", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "Umbrella", "14.0", "arm64", nil)
 	if len(framework.UmbrellaFor) == 0 {
 		t.Error("UmbrellaFor is empty, want [Sub]")
 	} else if framework.UmbrellaFor[0] != "Sub" {
@@ -845,7 +845,7 @@ func TestExtractEnumNode(t *testing.T) {
 	}
 	root.Inner[0].Loc = &Location{FilePath: fakeHdr}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	e, ok := framework.Enums["MyOptions"]
 	if !ok {
 		t.Fatal("MyOptions enum not found in extracted metadata")
@@ -884,7 +884,7 @@ func TestExtractAnonymousEnumNode(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	key := "_anon_NSNotFound"
 	e, ok := framework.Enums[key]
 	if !ok {
@@ -1073,7 +1073,7 @@ func TestExtractExternSkipsNonExtern(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	if len(framework.Externs) != 1 {
 		t.Fatalf("Externs: got %d, want 1", len(framework.Externs))
 	}
@@ -1123,7 +1123,7 @@ func TestExtractStructNode(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	if _, ok := framework.Structs["NSRange"]; !ok {
 		t.Fatal("NSRange struct not found")
 	}
@@ -1198,7 +1198,7 @@ func TestExtractStructAttributeDecoratedAndForwardDecl(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	cgsize, ok := framework.Structs["CGSize"]
 	if !ok {
 		t.Fatal("CGSize not extracted")
@@ -1244,7 +1244,7 @@ func TestExtractTypedefNode(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	if v, ok := framework.Typedefs["NSTimeInterval"]; !ok || v != "double" {
 		t.Errorf("Typedefs[NSTimeInterval] = %q (ok=%v), want double", v, ok)
 	}
@@ -1278,7 +1278,7 @@ func TestExtractClassForwardDeclSkipped(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	if _, ok := framework.Classes["NSScreen"]; ok {
 		t.Error("forward-declared class NSScreen should not be in Classes")
 	}
@@ -1317,7 +1317,7 @@ func TestExtractCategoryForeignExtension(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	methods, ok := framework.ForeignExtensions["NSBundle"]
 	if !ok {
 		t.Fatal("ForeignExtensions[NSBundle] not found")
@@ -1352,7 +1352,7 @@ func TestExtractImplicitNodeSkipped(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	if _, ok := framework.Classes["ImplicitClass"]; ok {
 		t.Error("implicit class should be skipped")
 	}
@@ -1392,7 +1392,7 @@ func TestExtractFunctionNode(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	if len(framework.Functions) != 1 {
 		t.Fatalf("Functions: got %d, want 1", len(framework.Functions))
 	}
@@ -1494,7 +1494,7 @@ func TestExtractClassFull(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	cls, ok := framework.Classes["MyClass"]
 	if !ok {
 		t.Fatal("MyClass not found in Classes")
@@ -1573,7 +1573,7 @@ func TestExtractPropertyFull(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	cls, ok := framework.Classes["PropClass"]
 	if !ok {
 		t.Fatal("PropClass not found in Classes")
@@ -1649,7 +1649,7 @@ func TestExtractCategoryOwnClass(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	cls, ok := framework.Classes["MyClass"]
 	if !ok {
 		t.Fatal("MyClass not found in Classes")
@@ -1702,7 +1702,7 @@ func TestExtractCategoryNoInterface(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	cls, ok := framework.Classes["OtherClass"]
 	if !ok {
 		t.Fatal("OtherClass not found in Classes")
@@ -1737,7 +1737,7 @@ func TestExtractFunctionNoReturnType(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	if len(framework.Functions) != 1 || framework.Functions[0].Return.ObjCType != "" {
 		t.Errorf("expected 1 function with empty Return; got %+v", framework.Functions)
 	}
@@ -1793,7 +1793,7 @@ func TestExtractFunctionReturnTypeFromTypeQualType(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	if len(framework.Functions) != 3 {
 		t.Fatalf("want 3 functions, got %d", len(framework.Functions))
 	}
@@ -1840,7 +1840,7 @@ func TestExtractEnumNoFixedType(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	e, ok := framework.Enums["MyEnum"]
 	if !ok {
 		t.Fatal("MyEnum not found in Enums")
@@ -1875,7 +1875,7 @@ func TestExtractAnonymousEnumEmpty(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	if len(framework.Enums) != 0 {
 		t.Errorf("expected no enums from empty anonymous enum; got %v", framework.Enums)
 	}
@@ -1973,7 +1973,7 @@ func TestExtractProtocolNode(t *testing.T) {
 		},
 	}
 
-	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64")
+	framework := Extract(root, sdkRoot, "TestFW", "14.0", "arm64", nil)
 	proto, ok := framework.Protocols["MyProtocol"]
 	if !ok {
 		t.Fatal("MyProtocol not found in Protocols")
