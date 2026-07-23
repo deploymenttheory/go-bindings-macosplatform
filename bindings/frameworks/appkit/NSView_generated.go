@@ -515,6 +515,21 @@ func (v_ *View) AncestorShared(view *View) *View {
 
 }
 
+// GetRectsBeingDrawnCount wraps the corresponding Objective-C method.
+func (v_ *View) GetRectsBeingDrawnCount(rects *corefoundation.CGRect) (count int64) {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 int64
+	purego.Main(func() {
+		_mainthread0 = func() (count int64) {
+			var _out0 int64
+			objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("getRectsBeingDrawn:count:"), unsafe.Pointer(rects), unsafe.Pointer(&_out0))
+			return _out0
+		}()
+	})
+	return _mainthread0
+
+}
+
 // NeedsToDrawRect wraps the corresponding Objective-C method.
 func (v_ *View) NeedsToDrawRect(rect corefoundation.CGRect) bool {
 	defer runtime.KeepAlive(v_)
@@ -1465,6 +1480,21 @@ func (v_ *View) ViewDidEndLiveResize() {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidEndLiveResize"))
 	})
+
+}
+
+// GetRectsExposedDuringLiveResizeCount wraps the corresponding Objective-C method.
+func (v_ *View) GetRectsExposedDuringLiveResizeCount(exposedRects *corefoundation.CGRect) (count int64) {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 int64
+	purego.Main(func() {
+		_mainthread0 = func() (count int64) {
+			var _out0 int64
+			objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("getRectsExposedDuringLiveResize:count:"), unsafe.Pointer(exposedRects), unsafe.Pointer(&_out0))
+			return _out0
+		}()
+	})
+	return _mainthread0
 
 }
 
@@ -2423,6 +2453,20 @@ func (v_ *View) Print(sender obj.Object) {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("print:"), objref.IDOf(sender))
 	})
+
+}
+
+// KnowsPageRange wraps the corresponding Objective-C method.
+func (v_ *View) KnowsPageRange(range_ *foundation.NSRange) bool {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("knowsPageRange:"), unsafe.Pointer(range_))
+			return _r
+		}()
+	})
+	return _mainthread0
 
 }
 

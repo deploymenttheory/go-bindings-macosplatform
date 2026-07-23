@@ -1641,6 +1641,14 @@ func DominantLanguageForString(str string) string {
 	return purego.GoString(_r)
 }
 
+// TagForStringAtIndexUnitSchemeOrthographyTokenRange returns a tag for a single scheme, for a given linguistic unit, at the specified character position in a string.
+func TagForStringAtIndexUnitSchemeOrthographyTokenRange(str string, charIndex int, unit LinguisticTaggerUnit, scheme *String, orthography *Orthography, tokenRange *NSRange) *String {
+	defer runtime.KeepAlive(scheme)
+	defer runtime.KeepAlive(orthography)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLinguisticTagger")), objc.RegisterName("tagForString:atIndex:unit:scheme:orthography:tokenRange:"), purego.NSString(str), charIndex, unit, objref.IDOf(scheme), objref.IDOf(orthography), unsafe.Pointer(tokenRange))
+	return StringFromID(_r)
+}
+
 // LocalizedStringByJoiningStrings wraps the corresponding Objective-C method.
 func LocalizedStringByJoiningStrings(strings_ []string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSListFormatter")), objc.RegisterName("localizedStringByJoiningStrings:"), purego.SliceToNSArray(strings_, func(_v string) objc.ID { return purego.NSString(_v) }))
@@ -3155,6 +3163,13 @@ func CurrentUser() *TermOfAddress {
 func LocalizedForLanguageIdentifierWithPronouns(language string, pronouns []*MorphologyPronoun) *TermOfAddress {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTermOfAddress")), objc.RegisterName("localizedForLanguageIdentifier:withPronouns:"), purego.NSString(language), purego.SliceToNSArray(pronouns, func(_v *MorphologyPronoun) objc.ID { return objref.IDOf(_v) }))
 	return TermOfAddressFromID(_r)
+}
+
+// RegularExpressionCheckingResultWithRangesCountRegularExpression creates and returns a type checking result with the specified regular expression data.
+func RegularExpressionCheckingResultWithRangesCountRegularExpression(ranges *NSRange, count int, regularExpression *RegularExpression) *TextCheckingResult {
+	defer runtime.KeepAlive(regularExpression)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("regularExpressionCheckingResultWithRanges:count:regularExpression:"), unsafe.Pointer(ranges), count, objref.IDOf(regularExpression))
+	return TextCheckingResultFromID(_r)
 }
 
 // DetachNewThreadWith detaches new thread with.

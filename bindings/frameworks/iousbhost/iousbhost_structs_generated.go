@@ -30,6 +30,15 @@ type IOUSBDescriptorHeader struct {
 	BDescriptorType uint8
 }
 
+// Device Capability Container ID. USB 3.0 9.6.2.3: Container ID
+type IOUSBDeviceCapabilityContainerID struct {
+	BLength            uint8
+	BDescriptorType    uint8
+	BDevCapabilityType uint8
+	BReservedID        uint8
+	ContainerID        [16]uint8
+}
+
 // Device Capability descriptor.  See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>. USB 3.0 9.6.2: Binary Device Object Store (BOS)
 type IOUSBDeviceCapabilityDescriptorHeader struct {
 	BLength            uint8

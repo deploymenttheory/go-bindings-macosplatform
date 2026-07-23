@@ -7,6 +7,7 @@ package launchservices
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -59,29 +60,17 @@ func GetIconRef(vRefNum int16, creator int, iconType int, theIconRef unsafe.Poin
 	return _fnGetIconRef(vRefNum, creator, iconType, theIconRef)
 }
 
-var _fnGetIconRefFromComponent func(unsafe.Pointer, unsafe.Pointer) int32
-
-// GetIconRefFromComponent calls the LaunchServices framework function GetIconRefFromComponent.
-func GetIconRefFromComponent(inComponent unsafe.Pointer, outIconRef unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnGetIconRefFromComponent == nil {
-		ebipurego.RegisterLibFunc(&_fnGetIconRefFromComponent, _lib, "GetIconRefFromComponent")
-	}
-	return int(_fnGetIconRefFromComponent(inComponent, outIconRef))
-}
-
 var _fnGetIconRefFromFileInfo func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // GetIconRefFromFileInfo calls the LaunchServices framework function GetIconRefFromFileInfo.
-func GetIconRefFromFileInfo(inRef unsafe.Pointer, inFileNameLength int, inWhichInfo int, inCatalogInfo unsafe.Pointer, inUsageFlags int, outIconRef unsafe.Pointer) (result int, inFileName uint16, outLabel int16) {
+func GetIconRefFromFileInfo(inRef *carboncore.FSRef, inFileNameLength int, inFileName unsafe.Pointer, inWhichInfo int, inCatalogInfo unsafe.Pointer, inUsageFlags int, outIconRef unsafe.Pointer) (result int, outLabel int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetIconRefFromFileInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnGetIconRefFromFileInfo, _lib, "GetIconRefFromFileInfo")
 	}
-	var _out0 uint16
-	var _out1 int16
-	_ret := int(_fnGetIconRefFromFileInfo(inRef, inFileNameLength, unsafe.Pointer(&_out0), inWhichInfo, inCatalogInfo, inUsageFlags, outIconRef, unsafe.Pointer(&_out1)))
-	return _ret, _out0, _out1
+	var _out0 int16
+	_ret := int(_fnGetIconRefFromFileInfo(unsafe.Pointer(inRef), inFileNameLength, inFileName, inWhichInfo, inCatalogInfo, inUsageFlags, outIconRef, unsafe.Pointer(&_out0)))
+	return _ret, _out0
 }
 
 var _fnGetIconRefFromFolder func(int16, int, int, int8, int8, unsafe.Pointer) int16
@@ -93,17 +82,6 @@ func GetIconRefFromFolder(vRefNum int16, parentFolderID int, folderID int, attri
 		ebipurego.RegisterLibFunc(&_fnGetIconRefFromFolder, _lib, "GetIconRefFromFolder")
 	}
 	return _fnGetIconRefFromFolder(vRefNum, parentFolderID, folderID, attributes, accessPrivileges, theIconRef)
-}
-
-var _fnGetIconRefFromIconFamilyPtr func(unsafe.Pointer, int, unsafe.Pointer) int32
-
-// GetIconRefFromIconFamilyPtr calls the LaunchServices framework function GetIconRefFromIconFamilyPtr.
-func GetIconRefFromIconFamilyPtr(inIconFamilyPtr unsafe.Pointer, inSize int, outIconRef unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnGetIconRefFromIconFamilyPtr == nil {
-		ebipurego.RegisterLibFunc(&_fnGetIconRefFromIconFamilyPtr, _lib, "GetIconRefFromIconFamilyPtr")
-	}
-	return int(_fnGetIconRefFromIconFamilyPtr(inIconFamilyPtr, inSize, outIconRef))
 }
 
 var _fnGetIconRefFromTypeInfo func(int, int, objc.ID, objc.ID, int, unsafe.Pointer) int16
@@ -166,13 +144,13 @@ func IsValidIconRef(theIconRef obj.Object) uint8 {
 var _fnLSCanRefAcceptItem func(unsafe.Pointer, unsafe.Pointer, LSRolesMask, LSAcceptanceFlags, unsafe.Pointer) int32
 
 // LSCanRefAcceptItem calls the LaunchServices framework function LSCanRefAcceptItem.
-func LSCanRefAcceptItem(inItemFSRef unsafe.Pointer, inTargetRef unsafe.Pointer, inRoleMask LSRolesMask, inFlags LSAcceptanceFlags) (result int, outAcceptsItem uint8) {
+func LSCanRefAcceptItem(inItemFSRef *carboncore.FSRef, inTargetRef *carboncore.FSRef, inRoleMask LSRolesMask, inFlags LSAcceptanceFlags) (result int, outAcceptsItem uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCanRefAcceptItem == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCanRefAcceptItem, _lib, "LSCanRefAcceptItem")
 	}
 	var _out0 uint8
-	_ret := int(_fnLSCanRefAcceptItem(inItemFSRef, inTargetRef, inRoleMask, inFlags, unsafe.Pointer(&_out0)))
+	_ret := int(_fnLSCanRefAcceptItem(unsafe.Pointer(inItemFSRef), unsafe.Pointer(inTargetRef), inRoleMask, inFlags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -249,48 +227,15 @@ func LSCopyDefaultRoleHandlerForContentType(inContentType obj.Object, inRole LSR
 	return obj.Wrap(_ret)
 }
 
-var _fnLSCopyDisplayNameForRef func(unsafe.Pointer, unsafe.Pointer) int32
-
-// LSCopyDisplayNameForRef calls the LaunchServices framework function LSCopyDisplayNameForRef.
-func LSCopyDisplayNameForRef(inRef unsafe.Pointer, outDisplayName unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnLSCopyDisplayNameForRef == nil {
-		ebipurego.RegisterLibFunc(&_fnLSCopyDisplayNameForRef, _lib, "LSCopyDisplayNameForRef")
-	}
-	return int(_fnLSCopyDisplayNameForRef(inRef, outDisplayName))
-}
-
-var _fnLSCopyItemAttribute func(unsafe.Pointer, LSRolesMask, objc.ID, unsafe.Pointer) int32
-
-// LSCopyItemAttribute calls the LaunchServices framework function LSCopyItemAttribute.
-func LSCopyItemAttribute(inItem unsafe.Pointer, inRoles LSRolesMask, inAttributeName obj.Object, outValue unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnLSCopyItemAttribute == nil {
-		ebipurego.RegisterLibFunc(&_fnLSCopyItemAttribute, _lib, "LSCopyItemAttribute")
-	}
-	return int(_fnLSCopyItemAttribute(inItem, inRoles, objref.IDOf(inAttributeName), outValue))
-}
-
-var _fnLSCopyItemAttributes func(unsafe.Pointer, LSRolesMask, objc.ID, unsafe.Pointer) int32
-
-// LSCopyItemAttributes calls the LaunchServices framework function LSCopyItemAttributes.
-func LSCopyItemAttributes(inItem unsafe.Pointer, inRoles LSRolesMask, inAttributeNames obj.Object, outValues unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnLSCopyItemAttributes == nil {
-		ebipurego.RegisterLibFunc(&_fnLSCopyItemAttributes, _lib, "LSCopyItemAttributes")
-	}
-	return int(_fnLSCopyItemAttributes(inItem, inRoles, objref.IDOf(inAttributeNames), outValues))
-}
-
 var _fnLSCopyItemInfoForRef func(unsafe.Pointer, LSRequestedInfo, unsafe.Pointer) int32
 
 // LSCopyItemInfoForRef calls the LaunchServices framework function LSCopyItemInfoForRef.
-func LSCopyItemInfoForRef(inItemRef unsafe.Pointer, inWhichInfo LSRequestedInfo, outItemInfo unsafe.Pointer) int {
+func LSCopyItemInfoForRef(inItemRef *carboncore.FSRef, inWhichInfo LSRequestedInfo, outItemInfo unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSCopyItemInfoForRef == nil {
 		ebipurego.RegisterLibFunc(&_fnLSCopyItemInfoForRef, _lib, "LSCopyItemInfoForRef")
 	}
-	return int(_fnLSCopyItemInfoForRef(inItemRef, inWhichInfo, outItemInfo))
+	return int(_fnLSCopyItemInfoForRef(unsafe.Pointer(inItemRef), inWhichInfo, outItemInfo))
 }
 
 var _fnLSCopyItemInfoForURL func(objc.ID, LSRequestedInfo, unsafe.Pointer) int32
@@ -304,73 +249,17 @@ func LSCopyItemInfoForURL(inURL obj.Object, inWhichInfo LSRequestedInfo, outItem
 	return int(_fnLSCopyItemInfoForURL(objref.IDOf(inURL), inWhichInfo, outItemInfo))
 }
 
-var _fnLSCopyKindStringForRef func(unsafe.Pointer, unsafe.Pointer) int32
-
-// LSCopyKindStringForRef calls the LaunchServices framework function LSCopyKindStringForRef.
-func LSCopyKindStringForRef(inFSRef unsafe.Pointer, outKindString unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnLSCopyKindStringForRef == nil {
-		ebipurego.RegisterLibFunc(&_fnLSCopyKindStringForRef, _lib, "LSCopyKindStringForRef")
-	}
-	return int(_fnLSCopyKindStringForRef(inFSRef, outKindString))
-}
-
-var _fnLSFindApplicationForInfo func(int, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
-
-// LSFindApplicationForInfo calls the LaunchServices framework function LSFindApplicationForInfo.
-func LSFindApplicationForInfo(inCreator int, inBundleID obj.Object, inName obj.Object, outAppRef unsafe.Pointer, outAppURL unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnLSFindApplicationForInfo == nil {
-		ebipurego.RegisterLibFunc(&_fnLSFindApplicationForInfo, _lib, "LSFindApplicationForInfo")
-	}
-	return int(_fnLSFindApplicationForInfo(inCreator, objref.IDOf(inBundleID), objref.IDOf(inName), outAppRef, outAppURL))
-}
-
-var _fnLSGetApplicationForInfo func(int, int, objc.ID, LSRolesMask, unsafe.Pointer, unsafe.Pointer) int32
-
-// LSGetApplicationForInfo calls the LaunchServices framework function LSGetApplicationForInfo.
-func LSGetApplicationForInfo(inType int, inCreator int, inExtension obj.Object, inRoleMask LSRolesMask, outAppRef unsafe.Pointer, outAppURL unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnLSGetApplicationForInfo == nil {
-		ebipurego.RegisterLibFunc(&_fnLSGetApplicationForInfo, _lib, "LSGetApplicationForInfo")
-	}
-	return int(_fnLSGetApplicationForInfo(inType, inCreator, objref.IDOf(inExtension), inRoleMask, outAppRef, outAppURL))
-}
-
-var _fnLSGetApplicationForItem func(unsafe.Pointer, LSRolesMask, unsafe.Pointer, unsafe.Pointer) int32
-
-// LSGetApplicationForItem calls the LaunchServices framework function LSGetApplicationForItem.
-func LSGetApplicationForItem(inItemRef unsafe.Pointer, inRoleMask LSRolesMask, outAppRef unsafe.Pointer, outAppURL unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnLSGetApplicationForItem == nil {
-		ebipurego.RegisterLibFunc(&_fnLSGetApplicationForItem, _lib, "LSGetApplicationForItem")
-	}
-	return int(_fnLSGetApplicationForItem(inItemRef, inRoleMask, outAppRef, outAppURL))
-}
-
-var _fnLSGetApplicationForURL func(objc.ID, LSRolesMask, unsafe.Pointer, unsafe.Pointer) int32
-
-// LSGetApplicationForURL calls the LaunchServices framework function LSGetApplicationForURL.
-func LSGetApplicationForURL(inURL obj.Object, inRoleMask LSRolesMask, outAppRef unsafe.Pointer, outAppURL unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnLSGetApplicationForURL == nil {
-		ebipurego.RegisterLibFunc(&_fnLSGetApplicationForURL, _lib, "LSGetApplicationForURL")
-	}
-	return int(_fnLSGetApplicationForURL(objref.IDOf(inURL), inRoleMask, outAppRef, outAppURL))
-}
-
 var _fnLSGetExtensionInfo func(int, unsafe.Pointer, unsafe.Pointer) int32
 
 // LSGetExtensionInfo calls the LaunchServices framework function LSGetExtensionInfo.
-func LSGetExtensionInfo(inNameLen int) (result int, inNameBuffer uint16, outExtStartIndex int) {
+func LSGetExtensionInfo(inNameLen int, inNameBuffer unsafe.Pointer) (result int, outExtStartIndex int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSGetExtensionInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnLSGetExtensionInfo, _lib, "LSGetExtensionInfo")
 	}
-	var _out0 uint16
-	var _out1 int
-	_ret := int(_fnLSGetExtensionInfo(inNameLen, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
-	return _ret, _out0, _out1
+	var _out0 int
+	_ret := int(_fnLSGetExtensionInfo(inNameLen, inNameBuffer, unsafe.Pointer(&_out0)))
+	return _ret, _out0
 }
 
 var _fnLSGetHandlerOptionsForContentType func(objc.ID) LSHandlerOptions
@@ -395,26 +284,15 @@ func LSOpenApplication(appParams unsafe.Pointer, outPSN unsafe.Pointer) int {
 	return int(_fnLSOpenApplication(appParams, outPSN))
 }
 
-var _fnLSOpenFSRef func(unsafe.Pointer, unsafe.Pointer) int32
-
-// LSOpenFSRef calls the LaunchServices framework function LSOpenFSRef.
-func LSOpenFSRef(inRef unsafe.Pointer, outLaunchedRef unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnLSOpenFSRef == nil {
-		ebipurego.RegisterLibFunc(&_fnLSOpenFSRef, _lib, "LSOpenFSRef")
-	}
-	return int(_fnLSOpenFSRef(inRef, outLaunchedRef))
-}
-
 var _fnLSOpenFromRefSpec func(unsafe.Pointer, unsafe.Pointer) int32
 
 // LSOpenFromRefSpec calls the LaunchServices framework function LSOpenFromRefSpec.
-func LSOpenFromRefSpec(inLaunchSpec unsafe.Pointer, outLaunchedRef unsafe.Pointer) int {
+func LSOpenFromRefSpec(inLaunchSpec unsafe.Pointer, outLaunchedRef *carboncore.FSRef) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSOpenFromRefSpec == nil {
 		ebipurego.RegisterLibFunc(&_fnLSOpenFromRefSpec, _lib, "LSOpenFromRefSpec")
 	}
-	return int(_fnLSOpenFromRefSpec(inLaunchSpec, outLaunchedRef))
+	return int(_fnLSOpenFromRefSpec(inLaunchSpec, unsafe.Pointer(outLaunchedRef)))
 }
 
 var _fnLSOpenFromURLSpec func(unsafe.Pointer, unsafe.Pointer) int32
@@ -450,39 +328,6 @@ func LSOpenURLsWithRole(inURLs obj.Object, inRole LSRolesMask, inAEParam unsafe.
 	return int(_fnLSOpenURLsWithRole(objref.IDOf(inURLs), inRole, inAEParam, inAppParams, outPSNs, inMaxPSNCount))
 }
 
-var _fnLSRegisterFSRef func(unsafe.Pointer, uint8) int32
-
-// LSRegisterFSRef calls the LaunchServices framework function LSRegisterFSRef.
-func LSRegisterFSRef(inRef unsafe.Pointer, inUpdate uint8) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnLSRegisterFSRef == nil {
-		ebipurego.RegisterLibFunc(&_fnLSRegisterFSRef, _lib, "LSRegisterFSRef")
-	}
-	return int(_fnLSRegisterFSRef(inRef, inUpdate))
-}
-
-var _fnLSSetExtensionHiddenForRef func(unsafe.Pointer, uint8) int32
-
-// LSSetExtensionHiddenForRef calls the LaunchServices framework function LSSetExtensionHiddenForRef.
-func LSSetExtensionHiddenForRef(inRef unsafe.Pointer, inHide uint8) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnLSSetExtensionHiddenForRef == nil {
-		ebipurego.RegisterLibFunc(&_fnLSSetExtensionHiddenForRef, _lib, "LSSetExtensionHiddenForRef")
-	}
-	return int(_fnLSSetExtensionHiddenForRef(inRef, inHide))
-}
-
-var _fnLSSetItemAttribute func(unsafe.Pointer, LSRolesMask, objc.ID, objc.ID) int32
-
-// LSSetItemAttribute calls the LaunchServices framework function LSSetItemAttribute.
-func LSSetItemAttribute(inItem unsafe.Pointer, inRoles LSRolesMask, inAttributeName obj.Object, inValue obj.Object) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnLSSetItemAttribute == nil {
-		ebipurego.RegisterLibFunc(&_fnLSSetItemAttribute, _lib, "LSSetItemAttribute")
-	}
-	return int(_fnLSSetItemAttribute(inItem, inRoles, objref.IDOf(inAttributeName), objref.IDOf(inValue)))
-}
-
 var _fnOverrideIconRef func(objc.ID, objc.ID) int16
 
 // OverrideIconRef calls the LaunchServices framework function OverrideIconRef.
@@ -497,23 +342,12 @@ func OverrideIconRef(oldIconRef obj.Object, newIconRef obj.Object) int16 {
 var _fnReadIconFromFSRef func(unsafe.Pointer, unsafe.Pointer) int32
 
 // ReadIconFromFSRef calls the LaunchServices framework function ReadIconFromFSRef.
-func ReadIconFromFSRef(ref unsafe.Pointer, iconFamily unsafe.Pointer) int {
+func ReadIconFromFSRef(ref *carboncore.FSRef, iconFamily unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnReadIconFromFSRef == nil {
 		ebipurego.RegisterLibFunc(&_fnReadIconFromFSRef, _lib, "ReadIconFromFSRef")
 	}
-	return int(_fnReadIconFromFSRef(ref, iconFamily))
-}
-
-var _fnRegisterIconRefFromFSRef func(int, int, unsafe.Pointer, unsafe.Pointer) int32
-
-// RegisterIconRefFromFSRef calls the LaunchServices framework function RegisterIconRefFromFSRef.
-func RegisterIconRefFromFSRef(creator int, iconType int, iconFile unsafe.Pointer, theIconRef unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnRegisterIconRefFromFSRef == nil {
-		ebipurego.RegisterLibFunc(&_fnRegisterIconRefFromFSRef, _lib, "RegisterIconRefFromFSRef")
-	}
-	return int(_fnRegisterIconRefFromFSRef(creator, iconType, iconFile, theIconRef))
+	return int(_fnReadIconFromFSRef(unsafe.Pointer(ref), iconFamily))
 }
 
 var _fnRegisterIconRefFromIconFamily func(int, int, unsafe.Pointer, unsafe.Pointer) int16

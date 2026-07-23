@@ -57,14 +57,12 @@ func AlBufferf(bid int, param int, value float32) {
 var _fnAlBufferfv func(int, int, unsafe.Pointer)
 
 // AlBufferfv calls the OpenAL framework function alBufferfv.
-func AlBufferfv(bid int, param int) (values float32) {
+func AlBufferfv(bid int, param int, values unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlBufferfv == nil {
 		ebipurego.RegisterLibFunc(&_fnAlBufferfv, _lib, "alBufferfv")
 	}
-	var _out0 float32
-	_fnAlBufferfv(bid, param, unsafe.Pointer(&_out0))
-	return _out0
+	_fnAlBufferfv(bid, param, values)
 }
 
 var _fnAlBufferi func(int, int, int)
@@ -81,40 +79,34 @@ func AlBufferi(bid int, param int, value int) {
 var _fnAlBufferiv func(int, int, unsafe.Pointer)
 
 // AlBufferiv calls the OpenAL framework function alBufferiv.
-func AlBufferiv(bid int, param int) (values int) {
+func AlBufferiv(bid int, param int, values unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlBufferiv == nil {
 		ebipurego.RegisterLibFunc(&_fnAlBufferiv, _lib, "alBufferiv")
 	}
-	var _out0 int
-	_fnAlBufferiv(bid, param, unsafe.Pointer(&_out0))
-	return _out0
+	_fnAlBufferiv(bid, param, values)
 }
 
 var _fnAlDeleteBuffers func(int, unsafe.Pointer)
 
 // AlDeleteBuffers calls the OpenAL framework function alDeleteBuffers.
-func AlDeleteBuffers(n int) (buffers int) {
+func AlDeleteBuffers(n int, buffers unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlDeleteBuffers == nil {
 		ebipurego.RegisterLibFunc(&_fnAlDeleteBuffers, _lib, "alDeleteBuffers")
 	}
-	var _out0 int
-	_fnAlDeleteBuffers(n, unsafe.Pointer(&_out0))
-	return _out0
+	_fnAlDeleteBuffers(n, buffers)
 }
 
 var _fnAlDeleteSources func(int, unsafe.Pointer)
 
 // AlDeleteSources calls the OpenAL framework function alDeleteSources.
-func AlDeleteSources(n int) (sources int) {
+func AlDeleteSources(n int, sources unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlDeleteSources == nil {
 		ebipurego.RegisterLibFunc(&_fnAlDeleteSources, _lib, "alDeleteSources")
 	}
-	var _out0 int
-	_fnAlDeleteSources(n, unsafe.Pointer(&_out0))
-	return _out0
+	_fnAlDeleteSources(n, sources)
 }
 
 var _fnAlDisable func(int)
@@ -331,14 +323,12 @@ func AlGetDoublev(param int) (data float64) {
 var _fnAlGetEnumValue func(unsafe.Pointer) int32
 
 // AlGetEnumValue calls the OpenAL framework function alGetEnumValue.
-func AlGetEnumValue() (result int, ename int8) {
+func AlGetEnumValue(ename unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlGetEnumValue == nil {
 		ebipurego.RegisterLibFunc(&_fnAlGetEnumValue, _lib, "alGetEnumValue")
 	}
-	var _out0 int8
-	_ret := int(_fnAlGetEnumValue(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	return int(_fnAlGetEnumValue(ename))
 }
 
 var _fnAlGetError func() int32
@@ -485,14 +475,12 @@ func AlGetListeneriv(param int) (values int) {
 var _fnAlGetProcAddress func(unsafe.Pointer) unsafe.Pointer
 
 // AlGetProcAddress calls the OpenAL framework function alGetProcAddress.
-func AlGetProcAddress() (result unsafe.Pointer, fname int8) {
+func AlGetProcAddress(fname unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlGetProcAddress == nil {
 		ebipurego.RegisterLibFunc(&_fnAlGetProcAddress, _lib, "alGetProcAddress")
 	}
-	var _out0 int8
-	_ret := _fnAlGetProcAddress(unsafe.Pointer(&_out0))
-	return _ret, _out0
+	return _fnAlGetProcAddress(fname)
 }
 
 var _fnAlGetSource3f func(int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -613,14 +601,12 @@ func AlIsEnabled(capability int) int8 {
 var _fnAlIsExtensionPresent func(unsafe.Pointer) int8
 
 // AlIsExtensionPresent calls the OpenAL framework function alIsExtensionPresent.
-func AlIsExtensionPresent() (result int8, extname int8) {
+func AlIsExtensionPresent(extname unsafe.Pointer) int8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlIsExtensionPresent == nil {
 		ebipurego.RegisterLibFunc(&_fnAlIsExtensionPresent, _lib, "alIsExtensionPresent")
 	}
-	var _out0 int8
-	_ret := _fnAlIsExtensionPresent(unsafe.Pointer(&_out0))
-	return _ret, _out0
+	return _fnAlIsExtensionPresent(extname)
 }
 
 var _fnAlIsSource func(int) int8
@@ -670,14 +656,12 @@ func AlListenerf(param int, value float32) {
 var _fnAlListenerfv func(int, unsafe.Pointer)
 
 // AlListenerfv calls the OpenAL framework function alListenerfv.
-func AlListenerfv(param int) (values float32) {
+func AlListenerfv(param int, values unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlListenerfv == nil {
 		ebipurego.RegisterLibFunc(&_fnAlListenerfv, _lib, "alListenerfv")
 	}
-	var _out0 float32
-	_fnAlListenerfv(param, unsafe.Pointer(&_out0))
-	return _out0
+	_fnAlListenerfv(param, values)
 }
 
 var _fnAlListeneri func(int, int)
@@ -694,14 +678,12 @@ func AlListeneri(param int, value int) {
 var _fnAlListeneriv func(int, unsafe.Pointer)
 
 // AlListeneriv calls the OpenAL framework function alListeneriv.
-func AlListeneriv(param int) (values int) {
+func AlListeneriv(param int, values unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlListeneriv == nil {
 		ebipurego.RegisterLibFunc(&_fnAlListeneriv, _lib, "alListeneriv")
 	}
-	var _out0 int
-	_fnAlListeneriv(param, unsafe.Pointer(&_out0))
-	return _out0
+	_fnAlListeneriv(param, values)
 }
 
 var _fnAlSource3f func(int, int, float32, float32, float32)
@@ -740,14 +722,12 @@ func AlSourcePause(sid int) {
 var _fnAlSourcePausev func(int, unsafe.Pointer)
 
 // AlSourcePausev calls the OpenAL framework function alSourcePausev.
-func AlSourcePausev(ns int) (sids int) {
+func AlSourcePausev(ns int, sids unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlSourcePausev == nil {
 		ebipurego.RegisterLibFunc(&_fnAlSourcePausev, _lib, "alSourcePausev")
 	}
-	var _out0 int
-	_fnAlSourcePausev(ns, unsafe.Pointer(&_out0))
-	return _out0
+	_fnAlSourcePausev(ns, sids)
 }
 
 var _fnAlSourcePlay func(int)
@@ -764,27 +744,23 @@ func AlSourcePlay(sid int) {
 var _fnAlSourcePlayv func(int, unsafe.Pointer)
 
 // AlSourcePlayv calls the OpenAL framework function alSourcePlayv.
-func AlSourcePlayv(ns int) (sids int) {
+func AlSourcePlayv(ns int, sids unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlSourcePlayv == nil {
 		ebipurego.RegisterLibFunc(&_fnAlSourcePlayv, _lib, "alSourcePlayv")
 	}
-	var _out0 int
-	_fnAlSourcePlayv(ns, unsafe.Pointer(&_out0))
-	return _out0
+	_fnAlSourcePlayv(ns, sids)
 }
 
 var _fnAlSourceQueueBuffers func(int, int, unsafe.Pointer)
 
 // AlSourceQueueBuffers calls the OpenAL framework function alSourceQueueBuffers.
-func AlSourceQueueBuffers(sid int, numEntries int) (bids int) {
+func AlSourceQueueBuffers(sid int, numEntries int, bids unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlSourceQueueBuffers == nil {
 		ebipurego.RegisterLibFunc(&_fnAlSourceQueueBuffers, _lib, "alSourceQueueBuffers")
 	}
-	var _out0 int
-	_fnAlSourceQueueBuffers(sid, numEntries, unsafe.Pointer(&_out0))
-	return _out0
+	_fnAlSourceQueueBuffers(sid, numEntries, bids)
 }
 
 var _fnAlSourceRewind func(int)
@@ -801,14 +777,12 @@ func AlSourceRewind(sid int) {
 var _fnAlSourceRewindv func(int, unsafe.Pointer)
 
 // AlSourceRewindv calls the OpenAL framework function alSourceRewindv.
-func AlSourceRewindv(ns int) (sids int) {
+func AlSourceRewindv(ns int, sids unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlSourceRewindv == nil {
 		ebipurego.RegisterLibFunc(&_fnAlSourceRewindv, _lib, "alSourceRewindv")
 	}
-	var _out0 int
-	_fnAlSourceRewindv(ns, unsafe.Pointer(&_out0))
-	return _out0
+	_fnAlSourceRewindv(ns, sids)
 }
 
 var _fnAlSourceStop func(int)
@@ -825,14 +799,12 @@ func AlSourceStop(sid int) {
 var _fnAlSourceStopv func(int, unsafe.Pointer)
 
 // AlSourceStopv calls the OpenAL framework function alSourceStopv.
-func AlSourceStopv(ns int) (sids int) {
+func AlSourceStopv(ns int, sids unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlSourceStopv == nil {
 		ebipurego.RegisterLibFunc(&_fnAlSourceStopv, _lib, "alSourceStopv")
 	}
-	var _out0 int
-	_fnAlSourceStopv(ns, unsafe.Pointer(&_out0))
-	return _out0
+	_fnAlSourceStopv(ns, sids)
 }
 
 var _fnAlSourceUnqueueBuffers func(int, int, unsafe.Pointer)
@@ -862,14 +834,12 @@ func AlSourcef(sid int, param int, value float32) {
 var _fnAlSourcefv func(int, int, unsafe.Pointer)
 
 // AlSourcefv calls the OpenAL framework function alSourcefv.
-func AlSourcefv(sid int, param int) (values float32) {
+func AlSourcefv(sid int, param int, values unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlSourcefv == nil {
 		ebipurego.RegisterLibFunc(&_fnAlSourcefv, _lib, "alSourcefv")
 	}
-	var _out0 float32
-	_fnAlSourcefv(sid, param, unsafe.Pointer(&_out0))
-	return _out0
+	_fnAlSourcefv(sid, param, values)
 }
 
 var _fnAlSourcei func(int, int, int)
@@ -886,14 +856,12 @@ func AlSourcei(sid int, param int, value int) {
 var _fnAlSourceiv func(int, int, unsafe.Pointer)
 
 // AlSourceiv calls the OpenAL framework function alSourceiv.
-func AlSourceiv(sid int, param int) (values int) {
+func AlSourceiv(sid int, param int, values unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlSourceiv == nil {
 		ebipurego.RegisterLibFunc(&_fnAlSourceiv, _lib, "alSourceiv")
 	}
-	var _out0 int
-	_fnAlSourceiv(sid, param, unsafe.Pointer(&_out0))
-	return _out0
+	_fnAlSourceiv(sid, param, values)
 }
 
 var _fnAlSpeedOfSound func(float32)
@@ -921,14 +889,12 @@ func AlcCaptureCloseDevice(device unsafe.Pointer) int8 {
 var _fnAlcCaptureOpenDevice func(unsafe.Pointer, int, int, int) unsafe.Pointer
 
 // AlcCaptureOpenDevice calls the OpenAL framework function alcCaptureOpenDevice.
-func AlcCaptureOpenDevice(frequency int, format int, buffersize int) (result unsafe.Pointer, devicename int8) {
+func AlcCaptureOpenDevice(devicename unsafe.Pointer, frequency int, format int, buffersize int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlcCaptureOpenDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnAlcCaptureOpenDevice, _lib, "alcCaptureOpenDevice")
 	}
-	var _out0 int8
-	_ret := _fnAlcCaptureOpenDevice(unsafe.Pointer(&_out0), frequency, format, buffersize)
-	return _ret, _out0
+	return _fnAlcCaptureOpenDevice(devicename, frequency, format, buffersize)
 }
 
 var _fnAlcCaptureSamples func(unsafe.Pointer, unsafe.Pointer, int)
@@ -978,14 +944,12 @@ func AlcCloseDevice(device unsafe.Pointer) int8 {
 var _fnAlcCreateContext func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // AlcCreateContext calls the OpenAL framework function alcCreateContext.
-func AlcCreateContext(device unsafe.Pointer) (result unsafe.Pointer, attrlist int) {
+func AlcCreateContext(device unsafe.Pointer, attrlist unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlcCreateContext == nil {
 		ebipurego.RegisterLibFunc(&_fnAlcCreateContext, _lib, "alcCreateContext")
 	}
-	var _out0 int
-	_ret := _fnAlcCreateContext(device, unsafe.Pointer(&_out0))
-	return _ret, _out0
+	return _fnAlcCreateContext(device, attrlist)
 }
 
 var _fnAlcDestroyContext func(unsafe.Pointer)
@@ -1024,14 +988,12 @@ func AlcGetCurrentContext() unsafe.Pointer {
 var _fnAlcGetEnumValue func(unsafe.Pointer, unsafe.Pointer) int32
 
 // AlcGetEnumValue calls the OpenAL framework function alcGetEnumValue.
-func AlcGetEnumValue(device unsafe.Pointer) (result int, enumname int8) {
+func AlcGetEnumValue(device unsafe.Pointer, enumname unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlcGetEnumValue == nil {
 		ebipurego.RegisterLibFunc(&_fnAlcGetEnumValue, _lib, "alcGetEnumValue")
 	}
-	var _out0 int8
-	_ret := int(_fnAlcGetEnumValue(device, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	return int(_fnAlcGetEnumValue(device, enumname))
 }
 
 var _fnAlcGetError func(unsafe.Pointer) int32
@@ -1061,14 +1023,12 @@ func AlcGetIntegerv(device unsafe.Pointer, param int, size int) (data int) {
 var _fnAlcGetProcAddress func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // AlcGetProcAddress calls the OpenAL framework function alcGetProcAddress.
-func AlcGetProcAddress(device unsafe.Pointer) (result unsafe.Pointer, funcname int8) {
+func AlcGetProcAddress(device unsafe.Pointer, funcname unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlcGetProcAddress == nil {
 		ebipurego.RegisterLibFunc(&_fnAlcGetProcAddress, _lib, "alcGetProcAddress")
 	}
-	var _out0 int8
-	_ret := _fnAlcGetProcAddress(device, unsafe.Pointer(&_out0))
-	return _ret, _out0
+	return _fnAlcGetProcAddress(device, funcname)
 }
 
 var _fnAlcGetString func(unsafe.Pointer, int) unsafe.Pointer
@@ -1085,14 +1045,12 @@ func AlcGetString(device unsafe.Pointer, param int) unsafe.Pointer {
 var _fnAlcIsExtensionPresent func(unsafe.Pointer, unsafe.Pointer) int8
 
 // AlcIsExtensionPresent calls the OpenAL framework function alcIsExtensionPresent.
-func AlcIsExtensionPresent(device unsafe.Pointer) (result int8, extname int8) {
+func AlcIsExtensionPresent(device unsafe.Pointer, extname unsafe.Pointer) int8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlcIsExtensionPresent == nil {
 		ebipurego.RegisterLibFunc(&_fnAlcIsExtensionPresent, _lib, "alcIsExtensionPresent")
 	}
-	var _out0 int8
-	_ret := _fnAlcIsExtensionPresent(device, unsafe.Pointer(&_out0))
-	return _ret, _out0
+	return _fnAlcIsExtensionPresent(device, extname)
 }
 
 var _fnAlcMakeContextCurrent func(unsafe.Pointer) int8
@@ -1109,14 +1067,12 @@ func AlcMakeContextCurrent(context_ unsafe.Pointer) int8 {
 var _fnAlcOpenDevice func(unsafe.Pointer) unsafe.Pointer
 
 // AlcOpenDevice calls the OpenAL framework function alcOpenDevice.
-func AlcOpenDevice() (result unsafe.Pointer, devicename int8) {
+func AlcOpenDevice(devicename unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAlcOpenDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnAlcOpenDevice, _lib, "alcOpenDevice")
 	}
-	var _out0 int8
-	_ret := _fnAlcOpenDevice(unsafe.Pointer(&_out0))
-	return _ret, _out0
+	return _fnAlcOpenDevice(devicename)
 }
 
 var _fnAlcProcessContext func(unsafe.Pointer)

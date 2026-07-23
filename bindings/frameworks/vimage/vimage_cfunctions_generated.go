@@ -17,329 +17,265 @@ import (
 var _fnVImageAffineWarpCGARGB16S func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpCGARGB16S calls the vImage framework function vImageAffineWarpCG_ARGB16S.
-func VImageAffineWarpCGARGB16S(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransformDouble, backColor int16) {
+func VImageAffineWarpCGARGB16S(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpCGARGB16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpCGARGB16S, _lib, "vImageAffineWarpCG_ARGB16S")
 	}
-	var _out0 VImageAffineTransformDouble
-	var _out1 int16
-	_ret := _fnVImageAffineWarpCGARGB16S(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpCGARGB16S(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpCGARGB16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpCGARGB16U calls the vImage framework function vImageAffineWarpCG_ARGB16U.
-func VImageAffineWarpCGARGB16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransformDouble, backColor uint16) {
+func VImageAffineWarpCGARGB16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpCGARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpCGARGB16U, _lib, "vImageAffineWarpCG_ARGB16U")
 	}
-	var _out0 VImageAffineTransformDouble
-	var _out1 uint16
-	_ret := _fnVImageAffineWarpCGARGB16U(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpCGARGB16U(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpCGARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpCGARGB8888 calls the vImage framework function vImageAffineWarpCG_ARGB8888.
-func VImageAffineWarpCGARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransformDouble, backColor uint8) {
+func VImageAffineWarpCGARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpCGARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpCGARGB8888, _lib, "vImageAffineWarpCG_ARGB8888")
 	}
-	var _out0 VImageAffineTransformDouble
-	var _out1 uint8
-	_ret := _fnVImageAffineWarpCGARGB8888(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpCGARGB8888(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpCGARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpCGARGBFFFF calls the vImage framework function vImageAffineWarpCG_ARGBFFFF.
-func VImageAffineWarpCGARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransformDouble, backColor float32) {
+func VImageAffineWarpCGARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpCGARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpCGARGBFFFF, _lib, "vImageAffineWarpCG_ARGBFFFF")
 	}
-	var _out0 VImageAffineTransformDouble
-	var _out1 float32
-	_ret := _fnVImageAffineWarpCGARGBFFFF(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpCGARGBFFFF(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpCGPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageAffineWarpCGPlanar8 calls the vImage framework function vImageAffineWarpCG_Planar8.
-func VImageAffineWarpCGPlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, backColor uint8, flags uint32) (result int, transform VImageAffineTransformDouble) {
+func VImageAffineWarpCGPlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpCGPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpCGPlanar8, _lib, "vImageAffineWarpCG_Planar8")
 	}
-	var _out0 VImageAffineTransformDouble
-	_ret := _fnVImageAffineWarpCGPlanar8(src, dest, tempBuffer, unsafe.Pointer(&_out0), backColor, flags)
-	return _ret, _out0
+	return _fnVImageAffineWarpCGPlanar8(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpCGPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, uint32) int
 
 // VImageAffineWarpCGPlanarF calls the vImage framework function vImageAffineWarpCG_PlanarF.
-func VImageAffineWarpCGPlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, backColor float32, flags uint32) (result int, transform VImageAffineTransformDouble) {
+func VImageAffineWarpCGPlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor float32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpCGPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpCGPlanarF, _lib, "vImageAffineWarpCG_PlanarF")
 	}
-	var _out0 VImageAffineTransformDouble
-	_ret := _fnVImageAffineWarpCGPlanarF(src, dest, tempBuffer, unsafe.Pointer(&_out0), backColor, flags)
-	return _ret, _out0
+	return _fnVImageAffineWarpCGPlanarF(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpDARGB16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpDARGB16F calls the vImage framework function vImageAffineWarpD_ARGB16F.
-func VImageAffineWarpDARGB16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransformDouble, backColor uint16) {
+func VImageAffineWarpDARGB16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpDARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpDARGB16F, _lib, "vImageAffineWarpD_ARGB16F")
 	}
-	var _out0 VImageAffineTransformDouble
-	var _out1 uint16
-	_ret := _fnVImageAffineWarpDARGB16F(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpDARGB16F(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpDARGB16S func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpDARGB16S calls the vImage framework function vImageAffineWarpD_ARGB16S.
-func VImageAffineWarpDARGB16S(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransformDouble, backColor int16) {
+func VImageAffineWarpDARGB16S(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpDARGB16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpDARGB16S, _lib, "vImageAffineWarpD_ARGB16S")
 	}
-	var _out0 VImageAffineTransformDouble
-	var _out1 int16
-	_ret := _fnVImageAffineWarpDARGB16S(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpDARGB16S(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpDARGB16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpDARGB16U calls the vImage framework function vImageAffineWarpD_ARGB16U.
-func VImageAffineWarpDARGB16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransformDouble, backColor uint16) {
+func VImageAffineWarpDARGB16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpDARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpDARGB16U, _lib, "vImageAffineWarpD_ARGB16U")
 	}
-	var _out0 VImageAffineTransformDouble
-	var _out1 uint16
-	_ret := _fnVImageAffineWarpDARGB16U(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpDARGB16U(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpDARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpDARGB8888 calls the vImage framework function vImageAffineWarpD_ARGB8888.
-func VImageAffineWarpDARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransformDouble, backColor uint8) {
+func VImageAffineWarpDARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpDARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpDARGB8888, _lib, "vImageAffineWarpD_ARGB8888")
 	}
-	var _out0 VImageAffineTransformDouble
-	var _out1 uint8
-	_ret := _fnVImageAffineWarpDARGB8888(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpDARGB8888(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpDARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpDARGBFFFF calls the vImage framework function vImageAffineWarpD_ARGBFFFF.
-func VImageAffineWarpDARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransformDouble, backColor float32) {
+func VImageAffineWarpDARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpDARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpDARGBFFFF, _lib, "vImageAffineWarpD_ARGBFFFF")
 	}
-	var _out0 VImageAffineTransformDouble
-	var _out1 float32
-	_ret := _fnVImageAffineWarpDARGBFFFF(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpDARGBFFFF(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpDCbCr16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpDCbCr16F calls the vImage framework function vImageAffineWarpD_CbCr16F.
-func VImageAffineWarpDCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransformDouble, backColor uint16) {
+func VImageAffineWarpDCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpDCbCr16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpDCbCr16F, _lib, "vImageAffineWarpD_CbCr16F")
 	}
-	var _out0 VImageAffineTransformDouble
-	var _out1 uint16
-	_ret := _fnVImageAffineWarpDCbCr16F(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpDCbCr16F(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpDPlanar16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint16, uint32) int
 
 // VImageAffineWarpDPlanar16F calls the vImage framework function vImageAffineWarpD_Planar16F.
-func VImageAffineWarpDPlanar16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, backColor uint16, flags uint32) (result int, transform VImageAffineTransformDouble) {
+func VImageAffineWarpDPlanar16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor uint16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpDPlanar16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpDPlanar16F, _lib, "vImageAffineWarpD_Planar16F")
 	}
-	var _out0 VImageAffineTransformDouble
-	_ret := _fnVImageAffineWarpDPlanar16F(src, dest, tempBuffer, unsafe.Pointer(&_out0), backColor, flags)
-	return _ret, _out0
+	return _fnVImageAffineWarpDPlanar16F(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpDPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageAffineWarpDPlanar8 calls the vImage framework function vImageAffineWarpD_Planar8.
-func VImageAffineWarpDPlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, backColor uint8, flags uint32) (result int, transform VImageAffineTransformDouble) {
+func VImageAffineWarpDPlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpDPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpDPlanar8, _lib, "vImageAffineWarpD_Planar8")
 	}
-	var _out0 VImageAffineTransformDouble
-	_ret := _fnVImageAffineWarpDPlanar8(src, dest, tempBuffer, unsafe.Pointer(&_out0), backColor, flags)
-	return _ret, _out0
+	return _fnVImageAffineWarpDPlanar8(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpDPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, uint32) int
 
 // VImageAffineWarpDPlanarF calls the vImage framework function vImageAffineWarpD_PlanarF.
-func VImageAffineWarpDPlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, backColor float32, flags uint32) (result int, transform VImageAffineTransformDouble) {
+func VImageAffineWarpDPlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransformDouble, backColor float32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpDPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpDPlanarF, _lib, "vImageAffineWarpD_PlanarF")
 	}
-	var _out0 VImageAffineTransformDouble
-	_ret := _fnVImageAffineWarpDPlanarF(src, dest, tempBuffer, unsafe.Pointer(&_out0), backColor, flags)
-	return _ret, _out0
+	return _fnVImageAffineWarpDPlanarF(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpARGB16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpARGB16F calls the vImage framework function vImageAffineWarp_ARGB16F.
-func VImageAffineWarpARGB16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransform, backColor uint16) {
+func VImageAffineWarpARGB16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransform, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpARGB16F, _lib, "vImageAffineWarp_ARGB16F")
 	}
-	var _out0 VImageAffineTransform
-	var _out1 uint16
-	_ret := _fnVImageAffineWarpARGB16F(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpARGB16F(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpARGB16S func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpARGB16S calls the vImage framework function vImageAffineWarp_ARGB16S.
-func VImageAffineWarpARGB16S(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransform, backColor int16) {
+func VImageAffineWarpARGB16S(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransform, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpARGB16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpARGB16S, _lib, "vImageAffineWarp_ARGB16S")
 	}
-	var _out0 VImageAffineTransform
-	var _out1 int16
-	_ret := _fnVImageAffineWarpARGB16S(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpARGB16S(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpARGB16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpARGB16U calls the vImage framework function vImageAffineWarp_ARGB16U.
-func VImageAffineWarpARGB16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransform, backColor uint16) {
+func VImageAffineWarpARGB16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransform, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpARGB16U, _lib, "vImageAffineWarp_ARGB16U")
 	}
-	var _out0 VImageAffineTransform
-	var _out1 uint16
-	_ret := _fnVImageAffineWarpARGB16U(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpARGB16U(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpARGB8888 calls the vImage framework function vImageAffineWarp_ARGB8888.
-func VImageAffineWarpARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransform, backColor uint8) {
+func VImageAffineWarpARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransform, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpARGB8888, _lib, "vImageAffineWarp_ARGB8888")
 	}
-	var _out0 VImageAffineTransform
-	var _out1 uint8
-	_ret := _fnVImageAffineWarpARGB8888(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpARGB8888(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpARGBFFFF calls the vImage framework function vImageAffineWarp_ARGBFFFF.
-func VImageAffineWarpARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransform, backColor float32) {
+func VImageAffineWarpARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransform, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpARGBFFFF, _lib, "vImageAffineWarp_ARGBFFFF")
 	}
-	var _out0 VImageAffineTransform
-	var _out1 float32
-	_ret := _fnVImageAffineWarpARGBFFFF(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpARGBFFFF(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpCbCr16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageAffineWarpCbCr16F calls the vImage framework function vImageAffineWarp_CbCr16F.
-func VImageAffineWarpCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, flags uint32) (result int, transform VImageAffineTransform, backColor uint16) {
+func VImageAffineWarpCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransform, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpCbCr16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpCbCr16F, _lib, "vImageAffineWarp_CbCr16F")
 	}
-	var _out0 VImageAffineTransform
-	var _out1 uint16
-	_ret := _fnVImageAffineWarpCbCr16F(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageAffineWarpCbCr16F(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpPlanar16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint16, uint32) int
 
 // VImageAffineWarpPlanar16F calls the vImage framework function vImageAffineWarp_Planar16F.
-func VImageAffineWarpPlanar16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, backColor uint16, flags uint32) (result int, transform VImageAffineTransform) {
+func VImageAffineWarpPlanar16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransform, backColor uint16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpPlanar16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpPlanar16F, _lib, "vImageAffineWarp_Planar16F")
 	}
-	var _out0 VImageAffineTransform
-	_ret := _fnVImageAffineWarpPlanar16F(src, dest, tempBuffer, unsafe.Pointer(&_out0), backColor, flags)
-	return _ret, _out0
+	return _fnVImageAffineWarpPlanar16F(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageAffineWarpPlanar8 calls the vImage framework function vImageAffineWarp_Planar8.
-func VImageAffineWarpPlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, backColor uint8, flags uint32) (result int, transform VImageAffineTransform) {
+func VImageAffineWarpPlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransform, backColor uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpPlanar8, _lib, "vImageAffineWarp_Planar8")
 	}
-	var _out0 VImageAffineTransform
-	_ret := _fnVImageAffineWarpPlanar8(src, dest, tempBuffer, unsafe.Pointer(&_out0), backColor, flags)
-	return _ret, _out0
+	return _fnVImageAffineWarpPlanar8(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAffineWarpPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, uint32) int
 
 // VImageAffineWarpPlanarF calls the vImage framework function vImageAffineWarp_PlanarF.
-func VImageAffineWarpPlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, backColor float32, flags uint32) (result int, transform VImageAffineTransform) {
+func VImageAffineWarpPlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImageAffineTransform, backColor float32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageAffineWarpPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageAffineWarpPlanarF, _lib, "vImageAffineWarp_PlanarF")
 	}
-	var _out0 VImageAffineTransform
-	_ret := _fnVImageAffineWarpPlanarF(src, dest, tempBuffer, unsafe.Pointer(&_out0), backColor, flags)
-	return _ret, _out0
+	return _fnVImageAffineWarpPlanarF(src, dest, tempBuffer, unsafe.Pointer(transform), backColor, flags)
 }
 
 var _fnVImageAlphaBlendARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -433,14 +369,12 @@ func VImageAlphaBlendPlanarF(srcTop unsafe.Pointer, srcTopAlpha unsafe.Pointer, 
 var _fnVImageBoxConvolveARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, uint32, uint32, unsafe.Pointer, uint32) int
 
 // VImageBoxConvolveARGB8888 calls the vImage framework function vImageBoxConvolve_ARGB8888.
-func VImageBoxConvolveARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, flags uint32) (result int, backgroundColor uint8) {
+func VImageBoxConvolveARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBoxConvolveARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBoxConvolveARGB8888, _lib, "vImageBoxConvolve_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageBoxConvolveARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernelHeight, kernelWidth, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageBoxConvolveARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernelHeight, kernelWidth, backgroundColor, flags)
 }
 
 var _fnVImageBoxConvolvePlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, uint32, uint32, uint8, uint32) int
@@ -457,118 +391,100 @@ func VImageBoxConvolvePlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffe
 var _fnVImageBufferFillARGB16F func(unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageBufferFillARGB16F calls the vImage framework function vImageBufferFill_ARGB16F.
-func VImageBufferFillARGB16F(dest unsafe.Pointer, flags uint32) (result int, color uint16) {
+func VImageBufferFillARGB16F(dest unsafe.Pointer, color unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferFillARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferFillARGB16F, _lib, "vImageBufferFill_ARGB16F")
 	}
-	var _out0 uint16
-	_ret := _fnVImageBufferFillARGB16F(dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageBufferFillARGB16F(dest, color, flags)
 }
 
 var _fnVImageBufferFillARGB16S func(unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageBufferFillARGB16S calls the vImage framework function vImageBufferFill_ARGB16S.
-func VImageBufferFillARGB16S(dest unsafe.Pointer, flags uint32) (result int, color int16) {
+func VImageBufferFillARGB16S(dest unsafe.Pointer, color unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferFillARGB16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferFillARGB16S, _lib, "vImageBufferFill_ARGB16S")
 	}
-	var _out0 int16
-	_ret := _fnVImageBufferFillARGB16S(dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageBufferFillARGB16S(dest, color, flags)
 }
 
 var _fnVImageBufferFillARGB16U func(unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageBufferFillARGB16U calls the vImage framework function vImageBufferFill_ARGB16U.
-func VImageBufferFillARGB16U(dest unsafe.Pointer, flags uint32) (result int, color uint16) {
+func VImageBufferFillARGB16U(dest unsafe.Pointer, color unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferFillARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferFillARGB16U, _lib, "vImageBufferFill_ARGB16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageBufferFillARGB16U(dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageBufferFillARGB16U(dest, color, flags)
 }
 
 var _fnVImageBufferFillARGB8888 func(unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageBufferFillARGB8888 calls the vImage framework function vImageBufferFill_ARGB8888.
-func VImageBufferFillARGB8888(dest unsafe.Pointer, flags uint32) (result int, color uint8) {
+func VImageBufferFillARGB8888(dest unsafe.Pointer, color unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferFillARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferFillARGB8888, _lib, "vImageBufferFill_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageBufferFillARGB8888(dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageBufferFillARGB8888(dest, color, flags)
 }
 
 var _fnVImageBufferFillARGBFFFF func(unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageBufferFillARGBFFFF calls the vImage framework function vImageBufferFill_ARGBFFFF.
-func VImageBufferFillARGBFFFF(dest unsafe.Pointer, flags uint32) (result int, color float32) {
+func VImageBufferFillARGBFFFF(dest unsafe.Pointer, color unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferFillARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferFillARGBFFFF, _lib, "vImageBufferFill_ARGBFFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageBufferFillARGBFFFF(dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageBufferFillARGBFFFF(dest, color, flags)
 }
 
 var _fnVImageBufferFillCbCr16S func(unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageBufferFillCbCr16S calls the vImage framework function vImageBufferFill_CbCr16S.
-func VImageBufferFillCbCr16S(dest unsafe.Pointer, flags uint32) (result int, color int16) {
+func VImageBufferFillCbCr16S(dest unsafe.Pointer, color unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferFillCbCr16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferFillCbCr16S, _lib, "vImageBufferFill_CbCr16S")
 	}
-	var _out0 int16
-	_ret := _fnVImageBufferFillCbCr16S(dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageBufferFillCbCr16S(dest, color, flags)
 }
 
 var _fnVImageBufferFillCbCr16U func(unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageBufferFillCbCr16U calls the vImage framework function vImageBufferFill_CbCr16U.
-func VImageBufferFillCbCr16U(dest unsafe.Pointer, flags uint32) (result int, color uint16) {
+func VImageBufferFillCbCr16U(dest unsafe.Pointer, color unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferFillCbCr16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferFillCbCr16U, _lib, "vImageBufferFill_CbCr16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageBufferFillCbCr16U(dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageBufferFillCbCr16U(dest, color, flags)
 }
 
 var _fnVImageBufferFillCbCr8 func(unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageBufferFillCbCr8 calls the vImage framework function vImageBufferFill_CbCr8.
-func VImageBufferFillCbCr8(dest unsafe.Pointer, flags uint32) (result int, color uint8) {
+func VImageBufferFillCbCr8(dest unsafe.Pointer, color unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferFillCbCr8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferFillCbCr8, _lib, "vImageBufferFill_CbCr8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageBufferFillCbCr8(dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageBufferFillCbCr8(dest, color, flags)
 }
 
 var _fnVImageBufferCopyToCVPixelBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer, uint32) int
 
 // VImageBufferCopyToCVPixelBuffer calls the vImage framework function vImageBuffer_CopyToCVPixelBuffer.
-func VImageBufferCopyToCVPixelBuffer(buffer unsafe.Pointer, bufferFormat unsafe.Pointer, cvPixelBuffer unsafe.Pointer, cvImageFormat obj.Object, flags uint32) (result int, backgroundColor float64) {
+func VImageBufferCopyToCVPixelBuffer(buffer unsafe.Pointer, bufferFormat unsafe.Pointer, cvPixelBuffer unsafe.Pointer, cvImageFormat obj.Object, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferCopyToCVPixelBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferCopyToCVPixelBuffer, _lib, "vImageBuffer_CopyToCVPixelBuffer")
 	}
-	var _out0 float64
-	_ret := _fnVImageBufferCopyToCVPixelBuffer(buffer, bufferFormat, cvPixelBuffer, objref.IDOf(cvImageFormat), unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageBufferCopyToCVPixelBuffer(buffer, bufferFormat, cvPixelBuffer, objref.IDOf(cvImageFormat), backgroundColor, flags)
 }
 
 var _fnVImageBufferGetSize func(unsafe.Pointer) corefoundation.CGSize
@@ -618,27 +534,23 @@ func VImageBufferInitForCopyToCVPixelBuffer(buffers unsafe.Pointer, converter ob
 var _fnVImageBufferInitWithCGImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, uint32) int
 
 // VImageBufferInitWithCGImage calls the vImage framework function vImageBuffer_InitWithCGImage.
-func VImageBufferInitWithCGImage(buf unsafe.Pointer, format unsafe.Pointer, image obj.Object, flags uint32) (result int, backgroundColor float64) {
+func VImageBufferInitWithCGImage(buf unsafe.Pointer, format unsafe.Pointer, backgroundColor unsafe.Pointer, image obj.Object, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferInitWithCGImage == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferInitWithCGImage, _lib, "vImageBuffer_InitWithCGImage")
 	}
-	var _out0 float64
-	_ret := _fnVImageBufferInitWithCGImage(buf, format, unsafe.Pointer(&_out0), objref.IDOf(image), flags)
-	return _ret, _out0
+	return _fnVImageBufferInitWithCGImage(buf, format, backgroundColor, objref.IDOf(image), flags)
 }
 
 var _fnVImageBufferInitWithCVPixelBuffer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer, uint32) int
 
 // VImageBufferInitWithCVPixelBuffer calls the vImage framework function vImageBuffer_InitWithCVPixelBuffer.
-func VImageBufferInitWithCVPixelBuffer(buffer unsafe.Pointer, desiredFormat unsafe.Pointer, cvPixelBuffer unsafe.Pointer, cvImageFormat obj.Object, flags uint32) (result int, backgroundColor float64) {
+func VImageBufferInitWithCVPixelBuffer(buffer unsafe.Pointer, desiredFormat unsafe.Pointer, cvPixelBuffer unsafe.Pointer, cvImageFormat obj.Object, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageBufferInitWithCVPixelBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageBufferInitWithCVPixelBuffer, _lib, "vImageBuffer_InitWithCVPixelBuffer")
 	}
-	var _out0 float64
-	_ret := _fnVImageBufferInitWithCVPixelBuffer(buffer, desiredFormat, cvPixelBuffer, objref.IDOf(cvImageFormat), unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageBufferInitWithCVPixelBuffer(buffer, desiredFormat, cvPixelBuffer, objref.IDOf(cvImageFormat), backgroundColor, flags)
 }
 
 var _fnVImageByteSwapPlanar16U func(unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -689,14 +601,12 @@ func VImageCVImageFormatCopy(format obj.Object) obj.Object {
 var _fnVImageCVImageFormatCopyChannelDescription func(objc.ID, unsafe.Pointer, uint32) int
 
 // VImageCVImageFormatCopyChannelDescription calls the vImage framework function vImageCVImageFormat_CopyChannelDescription.
-func VImageCVImageFormatCopyChannelDescription(format obj.Object, type_ uint32) (result int, desc VImageChannelDescription) {
+func VImageCVImageFormatCopyChannelDescription(format obj.Object, desc *VImageChannelDescription, type_ uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatCopyChannelDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCopyChannelDescription, _lib, "vImageCVImageFormat_CopyChannelDescription")
 	}
-	var _out0 VImageChannelDescription
-	_ret := _fnVImageCVImageFormatCopyChannelDescription(objref.IDOf(format), unsafe.Pointer(&_out0), type_)
-	return _ret, _out0
+	return _fnVImageCVImageFormatCopyChannelDescription(objref.IDOf(format), unsafe.Pointer(desc), type_)
 }
 
 var _fnVImageCVImageFormatCopyConversionMatrix func(objc.ID, unsafe.Pointer, uint32) int
@@ -713,14 +623,13 @@ func VImageCVImageFormatCopyConversionMatrix(format obj.Object, matrix unsafe.Po
 var _fnVImageCVImageFormatCreate func(uint32, unsafe.Pointer, objc.ID, objc.ID, int) objc.ID
 
 // VImageCVImageFormatCreate calls the vImage framework function vImageCVImageFormat_Create.
-func VImageCVImageFormatCreate(imageFormatType uint32, cvImageBufferChromaLocation obj.Object, baseColorspace obj.Object, alphaIsOneHint int) (result obj.Object, matrix VImageARGBToYpCbCrMatrix) {
+func VImageCVImageFormatCreate(imageFormatType uint32, matrix *VImageARGBToYpCbCrMatrix, cvImageBufferChromaLocation obj.Object, baseColorspace obj.Object, alphaIsOneHint int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCVImageFormatCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCVImageFormatCreate, _lib, "vImageCVImageFormat_Create")
 	}
-	var _out0 VImageARGBToYpCbCrMatrix
-	_ret := _fnVImageCVImageFormatCreate(imageFormatType, unsafe.Pointer(&_out0), objref.IDOf(cvImageBufferChromaLocation), objref.IDOf(baseColorspace), alphaIsOneHint)
-	return obj.Wrap(_ret), _out0
+	_ret := _fnVImageCVImageFormatCreate(imageFormatType, unsafe.Pointer(matrix), objref.IDOf(cvImageBufferChromaLocation), objref.IDOf(baseColorspace), alphaIsOneHint)
+	return obj.Wrap(_ret)
 }
 
 var _fnVImageCVImageFormatCreateWithCVPixelBuffer func(unsafe.Pointer) objc.ID
@@ -1171,209 +1080,177 @@ func VImageConvert16Uto16Q12(src unsafe.Pointer, dest unsafe.Pointer, flags uint
 var _fnVImageConvert420Yp8Cb8Cr8ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageConvert420Yp8Cb8Cr8ToARGB8888 calls the vImage framework function vImageConvert_420Yp8_Cb8_Cr8ToARGB8888.
-func VImageConvert420Yp8Cb8Cr8ToARGB8888(srcYp unsafe.Pointer, srcCb unsafe.Pointer, srcCr unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, alpha uint8, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert420Yp8Cb8Cr8ToARGB8888(srcYp unsafe.Pointer, srcCb unsafe.Pointer, srcCr unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, alpha uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert420Yp8Cb8Cr8ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert420Yp8Cb8Cr8ToARGB8888, _lib, "vImageConvert_420Yp8_Cb8_Cr8ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert420Yp8Cb8Cr8ToARGB8888(srcYp, srcCb, srcCr, dest, info, unsafe.Pointer(&_out0), alpha, flags)
-	return _ret, _out0
+	return _fnVImageConvert420Yp8Cb8Cr8ToARGB8888(srcYp, srcCb, srcCr, dest, unsafe.Pointer(info), permuteMap, alpha, flags)
 }
 
 var _fnVImageConvert420Yp8CbCr8ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageConvert420Yp8CbCr8ToARGB8888 calls the vImage framework function vImageConvert_420Yp8_CbCr8ToARGB8888.
-func VImageConvert420Yp8CbCr8ToARGB8888(srcYp unsafe.Pointer, srcCbCr unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, alpha uint8, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert420Yp8CbCr8ToARGB8888(srcYp unsafe.Pointer, srcCbCr unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, alpha uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert420Yp8CbCr8ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert420Yp8CbCr8ToARGB8888, _lib, "vImageConvert_420Yp8_CbCr8ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert420Yp8CbCr8ToARGB8888(srcYp, srcCbCr, dest, info, unsafe.Pointer(&_out0), alpha, flags)
-	return _ret, _out0
+	return _fnVImageConvert420Yp8CbCr8ToARGB8888(srcYp, srcCbCr, dest, unsafe.Pointer(info), permuteMap, alpha, flags)
 }
 
 var _fnVImageConvert422CbYpCrYp16ToARGB16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint16, uint32) int
 
 // VImageConvert422CbYpCrYp16ToARGB16U calls the vImage framework function vImageConvert_422CbYpCrYp16ToARGB16U.
-func VImageConvert422CbYpCrYp16ToARGB16U(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, alpha uint16, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert422CbYpCrYp16ToARGB16U(src unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, alpha uint16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert422CbYpCrYp16ToARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert422CbYpCrYp16ToARGB16U, _lib, "vImageConvert_422CbYpCrYp16ToARGB16U")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert422CbYpCrYp16ToARGB16U(src, dest, info, unsafe.Pointer(&_out0), alpha, flags)
-	return _ret, _out0
+	return _fnVImageConvert422CbYpCrYp16ToARGB16U(src, dest, unsafe.Pointer(info), permuteMap, alpha, flags)
 }
 
 var _fnVImageConvert422CbYpCrYp16ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageConvert422CbYpCrYp16ToARGB8888 calls the vImage framework function vImageConvert_422CbYpCrYp16ToARGB8888.
-func VImageConvert422CbYpCrYp16ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, alpha uint8, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert422CbYpCrYp16ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, alpha uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert422CbYpCrYp16ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert422CbYpCrYp16ToARGB8888, _lib, "vImageConvert_422CbYpCrYp16ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert422CbYpCrYp16ToARGB8888(src, dest, info, unsafe.Pointer(&_out0), alpha, flags)
-	return _ret, _out0
+	return _fnVImageConvert422CbYpCrYp16ToARGB8888(src, dest, unsafe.Pointer(info), permuteMap, alpha, flags)
 }
 
 var _fnVImageConvert422CbYpCrYp8ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageConvert422CbYpCrYp8ToARGB8888 calls the vImage framework function vImageConvert_422CbYpCrYp8ToARGB8888.
-func VImageConvert422CbYpCrYp8ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, alpha uint8, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert422CbYpCrYp8ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, alpha uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert422CbYpCrYp8ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert422CbYpCrYp8ToARGB8888, _lib, "vImageConvert_422CbYpCrYp8ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert422CbYpCrYp8ToARGB8888(src, dest, info, unsafe.Pointer(&_out0), alpha, flags)
-	return _ret, _out0
+	return _fnVImageConvert422CbYpCrYp8ToARGB8888(src, dest, unsafe.Pointer(info), permuteMap, alpha, flags)
 }
 
 var _fnVImageConvert422CbYpCrYp8AA8ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvert422CbYpCrYp8AA8ToARGB8888 calls the vImage framework function vImageConvert_422CbYpCrYp8_AA8ToARGB8888.
-func VImageConvert422CbYpCrYp8AA8ToARGB8888(src unsafe.Pointer, srcA unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert422CbYpCrYp8AA8ToARGB8888(src unsafe.Pointer, srcA unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert422CbYpCrYp8AA8ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert422CbYpCrYp8AA8ToARGB8888, _lib, "vImageConvert_422CbYpCrYp8_AA8ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert422CbYpCrYp8AA8ToARGB8888(src, srcA, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvert422CbYpCrYp8AA8ToARGB8888(src, srcA, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int16, uint32) int
 
 // VImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12 calls the vImage framework function vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12.
-func VImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, alpha int16, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12(src unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, alpha int16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12, _lib, "vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12(src, dest, info, unsafe.Pointer(&_out0), alpha, flags)
-	return _ret, _out0
+	return _fnVImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12(src, dest, unsafe.Pointer(info), permuteMap, alpha, flags)
 }
 
 var _fnVImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888 calls the vImage framework function vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888.
-func VImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, alpha uint8, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, alpha uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888, _lib, "vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888(src, dest, info, unsafe.Pointer(&_out0), alpha, flags)
-	return _ret, _out0
+	return _fnVImageConvert422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888(src, dest, unsafe.Pointer(info), permuteMap, alpha, flags)
 }
 
 var _fnVImageConvert422YpCbYpCr8ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageConvert422YpCbYpCr8ToARGB8888 calls the vImage framework function vImageConvert_422YpCbYpCr8ToARGB8888.
-func VImageConvert422YpCbYpCr8ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, alpha uint8, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert422YpCbYpCr8ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, alpha uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert422YpCbYpCr8ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert422YpCbYpCr8ToARGB8888, _lib, "vImageConvert_422YpCbYpCr8ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert422YpCbYpCr8ToARGB8888(src, dest, info, unsafe.Pointer(&_out0), alpha, flags)
-	return _ret, _out0
+	return _fnVImageConvert422YpCbYpCr8ToARGB8888(src, dest, unsafe.Pointer(info), permuteMap, alpha, flags)
 }
 
 var _fnVImageConvert444AYpCbCr16ToARGB16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvert444AYpCbCr16ToARGB16U calls the vImage framework function vImageConvert_444AYpCbCr16ToARGB16U.
-func VImageConvert444AYpCbCr16ToARGB16U(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert444AYpCbCr16ToARGB16U(src unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert444AYpCbCr16ToARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert444AYpCbCr16ToARGB16U, _lib, "vImageConvert_444AYpCbCr16ToARGB16U")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert444AYpCbCr16ToARGB16U(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvert444AYpCbCr16ToARGB16U(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvert444AYpCbCr16ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvert444AYpCbCr16ToARGB8888 calls the vImage framework function vImageConvert_444AYpCbCr16ToARGB8888.
-func VImageConvert444AYpCbCr16ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert444AYpCbCr16ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert444AYpCbCr16ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert444AYpCbCr16ToARGB8888, _lib, "vImageConvert_444AYpCbCr16ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert444AYpCbCr16ToARGB8888(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvert444AYpCbCr16ToARGB8888(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvert444AYpCbCr8ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvert444AYpCbCr8ToARGB8888 calls the vImage framework function vImageConvert_444AYpCbCr8ToARGB8888.
-func VImageConvert444AYpCbCr8ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert444AYpCbCr8ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert444AYpCbCr8ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert444AYpCbCr8ToARGB8888, _lib, "vImageConvert_444AYpCbCr8ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert444AYpCbCr8ToARGB8888(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvert444AYpCbCr8ToARGB8888(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvert444CbYpCrA8ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvert444CbYpCrA8ToARGB8888 calls the vImage framework function vImageConvert_444CbYpCrA8ToARGB8888.
-func VImageConvert444CbYpCrA8ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert444CbYpCrA8ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert444CbYpCrA8ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert444CbYpCrA8ToARGB8888, _lib, "vImageConvert_444CbYpCrA8ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert444CbYpCrA8ToARGB8888(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvert444CbYpCrA8ToARGB8888(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvert444CrYpCb10ToARGB16Q12 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int16, uint32) int
 
 // VImageConvert444CrYpCb10ToARGB16Q12 calls the vImage framework function vImageConvert_444CrYpCb10ToARGB16Q12.
-func VImageConvert444CrYpCb10ToARGB16Q12(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, alpha int16, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert444CrYpCb10ToARGB16Q12(src unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, alpha int16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert444CrYpCb10ToARGB16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert444CrYpCb10ToARGB16Q12, _lib, "vImageConvert_444CrYpCb10ToARGB16Q12")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert444CrYpCb10ToARGB16Q12(src, dest, info, unsafe.Pointer(&_out0), alpha, flags)
-	return _ret, _out0
+	return _fnVImageConvert444CrYpCb10ToARGB16Q12(src, dest, unsafe.Pointer(info), permuteMap, alpha, flags)
 }
 
 var _fnVImageConvert444CrYpCb10ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageConvert444CrYpCb10ToARGB8888 calls the vImage framework function vImageConvert_444CrYpCb10ToARGB8888.
-func VImageConvert444CrYpCb10ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, alpha uint8, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert444CrYpCb10ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, alpha uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert444CrYpCb10ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert444CrYpCb10ToARGB8888, _lib, "vImageConvert_444CrYpCb10ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert444CrYpCb10ToARGB8888(src, dest, info, unsafe.Pointer(&_out0), alpha, flags)
-	return _ret, _out0
+	return _fnVImageConvert444CrYpCb10ToARGB8888(src, dest, unsafe.Pointer(info), permuteMap, alpha, flags)
 }
 
 var _fnVImageConvert444CrYpCb8ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageConvert444CrYpCb8ToARGB8888 calls the vImage framework function vImageConvert_444CrYpCb8ToARGB8888.
-func VImageConvert444CrYpCb8ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, alpha uint8, flags uint32) (result int, permuteMap uint8) {
+func VImageConvert444CrYpCb8ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, info *VImageYpCbCrToARGB, permuteMap unsafe.Pointer, alpha uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvert444CrYpCb8ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvert444CrYpCb8ToARGB8888, _lib, "vImageConvert_444CrYpCb8ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvert444CrYpCb8ToARGB8888(src, dest, info, unsafe.Pointer(&_out0), alpha, flags)
-	return _ret, _out0
+	return _fnVImageConvert444CrYpCb8ToARGB8888(src, dest, unsafe.Pointer(info), permuteMap, alpha, flags)
 }
 
 var _fnVImageConvert8to16Q12 func(unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -1423,158 +1300,133 @@ func VImageConvertARGB1555toRGB565(src unsafe.Pointer, dest unsafe.Pointer, flag
 var _fnVImageConvertARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10 calls the vImage framework function vImageConvert_ARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10.
-func VImageConvertARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10(src unsafe.Pointer, dest unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10, _lib, "vImageConvert_ARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB16Q12To444CrYpCb10 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB16Q12To444CrYpCb10 calls the vImage framework function vImageConvert_ARGB16Q12To444CrYpCb10.
-func VImageConvertARGB16Q12To444CrYpCb10(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB16Q12To444CrYpCb10(src unsafe.Pointer, dest unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB16Q12To444CrYpCb10 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB16Q12To444CrYpCb10, _lib, "vImageConvert_ARGB16Q12To444CrYpCb10")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB16Q12To444CrYpCb10(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB16Q12To444CrYpCb10(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB16Q12ToARGB2101010 func(unsafe.Pointer, unsafe.Pointer, int32, int32, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB16Q12ToARGB2101010 calls the vImage framework function vImageConvert_ARGB16Q12ToARGB2101010.
-func VImageConvertARGB16Q12ToARGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, rgb101010Min int32, rgb101010Max int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB16Q12ToARGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, rgb101010Min int32, rgb101010Max int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB16Q12ToARGB2101010 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB16Q12ToARGB2101010, _lib, "vImageConvert_ARGB16Q12ToARGB2101010")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB16Q12ToARGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, rgb101010Min, rgb101010Max, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB16Q12ToARGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, rgb101010Min, rgb101010Max, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB16Q12ToRGBA1010102 func(unsafe.Pointer, unsafe.Pointer, int32, int32, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB16Q12ToRGBA1010102 calls the vImage framework function vImageConvert_ARGB16Q12ToRGBA1010102.
-func VImageConvertARGB16Q12ToRGBA1010102(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, rgb101010Min int32, rgb101010Max int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB16Q12ToRGBA1010102(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, rgb101010Min int32, rgb101010Max int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB16Q12ToRGBA1010102 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB16Q12ToRGBA1010102, _lib, "vImageConvert_ARGB16Q12ToRGBA1010102")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB16Q12ToRGBA1010102(src, dest, rgb101010RangeMin, rgb101010RangeMax, rgb101010Min, rgb101010Max, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB16Q12ToRGBA1010102(src, dest, rgb101010RangeMin, rgb101010RangeMax, rgb101010Min, rgb101010Max, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB16Q12ToXRGB2101010 func(unsafe.Pointer, unsafe.Pointer, int32, int32, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB16Q12ToXRGB2101010 calls the vImage framework function vImageConvert_ARGB16Q12ToXRGB2101010.
-func VImageConvertARGB16Q12ToXRGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, rgb101010Min int32, rgb101010Max int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB16Q12ToXRGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, rgb101010Min int32, rgb101010Max int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB16Q12ToXRGB2101010 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB16Q12ToXRGB2101010, _lib, "vImageConvert_ARGB16Q12ToXRGB2101010")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB16Q12ToXRGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, rgb101010Min, rgb101010Max, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB16Q12ToXRGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, rgb101010Min, rgb101010Max, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB16UTo422CbYpCrYp16 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB16UTo422CbYpCrYp16 calls the vImage framework function vImageConvert_ARGB16UTo422CbYpCrYp16.
-func VImageConvertARGB16UTo422CbYpCrYp16(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB16UTo422CbYpCrYp16(src unsafe.Pointer, dest unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB16UTo422CbYpCrYp16 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB16UTo422CbYpCrYp16, _lib, "vImageConvert_ARGB16UTo422CbYpCrYp16")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB16UTo422CbYpCrYp16(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB16UTo422CbYpCrYp16(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB16UTo444AYpCbCr16 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB16UTo444AYpCbCr16 calls the vImage framework function vImageConvert_ARGB16UTo444AYpCbCr16.
-func VImageConvertARGB16UTo444AYpCbCr16(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB16UTo444AYpCbCr16(src unsafe.Pointer, dest unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB16UTo444AYpCbCr16 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB16UTo444AYpCbCr16, _lib, "vImageConvert_ARGB16UTo444AYpCbCr16")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB16UTo444AYpCbCr16(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB16UTo444AYpCbCr16(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB16UToARGB2101010 func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB16UToARGB2101010 calls the vImage framework function vImageConvert_ARGB16UToARGB2101010.
-func VImageConvertARGB16UToARGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB16UToARGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB16UToARGB2101010 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB16UToARGB2101010, _lib, "vImageConvert_ARGB16UToARGB2101010")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB16UToARGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB16UToARGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB16UToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB16UToARGB8888 calls the vImage framework function vImageConvert_ARGB16UToARGB8888.
-func VImageConvertARGB16UToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, copyMask uint8, flags uint32) (result int, permuteMap uint8, backgroundColor uint8) {
+func VImageConvertARGB16UToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, copyMask uint8, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB16UToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB16UToARGB8888, _lib, "vImageConvert_ARGB16UToARGB8888")
 	}
-	var _out0 uint8
-	var _out1 uint8
-	_ret := _fnVImageConvertARGB16UToARGB8888(src, dest, unsafe.Pointer(&_out0), copyMask, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvertARGB16UToARGB8888(src, dest, permuteMap, copyMask, backgroundColor, flags)
 }
 
 var _fnVImageConvertARGB16UToRGBA1010102 func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB16UToRGBA1010102 calls the vImage framework function vImageConvert_ARGB16UToRGBA1010102.
-func VImageConvertARGB16UToRGBA1010102(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB16UToRGBA1010102(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB16UToRGBA1010102 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB16UToRGBA1010102, _lib, "vImageConvert_ARGB16UToRGBA1010102")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB16UToRGBA1010102(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB16UToRGBA1010102(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB16UToXRGB2101010 func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB16UToXRGB2101010 calls the vImage framework function vImageConvert_ARGB16UToXRGB2101010.
-func VImageConvertARGB16UToXRGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB16UToXRGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB16UToXRGB2101010 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB16UToXRGB2101010, _lib, "vImageConvert_ARGB16UToXRGB2101010")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB16UToXRGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB16UToXRGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB16UtoARGB8888Dithered func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB16UtoARGB8888Dithered calls the vImage framework function vImageConvert_ARGB16UtoARGB8888_dithered.
-func VImageConvertARGB16UtoARGB8888Dithered(src unsafe.Pointer, dest unsafe.Pointer, dither int, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB16UtoARGB8888Dithered(src unsafe.Pointer, dest unsafe.Pointer, dither int, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB16UtoARGB8888Dithered == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB16UtoARGB8888Dithered, _lib, "vImageConvert_ARGB16UtoARGB8888_dithered")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB16UtoARGB8888Dithered(src, dest, dither, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB16UtoARGB8888Dithered(src, dest, dither, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB16UtoPlanar16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -1602,289 +1454,243 @@ func VImageConvertARGB16UtoRGB16U(argbSrc unsafe.Pointer, rgbDest unsafe.Pointer
 var _fnVImageConvertARGB2101010ToARGB16F func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB2101010ToARGB16F calls the vImage framework function vImageConvert_ARGB2101010ToARGB16F.
-func VImageConvertARGB2101010ToARGB16F(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB2101010ToARGB16F(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB2101010ToARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB2101010ToARGB16F, _lib, "vImageConvert_ARGB2101010ToARGB16F")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB2101010ToARGB16F(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB2101010ToARGB16F(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB2101010ToARGB16Q12 func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB2101010ToARGB16Q12 calls the vImage framework function vImageConvert_ARGB2101010ToARGB16Q12.
-func VImageConvertARGB2101010ToARGB16Q12(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB2101010ToARGB16Q12(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB2101010ToARGB16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB2101010ToARGB16Q12, _lib, "vImageConvert_ARGB2101010ToARGB16Q12")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB2101010ToARGB16Q12(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB2101010ToARGB16Q12(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB2101010ToARGB16U func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB2101010ToARGB16U calls the vImage framework function vImageConvert_ARGB2101010ToARGB16U.
-func VImageConvertARGB2101010ToARGB16U(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB2101010ToARGB16U(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB2101010ToARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB2101010ToARGB16U, _lib, "vImageConvert_ARGB2101010ToARGB16U")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB2101010ToARGB16U(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB2101010ToARGB16U(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB2101010ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB2101010ToARGB8888 calls the vImage framework function vImageConvert_ARGB2101010ToARGB8888.
-func VImageConvertARGB2101010ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB2101010ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB2101010ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB2101010ToARGB8888, _lib, "vImageConvert_ARGB2101010ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB2101010ToARGB8888(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB2101010ToARGB8888(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB2101010ToARGBFFFF func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB2101010ToARGBFFFF calls the vImage framework function vImageConvert_ARGB2101010ToARGBFFFF.
-func VImageConvertARGB2101010ToARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB2101010ToARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB2101010ToARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB2101010ToARGBFFFF, _lib, "vImageConvert_ARGB2101010ToARGBFFFF")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB2101010ToARGBFFFF(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB2101010ToARGBFFFF(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888To420Yp8Cb8Cr8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888To420Yp8Cb8Cr8 calls the vImage framework function vImageConvert_ARGB8888To420Yp8_Cb8_Cr8.
-func VImageConvertARGB8888To420Yp8Cb8Cr8(src unsafe.Pointer, destYp unsafe.Pointer, destCb unsafe.Pointer, destCr unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888To420Yp8Cb8Cr8(src unsafe.Pointer, destYp unsafe.Pointer, destCb unsafe.Pointer, destCr unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888To420Yp8Cb8Cr8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888To420Yp8Cb8Cr8, _lib, "vImageConvert_ARGB8888To420Yp8_Cb8_Cr8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888To420Yp8Cb8Cr8(src, destYp, destCb, destCr, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888To420Yp8Cb8Cr8(src, destYp, destCb, destCr, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888To420Yp8CbCr8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888To420Yp8CbCr8 calls the vImage framework function vImageConvert_ARGB8888To420Yp8_CbCr8.
-func VImageConvertARGB8888To420Yp8CbCr8(src unsafe.Pointer, destYp unsafe.Pointer, destCbCr unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888To420Yp8CbCr8(src unsafe.Pointer, destYp unsafe.Pointer, destCbCr unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888To420Yp8CbCr8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888To420Yp8CbCr8, _lib, "vImageConvert_ARGB8888To420Yp8_CbCr8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888To420Yp8CbCr8(src, destYp, destCbCr, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888To420Yp8CbCr8(src, destYp, destCbCr, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888To422CbYpCrYp16 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888To422CbYpCrYp16 calls the vImage framework function vImageConvert_ARGB8888To422CbYpCrYp16.
-func VImageConvertARGB8888To422CbYpCrYp16(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888To422CbYpCrYp16(src unsafe.Pointer, dest unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888To422CbYpCrYp16 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888To422CbYpCrYp16, _lib, "vImageConvert_ARGB8888To422CbYpCrYp16")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888To422CbYpCrYp16(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888To422CbYpCrYp16(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888To422CbYpCrYp8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888To422CbYpCrYp8 calls the vImage framework function vImageConvert_ARGB8888To422CbYpCrYp8.
-func VImageConvertARGB8888To422CbYpCrYp8(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888To422CbYpCrYp8(src unsafe.Pointer, dest unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888To422CbYpCrYp8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888To422CbYpCrYp8, _lib, "vImageConvert_ARGB8888To422CbYpCrYp8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888To422CbYpCrYp8(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888To422CbYpCrYp8(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888To422CbYpCrYp8AA8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888To422CbYpCrYp8AA8 calls the vImage framework function vImageConvert_ARGB8888To422CbYpCrYp8_AA8.
-func VImageConvertARGB8888To422CbYpCrYp8AA8(src unsafe.Pointer, dest unsafe.Pointer, destA unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888To422CbYpCrYp8AA8(src unsafe.Pointer, dest unsafe.Pointer, destA unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888To422CbYpCrYp8AA8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888To422CbYpCrYp8AA8, _lib, "vImageConvert_ARGB8888To422CbYpCrYp8_AA8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888To422CbYpCrYp8AA8(src, dest, destA, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888To422CbYpCrYp8AA8(src, dest, destA, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10 calls the vImage framework function vImageConvert_ARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10.
-func VImageConvertARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10(src unsafe.Pointer, dest unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10, _lib, "vImageConvert_ARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888To422CrYpCbYpCbYpCbYpCrYpCrYp10(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888To422YpCbYpCr8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888To422YpCbYpCr8 calls the vImage framework function vImageConvert_ARGB8888To422YpCbYpCr8.
-func VImageConvertARGB8888To422YpCbYpCr8(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888To422YpCbYpCr8(src unsafe.Pointer, dest unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888To422YpCbYpCr8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888To422YpCbYpCr8, _lib, "vImageConvert_ARGB8888To422YpCbYpCr8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888To422YpCbYpCr8(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888To422YpCbYpCr8(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888To444AYpCbCr16 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888To444AYpCbCr16 calls the vImage framework function vImageConvert_ARGB8888To444AYpCbCr16.
-func VImageConvertARGB8888To444AYpCbCr16(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888To444AYpCbCr16(src unsafe.Pointer, dest unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888To444AYpCbCr16 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888To444AYpCbCr16, _lib, "vImageConvert_ARGB8888To444AYpCbCr16")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888To444AYpCbCr16(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888To444AYpCbCr16(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888To444AYpCbCr8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888To444AYpCbCr8 calls the vImage framework function vImageConvert_ARGB8888To444AYpCbCr8.
-func VImageConvertARGB8888To444AYpCbCr8(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888To444AYpCbCr8(src unsafe.Pointer, dest unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888To444AYpCbCr8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888To444AYpCbCr8, _lib, "vImageConvert_ARGB8888To444AYpCbCr8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888To444AYpCbCr8(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888To444AYpCbCr8(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888To444CbYpCrA8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888To444CbYpCrA8 calls the vImage framework function vImageConvert_ARGB8888To444CbYpCrA8.
-func VImageConvertARGB8888To444CbYpCrA8(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888To444CbYpCrA8(src unsafe.Pointer, dest unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888To444CbYpCrA8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888To444CbYpCrA8, _lib, "vImageConvert_ARGB8888To444CbYpCrA8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888To444CbYpCrA8(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888To444CbYpCrA8(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888To444CrYpCb10 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888To444CrYpCb10 calls the vImage framework function vImageConvert_ARGB8888To444CrYpCb10.
-func VImageConvertARGB8888To444CrYpCb10(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888To444CrYpCb10(src unsafe.Pointer, dest unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888To444CrYpCb10 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888To444CrYpCb10, _lib, "vImageConvert_ARGB8888To444CrYpCb10")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888To444CrYpCb10(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888To444CrYpCb10(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888To444CrYpCb8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888To444CrYpCb8 calls the vImage framework function vImageConvert_ARGB8888To444CrYpCb8.
-func VImageConvertARGB8888To444CrYpCb8(src unsafe.Pointer, dest unsafe.Pointer, info unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888To444CrYpCb8(src unsafe.Pointer, dest unsafe.Pointer, info *VImageARGBToYpCbCr, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888To444CrYpCb8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888To444CrYpCb8, _lib, "vImageConvert_ARGB8888To444CrYpCb8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888To444CrYpCb8(src, dest, info, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888To444CrYpCb8(src, dest, unsafe.Pointer(info), permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888ToARGB16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888ToARGB16U calls the vImage framework function vImageConvert_ARGB8888ToARGB16U.
-func VImageConvertARGB8888ToARGB16U(src unsafe.Pointer, dest unsafe.Pointer, copyMask uint8, flags uint32) (result int, permuteMap uint8, backgroundColor uint16) {
+func VImageConvertARGB8888ToARGB16U(src unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, copyMask uint8, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888ToARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888ToARGB16U, _lib, "vImageConvert_ARGB8888ToARGB16U")
 	}
-	var _out0 uint8
-	var _out1 uint16
-	_ret := _fnVImageConvertARGB8888ToARGB16U(src, dest, unsafe.Pointer(&_out0), copyMask, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvertARGB8888ToARGB16U(src, dest, permuteMap, copyMask, backgroundColor, flags)
 }
 
 var _fnVImageConvertARGB8888ToARGB2101010 func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888ToARGB2101010 calls the vImage framework function vImageConvert_ARGB8888ToARGB2101010.
-func VImageConvertARGB8888ToARGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888ToARGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888ToARGB2101010 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888ToARGB2101010, _lib, "vImageConvert_ARGB8888ToARGB2101010")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888ToARGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888ToARGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888ToRGB16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888ToRGB16U calls the vImage framework function vImageConvert_ARGB8888ToRGB16U.
-func VImageConvertARGB8888ToRGB16U(src unsafe.Pointer, dest unsafe.Pointer, copyMask uint8, flags uint32) (result int, permuteMap uint8, backgroundColor uint16) {
+func VImageConvertARGB8888ToRGB16U(src unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, copyMask uint8, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888ToRGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888ToRGB16U, _lib, "vImageConvert_ARGB8888ToRGB16U")
 	}
-	var _out0 uint8
-	var _out1 uint16
-	_ret := _fnVImageConvertARGB8888ToRGB16U(src, dest, unsafe.Pointer(&_out0), copyMask, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvertARGB8888ToRGB16U(src, dest, permuteMap, copyMask, backgroundColor, flags)
 }
 
 var _fnVImageConvertARGB8888ToRGBA1010102 func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888ToRGBA1010102 calls the vImage framework function vImageConvert_ARGB8888ToRGBA1010102.
-func VImageConvertARGB8888ToRGBA1010102(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888ToRGBA1010102(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888ToRGBA1010102 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888ToRGBA1010102, _lib, "vImageConvert_ARGB8888ToRGBA1010102")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888ToRGBA1010102(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888ToRGBA1010102(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888ToXRGB2101010 func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888ToXRGB2101010 calls the vImage framework function vImageConvert_ARGB8888ToXRGB2101010.
-func VImageConvertARGB8888ToXRGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGB8888ToXRGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888ToXRGB2101010 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888ToXRGB2101010, _lib, "vImageConvert_ARGB8888ToXRGB2101010")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGB8888ToXRGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGB8888ToXRGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertARGB8888toARGB1555 func(unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -1934,15 +1740,12 @@ func VImageConvertARGB8888toPlanar8(srcARGB unsafe.Pointer, destA unsafe.Pointer
 var _fnVImageConvertARGB8888toPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGB8888toPlanarF calls the vImage framework function vImageConvert_ARGB8888toPlanarF.
-func VImageConvertARGB8888toPlanarF(src unsafe.Pointer, alpha unsafe.Pointer, red unsafe.Pointer, green unsafe.Pointer, blue unsafe.Pointer, flags uint32) (result int, maxFloat float32, minFloat float32) {
+func VImageConvertARGB8888toPlanarF(src unsafe.Pointer, alpha unsafe.Pointer, red unsafe.Pointer, green unsafe.Pointer, blue unsafe.Pointer, maxFloat unsafe.Pointer, minFloat unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGB8888toPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGB8888toPlanarF, _lib, "vImageConvert_ARGB8888toPlanarF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageConvertARGB8888toPlanarF(src, alpha, red, green, blue, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvertARGB8888toPlanarF(src, alpha, red, green, blue, maxFloat, minFloat, flags)
 }
 
 var _fnVImageConvertARGB8888toRGB565 func(unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -1981,56 +1784,45 @@ func VImageConvertARGB8888toRGB888(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3
 var _fnVImageConvertARGBFFFFToARGB2101010 func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGBFFFFToARGB2101010 calls the vImage framework function vImageConvert_ARGBFFFFToARGB2101010.
-func VImageConvertARGBFFFFToARGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGBFFFFToARGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGBFFFFToARGB2101010 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGBFFFFToARGB2101010, _lib, "vImageConvert_ARGBFFFFToARGB2101010")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGBFFFFToARGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGBFFFFToARGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertARGBFFFFToXRGB2101010 func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertARGBFFFFToXRGB2101010 calls the vImage framework function vImageConvert_ARGBFFFFToXRGB2101010.
-func VImageConvertARGBFFFFToXRGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertARGBFFFFToXRGB2101010(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGBFFFFToXRGB2101010 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGBFFFFToXRGB2101010, _lib, "vImageConvert_ARGBFFFFToXRGB2101010")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertARGBFFFFToXRGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertARGBFFFFToXRGB2101010(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertARGBFFFFtoARGB8888Dithered func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, uint32) int
 
 // VImageConvertARGBFFFFtoARGB8888Dithered calls the vImage framework function vImageConvert_ARGBFFFFtoARGB8888_dithered.
-func VImageConvertARGBFFFFtoARGB8888Dithered(src unsafe.Pointer, dest unsafe.Pointer, dither int, flags uint32) (result int, maxFloat float32, minFloat float32, permuteMap uint8) {
+func VImageConvertARGBFFFFtoARGB8888Dithered(src unsafe.Pointer, dest unsafe.Pointer, maxFloat unsafe.Pointer, minFloat unsafe.Pointer, dither int, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGBFFFFtoARGB8888Dithered == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGBFFFFtoARGB8888Dithered, _lib, "vImageConvert_ARGBFFFFtoARGB8888_dithered")
 	}
-	var _out0 float32
-	var _out1 float32
-	var _out2 uint8
-	_ret := _fnVImageConvertARGBFFFFtoARGB8888Dithered(src, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), dither, unsafe.Pointer(&_out2), flags)
-	return _ret, _out0, _out1, _out2
+	return _fnVImageConvertARGBFFFFtoARGB8888Dithered(src, dest, maxFloat, minFloat, dither, permuteMap, flags)
 }
 
 var _fnVImageConvertARGBFFFFtoPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGBFFFFtoPlanar8 calls the vImage framework function vImageConvert_ARGBFFFFtoPlanar8.
-func VImageConvertARGBFFFFtoPlanar8(src unsafe.Pointer, alpha unsafe.Pointer, red unsafe.Pointer, green unsafe.Pointer, blue unsafe.Pointer, flags uint32) (result int, maxFloat float32, minFloat float32) {
+func VImageConvertARGBFFFFtoPlanar8(src unsafe.Pointer, alpha unsafe.Pointer, red unsafe.Pointer, green unsafe.Pointer, blue unsafe.Pointer, maxFloat unsafe.Pointer, minFloat unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGBFFFFtoPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGBFFFFtoPlanar8, _lib, "vImageConvert_ARGBFFFFtoPlanar8")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageConvertARGBFFFFtoPlanar8(src, alpha, red, green, blue, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvertARGBFFFFtoPlanar8(src, alpha, red, green, blue, maxFloat, minFloat, flags)
 }
 
 var _fnVImageConvertARGBFFFFtoPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -2058,15 +1850,14 @@ func VImageConvertARGBFFFFtoRGBFFF(src unsafe.Pointer, dest unsafe.Pointer, flag
 var _fnVImageConvertARGBToYpCbCrGenerateConversion func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertARGBToYpCbCrGenerateConversion calls the vImage framework function vImageConvert_ARGBToYpCbCr_GenerateConversion.
-func VImageConvertARGBToYpCbCrGenerateConversion(outInfo unsafe.Pointer, inARGBType unsafe.Pointer, outYpCbCrType unsafe.Pointer, flags uint32) (result int, matrix VImageARGBToYpCbCrMatrix, pixelRange VImageYpCbCrPixelRange) {
+func VImageConvertARGBToYpCbCrGenerateConversion(matrix *VImageARGBToYpCbCrMatrix, pixelRange *VImageYpCbCrPixelRange, inARGBType unsafe.Pointer, outYpCbCrType unsafe.Pointer, flags uint32) (result int, outInfo VImageARGBToYpCbCr) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertARGBToYpCbCrGenerateConversion == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertARGBToYpCbCrGenerateConversion, _lib, "vImageConvert_ARGBToYpCbCr_GenerateConversion")
 	}
-	var _out0 VImageARGBToYpCbCrMatrix
-	var _out1 VImageYpCbCrPixelRange
-	_ret := _fnVImageConvertARGBToYpCbCrGenerateConversion(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), outInfo, inARGBType, outYpCbCrType, flags)
-	return _ret, _out0, _out1
+	var _out0 VImageARGBToYpCbCr
+	_ret := _fnVImageConvertARGBToYpCbCrGenerateConversion(unsafe.Pointer(matrix), unsafe.Pointer(pixelRange), unsafe.Pointer(&_out0), inARGBType, outYpCbCrType, flags)
+	return _ret, _out0
 }
 
 var _fnVImageConvertAnyToAny func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -2215,40 +2006,34 @@ func VImageConvertFto16Q12(src unsafe.Pointer, dest unsafe.Pointer, flags uint32
 var _fnVImageConvertIndexed1toPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertIndexed1toPlanar8 calls the vImage framework function vImageConvert_Indexed1toPlanar8.
-func VImageConvertIndexed1toPlanar8(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, colors uint8) {
+func VImageConvertIndexed1toPlanar8(src unsafe.Pointer, dest unsafe.Pointer, colors unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertIndexed1toPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertIndexed1toPlanar8, _lib, "vImageConvert_Indexed1toPlanar8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertIndexed1toPlanar8(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertIndexed1toPlanar8(src, dest, colors, flags)
 }
 
 var _fnVImageConvertIndexed2toPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertIndexed2toPlanar8 calls the vImage framework function vImageConvert_Indexed2toPlanar8.
-func VImageConvertIndexed2toPlanar8(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, colors uint8) {
+func VImageConvertIndexed2toPlanar8(src unsafe.Pointer, dest unsafe.Pointer, colors unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertIndexed2toPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertIndexed2toPlanar8, _lib, "vImageConvert_Indexed2toPlanar8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertIndexed2toPlanar8(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertIndexed2toPlanar8(src, dest, colors, flags)
 }
 
 var _fnVImageConvertIndexed4toPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertIndexed4toPlanar8 calls the vImage framework function vImageConvert_Indexed4toPlanar8.
-func VImageConvertIndexed4toPlanar8(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, colors uint8) {
+func VImageConvertIndexed4toPlanar8(src unsafe.Pointer, dest unsafe.Pointer, colors unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertIndexed4toPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertIndexed4toPlanar8, _lib, "vImageConvert_Indexed4toPlanar8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertIndexed4toPlanar8(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertIndexed4toPlanar8(src, dest, colors, flags)
 }
 
 var _fnVImageConvertPlanar16FtoPlanar8 func(unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -2397,15 +2182,12 @@ func VImageConvertPlanar8To16U(src unsafe.Pointer, dest unsafe.Pointer, flags ui
 var _fnVImageConvertPlanar8ToARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertPlanar8ToARGBFFFF calls the vImage framework function vImageConvert_Planar8ToARGBFFFF.
-func VImageConvertPlanar8ToARGBFFFF(alpha unsafe.Pointer, red unsafe.Pointer, green unsafe.Pointer, blue unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, maxFloat float32, minFloat float32) {
+func VImageConvertPlanar8ToARGBFFFF(alpha unsafe.Pointer, red unsafe.Pointer, green unsafe.Pointer, blue unsafe.Pointer, dest unsafe.Pointer, maxFloat unsafe.Pointer, minFloat unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertPlanar8ToARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertPlanar8ToARGBFFFF, _lib, "vImageConvert_Planar8ToARGBFFFF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageConvertPlanar8ToARGBFFFF(alpha, red, green, blue, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvertPlanar8ToARGBFFFF(alpha, red, green, blue, dest, maxFloat, minFloat, flags)
 }
 
 var _fnVImageConvertPlanar8ToBGRX8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
@@ -2422,15 +2204,12 @@ func VImageConvertPlanar8ToBGRX8888(blue unsafe.Pointer, green unsafe.Pointer, r
 var _fnVImageConvertPlanar8ToBGRXFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertPlanar8ToBGRXFFFF calls the vImage framework function vImageConvert_Planar8ToBGRXFFFF.
-func VImageConvertPlanar8ToBGRXFFFF(blue unsafe.Pointer, green unsafe.Pointer, red unsafe.Pointer, alpha float32, dest unsafe.Pointer, flags uint32) (result int, maxFloat float32, minFloat float32) {
+func VImageConvertPlanar8ToBGRXFFFF(blue unsafe.Pointer, green unsafe.Pointer, red unsafe.Pointer, alpha float32, dest unsafe.Pointer, maxFloat unsafe.Pointer, minFloat unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertPlanar8ToBGRXFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertPlanar8ToBGRXFFFF, _lib, "vImageConvert_Planar8ToBGRXFFFF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageConvertPlanar8ToBGRXFFFF(blue, green, red, alpha, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvertPlanar8ToBGRXFFFF(blue, green, red, alpha, dest, maxFloat, minFloat, flags)
 }
 
 var _fnVImageConvertPlanar8ToXRGB8888 func(uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -2447,15 +2226,12 @@ func VImageConvertPlanar8ToXRGB8888(alpha uint8, red unsafe.Pointer, green unsaf
 var _fnVImageConvertPlanar8ToXRGBFFFF func(float32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertPlanar8ToXRGBFFFF calls the vImage framework function vImageConvert_Planar8ToXRGBFFFF.
-func VImageConvertPlanar8ToXRGBFFFF(alpha float32, red unsafe.Pointer, green unsafe.Pointer, blue unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, maxFloat float32, minFloat float32) {
+func VImageConvertPlanar8ToXRGBFFFF(alpha float32, red unsafe.Pointer, green unsafe.Pointer, blue unsafe.Pointer, dest unsafe.Pointer, maxFloat unsafe.Pointer, minFloat unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertPlanar8ToXRGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertPlanar8ToXRGBFFFF, _lib, "vImageConvert_Planar8ToXRGBFFFF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageConvertPlanar8ToXRGBFFFF(alpha, red, green, blue, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvertPlanar8ToXRGBFFFF(alpha, red, green, blue, dest, maxFloat, minFloat, flags)
 }
 
 var _fnVImageConvertPlanar8toARGB1555 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -2599,29 +2375,23 @@ func VImageConvertPlanar8toRGB888(planarRed unsafe.Pointer, planarGreen unsafe.P
 var _fnVImageConvertPlanarFToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertPlanarFToARGB8888 calls the vImage framework function vImageConvert_PlanarFToARGB8888.
-func VImageConvertPlanarFToARGB8888(alpha unsafe.Pointer, red unsafe.Pointer, green unsafe.Pointer, blue unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, maxFloat float32, minFloat float32) {
+func VImageConvertPlanarFToARGB8888(alpha unsafe.Pointer, red unsafe.Pointer, green unsafe.Pointer, blue unsafe.Pointer, dest unsafe.Pointer, maxFloat unsafe.Pointer, minFloat unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertPlanarFToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertPlanarFToARGB8888, _lib, "vImageConvert_PlanarFToARGB8888")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageConvertPlanarFToARGB8888(alpha, red, green, blue, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvertPlanarFToARGB8888(alpha, red, green, blue, dest, maxFloat, minFloat, flags)
 }
 
 var _fnVImageConvertPlanarFToBGRX8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertPlanarFToBGRX8888 calls the vImage framework function vImageConvert_PlanarFToBGRX8888.
-func VImageConvertPlanarFToBGRX8888(blue unsafe.Pointer, green unsafe.Pointer, red unsafe.Pointer, alpha uint8, dest unsafe.Pointer, flags uint32) (result int, maxFloat float32, minFloat float32) {
+func VImageConvertPlanarFToBGRX8888(blue unsafe.Pointer, green unsafe.Pointer, red unsafe.Pointer, alpha uint8, dest unsafe.Pointer, maxFloat unsafe.Pointer, minFloat unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertPlanarFToBGRX8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertPlanarFToBGRX8888, _lib, "vImageConvert_PlanarFToBGRX8888")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageConvertPlanarFToBGRX8888(blue, green, red, alpha, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvertPlanarFToBGRX8888(blue, green, red, alpha, dest, maxFloat, minFloat, flags)
 }
 
 var _fnVImageConvertPlanarFToBGRXFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, uint32) int
@@ -2638,15 +2408,12 @@ func VImageConvertPlanarFToBGRXFFFF(blue unsafe.Pointer, green unsafe.Pointer, r
 var _fnVImageConvertPlanarFToXRGB8888 func(uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertPlanarFToXRGB8888 calls the vImage framework function vImageConvert_PlanarFToXRGB8888.
-func VImageConvertPlanarFToXRGB8888(alpha uint8, red unsafe.Pointer, green unsafe.Pointer, blue unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, maxFloat float32, minFloat float32) {
+func VImageConvertPlanarFToXRGB8888(alpha uint8, red unsafe.Pointer, green unsafe.Pointer, blue unsafe.Pointer, dest unsafe.Pointer, maxFloat unsafe.Pointer, minFloat unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertPlanarFToXRGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertPlanarFToXRGB8888, _lib, "vImageConvert_PlanarFToXRGB8888")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageConvertPlanarFToXRGB8888(alpha, red, green, blue, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvertPlanarFToXRGB8888(alpha, red, green, blue, dest, maxFloat, minFloat, flags)
 }
 
 var _fnVImageConvertPlanarFToXRGBFFFF func(float32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -2740,15 +2507,12 @@ func VImageConvertPlanarToChunkyF(srcPlanarBuffers unsafe.Pointer, destChannels 
 var _fnVImageConvertRGB16UToARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
 
 // VImageConvertRGB16UToARGB8888 calls the vImage framework function vImageConvert_RGB16UToARGB8888.
-func VImageConvertRGB16UToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, copyMask uint8, flags uint32) (result int, permuteMap uint8, backgroundColor uint8) {
+func VImageConvertRGB16UToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, copyMask uint8, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertRGB16UToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertRGB16UToARGB8888, _lib, "vImageConvert_RGB16UToARGB8888")
 	}
-	var _out0 uint8
-	var _out1 uint8
-	_ret := _fnVImageConvertRGB16UToARGB8888(src, dest, unsafe.Pointer(&_out0), copyMask, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvertRGB16UToARGB8888(src, dest, permuteMap, copyMask, backgroundColor, flags)
 }
 
 var _fnVImageConvertRGB16UtoARGB16U func(unsafe.Pointer, unsafe.Pointer, uint16, unsafe.Pointer, bool, uint32) int
@@ -2952,40 +2716,34 @@ func VImageConvertRGB888toRGBA8888(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3
 var _fnVImageConvertRGBA1010102ToARGB16Q12 func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertRGBA1010102ToARGB16Q12 calls the vImage framework function vImageConvert_RGBA1010102ToARGB16Q12.
-func VImageConvertRGBA1010102ToARGB16Q12(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertRGBA1010102ToARGB16Q12(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertRGBA1010102ToARGB16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertRGBA1010102ToARGB16Q12, _lib, "vImageConvert_RGBA1010102ToARGB16Q12")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertRGBA1010102ToARGB16Q12(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertRGBA1010102ToARGB16Q12(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertRGBA1010102ToARGB16U func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertRGBA1010102ToARGB16U calls the vImage framework function vImageConvert_RGBA1010102ToARGB16U.
-func VImageConvertRGBA1010102ToARGB16U(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertRGBA1010102ToARGB16U(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertRGBA1010102ToARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertRGBA1010102ToARGB16U, _lib, "vImageConvert_RGBA1010102ToARGB16U")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertRGBA1010102ToARGB16U(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertRGBA1010102ToARGB16U(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertRGBA1010102ToARGB8888 func(unsafe.Pointer, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertRGBA1010102ToARGB8888 calls the vImage framework function vImageConvert_RGBA1010102ToARGB8888.
-func VImageConvertRGBA1010102ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertRGBA1010102ToARGB8888(src unsafe.Pointer, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertRGBA1010102ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertRGBA1010102ToARGB8888, _lib, "vImageConvert_RGBA1010102ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertRGBA1010102ToARGB8888(src, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertRGBA1010102ToARGB8888(src, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertRGBA16UtoRGB16U func(unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -3123,15 +2881,12 @@ func VImageConvertRGBFFFtoPlanarF(rgbSrc unsafe.Pointer, redDest unsafe.Pointer,
 var _fnVImageConvertRGBFFFtoRGB888Dithered func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, uint32) int
 
 // VImageConvertRGBFFFtoRGB888Dithered calls the vImage framework function vImageConvert_RGBFFFtoRGB888_dithered.
-func VImageConvertRGBFFFtoRGB888Dithered(src unsafe.Pointer, dest unsafe.Pointer, dither int, flags uint32) (result int, maxFloat float32, minFloat float32) {
+func VImageConvertRGBFFFtoRGB888Dithered(src unsafe.Pointer, dest unsafe.Pointer, maxFloat unsafe.Pointer, minFloat unsafe.Pointer, dither int, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertRGBFFFtoRGB888Dithered == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertRGBFFFtoRGB888Dithered, _lib, "vImageConvert_RGBFFFtoRGB888_dithered")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageConvertRGBFFFtoRGB888Dithered(src, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), dither, flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvertRGBFFFtoRGB888Dithered(src, dest, maxFloat, minFloat, dither, flags)
 }
 
 var _fnVImageConvertRGBFFFtoRGBAFFFF func(unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, bool, uint32) int
@@ -3148,66 +2903,56 @@ func VImageConvertRGBFFFtoRGBAFFFF(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3
 var _fnVImageConvertXRGB2101010ToARGB16F func(unsafe.Pointer, float32, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertXRGB2101010ToARGB16F calls the vImage framework function vImageConvert_XRGB2101010ToARGB16F.
-func VImageConvertXRGB2101010ToARGB16F(src unsafe.Pointer, alpha float32, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertXRGB2101010ToARGB16F(src unsafe.Pointer, alpha float32, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertXRGB2101010ToARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertXRGB2101010ToARGB16F, _lib, "vImageConvert_XRGB2101010ToARGB16F")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertXRGB2101010ToARGB16F(src, alpha, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertXRGB2101010ToARGB16F(src, alpha, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertXRGB2101010ToARGB16Q12 func(unsafe.Pointer, int16, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertXRGB2101010ToARGB16Q12 calls the vImage framework function vImageConvert_XRGB2101010ToARGB16Q12.
-func VImageConvertXRGB2101010ToARGB16Q12(src unsafe.Pointer, alpha int16, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertXRGB2101010ToARGB16Q12(src unsafe.Pointer, alpha int16, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertXRGB2101010ToARGB16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertXRGB2101010ToARGB16Q12, _lib, "vImageConvert_XRGB2101010ToARGB16Q12")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertXRGB2101010ToARGB16Q12(src, alpha, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertXRGB2101010ToARGB16Q12(src, alpha, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertXRGB2101010ToARGB16U func(unsafe.Pointer, uint16, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertXRGB2101010ToARGB16U calls the vImage framework function vImageConvert_XRGB2101010ToARGB16U.
-func VImageConvertXRGB2101010ToARGB16U(src unsafe.Pointer, alpha uint16, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertXRGB2101010ToARGB16U(src unsafe.Pointer, alpha uint16, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertXRGB2101010ToARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertXRGB2101010ToARGB16U, _lib, "vImageConvert_XRGB2101010ToARGB16U")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertXRGB2101010ToARGB16U(src, alpha, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertXRGB2101010ToARGB16U(src, alpha, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertXRGB2101010ToARGB8888 func(unsafe.Pointer, uint8, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertXRGB2101010ToARGB8888 calls the vImage framework function vImageConvert_XRGB2101010ToARGB8888.
-func VImageConvertXRGB2101010ToARGB8888(src unsafe.Pointer, alpha uint8, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertXRGB2101010ToARGB8888(src unsafe.Pointer, alpha uint8, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertXRGB2101010ToARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertXRGB2101010ToARGB8888, _lib, "vImageConvert_XRGB2101010ToARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertXRGB2101010ToARGB8888(src, alpha, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertXRGB2101010ToARGB8888(src, alpha, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertXRGB2101010ToARGBFFFF func(unsafe.Pointer, float32, unsafe.Pointer, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvertXRGB2101010ToARGBFFFF calls the vImage framework function vImageConvert_XRGB2101010ToARGBFFFF.
-func VImageConvertXRGB2101010ToARGBFFFF(src unsafe.Pointer, alpha float32, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, flags uint32) (result int, permuteMap uint8) {
+func VImageConvertXRGB2101010ToARGBFFFF(src unsafe.Pointer, alpha float32, dest unsafe.Pointer, rgb101010RangeMin int32, rgb101010RangeMax int32, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertXRGB2101010ToARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertXRGB2101010ToARGBFFFF, _lib, "vImageConvert_XRGB2101010ToARGBFFFF")
 	}
-	var _out0 uint8
-	_ret := _fnVImageConvertXRGB2101010ToARGBFFFF(src, alpha, dest, rgb101010RangeMin, rgb101010RangeMax, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageConvertXRGB2101010ToARGBFFFF(src, alpha, dest, rgb101010RangeMin, rgb101010RangeMax, permuteMap, flags)
 }
 
 var _fnVImageConvertXRGB8888ToPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -3235,85 +2980,79 @@ func VImageConvertXRGBFFFFToPlanarF(src unsafe.Pointer, red unsafe.Pointer, gree
 var _fnVImageConvertYpCbCrToARGBGenerateConversion func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvertYpCbCrToARGBGenerateConversion calls the vImage framework function vImageConvert_YpCbCrToARGB_GenerateConversion.
-func VImageConvertYpCbCrToARGBGenerateConversion(outInfo unsafe.Pointer, inYpCbCrType unsafe.Pointer, outARGBType unsafe.Pointer, flags uint32) (result int, matrix VImageYpCbCrToARGBMatrix, pixelRange VImageYpCbCrPixelRange) {
+func VImageConvertYpCbCrToARGBGenerateConversion(matrix *VImageYpCbCrToARGBMatrix, pixelRange *VImageYpCbCrPixelRange, inYpCbCrType unsafe.Pointer, outARGBType unsafe.Pointer, flags uint32) (result int, outInfo VImageYpCbCrToARGB) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvertYpCbCrToARGBGenerateConversion == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvertYpCbCrToARGBGenerateConversion, _lib, "vImageConvert_YpCbCrToARGB_GenerateConversion")
 	}
-	var _out0 VImageYpCbCrToARGBMatrix
-	var _out1 VImageYpCbCrPixelRange
-	_ret := _fnVImageConvertYpCbCrToARGBGenerateConversion(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), outInfo, inYpCbCrType, outARGBType, flags)
-	return _ret, _out0, _out1
+	var _out0 VImageYpCbCrToARGB
+	_ret := _fnVImageConvertYpCbCrToARGBGenerateConversion(unsafe.Pointer(matrix), unsafe.Pointer(pixelRange), unsafe.Pointer(&_out0), inYpCbCrType, outARGBType, flags)
+	return _ret, _out0
 }
 
 var _fnVImageConverterCreateForCGToCVImageFormat func(unsafe.Pointer, objc.ID, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
 
 // VImageConverterCreateForCGToCVImageFormat calls the vImage framework function vImageConverter_CreateForCGToCVImageFormat.
-func VImageConverterCreateForCGToCVImageFormat(srcFormat unsafe.Pointer, destFormat obj.Object, flags uint32) (result obj.Object, backgroundColor float64, err int) {
+func VImageConverterCreateForCGToCVImageFormat(srcFormat unsafe.Pointer, destFormat obj.Object, backgroundColor unsafe.Pointer, flags uint32) (result obj.Object, err int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterCreateForCGToCVImageFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterCreateForCGToCVImageFormat, _lib, "vImageConverter_CreateForCGToCVImageFormat")
 	}
-	var _out0 float64
-	var _out1 int
-	_ret := _fnVImageConverterCreateForCGToCVImageFormat(srcFormat, objref.IDOf(destFormat), unsafe.Pointer(&_out0), flags, unsafe.Pointer(&_out1))
-	return obj.Wrap(_ret), _out0, _out1
+	var _out0 int
+	_ret := _fnVImageConverterCreateForCGToCVImageFormat(srcFormat, objref.IDOf(destFormat), backgroundColor, flags, unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
 }
 
 var _fnVImageConverterCreateForCVToCGImageFormat func(objc.ID, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
 
 // VImageConverterCreateForCVToCGImageFormat calls the vImage framework function vImageConverter_CreateForCVToCGImageFormat.
-func VImageConverterCreateForCVToCGImageFormat(srcFormat obj.Object, destFormat unsafe.Pointer, flags uint32) (result obj.Object, backgroundColor float64, err int) {
+func VImageConverterCreateForCVToCGImageFormat(srcFormat obj.Object, destFormat unsafe.Pointer, backgroundColor unsafe.Pointer, flags uint32) (result obj.Object, err int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterCreateForCVToCGImageFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterCreateForCVToCGImageFormat, _lib, "vImageConverter_CreateForCVToCGImageFormat")
 	}
-	var _out0 float64
-	var _out1 int
-	_ret := _fnVImageConverterCreateForCVToCGImageFormat(objref.IDOf(srcFormat), destFormat, unsafe.Pointer(&_out0), flags, unsafe.Pointer(&_out1))
-	return obj.Wrap(_ret), _out0, _out1
+	var _out0 int
+	_ret := _fnVImageConverterCreateForCVToCGImageFormat(objref.IDOf(srcFormat), destFormat, backgroundColor, flags, unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
 }
 
 var _fnVImageConverterCreateWithCGColorConversionInfo func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
 
 // VImageConverterCreateWithCGColorConversionInfo calls the vImage framework function vImageConverter_CreateWithCGColorConversionInfo.
-func VImageConverterCreateWithCGColorConversionInfo(colorConversionInfoRef obj.Object, sFormat unsafe.Pointer, dFormat unsafe.Pointer, flags uint32) (result obj.Object, bg float64, err int) {
+func VImageConverterCreateWithCGColorConversionInfo(colorConversionInfoRef obj.Object, sFormat unsafe.Pointer, dFormat unsafe.Pointer, bg unsafe.Pointer, flags uint32) (result obj.Object, err int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterCreateWithCGColorConversionInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterCreateWithCGColorConversionInfo, _lib, "vImageConverter_CreateWithCGColorConversionInfo")
 	}
-	var _out0 float64
-	var _out1 int
-	_ret := _fnVImageConverterCreateWithCGColorConversionInfo(objref.IDOf(colorConversionInfoRef), sFormat, dFormat, unsafe.Pointer(&_out0), flags, unsafe.Pointer(&_out1))
-	return obj.Wrap(_ret), _out0, _out1
+	var _out0 int
+	_ret := _fnVImageConverterCreateWithCGColorConversionInfo(objref.IDOf(colorConversionInfoRef), sFormat, dFormat, bg, flags, unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
 }
 
 var _fnVImageConverterCreateWithCGImageFormat func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
 
 // VImageConverterCreateWithCGImageFormat calls the vImage framework function vImageConverter_CreateWithCGImageFormat.
-func VImageConverterCreateWithCGImageFormat(srcFormat unsafe.Pointer, destFormat unsafe.Pointer, flags uint32) (result obj.Object, backgroundColor float64, err int) {
+func VImageConverterCreateWithCGImageFormat(srcFormat unsafe.Pointer, destFormat unsafe.Pointer, backgroundColor unsafe.Pointer, flags uint32) (result obj.Object, err int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterCreateWithCGImageFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterCreateWithCGImageFormat, _lib, "vImageConverter_CreateWithCGImageFormat")
 	}
-	var _out0 float64
-	var _out1 int
-	_ret := _fnVImageConverterCreateWithCGImageFormat(srcFormat, destFormat, unsafe.Pointer(&_out0), flags, unsafe.Pointer(&_out1))
-	return obj.Wrap(_ret), _out0, _out1
+	var _out0 int
+	_ret := _fnVImageConverterCreateWithCGImageFormat(srcFormat, destFormat, backgroundColor, flags, unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
 }
 
 var _fnVImageConverterCreateWithColorSyncCodeFragment func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
 
 // VImageConverterCreateWithColorSyncCodeFragment calls the vImage framework function vImageConverter_CreateWithColorSyncCodeFragment.
-func VImageConverterCreateWithColorSyncCodeFragment(codeFragment obj.Object, srcFormat unsafe.Pointer, destFormat unsafe.Pointer, flags uint32) (result obj.Object, backgroundColor float64, err int) {
+func VImageConverterCreateWithColorSyncCodeFragment(codeFragment obj.Object, srcFormat unsafe.Pointer, destFormat unsafe.Pointer, backgroundColor unsafe.Pointer, flags uint32) (result obj.Object, err int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterCreateWithColorSyncCodeFragment == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterCreateWithColorSyncCodeFragment, _lib, "vImageConverter_CreateWithColorSyncCodeFragment")
 	}
-	var _out0 float64
-	var _out1 int
-	_ret := _fnVImageConverterCreateWithColorSyncCodeFragment(objref.IDOf(codeFragment), srcFormat, destFormat, unsafe.Pointer(&_out0), flags, unsafe.Pointer(&_out1))
-	return obj.Wrap(_ret), _out0, _out1
+	var _out0 int
+	_ret := _fnVImageConverterCreateWithColorSyncCodeFragment(objref.IDOf(codeFragment), srcFormat, destFormat, backgroundColor, flags, unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
 }
 
 var _fnVImageConverterGetDestinationBufferOrder func(objc.ID) unsafe.Pointer
@@ -3396,206 +3135,166 @@ func VImageConverterRetain(converter obj.Object) {
 var _fnVImageConvolveFloatKernelARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, float32, unsafe.Pointer, uint32) int
 
 // VImageConvolveFloatKernelARGB8888 calls the vImage framework function vImageConvolveFloatKernel_ARGB8888.
-func VImageConvolveFloatKernelARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, bias float32, flags uint32) (result int, kernel float32, backgroundColor uint8) {
+func VImageConvolveFloatKernelARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, bias float32, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolveFloatKernelARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolveFloatKernelARGB8888, _lib, "vImageConvolveFloatKernel_ARGB8888")
 	}
-	var _out0 float32
-	var _out1 uint8
-	_ret := _fnVImageConvolveFloatKernelARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, bias, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvolveFloatKernelARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, bias, backgroundColor, flags)
 }
 
 var _fnVImageConvolveMultiKernelARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvolveMultiKernelARGB8888 calls the vImage framework function vImageConvolveMultiKernel_ARGB8888.
-func VImageConvolveMultiKernelARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernels unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, flags uint32) (result int, divisors int32, biases int32, backgroundColor uint8) {
+func VImageConvolveMultiKernelARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernels unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, divisors unsafe.Pointer, biases unsafe.Pointer, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolveMultiKernelARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolveMultiKernelARGB8888, _lib, "vImageConvolveMultiKernel_ARGB8888")
 	}
-	var _out0 int32
-	var _out1 int32
-	var _out2 uint8
-	_ret := _fnVImageConvolveMultiKernelARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernels, kernelHeight, kernelWidth, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), flags)
-	return _ret, _out0, _out1, _out2
+	return _fnVImageConvolveMultiKernelARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernels, kernelHeight, kernelWidth, divisors, biases, backgroundColor, flags)
 }
 
 var _fnVImageConvolveMultiKernelARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageConvolveMultiKernelARGBFFFF calls the vImage framework function vImageConvolveMultiKernel_ARGBFFFF.
-func VImageConvolveMultiKernelARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernels unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, flags uint32) (result int, biases float32, backgroundColor float32) {
+func VImageConvolveMultiKernelARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernels unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, biases unsafe.Pointer, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolveMultiKernelARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolveMultiKernelARGBFFFF, _lib, "vImageConvolveMultiKernel_ARGBFFFF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageConvolveMultiKernelARGBFFFF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernels, kernelHeight, kernelWidth, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvolveMultiKernelARGBFFFF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernels, kernelHeight, kernelWidth, biases, backgroundColor, flags)
 }
 
 var _fnVImageConvolveWithBiasARGB16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, float32, unsafe.Pointer, uint32) int
 
 // VImageConvolveWithBiasARGB16F calls the vImage framework function vImageConvolveWithBias_ARGB16F.
-func VImageConvolveWithBiasARGB16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, bias float32, flags uint32) (result int, kernel float32, backgroundColor uint16) {
+func VImageConvolveWithBiasARGB16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, bias float32, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolveWithBiasARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolveWithBiasARGB16F, _lib, "vImageConvolveWithBias_ARGB16F")
 	}
-	var _out0 float32
-	var _out1 uint16
-	_ret := _fnVImageConvolveWithBiasARGB16F(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, bias, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvolveWithBiasARGB16F(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, bias, backgroundColor, flags)
 }
 
 var _fnVImageConvolveWithBiasARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, int32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvolveWithBiasARGB8888 calls the vImage framework function vImageConvolveWithBias_ARGB8888.
-func VImageConvolveWithBiasARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, divisor int32, bias int32, flags uint32) (result int, kernel int16, backgroundColor uint8) {
+func VImageConvolveWithBiasARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, divisor int32, bias int32, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolveWithBiasARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolveWithBiasARGB8888, _lib, "vImageConvolveWithBias_ARGB8888")
 	}
-	var _out0 int16
-	var _out1 uint8
-	_ret := _fnVImageConvolveWithBiasARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, divisor, bias, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvolveWithBiasARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, divisor, bias, backgroundColor, flags)
 }
 
 var _fnVImageConvolveWithBiasARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, float32, unsafe.Pointer, uint32) int
 
 // VImageConvolveWithBiasARGBFFFF calls the vImage framework function vImageConvolveWithBias_ARGBFFFF.
-func VImageConvolveWithBiasARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, bias float32, flags uint32) (result int, kernel float32, backgroundColor float32) {
+func VImageConvolveWithBiasARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, bias float32, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolveWithBiasARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolveWithBiasARGBFFFF, _lib, "vImageConvolveWithBias_ARGBFFFF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageConvolveWithBiasARGBFFFF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, bias, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvolveWithBiasARGBFFFF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, bias, backgroundColor, flags)
 }
 
 var _fnVImageConvolveWithBiasPlanar16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, float32, uint16, uint32) int
 
 // VImageConvolveWithBiasPlanar16F calls the vImage framework function vImageConvolveWithBias_Planar16F.
-func VImageConvolveWithBiasPlanar16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, bias float32, backgroundColor uint16, flags uint32) (result int, kernel float32) {
+func VImageConvolveWithBiasPlanar16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, bias float32, backgroundColor uint16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolveWithBiasPlanar16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolveWithBiasPlanar16F, _lib, "vImageConvolveWithBias_Planar16F")
 	}
-	var _out0 float32
-	_ret := _fnVImageConvolveWithBiasPlanar16F(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, bias, backgroundColor, flags)
-	return _ret, _out0
+	return _fnVImageConvolveWithBiasPlanar16F(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, bias, backgroundColor, flags)
 }
 
 var _fnVImageConvolveWithBiasPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, int32, int32, uint8, uint32) int
 
 // VImageConvolveWithBiasPlanar8 calls the vImage framework function vImageConvolveWithBias_Planar8.
-func VImageConvolveWithBiasPlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, divisor int32, bias int32, backgroundColor uint8, flags uint32) (result int, kernel int16) {
+func VImageConvolveWithBiasPlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, divisor int32, bias int32, backgroundColor uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolveWithBiasPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolveWithBiasPlanar8, _lib, "vImageConvolveWithBias_Planar8")
 	}
-	var _out0 int16
-	_ret := _fnVImageConvolveWithBiasPlanar8(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, divisor, bias, backgroundColor, flags)
-	return _ret, _out0
+	return _fnVImageConvolveWithBiasPlanar8(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, divisor, bias, backgroundColor, flags)
 }
 
 var _fnVImageConvolveWithBiasPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, float32, float32, uint32) int
 
 // VImageConvolveWithBiasPlanarF calls the vImage framework function vImageConvolveWithBias_PlanarF.
-func VImageConvolveWithBiasPlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, bias float32, backgroundColor float32, flags uint32) (result int, kernel float32) {
+func VImageConvolveWithBiasPlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, bias float32, backgroundColor float32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolveWithBiasPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolveWithBiasPlanarF, _lib, "vImageConvolveWithBias_PlanarF")
 	}
-	var _out0 float32
-	_ret := _fnVImageConvolveWithBiasPlanarF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, bias, backgroundColor, flags)
-	return _ret, _out0
+	return _fnVImageConvolveWithBiasPlanarF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, bias, backgroundColor, flags)
 }
 
 var _fnVImageConvolveARGB16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, unsafe.Pointer, uint32) int
 
 // VImageConvolveARGB16F calls the vImage framework function vImageConvolve_ARGB16F.
-func VImageConvolveARGB16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, flags uint32) (result int, kernel float32, backgroundColor uint16) {
+func VImageConvolveARGB16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolveARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolveARGB16F, _lib, "vImageConvolve_ARGB16F")
 	}
-	var _out0 float32
-	var _out1 uint16
-	_ret := _fnVImageConvolveARGB16F(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvolveARGB16F(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, backgroundColor, flags)
 }
 
 var _fnVImageConvolveARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, int32, unsafe.Pointer, uint32) int
 
 // VImageConvolveARGB8888 calls the vImage framework function vImageConvolve_ARGB8888.
-func VImageConvolveARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, divisor int32, flags uint32) (result int, kernel int16, backgroundColor uint8) {
+func VImageConvolveARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, divisor int32, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolveARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolveARGB8888, _lib, "vImageConvolve_ARGB8888")
 	}
-	var _out0 int16
-	var _out1 uint8
-	_ret := _fnVImageConvolveARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, divisor, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvolveARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, divisor, backgroundColor, flags)
 }
 
 var _fnVImageConvolveARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, unsafe.Pointer, uint32) int
 
 // VImageConvolveARGBFFFF calls the vImage framework function vImageConvolve_ARGBFFFF.
-func VImageConvolveARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, flags uint32) (result int, kernel float32, backgroundColor float32) {
+func VImageConvolveARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolveARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolveARGBFFFF, _lib, "vImageConvolve_ARGBFFFF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageConvolveARGBFFFF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageConvolveARGBFFFF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, backgroundColor, flags)
 }
 
 var _fnVImageConvolvePlanar16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, uint16, uint32) int
 
 // VImageConvolvePlanar16F calls the vImage framework function vImageConvolve_Planar16F.
-func VImageConvolvePlanar16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, backgroundColor uint16, flags uint32) (result int, kernel float32) {
+func VImageConvolvePlanar16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, backgroundColor uint16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolvePlanar16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolvePlanar16F, _lib, "vImageConvolve_Planar16F")
 	}
-	var _out0 float32
-	_ret := _fnVImageConvolvePlanar16F(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, backgroundColor, flags)
-	return _ret, _out0
+	return _fnVImageConvolvePlanar16F(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, backgroundColor, flags)
 }
 
 var _fnVImageConvolvePlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, int32, uint8, uint32) int
 
 // VImageConvolvePlanar8 calls the vImage framework function vImageConvolve_Planar8.
-func VImageConvolvePlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, divisor int32, backgroundColor uint8, flags uint32) (result int, kernel int16) {
+func VImageConvolvePlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, divisor int32, backgroundColor uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolvePlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolvePlanar8, _lib, "vImageConvolve_Planar8")
 	}
-	var _out0 int16
-	_ret := _fnVImageConvolvePlanar8(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, divisor, backgroundColor, flags)
-	return _ret, _out0
+	return _fnVImageConvolvePlanar8(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, divisor, backgroundColor, flags)
 }
 
 var _fnVImageConvolvePlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, uint32, float32, uint32) int
 
 // VImageConvolvePlanarF calls the vImage framework function vImageConvolve_PlanarF.
-func VImageConvolvePlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, backgroundColor float32, flags uint32) (result int, kernel float32) {
+func VImageConvolvePlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, backgroundColor float32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConvolvePlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConvolvePlanarF, _lib, "vImageConvolve_PlanarF")
 	}
-	var _out0 float32
-	_ret := _fnVImageConvolvePlanarF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, backgroundColor, flags)
-	return _ret, _out0
+	return _fnVImageConvolvePlanarF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, backgroundColor, flags)
 }
 
 var _fnVImageCopyBuffer func(unsafe.Pointer, unsafe.Pointer, int, uint32) int
@@ -3636,31 +3335,27 @@ func VImageCreateGammaFunction(gamma float32, gammaType int, flags uint32) unsaf
 var _fnVImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
 
 // VImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction calls the vImage framework function vImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction.
-func VImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction(intent unsafe.Pointer, flags uint32) (result obj.Object, whitePoint VImageWhitePoint, tf VImageTransferFunction, err int) {
+func VImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction(whitePoint *VImageWhitePoint, tf *VImageTransferFunction, intent unsafe.Pointer, flags uint32) (result obj.Object, err int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction, _lib, "vImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction")
 	}
-	var _out0 VImageWhitePoint
-	var _out1 VImageTransferFunction
-	var _out2 int
-	_ret := _fnVImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), intent, flags, unsafe.Pointer(&_out2))
-	return obj.Wrap(_ret), _out0, _out1, _out2
+	var _out0 int
+	_ret := _fnVImageCreateMonochromeColorSpaceWithWhitePointAndTransferFunction(unsafe.Pointer(whitePoint), unsafe.Pointer(tf), intent, flags, unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
 }
 
 var _fnVImageCreateRGBColorSpaceWithPrimariesAndTransferFunction func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
 
 // VImageCreateRGBColorSpaceWithPrimariesAndTransferFunction calls the vImage framework function vImageCreateRGBColorSpaceWithPrimariesAndTransferFunction.
-func VImageCreateRGBColorSpaceWithPrimariesAndTransferFunction(intent unsafe.Pointer, flags uint32) (result obj.Object, primaries VImageRGBPrimaries, tf VImageTransferFunction, err int) {
+func VImageCreateRGBColorSpaceWithPrimariesAndTransferFunction(primaries *VImageRGBPrimaries, tf *VImageTransferFunction, intent unsafe.Pointer, flags uint32) (result obj.Object, err int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageCreateRGBColorSpaceWithPrimariesAndTransferFunction == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageCreateRGBColorSpaceWithPrimariesAndTransferFunction, _lib, "vImageCreateRGBColorSpaceWithPrimariesAndTransferFunction")
 	}
-	var _out0 VImageRGBPrimaries
-	var _out1 VImageTransferFunction
-	var _out2 int
-	_ret := _fnVImageCreateRGBColorSpaceWithPrimariesAndTransferFunction(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), intent, flags, unsafe.Pointer(&_out2))
-	return obj.Wrap(_ret), _out0, _out1, _out2
+	var _out0 int
+	_ret := _fnVImageCreateRGBColorSpaceWithPrimariesAndTransferFunction(unsafe.Pointer(primaries), unsafe.Pointer(tf), intent, flags, unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
 }
 
 var _fnVImageDestroyGammaFunction func(unsafe.Pointer)
@@ -3688,81 +3383,67 @@ func VImageDestroyResamplingFilter(filter unsafe.Pointer) {
 var _fnVImageDilateARGB8888 func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, int, int, uint32) int
 
 // VImageDilateARGB8888 calls the vImage framework function vImageDilate_ARGB8888.
-func VImageDilateARGB8888(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight int, kernelWidth int, flags uint32) (result int, kernel uint8) {
+func VImageDilateARGB8888(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight int, kernelWidth int, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageDilateARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageDilateARGB8888, _lib, "vImageDilate_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageDilateARGB8888(src, dest, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, flags)
-	return _ret, _out0
+	return _fnVImageDilateARGB8888(src, dest, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, flags)
 }
 
 var _fnVImageDilateARGBFFFF func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, int, int, uint32) int
 
 // VImageDilateARGBFFFF calls the vImage framework function vImageDilate_ARGBFFFF.
-func VImageDilateARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight int, kernelWidth int, flags uint32) (result int, kernel float32) {
+func VImageDilateARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight int, kernelWidth int, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageDilateARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageDilateARGBFFFF, _lib, "vImageDilate_ARGBFFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageDilateARGBFFFF(src, dest, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, flags)
-	return _ret, _out0
+	return _fnVImageDilateARGBFFFF(src, dest, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, flags)
 }
 
 var _fnVImageDilatePlanar8 func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, int, int, uint32) int
 
 // VImageDilatePlanar8 calls the vImage framework function vImageDilate_Planar8.
-func VImageDilatePlanar8(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight int, kernelWidth int, flags uint32) (result int, kernel uint8) {
+func VImageDilatePlanar8(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight int, kernelWidth int, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageDilatePlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageDilatePlanar8, _lib, "vImageDilate_Planar8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageDilatePlanar8(src, dest, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, flags)
-	return _ret, _out0
+	return _fnVImageDilatePlanar8(src, dest, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, flags)
 }
 
 var _fnVImageDilatePlanarF func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, int, int, uint32) int
 
 // VImageDilatePlanarF calls the vImage framework function vImageDilate_PlanarF.
-func VImageDilatePlanarF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight int, kernelWidth int, flags uint32) (result int, kernel float32) {
+func VImageDilatePlanarF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight int, kernelWidth int, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageDilatePlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageDilatePlanarF, _lib, "vImageDilate_PlanarF")
 	}
-	var _out0 float32
-	_ret := _fnVImageDilatePlanarF(src, dest, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, flags)
-	return _ret, _out0
+	return _fnVImageDilatePlanarF(src, dest, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, flags)
 }
 
 var _fnVImageEndsInContrastStretchARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageEndsInContrastStretchARGB8888 calls the vImage framework function vImageEndsInContrastStretch_ARGB8888.
-func VImageEndsInContrastStretchARGB8888(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, percentLow uint32, percentHigh uint32) {
+func VImageEndsInContrastStretchARGB8888(src unsafe.Pointer, dest unsafe.Pointer, percentLow unsafe.Pointer, percentHigh unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageEndsInContrastStretchARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageEndsInContrastStretchARGB8888, _lib, "vImageEndsInContrastStretch_ARGB8888")
 	}
-	var _out0 uint32
-	var _out1 uint32
-	_ret := _fnVImageEndsInContrastStretchARGB8888(src, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImageEndsInContrastStretchARGB8888(src, dest, percentLow, percentHigh, flags)
 }
 
 var _fnVImageEndsInContrastStretchARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, float32, float32, uint32) int
 
 // VImageEndsInContrastStretchARGBFFFF calls the vImage framework function vImageEndsInContrastStretch_ARGBFFFF.
-func VImageEndsInContrastStretchARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, histogramEntries int, minVal float32, maxVal float32, flags uint32) (result int, percentLow uint32, percentHigh uint32) {
+func VImageEndsInContrastStretchARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, percentLow unsafe.Pointer, percentHigh unsafe.Pointer, histogramEntries int, minVal float32, maxVal float32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageEndsInContrastStretchARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageEndsInContrastStretchARGBFFFF, _lib, "vImageEndsInContrastStretch_ARGBFFFF")
 	}
-	var _out0 uint32
-	var _out1 uint32
-	_ret := _fnVImageEndsInContrastStretchARGBFFFF(src, dest, tempBuffer, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), histogramEntries, minVal, maxVal, flags)
-	return _ret, _out0, _out1
+	return _fnVImageEndsInContrastStretchARGBFFFF(src, dest, tempBuffer, percentLow, percentHigh, histogramEntries, minVal, maxVal, flags)
 }
 
 var _fnVImageEndsInContrastStretchPlanar8 func(unsafe.Pointer, unsafe.Pointer, int, int, uint32) int
@@ -3834,53 +3515,45 @@ func VImageEqualizationPlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuff
 var _fnVImageErodeARGB8888 func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, int, int, uint32) int
 
 // VImageErodeARGB8888 calls the vImage framework function vImageErode_ARGB8888.
-func VImageErodeARGB8888(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight int, kernelWidth int, flags uint32) (result int, kernel uint8) {
+func VImageErodeARGB8888(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight int, kernelWidth int, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageErodeARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageErodeARGB8888, _lib, "vImageErode_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageErodeARGB8888(src, dest, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, flags)
-	return _ret, _out0
+	return _fnVImageErodeARGB8888(src, dest, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, flags)
 }
 
 var _fnVImageErodeARGBFFFF func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, int, int, uint32) int
 
 // VImageErodeARGBFFFF calls the vImage framework function vImageErode_ARGBFFFF.
-func VImageErodeARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight int, kernelWidth int, flags uint32) (result int, kernel float32) {
+func VImageErodeARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight int, kernelWidth int, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageErodeARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageErodeARGBFFFF, _lib, "vImageErode_ARGBFFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageErodeARGBFFFF(src, dest, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, flags)
-	return _ret, _out0
+	return _fnVImageErodeARGBFFFF(src, dest, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, flags)
 }
 
 var _fnVImageErodePlanar8 func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, int, int, uint32) int
 
 // VImageErodePlanar8 calls the vImage framework function vImageErode_Planar8.
-func VImageErodePlanar8(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight int, kernelWidth int, flags uint32) (result int, kernel uint8) {
+func VImageErodePlanar8(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight int, kernelWidth int, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageErodePlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageErodePlanar8, _lib, "vImageErode_Planar8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageErodePlanar8(src, dest, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, flags)
-	return _ret, _out0
+	return _fnVImageErodePlanar8(src, dest, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, flags)
 }
 
 var _fnVImageErodePlanarF func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, int, int, uint32) int
 
 // VImageErodePlanarF calls the vImage framework function vImageErode_PlanarF.
-func VImageErodePlanarF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight int, kernelWidth int, flags uint32) (result int, kernel float32) {
+func VImageErodePlanarF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernelHeight int, kernelWidth int, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageErodePlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageErodePlanarF, _lib, "vImageErode_PlanarF")
 	}
-	var _out0 float32
-	_ret := _fnVImageErodePlanarF(src, dest, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelHeight, kernelWidth, flags)
-	return _ret, _out0
+	return _fnVImageErodePlanarF(src, dest, srcOffsetToROIX, srcOffsetToROIY, kernel, kernelHeight, kernelWidth, flags)
 }
 
 var _fnVImageExtractChannelARGB16U func(unsafe.Pointer, unsafe.Pointer, int, uint32) int
@@ -3919,183 +3592,155 @@ func VImageExtractChannelARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, chann
 var _fnVImageFlattenARGB16Q12 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenARGB16Q12 calls the vImage framework function vImageFlatten_ARGB16Q12.
-func VImageFlattenARGB16Q12(argbSrc unsafe.Pointer, argbDst unsafe.Pointer, isImagePremultiplied bool, flags uint32) (result int, argbBackgroundColorPtr int16) {
+func VImageFlattenARGB16Q12(argbSrc unsafe.Pointer, argbDst unsafe.Pointer, argbBackgroundColorPtr unsafe.Pointer, isImagePremultiplied bool, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenARGB16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenARGB16Q12, _lib, "vImageFlatten_ARGB16Q12")
 	}
-	var _out0 int16
-	_ret := _fnVImageFlattenARGB16Q12(argbSrc, argbDst, unsafe.Pointer(&_out0), isImagePremultiplied, flags)
-	return _ret, _out0
+	return _fnVImageFlattenARGB16Q12(argbSrc, argbDst, argbBackgroundColorPtr, isImagePremultiplied, flags)
 }
 
 var _fnVImageFlattenARGB16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenARGB16U calls the vImage framework function vImageFlatten_ARGB16U.
-func VImageFlattenARGB16U(argbSrc unsafe.Pointer, argbDst unsafe.Pointer, isImagePremultiplied bool, flags uint32) (result int, argbBackgroundColorPtr uint16) {
+func VImageFlattenARGB16U(argbSrc unsafe.Pointer, argbDst unsafe.Pointer, argbBackgroundColorPtr unsafe.Pointer, isImagePremultiplied bool, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenARGB16U, _lib, "vImageFlatten_ARGB16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageFlattenARGB16U(argbSrc, argbDst, unsafe.Pointer(&_out0), isImagePremultiplied, flags)
-	return _ret, _out0
+	return _fnVImageFlattenARGB16U(argbSrc, argbDst, argbBackgroundColorPtr, isImagePremultiplied, flags)
 }
 
 var _fnVImageFlattenARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenARGB8888 calls the vImage framework function vImageFlatten_ARGB8888.
-func VImageFlattenARGB8888(argbSrc unsafe.Pointer, argbDst unsafe.Pointer, isImagePremultiplied bool, flags uint32) (result int, argbBackgroundColorPtr uint8) {
+func VImageFlattenARGB8888(argbSrc unsafe.Pointer, argbDst unsafe.Pointer, argbBackgroundColorPtr unsafe.Pointer, isImagePremultiplied bool, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenARGB8888, _lib, "vImageFlatten_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageFlattenARGB8888(argbSrc, argbDst, unsafe.Pointer(&_out0), isImagePremultiplied, flags)
-	return _ret, _out0
+	return _fnVImageFlattenARGB8888(argbSrc, argbDst, argbBackgroundColorPtr, isImagePremultiplied, flags)
 }
 
 var _fnVImageFlattenARGB8888ToRGB888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenARGB8888ToRGB888 calls the vImage framework function vImageFlatten_ARGB8888ToRGB888.
-func VImageFlattenARGB8888ToRGB888(arg unsafe.Pointer, arg2 unsafe.Pointer, arg4 bool, arg5 uint32) (result int, arg3 uint8) {
+func VImageFlattenARGB8888ToRGB888(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 bool, arg5 uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenARGB8888ToRGB888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenARGB8888ToRGB888, _lib, "vImageFlatten_ARGB8888ToRGB888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageFlattenARGB8888ToRGB888(arg, arg2, unsafe.Pointer(&_out0), arg4, arg5)
-	return _ret, _out0
+	return _fnVImageFlattenARGB8888ToRGB888(arg, arg2, arg3, arg4, arg5)
 }
 
 var _fnVImageFlattenARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenARGBFFFF calls the vImage framework function vImageFlatten_ARGBFFFF.
-func VImageFlattenARGBFFFF(argbSrc unsafe.Pointer, argbDst unsafe.Pointer, isImagePremultiplied bool, flags uint32) (result int, argbBackgroundColorPtr float32) {
+func VImageFlattenARGBFFFF(argbSrc unsafe.Pointer, argbDst unsafe.Pointer, argbBackgroundColorPtr unsafe.Pointer, isImagePremultiplied bool, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenARGBFFFF, _lib, "vImageFlatten_ARGBFFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageFlattenARGBFFFF(argbSrc, argbDst, unsafe.Pointer(&_out0), isImagePremultiplied, flags)
-	return _ret, _out0
+	return _fnVImageFlattenARGBFFFF(argbSrc, argbDst, argbBackgroundColorPtr, isImagePremultiplied, flags)
 }
 
 var _fnVImageFlattenARGBFFFFToRGBFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenARGBFFFFToRGBFFF calls the vImage framework function vImageFlatten_ARGBFFFFToRGBFFF.
-func VImageFlattenARGBFFFFToRGBFFF(arg unsafe.Pointer, arg2 unsafe.Pointer, arg4 bool, arg5 uint32) (result int, arg3 float32) {
+func VImageFlattenARGBFFFFToRGBFFF(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 bool, arg5 uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenARGBFFFFToRGBFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenARGBFFFFToRGBFFF, _lib, "vImageFlatten_ARGBFFFFToRGBFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageFlattenARGBFFFFToRGBFFF(arg, arg2, unsafe.Pointer(&_out0), arg4, arg5)
-	return _ret, _out0
+	return _fnVImageFlattenARGBFFFFToRGBFFF(arg, arg2, arg3, arg4, arg5)
 }
 
 var _fnVImageFlattenBGRA8888ToRGB888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenBGRA8888ToRGB888 calls the vImage framework function vImageFlatten_BGRA8888ToRGB888.
-func VImageFlattenBGRA8888ToRGB888(arg unsafe.Pointer, arg2 unsafe.Pointer, arg4 bool, arg5 uint32) (result int, arg3 uint8) {
+func VImageFlattenBGRA8888ToRGB888(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 bool, arg5 uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenBGRA8888ToRGB888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenBGRA8888ToRGB888, _lib, "vImageFlatten_BGRA8888ToRGB888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageFlattenBGRA8888ToRGB888(arg, arg2, unsafe.Pointer(&_out0), arg4, arg5)
-	return _ret, _out0
+	return _fnVImageFlattenBGRA8888ToRGB888(arg, arg2, arg3, arg4, arg5)
 }
 
 var _fnVImageFlattenBGRAFFFFToRGBFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenBGRAFFFFToRGBFFF calls the vImage framework function vImageFlatten_BGRAFFFFToRGBFFF.
-func VImageFlattenBGRAFFFFToRGBFFF(arg unsafe.Pointer, arg2 unsafe.Pointer, arg4 bool, arg5 uint32) (result int, arg3 float32) {
+func VImageFlattenBGRAFFFFToRGBFFF(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 bool, arg5 uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenBGRAFFFFToRGBFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenBGRAFFFFToRGBFFF, _lib, "vImageFlatten_BGRAFFFFToRGBFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageFlattenBGRAFFFFToRGBFFF(arg, arg2, unsafe.Pointer(&_out0), arg4, arg5)
-	return _ret, _out0
+	return _fnVImageFlattenBGRAFFFFToRGBFFF(arg, arg2, arg3, arg4, arg5)
 }
 
 var _fnVImageFlattenRGBA16Q12 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenRGBA16Q12 calls the vImage framework function vImageFlatten_RGBA16Q12.
-func VImageFlattenRGBA16Q12(argbSrc unsafe.Pointer, argbDst unsafe.Pointer, isImagePremultiplied bool, flags uint32) (result int, argbBackgroundColorPtr int16) {
+func VImageFlattenRGBA16Q12(argbSrc unsafe.Pointer, argbDst unsafe.Pointer, argbBackgroundColorPtr unsafe.Pointer, isImagePremultiplied bool, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenRGBA16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenRGBA16Q12, _lib, "vImageFlatten_RGBA16Q12")
 	}
-	var _out0 int16
-	_ret := _fnVImageFlattenRGBA16Q12(argbSrc, argbDst, unsafe.Pointer(&_out0), isImagePremultiplied, flags)
-	return _ret, _out0
+	return _fnVImageFlattenRGBA16Q12(argbSrc, argbDst, argbBackgroundColorPtr, isImagePremultiplied, flags)
 }
 
 var _fnVImageFlattenRGBA16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenRGBA16U calls the vImage framework function vImageFlatten_RGBA16U.
-func VImageFlattenRGBA16U(rgbaSrc unsafe.Pointer, rgbaDst unsafe.Pointer, isImagePremultiplied bool, flags uint32) (result int, rgbaBackgroundColorPtr uint16) {
+func VImageFlattenRGBA16U(rgbaSrc unsafe.Pointer, rgbaDst unsafe.Pointer, rgbaBackgroundColorPtr unsafe.Pointer, isImagePremultiplied bool, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenRGBA16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenRGBA16U, _lib, "vImageFlatten_RGBA16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageFlattenRGBA16U(rgbaSrc, rgbaDst, unsafe.Pointer(&_out0), isImagePremultiplied, flags)
-	return _ret, _out0
+	return _fnVImageFlattenRGBA16U(rgbaSrc, rgbaDst, rgbaBackgroundColorPtr, isImagePremultiplied, flags)
 }
 
 var _fnVImageFlattenRGBA8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenRGBA8888 calls the vImage framework function vImageFlatten_RGBA8888.
-func VImageFlattenRGBA8888(rgbaSrc unsafe.Pointer, rgbaDst unsafe.Pointer, isImagePremultiplied bool, flags uint32) (result int, rgbaBackgroundColorPtr uint8) {
+func VImageFlattenRGBA8888(rgbaSrc unsafe.Pointer, rgbaDst unsafe.Pointer, rgbaBackgroundColorPtr unsafe.Pointer, isImagePremultiplied bool, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenRGBA8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenRGBA8888, _lib, "vImageFlatten_RGBA8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageFlattenRGBA8888(rgbaSrc, rgbaDst, unsafe.Pointer(&_out0), isImagePremultiplied, flags)
-	return _ret, _out0
+	return _fnVImageFlattenRGBA8888(rgbaSrc, rgbaDst, rgbaBackgroundColorPtr, isImagePremultiplied, flags)
 }
 
 var _fnVImageFlattenRGBA8888ToRGB888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenRGBA8888ToRGB888 calls the vImage framework function vImageFlatten_RGBA8888ToRGB888.
-func VImageFlattenRGBA8888ToRGB888(arg unsafe.Pointer, arg2 unsafe.Pointer, arg4 bool, arg5 uint32) (result int, arg3 uint8) {
+func VImageFlattenRGBA8888ToRGB888(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 bool, arg5 uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenRGBA8888ToRGB888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenRGBA8888ToRGB888, _lib, "vImageFlatten_RGBA8888ToRGB888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageFlattenRGBA8888ToRGB888(arg, arg2, unsafe.Pointer(&_out0), arg4, arg5)
-	return _ret, _out0
+	return _fnVImageFlattenRGBA8888ToRGB888(arg, arg2, arg3, arg4, arg5)
 }
 
 var _fnVImageFlattenRGBAFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenRGBAFFFF calls the vImage framework function vImageFlatten_RGBAFFFF.
-func VImageFlattenRGBAFFFF(rgbaSrc unsafe.Pointer, rgbaDst unsafe.Pointer, isImagePremultiplied bool, flags uint32) (result int, rgbaBackgroundColorPtr float32) {
+func VImageFlattenRGBAFFFF(rgbaSrc unsafe.Pointer, rgbaDst unsafe.Pointer, rgbaBackgroundColorPtr unsafe.Pointer, isImagePremultiplied bool, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenRGBAFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenRGBAFFFF, _lib, "vImageFlatten_RGBAFFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageFlattenRGBAFFFF(rgbaSrc, rgbaDst, unsafe.Pointer(&_out0), isImagePremultiplied, flags)
-	return _ret, _out0
+	return _fnVImageFlattenRGBAFFFF(rgbaSrc, rgbaDst, rgbaBackgroundColorPtr, isImagePremultiplied, flags)
 }
 
 var _fnVImageFlattenRGBAFFFFToRGBFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImageFlattenRGBAFFFFToRGBFFF calls the vImage framework function vImageFlatten_RGBAFFFFToRGBFFF.
-func VImageFlattenRGBAFFFFToRGBFFF(arg unsafe.Pointer, arg2 unsafe.Pointer, arg4 bool, arg5 uint32) (result int, arg3 float32) {
+func VImageFlattenRGBAFFFFToRGBFFF(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 bool, arg5 uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageFlattenRGBAFFFFToRGBFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageFlattenRGBAFFFFToRGBFFF, _lib, "vImageFlatten_RGBAFFFFToRGBFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageFlattenRGBAFFFFToRGBFFF(arg, arg2, unsafe.Pointer(&_out0), arg4, arg5)
-	return _ret, _out0
+	return _fnVImageFlattenRGBAFFFFToRGBFFF(arg, arg2, arg3, arg4, arg5)
 }
 
 var _fnVImageFloodFillARGB16U func(unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, int, uint32) int
@@ -4287,27 +3932,23 @@ func VImageHistogramSpecificationARGBFFFF(src unsafe.Pointer, dest unsafe.Pointe
 var _fnVImageHistogramSpecificationPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHistogramSpecificationPlanar8 calls the vImage framework function vImageHistogramSpecification_Planar8.
-func VImageHistogramSpecificationPlanar8(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, desiredHistogram int) {
+func VImageHistogramSpecificationPlanar8(src unsafe.Pointer, dest unsafe.Pointer, desiredHistogram unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHistogramSpecificationPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHistogramSpecificationPlanar8, _lib, "vImageHistogramSpecification_Planar8")
 	}
-	var _out0 int
-	_ret := _fnVImageHistogramSpecificationPlanar8(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHistogramSpecificationPlanar8(src, dest, desiredHistogram, flags)
 }
 
 var _fnVImageHistogramSpecificationPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, float32, float32, uint32) int
 
 // VImageHistogramSpecificationPlanarF calls the vImage framework function vImageHistogramSpecification_PlanarF.
-func VImageHistogramSpecificationPlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, histogramEntries int, minVal float32, maxVal float32, flags uint32) (result int, desiredHistogram int) {
+func VImageHistogramSpecificationPlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, desiredHistogram unsafe.Pointer, histogramEntries int, minVal float32, maxVal float32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHistogramSpecificationPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHistogramSpecificationPlanarF, _lib, "vImageHistogramSpecification_PlanarF")
 	}
-	var _out0 int
-	_ret := _fnVImageHistogramSpecificationPlanarF(src, dest, tempBuffer, unsafe.Pointer(&_out0), histogramEntries, minVal, maxVal, flags)
-	return _ret, _out0
+	return _fnVImageHistogramSpecificationPlanarF(src, dest, tempBuffer, desiredHistogram, histogramEntries, minVal, maxVal, flags)
 }
 
 var _fnVImageHorizontalReflectARGB16F func(unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -4423,105 +4064,89 @@ func VImageHorizontalReflectPlanarF(src unsafe.Pointer, dest unsafe.Pointer, fla
 var _fnVImageHorizontalShearDARGB16F func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearDARGB16F calls the vImage framework function vImageHorizontalShearD_ARGB16F.
-func VImageHorizontalShearDARGB16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageHorizontalShearDARGB16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearDARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearDARGB16F, _lib, "vImageHorizontalShearD_ARGB16F")
 	}
-	var _out0 uint16
-	_ret := _fnVImageHorizontalShearDARGB16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearDARGB16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearDARGB16S func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearDARGB16S calls the vImage framework function vImageHorizontalShearD_ARGB16S.
-func VImageHorizontalShearDARGB16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor int16) {
+func VImageHorizontalShearDARGB16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearDARGB16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearDARGB16S, _lib, "vImageHorizontalShearD_ARGB16S")
 	}
-	var _out0 int16
-	_ret := _fnVImageHorizontalShearDARGB16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearDARGB16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearDARGB16U func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearDARGB16U calls the vImage framework function vImageHorizontalShearD_ARGB16U.
-func VImageHorizontalShearDARGB16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageHorizontalShearDARGB16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearDARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearDARGB16U, _lib, "vImageHorizontalShearD_ARGB16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageHorizontalShearDARGB16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearDARGB16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearDARGB8888 func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearDARGB8888 calls the vImage framework function vImageHorizontalShearD_ARGB8888.
-func VImageHorizontalShearDARGB8888(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor uint8) {
+func VImageHorizontalShearDARGB8888(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearDARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearDARGB8888, _lib, "vImageHorizontalShearD_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageHorizontalShearDARGB8888(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearDARGB8888(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearDARGBFFFF func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearDARGBFFFF calls the vImage framework function vImageHorizontalShearD_ARGBFFFF.
-func VImageHorizontalShearDARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor float32) {
+func VImageHorizontalShearDARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearDARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearDARGBFFFF, _lib, "vImageHorizontalShearD_ARGBFFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageHorizontalShearDARGBFFFF(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearDARGBFFFF(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearDCbCr16F func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearDCbCr16F calls the vImage framework function vImageHorizontalShearD_CbCr16F.
-func VImageHorizontalShearDCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageHorizontalShearDCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearDCbCr16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearDCbCr16F, _lib, "vImageHorizontalShearD_CbCr16F")
 	}
-	var _out0 uint16
-	_ret := _fnVImageHorizontalShearDCbCr16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearDCbCr16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearDCbCr16S func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearDCbCr16S calls the vImage framework function vImageHorizontalShearD_CbCr16S.
-func VImageHorizontalShearDCbCr16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor int16) {
+func VImageHorizontalShearDCbCr16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearDCbCr16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearDCbCr16S, _lib, "vImageHorizontalShearD_CbCr16S")
 	}
-	var _out0 int16
-	_ret := _fnVImageHorizontalShearDCbCr16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearDCbCr16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearDCbCr16U func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearDCbCr16U calls the vImage framework function vImageHorizontalShearD_CbCr16U.
-func VImageHorizontalShearDCbCr16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageHorizontalShearDCbCr16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearDCbCr16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearDCbCr16U, _lib, "vImageHorizontalShearD_CbCr16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageHorizontalShearDCbCr16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearDCbCr16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearDPlanar16F func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, uint16, uint32) int
@@ -4560,118 +4185,100 @@ func VImageHorizontalShearDPlanarF(src unsafe.Pointer, dest unsafe.Pointer, srcO
 var _fnVImageHorizontalShearARGB16F func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearARGB16F calls the vImage framework function vImageHorizontalShear_ARGB16F.
-func VImageHorizontalShearARGB16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageHorizontalShearARGB16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearARGB16F, _lib, "vImageHorizontalShear_ARGB16F")
 	}
-	var _out0 uint16
-	_ret := _fnVImageHorizontalShearARGB16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearARGB16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearARGB16S func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearARGB16S calls the vImage framework function vImageHorizontalShear_ARGB16S.
-func VImageHorizontalShearARGB16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor int16) {
+func VImageHorizontalShearARGB16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearARGB16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearARGB16S, _lib, "vImageHorizontalShear_ARGB16S")
 	}
-	var _out0 int16
-	_ret := _fnVImageHorizontalShearARGB16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearARGB16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearARGB16U func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearARGB16U calls the vImage framework function vImageHorizontalShear_ARGB16U.
-func VImageHorizontalShearARGB16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageHorizontalShearARGB16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearARGB16U, _lib, "vImageHorizontalShear_ARGB16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageHorizontalShearARGB16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearARGB16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearARGB8888 func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearARGB8888 calls the vImage framework function vImageHorizontalShear_ARGB8888.
-func VImageHorizontalShearARGB8888(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor uint8) {
+func VImageHorizontalShearARGB8888(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearARGB8888, _lib, "vImageHorizontalShear_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageHorizontalShearARGB8888(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearARGB8888(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearARGBFFFF func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearARGBFFFF calls the vImage framework function vImageHorizontalShear_ARGBFFFF.
-func VImageHorizontalShearARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor float32) {
+func VImageHorizontalShearARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearARGBFFFF, _lib, "vImageHorizontalShear_ARGBFFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageHorizontalShearARGBFFFF(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearARGBFFFF(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearCbCr16F func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearCbCr16F calls the vImage framework function vImageHorizontalShear_CbCr16F.
-func VImageHorizontalShearCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageHorizontalShearCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearCbCr16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearCbCr16F, _lib, "vImageHorizontalShear_CbCr16F")
 	}
-	var _out0 uint16
-	_ret := _fnVImageHorizontalShearCbCr16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearCbCr16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearCbCr16S func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearCbCr16S calls the vImage framework function vImageHorizontalShear_CbCr16S.
-func VImageHorizontalShearCbCr16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor int16) {
+func VImageHorizontalShearCbCr16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearCbCr16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearCbCr16S, _lib, "vImageHorizontalShear_CbCr16S")
 	}
-	var _out0 int16
-	_ret := _fnVImageHorizontalShearCbCr16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearCbCr16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearCbCr16U func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearCbCr16U calls the vImage framework function vImageHorizontalShear_CbCr16U.
-func VImageHorizontalShearCbCr16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageHorizontalShearCbCr16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearCbCr16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearCbCr16U, _lib, "vImageHorizontalShear_CbCr16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageHorizontalShearCbCr16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearCbCr16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearCbCr8 func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageHorizontalShearCbCr8 calls the vImage framework function vImageHorizontalShear_CbCr8.
-func VImageHorizontalShearCbCr8(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor uint8) {
+func VImageHorizontalShearCbCr8(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, xTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageHorizontalShearCbCr8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageHorizontalShearCbCr8, _lib, "vImageHorizontalShear_CbCr8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageHorizontalShearCbCr8(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageHorizontalShearCbCr8(src, dest, srcOffsetToROIX, srcOffsetToROIY, xTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageHorizontalShearPlanar16F func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, uint16, uint32) int
@@ -4743,40 +4350,34 @@ func VImageHorizontalShearXRGB2101010W(src unsafe.Pointer, dest unsafe.Pointer, 
 var _fnVImageInterpolatedLookupTablePlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, float32, float32, uint32) int
 
 // VImageInterpolatedLookupTablePlanarF calls the vImage framework function vImageInterpolatedLookupTable_PlanarF.
-func VImageInterpolatedLookupTablePlanarF(src unsafe.Pointer, dest unsafe.Pointer, tableEntries int, maxFloat float32, minFloat float32, flags uint32) (result int, table float32) {
+func VImageInterpolatedLookupTablePlanarF(src unsafe.Pointer, dest unsafe.Pointer, table unsafe.Pointer, tableEntries int, maxFloat float32, minFloat float32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageInterpolatedLookupTablePlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageInterpolatedLookupTablePlanarF, _lib, "vImageInterpolatedLookupTable_PlanarF")
 	}
-	var _out0 float32
-	_ret := _fnVImageInterpolatedLookupTablePlanarF(src, dest, unsafe.Pointer(&_out0), tableEntries, maxFloat, minFloat, flags)
-	return _ret, _out0
+	return _fnVImageInterpolatedLookupTablePlanarF(src, dest, table, tableEntries, maxFloat, minFloat, flags)
 }
 
 var _fnVImageLookupTable8to64U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageLookupTable8to64U calls the vImage framework function vImageLookupTable_8to64U.
-func VImageLookupTable8to64U(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, lut uint64) {
+func VImageLookupTable8to64U(src unsafe.Pointer, dest unsafe.Pointer, lut unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageLookupTable8to64U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageLookupTable8to64U, _lib, "vImageLookupTable_8to64U")
 	}
-	var _out0 uint64
-	_ret := _fnVImageLookupTable8to64U(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageLookupTable8to64U(src, dest, lut, flags)
 }
 
 var _fnVImageLookupTablePlanar16 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageLookupTablePlanar16 calls the vImage framework function vImageLookupTable_Planar16.
-func VImageLookupTablePlanar16(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, table uint16) {
+func VImageLookupTablePlanar16(src unsafe.Pointer, dest unsafe.Pointer, table unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageLookupTablePlanar16 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageLookupTablePlanar16, _lib, "vImageLookupTable_Planar16")
 	}
-	var _out0 uint16
-	_ret := _fnVImageLookupTablePlanar16(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageLookupTablePlanar16(src, dest, table, flags)
 }
 
 var _fnVImageLookupTablePlanar8toPlanar128 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -4793,40 +4394,34 @@ func VImageLookupTablePlanar8toPlanar128(src unsafe.Pointer, dest unsafe.Pointer
 var _fnVImageLookupTablePlanar8toPlanar16 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageLookupTablePlanar8toPlanar16 calls the vImage framework function vImageLookupTable_Planar8toPlanar16.
-func VImageLookupTablePlanar8toPlanar16(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, table uint16) {
+func VImageLookupTablePlanar8toPlanar16(src unsafe.Pointer, dest unsafe.Pointer, table unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageLookupTablePlanar8toPlanar16 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageLookupTablePlanar8toPlanar16, _lib, "vImageLookupTable_Planar8toPlanar16")
 	}
-	var _out0 uint16
-	_ret := _fnVImageLookupTablePlanar8toPlanar16(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageLookupTablePlanar8toPlanar16(src, dest, table, flags)
 }
 
 var _fnVImageLookupTablePlanar8toPlanar24 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageLookupTablePlanar8toPlanar24 calls the vImage framework function vImageLookupTable_Planar8toPlanar24.
-func VImageLookupTablePlanar8toPlanar24(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, table uint32) {
+func VImageLookupTablePlanar8toPlanar24(src unsafe.Pointer, dest unsafe.Pointer, table unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageLookupTablePlanar8toPlanar24 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageLookupTablePlanar8toPlanar24, _lib, "vImageLookupTable_Planar8toPlanar24")
 	}
-	var _out0 uint32
-	_ret := _fnVImageLookupTablePlanar8toPlanar24(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageLookupTablePlanar8toPlanar24(src, dest, table, flags)
 }
 
 var _fnVImageLookupTablePlanar8toPlanar48 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageLookupTablePlanar8toPlanar48 calls the vImage framework function vImageLookupTable_Planar8toPlanar48.
-func VImageLookupTablePlanar8toPlanar48(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, table uint64) {
+func VImageLookupTablePlanar8toPlanar48(src unsafe.Pointer, dest unsafe.Pointer, table unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageLookupTablePlanar8toPlanar48 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageLookupTablePlanar8toPlanar48, _lib, "vImageLookupTable_Planar8toPlanar48")
 	}
-	var _out0 uint64
-	_ret := _fnVImageLookupTablePlanar8toPlanar48(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageLookupTablePlanar8toPlanar48(src, dest, table, flags)
 }
 
 var _fnVImageLookupTablePlanar8toPlanar96 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -4843,130 +4438,100 @@ func VImageLookupTablePlanar8toPlanar96(src unsafe.Pointer, dest unsafe.Pointer,
 var _fnVImageLookupTablePlanar8toPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageLookupTablePlanar8toPlanarF calls the vImage framework function vImageLookupTable_Planar8toPlanarF.
-func VImageLookupTablePlanar8toPlanarF(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, table float32) {
+func VImageLookupTablePlanar8toPlanarF(src unsafe.Pointer, dest unsafe.Pointer, table unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageLookupTablePlanar8toPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageLookupTablePlanar8toPlanarF, _lib, "vImageLookupTable_Planar8toPlanarF")
 	}
-	var _out0 float32
-	_ret := _fnVImageLookupTablePlanar8toPlanarF(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageLookupTablePlanar8toPlanarF(src, dest, table, flags)
 }
 
 var _fnVImageLookupTablePlanarFtoPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageLookupTablePlanarFtoPlanar8 calls the vImage framework function vImageLookupTable_PlanarFtoPlanar8.
-func VImageLookupTablePlanarFtoPlanar8(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, table uint8) {
+func VImageLookupTablePlanarFtoPlanar8(src unsafe.Pointer, dest unsafe.Pointer, table unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageLookupTablePlanarFtoPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageLookupTablePlanarFtoPlanar8, _lib, "vImageLookupTable_PlanarFtoPlanar8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageLookupTablePlanarFtoPlanar8(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageLookupTablePlanarFtoPlanar8(src, dest, table, flags)
 }
 
 var _fnVImageMatrixMultiplyARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageMatrixMultiplyARGB8888 calls the vImage framework function vImageMatrixMultiply_ARGB8888.
-func VImageMatrixMultiplyARGB8888(src unsafe.Pointer, dest unsafe.Pointer, divisor int32, flags uint32) (result int, matrix int16, preBias int16, postBias int32) {
+func VImageMatrixMultiplyARGB8888(src unsafe.Pointer, dest unsafe.Pointer, matrix unsafe.Pointer, divisor int32, preBias unsafe.Pointer, postBias unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageMatrixMultiplyARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageMatrixMultiplyARGB8888, _lib, "vImageMatrixMultiply_ARGB8888")
 	}
-	var _out0 int16
-	var _out1 int16
-	var _out2 int32
-	_ret := _fnVImageMatrixMultiplyARGB8888(src, dest, unsafe.Pointer(&_out0), divisor, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), flags)
-	return _ret, _out0, _out1, _out2
+	return _fnVImageMatrixMultiplyARGB8888(src, dest, matrix, divisor, preBias, postBias, flags)
 }
 
 var _fnVImageMatrixMultiplyARGB8888ToPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int32, unsafe.Pointer, int32, uint32) int
 
 // VImageMatrixMultiplyARGB8888ToPlanar8 calls the vImage framework function vImageMatrixMultiply_ARGB8888ToPlanar8.
-func VImageMatrixMultiplyARGB8888ToPlanar8(src unsafe.Pointer, dest unsafe.Pointer, divisor int32, postBias int32, flags uint32) (result int, matrix int16, preBias int16) {
+func VImageMatrixMultiplyARGB8888ToPlanar8(src unsafe.Pointer, dest unsafe.Pointer, matrix unsafe.Pointer, divisor int32, preBias unsafe.Pointer, postBias int32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageMatrixMultiplyARGB8888ToPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageMatrixMultiplyARGB8888ToPlanar8, _lib, "vImageMatrixMultiply_ARGB8888ToPlanar8")
 	}
-	var _out0 int16
-	var _out1 int16
-	_ret := _fnVImageMatrixMultiplyARGB8888ToPlanar8(src, dest, unsafe.Pointer(&_out0), divisor, unsafe.Pointer(&_out1), postBias, flags)
-	return _ret, _out0, _out1
+	return _fnVImageMatrixMultiplyARGB8888ToPlanar8(src, dest, matrix, divisor, preBias, postBias, flags)
 }
 
 var _fnVImageMatrixMultiplyARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageMatrixMultiplyARGBFFFF calls the vImage framework function vImageMatrixMultiply_ARGBFFFF.
-func VImageMatrixMultiplyARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, matrix float32, preBias float32, postBias float32) {
+func VImageMatrixMultiplyARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, matrix unsafe.Pointer, preBias unsafe.Pointer, postBias unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageMatrixMultiplyARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageMatrixMultiplyARGBFFFF, _lib, "vImageMatrixMultiply_ARGBFFFF")
 	}
-	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_ret := _fnVImageMatrixMultiplyARGBFFFF(src, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), flags)
-	return _ret, _out0, _out1, _out2
+	return _fnVImageMatrixMultiplyARGBFFFF(src, dest, matrix, preBias, postBias, flags)
 }
 
 var _fnVImageMatrixMultiplyARGBFFFFToPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, uint32) int
 
 // VImageMatrixMultiplyARGBFFFFToPlanarF calls the vImage framework function vImageMatrixMultiply_ARGBFFFFToPlanarF.
-func VImageMatrixMultiplyARGBFFFFToPlanarF(src unsafe.Pointer, dest unsafe.Pointer, postBias float32, flags uint32) (result int, matrix float32, preBias float32) {
+func VImageMatrixMultiplyARGBFFFFToPlanarF(src unsafe.Pointer, dest unsafe.Pointer, matrix unsafe.Pointer, preBias unsafe.Pointer, postBias float32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageMatrixMultiplyARGBFFFFToPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageMatrixMultiplyARGBFFFFToPlanarF, _lib, "vImageMatrixMultiply_ARGBFFFFToPlanarF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageMatrixMultiplyARGBFFFFToPlanarF(src, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), postBias, flags)
-	return _ret, _out0, _out1
+	return _fnVImageMatrixMultiplyARGBFFFFToPlanarF(src, dest, matrix, preBias, postBias, flags)
 }
 
 var _fnVImageMatrixMultiplyPlanar16S func(unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, int32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageMatrixMultiplyPlanar16S calls the vImage framework function vImageMatrixMultiply_Planar16S.
-func VImageMatrixMultiplyPlanar16S(srcs unsafe.Pointer, dests unsafe.Pointer, srcPlanes uint32, destPlanes uint32, divisor int32, flags uint32) (result int, matrix int16, preBias int16, postBias int32) {
+func VImageMatrixMultiplyPlanar16S(srcs unsafe.Pointer, dests unsafe.Pointer, srcPlanes uint32, destPlanes uint32, matrix unsafe.Pointer, divisor int32, preBias unsafe.Pointer, postBias unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageMatrixMultiplyPlanar16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageMatrixMultiplyPlanar16S, _lib, "vImageMatrixMultiply_Planar16S")
 	}
-	var _out0 int16
-	var _out1 int16
-	var _out2 int32
-	_ret := _fnVImageMatrixMultiplyPlanar16S(srcs, dests, srcPlanes, destPlanes, unsafe.Pointer(&_out0), divisor, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), flags)
-	return _ret, _out0, _out1, _out2
+	return _fnVImageMatrixMultiplyPlanar16S(srcs, dests, srcPlanes, destPlanes, matrix, divisor, preBias, postBias, flags)
 }
 
 var _fnVImageMatrixMultiplyPlanar8 func(unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, int32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageMatrixMultiplyPlanar8 calls the vImage framework function vImageMatrixMultiply_Planar8.
-func VImageMatrixMultiplyPlanar8(srcs unsafe.Pointer, dests unsafe.Pointer, srcPlanes uint32, destPlanes uint32, divisor int32, flags uint32) (result int, matrix int16, preBias int16, postBias int32) {
+func VImageMatrixMultiplyPlanar8(srcs unsafe.Pointer, dests unsafe.Pointer, srcPlanes uint32, destPlanes uint32, matrix unsafe.Pointer, divisor int32, preBias unsafe.Pointer, postBias unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageMatrixMultiplyPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageMatrixMultiplyPlanar8, _lib, "vImageMatrixMultiply_Planar8")
 	}
-	var _out0 int16
-	var _out1 int16
-	var _out2 int32
-	_ret := _fnVImageMatrixMultiplyPlanar8(srcs, dests, srcPlanes, destPlanes, unsafe.Pointer(&_out0), divisor, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), flags)
-	return _ret, _out0, _out1, _out2
+	return _fnVImageMatrixMultiplyPlanar8(srcs, dests, srcPlanes, destPlanes, matrix, divisor, preBias, postBias, flags)
 }
 
 var _fnVImageMatrixMultiplyPlanarF func(unsafe.Pointer, unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageMatrixMultiplyPlanarF calls the vImage framework function vImageMatrixMultiply_PlanarF.
-func VImageMatrixMultiplyPlanarF(srcs unsafe.Pointer, dests unsafe.Pointer, srcPlanes uint32, destPlanes uint32, flags uint32) (result int, matrix float32, preBias float32, postBias float32) {
+func VImageMatrixMultiplyPlanarF(srcs unsafe.Pointer, dests unsafe.Pointer, srcPlanes uint32, destPlanes uint32, matrix unsafe.Pointer, preBias unsafe.Pointer, postBias unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageMatrixMultiplyPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageMatrixMultiplyPlanarF, _lib, "vImageMatrixMultiply_PlanarF")
 	}
-	var _out0 float32
-	var _out1 float32
-	var _out2 float32
-	_ret := _fnVImageMatrixMultiplyPlanarF(srcs, dests, srcPlanes, destPlanes, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), flags)
-	return _ret, _out0, _out1, _out2
+	return _fnVImageMatrixMultiplyPlanarF(srcs, dests, srcPlanes, destPlanes, matrix, preBias, postBias, flags)
 }
 
 var _fnVImageMaxARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, int, int, uint32) int
@@ -5082,16 +4647,14 @@ func VImageMultiDimensionalInterpolatedLookupTablePlanarF(srcs unsafe.Pointer, d
 var _fnVImageMultidimensionalTableCreate func(unsafe.Pointer, uint32, uint32, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
 
 // VImageMultidimensionalTableCreate calls the vImage framework function vImageMultidimensionalTable_Create.
-func VImageMultidimensionalTableCreate(numSrcChannels uint32, numDestChannels uint32, hint unsafe.Pointer, flags uint32) (result obj.Object, tableData uint16, tableEntriesPerDimension uint8, err int) {
+func VImageMultidimensionalTableCreate(tableData unsafe.Pointer, numSrcChannels uint32, numDestChannels uint32, tableEntriesPerDimension unsafe.Pointer, hint unsafe.Pointer, flags uint32) (result obj.Object, err int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageMultidimensionalTableCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageMultidimensionalTableCreate, _lib, "vImageMultidimensionalTable_Create")
 	}
-	var _out0 uint16
-	var _out1 uint8
-	var _out2 int
-	_ret := _fnVImageMultidimensionalTableCreate(unsafe.Pointer(&_out0), numSrcChannels, numDestChannels, unsafe.Pointer(&_out1), hint, flags, unsafe.Pointer(&_out2))
-	return obj.Wrap(_ret), _out0, _out1, _out2
+	var _out0 int
+	_ret := _fnVImageMultidimensionalTableCreate(tableData, numSrcChannels, numDestChannels, tableEntriesPerDimension, hint, flags, unsafe.Pointer(&_out0))
+	return obj.Wrap(_ret), _out0
 }
 
 var _fnVImageMultidimensionalTableRelease func(objc.ID) int
@@ -5141,40 +4704,34 @@ func VImageNewResamplingFilterForFunctionUsingBuffer(filter unsafe.Pointer, scal
 var _fnVImageOverwriteChannelsWithPixelARGB16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageOverwriteChannelsWithPixelARGB16U calls the vImage framework function vImageOverwriteChannelsWithPixel_ARGB16U.
-func VImageOverwriteChannelsWithPixelARGB16U(src unsafe.Pointer, dest unsafe.Pointer, copyMask uint8, flags uint32) (result int, thePixel uint16) {
+func VImageOverwriteChannelsWithPixelARGB16U(thePixel unsafe.Pointer, src unsafe.Pointer, dest unsafe.Pointer, copyMask uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageOverwriteChannelsWithPixelARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageOverwriteChannelsWithPixelARGB16U, _lib, "vImageOverwriteChannelsWithPixel_ARGB16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageOverwriteChannelsWithPixelARGB16U(unsafe.Pointer(&_out0), src, dest, copyMask, flags)
-	return _ret, _out0
+	return _fnVImageOverwriteChannelsWithPixelARGB16U(thePixel, src, dest, copyMask, flags)
 }
 
 var _fnVImageOverwriteChannelsWithPixelARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageOverwriteChannelsWithPixelARGB8888 calls the vImage framework function vImageOverwriteChannelsWithPixel_ARGB8888.
-func VImageOverwriteChannelsWithPixelARGB8888(src unsafe.Pointer, dest unsafe.Pointer, copyMask uint8, flags uint32) (result int, thePixel uint8) {
+func VImageOverwriteChannelsWithPixelARGB8888(thePixel unsafe.Pointer, src unsafe.Pointer, dest unsafe.Pointer, copyMask uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageOverwriteChannelsWithPixelARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageOverwriteChannelsWithPixelARGB8888, _lib, "vImageOverwriteChannelsWithPixel_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageOverwriteChannelsWithPixelARGB8888(unsafe.Pointer(&_out0), src, dest, copyMask, flags)
-	return _ret, _out0
+	return _fnVImageOverwriteChannelsWithPixelARGB8888(thePixel, src, dest, copyMask, flags)
 }
 
 var _fnVImageOverwriteChannelsWithPixelARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImageOverwriteChannelsWithPixelARGBFFFF calls the vImage framework function vImageOverwriteChannelsWithPixel_ARGBFFFF.
-func VImageOverwriteChannelsWithPixelARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, copyMask uint8, flags uint32) (result int, thePixel float32) {
+func VImageOverwriteChannelsWithPixelARGBFFFF(thePixel unsafe.Pointer, src unsafe.Pointer, dest unsafe.Pointer, copyMask uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageOverwriteChannelsWithPixelARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageOverwriteChannelsWithPixelARGBFFFF, _lib, "vImageOverwriteChannelsWithPixel_ARGBFFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageOverwriteChannelsWithPixelARGBFFFF(unsafe.Pointer(&_out0), src, dest, copyMask, flags)
-	return _ret, _out0
+	return _fnVImageOverwriteChannelsWithPixelARGBFFFF(thePixel, src, dest, copyMask, flags)
 }
 
 var _fnVImageOverwriteChannelsWithScalarARGB8888 func(uint8, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
@@ -5290,339 +4847,282 @@ func VImagePNGDecompressionFilter(buffer unsafe.Pointer, startScanline int, scan
 var _fnVImagePermuteChannelsWithMaskedInsertARGB16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
 
 // VImagePermuteChannelsWithMaskedInsertARGB16U calls the vImage framework function vImagePermuteChannelsWithMaskedInsert_ARGB16U.
-func VImagePermuteChannelsWithMaskedInsertARGB16U(src unsafe.Pointer, dest unsafe.Pointer, copyMask uint8, flags uint32) (result int, permuteMap uint8, backgroundColor uint16) {
+func VImagePermuteChannelsWithMaskedInsertARGB16U(src unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, copyMask uint8, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePermuteChannelsWithMaskedInsertARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePermuteChannelsWithMaskedInsertARGB16U, _lib, "vImagePermuteChannelsWithMaskedInsert_ARGB16U")
 	}
-	var _out0 uint8
-	var _out1 uint16
-	_ret := _fnVImagePermuteChannelsWithMaskedInsertARGB16U(src, dest, unsafe.Pointer(&_out0), copyMask, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImagePermuteChannelsWithMaskedInsertARGB16U(src, dest, permuteMap, copyMask, backgroundColor, flags)
 }
 
 var _fnVImagePermuteChannelsWithMaskedInsertARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
 
 // VImagePermuteChannelsWithMaskedInsertARGB8888 calls the vImage framework function vImagePermuteChannelsWithMaskedInsert_ARGB8888.
-func VImagePermuteChannelsWithMaskedInsertARGB8888(src unsafe.Pointer, dest unsafe.Pointer, copyMask uint8, flags uint32) (result int, permuteMap uint8, backgroundColor uint8) {
+func VImagePermuteChannelsWithMaskedInsertARGB8888(src unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, copyMask uint8, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePermuteChannelsWithMaskedInsertARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePermuteChannelsWithMaskedInsertARGB8888, _lib, "vImagePermuteChannelsWithMaskedInsert_ARGB8888")
 	}
-	var _out0 uint8
-	var _out1 uint8
-	_ret := _fnVImagePermuteChannelsWithMaskedInsertARGB8888(src, dest, unsafe.Pointer(&_out0), copyMask, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImagePermuteChannelsWithMaskedInsertARGB8888(src, dest, permuteMap, copyMask, backgroundColor, flags)
 }
 
 var _fnVImagePermuteChannelsWithMaskedInsertARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
 
 // VImagePermuteChannelsWithMaskedInsertARGBFFFF calls the vImage framework function vImagePermuteChannelsWithMaskedInsert_ARGBFFFF.
-func VImagePermuteChannelsWithMaskedInsertARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, copyMask uint8, flags uint32) (result int, permuteMap uint8, backgroundColor float32) {
+func VImagePermuteChannelsWithMaskedInsertARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, copyMask uint8, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePermuteChannelsWithMaskedInsertARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePermuteChannelsWithMaskedInsertARGBFFFF, _lib, "vImagePermuteChannelsWithMaskedInsert_ARGBFFFF")
 	}
-	var _out0 uint8
-	var _out1 float32
-	_ret := _fnVImagePermuteChannelsWithMaskedInsertARGBFFFF(src, dest, unsafe.Pointer(&_out0), copyMask, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	return _fnVImagePermuteChannelsWithMaskedInsertARGBFFFF(src, dest, permuteMap, copyMask, backgroundColor, flags)
 }
 
 var _fnVImagePermuteChannelsARGB16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImagePermuteChannelsARGB16F calls the vImage framework function vImagePermuteChannels_ARGB16F.
-func VImagePermuteChannelsARGB16F(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImagePermuteChannelsARGB16F(src unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePermuteChannelsARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePermuteChannelsARGB16F, _lib, "vImagePermuteChannels_ARGB16F")
 	}
-	var _out0 uint8
-	_ret := _fnVImagePermuteChannelsARGB16F(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImagePermuteChannelsARGB16F(src, dest, permuteMap, flags)
 }
 
 var _fnVImagePermuteChannelsARGB16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImagePermuteChannelsARGB16U calls the vImage framework function vImagePermuteChannels_ARGB16U.
-func VImagePermuteChannelsARGB16U(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImagePermuteChannelsARGB16U(src unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePermuteChannelsARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePermuteChannelsARGB16U, _lib, "vImagePermuteChannels_ARGB16U")
 	}
-	var _out0 uint8
-	_ret := _fnVImagePermuteChannelsARGB16U(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImagePermuteChannelsARGB16U(src, dest, permuteMap, flags)
 }
 
 var _fnVImagePermuteChannelsARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImagePermuteChannelsARGB8888 calls the vImage framework function vImagePermuteChannels_ARGB8888.
-func VImagePermuteChannelsARGB8888(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImagePermuteChannelsARGB8888(src unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePermuteChannelsARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePermuteChannelsARGB8888, _lib, "vImagePermuteChannels_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImagePermuteChannelsARGB8888(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImagePermuteChannelsARGB8888(src, dest, permuteMap, flags)
 }
 
 var _fnVImagePermuteChannelsARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImagePermuteChannelsARGBFFFF calls the vImage framework function vImagePermuteChannels_ARGBFFFF.
-func VImagePermuteChannelsARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImagePermuteChannelsARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePermuteChannelsARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePermuteChannelsARGBFFFF, _lib, "vImagePermuteChannels_ARGBFFFF")
 	}
-	var _out0 uint8
-	_ret := _fnVImagePermuteChannelsARGBFFFF(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImagePermuteChannelsARGBFFFF(src, dest, permuteMap, flags)
 }
 
 var _fnVImagePermuteChannelsRGB888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImagePermuteChannelsRGB888 calls the vImage framework function vImagePermuteChannels_RGB888.
-func VImagePermuteChannelsRGB888(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, permuteMap uint8) {
+func VImagePermuteChannelsRGB888(src unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePermuteChannelsRGB888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePermuteChannelsRGB888, _lib, "vImagePermuteChannels_RGB888")
 	}
-	var _out0 uint8
-	_ret := _fnVImagePermuteChannelsRGB888(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImagePermuteChannelsRGB888(src, dest, permuteMap, flags)
 }
 
 var _fnVImagePerspectiveWarpARGB16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int32, unsafe.Pointer, uint32) int
 
 // VImagePerspectiveWarpARGB16F calls the vImage framework function vImagePerspectiveWarp_ARGB16F.
-func VImagePerspectiveWarpARGB16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, interpolation int32, flags uint32) (result int, transform VImagePerpsectiveTransform, backColor uint16) {
+func VImagePerspectiveWarpARGB16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImagePerpsectiveTransform, interpolation int32, flags uint32) (result int, backColor uint16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePerspectiveWarpARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePerspectiveWarpARGB16F, _lib, "vImagePerspectiveWarp_ARGB16F")
 	}
-	var _out0 VImagePerpsectiveTransform
-	var _out1 uint16
-	_ret := _fnVImagePerspectiveWarpARGB16F(src, dest, tempBuffer, unsafe.Pointer(&_out0), interpolation, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	var _out0 uint16
+	_ret := _fnVImagePerspectiveWarpARGB16F(src, dest, tempBuffer, unsafe.Pointer(transform), interpolation, unsafe.Pointer(&_out0), flags)
+	return _ret, _out0
 }
 
 var _fnVImagePerspectiveWarpARGB16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int32, unsafe.Pointer, uint32) int
 
 // VImagePerspectiveWarpARGB16U calls the vImage framework function vImagePerspectiveWarp_ARGB16U.
-func VImagePerspectiveWarpARGB16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, interpolation int32, flags uint32) (result int, transform VImagePerpsectiveTransform, backColor uint16) {
+func VImagePerspectiveWarpARGB16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImagePerpsectiveTransform, interpolation int32, flags uint32) (result int, backColor uint16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePerspectiveWarpARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePerspectiveWarpARGB16U, _lib, "vImagePerspectiveWarp_ARGB16U")
 	}
-	var _out0 VImagePerpsectiveTransform
-	var _out1 uint16
-	_ret := _fnVImagePerspectiveWarpARGB16U(src, dest, tempBuffer, unsafe.Pointer(&_out0), interpolation, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	var _out0 uint16
+	_ret := _fnVImagePerspectiveWarpARGB16U(src, dest, tempBuffer, unsafe.Pointer(transform), interpolation, unsafe.Pointer(&_out0), flags)
+	return _ret, _out0
 }
 
 var _fnVImagePerspectiveWarpARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int32, unsafe.Pointer, uint32) int
 
 // VImagePerspectiveWarpARGB8888 calls the vImage framework function vImagePerspectiveWarp_ARGB8888.
-func VImagePerspectiveWarpARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, interpolation int32, flags uint32) (result int, transform VImagePerpsectiveTransform, backColor uint8) {
+func VImagePerspectiveWarpARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImagePerpsectiveTransform, interpolation int32, flags uint32) (result int, backColor uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePerspectiveWarpARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePerspectiveWarpARGB8888, _lib, "vImagePerspectiveWarp_ARGB8888")
 	}
-	var _out0 VImagePerpsectiveTransform
-	var _out1 uint8
-	_ret := _fnVImagePerspectiveWarpARGB8888(src, dest, tempBuffer, unsafe.Pointer(&_out0), interpolation, unsafe.Pointer(&_out1), flags)
-	return _ret, _out0, _out1
+	var _out0 uint8
+	_ret := _fnVImagePerspectiveWarpARGB8888(src, dest, tempBuffer, unsafe.Pointer(transform), interpolation, unsafe.Pointer(&_out0), flags)
+	return _ret, _out0
 }
 
 var _fnVImagePerspectiveWarpPlanar16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int32, uint16, uint32) int
 
 // VImagePerspectiveWarpPlanar16F calls the vImage framework function vImagePerspectiveWarp_Planar16F.
-func VImagePerspectiveWarpPlanar16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, interpolation int32, backColor uint16, flags uint32) (result int, transform VImagePerpsectiveTransform) {
+func VImagePerspectiveWarpPlanar16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImagePerpsectiveTransform, interpolation int32, backColor uint16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePerspectiveWarpPlanar16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePerspectiveWarpPlanar16F, _lib, "vImagePerspectiveWarp_Planar16F")
 	}
-	var _out0 VImagePerpsectiveTransform
-	_ret := _fnVImagePerspectiveWarpPlanar16F(src, dest, tempBuffer, unsafe.Pointer(&_out0), interpolation, backColor, flags)
-	return _ret, _out0
+	return _fnVImagePerspectiveWarpPlanar16F(src, dest, tempBuffer, unsafe.Pointer(transform), interpolation, backColor, flags)
 }
 
 var _fnVImagePerspectiveWarpPlanar16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int32, uint16, uint32) int
 
 // VImagePerspectiveWarpPlanar16U calls the vImage framework function vImagePerspectiveWarp_Planar16U.
-func VImagePerspectiveWarpPlanar16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, interpolation int32, backColor uint16, flags uint32) (result int, transform VImagePerpsectiveTransform) {
+func VImagePerspectiveWarpPlanar16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImagePerpsectiveTransform, interpolation int32, backColor uint16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePerspectiveWarpPlanar16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePerspectiveWarpPlanar16U, _lib, "vImagePerspectiveWarp_Planar16U")
 	}
-	var _out0 VImagePerpsectiveTransform
-	_ret := _fnVImagePerspectiveWarpPlanar16U(src, dest, tempBuffer, unsafe.Pointer(&_out0), interpolation, backColor, flags)
-	return _ret, _out0
+	return _fnVImagePerspectiveWarpPlanar16U(src, dest, tempBuffer, unsafe.Pointer(transform), interpolation, backColor, flags)
 }
 
 var _fnVImagePerspectiveWarpPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int32, uint8, uint32) int
 
 // VImagePerspectiveWarpPlanar8 calls the vImage framework function vImagePerspectiveWarp_Planar8.
-func VImagePerspectiveWarpPlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, interpolation int32, backColor uint8, flags uint32) (result int, transform VImagePerpsectiveTransform) {
+func VImagePerspectiveWarpPlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, transform *VImagePerpsectiveTransform, interpolation int32, backColor uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePerspectiveWarpPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePerspectiveWarpPlanar8, _lib, "vImagePerspectiveWarp_Planar8")
 	}
-	var _out0 VImagePerpsectiveTransform
-	_ret := _fnVImagePerspectiveWarpPlanar8(src, dest, tempBuffer, unsafe.Pointer(&_out0), interpolation, backColor, flags)
-	return _ret, _out0
+	return _fnVImagePerspectiveWarpPlanar8(src, dest, tempBuffer, unsafe.Pointer(transform), interpolation, backColor, flags)
 }
 
 var _fnVImagePiecewiseGammaPlanar16Q12 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int16, uint32) int
 
 // VImagePiecewiseGammaPlanar16Q12 calls the vImage framework function vImagePiecewiseGamma_Planar16Q12.
-func VImagePiecewiseGammaPlanar16Q12(src unsafe.Pointer, dest unsafe.Pointer, gamma unsafe.Pointer, boundary int16, flags uint32) (result int, exponentialCoeffs float32, linearCoeffs float32) {
+func VImagePiecewiseGammaPlanar16Q12(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary int16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanar16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanar16Q12, _lib, "vImagePiecewiseGamma_Planar16Q12")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImagePiecewiseGammaPlanar16Q12(src, dest, unsafe.Pointer(&_out0), gamma, unsafe.Pointer(&_out1), boundary, flags)
-	return _ret, _out0, _out1
+	return _fnVImagePiecewiseGammaPlanar16Q12(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 var _fnVImagePiecewiseGammaPlanar16Q12toPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int16, uint32) int
 
 // VImagePiecewiseGammaPlanar16Q12toPlanar8 calls the vImage framework function vImagePiecewiseGamma_Planar16Q12toPlanar8.
-func VImagePiecewiseGammaPlanar16Q12toPlanar8(src unsafe.Pointer, dest unsafe.Pointer, gamma unsafe.Pointer, boundary int16, flags uint32) (result int, exponentialCoeffs float32, linearCoeffs float32) {
+func VImagePiecewiseGammaPlanar16Q12toPlanar8(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary int16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanar16Q12toPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanar16Q12toPlanar8, _lib, "vImagePiecewiseGamma_Planar16Q12toPlanar8")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImagePiecewiseGammaPlanar16Q12toPlanar8(src, dest, unsafe.Pointer(&_out0), gamma, unsafe.Pointer(&_out1), boundary, flags)
-	return _ret, _out0, _out1
+	return _fnVImagePiecewiseGammaPlanar16Q12toPlanar8(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 var _fnVImagePiecewiseGammaPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImagePiecewiseGammaPlanar8 calls the vImage framework function vImagePiecewiseGamma_Planar8.
-func VImagePiecewiseGammaPlanar8(src unsafe.Pointer, dest unsafe.Pointer, gamma unsafe.Pointer, boundary uint8, flags uint32) (result int, exponentialCoeffs float32, linearCoeffs float32) {
+func VImagePiecewiseGammaPlanar8(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanar8, _lib, "vImagePiecewiseGamma_Planar8")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImagePiecewiseGammaPlanar8(src, dest, unsafe.Pointer(&_out0), gamma, unsafe.Pointer(&_out1), boundary, flags)
-	return _ret, _out0, _out1
+	return _fnVImagePiecewiseGammaPlanar8(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 var _fnVImagePiecewiseGammaPlanar8toPlanar16Q12 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImagePiecewiseGammaPlanar8toPlanar16Q12 calls the vImage framework function vImagePiecewiseGamma_Planar8toPlanar16Q12.
-func VImagePiecewiseGammaPlanar8toPlanar16Q12(src unsafe.Pointer, dest unsafe.Pointer, gamma unsafe.Pointer, boundary uint8, flags uint32) (result int, exponentialCoeffs float32, linearCoeffs float32) {
+func VImagePiecewiseGammaPlanar8toPlanar16Q12(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanar8toPlanar16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanar8toPlanar16Q12, _lib, "vImagePiecewiseGamma_Planar8toPlanar16Q12")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImagePiecewiseGammaPlanar8toPlanar16Q12(src, dest, unsafe.Pointer(&_out0), gamma, unsafe.Pointer(&_out1), boundary, flags)
-	return _ret, _out0, _out1
+	return _fnVImagePiecewiseGammaPlanar8toPlanar16Q12(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 var _fnVImagePiecewiseGammaPlanar8toPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint8, uint32) int
 
 // VImagePiecewiseGammaPlanar8toPlanarF calls the vImage framework function vImagePiecewiseGamma_Planar8toPlanarF.
-func VImagePiecewiseGammaPlanar8toPlanarF(src unsafe.Pointer, dest unsafe.Pointer, gamma unsafe.Pointer, boundary uint8, flags uint32) (result int, exponentialCoeffs float32, linearCoeffs float32) {
+func VImagePiecewiseGammaPlanar8toPlanarF(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanar8toPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanar8toPlanarF, _lib, "vImagePiecewiseGamma_Planar8toPlanarF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImagePiecewiseGammaPlanar8toPlanarF(src, dest, unsafe.Pointer(&_out0), gamma, unsafe.Pointer(&_out1), boundary, flags)
-	return _ret, _out0, _out1
+	return _fnVImagePiecewiseGammaPlanar8toPlanarF(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 var _fnVImagePiecewiseGammaPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImagePiecewiseGammaPlanarF calls the vImage framework function vImagePiecewiseGamma_PlanarF.
-func VImagePiecewiseGammaPlanarF(src unsafe.Pointer, dest unsafe.Pointer, gamma unsafe.Pointer, boundary unsafe.Pointer, flags uint32) (result int, exponentialCoeffs float32, linearCoeffs float32) {
+func VImagePiecewiseGammaPlanarF(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanarF, _lib, "vImagePiecewiseGamma_PlanarF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImagePiecewiseGammaPlanarF(src, dest, unsafe.Pointer(&_out0), gamma, unsafe.Pointer(&_out1), boundary, flags)
-	return _ret, _out0, _out1
+	return _fnVImagePiecewiseGammaPlanarF(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 var _fnVImagePiecewiseGammaPlanarFtoPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImagePiecewiseGammaPlanarFtoPlanar8 calls the vImage framework function vImagePiecewiseGamma_PlanarFtoPlanar8.
-func VImagePiecewiseGammaPlanarFtoPlanar8(src unsafe.Pointer, dest unsafe.Pointer, gamma unsafe.Pointer, boundary unsafe.Pointer, flags uint32) (result int, exponentialCoeffs float32, linearCoeffs float32) {
+func VImagePiecewiseGammaPlanarFtoPlanar8(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseGammaPlanarFtoPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseGammaPlanarFtoPlanar8, _lib, "vImagePiecewiseGamma_PlanarFtoPlanar8")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImagePiecewiseGammaPlanarFtoPlanar8(src, dest, unsafe.Pointer(&_out0), gamma, unsafe.Pointer(&_out1), boundary, flags)
-	return _ret, _out0, _out1
+	return _fnVImagePiecewiseGammaPlanarFtoPlanar8(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 var _fnVImagePiecewisePolynomialPlanar8toPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, uint32, uint32) int
 
 // VImagePiecewisePolynomialPlanar8toPlanarF calls the vImage framework function vImagePiecewisePolynomial_Planar8toPlanarF.
-func VImagePiecewisePolynomialPlanar8toPlanarF(src unsafe.Pointer, dest unsafe.Pointer, coefficients unsafe.Pointer, order uint32, log2segments uint32, flags uint32) (result int, boundaries float32) {
+func VImagePiecewisePolynomialPlanar8toPlanarF(src unsafe.Pointer, dest unsafe.Pointer, coefficients unsafe.Pointer, boundaries unsafe.Pointer, order uint32, log2segments uint32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewisePolynomialPlanar8toPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewisePolynomialPlanar8toPlanarF, _lib, "vImagePiecewisePolynomial_Planar8toPlanarF")
 	}
-	var _out0 float32
-	_ret := _fnVImagePiecewisePolynomialPlanar8toPlanarF(src, dest, coefficients, unsafe.Pointer(&_out0), order, log2segments, flags)
-	return _ret, _out0
+	return _fnVImagePiecewisePolynomialPlanar8toPlanarF(src, dest, coefficients, boundaries, order, log2segments, flags)
 }
 
 var _fnVImagePiecewisePolynomialPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, uint32, uint32) int
 
 // VImagePiecewisePolynomialPlanarF calls the vImage framework function vImagePiecewisePolynomial_PlanarF.
-func VImagePiecewisePolynomialPlanarF(src unsafe.Pointer, dest unsafe.Pointer, coefficients unsafe.Pointer, order uint32, log2segments uint32, flags uint32) (result int, boundaries float32) {
+func VImagePiecewisePolynomialPlanarF(src unsafe.Pointer, dest unsafe.Pointer, coefficients unsafe.Pointer, boundaries unsafe.Pointer, order uint32, log2segments uint32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewisePolynomialPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewisePolynomialPlanarF, _lib, "vImagePiecewisePolynomial_PlanarF")
 	}
-	var _out0 float32
-	_ret := _fnVImagePiecewisePolynomialPlanarF(src, dest, coefficients, unsafe.Pointer(&_out0), order, log2segments, flags)
-	return _ret, _out0
+	return _fnVImagePiecewisePolynomialPlanarF(src, dest, coefficients, boundaries, order, log2segments, flags)
 }
 
 var _fnVImagePiecewisePolynomialPlanarFtoPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, uint32, uint32) int
 
 // VImagePiecewisePolynomialPlanarFtoPlanar8 calls the vImage framework function vImagePiecewisePolynomial_PlanarFtoPlanar8.
-func VImagePiecewisePolynomialPlanarFtoPlanar8(src unsafe.Pointer, dest unsafe.Pointer, coefficients unsafe.Pointer, order uint32, log2segments uint32, flags uint32) (result int, boundaries float32) {
+func VImagePiecewisePolynomialPlanarFtoPlanar8(src unsafe.Pointer, dest unsafe.Pointer, coefficients unsafe.Pointer, boundaries unsafe.Pointer, order uint32, log2segments uint32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewisePolynomialPlanarFtoPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewisePolynomialPlanarFtoPlanar8, _lib, "vImagePiecewisePolynomial_PlanarFtoPlanar8")
 	}
-	var _out0 float32
-	_ret := _fnVImagePiecewisePolynomialPlanarFtoPlanar8(src, dest, coefficients, unsafe.Pointer(&_out0), order, log2segments, flags)
-	return _ret, _out0
+	return _fnVImagePiecewisePolynomialPlanarFtoPlanar8(src, dest, coefficients, boundaries, order, log2segments, flags)
 }
 
 var _fnVImagePiecewiseRationalPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, uint32, uint32, uint32) int
 
 // VImagePiecewiseRationalPlanarF calls the vImage framework function vImagePiecewiseRational_PlanarF.
-func VImagePiecewiseRationalPlanarF(src unsafe.Pointer, dest unsafe.Pointer, topCoefficients unsafe.Pointer, bottomCoefficients unsafe.Pointer, topOrder uint32, bottomOrder uint32, log2segments uint32, flags uint32) (result int, boundaries float32) {
+func VImagePiecewiseRationalPlanarF(src unsafe.Pointer, dest unsafe.Pointer, topCoefficients unsafe.Pointer, bottomCoefficients unsafe.Pointer, boundaries unsafe.Pointer, topOrder uint32, bottomOrder uint32, log2segments uint32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePiecewiseRationalPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePiecewiseRationalPlanarF, _lib, "vImagePiecewiseRational_PlanarF")
 	}
-	var _out0 float32
-	_ret := _fnVImagePiecewiseRationalPlanarF(src, dest, topCoefficients, bottomCoefficients, unsafe.Pointer(&_out0), topOrder, bottomOrder, log2segments, flags)
-	return _ret, _out0
+	return _fnVImagePiecewiseRationalPlanarF(src, dest, topCoefficients, bottomCoefficients, boundaries, topOrder, bottomOrder, log2segments, flags)
 }
 
 var _fnVImagePremultipliedAlphaBlendDarkenRGBA8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -5672,27 +5172,23 @@ func VImagePremultipliedAlphaBlendScreenRGBA8888(srcTop unsafe.Pointer, srcBotto
 var _fnVImagePremultipliedAlphaBlendWithPermuteARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImagePremultipliedAlphaBlendWithPermuteARGB8888 calls the vImage framework function vImagePremultipliedAlphaBlendWithPermute_ARGB8888.
-func VImagePremultipliedAlphaBlendWithPermuteARGB8888(srcTop unsafe.Pointer, srcBottom unsafe.Pointer, dest unsafe.Pointer, makeDestAlphaOpaque bool, flags uint32) (result int, permuteMap uint8) {
+func VImagePremultipliedAlphaBlendWithPermuteARGB8888(srcTop unsafe.Pointer, srcBottom unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, makeDestAlphaOpaque bool, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePremultipliedAlphaBlendWithPermuteARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePremultipliedAlphaBlendWithPermuteARGB8888, _lib, "vImagePremultipliedAlphaBlendWithPermute_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImagePremultipliedAlphaBlendWithPermuteARGB8888(srcTop, srcBottom, dest, unsafe.Pointer(&_out0), makeDestAlphaOpaque, flags)
-	return _ret, _out0
+	return _fnVImagePremultipliedAlphaBlendWithPermuteARGB8888(srcTop, srcBottom, dest, permuteMap, makeDestAlphaOpaque, flags)
 }
 
 var _fnVImagePremultipliedAlphaBlendWithPermuteRGBA8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, bool, uint32) int
 
 // VImagePremultipliedAlphaBlendWithPermuteRGBA8888 calls the vImage framework function vImagePremultipliedAlphaBlendWithPermute_RGBA8888.
-func VImagePremultipliedAlphaBlendWithPermuteRGBA8888(srcTop unsafe.Pointer, srcBottom unsafe.Pointer, dest unsafe.Pointer, makeDestAlphaOpaque bool, flags uint32) (result int, permuteMap uint8) {
+func VImagePremultipliedAlphaBlendWithPermuteRGBA8888(srcTop unsafe.Pointer, srcBottom unsafe.Pointer, dest unsafe.Pointer, permuteMap unsafe.Pointer, makeDestAlphaOpaque bool, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImagePremultipliedAlphaBlendWithPermuteRGBA8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImagePremultipliedAlphaBlendWithPermuteRGBA8888, _lib, "vImagePremultipliedAlphaBlendWithPermute_RGBA8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImagePremultipliedAlphaBlendWithPermuteRGBA8888(srcTop, srcBottom, dest, unsafe.Pointer(&_out0), makeDestAlphaOpaque, flags)
-	return _ret, _out0
+	return _fnVImagePremultipliedAlphaBlendWithPermuteRGBA8888(srcTop, srcBottom, dest, permuteMap, makeDestAlphaOpaque, flags)
 }
 
 var _fnVImagePremultipliedAlphaBlendARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
@@ -5929,135 +5425,111 @@ func VImagePremultiplyDataRGBAFFFF(src unsafe.Pointer, dest unsafe.Pointer, flag
 var _fnVImageRichardsonLucyDeConvolveARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, uint32, uint32, uint32, uint32, int32, int32, unsafe.Pointer, uint32, uint32) int
 
 // VImageRichardsonLucyDeConvolveARGB8888 calls the vImage framework function vImageRichardsonLucyDeConvolve_ARGB8888.
-func VImageRichardsonLucyDeConvolveARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, kernelHeight2 uint32, kernelWidth2 uint32, divisor int32, divisor2 int32, backgroundColor unsafe.Pointer, iterationCount uint32, flags uint32) (result int, kernel int16, kernel2 int16) {
+func VImageRichardsonLucyDeConvolveARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernel2 unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, kernelHeight2 uint32, kernelWidth2 uint32, divisor int32, divisor2 int32, backgroundColor unsafe.Pointer, iterationCount uint32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRichardsonLucyDeConvolveARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRichardsonLucyDeConvolveARGB8888, _lib, "vImageRichardsonLucyDeConvolve_ARGB8888")
 	}
-	var _out0 int16
-	var _out1 int16
-	_ret := _fnVImageRichardsonLucyDeConvolveARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), kernelHeight, kernelWidth, kernelHeight2, kernelWidth2, divisor, divisor2, backgroundColor, iterationCount, flags)
-	return _ret, _out0, _out1
+	return _fnVImageRichardsonLucyDeConvolveARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernel2, kernelHeight, kernelWidth, kernelHeight2, kernelWidth2, divisor, divisor2, backgroundColor, iterationCount, flags)
 }
 
 var _fnVImageRichardsonLucyDeConvolveARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, uint32, uint32, uint32, uint32, unsafe.Pointer, uint32, uint32) int
 
 // VImageRichardsonLucyDeConvolveARGBFFFF calls the vImage framework function vImageRichardsonLucyDeConvolve_ARGBFFFF.
-func VImageRichardsonLucyDeConvolveARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, kernelHeight2 uint32, kernelWidth2 uint32, backgroundColor unsafe.Pointer, iterationCount uint32, flags uint32) (result int, kernel float32, kernel2 float32) {
+func VImageRichardsonLucyDeConvolveARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernel2 unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, kernelHeight2 uint32, kernelWidth2 uint32, backgroundColor unsafe.Pointer, iterationCount uint32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRichardsonLucyDeConvolveARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRichardsonLucyDeConvolveARGBFFFF, _lib, "vImageRichardsonLucyDeConvolve_ARGBFFFF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageRichardsonLucyDeConvolveARGBFFFF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), kernelHeight, kernelWidth, kernelHeight2, kernelWidth2, backgroundColor, iterationCount, flags)
-	return _ret, _out0, _out1
+	return _fnVImageRichardsonLucyDeConvolveARGBFFFF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernel2, kernelHeight, kernelWidth, kernelHeight2, kernelWidth2, backgroundColor, iterationCount, flags)
 }
 
 var _fnVImageRichardsonLucyDeConvolvePlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, uint32, uint32, uint32, uint32, int32, int32, uint8, uint32, uint32) int
 
 // VImageRichardsonLucyDeConvolvePlanar8 calls the vImage framework function vImageRichardsonLucyDeConvolve_Planar8.
-func VImageRichardsonLucyDeConvolvePlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, kernelHeight2 uint32, kernelWidth2 uint32, divisor int32, divisor2 int32, backgroundColor uint8, iterationCount uint32, flags uint32) (result int, kernel int16, kernel2 int16) {
+func VImageRichardsonLucyDeConvolvePlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernel2 unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, kernelHeight2 uint32, kernelWidth2 uint32, divisor int32, divisor2 int32, backgroundColor uint8, iterationCount uint32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRichardsonLucyDeConvolvePlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRichardsonLucyDeConvolvePlanar8, _lib, "vImageRichardsonLucyDeConvolve_Planar8")
 	}
-	var _out0 int16
-	var _out1 int16
-	_ret := _fnVImageRichardsonLucyDeConvolvePlanar8(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), kernelHeight, kernelWidth, kernelHeight2, kernelWidth2, divisor, divisor2, backgroundColor, iterationCount, flags)
-	return _ret, _out0, _out1
+	return _fnVImageRichardsonLucyDeConvolvePlanar8(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernel2, kernelHeight, kernelWidth, kernelHeight2, kernelWidth2, divisor, divisor2, backgroundColor, iterationCount, flags)
 }
 
 var _fnVImageRichardsonLucyDeConvolvePlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, uint32, uint32, uint32, uint32, float32, uint32, uint32) int
 
 // VImageRichardsonLucyDeConvolvePlanarF calls the vImage framework function vImageRichardsonLucyDeConvolve_PlanarF.
-func VImageRichardsonLucyDeConvolvePlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, kernelHeight2 uint32, kernelWidth2 uint32, backgroundColor float32, iterationCount uint32, flags uint32) (result int, kernel float32, kernel2 float32) {
+func VImageRichardsonLucyDeConvolvePlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernel unsafe.Pointer, kernel2 unsafe.Pointer, kernelHeight uint32, kernelWidth uint32, kernelHeight2 uint32, kernelWidth2 uint32, backgroundColor float32, iterationCount uint32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRichardsonLucyDeConvolvePlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRichardsonLucyDeConvolvePlanarF, _lib, "vImageRichardsonLucyDeConvolve_PlanarF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageRichardsonLucyDeConvolvePlanarF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), kernelHeight, kernelWidth, kernelHeight2, kernelWidth2, backgroundColor, iterationCount, flags)
-	return _ret, _out0, _out1
+	return _fnVImageRichardsonLucyDeConvolvePlanarF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernel, kernel2, kernelHeight, kernelWidth, kernelHeight2, kernelWidth2, backgroundColor, iterationCount, flags)
 }
 
 var _fnVImageRotate90ARGB16F func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
 
 // VImageRotate90ARGB16F calls the vImage framework function vImageRotate90_ARGB16F.
-func VImageRotate90ARGB16F(src unsafe.Pointer, dest unsafe.Pointer, rotationConstant uint8, flags uint32) (result int, backColor uint16) {
+func VImageRotate90ARGB16F(src unsafe.Pointer, dest unsafe.Pointer, rotationConstant uint8, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRotate90ARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRotate90ARGB16F, _lib, "vImageRotate90_ARGB16F")
 	}
-	var _out0 uint16
-	_ret := _fnVImageRotate90ARGB16F(src, dest, rotationConstant, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageRotate90ARGB16F(src, dest, rotationConstant, backColor, flags)
 }
 
 var _fnVImageRotate90ARGB16S func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
 
 // VImageRotate90ARGB16S calls the vImage framework function vImageRotate90_ARGB16S.
-func VImageRotate90ARGB16S(src unsafe.Pointer, dest unsafe.Pointer, rotationConstant uint8, flags uint32) (result int, backColor int16) {
+func VImageRotate90ARGB16S(src unsafe.Pointer, dest unsafe.Pointer, rotationConstant uint8, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRotate90ARGB16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRotate90ARGB16S, _lib, "vImageRotate90_ARGB16S")
 	}
-	var _out0 int16
-	_ret := _fnVImageRotate90ARGB16S(src, dest, rotationConstant, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageRotate90ARGB16S(src, dest, rotationConstant, backColor, flags)
 }
 
 var _fnVImageRotate90ARGB16U func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
 
 // VImageRotate90ARGB16U calls the vImage framework function vImageRotate90_ARGB16U.
-func VImageRotate90ARGB16U(src unsafe.Pointer, dest unsafe.Pointer, rotationConstant uint8, flags uint32) (result int, backColor uint16) {
+func VImageRotate90ARGB16U(src unsafe.Pointer, dest unsafe.Pointer, rotationConstant uint8, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRotate90ARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRotate90ARGB16U, _lib, "vImageRotate90_ARGB16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageRotate90ARGB16U(src, dest, rotationConstant, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageRotate90ARGB16U(src, dest, rotationConstant, backColor, flags)
 }
 
 var _fnVImageRotate90ARGB8888 func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
 
 // VImageRotate90ARGB8888 calls the vImage framework function vImageRotate90_ARGB8888.
-func VImageRotate90ARGB8888(src unsafe.Pointer, dest unsafe.Pointer, rotationConstant uint8, flags uint32) (result int, backColor uint8) {
+func VImageRotate90ARGB8888(src unsafe.Pointer, dest unsafe.Pointer, rotationConstant uint8, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRotate90ARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRotate90ARGB8888, _lib, "vImageRotate90_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageRotate90ARGB8888(src, dest, rotationConstant, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageRotate90ARGB8888(src, dest, rotationConstant, backColor, flags)
 }
 
 var _fnVImageRotate90ARGBFFFF func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
 
 // VImageRotate90ARGBFFFF calls the vImage framework function vImageRotate90_ARGBFFFF.
-func VImageRotate90ARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, rotationConstant uint8, flags uint32) (result int, backColor float32) {
+func VImageRotate90ARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, rotationConstant uint8, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRotate90ARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRotate90ARGBFFFF, _lib, "vImageRotate90_ARGBFFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageRotate90ARGBFFFF(src, dest, rotationConstant, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageRotate90ARGBFFFF(src, dest, rotationConstant, backColor, flags)
 }
 
 var _fnVImageRotate90CbCr16F func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, uint32) int
 
 // VImageRotate90CbCr16F calls the vImage framework function vImageRotate90_CbCr16F.
-func VImageRotate90CbCr16F(src unsafe.Pointer, dest unsafe.Pointer, rotationConstant uint8, flags uint32) (result int, backColor uint16) {
+func VImageRotate90CbCr16F(src unsafe.Pointer, dest unsafe.Pointer, rotationConstant uint8, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRotate90CbCr16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRotate90CbCr16F, _lib, "vImageRotate90_CbCr16F")
 	}
-	var _out0 uint16
-	_ret := _fnVImageRotate90CbCr16F(src, dest, rotationConstant, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageRotate90CbCr16F(src, dest, rotationConstant, backColor, flags)
 }
 
 var _fnVImageRotate90Planar16F func(unsafe.Pointer, unsafe.Pointer, uint8, uint16, uint32) int
@@ -6107,79 +5579,67 @@ func VImageRotate90PlanarF(src unsafe.Pointer, dest unsafe.Pointer, rotationCons
 var _fnVImageRotateARGB16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, uint32) int
 
 // VImageRotateARGB16F calls the vImage framework function vImageRotate_ARGB16F.
-func VImageRotateARGB16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, angleInRadians float32, flags uint32) (result int, backColor uint16) {
+func VImageRotateARGB16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, angleInRadians float32, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRotateARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRotateARGB16F, _lib, "vImageRotate_ARGB16F")
 	}
-	var _out0 uint16
-	_ret := _fnVImageRotateARGB16F(src, dest, tempBuffer, angleInRadians, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageRotateARGB16F(src, dest, tempBuffer, angleInRadians, backColor, flags)
 }
 
 var _fnVImageRotateARGB16S func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, uint32) int
 
 // VImageRotateARGB16S calls the vImage framework function vImageRotate_ARGB16S.
-func VImageRotateARGB16S(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, angleInRadians float32, flags uint32) (result int, backColor int16) {
+func VImageRotateARGB16S(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, angleInRadians float32, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRotateARGB16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRotateARGB16S, _lib, "vImageRotate_ARGB16S")
 	}
-	var _out0 int16
-	_ret := _fnVImageRotateARGB16S(src, dest, tempBuffer, angleInRadians, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageRotateARGB16S(src, dest, tempBuffer, angleInRadians, backColor, flags)
 }
 
 var _fnVImageRotateARGB16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, uint32) int
 
 // VImageRotateARGB16U calls the vImage framework function vImageRotate_ARGB16U.
-func VImageRotateARGB16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, angleInRadians float32, flags uint32) (result int, backColor uint16) {
+func VImageRotateARGB16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, angleInRadians float32, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRotateARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRotateARGB16U, _lib, "vImageRotate_ARGB16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageRotateARGB16U(src, dest, tempBuffer, angleInRadians, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageRotateARGB16U(src, dest, tempBuffer, angleInRadians, backColor, flags)
 }
 
 var _fnVImageRotateARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, uint32) int
 
 // VImageRotateARGB8888 calls the vImage framework function vImageRotate_ARGB8888.
-func VImageRotateARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, angleInRadians float32, flags uint32) (result int, backColor uint8) {
+func VImageRotateARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, angleInRadians float32, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRotateARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRotateARGB8888, _lib, "vImageRotate_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageRotateARGB8888(src, dest, tempBuffer, angleInRadians, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageRotateARGB8888(src, dest, tempBuffer, angleInRadians, backColor, flags)
 }
 
 var _fnVImageRotateARGBFFFF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, uint32) int
 
 // VImageRotateARGBFFFF calls the vImage framework function vImageRotate_ARGBFFFF.
-func VImageRotateARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, angleInRadians float32, flags uint32) (result int, backColor float32) {
+func VImageRotateARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, angleInRadians float32, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRotateARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRotateARGBFFFF, _lib, "vImageRotate_ARGBFFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageRotateARGBFFFF(src, dest, tempBuffer, angleInRadians, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageRotateARGBFFFF(src, dest, tempBuffer, angleInRadians, backColor, flags)
 }
 
 var _fnVImageRotateCbCr16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, unsafe.Pointer, uint32) int
 
 // VImageRotateCbCr16F calls the vImage framework function vImageRotate_CbCr16F.
-func VImageRotateCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, angleInRadians float32, flags uint32) (result int, backColor uint16) {
+func VImageRotateCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, angleInRadians float32, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageRotateCbCr16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageRotateCbCr16F, _lib, "vImageRotate_CbCr16F")
 	}
-	var _out0 uint16
-	_ret := _fnVImageRotateCbCr16F(src, dest, tempBuffer, angleInRadians, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageRotateCbCr16F(src, dest, tempBuffer, angleInRadians, backColor, flags)
 }
 
 var _fnVImageRotatePlanar16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, float32, uint16, uint32) int
@@ -6394,169 +5854,133 @@ func VImageSelectChannelsARGBFFFF(newSrc unsafe.Pointer, origSrc unsafe.Pointer,
 var _fnVImageSepConvolveARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, unsafe.Pointer, uint32, float32, unsafe.Pointer, uint32) int
 
 // VImageSepConvolveARGB8888 calls the vImage framework function vImageSepConvolve_ARGB8888.
-func VImageSepConvolveARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelXWidth uint32, kernelYWidth uint32, bias float32, flags uint32) (result int, kernelX float32, kernelY float32, backgroundColor uint8) {
+func VImageSepConvolveARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelX unsafe.Pointer, kernelXWidth uint32, kernelY unsafe.Pointer, kernelYWidth uint32, bias float32, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageSepConvolveARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageSepConvolveARGB8888, _lib, "vImageSepConvolve_ARGB8888")
 	}
-	var _out0 float32
-	var _out1 float32
-	var _out2 uint8
-	_ret := _fnVImageSepConvolveARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelXWidth, unsafe.Pointer(&_out1), kernelYWidth, bias, unsafe.Pointer(&_out2), flags)
-	return _ret, _out0, _out1, _out2
+	return _fnVImageSepConvolveARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernelX, kernelXWidth, kernelY, kernelYWidth, bias, backgroundColor, flags)
 }
 
 var _fnVImageSepConvolvePlanar16F func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, unsafe.Pointer, uint32, float32, uint16, uint32) int
 
 // VImageSepConvolvePlanar16F calls the vImage framework function vImageSepConvolve_Planar16F.
-func VImageSepConvolvePlanar16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelXWidth uint32, kernelYWidth uint32, bias float32, backgroundColor uint16, flags uint32) (result int, kernelX float32, kernelY float32) {
+func VImageSepConvolvePlanar16F(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelX unsafe.Pointer, kernelXWidth uint32, kernelY unsafe.Pointer, kernelYWidth uint32, bias float32, backgroundColor uint16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageSepConvolvePlanar16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageSepConvolvePlanar16F, _lib, "vImageSepConvolve_Planar16F")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageSepConvolvePlanar16F(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelXWidth, unsafe.Pointer(&_out1), kernelYWidth, bias, backgroundColor, flags)
-	return _ret, _out0, _out1
+	return _fnVImageSepConvolvePlanar16F(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernelX, kernelXWidth, kernelY, kernelYWidth, bias, backgroundColor, flags)
 }
 
 var _fnVImageSepConvolvePlanar16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, unsafe.Pointer, uint32, float32, uint16, uint32) int
 
 // VImageSepConvolvePlanar16U calls the vImage framework function vImageSepConvolve_Planar16U.
-func VImageSepConvolvePlanar16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelXWidth uint32, kernelYWidth uint32, bias float32, backgroundColor uint16, flags uint32) (result int, kernelX float32, kernelY float32) {
+func VImageSepConvolvePlanar16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelX unsafe.Pointer, kernelXWidth uint32, kernelY unsafe.Pointer, kernelYWidth uint32, bias float32, backgroundColor uint16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageSepConvolvePlanar16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageSepConvolvePlanar16U, _lib, "vImageSepConvolve_Planar16U")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageSepConvolvePlanar16U(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelXWidth, unsafe.Pointer(&_out1), kernelYWidth, bias, backgroundColor, flags)
-	return _ret, _out0, _out1
+	return _fnVImageSepConvolvePlanar16U(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernelX, kernelXWidth, kernelY, kernelYWidth, bias, backgroundColor, flags)
 }
 
 var _fnVImageSepConvolvePlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, unsafe.Pointer, uint32, float32, uint16, uint32) int
 
 // VImageSepConvolvePlanar8 calls the vImage framework function vImageSepConvolve_Planar8.
-func VImageSepConvolvePlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelXWidth uint32, kernelYWidth uint32, bias float32, backgroundColor uint16, flags uint32) (result int, kernelX float32, kernelY float32) {
+func VImageSepConvolvePlanar8(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelX unsafe.Pointer, kernelXWidth uint32, kernelY unsafe.Pointer, kernelYWidth uint32, bias float32, backgroundColor uint16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageSepConvolvePlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageSepConvolvePlanar8, _lib, "vImageSepConvolve_Planar8")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageSepConvolvePlanar8(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelXWidth, unsafe.Pointer(&_out1), kernelYWidth, bias, backgroundColor, flags)
-	return _ret, _out0, _out1
+	return _fnVImageSepConvolvePlanar8(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernelX, kernelXWidth, kernelY, kernelYWidth, bias, backgroundColor, flags)
 }
 
 var _fnVImageSepConvolvePlanar8to16U func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, unsafe.Pointer, uint32, float32, float32, uint8, uint32) int
 
 // VImageSepConvolvePlanar8to16U calls the vImage framework function vImageSepConvolve_Planar8to16U.
-func VImageSepConvolvePlanar8to16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelXWidth uint32, kernelYWidth uint32, scale float32, bias float32, backgroundColor uint8, flags uint32) (result int, kernelX float32, kernelY float32) {
+func VImageSepConvolvePlanar8to16U(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelX unsafe.Pointer, kernelXWidth uint32, kernelY unsafe.Pointer, kernelYWidth uint32, scale float32, bias float32, backgroundColor uint8, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageSepConvolvePlanar8to16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageSepConvolvePlanar8to16U, _lib, "vImageSepConvolve_Planar8to16U")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageSepConvolvePlanar8to16U(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelXWidth, unsafe.Pointer(&_out1), kernelYWidth, scale, bias, backgroundColor, flags)
-	return _ret, _out0, _out1
+	return _fnVImageSepConvolvePlanar8to16U(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernelX, kernelXWidth, kernelY, kernelYWidth, scale, bias, backgroundColor, flags)
 }
 
 var _fnVImageSepConvolvePlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, unsafe.Pointer, uint32, unsafe.Pointer, uint32, float32, float32, uint32) int
 
 // VImageSepConvolvePlanarF calls the vImage framework function vImageSepConvolve_PlanarF.
-func VImageSepConvolvePlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelXWidth uint32, kernelYWidth uint32, bias float32, backgroundColor float32, flags uint32) (result int, kernelX float32, kernelY float32) {
+func VImageSepConvolvePlanarF(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelX unsafe.Pointer, kernelXWidth uint32, kernelY unsafe.Pointer, kernelYWidth uint32, bias float32, backgroundColor float32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageSepConvolvePlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageSepConvolvePlanarF, _lib, "vImageSepConvolve_PlanarF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageSepConvolvePlanarF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, unsafe.Pointer(&_out0), kernelXWidth, unsafe.Pointer(&_out1), kernelYWidth, bias, backgroundColor, flags)
-	return _ret, _out0, _out1
+	return _fnVImageSepConvolvePlanarF(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernelX, kernelXWidth, kernelY, kernelYWidth, bias, backgroundColor, flags)
 }
 
 var _fnVImageSymmetricPiecewiseGammaPlanar16Q12 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int16, uint32) int
 
 // VImageSymmetricPiecewiseGammaPlanar16Q12 calls the vImage framework function vImageSymmetricPiecewiseGamma_Planar16Q12.
-func VImageSymmetricPiecewiseGammaPlanar16Q12(src unsafe.Pointer, dest unsafe.Pointer, gamma unsafe.Pointer, boundary int16, flags uint32) (result int, exponentialCoeffs float32, linearCoeffs float32) {
+func VImageSymmetricPiecewiseGammaPlanar16Q12(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary int16, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageSymmetricPiecewiseGammaPlanar16Q12 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageSymmetricPiecewiseGammaPlanar16Q12, _lib, "vImageSymmetricPiecewiseGamma_Planar16Q12")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageSymmetricPiecewiseGammaPlanar16Q12(src, dest, unsafe.Pointer(&_out0), gamma, unsafe.Pointer(&_out1), boundary, flags)
-	return _ret, _out0, _out1
+	return _fnVImageSymmetricPiecewiseGammaPlanar16Q12(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 var _fnVImageSymmetricPiecewiseGammaPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageSymmetricPiecewiseGammaPlanarF calls the vImage framework function vImageSymmetricPiecewiseGamma_PlanarF.
-func VImageSymmetricPiecewiseGammaPlanarF(src unsafe.Pointer, dest unsafe.Pointer, gamma unsafe.Pointer, boundary unsafe.Pointer, flags uint32) (result int, exponentialCoeffs float32, linearCoeffs float32) {
+func VImageSymmetricPiecewiseGammaPlanarF(src unsafe.Pointer, dest unsafe.Pointer, exponentialCoeffs unsafe.Pointer, gamma unsafe.Pointer, linearCoeffs unsafe.Pointer, boundary unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageSymmetricPiecewiseGammaPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageSymmetricPiecewiseGammaPlanarF, _lib, "vImageSymmetricPiecewiseGamma_PlanarF")
 	}
-	var _out0 float32
-	var _out1 float32
-	_ret := _fnVImageSymmetricPiecewiseGammaPlanarF(src, dest, unsafe.Pointer(&_out0), gamma, unsafe.Pointer(&_out1), boundary, flags)
-	return _ret, _out0, _out1
+	return _fnVImageSymmetricPiecewiseGammaPlanarF(src, dest, exponentialCoeffs, gamma, linearCoeffs, boundary, flags)
 }
 
 var _fnVImageSymmetricPiecewisePolynomialPlanarF func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, uint32, uint32) int
 
 // VImageSymmetricPiecewisePolynomialPlanarF calls the vImage framework function vImageSymmetricPiecewisePolynomial_PlanarF.
-func VImageSymmetricPiecewisePolynomialPlanarF(src unsafe.Pointer, dest unsafe.Pointer, coefficients unsafe.Pointer, order uint32, log2segments uint32, flags uint32) (result int, boundaries float32) {
+func VImageSymmetricPiecewisePolynomialPlanarF(src unsafe.Pointer, dest unsafe.Pointer, coefficients unsafe.Pointer, boundaries unsafe.Pointer, order uint32, log2segments uint32, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageSymmetricPiecewisePolynomialPlanarF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageSymmetricPiecewisePolynomialPlanarF, _lib, "vImageSymmetricPiecewisePolynomial_PlanarF")
 	}
-	var _out0 float32
-	_ret := _fnVImageSymmetricPiecewisePolynomialPlanarF(src, dest, coefficients, unsafe.Pointer(&_out0), order, log2segments, flags)
-	return _ret, _out0
+	return _fnVImageSymmetricPiecewisePolynomialPlanarF(src, dest, coefficients, boundaries, order, log2segments, flags)
 }
 
 var _fnVImageTableLookUpARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageTableLookUpARGB8888 calls the vImage framework function vImageTableLookUp_ARGB8888.
-func VImageTableLookUpARGB8888(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, alphaTable uint8, redTable uint8, greenTable uint8, blueTable uint8) {
+func VImageTableLookUpARGB8888(src unsafe.Pointer, dest unsafe.Pointer, alphaTable unsafe.Pointer, redTable unsafe.Pointer, greenTable unsafe.Pointer, blueTable unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageTableLookUpARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageTableLookUpARGB8888, _lib, "vImageTableLookUp_ARGB8888")
 	}
-	var _out0 uint8
-	var _out1 uint8
-	var _out2 uint8
-	var _out3 uint8
-	_ret := _fnVImageTableLookUpARGB8888(src, dest, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), flags)
-	return _ret, _out0, _out1, _out2, _out3
+	return _fnVImageTableLookUpARGB8888(src, dest, alphaTable, redTable, greenTable, blueTable, flags)
 }
 
 var _fnVImageTableLookUpPlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageTableLookUpPlanar8 calls the vImage framework function vImageTableLookUp_Planar8.
-func VImageTableLookUpPlanar8(src unsafe.Pointer, dest unsafe.Pointer, flags uint32) (result int, table uint8) {
+func VImageTableLookUpPlanar8(src unsafe.Pointer, dest unsafe.Pointer, table unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageTableLookUpPlanar8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageTableLookUpPlanar8, _lib, "vImageTableLookUp_Planar8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageTableLookUpPlanar8(src, dest, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageTableLookUpPlanar8(src, dest, table, flags)
 }
 
 var _fnVImageTentConvolveARGB8888 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, uint32, uint32, unsafe.Pointer, uint32) int
 
 // VImageTentConvolveARGB8888 calls the vImage framework function vImageTentConvolve_ARGB8888.
-func VImageTentConvolveARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, flags uint32) (result int, backgroundColor uint8) {
+func VImageTentConvolveARGB8888(src unsafe.Pointer, dest unsafe.Pointer, tempBuffer unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, kernelHeight uint32, kernelWidth uint32, backgroundColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageTentConvolveARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageTentConvolveARGB8888, _lib, "vImageTentConvolve_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageTentConvolveARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernelHeight, kernelWidth, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageTentConvolveARGB8888(src, dest, tempBuffer, srcOffsetToROIX, srcOffsetToROIY, kernelHeight, kernelWidth, backgroundColor, flags)
 }
 
 var _fnVImageTentConvolvePlanar8 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, uint32, uint32, uint8, uint32) int
@@ -6804,105 +6228,89 @@ func VImageVerticalReflectPlanarF(src unsafe.Pointer, dest unsafe.Pointer, flags
 var _fnVImageVerticalShearDARGB16F func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearDARGB16F calls the vImage framework function vImageVerticalShearD_ARGB16F.
-func VImageVerticalShearDARGB16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageVerticalShearDARGB16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearDARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearDARGB16F, _lib, "vImageVerticalShearD_ARGB16F")
 	}
-	var _out0 uint16
-	_ret := _fnVImageVerticalShearDARGB16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearDARGB16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearDARGB16S func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearDARGB16S calls the vImage framework function vImageVerticalShearD_ARGB16S.
-func VImageVerticalShearDARGB16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor int16) {
+func VImageVerticalShearDARGB16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearDARGB16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearDARGB16S, _lib, "vImageVerticalShearD_ARGB16S")
 	}
-	var _out0 int16
-	_ret := _fnVImageVerticalShearDARGB16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearDARGB16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearDARGB16U func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearDARGB16U calls the vImage framework function vImageVerticalShearD_ARGB16U.
-func VImageVerticalShearDARGB16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageVerticalShearDARGB16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearDARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearDARGB16U, _lib, "vImageVerticalShearD_ARGB16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageVerticalShearDARGB16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearDARGB16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearDARGB8888 func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearDARGB8888 calls the vImage framework function vImageVerticalShearD_ARGB8888.
-func VImageVerticalShearDARGB8888(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor uint8) {
+func VImageVerticalShearDARGB8888(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearDARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearDARGB8888, _lib, "vImageVerticalShearD_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageVerticalShearDARGB8888(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearDARGB8888(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearDARGBFFFF func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearDARGBFFFF calls the vImage framework function vImageVerticalShearD_ARGBFFFF.
-func VImageVerticalShearDARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor float32) {
+func VImageVerticalShearDARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearDARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearDARGBFFFF, _lib, "vImageVerticalShearD_ARGBFFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageVerticalShearDARGBFFFF(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearDARGBFFFF(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearDCbCr16F func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearDCbCr16F calls the vImage framework function vImageVerticalShearD_CbCr16F.
-func VImageVerticalShearDCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageVerticalShearDCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearDCbCr16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearDCbCr16F, _lib, "vImageVerticalShearD_CbCr16F")
 	}
-	var _out0 uint16
-	_ret := _fnVImageVerticalShearDCbCr16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearDCbCr16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearDCbCr16S func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearDCbCr16S calls the vImage framework function vImageVerticalShearD_CbCr16S.
-func VImageVerticalShearDCbCr16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor int16) {
+func VImageVerticalShearDCbCr16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearDCbCr16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearDCbCr16S, _lib, "vImageVerticalShearD_CbCr16S")
 	}
-	var _out0 int16
-	_ret := _fnVImageVerticalShearDCbCr16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearDCbCr16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearDCbCr16U func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearDCbCr16U calls the vImage framework function vImageVerticalShearD_CbCr16U.
-func VImageVerticalShearDCbCr16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageVerticalShearDCbCr16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float64, shearSlope float64, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearDCbCr16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearDCbCr16U, _lib, "vImageVerticalShearD_CbCr16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageVerticalShearDCbCr16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearDCbCr16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearDPlanar16F func(unsafe.Pointer, unsafe.Pointer, int, int, float64, float64, unsafe.Pointer, uint16, uint32) int
@@ -6941,118 +6349,100 @@ func VImageVerticalShearDPlanarF(src unsafe.Pointer, dest unsafe.Pointer, srcOff
 var _fnVImageVerticalShearARGB16F func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearARGB16F calls the vImage framework function vImageVerticalShear_ARGB16F.
-func VImageVerticalShearARGB16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageVerticalShearARGB16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearARGB16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearARGB16F, _lib, "vImageVerticalShear_ARGB16F")
 	}
-	var _out0 uint16
-	_ret := _fnVImageVerticalShearARGB16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearARGB16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearARGB16S func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearARGB16S calls the vImage framework function vImageVerticalShear_ARGB16S.
-func VImageVerticalShearARGB16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor int16) {
+func VImageVerticalShearARGB16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearARGB16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearARGB16S, _lib, "vImageVerticalShear_ARGB16S")
 	}
-	var _out0 int16
-	_ret := _fnVImageVerticalShearARGB16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearARGB16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearARGB16U func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearARGB16U calls the vImage framework function vImageVerticalShear_ARGB16U.
-func VImageVerticalShearARGB16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageVerticalShearARGB16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearARGB16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearARGB16U, _lib, "vImageVerticalShear_ARGB16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageVerticalShearARGB16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearARGB16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearARGB8888 func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearARGB8888 calls the vImage framework function vImageVerticalShear_ARGB8888.
-func VImageVerticalShearARGB8888(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor uint8) {
+func VImageVerticalShearARGB8888(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearARGB8888 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearARGB8888, _lib, "vImageVerticalShear_ARGB8888")
 	}
-	var _out0 uint8
-	_ret := _fnVImageVerticalShearARGB8888(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearARGB8888(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearARGBFFFF func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearARGBFFFF calls the vImage framework function vImageVerticalShear_ARGBFFFF.
-func VImageVerticalShearARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor float32) {
+func VImageVerticalShearARGBFFFF(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearARGBFFFF == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearARGBFFFF, _lib, "vImageVerticalShear_ARGBFFFF")
 	}
-	var _out0 float32
-	_ret := _fnVImageVerticalShearARGBFFFF(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearARGBFFFF(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearCbCr16F func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearCbCr16F calls the vImage framework function vImageVerticalShear_CbCr16F.
-func VImageVerticalShearCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageVerticalShearCbCr16F(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearCbCr16F == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearCbCr16F, _lib, "vImageVerticalShear_CbCr16F")
 	}
-	var _out0 uint16
-	_ret := _fnVImageVerticalShearCbCr16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearCbCr16F(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearCbCr16S func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearCbCr16S calls the vImage framework function vImageVerticalShear_CbCr16S.
-func VImageVerticalShearCbCr16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor int16) {
+func VImageVerticalShearCbCr16S(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearCbCr16S == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearCbCr16S, _lib, "vImageVerticalShear_CbCr16S")
 	}
-	var _out0 int16
-	_ret := _fnVImageVerticalShearCbCr16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearCbCr16S(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearCbCr16U func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearCbCr16U calls the vImage framework function vImageVerticalShear_CbCr16U.
-func VImageVerticalShearCbCr16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor uint16) {
+func VImageVerticalShearCbCr16U(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearCbCr16U == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearCbCr16U, _lib, "vImageVerticalShear_CbCr16U")
 	}
-	var _out0 uint16
-	_ret := _fnVImageVerticalShearCbCr16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearCbCr16U(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearCbCr8 func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, unsafe.Pointer, uint32) int
 
 // VImageVerticalShearCbCr8 calls the vImage framework function vImageVerticalShear_CbCr8.
-func VImageVerticalShearCbCr8(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, flags uint32) (result int, backColor uint8) {
+func VImageVerticalShearCbCr8(src unsafe.Pointer, dest unsafe.Pointer, srcOffsetToROIX int, srcOffsetToROIY int, yTranslate float32, shearSlope float32, filter unsafe.Pointer, backColor unsafe.Pointer, flags uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageVerticalShearCbCr8 == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageVerticalShearCbCr8, _lib, "vImageVerticalShear_CbCr8")
 	}
-	var _out0 uint8
-	_ret := _fnVImageVerticalShearCbCr8(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, unsafe.Pointer(&_out0), flags)
-	return _ret, _out0
+	return _fnVImageVerticalShearCbCr8(src, dest, srcOffsetToROIX, srcOffsetToROIY, yTranslate, shearSlope, filter, backColor, flags)
 }
 
 var _fnVImageVerticalShearPlanar16F func(unsafe.Pointer, unsafe.Pointer, int, int, float32, float32, unsafe.Pointer, uint16, uint32) int

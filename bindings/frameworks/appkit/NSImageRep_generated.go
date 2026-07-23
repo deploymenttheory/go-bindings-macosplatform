@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -161,6 +162,15 @@ func (ir *ImageRep) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSp
 	defer runtime.KeepAlive(hints)
 	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("drawInRect:fromRect:operation:fraction:respectFlipped:hints:"), dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, objref.IDOf(hints))
 	return _r
+}
+
+// CGImageForProposedRectContextHints returns a Core Graphics image object that captures the drawing of the image.
+func (ir *ImageRep) CGImageForProposedRectContextHints(proposedDestRect *corefoundation.CGRect, context_ *GraphicsContext, hints obj.Object) obj.Object {
+	defer runtime.KeepAlive(ir)
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(hints)
+	_r := objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("CGImageForProposedRect:context:hints:"), unsafe.Pointer(proposedDestRect), objref.IDOf(context_), objref.IDOf(hints))
+	return obj.Wrap(_r)
 }
 
 // Size returns the size.

@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"runtime"
 	"time"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -79,6 +80,13 @@ func (piits *PlayerItemIntegratedTimelineSnapshot) String() string {
 func NewPlayerItemIntegratedTimelineSnapshot() *PlayerItemIntegratedTimelineSnapshot {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemIntegratedTimelineSnapshot")), objc.RegisterName("new"))
 	return playerItemIntegratedTimelineSnapshotAdopt(_id)
+}
+
+// MapTimeToSegmentAtSegmentOffset provides mapping from time to AVPlayerItemSegment and offset in segment. Provides mapping from time to segment and offset in the segment's timeMapping target. For time that correlates to the start of multiple segments, this will return the first one.
+func (piits *PlayerItemIntegratedTimelineSnapshot) MapTimeToSegmentAtSegmentOffset(time_ coremedia.CMTime, timeSegmentOut *PlayerItemSegment, segmentOffsetOut *coremedia.CMTime) {
+	defer runtime.KeepAlive(piits)
+	defer runtime.KeepAlive(timeSegmentOut)
+	objc.Send[objc.ID](objref.IDOf(piits), objc.RegisterName("mapTime:toSegment:atSegmentOffset:"), time_, objref.IDOf(timeSegmentOut), unsafe.Pointer(segmentOffsetOut))
 }
 
 // Duration returns the duration totaling the primary item and scheduled interstitial events. This property returns the duration totaling the primary item and scheduled interstitial events and taking into account the interstitial event's playoutLimit and resumption offset. Before loading the duration of the primary item, the value of this property is kCMTimeInvalid. For livestreams, this value will be kCMTimeIndefinite.

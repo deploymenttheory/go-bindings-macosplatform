@@ -6,7 +6,9 @@ package avfaudio
 
 import (
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -80,10 +82,24 @@ func NewAudioChannelLayoutWithLayoutTag(layoutTag int) *AudioChannelLayout {
 	return audioChannelLayoutAdopt(_id)
 }
 
+// NewAudioChannelLayoutWithLayout creates an audio channel layout object from an existing one.
+func NewAudioChannelLayoutWithLayout(layout *coreaudiotypes.AudioChannelLayout) *AudioChannelLayout {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioChannelLayout")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLayout:"), unsafe.Pointer(layout))
+	return audioChannelLayoutAdopt(_id)
+}
+
 // LayoutTag returns the layout's tag.
 func (acl *AudioChannelLayout) LayoutTag() int {
 	defer runtime.KeepAlive(acl)
 	_r := objc.Send[int](objref.IDOf(acl), objc.RegisterName("layoutTag"))
+	return _r
+}
+
+// Layout returns the underlying AudioChannelLayout.
+func (acl *AudioChannelLayout) Layout() *coreaudiotypes.AudioChannelLayout {
+	defer runtime.KeepAlive(acl)
+	_r := objc.Send[*coreaudiotypes.AudioChannelLayout](objref.IDOf(acl), objc.RegisterName("layout"))
 	return _r
 }
 

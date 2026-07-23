@@ -37,124 +37,76 @@ func CMIODeviceProcessRS422Command(deviceID int, ioRS422Command unsafe.Pointer) 
 	return int(_fnCMIODeviceProcessRS422Command(deviceID, ioRS422Command))
 }
 
-var _fnCMIOObjectAddPropertyListener func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-
-// CMIOObjectAddPropertyListener calls the CoreMediaIO framework function CMIOObjectAddPropertyListener.
-func CMIOObjectAddPropertyListener(objectID int, listener unsafe.Pointer, clientData unsafe.Pointer) (result int, address CMIOObjectPropertyAddress) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnCMIOObjectAddPropertyListener == nil {
-		ebipurego.RegisterLibFunc(&_fnCMIOObjectAddPropertyListener, _lib, "CMIOObjectAddPropertyListener")
-	}
-	var _out0 CMIOObjectPropertyAddress
-	_ret := int(_fnCMIOObjectAddPropertyListener(objectID, unsafe.Pointer(&_out0), listener, clientData))
-	return _ret, _out0
-}
-
 var _fnCMIOObjectAddPropertyListenerBlock func(int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
 
 // CMIOObjectAddPropertyListenerBlock calls the CoreMediaIO framework function CMIOObjectAddPropertyListenerBlock.
-func CMIOObjectAddPropertyListenerBlock(objectID int, dispatchQueue dispatch.Queue, listener unsafe.Pointer) (result int, address CMIOObjectPropertyAddress) {
+func CMIOObjectAddPropertyListenerBlock(objectID int, address *CMIOObjectPropertyAddress, dispatchQueue dispatch.Queue, listener unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMIOObjectAddPropertyListenerBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCMIOObjectAddPropertyListenerBlock, _lib, "CMIOObjectAddPropertyListenerBlock")
 	}
-	var _out0 CMIOObjectPropertyAddress
-	_ret := int(_fnCMIOObjectAddPropertyListenerBlock(objectID, unsafe.Pointer(&_out0), objc.ID(uintptr(dispatchQueue.Ptr())), listener))
-	return _ret, _out0
+	return int(_fnCMIOObjectAddPropertyListenerBlock(objectID, unsafe.Pointer(address), objc.ID(uintptr(dispatchQueue.Ptr())), listener))
 }
 
 var _fnCMIOObjectGetPropertyData func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMIOObjectGetPropertyData calls the CoreMediaIO framework function CMIOObjectGetPropertyData.
-func CMIOObjectGetPropertyData(objectID int, qualifierDataSize int, qualifierData unsafe.Pointer, dataSize int, data unsafe.Pointer) (result int, address CMIOObjectPropertyAddress, dataUsed int) {
+func CMIOObjectGetPropertyData(objectID int, address *CMIOObjectPropertyAddress, qualifierDataSize int, qualifierData unsafe.Pointer, dataSize int, data unsafe.Pointer) (result int, dataUsed int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMIOObjectGetPropertyData == nil {
 		ebipurego.RegisterLibFunc(&_fnCMIOObjectGetPropertyData, _lib, "CMIOObjectGetPropertyData")
 	}
-	var _out0 CMIOObjectPropertyAddress
-	var _out1 int
-	_ret := int(_fnCMIOObjectGetPropertyData(objectID, unsafe.Pointer(&_out0), qualifierDataSize, qualifierData, dataSize, unsafe.Pointer(&_out1), data))
-	return _ret, _out0, _out1
+	var _out0 int
+	_ret := int(_fnCMIOObjectGetPropertyData(objectID, unsafe.Pointer(address), qualifierDataSize, qualifierData, dataSize, unsafe.Pointer(&_out0), data))
+	return _ret, _out0
 }
 
 var _fnCMIOObjectGetPropertyDataSize func(int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMIOObjectGetPropertyDataSize calls the CoreMediaIO framework function CMIOObjectGetPropertyDataSize.
-func CMIOObjectGetPropertyDataSize(objectID int, qualifierDataSize int, qualifierData unsafe.Pointer) (result int, address CMIOObjectPropertyAddress, dataSize int) {
+func CMIOObjectGetPropertyDataSize(objectID int, address *CMIOObjectPropertyAddress, qualifierDataSize int, qualifierData unsafe.Pointer) (result int, dataSize int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMIOObjectGetPropertyDataSize == nil {
 		ebipurego.RegisterLibFunc(&_fnCMIOObjectGetPropertyDataSize, _lib, "CMIOObjectGetPropertyDataSize")
 	}
-	var _out0 CMIOObjectPropertyAddress
-	var _out1 int
-	_ret := int(_fnCMIOObjectGetPropertyDataSize(objectID, unsafe.Pointer(&_out0), qualifierDataSize, qualifierData, unsafe.Pointer(&_out1)))
-	return _ret, _out0, _out1
+	var _out0 int
+	_ret := int(_fnCMIOObjectGetPropertyDataSize(objectID, unsafe.Pointer(address), qualifierDataSize, qualifierData, unsafe.Pointer(&_out0)))
+	return _ret, _out0
 }
 
 var _fnCMIOObjectHasProperty func(int, unsafe.Pointer) uint8
 
 // CMIOObjectHasProperty calls the CoreMediaIO framework function CMIOObjectHasProperty.
-func CMIOObjectHasProperty(objectID int) (result uint8, address CMIOObjectPropertyAddress) {
+func CMIOObjectHasProperty(objectID int, address *CMIOObjectPropertyAddress) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMIOObjectHasProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnCMIOObjectHasProperty, _lib, "CMIOObjectHasProperty")
 	}
-	var _out0 CMIOObjectPropertyAddress
-	_ret := _fnCMIOObjectHasProperty(objectID, unsafe.Pointer(&_out0))
-	return _ret, _out0
+	return _fnCMIOObjectHasProperty(objectID, unsafe.Pointer(address))
 }
 
 var _fnCMIOObjectIsPropertySettable func(int, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMIOObjectIsPropertySettable calls the CoreMediaIO framework function CMIOObjectIsPropertySettable.
-func CMIOObjectIsPropertySettable(objectID int) (result int, address CMIOObjectPropertyAddress, isSettable uint8) {
+func CMIOObjectIsPropertySettable(objectID int, address *CMIOObjectPropertyAddress) (result int, isSettable uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMIOObjectIsPropertySettable == nil {
 		ebipurego.RegisterLibFunc(&_fnCMIOObjectIsPropertySettable, _lib, "CMIOObjectIsPropertySettable")
 	}
-	var _out0 CMIOObjectPropertyAddress
-	var _out1 uint8
-	_ret := int(_fnCMIOObjectIsPropertySettable(objectID, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
-	return _ret, _out0, _out1
-}
-
-var _fnCMIOObjectRemovePropertyListener func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-
-// CMIOObjectRemovePropertyListener calls the CoreMediaIO framework function CMIOObjectRemovePropertyListener.
-func CMIOObjectRemovePropertyListener(objectID int, listener unsafe.Pointer, clientData unsafe.Pointer) (result int, address CMIOObjectPropertyAddress) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnCMIOObjectRemovePropertyListener == nil {
-		ebipurego.RegisterLibFunc(&_fnCMIOObjectRemovePropertyListener, _lib, "CMIOObjectRemovePropertyListener")
-	}
-	var _out0 CMIOObjectPropertyAddress
-	_ret := int(_fnCMIOObjectRemovePropertyListener(objectID, unsafe.Pointer(&_out0), listener, clientData))
+	var _out0 uint8
+	_ret := int(_fnCMIOObjectIsPropertySettable(objectID, unsafe.Pointer(address), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnCMIOObjectRemovePropertyListenerBlock func(int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
 
 // CMIOObjectRemovePropertyListenerBlock calls the CoreMediaIO framework function CMIOObjectRemovePropertyListenerBlock.
-func CMIOObjectRemovePropertyListenerBlock(objectID int, dispatchQueue dispatch.Queue, listener unsafe.Pointer) (result int, address CMIOObjectPropertyAddress) {
+func CMIOObjectRemovePropertyListenerBlock(objectID int, address *CMIOObjectPropertyAddress, dispatchQueue dispatch.Queue, listener unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMIOObjectRemovePropertyListenerBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnCMIOObjectRemovePropertyListenerBlock, _lib, "CMIOObjectRemovePropertyListenerBlock")
 	}
-	var _out0 CMIOObjectPropertyAddress
-	_ret := int(_fnCMIOObjectRemovePropertyListenerBlock(objectID, unsafe.Pointer(&_out0), objc.ID(uintptr(dispatchQueue.Ptr())), listener))
-	return _ret, _out0
-}
-
-var _fnCMIOObjectSetPropertyData func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer) int32
-
-// CMIOObjectSetPropertyData calls the CoreMediaIO framework function CMIOObjectSetPropertyData.
-func CMIOObjectSetPropertyData(objectID int, qualifierDataSize int, qualifierData unsafe.Pointer, dataSize int, data unsafe.Pointer) (result int, address CMIOObjectPropertyAddress) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnCMIOObjectSetPropertyData == nil {
-		ebipurego.RegisterLibFunc(&_fnCMIOObjectSetPropertyData, _lib, "CMIOObjectSetPropertyData")
-	}
-	var _out0 CMIOObjectPropertyAddress
-	_ret := int(_fnCMIOObjectSetPropertyData(objectID, unsafe.Pointer(&_out0), qualifierDataSize, qualifierData, dataSize, data))
-	return _ret, _out0
+	return int(_fnCMIOObjectRemovePropertyListenerBlock(objectID, unsafe.Pointer(address), objc.ID(uintptr(dispatchQueue.Ptr())), listener))
 }
 
 var _fnCMIOObjectShow func(int)

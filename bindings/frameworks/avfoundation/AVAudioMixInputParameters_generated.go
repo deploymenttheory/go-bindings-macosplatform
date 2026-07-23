@@ -6,7 +6,9 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -74,6 +76,15 @@ func (amip *AudioMixInputParameters) IsKind(className string) bool {
 func (amip *AudioMixInputParameters) String() string {
 	defer runtime.KeepAlive(amip)
 	return rt.Description(objref.IDOf(amip))
+}
+
+// GetVolumeRampForTimeStartVolumeEndVolumeTimeRange retrieves the volume ramp that includes the specified time.
+func (amip *AudioMixInputParameters) GetVolumeRampForTimeStartVolumeEndVolumeTimeRange(time_ coremedia.CMTime, timeRange *coremedia.CMTimeRange) (ok bool, startVolume float32, endVolume float32) {
+	defer runtime.KeepAlive(amip)
+	var _out0 float32
+	var _out1 float32
+	_r := objc.Send[bool](objref.IDOf(amip), objc.RegisterName("getVolumeRampForTime:startVolume:endVolume:timeRange:"), time_, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(timeRange))
+	return _r, _out0, _out1
 }
 
 // TrackID indicates the trackID of the audio track to which the parameters should be applied.

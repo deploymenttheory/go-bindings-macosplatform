@@ -7,6 +7,8 @@ package dvdplayback
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -181,6 +183,21 @@ func DVDGetSPDIFDataOutDeviceCFName(inIndex int) (obj.Object, error) {
 	return obj.Wrap(objc.ID(_out0)), nil
 }
 
+var _fnDVDGetVideoCGBounds func(unsafe.Pointer) int32
+
+// DVDGetVideoCGBounds reports an error if the DVDPlayback framework function DVDGetVideoCGBounds fails.
+func DVDGetVideoCGBounds(outRect *corefoundation.CGRect) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDGetVideoCGBounds == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDGetVideoCGBounds, _lib, "DVDGetVideoCGBounds")
+	}
+	_rc := _fnDVDGetVideoCGBounds(unsafe.Pointer(outRect))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnDVDGetVideoWindowRef func(unsafe.Pointer) int32
 
 // DVDGetVideoWindowRef reports an error if the DVDPlayback framework function DVDGetVideoWindowRef fails.
@@ -301,6 +318,21 @@ func DVDNextChapter() error {
 	return nil
 }
 
+var _fnDVDOpenMediaFile func(unsafe.Pointer) int32
+
+// DVDOpenMediaFile reports an error if the DVDPlayback framework function DVDOpenMediaFile fails.
+func DVDOpenMediaFile(inFile *carboncore.FSRef) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDOpenMediaFile == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDOpenMediaFile, _lib, "DVDOpenMediaFile")
+	}
+	_rc := _fnDVDOpenMediaFile(unsafe.Pointer(inFile))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnDVDOpenMediaFileWithURL func(objc.ID) int32
 
 // DVDOpenMediaFileWithURL reports an error if the DVDPlayback framework function DVDOpenMediaFileWithURL fails.
@@ -310,6 +342,21 @@ func DVDOpenMediaFileWithURL(inFile obj.Object) error {
 		ebipurego.RegisterLibFunc(&_fnDVDOpenMediaFileWithURL, _lib, "DVDOpenMediaFileWithURL")
 	}
 	_rc := _fnDVDOpenMediaFileWithURL(objref.IDOf(inFile))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnDVDOpenMediaVolume func(unsafe.Pointer) int32
+
+// DVDOpenMediaVolume reports an error if the DVDPlayback framework function DVDOpenMediaVolume fails.
+func DVDOpenMediaVolume(inVolume *carboncore.FSRef) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDOpenMediaVolume == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDOpenMediaVolume, _lib, "DVDOpenMediaVolume")
+	}
+	_rc := _fnDVDOpenMediaVolume(unsafe.Pointer(inVolume))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -670,6 +717,21 @@ func DVDSetTitle(inTitleNum uint16) error {
 		ebipurego.RegisterLibFunc(&_fnDVDSetTitle, _lib, "DVDSetTitle")
 	}
 	_rc := _fnDVDSetTitle(inTitleNum)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnDVDSetVideoCGBounds func(unsafe.Pointer) int32
+
+// DVDSetVideoCGBounds reports an error if the DVDPlayback framework function DVDSetVideoCGBounds fails.
+func DVDSetVideoCGBounds(inRect *corefoundation.CGRect) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDVDSetVideoCGBounds == nil {
+		ebipurego.RegisterLibFunc(&_fnDVDSetVideoCGBounds, _lib, "DVDSetVideoCGBounds")
+	}
+	_rc := _fnDVDSetVideoCGBounds(unsafe.Pointer(inRect))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

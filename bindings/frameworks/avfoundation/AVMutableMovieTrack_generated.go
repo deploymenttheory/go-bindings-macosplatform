@@ -306,6 +306,18 @@ func (mmt *MutableMovieTrack) ReplaceFormatDescriptionWithFormatDescription(form
 	objc.Send[objc.ID](objref.IDOf(mmt), objc.RegisterName("replaceFormatDescription:withFormatDescription:"), objref.IDOf(formatDescription), objref.IDOf(newFormatDescription))
 }
 
+// AppendSampleBufferDecodeTimePresentationTime appends sample data to a media file and adds sample references for the added data to a track’s media sample tables.
+func (mmt *MutableMovieTrack) AppendSampleBufferDecodeTimePresentationTime(sampleBuffer obj.Object, outDecodeTime *coremedia.CMTime, outPresentationTime *coremedia.CMTime) error {
+	defer runtime.KeepAlive(mmt)
+	defer runtime.KeepAlive(sampleBuffer)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(mmt), objc.RegisterName("appendSampleBuffer:decodeTime:presentationTime:error:"), objref.IDOf(sampleBuffer), unsafe.Pointer(outDecodeTime), unsafe.Pointer(outPresentationTime), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
 // InsertMediaTimeRangeIntoTimeRange inserts a reference to a media time range into a track.
 func (mmt *MutableMovieTrack) InsertMediaTimeRangeIntoTimeRange(mediaTimeRange coremedia.CMTimeRange, trackTimeRange coremedia.CMTimeRange) bool {
 	defer runtime.KeepAlive(mmt)

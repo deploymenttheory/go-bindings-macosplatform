@@ -346,133 +346,152 @@ func NSDeallocateObject(object obj.Object) {
 var _fnNSDecimalAdd func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, RoundingMode) CalculationError
 
 // NSDecimalAdd calls the Foundation framework function NSDecimalAdd.
-func NSDecimalAdd(result unsafe.Pointer, leftOperand unsafe.Pointer, rightOperand unsafe.Pointer, roundingMode RoundingMode) CalculationError {
+func NSDecimalAdd(leftOperand *NSDecimal, rightOperand *NSDecimal, roundingMode RoundingMode) (result CalculationError, result_ NSDecimal) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalAdd == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalAdd, _lib, "NSDecimalAdd")
 	}
-	return _fnNSDecimalAdd(result, leftOperand, rightOperand, roundingMode)
+	var _out0 NSDecimal
+	_ret := _fnNSDecimalAdd(unsafe.Pointer(&_out0), unsafe.Pointer(leftOperand), unsafe.Pointer(rightOperand), roundingMode)
+	return _ret, _out0
 }
 
 var _fnNSDecimalCompact func(unsafe.Pointer)
 
 // NSDecimalCompact calls the Foundation framework function NSDecimalCompact.
-func NSDecimalCompact(number unsafe.Pointer) {
+func NSDecimalCompact() (number NSDecimal) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalCompact == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalCompact, _lib, "NSDecimalCompact")
 	}
-	_fnNSDecimalCompact(number)
+	var _out0 NSDecimal
+	_fnNSDecimalCompact(unsafe.Pointer(&_out0))
+	return _out0
 }
 
 var _fnNSDecimalCompare func(unsafe.Pointer, unsafe.Pointer) ComparisonResult
 
 // NSDecimalCompare calls the Foundation framework function NSDecimalCompare.
-func NSDecimalCompare(leftOperand unsafe.Pointer, rightOperand unsafe.Pointer) ComparisonResult {
+func NSDecimalCompare(leftOperand *NSDecimal, rightOperand *NSDecimal) ComparisonResult {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalCompare == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalCompare, _lib, "NSDecimalCompare")
 	}
-	return _fnNSDecimalCompare(leftOperand, rightOperand)
+	return _fnNSDecimalCompare(unsafe.Pointer(leftOperand), unsafe.Pointer(rightOperand))
 }
 
 var _fnNSDecimalCopy func(unsafe.Pointer, unsafe.Pointer)
 
 // NSDecimalCopy calls the Foundation framework function NSDecimalCopy.
-func NSDecimalCopy(destination unsafe.Pointer, source unsafe.Pointer) {
+func NSDecimalCopy(source *NSDecimal) (destination NSDecimal) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalCopy, _lib, "NSDecimalCopy")
 	}
-	_fnNSDecimalCopy(destination, source)
+	var _out0 NSDecimal
+	_fnNSDecimalCopy(unsafe.Pointer(&_out0), unsafe.Pointer(source))
+	return _out0
 }
 
 var _fnNSDecimalDivide func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, RoundingMode) CalculationError
 
 // NSDecimalDivide calls the Foundation framework function NSDecimalDivide.
-func NSDecimalDivide(result unsafe.Pointer, leftOperand unsafe.Pointer, rightOperand unsafe.Pointer, roundingMode RoundingMode) CalculationError {
+func NSDecimalDivide(leftOperand *NSDecimal, rightOperand *NSDecimal, roundingMode RoundingMode) (result CalculationError, result_ NSDecimal) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalDivide == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalDivide, _lib, "NSDecimalDivide")
 	}
-	return _fnNSDecimalDivide(result, leftOperand, rightOperand, roundingMode)
+	var _out0 NSDecimal
+	_ret := _fnNSDecimalDivide(unsafe.Pointer(&_out0), unsafe.Pointer(leftOperand), unsafe.Pointer(rightOperand), roundingMode)
+	return _ret, _out0
 }
 
 var _fnNSDecimalIsNotANumber func(unsafe.Pointer) bool
 
 // NSDecimalIsNotANumber calls the Foundation framework function NSDecimalIsNotANumber.
-func NSDecimalIsNotANumber(dcm unsafe.Pointer) bool {
+func NSDecimalIsNotANumber(dcm *NSDecimal) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalIsNotANumber == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalIsNotANumber, _lib, "NSDecimalIsNotANumber")
 	}
-	return _fnNSDecimalIsNotANumber(dcm)
+	return _fnNSDecimalIsNotANumber(unsafe.Pointer(dcm))
 }
 
 var _fnNSDecimalMultiply func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, RoundingMode) CalculationError
 
 // NSDecimalMultiply calls the Foundation framework function NSDecimalMultiply.
-func NSDecimalMultiply(result unsafe.Pointer, leftOperand unsafe.Pointer, rightOperand unsafe.Pointer, roundingMode RoundingMode) CalculationError {
+func NSDecimalMultiply(leftOperand *NSDecimal, rightOperand *NSDecimal, roundingMode RoundingMode) (result CalculationError, result_ NSDecimal) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalMultiply == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalMultiply, _lib, "NSDecimalMultiply")
 	}
-	return _fnNSDecimalMultiply(result, leftOperand, rightOperand, roundingMode)
+	var _out0 NSDecimal
+	_ret := _fnNSDecimalMultiply(unsafe.Pointer(&_out0), unsafe.Pointer(leftOperand), unsafe.Pointer(rightOperand), roundingMode)
+	return _ret, _out0
 }
 
 var _fnNSDecimalMultiplyByPowerOf10 func(unsafe.Pointer, unsafe.Pointer, int16, RoundingMode) CalculationError
 
 // NSDecimalMultiplyByPowerOf10 calls the Foundation framework function NSDecimalMultiplyByPowerOf10.
-func NSDecimalMultiplyByPowerOf10(result unsafe.Pointer, number unsafe.Pointer, power int16, roundingMode RoundingMode) CalculationError {
+func NSDecimalMultiplyByPowerOf10(number *NSDecimal, power int16, roundingMode RoundingMode) (result CalculationError, result_ NSDecimal) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalMultiplyByPowerOf10 == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalMultiplyByPowerOf10, _lib, "NSDecimalMultiplyByPowerOf10")
 	}
-	return _fnNSDecimalMultiplyByPowerOf10(result, number, power, roundingMode)
+	var _out0 NSDecimal
+	_ret := _fnNSDecimalMultiplyByPowerOf10(unsafe.Pointer(&_out0), unsafe.Pointer(number), power, roundingMode)
+	return _ret, _out0
 }
 
 var _fnNSDecimalNormalize func(unsafe.Pointer, unsafe.Pointer, RoundingMode) CalculationError
 
 // NSDecimalNormalize calls the Foundation framework function NSDecimalNormalize.
-func NSDecimalNormalize(number1 unsafe.Pointer, number2 unsafe.Pointer, roundingMode RoundingMode) CalculationError {
+func NSDecimalNormalize(roundingMode RoundingMode) (result CalculationError, number1 NSDecimal, number2 NSDecimal) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalNormalize == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalNormalize, _lib, "NSDecimalNormalize")
 	}
-	return _fnNSDecimalNormalize(number1, number2, roundingMode)
+	var _out0 NSDecimal
+	var _out1 NSDecimal
+	_ret := _fnNSDecimalNormalize(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), roundingMode)
+	return _ret, _out0, _out1
 }
 
 var _fnNSDecimalPower func(unsafe.Pointer, unsafe.Pointer, int, RoundingMode) CalculationError
 
 // NSDecimalPower calls the Foundation framework function NSDecimalPower.
-func NSDecimalPower(result unsafe.Pointer, number unsafe.Pointer, power int, roundingMode RoundingMode) CalculationError {
+func NSDecimalPower(number *NSDecimal, power int, roundingMode RoundingMode) (result CalculationError, result_ NSDecimal) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalPower == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalPower, _lib, "NSDecimalPower")
 	}
-	return _fnNSDecimalPower(result, number, power, roundingMode)
+	var _out0 NSDecimal
+	_ret := _fnNSDecimalPower(unsafe.Pointer(&_out0), unsafe.Pointer(number), power, roundingMode)
+	return _ret, _out0
 }
 
 var _fnNSDecimalRound func(unsafe.Pointer, unsafe.Pointer, int, RoundingMode)
 
 // NSDecimalRound calls the Foundation framework function NSDecimalRound.
-func NSDecimalRound(result unsafe.Pointer, number unsafe.Pointer, scale int, roundingMode RoundingMode) {
+func NSDecimalRound(number *NSDecimal, scale int, roundingMode RoundingMode) (result NSDecimal) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalRound == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalRound, _lib, "NSDecimalRound")
 	}
-	_fnNSDecimalRound(result, number, scale, roundingMode)
+	var _out0 NSDecimal
+	_fnNSDecimalRound(unsafe.Pointer(&_out0), unsafe.Pointer(number), scale, roundingMode)
+	return _out0
 }
 
 var _fnNSDecimalString func(unsafe.Pointer, objc.ID) objc.ID
 
 // NSDecimalString calls the Foundation framework function NSDecimalString.
-func NSDecimalString(dcm unsafe.Pointer, locale obj.Object) string {
+func NSDecimalString(dcm *NSDecimal, locale obj.Object) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalString == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalString, _lib, "NSDecimalString")
 	}
-	_ret := _fnNSDecimalString(dcm, objref.IDOf(locale))
+	_ret := _fnNSDecimalString(unsafe.Pointer(dcm), objref.IDOf(locale))
 	if _ret == 0 {
 		return ""
 	}
@@ -482,12 +501,14 @@ func NSDecimalString(dcm unsafe.Pointer, locale obj.Object) string {
 var _fnNSDecimalSubtract func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, RoundingMode) CalculationError
 
 // NSDecimalSubtract calls the Foundation framework function NSDecimalSubtract.
-func NSDecimalSubtract(result unsafe.Pointer, leftOperand unsafe.Pointer, rightOperand unsafe.Pointer, roundingMode RoundingMode) CalculationError {
+func NSDecimalSubtract(leftOperand *NSDecimal, rightOperand *NSDecimal, roundingMode RoundingMode) (result CalculationError, result_ NSDecimal) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDecimalSubtract == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDecimalSubtract, _lib, "NSDecimalSubtract")
 	}
-	return _fnNSDecimalSubtract(result, leftOperand, rightOperand, roundingMode)
+	var _out0 NSDecimal
+	_ret := _fnNSDecimalSubtract(unsafe.Pointer(&_out0), unsafe.Pointer(leftOperand), unsafe.Pointer(rightOperand), roundingMode)
+	return _ret, _out0
 }
 
 var _fnNSDecrementExtraRefCountWasZero func(objc.ID) bool
@@ -515,12 +536,12 @@ func NSDefaultMallocZone() unsafe.Pointer {
 var _fnNSDivideRect func(corefoundation.CGRect, unsafe.Pointer, unsafe.Pointer, float64, RectEdge)
 
 // NSDivideRect calls the Foundation framework function NSDivideRect.
-func NSDivideRect(inRect corefoundation.CGRect, slice unsafe.Pointer, rem unsafe.Pointer, amount float64, edge RectEdge) {
+func NSDivideRect(inRect corefoundation.CGRect, slice *corefoundation.CGRect, rem *corefoundation.CGRect, amount float64, edge RectEdge) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDivideRect == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDivideRect, _lib, "NSDivideRect")
 	}
-	_fnNSDivideRect(inRect, slice, rem, amount, edge)
+	_fnNSDivideRect(inRect, unsafe.Pointer(slice), unsafe.Pointer(rem), amount, edge)
 }
 
 var _fnNSEdgeInsetsEqual func(unsafe.Pointer, unsafe.Pointer) bool

@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -183,6 +184,13 @@ func (tcc *TextCheckingController) ValidAnnotations() []obj.Object {
 	defer runtime.KeepAlive(tcc)
 	_arr := objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("validAnnotations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// MenuAtIndexClickedOnSelectionEffectiveRange wraps the corresponding Objective-C method.
+func (tcc *TextCheckingController) MenuAtIndexClickedOnSelectionEffectiveRange(location int, clickedOnSelection bool, effectiveRange *foundation.NSRange) *Menu {
+	defer runtime.KeepAlive(tcc)
+	_r := objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("menuAtIndex:clickedOnSelection:effectiveRange:"), location, clickedOnSelection, unsafe.Pointer(effectiveRange))
+	return MenuFromID(_r)
 }
 
 // SpellCheckerDocumentTag returns the spell checker document tag.

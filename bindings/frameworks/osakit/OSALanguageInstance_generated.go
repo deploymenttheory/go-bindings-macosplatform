@@ -7,6 +7,7 @@ package osakit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -100,6 +101,13 @@ func (li *LanguageInstance) Language() *Language {
 	defer runtime.KeepAlive(li)
 	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("language"))
 	return LanguageFromID(_r)
+}
+
+// ComponentInstance returns the component instance.
+func (li *LanguageInstance) ComponentInstance() *carboncore.ComponentInstanceRecord {
+	defer runtime.KeepAlive(li)
+	_r := objc.Send[*carboncore.ComponentInstanceRecord](objref.IDOf(li), objc.RegisterName("componentInstance"))
+	return _r
 }
 
 // DefaultTarget returns the default target.

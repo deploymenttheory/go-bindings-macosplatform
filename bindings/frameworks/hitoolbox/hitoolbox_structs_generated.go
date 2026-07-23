@@ -262,7 +262,7 @@ type HFSFlavor struct {
 	FileType    uint
 	FileCreator uint
 	FdFlags     uint16
-	FileSpec    unsafe.Pointer
+	FileSpec    carboncore.FSSpec
 }
 
 type HIAxisPosition struct {

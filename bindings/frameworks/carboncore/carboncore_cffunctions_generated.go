@@ -7,6 +7,7 @@ package carboncore
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -23,6 +24,36 @@ func CSBackupSetItemExcluded(item obj.Object, exclude uint8, excludeByPath uint8
 		ebipurego.RegisterLibFunc(&_fnCSBackupSetItemExcluded, _lib, "CSBackupSetItemExcluded")
 	}
 	_rc := _fnCSBackupSetItemExcluded(objref.IDOf(item), exclude, excludeByPath)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnChangeTextToUnicodeInfo func(objc.ID, unsafe.Pointer) int32
+
+// ChangeTextToUnicodeInfo reports an error if the CarbonCore framework function ChangeTextToUnicodeInfo fails.
+func ChangeTextToUnicodeInfo(ioTextToUnicodeInfo obj.Object, iUnicodeMapping *UnicodeMapping) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnChangeTextToUnicodeInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnChangeTextToUnicodeInfo, _lib, "ChangeTextToUnicodeInfo")
+	}
+	_rc := _fnChangeTextToUnicodeInfo(objref.IDOf(ioTextToUnicodeInfo), unsafe.Pointer(iUnicodeMapping))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnChangeUnicodeToTextInfo func(objc.ID, unsafe.Pointer) int32
+
+// ChangeUnicodeToTextInfo reports an error if the CarbonCore framework function ChangeUnicodeToTextInfo fails.
+func ChangeUnicodeToTextInfo(ioUnicodeToTextInfo obj.Object, iUnicodeMapping *UnicodeMapping) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnChangeUnicodeToTextInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnChangeUnicodeToTextInfo, _lib, "ChangeUnicodeToTextInfo")
+	}
+	_rc := _fnChangeUnicodeToTextInfo(objref.IDOf(ioUnicodeToTextInfo), unsafe.Pointer(iUnicodeMapping))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -74,6 +105,21 @@ func CoreEndianInstallFlipper(dataDomain int, dataType int, proc unsafe.Pointer,
 	return nil
 }
 
+var _fnCreateTextToUnicodeInfo func(unsafe.Pointer, unsafe.Pointer) int32
+
+// CreateTextToUnicodeInfo reports an error if the CarbonCore framework function CreateTextToUnicodeInfo fails.
+func CreateTextToUnicodeInfo(iUnicodeMapping *UnicodeMapping, oTextToUnicodeInfo unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateTextToUnicodeInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateTextToUnicodeInfo, _lib, "CreateTextToUnicodeInfo")
+	}
+	_rc := _fnCreateTextToUnicodeInfo(unsafe.Pointer(iUnicodeMapping), oTextToUnicodeInfo)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnCreateTextToUnicodeInfoByEncoding func(int, unsafe.Pointer) int32
 
 // CreateTextToUnicodeInfoByEncoding reports an error if the CarbonCore framework function CreateTextToUnicodeInfoByEncoding fails.
@@ -89,6 +135,21 @@ func CreateTextToUnicodeInfoByEncoding(iEncoding int, oTextToUnicodeInfo unsafe.
 	return nil
 }
 
+var _fnCreateUnicodeToTextInfo func(unsafe.Pointer, unsafe.Pointer) int32
+
+// CreateUnicodeToTextInfo reports an error if the CarbonCore framework function CreateUnicodeToTextInfo fails.
+func CreateUnicodeToTextInfo(iUnicodeMapping *UnicodeMapping, oUnicodeToTextInfo unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateUnicodeToTextInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateUnicodeToTextInfo, _lib, "CreateUnicodeToTextInfo")
+	}
+	_rc := _fnCreateUnicodeToTextInfo(unsafe.Pointer(iUnicodeMapping), oUnicodeToTextInfo)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnCreateUnicodeToTextInfoByEncoding func(int, unsafe.Pointer) int32
 
 // CreateUnicodeToTextInfoByEncoding reports an error if the CarbonCore framework function CreateUnicodeToTextInfoByEncoding fails.
@@ -98,6 +159,21 @@ func CreateUnicodeToTextInfoByEncoding(iEncoding int, oUnicodeToTextInfo unsafe.
 		ebipurego.RegisterLibFunc(&_fnCreateUnicodeToTextInfoByEncoding, _lib, "CreateUnicodeToTextInfoByEncoding")
 	}
 	_rc := _fnCreateUnicodeToTextInfoByEncoding(iEncoding, oUnicodeToTextInfo)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCreateUnicodeToTextRunInfo func(int, unsafe.Pointer, unsafe.Pointer) int32
+
+// CreateUnicodeToTextRunInfo reports an error if the CarbonCore framework function CreateUnicodeToTextRunInfo fails.
+func CreateUnicodeToTextRunInfo(iNumberOfMappings int, iUnicodeMappings *UnicodeMapping, oUnicodeToTextInfo unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCreateUnicodeToTextRunInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnCreateUnicodeToTextRunInfo, _lib, "CreateUnicodeToTextRunInfo")
+	}
+	_rc := _fnCreateUnicodeToTextRunInfo(iNumberOfMappings, unsafe.Pointer(iUnicodeMappings), oUnicodeToTextInfo)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -164,6 +240,36 @@ func DisposeUnicodeToTextRunInfo(ioUnicodeToTextRunInfo unsafe.Pointer) error {
 	return nil
 }
 
+var _fnFNGetDirectoryForSubscription func(objc.ID, unsafe.Pointer) int32
+
+// FNGetDirectoryForSubscription reports an error if the CarbonCore framework function FNGetDirectoryForSubscription fails.
+func FNGetDirectoryForSubscription(subscription obj.Object, ref *FSRef) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFNGetDirectoryForSubscription == nil {
+		ebipurego.RegisterLibFunc(&_fnFNGetDirectoryForSubscription, _lib, "FNGetDirectoryForSubscription")
+	}
+	_rc := _fnFNGetDirectoryForSubscription(objref.IDOf(subscription), unsafe.Pointer(ref))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFNNotify func(unsafe.Pointer, int, int) int32
+
+// FNNotify reports an error if the CarbonCore framework function FNNotify fails.
+func FNNotify(ref *FSRef, message int, flags int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFNNotify == nil {
+		ebipurego.RegisterLibFunc(&_fnFNNotify, _lib, "FNNotify")
+	}
+	_rc := _fnFNNotify(unsafe.Pointer(ref), message, flags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnFNNotifyAll func(int, int) int32
 
 // FNNotifyAll reports an error if the CarbonCore framework function FNNotifyAll fails.
@@ -173,6 +279,21 @@ func FNNotifyAll(message int, flags int) error {
 		ebipurego.RegisterLibFunc(&_fnFNNotifyAll, _lib, "FNNotifyAll")
 	}
 	_rc := _fnFNNotifyAll(message, flags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFNSubscribe func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
+
+// FNSubscribe reports an error if the CarbonCore framework function FNSubscribe fails.
+func FNSubscribe(directoryRef *FSRef, callback unsafe.Pointer, refcon unsafe.Pointer, flags int, subscription unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFNSubscribe == nil {
+		ebipurego.RegisterLibFunc(&_fnFNSubscribe, _lib, "FNSubscribe")
+	}
+	_rc := _fnFNSubscribe(unsafe.Pointer(directoryRef), callback, refcon, flags, subscription)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -238,6 +359,21 @@ func FSCopyDiskIDForVolume(vRefNum int16) (obj.Object, error) {
 		return nil, _err
 	}
 	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnFSCopyObjectSync func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer, int) int32
+
+// FSCopyObjectSync reports an error if the CarbonCore framework function FSCopyObjectSync fails.
+func FSCopyObjectSync(source *FSRef, destDir *FSRef, destName obj.Object, target *FSRef, options int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSCopyObjectSync == nil {
+		ebipurego.RegisterLibFunc(&_fnFSCopyObjectSync, _lib, "FSCopyObjectSync")
+	}
+	_rc := _fnFSCopyObjectSync(unsafe.Pointer(source), unsafe.Pointer(destDir), objref.IDOf(destName), unsafe.Pointer(target), options)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnFSCopyURLForVolume func(int16, unsafe.Pointer) int32
@@ -361,6 +497,36 @@ func FSFileSecurityCopyAccessControlList(fileSec obj.Object, accessControlList u
 	return nil
 }
 
+var _fnFSFileSecurityGetGroupUUID func(objc.ID, unsafe.Pointer) int32
+
+// FSFileSecurityGetGroupUUID reports an error if the CarbonCore framework function FSFileSecurityGetGroupUUID fails.
+func FSFileSecurityGetGroupUUID(fileSec obj.Object, group *corefoundation.CFUUIDBytes) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileSecurityGetGroupUUID == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileSecurityGetGroupUUID, _lib, "FSFileSecurityGetGroupUUID")
+	}
+	_rc := _fnFSFileSecurityGetGroupUUID(objref.IDOf(fileSec), unsafe.Pointer(group))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFSFileSecurityGetOwnerUUID func(objc.ID, unsafe.Pointer) int32
+
+// FSFileSecurityGetOwnerUUID reports an error if the CarbonCore framework function FSFileSecurityGetOwnerUUID fails.
+func FSFileSecurityGetOwnerUUID(fileSec obj.Object, owner *corefoundation.CFUUIDBytes) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileSecurityGetOwnerUUID == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileSecurityGetOwnerUUID, _lib, "FSFileSecurityGetOwnerUUID")
+	}
+	_rc := _fnFSFileSecurityGetOwnerUUID(objref.IDOf(fileSec), unsafe.Pointer(owner))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnFSFileSecuritySetAccessControlList func(objc.ID, unsafe.Pointer) int32
 
 // FSFileSecuritySetAccessControlList reports an error if the CarbonCore framework function FSFileSecuritySetAccessControlList fails.
@@ -385,6 +551,21 @@ func FSFileSecuritySetGroup(fileSec obj.Object, group int) error {
 		ebipurego.RegisterLibFunc(&_fnFSFileSecuritySetGroup, _lib, "FSFileSecuritySetGroup")
 	}
 	_rc := _fnFSFileSecuritySetGroup(objref.IDOf(fileSec), group)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFSFileSecuritySetGroupUUID func(objc.ID, unsafe.Pointer) int32
+
+// FSFileSecuritySetGroupUUID reports an error if the CarbonCore framework function FSFileSecuritySetGroupUUID fails.
+func FSFileSecuritySetGroupUUID(fileSec obj.Object, group *corefoundation.CFUUIDBytes) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileSecuritySetGroupUUID == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileSecuritySetGroupUUID, _lib, "FSFileSecuritySetGroupUUID")
+	}
+	_rc := _fnFSFileSecuritySetGroupUUID(objref.IDOf(fileSec), unsafe.Pointer(group))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -421,6 +602,21 @@ func FSFileSecuritySetOwner(fileSec obj.Object, owner int) error {
 	return nil
 }
 
+var _fnFSFileSecuritySetOwnerUUID func(objc.ID, unsafe.Pointer) int32
+
+// FSFileSecuritySetOwnerUUID reports an error if the CarbonCore framework function FSFileSecuritySetOwnerUUID fails.
+func FSFileSecuritySetOwnerUUID(fileSec obj.Object, owner *corefoundation.CFUUIDBytes) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileSecuritySetOwnerUUID == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileSecuritySetOwnerUUID, _lib, "FSFileSecuritySetOwnerUUID")
+	}
+	_rc := _fnFSFileSecuritySetOwnerUUID(objref.IDOf(fileSec), unsafe.Pointer(owner))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnFSFlushVolume func(int16) int32
 
 // FSFlushVolume reports an error if the CarbonCore framework function FSFlushVolume fails.
@@ -451,6 +647,21 @@ func FSGetHFSUniStrFromString(theString obj.Object, uniStr unsafe.Pointer) error
 	return nil
 }
 
+var _fnFSGetTemporaryDirectoryForReplaceObject func(unsafe.Pointer, unsafe.Pointer, int) int32
+
+// FSGetTemporaryDirectoryForReplaceObject reports an error if the CarbonCore framework function FSGetTemporaryDirectoryForReplaceObject fails.
+func FSGetTemporaryDirectoryForReplaceObject(originalObject *FSRef, temporaryDirectory *FSRef, flags int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSGetTemporaryDirectoryForReplaceObject == nil {
+		ebipurego.RegisterLibFunc(&_fnFSGetTemporaryDirectoryForReplaceObject, _lib, "FSGetTemporaryDirectoryForReplaceObject")
+	}
+	_rc := _fnFSGetTemporaryDirectoryForReplaceObject(unsafe.Pointer(originalObject), unsafe.Pointer(temporaryDirectory), flags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnFSMountLocalVolumeAsync func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, int, unsafe.Pointer, objc.ID, objc.ID) int32
 
 // FSMountLocalVolumeAsync reports an error if the CarbonCore framework function FSMountLocalVolumeAsync fails.
@@ -475,6 +686,36 @@ func FSMountServerVolumeAsync(url obj.Object, mountDir obj.Object, user obj.Obje
 		ebipurego.RegisterLibFunc(&_fnFSMountServerVolumeAsync, _lib, "FSMountServerVolumeAsync")
 	}
 	_rc := _fnFSMountServerVolumeAsync(objref.IDOf(url), objref.IDOf(mountDir), objref.IDOf(user), objref.IDOf(password), objref.IDOf(volumeOp), clientData, flags, callback, objref.IDOf(runloop), objref.IDOf(runloopMode))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFSMoveObjectSync func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer, int) int32
+
+// FSMoveObjectSync reports an error if the CarbonCore framework function FSMoveObjectSync fails.
+func FSMoveObjectSync(source *FSRef, destDir *FSRef, destName obj.Object, target *FSRef, options int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSMoveObjectSync == nil {
+		ebipurego.RegisterLibFunc(&_fnFSMoveObjectSync, _lib, "FSMoveObjectSync")
+	}
+	_rc := _fnFSMoveObjectSync(unsafe.Pointer(source), unsafe.Pointer(destDir), objref.IDOf(destName), unsafe.Pointer(target), options)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFSMoveObjectToTrashSync func(unsafe.Pointer, unsafe.Pointer, int) int32
+
+// FSMoveObjectToTrashSync reports an error if the CarbonCore framework function FSMoveObjectToTrashSync fails.
+func FSMoveObjectToTrashSync(source *FSRef, target *FSRef, options int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSMoveObjectToTrashSync == nil {
+		ebipurego.RegisterLibFunc(&_fnFSMoveObjectToTrashSync, _lib, "FSMoveObjectToTrashSync")
+	}
+	_rc := _fnFSMoveObjectToTrashSync(unsafe.Pointer(source), unsafe.Pointer(target), options)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -550,6 +791,36 @@ func FSPathReplaceObject(originalObjectPath string, replacementObjectPath string
 		ebipurego.RegisterLibFunc(&_fnFSPathReplaceObject, _lib, "FSPathReplaceObject")
 	}
 	_rc := _fnFSPathReplaceObject(originalObjectPath, replacementObjectPath, objref.IDOf(newName), objref.IDOf(temporaryName), temporaryDirectoryPath, flags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFSReplaceObject func(unsafe.Pointer, unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
+
+// FSReplaceObject reports an error if the CarbonCore framework function FSReplaceObject fails.
+func FSReplaceObject(originalObject *FSRef, replacementObject *FSRef, newName obj.Object, temporaryName obj.Object, temporaryDirectory *FSRef, flags int, resultObject *FSRef) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSReplaceObject == nil {
+		ebipurego.RegisterLibFunc(&_fnFSReplaceObject, _lib, "FSReplaceObject")
+	}
+	_rc := _fnFSReplaceObject(unsafe.Pointer(originalObject), unsafe.Pointer(replacementObject), objref.IDOf(newName), objref.IDOf(temporaryName), unsafe.Pointer(temporaryDirectory), flags, unsafe.Pointer(resultObject))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFSResolveNodeID func(int16, int, unsafe.Pointer) int32
+
+// FSResolveNodeID reports an error if the CarbonCore framework function FSResolveNodeID fails.
+func FSResolveNodeID(volume int16, nodeID int, newRef *FSRef) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSResolveNodeID == nil {
+		ebipurego.RegisterLibFunc(&_fnFSResolveNodeID, _lib, "FSResolveNodeID")
+	}
+	_rc := _fnFSResolveNodeID(volume, nodeID, unsafe.Pointer(newRef))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1465,6 +1736,21 @@ func TECSetBasicOptions(encodingConverter obj.Object, controlFlags int) error {
 		ebipurego.RegisterLibFunc(&_fnTECSetBasicOptions, _lib, "TECSetBasicOptions")
 	}
 	_rc := _fnTECSetBasicOptions(objref.IDOf(encodingConverter), controlFlags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnUCConvertCFAbsoluteTimeToUTCDateTime func(float64, unsafe.Pointer) int32
+
+// UCConvertCFAbsoluteTimeToUTCDateTime reports an error if the CarbonCore framework function UCConvertCFAbsoluteTimeToUTCDateTime fails.
+func UCConvertCFAbsoluteTimeToUTCDateTime(iCFTime float64, oUTCDate *UTCDateTime) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUCConvertCFAbsoluteTimeToUTCDateTime == nil {
+		ebipurego.RegisterLibFunc(&_fnUCConvertCFAbsoluteTimeToUTCDateTime, _lib, "UCConvertCFAbsoluteTimeToUTCDateTime")
+	}
+	_rc := _fnUCConvertCFAbsoluteTimeToUTCDateTime(iCFTime, unsafe.Pointer(oUTCDate))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

@@ -6,6 +6,8 @@ package speechsynthesis
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 )
 
 type DelimiterInfo struct {
@@ -73,7 +75,7 @@ type VoiceDescription struct {
 }
 
 type VoiceFileInfo struct {
-	FileSpec unsafe.Pointer
+	FileSpec carboncore.FSSpec
 	ResID    int16
 }
 

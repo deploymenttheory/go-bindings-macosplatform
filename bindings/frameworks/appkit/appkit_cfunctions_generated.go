@@ -385,14 +385,12 @@ func NSDottedFrameRect(rect corefoundation.CGRect) {
 var _fnNSDrawBitmap func(corefoundation.CGRect, int, int, int, int, int, int, bool, bool, objc.ID, unsafe.Pointer)
 
 // NSDrawBitmap calls the AppKit framework function NSDrawBitmap.
-func NSDrawBitmap(rect corefoundation.CGRect, width int, height int, bps int, spp int, bpp int, bpr int, isPlanar bool, hasAlpha bool, colorSpaceName obj.Object) (data uint8) {
+func NSDrawBitmap(rect corefoundation.CGRect, width int, height int, bps int, spp int, bpp int, bpr int, isPlanar bool, hasAlpha bool, colorSpaceName obj.Object, data unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSDrawBitmap == nil {
 		ebipurego.RegisterLibFunc(&_fnNSDrawBitmap, _lib, "NSDrawBitmap")
 	}
-	var _out0 uint8
-	_fnNSDrawBitmap(rect, width, height, bps, spp, bpp, bpr, isPlanar, hasAlpha, objref.IDOf(colorSpaceName), unsafe.Pointer(&_out0))
-	return _out0
+	_fnNSDrawBitmap(rect, width, height, bps, spp, bpp, bpr, isPlanar, hasAlpha, objref.IDOf(colorSpaceName), data)
 }
 
 var _fnNSDrawButton func(corefoundation.CGRect, corefoundation.CGRect)
@@ -809,34 +807,34 @@ func NSRectFillListUsingOperation(rects unsafe.Pointer, count int, op Compositin
 var _fnNSRectFillListWithColors func(unsafe.Pointer, objc.ID, int)
 
 // NSRectFillListWithColors calls the AppKit framework function NSRectFillListWithColors.
-func NSRectFillListWithColors(rects unsafe.Pointer, colors *Color, num int) {
+func NSRectFillListWithColors(rects *corefoundation.CGRect, colors *Color, num int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSRectFillListWithColors == nil {
 		ebipurego.RegisterLibFunc(&_fnNSRectFillListWithColors, _lib, "NSRectFillListWithColors")
 	}
-	_fnNSRectFillListWithColors(rects, objref.IDOf(colors), num)
+	_fnNSRectFillListWithColors(unsafe.Pointer(rects), objref.IDOf(colors), num)
 }
 
 var _fnNSRectFillListWithColorsUsingOperation func(unsafe.Pointer, objc.ID, int, CompositingOperation)
 
 // NSRectFillListWithColorsUsingOperation calls the AppKit framework function NSRectFillListWithColorsUsingOperation.
-func NSRectFillListWithColorsUsingOperation(rects unsafe.Pointer, colors *Color, num int, op CompositingOperation) {
+func NSRectFillListWithColorsUsingOperation(rects *corefoundation.CGRect, colors *Color, num int, op CompositingOperation) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSRectFillListWithColorsUsingOperation == nil {
 		ebipurego.RegisterLibFunc(&_fnNSRectFillListWithColorsUsingOperation, _lib, "NSRectFillListWithColorsUsingOperation")
 	}
-	_fnNSRectFillListWithColorsUsingOperation(rects, objref.IDOf(colors), num, op)
+	_fnNSRectFillListWithColorsUsingOperation(unsafe.Pointer(rects), objref.IDOf(colors), num, op)
 }
 
 var _fnNSRectFillListWithGrays func(unsafe.Pointer, unsafe.Pointer, int)
 
 // NSRectFillListWithGrays calls the AppKit framework function NSRectFillListWithGrays.
-func NSRectFillListWithGrays(rects unsafe.Pointer, grays unsafe.Pointer, num int) {
+func NSRectFillListWithGrays(rects *corefoundation.CGRect, grays unsafe.Pointer, num int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSRectFillListWithGrays == nil {
 		ebipurego.RegisterLibFunc(&_fnNSRectFillListWithGrays, _lib, "NSRectFillListWithGrays")
 	}
-	_fnNSRectFillListWithGrays(rects, grays, num)
+	_fnNSRectFillListWithGrays(unsafe.Pointer(rects), grays, num)
 }
 
 var _fnNSRectFillUsingOperation func(corefoundation.CGRect, CompositingOperation)

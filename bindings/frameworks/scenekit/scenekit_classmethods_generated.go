@@ -9,6 +9,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -309,6 +310,24 @@ func GeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterl
 func GeometrySourceWithDataSemanticVectorCountFloatComponentsComponentsPerVectorBytesPerComponentDataOffsetDataStride(data []byte, semantic obj.Object, vectorCount int, floatComponents bool, componentsPerVector int, bytesPerComponent int, offset int, stride int) *GeometrySource {
 	defer runtime.KeepAlive(semantic)
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometrySource")), objc.RegisterName("geometrySourceWithData:semantic:vectorCount:floatComponents:componentsPerVector:bytesPerComponent:dataOffset:dataStride:"), rt.BytesToNSData(data), objref.IDOf(semantic), vectorCount, floatComponents, componentsPerVector, bytesPerComponent, offset, stride)
+	return GeometrySourceFromID(_r)
+}
+
+// GeometrySourceWithVerticesCount creates a geometry source from an array of vertex positions.
+func GeometrySourceWithVerticesCount(vertices *SCNVector3, count int) *GeometrySource {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometrySource")), objc.RegisterName("geometrySourceWithVertices:count:"), unsafe.Pointer(vertices), count)
+	return GeometrySourceFromID(_r)
+}
+
+// GeometrySourceWithNormalsCount creates a geometry source from an array of normal vectors.
+func GeometrySourceWithNormalsCount(normals *SCNVector3, count int) *GeometrySource {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometrySource")), objc.RegisterName("geometrySourceWithNormals:count:"), unsafe.Pointer(normals), count)
+	return GeometrySourceFromID(_r)
+}
+
+// GeometrySourceWithTextureCoordinatesCount creates a geometry source from an array of texture coordinate points.
+func GeometrySourceWithTextureCoordinatesCount(texcoord *corefoundation.CGPoint, count int) *GeometrySource {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometrySource")), objc.RegisterName("geometrySourceWithTextureCoordinates:count:"), unsafe.Pointer(texcoord), count)
 	return GeometrySourceFromID(_r)
 }
 

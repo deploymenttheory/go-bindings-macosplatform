@@ -130,27 +130,13 @@ func AESuspendTheCurrentEvent(theAppleEvent unsafe.Pointer) int16 {
 var _fnAcquireFirstMatchingEventInQueue func(objc.ID, int, unsafe.Pointer, int) objc.ID
 
 // AcquireFirstMatchingEventInQueue calls the HIToolbox framework function AcquireFirstMatchingEventInQueue.
-func AcquireFirstMatchingEventInQueue(inQueue obj.Object, inNumTypes int, inOptions int) (result obj.Object, inList EventTypeSpec) {
+func AcquireFirstMatchingEventInQueue(inQueue obj.Object, inNumTypes int, inList *EventTypeSpec, inOptions int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAcquireFirstMatchingEventInQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnAcquireFirstMatchingEventInQueue, _lib, "AcquireFirstMatchingEventInQueue")
 	}
-	var _out0 EventTypeSpec
-	_ret := _fnAcquireFirstMatchingEventInQueue(objref.IDOf(inQueue), inNumTypes, unsafe.Pointer(&_out0), inOptions)
-	return obj.Wrap(_ret), _out0
-}
-
-var _fnAddEventTypesToHandler func(objc.ID, int, unsafe.Pointer) int32
-
-// AddEventTypesToHandler calls the HIToolbox framework function AddEventTypesToHandler.
-func AddEventTypesToHandler(inHandlerRef obj.Object, inNumTypes int) (result int, inList EventTypeSpec) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnAddEventTypesToHandler == nil {
-		ebipurego.RegisterLibFunc(&_fnAddEventTypesToHandler, _lib, "AddEventTypesToHandler")
-	}
-	var _out0 EventTypeSpec
-	_ret := int(_fnAddEventTypesToHandler(objref.IDOf(inHandlerRef), inNumTypes, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_ret := _fnAcquireFirstMatchingEventInQueue(objref.IDOf(inQueue), inNumTypes, unsafe.Pointer(inList), inOptions)
+	return obj.Wrap(_ret)
 }
 
 var _fnButton func() uint8
@@ -1180,19 +1166,6 @@ func FlushEvents(whichMask uint16, stopMask uint16) {
 	_fnFlushEvents(whichMask, stopMask)
 }
 
-var _fnFlushEventsMatchingListFromQueue func(objc.ID, int, unsafe.Pointer) int32
-
-// FlushEventsMatchingListFromQueue calls the HIToolbox framework function FlushEventsMatchingListFromQueue.
-func FlushEventsMatchingListFromQueue(inQueue obj.Object, inNumTypes int) (result int, inList EventTypeSpec) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnFlushEventsMatchingListFromQueue == nil {
-		ebipurego.RegisterLibFunc(&_fnFlushEventsMatchingListFromQueue, _lib, "FlushEventsMatchingListFromQueue")
-	}
-	var _out0 EventTypeSpec
-	_ret := int(_fnFlushEventsMatchingListFromQueue(objref.IDOf(inQueue), inNumTypes, unsafe.Pointer(&_out0)))
-	return _ret, _out0
-}
-
 var _fnGetApplicationEventTarget func() objc.ID
 
 // GetApplicationEventTarget calls the HIToolbox framework function GetApplicationEventTarget.
@@ -1404,12 +1377,12 @@ func GetEventTime(inEvent obj.Object) float64 {
 var _fnGetKeys func(unsafe.Pointer)
 
 // GetKeys calls the HIToolbox framework function GetKeys.
-func GetKeys(theKeys unsafe.Pointer) {
+func GetKeys(theKeys *carboncore.BigEndianUInt32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetKeys == nil {
 		ebipurego.RegisterLibFunc(&_fnGetKeys, _lib, "GetKeys")
 	}
-	_fnGetKeys(theKeys)
+	_fnGetKeys(unsafe.Pointer(theKeys))
 }
 
 var _fnGetMainEventLoop func() objc.ID
@@ -1539,35 +1512,35 @@ func GetThemeMetric(inMetric int) (result int, outMetric int) {
 var _fnHIDictionaryWindowShow func(objc.ID, objc.ID, corefoundation.CFRange, objc.ID, corefoundation.CGPoint, uint8, unsafe.Pointer)
 
 // HIDictionaryWindowShow calls the HIToolbox framework function HIDictionaryWindowShow.
-func HIDictionaryWindowShow(dictionary obj.Object, textString obj.Object, selectionRange corefoundation.CFRange, textFont obj.Object, textOrigin corefoundation.CGPoint, verticalText uint8, viewTransform unsafe.Pointer) {
+func HIDictionaryWindowShow(dictionary obj.Object, textString obj.Object, selectionRange corefoundation.CFRange, textFont obj.Object, textOrigin corefoundation.CGPoint, verticalText uint8, viewTransform *corefoundation.CGAffineTransform) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIDictionaryWindowShow == nil {
 		ebipurego.RegisterLibFunc(&_fnHIDictionaryWindowShow, _lib, "HIDictionaryWindowShow")
 	}
-	_fnHIDictionaryWindowShow(objref.IDOf(dictionary), objref.IDOf(textString), selectionRange, objref.IDOf(textFont), textOrigin, verticalText, viewTransform)
+	_fnHIDictionaryWindowShow(objref.IDOf(dictionary), objref.IDOf(textString), selectionRange, objref.IDOf(textFont), textOrigin, verticalText, unsafe.Pointer(viewTransform))
 }
 
 var _fnHIGetMousePosition func(int, unsafe.Pointer, unsafe.Pointer) *corefoundation.CGPoint
 
 // HIGetMousePosition calls the HIToolbox framework function HIGetMousePosition.
-func HIGetMousePosition(inSpace int, inObject unsafe.Pointer, outPoint unsafe.Pointer) *corefoundation.CGPoint {
+func HIGetMousePosition(inSpace int, inObject unsafe.Pointer, outPoint *corefoundation.CGPoint) *corefoundation.CGPoint {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIGetMousePosition == nil {
 		ebipurego.RegisterLibFunc(&_fnHIGetMousePosition, _lib, "HIGetMousePosition")
 	}
-	return _fnHIGetMousePosition(inSpace, inObject, outPoint)
+	return _fnHIGetMousePosition(inSpace, inObject, unsafe.Pointer(outPoint))
 }
 
 var _fnHIMouseTrackingGetParameters func(int, unsafe.Pointer, unsafe.Pointer) int32
 
 // HIMouseTrackingGetParameters calls the HIToolbox framework function HIMouseTrackingGetParameters.
-func HIMouseTrackingGetParameters(inSelector int, outDistance unsafe.Pointer) (result int, outTime float64) {
+func HIMouseTrackingGetParameters(inSelector int, outDistance *corefoundation.CGSize) (result int, outTime float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIMouseTrackingGetParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnHIMouseTrackingGetParameters, _lib, "HIMouseTrackingGetParameters")
 	}
 	var _out0 float64
-	_ret := int(_fnHIMouseTrackingGetParameters(inSelector, unsafe.Pointer(&_out0), outDistance))
+	_ret := int(_fnHIMouseTrackingGetParameters(inSelector, unsafe.Pointer(&_out0), unsafe.Pointer(outDistance)))
 	return _ret, _out0
 }
 
@@ -1663,404 +1636,81 @@ func HIObjectPrintDebugInfo(inObject obj.Object) {
 	_fnHIObjectPrintDebugInfo(objref.IDOf(inObject))
 }
 
-var _fnHIObjectRegisterSubclass func(objc.ID, objc.ID, int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-
-// HIObjectRegisterSubclass calls the HIToolbox framework function HIObjectRegisterSubclass.
-func HIObjectRegisterSubclass(inClassID obj.Object, inBaseClassID obj.Object, inOptions int, inConstructProc unsafe.Pointer, inNumEvents int, inConstructData unsafe.Pointer, outClassRef unsafe.Pointer) (result int, inEventList EventTypeSpec) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIObjectRegisterSubclass == nil {
-		ebipurego.RegisterLibFunc(&_fnHIObjectRegisterSubclass, _lib, "HIObjectRegisterSubclass")
-	}
-	var _out0 EventTypeSpec
-	_ret := int(_fnHIObjectRegisterSubclass(objref.IDOf(inClassID), objref.IDOf(inBaseClassID), inOptions, inConstructProc, inNumEvents, unsafe.Pointer(&_out0), inConstructData, outClassRef))
-	return _ret, _out0
-}
-
 var _fnHIPointConvert func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 
 // HIPointConvert calls the HIToolbox framework function HIPointConvert.
-func HIPointConvert(ioPoint unsafe.Pointer, inSourceSpace int, inSourceObject unsafe.Pointer, inDestinationSpace int, inDestinationObject unsafe.Pointer) {
+func HIPointConvert(ioPoint *corefoundation.CGPoint, inSourceSpace int, inSourceObject unsafe.Pointer, inDestinationSpace int, inDestinationObject unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIPointConvert == nil {
 		ebipurego.RegisterLibFunc(&_fnHIPointConvert, _lib, "HIPointConvert")
 	}
-	_fnHIPointConvert(ioPoint, inSourceSpace, inSourceObject, inDestinationSpace, inDestinationObject)
+	_fnHIPointConvert(unsafe.Pointer(ioPoint), inSourceSpace, inSourceObject, inDestinationSpace, inDestinationObject)
 }
 
 var _fnHIRectConvert func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 
 // HIRectConvert calls the HIToolbox framework function HIRectConvert.
-func HIRectConvert(ioRect unsafe.Pointer, inSourceSpace int, inSourceObject unsafe.Pointer, inDestinationSpace int, inDestinationObject unsafe.Pointer) {
+func HIRectConvert(ioRect *corefoundation.CGRect, inSourceSpace int, inSourceObject unsafe.Pointer, inDestinationSpace int, inDestinationObject unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIRectConvert == nil {
 		ebipurego.RegisterLibFunc(&_fnHIRectConvert, _lib, "HIRectConvert")
 	}
-	_fnHIRectConvert(ioRect, inSourceSpace, inSourceObject, inDestinationSpace, inDestinationObject)
+	_fnHIRectConvert(unsafe.Pointer(ioRect), inSourceSpace, inSourceObject, inDestinationSpace, inDestinationObject)
 }
 
 var _fnHISizeConvert func(unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer)
 
 // HISizeConvert calls the HIToolbox framework function HISizeConvert.
-func HISizeConvert(ioSize unsafe.Pointer, inSourceSpace int, inSourceObject unsafe.Pointer, inDestinationSpace int, inDestinationObject unsafe.Pointer) {
+func HISizeConvert(ioSize *corefoundation.CGSize, inSourceSpace int, inSourceObject unsafe.Pointer, inDestinationSpace int, inDestinationObject unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHISizeConvert == nil {
 		ebipurego.RegisterLibFunc(&_fnHISizeConvert, _lib, "HISizeConvert")
 	}
-	_fnHISizeConvert(ioSize, inSourceSpace, inSourceObject, inDestinationSpace, inDestinationObject)
-}
-
-var _fnHIThemeApplyBackground func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeApplyBackground calls the HIToolbox framework function HIThemeApplyBackground.
-func HIThemeApplyBackground(inBounds unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeBackgroundDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeApplyBackground == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeApplyBackground, _lib, "HIThemeApplyBackground")
-	}
-	var _out0 HIThemeBackgroundDrawInfo
-	_ret := int(_fnHIThemeApplyBackground(inBounds, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawBackground func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawBackground calls the HIToolbox framework function HIThemeDrawBackground.
-func HIThemeDrawBackground(inBounds unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeBackgroundDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawBackground == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawBackground, _lib, "HIThemeDrawBackground")
-	}
-	var _out0 HIThemeBackgroundDrawInfo
-	_ret := int(_fnHIThemeDrawBackground(inBounds, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
+	_fnHISizeConvert(unsafe.Pointer(ioSize), inSourceSpace, inSourceObject, inDestinationSpace, inDestinationObject)
 }
 
 var _fnHIThemeDrawButton func(unsafe.Pointer, unsafe.Pointer, objc.ID, int, unsafe.Pointer) int32
 
 // HIThemeDrawButton calls the HIToolbox framework function HIThemeDrawButton.
-func HIThemeDrawButton(inBounds unsafe.Pointer, inDrawInfo unsafe.Pointer, inContext obj.Object, inOrientation int, outLabelRect unsafe.Pointer) int {
+func HIThemeDrawButton(inBounds *corefoundation.CGRect, inDrawInfo unsafe.Pointer, inContext obj.Object, inOrientation int, outLabelRect *corefoundation.CGRect) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeDrawButton == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeDrawButton, _lib, "HIThemeDrawButton")
 	}
-	return int(_fnHIThemeDrawButton(inBounds, inDrawInfo, objref.IDOf(inContext), inOrientation, outLabelRect))
-}
-
-var _fnHIThemeDrawChasingArrows func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawChasingArrows calls the HIToolbox framework function HIThemeDrawChasingArrows.
-func HIThemeDrawChasingArrows(inBounds unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeChasingArrowsDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawChasingArrows == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawChasingArrows, _lib, "HIThemeDrawChasingArrows")
-	}
-	var _out0 HIThemeChasingArrowsDrawInfo
-	_ret := int(_fnHIThemeDrawChasingArrows(inBounds, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawFocusRect func(unsafe.Pointer, uint8, objc.ID, int) int32
-
-// HIThemeDrawFocusRect calls the HIToolbox framework function HIThemeDrawFocusRect.
-func HIThemeDrawFocusRect(inRect unsafe.Pointer, inHasFocus uint8, inContext obj.Object, inOrientation int) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawFocusRect == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawFocusRect, _lib, "HIThemeDrawFocusRect")
-	}
-	return int(_fnHIThemeDrawFocusRect(inRect, inHasFocus, objref.IDOf(inContext), inOrientation))
-}
-
-var _fnHIThemeDrawFrame func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawFrame calls the HIToolbox framework function HIThemeDrawFrame.
-func HIThemeDrawFrame(inRect unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeFrameDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawFrame == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawFrame, _lib, "HIThemeDrawFrame")
-	}
-	var _out0 HIThemeFrameDrawInfo
-	_ret := int(_fnHIThemeDrawFrame(inRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
+	return int(_fnHIThemeDrawButton(unsafe.Pointer(inBounds), inDrawInfo, objref.IDOf(inContext), inOrientation, unsafe.Pointer(outLabelRect)))
 }
 
 var _fnHIThemeDrawGenericWell func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
 
 // HIThemeDrawGenericWell calls the HIToolbox framework function HIThemeDrawGenericWell.
-func HIThemeDrawGenericWell(inRect unsafe.Pointer, inDrawInfo unsafe.Pointer, inContext obj.Object, inOrientation int) int {
+func HIThemeDrawGenericWell(inRect *corefoundation.CGRect, inDrawInfo unsafe.Pointer, inContext obj.Object, inOrientation int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeDrawGenericWell == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeDrawGenericWell, _lib, "HIThemeDrawGenericWell")
 	}
-	return int(_fnHIThemeDrawGenericWell(inRect, inDrawInfo, objref.IDOf(inContext), inOrientation))
-}
-
-var _fnHIThemeDrawGrabber func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawGrabber calls the HIToolbox framework function HIThemeDrawGrabber.
-func HIThemeDrawGrabber(inRect unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeGrabberDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawGrabber == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawGrabber, _lib, "HIThemeDrawGrabber")
-	}
-	var _out0 HIThemeGrabberDrawInfo
-	_ret := int(_fnHIThemeDrawGrabber(inRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawGroupBox func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawGroupBox calls the HIToolbox framework function HIThemeDrawGroupBox.
-func HIThemeDrawGroupBox(inRect unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeGroupBoxDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawGroupBox == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawGroupBox, _lib, "HIThemeDrawGroupBox")
-	}
-	var _out0 HIThemeGroupBoxDrawInfo
-	_ret := int(_fnHIThemeDrawGroupBox(inRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawGrowBox func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawGrowBox calls the HIToolbox framework function HIThemeDrawGrowBox.
-func HIThemeDrawGrowBox(inOrigin unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeGrowBoxDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawGrowBox == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawGrowBox, _lib, "HIThemeDrawGrowBox")
-	}
-	var _out0 HIThemeGrowBoxDrawInfo
-	_ret := int(_fnHIThemeDrawGrowBox(inOrigin, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawHeader func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawHeader calls the HIToolbox framework function HIThemeDrawHeader.
-func HIThemeDrawHeader(inRect unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeHeaderDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawHeader == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawHeader, _lib, "HIThemeDrawHeader")
-	}
-	var _out0 HIThemeHeaderDrawInfo
-	_ret := int(_fnHIThemeDrawHeader(inRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawMenuBackground func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawMenuBackground calls the HIToolbox framework function HIThemeDrawMenuBackground.
-func HIThemeDrawMenuBackground(inMenuRect unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inMenuDrawInfo HIThemeMenuDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawMenuBackground == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawMenuBackground, _lib, "HIThemeDrawMenuBackground")
-	}
-	var _out0 HIThemeMenuDrawInfo
-	_ret := int(_fnHIThemeDrawMenuBackground(inMenuRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawMenuBarBackground func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawMenuBarBackground calls the HIToolbox framework function HIThemeDrawMenuBarBackground.
-func HIThemeDrawMenuBarBackground(inBounds unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeMenuBarDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawMenuBarBackground == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawMenuBarBackground, _lib, "HIThemeDrawMenuBarBackground")
-	}
-	var _out0 HIThemeMenuBarDrawInfo
-	_ret := int(_fnHIThemeDrawMenuBarBackground(inBounds, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawMenuItem func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, int, unsafe.Pointer) int32
-
-// HIThemeDrawMenuItem calls the HIToolbox framework function HIThemeDrawMenuItem.
-func HIThemeDrawMenuItem(inMenuRect unsafe.Pointer, inItemRect unsafe.Pointer, inContext obj.Object, inOrientation int, outContentRect unsafe.Pointer) (result int, inItemDrawInfo HIThemeMenuItemDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawMenuItem == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawMenuItem, _lib, "HIThemeDrawMenuItem")
-	}
-	var _out0 HIThemeMenuItemDrawInfo
-	_ret := int(_fnHIThemeDrawMenuItem(inMenuRect, inItemRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation, outContentRect))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawMenuSeparator func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawMenuSeparator calls the HIToolbox framework function HIThemeDrawMenuSeparator.
-func HIThemeDrawMenuSeparator(inMenuRect unsafe.Pointer, inItemRect unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inItemDrawInfo HIThemeMenuItemDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawMenuSeparator == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawMenuSeparator, _lib, "HIThemeDrawMenuSeparator")
-	}
-	var _out0 HIThemeMenuItemDrawInfo
-	_ret := int(_fnHIThemeDrawMenuSeparator(inMenuRect, inItemRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawMenuTitle func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, int, unsafe.Pointer) int32
-
-// HIThemeDrawMenuTitle calls the HIToolbox framework function HIThemeDrawMenuTitle.
-func HIThemeDrawMenuTitle(inMenuBarRect unsafe.Pointer, inTitleRect unsafe.Pointer, inContext obj.Object, inOrientation int, outLabelRect unsafe.Pointer) (result int, inDrawInfo HIThemeMenuTitleDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawMenuTitle == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawMenuTitle, _lib, "HIThemeDrawMenuTitle")
-	}
-	var _out0 HIThemeMenuTitleDrawInfo
-	_ret := int(_fnHIThemeDrawMenuTitle(inMenuBarRect, inTitleRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation, outLabelRect))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawPaneSplitter func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawPaneSplitter calls the HIToolbox framework function HIThemeDrawPaneSplitter.
-func HIThemeDrawPaneSplitter(inRect unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeSplitterDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawPaneSplitter == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawPaneSplitter, _lib, "HIThemeDrawPaneSplitter")
-	}
-	var _out0 HIThemeSplitterDrawInfo
-	_ret := int(_fnHIThemeDrawPaneSplitter(inRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawPlacard func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawPlacard calls the HIToolbox framework function HIThemeDrawPlacard.
-func HIThemeDrawPlacard(inRect unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemePlacardDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawPlacard == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawPlacard, _lib, "HIThemeDrawPlacard")
-	}
-	var _out0 HIThemePlacardDrawInfo
-	_ret := int(_fnHIThemeDrawPlacard(inRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawPopupArrow func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawPopupArrow calls the HIToolbox framework function HIThemeDrawPopupArrow.
-func HIThemeDrawPopupArrow(inBounds unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemePopupArrowDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawPopupArrow == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawPopupArrow, _lib, "HIThemeDrawPopupArrow")
-	}
-	var _out0 HIThemePopupArrowDrawInfo
-	_ret := int(_fnHIThemeDrawPopupArrow(inBounds, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawScrollBarDelimiters func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawScrollBarDelimiters calls the HIToolbox framework function HIThemeDrawScrollBarDelimiters.
-func HIThemeDrawScrollBarDelimiters(inContRect unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeScrollBarDelimitersDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawScrollBarDelimiters == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawScrollBarDelimiters, _lib, "HIThemeDrawScrollBarDelimiters")
-	}
-	var _out0 HIThemeScrollBarDelimitersDrawInfo
-	_ret := int(_fnHIThemeDrawScrollBarDelimiters(inContRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawSegment func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawSegment calls the HIToolbox framework function HIThemeDrawSegment.
-func HIThemeDrawSegment(inBounds unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeSegmentDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawSegment == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawSegment, _lib, "HIThemeDrawSegment")
-	}
-	var _out0 HIThemeSegmentDrawInfo
-	_ret := int(_fnHIThemeDrawSegment(inBounds, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawSeparator func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawSeparator calls the HIToolbox framework function HIThemeDrawSeparator.
-func HIThemeDrawSeparator(inRect unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeSeparatorDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawSeparator == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawSeparator, _lib, "HIThemeDrawSeparator")
-	}
-	var _out0 HIThemeSeparatorDrawInfo
-	_ret := int(_fnHIThemeDrawSeparator(inRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawTab func(unsafe.Pointer, unsafe.Pointer, objc.ID, int, unsafe.Pointer) int32
-
-// HIThemeDrawTab calls the HIToolbox framework function HIThemeDrawTab.
-func HIThemeDrawTab(inRect unsafe.Pointer, inContext obj.Object, inOrientation int, outLabelRect unsafe.Pointer) (result int, inDrawInfo HIThemeTabDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawTab == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawTab, _lib, "HIThemeDrawTab")
-	}
-	var _out0 HIThemeTabDrawInfo
-	_ret := int(_fnHIThemeDrawTab(inRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation, outLabelRect))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawTabPane func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawTabPane calls the HIToolbox framework function HIThemeDrawTabPane.
-func HIThemeDrawTabPane(inRect unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeTabPaneDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawTabPane == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawTabPane, _lib, "HIThemeDrawTabPane")
-	}
-	var _out0 HIThemeTabPaneDrawInfo
-	_ret := int(_fnHIThemeDrawTabPane(inRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
+	return int(_fnHIThemeDrawGenericWell(unsafe.Pointer(inRect), inDrawInfo, objref.IDOf(inContext), inOrientation))
 }
 
 var _fnHIThemeDrawTextBox func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
 
 // HIThemeDrawTextBox calls the HIToolbox framework function HIThemeDrawTextBox.
-func HIThemeDrawTextBox(inString obj.Object, inBounds unsafe.Pointer, inTextInfo unsafe.Pointer, inContext obj.Object, inOrientation int) int {
+func HIThemeDrawTextBox(inString obj.Object, inBounds *corefoundation.CGRect, inTextInfo unsafe.Pointer, inContext obj.Object, inOrientation int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeDrawTextBox == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeDrawTextBox, _lib, "HIThemeDrawTextBox")
 	}
-	return int(_fnHIThemeDrawTextBox(objref.IDOf(inString), inBounds, inTextInfo, objref.IDOf(inContext), inOrientation))
-}
-
-var _fnHIThemeDrawTickMark func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawTickMark calls the HIToolbox framework function HIThemeDrawTickMark.
-func HIThemeDrawTickMark(inBounds unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeTickMarkDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawTickMark == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawTickMark, _lib, "HIThemeDrawTickMark")
-	}
-	var _out0 HIThemeTickMarkDrawInfo
-	_ret := int(_fnHIThemeDrawTickMark(inBounds, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
-}
-
-var _fnHIThemeDrawTitleBarWidget func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
-
-// HIThemeDrawTitleBarWidget calls the HIToolbox framework function HIThemeDrawTitleBarWidget.
-func HIThemeDrawTitleBarWidget(inContRect unsafe.Pointer, inContext obj.Object, inOrientation int) (result int, inDrawInfo HIThemeWindowWidgetDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawTitleBarWidget == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawTitleBarWidget, _lib, "HIThemeDrawTitleBarWidget")
-	}
-	var _out0 HIThemeWindowWidgetDrawInfo
-	_ret := int(_fnHIThemeDrawTitleBarWidget(inContRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation))
-	return _ret, _out0
+	return int(_fnHIThemeDrawTextBox(objref.IDOf(inString), unsafe.Pointer(inBounds), inTextInfo, objref.IDOf(inContext), inOrientation))
 }
 
 var _fnHIThemeDrawTrack func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
 
 // HIThemeDrawTrack calls the HIToolbox framework function HIThemeDrawTrack.
-func HIThemeDrawTrack(inDrawInfo unsafe.Pointer, inGhostRect unsafe.Pointer, inContext obj.Object, inOrientation int) int {
+func HIThemeDrawTrack(inDrawInfo unsafe.Pointer, inGhostRect *corefoundation.CGRect, inContext obj.Object, inOrientation int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeDrawTrack == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeDrawTrack, _lib, "HIThemeDrawTrack")
 	}
-	return int(_fnHIThemeDrawTrack(inDrawInfo, inGhostRect, objref.IDOf(inContext), inOrientation))
+	return int(_fnHIThemeDrawTrack(inDrawInfo, unsafe.Pointer(inGhostRect), objref.IDOf(inContext), inOrientation))
 }
 
 var _fnHIThemeDrawTrackTickMarks func(unsafe.Pointer, int, objc.ID, int) int32
@@ -2074,137 +1724,37 @@ func HIThemeDrawTrackTickMarks(inDrawInfo unsafe.Pointer, inNumTicks int, inCont
 	return int(_fnHIThemeDrawTrackTickMarks(inDrawInfo, inNumTicks, objref.IDOf(inContext), inOrientation))
 }
 
-var _fnHIThemeDrawWindowFrame func(unsafe.Pointer, unsafe.Pointer, objc.ID, int, unsafe.Pointer) int32
-
-// HIThemeDrawWindowFrame calls the HIToolbox framework function HIThemeDrawWindowFrame.
-func HIThemeDrawWindowFrame(inContRect unsafe.Pointer, inContext obj.Object, inOrientation int, outTitleRect unsafe.Pointer) (result int, inDrawInfo HIThemeWindowDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeDrawWindowFrame == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeDrawWindowFrame, _lib, "HIThemeDrawWindowFrame")
-	}
-	var _out0 HIThemeWindowDrawInfo
-	_ret := int(_fnHIThemeDrawWindowFrame(inContRect, unsafe.Pointer(&_out0), objref.IDOf(inContext), inOrientation, outTitleRect))
-	return _ret, _out0
-}
-
 var _fnHIThemeGetButtonBackgroundBounds func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // HIThemeGetButtonBackgroundBounds calls the HIToolbox framework function HIThemeGetButtonBackgroundBounds.
-func HIThemeGetButtonBackgroundBounds(inBounds unsafe.Pointer, inDrawInfo unsafe.Pointer, outBounds unsafe.Pointer) int {
+func HIThemeGetButtonBackgroundBounds(inBounds *corefoundation.CGRect, inDrawInfo unsafe.Pointer, outBounds *corefoundation.CGRect) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeGetButtonBackgroundBounds == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeGetButtonBackgroundBounds, _lib, "HIThemeGetButtonBackgroundBounds")
 	}
-	return int(_fnHIThemeGetButtonBackgroundBounds(inBounds, inDrawInfo, outBounds))
+	return int(_fnHIThemeGetButtonBackgroundBounds(unsafe.Pointer(inBounds), inDrawInfo, unsafe.Pointer(outBounds)))
 }
 
 var _fnHIThemeGetButtonContentBounds func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // HIThemeGetButtonContentBounds calls the HIToolbox framework function HIThemeGetButtonContentBounds.
-func HIThemeGetButtonContentBounds(inBounds unsafe.Pointer, inDrawInfo unsafe.Pointer, outBounds unsafe.Pointer) int {
+func HIThemeGetButtonContentBounds(inBounds *corefoundation.CGRect, inDrawInfo unsafe.Pointer, outBounds *corefoundation.CGRect) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeGetButtonContentBounds == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeGetButtonContentBounds, _lib, "HIThemeGetButtonContentBounds")
 	}
-	return int(_fnHIThemeGetButtonContentBounds(inBounds, inDrawInfo, outBounds))
+	return int(_fnHIThemeGetButtonContentBounds(unsafe.Pointer(inBounds), inDrawInfo, unsafe.Pointer(outBounds)))
 }
 
 var _fnHIThemeGetButtonShape func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // HIThemeGetButtonShape calls the HIToolbox framework function HIThemeGetButtonShape.
-func HIThemeGetButtonShape(inBounds unsafe.Pointer, inDrawInfo unsafe.Pointer, outShape unsafe.Pointer) int {
+func HIThemeGetButtonShape(inBounds *corefoundation.CGRect, inDrawInfo unsafe.Pointer, outShape unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeGetButtonShape == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeGetButtonShape, _lib, "HIThemeGetButtonShape")
 	}
-	return int(_fnHIThemeGetButtonShape(inBounds, inDrawInfo, outShape))
-}
-
-var _fnHIThemeGetGrowBoxBounds func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-
-// HIThemeGetGrowBoxBounds calls the HIToolbox framework function HIThemeGetGrowBoxBounds.
-func HIThemeGetGrowBoxBounds(inOrigin unsafe.Pointer, outBounds unsafe.Pointer) (result int, inDrawInfo HIThemeGrowBoxDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeGetGrowBoxBounds == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeGetGrowBoxBounds, _lib, "HIThemeGetGrowBoxBounds")
-	}
-	var _out0 HIThemeGrowBoxDrawInfo
-	_ret := int(_fnHIThemeGetGrowBoxBounds(inOrigin, unsafe.Pointer(&_out0), outBounds))
-	return _ret, _out0
-}
-
-var _fnHIThemeGetMenuBackgroundShape func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-
-// HIThemeGetMenuBackgroundShape calls the HIToolbox framework function HIThemeGetMenuBackgroundShape.
-func HIThemeGetMenuBackgroundShape(inMenuRect unsafe.Pointer, outShape unsafe.Pointer) (result int, inMenuDrawInfo HIThemeMenuDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeGetMenuBackgroundShape == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeGetMenuBackgroundShape, _lib, "HIThemeGetMenuBackgroundShape")
-	}
-	var _out0 HIThemeMenuDrawInfo
-	_ret := int(_fnHIThemeGetMenuBackgroundShape(inMenuRect, unsafe.Pointer(&_out0), outShape))
-	return _ret, _out0
-}
-
-var _fnHIThemeGetScrollBarTrackRect func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer) int32
-
-// HIThemeGetScrollBarTrackRect calls the HIToolbox framework function HIThemeGetScrollBarTrackRect.
-func HIThemeGetScrollBarTrackRect(inBounds unsafe.Pointer, inIsHoriz uint8, outTrackBounds unsafe.Pointer) (result int, inTrackInfo HIScrollBarTrackInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeGetScrollBarTrackRect == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeGetScrollBarTrackRect, _lib, "HIThemeGetScrollBarTrackRect")
-	}
-	var _out0 HIScrollBarTrackInfo
-	_ret := int(_fnHIThemeGetScrollBarTrackRect(inBounds, unsafe.Pointer(&_out0), inIsHoriz, outTrackBounds))
-	return _ret, _out0
-}
-
-var _fnHIThemeGetTabDrawShape func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-
-// HIThemeGetTabDrawShape calls the HIToolbox framework function HIThemeGetTabDrawShape.
-func HIThemeGetTabDrawShape(inRect unsafe.Pointer, outShape unsafe.Pointer) (result int, inDrawInfo HIThemeTabDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeGetTabDrawShape == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeGetTabDrawShape, _lib, "HIThemeGetTabDrawShape")
-	}
-	var _out0 HIThemeTabDrawInfo
-	_ret := int(_fnHIThemeGetTabDrawShape(inRect, unsafe.Pointer(&_out0), outShape))
-	return _ret, _out0
-}
-
-var _fnHIThemeGetTabPaneContentShape func(unsafe.Pointer, uint16, int, unsafe.Pointer) int32
-
-// HIThemeGetTabPaneContentShape calls the HIToolbox framework function HIThemeGetTabPaneContentShape.
-func HIThemeGetTabPaneContentShape(inRect unsafe.Pointer, inDirection uint16, inTabSize int, outShape unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeGetTabPaneContentShape == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeGetTabPaneContentShape, _lib, "HIThemeGetTabPaneContentShape")
-	}
-	return int(_fnHIThemeGetTabPaneContentShape(inRect, inDirection, inTabSize, outShape))
-}
-
-var _fnHIThemeGetTabPaneDrawShape func(unsafe.Pointer, uint16, int, unsafe.Pointer) int32
-
-// HIThemeGetTabPaneDrawShape calls the HIToolbox framework function HIThemeGetTabPaneDrawShape.
-func HIThemeGetTabPaneDrawShape(inRect unsafe.Pointer, inDirection uint16, inTabSize int, outShape unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeGetTabPaneDrawShape == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeGetTabPaneDrawShape, _lib, "HIThemeGetTabPaneDrawShape")
-	}
-	return int(_fnHIThemeGetTabPaneDrawShape(inRect, inDirection, inTabSize, outShape))
-}
-
-var _fnHIThemeGetTabShape func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-
-// HIThemeGetTabShape calls the HIToolbox framework function HIThemeGetTabShape.
-func HIThemeGetTabShape(inRect unsafe.Pointer, outShape unsafe.Pointer) (result int, inDrawInfo HIThemeTabDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeGetTabShape == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeGetTabShape, _lib, "HIThemeGetTabShape")
-	}
-	var _out0 HIThemeTabDrawInfo
-	_ret := int(_fnHIThemeGetTabShape(inRect, unsafe.Pointer(&_out0), outShape))
-	return _ret, _out0
+	return int(_fnHIThemeGetButtonShape(unsafe.Pointer(inBounds), inDrawInfo, outShape))
 }
 
 var _fnHIThemeGetTextColorForThemeBrush func(int16, uint8, unsafe.Pointer) int32
@@ -2238,23 +1788,23 @@ func HIThemeGetTextDimensions(inString obj.Object, inWidth float64, inTextInfo u
 var _fnHIThemeGetTrackBounds func(unsafe.Pointer, unsafe.Pointer) int32
 
 // HIThemeGetTrackBounds calls the HIToolbox framework function HIThemeGetTrackBounds.
-func HIThemeGetTrackBounds(inDrawInfo unsafe.Pointer, outBounds unsafe.Pointer) int {
+func HIThemeGetTrackBounds(inDrawInfo unsafe.Pointer, outBounds *corefoundation.CGRect) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeGetTrackBounds == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeGetTrackBounds, _lib, "HIThemeGetTrackBounds")
 	}
-	return int(_fnHIThemeGetTrackBounds(inDrawInfo, outBounds))
+	return int(_fnHIThemeGetTrackBounds(inDrawInfo, unsafe.Pointer(outBounds)))
 }
 
 var _fnHIThemeGetTrackDragRect func(unsafe.Pointer, unsafe.Pointer) int32
 
 // HIThemeGetTrackDragRect calls the HIToolbox framework function HIThemeGetTrackDragRect.
-func HIThemeGetTrackDragRect(inDrawInfo unsafe.Pointer, outDragRect unsafe.Pointer) int {
+func HIThemeGetTrackDragRect(inDrawInfo unsafe.Pointer, outDragRect *corefoundation.CGRect) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeGetTrackDragRect == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeGetTrackDragRect, _lib, "HIThemeGetTrackDragRect")
 	}
-	return int(_fnHIThemeGetTrackDragRect(inDrawInfo, outDragRect))
+	return int(_fnHIThemeGetTrackDragRect(inDrawInfo, unsafe.Pointer(outDragRect)))
 }
 
 var _fnHIThemeGetTrackLiveValue func(unsafe.Pointer, float64, unsafe.Pointer) int32
@@ -2273,12 +1823,12 @@ func HIThemeGetTrackLiveValue(inDrawInfo unsafe.Pointer, inRelativePosition floa
 var _fnHIThemeGetTrackPartBounds func(unsafe.Pointer, int16, unsafe.Pointer) int32
 
 // HIThemeGetTrackPartBounds calls the HIToolbox framework function HIThemeGetTrackPartBounds.
-func HIThemeGetTrackPartBounds(inDrawInfo unsafe.Pointer, inPartCode int16, outPartBounds unsafe.Pointer) int {
+func HIThemeGetTrackPartBounds(inDrawInfo unsafe.Pointer, inPartCode int16, outPartBounds *corefoundation.CGRect) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeGetTrackPartBounds == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeGetTrackPartBounds, _lib, "HIThemeGetTrackPartBounds")
 	}
-	return int(_fnHIThemeGetTrackPartBounds(inDrawInfo, inPartCode, outPartBounds))
+	return int(_fnHIThemeGetTrackPartBounds(inDrawInfo, inPartCode, unsafe.Pointer(outPartBounds)))
 }
 
 var _fnHIThemeGetTrackParts func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer) int32
@@ -2298,26 +1848,26 @@ func HIThemeGetTrackParts(inDrawInfo unsafe.Pointer, inMaxParts int) (result int
 var _fnHIThemeGetTrackThumbPositionFromBounds func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // HIThemeGetTrackThumbPositionFromBounds calls the HIToolbox framework function HIThemeGetTrackThumbPositionFromBounds.
-func HIThemeGetTrackThumbPositionFromBounds(inDrawInfo unsafe.Pointer, inThumbBounds unsafe.Pointer) (result int, outRelativePosition float64) {
+func HIThemeGetTrackThumbPositionFromBounds(inDrawInfo unsafe.Pointer, inThumbBounds *corefoundation.CGRect) (result int, outRelativePosition float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeGetTrackThumbPositionFromBounds == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeGetTrackThumbPositionFromBounds, _lib, "HIThemeGetTrackThumbPositionFromBounds")
 	}
 	var _out0 float64
-	_ret := int(_fnHIThemeGetTrackThumbPositionFromBounds(inDrawInfo, inThumbBounds, unsafe.Pointer(&_out0)))
+	_ret := int(_fnHIThemeGetTrackThumbPositionFromBounds(inDrawInfo, unsafe.Pointer(inThumbBounds), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnHIThemeGetTrackThumbPositionFromOffset func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // HIThemeGetTrackThumbPositionFromOffset calls the HIToolbox framework function HIThemeGetTrackThumbPositionFromOffset.
-func HIThemeGetTrackThumbPositionFromOffset(inDrawInfo unsafe.Pointer, inThumbOffset unsafe.Pointer) (result int, outRelativePosition float64) {
+func HIThemeGetTrackThumbPositionFromOffset(inDrawInfo unsafe.Pointer, inThumbOffset *corefoundation.CGPoint) (result int, outRelativePosition float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeGetTrackThumbPositionFromOffset == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeGetTrackThumbPositionFromOffset, _lib, "HIThemeGetTrackThumbPositionFromOffset")
 	}
 	var _out0 float64
-	_ret := int(_fnHIThemeGetTrackThumbPositionFromOffset(inDrawInfo, inThumbOffset, unsafe.Pointer(&_out0)))
+	_ret := int(_fnHIThemeGetTrackThumbPositionFromOffset(inDrawInfo, unsafe.Pointer(inThumbOffset), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -2346,67 +1896,39 @@ func HIThemeGetUIFontType(inFontID uint16) unsafe.Pointer {
 var _fnHIThemeGetWindowRegionHit func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
 
 // HIThemeGetWindowRegionHit calls the HIToolbox framework function HIThemeGetWindowRegionHit.
-func HIThemeGetWindowRegionHit(inContRect unsafe.Pointer, inPoint unsafe.Pointer) (result uint8, inDrawInfo HIThemeWindowDrawInfo, outRegionHit uint16) {
+func HIThemeGetWindowRegionHit(inContRect *corefoundation.CGRect, inDrawInfo *HIThemeWindowDrawInfo, inPoint *corefoundation.CGPoint) (result uint8, outRegionHit uint16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeGetWindowRegionHit == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeGetWindowRegionHit, _lib, "HIThemeGetWindowRegionHit")
 	}
-	var _out0 HIThemeWindowDrawInfo
-	var _out1 uint16
-	_ret := _fnHIThemeGetWindowRegionHit(inContRect, unsafe.Pointer(&_out0), inPoint, unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
-}
-
-var _fnHIThemeGetWindowShape func(unsafe.Pointer, unsafe.Pointer, uint16, unsafe.Pointer) int32
-
-// HIThemeGetWindowShape calls the HIToolbox framework function HIThemeGetWindowShape.
-func HIThemeGetWindowShape(inContRect unsafe.Pointer, inWinRegion uint16, outShape unsafe.Pointer) (result int, inDrawInfo HIThemeWindowDrawInfo) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnHIThemeGetWindowShape == nil {
-		ebipurego.RegisterLibFunc(&_fnHIThemeGetWindowShape, _lib, "HIThemeGetWindowShape")
-	}
-	var _out0 HIThemeWindowDrawInfo
-	_ret := int(_fnHIThemeGetWindowShape(inContRect, unsafe.Pointer(&_out0), inWinRegion, outShape))
+	var _out0 uint16
+	_ret := _fnHIThemeGetWindowRegionHit(unsafe.Pointer(inContRect), unsafe.Pointer(inDrawInfo), unsafe.Pointer(inPoint), unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnHIThemeHitTestScrollBarArrows func(unsafe.Pointer, unsafe.Pointer, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
 
 // HIThemeHitTestScrollBarArrows calls the HIToolbox framework function HIThemeHitTestScrollBarArrows.
-func HIThemeHitTestScrollBarArrows(inScrollBarBounds unsafe.Pointer, inIsHoriz uint8, inPtHit unsafe.Pointer, outTrackBounds unsafe.Pointer) (result uint8, inTrackInfo HIScrollBarTrackInfo, outPartCode int16) {
+func HIThemeHitTestScrollBarArrows(inScrollBarBounds *corefoundation.CGRect, inTrackInfo *HIScrollBarTrackInfo, inIsHoriz uint8, inPtHit *corefoundation.CGPoint, outTrackBounds *corefoundation.CGRect) (result uint8, outPartCode int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeHitTestScrollBarArrows == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeHitTestScrollBarArrows, _lib, "HIThemeHitTestScrollBarArrows")
 	}
-	var _out0 HIScrollBarTrackInfo
-	var _out1 int16
-	_ret := _fnHIThemeHitTestScrollBarArrows(inScrollBarBounds, unsafe.Pointer(&_out0), inIsHoriz, inPtHit, outTrackBounds, unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	var _out0 int16
+	_ret := _fnHIThemeHitTestScrollBarArrows(unsafe.Pointer(inScrollBarBounds), unsafe.Pointer(inTrackInfo), inIsHoriz, unsafe.Pointer(inPtHit), unsafe.Pointer(outTrackBounds), unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnHIThemeHitTestTrack func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
 
 // HIThemeHitTestTrack calls the HIToolbox framework function HIThemeHitTestTrack.
-func HIThemeHitTestTrack(inDrawInfo unsafe.Pointer, inMousePoint unsafe.Pointer) (result uint8, outPartHit int16) {
+func HIThemeHitTestTrack(inDrawInfo unsafe.Pointer, inMousePoint *corefoundation.CGPoint) (result uint8, outPartHit int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeHitTestTrack == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeHitTestTrack, _lib, "HIThemeHitTestTrack")
 	}
 	var _out0 int16
-	_ret := _fnHIThemeHitTestTrack(inDrawInfo, inMousePoint, unsafe.Pointer(&_out0))
-	return _ret, _out0
-}
-
-var _fnInstallEventHandler func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
-
-// InstallEventHandler calls the HIToolbox framework function InstallEventHandler.
-func InstallEventHandler(inTarget obj.Object, inHandler unsafe.Pointer, inNumTypes int, inUserData unsafe.Pointer, outRef unsafe.Pointer) (result int, inList EventTypeSpec) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnInstallEventHandler == nil {
-		ebipurego.RegisterLibFunc(&_fnInstallEventHandler, _lib, "InstallEventHandler")
-	}
-	var _out0 EventTypeSpec
-	_ret := int(_fnInstallEventHandler(objref.IDOf(inTarget), inHandler, inNumTypes, unsafe.Pointer(&_out0), inUserData, outRef))
+	_ret := _fnHIThemeHitTestTrack(inDrawInfo, unsafe.Pointer(inMousePoint), unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
@@ -2437,12 +1959,12 @@ func InvokeAEIdleUPP(theEvent unsafe.Pointer, mouseRgn unsafe.Pointer, userUPP u
 var _fnInvokeCaretHookUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // InvokeCaretHookUPP calls the HIToolbox framework function InvokeCaretHookUPP.
-func InvokeCaretHookUPP(r unsafe.Pointer, pTE unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeCaretHookUPP(r *carboncore.Rect, pTE unsafe.Pointer, userUPP unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeCaretHookUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeCaretHookUPP, _lib, "InvokeCaretHookUPP")
 	}
-	_fnInvokeCaretHookUPP(r, pTE, userUPP)
+	_fnInvokeCaretHookUPP(unsafe.Pointer(r), pTE, userUPP)
 }
 
 var _fnInvokeControlActionUPP func(objc.ID, int16, unsafe.Pointer)
@@ -2584,24 +2106,24 @@ func InvokeDataBrowserAddDragItemUPP(browser obj.Object, theDrag unsafe.Pointer,
 var _fnInvokeDataBrowserDrawItemUPP func(objc.ID, int, int, int, unsafe.Pointer, int16, uint8, unsafe.Pointer)
 
 // InvokeDataBrowserDrawItemUPP calls the HIToolbox framework function InvokeDataBrowserDrawItemUPP.
-func InvokeDataBrowserDrawItemUPP(browser obj.Object, item int, property int, itemState int, theRect unsafe.Pointer, gdDepth int16, colorDevice uint8, userUPP unsafe.Pointer) {
+func InvokeDataBrowserDrawItemUPP(browser obj.Object, item int, property int, itemState int, theRect *carboncore.Rect, gdDepth int16, colorDevice uint8, userUPP unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeDataBrowserDrawItemUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeDataBrowserDrawItemUPP, _lib, "InvokeDataBrowserDrawItemUPP")
 	}
-	_fnInvokeDataBrowserDrawItemUPP(objref.IDOf(browser), item, property, itemState, theRect, gdDepth, colorDevice, userUPP)
+	_fnInvokeDataBrowserDrawItemUPP(objref.IDOf(browser), item, property, itemState, unsafe.Pointer(theRect), gdDepth, colorDevice, userUPP)
 }
 
 var _fnInvokeDataBrowserEditItemUPP func(objc.ID, int, int, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
 
 // InvokeDataBrowserEditItemUPP calls the HIToolbox framework function InvokeDataBrowserEditItemUPP.
-func InvokeDataBrowserEditItemUPP(browser obj.Object, item int, property int, theString obj.Object, maxEditTextRect unsafe.Pointer, userUPP unsafe.Pointer) (result uint8, shrinkToFit uint8) {
+func InvokeDataBrowserEditItemUPP(browser obj.Object, item int, property int, theString obj.Object, maxEditTextRect *carboncore.Rect, userUPP unsafe.Pointer) (result uint8, shrinkToFit uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeDataBrowserEditItemUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeDataBrowserEditItemUPP, _lib, "InvokeDataBrowserEditItemUPP")
 	}
 	var _out0 uint8
-	_ret := _fnInvokeDataBrowserEditItemUPP(objref.IDOf(browser), item, property, objref.IDOf(theString), maxEditTextRect, unsafe.Pointer(&_out0), userUPP)
+	_ret := _fnInvokeDataBrowserEditItemUPP(objref.IDOf(browser), item, property, objref.IDOf(theString), unsafe.Pointer(maxEditTextRect), unsafe.Pointer(&_out0), userUPP)
 	return _ret, _out0
 }
 
@@ -2621,23 +2143,23 @@ func InvokeDataBrowserGetContextualMenuUPP(browser obj.Object, menu unsafe.Point
 var _fnInvokeDataBrowserHitTestUPP func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
 
 // InvokeDataBrowserHitTestUPP calls the HIToolbox framework function InvokeDataBrowserHitTestUPP.
-func InvokeDataBrowserHitTestUPP(browser obj.Object, itemID int, property int, theRect unsafe.Pointer, mouseRect unsafe.Pointer, userUPP unsafe.Pointer) uint8 {
+func InvokeDataBrowserHitTestUPP(browser obj.Object, itemID int, property int, theRect *carboncore.Rect, mouseRect *carboncore.Rect, userUPP unsafe.Pointer) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeDataBrowserHitTestUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeDataBrowserHitTestUPP, _lib, "InvokeDataBrowserHitTestUPP")
 	}
-	return _fnInvokeDataBrowserHitTestUPP(objref.IDOf(browser), itemID, property, theRect, mouseRect, userUPP)
+	return _fnInvokeDataBrowserHitTestUPP(objref.IDOf(browser), itemID, property, unsafe.Pointer(theRect), unsafe.Pointer(mouseRect), userUPP)
 }
 
 var _fnInvokeDataBrowserItemAcceptDragUPP func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
 
 // InvokeDataBrowserItemAcceptDragUPP calls the HIToolbox framework function InvokeDataBrowserItemAcceptDragUPP.
-func InvokeDataBrowserItemAcceptDragUPP(browser obj.Object, itemID int, property int, theRect unsafe.Pointer, theDrag unsafe.Pointer, userUPP unsafe.Pointer) int {
+func InvokeDataBrowserItemAcceptDragUPP(browser obj.Object, itemID int, property int, theRect *carboncore.Rect, theDrag unsafe.Pointer, userUPP unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeDataBrowserItemAcceptDragUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeDataBrowserItemAcceptDragUPP, _lib, "InvokeDataBrowserItemAcceptDragUPP")
 	}
-	return int(_fnInvokeDataBrowserItemAcceptDragUPP(objref.IDOf(browser), itemID, property, theRect, theDrag, userUPP))
+	return int(_fnInvokeDataBrowserItemAcceptDragUPP(objref.IDOf(browser), itemID, property, unsafe.Pointer(theRect), theDrag, userUPP))
 }
 
 var _fnInvokeDataBrowserItemCompareUPP func(objc.ID, int, int, int, unsafe.Pointer) uint8
@@ -2654,12 +2176,12 @@ func InvokeDataBrowserItemCompareUPP(browser obj.Object, itemOne int, itemTwo in
 var _fnInvokeDataBrowserItemDragRgnUPP func(objc.ID, int, int, unsafe.Pointer, objc.ID, unsafe.Pointer)
 
 // InvokeDataBrowserItemDragRgnUPP calls the HIToolbox framework function InvokeDataBrowserItemDragRgnUPP.
-func InvokeDataBrowserItemDragRgnUPP(browser obj.Object, itemID int, property int, theRect unsafe.Pointer, dragRgn obj.Object, userUPP unsafe.Pointer) {
+func InvokeDataBrowserItemDragRgnUPP(browser obj.Object, itemID int, property int, theRect *carboncore.Rect, dragRgn obj.Object, userUPP unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeDataBrowserItemDragRgnUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeDataBrowserItemDragRgnUPP, _lib, "InvokeDataBrowserItemDragRgnUPP")
 	}
-	_fnInvokeDataBrowserItemDragRgnUPP(objref.IDOf(browser), itemID, property, theRect, objref.IDOf(dragRgn), userUPP)
+	_fnInvokeDataBrowserItemDragRgnUPP(objref.IDOf(browser), itemID, property, unsafe.Pointer(theRect), objref.IDOf(dragRgn), userUPP)
 }
 
 var _fnInvokeDataBrowserItemHelpContentUPP func(objc.ID, int, int, int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -2755,12 +2277,12 @@ func InvokeDataBrowserSelectContextualMenuUPP(browser obj.Object, menu obj.Objec
 var _fnInvokeDataBrowserTrackingUPP func(objc.ID, int, int, unsafe.Pointer, carboncore.Point, uint16, unsafe.Pointer) int16
 
 // InvokeDataBrowserTrackingUPP calls the HIToolbox framework function InvokeDataBrowserTrackingUPP.
-func InvokeDataBrowserTrackingUPP(browser obj.Object, itemID int, property int, theRect unsafe.Pointer, startPt carboncore.Point, modifiers uint16, userUPP unsafe.Pointer) int16 {
+func InvokeDataBrowserTrackingUPP(browser obj.Object, itemID int, property int, theRect *carboncore.Rect, startPt carboncore.Point, modifiers uint16, userUPP unsafe.Pointer) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeDataBrowserTrackingUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeDataBrowserTrackingUPP, _lib, "InvokeDataBrowserTrackingUPP")
 	}
-	return _fnInvokeDataBrowserTrackingUPP(objref.IDOf(browser), itemID, property, theRect, startPt, modifiers, userUPP)
+	return _fnInvokeDataBrowserTrackingUPP(objref.IDOf(browser), itemID, property, unsafe.Pointer(theRect), startPt, modifiers, userUPP)
 }
 
 var _fnInvokeDragDrawingUPP func(int16, objc.ID, carboncore.Point, objc.ID, carboncore.Point, unsafe.Pointer, objc.ID, unsafe.Pointer) int16
@@ -2777,13 +2299,13 @@ func InvokeDragDrawingUPP(message int16, showRegion obj.Object, showOrigin carbo
 var _fnInvokeDragInputUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) int16
 
 // InvokeDragInputUPP calls the HIToolbox framework function InvokeDragInputUPP.
-func InvokeDragInputUPP(mouse unsafe.Pointer, dragInputRefCon unsafe.Pointer, theDrag obj.Object, userUPP unsafe.Pointer) (result int16, modifiers int16) {
+func InvokeDragInputUPP(mouse *carboncore.Point, dragInputRefCon unsafe.Pointer, theDrag obj.Object, userUPP unsafe.Pointer) (result int16, modifiers int16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeDragInputUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeDragInputUPP, _lib, "InvokeDragInputUPP")
 	}
 	var _out0 int16
-	_ret := _fnInvokeDragInputUPP(mouse, unsafe.Pointer(&_out0), dragInputRefCon, objref.IDOf(theDrag), userUPP)
+	_ret := _fnInvokeDragInputUPP(unsafe.Pointer(mouse), unsafe.Pointer(&_out0), dragInputRefCon, objref.IDOf(theDrag), userUPP)
 	return _ret, _out0
 }
 
@@ -2954,12 +2476,12 @@ func InvokeHMWindowContentUPP(inWindow unsafe.Pointer, inGlobalMouse carboncore.
 var _fnInvokeHighHookUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // InvokeHighHookUPP calls the HIToolbox framework function InvokeHighHookUPP.
-func InvokeHighHookUPP(r unsafe.Pointer, pTE unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeHighHookUPP(r *carboncore.Rect, pTE unsafe.Pointer, userUPP unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeHighHookUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeHighHookUPP, _lib, "InvokeHighHookUPP")
 	}
-	_fnInvokeHighHookUPP(r, pTE, userUPP)
+	_fnInvokeHighHookUPP(unsafe.Pointer(r), pTE, userUPP)
 }
 
 var _fnInvokeHitTestHookUPP func(uint16, uint16, uint16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
@@ -2991,12 +2513,12 @@ func InvokeListClickLoopUPP(userUPP unsafe.Pointer) uint8 {
 var _fnInvokeListDefUPP func(int16, uint8, unsafe.Pointer, carboncore.Point, int16, int16, unsafe.Pointer, unsafe.Pointer)
 
 // InvokeListDefUPP calls the HIToolbox framework function InvokeListDefUPP.
-func InvokeListDefUPP(lMessage int16, lSelect uint8, lRect unsafe.Pointer, lCell carboncore.Point, lDataOffset int16, lDataLen int16, lHandle unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeListDefUPP(lMessage int16, lSelect uint8, lRect *carboncore.Rect, lCell carboncore.Point, lDataOffset int16, lDataLen int16, lHandle unsafe.Pointer, userUPP unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeListDefUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeListDefUPP, _lib, "InvokeListDefUPP")
 	}
-	_fnInvokeListDefUPP(lMessage, lSelect, lRect, lCell, lDataOffset, lDataLen, lHandle, userUPP)
+	_fnInvokeListDefUPP(lMessage, lSelect, unsafe.Pointer(lRect), lCell, lDataOffset, lDataLen, lHandle, userUPP)
 }
 
 var _fnInvokeListSearchUPP func(string, string, int16, int16, unsafe.Pointer) int16
@@ -3013,23 +2535,23 @@ func InvokeListSearchUPP(aPtr string, bPtr string, aLen int16, bLen int16, userU
 var _fnInvokeMenuItemDrawingUPP func(unsafe.Pointer, int16, uint8, unsafe.Pointer, unsafe.Pointer)
 
 // InvokeMenuItemDrawingUPP calls the HIToolbox framework function InvokeMenuItemDrawingUPP.
-func InvokeMenuItemDrawingUPP(inBounds unsafe.Pointer, inDepth int16, inIsColorDevice uint8, inUserData unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeMenuItemDrawingUPP(inBounds *carboncore.Rect, inDepth int16, inIsColorDevice uint8, inUserData unsafe.Pointer, userUPP unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeMenuItemDrawingUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeMenuItemDrawingUPP, _lib, "InvokeMenuItemDrawingUPP")
 	}
-	_fnInvokeMenuItemDrawingUPP(inBounds, inDepth, inIsColorDevice, inUserData, userUPP)
+	_fnInvokeMenuItemDrawingUPP(unsafe.Pointer(inBounds), inDepth, inIsColorDevice, inUserData, userUPP)
 }
 
 var _fnInvokeMenuTitleDrawingUPP func(unsafe.Pointer, int16, uint8, unsafe.Pointer, unsafe.Pointer)
 
 // InvokeMenuTitleDrawingUPP calls the HIToolbox framework function InvokeMenuTitleDrawingUPP.
-func InvokeMenuTitleDrawingUPP(inBounds unsafe.Pointer, inDepth int16, inIsColorDevice uint8, inUserData unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeMenuTitleDrawingUPP(inBounds *carboncore.Rect, inDepth int16, inIsColorDevice uint8, inUserData unsafe.Pointer, userUPP unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeMenuTitleDrawingUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeMenuTitleDrawingUPP, _lib, "InvokeMenuTitleDrawingUPP")
 	}
-	_fnInvokeMenuTitleDrawingUPP(inBounds, inDepth, inIsColorDevice, inUserData, userUPP)
+	_fnInvokeMenuTitleDrawingUPP(unsafe.Pointer(inBounds), inDepth, inIsColorDevice, inUserData, userUPP)
 }
 
 var _fnInvokeModalFilterUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
@@ -3232,25 +2754,23 @@ func InvokeTextWidthHookUPP(textLen uint16, textOffset uint16, textBufferPtr uns
 var _fnInvokeThemeButtonDrawUPP func(unsafe.Pointer, uint16, unsafe.Pointer, unsafe.Pointer, int16, uint8, unsafe.Pointer)
 
 // InvokeThemeButtonDrawUPP calls the HIToolbox framework function InvokeThemeButtonDrawUPP.
-func InvokeThemeButtonDrawUPP(bounds unsafe.Pointer, kind uint16, userData unsafe.Pointer, depth int16, isColorDev uint8, userUPP unsafe.Pointer) (info ThemeButtonDrawInfo) {
+func InvokeThemeButtonDrawUPP(bounds *carboncore.Rect, kind uint16, info *ThemeButtonDrawInfo, userData unsafe.Pointer, depth int16, isColorDev uint8, userUPP unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeThemeButtonDrawUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeThemeButtonDrawUPP, _lib, "InvokeThemeButtonDrawUPP")
 	}
-	var _out0 ThemeButtonDrawInfo
-	_fnInvokeThemeButtonDrawUPP(bounds, kind, unsafe.Pointer(&_out0), userData, depth, isColorDev, userUPP)
-	return _out0
+	_fnInvokeThemeButtonDrawUPP(unsafe.Pointer(bounds), kind, unsafe.Pointer(info), userData, depth, isColorDev, userUPP)
 }
 
 var _fnInvokeThemeEraseUPP func(unsafe.Pointer, unsafe.Pointer, int16, uint8, unsafe.Pointer)
 
 // InvokeThemeEraseUPP calls the HIToolbox framework function InvokeThemeEraseUPP.
-func InvokeThemeEraseUPP(bounds unsafe.Pointer, eraseData unsafe.Pointer, depth int16, isColorDev uint8, userUPP unsafe.Pointer) {
+func InvokeThemeEraseUPP(bounds *carboncore.Rect, eraseData unsafe.Pointer, depth int16, isColorDev uint8, userUPP unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeThemeEraseUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeThemeEraseUPP, _lib, "InvokeThemeEraseUPP")
 	}
-	_fnInvokeThemeEraseUPP(bounds, eraseData, depth, isColorDev, userUPP)
+	_fnInvokeThemeEraseUPP(unsafe.Pointer(bounds), eraseData, depth, isColorDev, userUPP)
 }
 
 var _fnInvokeThemeIteratorUPP func(unsafe.Pointer, int16, objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
@@ -3269,12 +2789,12 @@ func InvokeThemeIteratorUPP(resID int16, inThemeSettings obj.Object, inUserData 
 var _fnInvokeThemeTabTitleDrawUPP func(unsafe.Pointer, uint16, uint16, int16, uint8, unsafe.Pointer, unsafe.Pointer)
 
 // InvokeThemeTabTitleDrawUPP calls the HIToolbox framework function InvokeThemeTabTitleDrawUPP.
-func InvokeThemeTabTitleDrawUPP(bounds unsafe.Pointer, style uint16, direction uint16, depth int16, isColorDev uint8, userData unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeThemeTabTitleDrawUPP(bounds *carboncore.Rect, style uint16, direction uint16, depth int16, isColorDev uint8, userData unsafe.Pointer, userUPP unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeThemeTabTitleDrawUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeThemeTabTitleDrawUPP, _lib, "InvokeThemeTabTitleDrawUPP")
 	}
-	_fnInvokeThemeTabTitleDrawUPP(bounds, style, direction, depth, isColorDev, userData, userUPP)
+	_fnInvokeThemeTabTitleDrawUPP(unsafe.Pointer(bounds), style, direction, depth, isColorDev, userData, userUPP)
 }
 
 var _fnInvokeUserItemUPP func(unsafe.Pointer, int16, unsafe.Pointer)
@@ -3313,12 +2833,12 @@ func InvokeWindowPaintUPP(device unsafe.Pointer, qdContext obj.Object, window un
 var _fnInvokeWindowTitleDrawingUPP func(unsafe.Pointer, int16, uint8, unsafe.Pointer, unsafe.Pointer)
 
 // InvokeWindowTitleDrawingUPP calls the HIToolbox framework function InvokeWindowTitleDrawingUPP.
-func InvokeWindowTitleDrawingUPP(bounds unsafe.Pointer, depth int16, colorDevice uint8, userData unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeWindowTitleDrawingUPP(bounds *carboncore.Rect, depth int16, colorDevice uint8, userData unsafe.Pointer, userUPP unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeWindowTitleDrawingUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeWindowTitleDrawingUPP, _lib, "InvokeWindowTitleDrawingUPP")
 	}
-	_fnInvokeWindowTitleDrawingUPP(bounds, depth, colorDevice, userData, userUPP)
+	_fnInvokeWindowTitleDrawingUPP(unsafe.Pointer(bounds), depth, colorDevice, userData, userUPP)
 }
 
 var _fnIsCmdChar func(unsafe.Pointer, int16) uint8
@@ -4344,19 +3864,6 @@ func PushSymbolicHotKeyMode(inOptions int) unsafe.Pointer {
 	return _fnPushSymbolicHotKeyMode(inOptions)
 }
 
-var _fnReceiveNextEvent func(int, unsafe.Pointer, float64, uint8, unsafe.Pointer) int32
-
-// ReceiveNextEvent calls the HIToolbox framework function ReceiveNextEvent.
-func ReceiveNextEvent(inNumTypes int, inTimeout float64, inPullEvent uint8, outEvent unsafe.Pointer) (result int, inList EventTypeSpec) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnReceiveNextEvent == nil {
-		ebipurego.RegisterLibFunc(&_fnReceiveNextEvent, _lib, "ReceiveNextEvent")
-	}
-	var _out0 EventTypeSpec
-	_ret := int(_fnReceiveNextEvent(inNumTypes, unsafe.Pointer(&_out0), inTimeout, inPullEvent, outEvent))
-	return _ret, _out0
-}
-
 var _fnRegisterEventHotKey func(int, int, unsafe.Pointer, objc.ID, int, unsafe.Pointer) int32
 
 // RegisterEventHotKey calls the HIToolbox framework function RegisterEventHotKey.
@@ -4377,19 +3884,6 @@ func ReleaseEvent(inEvent obj.Object) {
 		ebipurego.RegisterLibFunc(&_fnReleaseEvent, _lib, "ReleaseEvent")
 	}
 	_fnReleaseEvent(objref.IDOf(inEvent))
-}
-
-var _fnRemoveEventTypesFromHandler func(objc.ID, int, unsafe.Pointer) int32
-
-// RemoveEventTypesFromHandler calls the HIToolbox framework function RemoveEventTypesFromHandler.
-func RemoveEventTypesFromHandler(inHandlerRef obj.Object, inNumTypes int) (result int, inList EventTypeSpec) {
-	_loadOnce.Do(_loadLibrary)
-	if _fnRemoveEventTypesFromHandler == nil {
-		ebipurego.RegisterLibFunc(&_fnRemoveEventTypesFromHandler, _lib, "RemoveEventTypesFromHandler")
-	}
-	var _out0 EventTypeSpec
-	_ret := int(_fnRemoveEventTypesFromHandler(objref.IDOf(inHandlerRef), inNumTypes, unsafe.Pointer(&_out0)))
-	return _ret, _out0
 }
 
 var _fnRetainEvent func(objc.ID) objc.ID

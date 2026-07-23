@@ -6,7 +6,9 @@ package securityinterface
 
 import (
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -83,4 +85,19 @@ func NewKeychainSettingsPanel() *KeychainSettingsPanel {
 		}()
 	})
 	return _mainthread0
+}
+
+// RunModalForSettingsKeychain displays a panel that allows users to change keychain settings.
+func (ksp *KeychainSettingsPanel) RunModalForSettingsKeychain(settings *security.SecKeychainSettings, keychain obj.Object) int {
+	defer runtime.KeepAlive(ksp)
+	defer runtime.KeepAlive(keychain)
+	var _mainthread0 int
+	purego.Main(func() {
+		_mainthread0 = func() int {
+			_r := objc.Send[int](objref.IDOf(ksp), objc.RegisterName("runModalForSettings:keychain:"), unsafe.Pointer(settings), objref.IDOf(keychain))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

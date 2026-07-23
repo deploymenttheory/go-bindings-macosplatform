@@ -6,7 +6,9 @@ package osakit
 
 import (
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -71,9 +73,10 @@ func (l *Language) String() string {
 	return rt.Description(objref.IDOf(l))
 }
 
-// NewLanguage creates a new Language.
-func NewLanguage() *Language {
-	_id := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("new"))
+// NewLanguageWithComponent creates a new Language.
+func NewLanguageWithComponent(component *carboncore.ComponentRecord) *Language {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComponent:"), unsafe.Pointer(component))
 	return languageAdopt(_id)
 }
 
@@ -82,6 +85,13 @@ func (l *Language) SharedLanguageInstance() *LanguageInstance {
 	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("sharedLanguageInstance"))
 	return LanguageInstanceFromID(_r)
+}
+
+// ComponentInstance returns the component instance.
+func (l *Language) ComponentInstance() *carboncore.ComponentInstanceRecord {
+	defer runtime.KeepAlive(l)
+	_r := objc.Send[*carboncore.ComponentInstanceRecord](objref.IDOf(l), objc.RegisterName("componentInstance"))
+	return _r
 }
 
 // Name returns the name.

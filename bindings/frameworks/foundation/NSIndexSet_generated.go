@@ -139,6 +139,14 @@ func (is *IndexSet) IndexLessThanOrEqualToIndex(value int) int {
 	return _r
 }
 
+// GetIndexesMaxCountInIndexRange the index set fills an index buffer with the indexes contained both in the index set and in an index range, returning the number of indexes copied.
+func (is *IndexSet) GetIndexesMaxCountInIndexRange(bufferSize int, range_ *NSRange) (result int, indexBuffer int) {
+	defer runtime.KeepAlive(is)
+	var _out0 int
+	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("getIndexes:maxCount:inIndexRange:"), unsafe.Pointer(&_out0), bufferSize, unsafe.Pointer(range_))
+	return _r, _out0
+}
+
 // ContainsIndex indicates whether the index set contains a specific index.
 func (is *IndexSet) ContainsIndex(value int) bool {
 	defer runtime.KeepAlive(is)

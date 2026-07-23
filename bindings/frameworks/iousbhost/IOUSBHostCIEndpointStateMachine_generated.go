@@ -75,10 +75,38 @@ func (hcesm *HostCIEndpointStateMachine) String() string {
 	return rt.Description(objref.IDOf(hcesm))
 }
 
-// NewHostCIEndpointStateMachine creates a new HostCIEndpointStateMachine.
-func NewHostCIEndpointStateMachine() *HostCIEndpointStateMachine {
-	_id := objc.Send[objc.ID](objc.ID(_class("IOUSBHostCIEndpointStateMachine")), objc.RegisterName("new"))
-	return hostCIEndpointStateMachineAdopt(_id)
+// NewHostCIEndpointStateMachineWithInterfaceCommand initializes an IOUSBHostCIEndpointStateMachine object The IOUSBHostCIEndpointStateMachine defaults to the IOUSBHostCIEndpointStatePaused state.
+func NewHostCIEndpointStateMachineWithInterfaceCommand(interface_ *HostControllerInterface, command *IOUSBHostCIMessage) (result *HostCIEndpointStateMachine, err error) {
+	defer runtime.KeepAlive(interface_)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IOUSBHostCIEndpointStateMachine")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:command:error:"), objref.IDOf(interface_), unsafe.Pointer(command), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return hostCIEndpointStateMachineAdopt(_id), nil
+}
+
+// InspectCommand inspect an IOUSBHostCIMessage command The IOUSBHostCIMessage command is inspected to determine if it is handled by this state machine and is appropriate for the current state.
+func (hcesm *HostCIEndpointStateMachine) InspectCommand(command *IOUSBHostCIMessage) error {
+	defer runtime.KeepAlive(hcesm)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hcesm), objc.RegisterName("inspectCommand:error:"), unsafe.Pointer(command), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// RespondToCommandStatus advance the state machine and respond to an IOUSBHostCIMessage command If the command passes inspectCommand and the client indicates the command was processed successfully, endpointState is updated and a properly formatted command response message is sent to the kernel driver.  If the client indicates the command was not processed successfully, endpointState is not updated but a properly formatted command response message is sent to the kernel driver.
+func (hcesm *HostCIEndpointStateMachine) RespondToCommandStatus(command *IOUSBHostCIMessage, status HostCIMessageStatus) error {
+	defer runtime.KeepAlive(hcesm)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hcesm), objc.RegisterName("respondToCommand:status:error:"), unsafe.Pointer(command), status, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // ProcessDoorbell advance the state machine and process an IOUSBHostCIDoorbell message The IOUSBHostCIDoorbell is inspected to determine if it is handled by this state machine and is appropriate for the current state.  If successful, the client should check for an IOUSBHostCIEndpointStateActive endpointState and a currentTransferMessage with IOUSBHostCIMessageControlValid set to determine if more IOUSBHostCIMessages should be processed.
@@ -86,6 +114,17 @@ func (hcesm *HostCIEndpointStateMachine) ProcessDoorbell(doorbell uint32) error 
 	defer runtime.KeepAlive(hcesm)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(hcesm), objc.RegisterName("processDoorbell:error:"), doorbell, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// EnqueueTransferCompletionForMessageStatusTransferLength send an IOUSBHostCIMessage representing a transfer completion to the kernel, and advance the state machine When a client has processed an IOUSBHostCIMessage representing a transfer, the result is reported to the kernel by another IOUSBHostCIMessage.  If successful, this object will use controllerInterface's enqueueInterrupt interface to send a properly formatted IOUSBHostCIMessage to the kernel with IOUSBHostCITransferCompletionMessageData1TransferStructure populated with currentTransferMessage's virtual address, and endpointState and currentTransferMessage are updated.  After a successful call, the client should check for an IOUSBHostCIEndpointStateActive endpointState and a currentTransferMessage with IOUSBHostCIMessageControlValid set to determine if more IOUSBHostCIMessages should be processed.
+func (hcesm *HostCIEndpointStateMachine) EnqueueTransferCompletionForMessageStatusTransferLength(message *IOUSBHostCIMessage, status HostCIMessageStatus, transferLength int) error {
+	defer runtime.KeepAlive(hcesm)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hcesm), objc.RegisterName("enqueueTransferCompletionForMessage:status:transferLength:error:"), unsafe.Pointer(message), status, transferLength, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}

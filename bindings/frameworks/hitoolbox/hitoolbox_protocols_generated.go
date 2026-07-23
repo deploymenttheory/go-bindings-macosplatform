@@ -19,7 +19,7 @@ type IMKTextInput interface {
 	AttributedSubstringFromRange(range_ foundation.NSRange) *foundation.AttributedString
 	Length() int
 	CharacterIndexForPointTrackingInMarkedRange(point corefoundation.CGPoint, mappingMode int, inMarkedRange obj.Object) int
-	AttributesForCharacterIndexLineHeightRectangle(index int, lineRect obj.Object) obj.Object
+	AttributesForCharacterIndexLineHeightRectangle(index int, lineRect *corefoundation.CGRect) obj.Object
 	ValidAttributesForMarkedText() obj.Object
 	OverrideKeyboardWithKeyboardNamed(keyboardUniqueName string)
 	SelectInputMode(modeIdentifier string)
@@ -28,8 +28,8 @@ type IMKTextInput interface {
 	WindowLevel() int32
 	SupportsProperty(property int) bool
 	UniqueClientIdentifierString() string
-	StringFromRangeActualRange(range_ foundation.NSRange, actualRange obj.Object) string
-	FirstRectForCharacterRangeActualRange(aRange foundation.NSRange, actualRange obj.Object) corefoundation.CGRect
+	StringFromRangeActualRange(range_ foundation.NSRange, actualRange *foundation.NSRange) string
+	FirstRectForCharacterRangeActualRange(aRange foundation.NSRange, actualRange *foundation.NSRange) corefoundation.CGRect
 }
 
 // IMKUnicodeTextInput is the Go form of the Objective-C protocol IMKUnicodeTextInput.

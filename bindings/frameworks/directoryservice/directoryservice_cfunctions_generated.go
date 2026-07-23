@@ -16,25 +16,30 @@ import (
 var _fnDsAddAttribute func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsAddAttribute calls the DirectoryService framework function dsAddAttribute.
-func DsAddAttribute(inRecordReference int, inNewAttribute unsafe.Pointer, inFirstAttributeValue unsafe.Pointer) (result TDirStatus, inNewAttributeAccess TAccessControlEntry) {
+func DsAddAttribute(inRecordReference int) (result TDirStatus, inNewAttribute TDataBuffer, inNewAttributeAccess TAccessControlEntry, inFirstAttributeValue TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsAddAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnDsAddAttribute, _lib, "dsAddAttribute")
 	}
-	var _out0 TAccessControlEntry
-	_ret := _fnDsAddAttribute(inRecordReference, inNewAttribute, unsafe.Pointer(&_out0), inFirstAttributeValue)
-	return _ret, _out0
+	var _out0 TDataBuffer
+	var _out1 TAccessControlEntry
+	var _out2 TDataBuffer
+	_ret := _fnDsAddAttribute(inRecordReference, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnDsAddAttributeValue func(int, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsAddAttributeValue calls the DirectoryService framework function dsAddAttributeValue.
-func DsAddAttributeValue(inRecordReference int, inAttributeType unsafe.Pointer, inAttributeValue unsafe.Pointer) TDirStatus {
+func DsAddAttributeValue(inRecordReference int) (result TDirStatus, inAttributeType TDataBuffer, inAttributeValue TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsAddAttributeValue == nil {
 		ebipurego.RegisterLibFunc(&_fnDsAddAttributeValue, _lib, "dsAddAttributeValue")
 	}
-	return _fnDsAddAttributeValue(inRecordReference, inAttributeType, inAttributeValue)
+	var _out0 TDataBuffer
+	var _out1 TDataBuffer
+	_ret := _fnDsAddAttributeValue(inRecordReference, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
 }
 
 var _fnDsAddChildPIDToReference func(int, int, int) TDirStatus
@@ -48,10 +53,10 @@ func DsAddChildPIDToReference(inDirRef int, inValidChildPID int, inValidAPIRefer
 	return _fnDsAddChildPIDToReference(inDirRef, inValidChildPID, inValidAPIReferenceToGrantChild)
 }
 
-var _fnDsAllocAttributeValueEntry func(int, int, unsafe.Pointer, int) unsafe.Pointer
+var _fnDsAllocAttributeValueEntry func(int, int, unsafe.Pointer, int) *TAttributeValueEntry
 
 // DsAllocAttributeValueEntry calls the DirectoryService framework function dsAllocAttributeValueEntry.
-func DsAllocAttributeValueEntry(inDirRef int, inAttrValueID int, inAttrValueData unsafe.Pointer, inAttrValueDataLen int) unsafe.Pointer {
+func DsAllocAttributeValueEntry(inDirRef int, inAttrValueID int, inAttrValueData unsafe.Pointer, inAttrValueDataLen int) *TAttributeValueEntry {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsAllocAttributeValueEntry == nil {
 		ebipurego.RegisterLibFunc(&_fnDsAllocAttributeValueEntry, _lib, "dsAllocAttributeValueEntry")
@@ -73,23 +78,29 @@ func DsAllocStringsFromList(inDirRef int, inDataList unsafe.Pointer) string {
 var _fnDsAppendAuthBufferWithAuthorityAttribute func(int, unsafe.Pointer, unsafe.Pointer, int, string, unsafe.Pointer) TDirStatus
 
 // DsAppendAuthBufferWithAuthorityAttribute calls the DirectoryService framework function dsAppendAuthBufferWithAuthorityAttribute.
-func DsAppendAuthBufferWithAuthorityAttribute(inNodeRef int, inRecordListBuffPtr unsafe.Pointer, inAttributePtr unsafe.Pointer, inValueRef int, inUserName string, inOutAuthBuffer unsafe.Pointer) TDirStatus {
+func DsAppendAuthBufferWithAuthorityAttribute(inNodeRef int, inValueRef int, inUserName string) (result TDirStatus, inRecordListBuffPtr TDataBuffer, inAttributePtr TAttributeEntry, inOutAuthBuffer TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsAppendAuthBufferWithAuthorityAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnDsAppendAuthBufferWithAuthorityAttribute, _lib, "dsAppendAuthBufferWithAuthorityAttribute")
 	}
-	return _fnDsAppendAuthBufferWithAuthorityAttribute(inNodeRef, inRecordListBuffPtr, inAttributePtr, inValueRef, inUserName, inOutAuthBuffer)
+	var _out0 TDataBuffer
+	var _out1 TAttributeEntry
+	var _out2 TDataBuffer
+	_ret := _fnDsAppendAuthBufferWithAuthorityAttribute(inNodeRef, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), inValueRef, inUserName, unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnDsAppendAuthBufferWithAuthorityStrings func(string, string, unsafe.Pointer) TDirStatus
 
 // DsAppendAuthBufferWithAuthorityStrings calls the DirectoryService framework function dsAppendAuthBufferWithAuthorityStrings.
-func DsAppendAuthBufferWithAuthorityStrings(inUserName string, inAuthAuthority string, inOutAuthBuffer unsafe.Pointer) TDirStatus {
+func DsAppendAuthBufferWithAuthorityStrings(inUserName string, inAuthAuthority string) (result TDirStatus, inOutAuthBuffer TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsAppendAuthBufferWithAuthorityStrings == nil {
 		ebipurego.RegisterLibFunc(&_fnDsAppendAuthBufferWithAuthorityStrings, _lib, "dsAppendAuthBufferWithAuthorityStrings")
 	}
-	return _fnDsAppendAuthBufferWithAuthorityStrings(inUserName, inAuthAuthority, inOutAuthBuffer)
+	var _out0 TDataBuffer
+	_ret := _fnDsAppendAuthBufferWithAuthorityStrings(inUserName, inAuthAuthority, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnDsAppendStringToList func(unsafe.Pointer, string) TDirStatus
@@ -216,31 +227,36 @@ func DsCopyDirStatusName(inDirStatus int) string {
 var _fnDsCreateRecord func(int, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsCreateRecord calls the DirectoryService framework function dsCreateRecord.
-func DsCreateRecord(inDirNodeReference int, inRecordType unsafe.Pointer, inRecordName unsafe.Pointer) TDirStatus {
+func DsCreateRecord(inDirNodeReference int) (result TDirStatus, inRecordType TDataBuffer, inRecordName TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsCreateRecord == nil {
 		ebipurego.RegisterLibFunc(&_fnDsCreateRecord, _lib, "dsCreateRecord")
 	}
-	return _fnDsCreateRecord(inDirNodeReference, inRecordType, inRecordName)
+	var _out0 TDataBuffer
+	var _out1 TDataBuffer
+	_ret := _fnDsCreateRecord(inDirNodeReference, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
 }
 
 var _fnDsCreateRecordAndOpen func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsCreateRecordAndOpen calls the DirectoryService framework function dsCreateRecordAndOpen.
-func DsCreateRecordAndOpen(inDirNodeReference int, inRecordType unsafe.Pointer, inRecordName unsafe.Pointer) (result TDirStatus, outRecordReference int) {
+func DsCreateRecordAndOpen(inDirNodeReference int) (result TDirStatus, inRecordType TDataBuffer, inRecordName TDataBuffer, outRecordReference int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsCreateRecordAndOpen == nil {
 		ebipurego.RegisterLibFunc(&_fnDsCreateRecordAndOpen, _lib, "dsCreateRecordAndOpen")
 	}
-	var _out0 int
-	_ret := _fnDsCreateRecordAndOpen(inDirNodeReference, inRecordType, inRecordName, unsafe.Pointer(&_out0))
-	return _ret, _out0
+	var _out0 TDataBuffer
+	var _out1 TDataBuffer
+	var _out2 int
+	_ret := _fnDsCreateRecordAndOpen(inDirNodeReference, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
-var _fnDsDataBufferAllocate func(int, int) unsafe.Pointer
+var _fnDsDataBufferAllocate func(int, int) *TDataBuffer
 
 // DsDataBufferAllocate calls the DirectoryService framework function dsDataBufferAllocate.
-func DsDataBufferAllocate(inDirReference int, inBufferSize int) unsafe.Pointer {
+func DsDataBufferAllocate(inDirReference int, inBufferSize int) *TDataBuffer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDataBufferAllocate == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDataBufferAllocate, _lib, "dsDataBufferAllocate")
@@ -251,12 +267,14 @@ func DsDataBufferAllocate(inDirReference int, inBufferSize int) unsafe.Pointer {
 var _fnDsDataBufferDeAllocate func(int, unsafe.Pointer) TDirStatus
 
 // DsDataBufferDeAllocate calls the DirectoryService framework function dsDataBufferDeAllocate.
-func DsDataBufferDeAllocate(inDirReference int, inDataBufferPtr unsafe.Pointer) TDirStatus {
+func DsDataBufferDeAllocate(inDirReference int) (result TDirStatus, inDataBufferPtr TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDataBufferDeAllocate == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDataBufferDeAllocate, _lib, "dsDataBufferDeAllocate")
 	}
-	return _fnDsDataBufferDeAllocate(inDirReference, inDataBufferPtr)
+	var _out0 TDataBuffer
+	_ret := _fnDsDataBufferDeAllocate(inDirReference, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnDsDataListAllocate func(int) unsafe.Pointer
@@ -350,34 +368,41 @@ func DsDataListGetNodeCount(inDataList unsafe.Pointer) int {
 var _fnDsDataListInsertAfter func(int, unsafe.Pointer, unsafe.Pointer, int) TDirStatus
 
 // DsDataListInsertAfter calls the DirectoryService framework function dsDataListInsertAfter.
-func DsDataListInsertAfter(inDirReferences int, inDataList unsafe.Pointer, inInsertDataNode unsafe.Pointer, inNodeIndex int) TDirStatus {
+func DsDataListInsertAfter(inDirReferences int, inDataList unsafe.Pointer, inNodeIndex int) (result TDirStatus, inInsertDataNode TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDataListInsertAfter == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDataListInsertAfter, _lib, "dsDataListInsertAfter")
 	}
-	return _fnDsDataListInsertAfter(inDirReferences, inDataList, inInsertDataNode, inNodeIndex)
+	var _out0 TDataBuffer
+	_ret := _fnDsDataListInsertAfter(inDirReferences, inDataList, unsafe.Pointer(&_out0), inNodeIndex)
+	return _ret, _out0
 }
 
 var _fnDsDataListInsertNode func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsDataListInsertNode calls the DirectoryService framework function dsDataListInsertNode.
-func DsDataListInsertNode(inDataList unsafe.Pointer, inAfterDataNode unsafe.Pointer, inInsertDataNode unsafe.Pointer) TDirStatus {
+func DsDataListInsertNode(inDataList unsafe.Pointer) (result TDirStatus, inAfterDataNode TDataBuffer, inInsertDataNode TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDataListInsertNode == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDataListInsertNode, _lib, "dsDataListInsertNode")
 	}
-	return _fnDsDataListInsertNode(inDataList, inAfterDataNode, inInsertDataNode)
+	var _out0 TDataBuffer
+	var _out1 TDataBuffer
+	_ret := _fnDsDataListInsertNode(inDataList, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
 }
 
 var _fnDsDataListMergeList func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsDataListMergeList calls the DirectoryService framework function dsDataListMergeList.
-func DsDataListMergeList(inDataList unsafe.Pointer, inAfterDataNode unsafe.Pointer, inMergeDataList unsafe.Pointer) TDirStatus {
+func DsDataListMergeList(inDataList unsafe.Pointer, inMergeDataList unsafe.Pointer) (result TDirStatus, inAfterDataNode TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDataListMergeList == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDataListMergeList, _lib, "dsDataListMergeList")
 	}
-	return _fnDsDataListMergeList(inDataList, inAfterDataNode, inMergeDataList)
+	var _out0 TDataBuffer
+	_ret := _fnDsDataListMergeList(inDataList, unsafe.Pointer(&_out0), inMergeDataList)
+	return _ret, _out0
 }
 
 var _fnDsDataListMergeListAfter func(unsafe.Pointer, unsafe.Pointer, int) TDirStatus
@@ -394,12 +419,14 @@ func DsDataListMergeListAfter(inTargetList unsafe.Pointer, inSourceList unsafe.P
 var _fnDsDataListRemoveNodes func(unsafe.Pointer, unsafe.Pointer, int) TDirStatus
 
 // DsDataListRemoveNodes calls the DirectoryService framework function dsDataListRemoveNodes.
-func DsDataListRemoveNodes(inDataList unsafe.Pointer, in1stDataNode unsafe.Pointer, inDeleteCount int) TDirStatus {
+func DsDataListRemoveNodes(inDataList unsafe.Pointer, inDeleteCount int) (result TDirStatus, in1stDataNode TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDataListRemoveNodes == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDataListRemoveNodes, _lib, "dsDataListRemoveNodes")
 	}
-	return _fnDsDataListRemoveNodes(inDataList, in1stDataNode, inDeleteCount)
+	var _out0 TDataBuffer
+	_ret := _fnDsDataListRemoveNodes(inDataList, unsafe.Pointer(&_out0), inDeleteCount)
+	return _ret, _out0
 }
 
 var _fnDsDataListRemoveThisNode func(unsafe.Pointer, int, int) TDirStatus
@@ -413,10 +440,10 @@ func DsDataListRemoveThisNode(inDataList unsafe.Pointer, inNodeIndex int, inDele
 	return _fnDsDataListRemoveThisNode(inDataList, inNodeIndex, inDeleteCount)
 }
 
-var _fnDsDataNodeAllocateBlock func(int, int, int, unsafe.Pointer) unsafe.Pointer
+var _fnDsDataNodeAllocateBlock func(int, int, int, unsafe.Pointer) *TDataBuffer
 
 // DsDataNodeAllocateBlock calls the DirectoryService framework function dsDataNodeAllocateBlock.
-func DsDataNodeAllocateBlock(inDirReference int, inDataNodeSize int, inDataNodeLength int, inDataNodeBuffer unsafe.Pointer) unsafe.Pointer {
+func DsDataNodeAllocateBlock(inDirReference int, inDataNodeSize int, inDataNodeLength int, inDataNodeBuffer unsafe.Pointer) *TDataBuffer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDataNodeAllocateBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDataNodeAllocateBlock, _lib, "dsDataNodeAllocateBlock")
@@ -424,10 +451,10 @@ func DsDataNodeAllocateBlock(inDirReference int, inDataNodeSize int, inDataNodeL
 	return _fnDsDataNodeAllocateBlock(inDirReference, inDataNodeSize, inDataNodeLength, inDataNodeBuffer)
 }
 
-var _fnDsDataNodeAllocateString func(int, string) unsafe.Pointer
+var _fnDsDataNodeAllocateString func(int, string) *TDataBuffer
 
 // DsDataNodeAllocateString calls the DirectoryService framework function dsDataNodeAllocateString.
-func DsDataNodeAllocateString(inDirReference int, inCString string) unsafe.Pointer {
+func DsDataNodeAllocateString(inDirReference int, inCString string) *TDataBuffer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDataNodeAllocateString == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDataNodeAllocateString, _lib, "dsDataNodeAllocateString")
@@ -438,78 +465,92 @@ func DsDataNodeAllocateString(inDirReference int, inCString string) unsafe.Point
 var _fnDsDataNodeDeAllocate func(int, unsafe.Pointer) TDirStatus
 
 // DsDataNodeDeAllocate calls the DirectoryService framework function dsDataNodeDeAllocate.
-func DsDataNodeDeAllocate(inDirReference int, inDataNodePtr unsafe.Pointer) TDirStatus {
+func DsDataNodeDeAllocate(inDirReference int) (result TDirStatus, inDataNodePtr TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDataNodeDeAllocate == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDataNodeDeAllocate, _lib, "dsDataNodeDeAllocate")
 	}
-	return _fnDsDataNodeDeAllocate(inDirReference, inDataNodePtr)
+	var _out0 TDataBuffer
+	_ret := _fnDsDataNodeDeAllocate(inDirReference, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnDsDataNodeGetLength func(unsafe.Pointer) uint32
 
 // DsDataNodeGetLength calls the DirectoryService framework function dsDataNodeGetLength.
-func DsDataNodeGetLength(inDataNodePtr unsafe.Pointer) int {
+func DsDataNodeGetLength() (result int, inDataNodePtr TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDataNodeGetLength == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDataNodeGetLength, _lib, "dsDataNodeGetLength")
 	}
-	return int(_fnDsDataNodeGetLength(inDataNodePtr))
+	var _out0 TDataBuffer
+	_ret := int(_fnDsDataNodeGetLength(unsafe.Pointer(&_out0)))
+	return _ret, _out0
 }
 
 var _fnDsDataNodeGetSize func(unsafe.Pointer) uint32
 
 // DsDataNodeGetSize calls the DirectoryService framework function dsDataNodeGetSize.
-func DsDataNodeGetSize(inDataNodePtr unsafe.Pointer) int {
+func DsDataNodeGetSize() (result int, inDataNodePtr TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDataNodeGetSize == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDataNodeGetSize, _lib, "dsDataNodeGetSize")
 	}
-	return int(_fnDsDataNodeGetSize(inDataNodePtr))
+	var _out0 TDataBuffer
+	_ret := int(_fnDsDataNodeGetSize(unsafe.Pointer(&_out0)))
+	return _ret, _out0
 }
 
 var _fnDsDataNodeSetLength func(unsafe.Pointer, int) TDirStatus
 
 // DsDataNodeSetLength calls the DirectoryService framework function dsDataNodeSetLength.
-func DsDataNodeSetLength(inDataNodePtr unsafe.Pointer, inDataNodeLength int) TDirStatus {
+func DsDataNodeSetLength(inDataNodeLength int) (result TDirStatus, inDataNodePtr TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDataNodeSetLength == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDataNodeSetLength, _lib, "dsDataNodeSetLength")
 	}
-	return _fnDsDataNodeSetLength(inDataNodePtr, inDataNodeLength)
+	var _out0 TDataBuffer
+	_ret := _fnDsDataNodeSetLength(unsafe.Pointer(&_out0), inDataNodeLength)
+	return _ret, _out0
 }
 
 var _fnDsDeallocAttributeEntry func(int, unsafe.Pointer) TDirStatus
 
 // DsDeallocAttributeEntry calls the DirectoryService framework function dsDeallocAttributeEntry.
-func DsDeallocAttributeEntry(inDirRef int, inAttrEntry unsafe.Pointer) TDirStatus {
+func DsDeallocAttributeEntry(inDirRef int) (result TDirStatus, inAttrEntry TAttributeEntry) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDeallocAttributeEntry == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDeallocAttributeEntry, _lib, "dsDeallocAttributeEntry")
 	}
-	return _fnDsDeallocAttributeEntry(inDirRef, inAttrEntry)
+	var _out0 TAttributeEntry
+	_ret := _fnDsDeallocAttributeEntry(inDirRef, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnDsDeallocAttributeValueEntry func(int, unsafe.Pointer) TDirStatus
 
 // DsDeallocAttributeValueEntry calls the DirectoryService framework function dsDeallocAttributeValueEntry.
-func DsDeallocAttributeValueEntry(inDirRef int, inAttrValueEntry unsafe.Pointer) TDirStatus {
+func DsDeallocAttributeValueEntry(inDirRef int) (result TDirStatus, inAttrValueEntry TAttributeValueEntry) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDeallocAttributeValueEntry == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDeallocAttributeValueEntry, _lib, "dsDeallocAttributeValueEntry")
 	}
-	return _fnDsDeallocAttributeValueEntry(inDirRef, inAttrValueEntry)
+	var _out0 TAttributeValueEntry
+	_ret := _fnDsDeallocAttributeValueEntry(inDirRef, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnDsDeallocRecordEntry func(int, unsafe.Pointer) TDirStatus
 
 // DsDeallocRecordEntry calls the DirectoryService framework function dsDeallocRecordEntry.
-func DsDeallocRecordEntry(inDirRef int, inRecEntry unsafe.Pointer) TDirStatus {
+func DsDeallocRecordEntry(inDirRef int) (result TDirStatus, inRecEntry TRecordEntry) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDeallocRecordEntry == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDeallocRecordEntry, _lib, "dsDeallocRecordEntry")
 	}
-	return _fnDsDeallocRecordEntry(inDirRef, inRecEntry)
+	var _out0 TRecordEntry
+	_ret := _fnDsDeallocRecordEntry(inDirRef, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnDsDeleteRecord func(int) TDirStatus
@@ -526,108 +567,129 @@ func DsDeleteRecord(inRecordReference int) TDirStatus {
 var _fnDsDoAttributeValueSearch func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, TDirPatternMatch, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsDoAttributeValueSearch calls the DirectoryService framework function dsDoAttributeValueSearch.
-func DsDoAttributeValueSearch(inDirNodeReference int, inOutDataBuffer unsafe.Pointer, inRecordTypeList unsafe.Pointer, inAttributeType unsafe.Pointer, inPatternMatchType TDirPatternMatch, inPattern2Match unsafe.Pointer) (result TDirStatus, inOutMatchRecordCount int, inOutContinueData int) {
+func DsDoAttributeValueSearch(inDirNodeReference int, inRecordTypeList unsafe.Pointer, inPatternMatchType TDirPatternMatch) (result TDirStatus, inOutDataBuffer TDataBuffer, inAttributeType TDataBuffer, inPattern2Match TDataBuffer, inOutMatchRecordCount int, inOutContinueData int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDoAttributeValueSearch == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDoAttributeValueSearch, _lib, "dsDoAttributeValueSearch")
 	}
-	var _out0 int
-	var _out1 int
-	_ret := _fnDsDoAttributeValueSearch(inDirNodeReference, inOutDataBuffer, inRecordTypeList, inAttributeType, inPatternMatchType, inPattern2Match, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	var _out0 TDataBuffer
+	var _out1 TDataBuffer
+	var _out2 TDataBuffer
+	var _out3 int
+	var _out4 int
+	_ret := _fnDsDoAttributeValueSearch(inDirNodeReference, unsafe.Pointer(&_out0), inRecordTypeList, unsafe.Pointer(&_out1), inPatternMatchType, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4))
+	return _ret, _out0, _out1, _out2, _out3, _out4
 }
 
 var _fnDsDoAttributeValueSearchWithData func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, TDirPatternMatch, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsDoAttributeValueSearchWithData calls the DirectoryService framework function dsDoAttributeValueSearchWithData.
-func DsDoAttributeValueSearchWithData(inDirNodeReference int, inOutDataBuffer unsafe.Pointer, inRecordTypeList unsafe.Pointer, inAttributeMatchType unsafe.Pointer, inPatternMatchType TDirPatternMatch, inPatternToMatch unsafe.Pointer, inAttributeTypeRequestList unsafe.Pointer, inAttributeInfoOnly int) (result TDirStatus, inOutMatchRecordCount int, inOutContinueData int) {
+func DsDoAttributeValueSearchWithData(inDirNodeReference int, inRecordTypeList unsafe.Pointer, inPatternMatchType TDirPatternMatch, inAttributeTypeRequestList unsafe.Pointer, inAttributeInfoOnly int) (result TDirStatus, inOutDataBuffer TDataBuffer, inAttributeMatchType TDataBuffer, inPatternToMatch TDataBuffer, inOutMatchRecordCount int, inOutContinueData int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDoAttributeValueSearchWithData == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDoAttributeValueSearchWithData, _lib, "dsDoAttributeValueSearchWithData")
 	}
-	var _out0 int
-	var _out1 int
-	_ret := _fnDsDoAttributeValueSearchWithData(inDirNodeReference, inOutDataBuffer, inRecordTypeList, inAttributeMatchType, inPatternMatchType, inPatternToMatch, inAttributeTypeRequestList, inAttributeInfoOnly, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	var _out0 TDataBuffer
+	var _out1 TDataBuffer
+	var _out2 TDataBuffer
+	var _out3 int
+	var _out4 int
+	_ret := _fnDsDoAttributeValueSearchWithData(inDirNodeReference, unsafe.Pointer(&_out0), inRecordTypeList, unsafe.Pointer(&_out1), inPatternMatchType, unsafe.Pointer(&_out2), inAttributeTypeRequestList, inAttributeInfoOnly, unsafe.Pointer(&_out3), unsafe.Pointer(&_out4))
+	return _ret, _out0, _out1, _out2, _out3, _out4
 }
 
 var _fnDsDoDirNodeAuth func(int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsDoDirNodeAuth calls the DirectoryService framework function dsDoDirNodeAuth.
-func DsDoDirNodeAuth(inDirNodeReference int, inDirNodeAuthName unsafe.Pointer, inDirNodeAuthOnlyFlag int, inAuthStepData unsafe.Pointer, outAuthStepDataResponse unsafe.Pointer) (result TDirStatus, inOutContinueData int) {
+func DsDoDirNodeAuth(inDirNodeReference int, inDirNodeAuthOnlyFlag int) (result TDirStatus, inDirNodeAuthName TDataBuffer, inAuthStepData TDataBuffer, outAuthStepDataResponse TDataBuffer, inOutContinueData int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDoDirNodeAuth == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDoDirNodeAuth, _lib, "dsDoDirNodeAuth")
 	}
-	var _out0 int
-	_ret := _fnDsDoDirNodeAuth(inDirNodeReference, inDirNodeAuthName, inDirNodeAuthOnlyFlag, inAuthStepData, outAuthStepDataResponse, unsafe.Pointer(&_out0))
-	return _ret, _out0
+	var _out0 TDataBuffer
+	var _out1 TDataBuffer
+	var _out2 TDataBuffer
+	var _out3 int
+	_ret := _fnDsDoDirNodeAuth(inDirNodeReference, unsafe.Pointer(&_out0), inDirNodeAuthOnlyFlag, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnDsDoDirNodeAuthOnRecordType func(int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsDoDirNodeAuthOnRecordType calls the DirectoryService framework function dsDoDirNodeAuthOnRecordType.
-func DsDoDirNodeAuthOnRecordType(inDirNodeReference int, inDirNodeAuthName unsafe.Pointer, inDirNodeAuthOnlyFlag int, inAuthStepData unsafe.Pointer, outAuthStepDataResponse unsafe.Pointer, inRecordType unsafe.Pointer) (result TDirStatus, inOutContinueData int) {
+func DsDoDirNodeAuthOnRecordType(inDirNodeReference int, inDirNodeAuthOnlyFlag int) (result TDirStatus, inDirNodeAuthName TDataBuffer, inAuthStepData TDataBuffer, outAuthStepDataResponse TDataBuffer, inOutContinueData int, inRecordType TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDoDirNodeAuthOnRecordType == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDoDirNodeAuthOnRecordType, _lib, "dsDoDirNodeAuthOnRecordType")
 	}
-	var _out0 int
-	_ret := _fnDsDoDirNodeAuthOnRecordType(inDirNodeReference, inDirNodeAuthName, inDirNodeAuthOnlyFlag, inAuthStepData, outAuthStepDataResponse, unsafe.Pointer(&_out0), inRecordType)
-	return _ret, _out0
+	var _out0 TDataBuffer
+	var _out1 TDataBuffer
+	var _out2 TDataBuffer
+	var _out3 int
+	var _out4 TDataBuffer
+	_ret := _fnDsDoDirNodeAuthOnRecordType(inDirNodeReference, unsafe.Pointer(&_out0), inDirNodeAuthOnlyFlag, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4))
+	return _ret, _out0, _out1, _out2, _out3, _out4
 }
 
 var _fnDsDoMultipleAttributeValueSearch func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, TDirPatternMatch, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsDoMultipleAttributeValueSearch calls the DirectoryService framework function dsDoMultipleAttributeValueSearch.
-func DsDoMultipleAttributeValueSearch(inDirNodeReference int, inOutDataBuffer unsafe.Pointer, inRecordTypeList unsafe.Pointer, inAttributeType unsafe.Pointer, inPatternMatchType TDirPatternMatch, inPatterns2Match unsafe.Pointer) (result TDirStatus, inOutMatchRecordCount int, inOutContinueData int) {
+func DsDoMultipleAttributeValueSearch(inDirNodeReference int, inRecordTypeList unsafe.Pointer, inPatternMatchType TDirPatternMatch, inPatterns2Match unsafe.Pointer) (result TDirStatus, inOutDataBuffer TDataBuffer, inAttributeType TDataBuffer, inOutMatchRecordCount int, inOutContinueData int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDoMultipleAttributeValueSearch == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDoMultipleAttributeValueSearch, _lib, "dsDoMultipleAttributeValueSearch")
 	}
-	var _out0 int
-	var _out1 int
-	_ret := _fnDsDoMultipleAttributeValueSearch(inDirNodeReference, inOutDataBuffer, inRecordTypeList, inAttributeType, inPatternMatchType, inPatterns2Match, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	var _out0 TDataBuffer
+	var _out1 TDataBuffer
+	var _out2 int
+	var _out3 int
+	_ret := _fnDsDoMultipleAttributeValueSearch(inDirNodeReference, unsafe.Pointer(&_out0), inRecordTypeList, unsafe.Pointer(&_out1), inPatternMatchType, inPatterns2Match, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnDsDoMultipleAttributeValueSearchWithData func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, TDirPatternMatch, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsDoMultipleAttributeValueSearchWithData calls the DirectoryService framework function dsDoMultipleAttributeValueSearchWithData.
-func DsDoMultipleAttributeValueSearchWithData(inDirNodeReference int, inOutDataBuffer unsafe.Pointer, inRecordTypeList unsafe.Pointer, inAttributeMatchType unsafe.Pointer, inPatternMatchType TDirPatternMatch, inPatternsToMatch unsafe.Pointer, inAttributeTypeRequestList unsafe.Pointer, inAttributeInfoOnly int) (result TDirStatus, inOutMatchRecordCount int, inOutContinueData int) {
+func DsDoMultipleAttributeValueSearchWithData(inDirNodeReference int, inRecordTypeList unsafe.Pointer, inPatternMatchType TDirPatternMatch, inPatternsToMatch unsafe.Pointer, inAttributeTypeRequestList unsafe.Pointer, inAttributeInfoOnly int) (result TDirStatus, inOutDataBuffer TDataBuffer, inAttributeMatchType TDataBuffer, inOutMatchRecordCount int, inOutContinueData int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDoMultipleAttributeValueSearchWithData == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDoMultipleAttributeValueSearchWithData, _lib, "dsDoMultipleAttributeValueSearchWithData")
 	}
-	var _out0 int
-	var _out1 int
-	_ret := _fnDsDoMultipleAttributeValueSearchWithData(inDirNodeReference, inOutDataBuffer, inRecordTypeList, inAttributeMatchType, inPatternMatchType, inPatternsToMatch, inAttributeTypeRequestList, inAttributeInfoOnly, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	var _out0 TDataBuffer
+	var _out1 TDataBuffer
+	var _out2 int
+	var _out3 int
+	_ret := _fnDsDoMultipleAttributeValueSearchWithData(inDirNodeReference, unsafe.Pointer(&_out0), inRecordTypeList, unsafe.Pointer(&_out1), inPatternMatchType, inPatternsToMatch, inAttributeTypeRequestList, inAttributeInfoOnly, unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnDsDoPlugInCustomCall func(int, int, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsDoPlugInCustomCall calls the DirectoryService framework function dsDoPlugInCustomCall.
-func DsDoPlugInCustomCall(inDirNodeReference int, inCustomRequestCode int, inCustomRequestData unsafe.Pointer, outCustomRequestResponse unsafe.Pointer) TDirStatus {
+func DsDoPlugInCustomCall(inDirNodeReference int, inCustomRequestCode int) (result TDirStatus, inCustomRequestData TDataBuffer, outCustomRequestResponse TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsDoPlugInCustomCall == nil {
 		ebipurego.RegisterLibFunc(&_fnDsDoPlugInCustomCall, _lib, "dsDoPlugInCustomCall")
 	}
-	return _fnDsDoPlugInCustomCall(inDirNodeReference, inCustomRequestCode, inCustomRequestData, outCustomRequestResponse)
+	var _out0 TDataBuffer
+	var _out1 TDataBuffer
+	_ret := _fnDsDoPlugInCustomCall(inDirNodeReference, inCustomRequestCode, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
 }
 
 var _fnDsFindDirNodes func(int, unsafe.Pointer, unsafe.Pointer, TDirPatternMatch, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsFindDirNodes calls the DirectoryService framework function dsFindDirNodes.
-func DsFindDirNodes(inDirReference int, inOutDataBufferPtr unsafe.Pointer, inNodeNamePattern unsafe.Pointer, inPatternMatchType TDirPatternMatch) (result TDirStatus, outDirNodeCount int, inOutContinueData int) {
+func DsFindDirNodes(inDirReference int, inNodeNamePattern unsafe.Pointer, inPatternMatchType TDirPatternMatch) (result TDirStatus, inOutDataBufferPtr TDataBuffer, outDirNodeCount int, inOutContinueData int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsFindDirNodes == nil {
 		ebipurego.RegisterLibFunc(&_fnDsFindDirNodes, _lib, "dsFindDirNodes")
 	}
-	var _out0 int
+	var _out0 TDataBuffer
 	var _out1 int
-	_ret := _fnDsFindDirNodes(inDirReference, inOutDataBufferPtr, inNodeNamePattern, inPatternMatchType, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	var _out2 int
+	_ret := _fnDsFindDirNodes(inDirReference, unsafe.Pointer(&_out0), inNodeNamePattern, inPatternMatchType, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnDsFlushRecord func(int) TDirStatus
@@ -644,25 +706,28 @@ func DsFlushRecord(inRecordReference int) TDirStatus {
 var _fnDsGetAttributeEntry func(int, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsGetAttributeEntry calls the DirectoryService framework function dsGetAttributeEntry.
-func DsGetAttributeEntry(inDirNodeReference int, inOutDataBuffer unsafe.Pointer, inAttributeListRef int, inAttributeInfoIndex int, outAttributeInfoPtr unsafe.Pointer) (result TDirStatus, outAttributeValueListRef int) {
+func DsGetAttributeEntry(inDirNodeReference int, inAttributeListRef int, inAttributeInfoIndex int, outAttributeInfoPtr unsafe.Pointer) (result TDirStatus, inOutDataBuffer TDataBuffer, outAttributeValueListRef int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetAttributeEntry == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetAttributeEntry, _lib, "dsGetAttributeEntry")
 	}
-	var _out0 int
-	_ret := _fnDsGetAttributeEntry(inDirNodeReference, inOutDataBuffer, inAttributeListRef, inAttributeInfoIndex, unsafe.Pointer(&_out0), outAttributeInfoPtr)
-	return _ret, _out0
+	var _out0 TDataBuffer
+	var _out1 int
+	_ret := _fnDsGetAttributeEntry(inDirNodeReference, unsafe.Pointer(&_out0), inAttributeListRef, inAttributeInfoIndex, unsafe.Pointer(&_out1), outAttributeInfoPtr)
+	return _ret, _out0, _out1
 }
 
 var _fnDsGetAttributeValue func(int, unsafe.Pointer, int, int, unsafe.Pointer) TDirStatus
 
 // DsGetAttributeValue calls the DirectoryService framework function dsGetAttributeValue.
-func DsGetAttributeValue(inDirNodeReference int, inOutDataBuffer unsafe.Pointer, inAttributeValueIndex int, inAttributeValueListRef int, outAttributeValue unsafe.Pointer) TDirStatus {
+func DsGetAttributeValue(inDirNodeReference int, inAttributeValueIndex int, inAttributeValueListRef int, outAttributeValue unsafe.Pointer) (result TDirStatus, inOutDataBuffer TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetAttributeValue == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetAttributeValue, _lib, "dsGetAttributeValue")
 	}
-	return _fnDsGetAttributeValue(inDirNodeReference, inOutDataBuffer, inAttributeValueIndex, inAttributeValueListRef, outAttributeValue)
+	var _out0 TDataBuffer
+	_ret := _fnDsGetAttributeValue(inDirNodeReference, unsafe.Pointer(&_out0), inAttributeValueIndex, inAttributeValueListRef, outAttributeValue)
+	return _ret, _out0
 }
 
 var _fnDsGetDataLength func(unsafe.Pointer) uint32
@@ -706,68 +771,74 @@ func DsGetDirNodeCountWithInfo(inDirReference int) (result TDirStatus, outDirect
 var _fnDsGetDirNodeInfo func(int, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsGetDirNodeInfo calls the DirectoryService framework function dsGetDirNodeInfo.
-func DsGetDirNodeInfo(inDirNodeReference int, inDirNodeInfoTypeList unsafe.Pointer, inOutDataBuffer unsafe.Pointer, inAttributeInfoOnly int) (result TDirStatus, outAttributeInfoCount int, outAttributeListRef int, inOutContinueData int) {
+func DsGetDirNodeInfo(inDirNodeReference int, inDirNodeInfoTypeList unsafe.Pointer, inAttributeInfoOnly int) (result TDirStatus, inOutDataBuffer TDataBuffer, outAttributeInfoCount int, outAttributeListRef int, inOutContinueData int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetDirNodeInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetDirNodeInfo, _lib, "dsGetDirNodeInfo")
 	}
-	var _out0 int
+	var _out0 TDataBuffer
 	var _out1 int
 	var _out2 int
-	_ret := _fnDsGetDirNodeInfo(inDirNodeReference, inDirNodeInfoTypeList, inOutDataBuffer, inAttributeInfoOnly, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _ret, _out0, _out1, _out2
+	var _out3 int
+	_ret := _fnDsGetDirNodeInfo(inDirNodeReference, inDirNodeInfoTypeList, unsafe.Pointer(&_out0), inAttributeInfoOnly, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3))
+	return _ret, _out0, _out1, _out2, _out3
 }
 
 var _fnDsGetDirNodeList func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsGetDirNodeList calls the DirectoryService framework function dsGetDirNodeList.
-func DsGetDirNodeList(inDirReference int, inOutDataBufferPtr unsafe.Pointer) (result TDirStatus, outDirNodeCount int, inOutContinueData int) {
+func DsGetDirNodeList(inDirReference int) (result TDirStatus, inOutDataBufferPtr TDataBuffer, outDirNodeCount int, inOutContinueData int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetDirNodeList == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetDirNodeList, _lib, "dsGetDirNodeList")
 	}
-	var _out0 int
+	var _out0 TDataBuffer
 	var _out1 int
-	_ret := _fnDsGetDirNodeList(inDirReference, inOutDataBufferPtr, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	var _out2 int
+	_ret := _fnDsGetDirNodeList(inDirReference, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnDsGetDirNodeName func(int, unsafe.Pointer, int, unsafe.Pointer) TDirStatus
 
 // DsGetDirNodeName calls the DirectoryService framework function dsGetDirNodeName.
-func DsGetDirNodeName(inDirReference int, inOutDataBuffer unsafe.Pointer, inDirNodeIndex int, inOutDataList unsafe.Pointer) TDirStatus {
+func DsGetDirNodeName(inDirReference int, inDirNodeIndex int, inOutDataList unsafe.Pointer) (result TDirStatus, inOutDataBuffer TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetDirNodeName == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetDirNodeName, _lib, "dsGetDirNodeName")
 	}
-	return _fnDsGetDirNodeName(inDirReference, inOutDataBuffer, inDirNodeIndex, inOutDataList)
+	var _out0 TDataBuffer
+	_ret := _fnDsGetDirNodeName(inDirReference, unsafe.Pointer(&_out0), inDirNodeIndex, inOutDataList)
+	return _ret, _out0
 }
 
 var _fnDsGetNextAttributeEntry func(int, unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsGetNextAttributeEntry calls the DirectoryService framework function dsGetNextAttributeEntry.
-func DsGetNextAttributeEntry(inDirNodeReference int, inOutDataBuffer unsafe.Pointer, inAttributeListRef int, inAttributeInfoIndex int, outAttributeInfoPtr unsafe.Pointer) (result TDirStatus, inOutAttributeOffset int, outAttributeValueListRef int) {
+func DsGetNextAttributeEntry(inDirNodeReference int, inAttributeListRef int, inAttributeInfoIndex int, outAttributeInfoPtr unsafe.Pointer) (result TDirStatus, inOutDataBuffer TDataBuffer, inOutAttributeOffset int, outAttributeValueListRef int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetNextAttributeEntry == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetNextAttributeEntry, _lib, "dsGetNextAttributeEntry")
 	}
-	var _out0 int
+	var _out0 TDataBuffer
 	var _out1 int
-	_ret := _fnDsGetNextAttributeEntry(inDirNodeReference, inOutDataBuffer, inAttributeListRef, inAttributeInfoIndex, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), outAttributeInfoPtr)
-	return _ret, _out0, _out1
+	var _out2 int
+	_ret := _fnDsGetNextAttributeEntry(inDirNodeReference, unsafe.Pointer(&_out0), inAttributeListRef, inAttributeInfoIndex, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), outAttributeInfoPtr)
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnDsGetNextAttributeValue func(int, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer) TDirStatus
 
 // DsGetNextAttributeValue calls the DirectoryService framework function dsGetNextAttributeValue.
-func DsGetNextAttributeValue(inDirNodeReference int, inOutDataBuffer unsafe.Pointer, inAttributeValueIndex int, inAttributeValueListRef int, outAttributeValue unsafe.Pointer) (result TDirStatus, inOutAttributeValueOffset int) {
+func DsGetNextAttributeValue(inDirNodeReference int, inAttributeValueIndex int, inAttributeValueListRef int, outAttributeValue unsafe.Pointer) (result TDirStatus, inOutDataBuffer TDataBuffer, inOutAttributeValueOffset int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetNextAttributeValue == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetNextAttributeValue, _lib, "dsGetNextAttributeValue")
 	}
-	var _out0 int
-	_ret := _fnDsGetNextAttributeValue(inDirNodeReference, inOutDataBuffer, inAttributeValueIndex, unsafe.Pointer(&_out0), inAttributeValueListRef, outAttributeValue)
-	return _ret, _out0
+	var _out0 TDataBuffer
+	var _out1 int
+	_ret := _fnDsGetNextAttributeValue(inDirNodeReference, unsafe.Pointer(&_out0), inAttributeValueIndex, unsafe.Pointer(&_out1), inAttributeValueListRef, outAttributeValue)
+	return _ret, _out0, _out1
 }
 
 var _fnDsGetPathFromList func(int, unsafe.Pointer, string) string
@@ -784,83 +855,96 @@ func DsGetPathFromList(inDirReference int, inDataList unsafe.Pointer, inDelimite
 var _fnDsGetRecordAttributeInfo func(int, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsGetRecordAttributeInfo calls the DirectoryService framework function dsGetRecordAttributeInfo.
-func DsGetRecordAttributeInfo(inRecordReference int, inAttributeType unsafe.Pointer, outAttributeInfoPtr unsafe.Pointer) TDirStatus {
+func DsGetRecordAttributeInfo(inRecordReference int, outAttributeInfoPtr unsafe.Pointer) (result TDirStatus, inAttributeType TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetRecordAttributeInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetRecordAttributeInfo, _lib, "dsGetRecordAttributeInfo")
 	}
-	return _fnDsGetRecordAttributeInfo(inRecordReference, inAttributeType, outAttributeInfoPtr)
+	var _out0 TDataBuffer
+	_ret := _fnDsGetRecordAttributeInfo(inRecordReference, unsafe.Pointer(&_out0), outAttributeInfoPtr)
+	return _ret, _out0
 }
 
 var _fnDsGetRecordAttributeValueByID func(int, unsafe.Pointer, int, unsafe.Pointer) TDirStatus
 
 // DsGetRecordAttributeValueByID calls the DirectoryService framework function dsGetRecordAttributeValueByID.
-func DsGetRecordAttributeValueByID(inRecordReference int, inAttributeType unsafe.Pointer, inValueID int, outEntryPtr unsafe.Pointer) TDirStatus {
+func DsGetRecordAttributeValueByID(inRecordReference int, inValueID int, outEntryPtr unsafe.Pointer) (result TDirStatus, inAttributeType TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetRecordAttributeValueByID == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetRecordAttributeValueByID, _lib, "dsGetRecordAttributeValueByID")
 	}
-	return _fnDsGetRecordAttributeValueByID(inRecordReference, inAttributeType, inValueID, outEntryPtr)
+	var _out0 TDataBuffer
+	_ret := _fnDsGetRecordAttributeValueByID(inRecordReference, unsafe.Pointer(&_out0), inValueID, outEntryPtr)
+	return _ret, _out0
 }
 
 var _fnDsGetRecordAttributeValueByIndex func(int, unsafe.Pointer, int, unsafe.Pointer) TDirStatus
 
 // DsGetRecordAttributeValueByIndex calls the DirectoryService framework function dsGetRecordAttributeValueByIndex.
-func DsGetRecordAttributeValueByIndex(inRecordReference int, inAttributeType unsafe.Pointer, inValueIndex int, outEntryPtr unsafe.Pointer) TDirStatus {
+func DsGetRecordAttributeValueByIndex(inRecordReference int, inValueIndex int, outEntryPtr unsafe.Pointer) (result TDirStatus, inAttributeType TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetRecordAttributeValueByIndex == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetRecordAttributeValueByIndex, _lib, "dsGetRecordAttributeValueByIndex")
 	}
-	return _fnDsGetRecordAttributeValueByIndex(inRecordReference, inAttributeType, inValueIndex, outEntryPtr)
+	var _out0 TDataBuffer
+	_ret := _fnDsGetRecordAttributeValueByIndex(inRecordReference, unsafe.Pointer(&_out0), inValueIndex, outEntryPtr)
+	return _ret, _out0
 }
 
 var _fnDsGetRecordAttributeValueByValue func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsGetRecordAttributeValueByValue calls the DirectoryService framework function dsGetRecordAttributeValueByValue.
-func DsGetRecordAttributeValueByValue(inRecordReference int, inAttributeType unsafe.Pointer, inAttributeValue unsafe.Pointer, outEntryPtr unsafe.Pointer) TDirStatus {
+func DsGetRecordAttributeValueByValue(inRecordReference int, outEntryPtr unsafe.Pointer) (result TDirStatus, inAttributeType TDataBuffer, inAttributeValue TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetRecordAttributeValueByValue == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetRecordAttributeValueByValue, _lib, "dsGetRecordAttributeValueByValue")
 	}
-	return _fnDsGetRecordAttributeValueByValue(inRecordReference, inAttributeType, inAttributeValue, outEntryPtr)
+	var _out0 TDataBuffer
+	var _out1 TDataBuffer
+	_ret := _fnDsGetRecordAttributeValueByValue(inRecordReference, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), outEntryPtr)
+	return _ret, _out0, _out1
 }
 
 var _fnDsGetRecordEntry func(int, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsGetRecordEntry calls the DirectoryService framework function dsGetRecordEntry.
-func DsGetRecordEntry(inDirNodeReference int, inOutDataBuffer unsafe.Pointer, inRecordEntryIndex int, outRecordEntryPtr unsafe.Pointer) (result TDirStatus, outAttributeListRef int) {
+func DsGetRecordEntry(inDirNodeReference int, inRecordEntryIndex int, outRecordEntryPtr unsafe.Pointer) (result TDirStatus, inOutDataBuffer TDataBuffer, outAttributeListRef int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetRecordEntry == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetRecordEntry, _lib, "dsGetRecordEntry")
 	}
-	var _out0 int
-	_ret := _fnDsGetRecordEntry(inDirNodeReference, inOutDataBuffer, inRecordEntryIndex, unsafe.Pointer(&_out0), outRecordEntryPtr)
-	return _ret, _out0
+	var _out0 TDataBuffer
+	var _out1 int
+	_ret := _fnDsGetRecordEntry(inDirNodeReference, unsafe.Pointer(&_out0), inRecordEntryIndex, unsafe.Pointer(&_out1), outRecordEntryPtr)
+	return _ret, _out0, _out1
 }
 
 var _fnDsGetRecordList func(int, unsafe.Pointer, unsafe.Pointer, TDirPatternMatch, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsGetRecordList calls the DirectoryService framework function dsGetRecordList.
-func DsGetRecordList(inDirNodeReference int, inOutDataBuffer unsafe.Pointer, inRecordNameList unsafe.Pointer, inPatternMatchType TDirPatternMatch, inRecordTypeList unsafe.Pointer, inAttributeTypeList unsafe.Pointer, inAttributeInfoOnly int) (result TDirStatus, inOutRecordEntryCount int, inOutContinueData int) {
+func DsGetRecordList(inDirNodeReference int, inRecordNameList unsafe.Pointer, inPatternMatchType TDirPatternMatch, inRecordTypeList unsafe.Pointer, inAttributeTypeList unsafe.Pointer, inAttributeInfoOnly int) (result TDirStatus, inOutDataBuffer TDataBuffer, inOutRecordEntryCount int, inOutContinueData int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetRecordList == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetRecordList, _lib, "dsGetRecordList")
 	}
-	var _out0 int
+	var _out0 TDataBuffer
 	var _out1 int
-	_ret := _fnDsGetRecordList(inDirNodeReference, inOutDataBuffer, inRecordNameList, inPatternMatchType, inRecordTypeList, inAttributeTypeList, inAttributeInfoOnly, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	var _out2 int
+	_ret := _fnDsGetRecordList(inDirNodeReference, unsafe.Pointer(&_out0), inRecordNameList, inPatternMatchType, inRecordTypeList, inAttributeTypeList, inAttributeInfoOnly, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnDsGetRecordNameFromEntry func(unsafe.Pointer, string) TDirStatus
 
 // DsGetRecordNameFromEntry calls the DirectoryService framework function dsGetRecordNameFromEntry.
-func DsGetRecordNameFromEntry(inRecEntryPtr unsafe.Pointer, outRecName string) TDirStatus {
+func DsGetRecordNameFromEntry(outRecName string) (result TDirStatus, inRecEntryPtr TRecordEntry) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetRecordNameFromEntry == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetRecordNameFromEntry, _lib, "dsGetRecordNameFromEntry")
 	}
-	return _fnDsGetRecordNameFromEntry(inRecEntryPtr, outRecName)
+	var _out0 TRecordEntry
+	_ret := _fnDsGetRecordNameFromEntry(unsafe.Pointer(&_out0), outRecName)
+	return _ret, _out0
 }
 
 var _fnDsGetRecordReferenceInfo func(int, unsafe.Pointer) TDirStatus
@@ -877,12 +961,14 @@ func DsGetRecordReferenceInfo(inRecordReference int, outRecordInfo unsafe.Pointe
 var _fnDsGetRecordTypeFromEntry func(unsafe.Pointer, string) TDirStatus
 
 // DsGetRecordTypeFromEntry calls the DirectoryService framework function dsGetRecordTypeFromEntry.
-func DsGetRecordTypeFromEntry(inRecEntryPtr unsafe.Pointer, outRecType string) TDirStatus {
+func DsGetRecordTypeFromEntry(outRecType string) (result TDirStatus, inRecEntryPtr TRecordEntry) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsGetRecordTypeFromEntry == nil {
 		ebipurego.RegisterLibFunc(&_fnDsGetRecordTypeFromEntry, _lib, "dsGetRecordTypeFromEntry")
 	}
-	return _fnDsGetRecordTypeFromEntry(inRecEntryPtr, outRecType)
+	var _out0 TRecordEntry
+	_ret := _fnDsGetRecordTypeFromEntry(unsafe.Pointer(&_out0), outRecType)
+	return _ret, _out0
 }
 
 var _fnDsIsDirServiceLocalRunning func() TDirStatus
@@ -949,28 +1035,33 @@ func DsOpenDirServiceLocal(inFilePath string) (result TDirStatus, outDirRef int)
 var _fnDsOpenDirServiceProxy func(unsafe.Pointer, string, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsOpenDirServiceProxy calls the DirectoryService framework function dsOpenDirServiceProxy.
-func DsOpenDirServiceProxy(inHostOrIPAddress string, inIPPort int, inAuthMethod unsafe.Pointer, inAuthStepData unsafe.Pointer, outAuthStepDataResponse unsafe.Pointer) (result TDirStatus, outDirRef int, ioContinueData int) {
+func DsOpenDirServiceProxy(inHostOrIPAddress string, inIPPort int) (result TDirStatus, outDirRef int, inAuthMethod TDataBuffer, inAuthStepData TDataBuffer, outAuthStepDataResponse TDataBuffer, ioContinueData int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsOpenDirServiceProxy == nil {
 		ebipurego.RegisterLibFunc(&_fnDsOpenDirServiceProxy, _lib, "dsOpenDirServiceProxy")
 	}
 	var _out0 int
-	var _out1 int
-	_ret := _fnDsOpenDirServiceProxy(unsafe.Pointer(&_out0), inHostOrIPAddress, inIPPort, inAuthMethod, inAuthStepData, outAuthStepDataResponse, unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	var _out1 TDataBuffer
+	var _out2 TDataBuffer
+	var _out3 TDataBuffer
+	var _out4 int
+	_ret := _fnDsOpenDirServiceProxy(unsafe.Pointer(&_out0), inHostOrIPAddress, inIPPort, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3), unsafe.Pointer(&_out4))
+	return _ret, _out0, _out1, _out2, _out3, _out4
 }
 
 var _fnDsOpenRecord func(int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsOpenRecord calls the DirectoryService framework function dsOpenRecord.
-func DsOpenRecord(inDirNodeReference int, inRecordType unsafe.Pointer, inRecordName unsafe.Pointer) (result TDirStatus, outRecordReference int) {
+func DsOpenRecord(inDirNodeReference int) (result TDirStatus, inRecordType TDataBuffer, inRecordName TDataBuffer, outRecordReference int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsOpenRecord == nil {
 		ebipurego.RegisterLibFunc(&_fnDsOpenRecord, _lib, "dsOpenRecord")
 	}
-	var _out0 int
-	_ret := _fnDsOpenRecord(inDirNodeReference, inRecordType, inRecordName, unsafe.Pointer(&_out0))
-	return _ret, _out0
+	var _out0 TDataBuffer
+	var _out1 TDataBuffer
+	var _out2 int
+	_ret := _fnDsOpenRecord(inDirNodeReference, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnDsParseAuthAuthority func(string, string, string, string) TDirStatus
@@ -998,23 +1089,27 @@ func DsReleaseContinueData(inDirReference int, inContinueData int) TDirStatus {
 var _fnDsRemoveAttribute func(int, unsafe.Pointer) TDirStatus
 
 // DsRemoveAttribute calls the DirectoryService framework function dsRemoveAttribute.
-func DsRemoveAttribute(inRecordReference int, inAttribute unsafe.Pointer) TDirStatus {
+func DsRemoveAttribute(inRecordReference int) (result TDirStatus, inAttribute TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsRemoveAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnDsRemoveAttribute, _lib, "dsRemoveAttribute")
 	}
-	return _fnDsRemoveAttribute(inRecordReference, inAttribute)
+	var _out0 TDataBuffer
+	_ret := _fnDsRemoveAttribute(inRecordReference, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnDsRemoveAttributeValue func(int, unsafe.Pointer, int) TDirStatus
 
 // DsRemoveAttributeValue calls the DirectoryService framework function dsRemoveAttributeValue.
-func DsRemoveAttributeValue(inRecordReference int, inAttributeType unsafe.Pointer, inAttributeValueID int) TDirStatus {
+func DsRemoveAttributeValue(inRecordReference int, inAttributeValueID int) (result TDirStatus, inAttributeType TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsRemoveAttributeValue == nil {
 		ebipurego.RegisterLibFunc(&_fnDsRemoveAttributeValue, _lib, "dsRemoveAttributeValue")
 	}
-	return _fnDsRemoveAttributeValue(inRecordReference, inAttributeType, inAttributeValueID)
+	var _out0 TDataBuffer
+	_ret := _fnDsRemoveAttributeValue(inRecordReference, unsafe.Pointer(&_out0), inAttributeValueID)
+	return _ret, _out0
 }
 
 var _fnDsServiceInformationAllocate func(objc.ID, int, unsafe.Pointer) TDirStatus
@@ -1031,45 +1126,54 @@ func DsServiceInformationAllocate(inServiceInfo obj.Object, inBufferSize int, ou
 var _fnDsSetAttributeValue func(int, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsSetAttributeValue calls the DirectoryService framework function dsSetAttributeValue.
-func DsSetAttributeValue(inRecordReference int, inAttributeType unsafe.Pointer, inAttributeValuePtr unsafe.Pointer) TDirStatus {
+func DsSetAttributeValue(inRecordReference int) (result TDirStatus, inAttributeType TDataBuffer, inAttributeValuePtr TAttributeValueEntry) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsSetAttributeValue == nil {
 		ebipurego.RegisterLibFunc(&_fnDsSetAttributeValue, _lib, "dsSetAttributeValue")
 	}
-	return _fnDsSetAttributeValue(inRecordReference, inAttributeType, inAttributeValuePtr)
+	var _out0 TDataBuffer
+	var _out1 TAttributeValueEntry
+	_ret := _fnDsSetAttributeValue(inRecordReference, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
 }
 
 var _fnDsSetAttributeValues func(int, unsafe.Pointer, unsafe.Pointer) TDirStatus
 
 // DsSetAttributeValues calls the DirectoryService framework function dsSetAttributeValues.
-func DsSetAttributeValues(inRecordReference int, inAttributeType unsafe.Pointer, inAttributeValuesPtr unsafe.Pointer) TDirStatus {
+func DsSetAttributeValues(inRecordReference int, inAttributeValuesPtr unsafe.Pointer) (result TDirStatus, inAttributeType TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsSetAttributeValues == nil {
 		ebipurego.RegisterLibFunc(&_fnDsSetAttributeValues, _lib, "dsSetAttributeValues")
 	}
-	return _fnDsSetAttributeValues(inRecordReference, inAttributeType, inAttributeValuesPtr)
+	var _out0 TDataBuffer
+	_ret := _fnDsSetAttributeValues(inRecordReference, unsafe.Pointer(&_out0), inAttributeValuesPtr)
+	return _ret, _out0
 }
 
 var _fnDsSetRecordName func(int, unsafe.Pointer) TDirStatus
 
 // DsSetRecordName calls the DirectoryService framework function dsSetRecordName.
-func DsSetRecordName(inRecordReference int, inNewRecordName unsafe.Pointer) TDirStatus {
+func DsSetRecordName(inRecordReference int) (result TDirStatus, inNewRecordName TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsSetRecordName == nil {
 		ebipurego.RegisterLibFunc(&_fnDsSetRecordName, _lib, "dsSetRecordName")
 	}
-	return _fnDsSetRecordName(inRecordReference, inNewRecordName)
+	var _out0 TDataBuffer
+	_ret := _fnDsSetRecordName(inRecordReference, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnDsSetRecordType func(int, unsafe.Pointer) TDirStatus
 
 // DsSetRecordType calls the DirectoryService framework function dsSetRecordType.
-func DsSetRecordType(inRecordReference int, inNewRecordType unsafe.Pointer) TDirStatus {
+func DsSetRecordType(inRecordReference int) (result TDirStatus, inNewRecordType TDataBuffer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsSetRecordType == nil {
 		ebipurego.RegisterLibFunc(&_fnDsSetRecordType, _lib, "dsSetRecordType")
 	}
-	return _fnDsSetRecordType(inRecordReference, inNewRecordType)
+	var _out0 TDataBuffer
+	_ret := _fnDsSetRecordType(inRecordReference, unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnDsVerifyDirRefNum func(int) TDirStatus

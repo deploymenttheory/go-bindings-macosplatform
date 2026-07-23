@@ -6,6 +6,7 @@ package iobluetooth
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -111,6 +112,12 @@ func (ibdp *IOBluetoothDevicePair) SetDevice(inDevice *IOBluetoothDevice) {
 	defer runtime.KeepAlive(ibdp)
 	defer runtime.KeepAlive(inDevice)
 	objc.Send[objc.ID](objref.IDOf(ibdp), objc.RegisterName("setDevice:"), objref.IDOf(inDevice))
+}
+
+// ReplyPINCodePINCode this is the required reply to the devicePairingPINCodeRequest delegate message. Set the PIN code to use during pairing if required.
+func (ibdp *IOBluetoothDevicePair) ReplyPINCodePINCode(pinCodeSize int, pinCode *BluetoothPINCode) {
+	defer runtime.KeepAlive(ibdp)
+	objc.Send[objc.ID](objref.IDOf(ibdp), objc.RegisterName("replyPINCode:PINCode:"), pinCodeSize, unsafe.Pointer(pinCode))
 }
 
 // ReplyUserConfirmation this is the required reply to the devicePairingUserConfirmationRequest delegate message.

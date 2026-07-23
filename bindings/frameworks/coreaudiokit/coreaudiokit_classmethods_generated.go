@@ -5,8 +5,17 @@
 package coreaudiokit
 
 import (
+	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/ebitengine/purego/objc"
 )
+
+// AUPannerViewWithAudioUnit creates a panner view for an audio unit.
+func AUPannerViewWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUPannerView {
+	_r := objc.Send[objc.ID](objc.ID(_class("AUPannerView")), objc.RegisterName("AUPannerViewWithAudioUnit:"), unsafe.Pointer(au))
+	return AUPannerViewFromID(_r)
+}
 
 // IsAVBSupported reports whether returns a Boolean value that indicates whether the current machine hardware supports Audio Video Bridging (AVB).
 func IsAVBSupported() bool {

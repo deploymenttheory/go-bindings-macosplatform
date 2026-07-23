@@ -6,7 +6,9 @@ package avfaudio
 
 import (
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -121,6 +123,12 @@ func (aumi *AudioUnitMIDIInstrument) SendMIDIEventData1(midiStatus uint8, data1 
 func (aumi *AudioUnitMIDIInstrument) SendMIDISysExEvent(midiData []byte) {
 	defer runtime.KeepAlive(aumi)
 	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendMIDISysExEvent:"), rt.BytesToNSData(midiData))
+}
+
+// SendMIDIEventList sends a MIDI event list to the instrument.
+func (aumi *AudioUnitMIDIInstrument) SendMIDIEventList(eventList *coremidi.MIDIEventList) {
+	defer runtime.KeepAlive(aumi)
+	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendMIDIEventList:"), unsafe.Pointer(eventList))
 }
 
 // isAudioUnitMIDIInstrument marks AudioUnitMIDIInstrument — and, by embedding promotion, its

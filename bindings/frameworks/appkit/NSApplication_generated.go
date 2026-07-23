@@ -1260,6 +1260,20 @@ func (a *Application) OrderedWindows() []*Window {
 	return _mainthread0
 }
 
+// SearchStringInUserInterfaceItemStringSearchRangeFoundRange searches for the string in the user interface.
+func (a *Application) SearchStringInUserInterfaceItemStringSearchRangeFoundRange(searchString string, stringToSearch string, searchRange foundation.NSRange, foundRange *foundation.NSRange) bool {
+	defer runtime.KeepAlive(a)
+	var _mainthread0 bool
+	purego.Main(func() {
+		_mainthread0 = func() bool {
+			_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("searchString:inUserInterfaceItemString:searchRange:foundRange:"), purego.NSString(searchString), purego.NSString(stringToSearch), searchRange, unsafe.Pointer(foundRange))
+			return _r
+		}()
+	})
+	return _mainthread0
+
+}
+
 // RestoreWindowWithIdentifierStateCompletionHandler wraps the corresponding Objective-C method.
 func (a *Application) RestoreWindowWithIdentifierStateCompletionHandler(identifier obj.Object, state obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) bool {
 	defer runtime.KeepAlive(a)

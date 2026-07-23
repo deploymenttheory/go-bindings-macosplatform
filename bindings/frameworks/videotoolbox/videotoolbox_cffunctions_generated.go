@@ -260,6 +260,21 @@ func VTFrameSiloCreate(allocator obj.Object, fileURL obj.Object, timeRange corem
 	return nil
 }
 
+var _fnVTFrameSiloSetTimeRangesForNextPass func(objc.ID, int, unsafe.Pointer) int32
+
+// VTFrameSiloSetTimeRangesForNextPass reports an error if the VideoToolbox framework function VTFrameSiloSetTimeRangesForNextPass fails.
+func VTFrameSiloSetTimeRangesForNextPass(silo obj.Object, timeRangeCount int, timeRangeArray *coremedia.CMTimeRange) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTFrameSiloSetTimeRangesForNextPass == nil {
+		ebipurego.RegisterLibFunc(&_fnVTFrameSiloSetTimeRangesForNextPass, _lib, "VTFrameSiloSetTimeRangesForNextPass")
+	}
+	_rc := _fnVTFrameSiloSetTimeRangesForNextPass(objref.IDOf(silo), timeRangeCount, unsafe.Pointer(timeRangeArray))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnVTHDRPerFrameMetadataGenerationSessionAttachMetadata func(objc.ID, unsafe.Pointer, uint8) int32
 
 // VTHDRPerFrameMetadataGenerationSessionAttachMetadata reports an error if the VideoToolbox framework function VTHDRPerFrameMetadataGenerationSessionAttachMetadata fails.

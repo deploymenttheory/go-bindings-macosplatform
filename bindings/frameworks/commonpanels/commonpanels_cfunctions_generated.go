@@ -131,16 +131,15 @@ func FPIsFontPanelVisible() uint8 {
 var _fnGetColor func(carboncore.Point, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
 
 // GetColor calls the CommonPanels framework function GetColor.
-func GetColor(where carboncore.Point) (result uint8, prompt uint8, inColor RGBColor, outColor RGBColor) {
+func GetColor(where carboncore.Point, inColor *RGBColor) (result uint8, prompt uint8, outColor RGBColor) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetColor == nil {
 		ebipurego.RegisterLibFunc(&_fnGetColor, _lib, "GetColor")
 	}
 	var _out0 uint8
 	var _out1 RGBColor
-	var _out2 RGBColor
-	_ret := _fnGetColor(where, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
-	return _ret, _out0, _out1, _out2
+	_ret := _fnGetColor(where, unsafe.Pointer(&_out0), unsafe.Pointer(inColor), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
 }
 
 var _fnInvokeCalibrateEventUPP func(unsafe.Pointer, unsafe.Pointer)

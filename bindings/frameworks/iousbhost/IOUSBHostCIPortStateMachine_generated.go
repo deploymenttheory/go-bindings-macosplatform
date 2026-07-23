@@ -105,6 +105,28 @@ func (hcpsm *HostCIPortStateMachine) WithOvercurrent(overcurrent bool) *HostCIPo
 	return hcpsm
 }
 
+// InspectCommand inspect an IOUSBHostCIMessage command The IOUSBHostCIMessage command is inspected to determine if it is handled by the state machine, and is appropriate for the current state.
+func (hcpsm *HostCIPortStateMachine) InspectCommand(command *IOUSBHostCIMessage) error {
+	defer runtime.KeepAlive(hcpsm)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hcpsm), objc.RegisterName("inspectCommand:error:"), unsafe.Pointer(command), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// RespondToCommandStatus advance the state machine and respond to an IOUSBHostCIMessage command If the command passes inspectCommand and the client indicates the command was processed successfully, the state machine is advanced, and a properly formatted command response message is sent to the kernel driver.  If the client indicates the command was not processed successfully, the state machine is not advanced but a properly formatted command response message is sent to the kernel driver.
+func (hcpsm *HostCIPortStateMachine) RespondToCommandStatus(command *IOUSBHostCIMessage, status HostCIMessageStatus) error {
+	defer runtime.KeepAlive(hcpsm)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hcpsm), objc.RegisterName("respondToCommand:status:error:"), unsafe.Pointer(command), status, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
 // UpdateLinkStateSpeedInhibitLinkStateChange updates link state speed inhibit link state change.
 func (hcpsm *HostCIPortStateMachine) UpdateLinkStateSpeedInhibitLinkStateChange(linkState HostCILinkState, speed HostCIDeviceSpeed, inhibitLinkStateChange bool) error {
 	defer runtime.KeepAlive(hcpsm)

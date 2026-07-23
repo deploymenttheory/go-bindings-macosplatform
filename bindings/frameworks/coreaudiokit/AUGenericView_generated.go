@@ -6,7 +6,9 @@ package coreaudiokit
 
 import (
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -73,12 +75,26 @@ func (agv *AUGenericView) String() string {
 	return rt.Description(objref.IDOf(agv))
 }
 
-// NewAUGenericView creates a new AUGenericView.
-func NewAUGenericView() *AUGenericView {
+// NewAUGenericViewWithAudioUnit creates a generic view for an audio unit, setting all display flags.
+func NewAUGenericViewWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUGenericView {
 	var _mainthread0 *AUGenericView
 	purego.Main(func() {
 		_mainthread0 = func() *AUGenericView {
-			_id := objc.Send[objc.ID](objc.ID(_class("AUGenericView")), objc.RegisterName("new"))
+			_alloc := objc.Send[objc.ID](objc.ID(_class("AUGenericView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:"), unsafe.Pointer(au))
+			return aUGenericViewAdopt(_id)
+		}()
+	})
+	return _mainthread0
+}
+
+// NewAUGenericViewWithAudioUnitDisplayFlags initializes a generic view for an audio unit, setting specific display flags.
+func NewAUGenericViewWithAudioUnitDisplayFlags(inAudioUnit *carboncore.ComponentInstanceRecord, inFlags AUGenericViewDisplayFlags) *AUGenericView {
+	var _mainthread0 *AUGenericView
+	purego.Main(func() {
+		_mainthread0 = func() *AUGenericView {
+			_alloc := objc.Send[objc.ID](objc.ID(_class("AUGenericView")), objc.RegisterName("alloc"))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:displayFlags:"), unsafe.Pointer(inAudioUnit), inFlags)
 			return aUGenericViewAdopt(_id)
 		}()
 	})
@@ -91,6 +107,20 @@ func (agv *AUGenericView) WithShowsExpertParameters(showsExpertParameters bool) 
 		objc.Send[objc.ID](objref.IDOf(agv), objc.RegisterName("setShowsExpertParameters:"), showsExpertParameters)
 	})
 	return agv
+}
+
+// AudioUnit returns the audio unit.
+func (agv *AUGenericView) AudioUnit() *carboncore.ComponentInstanceRecord {
+	defer runtime.KeepAlive(agv)
+	var _mainthread0 *carboncore.ComponentInstanceRecord
+	purego.Main(func() {
+		_mainthread0 = func() *carboncore.ComponentInstanceRecord {
+			_r := objc.Send[*carboncore.ComponentInstanceRecord](objref.IDOf(agv), objc.RegisterName("audioUnit"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }
 
 // ShowsExpertParameters wraps the corresponding Objective-C method.

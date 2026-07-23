@@ -108,13 +108,13 @@ func VTCompressionSessionGetPixelBufferPool(session obj.Object) obj.Object {
 var _fnVTCompressionSessionGetTimeRangesForNextPass func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // VTCompressionSessionGetTimeRangesForNextPass calls the VideoToolbox framework function VTCompressionSessionGetTimeRangesForNextPass.
-func VTCompressionSessionGetTimeRangesForNextPass(session obj.Object, timeRangeArrayOut unsafe.Pointer) (result int, timeRangeCountOut int) {
+func VTCompressionSessionGetTimeRangesForNextPass(session obj.Object, timeRangeArrayOut *coremedia.CMTimeRange) (result int, timeRangeCountOut int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVTCompressionSessionGetTimeRangesForNextPass == nil {
 		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionGetTimeRangesForNextPass, _lib, "VTCompressionSessionGetTimeRangesForNextPass")
 	}
 	var _out0 int
-	_ret := int(_fnVTCompressionSessionGetTimeRangesForNextPass(objref.IDOf(session), unsafe.Pointer(&_out0), timeRangeArrayOut))
+	_ret := int(_fnVTCompressionSessionGetTimeRangesForNextPass(objref.IDOf(session), unsafe.Pointer(&_out0), unsafe.Pointer(timeRangeArrayOut)))
 	return _ret, _out0
 }
 
@@ -271,17 +271,6 @@ func VTFrameSiloGetTypeID() int {
 		ebipurego.RegisterLibFunc(&_fnVTFrameSiloGetTypeID, _lib, "VTFrameSiloGetTypeID")
 	}
 	return _fnVTFrameSiloGetTypeID()
-}
-
-var _fnVTFrameSiloSetTimeRangesForNextPass func(objc.ID, int, unsafe.Pointer) int32
-
-// VTFrameSiloSetTimeRangesForNextPass calls the VideoToolbox framework function VTFrameSiloSetTimeRangesForNextPass.
-func VTFrameSiloSetTimeRangesForNextPass(silo obj.Object, timeRangeCount int, timeRangeArray unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnVTFrameSiloSetTimeRangesForNextPass == nil {
-		ebipurego.RegisterLibFunc(&_fnVTFrameSiloSetTimeRangesForNextPass, _lib, "VTFrameSiloSetTimeRangesForNextPass")
-	}
-	return int(_fnVTFrameSiloSetTimeRangesForNextPass(objref.IDOf(silo), timeRangeCount, timeRangeArray))
 }
 
 var _fnVTHDRPerFrameMetadataGenerationSessionGetTypeID func() int

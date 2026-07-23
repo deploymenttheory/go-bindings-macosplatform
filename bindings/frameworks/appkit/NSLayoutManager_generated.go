@@ -229,6 +229,18 @@ func (lm *LayoutManager) TextContainerChangedTextView(container *TextContainer) 
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("textContainerChangedTextView:"), objref.IDOf(container))
 }
 
+// InvalidateGlyphsForCharacterRangeChangeInLengthActualCharacterRange invalidates and adjusts the glyphs in the specified character range.
+func (lm *LayoutManager) InvalidateGlyphsForCharacterRangeChangeInLengthActualCharacterRange(charRange foundation.NSRange, delta int, actualCharRange *foundation.NSRange) {
+	defer runtime.KeepAlive(lm)
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("invalidateGlyphsForCharacterRange:changeInLength:actualCharacterRange:"), charRange, delta, unsafe.Pointer(actualCharRange))
+}
+
+// InvalidateLayoutForCharacterRangeActualCharacterRange invalidates the layout information for the glyphs that map to the specified character range.
+func (lm *LayoutManager) InvalidateLayoutForCharacterRangeActualCharacterRange(charRange foundation.NSRange, actualCharRange *foundation.NSRange) {
+	defer runtime.KeepAlive(lm)
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("invalidateLayoutForCharacterRange:actualCharacterRange:"), charRange, unsafe.Pointer(actualCharRange))
+}
+
 // InvalidateDisplayForCharacterRange invalidates display for the specified character range.
 func (lm *LayoutManager) InvalidateDisplayForCharacterRange(charRange foundation.NSRange) {
 	defer runtime.KeepAlive(lm)
@@ -418,11 +430,53 @@ func (lm *LayoutManager) FirstUnlaidGlyphIndex() int {
 	return _r
 }
 
+// TextContainerForGlyphAtIndexEffectiveRange returns the text container that manages the layout for the specified glyph, causing layout to happen as necessary.
+func (lm *LayoutManager) TextContainerForGlyphAtIndexEffectiveRange(glyphIndex int, effectiveGlyphRange *foundation.NSRange) *TextContainer {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("textContainerForGlyphAtIndex:effectiveRange:"), glyphIndex, unsafe.Pointer(effectiveGlyphRange))
+	return TextContainerFromID(_r)
+}
+
+// TextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout returns the text container that manages the layout for the specified glyph.
+func (lm *LayoutManager) TextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex int, effectiveGlyphRange *foundation.NSRange, flag bool) *TextContainer {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("textContainerForGlyphAtIndex:effectiveRange:withoutAdditionalLayout:"), glyphIndex, unsafe.Pointer(effectiveGlyphRange), flag)
+	return TextContainerFromID(_r)
+}
+
 // UsedRectForTextContainer returns the bounding rectangle for the glyphs in the specified text container.
 func (lm *LayoutManager) UsedRectForTextContainer(container *TextContainer) corefoundation.CGRect {
 	defer runtime.KeepAlive(lm)
 	defer runtime.KeepAlive(container)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lm), objc.RegisterName("usedRectForTextContainer:"), objref.IDOf(container))
+	return _r
+}
+
+// LineFragmentRectForGlyphAtIndexEffectiveRange returns the rectangle for the line fragment where the glyph lies and (optionally), by reference, the entire range of glyphs in that fragment.
+func (lm *LayoutManager) LineFragmentRectForGlyphAtIndexEffectiveRange(glyphIndex int, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lm), objc.RegisterName("lineFragmentRectForGlyphAtIndex:effectiveRange:"), glyphIndex, unsafe.Pointer(effectiveGlyphRange))
+	return _r
+}
+
+// LineFragmentRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout returns the line fragment rectangle that contains the glyph at the specified glyph index.
+func (lm *LayoutManager) LineFragmentRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex int, effectiveGlyphRange *foundation.NSRange, flag bool) corefoundation.CGRect {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lm), objc.RegisterName("lineFragmentRectForGlyphAtIndex:effectiveRange:withoutAdditionalLayout:"), glyphIndex, unsafe.Pointer(effectiveGlyphRange), flag)
+	return _r
+}
+
+// LineFragmentUsedRectForGlyphAtIndexEffectiveRange returns the usage rectangle for the line fragment and (optionally) returns the entire range of glyphs in that fragment.
+func (lm *LayoutManager) LineFragmentUsedRectForGlyphAtIndexEffectiveRange(glyphIndex int, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lm), objc.RegisterName("lineFragmentUsedRectForGlyphAtIndex:effectiveRange:"), glyphIndex, unsafe.Pointer(effectiveGlyphRange))
+	return _r
+}
+
+// LineFragmentUsedRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout returns the usage rectangle for the line fragment and (optionally) returns the entire range of glyphs in that fragment.
+func (lm *LayoutManager) LineFragmentUsedRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex int, effectiveGlyphRange *foundation.NSRange, flag bool) corefoundation.CGRect {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lm), objc.RegisterName("lineFragmentUsedRectForGlyphAtIndex:effectiveRange:withoutAdditionalLayout:"), glyphIndex, unsafe.Pointer(effectiveGlyphRange), flag)
 	return _r
 }
 
@@ -458,6 +512,20 @@ func (lm *LayoutManager) AttachmentSizeForGlyphAtIndex(glyphIndex int) corefound
 func (lm *LayoutManager) TruncatedGlyphRangeInLineFragmentForGlyphAtIndex(glyphIndex int) foundation.NSRange {
 	defer runtime.KeepAlive(lm)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(lm), objc.RegisterName("truncatedGlyphRangeInLineFragmentForGlyphAtIndex:"), glyphIndex)
+	return _r
+}
+
+// GlyphRangeForCharacterRangeActualCharacterRange returns the range of glyphs that the specified range of characters generates.
+func (lm *LayoutManager) GlyphRangeForCharacterRangeActualCharacterRange(charRange foundation.NSRange, actualCharRange *foundation.NSRange) foundation.NSRange {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[foundation.NSRange](objref.IDOf(lm), objc.RegisterName("glyphRangeForCharacterRange:actualCharacterRange:"), charRange, unsafe.Pointer(actualCharRange))
+	return _r
+}
+
+// CharacterRangeForGlyphRangeActualGlyphRange returns the range of characters that correspond to the glyphs in the specified glyph range.
+func (lm *LayoutManager) CharacterRangeForGlyphRangeActualGlyphRange(glyphRange foundation.NSRange, actualGlyphRange *foundation.NSRange) foundation.NSRange {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[foundation.NSRange](objref.IDOf(lm), objc.RegisterName("characterRangeForGlyphRange:actualGlyphRange:"), glyphRange, unsafe.Pointer(actualGlyphRange))
 	return _r
 }
 
@@ -555,6 +623,24 @@ func (lm *LayoutManager) DrawGlyphsForGlyphRangeAtPoint(glyphsToShow foundation.
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("drawGlyphsForGlyphRange:atPoint:"), glyphsToShow, origin)
 }
 
+// ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext renders the glyphs at the specified positions, using the specified attributes.
+func (lm *LayoutManager) ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext(positions *corefoundation.CGPoint, glyphCount int, font *Font, textMatrix corefoundation.CGAffineTransform, attributes obj.Object, cgContext obj.Object) (glyphs uint16) {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(font)
+	defer runtime.KeepAlive(attributes)
+	defer runtime.KeepAlive(cgContext)
+	var _out0 uint16
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("showCGGlyphs:positions:count:font:textMatrix:attributes:inContext:"), unsafe.Pointer(&_out0), unsafe.Pointer(positions), glyphCount, objref.IDOf(font), textMatrix, objref.IDOf(attributes), objref.IDOf(cgContext))
+	return _out0
+}
+
+// FillBackgroundRectArrayCountForCharacterRangeColor fills background rectangles with a color.
+func (lm *LayoutManager) FillBackgroundRectArrayCountForCharacterRangeColor(rectArray *corefoundation.CGRect, rectCount int, charRange foundation.NSRange, color *Color) {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(color)
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("fillBackgroundRectArray:count:forCharacterRange:color:"), unsafe.Pointer(rectArray), rectCount, charRange, objref.IDOf(color))
+}
+
 // DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin draws underlining for the glyphs in a specified range.
 func (lm *LayoutManager) DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal UnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
 	defer runtime.KeepAlive(lm)
@@ -616,6 +702,29 @@ func (lm *LayoutManager) BoundsRectForTextBlockGlyphRange(block *TextBlock, glyp
 	return _r
 }
 
+// LayoutRectForTextBlockAtIndexEffectiveRange returns the rectangle for the layout of the specified text block and glyph.
+func (lm *LayoutManager) LayoutRectForTextBlockAtIndexEffectiveRange(block *TextBlock, glyphIndex int, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(block)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lm), objc.RegisterName("layoutRectForTextBlock:atIndex:effectiveRange:"), objref.IDOf(block), glyphIndex, unsafe.Pointer(effectiveGlyphRange))
+	return _r
+}
+
+// BoundsRectForTextBlockAtIndexEffectiveRange returns the bounding rectangle for the specified text block and glyph.
+func (lm *LayoutManager) BoundsRectForTextBlockAtIndexEffectiveRange(block *TextBlock, glyphIndex int, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(block)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lm), objc.RegisterName("boundsRectForTextBlock:atIndex:effectiveRange:"), objref.IDOf(block), glyphIndex, unsafe.Pointer(effectiveGlyphRange))
+	return _r
+}
+
+// TemporaryAttributesAtCharacterIndexEffectiveRange returns the dictionary of temporary attributes for the specified character range.
+func (lm *LayoutManager) TemporaryAttributesAtCharacterIndexEffectiveRange(charIndex int, effectiveCharRange *foundation.NSRange) obj.Object {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("temporaryAttributesAtCharacterIndex:effectiveRange:"), charIndex, unsafe.Pointer(effectiveCharRange))
+	return obj.Wrap(_r)
+}
+
 // SetTemporaryAttributesForCharacterRange sets one or more temporary attributes for the specified character range.
 func (lm *LayoutManager) SetTemporaryAttributesForCharacterRange(attrs obj.Object, charRange foundation.NSRange) {
 	defer runtime.KeepAlive(lm)
@@ -635,6 +744,29 @@ func (lm *LayoutManager) RemoveTemporaryAttributeForCharacterRange(attrName obj.
 	defer runtime.KeepAlive(lm)
 	defer runtime.KeepAlive(attrName)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("removeTemporaryAttribute:forCharacterRange:"), objref.IDOf(attrName), charRange)
+}
+
+// TemporaryAttributeAtCharacterIndexEffectiveRange returns the value for the temporary attribute of a character, and the range it applies to.
+func (lm *LayoutManager) TemporaryAttributeAtCharacterIndexEffectiveRange(attrName obj.Object, location int, range_ *foundation.NSRange) obj.Object {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(attrName)
+	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("temporaryAttribute:atCharacterIndex:effectiveRange:"), objref.IDOf(attrName), location, unsafe.Pointer(range_))
+	return obj.Wrap(_r)
+}
+
+// TemporaryAttributeAtCharacterIndexLongestEffectiveRangeInRange returns the value for the temporary attribute of a character, and the maximum range it applies to.
+func (lm *LayoutManager) TemporaryAttributeAtCharacterIndexLongestEffectiveRangeInRange(attrName obj.Object, location int, range_ *foundation.NSRange, rangeLimit foundation.NSRange) obj.Object {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(attrName)
+	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("temporaryAttribute:atCharacterIndex:longestEffectiveRange:inRange:"), objref.IDOf(attrName), location, unsafe.Pointer(range_), rangeLimit)
+	return obj.Wrap(_r)
+}
+
+// TemporaryAttributesAtCharacterIndexLongestEffectiveRangeInRange returns the temporary attributes for a character, and the maximum range they apply to.
+func (lm *LayoutManager) TemporaryAttributesAtCharacterIndexLongestEffectiveRangeInRange(location int, range_ *foundation.NSRange, rangeLimit foundation.NSRange) obj.Object {
+	defer runtime.KeepAlive(lm)
+	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("temporaryAttributesAtCharacterIndex:longestEffectiveRange:inRange:"), location, unsafe.Pointer(range_), rangeLimit)
+	return obj.Wrap(_r)
 }
 
 // AddTemporaryAttributeValueForCharacterRange adds a temporary attribute to the characters in the specified range.
@@ -947,11 +1079,25 @@ func (lm *LayoutManager) GetGlyphsRange(glyphRange foundation.NSRange) (result i
 	return _r, _out0
 }
 
+// InvalidateLayoutForCharacterRangeIsSoftActualCharacterRange invalidates layout for character range is soft actual character range.
+func (lm *LayoutManager) InvalidateLayoutForCharacterRangeIsSoftActualCharacterRange(charRange foundation.NSRange, flag bool, actualCharRange *foundation.NSRange) {
+	defer runtime.KeepAlive(lm)
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("invalidateLayoutForCharacterRange:isSoft:actualCharacterRange:"), charRange, flag, unsafe.Pointer(actualCharRange))
+}
+
 // TextStorageEditedRangeChangeInLengthInvalidatedRange wraps the corresponding Objective-C method.
 func (lm *LayoutManager) TextStorageEditedRangeChangeInLengthInvalidatedRange(str *TextStorage, editedMask int, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange) {
 	defer runtime.KeepAlive(lm)
 	defer runtime.KeepAlive(str)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("textStorage:edited:range:changeInLength:invalidatedRange:"), objref.IDOf(str), editedMask, newCharRange, delta, invalidatedCharRange)
+}
+
+// SetLocationsStartingGlyphIndexesCountForGlyphRange wraps the corresponding Objective-C method.
+func (lm *LayoutManager) SetLocationsStartingGlyphIndexesCountForGlyphRange(locations *corefoundation.CGPoint, count int, glyphRange foundation.NSRange) (glyphIndexes int) {
+	defer runtime.KeepAlive(lm)
+	var _out0 int
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setLocations:startingGlyphIndexes:count:forGlyphRange:"), unsafe.Pointer(locations), unsafe.Pointer(&_out0), count, glyphRange)
+	return _out0
 }
 
 // ShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment shows packed glyphs length glyph range at point font color printing adjustment.
@@ -960,6 +1106,18 @@ func (lm *LayoutManager) ShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintin
 	defer runtime.KeepAlive(font)
 	defer runtime.KeepAlive(color)
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("showPackedGlyphs:length:glyphRange:atPoint:font:color:printingAdjustment:"), glyphs, glyphLen, glyphRange, point, objref.IDOf(font), objref.IDOf(color), printingAdjustment)
+}
+
+// ShowCGGlyphsPositionsCountFontMatrixAttributesInContext shows cg glyphs positions count font matrix attributes in context.
+func (lm *LayoutManager) ShowCGGlyphsPositionsCountFontMatrixAttributesInContext(positions *corefoundation.CGPoint, glyphCount int, font *Font, textMatrix obj.Object, attributes obj.Object, graphicsContext *GraphicsContext) (glyphs uint16) {
+	defer runtime.KeepAlive(lm)
+	defer runtime.KeepAlive(font)
+	defer runtime.KeepAlive(textMatrix)
+	defer runtime.KeepAlive(attributes)
+	defer runtime.KeepAlive(graphicsContext)
+	var _out0 uint16
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("showCGGlyphs:positions:count:font:matrix:attributes:inContext:"), unsafe.Pointer(&_out0), unsafe.Pointer(positions), glyphCount, objref.IDOf(font), objref.IDOf(textMatrix), objref.IDOf(attributes), objref.IDOf(graphicsContext))
+	return _out0
 }
 
 // UsesScreenFonts wraps the corresponding Objective-C method.

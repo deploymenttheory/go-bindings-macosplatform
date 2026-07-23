@@ -65,6 +65,11 @@ func cfuncABIType(sig, argExpr string) string {
 	if strings.HasPrefix(argExpr, "objc.NewBlock(") {
 		return "objc.Block"
 	}
+	// A *Struct parameter is handed to the C function as its raw pointer
+	// (unsafe.Pointer(x)); the bound function takes unsafe.Pointer for it.
+	if strings.HasPrefix(argExpr, "unsafe.Pointer(") {
+		return "unsafe.Pointer"
+	}
 	for _, prefix := range []string{
 		"purego.NSString(", "objref.IDOf(", "purego.SliceToNSArray(",
 		"rt.FileURL(", "rt.TimeToNSDate(", "rt.BytesToNSData(",
@@ -243,7 +248,10 @@ func emitGenericFunctionWrappers(
 			}
 			// A pointer out-parameter is lifted into an extra return value: declare a
 			// local (named _outN so it never clashes with the readable return name),
-			// pass its address to the call, and return it after the result.
+			// pass its address to the call, and return it after the result. A
+			// const-qualified pointer (const NSDecimal *dcm) is a caller-supplied
+			// INPUT the callee only reads, never an output — it must not be lifted; it
+			// falls through to idiomaticArg and is passed as an input pointer.
 			if outGo, isOut := outParamGoType(
 				param.ObjCType,
 				ctx,
@@ -251,7 +259,7 @@ func emitGenericFunctionWrappers(
 				fc,
 				rawPkgAlias,
 				true,
-			); isOut {
+			); isOut && !strings.Contains(param.ObjCType, "const") {
 				local := fmt.Sprintf("_out%d", len(outs))
 				outs = append(outs, view.DispatchOut{
 					GoName: local,

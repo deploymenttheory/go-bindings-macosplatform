@@ -6,6 +6,8 @@ package hiservices
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 )
 
 // An AXObserverRef is a CFType. Like all CFTypes, they are reference counted (
@@ -51,8 +53,8 @@ type ICCharTable struct {
 type ICFileSpec struct {
 	VolName         [32]uint8
 	VolCreationDate int
-	Fss             unsafe.Pointer
-	Alias           unsafe.Pointer
+	Fss             carboncore.FSSpec
+	Alias           carboncore.AliasRecord
 }
 
 // ********************************************************************************************** types and constants for use with kICDocumentFont, et. al. **********************************************************************************************

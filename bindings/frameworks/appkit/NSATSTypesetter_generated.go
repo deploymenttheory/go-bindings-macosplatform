@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -91,6 +92,13 @@ func (at *ATSTypesetter) WithAttributedString(attributedString obj.Object) *ATST
 	defer runtime.KeepAlive(attributedString)
 	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("setAttributedString:"), objref.IDOf(attributedString))
 	return at
+}
+
+// LineFragmentRectForProposedRectRemainingRect this method has been deprecated. Use the NSTypesetter method getLineFragmentRect:usedRect:remainingRect:forStartingGlyphAtIndex:proposedRect:lineSpacing:paragraphSpacingBefore:paragraphSpacingAfter: instead.
+func (at *ATSTypesetter) LineFragmentRectForProposedRectRemainingRect(proposedRect corefoundation.CGRect, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(at)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(at), objc.RegisterName("lineFragmentRectForProposedRect:remainingRect:"), proposedRect, unsafe.Pointer(remainingRect))
+	return _r
 }
 
 // GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits extracts the information needed to lay out the glyphs in the given glyph buffer from the given glyph range.

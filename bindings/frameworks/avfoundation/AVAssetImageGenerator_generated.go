@@ -6,11 +6,13 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -127,6 +129,17 @@ func (aig *AssetImageGenerator) WithRequestedTimeToleranceBefore(requestedTimeTo
 func (aig *AssetImageGenerator) WithRequestedTimeToleranceAfter(requestedTimeToleranceAfter coremedia.CMTime) *AssetImageGenerator {
 	objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("setRequestedTimeToleranceAfter:"), requestedTimeToleranceAfter)
 	return aig
+}
+
+// CopyCGImageAtTimeActualTime returns an image for the asset at or near a specified time.
+func (aig *AssetImageGenerator) CopyCGImageAtTimeActualTime(requestedTime coremedia.CMTime, actualTime *coremedia.CMTime) (result obj.Object, err error) {
+	defer runtime.KeepAlive(aig)
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("copyCGImageAtTime:actualTime:error:"), requestedTime, unsafe.Pointer(actualTime), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // CancelAllCGImageGeneration cancels all pending image generation requests.

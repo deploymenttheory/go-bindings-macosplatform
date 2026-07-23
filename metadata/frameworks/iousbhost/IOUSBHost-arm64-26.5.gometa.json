@@ -6238,6 +6238,35 @@
       "sdk_line": 184,
       "doc": "@struct      IOUSBDescriptorHeader @brief       Base descriptor defined by USB 2.0 9.5 @discussion  IOUSBDescriptorDefinitions declares structs to represent a variety of USB standard descriptors."
     },
+    "IOUSBDeviceCapabilityContainerID": {
+      "fields": [
+        {
+          "name": "bLength",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDescriptorType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bDevCapabilityType",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "bReservedID",
+          "objc_type": "uint8_t"
+        },
+        {
+          "name": "containerID",
+          "objc_type": "uint8_t[16]"
+        }
+      ],
+      "packed": true,
+      "availability": {},
+      "sdk_file": "IOKit/usb/AppleUSBDefinitions.h",
+      "sdk_line": 652,
+      "doc": "@typedef    IOUSBDeviceCapabilityContainerID @discussion Device Capability Container ID. USB 3.0 9.6.2.3: Container ID"
+    },
     "IOUSBDeviceCapabilityDescriptorHeader": {
       "fields": [
         {

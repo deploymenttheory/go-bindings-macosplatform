@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -319,6 +320,15 @@ func (i *Image) RemoveRepresentation(imageRep *ImageRep) {
 	defer runtime.KeepAlive(i)
 	defer runtime.KeepAlive(imageRep)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("removeRepresentation:"), objref.IDOf(imageRep))
+}
+
+// CGImageForProposedRectContextHints returns a Core Graphics image based on the contents of the current image object.
+func (i *Image) CGImageForProposedRectContextHints(proposedDestRect *corefoundation.CGRect, referenceContext *GraphicsContext, hints obj.Object) obj.Object {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(referenceContext)
+	defer runtime.KeepAlive(hints)
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("CGImageForProposedRect:context:hints:"), unsafe.Pointer(proposedDestRect), objref.IDOf(referenceContext), objref.IDOf(hints))
+	return obj.Wrap(_r)
 }
 
 // BestRepresentationForRectContextHints returns the best representation of the image for the specified rectangle using the provided hints.

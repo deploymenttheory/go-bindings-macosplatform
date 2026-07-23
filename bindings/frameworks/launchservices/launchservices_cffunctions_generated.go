@@ -7,12 +7,44 @@ package launchservices
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
+
+var _fnGetIconRefFromComponent func(unsafe.Pointer, unsafe.Pointer) int32
+
+// GetIconRefFromComponent reports an error if the LaunchServices framework function GetIconRefFromComponent fails.
+func GetIconRefFromComponent(inComponent *carboncore.ComponentRecord, outIconRef unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetIconRefFromComponent == nil {
+		ebipurego.RegisterLibFunc(&_fnGetIconRefFromComponent, _lib, "GetIconRefFromComponent")
+	}
+	_rc := _fnGetIconRefFromComponent(unsafe.Pointer(inComponent), outIconRef)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnGetIconRefFromIconFamilyPtr func(unsafe.Pointer, int, unsafe.Pointer) int32
+
+// GetIconRefFromIconFamilyPtr reports an error if the LaunchServices framework function GetIconRefFromIconFamilyPtr fails.
+func GetIconRefFromIconFamilyPtr(inIconFamilyPtr *osservices.IconFamilyResource, inSize int, outIconRef unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetIconRefFromIconFamilyPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnGetIconRefFromIconFamilyPtr, _lib, "GetIconRefFromIconFamilyPtr")
+	}
+	_rc := _fnGetIconRefFromIconFamilyPtr(unsafe.Pointer(inIconFamilyPtr), inSize, outIconRef)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
 
 var _fnLSCopyApplicationForMIMEType func(objc.ID, LSRolesMask, unsafe.Pointer) int32
 
@@ -24,6 +56,22 @@ func LSCopyApplicationForMIMEType(inMIMEType obj.Object, inRoleMask LSRolesMask)
 	}
 	var _out0 uintptr
 	_rc := _fnLSCopyApplicationForMIMEType(objref.IDOf(inMIMEType), inRoleMask, unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnLSCopyDisplayNameForRef func(unsafe.Pointer, unsafe.Pointer) int32
+
+// LSCopyDisplayNameForRef reports an error if the LaunchServices framework function LSCopyDisplayNameForRef fails.
+func LSCopyDisplayNameForRef(inRef *carboncore.FSRef) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyDisplayNameForRef == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyDisplayNameForRef, _lib, "LSCopyDisplayNameForRef")
+	}
+	var _out0 uintptr
+	_rc := _fnLSCopyDisplayNameForRef(unsafe.Pointer(inRef), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -46,6 +94,38 @@ func LSCopyDisplayNameForURL(inURL obj.Object) (obj.Object, error) {
 	return obj.Wrap(objc.ID(_out0)), nil
 }
 
+var _fnLSCopyItemAttribute func(unsafe.Pointer, LSRolesMask, objc.ID, unsafe.Pointer) int32
+
+// LSCopyItemAttribute reports an error if the LaunchServices framework function LSCopyItemAttribute fails.
+func LSCopyItemAttribute(inItem *carboncore.FSRef, inRoles LSRolesMask, inAttributeName obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyItemAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyItemAttribute, _lib, "LSCopyItemAttribute")
+	}
+	var _out0 uintptr
+	_rc := _fnLSCopyItemAttribute(unsafe.Pointer(inItem), inRoles, objref.IDOf(inAttributeName), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnLSCopyItemAttributes func(unsafe.Pointer, LSRolesMask, objc.ID, unsafe.Pointer) int32
+
+// LSCopyItemAttributes reports an error if the LaunchServices framework function LSCopyItemAttributes fails.
+func LSCopyItemAttributes(inItem *carboncore.FSRef, inRoles LSRolesMask, inAttributeNames obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyItemAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyItemAttributes, _lib, "LSCopyItemAttributes")
+	}
+	var _out0 uintptr
+	_rc := _fnLSCopyItemAttributes(unsafe.Pointer(inItem), inRoles, objref.IDOf(inAttributeNames), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
 var _fnLSCopyKindStringForMIMEType func(objc.ID, unsafe.Pointer) int32
 
 // LSCopyKindStringForMIMEType reports an error if the LaunchServices framework function LSCopyKindStringForMIMEType fails.
@@ -56,6 +136,22 @@ func LSCopyKindStringForMIMEType(inMIMEType obj.Object) (obj.Object, error) {
 	}
 	var _out0 uintptr
 	_rc := _fnLSCopyKindStringForMIMEType(objref.IDOf(inMIMEType), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnLSCopyKindStringForRef func(unsafe.Pointer, unsafe.Pointer) int32
+
+// LSCopyKindStringForRef reports an error if the LaunchServices framework function LSCopyKindStringForRef fails.
+func LSCopyKindStringForRef(inFSRef *carboncore.FSRef) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyKindStringForRef == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyKindStringForRef, _lib, "LSCopyKindStringForRef")
+	}
+	var _out0 uintptr
+	_rc := _fnLSCopyKindStringForRef(unsafe.Pointer(inFSRef), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -94,6 +190,70 @@ func LSCopyKindStringForURL(inURL obj.Object) (obj.Object, error) {
 	return obj.Wrap(objc.ID(_out0)), nil
 }
 
+var _fnLSFindApplicationForInfo func(int, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// LSFindApplicationForInfo reports an error if the LaunchServices framework function LSFindApplicationForInfo fails.
+func LSFindApplicationForInfo(inCreator int, inBundleID obj.Object, inName obj.Object, outAppRef *carboncore.FSRef) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSFindApplicationForInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnLSFindApplicationForInfo, _lib, "LSFindApplicationForInfo")
+	}
+	var _out0 uintptr
+	_rc := _fnLSFindApplicationForInfo(inCreator, objref.IDOf(inBundleID), objref.IDOf(inName), unsafe.Pointer(outAppRef), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnLSGetApplicationForInfo func(int, int, objc.ID, LSRolesMask, unsafe.Pointer, unsafe.Pointer) int32
+
+// LSGetApplicationForInfo reports an error if the LaunchServices framework function LSGetApplicationForInfo fails.
+func LSGetApplicationForInfo(inType int, inCreator int, inExtension obj.Object, inRoleMask LSRolesMask, outAppRef *carboncore.FSRef) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSGetApplicationForInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnLSGetApplicationForInfo, _lib, "LSGetApplicationForInfo")
+	}
+	var _out0 uintptr
+	_rc := _fnLSGetApplicationForInfo(inType, inCreator, objref.IDOf(inExtension), inRoleMask, unsafe.Pointer(outAppRef), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnLSGetApplicationForItem func(unsafe.Pointer, LSRolesMask, unsafe.Pointer, unsafe.Pointer) int32
+
+// LSGetApplicationForItem reports an error if the LaunchServices framework function LSGetApplicationForItem fails.
+func LSGetApplicationForItem(inItemRef *carboncore.FSRef, inRoleMask LSRolesMask, outAppRef *carboncore.FSRef) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSGetApplicationForItem == nil {
+		ebipurego.RegisterLibFunc(&_fnLSGetApplicationForItem, _lib, "LSGetApplicationForItem")
+	}
+	var _out0 uintptr
+	_rc := _fnLSGetApplicationForItem(unsafe.Pointer(inItemRef), inRoleMask, unsafe.Pointer(outAppRef), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnLSGetApplicationForURL func(objc.ID, LSRolesMask, unsafe.Pointer, unsafe.Pointer) int32
+
+// LSGetApplicationForURL reports an error if the LaunchServices framework function LSGetApplicationForURL fails.
+func LSGetApplicationForURL(inURL obj.Object, inRoleMask LSRolesMask, outAppRef *carboncore.FSRef) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSGetApplicationForURL == nil {
+		ebipurego.RegisterLibFunc(&_fnLSGetApplicationForURL, _lib, "LSGetApplicationForURL")
+	}
+	var _out0 uintptr
+	_rc := _fnLSGetApplicationForURL(objref.IDOf(inURL), inRoleMask, unsafe.Pointer(outAppRef), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
 var _fnLSOpenCFURLRef func(objc.ID, unsafe.Pointer) int32
 
 // LSOpenCFURLRef reports an error if the LaunchServices framework function LSOpenCFURLRef fails.
@@ -108,6 +268,36 @@ func LSOpenCFURLRef(inURL obj.Object) (obj.Object, error) {
 		return nil, _err
 	}
 	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnLSOpenFSRef func(unsafe.Pointer, unsafe.Pointer) int32
+
+// LSOpenFSRef reports an error if the LaunchServices framework function LSOpenFSRef fails.
+func LSOpenFSRef(inRef *carboncore.FSRef, outLaunchedRef *carboncore.FSRef) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSOpenFSRef == nil {
+		ebipurego.RegisterLibFunc(&_fnLSOpenFSRef, _lib, "LSOpenFSRef")
+	}
+	_rc := _fnLSOpenFSRef(unsafe.Pointer(inRef), unsafe.Pointer(outLaunchedRef))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnLSRegisterFSRef func(unsafe.Pointer, uint8) int32
+
+// LSRegisterFSRef reports an error if the LaunchServices framework function LSRegisterFSRef fails.
+func LSRegisterFSRef(inRef *carboncore.FSRef, inUpdate uint8) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSRegisterFSRef == nil {
+		ebipurego.RegisterLibFunc(&_fnLSRegisterFSRef, _lib, "LSRegisterFSRef")
+	}
+	_rc := _fnLSRegisterFSRef(unsafe.Pointer(inRef), inUpdate)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnLSRegisterURL func(objc.ID, uint8) int32
@@ -155,6 +345,21 @@ func LSSetDefaultRoleHandlerForContentType(inContentType obj.Object, inRole LSRo
 	return nil
 }
 
+var _fnLSSetExtensionHiddenForRef func(unsafe.Pointer, uint8) int32
+
+// LSSetExtensionHiddenForRef reports an error if the LaunchServices framework function LSSetExtensionHiddenForRef fails.
+func LSSetExtensionHiddenForRef(inRef *carboncore.FSRef, inHide uint8) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSetExtensionHiddenForRef == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSetExtensionHiddenForRef, _lib, "LSSetExtensionHiddenForRef")
+	}
+	_rc := _fnLSSetExtensionHiddenForRef(unsafe.Pointer(inRef), inHide)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnLSSetExtensionHiddenForURL func(objc.ID, uint8) int32
 
 // LSSetExtensionHiddenForURL reports an error if the LaunchServices framework function LSSetExtensionHiddenForURL fails.
@@ -179,6 +384,36 @@ func LSSetHandlerOptionsForContentType(inContentType obj.Object, inOptions LSHan
 		ebipurego.RegisterLibFunc(&_fnLSSetHandlerOptionsForContentType, _lib, "LSSetHandlerOptionsForContentType")
 	}
 	_rc := _fnLSSetHandlerOptionsForContentType(objref.IDOf(inContentType), inOptions)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnLSSetItemAttribute func(unsafe.Pointer, LSRolesMask, objc.ID, objc.ID) int32
+
+// LSSetItemAttribute reports an error if the LaunchServices framework function LSSetItemAttribute fails.
+func LSSetItemAttribute(inItem *carboncore.FSRef, inRoles LSRolesMask, inAttributeName obj.Object, inValue obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSetItemAttribute == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSetItemAttribute, _lib, "LSSetItemAttribute")
+	}
+	_rc := _fnLSSetItemAttribute(unsafe.Pointer(inItem), inRoles, objref.IDOf(inAttributeName), objref.IDOf(inValue))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnRegisterIconRefFromFSRef func(int, int, unsafe.Pointer, unsafe.Pointer) int32
+
+// RegisterIconRefFromFSRef reports an error if the LaunchServices framework function RegisterIconRefFromFSRef fails.
+func RegisterIconRefFromFSRef(creator int, iconType int, iconFile *carboncore.FSRef, theIconRef unsafe.Pointer) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRegisterIconRefFromFSRef == nil {
+		ebipurego.RegisterLibFunc(&_fnRegisterIconRefFromFSRef, _lib, "RegisterIconRefFromFSRef")
+	}
+	_rc := _fnRegisterIconRefFromFSRef(creator, iconType, unsafe.Pointer(iconFile), theIconRef)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

@@ -751,13 +751,13 @@ type TextAttachmentLayout interface {
 
 // TextCheckingClient is the Go form of the Objective-C protocol NSTextCheckingClient.
 type TextCheckingClient interface {
-	AnnotatedSubstringForProposedRangeActualRange(range_ foundation.NSRange, actualRange obj.Object) *foundation.AttributedString
+	AnnotatedSubstringForProposedRangeActualRange(range_ foundation.NSRange, actualRange *foundation.NSRange) *foundation.AttributedString
 	SetAnnotationsRange(annotations obj.Object, range_ foundation.NSRange)
 	AddAnnotationsRange(annotations obj.Object, range_ foundation.NSRange)
 	RemoveAnnotationRange(annotationName obj.Object, range_ foundation.NSRange)
 	ReplaceCharactersInRangeWithAnnotatedString(range_ foundation.NSRange, annotatedString obj.Object)
 	SelectAndShowRange(range_ foundation.NSRange)
-	ViewForRangeFirstRectActualRange(range_ foundation.NSRange, firstRect obj.Object, actualRange obj.Object) *View
+	ViewForRangeFirstRectActualRange(range_ foundation.NSRange, firstRect *corefoundation.CGRect, actualRange *foundation.NSRange) *View
 	CandidateListTouchBarItem() obj.Object
 }
 
@@ -817,9 +817,9 @@ type TextInputClient interface {
 	SelectedRange() foundation.NSRange
 	MarkedRange() foundation.NSRange
 	HasMarkedText() bool
-	AttributedSubstringForProposedRangeActualRange(range_ foundation.NSRange, actualRange obj.Object) *foundation.AttributedString
+	AttributedSubstringForProposedRangeActualRange(range_ foundation.NSRange, actualRange *foundation.NSRange) *foundation.AttributedString
 	ValidAttributesForMarkedText() []*foundation.String
-	FirstRectForCharacterRangeActualRange(range_ foundation.NSRange, actualRange obj.Object) corefoundation.CGRect
+	FirstRectForCharacterRangeActualRange(range_ foundation.NSRange, actualRange *foundation.NSRange) corefoundation.CGRect
 	CharacterIndexForPoint(point corefoundation.CGPoint) int
 }
 

@@ -6,8 +6,10 @@ package iousbhost
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/rt"
@@ -73,10 +75,49 @@ func (hcdsm *HostCIDeviceStateMachine) String() string {
 	return rt.Description(objref.IDOf(hcdsm))
 }
 
-// NewHostCIDeviceStateMachine creates a new HostCIDeviceStateMachine.
-func NewHostCIDeviceStateMachine() *HostCIDeviceStateMachine {
-	_id := objc.Send[objc.ID](objc.ID(_class("IOUSBHostCIDeviceStateMachine")), objc.RegisterName("new"))
-	return hostCIDeviceStateMachineAdopt(_id)
+// NewHostCIDeviceStateMachineWithInterfaceCommand initializes an IOUSBHostCIDeviceStateMachine object The IOUSBHostCIDeviceStateMachine defaults to the IOUSBHostCIDeviceStateActive state.
+func NewHostCIDeviceStateMachineWithInterfaceCommand(interface_ *HostControllerInterface, command *IOUSBHostCIMessage) (result *HostCIDeviceStateMachine, err error) {
+	defer runtime.KeepAlive(interface_)
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IOUSBHostCIDeviceStateMachine")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:command:error:"), objref.IDOf(interface_), unsafe.Pointer(command), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return hostCIDeviceStateMachineAdopt(_id), nil
+}
+
+// InspectCommand inspect an IOUSBHostCIMessage command The IOUSBHostCIMessage command is inspected to determine if it is handled by the state machine, and is appropriate for the current state.
+func (hcdsm *HostCIDeviceStateMachine) InspectCommand(command *IOUSBHostCIMessage) error {
+	defer runtime.KeepAlive(hcdsm)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hcdsm), objc.RegisterName("inspectCommand:error:"), unsafe.Pointer(command), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// RespondToCommandStatus advance the state machine and respond to an IOUSBHostCIMessage command If the command passes inspectCommand and the client indicates the command was processed successfully, the state machine is advanced, and a properly formatted command response message is sent to the kernel driver.  If the client indicates the command was not processed successfully, the state machine is not advanced but a properly formatted command response message is sent to the kernel driver.
+func (hcdsm *HostCIDeviceStateMachine) RespondToCommandStatus(command *IOUSBHostCIMessage, status HostCIMessageStatus) error {
+	defer runtime.KeepAlive(hcdsm)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hcdsm), objc.RegisterName("respondToCommand:status:error:"), unsafe.Pointer(command), status, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// RespondToCommandStatusDeviceAddress wraps the corresponding Objective-C method.
+func (hcdsm *HostCIDeviceStateMachine) RespondToCommandStatusDeviceAddress(command *IOUSBHostCIMessage, status HostCIMessageStatus, deviceAddress int) error {
+	defer runtime.KeepAlive(hcdsm)
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(hcdsm), objc.RegisterName("respondToCommand:status:deviceAddress:error:"), unsafe.Pointer(command), status, deviceAddress, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // DeviceState returns the device state.

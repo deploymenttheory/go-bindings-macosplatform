@@ -6,7 +6,9 @@ package appkit
 
 import (
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -113,6 +115,23 @@ func (ogl *OpenGLLayer) OpenGLContextForPixelFormat(pixelFormat *OpenGLPixelForm
 	defer runtime.KeepAlive(pixelFormat)
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("openGLContextForPixelFormat:"), objref.IDOf(pixelFormat))
 	return OpenGLContextFromID(_r)
+}
+
+// CanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime invoked to ask the layer whether it can (or should) draw.
+func (ogl *OpenGLLayer) CanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_ *OpenGLContext, pixelFormat *OpenGLPixelFormat, t float64, ts *corevideo.CVTimeStamp) bool {
+	defer runtime.KeepAlive(ogl)
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(pixelFormat)
+	_r := objc.Send[bool](objref.IDOf(ogl), objc.RegisterName("canDrawInOpenGLContext:pixelFormat:forLayerTime:displayTime:"), objref.IDOf(context_), objref.IDOf(pixelFormat), t, unsafe.Pointer(ts))
+	return _r
+}
+
+// DrawInOpenGLContextPixelFormatForLayerTimeDisplayTime draws the OpenGL content for the specified time.
+func (ogl *OpenGLLayer) DrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_ *OpenGLContext, pixelFormat *OpenGLPixelFormat, t float64, ts *corevideo.CVTimeStamp) {
+	defer runtime.KeepAlive(ogl)
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(pixelFormat)
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("drawInOpenGLContext:pixelFormat:forLayerTime:displayTime:"), objref.IDOf(context_), objref.IDOf(pixelFormat), t, unsafe.Pointer(ts))
 }
 
 // View returns the view.

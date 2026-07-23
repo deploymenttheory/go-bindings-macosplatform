@@ -6,6 +6,7 @@ package naturallanguage
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -71,6 +72,13 @@ func (cer *ContextualEmbeddingResult) IsKind(className string) bool {
 func NewContextualEmbeddingResult() *ContextualEmbeddingResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("NLContextualEmbeddingResult")), objc.RegisterName("new"))
 	return contextualEmbeddingResultAdopt(_id)
+}
+
+// TokenVectorAtIndexTokenRange returns a token vector at the specified character index.
+func (cer *ContextualEmbeddingResult) TokenVectorAtIndexTokenRange(characterIndex int, tokenRange *foundation.NSRange) []*foundation.Number {
+	defer runtime.KeepAlive(cer)
+	_r := objc.Send[objc.ID](objref.IDOf(cer), objc.RegisterName("tokenVectorAtIndex:tokenRange:"), characterIndex, unsafe.Pointer(tokenRange))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }
 
 // String returns a copy of the input string used to generate the embedding vectors.

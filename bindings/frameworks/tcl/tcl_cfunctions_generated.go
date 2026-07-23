@@ -4414,14 +4414,12 @@ func Tcl_NewStringObj(data unsafe.Pointer, length int) unsafe.Pointer {
 var _fnTcl_NewUnicodeObj func(unsafe.Pointer, int) unsafe.Pointer
 
 // Tcl_NewUnicodeObj calls the Tcl framework function Tcl_NewUnicodeObj.
-func Tcl_NewUnicodeObj(numChars int) (result unsafe.Pointer, unicode uint16) {
+func Tcl_NewUnicodeObj(unicode unsafe.Pointer, numChars int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_NewUnicodeObj == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_NewUnicodeObj, _lib, "Tcl_NewUnicodeObj")
 	}
-	var _out0 uint16
-	_ret := _fnTcl_NewUnicodeObj(unsafe.Pointer(&_out0), numChars)
-	return _ret, _out0
+	return _fnTcl_NewUnicodeObj(unicode, numChars)
 }
 
 var _fnTcl_NewWideIntObj func(int) unsafe.Pointer
@@ -5596,14 +5594,12 @@ func Tcl_SetTimer() (timePtr Tcl_Time) {
 var _fnTcl_SetUnicodeObj func(unsafe.Pointer, unsafe.Pointer, int)
 
 // Tcl_SetUnicodeObj calls the Tcl framework function Tcl_SetUnicodeObj.
-func Tcl_SetUnicodeObj(objPtr unsafe.Pointer, numChars int) (unicode uint16) {
+func Tcl_SetUnicodeObj(objPtr unsafe.Pointer, unicode unsafe.Pointer, numChars int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_SetUnicodeObj == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_SetUnicodeObj, _lib, "Tcl_SetUnicodeObj")
 	}
-	var _out0 uint16
-	_fnTcl_SetUnicodeObj(objPtr, unsafe.Pointer(&_out0), numChars)
-	return _out0
+	_fnTcl_SetUnicodeObj(objPtr, unicode, numChars)
 }
 
 var _fnTcl_SetVar func(unsafe.Pointer, string, string, int) string
@@ -5933,15 +5929,12 @@ func Tcl_UniCharAtIndex(src string, index int) uint16 {
 var _fnTcl_UniCharCaseMatch func(unsafe.Pointer, unsafe.Pointer, int) int32
 
 // Tcl_UniCharCaseMatch calls the Tcl framework function Tcl_UniCharCaseMatch.
-func Tcl_UniCharCaseMatch(nocase int) (result int, uniStr uint16, uniPattern uint16) {
+func Tcl_UniCharCaseMatch(uniStr unsafe.Pointer, uniPattern unsafe.Pointer, nocase int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_UniCharCaseMatch == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_UniCharCaseMatch, _lib, "Tcl_UniCharCaseMatch")
 	}
-	var _out0 uint16
-	var _out1 uint16
-	_ret := int(_fnTcl_UniCharCaseMatch(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), nocase))
-	return _ret, _out0, _out1
+	return int(_fnTcl_UniCharCaseMatch(uniStr, uniPattern, nocase))
 }
 
 var _fnTcl_UniCharIsAlnum func(int) int32
@@ -6068,42 +6061,34 @@ func Tcl_UniCharIsWordChar(ch int) int {
 var _fnTcl_UniCharLen func(unsafe.Pointer) int32
 
 // Tcl_UniCharLen calls the Tcl framework function Tcl_UniCharLen.
-func Tcl_UniCharLen() (result int, uniStr uint16) {
+func Tcl_UniCharLen(uniStr unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_UniCharLen == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_UniCharLen, _lib, "Tcl_UniCharLen")
 	}
-	var _out0 uint16
-	_ret := int(_fnTcl_UniCharLen(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	return int(_fnTcl_UniCharLen(uniStr))
 }
 
 var _fnTcl_UniCharNcasecmp func(unsafe.Pointer, unsafe.Pointer, int) int32
 
 // Tcl_UniCharNcasecmp calls the Tcl framework function Tcl_UniCharNcasecmp.
-func Tcl_UniCharNcasecmp(numChars int) (result int, ucs uint16, uct uint16) {
+func Tcl_UniCharNcasecmp(ucs unsafe.Pointer, uct unsafe.Pointer, numChars int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_UniCharNcasecmp == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_UniCharNcasecmp, _lib, "Tcl_UniCharNcasecmp")
 	}
-	var _out0 uint16
-	var _out1 uint16
-	_ret := int(_fnTcl_UniCharNcasecmp(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), numChars))
-	return _ret, _out0, _out1
+	return int(_fnTcl_UniCharNcasecmp(ucs, uct, numChars))
 }
 
 var _fnTcl_UniCharNcmp func(unsafe.Pointer, unsafe.Pointer, int) int32
 
 // Tcl_UniCharNcmp calls the Tcl framework function Tcl_UniCharNcmp.
-func Tcl_UniCharNcmp(numChars int) (result int, ucs uint16, uct uint16) {
+func Tcl_UniCharNcmp(ucs unsafe.Pointer, uct unsafe.Pointer, numChars int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_UniCharNcmp == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_UniCharNcmp, _lib, "Tcl_UniCharNcmp")
 	}
-	var _out0 uint16
-	var _out1 uint16
-	_ret := int(_fnTcl_UniCharNcmp(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), numChars))
-	return _ret, _out0, _out1
+	return int(_fnTcl_UniCharNcmp(ucs, uct, numChars))
 }
 
 var _fnTcl_UniCharToLower func(int) uint16
@@ -6153,14 +6138,12 @@ func Tcl_UniCharToUtf(ch int, buf string) int {
 var _fnTcl_UniCharToUtfDString func(unsafe.Pointer, int, unsafe.Pointer) string
 
 // Tcl_UniCharToUtfDString calls the Tcl framework function Tcl_UniCharToUtfDString.
-func Tcl_UniCharToUtfDString(uniLength int, dsPtr unsafe.Pointer) (result string, uniStr uint16) {
+func Tcl_UniCharToUtfDString(uniStr unsafe.Pointer, uniLength int, dsPtr unsafe.Pointer) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTcl_UniCharToUtfDString == nil {
 		ebipurego.RegisterLibFunc(&_fnTcl_UniCharToUtfDString, _lib, "Tcl_UniCharToUtfDString")
 	}
-	var _out0 uint16
-	_ret := _fnTcl_UniCharToUtfDString(unsafe.Pointer(&_out0), uniLength, dsPtr)
-	return _ret, _out0
+	return _fnTcl_UniCharToUtfDString(uniStr, uniLength, dsPtr)
 }
 
 var _fnTcl_UnlinkVar func(unsafe.Pointer, string)

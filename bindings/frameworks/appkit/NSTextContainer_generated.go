@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -159,6 +160,13 @@ func (tc *TextContainer) WithContainerSize(containerSize corefoundation.CGSize) 
 	return tc
 }
 
+// LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect returns the bounds of a line fragment rectangle inside the text container for the proposed rectangle.
+func (tc *TextContainer) LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect corefoundation.CGRect, characterIndex int, baseWritingDirection WritingDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(tc)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tc), objc.RegisterName("lineFragmentRectForProposedRect:atIndex:writingDirection:remainingRect:"), proposedRect, characterIndex, baseWritingDirection, unsafe.Pointer(remainingRect))
+	return _r
+}
+
 // TextLayoutManager returns the text layout manager.
 func (tc *TextContainer) TextLayoutManager() *TextLayoutManager {
 	defer runtime.KeepAlive(tc)
@@ -243,6 +251,13 @@ func (tc *TextContainer) TextView() *TextView {
 	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("textView"))
 	return TextViewFromID(_r)
+}
+
+// LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect calculates and returns the longest rectangle available in the proposed rectangle for displaying text.
+func (tc *TextContainer) LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect corefoundation.CGRect, sweepDirection LineSweepDirection, movementDirection LineMovementDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(tc)
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tc), objc.RegisterName("lineFragmentRectForProposedRect:sweepDirection:movementDirection:remainingRect:"), proposedRect, sweepDirection, movementDirection, unsafe.Pointer(remainingRect))
+	return _r
 }
 
 // ContainsPoint queries whether a point lies within the text container’s region or on the region’s edge—not simply within its bounding rectangle.

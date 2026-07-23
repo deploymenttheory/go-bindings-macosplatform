@@ -6,7 +6,10 @@ package avfoundation
 
 import (
 	"runtime"
+	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -73,6 +76,29 @@ func (vcli *VideoCompositionLayerInstruction) IsKind(className string) bool {
 func (vcli *VideoCompositionLayerInstruction) String() string {
 	defer runtime.KeepAlive(vcli)
 	return rt.Description(objref.IDOf(vcli))
+}
+
+// GetTransformRampForTimeStartTransformEndTransformTimeRange obtains the transform ramp that includes a specified time.
+func (vcli *VideoCompositionLayerInstruction) GetTransformRampForTimeStartTransformEndTransformTimeRange(time_ coremedia.CMTime, startTransform *corefoundation.CGAffineTransform, endTransform *corefoundation.CGAffineTransform, timeRange *coremedia.CMTimeRange) bool {
+	defer runtime.KeepAlive(vcli)
+	_r := objc.Send[bool](objref.IDOf(vcli), objc.RegisterName("getTransformRampForTime:startTransform:endTransform:timeRange:"), time_, unsafe.Pointer(startTransform), unsafe.Pointer(endTransform), unsafe.Pointer(timeRange))
+	return _r
+}
+
+// GetOpacityRampForTimeStartOpacityEndOpacityTimeRange obtains the opacity ramp that includes a specified time.
+func (vcli *VideoCompositionLayerInstruction) GetOpacityRampForTimeStartOpacityEndOpacityTimeRange(time_ coremedia.CMTime, timeRange *coremedia.CMTimeRange) (ok bool, startOpacity float32, endOpacity float32) {
+	defer runtime.KeepAlive(vcli)
+	var _out0 float32
+	var _out1 float32
+	_r := objc.Send[bool](objref.IDOf(vcli), objc.RegisterName("getOpacityRampForTime:startOpacity:endOpacity:timeRange:"), time_, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(timeRange))
+	return _r, _out0, _out1
+}
+
+// GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange obtains the crop rectangle ramp that includes the specified time.
+func (vcli *VideoCompositionLayerInstruction) GetCropRectangleRampForTimeStartCropRectangleEndCropRectangleTimeRange(time_ coremedia.CMTime, startCropRectangle *corefoundation.CGRect, endCropRectangle *corefoundation.CGRect, timeRange *coremedia.CMTimeRange) bool {
+	defer runtime.KeepAlive(vcli)
+	_r := objc.Send[bool](objref.IDOf(vcli), objc.RegisterName("getCropRectangleRampForTime:startCropRectangle:endCropRectangle:timeRange:"), time_, unsafe.Pointer(startCropRectangle), unsafe.Pointer(endCropRectangle), unsafe.Pointer(timeRange))
+	return _r
 }
 
 // isVideoCompositionLayerInstruction marks VideoCompositionLayerInstruction — and, by embedding promotion, its

@@ -7,6 +7,7 @@ package sharedfilelist
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -86,12 +87,12 @@ func LSSharedFileListGetTypeID() int {
 var _fnLSSharedFileListInsertItemFSRef func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer, objc.ID, objc.ID) objc.ID
 
 // LSSharedFileListInsertItemFSRef calls the SharedFileList framework function LSSharedFileListInsertItemFSRef.
-func LSSharedFileListInsertItemFSRef(inList obj.Object, insertAfterThisItem obj.Object, inDisplayName obj.Object, inIconRef obj.Object, inFSRef unsafe.Pointer, inPropertiesToSet obj.Object, inPropertiesToClear obj.Object) obj.Object {
+func LSSharedFileListInsertItemFSRef(inList obj.Object, insertAfterThisItem obj.Object, inDisplayName obj.Object, inIconRef obj.Object, inFSRef *carboncore.FSRef, inPropertiesToSet obj.Object, inPropertiesToClear obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListInsertItemFSRef == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListInsertItemFSRef, _lib, "LSSharedFileListInsertItemFSRef")
 	}
-	_ret := _fnLSSharedFileListInsertItemFSRef(objref.IDOf(inList), objref.IDOf(insertAfterThisItem), objref.IDOf(inDisplayName), objref.IDOf(inIconRef), inFSRef, objref.IDOf(inPropertiesToSet), objref.IDOf(inPropertiesToClear))
+	_ret := _fnLSSharedFileListInsertItemFSRef(objref.IDOf(inList), objref.IDOf(insertAfterThisItem), objref.IDOf(inDisplayName), objref.IDOf(inIconRef), unsafe.Pointer(inFSRef), objref.IDOf(inPropertiesToSet), objref.IDOf(inPropertiesToClear))
 	return obj.Wrap(_ret)
 }
 
@@ -163,17 +164,6 @@ func LSSharedFileListItemGetTypeID() int {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemGetTypeID, _lib, "LSSharedFileListItemGetTypeID")
 	}
 	return _fnLSSharedFileListItemGetTypeID()
-}
-
-var _fnLSSharedFileListItemResolve func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
-
-// LSSharedFileListItemResolve calls the SharedFileList framework function LSSharedFileListItemResolve.
-func LSSharedFileListItemResolve(inItem obj.Object, inFlags int, outURL unsafe.Pointer, outRef unsafe.Pointer) int {
-	_loadOnce.Do(_loadLibrary)
-	if _fnLSSharedFileListItemResolve == nil {
-		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemResolve, _lib, "LSSharedFileListItemResolve")
-	}
-	return int(_fnLSSharedFileListItemResolve(objref.IDOf(inItem), inFlags, outURL, outRef))
 }
 
 var _fnLSSharedFileListRemoveObserver func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)

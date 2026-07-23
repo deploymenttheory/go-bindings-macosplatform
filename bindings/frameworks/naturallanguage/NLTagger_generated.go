@@ -6,6 +6,7 @@ package naturallanguage
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -94,12 +95,28 @@ func (t *Tagger) TokenRangeForRangeUnit(range_ foundation.NSRange, unit TokenUni
 	return _r
 }
 
+// TagAtIndexUnitSchemeTokenRange finds a tag for a given linguistic unit, for a single scheme, at the specified character position.
+func (t *Tagger) TagAtIndexUnitSchemeTokenRange(characterIndex int, unit TokenUnit, scheme obj.Object, tokenRange *foundation.NSRange) *foundation.String {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(scheme)
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tagAtIndex:unit:scheme:tokenRange:"), characterIndex, unit, objref.IDOf(scheme), unsafe.Pointer(tokenRange))
+	return foundation.StringFromID(_r)
+}
+
 // TagsInRangeUnitSchemeOptionsTokenRanges finds an array of linguistic tags and token ranges for a given string range and linguistic unit.
 func (t *Tagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ foundation.NSRange, unit TokenUnit, scheme obj.Object, options TaggerOptions, tokenRanges []*foundation.Value) []*foundation.String {
 	defer runtime.KeepAlive(t)
 	defer runtime.KeepAlive(scheme)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tagsInRange:unit:scheme:options:tokenRanges:"), range_, unit, objref.IDOf(scheme), options, purego.SliceToNSArray(tokenRanges, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
+}
+
+// TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange finds multiple possible tags for a given linguistic unit, for a single scheme, at the specified character position.
+func (t *Tagger) TagHypothesesAtIndexUnitSchemeMaximumCountTokenRange(characterIndex int, unit TokenUnit, scheme obj.Object, maximumCount int, tokenRange *foundation.NSRange) obj.Object {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(scheme)
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tagHypothesesAtIndex:unit:scheme:maximumCount:tokenRange:"), characterIndex, unit, objref.IDOf(scheme), maximumCount, unsafe.Pointer(tokenRange))
+	return obj.Wrap(_r)
 }
 
 // SetLanguageRange sets the language for a range of text within the tagger’s string.

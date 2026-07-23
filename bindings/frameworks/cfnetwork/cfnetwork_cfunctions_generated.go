@@ -7,6 +7,7 @@ package cfnetwork
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -16,14 +17,12 @@ import (
 var _fnCFFTPCreateParsedResourceListing func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int
 
 // CFFTPCreateParsedResourceListing calls the CFNetwork framework function CFFTPCreateParsedResourceListing.
-func CFFTPCreateParsedResourceListing(alloc obj.Object, bufferLength int, parsed unsafe.Pointer) (result int, buffer uint8) {
+func CFFTPCreateParsedResourceListing(alloc obj.Object, buffer unsafe.Pointer, bufferLength int, parsed unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFFTPCreateParsedResourceListing == nil {
 		ebipurego.RegisterLibFunc(&_fnCFFTPCreateParsedResourceListing, _lib, "CFFTPCreateParsedResourceListing")
 	}
-	var _out0 uint8
-	_ret := _fnCFFTPCreateParsedResourceListing(objref.IDOf(alloc), unsafe.Pointer(&_out0), bufferLength, parsed)
-	return _ret, _out0
+	return _fnCFFTPCreateParsedResourceListing(objref.IDOf(alloc), buffer, bufferLength, parsed)
 }
 
 var _fnCFHTTPAuthenticationAppliesToRequest func(objc.ID, objc.ID) uint8
@@ -99,12 +98,12 @@ func CFHTTPAuthenticationGetTypeID() int {
 var _fnCFHTTPAuthenticationIsValid func(objc.ID, unsafe.Pointer) uint8
 
 // CFHTTPAuthenticationIsValid calls the CFNetwork framework function CFHTTPAuthenticationIsValid.
-func CFHTTPAuthenticationIsValid(auth obj.Object, err unsafe.Pointer) uint8 {
+func CFHTTPAuthenticationIsValid(auth obj.Object, err *corefoundation.CFStreamError) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPAuthenticationIsValid == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPAuthenticationIsValid, _lib, "CFHTTPAuthenticationIsValid")
 	}
-	return _fnCFHTTPAuthenticationIsValid(objref.IDOf(auth), err)
+	return _fnCFHTTPAuthenticationIsValid(objref.IDOf(auth), unsafe.Pointer(err))
 }
 
 var _fnCFHTTPAuthenticationRequiresAccountDomain func(objc.ID) uint8
@@ -154,36 +153,34 @@ func CFHTTPMessageAddAuthentication(request obj.Object, authenticationFailureRes
 var _fnCFHTTPMessageAppendBytes func(objc.ID, unsafe.Pointer, int) uint8
 
 // CFHTTPMessageAppendBytes calls the CFNetwork framework function CFHTTPMessageAppendBytes.
-func CFHTTPMessageAppendBytes(message obj.Object, numBytes int) (result uint8, newBytes uint8) {
+func CFHTTPMessageAppendBytes(message obj.Object, newBytes unsafe.Pointer, numBytes int) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageAppendBytes == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageAppendBytes, _lib, "CFHTTPMessageAppendBytes")
 	}
-	var _out0 uint8
-	_ret := _fnCFHTTPMessageAppendBytes(objref.IDOf(message), unsafe.Pointer(&_out0), numBytes)
-	return _ret, _out0
+	return _fnCFHTTPMessageAppendBytes(objref.IDOf(message), newBytes, numBytes)
 }
 
 var _fnCFHTTPMessageApplyCredentialDictionary func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) uint8
 
 // CFHTTPMessageApplyCredentialDictionary calls the CFNetwork framework function CFHTTPMessageApplyCredentialDictionary.
-func CFHTTPMessageApplyCredentialDictionary(request obj.Object, auth obj.Object, dict obj.Object, err unsafe.Pointer) uint8 {
+func CFHTTPMessageApplyCredentialDictionary(request obj.Object, auth obj.Object, dict obj.Object, err *corefoundation.CFStreamError) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageApplyCredentialDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageApplyCredentialDictionary, _lib, "CFHTTPMessageApplyCredentialDictionary")
 	}
-	return _fnCFHTTPMessageApplyCredentialDictionary(objref.IDOf(request), objref.IDOf(auth), objref.IDOf(dict), err)
+	return _fnCFHTTPMessageApplyCredentialDictionary(objref.IDOf(request), objref.IDOf(auth), objref.IDOf(dict), unsafe.Pointer(err))
 }
 
 var _fnCFHTTPMessageApplyCredentials func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) uint8
 
 // CFHTTPMessageApplyCredentials calls the CFNetwork framework function CFHTTPMessageApplyCredentials.
-func CFHTTPMessageApplyCredentials(request obj.Object, auth obj.Object, username obj.Object, password obj.Object, err unsafe.Pointer) uint8 {
+func CFHTTPMessageApplyCredentials(request obj.Object, auth obj.Object, username obj.Object, password obj.Object, err *corefoundation.CFStreamError) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHTTPMessageApplyCredentials == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHTTPMessageApplyCredentials, _lib, "CFHTTPMessageApplyCredentials")
 	}
-	return _fnCFHTTPMessageApplyCredentials(objref.IDOf(request), objref.IDOf(auth), objref.IDOf(username), objref.IDOf(password), err)
+	return _fnCFHTTPMessageApplyCredentials(objref.IDOf(request), objref.IDOf(auth), objref.IDOf(username), objref.IDOf(password), unsafe.Pointer(err))
 }
 
 var _fnCFHTTPMessageCopyAllHeaderFields func(objc.ID) objc.ID
@@ -518,12 +515,12 @@ func CFHostSetClient(theHost obj.Object, clientCB unsafe.Pointer, clientContext 
 var _fnCFHostStartInfoResolution func(objc.ID, CFHostInfoType, unsafe.Pointer) uint8
 
 // CFHostStartInfoResolution calls the CFNetwork framework function CFHostStartInfoResolution.
-func CFHostStartInfoResolution(theHost obj.Object, info CFHostInfoType, err unsafe.Pointer) uint8 {
+func CFHostStartInfoResolution(theHost obj.Object, info CFHostInfoType, err *corefoundation.CFStreamError) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFHostStartInfoResolution == nil {
 		ebipurego.RegisterLibFunc(&_fnCFHostStartInfoResolution, _lib, "CFHostStartInfoResolution")
 	}
-	return _fnCFHostStartInfoResolution(objref.IDOf(theHost), info, err)
+	return _fnCFHostStartInfoResolution(objref.IDOf(theHost), info, unsafe.Pointer(err))
 }
 
 var _fnCFHostUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
@@ -642,34 +639,34 @@ func CFNetServiceBrowserScheduleWithRunLoop(browser obj.Object, runLoop obj.Obje
 var _fnCFNetServiceBrowserSearchForDomains func(objc.ID, uint8, unsafe.Pointer) uint8
 
 // CFNetServiceBrowserSearchForDomains calls the CFNetwork framework function CFNetServiceBrowserSearchForDomains.
-func CFNetServiceBrowserSearchForDomains(browser obj.Object, registrationDomains uint8, err unsafe.Pointer) uint8 {
+func CFNetServiceBrowserSearchForDomains(browser obj.Object, registrationDomains uint8, err *corefoundation.CFStreamError) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceBrowserSearchForDomains == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceBrowserSearchForDomains, _lib, "CFNetServiceBrowserSearchForDomains")
 	}
-	return _fnCFNetServiceBrowserSearchForDomains(objref.IDOf(browser), registrationDomains, err)
+	return _fnCFNetServiceBrowserSearchForDomains(objref.IDOf(browser), registrationDomains, unsafe.Pointer(err))
 }
 
 var _fnCFNetServiceBrowserSearchForServices func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) uint8
 
 // CFNetServiceBrowserSearchForServices calls the CFNetwork framework function CFNetServiceBrowserSearchForServices.
-func CFNetServiceBrowserSearchForServices(browser obj.Object, domain obj.Object, serviceType obj.Object, err unsafe.Pointer) uint8 {
+func CFNetServiceBrowserSearchForServices(browser obj.Object, domain obj.Object, serviceType obj.Object, err *corefoundation.CFStreamError) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceBrowserSearchForServices == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceBrowserSearchForServices, _lib, "CFNetServiceBrowserSearchForServices")
 	}
-	return _fnCFNetServiceBrowserSearchForServices(objref.IDOf(browser), objref.IDOf(domain), objref.IDOf(serviceType), err)
+	return _fnCFNetServiceBrowserSearchForServices(objref.IDOf(browser), objref.IDOf(domain), objref.IDOf(serviceType), unsafe.Pointer(err))
 }
 
 var _fnCFNetServiceBrowserStopSearch func(objc.ID, unsafe.Pointer)
 
 // CFNetServiceBrowserStopSearch calls the CFNetwork framework function CFNetServiceBrowserStopSearch.
-func CFNetServiceBrowserStopSearch(browser obj.Object, err unsafe.Pointer) {
+func CFNetServiceBrowserStopSearch(browser obj.Object, err *corefoundation.CFStreamError) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceBrowserStopSearch == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceBrowserStopSearch, _lib, "CFNetServiceBrowserStopSearch")
 	}
-	_fnCFNetServiceBrowserStopSearch(objref.IDOf(browser), err)
+	_fnCFNetServiceBrowserStopSearch(objref.IDOf(browser), unsafe.Pointer(err))
 }
 
 var _fnCFNetServiceBrowserUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
@@ -884,23 +881,23 @@ func CFNetServiceMonitorScheduleWithRunLoop(monitor obj.Object, runLoop obj.Obje
 var _fnCFNetServiceMonitorStart func(objc.ID, CFNetServiceMonitorType, unsafe.Pointer) uint8
 
 // CFNetServiceMonitorStart calls the CFNetwork framework function CFNetServiceMonitorStart.
-func CFNetServiceMonitorStart(monitor obj.Object, recordType CFNetServiceMonitorType, err unsafe.Pointer) uint8 {
+func CFNetServiceMonitorStart(monitor obj.Object, recordType CFNetServiceMonitorType, err *corefoundation.CFStreamError) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceMonitorStart == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceMonitorStart, _lib, "CFNetServiceMonitorStart")
 	}
-	return _fnCFNetServiceMonitorStart(objref.IDOf(monitor), recordType, err)
+	return _fnCFNetServiceMonitorStart(objref.IDOf(monitor), recordType, unsafe.Pointer(err))
 }
 
 var _fnCFNetServiceMonitorStop func(objc.ID, unsafe.Pointer)
 
 // CFNetServiceMonitorStop calls the CFNetwork framework function CFNetServiceMonitorStop.
-func CFNetServiceMonitorStop(monitor obj.Object, err unsafe.Pointer) {
+func CFNetServiceMonitorStop(monitor obj.Object, err *corefoundation.CFStreamError) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceMonitorStop == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceMonitorStop, _lib, "CFNetServiceMonitorStop")
 	}
-	_fnCFNetServiceMonitorStop(objref.IDOf(monitor), err)
+	_fnCFNetServiceMonitorStop(objref.IDOf(monitor), unsafe.Pointer(err))
 }
 
 var _fnCFNetServiceMonitorUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
@@ -917,45 +914,45 @@ func CFNetServiceMonitorUnscheduleFromRunLoop(monitor obj.Object, runLoop obj.Ob
 var _fnCFNetServiceRegister func(objc.ID, unsafe.Pointer) uint8
 
 // CFNetServiceRegister calls the CFNetwork framework function CFNetServiceRegister.
-func CFNetServiceRegister(theService obj.Object, err unsafe.Pointer) uint8 {
+func CFNetServiceRegister(theService obj.Object, err *corefoundation.CFStreamError) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceRegister == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceRegister, _lib, "CFNetServiceRegister")
 	}
-	return _fnCFNetServiceRegister(objref.IDOf(theService), err)
+	return _fnCFNetServiceRegister(objref.IDOf(theService), unsafe.Pointer(err))
 }
 
 var _fnCFNetServiceRegisterWithOptions func(objc.ID, int, unsafe.Pointer) uint8
 
 // CFNetServiceRegisterWithOptions calls the CFNetwork framework function CFNetServiceRegisterWithOptions.
-func CFNetServiceRegisterWithOptions(theService obj.Object, options int, err unsafe.Pointer) uint8 {
+func CFNetServiceRegisterWithOptions(theService obj.Object, options int, err *corefoundation.CFStreamError) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceRegisterWithOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceRegisterWithOptions, _lib, "CFNetServiceRegisterWithOptions")
 	}
-	return _fnCFNetServiceRegisterWithOptions(objref.IDOf(theService), options, err)
+	return _fnCFNetServiceRegisterWithOptions(objref.IDOf(theService), options, unsafe.Pointer(err))
 }
 
 var _fnCFNetServiceResolve func(objc.ID, unsafe.Pointer) uint8
 
 // CFNetServiceResolve calls the CFNetwork framework function CFNetServiceResolve.
-func CFNetServiceResolve(theService obj.Object, err unsafe.Pointer) uint8 {
+func CFNetServiceResolve(theService obj.Object, err *corefoundation.CFStreamError) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceResolve == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceResolve, _lib, "CFNetServiceResolve")
 	}
-	return _fnCFNetServiceResolve(objref.IDOf(theService), err)
+	return _fnCFNetServiceResolve(objref.IDOf(theService), unsafe.Pointer(err))
 }
 
 var _fnCFNetServiceResolveWithTimeout func(objc.ID, float64, unsafe.Pointer) uint8
 
 // CFNetServiceResolveWithTimeout calls the CFNetwork framework function CFNetServiceResolveWithTimeout.
-func CFNetServiceResolveWithTimeout(theService obj.Object, timeout float64, err unsafe.Pointer) uint8 {
+func CFNetServiceResolveWithTimeout(theService obj.Object, timeout float64, err *corefoundation.CFStreamError) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFNetServiceResolveWithTimeout == nil {
 		ebipurego.RegisterLibFunc(&_fnCFNetServiceResolveWithTimeout, _lib, "CFNetServiceResolveWithTimeout")
 	}
-	return _fnCFNetServiceResolveWithTimeout(objref.IDOf(theService), timeout, err)
+	return _fnCFNetServiceResolveWithTimeout(objref.IDOf(theService), timeout, unsafe.Pointer(err))
 }
 
 var _fnCFNetServiceScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)
@@ -1089,23 +1086,23 @@ func CFReadStreamCreateWithFTPURL(alloc obj.Object, ftpURL obj.Object) obj.Objec
 var _fnCFSocketStreamSOCKSGetError func(unsafe.Pointer) int32
 
 // CFSocketStreamSOCKSGetError calls the CFNetwork framework function CFSocketStreamSOCKSGetError.
-func CFSocketStreamSOCKSGetError(err unsafe.Pointer) int {
+func CFSocketStreamSOCKSGetError(err *corefoundation.CFStreamError) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFSocketStreamSOCKSGetError == nil {
 		ebipurego.RegisterLibFunc(&_fnCFSocketStreamSOCKSGetError, _lib, "CFSocketStreamSOCKSGetError")
 	}
-	return int(_fnCFSocketStreamSOCKSGetError(err))
+	return int(_fnCFSocketStreamSOCKSGetError(unsafe.Pointer(err)))
 }
 
 var _fnCFSocketStreamSOCKSGetErrorSubdomain func(unsafe.Pointer) int32
 
 // CFSocketStreamSOCKSGetErrorSubdomain calls the CFNetwork framework function CFSocketStreamSOCKSGetErrorSubdomain.
-func CFSocketStreamSOCKSGetErrorSubdomain(err unsafe.Pointer) int {
+func CFSocketStreamSOCKSGetErrorSubdomain(err *corefoundation.CFStreamError) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFSocketStreamSOCKSGetErrorSubdomain == nil {
 		ebipurego.RegisterLibFunc(&_fnCFSocketStreamSOCKSGetErrorSubdomain, _lib, "CFSocketStreamSOCKSGetErrorSubdomain")
 	}
-	return int(_fnCFSocketStreamSOCKSGetErrorSubdomain(err))
+	return int(_fnCFSocketStreamSOCKSGetErrorSubdomain(unsafe.Pointer(err)))
 }
 
 var _fnCFStreamCreatePairWithSocketToCFHost func(objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Pointer)

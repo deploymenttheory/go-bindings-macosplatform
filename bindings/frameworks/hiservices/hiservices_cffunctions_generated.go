@@ -7,6 +7,8 @@ package hiservices
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -28,6 +30,21 @@ func CopyProcessName(psn unsafe.Pointer) (obj.Object, error) {
 		return nil, _err
 	}
 	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnGetProcessBundleLocation func(unsafe.Pointer, unsafe.Pointer) int32
+
+// GetProcessBundleLocation reports an error if the HIServices framework function GetProcessBundleLocation fails.
+func GetProcessBundleLocation(psn unsafe.Pointer, location *carboncore.FSRef) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGetProcessBundleLocation == nil {
+		ebipurego.RegisterLibFunc(&_fnGetProcessBundleLocation, _lib, "GetProcessBundleLocation")
+	}
+	_rc := _fnGetProcessBundleLocation(psn, unsafe.Pointer(location))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnGetProcessForPID func(int, unsafe.Pointer) int32
@@ -189,6 +206,21 @@ func HIShapeUnion(inShape1 obj.Object, inShape2 obj.Object, outResult obj.Object
 		ebipurego.RegisterLibFunc(&_fnHIShapeUnion, _lib, "HIShapeUnion")
 	}
 	_rc := _fnHIShapeUnion(objref.IDOf(inShape1), objref.IDOf(inShape2), objref.IDOf(outResult))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnHIShapeUnionWithRect func(objc.ID, unsafe.Pointer) int32
+
+// HIShapeUnionWithRect reports an error if the HIServices framework function HIShapeUnionWithRect fails.
+func HIShapeUnionWithRect(inShape obj.Object, inRect *corefoundation.CGRect) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHIShapeUnionWithRect == nil {
+		ebipurego.RegisterLibFunc(&_fnHIShapeUnionWithRect, _lib, "HIShapeUnionWithRect")
+	}
+	_rc := _fnHIShapeUnionWithRect(objref.IDOf(inShape), unsafe.Pointer(inRect))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -469,6 +501,21 @@ func PasteboardSetPromiseKeeper(inPasteboard obj.Object, inPromiseKeeper unsafe.
 	return nil
 }
 
+var _fnPlotIconRefInContext func(objc.ID, unsafe.Pointer, int16, int16, objc.ID, int, objc.ID) int32
+
+// PlotIconRefInContext reports an error if the HIServices framework function PlotIconRefInContext fails.
+func PlotIconRefInContext(inContext obj.Object, inRect *corefoundation.CGRect, inAlign int16, inTransform int16, inLabelColor obj.Object, inFlags int, inIconRef obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPlotIconRefInContext == nil {
+		ebipurego.RegisterLibFunc(&_fnPlotIconRefInContext, _lib, "PlotIconRefInContext")
+	}
+	_rc := _fnPlotIconRefInContext(objref.IDOf(inContext), unsafe.Pointer(inRect), inAlign, inTransform, objref.IDOf(inLabelColor), inFlags, objref.IDOf(inIconRef))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnSetFrontProcessWithOptions func(unsafe.Pointer, int) int32
 
 // SetFrontProcessWithOptions reports an error if the HIServices framework function SetFrontProcessWithOptions fails.
@@ -579,6 +626,21 @@ func TranslationPerformForData(inTranslation obj.Object, inSourceData obj.Object
 	return obj.Wrap(objc.ID(_out0)), nil
 }
 
+var _fnTranslationPerformForFile func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
+
+// TranslationPerformForFile reports an error if the HIServices framework function TranslationPerformForFile fails.
+func TranslationPerformForFile(inTranslation obj.Object, inSourceFile *carboncore.FSRef, inDestinationDirectory *carboncore.FSRef, inDestinationName obj.Object, outTranslatedFile *carboncore.FSRef) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTranslationPerformForFile == nil {
+		ebipurego.RegisterLibFunc(&_fnTranslationPerformForFile, _lib, "TranslationPerformForFile")
+	}
+	_rc := _fnTranslationPerformForFile(objref.IDOf(inTranslation), unsafe.Pointer(inSourceFile), unsafe.Pointer(inDestinationDirectory), objref.IDOf(inDestinationName), unsafe.Pointer(outTranslatedFile))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
 var _fnTranslationPerformForURL func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32
 
 // TranslationPerformForURL reports an error if the HIServices framework function TranslationPerformForURL fails.
@@ -593,4 +655,19 @@ func TranslationPerformForURL(inTranslation obj.Object, inSourceURL obj.Object, 
 		return nil, _err
 	}
 	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnUAZoomChangeFocus func(unsafe.Pointer, unsafe.Pointer, int) int32
+
+// UAZoomChangeFocus reports an error if the HIServices framework function UAZoomChangeFocus fails.
+func UAZoomChangeFocus(inRect *corefoundation.CGRect, inHighlightRect *corefoundation.CGRect, inType int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUAZoomChangeFocus == nil {
+		ebipurego.RegisterLibFunc(&_fnUAZoomChangeFocus, _lib, "UAZoomChangeFocus")
+	}
+	_rc := _fnUAZoomChangeFocus(unsafe.Pointer(inRect), unsafe.Pointer(inHighlightRect), inType)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
 }

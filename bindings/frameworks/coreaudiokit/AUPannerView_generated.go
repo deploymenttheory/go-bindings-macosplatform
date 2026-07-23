@@ -7,6 +7,7 @@ package coreaudiokit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -83,4 +84,18 @@ func NewAUPannerView() *AUPannerView {
 		}()
 	})
 	return _mainthread0
+}
+
+// AudioUnit returns read-only property for the audio unit associated with the view
+func (apv *AUPannerView) AudioUnit() *carboncore.ComponentInstanceRecord {
+	defer runtime.KeepAlive(apv)
+	var _mainthread0 *carboncore.ComponentInstanceRecord
+	purego.Main(func() {
+		_mainthread0 = func() *carboncore.ComponentInstanceRecord {
+			_r := objc.Send[*carboncore.ComponentInstanceRecord](objref.IDOf(apv), objc.RegisterName("audioUnit"))
+			return _r
+		}()
+	})
+	return _mainthread0
+
 }

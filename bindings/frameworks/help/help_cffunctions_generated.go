@@ -5,6 +5,9 @@
 package help
 
 import (
+	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,6 +54,21 @@ func AHLookupAnchor(bookname obj.Object, anchor obj.Object) error {
 		ebipurego.RegisterLibFunc(&_fnAHLookupAnchor, _lib, "AHLookupAnchor")
 	}
 	_rc := _fnAHLookupAnchor(objref.IDOf(bookname), objref.IDOf(anchor))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAHRegisterHelpBook func(unsafe.Pointer) int32
+
+// AHRegisterHelpBook reports an error if the Help framework function AHRegisterHelpBook fails.
+func AHRegisterHelpBook(appBundleRef *carboncore.FSRef) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAHRegisterHelpBook == nil {
+		ebipurego.RegisterLibFunc(&_fnAHRegisterHelpBook, _lib, "AHRegisterHelpBook")
+	}
+	_rc := _fnAHRegisterHelpBook(unsafe.Pointer(appBundleRef))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

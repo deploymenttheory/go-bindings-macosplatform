@@ -136,6 +136,13 @@ func (t *Typesetter) SetParagraphGlyphRangeSeparatorGlyphRange(paragraphRange fo
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setParagraphGlyphRange:separatorGlyphRange:"), paragraphRange, paragraphSeparatorRange)
 }
 
+// LayoutParagraphAtPoint lays out glyphs in the current glyph range until the next paragraph separator is reached.
+func (t *Typesetter) LayoutParagraphAtPoint(lineFragmentOrigin *corefoundation.CGPoint) int {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("layoutParagraphAtPoint:"), unsafe.Pointer(lineFragmentOrigin))
+	return _r
+}
+
 // BeginParagraph sets up layout parameters at the beginning of a paragraph.
 func (t *Typesetter) BeginParagraph() {
 	defer runtime.KeepAlive(t)
@@ -179,6 +186,12 @@ func (t *Typesetter) ParagraphSpacingAfterGlyphAtIndexWithProposedLineFragmentRe
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("paragraphSpacingAfterGlyphAtIndex:withProposedLineFragmentRect:"), glyphIndex, rect)
 	return _r
+}
+
+// GetLineFragmentRectUsedRectForParagraphSeparatorGlyphRangeAtProposedOrigin calculates the line fragment rectangle and line fragment used rectangle for blank lines.
+func (t *Typesetter) GetLineFragmentRectUsedRectForParagraphSeparatorGlyphRangeAtProposedOrigin(lineFragmentRect *corefoundation.CGRect, lineFragmentUsedRect *corefoundation.CGRect, paragraphSeparatorGlyphRange foundation.NSRange, lineOrigin corefoundation.CGPoint) {
+	defer runtime.KeepAlive(t)
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("getLineFragmentRect:usedRect:forParagraphSeparatorGlyphRange:atProposedOrigin:"), unsafe.Pointer(lineFragmentRect), unsafe.Pointer(lineFragmentUsedRect), paragraphSeparatorGlyphRange, lineOrigin)
 }
 
 // SetHardInvalidationForGlyphRange sets whether to force the layout manager to invalidate the specified portion of the glyph cache when invalidating layout.
@@ -319,6 +332,14 @@ func (t *Typesetter) CurrentParagraphStyle() *ParagraphStyle {
 	return ParagraphStyleFromID(_r)
 }
 
+// WillSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset called by the typesetter just prior to storing the actual line fragment rectangle location in the layout manager.
+func (t *Typesetter) WillSetLineFragmentRectForGlyphRangeUsedRectBaselineOffset(lineRect *corefoundation.CGRect, glyphRange foundation.NSRange, usedRect *corefoundation.CGRect) (baselineOffset float64) {
+	defer runtime.KeepAlive(t)
+	var _out0 float64
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("willSetLineFragmentRect:forGlyphRange:usedRect:baselineOffset:"), unsafe.Pointer(lineRect), glyphRange, unsafe.Pointer(usedRect), unsafe.Pointer(&_out0))
+	return _out0
+}
+
 // ShouldBreakLineByWordBeforeCharacterAtIndex returns whether the line being laid out should be broken by a word break at the specified character.
 func (t *Typesetter) ShouldBreakLineByWordBeforeCharacterAtIndex(charIndex int) bool {
 	defer runtime.KeepAlive(t)
@@ -353,6 +374,26 @@ func (t *Typesetter) BoundingBoxForControlGlyphAtIndexForTextContainerProposedLi
 	defer runtime.KeepAlive(textContainer)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(t), objc.RegisterName("boundingBoxForControlGlyphAtIndex:forTextContainer:proposedLineFragment:glyphPosition:characterIndex:"), glyphIndex, objref.IDOf(textContainer), proposedRect, glyphPosition, charIndex)
 	return _r
+}
+
+// CharacterRangeForGlyphRangeActualGlyphRange returns the range for the characters in the receiver’s text store that are mapped to the specified glyphs.
+func (t *Typesetter) CharacterRangeForGlyphRangeActualGlyphRange(glyphRange foundation.NSRange, actualGlyphRange *foundation.NSRange) foundation.NSRange {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[foundation.NSRange](objref.IDOf(t), objc.RegisterName("characterRangeForGlyphRange:actualGlyphRange:"), glyphRange, unsafe.Pointer(actualGlyphRange))
+	return _r
+}
+
+// GlyphRangeForCharacterRangeActualCharacterRange returns the range for the glyphs mapped to the characters of the text store in the specified range.
+func (t *Typesetter) GlyphRangeForCharacterRangeActualCharacterRange(charRange foundation.NSRange, actualCharRange *foundation.NSRange) foundation.NSRange {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[foundation.NSRange](objref.IDOf(t), objc.RegisterName("glyphRangeForCharacterRange:actualCharacterRange:"), charRange, unsafe.Pointer(actualCharRange))
+	return _r
+}
+
+// GetLineFragmentRectUsedRectRemainingRectForStartingGlyphAtIndexProposedRectLineSpacingParagraphSpacingBeforeParagraphSpacingAfter calculates line fragment rectangle, line fragment used rectangle, and remaining rectangle for a line fragment.
+func (t *Typesetter) GetLineFragmentRectUsedRectRemainingRectForStartingGlyphAtIndexProposedRectLineSpacingParagraphSpacingBeforeParagraphSpacingAfter(lineFragmentRect *corefoundation.CGRect, lineFragmentUsedRect *corefoundation.CGRect, remainingRect *corefoundation.CGRect, startingGlyphIndex int, proposedRect corefoundation.CGRect, lineSpacing float64, paragraphSpacingBefore float64, paragraphSpacingAfter float64) {
+	defer runtime.KeepAlive(t)
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("getLineFragmentRect:usedRect:remainingRect:forStartingGlyphAtIndex:proposedRect:lineSpacing:paragraphSpacingBefore:paragraphSpacingAfter:"), unsafe.Pointer(lineFragmentRect), unsafe.Pointer(lineFragmentUsedRect), unsafe.Pointer(remainingRect), startingGlyphIndex, proposedRect, lineSpacing, paragraphSpacingBefore, paragraphSpacingAfter)
 }
 
 // SetLineFragmentRectForGlyphRangeUsedRectBaselineOffset sets the line fragment rectangle where the specified glyphs are laid out.

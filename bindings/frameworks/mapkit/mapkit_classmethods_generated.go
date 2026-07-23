@@ -47,6 +47,12 @@ func IsDirectionsRequestURL(url string) bool {
 	return _r
 }
 
+// PolylineWithPointsCount creates and returns a geodesic polyline using the specified map points.
+func PolylineWithPointsCount(points *MKMapPoint, count int) *GeodesicPolyline {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKGeodesicPolyline")), objc.RegisterName("polylineWithPoints:count:"), unsafe.Pointer(points), count)
+	return GeodesicPolylineFromID(_r)
+}
+
 // PolylineWithCoordinatesCount creates and returns a geodesic polyline using the specified coordinates.
 func PolylineWithCoordinatesCount(coords unsafe.Pointer, count int) *GeodesicPolyline {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKGeodesicPolyline")), objc.RegisterName("polylineWithCoordinates:count:"), coords, count)
@@ -164,6 +170,18 @@ func FilterExcludingAllCategories() *PointOfInterestFilter {
 	return PointOfInterestFilterFromID(_r)
 }
 
+// PolygonWithPointsCount creates and returns a polygon object from the specified set of map points.
+func PolygonWithPointsCount(points *MKMapPoint, count int) *Polygon {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKPolygon")), objc.RegisterName("polygonWithPoints:count:"), unsafe.Pointer(points), count)
+	return PolygonFromID(_r)
+}
+
+// PolygonWithPointsCountInteriorPolygons creates and returns a polygon object from the specified set of map points and interior polygons.
+func PolygonWithPointsCountInteriorPolygons(points *MKMapPoint, count int, interiorPolygons []*Polygon) *Polygon {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKPolygon")), objc.RegisterName("polygonWithPoints:count:interiorPolygons:"), unsafe.Pointer(points), count, purego.SliceToNSArray(interiorPolygons, func(_v *Polygon) objc.ID { return objref.IDOf(_v) }))
+	return PolygonFromID(_r)
+}
+
 // PolygonWithCoordinatesCount creates and returns a polygon object from the specified set of coordinates.
 func PolygonWithCoordinatesCount(coords unsafe.Pointer, count int) *Polygon {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKPolygon")), objc.RegisterName("polygonWithCoordinates:count:"), coords, count)
@@ -174,6 +192,12 @@ func PolygonWithCoordinatesCount(coords unsafe.Pointer, count int) *Polygon {
 func PolygonWithCoordinatesCountInteriorPolygons(coords unsafe.Pointer, count int, interiorPolygons []*Polygon) *Polygon {
 	_r := objc.Send[objc.ID](objc.ID(_class("MKPolygon")), objc.RegisterName("polygonWithCoordinates:count:interiorPolygons:"), coords, count, purego.SliceToNSArray(interiorPolygons, func(_v *Polygon) objc.ID { return objref.IDOf(_v) }))
 	return PolygonFromID(_r)
+}
+
+// MKPolylinePolylineWithPointsCount creates a polyline object from the specified set of map points.
+func MKPolylinePolylineWithPointsCount(points *MKMapPoint, count int) *Polyline {
+	_r := objc.Send[objc.ID](objc.ID(_class("MKPolyline")), objc.RegisterName("polylineWithPoints:count:"), unsafe.Pointer(points), count)
+	return PolylineFromID(_r)
 }
 
 // MKPolylinePolylineWithCoordinatesCount creates a polyline object from the specified set of coordinates.

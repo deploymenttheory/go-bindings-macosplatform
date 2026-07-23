@@ -16,34 +16,40 @@ import (
 var _fnContinueSpeech func(unsafe.Pointer) int16
 
 // ContinueSpeech calls the SpeechSynthesis framework function ContinueSpeech.
-func ContinueSpeech(chan_ unsafe.Pointer) int16 {
+func ContinueSpeech() (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnContinueSpeech == nil {
 		ebipurego.RegisterLibFunc(&_fnContinueSpeech, _lib, "ContinueSpeech")
 	}
-	return _fnContinueSpeech(chan_)
+	var _out0 SpeechChannelRecord
+	_ret := _fnContinueSpeech(unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnCopyPhonemesFromText func(unsafe.Pointer, objc.ID, unsafe.Pointer) int16
 
 // CopyPhonemesFromText calls the SpeechSynthesis framework function CopyPhonemesFromText.
-func CopyPhonemesFromText(chan_ unsafe.Pointer, text obj.Object, phonemes unsafe.Pointer) int16 {
+func CopyPhonemesFromText(text obj.Object, phonemes unsafe.Pointer) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCopyPhonemesFromText == nil {
 		ebipurego.RegisterLibFunc(&_fnCopyPhonemesFromText, _lib, "CopyPhonemesFromText")
 	}
-	return _fnCopyPhonemesFromText(chan_, objref.IDOf(text), phonemes)
+	var _out0 SpeechChannelRecord
+	_ret := _fnCopyPhonemesFromText(unsafe.Pointer(&_out0), objref.IDOf(text), phonemes)
+	return _ret, _out0
 }
 
 var _fnCopySpeechProperty func(unsafe.Pointer, objc.ID, unsafe.Pointer) int16
 
 // CopySpeechProperty calls the SpeechSynthesis framework function CopySpeechProperty.
-func CopySpeechProperty(chan_ unsafe.Pointer, property obj.Object, object unsafe.Pointer) int16 {
+func CopySpeechProperty(property obj.Object, object unsafe.Pointer) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCopySpeechProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnCopySpeechProperty, _lib, "CopySpeechProperty")
 	}
-	return _fnCopySpeechProperty(chan_, objref.IDOf(property), object)
+	var _out0 SpeechChannelRecord
+	_ret := _fnCopySpeechProperty(unsafe.Pointer(&_out0), objref.IDOf(property), object)
+	return _ret, _out0
 }
 
 var _fnCountVoices func(unsafe.Pointer) int16
@@ -62,12 +68,14 @@ func CountVoices() (result int16, numVoices int16) {
 var _fnDisposeSpeechChannel func(unsafe.Pointer) int16
 
 // DisposeSpeechChannel calls the SpeechSynthesis framework function DisposeSpeechChannel.
-func DisposeSpeechChannel(chan_ unsafe.Pointer) int16 {
+func DisposeSpeechChannel() (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDisposeSpeechChannel == nil {
 		ebipurego.RegisterLibFunc(&_fnDisposeSpeechChannel, _lib, "DisposeSpeechChannel")
 	}
-	return _fnDisposeSpeechChannel(chan_)
+	var _out0 SpeechChannelRecord
+	_ret := _fnDisposeSpeechChannel(unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnDisposeSpeechDoneUPP func(unsafe.Pointer)
@@ -152,132 +160,145 @@ func GetIndVoice(index int16) (result int16, voice VoiceSpec) {
 var _fnGetSpeechInfo func(unsafe.Pointer, int, unsafe.Pointer) int16
 
 // GetSpeechInfo calls the SpeechSynthesis framework function GetSpeechInfo.
-func GetSpeechInfo(chan_ unsafe.Pointer, selector int, speechInfo unsafe.Pointer) int16 {
+func GetSpeechInfo(selector int, speechInfo unsafe.Pointer) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetSpeechInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnGetSpeechInfo, _lib, "GetSpeechInfo")
 	}
-	return _fnGetSpeechInfo(chan_, selector, speechInfo)
+	var _out0 SpeechChannelRecord
+	_ret := _fnGetSpeechInfo(unsafe.Pointer(&_out0), selector, speechInfo)
+	return _ret, _out0
 }
 
 var _fnGetSpeechPitch func(unsafe.Pointer, unsafe.Pointer) int16
 
 // GetSpeechPitch calls the SpeechSynthesis framework function GetSpeechPitch.
-func GetSpeechPitch(chan_ unsafe.Pointer) (result int16, pitch int) {
+func GetSpeechPitch() (result int16, chan_ SpeechChannelRecord, pitch int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetSpeechPitch == nil {
 		ebipurego.RegisterLibFunc(&_fnGetSpeechPitch, _lib, "GetSpeechPitch")
 	}
-	var _out0 int
-	_ret := _fnGetSpeechPitch(chan_, unsafe.Pointer(&_out0))
-	return _ret, _out0
+	var _out0 SpeechChannelRecord
+	var _out1 int
+	_ret := _fnGetSpeechPitch(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
 }
 
 var _fnGetSpeechRate func(unsafe.Pointer, unsafe.Pointer) int16
 
 // GetSpeechRate calls the SpeechSynthesis framework function GetSpeechRate.
-func GetSpeechRate(chan_ unsafe.Pointer) (result int16, rate int) {
+func GetSpeechRate() (result int16, chan_ SpeechChannelRecord, rate int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetSpeechRate == nil {
 		ebipurego.RegisterLibFunc(&_fnGetSpeechRate, _lib, "GetSpeechRate")
 	}
-	var _out0 int
-	_ret := _fnGetSpeechRate(chan_, unsafe.Pointer(&_out0))
-	return _ret, _out0
+	var _out0 SpeechChannelRecord
+	var _out1 int
+	_ret := _fnGetSpeechRate(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
 }
 
 var _fnGetVoiceDescription func(unsafe.Pointer, unsafe.Pointer, int) int16
 
 // GetVoiceDescription calls the SpeechSynthesis framework function GetVoiceDescription.
-func GetVoiceDescription(info unsafe.Pointer, infoLength int) (result int16, voice VoiceSpec) {
+func GetVoiceDescription(voice *VoiceSpec, infoLength int) (result int16, info VoiceDescription) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetVoiceDescription == nil {
 		ebipurego.RegisterLibFunc(&_fnGetVoiceDescription, _lib, "GetVoiceDescription")
 	}
-	var _out0 VoiceSpec
-	_ret := _fnGetVoiceDescription(unsafe.Pointer(&_out0), info, infoLength)
+	var _out0 VoiceDescription
+	_ret := _fnGetVoiceDescription(unsafe.Pointer(voice), unsafe.Pointer(&_out0), infoLength)
 	return _ret, _out0
 }
 
 var _fnGetVoiceInfo func(unsafe.Pointer, int, unsafe.Pointer) int16
 
 // GetVoiceInfo calls the SpeechSynthesis framework function GetVoiceInfo.
-func GetVoiceInfo(selector int, voiceInfo unsafe.Pointer) (result int16, voice VoiceSpec) {
+func GetVoiceInfo(voice *VoiceSpec, selector int, voiceInfo unsafe.Pointer) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetVoiceInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnGetVoiceInfo, _lib, "GetVoiceInfo")
 	}
-	var _out0 VoiceSpec
-	_ret := _fnGetVoiceInfo(unsafe.Pointer(&_out0), selector, voiceInfo)
-	return _ret, _out0
+	return _fnGetVoiceInfo(unsafe.Pointer(voice), selector, voiceInfo)
 }
 
 var _fnInvokeSpeechDoneUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // InvokeSpeechDoneUPP calls the SpeechSynthesis framework function InvokeSpeechDoneUPP.
-func InvokeSpeechDoneUPP(chan_ unsafe.Pointer, refCon unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeSpeechDoneUPP(refCon unsafe.Pointer, userUPP unsafe.Pointer) (chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeSpeechDoneUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeSpeechDoneUPP, _lib, "InvokeSpeechDoneUPP")
 	}
-	_fnInvokeSpeechDoneUPP(chan_, refCon, userUPP)
+	var _out0 SpeechChannelRecord
+	_fnInvokeSpeechDoneUPP(unsafe.Pointer(&_out0), refCon, userUPP)
+	return _out0
 }
 
 var _fnInvokeSpeechErrorUPP func(unsafe.Pointer, unsafe.Pointer, int16, int, unsafe.Pointer)
 
 // InvokeSpeechErrorUPP calls the SpeechSynthesis framework function InvokeSpeechErrorUPP.
-func InvokeSpeechErrorUPP(chan_ unsafe.Pointer, refCon unsafe.Pointer, theError int16, bytePos int, userUPP unsafe.Pointer) {
+func InvokeSpeechErrorUPP(refCon unsafe.Pointer, theError int16, bytePos int, userUPP unsafe.Pointer) (chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeSpeechErrorUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeSpeechErrorUPP, _lib, "InvokeSpeechErrorUPP")
 	}
-	_fnInvokeSpeechErrorUPP(chan_, refCon, theError, bytePos, userUPP)
+	var _out0 SpeechChannelRecord
+	_fnInvokeSpeechErrorUPP(unsafe.Pointer(&_out0), refCon, theError, bytePos, userUPP)
+	return _out0
 }
 
 var _fnInvokeSpeechPhonemeUPP func(unsafe.Pointer, unsafe.Pointer, int16, unsafe.Pointer)
 
 // InvokeSpeechPhonemeUPP calls the SpeechSynthesis framework function InvokeSpeechPhonemeUPP.
-func InvokeSpeechPhonemeUPP(chan_ unsafe.Pointer, refCon unsafe.Pointer, phonemeOpcode int16, userUPP unsafe.Pointer) {
+func InvokeSpeechPhonemeUPP(refCon unsafe.Pointer, phonemeOpcode int16, userUPP unsafe.Pointer) (chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeSpeechPhonemeUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeSpeechPhonemeUPP, _lib, "InvokeSpeechPhonemeUPP")
 	}
-	_fnInvokeSpeechPhonemeUPP(chan_, refCon, phonemeOpcode, userUPP)
+	var _out0 SpeechChannelRecord
+	_fnInvokeSpeechPhonemeUPP(unsafe.Pointer(&_out0), refCon, phonemeOpcode, userUPP)
+	return _out0
 }
 
 var _fnInvokeSpeechSyncUPP func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer)
 
 // InvokeSpeechSyncUPP calls the SpeechSynthesis framework function InvokeSpeechSyncUPP.
-func InvokeSpeechSyncUPP(chan_ unsafe.Pointer, refCon unsafe.Pointer, syncMessage int, userUPP unsafe.Pointer) {
+func InvokeSpeechSyncUPP(refCon unsafe.Pointer, syncMessage int, userUPP unsafe.Pointer) (chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeSpeechSyncUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeSpeechSyncUPP, _lib, "InvokeSpeechSyncUPP")
 	}
-	_fnInvokeSpeechSyncUPP(chan_, refCon, syncMessage, userUPP)
+	var _out0 SpeechChannelRecord
+	_fnInvokeSpeechSyncUPP(unsafe.Pointer(&_out0), refCon, syncMessage, userUPP)
+	return _out0
 }
 
 var _fnInvokeSpeechTextDoneUPP func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // InvokeSpeechTextDoneUPP calls the SpeechSynthesis framework function InvokeSpeechTextDoneUPP.
-func InvokeSpeechTextDoneUPP(chan_ unsafe.Pointer, refCon unsafe.Pointer, nextBuf unsafe.Pointer, byteLen unsafe.Pointer, userUPP unsafe.Pointer) (controlFlags int) {
+func InvokeSpeechTextDoneUPP(refCon unsafe.Pointer, nextBuf unsafe.Pointer, byteLen unsafe.Pointer, userUPP unsafe.Pointer) (chan_ SpeechChannelRecord, controlFlags int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeSpeechTextDoneUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeSpeechTextDoneUPP, _lib, "InvokeSpeechTextDoneUPP")
 	}
-	var _out0 int
-	_fnInvokeSpeechTextDoneUPP(chan_, refCon, nextBuf, byteLen, unsafe.Pointer(&_out0), userUPP)
-	return _out0
+	var _out0 SpeechChannelRecord
+	var _out1 int
+	_fnInvokeSpeechTextDoneUPP(unsafe.Pointer(&_out0), refCon, nextBuf, byteLen, unsafe.Pointer(&_out1), userUPP)
+	return _out0, _out1
 }
 
 var _fnInvokeSpeechWordUPP func(unsafe.Pointer, unsafe.Pointer, int, uint16, unsafe.Pointer)
 
 // InvokeSpeechWordUPP calls the SpeechSynthesis framework function InvokeSpeechWordUPP.
-func InvokeSpeechWordUPP(chan_ unsafe.Pointer, refCon unsafe.Pointer, wordPos int, wordLen uint16, userUPP unsafe.Pointer) {
+func InvokeSpeechWordUPP(refCon unsafe.Pointer, wordPos int, wordLen uint16, userUPP unsafe.Pointer) (chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInvokeSpeechWordUPP == nil {
 		ebipurego.RegisterLibFunc(&_fnInvokeSpeechWordUPP, _lib, "InvokeSpeechWordUPP")
 	}
-	_fnInvokeSpeechWordUPP(chan_, refCon, wordPos, wordLen, userUPP)
+	var _out0 SpeechChannelRecord
+	_fnInvokeSpeechWordUPP(unsafe.Pointer(&_out0), refCon, wordPos, wordLen, userUPP)
+	return _out0
 }
 
 var _fnMakeVoiceSpec func(int, int, unsafe.Pointer) int16
@@ -375,78 +396,92 @@ func NewSpeechWordUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
 var _fnPauseSpeechAt func(unsafe.Pointer, int) int16
 
 // PauseSpeechAt calls the SpeechSynthesis framework function PauseSpeechAt.
-func PauseSpeechAt(chan_ unsafe.Pointer, whereToPause int) int16 {
+func PauseSpeechAt(whereToPause int) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPauseSpeechAt == nil {
 		ebipurego.RegisterLibFunc(&_fnPauseSpeechAt, _lib, "PauseSpeechAt")
 	}
-	return _fnPauseSpeechAt(chan_, whereToPause)
+	var _out0 SpeechChannelRecord
+	_ret := _fnPauseSpeechAt(unsafe.Pointer(&_out0), whereToPause)
+	return _ret, _out0
 }
 
 var _fnSetSpeechInfo func(unsafe.Pointer, int, unsafe.Pointer) int16
 
 // SetSpeechInfo calls the SpeechSynthesis framework function SetSpeechInfo.
-func SetSpeechInfo(chan_ unsafe.Pointer, selector int, speechInfo unsafe.Pointer) int16 {
+func SetSpeechInfo(selector int, speechInfo unsafe.Pointer) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSetSpeechInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnSetSpeechInfo, _lib, "SetSpeechInfo")
 	}
-	return _fnSetSpeechInfo(chan_, selector, speechInfo)
+	var _out0 SpeechChannelRecord
+	_ret := _fnSetSpeechInfo(unsafe.Pointer(&_out0), selector, speechInfo)
+	return _ret, _out0
 }
 
 var _fnSetSpeechPitch func(unsafe.Pointer, int) int16
 
 // SetSpeechPitch calls the SpeechSynthesis framework function SetSpeechPitch.
-func SetSpeechPitch(chan_ unsafe.Pointer, pitch int) int16 {
+func SetSpeechPitch(pitch int) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSetSpeechPitch == nil {
 		ebipurego.RegisterLibFunc(&_fnSetSpeechPitch, _lib, "SetSpeechPitch")
 	}
-	return _fnSetSpeechPitch(chan_, pitch)
+	var _out0 SpeechChannelRecord
+	_ret := _fnSetSpeechPitch(unsafe.Pointer(&_out0), pitch)
+	return _ret, _out0
 }
 
 var _fnSetSpeechProperty func(unsafe.Pointer, objc.ID, objc.ID) int16
 
 // SetSpeechProperty calls the SpeechSynthesis framework function SetSpeechProperty.
-func SetSpeechProperty(chan_ unsafe.Pointer, property obj.Object, object obj.Object) int16 {
+func SetSpeechProperty(property obj.Object, object obj.Object) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSetSpeechProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnSetSpeechProperty, _lib, "SetSpeechProperty")
 	}
-	return _fnSetSpeechProperty(chan_, objref.IDOf(property), objref.IDOf(object))
+	var _out0 SpeechChannelRecord
+	_ret := _fnSetSpeechProperty(unsafe.Pointer(&_out0), objref.IDOf(property), objref.IDOf(object))
+	return _ret, _out0
 }
 
 var _fnSetSpeechRate func(unsafe.Pointer, int) int16
 
 // SetSpeechRate calls the SpeechSynthesis framework function SetSpeechRate.
-func SetSpeechRate(chan_ unsafe.Pointer, rate int) int16 {
+func SetSpeechRate(rate int) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSetSpeechRate == nil {
 		ebipurego.RegisterLibFunc(&_fnSetSpeechRate, _lib, "SetSpeechRate")
 	}
-	return _fnSetSpeechRate(chan_, rate)
+	var _out0 SpeechChannelRecord
+	_ret := _fnSetSpeechRate(unsafe.Pointer(&_out0), rate)
+	return _ret, _out0
 }
 
 var _fnSpeakBuffer func(unsafe.Pointer, unsafe.Pointer, int, int) int16
 
 // SpeakBuffer calls the SpeechSynthesis framework function SpeakBuffer.
-func SpeakBuffer(chan_ unsafe.Pointer, textBuf unsafe.Pointer, textBytes int, controlFlags int) int16 {
+func SpeakBuffer(textBuf unsafe.Pointer, textBytes int, controlFlags int) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSpeakBuffer == nil {
 		ebipurego.RegisterLibFunc(&_fnSpeakBuffer, _lib, "SpeakBuffer")
 	}
-	return _fnSpeakBuffer(chan_, textBuf, textBytes, controlFlags)
+	var _out0 SpeechChannelRecord
+	_ret := _fnSpeakBuffer(unsafe.Pointer(&_out0), textBuf, textBytes, controlFlags)
+	return _ret, _out0
 }
 
 var _fnSpeakCFString func(unsafe.Pointer, objc.ID, objc.ID) int16
 
 // SpeakCFString calls the SpeechSynthesis framework function SpeakCFString.
-func SpeakCFString(chan_ unsafe.Pointer, aString obj.Object, options obj.Object) int16 {
+func SpeakCFString(aString obj.Object, options obj.Object) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSpeakCFString == nil {
 		ebipurego.RegisterLibFunc(&_fnSpeakCFString, _lib, "SpeakCFString")
 	}
-	return _fnSpeakCFString(chan_, objref.IDOf(aString), objref.IDOf(options))
+	var _out0 SpeechChannelRecord
+	_ret := _fnSpeakCFString(unsafe.Pointer(&_out0), objref.IDOf(aString), objref.IDOf(options))
+	return _ret, _out0
 }
 
 var _fnSpeakString func(unsafe.Pointer) int16
@@ -465,12 +500,14 @@ func SpeakString() (result int16, textToBeSpoken uint8) {
 var _fnSpeakText func(unsafe.Pointer, unsafe.Pointer, int) int16
 
 // SpeakText calls the SpeechSynthesis framework function SpeakText.
-func SpeakText(chan_ unsafe.Pointer, textBuf unsafe.Pointer, textBytes int) int16 {
+func SpeakText(textBuf unsafe.Pointer, textBytes int) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSpeakText == nil {
 		ebipurego.RegisterLibFunc(&_fnSpeakText, _lib, "SpeakText")
 	}
-	return _fnSpeakText(chan_, textBuf, textBytes)
+	var _out0 SpeechChannelRecord
+	_ret := _fnSpeakText(unsafe.Pointer(&_out0), textBuf, textBytes)
+	return _ret, _out0
 }
 
 var _fnSpeechBusy func() int16
@@ -531,59 +568,67 @@ func SpeechSynthesisUnregisterModuleURL(url obj.Object) int16 {
 var _fnStopSpeech func(unsafe.Pointer) int16
 
 // StopSpeech calls the SpeechSynthesis framework function StopSpeech.
-func StopSpeech(chan_ unsafe.Pointer) int16 {
+func StopSpeech() (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStopSpeech == nil {
 		ebipurego.RegisterLibFunc(&_fnStopSpeech, _lib, "StopSpeech")
 	}
-	return _fnStopSpeech(chan_)
+	var _out0 SpeechChannelRecord
+	_ret := _fnStopSpeech(unsafe.Pointer(&_out0))
+	return _ret, _out0
 }
 
 var _fnStopSpeechAt func(unsafe.Pointer, int) int16
 
 // StopSpeechAt calls the SpeechSynthesis framework function StopSpeechAt.
-func StopSpeechAt(chan_ unsafe.Pointer, whereToStop int) int16 {
+func StopSpeechAt(whereToStop int) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnStopSpeechAt == nil {
 		ebipurego.RegisterLibFunc(&_fnStopSpeechAt, _lib, "StopSpeechAt")
 	}
-	return _fnStopSpeechAt(chan_, whereToStop)
+	var _out0 SpeechChannelRecord
+	_ret := _fnStopSpeechAt(unsafe.Pointer(&_out0), whereToStop)
+	return _ret, _out0
 }
 
 var _fnTextToPhonemes func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int16
 
 // TextToPhonemes calls the SpeechSynthesis framework function TextToPhonemes.
-func TextToPhonemes(chan_ unsafe.Pointer, textBuf unsafe.Pointer, textBytes int) (result int16, phonemeBuf string, phonemeBytes int64) {
+func TextToPhonemes(textBuf unsafe.Pointer, textBytes int) (result int16, chan_ SpeechChannelRecord, phonemeBuf string, phonemeBytes int64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTextToPhonemes == nil {
 		ebipurego.RegisterLibFunc(&_fnTextToPhonemes, _lib, "TextToPhonemes")
 	}
-	var _out0 string
-	var _out1 int64
-	_ret := _fnTextToPhonemes(chan_, textBuf, textBytes, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
-	return _ret, _out0, _out1
+	var _out0 SpeechChannelRecord
+	var _out1 string
+	var _out2 int64
+	_ret := _fnTextToPhonemes(unsafe.Pointer(&_out0), textBuf, textBytes, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	return _ret, _out0, _out1, _out2
 }
 
 var _fnUseDictionary func(unsafe.Pointer, unsafe.Pointer) int16
 
 // UseDictionary calls the SpeechSynthesis framework function UseDictionary.
-func UseDictionary(chan_ unsafe.Pointer) (result int16, dictionary string) {
+func UseDictionary() (result int16, chan_ SpeechChannelRecord, dictionary string) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnUseDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnUseDictionary, _lib, "UseDictionary")
 	}
-	var _out0 string
-	_ret := _fnUseDictionary(chan_, unsafe.Pointer(&_out0))
-	return _ret, _out0
+	var _out0 SpeechChannelRecord
+	var _out1 string
+	_ret := _fnUseDictionary(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	return _ret, _out0, _out1
 }
 
 var _fnUseSpeechDictionary func(unsafe.Pointer, objc.ID) int16
 
 // UseSpeechDictionary calls the SpeechSynthesis framework function UseSpeechDictionary.
-func UseSpeechDictionary(chan_ unsafe.Pointer, speechDictionary obj.Object) int16 {
+func UseSpeechDictionary(speechDictionary obj.Object) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnUseSpeechDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnUseSpeechDictionary, _lib, "UseSpeechDictionary")
 	}
-	return _fnUseSpeechDictionary(chan_, objref.IDOf(speechDictionary))
+	var _out0 SpeechChannelRecord
+	_ret := _fnUseSpeechDictionary(unsafe.Pointer(&_out0), objref.IDOf(speechDictionary))
+	return _ret, _out0
 }

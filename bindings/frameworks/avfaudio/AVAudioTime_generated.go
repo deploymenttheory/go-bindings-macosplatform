@@ -6,6 +6,7 @@ package avfaudio
 
 import (
 	"runtime"
+	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -72,6 +73,13 @@ func (at *AudioTime) IsKind(className string) bool {
 func (at *AudioTime) String() string {
 	defer runtime.KeepAlive(at)
 	return rt.Description(objref.IDOf(at))
+}
+
+// NewAudioTimeWithAudioTimeStampSampleRate creates an audio time object with the specified timestamp and sample rate.
+func NewAudioTimeWithAudioTimeStampSampleRate(ts *coreaudiotypes.AudioTimeStamp, sampleRate float64) *AudioTime {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioTime")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioTimeStamp:sampleRate:"), unsafe.Pointer(ts), sampleRate)
+	return audioTimeAdopt(_id)
 }
 
 // NewAudioTimeWithHostTime creates an audio time object with the specified host time.
