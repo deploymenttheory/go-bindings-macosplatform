@@ -55,7 +55,7 @@ func (e ParameterAutomationEventType) String() string {
 }
 
 // Audio unit parameter event types.
-type ParameterEventType int64
+type ParameterEventType uint32
 
 const (
 	// An immediate change from the parameter’s previous value to a new value.
@@ -78,7 +78,7 @@ func (e ParameterEventType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type ParameterMIDIMappingFlags int64
+type ParameterMIDIMappingFlags uint32
 
 const (
 	KAUParameterMIDIMapping_AnyChannelFlag ParameterMIDIMappingFlags = 1
@@ -151,7 +151,7 @@ func (e RenderEventType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type ScheduledAudioSliceFlags int64
+type ScheduledAudioSliceFlags uint32
 
 const (
 	KScheduledAudioSliceFlag_Complete          ScheduledAudioSliceFlags = 1
@@ -191,7 +191,7 @@ func (e ScheduledAudioSliceFlags) String() string {
 }
 
 // The ducking level to apply to other non-voice audio.
-type VoiceIOOtherAudioDuckingLevel int64
+type VoiceIOOtherAudioDuckingLevel uint32
 
 const (
 	// The default ducking level of other non-voice audio in a typical voice chat.
@@ -222,7 +222,7 @@ func (e VoiceIOOtherAudioDuckingLevel) String() string {
 }
 
 // Identifiers for audio balance fade types.
-type AudioBalanceFadeType int64
+type AudioBalanceFadeType uint32
 
 const (
 	// Ensures that the overall gain value never exceeds 1.0 by fading one channel as the other channel’s level rises. This can reduce overall loudness when the balance or fade is not in the center.
@@ -245,7 +245,7 @@ func (e AudioBalanceFadeType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AudioBytePacketTranslationFlags int64
+type AudioBytePacketTranslationFlags uint32
 
 const (
 	// If set, the result value is an estimate.
@@ -266,7 +266,7 @@ func (e AudioBytePacketTranslationFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AudioComponentInstantiationOptions int64
+type AudioComponentInstantiationOptions uint32
 
 const (
 	KAudioComponentInstantiation_LoadOutOfProcess AudioComponentInstantiationOptions = 1
@@ -289,7 +289,7 @@ func (e AudioComponentInstantiationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type AudioComponentValidationResult int64
+type AudioComponentValidationResult uint32
 
 const (
 	KAudioComponentValidationResult_Unknown                AudioComponentValidationResult = 0
@@ -322,7 +322,7 @@ func (e AudioComponentValidationResult) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AudioConverterOptions int64
+type AudioConverterOptions uint32
 
 const (
 	KAudioConverterOption_Unbuffered AudioConverterOptions = 65536
@@ -342,7 +342,7 @@ func (e AudioConverterOptions) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AudioFileFlags int64
+type AudioFileFlags uint32
 
 const (
 	KAudioFileFlags_EraseFile AudioFileFlags = 1
@@ -367,7 +367,7 @@ func (e AudioFileFlags) String() string {
 }
 
 // Flags for use when opening an audio file.
-type AudioFilePermissions int64
+type AudioFilePermissions int8
 
 const (
 	// File is read-only.
@@ -395,7 +395,7 @@ func (e AudioFilePermissions) String() string {
 
 // Flags that specify a playback direction for an audio file region structure.
 // Bitmask — values may be combined with |.
-type AudioFileRegionFlags int64
+type AudioFileRegionFlags uint32
 
 const (
 	// If set, the region is looped. You must set one or both of the remaining flags must also be set for the region to be looped.
@@ -426,7 +426,7 @@ func (e AudioFileRegionFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AudioFileStreamParseFlags int64
+type AudioFileStreamParseFlags uint32
 
 const (
 	// Pass this flag to the AudioFileStreamParseBytes function to signal a discontinuity in the audio data.
@@ -447,7 +447,7 @@ func (e AudioFileStreamParseFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AudioFileStreamSeekFlags int64
+type AudioFileStreamSeekFlags uint32
 
 const (
 	// This flag is returned by the AudioFileStreamSeek function if the byte offset is only an estimate.
@@ -468,7 +468,7 @@ func (e AudioFileStreamSeekFlags) String() string {
 }
 
 // Identifiers for audio panning algorithms.
-type AudioPanningMode int64
+type AudioPanningMode uint32
 
 const (
 	// The SoundField panning algorithm.
@@ -491,7 +491,7 @@ func (e AudioPanningMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AudioQueueProcessingTapFlags int64
+type AudioQueueProcessingTapFlags uint32
 
 const (
 	KAudioQueueProcessingTap_PreEffects    AudioQueueProcessingTapFlags = 1
@@ -526,7 +526,7 @@ func (e AudioQueueProcessingTapFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type AudioUnitEventType int64
+type AudioUnitEventType uint32
 
 const (
 	KAudioUnitEvent_ParameterValueChange        AudioUnitEventType = 0
@@ -554,7 +554,7 @@ func (e AudioUnitEventType) String() string {
 
 // Value options for audio unit parameters.
 // Bitmask — values may be combined with |.
-type AudioUnitParameterOptions int64
+type AudioUnitParameterOptions uint32
 
 const (
 	// If an audio unit can generate parameter names dynamically, it should set this flag.
@@ -660,7 +660,7 @@ func (e AudioUnitParameterOptions) String() string {
 }
 
 // The unit-of-measure for an audio unit parameter.
-type AudioUnitParameterUnit int64
+type AudioUnitParameterUnit uint32
 
 const (
 	// A generic unit of measure.
@@ -787,7 +787,7 @@ func (e AudioUnitParameterUnit) String() string {
 
 // Flags for configuring audio unit rendering.
 // Bitmask — values may be combined with |.
-type AudioUnitRenderActionFlags int64
+type AudioUnitRenderActionFlags uint32
 
 const (
 	// Called on a render notification Proc - which is called either before or after the render operation of the audio unit. If this flag is set, the proc is being called before the render operation is performed.
@@ -842,7 +842,7 @@ func (e AudioUnitRenderActionFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type CAClockPropertyID int64
+type CAClockPropertyID uint32
 
 const (
 	KCAClockProperty_InternalTimebase      CAClockPropertyID = 1768846434
@@ -895,7 +895,7 @@ func (e CAClockPropertyID) String() string {
 	}
 }
 
-type CAClockTimeFormat int64
+type CAClockTimeFormat uint32
 
 const (
 	KCAClockTimeFormat_HostTime        CAClockTimeFormat = 1752134516
@@ -931,7 +931,7 @@ func (e CAClockTimeFormat) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type CAFFormatFlags int64
+type CAFFormatFlags uint32
 
 const (
 	KCAFLinearPCMFormatFlagIsFloat        CAFFormatFlags = 1
@@ -955,7 +955,7 @@ func (e CAFFormatFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type CAFRegionFlags int64
+type CAFRegionFlags uint32
 
 const (
 	KCAFRegionFlag_LoopEnable   CAFRegionFlags = 1
@@ -984,7 +984,7 @@ func (e CAFRegionFlags) String() string {
 
 // Flags that configure the behavior of the MusicSequenceFileCreate and MusicSequenceFileCreateData functions.
 // Bitmask — values may be combined with |.
-type MusicSequenceFileFlags int64
+type MusicSequenceFileFlags uint32
 
 const (
 	KMusicSequenceFileFlags_Default MusicSequenceFileFlags = 0
@@ -1006,7 +1006,7 @@ func (e MusicSequenceFileFlags) String() string {
 }
 
 // The various types of files that can be parsed by a music sequence.
-type MusicSequenceFileTypeID int64
+type MusicSequenceFileTypeID uint32
 
 const (
 	KMusicSequenceFile_AnyType MusicSequenceFileTypeID = 0
@@ -1033,7 +1033,7 @@ func (e MusicSequenceFileTypeID) String() string {
 
 // Flags used to configure the behavior of the MusicSequenceFileLoad and MusicSequenceFileLoadData functions.
 // Bitmask — values may be combined with |.
-type MusicSequenceLoadFlags int64
+type MusicSequenceLoadFlags uint32
 
 const (
 	KMusicSequenceLoadSMF_PreserveTracks MusicSequenceLoadFlags = 0
@@ -1055,7 +1055,7 @@ func (e MusicSequenceLoadFlags) String() string {
 }
 
 // The various types of music sequences.
-type MusicSequenceType int64
+type MusicSequenceType uint32
 
 const (
 	// Used for a music sequence that corresponds to a normal MIDI file. The tempo track defines the number of beats per second and can have multiple tempo events.
@@ -1081,7 +1081,7 @@ func (e MusicSequenceType) String() string {
 	}
 }
 
-type AU3DMixerAttenuationCurve int64
+type AU3DMixerAttenuationCurve uint32
 
 const (
 	// An equal-power-based attenuation curve.
@@ -1112,7 +1112,7 @@ func (e AU3DMixerAttenuationCurve) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AU3DMixerRenderingFlags int64
+type AU3DMixerRenderingFlags uint32
 
 const (
 	K3DMixerRenderingFlags_InterAuralDelay           AU3DMixerRenderingFlags = 1
@@ -1155,7 +1155,7 @@ func (e AU3DMixerRenderingFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type AudioMixRenderingStyle int64
+type AudioMixRenderingStyle uint32
 
 const (
 	KAudioMixRenderingStyle_Cinematic               AudioMixRenderingStyle = 0
@@ -1235,7 +1235,7 @@ func (e HostTransportStateFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type ReverbRoomType int64
+type ReverbRoomType uint32
 
 const (
 	KReverbRoomType_SmallRoom     ReverbRoomType = 0
@@ -1288,7 +1288,7 @@ func (e ReverbRoomType) String() string {
 	}
 }
 
-type SpatialMixerAttenuationCurve int64
+type SpatialMixerAttenuationCurve uint32
 
 const (
 	KSpatialMixerAttenuationCurve_Power       SpatialMixerAttenuationCurve = 0
@@ -1314,7 +1314,7 @@ func (e SpatialMixerAttenuationCurve) String() string {
 	}
 }
 
-type SpatialMixerOutputType int64
+type SpatialMixerOutputType uint32
 
 const (
 	KSpatialMixerOutputType_Headphones       SpatialMixerOutputType = 1
@@ -1337,7 +1337,7 @@ func (e SpatialMixerOutputType) String() string {
 	}
 }
 
-type SpatialMixerPersonalizedHRTFMode int64
+type SpatialMixerPersonalizedHRTFMode uint32
 
 const (
 	KSpatialMixerPersonalizedHRTFMode_Off  SpatialMixerPersonalizedHRTFMode = 0
@@ -1360,7 +1360,7 @@ func (e SpatialMixerPersonalizedHRTFMode) String() string {
 	}
 }
 
-type SpatialMixerPointSourceInHeadMode int64
+type SpatialMixerPointSourceInHeadMode uint32
 
 const (
 	KSpatialMixerPointSourceInHeadMode_Mono   SpatialMixerPointSourceInHeadMode = 0
@@ -1381,7 +1381,7 @@ func (e SpatialMixerPointSourceInHeadMode) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type SpatialMixerRenderingFlags int64
+type SpatialMixerRenderingFlags uint32
 
 const (
 	KSpatialMixerRenderingFlags_InterAuralDelay     SpatialMixerRenderingFlags = 1
@@ -1404,7 +1404,7 @@ func (e SpatialMixerRenderingFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type SpatialMixerSourceMode int64
+type SpatialMixerSourceMode uint32
 
 const (
 	KSpatialMixerSourceMode_SpatializeIfMono SpatialMixerSourceMode = 0
@@ -1430,7 +1430,7 @@ func (e SpatialMixerSourceMode) String() string {
 	}
 }
 
-type SpatializationAlgorithm int64
+type SpatializationAlgorithm uint32
 
 const (
 	KSpatializationAlgorithm_EqualPowerPanning  SpatializationAlgorithm = 0
@@ -1469,7 +1469,7 @@ func (e SpatializationAlgorithm) String() string {
 }
 
 // Constants that indicate the state of muted speech.
-type VoiceIOSpeechActivityEvent int64
+type VoiceIOSpeechActivityEvent uint32
 
 const (
 	// A state that indicates speech started.
@@ -1491,7 +1491,7 @@ func (e VoiceIOSpeechActivityEvent) String() string {
 	}
 }
 
-type EntryID int64
+type EntryID int32
 
 const (
 	EntryIDFirstEntry EntryID = 0
@@ -1514,7 +1514,7 @@ func (e EntryID) String() string {
 	}
 }
 
-type Flag int64
+type Flag int32
 
 const (
 	FlagFlagDeferInherit      Flag = 1
@@ -1549,7 +1549,7 @@ func (e Flag) String() string {
 	}
 }
 
-type Perm int64
+type Perm int32
 
 const (
 	PermReadData           Perm = 2
@@ -1609,7 +1609,7 @@ func (e Perm) String() string {
 	}
 }
 
-type Tag int64
+type Tag int32
 
 const (
 	TagUndefinedTag  Tag = 0
@@ -1632,7 +1632,7 @@ func (e Tag) String() string {
 	}
 }
 
-type Type int64
+type Type int32
 
 const (
 	TypeExtended Type = 256
@@ -1668,7 +1668,7 @@ func (e Type) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AudioComponentFlags int64
+type AudioComponentFlags uint32
 
 const (
 	KAudioComponentFlag_Unsearchable               AudioComponentFlags = 1
@@ -1704,7 +1704,7 @@ func (e AudioComponentFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AudioFileStreamPropertyFlags int64
+type AudioFileStreamPropertyFlags uint32
 
 const (
 	// This flag is set when the callback AudioFileStream_PropertyListenerProc is invoked in the case that the value of the property has been cached and can be obtained later.
@@ -1730,7 +1730,7 @@ func (e AudioFileStreamPropertyFlags) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type AudioSettingsFlags int64
+type AudioSettingsFlags uint32
 
 const (
 	KAudioSettingsFlags_ExpertParameter        AudioSettingsFlags = 1
@@ -1761,7 +1761,7 @@ func (e AudioSettingsFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type AudioUnitRemoteControlEvent int64
+type AudioUnitRemoteControlEvent uint32
 
 const (
 	KAudioUnitRemoteControlEvent_TogglePlayPause AudioUnitRemoteControlEvent = 1
@@ -1784,7 +1784,7 @@ func (e AudioUnitRemoteControlEvent) String() string {
 	}
 }
 
-type CAClockMessage int64
+type CAClockMessage uint32
 
 const (
 	KCAClockMessage_StartTimeSet     CAClockMessage = 1937009005
@@ -1819,7 +1819,7 @@ func (e CAClockMessage) String() string {
 	}
 }
 
-type CAClockSyncMode int64
+type CAClockSyncMode uint32
 
 const (
 	KCAClockSyncMode_Internal           CAClockSyncMode = 1768846450
@@ -1842,7 +1842,7 @@ func (e CAClockSyncMode) String() string {
 	}
 }
 
-type CAClockTimebase int64
+type CAClockTimebase uint32
 
 const (
 	KCAClockTimebase_HostTime        CAClockTimebase = 1752134516
@@ -1865,7 +1865,7 @@ func (e CAClockTimebase) String() string {
 	}
 }
 
-type Clockid int64
+type Clockid int32
 
 const (
 	ClockidRealtime           Clockid = 0
@@ -1966,7 +1966,7 @@ func (e DispatchBlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -2004,7 +2004,7 @@ func (e FilesecProperty) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -2027,7 +2027,7 @@ func (e Idtype) String() string {
 	}
 }
 
-type IpcInfoObjectType int64
+type IpcInfoObjectType uint32
 
 const (
 	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
@@ -2209,7 +2209,7 @@ func (e IpcInfoObjectType) String() string {
 	}
 }
 
-type LaunchDataType int64
+type LaunchDataType int32
 
 const (
 	LaunchDataTypeDictionary LaunchDataType = 1
@@ -2254,7 +2254,7 @@ func (e LaunchDataType) String() string {
 }
 
 // These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -2274,7 +2274,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -2297,7 +2297,7 @@ func (e MDQueryOptionFlags) String() string {
 	}
 }
 
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -2436,7 +2436,7 @@ func (e OSClockid) String() string {
 	}
 }
 
-type PtrauthKey int64
+type PtrauthKey int32
 
 const (
 	Ptrauth_key_none                     PtrauthKey = -1

@@ -8,7 +8,7 @@ import (
 	"fmt"
 )
 
-type Anchor int64
+type Anchor int32
 
 const (
 	AnchorN      Anchor = 0
@@ -49,7 +49,7 @@ func (e Anchor) String() string {
 	}
 }
 
-type Justify int64
+type Justify int32
 
 const (
 	JustifyLeft   Justify = 0
@@ -72,7 +72,7 @@ func (e Justify) String() string {
 	}
 }
 
-type XIMCaretDirection int64
+type XIMCaretDirection int32
 
 const (
 	XIMForwardChar      XIMCaretDirection = 0
@@ -122,7 +122,7 @@ func (e XIMCaretDirection) String() string {
 	}
 }
 
-type XIMCaretStyle int64
+type XIMCaretStyle int32
 
 const (
 	XIMIsInvisible XIMCaretStyle = 0
@@ -145,7 +145,7 @@ func (e XIMCaretStyle) String() string {
 	}
 }
 
-type XIMStatusDataType int64
+type XIMStatusDataType int32
 
 const (
 	XIMTextType   XIMStatusDataType = 0
@@ -165,7 +165,7 @@ func (e XIMStatusDataType) String() string {
 	}
 }
 
-type TclQueueposition int64
+type TclQueueposition int32
 
 const (
 	TclQueuepositionTail TclQueueposition = 0
@@ -188,7 +188,7 @@ func (e TclQueueposition) String() string {
 	}
 }
 
-type TclValuetype int64
+type TclValuetype int32
 
 const (
 	TclValuetypeInt     TclValuetype = 0
@@ -214,7 +214,7 @@ func (e TclValuetype) String() string {
 	}
 }
 
-type Configtypes int64
+type Configtypes int32
 
 const (
 	ConfigtypesBoolean      Configtypes = 0
@@ -294,7 +294,7 @@ func (e Configtypes) String() string {
 	}
 }
 
-type Optiontype int64
+type Optiontype int32
 
 const (
 	OptiontypeBoolean     Optiontype = 0
@@ -365,7 +365,7 @@ func (e Optiontype) String() string {
 	}
 }
 
-type Restrictaction int64
+type Restrictaction int32
 
 const (
 	RestrictactionDeferEvent   Restrictaction = 0
@@ -388,7 +388,7 @@ func (e Restrictaction) String() string {
 	}
 }
 
-type State int64
+type State int32
 
 const (
 	StateNull     State = -1

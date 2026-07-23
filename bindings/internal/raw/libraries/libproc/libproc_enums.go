@@ -10,7 +10,7 @@ import (
 )
 
 // [_time.h:156]
-type ClockidT int64
+type ClockidT int32
 
 const (
 	_CLOCK_REALTIME             ClockidT = 0

@@ -180,7 +180,7 @@ func Es_subscriptions(client unsafe.Pointer, count *uint64, subscriptions unsafe
 // ID: objc-sym EndpointSecurity.es_respond_auth_result
 func Es_respond_auth_result(client unsafe.Pointer, message *EsMessageT, result EsAuthResultT, cache bool) EsRespondResultT {
 	var _exc unsafe.Pointer
-	_result := EsRespondResultT(C.endpointsecurity_fn_es_respond_auth_result(client, unsafe.Pointer(message), C.int64_t(result), C.bool(cache), &_exc))
+	_result := EsRespondResultT(C.endpointsecurity_fn_es_respond_auth_result(client, unsafe.Pointer(message), C.int32_t(result), C.bool(cache), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -273,7 +273,7 @@ func Es_mute_path(client unsafe.Pointer, path string, type_ EsMutePathTypeT) EsR
 	_cstr_path := C.CString(path)
 	defer C.free(unsafe.Pointer(_cstr_path))
 	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_mute_path(client, _cstr_path, C.int64_t(type_), &_exc))
+	_result := EsReturnT(C.endpointsecurity_fn_es_mute_path(client, _cstr_path, C.int32_t(type_), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -285,7 +285,7 @@ func Es_mute_path_events(client unsafe.Pointer, path string, type_ EsMutePathTyp
 	_cstr_path := C.CString(path)
 	defer C.free(unsafe.Pointer(_cstr_path))
 	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_mute_path_events(client, _cstr_path, C.int64_t(type_), unsafe.Pointer(events), C.uint64_t(event_count), &_exc))
+	_result := EsReturnT(C.endpointsecurity_fn_es_mute_path_events(client, _cstr_path, C.int32_t(type_), unsafe.Pointer(events), C.uint64_t(event_count), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -345,7 +345,7 @@ func Es_unmute_path(client unsafe.Pointer, path string, type_ EsMutePathTypeT) E
 	_cstr_path := C.CString(path)
 	defer C.free(unsafe.Pointer(_cstr_path))
 	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_unmute_path(client, _cstr_path, C.int64_t(type_), &_exc))
+	_result := EsReturnT(C.endpointsecurity_fn_es_unmute_path(client, _cstr_path, C.int32_t(type_), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -357,7 +357,7 @@ func Es_unmute_path_events(client unsafe.Pointer, path string, type_ EsMutePathT
 	_cstr_path := C.CString(path)
 	defer C.free(unsafe.Pointer(_cstr_path))
 	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_unmute_path_events(client, _cstr_path, C.int64_t(type_), unsafe.Pointer(events), C.uint64_t(event_count), &_exc))
+	_result := EsReturnT(C.endpointsecurity_fn_es_unmute_path_events(client, _cstr_path, C.int32_t(type_), unsafe.Pointer(events), C.uint64_t(event_count), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -386,7 +386,7 @@ func Es_release_muted_paths(muted_paths *EsMutedPathsT) {
 // ID: objc-sym EndpointSecurity.es_invert_muting
 func Es_invert_muting(client unsafe.Pointer, mute_type EsMuteInversionTypeT) EsReturnT {
 	var _exc unsafe.Pointer
-	_result := EsReturnT(C.endpointsecurity_fn_es_invert_muting(client, C.int64_t(mute_type), &_exc))
+	_result := EsReturnT(C.endpointsecurity_fn_es_invert_muting(client, C.int32_t(mute_type), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -396,7 +396,7 @@ func Es_invert_muting(client unsafe.Pointer, mute_type EsMuteInversionTypeT) EsR
 // ID: objc-sym EndpointSecurity.es_muting_inverted
 func Es_muting_inverted(client unsafe.Pointer, mute_type EsMuteInversionTypeT) EsMuteInvertedReturnT {
 	var _exc unsafe.Pointer
-	_result := EsMuteInvertedReturnT(C.endpointsecurity_fn_es_muting_inverted(client, C.int64_t(mute_type), &_exc))
+	_result := EsMuteInvertedReturnT(C.endpointsecurity_fn_es_muting_inverted(client, C.int32_t(mute_type), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }

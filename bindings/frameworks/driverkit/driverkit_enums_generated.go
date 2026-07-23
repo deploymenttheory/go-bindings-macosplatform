@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-type IOLockAssertState int64
+type IOLockAssertState int32
 
 const (
 	KIOLockAssertOwned    IOLockAssertState = 1
@@ -29,7 +29,7 @@ func (e IOLockAssertState) String() string {
 	}
 }
 
-type Clockid int64
+type Clockid int32
 
 const (
 	ClockidRealtime           Clockid = 0
@@ -130,7 +130,7 @@ func (e DispatchBlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -169,7 +169,7 @@ func (e FilesecProperty) String() string {
 }
 
 // Used with IORWLockAssert to assert the state of a lock.
-type IORWLockAssertState int64
+type IORWLockAssertState int32
 
 const (
 	KIORWLockAssertRead    IORWLockAssertState = 1
@@ -195,7 +195,7 @@ func (e IORWLockAssertState) String() string {
 	}
 }
 
-type IostatereporterValueselector int64
+type IostatereporterValueselector int32
 
 const (
 	KInTransitions      IostatereporterValueselector = 0
@@ -218,7 +218,7 @@ func (e IostatereporterValueselector) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -241,7 +241,7 @@ func (e Idtype) String() string {
 	}
 }
 
-type IpcInfoObjectType int64
+type IpcInfoObjectType uint32
 
 const (
 	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
@@ -423,7 +423,7 @@ func (e IpcInfoObjectType) String() string {
 	}
 }
 
-type LaunchDataType int64
+type LaunchDataType int32
 
 const (
 	LaunchDataTypeDictionary LaunchDataType = 1

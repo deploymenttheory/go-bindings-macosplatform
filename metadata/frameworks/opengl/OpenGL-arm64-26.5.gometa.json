@@ -9,7 +9,7 @@
   "protocols": {},
   "enums": {
     "CGLCPContextPriorityRequest": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGLCPContextPriorityRequestHigh",
@@ -32,7 +32,7 @@
       "sdk_line": 205
     },
     "_CGLContextEnable": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGLCESwapRectangle",
@@ -80,7 +80,7 @@
       "sdk_line": 146
     },
     "_CGLContextParameter": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGLCPSwapRectangle",
@@ -193,7 +193,7 @@
       "sdk_line": 170
     },
     "_CGLError": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGLNoError",
@@ -296,7 +296,7 @@
       "sdk_line": 239
     },
     "_CGLGPURestartStatus": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGLCPGPURestartStatusNone",
@@ -324,7 +324,7 @@
       "sdk_line": 160
     },
     "_CGLGlobalOption": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGLGOFormatCacheSize",
@@ -362,7 +362,7 @@
       "sdk_line": 215
     },
     "_CGLOpenGLProfile": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGLOGLPVersion_Legacy",
@@ -390,7 +390,7 @@
       "sdk_line": 229
     },
     "_CGLPixelFormatAttribute": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGLPFAAllRenderers",
@@ -603,7 +603,7 @@
       "sdk_line": 53
     },
     "_CGLRendererProperty": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGLRPOffScreen",

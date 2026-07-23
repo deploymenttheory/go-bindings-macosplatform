@@ -9,7 +9,7 @@ import (
 )
 
 // Credentials versions These constants are used in several places in the API to discern between Kerberos v4 and Kerberos v5. Not all values are valid inputs and outputs for all functions; function specifications below detail the allowed values. Kerberos version constants will always be a bit-field, and can be tested as such; for example the following test will tell you if a ccacheVersion includes v5 credentials: if ((ccacheVersion & cc_credentials_v5) != 0)
-type CredentialVersions int64
+type CredentialVersions int32
 
 const (
 	Cc_credentials_v4    CredentialVersions = 1
@@ -33,7 +33,7 @@ func (e CredentialVersions) String() string {
 }
 
 // Locking Modes These constants are used in the advisory locking functions to describe whether or not the lock function should block waiting for a lock or return an error immediately.   For example, attempting to acquire a lock with a non-blocking call will result in an error if the lock cannot be acquired; otherwise, the call will block until the lock can be acquired.
-type LockModes int64
+type LockModes int32
 
 const (
 	Cc_lock_noblock LockModes = 0
@@ -54,7 +54,7 @@ func (e LockModes) String() string {
 }
 
 // Lock types These constants are used in the locking functions to describe the type of lock requested.  Note that all CCAPI locks are advisory so only callers using the lock calls will be blocked by each other. This is because locking functions were introduced after the CCAPI came into common use and we did not want to break existing callers.
-type LockTypes int64
+type LockTypes int32
 
 const (
 	Cc_lock_read      LockTypes = 0
@@ -81,7 +81,7 @@ func (e LockTypes) String() string {
 }
 
 // String to key type (Kerberos v4 only)
-type StringToKeyType int64
+type StringToKeyType int32
 
 const (
 	Cc_v4_stk_afs              StringToKeyType = 0
@@ -110,7 +110,7 @@ func (e StringToKeyType) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0

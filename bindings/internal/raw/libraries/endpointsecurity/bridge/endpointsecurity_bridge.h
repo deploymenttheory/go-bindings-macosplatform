@@ -40,85 +40,85 @@ void * endpointsecurity_fn_es_exec_env(void * event, uint32_t index, void **outE
 void * endpointsecurity_fn_es_exec_fd(void * event, uint32_t index, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_subscribe
-int64_t endpointsecurity_fn_es_subscribe(void * client, void * events, uint32_t event_count, void **outException);
+int32_t endpointsecurity_fn_es_subscribe(void * client, void * events, uint32_t event_count, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_unsubscribe
-int64_t endpointsecurity_fn_es_unsubscribe(void * client, void * events, uint32_t event_count, void **outException);
+int32_t endpointsecurity_fn_es_unsubscribe(void * client, void * events, uint32_t event_count, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_unsubscribe_all
-int64_t endpointsecurity_fn_es_unsubscribe_all(void * client, void **outException);
+int32_t endpointsecurity_fn_es_unsubscribe_all(void * client, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_subscriptions
-int64_t endpointsecurity_fn_es_subscriptions(void * client, void * count, void * subscriptions, void **outException);
+int32_t endpointsecurity_fn_es_subscriptions(void * client, void * count, void * subscriptions, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_respond_auth_result
-int64_t endpointsecurity_fn_es_respond_auth_result(void * client, void * message, int64_t result, bool cache, void **outException);
+int32_t endpointsecurity_fn_es_respond_auth_result(void * client, void * message, int32_t result, bool cache, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_respond_flags_result
-int64_t endpointsecurity_fn_es_respond_flags_result(void * client, void * message, uint32_t authorized_flags, bool cache, void **outException);
+int32_t endpointsecurity_fn_es_respond_flags_result(void * client, void * message, uint32_t authorized_flags, bool cache, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_mute_process
-int64_t endpointsecurity_fn_es_mute_process(void * client, void * audit_token, void **outException);
+int32_t endpointsecurity_fn_es_mute_process(void * client, void * audit_token, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_mute_process_events
-int64_t endpointsecurity_fn_es_mute_process_events(void * client, void * audit_token, void * events, uint64_t event_count, void **outException);
+int32_t endpointsecurity_fn_es_mute_process_events(void * client, void * audit_token, void * events, uint64_t event_count, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_unmute_process
-int64_t endpointsecurity_fn_es_unmute_process(void * client, void * audit_token, void **outException);
+int32_t endpointsecurity_fn_es_unmute_process(void * client, void * audit_token, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_unmute_process_events
-int64_t endpointsecurity_fn_es_unmute_process_events(void * client, void * audit_token, void * events, uint64_t event_count, void **outException);
+int32_t endpointsecurity_fn_es_unmute_process_events(void * client, void * audit_token, void * events, uint64_t event_count, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_muted_processes
-int64_t endpointsecurity_fn_es_muted_processes(void * client, void * count, void * audit_tokens, void **outException);
+int32_t endpointsecurity_fn_es_muted_processes(void * client, void * count, void * audit_tokens, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_muted_processes_events
-int64_t endpointsecurity_fn_es_muted_processes_events(void * client, void * muted_processes, void **outException);
+int32_t endpointsecurity_fn_es_muted_processes_events(void * client, void * muted_processes, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_release_muted_processes
 void endpointsecurity_fn_es_release_muted_processes(void * muted_processes, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_mute_path
-int64_t endpointsecurity_fn_es_mute_path(void * client, const char * path, int64_t type_, void **outException);
+int32_t endpointsecurity_fn_es_mute_path(void * client, const char * path, int32_t type_, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_mute_path_events
-int64_t endpointsecurity_fn_es_mute_path_events(void * client, const char * path, int64_t type_, void * events, uint64_t event_count, void **outException);
+int32_t endpointsecurity_fn_es_mute_path_events(void * client, const char * path, int32_t type_, void * events, uint64_t event_count, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_mute_path_prefix
-int64_t endpointsecurity_fn_es_mute_path_prefix(void * client, const char * path_prefix, void **outException);
+int32_t endpointsecurity_fn_es_mute_path_prefix(void * client, const char * path_prefix, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_mute_path_literal
-int64_t endpointsecurity_fn_es_mute_path_literal(void * client, const char * path_literal, void **outException);
+int32_t endpointsecurity_fn_es_mute_path_literal(void * client, const char * path_literal, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_unmute_all_paths
-int64_t endpointsecurity_fn_es_unmute_all_paths(void * client, void **outException);
+int32_t endpointsecurity_fn_es_unmute_all_paths(void * client, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_unmute_all_target_paths
-int64_t endpointsecurity_fn_es_unmute_all_target_paths(void * client, void **outException);
+int32_t endpointsecurity_fn_es_unmute_all_target_paths(void * client, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_unmute_path
-int64_t endpointsecurity_fn_es_unmute_path(void * client, const char * path, int64_t type_, void **outException);
+int32_t endpointsecurity_fn_es_unmute_path(void * client, const char * path, int32_t type_, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_unmute_path_events
-int64_t endpointsecurity_fn_es_unmute_path_events(void * client, const char * path, int64_t type_, void * events, uint64_t event_count, void **outException);
+int32_t endpointsecurity_fn_es_unmute_path_events(void * client, const char * path, int32_t type_, void * events, uint64_t event_count, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_muted_paths_events
-int64_t endpointsecurity_fn_es_muted_paths_events(void * client, void * muted_paths, void **outException);
+int32_t endpointsecurity_fn_es_muted_paths_events(void * client, void * muted_paths, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_release_muted_paths
 void endpointsecurity_fn_es_release_muted_paths(void * muted_paths, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_invert_muting
-int64_t endpointsecurity_fn_es_invert_muting(void * client, int64_t mute_type, void **outException);
+int32_t endpointsecurity_fn_es_invert_muting(void * client, int32_t mute_type, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_muting_inverted
-int64_t endpointsecurity_fn_es_muting_inverted(void * client, int64_t mute_type, void **outException);
+int32_t endpointsecurity_fn_es_muting_inverted(void * client, int32_t mute_type, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_clear_cache
-int64_t endpointsecurity_fn_es_clear_cache(void * client, void **outException);
+int32_t endpointsecurity_fn_es_clear_cache(void * client, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_new_client
-int64_t endpointsecurity_fn_es_new_client(void * client, void * handler, void **outException);
+int32_t endpointsecurity_fn_es_new_client(void * client, void * handler, void **outException);
 
 // ID: objc-sym EndpointSecurity.es_delete_client
-int64_t endpointsecurity_fn_es_delete_client(void * client, void **outException);
+int32_t endpointsecurity_fn_es_delete_client(void * client, void **outException);

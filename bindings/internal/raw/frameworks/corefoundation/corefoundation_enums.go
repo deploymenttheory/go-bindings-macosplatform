@@ -9,7 +9,7 @@ import (
 )
 
 // CFCalendarUnit constants are used to specify calendrical units, such as day or month, in various calendar calculations.
-type CFCalendarUnit int64
+type CFCalendarUnit uint64
 
 const (
 	// Specifies the era unit.
@@ -195,7 +195,7 @@ func (e CFComparisonResult) String() string {
 }
 
 // A CFOptionFlags type for specifying options for searching.
-type CFDataSearchFlags int64
+type CFDataSearchFlags uint64
 
 const (
 	KCFDataSearchBackwards CFDataSearchFlags = 1
@@ -249,7 +249,7 @@ func (e CFDateFormatterStyle) String() string {
 	}
 }
 
-type CFFileSecurityClearOptions int64
+type CFFileSecurityClearOptions uint64
 
 const (
 	// Clear the (POSIX) owner ID.
@@ -293,7 +293,7 @@ func (e CFFileSecurityClearOptions) String() string {
 }
 
 // These option flags are used as a mask to indicate a specific set of fields in the CFGregorianDate or CFGregorianUnits structures.
-type CFGregorianUnitFlags int64
+type CFGregorianUnitFlags uint64
 
 const (
 	// Specifies the year field.
@@ -341,7 +341,7 @@ func (e CFGregorianUnitFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type CFISO8601DateFormatOptions int64
+type CFISO8601DateFormatOptions uint64
 
 const (
 	KCFISO8601DateFormatWithYear                     CFISO8601DateFormatOptions = 1
@@ -468,7 +468,7 @@ func (e CFNotificationSuspensionBehavior) String() string {
 }
 
 // Type for constants specifying how numbers should be parsed.
-type CFNumberFormatterOptionFlags int64
+type CFNumberFormatterOptionFlags uint64
 
 const (
 	// Specifies that only integers should be parsed.
@@ -710,7 +710,7 @@ func (e CFPropertyListFormat) String() string {
 }
 
 // Type for flags that determine the degree of mutability of newly created property lists.
-type CFPropertyListMutabilityOptions int64
+type CFPropertyListMutabilityOptions uint64
 
 const (
 	// Specifies that the property list should be immutable.
@@ -736,7 +736,7 @@ func (e CFPropertyListMutabilityOptions) String() string {
 }
 
 // Run loop activity stages in which run loop observers can be scheduled.
-type CFRunLoopActivity int64
+type CFRunLoopActivity uint64
 
 const (
 	// The entrance of the run loop, before entering the event processing loop. This activity occurs once for each call to CFRunLoopRun and CFRunLoopRunInMode.
@@ -783,7 +783,7 @@ func (e CFRunLoopActivity) String() string {
 	return strings.Join(parts, "|")
 }
 
-type CFRunLoopRunResult int64
+type CFRunLoopRunResult int32
 
 const (
 	// The running run loop mode has no sources or timers to process.
@@ -812,7 +812,7 @@ func (e CFRunLoopRunResult) String() string {
 }
 
 // Types of socket activity that can cause the callback function of a CFSocket object to be called.
-type CFSocketCallBackType int64
+type CFSocketCallBackType uint64
 
 const (
 	// No callback should be made for any activity.
@@ -902,7 +902,7 @@ func (e CFStreamErrorDomain) String() string {
 }
 
 // Defines constants for stream-related events.
-type CFStreamEventType int64
+type CFStreamEventType uint64
 
 const (
 	// No event has occurred.
@@ -988,7 +988,7 @@ func (e CFStreamStatus) String() string {
 }
 
 // Encodings that are built-in on all platforms on which macOS runs.
-type CFStringBuiltInEncodings int64
+type CFStringBuiltInEncodings uint32
 
 const (
 	// An encoding constant that identifies the Mac Roman encoding.
@@ -1055,7 +1055,7 @@ func (e CFStringBuiltInEncodings) String() string {
 }
 
 // A CFOptionFlags type for specifying options for string comparison .
-type CFStringCompareFlags int64
+type CFStringCompareFlags uint64
 
 const (
 	// Specifies that the comparison should ignore differences in case between alphabetical characters.
@@ -1618,7 +1618,7 @@ func (e CFStringNormalizationForm) String() string {
 }
 
 // Token types returned by CFStringTokenizerGoToTokenAtIndex and CFStringTokenizerAdvanceToNextToken.
-type CFStringTokenizerTokenType int64
+type CFStringTokenizerTokenType uint64
 
 const (
 	// Has no token.
@@ -1701,7 +1701,7 @@ func (e CFTimeZoneNameStyle) String() string {
 }
 
 // Type for bookmark data creation options.
-type CFURLBookmarkCreationOptions int64
+type CFURLBookmarkCreationOptions uint64
 
 const (
 	// Specifies that an alias created with the bookmark data be created with minimal information, which may make it smaller but still able to resolve in certain ways.
@@ -1744,7 +1744,7 @@ func (e CFURLBookmarkCreationOptions) String() string {
 }
 
 // Type for bookmark data resolution options.
-type CFURLBookmarkResolutionOptions int64
+type CFURLBookmarkResolutionOptions uint64
 
 const (
 	KCFURLBookmarkResolutionWithoutUIMask       CFURLBookmarkResolutionOptions = 256
@@ -1846,7 +1846,7 @@ func (e CFURLComponentType) String() string {
 }
 
 // Options for controlling enumerator behavior.
-type CFURLEnumeratorOptions int64
+type CFURLEnumeratorOptions uint64
 
 const (
 	// The enumerator performs its default behavior.
@@ -2106,7 +2106,7 @@ func (e CFXMLNodeTypeCode) String() string {
 }
 
 // Options you can use to control the parser’s treatment of an XML document.
-type CFXMLParserOptions int64
+type CFXMLParserOptions uint64
 
 const (
 	// Validates the document against its grammar from the DTD, reporting any errors. Currently not supported.
@@ -2280,7 +2280,7 @@ func (e CGRectEdge) String() string {
 	}
 }
 
-type __CFByteOrder int64
+type __CFByteOrder int32
 
 const (
 	CFByteOrderUnknown      __CFByteOrder = 0
@@ -2301,7 +2301,7 @@ func (e __CFByteOrder) String() string {
 	}
 }
 
-type Acl_entry_id_t int64
+type Acl_entry_id_t int32
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
@@ -2322,7 +2322,7 @@ func (e Acl_entry_id_t) String() string {
 	}
 }
 
-type Acl_flag_t int64
+type Acl_flag_t int32
 
 const (
 	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
@@ -2355,7 +2355,7 @@ func (e Acl_flag_t) String() string {
 	}
 }
 
-type Acl_perm_t int64
+type Acl_perm_t int32
 
 const (
 	ACL_READ_DATA           Acl_perm_t = 2
@@ -2413,7 +2413,7 @@ func (e Acl_perm_t) String() string {
 	}
 }
 
-type Acl_tag_t int64
+type Acl_tag_t int32
 
 const (
 	ACL_UNDEFINED_TAG  Acl_tag_t = 0
@@ -2434,7 +2434,7 @@ func (e Acl_tag_t) String() string {
 	}
 }
 
-type Acl_type_t int64
+type Acl_type_t int32
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
@@ -2467,7 +2467,7 @@ func (e Acl_type_t) String() string {
 	}
 }
 
-type Clockid_t int64
+type Clockid_t int32
 
 const (
 	_CLOCK_REALTIME             Clockid_t = 0
@@ -2561,7 +2561,7 @@ func (e Dispatch_block_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Filesec_property_t int64
+type Filesec_property_t int32
 
 const (
 	FILESEC_OWNER         Filesec_property_t = 1
@@ -2597,7 +2597,7 @@ func (e Filesec_property_t) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0
@@ -2675,7 +2675,7 @@ func (e Os_clockid_t) String() string {
 	}
 }
 
-type Ptrauth_key int64
+type Ptrauth_key int32
 
 const (
 	Ptrauth_key_none                     Ptrauth_key = -1

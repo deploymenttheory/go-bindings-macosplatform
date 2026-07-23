@@ -26,7 +26,7 @@ const (
 )
 
 // [audit.h:338]
-type AuditSessionFlags int64
+type AuditSessionFlags int32
 
 const (
 	AU_SESSION_FLAG_IS_INITIAL         AuditSessionFlags = 1
@@ -90,7 +90,7 @@ func (i AuditSessionFlags) isMultiValue() bool {
 }
 
 // [_time.h:156]
-type ClockidT int64
+type ClockidT int32
 
 const (
 	_CLOCK_REALTIME             ClockidT = 0
@@ -164,7 +164,7 @@ func (i ClockidT) isMultiValue() bool {
 }
 
 // [ipc_info.h:1098]
-type IpcInfoObjectTypeT int64
+type IpcInfoObjectTypeT uint32
 
 const (
 	IPC_OTYPE_NONE                 IpcInfoObjectTypeT = 0

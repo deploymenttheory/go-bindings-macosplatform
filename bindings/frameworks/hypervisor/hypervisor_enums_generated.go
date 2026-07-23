@@ -5941,7 +5941,7 @@ func (e SysReg) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0

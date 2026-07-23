@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-type Ldap_sync_refresh_t int64
+type Ldap_sync_refresh_t int32
 
 const (
 	LDAP_SYNC_CAPI_NONE           Ldap_sync_refresh_t = -1

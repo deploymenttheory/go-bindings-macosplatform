@@ -10,7 +10,7 @@ import (
 )
 
 // [ipc_info.h:1098]
-type IpcInfoObjectTypeT int64
+type IpcInfoObjectTypeT uint32
 
 const (
 	IPC_OTYPE_NONE                 IpcInfoObjectTypeT = 0

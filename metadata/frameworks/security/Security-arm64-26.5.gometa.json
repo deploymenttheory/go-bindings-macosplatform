@@ -46,7 +46,7 @@
   },
   "enums": {
     "AuthorizationFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAuthorizationFlagDefaults",
@@ -515,7 +515,7 @@
       "is_extensible": true
     },
     "SecAccessControlCreateFlags": {
-      "go_type": "int64",
+      "go_type": "uint64",
       "members": [
         {
           "name": "kSecAccessControlUserPresence",
@@ -611,7 +611,7 @@
       "is_extensible": true
     },
     "SecAuthenticationType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecAuthenticationTypeNTLM",
@@ -854,7 +854,7 @@
       "is_extensible": true
     },
     "SecCredentialType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecCredentialTypeDefault",
@@ -1002,7 +1002,7 @@
       "is_extensible": true
     },
     "SecItemAttr": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecCreationDateItemAttr",
@@ -1150,7 +1150,7 @@
       "is_extensible": true
     },
     "SecItemClass": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecInternetPasswordItemClass",
@@ -1407,7 +1407,7 @@
       "is_extensible": true
     },
     "SecKeychainEvent": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecLockEvent",
@@ -1477,7 +1477,7 @@
       "is_extensible": true
     },
     "SecKeychainEventMask": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecLockEventMask",
@@ -1557,7 +1557,7 @@
       "is_extensible": true
     },
     "SecKeychainPromptSelector": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "kSecKeychainPromptRequirePassphase",
@@ -1697,7 +1697,7 @@
       "is_extensible": true
     },
     "SecProtocolType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSecProtocolTypeFTP",
@@ -2182,7 +2182,7 @@
       "is_extensible": true
     },
     "SessionAttributeBits": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "sessionIsRoot",
@@ -2211,7 +2211,7 @@
       "is_extensible": true
     },
     "SessionCreationFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "sessionKeepCurrentBootstrap",
@@ -2225,7 +2225,7 @@
       "is_extensible": true
     },
     "__CE_CrlDistributionPointNameType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "CE_CDNT_FullName",
@@ -2243,7 +2243,7 @@
       "sdk_line": 530
     },
     "__CE_DataType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "DT_AuthorityKeyID",
@@ -2356,7 +2356,7 @@
       "sdk_line": 752
     },
     "__CE_GeneralNameType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "GNT_OtherName",
@@ -15934,7 +15934,7 @@
       "availability": {}
     },
     "acl_entry_id_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FIRST_ENTRY",
@@ -15957,7 +15957,7 @@
       "sdk_line": 118
     },
     "acl_flag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FLAG_DEFER_INHERIT",
@@ -16000,7 +16000,7 @@
       "sdk_line": 125
     },
     "acl_perm_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_READ_DATA",
@@ -16098,7 +16098,7 @@
       "sdk_line": 72
     },
     "acl_tag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_UNDEFINED_TAG",
@@ -16121,7 +16121,7 @@
       "sdk_line": 94
     },
     "acl_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_TYPE_EXTENDED",
@@ -16164,7 +16164,7 @@
       "sdk_line": 101
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -16212,7 +16212,7 @@
       "sdk_line": 156
     },
     "cssm_appledl_open_parameters_mask": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCSSM_APPLEDL_MASK_MODE",
@@ -16299,7 +16299,7 @@
       "is_extensible": true
     },
     "extension_data_format": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "CSSM_X509_DATAFORMAT_ENCODED",
@@ -16322,7 +16322,7 @@
       "sdk_line": 118
     },
     "filesec_property_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "FILESEC_OWNER",
@@ -16370,7 +16370,7 @@
       "sdk_line": 582
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -16393,7 +16393,7 @@
       "sdk_line": 79
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",
@@ -16682,7 +16682,7 @@
       "is_extensible": true
     },
     "launch_data_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "LAUNCH_DATA_DICTIONARY",
@@ -16861,7 +16861,7 @@
       "sdk_line": 188
     },
     "ptrauth_key": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ptrauth_key_none",

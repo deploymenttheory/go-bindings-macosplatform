@@ -9,7 +9,7 @@
   "protocols": {},
   "enums": {
     "Tcl_QueuePosition": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "TCL_QUEUE_TAIL",
@@ -32,7 +32,7 @@
       "sdk_line": 1249
     },
     "Tcl_ValueType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "TCL_INT",
@@ -60,7 +60,7 @@
       "sdk_line": 561
     },
     "Tk_Anchor": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "TK_ANCHOR_N",
@@ -113,7 +113,7 @@
       "sdk_line": 502
     },
     "Tk_ConfigTypes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "TK_CONFIG_BOOLEAN",
@@ -231,7 +231,7 @@
       "sdk_line": 374
     },
     "Tk_Justify": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "TK_JUSTIFY_LEFT",
@@ -254,7 +254,7 @@
       "sdk_line": 512
     },
     "Tk_OptionType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "TK_OPTION_BOOLEAN",
@@ -357,7 +357,7 @@
       "sdk_line": 137
     },
     "Tk_RestrictAction": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "TK_DEFER_EVENT",
@@ -380,7 +380,7 @@
       "sdk_line": 455
     },
     "Tk_State": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "TK_STATE_NULL",
@@ -413,7 +413,7 @@
       "sdk_line": 903
     },
     "XIMCaretDirection": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "XIMForwardChar",
@@ -481,7 +481,7 @@
       "sdk_line": 1150
     },
     "XIMCaretStyle": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "XIMIsInvisible",
@@ -504,7 +504,7 @@
       "sdk_line": 1160
     },
     "XIMStatusDataType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "XIMTextType",

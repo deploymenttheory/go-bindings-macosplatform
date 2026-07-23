@@ -8,7 +8,7 @@ import "fmt"
 
 // A structure for values that represent compression algorithms.
 // [compression.h:115]
-type CompressionAlgorithm int64
+type CompressionAlgorithm int32
 
 const (
 	COMPRESSION_LZ4      CompressionAlgorithm = 256
@@ -78,7 +78,7 @@ func (i CompressionAlgorithm) isMultiValue() bool {
 
 // A set of values used to represent the status of stream compression.
 // [compression.h:349]
-type CompressionStatus int64
+type CompressionStatus int32
 
 const (
 	COMPRESSION_STATUS_OK    CompressionStatus = 0
@@ -128,7 +128,7 @@ func (i CompressionStatus) isMultiValue() bool {
 
 // A set of values used to represent stream compression flags.
 // [compression.h:342]
-type CompressionStreamFlags int64
+type CompressionStreamFlags int32
 
 const (
 	COMPRESSION_STREAM_FINALIZE CompressionStreamFlags = 1
@@ -168,7 +168,7 @@ func (i CompressionStreamFlags) isMultiValue() bool {
 
 // A set of values used to represent a stream compression operation.
 // [compression.h:331]
-type CompressionStreamOperation int64
+type CompressionStreamOperation int32
 
 const (
 	COMPRESSION_STREAM_ENCODE CompressionStreamOperation = 0

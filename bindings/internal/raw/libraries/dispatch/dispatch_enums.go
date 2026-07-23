@@ -150,7 +150,7 @@ func (i DispatchBlockFlagsT) isMultiValue() bool {
 }
 
 // [fcntl.h:582]
-type FilesecPropertyT int64
+type FilesecPropertyT int32
 
 const (
 	FILESEC_OWNER         FilesecPropertyT = 1
@@ -224,7 +224,7 @@ func (i FilesecPropertyT) isMultiValue() bool {
 }
 
 // [wait.h:79]
-type IdtypeT int64
+type IdtypeT int32
 
 const (
 	P_ALL  IdtypeT = 0

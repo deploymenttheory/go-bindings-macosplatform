@@ -1863,7 +1863,7 @@
       "is_extensible": true
     },
     "JSType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kJSTypeUndefined",
@@ -1916,7 +1916,7 @@
       "doc": "@enum JSType @abstract     A constant identifying the type of a JSValue. @constant     kJSTypeUndefined  The unique undefined value. @constant     kJSTypeNull       The unique null value. @constant     kJSTypeBoolean    A primitive boolean value, one of true or false. @constant     kJSTypeNumber     A primitive number value. @constant     kJSTypeString     A primitive string value. @constant     kJSTypeObject     An object value (meaning that this JSValueRef is a JSObjectRef). @constant     kJSTypeSymbol     A primitive symbol value. @constant     kJSTypeBigInt     A primitive BigInt value."
     },
     "JSTypedArrayType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kJSTypedArrayTypeInt8Array",
@@ -1990,7 +1990,7 @@
       "doc": "@enum JSTypedArrayType @abstract     A constant identifying the Typed Array type of a JSObjectRef. @constant     kJSTypedArrayTypeInt8Array            Int8Array @constant     kJSTypedArrayTypeInt16Array           Int16Array @constant     kJSTypedArrayTypeInt32Array           Int32Array @constant     kJSTypedArrayTypeUint8Array           Uint8Array @constant     kJSTypedArrayTypeUint8ClampedArray    Uint8ClampedArray @constant     kJSTypedArrayTypeUint16Array          Uint16Array @constant     kJSTypedArrayTypeUint32Array          Uint32Array @constant     kJSTypedArrayTypeFloat32Array         Float32Array @constant     kJSTypedArrayTypeFloat64Array         Float64Array @constant     kJSTypedArrayTypeBigInt64Array        BigInt64Array @constant     kJSTypedArrayTypeBigUint64Array       BigUint64Array @constant     kJSTypedArrayTypeArrayBuffer          ArrayBuffer @constant     kJSTypedArrayTypeNone                 Not a Typed Array"
     },
     "MDLabelDomain": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDLabelUserDomain",
@@ -2009,7 +2009,7 @@
       "doc": "@typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate()."
     },
     "MDQueryOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQuerySynchronous",
@@ -2032,7 +2032,7 @@
       "sdk_line": 83
     },
     "MDQuerySortOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQueryReverseSortOrderFlag",
@@ -2213,7 +2213,7 @@
       "availability": {}
     },
     "acl_entry_id_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FIRST_ENTRY",
@@ -2236,7 +2236,7 @@
       "sdk_line": 118
     },
     "acl_flag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FLAG_DEFER_INHERIT",
@@ -2279,7 +2279,7 @@
       "sdk_line": 125
     },
     "acl_perm_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_READ_DATA",
@@ -2377,7 +2377,7 @@
       "sdk_line": 72
     },
     "acl_tag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_UNDEFINED_TAG",
@@ -2400,7 +2400,7 @@
       "sdk_line": 94
     },
     "acl_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_TYPE_EXTENDED",
@@ -2443,7 +2443,7 @@
       "sdk_line": 101
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -2565,7 +2565,7 @@
       "is_extensible": true
     },
     "filesec_property_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "FILESEC_OWNER",
@@ -2613,7 +2613,7 @@
       "sdk_line": 582
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -2636,7 +2636,7 @@
       "sdk_line": 79
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",
@@ -2925,7 +2925,7 @@
       "is_extensible": true
     },
     "launch_data_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "LAUNCH_DATA_DICTIONARY",
@@ -3104,7 +3104,7 @@
       "sdk_line": 188
     },
     "ptrauth_key": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ptrauth_key_none",

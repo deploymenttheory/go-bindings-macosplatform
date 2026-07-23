@@ -67,7 +67,7 @@ func (e AVAudioSessionErrorCode) String() string {
 }
 
 // The supported channel bitmaps to use when defining channel layouts.
-type AudioChannelBitmap int64
+type AudioChannelBitmap uint32
 
 const (
 	// The left channel.
@@ -216,7 +216,7 @@ func (e AudioChannelBitmap) String() string {
 }
 
 // Indexes the fields of the mCoordinates array in an AudioChannelDescription structure.
-type AudioChannelCoordinateIndex int64
+type AudioChannelCoordinateIndex uint32
 
 const (
 	// For rectangular coordinates, negative is left and positive is right. The units are specified by the mChannelFlags field of the AudioChannelDescription structure.
@@ -247,7 +247,7 @@ func (e AudioChannelCoordinateIndex) String() string {
 }
 
 // Constants that define the audio channel flags of an audio channel description.
-type AudioChannelFlags int64
+type AudioChannelFlags uint32
 
 const (
 	// All flags are clear.
@@ -278,7 +278,7 @@ func (e AudioChannelFlags) String() string {
 }
 
 // A structure that represents flags for a timestamp.
-type AudioTimeStampFlags int64
+type AudioTimeStampFlags uint32
 
 const (
 	// A flag that indicates no fields are valid.
@@ -373,7 +373,7 @@ func (e MPEG4ObjectID) String() string {
 }
 
 // A structure that defines SMPTE time flags.
-type SMPTETimeFlags int64
+type SMPTETimeFlags uint32
 
 const (
 	KSMPTETimeUnknown SMPTETimeFlags = 0
@@ -396,7 +396,7 @@ func (e SMPTETimeFlags) String() string {
 }
 
 // Constants that define SMPTE time types.
-type SMPTETimeType int64
+type SMPTETimeType uint32
 
 const (
 	KSMPTETimeType24       SMPTETimeType = 0
@@ -444,7 +444,7 @@ func (e SMPTETimeType) String() string {
 	}
 }
 
-type Ptrauth_key int64
+type Ptrauth_key int32
 
 const (
 	Ptrauth_key_none                     Ptrauth_key = -1

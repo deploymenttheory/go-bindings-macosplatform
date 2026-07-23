@@ -33,7 +33,7 @@ func (e AVCustomRoutingEventReason) String() string {
 	}
 }
 
-type DNSServiceAAAAPolicy int64
+type DNSServiceAAAAPolicy int32
 
 const (
 	KDNSServiceAAAAPolicyNone     DNSServiceAAAAPolicy = 0
@@ -52,7 +52,7 @@ func (e DNSServiceAAAAPolicy) String() string {
 }
 
 // @typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -70,7 +70,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -92,7 +92,7 @@ func (e MDQueryOptionFlags) String() string {
 }
 
 // @enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order.
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -107,7 +107,7 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
-type Acl_entry_id_t int64
+type Acl_entry_id_t int32
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
@@ -128,7 +128,7 @@ func (e Acl_entry_id_t) String() string {
 	}
 }
 
-type Acl_flag_t int64
+type Acl_flag_t int32
 
 const (
 	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
@@ -161,7 +161,7 @@ func (e Acl_flag_t) String() string {
 	}
 }
 
-type Acl_perm_t int64
+type Acl_perm_t int32
 
 const (
 	ACL_READ_DATA           Acl_perm_t = 2
@@ -219,7 +219,7 @@ func (e Acl_perm_t) String() string {
 	}
 }
 
-type Acl_tag_t int64
+type Acl_tag_t int32
 
 const (
 	ACL_UNDEFINED_TAG  Acl_tag_t = 0
@@ -240,7 +240,7 @@ func (e Acl_tag_t) String() string {
 	}
 }
 
-type Acl_type_t int64
+type Acl_type_t int32
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
@@ -273,7 +273,7 @@ func (e Acl_type_t) String() string {
 	}
 }
 
-type Clockid_t int64
+type Clockid_t int32
 
 const (
 	_CLOCK_REALTIME             Clockid_t = 0
@@ -367,7 +367,7 @@ func (e Dispatch_block_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Filesec_property_t int64
+type Filesec_property_t int32
 
 const (
 	FILESEC_OWNER         Filesec_property_t = 1
@@ -403,7 +403,7 @@ func (e Filesec_property_t) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0
@@ -424,7 +424,7 @@ func (e Idtype_t) String() string {
 	}
 }
 
-type Ipc_info_object_type_t int64
+type Ipc_info_object_type_t uint32
 
 const (
 	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
@@ -604,7 +604,7 @@ func (e Ipc_info_object_type_t) String() string {
 	}
 }
 
-type Launch_data_type_t int64
+type Launch_data_type_t int32
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
@@ -742,7 +742,7 @@ func (e Mpo_flags_t) String() string {
 }
 
 // @typedef nw_browser_state_t @abstract Browser states sent by nw_browser_set_state_changed_handler.
-type Nw_browser_state_t int64
+type Nw_browser_state_t int32
 
 const (
 	// @const nw_browser_state_invalid The state of the browser is not valid. This state will never be delivered in the browser's state update handler and can be treated as an unexpected value.
@@ -775,7 +775,7 @@ func (e Nw_browser_state_t) String() string {
 }
 
 // @typedef nw_connection_group_state_t @abstract Connection Group states sent by nw_connection_group_set_state_changed_handler. States progress forward and do not move backwards.
-type Nw_connection_group_state_t int64
+type Nw_connection_group_state_t int32
 
 const (
 	// @const nw_connection_group_state_invalid The state of the connection group is not valid. This state will never be delivered in the connection group's state update handler and can be treated as an unexpected value.
@@ -808,7 +808,7 @@ func (e Nw_connection_group_state_t) String() string {
 }
 
 // @typedef nw_connection_state_t @abstract Connection states sent by nw_connection_set_state_changed_handler. States generally progress forward and do not move backwards, with the exception of preparing and waiting, which may alternate before the connection becomes ready or failed.
-type Nw_connection_state_t int64
+type Nw_connection_state_t int32
 
 const (
 	// @const nw_connection_state_invalid The state of the connection is not valid. This state will never be delivered in the connection's state update handler, and can be treated as an unexpected value.
@@ -845,7 +845,7 @@ func (e Nw_connection_state_t) String() string {
 }
 
 // @typedef nw_data_transfer_report_state_t @abstract The state of a Data Transfer Report indicates whether or not the contents have been collected, and are ready to be accessed.
-type Nw_data_transfer_report_state_t int64
+type Nw_data_transfer_report_state_t int32
 
 const (
 	// @const nw_data_transfer_report_state_collecting The report is outstanding; values cannot be accessed.
@@ -866,7 +866,7 @@ func (e Nw_data_transfer_report_state_t) String() string {
 }
 
 // @typedef nw_endpoint_type_t @abstract Endpoint types represent a well-known form of endpoint. Values may be added to this enumeration, and some custom endpoint types may use values not defined in this enumeration.
-type Nw_endpoint_type_t int64
+type Nw_endpoint_type_t int32
 
 const (
 	// @const nw_endpoint_type_invalid An invalid endpoint
@@ -899,7 +899,7 @@ func (e Nw_endpoint_type_t) String() string {
 }
 
 // @typedef nw_error_domain_t @abstract The enumeration of network error domains.
-type Nw_error_domain_t int64
+type Nw_error_domain_t int32
 
 const (
 	// @const nw_error_domain_invalid
@@ -931,7 +931,7 @@ func (e Nw_error_domain_t) String() string {
 	}
 }
 
-type Nw_ethernet_channel_state_t int64
+type Nw_ethernet_channel_state_t int32
 
 const (
 	// @const nw_ethernet_channel_state_invalid The state of the channel is not valid. This state will never be delivered in the channel's state update handler, and can be treated as an unexpected value.
@@ -967,7 +967,7 @@ func (e Nw_ethernet_channel_state_t) String() string {
 	}
 }
 
-type Nw_framer_start_result_t int64
+type Nw_framer_start_result_t int32
 
 const (
 	Nw_framer_start_result_ready           Nw_framer_start_result_t = 1
@@ -986,7 +986,7 @@ func (e Nw_framer_start_result_t) String() string {
 }
 
 // @typedef nw_interface_radio_type_t @abstract Interface radio types represent the radio technology for a network link.
-type Nw_interface_radio_type_t int64
+type Nw_interface_radio_type_t int32
 
 const (
 	Nw_interface_radio_type_unknown         Nw_interface_radio_type_t = 0
@@ -1047,7 +1047,7 @@ func (e Nw_interface_radio_type_t) String() string {
 }
 
 // @typedef nw_interface_type_t @abstract Interface types represent the underlying media for a network link, such as Wi-Fi or Cellular.
-type Nw_interface_type_t int64
+type Nw_interface_type_t int32
 
 const (
 	// @const nw_interface_type_other A virtual or otherwise unknown interface type
@@ -1080,7 +1080,7 @@ func (e Nw_interface_type_t) String() string {
 }
 
 // @typedef nw_ip_ecn_flag_t @abstract ECN flags marked in IP headers to indicate congestion.
-type Nw_ip_ecn_flag_t int64
+type Nw_ip_ecn_flag_t int32
 
 const (
 	// @const nw_ip_ecn_flag_non_ect Non ECN-Capable Transport, value 0b00
@@ -1109,7 +1109,7 @@ func (e Nw_ip_ecn_flag_t) String() string {
 }
 
 // @typedef nw_ip_local_address_preference_t @abstract Preference for local addresses selection.
-type Nw_ip_local_address_preference_t int64
+type Nw_ip_local_address_preference_t int32
 
 const (
 	// @const nw_ip_local_address_preference_default Use system default for address selection
@@ -1134,7 +1134,7 @@ func (e Nw_ip_local_address_preference_t) String() string {
 }
 
 // @typedef nw_ip_version_t @abstract A specific version of the Internet Protocol.
-type Nw_ip_version_t int64
+type Nw_ip_version_t int32
 
 const (
 	// @const nw_ip_version_any Allow any IP version
@@ -1159,7 +1159,7 @@ func (e Nw_ip_version_t) String() string {
 }
 
 // @typedef nw_link_quality_t @abstract Link quality measurement is a representation of the expected capabilities of the link layer network attachment. Use this value to tune initial values for algorithms that can scale with the capabilities of the network. Do not use this value to gate connection attempts or to override adjustments that would be made based on actual network performance.
-type Nw_link_quality_t int64
+type Nw_link_quality_t int32
 
 const (
 	// @const nw_link_quality_unknown No link quality measurement is available
@@ -1188,7 +1188,7 @@ func (e Nw_link_quality_t) String() string {
 }
 
 // @typedef nw_listener_state_t @abstract Listener states sent by nw_listener_set_state_changed_handler. States progress forward and do not move backwards.
-type Nw_listener_state_t int64
+type Nw_listener_state_t int32
 
 const (
 	// @const nw_listener_state_invalid The state of the listener is not valid. This state will never be delivered in the listener's state update handler, and can be treated as an unexpected value.
@@ -1221,7 +1221,7 @@ func (e Nw_listener_state_t) String() string {
 }
 
 // @typedef nw_multipath_service_t @abstract Multipath services represent the modes of multipath usage that are allowed for connections.
-type Nw_multipath_service_t int64
+type Nw_multipath_service_t int32
 
 const (
 	// @const nw_multipath_service_disabled No multipath transport will be attempted
@@ -1250,7 +1250,7 @@ func (e Nw_multipath_service_t) String() string {
 }
 
 // @typedef nw_multipath_version_t @abstract Multipath versions represent the MPTCP standard versions
-type Nw_multipath_version_t int64
+type Nw_multipath_version_t int32
 
 const (
 	// @const nw_multipath_version_unspecified MPTCP unspecified version
@@ -1275,7 +1275,7 @@ func (e Nw_multipath_version_t) String() string {
 }
 
 // @typedef nw_parameters_expired_dns_behavior_t @abstract Expired DNS behavior defines whether or not a connection will allow the use of expired DNS answers during connection establishment.
-type Nw_parameters_expired_dns_behavior_t int64
+type Nw_parameters_expired_dns_behavior_t int32
 
 const (
 	// @const nw_parameters_expired_dns_behavior_default Let the system determine whether or not to allow expired DNS answers
@@ -1304,7 +1304,7 @@ func (e Nw_parameters_expired_dns_behavior_t) String() string {
 }
 
 // @typedef nw_path_status_t @abstract A network path status indicates if there is a usable route available upon which to send and receive data.
-type Nw_path_status_t int64
+type Nw_path_status_t int32
 
 const (
 	// @const nw_path_status_invalid The path is not valid
@@ -1333,7 +1333,7 @@ func (e Nw_path_status_t) String() string {
 }
 
 // @typedef nw_path_unsatisfied_reason_t @abstract A network path unsatisfied reason may indicate the reason the path is currently unsatisfied for some conditions.
-type Nw_path_unsatisfied_reason_t int64
+type Nw_path_unsatisfied_reason_t int32
 
 const (
 	// @const nw_path_unsatisfied_reason_not_available No reason is given
@@ -1366,7 +1366,7 @@ func (e Nw_path_unsatisfied_reason_t) String() string {
 }
 
 // @typedef nw_quic_stream_type_t @abstract Represents the type of a QUIC stream.
-type Nw_quic_stream_type_t int64
+type Nw_quic_stream_type_t int32
 
 const (
 	// @const nw_quic_stream_type_unknown 		A QUIC stream whose direction can not be determined.
@@ -1395,7 +1395,7 @@ func (e Nw_quic_stream_type_t) String() string {
 }
 
 // @typedef nw_report_resolution_protocol_t @abstract The protocol used for endpoint resolution.
-type Nw_report_resolution_protocol_t int64
+type Nw_report_resolution_protocol_t int32
 
 const (
 	// @const nw_report_resolution_protocol_unknown The protocol used is not known, or not applicable
@@ -1428,7 +1428,7 @@ func (e Nw_report_resolution_protocol_t) String() string {
 }
 
 // @typedef nw_report_resolution_source_t @abstract The source of a resolution indicates if the set of endpoints was resolved locally using a cache, or sent a query over the network.
-type Nw_report_resolution_source_t int64
+type Nw_report_resolution_source_t int32
 
 const (
 	// @const nw_report_resolution_source_query A query was sent over the network
@@ -1453,7 +1453,7 @@ func (e Nw_report_resolution_source_t) String() string {
 }
 
 // @typedef nw_service_class_t @abstract The network service class represents the network queuing priority to use for traffic generated by a connection.
-type Nw_service_class_t int64
+type Nw_service_class_t int32
 
 const (
 	// @const nw_service_class_best_effort Default priority traffic
@@ -1490,7 +1490,7 @@ func (e Nw_service_class_t) String() string {
 }
 
 // @typedef nw_txt_record_find_key_t @abstract An enumeration of possible find results when trying to find a key-value pair in the TXT record object.
-type Nw_txt_record_find_key_t int64
+type Nw_txt_record_find_key_t int32
 
 const (
 	// @const nw_txt_record_find_key_invalid The key is invalid. According to RFC 1464, a key is invalid if it is an empty string, contains non-ASCII characters, or has length greater than UINT8_MAX.
@@ -1523,7 +1523,7 @@ func (e Nw_txt_record_find_key_t) String() string {
 }
 
 // @typedef nw_ws_close_code_t @abstract WebSocket close codes that describe the reason for closing a WebSocket connection. Endpoints MAY use the following pre-defined status codes when sending a Close frame.
-type Nw_ws_close_code_t int64
+type Nw_ws_close_code_t int32
 
 const (
 	// @const nw_ws_close_code_normal_closure Indicates a normal closure, meaning that the purpose for which the connection was established has been fulfilled.
@@ -1584,7 +1584,7 @@ func (e Nw_ws_close_code_t) String() string {
 }
 
 // @typedef nw_ws_opcode_t @abstract WebSocket opcodes that denote the type of frame sent or received by a WebSocket endpoint. Opcodes define the interpretation of their associated payload data.
-type Nw_ws_opcode_t int64
+type Nw_ws_opcode_t int32
 
 const (
 	// @const nw_ws_opcode_invalid Denotes an invalid frame.
@@ -1625,7 +1625,7 @@ func (e Nw_ws_opcode_t) String() string {
 }
 
 // @typedef nw_ws_response_status_t @abstract The status of a WebSocket server's response to a client's request to connect.
-type Nw_ws_response_status_t int64
+type Nw_ws_response_status_t int32
 
 const (
 	// @const nw_ws_response_status_invalid The response is invalid. This should be treated as an unexpected value.
@@ -1650,7 +1650,7 @@ func (e Nw_ws_response_status_t) String() string {
 }
 
 // @typedef nw_ws_version_t @abstract The WebSocket Protocol version.
-type Nw_ws_version_t int64
+type Nw_ws_version_t int32
 
 const (
 	// @const nw_ws_version_invalid An invalid WebSocket version
@@ -1685,7 +1685,7 @@ func (e Os_clockid_t) String() string {
 	}
 }
 
-type Ptrauth_key int64
+type Ptrauth_key int32
 
 const (
 	Ptrauth_key_none                     Ptrauth_key = -1

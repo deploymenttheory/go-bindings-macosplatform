@@ -8,7 +8,7 @@ import (
 	"fmt"
 )
 
-type RbIOWaitReadwrite int64
+type RbIOWaitReadwrite int32
 
 const (
 	RbIOWaitReadwriteReadable RbIOWaitReadwrite = 0
@@ -28,7 +28,7 @@ func (e RbIOWaitReadwrite) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -51,7 +51,7 @@ func (e Idtype) String() string {
 	}
 }
 
-type FlType int64
+type FlType int32
 
 const (
 	FlTypeFlWbProtected FlType = 32
@@ -156,7 +156,7 @@ func (e FlType) String() string {
 	}
 }
 
-type RarrayFlags int64
+type RarrayFlags int32
 
 const (
 	RarrayFlagsEmbedLenMax   RarrayFlags = 3
@@ -188,7 +188,7 @@ func (e RarrayFlags) String() string {
 	}
 }
 
-type RmoduleFlags int64
+type RmoduleFlags int32
 
 const (
 	RmoduleFlagsIsOverlaid             RmoduleFlags = 16384
@@ -214,7 +214,7 @@ func (e RmoduleFlags) String() string {
 	}
 }
 
-type RobjectFlags int64
+type RobjectFlags int32
 
 const (
 	RobjectFlagsEmbedLenMax RobjectFlags = 3
@@ -237,7 +237,7 @@ func (e RobjectFlags) String() string {
 	}
 }
 
-type RstringFlags int64
+type RstringFlags int32
 
 const (
 	RstringFlagsNoembed       RstringFlags = 8192
@@ -269,7 +269,7 @@ func (e RstringFlags) String() string {
 	}
 }
 
-type SpecialConsts int64
+type SpecialConsts int32
 
 const (
 	RUBY_Qfalse         SpecialConsts = 0
@@ -311,7 +311,7 @@ func (e SpecialConsts) String() string {
 	}
 }
 
-type ValueType int64
+type ValueType int32
 
 const (
 	ValueTypeNone     ValueType = 0
@@ -406,7 +406,7 @@ func (e ValueType) String() string {
 	}
 }
 
-type StRetval int64
+type StRetval int32
 
 const (
 	StRetvalContinue StRetval = 0

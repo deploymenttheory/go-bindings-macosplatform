@@ -92,7 +92,7 @@
       "is_extensible": true
     },
     "AudioChannelBitmap": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioChannelBit_Left",
@@ -236,7 +236,7 @@
       "is_extensible": true
     },
     "AudioChannelCoordinateIndex": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioChannelCoordinates_LeftRight",
@@ -274,7 +274,7 @@
       "is_extensible": true
     },
     "AudioChannelFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioChannelFlags_AllOff",
@@ -303,7 +303,7 @@
       "is_extensible": true
     },
     "AudioTimeStampFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioTimeStampNothingValid",
@@ -400,7 +400,7 @@
       "is_extensible": true
     },
     "SMPTETimeFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSMPTETimeUnknown",
@@ -424,7 +424,7 @@
       "is_extensible": true
     },
     "SMPTETimeType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSMPTETimeType24",
@@ -2513,7 +2513,7 @@
       "availability": {}
     },
     "ptrauth_key": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ptrauth_key_none",

@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-type CGLCPContextPriorityRequest int64
+type CGLCPContextPriorityRequest int32
 
 const (
 	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
@@ -28,7 +28,7 @@ func (e CGLCPContextPriorityRequest) String() string {
 	}
 }
 
-type _CGLContextEnable int64
+type _CGLContextEnable int32
 
 const (
 	KCGLCESwapRectangle           _CGLContextEnable = 201
@@ -64,7 +64,7 @@ func (e _CGLContextEnable) String() string {
 	}
 }
 
-type _CGLContextParameter int64
+type _CGLContextParameter int32
 
 const (
 	KCGLCPSwapRectangle                      _CGLContextParameter = 200
@@ -137,7 +137,7 @@ func (e _CGLContextParameter) String() string {
 	}
 }
 
-type _CGLError int64
+type _CGLError int32
 
 const (
 	KCGLNoError         _CGLError = 0
@@ -206,7 +206,7 @@ func (e _CGLError) String() string {
 	}
 }
 
-type _CGLGPURestartStatus int64
+type _CGLGPURestartStatus int32
 
 const (
 	KCGLCPGPURestartStatusNone        _CGLGPURestartStatus = 0
@@ -228,7 +228,7 @@ func (e _CGLGPURestartStatus) String() string {
 	}
 }
 
-type _CGLGlobalOption int64
+type _CGLGlobalOption int32
 
 const (
 	KCGLGOFormatCacheSize  _CGLGlobalOption = 501
@@ -258,7 +258,7 @@ func (e _CGLGlobalOption) String() string {
 	}
 }
 
-type _CGLOpenGLProfile int64
+type _CGLOpenGLProfile int32
 
 const (
 	KCGLOGLPVersion_Legacy   _CGLOpenGLProfile = 4096
@@ -280,7 +280,7 @@ func (e _CGLOpenGLProfile) String() string {
 	}
 }
 
-type _CGLPixelFormatAttribute int64
+type _CGLPixelFormatAttribute int32
 
 const (
 	KCGLPFAAllRenderers                       _CGLPixelFormatAttribute = 1
@@ -415,7 +415,7 @@ func (e _CGLPixelFormatAttribute) String() string {
 	}
 }
 
-type _CGLRendererProperty int64
+type _CGLRendererProperty int32
 
 const (
 	KCGLRPOffScreen              _CGLRendererProperty = 53

@@ -9,7 +9,7 @@
   "protocols": {},
   "enums": {
     "IOLockAssertState": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kIOLockAssertOwned",
@@ -27,7 +27,7 @@
       "sdk_line": 429
     },
     "IORWLockAssertState": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kIORWLockAssertRead",
@@ -56,7 +56,7 @@
       "doc": "@enum     IORWLockAssertState @abstract Used with IORWLockAssert to assert the state of a lock."
     },
     "IOStateReporter_valueSelector": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kInTransitions",
@@ -1026,7 +1026,7 @@
       "availability": {}
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -1148,7 +1148,7 @@
       "is_extensible": true
     },
     "filesec_property_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "FILESEC_OWNER",
@@ -1196,7 +1196,7 @@
       "sdk_line": 582
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -1219,7 +1219,7 @@
       "sdk_line": 79
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",
@@ -1508,7 +1508,7 @@
       "is_extensible": true
     },
     "launch_data_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "LAUNCH_DATA_DICTIONARY",

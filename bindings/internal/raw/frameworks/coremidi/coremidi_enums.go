@@ -9,7 +9,7 @@ import (
 )
 
 // @typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -27,7 +27,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -49,7 +49,7 @@ func (e MDQueryOptionFlags) String() string {
 }
 
 // @enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order.
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -64,7 +64,7 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
-type MIDICICategoryOptions int64
+type MIDICICategoryOptions uint8
 
 const (
 	KMIDICICategoryOptionsProtocolNegotiation           MIDICICategoryOptions = 2
@@ -93,7 +93,7 @@ func (e MIDICICategoryOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MIDICIDeviceType int64
+type MIDICIDeviceType uint8
 
 const (
 	KMIDICIDeviceTypeUnknown     MIDICIDeviceType = 0
@@ -117,7 +117,7 @@ func (e MIDICIDeviceType) String() string {
 	}
 }
 
-type MIDICIManagementMessageType int64
+type MIDICIManagementMessageType uint8
 
 const (
 	KMIDICIManagementMessageTypeDiscovery                  MIDICIManagementMessageType = 112
@@ -150,7 +150,7 @@ func (e MIDICIManagementMessageType) String() string {
 	}
 }
 
-type MIDICIProcessInquiryMessageType int64
+type MIDICIProcessInquiryMessageType uint8
 
 const (
 	KMIDICIProcessInquiryMessageTypeInquiryProcessInquiryCapabilities MIDICIProcessInquiryMessageType = 64
@@ -177,7 +177,7 @@ func (e MIDICIProcessInquiryMessageType) String() string {
 	}
 }
 
-type MIDICIProfileMessageType int64
+type MIDICIProfileMessageType uint8
 
 const (
 	KMIDICIProfileMessageTypeProfileInquiry        MIDICIProfileMessageType = 32
@@ -222,7 +222,7 @@ func (e MIDICIProfileMessageType) String() string {
 	}
 }
 
-type MIDICIProfileType int64
+type MIDICIProfileType uint8
 
 const (
 	KMIDICIProfileTypeSingleChannel MIDICIProfileType = 1
@@ -246,7 +246,7 @@ func (e MIDICIProfileType) String() string {
 	}
 }
 
-type MIDICIPropertyExchangeMessageType int64
+type MIDICIPropertyExchangeMessageType uint8
 
 const (
 	KMIDICIPropertyExchangeMessageTypeInquiryPropertyExchangeCapabilities    MIDICIPropertyExchangeMessageType = 48
@@ -411,7 +411,7 @@ func (e MIDINetworkConnectionPolicy) String() string {
 	}
 }
 
-type MIDINoteAttribute int64
+type MIDINoteAttribute uint8
 
 const (
 	KMIDINoteAttributeNone                 MIDINoteAttribute = 0
@@ -436,7 +436,7 @@ func (e MIDINoteAttribute) String() string {
 }
 
 // The types of state changes the system supports.
-type MIDINotificationMessageID int64
+type MIDINotificationMessageID int32
 
 const (
 	// Some aspect of the current MIDI setup changed.
@@ -477,7 +477,7 @@ func (e MIDINotificationMessageID) String() string {
 }
 
 // The MIDI object types that the system supports.
-type MIDIObjectType int64
+type MIDIObjectType int32
 
 const (
 	// A MIDI object with an undefined type.
@@ -525,7 +525,7 @@ func (e MIDIObjectType) String() string {
 	}
 }
 
-type MIDIPerNoteManagementOptions int64
+type MIDIPerNoteManagementOptions uint8
 
 const (
 	KMIDIPerNoteManagementReset  MIDIPerNoteManagementOptions = 1
@@ -546,7 +546,7 @@ func (e MIDIPerNoteManagementOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MIDIProgramChangeOptions int64
+type MIDIProgramChangeOptions uint8
 
 const (
 	KMIDIProgramChangeBankValid MIDIProgramChangeOptions = 1
@@ -564,7 +564,7 @@ func (e MIDIProgramChangeOptions) String() string {
 }
 
 // Specifies a MIDI protocol variant.
-type MIDIProtocolID int64
+type MIDIProtocolID int32
 
 const (
 	KMIDIProtocol_1_0 MIDIProtocolID = 1
@@ -664,7 +664,7 @@ func (e MIDISystemStatus) String() string {
 }
 
 // A set of values that indicate how to interpret control numbers.
-type MIDITransformControlType int64
+type MIDITransformControlType uint8
 
 const (
 	// A 7-bit control type.
@@ -701,7 +701,7 @@ func (e MIDITransformControlType) String() string {
 }
 
 // Values that specify the type of MIDI transformation.
-type MIDITransformType int64
+type MIDITransformType uint16
 
 const (
 	// No transformation.
@@ -745,7 +745,7 @@ func (e MIDITransformType) String() string {
 	}
 }
 
-type MIDIUMPCIObjectBackingType int64
+type MIDIUMPCIObjectBackingType uint8
 
 const (
 	KMIDIUMPCIObjectBackingTypeUnknown      MIDIUMPCIObjectBackingType = 0
@@ -769,7 +769,7 @@ func (e MIDIUMPCIObjectBackingType) String() string {
 	}
 }
 
-type MIDIUMPFunctionBlockDirection int64
+type MIDIUMPFunctionBlockDirection int32
 
 const (
 	KMIDIUMPFunctionBlockDirectionUnknown       MIDIUMPFunctionBlockDirection = 0
@@ -793,7 +793,7 @@ func (e MIDIUMPFunctionBlockDirection) String() string {
 	}
 }
 
-type MIDIUMPFunctionBlockMIDI1Info int64
+type MIDIUMPFunctionBlockMIDI1Info int32
 
 const (
 	KMIDIUMPFunctionBlockMIDI1InfoNotMIDI1              MIDIUMPFunctionBlockMIDI1Info = 0
@@ -814,7 +814,7 @@ func (e MIDIUMPFunctionBlockMIDI1Info) String() string {
 	}
 }
 
-type MIDIUMPFunctionBlockUIHint int64
+type MIDIUMPFunctionBlockUIHint int32
 
 const (
 	KMIDIUMPFunctionBlockUIHintUnknown        MIDIUMPFunctionBlockUIHint = 0
@@ -838,7 +838,7 @@ func (e MIDIUMPFunctionBlockUIHint) String() string {
 	}
 }
 
-type MIDIUMPProtocolOptions int64
+type MIDIUMPProtocolOptions uint8
 
 const (
 	KMIDIUMPProtocolOptionsMIDI1 MIDIUMPProtocolOptions = 1
@@ -886,7 +886,7 @@ func (e MIDIUtilityStatus) String() string {
 	}
 }
 
-type UMPStreamMessageFormat int64
+type UMPStreamMessageFormat uint8
 
 const (
 	KUMPStreamMessageFormatComplete   UMPStreamMessageFormat = 0
@@ -958,7 +958,7 @@ func (e UMPStreamMessageStatus) String() string {
 	}
 }
 
-type Acl_entry_id_t int64
+type Acl_entry_id_t int32
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
@@ -979,7 +979,7 @@ func (e Acl_entry_id_t) String() string {
 	}
 }
 
-type Acl_flag_t int64
+type Acl_flag_t int32
 
 const (
 	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
@@ -1012,7 +1012,7 @@ func (e Acl_flag_t) String() string {
 	}
 }
 
-type Acl_perm_t int64
+type Acl_perm_t int32
 
 const (
 	ACL_READ_DATA           Acl_perm_t = 2
@@ -1070,7 +1070,7 @@ func (e Acl_perm_t) String() string {
 	}
 }
 
-type Acl_tag_t int64
+type Acl_tag_t int32
 
 const (
 	ACL_UNDEFINED_TAG  Acl_tag_t = 0
@@ -1091,7 +1091,7 @@ func (e Acl_tag_t) String() string {
 	}
 }
 
-type Acl_type_t int64
+type Acl_type_t int32
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
@@ -1124,7 +1124,7 @@ func (e Acl_type_t) String() string {
 	}
 }
 
-type Clockid_t int64
+type Clockid_t int32
 
 const (
 	_CLOCK_REALTIME             Clockid_t = 0
@@ -1218,7 +1218,7 @@ func (e Dispatch_block_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Filesec_property_t int64
+type Filesec_property_t int32
 
 const (
 	FILESEC_OWNER         Filesec_property_t = 1
@@ -1254,7 +1254,7 @@ func (e Filesec_property_t) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0
@@ -1275,7 +1275,7 @@ func (e Idtype_t) String() string {
 	}
 }
 
-type Ipc_info_object_type_t int64
+type Ipc_info_object_type_t uint32
 
 const (
 	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
@@ -1455,7 +1455,7 @@ func (e Ipc_info_object_type_t) String() string {
 	}
 }
 
-type Launch_data_type_t int64
+type Launch_data_type_t int32
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
@@ -1607,7 +1607,7 @@ func (e Os_clockid_t) String() string {
 	}
 }
 
-type Ptrauth_key int64
+type Ptrauth_key int32
 
 const (
 	Ptrauth_key_none                     Ptrauth_key = -1

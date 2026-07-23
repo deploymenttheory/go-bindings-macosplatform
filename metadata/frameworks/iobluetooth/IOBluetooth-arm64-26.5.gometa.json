@@ -6541,7 +6541,7 @@
   },
   "enums": {
     "BluetoothAMPCommandRejectReason": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothAMPManagerCommandRejectReasonCommandNotRecognized",
@@ -6554,7 +6554,7 @@
       "sdk_line": 763
     },
     "BluetoothAMPCreatePhysicalLinkResponseStatus": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothAMPManagerCreatePhysicalLinkResponseSuccess",
@@ -6597,7 +6597,7 @@
       "sdk_line": 787
     },
     "BluetoothAMPDisconnectPhysicalLinkResponseStatus": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothAMPManagerDisconnectPhysicalLinkResponseSuccess",
@@ -6620,7 +6620,7 @@
       "sdk_line": 797
     },
     "BluetoothAMPDiscoverResponseControllerStatus": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothAMPManagerDiscoverResponseControllerStatusPoweredDown",
@@ -6663,7 +6663,7 @@
       "sdk_line": 767
     },
     "BluetoothAMPGetAssocResponseStatus": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothAMPManagerGetAssocResponseSuccess",
@@ -6681,7 +6681,7 @@
       "sdk_line": 782
     },
     "BluetoothAMPGetInfoResponseStatus": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothAMPManagerGetInfoResponseSuccess",
@@ -6699,7 +6699,7 @@
       "sdk_line": 777
     },
     "BluetoothAMPManagerCode": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothAMPManagerCodeReserved",
@@ -6777,7 +6777,7 @@
       "sdk_line": 746
     },
     "BluetoothAuthenticationRequirementsValues": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothAuthenticationRequirementsMITMProtectionNotRequired",
@@ -6825,7 +6825,7 @@
       "sdk_line": 1925
     },
     "BluetoothCompanyIdentifers": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothCompanyIdentiferEricssonTechnologyLicensing",
@@ -8158,7 +8158,7 @@
       "sdk_line": 26
     },
     "BluetoothFeatureBits": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothFeatureThreeSlotPackets",
@@ -8506,7 +8506,7 @@
       "sdk_line": 1234
     },
     "BluetoothHCIAFHChannelAssessmentModes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kAFHChannelAssessmentModeDisabled",
@@ -8524,7 +8524,7 @@
       "sdk_line": 1701
     },
     "BluetoothHCIAuthentionEnableModes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kAuthenticationDisabled",
@@ -8542,7 +8542,7 @@
       "sdk_line": 1726
     },
     "BluetoothHCIConnectionModes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kConnectionActiveMode",
@@ -8575,7 +8575,7 @@
       "sdk_line": 1184
     },
     "BluetoothHCIDeleteStoredLinkKeyFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kDeleteKeyForSpecifiedDeviceOnly",
@@ -8593,7 +8593,7 @@
       "sdk_line": 1588
     },
     "BluetoothHCIEncryptionModes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kEncryptionDisabled",
@@ -8616,7 +8616,7 @@
       "sdk_line": 1733
     },
     "BluetoothHCIExtendedInquiryResponseDataTypes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothHCIExtendedInquiryResponseDataTypeFlags",
@@ -8824,7 +8824,7 @@
       "sdk_line": 804
     },
     "BluetoothHCIFECRequiredValues": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothHCIFECRequired",
@@ -8842,7 +8842,7 @@
       "sdk_line": 1819
     },
     "BluetoothHCIGeneralFlowControlStates": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kHostControllerToHostFlowControlOff",
@@ -8870,7 +8870,7 @@
       "sdk_line": 1684
     },
     "BluetoothHCIHoldModeActivityStates": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMaintainCurrentPowerState",
@@ -8898,7 +8898,7 @@
       "sdk_line": 1717
     },
     "BluetoothHCIInquiryModes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothHCIInquiryModeResultFormatStandard",
@@ -8921,7 +8921,7 @@
       "sdk_line": 1826
     },
     "BluetoothHCIInquiryScanTypes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothHCIInquiryScanTypeStandard",
@@ -8949,7 +8949,7 @@
       "sdk_line": 1834
     },
     "BluetoothHCILinkPolicySettingsValues": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kDisableAllLMModes",
@@ -8992,7 +8992,7 @@
       "sdk_line": 1391
     },
     "BluetoothHCIPageScanEnableStates": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kNoScansEnabled",
@@ -9020,7 +9020,7 @@
       "sdk_line": 1629
     },
     "BluetoothHCIPageScanModes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMandatoryPageScanMode",
@@ -9048,7 +9048,7 @@
       "sdk_line": 1612
     },
     "BluetoothHCIPageScanPeriodModes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kP0Mode",
@@ -9071,7 +9071,7 @@
       "sdk_line": 1621
     },
     "BluetoothHCIPageScanTypes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothHCIPageScanTypeStandard",
@@ -9099,7 +9099,7 @@
       "sdk_line": 199
     },
     "BluetoothHCIPowerState": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothHCIPowerStateON",
@@ -9122,7 +9122,7 @@
       "sdk_line": 2763
     },
     "BluetoothHCIReadStoredLinkKeysFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kReturnLinkKeyForSpecifiedDeviceOnly",
@@ -9140,7 +9140,7 @@
       "sdk_line": 1595
     },
     "BluetoothHCIRetransmissionEffortTypes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kHCIRetransmissionEffortTypeNone",
@@ -9168,7 +9168,7 @@
       "sdk_line": 2108
     },
     "BluetoothHCIRoles": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothHCICentralRole",
@@ -9196,7 +9196,7 @@
       "sdk_line": 1382
     },
     "BluetoothHCISCOFlowControlStates": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kSCOFlowControlDisabled",
@@ -9214,7 +9214,7 @@
       "sdk_line": 1678
     },
     "BluetoothHCISimplePairingModes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothHCISimplePairingModeNotSet",
@@ -9232,7 +9232,7 @@
       "sdk_line": 1882
     },
     "BluetoothHCITimeoutValues": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kDefaultPageTimeout",
@@ -9245,7 +9245,7 @@
       "sdk_line": 1575
     },
     "BluetoothHCITransmitReadPowerLevelTypes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kReadCurrentTransmitPowerLevel",
@@ -9263,7 +9263,7 @@
       "sdk_line": 1694
     },
     "BluetoothHCIVersions": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothHCIVersionCoreSpecification1_0b",
@@ -9336,7 +9336,7 @@
       "sdk_line": 852
     },
     "BluetoothIOCapabilities": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothCapabilityTypeDisplayOnly",
@@ -9364,7 +9364,7 @@
       "sdk_line": 1909
     },
     "BluetoothKeypressNotificationTypes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothKeypressNotificationTypePasskeyEntryStarted",
@@ -9397,7 +9397,7 @@
       "sdk_line": 1956
     },
     "BluetoothL2CAPCommandCode": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothL2CAPCommandCodeReserved",
@@ -9520,7 +9520,7 @@
       "sdk_line": 395
     },
     "BluetoothL2CAPCommandRejectReason": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothL2CAPCommandRejectReasonCommandNotUnderstood",
@@ -9543,7 +9543,7 @@
       "sdk_line": 424
     },
     "BluetoothL2CAPConfigurationOption": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothL2CAPConfigurationOptionMTU",
@@ -9586,7 +9586,7 @@
       "sdk_line": 516
     },
     "BluetoothL2CAPConfigurationResult": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothL2CAPConfigurationResultSuccess",
@@ -9614,7 +9614,7 @@
       "sdk_line": 508
     },
     "BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothL2CAPConfigurationBasicL2CAPModeFlag",
@@ -9647,7 +9647,7 @@
       "sdk_line": 535
     },
     "BluetoothL2CAPConnectionResult": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothL2CAPConnectionResultSuccessful",
@@ -9695,7 +9695,7 @@
       "sdk_line": 489
     },
     "BluetoothL2CAPConnectionStatus": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothL2CAPConnectionStatusNoInfoAvailable",
@@ -9718,7 +9718,7 @@
       "sdk_line": 501
     },
     "BluetoothL2CAPInformationExtendedFeaturesMask": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothL2CAPInformationNoExtendedFeatures",
@@ -9781,7 +9781,7 @@
       "sdk_line": 558
     },
     "BluetoothL2CAPInformationResult": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothL2CAPInformationResultSuccess",
@@ -9799,7 +9799,7 @@
       "sdk_line": 552
     },
     "BluetoothL2CAPInformationType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothL2CAPInformationTypeConnectionlessMTU",
@@ -9822,7 +9822,7 @@
       "sdk_line": 545
     },
     "BluetoothL2CAPQoSType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothL2CAPQoSTypeNoTraffic",
@@ -9845,7 +9845,7 @@
       "sdk_line": 573
     },
     "BluetoothL2CAPSegmentationAndReassembly": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothL2CAPSegmentationAndReassemblyUnsegmentedSDU",
@@ -9873,7 +9873,7 @@
       "sdk_line": 466
     },
     "BluetoothL2CAPSupervisoryFuctionType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothL2CAPSupervisoryFuctionTypeReceiverReady",
@@ -9901,7 +9901,7 @@
       "sdk_line": 580
     },
     "BluetoothLEAddressType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "BluetoothLEAddressTypePublic",
@@ -9919,7 +9919,7 @@
       "sdk_line": 2953
     },
     "BluetoothLEAdvertisingType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "BluetoothLEAdvertisingTypeConnectableUndirected",
@@ -9952,7 +9952,7 @@
       "sdk_line": 2979
     },
     "BluetoothLEConnectionInterval": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "BluetoothLEConnectionIntervalMin",
@@ -9970,7 +9970,7 @@
       "sdk_line": 2969
     },
     "BluetoothLEFeatureBits": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothLEFeatureLEEncryption",
@@ -10023,7 +10023,7 @@
       "sdk_line": 1219
     },
     "BluetoothLEScan": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "BluetoothLEScanDisable",
@@ -10041,7 +10041,7 @@
       "sdk_line": 2964
     },
     "BluetoothLEScanDuplicateFilter": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "BluetoothLEScanDuplicateFilterDisable",
@@ -10059,7 +10059,7 @@
       "sdk_line": 2974
     },
     "BluetoothLEScanFilter": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "BluetoothLEScanFilterNone",
@@ -10082,7 +10082,7 @@
       "sdk_line": 2958
     },
     "BluetoothLEScanType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "BluetoothLEScanTypePassive",
@@ -10100,7 +10100,7 @@
       "sdk_line": 2948
     },
     "BluetoothLESecurityManagerCommandCode": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothLESecurityManagerCommandCodeReserved",
@@ -10193,7 +10193,7 @@
       "sdk_line": 641
     },
     "BluetoothLESecurityManagerIOCapability": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothLESecurityManagerIOCapabilityDisplayOnly",
@@ -10236,7 +10236,7 @@
       "sdk_line": 677
     },
     "BluetoothLESecurityManagerKeyDistributionFormat": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothLESecurityManagerEncryptionKey",
@@ -10264,7 +10264,7 @@
       "sdk_line": 633
     },
     "BluetoothLESecurityManagerKeypressNotificationType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothLESecurityManagerNotificationTypePasskeyEntryStarted",
@@ -10307,7 +10307,7 @@
       "sdk_line": 730
     },
     "BluetoothLESecurityManagerOOBData": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothLESecurityManagerOOBAuthenticationDataNotPresent",
@@ -10335,7 +10335,7 @@
       "sdk_line": 690
     },
     "BluetoothLESecurityManagerPairingFailedReasonCode": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothLESecurityManagerReasonCodeReserved",
@@ -10428,7 +10428,7 @@
       "sdk_line": 708
     },
     "BluetoothLESecurityManagerUserInputCapability": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothLESecurityManagerUserInputCapabilityNoInput",
@@ -10451,7 +10451,7 @@
       "sdk_line": 664
     },
     "BluetoothLESecurityManagerUserOutputCapability": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothLESecurityManagerUserOutputCapabilityNoOutput",
@@ -10469,7 +10469,7 @@
       "sdk_line": 671
     },
     "BluetoothLMPVersions": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothLMPVersionCoreSpecification1_0b",
@@ -10537,7 +10537,7 @@
       "sdk_line": 873
     },
     "BluetoothLinkTypes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothSCOConnection",
@@ -10565,7 +10565,7 @@
       "sdk_line": 2031
     },
     "BluetoothOOBDataPresenceValues": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothOOBAuthenticationDataNotPresent",
@@ -10583,7 +10583,7 @@
       "sdk_line": 1918
     },
     "BluetoothRFCOMMLineStatus": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "BluetoothRFCOMMLineStatusNoError",
@@ -10611,7 +10611,7 @@
       "sdk_line": 2864
     },
     "BluetoothRFCOMMParityType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothRFCOMMParityTypeNoParity",
@@ -10639,7 +10639,7 @@
       "sdk_line": 2856
     },
     "BluetoothSimplePairingDebugModes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothHCISimplePairingDebugModeDisabled",
@@ -10657,7 +10657,7 @@
       "sdk_line": 1889
     },
     "BluetoothTransportTypes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothTransportTypeUSB",
@@ -10690,7 +10690,7 @@
       "sdk_line": 1765
     },
     "FTSFileType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kFTSFileTypeFolder",
@@ -10709,7 +10709,7 @@
       "doc": "@enum\t\t\tFTSFileType @discussion\tThe type values associated with the kFTSListingTypeKey dictionary value @constant\t\tkFTSFileTypeFolder Folder @constant\t\tkFTSFileTypeFile File"
     },
     "IOBluetoothDeviceSearchOptionsBits": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kSearchOptionsNone",
@@ -10732,7 +10732,7 @@
       "sdk_line": 86
     },
     "IOBluetoothDeviceSearchTypesBits": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kIOBluetoothDeviceSearchClassic",
@@ -10988,7 +10988,7 @@
       "is_extensible": true
     },
     "IOBluetoothL2CAPChannelEventType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kIOBluetoothL2CAPChannelEventTypeData",
@@ -11044,7 +11044,7 @@
       "is_extensible": true
     },
     "IOBluetoothUserNotificationChannelDirection": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kIOBluetoothUserNotificationChannelDirectionAny",
@@ -11067,7 +11067,7 @@
       "sdk_line": 178
     },
     "MDLabelDomain": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDLabelUserDomain",
@@ -11086,7 +11086,7 @@
       "doc": "@typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate()."
     },
     "MDQueryOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQuerySynchronous",
@@ -11109,7 +11109,7 @@
       "sdk_line": 83
     },
     "MDQuerySortOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQueryReverseSortOrderFlag",
@@ -11123,7 +11123,7 @@
       "doc": "@enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order."
     },
     "OBEXConnectFlagValues": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kOBEXConnectFlagNone",
@@ -11176,7 +11176,7 @@
       "sdk_line": 344
     },
     "OBEXErrorCodes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kOBEXErrorRangeMin",
@@ -11319,7 +11319,7 @@
       "sdk_line": 55
     },
     "OBEXHeaderIdentifiers": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kOBEXHeaderIDName",
@@ -11457,7 +11457,7 @@
       "sdk_line": 156
     },
     "OBEXNonceFlagValues": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kOBEXNonceFlagNone",
@@ -11510,7 +11510,7 @@
       "sdk_line": 400
     },
     "OBEXOpCodeCommandValues": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kOBEXOpCodeReserved",
@@ -11588,7 +11588,7 @@
       "sdk_line": 308
     },
     "OBEXOpCodeResponseValues": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kOBEXResponseCodeReservedRangeStart",
@@ -11986,7 +11986,7 @@
       "sdk_line": 208
     },
     "OBEXOpCodeSessionValues": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kOBEXOpCodeCreateSession",
@@ -12019,7 +12019,7 @@
       "sdk_line": 457
     },
     "OBEXPutFlagValues": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kOBEXPutFlagNone",
@@ -12072,7 +12072,7 @@
       "sdk_line": 372
     },
     "OBEXRealmValues": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kOBEXRealmASCII",
@@ -12135,7 +12135,7 @@
       "sdk_line": 429
     },
     "OBEXSessionEventTypes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kOBEXSessionEventTypeConnectCommandResponseReceived",
@@ -12208,7 +12208,7 @@
       "sdk_line": 747
     },
     "OBEXSessionParameterTags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kOBEXSessionParameterTagDeviceAddress",
@@ -12246,7 +12246,7 @@
       "sdk_line": 481
     },
     "OBEXTransportEventTypes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kOBEXTransportEventTypeDataReceived",
@@ -12264,7 +12264,7 @@
       "sdk_line": 549
     },
     "OBEXVersions": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kOBEXVersion10",
@@ -12277,7 +12277,7 @@
       "sdk_line": 505
     },
     "ProtocolParameters": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothSDPProtocolParameterL2CAPPSM",
@@ -12315,7 +12315,7 @@
       "sdk_line": 792
     },
     "SDPAttributeDeviceIdentificationRecord": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothSDPAttributeDeviceIdentifierServiceDescription",
@@ -12378,7 +12378,7 @@
       "sdk_line": 775
     },
     "SDPAttributeIdentifierCodes": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothSDPAttributeIdentifierServiceRecordHandle",
@@ -12681,7 +12681,7 @@
       "sdk_line": 702
     },
     "SDPServiceClasses": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kBluetoothSDPUUID16ServiceClassServiceDiscoveryServer",
@@ -18987,7 +18987,7 @@
       "availability": {}
     },
     "acl_entry_id_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FIRST_ENTRY",
@@ -19010,7 +19010,7 @@
       "sdk_line": 118
     },
     "acl_flag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FLAG_DEFER_INHERIT",
@@ -19053,7 +19053,7 @@
       "sdk_line": 125
     },
     "acl_perm_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_READ_DATA",
@@ -19151,7 +19151,7 @@
       "sdk_line": 72
     },
     "acl_tag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_UNDEFINED_TAG",
@@ -19174,7 +19174,7 @@
       "sdk_line": 94
     },
     "acl_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_TYPE_EXTENDED",
@@ -19217,7 +19217,7 @@
       "sdk_line": 101
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -19339,7 +19339,7 @@
       "is_extensible": true
     },
     "filesec_property_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "FILESEC_OWNER",
@@ -19387,7 +19387,7 @@
       "sdk_line": 582
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -19410,7 +19410,7 @@
       "sdk_line": 79
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",
@@ -19699,7 +19699,7 @@
       "is_extensible": true
     },
     "launch_data_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "LAUNCH_DATA_DICTIONARY",
@@ -19878,7 +19878,7 @@
       "sdk_line": 188
     },
     "ptrauth_key": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ptrauth_key_none",

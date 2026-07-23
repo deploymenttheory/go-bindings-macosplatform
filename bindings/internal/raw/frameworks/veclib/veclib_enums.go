@@ -1221,7 +1221,7 @@ func (e BNNSTargetSystem) String() string {
 	}
 }
 
-type CBLAS_DIAG int64
+type CBLAS_DIAG int32
 
 const (
 	CblasNonUnit CBLAS_DIAG = 131
@@ -1239,7 +1239,7 @@ func (e CBLAS_DIAG) String() string {
 	}
 }
 
-type CBLAS_ORDER int64
+type CBLAS_ORDER int32
 
 const (
 	CblasRowMajor CBLAS_ORDER = 101
@@ -1257,7 +1257,7 @@ func (e CBLAS_ORDER) String() string {
 	}
 }
 
-type CBLAS_SIDE int64
+type CBLAS_SIDE int32
 
 const (
 	CblasLeft  CBLAS_SIDE = 141
@@ -1275,7 +1275,7 @@ func (e CBLAS_SIDE) String() string {
 	}
 }
 
-type CBLAS_TRANSPOSE int64
+type CBLAS_TRANSPOSE int32
 
 const (
 	CblasNoTrans   CBLAS_TRANSPOSE = 111
@@ -1299,7 +1299,7 @@ func (e CBLAS_TRANSPOSE) String() string {
 	}
 }
 
-type CBLAS_UPLO int64
+type CBLAS_UPLO int32
 
 const (
 	CblasUpper CBLAS_UPLO = 121
@@ -1317,7 +1317,7 @@ func (e CBLAS_UPLO) String() string {
 	}
 }
 
-type EvCmd int64
+type EvCmd int32
 
 const (
 	EVNOP   EvCmd = 0
@@ -1345,7 +1345,7 @@ func (e EvCmd) String() string {
 }
 
 // @typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -1363,7 +1363,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -1385,7 +1385,7 @@ func (e MDQueryOptionFlags) String() string {
 }
 
 // @enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order.
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -1400,7 +1400,7 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
-type NXMouseButton int64
+type NXMouseButton int32
 
 const (
 	NX_OneButton   NXMouseButton = 0
@@ -1421,7 +1421,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
-type PMPageToPaperMappingType int64
+type PMPageToPaperMappingType int32
 
 const (
 	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
@@ -1805,7 +1805,7 @@ func (e _SparseIterativeMethod_t) String() string {
 	}
 }
 
-type Acl_entry_id_t int64
+type Acl_entry_id_t int32
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
@@ -1826,7 +1826,7 @@ func (e Acl_entry_id_t) String() string {
 	}
 }
 
-type Acl_flag_t int64
+type Acl_flag_t int32
 
 const (
 	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
@@ -1859,7 +1859,7 @@ func (e Acl_flag_t) String() string {
 	}
 }
 
-type Acl_perm_t int64
+type Acl_perm_t int32
 
 const (
 	ACL_READ_DATA           Acl_perm_t = 2
@@ -1917,7 +1917,7 @@ func (e Acl_perm_t) String() string {
 	}
 }
 
-type Acl_tag_t int64
+type Acl_tag_t int32
 
 const (
 	ACL_UNDEFINED_TAG  Acl_tag_t = 0
@@ -1938,7 +1938,7 @@ func (e Acl_tag_t) String() string {
 	}
 }
 
-type Acl_type_t int64
+type Acl_type_t int32
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
@@ -1971,7 +1971,7 @@ func (e Acl_type_t) String() string {
 	}
 }
 
-type Clockid_t int64
+type Clockid_t int32
 
 const (
 	_CLOCK_REALTIME             Clockid_t = 0
@@ -2065,7 +2065,7 @@ func (e Dispatch_block_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Filesec_property_t int64
+type Filesec_property_t int32
 
 const (
 	FILESEC_OWNER         Filesec_property_t = 1
@@ -2101,7 +2101,7 @@ func (e Filesec_property_t) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0
@@ -2122,7 +2122,7 @@ func (e Idtype_t) String() string {
 	}
 }
 
-type Ipc_info_object_type_t int64
+type Ipc_info_object_type_t uint32
 
 const (
 	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
@@ -2302,7 +2302,7 @@ func (e Ipc_info_object_type_t) String() string {
 	}
 }
 
-type Launch_data_type_t int64
+type Launch_data_type_t int32
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
@@ -2481,7 +2481,7 @@ func (e Os_log_type_t) String() string {
 	}
 }
 
-type Ptrauth_key int64
+type Ptrauth_key int32
 
 const (
 	Ptrauth_key_none                     Ptrauth_key = -1
@@ -2555,7 +2555,7 @@ func (e Qos_class_t) String() string {
 }
 
 // @enum quadrature_integrator @abstract Integrators @constant QUADRATURE_INTEGRATE_QNG Simple non-adaptive automatic integrator using Gauss-Kronrod-Patterson quadrature coefficients. Evaluates 21, or 43, or 87 points in the interval until the requested accuracy is reached. No workspace is necessary for this integrator. @constant QUADRATURE_INTEGRATE_QAG Simple globally adaptive integrator. Allows selection of the number of Gauss-Kronrod points used in each subinterval, and the max number of subintervals. @constant QUADRATURE_INTEGRATE_QAGS Global adaptive quadrature based on 21-point or 15-point (if at least one bound is infinite) Gauss–Kronrod quadrature within each subinterval, with acceleration by Peter Wynn's epsilon algorithm. If at least one of the interval bounds is infinite, this is equivalent to the QUADPACK QAGI routine. Otherwise, this is equivalent to the QUADPACK QAGS routine.
-type Quadrature_integrator int64
+type Quadrature_integrator int32
 
 const (
 	QUADRATURE_INTEGRATE_QNG  Quadrature_integrator = 0
@@ -2577,7 +2577,7 @@ func (e Quadrature_integrator) String() string {
 }
 
 // @enum quadrature_status @abstract Quadrature return status @discussion Success is 0, and errors have a negative value. @constant QUADRATURE_SUCCESS Success. @constant QUADRATURE_ERROR Generic error. @constant QUADRATURE_INVALID_ARG_ERROR Invalid argument. @constant QUADRATURE_ALLOC_ERROR Memory allocation failed. @constant QUADRATURE_INTERNAL_ERROR This is a bug in the Quadrature code, please file a bug report. @constant QUADRATURE_INTEGRATE_MAX_EVAL_ERROR The requested accuracy limit could not be reached with the allowed number of evals/subdivisions. @constant QUADRATURE_INTEGRATE_BAD_BEHAVIOUR_ERROR Extremely bad integrand behaviour, or excessive roundoff error occurs at some points of the integration interval.
-type Quadrature_status int64
+type Quadrature_status int32
 
 const (
 	QUADRATURE_SUCCESS                       Quadrature_status = 0
@@ -2611,7 +2611,7 @@ func (e Quadrature_status) String() string {
 }
 
 // @abstract The matrix property type
-type Sparse_matrix_property int64
+type Sparse_matrix_property int32
 
 const (
 	SPARSE_UPPER_TRIANGULAR Sparse_matrix_property = 1
@@ -2636,7 +2636,7 @@ func (e Sparse_matrix_property) String() string {
 }
 
 // @abstract The norm specifier @constant SPARSE_NORM_ONE Matrix element wise: sum over i,j ( | A[i,j] | ) Matrix operator    : max over j ( sum over i ( | A[i,j] | ) Vector element wise: sum over i ( | x[i] | ) @constant SPARSE_NORM_TWO Matrix element wise: sqrt( sum over i,j (A[i,j])^2 ) Matrix operator    : Largest singular value of matrix, note that the operator SPARSE_NORM_TWO is significantly more expensive than other norm operations. Vector element wise: sqrt( sum over i (x[i])^2 ) @constant SPARSE_NORM_INF Matrix element wise: max over i,j ( | A[i,j] | ) Matrix operator    : max over i ( sum over j ( | A[i,j] | ) Vector element wise: max over i ( | x[i] | ) @constant SPARSE_NORM_R1 Matrix element wise: sum over j ( sqrt ( sum over i ( A[i,j]^2 ) ) ) Matrix operator    : Not supported. Undefined Vector element wise: Not supported. Undefined
-type Sparse_norm int64
+type Sparse_norm int32
 
 const (
 	SPARSE_NORM_ONE Sparse_norm = 171
@@ -2661,7 +2661,7 @@ func (e Sparse_norm) String() string {
 }
 
 // @abstract The type reflecting the status of an operations. @constant SPARSE_SUCCESS Operation was a success @constant SPARSE_ILLEGAL_PARAMETER Operation was not completed because one or more of the arguments had an illegal value. @constant SPARSE_CANNOT_SET_PROPERTY Matrix properties can only be set before any values are inserted into the matrix.  This error occurs if that order is not repsected. @constant SPARSE_SYSTEM_ERROR An internal error has occured, such as non enough memory.
-type Sparse_status int64
+type Sparse_status int32
 
 const (
 	SPARSE_SUCCESS             Sparse_status = 0
@@ -2743,7 +2743,7 @@ func (e VDSP_DFT_RealtoComplex) String() string {
 }
 
 // @typedef    vImageARGBType @abstract   An encoding of an image format type to be used with RGB <-> Y'CbCr conversions in vImage/Conversions.h @discussion These formats enumerate different vImage ARGB pixel formats.
-type VImageARGBType int64
+type VImageARGBType int32
 
 const (
 	KvImageARGB8888  VImageARGBType = 0
@@ -2764,7 +2764,7 @@ func (e VImageARGBType) String() string {
 	}
 }
 
-type VImageMDTableUsageHint int64
+type VImageMDTableUsageHint int32
 
 const (
 	KvImageMDTableHint_16Q12 VImageMDTableUsageHint = 1
@@ -2783,7 +2783,7 @@ func (e VImageMDTableUsageHint) String() string {
 }
 
 // @typedef    vImageYpCbCrType @abstract   An encoding of an image format type to be used with RGB <-> Y'CbCr conversions in vImage/Conversions.h @discussion These formats enumerate different vImage/CoreVideo Y'CbCr pixel formats. @seealso    CVPixelBuffer OSTypes in CVPixelBuffer.h
-type VImageYpCbCrType int64
+type VImageYpCbCrType int32
 
 const (
 	KvImage422CbYpCrYp8                  VImageYpCbCrType = 0
@@ -2831,7 +2831,7 @@ func (e VImageYpCbCrType) String() string {
 	}
 }
 
-type VImage_InterpolationMethod int64
+type VImage_InterpolationMethod int32
 
 const (
 	KvImageNoInterpolation   VImage_InterpolationMethod = 0

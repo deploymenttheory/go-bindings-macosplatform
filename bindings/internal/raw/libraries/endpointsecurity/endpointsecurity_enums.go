@@ -10,7 +10,7 @@ import (
 )
 
 // [acl.h:118]
-type AclEntryIdT int64
+type AclEntryIdT int32
 
 const (
 	ACL_FIRST_ENTRY AclEntryIdT = 0
@@ -59,7 +59,7 @@ func (i AclEntryIdT) isMultiValue() bool {
 }
 
 // [acl.h:125]
-type AclFlagT int64
+type AclFlagT int32
 
 const (
 	ACL_FLAG_DEFER_INHERIT      AclFlagT = 1
@@ -128,7 +128,7 @@ func (i AclFlagT) isMultiValue() bool {
 }
 
 // [acl.h:72]
-type AclPermT int64
+type AclPermT int32
 
 const (
 	ACL_READ_DATA           AclPermT = 2
@@ -244,7 +244,7 @@ func (i AclPermT) isMultiValue() bool {
 }
 
 // [acl.h:94]
-type AclTagT int64
+type AclTagT int32
 
 const (
 	ACL_UNDEFINED_TAG  AclTagT = 0
@@ -293,7 +293,7 @@ func (i AclTagT) isMultiValue() bool {
 }
 
 // [acl.h:101]
-type AclTypeT int64
+type AclTypeT int32
 
 const (
 	ACL_TYPE_EXTENDED AclTypeT = 256
@@ -362,7 +362,7 @@ func (i AclTypeT) isMultiValue() bool {
 }
 
 // [_time.h:156]
-type ClockidT int64
+type ClockidT int32
 
 const (
 	_CLOCK_REALTIME             ClockidT = 0
@@ -499,7 +499,7 @@ func (i CryptexAuthTypeT) isMultiValue() bool {
 
 // The type of the message’s action.
 // [ESTypes.h:15]
-type EsActionTypeT int64
+type EsActionTypeT int32
 
 const (
 	ES_ACTION_TYPE_AUTH   EsActionTypeT = 0
@@ -543,7 +543,7 @@ func (i EsActionTypeT) isMultiValue() bool {
 }
 
 // [ESTypes.h:491]
-type EsAddressTypeT int64
+type EsAddressTypeT int32
 
 const (
 	// No source address available.
@@ -602,7 +602,7 @@ func (i EsAddressTypeT) isMultiValue() bool {
 
 // Values used when responding to an authorization event.
 // [ESTypes.h:299]
-type EsAuthResultT int64
+type EsAuthResultT int32
 
 const (
 	// The event is authorized and should be allowed to continue
@@ -649,7 +649,7 @@ func (i EsAuthResultT) isMultiValue() bool {
 
 // @brief This enum describes the types of authentications that ES_EVENT_TYPE_NOTIFY_AUTHENTICATION can describe.
 // [ESTypes.h:64]
-type EsAuthenticationTypeT int64
+type EsAuthenticationTypeT int32
 
 const (
 	ES_AUTHENTICATION_TYPE_OD          EsAuthenticationTypeT = 0
@@ -708,7 +708,7 @@ func (i EsAuthenticationTypeT) isMultiValue() bool {
 }
 
 // [ESTypes.h:521]
-type EsAuthorizationRuleClassT int64
+type EsAuthorizationRuleClassT int32
 
 const (
 	// Right is judged on user properties
@@ -785,7 +785,7 @@ func (i EsAuthorizationRuleClassT) isMultiValue() bool {
 
 // es_auto_unlock_type_t See es_event_authentication_auto_unlock_t
 // [ESTypes.h:680]
-type EsAutoUnlockTypeT int64
+type EsAutoUnlockTypeT int32
 
 const (
 	// Unlock the machine using Apple Watch.
@@ -832,7 +832,7 @@ func (i EsAutoUnlockTypeT) isMultiValue() bool {
 
 // es_btm_item_type_t See es_btm_launch_item_t
 // [ESTypes.h:692]
-type EsBtmItemTypeT int64
+type EsBtmItemTypeT int32
 
 const (
 	ES_BTM_ITEM_TYPE_USER_ITEM  EsBtmItemTypeT = 0
@@ -892,7 +892,7 @@ func (i EsBtmItemTypeT) isMultiValue() bool {
 
 // Values that indicate the result of clearing a cache.
 // [ESTypes.h:364]
-type EsClearCacheResultT int64
+type EsClearCacheResultT int32
 
 const (
 	ES_CLEAR_CACHE_RESULT_SUCCESS EsClearCacheResultT = 0
@@ -944,7 +944,7 @@ func (i EsClearCacheResultT) isMultiValue() bool {
 
 // es_cs_validation_category
 // [ESTypes.h:661]
-type EsCsValidationCategoryT int64
+type EsCsValidationCategoryT int32
 
 const (
 	ES_CS_VALIDATION_CATEGORY_INVALID       EsCsValidationCategoryT = 0
@@ -1034,7 +1034,7 @@ func (i EsCsValidationCategoryT) isMultiValue() bool {
 
 // A type that indicates how a file event presents its destination to the client.
 // [ESTypes.h:705]
-type EsDestinationTypeT int64
+type EsDestinationTypeT int32
 
 const (
 	ES_DESTINATION_TYPE_EXISTING_FILE EsDestinationTypeT = 0
@@ -1079,7 +1079,7 @@ func (i EsDestinationTypeT) isMultiValue() bool {
 
 // A type used to identify a message’s event type and subscribe to events of that type.
 // [ESTypes.h:99]
-type EsEventTypeT int64
+type EsEventTypeT int32
 
 const (
 	ES_EVENT_TYPE_AUTH_EXEC                        EsEventTypeT = 0
@@ -1903,7 +1903,7 @@ func (i EsEventTypeT) isMultiValue() bool {
 }
 
 // [ESTypes.h:568]
-type EsGatekeeperUserOverrideFileTypeT int64
+type EsGatekeeperUserOverrideFileTypeT int32
 
 const (
 	// Signals that file is a string of a path since file could not be resolved on disk at time of event submission
@@ -1950,7 +1950,7 @@ func (i EsGatekeeperUserOverrideFileTypeT) isMultiValue() bool {
 
 // es_get_task_type_t See es_event_get_task_t
 // [ESTypes.h:715]
-type EsGetTaskTypeT int64
+type EsGetTaskTypeT int32
 
 const (
 	ES_GET_TASK_TYPE_TASK_FOR_PID   EsGetTaskTypeT = 0
@@ -2000,7 +2000,7 @@ func (i EsGetTaskTypeT) isMultiValue() bool {
 
 // es_mount_disposition_t See es_event_mount_t
 // [ESTypes.h:753]
-type EsMountDispositionT int64
+type EsMountDispositionT int32
 
 const (
 	ES_MOUNT_DISPOSITION_EXTERNAL EsMountDispositionT = 0
@@ -2064,7 +2064,7 @@ func (i EsMountDispositionT) isMultiValue() bool {
 }
 
 // [ESTypes.h:502]
-type EsMuteInversionTypeT int64
+type EsMuteInversionTypeT int32
 
 const (
 	ES_MUTE_INVERSION_TYPE_PROCESS     EsMuteInversionTypeT = 0
@@ -2119,7 +2119,7 @@ func (i EsMuteInversionTypeT) isMultiValue() bool {
 
 // [ESTypes.h:509]
 // Introduced: macOS 13.0
-type EsMuteInvertedReturnT int64
+type EsMuteInvertedReturnT int32
 
 const (
 	// The type of muted queried was inverted
@@ -2173,7 +2173,7 @@ func (i EsMuteInvertedReturnT) isMultiValue() bool {
 
 // The type of a path argument, such as a prefix or a path literal.
 // [ESTypes.h:415]
-type EsMutePathTypeT int64
+type EsMutePathTypeT int32
 
 const (
 	// Value to describe a prefix for the path to the instigating program eg `/bin` would match `/bin/ls` and `/bin/sleep` This is a type of *program* muting. It could match multiple proccesses
@@ -2234,7 +2234,7 @@ func (i EsMutePathTypeT) isMultiValue() bool {
 
 // The result of an attempt to create a new client.
 // [ESTypes.h:345]
-type EsNewClientResultT int64
+type EsNewClientResultT int32
 
 const (
 	ES_NEW_CLIENT_RESULT_SUCCESS EsNewClientResultT = 0
@@ -2309,7 +2309,7 @@ func (i EsNewClientResultT) isMultiValue() bool {
 }
 
 // [ESTypes.h:554]
-type EsOdAccountTypeT int64
+type EsOdAccountTypeT int32
 
 const (
 	ES_OD_ACCOUNT_TYPE_USER     EsOdAccountTypeT = 0
@@ -2353,7 +2353,7 @@ func (i EsOdAccountTypeT) isMultiValue() bool {
 }
 
 // [ESTypes.h:542]
-type EsOdMemberTypeT int64
+type EsOdMemberTypeT int32
 
 const (
 	// Group member is a user, designated by name
@@ -2405,7 +2405,7 @@ func (i EsOdMemberTypeT) isMultiValue() bool {
 }
 
 // [ESTypes.h:562]
-type EsOdRecordTypeT int64
+type EsOdRecordTypeT int32
 
 const (
 	ES_OD_RECORD_TYPE_USER  EsOdRecordTypeT = 0
@@ -2450,7 +2450,7 @@ func (i EsOdRecordTypeT) isMultiValue() bool {
 
 // es_openssh_login_result_type_t See es_event_openssh_login_t
 // [ESTypes.h:735]
-type EsOpensshLoginResultTypeT int64
+type EsOpensshLoginResultTypeT int32
 
 const (
 	ES_OPENSSH_LOGIN_EXCEED_MAXTRIES EsOpensshLoginResultTypeT = 0
@@ -2535,7 +2535,7 @@ func (i EsOpensshLoginResultTypeT) isMultiValue() bool {
 
 // The type of call used when a process checks on the access of the target process.
 // [ESTypes.h:33]
-type EsProcCheckTypeT int64
+type EsProcCheckTypeT int32
 
 const (
 	ES_PROC_CHECK_TYPE_LISTPIDS        EsProcCheckTypeT = 1
@@ -2620,7 +2620,7 @@ func (i EsProcCheckTypeT) isMultiValue() bool {
 
 // The type of a process suspension or resumption event.
 // [ESTypes.h:765]
-type EsProcSuspendResumeTypeT int64
+type EsProcSuspendResumeTypeT int32
 
 const (
 	ES_PROC_SUSPEND_RESUME_TYPE_SUSPEND          EsProcSuspendResumeTypeT = 0
@@ -2670,7 +2670,7 @@ func (i EsProcSuspendResumeTypeT) isMultiValue() bool {
 
 // es_profile_source_t See es_profile_t
 // [ESTypes.h:776]
-type EsProfileSourceT int64
+type EsProfileSourceT int32
 
 const (
 	ES_PROFILE_SOURCE_MANAGED EsProfileSourceT = 0
@@ -2715,7 +2715,7 @@ func (i EsProfileSourceT) isMultiValue() bool {
 
 // Values that indicate the result of responding to a message.
 // [ESTypes.h:327]
-type EsRespondResultT int64
+type EsRespondResultT int32
 
 const (
 	ES_RESPOND_RESULT_SUCCESS EsRespondResultT = 0
@@ -2785,7 +2785,7 @@ func (i EsRespondResultT) isMultiValue() bool {
 
 // A type that indicates the type of a message’s result.
 // [ESTypes.h:309]
-type EsResultTypeT int64
+type EsResultTypeT int32
 
 const (
 	// The result is an auth result
@@ -2832,7 +2832,7 @@ func (i EsResultTypeT) isMultiValue() bool {
 
 // Values that indicate the result of an Endpoint Security action that can only succeed or fail.
 // [ESTypes.h:319]
-type EsReturnT int64
+type EsReturnT int32
 
 const (
 	ES_RETURN_SUCCESS EsReturnT = 0
@@ -2877,7 +2877,7 @@ func (i EsReturnT) isMultiValue() bool {
 
 // A type that indicates whether an event represents setting or clearing a file’s access control list.
 // [ESTypes.h:20]
-type EsSetOrClearT int64
+type EsSetOrClearT int32
 
 const (
 	ES_SET   EsSetOrClearT = 0
@@ -2922,7 +2922,7 @@ func (i EsSetOrClearT) isMultiValue() bool {
 
 // @brief This enum describes the type of plugin types in sudo
 // [ESTypes.h:78]
-type EsSudoPluginTypeT int64
+type EsSudoPluginTypeT int32
 
 const (
 	ES_SUDO_PLUGIN_TYPE_UNKNOWN   EsSudoPluginTypeT = 0
@@ -2987,7 +2987,7 @@ func (i EsSudoPluginTypeT) isMultiValue() bool {
 
 // ess_tcc_authorization_reason_t
 // [ESTypes.h:627]
-type EsTccAuthorizationReasonT int64
+type EsTccAuthorizationReasonT int32
 
 const (
 	ES_TCC_AUTHORIZATION_REASON_NONE                    EsTccAuthorizationReasonT = 0
@@ -3092,7 +3092,7 @@ func (i EsTccAuthorizationReasonT) isMultiValue() bool {
 
 // ess_tcc_authorization_right_t
 // [ESTypes.h:612]
-type EsTccAuthorizationRightT int64
+type EsTccAuthorizationRightT int32
 
 const (
 	ES_TCC_AUTHORIZATION_RIGHT_DENIED           EsTccAuthorizationRightT = 0
@@ -3162,7 +3162,7 @@ func (i EsTccAuthorizationRightT) isMultiValue() bool {
 
 // @typedef ess_tcc_event_type_t Represent the type of TCC modification event. - ES_TCC_EVENT_TYPE_UNKNOWN: Unknown prior state. - ES_TCC_EVENT_TYPE_CREATE: A new TCC authorization record was created. - ES_TCC_EVENT_TYPE_MODIFY: An existing TCC authorization record was modified. - ES_TCC_EVENT_TYPE_DELETE: An existing TCC authorization record was deleted.
 // [ESTypes.h:600]
-type EsTccEventTypeT int64
+type EsTccEventTypeT int32
 
 const (
 	ES_TCC_EVENT_TYPE_UNKNOWN EsTccEventTypeT = 0
@@ -3217,7 +3217,7 @@ func (i EsTccEventTypeT) isMultiValue() bool {
 
 // es_tcc_identity_type_t
 // [ESTypes.h:649]
-type EsTccIdentityTypeT int64
+type EsTccIdentityTypeT int32
 
 const (
 	ES_TCC_IDENTITY_TYPE_BUNDLE_ID               EsTccIdentityTypeT = 0
@@ -3272,7 +3272,7 @@ func (i EsTccIdentityTypeT) isMultiValue() bool {
 
 // es_touchid_mode_t See es_event_authentication_touchid_t
 // [ESTypes.h:786]
-type EsTouchidModeT int64
+type EsTouchidModeT int32
 
 const (
 	ES_TOUCHID_MODE_VERIFICATION   EsTouchidModeT = 0
@@ -3317,7 +3317,7 @@ func (i EsTouchidModeT) isMultiValue() bool {
 
 // @brief This enum describes the types of XPC service domains.
 // [ESTypes.h:49]
-type EsXpcDomainTypeT int64
+type EsXpcDomainTypeT int32
 
 const (
 	ES_XPC_DOMAIN_TYPE_SYSTEM     EsXpcDomainTypeT = 1

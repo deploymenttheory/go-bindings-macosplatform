@@ -9,7 +9,7 @@
   "protocols": {},
   "enums": {
     "Tcl_PathType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "TCL_PATH_ABSOLUTE",
@@ -32,7 +32,7 @@
       "sdk_line": 1476
     },
     "Tcl_QueuePosition": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "TCL_QUEUE_TAIL",
@@ -55,7 +55,7 @@
       "sdk_line": 1249
     },
     "Tcl_ValueType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "TCL_INT",

@@ -19390,7 +19390,7 @@
       "sdk_line": 188
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",

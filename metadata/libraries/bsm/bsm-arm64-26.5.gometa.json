@@ -81,7 +81,7 @@
       "availability": {}
     },
     "audit_session_flags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "AU_SESSION_FLAG_IS_INITIAL",
@@ -119,7 +119,7 @@
       "sdk_line": 338
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -167,7 +167,7 @@
       "sdk_line": 156
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",

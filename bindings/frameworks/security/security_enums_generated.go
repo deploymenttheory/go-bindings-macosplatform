@@ -11,7 +11,7 @@ import (
 
 // The flags used to specify authorization options.
 // Bitmask — values may be combined with |.
-type AuthorizationFlags int64
+type AuthorizationFlags uint32
 
 const (
 	// An empty flag set that you use as a placeholder when you don’t want any of the other flags.
@@ -189,7 +189,7 @@ func (e CMSSignerStatus) String() string {
 	}
 }
 
-type ExtensionDataFormat int64
+type ExtensionDataFormat int32
 
 const (
 	ExtensionDataFormatEncoded ExtensionDataFormat = 0
@@ -508,7 +508,7 @@ func (e SSLSessionState) String() string {
 
 // Access control constants that dictate how a keychain item may be used.
 // Bitmask — values may be combined with |.
-type SecAccessControlCreateFlags int64
+type SecAccessControlCreateFlags uint64
 
 const (
 	// Constraint to access an item with either biometry or passcode.
@@ -589,7 +589,7 @@ func (e SecAccessControlCreateFlags) String() string {
 }
 
 // The authentication type to use for an Internet password.
-type SecAuthenticationType int64
+type SecAuthenticationType uint32
 
 const (
 	// Specifies Windows NT LAN Manager authentication.
@@ -698,7 +698,7 @@ func (e SecCSFlags) String() string {
 // The credential type to be returned by SecKeyGetCredentials.
 //
 // Deprecated: No longer supported
-type SecCredentialType int64
+type SecCredentialType uint32
 
 const (
 	// The default setting for determining whether to present UI is used.
@@ -838,7 +838,7 @@ func (e SecExternalItemType) String() string {
 }
 
 // Specifies a keychain item’s class code.
-type SecItemClass int64
+type SecItemClass uint32
 
 const (
 	// Indicates that the item is an Internet password.
@@ -966,7 +966,7 @@ func (e SecKeyOperationType) String() string {
 
 // Bit masks corresponding to the events that can trigger a keychain callback.
 // Bitmask — values may be combined with |.
-type SecKeychainEventMask int64
+type SecKeychainEventMask uint32
 
 const (
 	// If the bit specified by this mask is set, your callback function is invoked when a keychain is locked.
@@ -1046,7 +1046,7 @@ func (e SecKeychainEventMask) String() string {
 
 // Bits that define when a keychain should require a passphrase.
 // Bitmask — values may be combined with |.
-type SecKeychainPromptSelector int64
+type SecKeychainPromptSelector uint16
 
 const (
 	// Indicates that a passphrase should be required for every access.
@@ -1118,7 +1118,7 @@ func (e SecPreferencesDomain) String() string {
 }
 
 // The protocol type associated with an Internet password.
-type SecProtocolType int64
+type SecProtocolType uint32
 
 const (
 	// Indicates FTP.
@@ -1461,7 +1461,7 @@ func (e SecTrustSettingsDomain) String() string {
 
 // The attributes of a security session.
 // Bitmask — values may be combined with |.
-type SessionAttributeBits int64
+type SessionAttributeBits uint32
 
 const (
 	// A bit that indicates the session is the root session.
@@ -1498,7 +1498,7 @@ func (e SessionAttributeBits) String() string {
 
 // The flags that affect the creation of a security session.
 // Bitmask — values may be combined with |.
-type SessionCreationFlags int64
+type SessionCreationFlags uint32
 
 const (
 	// The caller has allocated sub-bootstrap.
@@ -1695,7 +1695,7 @@ func (e TLSProtocolVersion) String() string {
 	}
 }
 
-type EntryID int64
+type EntryID int32
 
 const (
 	EntryIDFirstEntry EntryID = 0
@@ -1718,7 +1718,7 @@ func (e EntryID) String() string {
 	}
 }
 
-type Flag int64
+type Flag int32
 
 const (
 	FlagFlagDeferInherit      Flag = 1
@@ -1753,7 +1753,7 @@ func (e Flag) String() string {
 	}
 }
 
-type Perm int64
+type Perm int32
 
 const (
 	PermReadData           Perm = 2
@@ -1813,7 +1813,7 @@ func (e Perm) String() string {
 	}
 }
 
-type Tag int64
+type Tag int32
 
 const (
 	TagUndefinedTag  Tag = 0
@@ -1836,7 +1836,7 @@ func (e Tag) String() string {
 	}
 }
 
-type Type int64
+type Type int32
 
 const (
 	TypeExtended Type = 256
@@ -1871,7 +1871,7 @@ func (e Type) String() string {
 	}
 }
 
-type CE_CrlDistributionPointNameType int64
+type CE_CrlDistributionPointNameType int32
 
 const (
 	CE_CDNT_FullName                CE_CrlDistributionPointNameType = 0
@@ -1891,7 +1891,7 @@ func (e CE_CrlDistributionPointNameType) String() string {
 	}
 }
 
-type CE_DataType int64
+type CE_DataType int32
 
 const (
 	DT_AuthorityKeyID           CE_DataType = 0
@@ -1968,7 +1968,7 @@ func (e CE_DataType) String() string {
 	}
 }
 
-type CE_GeneralNameType int64
+type CE_GeneralNameType int32
 
 const (
 	GNT_OtherName     CE_GeneralNameType = 0
@@ -2009,7 +2009,7 @@ func (e CE_GeneralNameType) String() string {
 	}
 }
 
-type Clockid int64
+type Clockid int32
 
 const (
 	ClockidRealtime           Clockid = 0
@@ -2047,7 +2047,7 @@ func (e Clockid) String() string {
 	}
 }
 
-type CssmAppledlOpenParametersMask int64
+type CssmAppledlOpenParametersMask int32
 
 const (
 	KCSSM_APPLEDL_MASK_MODE CssmAppledlOpenParametersMask = 1
@@ -2127,7 +2127,7 @@ func (e DispatchBlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -2165,7 +2165,7 @@ func (e FilesecProperty) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -2188,7 +2188,7 @@ func (e Idtype) String() string {
 	}
 }
 
-type IpcInfoObjectType int64
+type IpcInfoObjectType uint32
 
 const (
 	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
@@ -2370,7 +2370,7 @@ func (e IpcInfoObjectType) String() string {
 	}
 }
 
-type LaunchDataType int64
+type LaunchDataType int32
 
 const (
 	LaunchDataTypeDictionary LaunchDataType = 1
@@ -2536,7 +2536,7 @@ func (e OSClockid) String() string {
 	}
 }
 
-type PtrauthKey int64
+type PtrauthKey int32
 
 const (
 	Ptrauth_key_none                     PtrauthKey = -1
@@ -2755,7 +2755,7 @@ func (e SecCodeStatus) String() string {
 }
 
 // Specifies a keychain item’s attributes.
-type SecItemAttr int64
+type SecItemAttr uint32
 
 const (
 	// Identifies the creation date attribute.
@@ -3015,7 +3015,7 @@ func (e SecKeyUsage) String() string {
 }
 
 // The list of keychain events that can trigger a callback.
-type SecKeychainEvent int64
+type SecKeychainEvent uint32
 
 const (
 	// Indicates a keychain was locked.

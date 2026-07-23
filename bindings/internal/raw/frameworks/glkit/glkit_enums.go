@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-type CGLCPContextPriorityRequest int64
+type CGLCPContextPriorityRequest int32
 
 const (
 	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
@@ -29,7 +29,7 @@ func (e CGLCPContextPriorityRequest) String() string {
 	}
 }
 
-type EvCmd int64
+type EvCmd int32
 
 const (
 	EVNOP   EvCmd = 0
@@ -57,7 +57,7 @@ func (e EvCmd) String() string {
 }
 
 // A mode that describes how the fog component is calculated for the fragment.
-type GLKFogMode int64
+type GLKFogMode int32
 
 const (
 	// The fog component is calculated as exp(-density * distance) and clamped to the range [0.0, 1.0].
@@ -82,7 +82,7 @@ func (e GLKFogMode) String() string {
 }
 
 // A constant that describes how lighting is calculated by an effect.
-type GLKLightingType int64
+type GLKLightingType int32
 
 const (
 	// Indicates that the lighting calculations are performed at each vertex in a triangle and then interpolated across the triangle.
@@ -103,7 +103,7 @@ func (e GLKLightingType) String() string {
 }
 
 // The mode used to combine the texture with other color components.
-type GLKTextureEnvMode int64
+type GLKTextureEnvMode int32
 
 const (
 	// The output color is set to the color fetched from the texture. The input color is ignored.
@@ -128,7 +128,7 @@ func (e GLKTextureEnvMode) String() string {
 }
 
 // Values that describe the alpha information stored in a source image’s pixel data.
-type GLKTextureInfoAlphaState int64
+type GLKTextureInfoAlphaState int32
 
 const (
 	// Indicates that the texture has no alpha information.
@@ -153,7 +153,7 @@ func (e GLKTextureInfoAlphaState) String() string {
 }
 
 // The location of the origin in the original source image.
-type GLKTextureInfoOrigin int64
+type GLKTextureInfoOrigin int32
 
 const (
 	// The origin of the texture is not supported.
@@ -177,7 +177,7 @@ func (e GLKTextureInfoOrigin) String() string {
 	}
 }
 
-type GLKTextureLoaderError int64
+type GLKTextureLoaderError uint32
 
 const (
 	GLKTextureLoaderErrorFileOrURLNotFound             GLKTextureLoaderError = 0
@@ -250,7 +250,7 @@ func (e GLKTextureLoaderError) String() string {
 }
 
 // The kind of texture pointed to by the property.
-type GLKTextureTarget int64
+type GLKTextureTarget uint32
 
 const (
 	// The texture is a 2D texture.
@@ -275,7 +275,7 @@ func (e GLKTextureTarget) String() string {
 }
 
 // Values used as indices in OpenGL code to associate vertex data with an attribute in a named shader effect.
-type GLKVertexAttrib int64
+type GLKVertexAttrib int32
 
 const (
 	// This index is used to provide the vertex position to a shader.
@@ -308,7 +308,7 @@ func (e GLKVertexAttrib) String() string {
 }
 
 // @typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -326,7 +326,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -348,7 +348,7 @@ func (e MDQueryOptionFlags) String() string {
 }
 
 // @enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order.
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -363,7 +363,7 @@ func (e MDQuerySortOptionFlags) String() string {
 	}
 }
 
-type NXMouseButton int64
+type NXMouseButton int32
 
 const (
 	NX_OneButton   NXMouseButton = 0
@@ -384,7 +384,7 @@ func (e NXMouseButton) String() string {
 	}
 }
 
-type PMPageToPaperMappingType int64
+type PMPageToPaperMappingType int32
 
 const (
 	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
@@ -402,7 +402,7 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
-type Acl_entry_id_t int64
+type Acl_entry_id_t int32
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
@@ -423,7 +423,7 @@ func (e Acl_entry_id_t) String() string {
 	}
 }
 
-type Acl_flag_t int64
+type Acl_flag_t int32
 
 const (
 	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
@@ -456,7 +456,7 @@ func (e Acl_flag_t) String() string {
 	}
 }
 
-type Acl_perm_t int64
+type Acl_perm_t int32
 
 const (
 	ACL_READ_DATA           Acl_perm_t = 2
@@ -514,7 +514,7 @@ func (e Acl_perm_t) String() string {
 	}
 }
 
-type Acl_tag_t int64
+type Acl_tag_t int32
 
 const (
 	ACL_UNDEFINED_TAG  Acl_tag_t = 0
@@ -535,7 +535,7 @@ func (e Acl_tag_t) String() string {
 	}
 }
 
-type Acl_type_t int64
+type Acl_type_t int32
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
@@ -568,7 +568,7 @@ func (e Acl_type_t) String() string {
 	}
 }
 
-type Clockid_t int64
+type Clockid_t int32
 
 const (
 	_CLOCK_REALTIME             Clockid_t = 0
@@ -662,7 +662,7 @@ func (e Dispatch_block_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Filesec_property_t int64
+type Filesec_property_t int32
 
 const (
 	FILESEC_OWNER         Filesec_property_t = 1
@@ -698,7 +698,7 @@ func (e Filesec_property_t) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0
@@ -719,7 +719,7 @@ func (e Idtype_t) String() string {
 	}
 }
 
-type Ipc_info_object_type_t int64
+type Ipc_info_object_type_t uint32
 
 const (
 	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
@@ -899,7 +899,7 @@ func (e Ipc_info_object_type_t) String() string {
 	}
 }
 
-type Launch_data_type_t int64
+type Launch_data_type_t int32
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
@@ -1069,7 +1069,7 @@ func (e Os_unfair_lock_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Ptrauth_key int64
+type Ptrauth_key int32
 
 const (
 	Ptrauth_key_none                     Ptrauth_key = -1

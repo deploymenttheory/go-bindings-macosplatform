@@ -2865,7 +2865,7 @@
   },
   "enums": {
     "MDLabelDomain": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDLabelUserDomain",
@@ -2884,7 +2884,7 @@
       "doc": "@typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate()."
     },
     "MDQueryOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQuerySynchronous",
@@ -2907,7 +2907,7 @@
       "sdk_line": 83
     },
     "MDQuerySortOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQueryReverseSortOrderFlag",
@@ -2921,7 +2921,7 @@
       "doc": "@enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order."
     },
     "MIDICICategoryOptions": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kMIDICICategoryOptionsProtocolNegotiation",
@@ -2950,7 +2950,7 @@
       "is_extensible": true
     },
     "MIDICIDeviceType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kMIDICIDeviceTypeUnknown",
@@ -2978,7 +2978,7 @@
       "is_extensible": true
     },
     "MIDICIManagementMessageType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kMIDICIManagementMessageTypeDiscovery",
@@ -3021,7 +3021,7 @@
       "is_extensible": true
     },
     "MIDICIProcessInquiryMessageType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kMIDICIProcessInquiryMessageTypeInquiryProcessInquiryCapabilities",
@@ -3054,7 +3054,7 @@
       "is_extensible": true
     },
     "MIDICIProfileMessageType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kMIDICIProfileMessageTypeProfileInquiry",
@@ -3117,7 +3117,7 @@
       "is_extensible": true
     },
     "MIDICIProfileType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kMIDICIProfileTypeSingleChannel",
@@ -3145,7 +3145,7 @@
       "is_extensible": true
     },
     "MIDICIPropertyExchangeMessageType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kMIDICIPropertyExchangeMessageTypeInquiryPropertyExchangeCapabilities",
@@ -3372,7 +3372,7 @@
       "is_extensible": true
     },
     "MIDINoteAttribute": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kMIDINoteAttributeNone",
@@ -3400,7 +3400,7 @@
       "is_extensible": true
     },
     "MIDINotificationMessageID": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMIDIMsgSetupChanged",
@@ -3450,7 +3450,7 @@
       "is_extensible": true
     },
     "MIDIObjectType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMIDIObjectType_Other",
@@ -3503,7 +3503,7 @@
       "is_extensible": true
     },
     "MIDIPerNoteManagementOptions": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kMIDIPerNoteManagementReset",
@@ -3522,7 +3522,7 @@
       "is_extensible": true
     },
     "MIDIProgramChangeOptions": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kMIDIProgramChangeBankValid",
@@ -3536,7 +3536,7 @@
       "is_extensible": true
     },
     "MIDIProtocolID": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMIDIProtocol_1_0",
@@ -3665,7 +3665,7 @@
       "is_extensible": true
     },
     "MIDITransformControlType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kMIDIControlType_7Bit",
@@ -3703,7 +3703,7 @@
       "is_extensible": true
     },
     "MIDITransformType": {
-      "go_type": "int64",
+      "go_type": "uint16",
       "members": [
         {
           "name": "kMIDITransform_None",
@@ -3751,7 +3751,7 @@
       "is_extensible": true
     },
     "MIDIUMPCIObjectBackingType": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kMIDIUMPCIObjectBackingTypeUnknown",
@@ -3779,7 +3779,7 @@
       "is_extensible": true
     },
     "MIDIUMPFunctionBlockDirection": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMIDIUMPFunctionBlockDirectionUnknown",
@@ -3807,7 +3807,7 @@
       "is_extensible": true
     },
     "MIDIUMPFunctionBlockMIDI1Info": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMIDIUMPFunctionBlockMIDI1InfoNotMIDI1",
@@ -3830,7 +3830,7 @@
       "is_extensible": true
     },
     "MIDIUMPFunctionBlockUIHint": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMIDIUMPFunctionBlockUIHintUnknown",
@@ -3858,7 +3858,7 @@
       "is_extensible": true
     },
     "MIDIUMPProtocolOptions": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kMIDIUMPProtocolOptionsMIDI1",
@@ -3910,7 +3910,7 @@
       "is_extensible": true
     },
     "UMPStreamMessageFormat": {
-      "go_type": "int64",
+      "go_type": "uint8",
       "members": [
         {
           "name": "kUMPStreamMessageFormatComplete",
@@ -4117,7 +4117,7 @@
       "availability": {}
     },
     "acl_entry_id_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FIRST_ENTRY",
@@ -4140,7 +4140,7 @@
       "sdk_line": 118
     },
     "acl_flag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FLAG_DEFER_INHERIT",
@@ -4183,7 +4183,7 @@
       "sdk_line": 125
     },
     "acl_perm_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_READ_DATA",
@@ -4281,7 +4281,7 @@
       "sdk_line": 72
     },
     "acl_tag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_UNDEFINED_TAG",
@@ -4304,7 +4304,7 @@
       "sdk_line": 94
     },
     "acl_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_TYPE_EXTENDED",
@@ -4347,7 +4347,7 @@
       "sdk_line": 101
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -4469,7 +4469,7 @@
       "is_extensible": true
     },
     "filesec_property_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "FILESEC_OWNER",
@@ -4517,7 +4517,7 @@
       "sdk_line": 582
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -4540,7 +4540,7 @@
       "sdk_line": 79
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",
@@ -4829,7 +4829,7 @@
       "is_extensible": true
     },
     "launch_data_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "LAUNCH_DATA_DICTIONARY",
@@ -5008,7 +5008,7 @@
       "sdk_line": 188
     },
     "ptrauth_key": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ptrauth_key_none",

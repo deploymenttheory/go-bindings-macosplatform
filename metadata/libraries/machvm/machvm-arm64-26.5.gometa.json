@@ -9,7 +9,7 @@
   "protocols": {},
   "enums": {
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",

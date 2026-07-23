@@ -5906,7 +5906,7 @@ func (e Hv_sys_reg_t) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0

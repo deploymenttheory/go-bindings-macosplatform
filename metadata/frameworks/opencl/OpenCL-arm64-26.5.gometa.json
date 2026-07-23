@@ -9,7 +9,7 @@
   "protocols": {},
   "enums": {
     "CGLCPContextPriorityRequest": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGLCPContextPriorityRequestHigh",
@@ -32,7 +32,7 @@
       "sdk_line": 205
     },
     "clk_sampler_type": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "__CLK_ADDRESS_BASE",
@@ -204,7 +204,7 @@
       "is_extensible": true
     },
     "filesec_property_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "FILESEC_OWNER",
@@ -252,7 +252,7 @@
       "sdk_line": 582
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",

@@ -9,7 +9,7 @@ import (
 )
 
 // The flags used to specify authorization options.
-type AuthorizationFlags int64
+type AuthorizationFlags uint32
 
 const (
 	// An empty flag set that you use as a placeholder when you don’t want any of the other flags.
@@ -457,7 +457,7 @@ func (e SSLSessionState) String() string {
 }
 
 // Access control constants that dictate how a keychain item may be used.
-type SecAccessControlCreateFlags int64
+type SecAccessControlCreateFlags uint64
 
 const (
 	// Constraint to access an item with either biometry or passcode.
@@ -530,7 +530,7 @@ func (e SecAccessControlCreateFlags) String() string {
 }
 
 // The authentication type to use for an Internet password.
-type SecAuthenticationType int64
+type SecAuthenticationType uint32
 
 const (
 	// Specifies Windows NT LAN Manager authentication.
@@ -766,7 +766,7 @@ func (e SecCodeStatus) String() string {
 
 // The credential type to be returned by SecKeyGetCredentials.
 // Deprecated: No longer supported
-type SecCredentialType int64
+type SecCredentialType uint32
 
 const (
 	// The default setting for determining whether to present UI is used.
@@ -900,7 +900,7 @@ func (e SecExternalItemType) String() string {
 }
 
 // Specifies a keychain item’s attributes.
-type SecItemAttr int64
+type SecItemAttr uint32
 
 const (
 	// Identifies the creation date attribute.
@@ -1025,7 +1025,7 @@ func (e SecItemAttr) String() string {
 }
 
 // Specifies a keychain item’s class code.
-type SecItemClass int64
+type SecItemClass uint32
 
 const (
 	// Indicates that the item is an Internet password.
@@ -1269,7 +1269,7 @@ func (e SecKeyUsage) String() string {
 }
 
 // The list of keychain events that can trigger a callback.
-type SecKeychainEvent int64
+type SecKeychainEvent uint32
 
 const (
 	// Indicates a keychain was locked.
@@ -1322,7 +1322,7 @@ func (e SecKeychainEvent) String() string {
 }
 
 // Bit masks corresponding to the events that can trigger a keychain callback.
-type SecKeychainEventMask int64
+type SecKeychainEventMask uint32
 
 const (
 	// If the bit specified by this mask is set, your callback function is invoked when a keychain is locked.
@@ -1391,7 +1391,7 @@ func (e SecKeychainEventMask) String() string {
 }
 
 // Bits that define when a keychain should require a passphrase.
-type SecKeychainPromptSelector int64
+type SecKeychainPromptSelector uint16
 
 const (
 	// Indicates that a passphrase should be required for every access.
@@ -1500,7 +1500,7 @@ func (e SecPreferencesDomain) String() string {
 }
 
 // The protocol type associated with an Internet password.
-type SecProtocolType int64
+type SecProtocolType uint32
 
 const (
 	// Indicates FTP.
@@ -1951,7 +1951,7 @@ func (e SecTrustSettingsResult) String() string {
 }
 
 // The attributes of a security session.
-type SessionAttributeBits int64
+type SessionAttributeBits uint32
 
 const (
 	// A bit that indicates the session is the root session.
@@ -1985,7 +1985,7 @@ func (e SessionAttributeBits) String() string {
 }
 
 // The flags that affect the creation of a security session.
-type SessionCreationFlags int64
+type SessionCreationFlags uint32
 
 const (
 	// The caller has allocated sub-bootstrap.
@@ -2003,7 +2003,7 @@ func (e SessionCreationFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type __CE_CrlDistributionPointNameType int64
+type __CE_CrlDistributionPointNameType int32
 
 const (
 	CE_CDNT_FullName                __CE_CrlDistributionPointNameType = 0
@@ -2021,7 +2021,7 @@ func (e __CE_CrlDistributionPointNameType) String() string {
 	}
 }
 
-type __CE_DataType int64
+type __CE_DataType int32
 
 const (
 	DT_AuthorityKeyID           __CE_DataType = 0
@@ -2096,7 +2096,7 @@ func (e __CE_DataType) String() string {
 	}
 }
 
-type __CE_GeneralNameType int64
+type __CE_GeneralNameType int32
 
 const (
 	GNT_OtherName     __CE_GeneralNameType = 0
@@ -2135,7 +2135,7 @@ func (e __CE_GeneralNameType) String() string {
 	}
 }
 
-type Acl_entry_id_t int64
+type Acl_entry_id_t int32
 
 const (
 	ACL_FIRST_ENTRY Acl_entry_id_t = 0
@@ -2156,7 +2156,7 @@ func (e Acl_entry_id_t) String() string {
 	}
 }
 
-type Acl_flag_t int64
+type Acl_flag_t int32
 
 const (
 	ACL_FLAG_DEFER_INHERIT      Acl_flag_t = 1
@@ -2189,7 +2189,7 @@ func (e Acl_flag_t) String() string {
 	}
 }
 
-type Acl_perm_t int64
+type Acl_perm_t int32
 
 const (
 	ACL_READ_DATA           Acl_perm_t = 2
@@ -2247,7 +2247,7 @@ func (e Acl_perm_t) String() string {
 	}
 }
 
-type Acl_tag_t int64
+type Acl_tag_t int32
 
 const (
 	ACL_UNDEFINED_TAG  Acl_tag_t = 0
@@ -2268,7 +2268,7 @@ func (e Acl_tag_t) String() string {
 	}
 }
 
-type Acl_type_t int64
+type Acl_type_t int32
 
 const (
 	ACL_TYPE_EXTENDED Acl_type_t = 256
@@ -2301,7 +2301,7 @@ func (e Acl_type_t) String() string {
 	}
 }
 
-type Clockid_t int64
+type Clockid_t int32
 
 const (
 	_CLOCK_REALTIME             Clockid_t = 0
@@ -2337,7 +2337,7 @@ func (e Clockid_t) String() string {
 	}
 }
 
-type Cssm_appledl_open_parameters_mask int64
+type Cssm_appledl_open_parameters_mask int32
 
 const (
 	KCSSM_APPLEDL_MASK_MODE Cssm_appledl_open_parameters_mask = 1
@@ -2410,7 +2410,7 @@ func (e Dispatch_block_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Extension_data_format int64
+type Extension_data_format int32
 
 const (
 	CSSM_X509_DATAFORMAT_ENCODED Extension_data_format = 0
@@ -2431,7 +2431,7 @@ func (e Extension_data_format) String() string {
 	}
 }
 
-type Filesec_property_t int64
+type Filesec_property_t int32
 
 const (
 	FILESEC_OWNER         Filesec_property_t = 1
@@ -2467,7 +2467,7 @@ func (e Filesec_property_t) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0
@@ -2488,7 +2488,7 @@ func (e Idtype_t) String() string {
 	}
 }
 
-type Ipc_info_object_type_t int64
+type Ipc_info_object_type_t uint32
 
 const (
 	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
@@ -2668,7 +2668,7 @@ func (e Ipc_info_object_type_t) String() string {
 	}
 }
 
-type Launch_data_type_t int64
+type Launch_data_type_t int32
 
 const (
 	LAUNCH_DATA_DICTIONARY Launch_data_type_t = 1
@@ -2820,7 +2820,7 @@ func (e Os_clockid_t) String() string {
 	}
 }
 
-type Ptrauth_key int64
+type Ptrauth_key int32
 
 const (
 	Ptrauth_key_none                     Ptrauth_key = -1

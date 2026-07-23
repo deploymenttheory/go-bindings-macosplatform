@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-type CGLCPContextPriorityRequest int64
+type CGLCPContextPriorityRequest int32
 
 const (
 	KCGLCPContextPriorityRequestHigh   CGLCPContextPriorityRequest = 0
@@ -29,7 +29,7 @@ func (e CGLCPContextPriorityRequest) String() string {
 	}
 }
 
-type Clk_sampler_type int64
+type Clk_sampler_type int32
 
 const (
 	__CLK_ADDRESS_BASE          Clk_sampler_type = 0
@@ -133,7 +133,7 @@ func (e Dispatch_block_flags_t) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Filesec_property_t int64
+type Filesec_property_t int32
 
 const (
 	FILESEC_OWNER         Filesec_property_t = 1
@@ -169,7 +169,7 @@ func (e Filesec_property_t) String() string {
 	}
 }
 
-type Idtype_t int64
+type Idtype_t int32
 
 const (
 	P_ALL  Idtype_t = 0

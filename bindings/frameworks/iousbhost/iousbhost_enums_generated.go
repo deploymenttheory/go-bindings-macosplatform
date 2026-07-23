@@ -33,7 +33,7 @@ func (e HostAbortOption) String() string {
 }
 
 // Host controller state managed by IOUSBHostCIControllerStateMachine IOUSBHostCIControllerStateOff is the initial state of a newly created IOUSBHostCIControllerStateMachine instance, and represents a completely quiesced controller.  All root ports must be in the IOUSBHostCIPortStateOff state. IOUSBHostCIControllerStatePaused represents a controller that is idle.  In this state the controller is not processing IO requests, but can detect port changes such as connect events or remote wakes.  Root ports must not be in the IOUSBHostCIPortStateActive state. IOUSBHostCIControllerStateActive represents a controller that is fully functional and able to service IO requests.  Root ports may be in the IOUSBHostCIPortStateActive state.
-type HostCIControllerState int64
+type HostCIControllerState int32
 
 const (
 	HostCIControllerStateOff    HostCIControllerState = 0
@@ -57,7 +57,7 @@ func (e HostCIControllerState) String() string {
 }
 
 // Values to represent a connected device speed, to be used in IOUSBHostCIMessages and IOUSBHostsCIPortStatus
-type HostCIDeviceSpeed int64
+type HostCIDeviceSpeed int32
 
 const (
 	HostCIDeviceSpeedNone         HostCIDeviceSpeed = 0
@@ -96,7 +96,7 @@ func (e HostCIDeviceSpeed) String() string {
 }
 
 // Device state managed by IOUSBHostCIDeviceStateMachine IOUSBHostCIDeviceStateDestroyed represents a device that is no longer usable, and whose resources will be destroyed and freed IOUSBHostCIDeviceStatePaused represents a device that may have IO requests enqueued, but they are not active on the bus.  The state is closely correlated to IOUSBHostCIPortStateSuspended, and endpoints associated with this device may not be in the IOUSBHostCIEndpointStateActive state. IOUSBHostCIDeviceStateActive is the initial sate of a newly created IOUSBHsotCIDeviceStateMachine, and represents a device that can be processing IO requests.  Endpoints associated with this device may be in the IOUSBHostCIEndpointStateActive state.
-type HostCIDeviceState int64
+type HostCIDeviceState int32
 
 const (
 	HostCIDeviceStateDestroyed HostCIDeviceState = 0
@@ -120,7 +120,7 @@ func (e HostCIDeviceState) String() string {
 }
 
 // Endpoint state managed by IOUSBHostCIEndpointStateMachine IOUSBHostCIEndpointStateDestroyed represents an endpoint that is no longer usable, and whose resources will be destroyed and freed. IOUSBHostCIEndpointStateHalted represents an endpoint that has encountered an IO error.  The client must not access or modify transfer structures or IO buffers for an endpoint in this state. IOUSBHostCIEndpointStatePaused is the initial state of a newly created IOUSBHostCIEndpointStateMachine, and represents an endpoint that is not currently servicing IO requests.  The client must not access or modify transfer structures or IO buffers for an endpoint in this state. IOUSBHostCIEndpointStateActive represents an endpoint that is currently servicing an IO request, or is idle after successfully servicing its queue of IO requests.  In this state the client may access transfer structures and IO buffers.
-type HostCIEndpointState int64
+type HostCIEndpointState int32
 
 const (
 	HostCIEndpointStateDestroyed HostCIEndpointState = 0
@@ -147,7 +147,7 @@ func (e HostCIEndpointState) String() string {
 }
 
 // Exception specifier included as message argument to <code>kUSBHostMessageControllerException</code> The kernel driver sends a <code>kUSBHostMessageControllerException</code> message to its clients when a fatal problem has occurred, with a refCon of the IOUSBHostController instance and a <code>IOUSBHostCIExceptionType</code> in the message arguments. When any <code>kUSBHostMessageControllerException</code> message is received, the specified IOUSBHostControllerInterface must be destroyed.
-type HostCIExceptionType int64
+type HostCIExceptionType int32
 
 const (
 	HostCIExceptionTypeUnknown               HostCIExceptionType = 0
@@ -201,7 +201,7 @@ func (e HostCIExceptionType) String() string {
 }
 
 // Values to represent a port's link state, to be used in IOUSBHostCIMessages and IOUSBHostCIPortStatus
-type HostCILinkState int64
+type HostCILinkState int32
 
 const (
 	HostCILinkStateU0         HostCILinkState = 0
@@ -255,7 +255,7 @@ func (e HostCILinkState) String() string {
 }
 
 // Values to be populated in IOUSBHostCIMessageControlStatus of an IOUSBHostCIMessage structure
-type HostCIMessageStatus int64
+type HostCIMessageStatus int32
 
 const (
 	HostCIMessageStatusReserved           HostCIMessageStatus = 0
@@ -312,7 +312,7 @@ func (e HostCIMessageStatus) String() string {
 }
 
 // Values to be populated in IOUSBHostCIMessageControlType of an IOUSBHostCIMessage structure
-type HostCIMessageType int64
+type HostCIMessageType int32
 
 const (
 	HostCIMessageTypeControllerCapabilities  HostCIMessageType = 0
@@ -436,7 +436,7 @@ func (e HostCIMessageType) String() string {
 }
 
 // Port state managed by IOUSBHostCIPortStateMachine IOUSBHostCIPortStateOff is the initial state of a newly created IOUSBHostCIPortStateMachine and represents an unpowered port which is unable to detect events such as connections.  Downstream devices, if any, must be in the IOUSBHostCIDeviceStateDestroyed state. IOUSBHostCIPortStatePowered represents a powered port which is able to detect events such as connections.  Downstream devices, if any, must be in the IOUSBHostCIDeviceStateDestroyed state. IOUSBHostCIPortStateSuspended represents a port with a downstream device that is in a low-power state such as U3 or L2.  The port is able to detect events such as remote wakes, and is not actively transmitting data.  Downstream devices must be in the IOUSBHostCIDeviceStatePaused state. IOUSBHostCIPortStateActive represents a port with a downstream device that is able to immediately transfer data.  The downstream device may be in the IOUSBHostCIDeviceStateActive state.
-type HostCIPortState int64
+type HostCIPortState int32
 
 const (
 	HostCIPortStateOff       HostCIPortState = 0
@@ -463,7 +463,7 @@ func (e HostCIPortState) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type HostIsochronousTransactionOptions int64
+type HostIsochronousTransactionOptions uint32
 
 const (
 	HostIsochronousTransactionOptionsNone HostIsochronousTransactionOptions = 0
@@ -532,7 +532,7 @@ func (e HostObjectInitOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type EntryID int64
+type EntryID int32
 
 const (
 	EntryIDFirstEntry EntryID = 0
@@ -555,7 +555,7 @@ func (e EntryID) String() string {
 	}
 }
 
-type Flag int64
+type Flag int32
 
 const (
 	FlagFlagDeferInherit      Flag = 1
@@ -590,7 +590,7 @@ func (e Flag) String() string {
 	}
 }
 
-type Perm int64
+type Perm int32
 
 const (
 	PermReadData           Perm = 2
@@ -650,7 +650,7 @@ func (e Perm) String() string {
 	}
 }
 
-type Tag int64
+type Tag int32
 
 const (
 	TagUndefinedTag  Tag = 0
@@ -673,7 +673,7 @@ func (e Tag) String() string {
 	}
 }
 
-type Type int64
+type Type int32
 
 const (
 	TypeExtended Type = 256
@@ -708,7 +708,7 @@ func (e Type) String() string {
 	}
 }
 
-type Clockid int64
+type Clockid int32
 
 const (
 	ClockidRealtime           Clockid = 0
@@ -809,7 +809,7 @@ func (e DispatchBlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -847,7 +847,7 @@ func (e FilesecProperty) String() string {
 	}
 }
 
-type HostCIUserClientVersion int64
+type HostCIUserClientVersion int32
 
 const (
 	HostCIUserClientVersion100 HostCIUserClientVersion = 0
@@ -865,7 +865,7 @@ func (e HostCIUserClientVersion) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type HostIsochronousTransferOptions int64
+type HostIsochronousTransferOptions uint32
 
 const (
 	HostIsochronousTransferOptionsNone HostIsochronousTransferOptions = 0
@@ -881,7 +881,7 @@ func (e HostIsochronousTransferOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -904,7 +904,7 @@ func (e Idtype) String() string {
 	}
 }
 
-type IpcInfoObjectType int64
+type IpcInfoObjectType uint32
 
 const (
 	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
@@ -1086,7 +1086,7 @@ func (e IpcInfoObjectType) String() string {
 	}
 }
 
-type LaunchDataType int64
+type LaunchDataType int32
 
 const (
 	LaunchDataTypeDictionary LaunchDataType = 1
@@ -1131,7 +1131,7 @@ func (e LaunchDataType) String() string {
 }
 
 // These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -1151,7 +1151,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -1174,7 +1174,7 @@ func (e MDQueryOptionFlags) String() string {
 	}
 }
 
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -1313,7 +1313,7 @@ func (e OSClockid) String() string {
 	}
 }
 
-type PtrauthKey int64
+type PtrauthKey int32
 
 const (
 	Ptrauth_key_none                     PtrauthKey = -1

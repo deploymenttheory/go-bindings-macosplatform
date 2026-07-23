@@ -2365,7 +2365,7 @@
   },
   "enums": {
     "CGLCPContextPriorityRequest": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGLCPContextPriorityRequestHigh",
@@ -2388,7 +2388,7 @@
       "sdk_line": 205
     },
     "EvCmd": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "EVNOP",
@@ -2421,7 +2421,7 @@
       "sdk_line": 148
     },
     "MDLabelDomain": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDLabelUserDomain",
@@ -2440,7 +2440,7 @@
       "doc": "@typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate()."
     },
     "MDQueryOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQuerySynchronous",
@@ -2463,7 +2463,7 @@
       "sdk_line": 83
     },
     "MDQuerySortOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQueryReverseSortOrderFlag",
@@ -2477,7 +2477,7 @@
       "doc": "@enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order."
     },
     "NXMouseButton": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "NX_OneButton",
@@ -2500,7 +2500,7 @@
       "sdk_line": 66
     },
     "PMPageToPaperMappingType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kPMPageToPaperMappingNone",
@@ -2518,7 +2518,7 @@
       "sdk_line": 197
     },
     "QCPlugInExecutionMode": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kQCPlugInExecutionModeProvider",
@@ -2541,7 +2541,7 @@
       "sdk_line": 83
     },
     "QCPlugInTimeMode": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kQCPlugInTimeModeNone",
@@ -2608,7 +2608,7 @@
       "availability": {}
     },
     "acl_entry_id_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FIRST_ENTRY",
@@ -2631,7 +2631,7 @@
       "sdk_line": 118
     },
     "acl_flag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FLAG_DEFER_INHERIT",
@@ -2674,7 +2674,7 @@
       "sdk_line": 125
     },
     "acl_perm_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_READ_DATA",
@@ -2772,7 +2772,7 @@
       "sdk_line": 72
     },
     "acl_tag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_UNDEFINED_TAG",
@@ -2795,7 +2795,7 @@
       "sdk_line": 94
     },
     "acl_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_TYPE_EXTENDED",
@@ -2838,7 +2838,7 @@
       "sdk_line": 101
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -2960,7 +2960,7 @@
       "is_extensible": true
     },
     "filesec_property_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "FILESEC_OWNER",
@@ -3008,7 +3008,7 @@
       "sdk_line": 582
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -3031,7 +3031,7 @@
       "sdk_line": 79
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",
@@ -3320,7 +3320,7 @@
       "is_extensible": true
     },
     "launch_data_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "LAUNCH_DATA_DICTIONARY",
@@ -3521,7 +3521,7 @@
       "is_extensible": true
     },
     "ptrauth_key": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ptrauth_key_none",

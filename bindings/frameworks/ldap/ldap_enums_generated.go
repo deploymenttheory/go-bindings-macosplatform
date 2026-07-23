@@ -8,7 +8,7 @@ import (
 	"fmt"
 )
 
-type LdapSyncRefresh int64
+type LdapSyncRefresh int32
 
 const (
 	LdapSyncRefreshNone          LdapSyncRefresh = -1

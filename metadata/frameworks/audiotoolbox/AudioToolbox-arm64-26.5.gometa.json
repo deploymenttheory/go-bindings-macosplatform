@@ -3618,7 +3618,7 @@
   },
   "enums": {
     "AU3DMixerAttenuationCurve": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "k3DMixerAttenuationCurve_Power",
@@ -3646,7 +3646,7 @@
       "is_extensible": true
     },
     "AU3DMixerRenderingFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "k3DMixerRenderingFlags_InterAuralDelay",
@@ -3690,7 +3690,7 @@
       "is_extensible": true
     },
     "AUAudioMixRenderingStyle": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioMixRenderingStyle_Cinematic",
@@ -3838,7 +3838,7 @@
       "is_extensible": true
     },
     "AUParameterEventType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kParameterEvent_Immediate",
@@ -3856,7 +3856,7 @@
       "is_extensible": true
     },
     "AUParameterMIDIMappingFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAUParameterMIDIMapping_AnyChannelFlag",
@@ -3928,7 +3928,7 @@
       "is_extensible": true
     },
     "AUReverbRoomType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kReverbRoomType_SmallRoom",
@@ -4001,7 +4001,7 @@
       "is_extensible": true
     },
     "AUScheduledAudioSliceFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kScheduledAudioSliceFlag_Complete",
@@ -4040,7 +4040,7 @@
       "is_extensible": true
     },
     "AUSpatialMixerAttenuationCurve": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSpatialMixerAttenuationCurve_Power",
@@ -4068,7 +4068,7 @@
       "is_extensible": true
     },
     "AUSpatialMixerOutputType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSpatialMixerOutputType_Headphones",
@@ -4091,7 +4091,7 @@
       "is_extensible": true
     },
     "AUSpatialMixerPersonalizedHRTFMode": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSpatialMixerPersonalizedHRTFMode_Off",
@@ -4120,7 +4120,7 @@
       "is_extensible": true
     },
     "AUSpatialMixerPointSourceInHeadMode": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSpatialMixerPointSourceInHeadMode_Mono",
@@ -4138,7 +4138,7 @@
       "is_extensible": true
     },
     "AUSpatialMixerRenderingFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSpatialMixerRenderingFlags_InterAuralDelay",
@@ -4157,7 +4157,7 @@
       "is_extensible": true
     },
     "AUSpatialMixerSourceMode": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSpatialMixerSourceMode_SpatializeIfMono",
@@ -4185,7 +4185,7 @@
       "is_extensible": true
     },
     "AUSpatializationAlgorithm": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kSpatializationAlgorithm_EqualPowerPanning",
@@ -4233,7 +4233,7 @@
       "is_extensible": true
     },
     "AUVoiceIOOtherAudioDuckingLevel": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAUVoiceIOOtherAudioDuckingLevelDefault",
@@ -4261,7 +4261,7 @@
       "is_extensible": true
     },
     "AUVoiceIOSpeechActivityEvent": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAUVoiceIOSpeechActivityHasStarted",
@@ -4279,7 +4279,7 @@
       "is_extensible": true
     },
     "AudioBalanceFadeType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioBalanceFadeType_MaxUnityGain",
@@ -4297,7 +4297,7 @@
       "is_extensible": true
     },
     "AudioBytePacketTranslationFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kBytePacketTranslationFlag_IsEstimate",
@@ -4311,7 +4311,7 @@
       "is_extensible": true
     },
     "AudioComponentFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioComponentFlag_Unsearchable",
@@ -4345,7 +4345,7 @@
       "is_extensible": true
     },
     "AudioComponentInstantiationOptions": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioComponentInstantiation_LoadOutOfProcess",
@@ -4373,7 +4373,7 @@
       "is_extensible": true
     },
     "AudioComponentValidationResult": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioComponentValidationResult_Unknown",
@@ -4411,7 +4411,7 @@
       "is_extensible": true
     },
     "AudioConverterOptions": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioConverterOption_Unbuffered",
@@ -4425,7 +4425,7 @@
       "is_extensible": true
     },
     "AudioFileFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioFileFlags_EraseFile",
@@ -4444,7 +4444,7 @@
       "is_extensible": true
     },
     "AudioFilePermissions": {
-      "go_type": "int64",
+      "go_type": "int8",
       "members": [
         {
           "name": "kAudioFileReadPermission",
@@ -4467,7 +4467,7 @@
       "is_extensible": true
     },
     "AudioFileRegionFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioFileRegionFlag_LoopEnable",
@@ -4491,7 +4491,7 @@
       "is_extensible": true
     },
     "AudioFileStreamParseFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioFileStreamParseFlag_Discontinuity",
@@ -4505,7 +4505,7 @@
       "is_extensible": true
     },
     "AudioFileStreamPropertyFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioFileStreamPropertyFlag_PropertyIsCached",
@@ -4524,7 +4524,7 @@
       "is_extensible": true
     },
     "AudioFileStreamSeekFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioFileStreamSeekFlag_OffsetIsEstimated",
@@ -4538,7 +4538,7 @@
       "is_extensible": true
     },
     "AudioPanningMode": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kPanningMode_SoundField",
@@ -4556,7 +4556,7 @@
       "is_extensible": true
     },
     "AudioQueueProcessingTapFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioQueueProcessingTap_PreEffects",
@@ -4590,7 +4590,7 @@
       "is_extensible": true
     },
     "AudioSettingsFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioSettingsFlags_ExpertParameter",
@@ -4619,7 +4619,7 @@
       "is_extensible": true
     },
     "AudioUnitEventType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioUnitEvent_ParameterValueChange",
@@ -4647,7 +4647,7 @@
       "is_extensible": true
     },
     "AudioUnitParameterOptions": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioUnitParameterFlag_CFNameRelease",
@@ -4766,7 +4766,7 @@
       "is_extensible": true
     },
     "AudioUnitParameterUnit": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioUnitParameterUnit_Generic",
@@ -4914,7 +4914,7 @@
       "is_extensible": true
     },
     "AudioUnitRemoteControlEvent": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioUnitRemoteControlEvent_TogglePlayPause",
@@ -4937,7 +4937,7 @@
       "is_extensible": true
     },
     "AudioUnitRenderActionFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kAudioUnitRenderAction_PreRender",
@@ -4986,7 +4986,7 @@
       "is_extensible": true
     },
     "CAClockMessage": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kCAClockMessage_StartTimeSet",
@@ -5029,7 +5029,7 @@
       "is_extensible": true
     },
     "CAClockPropertyID": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kCAClockProperty_InternalTimebase",
@@ -5102,7 +5102,7 @@
       "is_extensible": true
     },
     "CAClockSyncMode": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kCAClockSyncMode_Internal",
@@ -5125,7 +5125,7 @@
       "is_extensible": true
     },
     "CAClockTimeFormat": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kCAClockTimeFormat_HostTime",
@@ -5168,7 +5168,7 @@
       "is_extensible": true
     },
     "CAClockTimebase": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kCAClockTimebase_HostTime",
@@ -5191,7 +5191,7 @@
       "is_extensible": true
     },
     "CAFFormatFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kCAFLinearPCMFormatFlagIsFloat",
@@ -5210,7 +5210,7 @@
       "is_extensible": true
     },
     "CAFRegionFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kCAFRegionFlag_LoopEnable",
@@ -5234,7 +5234,7 @@
       "is_extensible": true
     },
     "MDLabelDomain": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDLabelUserDomain",
@@ -5253,7 +5253,7 @@
       "doc": "@typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate()."
     },
     "MDQueryOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQuerySynchronous",
@@ -5276,7 +5276,7 @@
       "sdk_line": 83
     },
     "MDQuerySortOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQueryReverseSortOrderFlag",
@@ -5290,7 +5290,7 @@
       "doc": "@enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order."
     },
     "MusicSequenceFileFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kMusicSequenceFileFlags_Default",
@@ -5309,7 +5309,7 @@
       "is_extensible": true
     },
     "MusicSequenceFileTypeID": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kMusicSequenceFile_AnyType",
@@ -5332,7 +5332,7 @@
       "is_extensible": true
     },
     "MusicSequenceLoadFlags": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kMusicSequenceLoadSMF_PreserveTracks",
@@ -5351,7 +5351,7 @@
       "is_extensible": true
     },
     "MusicSequenceType": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "kMusicSequenceType_Beats",
@@ -13622,7 +13622,7 @@
       "availability": {}
     },
     "acl_entry_id_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FIRST_ENTRY",
@@ -13645,7 +13645,7 @@
       "sdk_line": 118
     },
     "acl_flag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FLAG_DEFER_INHERIT",
@@ -13688,7 +13688,7 @@
       "sdk_line": 125
     },
     "acl_perm_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_READ_DATA",
@@ -13786,7 +13786,7 @@
       "sdk_line": 72
     },
     "acl_tag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_UNDEFINED_TAG",
@@ -13809,7 +13809,7 @@
       "sdk_line": 94
     },
     "acl_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_TYPE_EXTENDED",
@@ -13852,7 +13852,7 @@
       "sdk_line": 101
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -13974,7 +13974,7 @@
       "is_extensible": true
     },
     "filesec_property_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "FILESEC_OWNER",
@@ -14022,7 +14022,7 @@
       "sdk_line": 582
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -14045,7 +14045,7 @@
       "sdk_line": 79
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",
@@ -14334,7 +14334,7 @@
       "is_extensible": true
     },
     "launch_data_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "LAUNCH_DATA_DICTIONARY",
@@ -14513,7 +14513,7 @@
       "sdk_line": 188
     },
     "ptrauth_key": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ptrauth_key_none",

@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-type Tcl_QueuePosition int64
+type Tcl_QueuePosition int32
 
 const (
 	TCL_QUEUE_TAIL Tcl_QueuePosition = 0
@@ -28,7 +28,7 @@ func (e Tcl_QueuePosition) String() string {
 	}
 }
 
-type Tcl_ValueType int64
+type Tcl_ValueType int32
 
 const (
 	TCL_INT      Tcl_ValueType = 0
@@ -52,7 +52,7 @@ func (e Tcl_ValueType) String() string {
 	}
 }
 
-type Tk_Anchor int64
+type Tk_Anchor int32
 
 const (
 	TK_ANCHOR_N      Tk_Anchor = 0
@@ -91,7 +91,7 @@ func (e Tk_Anchor) String() string {
 	}
 }
 
-type Tk_ConfigTypes int64
+type Tk_ConfigTypes int32
 
 const (
 	TK_CONFIG_BOOLEAN       Tk_ConfigTypes = 0
@@ -169,7 +169,7 @@ func (e Tk_ConfigTypes) String() string {
 	}
 }
 
-type Tk_Justify int64
+type Tk_Justify int32
 
 const (
 	TK_JUSTIFY_LEFT   Tk_Justify = 0
@@ -190,7 +190,7 @@ func (e Tk_Justify) String() string {
 	}
 }
 
-type Tk_OptionType int64
+type Tk_OptionType int32
 
 const (
 	TK_OPTION_BOOLEAN      Tk_OptionType = 0
@@ -259,7 +259,7 @@ func (e Tk_OptionType) String() string {
 	}
 }
 
-type Tk_RestrictAction int64
+type Tk_RestrictAction int32
 
 const (
 	TK_DEFER_EVENT   Tk_RestrictAction = 0
@@ -280,7 +280,7 @@ func (e Tk_RestrictAction) String() string {
 	}
 }
 
-type Tk_State int64
+type Tk_State int32
 
 const (
 	TK_STATE_NULL     Tk_State = -1
@@ -307,7 +307,7 @@ func (e Tk_State) String() string {
 	}
 }
 
-type XIMCaretDirection int64
+type XIMCaretDirection int32
 
 const (
 	XIMForwardChar      XIMCaretDirection = 0
@@ -355,7 +355,7 @@ func (e XIMCaretDirection) String() string {
 	}
 }
 
-type XIMCaretStyle int64
+type XIMCaretStyle int32
 
 const (
 	XIMIsInvisible XIMCaretStyle = 0
@@ -376,7 +376,7 @@ func (e XIMCaretStyle) String() string {
 	}
 }
 
-type XIMStatusDataType int64
+type XIMStatusDataType int32
 
 const (
 	XIMTextType   XIMStatusDataType = 0

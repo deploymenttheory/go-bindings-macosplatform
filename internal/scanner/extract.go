@@ -769,10 +769,16 @@ func scanEnum(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *
 		Doc:          docForNode(absFile, line),
 	}
 	if node.FixedUnderlyingType != nil {
-		e.GoType = objcIntTypeToGo(node.FixedUnderlyingType.QualType)
-	}
-	if e.GoType == "" {
-		e.GoType = "int64" // safe default
+		// Prefer the desugared canonical type so every typedef spelling of the same
+		// integer type resolves identically: uint32_t, UInt32, and unsigned int all
+		// desugar to "unsigned int" (→ uint32). Using qualType alone would leave the
+		// typedef spellings unrecognised and fall through to the int64 default,
+		// mis-sizing the enum (e.g. AudioChannelFlags is CF_OPTIONS(UInt32)).
+		underlying := node.FixedUnderlyingType.DesugaredQualType
+		if underlying == "" {
+			underlying = node.FixedUnderlyingType.QualType
+		}
+		e.GoType = objcIntTypeToGo(underlying)
 	}
 	var nextVal int64
 	for i := range node.Inner {
@@ -806,6 +812,15 @@ func scanEnum(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f *
 			}
 			e.Members = append(e.Members, member)
 		}
+	}
+	if e.GoType == "" {
+		// The clang AST reports no fixedUnderlyingType for a plain enum (no
+		// `enum E : type` and no CF_ENUM/CF_OPTIONS macro); clang still chose an
+		// underlying integer type implicitly from the enumerator values. Reproduce
+		// that choice from the member values so the enum's width matches C. A blanket
+		// int64 default would make a plain int-sized enum 8 bytes and mislay any
+		// struct that embeds it (e.g. AudioChannelDescription's AudioChannelFlags).
+		e.GoType = enumGoTypeFromValues(e.Members)
 	}
 	framework.Enums[node.Name] = e
 }
@@ -1435,6 +1450,57 @@ func hasValueInitializer(node *ASTNode) bool {
 }
 
 // objcIntTypeToGo converts an ObjC integer type name to its Go equivalent.
+// enumGoTypeFromValues picks the Go integer type for a plain enum whose clang
+// AST reports no fixed underlying type, reproducing clang's implicit choice from
+// the enumerator values: the smallest of int/unsigned int/long/unsigned long
+// (int32/uint32/int64/uint64) that represents every value. This keeps a plain
+// int-sized enum at 4 bytes instead of defaulting to int64 (8 bytes), which would
+// mislay any struct that embeds it. An empty enum falls back to int32.
+func enumGoTypeFromValues(members []macosplatformmetadata.EnumMember) string {
+	const (
+		maxInt32  = 1<<31 - 1
+		minInt32  = -(1 << 31)
+		maxUint32 = 1<<32 - 1
+		maxInt64  = 1<<63 - 1
+	)
+	anyNeg := false
+	var maxU uint64
+	var minI int64
+	for _, m := range members {
+		v := strings.TrimSpace(m.Value)
+		if v == "" {
+			continue
+		}
+		if strings.HasPrefix(v, "-") {
+			anyNeg = true
+			if n, err := strconv.ParseInt(v, 0, 64); err == nil && n < minI {
+				minI = n
+			}
+			continue
+		}
+		if n, err := strconv.ParseUint(v, 0, 64); err == nil && n > maxU {
+			maxU = n
+		}
+	}
+	if anyNeg {
+		// Signed: int32 when the whole range fits, else int64.
+		if minI >= minInt32 && maxU <= maxInt32 {
+			return "int32"
+		}
+		return "int64"
+	}
+	switch {
+	case maxU <= maxInt32:
+		return "int32" // clang uses signed int for small non-negative enums
+	case maxU <= maxUint32:
+		return "uint32"
+	case maxU <= maxInt64:
+		return "int64"
+	default:
+		return "uint64"
+	}
+}
+
 func objcIntTypeToGo(qt string) string {
 	qt = strings.TrimSpace(qt)
 	// Both the keyword spelling ("unsigned int") and the stdint typedef spelling

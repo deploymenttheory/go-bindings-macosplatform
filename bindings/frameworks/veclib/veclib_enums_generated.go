@@ -32,7 +32,7 @@ func (e BlasThreading) String() string {
 	}
 }
 
-type CblasOrder int64
+type CblasOrder int32
 
 const (
 	CblasRowMajor CblasOrder = 101
@@ -52,7 +52,7 @@ func (e CblasOrder) String() string {
 	}
 }
 
-type CblasTranspose int64
+type CblasTranspose int32
 
 const (
 	CblasNoTrans   CblasTranspose = 111
@@ -141,7 +141,7 @@ func (e VdspDftRealtocomplex) String() string {
 	}
 }
 
-type EntryID int64
+type EntryID int32
 
 const (
 	EntryIDFirstEntry EntryID = 0
@@ -164,7 +164,7 @@ func (e EntryID) String() string {
 	}
 }
 
-type Flag int64
+type Flag int32
 
 const (
 	FlagFlagDeferInherit      Flag = 1
@@ -199,7 +199,7 @@ func (e Flag) String() string {
 	}
 }
 
-type Perm int64
+type Perm int32
 
 const (
 	PermReadData           Perm = 2
@@ -259,7 +259,7 @@ func (e Perm) String() string {
 	}
 }
 
-type Tag int64
+type Tag int32
 
 const (
 	TagUndefinedTag  Tag = 0
@@ -282,7 +282,7 @@ func (e Tag) String() string {
 	}
 }
 
-type Type int64
+type Type int32
 
 const (
 	TypeExtended Type = 256
@@ -1578,7 +1578,7 @@ func (e BNNSTargetSystem) String() string {
 	}
 }
 
-type CblasDiag int64
+type CblasDiag int32
 
 const (
 	CblasNonUnit CblasDiag = 131
@@ -1598,7 +1598,7 @@ func (e CblasDiag) String() string {
 	}
 }
 
-type CblasSide int64
+type CblasSide int32
 
 const (
 	CblasLeft  CblasSide = 141
@@ -1618,7 +1618,7 @@ func (e CblasSide) String() string {
 	}
 }
 
-type CblasUplo int64
+type CblasUplo int32
 
 const (
 	CblasUpper CblasUplo = 121
@@ -1638,7 +1638,7 @@ func (e CblasUplo) String() string {
 	}
 }
 
-type Clockid int64
+type Clockid int32
 
 const (
 	ClockidRealtime           Clockid = 0
@@ -1739,7 +1739,7 @@ func (e DispatchBlockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type EvCmd int64
+type EvCmd int32
 
 const (
 	EVNOP   EvCmd = 0
@@ -1768,7 +1768,7 @@ func (e EvCmd) String() string {
 	}
 }
 
-type FilesecProperty int64
+type FilesecProperty int32
 
 const (
 	FilesecPropertyOwner        FilesecProperty = 1
@@ -1806,7 +1806,7 @@ func (e FilesecProperty) String() string {
 	}
 }
 
-type Idtype int64
+type Idtype int32
 
 const (
 	IdtypeAll  Idtype = 0
@@ -1829,7 +1829,7 @@ func (e Idtype) String() string {
 	}
 }
 
-type IpcInfoObjectType int64
+type IpcInfoObjectType uint32
 
 const (
 	IpcInfoObjectTypeNone               IpcInfoObjectType = 0
@@ -2011,7 +2011,7 @@ func (e IpcInfoObjectType) String() string {
 	}
 }
 
-type LaunchDataType int64
+type LaunchDataType int32
 
 const (
 	LaunchDataTypeDictionary LaunchDataType = 1
@@ -2056,7 +2056,7 @@ func (e LaunchDataType) String() string {
 }
 
 // These constants are used to specify a domain to MDLabelCreate().
-type MDLabelDomain int64
+type MDLabelDomain int32
 
 const (
 	KMDLabelUserDomain  MDLabelDomain = 0
@@ -2076,7 +2076,7 @@ func (e MDLabelDomain) String() string {
 	}
 }
 
-type MDQueryOptionFlags int64
+type MDQueryOptionFlags int32
 
 const (
 	KMDQuerySynchronous        MDQueryOptionFlags = 1
@@ -2099,7 +2099,7 @@ func (e MDQueryOptionFlags) String() string {
 	}
 }
 
-type MDQuerySortOptionFlags int64
+type MDQuerySortOptionFlags int32
 
 const (
 	KMDQueryReverseSortOrderFlag MDQuerySortOptionFlags = 1
@@ -2221,7 +2221,7 @@ func (e MpoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
-type NXMouseButton int64
+type NXMouseButton int32
 
 const (
 	NX_OneButton   NXMouseButton = 0
@@ -2290,7 +2290,7 @@ func (e OSLogType) String() string {
 	}
 }
 
-type PMPageToPaperMappingType int64
+type PMPageToPaperMappingType int32
 
 const (
 	KPMPageToPaperMappingNone       PMPageToPaperMappingType = 1
@@ -2310,7 +2310,7 @@ func (e PMPageToPaperMappingType) String() string {
 	}
 }
 
-type PtrauthKey int64
+type PtrauthKey int32
 
 const (
 	Ptrauth_key_none                     PtrauthKey = -1
@@ -2388,7 +2388,7 @@ func (e QosClass) String() string {
 }
 
 // Integrators
-type QuadratureIntegrator int64
+type QuadratureIntegrator int32
 
 const (
 	QuadratureIntegratorQng  QuadratureIntegrator = 0
@@ -2412,7 +2412,7 @@ func (e QuadratureIntegrator) String() string {
 }
 
 // Quadrature return status Success is 0, and errors have a negative value.
-type QuadratureStatus int64
+type QuadratureStatus int32
 
 const (
 	QuadratureStatusSuccess                    QuadratureStatus = 0
@@ -2842,7 +2842,7 @@ func (e Sparseupdate) String() string {
 }
 
 // The matrix property type
-type SparseMatrixProperty int64
+type SparseMatrixProperty int32
 
 const (
 	SparseMatrixPropertyUpperTriangular SparseMatrixProperty = 1
@@ -2869,7 +2869,7 @@ func (e SparseMatrixProperty) String() string {
 }
 
 // The norm specifier
-type SparseNorm int64
+type SparseNorm int32
 
 const (
 	SparseNormOne SparseNorm = 171
@@ -2896,7 +2896,7 @@ func (e SparseNorm) String() string {
 }
 
 // The type reflecting the status of an operations.
-type SparseStatus int64
+type SparseStatus int32
 
 const (
 	SparseStatusSuccess           SparseStatus = 0
@@ -2923,7 +2923,7 @@ func (e SparseStatus) String() string {
 }
 
 // An encoding of an image format type to be used with RGB <-> Y'CbCr conversions in vImage/Conversions.h These formats enumerate different vImage ARGB pixel formats.
-type VImageARGBType int64
+type VImageARGBType int32
 
 const (
 	KvImageARGB8888  VImageARGBType = 0
@@ -2946,7 +2946,7 @@ func (e VImageARGBType) String() string {
 	}
 }
 
-type VImageMDTableUsageHint int64
+type VImageMDTableUsageHint int32
 
 const (
 	KvImageMDTableHint_16Q12 VImageMDTableUsageHint = 1
@@ -2967,7 +2967,7 @@ func (e VImageMDTableUsageHint) String() string {
 }
 
 // An encoding of an image format type to be used with RGB <-> Y'CbCr conversions in vImage/Conversions.h These formats enumerate different vImage/CoreVideo Y'CbCr pixel formats.
-type VImageYpCbCrType int64
+type VImageYpCbCrType int32
 
 const (
 	KvImage422CbYpCrYp8                  VImageYpCbCrType = 0
@@ -3017,7 +3017,7 @@ func (e VImageYpCbCrType) String() string {
 	}
 }
 
-type VimageInterpolationmethod int64
+type VimageInterpolationmethod int32
 
 const (
 	KvImageNoInterpolation   VimageInterpolationmethod = 0

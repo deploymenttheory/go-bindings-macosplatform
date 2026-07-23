@@ -899,7 +899,7 @@ func (i AEAProfiles) isMultiValue() bool {
 }
 
 // [_time.h:156]
-type ClockidT int64
+type ClockidT int32
 
 const (
 	_CLOCK_REALTIME             ClockidT = 0
@@ -973,7 +973,7 @@ func (i ClockidT) isMultiValue() bool {
 }
 
 // [fcntl.h:582]
-type FilesecPropertyT int64
+type FilesecPropertyT int32
 
 const (
 	FILESEC_OWNER         FilesecPropertyT = 1

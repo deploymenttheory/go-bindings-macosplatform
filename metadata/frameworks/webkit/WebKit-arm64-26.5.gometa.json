@@ -39441,7 +39441,7 @@
   },
   "enums": {
     "CGLCPContextPriorityRequest": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kCGLCPContextPriorityRequestHigh",
@@ -39464,7 +39464,7 @@
       "sdk_line": 205
     },
     "DNSServiceAAAAPolicy": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kDNSServiceAAAAPolicyNone",
@@ -39484,7 +39484,7 @@
       "sdk_line": 203
     },
     "DOMEventExceptionCode": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "DOM_UNSPECIFIED_EVENT_TYPE_ERR",
@@ -39497,7 +39497,7 @@
       "sdk_line": 33
     },
     "DOMExceptionCode": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "DOM_INDEX_SIZE_ERR",
@@ -39580,7 +39580,7 @@
       "sdk_line": 33
     },
     "DOMRangeExceptionCode": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "DOM_BAD_BOUNDARYPOINTS_ERR",
@@ -39598,7 +39598,7 @@
       "sdk_line": 33
     },
     "DOMXPathExceptionCode": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "DOM_INVALID_EXPRESSION_ERR",
@@ -39616,7 +39616,7 @@
       "sdk_line": 33
     },
     "EvCmd": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "EVNOP",
@@ -39649,7 +39649,7 @@
       "sdk_line": 148
     },
     "MDLabelDomain": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDLabelUserDomain",
@@ -39668,7 +39668,7 @@
       "doc": "@typedef MDLabelDomain @abstract These constants are used to specify a domain to MDLabelCreate()."
     },
     "MDQueryOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQuerySynchronous",
@@ -39691,7 +39691,7 @@
       "sdk_line": 83
     },
     "MDQuerySortOptionFlags": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kMDQueryReverseSortOrderFlag",
@@ -39705,7 +39705,7 @@
       "doc": "@enum MDQuerySortOptionFlags @constant kMDQueryReverseSortOrderFlag Sort the attribute in reverse order."
     },
     "NXMouseButton": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "NX_OneButton",
@@ -39728,7 +39728,7 @@
       "sdk_line": 66
     },
     "PMPageToPaperMappingType": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "kPMPageToPaperMappingNone",
@@ -41795,7 +41795,7 @@
       "availability": {}
     },
     "acl_entry_id_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FIRST_ENTRY",
@@ -41818,7 +41818,7 @@
       "sdk_line": 118
     },
     "acl_flag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_FLAG_DEFER_INHERIT",
@@ -41861,7 +41861,7 @@
       "sdk_line": 125
     },
     "acl_perm_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_READ_DATA",
@@ -41959,7 +41959,7 @@
       "sdk_line": 72
     },
     "acl_tag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_UNDEFINED_TAG",
@@ -41982,7 +41982,7 @@
       "sdk_line": 94
     },
     "acl_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ACL_TYPE_EXTENDED",
@@ -42025,7 +42025,7 @@
       "sdk_line": 101
     },
     "clockid_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "_CLOCK_REALTIME",
@@ -42147,7 +42147,7 @@
       "is_extensible": true
     },
     "filesec_property_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "FILESEC_OWNER",
@@ -42195,7 +42195,7 @@
       "sdk_line": 582
     },
     "idtype_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "P_ALL",
@@ -42218,7 +42218,7 @@
       "sdk_line": 79
     },
     "ipc_info_object_type_t": {
-      "go_type": "int64",
+      "go_type": "uint32",
       "members": [
         {
           "name": "IPC_OTYPE_NONE",
@@ -42507,7 +42507,7 @@
       "is_extensible": true
     },
     "launch_data_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "LAUNCH_DATA_DICTIONARY",
@@ -42673,7 +42673,7 @@
       "is_extensible": true
     },
     "nw_browser_state_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_browser_state_invalid",
@@ -42712,7 +42712,7 @@
       "doc": "@typedef nw_browser_state_t @abstract Browser states sent by nw_browser_set_state_changed_handler."
     },
     "nw_connection_group_state_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_connection_group_state_invalid",
@@ -42751,7 +42751,7 @@
       "doc": "@typedef nw_connection_group_state_t @abstract Connection Group states sent by nw_connection_group_set_state_changed_handler. States progress forward and do not move backwards."
     },
     "nw_connection_state_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_connection_state_invalid",
@@ -42796,7 +42796,7 @@
       "doc": "@typedef nw_connection_state_t @abstract Connection states sent by nw_connection_set_state_changed_handler. States generally progress forward and do not move backwards, with the exception of preparing and waiting, which may alternate before the connection becomes ready or failed."
     },
     "nw_data_transfer_report_state_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_data_transfer_report_state_collecting",
@@ -42817,7 +42817,7 @@
       "doc": "@typedef nw_data_transfer_report_state_t @abstract The state of a Data Transfer Report indicates whether or not the contents have been collected, and are ready to be accessed."
     },
     "nw_endpoint_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_endpoint_type_invalid",
@@ -42856,7 +42856,7 @@
       "doc": "@typedef nw_endpoint_type_t @abstract Endpoint types represent a well-known form of endpoint. Values may be added to this enumeration, and some custom endpoint types may use values not defined in this enumeration."
     },
     "nw_error_domain_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_error_domain_invalid",
@@ -42897,7 +42897,7 @@
       "doc": "@typedef nw_error_domain_t @abstract The enumeration of network error domains."
     },
     "nw_ethernet_channel_state_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_ethernet_channel_state_invalid",
@@ -42943,7 +42943,7 @@
       "sdk_line": 44
     },
     "nw_framer_start_result_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_framer_start_result_ready",
@@ -42961,7 +42961,7 @@
       "sdk_line": 238
     },
     "nw_interface_radio_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_interface_radio_type_unknown",
@@ -43050,7 +43050,7 @@
       "doc": "@typedef nw_interface_radio_type_t @abstract Interface radio types represent the radio technology for a network link."
     },
     "nw_interface_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_interface_type_other",
@@ -43089,7 +43089,7 @@
       "doc": "@typedef nw_interface_type_t @abstract Interface types represent the underlying media for a network link, such as Wi-Fi or Cellular."
     },
     "nw_ip_ecn_flag_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_ip_ecn_flag_non_ect",
@@ -43122,7 +43122,7 @@
       "doc": "@typedef nw_ip_ecn_flag_t @abstract ECN flags marked in IP headers to indicate congestion."
     },
     "nw_ip_local_address_preference_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_ip_local_address_preference_default",
@@ -43149,7 +43149,7 @@
       "doc": "@typedef nw_ip_local_address_preference_t @abstract Preference for local addresses selection."
     },
     "nw_ip_version_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_ip_version_any",
@@ -43176,7 +43176,7 @@
       "doc": "@typedef nw_ip_version_t @abstract A specific version of the Internet Protocol."
     },
     "nw_link_quality_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_link_quality_unknown",
@@ -43209,7 +43209,7 @@
       "doc": "@typedef nw_link_quality_t @abstract Link quality measurement is a representation of the expected capabilities of the link layer network attachment. Use this value to tune initial values for algorithms that can scale with the capabilities of the network. Do not use this value to gate connection attempts or to override adjustments that would be made based on actual network performance."
     },
     "nw_listener_state_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_listener_state_invalid",
@@ -43248,7 +43248,7 @@
       "doc": "@typedef nw_listener_state_t @abstract Listener states sent by nw_listener_set_state_changed_handler. States progress forward and do not move backwards."
     },
     "nw_multipath_service_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_multipath_service_disabled",
@@ -43281,7 +43281,7 @@
       "doc": "@typedef nw_multipath_service_t @abstract Multipath services represent the modes of multipath usage that are allowed for connections."
     },
     "nw_multipath_version_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_multipath_version_unspecified",
@@ -43308,7 +43308,7 @@
       "doc": "@typedef nw_multipath_version_t @abstract Multipath versions represent the MPTCP standard versions"
     },
     "nw_parameters_expired_dns_behavior_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_parameters_expired_dns_behavior_default",
@@ -43343,7 +43343,7 @@
       "doc": "@typedef nw_parameters_expired_dns_behavior_t @abstract Expired DNS behavior defines whether or not a connection will allow the use of expired DNS answers during connection establishment."
     },
     "nw_path_status_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_path_status_invalid",
@@ -43376,7 +43376,7 @@
       "doc": "@typedef nw_path_status_t @abstract A network path status indicates if there is a usable route available upon which to send and receive data."
     },
     "nw_path_unsatisfied_reason_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_path_unsatisfied_reason_not_available",
@@ -43417,7 +43417,7 @@
       "doc": "@typedef nw_path_unsatisfied_reason_t @abstract A network path unsatisfied reason may indicate the reason the path is currently unsatisfied for some conditions."
     },
     "nw_quic_stream_type_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_quic_stream_type_unknown",
@@ -43450,7 +43450,7 @@
       "doc": "@typedef nw_quic_stream_type_t @abstract Represents the type of a QUIC stream."
     },
     "nw_report_resolution_protocol_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_report_resolution_protocol_unknown",
@@ -43489,7 +43489,7 @@
       "doc": "@typedef nw_report_resolution_protocol_t @abstract The protocol used for endpoint resolution."
     },
     "nw_report_resolution_source_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_report_resolution_source_query",
@@ -43516,7 +43516,7 @@
       "doc": "@typedef nw_report_resolution_source_t @abstract The source of a resolution indicates if the set of endpoints was resolved locally using a cache, or sent a query over the network."
     },
     "nw_service_class_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_service_class_best_effort",
@@ -43561,7 +43561,7 @@
       "doc": "@typedef nw_service_class_t @abstract The network service class represents the network queuing priority to use for traffic generated by a connection."
     },
     "nw_txt_record_find_key_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_txt_record_find_key_invalid",
@@ -43600,7 +43600,7 @@
       "doc": "@typedef nw_txt_record_find_key_t @abstract An enumeration of possible find results when trying to find a key-value pair in the TXT record object."
     },
     "nw_ws_close_code_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_ws_close_code_normal_closure",
@@ -43681,7 +43681,7 @@
       "doc": "@typedef nw_ws_close_code_t @abstract WebSocket close codes that describe the reason for closing a WebSocket connection. Endpoints MAY use the following pre-defined status codes when sending a Close frame."
     },
     "nw_ws_opcode_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_ws_opcode_invalid",
@@ -43732,7 +43732,7 @@
       "doc": "@typedef nw_ws_opcode_t @abstract WebSocket opcodes that denote the type of frame sent or received by a WebSocket endpoint. Opcodes define the interpretation of their associated payload data."
     },
     "nw_ws_response_status_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_ws_response_status_invalid",
@@ -43759,7 +43759,7 @@
       "doc": "@typedef nw_ws_response_status_t @abstract The status of a WebSocket server's response to a client's request to connect."
     },
     "nw_ws_version_t": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "nw_ws_version_invalid",
@@ -43815,7 +43815,7 @@
       "is_extensible": true
     },
     "ptrauth_key": {
-      "go_type": "int64",
+      "go_type": "int32",
       "members": [
         {
           "name": "ptrauth_key_none",
