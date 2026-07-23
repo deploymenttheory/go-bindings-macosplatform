@@ -198,7 +198,20 @@
       "is_extensible": true
     }
   },
-  "structs": {},
+  "structs": {
+    "audit_token_t": {
+      "fields": [
+        {
+          "name": "val",
+          "objc_type": "unsigned int[8]"
+        }
+      ],
+      "size": 32,
+      "availability": {},
+      "sdk_file": "message.h",
+      "sdk_line": 506
+    }
+  },
   "functions": [
     {
       "name": "proc_listpidspath",

@@ -15,6 +15,7 @@ type (
 	AclPermT                          = raw.AclPermT
 	AclTagT                           = raw.AclTagT
 	AclTypeT                          = raw.AclTypeT
+	AuditTokenT                       = raw.AuditTokenT
 	ClockidT                          = raw.ClockidT
 	CryptexAuthTypeT                  = raw.CryptexAuthTypeT
 	EsActionTypeT                     = raw.EsActionTypeT

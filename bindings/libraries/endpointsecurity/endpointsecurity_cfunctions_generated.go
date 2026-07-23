@@ -9,15 +9,6 @@ import (
 	"unsafe"
 )
 
-// AuditToken wraps the C handle audit_token_t.
-type AuditToken struct{ ptr unsafe.Pointer }
-
-// WrapAuditToken adopts an existing audit_token_t handle.
-func WrapAuditToken(p unsafe.Pointer) AuditToken { return AuditToken{ptr: p} }
-
-// Ptr returns the underlying audit_token_t handle.
-func (h AuditToken) Ptr() unsafe.Pointer { return h.ptr }
-
 // Client wraps the C handle es_client_t.
 type Client struct{ ptr unsafe.Pointer }
 
@@ -51,24 +42,24 @@ func (h Client) RespondFlagsResult(message *raw.EsMessageT, authorized_flags uin
 	return raw.Es_respond_flags_result(h.ptr, message, authorized_flags, cache)
 }
 
-func (h Client) MuteProcess(audit_token AuditToken) raw.EsReturnT {
-	return raw.Es_mute_process(h.ptr, audit_token.ptr)
+func (h Client) MuteProcess(audit_token *raw.AuditTokenT) raw.EsReturnT {
+	return raw.Es_mute_process(h.ptr, audit_token)
 }
 
-func (h Client) MuteProcessEvents(audit_token AuditToken, events *raw.EsEventTypeT, event_count uint64) raw.EsReturnT {
-	return raw.Es_mute_process_events(h.ptr, audit_token.ptr, events, event_count)
+func (h Client) MuteProcessEvents(audit_token *raw.AuditTokenT, events *raw.EsEventTypeT, event_count uint64) raw.EsReturnT {
+	return raw.Es_mute_process_events(h.ptr, audit_token, events, event_count)
 }
 
-func (h Client) UnmuteProcess(audit_token AuditToken) raw.EsReturnT {
-	return raw.Es_unmute_process(h.ptr, audit_token.ptr)
+func (h Client) UnmuteProcess(audit_token *raw.AuditTokenT) raw.EsReturnT {
+	return raw.Es_unmute_process(h.ptr, audit_token)
 }
 
-func (h Client) UnmuteProcessEvents(audit_token AuditToken, events *raw.EsEventTypeT, event_count uint64) raw.EsReturnT {
-	return raw.Es_unmute_process_events(h.ptr, audit_token.ptr, events, event_count)
+func (h Client) UnmuteProcessEvents(audit_token *raw.AuditTokenT, events *raw.EsEventTypeT, event_count uint64) raw.EsReturnT {
+	return raw.Es_unmute_process_events(h.ptr, audit_token, events, event_count)
 }
 
-func (h Client) MutedProcesses(count *uint64, audit_tokens AuditToken) raw.EsReturnT {
-	return raw.Es_muted_processes(h.ptr, count, audit_tokens.ptr)
+func (h Client) MutedProcesses(count *uint64, audit_tokens unsafe.Pointer) raw.EsReturnT {
+	return raw.Es_muted_processes(h.ptr, count, audit_tokens)
 }
 
 func (h Client) MutedProcessesEvents(muted_processes unsafe.Pointer) raw.EsReturnT {

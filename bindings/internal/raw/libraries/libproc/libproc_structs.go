@@ -3,3 +3,8 @@
 //go:build darwin
 
 package libproc
+
+// [message.h:506]
+type AuditTokenT struct {
+	Val [8]uint32
+}

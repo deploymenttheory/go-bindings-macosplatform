@@ -10,6 +10,7 @@ import raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/inter
 // types and values so callers name them through this package.
 
 type (
+	AuditTokenT      = raw.AuditTokenT
 	ClockidT         = raw.ClockidT
 	CryptexAuthTypeT = raw.CryptexAuthTypeT
 	GraftdmgTypeT    = raw.GraftdmgTypeT

@@ -34,7 +34,7 @@ var (
 	_fnTk_CanvasPsPath                    func(*tcl.Tcl_Interp, unsafe.Pointer, *float64, int)
 	_fnTk_CanvasPsStipple                 func(*tcl.Tcl_Interp, unsafe.Pointer, int) int
 	_fnTk_CanvasPsY                       func(unsafe.Pointer, float64) float64
-	_fnTk_CanvasSetOffset                 func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnTk_CanvasSetOffset                 func(unsafe.Pointer, unsafe.Pointer, *Tk_TSOffset)
 	_fnTk_CanvasSetStippleOrigin          func(unsafe.Pointer, unsafe.Pointer)
 	_fnTk_CanvasTagsParseProc             func(unsafe.Pointer, *tcl.Tcl_Interp, unsafe.Pointer, string, string, int) int
 	_fnTk_CanvasTagsPrintProc             func(unsafe.Pointer, unsafe.Pointer, string, int, unsafe.Pointer) string
@@ -149,7 +149,7 @@ var (
 	_fnTk_GetElementSize                  func(unsafe.Pointer, unsafe.Pointer, string, unsafe.Pointer, int, int, int, *int32, *int32)
 	_fnTk_GetFont                         func(*tcl.Tcl_Interp, unsafe.Pointer, string) unsafe.Pointer
 	_fnTk_GetFontFromObj                  func(unsafe.Pointer, *tcl.Tcl_Obj) unsafe.Pointer
-	_fnTk_GetFontMetrics                  func(unsafe.Pointer, unsafe.Pointer)
+	_fnTk_GetFontMetrics                  func(unsafe.Pointer, *Tk_FontMetrics)
 	_fnTk_GetGC                           func(unsafe.Pointer, uint, unsafe.Pointer) unsafe.Pointer
 	_fnTk_GetImage                        func(*tcl.Tcl_Interp, unsafe.Pointer, string, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 	_fnTk_GetImageMasterData              func(*tcl.Tcl_Interp, string, unsafe.Pointer) unsafe.Pointer
@@ -380,7 +380,7 @@ func Tk_CanvasPsY(canvas unsafe.Pointer, y float64) float64 {
 	return _fnTk_CanvasPsY(canvas, y)
 }
 
-func Tk_CanvasSetOffset(canvas unsafe.Pointer, gc unsafe.Pointer, offset unsafe.Pointer) {
+func Tk_CanvasSetOffset(canvas unsafe.Pointer, gc unsafe.Pointer, offset *Tk_TSOffset) {
 	_fnTk_CanvasSetOffset(canvas, gc, offset)
 }
 
@@ -840,7 +840,7 @@ func Tk_GetFontFromObj(tkwin unsafe.Pointer, objPtr *tcl.Tcl_Obj) unsafe.Pointer
 	return _fnTk_GetFontFromObj(tkwin, objPtr)
 }
 
-func Tk_GetFontMetrics(font unsafe.Pointer, fmPtr unsafe.Pointer) {
+func Tk_GetFontMetrics(font unsafe.Pointer, fmPtr *Tk_FontMetrics) {
 	_fnTk_GetFontMetrics(font, fmPtr)
 }
 

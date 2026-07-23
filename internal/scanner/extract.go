@@ -972,20 +972,20 @@ func cScalarSizeAlign(cType string) (size, align int, ok bool) {
 	}
 	// Only fixed-width types whose Go mapping is unambiguous and identical in size
 	// are admitted, so the scanner's packed-contiguity check agrees with the
-	// emitter's (which computes from the resolved Go type). Native ints of
-	// platform-dependent or codegen-dependent width (int, unsigned, short) are
-	// deliberately excluded — a struct using them stays an opaque unsafe.Pointer
-	// rather than risk a scanner/emitter layout disagreement.
+	// emitter's (which computes from the resolved Go type).
 	switch t {
 	case "uint8_t", "int8_t", "char", "signed char", "unsigned char", "bool", "_Bool", "Boolean":
 		return 1, 1, true
 	case "uint16_t", "int16_t", "short", "unsigned short", "short int", "unsigned short int":
-		// The mapper resolves short/unsigned short to int16/uint16 (2 bytes), so
-		// these are safe. Plain int/unsigned are deliberately excluded: the mapper
-		// resolves them to Go int/uint (8 bytes), which does not match C's 4-byte
-		// int, so a struct using them stays an opaque unsafe.Pointer.
 		return 2, 2, true
-	case "uint32_t", "int32_t", "float":
+	case "uint32_t", "int32_t", "float", "int", "signed int", "unsigned int", "unsigned":
+		// Native C int/unsigned are 4 bytes. The mapper resolves them to Go int/uint
+		// (8 bytes) for ergonomic function signatures, but every struct-field emitter
+		// width-corrects them back to int32/uint32 (frameworks idiomatic via
+		// structlayout.StructFieldGoType, raw frameworks likewise, libraries via the
+		// mapper's int->int32 primitive), so the emitted 4-byte field matches C and
+		// this admission. This is what lets referenced-by-value structs like
+		// audit_token_t (unsigned int[8]) be captured as typed value structs.
 		return 4, 4, true
 	case "uint64_t", "int64_t", "double":
 		return 8, 8, true

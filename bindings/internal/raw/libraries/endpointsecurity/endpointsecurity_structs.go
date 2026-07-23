@@ -9,6 +9,11 @@ import (
 	"unsafe"
 )
 
+// [message.h:506]
+type AuditTokenT struct {
+	Val [8]uint32
+}
+
 // @brief Describes, for a single right, the class of that right and if it was granted @field right_name            The name of the right being considered @field rule_class            The class of the right being considered The rule class determines how the operating system determines if it should be granted or not @field granted               Indicates if the right was granted or not
 // [ESMessage.h:1986]
 type EsAuthorizationResultT struct {
@@ -55,7 +60,7 @@ type EsEventAuthenticationOdT struct {
 	Record_name      EsStringTokenT
 	Node_name        EsStringTokenT
 	Db_path          EsStringTokenT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification that an authentication was performed. @field success           True iff authentication was successful. @field type              The type of authentication. @field data              Type-specific data describing the authentication. @note This event type does not support caching (notify-only).
@@ -73,7 +78,7 @@ type EsEventAuthenticationTokenT struct {
 	Pubkey_hash        EsStringTokenT
 	Token_id           EsStringTokenT
 	Kerberos_principal EsStringTokenT
-	Instigator_token   unsafe.Pointer
+	Instigator_token   AuditTokenT
 }
 
 // @brief TouchID authentication data for type ES_AUTHENTICATION_TYPE_TOUCHID. @field instigator            Process that instigated the authentication (XPC caller that asked for authentication). @field touchid_mode          TouchID authentication type @field has_uid               Describes whether or not the uid of the user authenticated is available @field uid                   Union that is valid when `has_uid` is set to `true` @field uid.uid               uid of user that was authenticated. This will be set when `success` is true and `touchid_mode` is of verification type i.e. ES_TOUCHID_MODE_VERIFICATION @field instigator_token      Audit token of the process that instigated this event.
@@ -83,7 +88,7 @@ type EsEventAuthenticationTouchidT struct {
 	Touchid_mode     EsTouchidModeT
 	Has_uid          bool
 	Uid              unsafe.Pointer
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification that a process had it's right petition judged @field instigator            Process that submitted the petition (XPC caller) @field petitioner            Process that created the petition @field return_code           The overall result of the petition. 0 indicates success. Possible return codes are defined Security framework "Authorization/Authorizatioh.h" @field result_count          The number of elements in `results` @field results               Array of results. One for each right that was peititioned @field instigator_token      Audit token of the process that submitted the petition. @field petitioner_token      Audit token of the process that created the petition. @note This event type does not support caching (notify-only).
@@ -94,8 +99,8 @@ type EsEventAuthorizationJudgementT struct {
 	Return_code      int32
 	Result_count     uint64
 	Results          *EsAuthorizationResultT
-	Instigator_token unsafe.Pointer
-	Petitioner_token unsafe.Pointer
+	Instigator_token AuditTokenT
+	Petitioner_token AuditTokenT
 }
 
 // @brief Notification that a process peititioned for certain authorization rights @field instigator            Process that submitted the petition (XPC caller) @field petitioner            Process that created the petition @field flags                 Flags associated with the petition. Defined Security framework "Authorization/Authorizatioh.h" @field right_count           The number of elements in `rights` @field rights                Array of string tokens, each token is the name of a right being requested @field instigator_token      Audit token of the process that submitted the petition. @field petitioner_token      Audit token of the process that created the petition. @note This event type does not support caching (notify-only).
@@ -106,8 +111,8 @@ type EsEventAuthorizationPetitionT struct {
 	Flags            uint32
 	Right_count      uint64
 	Rights           *EsStringTokenT
-	Instigator_token unsafe.Pointer
-	Petitioner_token unsafe.Pointer
+	Instigator_token AuditTokenT
+	Petitioner_token AuditTokenT
 }
 
 // @brief Notification for launch item being made known to background task management.  This includes launch agents and daemons as well as login items added by the user, via MDM or by an app. @field instigator            Optional.  Process that instigated the BTM operation (XPC caller that asked for the item to be added). @field app                   Optional.  App process that registered the item. @field item                  BTM launch item. @field executable_path       Optional.  If available and applicable, the POSIX executable path from the launchd plist. If the path is relative, it is relative to item->app_url. @field instigator_token      Audit token of the process that instigated this event. @field app_token             Audit token of the app process that registered the item. @note May be emitted for items where an add was already seen previously, with or without the item having changed. @note This event type does not support caching (notify-only).
@@ -117,8 +122,8 @@ type EsEventBtmLaunchItemAddT struct {
 	App              *EsProcessT
 	Item             *EsBtmLaunchItemT
 	Executable_path  EsStringTokenT
-	Instigator_token unsafe.Pointer
-	App_token        unsafe.Pointer
+	Instigator_token *AuditTokenT
+	App_token        *AuditTokenT
 }
 
 // @brief Notification for launch item being removed from background task management.  This includes launch agents and daemons as well as login items added by the user, via MDM or by an app. @field instigator            Optional.  Process that instigated the BTM operation (XPC caller that asked for the item to be removed). @field app                   Optional.  App process that registered the item. @field item                  BTM launch item. @field instigator_token      Audit token of the process that instigated this event. @field app_token             Audit token of the app process that removed the item. @note This event type does not support caching (notify-only).
@@ -127,8 +132,8 @@ type EsEventBtmLaunchItemRemoveT struct {
 	Instigator       *EsProcessT
 	App              *EsProcessT
 	Item             *EsBtmLaunchItemT
-	Instigator_token unsafe.Pointer
-	App_token        unsafe.Pointer
+	Instigator_token *AuditTokenT
+	App_token        *AuditTokenT
 }
 
 // A type for an event that indicates a change to a process’s working directory.
@@ -241,7 +246,7 @@ type EsEventFileProviderMaterializeT struct {
 	Instigator       *EsProcessT
 	Source           *EsFileT
 	Target           *EsFileT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 	Reserved         [32]uint8
 }
 
@@ -463,7 +468,7 @@ type EsEventOdAttributeSetT struct {
 	Attribute_values      *EsStringTokenT
 	Node_name             EsStringTokenT
 	Db_path               EsStringTokenT
-	Instigator_token      unsafe.Pointer
+	Instigator_token      AuditTokenT
 }
 
 // @brief Notification that an attribute value was added to a record. @field instigator            Process that instigated operation (XPC caller). @field error_code            0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field record_type           The type of the record to which the attribute value was added. @field record_name           The name of the record to which the attribute value was added. @field attribute_name        The name of the attribute to which the value was added. @field attribute_value       The value that was added. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only). @note Attributes conceptually have the type `Map String (Set String)`. Each OD record has a Map of attribute name to Set of attribute value. When an attribute value is added, it is inserted into the set of values for that name.
@@ -477,7 +482,7 @@ type EsEventOdAttributeValueAddT struct {
 	Attribute_value  EsStringTokenT
 	Node_name        EsStringTokenT
 	Db_path          EsStringTokenT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification that an attribute value was removed from a record. @field instigator            Process that instigated operation (XPC caller). @field error_code            0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field record_type           The type of the record from which the attribute value was removed. @field record_name           The name of the record from which the attribute value was removed. @field attribute_name        The name of the attribute from which the value was removed. @field attribute_value       The value that was removed. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only). @note Attributes conceptually have the type `Map String (Set String)`. Each OD record has a Map of attribute name to Set of attribute value. When an attribute value is removed, it is subtraced from the set of values for that name. @note Removing a value that was never added is a no-op.
@@ -491,7 +496,7 @@ type EsEventOdAttributeValueRemoveT struct {
 	Attribute_value  EsStringTokenT
 	Node_name        EsStringTokenT
 	Db_path          EsStringTokenT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification that a group was created. @field instigator              Process that instigated operation (XPC caller). @field error_code              0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field group_name              The name of the group that was created. @field node_name               OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path                 Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token        Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
@@ -502,7 +507,7 @@ type EsEventOdCreateGroupT struct {
 	Group_name       EsStringTokenT
 	Node_name        EsStringTokenT
 	Db_path          EsStringTokenT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification that a user account was created. @field instigator              Process that instigated operation (XPC caller). @field error_code              0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field user_name               The name of the user account that was created. @field node_name               OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path                 Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token        Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
@@ -513,7 +518,7 @@ type EsEventOdCreateUserT struct {
 	User_name        EsStringTokenT
 	Node_name        EsStringTokenT
 	Db_path          EsStringTokenT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification that a group was deleted. @field instigator              Process that instigated operation (XPC caller). @field error_code              0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field group_name              The name of the group that was deleted. @field node_name               OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path                 Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token        Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
@@ -524,7 +529,7 @@ type EsEventOdDeleteGroupT struct {
 	Group_name       EsStringTokenT
 	Node_name        EsStringTokenT
 	Db_path          EsStringTokenT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification that a user account was deleted. @field instigator              Process that instigated operation (XPC caller). @field error_code              0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field user_name               The name of the user account that was deleted. @field node_name               OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path                 Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token        Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
@@ -535,7 +540,7 @@ type EsEventOdDeleteUserT struct {
 	User_name        EsStringTokenT
 	Node_name        EsStringTokenT
 	Db_path          EsStringTokenT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification that a user account was disabled. @field instigator            Process that instigated operation (XPC caller). @field error_code            0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field user_name             The name of the user account that was disabled. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
@@ -546,7 +551,7 @@ type EsEventOdDisableUserT struct {
 	User_name        EsStringTokenT
 	Node_name        EsStringTokenT
 	Db_path          EsStringTokenT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification that a user account was enabled. @field instigator            Process that instigated operation (XPC caller). @field error_code            0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field user_name             The name of the user account that was enabled. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
@@ -557,7 +562,7 @@ type EsEventOdEnableUserT struct {
 	User_name        EsStringTokenT
 	Node_name        EsStringTokenT
 	Db_path          EsStringTokenT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification that a member was added to a group. @field instigator            Process that instigated operation (XPC caller). @field group_name            The group to which the member was added. @field member                The identity of the member added. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only). @note This event does not indicate that a member was actually added. For example when adding a user to a group they are already a member of.
@@ -569,7 +574,7 @@ type EsEventOdGroupAddT struct {
 	Member           *EsOdMemberIdT
 	Node_name        EsStringTokenT
 	Db_path          EsStringTokenT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification that a member was removed from a group. @field instigator            Process that instigated operation (XPC caller). @field group_name            The group from which the member was removed. @field member                The identity of the member removed. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only). @note This event does not indicate that a member was actually removed. For example when removing a user from a group they are not a member of.
@@ -581,7 +586,7 @@ type EsEventOdGroupRemoveT struct {
 	Member           *EsOdMemberIdT
 	Node_name        EsStringTokenT
 	Db_path          EsStringTokenT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification that a group had it's members initialised or replaced. @field instigator            Process that instigated operation (XPC caller). @field error_code            0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field group_name            The group for which members were set. @field members               Array of new members. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only). @note This event does not indicate that a member was actually removed. For example when removing a user from a group they are not a member of.
@@ -593,7 +598,7 @@ type EsEventOdGroupSetT struct {
 	Members          *EsOdMemberIdArrayT
 	Node_name        EsStringTokenT
 	Db_path          EsStringTokenT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification that an account had its password modified. @field instigator            Process that instigated operation (XPC caller). @field error_code            0 indicates the operation succeeded. Values indicating specific failure reasons are defined in odconstants.h. @field account_type          The type of the account for which the password was modified. @field account_name          The name of the account for which the password was modified. @field node_name             OD node being mutated. Typically one of "/Local/Default", "/LDAPv3/<server>" or "/Active Directory/<domain>". @field db_path               Optional.  If node_name is "/Local/Default", this is the path of the database against which OD is authenticating. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
@@ -605,7 +610,7 @@ type EsEventOdModifyPasswordT struct {
 	Account_name     EsStringTokenT
 	Node_name        EsStringTokenT
 	Db_path          EsStringTokenT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // A type for an event that indicates the opening of a file.
@@ -660,7 +665,7 @@ type EsEventProfileAddT struct {
 	Instigator       *EsProcessT
 	Is_update        bool
 	Profile          *EsProfileT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // @brief Notification for Profiles removed on the system. @field instigator            Process that instigated the Profile removal. @field profile               Profile being removed. @field instigator_token      Audit token of the process that instigated this event. @note This event type does not support caching (notify-only).
@@ -668,7 +673,7 @@ type EsEventProfileAddT struct {
 type EsEventProfileRemoveT struct {
 	Instigator       *EsProcessT
 	Profile          *EsProfileT
-	Instigator_token unsafe.Pointer
+	Instigator_token AuditTokenT
 }
 
 // A type for an event that indicates the closing of a pseudoterminal device.
@@ -910,9 +915,9 @@ type EsEventTccModifyT struct {
 	Identity          EsStringTokenT
 	Identity_type     EsTccIdentityTypeT
 	Update_type       EsTccEventTypeT
-	Instigator_token  unsafe.Pointer
+	Instigator_token  AuditTokenT
 	Instigator        *EsProcessT
-	Responsible_token unsafe.Pointer
+	Responsible_token *AuditTokenT
 	Responsible       *EsProcessT
 	Right             EsTccAuthorizationRightT
 	Reason            EsTccAuthorizationReasonT
@@ -1002,7 +1007,7 @@ type EsEventXpMalwareRemediatedT struct {
 	Success                        bool
 	Result_description             EsStringTokenT
 	Remediated_path                EsStringTokenT
-	Remediated_process_audit_token unsafe.Pointer
+	Remediated_process_audit_token *AuditTokenT
 }
 
 // @brief Notification for an XPC connection being established to a named service. @field service_name          Service name of the named service. @field service_domain_type   The type of XPC domain in which the service resides in. @note This event type does not support caching (notify-only).
@@ -1065,7 +1070,7 @@ type EsMutedPathsT struct {
 // A structure that describes a process’s muted events.
 // [ESTypes.h:471]
 type EsMutedProcessT struct {
-	Audit_token unsafe.Pointer
+	Audit_token AuditTokenT
 	Event_count uint64
 	Events      *EsEventTypeT
 }
@@ -1095,7 +1100,7 @@ type EsOdMemberIdT struct {
 // A type that describes a process, as delivered by an Endpoint Security message.
 // [ESMessageCore.h:97]
 type EsProcessT struct {
-	Audit_token             unsafe.Pointer
+	Audit_token             AuditTokenT
 	Ppid                    int32
 	Original_ppid           int32
 	Group_id                int32
@@ -1109,8 +1114,8 @@ type EsProcessT struct {
 	Executable              *EsFileT
 	Tty                     *EsFileT
 	Start_time              bsd.Timeval
-	Responsible_audit_token unsafe.Pointer
-	Parent_audit_token      unsafe.Pointer
+	Responsible_audit_token AuditTokenT
+	Parent_audit_token      AuditTokenT
 	Cs_validation_category  EsCsValidationCategoryT
 }
 

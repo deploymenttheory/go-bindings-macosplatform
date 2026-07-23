@@ -5,38 +5,10 @@
 package libproc
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/endpointsecurity"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/libproc"
 	"unsafe"
 )
-
-// AuditToken wraps the C handle audit_token_t.
-type AuditToken struct{ ptr unsafe.Pointer }
-
-// WrapAuditToken adopts an existing audit_token_t handle.
-func WrapAuditToken(p unsafe.Pointer) AuditToken { return AuditToken{ptr: p} }
-
-// Ptr returns the underlying audit_token_t handle.
-func (h AuditToken) Ptr() unsafe.Pointer { return h.ptr }
-
-func (h AuditToken) PidpathAudittoken(buffer unsafe.Pointer, buffersize uint32) int32 {
-	return raw.Proc_pidpath_audittoken(h.ptr, buffer, buffersize)
-}
-
-func (h AuditToken) SignalWithAudittoken(sig int32) int32 {
-	return raw.Proc_signal_with_audittoken(h.ptr, sig)
-}
-
-func (h AuditToken) TerminateWithAudittoken(sig *int32) int32 {
-	return raw.Proc_terminate_with_audittoken(h.ptr, sig)
-}
-
-func (h AuditToken) SignalDelegate(target AuditToken, sig int32) int32 {
-	return raw.Proc_signal_delegate(h.ptr, target.ptr, sig)
-}
-
-func (h AuditToken) TerminateDelegate(target AuditToken, sig *int32) int32 {
-	return raw.Proc_terminate_delegate(h.ptr, target.ptr, sig)
-}
 
 // RusageInfo wraps the C handle rusage_info_t.
 type RusageInfo struct{ ptr unsafe.Pointer }
@@ -95,6 +67,10 @@ func Pidpath(pid int32, buffer unsafe.Pointer, buffersize uint32) int32 {
 	return raw.Proc_pidpath(pid, buffer, buffersize)
 }
 
+func PidpathAudittoken(audittoken *endpointsecurity.AuditTokenT, buffer unsafe.Pointer, buffersize uint32) int32 {
+	return raw.Proc_pidpath_audittoken(audittoken, buffer, buffersize)
+}
+
 func Libversion(major *int32, minor *int32) int32 {
 	return raw.Proc_libversion(major, minor)
 }
@@ -129,6 +105,22 @@ func Terminate(pid int32, sig *int32) int32 {
 
 func TerminateAllRsr(sig int32) int32 {
 	return raw.Proc_terminate_all_rsr(sig)
+}
+
+func SignalWithAudittoken(audittoken *endpointsecurity.AuditTokenT, sig int32) int32 {
+	return raw.Proc_signal_with_audittoken(audittoken, sig)
+}
+
+func TerminateWithAudittoken(audittoken *endpointsecurity.AuditTokenT, sig *int32) int32 {
+	return raw.Proc_terminate_with_audittoken(audittoken, sig)
+}
+
+func SignalDelegate(instigator endpointsecurity.AuditTokenT, target endpointsecurity.AuditTokenT, sig int32) int32 {
+	return raw.Proc_signal_delegate(instigator, target, sig)
+}
+
+func TerminateDelegate(instigator endpointsecurity.AuditTokenT, target endpointsecurity.AuditTokenT, sig *int32) int32 {
+	return raw.Proc_terminate_delegate(instigator, target, sig)
 }
 
 func SetNoSmt() int32 {

@@ -6,54 +6,10 @@ package bsm
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/bsm"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/endpointsecurity"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/bsd"
 	"unsafe"
 )
-
-// AuditToken wraps the C handle audit_token_t.
-type AuditToken struct{ ptr unsafe.Pointer }
-
-// WrapAuditToken adopts an existing audit_token_t handle.
-func WrapAuditToken(p unsafe.Pointer) AuditToken { return AuditToken{ptr: p} }
-
-// Ptr returns the underlying audit_token_t handle.
-func (h AuditToken) Ptr() unsafe.Pointer { return h.ptr }
-
-func (h AuditToken) ToAu32(auidp *uint32, euidp *uint32, egidp *uint32, ruidp *uint32, rgidp *uint32, pidp *int32, asidp *int32, tidp Tid) {
-	raw.Audit_token_to_au32(h.ptr, auidp, euidp, egidp, ruidp, rgidp, pidp, asidp, tidp.ptr)
-}
-
-func (h AuditToken) ToAuid() uint32 {
-	return raw.Audit_token_to_auid(h.ptr)
-}
-
-func (h AuditToken) ToEuid() uint32 {
-	return raw.Audit_token_to_euid(h.ptr)
-}
-
-func (h AuditToken) ToEgid() uint32 {
-	return raw.Audit_token_to_egid(h.ptr)
-}
-
-func (h AuditToken) ToRuid() uint32 {
-	return raw.Audit_token_to_ruid(h.ptr)
-}
-
-func (h AuditToken) ToRgid() uint32 {
-	return raw.Audit_token_to_rgid(h.ptr)
-}
-
-func (h AuditToken) ToPid() int32 {
-	return raw.Audit_token_to_pid(h.ptr)
-}
-
-func (h AuditToken) ToAsid() int32 {
-	return raw.Audit_token_to_asid(h.ptr)
-}
-
-func (h AuditToken) ToPidversion() int32 {
-	return raw.Audit_token_to_pidversion(h.ptr)
-}
 
 // AuditinfoAddr wraps the C handle auditinfo_addr_t.
 type AuditinfoAddr struct{ ptr unsafe.Pointer }
@@ -779,6 +735,42 @@ func AuditWriteFailureNaEx(event_code int16, errmsg string, errret int32, euid u
 
 func AuditWriteFailureNa(event_code int16, errmsg string, errret int32, euid uint32, egid uint32, pid int32, tid Tid) int32 {
 	return raw.Audit_write_failure_na(event_code, errmsg, errret, euid, egid, pid, tid.ptr)
+}
+
+func AuditTokenToAu32(atoken endpointsecurity.AuditTokenT, auidp *uint32, euidp *uint32, egidp *uint32, ruidp *uint32, rgidp *uint32, pidp *int32, asidp *int32, tidp Tid) {
+	raw.Audit_token_to_au32(atoken, auidp, euidp, egidp, ruidp, rgidp, pidp, asidp, tidp.ptr)
+}
+
+func AuditTokenToAuid(atoken endpointsecurity.AuditTokenT) uint32 {
+	return raw.Audit_token_to_auid(atoken)
+}
+
+func AuditTokenToEuid(atoken endpointsecurity.AuditTokenT) uint32 {
+	return raw.Audit_token_to_euid(atoken)
+}
+
+func AuditTokenToEgid(atoken endpointsecurity.AuditTokenT) uint32 {
+	return raw.Audit_token_to_egid(atoken)
+}
+
+func AuditTokenToRuid(atoken endpointsecurity.AuditTokenT) uint32 {
+	return raw.Audit_token_to_ruid(atoken)
+}
+
+func AuditTokenToRgid(atoken endpointsecurity.AuditTokenT) uint32 {
+	return raw.Audit_token_to_rgid(atoken)
+}
+
+func AuditTokenToPid(atoken endpointsecurity.AuditTokenT) int32 {
+	return raw.Audit_token_to_pid(atoken)
+}
+
+func AuditTokenToAsid(atoken endpointsecurity.AuditTokenT) int32 {
+	return raw.Audit_token_to_asid(atoken)
+}
+
+func AuditTokenToPidversion(atoken endpointsecurity.AuditTokenT) int32 {
+	return raw.Audit_token_to_pidversion(atoken)
 }
 
 func AuditGetCar(path string, sz uint64) int32 {

@@ -8,6 +8,7 @@ package libproc
 import "C"
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/endpointsecurity"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
@@ -128,9 +129,9 @@ func Proc_pidpath(pid int32, buffer unsafe.Pointer, buffersize uint32) int32 {
 // [libproc.h:103]
 // Introduced: macOS 11.0
 // ID: objc-sym libproc.proc_pidpath_audittoken
-func Proc_pidpath_audittoken(audittoken unsafe.Pointer, buffer unsafe.Pointer, buffersize uint32) int32 {
+func Proc_pidpath_audittoken(audittoken *endpointsecurity.AuditTokenT, buffer unsafe.Pointer, buffersize uint32) int32 {
 	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_pidpath_audittoken(audittoken, buffer, C.uint32_t(buffersize), &_exc))
+	_result := int32(C.libproc_fn_proc_pidpath_audittoken(unsafe.Pointer(audittoken), buffer, C.uint32_t(buffersize), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -219,36 +220,36 @@ func Proc_terminate_all_rsr(sig int32) int32 {
 
 // [libproc.h:132]
 // ID: objc-sym libproc.proc_signal_with_audittoken
-func Proc_signal_with_audittoken(audittoken unsafe.Pointer, sig int32) int32 {
+func Proc_signal_with_audittoken(audittoken *endpointsecurity.AuditTokenT, sig int32) int32 {
 	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_signal_with_audittoken(audittoken, C.int32_t(sig), &_exc))
+	_result := int32(C.libproc_fn_proc_signal_with_audittoken(unsafe.Pointer(audittoken), C.int32_t(sig), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libproc.h:133]
 // ID: objc-sym libproc.proc_terminate_with_audittoken
-func Proc_terminate_with_audittoken(audittoken unsafe.Pointer, sig *int32) int32 {
+func Proc_terminate_with_audittoken(audittoken *endpointsecurity.AuditTokenT, sig *int32) int32 {
 	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_terminate_with_audittoken(audittoken, unsafe.Pointer(sig), &_exc))
+	_result := int32(C.libproc_fn_proc_terminate_with_audittoken(unsafe.Pointer(audittoken), unsafe.Pointer(sig), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libproc.h:134]
 // ID: objc-sym libproc.proc_signal_delegate
-func Proc_signal_delegate(instigator unsafe.Pointer, target unsafe.Pointer, sig int32) int32 {
+func Proc_signal_delegate(instigator endpointsecurity.AuditTokenT, target endpointsecurity.AuditTokenT, sig int32) int32 {
 	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_signal_delegate(instigator, target, C.int32_t(sig), &_exc))
+	_result := int32(C.libproc_fn_proc_signal_delegate(unsafe.Pointer(&instigator), unsafe.Pointer(&target), C.int32_t(sig), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libproc.h:135]
 // ID: objc-sym libproc.proc_terminate_delegate
-func Proc_terminate_delegate(instigator unsafe.Pointer, target unsafe.Pointer, sig *int32) int32 {
+func Proc_terminate_delegate(instigator endpointsecurity.AuditTokenT, target endpointsecurity.AuditTokenT, sig *int32) int32 {
 	var _exc unsafe.Pointer
-	_result := int32(C.libproc_fn_proc_terminate_delegate(instigator, target, unsafe.Pointer(sig), &_exc))
+	_result := int32(C.libproc_fn_proc_terminate_delegate(unsafe.Pointer(&instigator), unsafe.Pointer(&target), unsafe.Pointer(sig), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }

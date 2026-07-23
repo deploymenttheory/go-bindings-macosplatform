@@ -519,6 +519,11 @@ type AuditStat struct {
 	As_memused   uint32
 }
 
+// [message.h:506]
+type AuditTokenT struct {
+	Val [8]uint32
+}
+
 // [audit.h:221]
 type Auditinfo struct {
 	Ai_auid   uint32

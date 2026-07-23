@@ -1789,6 +1789,44 @@
       "sdk_file": "Tk/tkDecls.h",
       "sdk_line": 1695
     },
+    "Tk_FontMetrics": {
+      "fields": [
+        {
+          "name": "ascent",
+          "objc_type": "int"
+        },
+        {
+          "name": "descent",
+          "objc_type": "int"
+        },
+        {
+          "name": "linespace",
+          "objc_type": "int"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "tkIntXlibDecls.h",
+      "sdk_line": 521
+    },
+    "Tk_TSOffset": {
+      "fields": [
+        {
+          "name": "flags",
+          "objc_type": "int"
+        },
+        {
+          "name": "xoffset",
+          "objc_type": "int"
+        },
+        {
+          "name": "yoffset",
+          "objc_type": "int"
+        }
+      ],
+      "availability": {},
+      "sdk_file": "tkIntXlibDecls.h",
+      "sdk_line": 1150
+    },
     "XArc": {
       "fields": [
         {
