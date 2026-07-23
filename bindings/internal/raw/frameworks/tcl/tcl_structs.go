@@ -8,7 +8,7 @@ import (
 )
 
 type TclPlatStubs struct {
-	Magic                                  int
+	Magic                                  int32
 	Hooks                                  unsafe.Pointer
 	Tcl_MacOSXOpenBundleResources          unsafe.Pointer
 	Tcl_MacOSXOpenVersionedBundleResources unsafe.Pointer
@@ -21,7 +21,7 @@ type TclStubHooks struct {
 }
 
 type TclStubs struct {
-	Magic                              int
+	Magic                              int32
 	Hooks                              *TclStubHooks
 	Tcl_PkgProvideEx                   unsafe.Pointer
 	Tcl_PkgRequireEx                   unsafe.Pointer
@@ -610,15 +610,15 @@ type Tcl_AsyncHandler_ struct{}
 
 type Tcl_CallFrame struct {
 	NsPtr   *Tcl_Namespace
-	Dummy1  int
-	Dummy2  int
+	Dummy1  int32
+	Dummy2  int32
 	Dummy3  unsafe.Pointer
 	Dummy4  unsafe.Pointer
 	Dummy5  unsafe.Pointer
-	Dummy6  int
+	Dummy6  int32
 	Dummy7  unsafe.Pointer
 	Dummy8  unsafe.Pointer
-	Dummy9  int
+	Dummy9  int32
 	Dummy10 unsafe.Pointer
 	Dummy11 unsafe.Pointer
 	Dummy12 unsafe.Pointer
@@ -652,7 +652,7 @@ type Tcl_ChannelTypeVersion_ struct{}
 type Tcl_Channel_ struct{}
 
 type Tcl_CmdInfo struct {
-	IsNativeObjectProc int
+	IsNativeObjectProc int32
 	ObjProc            unsafe.Pointer
 	ObjClientData      unsafe.Pointer
 	Proc               unsafe.Pointer
@@ -675,14 +675,14 @@ type Tcl_Config struct {
 
 type Tcl_DString struct {
 	String      string
-	Length      int
-	SpaceAvl    int
+	Length      int32
+	SpaceAvl    int32
 	StaticSpace [200]int8
 }
 
 type Tcl_DictSearch struct {
 	Next          unsafe.Pointer
-	Epoch         int
+	Epoch         int32
 	DictionaryPtr unsafe.Pointer
 }
 
@@ -698,7 +698,7 @@ type Tcl_EncodingType struct {
 	FromUtfProc  unsafe.Pointer
 	FreeProc     unsafe.Pointer
 	ClientData   unsafe.Pointer
-	NullSize     int
+	NullSize     int32
 }
 
 // Tcl_Encoding_ is an opaque type.
@@ -714,7 +714,7 @@ type Tcl_FSVersion_ struct{}
 
 type Tcl_Filesystem struct {
 	TypeName                 string
-	StructureLength          int
+	StructureLength          int32
 	Version                  unsafe.Pointer
 	PathInFilesystemProc     unsafe.Pointer
 	DupInternalRepProc       unsafe.Pointer
@@ -747,8 +747,8 @@ type Tcl_Filesystem struct {
 }
 
 type Tcl_GlobTypeData struct {
-	Type       int
-	Perm       int
+	Type       int32
+	Perm       int32
 	MacType    *Tcl_Obj
 	MacCreator *Tcl_Obj
 }
@@ -762,8 +762,8 @@ type Tcl_HashEntry struct {
 }
 
 type Tcl_HashKeyType struct {
-	Version         int
-	Flags           int
+	Version         int32
+	Flags           int32
 	HashKeyProc     unsafe.Pointer
 	CompareKeysProc unsafe.Pointer
 	AllocEntryProc  unsafe.Pointer
@@ -772,19 +772,19 @@ type Tcl_HashKeyType struct {
 
 type Tcl_HashSearch struct {
 	TablePtr     *Tcl_HashTable
-	NextIndex    int
+	NextIndex    int32
 	NextEntryPtr *Tcl_HashEntry
 }
 
 type Tcl_HashTable struct {
 	Buckets       *Tcl_HashEntry
 	StaticBuckets [4]*Tcl_HashEntry
-	NumBuckets    int
-	NumEntries    int
-	RebuildSize   int
-	DownShift     int
-	Mask          int
-	KeyType       int
+	NumBuckets    int32
+	NumEntries    int32
+	RebuildSize   int32
+	DownShift     int32
+	Mask          int32
+	KeyType       int32
 	FindProc      unsafe.Pointer
 	CreateProc    unsafe.Pointer
 	TypePtr       *Tcl_HashKeyType
@@ -793,7 +793,7 @@ type Tcl_HashTable struct {
 type Tcl_Interp struct {
 	Result    string
 	FreeProc  unsafe.Pointer
-	ErrorLine int
+	ErrorLine int32
 }
 
 // Tcl_InterpState_ is an opaque type.
@@ -825,9 +825,9 @@ type Tcl_NotifierProcs struct {
 }
 
 type Tcl_Obj struct {
-	RefCount    int
+	RefCount    int32
 	Bytes       string
-	Length      int
+	Length      int32
 	TypePtr     *Tcl_ObjType
 	InternalRep unsafe.Pointer
 }
@@ -842,19 +842,19 @@ type Tcl_ObjType struct {
 
 type Tcl_Parse struct {
 	CommentStart    string
-	CommentSize     int
+	CommentSize     int32
 	CommandStart    string
-	CommandSize     int
-	NumWords        int
+	CommandSize     int32
+	NumWords        int32
 	TokenPtr        *Tcl_Token
-	NumTokens       int
-	TokensAvailable int
-	ErrorType       int
+	NumTokens       int32
+	TokensAvailable int32
+	ErrorType       int32
 	String          string
 	End             string
 	Interp          *Tcl_Interp
 	Term            string
-	Incomplete      int
+	Incomplete      int32
 	StaticTokens    [20]Tcl_Token
 }
 
@@ -867,7 +867,7 @@ type Tcl_RegExpIndices struct {
 }
 
 type Tcl_RegExpInfo struct {
-	Nsubs       int
+	Nsubs       int32
 	Matches     *Tcl_RegExpIndices
 	ExtendStart int
 	Reserved    int
@@ -881,8 +881,8 @@ type Tcl_SavedResult struct {
 	FreeProc     unsafe.Pointer
 	ObjResultPtr *Tcl_Obj
 	AppendResult string
-	AppendAvl    int
-	AppendUsed   int
+	AppendAvl    int32
+	AppendUsed   int32
 	ResultSpace  [201]int8
 }
 
@@ -901,10 +901,10 @@ type Tcl_Time struct {
 type Tcl_TimerToken_ struct{}
 
 type Tcl_Token struct {
-	Type          int
+	Type          int32
 	Start         string
-	Size          int
-	NumComponents int
+	Size          int32
+	NumComponents int32
 }
 
 // Tcl_Trace_ is an opaque type.

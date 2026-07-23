@@ -799,7 +799,7 @@ type CssmField struct {
 
 // C struct: cssm_fieldgroup
 type CssmFieldgroup struct {
-	NumberOfFields int
+	NumberOfFields int32
 	Fields         *CssmField
 }
 

@@ -9,7 +9,7 @@ import (
 
 // A structure that defines life cycle callbacks for an audio processing tap object.
 type MTAudioProcessingTapCallbacks struct {
-	Version    int
+	Version    int32
 	ClientInfo unsafe.Pointer
 	Init       unsafe.Pointer
 	Finalize   unsafe.Pointer

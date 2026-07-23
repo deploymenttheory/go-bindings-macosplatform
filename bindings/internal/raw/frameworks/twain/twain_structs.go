@@ -114,7 +114,7 @@ type TW_FILESYSTEM struct {
 	InputName        [256]uint8
 	OutputName       [256]uint8
 	Context          string
-	Recursive        int
+	Recursive        int32
 	FileType         int
 	Size             uint
 	CreateTimeDate   [34]uint8

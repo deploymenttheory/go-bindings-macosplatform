@@ -9,7 +9,7 @@ import (
 
 // A structure that contains properties and callbacks that define a type of object.
 type JSClassDefinition struct {
-	Version           int
+	Version           int32
 	Attributes        uint
 	ClassName         string
 	ParentClass       unsafe.Pointer
