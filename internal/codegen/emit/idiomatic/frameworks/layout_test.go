@@ -75,3 +75,58 @@ func TestLayoutSafeFromGoTypes(t *testing.T) {
 		}
 	}
 }
+
+func TestGoStructLayout(t *testing.T) {
+	cases := []struct {
+		name    string
+		packed  bool
+		goTypes []string
+		offsets []int
+		size    int
+		ok      bool
+	}{
+		{"scalars natural", false, []string{"uint8", "uint16", "uint8"}, []int{0, 2, 4}, 6, true},
+		{"int32 pair", false, []string{"int32", "int32"}, []int{0, 4}, 8, true},
+		{"mixed align pads", false, []string{"uint8", "uint32"}, []int{0, 4}, 8, true},
+		{"packed tight", true, []string{"uint8", "uint16", "uint8"}, []int{0, 1, 3}, 4, true},
+		{"byte array field", false, []string{"uint8", "[3]uint8", "uint16"}, []int{0, 1, 4}, 6, true},
+		{"unknown type", false, []string{"SomeStruct"}, nil, 0, false},
+	}
+	for _, c := range cases {
+		offsets, size, ok := goStructLayout(c.goTypes, c.packed)
+		if ok != c.ok || (ok && (size != c.size || !intsEqualLayout(offsets, c.offsets))) {
+			t.Errorf("%s: goStructLayout = %v,%d,%v; want %v,%d,%v",
+				c.name, offsets, size, ok, c.offsets, c.size, c.ok)
+		}
+	}
+}
+
+func TestStructFieldGoType(t *testing.T) {
+	cases := []struct{ objc, mapped, want string }{
+		{"int", "int", "int32"},
+		{"unsigned int", "uint", "uint32"},
+		{"int[4]", "[4]int", "[4]int32"},
+		{"const int", "int", "int32"},
+		{"long", "int", "int"},      // 8 bytes = Go int; unchanged
+		{"NSInteger", "int", "int"}, // 8 bytes; unchanged
+		{"short", "int16", "int16"},
+		{"uint32_t", "uint32", "uint32"},
+	}
+	for _, c := range cases {
+		if got := structFieldGoType(c.objc, c.mapped); got != c.want {
+			t.Errorf("structFieldGoType(%q, %q) = %q; want %q", c.objc, c.mapped, got, c.want)
+		}
+	}
+}
+
+func intsEqualLayout(a, b []int) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
+}

@@ -7327,9 +7327,11 @@
         },
         {
           "name": "y",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1785
@@ -7379,6 +7381,7 @@
           "objc_type": "SInt16[32]"
         }
       ],
+      "size": 64,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1685
@@ -7563,17 +7566,21 @@
         },
         {
           "name": "theType",
-          "objc_type": "JustPCActionType"
+          "objc_type": "JustPCActionType",
+          "offset": 2
         },
         {
           "name": "length",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "data",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 927
@@ -7704,29 +7711,36 @@
         },
         {
           "name": "beforeGrowLimit",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 4
         },
         {
           "name": "beforeShrinkLimit",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 8
         },
         {
           "name": "afterGrowLimit",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 12
         },
         {
           "name": "afterShrinkLimit",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 16
         },
         {
           "name": "growFlags",
-          "objc_type": "JustificationFlags"
+          "objc_type": "JustificationFlags",
+          "offset": 20
         },
         {
           "name": "shrinkFlags",
-          "objc_type": "JustificationFlags"
+          "objc_type": "JustificationFlags",
+          "offset": 22
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 944
@@ -7797,9 +7811,11 @@
         },
         {
           "name": "right",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1355
@@ -7846,21 +7862,26 @@
         },
         {
           "name": "searchRange",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "entrySelector",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 4
         },
         {
           "name": "rangeShift",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 6
         },
         {
           "name": "table",
-          "objc_type": "UInt16[1]"
+          "objc_type": "UInt16[1]",
+          "offset": 8
         }
       ],
+      "size": 10,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1368
@@ -8144,9 +8165,11 @@
         },
         {
           "name": "right",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1537
@@ -8174,21 +8197,26 @@
         },
         {
           "name": "searchRange",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "entrySelector",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         },
         {
           "name": "rangeShift",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 12
         },
         {
           "name": "table",
-          "objc_type": "UInt32[1]"
+          "objc_type": "UInt32[1]",
+          "offset": 16
         }
       ],
+      "size": 20,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1550
@@ -8342,9 +8370,11 @@
         },
         {
           "name": "length",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1812
@@ -8380,21 +8410,26 @@
         },
         {
           "name": "length",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "nFeatures",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 8
         },
         {
           "name": "nSubtables",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 10
         },
         {
           "name": "featureEntries",
-          "objc_type": "MortFeatureEntry[1]"
+          "objc_type": "MortFeatureEntry[1]",
+          "offset": 12
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1114
@@ -8422,17 +8457,21 @@
         },
         {
           "name": "featureSelector",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "enableFlags",
-          "objc_type": "MortSubtableMaskFlags"
+          "objc_type": "MortSubtableMaskFlags",
+          "offset": 4
         },
         {
           "name": "disableFlags",
-          "objc_type": "MortSubtableMaskFlags"
+          "objc_type": "MortSubtableMaskFlags",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1107
@@ -8478,6 +8517,7 @@
           "objc_type": "STHeader"
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1068
@@ -8543,21 +8583,26 @@
         },
         {
           "name": "length",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "nFeatures",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         },
         {
           "name": "nSubtables",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 12
         },
         {
           "name": "featureEntries",
-          "objc_type": "MortFeatureEntry[1]"
+          "objc_type": "MortFeatureEntry[1]",
+          "offset": 16
         }
       ],
+      "size": 28,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1180
@@ -8622,6 +8667,7 @@
           "objc_type": "STXHeader"
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1144
@@ -8832,6 +8878,7 @@
           "objc_type": "SFNTLookupValue[1]"
         }
       ],
+      "size": 2,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 671
@@ -8844,21 +8891,26 @@
         },
         {
           "name": "nUnits",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "searchRange",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 4
         },
         {
           "name": "entrySelector",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 6
         },
         {
           "name": "rangeShift",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 8
         }
       ],
+      "size": 10,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 662
@@ -8871,13 +8923,16 @@
         },
         {
           "name": "firstGlyph",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "value",
-          "objc_type": "UInt16[1]"
+          "objc_type": "UInt16[1]",
+          "offset": 4
         }
       ],
+      "size": 6,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 696
@@ -8890,9 +8945,11 @@
         },
         {
           "name": "segments",
-          "objc_type": "SFNTLookupSegment[1]"
+          "objc_type": "SFNTLookupSegment[1]",
+          "offset": 10
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 702
@@ -8905,9 +8962,11 @@
         },
         {
           "name": "value",
-          "objc_type": "UInt16[1]"
+          "objc_type": "UInt16[1]",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 708
@@ -8920,9 +8979,11 @@
         },
         {
           "name": "entries",
-          "objc_type": "SFNTLookupSingle[1]"
+          "objc_type": "SFNTLookupSingle[1]",
+          "offset": 10
         }
       ],
+      "size": 14,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 713
@@ -8935,9 +8996,11 @@
         },
         {
           "name": "fsHeader",
-          "objc_type": "SFNTLookupFormatSpecificHeader"
+          "objc_type": "SFNTLookupFormatSpecificHeader",
+          "offset": 2
         }
       ],
+      "size": 18,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 728
@@ -8950,13 +9013,16 @@
         },
         {
           "name": "count",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "valueArray",
-          "objc_type": "SFNTLookupValue[1]"
+          "objc_type": "SFNTLookupValue[1]",
+          "offset": 4
         }
       ],
+      "size": 6,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 676
@@ -8969,17 +9035,21 @@
         },
         {
           "name": "firstGlyph",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "count",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 4
         },
         {
           "name": "values",
-          "objc_type": "UInt8[1]"
+          "objc_type": "UInt8[1]",
+          "offset": 6
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 683
@@ -9068,21 +9138,26 @@
         },
         {
           "name": "nClasses",
-          "objc_type": "STClass"
+          "objc_type": "STClass",
+          "offset": 1
         },
         {
           "name": "classTableOffset",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "stateArrayOffset",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 4
         },
         {
           "name": "entryTableOffset",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 6
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 751
@@ -9152,17 +9227,21 @@
         },
         {
           "name": "classTableOffset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "stateArrayOffset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         },
         {
           "name": "entryTableOffset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 12
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 793
@@ -9221,13 +9300,16 @@
         },
         {
           "name": "nameTableIndex",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 4
         },
         {
           "name": "sizesOffset",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 6
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "CoreText/SFNTLayoutTypes.h",
       "sdk_line": 1271
@@ -9305,13 +9387,16 @@
         },
         {
           "name": "scriptID",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "offset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 269
@@ -9435,17 +9520,21 @@
         },
         {
           "name": "checkSum",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "offset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         },
         {
           "name": "length",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 12
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 26
@@ -9493,21 +9582,26 @@
         },
         {
           "name": "settingCount",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "offsetToSettings",
-          "objc_type": "SInt32"
+          "objc_type": "SInt32",
+          "offset": 4
         },
         {
           "name": "featureFlags",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 8
         },
         {
           "name": "nameID",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 10
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 421
@@ -9520,9 +9614,11 @@
         },
         {
           "name": "value",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 401
@@ -9535,9 +9631,11 @@
         },
         {
           "name": "nameID",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 429
@@ -9550,9 +9648,11 @@
         },
         {
           "name": "setting",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 434
@@ -9565,13 +9665,16 @@
         },
         {
           "name": "flags",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 2
         },
         {
           "name": "coord",
-          "objc_type": "Fixed[1]"
+          "objc_type": "Fixed[1]",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 368
@@ -9607,25 +9710,31 @@
         },
         {
           "name": "scriptID",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "languageID",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 4
         },
         {
           "name": "nameID",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 6
         },
         {
           "name": "length",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 8
         },
         {
           "name": "offset",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 10
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 324
@@ -9638,25 +9747,31 @@
         },
         {
           "name": "minValue",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 4
         },
         {
           "name": "defaultValue",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 8
         },
         {
           "name": "maxValue",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 12
         },
         {
           "name": "flags",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 16
         },
         {
           "name": "nameID",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 18
         }
       ],
+      "size": 20,
       "availability": {},
       "sdk_file": "CoreText/SFNTTypes.h",
       "sdk_line": 354

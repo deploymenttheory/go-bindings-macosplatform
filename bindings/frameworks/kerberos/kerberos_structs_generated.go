@@ -238,7 +238,7 @@ type KimOptionsOpaque struct{}
 type Krb5Address struct {
 	Magic    int
 	Addrtype int
-	Length   uint
+	Length   uint32
 	Contents unsafe.Pointer
 }
 
@@ -267,7 +267,7 @@ type Krb5AuthContext struct{}
 type Krb5Authdata struct {
 	Magic    int
 	AdType   int
-	Length   uint
+	Length   uint32
 	Contents unsafe.Pointer
 }
 
@@ -291,7 +291,7 @@ type Krb5CccolCursor struct{}
 type Krb5Checksum struct {
 	Magic        int
 	ChecksumType int
-	Length       uint
+	Length       uint32
 	Contents     unsafe.Pointer
 }
 
@@ -342,7 +342,7 @@ type Krb5CryptosystemEntry struct{}
 
 type Krb5Data struct {
 	Magic  int
-	Length uint
+	Length uint32
 	Data   unsafe.Pointer
 }
 
@@ -400,13 +400,13 @@ type Krb5GetInitCredsOpt struct {
 	Flags             int
 	TktLife           int
 	RenewLife         int
-	Forwardable       int
-	Proxiable         int
+	Forwardable       int32
+	Proxiable         int32
 	EtypeList         unsafe.Pointer
-	EtypeListLength   int
+	EtypeListLength   int32
 	AddressList       unsafe.Pointer
 	PreauthList       unsafe.Pointer
-	PreauthListLength int
+	PreauthListLength int32
 	Salt              unsafe.Pointer
 }
 
@@ -436,7 +436,7 @@ type Krb5KdcReq struct {
 	Till              int
 	Rtime             int
 	Nonce             int
-	Nktypes           int
+	Nktypes           int32
 	Ktype             unsafe.Pointer
 	Addresses         unsafe.Pointer
 	AuthorizationData Krb5EncData
@@ -447,7 +447,7 @@ type Krb5KdcReq struct {
 type Krb5Keyblock struct {
 	Magic    int
 	Enctype  int
-	Length   uint
+	Length   uint32
 	Contents unsafe.Pointer
 }
 
@@ -469,14 +469,14 @@ type Krb5LastReqEntry struct {
 
 type Krb5OctetData struct {
 	Magic  int
-	Length uint
+	Length uint32
 	Data   unsafe.Pointer
 }
 
 type Krb5PaData struct {
 	Magic    int
 	PaType   int
-	Length   uint
+	Length   uint32
 	Contents unsafe.Pointer
 }
 
@@ -490,13 +490,13 @@ type Krb5PrincipalData struct {
 
 type Krb5Prompt struct {
 	Prompt unsafe.Pointer
-	Hidden int
+	Hidden int32
 	Reply  unsafe.Pointer
 }
 
 type Krb5PwdData struct {
 	Magic         int
-	SequenceCount int
+	SequenceCount int32
 	Element       unsafe.Pointer
 }
 
@@ -545,7 +545,7 @@ type Krb5Transited struct {
 
 type Krb5VerifyInitCredsOpt struct {
 	Flags       int
-	ApReqNofail int
+	ApReqNofail int32
 }
 
 type PasswdPhraseElement struct {

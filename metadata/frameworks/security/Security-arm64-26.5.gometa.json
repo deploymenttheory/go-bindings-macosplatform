@@ -17786,9 +17786,11 @@
         },
         {
           "name": "parameters",
-          "objc_type": "SecAsn1Item"
+          "objc_type": "SecAsn1Item",
+          "offset": 16
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "Security/SecAsn1Types.h",
       "sdk_line": 58
@@ -17801,9 +17803,11 @@
         },
         {
           "name": "subjectPublicKey",
-          "objc_type": "SecAsn1Item"
+          "objc_type": "SecAsn1Item",
+          "offset": 32
         }
       ],
+      "size": 48,
       "availability": {},
       "sdk_file": "Security/SecAsn1Types.h",
       "sdk_line": 63
@@ -18061,25 +18065,31 @@
         },
         {
           "name": "keyIdentifier",
-          "objc_type": "SecAsn1Item"
+          "objc_type": "SecAsn1Item",
+          "offset": 8
         },
         {
           "name": "generalNamesPresent",
-          "objc_type": "CSSM_BOOL"
+          "objc_type": "CSSM_BOOL",
+          "offset": 24
         },
         {
           "name": "generalNames",
-          "objc_type": "CE_GeneralNames *"
+          "objc_type": "CE_GeneralNames *",
+          "offset": 32
         },
         {
           "name": "serialNumberPresent",
-          "objc_type": "CSSM_BOOL"
+          "objc_type": "CSSM_BOOL",
+          "offset": 40
         },
         {
           "name": "serialNumber",
-          "objc_type": "SecAsn1Item"
+          "objc_type": "SecAsn1Item",
+          "offset": 48
         }
       ],
+      "size": 64,
       "availability": {},
       "sdk_file": "Security/certextensions.h",
       "sdk_line": 164
@@ -18676,21 +18686,26 @@
         },
         {
           "name": "Delegate",
-          "objc_type": "CSSM_BOOL"
+          "objc_type": "CSSM_BOOL",
+          "offset": 24
         },
         {
           "name": "Authorization",
-          "objc_type": "CSSM_AUTHORIZATIONGROUP"
+          "objc_type": "CSSM_AUTHORIZATIONGROUP",
+          "offset": 32
         },
         {
           "name": "TimeRange",
-          "objc_type": "CSSM_ACL_VALIDITY_PERIOD"
+          "objc_type": "CSSM_ACL_VALIDITY_PERIOD",
+          "offset": 48
         },
         {
           "name": "EntryTag",
-          "objc_type": "CSSM_STRING"
+          "objc_type": "CSSM_STRING",
+          "offset": 80
         }
       ],
+      "size": 152,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 645
@@ -18756,9 +18771,11 @@
         },
         {
           "name": "EndDate",
-          "objc_type": "SecAsn1Item"
+          "objc_type": "SecAsn1Item",
+          "offset": 16
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 640
@@ -18835,9 +18852,11 @@
         },
         {
           "name": "AuthTags",
-          "objc_type": "CSSM_ACL_AUTHORIZATION_TAG *"
+          "objc_type": "CSSM_ACL_AUTHORIZATION_TAG *",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 635
@@ -18884,9 +18903,11 @@
         },
         {
           "name": "BundleEncoding",
-          "objc_type": "CSSM_CERT_BUNDLE_ENCODING"
+          "objc_type": "CSSM_CERT_BUNDLE_ENCODING",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 1816
@@ -19115,9 +19136,11 @@
         },
         {
           "name": "Data",
-          "objc_type": "uint8_t * _Nullable"
+          "objc_type": "uint8_t * _Nullable",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {
         "macos_introduced": "10.0",
         "macos_deprecated": "12.0",
@@ -19134,13 +19157,16 @@
         },
         {
           "name": "Month",
-          "objc_type": "uint8[2]"
+          "objc_type": "uint8[2]",
+          "offset": 4
         },
         {
           "name": "Day",
-          "objc_type": "uint8[2]"
+          "objc_type": "uint8[2]",
+          "offset": 6
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 710
@@ -19172,13 +19198,16 @@
         },
         {
           "name": "Label",
-          "objc_type": "union cssm_db_attribute_label"
+          "objc_type": "union cssm_db_attribute_label",
+          "offset": 8
         },
         {
           "name": "AttributeFormat",
-          "objc_type": "CSSM_DB_ATTRIBUTE_FORMAT"
+          "objc_type": "CSSM_DB_ATTRIBUTE_FORMAT",
+          "offset": 24
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 1852
@@ -19191,13 +19220,16 @@
         },
         {
           "name": "IndexedDataLocation",
-          "objc_type": "CSSM_DB_INDEXED_DATA_LOCATION"
+          "objc_type": "CSSM_DB_INDEXED_DATA_LOCATION",
+          "offset": 4
         },
         {
           "name": "Info",
-          "objc_type": "CSSM_DB_ATTRIBUTE_INFO"
+          "objc_type": "CSSM_DB_ATTRIBUTE_INFO",
+          "offset": 8
         }
       ],
+      "size": 40,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 1936
@@ -19423,13 +19455,16 @@
         },
         {
           "name": "CertEncoding",
-          "objc_type": "CSSM_CERT_ENCODING"
+          "objc_type": "CSSM_CERT_ENCODING",
+          "offset": 4
         },
         {
           "name": "CertBlob",
-          "objc_type": "SecAsn1Item"
+          "objc_type": "SecAsn1Item",
+          "offset": 8
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 511
@@ -19442,13 +19477,16 @@
         },
         {
           "name": "CrlEncoding",
-          "objc_type": "CSSM_CRL_ENCODING"
+          "objc_type": "CSSM_CRL_ENCODING",
+          "offset": 4
         },
         {
           "name": "CrlBlob",
-          "objc_type": "SecAsn1Item"
+          "objc_type": "SecAsn1Item",
+          "offset": 8
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 1373
@@ -19521,17 +19559,21 @@
         },
         {
           "name": "Data2",
-          "objc_type": "uint16"
+          "objc_type": "uint16",
+          "offset": 4
         },
         {
           "name": "Data3",
-          "objc_type": "uint16"
+          "objc_type": "uint16",
+          "offset": 6
         },
         {
           "name": "Data4",
-          "objc_type": "uint8[8]"
+          "objc_type": "uint8[8]",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 97
@@ -19589,57 +19631,71 @@
         },
         {
           "name": "CspId",
-          "objc_type": "CSSM_GUID"
+          "objc_type": "CSSM_GUID",
+          "offset": 4
         },
         {
           "name": "BlobType",
-          "objc_type": "CSSM_KEYBLOB_TYPE"
+          "objc_type": "CSSM_KEYBLOB_TYPE",
+          "offset": 20
         },
         {
           "name": "Format",
-          "objc_type": "CSSM_KEYBLOB_FORMAT"
+          "objc_type": "CSSM_KEYBLOB_FORMAT",
+          "offset": 24
         },
         {
           "name": "AlgorithmId",
-          "objc_type": "CSSM_ALGORITHMS"
+          "objc_type": "CSSM_ALGORITHMS",
+          "offset": 28
         },
         {
           "name": "KeyClass",
-          "objc_type": "CSSM_KEYCLASS"
+          "objc_type": "CSSM_KEYCLASS",
+          "offset": 32
         },
         {
           "name": "LogicalKeySizeInBits",
-          "objc_type": "uint32"
+          "objc_type": "uint32",
+          "offset": 36
         },
         {
           "name": "KeyAttr",
-          "objc_type": "CSSM_KEYATTR_FLAGS"
+          "objc_type": "CSSM_KEYATTR_FLAGS",
+          "offset": 40
         },
         {
           "name": "KeyUsage",
-          "objc_type": "CSSM_KEYUSE"
+          "objc_type": "CSSM_KEYUSE",
+          "offset": 44
         },
         {
           "name": "StartDate",
-          "objc_type": "CSSM_DATE"
+          "objc_type": "CSSM_DATE",
+          "offset": 48
         },
         {
           "name": "EndDate",
-          "objc_type": "CSSM_DATE"
+          "objc_type": "CSSM_DATE",
+          "offset": 56
         },
         {
           "name": "WrapAlgorithmId",
-          "objc_type": "CSSM_ALGORITHMS"
+          "objc_type": "CSSM_ALGORITHMS",
+          "offset": 64
         },
         {
           "name": "WrapMode",
-          "objc_type": "CSSM_ENCRYPT_MODE"
+          "objc_type": "CSSM_ENCRYPT_MODE",
+          "offset": 68
         },
         {
           "name": "Reserved",
-          "objc_type": "uint32"
+          "objc_type": "uint32",
+          "offset": 72
         }
       ],
+      "size": 76,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 990
@@ -19652,13 +19708,16 @@
         },
         {
           "name": "Length",
-          "objc_type": "uint8"
+          "objc_type": "uint8",
+          "offset": 1
         },
         {
           "name": "Name",
-          "objc_type": "char *"
+          "objc_type": "char *",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "Security/cssmkrapi.h",
       "sdk_line": 40
@@ -19834,13 +19893,16 @@
         },
         {
           "name": "Head",
-          "objc_type": "CSSM_LIST_ELEMENT_PTR"
+          "objc_type": "CSSM_LIST_ELEMENT_PTR",
+          "offset": 8
         },
         {
           "name": "Tail",
-          "objc_type": "CSSM_LIST_ELEMENT_PTR"
+          "objc_type": "CSSM_LIST_ELEMENT_PTR",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 383
@@ -20930,17 +20992,21 @@
         },
         {
           "name": "Version",
-          "objc_type": "CSSM_VERSION"
+          "objc_type": "CSSM_VERSION",
+          "offset": 16
         },
         {
           "name": "SubserviceId",
-          "objc_type": "uint32"
+          "objc_type": "uint32",
+          "offset": 24
         },
         {
           "name": "SubserviceType",
-          "objc_type": "CSSM_SERVICE_TYPE"
+          "objc_type": "CSSM_SERVICE_TYPE",
+          "offset": 28
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 144
@@ -21318,13 +21384,16 @@
         },
         {
           "name": "PolicyIds",
-          "objc_type": "CSSM_FIELD_PTR"
+          "objc_type": "CSSM_FIELD_PTR",
+          "offset": 8
         },
         {
           "name": "PolicyControl",
-          "objc_type": "void *"
+          "objc_type": "void *",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 1287
@@ -21451,9 +21520,11 @@
         },
         {
           "name": "Minor",
-          "objc_type": "uint32"
+          "objc_type": "uint32",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "Security/cssmtype.h",
       "sdk_line": 126
@@ -21493,9 +21564,11 @@
         },
         {
           "name": "value",
-          "objc_type": "SecAsn1Item"
+          "objc_type": "SecAsn1Item",
+          "offset": 8
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 124
@@ -21508,9 +21581,11 @@
         },
         {
           "name": "extensions",
-          "objc_type": "CSSM_X509_EXTENSION_PTR"
+          "objc_type": "CSSM_X509_EXTENSION_PTR",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 147
@@ -21523,9 +21598,11 @@
         },
         {
           "name": "RelativeDistinguishedName",
-          "objc_type": "CSSM_X509_RDN_PTR"
+          "objc_type": "CSSM_X509_RDN_PTR",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 88
@@ -21632,41 +21709,51 @@
         },
         {
           "name": "serialNumber",
-          "objc_type": "SecAsn1Item"
+          "objc_type": "SecAsn1Item",
+          "offset": 16
         },
         {
           "name": "signature",
-          "objc_type": "SecAsn1AlgId"
+          "objc_type": "SecAsn1AlgId",
+          "offset": 32
         },
         {
           "name": "issuer",
-          "objc_type": "CSSM_X509_NAME"
+          "objc_type": "CSSM_X509_NAME",
+          "offset": 64
         },
         {
           "name": "validity",
-          "objc_type": "CSSM_X509_VALIDITY"
+          "objc_type": "CSSM_X509_VALIDITY",
+          "offset": 80
         },
         {
           "name": "subject",
-          "objc_type": "CSSM_X509_NAME"
+          "objc_type": "CSSM_X509_NAME",
+          "offset": 128
         },
         {
           "name": "subjectPublicKeyInfo",
-          "objc_type": "SecAsn1PubKeyInfo"
+          "objc_type": "SecAsn1PubKeyInfo",
+          "offset": 144
         },
         {
           "name": "issuerUniqueIdentifier",
-          "objc_type": "SecAsn1Item"
+          "objc_type": "SecAsn1Item",
+          "offset": 192
         },
         {
           "name": "subjectUniqueIdentifier",
-          "objc_type": "SecAsn1Item"
+          "objc_type": "SecAsn1Item",
+          "offset": 208
         },
         {
           "name": "extensions",
-          "objc_type": "CSSM_X509_EXTENSIONS"
+          "objc_type": "CSSM_X509_EXTENSIONS",
+          "offset": 224
         }
       ],
+      "size": 240,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 153
@@ -21679,29 +21766,36 @@
         },
         {
           "name": "signature",
-          "objc_type": "SecAsn1AlgId"
+          "objc_type": "SecAsn1AlgId",
+          "offset": 16
         },
         {
           "name": "issuer",
-          "objc_type": "CSSM_X509_NAME"
+          "objc_type": "CSSM_X509_NAME",
+          "offset": 48
         },
         {
           "name": "thisUpdate",
-          "objc_type": "CSSM_X509_TIME"
+          "objc_type": "CSSM_X509_TIME",
+          "offset": 64
         },
         {
           "name": "nextUpdate",
-          "objc_type": "CSSM_X509_TIME"
+          "objc_type": "CSSM_X509_TIME",
+          "offset": 88
         },
         {
           "name": "revokedCertificates",
-          "objc_type": "CSSM_X509_REVOKED_CERT_LIST_PTR"
+          "objc_type": "CSSM_X509_REVOKED_CERT_LIST_PTR",
+          "offset": 112
         },
         {
           "name": "extensions",
-          "objc_type": "CSSM_X509_EXTENSIONS"
+          "objc_type": "CSSM_X509_EXTENSIONS",
+          "offset": 120
         }
       ],
+      "size": 136,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 209
@@ -21714,9 +21808,11 @@
         },
         {
           "name": "time",
-          "objc_type": "SecAsn1Item"
+          "objc_type": "SecAsn1Item",
+          "offset": 8
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 97
@@ -21894,9 +21990,11 @@
         },
         {
           "name": "notAfter",
-          "objc_type": "CSSM_X509_TIME"
+          "objc_type": "CSSM_X509_TIME",
+          "offset": 24
         }
       ],
+      "size": 48,
       "availability": {},
       "sdk_file": "Security/x509defs.h",
       "sdk_line": 103

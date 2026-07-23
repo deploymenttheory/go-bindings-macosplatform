@@ -26,6 +26,6 @@ type AudioObjectPropertyAddress struct {
 
 // This structure allows a specific sample rate range to be associated with an AudioStreamBasicDescription that specifies its sample rate as kAudioStreamAnyRate.
 type AudioStreamRangedDescription struct {
-	MFormat          coreaudiotypes.AudioStreamBasicDescription
+	MFormat          unsafe.Pointer
 	MSampleRateRange coreaudiotypes.AudioValueRange
 }

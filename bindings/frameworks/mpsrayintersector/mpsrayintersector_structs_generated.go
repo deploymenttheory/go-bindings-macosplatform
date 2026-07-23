@@ -22,60 +22,60 @@ type MPSIntersectionDistance struct {
 // Intersection result which contains the distance from the ray origin to the intersection point and the index of the intersected primitive This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
 type MPSIntersectionDistancePrimitiveIndex struct {
 	Distance       float32
-	PrimitiveIndex uint
+	PrimitiveIndex uint32
 }
 
 // Intersection result which contains the distance from the ray origin to the intersection point, the index of the intersected primitive, and the polygon buffer index of the intersected primitive. This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
 type MPSIntersectionDistancePrimitiveIndexBufferIndex struct {
 	Distance       float32
-	PrimitiveIndex uint
-	BufferIndex    uint
+	PrimitiveIndex uint32
+	BufferIndex    uint32
 }
 
 // Intersection result which contains the distance from the ray origin to the intersection point, the index of the intersected primitive, the polygon buffer index of the intersected primitive, and the two dimensional parameterization of the intersection point. This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
 type MPSIntersectionDistancePrimitiveIndexBufferIndexCoordinates struct {
 	Distance       float32
-	PrimitiveIndex uint
-	BufferIndex    uint
+	PrimitiveIndex uint32
+	BufferIndex    uint32
 	Coordinates    unsafe.Pointer
 }
 
 // Intersection result which contains the distance from the ray origin to the intersection point, the index of the intersected primitive, the polygon buffer index of the intersected primitive, and the index of the intersected instance. This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
 type MPSIntersectionDistancePrimitiveIndexBufferIndexInstanceIndex struct {
 	Distance       float32
-	PrimitiveIndex uint
-	BufferIndex    uint
-	InstanceIndex  uint
+	PrimitiveIndex uint32
+	BufferIndex    uint32
+	InstanceIndex  uint32
 }
 
 // Intersection result which contains the distance from the ray origin to the intersection point, the index of the intersected primitive, the polygon buffer index of the intersected primitive, the index of the intersected instance, and the two dimensional parameterization of the intersection point. This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
 type MPSIntersectionDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates struct {
 	Distance       float32
-	PrimitiveIndex uint
-	BufferIndex    uint
-	InstanceIndex  uint
+	PrimitiveIndex uint32
+	BufferIndex    uint32
+	InstanceIndex  uint32
 	Coordinates    unsafe.Pointer
 }
 
 // Intersection result which contains the distance from the ray origin to the intersection point, the index of the intersected primitive, and the two dimensional parameterization of the intersection point. This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
 type MPSIntersectionDistancePrimitiveIndexCoordinates struct {
 	Distance       float32
-	PrimitiveIndex uint
+	PrimitiveIndex uint32
 	Coordinates    unsafe.Pointer
 }
 
 // Intersection result which contains the distance from the ray origin to the intersection point, the index of the intersected primitive, and the index of the intersected instance. This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
 type MPSIntersectionDistancePrimitiveIndexInstanceIndex struct {
 	Distance       float32
-	PrimitiveIndex uint
-	InstanceIndex  uint
+	PrimitiveIndex uint32
+	InstanceIndex  uint32
 }
 
 // Intersection result which contains the distance from the ray origin to the intersection point, the index of the intersected primitive, the index of the intersected instance, and the two dimensional parameterization of the intersection point. This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
 type MPSIntersectionDistancePrimitiveIndexInstanceIndexCoordinates struct {
 	Distance       float32
-	PrimitiveIndex uint
-	InstanceIndex  uint
+	PrimitiveIndex uint32
+	InstanceIndex  uint32
 	Coordinates    unsafe.Pointer
 }
 
@@ -92,7 +92,7 @@ type MPSRayOriginDirection struct {
 // Represents a 3D ray with an origin, a direction, and a mask to filter out intersections This type is available from the Metal Shading Language by including the MetalPerformanceShaders/MetalPerformanceShaders.h header.
 type MPSRayOriginMaskDirectionMaxDistance struct {
 	Origin      MPSPackedFloat3
-	Mask        uint
+	Mask        uint32
 	Direction   MPSPackedFloat3
 	MaxDistance float32
 }

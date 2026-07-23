@@ -3409,17 +3409,21 @@
         },
         {
           "name": "green",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 8
         },
         {
           "name": "blue",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 16
         },
         {
           "name": "alpha",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 24
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "Metal/MTLRenderPass.h",
       "sdk_line": 12

@@ -55,9 +55,42 @@ func resolveStructFields(
 			return nil, nil, false
 		}
 		names = append(names, f.Name)
-		goTypes = append(goTypes, gt)
+		goTypes = append(goTypes, structFieldGoType(f.ObjCType, gt))
 	}
 	return names, goTypes, len(names) > 0
+}
+
+// structFieldGoType corrects a struct field's Go type to the exact C ABI width
+// where the type mapper widened a native C int to Go int/uint (8 bytes) even
+// though a C int is 4. Struct fields — unlike function parameters — must match the
+// C width exactly, or the Go struct would mislay every field after the first int.
+// Arrays are corrected element-wise (int[4] → [4]int32). Other types (short→int16,
+// long→int, stdint) already match and pass through.
+func structFieldGoType(objcType, mapped string) string {
+	base := objcType
+	for _, q := range []string{"const", "volatile", "_Nonnull", "_Nullable", "_Null_unspecified"} {
+		base = strings.ReplaceAll(base, q, " ")
+	}
+	if i := strings.IndexByte(base, '['); i >= 0 { // strip array dimensions
+		base = base[:i]
+	}
+	base = strings.Join(strings.Fields(base), " ")
+	var from, to string
+	switch base {
+	case "int", "signed int":
+		from, to = "int", "int32"
+	case "unsigned int", "unsigned":
+		from, to = "uint", "uint32"
+	default:
+		return mapped
+	}
+	if mapped == from {
+		return to
+	}
+	if strings.HasSuffix(mapped, "]"+from) {
+		return mapped[:len(mapped)-len(from)] + to
+	}
+	return mapped
 }
 
 // scalarGoSizeAlign returns the size and alignment (in bytes, arm64/amd64 LP64)
@@ -128,6 +161,64 @@ func layoutSafeFromGoTypes(packed bool, goTypes []string) bool {
 	return true
 }
 
+// goStructLayout computes each field's byte offset and the total size of a Go
+// struct with the given (width-corrected) field types, under Go's natural
+// alignment (packed=false) or tight packing (packed=true). ok is false if any
+// field's size is unknown.
+func goStructLayout(goTypes []string, packed bool) (offsets []int, size int, ok bool) {
+	pos, maxAlign := 0, 1
+	for _, gt := range goTypes {
+		sz, al, fieldOK := scalarGoSizeAlign(gt)
+		if !fieldOK {
+			return nil, 0, false
+		}
+		if !packed {
+			if al > maxAlign {
+				maxAlign = al
+			}
+			if r := pos % al; r != 0 {
+				pos += al - r
+			}
+		}
+		offsets = append(offsets, pos)
+		pos += sz
+	}
+	if !packed {
+		if r := pos % maxAlign; r != 0 {
+			pos += maxAlign - r
+		}
+	}
+	return offsets, pos, true
+}
+
+// layoutMatchesAuthoritative verifies the width-corrected Go layout reproduces
+// clang's authoritative record layout (per-field offsets + total size) when one
+// was captured (Struct.Size != 0). It returns true when no authoritative layout
+// exists (nothing to cross-check — clang only lays out value-used structs) or when
+// the Go layout matches exactly. A mismatch means the Go struct would not
+// reproduce the C ABI, so the struct stays opaque.
+func layoutMatchesAuthoritative(s meta.Struct, goTypes []string) bool {
+	if s.Size == 0 {
+		return true
+	}
+	offsets, size, ok := goStructLayout(goTypes, s.Packed)
+	if !ok {
+		// A nested struct / non-scalar field the layout computer cannot size — the
+		// emittable fixpoint already gates those recursively; skip the cross-check
+		// rather than wrongly excluding a valid nested-struct struct.
+		return true
+	}
+	if size != s.Size || len(offsets) != len(s.Fields) {
+		return false
+	}
+	for i := range offsets {
+		if offsets[i] != s.Fields[i].Offset {
+			return false
+		}
+	}
+	return true
+}
+
 // structLayoutSafe is layoutSafeFromGoTypes over a metadata struct's resolved
 // field Go types.
 func structLayoutSafe(s meta.Struct) bool {
@@ -179,7 +270,8 @@ func ComputeEmittableStructs(
 				// inserted); otherwise field reads would be misaligned. Drop unsafe
 				// packed structs from the emittable set so pointer/value uses fall back
 				// to the opaque unsafe.Pointer path rather than a wrong-layout struct.
-				if !layoutSafeFromGoTypes(s.Packed, goTypes) {
+				if !layoutSafeFromGoTypes(s.Packed, goTypes) ||
+					!layoutMatchesAuthoritative(s, goTypes) {
 					continue
 				}
 				resolved[goName] = goTypes
@@ -393,7 +485,7 @@ func emitStructs(
 			if fieldName == "" {
 				fieldName = fmt.Sprintf("Field%d", i)
 			}
-			gt := hermeticFieldType(f, ctx, mapper, fc, rawPkgAlias, willEmit, imports)
+			gt := structFieldGoType(f.ObjCType, hermeticFieldType(f, ctx, mapper, fc, rawPkgAlias, willEmit, imports))
 			fields = append(fields, view.Field{GoName: structFieldGoName(fieldName), GoType: gt})
 		}
 		structs = append(structs, view.Struct{GoName: goName, Doc: cleanDoc(s.Doc), Fields: fields})

@@ -35241,17 +35241,21 @@
         },
         {
           "name": "marker",
-          "objc_type": "MarkerIdType"
+          "objc_type": "MarkerIdType",
+          "offset": 4
         },
         {
           "name": "count",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 6
         },
         {
           "name": "text",
-          "objc_type": "char[1]"
+          "objc_type": "char[1]",
+          "offset": 8
         }
       ],
+      "size": 10,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/AIFF.h",
       "sdk_line": 185
@@ -35333,21 +35337,26 @@
         },
         {
           "name": "componentSubType",
-          "objc_type": "OSType"
+          "objc_type": "OSType",
+          "offset": 4
         },
         {
           "name": "componentManufacturer",
-          "objc_type": "OSType"
+          "objc_type": "OSType",
+          "offset": 8
         },
         {
           "name": "componentFlags",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 12
         },
         {
           "name": "componentFlagsMask",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 16
         }
       ],
+      "size": 20,
       "availability": {
         "macos_introduced": "10.0",
         "macos_deprecated": "10.8",
@@ -35433,13 +35442,16 @@
         },
         {
           "name": "component",
-          "objc_type": "ResourceSpec"
+          "objc_type": "ResourceSpec",
+          "offset": 4
         },
         {
           "name": "platformType",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 10
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/Components.h",
       "sdk_line": 133
@@ -35478,21 +35490,26 @@
         },
         {
           "name": "component",
-          "objc_type": "ResourceSpec"
+          "objc_type": "ResourceSpec",
+          "offset": 20
         },
         {
           "name": "componentName",
-          "objc_type": "ResourceSpec"
+          "objc_type": "ResourceSpec",
+          "offset": 26
         },
         {
           "name": "componentInfo",
-          "objc_type": "ResourceSpec"
+          "objc_type": "ResourceSpec",
+          "offset": 32
         },
         {
           "name": "componentIcon",
-          "objc_type": "ResourceSpec"
+          "objc_type": "ResourceSpec",
+          "offset": 38
         }
       ],
+      "size": 44,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/Components.h",
       "sdk_line": 123
@@ -36892,9 +36909,11 @@
         },
         {
           "name": "length",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {
         "macos_introduced": "10.0",
         "macos_deprecated": "10.8",
@@ -37282,53 +37301,66 @@
         },
         {
           "name": "months",
-          "objc_type": "Str15[12]"
+          "objc_type": "Str15[12]",
+          "offset": 112
         },
         {
           "name": "suppressDay",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 304
         },
         {
           "name": "lngDateFmt",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 305
         },
         {
           "name": "dayLeading0",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 306
         },
         {
           "name": "abbrLen",
-          "objc_type": "UInt8"
+          "objc_type": "UInt8",
+          "offset": 307
         },
         {
           "name": "st0",
-          "objc_type": "char[4]"
+          "objc_type": "char[4]",
+          "offset": 308
         },
         {
           "name": "st1",
-          "objc_type": "char[4]"
+          "objc_type": "char[4]",
+          "offset": 312
         },
         {
           "name": "st2",
-          "objc_type": "char[4]"
+          "objc_type": "char[4]",
+          "offset": 316
         },
         {
           "name": "st3",
-          "objc_type": "char[4]"
+          "objc_type": "char[4]",
+          "offset": 320
         },
         {
           "name": "st4",
-          "objc_type": "char[4]"
+          "objc_type": "char[4]",
+          "offset": 324
         },
         {
           "name": "intl1Vers",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 328
         },
         {
           "name": "localRtn",
-          "objc_type": "short[1]"
+          "objc_type": "short[1]",
+          "offset": 330
         }
       ],
+      "size": 332,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/IntlResources.h",
       "sdk_line": 146
@@ -37569,45 +37601,56 @@
         },
         {
           "name": "itlbDate",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         },
         {
           "name": "itlbSort",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 4
         },
         {
           "name": "itlbFlags",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 6
         },
         {
           "name": "itlbToken",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 8
         },
         {
           "name": "itlbEncoding",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 10
         },
         {
           "name": "itlbLang",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 12
         },
         {
           "name": "itlbNumRep",
-          "objc_type": "SInt8"
+          "objc_type": "SInt8",
+          "offset": 14
         },
         {
           "name": "itlbDateRep",
-          "objc_type": "SInt8"
+          "objc_type": "SInt8",
+          "offset": 15
         },
         {
           "name": "itlbKeys",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 16
         },
         {
           "name": "itlbIcon",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 18
         }
       ],
+      "size": 20,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/IntlResources.h",
       "sdk_line": 331
@@ -37694,9 +37737,11 @@
         },
         {
           "name": "opVariant",
-          "objc_type": "LocaleOperationVariant"
+          "objc_type": "LocaleOperationVariant",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/MacLocales.h",
       "sdk_line": 62
@@ -38185,13 +38230,16 @@
         },
         {
           "name": "position",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 2
         },
         {
           "name": "markerName",
-          "objc_type": "Str255"
+          "objc_type": "Str255",
+          "offset": 6
         }
       ],
+      "size": 262,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/AIFF.h",
       "sdk_line": 128
@@ -38434,9 +38482,11 @@
         },
         {
           "name": "offSecond",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/IntlResources.h",
       "sdk_line": 110
@@ -38593,45 +38643,56 @@
         },
         {
           "name": "tag2",
-          "objc_type": "OSType"
+          "objc_type": "OSType",
+          "offset": 4
         },
         {
           "name": "architecture",
-          "objc_type": "OSType"
+          "objc_type": "OSType",
+          "offset": 8
         },
         {
           "name": "formatVersion",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 12
         },
         {
           "name": "dateTimeStamp",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 16
         },
         {
           "name": "oldDefVersion",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 20
         },
         {
           "name": "oldImpVersion",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 24
         },
         {
           "name": "currentVersion",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 28
         },
         {
           "name": "sectionCount",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 32
         },
         {
           "name": "instSectionCount",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 34
         },
         {
           "name": "reservedA",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 36
         }
       ],
+      "size": 40,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/PEFBinaryFormat.h",
       "sdk_line": 96
@@ -38868,9 +38929,11 @@
         },
         {
           "name": "hashValue",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/PEFBinaryFormat.h",
       "sdk_line": 491
@@ -38883,9 +38946,11 @@
         },
         {
           "name": "h",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "MacTypes.h",
       "sdk_line": 544,
@@ -38941,17 +39006,21 @@
         },
         {
           "name": "left",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         },
         {
           "name": "bottom",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 4
         },
         {
           "name": "right",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 6
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "MacTypes.h",
       "sdk_line": 550
@@ -39132,9 +39201,11 @@
         },
         {
           "name": "resID",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 4
         }
       ],
+      "size": 6,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/Components.h",
       "sdk_line": 118
@@ -39190,29 +39261,36 @@
         },
         {
           "name": "reserved1",
-          "objc_type": "SInt8"
+          "objc_type": "SInt8",
+          "offset": 8
         },
         {
           "name": "ISA",
-          "objc_type": "ISAType"
+          "objc_type": "ISAType",
+          "offset": 9
         },
         {
           "name": "routineFlags",
-          "objc_type": "RoutineFlagsType"
+          "objc_type": "RoutineFlagsType",
+          "offset": 10
         },
         {
           "name": "procDescriptor",
-          "objc_type": "ProcPtr"
+          "objc_type": "ProcPtr",
+          "offset": 12
         },
         {
           "name": "reserved2",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 20
         },
         {
           "name": "selector",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 24
         }
       ],
+      "size": 28,
       "availability": {
         "macos_introduced": "10.0",
         "macos_deprecated": "10.8",
@@ -39310,9 +39388,11 @@
         },
         {
           "name": "script",
-          "objc_type": "ScriptCode"
+          "objc_type": "ScriptCode",
+          "offset": 8
         }
       ],
+      "size": 10,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/TextCommon.h",
       "sdk_line": 604
@@ -39387,17 +39467,21 @@
         },
         {
           "name": "destinationEncoding",
-          "objc_type": "TextEncoding"
+          "objc_type": "TextEncoding",
+          "offset": 4
         },
         {
           "name": "reserved1",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 8
         },
         {
           "name": "reserved2",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 10
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/TextEncodingConverter.h",
       "sdk_line": 59
@@ -39469,9 +39553,11 @@
         },
         {
           "name": "dest",
-          "objc_type": "TextEncodingRec"
+          "objc_type": "TextEncodingRec",
+          "offset": 12
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/TextEncodingPlugin.h",
       "sdk_line": 114
@@ -39902,17 +39988,21 @@
         },
         {
           "name": "reserved",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "tableStartOffset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         },
         {
           "name": "tableSize",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 12
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/IntlResources.h",
       "sdk_line": 293
@@ -39944,13 +40034,16 @@
         },
         {
           "name": "variant",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "format",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/TextEncodingPlugin.h",
       "sdk_line": 84
@@ -39963,9 +40056,11 @@
         },
         {
           "name": "textEncoding",
-          "objc_type": "TextEncoding"
+          "objc_type": "TextEncoding",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/TextCommon.h",
       "sdk_line": 597
@@ -40337,29 +40432,36 @@
         },
         {
           "name": "keyboardTypeLast",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "keyModifiersToTableNumOffset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         },
         {
           "name": "keyToCharTableIndexOffset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 12
         },
         {
           "name": "keyStateRecordsIndexOffset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 16
         },
         {
           "name": "keyStateTerminatorsOffset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 20
         },
         {
           "name": "keySequenceDataIndexOffset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 24
         }
       ],
+      "size": 28,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/UnicodeUtilities.h",
       "sdk_line": 156
@@ -40372,13 +40474,16 @@
         },
         {
           "name": "lowSeconds",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 2
         },
         {
           "name": "fraction",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 6
         }
       ],
+      "size": 8,
       "availability": {
         "macos_introduced": "10.0",
         "macos_deprecated": "10.4",
@@ -40395,13 +40500,16 @@
         },
         {
           "name": "otherEncoding",
-          "objc_type": "TextEncoding"
+          "objc_type": "TextEncoding",
+          "offset": 4
         },
         {
           "name": "mappingVersion",
-          "objc_type": "UnicodeMapVersion"
+          "objc_type": "UnicodeMapVersion",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/CarbonCore/UnicodeConverter.h",
       "sdk_line": 57

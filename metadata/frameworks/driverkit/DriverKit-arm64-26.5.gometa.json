@@ -2222,17 +2222,21 @@
         },
         {
           "name": "flags",
-          "objc_type": "uint64_t"
+          "objc_type": "uint64_t",
+          "offset": 8
         },
         {
           "name": "objectRefs",
-          "objc_type": "uint64_t"
+          "objc_type": "uint64_t",
+          "offset": 16
         },
         {
           "name": "objects",
-          "objc_type": "OSObjectRef[0]"
+          "objc_type": "OSObjectRef[0]",
+          "offset": 24
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "DriverKit/IORPC.h",
       "sdk_line": 78
@@ -2279,13 +2283,16 @@
         },
         {
           "name": "msgh_body",
-          "objc_type": "mach_msg_body_t"
+          "objc_type": "mach_msg_body_t",
+          "offset": 24
         },
         {
           "name": "objects",
-          "objc_type": "mach_msg_port_descriptor_t[0]"
+          "objc_type": "mach_msg_port_descriptor_t[0]",
+          "offset": 28
         }
       ],
+      "size": 28,
       "availability": {},
       "sdk_file": "DriverKit/IORPC.h",
       "sdk_line": 70
@@ -2313,9 +2320,11 @@
         },
         {
           "name": "channel_type",
-          "objc_type": "IOReportChannelType"
+          "objc_type": "IOReportChannelType",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "DriverKit/IOReportTypes.h",
       "sdk_line": 171
@@ -2343,22 +2352,27 @@
         },
         {
           "name": "reserved",
-          "objc_type": "uint8_t"
+          "objc_type": "uint8_t",
+          "offset": 1
         },
         {
           "name": "categories",
-          "objc_type": "uint16_t"
+          "objc_type": "uint16_t",
+          "offset": 2
         },
         {
           "name": "nelements",
-          "objc_type": "uint16_t"
+          "objc_type": "uint16_t",
+          "offset": 4
         },
         {
           "name": "element_idx",
-          "objc_type": "int16_t"
+          "objc_type": "int16_t",
+          "offset": 6
         }
       ],
       "packed": true,
+      "size": 8,
       "availability": {},
       "sdk_file": "DriverKit/IOReportTypes.h",
       "sdk_line": 138
@@ -2411,9 +2425,11 @@
         },
         {
           "name": "channel",
-          "objc_type": "IOReportChannel"
+          "objc_type": "IOReportChannel",
+          "offset": 8
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "DriverKit/IOReportTypes.h",
       "sdk_line": 181
@@ -3046,9 +3062,11 @@
         },
         {
           "name": "prev",
-          "objc_type": "struct queue_entry *"
+          "objc_type": "struct queue_entry *",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "DriverKit/queue_implementation.h",
       "sdk_line": 201

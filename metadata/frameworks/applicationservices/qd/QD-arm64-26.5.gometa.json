@@ -3897,69 +3897,86 @@
         },
         {
           "name": "CMMType",
-          "objc_type": "OSType"
+          "objc_type": "OSType",
+          "offset": 4
         },
         {
           "name": "profileVersion",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         },
         {
           "name": "profileClass",
-          "objc_type": "OSType"
+          "objc_type": "OSType",
+          "offset": 12
         },
         {
           "name": "dataColorSpace",
-          "objc_type": "OSType"
+          "objc_type": "OSType",
+          "offset": 16
         },
         {
           "name": "profileConnectionSpace",
-          "objc_type": "OSType"
+          "objc_type": "OSType",
+          "offset": 20
         },
         {
           "name": "dateTime",
-          "objc_type": "CMDateTime"
+          "objc_type": "CMDateTime",
+          "offset": 24
         },
         {
           "name": "CS2profileSignature",
-          "objc_type": "OSType"
+          "objc_type": "OSType",
+          "offset": 36
         },
         {
           "name": "platform",
-          "objc_type": "OSType"
+          "objc_type": "OSType",
+          "offset": 40
         },
         {
           "name": "flags",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 44
         },
         {
           "name": "deviceManufacturer",
-          "objc_type": "OSType"
+          "objc_type": "OSType",
+          "offset": 48
         },
         {
           "name": "deviceModel",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 52
         },
         {
           "name": "deviceAttributes",
-          "objc_type": "UInt32[2]"
+          "objc_type": "UInt32[2]",
+          "offset": 56
         },
         {
           "name": "renderingIntent",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 64
         },
         {
           "name": "white",
-          "objc_type": "CMFixedXYZColor"
+          "objc_type": "CMFixedXYZColor",
+          "offset": 68
         },
         {
           "name": "creator",
-          "objc_type": "OSType"
+          "objc_type": "OSType",
+          "offset": 80
         },
         {
           "name": "reserved",
-          "objc_type": "char[44]"
+          "objc_type": "char[44]",
+          "offset": 84
         }
       ],
+      "size": 128,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 468
@@ -4128,9 +4145,11 @@
         },
         {
           "name": "size",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 1580
@@ -4250,25 +4269,31 @@
         },
         {
           "name": "month",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "dayOfTheMonth",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 4
         },
         {
           "name": "hours",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 6
         },
         {
           "name": "minutes",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 8
         },
         {
           "name": "seconds",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 10
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 417
@@ -4358,21 +4383,26 @@
         },
         {
           "name": "profileID",
-          "objc_type": "CMDeviceProfileID"
+          "objc_type": "CMDeviceProfileID",
+          "offset": 4
         },
         {
           "name": "profileLoc",
-          "objc_type": "CMProfileLocation"
+          "objc_type": "CMProfileLocation",
+          "offset": 8
         },
         {
           "name": "profileName",
-          "objc_type": "CFDictionaryRef"
+          "objc_type": "CFDictionaryRef",
+          "offset": 1040
         },
         {
           "name": "reserved",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 1048
         }
       ],
+      "size": 1056,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 2008
@@ -4415,13 +4445,16 @@
         },
         {
           "name": "Y",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 4
         },
         {
           "name": "Z",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 431
@@ -4522,6 +4555,7 @@
           "objc_type": "Handle"
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 1555
@@ -4534,9 +4568,11 @@
         },
         {
           "name": "VMSize",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 820
@@ -5196,6 +5232,7 @@
           "objc_type": "char[1024]"
         }
       ],
+      "size": 1024,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 1572
@@ -5255,9 +5292,11 @@
         },
         {
           "name": "u",
-          "objc_type": "CMProfLoc"
+          "objc_type": "CMProfLoc",
+          "offset": 8
         }
       ],
+      "size": 1032,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 1598
@@ -5293,13 +5332,16 @@
         },
         {
           "name": "green",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "blue",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 4
         }
       ],
+      "size": 6,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 1228
@@ -5331,13 +5373,16 @@
         },
         {
           "name": "angle",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 4
         },
         {
           "name": "spotFunction",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 723
@@ -5411,13 +5456,16 @@
         },
         {
           "name": "elementOffset",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "elementSize",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 509
@@ -5667,17 +5715,21 @@
         },
         {
           "name": "entryCount",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 2
         },
         {
           "name": "entrySize",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 4
         },
         {
           "name": "data",
-          "objc_type": "char[1]"
+          "objc_type": "char[1]",
+          "offset": 6
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 838
@@ -5880,9 +5932,11 @@
         },
         {
           "name": "rgb",
-          "objc_type": "RGBColor"
+          "objc_type": "RGBColor",
+          "offset": 2
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/Quickdraw.h",
       "sdk_line": 71
@@ -6290,13 +6344,16 @@
         },
         {
           "name": "transformTag",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "profile",
-          "objc_type": "CMProfileRef"
+          "objc_type": "CMProfileRef",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/ColorSyncDeprecated.h",
       "sdk_line": 1200
@@ -6544,9 +6601,11 @@
         },
         {
           "name": "h",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "MacTypes.h",
       "sdk_line": 544,
@@ -6560,13 +6619,16 @@
         },
         {
           "name": "green",
-          "objc_type": "unsigned short"
+          "objc_type": "unsigned short",
+          "offset": 2
         },
         {
           "name": "blue",
-          "objc_type": "unsigned short"
+          "objc_type": "unsigned short",
+          "offset": 4
         }
       ],
+      "size": 6,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/Quickdraw.h",
       "sdk_line": 65
@@ -6579,17 +6641,21 @@
         },
         {
           "name": "left",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         },
         {
           "name": "bottom",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 4
         },
         {
           "name": "right",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 6
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "MacTypes.h",
       "sdk_line": 550

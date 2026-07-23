@@ -2284,25 +2284,31 @@
         },
         {
           "name": "beforeShrinkLimit",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 4
         },
         {
           "name": "afterGrowLimit",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 8
         },
         {
           "name": "afterShrinkLimit",
-          "objc_type": "Fixed"
+          "objc_type": "Fixed",
+          "offset": 12
         },
         {
           "name": "growFlags",
-          "objc_type": "JustificationFlags"
+          "objc_type": "JustificationFlags",
+          "offset": 16
         },
         {
           "name": "shrinkFlags",
-          "objc_type": "JustificationFlags"
+          "objc_type": "JustificationFlags",
+          "offset": 18
         }
       ],
+      "size": 20,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/ATS/ATSLayoutTypes.h",
       "sdk_line": 512
@@ -2361,13 +2367,16 @@
         },
         {
           "name": "controlBits",
-          "objc_type": "UInt32[1]"
+          "objc_type": "UInt32[1]",
+          "offset": 4
         },
         {
           "name": "vector",
-          "objc_type": "ATSPoint[1]"
+          "objc_type": "ATSPoint[1]",
+          "offset": 8
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/ATS/ATSTypes.h",
       "sdk_line": 345

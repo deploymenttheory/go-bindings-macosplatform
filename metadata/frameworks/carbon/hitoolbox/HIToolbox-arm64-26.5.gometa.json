@@ -28516,17 +28516,21 @@
         },
         {
           "name": "item",
-          "objc_type": "DataBrowserItemID"
+          "objc_type": "DataBrowserItemID",
+          "offset": 8
         },
         {
           "name": "columnProperty",
-          "objc_type": "DataBrowserPropertyID"
+          "objc_type": "DataBrowserPropertyID",
+          "offset": 16
         },
         {
           "name": "propertyPart",
-          "objc_type": "DataBrowserPropertyPart"
+          "objc_type": "DataBrowserPropertyPart",
+          "offset": 24
         }
       ],
+      "size": 28,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/HIDataBrowser.h",
       "sdk_line": 4072
@@ -28654,13 +28658,16 @@
         },
         {
           "name": "propertyType",
-          "objc_type": "DataBrowserPropertyType"
+          "objc_type": "DataBrowserPropertyType",
+          "offset": 8
         },
         {
           "name": "propertyFlags",
-          "objc_type": "DataBrowserPropertyFlags"
+          "objc_type": "DataBrowserPropertyFlags",
+          "offset": 12
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/HIDataBrowser.h",
       "sdk_line": 386
@@ -28927,13 +28934,16 @@
         },
         {
           "name": "kind",
-          "objc_type": "HIPositionKind"
+          "objc_type": "HIPositionKind",
+          "offset": 8
         },
         {
           "name": "offset",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 10
         }
       ],
+      "size": 18,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/HIView.h",
       "sdk_line": 4212
@@ -28946,13 +28956,16 @@
         },
         {
           "name": "kind",
-          "objc_type": "HIScaleKind"
+          "objc_type": "HIScaleKind",
+          "offset": 8
         },
         {
           "name": "ratio",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 10
         }
       ],
+      "size": 18,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/HIView.h",
       "sdk_line": 4114
@@ -29125,13 +29138,16 @@
         },
         {
           "name": "kind",
-          "objc_type": "HIBindingKind"
+          "objc_type": "HIBindingKind",
+          "offset": 8
         },
         {
           "name": "offset",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 10
         }
       ],
+      "size": 18,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/HIView.h",
       "sdk_line": 4043
@@ -29155,9 +29171,11 @@
         },
         {
           "name": "current",
-          "objc_type": "CFAbsoluteTime"
+          "objc_type": "CFAbsoluteTime",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/HITheme.h",
       "sdk_line": 346
@@ -29954,9 +29972,11 @@
         },
         {
           "name": "u",
-          "objc_type": "union (unnamed union at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Carbon.framework/Frameworks/HIToolbox.framework/Headers/MacHelp.h:348:3)"
+          "objc_type": "union (unnamed union at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Carbon.framework/Frameworks/HIToolbox.framework/Headers/MacHelp.h:348:3)",
+          "offset": 4
         }
       ],
+      "size": 260,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/MacHelp.h",
       "sdk_line": 346
@@ -29992,9 +30012,11 @@
         },
         {
           "name": "hmmIndex",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/MacHelp.h",
       "sdk_line": 341
@@ -30056,9 +30078,11 @@
         },
         {
           "name": "lhAscent",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextEdit.h",
       "sdk_line": 371
@@ -30185,29 +30209,36 @@
         },
         {
           "name": "mctItem",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         },
         {
           "name": "mctRGB1",
-          "objc_type": "RGBColor"
+          "objc_type": "RGBColor",
+          "offset": 4
         },
         {
           "name": "mctRGB2",
-          "objc_type": "RGBColor"
+          "objc_type": "RGBColor",
+          "offset": 10
         },
         {
           "name": "mctRGB3",
-          "objc_type": "RGBColor"
+          "objc_type": "RGBColor",
+          "offset": 16
         },
         {
           "name": "mctRGB4",
-          "objc_type": "RGBColor"
+          "objc_type": "RGBColor",
+          "offset": 22
         },
         {
           "name": "mctReserved",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 28
         }
       ],
+      "size": 30,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/Menus.h",
       "sdk_line": 6441
@@ -30490,25 +30521,31 @@
         },
         {
           "name": "itemSelected",
-          "objc_type": "MenuItemIndex"
+          "objc_type": "MenuItemIndex",
+          "offset": 8
         },
         {
           "name": "itemUnderMouse",
-          "objc_type": "MenuItemIndex"
+          "objc_type": "MenuItemIndex",
+          "offset": 10
         },
         {
           "name": "itemRect",
-          "objc_type": "Rect"
+          "objc_type": "Rect",
+          "offset": 12
         },
         {
           "name": "virtualMenuTop",
-          "objc_type": "SInt32"
+          "objc_type": "SInt32",
+          "offset": 20
         },
         {
           "name": "virtualMenuBottom",
-          "objc_type": "SInt32"
+          "objc_type": "SInt32",
+          "offset": 24
         }
       ],
+      "size": 28,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/Menus.h",
       "sdk_line": 601
@@ -30697,9 +30734,11 @@
         },
         {
           "name": "h",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "MacTypes.h",
       "sdk_line": 544,
@@ -30747,13 +30786,16 @@
         },
         {
           "name": "green",
-          "objc_type": "unsigned short"
+          "objc_type": "unsigned short",
+          "offset": 2
         },
         {
           "name": "blue",
-          "objc_type": "unsigned short"
+          "objc_type": "unsigned short",
+          "offset": 4
         }
       ],
+      "size": 6,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/QD/Quickdraw.h",
       "sdk_line": 65
@@ -30766,17 +30808,21 @@
         },
         {
           "name": "left",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         },
         {
           "name": "bottom",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 4
         },
         {
           "name": "right",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 6
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "MacTypes.h",
       "sdk_line": 550
@@ -30789,29 +30835,36 @@
         },
         {
           "name": "stHeight",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         },
         {
           "name": "stAscent",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 4
         },
         {
           "name": "stFont",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 6
         },
         {
           "name": "stFace",
-          "objc_type": "StyleField"
+          "objc_type": "StyleField",
+          "offset": 8
         },
         {
           "name": "stSize",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 10
         },
         {
           "name": "stColor",
-          "objc_type": "RGBColor"
+          "objc_type": "RGBColor",
+          "offset": 12
         }
       ],
+      "size": 18,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextEdit.h",
       "sdk_line": 358
@@ -30870,9 +30923,11 @@
         },
         {
           "name": "fLanguage",
-          "objc_type": "LangCode"
+          "objc_type": "LangCode",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextServices.h",
       "sdk_line": 577
@@ -30900,9 +30955,11 @@
         },
         {
           "name": "pressState",
-          "objc_type": "ThemeTrackPressState"
+          "objc_type": "ThemeTrackPressState",
+          "offset": 4
         }
       ],
+      "size": 6,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/Appearance.h",
       "sdk_line": 1296
@@ -30915,29 +30972,36 @@
         },
         {
           "name": "scrpHeight",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 4
         },
         {
           "name": "scrpAscent",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 6
         },
         {
           "name": "scrpFont",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 8
         },
         {
           "name": "scrpFace",
-          "objc_type": "StyleField"
+          "objc_type": "StyleField",
+          "offset": 10
         },
         {
           "name": "scrpSize",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 12
         },
         {
           "name": "scrpColor",
-          "objc_type": "RGBColor"
+          "objc_type": "RGBColor",
+          "offset": 14
         }
       ],
+      "size": 20,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextEdit.h",
       "sdk_line": 379
@@ -31026,9 +31090,11 @@
         },
         {
           "name": "styleIndex",
-          "objc_type": "short"
+          "objc_type": "short",
+          "offset": 2
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextEdit.h",
       "sdk_line": 353
@@ -31203,17 +31269,21 @@
         },
         {
           "name": "fontRef",
-          "objc_type": "ATSFontRef"
+          "objc_type": "ATSFontRef",
+          "offset": 16
         },
         {
           "name": "collection",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 20
         },
         {
           "name": "glyphID",
-          "objc_type": "UInt16"
+          "objc_type": "UInt16",
+          "offset": 22
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextServices.h",
       "sdk_line": 589
@@ -31568,9 +31638,11 @@
         },
         {
           "name": "fItemName",
-          "objc_type": "Str255"
+          "objc_type": "Str255",
+          "offset": 8
         }
       ],
+      "size": 264,
       "availability": {},
       "sdk_file": "Carbon.framework/Frameworks/HIToolbox/TextServices.h",
       "sdk_line": 564

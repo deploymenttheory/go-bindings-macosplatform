@@ -1557,13 +1557,16 @@
         },
         {
           "name": "hidden",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 8
         },
         {
           "name": "reply",
-          "objc_type": "krb5_data *"
+          "objc_type": "krb5_data *",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "Kerberos/krb5.h",
       "sdk_line": 2153
@@ -2275,9 +2278,11 @@
         },
         {
           "name": "elements",
-          "objc_type": "void *"
+          "objc_type": "void *",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "Kerberos/gssapi.h",
       "sdk_line": 131

@@ -2635,13 +2635,16 @@
         },
         {
           "name": "mDataByteSize",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 4
         },
         {
           "name": "mData",
-          "objc_type": "void * _Nullable"
+          "objc_type": "void * _Nullable",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
       "sdk_line": 163,
@@ -2671,13 +2674,16 @@
         },
         {
           "name": "mChannelFlags",
-          "objc_type": "AudioChannelFlags"
+          "objc_type": "AudioChannelFlags",
+          "offset": 4
         },
         {
           "name": "mCoordinates",
-          "objc_type": "Float32[3]"
+          "objc_type": "Float32[3]",
+          "offset": 8
         }
       ],
+      "size": 20,
       "availability": {},
       "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
       "sdk_line": 1518,
@@ -2751,37 +2757,46 @@
         },
         {
           "name": "mFormatID",
-          "objc_type": "AudioFormatID"
+          "objc_type": "AudioFormatID",
+          "offset": 8
         },
         {
           "name": "mFormatFlags",
-          "objc_type": "AudioFormatFlags"
+          "objc_type": "AudioFormatFlags",
+          "offset": 12
         },
         {
           "name": "mBytesPerPacket",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 16
         },
         {
           "name": "mFramesPerPacket",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 20
         },
         {
           "name": "mBytesPerFrame",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 24
         },
         {
           "name": "mChannelsPerFrame",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 28
         },
         {
           "name": "mBitsPerChannel",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 32
         },
         {
           "name": "mReserved",
-          "objc_type": "UInt32"
+          "objc_type": "UInt32",
+          "offset": 36
         }
       ],
+      "size": 40,
       "availability": {},
       "sdk_file": "CoreAudioTypes/CoreAudioBaseTypes.h",
       "sdk_line": 271,

@@ -7158,13 +7158,16 @@
         },
         {
           "name": "sourceTextureCount",
-          "objc_type": "unsigned long"
+          "objc_type": "unsigned long",
+          "offset": 8
         },
         {
           "name": "broadcastTextureCount",
-          "objc_type": "unsigned long"
+          "objc_type": "unsigned long",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSCore/MPSKernelTypes.h",
       "sdk_line": 812
@@ -7283,13 +7286,16 @@
         },
         {
           "name": "y",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 8
         },
         {
           "name": "channel",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSCore/MPSCoreTypes.h",
       "sdk_line": 426,
@@ -7335,17 +7341,21 @@
         },
         {
           "name": "recip",
-          "objc_type": "uint16_t"
+          "objc_type": "uint16_t",
+          "offset": 2
         },
         {
           "name": "addend",
-          "objc_type": "uint16_t"
+          "objc_type": "uint16_t",
+          "offset": 4
         },
         {
           "name": "shift",
-          "objc_type": "uint16_t"
+          "objc_type": "uint16_t",
+          "offset": 6
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSCore/MPSKernelTypes.h",
       "sdk_line": 92
@@ -7394,13 +7404,16 @@
         },
         {
           "name": "y",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 8
         },
         {
           "name": "z",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "MetalPerformanceShaders.framework/Frameworks/MPSCore/MPSCoreTypes.h",
       "sdk_line": 359,

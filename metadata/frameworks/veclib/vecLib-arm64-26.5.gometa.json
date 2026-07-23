@@ -7978,13 +7978,16 @@
         },
         {
           "name": "weights",
-          "objc_type": "BNNSNDArrayDescriptor"
+          "objc_type": "BNNSNDArrayDescriptor",
+          "offset": 176
         },
         {
           "name": "bias",
-          "objc_type": "BNNSNDArrayDescriptor"
+          "objc_type": "BNNSNDArrayDescriptor",
+          "offset": 352
         }
       ],
+      "size": 528,
       "availability": {},
       "sdk_file": "vecLib/BNNS/bnns_structures.h",
       "sdk_line": 312,
@@ -7998,41 +8001,51 @@
         },
         {
           "name": "layout",
-          "objc_type": "BNNSDataLayout"
+          "objc_type": "BNNSDataLayout",
+          "offset": 4
         },
         {
           "name": "size",
-          "objc_type": "size_t[8]"
+          "objc_type": "size_t[8]",
+          "offset": 8
         },
         {
           "name": "stride",
-          "objc_type": "size_t[8]"
+          "objc_type": "size_t[8]",
+          "offset": 72
         },
         {
           "name": "data",
-          "objc_type": "void * _Nullable"
+          "objc_type": "void * _Nullable",
+          "offset": 136
         },
         {
           "name": "data_type",
-          "objc_type": "BNNSDataType"
+          "objc_type": "BNNSDataType",
+          "offset": 144
         },
         {
           "name": "table_data",
-          "objc_type": "void * _Nullable"
+          "objc_type": "void * _Nullable",
+          "offset": 152
         },
         {
           "name": "table_data_type",
-          "objc_type": "BNNSDataType"
+          "objc_type": "BNNSDataType",
+          "offset": 160
         },
         {
           "name": "data_scale",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 164
         },
         {
           "name": "data_bias",
-          "objc_type": "float"
+          "objc_type": "float",
+          "offset": 168
         }
       ],
+      "size": 176,
       "availability": {},
       "sdk_file": "vecLib/BNNS/bnns_structures.h",
       "sdk_line": 125,
@@ -8572,21 +8585,26 @@
         },
         {
           "name": "columnCount",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 4
         },
         {
           "name": "columnStride",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 8
         },
         {
           "name": "attributes",
-          "objc_type": "SparseAttributesComplex_t"
+          "objc_type": "SparseAttributesComplex_t",
+          "offset": 12
         },
         {
           "name": "data",
-          "objc_type": "__SPARSE_double_complex * _Nonnull"
+          "objc_type": "__SPARSE_double_complex * _Nonnull",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1123,
@@ -8600,21 +8618,26 @@
         },
         {
           "name": "columnCount",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 4
         },
         {
           "name": "columnStride",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 8
         },
         {
           "name": "attributes",
-          "objc_type": "SparseAttributesComplex_t"
+          "objc_type": "SparseAttributesComplex_t",
+          "offset": 12
         },
         {
           "name": "data",
-          "objc_type": "__SPARSE_float_complex * _Nonnull"
+          "objc_type": "__SPARSE_float_complex * _Nonnull",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1139,
@@ -8628,21 +8651,26 @@
         },
         {
           "name": "columnCount",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 4
         },
         {
           "name": "columnStride",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 8
         },
         {
           "name": "attributes",
-          "objc_type": "SparseAttributes_t"
+          "objc_type": "SparseAttributes_t",
+          "offset": 12
         },
         {
           "name": "data",
-          "objc_type": "double * _Nonnull"
+          "objc_type": "double * _Nonnull",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1091,
@@ -8656,21 +8684,26 @@
         },
         {
           "name": "columnCount",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 4
         },
         {
           "name": "columnStride",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 8
         },
         {
           "name": "attributes",
-          "objc_type": "SparseAttributes_t"
+          "objc_type": "SparseAttributes_t",
+          "offset": 12
         },
         {
           "name": "data",
-          "objc_type": "float * _Nonnull"
+          "objc_type": "float * _Nonnull",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1107,
@@ -8684,9 +8717,11 @@
         },
         {
           "name": "data",
-          "objc_type": "__SPARSE_double_complex * _Nonnull"
+          "objc_type": "__SPARSE_double_complex * _Nonnull",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1069,
@@ -8700,9 +8735,11 @@
         },
         {
           "name": "data",
-          "objc_type": "__SPARSE_float_complex * _Nonnull"
+          "objc_type": "__SPARSE_float_complex * _Nonnull",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1078,
@@ -8716,9 +8753,11 @@
         },
         {
           "name": "data",
-          "objc_type": "double * _Nonnull"
+          "objc_type": "double * _Nonnull",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1051,
@@ -8732,9 +8771,11 @@
         },
         {
           "name": "data",
-          "objc_type": "float * _Nonnull"
+          "objc_type": "float * _Nonnull",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1060,
@@ -8818,21 +8859,26 @@
         },
         {
           "name": "maxIterations",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 8
         },
         {
           "name": "atol",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 16
         },
         {
           "name": "rtol",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 24
         },
         {
           "name": "reportStatus",
-          "objc_type": "void (* _Nullable)(const char * _Nonnull)"
+          "objc_type": "void (* _Nullable)(const char * _Nonnull)",
+          "offset": 32
         }
       ],
+      "size": 40,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 6060,
@@ -8846,29 +8892,36 @@
         },
         {
           "name": "variant",
-          "objc_type": "SparseGMRESVariant_t"
+          "objc_type": "SparseGMRESVariant_t",
+          "offset": 8
         },
         {
           "name": "nvec",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 12
         },
         {
           "name": "maxIterations",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 16
         },
         {
           "name": "atol",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 24
         },
         {
           "name": "rtol",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 32
         },
         {
           "name": "reportStatus",
-          "objc_type": "void (* _Nullable)(const char * _Nonnull)"
+          "objc_type": "void (* _Nullable)(const char * _Nonnull)",
+          "offset": 40
         }
       ],
+      "size": 48,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 6152,
@@ -8882,9 +8935,11 @@
         },
         {
           "name": "options",
-          "objc_type": "union (unnamed union at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/Sparse/Solve.h:6310:3)"
+          "objc_type": "union (unnamed union at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/vecLib.framework/Headers/Sparse/Solve.h:6310:3)",
+          "offset": 8
         }
       ],
+      "size": 264,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 6307,
@@ -8898,41 +8953,51 @@
         },
         {
           "name": "lambda",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 8
         },
         {
           "name": "nvec",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 16
         },
         {
           "name": "convergenceTest",
-          "objc_type": "SparseLSMRConvergenceTest_t"
+          "objc_type": "SparseLSMRConvergenceTest_t",
+          "offset": 20
         },
         {
           "name": "atol",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 24
         },
         {
           "name": "rtol",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 32
         },
         {
           "name": "btol",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 40
         },
         {
           "name": "conditionLimit",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 48
         },
         {
           "name": "maxIterations",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 56
         },
         {
           "name": "reportStatus",
-          "objc_type": "void (* _Nullable)(const char * _Nonnull)"
+          "objc_type": "void (* _Nullable)(const char * _Nonnull)",
+          "offset": 64
         }
       ],
+      "size": 72,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 6285,
@@ -8946,25 +9011,31 @@
         },
         {
           "name": "columnCount",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 4
         },
         {
           "name": "columnStarts",
-          "objc_type": "long * _Nonnull"
+          "objc_type": "long * _Nonnull",
+          "offset": 8
         },
         {
           "name": "rowIndices",
-          "objc_type": "int * _Nonnull"
+          "objc_type": "int * _Nonnull",
+          "offset": 16
         },
         {
           "name": "attributes",
-          "objc_type": "SparseAttributes_t"
+          "objc_type": "SparseAttributes_t",
+          "offset": 24
         },
         {
           "name": "blockSize",
-          "objc_type": "uint8_t"
+          "objc_type": "uint8_t",
+          "offset": 28
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 479,
@@ -8978,25 +9049,31 @@
         },
         {
           "name": "columnCount",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 4
         },
         {
           "name": "columnStarts",
-          "objc_type": "long * _Nonnull"
+          "objc_type": "long * _Nonnull",
+          "offset": 8
         },
         {
           "name": "rowIndices",
-          "objc_type": "int * _Nonnull"
+          "objc_type": "int * _Nonnull",
+          "offset": 16
         },
         {
           "name": "attributes",
-          "objc_type": "SparseAttributesComplex_t"
+          "objc_type": "SparseAttributesComplex_t",
+          "offset": 24
         },
         {
           "name": "blockSize",
-          "objc_type": "uint8_t"
+          "objc_type": "uint8_t",
+          "offset": 28
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 522,
@@ -9010,9 +9087,11 @@
         },
         {
           "name": "data",
-          "objc_type": "__SPARSE_double_complex * _Nonnull"
+          "objc_type": "__SPARSE_double_complex * _Nonnull",
+          "offset": 32
         }
       ],
+      "size": 40,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 574,
@@ -9026,9 +9105,11 @@
         },
         {
           "name": "data",
-          "objc_type": "__SPARSE_float_complex * _Nonnull"
+          "objc_type": "__SPARSE_float_complex * _Nonnull",
+          "offset": 32
         }
       ],
+      "size": 40,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 590,
@@ -9042,9 +9123,11 @@
         },
         {
           "name": "data",
-          "objc_type": "double * _Nonnull"
+          "objc_type": "double * _Nonnull",
+          "offset": 32
         }
       ],
+      "size": 40,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 542,
@@ -9058,9 +9141,11 @@
         },
         {
           "name": "data",
-          "objc_type": "float * _Nonnull"
+          "objc_type": "float * _Nonnull",
+          "offset": 32
         }
       ],
+      "size": 40,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 558,
@@ -9074,21 +9159,26 @@
         },
         {
           "name": "scalingMethod",
-          "objc_type": "SparseScaling_t"
+          "objc_type": "SparseScaling_t",
+          "offset": 4
         },
         {
           "name": "scaling",
-          "objc_type": "void * _Nullable"
+          "objc_type": "void * _Nullable",
+          "offset": 8
         },
         {
           "name": "pivotTolerance",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 16
         },
         {
           "name": "zeroTolerance",
-          "objc_type": "double"
+          "objc_type": "double",
+          "offset": 24
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1424,
@@ -9102,29 +9192,36 @@
         },
         {
           "name": "attributes",
-          "objc_type": "SparseAttributesComplex_t"
+          "objc_type": "SparseAttributesComplex_t",
+          "offset": 4
         },
         {
           "name": "symbolicFactorization",
-          "objc_type": "SparseOpaqueSymbolicFactorization"
+          "objc_type": "SparseOpaqueSymbolicFactorization",
+          "offset": 8
         },
         {
           "name": "userFactorStorage",
-          "objc_type": "bool"
+          "objc_type": "bool",
+          "offset": 72
         },
         {
           "name": "numericFactorization",
-          "objc_type": "void * _Nullable"
+          "objc_type": "void * _Nullable",
+          "offset": 80
         },
         {
           "name": "solveWorkspaceRequiredStatic",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 88
         },
         {
           "name": "solveWorkspaceRequiredPerRHS",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 96
         }
       ],
+      "size": 104,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1669,
@@ -9138,29 +9235,36 @@
         },
         {
           "name": "attributes",
-          "objc_type": "SparseAttributesComplex_t"
+          "objc_type": "SparseAttributesComplex_t",
+          "offset": 4
         },
         {
           "name": "symbolicFactorization",
-          "objc_type": "SparseOpaqueSymbolicFactorization"
+          "objc_type": "SparseOpaqueSymbolicFactorization",
+          "offset": 8
         },
         {
           "name": "userFactorStorage",
-          "objc_type": "bool"
+          "objc_type": "bool",
+          "offset": 72
         },
         {
           "name": "numericFactorization",
-          "objc_type": "void * _Nullable"
+          "objc_type": "void * _Nullable",
+          "offset": 80
         },
         {
           "name": "solveWorkspaceRequiredStatic",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 88
         },
         {
           "name": "solveWorkspaceRequiredPerRHS",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 96
         }
       ],
+      "size": 104,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1728,
@@ -9174,29 +9278,36 @@
         },
         {
           "name": "attributes",
-          "objc_type": "SparseAttributes_t"
+          "objc_type": "SparseAttributes_t",
+          "offset": 4
         },
         {
           "name": "symbolicFactorization",
-          "objc_type": "SparseOpaqueSymbolicFactorization"
+          "objc_type": "SparseOpaqueSymbolicFactorization",
+          "offset": 8
         },
         {
           "name": "userFactorStorage",
-          "objc_type": "bool"
+          "objc_type": "bool",
+          "offset": 72
         },
         {
           "name": "numericFactorization",
-          "objc_type": "void * _Nullable"
+          "objc_type": "void * _Nullable",
+          "offset": 80
         },
         {
           "name": "solveWorkspaceRequiredStatic",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 88
         },
         {
           "name": "solveWorkspaceRequiredPerRHS",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 96
         }
       ],
+      "size": 104,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1551,
@@ -9210,29 +9321,36 @@
         },
         {
           "name": "attributes",
-          "objc_type": "SparseAttributes_t"
+          "objc_type": "SparseAttributes_t",
+          "offset": 4
         },
         {
           "name": "symbolicFactorization",
-          "objc_type": "SparseOpaqueSymbolicFactorization"
+          "objc_type": "SparseOpaqueSymbolicFactorization",
+          "offset": 8
         },
         {
           "name": "userFactorStorage",
-          "objc_type": "bool"
+          "objc_type": "bool",
+          "offset": 72
         },
         {
           "name": "numericFactorization",
-          "objc_type": "void * _Nullable"
+          "objc_type": "void * _Nullable",
+          "offset": 80
         },
         {
           "name": "solveWorkspaceRequiredStatic",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 88
         },
         {
           "name": "solveWorkspaceRequiredPerRHS",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 96
         }
       ],
+      "size": 104,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1610,
@@ -9246,13 +9364,16 @@
         },
         {
           "name": "mem",
-          "objc_type": "void * _Nonnull"
+          "objc_type": "void * _Nonnull",
+          "offset": 8
         },
         {
           "name": "apply",
-          "objc_type": "void (* _Nonnull)(void * _Nonnull, enum CBLAS_TRANSPOSE, DenseMatrix_Complex_Double, DenseMatrix_Complex_Double)"
+          "objc_type": "void (* _Nonnull)(void * _Nonnull, enum CBLAS_TRANSPOSE, DenseMatrix_Complex_Double, DenseMatrix_Complex_Double)",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 5876,
@@ -9266,13 +9387,16 @@
         },
         {
           "name": "mem",
-          "objc_type": "void * _Nonnull"
+          "objc_type": "void * _Nonnull",
+          "offset": 8
         },
         {
           "name": "apply",
-          "objc_type": "void (* _Nonnull)(void * _Nonnull, enum CBLAS_TRANSPOSE, DenseMatrix_Complex_Float, DenseMatrix_Complex_Float)"
+          "objc_type": "void (* _Nonnull)(void * _Nonnull, enum CBLAS_TRANSPOSE, DenseMatrix_Complex_Float, DenseMatrix_Complex_Float)",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 5896,
@@ -9286,13 +9410,16 @@
         },
         {
           "name": "mem",
-          "objc_type": "void * _Nonnull"
+          "objc_type": "void * _Nonnull",
+          "offset": 8
         },
         {
           "name": "apply",
-          "objc_type": "void (* _Nonnull)(void * _Nonnull, enum CBLAS_TRANSPOSE, DenseMatrix_Double, DenseMatrix_Double)"
+          "objc_type": "void (* _Nonnull)(void * _Nonnull, enum CBLAS_TRANSPOSE, DenseMatrix_Double, DenseMatrix_Double)",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 5836,
@@ -9306,13 +9433,16 @@
         },
         {
           "name": "mem",
-          "objc_type": "void * _Nonnull"
+          "objc_type": "void * _Nonnull",
+          "offset": 8
         },
         {
           "name": "apply",
-          "objc_type": "void (* _Nonnull)(void * _Nonnull, enum CBLAS_TRANSPOSE, DenseMatrix_Float, DenseMatrix_Float)"
+          "objc_type": "void (* _Nonnull)(void * _Nonnull, enum CBLAS_TRANSPOSE, DenseMatrix_Float, DenseMatrix_Float)",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 5856,
@@ -9326,21 +9456,26 @@
         },
         {
           "name": "contents",
-          "objc_type": "SparseSubfactor_t"
+          "objc_type": "SparseSubfactor_t",
+          "offset": 4
         },
         {
           "name": "factor",
-          "objc_type": "SparseOpaqueFactorization_Complex_Double"
+          "objc_type": "SparseOpaqueFactorization_Complex_Double",
+          "offset": 8
         },
         {
           "name": "workspaceRequiredStatic",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 112
         },
         {
           "name": "workspaceRequiredPerRHS",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 120
         }
       ],
+      "size": 128,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1864,
@@ -9354,21 +9489,26 @@
         },
         {
           "name": "contents",
-          "objc_type": "SparseSubfactor_t"
+          "objc_type": "SparseSubfactor_t",
+          "offset": 4
         },
         {
           "name": "factor",
-          "objc_type": "SparseOpaqueFactorization_Complex_Float"
+          "objc_type": "SparseOpaqueFactorization_Complex_Float",
+          "offset": 8
         },
         {
           "name": "workspaceRequiredStatic",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 112
         },
         {
           "name": "workspaceRequiredPerRHS",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 120
         }
       ],
+      "size": 128,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1893,
@@ -9382,21 +9522,26 @@
         },
         {
           "name": "contents",
-          "objc_type": "SparseSubfactor_t"
+          "objc_type": "SparseSubfactor_t",
+          "offset": 4
         },
         {
           "name": "factor",
-          "objc_type": "SparseOpaqueFactorization_Double"
+          "objc_type": "SparseOpaqueFactorization_Double",
+          "offset": 8
         },
         {
           "name": "workspaceRequiredStatic",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 112
         },
         {
           "name": "workspaceRequiredPerRHS",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 120
         }
       ],
+      "size": 128,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1806,
@@ -9410,21 +9555,26 @@
         },
         {
           "name": "contents",
-          "objc_type": "SparseSubfactor_t"
+          "objc_type": "SparseSubfactor_t",
+          "offset": 4
         },
         {
           "name": "factor",
-          "objc_type": "SparseOpaqueFactorization_Float"
+          "objc_type": "SparseOpaqueFactorization_Float",
+          "offset": 8
         },
         {
           "name": "workspaceRequiredStatic",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 112
         },
         {
           "name": "workspaceRequiredPerRHS",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 120
         }
       ],
+      "size": 128,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1835,
@@ -9438,45 +9588,56 @@
         },
         {
           "name": "rowCount",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 4
         },
         {
           "name": "columnCount",
-          "objc_type": "int"
+          "objc_type": "int",
+          "offset": 8
         },
         {
           "name": "attributes",
-          "objc_type": "SparseAttributes_t"
+          "objc_type": "SparseAttributes_t",
+          "offset": 12
         },
         {
           "name": "blockSize",
-          "objc_type": "uint8_t"
+          "objc_type": "uint8_t",
+          "offset": 16
         },
         {
           "name": "type",
-          "objc_type": "SparseFactorization_t"
+          "objc_type": "SparseFactorization_t",
+          "offset": 17
         },
         {
           "name": "factorization",
-          "objc_type": "void * _Nullable"
+          "objc_type": "void * _Nullable",
+          "offset": 24
         },
         {
           "name": "workspaceSize_Float",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 32
         },
         {
           "name": "workspaceSize_Double",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 40
         },
         {
           "name": "factorSize_Float",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 48
         },
         {
           "name": "factorSize_Double",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 56
         }
       ],
+      "size": 64,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1488,
@@ -9490,29 +9651,36 @@
         },
         {
           "name": "orderMethod",
-          "objc_type": "SparseOrder_t"
+          "objc_type": "SparseOrder_t",
+          "offset": 4
         },
         {
           "name": "order",
-          "objc_type": "int * _Nullable"
+          "objc_type": "int * _Nullable",
+          "offset": 8
         },
         {
           "name": "ignoreRowsAndColumns",
-          "objc_type": "int * _Nullable"
+          "objc_type": "int * _Nullable",
+          "offset": 16
         },
         {
           "name": "malloc",
-          "objc_type": "void * _Nullable (* _Nonnull)(size_t)"
+          "objc_type": "void * _Nullable (* _Nonnull)(size_t)",
+          "offset": 24
         },
         {
           "name": "free",
-          "objc_type": "void (* _Nonnull)(void * _Nullable)"
+          "objc_type": "void (* _Nonnull)(void * _Nullable)",
+          "offset": 32
         },
         {
           "name": "reportError",
-          "objc_type": "void (* _Nullable)(const char * _Nonnull)"
+          "objc_type": "void (* _Nullable)(const char * _Nonnull)",
+          "offset": 40
         }
       ],
+      "size": 48,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 1380,
@@ -9525,6 +9693,7 @@
           "objc_type": "void (* _Nullable)(const char * _Nonnull)"
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "vecLib/Sparse/Solve.h",
       "sdk_line": 6014,

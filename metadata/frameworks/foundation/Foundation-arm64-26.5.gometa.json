@@ -102952,17 +102952,21 @@
         },
         {
           "name": "left",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 8
         },
         {
           "name": "bottom",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 16
         },
         {
           "name": "right",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 24
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "Foundation/NSGeometry.h",
       "sdk_line": 93
@@ -103135,6 +103139,7 @@
           "objc_type": "unsigned long long"
         }
       ],
+      "size": 8,
       "availability": {},
       "sdk_file": "Foundation/NSByteOrder.h",
       "sdk_line": 122
@@ -103146,6 +103151,7 @@
           "objc_type": "unsigned int"
         }
       ],
+      "size": 4,
       "availability": {},
       "sdk_file": "Foundation/NSByteOrder.h",
       "sdk_line": 121
@@ -103158,9 +103164,11 @@
         },
         {
           "name": "length",
-          "objc_type": "NSUInteger"
+          "objc_type": "NSUInteger",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "Foundation/NSRange.h",
       "sdk_line": 12

@@ -9,16 +9,16 @@ import (
 )
 
 type Depth struct {
-	Depth    int
-	Nvisuals int
+	Depth    int32
+	Nvisuals int32
 	Visuals  unsafe.Pointer
 }
 
 type ScreenFormat struct {
 	ExtData      unsafe.Pointer
-	Depth        int
-	BitsPerPixel int
-	ScanlinePad  int
+	Depth        int32
+	BitsPerPixel int32
+	ScanlinePad  int32
 }
 
 type TkStubHooks struct {
@@ -29,7 +29,7 @@ type TkStubHooks struct {
 }
 
 type TkStubs struct {
-	Magic                            int
+	Magic                            int32
 	Hooks                            unsafe.Pointer
 	TkMainLoop                       unsafe.Pointer
 	Tk3DBorderColor                  unsafe.Pointer
@@ -338,62 +338,62 @@ type XColor struct {
 type XDisplay struct {
 	ExtData            unsafe.Pointer
 	FreeFuncs          unsafe.Pointer
-	Fd                 int
-	ConnChecker        int
-	ProtoMajorVersion  int
-	ProtoMinorVersion  int
+	Fd                 int32
+	ConnChecker        int32
+	ProtoMajorVersion  int32
+	ProtoMinorVersion  int32
 	Vendor             unsafe.Pointer
-	ResourceBase       int
-	ResourceMask       int
-	ResourceID         int
-	ResourceShift      int
+	ResourceBase       int32
+	ResourceMask       int32
+	ResourceID         int32
+	ResourceShift      int32
 	XID                unsafe.Pointer
-	ByteOrder          int
-	BitmapUnit         int
-	BitmapPad          int
-	BitmapBitOrder     int
-	Nformats           int
+	ByteOrder          int32
+	BitmapUnit         int32
+	BitmapPad          int32
+	BitmapBitOrder     int32
+	Nformats           int32
 	PixmapFormat       unsafe.Pointer
-	Vnumber            int
-	Release            int
+	Vnumber            int32
+	Release            int32
 	Head               unsafe.Pointer
 	Tail               unsafe.Pointer
-	Qlen               int
+	Qlen               int32
 	Request            uint
 	LastReq            unsafe.Pointer
 	Buffer             unsafe.Pointer
 	Bufptr             unsafe.Pointer
 	Bufmax             unsafe.Pointer
-	MaxRequestSize     uint
+	MaxRequestSize     uint32
 	Db                 unsafe.Pointer
 	Synchandler        unsafe.Pointer
 	DisplayName        unsafe.Pointer
-	DefaultScreen      int
-	Nscreens           int
+	DefaultScreen      int32
+	Nscreens           int32
 	Screens            unsafe.Pointer
 	MotionBuffer       uint
 	Flags              uint
-	MinKeycode         int
-	MaxKeycode         int
+	MinKeycode         int32
+	MaxKeycode         int32
 	Keysyms            unsafe.Pointer
 	Modifiermap        unsafe.Pointer
-	KeysymsPerKeycode  int
+	KeysymsPerKeycode  int32
 	Xdefaults          unsafe.Pointer
 	ScratchBuffer      unsafe.Pointer
 	ScratchLength      uint
-	ExtNumber          int
+	ExtNumber          int32
 	ExtProcs           unsafe.Pointer
 	EventVec           unsafe.Pointer
 	WireVec            unsafe.Pointer
-	LockMeaning        int
+	LockMeaning        int32
 	Lock               unsafe.Pointer
 	AsyncHandlers      unsafe.Pointer
 	BigreqSize         uint
 	LockFns            unsafe.Pointer
 	KeyBindings        unsafe.Pointer
-	CursorFont         int
+	CursorFont         int32
 	Atoms              unsafe.Pointer
-	ModeSwitch         uint
+	ModeSwitch         uint32
 	ContextDb          unsafe.Pointer
 	ErrorVec           unsafe.Pointer
 	Cms                unsafe.Pointer
@@ -404,14 +404,14 @@ type XDisplay struct {
 }
 
 type XExtCodes struct {
-	Extension   int
-	MajorOpcode int
-	FirstEvent  int
-	FirstError  int
+	Extension   int32
+	MajorOpcode int32
+	FirstEvent  int32
+	FirstError  int32
 }
 
 type XExtData struct {
-	Number      int
+	Number      int32
 	Next        unsafe.Pointer
 	FreePrivate unsafe.Pointer
 	PrivateData unsafe.Pointer
@@ -425,8 +425,8 @@ type XFontSetExtents struct {
 }
 
 type XHostAddress struct {
-	Family  int
-	Length  int
+	Family  int32
+	Length  int32
 	Address unsafe.Pointer
 }
 
@@ -440,15 +440,15 @@ type XIMCallback struct {
 }
 
 type XIMPreeditCaretCallbackStruct struct {
-	Position  int
+	Position  int32
 	Direction XIMCaretDirection
 	Style     XIMCaretStyle
 }
 
 type XIMPreeditDrawCallbackStruct struct {
-	Caret     int
-	ChgFirst  int
-	ChgLength int
+	Caret     int32
+	ChgFirst  int32
+	ChgLength int32
 	Text      unsafe.Pointer
 }
 
@@ -465,23 +465,23 @@ type XIMStyles struct {
 type XIMText struct {
 	Length          uint16
 	Feedback        unsafe.Pointer
-	EncodingIsWchar int
+	EncodingIsWchar int32
 	String          unsafe.Pointer
 }
 
 type XImage struct {
-	Width          int
-	Height         int
-	Xoffset        int
-	Format         int
+	Width          int32
+	Height         int32
+	Xoffset        int32
+	Format         int32
 	Data           unsafe.Pointer
-	ByteOrder      int
-	BitmapUnit     int
-	BitmapBitOrder int
-	BitmapPad      int
-	Depth          int
-	BytesPerLine   int
-	BitsPerPixel   int
+	ByteOrder      int32
+	BitmapUnit     int32
+	BitmapBitOrder int32
+	BitmapPad      int32
+	Depth          int32
+	BytesPerLine   int32
+	BitsPerPixel   int32
 	RedMask        uint
 	GreenMask      uint
 	BlueMask       uint
@@ -490,30 +490,30 @@ type XImage struct {
 }
 
 type XKeyboardControl struct {
-	KeyClickPercent int
-	BellPercent     int
-	BellPitch       int
-	BellDuration    int
-	Led             int
-	LedMode         int
-	Key             int
-	AutoRepeatMode  int
+	KeyClickPercent int32
+	BellPercent     int32
+	BellPitch       int32
+	BellDuration    int32
+	Led             int32
+	LedMode         int32
+	Key             int32
+	AutoRepeatMode  int32
 }
 
 type XKeyboardState struct {
-	KeyClickPercent  int
-	BellPercent      int
-	BellPitch        uint
-	BellDuration     uint
+	KeyClickPercent  int32
+	BellPercent      int32
+	BellPitch        uint32
+	BellDuration     uint32
 	LedMask          uint
-	GlobalAutoRepeat int
+	GlobalAutoRepeat int32
 	AutoRepeats      [32]int8
 }
 
 type XPixmapFormatValues struct {
-	Depth        int
-	BitsPerPixel int
-	ScanlinePad  int
+	Depth        int32
+	BitsPerPixel int32
+	ScanlinePad  int32
 }
 
 type XPoint struct {
@@ -537,15 +537,15 @@ type XSegment struct {
 
 type XmbTextItem struct {
 	Chars   unsafe.Pointer
-	Nchars  int
-	Delta   int
+	Nchars  int32
+	Delta   int32
 	FontSet unsafe.Pointer
 }
 
 type XwcTextItem struct {
 	Chars   unsafe.Pointer
-	Nchars  int
-	Delta   int
+	Nchars  int32
+	Delta   int32
 	FontSet unsafe.Pointer
 }
 

@@ -158,7 +158,11 @@ type Struct struct {
 	// idiomatic emitter uses it to decide whether a plain Go struct reproduces
 	// the C ABI layout: a packed struct is only safe to surface as a typed Go
 	// value when its natural layout already needs no padding.
-	Packed       bool         `json:"packed,omitempty"`
+	Packed bool `json:"packed,omitempty"`
+	// Size is the total struct size in bytes from clang's authoritative record
+	// layout (0 when unknown). Used with each field's Offset to cross-check that
+	// the emitted Go struct reproduces the C ABI.
+	Size         int          `json:"size,omitempty"`
 	Availability Availability `json:"availability,omitempty"`
 	SDKFile      string       `json:"sdk_file,omitempty"`
 	SDKLine      int          `json:"sdk_line,omitempty"`
@@ -170,6 +174,8 @@ type StructField struct {
 	Name     string `json:"name"`
 	ObjCType string `json:"objc_type"`
 	GoType   string `json:"go_type,omitempty"`
+	// Offset is the field's byte offset from clang's authoritative record layout.
+	Offset int `json:"offset,omitempty"`
 }
 
 // Function is a plain C function declared in the framework headers.

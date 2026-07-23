@@ -2513,17 +2513,21 @@
         },
         {
           "name": "height",
-          "objc_type": "vImagePixelCount"
+          "objc_type": "vImagePixelCount",
+          "offset": 8
         },
         {
           "name": "width",
-          "objc_type": "vImagePixelCount"
+          "objc_type": "vImagePixelCount",
+          "offset": 16
         },
         {
           "name": "rowBytes",
-          "objc_type": "size_t"
+          "objc_type": "size_t",
+          "offset": 24
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "Accelerate.framework/Frameworks/vImage/vImage_Types.h",
       "sdk_line": 155

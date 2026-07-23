@@ -541,7 +541,7 @@ type CssmField struct {
 }
 
 type CssmFieldgroup struct {
-	NumberOfFields int
+	NumberOfFields int32
 	Fields         unsafe.Pointer
 }
 

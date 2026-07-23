@@ -108,9 +108,10 @@ func nodeFileLine(node *ASTNode, fallbackFile string) (string, int) {
 
 // Extract walks the Clang AST root node and produces a FrameworkMeta
 // containing only declarations that originate from the named framework's headers.
-func Extract(root *ASTNode, sdkPath, frameworkName, sdkVersion, arch string) *macosplatformmetadata.FrameworkMeta {
+func Extract(root *ASTNode, sdkPath, frameworkName, sdkVersion, arch string, layouts map[string]RecordLayout) *macosplatformmetadata.FrameworkMeta {
 	filter := newFilter(sdkPath, frameworkName)
 	f := &filter
+	f.layouts = layouts
 
 	// Use the leaf name (strip "Parent/" prefix for sub-frameworks) as the
 	// canonical framework name stored in metadata.
@@ -928,6 +929,16 @@ func scanStruct(node *ASTNode, framework *macosplatformmetadata.FrameworkMeta, f
 	// fields. A complete struct shouldn't be replaced by a fields-less one.
 	if existing, ok := framework.Structs[node.Name]; ok && len(existing.Fields) > 0 && len(s.Fields) == 0 {
 		return
+	}
+	// Stamp clang's authoritative layout when it matches this struct one-to-one:
+	// the field count must agree (a mismatch means anonymous members or bitfields
+	// the FieldDecl scan and the layout dump count differently — leave Size 0 so
+	// the emitter falls back to its computed layout).
+	if layout, ok := f.layouts[node.Name]; ok && len(layout.FieldOffsets) == len(s.Fields) {
+		s.Size = layout.Size
+		for i := range s.Fields {
+			s.Fields[i].Offset = layout.FieldOffsets[i]
+		}
 	}
 	framework.Structs[node.Name] = s
 }

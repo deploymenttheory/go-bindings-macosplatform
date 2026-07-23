@@ -3406,13 +3406,16 @@
         },
         {
           "name": "dataType",
-          "objc_type": "CMTagDataType"
+          "objc_type": "CMTagDataType",
+          "offset": 4
         },
         {
           "name": "value",
-          "objc_type": "CMTagValue"
+          "objc_type": "CMTagValue",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {
         "macos_introduced": "14.0"
       },
@@ -3428,17 +3431,21 @@
         },
         {
           "name": "timescale",
-          "objc_type": "CMTimeScale"
+          "objc_type": "CMTimeScale",
+          "offset": 8
         },
         {
           "name": "flags",
-          "objc_type": "CMTimeFlags"
+          "objc_type": "CMTimeFlags",
+          "offset": 12
         },
         {
           "name": "epoch",
-          "objc_type": "CMTimeEpoch"
+          "objc_type": "CMTimeEpoch",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {},
       "sdk_file": "CoreMedia/CMTime.h",
       "sdk_line": 89,
@@ -3468,9 +3475,11 @@
         },
         {
           "name": "duration",
-          "objc_type": "CMTime"
+          "objc_type": "CMTime",
+          "offset": 24
         }
       ],
+      "size": 48,
       "availability": {},
       "sdk_file": "CoreMedia/CMTimeRange.h",
       "sdk_line": 51,

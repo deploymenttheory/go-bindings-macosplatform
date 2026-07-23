@@ -30322,13 +30322,16 @@
         },
         {
           "name": "y",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 8
         },
         {
           "name": "z",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 16
         }
       ],
+      "size": 24,
       "availability": {
         "macos_introduced": "10.13"
       },
@@ -30343,17 +30346,21 @@
         },
         {
           "name": "y",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 8
         },
         {
           "name": "z",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 16
         },
         {
           "name": "w",
-          "objc_type": "CGFloat"
+          "objc_type": "CGFloat",
+          "offset": 24
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "SceneKit/SceneKitTypes.h",
       "sdk_line": 70

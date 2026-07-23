@@ -327,7 +327,7 @@ type AudioFile_SMPTE_Time struct {
 
 // A structure that specifies an audio format.
 type AudioFormatInfo struct {
-	MASBD            coreaudiotypes.AudioStreamBasicDescription
+	MASBD            unsafe.Pointer
 	MMagicCookie     unsafe.Pointer
 	MMagicCookieSize uint
 }
@@ -744,7 +744,7 @@ type ComponentInstanceRecord struct{}
 
 // A specifier for the kAudioFormatProperty_FormatList property, including the codec to use.
 type ExtendedAudioFormatInfo struct {
-	MASBD             coreaudiotypes.AudioStreamBasicDescription
+	MASBD             unsafe.Pointer
 	MMagicCookie      unsafe.Pointer
 	MMagicCookieSize  uint
 	MClassDescription coreaudiotypes.AudioClassDescription

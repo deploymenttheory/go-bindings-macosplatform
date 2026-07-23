@@ -603,9 +603,11 @@
         },
         {
           "name": "klass",
-          "objc_type": "const VALUE"
+          "objc_type": "const VALUE",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "Ruby/ruby/ruby.h",
       "sdk_line": 884
@@ -766,21 +768,26 @@
         },
         {
           "name": "function",
-          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Ruby.framework/Headers/ruby/ruby.h:1138:5)"
+          "objc_type": "struct (unnamed struct at /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Ruby.framework/Headers/ruby/ruby.h:1138:5)",
+          "offset": 8
         },
         {
           "name": "parent",
-          "objc_type": "const struct rb_data_type_struct *"
+          "objc_type": "const struct rb_data_type_struct *",
+          "offset": 48
         },
         {
           "name": "data",
-          "objc_type": "void *"
+          "objc_type": "void *",
+          "offset": 56
         },
         {
           "name": "flags",
-          "objc_type": "VALUE"
+          "objc_type": "VALUE",
+          "offset": 64
         }
       ],
+      "size": 72,
       "availability": {},
       "sdk_file": "Ruby/ruby/ruby.h",
       "sdk_line": 1136

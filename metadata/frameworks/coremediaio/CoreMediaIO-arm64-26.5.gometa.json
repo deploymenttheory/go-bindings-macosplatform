@@ -6093,13 +6093,16 @@
         },
         {
           "name": "mScope",
-          "objc_type": "CMIOObjectPropertyScope"
+          "objc_type": "CMIOObjectPropertyScope",
+          "offset": 4
         },
         {
           "name": "mElement",
-          "objc_type": "CMIOObjectPropertyElement"
+          "objc_type": "CMIOObjectPropertyElement",
+          "offset": 8
         }
       ],
+      "size": 12,
       "availability": {
         "macos_introduced": "10.7"
       },

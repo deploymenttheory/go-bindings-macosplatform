@@ -2754,13 +2754,16 @@
         },
         {
           "name": "elementSize",
-          "objc_type": "SInt32"
+          "objc_type": "SInt32",
+          "offset": 4
         },
         {
           "name": "elementData",
-          "objc_type": "unsigned char[1]"
+          "objc_type": "unsigned char[1]",
+          "offset": 8
         }
       ],
+      "size": 10,
       "availability": {},
       "sdk_file": "CoreServices.framework/Frameworks/OSServices/IconStorage.h",
       "sdk_line": 110

@@ -610,61 +610,61 @@ type DSPSplitComplex struct {
 
 // Contains a dense `rowCount` x `columnCount` matrix of complex double values stored in column-major order. - term `rowCount`:     Number of rows in the matrix. - term `columnCount`:  Number of columns in the matrix. - term `columnStride`: The column stride of the matrix. - term `attributes`:   The attributes of the matrix, for example whether the matrix is symmetrical (Hermitian) or triangular. - term `data`: The array of float values in column-major order.
 type DenseMatrix_Complex_Double struct {
-	RowCount     int
-	ColumnCount  int
-	ColumnStride int
+	RowCount     int32
+	ColumnCount  int32
+	ColumnStride int32
 	Attributes   SparseAttributesComplex_t
 	Data         unsafe.Pointer
 }
 
 // Contains a dense `rowCount` x `columnCount` matrix of complex float values stored in column-major order. - term `rowCount`:     Number of rows in the matrix. - term `columnCount`:  Number of columns in the matrix. - term `columnStride`:  The column stride of the matrix. - term `attributes`: The attributes of the matrix, for example whether the  matrix is symmetrical (Hermitian) or triangular. - term `data`: The array of float values in column-major order.
 type DenseMatrix_Complex_Float struct {
-	RowCount     int
-	ColumnCount  int
-	ColumnStride int
+	RowCount     int32
+	ColumnCount  int32
+	ColumnStride int32
 	Attributes   SparseAttributesComplex_t
 	Data         unsafe.Pointer
 }
 
 // Contains a dense `rowCount` x `columnCount` matrix of double values stored in column-major order. - term `rowCount`:   Number of rows in the matrix. - term `columnCount`:  Number of columns in the matrix. - term `columnStride`: The column stride of the matrix. - term `attributes`:  The attributes of the matrix, for example whether the matrix is symmetrical (Hermitian) or triangular. - term `data` :        The array of double values in column-major order.
 type DenseMatrix_Double struct {
-	RowCount     int
-	ColumnCount  int
-	ColumnStride int
+	RowCount     int32
+	ColumnCount  int32
+	ColumnStride int32
 	Attributes   SparseAttributes_t
 	Data         unsafe.Pointer
 }
 
 // Contains a dense `rowCount` x `columnCount` matrix of float values stored in column-major order. - term `rowCount`:   Number of rows in the matrix. - term `columnCount`:  Number of columns in the matrix. - term `columnStride`:  The column stride of the matrix. - term `attributes`:   The attributes of the matrix, for example whether the matrix is symmetrical (Hermitian) or triangular. - term `data`: The array of float values in column-major order.
 type DenseMatrix_Float struct {
-	RowCount     int
-	ColumnCount  int
-	ColumnStride int
+	RowCount     int32
+	ColumnCount  int32
+	ColumnStride int32
 	Attributes   SparseAttributes_t
 	Data         unsafe.Pointer
 }
 
 // Contains a dense vector of double complex values. - term `count`  :  Number of entries in the vector. - term  `data`  : The array of complex double values.
 type DenseVector_Complex_Double struct {
-	Count int
+	Count int32
 	Data  unsafe.Pointer
 }
 
 // Contains a dense vector of float complex values. - term `count`  :  Number of entries in the vector. - term  `data`  : The array of complex float values.
 type DenseVector_Complex_Float struct {
-	Count int
+	Count int32
 	Data  unsafe.Pointer
 }
 
 // Contains a dense vector of double values. - term `count`  :  Number of entries in the vector. - term  `data`  : The array of double values.
 type DenseVector_Double struct {
-	Count int
+	Count int32
 	Data  unsafe.Pointer
 }
 
 // Contains a dense vector of float values. - term `count`  :  Number of entries in the vector. - term  `data`  : The array of float values.
 type DenseVector_Float struct {
-	Count int
+	Count int32
 	Data  unsafe.Pointer
 }
 
@@ -705,7 +705,7 @@ type SparseAttributes_t struct {
 // Conjugate Gradient Options. Use CG to solve Ax=b when A is symmetric (Hermitian) positive-definite (the method may break down or fail to converge if A is not positive-definite). For square, full rank unsymmetric or indefinite equations, use GMRES instead. For rectangular or singular systems, use LSMR instead. - term `reportError`  : Function to use to report parameter errors. If `NULL`, errors are logged via `<os/log.h>` and execution is halted via `__builtin_trap()`.  If non-`NULL`, the provided function is called with a human-readable string describing the error condition. If the callback returns, control will be returned to the caller with any outputs in a safe but undefined state (i.e. they may hold partial results or garbage, but all sizes and pointers are valid). - term `maxIterations` : Maximum number of iterations to perform. If 0, the default value of 100 is used. - term `atol` : Absolute convergence tolerance. Iterate is considered to have converged if ``` || b-Ax ||_2 < rtol * || b-Ax_0 ||_2 + atol ``` - term `rtol` : Relative convergence tolerance. Iterate is considered to have converged if ``` || b-Ax ||_2 < rtol * || b-Ax_0 ||_2 + atol ``` If `rtol = 0.0`, default value of `sqrt(epsilon)` is used. If negative, `rtol` is treated as `0.0` (default is not used). - term  `reportStatus` : Function to use to report status (iteration count and residual of first right-hand side) every few iterations. If `NULL`, status is not reported.
 type SparseCGOptions struct {
 	ReportError   unsafe.Pointer
-	MaxIterations int
+	MaxIterations int32
 	Atol          float64
 	Rtol          float64
 	ReportStatus  unsafe.Pointer
@@ -715,8 +715,8 @@ type SparseCGOptions struct {
 type SparseGMRESOptions struct {
 	ReportError   unsafe.Pointer
 	Variant       unsafe.Pointer
-	Nvec          int
-	MaxIterations int
+	Nvec          int32
+	MaxIterations int32
 	Atol          float64
 	Rtol          float64
 	ReportStatus  unsafe.Pointer
@@ -724,7 +724,7 @@ type SparseGMRESOptions struct {
 
 // General description object for all iterative methods. This object is intended to be constructed through a call to an iterative method factory function, such as `SparseConjugateGradient()` or `SparseLSMR()`. - term `method` : The type of method the object represents. - term `options` : The options to be used for the method.
 type SparseIterativeMethod struct {
-	Method  int
+	Method  int32
 	Options unsafe.Pointer
 }
 
@@ -736,13 +736,13 @@ type SparseIterativeMethodBaseOptions struct {
 type SparseLSMROptions struct {
 	ReportError     unsafe.Pointer
 	Lambda          float64
-	Nvec            int
+	Nvec            int32
 	ConvergenceTest unsafe.Pointer
 	Atol            float64
 	Rtol            float64
 	Btol            float64
 	ConditionLimit  float64
-	MaxIterations   int
+	MaxIterations   int32
 	ReportStatus    unsafe.Pointer
 }
 
@@ -758,8 +758,8 @@ type SparseMFloatComplex struct{}
 
 // A type representing the sparsity structure of a sparse matrix. The sparsity structure is represented in *block compressed sparse column* (block CSC) format. The matrix is divided into a regular grid of `rowCount x columnCount` blocks each of size `blockSize x blockSize`, and only blocks containing a non-zero entry are stored. CSC format is used to store the locations of these blocks. For each block column, a list of block row indices for non-zero blocks are stored, and the lists for each column are stored contiguously one after the other. Hence the row indices for column j are given by rowIndices`[columnStarts[j]:columnStarts[j+1]]`, where `columnStarts[]` is storing the location of the first index in each column. If the blockSize is `1`, then this format is exactly equivalent to standard CSC format. CSR format data can be simulated by using a blockSize of `1` and setting the transpose attribute (strictly this is still a transposed CSC matrix, so `rowCount` and `columnCount` will be transposed compared to true CSR). - term `rowCount` : Number of (block) rows in matrix. - term `columnCount` : Number of (block) columns in matrix. - term `columnStarts` : Specifies where each (block) column starts in rowIndices array. - term `rowIndices` : Specifies the (block) row indices of the matrix. - term `attributes` : The attribute meta-data for the matrix, for example whether the matrix is symmetric (Hermitian) and only half the entries are stored. - term `blockSize` :  The block size of the matrix.
 type SparseMatrixStructure struct {
-	RowCount     int
-	ColumnCount  int
+	RowCount     int32
+	ColumnCount  int32
 	ColumnStarts unsafe.Pointer
 	RowIndices   unsafe.Pointer
 	Attributes   SparseAttributes_t
@@ -768,8 +768,8 @@ type SparseMatrixStructure struct {
 
 // A type representing the sparsity structure of a sparse complex matrix. The sparsity structure is represented in *block compressed sparse column* (block CSC) format. The matrix is divided into a regular grid of `rowCount x columnCount` blocks each of size `blockSize x blockSize`, and only blocks containing a non-zero entry are stored. CSC format is used to store the locations of these blocks. For each block column, a list of block row indices for non-zero blocks are stored, and the lists for each column are stored contiguously one after the other. Hence the row indices for column j are given by rowIndices`[columnStarts[j]:columnStarts[j+1]]`, where `columnStarts[]` is storing the location of the first index in each column. If the blockSize is `1`, then this format is exactly equivalent to standard CSC format. CSR format data can be simulated by using a blockSize of `1` and setting the transpose attribute (strictly this is still a transposed CSC matrix, so `rowCount` and `columnCount` will be transposed compared to true CSR). - term `rowCount` : Number of (block) rows in matrix. - term `columnCount` : Number of (block) columns in matrix. - term `columnStarts` : Specifies where each (block) column starts in rowIndices array. - term `rowIndices` : Specifies the (block) row indices of the matrix. - term `attributes` : The attribute meta-data for the matrix, for example whether the matrix is symmetric (Hermitian) and only half the entries are stored. - term `blockSize` :  The block size of the matrix.
 type SparseMatrixStructureComplex struct {
-	RowCount     int
-	ColumnCount  int
+	RowCount     int32
+	ColumnCount  int32
 	ColumnStarts unsafe.Pointer
 	RowIndices   unsafe.Pointer
 	Attributes   SparseAttributesComplex_t
@@ -920,8 +920,8 @@ type SparseOpaqueSubfactor_Float struct {
 // A semi-opaque type representing symbolic matrix factorization. Represents a symbolic matrix factorization (i.e. the pattern of the factors without the values). A single symbolic factorization may be the basis for multiple numerical factorizations of matrices with the same pattern but different values non-zero values. Use the `SparseCleanup` function to free resources held by these objects. The internal factorization pointer is refence counted, so it is safe to destroy this object even if numeric factorizations exist that still depend on it. - term `status` : Indicates status of factorization object. - term `type` : Type fo factorization this represents. - term `rowCount` : Copy of field from `SparseMatrixStructure` passed to `SparseFactor` call used to construct this symbolic factorization. - term `columnCount` : Copy of field from `SparseMatrixStructure` passed to `SparseFactor` call used to construct this symbolic factorization. - term `attributes` : Copy of field from `SparseMatrixStructure` passed to `SparseFactor` call used to construct this symbolic factorization. - term `blockSize` : Copy of field from `SparseMatrixStructure` passed to `SparseFactor` call used to construct this symbolic factorization. - term `factorization` : Pointer to private internal representation of symbolic factor. - term `workspaceSize_Float` : Size, in bytes, of workspace required to perform numerical factorization in float. Double the size when used in complex float. - term `workspaceSize_Double` : Size, in bytes, of workspace required to perform numerical factorization in double. Double the size when used in complex double. - term `factorSize_Float` : Minimum size, in bytes, required to store numerical factors in float. If numerical pivoting requires a pivot to be delayed, the actual size required may be larger. Double the size when used in complex float. - term `factorSize_Double` : Minimum size, in bytes, required to store numerical factors in double. If numerical pivoting requires a pivot to be delayed, the actual size required may be larger. Double the size when used in complex double.
 type SparseOpaqueSymbolicFactorization struct {
 	Status              unsafe.Pointer
-	RowCount            int
-	ColumnCount         int
+	RowCount            int32
+	ColumnCount         int32
 	Attributes          SparseAttributes_t
 	BlockSize           uint8
 	Type                unsafe.Pointer

@@ -4303,13 +4303,16 @@
         },
         {
           "name": "target",
-          "objc_type": "es_file_t * _Nonnull"
+          "objc_type": "es_file_t * _Nonnull",
+          "offset": 8
         },
         {
           "name": "reserved",
-          "objc_type": "uint8_t[64]"
+          "objc_type": "uint8_t[64]",
+          "offset": 16
         }
       ],
+      "size": 80,
       "availability": {},
       "sdk_file": "ESMessage.h",
       "sdk_line": 1015,
@@ -5062,6 +5065,7 @@
           "objc_type": "uint8_t[32]"
         }
       ],
+      "size": 32,
       "availability": {},
       "sdk_file": "ESTypes.h",
       "sdk_line": 11
@@ -7265,9 +7269,11 @@
         },
         {
           "name": "data",
-          "objc_type": "const char *"
+          "objc_type": "const char *",
+          "offset": 8
         }
       ],
+      "size": 16,
       "availability": {},
       "sdk_file": "ESTypes.h",
       "sdk_line": 404,

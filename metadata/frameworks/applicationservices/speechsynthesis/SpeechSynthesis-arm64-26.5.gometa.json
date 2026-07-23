@@ -1643,21 +1643,26 @@
         },
         {
           "name": "phStr",
-          "objc_type": "Str15"
+          "objc_type": "Str15",
+          "offset": 2
         },
         {
           "name": "exampleStr",
-          "objc_type": "Str31"
+          "objc_type": "Str31",
+          "offset": 18
         },
         {
           "name": "hiliteStart",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 50
         },
         {
           "name": "hiliteEnd",
-          "objc_type": "SInt16"
+          "objc_type": "SInt16",
+          "offset": 52
         }
       ],
+      "size": 54,
       "availability": {},
       "sdk_file": "ApplicationServices.framework/Frameworks/SpeechSynthesis/SpeechSynthesis.h",
       "sdk_line": 207
