@@ -6,5 +6,5 @@ package oslog
 
 // [log.h:42]
 // Introduced: macOS 10.13
-type Os_log_s struct {
+type OsLogS struct {
 }

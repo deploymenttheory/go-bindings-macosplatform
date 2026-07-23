@@ -2058,6 +2058,14 @@ func primaryReturnType(
 // registry stores ObjC names as-is while qualifiedStructType capitalises the first
 // letter via naming.GoTypeName.
 func isKnownStruct(bare string, m *typemap.Mapper) bool {
+	// Preferred: forward-mapped exported Go names (bare is the resolved Go type
+	// name, which uses the non-invertible ExportedTypeName mapping).
+	if m.IsStructGoName(bare) {
+		return true
+	}
+	// Fallback for single-word names (where ExportedTypeName == the capitalised C
+	// name) and callers that did not build the Go-name index: the StructIndex is
+	// keyed by the ObjC/C name, so also try the lowercase-first form.
 	if m.StructIndex[bare] != "" {
 		return true
 	}

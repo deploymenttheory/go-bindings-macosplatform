@@ -507,7 +507,7 @@ func Xpc_session_copy_description(session unsafe.Pointer) string {
 // Introduced: macOS 13.0
 // Return value must not be discarded.
 // ID: objc-sym xpc.xpc_session_create_xpc_service
-func Xpc_session_create_xpc_service(name string, target_queue unsafe.Pointer, flags oslog.Xpc_session_create_flags_t, error_out unsafe.Pointer) unsafe.Pointer {
+func Xpc_session_create_xpc_service(name string, target_queue unsafe.Pointer, flags oslog.XpcSessionCreateFlagsT, error_out unsafe.Pointer) unsafe.Pointer {
 	_cstr_name := C.CString(name)
 	defer C.free(unsafe.Pointer(_cstr_name))
 	var _exc unsafe.Pointer
@@ -520,7 +520,7 @@ func Xpc_session_create_xpc_service(name string, target_queue unsafe.Pointer, fl
 // Introduced: macOS 13.0
 // Return value must not be discarded.
 // ID: objc-sym xpc.xpc_session_create_mach_service
-func Xpc_session_create_mach_service(mach_service string, target_queue unsafe.Pointer, flags oslog.Xpc_session_create_flags_t, error_out unsafe.Pointer) unsafe.Pointer {
+func Xpc_session_create_mach_service(mach_service string, target_queue unsafe.Pointer, flags oslog.XpcSessionCreateFlagsT, error_out unsafe.Pointer) unsafe.Pointer {
 	_cstr_mach_service := C.CString(mach_service)
 	defer C.free(unsafe.Pointer(_cstr_mach_service))
 	var _exc unsafe.Pointer
@@ -649,7 +649,7 @@ func Xpc_listener_copy_description(listener unsafe.Pointer) string {
 // Introduced: macOS 14.0
 // Return value must not be discarded.
 // ID: objc-sym xpc.xpc_listener_create
-func Xpc_listener_create(service string, target_queue unsafe.Pointer, flags oslog.Xpc_listener_create_flags_t, incoming_session_handler func(unsafe.Pointer), error_out unsafe.Pointer) unsafe.Pointer {
+func Xpc_listener_create(service string, target_queue unsafe.Pointer, flags oslog.XpcListenerCreateFlagsT, incoming_session_handler func(unsafe.Pointer), error_out unsafe.Pointer) unsafe.Pointer {
 	_cstr_service := C.CString(service)
 	defer C.free(unsafe.Pointer(_cstr_service))
 	_blk_incoming_session_handler := blocks.MakeBlock_void_ptr(incoming_session_handler)
@@ -732,16 +732,16 @@ func Xpc_release(object unsafe.Pointer) {
 // [xpc.h:429]
 // Return value must not be discarded.
 // ID: objc-sym xpc.xpc_get_type
-func Xpc_get_type(object unsafe.Pointer) *Xpc_type_t {
+func Xpc_get_type(object unsafe.Pointer) *XpcTypeT {
 	var _exc unsafe.Pointer
 	_ptr := unsafe.Pointer(C.xpc_fn_xpc_get_type(object, &_exc))
 	cgo.RaiseIfException(_exc)
-	return NewXpc_type_t(_ptr)
+	return NewXpcTypeT(_ptr)
 }
 
 // [xpc.h:447]
 // ID: objc-sym xpc.xpc_type_get_name
-func Xpc_type_get_name(type_ *Xpc_type_t) string {
+func Xpc_type_get_name(type_ *XpcTypeT) string {
 	defer cgo.KeepAlive(type_)
 	var _objcPtr_type_ unsafe.Pointer
 	if type_ != nil {

@@ -10,7 +10,7 @@ import (
 )
 
 // [xar.h:59]
-type Xar_header struct {
+type XarHeader struct {
 	Magic                   uint32
 	Size                    uint16
 	Version                 uint16
@@ -20,7 +20,7 @@ type Xar_header struct {
 }
 
 // [xar.h:88]
-type Xar_stream struct {
+type XarStream struct {
 	Next_out  string
 	Avail_out uint32
 	Total_in  uint64
@@ -28,105 +28,105 @@ type Xar_stream struct {
 	State     unsafe.Pointer
 }
 
-type Xar_file_t struct {
+type XarFileT struct {
 	ptr unsafe.Pointer
 }
 
-func (c *Xar_file_t) Ptr() unsafe.Pointer {
+func (c *XarFileT) Ptr() unsafe.Pointer {
 	if c == nil {
 		return nil
 	}
 	return c.ptr
 }
 
-func NewXar_file_t(ptr unsafe.Pointer) *Xar_file_t {
+func NewXarFileT(ptr unsafe.Pointer) *XarFileT {
 	if ptr == nil {
 		return nil
 	}
-	o := &Xar_file_t{ptr: ptr}
+	o := &XarFileT{ptr: ptr}
 	cgo.Track(o, o.Ptr)
 	return o
 }
 
-type Xar_iter_t struct {
+type XarIterT struct {
 	ptr unsafe.Pointer
 }
 
-func (c *Xar_iter_t) Ptr() unsafe.Pointer {
+func (c *XarIterT) Ptr() unsafe.Pointer {
 	if c == nil {
 		return nil
 	}
 	return c.ptr
 }
 
-func NewXar_iter_t(ptr unsafe.Pointer) *Xar_iter_t {
+func NewXarIterT(ptr unsafe.Pointer) *XarIterT {
 	if ptr == nil {
 		return nil
 	}
-	o := &Xar_iter_t{ptr: ptr}
+	o := &XarIterT{ptr: ptr}
 	cgo.Track(o, o.Ptr)
 	return o
 }
 
-type Xar_signature_t struct {
+type XarSignatureT struct {
 	ptr unsafe.Pointer
 }
 
-func (c *Xar_signature_t) Ptr() unsafe.Pointer {
+func (c *XarSignatureT) Ptr() unsafe.Pointer {
 	if c == nil {
 		return nil
 	}
 	return c.ptr
 }
 
-func NewXar_signature_t(ptr unsafe.Pointer) *Xar_signature_t {
+func NewXarSignatureT(ptr unsafe.Pointer) *XarSignatureT {
 	if ptr == nil {
 		return nil
 	}
-	o := &Xar_signature_t{ptr: ptr}
+	o := &XarSignatureT{ptr: ptr}
 	cgo.Track(o, o.Ptr)
 	return o
 }
 
-type Xar_subdoc_t struct {
+type XarSubdocT struct {
 	ptr unsafe.Pointer
 }
 
-func (c *Xar_subdoc_t) Ptr() unsafe.Pointer {
+func (c *XarSubdocT) Ptr() unsafe.Pointer {
 	if c == nil {
 		return nil
 	}
 	return c.ptr
 }
 
-func NewXar_subdoc_t(ptr unsafe.Pointer) *Xar_subdoc_t {
+func NewXarSubdocT(ptr unsafe.Pointer) *XarSubdocT {
 	if ptr == nil {
 		return nil
 	}
-	o := &Xar_subdoc_t{ptr: ptr}
+	o := &XarSubdocT{ptr: ptr}
 	cgo.Track(o, o.Ptr)
 	return o
 }
 
-type Xar_t struct {
+type XarT struct {
 	ptr unsafe.Pointer
 }
 
-func (c *Xar_t) Ptr() unsafe.Pointer {
+func (c *XarT) Ptr() unsafe.Pointer {
 	if c == nil {
 		return nil
 	}
 	return c.ptr
 }
 
-func NewXar_t(ptr unsafe.Pointer) *Xar_t {
+func NewXarT(ptr unsafe.Pointer) *XarT {
 	if ptr == nil {
 		return nil
 	}
-	o := &Xar_t{ptr: ptr}
+	o := &XarT{ptr: ptr}
 	cgo.Track(o, o.Ptr)
 	return o
 }
 
-// Xar_header_t is a typedef alias for Xar_header.
-type Xar_header_t = Xar_header
+// XarHeaderT is a typedef alias for XarHeader.
+type XarHeaderT = XarHeader

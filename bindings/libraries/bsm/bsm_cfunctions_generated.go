@@ -305,11 +305,11 @@ func Setauid(arg *uint32) int32 {
 	return raw.Setauid(arg)
 }
 
-func GetauditAddr(arg *raw.Auditinfo_addr, arg2 int32) int32 {
+func GetauditAddr(arg *raw.AuditinfoAddr, arg2 int32) int32 {
 	return raw.Getaudit_addr(arg, arg2)
 }
 
-func SetauditAddr(arg *raw.Auditinfo_addr, arg2 int32) int32 {
+func SetauditAddr(arg *raw.AuditinfoAddr, arg2 int32) int32 {
 	return raw.Setaudit_addr(arg, arg2)
 }
 
@@ -649,7 +649,7 @@ func Getauevent() unsafe.Pointer {
 	return raw.Getauevent()
 }
 
-func GetaueventR(e *raw.Au_event_ent) unsafe.Pointer {
+func GetaueventR(e *raw.AuEventEnt) unsafe.Pointer {
 	return raw.Getauevent_r(e)
 }
 
@@ -657,7 +657,7 @@ func Getauevnam(name string) unsafe.Pointer {
 	return raw.Getauevnam(name)
 }
 
-func GetauevnamR(e *raw.Au_event_ent, name string) unsafe.Pointer {
+func GetauevnamR(e *raw.AuEventEnt, name string) unsafe.Pointer {
 	return raw.Getauevnam_r(e, name)
 }
 
@@ -665,7 +665,7 @@ func Getauevnum(event_number uint16) unsafe.Pointer {
 	return raw.Getauevnum(event_number)
 }
 
-func GetauevnumR(e *raw.Au_event_ent, event_number uint16) unsafe.Pointer {
+func GetauevnumR(e *raw.AuEventEnt, event_number uint16) unsafe.Pointer {
 	return raw.Getauevnum_r(e, event_number)
 }
 
@@ -689,7 +689,7 @@ func Getauuserent() unsafe.Pointer {
 	return raw.Getauuserent()
 }
 
-func GetauuserentR(u *raw.Au_user_ent) unsafe.Pointer {
+func GetauuserentR(u *raw.AuUserEnt) unsafe.Pointer {
 	return raw.Getauuserent_r(u)
 }
 
@@ -697,7 +697,7 @@ func Getauusernam(name string) unsafe.Pointer {
 	return raw.Getauusernam(name)
 }
 
-func GetauusernamR(u *raw.Au_user_ent, name string) unsafe.Pointer {
+func GetauusernamR(u *raw.AuUserEnt, name string) unsafe.Pointer {
 	return raw.Getauusernam_r(u, name)
 }
 

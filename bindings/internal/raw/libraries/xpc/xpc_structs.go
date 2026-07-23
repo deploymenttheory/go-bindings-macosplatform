@@ -10,29 +10,29 @@ import (
 )
 
 // [xpc.h:172]
-type _xpc_bool_s struct {
+type XpcBoolS struct {
 }
 
 // [connection.h:38]
-type _xpc_dictionary_s struct {
+type XpcDictionaryS struct {
 }
 
-type Xpc_type_t struct {
+type XpcTypeT struct {
 	ptr unsafe.Pointer
 }
 
-func (c *Xpc_type_t) Ptr() unsafe.Pointer {
+func (c *XpcTypeT) Ptr() unsafe.Pointer {
 	if c == nil {
 		return nil
 	}
 	return c.ptr
 }
 
-func NewXpc_type_t(ptr unsafe.Pointer) *Xpc_type_t {
+func NewXpcTypeT(ptr unsafe.Pointer) *XpcTypeT {
 	if ptr == nil {
 		return nil
 	}
-	o := &Xpc_type_t{ptr: ptr}
+	o := &XpcTypeT{ptr: ptr}
 	cgo.Track(o, o.Ptr)
 	return o
 }

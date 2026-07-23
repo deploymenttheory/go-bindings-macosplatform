@@ -123,7 +123,7 @@ func Dispatch_resume(object unsafe.Pointer) {
 // [object.h:497]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_set_qos_class_floor
-func Dispatch_set_qos_class_floor(object unsafe.Pointer, qos_class Qos_class_t, relative_priority int32) {
+func Dispatch_set_qos_class_floor(object unsafe.Pointer, qos_class QosClassT, relative_priority int32) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_set_qos_class_floor(object, C.uint32_t(qos_class), C.int32_t(relative_priority), &_exc)
 	cgo.RaiseIfException(_exc)
@@ -257,7 +257,7 @@ func Dispatch_queue_attr_make_initially_inactive(attr unsafe.Pointer) unsafe.Poi
 // Introduced: macOS 10.12
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_attr_make_with_autorelease_frequency
-func Dispatch_queue_attr_make_with_autorelease_frequency(attr unsafe.Pointer, frequency Dispatch_autorelease_frequency_t) unsafe.Pointer {
+func Dispatch_queue_attr_make_with_autorelease_frequency(attr unsafe.Pointer, frequency DispatchAutoreleaseFrequencyT) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_attr_make_with_autorelease_frequency(attr, C.uint64_t(frequency), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -268,7 +268,7 @@ func Dispatch_queue_attr_make_with_autorelease_frequency(attr unsafe.Pointer, fr
 // Introduced: macOS 10.10
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_attr_make_with_qos_class
-func Dispatch_queue_attr_make_with_qos_class(attr unsafe.Pointer, qos_class Qos_class_t, relative_priority int32) unsafe.Pointer {
+func Dispatch_queue_attr_make_with_qos_class(attr unsafe.Pointer, qos_class QosClassT, relative_priority int32) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.dispatch_fn_dispatch_queue_attr_make_with_qos_class(attr, C.uint32_t(qos_class), C.int32_t(relative_priority), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -316,9 +316,9 @@ func Dispatch_queue_get_label(queue unsafe.Pointer) string {
 // Introduced: macOS 10.10
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_queue_get_qos_class
-func Dispatch_queue_get_qos_class(queue unsafe.Pointer, relative_priority_ptr *int32) Qos_class_t {
+func Dispatch_queue_get_qos_class(queue unsafe.Pointer, relative_priority_ptr *int32) QosClassT {
 	var _exc unsafe.Pointer
-	_result := Qos_class_t(C.dispatch_fn_dispatch_queue_get_qos_class(queue, unsafe.Pointer(relative_priority_ptr), &_exc))
+	_result := QosClassT(C.dispatch_fn_dispatch_queue_get_qos_class(queue, unsafe.Pointer(relative_priority_ptr), &_exc))
 	cgo.RaiseIfException(_exc)
 	return _result
 }
@@ -493,7 +493,7 @@ func Dispatch_allow_send_signals(preserve_signum int32) int32 {
 // Introduced: macOS 10.10
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_block_create
-func Dispatch_block_create(flags Dispatch_block_flags_t, block func()) unsafe.Pointer {
+func Dispatch_block_create(flags DispatchBlockFlagsT, block func()) unsafe.Pointer {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
@@ -506,7 +506,7 @@ func Dispatch_block_create(flags Dispatch_block_flags_t, block func()) unsafe.Po
 // Introduced: macOS 10.10
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_block_create_with_qos_class
-func Dispatch_block_create_with_qos_class(flags Dispatch_block_flags_t, qos_class Qos_class_t, relative_priority int32, block func()) unsafe.Pointer {
+func Dispatch_block_create_with_qos_class(flags DispatchBlockFlagsT, qos_class QosClassT, relative_priority int32, block func()) unsafe.Pointer {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
@@ -518,7 +518,7 @@ func Dispatch_block_create_with_qos_class(flags Dispatch_block_flags_t, qos_clas
 // [block.h:287]
 // Introduced: macOS 10.10
 // ID: objc-sym dispatch.dispatch_block_perform
-func Dispatch_block_perform(flags Dispatch_block_flags_t, block func()) {
+func Dispatch_block_perform(flags DispatchBlockFlagsT, block func()) {
 	_blk_block := blocks.MakeBlock_void(block)
 	defer blocks.FreeBlock(_blk_block)
 	var _exc unsafe.Pointer
@@ -579,7 +579,7 @@ func Dispatch_block_testcancel(block func()) int64 {
 // Introduced: macOS 10.6
 // Return value must not be discarded.
 // ID: objc-sym dispatch.dispatch_source_create
-func Dispatch_source_create(type_ *Dispatch_source_type_t, handle uint64, mask uint64, queue unsafe.Pointer) unsafe.Pointer {
+func Dispatch_source_create(type_ *DispatchSourceTypeT, handle uint64, mask uint64, queue unsafe.Pointer) unsafe.Pointer {
 	defer cgo.KeepAlive(type_)
 	var _objcPtr_type_ unsafe.Pointer
 	if type_ != nil {
@@ -1121,7 +1121,7 @@ func Dispatch_workloop_create_inactive(label string) unsafe.Pointer {
 // [workloop.h:136]
 // Introduced: macOS 10.14
 // ID: objc-sym dispatch.dispatch_workloop_set_autorelease_frequency
-func Dispatch_workloop_set_autorelease_frequency(workloop unsafe.Pointer, frequency Dispatch_autorelease_frequency_t) {
+func Dispatch_workloop_set_autorelease_frequency(workloop unsafe.Pointer, frequency DispatchAutoreleaseFrequencyT) {
 	var _exc unsafe.Pointer
 	C.dispatch_fn_dispatch_workloop_set_autorelease_frequency(workloop, C.uint64_t(frequency), &_exc)
 	cgo.RaiseIfException(_exc)

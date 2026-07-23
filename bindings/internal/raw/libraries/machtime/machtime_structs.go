@@ -5,10 +5,10 @@
 package machtime
 
 // [mach_time.h:36]
-type Mach_timebase_info struct {
+type MachTimebaseInfo struct {
 	Numer uint32
 	Denom uint32
 }
 
-// Mach_timebase_info_data_t is a typedef alias for Mach_timebase_info.
-type Mach_timebase_info_data_t = Mach_timebase_info
+// MachTimebaseInfoDataT is a typedef alias for MachTimebaseInfo.
+type MachTimebaseInfoDataT = MachTimebaseInfo

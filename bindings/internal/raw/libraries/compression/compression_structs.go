@@ -8,7 +8,7 @@ import "unsafe"
 
 // A structure representing a compression stream.
 // [compression.h:310]
-type Compression_stream struct {
+type CompressionStream struct {
 	Dst_ptr  *uint8
 	Dst_size uint64
 	Src_ptr  *uint8

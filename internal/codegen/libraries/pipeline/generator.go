@@ -79,6 +79,10 @@ func buildMapper(reg *Registry, nsStringOverloads bool) *typemap.Mapper {
 	m.ModulePrefix = reg.ModulePrefix
 	m.BlockedImports = resolveBlockedImports(reg)
 	m.IsNSStringOverloads = nsStringOverloads
+	// Build the Go-name-keyed lookup sets from the C-name-keyed indices just
+	// assigned, so emitters can classify a resolved Go type name (which uses the
+	// non-invertible ExportedTypeName mapping) as a struct/enum.
+	m.RebuildGoNameIndices()
 	return m
 }
 

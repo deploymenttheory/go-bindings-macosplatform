@@ -10,10 +10,10 @@ import raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/inter
 // types and values so callers name them through this package.
 
 type (
-	Clockid_t           = raw.Clockid_t
-	Cryptex_auth_type_t = raw.Cryptex_auth_type_t
-	Graftdmg_type_t     = raw.Graftdmg_type_t
-	Mpo_flags_t         = raw.Mpo_flags_t
+	ClockidT         = raw.ClockidT
+	CryptexAuthTypeT = raw.CryptexAuthTypeT
+	GraftdmgTypeT    = raw.GraftdmgTypeT
+	MpoFlagsT        = raw.MpoFlagsT
 )
 
 const (

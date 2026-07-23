@@ -7,7 +7,7 @@ package bsm
 import "unsafe"
 
 // [libbsm.h:213]
-type Au_arb_t struct {
+type AuArbT struct {
 	Howtopr uint8
 	Bu      uint8
 	Uc      uint8
@@ -15,7 +15,7 @@ type Au_arb_t struct {
 }
 
 // [libbsm.h:193]
-type Au_arg32_t struct {
+type AuArg32T struct {
 	No   uint8
 	Val  uint32
 	Len  uint16
@@ -23,7 +23,7 @@ type Au_arg32_t struct {
 }
 
 // [libbsm.h:200]
-type Au_arg64_t struct {
+type AuArg64T struct {
 	No   uint8
 	Val  uint64
 	Len  uint16
@@ -31,7 +31,7 @@ type Au_arg64_t struct {
 }
 
 // [libbsm.h:228]
-type Au_attr32_t struct {
+type AuAttr32T struct {
 	Mode uint32
 	Uid  uint32
 	Gid  uint32
@@ -41,7 +41,7 @@ type Au_attr32_t struct {
 }
 
 // [libbsm.h:237]
-type Au_attr64_t struct {
+type AuAttr64T struct {
 	Mode uint32
 	Uid  uint32
 	Gid  uint32
@@ -51,26 +51,26 @@ type Au_attr64_t struct {
 }
 
 // [libbsm.h:268]
-type Au_cert_hash_t struct {
+type AuCertHashT struct {
 	Count uint32
 	Text  unsafe.Pointer
 }
 
 // [libbsm.h:124]
-type Au_class_ent struct {
+type AuClassEnt struct {
 	Ac_name  string
 	Ac_class uint32
 	Ac_desc  string
 }
 
 // [audit.h:329]
-type Au_evclass_map struct {
+type AuEvclassMap struct {
 	Ec_number uint16
 	Ec_class  uint32
 }
 
 // [libbsm.h:116]
-type Au_event_ent struct {
+type AuEventEnt struct {
 	Ae_number uint16
 	Ae_name   string
 	Ae_desc   string
@@ -78,32 +78,32 @@ type Au_event_ent struct {
 }
 
 // [libbsm.h:250]
-type Au_execarg_t struct {
+type AuExecargT struct {
 	Count uint32
 	Text  unsafe.Pointer
 }
 
 // [libbsm.h:259]
-type Au_execenv_t struct {
+type AuExecenvT struct {
 	Count uint32
 	Text  unsafe.Pointer
 }
 
 // [libbsm.h:286]
-type Au_exit_t struct {
+type AuExitT struct {
 	Status uint32
 	Ret    uint32
 }
 
 // [audit.h:263]
-type Au_expire_after struct {
+type AuExpireAfter struct {
 	Age     int64
 	Size    uint64
 	Op_type uint8
 }
 
 // [libbsm.h:297]
-type Au_file_t struct {
+type AuFileT struct {
 	S    uint32
 	Ms   uint32
 	Len  uint16
@@ -111,13 +111,13 @@ type Au_file_t struct {
 }
 
 // [libbsm.h:309]
-type Au_groups_t struct {
+type AuGroupsT struct {
 	No   uint16
 	List [16]uint32
 }
 
 // [libbsm.h:341]
-type Au_header32_ex_t struct {
+type AuHeader32ExT struct {
 	Size    uint32
 	Version uint8
 	E_type  uint16
@@ -129,7 +129,7 @@ type Au_header32_ex_t struct {
 }
 
 // [libbsm.h:322]
-type Au_header32_t struct {
+type AuHeader32T struct {
 	Size    uint32
 	Version uint8
 	E_type  uint16
@@ -139,7 +139,7 @@ type Au_header32_t struct {
 }
 
 // [libbsm.h:361]
-type Au_header64_ex_t struct {
+type AuHeader64ExT struct {
 	Size    uint32
 	Version uint8
 	E_type  uint16
@@ -151,7 +151,7 @@ type Au_header64_ex_t struct {
 }
 
 // [libbsm.h:352]
-type Au_header64_t struct {
+type AuHeader64T struct {
 	Size    uint32
 	Version uint8
 	E_type  uint16
@@ -161,7 +161,7 @@ type Au_header64_t struct {
 }
 
 // [libbsm.h:731]
-type Au_identity_t struct {
+type AuIdentityT struct {
 	Signer_type          uint32
 	Signing_id_len       uint16
 	Signing_id           string
@@ -174,24 +174,24 @@ type Au_identity_t struct {
 }
 
 // [libbsm.h:383]
-type Au_inaddr_ex_t struct {
+type AuInaddrExT struct {
 	Type uint32
 	Addr [4]uint32
 }
 
 // [libbsm.h:375]
-type Au_inaddr_t struct {
+type AuInaddrT struct {
 	Addr uint32
 }
 
 // [libbsm.h:711]
-type Au_invalid_t struct {
+type AuInvalidT struct {
 	Length uint16
 	Data   string
 }
 
 // [libbsm.h:400]
-type Au_ip_t struct {
+type AuIpT struct {
 	Version uint8
 	Tos     uint8
 	Len     uint16
@@ -205,13 +205,13 @@ type Au_ip_t struct {
 }
 
 // [libbsm.h:417]
-type Au_ipc_t struct {
+type AuIpcT struct {
 	Type uint8
 	Id   uint32
 }
 
 // [libbsm.h:431]
-type Au_ipcperm_t struct {
+type AuIpcpermT struct {
 	Uid  uint32
 	Gid  uint32
 	Puid uint32
@@ -222,12 +222,12 @@ type Au_ipcperm_t struct {
 }
 
 // [libbsm.h:444]
-type Au_iport_t struct {
+type AuIportT struct {
 	Port uint16
 }
 
 // [libbsm.h:703]
-type Au_kevent_t struct {
+type AuKeventT struct {
 	Ident  uint32
 	Filter uint16
 	Flags  uint16
@@ -236,31 +236,31 @@ type Au_kevent_t struct {
 }
 
 // [libbsm.h:277]
-type Au_krb5_principal_t struct {
+type AuKrb5PrincipalT struct {
 	Count uint32
 	Text  unsafe.Pointer
 }
 
 // [audit.h:215]
-type Au_mask struct {
+type AuMask struct {
 	Am_success uint32
 	Am_failure uint32
 }
 
 // [libbsm.h:452]
-type Au_opaque_t struct {
+type AuOpaqueT struct {
 	Size uint16
 	Data string
 }
 
 // [libbsm.h:461]
-type Au_path_t struct {
+type AuPathT struct {
 	Len  uint16
 	Path string
 }
 
 // [libbsm.h:478]
-type Au_proc32_t struct {
+type AuProc32T struct {
 	Auid uint32
 	Euid uint32
 	Egid uint32
@@ -268,11 +268,11 @@ type Au_proc32_t struct {
 	Rgid uint32
 	Pid  uint32
 	Sid  uint32
-	Tid  Au_tid32
+	Tid  AuTid32
 }
 
 // [libbsm.h:513]
-type Au_proc32ex_t struct {
+type AuProc32exT struct {
 	Auid uint32
 	Euid uint32
 	Egid uint32
@@ -280,11 +280,11 @@ type Au_proc32ex_t struct {
 	Rgid uint32
 	Pid  uint32
 	Sid  uint32
-	Tid  Au_tidaddr32
+	Tid  AuTidaddr32
 }
 
 // [libbsm.h:489]
-type Au_proc64_t struct {
+type AuProc64T struct {
 	Auid uint32
 	Euid uint32
 	Egid uint32
@@ -292,11 +292,11 @@ type Au_proc64_t struct {
 	Rgid uint32
 	Pid  uint32
 	Sid  uint32
-	Tid  Au_tid64
+	Tid  AuTid64
 }
 
 // [libbsm.h:524]
-type Au_proc64ex_t struct {
+type AuProc64exT struct {
 	Auid uint32
 	Euid uint32
 	Egid uint32
@@ -304,11 +304,11 @@ type Au_proc64ex_t struct {
 	Rgid uint32
 	Pid  uint32
 	Sid  uint32
-	Tid  Au_tidaddr64
+	Tid  AuTidaddr64
 }
 
 // [audit.h:283]
-type Au_qctrl struct {
+type AuQctrl struct {
 	Aq_hiwater int32
 	Aq_lowater int32
 	Aq_bufsz   int32
@@ -317,30 +317,30 @@ type Au_qctrl struct {
 }
 
 // [libbsm.h:539]
-type Au_ret32_t struct {
+type AuRet32T struct {
 	Status uint8
 	Ret    uint32
 }
 
 // [libbsm.h:544]
-type Au_ret64_t struct {
+type AuRet64T struct {
 	Err uint8
 	Val uint64
 }
 
 // [libbsm.h:552]
-type Au_seq_t struct {
+type AuSeqT struct {
 	Seqno uint32
 }
 
 // [audit.h:257]
-type Au_session struct {
+type AuSession struct {
 	As_aia_p unsafe.Pointer
-	As_mask  Au_mask
+	As_mask  AuMask
 }
 
 // [libbsm.h:580]
-type Au_socket_ex32_t struct {
+type AuSocketEx32T struct {
 	Domain uint16
 	Type   uint16
 	Atype  uint16
@@ -351,7 +351,7 @@ type Au_socket_ex32_t struct {
 }
 
 // [libbsm.h:563]
-type Au_socket_t struct {
+type AuSocketT struct {
 	Type   uint16
 	L_port uint16
 	L_addr uint32
@@ -360,27 +360,27 @@ type Au_socket_t struct {
 }
 
 // [libbsm.h:601]
-type Au_socketinet32_t struct {
+type AuSocketinet32T struct {
 	Family uint16
 	Port   uint16
 	Addr   uint32
 }
 
 // [libbsm.h:595]
-type Au_socketinet_ex32_t struct {
+type AuSocketinetEx32T struct {
 	Family uint16
 	Port   uint16
 	Addr   [4]uint32
 }
 
 // [libbsm.h:611]
-type Au_socketunix_t struct {
+type AuSocketunixT struct {
 	Family uint16
 	Path   [104]int8
 }
 
 // [libbsm.h:628]
-type Au_subject32_t struct {
+type AuSubject32T struct {
 	Auid uint32
 	Euid uint32
 	Egid uint32
@@ -388,11 +388,11 @@ type Au_subject32_t struct {
 	Rgid uint32
 	Pid  uint32
 	Sid  uint32
-	Tid  Au_tid32
+	Tid  AuTid32
 }
 
 // [libbsm.h:663]
-type Au_subject32ex_t struct {
+type AuSubject32exT struct {
 	Auid uint32
 	Euid uint32
 	Egid uint32
@@ -400,11 +400,11 @@ type Au_subject32ex_t struct {
 	Rgid uint32
 	Pid  uint32
 	Sid  uint32
-	Tid  Au_tidaddr32
+	Tid  AuTidaddr32
 }
 
 // [libbsm.h:639]
-type Au_subject64_t struct {
+type AuSubject64T struct {
 	Auid uint32
 	Euid uint32
 	Egid uint32
@@ -412,11 +412,11 @@ type Au_subject64_t struct {
 	Rgid uint32
 	Pid  uint32
 	Sid  uint32
-	Tid  Au_tid64
+	Tid  AuTid64
 }
 
 // [libbsm.h:674]
-type Au_subject64ex_t struct {
+type AuSubject64exT struct {
 	Auid uint32
 	Euid uint32
 	Egid uint32
@@ -424,85 +424,85 @@ type Au_subject64ex_t struct {
 	Rgid uint32
 	Pid  uint32
 	Sid  uint32
-	Tid  Au_tidaddr64
+	Tid  AuTidaddr64
 }
 
 // [libbsm.h:689]
-type Au_text_t struct {
+type AuTextT struct {
 	Len  uint16
 	Text string
 }
 
 // [audit.h:202]
-type Au_tid struct {
+type AuTid struct {
 	Port    int32
 	Machine uint32
 }
 
 // [libbsm.h:165]
-type Au_tid32 struct {
+type AuTid32 struct {
 	Port uint32
 	Addr uint32
 }
 
 // [libbsm.h:170]
-type Au_tid64 struct {
+type AuTid64 struct {
 	Port uint64
 	Addr uint32
 }
 
 // [audit.h:208]
-type Au_tid_addr struct {
+type AuTidAddr struct {
 	At_port int32
 	At_type uint32
 	At_addr [4]uint32
 }
 
 // [libbsm.h:175]
-type Au_tidaddr32 struct {
+type AuTidaddr32 struct {
 	Port uint32
 	Type uint32
 	Addr [4]uint32
 }
 
 // [libbsm.h:181]
-type Au_tidaddr64 struct {
+type AuTidaddr64 struct {
 	Port uint64
 	Type uint32
 	Addr [4]uint32
 }
 
 // [audit.h:273]
-type Au_token struct {
+type AuToken struct {
 }
 
 // [libbsm.h:747]
-type Au_trailer_t struct {
+type AuTrailerT struct {
 	Magic uint16
 	Count uint32
 }
 
 // [libbsm.h:131]
-type Au_user_ent struct {
+type AuUserEnt struct {
 	Au_name   string
-	Au_always Au_mask
-	Au_never  Au_mask
+	Au_always AuMask
+	Au_never  AuMask
 }
 
 // [libbsm.h:698]
-type Au_zonename_t struct {
+type AuZonenameT struct {
 	Len      uint16
 	Zonename string
 }
 
 // [audit.h:320]
-type Audit_fstat struct {
+type AuditFstat struct {
 	Af_filesz uint64
 	Af_currsz uint64
 }
 
 // [audit.h:299]
-type Audit_stat struct {
+type AuditStat struct {
 	As_version   uint32
 	As_numevent  uint32
 	As_generated int32
@@ -522,16 +522,16 @@ type Audit_stat struct {
 // [audit.h:221]
 type Auditinfo struct {
 	Ai_auid   uint32
-	Ai_mask   Au_mask
-	Ai_termid Au_tid
+	Ai_mask   AuMask
+	Ai_termid AuTid
 	Ai_asid   int32
 }
 
 // [audit.h:229]
-type Auditinfo_addr struct {
+type AuditinfoAddr struct {
 	Ai_auid   uint32
-	Ai_mask   Au_mask
-	Ai_termid Au_tid_addr
+	Ai_mask   AuMask
+	Ai_termid AuTidAddr
 	Ai_asid   int32
 	Ai_flags  uint64
 }
@@ -540,27 +540,27 @@ type Auditinfo_addr struct {
 type Auditpinfo struct {
 	Ap_pid    int32
 	Ap_auid   uint32
-	Ap_mask   Au_mask
-	Ap_termid Au_tid
+	Ap_mask   AuMask
+	Ap_termid AuTid
 	Ap_asid   int32
 }
 
 // [audit.h:247]
-type Auditpinfo_addr struct {
+type AuditpinfoAddr struct {
 	Ap_pid    int32
 	Ap_auid   uint32
-	Ap_mask   Au_mask
-	Ap_termid Au_tid_addr
+	Ap_mask   AuMask
+	Ap_termid AuTidAddr
 	Ap_asid   int32
 	Ap_flags  uint64
 }
 
 // [audit_record.h:193]
-type In6_addr struct {
+type In6Addr struct {
 }
 
 // [audit_record.h:192]
-type In_addr struct {
+type InAddr struct {
 }
 
 // [audit_record.h:194]
@@ -568,7 +568,7 @@ type Ip struct {
 }
 
 // [audit_record.h:195]
-type Ipc_perm struct {
+type IpcPerm struct {
 }
 
 // [audit_record.h:196]
@@ -580,15 +580,15 @@ type Sockaddr struct {
 }
 
 // [audit_record.h:198]
-type Sockaddr_in struct {
+type SockaddrIn struct {
 }
 
 // [audit_record.h:199]
-type Sockaddr_in6 struct {
+type SockaddrIn6 struct {
 }
 
 // [audit_record.h:200]
-type Sockaddr_un struct {
+type SockaddrUn struct {
 }
 
 // [libbsm.h:752]
@@ -599,68 +599,68 @@ type Tokenstr struct {
 	Tt   unsafe.Pointer
 }
 
-// Au_class_ent_t is a typedef alias for Au_class_ent.
-type Au_class_ent_t = Au_class_ent
+// AuClassEntT is a typedef alias for AuClassEnt.
+type AuClassEntT = AuClassEnt
 
-// Au_evclass_map_t is a typedef alias for Au_evclass_map.
-type Au_evclass_map_t = Au_evclass_map
+// AuEvclassMapT is a typedef alias for AuEvclassMap.
+type AuEvclassMapT = AuEvclassMap
 
-// Au_event_ent_t is a typedef alias for Au_event_ent.
-type Au_event_ent_t = Au_event_ent
+// AuEventEntT is a typedef alias for AuEventEnt.
+type AuEventEntT = AuEventEnt
 
-// Au_expire_after_t is a typedef alias for Au_expire_after.
-type Au_expire_after_t = Au_expire_after
+// AuExpireAfterT is a typedef alias for AuExpireAfter.
+type AuExpireAfterT = AuExpireAfter
 
-// Au_fstat_t is a typedef alias for Audit_fstat.
-type Au_fstat_t = Audit_fstat
+// AuFstatT is a typedef alias for AuditFstat.
+type AuFstatT = AuditFstat
 
-// Au_mask_t is a typedef alias for Au_mask.
-type Au_mask_t = Au_mask
+// AuMaskT is a typedef alias for AuMask.
+type AuMaskT = AuMask
 
-// Au_qctrl_t is a typedef alias for Au_qctrl.
-type Au_qctrl_t = Au_qctrl
+// AuQctrlT is a typedef alias for AuQctrl.
+type AuQctrlT = AuQctrl
 
-// Au_session_t is a typedef alias for Au_session.
-type Au_session_t = Au_session
+// AuSessionT is a typedef alias for AuSession.
+type AuSessionT = AuSession
 
-// Au_stat_t is a typedef alias for Audit_stat.
-type Au_stat_t = Audit_stat
+// AuStatT is a typedef alias for AuditStat.
+type AuStatT = AuditStat
 
-// Au_tid32_t is a typedef alias for Au_tid32.
-type Au_tid32_t = Au_tid32
+// AuTid32T is a typedef alias for AuTid32.
+type AuTid32T = AuTid32
 
-// Au_tid64_t is a typedef alias for Au_tid64.
-type Au_tid64_t = Au_tid64
+// AuTid64T is a typedef alias for AuTid64.
+type AuTid64T = AuTid64
 
-// Au_tid_addr_t is a typedef alias for Au_tid_addr.
-type Au_tid_addr_t = Au_tid_addr
+// AuTidAddrT is a typedef alias for AuTidAddr.
+type AuTidAddrT = AuTidAddr
 
-// Au_tid_t is a typedef alias for Au_tid.
-type Au_tid_t = Au_tid
+// AuTidT is a typedef alias for AuTid.
+type AuTidT = AuTid
 
-// Au_tidaddr32_t is a typedef alias for Au_tidaddr32.
-type Au_tidaddr32_t = Au_tidaddr32
+// AuTidaddr32T is a typedef alias for AuTidaddr32.
+type AuTidaddr32T = AuTidaddr32
 
-// Au_tidaddr64_t is a typedef alias for Au_tidaddr64.
-type Au_tidaddr64_t = Au_tidaddr64
+// AuTidaddr64T is a typedef alias for AuTidaddr64.
+type AuTidaddr64T = AuTidaddr64
 
-// Au_user_ent_t is a typedef alias for Au_user_ent.
-type Au_user_ent_t = Au_user_ent
+// AuUserEntT is a typedef alias for AuUserEnt.
+type AuUserEntT = AuUserEnt
 
-// Auditinfo_addr_t is a typedef alias for Auditinfo_addr.
-type Auditinfo_addr_t = Auditinfo_addr
+// AuditinfoAddrT is a typedef alias for AuditinfoAddr.
+type AuditinfoAddrT = AuditinfoAddr
 
-// Auditinfo_t is a typedef alias for Auditinfo.
-type Auditinfo_t = Auditinfo
+// AuditinfoT is a typedef alias for Auditinfo.
+type AuditinfoT = Auditinfo
 
-// Auditpinfo_addr_t is a typedef alias for Auditpinfo_addr.
-type Auditpinfo_addr_t = Auditpinfo_addr
+// AuditpinfoAddrT is a typedef alias for AuditpinfoAddr.
+type AuditpinfoAddrT = AuditpinfoAddr
 
-// Auditpinfo_t is a typedef alias for Auditpinfo.
-type Auditpinfo_t = Auditpinfo
+// AuditpinfoT is a typedef alias for Auditpinfo.
+type AuditpinfoT = Auditpinfo
 
-// Token_t is a typedef alias for Au_token.
-type Token_t = Au_token
+// TokenT is a typedef alias for AuToken.
+type TokenT = AuToken
 
-// Tokenstr_t is a typedef alias for Tokenstr.
-type Tokenstr_t = Tokenstr
+// TokenstrT is a typedef alias for Tokenstr.
+type TokenstrT = Tokenstr

@@ -64,7 +64,7 @@ func Setauid(arg0 *uint32) int32 {
 
 // [audit.h:382]
 // ID: objc-sym bsm.getaudit_addr
-func Getaudit_addr(arg0 *Auditinfo_addr, arg1 int32) int32 {
+func Getaudit_addr(arg0 *AuditinfoAddr, arg1 int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getaudit_addr(unsafe.Pointer(arg0), C.int32_t(arg1), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -73,7 +73,7 @@ func Getaudit_addr(arg0 *Auditinfo_addr, arg1 int32) int32 {
 
 // [audit.h:383]
 // ID: objc-sym bsm.setaudit_addr
-func Setaudit_addr(arg0 *Auditinfo_addr, arg1 int32) int32 {
+func Setaudit_addr(arg0 *AuditinfoAddr, arg1 int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_setaudit_addr(unsafe.Pointer(arg0), C.int32_t(arg1), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1000,7 +1000,7 @@ func Getauevent() unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevent_r
-func Getauevent_r(e *Au_event_ent) unsafe.Pointer {
+func Getauevent_r(e *AuEventEnt) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauevent_r(unsafe.Pointer(e), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1026,7 +1026,7 @@ func Getauevnam(name string) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevnam_r
-func Getauevnam_r(e *Au_event_ent, name string) unsafe.Pointer {
+func Getauevnam_r(e *AuEventEnt, name string) unsafe.Pointer {
 	_cstr_name := C.CString(name)
 	defer C.free(unsafe.Pointer(_cstr_name))
 	var _exc unsafe.Pointer
@@ -1052,7 +1052,7 @@ func Getauevnum(event_number uint16) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevnum_r
-func Getauevnum_r(e *Au_event_ent, event_number uint16) unsafe.Pointer {
+func Getauevnum_r(e *AuEventEnt, event_number uint16) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauevnum_r(unsafe.Pointer(e), C.uint16_t(event_number), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1126,7 +1126,7 @@ func Getauuserent() unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauuserent_r
-func Getauuserent_r(u *Au_user_ent) unsafe.Pointer {
+func Getauuserent_r(u *AuUserEnt) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauuserent_r(unsafe.Pointer(u), &_exc))
 	cgo.RaiseIfException(_exc)
@@ -1152,7 +1152,7 @@ func Getauusernam(name string) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauusernam_r
-func Getauusernam_r(u *Au_user_ent, name string) unsafe.Pointer {
+func Getauusernam_r(u *AuUserEnt, name string) unsafe.Pointer {
 	_cstr_name := C.CString(name)
 	defer C.free(unsafe.Pointer(_cstr_name))
 	var _exc unsafe.Pointer

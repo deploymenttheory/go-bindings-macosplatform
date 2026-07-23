@@ -899,20 +899,20 @@ func (i AEAProfiles) isMultiValue() bool {
 }
 
 // [_time.h:156]
-type Clockid_t int64
+type ClockidT int64
 
 const (
-	_CLOCK_REALTIME             Clockid_t = 0
-	_CLOCK_MONOTONIC            Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
-	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW           Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
+	_CLOCK_REALTIME             ClockidT = 0
+	_CLOCK_MONOTONIC            ClockidT = 6
+	_CLOCK_MONOTONIC_RAW        ClockidT = 4
+	_CLOCK_MONOTONIC_RAW_APPROX ClockidT = 5
+	_CLOCK_UPTIME_RAW           ClockidT = 8
+	_CLOCK_UPTIME_RAW_APPROX    ClockidT = 9
+	_CLOCK_PROCESS_CPUTIME_ID   ClockidT = 12
+	_CLOCK_THREAD_CPUTIME_ID    ClockidT = 16
 )
 
-func (i Clockid_t) String() string {
+func (i ClockidT) String() string {
 	switch i {
 	case _CLOCK_REALTIME:
 		return "_CLOCK_REALTIME"
@@ -931,11 +931,11 @@ func (i Clockid_t) String() string {
 	case _CLOCK_THREAD_CPUTIME_ID:
 		return "_CLOCK_THREAD_CPUTIME_ID"
 	default:
-		return fmt.Sprintf("Clockid_t(%d)", int64(i))
+		return fmt.Sprintf("ClockidT(%d)", int64(i))
 	}
 }
 
-func ParseClockid_t(v string) (any, error) {
+func ParseClockidT(v string) (any, error) {
 	result := _CLOCK_REALTIME
 	switch v {
 	case "_CLOCK_REALTIME":
@@ -960,7 +960,7 @@ func ParseClockid_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeClockid_t(values []Clockid_t) []string {
+func SerializeClockidT(values []ClockidT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -968,25 +968,25 @@ func SerializeClockid_t(values []Clockid_t) []string {
 	return result
 }
 
-func (i Clockid_t) isMultiValue() bool {
+func (i ClockidT) isMultiValue() bool {
 	return false
 }
 
 // [fcntl.h:582]
-type Filesec_property_t int64
+type FilesecPropertyT int64
 
 const (
-	FILESEC_OWNER         Filesec_property_t = 1
-	FILESEC_GROUP         Filesec_property_t = 2
-	FILESEC_UUID          Filesec_property_t = 3
-	FILESEC_MODE          Filesec_property_t = 4
-	FILESEC_ACL           Filesec_property_t = 5
-	FILESEC_GRPUUID       Filesec_property_t = 6
-	FILESEC_ACL_RAW       Filesec_property_t = 100
-	FILESEC_ACL_ALLOCSIZE Filesec_property_t = 101
+	FILESEC_OWNER         FilesecPropertyT = 1
+	FILESEC_GROUP         FilesecPropertyT = 2
+	FILESEC_UUID          FilesecPropertyT = 3
+	FILESEC_MODE          FilesecPropertyT = 4
+	FILESEC_ACL           FilesecPropertyT = 5
+	FILESEC_GRPUUID       FilesecPropertyT = 6
+	FILESEC_ACL_RAW       FilesecPropertyT = 100
+	FILESEC_ACL_ALLOCSIZE FilesecPropertyT = 101
 )
 
-func (i Filesec_property_t) String() string {
+func (i FilesecPropertyT) String() string {
 	switch i {
 	case FILESEC_OWNER:
 		return "FILESEC_OWNER"
@@ -1005,11 +1005,11 @@ func (i Filesec_property_t) String() string {
 	case FILESEC_ACL_ALLOCSIZE:
 		return "FILESEC_ACL_ALLOCSIZE"
 	default:
-		return fmt.Sprintf("Filesec_property_t(%d)", int64(i))
+		return fmt.Sprintf("FilesecPropertyT(%d)", int64(i))
 	}
 }
 
-func ParseFilesec_property_t(v string) (any, error) {
+func ParseFilesecPropertyT(v string) (any, error) {
 	result := FILESEC_OWNER
 	switch v {
 	case "FILESEC_OWNER":
@@ -1034,7 +1034,7 @@ func ParseFilesec_property_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeFilesec_property_t(values []Filesec_property_t) []string {
+func SerializeFilesecPropertyT(values []FilesecPropertyT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -1042,6 +1042,6 @@ func SerializeFilesec_property_t(values []Filesec_property_t) []string {
 	return result
 }
 
-func (i Filesec_property_t) isMultiValue() bool {
+func (i FilesecPropertyT) isMultiValue() bool {
 	return false
 }

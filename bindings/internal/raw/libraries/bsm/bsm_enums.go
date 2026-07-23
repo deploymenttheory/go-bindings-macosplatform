@@ -26,18 +26,18 @@ const (
 )
 
 // [audit.h:338]
-type Audit_session_flags int64
+type AuditSessionFlags int64
 
 const (
-	AU_SESSION_FLAG_IS_INITIAL         Audit_session_flags = 1
-	AU_SESSION_FLAG_HAS_GRAPHIC_ACCESS Audit_session_flags = 16
-	AU_SESSION_FLAG_HAS_TTY            Audit_session_flags = 32
-	AU_SESSION_FLAG_IS_REMOTE          Audit_session_flags = 4096
-	AU_SESSION_FLAG_HAS_CONSOLE_ACCESS Audit_session_flags = 8192
-	AU_SESSION_FLAG_HAS_AUTHENTICATED  Audit_session_flags = 16384
+	AU_SESSION_FLAG_IS_INITIAL         AuditSessionFlags = 1
+	AU_SESSION_FLAG_HAS_GRAPHIC_ACCESS AuditSessionFlags = 16
+	AU_SESSION_FLAG_HAS_TTY            AuditSessionFlags = 32
+	AU_SESSION_FLAG_IS_REMOTE          AuditSessionFlags = 4096
+	AU_SESSION_FLAG_HAS_CONSOLE_ACCESS AuditSessionFlags = 8192
+	AU_SESSION_FLAG_HAS_AUTHENTICATED  AuditSessionFlags = 16384
 )
 
-func (i Audit_session_flags) String() string {
+func (i AuditSessionFlags) String() string {
 	switch i {
 	case AU_SESSION_FLAG_IS_INITIAL:
 		return "AU_SESSION_FLAG_IS_INITIAL"
@@ -52,11 +52,11 @@ func (i Audit_session_flags) String() string {
 	case AU_SESSION_FLAG_HAS_AUTHENTICATED:
 		return "AU_SESSION_FLAG_HAS_AUTHENTICATED"
 	default:
-		return fmt.Sprintf("Audit_session_flags(%d)", int64(i))
+		return fmt.Sprintf("AuditSessionFlags(%d)", int64(i))
 	}
 }
 
-func ParseAudit_session_flags(v string) (any, error) {
+func ParseAuditSessionFlags(v string) (any, error) {
 	result := AU_SESSION_FLAG_IS_INITIAL
 	switch v {
 	case "AU_SESSION_FLAG_IS_INITIAL":
@@ -77,7 +77,7 @@ func ParseAudit_session_flags(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeAudit_session_flags(values []Audit_session_flags) []string {
+func SerializeAuditSessionFlags(values []AuditSessionFlags) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -85,25 +85,25 @@ func SerializeAudit_session_flags(values []Audit_session_flags) []string {
 	return result
 }
 
-func (i Audit_session_flags) isMultiValue() bool {
+func (i AuditSessionFlags) isMultiValue() bool {
 	return false
 }
 
 // [_time.h:156]
-type Clockid_t int64
+type ClockidT int64
 
 const (
-	_CLOCK_REALTIME             Clockid_t = 0
-	_CLOCK_MONOTONIC            Clockid_t = 6
-	_CLOCK_MONOTONIC_RAW        Clockid_t = 4
-	_CLOCK_MONOTONIC_RAW_APPROX Clockid_t = 5
-	_CLOCK_UPTIME_RAW           Clockid_t = 8
-	_CLOCK_UPTIME_RAW_APPROX    Clockid_t = 9
-	_CLOCK_PROCESS_CPUTIME_ID   Clockid_t = 12
-	_CLOCK_THREAD_CPUTIME_ID    Clockid_t = 16
+	_CLOCK_REALTIME             ClockidT = 0
+	_CLOCK_MONOTONIC            ClockidT = 6
+	_CLOCK_MONOTONIC_RAW        ClockidT = 4
+	_CLOCK_MONOTONIC_RAW_APPROX ClockidT = 5
+	_CLOCK_UPTIME_RAW           ClockidT = 8
+	_CLOCK_UPTIME_RAW_APPROX    ClockidT = 9
+	_CLOCK_PROCESS_CPUTIME_ID   ClockidT = 12
+	_CLOCK_THREAD_CPUTIME_ID    ClockidT = 16
 )
 
-func (i Clockid_t) String() string {
+func (i ClockidT) String() string {
 	switch i {
 	case _CLOCK_REALTIME:
 		return "_CLOCK_REALTIME"
@@ -122,11 +122,11 @@ func (i Clockid_t) String() string {
 	case _CLOCK_THREAD_CPUTIME_ID:
 		return "_CLOCK_THREAD_CPUTIME_ID"
 	default:
-		return fmt.Sprintf("Clockid_t(%d)", int64(i))
+		return fmt.Sprintf("ClockidT(%d)", int64(i))
 	}
 }
 
-func ParseClockid_t(v string) (any, error) {
+func ParseClockidT(v string) (any, error) {
 	result := _CLOCK_REALTIME
 	switch v {
 	case "_CLOCK_REALTIME":
@@ -151,7 +151,7 @@ func ParseClockid_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeClockid_t(values []Clockid_t) []string {
+func SerializeClockidT(values []ClockidT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -159,73 +159,73 @@ func SerializeClockid_t(values []Clockid_t) []string {
 	return result
 }
 
-func (i Clockid_t) isMultiValue() bool {
+func (i ClockidT) isMultiValue() bool {
 	return false
 }
 
 // [ipc_info.h:1098]
-type Ipc_info_object_type_t int64
+type IpcInfoObjectTypeT int64
 
 const (
-	IPC_OTYPE_NONE                 Ipc_info_object_type_t = 0
-	IPC_OTYPE_THREAD_CONTROL       Ipc_info_object_type_t = 1
-	IPC_OTYPE_TASK_CONTROL         Ipc_info_object_type_t = 2
-	IPC_OTYPE_HOST                 Ipc_info_object_type_t = 3
-	IPC_OTYPE_HOST_PRIV            Ipc_info_object_type_t = 4
-	IPC_OTYPE_PROCESSOR            Ipc_info_object_type_t = 5
-	IPC_OTYPE_PROCESSOR_SET        Ipc_info_object_type_t = 6
-	IPC_OTYPE_PROCESSOR_SET_NAME   Ipc_info_object_type_t = 7
-	IPC_OTYPE_TIMER                Ipc_info_object_type_t = 8
-	IPC_OTYPE_PORT_SUBST_ONCE      Ipc_info_object_type_t = 9
-	IPC_OTYPE_MIG                  Ipc_info_object_type_t = 10
-	IPC_OTYPE_MEMORY_OBJECT        Ipc_info_object_type_t = 11
-	IPC_OTYPE_XMM_PAGER            Ipc_info_object_type_t = 12
-	IPC_OTYPE_XMM_KERNEL           Ipc_info_object_type_t = 13
-	IPC_OTYPE_XMM_REPLY            Ipc_info_object_type_t = 14
-	IPC_OTYPE_UND_REPLY            Ipc_info_object_type_t = 15
-	IPC_OTYPE_HOST_NOTIFY          Ipc_info_object_type_t = 16
-	IPC_OTYPE_HOST_SECURITY        Ipc_info_object_type_t = 17
-	IPC_OTYPE_LEDGER               Ipc_info_object_type_t = 18
-	IPC_OTYPE_MAIN_DEVICE          Ipc_info_object_type_t = 19
-	IPC_OTYPE_TASK_NAME            Ipc_info_object_type_t = 20
-	IPC_OTYPE_SUBSYSTEM            Ipc_info_object_type_t = 21
-	IPC_OTYPE_IO_DONE_QUEUE        Ipc_info_object_type_t = 22
-	IPC_OTYPE_SEMAPHORE            Ipc_info_object_type_t = 23
-	IPC_OTYPE_LOCK_SET             Ipc_info_object_type_t = 24
-	IPC_OTYPE_CLOCK                Ipc_info_object_type_t = 25
-	IPC_OTYPE_CLOCK_CTRL           Ipc_info_object_type_t = 26
-	IPC_OTYPE_IOKIT_IDENT          Ipc_info_object_type_t = 27
-	IPC_OTYPE_NAMED_ENTRY          Ipc_info_object_type_t = 28
-	IPC_OTYPE_IOKIT_CONNECT        Ipc_info_object_type_t = 29
-	IPC_OTYPE_IOKIT_OBJECT         Ipc_info_object_type_t = 30
-	IPC_OTYPE_UPL                  Ipc_info_object_type_t = 31
-	IPC_OTYPE_MEM_OBJ_CONTROL      Ipc_info_object_type_t = 32
-	IPC_OTYPE_AU_SESSIONPORT       Ipc_info_object_type_t = 33
-	IPC_OTYPE_FILEPORT             Ipc_info_object_type_t = 34
-	IPC_OTYPE_LABELH               Ipc_info_object_type_t = 35
-	IPC_OTYPE_TASK_RESUME          Ipc_info_object_type_t = 36
-	IPC_OTYPE_VOUCHER              Ipc_info_object_type_t = 37
-	IPC_OTYPE_VOUCHER_ATTR_CONTROL Ipc_info_object_type_t = 38
-	IPC_OTYPE_WORK_INTERVAL        Ipc_info_object_type_t = 39
-	IPC_OTYPE_UX_HANDLER           Ipc_info_object_type_t = 40
-	IPC_OTYPE_UEXT_OBJECT          Ipc_info_object_type_t = 41
-	IPC_OTYPE_ARCADE_REG           Ipc_info_object_type_t = 42
-	IPC_OTYPE_EVENTLINK            Ipc_info_object_type_t = 43
-	IPC_OTYPE_TASK_INSPECT         Ipc_info_object_type_t = 44
-	IPC_OTYPE_TASK_READ            Ipc_info_object_type_t = 45
-	IPC_OTYPE_THREAD_INSPECT       Ipc_info_object_type_t = 46
-	IPC_OTYPE_THREAD_READ          Ipc_info_object_type_t = 47
-	IPC_OTYPE_SUID_CRED            Ipc_info_object_type_t = 48
-	IPC_OTYPE_HYPERVISOR           Ipc_info_object_type_t = 49
-	IPC_OTYPE_TASK_ID_TOKEN        Ipc_info_object_type_t = 50
-	IPC_OTYPE_TASK_FATAL           Ipc_info_object_type_t = 51
-	IPC_OTYPE_KCDATA               Ipc_info_object_type_t = 52
-	IPC_OTYPE_EXCLAVES_RESOURCE    Ipc_info_object_type_t = 53
-	IPC_OTYPE_THREAD_RESUME        Ipc_info_object_type_t = 54
-	IPC_OTYPE_UNKNOWN              Ipc_info_object_type_t = 4294967295
+	IPC_OTYPE_NONE                 IpcInfoObjectTypeT = 0
+	IPC_OTYPE_THREAD_CONTROL       IpcInfoObjectTypeT = 1
+	IPC_OTYPE_TASK_CONTROL         IpcInfoObjectTypeT = 2
+	IPC_OTYPE_HOST                 IpcInfoObjectTypeT = 3
+	IPC_OTYPE_HOST_PRIV            IpcInfoObjectTypeT = 4
+	IPC_OTYPE_PROCESSOR            IpcInfoObjectTypeT = 5
+	IPC_OTYPE_PROCESSOR_SET        IpcInfoObjectTypeT = 6
+	IPC_OTYPE_PROCESSOR_SET_NAME   IpcInfoObjectTypeT = 7
+	IPC_OTYPE_TIMER                IpcInfoObjectTypeT = 8
+	IPC_OTYPE_PORT_SUBST_ONCE      IpcInfoObjectTypeT = 9
+	IPC_OTYPE_MIG                  IpcInfoObjectTypeT = 10
+	IPC_OTYPE_MEMORY_OBJECT        IpcInfoObjectTypeT = 11
+	IPC_OTYPE_XMM_PAGER            IpcInfoObjectTypeT = 12
+	IPC_OTYPE_XMM_KERNEL           IpcInfoObjectTypeT = 13
+	IPC_OTYPE_XMM_REPLY            IpcInfoObjectTypeT = 14
+	IPC_OTYPE_UND_REPLY            IpcInfoObjectTypeT = 15
+	IPC_OTYPE_HOST_NOTIFY          IpcInfoObjectTypeT = 16
+	IPC_OTYPE_HOST_SECURITY        IpcInfoObjectTypeT = 17
+	IPC_OTYPE_LEDGER               IpcInfoObjectTypeT = 18
+	IPC_OTYPE_MAIN_DEVICE          IpcInfoObjectTypeT = 19
+	IPC_OTYPE_TASK_NAME            IpcInfoObjectTypeT = 20
+	IPC_OTYPE_SUBSYSTEM            IpcInfoObjectTypeT = 21
+	IPC_OTYPE_IO_DONE_QUEUE        IpcInfoObjectTypeT = 22
+	IPC_OTYPE_SEMAPHORE            IpcInfoObjectTypeT = 23
+	IPC_OTYPE_LOCK_SET             IpcInfoObjectTypeT = 24
+	IPC_OTYPE_CLOCK                IpcInfoObjectTypeT = 25
+	IPC_OTYPE_CLOCK_CTRL           IpcInfoObjectTypeT = 26
+	IPC_OTYPE_IOKIT_IDENT          IpcInfoObjectTypeT = 27
+	IPC_OTYPE_NAMED_ENTRY          IpcInfoObjectTypeT = 28
+	IPC_OTYPE_IOKIT_CONNECT        IpcInfoObjectTypeT = 29
+	IPC_OTYPE_IOKIT_OBJECT         IpcInfoObjectTypeT = 30
+	IPC_OTYPE_UPL                  IpcInfoObjectTypeT = 31
+	IPC_OTYPE_MEM_OBJ_CONTROL      IpcInfoObjectTypeT = 32
+	IPC_OTYPE_AU_SESSIONPORT       IpcInfoObjectTypeT = 33
+	IPC_OTYPE_FILEPORT             IpcInfoObjectTypeT = 34
+	IPC_OTYPE_LABELH               IpcInfoObjectTypeT = 35
+	IPC_OTYPE_TASK_RESUME          IpcInfoObjectTypeT = 36
+	IPC_OTYPE_VOUCHER              IpcInfoObjectTypeT = 37
+	IPC_OTYPE_VOUCHER_ATTR_CONTROL IpcInfoObjectTypeT = 38
+	IPC_OTYPE_WORK_INTERVAL        IpcInfoObjectTypeT = 39
+	IPC_OTYPE_UX_HANDLER           IpcInfoObjectTypeT = 40
+	IPC_OTYPE_UEXT_OBJECT          IpcInfoObjectTypeT = 41
+	IPC_OTYPE_ARCADE_REG           IpcInfoObjectTypeT = 42
+	IPC_OTYPE_EVENTLINK            IpcInfoObjectTypeT = 43
+	IPC_OTYPE_TASK_INSPECT         IpcInfoObjectTypeT = 44
+	IPC_OTYPE_TASK_READ            IpcInfoObjectTypeT = 45
+	IPC_OTYPE_THREAD_INSPECT       IpcInfoObjectTypeT = 46
+	IPC_OTYPE_THREAD_READ          IpcInfoObjectTypeT = 47
+	IPC_OTYPE_SUID_CRED            IpcInfoObjectTypeT = 48
+	IPC_OTYPE_HYPERVISOR           IpcInfoObjectTypeT = 49
+	IPC_OTYPE_TASK_ID_TOKEN        IpcInfoObjectTypeT = 50
+	IPC_OTYPE_TASK_FATAL           IpcInfoObjectTypeT = 51
+	IPC_OTYPE_KCDATA               IpcInfoObjectTypeT = 52
+	IPC_OTYPE_EXCLAVES_RESOURCE    IpcInfoObjectTypeT = 53
+	IPC_OTYPE_THREAD_RESUME        IpcInfoObjectTypeT = 54
+	IPC_OTYPE_UNKNOWN              IpcInfoObjectTypeT = 4294967295
 )
 
-func (i Ipc_info_object_type_t) String() string {
+func (i IpcInfoObjectTypeT) String() string {
 	switch i {
 	case IPC_OTYPE_NONE:
 		return "IPC_OTYPE_NONE"
@@ -340,11 +340,11 @@ func (i Ipc_info_object_type_t) String() string {
 	case IPC_OTYPE_UNKNOWN:
 		return "IPC_OTYPE_UNKNOWN"
 	default:
-		return fmt.Sprintf("Ipc_info_object_type_t(%d)", int64(i))
+		return fmt.Sprintf("IpcInfoObjectTypeT(%d)", int64(i))
 	}
 }
 
-func ParseIpc_info_object_type_t(v string) (any, error) {
+func ParseIpcInfoObjectTypeT(v string) (any, error) {
 	result := IPC_OTYPE_NONE
 	switch v {
 	case "IPC_OTYPE_NONE":
@@ -465,7 +465,7 @@ func ParseIpc_info_object_type_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeIpc_info_object_type_t(values []Ipc_info_object_type_t) []string {
+func SerializeIpcInfoObjectTypeT(values []IpcInfoObjectTypeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -473,19 +473,19 @@ func SerializeIpc_info_object_type_t(values []Ipc_info_object_type_t) []string {
 	return result
 }
 
-func (i Ipc_info_object_type_t) isMultiValue() bool {
+func (i IpcInfoObjectTypeT) isMultiValue() bool {
 	return false
 }
 
 // [vm_types.h:1102]
 // Bitmask — values may be combined with |.
-type Mach_vm_range_flags_t int64
+type MachVmRangeFlagsT int64
 
 const (
-	MACH_VM_RANGE_NONE Mach_vm_range_flags_t = 0
+	MACH_VM_RANGE_NONE MachVmRangeFlagsT = 0
 )
 
-func (i Mach_vm_range_flags_t) String() string {
+func (i MachVmRangeFlagsT) String() string {
 	var values []string
 	if i == 0 {
 		values = append(values, "MACH_VM_RANGE_NONE")
@@ -493,8 +493,8 @@ func (i Mach_vm_range_flags_t) String() string {
 	return strings.Join(values, ",")
 }
 
-func ParseMach_vm_range_flags_t(v string) (any, error) {
-	var result Mach_vm_range_flags_t
+func ParseMachVmRangeFlagsT(v string) (any, error) {
+	var result MachVmRangeFlagsT
 	for _, str := range strings.Split(v, ",") {
 		switch str {
 		case "MACH_VM_RANGE_NONE":
@@ -506,7 +506,7 @@ func ParseMach_vm_range_flags_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeMach_vm_range_flags_t(values []Mach_vm_range_flags_t) []string {
+func SerializeMachVmRangeFlagsT(values []MachVmRangeFlagsT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -514,30 +514,30 @@ func SerializeMach_vm_range_flags_t(values []Mach_vm_range_flags_t) []string {
 	return result
 }
 
-func (i Mach_vm_range_flags_t) isMultiValue() bool {
+func (i MachVmRangeFlagsT) isMultiValue() bool {
 	return true
 }
 
 // [vm_types.h:1098]
-type Mach_vm_range_flavor_t int64
+type MachVmRangeFlavorT int64
 
 const (
-	MACH_VM_RANGE_FLAVOR_INVALID Mach_vm_range_flavor_t = 0
-	MACH_VM_RANGE_FLAVOR_V1      Mach_vm_range_flavor_t = 1
+	MACH_VM_RANGE_FLAVOR_INVALID MachVmRangeFlavorT = 0
+	MACH_VM_RANGE_FLAVOR_V1      MachVmRangeFlavorT = 1
 )
 
-func (i Mach_vm_range_flavor_t) String() string {
+func (i MachVmRangeFlavorT) String() string {
 	switch i {
 	case MACH_VM_RANGE_FLAVOR_INVALID:
 		return "MACH_VM_RANGE_FLAVOR_INVALID"
 	case MACH_VM_RANGE_FLAVOR_V1:
 		return "MACH_VM_RANGE_FLAVOR_V1"
 	default:
-		return fmt.Sprintf("Mach_vm_range_flavor_t(%d)", int64(i))
+		return fmt.Sprintf("MachVmRangeFlavorT(%d)", int64(i))
 	}
 }
 
-func ParseMach_vm_range_flavor_t(v string) (any, error) {
+func ParseMachVmRangeFlavorT(v string) (any, error) {
 	result := MACH_VM_RANGE_FLAVOR_INVALID
 	switch v {
 	case "MACH_VM_RANGE_FLAVOR_INVALID":
@@ -550,7 +550,7 @@ func ParseMach_vm_range_flavor_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeMach_vm_range_flavor_t(values []Mach_vm_range_flavor_t) []string {
+func SerializeMachVmRangeFlavorT(values []MachVmRangeFlavorT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -558,20 +558,20 @@ func SerializeMach_vm_range_flavor_t(values []Mach_vm_range_flavor_t) []string {
 	return result
 }
 
-func (i Mach_vm_range_flavor_t) isMultiValue() bool {
+func (i MachVmRangeFlavorT) isMultiValue() bool {
 	return false
 }
 
 // [vm_types.h:1098]
-type Mach_vm_range_tag_t int64
+type MachVmRangeTagT int64
 
 const (
-	MACH_VM_RANGE_DEFAULT Mach_vm_range_tag_t = 0
-	MACH_VM_RANGE_DATA    Mach_vm_range_tag_t = 1
-	MACH_VM_RANGE_FIXED   Mach_vm_range_tag_t = 2
+	MACH_VM_RANGE_DEFAULT MachVmRangeTagT = 0
+	MACH_VM_RANGE_DATA    MachVmRangeTagT = 1
+	MACH_VM_RANGE_FIXED   MachVmRangeTagT = 2
 )
 
-func (i Mach_vm_range_tag_t) String() string {
+func (i MachVmRangeTagT) String() string {
 	switch i {
 	case MACH_VM_RANGE_DEFAULT:
 		return "MACH_VM_RANGE_DEFAULT"
@@ -580,11 +580,11 @@ func (i Mach_vm_range_tag_t) String() string {
 	case MACH_VM_RANGE_FIXED:
 		return "MACH_VM_RANGE_FIXED"
 	default:
-		return fmt.Sprintf("Mach_vm_range_tag_t(%d)", int64(i))
+		return fmt.Sprintf("MachVmRangeTagT(%d)", int64(i))
 	}
 }
 
-func ParseMach_vm_range_tag_t(v string) (any, error) {
+func ParseMachVmRangeTagT(v string) (any, error) {
 	result := MACH_VM_RANGE_DEFAULT
 	switch v {
 	case "MACH_VM_RANGE_DEFAULT":
@@ -599,7 +599,7 @@ func ParseMach_vm_range_tag_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeMach_vm_range_tag_t(values []Mach_vm_range_tag_t) []string {
+func SerializeMachVmRangeTagT(values []MachVmRangeTagT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -607,26 +607,26 @@ func SerializeMach_vm_range_tag_t(values []Mach_vm_range_tag_t) []string {
 	return result
 }
 
-func (i Mach_vm_range_tag_t) isMultiValue() bool {
+func (i MachVmRangeTagT) isMultiValue() bool {
 	return false
 }
 
 // [port.h:1102]
 // Bitmask — values may be combined with |.
-type Mpo_flags_t int64
+type MpoFlagsT int64
 
 const (
-	MPO_PORT                            Mpo_flags_t = 0
-	MPO_SERVICE_PORT                    Mpo_flags_t = 1024
-	MPO_CONNECTION_PORT                 Mpo_flags_t = 2048
-	MPO_REPLY_PORT                      Mpo_flags_t = 4096
-	MPO_WEAK_REPLY_PORT                 Mpo_flags_t = 16384
-	MPO_NOTIFICATION_PORT               Mpo_flags_t = 17408
-	MPO_EXCEPTION_PORT                  Mpo_flags_t = 32768
-	MPO_CONNECTION_PORT_WITH_PORT_ARRAY Mpo_flags_t = 65536
+	MPO_PORT                            MpoFlagsT = 0
+	MPO_SERVICE_PORT                    MpoFlagsT = 1024
+	MPO_CONNECTION_PORT                 MpoFlagsT = 2048
+	MPO_REPLY_PORT                      MpoFlagsT = 4096
+	MPO_WEAK_REPLY_PORT                 MpoFlagsT = 16384
+	MPO_NOTIFICATION_PORT               MpoFlagsT = 17408
+	MPO_EXCEPTION_PORT                  MpoFlagsT = 32768
+	MPO_CONNECTION_PORT_WITH_PORT_ARRAY MpoFlagsT = 65536
 )
 
-func (i Mpo_flags_t) String() string {
+func (i MpoFlagsT) String() string {
 	var values []string
 	if i == 0 {
 		values = append(values, "MPO_PORT")
@@ -655,8 +655,8 @@ func (i Mpo_flags_t) String() string {
 	return strings.Join(values, ",")
 }
 
-func ParseMpo_flags_t(v string) (any, error) {
-	var result Mpo_flags_t
+func ParseMpoFlagsT(v string) (any, error) {
+	var result MpoFlagsT
 	for _, str := range strings.Split(v, ",") {
 		switch str {
 		case "MPO_PORT":
@@ -682,7 +682,7 @@ func ParseMpo_flags_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeMpo_flags_t(values []Mpo_flags_t) []string {
+func SerializeMpoFlagsT(values []MpoFlagsT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -690,35 +690,35 @@ func SerializeMpo_flags_t(values []Mpo_flags_t) []string {
 	return result
 }
 
-func (i Mpo_flags_t) isMultiValue() bool {
+func (i MpoFlagsT) isMultiValue() bool {
 	return true
 }
 
 // [vm_statistics.h:1098]
-type Virtual_memory_guard_exception_code_t int64
+type VirtualMemoryGuardExceptionCodeT int64
 
 const (
-	KGUARD_EXC_DEALLOC_GAP                   Virtual_memory_guard_exception_code_t = 1
-	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        Virtual_memory_guard_exception_code_t = 2
-	KGUARD_EXC_RECLAIM_INDEX_FAILURE         Virtual_memory_guard_exception_code_t = 4
-	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    Virtual_memory_guard_exception_code_t = 8
-	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    Virtual_memory_guard_exception_code_t = 9
-	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         Virtual_memory_guard_exception_code_t = 10
-	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         Virtual_memory_guard_exception_code_t = 11
-	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  Virtual_memory_guard_exception_code_t = 12
-	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    Virtual_memory_guard_exception_code_t = 13
-	KGUARD_EXC_SEC_ACCESS_FAULT              Virtual_memory_guard_exception_code_t = 98
-	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        Virtual_memory_guard_exception_code_t = 99
-	KGUARD_EXC_SEC_COPY_DENIED               Virtual_memory_guard_exception_code_t = 100
-	KGUARD_EXC_SEC_SHARING_DENIED            Virtual_memory_guard_exception_code_t = 101
-	KGUARD_EXC_MTE_SYNC_FAULT                Virtual_memory_guard_exception_code_t = 200
-	KGUARD_EXC_MTE_ASYNC_USER_FAULT          Virtual_memory_guard_exception_code_t = 201
-	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          Virtual_memory_guard_exception_code_t = 202
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT Virtual_memory_guard_exception_code_t = 203
-	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT Virtual_memory_guard_exception_code_t = 204
+	KGUARD_EXC_DEALLOC_GAP                   VirtualMemoryGuardExceptionCodeT = 1
+	KGUARD_EXC_RECLAIM_COPYIO_FAILURE        VirtualMemoryGuardExceptionCodeT = 2
+	KGUARD_EXC_RECLAIM_INDEX_FAILURE         VirtualMemoryGuardExceptionCodeT = 4
+	KGUARD_EXC_RECLAIM_DEALLOCATE_FAILURE    VirtualMemoryGuardExceptionCodeT = 8
+	KGUARD_EXC_RECLAIM_ACCOUNTING_FAILURE    VirtualMemoryGuardExceptionCodeT = 9
+	KGUARD_EXC_SEC_IOPL_ON_EXEC_PAGE         VirtualMemoryGuardExceptionCodeT = 10
+	KGUARD_EXC_SEC_EXEC_ON_IOPL_PAGE         VirtualMemoryGuardExceptionCodeT = 11
+	KGUARD_EXC_SEC_UPL_WRITE_ON_EXEC_REGION  VirtualMemoryGuardExceptionCodeT = 12
+	KGUARD_EXC_LARGE_ALLOCATION_TELEMETRY    VirtualMemoryGuardExceptionCodeT = 13
+	KGUARD_EXC_SEC_ACCESS_FAULT              VirtualMemoryGuardExceptionCodeT = 98
+	KGUARD_EXC_SEC_ASYNC_ACCESS_FAULT        VirtualMemoryGuardExceptionCodeT = 99
+	KGUARD_EXC_SEC_COPY_DENIED               VirtualMemoryGuardExceptionCodeT = 100
+	KGUARD_EXC_SEC_SHARING_DENIED            VirtualMemoryGuardExceptionCodeT = 101
+	KGUARD_EXC_MTE_SYNC_FAULT                VirtualMemoryGuardExceptionCodeT = 200
+	KGUARD_EXC_MTE_ASYNC_USER_FAULT          VirtualMemoryGuardExceptionCodeT = 201
+	KGUARD_EXC_MTE_ASYNC_KERN_FAULT          VirtualMemoryGuardExceptionCodeT = 202
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_USER_FAULT VirtualMemoryGuardExceptionCodeT = 203
+	KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT VirtualMemoryGuardExceptionCodeT = 204
 )
 
-func (i Virtual_memory_guard_exception_code_t) String() string {
+func (i VirtualMemoryGuardExceptionCodeT) String() string {
 	switch i {
 	case KGUARD_EXC_DEALLOC_GAP:
 		return "kGUARD_EXC_DEALLOC_GAP"
@@ -757,11 +757,11 @@ func (i Virtual_memory_guard_exception_code_t) String() string {
 	case KGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT:
 		return "kGUARD_EXC_GUARD_OBJECT_ASYNC_KERN_FAULT"
 	default:
-		return fmt.Sprintf("Virtual_memory_guard_exception_code_t(%d)", int64(i))
+		return fmt.Sprintf("VirtualMemoryGuardExceptionCodeT(%d)", int64(i))
 	}
 }
 
-func ParseVirtual_memory_guard_exception_code_t(v string) (any, error) {
+func ParseVirtualMemoryGuardExceptionCodeT(v string) (any, error) {
 	result := KGUARD_EXC_DEALLOC_GAP
 	switch v {
 	case "kGUARD_EXC_DEALLOC_GAP":
@@ -806,7 +806,7 @@ func ParseVirtual_memory_guard_exception_code_t(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeVirtual_memory_guard_exception_code_t(values []Virtual_memory_guard_exception_code_t) []string {
+func SerializeVirtualMemoryGuardExceptionCodeT(values []VirtualMemoryGuardExceptionCodeT) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -814,6 +814,6 @@ func SerializeVirtual_memory_guard_exception_code_t(values []Virtual_memory_guar
 	return result
 }
 
-func (i Virtual_memory_guard_exception_code_t) isMultiValue() bool {
+func (i VirtualMemoryGuardExceptionCodeT) isMultiValue() bool {
 	return false
 }

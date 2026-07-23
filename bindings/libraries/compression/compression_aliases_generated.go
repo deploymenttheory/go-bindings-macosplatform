@@ -10,11 +10,11 @@ import raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/inter
 // types and values so callers name them through this package.
 
 type (
-	Compression_algorithm        = raw.Compression_algorithm
-	Compression_status           = raw.Compression_status
-	Compression_stream           = raw.Compression_stream
-	Compression_stream_flags     = raw.Compression_stream_flags
-	Compression_stream_operation = raw.Compression_stream_operation
+	CompressionAlgorithm       = raw.CompressionAlgorithm
+	CompressionStatus          = raw.CompressionStatus
+	CompressionStream          = raw.CompressionStream
+	CompressionStreamFlags     = raw.CompressionStreamFlags
+	CompressionStreamOperation = raw.CompressionStreamOperation
 )
 
 const (

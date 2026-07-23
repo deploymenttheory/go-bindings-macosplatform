@@ -70,15 +70,15 @@ func EmittableFunctions(framework *macosplatformmetadata.FrameworkMeta) []macosp
 func packageTypeNames(framework *macosplatformmetadata.FrameworkMeta) map[string]bool {
 	pkgTypeNames := make(map[string]bool)
 	for n := range framework.Structs {
-		pkgTypeNames[naming.GoTypeName(n)] = true
+		pkgTypeNames[naming.ExportedTypeName(n)] = true
 	}
 	for n, target := range framework.Typedefs {
 		if strings.HasPrefix(target, "struct ") {
-			pkgTypeNames[naming.GoTypeName(n)] = true
+			pkgTypeNames[naming.ExportedTypeName(n)] = true
 		}
 	}
 	for n := range framework.Enums {
-		pkgTypeNames[naming.GoTypeName(n)] = true
+		pkgTypeNames[naming.ExportedTypeName(n)] = true
 	}
 	return pkgTypeNames
 }

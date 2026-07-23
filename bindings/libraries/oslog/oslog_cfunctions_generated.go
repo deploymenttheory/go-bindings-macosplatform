@@ -18,7 +18,7 @@ func WrapLog(p unsafe.Pointer) Log { return Log{ptr: p} }
 // Ptr returns the underlying os_log_t handle.
 func (h Log) Ptr() unsafe.Pointer { return h.ptr }
 
-func (h Log) TypeEnabled(type_ raw.Os_log_type_t) bool {
+func (h Log) TypeEnabled(type_ raw.OsLogTypeT) bool {
 	return raw.Os_log_type_enabled(h.ptr, type_)
 }
 

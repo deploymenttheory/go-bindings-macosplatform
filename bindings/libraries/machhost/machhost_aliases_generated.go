@@ -10,13 +10,69 @@ import raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/inter
 // types and values so callers name them through this package.
 
 type (
-	Ipc_info_object_type_t                = raw.Ipc_info_object_type_t
-	Mach_vm_range_flags_t                 = raw.Mach_vm_range_flags_t
-	Mach_vm_range_flavor_t                = raw.Mach_vm_range_flavor_t
-	Mach_vm_range_tag_t                   = raw.Mach_vm_range_tag_t
-	Mpo_flags_t                           = raw.Mpo_flags_t
-	NDR_record_t                          = raw.NDR_record_t
-	Virtual_memory_guard_exception_code_t = raw.Virtual_memory_guard_exception_code_t
+	IpcInfoObjectTypeT                                  = raw.IpcInfoObjectTypeT
+	MachVmRangeFlagsT                                   = raw.MachVmRangeFlagsT
+	MachVmRangeFlavorT                                  = raw.MachVmRangeFlavorT
+	MachVmRangeTagT                                     = raw.MachVmRangeTagT
+	MpoFlagsT                                           = raw.MpoFlagsT
+	NDR_record_t                                        = raw.NDR_record_t
+	ReplyHostCheckMultiuserModeT                        = raw.ReplyHostCheckMultiuserModeT
+	ReplyHostCreateMachVoucherT                         = raw.ReplyHostCreateMachVoucherT
+	ReplyHostGetAtmDiagnosticFlagT                      = raw.ReplyHostGetAtmDiagnosticFlagT
+	ReplyHostGetClockServiceT                           = raw.ReplyHostGetClockServiceT
+	ReplyHostGetIoMainT                                 = raw.ReplyHostGetIoMainT
+	ReplyHostGetMultiuserConfigFlagsT                   = raw.ReplyHostGetMultiuserConfigFlagsT
+	ReplyHostInfoT                                      = raw.ReplyHostInfoT
+	ReplyHostKernelVersionT                             = raw.ReplyHostKernelVersionT
+	ReplyHostLockgroupInfoT                             = raw.ReplyHostLockgroupInfoT
+	ReplyHostPageSizeT                                  = raw.ReplyHostPageSizeT
+	ReplyHostProcessorInfoT                             = raw.ReplyHostProcessorInfoT
+	ReplyHostRegisterMachVoucherAttrManagerT            = raw.ReplyHostRegisterMachVoucherAttrManagerT
+	ReplyHostRegisterWellKnownMachVoucherAttrManagerT   = raw.ReplyHostRegisterWellKnownMachVoucherAttrManagerT
+	ReplyHostRequestNotificationT                       = raw.ReplyHostRequestNotificationT
+	ReplyHostSetAtmDiagnosticFlagT                      = raw.ReplyHostSetAtmDiagnosticFlagT
+	ReplyHostSetMultiuserConfigFlagsT                   = raw.ReplyHostSetMultiuserConfigFlagsT
+	ReplyHostStatistics64T                              = raw.ReplyHostStatistics64T
+	ReplyHostStatisticsT                                = raw.ReplyHostStatisticsT
+	ReplyHostVirtualPhysicalTableInfoT                  = raw.ReplyHostVirtualPhysicalTableInfoT
+	ReplyKmodGetInfoT                                   = raw.ReplyKmodGetInfoT
+	ReplyMachMemoryInfoRedactedT                        = raw.ReplyMachMemoryInfoRedactedT
+	ReplyMachMemoryInfoT                                = raw.ReplyMachMemoryInfoT
+	ReplyMachMemoryObjectMemoryEntry64T                 = raw.ReplyMachMemoryObjectMemoryEntry64T
+	ReplyMachMemoryObjectMemoryEntryT                   = raw.ReplyMachMemoryObjectMemoryEntryT
+	ReplyMachZoneInfoForZoneT                           = raw.ReplyMachZoneInfoForZoneT
+	ReplyMachZoneInfoT                                  = raw.ReplyMachZoneInfoT
+	ReplyProcessorSetCreateT                            = raw.ReplyProcessorSetCreateT
+	ReplyProcessorSetDefaultT                           = raw.ReplyProcessorSetDefaultT
+	RequestHostCheckMultiuserModeT                      = raw.RequestHostCheckMultiuserModeT
+	RequestHostCreateMachVoucherT                       = raw.RequestHostCreateMachVoucherT
+	RequestHostGetAtmDiagnosticFlagT                    = raw.RequestHostGetAtmDiagnosticFlagT
+	RequestHostGetClockServiceT                         = raw.RequestHostGetClockServiceT
+	RequestHostGetIoMainT                               = raw.RequestHostGetIoMainT
+	RequestHostGetMultiuserConfigFlagsT                 = raw.RequestHostGetMultiuserConfigFlagsT
+	RequestHostInfoT                                    = raw.RequestHostInfoT
+	RequestHostKernelVersionT                           = raw.RequestHostKernelVersionT
+	RequestHostLockgroupInfoT                           = raw.RequestHostLockgroupInfoT
+	RequestHostPageSizeT                                = raw.RequestHostPageSizeT
+	RequestHostProcessorInfoT                           = raw.RequestHostProcessorInfoT
+	RequestHostRegisterMachVoucherAttrManagerT          = raw.RequestHostRegisterMachVoucherAttrManagerT
+	RequestHostRegisterWellKnownMachVoucherAttrManagerT = raw.RequestHostRegisterWellKnownMachVoucherAttrManagerT
+	RequestHostRequestNotificationT                     = raw.RequestHostRequestNotificationT
+	RequestHostSetAtmDiagnosticFlagT                    = raw.RequestHostSetAtmDiagnosticFlagT
+	RequestHostSetMultiuserConfigFlagsT                 = raw.RequestHostSetMultiuserConfigFlagsT
+	RequestHostStatistics64T                            = raw.RequestHostStatistics64T
+	RequestHostStatisticsT                              = raw.RequestHostStatisticsT
+	RequestHostVirtualPhysicalTableInfoT                = raw.RequestHostVirtualPhysicalTableInfoT
+	RequestKmodGetInfoT                                 = raw.RequestKmodGetInfoT
+	RequestMachMemoryInfoRedactedT                      = raw.RequestMachMemoryInfoRedactedT
+	RequestMachMemoryInfoT                              = raw.RequestMachMemoryInfoT
+	RequestMachMemoryObjectMemoryEntry64T               = raw.RequestMachMemoryObjectMemoryEntry64T
+	RequestMachMemoryObjectMemoryEntryT                 = raw.RequestMachMemoryObjectMemoryEntryT
+	RequestMachZoneInfoForZoneT                         = raw.RequestMachZoneInfoForZoneT
+	RequestMachZoneInfoT                                = raw.RequestMachZoneInfoT
+	RequestProcessorSetCreateT                          = raw.RequestProcessorSetCreateT
+	RequestProcessorSetDefaultT                         = raw.RequestProcessorSetDefaultT
+	VirtualMemoryGuardExceptionCodeT                    = raw.VirtualMemoryGuardExceptionCodeT
 )
 
 const (

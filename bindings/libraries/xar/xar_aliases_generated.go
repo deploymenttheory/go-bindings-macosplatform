@@ -10,12 +10,12 @@ import raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/inter
 // types and values so callers name them through this package.
 
 type (
-	Xar_file_t      = raw.Xar_file_t
-	Xar_header      = raw.Xar_header
-	Xar_header_t    = raw.Xar_header_t
-	Xar_iter_t      = raw.Xar_iter_t
-	Xar_signature_t = raw.Xar_signature_t
-	Xar_stream      = raw.Xar_stream
-	Xar_subdoc_t    = raw.Xar_subdoc_t
-	Xar_t           = raw.Xar_t
+	XarFileT      = raw.XarFileT
+	XarHeader     = raw.XarHeader
+	XarHeaderT    = raw.XarHeaderT
+	XarIterT      = raw.XarIterT
+	XarSignatureT = raw.XarSignatureT
+	XarStream     = raw.XarStream
+	XarSubdocT    = raw.XarSubdocT
+	XarT          = raw.XarT
 )

@@ -8,19 +8,19 @@ import "fmt"
 
 // A structure for values that represent compression algorithms.
 // [compression.h:115]
-type Compression_algorithm int64
+type CompressionAlgorithm int64
 
 const (
-	COMPRESSION_LZ4      Compression_algorithm = 256
-	COMPRESSION_ZLIB     Compression_algorithm = 517
-	COMPRESSION_LZMA     Compression_algorithm = 774
-	COMPRESSION_LZ4_RAW  Compression_algorithm = 257
-	COMPRESSION_BROTLI   Compression_algorithm = 2818
-	COMPRESSION_LZFSE    Compression_algorithm = 2049
-	COMPRESSION_LZBITMAP Compression_algorithm = 1794
+	COMPRESSION_LZ4      CompressionAlgorithm = 256
+	COMPRESSION_ZLIB     CompressionAlgorithm = 517
+	COMPRESSION_LZMA     CompressionAlgorithm = 774
+	COMPRESSION_LZ4_RAW  CompressionAlgorithm = 257
+	COMPRESSION_BROTLI   CompressionAlgorithm = 2818
+	COMPRESSION_LZFSE    CompressionAlgorithm = 2049
+	COMPRESSION_LZBITMAP CompressionAlgorithm = 1794
 )
 
-func (i Compression_algorithm) String() string {
+func (i CompressionAlgorithm) String() string {
 	switch i {
 	case COMPRESSION_LZ4:
 		return "COMPRESSION_LZ4"
@@ -37,11 +37,11 @@ func (i Compression_algorithm) String() string {
 	case COMPRESSION_LZBITMAP:
 		return "COMPRESSION_LZBITMAP"
 	default:
-		return fmt.Sprintf("Compression_algorithm(%d)", int64(i))
+		return fmt.Sprintf("CompressionAlgorithm(%d)", int64(i))
 	}
 }
 
-func ParseCompression_algorithm(v string) (any, error) {
+func ParseCompressionAlgorithm(v string) (any, error) {
 	result := COMPRESSION_LZ4
 	switch v {
 	case "COMPRESSION_LZ4":
@@ -64,7 +64,7 @@ func ParseCompression_algorithm(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeCompression_algorithm(values []Compression_algorithm) []string {
+func SerializeCompressionAlgorithm(values []CompressionAlgorithm) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -72,21 +72,21 @@ func SerializeCompression_algorithm(values []Compression_algorithm) []string {
 	return result
 }
 
-func (i Compression_algorithm) isMultiValue() bool {
+func (i CompressionAlgorithm) isMultiValue() bool {
 	return false
 }
 
 // A set of values used to represent the status of stream compression.
 // [compression.h:349]
-type Compression_status int64
+type CompressionStatus int64
 
 const (
-	COMPRESSION_STATUS_OK    Compression_status = 0
-	COMPRESSION_STATUS_ERROR Compression_status = -1
-	COMPRESSION_STATUS_END   Compression_status = 1
+	COMPRESSION_STATUS_OK    CompressionStatus = 0
+	COMPRESSION_STATUS_ERROR CompressionStatus = -1
+	COMPRESSION_STATUS_END   CompressionStatus = 1
 )
 
-func (i Compression_status) String() string {
+func (i CompressionStatus) String() string {
 	switch i {
 	case COMPRESSION_STATUS_OK:
 		return "COMPRESSION_STATUS_OK"
@@ -95,11 +95,11 @@ func (i Compression_status) String() string {
 	case COMPRESSION_STATUS_END:
 		return "COMPRESSION_STATUS_END"
 	default:
-		return fmt.Sprintf("Compression_status(%d)", int64(i))
+		return fmt.Sprintf("CompressionStatus(%d)", int64(i))
 	}
 }
 
-func ParseCompression_status(v string) (any, error) {
+func ParseCompressionStatus(v string) (any, error) {
 	result := COMPRESSION_STATUS_OK
 	switch v {
 	case "COMPRESSION_STATUS_OK":
@@ -114,7 +114,7 @@ func ParseCompression_status(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeCompression_status(values []Compression_status) []string {
+func SerializeCompressionStatus(values []CompressionStatus) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -122,28 +122,28 @@ func SerializeCompression_status(values []Compression_status) []string {
 	return result
 }
 
-func (i Compression_status) isMultiValue() bool {
+func (i CompressionStatus) isMultiValue() bool {
 	return false
 }
 
 // A set of values used to represent stream compression flags.
 // [compression.h:342]
-type Compression_stream_flags int64
+type CompressionStreamFlags int64
 
 const (
-	COMPRESSION_STREAM_FINALIZE Compression_stream_flags = 1
+	COMPRESSION_STREAM_FINALIZE CompressionStreamFlags = 1
 )
 
-func (i Compression_stream_flags) String() string {
+func (i CompressionStreamFlags) String() string {
 	switch i {
 	case COMPRESSION_STREAM_FINALIZE:
 		return "COMPRESSION_STREAM_FINALIZE"
 	default:
-		return fmt.Sprintf("Compression_stream_flags(%d)", int64(i))
+		return fmt.Sprintf("CompressionStreamFlags(%d)", int64(i))
 	}
 }
 
-func ParseCompression_stream_flags(v string) (any, error) {
+func ParseCompressionStreamFlags(v string) (any, error) {
 	result := COMPRESSION_STREAM_FINALIZE
 	switch v {
 	case "COMPRESSION_STREAM_FINALIZE":
@@ -154,7 +154,7 @@ func ParseCompression_stream_flags(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeCompression_stream_flags(values []Compression_stream_flags) []string {
+func SerializeCompressionStreamFlags(values []CompressionStreamFlags) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -162,31 +162,31 @@ func SerializeCompression_stream_flags(values []Compression_stream_flags) []stri
 	return result
 }
 
-func (i Compression_stream_flags) isMultiValue() bool {
+func (i CompressionStreamFlags) isMultiValue() bool {
 	return false
 }
 
 // A set of values used to represent a stream compression operation.
 // [compression.h:331]
-type Compression_stream_operation int64
+type CompressionStreamOperation int64
 
 const (
-	COMPRESSION_STREAM_ENCODE Compression_stream_operation = 0
-	COMPRESSION_STREAM_DECODE Compression_stream_operation = 1
+	COMPRESSION_STREAM_ENCODE CompressionStreamOperation = 0
+	COMPRESSION_STREAM_DECODE CompressionStreamOperation = 1
 )
 
-func (i Compression_stream_operation) String() string {
+func (i CompressionStreamOperation) String() string {
 	switch i {
 	case COMPRESSION_STREAM_ENCODE:
 		return "COMPRESSION_STREAM_ENCODE"
 	case COMPRESSION_STREAM_DECODE:
 		return "COMPRESSION_STREAM_DECODE"
 	default:
-		return fmt.Sprintf("Compression_stream_operation(%d)", int64(i))
+		return fmt.Sprintf("CompressionStreamOperation(%d)", int64(i))
 	}
 }
 
-func ParseCompression_stream_operation(v string) (any, error) {
+func ParseCompressionStreamOperation(v string) (any, error) {
 	result := COMPRESSION_STREAM_ENCODE
 	switch v {
 	case "COMPRESSION_STREAM_ENCODE":
@@ -199,7 +199,7 @@ func ParseCompression_stream_operation(v string) (any, error) {
 	return &result, nil
 }
 
-func SerializeCompression_stream_operation(values []Compression_stream_operation) []string {
+func SerializeCompressionStreamOperation(values []CompressionStreamOperation) []string {
 	result := make([]string, len(values))
 	for i, v := range values {
 		result[i] = v.String()
@@ -207,6 +207,6 @@ func SerializeCompression_stream_operation(values []Compression_stream_operation
 	return result
 }
 
-func (i Compression_stream_operation) isMultiValue() bool {
+func (i CompressionStreamOperation) isMultiValue() bool {
 	return false
 }

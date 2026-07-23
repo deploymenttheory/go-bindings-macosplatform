@@ -9,8 +9,8 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/machtime"
 )
 
-func TimebaseInfo(info *raw.Mach_timebase_info) error {
-	if _rc := raw.Mach_timebase_infoFn(info); _rc != 0 {
+func TimebaseInfo(info *raw.MachTimebaseInfo) error {
+	if _rc := raw.Mach_timebase_info(info); _rc != 0 {
 		return fmt.Errorf("TimebaseInfo"+": status %d", _rc)
 	}
 	return nil

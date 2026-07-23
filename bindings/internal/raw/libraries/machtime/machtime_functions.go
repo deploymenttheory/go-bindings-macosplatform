@@ -16,7 +16,7 @@ var _ unsafe.Pointer // suppress unused import
 
 // [mach_time.h:46]
 // ID: objc-sym machtime.mach_timebase_info
-func Mach_timebase_infoFn(info *Mach_timebase_info) int32 {
+func Mach_timebase_info(info *MachTimebaseInfo) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.machtime_fn_mach_timebase_info(unsafe.Pointer(info), &_exc))
 	cgo.RaiseIfException(_exc)
