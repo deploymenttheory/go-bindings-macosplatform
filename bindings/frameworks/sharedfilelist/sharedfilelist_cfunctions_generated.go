@@ -29,13 +29,13 @@ func LSSharedFileListAddObserver(inList LSSharedFileListRef, inRunloop corefound
 var _fnLSSharedFileListCopyProperty func(objc.ID, objc.ID) objc.ID
 
 // LSSharedFileListCopyProperty calls the SharedFileList framework function LSSharedFileListCopyProperty.
-func LSSharedFileListCopyProperty(inList LSSharedFileListRef, inPropertyName corefoundation.CFStringRef) corefoundation.CFTypeRef {
+func LSSharedFileListCopyProperty(inList LSSharedFileListRef, inPropertyName corefoundation.CFStringRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListCopyProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListCopyProperty, _lib, "LSSharedFileListCopyProperty")
 	}
 	_ret := _fnLSSharedFileListCopyProperty(objref.IDOf(inList.Object), objref.IDOf(inPropertyName.Object))
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnLSSharedFileListCopySnapshot func(objc.ID, unsafe.Pointer) objc.ID
@@ -54,12 +54,12 @@ func LSSharedFileListCopySnapshot(inList LSSharedFileListRef) (result corefounda
 var _fnLSSharedFileListCreate func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // LSSharedFileListCreate calls the SharedFileList framework function LSSharedFileListCreate.
-func LSSharedFileListCreate(inAllocator corefoundation.CFAllocatorRef, inListType corefoundation.CFStringRef, listOptions corefoundation.CFTypeRef) LSSharedFileListRef {
+func LSSharedFileListCreate(inAllocator corefoundation.CFAllocatorRef, inListType corefoundation.CFStringRef, listOptions obj.Object) LSSharedFileListRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListCreate, _lib, "LSSharedFileListCreate")
 	}
-	_ret := _fnLSSharedFileListCreate(objref.IDOf(inAllocator.Object), objref.IDOf(inListType.Object), objref.IDOf(listOptions.Object))
+	_ret := _fnLSSharedFileListCreate(objref.IDOf(inAllocator.Object), objref.IDOf(inListType.Object), objref.IDOf(listOptions))
 	return LSSharedFileListRef{obj.Wrap(_ret)}
 }
 
@@ -136,13 +136,13 @@ func LSSharedFileListItemCopyIconRef(inItem LSSharedFileListItemRef) obj.Object 
 var _fnLSSharedFileListItemCopyProperty func(objc.ID, objc.ID) objc.ID
 
 // LSSharedFileListItemCopyProperty calls the SharedFileList framework function LSSharedFileListItemCopyProperty.
-func LSSharedFileListItemCopyProperty(inItem LSSharedFileListItemRef, inPropertyName corefoundation.CFStringRef) corefoundation.CFTypeRef {
+func LSSharedFileListItemCopyProperty(inItem LSSharedFileListItemRef, inPropertyName corefoundation.CFStringRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemCopyProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemCopyProperty, _lib, "LSSharedFileListItemCopyProperty")
 	}
 	_ret := _fnLSSharedFileListItemCopyProperty(objref.IDOf(inItem.Object), objref.IDOf(inPropertyName.Object))
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnLSSharedFileListItemGetID func(objc.ID) uint32

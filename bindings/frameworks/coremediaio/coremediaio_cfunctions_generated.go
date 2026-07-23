@@ -7,10 +7,10 @@ package coremediaio
 import (
 	"unsafe"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -123,10 +123,10 @@ func CMIOObjectShow(objectID int) {
 var _fnCMIOStreamClockConvertHostTimeToDeviceTime func(uint64, objc.ID) coremedia.CMTime
 
 // CMIOStreamClockConvertHostTimeToDeviceTime calls the CoreMediaIO framework function CMIOStreamClockConvertHostTimeToDeviceTime.
-func CMIOStreamClockConvertHostTimeToDeviceTime(hostTime uint64, clock corefoundation.CFTypeRef) coremedia.CMTime {
+func CMIOStreamClockConvertHostTimeToDeviceTime(hostTime uint64, clock obj.Object) coremedia.CMTime {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMIOStreamClockConvertHostTimeToDeviceTime == nil {
 		ebipurego.RegisterLibFunc(&_fnCMIOStreamClockConvertHostTimeToDeviceTime, _lib, "CMIOStreamClockConvertHostTimeToDeviceTime")
 	}
-	return _fnCMIOStreamClockConvertHostTimeToDeviceTime(hostTime, objref.IDOf(clock.Object))
+	return _fnCMIOStreamClockConvertHostTimeToDeviceTime(hostTime, objref.IDOf(clock))
 }

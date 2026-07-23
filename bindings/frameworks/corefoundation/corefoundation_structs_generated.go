@@ -654,12 +654,22 @@ type CFMutableArrayRef struct{ obj.Object }
 // it before using a returned handle; a nil handle's methods panic.
 func (h CFMutableArrayRef) IsNil() bool { return h.Object == nil }
 
+// AsArray returns this handle as its immutable CFArrayRef counterpart,
+// which any function taking a CFArrayRef accepts (a mutable ref is-a immutable ref).
+func (h CFMutableArrayRef) AsArray() CFArrayRef { return CFArrayRef{h.Object} }
+
 // CFMutableAttributedStringRef is a handle for the opaque CFMutableAttributedStringRef type.
 type CFMutableAttributedStringRef struct{ obj.Object }
 
 // IsNil reports whether CFMutableAttributedStringRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h CFMutableAttributedStringRef) IsNil() bool { return h.Object == nil }
+
+// AsAttributedString returns this handle as its immutable CFAttributedStringRef counterpart,
+// which any function taking a CFAttributedStringRef accepts (a mutable ref is-a immutable ref).
+func (h CFMutableAttributedStringRef) AsAttributedString() CFAttributedStringRef {
+	return CFAttributedStringRef{h.Object}
+}
 
 // CFMutableBagRef is a handle for the opaque CFMutableBagRef type.
 type CFMutableBagRef struct{ obj.Object }
@@ -668,12 +678,20 @@ type CFMutableBagRef struct{ obj.Object }
 // it before using a returned handle; a nil handle's methods panic.
 func (h CFMutableBagRef) IsNil() bool { return h.Object == nil }
 
+// AsBag returns this handle as its immutable CFBagRef counterpart,
+// which any function taking a CFBagRef accepts (a mutable ref is-a immutable ref).
+func (h CFMutableBagRef) AsBag() CFBagRef { return CFBagRef{h.Object} }
+
 // CFMutableBitVectorRef is a handle for the opaque CFMutableBitVectorRef type.
 type CFMutableBitVectorRef struct{ obj.Object }
 
 // IsNil reports whether CFMutableBitVectorRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h CFMutableBitVectorRef) IsNil() bool { return h.Object == nil }
+
+// AsBitVector returns this handle as its immutable CFBitVectorRef counterpart,
+// which any function taking a CFBitVectorRef accepts (a mutable ref is-a immutable ref).
+func (h CFMutableBitVectorRef) AsBitVector() CFBitVectorRef { return CFBitVectorRef{h.Object} }
 
 // CFMutableCharacterSetRef is a handle for the opaque CFMutableCharacterSetRef type.
 type CFMutableCharacterSetRef struct{ obj.Object }
@@ -682,12 +700,22 @@ type CFMutableCharacterSetRef struct{ obj.Object }
 // it before using a returned handle; a nil handle's methods panic.
 func (h CFMutableCharacterSetRef) IsNil() bool { return h.Object == nil }
 
+// AsCharacterSet returns this handle as its immutable CFCharacterSetRef counterpart,
+// which any function taking a CFCharacterSetRef accepts (a mutable ref is-a immutable ref).
+func (h CFMutableCharacterSetRef) AsCharacterSet() CFCharacterSetRef {
+	return CFCharacterSetRef{h.Object}
+}
+
 // CFMutableDataRef is a handle for the opaque CFMutableDataRef type.
 type CFMutableDataRef struct{ obj.Object }
 
 // IsNil reports whether CFMutableDataRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h CFMutableDataRef) IsNil() bool { return h.Object == nil }
+
+// AsData returns this handle as its immutable CFDataRef counterpart,
+// which any function taking a CFDataRef accepts (a mutable ref is-a immutable ref).
+func (h CFMutableDataRef) AsData() CFDataRef { return CFDataRef{h.Object} }
 
 // CFMutableDictionaryRef is a handle for the opaque CFMutableDictionaryRef type.
 type CFMutableDictionaryRef struct{ obj.Object }
@@ -696,6 +724,10 @@ type CFMutableDictionaryRef struct{ obj.Object }
 // it before using a returned handle; a nil handle's methods panic.
 func (h CFMutableDictionaryRef) IsNil() bool { return h.Object == nil }
 
+// AsDictionary returns this handle as its immutable CFDictionaryRef counterpart,
+// which any function taking a CFDictionaryRef accepts (a mutable ref is-a immutable ref).
+func (h CFMutableDictionaryRef) AsDictionary() CFDictionaryRef { return CFDictionaryRef{h.Object} }
+
 // CFMutableSetRef is a handle for the opaque CFMutableSetRef type.
 type CFMutableSetRef struct{ obj.Object }
 
@@ -703,12 +735,20 @@ type CFMutableSetRef struct{ obj.Object }
 // it before using a returned handle; a nil handle's methods panic.
 func (h CFMutableSetRef) IsNil() bool { return h.Object == nil }
 
+// AsSet returns this handle as its immutable CFSetRef counterpart,
+// which any function taking a CFSetRef accepts (a mutable ref is-a immutable ref).
+func (h CFMutableSetRef) AsSet() CFSetRef { return CFSetRef{h.Object} }
+
 // CFMutableStringRef is a handle for the opaque CFMutableStringRef type.
 type CFMutableStringRef struct{ obj.Object }
 
 // IsNil reports whether CFMutableStringRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h CFMutableStringRef) IsNil() bool { return h.Object == nil }
+
+// AsString returns this handle as its immutable CFStringRef counterpart,
+// which any function taking a CFStringRef accepts (a mutable ref is-a immutable ref).
+func (h CFMutableStringRef) AsString() CFStringRef { return CFStringRef{h.Object} }
 
 // CFNetDiagnosticRef is a handle for the opaque CFNetDiagnosticRef type.
 type CFNetDiagnosticRef struct{ obj.Object }
@@ -863,13 +903,6 @@ type CFTreeRef struct{ obj.Object }
 // IsNil reports whether CFTreeRef is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h CFTreeRef) IsNil() bool { return h.Object == nil }
-
-// CFTypeRef is a handle for the opaque CFTypeRef type.
-type CFTypeRef struct{ obj.Object }
-
-// IsNil reports whether CFTypeRef is a NULL handle (it wraps no object). Call
-// it before using a returned handle; a nil handle's methods panic.
-func (h CFTypeRef) IsNil() bool { return h.Object == nil }
 
 // CFURLEnumeratorRef is a handle for the opaque CFURLEnumeratorRef type.
 type CFURLEnumeratorRef struct{ obj.Object }

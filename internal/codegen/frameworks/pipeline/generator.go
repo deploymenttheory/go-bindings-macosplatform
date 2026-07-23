@@ -801,6 +801,13 @@ func buildMapper(reg *Registry) *typemap.Mapper {
 			if !typemap.IsCoreFoundationOpaqueRef(tName) {
 				continue
 			}
+			// CFTypeRef is the universal CF supertype (void *) — every CF object IS a
+			// CFTypeRef. Naming it as a distinct struct would force a conversion at the
+			// ~190 CFEqual/CFRetain/CFCopyDescription-style call sites, so it stays the
+			// generic obj.Object, which every named handle already satisfies.
+			if tName == "CFTypeRef" {
+				continue
+			}
 			if _, done := cfHandleIndex[tName]; done {
 				continue
 			}

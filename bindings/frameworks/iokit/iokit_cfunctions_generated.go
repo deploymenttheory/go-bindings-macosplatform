@@ -248,23 +248,23 @@ func IOConnectRelease(connect int) int {
 var _fnIOConnectSetCFProperties func(int, objc.ID) int32
 
 // IOConnectSetCFProperties calls the IOKit framework function IOConnectSetCFProperties.
-func IOConnectSetCFProperties(connect int, properties corefoundation.CFTypeRef) int {
+func IOConnectSetCFProperties(connect int, properties obj.Object) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOConnectSetCFProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnIOConnectSetCFProperties, _lib, "IOConnectSetCFProperties")
 	}
-	return int(_fnIOConnectSetCFProperties(connect, objref.IDOf(properties.Object)))
+	return int(_fnIOConnectSetCFProperties(connect, objref.IDOf(properties)))
 }
 
 var _fnIOConnectSetCFProperty func(int, objc.ID, objc.ID) int32
 
 // IOConnectSetCFProperty calls the IOKit framework function IOConnectSetCFProperty.
-func IOConnectSetCFProperty(connect int, propertyName corefoundation.CFStringRef, property corefoundation.CFTypeRef) int {
+func IOConnectSetCFProperty(connect int, propertyName corefoundation.CFStringRef, property obj.Object) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOConnectSetCFProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnIOConnectSetCFProperty, _lib, "IOConnectSetCFProperty")
 	}
-	return int(_fnIOConnectSetCFProperty(connect, objref.IDOf(propertyName.Object), objref.IDOf(property.Object)))
+	return int(_fnIOConnectSetCFProperty(connect, objref.IDOf(propertyName.Object), objref.IDOf(property)))
 }
 
 var _fnIOConnectSetNotificationPort func(int, uint32, int, int) int32
@@ -738,13 +738,13 @@ func IORegistryEntryCreateCFProperties(entry int, properties unsafe.Pointer, all
 var _fnIORegistryEntryCreateCFProperty func(int, objc.ID, objc.ID, int) objc.ID
 
 // IORegistryEntryCreateCFProperty calls the IOKit framework function IORegistryEntryCreateCFProperty.
-func IORegistryEntryCreateCFProperty(entry int, key corefoundation.CFStringRef, allocator corefoundation.CFAllocatorRef, options int) corefoundation.CFTypeRef {
+func IORegistryEntryCreateCFProperty(entry int, key corefoundation.CFStringRef, allocator corefoundation.CFAllocatorRef, options int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIORegistryEntryCreateCFProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntryCreateCFProperty, _lib, "IORegistryEntryCreateCFProperty")
 	}
 	_ret := _fnIORegistryEntryCreateCFProperty(entry, objref.IDOf(key.Object), objref.IDOf(allocator.Object), options)
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnIORegistryEntryCreateIterator func(int, string, int, unsafe.Pointer) int32
@@ -919,35 +919,35 @@ func IORegistryEntryInPlane(entry int, plane string) int {
 var _fnIORegistryEntrySearchCFProperty func(int, string, objc.ID, objc.ID, int) objc.ID
 
 // IORegistryEntrySearchCFProperty calls the IOKit framework function IORegistryEntrySearchCFProperty.
-func IORegistryEntrySearchCFProperty(entry int, plane string, key corefoundation.CFStringRef, allocator corefoundation.CFAllocatorRef, options int) corefoundation.CFTypeRef {
+func IORegistryEntrySearchCFProperty(entry int, plane string, key corefoundation.CFStringRef, allocator corefoundation.CFAllocatorRef, options int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIORegistryEntrySearchCFProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntrySearchCFProperty, _lib, "IORegistryEntrySearchCFProperty")
 	}
 	_ret := _fnIORegistryEntrySearchCFProperty(entry, plane, objref.IDOf(key.Object), objref.IDOf(allocator.Object), options)
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnIORegistryEntrySetCFProperties func(int, objc.ID) int32
 
 // IORegistryEntrySetCFProperties calls the IOKit framework function IORegistryEntrySetCFProperties.
-func IORegistryEntrySetCFProperties(entry int, properties corefoundation.CFTypeRef) int {
+func IORegistryEntrySetCFProperties(entry int, properties obj.Object) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIORegistryEntrySetCFProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntrySetCFProperties, _lib, "IORegistryEntrySetCFProperties")
 	}
-	return int(_fnIORegistryEntrySetCFProperties(entry, objref.IDOf(properties.Object)))
+	return int(_fnIORegistryEntrySetCFProperties(entry, objref.IDOf(properties)))
 }
 
 var _fnIORegistryEntrySetCFProperty func(int, objc.ID, objc.ID) int32
 
 // IORegistryEntrySetCFProperty calls the IOKit framework function IORegistryEntrySetCFProperty.
-func IORegistryEntrySetCFProperty(entry int, propertyName corefoundation.CFStringRef, property corefoundation.CFTypeRef) int {
+func IORegistryEntrySetCFProperty(entry int, propertyName corefoundation.CFStringRef, property obj.Object) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIORegistryEntrySetCFProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnIORegistryEntrySetCFProperty, _lib, "IORegistryEntrySetCFProperty")
 	}
-	return int(_fnIORegistryEntrySetCFProperty(entry, objref.IDOf(propertyName.Object), objref.IDOf(property.Object)))
+	return int(_fnIORegistryEntrySetCFProperty(entry, objref.IDOf(propertyName.Object), objref.IDOf(property)))
 }
 
 var _fnIORegistryGetRootEntry func(int) uint32

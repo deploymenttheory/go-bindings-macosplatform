@@ -320,12 +320,12 @@ func AXUIElementCopyParameterizedAttributeNames(element AXUIElementRef, names un
 var _fnAXUIElementCopyParameterizedAttributeValue func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) AXError
 
 // AXUIElementCopyParameterizedAttributeValue calls the HIServices framework function AXUIElementCopyParameterizedAttributeValue.
-func AXUIElementCopyParameterizedAttributeValue(element AXUIElementRef, parameterizedAttribute corefoundation.CFStringRef, parameter corefoundation.CFTypeRef, result unsafe.Pointer) AXError {
+func AXUIElementCopyParameterizedAttributeValue(element AXUIElementRef, parameterizedAttribute corefoundation.CFStringRef, parameter obj.Object, result unsafe.Pointer) AXError {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAXUIElementCopyParameterizedAttributeValue == nil {
 		ebipurego.RegisterLibFunc(&_fnAXUIElementCopyParameterizedAttributeValue, _lib, "AXUIElementCopyParameterizedAttributeValue")
 	}
-	return _fnAXUIElementCopyParameterizedAttributeValue(objref.IDOf(element.Object), objref.IDOf(parameterizedAttribute.Object), objref.IDOf(parameter.Object), result)
+	return _fnAXUIElementCopyParameterizedAttributeValue(objref.IDOf(element.Object), objref.IDOf(parameterizedAttribute.Object), objref.IDOf(parameter), result)
 }
 
 var _fnAXUIElementCreateApplication func(int) objc.ID
@@ -427,12 +427,12 @@ func AXUIElementPostKeyboardEvent(application AXUIElementRef, keyChar uint16, vi
 var _fnAXUIElementSetAttributeValue func(objc.ID, objc.ID, objc.ID) AXError
 
 // AXUIElementSetAttributeValue calls the HIServices framework function AXUIElementSetAttributeValue.
-func AXUIElementSetAttributeValue(element AXUIElementRef, attribute corefoundation.CFStringRef, value corefoundation.CFTypeRef) AXError {
+func AXUIElementSetAttributeValue(element AXUIElementRef, attribute corefoundation.CFStringRef, value obj.Object) AXError {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAXUIElementSetAttributeValue == nil {
 		ebipurego.RegisterLibFunc(&_fnAXUIElementSetAttributeValue, _lib, "AXUIElementSetAttributeValue")
 	}
-	return _fnAXUIElementSetAttributeValue(objref.IDOf(element.Object), objref.IDOf(attribute.Object), objref.IDOf(value.Object))
+	return _fnAXUIElementSetAttributeValue(objref.IDOf(element.Object), objref.IDOf(attribute.Object), objref.IDOf(value))
 }
 
 var _fnAXUIElementSetMessagingTimeout func(objc.ID, float32) AXError

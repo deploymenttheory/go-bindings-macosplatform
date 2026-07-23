@@ -41,12 +41,12 @@ func GSSCreateError(mech unsafe.Pointer, majorStatus uint32, minorStatus uint32)
 var _fnGSSCreateName func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // GSSCreateName calls the GSS framework function GSSCreateName.
-func GSSCreateName(name corefoundation.CFTypeRef, nameType unsafe.Pointer, err unsafe.Pointer) GssNameT {
+func GSSCreateName(name obj.Object, nameType unsafe.Pointer, err unsafe.Pointer) GssNameT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGSSCreateName == nil {
 		ebipurego.RegisterLibFunc(&_fnGSSCreateName, _lib, "GSSCreateName")
 	}
-	_ret := _fnGSSCreateName(objref.IDOf(name.Object), nameType, err)
+	_ret := _fnGSSCreateName(objref.IDOf(name), nameType, err)
 	return GssNameT{obj.WrapUnmanaged(_ret)}
 }
 

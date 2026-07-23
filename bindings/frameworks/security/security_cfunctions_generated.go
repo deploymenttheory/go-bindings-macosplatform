@@ -86,14 +86,14 @@ func CMSDecoderCopySignerSigningTime(cmsDecoder CMSDecoderRef, signerIndex int) 
 var _fnCMSDecoderCopySignerStatus func(objc.ID, int, objc.ID, uint8, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerStatus calls the Security framework function CMSDecoderCopySignerStatus.
-func CMSDecoderCopySignerStatus(cmsDecoder CMSDecoderRef, signerIndex int, policyOrArray corefoundation.CFTypeRef, evaluateSecTrust uint8, secTrustOut unsafe.Pointer) (result int, signerStatusOut CMSSignerStatus, certVerifyResultCodeOut int) {
+func CMSDecoderCopySignerStatus(cmsDecoder CMSDecoderRef, signerIndex int, policyOrArray obj.Object, evaluateSecTrust uint8, secTrustOut unsafe.Pointer) (result int, signerStatusOut CMSSignerStatus, certVerifyResultCodeOut int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopySignerStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerStatus, _lib, "CMSDecoderCopySignerStatus")
 	}
 	var _out0 CMSSignerStatus
 	var _out1 int
-	_ret := int(_fnCMSDecoderCopySignerStatus(objref.IDOf(cmsDecoder.Object), signerIndex, objref.IDOf(policyOrArray.Object), evaluateSecTrust, unsafe.Pointer(&_out0), secTrustOut, unsafe.Pointer(&_out1)))
+	_ret := int(_fnCMSDecoderCopySignerStatus(objref.IDOf(cmsDecoder.Object), signerIndex, objref.IDOf(policyOrArray), evaluateSecTrust, unsafe.Pointer(&_out0), secTrustOut, unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
@@ -113,13 +113,13 @@ func CMSDecoderCopySignerTimestamp(cmsDecoder CMSDecoderRef, signerIndex int) (r
 var _fnCMSDecoderCopySignerTimestampWithPolicy func(objc.ID, objc.ID, int, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerTimestampWithPolicy calls the Security framework function CMSDecoderCopySignerTimestampWithPolicy.
-func CMSDecoderCopySignerTimestampWithPolicy(cmsDecoder CMSDecoderRef, timeStampPolicy corefoundation.CFTypeRef, signerIndex int) (result int, timestamp float64) {
+func CMSDecoderCopySignerTimestampWithPolicy(cmsDecoder CMSDecoderRef, timeStampPolicy obj.Object, signerIndex int) (result int, timestamp float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopySignerTimestampWithPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerTimestampWithPolicy, _lib, "CMSDecoderCopySignerTimestampWithPolicy")
 	}
 	var _out0 float64
-	_ret := int(_fnCMSDecoderCopySignerTimestampWithPolicy(objref.IDOf(cmsDecoder.Object), objref.IDOf(timeStampPolicy.Object), signerIndex, unsafe.Pointer(&_out0)))
+	_ret := int(_fnCMSDecoderCopySignerTimestampWithPolicy(objref.IDOf(cmsDecoder.Object), objref.IDOf(timeStampPolicy), signerIndex, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -163,12 +163,12 @@ func CMSDecoderIsContentEncrypted(cmsDecoder CMSDecoderRef) (result int, isEncry
 var _fnCMSEncode func(objc.ID, objc.ID, unsafe.Pointer, uint8, CMSSignedAttributes, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // CMSEncode calls the Security framework function CMSEncode.
-func CMSEncode(signers corefoundation.CFTypeRef, recipients corefoundation.CFTypeRef, eContentType unsafe.Pointer, detachedContent uint8, signedAttributes CMSSignedAttributes, content unsafe.Pointer, contentLen int, encodedContentOut unsafe.Pointer) int {
+func CMSEncode(signers obj.Object, recipients obj.Object, eContentType unsafe.Pointer, detachedContent uint8, signedAttributes CMSSignedAttributes, content unsafe.Pointer, contentLen int, encodedContentOut unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncode == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncode, _lib, "CMSEncode")
 	}
-	return int(_fnCMSEncode(objref.IDOf(signers.Object), objref.IDOf(recipients.Object), eContentType, detachedContent, signedAttributes, content, contentLen, encodedContentOut))
+	return int(_fnCMSEncode(objref.IDOf(signers), objref.IDOf(recipients), eContentType, detachedContent, signedAttributes, content, contentLen, encodedContentOut))
 }
 
 var _fnCMSEncoderCopySignerTimestamp func(objc.ID, int, unsafe.Pointer) int32
@@ -187,13 +187,13 @@ func CMSEncoderCopySignerTimestamp(cmsEncoder CMSEncoderRef, signerIndex int) (r
 var _fnCMSEncoderCopySignerTimestampWithPolicy func(objc.ID, objc.ID, int, unsafe.Pointer) int32
 
 // CMSEncoderCopySignerTimestampWithPolicy calls the Security framework function CMSEncoderCopySignerTimestampWithPolicy.
-func CMSEncoderCopySignerTimestampWithPolicy(cmsEncoder CMSEncoderRef, timeStampPolicy corefoundation.CFTypeRef, signerIndex int) (result int, timestamp float64) {
+func CMSEncoderCopySignerTimestampWithPolicy(cmsEncoder CMSEncoderRef, timeStampPolicy obj.Object, signerIndex int) (result int, timestamp float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderCopySignerTimestampWithPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopySignerTimestampWithPolicy, _lib, "CMSEncoderCopySignerTimestampWithPolicy")
 	}
 	var _out0 float64
-	_ret := int(_fnCMSEncoderCopySignerTimestampWithPolicy(objref.IDOf(cmsEncoder.Object), objref.IDOf(timeStampPolicy.Object), signerIndex, unsafe.Pointer(&_out0)))
+	_ret := int(_fnCMSEncoderCopySignerTimestampWithPolicy(objref.IDOf(cmsEncoder.Object), objref.IDOf(timeStampPolicy), signerIndex, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
@@ -2873,12 +2873,12 @@ func SecAccessControlGetTypeID() int {
 var _fnSecAccessCopyMatchingACLList func(objc.ID, objc.ID) objc.ID
 
 // SecAccessCopyMatchingACLList calls the Security framework function SecAccessCopyMatchingACLList.
-func SecAccessCopyMatchingACLList(accessRef SecAccessRef, authorizationTag corefoundation.CFTypeRef) corefoundation.CFArrayRef {
+func SecAccessCopyMatchingACLList(accessRef SecAccessRef, authorizationTag obj.Object) corefoundation.CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAccessCopyMatchingACLList == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAccessCopyMatchingACLList, _lib, "SecAccessCopyMatchingACLList")
 	}
-	_ret := _fnSecAccessCopyMatchingACLList(objref.IDOf(accessRef.Object), objref.IDOf(authorizationTag.Object))
+	_ret := _fnSecAccessCopyMatchingACLList(objref.IDOf(accessRef.Object), objref.IDOf(authorizationTag))
 	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
 }
 
@@ -3297,12 +3297,12 @@ func SecIdentitySearchGetTypeID() int {
 var _fnSecItemExport func(objc.ID, SecExternalFormat, SecItemImportExportFlags, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecItemExport calls the Security framework function SecItemExport.
-func SecItemExport(secItemOrArray corefoundation.CFTypeRef, outputFormat SecExternalFormat, flags SecItemImportExportFlags, keyParams unsafe.Pointer, exportedData unsafe.Pointer) int {
+func SecItemExport(secItemOrArray obj.Object, outputFormat SecExternalFormat, flags SecItemImportExportFlags, keyParams unsafe.Pointer, exportedData unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecItemExport == nil {
 		ebipurego.RegisterLibFunc(&_fnSecItemExport, _lib, "SecItemExport")
 	}
-	return int(_fnSecItemExport(objref.IDOf(secItemOrArray.Object), outputFormat, flags, keyParams, exportedData))
+	return int(_fnSecItemExport(objref.IDOf(secItemOrArray), outputFormat, flags, keyParams, exportedData))
 }
 
 var _fnSecItemImport func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, SecItemImportExportFlags, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
@@ -3436,26 +3436,26 @@ func SecKeychainAttributeInfoForItemID(keychain SecKeychainRef, itemID int, info
 var _fnSecKeychainFindGenericPassword func(objc.ID, int, string, int, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecKeychainFindGenericPassword calls the Security framework function SecKeychainFindGenericPassword.
-func SecKeychainFindGenericPassword(keychainOrArray corefoundation.CFTypeRef, serviceNameLength int, serviceName string, accountNameLength int, accountName string, passwordData unsafe.Pointer, itemRef unsafe.Pointer) (result int, passwordLength int) {
+func SecKeychainFindGenericPassword(keychainOrArray obj.Object, serviceNameLength int, serviceName string, accountNameLength int, accountName string, passwordData unsafe.Pointer, itemRef unsafe.Pointer) (result int, passwordLength int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainFindGenericPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainFindGenericPassword, _lib, "SecKeychainFindGenericPassword")
 	}
 	var _out0 int
-	_ret := int(_fnSecKeychainFindGenericPassword(objref.IDOf(keychainOrArray.Object), serviceNameLength, serviceName, accountNameLength, accountName, unsafe.Pointer(&_out0), passwordData, itemRef))
+	_ret := int(_fnSecKeychainFindGenericPassword(objref.IDOf(keychainOrArray), serviceNameLength, serviceName, accountNameLength, accountName, unsafe.Pointer(&_out0), passwordData, itemRef))
 	return _ret, _out0
 }
 
 var _fnSecKeychainFindInternetPassword func(objc.ID, int, string, int, string, int, string, int, string, uint16, SecProtocolType, SecAuthenticationType, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecKeychainFindInternetPassword calls the Security framework function SecKeychainFindInternetPassword.
-func SecKeychainFindInternetPassword(keychainOrArray corefoundation.CFTypeRef, serverNameLength int, serverName string, securityDomainLength int, securityDomain string, accountNameLength int, accountName string, pathLength int, path string, port uint16, protocol SecProtocolType, authenticationType SecAuthenticationType, passwordData unsafe.Pointer, itemRef unsafe.Pointer) (result int, passwordLength int) {
+func SecKeychainFindInternetPassword(keychainOrArray obj.Object, serverNameLength int, serverName string, securityDomainLength int, securityDomain string, accountNameLength int, accountName string, pathLength int, path string, port uint16, protocol SecProtocolType, authenticationType SecAuthenticationType, passwordData unsafe.Pointer, itemRef unsafe.Pointer) (result int, passwordLength int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainFindInternetPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainFindInternetPassword, _lib, "SecKeychainFindInternetPassword")
 	}
 	var _out0 int
-	_ret := int(_fnSecKeychainFindInternetPassword(objref.IDOf(keychainOrArray.Object), serverNameLength, serverName, securityDomainLength, securityDomain, accountNameLength, accountName, pathLength, path, port, protocol, authenticationType, unsafe.Pointer(&_out0), passwordData, itemRef))
+	_ret := int(_fnSecKeychainFindInternetPassword(objref.IDOf(keychainOrArray), serverNameLength, serverName, securityDomainLength, securityDomain, accountNameLength, accountName, pathLength, path, port, protocol, authenticationType, unsafe.Pointer(&_out0), passwordData, itemRef))
 	return _ret, _out0
 }
 
@@ -3601,12 +3601,12 @@ func SecKeychainItemCreateFromContent(itemClass SecItemClass, attrList unsafe.Po
 var _fnSecKeychainItemExport func(objc.ID, SecExternalFormat, SecItemImportExportFlags, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecKeychainItemExport calls the Security framework function SecKeychainItemExport.
-func SecKeychainItemExport(keychainItemOrArray corefoundation.CFTypeRef, outputFormat SecExternalFormat, flags SecItemImportExportFlags, keyParams unsafe.Pointer, exportedData unsafe.Pointer) int {
+func SecKeychainItemExport(keychainItemOrArray obj.Object, outputFormat SecExternalFormat, flags SecItemImportExportFlags, keyParams unsafe.Pointer, exportedData unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemExport == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemExport, _lib, "SecKeychainItemExport")
 	}
-	return int(_fnSecKeychainItemExport(objref.IDOf(keychainItemOrArray.Object), outputFormat, flags, keyParams, exportedData))
+	return int(_fnSecKeychainItemExport(objref.IDOf(keychainItemOrArray), outputFormat, flags, keyParams, exportedData))
 }
 
 var _fnSecKeychainItemFreeAttributesAndData func(unsafe.Pointer, unsafe.Pointer) int32
@@ -3692,12 +3692,12 @@ func SecKeychainItemModifyContent(itemRef SecKeychainItemRef, attrList unsafe.Po
 var _fnSecKeychainSearchCreateFromAttributes func(objc.ID, SecItemClass, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecKeychainSearchCreateFromAttributes calls the Security framework function SecKeychainSearchCreateFromAttributes.
-func SecKeychainSearchCreateFromAttributes(keychainOrArray corefoundation.CFTypeRef, itemClass SecItemClass, attrList unsafe.Pointer, searchRef unsafe.Pointer) int {
+func SecKeychainSearchCreateFromAttributes(keychainOrArray obj.Object, itemClass SecItemClass, attrList unsafe.Pointer, searchRef unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSearchCreateFromAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSearchCreateFromAttributes, _lib, "SecKeychainSearchCreateFromAttributes")
 	}
-	return int(_fnSecKeychainSearchCreateFromAttributes(objref.IDOf(keychainOrArray.Object), itemClass, attrList, searchRef))
+	return int(_fnSecKeychainSearchCreateFromAttributes(objref.IDOf(keychainOrArray), itemClass, attrList, searchRef))
 }
 
 var _fnSecKeychainSearchGetTypeID func() int
@@ -3762,24 +3762,24 @@ func SecPolicyCreateSSL(server uint8, hostname corefoundation.CFStringRef) SecPo
 var _fnSecPolicyCreateWithOID func(objc.ID) objc.ID
 
 // SecPolicyCreateWithOID calls the Security framework function SecPolicyCreateWithOID.
-func SecPolicyCreateWithOID(policyOID corefoundation.CFTypeRef) SecPolicyRef {
+func SecPolicyCreateWithOID(policyOID obj.Object) SecPolicyRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicyCreateWithOID == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateWithOID, _lib, "SecPolicyCreateWithOID")
 	}
-	_ret := _fnSecPolicyCreateWithOID(objref.IDOf(policyOID.Object))
+	_ret := _fnSecPolicyCreateWithOID(objref.IDOf(policyOID))
 	return SecPolicyRef{obj.Adopt(_ret)}
 }
 
 var _fnSecPolicyCreateWithProperties func(objc.ID, objc.ID) objc.ID
 
 // SecPolicyCreateWithProperties calls the Security framework function SecPolicyCreateWithProperties.
-func SecPolicyCreateWithProperties(policyIdentifier corefoundation.CFTypeRef, properties corefoundation.CFDictionaryRef) SecPolicyRef {
+func SecPolicyCreateWithProperties(policyIdentifier obj.Object, properties corefoundation.CFDictionaryRef) SecPolicyRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicyCreateWithProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateWithProperties, _lib, "SecPolicyCreateWithProperties")
 	}
-	_ret := _fnSecPolicyCreateWithProperties(objref.IDOf(policyIdentifier.Object), objref.IDOf(properties.Object))
+	_ret := _fnSecPolicyCreateWithProperties(objref.IDOf(policyIdentifier), objref.IDOf(properties.Object))
 	return SecPolicyRef{obj.Adopt(_ret)}
 }
 
@@ -3944,13 +3944,13 @@ func SecTaskGetTypeID() int {
 var _fnSecTranformCustomGetAttribute func(objc.ID, unsafe.Pointer, SecTransformMetaAttributeType) objc.ID
 
 // SecTranformCustomGetAttribute calls the Security framework function SecTranformCustomGetAttribute.
-func SecTranformCustomGetAttribute(ref SecTransformImplementationRef, attribute unsafe.Pointer, type_ SecTransformMetaAttributeType) corefoundation.CFTypeRef {
+func SecTranformCustomGetAttribute(ref SecTransformImplementationRef, attribute unsafe.Pointer, type_ SecTransformMetaAttributeType) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTranformCustomGetAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTranformCustomGetAttribute, _lib, "SecTranformCustomGetAttribute")
 	}
 	_ret := _fnSecTranformCustomGetAttribute(objref.IDOf(ref.Object), attribute, type_)
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnSecTransformCopyExternalRepresentation func(unsafe.Pointer) objc.ID
@@ -3990,25 +3990,25 @@ func SecTransformCreateReadTransformWithReadStream(inputStream corefoundation.CF
 var _fnSecTransformCustomGetAttribute func(objc.ID, unsafe.Pointer, SecTransformMetaAttributeType) objc.ID
 
 // SecTransformCustomGetAttribute calls the Security framework function SecTransformCustomGetAttribute.
-func SecTransformCustomGetAttribute(ref SecTransformImplementationRef, attribute unsafe.Pointer, type_ SecTransformMetaAttributeType) corefoundation.CFTypeRef {
+func SecTransformCustomGetAttribute(ref SecTransformImplementationRef, attribute unsafe.Pointer, type_ SecTransformMetaAttributeType) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformCustomGetAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformCustomGetAttribute, _lib, "SecTransformCustomGetAttribute")
 	}
 	_ret := _fnSecTransformCustomGetAttribute(objref.IDOf(ref.Object), attribute, type_)
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnSecTransformCustomSetAttribute func(objc.ID, unsafe.Pointer, SecTransformMetaAttributeType, objc.ID) objc.ID
 
 // SecTransformCustomSetAttribute calls the Security framework function SecTransformCustomSetAttribute.
-func SecTransformCustomSetAttribute(ref SecTransformImplementationRef, attribute unsafe.Pointer, type_ SecTransformMetaAttributeType, value corefoundation.CFTypeRef) corefoundation.CFTypeRef {
+func SecTransformCustomSetAttribute(ref SecTransformImplementationRef, attribute unsafe.Pointer, type_ SecTransformMetaAttributeType, value obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformCustomSetAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformCustomSetAttribute, _lib, "SecTransformCustomSetAttribute")
 	}
-	_ret := _fnSecTransformCustomSetAttribute(objref.IDOf(ref.Object), attribute, type_, objref.IDOf(value.Object))
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	_ret := _fnSecTransformCustomSetAttribute(objref.IDOf(ref.Object), attribute, type_, objref.IDOf(value))
+	return obj.Wrap(_ret)
 }
 
 var _fnSecTransformExecuteAsync func(unsafe.Pointer, objc.ID, objc.Block)
@@ -4036,13 +4036,13 @@ func SecTransformFindByName(transform unsafe.Pointer, name corefoundation.CFStri
 var _fnSecTransformGetAttribute func(unsafe.Pointer, objc.ID) objc.ID
 
 // SecTransformGetAttribute calls the Security framework function SecTransformGetAttribute.
-func SecTransformGetAttribute(transformRef unsafe.Pointer, key corefoundation.CFStringRef) corefoundation.CFTypeRef {
+func SecTransformGetAttribute(transformRef unsafe.Pointer, key corefoundation.CFStringRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformGetAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformGetAttribute, _lib, "SecTransformGetAttribute")
 	}
 	_ret := _fnSecTransformGetAttribute(transformRef, objref.IDOf(key.Object))
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnSecTransformGetTypeID func() int
@@ -4059,25 +4059,25 @@ func SecTransformGetTypeID() int {
 var _fnSecTransformNoData func() objc.ID
 
 // SecTransformNoData calls the Security framework function SecTransformNoData.
-func SecTransformNoData() corefoundation.CFTypeRef {
+func SecTransformNoData() obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformNoData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformNoData, _lib, "SecTransformNoData")
 	}
 	_ret := _fnSecTransformNoData()
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnSecTransformPushbackAttribute func(objc.ID, unsafe.Pointer, objc.ID) objc.ID
 
 // SecTransformPushbackAttribute calls the Security framework function SecTransformPushbackAttribute.
-func SecTransformPushbackAttribute(ref SecTransformImplementationRef, attribute unsafe.Pointer, value corefoundation.CFTypeRef) corefoundation.CFTypeRef {
+func SecTransformPushbackAttribute(ref SecTransformImplementationRef, attribute unsafe.Pointer, value obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformPushbackAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformPushbackAttribute, _lib, "SecTransformPushbackAttribute")
 	}
-	_ret := _fnSecTransformPushbackAttribute(objref.IDOf(ref.Object), attribute, objref.IDOf(value.Object))
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	_ret := _fnSecTransformPushbackAttribute(objref.IDOf(ref.Object), attribute, objref.IDOf(value))
+	return obj.Wrap(_ret)
 }
 
 var _fnSecTransformSetAttributeAction func(objc.ID, objc.ID, unsafe.Pointer, objc.Block) objc.ID

@@ -338,12 +338,12 @@ func JRSUIControlSetUserInterfaceLayoutDirection(control unsafe.Pointer, value i
 var _fnJRSUIControlSetValueByKey func(unsafe.Pointer, objc.ID, objc.ID)
 
 // JRSUIControlSetValueByKey calls the JavaRuntimeSupport framework function JRSUIControlSetValueByKey.
-func JRSUIControlSetValueByKey(control unsafe.Pointer, key corefoundation.CFTypeRef, value corefoundation.CFTypeRef) {
+func JRSUIControlSetValueByKey(control unsafe.Pointer, key obj.Object, value obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSUIControlSetValueByKey == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetValueByKey, _lib, "JRSUIControlSetValueByKey")
 	}
-	_fnJRSUIControlSetValueByKey(control, objref.IDOf(key.Object), objref.IDOf(value.Object))
+	_fnJRSUIControlSetValueByKey(control, objref.IDOf(key), objref.IDOf(value))
 }
 
 var _fnJRSUIControlSetVariant func(unsafe.Pointer, int)
@@ -393,13 +393,13 @@ func JRSUIControlShouldScrollToClick() uint8 {
 var _fnJRSUIGetKey func(int) objc.ID
 
 // JRSUIGetKey calls the JavaRuntimeSupport framework function JRSUIGetKey.
-func JRSUIGetKey(value int) corefoundation.CFTypeRef {
+func JRSUIGetKey(value int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSUIGetKey == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSUIGetKey, _lib, "JRSUIGetKey")
 	}
 	_ret := _fnJRSUIGetKey(value)
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnJRSUIRendererCreate func() unsafe.Pointer

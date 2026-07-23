@@ -81,4 +81,11 @@ type HandleType struct {
 	Doc string
 	// GoName is the exported handle type name (e.g. "CFArrayRef").
 	GoName string
+	// ImmutableType, when non-empty, is the immutable counterpart type name of a
+	// CFMutable<X>Ref handle (e.g. "CFArrayRef" for "CFMutableArrayRef"); the
+	// generated ImmutableMethod converts to it. In C a mutable ref IS-A immutable
+	// ref, a subtyping the distinct Go types lose, so this restores the widening.
+	ImmutableType string
+	// ImmutableMethod is the conversion method name (e.g. "AsArray").
+	ImmutableMethod string
 }

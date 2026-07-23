@@ -7,7 +7,6 @@ package discrecordingui
 import (
 	"unsafe"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -17,12 +16,12 @@ import (
 var _fnDRBurnSessionBeginProgressDialog func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // DRBurnSessionBeginProgressDialog calls the DiscRecordingUI framework function DRBurnSessionBeginProgressDialog.
-func DRBurnSessionBeginProgressDialog(burnSession DRBurnSessionRef, layout corefoundation.CFTypeRef, options unsafe.Pointer, progressCallbacks unsafe.Pointer) {
+func DRBurnSessionBeginProgressDialog(burnSession DRBurnSessionRef, layout obj.Object, options unsafe.Pointer, progressCallbacks unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnSessionBeginProgressDialog == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnSessionBeginProgressDialog, _lib, "DRBurnSessionBeginProgressDialog")
 	}
-	_fnDRBurnSessionBeginProgressDialog(objref.IDOf(burnSession.Object), objref.IDOf(layout.Object), options, progressCallbacks)
+	_fnDRBurnSessionBeginProgressDialog(objref.IDOf(burnSession.Object), objref.IDOf(layout), options, progressCallbacks)
 }
 
 var _fnDRBurnSessionCreate func() objc.ID

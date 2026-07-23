@@ -305,23 +305,23 @@ func CGImageMetadataSetTagWithPath(metadata coregraphics.CGMutableImageMetadataR
 var _fnCGImageMetadataSetValueMatchingImageProperty func(objc.ID, objc.ID, objc.ID, objc.ID) bool
 
 // CGImageMetadataSetValueMatchingImageProperty calls the ImageIO framework function CGImageMetadataSetValueMatchingImageProperty.
-func CGImageMetadataSetValueMatchingImageProperty(metadata coregraphics.CGMutableImageMetadataRef, dictionaryName corefoundation.CFStringRef, propertyName corefoundation.CFStringRef, value corefoundation.CFTypeRef) bool {
+func CGImageMetadataSetValueMatchingImageProperty(metadata coregraphics.CGMutableImageMetadataRef, dictionaryName corefoundation.CFStringRef, propertyName corefoundation.CFStringRef, value obj.Object) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataSetValueMatchingImageProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataSetValueMatchingImageProperty, _lib, "CGImageMetadataSetValueMatchingImageProperty")
 	}
-	return _fnCGImageMetadataSetValueMatchingImageProperty(objref.IDOf(metadata.Object), objref.IDOf(dictionaryName.Object), objref.IDOf(propertyName.Object), objref.IDOf(value.Object))
+	return _fnCGImageMetadataSetValueMatchingImageProperty(objref.IDOf(metadata.Object), objref.IDOf(dictionaryName.Object), objref.IDOf(propertyName.Object), objref.IDOf(value))
 }
 
 var _fnCGImageMetadataSetValueWithPath func(objc.ID, objc.ID, objc.ID, objc.ID) bool
 
 // CGImageMetadataSetValueWithPath calls the ImageIO framework function CGImageMetadataSetValueWithPath.
-func CGImageMetadataSetValueWithPath(metadata coregraphics.CGMutableImageMetadataRef, parent coregraphics.CGImageMetadataTagRef, path corefoundation.CFStringRef, value corefoundation.CFTypeRef) bool {
+func CGImageMetadataSetValueWithPath(metadata coregraphics.CGMutableImageMetadataRef, parent coregraphics.CGImageMetadataTagRef, path corefoundation.CFStringRef, value obj.Object) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataSetValueWithPath == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataSetValueWithPath, _lib, "CGImageMetadataSetValueWithPath")
 	}
-	return _fnCGImageMetadataSetValueWithPath(objref.IDOf(metadata.Object), objref.IDOf(parent.Object), objref.IDOf(path.Object), objref.IDOf(value.Object))
+	return _fnCGImageMetadataSetValueWithPath(objref.IDOf(metadata.Object), objref.IDOf(parent.Object), objref.IDOf(path.Object), objref.IDOf(value))
 }
 
 var _fnCGImageMetadataTagCopyName func(objc.ID) objc.ID
@@ -375,24 +375,24 @@ func CGImageMetadataTagCopyQualifiers(tag coregraphics.CGImageMetadataTagRef) co
 var _fnCGImageMetadataTagCopyValue func(objc.ID) objc.ID
 
 // CGImageMetadataTagCopyValue calls the ImageIO framework function CGImageMetadataTagCopyValue.
-func CGImageMetadataTagCopyValue(tag coregraphics.CGImageMetadataTagRef) corefoundation.CFTypeRef {
+func CGImageMetadataTagCopyValue(tag coregraphics.CGImageMetadataTagRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCopyValue == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCopyValue, _lib, "CGImageMetadataTagCopyValue")
 	}
 	_ret := _fnCGImageMetadataTagCopyValue(objref.IDOf(tag.Object))
-	return corefoundation.CFTypeRef{obj.Adopt(_ret)}
+	return obj.Adopt(_ret)
 }
 
 var _fnCGImageMetadataTagCreate func(objc.ID, objc.ID, objc.ID, CGImageMetadataType, objc.ID) objc.ID
 
 // CGImageMetadataTagCreate calls the ImageIO framework function CGImageMetadataTagCreate.
-func CGImageMetadataTagCreate(xmlns corefoundation.CFStringRef, prefix corefoundation.CFStringRef, name corefoundation.CFStringRef, type_ CGImageMetadataType, value corefoundation.CFTypeRef) coregraphics.CGImageMetadataTagRef {
+func CGImageMetadataTagCreate(xmlns corefoundation.CFStringRef, prefix corefoundation.CFStringRef, name corefoundation.CFStringRef, type_ CGImageMetadataType, value obj.Object) coregraphics.CGImageMetadataTagRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataTagCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataTagCreate, _lib, "CGImageMetadataTagCreate")
 	}
-	_ret := _fnCGImageMetadataTagCreate(objref.IDOf(xmlns.Object), objref.IDOf(prefix.Object), objref.IDOf(name.Object), type_, objref.IDOf(value.Object))
+	_ret := _fnCGImageMetadataTagCreate(objref.IDOf(xmlns.Object), objref.IDOf(prefix.Object), objref.IDOf(name.Object), type_, objref.IDOf(value))
 	return coregraphics.CGImageMetadataTagRef{obj.Adopt(_ret)}
 }
 

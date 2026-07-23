@@ -361,9 +361,12 @@ func emitStructs(
 		// under this Go name — parity is unchanged).
 		if len(s.Fields) == 0 && handleNames[goName] {
 			imports["obj"] = objImportPath
+			immType, immMethod := immutableConversion(goName, handleNames)
 			handleTypes = append(handleTypes, view.HandleType{
-				Doc:    fmt.Sprintf("%s is a handle for the opaque %s type.", goName, keyOf[goName]),
-				GoName: goName,
+				Doc:             fmt.Sprintf("%s is a handle for the opaque %s type.", goName, keyOf[goName]),
+				GoName:          goName,
+				ImmutableType:   immType,
+				ImmutableMethod: immMethod,
 			})
 			emittedHandle[goName] = true
 			continue
@@ -560,6 +563,7 @@ func buildCFHandleTypeViews(
 	imports map[string]string,
 ) []view.HandleType {
 	pkg := naming.PackageName(framework.Framework)
+	handleNames := packageHandleNames(framework, mapper)
 	var names []string
 	for name, ref := range mapper.CFHandleIndex {
 		if ref.Package == pkg {
@@ -579,12 +583,35 @@ func buildCFHandleTypeViews(
 		}
 		takenNames[goName] = true
 		imports["obj"] = objImportPath
+		immType, immMethod := immutableConversion(goName, handleNames)
 		out = append(out, view.HandleType{
-			Doc:    fmt.Sprintf("%s is a handle for the opaque %s type.", goName, name),
-			GoName: goName,
+			Doc:             fmt.Sprintf("%s is a handle for the opaque %s type.", goName, name),
+			GoName:          goName,
+			ImmutableType:   immType,
+			ImmutableMethod: immMethod,
 		})
 	}
 	return out
+}
+
+// immutableConversion derives the immutable-counterpart conversion for a mutable
+// handle type: a "CFMutable<X>Ref" whose "CF<X>Ref" is also a handle this package
+// owns yields (immutableType "CF<X>Ref", method "As<X>"). It reports ("","") for
+// any name that is not a mutable handle with an owned immutable counterpart.
+func immutableConversion(goName string, handleNames map[string]bool) (immutableType, method string) {
+	core, ok := strings.CutPrefix(goName, "CFMutable")
+	if !ok {
+		return "", ""
+	}
+	core, ok = strings.CutSuffix(core, "Ref")
+	if !ok || core == "" {
+		return "", ""
+	}
+	imm := "CF" + core + "Ref"
+	if !handleNames[imm] {
+		return "", ""
+	}
+	return imm, "As" + core
 }
 
 // packageHandleNames is the set of Go handle-type names the given framework's

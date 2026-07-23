@@ -66,13 +66,13 @@ func MDCopyLabelsWithKind(kind corefoundation.CFStringRef) corefoundation.CFArra
 var _fnMDItemCopyAttribute func(objc.ID, objc.ID) objc.ID
 
 // MDItemCopyAttribute calls the Metadata framework function MDItemCopyAttribute.
-func MDItemCopyAttribute(item MDItemRef, name corefoundation.CFStringRef) corefoundation.CFTypeRef {
+func MDItemCopyAttribute(item MDItemRef, name corefoundation.CFStringRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDItemCopyAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnMDItemCopyAttribute, _lib, "MDItemCopyAttribute")
 	}
 	_ret := _fnMDItemCopyAttribute(objref.IDOf(item.Object), objref.IDOf(name.Object))
-	return corefoundation.CFTypeRef{obj.Adopt(_ret)}
+	return obj.Adopt(_ret)
 }
 
 var _fnMDItemCopyAttributeNames func(objc.ID) objc.ID
@@ -206,13 +206,13 @@ func MDItemsCreateWithURLs(allocator corefoundation.CFAllocatorRef, urls corefou
 var _fnMDLabelCopyAttribute func(objc.ID, objc.ID) objc.ID
 
 // MDLabelCopyAttribute calls the Metadata framework function MDLabelCopyAttribute.
-func MDLabelCopyAttribute(label MDLabelRef, name corefoundation.CFStringRef) corefoundation.CFTypeRef {
+func MDLabelCopyAttribute(label MDLabelRef, name corefoundation.CFStringRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDLabelCopyAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnMDLabelCopyAttribute, _lib, "MDLabelCopyAttribute")
 	}
 	_ret := _fnMDLabelCopyAttribute(objref.IDOf(label.Object), objref.IDOf(name.Object))
-	return corefoundation.CFTypeRef{obj.Adopt(_ret)}
+	return obj.Adopt(_ret)
 }
 
 var _fnMDLabelCopyAttributeName func(objc.ID) objc.ID
@@ -414,12 +414,12 @@ func MDQueryGetBatchingParameters(query MDQueryRef) unsafe.Pointer {
 var _fnMDQueryGetCountOfResultsWithAttributeValue func(objc.ID, objc.ID, objc.ID) int
 
 // MDQueryGetCountOfResultsWithAttributeValue calls the Metadata framework function MDQueryGetCountOfResultsWithAttributeValue.
-func MDQueryGetCountOfResultsWithAttributeValue(query MDQueryRef, name corefoundation.CFStringRef, value corefoundation.CFTypeRef) int {
+func MDQueryGetCountOfResultsWithAttributeValue(query MDQueryRef, name corefoundation.CFStringRef, value obj.Object) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMDQueryGetCountOfResultsWithAttributeValue == nil {
 		ebipurego.RegisterLibFunc(&_fnMDQueryGetCountOfResultsWithAttributeValue, _lib, "MDQueryGetCountOfResultsWithAttributeValue")
 	}
-	return _fnMDQueryGetCountOfResultsWithAttributeValue(objref.IDOf(query.Object), objref.IDOf(name.Object), objref.IDOf(value.Object))
+	return _fnMDQueryGetCountOfResultsWithAttributeValue(objref.IDOf(query.Object), objref.IDOf(name.Object), objref.IDOf(value))
 }
 
 var _fnMDQueryGetIndexOfResult func(objc.ID, unsafe.Pointer) int

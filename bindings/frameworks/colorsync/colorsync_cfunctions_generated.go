@@ -110,13 +110,13 @@ func ColorSyncCMMGetTypeID() int {
 var _fnColorSyncCreateCodeFragment func(objc.ID, objc.ID) objc.ID
 
 // ColorSyncCreateCodeFragment calls the ColorSync framework function ColorSyncCreateCodeFragment.
-func ColorSyncCreateCodeFragment(profileSequence corefoundation.CFArrayRef, options corefoundation.CFDictionaryRef) corefoundation.CFTypeRef {
+func ColorSyncCreateCodeFragment(profileSequence corefoundation.CFArrayRef, options corefoundation.CFDictionaryRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncCreateCodeFragment == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncCreateCodeFragment, _lib, "ColorSyncCreateCodeFragment")
 	}
 	_ret := _fnColorSyncCreateCodeFragment(objref.IDOf(profileSequence.Object), objref.IDOf(options.Object))
-	return corefoundation.CFTypeRef{obj.Adopt(_ret)}
+	return obj.Adopt(_ret)
 }
 
 var _fnColorSyncDeviceCopyDeviceInfo func(objc.ID, objc.ID) objc.ID
@@ -252,12 +252,12 @@ func ColorSyncProfileCopyTagSignatures(prof ColorSyncProfileRef) corefoundation.
 var _fnColorSyncProfileCreateDeviceProfile func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // ColorSyncProfileCreateDeviceProfile calls the ColorSync framework function ColorSyncProfileCreateDeviceProfile.
-func ColorSyncProfileCreateDeviceProfile(deviceClass corefoundation.CFStringRef, deviceID corefoundation.CFUUIDRef, profileID corefoundation.CFTypeRef) ColorSyncProfileRef {
+func ColorSyncProfileCreateDeviceProfile(deviceClass corefoundation.CFStringRef, deviceID corefoundation.CFUUIDRef, profileID obj.Object) ColorSyncProfileRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreateDeviceProfile == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateDeviceProfile, _lib, "ColorSyncProfileCreateDeviceProfile")
 	}
-	_ret := _fnColorSyncProfileCreateDeviceProfile(objref.IDOf(deviceClass.Object), objref.IDOf(deviceID.Object), objref.IDOf(profileID.Object))
+	_ret := _fnColorSyncProfileCreateDeviceProfile(objref.IDOf(deviceClass.Object), objref.IDOf(deviceID.Object), objref.IDOf(profileID))
 	return ColorSyncProfileRef{obj.WrapUnmanaged(_ret)}
 }
 
@@ -479,13 +479,13 @@ func ColorSyncTransformConvert(transform ColorSyncTransformRef, width int, heigh
 var _fnColorSyncTransformCopyProperty func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // ColorSyncTransformCopyProperty calls the ColorSync framework function ColorSyncTransformCopyProperty.
-func ColorSyncTransformCopyProperty(transform ColorSyncTransformRef, key corefoundation.CFTypeRef, options corefoundation.CFDictionaryRef) corefoundation.CFTypeRef {
+func ColorSyncTransformCopyProperty(transform ColorSyncTransformRef, key obj.Object, options corefoundation.CFDictionaryRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncTransformCopyProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncTransformCopyProperty, _lib, "ColorSyncTransformCopyProperty")
 	}
-	_ret := _fnColorSyncTransformCopyProperty(objref.IDOf(transform.Object), objref.IDOf(key.Object), objref.IDOf(options.Object))
-	return corefoundation.CFTypeRef{obj.Adopt(_ret)}
+	_ret := _fnColorSyncTransformCopyProperty(objref.IDOf(transform.Object), objref.IDOf(key), objref.IDOf(options.Object))
+	return obj.Adopt(_ret)
 }
 
 var _fnColorSyncTransformCreate func(objc.ID, objc.ID) objc.ID
@@ -526,12 +526,12 @@ func ColorSyncTransformGetTypeID() int {
 var _fnColorSyncTransformSetProperty func(objc.ID, objc.ID, objc.ID)
 
 // ColorSyncTransformSetProperty calls the ColorSync framework function ColorSyncTransformSetProperty.
-func ColorSyncTransformSetProperty(transform ColorSyncTransformRef, key corefoundation.CFTypeRef, property corefoundation.CFTypeRef) {
+func ColorSyncTransformSetProperty(transform ColorSyncTransformRef, key obj.Object, property obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncTransformSetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncTransformSetProperty, _lib, "ColorSyncTransformSetProperty")
 	}
-	_fnColorSyncTransformSetProperty(objref.IDOf(transform.Object), objref.IDOf(key.Object), objref.IDOf(property.Object))
+	_fnColorSyncTransformSetProperty(objref.IDOf(transform.Object), objref.IDOf(key), objref.IDOf(property))
 }
 
 var _fnColorSyncUnregisterDevice func(objc.ID, objc.ID) bool

@@ -195,13 +195,13 @@ func CTFontCollectionSetQueryDescriptors(collection CTMutableFontCollectionRef, 
 var _fnCTFontCopyAttribute func(objc.ID, objc.ID) objc.ID
 
 // CTFontCopyAttribute calls the CoreText framework function CTFontCopyAttribute.
-func CTFontCopyAttribute(font CTFontRef, attribute corefoundation.CFStringRef) corefoundation.CFTypeRef {
+func CTFontCopyAttribute(font CTFontRef, attribute corefoundation.CFStringRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontCopyAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontCopyAttribute, _lib, "CTFontCopyAttribute")
 	}
 	_ret := _fnCTFontCopyAttribute(objref.IDOf(font.Object), objref.IDOf(attribute.Object))
-	return corefoundation.CFTypeRef{obj.Adopt(_ret)}
+	return obj.Adopt(_ret)
 }
 
 var _fnCTFontCopyAvailableTables func(objc.ID, CTFontTableOptions) objc.ID
@@ -604,13 +604,13 @@ func CTFontCreateWithQuickdrawInstance(identifier int16, style uint8, size float
 var _fnCTFontDescriptorCopyAttribute func(objc.ID, objc.ID) objc.ID
 
 // CTFontDescriptorCopyAttribute calls the CoreText framework function CTFontDescriptorCopyAttribute.
-func CTFontDescriptorCopyAttribute(descriptor CTFontDescriptorRef, attribute corefoundation.CFStringRef) corefoundation.CFTypeRef {
+func CTFontDescriptorCopyAttribute(descriptor CTFontDescriptorRef, attribute corefoundation.CFStringRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontDescriptorCopyAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorCopyAttribute, _lib, "CTFontDescriptorCopyAttribute")
 	}
 	_ret := _fnCTFontDescriptorCopyAttribute(objref.IDOf(descriptor.Object), objref.IDOf(attribute.Object))
-	return corefoundation.CFTypeRef{obj.Adopt(_ret)}
+	return obj.Adopt(_ret)
 }
 
 var _fnCTFontDescriptorCopyAttributes func(objc.ID) objc.ID
@@ -628,13 +628,13 @@ func CTFontDescriptorCopyAttributes(descriptor CTFontDescriptorRef) corefoundati
 var _fnCTFontDescriptorCopyLocalizedAttribute func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // CTFontDescriptorCopyLocalizedAttribute calls the CoreText framework function CTFontDescriptorCopyLocalizedAttribute.
-func CTFontDescriptorCopyLocalizedAttribute(descriptor CTFontDescriptorRef, attribute corefoundation.CFStringRef, language unsafe.Pointer) corefoundation.CFTypeRef {
+func CTFontDescriptorCopyLocalizedAttribute(descriptor CTFontDescriptorRef, attribute corefoundation.CFStringRef, language unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontDescriptorCopyLocalizedAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontDescriptorCopyLocalizedAttribute, _lib, "CTFontDescriptorCopyLocalizedAttribute")
 	}
 	_ret := _fnCTFontDescriptorCopyLocalizedAttribute(objref.IDOf(descriptor.Object), objref.IDOf(attribute.Object), language)
-	return corefoundation.CFTypeRef{obj.Adopt(_ret)}
+	return obj.Adopt(_ret)
 }
 
 var _fnCTFontDescriptorCreateCopyWithAttributes func(objc.ID, objc.ID) objc.ID

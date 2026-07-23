@@ -1193,13 +1193,13 @@ func GetApplicationTextEncoding() int {
 var _fnGetCFRunLoopFromEventLoop func(objc.ID) objc.ID
 
 // GetCFRunLoopFromEventLoop calls the HIToolbox framework function GetCFRunLoopFromEventLoop.
-func GetCFRunLoopFromEventLoop(inEventLoop EventLoopRef) corefoundation.CFTypeRef {
+func GetCFRunLoopFromEventLoop(inEventLoop EventLoopRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetCFRunLoopFromEventLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnGetCFRunLoopFromEventLoop, _lib, "GetCFRunLoopFromEventLoop")
 	}
 	_ret := _fnGetCFRunLoopFromEventLoop(objref.IDOf(inEventLoop.Object))
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnGetCurrentButtonState func() uint32
@@ -1513,12 +1513,12 @@ func GetThemeMetric(inMetric int) (result int, outMetric int) {
 var _fnHIDictionaryWindowShow func(objc.ID, objc.ID, corefoundation.CFRange, objc.ID, corefoundation.CGPoint, uint8, unsafe.Pointer)
 
 // HIDictionaryWindowShow calls the HIToolbox framework function HIDictionaryWindowShow.
-func HIDictionaryWindowShow(dictionary obj.Object, textString corefoundation.CFTypeRef, selectionRange corefoundation.CFRange, textFont obj.Object, textOrigin corefoundation.CGPoint, verticalText uint8, viewTransform *corefoundation.CGAffineTransform) {
+func HIDictionaryWindowShow(dictionary obj.Object, textString obj.Object, selectionRange corefoundation.CFRange, textFont obj.Object, textOrigin corefoundation.CGPoint, verticalText uint8, viewTransform *corefoundation.CGAffineTransform) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIDictionaryWindowShow == nil {
 		ebipurego.RegisterLibFunc(&_fnHIDictionaryWindowShow, _lib, "HIDictionaryWindowShow")
 	}
-	_fnHIDictionaryWindowShow(objref.IDOf(dictionary), objref.IDOf(textString.Object), selectionRange, objref.IDOf(textFont), textOrigin, verticalText, unsafe.Pointer(viewTransform))
+	_fnHIDictionaryWindowShow(objref.IDOf(dictionary), objref.IDOf(textString), selectionRange, objref.IDOf(textFont), textOrigin, verticalText, unsafe.Pointer(viewTransform))
 }
 
 var _fnHIGetMousePosition func(int, unsafe.Pointer, unsafe.Pointer) *corefoundation.CGPoint
@@ -1695,12 +1695,12 @@ func HIThemeDrawGenericWell(inRect *corefoundation.CGRect, inDrawInfo unsafe.Poi
 var _fnHIThemeDrawTextBox func(objc.ID, unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
 
 // HIThemeDrawTextBox calls the HIToolbox framework function HIThemeDrawTextBox.
-func HIThemeDrawTextBox(inString corefoundation.CFTypeRef, inBounds *corefoundation.CGRect, inTextInfo unsafe.Pointer, inContext coregraphics.CGContextRef, inOrientation int) int {
+func HIThemeDrawTextBox(inString obj.Object, inBounds *corefoundation.CGRect, inTextInfo unsafe.Pointer, inContext coregraphics.CGContextRef, inOrientation int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeDrawTextBox == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeDrawTextBox, _lib, "HIThemeDrawTextBox")
 	}
-	return int(_fnHIThemeDrawTextBox(objref.IDOf(inString.Object), unsafe.Pointer(inBounds), inTextInfo, objref.IDOf(inContext.Object), inOrientation))
+	return int(_fnHIThemeDrawTextBox(objref.IDOf(inString), unsafe.Pointer(inBounds), inTextInfo, objref.IDOf(inContext.Object), inOrientation))
 }
 
 var _fnHIThemeDrawTrack func(unsafe.Pointer, unsafe.Pointer, objc.ID, int) int32
@@ -1774,7 +1774,7 @@ func HIThemeGetTextColorForThemeBrush(inBrush int16, inWindowIsActive uint8) (re
 var _fnHIThemeGetTextDimensions func(objc.ID, float64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // HIThemeGetTextDimensions calls the HIToolbox framework function HIThemeGetTextDimensions.
-func HIThemeGetTextDimensions(inString corefoundation.CFTypeRef, inWidth float64, inTextInfo unsafe.Pointer) (result int, outWidth float64, outHeight float64, outBaseline float64) {
+func HIThemeGetTextDimensions(inString obj.Object, inWidth float64, inTextInfo unsafe.Pointer) (result int, outWidth float64, outHeight float64, outBaseline float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHIThemeGetTextDimensions == nil {
 		ebipurego.RegisterLibFunc(&_fnHIThemeGetTextDimensions, _lib, "HIThemeGetTextDimensions")
@@ -1782,7 +1782,7 @@ func HIThemeGetTextDimensions(inString corefoundation.CFTypeRef, inWidth float64
 	var _out0 float64
 	var _out1 float64
 	var _out2 float64
-	_ret := int(_fnHIThemeGetTextDimensions(objref.IDOf(inString.Object), inWidth, inTextInfo, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2)))
+	_ret := int(_fnHIThemeGetTextDimensions(objref.IDOf(inString), inWidth, inTextInfo, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2)))
 	return _ret, _out0, _out1, _out2
 }
 

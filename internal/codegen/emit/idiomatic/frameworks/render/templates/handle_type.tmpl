@@ -6,6 +6,10 @@
 // IsNil reports whether {{.GoName}} is a NULL handle (it wraps no object). Call
 // it before using a returned handle; a nil handle's methods panic.
 func (h {{.GoName}}) IsNil() bool { return h.Object == nil }
-
+{{if .ImmutableType}}
+// {{.ImmutableMethod}} returns this handle as its immutable {{.ImmutableType}} counterpart,
+// which any function taking a {{.ImmutableType}} accepts (a mutable ref is-a immutable ref).
+func (h {{.GoName}}) {{.ImmutableMethod}}() {{.ImmutableType}} { return {{.ImmutableType}}{h.Object} }
+{{end}}
 {{end -}}
 {{end}}
