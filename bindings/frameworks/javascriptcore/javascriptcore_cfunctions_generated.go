@@ -22,7 +22,7 @@ func JSBigIntCreateWithDouble(ctx obj.Object, value float64, exception unsafe.Po
 		ebipurego.RegisterLibFunc(&_fnJSBigIntCreateWithDouble, _lib, "JSBigIntCreateWithDouble")
 	}
 	_ret := _fnJSBigIntCreateWithDouble(objref.IDOf(ctx), value, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSBigIntCreateWithInt64 func(objc.ID, int64, unsafe.Pointer) objc.ID
@@ -34,7 +34,7 @@ func JSBigIntCreateWithInt64(ctx obj.Object, integer int64, exception unsafe.Poi
 		ebipurego.RegisterLibFunc(&_fnJSBigIntCreateWithInt64, _lib, "JSBigIntCreateWithInt64")
 	}
 	_ret := _fnJSBigIntCreateWithInt64(objref.IDOf(ctx), integer, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSBigIntCreateWithString func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -46,7 +46,7 @@ func JSBigIntCreateWithString(ctx obj.Object, str obj.Object, exception unsafe.P
 		ebipurego.RegisterLibFunc(&_fnJSBigIntCreateWithString, _lib, "JSBigIntCreateWithString")
 	}
 	_ret := _fnJSBigIntCreateWithString(objref.IDOf(ctx), objref.IDOf(str), exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSBigIntCreateWithUInt64 func(objc.ID, uint64, unsafe.Pointer) objc.ID
@@ -58,7 +58,7 @@ func JSBigIntCreateWithUInt64(ctx obj.Object, integer uint64, exception unsafe.P
 		ebipurego.RegisterLibFunc(&_fnJSBigIntCreateWithUInt64, _lib, "JSBigIntCreateWithUInt64")
 	}
 	_ret := _fnJSBigIntCreateWithUInt64(objref.IDOf(ctx), integer, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSCheckScriptSyntax func(objc.ID, objc.ID, objc.ID, int, unsafe.Pointer) bool
@@ -81,7 +81,7 @@ func JSClassCreate(definition unsafe.Pointer) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSClassCreate, _lib, "JSClassCreate")
 	}
 	_ret := _fnJSClassCreate(definition)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSClassRelease func(objc.ID)
@@ -104,7 +104,7 @@ func JSClassRetain(jsClass obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSClassRetain, _lib, "JSClassRetain")
 	}
 	_ret := _fnJSClassRetain(objref.IDOf(jsClass))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSContextGetGlobalContext func(objc.ID) objc.ID
@@ -116,7 +116,7 @@ func JSContextGetGlobalContext(ctx obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSContextGetGlobalContext, _lib, "JSContextGetGlobalContext")
 	}
 	_ret := _fnJSContextGetGlobalContext(objref.IDOf(ctx))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSContextGetGlobalObject func(objc.ID) objc.ID
@@ -128,7 +128,7 @@ func JSContextGetGlobalObject(ctx obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSContextGetGlobalObject, _lib, "JSContextGetGlobalObject")
 	}
 	_ret := _fnJSContextGetGlobalObject(objref.IDOf(ctx))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSContextGetGroup func(objc.ID) objc.ID
@@ -140,7 +140,7 @@ func JSContextGetGroup(ctx obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSContextGetGroup, _lib, "JSContextGetGroup")
 	}
 	_ret := _fnJSContextGetGroup(objref.IDOf(ctx))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSContextGroupCreate func() objc.ID
@@ -152,7 +152,7 @@ func JSContextGroupCreate() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSContextGroupCreate, _lib, "JSContextGroupCreate")
 	}
 	_ret := _fnJSContextGroupCreate()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSContextGroupRelease func(objc.ID)
@@ -175,7 +175,7 @@ func JSContextGroupRetain(group obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSContextGroupRetain, _lib, "JSContextGroupRetain")
 	}
 	_ret := _fnJSContextGroupRetain(objref.IDOf(group))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSEvaluateScript func(objc.ID, objc.ID, objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
@@ -187,7 +187,7 @@ func JSEvaluateScript(ctx obj.Object, script obj.Object, thisObject obj.Object, 
 		ebipurego.RegisterLibFunc(&_fnJSEvaluateScript, _lib, "JSEvaluateScript")
 	}
 	_ret := _fnJSEvaluateScript(objref.IDOf(ctx), objref.IDOf(script), objref.IDOf(thisObject), objref.IDOf(sourceURL), startingLineNumber, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSGarbageCollect func(objc.ID)
@@ -210,7 +210,7 @@ func JSGlobalContextCopyName(ctx obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSGlobalContextCopyName, _lib, "JSGlobalContextCopyName")
 	}
 	_ret := _fnJSGlobalContextCopyName(objref.IDOf(ctx))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSGlobalContextCreate func(objc.ID) objc.ID
@@ -222,7 +222,7 @@ func JSGlobalContextCreate(globalObjectClass obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSGlobalContextCreate, _lib, "JSGlobalContextCreate")
 	}
 	_ret := _fnJSGlobalContextCreate(objref.IDOf(globalObjectClass))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSGlobalContextCreateInGroup func(objc.ID, objc.ID) objc.ID
@@ -234,7 +234,7 @@ func JSGlobalContextCreateInGroup(group obj.Object, globalObjectClass obj.Object
 		ebipurego.RegisterLibFunc(&_fnJSGlobalContextCreateInGroup, _lib, "JSGlobalContextCreateInGroup")
 	}
 	_ret := _fnJSGlobalContextCreateInGroup(objref.IDOf(group), objref.IDOf(globalObjectClass))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSGlobalContextIsInspectable func(objc.ID) bool
@@ -268,7 +268,7 @@ func JSGlobalContextRetain(ctx obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSGlobalContextRetain, _lib, "JSGlobalContextRetain")
 	}
 	_ret := _fnJSGlobalContextRetain(objref.IDOf(ctx))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSGlobalContextSetInspectable func(objc.ID, bool)
@@ -302,7 +302,7 @@ func JSObjectCallAsConstructor(ctx obj.Object, object obj.Object, argumentCount 
 		ebipurego.RegisterLibFunc(&_fnJSObjectCallAsConstructor, _lib, "JSObjectCallAsConstructor")
 	}
 	_ret := _fnJSObjectCallAsConstructor(objref.IDOf(ctx), objref.IDOf(object), argumentCount, arguments, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectCallAsFunction func(objc.ID, objc.ID, objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -314,7 +314,7 @@ func JSObjectCallAsFunction(ctx obj.Object, object obj.Object, thisObject obj.Ob
 		ebipurego.RegisterLibFunc(&_fnJSObjectCallAsFunction, _lib, "JSObjectCallAsFunction")
 	}
 	_ret := _fnJSObjectCallAsFunction(objref.IDOf(ctx), objref.IDOf(object), objref.IDOf(thisObject), argumentCount, arguments, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectCopyPropertyNames func(objc.ID, objc.ID) objc.ID
@@ -326,7 +326,7 @@ func JSObjectCopyPropertyNames(ctx obj.Object, object obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSObjectCopyPropertyNames, _lib, "JSObjectCopyPropertyNames")
 	}
 	_ret := _fnJSObjectCopyPropertyNames(objref.IDOf(ctx), objref.IDOf(object))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectDeleteProperty func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
@@ -393,7 +393,7 @@ func JSObjectGetProperty(ctx obj.Object, object obj.Object, propertyName obj.Obj
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetProperty, _lib, "JSObjectGetProperty")
 	}
 	_ret := _fnJSObjectGetProperty(objref.IDOf(ctx), objref.IDOf(object), objref.IDOf(propertyName), exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectGetPropertyAtIndex func(objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
@@ -405,7 +405,7 @@ func JSObjectGetPropertyAtIndex(ctx obj.Object, object obj.Object, propertyIndex
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetPropertyAtIndex, _lib, "JSObjectGetPropertyAtIndex")
 	}
 	_ret := _fnJSObjectGetPropertyAtIndex(objref.IDOf(ctx), objref.IDOf(object), propertyIndex, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectGetPropertyForKey func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -417,7 +417,7 @@ func JSObjectGetPropertyForKey(ctx obj.Object, object obj.Object, propertyKey ob
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetPropertyForKey, _lib, "JSObjectGetPropertyForKey")
 	}
 	_ret := _fnJSObjectGetPropertyForKey(objref.IDOf(ctx), objref.IDOf(object), objref.IDOf(propertyKey), exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectGetPrototype func(objc.ID, objc.ID) objc.ID
@@ -429,7 +429,7 @@ func JSObjectGetPrototype(ctx obj.Object, object obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetPrototype, _lib, "JSObjectGetPrototype")
 	}
 	_ret := _fnJSObjectGetPrototype(objref.IDOf(ctx), objref.IDOf(object))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectGetTypedArrayBuffer func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -441,7 +441,7 @@ func JSObjectGetTypedArrayBuffer(ctx obj.Object, object obj.Object, exception un
 		ebipurego.RegisterLibFunc(&_fnJSObjectGetTypedArrayBuffer, _lib, "JSObjectGetTypedArrayBuffer")
 	}
 	_ret := _fnJSObjectGetTypedArrayBuffer(objref.IDOf(ctx), objref.IDOf(object), exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectGetTypedArrayByteLength func(objc.ID, objc.ID, unsafe.Pointer) int
@@ -541,7 +541,7 @@ func JSObjectMake(ctx obj.Object, jsClass obj.Object, data unsafe.Pointer) obj.O
 		ebipurego.RegisterLibFunc(&_fnJSObjectMake, _lib, "JSObjectMake")
 	}
 	_ret := _fnJSObjectMake(objref.IDOf(ctx), objref.IDOf(jsClass), data)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectMakeArray func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -553,7 +553,7 @@ func JSObjectMakeArray(ctx obj.Object, argumentCount int, arguments unsafe.Point
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeArray, _lib, "JSObjectMakeArray")
 	}
 	_ret := _fnJSObjectMakeArray(objref.IDOf(ctx), argumentCount, arguments, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectMakeArrayBufferWithBytesNoCopy func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -565,7 +565,7 @@ func JSObjectMakeArrayBufferWithBytesNoCopy(ctx obj.Object, data unsafe.Pointer,
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeArrayBufferWithBytesNoCopy, _lib, "JSObjectMakeArrayBufferWithBytesNoCopy")
 	}
 	_ret := _fnJSObjectMakeArrayBufferWithBytesNoCopy(objref.IDOf(ctx), data, byteLength, bytesDeallocator, deallocatorContext, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectMakeConstructor func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -577,7 +577,7 @@ func JSObjectMakeConstructor(ctx obj.Object, jsClass obj.Object, callAsConstruct
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeConstructor, _lib, "JSObjectMakeConstructor")
 	}
 	_ret := _fnJSObjectMakeConstructor(objref.IDOf(ctx), objref.IDOf(jsClass), callAsConstructor)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectMakeDate func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -589,7 +589,7 @@ func JSObjectMakeDate(ctx obj.Object, argumentCount int, arguments unsafe.Pointe
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeDate, _lib, "JSObjectMakeDate")
 	}
 	_ret := _fnJSObjectMakeDate(objref.IDOf(ctx), argumentCount, arguments, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectMakeDeferredPromise func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -601,7 +601,7 @@ func JSObjectMakeDeferredPromise(ctx obj.Object, resolve unsafe.Pointer, reject 
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeDeferredPromise, _lib, "JSObjectMakeDeferredPromise")
 	}
 	_ret := _fnJSObjectMakeDeferredPromise(objref.IDOf(ctx), resolve, reject, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectMakeError func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -613,7 +613,7 @@ func JSObjectMakeError(ctx obj.Object, argumentCount int, arguments unsafe.Point
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeError, _lib, "JSObjectMakeError")
 	}
 	_ret := _fnJSObjectMakeError(objref.IDOf(ctx), argumentCount, arguments, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectMakeFunction func(objc.ID, objc.ID, int, unsafe.Pointer, objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
@@ -625,7 +625,7 @@ func JSObjectMakeFunction(ctx obj.Object, name obj.Object, parameterCount int, p
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeFunction, _lib, "JSObjectMakeFunction")
 	}
 	_ret := _fnJSObjectMakeFunction(objref.IDOf(ctx), objref.IDOf(name), parameterCount, parameterNames, objref.IDOf(body), objref.IDOf(sourceURL), startingLineNumber, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectMakeFunctionWithCallback func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -637,7 +637,7 @@ func JSObjectMakeFunctionWithCallback(ctx obj.Object, name obj.Object, callAsFun
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeFunctionWithCallback, _lib, "JSObjectMakeFunctionWithCallback")
 	}
 	_ret := _fnJSObjectMakeFunctionWithCallback(objref.IDOf(ctx), objref.IDOf(name), callAsFunction)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectMakeRegExp func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -649,7 +649,7 @@ func JSObjectMakeRegExp(ctx obj.Object, argumentCount int, arguments unsafe.Poin
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeRegExp, _lib, "JSObjectMakeRegExp")
 	}
 	_ret := _fnJSObjectMakeRegExp(objref.IDOf(ctx), argumentCount, arguments, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectMakeTypedArray func(objc.ID, TypedArrayType, int, unsafe.Pointer) objc.ID
@@ -661,7 +661,7 @@ func JSObjectMakeTypedArray(ctx obj.Object, arrayType TypedArrayType, length int
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeTypedArray, _lib, "JSObjectMakeTypedArray")
 	}
 	_ret := _fnJSObjectMakeTypedArray(objref.IDOf(ctx), arrayType, length, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectMakeTypedArrayWithArrayBuffer func(objc.ID, TypedArrayType, objc.ID, unsafe.Pointer) objc.ID
@@ -673,7 +673,7 @@ func JSObjectMakeTypedArrayWithArrayBuffer(ctx obj.Object, arrayType TypedArrayT
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeTypedArrayWithArrayBuffer, _lib, "JSObjectMakeTypedArrayWithArrayBuffer")
 	}
 	_ret := _fnJSObjectMakeTypedArrayWithArrayBuffer(objref.IDOf(ctx), arrayType, objref.IDOf(buffer), exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectMakeTypedArrayWithArrayBufferAndOffset func(objc.ID, TypedArrayType, objc.ID, int, int, unsafe.Pointer) objc.ID
@@ -685,7 +685,7 @@ func JSObjectMakeTypedArrayWithArrayBufferAndOffset(ctx obj.Object, arrayType Ty
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeTypedArrayWithArrayBufferAndOffset, _lib, "JSObjectMakeTypedArrayWithArrayBufferAndOffset")
 	}
 	_ret := _fnJSObjectMakeTypedArrayWithArrayBufferAndOffset(objref.IDOf(ctx), arrayType, objref.IDOf(buffer), byteOffset, length, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectMakeTypedArrayWithBytesNoCopy func(objc.ID, TypedArrayType, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -697,7 +697,7 @@ func JSObjectMakeTypedArrayWithBytesNoCopy(ctx obj.Object, arrayType TypedArrayT
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeTypedArrayWithBytesNoCopy, _lib, "JSObjectMakeTypedArrayWithBytesNoCopy")
 	}
 	_ret := _fnJSObjectMakeTypedArrayWithBytesNoCopy(objref.IDOf(ctx), arrayType, data, byteLength, bytesDeallocator, deallocatorContext, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSObjectSetPrivate func(objc.ID, unsafe.Pointer) bool
@@ -786,7 +786,7 @@ func JSPropertyNameArrayGetNameAtIndex(array obj.Object, index int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSPropertyNameArrayGetNameAtIndex, _lib, "JSPropertyNameArrayGetNameAtIndex")
 	}
 	_ret := _fnJSPropertyNameArrayGetNameAtIndex(objref.IDOf(array), index)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSPropertyNameArrayRelease func(objc.ID)
@@ -809,7 +809,7 @@ func JSPropertyNameArrayRetain(array obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSPropertyNameArrayRetain, _lib, "JSPropertyNameArrayRetain")
 	}
 	_ret := _fnJSPropertyNameArrayRetain(objref.IDOf(array))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSStringCopyCFString func(objc.ID, objc.ID) objc.ID
@@ -833,7 +833,7 @@ func JSStringCreateWithCFString(str obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSStringCreateWithCFString, _lib, "JSStringCreateWithCFString")
 	}
 	_ret := _fnJSStringCreateWithCFString(objref.IDOf(str))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSStringCreateWithCharacters func(unsafe.Pointer, int) objc.ID
@@ -845,7 +845,7 @@ func JSStringCreateWithCharacters(chars unsafe.Pointer, numChars int) obj.Object
 		ebipurego.RegisterLibFunc(&_fnJSStringCreateWithCharacters, _lib, "JSStringCreateWithCharacters")
 	}
 	_ret := _fnJSStringCreateWithCharacters(chars, numChars)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSStringCreateWithUTF8CString func(string) objc.ID
@@ -857,7 +857,7 @@ func JSStringCreateWithUTF8CString(str string) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSStringCreateWithUTF8CString, _lib, "JSStringCreateWithUTF8CString")
 	}
 	_ret := _fnJSStringCreateWithUTF8CString(str)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSStringGetCharactersPtr func(objc.ID) unsafe.Pointer
@@ -946,7 +946,7 @@ func JSStringRetain(str obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSStringRetain, _lib, "JSStringRetain")
 	}
 	_ret := _fnJSStringRetain(objref.IDOf(str))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSValueCompare func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) RelationCondition
@@ -1002,7 +1002,7 @@ func JSValueCreateJSONString(ctx obj.Object, value obj.Object, indent int, excep
 		ebipurego.RegisterLibFunc(&_fnJSValueCreateJSONString, _lib, "JSValueCreateJSONString")
 	}
 	_ret := _fnJSValueCreateJSONString(objref.IDOf(ctx), objref.IDOf(value), indent, exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSValueGetType func(objc.ID, objc.ID) Type
@@ -1190,7 +1190,7 @@ func JSValueMakeBoolean(ctx obj.Object, boolean bool) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeBoolean, _lib, "JSValueMakeBoolean")
 	}
 	_ret := _fnJSValueMakeBoolean(objref.IDOf(ctx), boolean)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSValueMakeFromJSONString func(objc.ID, objc.ID) objc.ID
@@ -1202,7 +1202,7 @@ func JSValueMakeFromJSONString(ctx obj.Object, str obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeFromJSONString, _lib, "JSValueMakeFromJSONString")
 	}
 	_ret := _fnJSValueMakeFromJSONString(objref.IDOf(ctx), objref.IDOf(str))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSValueMakeNull func(objc.ID) objc.ID
@@ -1214,7 +1214,7 @@ func JSValueMakeNull(ctx obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeNull, _lib, "JSValueMakeNull")
 	}
 	_ret := _fnJSValueMakeNull(objref.IDOf(ctx))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSValueMakeNumber func(objc.ID, float64) objc.ID
@@ -1226,7 +1226,7 @@ func JSValueMakeNumber(ctx obj.Object, number float64) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeNumber, _lib, "JSValueMakeNumber")
 	}
 	_ret := _fnJSValueMakeNumber(objref.IDOf(ctx), number)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSValueMakeString func(objc.ID, objc.ID) objc.ID
@@ -1238,7 +1238,7 @@ func JSValueMakeString(ctx obj.Object, str obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeString, _lib, "JSValueMakeString")
 	}
 	_ret := _fnJSValueMakeString(objref.IDOf(ctx), objref.IDOf(str))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSValueMakeSymbol func(objc.ID, objc.ID) objc.ID
@@ -1250,7 +1250,7 @@ func JSValueMakeSymbol(ctx obj.Object, description obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeSymbol, _lib, "JSValueMakeSymbol")
 	}
 	_ret := _fnJSValueMakeSymbol(objref.IDOf(ctx), objref.IDOf(description))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSValueMakeUndefined func(objc.ID) objc.ID
@@ -1262,7 +1262,7 @@ func JSValueMakeUndefined(ctx obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeUndefined, _lib, "JSValueMakeUndefined")
 	}
 	_ret := _fnJSValueMakeUndefined(objref.IDOf(ctx))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSValueProtect func(objc.ID, objc.ID)
@@ -1329,7 +1329,7 @@ func JSValueToObject(ctx obj.Object, value obj.Object, exception unsafe.Pointer)
 		ebipurego.RegisterLibFunc(&_fnJSValueToObject, _lib, "JSValueToObject")
 	}
 	_ret := _fnJSValueToObject(objref.IDOf(ctx), objref.IDOf(value), exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSValueToStringCopy func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
@@ -1341,7 +1341,7 @@ func JSValueToStringCopy(ctx obj.Object, value obj.Object, exception unsafe.Poin
 		ebipurego.RegisterLibFunc(&_fnJSValueToStringCopy, _lib, "JSValueToStringCopy")
 	}
 	_ret := _fnJSValueToStringCopy(objref.IDOf(ctx), objref.IDOf(value), exception)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnJSValueToUInt32 func(objc.ID, objc.ID, unsafe.Pointer) uint32

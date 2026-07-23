@@ -129,7 +129,7 @@ func LSSharedFileListItemCopyIconRef(inItem obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemCopyIconRef, _lib, "LSSharedFileListItemCopyIconRef")
 	}
 	_ret := _fnLSSharedFileListItemCopyIconRef(objref.IDOf(inItem))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnLSSharedFileListItemCopyProperty func(objc.ID, objc.ID) objc.ID

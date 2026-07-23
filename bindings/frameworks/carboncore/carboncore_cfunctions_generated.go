@@ -688,7 +688,7 @@ func CloneCollection(c obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCloneCollection, _lib, "CloneCollection")
 	}
 	_ret := _fnCloneCollection(objref.IDOf(c))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCloseComponent func(unsafe.Pointer) int16
@@ -854,7 +854,7 @@ func CopyCollection(srcCollection obj.Object, dstCollection obj.Object) obj.Obje
 		ebipurego.RegisterLibFunc(&_fnCopyCollection, _lib, "CopyCollection")
 	}
 	_ret := _fnCopyCollection(objref.IDOf(srcCollection), objref.IDOf(dstCollection))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCount1Resources func(int) int16
@@ -3593,7 +3593,7 @@ func GetNewCollection(collectionID int16) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnGetNewCollection, _lib, "GetNewCollection")
 	}
 	_ret := _fnGetNewCollection(collectionID)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnGetNextFOND func(unsafe.Pointer) unsafe.Pointer
@@ -4932,7 +4932,7 @@ func MPCurrentTaskID() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnMPCurrentTaskID, _lib, "MPCurrentTaskID")
 	}
 	_ret := _fnMPCurrentTaskID()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnMPExit func(int)
@@ -5138,7 +5138,7 @@ func NewCollection() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnNewCollection, _lib, "NewCollection")
 	}
 	_ret := _fnNewCollection()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnNewCollectionExceptionUPP func(unsafe.Pointer) unsafe.Pointer

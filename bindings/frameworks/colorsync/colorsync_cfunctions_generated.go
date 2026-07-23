@@ -257,7 +257,7 @@ func ColorSyncProfileCreateDeviceProfile(deviceClass obj.Object, deviceID obj.Ob
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateDeviceProfile, _lib, "ColorSyncProfileCreateDeviceProfile")
 	}
 	_ret := _fnColorSyncProfileCreateDeviceProfile(objref.IDOf(deviceClass), objref.IDOf(deviceID), objref.IDOf(profileID))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnColorSyncProfileCreateDisplayTransferTablesFromVCGT func(objc.ID, unsafe.Pointer) objc.ID
@@ -282,7 +282,7 @@ func ColorSyncProfileCreateLink(profileInfo obj.Object, options obj.Object) obj.
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateLink, _lib, "ColorSyncProfileCreateLink")
 	}
 	_ret := _fnColorSyncProfileCreateLink(objref.IDOf(profileInfo), objref.IDOf(options))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnColorSyncProfileCreateMutable func() objc.ID
@@ -294,7 +294,7 @@ func ColorSyncProfileCreateMutable() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateMutable, _lib, "ColorSyncProfileCreateMutable")
 	}
 	_ret := _fnColorSyncProfileCreateMutable()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnColorSyncProfileCreateMutableCopy func(objc.ID) objc.ID
@@ -306,7 +306,7 @@ func ColorSyncProfileCreateMutableCopy(prof obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateMutableCopy, _lib, "ColorSyncProfileCreateMutableCopy")
 	}
 	_ret := _fnColorSyncProfileCreateMutableCopy(objref.IDOf(prof))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnColorSyncProfileCreateWithDisplayID func(uint32) objc.ID
@@ -318,7 +318,7 @@ func ColorSyncProfileCreateWithDisplayID(displayID uint32) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateWithDisplayID, _lib, "ColorSyncProfileCreateWithDisplayID")
 	}
 	_ret := _fnColorSyncProfileCreateWithDisplayID(displayID)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnColorSyncProfileCreateWithName func(objc.ID) objc.ID
@@ -330,7 +330,7 @@ func ColorSyncProfileCreateWithName(name obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateWithName, _lib, "ColorSyncProfileCreateWithName")
 	}
 	_ret := _fnColorSyncProfileCreateWithName(objref.IDOf(name))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnColorSyncProfileGetDisplayTransferFormulaFromVCGT func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool

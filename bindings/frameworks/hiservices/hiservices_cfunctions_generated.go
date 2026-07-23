@@ -569,7 +569,7 @@ func GetIconRefVariant(inIconRef obj.Object, inVariant int) (result obj.Object, 
 	}
 	var _out0 int16
 	_ret := _fnGetIconRefVariant(objref.IDOf(inIconRef), inVariant, unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return obj.WrapUnmanaged(_ret), _out0
 }
 
 var _fnGetNextProcess func(unsafe.Pointer) int16
@@ -675,7 +675,7 @@ func HIShapeCreateMutable() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnHIShapeCreateMutable, _lib, "HIShapeCreateMutable")
 	}
 	_ret := _fnHIShapeCreateMutable()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnHIShapeCreateMutableCopy func(objc.ID) objc.ID
@@ -687,7 +687,7 @@ func HIShapeCreateMutableCopy(inOrig obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnHIShapeCreateMutableCopy, _lib, "HIShapeCreateMutableCopy")
 	}
 	_ret := _fnHIShapeCreateMutableCopy(objref.IDOf(inOrig))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnHIShapeCreateMutableWithRect func(unsafe.Pointer) objc.ID
@@ -699,7 +699,7 @@ func HIShapeCreateMutableWithRect(inRect *corefoundation.CGRect) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnHIShapeCreateMutableWithRect, _lib, "HIShapeCreateMutableWithRect")
 	}
 	_ret := _fnHIShapeCreateMutableWithRect(unsafe.Pointer(inRect))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnHIShapeCreateUnion func(objc.ID, objc.ID) objc.ID

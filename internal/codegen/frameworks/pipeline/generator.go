@@ -798,6 +798,7 @@ func buildMapper(reg *Registry) *typemap.Mapper {
 		StructIndex:              reg.StructIndex,
 		ProtocolIndex:            reg.ProtocolIndex,
 		CFTypeIndex:              reg.CFTypeIndex,
+		NonRefcountedHandles:     reg.NonRefcountedHandles,
 		BlockedImports:           reg.BlockedImports,
 		UnavailableClasses:       reg.UnavailableClasses,
 		UnavailableEnumBaseTypes: reg.UnavailableEnumBaseTypes,

@@ -82,7 +82,7 @@ func IOBluetoothL2CAPChannelRegisterForChannelCloseNotification(channel obj.Obje
 		ebipurego.RegisterLibFunc(&_fnIOBluetoothL2CAPChannelRegisterForChannelCloseNotification, _lib, "IOBluetoothL2CAPChannelRegisterForChannelCloseNotification")
 	}
 	_ret := _fnIOBluetoothL2CAPChannelRegisterForChannelCloseNotification(objref.IDOf(channel), callback, inRefCon)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnIOBluetoothNSStringFromDeviceAddress func(unsafe.Pointer) objc.ID

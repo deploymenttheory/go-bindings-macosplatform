@@ -77,6 +77,21 @@ func Adopt(id objc.ID) Object {
 	return g
 }
 
+// WrapUnmanaged returns an Object for an opaque handle that is NOT
+// reference-counted — a plain C handle with its own lifetime and no CFTypeID
+// (e.g. AudioComponent, AudioQueueRef), obtained from a Get/Find/Create function.
+// It installs NEITHER a retain NOR a release finalizer: objc_retain / objc_release
+// on such a pointer is undefined and crashes (the pointer is not an object). The
+// caller owns the handle's lifetime via the type's own dispose function, exactly
+// as with the raw unsafe.Pointer these replace. Calling Release on the returned
+// Object is likewise unsafe and must be avoided for these handles.
+func WrapUnmanaged(id objc.ID) Object {
+	if id == 0 {
+		return nil
+	}
+	return &generic{Handle: objref.Wrap(id)}
+}
+
 func (g *generic) Description() string       { return rt.Description(objref.IDOf(g)) }
 func (g *generic) IsEqual(other Object) bool { return rt.IsEqual(objref.IDOf(g), objref.IDOf(other)) }
 func (g *generic) IsKind(className string) bool {

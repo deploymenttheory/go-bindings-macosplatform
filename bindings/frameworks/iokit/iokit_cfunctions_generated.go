@@ -492,7 +492,7 @@ func IONotificationPortCreate(mainPort int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnIONotificationPortCreate, _lib, "IONotificationPortCreate")
 	}
 	_ret := _fnIONotificationPortCreate(mainPort)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnIONotificationPortDestroy func(objc.ID)

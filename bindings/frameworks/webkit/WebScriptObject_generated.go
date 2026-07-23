@@ -79,7 +79,7 @@ func (wso *WebScriptObject) String() string {
 func (wso *WebScriptObject) JSObject() obj.Object {
 	defer runtime.KeepAlive(wso)
 	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("JSObject"))
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }
 
 // CallWebScriptMethodWithArguments returns the result of executing a method in the scripting environment.

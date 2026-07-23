@@ -83,7 +83,7 @@ func NewAuthorization() *Authorization {
 func (a *Authorization) AuthorizationRef() obj.Object {
 	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("authorizationRef"))
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }
 
 // InvalidateCredentials prevents any rights that were obtained by this object from being preserved.

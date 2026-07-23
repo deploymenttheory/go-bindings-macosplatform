@@ -562,7 +562,14 @@ func idiomaticRet(
 	// integer-handle "…Ref" types fall through to the scalar case.
 	if goRet == "unsafe.Pointer" && isCFObjectType(objcType, mapper) {
 		imports["obj"] = objImportPath
-		return "obj.Object", kindObject, "obj.Wrap(%s)", "objc.ID", imports, true
+		// A non-reference-counted opaque handle (no CFTypeID) must NOT be retained
+		// or released — objc_retain/objc_release on the pointer crashes. Wrap it
+		// unmanaged (no retain, no finalizer); the caller owns its dispose lifetime.
+		wrap := "obj.Wrap(%s)"
+		if isNonRefcountedHandle(objcType, mapper) {
+			wrap = "obj.WrapUnmanaged(%s)"
+		}
+		return "obj.Object", kindObject, wrap, "objc.ID", imports, true
 	}
 	// An os_object handle returned already retained (OS_OBJECT_RETURNS_RETAINED,
 	// e.g. hv_vm_config_create) is surfaced as obj.Object and ADOPTED — obj.Adopt
@@ -878,6 +885,23 @@ func isCFObjectType(objcType string, mapper *typemap.Mapper) bool {
 		}
 	}
 	return false
+}
+
+// isNonRefcountedHandle reports whether objcType is an opaque handle that is NOT
+// reference-counted (a plain C handle with no CFTypeID, e.g. AudioComponent,
+// AudioQueueRef). A return of one must be wrapped with obj.WrapUnmanaged, since
+// objc_retain / objc_release on such a pointer (what obj.Wrap does) crashes.
+func isNonRefcountedHandle(objcType string, mapper *typemap.Mapper) bool {
+	t := strings.TrimPrefix(normaliseObjC(objcType), "const ")
+	t = strings.TrimSpace(t)
+	if strings.Contains(t, "*") {
+		return false
+	}
+	fields := strings.Fields(t)
+	if len(fields) == 0 {
+		return false
+	}
+	return mapper.NonRefcountedHandles[fields[len(fields)-1]]
 }
 
 // isOSObjectReturn reports whether an Objective-C return type is an os_object

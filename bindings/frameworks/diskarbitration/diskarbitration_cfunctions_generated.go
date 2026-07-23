@@ -271,7 +271,7 @@ func DADissenterCreate(allocator obj.Object, status int, str obj.Object) obj.Obj
 		ebipurego.RegisterLibFunc(&_fnDADissenterCreate, _lib, "DADissenterCreate")
 	}
 	_ret := _fnDADissenterCreate(objref.IDOf(allocator), status, objref.IDOf(str))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnDADissenterGetStatus func(objc.ID) int32

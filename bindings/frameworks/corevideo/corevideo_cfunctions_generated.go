@@ -128,7 +128,7 @@ func CVBufferRetain(buffer obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCVBufferRetain, _lib, "CVBufferRetain")
 	}
 	_ret := _fnCVBufferRetain(objref.IDOf(buffer))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCVBufferSetAttachment func(objc.ID, objc.ID, objc.ID, CVAttachmentMode)
@@ -1152,7 +1152,7 @@ func CVPixelBufferGetIOSurface(pixelBuffer unsafe.Pointer) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCVPixelBufferGetIOSurface, _lib, "CVPixelBufferGetIOSurface")
 	}
 	_ret := _fnCVPixelBufferGetIOSurface(pixelBuffer)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCVPixelBufferGetPixelFormatType func(unsafe.Pointer) uint32

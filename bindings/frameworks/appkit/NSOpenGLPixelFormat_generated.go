@@ -121,5 +121,5 @@ func (ogpf *OpenGLPixelFormat) NumberOfVirtualScreens() int32 {
 func (ogpf *OpenGLPixelFormat) CGLPixelFormatObj() obj.Object {
 	defer runtime.KeepAlive(ogpf)
 	_r := objc.Send[objc.ID](objref.IDOf(ogpf), objc.RegisterName("CGLPixelFormatObj"))
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }

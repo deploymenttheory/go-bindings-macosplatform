@@ -264,7 +264,7 @@ func Tcl_AsyncCreate(proc unsafe.Pointer, clientData unsafe.Pointer) obj.Object 
 		ebipurego.RegisterLibFunc(&_fnTcl_AsyncCreate, _lib, "Tcl_AsyncCreate")
 	}
 	_ret := _fnTcl_AsyncCreate(proc, clientData)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_AsyncDelete func(objc.ID)
@@ -597,7 +597,7 @@ func Tcl_ChannelVersion(chanTypePtr unsafe.Pointer) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnTcl_ChannelVersion, _lib, "Tcl_ChannelVersion")
 	}
 	_ret := _fnTcl_ChannelVersion(chanTypePtr)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_ChannelWatchProc func(unsafe.Pointer) unsafe.Pointer
@@ -798,7 +798,7 @@ func Tcl_CreateChannel(typePtr unsafe.Pointer, chanName string, instanceData uns
 		ebipurego.RegisterLibFunc(&_fnTcl_CreateChannel, _lib, "Tcl_CreateChannel")
 	}
 	_ret := _fnTcl_CreateChannel(typePtr, chanName, instanceData, mask)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_CreateChannelHandler func(objc.ID, int, unsafe.Pointer, unsafe.Pointer)
@@ -832,7 +832,7 @@ func Tcl_CreateCommand(interp unsafe.Pointer, cmdName string, proc unsafe.Pointe
 		ebipurego.RegisterLibFunc(&_fnTcl_CreateCommand, _lib, "Tcl_CreateCommand")
 	}
 	_ret := _fnTcl_CreateCommand(interp, cmdName, proc, clientData, deleteProc)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_CreateEncoding func(unsafe.Pointer) objc.ID
@@ -844,7 +844,7 @@ func Tcl_CreateEncoding(typePtr unsafe.Pointer) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnTcl_CreateEncoding, _lib, "Tcl_CreateEncoding")
 	}
 	_ret := _fnTcl_CreateEncoding(typePtr)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_CreateEnsemble func(unsafe.Pointer, string, unsafe.Pointer, int) objc.ID
@@ -856,7 +856,7 @@ func Tcl_CreateEnsemble(interp unsafe.Pointer, name string, namespacePtr unsafe.
 		ebipurego.RegisterLibFunc(&_fnTcl_CreateEnsemble, _lib, "Tcl_CreateEnsemble")
 	}
 	_ret := _fnTcl_CreateEnsemble(interp, name, namespacePtr, flags)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_CreateEventSource func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
@@ -949,7 +949,7 @@ func Tcl_CreateObjCommand(interp unsafe.Pointer, cmdName string, proc unsafe.Poi
 		ebipurego.RegisterLibFunc(&_fnTcl_CreateObjCommand, _lib, "Tcl_CreateObjCommand")
 	}
 	_ret := _fnTcl_CreateObjCommand(interp, cmdName, proc, clientData, deleteProc)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_CreateObjTrace func(unsafe.Pointer, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -961,7 +961,7 @@ func Tcl_CreateObjTrace(interp unsafe.Pointer, level int, flags int, objProc uns
 		ebipurego.RegisterLibFunc(&_fnTcl_CreateObjTrace, _lib, "Tcl_CreateObjTrace")
 	}
 	_ret := _fnTcl_CreateObjTrace(interp, level, flags, objProc, clientData, delProc)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_CreateSlave func(unsafe.Pointer, string, int) unsafe.Pointer
@@ -1006,7 +1006,7 @@ func Tcl_CreateTimerHandler(milliseconds int, proc unsafe.Pointer, clientData un
 		ebipurego.RegisterLibFunc(&_fnTcl_CreateTimerHandler, _lib, "Tcl_CreateTimerHandler")
 	}
 	_ret := _fnTcl_CreateTimerHandler(milliseconds, proc, clientData)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_CreateTrace func(unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -1018,7 +1018,7 @@ func Tcl_CreateTrace(interp unsafe.Pointer, level int, proc unsafe.Pointer, clie
 		ebipurego.RegisterLibFunc(&_fnTcl_CreateTrace, _lib, "Tcl_CreateTrace")
 	}
 	_ret := _fnTcl_CreateTrace(interp, level, proc, clientData)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_CutChannel func(objc.ID)
@@ -2361,7 +2361,7 @@ func Tcl_FSOpenFileChannel(interp unsafe.Pointer, pathPtr unsafe.Pointer, modeSt
 		ebipurego.RegisterLibFunc(&_fnTcl_FSOpenFileChannel, _lib, "Tcl_FSOpenFileChannel")
 	}
 	_ret := _fnTcl_FSOpenFileChannel(interp, pathPtr, modeString, permissions)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_FSPathSeparator func(unsafe.Pointer) unsafe.Pointer
@@ -2496,7 +2496,7 @@ func Tcl_FindCommand(interp unsafe.Pointer, name string, contextNsPtr unsafe.Poi
 		ebipurego.RegisterLibFunc(&_fnTcl_FindCommand, _lib, "Tcl_FindCommand")
 	}
 	_ret := _fnTcl_FindCommand(interp, name, contextNsPtr, flags)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_FindEnsemble func(unsafe.Pointer, unsafe.Pointer, int) objc.ID
@@ -2508,7 +2508,7 @@ func Tcl_FindEnsemble(interp unsafe.Pointer, cmdNameObj unsafe.Pointer, flags in
 		ebipurego.RegisterLibFunc(&_fnTcl_FindEnsemble, _lib, "Tcl_FindEnsemble")
 	}
 	_ret := _fnTcl_FindEnsemble(interp, cmdNameObj, flags)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_FindExecutable func(string)
@@ -2740,7 +2740,7 @@ func Tcl_GetChannel(interp unsafe.Pointer, chanName string) (result obj.Object, 
 	}
 	var _out0 int32
 	_ret := _fnTcl_GetChannel(interp, chanName, unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return obj.WrapUnmanaged(_ret), _out0
 }
 
 var _fnTcl_GetChannelBufferSize func(objc.ID) int32
@@ -2862,7 +2862,7 @@ func Tcl_GetChannelThread(channel obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnTcl_GetChannelThread, _lib, "Tcl_GetChannelThread")
 	}
 	_ret := _fnTcl_GetChannelThread(objref.IDOf(channel))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_GetChannelType func(objc.ID) unsafe.Pointer
@@ -2896,7 +2896,7 @@ func Tcl_GetCommandFromObj(interp unsafe.Pointer, objPtr unsafe.Pointer) obj.Obj
 		ebipurego.RegisterLibFunc(&_fnTcl_GetCommandFromObj, _lib, "Tcl_GetCommandFromObj")
 	}
 	_ret := _fnTcl_GetCommandFromObj(interp, objPtr)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_GetCommandFullName func(unsafe.Pointer, objc.ID, unsafe.Pointer)
@@ -2963,7 +2963,7 @@ func Tcl_GetCurrentThread() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnTcl_GetCurrentThread, _lib, "Tcl_GetCurrentThread")
 	}
 	_ret := _fnTcl_GetCurrentThread()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_GetCwd func(unsafe.Pointer, unsafe.Pointer) string
@@ -3023,7 +3023,7 @@ func Tcl_GetEncoding(interp unsafe.Pointer, name string) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnTcl_GetEncoding, _lib, "Tcl_GetEncoding")
 	}
 	_ret := _fnTcl_GetEncoding(interp, name)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_GetEncodingFromObj func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -3368,7 +3368,7 @@ func Tcl_GetRegExpFromObj(interp unsafe.Pointer, patObj unsafe.Pointer, flags in
 		ebipurego.RegisterLibFunc(&_fnTcl_GetRegExpFromObj, _lib, "Tcl_GetRegExpFromObj")
 	}
 	_ret := _fnTcl_GetRegExpFromObj(interp, patObj, flags)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_GetReturnOptions func(unsafe.Pointer, int) unsafe.Pointer
@@ -3413,7 +3413,7 @@ func Tcl_GetStackedChannel(chan_ obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnTcl_GetStackedChannel, _lib, "Tcl_GetStackedChannel")
 	}
 	_ret := _fnTcl_GetStackedChannel(objref.IDOf(chan_))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_GetStdChannel func(int) objc.ID
@@ -3425,7 +3425,7 @@ func Tcl_GetStdChannel(type_ int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnTcl_GetStdChannel, _lib, "Tcl_GetStdChannel")
 	}
 	_ret := _fnTcl_GetStdChannel(type_)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_GetString func(unsafe.Pointer) string
@@ -3496,7 +3496,7 @@ func Tcl_GetTopChannel(chan_ obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnTcl_GetTopChannel, _lib, "Tcl_GetTopChannel")
 	}
 	_ret := _fnTcl_GetTopChannel(objref.IDOf(chan_))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_GetUniChar func(unsafe.Pointer, int) uint16
@@ -4231,7 +4231,7 @@ func Tcl_MakeFileChannel(handle unsafe.Pointer, mode int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnTcl_MakeFileChannel, _lib, "Tcl_MakeFileChannel")
 	}
 	_ret := _fnTcl_MakeFileChannel(handle, mode)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_MakeSafe func(unsafe.Pointer) int32
@@ -4254,7 +4254,7 @@ func Tcl_MakeTcpClientChannel(tcpSocket unsafe.Pointer) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnTcl_MakeTcpClientChannel, _lib, "Tcl_MakeTcpClientChannel")
 	}
 	_ret := _fnTcl_MakeTcpClientChannel(tcpSocket)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_Merge func(int, string) string
@@ -4508,7 +4508,7 @@ func Tcl_OpenCommandChannel(interp unsafe.Pointer, argc int, argv string, flags 
 		ebipurego.RegisterLibFunc(&_fnTcl_OpenCommandChannel, _lib, "Tcl_OpenCommandChannel")
 	}
 	_ret := _fnTcl_OpenCommandChannel(interp, argc, argv, flags)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_OpenFileChannel func(unsafe.Pointer, string, string, int) objc.ID
@@ -4520,7 +4520,7 @@ func Tcl_OpenFileChannel(interp unsafe.Pointer, fileName string, modeString stri
 		ebipurego.RegisterLibFunc(&_fnTcl_OpenFileChannel, _lib, "Tcl_OpenFileChannel")
 	}
 	_ret := _fnTcl_OpenFileChannel(interp, fileName, modeString, permissions)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_OpenTcpClient func(unsafe.Pointer, int, string, string, int, int) objc.ID
@@ -4532,7 +4532,7 @@ func Tcl_OpenTcpClient(interp unsafe.Pointer, port int, address string, myaddr s
 		ebipurego.RegisterLibFunc(&_fnTcl_OpenTcpClient, _lib, "Tcl_OpenTcpClient")
 	}
 	_ret := _fnTcl_OpenTcpClient(interp, port, address, myaddr, myport, async)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_OpenTcpServer func(unsafe.Pointer, int, string, unsafe.Pointer, unsafe.Pointer) objc.ID
@@ -4544,7 +4544,7 @@ func Tcl_OpenTcpServer(interp unsafe.Pointer, port int, host string, acceptProc 
 		ebipurego.RegisterLibFunc(&_fnTcl_OpenTcpServer, _lib, "Tcl_OpenTcpServer")
 	}
 	_ret := _fnTcl_OpenTcpServer(interp, port, host, acceptProc, callbackData)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_OutputBuffered func(objc.ID) int32
@@ -4886,7 +4886,7 @@ func Tcl_RegExpCompile(interp unsafe.Pointer, pattern string) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnTcl_RegExpCompile, _lib, "Tcl_RegExpCompile")
 	}
 	_ret := _fnTcl_RegExpCompile(interp, pattern)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_RegExpExec func(unsafe.Pointer, objc.ID, string, string) int32
@@ -5041,7 +5041,7 @@ func Tcl_SaveInterpState(interp unsafe.Pointer, status int) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnTcl_SaveInterpState, _lib, "Tcl_SaveInterpState")
 	}
 	_ret := _fnTcl_SaveInterpState(interp, status)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_SaveResult func(unsafe.Pointer, unsafe.Pointer)
@@ -5736,7 +5736,7 @@ func Tcl_StackChannel(interp unsafe.Pointer, typePtr unsafe.Pointer, instanceDat
 		ebipurego.RegisterLibFunc(&_fnTcl_StackChannel, _lib, "Tcl_StackChannel")
 	}
 	_ret := _fnTcl_StackChannel(interp, typePtr, instanceData, mask, objref.IDOf(prevChan))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnTcl_Stat func(string, unsafe.Pointer) int32
@@ -6518,7 +6518,7 @@ func Tcl_WaitPid(pid obj.Object, options int) (result obj.Object, statPtr int32)
 	}
 	var _out0 int32
 	_ret := _fnTcl_WaitPid(objref.IDOf(pid), unsafe.Pointer(&_out0), options)
-	return obj.Wrap(_ret), _out0
+	return obj.WrapUnmanaged(_ret), _out0
 }
 
 var _fnTcl_Write func(objc.ID, string, int) int32

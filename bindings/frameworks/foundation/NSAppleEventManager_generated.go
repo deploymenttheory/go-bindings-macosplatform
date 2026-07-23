@@ -102,7 +102,7 @@ func (aem *AppleEventManager) RemoveEventHandlerForEventClassAndEventID(eventCla
 func (aem *AppleEventManager) SuspendCurrentAppleEvent() obj.Object {
 	defer runtime.KeepAlive(aem)
 	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("suspendCurrentAppleEvent"))
-	return obj.Wrap(_r)
+	return obj.WrapUnmanaged(_r)
 }
 
 // AppleEventForSuspensionID given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, returns the descriptor for the event whose handling was suspended.

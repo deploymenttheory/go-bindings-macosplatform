@@ -47,7 +47,7 @@ func FSEventStreamCreate(allocator obj.Object, callback unsafe.Pointer, context_
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamCreate, _lib, "FSEventStreamCreate")
 	}
 	_ret := _fnFSEventStreamCreate(objref.IDOf(allocator), callback, context_, objref.IDOf(pathsToWatch), sinceWhen, latency, flags)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnFSEventStreamCreateRelativeToDevice func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, objc.ID, uint64, float64, int) objc.ID
@@ -59,7 +59,7 @@ func FSEventStreamCreateRelativeToDevice(allocator obj.Object, callback unsafe.P
 		ebipurego.RegisterLibFunc(&_fnFSEventStreamCreateRelativeToDevice, _lib, "FSEventStreamCreateRelativeToDevice")
 	}
 	_ret := _fnFSEventStreamCreateRelativeToDevice(objref.IDOf(allocator), callback, context_, deviceToWatch, objref.IDOf(pathsToWatchRelativeToDevice), sinceWhen, latency, flags)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnFSEventStreamFlushAsync func(objc.ID) uint64

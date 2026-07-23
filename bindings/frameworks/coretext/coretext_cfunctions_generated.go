@@ -143,7 +143,7 @@ func CTFontCollectionCreateMutableCopy(original obj.Object) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnCTFontCollectionCreateMutableCopy, _lib, "CTFontCollectionCreateMutableCopy")
 	}
 	_ret := _fnCTFontCollectionCreateMutableCopy(objref.IDOf(original))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnCTFontCollectionCreateWithFontDescriptors func(objc.ID, objc.ID) objc.ID

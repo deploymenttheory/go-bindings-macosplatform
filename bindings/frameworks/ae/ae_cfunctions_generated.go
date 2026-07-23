@@ -137,7 +137,7 @@ func AECreateRemoteProcessResolver(allocator obj.Object, url obj.Object) obj.Obj
 		ebipurego.RegisterLibFunc(&_fnAECreateRemoteProcessResolver, _lib, "AECreateRemoteProcessResolver")
 	}
 	_ret := _fnAECreateRemoteProcessResolver(objref.IDOf(allocator), objref.IDOf(url))
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnAEDecodeMessage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
@@ -774,7 +774,7 @@ func AEStreamCreateEvent(clazz int, identifier int, targetType int, targetData u
 		ebipurego.RegisterLibFunc(&_fnAEStreamCreateEvent, _lib, "AEStreamCreateEvent")
 	}
 	_ret := _fnAEStreamCreateEvent(clazz, identifier, targetType, targetData, targetLength, returnID, transactionID)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnAEStreamOpen func() objc.ID
@@ -786,7 +786,7 @@ func AEStreamOpen() obj.Object {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpen, _lib, "AEStreamOpen")
 	}
 	_ret := _fnAEStreamOpen()
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnAEStreamOpenEvent func(unsafe.Pointer) objc.ID
@@ -798,7 +798,7 @@ func AEStreamOpenEvent(event unsafe.Pointer) obj.Object {
 		ebipurego.RegisterLibFunc(&_fnAEStreamOpenEvent, _lib, "AEStreamOpenEvent")
 	}
 	_ret := _fnAEStreamOpenEvent(event)
-	return obj.Wrap(_ret)
+	return obj.WrapUnmanaged(_ret)
 }
 
 var _fnAEStreamWriteAEDesc func(objc.ID, unsafe.Pointer) int32
