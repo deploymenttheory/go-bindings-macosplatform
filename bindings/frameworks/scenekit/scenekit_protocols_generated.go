@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
@@ -141,7 +142,7 @@ type SceneRenderer interface {
 	OverlaySKScene() obj.Object
 	SetOverlaySKScene(overlaySKScene obj.Object)
 	RenderingAPI() RenderingAPI
-	WorkingColorSpace() obj.Object
+	WorkingColorSpace() coregraphics.CGColorSpaceRef
 	Context() unsafe.Pointer
 	CurrentRenderCommandEncoder() obj.Object
 	CurrentRenderPassDescriptor() obj.Object

@@ -34,9 +34,9 @@ func DeviceWithAddressString(address string) *IOBluetoothDevice {
 }
 
 // WithDeviceRef method call to convert an IOBluetoothDeviceRef into an IOBluetoothDevice *.
-func WithDeviceRef(deviceRef obj.Object) *IOBluetoothDevice {
+func WithDeviceRef(deviceRef IOBluetoothDeviceRef) *IOBluetoothDevice {
 	defer runtime.KeepAlive(deviceRef)
-	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDevice")), objc.RegisterName("withDeviceRef:"), objref.IDOf(deviceRef))
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDevice")), objc.RegisterName("withDeviceRef:"), objref.IDOf(deviceRef.Object))
 	return IOBluetoothDeviceFromID(_r)
 }
 
@@ -99,9 +99,9 @@ func WithDeviceChannelID(inDevice *IOBluetoothDevice, inRFCOMMChannelID uint8) *
 }
 
 // WithRFCOMMChannelRef method call to convert an IOBluetoothRFCOMMChannelRef into an IOBluetoothRFCOMMChannel *.
-func WithRFCOMMChannelRef(rfcommChannelRef obj.Object) *IOBluetoothRFCOMMChannel {
+func WithRFCOMMChannelRef(rfcommChannelRef IOBluetoothRFCOMMChannelRef) *IOBluetoothRFCOMMChannel {
 	defer runtime.KeepAlive(rfcommChannelRef)
-	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothRFCOMMChannel")), objc.RegisterName("withRFCOMMChannelRef:"), objref.IDOf(rfcommChannelRef))
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothRFCOMMChannel")), objc.RegisterName("withRFCOMMChannelRef:"), objref.IDOf(rfcommChannelRef.Object))
 	return IOBluetoothRFCOMMChannelFromID(_r)
 }
 
@@ -126,9 +126,9 @@ func WithTypeSizeDescriptorSizeValue(type_ uint8, newSizeDescriptor uint8, newSi
 }
 
 // WithSDPDataElementRef method call to convert an IOBluetoothSDPDataElementRef into an IOBluetoothSDPDataElement *.
-func WithSDPDataElementRef(sdpDataElementRef obj.Object) *IOBluetoothSDPDataElement {
+func WithSDPDataElementRef(sdpDataElementRef IOBluetoothSDPDataElementRef) *IOBluetoothSDPDataElement {
 	defer runtime.KeepAlive(sdpDataElementRef)
-	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPDataElement")), objc.RegisterName("withSDPDataElementRef:"), objref.IDOf(sdpDataElementRef))
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPDataElement")), objc.RegisterName("withSDPDataElementRef:"), objref.IDOf(sdpDataElementRef.Object))
 	return IOBluetoothSDPDataElementFromID(_r)
 }
 
@@ -162,9 +162,9 @@ func WithServiceDictionaryDevice(serviceDict obj.Object, device *IOBluetoothDevi
 }
 
 // WithSDPServiceRecordRef method call to convert an IOBluetoothSDPServiceRecordRef into an IOBluetoothSDPServiceRecord *.
-func WithSDPServiceRecordRef(sdpServiceRecordRef obj.Object) *IOBluetoothSDPServiceRecord {
+func WithSDPServiceRecordRef(sdpServiceRecordRef IOBluetoothSDPServiceRecordRef) *IOBluetoothSDPServiceRecord {
 	defer runtime.KeepAlive(sdpServiceRecordRef)
-	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPServiceRecord")), objc.RegisterName("withSDPServiceRecordRef:"), objref.IDOf(sdpServiceRecordRef))
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPServiceRecord")), objc.RegisterName("withSDPServiceRecordRef:"), objref.IDOf(sdpServiceRecordRef.Object))
 	return IOBluetoothSDPServiceRecordFromID(_r)
 }
 
@@ -193,9 +193,9 @@ func Uuid32(uuid32 uint32) *IOBluetoothSDPUUID {
 }
 
 // WithSDPUUIDRef method call to convert an IOBluetoothSDPUUIDRef into an IOBluetoothSDPUUID *.
-func WithSDPUUIDRef(sdpUUIDRef obj.Object) *IOBluetoothSDPUUID {
+func WithSDPUUIDRef(sdpUUIDRef IOBluetoothSDPUUIDRef) *IOBluetoothSDPUUID {
 	defer runtime.KeepAlive(sdpUUIDRef)
-	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPUUID")), objc.RegisterName("withSDPUUIDRef:"), objref.IDOf(sdpUUIDRef))
+	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPUUID")), objc.RegisterName("withSDPUUIDRef:"), objref.IDOf(sdpUUIDRef.Object))
 	return IOBluetoothSDPUUIDFromID(_r)
 }
 

@@ -15,22 +15,22 @@ import (
 var _fnDCSCopyTextDefinition func(objc.ID, objc.ID, corefoundation.CFRange) objc.ID
 
 // DCSCopyTextDefinition calls the DictionaryServices framework function DCSCopyTextDefinition.
-func DCSCopyTextDefinition(dictionary obj.Object, textString obj.Object, range_ corefoundation.CFRange) obj.Object {
+func DCSCopyTextDefinition(dictionary DCSDictionaryRef, textString corefoundation.CFStringRef, range_ corefoundation.CFRange) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDCSCopyTextDefinition == nil {
 		ebipurego.RegisterLibFunc(&_fnDCSCopyTextDefinition, _lib, "DCSCopyTextDefinition")
 	}
-	_ret := _fnDCSCopyTextDefinition(objref.IDOf(dictionary), objref.IDOf(textString), range_)
-	return obj.Wrap(_ret)
+	_ret := _fnDCSCopyTextDefinition(objref.IDOf(dictionary.Object), objref.IDOf(textString.Object), range_)
+	return corefoundation.CFStringRef{obj.Wrap(_ret)}
 }
 
 var _fnDCSGetTermRangeInString func(objc.ID, objc.ID, int) corefoundation.CFRange
 
 // DCSGetTermRangeInString calls the DictionaryServices framework function DCSGetTermRangeInString.
-func DCSGetTermRangeInString(dictionary obj.Object, textString obj.Object, offset int) corefoundation.CFRange {
+func DCSGetTermRangeInString(dictionary DCSDictionaryRef, textString corefoundation.CFStringRef, offset int) corefoundation.CFRange {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDCSGetTermRangeInString == nil {
 		ebipurego.RegisterLibFunc(&_fnDCSGetTermRangeInString, _lib, "DCSGetTermRangeInString")
 	}
-	return _fnDCSGetTermRangeInString(objref.IDOf(dictionary), objref.IDOf(textString), offset)
+	return _fnDCSGetTermRangeInString(objref.IDOf(dictionary.Object), objref.IDOf(textString.Object), offset)
 }

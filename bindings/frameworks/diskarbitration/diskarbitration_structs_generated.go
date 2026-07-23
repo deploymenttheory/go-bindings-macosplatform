@@ -4,8 +4,40 @@
 
 package diskarbitration
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 type DADisk struct{}
 
 type DADissenter struct{}
 
 type DASession struct{}
+
+// DAApprovalSessionRef is a handle for the opaque DAApprovalSessionRef type.
+type DAApprovalSessionRef struct{ obj.Object }
+
+// IsNil reports whether DAApprovalSessionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DAApprovalSessionRef) IsNil() bool { return h.Object == nil }
+
+// DADiskRef is a handle for the opaque DADiskRef type.
+type DADiskRef struct{ obj.Object }
+
+// IsNil reports whether DADiskRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DADiskRef) IsNil() bool { return h.Object == nil }
+
+// DADissenterRef is a handle for the opaque DADissenterRef type.
+type DADissenterRef struct{ obj.Object }
+
+// IsNil reports whether DADissenterRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DADissenterRef) IsNil() bool { return h.Object == nil }
+
+// DASessionRef is a handle for the opaque DASessionRef type.
+type DASessionRef struct{ obj.Object }
+
+// IsNil reports whether DASessionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DASessionRef) IsNil() bool { return h.Object == nil }

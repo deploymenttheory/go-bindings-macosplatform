@@ -7,6 +7,7 @@ package discrecordingui
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -16,35 +17,35 @@ import (
 var _fnDRBurnSessionBeginProgressDialog func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // DRBurnSessionBeginProgressDialog calls the DiscRecordingUI framework function DRBurnSessionBeginProgressDialog.
-func DRBurnSessionBeginProgressDialog(burnSession obj.Object, layout obj.Object, options unsafe.Pointer, progressCallbacks unsafe.Pointer) {
+func DRBurnSessionBeginProgressDialog(burnSession DRBurnSessionRef, layout corefoundation.CFTypeRef, options unsafe.Pointer, progressCallbacks unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnSessionBeginProgressDialog == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnSessionBeginProgressDialog, _lib, "DRBurnSessionBeginProgressDialog")
 	}
-	_fnDRBurnSessionBeginProgressDialog(objref.IDOf(burnSession), objref.IDOf(layout), options, progressCallbacks)
+	_fnDRBurnSessionBeginProgressDialog(objref.IDOf(burnSession.Object), objref.IDOf(layout.Object), options, progressCallbacks)
 }
 
 var _fnDRBurnSessionCreate func() objc.ID
 
 // DRBurnSessionCreate calls the DiscRecordingUI framework function DRBurnSessionCreate.
-func DRBurnSessionCreate() obj.Object {
+func DRBurnSessionCreate() DRBurnSessionRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnSessionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnSessionCreate, _lib, "DRBurnSessionCreate")
 	}
 	_ret := _fnDRBurnSessionCreate()
-	return obj.Wrap(_ret)
+	return DRBurnSessionRef{obj.Wrap(_ret)}
 }
 
 var _fnDRBurnSessionGetBurn func(objc.ID) objc.ID
 
 // DRBurnSessionGetBurn calls the DiscRecordingUI framework function DRBurnSessionGetBurn.
-func DRBurnSessionGetBurn(burnSession obj.Object) obj.Object {
+func DRBurnSessionGetBurn(burnSession DRBurnSessionRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnSessionGetBurn == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnSessionGetBurn, _lib, "DRBurnSessionGetBurn")
 	}
-	_ret := _fnDRBurnSessionGetBurn(objref.IDOf(burnSession))
+	_ret := _fnDRBurnSessionGetBurn(objref.IDOf(burnSession.Object))
 	return obj.Wrap(_ret)
 }
 
@@ -62,57 +63,57 @@ func DRBurnSessionGetTypeID() int {
 var _fnDRBurnSessionSetBurn func(objc.ID, objc.ID)
 
 // DRBurnSessionSetBurn calls the DiscRecordingUI framework function DRBurnSessionSetBurn.
-func DRBurnSessionSetBurn(burnSession obj.Object, burn obj.Object) {
+func DRBurnSessionSetBurn(burnSession DRBurnSessionRef, burn obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnSessionSetBurn == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnSessionSetBurn, _lib, "DRBurnSessionSetBurn")
 	}
-	_fnDRBurnSessionSetBurn(objref.IDOf(burnSession), objref.IDOf(burn))
+	_fnDRBurnSessionSetBurn(objref.IDOf(burnSession.Object), objref.IDOf(burn))
 }
 
 var _fnDRBurnSessionSetupDialog func(objc.ID, unsafe.Pointer, unsafe.Pointer) int8
 
 // DRBurnSessionSetupDialog calls the DiscRecordingUI framework function DRBurnSessionSetupDialog.
-func DRBurnSessionSetupDialog(burnSession obj.Object, options unsafe.Pointer, setupCallbacks unsafe.Pointer) int8 {
+func DRBurnSessionSetupDialog(burnSession DRBurnSessionRef, options unsafe.Pointer, setupCallbacks unsafe.Pointer) int8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnSessionSetupDialog == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnSessionSetupDialog, _lib, "DRBurnSessionSetupDialog")
 	}
-	return _fnDRBurnSessionSetupDialog(objref.IDOf(burnSession), options, setupCallbacks)
+	return _fnDRBurnSessionSetupDialog(objref.IDOf(burnSession.Object), options, setupCallbacks)
 }
 
 var _fnDREraseSessionBeginProgressDialog func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // DREraseSessionBeginProgressDialog calls the DiscRecordingUI framework function DREraseSessionBeginProgressDialog.
-func DREraseSessionBeginProgressDialog(eraseSession obj.Object, options unsafe.Pointer, progressCallbacks unsafe.Pointer) {
+func DREraseSessionBeginProgressDialog(eraseSession DREraseSessionRef, options unsafe.Pointer, progressCallbacks unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDREraseSessionBeginProgressDialog == nil {
 		ebipurego.RegisterLibFunc(&_fnDREraseSessionBeginProgressDialog, _lib, "DREraseSessionBeginProgressDialog")
 	}
-	_fnDREraseSessionBeginProgressDialog(objref.IDOf(eraseSession), options, progressCallbacks)
+	_fnDREraseSessionBeginProgressDialog(objref.IDOf(eraseSession.Object), options, progressCallbacks)
 }
 
 var _fnDREraseSessionCreate func() objc.ID
 
 // DREraseSessionCreate calls the DiscRecordingUI framework function DREraseSessionCreate.
-func DREraseSessionCreate() obj.Object {
+func DREraseSessionCreate() DREraseSessionRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDREraseSessionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnDREraseSessionCreate, _lib, "DREraseSessionCreate")
 	}
 	_ret := _fnDREraseSessionCreate()
-	return obj.Wrap(_ret)
+	return DREraseSessionRef{obj.Wrap(_ret)}
 }
 
 var _fnDREraseSessionGetErase func(objc.ID) objc.ID
 
 // DREraseSessionGetErase calls the DiscRecordingUI framework function DREraseSessionGetErase.
-func DREraseSessionGetErase(eraseSession obj.Object) obj.Object {
+func DREraseSessionGetErase(eraseSession DREraseSessionRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDREraseSessionGetErase == nil {
 		ebipurego.RegisterLibFunc(&_fnDREraseSessionGetErase, _lib, "DREraseSessionGetErase")
 	}
-	_ret := _fnDREraseSessionGetErase(objref.IDOf(eraseSession))
+	_ret := _fnDREraseSessionGetErase(objref.IDOf(eraseSession.Object))
 	return obj.Wrap(_ret)
 }
 
@@ -130,23 +131,23 @@ func DREraseSessionGetTypeID() int {
 var _fnDREraseSessionSetErase func(objc.ID, objc.ID)
 
 // DREraseSessionSetErase calls the DiscRecordingUI framework function DREraseSessionSetErase.
-func DREraseSessionSetErase(eraseSession obj.Object, erase obj.Object) {
+func DREraseSessionSetErase(eraseSession DREraseSessionRef, erase obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDREraseSessionSetErase == nil {
 		ebipurego.RegisterLibFunc(&_fnDREraseSessionSetErase, _lib, "DREraseSessionSetErase")
 	}
-	_fnDREraseSessionSetErase(objref.IDOf(eraseSession), objref.IDOf(erase))
+	_fnDREraseSessionSetErase(objref.IDOf(eraseSession.Object), objref.IDOf(erase))
 }
 
 var _fnDREraseSessionSetupDialog func(objc.ID, unsafe.Pointer, unsafe.Pointer) int8
 
 // DREraseSessionSetupDialog calls the DiscRecordingUI framework function DREraseSessionSetupDialog.
-func DREraseSessionSetupDialog(eraseSession obj.Object, setupCallbacks unsafe.Pointer) (result int8, options DREraseSessionSetupDialogOptions) {
+func DREraseSessionSetupDialog(eraseSession DREraseSessionRef, setupCallbacks unsafe.Pointer) (result int8, options DREraseSessionSetupDialogOptions) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDREraseSessionSetupDialog == nil {
 		ebipurego.RegisterLibFunc(&_fnDREraseSessionSetupDialog, _lib, "DREraseSessionSetupDialog")
 	}
 	var _out0 DREraseSessionSetupDialogOptions
-	_ret := _fnDREraseSessionSetupDialog(objref.IDOf(eraseSession), unsafe.Pointer(&_out0), setupCallbacks)
+	_ret := _fnDREraseSessionSetupDialog(objref.IDOf(eraseSession.Object), unsafe.Pointer(&_out0), setupCallbacks)
 	return _ret, _out0
 }

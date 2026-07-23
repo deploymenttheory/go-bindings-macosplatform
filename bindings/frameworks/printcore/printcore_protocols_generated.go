@@ -31,10 +31,10 @@ type PDEPlugIn interface {
 
 // PDEPlugInCallbackProtocol is the Go form of the Objective-C protocol PDEPlugInCallbackProtocol.
 type PDEPlugInCallbackProtocol interface {
-	PrintSession() obj.Object
-	PrintSettings() obj.Object
-	PageFormat() obj.Object
-	PMPrinter() obj.Object
+	PrintSession() PMPrintSession
+	PrintSettings() PMPrintSettings
+	PageFormat() PMPageFormat
+	PMPrinter() PMPrinter
 	PpdFile() unsafe.Pointer
 	WillChangePPDOptionKeyValuePpdChoice(option string, choice string) bool
 }

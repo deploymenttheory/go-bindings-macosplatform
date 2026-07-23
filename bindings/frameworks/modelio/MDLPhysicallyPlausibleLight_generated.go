@@ -7,6 +7,7 @@ package modelio
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,9 +50,9 @@ func physicallyPlausibleLightAdopt(id objc.ID) *PhysicallyPlausibleLight {
 }
 
 // WithColor sets the color of the light source.
-func (ppl *PhysicallyPlausibleLight) WithColor(color obj.Object) *PhysicallyPlausibleLight {
+func (ppl *PhysicallyPlausibleLight) WithColor(color coregraphics.CGColorRef) *PhysicallyPlausibleLight {
 	defer runtime.KeepAlive(color)
-	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setColor:"), objref.IDOf(color))
+	objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("setColor:"), objref.IDOf(color.Object))
 	return ppl
 }
 
@@ -124,10 +125,10 @@ func (ppl *PhysicallyPlausibleLight) SetColorByTemperature(temperature float32) 
 }
 
 // Color returns the color.
-func (ppl *PhysicallyPlausibleLight) Color() obj.Object {
+func (ppl *PhysicallyPlausibleLight) Color() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(ppl)
 	_r := objc.Send[objc.ID](objref.IDOf(ppl), objc.RegisterName("color"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // Lumens returns the lumens.

@@ -32,12 +32,12 @@ func FCAddCollection(iCollection obj.Object, iCollectionOptions int) error {
 var _fnFCAddFontDescriptorToCollection func(objc.ID, objc.ID) int32
 
 // FCAddFontDescriptorToCollection reports an error if the CommonPanels framework function FCAddFontDescriptorToCollection fails.
-func FCAddFontDescriptorToCollection(iDescriptor obj.Object, iCollection obj.Object) error {
+func FCAddFontDescriptorToCollection(iDescriptor FCFontDescriptorRef, iCollection obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFCAddFontDescriptorToCollection == nil {
 		ebipurego.RegisterLibFunc(&_fnFCAddFontDescriptorToCollection, _lib, "FCAddFontDescriptorToCollection")
 	}
-	_rc := _fnFCAddFontDescriptorToCollection(objref.IDOf(iDescriptor), objref.IDOf(iCollection))
+	_rc := _fnFCAddFontDescriptorToCollection(objref.IDOf(iDescriptor.Object), objref.IDOf(iCollection))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -62,12 +62,12 @@ func FCRemoveCollection(iCollection obj.Object) error {
 var _fnFCRemoveFontDescriptorFromCollection func(objc.ID, objc.ID) int32
 
 // FCRemoveFontDescriptorFromCollection reports an error if the CommonPanels framework function FCRemoveFontDescriptorFromCollection fails.
-func FCRemoveFontDescriptorFromCollection(iDescriptor obj.Object, iCollection obj.Object) error {
+func FCRemoveFontDescriptorFromCollection(iDescriptor FCFontDescriptorRef, iCollection obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFCRemoveFontDescriptorFromCollection == nil {
 		ebipurego.RegisterLibFunc(&_fnFCRemoveFontDescriptorFromCollection, _lib, "FCRemoveFontDescriptorFromCollection")
 	}
-	_rc := _fnFCRemoveFontDescriptorFromCollection(objref.IDOf(iDescriptor), objref.IDOf(iCollection))
+	_rc := _fnFCRemoveFontDescriptorFromCollection(objref.IDOf(iDescriptor.Object), objref.IDOf(iCollection))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

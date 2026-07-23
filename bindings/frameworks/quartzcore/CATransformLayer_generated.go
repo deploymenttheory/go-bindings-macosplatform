@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -247,9 +248,9 @@ func (tl *TransformLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool
 }
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
-func (tl *TransformLayer) WithBackgroundColor(backgroundColor obj.Object) *TransformLayer {
+func (tl *TransformLayer) WithBackgroundColor(backgroundColor coregraphics.CGColorRef) *TransformLayer {
 	defer runtime.KeepAlive(backgroundColor)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor.Object))
 	return tl
 }
 
@@ -279,9 +280,9 @@ func (tl *TransformLayer) WithBorderWidth(borderWidth float64) *TransformLayer {
 }
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
-func (tl *TransformLayer) WithBorderColor(borderColor obj.Object) *TransformLayer {
+func (tl *TransformLayer) WithBorderColor(borderColor coregraphics.CGColorRef) *TransformLayer {
 	defer runtime.KeepAlive(borderColor)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor.Object))
 	return tl
 }
 
@@ -317,9 +318,9 @@ func (tl *TransformLayer) WithRasterizationScale(rasterizationScale float64) *Tr
 }
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
-func (tl *TransformLayer) WithShadowColor(shadowColor obj.Object) *TransformLayer {
+func (tl *TransformLayer) WithShadowColor(shadowColor coregraphics.CGColorRef) *TransformLayer {
 	defer runtime.KeepAlive(shadowColor)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor.Object))
 	return tl
 }
 
@@ -342,9 +343,9 @@ func (tl *TransformLayer) WithShadowRadius(shadowRadius float64) *TransformLayer
 }
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
-func (tl *TransformLayer) WithShadowPath(shadowPath obj.Object) *TransformLayer {
+func (tl *TransformLayer) WithShadowPath(shadowPath coregraphics.CGPathRef) *TransformLayer {
 	defer runtime.KeepAlive(shadowPath)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath.Object))
 	return tl
 }
 

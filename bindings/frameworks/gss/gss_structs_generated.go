@@ -6,6 +6,8 @@ package gss
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type GssAuthIdentity struct{}
@@ -140,3 +142,52 @@ type GssKrb5LucidKeyT = GssKrb5LucidKey
 
 // GssKrb5Rfc1964KeydataT is an alias for the gss_krb5_rfc1964_keydata value type.
 type GssKrb5Rfc1964KeydataT = GssKrb5Rfc1964Keydata
+
+// GssAuthIdentityT is a handle for the opaque gss_auth_identity_t type.
+type GssAuthIdentityT struct{ obj.Object }
+
+// IsNil reports whether GssAuthIdentityT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h GssAuthIdentityT) IsNil() bool { return h.Object == nil }
+
+// GssConstCredIdT is a handle for the opaque gss_const_cred_id_t type.
+type GssConstCredIdT struct{ obj.Object }
+
+// IsNil reports whether GssConstCredIdT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h GssConstCredIdT) IsNil() bool { return h.Object == nil }
+
+// GssConstCtxIdT is a handle for the opaque gss_const_ctx_id_t type.
+type GssConstCtxIdT struct{ obj.Object }
+
+// IsNil reports whether GssConstCtxIdT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h GssConstCtxIdT) IsNil() bool { return h.Object == nil }
+
+// GssConstNameT is a handle for the opaque gss_const_name_t type.
+type GssConstNameT struct{ obj.Object }
+
+// IsNil reports whether GssConstNameT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h GssConstNameT) IsNil() bool { return h.Object == nil }
+
+// GssCredIdT is a handle for the opaque gss_cred_id_t type.
+type GssCredIdT struct{ obj.Object }
+
+// IsNil reports whether GssCredIdT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h GssCredIdT) IsNil() bool { return h.Object == nil }
+
+// GssCtxIdT is a handle for the opaque gss_ctx_id_t type.
+type GssCtxIdT struct{ obj.Object }
+
+// IsNil reports whether GssCtxIdT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h GssCtxIdT) IsNil() bool { return h.Object == nil }
+
+// GssNameT is a handle for the opaque gss_name_t type.
+type GssNameT struct{ obj.Object }
+
+// IsNil reports whether GssNameT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h GssNameT) IsNil() bool { return h.Object == nil }

@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ats"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type CalibratorInfo struct {
@@ -73,3 +74,17 @@ type RGBColor struct {
 	Green uint16
 	Blue  uint16
 }
+
+// FCFontDescriptorRef is a handle for the opaque FCFontDescriptorRef type.
+type FCFontDescriptorRef struct{ obj.Object }
+
+// IsNil reports whether FCFontDescriptorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h FCFontDescriptorRef) IsNil() bool { return h.Object == nil }
+
+// Picker is a handle for the opaque Picker type.
+type Picker struct{ obj.Object }
+
+// IsNil reports whether Picker is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Picker) IsNil() bool { return h.Object == nil }

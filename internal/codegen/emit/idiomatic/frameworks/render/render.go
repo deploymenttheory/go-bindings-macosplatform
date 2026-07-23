@@ -88,6 +88,16 @@ func TypedefAliases(aliases []view.TypedefAlias) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
+// HandleTypes renders distinct named handle types (`type CFArrayRef struct{
+// obj.Object }` plus an IsNil method) for a package as a Go source fragment.
+func HandleTypes(handles []view.HandleType) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := templates.ExecuteTemplate(&buf, "handle_types", handles); err != nil {
+		return nil, fmt.Errorf("render handle types: %w", err)
+	}
+	return buf.Bytes(), nil
+}
+
 // Enums renders the concrete enum definitions for a package as a Go source
 // fragment (a package body, before file assembly and gofmt). Each enum becomes a
 // `type X <underlying>` declaration with a typed const block and a String method.

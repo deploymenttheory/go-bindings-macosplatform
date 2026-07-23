@@ -17,13 +17,13 @@ import (
 // CFBundleLoadExecutableAndReturnError reports an error if the CoreFoundation framework function CFBundleLoadExecutableAndReturnError fails.
 var _fnCFBundleLoadExecutableAndReturnError func(objc.ID, unsafe.Pointer) uint8
 
-func CFBundleLoadExecutableAndReturnError(bundle obj.Object) error {
+func CFBundleLoadExecutableAndReturnError(bundle CFBundleRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBundleLoadExecutableAndReturnError == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBundleLoadExecutableAndReturnError, _lib, "CFBundleLoadExecutableAndReturnError")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCFBundleLoadExecutableAndReturnError(objref.IDOf(bundle), unsafe.Pointer(&_cfErr))
+	_ok := _fnCFBundleLoadExecutableAndReturnError(objref.IDOf(bundle.Object), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -33,13 +33,13 @@ func CFBundleLoadExecutableAndReturnError(bundle obj.Object) error {
 // CFBundlePreflightExecutable reports an error if the CoreFoundation framework function CFBundlePreflightExecutable fails.
 var _fnCFBundlePreflightExecutable func(objc.ID, unsafe.Pointer) uint8
 
-func CFBundlePreflightExecutable(bundle obj.Object) error {
+func CFBundlePreflightExecutable(bundle CFBundleRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFBundlePreflightExecutable == nil {
 		ebipurego.RegisterLibFunc(&_fnCFBundlePreflightExecutable, _lib, "CFBundlePreflightExecutable")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCFBundlePreflightExecutable(objref.IDOf(bundle), unsafe.Pointer(&_cfErr))
+	_ok := _fnCFBundlePreflightExecutable(objref.IDOf(bundle.Object), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -49,13 +49,13 @@ func CFBundlePreflightExecutable(bundle obj.Object) error {
 // CFPropertyListCreateData reports an error if the CoreFoundation framework function CFPropertyListCreateData fails.
 var _fnCFPropertyListCreateData func(objc.ID, objc.ID, CFPropertyListFormat, int, unsafe.Pointer) objc.ID
 
-func CFPropertyListCreateData(allocator obj.Object, propertyList obj.Object, format CFPropertyListFormat, options int) (obj.Object, error) {
+func CFPropertyListCreateData(allocator CFAllocatorRef, propertyList CFPropertyListRef, format CFPropertyListFormat, options int) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFPropertyListCreateData == nil {
 		ebipurego.RegisterLibFunc(&_fnCFPropertyListCreateData, _lib, "CFPropertyListCreateData")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnCFPropertyListCreateData(objref.IDOf(allocator), objref.IDOf(propertyList), format, options, unsafe.Pointer(&_cfErr))
+	_r := _fnCFPropertyListCreateData(objref.IDOf(allocator.Object), objref.IDOf(propertyList.Object), format, options, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -65,13 +65,13 @@ func CFPropertyListCreateData(allocator obj.Object, propertyList obj.Object, for
 // CFPropertyListWrite reports an error if the CoreFoundation framework function CFPropertyListWrite fails.
 var _fnCFPropertyListWrite func(objc.ID, objc.ID, CFPropertyListFormat, int, unsafe.Pointer) objc.ID
 
-func CFPropertyListWrite(propertyList obj.Object, stream obj.Object, format CFPropertyListFormat, options int) (obj.Object, error) {
+func CFPropertyListWrite(propertyList CFPropertyListRef, stream CFWriteStreamRef, format CFPropertyListFormat, options int) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFPropertyListWrite == nil {
 		ebipurego.RegisterLibFunc(&_fnCFPropertyListWrite, _lib, "CFPropertyListWrite")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnCFPropertyListWrite(objref.IDOf(propertyList), objref.IDOf(stream), format, options, unsafe.Pointer(&_cfErr))
+	_r := _fnCFPropertyListWrite(objref.IDOf(propertyList.Object), objref.IDOf(stream.Object), format, options, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -81,13 +81,13 @@ func CFPropertyListWrite(propertyList obj.Object, stream obj.Object, format CFPr
 // CFStringCreateStringWithValidatedFormat reports an error if the CoreFoundation framework function CFStringCreateStringWithValidatedFormat fails.
 var _fnCFStringCreateStringWithValidatedFormat func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func CFStringCreateStringWithValidatedFormat(alloc obj.Object, formatOptions obj.Object, validFormatSpecifiers obj.Object, format obj.Object) (obj.Object, error) {
+func CFStringCreateStringWithValidatedFormat(alloc CFAllocatorRef, formatOptions CFDictionaryRef, validFormatSpecifiers CFStringRef, format CFStringRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringCreateStringWithValidatedFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateStringWithValidatedFormat, _lib, "CFStringCreateStringWithValidatedFormat")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnCFStringCreateStringWithValidatedFormat(objref.IDOf(alloc), objref.IDOf(formatOptions), objref.IDOf(validFormatSpecifiers), objref.IDOf(format), unsafe.Pointer(&_cfErr))
+	_r := _fnCFStringCreateStringWithValidatedFormat(objref.IDOf(alloc.Object), objref.IDOf(formatOptions.Object), objref.IDOf(validFormatSpecifiers.Object), objref.IDOf(format.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -97,13 +97,13 @@ func CFStringCreateStringWithValidatedFormat(alloc obj.Object, formatOptions obj
 // CFStringCreateStringWithValidatedFormatAndArguments reports an error if the CoreFoundation framework function CFStringCreateStringWithValidatedFormatAndArguments fails.
 var _fnCFStringCreateStringWithValidatedFormatAndArguments func(objc.ID, objc.ID, objc.ID, objc.ID, string, unsafe.Pointer) objc.ID
 
-func CFStringCreateStringWithValidatedFormatAndArguments(alloc obj.Object, formatOptions obj.Object, validFormatSpecifiers obj.Object, format obj.Object, arguments string) (obj.Object, error) {
+func CFStringCreateStringWithValidatedFormatAndArguments(alloc CFAllocatorRef, formatOptions CFDictionaryRef, validFormatSpecifiers CFStringRef, format CFStringRef, arguments string) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFStringCreateStringWithValidatedFormatAndArguments == nil {
 		ebipurego.RegisterLibFunc(&_fnCFStringCreateStringWithValidatedFormatAndArguments, _lib, "CFStringCreateStringWithValidatedFormatAndArguments")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnCFStringCreateStringWithValidatedFormatAndArguments(objref.IDOf(alloc), objref.IDOf(formatOptions), objref.IDOf(validFormatSpecifiers), objref.IDOf(format), arguments, unsafe.Pointer(&_cfErr))
+	_r := _fnCFStringCreateStringWithValidatedFormatAndArguments(objref.IDOf(alloc.Object), objref.IDOf(formatOptions.Object), objref.IDOf(validFormatSpecifiers.Object), objref.IDOf(format.Object), arguments, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -113,13 +113,13 @@ func CFStringCreateStringWithValidatedFormatAndArguments(alloc obj.Object, forma
 // CFURLCopyResourcePropertiesForKeys reports an error if the CoreFoundation framework function CFURLCopyResourcePropertiesForKeys fails.
 var _fnCFURLCopyResourcePropertiesForKeys func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func CFURLCopyResourcePropertiesForKeys(url obj.Object, keys obj.Object) (obj.Object, error) {
+func CFURLCopyResourcePropertiesForKeys(url CFURLRef, keys CFArrayRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLCopyResourcePropertiesForKeys == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyResourcePropertiesForKeys, _lib, "CFURLCopyResourcePropertiesForKeys")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnCFURLCopyResourcePropertiesForKeys(objref.IDOf(url), objref.IDOf(keys), unsafe.Pointer(&_cfErr))
+	_r := _fnCFURLCopyResourcePropertiesForKeys(objref.IDOf(url.Object), objref.IDOf(keys.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -129,13 +129,13 @@ func CFURLCopyResourcePropertiesForKeys(url obj.Object, keys obj.Object) (obj.Ob
 // CFURLCopyResourcePropertyForKey reports an error if the CoreFoundation framework function CFURLCopyResourcePropertyForKey fails.
 var _fnCFURLCopyResourcePropertyForKey func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) uint8
 
-func CFURLCopyResourcePropertyForKey(url obj.Object, key obj.Object, propertyValueTypeRefPtr unsafe.Pointer) error {
+func CFURLCopyResourcePropertyForKey(url CFURLRef, key CFStringRef, propertyValueTypeRefPtr unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLCopyResourcePropertyForKey == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLCopyResourcePropertyForKey, _lib, "CFURLCopyResourcePropertyForKey")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCFURLCopyResourcePropertyForKey(objref.IDOf(url), objref.IDOf(key), propertyValueTypeRefPtr, unsafe.Pointer(&_cfErr))
+	_ok := _fnCFURLCopyResourcePropertyForKey(objref.IDOf(url.Object), objref.IDOf(key.Object), propertyValueTypeRefPtr, unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -145,13 +145,13 @@ func CFURLCopyResourcePropertyForKey(url obj.Object, key obj.Object, propertyVal
 // CFURLCreateBookmarkData reports an error if the CoreFoundation framework function CFURLCreateBookmarkData fails.
 var _fnCFURLCreateBookmarkData func(objc.ID, objc.ID, CFURLBookmarkCreationOptions, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func CFURLCreateBookmarkData(allocator obj.Object, url obj.Object, options CFURLBookmarkCreationOptions, resourcePropertiesToInclude obj.Object, relativeToURL obj.Object) (obj.Object, error) {
+func CFURLCreateBookmarkData(allocator CFAllocatorRef, url CFURLRef, options CFURLBookmarkCreationOptions, resourcePropertiesToInclude CFArrayRef, relativeToURL CFURLRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLCreateBookmarkData == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateBookmarkData, _lib, "CFURLCreateBookmarkData")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnCFURLCreateBookmarkData(objref.IDOf(allocator), objref.IDOf(url), options, objref.IDOf(resourcePropertiesToInclude), objref.IDOf(relativeToURL), unsafe.Pointer(&_cfErr))
+	_r := _fnCFURLCreateBookmarkData(objref.IDOf(allocator.Object), objref.IDOf(url.Object), options, objref.IDOf(resourcePropertiesToInclude.Object), objref.IDOf(relativeToURL.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -161,13 +161,13 @@ func CFURLCreateBookmarkData(allocator obj.Object, url obj.Object, options CFURL
 // CFURLCreateBookmarkDataFromFile reports an error if the CoreFoundation framework function CFURLCreateBookmarkDataFromFile fails.
 var _fnCFURLCreateBookmarkDataFromFile func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func CFURLCreateBookmarkDataFromFile(allocator obj.Object, fileURL obj.Object) (obj.Object, error) {
+func CFURLCreateBookmarkDataFromFile(allocator CFAllocatorRef, fileURL CFURLRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLCreateBookmarkDataFromFile == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateBookmarkDataFromFile, _lib, "CFURLCreateBookmarkDataFromFile")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnCFURLCreateBookmarkDataFromFile(objref.IDOf(allocator), objref.IDOf(fileURL), unsafe.Pointer(&_cfErr))
+	_r := _fnCFURLCreateBookmarkDataFromFile(objref.IDOf(allocator.Object), objref.IDOf(fileURL.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -177,13 +177,13 @@ func CFURLCreateBookmarkDataFromFile(allocator obj.Object, fileURL obj.Object) (
 // CFURLCreateFilePathURL reports an error if the CoreFoundation framework function CFURLCreateFilePathURL fails.
 var _fnCFURLCreateFilePathURL func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func CFURLCreateFilePathURL(allocator obj.Object, url obj.Object) (obj.Object, error) {
+func CFURLCreateFilePathURL(allocator CFAllocatorRef, url CFURLRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLCreateFilePathURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateFilePathURL, _lib, "CFURLCreateFilePathURL")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnCFURLCreateFilePathURL(objref.IDOf(allocator), objref.IDOf(url), unsafe.Pointer(&_cfErr))
+	_r := _fnCFURLCreateFilePathURL(objref.IDOf(allocator.Object), objref.IDOf(url.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -193,13 +193,13 @@ func CFURLCreateFilePathURL(allocator obj.Object, url obj.Object) (obj.Object, e
 // CFURLCreateFileReferenceURL reports an error if the CoreFoundation framework function CFURLCreateFileReferenceURL fails.
 var _fnCFURLCreateFileReferenceURL func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func CFURLCreateFileReferenceURL(allocator obj.Object, url obj.Object) (obj.Object, error) {
+func CFURLCreateFileReferenceURL(allocator CFAllocatorRef, url CFURLRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLCreateFileReferenceURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLCreateFileReferenceURL, _lib, "CFURLCreateFileReferenceURL")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnCFURLCreateFileReferenceURL(objref.IDOf(allocator), objref.IDOf(url), unsafe.Pointer(&_cfErr))
+	_r := _fnCFURLCreateFileReferenceURL(objref.IDOf(allocator.Object), objref.IDOf(url.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -209,13 +209,13 @@ func CFURLCreateFileReferenceURL(allocator obj.Object, url obj.Object) (obj.Obje
 // CFURLEnumeratorGetNextURL reports an error if the CoreFoundation framework function CFURLEnumeratorGetNextURL fails.
 var _fnCFURLEnumeratorGetNextURL func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
 
-func CFURLEnumeratorGetNextURL(enumerator obj.Object, url unsafe.Pointer) (obj.Object, error) {
+func CFURLEnumeratorGetNextURL(enumerator CFURLEnumeratorRef, url unsafe.Pointer) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLEnumeratorGetNextURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLEnumeratorGetNextURL, _lib, "CFURLEnumeratorGetNextURL")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnCFURLEnumeratorGetNextURL(objref.IDOf(enumerator), url, unsafe.Pointer(&_cfErr))
+	_r := _fnCFURLEnumeratorGetNextURL(objref.IDOf(enumerator.Object), url, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -225,13 +225,13 @@ func CFURLEnumeratorGetNextURL(enumerator obj.Object, url unsafe.Pointer) (obj.O
 // CFURLResourceIsReachable reports an error if the CoreFoundation framework function CFURLResourceIsReachable fails.
 var _fnCFURLResourceIsReachable func(objc.ID, unsafe.Pointer) uint8
 
-func CFURLResourceIsReachable(url obj.Object) error {
+func CFURLResourceIsReachable(url CFURLRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLResourceIsReachable == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLResourceIsReachable, _lib, "CFURLResourceIsReachable")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCFURLResourceIsReachable(objref.IDOf(url), unsafe.Pointer(&_cfErr))
+	_ok := _fnCFURLResourceIsReachable(objref.IDOf(url.Object), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -241,13 +241,13 @@ func CFURLResourceIsReachable(url obj.Object) error {
 // CFURLSetResourcePropertiesForKeys reports an error if the CoreFoundation framework function CFURLSetResourcePropertiesForKeys fails.
 var _fnCFURLSetResourcePropertiesForKeys func(objc.ID, objc.ID, unsafe.Pointer) uint8
 
-func CFURLSetResourcePropertiesForKeys(url obj.Object, keyedPropertyValues obj.Object) error {
+func CFURLSetResourcePropertiesForKeys(url CFURLRef, keyedPropertyValues CFDictionaryRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLSetResourcePropertiesForKeys == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLSetResourcePropertiesForKeys, _lib, "CFURLSetResourcePropertiesForKeys")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCFURLSetResourcePropertiesForKeys(objref.IDOf(url), objref.IDOf(keyedPropertyValues), unsafe.Pointer(&_cfErr))
+	_ok := _fnCFURLSetResourcePropertiesForKeys(objref.IDOf(url.Object), objref.IDOf(keyedPropertyValues.Object), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -257,13 +257,13 @@ func CFURLSetResourcePropertiesForKeys(url obj.Object, keyedPropertyValues obj.O
 // CFURLSetResourcePropertyForKey reports an error if the CoreFoundation framework function CFURLSetResourcePropertyForKey fails.
 var _fnCFURLSetResourcePropertyForKey func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) uint8
 
-func CFURLSetResourcePropertyForKey(url obj.Object, key obj.Object, propertyValue obj.Object) error {
+func CFURLSetResourcePropertyForKey(url CFURLRef, key CFStringRef, propertyValue CFTypeRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLSetResourcePropertyForKey == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLSetResourcePropertyForKey, _lib, "CFURLSetResourcePropertyForKey")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCFURLSetResourcePropertyForKey(objref.IDOf(url), objref.IDOf(key), objref.IDOf(propertyValue), unsafe.Pointer(&_cfErr))
+	_ok := _fnCFURLSetResourcePropertyForKey(objref.IDOf(url.Object), objref.IDOf(key.Object), objref.IDOf(propertyValue.Object), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -273,13 +273,13 @@ func CFURLSetResourcePropertyForKey(url obj.Object, key obj.Object, propertyValu
 // CFURLWriteBookmarkDataToFile reports an error if the CoreFoundation framework function CFURLWriteBookmarkDataToFile fails.
 var _fnCFURLWriteBookmarkDataToFile func(objc.ID, objc.ID, int, unsafe.Pointer) uint8
 
-func CFURLWriteBookmarkDataToFile(bookmarkRef obj.Object, fileURL obj.Object, options int) error {
+func CFURLWriteBookmarkDataToFile(bookmarkRef CFDataRef, fileURL CFURLRef, options int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLWriteBookmarkDataToFile == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLWriteBookmarkDataToFile, _lib, "CFURLWriteBookmarkDataToFile")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCFURLWriteBookmarkDataToFile(objref.IDOf(bookmarkRef), objref.IDOf(fileURL), options, unsafe.Pointer(&_cfErr))
+	_ok := _fnCFURLWriteBookmarkDataToFile(objref.IDOf(bookmarkRef.Object), objref.IDOf(fileURL.Object), options, unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}

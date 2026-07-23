@@ -8,6 +8,8 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -110,33 +112,33 @@ func (t *Texture) WriteToURLLevel(url string, level int) bool {
 }
 
 // WriteToURLType exports the texture data to an image file at the specified URL, of the specified type.
-func (t *Texture) WriteToURLType(nsurl string, type_ obj.Object) bool {
+func (t *Texture) WriteToURLType(nsurl string, type_ corefoundation.CFStringRef) bool {
 	defer runtime.KeepAlive(t)
 	defer runtime.KeepAlive(type_)
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("writeToURL:type:"), rt.FileURL(nsurl), objref.IDOf(type_))
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("writeToURL:type:"), rt.FileURL(nsurl), objref.IDOf(type_.Object))
 	return _r
 }
 
 // WriteToURLTypeLevel write a particular level of a mipped texture to URL, using a specific UT type
-func (t *Texture) WriteToURLTypeLevel(nsurl string, type_ obj.Object, level int) bool {
+func (t *Texture) WriteToURLTypeLevel(nsurl string, type_ corefoundation.CFStringRef, level int) bool {
 	defer runtime.KeepAlive(t)
 	defer runtime.KeepAlive(type_)
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("writeToURL:type:level:"), rt.FileURL(nsurl), objref.IDOf(type_), level)
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("writeToURL:type:level:"), rt.FileURL(nsurl), objref.IDOf(type_.Object), level)
 	return _r
 }
 
 // ImageFromTexture returns exports the texture data as a CoreGraphics image.
-func (t *Texture) ImageFromTexture() obj.Object {
+func (t *Texture) ImageFromTexture() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("imageFromTexture"))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // ImageFromTextureAtLevel wraps the corresponding Objective-C method.
-func (t *Texture) ImageFromTextureAtLevel(level int) obj.Object {
+func (t *Texture) ImageFromTextureAtLevel(level int) coregraphics.CGImageRef {
 	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("imageFromTextureAtLevel:"), level)
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // TexelDataWithTopLeftOrigin returns the texture’s image data, organized such that its first pixel represents the top-left corner of the image.

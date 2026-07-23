@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
@@ -30,32 +31,32 @@ type PlugInContext interface {
 	CompositionURL() string
 	LogMessage(format string)
 	UserInfo() obj.Object
-	ColorSpace() obj.Object
+	ColorSpace() coregraphics.CGColorSpaceRef
 	Bounds() corefoundation.CGRect
 	CGLContextObj() obj.Object
-	OutputImageProviderFromBufferWithPixelFormatPixelsWidePixelsHighBaseAddressBytesPerRowReleaseCallbackReleaseContextColorSpaceShouldColorMatch(format string, width int, height int, baseAddress unsafe.Pointer, rowBytes int, callback unsafe.Pointer, context_ unsafe.Pointer, colorSpace obj.Object, colorMatch bool) obj.Object
-	OutputImageProviderFromTextureWithPixelFormatPixelsWidePixelsHighNameFlippedReleaseCallbackReleaseContextColorSpaceShouldColorMatch(format string, width int, height int, name uint32, flipped bool, callback unsafe.Pointer, context_ unsafe.Pointer, colorSpace obj.Object, colorMatch bool) obj.Object
+	OutputImageProviderFromBufferWithPixelFormatPixelsWidePixelsHighBaseAddressBytesPerRowReleaseCallbackReleaseContextColorSpaceShouldColorMatch(format string, width int, height int, baseAddress unsafe.Pointer, rowBytes int, callback unsafe.Pointer, context_ unsafe.Pointer, colorSpace coregraphics.CGColorSpaceRef, colorMatch bool) obj.Object
+	OutputImageProviderFromTextureWithPixelFormatPixelsWidePixelsHighNameFlippedReleaseCallbackReleaseContextColorSpaceShouldColorMatch(format string, width int, height int, name uint32, flipped bool, callback unsafe.Pointer, context_ unsafe.Pointer, colorSpace coregraphics.CGColorSpaceRef, colorMatch bool) obj.Object
 }
 
 // PlugInInputImageSource is the Go form of the Objective-C protocol QCPlugInInputImageSource.
 type PlugInInputImageSource interface {
 	ImageBounds() corefoundation.CGRect
-	ImageColorSpace() obj.Object
+	ImageColorSpace() coregraphics.CGColorSpaceRef
 	ShouldColorMatch() bool
-	LockBufferRepresentationWithPixelFormatColorSpaceForBounds(format string, colorSpace obj.Object, bounds corefoundation.CGRect) bool
+	LockBufferRepresentationWithPixelFormatColorSpaceForBounds(format string, colorSpace coregraphics.CGColorSpaceRef, bounds corefoundation.CGRect) bool
 	BufferPixelsWide() int
 	BufferPixelsHigh() int
 	BufferPixelFormat() string
-	BufferColorSpace() obj.Object
+	BufferColorSpace() coregraphics.CGColorSpaceRef
 	BufferBaseAddress() unsafe.Pointer
 	BufferBytesPerRow() int
 	UnlockBufferRepresentation()
-	LockTextureRepresentationWithColorSpaceForBounds(colorSpace obj.Object, bounds corefoundation.CGRect) bool
+	LockTextureRepresentationWithColorSpaceForBounds(colorSpace coregraphics.CGColorSpaceRef, bounds corefoundation.CGRect) bool
 	TexturePixelsWide() int
 	TexturePixelsHigh() int
 	TextureTarget() uint32
 	TextureName() uint32
-	TextureColorSpace() obj.Object
+	TextureColorSpace() coregraphics.CGColorSpaceRef
 	TextureFlipped() bool
 	TextureMatrix() obj.Object
 	BindTextureRepresentationToCGLContextTextureUnitNormalizeCoordinates(cglCtx obj.Object, unit uint32, flag bool)
@@ -66,5 +67,5 @@ type PlugInInputImageSource interface {
 // PlugInOutputImageProvider is the Go form of the Objective-C protocol QCPlugInOutputImageProvider.
 type PlugInOutputImageProvider interface {
 	ImageBounds() corefoundation.CGRect
-	ImageColorSpace() obj.Object
+	ImageColorSpace() coregraphics.CGColorSpaceRef
 }

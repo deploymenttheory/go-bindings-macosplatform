@@ -7,6 +7,8 @@ package printcore
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -16,378 +18,378 @@ import (
 var _fnPMCGImageCreateWithEPSDataProvider func(objc.ID, objc.ID) objc.ID
 
 // PMCGImageCreateWithEPSDataProvider calls the PrintCore framework function PMCGImageCreateWithEPSDataProvider.
-func PMCGImageCreateWithEPSDataProvider(epsDataProvider obj.Object, epsPreview obj.Object) obj.Object {
+func PMCGImageCreateWithEPSDataProvider(epsDataProvider coregraphics.CGDataProviderRef, epsPreview coregraphics.CGImageRef) coregraphics.CGImageRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMCGImageCreateWithEPSDataProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnPMCGImageCreateWithEPSDataProvider, _lib, "PMCGImageCreateWithEPSDataProvider")
 	}
-	_ret := _fnPMCGImageCreateWithEPSDataProvider(objref.IDOf(epsDataProvider), objref.IDOf(epsPreview))
-	return obj.Wrap(_ret)
+	_ret := _fnPMCGImageCreateWithEPSDataProvider(objref.IDOf(epsDataProvider.Object), objref.IDOf(epsPreview.Object))
+	return coregraphics.CGImageRef{obj.Wrap(_ret)}
 }
 
 var _fnPMGetCollate func(objc.ID, unsafe.Pointer) int32
 
 // PMGetCollate calls the PrintCore framework function PMGetCollate.
-func PMGetCollate(printSettings obj.Object) (result int, collate uint8) {
+func PMGetCollate(printSettings PMPrintSettings) (result int, collate uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMGetCollate == nil {
 		ebipurego.RegisterLibFunc(&_fnPMGetCollate, _lib, "PMGetCollate")
 	}
 	var _out0 uint8
-	_ret := int(_fnPMGetCollate(objref.IDOf(printSettings), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMGetCollate(objref.IDOf(printSettings.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMGetCopies func(objc.ID, unsafe.Pointer) int32
 
 // PMGetCopies calls the PrintCore framework function PMGetCopies.
-func PMGetCopies(printSettings obj.Object) (result int, copies int) {
+func PMGetCopies(printSettings PMPrintSettings) (result int, copies int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMGetCopies == nil {
 		ebipurego.RegisterLibFunc(&_fnPMGetCopies, _lib, "PMGetCopies")
 	}
 	var _out0 int
-	_ret := int(_fnPMGetCopies(objref.IDOf(printSettings), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMGetCopies(objref.IDOf(printSettings.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMGetDuplex func(objc.ID, unsafe.Pointer) int32
 
 // PMGetDuplex calls the PrintCore framework function PMGetDuplex.
-func PMGetDuplex(printSettings obj.Object) (result int, duplexSetting int) {
+func PMGetDuplex(printSettings PMPrintSettings) (result int, duplexSetting int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMGetDuplex == nil {
 		ebipurego.RegisterLibFunc(&_fnPMGetDuplex, _lib, "PMGetDuplex")
 	}
 	var _out0 int
-	_ret := int(_fnPMGetDuplex(objref.IDOf(printSettings), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMGetDuplex(objref.IDOf(printSettings.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMGetFirstPage func(objc.ID, unsafe.Pointer) int32
 
 // PMGetFirstPage calls the PrintCore framework function PMGetFirstPage.
-func PMGetFirstPage(printSettings obj.Object) (result int, first int) {
+func PMGetFirstPage(printSettings PMPrintSettings) (result int, first int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMGetFirstPage == nil {
 		ebipurego.RegisterLibFunc(&_fnPMGetFirstPage, _lib, "PMGetFirstPage")
 	}
 	var _out0 int
-	_ret := int(_fnPMGetFirstPage(objref.IDOf(printSettings), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMGetFirstPage(objref.IDOf(printSettings.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMGetLastPage func(objc.ID, unsafe.Pointer) int32
 
 // PMGetLastPage calls the PrintCore framework function PMGetLastPage.
-func PMGetLastPage(printSettings obj.Object) (result int, last int) {
+func PMGetLastPage(printSettings PMPrintSettings) (result int, last int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMGetLastPage == nil {
 		ebipurego.RegisterLibFunc(&_fnPMGetLastPage, _lib, "PMGetLastPage")
 	}
 	var _out0 int
-	_ret := int(_fnPMGetLastPage(objref.IDOf(printSettings), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMGetLastPage(objref.IDOf(printSettings.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMGetOrientation func(objc.ID, unsafe.Pointer) int32
 
 // PMGetOrientation calls the PrintCore framework function PMGetOrientation.
-func PMGetOrientation(pageFormat obj.Object) (result int, orientation uint16) {
+func PMGetOrientation(pageFormat PMPageFormat) (result int, orientation uint16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMGetOrientation == nil {
 		ebipurego.RegisterLibFunc(&_fnPMGetOrientation, _lib, "PMGetOrientation")
 	}
 	var _out0 uint16
-	_ret := int(_fnPMGetOrientation(objref.IDOf(pageFormat), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMGetOrientation(objref.IDOf(pageFormat.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMGetPageFormatExtendedData func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // PMGetPageFormatExtendedData calls the PrintCore framework function PMGetPageFormatExtendedData.
-func PMGetPageFormatExtendedData(pageFormat obj.Object, dataID int, extendedData unsafe.Pointer) (result int, size int) {
+func PMGetPageFormatExtendedData(pageFormat PMPageFormat, dataID int, extendedData unsafe.Pointer) (result int, size int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMGetPageFormatExtendedData == nil {
 		ebipurego.RegisterLibFunc(&_fnPMGetPageFormatExtendedData, _lib, "PMGetPageFormatExtendedData")
 	}
 	var _out0 int
-	_ret := int(_fnPMGetPageFormatExtendedData(objref.IDOf(pageFormat), dataID, unsafe.Pointer(&_out0), extendedData))
+	_ret := int(_fnPMGetPageFormatExtendedData(objref.IDOf(pageFormat.Object), dataID, unsafe.Pointer(&_out0), extendedData))
 	return _ret, _out0
 }
 
 var _fnPMGetPageRange func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // PMGetPageRange calls the PrintCore framework function PMGetPageRange.
-func PMGetPageRange(printSettings obj.Object) (result int, minPage int, maxPage int) {
+func PMGetPageRange(printSettings PMPrintSettings) (result int, minPage int, maxPage int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMGetPageRange == nil {
 		ebipurego.RegisterLibFunc(&_fnPMGetPageRange, _lib, "PMGetPageRange")
 	}
 	var _out0 int
 	var _out1 int
-	_ret := int(_fnPMGetPageRange(objref.IDOf(printSettings), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
+	_ret := int(_fnPMGetPageRange(objref.IDOf(printSettings.Object), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
 var _fnPMGetScale func(objc.ID, unsafe.Pointer) int32
 
 // PMGetScale calls the PrintCore framework function PMGetScale.
-func PMGetScale(pageFormat obj.Object) (result int, scale float64) {
+func PMGetScale(pageFormat PMPageFormat) (result int, scale float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMGetScale == nil {
 		ebipurego.RegisterLibFunc(&_fnPMGetScale, _lib, "PMGetScale")
 	}
 	var _out0 float64
-	_ret := int(_fnPMGetScale(objref.IDOf(pageFormat), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMGetScale(objref.IDOf(pageFormat.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMPaperGetHeight func(objc.ID, unsafe.Pointer) int32
 
 // PMPaperGetHeight calls the PrintCore framework function PMPaperGetHeight.
-func PMPaperGetHeight(paper obj.Object) (result int, paperHeight float64) {
+func PMPaperGetHeight(paper PMPaper) (result int, paperHeight float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPaperGetHeight == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPaperGetHeight, _lib, "PMPaperGetHeight")
 	}
 	var _out0 float64
-	_ret := int(_fnPMPaperGetHeight(objref.IDOf(paper), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMPaperGetHeight(objref.IDOf(paper.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMPaperGetWidth func(objc.ID, unsafe.Pointer) int32
 
 // PMPaperGetWidth calls the PrintCore framework function PMPaperGetWidth.
-func PMPaperGetWidth(paper obj.Object) (result int, paperWidth float64) {
+func PMPaperGetWidth(paper PMPaper) (result int, paperWidth float64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPaperGetWidth == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPaperGetWidth, _lib, "PMPaperGetWidth")
 	}
 	var _out0 float64
-	_ret := int(_fnPMPaperGetWidth(objref.IDOf(paper), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMPaperGetWidth(objref.IDOf(paper.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMPaperIsCustom func(objc.ID) uint8
 
 // PMPaperIsCustom calls the PrintCore framework function PMPaperIsCustom.
-func PMPaperIsCustom(paper obj.Object) uint8 {
+func PMPaperIsCustom(paper PMPaper) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPaperIsCustom == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPaperIsCustom, _lib, "PMPaperIsCustom")
 	}
-	return _fnPMPaperIsCustom(objref.IDOf(paper))
+	return _fnPMPaperIsCustom(objref.IDOf(paper.Object))
 }
 
 var _fnPMPrinterCreateFromPrinterID func(objc.ID) objc.ID
 
 // PMPrinterCreateFromPrinterID calls the PrintCore framework function PMPrinterCreateFromPrinterID.
-func PMPrinterCreateFromPrinterID(printerID obj.Object) obj.Object {
+func PMPrinterCreateFromPrinterID(printerID corefoundation.CFStringRef) PMPrinter {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPrinterCreateFromPrinterID == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterCreateFromPrinterID, _lib, "PMPrinterCreateFromPrinterID")
 	}
-	_ret := _fnPMPrinterCreateFromPrinterID(objref.IDOf(printerID))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnPMPrinterCreateFromPrinterID(objref.IDOf(printerID.Object))
+	return PMPrinter{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnPMPrinterGetCommInfo func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // PMPrinterGetCommInfo calls the PrintCore framework function PMPrinterGetCommInfo.
-func PMPrinterGetCommInfo(printer obj.Object) (result int, supportsControlCharRangeP uint8, supportsEightBitP uint8) {
+func PMPrinterGetCommInfo(printer PMPrinter) (result int, supportsControlCharRangeP uint8, supportsEightBitP uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPrinterGetCommInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterGetCommInfo, _lib, "PMPrinterGetCommInfo")
 	}
 	var _out0 uint8
 	var _out1 uint8
-	_ret := int(_fnPMPrinterGetCommInfo(objref.IDOf(printer), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
+	_ret := int(_fnPMPrinterGetCommInfo(objref.IDOf(printer.Object), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1)))
 	return _ret, _out0, _out1
 }
 
 var _fnPMPrinterGetDriverCreator func(objc.ID, unsafe.Pointer) int32
 
 // PMPrinterGetDriverCreator calls the PrintCore framework function PMPrinterGetDriverCreator.
-func PMPrinterGetDriverCreator(printer obj.Object) (result int, creator int) {
+func PMPrinterGetDriverCreator(printer PMPrinter) (result int, creator int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPrinterGetDriverCreator == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterGetDriverCreator, _lib, "PMPrinterGetDriverCreator")
 	}
 	var _out0 int
-	_ret := int(_fnPMPrinterGetDriverCreator(objref.IDOf(printer), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMPrinterGetDriverCreator(objref.IDOf(printer.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMPrinterGetID func(objc.ID) objc.ID
 
 // PMPrinterGetID calls the PrintCore framework function PMPrinterGetID.
-func PMPrinterGetID(printer obj.Object) obj.Object {
+func PMPrinterGetID(printer PMPrinter) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPrinterGetID == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterGetID, _lib, "PMPrinterGetID")
 	}
-	_ret := _fnPMPrinterGetID(objref.IDOf(printer))
-	return obj.Wrap(_ret)
+	_ret := _fnPMPrinterGetID(objref.IDOf(printer.Object))
+	return corefoundation.CFStringRef{obj.Wrap(_ret)}
 }
 
 var _fnPMPrinterGetLocation func(objc.ID) objc.ID
 
 // PMPrinterGetLocation calls the PrintCore framework function PMPrinterGetLocation.
-func PMPrinterGetLocation(printer obj.Object) obj.Object {
+func PMPrinterGetLocation(printer PMPrinter) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPrinterGetLocation == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterGetLocation, _lib, "PMPrinterGetLocation")
 	}
-	_ret := _fnPMPrinterGetLocation(objref.IDOf(printer))
-	return obj.Wrap(_ret)
+	_ret := _fnPMPrinterGetLocation(objref.IDOf(printer.Object))
+	return corefoundation.CFStringRef{obj.Wrap(_ret)}
 }
 
 var _fnPMPrinterGetName func(objc.ID) objc.ID
 
 // PMPrinterGetName calls the PrintCore framework function PMPrinterGetName.
-func PMPrinterGetName(printer obj.Object) obj.Object {
+func PMPrinterGetName(printer PMPrinter) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPrinterGetName == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterGetName, _lib, "PMPrinterGetName")
 	}
-	_ret := _fnPMPrinterGetName(objref.IDOf(printer))
-	return obj.Wrap(_ret)
+	_ret := _fnPMPrinterGetName(objref.IDOf(printer.Object))
+	return corefoundation.CFStringRef{obj.Wrap(_ret)}
 }
 
 var _fnPMPrinterGetPrinterResolutionCount func(objc.ID, unsafe.Pointer) int32
 
 // PMPrinterGetPrinterResolutionCount calls the PrintCore framework function PMPrinterGetPrinterResolutionCount.
-func PMPrinterGetPrinterResolutionCount(printer obj.Object) (result int, countP int) {
+func PMPrinterGetPrinterResolutionCount(printer PMPrinter) (result int, countP int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPrinterGetPrinterResolutionCount == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterGetPrinterResolutionCount, _lib, "PMPrinterGetPrinterResolutionCount")
 	}
 	var _out0 int
-	_ret := int(_fnPMPrinterGetPrinterResolutionCount(objref.IDOf(printer), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMPrinterGetPrinterResolutionCount(objref.IDOf(printer.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMPrinterGetState func(objc.ID, unsafe.Pointer) int32
 
 // PMPrinterGetState calls the PrintCore framework function PMPrinterGetState.
-func PMPrinterGetState(printer obj.Object) (result int, state uint16) {
+func PMPrinterGetState(printer PMPrinter) (result int, state uint16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPrinterGetState == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterGetState, _lib, "PMPrinterGetState")
 	}
 	var _out0 uint16
-	_ret := int(_fnPMPrinterGetState(objref.IDOf(printer), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMPrinterGetState(objref.IDOf(printer.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMPrinterIsDefault func(objc.ID) uint8
 
 // PMPrinterIsDefault calls the PrintCore framework function PMPrinterIsDefault.
-func PMPrinterIsDefault(printer obj.Object) uint8 {
+func PMPrinterIsDefault(printer PMPrinter) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPrinterIsDefault == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterIsDefault, _lib, "PMPrinterIsDefault")
 	}
-	return _fnPMPrinterIsDefault(objref.IDOf(printer))
+	return _fnPMPrinterIsDefault(objref.IDOf(printer.Object))
 }
 
 var _fnPMPrinterIsFavorite func(objc.ID) uint8
 
 // PMPrinterIsFavorite calls the PrintCore framework function PMPrinterIsFavorite.
-func PMPrinterIsFavorite(printer obj.Object) uint8 {
+func PMPrinterIsFavorite(printer PMPrinter) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPrinterIsFavorite == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterIsFavorite, _lib, "PMPrinterIsFavorite")
 	}
-	return _fnPMPrinterIsFavorite(objref.IDOf(printer))
+	return _fnPMPrinterIsFavorite(objref.IDOf(printer.Object))
 }
 
 var _fnPMPrinterIsPostScriptCapable func(objc.ID) uint8
 
 // PMPrinterIsPostScriptCapable calls the PrintCore framework function PMPrinterIsPostScriptCapable.
-func PMPrinterIsPostScriptCapable(printer obj.Object) uint8 {
+func PMPrinterIsPostScriptCapable(printer PMPrinter) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPrinterIsPostScriptCapable == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterIsPostScriptCapable, _lib, "PMPrinterIsPostScriptCapable")
 	}
-	return _fnPMPrinterIsPostScriptCapable(objref.IDOf(printer))
+	return _fnPMPrinterIsPostScriptCapable(objref.IDOf(printer.Object))
 }
 
 var _fnPMPrinterIsPostScriptPrinter func(objc.ID, unsafe.Pointer) int32
 
 // PMPrinterIsPostScriptPrinter calls the PrintCore framework function PMPrinterIsPostScriptPrinter.
-func PMPrinterIsPostScriptPrinter(printer obj.Object) (result int, isPSPrinter uint8) {
+func PMPrinterIsPostScriptPrinter(printer PMPrinter) (result int, isPSPrinter uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPrinterIsPostScriptPrinter == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterIsPostScriptPrinter, _lib, "PMPrinterIsPostScriptPrinter")
 	}
 	var _out0 uint8
-	_ret := int(_fnPMPrinterIsPostScriptPrinter(objref.IDOf(printer), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMPrinterIsPostScriptPrinter(objref.IDOf(printer.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMPrinterIsRemote func(objc.ID, unsafe.Pointer) int32
 
 // PMPrinterIsRemote calls the PrintCore framework function PMPrinterIsRemote.
-func PMPrinterIsRemote(printer obj.Object) (result int, isRemoteP uint8) {
+func PMPrinterIsRemote(printer PMPrinter) (result int, isRemoteP uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMPrinterIsRemote == nil {
 		ebipurego.RegisterLibFunc(&_fnPMPrinterIsRemote, _lib, "PMPrinterIsRemote")
 	}
 	var _out0 uint8
-	_ret := int(_fnPMPrinterIsRemote(objref.IDOf(printer), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMPrinterIsRemote(objref.IDOf(printer.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMSessionCreatePrinterList func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // PMSessionCreatePrinterList calls the PrintCore framework function PMSessionCreatePrinterList.
-func PMSessionCreatePrinterList(printSession obj.Object, printerList unsafe.Pointer, currentPrinter unsafe.Pointer) (result int, currentIndex int) {
+func PMSessionCreatePrinterList(printSession PMPrintSession, printerList unsafe.Pointer, currentPrinter unsafe.Pointer) (result int, currentIndex int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMSessionCreatePrinterList == nil {
 		ebipurego.RegisterLibFunc(&_fnPMSessionCreatePrinterList, _lib, "PMSessionCreatePrinterList")
 	}
 	var _out0 int
-	_ret := int(_fnPMSessionCreatePrinterList(objref.IDOf(printSession), printerList, unsafe.Pointer(&_out0), currentPrinter))
+	_ret := int(_fnPMSessionCreatePrinterList(objref.IDOf(printSession.Object), printerList, unsafe.Pointer(&_out0), currentPrinter))
 	return _ret, _out0
 }
 
 var _fnPMSessionGetDestinationType func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // PMSessionGetDestinationType calls the PrintCore framework function PMSessionGetDestinationType.
-func PMSessionGetDestinationType(printSession obj.Object, printSettings obj.Object) (result int, destTypeP uint16) {
+func PMSessionGetDestinationType(printSession PMPrintSession, printSettings PMPrintSettings) (result int, destTypeP uint16) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMSessionGetDestinationType == nil {
 		ebipurego.RegisterLibFunc(&_fnPMSessionGetDestinationType, _lib, "PMSessionGetDestinationType")
 	}
 	var _out0 uint16
-	_ret := int(_fnPMSessionGetDestinationType(objref.IDOf(printSession), objref.IDOf(printSettings), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMSessionGetDestinationType(objref.IDOf(printSession.Object), objref.IDOf(printSettings.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMSessionValidatePageFormat func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // PMSessionValidatePageFormat calls the PrintCore framework function PMSessionValidatePageFormat.
-func PMSessionValidatePageFormat(printSession obj.Object, pageFormat obj.Object) (result int, changed uint8) {
+func PMSessionValidatePageFormat(printSession PMPrintSession, pageFormat PMPageFormat) (result int, changed uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMSessionValidatePageFormat == nil {
 		ebipurego.RegisterLibFunc(&_fnPMSessionValidatePageFormat, _lib, "PMSessionValidatePageFormat")
 	}
 	var _out0 uint8
-	_ret := int(_fnPMSessionValidatePageFormat(objref.IDOf(printSession), objref.IDOf(pageFormat), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMSessionValidatePageFormat(objref.IDOf(printSession.Object), objref.IDOf(pageFormat.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 
 var _fnPMSessionValidatePrintSettings func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // PMSessionValidatePrintSettings calls the PrintCore framework function PMSessionValidatePrintSettings.
-func PMSessionValidatePrintSettings(printSession obj.Object, printSettings obj.Object) (result int, changed uint8) {
+func PMSessionValidatePrintSettings(printSession PMPrintSession, printSettings PMPrintSettings) (result int, changed uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPMSessionValidatePrintSettings == nil {
 		ebipurego.RegisterLibFunc(&_fnPMSessionValidatePrintSettings, _lib, "PMSessionValidatePrintSettings")
 	}
 	var _out0 uint8
-	_ret := int(_fnPMSessionValidatePrintSettings(objref.IDOf(printSession), objref.IDOf(printSettings), unsafe.Pointer(&_out0)))
+	_ret := int(_fnPMSessionValidatePrintSettings(objref.IDOf(printSession.Object), objref.IDOf(printSettings.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }

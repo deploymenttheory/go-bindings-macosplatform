@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -391,10 +392,10 @@ func (c *Color) LinearExposure() float64 {
 }
 
 // CGColor returns the cg color.
-func (c *Color) CGColor() obj.Object {
+func (c *Color) CGColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("CGColor"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // ColorUsingColorSpaceNameDevice creates a new color object for the same color, but in the specified color space and specific to the provided device.

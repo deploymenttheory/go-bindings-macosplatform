@@ -8,9 +8,9 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -122,13 +122,13 @@ func AudioGetHostClockMinimumTimeDelta() int {
 var _fnAudioHardwareCreateAggregateDevice func(objc.ID, unsafe.Pointer) int32
 
 // AudioHardwareCreateAggregateDevice calls the CoreAudio framework function AudioHardwareCreateAggregateDevice.
-func AudioHardwareCreateAggregateDevice(inDescription obj.Object) (result int, outDeviceID int) {
+func AudioHardwareCreateAggregateDevice(inDescription corefoundation.CFDictionaryRef) (result int, outDeviceID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAudioHardwareCreateAggregateDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnAudioHardwareCreateAggregateDevice, _lib, "AudioHardwareCreateAggregateDevice")
 	}
 	var _out0 int
-	_ret := int(_fnAudioHardwareCreateAggregateDevice(objref.IDOf(inDescription), unsafe.Pointer(&_out0)))
+	_ret := int(_fnAudioHardwareCreateAggregateDevice(objref.IDOf(inDescription.Object), unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 

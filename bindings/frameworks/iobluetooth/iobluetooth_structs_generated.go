@@ -6,6 +6,8 @@ package iobluetooth
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type BluetoothAFHHostChannelClassification struct {
@@ -786,3 +788,73 @@ type BluetoothHCILESupportedFeatures = BluetoothHCISupportedFeatures
 
 // BluetoothHCILEUsedFeatures is an alias for the BluetoothHCISupportedFeatures value type.
 type BluetoothHCILEUsedFeatures = BluetoothHCISupportedFeatures
+
+// IOBluetoothDeviceRef is a handle for the opaque IOBluetoothDeviceRef type.
+type IOBluetoothDeviceRef struct{ obj.Object }
+
+// IsNil reports whether IOBluetoothDeviceRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h IOBluetoothDeviceRef) IsNil() bool { return h.Object == nil }
+
+// IOBluetoothL2CAPChannelRef is a handle for the opaque IOBluetoothL2CAPChannelRef type.
+type IOBluetoothL2CAPChannelRef struct{ obj.Object }
+
+// IsNil reports whether IOBluetoothL2CAPChannelRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h IOBluetoothL2CAPChannelRef) IsNil() bool { return h.Object == nil }
+
+// IOBluetoothObjectRef is a handle for the opaque IOBluetoothObjectRef type.
+type IOBluetoothObjectRef struct{ obj.Object }
+
+// IsNil reports whether IOBluetoothObjectRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h IOBluetoothObjectRef) IsNil() bool { return h.Object == nil }
+
+// IOBluetoothRFCOMMChannelRef is a handle for the opaque IOBluetoothRFCOMMChannelRef type.
+type IOBluetoothRFCOMMChannelRef struct{ obj.Object }
+
+// IsNil reports whether IOBluetoothRFCOMMChannelRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h IOBluetoothRFCOMMChannelRef) IsNil() bool { return h.Object == nil }
+
+// IOBluetoothSDPDataElementRef is a handle for the opaque IOBluetoothSDPDataElementRef type.
+type IOBluetoothSDPDataElementRef struct{ obj.Object }
+
+// IsNil reports whether IOBluetoothSDPDataElementRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h IOBluetoothSDPDataElementRef) IsNil() bool { return h.Object == nil }
+
+// IOBluetoothSDPServiceRecordRef is a handle for the opaque IOBluetoothSDPServiceRecordRef type.
+type IOBluetoothSDPServiceRecordRef struct{ obj.Object }
+
+// IsNil reports whether IOBluetoothSDPServiceRecordRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h IOBluetoothSDPServiceRecordRef) IsNil() bool { return h.Object == nil }
+
+// IOBluetoothSDPUUIDRef is a handle for the opaque IOBluetoothSDPUUIDRef type.
+type IOBluetoothSDPUUIDRef struct{ obj.Object }
+
+// IsNil reports whether IOBluetoothSDPUUIDRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h IOBluetoothSDPUUIDRef) IsNil() bool { return h.Object == nil }
+
+// IOBluetoothUserNotificationRef is a handle for the opaque IOBluetoothUserNotificationRef type.
+type IOBluetoothUserNotificationRef struct{ obj.Object }
+
+// IsNil reports whether IOBluetoothUserNotificationRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h IOBluetoothUserNotificationRef) IsNil() bool { return h.Object == nil }
+
+// OBEXSessionRef is a handle for the opaque OBEXSessionRef type.
+type OBEXSessionRef struct{ obj.Object }
+
+// IsNil reports whether OBEXSessionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h OBEXSessionRef) IsNil() bool { return h.Object == nil }
+
+// PrivOBEXSessionDataRef is a handle for the opaque PrivOBEXSessionDataRef type.
+type PrivOBEXSessionDataRef struct{ obj.Object }
+
+// IsNil reports whether PrivOBEXSessionDataRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h PrivOBEXSessionDataRef) IsNil() bool { return h.Object == nil }

@@ -7,6 +7,7 @@ package cfopendirectory
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -17,13 +18,13 @@ import (
 // ODNodeAddAccountPolicy reports an error if the CFOpenDirectory framework function ODNodeAddAccountPolicy fails.
 var _fnODNodeAddAccountPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODNodeAddAccountPolicy(node obj.Object, policy obj.Object, category obj.Object) error {
+func ODNodeAddAccountPolicy(node ODNodeRef, policy corefoundation.CFDictionaryRef, category obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeAddAccountPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeAddAccountPolicy, _lib, "ODNodeAddAccountPolicy")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODNodeAddAccountPolicy(objref.IDOf(node), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_cfErr))
+	_ok := _fnODNodeAddAccountPolicy(objref.IDOf(node.Object), objref.IDOf(policy.Object), objref.IDOf(category), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -33,13 +34,13 @@ func ODNodeAddAccountPolicy(node obj.Object, policy obj.Object, category obj.Obj
 // ODNodeCopyAccountPolicies reports an error if the CFOpenDirectory framework function ODNodeCopyAccountPolicies fails.
 var _fnODNodeCopyAccountPolicies func(objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCopyAccountPolicies(node obj.Object) (obj.Object, error) {
+func ODNodeCopyAccountPolicies(node ODNodeRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopyAccountPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopyAccountPolicies, _lib, "ODNodeCopyAccountPolicies")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCopyAccountPolicies(objref.IDOf(node), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCopyAccountPolicies(objref.IDOf(node.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -49,13 +50,13 @@ func ODNodeCopyAccountPolicies(node obj.Object) (obj.Object, error) {
 // ODNodeCopyDetails reports an error if the CFOpenDirectory framework function ODNodeCopyDetails fails.
 var _fnODNodeCopyDetails func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCopyDetails(node obj.Object, keys obj.Object) (obj.Object, error) {
+func ODNodeCopyDetails(node ODNodeRef, keys corefoundation.CFArrayRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopyDetails == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopyDetails, _lib, "ODNodeCopyDetails")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCopyDetails(objref.IDOf(node), objref.IDOf(keys), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCopyDetails(objref.IDOf(node.Object), objref.IDOf(keys.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -65,13 +66,13 @@ func ODNodeCopyDetails(node obj.Object, keys obj.Object) (obj.Object, error) {
 // ODNodeCopyPolicies reports an error if the CFOpenDirectory framework function ODNodeCopyPolicies fails.
 var _fnODNodeCopyPolicies func(objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCopyPolicies(node obj.Object) (obj.Object, error) {
+func ODNodeCopyPolicies(node ODNodeRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopyPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopyPolicies, _lib, "ODNodeCopyPolicies")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCopyPolicies(objref.IDOf(node), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCopyPolicies(objref.IDOf(node.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -81,13 +82,13 @@ func ODNodeCopyPolicies(node obj.Object) (obj.Object, error) {
 // ODNodeCopyRecord reports an error if the CFOpenDirectory framework function ODNodeCopyRecord fails.
 var _fnODNodeCopyRecord func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCopyRecord(node obj.Object, recordType obj.Object, recordName obj.Object, attributes obj.Object) (obj.Object, error) {
+func ODNodeCopyRecord(node ODNodeRef, recordType obj.Object, recordName corefoundation.CFStringRef, attributes corefoundation.CFTypeRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopyRecord == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopyRecord, _lib, "ODNodeCopyRecord")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCopyRecord(objref.IDOf(node), objref.IDOf(recordType), objref.IDOf(recordName), objref.IDOf(attributes), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCopyRecord(objref.IDOf(node.Object), objref.IDOf(recordType), objref.IDOf(recordName.Object), objref.IDOf(attributes.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -97,13 +98,13 @@ func ODNodeCopyRecord(node obj.Object, recordType obj.Object, recordName obj.Obj
 // ODNodeCopySubnodeNames reports an error if the CFOpenDirectory framework function ODNodeCopySubnodeNames fails.
 var _fnODNodeCopySubnodeNames func(objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCopySubnodeNames(node obj.Object) (obj.Object, error) {
+func ODNodeCopySubnodeNames(node ODNodeRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopySubnodeNames == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopySubnodeNames, _lib, "ODNodeCopySubnodeNames")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCopySubnodeNames(objref.IDOf(node), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCopySubnodeNames(objref.IDOf(node.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -113,13 +114,13 @@ func ODNodeCopySubnodeNames(node obj.Object) (obj.Object, error) {
 // ODNodeCopySupportedAttributes reports an error if the CFOpenDirectory framework function ODNodeCopySupportedAttributes fails.
 var _fnODNodeCopySupportedAttributes func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCopySupportedAttributes(node obj.Object, recordType obj.Object) (obj.Object, error) {
+func ODNodeCopySupportedAttributes(node ODNodeRef, recordType obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopySupportedAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopySupportedAttributes, _lib, "ODNodeCopySupportedAttributes")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCopySupportedAttributes(objref.IDOf(node), objref.IDOf(recordType), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCopySupportedAttributes(objref.IDOf(node.Object), objref.IDOf(recordType), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -129,13 +130,13 @@ func ODNodeCopySupportedAttributes(node obj.Object, recordType obj.Object) (obj.
 // ODNodeCopySupportedPolicies reports an error if the CFOpenDirectory framework function ODNodeCopySupportedPolicies fails.
 var _fnODNodeCopySupportedPolicies func(objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCopySupportedPolicies(node obj.Object) (obj.Object, error) {
+func ODNodeCopySupportedPolicies(node ODNodeRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopySupportedPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopySupportedPolicies, _lib, "ODNodeCopySupportedPolicies")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCopySupportedPolicies(objref.IDOf(node), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCopySupportedPolicies(objref.IDOf(node.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -145,13 +146,13 @@ func ODNodeCopySupportedPolicies(node obj.Object) (obj.Object, error) {
 // ODNodeCopySupportedRecordTypes reports an error if the CFOpenDirectory framework function ODNodeCopySupportedRecordTypes fails.
 var _fnODNodeCopySupportedRecordTypes func(objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCopySupportedRecordTypes(node obj.Object) (obj.Object, error) {
+func ODNodeCopySupportedRecordTypes(node ODNodeRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopySupportedRecordTypes == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopySupportedRecordTypes, _lib, "ODNodeCopySupportedRecordTypes")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCopySupportedRecordTypes(objref.IDOf(node), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCopySupportedRecordTypes(objref.IDOf(node.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -161,13 +162,13 @@ func ODNodeCopySupportedRecordTypes(node obj.Object) (obj.Object, error) {
 // ODNodeCopyUnreachableSubnodeNames reports an error if the CFOpenDirectory framework function ODNodeCopyUnreachableSubnodeNames fails.
 var _fnODNodeCopyUnreachableSubnodeNames func(objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCopyUnreachableSubnodeNames(node obj.Object) (obj.Object, error) {
+func ODNodeCopyUnreachableSubnodeNames(node ODNodeRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopyUnreachableSubnodeNames == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopyUnreachableSubnodeNames, _lib, "ODNodeCopyUnreachableSubnodeNames")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCopyUnreachableSubnodeNames(objref.IDOf(node), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCopyUnreachableSubnodeNames(objref.IDOf(node.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -177,13 +178,13 @@ func ODNodeCopyUnreachableSubnodeNames(node obj.Object) (obj.Object, error) {
 // ODNodeCreateCopy reports an error if the CFOpenDirectory framework function ODNodeCreateCopy fails.
 var _fnODNodeCreateCopy func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCreateCopy(allocator obj.Object, node obj.Object) (obj.Object, error) {
+func ODNodeCreateCopy(allocator corefoundation.CFAllocatorRef, node ODNodeRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCreateCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCreateCopy, _lib, "ODNodeCreateCopy")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCreateCopy(objref.IDOf(allocator), objref.IDOf(node), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCreateCopy(objref.IDOf(allocator.Object), objref.IDOf(node.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -193,13 +194,13 @@ func ODNodeCreateCopy(allocator obj.Object, node obj.Object) (obj.Object, error)
 // ODNodeCreateRecord reports an error if the CFOpenDirectory framework function ODNodeCreateRecord fails.
 var _fnODNodeCreateRecord func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCreateRecord(node obj.Object, recordType obj.Object, recordName obj.Object, attributeDict obj.Object) (obj.Object, error) {
+func ODNodeCreateRecord(node ODNodeRef, recordType obj.Object, recordName corefoundation.CFStringRef, attributeDict corefoundation.CFDictionaryRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCreateRecord == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCreateRecord, _lib, "ODNodeCreateRecord")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCreateRecord(objref.IDOf(node), objref.IDOf(recordType), objref.IDOf(recordName), objref.IDOf(attributeDict), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCreateRecord(objref.IDOf(node.Object), objref.IDOf(recordType), objref.IDOf(recordName.Object), objref.IDOf(attributeDict.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -209,13 +210,13 @@ func ODNodeCreateRecord(node obj.Object, recordType obj.Object, recordName obj.O
 // ODNodeCreateWithName reports an error if the CFOpenDirectory framework function ODNodeCreateWithName fails.
 var _fnODNodeCreateWithName func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCreateWithName(allocator obj.Object, session obj.Object, nodeName obj.Object) (obj.Object, error) {
+func ODNodeCreateWithName(allocator corefoundation.CFAllocatorRef, session ODSessionRef, nodeName corefoundation.CFStringRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCreateWithName == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCreateWithName, _lib, "ODNodeCreateWithName")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCreateWithName(objref.IDOf(allocator), objref.IDOf(session), objref.IDOf(nodeName), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCreateWithName(objref.IDOf(allocator.Object), objref.IDOf(session.Object), objref.IDOf(nodeName.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -225,13 +226,13 @@ func ODNodeCreateWithName(allocator obj.Object, session obj.Object, nodeName obj
 // ODNodeCreateWithNodeType reports an error if the CFOpenDirectory framework function ODNodeCreateWithNodeType fails.
 var _fnODNodeCreateWithNodeType func(objc.ID, objc.ID, uint32, unsafe.Pointer) objc.ID
 
-func ODNodeCreateWithNodeType(allocator obj.Object, session obj.Object, nodeType uint32) (obj.Object, error) {
+func ODNodeCreateWithNodeType(allocator corefoundation.CFAllocatorRef, session ODSessionRef, nodeType uint32) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCreateWithNodeType == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCreateWithNodeType, _lib, "ODNodeCreateWithNodeType")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCreateWithNodeType(objref.IDOf(allocator), objref.IDOf(session), nodeType, unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCreateWithNodeType(objref.IDOf(allocator.Object), objref.IDOf(session.Object), nodeType, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -241,13 +242,13 @@ func ODNodeCreateWithNodeType(allocator obj.Object, session obj.Object, nodeType
 // ODNodeCustomCall reports an error if the CFOpenDirectory framework function ODNodeCustomCall fails.
 var _fnODNodeCustomCall func(objc.ID, int, objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCustomCall(node obj.Object, customCode int, data obj.Object) (obj.Object, error) {
+func ODNodeCustomCall(node ODNodeRef, customCode int, data corefoundation.CFDataRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCustomCall == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCustomCall, _lib, "ODNodeCustomCall")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCustomCall(objref.IDOf(node), customCode, objref.IDOf(data), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCustomCall(objref.IDOf(node.Object), customCode, objref.IDOf(data.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -257,13 +258,13 @@ func ODNodeCustomCall(node obj.Object, customCode int, data obj.Object) (obj.Obj
 // ODNodeCustomFunction reports an error if the CFOpenDirectory framework function ODNodeCustomFunction fails.
 var _fnODNodeCustomFunction func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCustomFunction(node obj.Object, function obj.Object, payload obj.Object) (obj.Object, error) {
+func ODNodeCustomFunction(node ODNodeRef, function corefoundation.CFStringRef, payload corefoundation.CFTypeRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCustomFunction == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCustomFunction, _lib, "ODNodeCustomFunction")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCustomFunction(objref.IDOf(node), objref.IDOf(function), objref.IDOf(payload), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCustomFunction(objref.IDOf(node.Object), objref.IDOf(function.Object), objref.IDOf(payload.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -273,13 +274,13 @@ func ODNodeCustomFunction(node obj.Object, function obj.Object, payload obj.Obje
 // ODNodePasswordContentCheck reports an error if the CFOpenDirectory framework function ODNodePasswordContentCheck fails.
 var _fnODNodePasswordContentCheck func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODNodePasswordContentCheck(node obj.Object, password obj.Object, recordName obj.Object) error {
+func ODNodePasswordContentCheck(node ODNodeRef, password corefoundation.CFStringRef, recordName corefoundation.CFStringRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodePasswordContentCheck == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodePasswordContentCheck, _lib, "ODNodePasswordContentCheck")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODNodePasswordContentCheck(objref.IDOf(node), objref.IDOf(password), objref.IDOf(recordName), unsafe.Pointer(&_cfErr))
+	_ok := _fnODNodePasswordContentCheck(objref.IDOf(node.Object), objref.IDOf(password.Object), objref.IDOf(recordName.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -289,13 +290,13 @@ func ODNodePasswordContentCheck(node obj.Object, password obj.Object, recordName
 // ODNodeRemoveAccountPolicy reports an error if the CFOpenDirectory framework function ODNodeRemoveAccountPolicy fails.
 var _fnODNodeRemoveAccountPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODNodeRemoveAccountPolicy(node obj.Object, policy obj.Object, category obj.Object) error {
+func ODNodeRemoveAccountPolicy(node ODNodeRef, policy corefoundation.CFDictionaryRef, category obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeRemoveAccountPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeRemoveAccountPolicy, _lib, "ODNodeRemoveAccountPolicy")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODNodeRemoveAccountPolicy(objref.IDOf(node), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_cfErr))
+	_ok := _fnODNodeRemoveAccountPolicy(objref.IDOf(node.Object), objref.IDOf(policy.Object), objref.IDOf(category), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -305,13 +306,13 @@ func ODNodeRemoveAccountPolicy(node obj.Object, policy obj.Object, category obj.
 // ODNodeRemovePolicy reports an error if the CFOpenDirectory framework function ODNodeRemovePolicy fails.
 var _fnODNodeRemovePolicy func(objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODNodeRemovePolicy(node obj.Object, policyType obj.Object) error {
+func ODNodeRemovePolicy(node ODNodeRef, policyType obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeRemovePolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeRemovePolicy, _lib, "ODNodeRemovePolicy")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODNodeRemovePolicy(objref.IDOf(node), objref.IDOf(policyType), unsafe.Pointer(&_cfErr))
+	_ok := _fnODNodeRemovePolicy(objref.IDOf(node.Object), objref.IDOf(policyType), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -321,13 +322,13 @@ func ODNodeRemovePolicy(node obj.Object, policyType obj.Object) error {
 // ODNodeSetAccountPolicies reports an error if the CFOpenDirectory framework function ODNodeSetAccountPolicies fails.
 var _fnODNodeSetAccountPolicies func(objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODNodeSetAccountPolicies(node obj.Object, policies obj.Object) error {
+func ODNodeSetAccountPolicies(node ODNodeRef, policies corefoundation.CFDictionaryRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeSetAccountPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeSetAccountPolicies, _lib, "ODNodeSetAccountPolicies")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODNodeSetAccountPolicies(objref.IDOf(node), objref.IDOf(policies), unsafe.Pointer(&_cfErr))
+	_ok := _fnODNodeSetAccountPolicies(objref.IDOf(node.Object), objref.IDOf(policies.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -337,13 +338,13 @@ func ODNodeSetAccountPolicies(node obj.Object, policies obj.Object) error {
 // ODNodeSetCredentials reports an error if the CFOpenDirectory framework function ODNodeSetCredentials fails.
 var _fnODNodeSetCredentials func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODNodeSetCredentials(node obj.Object, recordType obj.Object, recordName obj.Object, password obj.Object) error {
+func ODNodeSetCredentials(node ODNodeRef, recordType obj.Object, recordName corefoundation.CFStringRef, password corefoundation.CFStringRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeSetCredentials == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeSetCredentials, _lib, "ODNodeSetCredentials")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODNodeSetCredentials(objref.IDOf(node), objref.IDOf(recordType), objref.IDOf(recordName), objref.IDOf(password), unsafe.Pointer(&_cfErr))
+	_ok := _fnODNodeSetCredentials(objref.IDOf(node.Object), objref.IDOf(recordType), objref.IDOf(recordName.Object), objref.IDOf(password.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -353,13 +354,13 @@ func ODNodeSetCredentials(node obj.Object, recordType obj.Object, recordName obj
 // ODNodeSetCredentialsExtended reports an error if the CFOpenDirectory framework function ODNodeSetCredentialsExtended fails.
 var _fnODNodeSetCredentialsExtended func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
 
-func ODNodeSetCredentialsExtended(node obj.Object, recordType obj.Object, authType obj.Object, authItems obj.Object, outAuthItems unsafe.Pointer, outContext unsafe.Pointer) error {
+func ODNodeSetCredentialsExtended(node ODNodeRef, recordType obj.Object, authType obj.Object, authItems corefoundation.CFArrayRef, outAuthItems unsafe.Pointer, outContext unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeSetCredentialsExtended == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeSetCredentialsExtended, _lib, "ODNodeSetCredentialsExtended")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODNodeSetCredentialsExtended(objref.IDOf(node), objref.IDOf(recordType), objref.IDOf(authType), objref.IDOf(authItems), outAuthItems, outContext, unsafe.Pointer(&_cfErr))
+	_ok := _fnODNodeSetCredentialsExtended(objref.IDOf(node.Object), objref.IDOf(recordType), objref.IDOf(authType), objref.IDOf(authItems.Object), outAuthItems, outContext, unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -369,13 +370,13 @@ func ODNodeSetCredentialsExtended(node obj.Object, recordType obj.Object, authTy
 // ODNodeSetCredentialsUsingKerberosCache reports an error if the CFOpenDirectory framework function ODNodeSetCredentialsUsingKerberosCache fails.
 var _fnODNodeSetCredentialsUsingKerberosCache func(objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODNodeSetCredentialsUsingKerberosCache(node obj.Object, cacheName obj.Object) error {
+func ODNodeSetCredentialsUsingKerberosCache(node ODNodeRef, cacheName corefoundation.CFStringRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeSetCredentialsUsingKerberosCache == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeSetCredentialsUsingKerberosCache, _lib, "ODNodeSetCredentialsUsingKerberosCache")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODNodeSetCredentialsUsingKerberosCache(objref.IDOf(node), objref.IDOf(cacheName), unsafe.Pointer(&_cfErr))
+	_ok := _fnODNodeSetCredentialsUsingKerberosCache(objref.IDOf(node.Object), objref.IDOf(cacheName.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -385,13 +386,13 @@ func ODNodeSetCredentialsUsingKerberosCache(node obj.Object, cacheName obj.Objec
 // ODNodeSetPolicies reports an error if the CFOpenDirectory framework function ODNodeSetPolicies fails.
 var _fnODNodeSetPolicies func(objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODNodeSetPolicies(node obj.Object, policies obj.Object) error {
+func ODNodeSetPolicies(node ODNodeRef, policies corefoundation.CFDictionaryRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeSetPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeSetPolicies, _lib, "ODNodeSetPolicies")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODNodeSetPolicies(objref.IDOf(node), objref.IDOf(policies), unsafe.Pointer(&_cfErr))
+	_ok := _fnODNodeSetPolicies(objref.IDOf(node.Object), objref.IDOf(policies.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -401,13 +402,13 @@ func ODNodeSetPolicies(node obj.Object, policies obj.Object) error {
 // ODNodeSetPolicy reports an error if the CFOpenDirectory framework function ODNodeSetPolicy fails.
 var _fnODNodeSetPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODNodeSetPolicy(node obj.Object, policyType obj.Object, value obj.Object) error {
+func ODNodeSetPolicy(node ODNodeRef, policyType obj.Object, value corefoundation.CFTypeRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeSetPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeSetPolicy, _lib, "ODNodeSetPolicy")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODNodeSetPolicy(objref.IDOf(node), objref.IDOf(policyType), objref.IDOf(value), unsafe.Pointer(&_cfErr))
+	_ok := _fnODNodeSetPolicy(objref.IDOf(node.Object), objref.IDOf(policyType), objref.IDOf(value.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -417,13 +418,13 @@ func ODNodeSetPolicy(node obj.Object, policyType obj.Object, value obj.Object) e
 // ODQueryCopyResults reports an error if the CFOpenDirectory framework function ODQueryCopyResults fails.
 var _fnODQueryCopyResults func(objc.ID, bool, unsafe.Pointer) objc.ID
 
-func ODQueryCopyResults(query obj.Object, allowPartialResults bool) (obj.Object, error) {
+func ODQueryCopyResults(query ODQueryRef, allowPartialResults bool) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQueryCopyResults == nil {
 		ebipurego.RegisterLibFunc(&_fnODQueryCopyResults, _lib, "ODQueryCopyResults")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODQueryCopyResults(objref.IDOf(query), allowPartialResults, unsafe.Pointer(&_cfErr))
+	_r := _fnODQueryCopyResults(objref.IDOf(query.Object), allowPartialResults, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -433,13 +434,13 @@ func ODQueryCopyResults(query obj.Object, allowPartialResults bool) (obj.Object,
 // ODQueryCreateWithNode reports an error if the CFOpenDirectory framework function ODQueryCreateWithNode fails.
 var _fnODQueryCreateWithNode func(objc.ID, objc.ID, objc.ID, objc.ID, uint32, objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
 
-func ODQueryCreateWithNode(allocator obj.Object, node obj.Object, recordTypeOrList obj.Object, attribute obj.Object, matchType uint32, queryValueOrList obj.Object, returnAttributeOrList obj.Object, maxResults int) (obj.Object, error) {
+func ODQueryCreateWithNode(allocator corefoundation.CFAllocatorRef, node ODNodeRef, recordTypeOrList corefoundation.CFTypeRef, attribute obj.Object, matchType uint32, queryValueOrList corefoundation.CFTypeRef, returnAttributeOrList corefoundation.CFTypeRef, maxResults int) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQueryCreateWithNode == nil {
 		ebipurego.RegisterLibFunc(&_fnODQueryCreateWithNode, _lib, "ODQueryCreateWithNode")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODQueryCreateWithNode(objref.IDOf(allocator), objref.IDOf(node), objref.IDOf(recordTypeOrList), objref.IDOf(attribute), matchType, objref.IDOf(queryValueOrList), objref.IDOf(returnAttributeOrList), maxResults, unsafe.Pointer(&_cfErr))
+	_r := _fnODQueryCreateWithNode(objref.IDOf(allocator.Object), objref.IDOf(node.Object), objref.IDOf(recordTypeOrList.Object), objref.IDOf(attribute), matchType, objref.IDOf(queryValueOrList.Object), objref.IDOf(returnAttributeOrList.Object), maxResults, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -449,13 +450,13 @@ func ODQueryCreateWithNode(allocator obj.Object, node obj.Object, recordTypeOrLi
 // ODQueryCreateWithNodeType reports an error if the CFOpenDirectory framework function ODQueryCreateWithNodeType fails.
 var _fnODQueryCreateWithNodeType func(objc.ID, uint32, objc.ID, objc.ID, uint32, objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
 
-func ODQueryCreateWithNodeType(allocator obj.Object, nodeType uint32, recordTypeOrList obj.Object, attribute obj.Object, matchType uint32, queryValueOrList obj.Object, returnAttributeOrList obj.Object, maxResults int) (obj.Object, error) {
+func ODQueryCreateWithNodeType(allocator corefoundation.CFAllocatorRef, nodeType uint32, recordTypeOrList corefoundation.CFTypeRef, attribute obj.Object, matchType uint32, queryValueOrList corefoundation.CFTypeRef, returnAttributeOrList corefoundation.CFTypeRef, maxResults int) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQueryCreateWithNodeType == nil {
 		ebipurego.RegisterLibFunc(&_fnODQueryCreateWithNodeType, _lib, "ODQueryCreateWithNodeType")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODQueryCreateWithNodeType(objref.IDOf(allocator), nodeType, objref.IDOf(recordTypeOrList), objref.IDOf(attribute), matchType, objref.IDOf(queryValueOrList), objref.IDOf(returnAttributeOrList), maxResults, unsafe.Pointer(&_cfErr))
+	_r := _fnODQueryCreateWithNodeType(objref.IDOf(allocator.Object), nodeType, objref.IDOf(recordTypeOrList.Object), objref.IDOf(attribute), matchType, objref.IDOf(queryValueOrList.Object), objref.IDOf(returnAttributeOrList.Object), maxResults, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -465,13 +466,13 @@ func ODQueryCreateWithNodeType(allocator obj.Object, nodeType uint32, recordType
 // ODRecordAddAccountPolicy reports an error if the CFOpenDirectory framework function ODRecordAddAccountPolicy fails.
 var _fnODRecordAddAccountPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordAddAccountPolicy(record obj.Object, policy obj.Object, category obj.Object) error {
+func ODRecordAddAccountPolicy(record ODRecordRef, policy corefoundation.CFDictionaryRef, category obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordAddAccountPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordAddAccountPolicy, _lib, "ODRecordAddAccountPolicy")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordAddAccountPolicy(objref.IDOf(record), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordAddAccountPolicy(objref.IDOf(record.Object), objref.IDOf(policy.Object), objref.IDOf(category), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -481,13 +482,13 @@ func ODRecordAddAccountPolicy(record obj.Object, policy obj.Object, category obj
 // ODRecordAddMember reports an error if the CFOpenDirectory framework function ODRecordAddMember fails.
 var _fnODRecordAddMember func(objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordAddMember(group obj.Object, member obj.Object) error {
+func ODRecordAddMember(group ODRecordRef, member ODRecordRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordAddMember == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordAddMember, _lib, "ODRecordAddMember")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordAddMember(objref.IDOf(group), objref.IDOf(member), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordAddMember(objref.IDOf(group.Object), objref.IDOf(member.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -497,13 +498,13 @@ func ODRecordAddMember(group obj.Object, member obj.Object) error {
 // ODRecordAddValue reports an error if the CFOpenDirectory framework function ODRecordAddValue fails.
 var _fnODRecordAddValue func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordAddValue(record obj.Object, attribute obj.Object, value obj.Object) error {
+func ODRecordAddValue(record ODRecordRef, attribute obj.Object, value corefoundation.CFTypeRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordAddValue == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordAddValue, _lib, "ODRecordAddValue")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordAddValue(objref.IDOf(record), objref.IDOf(attribute), objref.IDOf(value), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordAddValue(objref.IDOf(record.Object), objref.IDOf(attribute), objref.IDOf(value.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -513,13 +514,13 @@ func ODRecordAddValue(record obj.Object, attribute obj.Object, value obj.Object)
 // ODRecordAuthenticationAllowed reports an error if the CFOpenDirectory framework function ODRecordAuthenticationAllowed fails.
 var _fnODRecordAuthenticationAllowed func(objc.ID, unsafe.Pointer) bool
 
-func ODRecordAuthenticationAllowed(record obj.Object) error {
+func ODRecordAuthenticationAllowed(record ODRecordRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordAuthenticationAllowed == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordAuthenticationAllowed, _lib, "ODRecordAuthenticationAllowed")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordAuthenticationAllowed(objref.IDOf(record), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordAuthenticationAllowed(objref.IDOf(record.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -529,13 +530,13 @@ func ODRecordAuthenticationAllowed(record obj.Object) error {
 // ODRecordChangePassword reports an error if the CFOpenDirectory framework function ODRecordChangePassword fails.
 var _fnODRecordChangePassword func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordChangePassword(record obj.Object, oldPassword obj.Object, newPassword obj.Object) error {
+func ODRecordChangePassword(record ODRecordRef, oldPassword corefoundation.CFStringRef, newPassword corefoundation.CFStringRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordChangePassword == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordChangePassword, _lib, "ODRecordChangePassword")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordChangePassword(objref.IDOf(record), objref.IDOf(oldPassword), objref.IDOf(newPassword), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordChangePassword(objref.IDOf(record.Object), objref.IDOf(oldPassword.Object), objref.IDOf(newPassword.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -545,13 +546,13 @@ func ODRecordChangePassword(record obj.Object, oldPassword obj.Object, newPasswo
 // ODRecordContainsMember reports an error if the CFOpenDirectory framework function ODRecordContainsMember fails.
 var _fnODRecordContainsMember func(objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordContainsMember(group obj.Object, member obj.Object) error {
+func ODRecordContainsMember(group ODRecordRef, member ODRecordRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordContainsMember == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordContainsMember, _lib, "ODRecordContainsMember")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordContainsMember(objref.IDOf(group), objref.IDOf(member), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordContainsMember(objref.IDOf(group.Object), objref.IDOf(member.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -561,13 +562,13 @@ func ODRecordContainsMember(group obj.Object, member obj.Object) error {
 // ODRecordCopyAccountPolicies reports an error if the CFOpenDirectory framework function ODRecordCopyAccountPolicies fails.
 var _fnODRecordCopyAccountPolicies func(objc.ID, unsafe.Pointer) objc.ID
 
-func ODRecordCopyAccountPolicies(record obj.Object) (obj.Object, error) {
+func ODRecordCopyAccountPolicies(record ODRecordRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopyAccountPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopyAccountPolicies, _lib, "ODRecordCopyAccountPolicies")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODRecordCopyAccountPolicies(objref.IDOf(record), unsafe.Pointer(&_cfErr))
+	_r := _fnODRecordCopyAccountPolicies(objref.IDOf(record.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -577,13 +578,13 @@ func ODRecordCopyAccountPolicies(record obj.Object) (obj.Object, error) {
 // ODRecordCopyDetails reports an error if the CFOpenDirectory framework function ODRecordCopyDetails fails.
 var _fnODRecordCopyDetails func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODRecordCopyDetails(record obj.Object, attributes obj.Object) (obj.Object, error) {
+func ODRecordCopyDetails(record ODRecordRef, attributes corefoundation.CFArrayRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopyDetails == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopyDetails, _lib, "ODRecordCopyDetails")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODRecordCopyDetails(objref.IDOf(record), objref.IDOf(attributes), unsafe.Pointer(&_cfErr))
+	_r := _fnODRecordCopyDetails(objref.IDOf(record.Object), objref.IDOf(attributes.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -593,13 +594,13 @@ func ODRecordCopyDetails(record obj.Object, attributes obj.Object) (obj.Object, 
 // ODRecordCopyEffectivePolicies reports an error if the CFOpenDirectory framework function ODRecordCopyEffectivePolicies fails.
 var _fnODRecordCopyEffectivePolicies func(objc.ID, unsafe.Pointer) objc.ID
 
-func ODRecordCopyEffectivePolicies(record obj.Object) (obj.Object, error) {
+func ODRecordCopyEffectivePolicies(record ODRecordRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopyEffectivePolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopyEffectivePolicies, _lib, "ODRecordCopyEffectivePolicies")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODRecordCopyEffectivePolicies(objref.IDOf(record), unsafe.Pointer(&_cfErr))
+	_r := _fnODRecordCopyEffectivePolicies(objref.IDOf(record.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -609,13 +610,13 @@ func ODRecordCopyEffectivePolicies(record obj.Object) (obj.Object, error) {
 // ODRecordCopyPasswordPolicy reports an error if the CFOpenDirectory framework function ODRecordCopyPasswordPolicy fails.
 var _fnODRecordCopyPasswordPolicy func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODRecordCopyPasswordPolicy(allocator obj.Object, record obj.Object) (obj.Object, error) {
+func ODRecordCopyPasswordPolicy(allocator corefoundation.CFAllocatorRef, record ODRecordRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopyPasswordPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopyPasswordPolicy, _lib, "ODRecordCopyPasswordPolicy")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODRecordCopyPasswordPolicy(objref.IDOf(allocator), objref.IDOf(record), unsafe.Pointer(&_cfErr))
+	_r := _fnODRecordCopyPasswordPolicy(objref.IDOf(allocator.Object), objref.IDOf(record.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -625,13 +626,13 @@ func ODRecordCopyPasswordPolicy(allocator obj.Object, record obj.Object) (obj.Ob
 // ODRecordCopyPolicies reports an error if the CFOpenDirectory framework function ODRecordCopyPolicies fails.
 var _fnODRecordCopyPolicies func(objc.ID, unsafe.Pointer) objc.ID
 
-func ODRecordCopyPolicies(record obj.Object) (obj.Object, error) {
+func ODRecordCopyPolicies(record ODRecordRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopyPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopyPolicies, _lib, "ODRecordCopyPolicies")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODRecordCopyPolicies(objref.IDOf(record), unsafe.Pointer(&_cfErr))
+	_r := _fnODRecordCopyPolicies(objref.IDOf(record.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -641,13 +642,13 @@ func ODRecordCopyPolicies(record obj.Object) (obj.Object, error) {
 // ODRecordCopySupportedPolicies reports an error if the CFOpenDirectory framework function ODRecordCopySupportedPolicies fails.
 var _fnODRecordCopySupportedPolicies func(objc.ID, unsafe.Pointer) objc.ID
 
-func ODRecordCopySupportedPolicies(record obj.Object) (obj.Object, error) {
+func ODRecordCopySupportedPolicies(record ODRecordRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopySupportedPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopySupportedPolicies, _lib, "ODRecordCopySupportedPolicies")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODRecordCopySupportedPolicies(objref.IDOf(record), unsafe.Pointer(&_cfErr))
+	_r := _fnODRecordCopySupportedPolicies(objref.IDOf(record.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -657,13 +658,13 @@ func ODRecordCopySupportedPolicies(record obj.Object) (obj.Object, error) {
 // ODRecordCopyValues reports an error if the CFOpenDirectory framework function ODRecordCopyValues fails.
 var _fnODRecordCopyValues func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODRecordCopyValues(record obj.Object, attribute obj.Object) (obj.Object, error) {
+func ODRecordCopyValues(record ODRecordRef, attribute obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordCopyValues == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordCopyValues, _lib, "ODRecordCopyValues")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODRecordCopyValues(objref.IDOf(record), objref.IDOf(attribute), unsafe.Pointer(&_cfErr))
+	_r := _fnODRecordCopyValues(objref.IDOf(record.Object), objref.IDOf(attribute), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -673,13 +674,13 @@ func ODRecordCopyValues(record obj.Object, attribute obj.Object) (obj.Object, er
 // ODRecordDelete reports an error if the CFOpenDirectory framework function ODRecordDelete fails.
 var _fnODRecordDelete func(objc.ID, unsafe.Pointer) bool
 
-func ODRecordDelete(record obj.Object) error {
+func ODRecordDelete(record ODRecordRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordDelete == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordDelete, _lib, "ODRecordDelete")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordDelete(objref.IDOf(record), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordDelete(objref.IDOf(record.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -689,13 +690,13 @@ func ODRecordDelete(record obj.Object) error {
 // ODRecordPasswordChangeAllowed reports an error if the CFOpenDirectory framework function ODRecordPasswordChangeAllowed fails.
 var _fnODRecordPasswordChangeAllowed func(objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordPasswordChangeAllowed(record obj.Object, newPassword obj.Object) error {
+func ODRecordPasswordChangeAllowed(record ODRecordRef, newPassword corefoundation.CFStringRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordPasswordChangeAllowed == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordPasswordChangeAllowed, _lib, "ODRecordPasswordChangeAllowed")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordPasswordChangeAllowed(objref.IDOf(record), objref.IDOf(newPassword), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordPasswordChangeAllowed(objref.IDOf(record.Object), objref.IDOf(newPassword.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -705,13 +706,13 @@ func ODRecordPasswordChangeAllowed(record obj.Object, newPassword obj.Object) er
 // ODRecordRemoveAccountPolicy reports an error if the CFOpenDirectory framework function ODRecordRemoveAccountPolicy fails.
 var _fnODRecordRemoveAccountPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordRemoveAccountPolicy(record obj.Object, policy obj.Object, category obj.Object) error {
+func ODRecordRemoveAccountPolicy(record ODRecordRef, policy corefoundation.CFDictionaryRef, category obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordRemoveAccountPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordRemoveAccountPolicy, _lib, "ODRecordRemoveAccountPolicy")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordRemoveAccountPolicy(objref.IDOf(record), objref.IDOf(policy), objref.IDOf(category), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordRemoveAccountPolicy(objref.IDOf(record.Object), objref.IDOf(policy.Object), objref.IDOf(category), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -721,13 +722,13 @@ func ODRecordRemoveAccountPolicy(record obj.Object, policy obj.Object, category 
 // ODRecordRemoveMember reports an error if the CFOpenDirectory framework function ODRecordRemoveMember fails.
 var _fnODRecordRemoveMember func(objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordRemoveMember(group obj.Object, member obj.Object) error {
+func ODRecordRemoveMember(group ODRecordRef, member ODRecordRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordRemoveMember == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordRemoveMember, _lib, "ODRecordRemoveMember")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordRemoveMember(objref.IDOf(group), objref.IDOf(member), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordRemoveMember(objref.IDOf(group.Object), objref.IDOf(member.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -737,13 +738,13 @@ func ODRecordRemoveMember(group obj.Object, member obj.Object) error {
 // ODRecordRemovePolicy reports an error if the CFOpenDirectory framework function ODRecordRemovePolicy fails.
 var _fnODRecordRemovePolicy func(objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordRemovePolicy(record obj.Object, policy obj.Object) error {
+func ODRecordRemovePolicy(record ODRecordRef, policy obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordRemovePolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordRemovePolicy, _lib, "ODRecordRemovePolicy")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordRemovePolicy(objref.IDOf(record), objref.IDOf(policy), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordRemovePolicy(objref.IDOf(record.Object), objref.IDOf(policy), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -753,13 +754,13 @@ func ODRecordRemovePolicy(record obj.Object, policy obj.Object) error {
 // ODRecordRemoveValue reports an error if the CFOpenDirectory framework function ODRecordRemoveValue fails.
 var _fnODRecordRemoveValue func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordRemoveValue(record obj.Object, attribute obj.Object, value obj.Object) error {
+func ODRecordRemoveValue(record ODRecordRef, attribute obj.Object, value corefoundation.CFTypeRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordRemoveValue == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordRemoveValue, _lib, "ODRecordRemoveValue")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordRemoveValue(objref.IDOf(record), objref.IDOf(attribute), objref.IDOf(value), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordRemoveValue(objref.IDOf(record.Object), objref.IDOf(attribute), objref.IDOf(value.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -769,13 +770,13 @@ func ODRecordRemoveValue(record obj.Object, attribute obj.Object, value obj.Obje
 // ODRecordSetAccountPolicies reports an error if the CFOpenDirectory framework function ODRecordSetAccountPolicies fails.
 var _fnODRecordSetAccountPolicies func(objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordSetAccountPolicies(record obj.Object, policies obj.Object) error {
+func ODRecordSetAccountPolicies(record ODRecordRef, policies corefoundation.CFDictionaryRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetAccountPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetAccountPolicies, _lib, "ODRecordSetAccountPolicies")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordSetAccountPolicies(objref.IDOf(record), objref.IDOf(policies), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordSetAccountPolicies(objref.IDOf(record.Object), objref.IDOf(policies.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -785,13 +786,13 @@ func ODRecordSetAccountPolicies(record obj.Object, policies obj.Object) error {
 // ODRecordSetNodeCredentials reports an error if the CFOpenDirectory framework function ODRecordSetNodeCredentials fails.
 var _fnODRecordSetNodeCredentials func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordSetNodeCredentials(record obj.Object, username obj.Object, password obj.Object) error {
+func ODRecordSetNodeCredentials(record ODRecordRef, username corefoundation.CFStringRef, password corefoundation.CFStringRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetNodeCredentials == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetNodeCredentials, _lib, "ODRecordSetNodeCredentials")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordSetNodeCredentials(objref.IDOf(record), objref.IDOf(username), objref.IDOf(password), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordSetNodeCredentials(objref.IDOf(record.Object), objref.IDOf(username.Object), objref.IDOf(password.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -801,13 +802,13 @@ func ODRecordSetNodeCredentials(record obj.Object, username obj.Object, password
 // ODRecordSetNodeCredentialsExtended reports an error if the CFOpenDirectory framework function ODRecordSetNodeCredentialsExtended fails.
 var _fnODRecordSetNodeCredentialsExtended func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
 
-func ODRecordSetNodeCredentialsExtended(record obj.Object, recordType obj.Object, authType obj.Object, authItems obj.Object, outAuthItems unsafe.Pointer, outContext unsafe.Pointer) error {
+func ODRecordSetNodeCredentialsExtended(record ODRecordRef, recordType obj.Object, authType obj.Object, authItems corefoundation.CFArrayRef, outAuthItems unsafe.Pointer, outContext unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetNodeCredentialsExtended == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetNodeCredentialsExtended, _lib, "ODRecordSetNodeCredentialsExtended")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordSetNodeCredentialsExtended(objref.IDOf(record), objref.IDOf(recordType), objref.IDOf(authType), objref.IDOf(authItems), outAuthItems, outContext, unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordSetNodeCredentialsExtended(objref.IDOf(record.Object), objref.IDOf(recordType), objref.IDOf(authType), objref.IDOf(authItems.Object), outAuthItems, outContext, unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -817,13 +818,13 @@ func ODRecordSetNodeCredentialsExtended(record obj.Object, recordType obj.Object
 // ODRecordSetNodeCredentialsUsingKerberosCache reports an error if the CFOpenDirectory framework function ODRecordSetNodeCredentialsUsingKerberosCache fails.
 var _fnODRecordSetNodeCredentialsUsingKerberosCache func(objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordSetNodeCredentialsUsingKerberosCache(record obj.Object, cacheName obj.Object) error {
+func ODRecordSetNodeCredentialsUsingKerberosCache(record ODRecordRef, cacheName corefoundation.CFStringRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetNodeCredentialsUsingKerberosCache == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetNodeCredentialsUsingKerberosCache, _lib, "ODRecordSetNodeCredentialsUsingKerberosCache")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordSetNodeCredentialsUsingKerberosCache(objref.IDOf(record), objref.IDOf(cacheName), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordSetNodeCredentialsUsingKerberosCache(objref.IDOf(record.Object), objref.IDOf(cacheName.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -833,13 +834,13 @@ func ODRecordSetNodeCredentialsUsingKerberosCache(record obj.Object, cacheName o
 // ODRecordSetPolicies reports an error if the CFOpenDirectory framework function ODRecordSetPolicies fails.
 var _fnODRecordSetPolicies func(objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordSetPolicies(record obj.Object, policies obj.Object) error {
+func ODRecordSetPolicies(record ODRecordRef, policies corefoundation.CFDictionaryRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetPolicies, _lib, "ODRecordSetPolicies")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordSetPolicies(objref.IDOf(record), objref.IDOf(policies), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordSetPolicies(objref.IDOf(record.Object), objref.IDOf(policies.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -849,13 +850,13 @@ func ODRecordSetPolicies(record obj.Object, policies obj.Object) error {
 // ODRecordSetPolicy reports an error if the CFOpenDirectory framework function ODRecordSetPolicy fails.
 var _fnODRecordSetPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordSetPolicy(record obj.Object, policy obj.Object, value obj.Object) error {
+func ODRecordSetPolicy(record ODRecordRef, policy obj.Object, value corefoundation.CFTypeRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetPolicy, _lib, "ODRecordSetPolicy")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordSetPolicy(objref.IDOf(record), objref.IDOf(policy), objref.IDOf(value), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordSetPolicy(objref.IDOf(record.Object), objref.IDOf(policy), objref.IDOf(value.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -865,13 +866,13 @@ func ODRecordSetPolicy(record obj.Object, policy obj.Object, value obj.Object) e
 // ODRecordSetValue reports an error if the CFOpenDirectory framework function ODRecordSetValue fails.
 var _fnODRecordSetValue func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordSetValue(record obj.Object, attribute obj.Object, valueOrValues obj.Object) error {
+func ODRecordSetValue(record ODRecordRef, attribute obj.Object, valueOrValues corefoundation.CFTypeRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetValue, _lib, "ODRecordSetValue")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordSetValue(objref.IDOf(record), objref.IDOf(attribute), objref.IDOf(valueOrValues), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordSetValue(objref.IDOf(record.Object), objref.IDOf(attribute), objref.IDOf(valueOrValues.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -881,13 +882,13 @@ func ODRecordSetValue(record obj.Object, attribute obj.Object, valueOrValues obj
 // ODRecordSynchronize reports an error if the CFOpenDirectory framework function ODRecordSynchronize fails.
 var _fnODRecordSynchronize func(objc.ID, unsafe.Pointer) bool
 
-func ODRecordSynchronize(record obj.Object) error {
+func ODRecordSynchronize(record ODRecordRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSynchronize == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSynchronize, _lib, "ODRecordSynchronize")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordSynchronize(objref.IDOf(record), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordSynchronize(objref.IDOf(record.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -897,13 +898,13 @@ func ODRecordSynchronize(record obj.Object) error {
 // ODRecordVerifyPassword reports an error if the CFOpenDirectory framework function ODRecordVerifyPassword fails.
 var _fnODRecordVerifyPassword func(objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordVerifyPassword(record obj.Object, password obj.Object) error {
+func ODRecordVerifyPassword(record ODRecordRef, password corefoundation.CFStringRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordVerifyPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordVerifyPassword, _lib, "ODRecordVerifyPassword")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordVerifyPassword(objref.IDOf(record), objref.IDOf(password), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordVerifyPassword(objref.IDOf(record.Object), objref.IDOf(password.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -913,13 +914,13 @@ func ODRecordVerifyPassword(record obj.Object, password obj.Object) error {
 // ODRecordVerifyPasswordExtended reports an error if the CFOpenDirectory framework function ODRecordVerifyPasswordExtended fails.
 var _fnODRecordVerifyPasswordExtended func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) bool
 
-func ODRecordVerifyPasswordExtended(record obj.Object, authType obj.Object, authItems obj.Object, outAuthItems unsafe.Pointer, outContext unsafe.Pointer) error {
+func ODRecordVerifyPasswordExtended(record ODRecordRef, authType obj.Object, authItems corefoundation.CFArrayRef, outAuthItems unsafe.Pointer, outContext unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordVerifyPasswordExtended == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordVerifyPasswordExtended, _lib, "ODRecordVerifyPasswordExtended")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordVerifyPasswordExtended(objref.IDOf(record), objref.IDOf(authType), objref.IDOf(authItems), outAuthItems, outContext, unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordVerifyPasswordExtended(objref.IDOf(record.Object), objref.IDOf(authType), objref.IDOf(authItems.Object), outAuthItems, outContext, unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -929,13 +930,13 @@ func ODRecordVerifyPasswordExtended(record obj.Object, authType obj.Object, auth
 // ODSessionCopyNodeNames reports an error if the CFOpenDirectory framework function ODSessionCopyNodeNames fails.
 var _fnODSessionCopyNodeNames func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODSessionCopyNodeNames(allocator obj.Object, session obj.Object) (obj.Object, error) {
+func ODSessionCopyNodeNames(allocator corefoundation.CFAllocatorRef, session ODSessionRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODSessionCopyNodeNames == nil {
 		ebipurego.RegisterLibFunc(&_fnODSessionCopyNodeNames, _lib, "ODSessionCopyNodeNames")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODSessionCopyNodeNames(objref.IDOf(allocator), objref.IDOf(session), unsafe.Pointer(&_cfErr))
+	_r := _fnODSessionCopyNodeNames(objref.IDOf(allocator.Object), objref.IDOf(session.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -945,13 +946,13 @@ func ODSessionCopyNodeNames(allocator obj.Object, session obj.Object) (obj.Objec
 // ODSessionCreate reports an error if the CFOpenDirectory framework function ODSessionCreate fails.
 var _fnODSessionCreate func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODSessionCreate(allocator obj.Object, options obj.Object) (obj.Object, error) {
+func ODSessionCreate(allocator corefoundation.CFAllocatorRef, options corefoundation.CFDictionaryRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODSessionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnODSessionCreate, _lib, "ODSessionCreate")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODSessionCreate(objref.IDOf(allocator), objref.IDOf(options), unsafe.Pointer(&_cfErr))
+	_r := _fnODSessionCreate(objref.IDOf(allocator.Object), objref.IDOf(options.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}

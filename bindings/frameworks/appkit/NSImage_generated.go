@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -143,10 +144,10 @@ func NewImageWithDataIgnoringOrientation(data []byte) *Image {
 }
 
 // NewImageWithCGImageSize creates a new image using the contents of the provided image.
-func NewImageWithCGImageSize(cgImage obj.Object, size corefoundation.CGSize) *Image {
+func NewImageWithCGImageSize(cgImage coregraphics.CGImageRef, size corefoundation.CGSize) *Image {
 	defer runtime.KeepAlive(cgImage)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:size:"), objref.IDOf(cgImage), size)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:size:"), objref.IDOf(cgImage.Object), size)
 	return imageAdopt(_id)
 }
 
@@ -323,12 +324,12 @@ func (i *Image) RemoveRepresentation(imageRep *ImageRep) {
 }
 
 // CGImageForProposedRectContextHints returns a Core Graphics image based on the contents of the current image object.
-func (i *Image) CGImageForProposedRectContextHints(proposedDestRect *corefoundation.CGRect, referenceContext *GraphicsContext, hints obj.Object) obj.Object {
+func (i *Image) CGImageForProposedRectContextHints(proposedDestRect *corefoundation.CGRect, referenceContext *GraphicsContext, hints obj.Object) coregraphics.CGImageRef {
 	defer runtime.KeepAlive(i)
 	defer runtime.KeepAlive(referenceContext)
 	defer runtime.KeepAlive(hints)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("CGImageForProposedRect:context:hints:"), unsafe.Pointer(proposedDestRect), objref.IDOf(referenceContext), objref.IDOf(hints))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // BestRepresentationForRectContextHints returns the best representation of the image for the specified rectangle using the provided hints.

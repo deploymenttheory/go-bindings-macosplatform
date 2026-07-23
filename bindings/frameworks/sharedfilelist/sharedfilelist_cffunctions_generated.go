@@ -18,12 +18,12 @@ import (
 var _fnLSSharedFileListItemMove func(objc.ID, objc.ID, objc.ID) int32
 
 // LSSharedFileListItemMove reports an error if the SharedFileList framework function LSSharedFileListItemMove fails.
-func LSSharedFileListItemMove(inList obj.Object, inItem obj.Object, inMoveAfterItem obj.Object) error {
+func LSSharedFileListItemMove(inList LSSharedFileListRef, inItem LSSharedFileListItemRef, inMoveAfterItem LSSharedFileListItemRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemMove == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemMove, _lib, "LSSharedFileListItemMove")
 	}
-	_rc := _fnLSSharedFileListItemMove(objref.IDOf(inList), objref.IDOf(inItem), objref.IDOf(inMoveAfterItem))
+	_rc := _fnLSSharedFileListItemMove(objref.IDOf(inList.Object), objref.IDOf(inItem.Object), objref.IDOf(inMoveAfterItem.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -33,12 +33,12 @@ func LSSharedFileListItemMove(inList obj.Object, inItem obj.Object, inMoveAfterI
 var _fnLSSharedFileListItemRemove func(objc.ID, objc.ID) int32
 
 // LSSharedFileListItemRemove reports an error if the SharedFileList framework function LSSharedFileListItemRemove fails.
-func LSSharedFileListItemRemove(inList obj.Object, inItem obj.Object) error {
+func LSSharedFileListItemRemove(inList LSSharedFileListRef, inItem LSSharedFileListItemRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemRemove == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemRemove, _lib, "LSSharedFileListItemRemove")
 	}
-	_rc := _fnLSSharedFileListItemRemove(objref.IDOf(inList), objref.IDOf(inItem))
+	_rc := _fnLSSharedFileListItemRemove(objref.IDOf(inList.Object), objref.IDOf(inItem.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -48,13 +48,13 @@ func LSSharedFileListItemRemove(inList obj.Object, inItem obj.Object) error {
 var _fnLSSharedFileListItemResolve func(objc.ID, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // LSSharedFileListItemResolve reports an error if the SharedFileList framework function LSSharedFileListItemResolve fails.
-func LSSharedFileListItemResolve(inItem obj.Object, inFlags int, outRef *carboncore.FSRef) (obj.Object, error) {
+func LSSharedFileListItemResolve(inItem LSSharedFileListItemRef, inFlags int, outRef *carboncore.FSRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemResolve == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemResolve, _lib, "LSSharedFileListItemResolve")
 	}
 	var _out0 uintptr
-	_rc := _fnLSSharedFileListItemResolve(objref.IDOf(inItem), inFlags, unsafe.Pointer(&_out0), unsafe.Pointer(outRef))
+	_rc := _fnLSSharedFileListItemResolve(objref.IDOf(inItem.Object), inFlags, unsafe.Pointer(&_out0), unsafe.Pointer(outRef))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -64,12 +64,12 @@ func LSSharedFileListItemResolve(inItem obj.Object, inFlags int, outRef *carbonc
 var _fnLSSharedFileListItemSetProperty func(objc.ID, objc.ID, objc.ID) int32
 
 // LSSharedFileListItemSetProperty reports an error if the SharedFileList framework function LSSharedFileListItemSetProperty fails.
-func LSSharedFileListItemSetProperty(inItem obj.Object, inPropertyName obj.Object, inPropertyData obj.Object) error {
+func LSSharedFileListItemSetProperty(inItem LSSharedFileListItemRef, inPropertyName obj.Object, inPropertyData obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemSetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemSetProperty, _lib, "LSSharedFileListItemSetProperty")
 	}
-	_rc := _fnLSSharedFileListItemSetProperty(objref.IDOf(inItem), objref.IDOf(inPropertyName), objref.IDOf(inPropertyData))
+	_rc := _fnLSSharedFileListItemSetProperty(objref.IDOf(inItem.Object), objref.IDOf(inPropertyName), objref.IDOf(inPropertyData))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -79,12 +79,12 @@ func LSSharedFileListItemSetProperty(inItem obj.Object, inPropertyName obj.Objec
 var _fnLSSharedFileListRemoveAllItems func(objc.ID) int32
 
 // LSSharedFileListRemoveAllItems reports an error if the SharedFileList framework function LSSharedFileListRemoveAllItems fails.
-func LSSharedFileListRemoveAllItems(inList obj.Object) error {
+func LSSharedFileListRemoveAllItems(inList LSSharedFileListRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListRemoveAllItems == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListRemoveAllItems, _lib, "LSSharedFileListRemoveAllItems")
 	}
-	_rc := _fnLSSharedFileListRemoveAllItems(objref.IDOf(inList))
+	_rc := _fnLSSharedFileListRemoveAllItems(objref.IDOf(inList.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -94,12 +94,12 @@ func LSSharedFileListRemoveAllItems(inList obj.Object) error {
 var _fnLSSharedFileListSetAuthorization func(objc.ID, objc.ID) int32
 
 // LSSharedFileListSetAuthorization reports an error if the SharedFileList framework function LSSharedFileListSetAuthorization fails.
-func LSSharedFileListSetAuthorization(inList obj.Object, inAuthorization obj.Object) error {
+func LSSharedFileListSetAuthorization(inList LSSharedFileListRef, inAuthorization obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListSetAuthorization == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListSetAuthorization, _lib, "LSSharedFileListSetAuthorization")
 	}
-	_rc := _fnLSSharedFileListSetAuthorization(objref.IDOf(inList), objref.IDOf(inAuthorization))
+	_rc := _fnLSSharedFileListSetAuthorization(objref.IDOf(inList.Object), objref.IDOf(inAuthorization))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -109,12 +109,12 @@ func LSSharedFileListSetAuthorization(inList obj.Object, inAuthorization obj.Obj
 var _fnLSSharedFileListSetProperty func(objc.ID, objc.ID, objc.ID) int32
 
 // LSSharedFileListSetProperty reports an error if the SharedFileList framework function LSSharedFileListSetProperty fails.
-func LSSharedFileListSetProperty(inList obj.Object, inPropertyName obj.Object, inPropertyData obj.Object) error {
+func LSSharedFileListSetProperty(inList LSSharedFileListRef, inPropertyName obj.Object, inPropertyData obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListSetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListSetProperty, _lib, "LSSharedFileListSetProperty")
 	}
-	_rc := _fnLSSharedFileListSetProperty(objref.IDOf(inList), objref.IDOf(inPropertyName), objref.IDOf(inPropertyData))
+	_rc := _fnLSSharedFileListSetProperty(objref.IDOf(inList.Object), objref.IDOf(inPropertyName), objref.IDOf(inPropertyData))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

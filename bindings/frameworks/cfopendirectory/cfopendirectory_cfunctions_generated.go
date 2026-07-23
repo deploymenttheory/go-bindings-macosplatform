@@ -7,6 +7,7 @@ package cfopendirectory
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -28,13 +29,13 @@ func ODContextGetTypeID() int {
 var _fnODNodeGetName func(objc.ID) objc.ID
 
 // ODNodeGetName calls the CFOpenDirectory framework function ODNodeGetName.
-func ODNodeGetName(node obj.Object) obj.Object {
+func ODNodeGetName(node ODNodeRef) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeGetName == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeGetName, _lib, "ODNodeGetName")
 	}
-	_ret := _fnODNodeGetName(objref.IDOf(node))
-	return obj.Wrap(_ret)
+	_ret := _fnODNodeGetName(objref.IDOf(node.Object))
+	return corefoundation.CFStringRef{obj.Wrap(_ret)}
 }
 
 var _fnODNodeGetTypeID func() int
@@ -62,80 +63,80 @@ func ODQueryGetTypeID() int {
 var _fnODQueryScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // ODQueryScheduleWithRunLoop calls the CFOpenDirectory framework function ODQueryScheduleWithRunLoop.
-func ODQueryScheduleWithRunLoop(query obj.Object, runLoop obj.Object, runLoopMode obj.Object) {
+func ODQueryScheduleWithRunLoop(query ODQueryRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQueryScheduleWithRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnODQueryScheduleWithRunLoop, _lib, "ODQueryScheduleWithRunLoop")
 	}
-	_fnODQueryScheduleWithRunLoop(objref.IDOf(query), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
+	_fnODQueryScheduleWithRunLoop(objref.IDOf(query.Object), objref.IDOf(runLoop.Object), objref.IDOf(runLoopMode.Object))
 }
 
 var _fnODQuerySetCallback func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // ODQuerySetCallback calls the CFOpenDirectory framework function ODQuerySetCallback.
-func ODQuerySetCallback(query obj.Object, callback unsafe.Pointer, userInfo unsafe.Pointer) {
+func ODQuerySetCallback(query ODQueryRef, callback unsafe.Pointer, userInfo unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQuerySetCallback == nil {
 		ebipurego.RegisterLibFunc(&_fnODQuerySetCallback, _lib, "ODQuerySetCallback")
 	}
-	_fnODQuerySetCallback(objref.IDOf(query), callback, userInfo)
+	_fnODQuerySetCallback(objref.IDOf(query.Object), callback, userInfo)
 }
 
 var _fnODQuerySetDispatchQueue func(objc.ID, objc.ID)
 
 // ODQuerySetDispatchQueue calls the CFOpenDirectory framework function ODQuerySetDispatchQueue.
-func ODQuerySetDispatchQueue(query obj.Object, queue dispatch.Queue) {
+func ODQuerySetDispatchQueue(query ODQueryRef, queue dispatch.Queue) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQuerySetDispatchQueue == nil {
 		ebipurego.RegisterLibFunc(&_fnODQuerySetDispatchQueue, _lib, "ODQuerySetDispatchQueue")
 	}
-	_fnODQuerySetDispatchQueue(objref.IDOf(query), objc.ID(uintptr(queue.Ptr())))
+	_fnODQuerySetDispatchQueue(objref.IDOf(query.Object), objc.ID(uintptr(queue.Ptr())))
 }
 
 var _fnODQuerySynchronize func(objc.ID)
 
 // ODQuerySynchronize calls the CFOpenDirectory framework function ODQuerySynchronize.
-func ODQuerySynchronize(query obj.Object) {
+func ODQuerySynchronize(query ODQueryRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQuerySynchronize == nil {
 		ebipurego.RegisterLibFunc(&_fnODQuerySynchronize, _lib, "ODQuerySynchronize")
 	}
-	_fnODQuerySynchronize(objref.IDOf(query))
+	_fnODQuerySynchronize(objref.IDOf(query.Object))
 }
 
 var _fnODQueryUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
 
 // ODQueryUnscheduleFromRunLoop calls the CFOpenDirectory framework function ODQueryUnscheduleFromRunLoop.
-func ODQueryUnscheduleFromRunLoop(query obj.Object, runLoop obj.Object, runLoopMode obj.Object) {
+func ODQueryUnscheduleFromRunLoop(query ODQueryRef, runLoop corefoundation.CFRunLoopRef, runLoopMode corefoundation.CFStringRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQueryUnscheduleFromRunLoop == nil {
 		ebipurego.RegisterLibFunc(&_fnODQueryUnscheduleFromRunLoop, _lib, "ODQueryUnscheduleFromRunLoop")
 	}
-	_fnODQueryUnscheduleFromRunLoop(objref.IDOf(query), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
+	_fnODQueryUnscheduleFromRunLoop(objref.IDOf(query.Object), objref.IDOf(runLoop.Object), objref.IDOf(runLoopMode.Object))
 }
 
 var _fnODRecordGetRecordName func(objc.ID) objc.ID
 
 // ODRecordGetRecordName calls the CFOpenDirectory framework function ODRecordGetRecordName.
-func ODRecordGetRecordName(record obj.Object) obj.Object {
+func ODRecordGetRecordName(record ODRecordRef) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordGetRecordName == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordGetRecordName, _lib, "ODRecordGetRecordName")
 	}
-	_ret := _fnODRecordGetRecordName(objref.IDOf(record))
-	return obj.Wrap(_ret)
+	_ret := _fnODRecordGetRecordName(objref.IDOf(record.Object))
+	return corefoundation.CFStringRef{obj.Wrap(_ret)}
 }
 
 var _fnODRecordGetRecordType func(objc.ID) objc.ID
 
 // ODRecordGetRecordType calls the CFOpenDirectory framework function ODRecordGetRecordType.
-func ODRecordGetRecordType(record obj.Object) obj.Object {
+func ODRecordGetRecordType(record ODRecordRef) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordGetRecordType == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordGetRecordType, _lib, "ODRecordGetRecordType")
 	}
-	_ret := _fnODRecordGetRecordType(objref.IDOf(record))
-	return obj.Wrap(_ret)
+	_ret := _fnODRecordGetRecordType(objref.IDOf(record.Object))
+	return corefoundation.CFStringRef{obj.Wrap(_ret)}
 }
 
 var _fnODRecordGetTypeID func() int
@@ -152,45 +153,45 @@ func ODRecordGetTypeID() int {
 var _fnODRecordSecondsUntilAuthenticationsExpire func(objc.ID) int64
 
 // ODRecordSecondsUntilAuthenticationsExpire calls the CFOpenDirectory framework function ODRecordSecondsUntilAuthenticationsExpire.
-func ODRecordSecondsUntilAuthenticationsExpire(record obj.Object) int64 {
+func ODRecordSecondsUntilAuthenticationsExpire(record ODRecordRef) int64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSecondsUntilAuthenticationsExpire == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSecondsUntilAuthenticationsExpire, _lib, "ODRecordSecondsUntilAuthenticationsExpire")
 	}
-	return _fnODRecordSecondsUntilAuthenticationsExpire(objref.IDOf(record))
+	return _fnODRecordSecondsUntilAuthenticationsExpire(objref.IDOf(record.Object))
 }
 
 var _fnODRecordSecondsUntilPasswordExpires func(objc.ID) int64
 
 // ODRecordSecondsUntilPasswordExpires calls the CFOpenDirectory framework function ODRecordSecondsUntilPasswordExpires.
-func ODRecordSecondsUntilPasswordExpires(record obj.Object) int64 {
+func ODRecordSecondsUntilPasswordExpires(record ODRecordRef) int64 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSecondsUntilPasswordExpires == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSecondsUntilPasswordExpires, _lib, "ODRecordSecondsUntilPasswordExpires")
 	}
-	return _fnODRecordSecondsUntilPasswordExpires(objref.IDOf(record))
+	return _fnODRecordSecondsUntilPasswordExpires(objref.IDOf(record.Object))
 }
 
 var _fnODRecordWillAuthenticationsExpire func(objc.ID, uint64) bool
 
 // ODRecordWillAuthenticationsExpire calls the CFOpenDirectory framework function ODRecordWillAuthenticationsExpire.
-func ODRecordWillAuthenticationsExpire(record obj.Object, willExpireIn uint64) bool {
+func ODRecordWillAuthenticationsExpire(record ODRecordRef, willExpireIn uint64) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordWillAuthenticationsExpire == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordWillAuthenticationsExpire, _lib, "ODRecordWillAuthenticationsExpire")
 	}
-	return _fnODRecordWillAuthenticationsExpire(objref.IDOf(record), willExpireIn)
+	return _fnODRecordWillAuthenticationsExpire(objref.IDOf(record.Object), willExpireIn)
 }
 
 var _fnODRecordWillPasswordExpire func(objc.ID, uint64) bool
 
 // ODRecordWillPasswordExpire calls the CFOpenDirectory framework function ODRecordWillPasswordExpire.
-func ODRecordWillPasswordExpire(record obj.Object, willExpireIn uint64) bool {
+func ODRecordWillPasswordExpire(record ODRecordRef, willExpireIn uint64) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordWillPasswordExpire == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordWillPasswordExpire, _lib, "ODRecordWillPasswordExpire")
 	}
-	return _fnODRecordWillPasswordExpire(objref.IDOf(record), willExpireIn)
+	return _fnODRecordWillPasswordExpire(objref.IDOf(record.Object), willExpireIn)
 }
 
 var _fnODSessionGetTypeID func() int

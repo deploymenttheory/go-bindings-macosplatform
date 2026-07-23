@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -66,9 +67,9 @@ func (tl *TextLayer) WithString(str obj.Object) *TextLayer {
 }
 
 // WithFont sets the font used to render the receiver’s text.
-func (tl *TextLayer) WithFont(font obj.Object) *TextLayer {
+func (tl *TextLayer) WithFont(font corefoundation.CFTypeRef) *TextLayer {
 	defer runtime.KeepAlive(font)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setFont:"), objref.IDOf(font))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setFont:"), objref.IDOf(font.Object))
 	return tl
 }
 
@@ -79,9 +80,9 @@ func (tl *TextLayer) WithFontSize(fontSize float64) *TextLayer {
 }
 
 // WithForegroundColor sets the color used to render the receiver’s text. Animatable.
-func (tl *TextLayer) WithForegroundColor(foregroundColor obj.Object) *TextLayer {
+func (tl *TextLayer) WithForegroundColor(foregroundColor coregraphics.CGColorRef) *TextLayer {
 	defer runtime.KeepAlive(foregroundColor)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setForegroundColor:"), objref.IDOf(foregroundColor))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setForegroundColor:"), objref.IDOf(foregroundColor.Object))
 	return tl
 }
 
@@ -301,9 +302,9 @@ func (tl *TextLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *Te
 }
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
-func (tl *TextLayer) WithBackgroundColor(backgroundColor obj.Object) *TextLayer {
+func (tl *TextLayer) WithBackgroundColor(backgroundColor coregraphics.CGColorRef) *TextLayer {
 	defer runtime.KeepAlive(backgroundColor)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor.Object))
 	return tl
 }
 
@@ -333,9 +334,9 @@ func (tl *TextLayer) WithBorderWidth(borderWidth float64) *TextLayer {
 }
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
-func (tl *TextLayer) WithBorderColor(borderColor obj.Object) *TextLayer {
+func (tl *TextLayer) WithBorderColor(borderColor coregraphics.CGColorRef) *TextLayer {
 	defer runtime.KeepAlive(borderColor)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor.Object))
 	return tl
 }
 
@@ -371,9 +372,9 @@ func (tl *TextLayer) WithRasterizationScale(rasterizationScale float64) *TextLay
 }
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
-func (tl *TextLayer) WithShadowColor(shadowColor obj.Object) *TextLayer {
+func (tl *TextLayer) WithShadowColor(shadowColor coregraphics.CGColorRef) *TextLayer {
 	defer runtime.KeepAlive(shadowColor)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor.Object))
 	return tl
 }
 
@@ -396,9 +397,9 @@ func (tl *TextLayer) WithShadowRadius(shadowRadius float64) *TextLayer {
 }
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
-func (tl *TextLayer) WithShadowPath(shadowPath obj.Object) *TextLayer {
+func (tl *TextLayer) WithShadowPath(shadowPath coregraphics.CGPathRef) *TextLayer {
 	defer runtime.KeepAlive(shadowPath)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath.Object))
 	return tl
 }
 
@@ -452,10 +453,10 @@ func (tl *TextLayer) String() obj.Object {
 }
 
 // Font returns the font.
-func (tl *TextLayer) Font() obj.Object {
+func (tl *TextLayer) Font() corefoundation.CFTypeRef {
 	defer runtime.KeepAlive(tl)
 	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("font"))
-	return obj.Wrap(_r)
+	return corefoundation.CFTypeRef{obj.Wrap(_r)}
 }
 
 // FontSize returns the font size.
@@ -466,10 +467,10 @@ func (tl *TextLayer) FontSize() float64 {
 }
 
 // ForegroundColor returns the foreground color.
-func (tl *TextLayer) ForegroundColor() obj.Object {
+func (tl *TextLayer) ForegroundColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(tl)
 	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("foregroundColor"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // IsWrapped reports whether the object is wrapped.

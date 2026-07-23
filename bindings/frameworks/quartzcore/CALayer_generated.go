@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -276,9 +277,9 @@ func (l *Layer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *Layer {
 }
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
-func (l *Layer) WithBackgroundColor(backgroundColor obj.Object) *Layer {
+func (l *Layer) WithBackgroundColor(backgroundColor coregraphics.CGColorRef) *Layer {
 	defer runtime.KeepAlive(backgroundColor)
-	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor.Object))
 	return l
 }
 
@@ -308,9 +309,9 @@ func (l *Layer) WithBorderWidth(borderWidth float64) *Layer {
 }
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
-func (l *Layer) WithBorderColor(borderColor obj.Object) *Layer {
+func (l *Layer) WithBorderColor(borderColor coregraphics.CGColorRef) *Layer {
 	defer runtime.KeepAlive(borderColor)
-	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor.Object))
 	return l
 }
 
@@ -346,9 +347,9 @@ func (l *Layer) WithRasterizationScale(rasterizationScale float64) *Layer {
 }
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
-func (l *Layer) WithShadowColor(shadowColor obj.Object) *Layer {
+func (l *Layer) WithShadowColor(shadowColor coregraphics.CGColorRef) *Layer {
 	defer runtime.KeepAlive(shadowColor)
-	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor.Object))
 	return l
 }
 
@@ -371,9 +372,9 @@ func (l *Layer) WithShadowRadius(shadowRadius float64) *Layer {
 }
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
-func (l *Layer) WithShadowPath(shadowPath obj.Object) *Layer {
+func (l *Layer) WithShadowPath(shadowPath coregraphics.CGPathRef) *Layer {
 	defer runtime.KeepAlive(shadowPath)
-	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath.Object))
 	return l
 }
 
@@ -598,17 +599,17 @@ func (l *Layer) DisplayIfNeeded() {
 }
 
 // DrawInContext draws the layer’s content using the specified graphics context.
-func (l *Layer) DrawInContext(ctx obj.Object) {
+func (l *Layer) DrawInContext(ctx coregraphics.CGContextRef) {
 	defer runtime.KeepAlive(l)
 	defer runtime.KeepAlive(ctx)
-	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("drawInContext:"), objref.IDOf(ctx))
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("drawInContext:"), objref.IDOf(ctx.Object))
 }
 
 // RenderInContext renders the layer and its sublayers into the specified context.
-func (l *Layer) RenderInContext(ctx obj.Object) {
+func (l *Layer) RenderInContext(ctx coregraphics.CGContextRef) {
 	defer runtime.KeepAlive(l)
 	defer runtime.KeepAlive(ctx)
-	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("renderInContext:"), objref.IDOf(ctx))
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("renderInContext:"), objref.IDOf(ctx.Object))
 }
 
 // PreferredFrameSize returns the preferred size of the layer in the coordinate space of its superlayer.
@@ -910,10 +911,10 @@ func (l *Layer) AllowsEdgeAntialiasing() bool {
 }
 
 // BackgroundColor returns the background color.
-func (l *Layer) BackgroundColor() obj.Object {
+func (l *Layer) BackgroundColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("backgroundColor"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // CornerRadius returns the corner radius.
@@ -945,10 +946,10 @@ func (l *Layer) BorderWidth() float64 {
 }
 
 // BorderColor returns the border color.
-func (l *Layer) BorderColor() obj.Object {
+func (l *Layer) BorderColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("borderColor"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // Opacity returns the opacity.
@@ -1015,10 +1016,10 @@ func (l *Layer) RasterizationScale() float64 {
 }
 
 // ShadowColor returns the shadow color.
-func (l *Layer) ShadowColor() obj.Object {
+func (l *Layer) ShadowColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("shadowColor"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // ShadowOpacity returns the shadow opacity.
@@ -1043,10 +1044,10 @@ func (l *Layer) ShadowRadius() float64 {
 }
 
 // ShadowPath returns the shadow path.
-func (l *Layer) ShadowPath() obj.Object {
+func (l *Layer) ShadowPath() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("shadowPath"))
-	return obj.Wrap(_r)
+	return coregraphics.CGPathRef{obj.Wrap(_r)}
 }
 
 // AutoresizingMask returns the autoresizing mask.

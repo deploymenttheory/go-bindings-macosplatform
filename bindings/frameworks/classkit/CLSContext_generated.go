@@ -8,6 +8,7 @@ import (
 	"context"
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -121,9 +122,9 @@ func (c *Context) WithSummary(summary string) *Context {
 }
 
 // WithThumbnail sets an optional thumbnail image associated with the context.
-func (c *Context) WithThumbnail(thumbnail obj.Object) *Context {
+func (c *Context) WithThumbnail(thumbnail coregraphics.CGImageRef) *Context {
 	defer runtime.KeepAlive(thumbnail)
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setThumbnail:"), objref.IDOf(thumbnail))
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setThumbnail:"), objref.IDOf(thumbnail.Object))
 	return c
 }
 
@@ -258,10 +259,10 @@ func (c *Context) Summary() string {
 }
 
 // Thumbnail returns an optional thumbnail image associated with the context. The size of this image should be equal to or larger than 80x80 pixels and equal to or smaller than 330x330 pixels. Images larger than 330x330 pixels will be scaled down. Images with both dimensions smaller than 80x80 pixels will not be accepted.
-func (c *Context) Thumbnail() obj.Object {
+func (c *Context) Thumbnail() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("thumbnail"))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // IsActive reports whether self is the active context.

@@ -7,6 +7,7 @@ package corebluetooth
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -39,9 +40,9 @@ func UUIDWithData(theData []byte) *UUID {
 }
 
 // UUIDWithCFUUID creates a Core Bluetooth UUID object from a Core Foundation UUID object.
-func UUIDWithCFUUID(theUUID obj.Object) *UUID {
+func UUIDWithCFUUID(theUUID corefoundation.CFUUIDRef) *UUID {
 	defer runtime.KeepAlive(theUUID)
-	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithCFUUID:"), objref.IDOf(theUUID))
+	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithCFUUID:"), objref.IDOf(theUUID.Object))
 	return UUIDFromID(_r)
 }
 

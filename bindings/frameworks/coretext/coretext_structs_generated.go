@@ -6,6 +6,8 @@ package coretext
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type ALMXGlyphEntry struct {
@@ -771,3 +773,101 @@ type TrakTableEntry struct {
 	NameTableIndex uint16
 	SizesOffset    uint16
 }
+
+// CTFontCollectionRef is a handle for the opaque CTFontCollectionRef type.
+type CTFontCollectionRef struct{ obj.Object }
+
+// IsNil reports whether CTFontCollectionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTFontCollectionRef) IsNil() bool { return h.Object == nil }
+
+// CTFontDescriptorRef is a handle for the opaque CTFontDescriptorRef type.
+type CTFontDescriptorRef struct{ obj.Object }
+
+// IsNil reports whether CTFontDescriptorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTFontDescriptorRef) IsNil() bool { return h.Object == nil }
+
+// CTFontRef is a handle for the opaque CTFontRef type.
+type CTFontRef struct{ obj.Object }
+
+// IsNil reports whether CTFontRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTFontRef) IsNil() bool { return h.Object == nil }
+
+// CTFrameRef is a handle for the opaque CTFrameRef type.
+type CTFrameRef struct{ obj.Object }
+
+// IsNil reports whether CTFrameRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTFrameRef) IsNil() bool { return h.Object == nil }
+
+// CTFramesetterRef is a handle for the opaque CTFramesetterRef type.
+type CTFramesetterRef struct{ obj.Object }
+
+// IsNil reports whether CTFramesetterRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTFramesetterRef) IsNil() bool { return h.Object == nil }
+
+// CTGlyphInfoRef is a handle for the opaque CTGlyphInfoRef type.
+type CTGlyphInfoRef struct{ obj.Object }
+
+// IsNil reports whether CTGlyphInfoRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTGlyphInfoRef) IsNil() bool { return h.Object == nil }
+
+// CTLineRef is a handle for the opaque CTLineRef type.
+type CTLineRef struct{ obj.Object }
+
+// IsNil reports whether CTLineRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTLineRef) IsNil() bool { return h.Object == nil }
+
+// CTMutableFontCollectionRef is a handle for the opaque CTMutableFontCollectionRef type.
+type CTMutableFontCollectionRef struct{ obj.Object }
+
+// IsNil reports whether CTMutableFontCollectionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTMutableFontCollectionRef) IsNil() bool { return h.Object == nil }
+
+// CTParagraphStyleRef is a handle for the opaque CTParagraphStyleRef type.
+type CTParagraphStyleRef struct{ obj.Object }
+
+// IsNil reports whether CTParagraphStyleRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTParagraphStyleRef) IsNil() bool { return h.Object == nil }
+
+// CTRubyAnnotationRef is a handle for the opaque CTRubyAnnotationRef type.
+type CTRubyAnnotationRef struct{ obj.Object }
+
+// IsNil reports whether CTRubyAnnotationRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTRubyAnnotationRef) IsNil() bool { return h.Object == nil }
+
+// CTRunDelegateRef is a handle for the opaque CTRunDelegateRef type.
+type CTRunDelegateRef struct{ obj.Object }
+
+// IsNil reports whether CTRunDelegateRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTRunDelegateRef) IsNil() bool { return h.Object == nil }
+
+// CTRunRef is a handle for the opaque CTRunRef type.
+type CTRunRef struct{ obj.Object }
+
+// IsNil reports whether CTRunRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTRunRef) IsNil() bool { return h.Object == nil }
+
+// CTTextTabRef is a handle for the opaque CTTextTabRef type.
+type CTTextTabRef struct{ obj.Object }
+
+// IsNil reports whether CTTextTabRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTTextTabRef) IsNil() bool { return h.Object == nil }
+
+// CTTypesetterRef is a handle for the opaque CTTypesetterRef type.
+type CTTypesetterRef struct{ obj.Object }
+
+// IsNil reports whether CTTypesetterRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CTTypesetterRef) IsNil() bool { return h.Object == nil }

@@ -7,8 +7,8 @@ package accessibility
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
@@ -39,12 +39,12 @@ func AXAssistiveAccessEnabled() bool {
 var _fnAXNameFromColor func(objc.ID) objc.ID
 
 // AXNameFromColor calls the Accessibility framework function AXNameFromColor.
-func AXNameFromColor(color obj.Object) string {
+func AXNameFromColor(color coregraphics.CGColorRef) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAXNameFromColor == nil {
 		ebipurego.RegisterLibFunc(&_fnAXNameFromColor, _lib, "AXNameFromColor")
 	}
-	_ret := _fnAXNameFromColor(objref.IDOf(color))
+	_ret := _fnAXNameFromColor(objref.IDOf(color.Object))
 	if _ret == 0 {
 		return ""
 	}

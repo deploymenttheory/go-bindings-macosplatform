@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -88,10 +89,10 @@ func (tr *ThumbnailRepresentation) Type() ThumbnailRepresentationType {
 }
 
 // CGImage returns the CGImage representation of the thumbnail.
-func (tr *ThumbnailRepresentation) CGImage() obj.Object {
+func (tr *ThumbnailRepresentation) CGImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(tr)
 	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("CGImage"))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // ContentRect returns the the effective rect within the thumbnail image representing the content of the document. In icon mode, this is the part of the image without all the image decorations.

@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -93,11 +94,11 @@ func (srh *SequenceRequestHandler) PerformRequestsOnCVPixelBuffer(requests []*Re
 }
 
 // PerformRequestsOnCGImage schedules Vision requests to be performed on a Core Graphics image.
-func (srh *SequenceRequestHandler) PerformRequestsOnCGImage(requests []*Request, image obj.Object) error {
+func (srh *SequenceRequestHandler) PerformRequestsOnCGImage(requests []*Request, image coregraphics.CGImageRef) error {
 	defer runtime.KeepAlive(srh)
 	defer runtime.KeepAlive(image)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onCGImage:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(image), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(srh), objc.RegisterName("performRequests:onCGImage:error:"), purego.SliceToNSArray(requests, func(_v *Request) objc.ID { return objref.IDOf(_v) }), objref.IDOf(image.Object), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}

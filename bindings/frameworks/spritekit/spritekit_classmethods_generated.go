@@ -10,6 +10,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
@@ -286,30 +287,30 @@ func FalloffByDuration(falloff float32, duration float64) *Action {
 }
 
 // FollowPathDuration creates an action that moves the node along a relative path, orienting the node to the path
-func FollowPathDuration(path obj.Object, duration float64) *Action {
+func FollowPathDuration(path coregraphics.CGPathRef, duration float64) *Action {
 	defer runtime.KeepAlive(path)
-	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:duration:"), objref.IDOf(path), duration)
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:duration:"), objref.IDOf(path.Object), duration)
 	return ActionFromID(_r)
 }
 
 // FollowPathAsOffsetOrientToPathDuration creates an action that moves the node along a path
-func FollowPathAsOffsetOrientToPathDuration(path obj.Object, offset bool, orient bool, duration float64) *Action {
+func FollowPathAsOffsetOrientToPathDuration(path coregraphics.CGPathRef, offset bool, orient bool, duration float64) *Action {
 	defer runtime.KeepAlive(path)
-	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:asOffset:orientToPath:duration:"), objref.IDOf(path), offset, orient, duration)
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:asOffset:orientToPath:duration:"), objref.IDOf(path.Object), offset, orient, duration)
 	return ActionFromID(_r)
 }
 
 // FollowPathSpeed creates an action that moves the node along a relative path, orienting the node to the path
-func FollowPathSpeed(path obj.Object, speed float64) *Action {
+func FollowPathSpeed(path coregraphics.CGPathRef, speed float64) *Action {
 	defer runtime.KeepAlive(path)
-	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:speed:"), objref.IDOf(path), speed)
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:speed:"), objref.IDOf(path.Object), speed)
 	return ActionFromID(_r)
 }
 
 // FollowPathAsOffsetOrientToPathSpeed wraps the corresponding Objective-C method.
-func FollowPathAsOffsetOrientToPathSpeed(path obj.Object, offset bool, orient bool, speed float64) *Action {
+func FollowPathAsOffsetOrientToPathSpeed(path coregraphics.CGPathRef, offset bool, orient bool, speed float64) *Action {
 	defer runtime.KeepAlive(path)
-	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:asOffset:orientToPath:speed:"), objref.IDOf(path), offset, orient, speed)
+	_r := objc.Send[objc.ID](objc.ID(_class("SKAction")), objc.RegisterName("followPath:asOffset:orientToPath:speed:"), objref.IDOf(path.Object), offset, orient, speed)
 	return ActionFromID(_r)
 }
 
@@ -855,9 +856,9 @@ func BodyWithRectangleOfSizeCenter(s corefoundation.CGSize, center corefoundatio
 }
 
 // BodyWithPolygonFromPath creates a polygonal physics body.
-func BodyWithPolygonFromPath(path obj.Object) *PhysicsBody {
+func BodyWithPolygonFromPath(path coregraphics.CGPathRef) *PhysicsBody {
 	defer runtime.KeepAlive(path)
-	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithPolygonFromPath:"), objref.IDOf(path))
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithPolygonFromPath:"), objref.IDOf(path.Object))
 	return PhysicsBodyFromID(_r)
 }
 
@@ -868,16 +869,16 @@ func BodyWithEdgeFromPointToPoint(p1 corefoundation.CGPoint, p2 corefoundation.C
 }
 
 // BodyWithEdgeChainFromPath creates an edge chain from a path.
-func BodyWithEdgeChainFromPath(path obj.Object) *PhysicsBody {
+func BodyWithEdgeChainFromPath(path coregraphics.CGPathRef) *PhysicsBody {
 	defer runtime.KeepAlive(path)
-	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithEdgeChainFromPath:"), objref.IDOf(path))
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithEdgeChainFromPath:"), objref.IDOf(path.Object))
 	return PhysicsBodyFromID(_r)
 }
 
 // BodyWithEdgeLoopFromPath creates an edge loop from a path.
-func BodyWithEdgeLoopFromPath(path obj.Object) *PhysicsBody {
+func BodyWithEdgeLoopFromPath(path coregraphics.CGPathRef) *PhysicsBody {
 	defer runtime.KeepAlive(path)
-	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithEdgeLoopFromPath:"), objref.IDOf(path))
+	_r := objc.Send[objc.ID](objc.ID(_class("SKPhysicsBody")), objc.RegisterName("bodyWithEdgeLoopFromPath:"), objref.IDOf(path.Object))
 	return PhysicsBodyFromID(_r)
 }
 
@@ -1032,16 +1033,16 @@ func ShaderWithFileNamed(name string) *Shader {
 }
 
 // ShapeNodeWithPath creates a shape node from a Core Graphics path.
-func ShapeNodeWithPath(path obj.Object) *ShapeNode {
+func ShapeNodeWithPath(path coregraphics.CGPathRef) *ShapeNode {
 	defer runtime.KeepAlive(path)
-	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithPath:"), objref.IDOf(path))
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithPath:"), objref.IDOf(path.Object))
 	return ShapeNodeFromID(_r)
 }
 
 // ShapeNodeWithPathCentered creates a shape node from a Core Graphics path, centered around its position.
-func ShapeNodeWithPathCentered(path obj.Object, centered bool) *ShapeNode {
+func ShapeNodeWithPathCentered(path coregraphics.CGPathRef, centered bool) *ShapeNode {
 	defer runtime.KeepAlive(path)
-	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithPath:centered:"), objref.IDOf(path), centered)
+	_r := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("shapeNodeWithPath:centered:"), objref.IDOf(path.Object), centered)
 	return ShapeNodeFromID(_r)
 }
 
@@ -1166,9 +1167,9 @@ func TextureNoiseWithSmoothnessSizeGrayscale(smoothness float64, size corefounda
 }
 
 // TextureWithCGImage create a texture from a CGImageRef.
-func TextureWithCGImage(image obj.Object) *Texture {
+func TextureWithCGImage(image coregraphics.CGImageRef) *Texture {
 	defer runtime.KeepAlive(image)
-	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithCGImage:"), objref.IDOf(image))
+	_r := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("textureWithCGImage:"), objref.IDOf(image.Object))
 	return TextureFromID(_r)
 }
 

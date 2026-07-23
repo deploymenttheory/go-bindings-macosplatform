@@ -6,6 +6,8 @@ package mediatoolbox
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // A structure that defines life cycle callbacks for an audio processing tap object.
@@ -20,3 +22,10 @@ type MTAudioProcessingTapCallbacks struct {
 }
 
 type OpaqueMTAudioProcessingTap struct{}
+
+// MTAudioProcessingTapRef is a handle for the opaque MTAudioProcessingTapRef type.
+type MTAudioProcessingTapRef struct{ obj.Object }
+
+// IsNil reports whether MTAudioProcessingTapRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MTAudioProcessingTapRef) IsNil() bool { return h.Object == nil }

@@ -99,40 +99,40 @@ func (aem *AppleEventManager) RemoveEventHandlerForEventClassAndEventID(eventCla
 }
 
 // SuspendCurrentAppleEvent returns suspends the handling of the current event and returns an ID that must be used to resume the handling of the event if an Apple event is being handled on the current thread.
-func (aem *AppleEventManager) SuspendCurrentAppleEvent() obj.Object {
+func (aem *AppleEventManager) SuspendCurrentAppleEvent() NSAppleEventManagerSuspensionID {
 	defer runtime.KeepAlive(aem)
 	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("suspendCurrentAppleEvent"))
-	return obj.WrapUnmanaged(_r)
+	return NSAppleEventManagerSuspensionID{obj.WrapUnmanaged(_r)}
 }
 
 // AppleEventForSuspensionID given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, returns the descriptor for the event whose handling was suspended.
-func (aem *AppleEventManager) AppleEventForSuspensionID(suspensionID obj.Object) *AppleEventDescriptor {
+func (aem *AppleEventManager) AppleEventForSuspensionID(suspensionID NSAppleEventManagerSuspensionID) *AppleEventDescriptor {
 	defer runtime.KeepAlive(aem)
 	defer runtime.KeepAlive(suspensionID)
-	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("appleEventForSuspensionID:"), objref.IDOf(suspensionID))
+	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("appleEventForSuspensionID:"), objref.IDOf(suspensionID.Object))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // ReplyAppleEventForSuspensionID given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, returns the corresponding reply event descriptor.
-func (aem *AppleEventManager) ReplyAppleEventForSuspensionID(suspensionID obj.Object) *AppleEventDescriptor {
+func (aem *AppleEventManager) ReplyAppleEventForSuspensionID(suspensionID NSAppleEventManagerSuspensionID) *AppleEventDescriptor {
 	defer runtime.KeepAlive(aem)
 	defer runtime.KeepAlive(suspensionID)
-	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("replyAppleEventForSuspensionID:"), objref.IDOf(suspensionID))
+	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("replyAppleEventForSuspensionID:"), objref.IDOf(suspensionID.Object))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // SetCurrentAppleEventAndReplyEventWithSuspensionID given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, sets the values that will be returned by subsequent invocations of currentAppleEvent and currentReplyAppleEvent to be the event whose handling was suspended and its corresponding reply event, respectively.
-func (aem *AppleEventManager) SetCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID obj.Object) {
+func (aem *AppleEventManager) SetCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID NSAppleEventManagerSuspensionID) {
 	defer runtime.KeepAlive(aem)
 	defer runtime.KeepAlive(suspensionID)
-	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("setCurrentAppleEventAndReplyEventWithSuspensionID:"), objref.IDOf(suspensionID))
+	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("setCurrentAppleEventAndReplyEventWithSuspensionID:"), objref.IDOf(suspensionID.Object))
 }
 
 // ResumeWithSuspensionID given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, signal that handling of the suspended event may now continue.
-func (aem *AppleEventManager) ResumeWithSuspensionID(suspensionID obj.Object) {
+func (aem *AppleEventManager) ResumeWithSuspensionID(suspensionID NSAppleEventManagerSuspensionID) {
 	defer runtime.KeepAlive(aem)
 	defer runtime.KeepAlive(suspensionID)
-	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("resumeWithSuspensionID:"), objref.IDOf(suspensionID))
+	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("resumeWithSuspensionID:"), objref.IDOf(suspensionID.Object))
 }
 
 // CurrentAppleEvent returns the current apple event.

@@ -4,6 +4,10 @@
 
 package metadata
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 type MDItem struct{}
 
 // This is the type of a reference to an MDLabel.
@@ -19,3 +23,24 @@ type MDQueryBatchingParams struct {
 	UpdateMaxNum   uint
 	UpdateMaxMs    uint
 }
+
+// MDItemRef is a handle for the opaque MDItemRef type.
+type MDItemRef struct{ obj.Object }
+
+// IsNil reports whether MDItemRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MDItemRef) IsNil() bool { return h.Object == nil }
+
+// MDLabelRef is a handle for the opaque MDLabelRef type.
+type MDLabelRef struct{ obj.Object }
+
+// IsNil reports whether MDLabelRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MDLabelRef) IsNil() bool { return h.Object == nil }
+
+// MDQueryRef is a handle for the opaque MDQueryRef type.
+type MDQueryRef struct{ obj.Object }
+
+// IsNil reports whether MDQueryRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MDQueryRef) IsNil() bool { return h.Object == nil }

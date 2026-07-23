@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -113,10 +114,10 @@ func (tlf *TextLayoutFragment) InvalidateLayout() {
 }
 
 // DrawAtPointInContext renders the visual representation of this element in the specified graphics context.
-func (tlf *TextLayoutFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ obj.Object) {
+func (tlf *TextLayoutFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ coregraphics.CGContextRef) {
 	defer runtime.KeepAlive(tlf)
 	defer runtime.KeepAlive(context_)
-	objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("drawAtPoint:inContext:"), point, objref.IDOf(context_))
+	objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("drawAtPoint:inContext:"), point, objref.IDOf(context_.Object))
 }
 
 // TextLayoutManager returns the text layout manager.

@@ -7,6 +7,7 @@ package eventkit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -68,9 +69,9 @@ func (c *Calendar) WithTitle(title string) *Calendar {
 }
 
 // WithCGColor sets the calendar’s color.
-func (c *Calendar) WithCGColor(cgColor obj.Object) *Calendar {
+func (c *Calendar) WithCGColor(cgColor coregraphics.CGColorRef) *Calendar {
 	defer runtime.KeepAlive(cgColor)
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCGColor:"), objref.IDOf(cgColor))
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCGColor:"), objref.IDOf(cgColor.Object))
 	return c
 }
 
@@ -137,10 +138,10 @@ func (c *Calendar) IsImmutable() bool {
 }
 
 // CGColor returns the calendar color as a CGColorRef. This will be nil for new calendars until you set it.
-func (c *Calendar) CGColor() obj.Object {
+func (c *Calendar) CGColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("CGColor"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // Color returns the calendar color as a NSColor. This will be nil for new calendars until you set it.

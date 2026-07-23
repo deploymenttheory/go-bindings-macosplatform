@@ -6,6 +6,8 @@ package vimage
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // An opaque representation of a 3x3 converson matrix for converting RGB signals to Y'CbCr. It is used to do the actual conversions. Please attempt to reuse these rather than making new ones each time. The representation also includes the range of the input and output pixels from the matrix and clamping information.
@@ -136,3 +138,31 @@ type VImageYpCbCrToARGBMatrix struct {
 	Cb_G float32
 	Cb_B float32
 }
+
+// VImageCVImageFormatRef is a handle for the opaque vImageCVImageFormatRef type.
+type VImageCVImageFormatRef struct{ obj.Object }
+
+// IsNil reports whether VImageCVImageFormatRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VImageCVImageFormatRef) IsNil() bool { return h.Object == nil }
+
+// VImageConstCVImageFormatRef is a handle for the opaque vImageConstCVImageFormatRef type.
+type VImageConstCVImageFormatRef struct{ obj.Object }
+
+// IsNil reports whether VImageConstCVImageFormatRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VImageConstCVImageFormatRef) IsNil() bool { return h.Object == nil }
+
+// VImageConverterRef is a handle for the opaque vImageConverterRef type.
+type VImageConverterRef struct{ obj.Object }
+
+// IsNil reports whether VImageConverterRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VImageConverterRef) IsNil() bool { return h.Object == nil }
+
+// VImageMultidimensionalTable is a handle for the opaque vImage_MultidimensionalTable type.
+type VImageMultidimensionalTable struct{ obj.Object }
+
+// IsNil reports whether VImageMultidimensionalTable is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VImageMultidimensionalTable) IsNil() bool { return h.Object == nil }

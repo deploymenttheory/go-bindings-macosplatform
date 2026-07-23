@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -504,23 +505,23 @@ func (v_ *View) ScrollSelectionToVisible(sender obj.Object) {
 }
 
 // DrawPageToContext draws page to context.
-func (v_ *View) DrawPageToContext(page *Page, context_ obj.Object) {
+func (v_ *View) DrawPageToContext(page *Page, context_ coregraphics.CGContextRef) {
 	defer runtime.KeepAlive(v_)
 	defer runtime.KeepAlive(page)
 	defer runtime.KeepAlive(context_)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPage:toContext:"), objref.IDOf(page), objref.IDOf(context_))
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPage:toContext:"), objref.IDOf(page), objref.IDOf(context_.Object))
 	})
 
 }
 
 // DrawPagePostToContext draws page post to context.
-func (v_ *View) DrawPagePostToContext(page *Page, context_ obj.Object) {
+func (v_ *View) DrawPagePostToContext(page *Page, context_ coregraphics.CGContextRef) {
 	defer runtime.KeepAlive(v_)
 	defer runtime.KeepAlive(page)
 	defer runtime.KeepAlive(context_)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPagePost:toContext:"), objref.IDOf(page), objref.IDOf(context_))
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPagePost:toContext:"), objref.IDOf(page), objref.IDOf(context_.Object))
 	})
 
 }

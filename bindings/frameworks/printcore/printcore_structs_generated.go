@@ -4,6 +4,10 @@
 
 package printcore
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 type OpaquePMPageFormat struct{}
 
 type OpaquePMPaper struct{}
@@ -35,3 +39,52 @@ type PMResolution struct {
 	HRes float64
 	VRes float64
 }
+
+// PMPageFormat is a handle for the opaque PMPageFormat type.
+type PMPageFormat struct{ obj.Object }
+
+// IsNil reports whether PMPageFormat is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h PMPageFormat) IsNil() bool { return h.Object == nil }
+
+// PMPaper is a handle for the opaque PMPaper type.
+type PMPaper struct{ obj.Object }
+
+// IsNil reports whether PMPaper is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h PMPaper) IsNil() bool { return h.Object == nil }
+
+// PMPreset is a handle for the opaque PMPreset type.
+type PMPreset struct{ obj.Object }
+
+// IsNil reports whether PMPreset is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h PMPreset) IsNil() bool { return h.Object == nil }
+
+// PMPrintSession is a handle for the opaque PMPrintSession type.
+type PMPrintSession struct{ obj.Object }
+
+// IsNil reports whether PMPrintSession is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h PMPrintSession) IsNil() bool { return h.Object == nil }
+
+// PMPrintSettings is a handle for the opaque PMPrintSettings type.
+type PMPrintSettings struct{ obj.Object }
+
+// IsNil reports whether PMPrintSettings is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h PMPrintSettings) IsNil() bool { return h.Object == nil }
+
+// PMPrinter is a handle for the opaque PMPrinter type.
+type PMPrinter struct{ obj.Object }
+
+// IsNil reports whether PMPrinter is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h PMPrinter) IsNil() bool { return h.Object == nil }
+
+// PMServer is a handle for the opaque PMServer type.
+type PMServer struct{ obj.Object }
+
+// IsNil reports whether PMServer is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h PMServer) IsNil() bool { return h.Object == nil }

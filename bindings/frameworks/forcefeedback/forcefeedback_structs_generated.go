@@ -6,6 +6,8 @@ package forcefeedback
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // Used by the FFDeviceGetForceFeedbackCapabilities method to retrieve device force-feedback capabilities.
@@ -100,3 +102,17 @@ type FFRAMPFORCE struct {
 	LStart int32
 	LEnd   int32
 }
+
+// FFDeviceObjectReference is a handle for the opaque FFDeviceObjectReference type.
+type FFDeviceObjectReference struct{ obj.Object }
+
+// IsNil reports whether FFDeviceObjectReference is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h FFDeviceObjectReference) IsNil() bool { return h.Object == nil }
+
+// FFEffectObjectReference is a handle for the opaque FFEffectObjectReference type.
+type FFEffectObjectReference struct{ obj.Object }
+
+// IsNil reports whether FFEffectObjectReference is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h FFEffectObjectReference) IsNil() bool { return h.Object == nil }

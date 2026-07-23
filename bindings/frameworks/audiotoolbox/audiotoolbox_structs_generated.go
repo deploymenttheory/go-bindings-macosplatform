@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // The audio input and output channel capabilities for an audio unit.
@@ -788,9 +789,6 @@ type MIDIChannelMessage struct {
 	Reserved uint8
 }
 
-// A variable-length list of MIDI event packets.
-type MIDIEventList struct{}
-
 // Describes a MIDI metaevent such as lyric text, time signature, and so on.
 type MIDIMetaEvent struct {
 	MetaEventType uint8
@@ -932,3 +930,108 @@ type AudioUnitParameterIDName = AudioUnitParameterNameInfo
 
 // MagicCookieInfo is an alias for the AudioCodecMagicCookieInfo value type.
 type MagicCookieInfo = AudioCodecMagicCookieInfo
+
+// MIDIEventList is a handle for the opaque MIDIEventList type.
+type MIDIEventList struct{ obj.Object }
+
+// IsNil reports whether MIDIEventList is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MIDIEventList) IsNil() bool { return h.Object == nil }
+
+// AUGraph is a handle for the opaque AUGraph type.
+type AUGraph struct{ obj.Object }
+
+// IsNil reports whether AUGraph is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AUGraph) IsNil() bool { return h.Object == nil }
+
+// AUParameterListenerRef is a handle for the opaque AUParameterListenerRef type.
+type AUParameterListenerRef struct{ obj.Object }
+
+// IsNil reports whether AUParameterListenerRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AUParameterListenerRef) IsNil() bool { return h.Object == nil }
+
+// AudioComponent is a handle for the opaque AudioComponent type.
+type AudioComponent struct{ obj.Object }
+
+// IsNil reports whether AudioComponent is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AudioComponent) IsNil() bool { return h.Object == nil }
+
+// AudioConverterRef is a handle for the opaque AudioConverterRef type.
+type AudioConverterRef struct{ obj.Object }
+
+// IsNil reports whether AudioConverterRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AudioConverterRef) IsNil() bool { return h.Object == nil }
+
+// AudioFileStreamID is a handle for the opaque AudioFileStreamID type.
+type AudioFileStreamID struct{ obj.Object }
+
+// IsNil reports whether AudioFileStreamID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AudioFileStreamID) IsNil() bool { return h.Object == nil }
+
+// AudioQueueProcessingTapRef is a handle for the opaque AudioQueueProcessingTapRef type.
+type AudioQueueProcessingTapRef struct{ obj.Object }
+
+// IsNil reports whether AudioQueueProcessingTapRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AudioQueueProcessingTapRef) IsNil() bool { return h.Object == nil }
+
+// AudioQueueRef is a handle for the opaque AudioQueueRef type.
+type AudioQueueRef struct{ obj.Object }
+
+// IsNil reports whether AudioQueueRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AudioQueueRef) IsNil() bool { return h.Object == nil }
+
+// AudioQueueTimelineRef is a handle for the opaque AudioQueueTimelineRef type.
+type AudioQueueTimelineRef struct{ obj.Object }
+
+// IsNil reports whether AudioQueueTimelineRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AudioQueueTimelineRef) IsNil() bool { return h.Object == nil }
+
+// CAClockRef is a handle for the opaque CAClockRef type.
+type CAClockRef struct{ obj.Object }
+
+// IsNil reports whether CAClockRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CAClockRef) IsNil() bool { return h.Object == nil }
+
+// ExtAudioFileRef is a handle for the opaque ExtAudioFileRef type.
+type ExtAudioFileRef struct{ obj.Object }
+
+// IsNil reports whether ExtAudioFileRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ExtAudioFileRef) IsNil() bool { return h.Object == nil }
+
+// MusicEventIterator is a handle for the opaque MusicEventIterator type.
+type MusicEventIterator struct{ obj.Object }
+
+// IsNil reports whether MusicEventIterator is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MusicEventIterator) IsNil() bool { return h.Object == nil }
+
+// MusicPlayer is a handle for the opaque MusicPlayer type.
+type MusicPlayer struct{ obj.Object }
+
+// IsNil reports whether MusicPlayer is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MusicPlayer) IsNil() bool { return h.Object == nil }
+
+// MusicSequence is a handle for the opaque MusicSequence type.
+type MusicSequence struct{ obj.Object }
+
+// IsNil reports whether MusicSequence is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MusicSequence) IsNil() bool { return h.Object == nil }
+
+// MusicTrack is a handle for the opaque MusicTrack type.
+type MusicTrack struct{ obj.Object }
+
+// IsNil reports whether MusicTrack is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MusicTrack) IsNil() bool { return h.Object == nil }

@@ -15,12 +15,12 @@ import (
 var _fnLSMMapAddText func(objc.ID, objc.ID, uint32) int32
 
 // LSMMapAddText reports an error if the LatentSemanticMapping framework function LSMMapAddText fails.
-func LSMMapAddText(mapref obj.Object, textref obj.Object, category uint32) error {
+func LSMMapAddText(mapref LSMMapRef, textref LSMTextRef, category uint32) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapAddText == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapAddText, _lib, "LSMMapAddText")
 	}
-	_rc := _fnLSMMapAddText(objref.IDOf(mapref), objref.IDOf(textref), category)
+	_rc := _fnLSMMapAddText(objref.IDOf(mapref.Object), objref.IDOf(textref.Object), category)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -30,12 +30,12 @@ func LSMMapAddText(mapref obj.Object, textref obj.Object, category uint32) error
 var _fnLSMMapAddTextWithWeight func(objc.ID, objc.ID, uint32, float32) int32
 
 // LSMMapAddTextWithWeight reports an error if the LatentSemanticMapping framework function LSMMapAddTextWithWeight fails.
-func LSMMapAddTextWithWeight(mapref obj.Object, textref obj.Object, category uint32, weight float32) error {
+func LSMMapAddTextWithWeight(mapref LSMMapRef, textref LSMTextRef, category uint32, weight float32) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapAddTextWithWeight == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapAddTextWithWeight, _lib, "LSMMapAddTextWithWeight")
 	}
-	_rc := _fnLSMMapAddTextWithWeight(objref.IDOf(mapref), objref.IDOf(textref), category, weight)
+	_rc := _fnLSMMapAddTextWithWeight(objref.IDOf(mapref.Object), objref.IDOf(textref.Object), category, weight)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -45,12 +45,12 @@ func LSMMapAddTextWithWeight(mapref obj.Object, textref obj.Object, category uin
 var _fnLSMMapApplyClusters func(objc.ID, objc.ID) int32
 
 // LSMMapApplyClusters reports an error if the LatentSemanticMapping framework function LSMMapApplyClusters fails.
-func LSMMapApplyClusters(mapref obj.Object, clusters obj.Object) error {
+func LSMMapApplyClusters(mapref LSMMapRef, clusters obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapApplyClusters == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapApplyClusters, _lib, "LSMMapApplyClusters")
 	}
-	_rc := _fnLSMMapApplyClusters(objref.IDOf(mapref), objref.IDOf(clusters))
+	_rc := _fnLSMMapApplyClusters(objref.IDOf(mapref.Object), objref.IDOf(clusters))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -60,12 +60,12 @@ func LSMMapApplyClusters(mapref obj.Object, clusters obj.Object) error {
 var _fnLSMMapCompile func(objc.ID) int32
 
 // LSMMapCompile reports an error if the LatentSemanticMapping framework function LSMMapCompile fails.
-func LSMMapCompile(mapref obj.Object) error {
+func LSMMapCompile(mapref LSMMapRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapCompile == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapCompile, _lib, "LSMMapCompile")
 	}
-	_rc := _fnLSMMapCompile(objref.IDOf(mapref))
+	_rc := _fnLSMMapCompile(objref.IDOf(mapref.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -75,12 +75,12 @@ func LSMMapCompile(mapref obj.Object) error {
 var _fnLSMMapSetStopWords func(objc.ID, objc.ID) int32
 
 // LSMMapSetStopWords reports an error if the LatentSemanticMapping framework function LSMMapSetStopWords fails.
-func LSMMapSetStopWords(mapref obj.Object, textref obj.Object) error {
+func LSMMapSetStopWords(mapref LSMMapRef, textref LSMTextRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapSetStopWords == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapSetStopWords, _lib, "LSMMapSetStopWords")
 	}
-	_rc := _fnLSMMapSetStopWords(objref.IDOf(mapref), objref.IDOf(textref))
+	_rc := _fnLSMMapSetStopWords(objref.IDOf(mapref.Object), objref.IDOf(textref.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -90,12 +90,12 @@ func LSMMapSetStopWords(mapref obj.Object, textref obj.Object) error {
 var _fnLSMMapStartTraining func(objc.ID) int32
 
 // LSMMapStartTraining reports an error if the LatentSemanticMapping framework function LSMMapStartTraining fails.
-func LSMMapStartTraining(mapref obj.Object) error {
+func LSMMapStartTraining(mapref LSMMapRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapStartTraining == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapStartTraining, _lib, "LSMMapStartTraining")
 	}
-	_rc := _fnLSMMapStartTraining(objref.IDOf(mapref))
+	_rc := _fnLSMMapStartTraining(objref.IDOf(mapref.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -105,12 +105,12 @@ func LSMMapStartTraining(mapref obj.Object) error {
 var _fnLSMMapWriteToStream func(objc.ID, objc.ID, objc.ID, int) int32
 
 // LSMMapWriteToStream reports an error if the LatentSemanticMapping framework function LSMMapWriteToStream fails.
-func LSMMapWriteToStream(mapref obj.Object, textref obj.Object, stream obj.Object, options int) error {
+func LSMMapWriteToStream(mapref LSMMapRef, textref LSMTextRef, stream obj.Object, options int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapWriteToStream == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapWriteToStream, _lib, "LSMMapWriteToStream")
 	}
-	_rc := _fnLSMMapWriteToStream(objref.IDOf(mapref), objref.IDOf(textref), objref.IDOf(stream), options)
+	_rc := _fnLSMMapWriteToStream(objref.IDOf(mapref.Object), objref.IDOf(textref.Object), objref.IDOf(stream), options)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -120,12 +120,12 @@ func LSMMapWriteToStream(mapref obj.Object, textref obj.Object, stream obj.Objec
 var _fnLSMMapWriteToURL func(objc.ID, objc.ID, int) int32
 
 // LSMMapWriteToURL reports an error if the LatentSemanticMapping framework function LSMMapWriteToURL fails.
-func LSMMapWriteToURL(mapref obj.Object, file obj.Object, flags int) error {
+func LSMMapWriteToURL(mapref LSMMapRef, file obj.Object, flags int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMMapWriteToURL == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMMapWriteToURL, _lib, "LSMMapWriteToURL")
 	}
-	_rc := _fnLSMMapWriteToURL(objref.IDOf(mapref), objref.IDOf(file), flags)
+	_rc := _fnLSMMapWriteToURL(objref.IDOf(mapref.Object), objref.IDOf(file), flags)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -135,12 +135,12 @@ func LSMMapWriteToURL(mapref obj.Object, file obj.Object, flags int) error {
 var _fnLSMTextAddToken func(objc.ID, objc.ID) int32
 
 // LSMTextAddToken reports an error if the LatentSemanticMapping framework function LSMTextAddToken fails.
-func LSMTextAddToken(textref obj.Object, token obj.Object) error {
+func LSMTextAddToken(textref LSMTextRef, token obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMTextAddToken == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMTextAddToken, _lib, "LSMTextAddToken")
 	}
-	_rc := _fnLSMTextAddToken(objref.IDOf(textref), objref.IDOf(token))
+	_rc := _fnLSMTextAddToken(objref.IDOf(textref.Object), objref.IDOf(token))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -150,12 +150,12 @@ func LSMTextAddToken(textref obj.Object, token obj.Object) error {
 var _fnLSMTextAddWord func(objc.ID, objc.ID) int32
 
 // LSMTextAddWord reports an error if the LatentSemanticMapping framework function LSMTextAddWord fails.
-func LSMTextAddWord(textref obj.Object, word obj.Object) error {
+func LSMTextAddWord(textref LSMTextRef, word obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMTextAddWord == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMTextAddWord, _lib, "LSMTextAddWord")
 	}
-	_rc := _fnLSMTextAddWord(objref.IDOf(textref), objref.IDOf(word))
+	_rc := _fnLSMTextAddWord(objref.IDOf(textref.Object), objref.IDOf(word))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -165,12 +165,12 @@ func LSMTextAddWord(textref obj.Object, word obj.Object) error {
 var _fnLSMTextAddWords func(objc.ID, objc.ID, objc.ID, int) int32
 
 // LSMTextAddWords reports an error if the LatentSemanticMapping framework function LSMTextAddWords fails.
-func LSMTextAddWords(textref obj.Object, words obj.Object, locale obj.Object, flags int) error {
+func LSMTextAddWords(textref LSMTextRef, words obj.Object, locale obj.Object, flags int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSMTextAddWords == nil {
 		ebipurego.RegisterLibFunc(&_fnLSMTextAddWords, _lib, "LSMTextAddWords")
 	}
-	_rc := _fnLSMTextAddWords(objref.IDOf(textref), objref.IDOf(words), objref.IDOf(locale), flags)
+	_rc := _fnLSMTextAddWords(objref.IDOf(textref.Object), objref.IDOf(words), objref.IDOf(locale), flags)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

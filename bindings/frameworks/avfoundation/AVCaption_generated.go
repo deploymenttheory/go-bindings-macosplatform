@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
@@ -103,17 +104,17 @@ func (c *Caption) TimeRange() coremedia.CMTimeRange {
 }
 
 // TextColorAtIndexRange returns the text color at the index position.
-func (c *Caption) TextColorAtIndexRange(index int, outRange *foundation.NSRange) obj.Object {
+func (c *Caption) TextColorAtIndexRange(index int, outRange *foundation.NSRange) coregraphics.CGColorRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("textColorAtIndex:range:"), index, unsafe.Pointer(outRange))
-	return obj.Adopt(_r)
+	return coregraphics.CGColorRef{obj.Adopt(_r)}
 }
 
 // BackgroundColorAtIndexRange returns the background color at the index position.
-func (c *Caption) BackgroundColorAtIndexRange(index int, outRange *foundation.NSRange) obj.Object {
+func (c *Caption) BackgroundColorAtIndexRange(index int, outRange *foundation.NSRange) coregraphics.CGColorRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("backgroundColorAtIndex:range:"), index, unsafe.Pointer(outRange))
-	return obj.Adopt(_r)
+	return coregraphics.CGColorRef{obj.Adopt(_r)}
 }
 
 // FontWeightAtIndexRange returns the font weight and range at the index position.

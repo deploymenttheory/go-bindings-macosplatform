@@ -15,12 +15,12 @@ import (
 var _fnDRBurnWriteLayout func(objc.ID, objc.ID) int32
 
 // DRBurnWriteLayout reports an error if the DiscRecording framework function DRBurnWriteLayout fails.
-func DRBurnWriteLayout(burn obj.Object, layout obj.Object) error {
+func DRBurnWriteLayout(burn DRBurnRef, layout obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRBurnWriteLayout == nil {
 		ebipurego.RegisterLibFunc(&_fnDRBurnWriteLayout, _lib, "DRBurnWriteLayout")
 	}
-	_rc := _fnDRBurnWriteLayout(objref.IDOf(burn), objref.IDOf(layout))
+	_rc := _fnDRBurnWriteLayout(objref.IDOf(burn.Object), objref.IDOf(layout))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -30,12 +30,12 @@ func DRBurnWriteLayout(burn obj.Object, layout obj.Object) error {
 var _fnDRDeviceAcquireExclusiveAccess func(objc.ID) int32
 
 // DRDeviceAcquireExclusiveAccess reports an error if the DiscRecording framework function DRDeviceAcquireExclusiveAccess fails.
-func DRDeviceAcquireExclusiveAccess(device obj.Object) error {
+func DRDeviceAcquireExclusiveAccess(device DRDeviceRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceAcquireExclusiveAccess == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceAcquireExclusiveAccess, _lib, "DRDeviceAcquireExclusiveAccess")
 	}
-	_rc := _fnDRDeviceAcquireExclusiveAccess(objref.IDOf(device))
+	_rc := _fnDRDeviceAcquireExclusiveAccess(objref.IDOf(device.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -45,12 +45,12 @@ func DRDeviceAcquireExclusiveAccess(device obj.Object) error {
 var _fnDRDeviceCloseTray func(objc.ID) int32
 
 // DRDeviceCloseTray reports an error if the DiscRecording framework function DRDeviceCloseTray fails.
-func DRDeviceCloseTray(device obj.Object) error {
+func DRDeviceCloseTray(device DRDeviceRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceCloseTray == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceCloseTray, _lib, "DRDeviceCloseTray")
 	}
-	_rc := _fnDRDeviceCloseTray(objref.IDOf(device))
+	_rc := _fnDRDeviceCloseTray(objref.IDOf(device.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -60,12 +60,12 @@ func DRDeviceCloseTray(device obj.Object) error {
 var _fnDRDeviceEjectMedia func(objc.ID) int32
 
 // DRDeviceEjectMedia reports an error if the DiscRecording framework function DRDeviceEjectMedia fails.
-func DRDeviceEjectMedia(device obj.Object) error {
+func DRDeviceEjectMedia(device DRDeviceRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceEjectMedia == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceEjectMedia, _lib, "DRDeviceEjectMedia")
 	}
-	_rc := _fnDRDeviceEjectMedia(objref.IDOf(device))
+	_rc := _fnDRDeviceEjectMedia(objref.IDOf(device.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -75,12 +75,12 @@ func DRDeviceEjectMedia(device obj.Object) error {
 var _fnDRDeviceOpenTray func(objc.ID) int32
 
 // DRDeviceOpenTray reports an error if the DiscRecording framework function DRDeviceOpenTray fails.
-func DRDeviceOpenTray(device obj.Object) error {
+func DRDeviceOpenTray(device DRDeviceRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRDeviceOpenTray == nil {
 		ebipurego.RegisterLibFunc(&_fnDRDeviceOpenTray, _lib, "DRDeviceOpenTray")
 	}
-	_rc := _fnDRDeviceOpenTray(objref.IDOf(device))
+	_rc := _fnDRDeviceOpenTray(objref.IDOf(device.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -90,12 +90,12 @@ func DRDeviceOpenTray(device obj.Object) error {
 var _fnDREraseStart func(objc.ID) int32
 
 // DREraseStart reports an error if the DiscRecording framework function DREraseStart fails.
-func DREraseStart(erase obj.Object) error {
+func DREraseStart(erase DREraseRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDREraseStart == nil {
 		ebipurego.RegisterLibFunc(&_fnDREraseStart, _lib, "DREraseStart")
 	}
-	_rc := _fnDREraseStart(objref.IDOf(erase))
+	_rc := _fnDREraseStart(objref.IDOf(erase.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

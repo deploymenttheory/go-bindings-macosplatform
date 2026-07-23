@@ -8,8 +8,8 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -74,9 +74,9 @@ func (al *AreaLight) WithAspect(aspect float32) *AreaLight {
 }
 
 // WithColor sets the color of the light source.
-func (al *AreaLight) WithColor(color obj.Object) *AreaLight {
+func (al *AreaLight) WithColor(color coregraphics.CGColorRef) *AreaLight {
 	defer runtime.KeepAlive(color)
-	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setColor:"), objref.IDOf(color))
+	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setColor:"), objref.IDOf(color.Object))
 	return al
 }
 

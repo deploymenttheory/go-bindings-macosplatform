@@ -7,8 +7,8 @@ package forcefeedback
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -27,192 +27,192 @@ func FFCreateDevice(hidDevice int, pDeviceReference unsafe.Pointer) unsafe.Point
 var _fnFFDeviceCreateEffect func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // FFDeviceCreateEffect calls the ForceFeedback framework function FFDeviceCreateEffect.
-func FFDeviceCreateEffect(deviceReference obj.Object, uuidRef obj.Object, pEffectDefinition unsafe.Pointer, pEffectReference unsafe.Pointer) unsafe.Pointer {
+func FFDeviceCreateEffect(deviceReference FFDeviceObjectReference, uuidRef corefoundation.CFUUIDRef, pEffectDefinition unsafe.Pointer, pEffectReference unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFDeviceCreateEffect == nil {
 		ebipurego.RegisterLibFunc(&_fnFFDeviceCreateEffect, _lib, "FFDeviceCreateEffect")
 	}
-	return _fnFFDeviceCreateEffect(objref.IDOf(deviceReference), objref.IDOf(uuidRef), pEffectDefinition, pEffectReference)
+	return _fnFFDeviceCreateEffect(objref.IDOf(deviceReference.Object), objref.IDOf(uuidRef.Object), pEffectDefinition, pEffectReference)
 }
 
 var _fnFFDeviceEscape func(objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // FFDeviceEscape calls the ForceFeedback framework function FFDeviceEscape.
-func FFDeviceEscape(deviceReference obj.Object, pFFEffectEscape unsafe.Pointer) unsafe.Pointer {
+func FFDeviceEscape(deviceReference FFDeviceObjectReference, pFFEffectEscape unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFDeviceEscape == nil {
 		ebipurego.RegisterLibFunc(&_fnFFDeviceEscape, _lib, "FFDeviceEscape")
 	}
-	return _fnFFDeviceEscape(objref.IDOf(deviceReference), pFFEffectEscape)
+	return _fnFFDeviceEscape(objref.IDOf(deviceReference.Object), pFFEffectEscape)
 }
 
 var _fnFFDeviceGetForceFeedbackCapabilities func(objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // FFDeviceGetForceFeedbackCapabilities calls the ForceFeedback framework function FFDeviceGetForceFeedbackCapabilities.
-func FFDeviceGetForceFeedbackCapabilities(deviceReference obj.Object, pFFCapabilities unsafe.Pointer) unsafe.Pointer {
+func FFDeviceGetForceFeedbackCapabilities(deviceReference FFDeviceObjectReference, pFFCapabilities unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFDeviceGetForceFeedbackCapabilities == nil {
 		ebipurego.RegisterLibFunc(&_fnFFDeviceGetForceFeedbackCapabilities, _lib, "FFDeviceGetForceFeedbackCapabilities")
 	}
-	return _fnFFDeviceGetForceFeedbackCapabilities(objref.IDOf(deviceReference), pFFCapabilities)
+	return _fnFFDeviceGetForceFeedbackCapabilities(objref.IDOf(deviceReference.Object), pFFCapabilities)
 }
 
 var _fnFFDeviceGetForceFeedbackProperty func(objc.ID, int, unsafe.Pointer, uint64) unsafe.Pointer
 
 // FFDeviceGetForceFeedbackProperty calls the ForceFeedback framework function FFDeviceGetForceFeedbackProperty.
-func FFDeviceGetForceFeedbackProperty(deviceReference obj.Object, property int, pValue unsafe.Pointer, valueSize uint64) unsafe.Pointer {
+func FFDeviceGetForceFeedbackProperty(deviceReference FFDeviceObjectReference, property int, pValue unsafe.Pointer, valueSize uint64) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFDeviceGetForceFeedbackProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnFFDeviceGetForceFeedbackProperty, _lib, "FFDeviceGetForceFeedbackProperty")
 	}
-	return _fnFFDeviceGetForceFeedbackProperty(objref.IDOf(deviceReference), property, pValue, valueSize)
+	return _fnFFDeviceGetForceFeedbackProperty(objref.IDOf(deviceReference.Object), property, pValue, valueSize)
 }
 
 var _fnFFDeviceGetForceFeedbackState func(objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // FFDeviceGetForceFeedbackState calls the ForceFeedback framework function FFDeviceGetForceFeedbackState.
-func FFDeviceGetForceFeedbackState(deviceReference obj.Object) (result unsafe.Pointer, pFFState int) {
+func FFDeviceGetForceFeedbackState(deviceReference FFDeviceObjectReference) (result unsafe.Pointer, pFFState int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFDeviceGetForceFeedbackState == nil {
 		ebipurego.RegisterLibFunc(&_fnFFDeviceGetForceFeedbackState, _lib, "FFDeviceGetForceFeedbackState")
 	}
 	var _out0 int
-	_ret := _fnFFDeviceGetForceFeedbackState(objref.IDOf(deviceReference), unsafe.Pointer(&_out0))
+	_ret := _fnFFDeviceGetForceFeedbackState(objref.IDOf(deviceReference.Object), unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnFFDeviceReleaseEffect func(objc.ID, objc.ID) unsafe.Pointer
 
 // FFDeviceReleaseEffect calls the ForceFeedback framework function FFDeviceReleaseEffect.
-func FFDeviceReleaseEffect(deviceReference obj.Object, effectReference obj.Object) unsafe.Pointer {
+func FFDeviceReleaseEffect(deviceReference FFDeviceObjectReference, effectReference FFEffectObjectReference) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFDeviceReleaseEffect == nil {
 		ebipurego.RegisterLibFunc(&_fnFFDeviceReleaseEffect, _lib, "FFDeviceReleaseEffect")
 	}
-	return _fnFFDeviceReleaseEffect(objref.IDOf(deviceReference), objref.IDOf(effectReference))
+	return _fnFFDeviceReleaseEffect(objref.IDOf(deviceReference.Object), objref.IDOf(effectReference.Object))
 }
 
 var _fnFFDeviceSendForceFeedbackCommand func(objc.ID, int) unsafe.Pointer
 
 // FFDeviceSendForceFeedbackCommand calls the ForceFeedback framework function FFDeviceSendForceFeedbackCommand.
-func FFDeviceSendForceFeedbackCommand(deviceReference obj.Object, flags int) unsafe.Pointer {
+func FFDeviceSendForceFeedbackCommand(deviceReference FFDeviceObjectReference, flags int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFDeviceSendForceFeedbackCommand == nil {
 		ebipurego.RegisterLibFunc(&_fnFFDeviceSendForceFeedbackCommand, _lib, "FFDeviceSendForceFeedbackCommand")
 	}
-	return _fnFFDeviceSendForceFeedbackCommand(objref.IDOf(deviceReference), flags)
+	return _fnFFDeviceSendForceFeedbackCommand(objref.IDOf(deviceReference.Object), flags)
 }
 
 var _fnFFDeviceSetCooperativeLevel func(objc.ID, unsafe.Pointer, int) unsafe.Pointer
 
 // FFDeviceSetCooperativeLevel calls the ForceFeedback framework function FFDeviceSetCooperativeLevel.
-func FFDeviceSetCooperativeLevel(deviceReference obj.Object, taskIdentifier unsafe.Pointer, flags int) unsafe.Pointer {
+func FFDeviceSetCooperativeLevel(deviceReference FFDeviceObjectReference, taskIdentifier unsafe.Pointer, flags int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFDeviceSetCooperativeLevel == nil {
 		ebipurego.RegisterLibFunc(&_fnFFDeviceSetCooperativeLevel, _lib, "FFDeviceSetCooperativeLevel")
 	}
-	return _fnFFDeviceSetCooperativeLevel(objref.IDOf(deviceReference), taskIdentifier, flags)
+	return _fnFFDeviceSetCooperativeLevel(objref.IDOf(deviceReference.Object), taskIdentifier, flags)
 }
 
 var _fnFFDeviceSetForceFeedbackProperty func(objc.ID, int, unsafe.Pointer) unsafe.Pointer
 
 // FFDeviceSetForceFeedbackProperty calls the ForceFeedback framework function FFDeviceSetForceFeedbackProperty.
-func FFDeviceSetForceFeedbackProperty(deviceReference obj.Object, property int, pValue unsafe.Pointer) unsafe.Pointer {
+func FFDeviceSetForceFeedbackProperty(deviceReference FFDeviceObjectReference, property int, pValue unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFDeviceSetForceFeedbackProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnFFDeviceSetForceFeedbackProperty, _lib, "FFDeviceSetForceFeedbackProperty")
 	}
-	return _fnFFDeviceSetForceFeedbackProperty(objref.IDOf(deviceReference), property, pValue)
+	return _fnFFDeviceSetForceFeedbackProperty(objref.IDOf(deviceReference.Object), property, pValue)
 }
 
 var _fnFFEffectDownload func(objc.ID) unsafe.Pointer
 
 // FFEffectDownload calls the ForceFeedback framework function FFEffectDownload.
-func FFEffectDownload(effectReference obj.Object) unsafe.Pointer {
+func FFEffectDownload(effectReference FFEffectObjectReference) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFEffectDownload == nil {
 		ebipurego.RegisterLibFunc(&_fnFFEffectDownload, _lib, "FFEffectDownload")
 	}
-	return _fnFFEffectDownload(objref.IDOf(effectReference))
+	return _fnFFEffectDownload(objref.IDOf(effectReference.Object))
 }
 
 var _fnFFEffectEscape func(objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // FFEffectEscape calls the ForceFeedback framework function FFEffectEscape.
-func FFEffectEscape(effectReference obj.Object, pFFEffectEscape unsafe.Pointer) unsafe.Pointer {
+func FFEffectEscape(effectReference FFEffectObjectReference, pFFEffectEscape unsafe.Pointer) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFEffectEscape == nil {
 		ebipurego.RegisterLibFunc(&_fnFFEffectEscape, _lib, "FFEffectEscape")
 	}
-	return _fnFFEffectEscape(objref.IDOf(effectReference), pFFEffectEscape)
+	return _fnFFEffectEscape(objref.IDOf(effectReference.Object), pFFEffectEscape)
 }
 
 var _fnFFEffectGetEffectStatus func(objc.ID, unsafe.Pointer) unsafe.Pointer
 
 // FFEffectGetEffectStatus calls the ForceFeedback framework function FFEffectGetEffectStatus.
-func FFEffectGetEffectStatus(effectReference obj.Object) (result unsafe.Pointer, pFlags int) {
+func FFEffectGetEffectStatus(effectReference FFEffectObjectReference) (result unsafe.Pointer, pFlags int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFEffectGetEffectStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnFFEffectGetEffectStatus, _lib, "FFEffectGetEffectStatus")
 	}
 	var _out0 int
-	_ret := _fnFFEffectGetEffectStatus(objref.IDOf(effectReference), unsafe.Pointer(&_out0))
+	_ret := _fnFFEffectGetEffectStatus(objref.IDOf(effectReference.Object), unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnFFEffectGetParameters func(objc.ID, unsafe.Pointer, int) unsafe.Pointer
 
 // FFEffectGetParameters calls the ForceFeedback framework function FFEffectGetParameters.
-func FFEffectGetParameters(effectReference obj.Object, pFFEffect unsafe.Pointer, flags int) unsafe.Pointer {
+func FFEffectGetParameters(effectReference FFEffectObjectReference, pFFEffect unsafe.Pointer, flags int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFEffectGetParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnFFEffectGetParameters, _lib, "FFEffectGetParameters")
 	}
-	return _fnFFEffectGetParameters(objref.IDOf(effectReference), pFFEffect, flags)
+	return _fnFFEffectGetParameters(objref.IDOf(effectReference.Object), pFFEffect, flags)
 }
 
 var _fnFFEffectSetParameters func(objc.ID, unsafe.Pointer, int) unsafe.Pointer
 
 // FFEffectSetParameters calls the ForceFeedback framework function FFEffectSetParameters.
-func FFEffectSetParameters(effectReference obj.Object, pFFEffect unsafe.Pointer, flags int) unsafe.Pointer {
+func FFEffectSetParameters(effectReference FFEffectObjectReference, pFFEffect unsafe.Pointer, flags int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFEffectSetParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnFFEffectSetParameters, _lib, "FFEffectSetParameters")
 	}
-	return _fnFFEffectSetParameters(objref.IDOf(effectReference), pFFEffect, flags)
+	return _fnFFEffectSetParameters(objref.IDOf(effectReference.Object), pFFEffect, flags)
 }
 
 var _fnFFEffectStart func(objc.ID, int, int) unsafe.Pointer
 
 // FFEffectStart calls the ForceFeedback framework function FFEffectStart.
-func FFEffectStart(effectReference obj.Object, iterations int, flags int) unsafe.Pointer {
+func FFEffectStart(effectReference FFEffectObjectReference, iterations int, flags int) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFEffectStart == nil {
 		ebipurego.RegisterLibFunc(&_fnFFEffectStart, _lib, "FFEffectStart")
 	}
-	return _fnFFEffectStart(objref.IDOf(effectReference), iterations, flags)
+	return _fnFFEffectStart(objref.IDOf(effectReference.Object), iterations, flags)
 }
 
 var _fnFFEffectStop func(objc.ID) unsafe.Pointer
 
 // FFEffectStop calls the ForceFeedback framework function FFEffectStop.
-func FFEffectStop(effectReference obj.Object) unsafe.Pointer {
+func FFEffectStop(effectReference FFEffectObjectReference) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFEffectStop == nil {
 		ebipurego.RegisterLibFunc(&_fnFFEffectStop, _lib, "FFEffectStop")
 	}
-	return _fnFFEffectStop(objref.IDOf(effectReference))
+	return _fnFFEffectStop(objref.IDOf(effectReference.Object))
 }
 
 var _fnFFEffectUnload func(objc.ID) unsafe.Pointer
 
 // FFEffectUnload calls the ForceFeedback framework function FFEffectUnload.
-func FFEffectUnload(effectReference obj.Object) unsafe.Pointer {
+func FFEffectUnload(effectReference FFEffectObjectReference) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFEffectUnload == nil {
 		ebipurego.RegisterLibFunc(&_fnFFEffectUnload, _lib, "FFEffectUnload")
 	}
-	return _fnFFEffectUnload(objref.IDOf(effectReference))
+	return _fnFFEffectUnload(objref.IDOf(effectReference.Object))
 }
 
 var _fnFFIsForceFeedback func(int) unsafe.Pointer
@@ -229,10 +229,10 @@ func FFIsForceFeedback(hidDevice int) unsafe.Pointer {
 var _fnFFReleaseDevice func(objc.ID) unsafe.Pointer
 
 // FFReleaseDevice calls the ForceFeedback framework function FFReleaseDevice.
-func FFReleaseDevice(deviceReference obj.Object) unsafe.Pointer {
+func FFReleaseDevice(deviceReference FFDeviceObjectReference) unsafe.Pointer {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFFReleaseDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnFFReleaseDevice, _lib, "FFReleaseDevice")
 	}
-	return _fnFFReleaseDevice(objref.IDOf(deviceReference))
+	return _fnFFReleaseDevice(objref.IDOf(deviceReference.Object))
 }

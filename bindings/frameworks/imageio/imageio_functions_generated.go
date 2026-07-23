@@ -7,9 +7,10 @@ package imageio
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -17,13 +18,13 @@ import (
 // CGImageDestinationCopyImageSource reports an error if the ImageIO framework function CGImageDestinationCopyImageSource fails.
 var _fnCGImageDestinationCopyImageSource func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func CGImageDestinationCopyImageSource(idst obj.Object, isrc obj.Object, options obj.Object) error {
+func CGImageDestinationCopyImageSource(idst coregraphics.CGImageDestinationRef, isrc coregraphics.CGImageSourceRef, options corefoundation.CFDictionaryRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageDestinationCopyImageSource == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageDestinationCopyImageSource, _lib, "CGImageDestinationCopyImageSource")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCGImageDestinationCopyImageSource(objref.IDOf(idst), objref.IDOf(isrc), objref.IDOf(options), unsafe.Pointer(&_cfErr))
+	_ok := _fnCGImageDestinationCopyImageSource(objref.IDOf(idst.Object), objref.IDOf(isrc.Object), objref.IDOf(options.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -33,13 +34,13 @@ func CGImageDestinationCopyImageSource(idst obj.Object, isrc obj.Object, options
 // CGImageMetadataRegisterNamespaceForPrefix reports an error if the ImageIO framework function CGImageMetadataRegisterNamespaceForPrefix fails.
 var _fnCGImageMetadataRegisterNamespaceForPrefix func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func CGImageMetadataRegisterNamespaceForPrefix(metadata obj.Object, xmlns obj.Object, prefix obj.Object) error {
+func CGImageMetadataRegisterNamespaceForPrefix(metadata coregraphics.CGMutableImageMetadataRef, xmlns corefoundation.CFStringRef, prefix corefoundation.CFStringRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGImageMetadataRegisterNamespaceForPrefix == nil {
 		ebipurego.RegisterLibFunc(&_fnCGImageMetadataRegisterNamespaceForPrefix, _lib, "CGImageMetadataRegisterNamespaceForPrefix")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCGImageMetadataRegisterNamespaceForPrefix(objref.IDOf(metadata), objref.IDOf(xmlns), objref.IDOf(prefix), unsafe.Pointer(&_cfErr))
+	_ok := _fnCGImageMetadataRegisterNamespaceForPrefix(objref.IDOf(metadata.Object), objref.IDOf(xmlns.Object), objref.IDOf(prefix.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}

@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -192,12 +193,12 @@ func (iv *ImageView) WithBackgroundColor(backgroundColor obj.Object) *ImageView 
 }
 
 // SetImageImageProperties sets the image & metadata (both retrieved from ImageIO).
-func (iv *ImageView) SetImageImageProperties(image obj.Object, metaData obj.Object) {
+func (iv *ImageView) SetImageImageProperties(image coregraphics.CGImageRef, metaData obj.Object) {
 	defer runtime.KeepAlive(iv)
 	defer runtime.KeepAlive(image)
 	defer runtime.KeepAlive(metaData)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImage:imageProperties:"), objref.IDOf(image), objref.IDOf(metaData))
+		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImage:imageProperties:"), objref.IDOf(image.Object), objref.IDOf(metaData))
 	})
 
 }
@@ -212,13 +213,13 @@ func (iv *ImageView) SetImageWithURL(url string) {
 }
 
 // Image returns the image associated with the view, after any image corrections.
-func (iv *ImageView) Image() obj.Object {
+func (iv *ImageView) Image() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(iv)
-	var _mainthread0 obj.Object
+	var _mainthread0 coregraphics.CGImageRef
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() coregraphics.CGImageRef {
 			_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("image"))
-			return obj.Wrap(_r)
+			return coregraphics.CGImageRef{obj.Wrap(_r)}
 		}()
 	})
 	return _mainthread0

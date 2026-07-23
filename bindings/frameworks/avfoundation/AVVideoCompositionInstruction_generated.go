@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -76,10 +77,10 @@ func (vci *VideoCompositionInstruction) String() string {
 }
 
 // BackgroundColor indicates the background color of the composition. Solid BGRA colors only are supported; patterns and other color refs that are not supported will be ignored. - If the background color is not specified the video compositor will use a default backgroundColor of opaque black. - If the rendered pixel buffer does not have alpha, the alpha value of the backgroundColor will be ignored.
-func (vci *VideoCompositionInstruction) BackgroundColor() obj.Object {
+func (vci *VideoCompositionInstruction) BackgroundColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(vci)
 	_r := objc.Send[objc.ID](objref.IDOf(vci), objc.RegisterName("backgroundColor"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // LayerInstructions provides an array of instances of AVVideoCompositionLayerInstruction that specify how video frames from source tracks should be layered and composed. Tracks are layered in the composition according to the top-to-bottom order of the layerInstructions array; the track with trackID of the first instruction in the array will be layered on top, with the track with the trackID of the second instruction immediately underneath, etc. If this key is nil, the output will be a fill of the background color.

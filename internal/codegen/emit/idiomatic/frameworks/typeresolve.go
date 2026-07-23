@@ -290,8 +290,16 @@ func idiomaticArg(
 	// (Some "…Ref" types are really integer handles, e.g. MIDIObjectRef; those
 	// resolve to a number and are handled as scalars below.)
 	if goType == "unsafe.Pointer" && isCFObjectType(objcType, mapper) {
-		imports["obj"] = objImportPath
 		imports["objref"] = objrefImportPath
+		// A distinct named handle type (CFArrayRef): unwrap its embedded obj.Object
+		// before IDOf. IDOf(nil) is 0, so a zero-value handle passes NULL correctly;
+		// calling IDOf on the boxed struct itself would deref the nil embedded
+		// interface and panic.
+		if named, nimps, ok := cfHandleNamedType(objcType, mapper, fc); ok {
+			maps.Copy(imports, nimps)
+			return named, "objref.IDOf(" + pName + ".Object)", imports, true
+		}
+		imports["obj"] = objImportPath
 		return "obj.Object", "objref.IDOf(" + pName + ")", imports, true
 	}
 	// A bare host pointer input (e.g. void *addr in hv_vm_map) is passed through
@@ -574,6 +582,14 @@ func idiomaticRet(
 			// A +1 result (CF Create/Copy rule, cf/ns_returns_retained): adopt the
 			// existing reference. obj.Wrap would retain a second time and leak it.
 			wrap = "obj.Adopt(%s)"
+		}
+		// Surface a distinct named handle type (CFArrayRef) when the owner package is
+		// acyclically reachable, wrapping the chosen constructor's result in the
+		// struct type. The lifetime constructor (Wrap/Adopt/WrapUnmanaged) is
+		// unchanged; only the static type the caller sees is narrowed.
+		if named, nimps, ok := cfHandleNamedType(objcType, mapper, fc); ok {
+			maps.Copy(imports, nimps)
+			return named, kindObject, named + "{" + wrap + "}", "objc.ID", imports, true
 		}
 		return "obj.Object", kindObject, wrap, "objc.ID", imports, true
 	}
@@ -891,6 +907,55 @@ func isCFObjectType(objcType string, mapper *typemap.Mapper) bool {
 		}
 	}
 	return false
+}
+
+// cfHandleBareName returns the bare typedef name of a CF/opaque-handle ObjC type
+// (e.g. "const CFArrayRef _Nonnull" → "CFArrayRef"), or "" if the type is a
+// pointer-to-ref (an out-parameter) or otherwise not a plain handle value.
+func cfHandleBareName(objcType string) string {
+	t := strings.TrimPrefix(normaliseObjC(objcType), "const ")
+	t = strings.TrimSpace(t)
+	if strings.Contains(t, "*") {
+		return ""
+	}
+	fields := strings.Fields(t)
+	if len(fields) == 0 {
+		return ""
+	}
+	return fields[len(fields)-1]
+}
+
+// cfHandleNamedType resolves a CF/opaque-handle ObjC type to the distinct
+// struct-wrapper handle type its owning idiomatic package emits (e.g. CFArrayRef
+// → corefoundation.CFArrayRef), returning the Go type spelling and any import it
+// needs. It applies the same acyclic gating as crossFrameworkWrapClass: a handle
+// owned by the current package is named bare; one owned by a foundational
+// cross-target package is qualified; a reference FROM a foundational package, or
+// TO a non-foundational owner, degrades (ok=false) so the caller keeps the
+// generic obj.Object and the import graph stays acyclic by construction.
+func cfHandleNamedType(
+	objcType string,
+	mapper *typemap.Mapper,
+	fc *frameworkContext,
+) (goType string, imports map[string]string, ok bool) {
+	name := cfHandleBareName(objcType)
+	if name == "" {
+		return "", nil, false
+	}
+	ref, found := mapper.CFHandleIndex[name]
+	if !found {
+		return "", nil, false
+	}
+	current := strings.ToLower(fc.framework.Framework)
+	if ref.Package == current {
+		return ref.TypeName, map[string]string{}, true
+	}
+	if idiomaticCrossTargets[current] || !idiomaticCrossTargets[ref.Package] {
+		return "", nil, false
+	}
+	return ref.Package + "." + ref.TypeName,
+		map[string]string{ref.Package: idiomaticFrameworkPrefix + ref.Package},
+		true
 }
 
 // isNonRefcountedHandle reports whether objcType is an opaque handle that is NOT

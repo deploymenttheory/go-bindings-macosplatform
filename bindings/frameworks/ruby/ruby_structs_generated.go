@@ -6,6 +6,8 @@ package ruby
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type RArray struct {
@@ -98,9 +100,14 @@ type StTable struct {
 	Entries      unsafe.Pointer
 }
 
-type StTableEntry struct{}
-
 type Timeval struct{}
 
 // RbDataTypeT is an alias for the rb_data_type_struct value type.
 type RbDataTypeT = RbDataTypeStruct
+
+// StTableEntry is a handle for the opaque st_table_entry type.
+type StTableEntry struct{ obj.Object }
+
+// IsNil reports whether StTableEntry is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h StTableEntry) IsNil() bool { return h.Object == nil }

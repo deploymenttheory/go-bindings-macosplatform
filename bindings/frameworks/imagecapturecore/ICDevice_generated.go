@@ -9,6 +9,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -213,10 +214,10 @@ func (d *Device) ProductKind() string {
 }
 
 // Icon returns ￼Icon image for the device class.  If there is no custom icon present from a device manufacturer, this will be a rendered version of the system symbol for the device class.  Using a rendered system symbol instead of the systemSymbolName is discouraged.
-func (d *Device) Icon() obj.Object {
+func (d *Device) Icon() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("icon"))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // SystemSymbolName returns ￼Standard system symbol used to represent the device class.  Using the symbol to render an appropriate device icon will ensure proper scaling for high resolution devices.

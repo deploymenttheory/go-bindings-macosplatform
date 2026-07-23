@@ -9,6 +9,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -44,9 +45,9 @@ func ConfigurationForMetadataCompletion(ctx context.Context, metadata *IdentityD
 }
 
 // PreviewWithPassThumbnailLocalizedDescription initializes properties you need to preview an object that represents the pass you add to Wallet.
-func PreviewWithPassThumbnailLocalizedDescription(passThumbnail obj.Object, description string) *AddPassMetadataPreview {
+func PreviewWithPassThumbnailLocalizedDescription(passThumbnail coregraphics.CGImageRef, description string) *AddPassMetadataPreview {
 	defer runtime.KeepAlive(passThumbnail)
-	_r := objc.Send[objc.ID](objc.ID(_class("PKAddPassMetadataPreview")), objc.RegisterName("previewWithPassThumbnail:localizedDescription:"), objref.IDOf(passThumbnail), purego.NSString(description))
+	_r := objc.Send[objc.ID](objc.ID(_class("PKAddPassMetadataPreview")), objc.RegisterName("previewWithPassThumbnail:localizedDescription:"), objref.IDOf(passThumbnail.Object), purego.NSString(description))
 	return AddPassMetadataPreviewFromID(_r)
 }
 

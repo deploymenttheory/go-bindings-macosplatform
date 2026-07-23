@@ -7,8 +7,8 @@ package passkit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -49,11 +49,11 @@ func issuerProvisioningExtensionPaymentPassEntryAdopt(id objc.ID) *IssuerProvisi
 }
 
 // NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration creates a new entry for a payment pass that a user adds to Wallet.
-func NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration(identifier string, title string, art obj.Object, configuration *AddPaymentPassRequestConfiguration) *IssuerProvisioningExtensionPaymentPassEntry {
+func NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration(identifier string, title string, art coregraphics.CGImageRef, configuration *AddPaymentPassRequestConfiguration) *IssuerProvisioningExtensionPaymentPassEntry {
 	defer runtime.KeepAlive(art)
 	defer runtime.KeepAlive(configuration)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKIssuerProvisioningExtensionPaymentPassEntry")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:art:addRequestConfiguration:"), purego.NSString(identifier), purego.NSString(title), objref.IDOf(art), objref.IDOf(configuration))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:art:addRequestConfiguration:"), purego.NSString(identifier), purego.NSString(title), objref.IDOf(art.Object), objref.IDOf(configuration))
 	return issuerProvisioningExtensionPaymentPassEntryAdopt(_id)
 }
 

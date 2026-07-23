@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -102,10 +103,10 @@ func (cr *CaptionRenderer) CaptionSceneChangesInRange(consideredTimeRange coreme
 }
 
 // RenderInContextForTime draw the captions for the time you specify.
-func (cr *CaptionRenderer) RenderInContextForTime(ctx obj.Object, time_ coremedia.CMTime) {
+func (cr *CaptionRenderer) RenderInContextForTime(ctx coregraphics.CGContextRef, time_ coremedia.CMTime) {
 	defer runtime.KeepAlive(cr)
 	defer runtime.KeepAlive(ctx)
-	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("renderInContext:forTime:"), objref.IDOf(ctx), time_)
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("renderInContext:forTime:"), objref.IDOf(ctx.Object), time_)
 }
 
 // Captions returns a NSArray holding captions to consider for rendering. This is the array of AVCaptions to consider when drawing. The array can contain no captions.

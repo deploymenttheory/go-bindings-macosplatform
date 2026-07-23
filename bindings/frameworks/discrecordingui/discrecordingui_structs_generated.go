@@ -6,6 +6,8 @@ package discrecordingui
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type DRBurnSession struct{}
@@ -70,3 +72,17 @@ type DREraseSessionSetupDialogOptions struct {
 	Version           uint32
 	DialogOptionFlags uint32
 }
+
+// DRBurnSessionRef is a handle for the opaque DRBurnSessionRef type.
+type DRBurnSessionRef struct{ obj.Object }
+
+// IsNil reports whether DRBurnSessionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DRBurnSessionRef) IsNil() bool { return h.Object == nil }
+
+// DREraseSessionRef is a handle for the opaque DREraseSessionRef type.
+type DREraseSessionRef struct{ obj.Object }
+
+// IsNil reports whether DREraseSessionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DREraseSessionRef) IsNil() bool { return h.Object == nil }

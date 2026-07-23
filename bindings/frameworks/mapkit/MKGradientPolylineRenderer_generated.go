@@ -7,6 +7,7 @@ package mapkit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -113,9 +114,9 @@ func (gpr *GradientPolylineRenderer) WithShouldRasterize(shouldRasterize bool) *
 }
 
 // WithPath sets the path representing the overlay’s shape.
-func (gpr *GradientPolylineRenderer) WithPath(path obj.Object) *GradientPolylineRenderer {
+func (gpr *GradientPolylineRenderer) WithPath(path coregraphics.CGPathRef) *GradientPolylineRenderer {
 	defer runtime.KeepAlive(path)
-	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setPath:"), objref.IDOf(path))
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setPath:"), objref.IDOf(path.Object))
 	return gpr
 }
 

@@ -6,6 +6,8 @@ package carboncore
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type AFPAlternateAddress struct {
@@ -1679,3 +1681,213 @@ type XLibExportedSymbol struct {
 	ClassAndName uint32
 	BpOffset     uint32
 }
+
+// AreaID is a handle for the opaque AreaID type.
+type AreaID struct{ obj.Object }
+
+// IsNil reports whether AreaID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AreaID) IsNil() bool { return h.Object == nil }
+
+// CollatorRef is a handle for the opaque CollatorRef type.
+type CollatorRef struct{ obj.Object }
+
+// IsNil reports whether CollatorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CollatorRef) IsNil() bool { return h.Object == nil }
+
+// Collection is a handle for the opaque Collection type.
+type Collection struct{ obj.Object }
+
+// IsNil reports whether Collection is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Collection) IsNil() bool { return h.Object == nil }
+
+// FNSubscriptionRef is a handle for the opaque FNSubscriptionRef type.
+type FNSubscriptionRef struct{ obj.Object }
+
+// IsNil reports whether FNSubscriptionRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h FNSubscriptionRef) IsNil() bool { return h.Object == nil }
+
+// FSFileOperationRef is a handle for the opaque FSFileOperationRef type.
+type FSFileOperationRef struct{ obj.Object }
+
+// IsNil reports whether FSFileOperationRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h FSFileOperationRef) IsNil() bool { return h.Object == nil }
+
+// FSFileSecurityRef is a handle for the opaque FSFileSecurityRef type.
+type FSFileSecurityRef struct{ obj.Object }
+
+// IsNil reports whether FSFileSecurityRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h FSFileSecurityRef) IsNil() bool { return h.Object == nil }
+
+// FSIterator is a handle for the opaque FSIterator type.
+type FSIterator struct{ obj.Object }
+
+// IsNil reports whether FSIterator is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h FSIterator) IsNil() bool { return h.Object == nil }
+
+// FSVolumeOperation is a handle for the opaque FSVolumeOperation type.
+type FSVolumeOperation struct{ obj.Object }
+
+// IsNil reports whether FSVolumeOperation is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h FSVolumeOperation) IsNil() bool { return h.Object == nil }
+
+// LocaleRef is a handle for the opaque LocaleRef type.
+type LocaleRef struct{ obj.Object }
+
+// IsNil reports whether LocaleRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h LocaleRef) IsNil() bool { return h.Object == nil }
+
+// MPAddressSpaceID is a handle for the opaque MPAddressSpaceID type.
+type MPAddressSpaceID struct{ obj.Object }
+
+// IsNil reports whether MPAddressSpaceID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPAddressSpaceID) IsNil() bool { return h.Object == nil }
+
+// MPAreaID is a handle for the opaque MPAreaID type.
+type MPAreaID struct{ obj.Object }
+
+// IsNil reports whether MPAreaID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPAreaID) IsNil() bool { return h.Object == nil }
+
+// MPCoherenceID is a handle for the opaque MPCoherenceID type.
+type MPCoherenceID struct{ obj.Object }
+
+// IsNil reports whether MPCoherenceID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPCoherenceID) IsNil() bool { return h.Object == nil }
+
+// MPConsoleID is a handle for the opaque MPConsoleID type.
+type MPConsoleID struct{ obj.Object }
+
+// IsNil reports whether MPConsoleID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPConsoleID) IsNil() bool { return h.Object == nil }
+
+// MPCpuID is a handle for the opaque MPCpuID type.
+type MPCpuID struct{ obj.Object }
+
+// IsNil reports whether MPCpuID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPCpuID) IsNil() bool { return h.Object == nil }
+
+// MPCriticalRegionID is a handle for the opaque MPCriticalRegionID type.
+type MPCriticalRegionID struct{ obj.Object }
+
+// IsNil reports whether MPCriticalRegionID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPCriticalRegionID) IsNil() bool { return h.Object == nil }
+
+// MPEventID is a handle for the opaque MPEventID type.
+type MPEventID struct{ obj.Object }
+
+// IsNil reports whether MPEventID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPEventID) IsNil() bool { return h.Object == nil }
+
+// MPNotificationID is a handle for the opaque MPNotificationID type.
+type MPNotificationID struct{ obj.Object }
+
+// IsNil reports whether MPNotificationID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPNotificationID) IsNil() bool { return h.Object == nil }
+
+// MPOpaqueID is a handle for the opaque MPOpaqueID type.
+type MPOpaqueID struct{ obj.Object }
+
+// IsNil reports whether MPOpaqueID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPOpaqueID) IsNil() bool { return h.Object == nil }
+
+// MPProcessID is a handle for the opaque MPProcessID type.
+type MPProcessID struct{ obj.Object }
+
+// IsNil reports whether MPProcessID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPProcessID) IsNil() bool { return h.Object == nil }
+
+// MPQueueID is a handle for the opaque MPQueueID type.
+type MPQueueID struct{ obj.Object }
+
+// IsNil reports whether MPQueueID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPQueueID) IsNil() bool { return h.Object == nil }
+
+// MPSemaphoreID is a handle for the opaque MPSemaphoreID type.
+type MPSemaphoreID struct{ obj.Object }
+
+// IsNil reports whether MPSemaphoreID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPSemaphoreID) IsNil() bool { return h.Object == nil }
+
+// MPTaskID is a handle for the opaque MPTaskID type.
+type MPTaskID struct{ obj.Object }
+
+// IsNil reports whether MPTaskID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPTaskID) IsNil() bool { return h.Object == nil }
+
+// MPTimerID is a handle for the opaque MPTimerID type.
+type MPTimerID struct{ obj.Object }
+
+// IsNil reports whether MPTimerID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MPTimerID) IsNil() bool { return h.Object == nil }
+
+// TECObjectRef is a handle for the opaque TECObjectRef type.
+type TECObjectRef struct{ obj.Object }
+
+// IsNil reports whether TECObjectRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h TECObjectRef) IsNil() bool { return h.Object == nil }
+
+// TECSnifferObjectRef is a handle for the opaque TECSnifferObjectRef type.
+type TECSnifferObjectRef struct{ obj.Object }
+
+// IsNil reports whether TECSnifferObjectRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h TECSnifferObjectRef) IsNil() bool { return h.Object == nil }
+
+// TextBreakLocatorRef is a handle for the opaque TextBreakLocatorRef type.
+type TextBreakLocatorRef struct{ obj.Object }
+
+// IsNil reports whether TextBreakLocatorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h TextBreakLocatorRef) IsNil() bool { return h.Object == nil }
+
+// TextToUnicodeInfo is a handle for the opaque TextToUnicodeInfo type.
+type TextToUnicodeInfo struct{ obj.Object }
+
+// IsNil reports whether TextToUnicodeInfo is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h TextToUnicodeInfo) IsNil() bool { return h.Object == nil }
+
+// UCTypeSelectRef is a handle for the opaque UCTypeSelectRef type.
+type UCTypeSelectRef struct{ obj.Object }
+
+// IsNil reports whether UCTypeSelectRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h UCTypeSelectRef) IsNil() bool { return h.Object == nil }
+
+// UnicodeToTextInfo is a handle for the opaque UnicodeToTextInfo type.
+type UnicodeToTextInfo struct{ obj.Object }
+
+// IsNil reports whether UnicodeToTextInfo is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h UnicodeToTextInfo) IsNil() bool { return h.Object == nil }
+
+// UnicodeToTextRunInfo is a handle for the opaque UnicodeToTextRunInfo type.
+type UnicodeToTextRunInfo struct{ obj.Object }
+
+// IsNil reports whether UnicodeToTextRunInfo is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h UnicodeToTextRunInfo) IsNil() bool { return h.Object == nil }

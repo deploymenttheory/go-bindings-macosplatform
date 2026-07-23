@@ -6,6 +6,8 @@ package corevideo
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // Base type for all CoreVideo buffers
@@ -88,3 +90,52 @@ type CVTimeStamp struct {
 	Flags              uint64
 	Reserved           uint64
 }
+
+// CVBufferRef is a handle for the opaque CVBufferRef type.
+type CVBufferRef struct{ obj.Object }
+
+// IsNil reports whether CVBufferRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CVBufferRef) IsNil() bool { return h.Object == nil }
+
+// CVDisplayLinkRef is a handle for the opaque CVDisplayLinkRef type.
+type CVDisplayLinkRef struct{ obj.Object }
+
+// IsNil reports whether CVDisplayLinkRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CVDisplayLinkRef) IsNil() bool { return h.Object == nil }
+
+// CVMetalBufferCacheRef is a handle for the opaque CVMetalBufferCacheRef type.
+type CVMetalBufferCacheRef struct{ obj.Object }
+
+// IsNil reports whether CVMetalBufferCacheRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CVMetalBufferCacheRef) IsNil() bool { return h.Object == nil }
+
+// CVMetalTextureCacheRef is a handle for the opaque CVMetalTextureCacheRef type.
+type CVMetalTextureCacheRef struct{ obj.Object }
+
+// IsNil reports whether CVMetalTextureCacheRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CVMetalTextureCacheRef) IsNil() bool { return h.Object == nil }
+
+// CVOpenGLBufferPoolRef is a handle for the opaque CVOpenGLBufferPoolRef type.
+type CVOpenGLBufferPoolRef struct{ obj.Object }
+
+// IsNil reports whether CVOpenGLBufferPoolRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CVOpenGLBufferPoolRef) IsNil() bool { return h.Object == nil }
+
+// CVOpenGLTextureCacheRef is a handle for the opaque CVOpenGLTextureCacheRef type.
+type CVOpenGLTextureCacheRef struct{ obj.Object }
+
+// IsNil reports whether CVOpenGLTextureCacheRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CVOpenGLTextureCacheRef) IsNil() bool { return h.Object == nil }
+
+// CVPixelBufferPoolRef is a handle for the opaque CVPixelBufferPoolRef type.
+type CVPixelBufferPoolRef struct{ obj.Object }
+
+// IsNil reports whether CVPixelBufferPoolRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CVPixelBufferPoolRef) IsNil() bool { return h.Object == nil }

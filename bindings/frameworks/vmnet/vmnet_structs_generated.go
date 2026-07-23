@@ -6,6 +6,8 @@ package vmnet
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // The vmnet interface object.
@@ -22,3 +24,24 @@ type Vmpktdesc struct {
 	VMPktIovcnt uint32
 	VMFlags     uint32
 }
+
+// InterfaceRef is a handle for the opaque interface_ref type.
+type InterfaceRef struct{ obj.Object }
+
+// IsNil reports whether InterfaceRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h InterfaceRef) IsNil() bool { return h.Object == nil }
+
+// VmnetNetworkConfigurationRef is a handle for the opaque vmnet_network_configuration_ref type.
+type VmnetNetworkConfigurationRef struct{ obj.Object }
+
+// IsNil reports whether VmnetNetworkConfigurationRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VmnetNetworkConfigurationRef) IsNil() bool { return h.Object == nil }
+
+// VmnetNetworkRef is a handle for the opaque vmnet_network_ref type.
+type VmnetNetworkRef struct{ obj.Object }
+
+// IsNil reports whether VmnetNetworkRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VmnetNetworkRef) IsNil() bool { return h.Object == nil }

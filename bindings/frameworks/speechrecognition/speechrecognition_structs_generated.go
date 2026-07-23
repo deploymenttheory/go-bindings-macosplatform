@@ -6,6 +6,8 @@ package speechrecognition
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type OpaqueSRSpeechObject struct{}
@@ -23,3 +25,10 @@ type SRCallBackStruct struct {
 	Flags    int16
 	RefCon   unsafe.Pointer
 }
+
+// SRSpeechObject is a handle for the opaque SRSpeechObject type.
+type SRSpeechObject struct{ obj.Object }
+
+// IsNil reports whether SRSpeechObject is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SRSpeechObject) IsNil() bool { return h.Object == nil }

@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -136,9 +137,9 @@ func (sc *StreamConfiguration) WithShowMouseClicks(showMouseClicks bool) *Stream
 }
 
 // WithBackgroundColor sets a background color for the output.
-func (sc *StreamConfiguration) WithBackgroundColor(backgroundColor obj.Object) *StreamConfiguration {
+func (sc *StreamConfiguration) WithBackgroundColor(backgroundColor coregraphics.CGColorRef) *StreamConfiguration {
 	defer runtime.KeepAlive(backgroundColor)
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor.Object))
 	return sc
 }
 
@@ -161,16 +162,16 @@ func (sc *StreamConfiguration) WithQueueDepth(queueDepth int) *StreamConfigurati
 }
 
 // WithColorMatrix sets a color matrix to apply to the output surface.
-func (sc *StreamConfiguration) WithColorMatrix(colorMatrix obj.Object) *StreamConfiguration {
+func (sc *StreamConfiguration) WithColorMatrix(colorMatrix corefoundation.CFStringRef) *StreamConfiguration {
 	defer runtime.KeepAlive(colorMatrix)
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setColorMatrix:"), objref.IDOf(colorMatrix))
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setColorMatrix:"), objref.IDOf(colorMatrix.Object))
 	return sc
 }
 
 // WithColorSpaceName sets a color space to use for the output buffer.
-func (sc *StreamConfiguration) WithColorSpaceName(colorSpaceName obj.Object) *StreamConfiguration {
+func (sc *StreamConfiguration) WithColorSpaceName(colorSpaceName corefoundation.CFStringRef) *StreamConfiguration {
 	defer runtime.KeepAlive(colorSpaceName)
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName.Object))
 	return sc
 }
 
@@ -337,10 +338,10 @@ func (sc *StreamConfiguration) ShowMouseClicks() bool {
 }
 
 // BackgroundColor returns SCStreamProperty for background color. By default the background color is clear.
-func (sc *StreamConfiguration) BackgroundColor() obj.Object {
+func (sc *StreamConfiguration) BackgroundColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("backgroundColor"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // SourceRect returns SCStreamProperty that specifies that the stream only samples a subset of the frame input. For display streams, if not set, then the entire display is streamed. For independent window streams, if not set, then the entire window is streamed. The rectangle is specified in points in the display’s logical coordinate system.
@@ -365,17 +366,17 @@ func (sc *StreamConfiguration) QueueDepth() int {
 }
 
 // ColorMatrix returns SCStreamProperty that specifies the YCbCr matrix applied to the output surface.  The value must be one of the strings specified in https://developer.apple.com/documentation/coregraphics/quartz_display_services/display_stream_ycbcr_to_rgb_conversion_matrix_options. Should only be used if your pixel format is 420v or 420f.
-func (sc *StreamConfiguration) ColorMatrix() obj.Object {
+func (sc *StreamConfiguration) ColorMatrix() corefoundation.CFStringRef {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("colorMatrix"))
-	return obj.Wrap(_r)
+	return corefoundation.CFStringRef{obj.Wrap(_r)}
 }
 
 // ColorSpaceName returns SCStreamProperty that specifies the color space of the output buffer.  If not set the output buffer uses the same color space as the display. The value must be one of the strings specified in https://developer.apple.com/documentation/coregraphics/cgcolorspace/color_space_names.
-func (sc *StreamConfiguration) ColorSpaceName() obj.Object {
+func (sc *StreamConfiguration) ColorSpaceName() corefoundation.CFStringRef {
 	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("colorSpaceName"))
-	return obj.Wrap(_r)
+	return corefoundation.CFStringRef{obj.Wrap(_r)}
 }
 
 // CapturesAudio reports whether SCStreamProperty that specifies whether the audio will be captured. By default audio is not captured.

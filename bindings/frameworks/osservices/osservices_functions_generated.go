@@ -17,13 +17,13 @@ import (
 // CSIdentityCommit reports an error if the OSServices framework function CSIdentityCommit fails.
 var _fnCSIdentityCommit func(objc.ID, objc.ID, unsafe.Pointer) uint8
 
-func CSIdentityCommit(identity obj.Object, authorization obj.Object) error {
+func CSIdentityCommit(identity CSIdentityRef, authorization obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityCommit == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityCommit, _lib, "CSIdentityCommit")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCSIdentityCommit(objref.IDOf(identity), objref.IDOf(authorization), unsafe.Pointer(&_cfErr))
+	_ok := _fnCSIdentityCommit(objref.IDOf(identity.Object), objref.IDOf(authorization), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -33,13 +33,13 @@ func CSIdentityCommit(identity obj.Object, authorization obj.Object) error {
 // CSIdentityQueryExecute reports an error if the OSServices framework function CSIdentityQueryExecute fails.
 var _fnCSIdentityQueryExecute func(objc.ID, int, unsafe.Pointer) uint8
 
-func CSIdentityQueryExecute(query obj.Object, flags int) error {
+func CSIdentityQueryExecute(query CSIdentityQueryRef, flags int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCSIdentityQueryExecute == nil {
 		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryExecute, _lib, "CSIdentityQueryExecute")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCSIdentityQueryExecute(objref.IDOf(query), flags, unsafe.Pointer(&_cfErr))
+	_ok := _fnCSIdentityQueryExecute(objref.IDOf(query.Object), flags, unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}

@@ -6,6 +6,8 @@ package corefoundation
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type CFAllocator struct{}
@@ -477,4 +479,457 @@ type CGVector struct {
 
 type FSRef struct{}
 
-type MallocZoneT struct{}
+// MallocZoneT is a handle for the opaque _malloc_zone_t type.
+type MallocZoneT struct{ obj.Object }
+
+// IsNil reports whether MallocZoneT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MallocZoneT) IsNil() bool { return h.Object == nil }
+
+// CFAllocatorRef is a handle for the opaque CFAllocatorRef type.
+type CFAllocatorRef struct{ obj.Object }
+
+// IsNil reports whether CFAllocatorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFAllocatorRef) IsNil() bool { return h.Object == nil }
+
+// CFArrayRef is a handle for the opaque CFArrayRef type.
+type CFArrayRef struct{ obj.Object }
+
+// IsNil reports whether CFArrayRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFArrayRef) IsNil() bool { return h.Object == nil }
+
+// CFAttributedStringRef is a handle for the opaque CFAttributedStringRef type.
+type CFAttributedStringRef struct{ obj.Object }
+
+// IsNil reports whether CFAttributedStringRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFAttributedStringRef) IsNil() bool { return h.Object == nil }
+
+// CFBagRef is a handle for the opaque CFBagRef type.
+type CFBagRef struct{ obj.Object }
+
+// IsNil reports whether CFBagRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFBagRef) IsNil() bool { return h.Object == nil }
+
+// CFBinaryHeapRef is a handle for the opaque CFBinaryHeapRef type.
+type CFBinaryHeapRef struct{ obj.Object }
+
+// IsNil reports whether CFBinaryHeapRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFBinaryHeapRef) IsNil() bool { return h.Object == nil }
+
+// CFBitVectorRef is a handle for the opaque CFBitVectorRef type.
+type CFBitVectorRef struct{ obj.Object }
+
+// IsNil reports whether CFBitVectorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFBitVectorRef) IsNil() bool { return h.Object == nil }
+
+// CFBooleanRef is a handle for the opaque CFBooleanRef type.
+type CFBooleanRef struct{ obj.Object }
+
+// IsNil reports whether CFBooleanRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFBooleanRef) IsNil() bool { return h.Object == nil }
+
+// CFBundleRef is a handle for the opaque CFBundleRef type.
+type CFBundleRef struct{ obj.Object }
+
+// IsNil reports whether CFBundleRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFBundleRef) IsNil() bool { return h.Object == nil }
+
+// CFCalendarRef is a handle for the opaque CFCalendarRef type.
+type CFCalendarRef struct{ obj.Object }
+
+// IsNil reports whether CFCalendarRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFCalendarRef) IsNil() bool { return h.Object == nil }
+
+// CFCharacterSetRef is a handle for the opaque CFCharacterSetRef type.
+type CFCharacterSetRef struct{ obj.Object }
+
+// IsNil reports whether CFCharacterSetRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFCharacterSetRef) IsNil() bool { return h.Object == nil }
+
+// CFDataRef is a handle for the opaque CFDataRef type.
+type CFDataRef struct{ obj.Object }
+
+// IsNil reports whether CFDataRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFDataRef) IsNil() bool { return h.Object == nil }
+
+// CFDateFormatterRef is a handle for the opaque CFDateFormatterRef type.
+type CFDateFormatterRef struct{ obj.Object }
+
+// IsNil reports whether CFDateFormatterRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFDateFormatterRef) IsNil() bool { return h.Object == nil }
+
+// CFDateRef is a handle for the opaque CFDateRef type.
+type CFDateRef struct{ obj.Object }
+
+// IsNil reports whether CFDateRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFDateRef) IsNil() bool { return h.Object == nil }
+
+// CFDictionaryRef is a handle for the opaque CFDictionaryRef type.
+type CFDictionaryRef struct{ obj.Object }
+
+// IsNil reports whether CFDictionaryRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFDictionaryRef) IsNil() bool { return h.Object == nil }
+
+// CFErrorRef is a handle for the opaque CFErrorRef type.
+type CFErrorRef struct{ obj.Object }
+
+// IsNil reports whether CFErrorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFErrorRef) IsNil() bool { return h.Object == nil }
+
+// CFFileDescriptorRef is a handle for the opaque CFFileDescriptorRef type.
+type CFFileDescriptorRef struct{ obj.Object }
+
+// IsNil reports whether CFFileDescriptorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFFileDescriptorRef) IsNil() bool { return h.Object == nil }
+
+// CFFileSecurityRef is a handle for the opaque CFFileSecurityRef type.
+type CFFileSecurityRef struct{ obj.Object }
+
+// IsNil reports whether CFFileSecurityRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFFileSecurityRef) IsNil() bool { return h.Object == nil }
+
+// CFHTTPAuthenticationRef is a handle for the opaque CFHTTPAuthenticationRef type.
+type CFHTTPAuthenticationRef struct{ obj.Object }
+
+// IsNil reports whether CFHTTPAuthenticationRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFHTTPAuthenticationRef) IsNil() bool { return h.Object == nil }
+
+// CFHTTPMessageRef is a handle for the opaque CFHTTPMessageRef type.
+type CFHTTPMessageRef struct{ obj.Object }
+
+// IsNil reports whether CFHTTPMessageRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFHTTPMessageRef) IsNil() bool { return h.Object == nil }
+
+// CFHostRef is a handle for the opaque CFHostRef type.
+type CFHostRef struct{ obj.Object }
+
+// IsNil reports whether CFHostRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFHostRef) IsNil() bool { return h.Object == nil }
+
+// CFLocaleRef is a handle for the opaque CFLocaleRef type.
+type CFLocaleRef struct{ obj.Object }
+
+// IsNil reports whether CFLocaleRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFLocaleRef) IsNil() bool { return h.Object == nil }
+
+// CFMachPortRef is a handle for the opaque CFMachPortRef type.
+type CFMachPortRef struct{ obj.Object }
+
+// IsNil reports whether CFMachPortRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFMachPortRef) IsNil() bool { return h.Object == nil }
+
+// CFMessagePortRef is a handle for the opaque CFMessagePortRef type.
+type CFMessagePortRef struct{ obj.Object }
+
+// IsNil reports whether CFMessagePortRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFMessagePortRef) IsNil() bool { return h.Object == nil }
+
+// CFMutableArrayRef is a handle for the opaque CFMutableArrayRef type.
+type CFMutableArrayRef struct{ obj.Object }
+
+// IsNil reports whether CFMutableArrayRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFMutableArrayRef) IsNil() bool { return h.Object == nil }
+
+// CFMutableAttributedStringRef is a handle for the opaque CFMutableAttributedStringRef type.
+type CFMutableAttributedStringRef struct{ obj.Object }
+
+// IsNil reports whether CFMutableAttributedStringRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFMutableAttributedStringRef) IsNil() bool { return h.Object == nil }
+
+// CFMutableBagRef is a handle for the opaque CFMutableBagRef type.
+type CFMutableBagRef struct{ obj.Object }
+
+// IsNil reports whether CFMutableBagRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFMutableBagRef) IsNil() bool { return h.Object == nil }
+
+// CFMutableBitVectorRef is a handle for the opaque CFMutableBitVectorRef type.
+type CFMutableBitVectorRef struct{ obj.Object }
+
+// IsNil reports whether CFMutableBitVectorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFMutableBitVectorRef) IsNil() bool { return h.Object == nil }
+
+// CFMutableCharacterSetRef is a handle for the opaque CFMutableCharacterSetRef type.
+type CFMutableCharacterSetRef struct{ obj.Object }
+
+// IsNil reports whether CFMutableCharacterSetRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFMutableCharacterSetRef) IsNil() bool { return h.Object == nil }
+
+// CFMutableDataRef is a handle for the opaque CFMutableDataRef type.
+type CFMutableDataRef struct{ obj.Object }
+
+// IsNil reports whether CFMutableDataRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFMutableDataRef) IsNil() bool { return h.Object == nil }
+
+// CFMutableDictionaryRef is a handle for the opaque CFMutableDictionaryRef type.
+type CFMutableDictionaryRef struct{ obj.Object }
+
+// IsNil reports whether CFMutableDictionaryRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFMutableDictionaryRef) IsNil() bool { return h.Object == nil }
+
+// CFMutableSetRef is a handle for the opaque CFMutableSetRef type.
+type CFMutableSetRef struct{ obj.Object }
+
+// IsNil reports whether CFMutableSetRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFMutableSetRef) IsNil() bool { return h.Object == nil }
+
+// CFMutableStringRef is a handle for the opaque CFMutableStringRef type.
+type CFMutableStringRef struct{ obj.Object }
+
+// IsNil reports whether CFMutableStringRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFMutableStringRef) IsNil() bool { return h.Object == nil }
+
+// CFNetDiagnosticRef is a handle for the opaque CFNetDiagnosticRef type.
+type CFNetDiagnosticRef struct{ obj.Object }
+
+// IsNil reports whether CFNetDiagnosticRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFNetDiagnosticRef) IsNil() bool { return h.Object == nil }
+
+// CFNetServiceBrowserRef is a handle for the opaque CFNetServiceBrowserRef type.
+type CFNetServiceBrowserRef struct{ obj.Object }
+
+// IsNil reports whether CFNetServiceBrowserRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFNetServiceBrowserRef) IsNil() bool { return h.Object == nil }
+
+// CFNetServiceMonitorRef is a handle for the opaque CFNetServiceMonitorRef type.
+type CFNetServiceMonitorRef struct{ obj.Object }
+
+// IsNil reports whether CFNetServiceMonitorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFNetServiceMonitorRef) IsNil() bool { return h.Object == nil }
+
+// CFNetServiceRef is a handle for the opaque CFNetServiceRef type.
+type CFNetServiceRef struct{ obj.Object }
+
+// IsNil reports whether CFNetServiceRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFNetServiceRef) IsNil() bool { return h.Object == nil }
+
+// CFNotificationCenterRef is a handle for the opaque CFNotificationCenterRef type.
+type CFNotificationCenterRef struct{ obj.Object }
+
+// IsNil reports whether CFNotificationCenterRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFNotificationCenterRef) IsNil() bool { return h.Object == nil }
+
+// CFNullRef is a handle for the opaque CFNullRef type.
+type CFNullRef struct{ obj.Object }
+
+// IsNil reports whether CFNullRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFNullRef) IsNil() bool { return h.Object == nil }
+
+// CFNumberFormatterRef is a handle for the opaque CFNumberFormatterRef type.
+type CFNumberFormatterRef struct{ obj.Object }
+
+// IsNil reports whether CFNumberFormatterRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFNumberFormatterRef) IsNil() bool { return h.Object == nil }
+
+// CFNumberRef is a handle for the opaque CFNumberRef type.
+type CFNumberRef struct{ obj.Object }
+
+// IsNil reports whether CFNumberRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFNumberRef) IsNil() bool { return h.Object == nil }
+
+// CFPlugInInstanceRef is a handle for the opaque CFPlugInInstanceRef type.
+type CFPlugInInstanceRef struct{ obj.Object }
+
+// IsNil reports whether CFPlugInInstanceRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFPlugInInstanceRef) IsNil() bool { return h.Object == nil }
+
+// CFPlugInRef is a handle for the opaque CFPlugInRef type.
+type CFPlugInRef struct{ obj.Object }
+
+// IsNil reports whether CFPlugInRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFPlugInRef) IsNil() bool { return h.Object == nil }
+
+// CFPropertyListRef is a handle for the opaque CFPropertyListRef type.
+type CFPropertyListRef struct{ obj.Object }
+
+// IsNil reports whether CFPropertyListRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFPropertyListRef) IsNil() bool { return h.Object == nil }
+
+// CFReadStreamRef is a handle for the opaque CFReadStreamRef type.
+type CFReadStreamRef struct{ obj.Object }
+
+// IsNil reports whether CFReadStreamRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFReadStreamRef) IsNil() bool { return h.Object == nil }
+
+// CFRunLoopObserverRef is a handle for the opaque CFRunLoopObserverRef type.
+type CFRunLoopObserverRef struct{ obj.Object }
+
+// IsNil reports whether CFRunLoopObserverRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFRunLoopObserverRef) IsNil() bool { return h.Object == nil }
+
+// CFRunLoopRef is a handle for the opaque CFRunLoopRef type.
+type CFRunLoopRef struct{ obj.Object }
+
+// IsNil reports whether CFRunLoopRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFRunLoopRef) IsNil() bool { return h.Object == nil }
+
+// CFRunLoopSourceRef is a handle for the opaque CFRunLoopSourceRef type.
+type CFRunLoopSourceRef struct{ obj.Object }
+
+// IsNil reports whether CFRunLoopSourceRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFRunLoopSourceRef) IsNil() bool { return h.Object == nil }
+
+// CFRunLoopTimerRef is a handle for the opaque CFRunLoopTimerRef type.
+type CFRunLoopTimerRef struct{ obj.Object }
+
+// IsNil reports whether CFRunLoopTimerRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFRunLoopTimerRef) IsNil() bool { return h.Object == nil }
+
+// CFSetRef is a handle for the opaque CFSetRef type.
+type CFSetRef struct{ obj.Object }
+
+// IsNil reports whether CFSetRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFSetRef) IsNil() bool { return h.Object == nil }
+
+// CFSocketRef is a handle for the opaque CFSocketRef type.
+type CFSocketRef struct{ obj.Object }
+
+// IsNil reports whether CFSocketRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFSocketRef) IsNil() bool { return h.Object == nil }
+
+// CFStringRef is a handle for the opaque CFStringRef type.
+type CFStringRef struct{ obj.Object }
+
+// IsNil reports whether CFStringRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFStringRef) IsNil() bool { return h.Object == nil }
+
+// CFStringTokenizerRef is a handle for the opaque CFStringTokenizerRef type.
+type CFStringTokenizerRef struct{ obj.Object }
+
+// IsNil reports whether CFStringTokenizerRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFStringTokenizerRef) IsNil() bool { return h.Object == nil }
+
+// CFTimeZoneRef is a handle for the opaque CFTimeZoneRef type.
+type CFTimeZoneRef struct{ obj.Object }
+
+// IsNil reports whether CFTimeZoneRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFTimeZoneRef) IsNil() bool { return h.Object == nil }
+
+// CFTreeRef is a handle for the opaque CFTreeRef type.
+type CFTreeRef struct{ obj.Object }
+
+// IsNil reports whether CFTreeRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFTreeRef) IsNil() bool { return h.Object == nil }
+
+// CFTypeRef is a handle for the opaque CFTypeRef type.
+type CFTypeRef struct{ obj.Object }
+
+// IsNil reports whether CFTypeRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFTypeRef) IsNil() bool { return h.Object == nil }
+
+// CFURLEnumeratorRef is a handle for the opaque CFURLEnumeratorRef type.
+type CFURLEnumeratorRef struct{ obj.Object }
+
+// IsNil reports whether CFURLEnumeratorRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFURLEnumeratorRef) IsNil() bool { return h.Object == nil }
+
+// CFURLRef is a handle for the opaque CFURLRef type.
+type CFURLRef struct{ obj.Object }
+
+// IsNil reports whether CFURLRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFURLRef) IsNil() bool { return h.Object == nil }
+
+// CFUUIDRef is a handle for the opaque CFUUIDRef type.
+type CFUUIDRef struct{ obj.Object }
+
+// IsNil reports whether CFUUIDRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFUUIDRef) IsNil() bool { return h.Object == nil }
+
+// CFUserNotificationRef is a handle for the opaque CFUserNotificationRef type.
+type CFUserNotificationRef struct{ obj.Object }
+
+// IsNil reports whether CFUserNotificationRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFUserNotificationRef) IsNil() bool { return h.Object == nil }
+
+// CFWriteStreamRef is a handle for the opaque CFWriteStreamRef type.
+type CFWriteStreamRef struct{ obj.Object }
+
+// IsNil reports whether CFWriteStreamRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFWriteStreamRef) IsNil() bool { return h.Object == nil }
+
+// CFXMLNodeRef is a handle for the opaque CFXMLNodeRef type.
+type CFXMLNodeRef struct{ obj.Object }
+
+// IsNil reports whether CFXMLNodeRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFXMLNodeRef) IsNil() bool { return h.Object == nil }
+
+// CFXMLParserRef is a handle for the opaque CFXMLParserRef type.
+type CFXMLParserRef struct{ obj.Object }
+
+// IsNil reports whether CFXMLParserRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFXMLParserRef) IsNil() bool { return h.Object == nil }
+
+// CFXMLTreeRef is a handle for the opaque CFXMLTreeRef type.
+type CFXMLTreeRef struct{ obj.Object }
+
+// IsNil reports whether CFXMLTreeRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CFXMLTreeRef) IsNil() bool { return h.Object == nil }
+
+// ObjcZoneT is a handle for the opaque objc_zone_t type.
+type ObjcZoneT struct{ obj.Object }
+
+// IsNil reports whether ObjcZoneT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ObjcZoneT) IsNil() bool { return h.Object == nil }

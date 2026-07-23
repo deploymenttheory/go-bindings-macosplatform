@@ -7,6 +7,8 @@ package icadevices
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -236,12 +238,12 @@ func ICASendNotificationAndWaitForReply(pb unsafe.Pointer) int16 {
 var _fnICAShowDeviceBrowser func(objc.ID) int16
 
 // ICAShowDeviceBrowser calls the ICADevices framework function ICAShowDeviceBrowser.
-func ICAShowDeviceBrowser(options obj.Object) int16 {
+func ICAShowDeviceBrowser(options corefoundation.CFDictionaryRef) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICAShowDeviceBrowser == nil {
 		ebipurego.RegisterLibFunc(&_fnICAShowDeviceBrowser, _lib, "ICAShowDeviceBrowser")
 	}
-	return _fnICAShowDeviceBrowser(objref.IDOf(options))
+	return _fnICAShowDeviceBrowser(objref.IDOf(options.Object))
 }
 
 var _fnICAUnloadDeviceModule func(unsafe.Pointer, unsafe.Pointer) int16
@@ -269,34 +271,34 @@ func ICAUploadFile(pb unsafe.Pointer, completion unsafe.Pointer) int16 {
 var _fnICDAddBandInfoToNotificationDictionary func(objc.ID, int, int, int, int, int, int, int, int, int, int, int, unsafe.Pointer) int16
 
 // ICDAddBandInfoToNotificationDictionary calls the ICADevices framework function ICDAddBandInfoToNotificationDictionary.
-func ICDAddBandInfoToNotificationDictionary(dict obj.Object, width int, height int, bitsPerPixel int, bitsPerComponent int, numComponents int, endianness int, pixelDataType int, bytesPerRow int, dataStartRow int, dataNumberOfRows int, dataSize int, dataBuffer unsafe.Pointer) int16 {
+func ICDAddBandInfoToNotificationDictionary(dict corefoundation.CFMutableDictionaryRef, width int, height int, bitsPerPixel int, bitsPerComponent int, numComponents int, endianness int, pixelDataType int, bytesPerRow int, dataStartRow int, dataNumberOfRows int, dataSize int, dataBuffer unsafe.Pointer) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICDAddBandInfoToNotificationDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnICDAddBandInfoToNotificationDictionary, _lib, "ICDAddBandInfoToNotificationDictionary")
 	}
-	return _fnICDAddBandInfoToNotificationDictionary(objref.IDOf(dict), width, height, bitsPerPixel, bitsPerComponent, numComponents, endianness, pixelDataType, bytesPerRow, dataStartRow, dataNumberOfRows, dataSize, dataBuffer)
+	return _fnICDAddBandInfoToNotificationDictionary(objref.IDOf(dict.Object), width, height, bitsPerPixel, bitsPerComponent, numComponents, endianness, pixelDataType, bytesPerRow, dataStartRow, dataNumberOfRows, dataSize, dataBuffer)
 }
 
 var _fnICDAddImageInfoToNotificationDictionary func(objc.ID, int, int, int, int, int, int, unsafe.Pointer) int16
 
 // ICDAddImageInfoToNotificationDictionary calls the ICADevices framework function ICDAddImageInfoToNotificationDictionary.
-func ICDAddImageInfoToNotificationDictionary(dict obj.Object, width int, height int, bytesPerRow int, dataStartRow int, dataNumberOfRows int, dataSize int, dataBuffer unsafe.Pointer) int16 {
+func ICDAddImageInfoToNotificationDictionary(dict corefoundation.CFMutableDictionaryRef, width int, height int, bytesPerRow int, dataStartRow int, dataNumberOfRows int, dataSize int, dataBuffer unsafe.Pointer) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICDAddImageInfoToNotificationDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnICDAddImageInfoToNotificationDictionary, _lib, "ICDAddImageInfoToNotificationDictionary")
 	}
-	return _fnICDAddImageInfoToNotificationDictionary(objref.IDOf(dict), width, height, bytesPerRow, dataStartRow, dataNumberOfRows, dataSize, dataBuffer)
+	return _fnICDAddImageInfoToNotificationDictionary(objref.IDOf(dict.Object), width, height, bytesPerRow, dataStartRow, dataNumberOfRows, dataSize, dataBuffer)
 }
 
 var _fnICDConnectBluetoothDevice func(objc.ID) int16
 
 // ICDConnectBluetoothDevice calls the ICADevices framework function ICDConnectBluetoothDevice.
-func ICDConnectBluetoothDevice(params obj.Object) int16 {
+func ICDConnectBluetoothDevice(params corefoundation.CFDictionaryRef) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICDConnectBluetoothDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnICDConnectBluetoothDevice, _lib, "ICDConnectBluetoothDevice")
 	}
-	return _fnICDConnectBluetoothDevice(objref.IDOf(params))
+	return _fnICDConnectBluetoothDevice(objref.IDOf(params.Object))
 }
 
 var _fnICDConnectFWDevice func(uint64) int16
@@ -324,12 +326,12 @@ func ICDConnectFWDeviceWithIORegPath(guid uint64, ioregPath string) int16 {
 var _fnICDConnectTCPIPDevice func(objc.ID) int16
 
 // ICDConnectTCPIPDevice calls the ICADevices framework function ICDConnectTCPIPDevice.
-func ICDConnectTCPIPDevice(params obj.Object) int16 {
+func ICDConnectTCPIPDevice(params corefoundation.CFDictionaryRef) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICDConnectTCPIPDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnICDConnectTCPIPDevice, _lib, "ICDConnectTCPIPDevice")
 	}
-	return _fnICDConnectTCPIPDevice(objref.IDOf(params))
+	return _fnICDConnectTCPIPDevice(objref.IDOf(params.Object))
 }
 
 var _fnICDConnectUSBDevice func(int) int16
@@ -368,13 +370,13 @@ func ICDCopyDeviceInfoDictionary(deviceName string, theDict unsafe.Pointer) int1
 var _fnICDCreateColorSpace func(int, int, int, objc.ID, objc.ID, string) objc.ID
 
 // ICDCreateColorSpace calls the ICADevices framework function ICDCreateColorSpace.
-func ICDCreateColorSpace(bitsPerPixel int, samplesPerPixel int, icaObject int, colorSyncMode obj.Object, abstractProfile obj.Object, tmpProfilePath string) obj.Object {
+func ICDCreateColorSpace(bitsPerPixel int, samplesPerPixel int, icaObject int, colorSyncMode corefoundation.CFStringRef, abstractProfile corefoundation.CFDataRef, tmpProfilePath string) coregraphics.CGColorSpaceRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICDCreateColorSpace == nil {
 		ebipurego.RegisterLibFunc(&_fnICDCreateColorSpace, _lib, "ICDCreateColorSpace")
 	}
-	_ret := _fnICDCreateColorSpace(bitsPerPixel, samplesPerPixel, icaObject, objref.IDOf(colorSyncMode), objref.IDOf(abstractProfile), tmpProfilePath)
-	return obj.Wrap(_ret)
+	_ret := _fnICDCreateColorSpace(bitsPerPixel, samplesPerPixel, icaObject, objref.IDOf(colorSyncMode.Object), objref.IDOf(abstractProfile.Object), tmpProfilePath)
+	return coregraphics.CGColorSpaceRef{obj.Wrap(_ret)}
 }
 
 var _fnICDCreateEventDataCookie func(int, unsafe.Pointer) int16
@@ -415,12 +417,12 @@ func ICDCreateICAThumbnailFromIconRef(iconRef obj.Object, thumbnail unsafe.Point
 var _fnICDDisconnectBluetoothDevice func(objc.ID) int16
 
 // ICDDisconnectBluetoothDevice calls the ICADevices framework function ICDDisconnectBluetoothDevice.
-func ICDDisconnectBluetoothDevice(params obj.Object) int16 {
+func ICDDisconnectBluetoothDevice(params corefoundation.CFDictionaryRef) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICDDisconnectBluetoothDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnICDDisconnectBluetoothDevice, _lib, "ICDDisconnectBluetoothDevice")
 	}
-	return _fnICDDisconnectBluetoothDevice(objref.IDOf(params))
+	return _fnICDDisconnectBluetoothDevice(objref.IDOf(params.Object))
 }
 
 var _fnICDDisconnectFWDevice func(uint64) int16
@@ -448,12 +450,12 @@ func ICDDisconnectFWDeviceWithIORegPath(guid uint64, ioregPath string) int16 {
 var _fnICDDisconnectTCPIPDevice func(objc.ID) int16
 
 // ICDDisconnectTCPIPDevice calls the ICADevices framework function ICDDisconnectTCPIPDevice.
-func ICDDisconnectTCPIPDevice(params obj.Object) int16 {
+func ICDDisconnectTCPIPDevice(params corefoundation.CFDictionaryRef) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICDDisconnectTCPIPDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnICDDisconnectTCPIPDevice, _lib, "ICDDisconnectTCPIPDevice")
 	}
-	return _fnICDDisconnectTCPIPDevice(objref.IDOf(params))
+	return _fnICDDisconnectTCPIPDevice(objref.IDOf(params.Object))
 }
 
 var _fnICDDisconnectUSBDevice func(int) int16
@@ -549,12 +551,12 @@ func ICDNewObjectInfoCreated(parentInfo unsafe.Pointer, index int) (result int16
 var _fnICDScannerConnectBluetoothDevice func(objc.ID) int16
 
 // ICDScannerConnectBluetoothDevice calls the ICADevices framework function ICDScannerConnectBluetoothDevice.
-func ICDScannerConnectBluetoothDevice(params obj.Object) int16 {
+func ICDScannerConnectBluetoothDevice(params corefoundation.CFDictionaryRef) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICDScannerConnectBluetoothDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnICDScannerConnectBluetoothDevice, _lib, "ICDScannerConnectBluetoothDevice")
 	}
-	return _fnICDScannerConnectBluetoothDevice(objref.IDOf(params))
+	return _fnICDScannerConnectBluetoothDevice(objref.IDOf(params.Object))
 }
 
 var _fnICDScannerConnectFWDevice func(uint64) int16
@@ -582,12 +584,12 @@ func ICDScannerConnectFWDeviceWithIORegPath(guid uint64, ioregPath string) int16
 var _fnICDScannerConnectTCPIPDevice func(objc.ID) int16
 
 // ICDScannerConnectTCPIPDevice calls the ICADevices framework function ICDScannerConnectTCPIPDevice.
-func ICDScannerConnectTCPIPDevice(params obj.Object) int16 {
+func ICDScannerConnectTCPIPDevice(params corefoundation.CFDictionaryRef) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICDScannerConnectTCPIPDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnICDScannerConnectTCPIPDevice, _lib, "ICDScannerConnectTCPIPDevice")
 	}
-	return _fnICDScannerConnectTCPIPDevice(objref.IDOf(params))
+	return _fnICDScannerConnectTCPIPDevice(objref.IDOf(params.Object))
 }
 
 var _fnICDScannerConnectUSBDevice func(int) int16
@@ -650,12 +652,12 @@ func ICDScannerCreateICAThumbnailFromICNS(fileName string, thumbnail unsafe.Poin
 var _fnICDScannerDisconnectBluetoothDevice func(objc.ID) int16
 
 // ICDScannerDisconnectBluetoothDevice calls the ICADevices framework function ICDScannerDisconnectBluetoothDevice.
-func ICDScannerDisconnectBluetoothDevice(params obj.Object) int16 {
+func ICDScannerDisconnectBluetoothDevice(params corefoundation.CFDictionaryRef) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICDScannerDisconnectBluetoothDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnICDScannerDisconnectBluetoothDevice, _lib, "ICDScannerDisconnectBluetoothDevice")
 	}
-	return _fnICDScannerDisconnectBluetoothDevice(objref.IDOf(params))
+	return _fnICDScannerDisconnectBluetoothDevice(objref.IDOf(params.Object))
 }
 
 var _fnICDScannerDisconnectFWDevice func(uint64) int16
@@ -683,12 +685,12 @@ func ICDScannerDisconnectFWDeviceWithIORegPath(guid uint64, ioregPath string) in
 var _fnICDScannerDisconnectTCPIPDevice func(objc.ID) int16
 
 // ICDScannerDisconnectTCPIPDevice calls the ICADevices framework function ICDScannerDisconnectTCPIPDevice.
-func ICDScannerDisconnectTCPIPDevice(params obj.Object) int16 {
+func ICDScannerDisconnectTCPIPDevice(params corefoundation.CFDictionaryRef) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICDScannerDisconnectTCPIPDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnICDScannerDisconnectTCPIPDevice, _lib, "ICDScannerDisconnectTCPIPDevice")
 	}
-	return _fnICDScannerDisconnectTCPIPDevice(objref.IDOf(params))
+	return _fnICDScannerDisconnectTCPIPDevice(objref.IDOf(params.Object))
 }
 
 var _fnICDScannerDisconnectUSBDevice func(int) int16

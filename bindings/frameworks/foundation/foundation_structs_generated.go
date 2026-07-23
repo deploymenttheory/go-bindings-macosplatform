@@ -6,6 +6,8 @@ package foundation
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // A structure that defines the three-by-three matrix that performs an affine transform between two coordinate systems.
@@ -96,8 +98,6 @@ type NSSwappedFloat struct {
 	V uint32
 }
 
-type NSZone struct{}
-
 // An opaque type that represents an Objective-C class.
 type ObjcClass struct{}
 
@@ -111,3 +111,31 @@ type ObjcSelector struct{}
 
 // Id is an alias for the objc_object value type.
 type Id = *ObjcObject
+
+// NSZone is a handle for the opaque _NSZone type.
+type NSZone struct{ obj.Object }
+
+// IsNil reports whether NSZone is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h NSZone) IsNil() bool { return h.Object == nil }
+
+// Class is a handle for the opaque Class type.
+type Class struct{ obj.Object }
+
+// IsNil reports whether Class is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Class) IsNil() bool { return h.Object == nil }
+
+// NSAppleEventManagerSuspensionID is a handle for the opaque NSAppleEventManagerSuspensionID type.
+type NSAppleEventManagerSuspensionID struct{ obj.Object }
+
+// IsNil reports whether NSAppleEventManagerSuspensionID is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h NSAppleEventManagerSuspensionID) IsNil() bool { return h.Object == nil }
+
+// SEL is a handle for the opaque SEL type.
+type SEL struct{ obj.Object }
+
+// IsNil reports whether SEL is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SEL) IsNil() bool { return h.Object == nil }

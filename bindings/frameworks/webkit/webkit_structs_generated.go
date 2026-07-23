@@ -4,6 +4,20 @@
 
 package webkit
 
-type DOMObjectInternal struct{}
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
 
-type WebPreferencesPrivate struct{}
+// DOMObjectInternal is a handle for the opaque DOMObjectInternal type.
+type DOMObjectInternal struct{ obj.Object }
+
+// IsNil reports whether DOMObjectInternal is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DOMObjectInternal) IsNil() bool { return h.Object == nil }
+
+// WebPreferencesPrivate is a handle for the opaque WebPreferencesPrivate type.
+type WebPreferencesPrivate struct{ obj.Object }
+
+// IsNil reports whether WebPreferencesPrivate is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h WebPreferencesPrivate) IsNil() bool { return h.Object == nil }

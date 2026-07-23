@@ -4,8 +4,27 @@
 
 package installerplugins
 
-type InstallerPane_Private struct{}
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
 
-type InstallerSection_Private struct{}
+// InstallerPane_Private is a handle for the opaque InstallerPane_Private type.
+type InstallerPane_Private struct{ obj.Object }
 
-type InstallerState_Private struct{}
+// IsNil reports whether InstallerPane_Private is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h InstallerPane_Private) IsNil() bool { return h.Object == nil }
+
+// InstallerSection_Private is a handle for the opaque InstallerSection_Private type.
+type InstallerSection_Private struct{ obj.Object }
+
+// IsNil reports whether InstallerSection_Private is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h InstallerSection_Private) IsNil() bool { return h.Object == nil }
+
+// InstallerState_Private is a handle for the opaque InstallerState_Private type.
+type InstallerState_Private struct{ obj.Object }
+
+// IsNil reports whether InstallerState_Private is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h InstallerState_Private) IsNil() bool { return h.Object == nil }

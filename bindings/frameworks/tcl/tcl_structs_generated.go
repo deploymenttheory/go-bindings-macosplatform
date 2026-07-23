@@ -6,9 +6,9 @@ package tcl
 
 import (
 	"unsafe"
-)
 
-type MpInt struct{}
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
 
 type Stat struct{}
 
@@ -907,3 +907,157 @@ type Tcl_Value struct {
 type Tcl_Var_ struct{}
 
 type Utimbuf struct{}
+
+// MpInt is a handle for the opaque mp_int type.
+type MpInt struct{ obj.Object }
+
+// IsNil reports whether MpInt is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h MpInt) IsNil() bool { return h.Object == nil }
+
+// Tcl_AsyncHandler is a handle for the opaque Tcl_AsyncHandler type.
+type Tcl_AsyncHandler struct{ obj.Object }
+
+// IsNil reports whether Tcl_AsyncHandler is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_AsyncHandler) IsNil() bool { return h.Object == nil }
+
+// Tcl_Channel is a handle for the opaque Tcl_Channel type.
+type Tcl_Channel struct{ obj.Object }
+
+// IsNil reports whether Tcl_Channel is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_Channel) IsNil() bool { return h.Object == nil }
+
+// Tcl_ChannelTypeVersion is a handle for the opaque Tcl_ChannelTypeVersion type.
+type Tcl_ChannelTypeVersion struct{ obj.Object }
+
+// IsNil reports whether Tcl_ChannelTypeVersion is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_ChannelTypeVersion) IsNil() bool { return h.Object == nil }
+
+// Tcl_Command is a handle for the opaque Tcl_Command type.
+type Tcl_Command struct{ obj.Object }
+
+// IsNil reports whether Tcl_Command is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_Command) IsNil() bool { return h.Object == nil }
+
+// Tcl_Condition is a handle for the opaque Tcl_Condition type.
+type Tcl_Condition struct{ obj.Object }
+
+// IsNil reports whether Tcl_Condition is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_Condition) IsNil() bool { return h.Object == nil }
+
+// Tcl_Dict is a handle for the opaque Tcl_Dict type.
+type Tcl_Dict struct{ obj.Object }
+
+// IsNil reports whether Tcl_Dict is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_Dict) IsNil() bool { return h.Object == nil }
+
+// Tcl_Encoding is a handle for the opaque Tcl_Encoding type.
+type Tcl_Encoding struct{ obj.Object }
+
+// IsNil reports whether Tcl_Encoding is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_Encoding) IsNil() bool { return h.Object == nil }
+
+// Tcl_EncodingState is a handle for the opaque Tcl_EncodingState type.
+type Tcl_EncodingState struct{ obj.Object }
+
+// IsNil reports whether Tcl_EncodingState is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_EncodingState) IsNil() bool { return h.Object == nil }
+
+// Tcl_FSVersion is a handle for the opaque Tcl_FSVersion type.
+type Tcl_FSVersion struct{ obj.Object }
+
+// IsNil reports whether Tcl_FSVersion is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_FSVersion) IsNil() bool { return h.Object == nil }
+
+// Tcl_InterpState is a handle for the opaque Tcl_InterpState type.
+type Tcl_InterpState struct{ obj.Object }
+
+// IsNil reports whether Tcl_InterpState is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_InterpState) IsNil() bool { return h.Object == nil }
+
+// Tcl_LoadHandle is a handle for the opaque Tcl_LoadHandle type.
+type Tcl_LoadHandle struct{ obj.Object }
+
+// IsNil reports whether Tcl_LoadHandle is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_LoadHandle) IsNil() bool { return h.Object == nil }
+
+// Tcl_Mutex is a handle for the opaque Tcl_Mutex type.
+type Tcl_Mutex struct{ obj.Object }
+
+// IsNil reports whether Tcl_Mutex is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_Mutex) IsNil() bool { return h.Object == nil }
+
+// Tcl_OldStat_ is a handle for the opaque Tcl_OldStat_ type.
+type Tcl_OldStat_ struct{ obj.Object }
+
+// IsNil reports whether Tcl_OldStat_ is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_OldStat_) IsNil() bool { return h.Object == nil }
+
+// Tcl_Pid is a handle for the opaque Tcl_Pid type.
+type Tcl_Pid struct{ obj.Object }
+
+// IsNil reports whether Tcl_Pid is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_Pid) IsNil() bool { return h.Object == nil }
+
+// Tcl_RegExp is a handle for the opaque Tcl_RegExp type.
+type Tcl_RegExp struct{ obj.Object }
+
+// IsNil reports whether Tcl_RegExp is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_RegExp) IsNil() bool { return h.Object == nil }
+
+// Tcl_StatBuf is a handle for the opaque Tcl_StatBuf type.
+type Tcl_StatBuf struct{ obj.Object }
+
+// IsNil reports whether Tcl_StatBuf is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_StatBuf) IsNil() bool { return h.Object == nil }
+
+// Tcl_ThreadDataKey is a handle for the opaque Tcl_ThreadDataKey type.
+type Tcl_ThreadDataKey struct{ obj.Object }
+
+// IsNil reports whether Tcl_ThreadDataKey is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_ThreadDataKey) IsNil() bool { return h.Object == nil }
+
+// Tcl_ThreadId is a handle for the opaque Tcl_ThreadId type.
+type Tcl_ThreadId struct{ obj.Object }
+
+// IsNil reports whether Tcl_ThreadId is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_ThreadId) IsNil() bool { return h.Object == nil }
+
+// Tcl_TimerToken is a handle for the opaque Tcl_TimerToken type.
+type Tcl_TimerToken struct{ obj.Object }
+
+// IsNil reports whether Tcl_TimerToken is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_TimerToken) IsNil() bool { return h.Object == nil }
+
+// Tcl_Trace is a handle for the opaque Tcl_Trace type.
+type Tcl_Trace struct{ obj.Object }
+
+// IsNil reports whether Tcl_Trace is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_Trace) IsNil() bool { return h.Object == nil }
+
+// Tcl_Var is a handle for the opaque Tcl_Var type.
+type Tcl_Var struct{ obj.Object }
+
+// IsNil reports whether Tcl_Var is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Tcl_Var) IsNil() bool { return h.Object == nil }

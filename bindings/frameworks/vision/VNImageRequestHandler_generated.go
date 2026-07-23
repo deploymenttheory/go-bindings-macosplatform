@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -84,11 +85,11 @@ func NewImageRequestHandlerWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, 
 }
 
 // NewImageRequestHandlerWithCGImageOptions creates a handler to be used for performing requests on Core Graphics images.
-func NewImageRequestHandlerWithCGImageOptions(image obj.Object, options obj.Object) *ImageRequestHandler {
+func NewImageRequestHandlerWithCGImageOptions(image coregraphics.CGImageRef, options obj.Object) *ImageRequestHandler {
 	defer runtime.KeepAlive(image)
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNImageRequestHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:options:"), objref.IDOf(image), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:options:"), objref.IDOf(image.Object), objref.IDOf(options))
 	return imageRequestHandlerAdopt(_id)
 }
 

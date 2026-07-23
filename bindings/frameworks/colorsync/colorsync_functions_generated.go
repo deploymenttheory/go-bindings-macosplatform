@@ -7,6 +7,7 @@ package colorsync
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -17,13 +18,13 @@ import (
 // ColorSyncProfileCopyData reports an error if the ColorSync framework function ColorSyncProfileCopyData fails.
 var _fnColorSyncProfileCopyData func(objc.ID, unsafe.Pointer) objc.ID
 
-func ColorSyncProfileCopyData(prof obj.Object) (obj.Object, error) {
+func ColorSyncProfileCopyData(prof ColorSyncProfileRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCopyData == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCopyData, _lib, "ColorSyncProfileCopyData")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnColorSyncProfileCopyData(objref.IDOf(prof), unsafe.Pointer(&_cfErr))
+	_r := _fnColorSyncProfileCopyData(objref.IDOf(prof.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -33,13 +34,13 @@ func ColorSyncProfileCopyData(prof obj.Object) (obj.Object, error) {
 // ColorSyncProfileCreate reports an error if the ColorSync framework function ColorSyncProfileCreate fails.
 var _fnColorSyncProfileCreate func(objc.ID, unsafe.Pointer) objc.ID
 
-func ColorSyncProfileCreate(data obj.Object) (obj.Object, error) {
+func ColorSyncProfileCreate(data corefoundation.CFDataRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreate, _lib, "ColorSyncProfileCreate")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnColorSyncProfileCreate(objref.IDOf(data), unsafe.Pointer(&_cfErr))
+	_r := _fnColorSyncProfileCreate(objref.IDOf(data.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -49,13 +50,13 @@ func ColorSyncProfileCreate(data obj.Object) (obj.Object, error) {
 // ColorSyncProfileCreateWithURL reports an error if the ColorSync framework function ColorSyncProfileCreateWithURL fails.
 var _fnColorSyncProfileCreateWithURL func(objc.ID, unsafe.Pointer) objc.ID
 
-func ColorSyncProfileCreateWithURL(url obj.Object) (obj.Object, error) {
+func ColorSyncProfileCreateWithURL(url corefoundation.CFURLRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreateWithURL == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateWithURL, _lib, "ColorSyncProfileCreateWithURL")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnColorSyncProfileCreateWithURL(objref.IDOf(url), unsafe.Pointer(&_cfErr))
+	_r := _fnColorSyncProfileCreateWithURL(objref.IDOf(url.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -65,13 +66,13 @@ func ColorSyncProfileCreateWithURL(url obj.Object) (obj.Object, error) {
 // ColorSyncProfileCreateWithURLAndOptions reports an error if the ColorSync framework function ColorSyncProfileCreateWithURLAndOptions fails.
 var _fnColorSyncProfileCreateWithURLAndOptions func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ColorSyncProfileCreateWithURLAndOptions(url obj.Object, options obj.Object) (obj.Object, error) {
+func ColorSyncProfileCreateWithURLAndOptions(url corefoundation.CFURLRef, options corefoundation.CFDictionaryRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileCreateWithURLAndOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileCreateWithURLAndOptions, _lib, "ColorSyncProfileCreateWithURLAndOptions")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnColorSyncProfileCreateWithURLAndOptions(objref.IDOf(url), objref.IDOf(options), unsafe.Pointer(&_cfErr))
+	_r := _fnColorSyncProfileCreateWithURLAndOptions(objref.IDOf(url.Object), objref.IDOf(options.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -81,13 +82,13 @@ func ColorSyncProfileCreateWithURLAndOptions(url obj.Object, options obj.Object)
 // ColorSyncProfileEstimateGamma reports an error if the ColorSync framework function ColorSyncProfileEstimateGamma fails.
 var _fnColorSyncProfileEstimateGamma func(objc.ID, unsafe.Pointer) objc.ID
 
-func ColorSyncProfileEstimateGamma(prof obj.Object) (obj.Object, error) {
+func ColorSyncProfileEstimateGamma(prof ColorSyncProfileRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileEstimateGamma == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileEstimateGamma, _lib, "ColorSyncProfileEstimateGamma")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnColorSyncProfileEstimateGamma(objref.IDOf(prof), unsafe.Pointer(&_cfErr))
+	_r := _fnColorSyncProfileEstimateGamma(objref.IDOf(prof.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -113,13 +114,13 @@ func ColorSyncProfileEstimateGammaWithDisplayID(displayID int) (obj.Object, erro
 // ColorSyncProfileGetURL reports an error if the ColorSync framework function ColorSyncProfileGetURL fails.
 var _fnColorSyncProfileGetURL func(objc.ID, unsafe.Pointer) objc.ID
 
-func ColorSyncProfileGetURL(prof obj.Object) (obj.Object, error) {
+func ColorSyncProfileGetURL(prof ColorSyncProfileRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileGetURL == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileGetURL, _lib, "ColorSyncProfileGetURL")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnColorSyncProfileGetURL(objref.IDOf(prof), unsafe.Pointer(&_cfErr))
+	_r := _fnColorSyncProfileGetURL(objref.IDOf(prof.Object), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -129,13 +130,13 @@ func ColorSyncProfileGetURL(prof obj.Object) (obj.Object, error) {
 // ColorSyncProfileInstall reports an error if the ColorSync framework function ColorSyncProfileInstall fails.
 var _fnColorSyncProfileInstall func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ColorSyncProfileInstall(profile obj.Object, domain obj.Object, subpath obj.Object) error {
+func ColorSyncProfileInstall(profile ColorSyncProfileRef, domain corefoundation.CFStringRef, subpath corefoundation.CFStringRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileInstall == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileInstall, _lib, "ColorSyncProfileInstall")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnColorSyncProfileInstall(objref.IDOf(profile), objref.IDOf(domain), objref.IDOf(subpath), unsafe.Pointer(&_cfErr))
+	_ok := _fnColorSyncProfileInstall(objref.IDOf(profile.Object), objref.IDOf(domain.Object), objref.IDOf(subpath.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -145,13 +146,13 @@ func ColorSyncProfileInstall(profile obj.Object, domain obj.Object, subpath obj.
 // ColorSyncProfileUninstall reports an error if the ColorSync framework function ColorSyncProfileUninstall fails.
 var _fnColorSyncProfileUninstall func(objc.ID, unsafe.Pointer) bool
 
-func ColorSyncProfileUninstall(profile obj.Object) error {
+func ColorSyncProfileUninstall(profile ColorSyncProfileRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileUninstall == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileUninstall, _lib, "ColorSyncProfileUninstall")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnColorSyncProfileUninstall(objref.IDOf(profile), unsafe.Pointer(&_cfErr))
+	_ok := _fnColorSyncProfileUninstall(objref.IDOf(profile.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -161,13 +162,13 @@ func ColorSyncProfileUninstall(profile obj.Object) error {
 // ColorSyncProfileVerify reports an error if the ColorSync framework function ColorSyncProfileVerify fails.
 var _fnColorSyncProfileVerify func(objc.ID, unsafe.Pointer, unsafe.Pointer) bool
 
-func ColorSyncProfileVerify(prof obj.Object, errors_ unsafe.Pointer) error {
+func ColorSyncProfileVerify(prof ColorSyncProfileRef, errors_ unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnColorSyncProfileVerify == nil {
 		ebipurego.RegisterLibFunc(&_fnColorSyncProfileVerify, _lib, "ColorSyncProfileVerify")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnColorSyncProfileVerify(objref.IDOf(prof), errors_, unsafe.Pointer(&_cfErr))
+	_ok := _fnColorSyncProfileVerify(objref.IDOf(prof.Object), errors_, unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}

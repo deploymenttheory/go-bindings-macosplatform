@@ -181,8 +181,8 @@ func (c *Context) SetObjectForKeyedSubscript(object obj.Object, key obj.Object) 
 }
 
 // JSGlobalContextRef returns the js global context ref.
-func (c *Context) JSGlobalContextRef() obj.Object {
+func (c *Context) JSGlobalContextRef() JSGlobalContextRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("JSGlobalContextRef"))
-	return obj.WrapUnmanaged(_r)
+	return JSGlobalContextRef{obj.WrapUnmanaged(_r)}
 }

@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -84,12 +85,12 @@ func JRSFontGetBoundingBoxesForGlyphsAndStyle(font obj.Object, tx *corefoundatio
 var _fnJRSFontGetRenderingStyleForContext func(objc.ID) uint32
 
 // JRSFontGetRenderingStyleForContext calls the JavaRuntimeSupport framework function JRSFontGetRenderingStyleForContext.
-func JRSFontGetRenderingStyleForContext(context_ obj.Object) uint32 {
+func JRSFontGetRenderingStyleForContext(context_ coregraphics.CGContextRef) uint32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSFontGetRenderingStyleForContext == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSFontGetRenderingStyleForContext, _lib, "JRSFontGetRenderingStyleForContext")
 	}
-	return _fnJRSFontGetRenderingStyleForContext(objref.IDOf(context_))
+	return _fnJRSFontGetRenderingStyleForContext(objref.IDOf(context_.Object))
 }
 
 var _fnJRSFontGetRenderingStyleForHints func(unsafe.Pointer, unsafe.Pointer) uint32
@@ -106,12 +107,12 @@ func JRSFontGetRenderingStyleForHints(fmHint unsafe.Pointer, aaHint unsafe.Point
 var _fnJRSFontSetRenderingStyleOnContext func(objc.ID, uint32)
 
 // JRSFontSetRenderingStyleOnContext calls the JavaRuntimeSupport framework function JRSFontSetRenderingStyleOnContext.
-func JRSFontSetRenderingStyleOnContext(context_ obj.Object, style uint32) {
+func JRSFontSetRenderingStyleOnContext(context_ coregraphics.CGContextRef, style uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSFontSetRenderingStyleOnContext == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSFontSetRenderingStyleOnContext, _lib, "JRSFontSetRenderingStyleOnContext")
 	}
-	_fnJRSFontSetRenderingStyleOnContext(objref.IDOf(context_), style)
+	_fnJRSFontSetRenderingStyleOnContext(objref.IDOf(context_.Object), style)
 }
 
 var _fnJRSFontStyleIsAntialiased func(uint32) bool
@@ -150,12 +151,12 @@ func JRSUIControlCreate(isFlipped uint8) unsafe.Pointer {
 var _fnJRSUIControlDraw func(unsafe.Pointer, unsafe.Pointer, objc.ID, corefoundation.CGRect)
 
 // JRSUIControlDraw calls the JavaRuntimeSupport framework function JRSUIControlDraw.
-func JRSUIControlDraw(renderer unsafe.Pointer, control unsafe.Pointer, context_ obj.Object, bounds corefoundation.CGRect) {
+func JRSUIControlDraw(renderer unsafe.Pointer, control unsafe.Pointer, context_ coregraphics.CGContextRef, bounds corefoundation.CGRect) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSUIControlDraw == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSUIControlDraw, _lib, "JRSUIControlDraw")
 	}
-	_fnJRSUIControlDraw(renderer, control, objref.IDOf(context_), bounds)
+	_fnJRSUIControlDraw(renderer, control, objref.IDOf(context_.Object), bounds)
 }
 
 var _fnJRSUIControlGetHitPart func(unsafe.Pointer, unsafe.Pointer, corefoundation.CGRect, corefoundation.CGPoint) int
@@ -337,12 +338,12 @@ func JRSUIControlSetUserInterfaceLayoutDirection(control unsafe.Pointer, value i
 var _fnJRSUIControlSetValueByKey func(unsafe.Pointer, objc.ID, objc.ID)
 
 // JRSUIControlSetValueByKey calls the JavaRuntimeSupport framework function JRSUIControlSetValueByKey.
-func JRSUIControlSetValueByKey(control unsafe.Pointer, key obj.Object, value obj.Object) {
+func JRSUIControlSetValueByKey(control unsafe.Pointer, key corefoundation.CFTypeRef, value corefoundation.CFTypeRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSUIControlSetValueByKey == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSUIControlSetValueByKey, _lib, "JRSUIControlSetValueByKey")
 	}
-	_fnJRSUIControlSetValueByKey(control, objref.IDOf(key), objref.IDOf(value))
+	_fnJRSUIControlSetValueByKey(control, objref.IDOf(key.Object), objref.IDOf(value.Object))
 }
 
 var _fnJRSUIControlSetVariant func(unsafe.Pointer, int)
@@ -392,13 +393,13 @@ func JRSUIControlShouldScrollToClick() uint8 {
 var _fnJRSUIGetKey func(int) objc.ID
 
 // JRSUIGetKey calls the JavaRuntimeSupport framework function JRSUIGetKey.
-func JRSUIGetKey(value int) obj.Object {
+func JRSUIGetKey(value int) corefoundation.CFTypeRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJRSUIGetKey == nil {
 		ebipurego.RegisterLibFunc(&_fnJRSUIGetKey, _lib, "JRSUIGetKey")
 	}
 	_ret := _fnJRSUIGetKey(value)
-	return obj.Wrap(_ret)
+	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
 }
 
 var _fnJRSUIRendererCreate func() unsafe.Pointer

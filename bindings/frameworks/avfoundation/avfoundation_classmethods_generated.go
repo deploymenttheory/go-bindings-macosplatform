@@ -1217,11 +1217,11 @@ func NotifyOfDataReadyForSampleBufferCompletionHandler(sbuf obj.Object, completi
 }
 
 // SemanticSegmentationMatteFromImageSourceAuxiliaryDataTypeDictionaryRepresentation returns a new semantic segmentation matte instance from auxiliary image information in an image file.
-func SemanticSegmentationMatteFromImageSourceAuxiliaryDataTypeDictionaryRepresentation(imageSourceAuxiliaryDataType obj.Object, imageSourceAuxiliaryDataInfoDictionary obj.Object) (result *SemanticSegmentationMatte, err error) {
+func SemanticSegmentationMatteFromImageSourceAuxiliaryDataTypeDictionaryRepresentation(imageSourceAuxiliaryDataType corefoundation.CFStringRef, imageSourceAuxiliaryDataInfoDictionary obj.Object) (result *SemanticSegmentationMatte, err error) {
 	defer runtime.KeepAlive(imageSourceAuxiliaryDataType)
 	defer runtime.KeepAlive(imageSourceAuxiliaryDataInfoDictionary)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("AVSemanticSegmentationMatte")), objc.RegisterName("semanticSegmentationMatteFromImageSourceAuxiliaryDataType:dictionaryRepresentation:error:"), objref.IDOf(imageSourceAuxiliaryDataType), objref.IDOf(imageSourceAuxiliaryDataInfoDictionary), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("AVSemanticSegmentationMatte")), objc.RegisterName("semanticSegmentationMatteFromImageSourceAuxiliaryDataType:dictionaryRepresentation:error:"), objref.IDOf(imageSourceAuxiliaryDataType.Object), objref.IDOf(imageSourceAuxiliaryDataInfoDictionary), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}

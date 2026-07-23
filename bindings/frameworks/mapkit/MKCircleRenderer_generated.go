@@ -7,6 +7,7 @@ package mapkit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -114,9 +115,9 @@ func (cr *CircleRenderer) WithShouldRasterize(shouldRasterize bool) *CircleRende
 }
 
 // WithPath sets the path representing the overlay’s shape.
-func (cr *CircleRenderer) WithPath(path obj.Object) *CircleRenderer {
+func (cr *CircleRenderer) WithPath(path coregraphics.CGPathRef) *CircleRenderer {
 	defer runtime.KeepAlive(path)
-	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setPath:"), objref.IDOf(path))
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setPath:"), objref.IDOf(path.Object))
 	return cr
 }
 

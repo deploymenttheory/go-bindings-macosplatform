@@ -7,6 +7,7 @@ package quartzcore
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
@@ -57,9 +58,9 @@ func NewKeyframeAnimation() *KeyframeAnimation {
 }
 
 // WithPath sets the path for a point-based property to follow.
-func (ka *KeyframeAnimation) WithPath(path obj.Object) *KeyframeAnimation {
+func (ka *KeyframeAnimation) WithPath(path coregraphics.CGPathRef) *KeyframeAnimation {
 	defer runtime.KeepAlive(path)
-	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setPath:"), objref.IDOf(path))
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setPath:"), objref.IDOf(path.Object))
 	return ka
 }
 
@@ -175,10 +176,10 @@ func (ka *KeyframeAnimation) SetValues(values obj.Object) {
 }
 
 // Path returns the path.
-func (ka *KeyframeAnimation) Path() obj.Object {
+func (ka *KeyframeAnimation) Path() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(ka)
 	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("path"))
-	return obj.Wrap(_r)
+	return coregraphics.CGPathRef{obj.Wrap(_r)}
 }
 
 // KeyTimes returns the key times.

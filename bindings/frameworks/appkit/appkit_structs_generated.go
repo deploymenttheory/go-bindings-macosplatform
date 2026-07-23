@@ -4,6 +4,10 @@
 
 package appkit
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 // The inset distances for views, taking the user interface layout direction into account.
 type NSDirectionalEdgeInsets struct {
 	Top      float64
@@ -12,5 +16,9 @@ type NSDirectionalEdgeInsets struct {
 	Trailing float64
 }
 
-// Information used by the system during modal sessions.
-type NSModalSession struct{}
+// NSModalSession is a handle for the opaque _NSModalSession type.
+type NSModalSession struct{ obj.Object }
+
+// IsNil reports whether NSModalSession is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h NSModalSession) IsNil() bool { return h.Object == nil }

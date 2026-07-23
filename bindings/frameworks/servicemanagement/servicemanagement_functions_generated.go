@@ -7,6 +7,7 @@ package servicemanagement
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -17,13 +18,13 @@ import (
 // SMJobBless reports an error if the ServiceManagement framework function SMJobBless fails.
 var _fnSMJobBless func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) uint8
 
-func SMJobBless(domain obj.Object, executableLabel obj.Object, auth obj.Object) error {
+func SMJobBless(domain corefoundation.CFStringRef, executableLabel corefoundation.CFStringRef, auth obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSMJobBless == nil {
 		ebipurego.RegisterLibFunc(&_fnSMJobBless, _lib, "SMJobBless")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnSMJobBless(objref.IDOf(domain), objref.IDOf(executableLabel), objref.IDOf(auth), unsafe.Pointer(&_cfErr))
+	_ok := _fnSMJobBless(objref.IDOf(domain.Object), objref.IDOf(executableLabel.Object), objref.IDOf(auth), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -33,13 +34,13 @@ func SMJobBless(domain obj.Object, executableLabel obj.Object, auth obj.Object) 
 // SMJobRemove reports an error if the ServiceManagement framework function SMJobRemove fails.
 var _fnSMJobRemove func(objc.ID, objc.ID, objc.ID, uint8, unsafe.Pointer) uint8
 
-func SMJobRemove(domain obj.Object, jobLabel obj.Object, auth obj.Object, wait uint8) error {
+func SMJobRemove(domain corefoundation.CFStringRef, jobLabel corefoundation.CFStringRef, auth obj.Object, wait uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSMJobRemove == nil {
 		ebipurego.RegisterLibFunc(&_fnSMJobRemove, _lib, "SMJobRemove")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnSMJobRemove(objref.IDOf(domain), objref.IDOf(jobLabel), objref.IDOf(auth), wait, unsafe.Pointer(&_cfErr))
+	_ok := _fnSMJobRemove(objref.IDOf(domain.Object), objref.IDOf(jobLabel.Object), objref.IDOf(auth), wait, unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -49,13 +50,13 @@ func SMJobRemove(domain obj.Object, jobLabel obj.Object, auth obj.Object, wait u
 // SMJobSubmit reports an error if the ServiceManagement framework function SMJobSubmit fails.
 var _fnSMJobSubmit func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) uint8
 
-func SMJobSubmit(domain obj.Object, job obj.Object, auth obj.Object) error {
+func SMJobSubmit(domain corefoundation.CFStringRef, job corefoundation.CFDictionaryRef, auth obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSMJobSubmit == nil {
 		ebipurego.RegisterLibFunc(&_fnSMJobSubmit, _lib, "SMJobSubmit")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnSMJobSubmit(objref.IDOf(domain), objref.IDOf(job), objref.IDOf(auth), unsafe.Pointer(&_cfErr))
+	_ok := _fnSMJobSubmit(objref.IDOf(domain.Object), objref.IDOf(job.Object), objref.IDOf(auth), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}

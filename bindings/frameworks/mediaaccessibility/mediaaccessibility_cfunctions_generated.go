@@ -7,6 +7,8 @@ package mediaaccessibility
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -16,49 +18,49 @@ import (
 var _fnMAAudibleMediaCopyPreferredCharacteristics func() objc.ID
 
 // MAAudibleMediaCopyPreferredCharacteristics calls the MediaAccessibility framework function MAAudibleMediaCopyPreferredCharacteristics.
-func MAAudibleMediaCopyPreferredCharacteristics() obj.Object {
+func MAAudibleMediaCopyPreferredCharacteristics() corefoundation.CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMAAudibleMediaCopyPreferredCharacteristics == nil {
 		ebipurego.RegisterLibFunc(&_fnMAAudibleMediaCopyPreferredCharacteristics, _lib, "MAAudibleMediaCopyPreferredCharacteristics")
 	}
 	_ret := _fnMAAudibleMediaCopyPreferredCharacteristics()
-	return obj.Wrap(_ret)
+	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
 }
 
 var _fnMACaptionAppearanceAddSelectedLanguage func(CaptionAppearanceDomain, objc.ID) bool
 
 // MACaptionAppearanceAddSelectedLanguage calls the MediaAccessibility framework function MACaptionAppearanceAddSelectedLanguage.
-func MACaptionAppearanceAddSelectedLanguage(domain CaptionAppearanceDomain, language obj.Object) bool {
+func MACaptionAppearanceAddSelectedLanguage(domain CaptionAppearanceDomain, language corefoundation.CFStringRef) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceAddSelectedLanguage == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceAddSelectedLanguage, _lib, "MACaptionAppearanceAddSelectedLanguage")
 	}
-	return _fnMACaptionAppearanceAddSelectedLanguage(domain, objref.IDOf(language))
+	return _fnMACaptionAppearanceAddSelectedLanguage(domain, objref.IDOf(language.Object))
 }
 
 var _fnMACaptionAppearanceCopyActiveProfileID func() objc.ID
 
 // MACaptionAppearanceCopyActiveProfileID calls the MediaAccessibility framework function MACaptionAppearanceCopyActiveProfileID.
-func MACaptionAppearanceCopyActiveProfileID() obj.Object {
+func MACaptionAppearanceCopyActiveProfileID() corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceCopyActiveProfileID == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyActiveProfileID, _lib, "MACaptionAppearanceCopyActiveProfileID")
 	}
 	_ret := _fnMACaptionAppearanceCopyActiveProfileID()
-	return obj.Adopt(_ret)
+	return corefoundation.CFStringRef{obj.Adopt(_ret)}
 }
 
 var _fnMACaptionAppearanceCopyBackgroundColor func(CaptionAppearanceDomain, unsafe.Pointer) objc.ID
 
 // MACaptionAppearanceCopyBackgroundColor calls the MediaAccessibility framework function MACaptionAppearanceCopyBackgroundColor.
-func MACaptionAppearanceCopyBackgroundColor(domain CaptionAppearanceDomain) (result obj.Object, behavior CaptionAppearanceBehavior) {
+func MACaptionAppearanceCopyBackgroundColor(domain CaptionAppearanceDomain) (result coregraphics.CGColorRef, behavior CaptionAppearanceBehavior) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceCopyBackgroundColor == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyBackgroundColor, _lib, "MACaptionAppearanceCopyBackgroundColor")
 	}
 	var _out0 CaptionAppearanceBehavior
 	_ret := _fnMACaptionAppearanceCopyBackgroundColor(domain, unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return coregraphics.CGColorRef{obj.Wrap(_ret)}, _out0
 }
 
 var _fnMACaptionAppearanceCopyFontDescriptorForStyle func(CaptionAppearanceDomain, unsafe.Pointer, CaptionAppearanceFontStyle) objc.ID
@@ -77,97 +79,97 @@ func MACaptionAppearanceCopyFontDescriptorForStyle(domain CaptionAppearanceDomai
 var _fnMACaptionAppearanceCopyForegroundColor func(CaptionAppearanceDomain, unsafe.Pointer) objc.ID
 
 // MACaptionAppearanceCopyForegroundColor calls the MediaAccessibility framework function MACaptionAppearanceCopyForegroundColor.
-func MACaptionAppearanceCopyForegroundColor(domain CaptionAppearanceDomain) (result obj.Object, behavior CaptionAppearanceBehavior) {
+func MACaptionAppearanceCopyForegroundColor(domain CaptionAppearanceDomain) (result coregraphics.CGColorRef, behavior CaptionAppearanceBehavior) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceCopyForegroundColor == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyForegroundColor, _lib, "MACaptionAppearanceCopyForegroundColor")
 	}
 	var _out0 CaptionAppearanceBehavior
 	_ret := _fnMACaptionAppearanceCopyForegroundColor(domain, unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return coregraphics.CGColorRef{obj.Wrap(_ret)}, _out0
 }
 
 var _fnMACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics func(CaptionAppearanceDomain) objc.ID
 
 // MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics calls the MediaAccessibility framework function MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics.
-func MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(domain CaptionAppearanceDomain) obj.Object {
+func MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(domain CaptionAppearanceDomain) corefoundation.CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics, _lib, "MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics")
 	}
 	_ret := _fnMACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(domain)
-	return obj.Wrap(_ret)
+	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
 }
 
 var _fnMACaptionAppearanceCopyProfileIDs func() objc.ID
 
 // MACaptionAppearanceCopyProfileIDs calls the MediaAccessibility framework function MACaptionAppearanceCopyProfileIDs.
-func MACaptionAppearanceCopyProfileIDs() obj.Object {
+func MACaptionAppearanceCopyProfileIDs() corefoundation.CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceCopyProfileIDs == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyProfileIDs, _lib, "MACaptionAppearanceCopyProfileIDs")
 	}
 	_ret := _fnMACaptionAppearanceCopyProfileIDs()
-	return obj.Adopt(_ret)
+	return corefoundation.CFArrayRef{obj.Adopt(_ret)}
 }
 
 var _fnMACaptionAppearanceCopyProfileName func(objc.ID) objc.ID
 
 // MACaptionAppearanceCopyProfileName calls the MediaAccessibility framework function MACaptionAppearanceCopyProfileName.
-func MACaptionAppearanceCopyProfileName(profileID obj.Object) obj.Object {
+func MACaptionAppearanceCopyProfileName(profileID corefoundation.CFStringRef) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceCopyProfileName == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyProfileName, _lib, "MACaptionAppearanceCopyProfileName")
 	}
-	_ret := _fnMACaptionAppearanceCopyProfileName(objref.IDOf(profileID))
-	return obj.Adopt(_ret)
+	_ret := _fnMACaptionAppearanceCopyProfileName(objref.IDOf(profileID.Object))
+	return corefoundation.CFStringRef{obj.Adopt(_ret)}
 }
 
 var _fnMACaptionAppearanceCopySelectedLanguages func(CaptionAppearanceDomain) objc.ID
 
 // MACaptionAppearanceCopySelectedLanguages calls the MediaAccessibility framework function MACaptionAppearanceCopySelectedLanguages.
-func MACaptionAppearanceCopySelectedLanguages(domain CaptionAppearanceDomain) obj.Object {
+func MACaptionAppearanceCopySelectedLanguages(domain CaptionAppearanceDomain) corefoundation.CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceCopySelectedLanguages == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopySelectedLanguages, _lib, "MACaptionAppearanceCopySelectedLanguages")
 	}
 	_ret := _fnMACaptionAppearanceCopySelectedLanguages(domain)
-	return obj.Wrap(_ret)
+	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
 }
 
 var _fnMACaptionAppearanceCopyWindowColor func(CaptionAppearanceDomain, unsafe.Pointer) objc.ID
 
 // MACaptionAppearanceCopyWindowColor calls the MediaAccessibility framework function MACaptionAppearanceCopyWindowColor.
-func MACaptionAppearanceCopyWindowColor(domain CaptionAppearanceDomain) (result obj.Object, behavior CaptionAppearanceBehavior) {
+func MACaptionAppearanceCopyWindowColor(domain CaptionAppearanceDomain) (result coregraphics.CGColorRef, behavior CaptionAppearanceBehavior) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceCopyWindowColor == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceCopyWindowColor, _lib, "MACaptionAppearanceCopyWindowColor")
 	}
 	var _out0 CaptionAppearanceBehavior
 	_ret := _fnMACaptionAppearanceCopyWindowColor(domain, unsafe.Pointer(&_out0))
-	return obj.Wrap(_ret), _out0
+	return coregraphics.CGColorRef{obj.Wrap(_ret)}, _out0
 }
 
 var _fnMACaptionAppearanceDidDisplayCaptions func(objc.ID)
 
 // MACaptionAppearanceDidDisplayCaptions calls the MediaAccessibility framework function MACaptionAppearanceDidDisplayCaptions.
-func MACaptionAppearanceDidDisplayCaptions(strings_ obj.Object) {
+func MACaptionAppearanceDidDisplayCaptions(strings_ corefoundation.CFArrayRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceDidDisplayCaptions == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceDidDisplayCaptions, _lib, "MACaptionAppearanceDidDisplayCaptions")
 	}
-	_fnMACaptionAppearanceDidDisplayCaptions(objref.IDOf(strings_))
+	_fnMACaptionAppearanceDidDisplayCaptions(objref.IDOf(strings_.Object))
 }
 
 var _fnMACaptionAppearanceExecuteBlockForProfileID func(objc.ID, objc.Block)
 
 // MACaptionAppearanceExecuteBlockForProfileID calls the MediaAccessibility framework function MACaptionAppearanceExecuteBlockForProfileID.
-func MACaptionAppearanceExecuteBlockForProfileID(profileID obj.Object, aBlock func()) {
+func MACaptionAppearanceExecuteBlockForProfileID(profileID corefoundation.CFStringRef, aBlock func()) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceExecuteBlockForProfileID == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceExecuteBlockForProfileID, _lib, "MACaptionAppearanceExecuteBlockForProfileID")
 	}
-	_fnMACaptionAppearanceExecuteBlockForProfileID(objref.IDOf(profileID), objc.NewBlock(func(_ objc.Block) { aBlock() }))
+	_fnMACaptionAppearanceExecuteBlockForProfileID(objref.IDOf(profileID.Object), objc.NewBlock(func(_ objc.Block) { aBlock() }))
 }
 
 var _fnMACaptionAppearanceGetBackgroundOpacity func(CaptionAppearanceDomain, unsafe.Pointer) float64
@@ -273,12 +275,12 @@ func MACaptionAppearanceIsCustomized(domain CaptionAppearanceDomain) bool {
 var _fnMACaptionAppearanceSetActiveProfileID func(objc.ID)
 
 // MACaptionAppearanceSetActiveProfileID calls the MediaAccessibility framework function MACaptionAppearanceSetActiveProfileID.
-func MACaptionAppearanceSetActiveProfileID(profileID obj.Object) {
+func MACaptionAppearanceSetActiveProfileID(profileID corefoundation.CFStringRef) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMACaptionAppearanceSetActiveProfileID == nil {
 		ebipurego.RegisterLibFunc(&_fnMACaptionAppearanceSetActiveProfileID, _lib, "MACaptionAppearanceSetActiveProfileID")
 	}
-	_fnMACaptionAppearanceSetActiveProfileID(objref.IDOf(profileID))
+	_fnMACaptionAppearanceSetActiveProfileID(objref.IDOf(profileID.Object))
 }
 
 var _fnMACaptionAppearanceSetDisplayType func(CaptionAppearanceDomain, CaptionAppearanceDisplayType)
@@ -306,34 +308,34 @@ func MADimFlashingLightsEnabled() bool {
 var _fnMAImageCaptioningCopyCaption func(objc.ID, unsafe.Pointer) objc.ID
 
 // MAImageCaptioningCopyCaption calls the MediaAccessibility framework function MAImageCaptioningCopyCaption.
-func MAImageCaptioningCopyCaption(url obj.Object, err unsafe.Pointer) obj.Object {
+func MAImageCaptioningCopyCaption(url corefoundation.CFURLRef, err unsafe.Pointer) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMAImageCaptioningCopyCaption == nil {
 		ebipurego.RegisterLibFunc(&_fnMAImageCaptioningCopyCaption, _lib, "MAImageCaptioningCopyCaption")
 	}
-	_ret := _fnMAImageCaptioningCopyCaption(objref.IDOf(url), err)
-	return obj.Adopt(_ret)
+	_ret := _fnMAImageCaptioningCopyCaption(objref.IDOf(url.Object), err)
+	return corefoundation.CFStringRef{obj.Adopt(_ret)}
 }
 
 var _fnMAImageCaptioningCopyMetadataTagPath func() objc.ID
 
 // MAImageCaptioningCopyMetadataTagPath calls the MediaAccessibility framework function MAImageCaptioningCopyMetadataTagPath.
-func MAImageCaptioningCopyMetadataTagPath() obj.Object {
+func MAImageCaptioningCopyMetadataTagPath() corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMAImageCaptioningCopyMetadataTagPath == nil {
 		ebipurego.RegisterLibFunc(&_fnMAImageCaptioningCopyMetadataTagPath, _lib, "MAImageCaptioningCopyMetadataTagPath")
 	}
 	_ret := _fnMAImageCaptioningCopyMetadataTagPath()
-	return obj.Adopt(_ret)
+	return corefoundation.CFStringRef{obj.Adopt(_ret)}
 }
 
 var _fnMAImageCaptioningSetCaption func(objc.ID, objc.ID, unsafe.Pointer) bool
 
 // MAImageCaptioningSetCaption calls the MediaAccessibility framework function MAImageCaptioningSetCaption.
-func MAImageCaptioningSetCaption(url obj.Object, str obj.Object, err unsafe.Pointer) bool {
+func MAImageCaptioningSetCaption(url corefoundation.CFURLRef, str corefoundation.CFStringRef, err unsafe.Pointer) bool {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMAImageCaptioningSetCaption == nil {
 		ebipurego.RegisterLibFunc(&_fnMAImageCaptioningSetCaption, _lib, "MAImageCaptioningSetCaption")
 	}
-	return _fnMAImageCaptioningSetCaption(objref.IDOf(url), objref.IDOf(str), err)
+	return _fnMAImageCaptioningSetCaption(objref.IDOf(url.Object), objref.IDOf(str.Object), err)
 }

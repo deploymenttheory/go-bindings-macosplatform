@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // An AXObserverRef is a CFType. Like all CFTypes, they are reference counted (
@@ -157,3 +158,73 @@ type SizeResourceRec struct {
 	PreferredHeapSize uint32
 	MinimumHeapSize   uint32
 }
+
+// AXObserverRef is a handle for the opaque AXObserverRef type.
+type AXObserverRef struct{ obj.Object }
+
+// IsNil reports whether AXObserverRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AXObserverRef) IsNil() bool { return h.Object == nil }
+
+// AXTextMarkerRangeRef is a handle for the opaque AXTextMarkerRangeRef type.
+type AXTextMarkerRangeRef struct{ obj.Object }
+
+// IsNil reports whether AXTextMarkerRangeRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AXTextMarkerRangeRef) IsNil() bool { return h.Object == nil }
+
+// AXTextMarkerRef is a handle for the opaque AXTextMarkerRef type.
+type AXTextMarkerRef struct{ obj.Object }
+
+// IsNil reports whether AXTextMarkerRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AXTextMarkerRef) IsNil() bool { return h.Object == nil }
+
+// AXUIElementRef is a handle for the opaque AXUIElementRef type.
+type AXUIElementRef struct{ obj.Object }
+
+// IsNil reports whether AXUIElementRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AXUIElementRef) IsNil() bool { return h.Object == nil }
+
+// AXValueRef is a handle for the opaque AXValueRef type.
+type AXValueRef struct{ obj.Object }
+
+// IsNil reports whether AXValueRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h AXValueRef) IsNil() bool { return h.Object == nil }
+
+// HIMutableShapeRef is a handle for the opaque HIMutableShapeRef type.
+type HIMutableShapeRef struct{ obj.Object }
+
+// IsNil reports whether HIMutableShapeRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h HIMutableShapeRef) IsNil() bool { return h.Object == nil }
+
+// HIShapeRef is a handle for the opaque HIShapeRef type.
+type HIShapeRef struct{ obj.Object }
+
+// IsNil reports whether HIShapeRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h HIShapeRef) IsNil() bool { return h.Object == nil }
+
+// ICInstance is a handle for the opaque ICInstance type.
+type ICInstance struct{ obj.Object }
+
+// IsNil reports whether ICInstance is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ICInstance) IsNil() bool { return h.Object == nil }
+
+// PasteboardRef is a handle for the opaque PasteboardRef type.
+type PasteboardRef struct{ obj.Object }
+
+// IsNil reports whether PasteboardRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h PasteboardRef) IsNil() bool { return h.Object == nil }
+
+// TranslationRef is a handle for the opaque TranslationRef type.
+type TranslationRef struct{ obj.Object }
+
+// IsNil reports whether TranslationRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h TranslationRef) IsNil() bool { return h.Object == nil }

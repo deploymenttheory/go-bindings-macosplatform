@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -76,9 +77,9 @@ func (rl *ReplicatorLayer) WithInstanceDelay(instanceDelay float64) *ReplicatorL
 }
 
 // WithInstanceColor sets defines the color used to multiply the source object. Animatable.
-func (rl *ReplicatorLayer) WithInstanceColor(instanceColor obj.Object) *ReplicatorLayer {
+func (rl *ReplicatorLayer) WithInstanceColor(instanceColor coregraphics.CGColorRef) *ReplicatorLayer {
 	defer runtime.KeepAlive(instanceColor)
-	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setInstanceColor:"), objref.IDOf(instanceColor))
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setInstanceColor:"), objref.IDOf(instanceColor.Object))
 	return rl
 }
 
@@ -296,9 +297,9 @@ func (rl *ReplicatorLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing boo
 }
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
-func (rl *ReplicatorLayer) WithBackgroundColor(backgroundColor obj.Object) *ReplicatorLayer {
+func (rl *ReplicatorLayer) WithBackgroundColor(backgroundColor coregraphics.CGColorRef) *ReplicatorLayer {
 	defer runtime.KeepAlive(backgroundColor)
-	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor.Object))
 	return rl
 }
 
@@ -328,9 +329,9 @@ func (rl *ReplicatorLayer) WithBorderWidth(borderWidth float64) *ReplicatorLayer
 }
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
-func (rl *ReplicatorLayer) WithBorderColor(borderColor obj.Object) *ReplicatorLayer {
+func (rl *ReplicatorLayer) WithBorderColor(borderColor coregraphics.CGColorRef) *ReplicatorLayer {
 	defer runtime.KeepAlive(borderColor)
-	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor.Object))
 	return rl
 }
 
@@ -366,9 +367,9 @@ func (rl *ReplicatorLayer) WithRasterizationScale(rasterizationScale float64) *R
 }
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
-func (rl *ReplicatorLayer) WithShadowColor(shadowColor obj.Object) *ReplicatorLayer {
+func (rl *ReplicatorLayer) WithShadowColor(shadowColor coregraphics.CGColorRef) *ReplicatorLayer {
 	defer runtime.KeepAlive(shadowColor)
-	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor.Object))
 	return rl
 }
 
@@ -391,9 +392,9 @@ func (rl *ReplicatorLayer) WithShadowRadius(shadowRadius float64) *ReplicatorLay
 }
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
-func (rl *ReplicatorLayer) WithShadowPath(shadowPath obj.Object) *ReplicatorLayer {
+func (rl *ReplicatorLayer) WithShadowPath(shadowPath coregraphics.CGPathRef) *ReplicatorLayer {
 	defer runtime.KeepAlive(shadowPath)
-	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath.Object))
 	return rl
 }
 
@@ -461,10 +462,10 @@ func (rl *ReplicatorLayer) InstanceDelay() float64 {
 }
 
 // InstanceColor returns the instance color.
-func (rl *ReplicatorLayer) InstanceColor() obj.Object {
+func (rl *ReplicatorLayer) InstanceColor() coregraphics.CGColorRef {
 	defer runtime.KeepAlive(rl)
 	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("instanceColor"))
-	return obj.Wrap(_r)
+	return coregraphics.CGColorRef{obj.Wrap(_r)}
 }
 
 // InstanceRedOffset returns the instance red offset.

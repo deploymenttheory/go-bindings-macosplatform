@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/dispatch"
@@ -110,10 +111,10 @@ func (tl *TextureLoader) TextureWithContentsOfDataOptionsQueueCompletionHandler(
 }
 
 // TextureWithCGImageOptionsQueueCompletionHandler asynchronously loads a 2D texture image from a Quartz image and creates a new texture from the data.
-func (tl *TextureLoader) TextureWithCGImageOptionsQueueCompletionHandler(cgImage obj.Object, options map[string]*foundation.Number, queue dispatch.Queue, block func(obj.Object, unsafe.Pointer)) {
+func (tl *TextureLoader) TextureWithCGImageOptionsQueueCompletionHandler(cgImage coregraphics.CGImageRef, options map[string]*foundation.Number, queue dispatch.Queue, block func(obj.Object, unsafe.Pointer)) {
 	defer runtime.KeepAlive(tl)
 	defer runtime.KeepAlive(cgImage)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("textureWithCGImage:options:queue:completionHandler:"), objref.IDOf(cgImage), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("textureWithCGImage:options:queue:completionHandler:"), objref.IDOf(cgImage.Object), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), _b1) }))
 }
 
 // CubeMapWithContentsOfFilesOptionsQueueCompletionHandler asynchronously loads a cube map texture image from a series of files and creates a new texture from the data.

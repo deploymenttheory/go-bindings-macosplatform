@@ -69,3 +69,16 @@ type TypedefAlias struct {
 	// RHS is the aliased type expression.
 	RHS string
 }
+
+// HandleType is a distinct named handle type the idiomatic layer emits for an
+// opaque CoreFoundation / handle typedef: `type CFArrayRef struct{ obj.Object }`.
+// It embeds obj.Object (so it still satisfies Object and carries the lifecycle
+// methods) while being its own Go type, giving callers the compile-time type
+// distinction a generic obj.Object cannot. Its zero value wraps no object; the
+// generated IsNil method reports that NULL state.
+type HandleType struct {
+	// Doc is the one-line comment describing the handle type; empty when none.
+	Doc string
+	// GoName is the exported handle type name (e.g. "CFArrayRef").
+	GoName string
+}

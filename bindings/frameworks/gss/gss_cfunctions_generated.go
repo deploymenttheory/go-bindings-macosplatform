@@ -7,6 +7,7 @@ package gss
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -16,106 +17,106 @@ import (
 var _fnGSSCreateCredentialFromUUID func(objc.ID) objc.ID
 
 // GSSCreateCredentialFromUUID calls the GSS framework function GSSCreateCredentialFromUUID.
-func GSSCreateCredentialFromUUID(uuid obj.Object) obj.Object {
+func GSSCreateCredentialFromUUID(uuid corefoundation.CFUUIDRef) GssCredIdT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGSSCreateCredentialFromUUID == nil {
 		ebipurego.RegisterLibFunc(&_fnGSSCreateCredentialFromUUID, _lib, "GSSCreateCredentialFromUUID")
 	}
-	_ret := _fnGSSCreateCredentialFromUUID(objref.IDOf(uuid))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnGSSCreateCredentialFromUUID(objref.IDOf(uuid.Object))
+	return GssCredIdT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGSSCreateError func(unsafe.Pointer, uint32, uint32) objc.ID
 
 // GSSCreateError calls the GSS framework function GSSCreateError.
-func GSSCreateError(mech unsafe.Pointer, majorStatus uint32, minorStatus uint32) obj.Object {
+func GSSCreateError(mech unsafe.Pointer, majorStatus uint32, minorStatus uint32) corefoundation.CFErrorRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGSSCreateError == nil {
 		ebipurego.RegisterLibFunc(&_fnGSSCreateError, _lib, "GSSCreateError")
 	}
 	_ret := _fnGSSCreateError(mech, majorStatus, minorStatus)
-	return obj.Wrap(_ret)
+	return corefoundation.CFErrorRef{obj.Wrap(_ret)}
 }
 
 var _fnGSSCreateName func(objc.ID, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // GSSCreateName calls the GSS framework function GSSCreateName.
-func GSSCreateName(name obj.Object, nameType unsafe.Pointer, err unsafe.Pointer) obj.Object {
+func GSSCreateName(name corefoundation.CFTypeRef, nameType unsafe.Pointer, err unsafe.Pointer) GssNameT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGSSCreateName == nil {
 		ebipurego.RegisterLibFunc(&_fnGSSCreateName, _lib, "GSSCreateName")
 	}
-	_ret := _fnGSSCreateName(objref.IDOf(name), nameType, err)
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnGSSCreateName(objref.IDOf(name.Object), nameType, err)
+	return GssNameT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGSSCredentialCopyName func(objc.ID) objc.ID
 
 // GSSCredentialCopyName calls the GSS framework function GSSCredentialCopyName.
-func GSSCredentialCopyName(cred obj.Object) obj.Object {
+func GSSCredentialCopyName(cred GssCredIdT) GssNameT {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGSSCredentialCopyName == nil {
 		ebipurego.RegisterLibFunc(&_fnGSSCredentialCopyName, _lib, "GSSCredentialCopyName")
 	}
-	_ret := _fnGSSCredentialCopyName(objref.IDOf(cred))
-	return obj.WrapUnmanaged(_ret)
+	_ret := _fnGSSCredentialCopyName(objref.IDOf(cred.Object))
+	return GssNameT{obj.WrapUnmanaged(_ret)}
 }
 
 var _fnGSSCredentialCopyUUID func(objc.ID) objc.ID
 
 // GSSCredentialCopyUUID calls the GSS framework function GSSCredentialCopyUUID.
-func GSSCredentialCopyUUID(credential obj.Object) obj.Object {
+func GSSCredentialCopyUUID(credential GssCredIdT) corefoundation.CFUUIDRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGSSCredentialCopyUUID == nil {
 		ebipurego.RegisterLibFunc(&_fnGSSCredentialCopyUUID, _lib, "GSSCredentialCopyUUID")
 	}
-	_ret := _fnGSSCredentialCopyUUID(objref.IDOf(credential))
-	return obj.Wrap(_ret)
+	_ret := _fnGSSCredentialCopyUUID(objref.IDOf(credential.Object))
+	return corefoundation.CFUUIDRef{obj.Wrap(_ret)}
 }
 
 var _fnGSSCredentialGetLifetime func(objc.ID) uint32
 
 // GSSCredentialGetLifetime calls the GSS framework function GSSCredentialGetLifetime.
-func GSSCredentialGetLifetime(cred obj.Object) uint32 {
+func GSSCredentialGetLifetime(cred GssCredIdT) uint32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGSSCredentialGetLifetime == nil {
 		ebipurego.RegisterLibFunc(&_fnGSSCredentialGetLifetime, _lib, "GSSCredentialGetLifetime")
 	}
-	return _fnGSSCredentialGetLifetime(objref.IDOf(cred))
+	return _fnGSSCredentialGetLifetime(objref.IDOf(cred.Object))
 }
 
 var _fnGSSNameCreateDisplayString func(objc.ID) objc.ID
 
 // GSSNameCreateDisplayString calls the GSS framework function GSSNameCreateDisplayString.
-func GSSNameCreateDisplayString(name obj.Object) obj.Object {
+func GSSNameCreateDisplayString(name GssNameT) corefoundation.CFStringRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGSSNameCreateDisplayString == nil {
 		ebipurego.RegisterLibFunc(&_fnGSSNameCreateDisplayString, _lib, "GSSNameCreateDisplayString")
 	}
-	_ret := _fnGSSNameCreateDisplayString(objref.IDOf(name))
-	return obj.Wrap(_ret)
+	_ret := _fnGSSNameCreateDisplayString(objref.IDOf(name.Object))
+	return corefoundation.CFStringRef{obj.Wrap(_ret)}
 }
 
 var _fnAaplChangePassword func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer) uint32
 
 // AaplChangePassword calls the GSS framework function gss_aapl_change_password.
-func AaplChangePassword(name unsafe.Pointer, mech unsafe.Pointer, attributes obj.Object, err unsafe.Pointer) uint32 {
+func AaplChangePassword(name unsafe.Pointer, mech unsafe.Pointer, attributes corefoundation.CFDictionaryRef, err unsafe.Pointer) uint32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAaplChangePassword == nil {
 		ebipurego.RegisterLibFunc(&_fnAaplChangePassword, _lib, "gss_aapl_change_password")
 	}
-	return _fnAaplChangePassword(name, mech, objref.IDOf(attributes), err)
+	return _fnAaplChangePassword(name, mech, objref.IDOf(attributes.Object), err)
 }
 
 var _fnAaplInitialCred func(unsafe.Pointer, unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer) uint32
 
 // AaplInitialCred calls the GSS framework function gss_aapl_initial_cred.
-func AaplInitialCred(desiredName unsafe.Pointer, desiredMech unsafe.Pointer, attributes obj.Object, outputCredHandle unsafe.Pointer, err unsafe.Pointer) uint32 {
+func AaplInitialCred(desiredName unsafe.Pointer, desiredMech unsafe.Pointer, attributes corefoundation.CFDictionaryRef, outputCredHandle unsafe.Pointer, err unsafe.Pointer) uint32 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAaplInitialCred == nil {
 		ebipurego.RegisterLibFunc(&_fnAaplInitialCred, _lib, "gss_aapl_initial_cred")
 	}
-	return _fnAaplInitialCred(desiredName, desiredMech, objref.IDOf(attributes), outputCredHandle, err)
+	return _fnAaplInitialCred(desiredName, desiredMech, objref.IDOf(attributes.Object), outputCredHandle, err)
 }
 
 var _fnAcceptSecContext func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
@@ -386,13 +387,13 @@ func EncapsulateToken(inputToken unsafe.Pointer, oid unsafe.Pointer, outputToken
 var _fnExportCred func(unsafe.Pointer, objc.ID, unsafe.Pointer) uint32
 
 // ExportCred calls the GSS framework function gss_export_cred.
-func ExportCred(credHandle obj.Object, token unsafe.Pointer) (result uint32, minorStatus uint32) {
+func ExportCred(credHandle GssCredIdT, token unsafe.Pointer) (result uint32, minorStatus uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnExportCred == nil {
 		ebipurego.RegisterLibFunc(&_fnExportCred, _lib, "gss_export_cred")
 	}
 	var _out0 uint32
-	_ret := _fnExportCred(unsafe.Pointer(&_out0), objref.IDOf(credHandle), token)
+	_ret := _fnExportCred(unsafe.Pointer(&_out0), objref.IDOf(credHandle.Object), token)
 	return _ret, _out0
 }
 
@@ -618,14 +619,14 @@ func InquireMechsForName(inputName unsafe.Pointer, mechTypes unsafe.Pointer) (re
 var _fnInquireName func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
 
 // InquireName calls the GSS framework function gss_inquire_name.
-func InquireName(inputName obj.Object, mnMech unsafe.Pointer, attrs unsafe.Pointer) (result uint32, minorStatus uint32, nameIsMN int32) {
+func InquireName(inputName GssNameT, mnMech unsafe.Pointer, attrs unsafe.Pointer) (result uint32, minorStatus uint32, nameIsMN int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnInquireName == nil {
 		ebipurego.RegisterLibFunc(&_fnInquireName, _lib, "gss_inquire_name")
 	}
 	var _out0 uint32
 	var _out1 int32
-	_ret := _fnInquireName(unsafe.Pointer(&_out0), objref.IDOf(inputName), unsafe.Pointer(&_out1), mnMech, attrs)
+	_ret := _fnInquireName(unsafe.Pointer(&_out0), objref.IDOf(inputName.Object), unsafe.Pointer(&_out1), mnMech, attrs)
 	return _ret, _out0, _out1
 }
 
@@ -710,13 +711,13 @@ func Krb5CcacheName(name string, outName string) (result uint32, minorStatus uin
 var _fnKrb5CopyCcache func(unsafe.Pointer, objc.ID, unsafe.Pointer) uint32
 
 // Krb5CopyCcache calls the GSS framework function gss_krb5_copy_ccache.
-func Krb5CopyCcache(cred obj.Object, out unsafe.Pointer) (result uint32, minorStatus uint32) {
+func Krb5CopyCcache(cred GssCredIdT, out unsafe.Pointer) (result uint32, minorStatus uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CopyCcache == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CopyCcache, _lib, "gss_krb5_copy_ccache")
 	}
 	var _out0 uint32
-	_ret := _fnKrb5CopyCcache(unsafe.Pointer(&_out0), objref.IDOf(cred), out)
+	_ret := _fnKrb5CopyCcache(unsafe.Pointer(&_out0), objref.IDOf(cred.Object), out)
 	return _ret, _out0
 }
 
@@ -749,14 +750,14 @@ func Krb5FreeLucidSecContext(c unsafe.Pointer) (result uint32, minorStatus uint3
 var _fnKrb5SetAllowableEnctypes func(unsafe.Pointer, objc.ID, uint32, unsafe.Pointer) uint32
 
 // Krb5SetAllowableEnctypes calls the GSS framework function gss_krb5_set_allowable_enctypes.
-func Krb5SetAllowableEnctypes(cred obj.Object, numEnctypes uint32) (result uint32, minorStatus uint32, enctypes int32) {
+func Krb5SetAllowableEnctypes(cred GssCredIdT, numEnctypes uint32) (result uint32, minorStatus uint32, enctypes int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5SetAllowableEnctypes == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5SetAllowableEnctypes, _lib, "gss_krb5_set_allowable_enctypes")
 	}
 	var _out0 uint32
 	var _out1 int32
-	_ret := _fnKrb5SetAllowableEnctypes(unsafe.Pointer(&_out0), objref.IDOf(cred), numEnctypes, unsafe.Pointer(&_out1))
+	_ret := _fnKrb5SetAllowableEnctypes(unsafe.Pointer(&_out0), objref.IDOf(cred.Object), numEnctypes, unsafe.Pointer(&_out1))
 	return _ret, _out0, _out1
 }
 
@@ -800,13 +801,13 @@ func ProcessContextToken(contextHandle unsafe.Pointer, tokenBuffer unsafe.Pointe
 var _fnPseudoRandom func(unsafe.Pointer, objc.ID, int, unsafe.Pointer, int, unsafe.Pointer) uint32
 
 // PseudoRandom calls the GSS framework function gss_pseudo_random.
-func PseudoRandom(context_ obj.Object, prfKey int, prfIn unsafe.Pointer, desiredOutputLen int, prfOut unsafe.Pointer) (result uint32, minorStatus uint32) {
+func PseudoRandom(context_ GssCtxIdT, prfKey int, prfIn unsafe.Pointer, desiredOutputLen int, prfOut unsafe.Pointer) (result uint32, minorStatus uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnPseudoRandom == nil {
 		ebipurego.RegisterLibFunc(&_fnPseudoRandom, _lib, "gss_pseudo_random")
 	}
 	var _out0 uint32
-	_ret := _fnPseudoRandom(unsafe.Pointer(&_out0), objref.IDOf(context_), prfKey, prfIn, desiredOutputLen, prfOut)
+	_ret := _fnPseudoRandom(unsafe.Pointer(&_out0), objref.IDOf(context_.Object), prfKey, prfIn, desiredOutputLen, prfOut)
 	return _ret, _out0
 }
 
@@ -891,14 +892,14 @@ func ReleaseOidSet(set unsafe.Pointer) (result uint32, minorStatus uint32) {
 var _fnSeal func(unsafe.Pointer, objc.ID, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
 
 // Seal calls the GSS framework function gss_seal.
-func Seal(contextHandle obj.Object, confReqFlag int, qopReq int, inputMessageBuffer unsafe.Pointer, outputMessageBuffer unsafe.Pointer) (result uint32, minorStatus uint32, confState int32) {
+func Seal(contextHandle GssCtxIdT, confReqFlag int, qopReq int, inputMessageBuffer unsafe.Pointer, outputMessageBuffer unsafe.Pointer) (result uint32, minorStatus uint32, confState int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSeal == nil {
 		ebipurego.RegisterLibFunc(&_fnSeal, _lib, "gss_seal")
 	}
 	var _out0 uint32
 	var _out1 int32
-	_ret := _fnSeal(unsafe.Pointer(&_out0), objref.IDOf(contextHandle), confReqFlag, qopReq, inputMessageBuffer, unsafe.Pointer(&_out1), outputMessageBuffer)
+	_ret := _fnSeal(unsafe.Pointer(&_out0), objref.IDOf(contextHandle.Object), confReqFlag, qopReq, inputMessageBuffer, unsafe.Pointer(&_out1), outputMessageBuffer)
 	return _ret, _out0, _out1
 }
 
@@ -931,13 +932,13 @@ func SetSecContextOption(contextHandle unsafe.Pointer, object unsafe.Pointer, va
 var _fnSign func(unsafe.Pointer, objc.ID, int, unsafe.Pointer, unsafe.Pointer) uint32
 
 // Sign calls the GSS framework function gss_sign.
-func Sign(contextHandle obj.Object, qopReq int, messageBuffer unsafe.Pointer, messageToken unsafe.Pointer) (result uint32, minorStatus uint32) {
+func Sign(contextHandle GssCtxIdT, qopReq int, messageBuffer unsafe.Pointer, messageToken unsafe.Pointer) (result uint32, minorStatus uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSign == nil {
 		ebipurego.RegisterLibFunc(&_fnSign, _lib, "gss_sign")
 	}
 	var _out0 uint32
-	_ret := _fnSign(unsafe.Pointer(&_out0), objref.IDOf(contextHandle), qopReq, messageBuffer, messageToken)
+	_ret := _fnSign(unsafe.Pointer(&_out0), objref.IDOf(contextHandle.Object), qopReq, messageBuffer, messageToken)
 	return _ret, _out0
 }
 
@@ -958,7 +959,7 @@ func TestOidSetMember(member unsafe.Pointer, set unsafe.Pointer) (result uint32,
 var _fnUnseal func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
 
 // Unseal calls the GSS framework function gss_unseal.
-func Unseal(contextHandle obj.Object, inputMessageBuffer unsafe.Pointer, outputMessageBuffer unsafe.Pointer) (result uint32, minorStatus uint32, confState int32, qopState int32) {
+func Unseal(contextHandle GssCtxIdT, inputMessageBuffer unsafe.Pointer, outputMessageBuffer unsafe.Pointer) (result uint32, minorStatus uint32, confState int32, qopState int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnUnseal == nil {
 		ebipurego.RegisterLibFunc(&_fnUnseal, _lib, "gss_unseal")
@@ -966,7 +967,7 @@ func Unseal(contextHandle obj.Object, inputMessageBuffer unsafe.Pointer, outputM
 	var _out0 uint32
 	var _out1 int32
 	var _out2 int32
-	_ret := _fnUnseal(unsafe.Pointer(&_out0), objref.IDOf(contextHandle), inputMessageBuffer, outputMessageBuffer, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	_ret := _fnUnseal(unsafe.Pointer(&_out0), objref.IDOf(contextHandle.Object), inputMessageBuffer, outputMessageBuffer, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
 	return _ret, _out0, _out1, _out2
 }
 
@@ -999,14 +1000,14 @@ func Userok(name unsafe.Pointer, user string) int {
 var _fnVerify func(unsafe.Pointer, objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint32
 
 // Verify calls the GSS framework function gss_verify.
-func Verify(contextHandle obj.Object, messageBuffer unsafe.Pointer, tokenBuffer unsafe.Pointer) (result uint32, minorStatus uint32, qopState int32) {
+func Verify(contextHandle GssCtxIdT, messageBuffer unsafe.Pointer, tokenBuffer unsafe.Pointer) (result uint32, minorStatus uint32, qopState int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVerify == nil {
 		ebipurego.RegisterLibFunc(&_fnVerify, _lib, "gss_verify")
 	}
 	var _out0 uint32
 	var _out1 int32
-	_ret := _fnVerify(unsafe.Pointer(&_out0), objref.IDOf(contextHandle), messageBuffer, tokenBuffer, unsafe.Pointer(&_out1))
+	_ret := _fnVerify(unsafe.Pointer(&_out0), objref.IDOf(contextHandle.Object), messageBuffer, tokenBuffer, unsafe.Pointer(&_out1))
 	return _ret, _out0, _out1
 }
 
@@ -1055,13 +1056,13 @@ func WrapSizeLimit(contextHandle unsafe.Pointer, confReqFlag int, qopReq uint32,
 var _fnGsskrb5ExtractAuthzDataFromSecContext func(unsafe.Pointer, objc.ID, int, unsafe.Pointer) uint32
 
 // Gsskrb5ExtractAuthzDataFromSecContext calls the GSS framework function gsskrb5_extract_authz_data_from_sec_context.
-func Gsskrb5ExtractAuthzDataFromSecContext(contextHandle obj.Object, adType int, adData unsafe.Pointer) (result uint32, minorStatus uint32) {
+func Gsskrb5ExtractAuthzDataFromSecContext(contextHandle GssCtxIdT, adType int, adData unsafe.Pointer) (result uint32, minorStatus uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGsskrb5ExtractAuthzDataFromSecContext == nil {
 		ebipurego.RegisterLibFunc(&_fnGsskrb5ExtractAuthzDataFromSecContext, _lib, "gsskrb5_extract_authz_data_from_sec_context")
 	}
 	var _out0 uint32
-	_ret := _fnGsskrb5ExtractAuthzDataFromSecContext(unsafe.Pointer(&_out0), objref.IDOf(contextHandle), adType, adData)
+	_ret := _fnGsskrb5ExtractAuthzDataFromSecContext(unsafe.Pointer(&_out0), objref.IDOf(contextHandle.Object), adType, adData)
 	return _ret, _out0
 }
 

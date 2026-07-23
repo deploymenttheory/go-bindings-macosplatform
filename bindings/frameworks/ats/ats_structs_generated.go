@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type ATSFontFamilyIterator_ struct{}
@@ -114,3 +115,31 @@ type FMFontFamilyIterator struct {
 type FMFontIterator struct {
 	Reserved [16]uint32
 }
+
+// ATSFontFamilyIterator is a handle for the opaque ATSFontFamilyIterator type.
+type ATSFontFamilyIterator struct{ obj.Object }
+
+// IsNil reports whether ATSFontFamilyIterator is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ATSFontFamilyIterator) IsNil() bool { return h.Object == nil }
+
+// ATSFontIterator is a handle for the opaque ATSFontIterator type.
+type ATSFontIterator struct{ obj.Object }
+
+// IsNil reports whether ATSFontIterator is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ATSFontIterator) IsNil() bool { return h.Object == nil }
+
+// ATSFontNotificationInfoRef is a handle for the opaque ATSFontNotificationInfoRef type.
+type ATSFontNotificationInfoRef struct{ obj.Object }
+
+// IsNil reports whether ATSFontNotificationInfoRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ATSFontNotificationInfoRef) IsNil() bool { return h.Object == nil }
+
+// ATSFontNotificationRef is a handle for the opaque ATSFontNotificationRef type.
+type ATSFontNotificationRef struct{ obj.Object }
+
+// IsNil reports whether ATSFontNotificationRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ATSFontNotificationRef) IsNil() bool { return h.Object == nil }

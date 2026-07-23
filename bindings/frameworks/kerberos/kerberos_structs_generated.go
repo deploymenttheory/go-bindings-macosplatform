@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gss"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type AppleGssKrb5AuthdataIfRelevantKey struct {
@@ -262,8 +263,6 @@ type Krb5ApReq struct {
 	Authenticator Krb5EncData
 }
 
-type Krb5AuthContext struct{}
-
 type Krb5Authdata struct {
 	Magic    int32
 	AdType   int32
@@ -282,20 +281,12 @@ type Krb5Authenticator struct {
 	AuthorizationData unsafe.Pointer
 }
 
-type Krb5CcOps struct{}
-
-type Krb5Ccache struct{}
-
-type Krb5CccolCursor struct{}
-
 type Krb5Checksum struct {
 	Magic        int32
 	ChecksumType int32
 	Length       uint32
 	Contents     unsafe.Pointer
 }
-
-type Krb5Context struct{}
 
 type Krb5Cred struct {
 	Magic    int32
@@ -554,8 +545,6 @@ type PasswdPhraseElement struct {
 	Phrase unsafe.Pointer
 }
 
-type ProfileT struct{}
-
 // AppleGssKrb5AuthdataIfRelevant is an alias for the apple_gss_krb5_authdata_if_relevant_key value type.
 type AppleGssKrb5AuthdataIfRelevant = AppleGssKrb5AuthdataIfRelevantKey
 
@@ -597,3 +586,73 @@ type GssKrb5Rfc1964KeydataT = gss.GssKrb5Rfc1964Keydata
 
 // Krb5KeytabEntry is an alias for the krb5_keytab_entry_st value type.
 type Krb5KeytabEntry = Krb5KeytabEntrySt
+
+// Krb5AuthContext is a handle for the opaque _krb5_auth_context type.
+type Krb5AuthContext struct{ obj.Object }
+
+// IsNil reports whether Krb5AuthContext is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Krb5AuthContext) IsNil() bool { return h.Object == nil }
+
+// Krb5CcOps is a handle for the opaque _krb5_cc_ops type.
+type Krb5CcOps struct{ obj.Object }
+
+// IsNil reports whether Krb5CcOps is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Krb5CcOps) IsNil() bool { return h.Object == nil }
+
+// Krb5Ccache is a handle for the opaque _krb5_ccache type.
+type Krb5Ccache struct{ obj.Object }
+
+// IsNil reports whether Krb5Ccache is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Krb5Ccache) IsNil() bool { return h.Object == nil }
+
+// Krb5CccolCursor is a handle for the opaque _krb5_cccol_cursor type.
+type Krb5CccolCursor struct{ obj.Object }
+
+// IsNil reports whether Krb5CccolCursor is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Krb5CccolCursor) IsNil() bool { return h.Object == nil }
+
+// Krb5Context is a handle for the opaque _krb5_context type.
+type Krb5Context struct{ obj.Object }
+
+// IsNil reports whether Krb5Context is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Krb5Context) IsNil() bool { return h.Object == nil }
+
+// ProfileT is a handle for the opaque _profile_t type.
+type ProfileT struct{ obj.Object }
+
+// IsNil reports whether ProfileT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ProfileT) IsNil() bool { return h.Object == nil }
+
+// KLLoginOptions is a handle for the opaque KLLoginOptions type.
+type KLLoginOptions struct{ obj.Object }
+
+// IsNil reports whether KLLoginOptions is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h KLLoginOptions) IsNil() bool { return h.Object == nil }
+
+// KLPrincipal is a handle for the opaque KLPrincipal type.
+type KLPrincipal struct{ obj.Object }
+
+// IsNil reports whether KLPrincipal is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h KLPrincipal) IsNil() bool { return h.Object == nil }
+
+// Krb5Keytab is a handle for the opaque krb5_keytab type.
+type Krb5Keytab struct{ obj.Object }
+
+// IsNil reports whether Krb5Keytab is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Krb5Keytab) IsNil() bool { return h.Object == nil }
+
+// Krb5Rcache is a handle for the opaque krb5_rcache type.
+type Krb5Rcache struct{ obj.Object }
+
+// IsNil reports whether Krb5Rcache is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h Krb5Rcache) IsNil() bool { return h.Object == nil }

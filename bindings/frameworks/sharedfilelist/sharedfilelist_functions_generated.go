@@ -17,13 +17,13 @@ import (
 // LSSharedFileListItemCopyResolvedURL reports an error if the SharedFileList framework function LSSharedFileListItemCopyResolvedURL fails.
 var _fnLSSharedFileListItemCopyResolvedURL func(objc.ID, int, unsafe.Pointer) objc.ID
 
-func LSSharedFileListItemCopyResolvedURL(inItem obj.Object, inFlags int) (obj.Object, error) {
+func LSSharedFileListItemCopyResolvedURL(inItem LSSharedFileListItemRef, inFlags int) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnLSSharedFileListItemCopyResolvedURL == nil {
 		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemCopyResolvedURL, _lib, "LSSharedFileListItemCopyResolvedURL")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnLSSharedFileListItemCopyResolvedURL(objref.IDOf(inItem), inFlags, unsafe.Pointer(&_cfErr))
+	_r := _fnLSSharedFileListItemCopyResolvedURL(objref.IDOf(inItem.Object), inFlags, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}

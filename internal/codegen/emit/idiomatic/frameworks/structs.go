@@ -328,8 +328,16 @@ func emitStructs(
 		willEmit[goName] = true
 	}
 
+	// Names this package owns as distinct handle types (CFArrayRef, CGColorRef).
+	// A zero-field opaque struct whose own name is one of these is emitted AS the
+	// handle type below (so a signature referencing it can unwrap its .Object),
+	// instead of the fieldless `struct{}` it would otherwise be.
+	handleNames := packageHandleNames(framework, mapper)
+
 	imports := map[string]string{}
 	var structs []view.Struct
+	var handleTypes []view.HandleType
+	emittedHandle := make(map[string]bool)
 	for _, goName := range goNames {
 		takenNames[goName] = true
 		s := structOf[goName]
@@ -347,6 +355,18 @@ func emitStructs(
 				GoPkg:    pkgName,
 				GoSymbol: goName,
 			})
+		}
+		// A fieldless opaque struct that is itself a CF handle typedef becomes the
+		// struct-wrapper handle type (still recorded KindStruct above, still emitted
+		// under this Go name — parity is unchanged).
+		if len(s.Fields) == 0 && handleNames[goName] {
+			imports["obj"] = objImportPath
+			handleTypes = append(handleTypes, view.HandleType{
+				Doc:    fmt.Sprintf("%s is a handle for the opaque %s type.", goName, keyOf[goName]),
+				GoName: goName,
+			})
+			emittedHandle[goName] = true
+			continue
 		}
 		if len(s.Fields) == 0 {
 			structs = append(
@@ -385,7 +405,15 @@ func emitStructs(
 		imports,
 	)
 
-	if len(structs) == 0 && len(aliases) == 0 {
+	// Distinct named handle types this package owns whose backing struct is NOT
+	// emitted under the same name (CFArrayRef, whose opaque struct is CFArray).
+	// Built last so takenNames reflects every struct, enum, class, and alias; the
+	// collision case (name already emitted as a struct just above) was diverted to
+	// a handle type inline, and is skipped here via emittedHandle.
+	handleTypes = append(handleTypes,
+		buildCFHandleTypeViews(framework, mapper, takenNames, emittedHandle, imports)...)
+
+	if len(structs) == 0 && len(aliases) == 0 && len(handleTypes) == 0 {
 		return nil
 	}
 
@@ -399,6 +427,13 @@ func emitStructs(
 			return err
 		}
 		body = append(body, aliasBody...)
+	}
+	if len(handleTypes) > 0 {
+		handleBody, err := render.HandleTypes(handleTypes)
+		if err != nil {
+			return err
+		}
+		body = append(body, handleBody...)
 	}
 	fname := pkgName + "_structs_generated.go"
 	file := assembleFile(pkgName, imports, body)
@@ -506,6 +541,63 @@ func buildTypedefAliasViews(
 			GoName: goName,
 			RHS:    rhs,
 		})
+	}
+	return out
+}
+
+// buildCFHandleTypeViews returns the distinct named handle types this package
+// owns — `type CFArrayRef struct{ obj.Object }` for every opaque CF/CG/handle
+// typedef the mapper's CFHandleIndex assigns to this idiomatic package. The
+// resolver references these (gated on acyclicity) instead of the generic
+// obj.Object, so callers get a compile-time-distinct type; because the emitter
+// and resolver read the same index, a reference can never dangle. A name already
+// claimed by a struct/enum/class in this package is skipped (the resolver's
+// same-index degrade keeps that rare case at obj.Object).
+func buildCFHandleTypeViews(
+	framework *meta.FrameworkMeta,
+	mapper *typemap.Mapper,
+	takenNames, emittedHandle map[string]bool,
+	imports map[string]string,
+) []view.HandleType {
+	pkg := naming.PackageName(framework.Framework)
+	var names []string
+	for name, ref := range mapper.CFHandleIndex {
+		if ref.Package == pkg {
+			names = append(names, name)
+		}
+	}
+	sort.Strings(names)
+
+	var out []view.HandleType
+	for _, name := range names {
+		goName := mapper.CFHandleIndex[name].TypeName
+		if emittedHandle[goName] {
+			continue // already emitted inline as the struct of the same name
+		}
+		if !isExportedGoIdent(goName) || takenNames[goName] {
+			continue
+		}
+		takenNames[goName] = true
+		imports["obj"] = objImportPath
+		out = append(out, view.HandleType{
+			Doc:    fmt.Sprintf("%s is a handle for the opaque %s type.", goName, name),
+			GoName: goName,
+		})
+	}
+	return out
+}
+
+// packageHandleNames is the set of Go handle-type names the given framework's
+// idiomatic package owns (from the mapper's CFHandleIndex), keyed by the emitted
+// Go type name so the struct loop can recognise a fieldless opaque struct that is
+// itself a handle typedef and emit it as the struct-wrapper handle type.
+func packageHandleNames(framework *meta.FrameworkMeta, mapper *typemap.Mapper) map[string]bool {
+	pkg := naming.PackageName(framework.Framework)
+	out := make(map[string]bool)
+	for _, ref := range mapper.CFHandleIndex {
+		if ref.Package == pkg {
+			out[ref.TypeName] = true
+		}
 	}
 	return out
 }

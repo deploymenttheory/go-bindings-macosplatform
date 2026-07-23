@@ -7,6 +7,7 @@ package avfoundation
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -62,9 +63,9 @@ func (mvci *MutableVideoCompositionInstruction) WithTimeRange(timeRange coremedi
 }
 
 // WithBackgroundColor sets the background color of the composition.
-func (mvci *MutableVideoCompositionInstruction) WithBackgroundColor(backgroundColor obj.Object) *MutableVideoCompositionInstruction {
+func (mvci *MutableVideoCompositionInstruction) WithBackgroundColor(backgroundColor coregraphics.CGColorRef) *MutableVideoCompositionInstruction {
 	defer runtime.KeepAlive(backgroundColor)
-	objc.Send[objc.ID](objref.IDOf(mvci), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(mvci), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor.Object))
 	return mvci
 }
 

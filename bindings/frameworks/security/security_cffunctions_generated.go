@@ -49,12 +49,12 @@ func AuthorizationCreateFromExternalForm(extForm *AuthorizationExternalForm, aut
 var _fnAuthorizationExecuteWithPrivileges func(objc.ID, string, AuthorizationFlags, string, unsafe.Pointer) int32
 
 // AuthorizationExecuteWithPrivileges reports an error if the Security framework function AuthorizationExecuteWithPrivileges fails.
-func AuthorizationExecuteWithPrivileges(authorization obj.Object, pathToTool string, options AuthorizationFlags, arguments string, communicationsPipe unsafe.Pointer) error {
+func AuthorizationExecuteWithPrivileges(authorization AuthorizationRef, pathToTool string, options AuthorizationFlags, arguments string, communicationsPipe unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationExecuteWithPrivileges == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationExecuteWithPrivileges, _lib, "AuthorizationExecuteWithPrivileges")
 	}
-	_rc := _fnAuthorizationExecuteWithPrivileges(objref.IDOf(authorization), pathToTool, options, arguments, communicationsPipe)
+	_rc := _fnAuthorizationExecuteWithPrivileges(objref.IDOf(authorization.Object), pathToTool, options, arguments, communicationsPipe)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -64,12 +64,12 @@ func AuthorizationExecuteWithPrivileges(authorization obj.Object, pathToTool str
 var _fnAuthorizationFree func(objc.ID, AuthorizationFlags) int32
 
 // AuthorizationFree reports an error if the Security framework function AuthorizationFree fails.
-func AuthorizationFree(authorization obj.Object, flags AuthorizationFlags) error {
+func AuthorizationFree(authorization AuthorizationRef, flags AuthorizationFlags) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationFree == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationFree, _lib, "AuthorizationFree")
 	}
-	_rc := _fnAuthorizationFree(objref.IDOf(authorization), flags)
+	_rc := _fnAuthorizationFree(objref.IDOf(authorization.Object), flags)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -79,12 +79,12 @@ func AuthorizationFree(authorization obj.Object, flags AuthorizationFlags) error
 var _fnAuthorizationMakeExternalForm func(objc.ID, unsafe.Pointer) int32
 
 // AuthorizationMakeExternalForm reports an error if the Security framework function AuthorizationMakeExternalForm fails.
-func AuthorizationMakeExternalForm(authorization obj.Object, extForm *AuthorizationExternalForm) error {
+func AuthorizationMakeExternalForm(authorization AuthorizationRef, extForm *AuthorizationExternalForm) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationMakeExternalForm == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationMakeExternalForm, _lib, "AuthorizationMakeExternalForm")
 	}
-	_rc := _fnAuthorizationMakeExternalForm(objref.IDOf(authorization), unsafe.Pointer(extForm))
+	_rc := _fnAuthorizationMakeExternalForm(objref.IDOf(authorization.Object), unsafe.Pointer(extForm))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -110,12 +110,12 @@ func AuthorizationRightGet(rightName string) (obj.Object, error) {
 var _fnAuthorizationRightRemove func(objc.ID, string) int32
 
 // AuthorizationRightRemove reports an error if the Security framework function AuthorizationRightRemove fails.
-func AuthorizationRightRemove(authRef obj.Object, rightName string) error {
+func AuthorizationRightRemove(authRef AuthorizationRef, rightName string) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationRightRemove == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationRightRemove, _lib, "AuthorizationRightRemove")
 	}
-	_rc := _fnAuthorizationRightRemove(objref.IDOf(authRef), rightName)
+	_rc := _fnAuthorizationRightRemove(objref.IDOf(authRef.Object), rightName)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -125,12 +125,12 @@ func AuthorizationRightRemove(authRef obj.Object, rightName string) error {
 var _fnAuthorizationRightSet func(objc.ID, string, objc.ID, objc.ID, objc.ID, objc.ID) int32
 
 // AuthorizationRightSet reports an error if the Security framework function AuthorizationRightSet fails.
-func AuthorizationRightSet(authRef obj.Object, rightName string, rightDefinition obj.Object, descriptionKey obj.Object, bundle obj.Object, localeTableName obj.Object) error {
+func AuthorizationRightSet(authRef AuthorizationRef, rightName string, rightDefinition obj.Object, descriptionKey obj.Object, bundle obj.Object, localeTableName obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAuthorizationRightSet == nil {
 		ebipurego.RegisterLibFunc(&_fnAuthorizationRightSet, _lib, "AuthorizationRightSet")
 	}
-	_rc := _fnAuthorizationRightSet(objref.IDOf(authRef), rightName, objref.IDOf(rightDefinition), objref.IDOf(descriptionKey), objref.IDOf(bundle), objref.IDOf(localeTableName))
+	_rc := _fnAuthorizationRightSet(objref.IDOf(authRef.Object), rightName, objref.IDOf(rightDefinition), objref.IDOf(descriptionKey), objref.IDOf(bundle), objref.IDOf(localeTableName))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -140,13 +140,13 @@ func AuthorizationRightSet(authRef obj.Object, rightName string, rightDefinition
 var _fnCMSDecoderCopyAllCerts func(objc.ID, unsafe.Pointer) int32
 
 // CMSDecoderCopyAllCerts reports an error if the Security framework function CMSDecoderCopyAllCerts fails.
-func CMSDecoderCopyAllCerts(cmsDecoder obj.Object) (obj.Object, error) {
+func CMSDecoderCopyAllCerts(cmsDecoder CMSDecoderRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopyAllCerts == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopyAllCerts, _lib, "CMSDecoderCopyAllCerts")
 	}
 	var _out0 uintptr
-	_rc := _fnCMSDecoderCopyAllCerts(objref.IDOf(cmsDecoder), unsafe.Pointer(&_out0))
+	_rc := _fnCMSDecoderCopyAllCerts(objref.IDOf(cmsDecoder.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -156,13 +156,13 @@ func CMSDecoderCopyAllCerts(cmsDecoder obj.Object) (obj.Object, error) {
 var _fnCMSDecoderCopyContent func(objc.ID, unsafe.Pointer) int32
 
 // CMSDecoderCopyContent reports an error if the Security framework function CMSDecoderCopyContent fails.
-func CMSDecoderCopyContent(cmsDecoder obj.Object) (obj.Object, error) {
+func CMSDecoderCopyContent(cmsDecoder CMSDecoderRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopyContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopyContent, _lib, "CMSDecoderCopyContent")
 	}
 	var _out0 uintptr
-	_rc := _fnCMSDecoderCopyContent(objref.IDOf(cmsDecoder), unsafe.Pointer(&_out0))
+	_rc := _fnCMSDecoderCopyContent(objref.IDOf(cmsDecoder.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -172,13 +172,13 @@ func CMSDecoderCopyContent(cmsDecoder obj.Object) (obj.Object, error) {
 var _fnCMSDecoderCopyDetachedContent func(objc.ID, unsafe.Pointer) int32
 
 // CMSDecoderCopyDetachedContent reports an error if the Security framework function CMSDecoderCopyDetachedContent fails.
-func CMSDecoderCopyDetachedContent(cmsDecoder obj.Object) (obj.Object, error) {
+func CMSDecoderCopyDetachedContent(cmsDecoder CMSDecoderRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopyDetachedContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopyDetachedContent, _lib, "CMSDecoderCopyDetachedContent")
 	}
 	var _out0 uintptr
-	_rc := _fnCMSDecoderCopyDetachedContent(objref.IDOf(cmsDecoder), unsafe.Pointer(&_out0))
+	_rc := _fnCMSDecoderCopyDetachedContent(objref.IDOf(cmsDecoder.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -188,13 +188,13 @@ func CMSDecoderCopyDetachedContent(cmsDecoder obj.Object) (obj.Object, error) {
 var _fnCMSDecoderCopyEncapsulatedContentType func(objc.ID, unsafe.Pointer) int32
 
 // CMSDecoderCopyEncapsulatedContentType reports an error if the Security framework function CMSDecoderCopyEncapsulatedContentType fails.
-func CMSDecoderCopyEncapsulatedContentType(cmsDecoder obj.Object) (obj.Object, error) {
+func CMSDecoderCopyEncapsulatedContentType(cmsDecoder CMSDecoderRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopyEncapsulatedContentType == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopyEncapsulatedContentType, _lib, "CMSDecoderCopyEncapsulatedContentType")
 	}
 	var _out0 uintptr
-	_rc := _fnCMSDecoderCopyEncapsulatedContentType(objref.IDOf(cmsDecoder), unsafe.Pointer(&_out0))
+	_rc := _fnCMSDecoderCopyEncapsulatedContentType(objref.IDOf(cmsDecoder.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -204,12 +204,12 @@ func CMSDecoderCopyEncapsulatedContentType(cmsDecoder obj.Object) (obj.Object, e
 var _fnCMSDecoderCopySignerCert func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerCert reports an error if the Security framework function CMSDecoderCopySignerCert fails.
-func CMSDecoderCopySignerCert(cmsDecoder obj.Object, signerIndex int, signerCertOut unsafe.Pointer) error {
+func CMSDecoderCopySignerCert(cmsDecoder CMSDecoderRef, signerIndex int, signerCertOut unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopySignerCert == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerCert, _lib, "CMSDecoderCopySignerCert")
 	}
-	_rc := _fnCMSDecoderCopySignerCert(objref.IDOf(cmsDecoder), signerIndex, signerCertOut)
+	_rc := _fnCMSDecoderCopySignerCert(objref.IDOf(cmsDecoder.Object), signerIndex, signerCertOut)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -219,13 +219,13 @@ func CMSDecoderCopySignerCert(cmsDecoder obj.Object, signerIndex int, signerCert
 var _fnCMSDecoderCopySignerEmailAddress func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerEmailAddress reports an error if the Security framework function CMSDecoderCopySignerEmailAddress fails.
-func CMSDecoderCopySignerEmailAddress(cmsDecoder obj.Object, signerIndex int) (obj.Object, error) {
+func CMSDecoderCopySignerEmailAddress(cmsDecoder CMSDecoderRef, signerIndex int) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopySignerEmailAddress == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerEmailAddress, _lib, "CMSDecoderCopySignerEmailAddress")
 	}
 	var _out0 uintptr
-	_rc := _fnCMSDecoderCopySignerEmailAddress(objref.IDOf(cmsDecoder), signerIndex, unsafe.Pointer(&_out0))
+	_rc := _fnCMSDecoderCopySignerEmailAddress(objref.IDOf(cmsDecoder.Object), signerIndex, unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -235,13 +235,13 @@ func CMSDecoderCopySignerEmailAddress(cmsDecoder obj.Object, signerIndex int) (o
 var _fnCMSDecoderCopySignerTimestampCertificates func(objc.ID, int, unsafe.Pointer) int32
 
 // CMSDecoderCopySignerTimestampCertificates reports an error if the Security framework function CMSDecoderCopySignerTimestampCertificates fails.
-func CMSDecoderCopySignerTimestampCertificates(cmsDecoder obj.Object, signerIndex int) (obj.Object, error) {
+func CMSDecoderCopySignerTimestampCertificates(cmsDecoder CMSDecoderRef, signerIndex int) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderCopySignerTimestampCertificates == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderCopySignerTimestampCertificates, _lib, "CMSDecoderCopySignerTimestampCertificates")
 	}
 	var _out0 uintptr
-	_rc := _fnCMSDecoderCopySignerTimestampCertificates(objref.IDOf(cmsDecoder), signerIndex, unsafe.Pointer(&_out0))
+	_rc := _fnCMSDecoderCopySignerTimestampCertificates(objref.IDOf(cmsDecoder.Object), signerIndex, unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -266,12 +266,12 @@ func CMSDecoderCreate(cmsDecoderOut unsafe.Pointer) error {
 var _fnCMSDecoderFinalizeMessage func(objc.ID) int32
 
 // CMSDecoderFinalizeMessage reports an error if the Security framework function CMSDecoderFinalizeMessage fails.
-func CMSDecoderFinalizeMessage(cmsDecoder obj.Object) error {
+func CMSDecoderFinalizeMessage(cmsDecoder CMSDecoderRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderFinalizeMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderFinalizeMessage, _lib, "CMSDecoderFinalizeMessage")
 	}
-	_rc := _fnCMSDecoderFinalizeMessage(objref.IDOf(cmsDecoder))
+	_rc := _fnCMSDecoderFinalizeMessage(objref.IDOf(cmsDecoder.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -281,12 +281,12 @@ func CMSDecoderFinalizeMessage(cmsDecoder obj.Object) error {
 var _fnCMSDecoderSetDetachedContent func(objc.ID, objc.ID) int32
 
 // CMSDecoderSetDetachedContent reports an error if the Security framework function CMSDecoderSetDetachedContent fails.
-func CMSDecoderSetDetachedContent(cmsDecoder obj.Object, detachedContent obj.Object) error {
+func CMSDecoderSetDetachedContent(cmsDecoder CMSDecoderRef, detachedContent obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderSetDetachedContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderSetDetachedContent, _lib, "CMSDecoderSetDetachedContent")
 	}
-	_rc := _fnCMSDecoderSetDetachedContent(objref.IDOf(cmsDecoder), objref.IDOf(detachedContent))
+	_rc := _fnCMSDecoderSetDetachedContent(objref.IDOf(cmsDecoder.Object), objref.IDOf(detachedContent))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -296,12 +296,12 @@ func CMSDecoderSetDetachedContent(cmsDecoder obj.Object, detachedContent obj.Obj
 var _fnCMSDecoderSetSearchKeychain func(objc.ID, objc.ID) int32
 
 // CMSDecoderSetSearchKeychain reports an error if the Security framework function CMSDecoderSetSearchKeychain fails.
-func CMSDecoderSetSearchKeychain(cmsDecoder obj.Object, keychainOrArray obj.Object) error {
+func CMSDecoderSetSearchKeychain(cmsDecoder CMSDecoderRef, keychainOrArray obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderSetSearchKeychain == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderSetSearchKeychain, _lib, "CMSDecoderSetSearchKeychain")
 	}
-	_rc := _fnCMSDecoderSetSearchKeychain(objref.IDOf(cmsDecoder), objref.IDOf(keychainOrArray))
+	_rc := _fnCMSDecoderSetSearchKeychain(objref.IDOf(cmsDecoder.Object), objref.IDOf(keychainOrArray))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -311,12 +311,12 @@ func CMSDecoderSetSearchKeychain(cmsDecoder obj.Object, keychainOrArray obj.Obje
 var _fnCMSDecoderUpdateMessage func(objc.ID, unsafe.Pointer, int) int32
 
 // CMSDecoderUpdateMessage reports an error if the Security framework function CMSDecoderUpdateMessage fails.
-func CMSDecoderUpdateMessage(cmsDecoder obj.Object, msgBytes unsafe.Pointer, msgBytesLen int) error {
+func CMSDecoderUpdateMessage(cmsDecoder CMSDecoderRef, msgBytes unsafe.Pointer, msgBytesLen int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSDecoderUpdateMessage == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSDecoderUpdateMessage, _lib, "CMSDecoderUpdateMessage")
 	}
-	_rc := _fnCMSDecoderUpdateMessage(objref.IDOf(cmsDecoder), msgBytes, msgBytesLen)
+	_rc := _fnCMSDecoderUpdateMessage(objref.IDOf(cmsDecoder.Object), msgBytes, msgBytesLen)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -342,12 +342,12 @@ func CMSEncodeContent(signers obj.Object, recipients obj.Object, eContentTypeOID
 var _fnCMSEncoderAddRecipients func(objc.ID, objc.ID) int32
 
 // CMSEncoderAddRecipients reports an error if the Security framework function CMSEncoderAddRecipients fails.
-func CMSEncoderAddRecipients(cmsEncoder obj.Object, recipientOrArray obj.Object) error {
+func CMSEncoderAddRecipients(cmsEncoder CMSEncoderRef, recipientOrArray obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderAddRecipients == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderAddRecipients, _lib, "CMSEncoderAddRecipients")
 	}
-	_rc := _fnCMSEncoderAddRecipients(objref.IDOf(cmsEncoder), objref.IDOf(recipientOrArray))
+	_rc := _fnCMSEncoderAddRecipients(objref.IDOf(cmsEncoder.Object), objref.IDOf(recipientOrArray))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -357,12 +357,12 @@ func CMSEncoderAddRecipients(cmsEncoder obj.Object, recipientOrArray obj.Object)
 var _fnCMSEncoderAddSignedAttributes func(objc.ID, CMSSignedAttributes) int32
 
 // CMSEncoderAddSignedAttributes reports an error if the Security framework function CMSEncoderAddSignedAttributes fails.
-func CMSEncoderAddSignedAttributes(cmsEncoder obj.Object, signedAttributes CMSSignedAttributes) error {
+func CMSEncoderAddSignedAttributes(cmsEncoder CMSEncoderRef, signedAttributes CMSSignedAttributes) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderAddSignedAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderAddSignedAttributes, _lib, "CMSEncoderAddSignedAttributes")
 	}
-	_rc := _fnCMSEncoderAddSignedAttributes(objref.IDOf(cmsEncoder), signedAttributes)
+	_rc := _fnCMSEncoderAddSignedAttributes(objref.IDOf(cmsEncoder.Object), signedAttributes)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -372,12 +372,12 @@ func CMSEncoderAddSignedAttributes(cmsEncoder obj.Object, signedAttributes CMSSi
 var _fnCMSEncoderAddSigners func(objc.ID, objc.ID) int32
 
 // CMSEncoderAddSigners reports an error if the Security framework function CMSEncoderAddSigners fails.
-func CMSEncoderAddSigners(cmsEncoder obj.Object, signerOrArray obj.Object) error {
+func CMSEncoderAddSigners(cmsEncoder CMSEncoderRef, signerOrArray obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderAddSigners == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderAddSigners, _lib, "CMSEncoderAddSigners")
 	}
-	_rc := _fnCMSEncoderAddSigners(objref.IDOf(cmsEncoder), objref.IDOf(signerOrArray))
+	_rc := _fnCMSEncoderAddSigners(objref.IDOf(cmsEncoder.Object), objref.IDOf(signerOrArray))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -387,12 +387,12 @@ func CMSEncoderAddSigners(cmsEncoder obj.Object, signerOrArray obj.Object) error
 var _fnCMSEncoderAddSupportingCerts func(objc.ID, objc.ID) int32
 
 // CMSEncoderAddSupportingCerts reports an error if the Security framework function CMSEncoderAddSupportingCerts fails.
-func CMSEncoderAddSupportingCerts(cmsEncoder obj.Object, certOrArray obj.Object) error {
+func CMSEncoderAddSupportingCerts(cmsEncoder CMSEncoderRef, certOrArray obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderAddSupportingCerts == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderAddSupportingCerts, _lib, "CMSEncoderAddSupportingCerts")
 	}
-	_rc := _fnCMSEncoderAddSupportingCerts(objref.IDOf(cmsEncoder), objref.IDOf(certOrArray))
+	_rc := _fnCMSEncoderAddSupportingCerts(objref.IDOf(cmsEncoder.Object), objref.IDOf(certOrArray))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -402,13 +402,13 @@ func CMSEncoderAddSupportingCerts(cmsEncoder obj.Object, certOrArray obj.Object)
 var _fnCMSEncoderCopyEncapsulatedContentType func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderCopyEncapsulatedContentType reports an error if the Security framework function CMSEncoderCopyEncapsulatedContentType fails.
-func CMSEncoderCopyEncapsulatedContentType(cmsEncoder obj.Object) (obj.Object, error) {
+func CMSEncoderCopyEncapsulatedContentType(cmsEncoder CMSEncoderRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderCopyEncapsulatedContentType == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopyEncapsulatedContentType, _lib, "CMSEncoderCopyEncapsulatedContentType")
 	}
 	var _out0 uintptr
-	_rc := _fnCMSEncoderCopyEncapsulatedContentType(objref.IDOf(cmsEncoder), unsafe.Pointer(&_out0))
+	_rc := _fnCMSEncoderCopyEncapsulatedContentType(objref.IDOf(cmsEncoder.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -418,13 +418,13 @@ func CMSEncoderCopyEncapsulatedContentType(cmsEncoder obj.Object) (obj.Object, e
 var _fnCMSEncoderCopyEncodedContent func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderCopyEncodedContent reports an error if the Security framework function CMSEncoderCopyEncodedContent fails.
-func CMSEncoderCopyEncodedContent(cmsEncoder obj.Object) (obj.Object, error) {
+func CMSEncoderCopyEncodedContent(cmsEncoder CMSEncoderRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderCopyEncodedContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopyEncodedContent, _lib, "CMSEncoderCopyEncodedContent")
 	}
 	var _out0 uintptr
-	_rc := _fnCMSEncoderCopyEncodedContent(objref.IDOf(cmsEncoder), unsafe.Pointer(&_out0))
+	_rc := _fnCMSEncoderCopyEncodedContent(objref.IDOf(cmsEncoder.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -434,13 +434,13 @@ func CMSEncoderCopyEncodedContent(cmsEncoder obj.Object) (obj.Object, error) {
 var _fnCMSEncoderCopyRecipients func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderCopyRecipients reports an error if the Security framework function CMSEncoderCopyRecipients fails.
-func CMSEncoderCopyRecipients(cmsEncoder obj.Object) (obj.Object, error) {
+func CMSEncoderCopyRecipients(cmsEncoder CMSEncoderRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderCopyRecipients == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopyRecipients, _lib, "CMSEncoderCopyRecipients")
 	}
 	var _out0 uintptr
-	_rc := _fnCMSEncoderCopyRecipients(objref.IDOf(cmsEncoder), unsafe.Pointer(&_out0))
+	_rc := _fnCMSEncoderCopyRecipients(objref.IDOf(cmsEncoder.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -450,13 +450,13 @@ func CMSEncoderCopyRecipients(cmsEncoder obj.Object) (obj.Object, error) {
 var _fnCMSEncoderCopySigners func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderCopySigners reports an error if the Security framework function CMSEncoderCopySigners fails.
-func CMSEncoderCopySigners(cmsEncoder obj.Object) (obj.Object, error) {
+func CMSEncoderCopySigners(cmsEncoder CMSEncoderRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderCopySigners == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopySigners, _lib, "CMSEncoderCopySigners")
 	}
 	var _out0 uintptr
-	_rc := _fnCMSEncoderCopySigners(objref.IDOf(cmsEncoder), unsafe.Pointer(&_out0))
+	_rc := _fnCMSEncoderCopySigners(objref.IDOf(cmsEncoder.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -466,13 +466,13 @@ func CMSEncoderCopySigners(cmsEncoder obj.Object) (obj.Object, error) {
 var _fnCMSEncoderCopySupportingCerts func(objc.ID, unsafe.Pointer) int32
 
 // CMSEncoderCopySupportingCerts reports an error if the Security framework function CMSEncoderCopySupportingCerts fails.
-func CMSEncoderCopySupportingCerts(cmsEncoder obj.Object) (obj.Object, error) {
+func CMSEncoderCopySupportingCerts(cmsEncoder CMSEncoderRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderCopySupportingCerts == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderCopySupportingCerts, _lib, "CMSEncoderCopySupportingCerts")
 	}
 	var _out0 uintptr
-	_rc := _fnCMSEncoderCopySupportingCerts(objref.IDOf(cmsEncoder), unsafe.Pointer(&_out0))
+	_rc := _fnCMSEncoderCopySupportingCerts(objref.IDOf(cmsEncoder.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -497,12 +497,12 @@ func CMSEncoderCreate(cmsEncoderOut unsafe.Pointer) error {
 var _fnCMSEncoderSetCertificateChainMode func(objc.ID, CMSCertificateChainMode) int32
 
 // CMSEncoderSetCertificateChainMode reports an error if the Security framework function CMSEncoderSetCertificateChainMode fails.
-func CMSEncoderSetCertificateChainMode(cmsEncoder obj.Object, chainMode CMSCertificateChainMode) error {
+func CMSEncoderSetCertificateChainMode(cmsEncoder CMSEncoderRef, chainMode CMSCertificateChainMode) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderSetCertificateChainMode == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderSetCertificateChainMode, _lib, "CMSEncoderSetCertificateChainMode")
 	}
-	_rc := _fnCMSEncoderSetCertificateChainMode(objref.IDOf(cmsEncoder), chainMode)
+	_rc := _fnCMSEncoderSetCertificateChainMode(objref.IDOf(cmsEncoder.Object), chainMode)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -512,12 +512,12 @@ func CMSEncoderSetCertificateChainMode(cmsEncoder obj.Object, chainMode CMSCerti
 var _fnCMSEncoderSetEncapsulatedContentTypeOID func(objc.ID, objc.ID) int32
 
 // CMSEncoderSetEncapsulatedContentTypeOID reports an error if the Security framework function CMSEncoderSetEncapsulatedContentTypeOID fails.
-func CMSEncoderSetEncapsulatedContentTypeOID(cmsEncoder obj.Object, eContentTypeOID obj.Object) error {
+func CMSEncoderSetEncapsulatedContentTypeOID(cmsEncoder CMSEncoderRef, eContentTypeOID obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderSetEncapsulatedContentTypeOID == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderSetEncapsulatedContentTypeOID, _lib, "CMSEncoderSetEncapsulatedContentTypeOID")
 	}
-	_rc := _fnCMSEncoderSetEncapsulatedContentTypeOID(objref.IDOf(cmsEncoder), objref.IDOf(eContentTypeOID))
+	_rc := _fnCMSEncoderSetEncapsulatedContentTypeOID(objref.IDOf(cmsEncoder.Object), objref.IDOf(eContentTypeOID))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -527,12 +527,12 @@ func CMSEncoderSetEncapsulatedContentTypeOID(cmsEncoder obj.Object, eContentType
 var _fnCMSEncoderSetHasDetachedContent func(objc.ID, uint8) int32
 
 // CMSEncoderSetHasDetachedContent reports an error if the Security framework function CMSEncoderSetHasDetachedContent fails.
-func CMSEncoderSetHasDetachedContent(cmsEncoder obj.Object, detachedContent uint8) error {
+func CMSEncoderSetHasDetachedContent(cmsEncoder CMSEncoderRef, detachedContent uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderSetHasDetachedContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderSetHasDetachedContent, _lib, "CMSEncoderSetHasDetachedContent")
 	}
-	_rc := _fnCMSEncoderSetHasDetachedContent(objref.IDOf(cmsEncoder), detachedContent)
+	_rc := _fnCMSEncoderSetHasDetachedContent(objref.IDOf(cmsEncoder.Object), detachedContent)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -542,12 +542,12 @@ func CMSEncoderSetHasDetachedContent(cmsEncoder obj.Object, detachedContent uint
 var _fnCMSEncoderSetSignerAlgorithm func(objc.ID, objc.ID) int32
 
 // CMSEncoderSetSignerAlgorithm reports an error if the Security framework function CMSEncoderSetSignerAlgorithm fails.
-func CMSEncoderSetSignerAlgorithm(cmsEncoder obj.Object, digestAlgorithm obj.Object) error {
+func CMSEncoderSetSignerAlgorithm(cmsEncoder CMSEncoderRef, digestAlgorithm obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderSetSignerAlgorithm == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderSetSignerAlgorithm, _lib, "CMSEncoderSetSignerAlgorithm")
 	}
-	_rc := _fnCMSEncoderSetSignerAlgorithm(objref.IDOf(cmsEncoder), objref.IDOf(digestAlgorithm))
+	_rc := _fnCMSEncoderSetSignerAlgorithm(objref.IDOf(cmsEncoder.Object), objref.IDOf(digestAlgorithm))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -557,12 +557,12 @@ func CMSEncoderSetSignerAlgorithm(cmsEncoder obj.Object, digestAlgorithm obj.Obj
 var _fnCMSEncoderUpdateContent func(objc.ID, unsafe.Pointer, int) int32
 
 // CMSEncoderUpdateContent reports an error if the Security framework function CMSEncoderUpdateContent fails.
-func CMSEncoderUpdateContent(cmsEncoder obj.Object, content unsafe.Pointer, contentLen int) error {
+func CMSEncoderUpdateContent(cmsEncoder CMSEncoderRef, content unsafe.Pointer, contentLen int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSEncoderUpdateContent == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSEncoderUpdateContent, _lib, "CMSEncoderUpdateContent")
 	}
-	_rc := _fnCMSEncoderUpdateContent(objref.IDOf(cmsEncoder), content, contentLen)
+	_rc := _fnCMSEncoderUpdateContent(objref.IDOf(cmsEncoder.Object), content, contentLen)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -572,12 +572,12 @@ func CMSEncoderUpdateContent(cmsEncoder obj.Object, content unsafe.Pointer, cont
 var _fnSSLAddDistinguishedName func(objc.ID, unsafe.Pointer, int) int32
 
 // SSLAddDistinguishedName reports an error if the Security framework function SSLAddDistinguishedName fails.
-func SSLAddDistinguishedName(context_ obj.Object, derDN unsafe.Pointer, derDNLen int) error {
+func SSLAddDistinguishedName(context_ SSLContextRef, derDN unsafe.Pointer, derDNLen int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLAddDistinguishedName == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLAddDistinguishedName, _lib, "SSLAddDistinguishedName")
 	}
-	_rc := _fnSSLAddDistinguishedName(objref.IDOf(context_), derDN, derDNLen)
+	_rc := _fnSSLAddDistinguishedName(objref.IDOf(context_.Object), derDN, derDNLen)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -587,12 +587,12 @@ func SSLAddDistinguishedName(context_ obj.Object, derDN unsafe.Pointer, derDNLen
 var _fnSSLClose func(objc.ID) int32
 
 // SSLClose reports an error if the Security framework function SSLClose fails.
-func SSLClose(context_ obj.Object) error {
+func SSLClose(context_ SSLContextRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLClose == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLClose, _lib, "SSLClose")
 	}
-	_rc := _fnSSLClose(objref.IDOf(context_))
+	_rc := _fnSSLClose(objref.IDOf(context_.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -602,13 +602,13 @@ func SSLClose(context_ obj.Object) error {
 var _fnSSLCopyALPNProtocols func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyALPNProtocols reports an error if the Security framework function SSLCopyALPNProtocols fails.
-func SSLCopyALPNProtocols(context_ obj.Object) (obj.Object, error) {
+func SSLCopyALPNProtocols(context_ SSLContextRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyALPNProtocols == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyALPNProtocols, _lib, "SSLCopyALPNProtocols")
 	}
 	var _out0 uintptr
-	_rc := _fnSSLCopyALPNProtocols(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_rc := _fnSSLCopyALPNProtocols(objref.IDOf(context_.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -618,13 +618,13 @@ func SSLCopyALPNProtocols(context_ obj.Object) (obj.Object, error) {
 var _fnSSLCopyCertificateAuthorities func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyCertificateAuthorities reports an error if the Security framework function SSLCopyCertificateAuthorities fails.
-func SSLCopyCertificateAuthorities(context_ obj.Object) (obj.Object, error) {
+func SSLCopyCertificateAuthorities(context_ SSLContextRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyCertificateAuthorities == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyCertificateAuthorities, _lib, "SSLCopyCertificateAuthorities")
 	}
 	var _out0 uintptr
-	_rc := _fnSSLCopyCertificateAuthorities(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_rc := _fnSSLCopyCertificateAuthorities(objref.IDOf(context_.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -634,13 +634,13 @@ func SSLCopyCertificateAuthorities(context_ obj.Object) (obj.Object, error) {
 var _fnSSLCopyDistinguishedNames func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyDistinguishedNames reports an error if the Security framework function SSLCopyDistinguishedNames fails.
-func SSLCopyDistinguishedNames(context_ obj.Object) (obj.Object, error) {
+func SSLCopyDistinguishedNames(context_ SSLContextRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyDistinguishedNames == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyDistinguishedNames, _lib, "SSLCopyDistinguishedNames")
 	}
 	var _out0 uintptr
-	_rc := _fnSSLCopyDistinguishedNames(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_rc := _fnSSLCopyDistinguishedNames(objref.IDOf(context_.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -650,13 +650,13 @@ func SSLCopyDistinguishedNames(context_ obj.Object) (obj.Object, error) {
 var _fnSSLCopyPeerCertificates func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyPeerCertificates reports an error if the Security framework function SSLCopyPeerCertificates fails.
-func SSLCopyPeerCertificates(context_ obj.Object) (obj.Object, error) {
+func SSLCopyPeerCertificates(context_ SSLContextRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyPeerCertificates == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyPeerCertificates, _lib, "SSLCopyPeerCertificates")
 	}
 	var _out0 uintptr
-	_rc := _fnSSLCopyPeerCertificates(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_rc := _fnSSLCopyPeerCertificates(objref.IDOf(context_.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -666,12 +666,12 @@ func SSLCopyPeerCertificates(context_ obj.Object) (obj.Object, error) {
 var _fnSSLCopyPeerTrust func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyPeerTrust reports an error if the Security framework function SSLCopyPeerTrust fails.
-func SSLCopyPeerTrust(context_ obj.Object, trust unsafe.Pointer) error {
+func SSLCopyPeerTrust(context_ SSLContextRef, trust unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyPeerTrust == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyPeerTrust, _lib, "SSLCopyPeerTrust")
 	}
-	_rc := _fnSSLCopyPeerTrust(objref.IDOf(context_), trust)
+	_rc := _fnSSLCopyPeerTrust(objref.IDOf(context_.Object), trust)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -681,13 +681,13 @@ func SSLCopyPeerTrust(context_ obj.Object, trust unsafe.Pointer) error {
 var _fnSSLCopyTrustedRoots func(objc.ID, unsafe.Pointer) int32
 
 // SSLCopyTrustedRoots reports an error if the Security framework function SSLCopyTrustedRoots fails.
-func SSLCopyTrustedRoots(context_ obj.Object) (obj.Object, error) {
+func SSLCopyTrustedRoots(context_ SSLContextRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLCopyTrustedRoots == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLCopyTrustedRoots, _lib, "SSLCopyTrustedRoots")
 	}
 	var _out0 uintptr
-	_rc := _fnSSLCopyTrustedRoots(objref.IDOf(context_), unsafe.Pointer(&_out0))
+	_rc := _fnSSLCopyTrustedRoots(objref.IDOf(context_.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -697,12 +697,12 @@ func SSLCopyTrustedRoots(context_ obj.Object) (obj.Object, error) {
 var _fnSSLDisposeContext func(objc.ID) int32
 
 // SSLDisposeContext reports an error if the Security framework function SSLDisposeContext fails.
-func SSLDisposeContext(context_ obj.Object) error {
+func SSLDisposeContext(context_ SSLContextRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLDisposeContext == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLDisposeContext, _lib, "SSLDisposeContext")
 	}
-	_rc := _fnSSLDisposeContext(objref.IDOf(context_))
+	_rc := _fnSSLDisposeContext(objref.IDOf(context_.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -712,12 +712,12 @@ func SSLDisposeContext(context_ obj.Object) error {
 var _fnSSLGetConnection func(objc.ID, unsafe.Pointer) int32
 
 // SSLGetConnection reports an error if the Security framework function SSLGetConnection fails.
-func SSLGetConnection(context_ obj.Object, connection unsafe.Pointer) error {
+func SSLGetConnection(context_ SSLContextRef, connection unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLGetConnection == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLGetConnection, _lib, "SSLGetConnection")
 	}
-	_rc := _fnSSLGetConnection(objref.IDOf(context_), connection)
+	_rc := _fnSSLGetConnection(objref.IDOf(context_.Object), connection)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -727,12 +727,12 @@ func SSLGetConnection(context_ obj.Object, connection unsafe.Pointer) error {
 var _fnSSLHandshake func(objc.ID) int32
 
 // SSLHandshake reports an error if the Security framework function SSLHandshake fails.
-func SSLHandshake(context_ obj.Object) error {
+func SSLHandshake(context_ SSLContextRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLHandshake == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLHandshake, _lib, "SSLHandshake")
 	}
-	_rc := _fnSSLHandshake(objref.IDOf(context_))
+	_rc := _fnSSLHandshake(objref.IDOf(context_.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -757,12 +757,12 @@ func SSLNewContext(isServer uint8, contextPtr unsafe.Pointer) error {
 var _fnSSLReHandshake func(objc.ID) int32
 
 // SSLReHandshake reports an error if the Security framework function SSLReHandshake fails.
-func SSLReHandshake(context_ obj.Object) error {
+func SSLReHandshake(context_ SSLContextRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLReHandshake == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLReHandshake, _lib, "SSLReHandshake")
 	}
-	_rc := _fnSSLReHandshake(objref.IDOf(context_))
+	_rc := _fnSSLReHandshake(objref.IDOf(context_.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -772,12 +772,12 @@ func SSLReHandshake(context_ obj.Object) error {
 var _fnSSLSetALPNProtocols func(objc.ID, objc.ID) int32
 
 // SSLSetALPNProtocols reports an error if the Security framework function SSLSetALPNProtocols fails.
-func SSLSetALPNProtocols(context_ obj.Object, protocols obj.Object) error {
+func SSLSetALPNProtocols(context_ SSLContextRef, protocols obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetALPNProtocols == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetALPNProtocols, _lib, "SSLSetALPNProtocols")
 	}
-	_rc := _fnSSLSetALPNProtocols(objref.IDOf(context_), objref.IDOf(protocols))
+	_rc := _fnSSLSetALPNProtocols(objref.IDOf(context_.Object), objref.IDOf(protocols))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -787,12 +787,12 @@ func SSLSetALPNProtocols(context_ obj.Object, protocols obj.Object) error {
 var _fnSSLSetAllowsAnyRoot func(objc.ID, uint8) int32
 
 // SSLSetAllowsAnyRoot reports an error if the Security framework function SSLSetAllowsAnyRoot fails.
-func SSLSetAllowsAnyRoot(context_ obj.Object, anyRoot uint8) error {
+func SSLSetAllowsAnyRoot(context_ SSLContextRef, anyRoot uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetAllowsAnyRoot == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetAllowsAnyRoot, _lib, "SSLSetAllowsAnyRoot")
 	}
-	_rc := _fnSSLSetAllowsAnyRoot(objref.IDOf(context_), anyRoot)
+	_rc := _fnSSLSetAllowsAnyRoot(objref.IDOf(context_.Object), anyRoot)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -802,12 +802,12 @@ func SSLSetAllowsAnyRoot(context_ obj.Object, anyRoot uint8) error {
 var _fnSSLSetAllowsExpiredCerts func(objc.ID, uint8) int32
 
 // SSLSetAllowsExpiredCerts reports an error if the Security framework function SSLSetAllowsExpiredCerts fails.
-func SSLSetAllowsExpiredCerts(context_ obj.Object, allowsExpired uint8) error {
+func SSLSetAllowsExpiredCerts(context_ SSLContextRef, allowsExpired uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetAllowsExpiredCerts == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetAllowsExpiredCerts, _lib, "SSLSetAllowsExpiredCerts")
 	}
-	_rc := _fnSSLSetAllowsExpiredCerts(objref.IDOf(context_), allowsExpired)
+	_rc := _fnSSLSetAllowsExpiredCerts(objref.IDOf(context_.Object), allowsExpired)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -817,12 +817,12 @@ func SSLSetAllowsExpiredCerts(context_ obj.Object, allowsExpired uint8) error {
 var _fnSSLSetAllowsExpiredRoots func(objc.ID, uint8) int32
 
 // SSLSetAllowsExpiredRoots reports an error if the Security framework function SSLSetAllowsExpiredRoots fails.
-func SSLSetAllowsExpiredRoots(context_ obj.Object, allowsExpired uint8) error {
+func SSLSetAllowsExpiredRoots(context_ SSLContextRef, allowsExpired uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetAllowsExpiredRoots == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetAllowsExpiredRoots, _lib, "SSLSetAllowsExpiredRoots")
 	}
-	_rc := _fnSSLSetAllowsExpiredRoots(objref.IDOf(context_), allowsExpired)
+	_rc := _fnSSLSetAllowsExpiredRoots(objref.IDOf(context_.Object), allowsExpired)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -832,12 +832,12 @@ func SSLSetAllowsExpiredRoots(context_ obj.Object, allowsExpired uint8) error {
 var _fnSSLSetCertificate func(objc.ID, objc.ID) int32
 
 // SSLSetCertificate reports an error if the Security framework function SSLSetCertificate fails.
-func SSLSetCertificate(context_ obj.Object, certRefs obj.Object) error {
+func SSLSetCertificate(context_ SSLContextRef, certRefs obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetCertificate == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetCertificate, _lib, "SSLSetCertificate")
 	}
-	_rc := _fnSSLSetCertificate(objref.IDOf(context_), objref.IDOf(certRefs))
+	_rc := _fnSSLSetCertificate(objref.IDOf(context_.Object), objref.IDOf(certRefs))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -847,12 +847,12 @@ func SSLSetCertificate(context_ obj.Object, certRefs obj.Object) error {
 var _fnSSLSetCertificateAuthorities func(objc.ID, objc.ID, uint8) int32
 
 // SSLSetCertificateAuthorities reports an error if the Security framework function SSLSetCertificateAuthorities fails.
-func SSLSetCertificateAuthorities(context_ obj.Object, certificateOrArray obj.Object, replaceExisting uint8) error {
+func SSLSetCertificateAuthorities(context_ SSLContextRef, certificateOrArray obj.Object, replaceExisting uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetCertificateAuthorities == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetCertificateAuthorities, _lib, "SSLSetCertificateAuthorities")
 	}
-	_rc := _fnSSLSetCertificateAuthorities(objref.IDOf(context_), objref.IDOf(certificateOrArray), replaceExisting)
+	_rc := _fnSSLSetCertificateAuthorities(objref.IDOf(context_.Object), objref.IDOf(certificateOrArray), replaceExisting)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -862,12 +862,12 @@ func SSLSetCertificateAuthorities(context_ obj.Object, certificateOrArray obj.Ob
 var _fnSSLSetClientSideAuthenticate func(objc.ID, SSLAuthenticate) int32
 
 // SSLSetClientSideAuthenticate reports an error if the Security framework function SSLSetClientSideAuthenticate fails.
-func SSLSetClientSideAuthenticate(context_ obj.Object, auth SSLAuthenticate) error {
+func SSLSetClientSideAuthenticate(context_ SSLContextRef, auth SSLAuthenticate) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetClientSideAuthenticate == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetClientSideAuthenticate, _lib, "SSLSetClientSideAuthenticate")
 	}
-	_rc := _fnSSLSetClientSideAuthenticate(objref.IDOf(context_), auth)
+	_rc := _fnSSLSetClientSideAuthenticate(objref.IDOf(context_.Object), auth)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -877,12 +877,12 @@ func SSLSetClientSideAuthenticate(context_ obj.Object, auth SSLAuthenticate) err
 var _fnSSLSetConnection func(objc.ID, unsafe.Pointer) int32
 
 // SSLSetConnection reports an error if the Security framework function SSLSetConnection fails.
-func SSLSetConnection(context_ obj.Object, connection unsafe.Pointer) error {
+func SSLSetConnection(context_ SSLContextRef, connection unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetConnection == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetConnection, _lib, "SSLSetConnection")
 	}
-	_rc := _fnSSLSetConnection(objref.IDOf(context_), connection)
+	_rc := _fnSSLSetConnection(objref.IDOf(context_.Object), connection)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -892,12 +892,12 @@ func SSLSetConnection(context_ obj.Object, connection unsafe.Pointer) error {
 var _fnSSLSetDatagramHelloCookie func(objc.ID, unsafe.Pointer, int) int32
 
 // SSLSetDatagramHelloCookie reports an error if the Security framework function SSLSetDatagramHelloCookie fails.
-func SSLSetDatagramHelloCookie(dtlsContext obj.Object, cookie unsafe.Pointer, cookieLen int) error {
+func SSLSetDatagramHelloCookie(dtlsContext SSLContextRef, cookie unsafe.Pointer, cookieLen int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetDatagramHelloCookie == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetDatagramHelloCookie, _lib, "SSLSetDatagramHelloCookie")
 	}
-	_rc := _fnSSLSetDatagramHelloCookie(objref.IDOf(dtlsContext), cookie, cookieLen)
+	_rc := _fnSSLSetDatagramHelloCookie(objref.IDOf(dtlsContext.Object), cookie, cookieLen)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -907,12 +907,12 @@ func SSLSetDatagramHelloCookie(dtlsContext obj.Object, cookie unsafe.Pointer, co
 var _fnSSLSetDiffieHellmanParams func(objc.ID, unsafe.Pointer, int) int32
 
 // SSLSetDiffieHellmanParams reports an error if the Security framework function SSLSetDiffieHellmanParams fails.
-func SSLSetDiffieHellmanParams(context_ obj.Object, dhParams unsafe.Pointer, dhParamsLen int) error {
+func SSLSetDiffieHellmanParams(context_ SSLContextRef, dhParams unsafe.Pointer, dhParamsLen int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetDiffieHellmanParams == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetDiffieHellmanParams, _lib, "SSLSetDiffieHellmanParams")
 	}
-	_rc := _fnSSLSetDiffieHellmanParams(objref.IDOf(context_), dhParams, dhParamsLen)
+	_rc := _fnSSLSetDiffieHellmanParams(objref.IDOf(context_.Object), dhParams, dhParamsLen)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -922,12 +922,12 @@ func SSLSetDiffieHellmanParams(context_ obj.Object, dhParams unsafe.Pointer, dhP
 var _fnSSLSetEnableCertVerify func(objc.ID, uint8) int32
 
 // SSLSetEnableCertVerify reports an error if the Security framework function SSLSetEnableCertVerify fails.
-func SSLSetEnableCertVerify(context_ obj.Object, enableVerify uint8) error {
+func SSLSetEnableCertVerify(context_ SSLContextRef, enableVerify uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetEnableCertVerify == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetEnableCertVerify, _lib, "SSLSetEnableCertVerify")
 	}
-	_rc := _fnSSLSetEnableCertVerify(objref.IDOf(context_), enableVerify)
+	_rc := _fnSSLSetEnableCertVerify(objref.IDOf(context_.Object), enableVerify)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -937,12 +937,12 @@ func SSLSetEnableCertVerify(context_ obj.Object, enableVerify uint8) error {
 var _fnSSLSetEncryptionCertificate func(objc.ID, objc.ID) int32
 
 // SSLSetEncryptionCertificate reports an error if the Security framework function SSLSetEncryptionCertificate fails.
-func SSLSetEncryptionCertificate(context_ obj.Object, certRefs obj.Object) error {
+func SSLSetEncryptionCertificate(context_ SSLContextRef, certRefs obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetEncryptionCertificate == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetEncryptionCertificate, _lib, "SSLSetEncryptionCertificate")
 	}
-	_rc := _fnSSLSetEncryptionCertificate(objref.IDOf(context_), objref.IDOf(certRefs))
+	_rc := _fnSSLSetEncryptionCertificate(objref.IDOf(context_.Object), objref.IDOf(certRefs))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -952,12 +952,12 @@ func SSLSetEncryptionCertificate(context_ obj.Object, certRefs obj.Object) error
 var _fnSSLSetError func(objc.ID, int) int32
 
 // SSLSetError reports an error if the Security framework function SSLSetError fails.
-func SSLSetError(context_ obj.Object, status int) error {
+func SSLSetError(context_ SSLContextRef, status int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetError == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetError, _lib, "SSLSetError")
 	}
-	_rc := _fnSSLSetError(objref.IDOf(context_), status)
+	_rc := _fnSSLSetError(objref.IDOf(context_.Object), status)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -967,12 +967,12 @@ func SSLSetError(context_ obj.Object, status int) error {
 var _fnSSLSetIOFuncs func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // SSLSetIOFuncs reports an error if the Security framework function SSLSetIOFuncs fails.
-func SSLSetIOFuncs(context_ obj.Object, readFunc unsafe.Pointer, writeFunc unsafe.Pointer) error {
+func SSLSetIOFuncs(context_ SSLContextRef, readFunc unsafe.Pointer, writeFunc unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetIOFuncs == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetIOFuncs, _lib, "SSLSetIOFuncs")
 	}
-	_rc := _fnSSLSetIOFuncs(objref.IDOf(context_), readFunc, writeFunc)
+	_rc := _fnSSLSetIOFuncs(objref.IDOf(context_.Object), readFunc, writeFunc)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -982,12 +982,12 @@ func SSLSetIOFuncs(context_ obj.Object, readFunc unsafe.Pointer, writeFunc unsaf
 var _fnSSLSetMaxDatagramRecordSize func(objc.ID, int) int32
 
 // SSLSetMaxDatagramRecordSize reports an error if the Security framework function SSLSetMaxDatagramRecordSize fails.
-func SSLSetMaxDatagramRecordSize(dtlsContext obj.Object, maxSize int) error {
+func SSLSetMaxDatagramRecordSize(dtlsContext SSLContextRef, maxSize int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetMaxDatagramRecordSize == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetMaxDatagramRecordSize, _lib, "SSLSetMaxDatagramRecordSize")
 	}
-	_rc := _fnSSLSetMaxDatagramRecordSize(objref.IDOf(dtlsContext), maxSize)
+	_rc := _fnSSLSetMaxDatagramRecordSize(objref.IDOf(dtlsContext.Object), maxSize)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -997,12 +997,12 @@ func SSLSetMaxDatagramRecordSize(dtlsContext obj.Object, maxSize int) error {
 var _fnSSLSetOCSPResponse func(objc.ID, objc.ID) int32
 
 // SSLSetOCSPResponse reports an error if the Security framework function SSLSetOCSPResponse fails.
-func SSLSetOCSPResponse(context_ obj.Object, response obj.Object) error {
+func SSLSetOCSPResponse(context_ SSLContextRef, response obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetOCSPResponse == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetOCSPResponse, _lib, "SSLSetOCSPResponse")
 	}
-	_rc := _fnSSLSetOCSPResponse(objref.IDOf(context_), objref.IDOf(response))
+	_rc := _fnSSLSetOCSPResponse(objref.IDOf(context_.Object), objref.IDOf(response))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1012,12 +1012,12 @@ func SSLSetOCSPResponse(context_ obj.Object, response obj.Object) error {
 var _fnSSLSetPeerDomainName func(objc.ID, string, int) int32
 
 // SSLSetPeerDomainName reports an error if the Security framework function SSLSetPeerDomainName fails.
-func SSLSetPeerDomainName(context_ obj.Object, peerName string, peerNameLen int) error {
+func SSLSetPeerDomainName(context_ SSLContextRef, peerName string, peerNameLen int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetPeerDomainName == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetPeerDomainName, _lib, "SSLSetPeerDomainName")
 	}
-	_rc := _fnSSLSetPeerDomainName(objref.IDOf(context_), peerName, peerNameLen)
+	_rc := _fnSSLSetPeerDomainName(objref.IDOf(context_.Object), peerName, peerNameLen)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1027,12 +1027,12 @@ func SSLSetPeerDomainName(context_ obj.Object, peerName string, peerNameLen int)
 var _fnSSLSetPeerID func(objc.ID, unsafe.Pointer, int) int32
 
 // SSLSetPeerID reports an error if the Security framework function SSLSetPeerID fails.
-func SSLSetPeerID(context_ obj.Object, peerID unsafe.Pointer, peerIDLen int) error {
+func SSLSetPeerID(context_ SSLContextRef, peerID unsafe.Pointer, peerIDLen int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetPeerID == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetPeerID, _lib, "SSLSetPeerID")
 	}
-	_rc := _fnSSLSetPeerID(objref.IDOf(context_), peerID, peerIDLen)
+	_rc := _fnSSLSetPeerID(objref.IDOf(context_.Object), peerID, peerIDLen)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1042,12 +1042,12 @@ func SSLSetPeerID(context_ obj.Object, peerID unsafe.Pointer, peerIDLen int) err
 var _fnSSLSetProtocolVersion func(objc.ID, SSLProtocol) int32
 
 // SSLSetProtocolVersion reports an error if the Security framework function SSLSetProtocolVersion fails.
-func SSLSetProtocolVersion(context_ obj.Object, version SSLProtocol) error {
+func SSLSetProtocolVersion(context_ SSLContextRef, version SSLProtocol) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetProtocolVersion == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetProtocolVersion, _lib, "SSLSetProtocolVersion")
 	}
-	_rc := _fnSSLSetProtocolVersion(objref.IDOf(context_), version)
+	_rc := _fnSSLSetProtocolVersion(objref.IDOf(context_.Object), version)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1057,12 +1057,12 @@ func SSLSetProtocolVersion(context_ obj.Object, version SSLProtocol) error {
 var _fnSSLSetProtocolVersionEnabled func(objc.ID, SSLProtocol, uint8) int32
 
 // SSLSetProtocolVersionEnabled reports an error if the Security framework function SSLSetProtocolVersionEnabled fails.
-func SSLSetProtocolVersionEnabled(context_ obj.Object, protocol SSLProtocol, enable uint8) error {
+func SSLSetProtocolVersionEnabled(context_ SSLContextRef, protocol SSLProtocol, enable uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetProtocolVersionEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetProtocolVersionEnabled, _lib, "SSLSetProtocolVersionEnabled")
 	}
-	_rc := _fnSSLSetProtocolVersionEnabled(objref.IDOf(context_), protocol, enable)
+	_rc := _fnSSLSetProtocolVersionEnabled(objref.IDOf(context_.Object), protocol, enable)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1072,12 +1072,12 @@ func SSLSetProtocolVersionEnabled(context_ obj.Object, protocol SSLProtocol, ena
 var _fnSSLSetProtocolVersionMax func(objc.ID, SSLProtocol) int32
 
 // SSLSetProtocolVersionMax reports an error if the Security framework function SSLSetProtocolVersionMax fails.
-func SSLSetProtocolVersionMax(context_ obj.Object, maxVersion SSLProtocol) error {
+func SSLSetProtocolVersionMax(context_ SSLContextRef, maxVersion SSLProtocol) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetProtocolVersionMax == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetProtocolVersionMax, _lib, "SSLSetProtocolVersionMax")
 	}
-	_rc := _fnSSLSetProtocolVersionMax(objref.IDOf(context_), maxVersion)
+	_rc := _fnSSLSetProtocolVersionMax(objref.IDOf(context_.Object), maxVersion)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1087,12 +1087,12 @@ func SSLSetProtocolVersionMax(context_ obj.Object, maxVersion SSLProtocol) error
 var _fnSSLSetProtocolVersionMin func(objc.ID, SSLProtocol) int32
 
 // SSLSetProtocolVersionMin reports an error if the Security framework function SSLSetProtocolVersionMin fails.
-func SSLSetProtocolVersionMin(context_ obj.Object, minVersion SSLProtocol) error {
+func SSLSetProtocolVersionMin(context_ SSLContextRef, minVersion SSLProtocol) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetProtocolVersionMin == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetProtocolVersionMin, _lib, "SSLSetProtocolVersionMin")
 	}
-	_rc := _fnSSLSetProtocolVersionMin(objref.IDOf(context_), minVersion)
+	_rc := _fnSSLSetProtocolVersionMin(objref.IDOf(context_.Object), minVersion)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1102,12 +1102,12 @@ func SSLSetProtocolVersionMin(context_ obj.Object, minVersion SSLProtocol) error
 var _fnSSLSetRsaBlinding func(objc.ID, uint8) int32
 
 // SSLSetRsaBlinding reports an error if the Security framework function SSLSetRsaBlinding fails.
-func SSLSetRsaBlinding(context_ obj.Object, blinding uint8) error {
+func SSLSetRsaBlinding(context_ SSLContextRef, blinding uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetRsaBlinding == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetRsaBlinding, _lib, "SSLSetRsaBlinding")
 	}
-	_rc := _fnSSLSetRsaBlinding(objref.IDOf(context_), blinding)
+	_rc := _fnSSLSetRsaBlinding(objref.IDOf(context_.Object), blinding)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1117,12 +1117,12 @@ func SSLSetRsaBlinding(context_ obj.Object, blinding uint8) error {
 var _fnSSLSetSessionConfig func(objc.ID, objc.ID) int32
 
 // SSLSetSessionConfig reports an error if the Security framework function SSLSetSessionConfig fails.
-func SSLSetSessionConfig(context_ obj.Object, config obj.Object) error {
+func SSLSetSessionConfig(context_ SSLContextRef, config obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetSessionConfig == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetSessionConfig, _lib, "SSLSetSessionConfig")
 	}
-	_rc := _fnSSLSetSessionConfig(objref.IDOf(context_), objref.IDOf(config))
+	_rc := _fnSSLSetSessionConfig(objref.IDOf(context_.Object), objref.IDOf(config))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1132,12 +1132,12 @@ func SSLSetSessionConfig(context_ obj.Object, config obj.Object) error {
 var _fnSSLSetSessionOption func(objc.ID, SSLSessionOption, uint8) int32
 
 // SSLSetSessionOption reports an error if the Security framework function SSLSetSessionOption fails.
-func SSLSetSessionOption(context_ obj.Object, option SSLSessionOption, value uint8) error {
+func SSLSetSessionOption(context_ SSLContextRef, option SSLSessionOption, value uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetSessionOption == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetSessionOption, _lib, "SSLSetSessionOption")
 	}
-	_rc := _fnSSLSetSessionOption(objref.IDOf(context_), option, value)
+	_rc := _fnSSLSetSessionOption(objref.IDOf(context_.Object), option, value)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1147,12 +1147,12 @@ func SSLSetSessionOption(context_ obj.Object, option SSLSessionOption, value uin
 var _fnSSLSetSessionTicketsEnabled func(objc.ID, uint8) int32
 
 // SSLSetSessionTicketsEnabled reports an error if the Security framework function SSLSetSessionTicketsEnabled fails.
-func SSLSetSessionTicketsEnabled(context_ obj.Object, enabled uint8) error {
+func SSLSetSessionTicketsEnabled(context_ SSLContextRef, enabled uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetSessionTicketsEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetSessionTicketsEnabled, _lib, "SSLSetSessionTicketsEnabled")
 	}
-	_rc := _fnSSLSetSessionTicketsEnabled(objref.IDOf(context_), enabled)
+	_rc := _fnSSLSetSessionTicketsEnabled(objref.IDOf(context_.Object), enabled)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1162,12 +1162,12 @@ func SSLSetSessionTicketsEnabled(context_ obj.Object, enabled uint8) error {
 var _fnSSLSetTrustedRoots func(objc.ID, objc.ID, uint8) int32
 
 // SSLSetTrustedRoots reports an error if the Security framework function SSLSetTrustedRoots fails.
-func SSLSetTrustedRoots(context_ obj.Object, trustedRoots obj.Object, replaceExisting uint8) error {
+func SSLSetTrustedRoots(context_ SSLContextRef, trustedRoots obj.Object, replaceExisting uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSSLSetTrustedRoots == nil {
 		ebipurego.RegisterLibFunc(&_fnSSLSetTrustedRoots, _lib, "SSLSetTrustedRoots")
 	}
-	_rc := _fnSSLSetTrustedRoots(objref.IDOf(context_), objref.IDOf(trustedRoots), replaceExisting)
+	_rc := _fnSSLSetTrustedRoots(objref.IDOf(context_.Object), objref.IDOf(trustedRoots), replaceExisting)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1177,14 +1177,14 @@ func SSLSetTrustedRoots(context_ obj.Object, trustedRoots obj.Object, replaceExi
 var _fnSecACLCopySimpleContents func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecACLCopySimpleContents reports an error if the Security framework function SecACLCopySimpleContents fails.
-func SecACLCopySimpleContents(acl obj.Object, promptSelector *CssmAclKeychainPromptSelector) (obj.Object, obj.Object, error) {
+func SecACLCopySimpleContents(acl SecACLRef, promptSelector *CssmAclKeychainPromptSelector) (obj.Object, obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLCopySimpleContents == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLCopySimpleContents, _lib, "SecACLCopySimpleContents")
 	}
 	var _out0 uintptr
 	var _out1 uintptr
-	_rc := _fnSecACLCopySimpleContents(objref.IDOf(acl), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(promptSelector))
+	_rc := _fnSecACLCopySimpleContents(objref.IDOf(acl.Object), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(promptSelector))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, nil, _err
 	}
@@ -1194,12 +1194,12 @@ func SecACLCopySimpleContents(acl obj.Object, promptSelector *CssmAclKeychainPro
 var _fnSecACLCreateFromSimpleContents func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecACLCreateFromSimpleContents reports an error if the Security framework function SecACLCreateFromSimpleContents fails.
-func SecACLCreateFromSimpleContents(access obj.Object, applicationList obj.Object, description obj.Object, promptSelector *CssmAclKeychainPromptSelector, newAcl unsafe.Pointer) error {
+func SecACLCreateFromSimpleContents(access SecAccessRef, applicationList obj.Object, description obj.Object, promptSelector *CssmAclKeychainPromptSelector, newAcl unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLCreateFromSimpleContents == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLCreateFromSimpleContents, _lib, "SecACLCreateFromSimpleContents")
 	}
-	_rc := _fnSecACLCreateFromSimpleContents(objref.IDOf(access), objref.IDOf(applicationList), objref.IDOf(description), unsafe.Pointer(promptSelector), newAcl)
+	_rc := _fnSecACLCreateFromSimpleContents(objref.IDOf(access.Object), objref.IDOf(applicationList), objref.IDOf(description), unsafe.Pointer(promptSelector), newAcl)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1209,12 +1209,12 @@ func SecACLCreateFromSimpleContents(access obj.Object, applicationList obj.Objec
 var _fnSecACLCreateWithSimpleContents func(objc.ID, objc.ID, objc.ID, SecKeychainPromptSelector, unsafe.Pointer) int32
 
 // SecACLCreateWithSimpleContents reports an error if the Security framework function SecACLCreateWithSimpleContents fails.
-func SecACLCreateWithSimpleContents(access obj.Object, applicationList obj.Object, description obj.Object, promptSelector SecKeychainPromptSelector, newAcl unsafe.Pointer) error {
+func SecACLCreateWithSimpleContents(access SecAccessRef, applicationList obj.Object, description obj.Object, promptSelector SecKeychainPromptSelector, newAcl unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLCreateWithSimpleContents == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLCreateWithSimpleContents, _lib, "SecACLCreateWithSimpleContents")
 	}
-	_rc := _fnSecACLCreateWithSimpleContents(objref.IDOf(access), objref.IDOf(applicationList), objref.IDOf(description), promptSelector, newAcl)
+	_rc := _fnSecACLCreateWithSimpleContents(objref.IDOf(access.Object), objref.IDOf(applicationList), objref.IDOf(description), promptSelector, newAcl)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1224,12 +1224,12 @@ func SecACLCreateWithSimpleContents(access obj.Object, applicationList obj.Objec
 var _fnSecACLRemove func(objc.ID) int32
 
 // SecACLRemove reports an error if the Security framework function SecACLRemove fails.
-func SecACLRemove(aclRef obj.Object) error {
+func SecACLRemove(aclRef SecACLRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLRemove == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLRemove, _lib, "SecACLRemove")
 	}
-	_rc := _fnSecACLRemove(objref.IDOf(aclRef))
+	_rc := _fnSecACLRemove(objref.IDOf(aclRef.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1239,12 +1239,12 @@ func SecACLRemove(aclRef obj.Object) error {
 var _fnSecACLSetContents func(objc.ID, objc.ID, objc.ID, SecKeychainPromptSelector) int32
 
 // SecACLSetContents reports an error if the Security framework function SecACLSetContents fails.
-func SecACLSetContents(acl obj.Object, applicationList obj.Object, description obj.Object, promptSelector SecKeychainPromptSelector) error {
+func SecACLSetContents(acl SecACLRef, applicationList obj.Object, description obj.Object, promptSelector SecKeychainPromptSelector) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLSetContents == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLSetContents, _lib, "SecACLSetContents")
 	}
-	_rc := _fnSecACLSetContents(objref.IDOf(acl), objref.IDOf(applicationList), objref.IDOf(description), promptSelector)
+	_rc := _fnSecACLSetContents(objref.IDOf(acl.Object), objref.IDOf(applicationList), objref.IDOf(description), promptSelector)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1254,12 +1254,12 @@ func SecACLSetContents(acl obj.Object, applicationList obj.Object, description o
 var _fnSecACLSetSimpleContents func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32
 
 // SecACLSetSimpleContents reports an error if the Security framework function SecACLSetSimpleContents fails.
-func SecACLSetSimpleContents(acl obj.Object, applicationList obj.Object, description obj.Object, promptSelector *CssmAclKeychainPromptSelector) error {
+func SecACLSetSimpleContents(acl SecACLRef, applicationList obj.Object, description obj.Object, promptSelector *CssmAclKeychainPromptSelector) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLSetSimpleContents == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLSetSimpleContents, _lib, "SecACLSetSimpleContents")
 	}
-	_rc := _fnSecACLSetSimpleContents(objref.IDOf(acl), objref.IDOf(applicationList), objref.IDOf(description), unsafe.Pointer(promptSelector))
+	_rc := _fnSecACLSetSimpleContents(objref.IDOf(acl.Object), objref.IDOf(applicationList), objref.IDOf(description), unsafe.Pointer(promptSelector))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1269,12 +1269,12 @@ func SecACLSetSimpleContents(acl obj.Object, applicationList obj.Object, descrip
 var _fnSecACLUpdateAuthorizations func(objc.ID, objc.ID) int32
 
 // SecACLUpdateAuthorizations reports an error if the Security framework function SecACLUpdateAuthorizations fails.
-func SecACLUpdateAuthorizations(acl obj.Object, authorizations obj.Object) error {
+func SecACLUpdateAuthorizations(acl SecACLRef, authorizations obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecACLUpdateAuthorizations == nil {
 		ebipurego.RegisterLibFunc(&_fnSecACLUpdateAuthorizations, _lib, "SecACLUpdateAuthorizations")
 	}
-	_rc := _fnSecACLUpdateAuthorizations(objref.IDOf(acl), objref.IDOf(authorizations))
+	_rc := _fnSecACLUpdateAuthorizations(objref.IDOf(acl.Object), objref.IDOf(authorizations))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1284,13 +1284,13 @@ func SecACLUpdateAuthorizations(acl obj.Object, authorizations obj.Object) error
 var _fnSecAccessCopyACLList func(objc.ID, unsafe.Pointer) int32
 
 // SecAccessCopyACLList reports an error if the Security framework function SecAccessCopyACLList fails.
-func SecAccessCopyACLList(accessRef obj.Object) (obj.Object, error) {
+func SecAccessCopyACLList(accessRef SecAccessRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAccessCopyACLList == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAccessCopyACLList, _lib, "SecAccessCopyACLList")
 	}
 	var _out0 uintptr
-	_rc := _fnSecAccessCopyACLList(objref.IDOf(accessRef), unsafe.Pointer(&_out0))
+	_rc := _fnSecAccessCopyACLList(objref.IDOf(accessRef.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -1300,13 +1300,13 @@ func SecAccessCopyACLList(accessRef obj.Object) (obj.Object, error) {
 var _fnSecAccessCopySelectedACLList func(objc.ID, int32, unsafe.Pointer) int32
 
 // SecAccessCopySelectedACLList reports an error if the Security framework function SecAccessCopySelectedACLList fails.
-func SecAccessCopySelectedACLList(accessRef obj.Object, action int32) (obj.Object, error) {
+func SecAccessCopySelectedACLList(accessRef SecAccessRef, action int32) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAccessCopySelectedACLList == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAccessCopySelectedACLList, _lib, "SecAccessCopySelectedACLList")
 	}
 	var _out0 uintptr
-	_rc := _fnSecAccessCopySelectedACLList(objref.IDOf(accessRef), action, unsafe.Pointer(&_out0))
+	_rc := _fnSecAccessCopySelectedACLList(objref.IDOf(accessRef.Object), action, unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -1331,12 +1331,12 @@ func SecAccessCreate(descriptor obj.Object, trustedlist obj.Object, accessRef un
 var _fnSecCertificateAddToKeychain func(objc.ID, objc.ID) int32
 
 // SecCertificateAddToKeychain reports an error if the Security framework function SecCertificateAddToKeychain fails.
-func SecCertificateAddToKeychain(certificate obj.Object, keychain obj.Object) error {
+func SecCertificateAddToKeychain(certificate SecCertificateRef, keychain SecKeychainRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateAddToKeychain == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateAddToKeychain, _lib, "SecCertificateAddToKeychain")
 	}
-	_rc := _fnSecCertificateAddToKeychain(objref.IDOf(certificate), objref.IDOf(keychain))
+	_rc := _fnSecCertificateAddToKeychain(objref.IDOf(certificate.Object), objref.IDOf(keychain.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1346,13 +1346,13 @@ func SecCertificateAddToKeychain(certificate obj.Object, keychain obj.Object) er
 var _fnSecCertificateCopyCommonName func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateCopyCommonName reports an error if the Security framework function SecCertificateCopyCommonName fails.
-func SecCertificateCopyCommonName(certificate obj.Object) (obj.Object, error) {
+func SecCertificateCopyCommonName(certificate SecCertificateRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyCommonName == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyCommonName, _lib, "SecCertificateCopyCommonName")
 	}
 	var _out0 uintptr
-	_rc := _fnSecCertificateCopyCommonName(objref.IDOf(certificate), unsafe.Pointer(&_out0))
+	_rc := _fnSecCertificateCopyCommonName(objref.IDOf(certificate.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -1362,13 +1362,13 @@ func SecCertificateCopyCommonName(certificate obj.Object) (obj.Object, error) {
 var _fnSecCertificateCopyEmailAddresses func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateCopyEmailAddresses reports an error if the Security framework function SecCertificateCopyEmailAddresses fails.
-func SecCertificateCopyEmailAddresses(certificate obj.Object) (obj.Object, error) {
+func SecCertificateCopyEmailAddresses(certificate SecCertificateRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyEmailAddresses == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyEmailAddresses, _lib, "SecCertificateCopyEmailAddresses")
 	}
 	var _out0 uintptr
-	_rc := _fnSecCertificateCopyEmailAddresses(objref.IDOf(certificate), unsafe.Pointer(&_out0))
+	_rc := _fnSecCertificateCopyEmailAddresses(objref.IDOf(certificate.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -1393,12 +1393,12 @@ func SecCertificateCopyPreference(name obj.Object, keyUsage uint32, certificate 
 var _fnSecCertificateCopyPublicKey func(objc.ID, unsafe.Pointer) int32
 
 // SecCertificateCopyPublicKey reports an error if the Security framework function SecCertificateCopyPublicKey fails.
-func SecCertificateCopyPublicKey(certificate obj.Object, key unsafe.Pointer) error {
+func SecCertificateCopyPublicKey(certificate SecCertificateRef, key unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateCopyPublicKey == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyPublicKey, _lib, "SecCertificateCopyPublicKey")
 	}
-	_rc := _fnSecCertificateCopyPublicKey(objref.IDOf(certificate), key)
+	_rc := _fnSecCertificateCopyPublicKey(objref.IDOf(certificate.Object), key)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1408,12 +1408,12 @@ func SecCertificateCopyPublicKey(certificate obj.Object, key unsafe.Pointer) err
 var _fnSecCertificateSetPreference func(objc.ID, objc.ID, uint32, objc.ID) int32
 
 // SecCertificateSetPreference reports an error if the Security framework function SecCertificateSetPreference fails.
-func SecCertificateSetPreference(certificate obj.Object, name obj.Object, keyUsage uint32, date obj.Object) error {
+func SecCertificateSetPreference(certificate SecCertificateRef, name obj.Object, keyUsage uint32, date obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateSetPreference == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateSetPreference, _lib, "SecCertificateSetPreference")
 	}
-	_rc := _fnSecCertificateSetPreference(objref.IDOf(certificate), objref.IDOf(name), keyUsage, objref.IDOf(date))
+	_rc := _fnSecCertificateSetPreference(objref.IDOf(certificate.Object), objref.IDOf(name), keyUsage, objref.IDOf(date))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1423,12 +1423,12 @@ func SecCertificateSetPreference(certificate obj.Object, name obj.Object, keyUsa
 var _fnSecCertificateSetPreferred func(objc.ID, objc.ID, objc.ID) int32
 
 // SecCertificateSetPreferred reports an error if the Security framework function SecCertificateSetPreferred fails.
-func SecCertificateSetPreferred(certificate obj.Object, name obj.Object, keyUsage obj.Object) error {
+func SecCertificateSetPreferred(certificate SecCertificateRef, name obj.Object, keyUsage obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCertificateSetPreferred == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCertificateSetPreferred, _lib, "SecCertificateSetPreferred")
 	}
-	_rc := _fnSecCertificateSetPreferred(objref.IDOf(certificate), objref.IDOf(name), objref.IDOf(keyUsage))
+	_rc := _fnSecCertificateSetPreferred(objref.IDOf(certificate.Object), objref.IDOf(name), objref.IDOf(keyUsage))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1438,12 +1438,12 @@ func SecCertificateSetPreferred(certificate obj.Object, name obj.Object, keyUsag
 var _fnSecCodeCheckValidity func(objc.ID, SecCSFlags, objc.ID) int32
 
 // SecCodeCheckValidity reports an error if the Security framework function SecCodeCheckValidity fails.
-func SecCodeCheckValidity(code obj.Object, flags SecCSFlags, requirement obj.Object) error {
+func SecCodeCheckValidity(code SecCodeRef, flags SecCSFlags, requirement SecRequirementRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCheckValidity == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCheckValidity, _lib, "SecCodeCheckValidity")
 	}
-	_rc := _fnSecCodeCheckValidity(objref.IDOf(code), flags, objref.IDOf(requirement))
+	_rc := _fnSecCodeCheckValidity(objref.IDOf(code.Object), flags, objref.IDOf(requirement.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1453,12 +1453,12 @@ func SecCodeCheckValidity(code obj.Object, flags SecCSFlags, requirement obj.Obj
 var _fnSecCodeCopyDesignatedRequirement func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecCodeCopyDesignatedRequirement reports an error if the Security framework function SecCodeCopyDesignatedRequirement fails.
-func SecCodeCopyDesignatedRequirement(code obj.Object, flags SecCSFlags, requirement unsafe.Pointer) error {
+func SecCodeCopyDesignatedRequirement(code SecStaticCodeRef, flags SecCSFlags, requirement unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCopyDesignatedRequirement == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCopyDesignatedRequirement, _lib, "SecCodeCopyDesignatedRequirement")
 	}
-	_rc := _fnSecCodeCopyDesignatedRequirement(objref.IDOf(code), flags, requirement)
+	_rc := _fnSecCodeCopyDesignatedRequirement(objref.IDOf(code.Object), flags, requirement)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1468,12 +1468,12 @@ func SecCodeCopyDesignatedRequirement(code obj.Object, flags SecCSFlags, require
 var _fnSecCodeCopyGuestWithAttributes func(objc.ID, objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecCodeCopyGuestWithAttributes reports an error if the Security framework function SecCodeCopyGuestWithAttributes fails.
-func SecCodeCopyGuestWithAttributes(host obj.Object, attributes obj.Object, flags SecCSFlags, guest unsafe.Pointer) error {
+func SecCodeCopyGuestWithAttributes(host SecCodeRef, attributes obj.Object, flags SecCSFlags, guest unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCopyGuestWithAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCopyGuestWithAttributes, _lib, "SecCodeCopyGuestWithAttributes")
 	}
-	_rc := _fnSecCodeCopyGuestWithAttributes(objref.IDOf(host), objref.IDOf(attributes), flags, guest)
+	_rc := _fnSecCodeCopyGuestWithAttributes(objref.IDOf(host.Object), objref.IDOf(attributes), flags, guest)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1483,12 +1483,12 @@ func SecCodeCopyGuestWithAttributes(host obj.Object, attributes obj.Object, flag
 var _fnSecCodeCopyHost func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecCodeCopyHost reports an error if the Security framework function SecCodeCopyHost fails.
-func SecCodeCopyHost(guest obj.Object, flags SecCSFlags, host unsafe.Pointer) error {
+func SecCodeCopyHost(guest SecCodeRef, flags SecCSFlags, host unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCopyHost == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCopyHost, _lib, "SecCodeCopyHost")
 	}
-	_rc := _fnSecCodeCopyHost(objref.IDOf(guest), flags, host)
+	_rc := _fnSecCodeCopyHost(objref.IDOf(guest.Object), flags, host)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1498,13 +1498,13 @@ func SecCodeCopyHost(guest obj.Object, flags SecCSFlags, host unsafe.Pointer) er
 var _fnSecCodeCopyPath func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecCodeCopyPath reports an error if the Security framework function SecCodeCopyPath fails.
-func SecCodeCopyPath(staticCode obj.Object, flags SecCSFlags) (obj.Object, error) {
+func SecCodeCopyPath(staticCode SecStaticCodeRef, flags SecCSFlags) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCopyPath == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCopyPath, _lib, "SecCodeCopyPath")
 	}
 	var _out0 uintptr
-	_rc := _fnSecCodeCopyPath(objref.IDOf(staticCode), flags, unsafe.Pointer(&_out0))
+	_rc := _fnSecCodeCopyPath(objref.IDOf(staticCode.Object), flags, unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -1529,13 +1529,13 @@ func SecCodeCopySelf(flags SecCSFlags, self unsafe.Pointer) error {
 var _fnSecCodeCopySigningInformation func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecCodeCopySigningInformation reports an error if the Security framework function SecCodeCopySigningInformation fails.
-func SecCodeCopySigningInformation(code obj.Object, flags SecCSFlags) (obj.Object, error) {
+func SecCodeCopySigningInformation(code SecStaticCodeRef, flags SecCSFlags) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCopySigningInformation == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCopySigningInformation, _lib, "SecCodeCopySigningInformation")
 	}
 	var _out0 uintptr
-	_rc := _fnSecCodeCopySigningInformation(objref.IDOf(code), flags, unsafe.Pointer(&_out0))
+	_rc := _fnSecCodeCopySigningInformation(objref.IDOf(code.Object), flags, unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -1545,12 +1545,12 @@ func SecCodeCopySigningInformation(code obj.Object, flags SecCSFlags) (obj.Objec
 var _fnSecCodeCopyStaticCode func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecCodeCopyStaticCode reports an error if the Security framework function SecCodeCopyStaticCode fails.
-func SecCodeCopyStaticCode(code obj.Object, flags SecCSFlags, staticCode unsafe.Pointer) error {
+func SecCodeCopyStaticCode(code SecCodeRef, flags SecCSFlags, staticCode unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeCopyStaticCode == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeCopyStaticCode, _lib, "SecCodeCopyStaticCode")
 	}
-	_rc := _fnSecCodeCopyStaticCode(objref.IDOf(code), flags, staticCode)
+	_rc := _fnSecCodeCopyStaticCode(objref.IDOf(code.Object), flags, staticCode)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1575,12 +1575,12 @@ func SecCodeCreateWithXPCMessage(message xpc.Object, flags SecCSFlags, target un
 var _fnSecCodeMapMemory func(objc.ID, SecCSFlags) int32
 
 // SecCodeMapMemory reports an error if the Security framework function SecCodeMapMemory fails.
-func SecCodeMapMemory(code obj.Object, flags SecCSFlags) error {
+func SecCodeMapMemory(code SecStaticCodeRef, flags SecCSFlags) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeMapMemory == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeMapMemory, _lib, "SecCodeMapMemory")
 	}
-	_rc := _fnSecCodeMapMemory(objref.IDOf(code), flags)
+	_rc := _fnSecCodeMapMemory(objref.IDOf(code.Object), flags)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1590,12 +1590,12 @@ func SecCodeMapMemory(code obj.Object, flags SecCSFlags) error {
 var _fnSecCodeValidateFileResource func(objc.ID, objc.ID, objc.ID, SecCSFlags) int32
 
 // SecCodeValidateFileResource reports an error if the Security framework function SecCodeValidateFileResource fails.
-func SecCodeValidateFileResource(code obj.Object, relativePath obj.Object, fileData obj.Object, flags SecCSFlags) error {
+func SecCodeValidateFileResource(code SecStaticCodeRef, relativePath obj.Object, fileData obj.Object, flags SecCSFlags) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecCodeValidateFileResource == nil {
 		ebipurego.RegisterLibFunc(&_fnSecCodeValidateFileResource, _lib, "SecCodeValidateFileResource")
 	}
-	_rc := _fnSecCodeValidateFileResource(objref.IDOf(code), objref.IDOf(relativePath), objref.IDOf(fileData), flags)
+	_rc := _fnSecCodeValidateFileResource(objref.IDOf(code.Object), objref.IDOf(relativePath), objref.IDOf(fileData), flags)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1665,12 +1665,12 @@ func SecHostSetHostingPort(hostingPort int, flags SecCSFlags) error {
 var _fnSecIdentityCopyCertificate func(objc.ID, unsafe.Pointer) int32
 
 // SecIdentityCopyCertificate reports an error if the Security framework function SecIdentityCopyCertificate fails.
-func SecIdentityCopyCertificate(identityRef obj.Object, certificateRef unsafe.Pointer) error {
+func SecIdentityCopyCertificate(identityRef SecIdentityRef, certificateRef unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentityCopyCertificate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCopyCertificate, _lib, "SecIdentityCopyCertificate")
 	}
-	_rc := _fnSecIdentityCopyCertificate(objref.IDOf(identityRef), certificateRef)
+	_rc := _fnSecIdentityCopyCertificate(objref.IDOf(identityRef.Object), certificateRef)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1695,12 +1695,12 @@ func SecIdentityCopyPreference(name obj.Object, keyUsage uint32, validIssuers ob
 var _fnSecIdentityCopyPrivateKey func(objc.ID, unsafe.Pointer) int32
 
 // SecIdentityCopyPrivateKey reports an error if the Security framework function SecIdentityCopyPrivateKey fails.
-func SecIdentityCopyPrivateKey(identityRef obj.Object, privateKeyRef unsafe.Pointer) error {
+func SecIdentityCopyPrivateKey(identityRef SecIdentityRef, privateKeyRef unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentityCopyPrivateKey == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCopyPrivateKey, _lib, "SecIdentityCopyPrivateKey")
 	}
-	_rc := _fnSecIdentityCopyPrivateKey(objref.IDOf(identityRef), privateKeyRef)
+	_rc := _fnSecIdentityCopyPrivateKey(objref.IDOf(identityRef.Object), privateKeyRef)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1726,12 +1726,12 @@ func SecIdentityCopySystemIdentity(domain obj.Object, idRef unsafe.Pointer) (obj
 var _fnSecIdentityCreateWithCertificate func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // SecIdentityCreateWithCertificate reports an error if the Security framework function SecIdentityCreateWithCertificate fails.
-func SecIdentityCreateWithCertificate(keychainOrArray obj.Object, certificateRef obj.Object, identityRef unsafe.Pointer) error {
+func SecIdentityCreateWithCertificate(keychainOrArray obj.Object, certificateRef SecCertificateRef, identityRef unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentityCreateWithCertificate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentityCreateWithCertificate, _lib, "SecIdentityCreateWithCertificate")
 	}
-	_rc := _fnSecIdentityCreateWithCertificate(objref.IDOf(keychainOrArray), objref.IDOf(certificateRef), identityRef)
+	_rc := _fnSecIdentityCreateWithCertificate(objref.IDOf(keychainOrArray), objref.IDOf(certificateRef.Object), identityRef)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1741,12 +1741,12 @@ func SecIdentityCreateWithCertificate(keychainOrArray obj.Object, certificateRef
 var _fnSecIdentitySearchCopyNext func(objc.ID, unsafe.Pointer) int32
 
 // SecIdentitySearchCopyNext reports an error if the Security framework function SecIdentitySearchCopyNext fails.
-func SecIdentitySearchCopyNext(searchRef obj.Object, identity unsafe.Pointer) error {
+func SecIdentitySearchCopyNext(searchRef SecIdentitySearchRef, identity unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentitySearchCopyNext == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentitySearchCopyNext, _lib, "SecIdentitySearchCopyNext")
 	}
-	_rc := _fnSecIdentitySearchCopyNext(objref.IDOf(searchRef), identity)
+	_rc := _fnSecIdentitySearchCopyNext(objref.IDOf(searchRef.Object), identity)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1771,12 +1771,12 @@ func SecIdentitySearchCreate(keychainOrArray obj.Object, keyUsage uint32, search
 var _fnSecIdentitySetPreference func(objc.ID, objc.ID, uint32) int32
 
 // SecIdentitySetPreference reports an error if the Security framework function SecIdentitySetPreference fails.
-func SecIdentitySetPreference(identity obj.Object, name obj.Object, keyUsage uint32) error {
+func SecIdentitySetPreference(identity SecIdentityRef, name obj.Object, keyUsage uint32) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentitySetPreference == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentitySetPreference, _lib, "SecIdentitySetPreference")
 	}
-	_rc := _fnSecIdentitySetPreference(objref.IDOf(identity), objref.IDOf(name), keyUsage)
+	_rc := _fnSecIdentitySetPreference(objref.IDOf(identity.Object), objref.IDOf(name), keyUsage)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1786,12 +1786,12 @@ func SecIdentitySetPreference(identity obj.Object, name obj.Object, keyUsage uin
 var _fnSecIdentitySetPreferred func(objc.ID, objc.ID, objc.ID) int32
 
 // SecIdentitySetPreferred reports an error if the Security framework function SecIdentitySetPreferred fails.
-func SecIdentitySetPreferred(identity obj.Object, name obj.Object, keyUsage obj.Object) error {
+func SecIdentitySetPreferred(identity SecIdentityRef, name obj.Object, keyUsage obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentitySetPreferred == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentitySetPreferred, _lib, "SecIdentitySetPreferred")
 	}
-	_rc := _fnSecIdentitySetPreferred(objref.IDOf(identity), objref.IDOf(name), objref.IDOf(keyUsage))
+	_rc := _fnSecIdentitySetPreferred(objref.IDOf(identity.Object), objref.IDOf(name), objref.IDOf(keyUsage))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1801,12 +1801,12 @@ func SecIdentitySetPreferred(identity obj.Object, name obj.Object, keyUsage obj.
 var _fnSecIdentitySetSystemIdentity func(objc.ID, objc.ID) int32
 
 // SecIdentitySetSystemIdentity reports an error if the Security framework function SecIdentitySetSystemIdentity fails.
-func SecIdentitySetSystemIdentity(domain obj.Object, idRef obj.Object) error {
+func SecIdentitySetSystemIdentity(domain obj.Object, idRef SecIdentityRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecIdentitySetSystemIdentity == nil {
 		ebipurego.RegisterLibFunc(&_fnSecIdentitySetSystemIdentity, _lib, "SecIdentitySetSystemIdentity")
 	}
-	_rc := _fnSecIdentitySetSystemIdentity(objref.IDOf(domain), objref.IDOf(idRef))
+	_rc := _fnSecIdentitySetSystemIdentity(objref.IDOf(domain), objref.IDOf(idRef.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1878,12 +1878,12 @@ func SecItemUpdate(query obj.Object, attributesToUpdate obj.Object) error {
 var _fnSecKeyCreatePair func(objc.ID, uint32, uint32, uint64, uint32, uint32, uint32, uint32, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecKeyCreatePair reports an error if the Security framework function SecKeyCreatePair fails.
-func SecKeyCreatePair(keychainRef obj.Object, algorithm uint32, keySizeInBits uint32, contextHandle uint64, publicKeyUsage uint32, publicKeyAttr uint32, privateKeyUsage uint32, privateKeyAttr uint32, initialAccess obj.Object, publicKey unsafe.Pointer, privateKey unsafe.Pointer) error {
+func SecKeyCreatePair(keychainRef SecKeychainRef, algorithm uint32, keySizeInBits uint32, contextHandle uint64, publicKeyUsage uint32, publicKeyAttr uint32, privateKeyUsage uint32, privateKeyAttr uint32, initialAccess SecAccessRef, publicKey unsafe.Pointer, privateKey unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyCreatePair == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyCreatePair, _lib, "SecKeyCreatePair")
 	}
-	_rc := _fnSecKeyCreatePair(objref.IDOf(keychainRef), algorithm, keySizeInBits, contextHandle, publicKeyUsage, publicKeyAttr, privateKeyUsage, privateKeyAttr, objref.IDOf(initialAccess), publicKey, privateKey)
+	_rc := _fnSecKeyCreatePair(objref.IDOf(keychainRef.Object), algorithm, keySizeInBits, contextHandle, publicKeyUsage, publicKeyAttr, privateKeyUsage, privateKeyAttr, objref.IDOf(initialAccess.Object), publicKey, privateKey)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1893,12 +1893,12 @@ func SecKeyCreatePair(keychainRef obj.Object, algorithm uint32, keySizeInBits ui
 var _fnSecKeyGenerate func(objc.ID, uint32, uint32, uint64, uint32, uint32, objc.ID, unsafe.Pointer) int32
 
 // SecKeyGenerate reports an error if the Security framework function SecKeyGenerate fails.
-func SecKeyGenerate(keychainRef obj.Object, algorithm uint32, keySizeInBits uint32, contextHandle uint64, keyUsage uint32, keyAttr uint32, initialAccess obj.Object, keyRef unsafe.Pointer) error {
+func SecKeyGenerate(keychainRef SecKeychainRef, algorithm uint32, keySizeInBits uint32, contextHandle uint64, keyUsage uint32, keyAttr uint32, initialAccess SecAccessRef, keyRef unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeyGenerate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeyGenerate, _lib, "SecKeyGenerate")
 	}
-	_rc := _fnSecKeyGenerate(objref.IDOf(keychainRef), algorithm, keySizeInBits, contextHandle, keyUsage, keyAttr, objref.IDOf(initialAccess), keyRef)
+	_rc := _fnSecKeyGenerate(objref.IDOf(keychainRef.Object), algorithm, keySizeInBits, contextHandle, keyUsage, keyAttr, objref.IDOf(initialAccess.Object), keyRef)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1938,12 +1938,12 @@ func SecKeychainAddCallback(callbackFunction unsafe.Pointer, eventMask SecKeycha
 var _fnSecKeychainAddGenericPassword func(objc.ID, int, string, int, string, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecKeychainAddGenericPassword reports an error if the Security framework function SecKeychainAddGenericPassword fails.
-func SecKeychainAddGenericPassword(keychain obj.Object, serviceNameLength int, serviceName string, accountNameLength int, accountName string, passwordLength int, passwordData unsafe.Pointer, itemRef unsafe.Pointer) error {
+func SecKeychainAddGenericPassword(keychain SecKeychainRef, serviceNameLength int, serviceName string, accountNameLength int, accountName string, passwordLength int, passwordData unsafe.Pointer, itemRef unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainAddGenericPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainAddGenericPassword, _lib, "SecKeychainAddGenericPassword")
 	}
-	_rc := _fnSecKeychainAddGenericPassword(objref.IDOf(keychain), serviceNameLength, serviceName, accountNameLength, accountName, passwordLength, passwordData, itemRef)
+	_rc := _fnSecKeychainAddGenericPassword(objref.IDOf(keychain.Object), serviceNameLength, serviceName, accountNameLength, accountName, passwordLength, passwordData, itemRef)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1953,12 +1953,12 @@ func SecKeychainAddGenericPassword(keychain obj.Object, serviceNameLength int, s
 var _fnSecKeychainAddInternetPassword func(objc.ID, int, string, int, string, int, string, int, string, uint16, SecProtocolType, SecAuthenticationType, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // SecKeychainAddInternetPassword reports an error if the Security framework function SecKeychainAddInternetPassword fails.
-func SecKeychainAddInternetPassword(keychain obj.Object, serverNameLength int, serverName string, securityDomainLength int, securityDomain string, accountNameLength int, accountName string, pathLength int, path string, port uint16, protocol SecProtocolType, authenticationType SecAuthenticationType, passwordLength int, passwordData unsafe.Pointer, itemRef unsafe.Pointer) error {
+func SecKeychainAddInternetPassword(keychain SecKeychainRef, serverNameLength int, serverName string, securityDomainLength int, securityDomain string, accountNameLength int, accountName string, pathLength int, path string, port uint16, protocol SecProtocolType, authenticationType SecAuthenticationType, passwordLength int, passwordData unsafe.Pointer, itemRef unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainAddInternetPassword == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainAddInternetPassword, _lib, "SecKeychainAddInternetPassword")
 	}
-	_rc := _fnSecKeychainAddInternetPassword(objref.IDOf(keychain), serverNameLength, serverName, securityDomainLength, securityDomain, accountNameLength, accountName, pathLength, path, port, protocol, authenticationType, passwordLength, passwordData, itemRef)
+	_rc := _fnSecKeychainAddInternetPassword(objref.IDOf(keychain.Object), serverNameLength, serverName, securityDomainLength, securityDomain, accountNameLength, accountName, pathLength, path, port, protocol, authenticationType, passwordLength, passwordData, itemRef)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -1968,12 +1968,12 @@ func SecKeychainAddInternetPassword(keychain obj.Object, serverNameLength int, s
 var _fnSecKeychainCopyAccess func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainCopyAccess reports an error if the Security framework function SecKeychainCopyAccess fails.
-func SecKeychainCopyAccess(keychain obj.Object, access unsafe.Pointer) error {
+func SecKeychainCopyAccess(keychain SecKeychainRef, access unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainCopyAccess == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainCopyAccess, _lib, "SecKeychainCopyAccess")
 	}
-	_rc := _fnSecKeychainCopyAccess(objref.IDOf(keychain), access)
+	_rc := _fnSecKeychainCopyAccess(objref.IDOf(keychain.Object), access)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2045,12 +2045,12 @@ func SecKeychainCopySearchList() (obj.Object, error) {
 var _fnSecKeychainCopySettings func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainCopySettings reports an error if the Security framework function SecKeychainCopySettings fails.
-func SecKeychainCopySettings(keychain obj.Object, outSettings *SecKeychainSettings) error {
+func SecKeychainCopySettings(keychain SecKeychainRef, outSettings *SecKeychainSettings) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainCopySettings == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainCopySettings, _lib, "SecKeychainCopySettings")
 	}
-	_rc := _fnSecKeychainCopySettings(objref.IDOf(keychain), unsafe.Pointer(outSettings))
+	_rc := _fnSecKeychainCopySettings(objref.IDOf(keychain.Object), unsafe.Pointer(outSettings))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2060,12 +2060,12 @@ func SecKeychainCopySettings(keychain obj.Object, outSettings *SecKeychainSettin
 var _fnSecKeychainCreate func(string, int, unsafe.Pointer, uint8, objc.ID, unsafe.Pointer) int32
 
 // SecKeychainCreate reports an error if the Security framework function SecKeychainCreate fails.
-func SecKeychainCreate(pathName string, passwordLength int, password unsafe.Pointer, promptUser uint8, initialAccess obj.Object, keychain unsafe.Pointer) error {
+func SecKeychainCreate(pathName string, passwordLength int, password unsafe.Pointer, promptUser uint8, initialAccess SecAccessRef, keychain unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainCreate, _lib, "SecKeychainCreate")
 	}
-	_rc := _fnSecKeychainCreate(pathName, passwordLength, password, promptUser, objref.IDOf(initialAccess), keychain)
+	_rc := _fnSecKeychainCreate(pathName, passwordLength, password, promptUser, objref.IDOf(initialAccess.Object), keychain)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2075,12 +2075,12 @@ func SecKeychainCreate(pathName string, passwordLength int, password unsafe.Poin
 var _fnSecKeychainDelete func(objc.ID) int32
 
 // SecKeychainDelete reports an error if the Security framework function SecKeychainDelete fails.
-func SecKeychainDelete(keychainOrArray obj.Object) error {
+func SecKeychainDelete(keychainOrArray SecKeychainRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainDelete == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainDelete, _lib, "SecKeychainDelete")
 	}
-	_rc := _fnSecKeychainDelete(objref.IDOf(keychainOrArray))
+	_rc := _fnSecKeychainDelete(objref.IDOf(keychainOrArray.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2090,12 +2090,12 @@ func SecKeychainDelete(keychainOrArray obj.Object) error {
 var _fnSecKeychainGetDLDBHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainGetDLDBHandle reports an error if the Security framework function SecKeychainGetDLDBHandle fails.
-func SecKeychainGetDLDBHandle(keychain obj.Object, dldbHandle *CssmDlDbHandle) error {
+func SecKeychainGetDLDBHandle(keychain SecKeychainRef, dldbHandle *CssmDlDbHandle) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainGetDLDBHandle == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainGetDLDBHandle, _lib, "SecKeychainGetDLDBHandle")
 	}
-	_rc := _fnSecKeychainGetDLDBHandle(objref.IDOf(keychain), unsafe.Pointer(dldbHandle))
+	_rc := _fnSecKeychainGetDLDBHandle(objref.IDOf(keychain.Object), unsafe.Pointer(dldbHandle))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2105,12 +2105,12 @@ func SecKeychainGetDLDBHandle(keychain obj.Object, dldbHandle *CssmDlDbHandle) e
 var _fnSecKeychainItemCopyAccess func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainItemCopyAccess reports an error if the Security framework function SecKeychainItemCopyAccess fails.
-func SecKeychainItemCopyAccess(itemRef obj.Object, access unsafe.Pointer) error {
+func SecKeychainItemCopyAccess(itemRef SecKeychainItemRef, access unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemCopyAccess == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCopyAccess, _lib, "SecKeychainItemCopyAccess")
 	}
-	_rc := _fnSecKeychainItemCopyAccess(objref.IDOf(itemRef), access)
+	_rc := _fnSecKeychainItemCopyAccess(objref.IDOf(itemRef.Object), access)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2135,12 +2135,12 @@ func SecKeychainItemCopyFromPersistentReference(persistentItemRef obj.Object, it
 var _fnSecKeychainItemCopyKeychain func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainItemCopyKeychain reports an error if the Security framework function SecKeychainItemCopyKeychain fails.
-func SecKeychainItemCopyKeychain(itemRef obj.Object, keychainRef unsafe.Pointer) error {
+func SecKeychainItemCopyKeychain(itemRef SecKeychainItemRef, keychainRef unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemCopyKeychain == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCopyKeychain, _lib, "SecKeychainItemCopyKeychain")
 	}
-	_rc := _fnSecKeychainItemCopyKeychain(objref.IDOf(itemRef), keychainRef)
+	_rc := _fnSecKeychainItemCopyKeychain(objref.IDOf(itemRef.Object), keychainRef)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2150,12 +2150,12 @@ func SecKeychainItemCopyKeychain(itemRef obj.Object, keychainRef unsafe.Pointer)
 var _fnSecKeychainItemCreateCopy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32
 
 // SecKeychainItemCreateCopy reports an error if the Security framework function SecKeychainItemCreateCopy fails.
-func SecKeychainItemCreateCopy(itemRef obj.Object, destKeychainRef obj.Object, initialAccess obj.Object, itemCopy unsafe.Pointer) error {
+func SecKeychainItemCreateCopy(itemRef SecKeychainItemRef, destKeychainRef SecKeychainRef, initialAccess SecAccessRef, itemCopy unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemCreateCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCreateCopy, _lib, "SecKeychainItemCreateCopy")
 	}
-	_rc := _fnSecKeychainItemCreateCopy(objref.IDOf(itemRef), objref.IDOf(destKeychainRef), objref.IDOf(initialAccess), itemCopy)
+	_rc := _fnSecKeychainItemCreateCopy(objref.IDOf(itemRef.Object), objref.IDOf(destKeychainRef.Object), objref.IDOf(initialAccess.Object), itemCopy)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2165,13 +2165,13 @@ func SecKeychainItemCreateCopy(itemRef obj.Object, destKeychainRef obj.Object, i
 var _fnSecKeychainItemCreatePersistentReference func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainItemCreatePersistentReference reports an error if the Security framework function SecKeychainItemCreatePersistentReference fails.
-func SecKeychainItemCreatePersistentReference(itemRef obj.Object) (obj.Object, error) {
+func SecKeychainItemCreatePersistentReference(itemRef SecKeychainItemRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemCreatePersistentReference == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemCreatePersistentReference, _lib, "SecKeychainItemCreatePersistentReference")
 	}
 	var _out0 uintptr
-	_rc := _fnSecKeychainItemCreatePersistentReference(objref.IDOf(itemRef), unsafe.Pointer(&_out0))
+	_rc := _fnSecKeychainItemCreatePersistentReference(objref.IDOf(itemRef.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -2181,12 +2181,12 @@ func SecKeychainItemCreatePersistentReference(itemRef obj.Object) (obj.Object, e
 var _fnSecKeychainItemDelete func(objc.ID) int32
 
 // SecKeychainItemDelete reports an error if the Security framework function SecKeychainItemDelete fails.
-func SecKeychainItemDelete(itemRef obj.Object) error {
+func SecKeychainItemDelete(itemRef SecKeychainItemRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemDelete == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemDelete, _lib, "SecKeychainItemDelete")
 	}
-	_rc := _fnSecKeychainItemDelete(objref.IDOf(itemRef))
+	_rc := _fnSecKeychainItemDelete(objref.IDOf(itemRef.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2196,12 +2196,12 @@ func SecKeychainItemDelete(itemRef obj.Object) error {
 var _fnSecKeychainItemGetDLDBHandle func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainItemGetDLDBHandle reports an error if the Security framework function SecKeychainItemGetDLDBHandle fails.
-func SecKeychainItemGetDLDBHandle(keyItemRef obj.Object, dldbHandle *CssmDlDbHandle) error {
+func SecKeychainItemGetDLDBHandle(keyItemRef SecKeychainItemRef, dldbHandle *CssmDlDbHandle) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemGetDLDBHandle == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemGetDLDBHandle, _lib, "SecKeychainItemGetDLDBHandle")
 	}
-	_rc := _fnSecKeychainItemGetDLDBHandle(objref.IDOf(keyItemRef), unsafe.Pointer(dldbHandle))
+	_rc := _fnSecKeychainItemGetDLDBHandle(objref.IDOf(keyItemRef.Object), unsafe.Pointer(dldbHandle))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2211,12 +2211,12 @@ func SecKeychainItemGetDLDBHandle(keyItemRef obj.Object, dldbHandle *CssmDlDbHan
 var _fnSecKeychainItemSetAccess func(objc.ID, objc.ID) int32
 
 // SecKeychainItemSetAccess reports an error if the Security framework function SecKeychainItemSetAccess fails.
-func SecKeychainItemSetAccess(itemRef obj.Object, access obj.Object) error {
+func SecKeychainItemSetAccess(itemRef SecKeychainItemRef, access SecAccessRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainItemSetAccess == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainItemSetAccess, _lib, "SecKeychainItemSetAccess")
 	}
-	_rc := _fnSecKeychainItemSetAccess(objref.IDOf(itemRef), objref.IDOf(access))
+	_rc := _fnSecKeychainItemSetAccess(objref.IDOf(itemRef.Object), objref.IDOf(access.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2226,12 +2226,12 @@ func SecKeychainItemSetAccess(itemRef obj.Object, access obj.Object) error {
 var _fnSecKeychainLock func(objc.ID) int32
 
 // SecKeychainLock reports an error if the Security framework function SecKeychainLock fails.
-func SecKeychainLock(keychain obj.Object) error {
+func SecKeychainLock(keychain SecKeychainRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainLock == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainLock, _lib, "SecKeychainLock")
 	}
-	_rc := _fnSecKeychainLock(objref.IDOf(keychain))
+	_rc := _fnSecKeychainLock(objref.IDOf(keychain.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2286,12 +2286,12 @@ func SecKeychainRemoveCallback(callbackFunction unsafe.Pointer) error {
 var _fnSecKeychainSearchCopyNext func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainSearchCopyNext reports an error if the Security framework function SecKeychainSearchCopyNext fails.
-func SecKeychainSearchCopyNext(searchRef obj.Object, itemRef unsafe.Pointer) error {
+func SecKeychainSearchCopyNext(searchRef SecKeychainSearchRef, itemRef unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSearchCopyNext == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSearchCopyNext, _lib, "SecKeychainSearchCopyNext")
 	}
-	_rc := _fnSecKeychainSearchCopyNext(objref.IDOf(searchRef), itemRef)
+	_rc := _fnSecKeychainSearchCopyNext(objref.IDOf(searchRef.Object), itemRef)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2301,12 +2301,12 @@ func SecKeychainSearchCopyNext(searchRef obj.Object, itemRef unsafe.Pointer) err
 var _fnSecKeychainSetAccess func(objc.ID, objc.ID) int32
 
 // SecKeychainSetAccess reports an error if the Security framework function SecKeychainSetAccess fails.
-func SecKeychainSetAccess(keychain obj.Object, access obj.Object) error {
+func SecKeychainSetAccess(keychain SecKeychainRef, access SecAccessRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSetAccess == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSetAccess, _lib, "SecKeychainSetAccess")
 	}
-	_rc := _fnSecKeychainSetAccess(objref.IDOf(keychain), objref.IDOf(access))
+	_rc := _fnSecKeychainSetAccess(objref.IDOf(keychain.Object), objref.IDOf(access.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2316,12 +2316,12 @@ func SecKeychainSetAccess(keychain obj.Object, access obj.Object) error {
 var _fnSecKeychainSetDefault func(objc.ID) int32
 
 // SecKeychainSetDefault reports an error if the Security framework function SecKeychainSetDefault fails.
-func SecKeychainSetDefault(keychain obj.Object) error {
+func SecKeychainSetDefault(keychain SecKeychainRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSetDefault == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSetDefault, _lib, "SecKeychainSetDefault")
 	}
-	_rc := _fnSecKeychainSetDefault(objref.IDOf(keychain))
+	_rc := _fnSecKeychainSetDefault(objref.IDOf(keychain.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2331,12 +2331,12 @@ func SecKeychainSetDefault(keychain obj.Object) error {
 var _fnSecKeychainSetDomainDefault func(SecPreferencesDomain, objc.ID) int32
 
 // SecKeychainSetDomainDefault reports an error if the Security framework function SecKeychainSetDomainDefault fails.
-func SecKeychainSetDomainDefault(domain SecPreferencesDomain, keychain obj.Object) error {
+func SecKeychainSetDomainDefault(domain SecPreferencesDomain, keychain SecKeychainRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSetDomainDefault == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSetDomainDefault, _lib, "SecKeychainSetDomainDefault")
 	}
-	_rc := _fnSecKeychainSetDomainDefault(domain, objref.IDOf(keychain))
+	_rc := _fnSecKeychainSetDomainDefault(domain, objref.IDOf(keychain.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2391,12 +2391,12 @@ func SecKeychainSetSearchList(searchList obj.Object) error {
 var _fnSecKeychainSetSettings func(objc.ID, unsafe.Pointer) int32
 
 // SecKeychainSetSettings reports an error if the Security framework function SecKeychainSetSettings fails.
-func SecKeychainSetSettings(keychain obj.Object, newSettings *SecKeychainSettings) error {
+func SecKeychainSetSettings(keychain SecKeychainRef, newSettings *SecKeychainSettings) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainSetSettings == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainSetSettings, _lib, "SecKeychainSetSettings")
 	}
-	_rc := _fnSecKeychainSetSettings(objref.IDOf(keychain), unsafe.Pointer(newSettings))
+	_rc := _fnSecKeychainSetSettings(objref.IDOf(keychain.Object), unsafe.Pointer(newSettings))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2421,12 +2421,12 @@ func SecKeychainSetUserInteractionAllowed(state uint8) error {
 var _fnSecKeychainUnlock func(objc.ID, int, unsafe.Pointer, uint8) int32
 
 // SecKeychainUnlock reports an error if the Security framework function SecKeychainUnlock fails.
-func SecKeychainUnlock(keychain obj.Object, passwordLength int, password unsafe.Pointer, usePassword uint8) error {
+func SecKeychainUnlock(keychain SecKeychainRef, passwordLength int, password unsafe.Pointer, usePassword uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecKeychainUnlock == nil {
 		ebipurego.RegisterLibFunc(&_fnSecKeychainUnlock, _lib, "SecKeychainUnlock")
 	}
-	_rc := _fnSecKeychainUnlock(objref.IDOf(keychain), passwordLength, password, usePassword)
+	_rc := _fnSecKeychainUnlock(objref.IDOf(keychain.Object), passwordLength, password, usePassword)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2452,12 +2452,12 @@ func SecPKCS12Import(pkcs12Data obj.Object, options obj.Object) (obj.Object, err
 var _fnSecPolicySearchCopyNext func(objc.ID, unsafe.Pointer) int32
 
 // SecPolicySearchCopyNext reports an error if the Security framework function SecPolicySearchCopyNext fails.
-func SecPolicySearchCopyNext(searchRef obj.Object, policyRef unsafe.Pointer) error {
+func SecPolicySearchCopyNext(searchRef SecPolicySearchRef, policyRef unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicySearchCopyNext == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicySearchCopyNext, _lib, "SecPolicySearchCopyNext")
 	}
-	_rc := _fnSecPolicySearchCopyNext(objref.IDOf(searchRef), policyRef)
+	_rc := _fnSecPolicySearchCopyNext(objref.IDOf(searchRef.Object), policyRef)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2467,12 +2467,12 @@ func SecPolicySearchCopyNext(searchRef obj.Object, policyRef unsafe.Pointer) err
 var _fnSecPolicySetProperties func(objc.ID, objc.ID) int32
 
 // SecPolicySetProperties reports an error if the Security framework function SecPolicySetProperties fails.
-func SecPolicySetProperties(policyRef obj.Object, properties obj.Object) error {
+func SecPolicySetProperties(policyRef SecPolicyRef, properties obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPolicySetProperties == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPolicySetProperties, _lib, "SecPolicySetProperties")
 	}
-	_rc := _fnSecPolicySetProperties(objref.IDOf(policyRef), objref.IDOf(properties))
+	_rc := _fnSecPolicySetProperties(objref.IDOf(policyRef.Object), objref.IDOf(properties))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2482,13 +2482,13 @@ func SecPolicySetProperties(policyRef obj.Object, properties obj.Object) error {
 var _fnSecRequirementCopyData func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecRequirementCopyData reports an error if the Security framework function SecRequirementCopyData fails.
-func SecRequirementCopyData(requirement obj.Object, flags SecCSFlags) (obj.Object, error) {
+func SecRequirementCopyData(requirement SecRequirementRef, flags SecCSFlags) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecRequirementCopyData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecRequirementCopyData, _lib, "SecRequirementCopyData")
 	}
 	var _out0 uintptr
-	_rc := _fnSecRequirementCopyData(objref.IDOf(requirement), flags, unsafe.Pointer(&_out0))
+	_rc := _fnSecRequirementCopyData(objref.IDOf(requirement.Object), flags, unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -2498,13 +2498,13 @@ func SecRequirementCopyData(requirement obj.Object, flags SecCSFlags) (obj.Objec
 var _fnSecRequirementCopyString func(objc.ID, SecCSFlags, unsafe.Pointer) int32
 
 // SecRequirementCopyString reports an error if the Security framework function SecRequirementCopyString fails.
-func SecRequirementCopyString(requirement obj.Object, flags SecCSFlags) (obj.Object, error) {
+func SecRequirementCopyString(requirement SecRequirementRef, flags SecCSFlags) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecRequirementCopyString == nil {
 		ebipurego.RegisterLibFunc(&_fnSecRequirementCopyString, _lib, "SecRequirementCopyString")
 	}
 	var _out0 uintptr
-	_rc := _fnSecRequirementCopyString(objref.IDOf(requirement), flags, unsafe.Pointer(&_out0))
+	_rc := _fnSecRequirementCopyString(objref.IDOf(requirement.Object), flags, unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -2560,12 +2560,12 @@ func SecRequirementCreateWithStringAndErrors(text obj.Object, flags SecCSFlags, 
 var _fnSecStaticCodeCheckValidity func(objc.ID, SecCSFlags, objc.ID) int32
 
 // SecStaticCodeCheckValidity reports an error if the Security framework function SecStaticCodeCheckValidity fails.
-func SecStaticCodeCheckValidity(staticCode obj.Object, flags SecCSFlags, requirement obj.Object) error {
+func SecStaticCodeCheckValidity(staticCode SecStaticCodeRef, flags SecCSFlags, requirement SecRequirementRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecStaticCodeCheckValidity == nil {
 		ebipurego.RegisterLibFunc(&_fnSecStaticCodeCheckValidity, _lib, "SecStaticCodeCheckValidity")
 	}
-	_rc := _fnSecStaticCodeCheckValidity(objref.IDOf(staticCode), flags, objref.IDOf(requirement))
+	_rc := _fnSecStaticCodeCheckValidity(objref.IDOf(staticCode.Object), flags, objref.IDOf(requirement.Object))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2621,13 +2621,13 @@ func SecTrustCopyAnchorCertificates() (obj.Object, error) {
 var _fnSecTrustCopyCustomAnchorCertificates func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustCopyCustomAnchorCertificates reports an error if the Security framework function SecTrustCopyCustomAnchorCertificates fails.
-func SecTrustCopyCustomAnchorCertificates(trust obj.Object) (obj.Object, error) {
+func SecTrustCopyCustomAnchorCertificates(trust SecTrustRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustCopyCustomAnchorCertificates == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyCustomAnchorCertificates, _lib, "SecTrustCopyCustomAnchorCertificates")
 	}
 	var _out0 uintptr
-	_rc := _fnSecTrustCopyCustomAnchorCertificates(objref.IDOf(trust), unsafe.Pointer(&_out0))
+	_rc := _fnSecTrustCopyCustomAnchorCertificates(objref.IDOf(trust.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -2637,13 +2637,13 @@ func SecTrustCopyCustomAnchorCertificates(trust obj.Object) (obj.Object, error) 
 var _fnSecTrustCopyPolicies func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustCopyPolicies reports an error if the Security framework function SecTrustCopyPolicies fails.
-func SecTrustCopyPolicies(trust obj.Object) (obj.Object, error) {
+func SecTrustCopyPolicies(trust SecTrustRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustCopyPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustCopyPolicies, _lib, "SecTrustCopyPolicies")
 	}
 	var _out0 uintptr
-	_rc := _fnSecTrustCopyPolicies(objref.IDOf(trust), unsafe.Pointer(&_out0))
+	_rc := _fnSecTrustCopyPolicies(objref.IDOf(trust.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -2668,12 +2668,12 @@ func SecTrustCreateWithCertificates(certificates obj.Object, policies obj.Object
 var _fnSecTrustEvaluateAsync func(objc.ID, objc.ID, objc.Block) int32
 
 // SecTrustEvaluateAsync reports an error if the Security framework function SecTrustEvaluateAsync fails.
-func SecTrustEvaluateAsync(trust obj.Object, queue dispatch.Queue, result func(unsafe.Pointer, SecTrustResultType)) error {
+func SecTrustEvaluateAsync(trust SecTrustRef, queue dispatch.Queue, result func(unsafe.Pointer, SecTrustResultType)) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustEvaluateAsync == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateAsync, _lib, "SecTrustEvaluateAsync")
 	}
-	_rc := _fnSecTrustEvaluateAsync(objref.IDOf(trust), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 SecTrustResultType) { result(_b0, _b1) }))
+	_rc := _fnSecTrustEvaluateAsync(objref.IDOf(trust.Object), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 SecTrustResultType) { result(_b0, _b1) }))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2683,12 +2683,12 @@ func SecTrustEvaluateAsync(trust obj.Object, queue dispatch.Queue, result func(u
 var _fnSecTrustEvaluateAsyncWithError func(objc.ID, objc.ID, objc.Block) int32
 
 // SecTrustEvaluateAsyncWithError reports an error if the Security framework function SecTrustEvaluateAsyncWithError fails.
-func SecTrustEvaluateAsyncWithError(trust obj.Object, queue dispatch.Queue, result func(unsafe.Pointer, bool, unsafe.Pointer)) error {
+func SecTrustEvaluateAsyncWithError(trust SecTrustRef, queue dispatch.Queue, result func(unsafe.Pointer, bool, unsafe.Pointer)) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustEvaluateAsyncWithError == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustEvaluateAsyncWithError, _lib, "SecTrustEvaluateAsyncWithError")
 	}
-	_rc := _fnSecTrustEvaluateAsyncWithError(objref.IDOf(trust), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 bool, _b2 unsafe.Pointer) { result(_b0, _b1, _b2) }))
+	_rc := _fnSecTrustEvaluateAsyncWithError(objref.IDOf(trust.Object), objc.ID(uintptr(queue.Ptr())), objc.NewBlock(func(_ objc.Block, _b0 unsafe.Pointer, _b1 bool, _b2 unsafe.Pointer) { result(_b0, _b1, _b2) }))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2698,12 +2698,12 @@ func SecTrustEvaluateAsyncWithError(trust obj.Object, queue dispatch.Queue, resu
 var _fnSecTrustSetAnchorCertificates func(objc.ID, objc.ID) int32
 
 // SecTrustSetAnchorCertificates reports an error if the Security framework function SecTrustSetAnchorCertificates fails.
-func SecTrustSetAnchorCertificates(trust obj.Object, anchorCertificates obj.Object) error {
+func SecTrustSetAnchorCertificates(trust SecTrustRef, anchorCertificates obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetAnchorCertificates == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetAnchorCertificates, _lib, "SecTrustSetAnchorCertificates")
 	}
-	_rc := _fnSecTrustSetAnchorCertificates(objref.IDOf(trust), objref.IDOf(anchorCertificates))
+	_rc := _fnSecTrustSetAnchorCertificates(objref.IDOf(trust.Object), objref.IDOf(anchorCertificates))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2713,12 +2713,12 @@ func SecTrustSetAnchorCertificates(trust obj.Object, anchorCertificates obj.Obje
 var _fnSecTrustSetAnchorCertificatesOnly func(objc.ID, uint8) int32
 
 // SecTrustSetAnchorCertificatesOnly reports an error if the Security framework function SecTrustSetAnchorCertificatesOnly fails.
-func SecTrustSetAnchorCertificatesOnly(trust obj.Object, anchorCertificatesOnly uint8) error {
+func SecTrustSetAnchorCertificatesOnly(trust SecTrustRef, anchorCertificatesOnly uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetAnchorCertificatesOnly == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetAnchorCertificatesOnly, _lib, "SecTrustSetAnchorCertificatesOnly")
 	}
-	_rc := _fnSecTrustSetAnchorCertificatesOnly(objref.IDOf(trust), anchorCertificatesOnly)
+	_rc := _fnSecTrustSetAnchorCertificatesOnly(objref.IDOf(trust.Object), anchorCertificatesOnly)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2728,12 +2728,12 @@ func SecTrustSetAnchorCertificatesOnly(trust obj.Object, anchorCertificatesOnly 
 var _fnSecTrustSetKeychains func(objc.ID, objc.ID) int32
 
 // SecTrustSetKeychains reports an error if the Security framework function SecTrustSetKeychains fails.
-func SecTrustSetKeychains(trust obj.Object, keychainOrArray obj.Object) error {
+func SecTrustSetKeychains(trust SecTrustRef, keychainOrArray obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetKeychains == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetKeychains, _lib, "SecTrustSetKeychains")
 	}
-	_rc := _fnSecTrustSetKeychains(objref.IDOf(trust), objref.IDOf(keychainOrArray))
+	_rc := _fnSecTrustSetKeychains(objref.IDOf(trust.Object), objref.IDOf(keychainOrArray))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2743,12 +2743,12 @@ func SecTrustSetKeychains(trust obj.Object, keychainOrArray obj.Object) error {
 var _fnSecTrustSetNetworkFetchAllowed func(objc.ID, uint8) int32
 
 // SecTrustSetNetworkFetchAllowed reports an error if the Security framework function SecTrustSetNetworkFetchAllowed fails.
-func SecTrustSetNetworkFetchAllowed(trust obj.Object, allowFetch uint8) error {
+func SecTrustSetNetworkFetchAllowed(trust SecTrustRef, allowFetch uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetNetworkFetchAllowed == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetNetworkFetchAllowed, _lib, "SecTrustSetNetworkFetchAllowed")
 	}
-	_rc := _fnSecTrustSetNetworkFetchAllowed(objref.IDOf(trust), allowFetch)
+	_rc := _fnSecTrustSetNetworkFetchAllowed(objref.IDOf(trust.Object), allowFetch)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2758,12 +2758,12 @@ func SecTrustSetNetworkFetchAllowed(trust obj.Object, allowFetch uint8) error {
 var _fnSecTrustSetOCSPResponse func(objc.ID, objc.ID) int32
 
 // SecTrustSetOCSPResponse reports an error if the Security framework function SecTrustSetOCSPResponse fails.
-func SecTrustSetOCSPResponse(trust obj.Object, responseData obj.Object) error {
+func SecTrustSetOCSPResponse(trust SecTrustRef, responseData obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetOCSPResponse == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetOCSPResponse, _lib, "SecTrustSetOCSPResponse")
 	}
-	_rc := _fnSecTrustSetOCSPResponse(objref.IDOf(trust), objref.IDOf(responseData))
+	_rc := _fnSecTrustSetOCSPResponse(objref.IDOf(trust.Object), objref.IDOf(responseData))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2773,12 +2773,12 @@ func SecTrustSetOCSPResponse(trust obj.Object, responseData obj.Object) error {
 var _fnSecTrustSetOptions func(objc.ID, SecTrustOptionFlags) int32
 
 // SecTrustSetOptions reports an error if the Security framework function SecTrustSetOptions fails.
-func SecTrustSetOptions(trustRef obj.Object, options SecTrustOptionFlags) error {
+func SecTrustSetOptions(trustRef SecTrustRef, options SecTrustOptionFlags) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetOptions == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetOptions, _lib, "SecTrustSetOptions")
 	}
-	_rc := _fnSecTrustSetOptions(objref.IDOf(trustRef), options)
+	_rc := _fnSecTrustSetOptions(objref.IDOf(trustRef.Object), options)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2788,12 +2788,12 @@ func SecTrustSetOptions(trustRef obj.Object, options SecTrustOptionFlags) error 
 var _fnSecTrustSetParameters func(objc.ID, uint32, objc.ID) int32
 
 // SecTrustSetParameters reports an error if the Security framework function SecTrustSetParameters fails.
-func SecTrustSetParameters(trustRef obj.Object, action uint32, actionData obj.Object) error {
+func SecTrustSetParameters(trustRef SecTrustRef, action uint32, actionData obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetParameters == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetParameters, _lib, "SecTrustSetParameters")
 	}
-	_rc := _fnSecTrustSetParameters(objref.IDOf(trustRef), action, objref.IDOf(actionData))
+	_rc := _fnSecTrustSetParameters(objref.IDOf(trustRef.Object), action, objref.IDOf(actionData))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2803,12 +2803,12 @@ func SecTrustSetParameters(trustRef obj.Object, action uint32, actionData obj.Ob
 var _fnSecTrustSetPolicies func(objc.ID, objc.ID) int32
 
 // SecTrustSetPolicies reports an error if the Security framework function SecTrustSetPolicies fails.
-func SecTrustSetPolicies(trust obj.Object, policies obj.Object) error {
+func SecTrustSetPolicies(trust SecTrustRef, policies obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetPolicies == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetPolicies, _lib, "SecTrustSetPolicies")
 	}
-	_rc := _fnSecTrustSetPolicies(objref.IDOf(trust), objref.IDOf(policies))
+	_rc := _fnSecTrustSetPolicies(objref.IDOf(trust.Object), objref.IDOf(policies))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2818,12 +2818,12 @@ func SecTrustSetPolicies(trust obj.Object, policies obj.Object) error {
 var _fnSecTrustSetSignedCertificateTimestamps func(objc.ID, objc.ID) int32
 
 // SecTrustSetSignedCertificateTimestamps reports an error if the Security framework function SecTrustSetSignedCertificateTimestamps fails.
-func SecTrustSetSignedCertificateTimestamps(trust obj.Object, sctArray obj.Object) error {
+func SecTrustSetSignedCertificateTimestamps(trust SecTrustRef, sctArray obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetSignedCertificateTimestamps == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetSignedCertificateTimestamps, _lib, "SecTrustSetSignedCertificateTimestamps")
 	}
-	_rc := _fnSecTrustSetSignedCertificateTimestamps(objref.IDOf(trust), objref.IDOf(sctArray))
+	_rc := _fnSecTrustSetSignedCertificateTimestamps(objref.IDOf(trust.Object), objref.IDOf(sctArray))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2833,12 +2833,12 @@ func SecTrustSetSignedCertificateTimestamps(trust obj.Object, sctArray obj.Objec
 var _fnSecTrustSetVerifyDate func(objc.ID, objc.ID) int32
 
 // SecTrustSetVerifyDate reports an error if the Security framework function SecTrustSetVerifyDate fails.
-func SecTrustSetVerifyDate(trust obj.Object, verifyDate obj.Object) error {
+func SecTrustSetVerifyDate(trust SecTrustRef, verifyDate obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSetVerifyDate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSetVerifyDate, _lib, "SecTrustSetVerifyDate")
 	}
-	_rc := _fnSecTrustSetVerifyDate(objref.IDOf(trust), objref.IDOf(verifyDate))
+	_rc := _fnSecTrustSetVerifyDate(objref.IDOf(trust.Object), objref.IDOf(verifyDate))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2864,13 +2864,13 @@ func SecTrustSettingsCopyCertificates(domain SecTrustSettingsDomain) (obj.Object
 var _fnSecTrustSettingsCopyModificationDate func(objc.ID, SecTrustSettingsDomain, unsafe.Pointer) int32
 
 // SecTrustSettingsCopyModificationDate reports an error if the Security framework function SecTrustSettingsCopyModificationDate fails.
-func SecTrustSettingsCopyModificationDate(certRef obj.Object, domain SecTrustSettingsDomain) (obj.Object, error) {
+func SecTrustSettingsCopyModificationDate(certRef SecCertificateRef, domain SecTrustSettingsDomain) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSettingsCopyModificationDate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSettingsCopyModificationDate, _lib, "SecTrustSettingsCopyModificationDate")
 	}
 	var _out0 uintptr
-	_rc := _fnSecTrustSettingsCopyModificationDate(objref.IDOf(certRef), domain, unsafe.Pointer(&_out0))
+	_rc := _fnSecTrustSettingsCopyModificationDate(objref.IDOf(certRef.Object), domain, unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -2880,13 +2880,13 @@ func SecTrustSettingsCopyModificationDate(certRef obj.Object, domain SecTrustSet
 var _fnSecTrustSettingsCopyTrustSettings func(objc.ID, SecTrustSettingsDomain, unsafe.Pointer) int32
 
 // SecTrustSettingsCopyTrustSettings reports an error if the Security framework function SecTrustSettingsCopyTrustSettings fails.
-func SecTrustSettingsCopyTrustSettings(certRef obj.Object, domain SecTrustSettingsDomain) (obj.Object, error) {
+func SecTrustSettingsCopyTrustSettings(certRef SecCertificateRef, domain SecTrustSettingsDomain) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSettingsCopyTrustSettings == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSettingsCopyTrustSettings, _lib, "SecTrustSettingsCopyTrustSettings")
 	}
 	var _out0 uintptr
-	_rc := _fnSecTrustSettingsCopyTrustSettings(objref.IDOf(certRef), domain, unsafe.Pointer(&_out0))
+	_rc := _fnSecTrustSettingsCopyTrustSettings(objref.IDOf(certRef.Object), domain, unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -2927,12 +2927,12 @@ func SecTrustSettingsImportExternalRepresentation(domain SecTrustSettingsDomain,
 var _fnSecTrustSettingsRemoveTrustSettings func(objc.ID, SecTrustSettingsDomain) int32
 
 // SecTrustSettingsRemoveTrustSettings reports an error if the Security framework function SecTrustSettingsRemoveTrustSettings fails.
-func SecTrustSettingsRemoveTrustSettings(certRef obj.Object, domain SecTrustSettingsDomain) error {
+func SecTrustSettingsRemoveTrustSettings(certRef SecCertificateRef, domain SecTrustSettingsDomain) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSettingsRemoveTrustSettings == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSettingsRemoveTrustSettings, _lib, "SecTrustSettingsRemoveTrustSettings")
 	}
-	_rc := _fnSecTrustSettingsRemoveTrustSettings(objref.IDOf(certRef), domain)
+	_rc := _fnSecTrustSettingsRemoveTrustSettings(objref.IDOf(certRef.Object), domain)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2942,12 +2942,12 @@ func SecTrustSettingsRemoveTrustSettings(certRef obj.Object, domain SecTrustSett
 var _fnSecTrustSettingsSetTrustSettings func(objc.ID, SecTrustSettingsDomain, objc.ID) int32
 
 // SecTrustSettingsSetTrustSettings reports an error if the Security framework function SecTrustSettingsSetTrustSettings fails.
-func SecTrustSettingsSetTrustSettings(certRef obj.Object, domain SecTrustSettingsDomain, trustSettingsDictOrArray obj.Object) error {
+func SecTrustSettingsSetTrustSettings(certRef SecCertificateRef, domain SecTrustSettingsDomain, trustSettingsDictOrArray obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustSettingsSetTrustSettings == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustSettingsSetTrustSettings, _lib, "SecTrustSettingsSetTrustSettings")
 	}
-	_rc := _fnSecTrustSettingsSetTrustSettings(objref.IDOf(certRef), domain, objref.IDOf(trustSettingsDictOrArray))
+	_rc := _fnSecTrustSettingsSetTrustSettings(objref.IDOf(certRef.Object), domain, objref.IDOf(trustSettingsDictOrArray))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
@@ -2957,13 +2957,13 @@ func SecTrustSettingsSetTrustSettings(certRef obj.Object, domain SecTrustSetting
 var _fnSecTrustedApplicationCopyData func(objc.ID, unsafe.Pointer) int32
 
 // SecTrustedApplicationCopyData reports an error if the Security framework function SecTrustedApplicationCopyData fails.
-func SecTrustedApplicationCopyData(appRef obj.Object) (obj.Object, error) {
+func SecTrustedApplicationCopyData(appRef SecTrustedApplicationRef) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustedApplicationCopyData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustedApplicationCopyData, _lib, "SecTrustedApplicationCopyData")
 	}
 	var _out0 uintptr
-	_rc := _fnSecTrustedApplicationCopyData(objref.IDOf(appRef), unsafe.Pointer(&_out0))
+	_rc := _fnSecTrustedApplicationCopyData(objref.IDOf(appRef.Object), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}
@@ -2988,12 +2988,12 @@ func SecTrustedApplicationCreateFromPath(path string, app unsafe.Pointer) error 
 var _fnSecTrustedApplicationSetData func(objc.ID, objc.ID) int32
 
 // SecTrustedApplicationSetData reports an error if the Security framework function SecTrustedApplicationSetData fails.
-func SecTrustedApplicationSetData(appRef obj.Object, data obj.Object) error {
+func SecTrustedApplicationSetData(appRef SecTrustedApplicationRef, data obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTrustedApplicationSetData == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTrustedApplicationSetData, _lib, "SecTrustedApplicationSetData")
 	}
-	_rc := _fnSecTrustedApplicationSetData(objref.IDOf(appRef), objref.IDOf(data))
+	_rc := _fnSecTrustedApplicationSetData(objref.IDOf(appRef.Object), objref.IDOf(data))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

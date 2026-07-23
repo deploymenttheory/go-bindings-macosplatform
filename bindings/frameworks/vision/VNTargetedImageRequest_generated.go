@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -68,20 +69,20 @@ func NewTargetedImageRequestWithTargetedCVPixelBufferOptionsCompletionHandler(pi
 }
 
 // NewTargetedImageRequestWithTargetedCGImageOptions creates a new request targeting a Core Graphics image.
-func NewTargetedImageRequestWithTargetedCGImageOptions(cgImage obj.Object, options obj.Object) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCGImageOptions(cgImage coregraphics.CGImageRef, options obj.Object) *TargetedImageRequest {
 	defer runtime.KeepAlive(cgImage)
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:options:"), objref.IDOf(cgImage), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:options:"), objref.IDOf(cgImage.Object), objref.IDOf(options))
 	return targetedImageRequestAdopt(_id)
 }
 
 // NewTargetedImageRequestWithTargetedCGImageOptionsCompletionHandler creates a new request targeting a Core Graphics image, executing the completion handler when done.
-func NewTargetedImageRequestWithTargetedCGImageOptionsCompletionHandler(cgImage obj.Object, options obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCGImageOptionsCompletionHandler(cgImage coregraphics.CGImageRef, options obj.Object, completionHandler func(obj.Object, unsafe.Pointer)) *TargetedImageRequest {
 	defer runtime.KeepAlive(cgImage)
 	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:options:completionHandler:"), objref.IDOf(cgImage), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:options:completionHandler:"), objref.IDOf(cgImage.Object), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { completionHandler(obj.Wrap(_b0), _b1) }))
 	return targetedImageRequestAdopt(_id)
 }
 

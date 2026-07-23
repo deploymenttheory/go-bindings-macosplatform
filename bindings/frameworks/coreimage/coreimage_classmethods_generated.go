@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -276,9 +277,9 @@ func LighterColor() *BlendKernel {
 }
 
 // ColorWithCGColor create a Core Image color object with a Core Graphics color object.
-func ColorWithCGColor(color obj.Object) *Color {
+func ColorWithCGColor(color coregraphics.CGColorRef) *Color {
 	defer runtime.KeepAlive(color)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithCGColor:"), objref.IDOf(color))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithCGColor:"), objref.IDOf(color.Object))
 	return ColorFromID(_r)
 }
 
@@ -295,16 +296,16 @@ func ColorWithRedGreenBlue(red float64, green float64, blue float64) *Color {
 }
 
 // ColorWithRedGreenBlueAlphaColorSpace create a Core Image color object with the specified red, green, blue, and alpha component values as measured in the specified color space.
-func ColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue float64, alpha float64, colorSpace obj.Object) *Color {
+func ColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue float64, alpha float64, colorSpace coregraphics.CGColorSpaceRef) *Color {
 	defer runtime.KeepAlive(colorSpace)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithRed:green:blue:alpha:colorSpace:"), red, green, blue, alpha, objref.IDOf(colorSpace))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithRed:green:blue:alpha:colorSpace:"), red, green, blue, alpha, objref.IDOf(colorSpace.Object))
 	return ColorFromID(_r)
 }
 
 // ColorWithRedGreenBlueColorSpace create a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.
-func ColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64, colorSpace obj.Object) *Color {
+func ColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64, colorSpace coregraphics.CGColorSpaceRef) *Color {
 	defer runtime.KeepAlive(colorSpace)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithRed:green:blue:colorSpace:"), red, green, blue, objref.IDOf(colorSpace))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("colorWithRed:green:blue:colorSpace:"), red, green, blue, objref.IDOf(colorSpace.Object))
 	return ColorFromID(_r)
 }
 
@@ -381,12 +382,12 @@ func CIColorKernelKernelWithString(str string) *ColorKernel {
 }
 
 // ContextWithCGLContextPixelFormatColorSpaceOptions creates a Core Image context from a CGL context, using the specified options, color space, and pixel format object.
-func ContextWithCGLContextPixelFormatColorSpaceOptions(cglctx obj.Object, pixelFormat obj.Object, colorSpace obj.Object, options obj.Object) *Context {
+func ContextWithCGLContextPixelFormatColorSpaceOptions(cglctx obj.Object, pixelFormat obj.Object, colorSpace coregraphics.CGColorSpaceRef, options obj.Object) *Context {
 	defer runtime.KeepAlive(cglctx)
 	defer runtime.KeepAlive(pixelFormat)
 	defer runtime.KeepAlive(colorSpace)
 	defer runtime.KeepAlive(options)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextWithCGLContext:pixelFormat:colorSpace:options:"), objref.IDOf(cglctx), objref.IDOf(pixelFormat), objref.IDOf(colorSpace), objref.IDOf(options))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextWithCGLContext:pixelFormat:colorSpace:options:"), objref.IDOf(cglctx), objref.IDOf(pixelFormat), objref.IDOf(colorSpace.Object), objref.IDOf(options))
 	return ContextFromID(_r)
 }
 
@@ -400,10 +401,10 @@ func ContextWithCGLContextPixelFormatOptions(cglctx obj.Object, pixelFormat obj.
 }
 
 // ContextWithCGContextOptions creates a Core Image context from a Quartz context, using the specified options.
-func ContextWithCGContextOptions(cgctx obj.Object, options obj.Object) *Context {
+func ContextWithCGContextOptions(cgctx coregraphics.CGContextRef, options obj.Object) *Context {
 	defer runtime.KeepAlive(cgctx)
 	defer runtime.KeepAlive(options)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextWithCGContext:options:"), objref.IDOf(cgctx), objref.IDOf(options))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextWithCGContext:options:"), objref.IDOf(cgctx.Object), objref.IDOf(options))
 	return ContextFromID(_r)
 }
 
@@ -433,11 +434,11 @@ func ContextForOfflineGPUAtIndex(index int) *Context {
 }
 
 // ContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext wraps the corresponding Objective-C method.
-func ContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext(index int, colorSpace obj.Object, options obj.Object, sharedContext obj.Object) *Context {
+func ContextForOfflineGPUAtIndexColorSpaceOptionsSharedContext(index int, colorSpace coregraphics.CGColorSpaceRef, options obj.Object, sharedContext obj.Object) *Context {
 	defer runtime.KeepAlive(colorSpace)
 	defer runtime.KeepAlive(options)
 	defer runtime.KeepAlive(sharedContext)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextForOfflineGPUAtIndex:colorSpace:options:sharedContext:"), index, objref.IDOf(colorSpace), objref.IDOf(options), objref.IDOf(sharedContext))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("contextForOfflineGPUAtIndex:colorSpace:options:sharedContext:"), index, objref.IDOf(colorSpace.Object), objref.IDOf(options), objref.IDOf(sharedContext))
 	return ContextFromID(_r)
 }
 
@@ -576,54 +577,54 @@ func ShapeWithRect(r corefoundation.CGRect) *FilterShape {
 }
 
 // ImageWithCGImage creates and returns an image object from a Quartz 2D image.
-func ImageWithCGImage(image obj.Object) *Image {
+func ImageWithCGImage(image coregraphics.CGImageRef) *Image {
 	defer runtime.KeepAlive(image)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGImage:"), objref.IDOf(image))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGImage:"), objref.IDOf(image.Object))
 	return ImageFromID(_r)
 }
 
 // ImageWithCGImageOptions creates and returns an image object from a Quartz 2D image using the specified options.
-func ImageWithCGImageOptions(image obj.Object, options obj.Object) *Image {
+func ImageWithCGImageOptions(image coregraphics.CGImageRef, options obj.Object) *Image {
 	defer runtime.KeepAlive(image)
 	defer runtime.KeepAlive(options)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGImage:options:"), objref.IDOf(image), objref.IDOf(options))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGImage:options:"), objref.IDOf(image.Object), objref.IDOf(options))
 	return ImageFromID(_r)
 }
 
 // ImageWithCGImageSourceIndexOptions wraps the corresponding Objective-C method.
-func ImageWithCGImageSourceIndexOptions(source obj.Object, index int, dict obj.Object) *Image {
+func ImageWithCGImageSourceIndexOptions(source coregraphics.CGImageSourceRef, index int, dict obj.Object) *Image {
 	defer runtime.KeepAlive(source)
 	defer runtime.KeepAlive(dict)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGImageSource:index:options:"), objref.IDOf(source), index, objref.IDOf(dict))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGImageSource:index:options:"), objref.IDOf(source.Object), index, objref.IDOf(dict))
 	return ImageFromID(_r)
 }
 
 // ImageWithCGLayer creates and returns an image object from the contents supplied by a CGLayer object.
-func ImageWithCGLayer(layer obj.Object) *Image {
+func ImageWithCGLayer(layer coregraphics.CGLayerRef) *Image {
 	defer runtime.KeepAlive(layer)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGLayer:"), objref.IDOf(layer))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGLayer:"), objref.IDOf(layer.Object))
 	return ImageFromID(_r)
 }
 
 // ImageWithCGLayerOptions creates and returns an image object from the contents supplied by a CGLayer object, using the specified options.
-func ImageWithCGLayerOptions(layer obj.Object, options obj.Object) *Image {
+func ImageWithCGLayerOptions(layer coregraphics.CGLayerRef, options obj.Object) *Image {
 	defer runtime.KeepAlive(layer)
 	defer runtime.KeepAlive(options)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGLayer:options:"), objref.IDOf(layer), objref.IDOf(options))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithCGLayer:options:"), objref.IDOf(layer.Object), objref.IDOf(options))
 	return ImageFromID(_r)
 }
 
 // ImageWithBitmapDataBytesPerRowSizeFormatColorSpace creates and returns an image object from bitmap data.
-func ImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data []byte, bytesPerRow int, size corefoundation.CGSize, format int, colorSpace obj.Object) *Image {
+func ImageWithBitmapDataBytesPerRowSizeFormatColorSpace(data []byte, bytesPerRow int, size corefoundation.CGSize, format int, colorSpace coregraphics.CGColorSpaceRef) *Image {
 	defer runtime.KeepAlive(colorSpace)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithBitmapData:bytesPerRow:size:format:colorSpace:"), rt.BytesToNSData(data), bytesPerRow, size, format, objref.IDOf(colorSpace))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithBitmapData:bytesPerRow:size:format:colorSpace:"), rt.BytesToNSData(data), bytesPerRow, size, format, objref.IDOf(colorSpace.Object))
 	return ImageFromID(_r)
 }
 
 // ImageWithTextureSizeFlippedColorSpace creates and returns an image object initialized with data supplied by an OpenGL texture.
-func ImageWithTextureSizeFlippedColorSpace(name int, size corefoundation.CGSize, flipped bool, colorSpace obj.Object) *Image {
+func ImageWithTextureSizeFlippedColorSpace(name int, size corefoundation.CGSize, flipped bool, colorSpace coregraphics.CGColorSpaceRef) *Image {
 	defer runtime.KeepAlive(colorSpace)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithTexture:size:flipped:colorSpace:"), name, size, flipped, objref.IDOf(colorSpace))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithTexture:size:flipped:colorSpace:"), name, size, flipped, objref.IDOf(colorSpace.Object))
 	return ImageFromID(_r)
 }
 
@@ -687,17 +688,17 @@ func ImageWithCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options obj.Objec
 }
 
 // ImageWithIOSurface creates and returns an image from the contents of an IOSurface.
-func ImageWithIOSurface(surface obj.Object) *Image {
+func ImageWithIOSurface(surface coregraphics.IOSurfaceRef) *Image {
 	defer runtime.KeepAlive(surface)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithIOSurface:"), objref.IDOf(surface))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithIOSurface:"), objref.IDOf(surface.Object))
 	return ImageFromID(_r)
 }
 
 // ImageWithIOSurfaceOptions creates, using the specified options, and returns an image from the contents of an IOSurface.
-func ImageWithIOSurfaceOptions(surface obj.Object, options obj.Object) *Image {
+func ImageWithIOSurfaceOptions(surface coregraphics.IOSurfaceRef, options obj.Object) *Image {
 	defer runtime.KeepAlive(surface)
 	defer runtime.KeepAlive(options)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithIOSurface:options:"), objref.IDOf(surface), objref.IDOf(options))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithIOSurface:options:"), objref.IDOf(surface.Object), objref.IDOf(options))
 	return ImageFromID(_r)
 }
 
@@ -819,11 +820,11 @@ func ImageWithSemanticSegmentationMatte(matte obj.Object) *Image {
 }
 
 // ImageWithImageProviderSizeFormatColorSpaceOptions create an image object based on pixels from an image provider object.
-func ImageWithImageProviderSizeFormatColorSpaceOptions(provider obj.Object, width int, height int, format int, colorSpace obj.Object, options obj.Object) *Image {
+func ImageWithImageProviderSizeFormatColorSpaceOptions(provider obj.Object, width int, height int, format int, colorSpace coregraphics.CGColorSpaceRef, options obj.Object) *Image {
 	defer runtime.KeepAlive(provider)
 	defer runtime.KeepAlive(colorSpace)
 	defer runtime.KeepAlive(options)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithImageProvider:size::format:colorSpace:options:"), objref.IDOf(provider), width, height, format, objref.IDOf(colorSpace), objref.IDOf(options))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("imageWithImageProvider:size::format:colorSpace:options:"), objref.IDOf(provider), width, height, format, objref.IDOf(colorSpace.Object), objref.IDOf(options))
 	return ImageFromID(_r)
 }
 
@@ -834,9 +835,9 @@ func ImageAccumulatorWithExtentFormat(extent corefoundation.CGRect, format int) 
 }
 
 // ImageAccumulatorWithExtentFormatColorSpace creates an image accumulator with the specified extent, pixel format, and color space.
-func ImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace obj.Object) *ImageAccumulator {
+func ImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace coregraphics.CGColorSpaceRef) *ImageAccumulator {
 	defer runtime.KeepAlive(colorSpace)
-	_r := objc.Send[objc.ID](objc.ID(_class("CIImageAccumulator")), objc.RegisterName("imageAccumulatorWithExtent:format:colorSpace:"), extent, format, objref.IDOf(colorSpace))
+	_r := objc.Send[objc.ID](objc.ID(_class("CIImageAccumulator")), objc.RegisterName("imageAccumulatorWithExtent:format:colorSpace:"), extent, format, objref.IDOf(colorSpace.Object))
 	return ImageAccumulatorFromID(_r)
 }
 

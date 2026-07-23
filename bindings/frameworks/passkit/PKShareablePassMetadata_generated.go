@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -75,18 +76,18 @@ func (spm *ShareablePassMetadata) String() string {
 }
 
 // NewShareablePassMetadataWithProvisioningCredentialIdentifierCardConfigurationIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescription creates a shareable pass metadata object.
-func NewShareablePassMetadataWithProvisioningCredentialIdentifierCardConfigurationIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescription(credentialIdentifier string, cardConfigurationIdentifier string, sharingInstanceIdentifier string, passThumbnailImage obj.Object, ownerDisplayName string, localizedDescription string) *ShareablePassMetadata {
+func NewShareablePassMetadataWithProvisioningCredentialIdentifierCardConfigurationIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescription(credentialIdentifier string, cardConfigurationIdentifier string, sharingInstanceIdentifier string, passThumbnailImage coregraphics.CGImageRef, ownerDisplayName string, localizedDescription string) *ShareablePassMetadata {
 	defer runtime.KeepAlive(passThumbnailImage)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKShareablePassMetadata")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:cardConfigurationIdentifier:sharingInstanceIdentifier:passThumbnailImage:ownerDisplayName:localizedDescription:"), purego.NSString(credentialIdentifier), purego.NSString(cardConfigurationIdentifier), purego.NSString(sharingInstanceIdentifier), objref.IDOf(passThumbnailImage), purego.NSString(ownerDisplayName), purego.NSString(localizedDescription))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:cardConfigurationIdentifier:sharingInstanceIdentifier:passThumbnailImage:ownerDisplayName:localizedDescription:"), purego.NSString(credentialIdentifier), purego.NSString(cardConfigurationIdentifier), purego.NSString(sharingInstanceIdentifier), objref.IDOf(passThumbnailImage.Object), purego.NSString(ownerDisplayName), purego.NSString(localizedDescription))
 	return shareablePassMetadataAdopt(_id)
 }
 
 // NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescriptionAccountHashTemplateIdentifierRelyingPartyIdentifierRequiresUnifiedAccessCapableDevice creates a new ShareablePassMetadata.
-func NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescriptionAccountHashTemplateIdentifierRelyingPartyIdentifierRequiresUnifiedAccessCapableDevice(credentialIdentifier string, sharingInstanceIdentifier string, passThumbnailImage obj.Object, ownerDisplayName string, localizedDescription string, accountHash string, templateIdentifier string, relyingPartyIdentifier string, requiresUnifiedAccessCapableDevice bool) *ShareablePassMetadata {
+func NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescriptionAccountHashTemplateIdentifierRelyingPartyIdentifierRequiresUnifiedAccessCapableDevice(credentialIdentifier string, sharingInstanceIdentifier string, passThumbnailImage coregraphics.CGImageRef, ownerDisplayName string, localizedDescription string, accountHash string, templateIdentifier string, relyingPartyIdentifier string, requiresUnifiedAccessCapableDevice bool) *ShareablePassMetadata {
 	defer runtime.KeepAlive(passThumbnailImage)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKShareablePassMetadata")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:passThumbnailImage:ownerDisplayName:localizedDescription:accountHash:templateIdentifier:relyingPartyIdentifier:requiresUnifiedAccessCapableDevice:"), purego.NSString(credentialIdentifier), purego.NSString(sharingInstanceIdentifier), objref.IDOf(passThumbnailImage), purego.NSString(ownerDisplayName), purego.NSString(localizedDescription), purego.NSString(accountHash), purego.NSString(templateIdentifier), purego.NSString(relyingPartyIdentifier), requiresUnifiedAccessCapableDevice)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:passThumbnailImage:ownerDisplayName:localizedDescription:accountHash:templateIdentifier:relyingPartyIdentifier:requiresUnifiedAccessCapableDevice:"), purego.NSString(credentialIdentifier), purego.NSString(sharingInstanceIdentifier), objref.IDOf(passThumbnailImage.Object), purego.NSString(ownerDisplayName), purego.NSString(localizedDescription), purego.NSString(accountHash), purego.NSString(templateIdentifier), purego.NSString(relyingPartyIdentifier), requiresUnifiedAccessCapableDevice)
 	return shareablePassMetadataAdopt(_id)
 }
 
@@ -202,10 +203,10 @@ func (spm *ShareablePassMetadata) Preview() *ShareablePassMetadataPreview {
 }
 
 // PassThumbnailImage returns the pass thumbnail image.
-func (spm *ShareablePassMetadata) PassThumbnailImage() obj.Object {
+func (spm *ShareablePassMetadata) PassThumbnailImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(spm)
 	_r := objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("passThumbnailImage"))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // LocalizedDescription returns the localized description.

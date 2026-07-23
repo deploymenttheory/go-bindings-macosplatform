@@ -6,6 +6,8 @@ package tk
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type Depth struct {
@@ -429,8 +431,6 @@ type XExtData struct {
 	PrivateData unsafe.Pointer
 }
 
-type XFontSet struct{}
-
 type XFontSetExtents struct {
 	MaxInkExtent     XRectangle
 	MaxLogicalExtent XRectangle
@@ -441,10 +441,6 @@ type XHostAddress struct {
 	Length  int32
 	Address unsafe.Pointer
 }
-
-type XIC struct{}
-
-type XIM struct{}
 
 type XIMCallback struct {
 	ClientData unsafe.Pointer
@@ -563,3 +559,24 @@ type XwcTextItem struct {
 
 // Display is an alias for the _XDisplay value type.
 type Display = XDisplay
+
+// XFontSet is a handle for the opaque _XFontSet type.
+type XFontSet struct{ obj.Object }
+
+// IsNil reports whether XFontSet is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h XFontSet) IsNil() bool { return h.Object == nil }
+
+// XIC is a handle for the opaque _XIC type.
+type XIC struct{ obj.Object }
+
+// IsNil reports whether XIC is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h XIC) IsNil() bool { return h.Object == nil }
+
+// XIM is a handle for the opaque _XIM type.
+type XIM struct{ obj.Object }
+
+// IsNil reports whether XIM is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h XIM) IsNil() bool { return h.Object == nil }

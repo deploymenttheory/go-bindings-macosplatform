@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -63,10 +64,10 @@ func NewShapeNode() *ShapeNode {
 }
 
 // WithPath sets the path that defines the shape.
-func (sn *ShapeNode) WithPath(path obj.Object) *ShapeNode {
+func (sn *ShapeNode) WithPath(path coregraphics.CGPathRef) *ShapeNode {
 	defer runtime.KeepAlive(path)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPath:"), objref.IDOf(path))
+		objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("setPath:"), objref.IDOf(path.Object))
 	})
 	return sn
 }
@@ -371,13 +372,13 @@ func (sn *ShapeNode) WithAccessibilityEnabled(accessibilityEnabled bool) *ShapeN
 }
 
 // Path returns the CGPath to be drawn (in the Node's coordinate space)
-func (sn *ShapeNode) Path() obj.Object {
+func (sn *ShapeNode) Path() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(sn)
-	var _mainthread0 obj.Object
+	var _mainthread0 coregraphics.CGPathRef
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() coregraphics.CGPathRef {
 			_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("path"))
-			return obj.Wrap(_r)
+			return coregraphics.CGPathRef{obj.Wrap(_r)}
 		}()
 	})
 	return _mainthread0

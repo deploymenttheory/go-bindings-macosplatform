@@ -6,6 +6,8 @@ package veclib
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 // Common activation function parameters
@@ -966,3 +968,101 @@ type VDSPInt24 struct {
 type VDSPUint24 struct {
 	Bytes [3]uint8
 }
+
+// FFTSetup is a handle for the opaque FFTSetup type.
+type FFTSetup struct{ obj.Object }
+
+// IsNil reports whether FFTSetup is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h FFTSetup) IsNil() bool { return h.Object == nil }
+
+// FFTSetupD is a handle for the opaque FFTSetupD type.
+type FFTSetupD struct{ obj.Object }
+
+// IsNil reports whether FFTSetupD is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h FFTSetupD) IsNil() bool { return h.Object == nil }
+
+// SparseMatrixDouble is a handle for the opaque sparse_matrix_double type.
+type SparseMatrixDouble struct{ obj.Object }
+
+// IsNil reports whether SparseMatrixDouble is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SparseMatrixDouble) IsNil() bool { return h.Object == nil }
+
+// SparseMatrixDoubleComplex is a handle for the opaque sparse_matrix_double_complex type.
+type SparseMatrixDoubleComplex struct{ obj.Object }
+
+// IsNil reports whether SparseMatrixDoubleComplex is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SparseMatrixDoubleComplex) IsNil() bool { return h.Object == nil }
+
+// SparseMatrixFloat is a handle for the opaque sparse_matrix_float type.
+type SparseMatrixFloat struct{ obj.Object }
+
+// IsNil reports whether SparseMatrixFloat is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SparseMatrixFloat) IsNil() bool { return h.Object == nil }
+
+// SparseMatrixFloatComplex is a handle for the opaque sparse_matrix_float_complex type.
+type SparseMatrixFloatComplex struct{ obj.Object }
+
+// IsNil reports whether SparseMatrixFloatComplex is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h SparseMatrixFloatComplex) IsNil() bool { return h.Object == nil }
+
+// VDSPDFTInterleavedSetup is a handle for the opaque vDSP_DFT_Interleaved_Setup type.
+type VDSPDFTInterleavedSetup struct{ obj.Object }
+
+// IsNil reports whether VDSPDFTInterleavedSetup is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VDSPDFTInterleavedSetup) IsNil() bool { return h.Object == nil }
+
+// VDSPDFTInterleavedSetupD is a handle for the opaque vDSP_DFT_Interleaved_SetupD type.
+type VDSPDFTInterleavedSetupD struct{ obj.Object }
+
+// IsNil reports whether VDSPDFTInterleavedSetupD is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VDSPDFTInterleavedSetupD) IsNil() bool { return h.Object == nil }
+
+// VDSPDFTSetup is a handle for the opaque vDSP_DFT_Setup type.
+type VDSPDFTSetup struct{ obj.Object }
+
+// IsNil reports whether VDSPDFTSetup is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VDSPDFTSetup) IsNil() bool { return h.Object == nil }
+
+// VDSPDFTSetupD is a handle for the opaque vDSP_DFT_SetupD type.
+type VDSPDFTSetupD struct{ obj.Object }
+
+// IsNil reports whether VDSPDFTSetupD is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VDSPDFTSetupD) IsNil() bool { return h.Object == nil }
+
+// VDSPBiquadSetup is a handle for the opaque vDSP_biquad_Setup type.
+type VDSPBiquadSetup struct{ obj.Object }
+
+// IsNil reports whether VDSPBiquadSetup is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VDSPBiquadSetup) IsNil() bool { return h.Object == nil }
+
+// VDSPBiquadSetupD is a handle for the opaque vDSP_biquad_SetupD type.
+type VDSPBiquadSetupD struct{ obj.Object }
+
+// IsNil reports whether VDSPBiquadSetupD is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VDSPBiquadSetupD) IsNil() bool { return h.Object == nil }
+
+// VDSPBiquadmSetup is a handle for the opaque vDSP_biquadm_Setup type.
+type VDSPBiquadmSetup struct{ obj.Object }
+
+// IsNil reports whether VDSPBiquadmSetup is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VDSPBiquadmSetup) IsNil() bool { return h.Object == nil }
+
+// VDSPBiquadmSetupD is a handle for the opaque vDSP_biquadm_SetupD type.
+type VDSPBiquadmSetupD struct{ obj.Object }
+
+// IsNil reports whether VDSPBiquadmSetupD is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h VDSPBiquadmSetupD) IsNil() bool { return h.Object == nil }

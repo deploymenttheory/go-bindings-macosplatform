@@ -4,6 +4,24 @@
 
 package sharedfilelist
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 type OpaqueLSSharedFileListItemRef struct{}
 
 type OpaqueLSSharedFileListRef struct{}
+
+// LSSharedFileListItemRef is a handle for the opaque LSSharedFileListItemRef type.
+type LSSharedFileListItemRef struct{ obj.Object }
+
+// IsNil reports whether LSSharedFileListItemRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h LSSharedFileListItemRef) IsNil() bool { return h.Object == nil }
+
+// LSSharedFileListRef is a handle for the opaque LSSharedFileListRef type.
+type LSSharedFileListRef struct{ obj.Object }
+
+// IsNil reports whether LSSharedFileListRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h LSSharedFileListRef) IsNil() bool { return h.Object == nil }

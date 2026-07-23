@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -389,10 +390,10 @@ func (a *Annotation) WithStampName(stampName string) *Annotation {
 }
 
 // DrawWithBoxInContext draws the annotation in a graphics context using page-space coordinates relative to the origin of the specified box.
-func (a *Annotation) DrawWithBoxInContext(box DisplayBox, context_ obj.Object) {
+func (a *Annotation) DrawWithBoxInContext(box DisplayBox, context_ coregraphics.CGContextRef) {
 	defer runtime.KeepAlive(a)
 	defer runtime.KeepAlive(context_)
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("drawWithBox:inContext:"), box, objref.IDOf(context_))
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("drawWithBox:inContext:"), box, objref.IDOf(context_.Object))
 }
 
 // SetValueForAnnotationKey sets a value in the annotation’s dictionary.

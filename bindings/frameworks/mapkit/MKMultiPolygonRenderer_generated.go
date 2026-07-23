@@ -7,6 +7,7 @@ package mapkit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -102,9 +103,9 @@ func (mpr *MultiPolygonRenderer) WithShouldRasterize(shouldRasterize bool) *Mult
 }
 
 // WithPath sets the path representing the overlay’s shape.
-func (mpr *MultiPolygonRenderer) WithPath(path obj.Object) *MultiPolygonRenderer {
+func (mpr *MultiPolygonRenderer) WithPath(path coregraphics.CGPathRef) *MultiPolygonRenderer {
 	defer runtime.KeepAlive(path)
-	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setPath:"), objref.IDOf(path))
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setPath:"), objref.IDOf(path.Object))
 	return mpr
 }
 

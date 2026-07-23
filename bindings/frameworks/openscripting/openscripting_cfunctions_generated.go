@@ -8,8 +8,8 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -61,12 +61,12 @@ func ASInit(scriptingComponent *carboncore.ComponentInstanceRecord, modeFlags in
 var _fnASSetSourceAttributes func(unsafe.Pointer, objc.ID) int32
 
 // ASSetSourceAttributes calls the OpenScripting framework function ASSetSourceAttributes.
-func ASSetSourceAttributes(scriptingComponent *carboncore.ComponentInstanceRecord, sourceAttributes obj.Object) int {
+func ASSetSourceAttributes(scriptingComponent *carboncore.ComponentInstanceRecord, sourceAttributes corefoundation.CFArrayRef) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnASSetSourceAttributes == nil {
 		ebipurego.RegisterLibFunc(&_fnASSetSourceAttributes, _lib, "ASSetSourceAttributes")
 	}
-	return int(_fnASSetSourceAttributes(unsafe.Pointer(scriptingComponent), objref.IDOf(sourceAttributes)))
+	return int(_fnASSetSourceAttributes(unsafe.Pointer(scriptingComponent), objref.IDOf(sourceAttributes.Object)))
 }
 
 var _fnASSetSourceStyles func(unsafe.Pointer, unsafe.Pointer) int32
@@ -214,12 +214,12 @@ func OSACopyScriptingDefinition(ref *carboncore.FSRef, modeFlags int, sdef unsaf
 var _fnOSACopyScriptingDefinitionFromURL func(objc.ID, int, unsafe.Pointer) int32
 
 // OSACopyScriptingDefinitionFromURL calls the OpenScripting framework function OSACopyScriptingDefinitionFromURL.
-func OSACopyScriptingDefinitionFromURL(url obj.Object, modeFlags int, sdef unsafe.Pointer) int {
+func OSACopyScriptingDefinitionFromURL(url corefoundation.CFURLRef, modeFlags int, sdef unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSACopyScriptingDefinitionFromURL == nil {
 		ebipurego.RegisterLibFunc(&_fnOSACopyScriptingDefinitionFromURL, _lib, "OSACopyScriptingDefinitionFromURL")
 	}
-	return int(_fnOSACopyScriptingDefinitionFromURL(objref.IDOf(url), modeFlags, sdef))
+	return int(_fnOSACopyScriptingDefinitionFromURL(objref.IDOf(url.Object), modeFlags, sdef))
 }
 
 var _fnOSACopySourceString func(unsafe.Pointer, int, int, unsafe.Pointer) int32
@@ -448,13 +448,13 @@ func OSAGetResumeDispatchProc(scriptingComponent *carboncore.ComponentInstanceRe
 var _fnOSAGetScriptDataFromURL func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
 
 // OSAGetScriptDataFromURL calls the OpenScripting framework function OSAGetScriptDataFromURL.
-func OSAGetScriptDataFromURL(scriptURL obj.Object, modeFlags int, resultingScriptData unsafe.Pointer) (result int, storable uint8) {
+func OSAGetScriptDataFromURL(scriptURL corefoundation.CFURLRef, modeFlags int, resultingScriptData unsafe.Pointer) (result int, storable uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSAGetScriptDataFromURL == nil {
 		ebipurego.RegisterLibFunc(&_fnOSAGetScriptDataFromURL, _lib, "OSAGetScriptDataFromURL")
 	}
 	var _out0 uint8
-	_ret := int(_fnOSAGetScriptDataFromURL(objref.IDOf(scriptURL), unsafe.Pointer(&_out0), modeFlags, resultingScriptData))
+	_ret := int(_fnOSAGetScriptDataFromURL(objref.IDOf(scriptURL.Object), unsafe.Pointer(&_out0), modeFlags, resultingScriptData))
 	return _ret, _out0
 }
 
@@ -597,13 +597,13 @@ func OSALoadFile(scriptingComponent *carboncore.ComponentInstanceRecord, scriptF
 var _fnOSALoadScriptData func(unsafe.Pointer, unsafe.Pointer, objc.ID, int, unsafe.Pointer) int32
 
 // OSALoadScriptData calls the OpenScripting framework function OSALoadScriptData.
-func OSALoadScriptData(scriptingComponent *carboncore.ComponentInstanceRecord, scriptData unsafe.Pointer, fromURL obj.Object, modeFlags int) (result int, resultingScriptID int) {
+func OSALoadScriptData(scriptingComponent *carboncore.ComponentInstanceRecord, scriptData unsafe.Pointer, fromURL corefoundation.CFURLRef, modeFlags int) (result int, resultingScriptID int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnOSALoadScriptData == nil {
 		ebipurego.RegisterLibFunc(&_fnOSALoadScriptData, _lib, "OSALoadScriptData")
 	}
 	var _out0 int
-	_ret := int(_fnOSALoadScriptData(unsafe.Pointer(scriptingComponent), scriptData, objref.IDOf(fromURL), modeFlags, unsafe.Pointer(&_out0)))
+	_ret := int(_fnOSALoadScriptData(unsafe.Pointer(scriptingComponent), scriptData, objref.IDOf(fromURL.Object), modeFlags, unsafe.Pointer(&_out0)))
 	return _ret, _out0
 }
 

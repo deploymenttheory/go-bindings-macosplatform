@@ -6,6 +6,8 @@ package discrecording
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type DRBurn struct{}
@@ -61,3 +63,59 @@ type DRTrackProductionInfo struct {
 	BlockSize        uint32
 	RequestedAddress uint64
 }
+
+// DRBurnRef is a handle for the opaque DRBurnRef type.
+type DRBurnRef struct{ obj.Object }
+
+// IsNil reports whether DRBurnRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DRBurnRef) IsNil() bool { return h.Object == nil }
+
+// DRCDTextBlockRef is a handle for the opaque DRCDTextBlockRef type.
+type DRCDTextBlockRef struct{ obj.Object }
+
+// IsNil reports whether DRCDTextBlockRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DRCDTextBlockRef) IsNil() bool { return h.Object == nil }
+
+// DRDeviceRef is a handle for the opaque DRDeviceRef type.
+type DRDeviceRef struct{ obj.Object }
+
+// IsNil reports whether DRDeviceRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DRDeviceRef) IsNil() bool { return h.Object == nil }
+
+// DREraseRef is a handle for the opaque DREraseRef type.
+type DREraseRef struct{ obj.Object }
+
+// IsNil reports whether DREraseRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DREraseRef) IsNil() bool { return h.Object == nil }
+
+// DRFileRef is a handle for the opaque DRFileRef type.
+type DRFileRef struct{ obj.Object }
+
+// IsNil reports whether DRFileRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DRFileRef) IsNil() bool { return h.Object == nil }
+
+// DRFolderRef is a handle for the opaque DRFolderRef type.
+type DRFolderRef struct{ obj.Object }
+
+// IsNil reports whether DRFolderRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DRFolderRef) IsNil() bool { return h.Object == nil }
+
+// DRNotificationCenterRef is a handle for the opaque DRNotificationCenterRef type.
+type DRNotificationCenterRef struct{ obj.Object }
+
+// IsNil reports whether DRNotificationCenterRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DRNotificationCenterRef) IsNil() bool { return h.Object == nil }
+
+// DRTrackRef is a handle for the opaque DRTrackRef type.
+type DRTrackRef struct{ obj.Object }
+
+// IsNil reports whether DRTrackRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h DRTrackRef) IsNil() bool { return h.Object == nil }

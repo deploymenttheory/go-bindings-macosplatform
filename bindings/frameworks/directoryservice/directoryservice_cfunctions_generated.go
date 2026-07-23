@@ -7,8 +7,8 @@ package directoryservice
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -1115,12 +1115,12 @@ func DsRemoveAttributeValue(inRecordReference int, inAttributeValueID int) (resu
 var _fnDsServiceInformationAllocate func(objc.ID, int, unsafe.Pointer) TDirStatus
 
 // DsServiceInformationAllocate calls the DirectoryService framework function dsServiceInformationAllocate.
-func DsServiceInformationAllocate(inServiceInfo obj.Object, inBufferSize int, outPackedServiceInfo unsafe.Pointer) TDirStatus {
+func DsServiceInformationAllocate(inServiceInfo corefoundation.CFDictionaryRef, inBufferSize int, outPackedServiceInfo unsafe.Pointer) TDirStatus {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDsServiceInformationAllocate == nil {
 		ebipurego.RegisterLibFunc(&_fnDsServiceInformationAllocate, _lib, "dsServiceInformationAllocate")
 	}
-	return _fnDsServiceInformationAllocate(objref.IDOf(inServiceInfo), inBufferSize, outPackedServiceInfo)
+	return _fnDsServiceInformationAllocate(objref.IDOf(inServiceInfo.Object), inBufferSize, outPackedServiceInfo)
 }
 
 var _fnDsSetAttributeValue func(int, unsafe.Pointer, unsafe.Pointer) TDirStatus

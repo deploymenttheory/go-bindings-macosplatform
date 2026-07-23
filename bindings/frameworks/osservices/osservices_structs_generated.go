@@ -6,6 +6,8 @@ package osservices
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 )
 
 type CSIdentity struct{}
@@ -70,3 +72,38 @@ type WSClientContext struct {
 	Release         unsafe.Pointer
 	CopyDescription unsafe.Pointer
 }
+
+// CSIdentityAuthorityRef is a handle for the opaque CSIdentityAuthorityRef type.
+type CSIdentityAuthorityRef struct{ obj.Object }
+
+// IsNil reports whether CSIdentityAuthorityRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CSIdentityAuthorityRef) IsNil() bool { return h.Object == nil }
+
+// CSIdentityQueryRef is a handle for the opaque CSIdentityQueryRef type.
+type CSIdentityQueryRef struct{ obj.Object }
+
+// IsNil reports whether CSIdentityQueryRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CSIdentityQueryRef) IsNil() bool { return h.Object == nil }
+
+// CSIdentityRef is a handle for the opaque CSIdentityRef type.
+type CSIdentityRef struct{ obj.Object }
+
+// IsNil reports whether CSIdentityRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CSIdentityRef) IsNil() bool { return h.Object == nil }
+
+// WSMethodInvocationRef is a handle for the opaque WSMethodInvocationRef type.
+type WSMethodInvocationRef struct{ obj.Object }
+
+// IsNil reports whether WSMethodInvocationRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h WSMethodInvocationRef) IsNil() bool { return h.Object == nil }
+
+// WSProtocolHandlerRef is a handle for the opaque WSProtocolHandlerRef type.
+type WSProtocolHandlerRef struct{ obj.Object }
+
+// IsNil reports whether WSProtocolHandlerRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h WSProtocolHandlerRef) IsNil() bool { return h.Object == nil }

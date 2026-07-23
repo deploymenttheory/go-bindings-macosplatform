@@ -7,9 +7,10 @@ package coretext
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -17,13 +18,13 @@ import (
 // CTFontManagerRegisterFontsForURL reports an error if the CoreText framework function CTFontManagerRegisterFontsForURL fails.
 var _fnCTFontManagerRegisterFontsForURL func(objc.ID, CTFontManagerScope, unsafe.Pointer) bool
 
-func CTFontManagerRegisterFontsForURL(fontURL obj.Object, scope CTFontManagerScope) error {
+func CTFontManagerRegisterFontsForURL(fontURL corefoundation.CFURLRef, scope CTFontManagerScope) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontManagerRegisterFontsForURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerRegisterFontsForURL, _lib, "CTFontManagerRegisterFontsForURL")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCTFontManagerRegisterFontsForURL(objref.IDOf(fontURL), scope, unsafe.Pointer(&_cfErr))
+	_ok := _fnCTFontManagerRegisterFontsForURL(objref.IDOf(fontURL.Object), scope, unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -33,13 +34,13 @@ func CTFontManagerRegisterFontsForURL(fontURL obj.Object, scope CTFontManagerSco
 // CTFontManagerRegisterGraphicsFont reports an error if the CoreText framework function CTFontManagerRegisterGraphicsFont fails.
 var _fnCTFontManagerRegisterGraphicsFont func(objc.ID, unsafe.Pointer) bool
 
-func CTFontManagerRegisterGraphicsFont(font obj.Object) error {
+func CTFontManagerRegisterGraphicsFont(font coregraphics.CGFontRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontManagerRegisterGraphicsFont == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerRegisterGraphicsFont, _lib, "CTFontManagerRegisterGraphicsFont")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCTFontManagerRegisterGraphicsFont(objref.IDOf(font), unsafe.Pointer(&_cfErr))
+	_ok := _fnCTFontManagerRegisterGraphicsFont(objref.IDOf(font.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -49,13 +50,13 @@ func CTFontManagerRegisterGraphicsFont(font obj.Object) error {
 // CTFontManagerUnregisterFontsForURL reports an error if the CoreText framework function CTFontManagerUnregisterFontsForURL fails.
 var _fnCTFontManagerUnregisterFontsForURL func(objc.ID, CTFontManagerScope, unsafe.Pointer) bool
 
-func CTFontManagerUnregisterFontsForURL(fontURL obj.Object, scope CTFontManagerScope) error {
+func CTFontManagerUnregisterFontsForURL(fontURL corefoundation.CFURLRef, scope CTFontManagerScope) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontManagerUnregisterFontsForURL == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerUnregisterFontsForURL, _lib, "CTFontManagerUnregisterFontsForURL")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCTFontManagerUnregisterFontsForURL(objref.IDOf(fontURL), scope, unsafe.Pointer(&_cfErr))
+	_ok := _fnCTFontManagerUnregisterFontsForURL(objref.IDOf(fontURL.Object), scope, unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -65,13 +66,13 @@ func CTFontManagerUnregisterFontsForURL(fontURL obj.Object, scope CTFontManagerS
 // CTFontManagerUnregisterGraphicsFont reports an error if the CoreText framework function CTFontManagerUnregisterGraphicsFont fails.
 var _fnCTFontManagerUnregisterGraphicsFont func(objc.ID, unsafe.Pointer) bool
 
-func CTFontManagerUnregisterGraphicsFont(font obj.Object) error {
+func CTFontManagerUnregisterGraphicsFont(font coregraphics.CGFontRef) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCTFontManagerUnregisterGraphicsFont == nil {
 		ebipurego.RegisterLibFunc(&_fnCTFontManagerUnregisterGraphicsFont, _lib, "CTFontManagerUnregisterGraphicsFont")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCTFontManagerUnregisterGraphicsFont(objref.IDOf(font), unsafe.Pointer(&_cfErr))
+	_ok := _fnCTFontManagerUnregisterGraphicsFont(objref.IDOf(font.Object), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}

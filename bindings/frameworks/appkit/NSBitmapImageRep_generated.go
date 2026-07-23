@@ -9,6 +9,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -65,10 +66,10 @@ func NewBitmapImageRepWithFocusedViewRect(rect corefoundation.CGRect) *BitmapIma
 }
 
 // NewBitmapImageRepWithCGImage returns a bitmap image representation from a Core Graphics image object.
-func NewBitmapImageRepWithCGImage(cgImage obj.Object) *BitmapImageRep {
+func NewBitmapImageRepWithCGImage(cgImage coregraphics.CGImageRef) *BitmapImageRep {
 	defer runtime.KeepAlive(cgImage)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBitmapImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:"), objref.IDOf(cgImage))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGImage:"), objref.IDOf(cgImage.Object))
 	return bitmapImageRepAdopt(_id)
 }
 
@@ -299,10 +300,10 @@ func (bir *BitmapImageRep) TIFFRepresentation() []byte {
 }
 
 // CGImage returns the cg image.
-func (bir *BitmapImageRep) CGImage() obj.Object {
+func (bir *BitmapImageRep) CGImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(bir)
 	_r := objc.Send[objc.ID](objref.IDOf(bir), objc.RegisterName("CGImage"))
-	return obj.Wrap(_r)
+	return coregraphics.CGImageRef{obj.Wrap(_r)}
 }
 
 // ColorSpace returns the color space.

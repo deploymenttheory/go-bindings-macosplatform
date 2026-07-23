@@ -5,6 +5,7 @@
 package servicemanagement
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -14,34 +15,34 @@ import (
 var _fnSMCopyAllJobDictionaries func(objc.ID) objc.ID
 
 // SMCopyAllJobDictionaries calls the ServiceManagement framework function SMCopyAllJobDictionaries.
-func SMCopyAllJobDictionaries(domain obj.Object) obj.Object {
+func SMCopyAllJobDictionaries(domain corefoundation.CFStringRef) corefoundation.CFArrayRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSMCopyAllJobDictionaries == nil {
 		ebipurego.RegisterLibFunc(&_fnSMCopyAllJobDictionaries, _lib, "SMCopyAllJobDictionaries")
 	}
-	_ret := _fnSMCopyAllJobDictionaries(objref.IDOf(domain))
-	return obj.Wrap(_ret)
+	_ret := _fnSMCopyAllJobDictionaries(objref.IDOf(domain.Object))
+	return corefoundation.CFArrayRef{obj.Wrap(_ret)}
 }
 
 var _fnSMJobCopyDictionary func(objc.ID, objc.ID) objc.ID
 
 // SMJobCopyDictionary calls the ServiceManagement framework function SMJobCopyDictionary.
-func SMJobCopyDictionary(domain obj.Object, jobLabel obj.Object) obj.Object {
+func SMJobCopyDictionary(domain corefoundation.CFStringRef, jobLabel corefoundation.CFStringRef) corefoundation.CFDictionaryRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSMJobCopyDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnSMJobCopyDictionary, _lib, "SMJobCopyDictionary")
 	}
-	_ret := _fnSMJobCopyDictionary(objref.IDOf(domain), objref.IDOf(jobLabel))
-	return obj.Wrap(_ret)
+	_ret := _fnSMJobCopyDictionary(objref.IDOf(domain.Object), objref.IDOf(jobLabel.Object))
+	return corefoundation.CFDictionaryRef{obj.Wrap(_ret)}
 }
 
 var _fnSMLoginItemSetEnabled func(objc.ID, uint8) uint8
 
 // SMLoginItemSetEnabled calls the ServiceManagement framework function SMLoginItemSetEnabled.
-func SMLoginItemSetEnabled(identifier obj.Object, enabled uint8) uint8 {
+func SMLoginItemSetEnabled(identifier corefoundation.CFStringRef, enabled uint8) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSMLoginItemSetEnabled == nil {
 		ebipurego.RegisterLibFunc(&_fnSMLoginItemSetEnabled, _lib, "SMLoginItemSetEnabled")
 	}
-	return _fnSMLoginItemSetEnabled(objref.IDOf(identifier), enabled)
+	return _fnSMLoginItemSetEnabled(objref.IDOf(identifier.Object), enabled)
 }

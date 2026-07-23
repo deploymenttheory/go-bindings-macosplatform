@@ -4,6 +4,10 @@
 
 package colorsync
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 type ColorSyncCMM struct{}
 
 type ColorSyncMD5 struct {
@@ -13,3 +17,31 @@ type ColorSyncMD5 struct {
 type ColorSyncProfile struct{}
 
 type ColorSyncTransform struct{}
+
+// ColorSyncCMMRef is a handle for the opaque ColorSyncCMMRef type.
+type ColorSyncCMMRef struct{ obj.Object }
+
+// IsNil reports whether ColorSyncCMMRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ColorSyncCMMRef) IsNil() bool { return h.Object == nil }
+
+// ColorSyncMutableProfileRef is a handle for the opaque ColorSyncMutableProfileRef type.
+type ColorSyncMutableProfileRef struct{ obj.Object }
+
+// IsNil reports whether ColorSyncMutableProfileRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ColorSyncMutableProfileRef) IsNil() bool { return h.Object == nil }
+
+// ColorSyncProfileRef is a handle for the opaque ColorSyncProfileRef type.
+type ColorSyncProfileRef struct{ obj.Object }
+
+// IsNil reports whether ColorSyncProfileRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ColorSyncProfileRef) IsNil() bool { return h.Object == nil }
+
+// ColorSyncTransformRef is a handle for the opaque ColorSyncTransformRef type.
+type ColorSyncTransformRef struct{ obj.Object }
+
+// IsNil reports whether ColorSyncTransformRef is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h ColorSyncTransformRef) IsNil() bool { return h.Object == nil }

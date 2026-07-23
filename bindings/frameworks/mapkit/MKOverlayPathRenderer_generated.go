@@ -7,6 +7,7 @@ package mapkit
 import (
 	"runtime"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -94,9 +95,9 @@ func (opr *OverlayPathRenderer) WithShouldRasterize(shouldRasterize bool) *Overl
 }
 
 // WithPath sets the path representing the overlay’s shape.
-func (opr *OverlayPathRenderer) WithPath(path obj.Object) *OverlayPathRenderer {
+func (opr *OverlayPathRenderer) WithPath(path coregraphics.CGPathRef) *OverlayPathRenderer {
 	defer runtime.KeepAlive(path)
-	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("setPath:"), objref.IDOf(path))
+	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("setPath:"), objref.IDOf(path.Object))
 	return opr
 }
 
@@ -119,33 +120,33 @@ func (opr *OverlayPathRenderer) InvalidatePath() {
 }
 
 // ApplyStrokePropertiesToContextAtZoomScale applies the renderer’s stroke-related drawing properties to the specified graphics context.
-func (opr *OverlayPathRenderer) ApplyStrokePropertiesToContextAtZoomScale(context_ obj.Object, zoomScale float64) {
+func (opr *OverlayPathRenderer) ApplyStrokePropertiesToContextAtZoomScale(context_ coregraphics.CGContextRef, zoomScale float64) {
 	defer runtime.KeepAlive(opr)
 	defer runtime.KeepAlive(context_)
-	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("applyStrokePropertiesToContext:atZoomScale:"), objref.IDOf(context_), zoomScale)
+	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("applyStrokePropertiesToContext:atZoomScale:"), objref.IDOf(context_.Object), zoomScale)
 }
 
 // ApplyFillPropertiesToContextAtZoomScale applies the receiver’s fill-related drawing properties to the specified graphics context.
-func (opr *OverlayPathRenderer) ApplyFillPropertiesToContextAtZoomScale(context_ obj.Object, zoomScale float64) {
+func (opr *OverlayPathRenderer) ApplyFillPropertiesToContextAtZoomScale(context_ coregraphics.CGContextRef, zoomScale float64) {
 	defer runtime.KeepAlive(opr)
 	defer runtime.KeepAlive(context_)
-	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("applyFillPropertiesToContext:atZoomScale:"), objref.IDOf(context_), zoomScale)
+	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("applyFillPropertiesToContext:atZoomScale:"), objref.IDOf(context_.Object), zoomScale)
 }
 
 // StrokePathInContext draws a line along the specified path.
-func (opr *OverlayPathRenderer) StrokePathInContext(path obj.Object, context_ obj.Object) {
+func (opr *OverlayPathRenderer) StrokePathInContext(path coregraphics.CGPathRef, context_ coregraphics.CGContextRef) {
 	defer runtime.KeepAlive(opr)
 	defer runtime.KeepAlive(path)
 	defer runtime.KeepAlive(context_)
-	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("strokePath:inContext:"), objref.IDOf(path), objref.IDOf(context_))
+	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("strokePath:inContext:"), objref.IDOf(path.Object), objref.IDOf(context_.Object))
 }
 
 // FillPathInContext fills the area that the specified path encloses.
-func (opr *OverlayPathRenderer) FillPathInContext(path obj.Object, context_ obj.Object) {
+func (opr *OverlayPathRenderer) FillPathInContext(path coregraphics.CGPathRef, context_ coregraphics.CGContextRef) {
 	defer runtime.KeepAlive(opr)
 	defer runtime.KeepAlive(path)
 	defer runtime.KeepAlive(context_)
-	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("fillPath:inContext:"), objref.IDOf(path), objref.IDOf(context_))
+	objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("fillPath:inContext:"), objref.IDOf(path.Object), objref.IDOf(context_.Object))
 }
 
 // FillColor returns the fill color.
@@ -200,10 +201,10 @@ func (opr *OverlayPathRenderer) ShouldRasterize() bool {
 }
 
 // Path returns the path.
-func (opr *OverlayPathRenderer) Path() obj.Object {
+func (opr *OverlayPathRenderer) Path() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(opr)
 	_r := objc.Send[objc.ID](objref.IDOf(opr), objc.RegisterName("path"))
-	return obj.Wrap(_r)
+	return coregraphics.CGPathRef{obj.Wrap(_r)}
 }
 
 // isOverlayPathRenderer marks OverlayPathRenderer — and, by embedding promotion, its

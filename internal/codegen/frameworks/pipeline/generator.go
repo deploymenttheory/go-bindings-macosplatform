@@ -788,6 +788,38 @@ func buildMapper(reg *Registry) *typemap.Mapper {
 			libraryPkgs[naming.PackageName(fw.Framework)] = true
 		}
 	}
+	// CFHandleIndex — one authoritative name→{owner idiomatic package, Go type}
+	// entry for every opaque CF/CG/handle typedef the idiomatic layer surfaces as
+	// a distinct struct-wrapper type. Pattern CF*/CG* refs are owned by
+	// corefoundation/coregraphics; every other opaque handle takes its explicit
+	// CFTypeIndex owner (e.g. SecKeyRef → security). The emitter iterates this by
+	// owner to declare the types; the resolver reads it to reference them, so the
+	// two never disagree.
+	cfHandleIndex := make(map[string]typemap.IdiomaticClassRef)
+	for _, fw := range reg.Frameworks {
+		for tName := range fw.Typedefs {
+			if !typemap.IsCoreFoundationOpaqueRef(tName) {
+				continue
+			}
+			if _, done := cfHandleIndex[tName]; done {
+				continue
+			}
+			owner := "corefoundation"
+			if strings.HasPrefix(tName, "CG") {
+				owner = "coregraphics"
+			}
+			cfHandleIndex[tName] = typemap.IdiomaticClassRef{
+				Package:  owner,
+				TypeName: naming.ExportedTypeName(tName),
+			}
+		}
+	}
+	for name, fw := range reg.CFTypeIndex {
+		cfHandleIndex[name] = typemap.IdiomaticClassRef{
+			Package:  naming.PackageName(fw),
+			TypeName: naming.ExportedTypeName(name),
+		}
+	}
 	return &typemap.Mapper{
 		OwnerIndex:               reg.OwnerIndex,
 		GenericClasses:           reg.GenericClasses,
@@ -799,6 +831,7 @@ func buildMapper(reg *Registry) *typemap.Mapper {
 		ProtocolIndex:            reg.ProtocolIndex,
 		CFTypeIndex:              reg.CFTypeIndex,
 		NonRefcountedHandles:     reg.NonRefcountedHandles,
+		CFHandleIndex:            cfHandleIndex,
 		BlockedImports:           reg.BlockedImports,
 		UnavailableClasses:       reg.UnavailableClasses,
 		UnavailableEnumBaseTypes: reg.UnavailableEnumBaseTypes,

@@ -8,6 +8,7 @@ import (
 	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
@@ -76,13 +77,13 @@ func (tp *TextPreview) String() string {
 }
 
 // NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects creates a text preview using the specified image and rectangles that indicate the portions of text to highlight.
-func NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects(snapshotImage obj.Object, presentationFrame corefoundation.CGRect, candidateRects []*foundation.Value) *TextPreview {
+func NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects(snapshotImage coregraphics.CGImageRef, presentationFrame corefoundation.CGRect, candidateRects []*foundation.Value) *TextPreview {
 	defer runtime.KeepAlive(snapshotImage)
 	var _mainthread0 *TextPreview
 	purego.Main(func() {
 		_mainthread0 = func() *TextPreview {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextPreview")), objc.RegisterName("alloc"))
-			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:candidateRects:"), objref.IDOf(snapshotImage), presentationFrame, purego.SliceToNSArray(candidateRects, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:candidateRects:"), objref.IDOf(snapshotImage.Object), presentationFrame, purego.SliceToNSArray(candidateRects, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }))
 			return textPreviewAdopt(_id)
 		}()
 	})
@@ -90,13 +91,13 @@ func NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects(snapshotImag
 }
 
 // NewTextPreviewWithSnapshotImagePresentationFrame creates a text preview using the specified image.
-func NewTextPreviewWithSnapshotImagePresentationFrame(snapshotImage obj.Object, presentationFrame corefoundation.CGRect) *TextPreview {
+func NewTextPreviewWithSnapshotImagePresentationFrame(snapshotImage coregraphics.CGImageRef, presentationFrame corefoundation.CGRect) *TextPreview {
 	defer runtime.KeepAlive(snapshotImage)
 	var _mainthread0 *TextPreview
 	purego.Main(func() {
 		_mainthread0 = func() *TextPreview {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextPreview")), objc.RegisterName("alloc"))
-			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:"), objref.IDOf(snapshotImage), presentationFrame)
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotImage:presentationFrame:"), objref.IDOf(snapshotImage.Object), presentationFrame)
 			return textPreviewAdopt(_id)
 		}()
 	})
@@ -104,13 +105,13 @@ func NewTextPreviewWithSnapshotImagePresentationFrame(snapshotImage obj.Object, 
 }
 
 // PreviewImage returns the image that contains the requested text from your view. You specify this image at initialization time. The system uses it to implement any visual effects involving your view’s text. Create the image with your text on a transparent background.
-func (tp *TextPreview) PreviewImage() obj.Object {
+func (tp *TextPreview) PreviewImage() coregraphics.CGImageRef {
 	defer runtime.KeepAlive(tp)
-	var _mainthread0 obj.Object
+	var _mainthread0 coregraphics.CGImageRef
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() coregraphics.CGImageRef {
 			_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("previewImage"))
-			return obj.Wrap(_r)
+			return coregraphics.CGImageRef{obj.Wrap(_r)}
 		}()
 	})
 	return _mainthread0

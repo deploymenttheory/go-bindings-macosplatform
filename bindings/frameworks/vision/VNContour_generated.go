@@ -8,6 +8,7 @@ import (
 	"runtime"
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -142,10 +143,10 @@ func (c *Contour) NormalizedPoints() unsafe.Pointer {
 }
 
 // NormalizedPath returns the contour represented as a CGPath in normalized coordinates. The path is owned by this object and therefore will be alive as long as the the observation is alive.
-func (c *Contour) NormalizedPath() obj.Object {
+func (c *Contour) NormalizedPath() coregraphics.CGPathRef {
 	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("normalizedPath"))
-	return obj.Wrap(_r)
+	return coregraphics.CGPathRef{obj.Wrap(_r)}
 }
 
 // AspectRatio returns the aspect ratio of the contour from the original image aspect ratio expressed as width/height

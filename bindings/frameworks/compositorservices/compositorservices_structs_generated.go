@@ -4,6 +4,10 @@
 
 package compositorservices
 
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
+)
+
 // An opaque type that contains the textures and other information you need to set up your render pipeline. Use the drawable type to retrieve the textures for your render pipelines, and use the drawable’s views to get details about how to render to those textures. Get the drawable for a frame using the “cp_frame_query_drawable“ function. The layer manages a limited number of reusable drawable types and recycles them after each use. Draw only one frame at a time to ensure each new frame’s drawable type is ready in time.
 type CpDrawable struct{}
 
@@ -50,3 +54,73 @@ type MTLViewport struct {
 
 // CpTimeT is an alias for the cp_time value type.
 type CpTimeT = CpTime
+
+// CpDrawableArrayT is a handle for the opaque cp_drawable_array_t type.
+type CpDrawableArrayT struct{ obj.Object }
+
+// IsNil reports whether CpDrawableArrayT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CpDrawableArrayT) IsNil() bool { return h.Object == nil }
+
+// CpDrawableRenderContextT is a handle for the opaque cp_drawable_render_context_t type.
+type CpDrawableRenderContextT struct{ obj.Object }
+
+// IsNil reports whether CpDrawableRenderContextT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CpDrawableRenderContextT) IsNil() bool { return h.Object == nil }
+
+// CpDrawableT is a handle for the opaque cp_drawable_t type.
+type CpDrawableT struct{ obj.Object }
+
+// IsNil reports whether CpDrawableT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CpDrawableT) IsNil() bool { return h.Object == nil }
+
+// CpFrameT is a handle for the opaque cp_frame_t type.
+type CpFrameT struct{ obj.Object }
+
+// IsNil reports whether CpFrameT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CpFrameT) IsNil() bool { return h.Object == nil }
+
+// CpFrameTimingT is a handle for the opaque cp_frame_timing_t type.
+type CpFrameTimingT struct{ obj.Object }
+
+// IsNil reports whether CpFrameTimingT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CpFrameTimingT) IsNil() bool { return h.Object == nil }
+
+// CpHoverEffectT is a handle for the opaque cp_hover_effect_t type.
+type CpHoverEffectT struct{ obj.Object }
+
+// IsNil reports whether CpHoverEffectT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CpHoverEffectT) IsNil() bool { return h.Object == nil }
+
+// CpTextureTopologyT is a handle for the opaque cp_texture_topology_t type.
+type CpTextureTopologyT struct{ obj.Object }
+
+// IsNil reports whether CpTextureTopologyT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CpTextureTopologyT) IsNil() bool { return h.Object == nil }
+
+// CpTrackingAreaT is a handle for the opaque cp_tracking_area_t type.
+type CpTrackingAreaT struct{ obj.Object }
+
+// IsNil reports whether CpTrackingAreaT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CpTrackingAreaT) IsNil() bool { return h.Object == nil }
+
+// CpViewT is a handle for the opaque cp_view_t type.
+type CpViewT struct{ obj.Object }
+
+// IsNil reports whether CpViewT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CpViewT) IsNil() bool { return h.Object == nil }
+
+// CpViewTextureMapT is a handle for the opaque cp_view_texture_map_t type.
+type CpViewTextureMapT struct{ obj.Object }
+
+// IsNil reports whether CpViewTextureMapT is a NULL handle (it wraps no object). Call
+// it before using a returned handle; a nil handle's methods panic.
+func (h CpViewTextureMapT) IsNil() bool { return h.Object == nil }

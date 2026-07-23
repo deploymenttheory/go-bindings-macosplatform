@@ -10,6 +10,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/errkit"
@@ -170,9 +171,9 @@ func BezierPathWithRoundedRectXRadiusYRadius(rect corefoundation.CGRect, xRadius
 }
 
 // BezierPathWithCGPath wraps the corresponding Objective-C method.
-func BezierPathWithCGPath(cgPath obj.Object) *BezierPath {
+func BezierPathWithCGPath(cgPath coregraphics.CGPathRef) *BezierPath {
 	defer runtime.KeepAlive(cgPath)
-	_r := objc.Send[objc.ID](objc.ID(_class("NSBezierPath")), objc.RegisterName("bezierPathWithCGPath:"), objref.IDOf(cgPath))
+	_r := objc.Send[objc.ID](objc.ID(_class("NSBezierPath")), objc.RegisterName("bezierPathWithCGPath:"), objref.IDOf(cgPath.Object))
 	return BezierPathFromID(_r)
 }
 
@@ -737,9 +738,9 @@ func ColorFromPasteboard(pasteBoard *Pasteboard) *Color {
 }
 
 // ColorWithCGColor wraps the corresponding Objective-C method.
-func ColorWithCGColor(cgColor obj.Object) *Color {
+func ColorWithCGColor(cgColor coregraphics.CGColorRef) *Color {
 	defer runtime.KeepAlive(cgColor)
-	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("colorWithCGColor:"), objref.IDOf(cgColor))
+	_r := objc.Send[objc.ID](objc.ID(_class("NSColor")), objc.RegisterName("colorWithCGColor:"), objref.IDOf(cgColor.Object))
 	return ColorFromID(_r)
 }
 
@@ -1700,9 +1701,9 @@ func EventWithEventRef(eventRef unsafe.Pointer) *Event {
 }
 
 // EventWithCGEvent creates and returns an event object for a Core Graphics event.
-func EventWithCGEvent(cgEvent obj.Object) *Event {
+func EventWithCGEvent(cgEvent coregraphics.CGEventRef) *Event {
 	defer runtime.KeepAlive(cgEvent)
-	_r := objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("eventWithCGEvent:"), objref.IDOf(cgEvent))
+	_r := objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("eventWithCGEvent:"), objref.IDOf(cgEvent.Object))
 	return EventFromID(_r)
 }
 
@@ -2156,9 +2157,9 @@ func GraphicsContextWithBitmapImageRep(bitmapRep *BitmapImageRep) *GraphicsConte
 }
 
 // GraphicsContextWithCGContextFlipped creates a new graphics context from the specified Core Graphics context and the initial flipped state.
-func GraphicsContextWithCGContextFlipped(graphicsPort obj.Object, initialFlippedState bool) *GraphicsContext {
+func GraphicsContextWithCGContextFlipped(graphicsPort coregraphics.CGContextRef, initialFlippedState bool) *GraphicsContext {
 	defer runtime.KeepAlive(graphicsPort)
-	_r := objc.Send[objc.ID](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("graphicsContextWithCGContext:flipped:"), objref.IDOf(graphicsPort), initialFlippedState)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSGraphicsContext")), objc.RegisterName("graphicsContextWithCGContext:flipped:"), objref.IDOf(graphicsPort.Object), initialFlippedState)
 	return GraphicsContextFromID(_r)
 }
 
