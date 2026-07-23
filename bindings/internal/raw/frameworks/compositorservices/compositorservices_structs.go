@@ -3,6 +3,15 @@
 
 package compositorservices
 
+type MTLViewport struct {
+	OriginX float64
+	OriginY float64
+	Width   float64
+	Height  float64
+	Znear   float64
+	Zfar    float64
+}
+
 // An opaque type that contains the textures and other information you need to set up your render pipeline. Use the drawable type to retrieve the textures for your render pipelines, and use the drawable’s views to get details about how to render to those textures. Get the drawable for a frame using the “cp_frame_query_drawable“ function. The layer manages a limited number of reusable drawable types and recycles them after each use. Draw only one frame at a time to ensure each new frame’s drawable type is ready in time.
 // C struct: cp_drawable
 // CpDrawable is an opaque type.

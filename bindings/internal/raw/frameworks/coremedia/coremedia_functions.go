@@ -587,7 +587,7 @@ var (
 	_fnCMVideoFormatDescriptionCreateFromH264ParameterSets             func(unsafe.Pointer, uint, *uint8, *uint, int, unsafe.Pointer) int
 	_fnCMVideoFormatDescriptionCreateFromHEVCParameterSets             func(unsafe.Pointer, uint, *uint8, *uint, int, unsafe.Pointer, unsafe.Pointer) int
 	_fnCMVideoFormatDescriptionGetCleanAperture                        func(unsafe.Pointer, uint8) corefoundation.CGRect
-	_fnCMVideoFormatDescriptionGetDimensions                           func(unsafe.Pointer) CMVideoDimensions
+	_fnCMVideoFormatDescriptionGetDimensions                           func(unsafe.Pointer) objc.ID
 	_fnCMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers  func() unsafe.Pointer
 	_fnCMVideoFormatDescriptionGetH264ParameterSetAtIndex              func(unsafe.Pointer, uint, *uint8, *uint, *uint, *int32) int
 	_fnCMVideoFormatDescriptionGetHEVCParameterSetAtIndex              func(unsafe.Pointer, uint, *uint8, *uint, *uint, *int32) int
@@ -2346,7 +2346,7 @@ func CMVideoFormatDescriptionGetCleanAperture(videoDesc unsafe.Pointer, originIs
 	return _fnCMVideoFormatDescriptionGetCleanAperture(videoDesc, originIsAtTopLeft)
 }
 
-func CMVideoFormatDescriptionGetDimensions(videoDesc unsafe.Pointer) CMVideoDimensions {
+func CMVideoFormatDescriptionGetDimensions(videoDesc unsafe.Pointer) objc.ID {
 	return _fnCMVideoFormatDescriptionGetDimensions(videoDesc)
 }
 

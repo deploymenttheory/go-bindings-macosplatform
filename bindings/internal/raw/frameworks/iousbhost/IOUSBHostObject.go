@@ -110,7 +110,7 @@ func (o *IOUSBHostObject) DestroyWithOptions(options IOUSBHostObjectDestroyOptio
 }
 
 // Sends a request on the default control endpoint.
-func (o *IOUSBHostObject) SendDeviceRequestDataBytesTransferredCompletionTimeoutError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint, completionTimeout float64) (bool, error) {
+func (o *IOUSBHostObject) SendDeviceRequestDataBytesTransferredCompletionTimeoutError(request IOUSBDeviceRequest, data *foundation.NSMutableData, bytesTransferred *uint, completionTimeout float64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostObjectSelSendDeviceRequestDataBytesTransferredCompletionTimeoutError, request, data.Ptr(), bytesTransferred, completionTimeout, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -120,7 +120,7 @@ func (o *IOUSBHostObject) SendDeviceRequestDataBytesTransferredCompletionTimeout
 }
 
 // Sends a request on the default control endpoint with a default completion timeout.
-func (o *IOUSBHostObject) SendDeviceRequestDataBytesTransferredError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint) (bool, error) {
+func (o *IOUSBHostObject) SendDeviceRequestDataBytesTransferredError(request IOUSBDeviceRequest, data *foundation.NSMutableData, bytesTransferred *uint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostObjectSelSendDeviceRequestDataBytesTransferredError, request, data.Ptr(), bytesTransferred, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -130,7 +130,7 @@ func (o *IOUSBHostObject) SendDeviceRequestDataBytesTransferredError(request uns
 }
 
 // Sends a request on the default control endpoint without a data phase and default completion timeout.
-func (o *IOUSBHostObject) SendDeviceRequestError(request unsafe.Pointer) (bool, error) {
+func (o *IOUSBHostObject) SendDeviceRequestError(request IOUSBDeviceRequest) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostObjectSelSendDeviceRequestError, request, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -140,7 +140,7 @@ func (o *IOUSBHostObject) SendDeviceRequestError(request unsafe.Pointer) (bool, 
 }
 
 // Enqueues a request on the default control endpoint.
-func (o *IOUSBHostObject) EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+func (o *IOUSBHostObject) EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler(request IOUSBDeviceRequest, data *foundation.NSMutableData, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 int, blockParam1 uint) {
@@ -153,7 +153,7 @@ func (o *IOUSBHostObject) EnqueueDeviceRequestDataCompletionTimeoutErrorCompleti
 }
 
 // Enqueues a request on the default control endpoint with a default completion timeout.
-func (o *IOUSBHostObject) EnqueueDeviceRequestDataErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+func (o *IOUSBHostObject) EnqueueDeviceRequestDataErrorCompletionHandler(request IOUSBDeviceRequest, data *foundation.NSMutableData, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 int, blockParam1 uint) {
@@ -166,7 +166,7 @@ func (o *IOUSBHostObject) EnqueueDeviceRequestDataErrorCompletionHandler(request
 }
 
 // Enqueues a request on the default control endpoint without a data phase and a default timeout.
-func (o *IOUSBHostObject) EnqueueDeviceRequestErrorCompletionHandler(request unsafe.Pointer, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+func (o *IOUSBHostObject) EnqueueDeviceRequestErrorCompletionHandler(request IOUSBDeviceRequest, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 int, blockParam1 uint) {
@@ -229,9 +229,9 @@ func (o *IOUSBHostObject) DescriptorWithTypeLengthError(type_ unsafe.Pointer, le
 }
 
 // @brief       Return the configuration descriptor at a specified index @discussion  This method uses descriptorWithType to retrieve the configuration descriptor. @param       index Descriptor index value @return      Pointer of the configuration descriptor if found, otherwise nil. An IOReturn error code will be reported on failure.
-func (o *IOUSBHostObject) ConfigurationDescriptorWithIndexError(index uint) (unsafe.Pointer, error) {
+func (o *IOUSBHostObject) ConfigurationDescriptorWithIndexError(index uint) (*IOUSBConfigurationDescriptor, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostObjectSelConfigurationDescriptorWithIndexError, index, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[*IOUSBConfigurationDescriptor](o.Ptr(), _iOUSBHostObjectSelConfigurationDescriptorWithIndexError, index, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -239,9 +239,9 @@ func (o *IOUSBHostObject) ConfigurationDescriptorWithIndexError(index uint) (uns
 }
 
 // @brief       Return the configuration descriptor with a specified value @discussion  This method uses descriptorWithType to search for a configuration descriptor with a specific <code>bConfigurationValue</code> field. @param       configurationValue Value to match @return      Pointer of the configuration descriptor if found, otherwise nil. An IOReturn error code will be reported on failure.
-func (o *IOUSBHostObject) ConfigurationDescriptorWithConfigurationValueError(configurationValue uint) (unsafe.Pointer, error) {
+func (o *IOUSBHostObject) ConfigurationDescriptorWithConfigurationValueError(configurationValue uint) (*IOUSBConfigurationDescriptor, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostObjectSelConfigurationDescriptorWithConfigurationValueError, configurationValue, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[*IOUSBConfigurationDescriptor](o.Ptr(), _iOUSBHostObjectSelConfigurationDescriptorWithConfigurationValueError, configurationValue, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -329,14 +329,14 @@ func (o *IOUSBHostObject) Queue() *foundation.NSObject {
 }
 
 // @brief       Return the device descriptor @discussion  This method uses descriptorWithType to retrieve the device descriptor. @return      Pointer to the device descriptor.
-func (o *IOUSBHostObject) DeviceDescriptor() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostObjectSelDeviceDescriptor)
+func (o *IOUSBHostObject) DeviceDescriptor() *IOUSBDeviceDescriptor {
+	_ret := objc.Send[*IOUSBDeviceDescriptor](o.Ptr(), _iOUSBHostObjectSelDeviceDescriptor)
 	return _ret
 }
 
 // @brief       Return the capability descriptors of the device @discussion  This method uses descriptorWithType to return the device's BOS descriptors @return      Pointer to the BOS descriptor if found, otherwise nil.
-func (o *IOUSBHostObject) CapabilityDescriptors() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostObjectSelCapabilityDescriptors)
+func (o *IOUSBHostObject) CapabilityDescriptors() *IOUSBBOSDescriptor {
+	_ret := objc.Send[*IOUSBBOSDescriptor](o.Ptr(), _iOUSBHostObjectSelCapabilityDescriptors)
 	return _ret
 }
 

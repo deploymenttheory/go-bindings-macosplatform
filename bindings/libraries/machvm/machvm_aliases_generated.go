@@ -15,6 +15,7 @@ type (
 	Mach_vm_range_flavor_t                = raw.Mach_vm_range_flavor_t
 	Mach_vm_range_tag_t                   = raw.Mach_vm_range_tag_t
 	Mpo_flags_t                           = raw.Mpo_flags_t
+	NDR_record_t                          = raw.NDR_record_t
 	Virtual_memory_guard_exception_code_t = raw.Virtual_memory_guard_exception_code_t
 )
 

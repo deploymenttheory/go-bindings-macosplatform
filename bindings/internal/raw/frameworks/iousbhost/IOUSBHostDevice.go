@@ -75,7 +75,7 @@ func (o *IOUSBHostDevice) ResetWithError() (bool, error) {
 }
 
 // @brief       Return the currently selected configuration descriptor @discussion  This method uses descriptorWithType to return the configuration descriptor currently selected after a successful setConfiguration call @return      Pointer to the configuration descriptor if found, or nil if the device is not configured
-func (o *IOUSBHostDevice) ConfigurationDescriptor() unsafe.Pointer {
-	_ret := objc.Send[unsafe.Pointer](o.Ptr(), _iOUSBHostDeviceSelConfigurationDescriptor)
+func (o *IOUSBHostDevice) ConfigurationDescriptor() *IOUSBConfigurationDescriptor {
+	_ret := objc.Send[*IOUSBConfigurationDescriptor](o.Ptr(), _iOUSBHostDeviceSelConfigurationDescriptor)
 	return _ret
 }

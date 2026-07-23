@@ -105,3 +105,9 @@ type AVSampleCursorSyncInfo struct {
 	SampleIsPartialSync bool
 	SampleIsDroppable   bool
 }
+
+// @typedef CMVideoDimensions Type used for video dimensions, units are pixels
+type CMVideoDimensions struct {
+	Width  int32
+	Height int32
+}

@@ -6,8 +6,8 @@ package commonpanels
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/hitoolbox"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/qd"
 )
 
 var (
@@ -26,7 +26,7 @@ var (
 	_fnFCRemoveFontDescriptorFromCollection     func(unsafe.Pointer, unsafe.Pointer) int
 	_fnFPIsFontPanelVisible                     func() uint8
 	_fnFPShowHideFontPanel                      func() int
-	_fnGetColor                                 func(unsafe.Pointer, *uint8, *qd.RGBColor, *qd.RGBColor) uint8
+	_fnGetColor                                 func(carboncore.Point, *uint8, *RGBColor, *RGBColor) uint8
 	_fnInvokeCalibrateEventUPP                  func(*hitoolbox.EventRecord, unsafe.Pointer)
 	_fnInvokeCalibrateUPP                       func(*CalibratorInfo, unsafe.Pointer) int16
 	_fnInvokeCanCalibrateUPP                    func(uint, *uint8, unsafe.Pointer) uint8
@@ -99,7 +99,7 @@ func FPShowHideFontPanel() int {
 	return _fnFPShowHideFontPanel()
 }
 
-func GetColor(where unsafe.Pointer, prompt *uint8, inColor *qd.RGBColor, outColor *qd.RGBColor) uint8 {
+func GetColor(where carboncore.Point, prompt *uint8, inColor *RGBColor, outColor *RGBColor) uint8 {
 	return _fnGetColor(where, prompt, inColor, outColor)
 }
 

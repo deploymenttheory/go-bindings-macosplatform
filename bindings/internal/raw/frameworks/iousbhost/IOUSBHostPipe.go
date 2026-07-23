@@ -87,7 +87,7 @@ func (o *IOUSBHostPipe) ClearStallWithError() (bool, error) {
 }
 
 // Sends a request on a control endpoint.
-func (o *IOUSBHostPipe) SendControlRequestDataBytesTransferredCompletionTimeoutError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint, completionTimeout float64) (bool, error) {
+func (o *IOUSBHostPipe) SendControlRequestDataBytesTransferredCompletionTimeoutError(request IOUSBDeviceRequest, data *foundation.NSMutableData, bytesTransferred *uint, completionTimeout float64) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendControlRequestDataBytesTransferredCompletionTimeoutError, request, data.Ptr(), bytesTransferred, completionTimeout, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -97,7 +97,7 @@ func (o *IOUSBHostPipe) SendControlRequestDataBytesTransferredCompletionTimeoutE
 }
 
 // Sends a request on a control endpoint with a default timeout.
-func (o *IOUSBHostPipe) SendControlRequestDataBytesTransferredError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint) (bool, error) {
+func (o *IOUSBHostPipe) SendControlRequestDataBytesTransferredError(request IOUSBDeviceRequest, data *foundation.NSMutableData, bytesTransferred *uint) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendControlRequestDataBytesTransferredError, request, data.Ptr(), bytesTransferred, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -107,7 +107,7 @@ func (o *IOUSBHostPipe) SendControlRequestDataBytesTransferredError(request unsa
 }
 
 // Sends a request on a control endpoint without a data phase and a default completion timeout.
-func (o *IOUSBHostPipe) SendControlRequestError(request unsafe.Pointer) (bool, error) {
+func (o *IOUSBHostPipe) SendControlRequestError(request IOUSBDeviceRequest) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _iOUSBHostPipeSelSendControlRequestError, request, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -117,7 +117,7 @@ func (o *IOUSBHostPipe) SendControlRequestError(request unsafe.Pointer) (bool, e
 }
 
 // Enqueues a request on a control endpoint.
-func (o *IOUSBHostPipe) EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+func (o *IOUSBHostPipe) EnqueueControlRequestDataCompletionTimeoutErrorCompletionHandler(request IOUSBDeviceRequest, data *foundation.NSMutableData, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 int, blockParam1 uint) {
@@ -130,7 +130,7 @@ func (o *IOUSBHostPipe) EnqueueControlRequestDataCompletionTimeoutErrorCompletio
 }
 
 // Enqueues a request on a control endpoint with a default completion timeout.
-func (o *IOUSBHostPipe) EnqueueControlRequestDataErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+func (o *IOUSBHostPipe) EnqueueControlRequestDataErrorCompletionHandler(request IOUSBDeviceRequest, data *foundation.NSMutableData, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 int, blockParam1 uint) {
@@ -143,7 +143,7 @@ func (o *IOUSBHostPipe) EnqueueControlRequestDataErrorCompletionHandler(request 
 }
 
 // Enqueues a request on a control endpoint without a data phase and a default completion timeout.
-func (o *IOUSBHostPipe) EnqueueControlRequestErrorCompletionHandler(request unsafe.Pointer, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
+func (o *IOUSBHostPipe) EnqueueControlRequestErrorCompletionHandler(request IOUSBDeviceRequest, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 int, blockParam1 uint) {

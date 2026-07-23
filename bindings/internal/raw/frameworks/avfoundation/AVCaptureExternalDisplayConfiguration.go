@@ -6,7 +6,6 @@ package avfoundation
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
@@ -59,11 +58,11 @@ func (o *AVCaptureExternalDisplayConfiguration) SetBypassColorSpaceConversion(by
 }
 
 // Your preferred external display resolution. Use “preferredResolution“ to set your desired resolution of the external display. When left at the default value of { 0, 0 },  the native resolution of the external display is used.
-func (o *AVCaptureExternalDisplayConfiguration) PreferredResolution() coremedia.CMVideoDimensions {
-	_ret := objc.Send[coremedia.CMVideoDimensions](o.Ptr(), _aVCaptureExternalDisplayConfigurationSelPreferredResolution)
+func (o *AVCaptureExternalDisplayConfiguration) PreferredResolution() CMVideoDimensions {
+	_ret := objc.Send[CMVideoDimensions](o.Ptr(), _aVCaptureExternalDisplayConfigurationSelPreferredResolution)
 	return _ret
 }
 
-func (o *AVCaptureExternalDisplayConfiguration) SetPreferredResolution(preferredResolution coremedia.CMVideoDimensions) {
+func (o *AVCaptureExternalDisplayConfiguration) SetPreferredResolution(preferredResolution CMVideoDimensions) {
 	o.Ptr().Send(_aVCaptureExternalDisplayConfigurationSelSetPreferredResolution, preferredResolution)
 }

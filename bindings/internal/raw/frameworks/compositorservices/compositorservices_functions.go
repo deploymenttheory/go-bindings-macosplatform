@@ -132,7 +132,7 @@ var (
 	_cp_view_get_view_texture_map                func(unsafe.Pointer) unsafe.Pointer
 	_cp_view_texture_map_get_slice_index         func(unsafe.Pointer) uint
 	_cp_view_texture_map_get_texture_index       func(unsafe.Pointer) uint
-	_cp_view_texture_map_get_viewport            func(unsafe.Pointer) metal.MTLViewport
+	_cp_view_texture_map_get_viewport            func(unsafe.Pointer) MTLViewport
 )
 
 // C function: cp_drawable_add_mtl4_render_context
@@ -731,6 +731,6 @@ func CpViewTextureMapGetTextureIndex(viewTextureMap unsafe.Pointer) uint {
 }
 
 // C function: cp_view_texture_map_get_viewport
-func CpViewTextureMapGetViewport(viewTextureMap unsafe.Pointer) metal.MTLViewport {
+func CpViewTextureMapGetViewport(viewTextureMap unsafe.Pointer) MTLViewport {
 	return _cp_view_texture_map_get_viewport(viewTextureMap)
 }

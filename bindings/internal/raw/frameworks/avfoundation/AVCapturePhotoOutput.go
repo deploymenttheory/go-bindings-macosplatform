@@ -6,7 +6,6 @@ package avfoundation
 import (
 	"github.com/ebitengine/purego/objc"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
@@ -181,12 +180,12 @@ func (o *AVCapturePhotoOutput) SetHighResolutionCaptureEnabled(highResolutionCap
 }
 
 // @property maxPhotoDimensions @abstract Indicates the maximum resolution of the requested photo. @discussion Set this property to enable requesting of images up to as large as the specified dimensions. Images returned by AVCapturePhotoOutput may be smaller than these dimensions but will never be larger. Once set, images can be requested with any valid maximum photo dimensions by setting AVCapturePhotoSettings.maxPhotoDimensions on a per photo basis. The dimensions set must match one of the dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions for the current active format. Changing this property may trigger a lengthy reconfiguration of the capture render pipeline so it is recommended that this is set before calling -[AVCaptureSession startRunning]. Note: When supported, the 24MP setting (5712, 4284) is only serviced as 24MP when opted-in to autoDeferredPhotoDeliveryEnabled.
-func (o *AVCapturePhotoOutput) MaxPhotoDimensions() coremedia.CMVideoDimensions {
-	_ret := objc.Send[coremedia.CMVideoDimensions](o.Ptr(), _aVCapturePhotoOutputSelMaxPhotoDimensions)
+func (o *AVCapturePhotoOutput) MaxPhotoDimensions() CMVideoDimensions {
+	_ret := objc.Send[CMVideoDimensions](o.Ptr(), _aVCapturePhotoOutputSelMaxPhotoDimensions)
 	return _ret
 }
 
-func (o *AVCapturePhotoOutput) SetMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) {
+func (o *AVCapturePhotoOutput) SetMaxPhotoDimensions(maxPhotoDimensions CMVideoDimensions) {
 	o.Ptr().Send(_aVCapturePhotoOutputSelSetMaxPhotoDimensions, maxPhotoDimensions)
 }
 

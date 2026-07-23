@@ -5,6 +5,9 @@ package qd
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/carboncore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/commonpanels"
 )
 
 type AsscEntry struct {
@@ -16,7 +19,7 @@ type AsscEntry struct {
 type BitMap struct {
 	BaseAddr string
 	RowBytes int16
-	Bounds   unsafe.Pointer
+	Bounds   carboncore.Rect
 }
 
 type CM2Header struct {
@@ -615,7 +618,7 @@ type CQDProcs struct {
 
 type ColorSpec struct {
 	Value int16
-	Rgb   RGBColor
+	Rgb   commonpanels.RGBColor
 }
 
 type ColorTable struct {
@@ -631,8 +634,8 @@ type FMInput struct {
 	Face     uint8
 	NeedBits uint8
 	Device   int16
-	Numer    unsafe.Pointer
-	Denom    unsafe.Pointer
+	Numer    carboncore.Point
+	Denom    carboncore.Point
 }
 
 type FamRec struct {
@@ -691,7 +694,7 @@ type GDevice struct {
 	GdPMap       **PixMap
 	GdRefCon     int
 	GdNextGD     **GDevice
-	GdRect       unsafe.Pointer
+	GdRect       carboncore.Rect
 	GdMode       int
 	GdCCBytes    int16
 	GdCCDepth    int16
@@ -721,8 +724,8 @@ type KernTable struct {
 
 type MacPolygon struct {
 	PolySize   int16
-	PolyBBox   unsafe.Pointer
-	PolyPoints [1]unsafe.Pointer
+	PolyBBox   carboncore.Rect
+	PolyPoints [1]carboncore.Point
 }
 
 type NCMConcatProfileSet struct {
@@ -772,7 +775,7 @@ type OpaqueRgnHandle struct{}
 type OpaqueWindowPtr struct{}
 
 type OpenCPicParams struct {
-	SrcRect   unsafe.Pointer
+	SrcRect   carboncore.Rect
 	HRes      int
 	VRes      int
 	Version   int16
@@ -786,13 +789,13 @@ type Pattern struct {
 
 type Picture struct {
 	PicSize  int16
-	PicFrame unsafe.Pointer
+	PicFrame carboncore.Rect
 }
 
 type PixMap struct {
 	BaseAddr    string
 	RowBytes    int16
-	Bounds      unsafe.Pointer
+	Bounds      carboncore.Rect
 	PmVersion   int16
 	PackType    int16
 	PackSize    int
@@ -817,10 +820,23 @@ type PixPat struct {
 	Pat1Data  Pattern
 }
 
+// ****************************************************************************** Quickdraw Types Point               2D Quickdraw coordinate, range: -32K to +32K Rect                Rectangular Quickdraw area Style               Quickdraw font rendering styles StyleParameter      Style when used as a parameter (historical 68K convention) StyleField          Style when used as a field (historical 68K convention) CharParameter       Char when used as a parameter (historical 68K convention) Note:   The original Macintosh toolbox in 68K Pascal defined Style as a SET. Both Style and CHAR occupy 8-bits in packed records or 16-bits when used as fields in non-packed records or as parameters. *******************************************************************************
+type Point struct {
+	V int16
+	H int16
+}
+
 type RGBColor struct {
 	Red   uint16
 	Green uint16
 	Blue  uint16
+}
+
+type Rect struct {
+	Top    int16
+	Left   int16
+	Bottom int16
+	Right  int16
 }
 
 type StyleTable struct {

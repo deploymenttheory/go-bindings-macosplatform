@@ -224,14 +224,14 @@ type CustomBadgeResource struct {
 }
 
 type DInfo struct {
-	FrRect     unsafe.Pointer
+	FrRect     Rect
 	FrFlags    uint16
-	FrLocation unsafe.Pointer
+	FrLocation Point
 	FrView     int16
 }
 
 type DXInfo struct {
-	FrScroll    unsafe.Pointer
+	FrScroll    Point
 	FrOpenChain int
 	FrScript    int8
 	FrXFlags    int8
@@ -312,7 +312,7 @@ type ExtendedFileInfo struct {
 }
 
 type ExtendedFolderInfo struct {
-	ScrollPosition      unsafe.Pointer
+	ScrollPosition      Point
 	Reserved1           int
 	ExtendedFinderFlags uint16
 	Reserved2           int16
@@ -323,7 +323,7 @@ type FInfo struct {
 	FdType     uint
 	FdCreator  uint
 	FdFlags    uint16
-	FdLocation unsafe.Pointer
+	FdLocation Point
 	FdFldr     int16
 }
 
@@ -606,7 +606,7 @@ type FileInfo struct {
 	FileType      uint
 	FileCreator   uint
 	FinderFlags   uint16
-	Location      unsafe.Pointer
+	Location      Point
 	ReservedField uint16
 }
 
@@ -623,9 +623,9 @@ type FolderDesc struct {
 }
 
 type FolderInfo struct {
-	WindowBounds  unsafe.Pointer
+	WindowBounds  Rect
 	FinderFlags   uint16
-	Location      unsafe.Pointer
+	Location      Point
 	ReservedField uint16
 }
 
@@ -1194,6 +1194,12 @@ type PEFSplitHashWord struct {
 	HashValue  uint16
 }
 
+// ****************************************************************************** Quickdraw Types Point               2D Quickdraw coordinate, range: -32K to +32K Rect                Rectangular Quickdraw area Style               Quickdraw font rendering styles StyleParameter      Style when used as a parameter (historical 68K convention) StyleField          Style when used as a field (historical 68K convention) CharParameter       Char when used as a parameter (historical 68K convention) Note:   The original Macintosh toolbox in 68K Pascal defined Style as a SET. Both Style and CHAR occupy 8-bits in packed records or 16-bits when used as fields in non-packed records or as parameters. *******************************************************************************
+type Point struct {
+	V int16
+	H int16
+}
+
 // Deprecated: Deprecated
 type QElem struct {
 	QLink *QElem
@@ -1205,6 +1211,13 @@ type QHdr struct {
 	QFlags unsafe.Pointer
 	QHead  unsafe.Pointer
 	QTail  unsafe.Pointer
+}
+
+type Rect struct {
+	Top    int16
+	Left   int16
+	Bottom int16
+	Right  int16
 }
 
 type RegisterInformation struct {

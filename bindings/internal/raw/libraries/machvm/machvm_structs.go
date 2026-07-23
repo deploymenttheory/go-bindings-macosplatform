@@ -4,14 +4,29 @@
 
 package machvm
 
-import "unsafe"
+import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/libraries/machhost"
+	"unsafe"
+)
+
+// [ndr.h:40]
+type NDR_record_t struct {
+	Mig_vers     uint8
+	If_vers      uint8
+	Reserved1    uint8
+	Mig_encoding uint8
+	Int_rep      uint8
+	Char_rep     uint8
+	Float_rep    uint8
+	Reserved2    uint8
+}
 
 // [vm_map.h:1402]
 type __Reply__mach_make_memory_entry_64_t struct {
 	Head          unsafe.Pointer
 	Msgh_body     unsafe.Pointer
 	Object_handle unsafe.Pointer
-	NDR           unsafe.Pointer
+	NDR           machhost.NDR_record_t
 	Size          uint64
 }
 
@@ -20,7 +35,7 @@ type __Reply__mach_make_memory_entry_t struct {
 	Head          unsafe.Pointer
 	Msgh_body     unsafe.Pointer
 	Object_handle unsafe.Pointer
-	NDR           unsafe.Pointer
+	NDR           machhost.NDR_record_t
 	Size          uint64
 }
 
@@ -29,7 +44,7 @@ type __Reply__mach_vm_region_info_64_t struct {
 	Head       unsafe.Pointer
 	Msgh_body  unsafe.Pointer
 	Objects    unsafe.Pointer
-	NDR        unsafe.Pointer
+	NDR        machhost.NDR_record_t
 	Region     unsafe.Pointer
 	ObjectsCnt uint32
 }
@@ -39,7 +54,7 @@ type __Reply__mach_vm_region_info_t struct {
 	Head       unsafe.Pointer
 	Msgh_body  unsafe.Pointer
 	Objects    unsafe.Pointer
-	NDR        unsafe.Pointer
+	NDR        machhost.NDR_record_t
 	Region     unsafe.Pointer
 	ObjectsCnt uint32
 }
@@ -47,14 +62,14 @@ type __Reply__mach_vm_region_info_t struct {
 // [vm_map.h:1257]
 type __Reply__task_wire_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 }
 
 // [vm_map.h:1077]
 type __Reply__vm_allocate_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 	Address uint64
 }
@@ -62,35 +77,35 @@ type __Reply__vm_allocate_t struct {
 // [vm_map.h:1204]
 type __Reply__vm_behavior_set_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 }
 
 // [vm_map.h:1167]
 type __Reply__vm_copy_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 }
 
 // [vm_map.h:1090]
 type __Reply__vm_deallocate_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 }
 
 // [vm_map.h:1114]
 type __Reply__vm_inherit_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 }
 
 // [vm_map.h:1229]
 type __Reply__vm_machine_attribute_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 	Value   int32
 }
@@ -98,7 +113,7 @@ type __Reply__vm_machine_attribute_t struct {
 // [vm_map.h:1418]
 type __Reply__vm_map_64_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 	Address uint64
 }
@@ -106,14 +121,14 @@ type __Reply__vm_map_64_t struct {
 // [vm_map.h:1444]
 type __Reply__vm_map_exec_lockdown_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 }
 
 // [vm_map.h:1285]
 type __Reply__vm_map_page_query_t struct {
 	Head        unsafe.Pointer
-	NDR         unsafe.Pointer
+	NDR         machhost.NDR_record_t
 	RetCode     int32
 	Disposition int32
 	Ref_count   int32
@@ -122,7 +137,7 @@ type __Reply__vm_map_page_query_t struct {
 // [vm_map.h:1216]
 type __Reply__vm_map_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 	Address uint64
 }
@@ -132,28 +147,28 @@ type __Reply__vm_mapped_pages_info_t struct {
 	Head      unsafe.Pointer
 	Msgh_body unsafe.Pointer
 	Pages     unsafe.Pointer
-	NDR       unsafe.Pointer
+	NDR       machhost.NDR_record_t
 	PagesCnt  uint32
 }
 
 // [vm_map.h:1192]
 type __Reply__vm_msync_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 }
 
 // [vm_map.h:1102]
 type __Reply__vm_protect_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 }
 
 // [vm_map.h:1431]
 type __Reply__vm_purgable_control_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 	State   int32
 }
@@ -161,7 +176,7 @@ type __Reply__vm_purgable_control_t struct {
 // [vm_map.h:1142]
 type __Reply__vm_read_list_t struct {
 	Head      unsafe.Pointer
-	NDR       unsafe.Pointer
+	NDR       machhost.NDR_record_t
 	RetCode   int32
 	Data_list unsafe.Pointer
 }
@@ -169,7 +184,7 @@ type __Reply__vm_read_list_t struct {
 // [vm_map.h:1179]
 type __Reply__vm_read_overwrite_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 	Outsize uint64
 }
@@ -179,14 +194,14 @@ type __Reply__vm_read_t struct {
 	Head      unsafe.Pointer
 	Msgh_body unsafe.Pointer
 	Data      unsafe.Pointer
-	NDR       unsafe.Pointer
+	NDR       machhost.NDR_record_t
 	DataCnt   uint32
 }
 
 // [vm_map.h:1471]
 type __Reply__vm_reallocate_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 	Dst     uint64
 }
@@ -196,7 +211,7 @@ type __Reply__vm_region_64_t struct {
 	Head        unsafe.Pointer
 	Msgh_body   unsafe.Pointer
 	Object_name unsafe.Pointer
-	NDR         unsafe.Pointer
+	NDR         machhost.NDR_record_t
 	Address     uint64
 	Size        uint64
 	InfoCnt     uint32
@@ -206,7 +221,7 @@ type __Reply__vm_region_64_t struct {
 // [vm_map.h:1349]
 type __Reply__vm_region_recurse_64_t struct {
 	Head          unsafe.Pointer
-	NDR           unsafe.Pointer
+	NDR           machhost.NDR_record_t
 	RetCode       int32
 	Address       uint64
 	Size          uint64
@@ -218,7 +233,7 @@ type __Reply__vm_region_recurse_64_t struct {
 // [vm_map.h:1332]
 type __Reply__vm_region_recurse_t struct {
 	Head          unsafe.Pointer
-	NDR           unsafe.Pointer
+	NDR           machhost.NDR_record_t
 	RetCode       int32
 	Address       uint64
 	Size          uint64
@@ -232,7 +247,7 @@ type __Reply__vm_region_t struct {
 	Head        unsafe.Pointer
 	Msgh_body   unsafe.Pointer
 	Object_name unsafe.Pointer
-	NDR         unsafe.Pointer
+	NDR         machhost.NDR_record_t
 	Address     uint64
 	Size        uint64
 	InfoCnt     uint32
@@ -242,7 +257,7 @@ type __Reply__vm_region_t struct {
 // [vm_map.h:1456]
 type __Reply__vm_remap_new_t struct {
 	Head           unsafe.Pointer
-	NDR            unsafe.Pointer
+	NDR            machhost.NDR_record_t
 	RetCode        int32
 	Target_address uint64
 	Cur_protection int32
@@ -252,7 +267,7 @@ type __Reply__vm_remap_new_t struct {
 // [vm_map.h:1242]
 type __Reply__vm_remap_t struct {
 	Head           unsafe.Pointer
-	NDR            unsafe.Pointer
+	NDR            machhost.NDR_record_t
 	RetCode        int32
 	Target_address uint64
 	Cur_protection int32
@@ -262,7 +277,7 @@ type __Reply__vm_remap_t struct {
 // [vm_map.h:1155]
 type __Reply__vm_write_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	RetCode int32
 }
 
@@ -271,7 +286,7 @@ type __Request__mach_make_memory_entry_64_t struct {
 	Head         unsafe.Pointer
 	Msgh_body    unsafe.Pointer
 	Parent_entry unsafe.Pointer
-	NDR          unsafe.Pointer
+	NDR          machhost.NDR_record_t
 	Size         uint64
 	Offset       uint64
 	Permission   int32
@@ -282,7 +297,7 @@ type __Request__mach_make_memory_entry_t struct {
 	Head         unsafe.Pointer
 	Msgh_body    unsafe.Pointer
 	Parent_entry unsafe.Pointer
-	NDR          unsafe.Pointer
+	NDR          machhost.NDR_record_t
 	Size         uint64
 	Offset       uint64
 	Permission   int32
@@ -291,28 +306,28 @@ type __Request__mach_make_memory_entry_t struct {
 // [vm_map.h:881]
 type __Request__mach_vm_region_info_64_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	Address uint64
 }
 
 // [vm_map.h:831]
 type __Request__mach_vm_region_info_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	Address uint64
 }
 
 // [vm_map.h:789]
 type __Request__task_wire_t struct {
 	Head      unsafe.Pointer
-	NDR       unsafe.Pointer
+	NDR       machhost.NDR_record_t
 	Must_wire int32
 }
 
 // [vm_map.h:573]
 type __Request__vm_allocate_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	Address uint64
 	Size    uint64
 	Flags   int32
@@ -321,7 +336,7 @@ type __Request__vm_allocate_t struct {
 // [vm_map.h:714]
 type __Request__vm_behavior_set_t struct {
 	Head         unsafe.Pointer
-	NDR          unsafe.Pointer
+	NDR          machhost.NDR_record_t
 	Address      uint64
 	Size         uint64
 	New_behavior int32
@@ -330,7 +345,7 @@ type __Request__vm_behavior_set_t struct {
 // [vm_map.h:672]
 type __Request__vm_copy_t struct {
 	Head           unsafe.Pointer
-	NDR            unsafe.Pointer
+	NDR            machhost.NDR_record_t
 	Source_address uint64
 	Size           uint64
 	Dest_address   uint64
@@ -339,7 +354,7 @@ type __Request__vm_copy_t struct {
 // [vm_map.h:587]
 type __Request__vm_deallocate_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	Address uint64
 	Size    uint64
 }
@@ -347,7 +362,7 @@ type __Request__vm_deallocate_t struct {
 // [vm_map.h:615]
 type __Request__vm_inherit_t struct {
 	Head            unsafe.Pointer
-	NDR             unsafe.Pointer
+	NDR             machhost.NDR_record_t
 	Address         uint64
 	Size            uint64
 	New_inheritance uint32
@@ -356,7 +371,7 @@ type __Request__vm_inherit_t struct {
 // [vm_map.h:752]
 type __Request__vm_machine_attribute_t struct {
 	Head      unsafe.Pointer
-	NDR       unsafe.Pointer
+	NDR       machhost.NDR_record_t
 	Address   uint64
 	Size      uint64
 	Attribute uint32
@@ -368,7 +383,7 @@ type __Request__vm_map_64_t struct {
 	Head           unsafe.Pointer
 	Msgh_body      unsafe.Pointer
 	Object         unsafe.Pointer
-	NDR            unsafe.Pointer
+	NDR            machhost.NDR_record_t
 	Address        uint64
 	Size           uint64
 	Mask           uint64
@@ -388,7 +403,7 @@ type __Request__vm_map_exec_lockdown_t struct {
 // [vm_map.h:819]
 type __Request__vm_map_page_query_t struct {
 	Head   unsafe.Pointer
-	NDR    unsafe.Pointer
+	NDR    machhost.NDR_record_t
 	Offset uint64
 }
 
@@ -397,7 +412,7 @@ type __Request__vm_map_t struct {
 	Head           unsafe.Pointer
 	Msgh_body      unsafe.Pointer
 	Object         unsafe.Pointer
-	NDR            unsafe.Pointer
+	NDR            machhost.NDR_record_t
 	Address        uint64
 	Size           uint64
 	Mask           uint64
@@ -417,7 +432,7 @@ type __Request__vm_mapped_pages_info_t struct {
 // [vm_map.h:700]
 type __Request__vm_msync_t struct {
 	Head       unsafe.Pointer
-	NDR        unsafe.Pointer
+	NDR        machhost.NDR_record_t
 	Address    uint64
 	Size       uint64
 	Sync_flags uint32
@@ -426,7 +441,7 @@ type __Request__vm_msync_t struct {
 // [vm_map.h:600]
 type __Request__vm_protect_t struct {
 	Head           unsafe.Pointer
-	NDR            unsafe.Pointer
+	NDR            machhost.NDR_record_t
 	Address        uint64
 	Size           uint64
 	Set_maximum    int32
@@ -436,7 +451,7 @@ type __Request__vm_protect_t struct {
 // [vm_map.h:949]
 type __Request__vm_purgable_control_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	Address uint64
 	Control int32
 	State   int32
@@ -445,7 +460,7 @@ type __Request__vm_purgable_control_t struct {
 // [vm_map.h:642]
 type __Request__vm_read_list_t struct {
 	Head      unsafe.Pointer
-	NDR       unsafe.Pointer
+	NDR       machhost.NDR_record_t
 	Data_list unsafe.Pointer
 	Count     uint32
 }
@@ -453,7 +468,7 @@ type __Request__vm_read_list_t struct {
 // [vm_map.h:686]
 type __Request__vm_read_overwrite_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	Address uint64
 	Size    uint64
 	Data    uint64
@@ -462,7 +477,7 @@ type __Request__vm_read_overwrite_t struct {
 // [vm_map.h:629]
 type __Request__vm_read_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	Address uint64
 	Size    uint64
 }
@@ -470,7 +485,7 @@ type __Request__vm_read_t struct {
 // [vm_map.h:997]
 type __Request__vm_reallocate_t struct {
 	Head       unsafe.Pointer
-	NDR        unsafe.Pointer
+	NDR        machhost.NDR_record_t
 	Src        uint64
 	Src_size   uint64
 	Dst        uint64
@@ -483,7 +498,7 @@ type __Request__vm_reallocate_t struct {
 // [vm_map.h:893]
 type __Request__vm_region_64_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	Address uint64
 	Flavor  int32
 	InfoCnt uint32
@@ -492,7 +507,7 @@ type __Request__vm_region_64_t struct {
 // [vm_map.h:867]
 type __Request__vm_region_recurse_64_t struct {
 	Head          unsafe.Pointer
-	NDR           unsafe.Pointer
+	NDR           machhost.NDR_record_t
 	Address       uint64
 	Nesting_depth uint32
 	InfoCnt       uint32
@@ -501,7 +516,7 @@ type __Request__vm_region_recurse_64_t struct {
 // [vm_map.h:853]
 type __Request__vm_region_recurse_t struct {
 	Head          unsafe.Pointer
-	NDR           unsafe.Pointer
+	NDR           machhost.NDR_record_t
 	Address       uint64
 	Nesting_depth uint32
 	InfoCnt       uint32
@@ -510,7 +525,7 @@ type __Request__vm_region_recurse_t struct {
 // [vm_map.h:559]
 type __Request__vm_region_t struct {
 	Head    unsafe.Pointer
-	NDR     unsafe.Pointer
+	NDR     machhost.NDR_record_t
 	Address uint64
 	Flavor  int32
 	InfoCnt uint32
@@ -521,7 +536,7 @@ type __Request__vm_remap_new_t struct {
 	Head           unsafe.Pointer
 	Msgh_body      unsafe.Pointer
 	Src_task       unsafe.Pointer
-	NDR            unsafe.Pointer
+	NDR            machhost.NDR_record_t
 	Target_address uint64
 	Size           uint64
 	Mask           uint64
@@ -538,7 +553,7 @@ type __Request__vm_remap_t struct {
 	Head           unsafe.Pointer
 	Msgh_body      unsafe.Pointer
 	Src_task       unsafe.Pointer
-	NDR            unsafe.Pointer
+	NDR            machhost.NDR_record_t
 	Target_address uint64
 	Size           uint64
 	Mask           uint64
@@ -553,7 +568,7 @@ type __Request__vm_write_t struct {
 	Head      unsafe.Pointer
 	Msgh_body unsafe.Pointer
 	Data      unsafe.Pointer
-	NDR       unsafe.Pointer
+	NDR       machhost.NDR_record_t
 	Address   uint64
 	DataCnt   uint32
 }

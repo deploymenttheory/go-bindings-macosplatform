@@ -7,6 +7,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/carboncore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/commonpanels"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/qd"
 )
@@ -38,15 +39,15 @@ type AlertStdCFStringAlertParamRec struct {
 }
 
 type AlertTemplate struct {
-	BoundsRect unsafe.Pointer
+	BoundsRect carboncore.Rect
 	ItemsID    int16
 	Stages     int16
 }
 
 type BasicWindowDescription struct {
 	DescriptionSize         uint
-	WindowContentRect       unsafe.Pointer
-	WindowZoomRect          unsafe.Pointer
+	WindowContentRect       carboncore.Rect
+	WindowZoomRect          carboncore.Rect
 	WindowRefCon            unsafe.Pointer
 	WindowStateFlags        uint
 	WindowPositionMethod    uint
@@ -75,8 +76,8 @@ type ControlFontStyleRec struct {
 	Style     int16
 	Mode      int16
 	Just      int16
-	ForeColor qd.RGBColor
-	BackColor qd.RGBColor
+	ForeColor commonpanels.RGBColor
+	BackColor commonpanels.RGBColor
 }
 
 type ControlID struct {
@@ -113,7 +114,7 @@ type ControlTabInfoRecV1 struct {
 }
 
 type ControlTemplate struct {
-	ControlRect      unsafe.Pointer
+	ControlRect      carboncore.Rect
 	ControlValue     int16
 	ControlVisible   uint8
 	Fill             uint8
@@ -185,7 +186,7 @@ type DataBrowserPropertyDesc struct {
 }
 
 type DialogTemplate struct {
-	BoundsRect unsafe.Pointer
+	BoundsRect carboncore.Rect
 	ProcID     int16
 	Visible    uint8
 	Filler1    uint8
@@ -202,7 +203,7 @@ type EvQEl struct {
 	EvtQWhat      uint16
 	EvtQMessage   uint
 	EvtQWhen      uint
-	EvtQWhere     unsafe.Pointer
+	EvtQWhere     carboncore.Point
 	EvtQModifiers uint16
 }
 
@@ -215,7 +216,7 @@ type EventRecord struct {
 	What      uint16
 	Message   uint
 	When      uint
-	Where     unsafe.Pointer
+	Where     carboncore.Point
 	Modifiers uint16
 }
 
@@ -246,7 +247,7 @@ type FileTypeSpec struct {
 }
 
 type GetGrowImageRegionRec struct {
-	GrowRect        unsafe.Pointer
+	GrowRect        carboncore.Rect
 	GrowImageRegion unsafe.Pointer
 }
 
@@ -582,7 +583,7 @@ type HMHelpContent struct {
 
 type HMHelpContentRec struct {
 	Version    int
-	AbsHotRect unsafe.Pointer
+	AbsHotRect carboncore.Rect
 	TagSide    int16
 	Content    [2]HMHelpContent
 }
@@ -603,8 +604,8 @@ type HMenuBarMenu struct {
 }
 
 type IndicatorDragConstraint struct {
-	LimitRect unsafe.Pointer
-	SlopRect  unsafe.Pointer
+	LimitRect carboncore.Rect
+	SlopRect  carboncore.Rect
 	Axis      uint16
 }
 
@@ -619,11 +620,11 @@ type ListDefSpec struct {
 }
 
 type ListRec struct {
-	RView       unsafe.Pointer
+	RView       carboncore.Rect
 	Port        unsafe.Pointer
-	Indent      unsafe.Pointer
-	CellSize    unsafe.Pointer
-	Visible     unsafe.Pointer
+	Indent      carboncore.Point
+	CellSize    carboncore.Point
+	Visible     carboncore.Rect
 	VScroll     unsafe.Pointer
 	HScroll     unsafe.Pointer
 	SelFlags    int8
@@ -631,14 +632,14 @@ type ListRec struct {
 	LReserved   int8
 	ListFlags   int8
 	ClikTime    int
-	ClikLoc     unsafe.Pointer
-	MouseLoc    unsafe.Pointer
+	ClikLoc     carboncore.Point
+	MouseLoc    carboncore.Point
 	LClickLoop  unsafe.Pointer
-	LastClick   unsafe.Pointer
+	LastClick   carboncore.Point
 	RefCon      int
 	ListDefProc *string
 	UserHandle  *string
-	DataBounds  unsafe.Pointer
+	DataBounds  carboncore.Rect
 	Cells       *string
 	MaxIndex    int16
 	CellArray   [1]int16
@@ -647,10 +648,10 @@ type ListRec struct {
 type MCEntry struct {
 	MctID       int16
 	MctItem     int16
-	MctRGB1     qd.RGBColor
-	MctRGB2     qd.RGBColor
-	MctRGB3     qd.RGBColor
-	MctRGB4     qd.RGBColor
+	MctRGB1     commonpanels.RGBColor
+	MctRGB2     commonpanels.RGBColor
+	MctRGB3     commonpanels.RGBColor
+	MctRGB4     commonpanels.RGBColor
 	MctReserved int16
 }
 
@@ -738,7 +739,7 @@ type MenuTrackingData struct {
 	Menu              unsafe.Pointer
 	ItemSelected      uint16
 	ItemUnderMouse    uint16
-	ItemRect          unsafe.Pointer
+	ItemRect          carboncore.Rect
 	VirtualMenuTop    int
 	VirtualMenuBottom int
 }
@@ -828,6 +829,12 @@ type OpaqueToolboxObjectClassRef struct{}
 // OpaqueWindowGroupRef is an opaque type.
 type OpaqueWindowGroupRef struct{}
 
+// ****************************************************************************** Quickdraw Types Point               2D Quickdraw coordinate, range: -32K to +32K Rect                Rectangular Quickdraw area Style               Quickdraw font rendering styles StyleParameter      Style when used as a parameter (historical 68K convention) StyleField          Style when used as a field (historical 68K convention) CharParameter       Char when used as a parameter (historical 68K convention) Note:   The original Macintosh toolbox in 68K Pascal defined Style as a SET. Both Style and CHAR occupy 8-bits in packed records or 16-bits when used as fields in non-packed records or as parameters. *******************************************************************************
+type Point struct {
+	V int16
+	H int16
+}
+
 type ProgressTrackInfo struct {
 	Phase uint8
 }
@@ -839,6 +846,19 @@ type PromiseHFSFlavor struct {
 	PromisedFlavor uint
 }
 
+type RGBColor struct {
+	Red   uint16
+	Green uint16
+	Blue  uint16
+}
+
+type Rect struct {
+	Top    int16
+	Left   int16
+	Bottom int16
+	Right  int16
+}
+
 type STElement struct {
 	StCount  int16
 	StHeight int16
@@ -846,7 +866,7 @@ type STElement struct {
 	StFont   int16
 	StFace   uint8
 	StSize   int16
-	StColor  qd.RGBColor
+	StColor  commonpanels.RGBColor
 }
 
 type ScrapFlavorInfo struct {
@@ -887,7 +907,7 @@ type ScrpSTElement struct {
 	ScrpFont      int16
 	ScrpFace      uint8
 	ScrpSize      int16
-	ScrpColor     qd.RGBColor
+	ScrpColor     commonpanels.RGBColor
 }
 
 type SetupWindowProxyDragImageRec struct {
@@ -920,12 +940,12 @@ type StyleRun struct {
 }
 
 type TERec struct {
-	DestRect     unsafe.Pointer
-	ViewRect     unsafe.Pointer
-	SelRect      unsafe.Pointer
+	DestRect     carboncore.Rect
+	ViewRect     carboncore.Rect
+	SelRect      carboncore.Rect
 	LineHeight   int16
 	FontAscent   int16
-	SelPoint     unsafe.Pointer
+	SelPoint     carboncore.Point
 	SelStart     int16
 	SelEnd       int16
 	Active       int16
@@ -1000,7 +1020,7 @@ type TXNBackground struct {
 }
 
 type TXNBackgroundData struct {
-	Color qd.RGBColor
+	Color commonpanels.RGBColor
 }
 
 type TXNCarbonEventInfo struct {
@@ -1086,7 +1106,7 @@ type TextStyle struct {
 	TsFont  int16
 	TsFace  uint8
 	TsSize  int16
-	TsColor qd.RGBColor
+	TsColor commonpanels.RGBColor
 }
 
 type ThemeButtonDrawInfo struct {
@@ -1097,7 +1117,7 @@ type ThemeButtonDrawInfo struct {
 
 type ThemeTrackDrawInfo struct {
 	Kind        uint16
-	Bounds      unsafe.Pointer
+	Bounds      carboncore.Rect
 	Min         int
 	Max         int
 	Value       int
@@ -1131,8 +1151,8 @@ type TypeSelectRecord struct {
 }
 
 type WStateData struct {
-	UserState unsafe.Pointer
-	StdState  unsafe.Pointer
+	UserState carboncore.Rect
+	StdState  carboncore.Rect
 }
 
 type WinCTab struct {

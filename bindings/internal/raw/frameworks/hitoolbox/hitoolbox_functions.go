@@ -246,27 +246,27 @@ var (
 	_fnInstallEventLoopTimer                               func(unsafe.Pointer, float64, float64, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	_fnInvokeAEFilterUPP                                   func(*EventRecord, int, int, *ae.AEDesc, unsafe.Pointer) uint8
 	_fnInvokeAEIdleUPP                                     func(*EventRecord, *int, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnInvokeCaretHookUPP                                  func(unsafe.Pointer, *TERec, unsafe.Pointer)
+	_fnInvokeCaretHookUPP                                  func(*carboncore.Rect, *TERec, unsafe.Pointer)
 	_fnInvokeControlActionUPP                              func(unsafe.Pointer, int16, unsafe.Pointer)
 	_fnInvokeControlEditTextValidationUPP                  func(unsafe.Pointer, unsafe.Pointer)
 	_fnInvokeControlKeyFilterUPP                           func(unsafe.Pointer, *int16, *int16, *uint16, unsafe.Pointer) int16
 	_fnInvokeControlUserPaneActivateUPP                    func(unsafe.Pointer, uint8, unsafe.Pointer)
 	_fnInvokeControlUserPaneDrawUPP                        func(unsafe.Pointer, int16, unsafe.Pointer)
 	_fnInvokeControlUserPaneFocusUPP                       func(unsafe.Pointer, int16, unsafe.Pointer) int16
-	_fnInvokeControlUserPaneHitTestUPP                     func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeControlUserPaneHitTestUPP                     func(unsafe.Pointer, carboncore.Point, unsafe.Pointer) int16
 	_fnInvokeControlUserPaneIdleUPP                        func(unsafe.Pointer, unsafe.Pointer)
 	_fnInvokeControlUserPaneKeyDownUPP                     func(unsafe.Pointer, int16, int16, int16, unsafe.Pointer) int16
-	_fnInvokeControlUserPaneTrackingUPP                    func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeControlUserPaneTrackingUPP                    func(unsafe.Pointer, carboncore.Point, unsafe.Pointer, unsafe.Pointer) int16
 	_fnInvokeDataBrowserAcceptDragUPP                      func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) uint8
 	_fnInvokeDataBrowserAddDragItemUPP                     func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnInvokeDataBrowserDrawItemUPP                        func(unsafe.Pointer, uint, uint, uint, unsafe.Pointer, int16, uint8, unsafe.Pointer)
-	_fnInvokeDataBrowserEditItemUPP                        func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, *uint8, unsafe.Pointer) uint8
+	_fnInvokeDataBrowserDrawItemUPP                        func(unsafe.Pointer, uint, uint, uint, *carboncore.Rect, int16, uint8, unsafe.Pointer)
+	_fnInvokeDataBrowserEditItemUPP                        func(unsafe.Pointer, uint, uint, unsafe.Pointer, *carboncore.Rect, *uint8, unsafe.Pointer) uint8
 	_fnInvokeDataBrowserGetContextualMenuUPP               func(unsafe.Pointer, unsafe.Pointer, *uint, unsafe.Pointer, *ae.AEDesc, unsafe.Pointer)
-	_fnInvokeDataBrowserHitTestUPP                         func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnInvokeDataBrowserItemAcceptDragUPP                  func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint
+	_fnInvokeDataBrowserHitTestUPP                         func(unsafe.Pointer, uint, uint, *carboncore.Rect, *carboncore.Rect, unsafe.Pointer) uint8
+	_fnInvokeDataBrowserItemAcceptDragUPP                  func(unsafe.Pointer, uint, uint, *carboncore.Rect, unsafe.Pointer, unsafe.Pointer) uint
 	_fnInvokeDataBrowserItemCompareUPP                     func(unsafe.Pointer, uint, uint, uint, unsafe.Pointer) uint8
 	_fnInvokeDataBrowserItemDataUPP                        func(unsafe.Pointer, uint, uint, unsafe.Pointer, uint8, unsafe.Pointer) int
-	_fnInvokeDataBrowserItemDragRgnUPP                     func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeDataBrowserItemDragRgnUPP                     func(unsafe.Pointer, uint, uint, *carboncore.Rect, unsafe.Pointer, unsafe.Pointer)
 	_fnInvokeDataBrowserItemHelpContentUPP                 func(unsafe.Pointer, uint, uint, int16, *int16, *HMHelpContentRec, unsafe.Pointer)
 	_fnInvokeDataBrowserItemNotificationUPP                func(unsafe.Pointer, uint, uint, unsafe.Pointer)
 	_fnInvokeDataBrowserItemNotificationWithItemUPP        func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer)
@@ -275,9 +275,9 @@ var (
 	_fnInvokeDataBrowserPostProcessDragUPP                 func(unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer)
 	_fnInvokeDataBrowserReceiveDragUPP                     func(unsafe.Pointer, unsafe.Pointer, uint, unsafe.Pointer) uint8
 	_fnInvokeDataBrowserSelectContextualMenuUPP            func(unsafe.Pointer, unsafe.Pointer, uint, int16, uint16, unsafe.Pointer)
-	_fnInvokeDataBrowserTrackingUPP                        func(unsafe.Pointer, uint, uint, unsafe.Pointer, unsafe.Pointer, uint16, unsafe.Pointer) int16
-	_fnInvokeDragDrawingUPP                                func(int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeDragInputUPP                                  func(unsafe.Pointer, *int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeDataBrowserTrackingUPP                        func(unsafe.Pointer, uint, uint, *carboncore.Rect, carboncore.Point, uint16, unsafe.Pointer) int16
+	_fnInvokeDragDrawingUPP                                func(int16, unsafe.Pointer, carboncore.Point, unsafe.Pointer, carboncore.Point, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
+	_fnInvokeDragInputUPP                                  func(*carboncore.Point, *int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
 	_fnInvokeDragReceiveHandlerUPP                         func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
 	_fnInvokeDragSendDataUPP                               func(uint, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
 	_fnInvokeDragTrackingHandlerUPP                        func(int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
@@ -289,17 +289,17 @@ var (
 	_fnInvokeEventLoopIdleTimerUPP                         func(unsafe.Pointer, uint16, unsafe.Pointer, unsafe.Pointer)
 	_fnInvokeEventLoopTimerUPP                             func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 	_fnInvokeGetScrapDataUPP                               func(uint, *string, unsafe.Pointer, unsafe.Pointer) int16
-	_fnInvokeHMControlContentUPP                           func(unsafe.Pointer, unsafe.Pointer, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
+	_fnInvokeHMControlContentUPP                           func(unsafe.Pointer, carboncore.Point, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
 	_fnInvokeHMMenuItemContentUPP                          func(*MenuTrackingData, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
 	_fnInvokeHMMenuTitleContentUPP                         func(unsafe.Pointer, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
-	_fnInvokeHMWindowContentUPP                            func(unsafe.Pointer, unsafe.Pointer, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
-	_fnInvokeHighHookUPP                                   func(unsafe.Pointer, *TERec, unsafe.Pointer)
+	_fnInvokeHMWindowContentUPP                            func(unsafe.Pointer, carboncore.Point, int16, *int16, *HMHelpContentRec, unsafe.Pointer) int
+	_fnInvokeHighHookUPP                                   func(*carboncore.Rect, *TERec, unsafe.Pointer)
 	_fnInvokeHitTestHookUPP                                func(uint16, uint16, uint16, unsafe.Pointer, *TERec, **TERec, *uint16, *uint16, *uint8, unsafe.Pointer) uint8
 	_fnInvokeListClickLoopUPP                              func(unsafe.Pointer) uint8
-	_fnInvokeListDefUPP                                    func(int16, uint8, unsafe.Pointer, unsafe.Pointer, int16, int16, **ListRec, unsafe.Pointer)
+	_fnInvokeListDefUPP                                    func(int16, uint8, *carboncore.Rect, carboncore.Point, int16, int16, **ListRec, unsafe.Pointer)
 	_fnInvokeListSearchUPP                                 func(string, string, int16, int16, unsafe.Pointer) int16
-	_fnInvokeMenuItemDrawingUPP                            func(unsafe.Pointer, int16, uint8, unsafe.Pointer, unsafe.Pointer)
-	_fnInvokeMenuTitleDrawingUPP                           func(unsafe.Pointer, int16, uint8, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeMenuItemDrawingUPP                            func(*carboncore.Rect, int16, uint8, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeMenuTitleDrawingUPP                           func(*carboncore.Rect, int16, uint8, unsafe.Pointer, unsafe.Pointer)
 	_fnInvokeModalFilterUPP                                func(unsafe.Pointer, *EventRecord, *int16, unsafe.Pointer) uint8
 	_fnInvokeModalFilterYDUPP                              func(unsafe.Pointer, *EventRecord, *int16, unsafe.Pointer, unsafe.Pointer) uint8
 	_fnInvokeNMUPP                                         func(*NMRec, unsafe.Pointer)
@@ -317,14 +317,14 @@ var (
 	_fnInvokeTXNFindUPP                                    func(*TXNMatchTextRecord, uint, uint, unsafe.Pointer, uint, uint, uint, *uint, *uint, *uint8, unsafe.Pointer, unsafe.Pointer) int
 	_fnInvokeTXNScrollInfoUPP                              func(int, int, uint, unsafe.Pointer, unsafe.Pointer)
 	_fnInvokeTextWidthHookUPP                              func(uint16, uint16, unsafe.Pointer, *TERec, **TERec, unsafe.Pointer) uint16
-	_fnInvokeThemeButtonDrawUPP                            func(unsafe.Pointer, uint16, *ThemeButtonDrawInfo, unsafe.Pointer, int16, uint8, unsafe.Pointer)
-	_fnInvokeThemeEraseUPP                                 func(unsafe.Pointer, unsafe.Pointer, int16, uint8, unsafe.Pointer)
+	_fnInvokeThemeButtonDrawUPP                            func(*carboncore.Rect, uint16, *ThemeButtonDrawInfo, unsafe.Pointer, int16, uint8, unsafe.Pointer)
+	_fnInvokeThemeEraseUPP                                 func(*carboncore.Rect, unsafe.Pointer, int16, uint8, unsafe.Pointer)
 	_fnInvokeThemeIteratorUPP                              func(*uint8, int16, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uint8
-	_fnInvokeThemeTabTitleDrawUPP                          func(unsafe.Pointer, uint16, uint16, int16, uint8, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeThemeTabTitleDrawUPP                          func(*carboncore.Rect, uint16, uint16, int16, uint8, unsafe.Pointer, unsafe.Pointer)
 	_fnInvokeUserItemUPP                                   func(unsafe.Pointer, int16, unsafe.Pointer)
 	_fnInvokeWidthHookUPP                                  func(uint16, uint16, unsafe.Pointer, *TERec, **TERec, unsafe.Pointer) uint16
 	_fnInvokeWindowPaintUPP                                func(**qd.GDevice, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
-	_fnInvokeWindowTitleDrawingUPP                         func(unsafe.Pointer, int16, uint8, unsafe.Pointer, unsafe.Pointer)
+	_fnInvokeWindowTitleDrawingUPP                         func(*carboncore.Rect, int16, uint8, unsafe.Pointer, unsafe.Pointer)
 	_fnIsCmdChar                                           func(*EventRecord, int16) uint8
 	_fnIsEventInQueue                                      func(unsafe.Pointer, unsafe.Pointer) uint8
 	_fnIsSecureEventInputEnabled                           func() uint8
@@ -1387,7 +1387,7 @@ func InvokeAEIdleUPP(theEvent *EventRecord, sleepTime *int, mouseRgn unsafe.Poin
 	return _fnInvokeAEIdleUPP(theEvent, sleepTime, mouseRgn, userUPP)
 }
 
-func InvokeCaretHookUPP(r unsafe.Pointer, pTE *TERec, userUPP unsafe.Pointer) {
+func InvokeCaretHookUPP(r *carboncore.Rect, pTE *TERec, userUPP unsafe.Pointer) {
 	_fnInvokeCaretHookUPP(r, pTE, userUPP)
 }
 
@@ -1415,7 +1415,7 @@ func InvokeControlUserPaneFocusUPP(control unsafe.Pointer, action int16, userUPP
 	return _fnInvokeControlUserPaneFocusUPP(control, action, userUPP)
 }
 
-func InvokeControlUserPaneHitTestUPP(control unsafe.Pointer, where unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+func InvokeControlUserPaneHitTestUPP(control unsafe.Pointer, where carboncore.Point, userUPP unsafe.Pointer) int16 {
 	return _fnInvokeControlUserPaneHitTestUPP(control, where, userUPP)
 }
 
@@ -1427,7 +1427,7 @@ func InvokeControlUserPaneKeyDownUPP(control unsafe.Pointer, keyCode int16, char
 	return _fnInvokeControlUserPaneKeyDownUPP(control, keyCode, charCode, modifiers, userUPP)
 }
 
-func InvokeControlUserPaneTrackingUPP(control unsafe.Pointer, startPt unsafe.Pointer, actionProc unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+func InvokeControlUserPaneTrackingUPP(control unsafe.Pointer, startPt carboncore.Point, actionProc unsafe.Pointer, userUPP unsafe.Pointer) int16 {
 	return _fnInvokeControlUserPaneTrackingUPP(control, startPt, actionProc, userUPP)
 }
 
@@ -1439,11 +1439,11 @@ func InvokeDataBrowserAddDragItemUPP(browser unsafe.Pointer, theDrag unsafe.Poin
 	return _fnInvokeDataBrowserAddDragItemUPP(browser, theDrag, item, itemRef, userUPP)
 }
 
-func InvokeDataBrowserDrawItemUPP(browser unsafe.Pointer, item uint, property uint, itemState uint, theRect unsafe.Pointer, gdDepth int16, colorDevice uint8, userUPP unsafe.Pointer) {
+func InvokeDataBrowserDrawItemUPP(browser unsafe.Pointer, item uint, property uint, itemState uint, theRect *carboncore.Rect, gdDepth int16, colorDevice uint8, userUPP unsafe.Pointer) {
 	_fnInvokeDataBrowserDrawItemUPP(browser, item, property, itemState, theRect, gdDepth, colorDevice, userUPP)
 }
 
-func InvokeDataBrowserEditItemUPP(browser unsafe.Pointer, item uint, property uint, theString unsafe.Pointer, maxEditTextRect unsafe.Pointer, shrinkToFit *uint8, userUPP unsafe.Pointer) uint8 {
+func InvokeDataBrowserEditItemUPP(browser unsafe.Pointer, item uint, property uint, theString unsafe.Pointer, maxEditTextRect *carboncore.Rect, shrinkToFit *uint8, userUPP unsafe.Pointer) uint8 {
 	return _fnInvokeDataBrowserEditItemUPP(browser, item, property, theString, maxEditTextRect, shrinkToFit, userUPP)
 }
 
@@ -1451,11 +1451,11 @@ func InvokeDataBrowserGetContextualMenuUPP(browser unsafe.Pointer, menu unsafe.P
 	_fnInvokeDataBrowserGetContextualMenuUPP(browser, menu, helpType, helpItemString, selection, userUPP)
 }
 
-func InvokeDataBrowserHitTestUPP(browser unsafe.Pointer, itemID uint, property uint, theRect unsafe.Pointer, mouseRect unsafe.Pointer, userUPP unsafe.Pointer) uint8 {
+func InvokeDataBrowserHitTestUPP(browser unsafe.Pointer, itemID uint, property uint, theRect *carboncore.Rect, mouseRect *carboncore.Rect, userUPP unsafe.Pointer) uint8 {
 	return _fnInvokeDataBrowserHitTestUPP(browser, itemID, property, theRect, mouseRect, userUPP)
 }
 
-func InvokeDataBrowserItemAcceptDragUPP(browser unsafe.Pointer, itemID uint, property uint, theRect unsafe.Pointer, theDrag unsafe.Pointer, userUPP unsafe.Pointer) uint {
+func InvokeDataBrowserItemAcceptDragUPP(browser unsafe.Pointer, itemID uint, property uint, theRect *carboncore.Rect, theDrag unsafe.Pointer, userUPP unsafe.Pointer) uint {
 	return _fnInvokeDataBrowserItemAcceptDragUPP(browser, itemID, property, theRect, theDrag, userUPP)
 }
 
@@ -1467,7 +1467,7 @@ func InvokeDataBrowserItemDataUPP(browser unsafe.Pointer, item uint, property ui
 	return _fnInvokeDataBrowserItemDataUPP(browser, item, property, itemData, setValue, userUPP)
 }
 
-func InvokeDataBrowserItemDragRgnUPP(browser unsafe.Pointer, itemID uint, property uint, theRect unsafe.Pointer, dragRgn unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeDataBrowserItemDragRgnUPP(browser unsafe.Pointer, itemID uint, property uint, theRect *carboncore.Rect, dragRgn unsafe.Pointer, userUPP unsafe.Pointer) {
 	_fnInvokeDataBrowserItemDragRgnUPP(browser, itemID, property, theRect, dragRgn, userUPP)
 }
 
@@ -1503,15 +1503,15 @@ func InvokeDataBrowserSelectContextualMenuUPP(browser unsafe.Pointer, menu unsaf
 	_fnInvokeDataBrowserSelectContextualMenuUPP(browser, menu, selectionType, menuID, menuItem, userUPP)
 }
 
-func InvokeDataBrowserTrackingUPP(browser unsafe.Pointer, itemID uint, property uint, theRect unsafe.Pointer, startPt unsafe.Pointer, modifiers uint16, userUPP unsafe.Pointer) int16 {
+func InvokeDataBrowserTrackingUPP(browser unsafe.Pointer, itemID uint, property uint, theRect *carboncore.Rect, startPt carboncore.Point, modifiers uint16, userUPP unsafe.Pointer) int16 {
 	return _fnInvokeDataBrowserTrackingUPP(browser, itemID, property, theRect, startPt, modifiers, userUPP)
 }
 
-func InvokeDragDrawingUPP(message int16, showRegion unsafe.Pointer, showOrigin unsafe.Pointer, hideRegion unsafe.Pointer, hideOrigin unsafe.Pointer, dragDrawingRefCon unsafe.Pointer, theDrag unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+func InvokeDragDrawingUPP(message int16, showRegion unsafe.Pointer, showOrigin carboncore.Point, hideRegion unsafe.Pointer, hideOrigin carboncore.Point, dragDrawingRefCon unsafe.Pointer, theDrag unsafe.Pointer, userUPP unsafe.Pointer) int16 {
 	return _fnInvokeDragDrawingUPP(message, showRegion, showOrigin, hideRegion, hideOrigin, dragDrawingRefCon, theDrag, userUPP)
 }
 
-func InvokeDragInputUPP(mouse unsafe.Pointer, modifiers *int16, dragInputRefCon unsafe.Pointer, theDrag unsafe.Pointer, userUPP unsafe.Pointer) int16 {
+func InvokeDragInputUPP(mouse *carboncore.Point, modifiers *int16, dragInputRefCon unsafe.Pointer, theDrag unsafe.Pointer, userUPP unsafe.Pointer) int16 {
 	return _fnInvokeDragInputUPP(mouse, modifiers, dragInputRefCon, theDrag, userUPP)
 }
 
@@ -1559,7 +1559,7 @@ func InvokeGetScrapDataUPP(requestedFormat uint, dataH *string, srcDataGetterRef
 	return _fnInvokeGetScrapDataUPP(requestedFormat, dataH, srcDataGetterRefCon, userUPP)
 }
 
-func InvokeHMControlContentUPP(inControl unsafe.Pointer, inGlobalMouse unsafe.Pointer, inRequest int16, outContentProvided *int16, ioHelpContent *HMHelpContentRec, userUPP unsafe.Pointer) int {
+func InvokeHMControlContentUPP(inControl unsafe.Pointer, inGlobalMouse carboncore.Point, inRequest int16, outContentProvided *int16, ioHelpContent *HMHelpContentRec, userUPP unsafe.Pointer) int {
 	return _fnInvokeHMControlContentUPP(inControl, inGlobalMouse, inRequest, outContentProvided, ioHelpContent, userUPP)
 }
 
@@ -1571,11 +1571,11 @@ func InvokeHMMenuTitleContentUPP(inMenu unsafe.Pointer, inRequest int16, outCont
 	return _fnInvokeHMMenuTitleContentUPP(inMenu, inRequest, outContentProvided, ioHelpContent, userUPP)
 }
 
-func InvokeHMWindowContentUPP(inWindow unsafe.Pointer, inGlobalMouse unsafe.Pointer, inRequest int16, outContentProvided *int16, ioHelpContent *HMHelpContentRec, userUPP unsafe.Pointer) int {
+func InvokeHMWindowContentUPP(inWindow unsafe.Pointer, inGlobalMouse carboncore.Point, inRequest int16, outContentProvided *int16, ioHelpContent *HMHelpContentRec, userUPP unsafe.Pointer) int {
 	return _fnInvokeHMWindowContentUPP(inWindow, inGlobalMouse, inRequest, outContentProvided, ioHelpContent, userUPP)
 }
 
-func InvokeHighHookUPP(r unsafe.Pointer, pTE *TERec, userUPP unsafe.Pointer) {
+func InvokeHighHookUPP(r *carboncore.Rect, pTE *TERec, userUPP unsafe.Pointer) {
 	_fnInvokeHighHookUPP(r, pTE, userUPP)
 }
 
@@ -1587,7 +1587,7 @@ func InvokeListClickLoopUPP(userUPP unsafe.Pointer) uint8 {
 	return _fnInvokeListClickLoopUPP(userUPP)
 }
 
-func InvokeListDefUPP(lMessage int16, lSelect uint8, lRect unsafe.Pointer, lCell unsafe.Pointer, lDataOffset int16, lDataLen int16, lHandle **ListRec, userUPP unsafe.Pointer) {
+func InvokeListDefUPP(lMessage int16, lSelect uint8, lRect *carboncore.Rect, lCell carboncore.Point, lDataOffset int16, lDataLen int16, lHandle **ListRec, userUPP unsafe.Pointer) {
 	_fnInvokeListDefUPP(lMessage, lSelect, lRect, lCell, lDataOffset, lDataLen, lHandle, userUPP)
 }
 
@@ -1595,11 +1595,11 @@ func InvokeListSearchUPP(aPtr string, bPtr string, aLen int16, bLen int16, userU
 	return _fnInvokeListSearchUPP(aPtr, bPtr, aLen, bLen, userUPP)
 }
 
-func InvokeMenuItemDrawingUPP(inBounds unsafe.Pointer, inDepth int16, inIsColorDevice uint8, inUserData unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeMenuItemDrawingUPP(inBounds *carboncore.Rect, inDepth int16, inIsColorDevice uint8, inUserData unsafe.Pointer, userUPP unsafe.Pointer) {
 	_fnInvokeMenuItemDrawingUPP(inBounds, inDepth, inIsColorDevice, inUserData, userUPP)
 }
 
-func InvokeMenuTitleDrawingUPP(inBounds unsafe.Pointer, inDepth int16, inIsColorDevice uint8, inUserData unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeMenuTitleDrawingUPP(inBounds *carboncore.Rect, inDepth int16, inIsColorDevice uint8, inUserData unsafe.Pointer, userUPP unsafe.Pointer) {
 	_fnInvokeMenuTitleDrawingUPP(inBounds, inDepth, inIsColorDevice, inUserData, userUPP)
 }
 
@@ -1671,11 +1671,11 @@ func InvokeTextWidthHookUPP(textLen uint16, textOffset uint16, textBufferPtr uns
 	return _fnInvokeTextWidthHookUPP(textLen, textOffset, textBufferPtr, pTE, hTE, userUPP)
 }
 
-func InvokeThemeButtonDrawUPP(bounds unsafe.Pointer, kind uint16, info *ThemeButtonDrawInfo, userData unsafe.Pointer, depth int16, isColorDev uint8, userUPP unsafe.Pointer) {
+func InvokeThemeButtonDrawUPP(bounds *carboncore.Rect, kind uint16, info *ThemeButtonDrawInfo, userData unsafe.Pointer, depth int16, isColorDev uint8, userUPP unsafe.Pointer) {
 	_fnInvokeThemeButtonDrawUPP(bounds, kind, info, userData, depth, isColorDev, userUPP)
 }
 
-func InvokeThemeEraseUPP(bounds unsafe.Pointer, eraseData unsafe.Pointer, depth int16, isColorDev uint8, userUPP unsafe.Pointer) {
+func InvokeThemeEraseUPP(bounds *carboncore.Rect, eraseData unsafe.Pointer, depth int16, isColorDev uint8, userUPP unsafe.Pointer) {
 	_fnInvokeThemeEraseUPP(bounds, eraseData, depth, isColorDev, userUPP)
 }
 
@@ -1683,7 +1683,7 @@ func InvokeThemeIteratorUPP(inFileName *uint8, resID int16, inThemeSettings unsa
 	return _fnInvokeThemeIteratorUPP(inFileName, resID, inThemeSettings, inUserData, userUPP)
 }
 
-func InvokeThemeTabTitleDrawUPP(bounds unsafe.Pointer, style uint16, direction uint16, depth int16, isColorDev uint8, userData unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeThemeTabTitleDrawUPP(bounds *carboncore.Rect, style uint16, direction uint16, depth int16, isColorDev uint8, userData unsafe.Pointer, userUPP unsafe.Pointer) {
 	_fnInvokeThemeTabTitleDrawUPP(bounds, style, direction, depth, isColorDev, userData, userUPP)
 }
 
@@ -1699,7 +1699,7 @@ func InvokeWindowPaintUPP(device **qd.GDevice, qdContext unsafe.Pointer, window 
 	return _fnInvokeWindowPaintUPP(device, qdContext, window, inClientPaintRgn, outSystemPaintRgn, refCon, userUPP)
 }
 
-func InvokeWindowTitleDrawingUPP(bounds unsafe.Pointer, depth int16, colorDevice uint8, userData unsafe.Pointer, userUPP unsafe.Pointer) {
+func InvokeWindowTitleDrawingUPP(bounds *carboncore.Rect, depth int16, colorDevice uint8, userData unsafe.Pointer, userUPP unsafe.Pointer) {
 	_fnInvokeWindowTitleDrawingUPP(bounds, depth, colorDevice, userData, userUPP)
 }
 

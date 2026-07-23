@@ -6,11 +6,12 @@ package hiservices
 import (
 	"unsafe"
 
+	"github.com/ebitengine/purego/objc"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/ae"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/osservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/raw/frameworks/qd"
 )
 
 var (
@@ -207,7 +208,7 @@ var (
 	_fnPasteboardSetPasteLocation       func(unsafe.Pointer, unsafe.Pointer) int
 	_fnPasteboardSetPromiseKeeper       func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int
 	_fnPasteboardSynchronize            func(unsafe.Pointer) PasteboardSyncFlags
-	_fnPlotIconRefInContext             func(unsafe.Pointer, *corefoundation.CGRect, int16, int16, *qd.RGBColor, uint, unsafe.Pointer) int
+	_fnPlotIconRefInContext             func(unsafe.Pointer, *corefoundation.CGRect, int16, int16, objc.ID, uint, unsafe.Pointer) int
 	_fnProcessInformationCopyDictionary func(unsafe.Pointer, uint) unsafe.Pointer
 	_fnSameProcess                      func(unsafe.Pointer, unsafe.Pointer, *uint8) int16
 	_fnSetFrontProcess                  func(unsafe.Pointer) int16
@@ -875,7 +876,7 @@ func PasteboardSynchronize(inPasteboard unsafe.Pointer) PasteboardSyncFlags {
 	return _fnPasteboardSynchronize(inPasteboard)
 }
 
-func PlotIconRefInContext(inContext unsafe.Pointer, inRect *corefoundation.CGRect, inAlign int16, inTransform int16, inLabelColor *qd.RGBColor, inFlags uint, inIconRef unsafe.Pointer) int {
+func PlotIconRefInContext(inContext unsafe.Pointer, inRect *corefoundation.CGRect, inAlign int16, inTransform int16, inLabelColor objc.ID, inFlags uint, inIconRef unsafe.Pointer) int {
 	return _fnPlotIconRefInContext(inContext, inRect, inAlign, inTransform, inLabelColor, inFlags, inIconRef)
 }
 

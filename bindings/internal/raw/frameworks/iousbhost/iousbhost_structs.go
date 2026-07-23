@@ -3,9 +3,96 @@
 
 package iousbhost
 
-import (
-	"unsafe"
-)
+// @typedef    IOUSBBOSDescriptor @discussion USB BOS descriptor. See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>. USB 3.0 9.6.2: Binary Device Object Store (BOS)
+type IOUSBBOSDescriptor struct {
+	BLength         uint8
+	BDescriptorType uint8
+	WTotalLength    uint16
+	BNumDeviceCaps  uint8
+}
+
+// @typedef    IOUSBConfigurationDescriptor @discussion Standard USB Configuration Descriptor.  It is variable length, so this only specifies the known fields.  We use the wTotalLength field to read the whole descriptor. See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>. USB 2.0 9.6.3: Configuration
+type IOUSBConfigurationDescriptor struct {
+	BLength             uint8
+	BDescriptorType     uint8
+	WTotalLength        uint16
+	BNumInterfaces      uint8
+	BConfigurationValue uint8
+	IConfiguration      uint8
+	BmAttributes        uint8
+	MaxPower            uint8
+}
+
+// @struct      IOUSBDescriptorHeader @brief       Base descriptor defined by USB 2.0 9.5 @discussion  IOUSBDescriptorDefinitions declares structs to represent a variety of USB standard descriptors.
+type IOUSBDescriptorHeader struct {
+	BLength         uint8
+	BDescriptorType uint8
+}
+
+// @typedef    IOUSBDeviceCapabilityContainerID @discussion Device Capability Container ID. USB 3.0 9.6.2.3: Container ID
+type IOUSBDeviceCapabilityContainerID struct {
+	BLength            uint8
+	BDescriptorType    uint8
+	BDevCapabilityType uint8
+	BReservedID        uint8
+	ContainerID        [16]uint8
+}
+
+// @typedef    IOUSBDeviceCapabilityDescriptorHeader @discussion Device Capability descriptor.  See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>. USB 3.0 9.6.2: Binary Device Object Store (BOS)
+type IOUSBDeviceCapabilityDescriptorHeader struct {
+	BLength            uint8
+	BDescriptorType    uint8
+	BDevCapabilityType uint8
+}
+
+// @typedef    IOUSBDeviceCapabilitySuperSpeedUSB @discussion Device Capability SuperSpeed USB. USB 3.0 9.6.2.2: SuperSpeed USB Device Capability
+type IOUSBDeviceCapabilitySuperSpeedUSB struct {
+	BLength               uint8
+	BDescriptorType       uint8
+	BDevCapabilityType    uint8
+	BmAttributes          uint8
+	WSpeedsSupported      uint16
+	BFunctionalitySupport uint8
+	BU1DevExitLat         uint8
+	WU2DevExitLat         uint16
+}
+
+// @typedef    IOUSBDeviceDescriptor @discussion Descriptor for a USB Device. See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>.
+type IOUSBDeviceDescriptor struct {
+	BLength            uint8
+	BDescriptorType    uint8
+	BcdUSB             uint16
+	BDeviceClass       uint8
+	BDeviceSubClass    uint8
+	BDeviceProtocol    uint8
+	BMaxPacketSize0    uint8
+	IdVendor           uint16
+	IdProduct          uint16
+	BcdDevice          uint16
+	IManufacturer      uint8
+	IProduct           uint8
+	ISerialNumber      uint8
+	BNumConfigurations uint8
+}
+
+// @typedef    IOUSBDeviceRequest @discussion Standard device request. See the USB Specification at <a href="http://www.usb.org"TARGET="_blank">http://www.usb.org</a>. USB 2.0 9.3: USB Device Requests
+type IOUSBDeviceRequest struct {
+	BmRequestType uint8
+	BRequest      uint8
+	WValue        uint16
+	WIndex        uint16
+	WLength       uint16
+}
+
+// @typedef    IOUSBEndpointDescriptor @discussion Descriptor for a USB Endpoint.  See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>. USB 2.0 9.6.6: Endpoint
+type IOUSBEndpointDescriptor struct {
+	BLength          uint8
+	BDescriptorType  uint8
+	BEndpointAddress uint8
+	BmAttributes     uint8
+	WMaxPacketSize   uint16
+	BInterval        uint8
+}
 
 // @typedef     IOUSBHostCIMessage @brief       Foundational IOUSBHostControllerInterface message structure used for commands, transfers, and interrupts @discussion  IOUSBHostCIMessage structures are control structures passed between the IOUSBHostControllerInterface client and the kernel driver.  They are used to represent capabilities during initialization, commands and transfers sent from the kernel, and interrupt events sent to the kernel.
 type IOUSBHostCIMessage struct {
@@ -17,9 +104,9 @@ type IOUSBHostCIMessage struct {
 // The descriptors for a single endpoint.
 type IOUSBHostIOSourceDescriptors struct {
 	BcdUSB                 uint16
-	Descriptor             unsafe.Pointer
-	SsCompanionDescriptor  unsafe.Pointer
-	SspCompanionDescriptor unsafe.Pointer
+	Descriptor             IOUSBEndpointDescriptor
+	SsCompanionDescriptor  IOUSBSuperSpeedEndpointCompanionDescriptor
+	SspCompanionDescriptor IOUSBSuperSpeedPlusIsochronousEndpointCompanionDescriptor
 }
 
 // A structure that represents a single frame in an isochronous transfer.
@@ -39,4 +126,46 @@ type IOUSBHostIsochronousTransaction struct {
 	CompleteCount uint32
 	TimeStamp     uint64
 	Options       IOUSBHostIsochronousTransactionOptions
+}
+
+// @typedef    IOUSBInterfaceAssociationDescriptor @discussion USB Inerface Association Descriptor.  ECN to the USB 2.0 Spec. See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>. USB 3.0 9.6.4: Interface Association
+type IOUSBInterfaceAssociationDescriptor struct {
+	BLength           uint8
+	BDescriptorType   uint8
+	BFirstInterface   uint8
+	BInterfaceCount   uint8
+	BFunctionClass    uint8
+	BFunctionSubClass uint8
+	BFunctionProtocol uint8
+	IFunction         uint8
+}
+
+// @typedef    IOUSBInterfaceDescriptor @discussion Descriptor for a USB Interface.  See the USB Specification at <a href="http://www.usb.org" target="_blank">http://www.usb.org</a>. USB 2.0 9.6.5: Interface
+type IOUSBInterfaceDescriptor struct {
+	BLength            uint8
+	BDescriptorType    uint8
+	BInterfaceNumber   uint8
+	BAlternateSetting  uint8
+	BNumEndpoints      uint8
+	BInterfaceClass    uint8
+	BInterfaceSubClass uint8
+	BInterfaceProtocol uint8
+	IInterface         uint8
+}
+
+// @typedef    IOUSBSuperSpeedEndpointCompanionDescriptor @discussion Descriptor for a SuperSpeed USB Endpoint Companion. See the USB Specification at <a href="http://www.usb.org"TARGET="_blank">http://www.usb.org</a>. USB 3.1 9.6.7: SuperSpeed Endpoint Companion
+type IOUSBSuperSpeedEndpointCompanionDescriptor struct {
+	BLength           uint8
+	BDescriptorType   uint8
+	BMaxBurst         uint8
+	BmAttributes      uint8
+	WBytesPerInterval uint16
+}
+
+// @typedef    IOUSBSuperSpeedPlusIsochronousEndpointCompanionDescriptor @discussion Descriptor for a SuperSpeedPlus Isochronout USB Endpoint Companion. See the USB Specification at <a href="http://www.usb.org"TARGET="_blank">http://www.usb.org</a>. USB 3.1 9.6.8: SuperSpeedPlus Isochronous Endpoint Companion
+type IOUSBSuperSpeedPlusIsochronousEndpointCompanionDescriptor struct {
+	BLength            uint8
+	BDescriptorType    uint8
+	WReserved          uint16
+	DwBytesPerInterval uint32
 }
