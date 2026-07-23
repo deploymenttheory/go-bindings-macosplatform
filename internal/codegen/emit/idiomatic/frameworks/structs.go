@@ -71,6 +71,35 @@ func structLayoutSafe(s meta.Struct) bool {
 // cross-framework references, so a reference never names a struct that was
 // skipped. An enum-typed field is allowed when the enum is one the same framework
 // emits locally (see ComputeEmittableStructs).
+// buildEnumFieldWidths maps each available named enum's GoTypeName to the size
+// and alignment of its underlying Go integer type, so the authoritative-layout
+// cross-check can size an enum-typed struct field. The integer type is chosen the
+// same way the enum emitter chooses it (MapEnumGoType + UpgradeEnumTypeIfOverflow),
+// so the cross-check agrees with the emitted layout.
+func buildEnumFieldWidths(frameworks []*meta.FrameworkMeta) map[string][2]int {
+	widths := make(map[string][2]int)
+	for _, framework := range frameworks {
+		for key, enum := range framework.Enums {
+			if enum.Availability.IsUnavailable || enum.IsAnon {
+				continue
+			}
+			goName := naming.GoTypeName(key)
+			if !isExportedGoIdent(goName) {
+				continue
+			}
+			goIntType := enum.GoType
+			if goIntType == "" {
+				goIntType = "int64"
+			}
+			goIntType = rawfw.UpgradeEnumTypeIfOverflow(rawfw.MapEnumGoType(goIntType), enum.Members)
+			if sz, al, ok := structlayout.ScalarGoSizeAlign(goIntType); ok {
+				widths[goName] = [2]int{sz, al}
+			}
+		}
+	}
+	return widths
+}
+
 func ComputeEmittableStructs(
 	frameworks []*meta.FrameworkMeta,
 	mapper *typemap.Mapper,
@@ -81,6 +110,19 @@ func ComputeEmittableStructs(
 	ownEnumsByFw := make(map[string]map[string]bool, len(frameworks))
 	resolved := make(map[string][]string) // struct Go name → field Go types
 	structFw := make(map[string]string)   // struct Go name → owning framework
+
+	// Enum field widths, so the authoritative-layout cross-check can validate a
+	// struct whose fields include enums (which resolve to a Go named type, not a
+	// bare scalar). Keyed by the enum's GoTypeName — the form resolveStructFields
+	// produces for an enum field.
+	enumWidths := buildEnumFieldWidths(frameworks)
+	enumSizer := func(goType string) (size, align int, ok bool) {
+		if w, found := enumWidths[goType]; found {
+			return w[0], w[1], true
+		}
+		return 0, 0, false
+	}
+
 	for _, framework := range frameworks {
 		ownEnumsByFw[framework.Framework] = buildOwnEnumNames(framework)
 		ctx := typemap.Context{Framework: framework.Framework}
@@ -106,7 +148,7 @@ func ComputeEmittableStructs(
 					fieldOffsets[i] = f.Offset
 				}
 				if !structlayout.LayoutSafeFromGoTypes(s.Packed, goTypes) ||
-					!structlayout.LayoutMatchesAuthoritative(s.Size, s.Packed, fieldOffsets, goTypes) {
+					!structlayout.LayoutMatchesAuthoritative(s.Size, s.Packed, fieldOffsets, goTypes, enumSizer) {
 					continue
 				}
 				resolved[goName] = goTypes

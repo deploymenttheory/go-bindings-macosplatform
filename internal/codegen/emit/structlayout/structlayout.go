@@ -56,6 +56,12 @@ func StructFieldGoType(objcType, mapped string) string {
 	return mapped
 }
 
+// FieldSizer resolves the size and alignment (bytes) of a non-primitive field Go
+// type — an enum (by its underlying integer width) or a nested value struct (by
+// its own layout) — and ok=false when goType is neither. It lets the layout
+// helpers validate structs whose fields are not plain scalars. May be nil.
+type FieldSizer func(goType string) (size, align int, ok bool)
+
 // ScalarGoSizeAlign returns the size and alignment (in bytes, arm64/amd64 LP64)
 // of a hermetic scalar Go type, and ok=false for anything else (a nested struct,
 // pointer, slice, or unresolved type). Only fixed-width types are admitted;
@@ -63,6 +69,13 @@ func StructFieldGoType(objcType, mapped string) string {
 // a platform-width int is treated as 8 — matching the LP64 C `long`/pointer it
 // came from.
 func ScalarGoSizeAlign(goType string) (size, align int, ok bool) {
+	return sizeAlign(goType, nil)
+}
+
+// sizeAlign is ScalarGoSizeAlign with an optional resolver for non-primitive
+// (enum / nested-struct) field types, threaded through array elements so an
+// array of enums or nested structs also resolves.
+func sizeAlign(goType string, sizer FieldSizer) (size, align int, ok bool) {
 	// A fixed-size array [N]elem lays out as N contiguous elements with the
 	// element's alignment; recurse on the element (which may itself be an array).
 	// A slice "[]T" or malformed dimension is not a fixed array and is rejected.
@@ -75,7 +88,7 @@ func ScalarGoSizeAlign(goType string) (size, align int, ok bool) {
 		if err != nil || n < 0 {
 			return 0, 0, false
 		}
-		elemSize, elemAlign, elemOK := ScalarGoSizeAlign(goType[closeIdx+1:])
+		elemSize, elemAlign, elemOK := sizeAlign(goType[closeIdx+1:], sizer)
 		if !elemOK {
 			return 0, 0, false
 		}
@@ -90,6 +103,9 @@ func ScalarGoSizeAlign(goType string) (size, align int, ok bool) {
 		return 4, 4, true
 	case "int64", "uint64", "float64", "int", "uint", "uintptr":
 		return 8, 8, true
+	}
+	if sizer != nil {
+		return sizer(goType)
 	}
 	return 0, 0, false
 }
@@ -128,10 +144,10 @@ func LayoutSafeFromGoTypes(packed bool, goTypes []string) bool {
 // struct with the given (width-corrected) field types, under Go's natural
 // alignment (packed=false) or tight packing (packed=true). ok is false if any
 // field's size is unknown.
-func GoStructLayout(goTypes []string, packed bool) (offsets []int, size int, ok bool) {
+func GoStructLayout(goTypes []string, packed bool, sizer FieldSizer) (offsets []int, size int, ok bool) {
 	pos, maxAlign := 0, 1
 	for _, gt := range goTypes {
-		sz, al, fieldOK := ScalarGoSizeAlign(gt)
+		sz, al, fieldOK := sizeAlign(gt, sizer)
 		if !fieldOK {
 			return nil, 0, false
 		}
@@ -163,15 +179,15 @@ func GoStructLayout(goTypes []string, packed bool) (offsets []int, size int, ok 
 //
 // fieldOffsets holds the authoritative byte offset of each field (in field
 // order); its length is the struct's field count.
-func LayoutMatchesAuthoritative(size int, packed bool, fieldOffsets []int, goTypes []string) bool {
+func LayoutMatchesAuthoritative(size int, packed bool, fieldOffsets []int, goTypes []string, sizer FieldSizer) bool {
 	if size == 0 {
 		return true
 	}
-	offsets, computed, ok := GoStructLayout(goTypes, packed)
+	offsets, computed, ok := GoStructLayout(goTypes, packed, sizer)
 	if !ok {
-		// A nested struct / non-scalar field the layout computer cannot size — the
-		// emittable fixpoint already gates those recursively; skip the cross-check
-		// rather than wrongly excluding a valid nested-struct struct.
+		// A field the layout computer still cannot size (a nested struct the sizer
+		// does not resolve, a pointer, …) — skip the cross-check rather than wrongly
+		// excluding the struct; the emittable fixpoint gates field types separately.
 		return true
 	}
 	if computed != size || len(offsets) != len(fieldOffsets) {

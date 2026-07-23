@@ -934,21 +934,6 @@ func CMSimpleQueueReset(queue obj.Object) error {
 	return nil
 }
 
-var _fnCMTagCollectionAddTagsFromArray func(objc.ID, unsafe.Pointer, int) int32
-
-// CMTagCollectionAddTagsFromArray reports an error if the CoreMedia framework function CMTagCollectionAddTagsFromArray fails.
-func CMTagCollectionAddTagsFromArray(tagCollection obj.Object, tags *CMTag, tagCount int) error {
-	_loadOnce.Do(_loadLibrary)
-	if _fnCMTagCollectionAddTagsFromArray == nil {
-		ebipurego.RegisterLibFunc(&_fnCMTagCollectionAddTagsFromArray, _lib, "CMTagCollectionAddTagsFromArray")
-	}
-	_rc := _fnCMTagCollectionAddTagsFromArray(objref.IDOf(tagCollection), unsafe.Pointer(tags), tagCount)
-	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
 var _fnCMTagCollectionAddTagsFromCollection func(objc.ID, objc.ID) int32
 
 // CMTagCollectionAddTagsFromCollection reports an error if the CoreMedia framework function CMTagCollectionAddTagsFromCollection fails.
@@ -958,21 +943,6 @@ func CMTagCollectionAddTagsFromCollection(tagCollection obj.Object, collectionWi
 		ebipurego.RegisterLibFunc(&_fnCMTagCollectionAddTagsFromCollection, _lib, "CMTagCollectionAddTagsFromCollection")
 	}
 	_rc := _fnCMTagCollectionAddTagsFromCollection(objref.IDOf(tagCollection), objref.IDOf(collectionWithTagsToAdd))
-	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-var _fnCMTagCollectionCreate func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
-
-// CMTagCollectionCreate reports an error if the CoreMedia framework function CMTagCollectionCreate fails.
-func CMTagCollectionCreate(allocator obj.Object, tags *CMTag, tagCount int, newCollectionOut unsafe.Pointer) error {
-	_loadOnce.Do(_loadLibrary)
-	if _fnCMTagCollectionCreate == nil {
-		ebipurego.RegisterLibFunc(&_fnCMTagCollectionCreate, _lib, "CMTagCollectionCreate")
-	}
-	_rc := _fnCMTagCollectionCreate(objref.IDOf(allocator), unsafe.Pointer(tags), tagCount, newCollectionOut)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

@@ -34,12 +34,6 @@ func LayoutWithLayoutTag(layoutTag int) *AudioChannelLayout {
 	return AudioChannelLayoutFromID(_r)
 }
 
-// LayoutWithLayout creates an audio channel layout object from an existing one.
-func LayoutWithLayout(layout *coreaudiotypes.AudioChannelLayout) *AudioChannelLayout {
-	_r := objc.Send[objc.ID](objc.ID(_class("AVAudioChannelLayout")), objc.RegisterName("layoutWithLayout:"), unsafe.Pointer(layout))
-	return AudioChannelLayoutFromID(_r)
-}
-
 // SharedRoutingArbiter returns the singleton AVAudioRoutingArbiter instance.
 func SharedRoutingArbiter() *AudioRoutingArbiter {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVAudioRoutingArbiter")), objc.RegisterName("sharedRoutingArbiter"))

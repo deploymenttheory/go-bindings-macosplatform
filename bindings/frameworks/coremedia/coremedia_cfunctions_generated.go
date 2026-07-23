@@ -32,12 +32,12 @@ func CMAudioDeviceClockGetAudioDevice(clock obj.Object, deviceUIDOut unsafe.Poin
 var _fnCMAudioFormatDescriptionCreate func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, int, unsafe.Pointer, objc.ID, unsafe.Pointer) int32
 
 // CMAudioFormatDescriptionCreate calls the CoreMedia framework function CMAudioFormatDescriptionCreate.
-func CMAudioFormatDescriptionCreate(allocator obj.Object, asbd unsafe.Pointer, layoutSize int, layout *coreaudiotypes.AudioChannelLayout, magicCookieSize int, magicCookie unsafe.Pointer, extensions obj.Object, formatDescriptionOut unsafe.Pointer) int {
+func CMAudioFormatDescriptionCreate(allocator obj.Object, asbd unsafe.Pointer, layoutSize int, layout unsafe.Pointer, magicCookieSize int, magicCookie unsafe.Pointer, extensions obj.Object, formatDescriptionOut unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMAudioFormatDescriptionCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionCreate, _lib, "CMAudioFormatDescriptionCreate")
 	}
-	return int(_fnCMAudioFormatDescriptionCreate(objref.IDOf(allocator), asbd, layoutSize, unsafe.Pointer(layout), magicCookieSize, magicCookie, objref.IDOf(extensions), formatDescriptionOut))
+	return int(_fnCMAudioFormatDescriptionCreate(objref.IDOf(allocator), asbd, layoutSize, layout, magicCookieSize, magicCookie, objref.IDOf(extensions), formatDescriptionOut))
 }
 
 var _fnCMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
@@ -64,10 +64,10 @@ func CMAudioFormatDescriptionEqual(formatDescription unsafe.Pointer, otherFormat
 	return _ret, _out0
 }
 
-var _fnCMAudioFormatDescriptionGetChannelLayout func(unsafe.Pointer, unsafe.Pointer) *coreaudiotypes.AudioChannelLayout
+var _fnCMAudioFormatDescriptionGetChannelLayout func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer
 
 // CMAudioFormatDescriptionGetChannelLayout calls the CoreMedia framework function CMAudioFormatDescriptionGetChannelLayout.
-func CMAudioFormatDescriptionGetChannelLayout(desc unsafe.Pointer) (result *coreaudiotypes.AudioChannelLayout, sizeOut int) {
+func CMAudioFormatDescriptionGetChannelLayout(desc unsafe.Pointer) (result unsafe.Pointer, sizeOut int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMAudioFormatDescriptionGetChannelLayout == nil {
 		ebipurego.RegisterLibFunc(&_fnCMAudioFormatDescriptionGetChannelLayout, _lib, "CMAudioFormatDescriptionGetChannelLayout")
@@ -1621,6 +1621,17 @@ func CMTagCollectionAddTag(tagCollection obj.Object, tagToAdd unsafe.Pointer) in
 	return int(_fnCMTagCollectionAddTag(objref.IDOf(tagCollection), tagToAdd))
 }
 
+var _fnCMTagCollectionAddTagsFromArray func(objc.ID, unsafe.Pointer, int) int32
+
+// CMTagCollectionAddTagsFromArray calls the CoreMedia framework function CMTagCollectionAddTagsFromArray.
+func CMTagCollectionAddTagsFromArray(tagCollection obj.Object, tags unsafe.Pointer, tagCount int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionAddTagsFromArray == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionAddTagsFromArray, _lib, "CMTagCollectionAddTagsFromArray")
+	}
+	return int(_fnCMTagCollectionAddTagsFromArray(objref.IDOf(tagCollection), tags, tagCount))
+}
+
 var _fnCMTagCollectionApply func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // CMTagCollectionApply calls the CoreMedia framework function CMTagCollectionApply.
@@ -1743,6 +1754,17 @@ func CMTagCollectionCountTagsWithFilterFunction(tagCollection obj.Object, filter
 		ebipurego.RegisterLibFunc(&_fnCMTagCollectionCountTagsWithFilterFunction, _lib, "CMTagCollectionCountTagsWithFilterFunction")
 	}
 	return _fnCMTagCollectionCountTagsWithFilterFunction(objref.IDOf(tagCollection), filterApplier, context_)
+}
+
+var _fnCMTagCollectionCreate func(objc.ID, unsafe.Pointer, int, unsafe.Pointer) int32
+
+// CMTagCollectionCreate calls the CoreMedia framework function CMTagCollectionCreate.
+func CMTagCollectionCreate(allocator obj.Object, tags unsafe.Pointer, tagCount int, newCollectionOut unsafe.Pointer) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionCreate, _lib, "CMTagCollectionCreate")
+	}
+	return int(_fnCMTagCollectionCreate(objref.IDOf(allocator), tags, tagCount, newCollectionOut))
 }
 
 var _fnCMTagCollectionGetCount func(objc.ID) int

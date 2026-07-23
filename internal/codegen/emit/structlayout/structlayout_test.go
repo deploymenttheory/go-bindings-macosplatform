@@ -91,7 +91,7 @@ func TestGoStructLayout(t *testing.T) {
 		{"unknown type", false, []string{"SomeStruct"}, nil, 0, false},
 	}
 	for _, c := range cases {
-		offsets, size, ok := GoStructLayout(c.goTypes, c.packed)
+		offsets, size, ok := GoStructLayout(c.goTypes, c.packed, nil)
 		if ok != c.ok || (ok && (size != c.size || !intsEqualLayout(offsets, c.offsets))) {
 			t.Errorf("%s: GoStructLayout = %v,%d,%v; want %v,%d,%v",
 				c.name, offsets, size, ok, c.offsets, c.size, c.ok)
@@ -134,9 +134,38 @@ func TestLayoutMatchesAuthoritative(t *testing.T) {
 		{"unsizable field skips check", 16, false, []int{0}, []string{"SomeStruct"}, true},
 	}
 	for _, c := range cases {
-		if got := LayoutMatchesAuthoritative(c.size, c.packed, c.fieldOffsets, c.goTypes); got != c.want {
+		if got := LayoutMatchesAuthoritative(c.size, c.packed, c.fieldOffsets, c.goTypes, nil); got != c.want {
 			t.Errorf("%s: LayoutMatchesAuthoritative = %v; want %v", c.name, got, c.want)
 		}
+	}
+}
+
+func TestSizeAlignWithSizer(t *testing.T) {
+	// A sizer that knows one enum (4-byte) and one nested struct (8-byte, align 8).
+	sizer := func(goType string) (int, int, bool) {
+		switch goType {
+		case "MyEnum":
+			return 4, 4, true
+		case "MyStruct":
+			return 8, 8, true
+		}
+		return 0, 0, false
+	}
+	// GoStructLayout resolves the enum + nested struct + an array of the enum.
+	offsets, size, ok := GoStructLayout([]string{"uint8", "MyEnum", "MyStruct"}, false, sizer)
+	if !ok || size != 16 || offsets[0] != 0 || offsets[1] != 4 || offsets[2] != 8 {
+		t.Errorf("GoStructLayout with sizer = %v,%d,%v; want [0 4 8],16,true", offsets, size, ok)
+	}
+	// Array of enums.
+	if sz, al, ok := sizeAlign("[3]MyEnum", sizer); !ok || sz != 12 || al != 4 {
+		t.Errorf("sizeAlign([3]MyEnum) = %d,%d,%v; want 12,4,true", sz, al, ok)
+	}
+	// LayoutMatchesAuthoritative validates an enum-field struct against clang.
+	if !LayoutMatchesAuthoritative(16, false, []int{0, 4, 8}, []string{"uint8", "MyEnum", "MyStruct"}, sizer) {
+		t.Error("enum/nested-struct layout should match authoritative")
+	}
+	if LayoutMatchesAuthoritative(16, false, []int{0, 8, 8}, []string{"uint8", "MyEnum", "MyStruct"}, sizer) {
+		t.Error("mismatched enum offset should fail")
 	}
 }
 
