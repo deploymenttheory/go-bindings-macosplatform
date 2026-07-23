@@ -639,12 +639,12 @@ func CMFormatDescriptionEqual(formatDescription CMFormatDescriptionRef, otherFor
 var _fnCMFormatDescriptionEqualIgnoringExtensionKeys func(objc.ID, objc.ID, objc.ID, objc.ID) uint8
 
 // CMFormatDescriptionEqualIgnoringExtensionKeys calls the CoreMedia framework function CMFormatDescriptionEqualIgnoringExtensionKeys.
-func CMFormatDescriptionEqualIgnoringExtensionKeys(formatDescription CMFormatDescriptionRef, otherFormatDescription CMFormatDescriptionRef, formatDescriptionExtensionKeysToIgnore corefoundation.CFTypeRef, sampleDescriptionExtensionAtomKeysToIgnore corefoundation.CFTypeRef) uint8 {
+func CMFormatDescriptionEqualIgnoringExtensionKeys(formatDescription CMFormatDescriptionRef, otherFormatDescription CMFormatDescriptionRef, formatDescriptionExtensionKeysToIgnore obj.Object, sampleDescriptionExtensionAtomKeysToIgnore obj.Object) uint8 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMFormatDescriptionEqualIgnoringExtensionKeys == nil {
 		ebipurego.RegisterLibFunc(&_fnCMFormatDescriptionEqualIgnoringExtensionKeys, _lib, "CMFormatDescriptionEqualIgnoringExtensionKeys")
 	}
-	return _fnCMFormatDescriptionEqualIgnoringExtensionKeys(objref.IDOf(formatDescription.Object), objref.IDOf(otherFormatDescription.Object), objref.IDOf(formatDescriptionExtensionKeysToIgnore.Object), objref.IDOf(sampleDescriptionExtensionAtomKeysToIgnore.Object))
+	return _fnCMFormatDescriptionEqualIgnoringExtensionKeys(objref.IDOf(formatDescription.Object), objref.IDOf(otherFormatDescription.Object), objref.IDOf(formatDescriptionExtensionKeysToIgnore), objref.IDOf(sampleDescriptionExtensionAtomKeysToIgnore))
 }
 
 var _fnCMFormatDescriptionGetExtension func(objc.ID, objc.ID) objc.ID
@@ -707,14 +707,14 @@ func CMFormatDescriptionGetTypeID() int {
 var _fnCMGetAttachment func(unsafe.Pointer, objc.ID, unsafe.Pointer) objc.ID
 
 // CMGetAttachment calls the CoreMedia framework function CMGetAttachment.
-func CMGetAttachment(target unsafe.Pointer, key corefoundation.CFStringRef) (result corefoundation.CFTypeRef, attachmentModeOut uint32) {
+func CMGetAttachment(target unsafe.Pointer, key corefoundation.CFStringRef) (result obj.Object, attachmentModeOut uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMGetAttachment == nil {
 		ebipurego.RegisterLibFunc(&_fnCMGetAttachment, _lib, "CMGetAttachment")
 	}
 	var _out0 uint32
 	_ret := _fnCMGetAttachment(target, objref.IDOf(key.Object), unsafe.Pointer(&_out0))
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}, _out0
+	return obj.Wrap(_ret), _out0
 }
 
 var _fnCMMemoryPoolCreate func(objc.ID) objc.ID
@@ -1288,12 +1288,12 @@ func CMSampleBufferSetOutputPresentationTimeStamp(sbuf CMSampleBufferRef, output
 var _fnCMSetAttachment func(unsafe.Pointer, objc.ID, objc.ID, uint32)
 
 // CMSetAttachment calls the CoreMedia framework function CMSetAttachment.
-func CMSetAttachment(target unsafe.Pointer, key corefoundation.CFStringRef, value corefoundation.CFTypeRef, attachmentMode uint32) {
+func CMSetAttachment(target unsafe.Pointer, key corefoundation.CFStringRef, value obj.Object, attachmentMode uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCMSetAttachment == nil {
 		ebipurego.RegisterLibFunc(&_fnCMSetAttachment, _lib, "CMSetAttachment")
 	}
-	_fnCMSetAttachment(target, objref.IDOf(key.Object), objref.IDOf(value.Object), attachmentMode)
+	_fnCMSetAttachment(target, objref.IDOf(key.Object), objref.IDOf(value), attachmentMode)
 }
 
 var _fnCMSetAttachments func(unsafe.Pointer, objc.ID, uint32)

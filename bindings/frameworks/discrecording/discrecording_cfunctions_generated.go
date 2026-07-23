@@ -191,13 +191,13 @@ func DRCDTextBlockGetTypeID() int {
 var _fnDRCDTextBlockGetValue func(objc.ID, int, objc.ID) objc.ID
 
 // DRCDTextBlockGetValue calls the DiscRecording framework function DRCDTextBlockGetValue.
-func DRCDTextBlockGetValue(block DRCDTextBlockRef, trackIndex int, key corefoundation.CFStringRef) corefoundation.CFTypeRef {
+func DRCDTextBlockGetValue(block DRCDTextBlockRef, trackIndex int, key corefoundation.CFStringRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRCDTextBlockGetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockGetValue, _lib, "DRCDTextBlockGetValue")
 	}
 	_ret := _fnDRCDTextBlockGetValue(objref.IDOf(block.Object), trackIndex, objref.IDOf(key.Object))
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnDRCDTextBlockSetProperties func(objc.ID, objc.ID)
@@ -225,12 +225,12 @@ func DRCDTextBlockSetTrackDictionaries(block DRCDTextBlockRef, array corefoundat
 var _fnDRCDTextBlockSetValue func(objc.ID, int, objc.ID, objc.ID)
 
 // DRCDTextBlockSetValue calls the DiscRecording framework function DRCDTextBlockSetValue.
-func DRCDTextBlockSetValue(block DRCDTextBlockRef, trackIndex int, key corefoundation.CFStringRef, value corefoundation.CFTypeRef) {
+func DRCDTextBlockSetValue(block DRCDTextBlockRef, trackIndex int, key corefoundation.CFStringRef, value obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRCDTextBlockSetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnDRCDTextBlockSetValue, _lib, "DRCDTextBlockSetValue")
 	}
-	_fnDRCDTextBlockSetValue(objref.IDOf(block.Object), trackIndex, objref.IDOf(key.Object), objref.IDOf(value.Object))
+	_fnDRCDTextBlockSetValue(objref.IDOf(block.Object), trackIndex, objref.IDOf(key.Object), objref.IDOf(value))
 }
 
 var _fnDRCopyDeviceArray func() objc.ID
@@ -515,13 +515,13 @@ func DRFSObjectCopyFilesystemProperties(object unsafe.Pointer, fsKey corefoundat
 var _fnDRFSObjectCopyFilesystemProperty func(unsafe.Pointer, objc.ID, objc.ID, uint8) objc.ID
 
 // DRFSObjectCopyFilesystemProperty calls the DiscRecording framework function DRFSObjectCopyFilesystemProperty.
-func DRFSObjectCopyFilesystemProperty(object unsafe.Pointer, fsKey corefoundation.CFStringRef, propertyKey corefoundation.CFStringRef, coalesce uint8) corefoundation.CFTypeRef {
+func DRFSObjectCopyFilesystemProperty(object unsafe.Pointer, fsKey corefoundation.CFStringRef, propertyKey corefoundation.CFStringRef, coalesce uint8) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFSObjectCopyFilesystemProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectCopyFilesystemProperty, _lib, "DRFSObjectCopyFilesystemProperty")
 	}
 	_ret := _fnDRFSObjectCopyFilesystemProperty(object, objref.IDOf(fsKey.Object), objref.IDOf(propertyKey.Object), coalesce)
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnDRFSObjectCopyMangledName func(unsafe.Pointer, objc.ID) objc.ID
@@ -668,12 +668,12 @@ func DRFSObjectSetFilesystemProperties(object unsafe.Pointer, fsKey corefoundati
 var _fnDRFSObjectSetFilesystemProperty func(unsafe.Pointer, objc.ID, objc.ID, objc.ID)
 
 // DRFSObjectSetFilesystemProperty calls the DiscRecording framework function DRFSObjectSetFilesystemProperty.
-func DRFSObjectSetFilesystemProperty(object unsafe.Pointer, fsKey corefoundation.CFStringRef, propertyKey corefoundation.CFStringRef, value corefoundation.CFTypeRef) {
+func DRFSObjectSetFilesystemProperty(object unsafe.Pointer, fsKey corefoundation.CFStringRef, propertyKey corefoundation.CFStringRef, value obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDRFSObjectSetFilesystemProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnDRFSObjectSetFilesystemProperty, _lib, "DRFSObjectSetFilesystemProperty")
 	}
-	_fnDRFSObjectSetFilesystemProperty(object, objref.IDOf(fsKey.Object), objref.IDOf(propertyKey.Object), objref.IDOf(value.Object))
+	_fnDRFSObjectSetFilesystemProperty(object, objref.IDOf(fsKey.Object), objref.IDOf(propertyKey.Object), objref.IDOf(value))
 }
 
 var _fnDRFSObjectSetSpecificName func(unsafe.Pointer, objc.ID, objc.ID)

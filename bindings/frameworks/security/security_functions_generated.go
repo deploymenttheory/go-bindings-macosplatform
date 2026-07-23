@@ -18,13 +18,13 @@ import (
 // SecAccessControlCreateWithFlags reports an error if the Security framework function SecAccessControlCreateWithFlags fails.
 var _fnSecAccessControlCreateWithFlags func(objc.ID, objc.ID, SecAccessControlCreateFlags, unsafe.Pointer) objc.ID
 
-func SecAccessControlCreateWithFlags(allocator corefoundation.CFAllocatorRef, protection corefoundation.CFTypeRef, flags SecAccessControlCreateFlags) (obj.Object, error) {
+func SecAccessControlCreateWithFlags(allocator corefoundation.CFAllocatorRef, protection obj.Object, flags SecAccessControlCreateFlags) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecAccessControlCreateWithFlags == nil {
 		ebipurego.RegisterLibFunc(&_fnSecAccessControlCreateWithFlags, _lib, "SecAccessControlCreateWithFlags")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnSecAccessControlCreateWithFlags(objref.IDOf(allocator.Object), objref.IDOf(protection.Object), flags, unsafe.Pointer(&_cfErr))
+	_r := _fnSecAccessControlCreateWithFlags(objref.IDOf(allocator.Object), objref.IDOf(protection), flags, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -178,13 +178,13 @@ func SecCodeCheckValidityWithErrors(code SecCodeRef, flags SecCSFlags, requireme
 // SecDecodeTransformCreate reports an error if the Security framework function SecDecodeTransformCreate fails.
 var _fnSecDecodeTransformCreate func(objc.ID, unsafe.Pointer) objc.ID
 
-func SecDecodeTransformCreate(decodeType corefoundation.CFTypeRef) (obj.Object, error) {
+func SecDecodeTransformCreate(decodeType obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecDecodeTransformCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecDecodeTransformCreate, _lib, "SecDecodeTransformCreate")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnSecDecodeTransformCreate(objref.IDOf(decodeType.Object), unsafe.Pointer(&_cfErr))
+	_r := _fnSecDecodeTransformCreate(objref.IDOf(decodeType), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -210,13 +210,13 @@ func SecDecryptTransformCreate(keyRef SecKeyRef) (obj.Object, error) {
 // SecDigestTransformCreate reports an error if the Security framework function SecDigestTransformCreate fails.
 var _fnSecDigestTransformCreate func(objc.ID, int, unsafe.Pointer) objc.ID
 
-func SecDigestTransformCreate(digestType corefoundation.CFTypeRef, digestLength int) (obj.Object, error) {
+func SecDigestTransformCreate(digestType obj.Object, digestLength int) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecDigestTransformCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecDigestTransformCreate, _lib, "SecDigestTransformCreate")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnSecDigestTransformCreate(objref.IDOf(digestType.Object), digestLength, unsafe.Pointer(&_cfErr))
+	_r := _fnSecDigestTransformCreate(objref.IDOf(digestType), digestLength, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -226,13 +226,13 @@ func SecDigestTransformCreate(digestType corefoundation.CFTypeRef, digestLength 
 // SecEncodeTransformCreate reports an error if the Security framework function SecEncodeTransformCreate fails.
 var _fnSecEncodeTransformCreate func(objc.ID, unsafe.Pointer) objc.ID
 
-func SecEncodeTransformCreate(encodeType corefoundation.CFTypeRef) (obj.Object, error) {
+func SecEncodeTransformCreate(encodeType obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecEncodeTransformCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnSecEncodeTransformCreate, _lib, "SecEncodeTransformCreate")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnSecEncodeTransformCreate(objref.IDOf(encodeType.Object), unsafe.Pointer(&_cfErr))
+	_r := _fnSecEncodeTransformCreate(objref.IDOf(encodeType), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -626,13 +626,13 @@ func SecTransformRegister(uniqueName corefoundation.CFStringRef, createTransform
 // SecTransformSetAttribute reports an error if the Security framework function SecTransformSetAttribute fails.
 var _fnSecTransformSetAttribute func(unsafe.Pointer, objc.ID, objc.ID, unsafe.Pointer) uint8
 
-func SecTransformSetAttribute(transformRef unsafe.Pointer, key corefoundation.CFStringRef, value corefoundation.CFTypeRef) error {
+func SecTransformSetAttribute(transformRef unsafe.Pointer, key corefoundation.CFStringRef, value obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecTransformSetAttribute == nil {
 		ebipurego.RegisterLibFunc(&_fnSecTransformSetAttribute, _lib, "SecTransformSetAttribute")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnSecTransformSetAttribute(transformRef, objref.IDOf(key.Object), objref.IDOf(value.Object), unsafe.Pointer(&_cfErr))
+	_ok := _fnSecTransformSetAttribute(transformRef, objref.IDOf(key.Object), objref.IDOf(value), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}

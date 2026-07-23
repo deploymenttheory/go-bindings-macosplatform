@@ -82,13 +82,13 @@ func ODNodeCopyPolicies(node ODNodeRef) (obj.Object, error) {
 // ODNodeCopyRecord reports an error if the CFOpenDirectory framework function ODNodeCopyRecord fails.
 var _fnODNodeCopyRecord func(objc.ID, objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCopyRecord(node ODNodeRef, recordType obj.Object, recordName corefoundation.CFStringRef, attributes corefoundation.CFTypeRef) (obj.Object, error) {
+func ODNodeCopyRecord(node ODNodeRef, recordType obj.Object, recordName corefoundation.CFStringRef, attributes obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCopyRecord == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCopyRecord, _lib, "ODNodeCopyRecord")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCopyRecord(objref.IDOf(node.Object), objref.IDOf(recordType), objref.IDOf(recordName.Object), objref.IDOf(attributes.Object), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCopyRecord(objref.IDOf(node.Object), objref.IDOf(recordType), objref.IDOf(recordName.Object), objref.IDOf(attributes), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -258,13 +258,13 @@ func ODNodeCustomCall(node ODNodeRef, customCode int, data corefoundation.CFData
 // ODNodeCustomFunction reports an error if the CFOpenDirectory framework function ODNodeCustomFunction fails.
 var _fnODNodeCustomFunction func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
-func ODNodeCustomFunction(node ODNodeRef, function corefoundation.CFStringRef, payload corefoundation.CFTypeRef) (obj.Object, error) {
+func ODNodeCustomFunction(node ODNodeRef, function corefoundation.CFStringRef, payload obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeCustomFunction == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeCustomFunction, _lib, "ODNodeCustomFunction")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODNodeCustomFunction(objref.IDOf(node.Object), objref.IDOf(function.Object), objref.IDOf(payload.Object), unsafe.Pointer(&_cfErr))
+	_r := _fnODNodeCustomFunction(objref.IDOf(node.Object), objref.IDOf(function.Object), objref.IDOf(payload), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -402,13 +402,13 @@ func ODNodeSetPolicies(node ODNodeRef, policies corefoundation.CFDictionaryRef) 
 // ODNodeSetPolicy reports an error if the CFOpenDirectory framework function ODNodeSetPolicy fails.
 var _fnODNodeSetPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODNodeSetPolicy(node ODNodeRef, policyType obj.Object, value corefoundation.CFTypeRef) error {
+func ODNodeSetPolicy(node ODNodeRef, policyType obj.Object, value obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODNodeSetPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODNodeSetPolicy, _lib, "ODNodeSetPolicy")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODNodeSetPolicy(objref.IDOf(node.Object), objref.IDOf(policyType), objref.IDOf(value.Object), unsafe.Pointer(&_cfErr))
+	_ok := _fnODNodeSetPolicy(objref.IDOf(node.Object), objref.IDOf(policyType), objref.IDOf(value), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -434,13 +434,13 @@ func ODQueryCopyResults(query ODQueryRef, allowPartialResults bool) (obj.Object,
 // ODQueryCreateWithNode reports an error if the CFOpenDirectory framework function ODQueryCreateWithNode fails.
 var _fnODQueryCreateWithNode func(objc.ID, objc.ID, objc.ID, objc.ID, uint32, objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
 
-func ODQueryCreateWithNode(allocator corefoundation.CFAllocatorRef, node ODNodeRef, recordTypeOrList corefoundation.CFTypeRef, attribute obj.Object, matchType uint32, queryValueOrList corefoundation.CFTypeRef, returnAttributeOrList corefoundation.CFTypeRef, maxResults int) (obj.Object, error) {
+func ODQueryCreateWithNode(allocator corefoundation.CFAllocatorRef, node ODNodeRef, recordTypeOrList obj.Object, attribute obj.Object, matchType uint32, queryValueOrList obj.Object, returnAttributeOrList obj.Object, maxResults int) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQueryCreateWithNode == nil {
 		ebipurego.RegisterLibFunc(&_fnODQueryCreateWithNode, _lib, "ODQueryCreateWithNode")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODQueryCreateWithNode(objref.IDOf(allocator.Object), objref.IDOf(node.Object), objref.IDOf(recordTypeOrList.Object), objref.IDOf(attribute), matchType, objref.IDOf(queryValueOrList.Object), objref.IDOf(returnAttributeOrList.Object), maxResults, unsafe.Pointer(&_cfErr))
+	_r := _fnODQueryCreateWithNode(objref.IDOf(allocator.Object), objref.IDOf(node.Object), objref.IDOf(recordTypeOrList), objref.IDOf(attribute), matchType, objref.IDOf(queryValueOrList), objref.IDOf(returnAttributeOrList), maxResults, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -450,13 +450,13 @@ func ODQueryCreateWithNode(allocator corefoundation.CFAllocatorRef, node ODNodeR
 // ODQueryCreateWithNodeType reports an error if the CFOpenDirectory framework function ODQueryCreateWithNodeType fails.
 var _fnODQueryCreateWithNodeType func(objc.ID, uint32, objc.ID, objc.ID, uint32, objc.ID, objc.ID, int, unsafe.Pointer) objc.ID
 
-func ODQueryCreateWithNodeType(allocator corefoundation.CFAllocatorRef, nodeType uint32, recordTypeOrList corefoundation.CFTypeRef, attribute obj.Object, matchType uint32, queryValueOrList corefoundation.CFTypeRef, returnAttributeOrList corefoundation.CFTypeRef, maxResults int) (obj.Object, error) {
+func ODQueryCreateWithNodeType(allocator corefoundation.CFAllocatorRef, nodeType uint32, recordTypeOrList obj.Object, attribute obj.Object, matchType uint32, queryValueOrList obj.Object, returnAttributeOrList obj.Object, maxResults int) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODQueryCreateWithNodeType == nil {
 		ebipurego.RegisterLibFunc(&_fnODQueryCreateWithNodeType, _lib, "ODQueryCreateWithNodeType")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnODQueryCreateWithNodeType(objref.IDOf(allocator.Object), nodeType, objref.IDOf(recordTypeOrList.Object), objref.IDOf(attribute), matchType, objref.IDOf(queryValueOrList.Object), objref.IDOf(returnAttributeOrList.Object), maxResults, unsafe.Pointer(&_cfErr))
+	_r := _fnODQueryCreateWithNodeType(objref.IDOf(allocator.Object), nodeType, objref.IDOf(recordTypeOrList), objref.IDOf(attribute), matchType, objref.IDOf(queryValueOrList), objref.IDOf(returnAttributeOrList), maxResults, unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}
@@ -498,13 +498,13 @@ func ODRecordAddMember(group ODRecordRef, member ODRecordRef) error {
 // ODRecordAddValue reports an error if the CFOpenDirectory framework function ODRecordAddValue fails.
 var _fnODRecordAddValue func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordAddValue(record ODRecordRef, attribute obj.Object, value corefoundation.CFTypeRef) error {
+func ODRecordAddValue(record ODRecordRef, attribute obj.Object, value obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordAddValue == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordAddValue, _lib, "ODRecordAddValue")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordAddValue(objref.IDOf(record.Object), objref.IDOf(attribute), objref.IDOf(value.Object), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordAddValue(objref.IDOf(record.Object), objref.IDOf(attribute), objref.IDOf(value), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -754,13 +754,13 @@ func ODRecordRemovePolicy(record ODRecordRef, policy obj.Object) error {
 // ODRecordRemoveValue reports an error if the CFOpenDirectory framework function ODRecordRemoveValue fails.
 var _fnODRecordRemoveValue func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordRemoveValue(record ODRecordRef, attribute obj.Object, value corefoundation.CFTypeRef) error {
+func ODRecordRemoveValue(record ODRecordRef, attribute obj.Object, value obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordRemoveValue == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordRemoveValue, _lib, "ODRecordRemoveValue")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordRemoveValue(objref.IDOf(record.Object), objref.IDOf(attribute), objref.IDOf(value.Object), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordRemoveValue(objref.IDOf(record.Object), objref.IDOf(attribute), objref.IDOf(value), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -850,13 +850,13 @@ func ODRecordSetPolicies(record ODRecordRef, policies corefoundation.CFDictionar
 // ODRecordSetPolicy reports an error if the CFOpenDirectory framework function ODRecordSetPolicy fails.
 var _fnODRecordSetPolicy func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordSetPolicy(record ODRecordRef, policy obj.Object, value corefoundation.CFTypeRef) error {
+func ODRecordSetPolicy(record ODRecordRef, policy obj.Object, value obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetPolicy == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetPolicy, _lib, "ODRecordSetPolicy")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordSetPolicy(objref.IDOf(record.Object), objref.IDOf(policy), objref.IDOf(value.Object), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordSetPolicy(objref.IDOf(record.Object), objref.IDOf(policy), objref.IDOf(value), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}
@@ -866,13 +866,13 @@ func ODRecordSetPolicy(record ODRecordRef, policy obj.Object, value corefoundati
 // ODRecordSetValue reports an error if the CFOpenDirectory framework function ODRecordSetValue fails.
 var _fnODRecordSetValue func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) bool
 
-func ODRecordSetValue(record ODRecordRef, attribute obj.Object, valueOrValues corefoundation.CFTypeRef) error {
+func ODRecordSetValue(record ODRecordRef, attribute obj.Object, valueOrValues obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnODRecordSetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnODRecordSetValue, _lib, "ODRecordSetValue")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnODRecordSetValue(objref.IDOf(record.Object), objref.IDOf(attribute), objref.IDOf(valueOrValues.Object), unsafe.Pointer(&_cfErr))
+	_ok := _fnODRecordSetValue(objref.IDOf(record.Object), objref.IDOf(attribute), objref.IDOf(valueOrValues), unsafe.Pointer(&_cfErr))
 	if !_ok {
 		return errkit.FromCFError(_cfErr)
 	}

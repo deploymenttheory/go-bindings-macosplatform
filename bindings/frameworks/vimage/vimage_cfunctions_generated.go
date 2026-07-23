@@ -3046,13 +3046,13 @@ func VImageConverterCreateWithCGImageFormat(srcFormat unsafe.Pointer, destFormat
 var _fnVImageConverterCreateWithColorSyncCodeFragment func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) objc.ID
 
 // VImageConverterCreateWithColorSyncCodeFragment calls the vImage framework function vImageConverter_CreateWithColorSyncCodeFragment.
-func VImageConverterCreateWithColorSyncCodeFragment(codeFragment corefoundation.CFTypeRef, srcFormat unsafe.Pointer, destFormat unsafe.Pointer, backgroundColor unsafe.Pointer, flags uint32) (result VImageConverterRef, err int) {
+func VImageConverterCreateWithColorSyncCodeFragment(codeFragment obj.Object, srcFormat unsafe.Pointer, destFormat unsafe.Pointer, backgroundColor unsafe.Pointer, flags uint32) (result VImageConverterRef, err int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnVImageConverterCreateWithColorSyncCodeFragment == nil {
 		ebipurego.RegisterLibFunc(&_fnVImageConverterCreateWithColorSyncCodeFragment, _lib, "vImageConverter_CreateWithColorSyncCodeFragment")
 	}
 	var _out0 int
-	_ret := _fnVImageConverterCreateWithColorSyncCodeFragment(objref.IDOf(codeFragment.Object), srcFormat, destFormat, backgroundColor, flags, unsafe.Pointer(&_out0))
+	_ret := _fnVImageConverterCreateWithColorSyncCodeFragment(objref.IDOf(codeFragment), srcFormat, destFormat, backgroundColor, flags, unsafe.Pointer(&_out0))
 	return VImageConverterRef{obj.WrapUnmanaged(_ret)}, _out0
 }
 

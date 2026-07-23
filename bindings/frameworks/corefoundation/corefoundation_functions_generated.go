@@ -257,13 +257,13 @@ func CFURLSetResourcePropertiesForKeys(url CFURLRef, keyedPropertyValues CFDicti
 // CFURLSetResourcePropertyForKey reports an error if the CoreFoundation framework function CFURLSetResourcePropertyForKey fails.
 var _fnCFURLSetResourcePropertyForKey func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) uint8
 
-func CFURLSetResourcePropertyForKey(url CFURLRef, key CFStringRef, propertyValue CFTypeRef) error {
+func CFURLSetResourcePropertyForKey(url CFURLRef, key CFStringRef, propertyValue obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCFURLSetResourcePropertyForKey == nil {
 		ebipurego.RegisterLibFunc(&_fnCFURLSetResourcePropertyForKey, _lib, "CFURLSetResourcePropertyForKey")
 	}
 	var _cfErr unsafe.Pointer
-	_ok := _fnCFURLSetResourcePropertyForKey(objref.IDOf(url.Object), objref.IDOf(key.Object), objref.IDOf(propertyValue.Object), unsafe.Pointer(&_cfErr))
+	_ok := _fnCFURLSetResourcePropertyForKey(objref.IDOf(url.Object), objref.IDOf(key.Object), objref.IDOf(propertyValue), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
 		return errkit.FromCFError(_cfErr)
 	}

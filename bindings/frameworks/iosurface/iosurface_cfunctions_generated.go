@@ -53,13 +53,13 @@ func IOSurfaceCopyAllValues(buffer coregraphics.IOSurfaceRef) corefoundation.CFD
 var _fnIOSurfaceCopyValue func(objc.ID, objc.ID) objc.ID
 
 // IOSurfaceCopyValue calls the IOSurface framework function IOSurfaceCopyValue.
-func IOSurfaceCopyValue(buffer coregraphics.IOSurfaceRef, key corefoundation.CFStringRef) corefoundation.CFTypeRef {
+func IOSurfaceCopyValue(buffer coregraphics.IOSurfaceRef, key corefoundation.CFStringRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceCopyValue == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceCopyValue, _lib, "IOSurfaceCopyValue")
 	}
 	_ret := _fnIOSurfaceCopyValue(objref.IDOf(buffer.Object), objref.IDOf(key.Object))
-	return corefoundation.CFTypeRef{obj.Adopt(_ret)}
+	return obj.Adopt(_ret)
 }
 
 var _fnIOSurfaceCreate func(objc.ID) objc.ID
@@ -557,12 +557,12 @@ func IOSurfaceSetPurgeable(buffer coregraphics.IOSurfaceRef, newState uint32) (r
 var _fnIOSurfaceSetValue func(objc.ID, objc.ID, objc.ID)
 
 // IOSurfaceSetValue calls the IOSurface framework function IOSurfaceSetValue.
-func IOSurfaceSetValue(buffer coregraphics.IOSurfaceRef, key corefoundation.CFStringRef, value corefoundation.CFTypeRef) {
+func IOSurfaceSetValue(buffer coregraphics.IOSurfaceRef, key corefoundation.CFStringRef, value obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceSetValue == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceSetValue, _lib, "IOSurfaceSetValue")
 	}
-	_fnIOSurfaceSetValue(objref.IDOf(buffer.Object), objref.IDOf(key.Object), objref.IDOf(value.Object))
+	_fnIOSurfaceSetValue(objref.IDOf(buffer.Object), objref.IDOf(key.Object), objref.IDOf(value))
 }
 
 var _fnIOSurfaceSetValues func(objc.ID, objc.ID)

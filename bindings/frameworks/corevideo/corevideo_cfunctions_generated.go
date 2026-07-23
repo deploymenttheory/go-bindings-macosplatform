@@ -18,14 +18,14 @@ import (
 var _fnCVBufferCopyAttachment func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // CVBufferCopyAttachment calls the CoreVideo framework function CVBufferCopyAttachment.
-func CVBufferCopyAttachment(buffer CVBufferRef, key corefoundation.CFStringRef) (result corefoundation.CFTypeRef, attachmentMode CVAttachmentMode) {
+func CVBufferCopyAttachment(buffer CVBufferRef, key corefoundation.CFStringRef) (result obj.Object, attachmentMode CVAttachmentMode) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCVBufferCopyAttachment == nil {
 		ebipurego.RegisterLibFunc(&_fnCVBufferCopyAttachment, _lib, "CVBufferCopyAttachment")
 	}
 	var _out0 CVAttachmentMode
 	_ret := _fnCVBufferCopyAttachment(objref.IDOf(buffer.Object), objref.IDOf(key.Object), unsafe.Pointer(&_out0))
-	return corefoundation.CFTypeRef{obj.Adopt(_ret)}, _out0
+	return obj.Adopt(_ret), _out0
 }
 
 var _fnCVBufferCopyAttachments func(objc.ID, CVAttachmentMode) objc.ID
@@ -43,14 +43,14 @@ func CVBufferCopyAttachments(buffer CVBufferRef, attachmentMode CVAttachmentMode
 var _fnCVBufferGetAttachment func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // CVBufferGetAttachment calls the CoreVideo framework function CVBufferGetAttachment.
-func CVBufferGetAttachment(buffer CVBufferRef, key corefoundation.CFStringRef) (result corefoundation.CFTypeRef, attachmentMode CVAttachmentMode) {
+func CVBufferGetAttachment(buffer CVBufferRef, key corefoundation.CFStringRef) (result obj.Object, attachmentMode CVAttachmentMode) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCVBufferGetAttachment == nil {
 		ebipurego.RegisterLibFunc(&_fnCVBufferGetAttachment, _lib, "CVBufferGetAttachment")
 	}
 	var _out0 CVAttachmentMode
 	_ret := _fnCVBufferGetAttachment(objref.IDOf(buffer.Object), objref.IDOf(key.Object), unsafe.Pointer(&_out0))
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}, _out0
+	return obj.Wrap(_ret), _out0
 }
 
 var _fnCVBufferGetAttachments func(objc.ID, CVAttachmentMode) objc.ID
@@ -135,12 +135,12 @@ func CVBufferRetain(buffer CVBufferRef) CVBufferRef {
 var _fnCVBufferSetAttachment func(objc.ID, objc.ID, objc.ID, CVAttachmentMode)
 
 // CVBufferSetAttachment calls the CoreVideo framework function CVBufferSetAttachment.
-func CVBufferSetAttachment(buffer CVBufferRef, key corefoundation.CFStringRef, value corefoundation.CFTypeRef, attachmentMode CVAttachmentMode) {
+func CVBufferSetAttachment(buffer CVBufferRef, key corefoundation.CFStringRef, value obj.Object, attachmentMode CVAttachmentMode) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCVBufferSetAttachment == nil {
 		ebipurego.RegisterLibFunc(&_fnCVBufferSetAttachment, _lib, "CVBufferSetAttachment")
 	}
-	_fnCVBufferSetAttachment(objref.IDOf(buffer.Object), objref.IDOf(key.Object), objref.IDOf(value.Object), attachmentMode)
+	_fnCVBufferSetAttachment(objref.IDOf(buffer.Object), objref.IDOf(key.Object), objref.IDOf(value), attachmentMode)
 }
 
 var _fnCVBufferSetAttachments func(objc.ID, objc.ID, CVAttachmentMode)

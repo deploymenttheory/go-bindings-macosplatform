@@ -964,12 +964,12 @@ func WSGetCFTypeIDFromWSTypeID(typeID WSTypeID) int {
 var _fnWSGetWSTypeIDFromCFType func(objc.ID) WSTypeID
 
 // WSGetWSTypeIDFromCFType calls the OSServices framework function WSGetWSTypeIDFromCFType.
-func WSGetWSTypeIDFromCFType(ref corefoundation.CFTypeRef) WSTypeID {
+func WSGetWSTypeIDFromCFType(ref obj.Object) WSTypeID {
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSGetWSTypeIDFromCFType == nil {
 		ebipurego.RegisterLibFunc(&_fnWSGetWSTypeIDFromCFType, _lib, "WSGetWSTypeIDFromCFType")
 	}
-	return _fnWSGetWSTypeIDFromCFType(objref.IDOf(ref.Object))
+	return _fnWSGetWSTypeIDFromCFType(objref.IDOf(ref))
 }
 
 var _fnWSMethodInvocationAddDeserializationOverride func(objc.ID, objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
@@ -1009,13 +1009,13 @@ func WSMethodInvocationCopyParameters(invocation WSMethodInvocationRef, paramete
 var _fnWSMethodInvocationCopyProperty func(objc.ID, objc.ID) objc.ID
 
 // WSMethodInvocationCopyProperty calls the OSServices framework function WSMethodInvocationCopyProperty.
-func WSMethodInvocationCopyProperty(invocation WSMethodInvocationRef, propertyName corefoundation.CFStringRef) corefoundation.CFTypeRef {
+func WSMethodInvocationCopyProperty(invocation WSMethodInvocationRef, propertyName corefoundation.CFStringRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationCopyProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationCopyProperty, _lib, "WSMethodInvocationCopyProperty")
 	}
 	_ret := _fnWSMethodInvocationCopyProperty(objref.IDOf(invocation.Object), objref.IDOf(propertyName.Object))
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnWSMethodInvocationCopySerialization func(objc.ID) objc.ID
@@ -1113,12 +1113,12 @@ func WSMethodInvocationSetParameters(invocation WSMethodInvocationRef, parameter
 var _fnWSMethodInvocationSetProperty func(objc.ID, objc.ID, objc.ID)
 
 // WSMethodInvocationSetProperty calls the OSServices framework function WSMethodInvocationSetProperty.
-func WSMethodInvocationSetProperty(invocation WSMethodInvocationRef, propertyName corefoundation.CFStringRef, propertyValue corefoundation.CFTypeRef) {
+func WSMethodInvocationSetProperty(invocation WSMethodInvocationRef, propertyName corefoundation.CFStringRef, propertyValue obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSMethodInvocationSetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnWSMethodInvocationSetProperty, _lib, "WSMethodInvocationSetProperty")
 	}
-	_fnWSMethodInvocationSetProperty(objref.IDOf(invocation.Object), objref.IDOf(propertyName.Object), objref.IDOf(propertyValue.Object))
+	_fnWSMethodInvocationSetProperty(objref.IDOf(invocation.Object), objref.IDOf(propertyName.Object), objref.IDOf(propertyValue))
 }
 
 var _fnWSMethodInvocationUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
@@ -1158,13 +1158,13 @@ func WSProtocolHandlerCopyFaultDocument(ref WSProtocolHandlerRef, methodContext 
 var _fnWSProtocolHandlerCopyProperty func(objc.ID, objc.ID) objc.ID
 
 // WSProtocolHandlerCopyProperty calls the OSServices framework function WSProtocolHandlerCopyProperty.
-func WSProtocolHandlerCopyProperty(ref WSProtocolHandlerRef, propertyName corefoundation.CFStringRef) corefoundation.CFTypeRef {
+func WSProtocolHandlerCopyProperty(ref WSProtocolHandlerRef, propertyName corefoundation.CFStringRef) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSProtocolHandlerCopyProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCopyProperty, _lib, "WSProtocolHandlerCopyProperty")
 	}
 	_ret := _fnWSProtocolHandlerCopyProperty(objref.IDOf(ref.Object), objref.IDOf(propertyName.Object))
-	return corefoundation.CFTypeRef{obj.Wrap(_ret)}
+	return obj.Wrap(_ret)
 }
 
 var _fnWSProtocolHandlerCopyReplyDictionary func(objc.ID, objc.ID, objc.ID) objc.ID
@@ -1182,12 +1182,12 @@ func WSProtocolHandlerCopyReplyDictionary(ref WSProtocolHandlerRef, methodName c
 var _fnWSProtocolHandlerCopyReplyDocument func(objc.ID, objc.ID, objc.ID) objc.ID
 
 // WSProtocolHandlerCopyReplyDocument calls the OSServices framework function WSProtocolHandlerCopyReplyDocument.
-func WSProtocolHandlerCopyReplyDocument(ref WSProtocolHandlerRef, methodContext corefoundation.CFDictionaryRef, resultValue corefoundation.CFTypeRef) corefoundation.CFDataRef {
+func WSProtocolHandlerCopyReplyDocument(ref WSProtocolHandlerRef, methodContext corefoundation.CFDictionaryRef, resultValue obj.Object) corefoundation.CFDataRef {
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSProtocolHandlerCopyReplyDocument == nil {
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerCopyReplyDocument, _lib, "WSProtocolHandlerCopyReplyDocument")
 	}
-	_ret := _fnWSProtocolHandlerCopyReplyDocument(objref.IDOf(ref.Object), objref.IDOf(methodContext.Object), objref.IDOf(resultValue.Object))
+	_ret := _fnWSProtocolHandlerCopyReplyDocument(objref.IDOf(ref.Object), objref.IDOf(methodContext.Object), objref.IDOf(resultValue))
 	return corefoundation.CFDataRef{obj.Wrap(_ret)}
 }
 
@@ -1252,12 +1252,12 @@ func WSProtocolHandlerSetDeserializationOverride(protocol WSProtocolHandlerRef, 
 var _fnWSProtocolHandlerSetProperty func(objc.ID, objc.ID, objc.ID)
 
 // WSProtocolHandlerSetProperty calls the OSServices framework function WSProtocolHandlerSetProperty.
-func WSProtocolHandlerSetProperty(ref WSProtocolHandlerRef, propertyName corefoundation.CFStringRef, propertyValue corefoundation.CFTypeRef) {
+func WSProtocolHandlerSetProperty(ref WSProtocolHandlerRef, propertyName corefoundation.CFStringRef, propertyValue obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnWSProtocolHandlerSetProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnWSProtocolHandlerSetProperty, _lib, "WSProtocolHandlerSetProperty")
 	}
-	_fnWSProtocolHandlerSetProperty(objref.IDOf(ref.Object), objref.IDOf(propertyName.Object), objref.IDOf(propertyValue.Object))
+	_fnWSProtocolHandlerSetProperty(objref.IDOf(ref.Object), objref.IDOf(propertyName.Object), objref.IDOf(propertyValue))
 }
 
 var _fnWSProtocolHandlerSetSerializationOverride func(objc.ID, int, unsafe.Pointer, unsafe.Pointer)

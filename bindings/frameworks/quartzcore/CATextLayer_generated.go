@@ -67,9 +67,9 @@ func (tl *TextLayer) WithString(str obj.Object) *TextLayer {
 }
 
 // WithFont sets the font used to render the receiver’s text.
-func (tl *TextLayer) WithFont(font corefoundation.CFTypeRef) *TextLayer {
+func (tl *TextLayer) WithFont(font obj.Object) *TextLayer {
 	defer runtime.KeepAlive(font)
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setFont:"), objref.IDOf(font.Object))
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return tl
 }
 
@@ -453,10 +453,10 @@ func (tl *TextLayer) String() obj.Object {
 }
 
 // Font returns the font.
-func (tl *TextLayer) Font() corefoundation.CFTypeRef {
+func (tl *TextLayer) Font() obj.Object {
 	defer runtime.KeepAlive(tl)
 	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("font"))
-	return corefoundation.CFTypeRef{obj.Wrap(_r)}
+	return obj.Wrap(_r)
 }
 
 // FontSize returns the font size.

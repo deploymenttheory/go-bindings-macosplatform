@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -435,13 +436,13 @@ func SetSpeechPitch(pitch int) (result int16, chan_ SpeechChannelRecord) {
 var _fnSetSpeechProperty func(unsafe.Pointer, objc.ID, objc.ID) int16
 
 // SetSpeechProperty calls the SpeechSynthesis framework function SetSpeechProperty.
-func SetSpeechProperty(property corefoundation.CFStringRef, object corefoundation.CFTypeRef) (result int16, chan_ SpeechChannelRecord) {
+func SetSpeechProperty(property corefoundation.CFStringRef, object obj.Object) (result int16, chan_ SpeechChannelRecord) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSetSpeechProperty == nil {
 		ebipurego.RegisterLibFunc(&_fnSetSpeechProperty, _lib, "SetSpeechProperty")
 	}
 	var _out0 SpeechChannelRecord
-	_ret := _fnSetSpeechProperty(unsafe.Pointer(&_out0), objref.IDOf(property.Object), objref.IDOf(object.Object))
+	_ret := _fnSetSpeechProperty(unsafe.Pointer(&_out0), objref.IDOf(property.Object), objref.IDOf(object))
 	return _ret, _out0
 }
 
